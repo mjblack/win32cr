@@ -5,21 +5,21 @@ require "./ole.cr"
 module Win32cr::System::Performance
   alias PerfProviderHandle = LibC::IntPtrT
   alias PerfQueryHandle = LibC::IntPtrT
-  alias PLA_CABEXTRACT_CALLBACK = Proc(Win32cr::Foundation::PWSTR, Void*, Void)*
+  alias PLA_CABEXTRACT_CALLBACK = Proc(Win32cr::Foundation::PWSTR, Void*, Void)
 
-  alias PERFLIBREQUEST = Proc(UInt32, Void*, UInt32, UInt32)*
+  alias PERFLIBREQUEST = Proc(UInt32, Void*, UInt32, UInt32)
 
-  alias PERF_MEM_ALLOC = Proc(LibC::UIntPtrT, Void*, Void*)*
+  alias PERF_MEM_ALLOC = Proc(LibC::UIntPtrT, Void*, Void*)
 
-  alias PERF_MEM_FREE = Proc(Void*, Void*, Void)*
+  alias PERF_MEM_FREE = Proc(Void*, Void*, Void)
 
-  alias PM_OPEN_PROC = Proc(Win32cr::Foundation::PWSTR, UInt32)*
+  alias PM_OPEN_PROC = Proc(Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PM_COLLECT_PROC = Proc(Win32cr::Foundation::PWSTR, Void**, UInt32*, UInt32*, UInt32)*
+  alias PM_COLLECT_PROC = Proc(Win32cr::Foundation::PWSTR, Void**, UInt32*, UInt32*, UInt32)
 
-  alias PM_CLOSE_PROC = Proc(UInt32)*
+  alias PM_CLOSE_PROC = Proc(UInt32)
 
-  alias CounterPathCallBack = Proc(LibC::UIntPtrT, Int32)*
+  alias CounterPathCallBack = Proc(LibC::UIntPtrT, Int32)
 
   MAX_COUNTER_PATH = 256_u32
   PDH_MAX_COUNTER_NAME = 1024_u32
@@ -460,542 +460,698 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record PERF_COUNTERSET_INFO,
-    counter_set_guid : LibC::GUID,
-    provider_guid : LibC::GUID,
-    num_counters : UInt32,
-    instance_type : UInt32
+  struct PERF_COUNTERSET_INFO
+    property counter_set_guid : LibC::GUID
+    property provider_guid : LibC::GUID
+    property num_counters : UInt32
+    property instance_type : UInt32
+    def initialize(@counter_set_guid : LibC::GUID, @provider_guid : LibC::GUID, @num_counters : UInt32, @instance_type : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_COUNTER_INFO,
-    counter_id : UInt32,
-    type__ : UInt32,
-    attrib : UInt64,
-    size : UInt32,
-    detail_level : UInt32,
-    scale : Int32,
-    offset : UInt32
+  struct PERF_COUNTER_INFO
+    property counter_id : UInt32
+    property type__ : UInt32
+    property attrib : UInt64
+    property size : UInt32
+    property detail_level : UInt32
+    property scale : Int32
+    property offset : UInt32
+    def initialize(@counter_id : UInt32, @type__ : UInt32, @attrib : UInt64, @size : UInt32, @detail_level : UInt32, @scale : Int32, @offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_COUNTERSET_INSTANCE,
-    counter_set_guid : LibC::GUID,
-    dwSize : UInt32,
-    instance_id : UInt32,
-    instance_name_offset : UInt32,
-    instance_name_size : UInt32
+  struct PERF_COUNTERSET_INSTANCE
+    property counter_set_guid : LibC::GUID
+    property dwSize : UInt32
+    property instance_id : UInt32
+    property instance_name_offset : UInt32
+    property instance_name_size : UInt32
+    def initialize(@counter_set_guid : LibC::GUID, @dwSize : UInt32, @instance_id : UInt32, @instance_name_offset : UInt32, @instance_name_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_COUNTER_IDENTITY,
-    counter_set_guid : LibC::GUID,
-    buffer_size : UInt32,
-    counter_id : UInt32,
-    instance_id : UInt32,
-    machine_offset : UInt32,
-    name_offset : UInt32,
-    reserved : UInt32
+  struct PERF_COUNTER_IDENTITY
+    property counter_set_guid : LibC::GUID
+    property buffer_size : UInt32
+    property counter_id : UInt32
+    property instance_id : UInt32
+    property machine_offset : UInt32
+    property name_offset : UInt32
+    property reserved : UInt32
+    def initialize(@counter_set_guid : LibC::GUID, @buffer_size : UInt32, @counter_id : UInt32, @instance_id : UInt32, @machine_offset : UInt32, @name_offset : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_PROVIDER_CONTEXT,
-    context_size : UInt32,
-    reserved : UInt32,
-    control_callback : Win32cr::System::Performance::PERFLIBREQUEST,
-    mem_alloc_routine : Win32cr::System::Performance::PERF_MEM_ALLOC,
-    mem_free_routine : Win32cr::System::Performance::PERF_MEM_FREE,
-    pMemContext : Void*
+  struct PERF_PROVIDER_CONTEXT
+    property context_size : UInt32
+    property reserved : UInt32
+    property control_callback : Win32cr::System::Performance::PERFLIBREQUEST
+    property mem_alloc_routine : Win32cr::System::Performance::PERF_MEM_ALLOC
+    property mem_free_routine : Win32cr::System::Performance::PERF_MEM_FREE
+    property pMemContext : Void*
+    def initialize(@context_size : UInt32, @reserved : UInt32, @control_callback : Win32cr::System::Performance::PERFLIBREQUEST, @mem_alloc_routine : Win32cr::System::Performance::PERF_MEM_ALLOC, @mem_free_routine : Win32cr::System::Performance::PERF_MEM_FREE, @pMemContext : Void*)
+    end
+  end
 
   @[Extern]
-  record PERF_INSTANCE_HEADER,
-    size : UInt32,
-    instance_id : UInt32
+  struct PERF_INSTANCE_HEADER
+    property size : UInt32
+    property instance_id : UInt32
+    def initialize(@size : UInt32, @instance_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_COUNTERSET_REG_INFO,
-    counter_set_guid : LibC::GUID,
-    counter_set_type : UInt32,
-    detail_level : UInt32,
-    num_counters : UInt32,
-    instance_type : UInt32
+  struct PERF_COUNTERSET_REG_INFO
+    property counter_set_guid : LibC::GUID
+    property counter_set_type : UInt32
+    property detail_level : UInt32
+    property num_counters : UInt32
+    property instance_type : UInt32
+    def initialize(@counter_set_guid : LibC::GUID, @counter_set_type : UInt32, @detail_level : UInt32, @num_counters : UInt32, @instance_type : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_COUNTER_REG_INFO,
-    counter_id : UInt32,
-    type__ : UInt32,
-    attrib : UInt64,
-    detail_level : UInt32,
-    default_scale : Int32,
-    base_counter_id : UInt32,
-    perf_time_id : UInt32,
-    perf_freq_id : UInt32,
-    multi_id : UInt32,
-    aggregate_func : Win32cr::System::Performance::PERF_COUNTER_AGGREGATE_FUNC,
-    reserved : UInt32
+  struct PERF_COUNTER_REG_INFO
+    property counter_id : UInt32
+    property type__ : UInt32
+    property attrib : UInt64
+    property detail_level : UInt32
+    property default_scale : Int32
+    property base_counter_id : UInt32
+    property perf_time_id : UInt32
+    property perf_freq_id : UInt32
+    property multi_id : UInt32
+    property aggregate_func : Win32cr::System::Performance::PERF_COUNTER_AGGREGATE_FUNC
+    property reserved : UInt32
+    def initialize(@counter_id : UInt32, @type__ : UInt32, @attrib : UInt64, @detail_level : UInt32, @default_scale : Int32, @base_counter_id : UInt32, @perf_time_id : UInt32, @perf_freq_id : UInt32, @multi_id : UInt32, @aggregate_func : Win32cr::System::Performance::PERF_COUNTER_AGGREGATE_FUNC, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_STRING_BUFFER_HEADER,
-    dwSize : UInt32,
-    dwCounters : UInt32
+  struct PERF_STRING_BUFFER_HEADER
+    property dwSize : UInt32
+    property dwCounters : UInt32
+    def initialize(@dwSize : UInt32, @dwCounters : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_STRING_COUNTER_HEADER,
-    dwCounterId : UInt32,
-    dwOffset : UInt32
+  struct PERF_STRING_COUNTER_HEADER
+    property dwCounterId : UInt32
+    property dwOffset : UInt32
+    def initialize(@dwCounterId : UInt32, @dwOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_COUNTER_IDENTIFIER,
-    counter_set_guid : LibC::GUID,
-    status : UInt32,
-    size : UInt32,
-    counter_id : UInt32,
-    instance_id : UInt32,
-    index : UInt32,
-    reserved : UInt32
+  struct PERF_COUNTER_IDENTIFIER
+    property counter_set_guid : LibC::GUID
+    property status : UInt32
+    property size : UInt32
+    property counter_id : UInt32
+    property instance_id : UInt32
+    property index : UInt32
+    property reserved : UInt32
+    def initialize(@counter_set_guid : LibC::GUID, @status : UInt32, @size : UInt32, @counter_id : UInt32, @instance_id : UInt32, @index : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_DATA_HEADER,
-    dwTotalSize : UInt32,
-    dwNumCounters : UInt32,
-    perf_time_stamp : Int64,
-    perf_time100_n_sec : Int64,
-    perf_freq : Int64,
-    system_time : Win32cr::Foundation::SYSTEMTIME
+  struct PERF_DATA_HEADER
+    property dwTotalSize : UInt32
+    property dwNumCounters : UInt32
+    property perf_time_stamp : Int64
+    property perf_time100_n_sec : Int64
+    property perf_freq : Int64
+    property system_time : Win32cr::Foundation::SYSTEMTIME
+    def initialize(@dwTotalSize : UInt32, @dwNumCounters : UInt32, @perf_time_stamp : Int64, @perf_time100_n_sec : Int64, @perf_freq : Int64, @system_time : Win32cr::Foundation::SYSTEMTIME)
+    end
+  end
 
   @[Extern]
-  record PERF_COUNTER_HEADER,
-    dwStatus : UInt32,
-    dwType : Win32cr::System::Performance::PerfCounterDataType,
-    dwSize : UInt32,
-    reserved : UInt32
+  struct PERF_COUNTER_HEADER
+    property dwStatus : UInt32
+    property dwType : Win32cr::System::Performance::PerfCounterDataType
+    property dwSize : UInt32
+    property reserved : UInt32
+    def initialize(@dwStatus : UInt32, @dwType : Win32cr::System::Performance::PerfCounterDataType, @dwSize : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_MULTI_INSTANCES,
-    dwTotalSize : UInt32,
-    dwInstances : UInt32
+  struct PERF_MULTI_INSTANCES
+    property dwTotalSize : UInt32
+    property dwInstances : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwInstances : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_MULTI_COUNTERS,
-    dwSize : UInt32,
-    dwCounters : UInt32
+  struct PERF_MULTI_COUNTERS
+    property dwSize : UInt32
+    property dwCounters : UInt32
+    def initialize(@dwSize : UInt32, @dwCounters : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_COUNTER_DATA,
-    dwDataSize : UInt32,
-    dwSize : UInt32
+  struct PERF_COUNTER_DATA
+    property dwDataSize : UInt32
+    property dwSize : UInt32
+    def initialize(@dwDataSize : UInt32, @dwSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERF_DATA_BLOCK,
-    signature : UInt16[4],
-    little_endian : UInt32,
-    version : UInt32,
-    revision : UInt32,
-    total_byte_length : UInt32,
-    header_length : UInt32,
-    num_object_types : UInt32,
-    default_object : Int32,
-    system_time : Win32cr::Foundation::SYSTEMTIME,
-    perf_time : Win32cr::Foundation::LARGE_INTEGER,
-    perf_freq : Win32cr::Foundation::LARGE_INTEGER,
-    perf_time100n_sec : Win32cr::Foundation::LARGE_INTEGER,
-    system_name_length : UInt32,
-    system_name_offset : UInt32
+  struct PERF_DATA_BLOCK
+    property signature : UInt16[4]
+    property little_endian : UInt32
+    property version : UInt32
+    property revision : UInt32
+    property total_byte_length : UInt32
+    property header_length : UInt32
+    property num_object_types : UInt32
+    property default_object : Int32
+    property system_time : Win32cr::Foundation::SYSTEMTIME
+    property perf_time : Win32cr::Foundation::LARGE_INTEGER
+    property perf_freq : Win32cr::Foundation::LARGE_INTEGER
+    property perf_time100n_sec : Win32cr::Foundation::LARGE_INTEGER
+    property system_name_length : UInt32
+    property system_name_offset : UInt32
+    def initialize(@signature : UInt16[4], @little_endian : UInt32, @version : UInt32, @revision : UInt32, @total_byte_length : UInt32, @header_length : UInt32, @num_object_types : UInt32, @default_object : Int32, @system_time : Win32cr::Foundation::SYSTEMTIME, @perf_time : Win32cr::Foundation::LARGE_INTEGER, @perf_freq : Win32cr::Foundation::LARGE_INTEGER, @perf_time100n_sec : Win32cr::Foundation::LARGE_INTEGER, @system_name_length : UInt32, @system_name_offset : UInt32)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record PERF_OBJECT_TYPE,
-    total_byte_length : UInt32,
-    definition_length : UInt32,
-    header_length : UInt32,
-    object_name_title_index : UInt32,
-    object_name_title : UInt32,
-    object_help_title_index : UInt32,
-    object_help_title : UInt32,
-    detail_level : UInt32,
-    num_counters : UInt32,
-    default_counter : Int32,
-    num_instances : Int32,
-    code_page : UInt32,
-    perf_time : Win32cr::Foundation::LARGE_INTEGER,
-    perf_freq : Win32cr::Foundation::LARGE_INTEGER
+  struct PERF_OBJECT_TYPE
+    property total_byte_length : UInt32
+    property definition_length : UInt32
+    property header_length : UInt32
+    property object_name_title_index : UInt32
+    property object_name_title : UInt32
+    property object_help_title_index : UInt32
+    property object_help_title : UInt32
+    property detail_level : UInt32
+    property num_counters : UInt32
+    property default_counter : Int32
+    property num_instances : Int32
+    property code_page : UInt32
+    property perf_time : Win32cr::Foundation::LARGE_INTEGER
+    property perf_freq : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@total_byte_length : UInt32, @definition_length : UInt32, @header_length : UInt32, @object_name_title_index : UInt32, @object_name_title : UInt32, @object_help_title_index : UInt32, @object_help_title : UInt32, @detail_level : UInt32, @num_counters : UInt32, @default_counter : Int32, @num_instances : Int32, @code_page : UInt32, @perf_time : Win32cr::Foundation::LARGE_INTEGER, @perf_freq : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record PERF_COUNTER_DEFINITION,
-    byte_length : UInt32,
-    counter_name_title_index : UInt32,
-    counter_name_title : UInt32,
-    counter_help_title_index : UInt32,
-    counter_help_title : UInt32,
-    default_scale : Int32,
-    detail_level : UInt32,
-    counter_type : UInt32,
-    counter_size : UInt32,
-    counter_offset : UInt32
+  struct PERF_COUNTER_DEFINITION
+    property byte_length : UInt32
+    property counter_name_title_index : UInt32
+    property counter_name_title : UInt32
+    property counter_help_title_index : UInt32
+    property counter_help_title : UInt32
+    property default_scale : Int32
+    property detail_level : UInt32
+    property counter_type : UInt32
+    property counter_size : UInt32
+    property counter_offset : UInt32
+    def initialize(@byte_length : UInt32, @counter_name_title_index : UInt32, @counter_name_title : UInt32, @counter_help_title_index : UInt32, @counter_help_title : UInt32, @default_scale : Int32, @detail_level : UInt32, @counter_type : UInt32, @counter_size : UInt32, @counter_offset : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record PERF_INSTANCE_DEFINITION,
-    byte_length : UInt32,
-    parent_object_title_index : UInt32,
-    parent_object_instance : UInt32,
-    unique_id : Int32,
-    name_offset : UInt32,
-    name_length : UInt32
-
-  @[Extern]
-  record PERF_COUNTER_BLOCK,
-    byte_length : UInt32
-
-  @[Extern]
-  record PDH_RAW_COUNTER,
-    c_status : UInt32,
-    time_stamp : Win32cr::Foundation::FILETIME,
-    first_value : Int64,
-    second_value : Int64,
-    multi_count : UInt32
-
-  @[Extern]
-  record PDH_RAW_COUNTER_ITEM_A,
-    szName : Win32cr::Foundation::PSTR,
-    raw_value : Win32cr::System::Performance::PDH_RAW_COUNTER
-
-  @[Extern]
-  record PDH_RAW_COUNTER_ITEM_W,
-    szName : Win32cr::Foundation::PWSTR,
-    raw_value : Win32cr::System::Performance::PDH_RAW_COUNTER
-
-  @[Extern]
-  record PDH_FMT_COUNTERVALUE,
-    c_status : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      longValue : Int32,
-      doubleValue : Float64,
-      largeValue : Int64,
-      ansi_string_value : Win32cr::Foundation::PSTR,
-      wide_string_value : Win32cr::Foundation::PWSTR
-
+  struct PERF_INSTANCE_DEFINITION
+    property byte_length : UInt32
+    property parent_object_title_index : UInt32
+    property parent_object_instance : UInt32
+    property unique_id : Int32
+    property name_offset : UInt32
+    property name_length : UInt32
+    def initialize(@byte_length : UInt32, @parent_object_title_index : UInt32, @parent_object_instance : UInt32, @unique_id : Int32, @name_offset : UInt32, @name_length : UInt32)
+    end
   end
 
   @[Extern]
-  record PDH_FMT_COUNTERVALUE_ITEM_A,
-    szName : Win32cr::Foundation::PSTR,
-    fmt_value : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE
+  struct PERF_COUNTER_BLOCK
+    property byte_length : UInt32
+    def initialize(@byte_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record PDH_FMT_COUNTERVALUE_ITEM_W,
-    szName : Win32cr::Foundation::PWSTR,
-    fmt_value : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE
+  struct PDH_RAW_COUNTER
+    property c_status : UInt32
+    property time_stamp : Win32cr::Foundation::FILETIME
+    property first_value : Int64
+    property second_value : Int64
+    property multi_count : UInt32
+    def initialize(@c_status : UInt32, @time_stamp : Win32cr::Foundation::FILETIME, @first_value : Int64, @second_value : Int64, @multi_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record PDH_STATISTICS,
-    dwFormat : UInt32,
-    count : UInt32,
-    min : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE,
-    max : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE,
-    mean : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE
+  struct PDH_RAW_COUNTER_ITEM_A
+    property szName : Win32cr::Foundation::PSTR
+    property raw_value : Win32cr::System::Performance::PDH_RAW_COUNTER
+    def initialize(@szName : Win32cr::Foundation::PSTR, @raw_value : Win32cr::System::Performance::PDH_RAW_COUNTER)
+    end
+  end
 
   @[Extern]
-  record PDH_COUNTER_PATH_ELEMENTS_A,
-    szMachineName : Win32cr::Foundation::PSTR,
-    szObjectName : Win32cr::Foundation::PSTR,
-    szInstanceName : Win32cr::Foundation::PSTR,
-    szParentInstance : Win32cr::Foundation::PSTR,
-    dwInstanceIndex : UInt32,
-    szCounterName : Win32cr::Foundation::PSTR
+  struct PDH_RAW_COUNTER_ITEM_W
+    property szName : Win32cr::Foundation::PWSTR
+    property raw_value : Win32cr::System::Performance::PDH_RAW_COUNTER
+    def initialize(@szName : Win32cr::Foundation::PWSTR, @raw_value : Win32cr::System::Performance::PDH_RAW_COUNTER)
+    end
+  end
 
   @[Extern]
-  record PDH_COUNTER_PATH_ELEMENTS_W,
-    szMachineName : Win32cr::Foundation::PWSTR,
-    szObjectName : Win32cr::Foundation::PWSTR,
-    szInstanceName : Win32cr::Foundation::PWSTR,
-    szParentInstance : Win32cr::Foundation::PWSTR,
-    dwInstanceIndex : UInt32,
-    szCounterName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PDH_DATA_ITEM_PATH_ELEMENTS_A,
-    szMachineName : Win32cr::Foundation::PSTR,
-    object_guid : LibC::GUID,
-    dwItemId : UInt32,
-    szInstanceName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record PDH_DATA_ITEM_PATH_ELEMENTS_W,
-    szMachineName : Win32cr::Foundation::PWSTR,
-    object_guid : LibC::GUID,
-    dwItemId : UInt32,
-    szInstanceName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PDH_COUNTER_INFO_A,
-    dwLength : UInt32,
-    dwType : UInt32,
-    c_version : UInt32,
-    c_status : UInt32,
-    lScale : Int32,
-    lDefaultScale : Int32,
-    dwUserData : LibC::UIntPtrT,
-    dwQueryUserData : LibC::UIntPtrT,
-    szFullPath : Win32cr::Foundation::PSTR,
-    anonymous : Anonymous_e__Union_,
-    szExplainText : Win32cr::Foundation::PSTR,
-    data_buffer : UInt32* do
+  struct PDH_FMT_COUNTERVALUE
+    property c_status : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      data_item_path : Win32cr::System::Performance::PDH_DATA_ITEM_PATH_ELEMENTS_A,
-      counter_path : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_A,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property longValue : Int32
+    property doubleValue : Float64
+    property largeValue : Int64
+    property ansi_string_value : Win32cr::Foundation::PSTR
+    property wide_string_value : Win32cr::Foundation::PWSTR
+    def initialize(@longValue : Int32, @doubleValue : Float64, @largeValue : Int64, @ansi_string_value : Win32cr::Foundation::PSTR, @wide_string_value : Win32cr::Foundation::PWSTR)
+    end
+    end
+
+    def initialize(@c_status : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct PDH_FMT_COUNTERVALUE_ITEM_A
+    property szName : Win32cr::Foundation::PSTR
+    property fmt_value : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE
+    def initialize(@szName : Win32cr::Foundation::PSTR, @fmt_value : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE)
+    end
+  end
+
+  @[Extern]
+  struct PDH_FMT_COUNTERVALUE_ITEM_W
+    property szName : Win32cr::Foundation::PWSTR
+    property fmt_value : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE
+    def initialize(@szName : Win32cr::Foundation::PWSTR, @fmt_value : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE)
+    end
+  end
+
+  @[Extern]
+  struct PDH_STATISTICS
+    property dwFormat : UInt32
+    property count : UInt32
+    property min : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE
+    property max : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE
+    property mean : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE
+    def initialize(@dwFormat : UInt32, @count : UInt32, @min : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE, @max : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE, @mean : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE)
+    end
+  end
+
+  @[Extern]
+  struct PDH_COUNTER_PATH_ELEMENTS_A
+    property szMachineName : Win32cr::Foundation::PSTR
+    property szObjectName : Win32cr::Foundation::PSTR
+    property szInstanceName : Win32cr::Foundation::PSTR
+    property szParentInstance : Win32cr::Foundation::PSTR
+    property dwInstanceIndex : UInt32
+    property szCounterName : Win32cr::Foundation::PSTR
+    def initialize(@szMachineName : Win32cr::Foundation::PSTR, @szObjectName : Win32cr::Foundation::PSTR, @szInstanceName : Win32cr::Foundation::PSTR, @szParentInstance : Win32cr::Foundation::PSTR, @dwInstanceIndex : UInt32, @szCounterName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct PDH_COUNTER_PATH_ELEMENTS_W
+    property szMachineName : Win32cr::Foundation::PWSTR
+    property szObjectName : Win32cr::Foundation::PWSTR
+    property szInstanceName : Win32cr::Foundation::PWSTR
+    property szParentInstance : Win32cr::Foundation::PWSTR
+    property dwInstanceIndex : UInt32
+    property szCounterName : Win32cr::Foundation::PWSTR
+    def initialize(@szMachineName : Win32cr::Foundation::PWSTR, @szObjectName : Win32cr::Foundation::PWSTR, @szInstanceName : Win32cr::Foundation::PWSTR, @szParentInstance : Win32cr::Foundation::PWSTR, @dwInstanceIndex : UInt32, @szCounterName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct PDH_DATA_ITEM_PATH_ELEMENTS_A
+    property szMachineName : Win32cr::Foundation::PSTR
+    property object_guid : LibC::GUID
+    property dwItemId : UInt32
+    property szInstanceName : Win32cr::Foundation::PSTR
+    def initialize(@szMachineName : Win32cr::Foundation::PSTR, @object_guid : LibC::GUID, @dwItemId : UInt32, @szInstanceName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct PDH_DATA_ITEM_PATH_ELEMENTS_W
+    property szMachineName : Win32cr::Foundation::PWSTR
+    property object_guid : LibC::GUID
+    property dwItemId : UInt32
+    property szInstanceName : Win32cr::Foundation::PWSTR
+    def initialize(@szMachineName : Win32cr::Foundation::PWSTR, @object_guid : LibC::GUID, @dwItemId : UInt32, @szInstanceName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct PDH_COUNTER_INFO_A
+    property dwLength : UInt32
+    property dwType : UInt32
+    property c_version : UInt32
+    property c_status : UInt32
+    property lScale : Int32
+    property lDefaultScale : Int32
+    property dwUserData : LibC::UIntPtrT
+    property dwQueryUserData : LibC::UIntPtrT
+    property szFullPath : Win32cr::Foundation::PSTR
+    property anonymous : Anonymous_e__Union_
+    property szExplainText : Win32cr::Foundation::PSTR
+    property data_buffer : UInt32*
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property data_item_path : Win32cr::System::Performance::PDH_DATA_ITEM_PATH_ELEMENTS_A
+    property counter_path : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_A
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        szMachineName : Win32cr::Foundation::PSTR,
-        szObjectName : Win32cr::Foundation::PSTR,
-        szInstanceName : Win32cr::Foundation::PSTR,
-        szParentInstance : Win32cr::Foundation::PSTR,
-        dwInstanceIndex : UInt32,
-        szCounterName : Win32cr::Foundation::PSTR
+      struct Anonymous_e__Struct_
+    property szMachineName : Win32cr::Foundation::PSTR
+    property szObjectName : Win32cr::Foundation::PSTR
+    property szInstanceName : Win32cr::Foundation::PSTR
+    property szParentInstance : Win32cr::Foundation::PSTR
+    property dwInstanceIndex : UInt32
+    property szCounterName : Win32cr::Foundation::PSTR
+    def initialize(@szMachineName : Win32cr::Foundation::PSTR, @szObjectName : Win32cr::Foundation::PSTR, @szInstanceName : Win32cr::Foundation::PSTR, @szParentInstance : Win32cr::Foundation::PSTR, @dwInstanceIndex : UInt32, @szCounterName : Win32cr::Foundation::PSTR)
+    end
+      end
 
+    def initialize(@data_item_path : Win32cr::System::Performance::PDH_DATA_ITEM_PATH_ELEMENTS_A, @counter_path : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_A, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@dwLength : UInt32, @dwType : UInt32, @c_version : UInt32, @c_status : UInt32, @lScale : Int32, @lDefaultScale : Int32, @dwUserData : LibC::UIntPtrT, @dwQueryUserData : LibC::UIntPtrT, @szFullPath : Win32cr::Foundation::PSTR, @anonymous : Anonymous_e__Union_, @szExplainText : Win32cr::Foundation::PSTR, @data_buffer : UInt32*)
+    end
   end
 
   @[Extern]
-  record PDH_COUNTER_INFO_W,
-    dwLength : UInt32,
-    dwType : UInt32,
-    c_version : UInt32,
-    c_status : UInt32,
-    lScale : Int32,
-    lDefaultScale : Int32,
-    dwUserData : LibC::UIntPtrT,
-    dwQueryUserData : LibC::UIntPtrT,
-    szFullPath : Win32cr::Foundation::PWSTR,
-    anonymous : Anonymous_e__Union_,
-    szExplainText : Win32cr::Foundation::PWSTR,
-    data_buffer : UInt32* do
+  struct PDH_COUNTER_INFO_W
+    property dwLength : UInt32
+    property dwType : UInt32
+    property c_version : UInt32
+    property c_status : UInt32
+    property lScale : Int32
+    property lDefaultScale : Int32
+    property dwUserData : LibC::UIntPtrT
+    property dwQueryUserData : LibC::UIntPtrT
+    property szFullPath : Win32cr::Foundation::PWSTR
+    property anonymous : Anonymous_e__Union_
+    property szExplainText : Win32cr::Foundation::PWSTR
+    property data_buffer : UInt32*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      data_item_path : Win32cr::System::Performance::PDH_DATA_ITEM_PATH_ELEMENTS_W,
-      counter_path : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_W,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property data_item_path : Win32cr::System::Performance::PDH_DATA_ITEM_PATH_ELEMENTS_W
+    property counter_path : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_W
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        szMachineName : Win32cr::Foundation::PWSTR,
-        szObjectName : Win32cr::Foundation::PWSTR,
-        szInstanceName : Win32cr::Foundation::PWSTR,
-        szParentInstance : Win32cr::Foundation::PWSTR,
-        dwInstanceIndex : UInt32,
-        szCounterName : Win32cr::Foundation::PWSTR
+      struct Anonymous_e__Struct_
+    property szMachineName : Win32cr::Foundation::PWSTR
+    property szObjectName : Win32cr::Foundation::PWSTR
+    property szInstanceName : Win32cr::Foundation::PWSTR
+    property szParentInstance : Win32cr::Foundation::PWSTR
+    property dwInstanceIndex : UInt32
+    property szCounterName : Win32cr::Foundation::PWSTR
+    def initialize(@szMachineName : Win32cr::Foundation::PWSTR, @szObjectName : Win32cr::Foundation::PWSTR, @szInstanceName : Win32cr::Foundation::PWSTR, @szParentInstance : Win32cr::Foundation::PWSTR, @dwInstanceIndex : UInt32, @szCounterName : Win32cr::Foundation::PWSTR)
+    end
+      end
 
+    def initialize(@data_item_path : Win32cr::System::Performance::PDH_DATA_ITEM_PATH_ELEMENTS_W, @counter_path : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_W, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@dwLength : UInt32, @dwType : UInt32, @c_version : UInt32, @c_status : UInt32, @lScale : Int32, @lDefaultScale : Int32, @dwUserData : LibC::UIntPtrT, @dwQueryUserData : LibC::UIntPtrT, @szFullPath : Win32cr::Foundation::PWSTR, @anonymous : Anonymous_e__Union_, @szExplainText : Win32cr::Foundation::PWSTR, @data_buffer : UInt32*)
+    end
   end
 
   @[Extern]
-  record PDH_TIME_INFO,
-    start_time : Int64,
-    end_time : Int64,
-    sample_count : UInt32
+  struct PDH_TIME_INFO
+    property start_time : Int64
+    property end_time : Int64
+    property sample_count : UInt32
+    def initialize(@start_time : Int64, @end_time : Int64, @sample_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record PDH_RAW_LOG_RECORD,
-    dwStructureSize : UInt32,
-    dwRecordType : Win32cr::System::Performance::PDH_LOG_TYPE,
-    dwItems : UInt32,
-    raw_bytes : UInt8*
+  struct PDH_RAW_LOG_RECORD
+    property dwStructureSize : UInt32
+    property dwRecordType : Win32cr::System::Performance::PDH_LOG_TYPE
+    property dwItems : UInt32
+    property raw_bytes : UInt8*
+    def initialize(@dwStructureSize : UInt32, @dwRecordType : Win32cr::System::Performance::PDH_LOG_TYPE, @dwItems : UInt32, @raw_bytes : UInt8*)
+    end
+  end
 
   @[Extern]
-  record PDH_LOG_SERVICE_QUERY_INFO_A,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwLogQuota : UInt32,
-    szLogFileCaption : Win32cr::Foundation::PSTR,
-    szDefaultDir : Win32cr::Foundation::PSTR,
-    szBaseFileName : Win32cr::Foundation::PSTR,
-    dwFileType : UInt32,
-    dwReserved : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct PDH_LOG_SERVICE_QUERY_INFO_A
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwLogQuota : UInt32
+    property szLogFileCaption : Win32cr::Foundation::PSTR
+    property szDefaultDir : Win32cr::Foundation::PSTR
+    property szBaseFileName : Win32cr::Foundation::PSTR
+    property dwFileType : UInt32
+    property dwReserved : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      anonymous2 : Anonymous2_e__Struct_ do
+    struct Anonymous_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        pdl_auto_name_interval : UInt32,
-        pdl_auto_name_units : UInt32,
-        pdl_command_filename : Win32cr::Foundation::PSTR,
-        pdl_counter_list : Win32cr::Foundation::PSTR,
-        pdl_auto_name_format : UInt32,
-        pdl_sample_interval : UInt32,
-        pdl_log_start_time : Win32cr::Foundation::FILETIME,
-        pdl_log_end_time : Win32cr::Foundation::FILETIME
+      struct Anonymous1_e__Struct_
+    property pdl_auto_name_interval : UInt32
+    property pdl_auto_name_units : UInt32
+    property pdl_command_filename : Win32cr::Foundation::PSTR
+    property pdl_counter_list : Win32cr::Foundation::PSTR
+    property pdl_auto_name_format : UInt32
+    property pdl_sample_interval : UInt32
+    property pdl_log_start_time : Win32cr::Foundation::FILETIME
+    property pdl_log_end_time : Win32cr::Foundation::FILETIME
+    def initialize(@pdl_auto_name_interval : UInt32, @pdl_auto_name_units : UInt32, @pdl_command_filename : Win32cr::Foundation::PSTR, @pdl_counter_list : Win32cr::Foundation::PSTR, @pdl_auto_name_format : UInt32, @pdl_sample_interval : UInt32, @pdl_log_start_time : Win32cr::Foundation::FILETIME, @pdl_log_end_time : Win32cr::Foundation::FILETIME)
+    end
+      end
 
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        tl_number_of_buffers : UInt32,
-        tl_minimum_buffers : UInt32,
-        tl_maximum_buffers : UInt32,
-        tl_free_buffers : UInt32,
-        tl_buffer_size : UInt32,
-        tl_events_lost : UInt32,
-        tl_logger_thread_id : UInt32,
-        tl_buffers_written : UInt32,
-        tl_log_handle : UInt32,
-        tl_log_file_name : Win32cr::Foundation::PSTR
+      struct Anonymous2_e__Struct_
+    property tl_number_of_buffers : UInt32
+    property tl_minimum_buffers : UInt32
+    property tl_maximum_buffers : UInt32
+    property tl_free_buffers : UInt32
+    property tl_buffer_size : UInt32
+    property tl_events_lost : UInt32
+    property tl_logger_thread_id : UInt32
+    property tl_buffers_written : UInt32
+    property tl_log_handle : UInt32
+    property tl_log_file_name : Win32cr::Foundation::PSTR
+    def initialize(@tl_number_of_buffers : UInt32, @tl_minimum_buffers : UInt32, @tl_maximum_buffers : UInt32, @tl_free_buffers : UInt32, @tl_buffer_size : UInt32, @tl_events_lost : UInt32, @tl_logger_thread_id : UInt32, @tl_buffers_written : UInt32, @tl_log_handle : UInt32, @tl_log_file_name : Win32cr::Foundation::PSTR)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_)
+    end
     end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwLogQuota : UInt32, @szLogFileCaption : Win32cr::Foundation::PSTR, @szDefaultDir : Win32cr::Foundation::PSTR, @szBaseFileName : Win32cr::Foundation::PSTR, @dwFileType : UInt32, @dwReserved : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PDH_LOG_SERVICE_QUERY_INFO_W,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwLogQuota : UInt32,
-    szLogFileCaption : Win32cr::Foundation::PWSTR,
-    szDefaultDir : Win32cr::Foundation::PWSTR,
-    szBaseFileName : Win32cr::Foundation::PWSTR,
-    dwFileType : UInt32,
-    dwReserved : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct PDH_LOG_SERVICE_QUERY_INFO_W
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwLogQuota : UInt32
+    property szLogFileCaption : Win32cr::Foundation::PWSTR
+    property szDefaultDir : Win32cr::Foundation::PWSTR
+    property szBaseFileName : Win32cr::Foundation::PWSTR
+    property dwFileType : UInt32
+    property dwReserved : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      anonymous2 : Anonymous2_e__Struct_ do
+    struct Anonymous_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        pdl_auto_name_interval : UInt32,
-        pdl_auto_name_units : UInt32,
-        pdl_command_filename : Win32cr::Foundation::PWSTR,
-        pdl_counter_list : Win32cr::Foundation::PWSTR,
-        pdl_auto_name_format : UInt32,
-        pdl_sample_interval : UInt32,
-        pdl_log_start_time : Win32cr::Foundation::FILETIME,
-        pdl_log_end_time : Win32cr::Foundation::FILETIME
+      struct Anonymous1_e__Struct_
+    property pdl_auto_name_interval : UInt32
+    property pdl_auto_name_units : UInt32
+    property pdl_command_filename : Win32cr::Foundation::PWSTR
+    property pdl_counter_list : Win32cr::Foundation::PWSTR
+    property pdl_auto_name_format : UInt32
+    property pdl_sample_interval : UInt32
+    property pdl_log_start_time : Win32cr::Foundation::FILETIME
+    property pdl_log_end_time : Win32cr::Foundation::FILETIME
+    def initialize(@pdl_auto_name_interval : UInt32, @pdl_auto_name_units : UInt32, @pdl_command_filename : Win32cr::Foundation::PWSTR, @pdl_counter_list : Win32cr::Foundation::PWSTR, @pdl_auto_name_format : UInt32, @pdl_sample_interval : UInt32, @pdl_log_start_time : Win32cr::Foundation::FILETIME, @pdl_log_end_time : Win32cr::Foundation::FILETIME)
+    end
+      end
 
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        tl_number_of_buffers : UInt32,
-        tl_minimum_buffers : UInt32,
-        tl_maximum_buffers : UInt32,
-        tl_free_buffers : UInt32,
-        tl_buffer_size : UInt32,
-        tl_events_lost : UInt32,
-        tl_logger_thread_id : UInt32,
-        tl_buffers_written : UInt32,
-        tl_log_handle : UInt32,
-        tl_log_file_name : Win32cr::Foundation::PWSTR
+      struct Anonymous2_e__Struct_
+    property tl_number_of_buffers : UInt32
+    property tl_minimum_buffers : UInt32
+    property tl_maximum_buffers : UInt32
+    property tl_free_buffers : UInt32
+    property tl_buffer_size : UInt32
+    property tl_events_lost : UInt32
+    property tl_logger_thread_id : UInt32
+    property tl_buffers_written : UInt32
+    property tl_log_handle : UInt32
+    property tl_log_file_name : Win32cr::Foundation::PWSTR
+    def initialize(@tl_number_of_buffers : UInt32, @tl_minimum_buffers : UInt32, @tl_maximum_buffers : UInt32, @tl_free_buffers : UInt32, @tl_buffer_size : UInt32, @tl_events_lost : UInt32, @tl_logger_thread_id : UInt32, @tl_buffers_written : UInt32, @tl_log_handle : UInt32, @tl_log_file_name : Win32cr::Foundation::PWSTR)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_)
+    end
     end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwLogQuota : UInt32, @szLogFileCaption : Win32cr::Foundation::PWSTR, @szDefaultDir : Win32cr::Foundation::PWSTR, @szBaseFileName : Win32cr::Foundation::PWSTR, @dwFileType : UInt32, @dwReserved : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PDH_BROWSE_DLG_CONFIG_HW,
-    _bitfield : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    hDataSource : LibC::IntPtrT,
-    szReturnPathBuffer : Win32cr::Foundation::PWSTR,
-    cchReturnPathLength : UInt32,
-    pCallBack : Win32cr::System::Performance::CounterPathCallBack,
-    dwCallBackArg : LibC::UIntPtrT,
-    call_back_status : Int32,
-    dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL,
-    szDialogBoxCaption : Win32cr::Foundation::PWSTR
+  struct PDH_BROWSE_DLG_CONFIG_HW
+    property _bitfield : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property hDataSource : LibC::IntPtrT
+    property szReturnPathBuffer : Win32cr::Foundation::PWSTR
+    property cchReturnPathLength : UInt32
+    property pCallBack : Win32cr::System::Performance::CounterPathCallBack
+    property dwCallBackArg : LibC::UIntPtrT
+    property call_back_status : Int32
+    property dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL
+    property szDialogBoxCaption : Win32cr::Foundation::PWSTR
+    def initialize(@_bitfield : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @hDataSource : LibC::IntPtrT, @szReturnPathBuffer : Win32cr::Foundation::PWSTR, @cchReturnPathLength : UInt32, @pCallBack : Win32cr::System::Performance::CounterPathCallBack, @dwCallBackArg : LibC::UIntPtrT, @call_back_status : Int32, @dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL, @szDialogBoxCaption : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record PDH_BROWSE_DLG_CONFIG_HA,
-    _bitfield : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    hDataSource : LibC::IntPtrT,
-    szReturnPathBuffer : Win32cr::Foundation::PSTR,
-    cchReturnPathLength : UInt32,
-    pCallBack : Win32cr::System::Performance::CounterPathCallBack,
-    dwCallBackArg : LibC::UIntPtrT,
-    call_back_status : Int32,
-    dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL,
-    szDialogBoxCaption : Win32cr::Foundation::PSTR
+  struct PDH_BROWSE_DLG_CONFIG_HA
+    property _bitfield : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property hDataSource : LibC::IntPtrT
+    property szReturnPathBuffer : Win32cr::Foundation::PSTR
+    property cchReturnPathLength : UInt32
+    property pCallBack : Win32cr::System::Performance::CounterPathCallBack
+    property dwCallBackArg : LibC::UIntPtrT
+    property call_back_status : Int32
+    property dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL
+    property szDialogBoxCaption : Win32cr::Foundation::PSTR
+    def initialize(@_bitfield : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @hDataSource : LibC::IntPtrT, @szReturnPathBuffer : Win32cr::Foundation::PSTR, @cchReturnPathLength : UInt32, @pCallBack : Win32cr::System::Performance::CounterPathCallBack, @dwCallBackArg : LibC::UIntPtrT, @call_back_status : Int32, @dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL, @szDialogBoxCaption : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record PDH_BROWSE_DLG_CONFIG_W,
-    _bitfield : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    szDataSource : Win32cr::Foundation::PWSTR,
-    szReturnPathBuffer : Win32cr::Foundation::PWSTR,
-    cchReturnPathLength : UInt32,
-    pCallBack : Win32cr::System::Performance::CounterPathCallBack,
-    dwCallBackArg : LibC::UIntPtrT,
-    call_back_status : Int32,
-    dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL,
-    szDialogBoxCaption : Win32cr::Foundation::PWSTR
+  struct PDH_BROWSE_DLG_CONFIG_W
+    property _bitfield : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property szDataSource : Win32cr::Foundation::PWSTR
+    property szReturnPathBuffer : Win32cr::Foundation::PWSTR
+    property cchReturnPathLength : UInt32
+    property pCallBack : Win32cr::System::Performance::CounterPathCallBack
+    property dwCallBackArg : LibC::UIntPtrT
+    property call_back_status : Int32
+    property dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL
+    property szDialogBoxCaption : Win32cr::Foundation::PWSTR
+    def initialize(@_bitfield : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @szDataSource : Win32cr::Foundation::PWSTR, @szReturnPathBuffer : Win32cr::Foundation::PWSTR, @cchReturnPathLength : UInt32, @pCallBack : Win32cr::System::Performance::CounterPathCallBack, @dwCallBackArg : LibC::UIntPtrT, @call_back_status : Int32, @dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL, @szDialogBoxCaption : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record PDH_BROWSE_DLG_CONFIG_A,
-    _bitfield : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    szDataSource : Win32cr::Foundation::PSTR,
-    szReturnPathBuffer : Win32cr::Foundation::PSTR,
-    cchReturnPathLength : UInt32,
-    pCallBack : Win32cr::System::Performance::CounterPathCallBack,
-    dwCallBackArg : LibC::UIntPtrT,
-    call_back_status : Int32,
-    dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL,
-    szDialogBoxCaption : Win32cr::Foundation::PSTR
+  struct PDH_BROWSE_DLG_CONFIG_A
+    property _bitfield : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property szDataSource : Win32cr::Foundation::PSTR
+    property szReturnPathBuffer : Win32cr::Foundation::PSTR
+    property cchReturnPathLength : UInt32
+    property pCallBack : Win32cr::System::Performance::CounterPathCallBack
+    property dwCallBackArg : LibC::UIntPtrT
+    property call_back_status : Int32
+    property dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL
+    property szDialogBoxCaption : Win32cr::Foundation::PSTR
+    def initialize(@_bitfield : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @szDataSource : Win32cr::Foundation::PSTR, @szReturnPathBuffer : Win32cr::Foundation::PSTR, @cchReturnPathLength : UInt32, @pCallBack : Win32cr::System::Performance::CounterPathCallBack, @dwCallBackArg : LibC::UIntPtrT, @call_back_status : Int32, @dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL, @szDialogBoxCaption : Win32cr::Foundation::PSTR)
+    end
+  end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record PERF_OBJECT_TYPE,
-    total_byte_length : UInt32,
-    definition_length : UInt32,
-    header_length : UInt32,
-    object_name_title_index : UInt32,
-    object_name_title : Win32cr::Foundation::PWSTR,
-    object_help_title_index : UInt32,
-    object_help_title : Win32cr::Foundation::PWSTR,
-    detail_level : UInt32,
-    num_counters : UInt32,
-    default_counter : Int32,
-    num_instances : Int32,
-    code_page : UInt32,
-    perf_time : Win32cr::Foundation::LARGE_INTEGER,
-    perf_freq : Win32cr::Foundation::LARGE_INTEGER
+  struct PERF_OBJECT_TYPE
+    property total_byte_length : UInt32
+    property definition_length : UInt32
+    property header_length : UInt32
+    property object_name_title_index : UInt32
+    property object_name_title : Win32cr::Foundation::PWSTR
+    property object_help_title_index : UInt32
+    property object_help_title : Win32cr::Foundation::PWSTR
+    property detail_level : UInt32
+    property num_counters : UInt32
+    property default_counter : Int32
+    property num_instances : Int32
+    property code_page : UInt32
+    property perf_time : Win32cr::Foundation::LARGE_INTEGER
+    property perf_freq : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@total_byte_length : UInt32, @definition_length : UInt32, @header_length : UInt32, @object_name_title_index : UInt32, @object_name_title : Win32cr::Foundation::PWSTR, @object_help_title_index : UInt32, @object_help_title : Win32cr::Foundation::PWSTR, @detail_level : UInt32, @num_counters : UInt32, @default_counter : Int32, @num_instances : Int32, @code_page : UInt32, @perf_time : Win32cr::Foundation::LARGE_INTEGER, @perf_freq : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record PERF_COUNTER_DEFINITION,
-    byte_length : UInt32,
-    counter_name_title_index : UInt32,
-    counter_name_title : Win32cr::Foundation::PWSTR,
-    counter_help_title_index : UInt32,
-    counter_help_title : Win32cr::Foundation::PWSTR,
-    default_scale : Int32,
-    detail_level : UInt32,
-    counter_type : UInt32,
-    counter_size : UInt32,
-    counter_offset : UInt32
+  struct PERF_COUNTER_DEFINITION
+    property byte_length : UInt32
+    property counter_name_title_index : UInt32
+    property counter_name_title : Win32cr::Foundation::PWSTR
+    property counter_help_title_index : UInt32
+    property counter_help_title : Win32cr::Foundation::PWSTR
+    property default_scale : Int32
+    property detail_level : UInt32
+    property counter_type : UInt32
+    property counter_size : UInt32
+    property counter_offset : UInt32
+    def initialize(@byte_length : UInt32, @counter_name_title_index : UInt32, @counter_name_title : Win32cr::Foundation::PWSTR, @counter_help_title_index : UInt32, @counter_help_title : Win32cr::Foundation::PWSTR, @default_scale : Int32, @detail_level : UInt32, @counter_type : UInt32, @counter_size : UInt32, @counter_offset : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
@@ -1070,7 +1226,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("03837520-098b-11d8-9414-505054503030")]
   record IDataCollectorSet, lpVtbl : IDataCollectorSetVtbl* do
     GUID = LibC::GUID.new(0x3837520_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IDataCollectorSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1314,7 +1469,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("03837541-098b-11d8-9414-505054503030")]
   record IDataManager, lpVtbl : IDataManagerVtbl* do
     GUID = LibC::GUID.new(0x3837541_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IDataManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1436,7 +1590,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("03837543-098b-11d8-9414-505054503030")]
   record IFolderAction, lpVtbl : IFolderActionVtbl* do
     GUID = LibC::GUID.new(0x3837543_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IFolderAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1507,7 +1660,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("03837544-098b-11d8-9414-505054503030")]
   record IFolderActionCollection, lpVtbl : IFolderActionCollectionVtbl* do
     GUID = LibC::GUID.new(0x3837544_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IFolderActionCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1595,7 +1747,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("038374ff-098b-11d8-9414-505054503030")]
   record IDataCollector, lpVtbl : IDataCollectorVtbl* do
     GUID = LibC::GUID.new(0x38374ff_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1744,7 +1895,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("03837506-098b-11d8-9414-505054503030")]
   record IPerformanceCounterDataCollector, lpVtbl : IPerformanceCounterDataCollectorVtbl* do
     GUID = LibC::GUID.new(0x3837506_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IPerformanceCounterDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1953,7 +2103,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("0383750b-098b-11d8-9414-505054503030")]
   record ITraceDataCollector, lpVtbl : ITraceDataCollectorVtbl* do
     GUID = LibC::GUID.new(0x383750b_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : ITraceDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2230,7 +2379,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("03837514-098b-11d8-9414-505054503030")]
   record IConfigurationDataCollector, lpVtbl : IConfigurationDataCollectorVtbl* do
     GUID = LibC::GUID.new(0x3837514_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IConfigurationDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2439,7 +2587,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("03837516-098b-11d8-9414-505054503030")]
   record IAlertDataCollector, lpVtbl : IAlertDataCollectorVtbl* do
     GUID = LibC::GUID.new(0x3837516_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IAlertDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2640,7 +2787,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("0383751a-098b-11d8-9414-505054503030")]
   record IApiTracingDataCollector, lpVtbl : IApiTracingDataCollectorVtbl* do
     GUID = LibC::GUID.new(0x383751a_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IApiTracingDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2805,7 +2951,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("03837502-098b-11d8-9414-505054503030")]
   record IDataCollectorCollection, lpVtbl : IDataCollectorCollectionVtbl* do
     GUID = LibC::GUID.new(0x3837502_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IDataCollectorCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2879,7 +3024,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("03837524-098b-11d8-9414-505054503030")]
   record IDataCollectorSetCollection, lpVtbl : IDataCollectorSetCollectionVtbl* do
     GUID = LibC::GUID.new(0x3837524_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IDataCollectorSetCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2961,7 +3105,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("03837512-098b-11d8-9414-505054503030")]
   record ITraceDataProvider, lpVtbl : ITraceDataProviderVtbl* do
     GUID = LibC::GUID.new(0x3837512_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : ITraceDataProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3067,7 +3210,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("03837510-098b-11d8-9414-505054503030")]
   record ITraceDataProviderCollection, lpVtbl : ITraceDataProviderCollectionVtbl* do
     GUID = LibC::GUID.new(0x3837510_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : ITraceDataProviderCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3144,7 +3286,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("0383753a-098b-11d8-9414-505054503030")]
   record ISchedule, lpVtbl : IScheduleVtbl* do
     GUID = LibC::GUID.new(0x383753a_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : ISchedule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3215,7 +3356,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("0383753d-098b-11d8-9414-505054503030")]
   record IScheduleCollection, lpVtbl : IScheduleCollectionVtbl* do
     GUID = LibC::GUID.new(0x383753d_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IScheduleCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3288,7 +3428,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("03837533-098b-11d8-9414-505054503030")]
   record IValueMapItem, lpVtbl : IValueMapItemVtbl* do
     GUID = LibC::GUID.new(0x3837533_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IValueMapItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3371,7 +3510,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("03837534-098b-11d8-9414-505054503030")]
   record IValueMap, lpVtbl : IValueMapVtbl* do
     GUID = LibC::GUID.new(0x3837534_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IValueMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3460,7 +3598,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("771a9520-ee28-11ce-941e-008029004347")]
   record ICounterItem, lpVtbl : ICounterItemVtbl* do
     GUID = LibC::GUID.new(0x771a9520_u32, 0xee28_u16, 0x11ce_u16, StaticArray[0x94_u8, 0x1e_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
     def query_interface(this : ICounterItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3536,7 +3673,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("eefcd4e1-ea1c-4435-b7f4-e341ba03b4f9")]
   record ICounterItem2, lpVtbl : ICounterItem2Vtbl* do
     GUID = LibC::GUID.new(0xeefcd4e1_u32, 0xea1c_u16, 0x4435_u16, StaticArray[0xb7_u8, 0xf4_u8, 0xe3_u8, 0x41_u8, 0xba_u8, 0x3_u8, 0xb4_u8, 0xf9_u8])
     def query_interface(this : ICounterItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3627,7 +3763,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("de1a6b74-9182-4c41-8e2c-24c2cd30ee83")]
   record ICounterItemUnion_, lpVtbl : ICounterItemUnion_Vtbl* do
     GUID = LibC::GUID.new(0xde1a6b74_u32, 0x9182_u16, 0x4c41_u16, StaticArray[0x8e_u8, 0x2c_u8, 0x24_u8, 0xc2_u8, 0xcd_u8, 0x30_u8, 0xee_u8, 0x83_u8])
     def query_interface(this : ICounterItemUnion_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3705,7 +3840,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("c08c4ff2-0e2e-11cf-942c-008029004347")]
   record DICounterItem, lpVtbl : DICounterItemVtbl* do
     GUID = LibC::GUID.new(0xc08c4ff2_u32, 0xe2e_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2c_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
     def query_interface(this : DICounterItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3749,7 +3883,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("79167962-28fc-11cf-942f-008029004347")]
   record ICounters, lpVtbl : ICountersVtbl* do
     GUID = LibC::GUID.new(0x79167962_u32, 0x28fc_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2f_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
     def query_interface(this : ICounters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3800,7 +3933,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("d6b518dd-05c7-418a-89e6-4f9ce8c6841e")]
   record ILogFileItem, lpVtbl : ILogFileItemVtbl* do
     GUID = LibC::GUID.new(0xd6b518dd_u32, 0x5c7_u16, 0x418a_u16, StaticArray[0x89_u8, 0xe6_u8, 0x4f_u8, 0x9c_u8, 0xe8_u8, 0xc6_u8, 0x84_u8, 0x1e_u8])
     def query_interface(this : ILogFileItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3830,7 +3962,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("8d093ffc-f777-4917-82d1-833fbc54c58f")]
   record DILogFileItem, lpVtbl : DILogFileItemVtbl* do
     GUID = LibC::GUID.new(0x8d093ffc_u32, 0xf777_u16, 0x4917_u16, StaticArray[0x82_u8, 0xd1_u8, 0x83_u8, 0x3f_u8, 0xbc_u8, 0x54_u8, 0xc5_u8, 0x8f_u8])
     def query_interface(this : DILogFileItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3874,7 +4005,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("6a2a97e6-6851-41ea-87ad-2a8225335865")]
   record ILogFiles, lpVtbl : ILogFilesVtbl* do
     GUID = LibC::GUID.new(0x6a2a97e6_u32, 0x6851_u16, 0x41ea_u16, StaticArray[0x87_u8, 0xad_u8, 0x2a_u8, 0x82_u8, 0x25_u8, 0x33_u8, 0x58_u8, 0x65_u8])
     def query_interface(this : ILogFiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4000,7 +4130,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("194eb241-c32c-11cf-9398-00aa00a3ddea")]
   record ISystemMonitor, lpVtbl : ISystemMonitorVtbl* do
     GUID = LibC::GUID.new(0x194eb241_u32, 0xc32c_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
     def query_interface(this : ISystemMonitor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4347,7 +4476,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("08e3206a-5fd2-4fde-a8a5-8cb3b63d2677")]
   record ISystemMonitor2, lpVtbl : ISystemMonitor2Vtbl* do
     GUID = LibC::GUID.new(0x8e3206a_u32, 0x5fd2_u16, 0x4fde_u16, StaticArray[0xa8_u8, 0xa5_u8, 0x8c_u8, 0xb3_u8, 0xb6_u8, 0x3d_u8, 0x26_u8, 0x77_u8])
     def query_interface(this : ISystemMonitor2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4754,7 +4882,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("c8a77338-265f-4de5-aa25-c7da1ce5a8f4")]
   record ISystemMonitorUnion_, lpVtbl : ISystemMonitorUnion_Vtbl* do
     GUID = LibC::GUID.new(0xc8a77338_u32, 0x265f_u16, 0x4de5_u16, StaticArray[0xaa_u8, 0x25_u8, 0xc7_u8, 0xda_u8, 0x1c_u8, 0xe5_u8, 0xa8_u8, 0xf4_u8])
     def query_interface(this : ISystemMonitorUnion_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5069,7 +5196,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("13d73d81-c32e-11cf-9398-00aa00a3ddea")]
   record DISystemMonitor, lpVtbl : DISystemMonitorVtbl* do
     GUID = LibC::GUID.new(0x13d73d81_u32, 0xc32e_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
     def query_interface(this : DISystemMonitor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5108,7 +5234,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("194eb242-c32c-11cf-9398-00aa00a3ddea")]
   record DISystemMonitorInternal, lpVtbl : DISystemMonitorInternalVtbl* do
     GUID = LibC::GUID.new(0x194eb242_u32, 0xc32c_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
     def query_interface(this : DISystemMonitorInternal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5148,7 +5273,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("ee660ea0-4abd-11cf-943a-008029004347")]
   record ISystemMonitorEvents, lpVtbl : ISystemMonitorEventsVtbl* do
     GUID = LibC::GUID.new(0xee660ea0_u32, 0x4abd_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x3a_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
     def query_interface(this : ISystemMonitorEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5190,7 +5314,6 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  #@[Com("84979930-4ab3-11cf-943a-008029004347")]
   record DISystemMonitorEvents, lpVtbl : DISystemMonitorEventsVtbl* do
     GUID = LibC::GUID.new(0x84979930_u32, 0x4ab3_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x3a_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
     def query_interface(this : DISystemMonitorEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

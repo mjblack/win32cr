@@ -5,7 +5,7 @@ require "./../ui/windows_and_messaging.cr"
 require "./../graphics/gdi.cr"
 
 module Win32cr::Devices::ImageAcquisition
-  alias DeviceDialogFunction = Proc(Win32cr::Devices::ImageAcquisition::DEVICEDIALOGDATA*, Win32cr::Foundation::HRESULT)*
+  alias DeviceDialogFunction = Proc(Win32cr::Devices::ImageAcquisition::DEVICEDIALOGDATA*, Win32cr::Foundation::HRESULT)
 
   WIA_DIP_DEV_ID = 2_u32
   WIA_DIP_DEV_ID_STR = "Unique Device ID"
@@ -1268,412 +1268,532 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record WIA_DITHER_PATTERN_DATA,
-    lSize : Int32,
-    bstrPatternName : Win32cr::Foundation::BSTR,
-    lPatternWidth : Int32,
-    lPatternLength : Int32,
-    cbPattern : Int32,
-    pbPattern : UInt8*
+  struct WIA_DITHER_PATTERN_DATA
+    property lSize : Int32
+    property bstrPatternName : Win32cr::Foundation::BSTR
+    property lPatternWidth : Int32
+    property lPatternLength : Int32
+    property cbPattern : Int32
+    property pbPattern : UInt8*
+    def initialize(@lSize : Int32, @bstrPatternName : Win32cr::Foundation::BSTR, @lPatternWidth : Int32, @lPatternLength : Int32, @cbPattern : Int32, @pbPattern : UInt8*)
+    end
+  end
 
   @[Extern]
-  record WIA_PROPID_TO_NAME,
-    propid : UInt32,
-    pszName : Win32cr::Foundation::PWSTR
+  struct WIA_PROPID_TO_NAME
+    property propid : UInt32
+    property pszName : Win32cr::Foundation::PWSTR
+    def initialize(@propid : UInt32, @pszName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WIA_FORMAT_INFO,
-    guidFormatID : LibC::GUID,
-    lTymed : Int32
+  struct WIA_FORMAT_INFO
+    property guidFormatID : LibC::GUID
+    property lTymed : Int32
+    def initialize(@guidFormatID : LibC::GUID, @lTymed : Int32)
+    end
+  end
 
   @[Extern]
-  record WIA_RAW_HEADER,
-    tag : UInt32,
-    version : UInt32,
-    header_size : UInt32,
-    x_res : UInt32,
-    y_res : UInt32,
-    x_extent : UInt32,
-    y_extent : UInt32,
-    bytes_per_line : UInt32,
-    bits_per_pixel : UInt32,
-    channels_per_pixel : UInt32,
-    data_type : UInt32,
-    bits_per_channel : UInt8[8],
-    compression : UInt32,
-    photometric_interp : UInt32,
-    line_order : UInt32,
-    raw_data_offset : UInt32,
-    raw_data_size : UInt32,
-    palette_offset : UInt32,
-    palette_size : UInt32
+  struct WIA_RAW_HEADER
+    property tag : UInt32
+    property version : UInt32
+    property header_size : UInt32
+    property x_res : UInt32
+    property y_res : UInt32
+    property x_extent : UInt32
+    property y_extent : UInt32
+    property bytes_per_line : UInt32
+    property bits_per_pixel : UInt32
+    property channels_per_pixel : UInt32
+    property data_type : UInt32
+    property bits_per_channel : UInt8[8]
+    property compression : UInt32
+    property photometric_interp : UInt32
+    property line_order : UInt32
+    property raw_data_offset : UInt32
+    property raw_data_size : UInt32
+    property palette_offset : UInt32
+    property palette_size : UInt32
+    def initialize(@tag : UInt32, @version : UInt32, @header_size : UInt32, @x_res : UInt32, @y_res : UInt32, @x_extent : UInt32, @y_extent : UInt32, @bytes_per_line : UInt32, @bits_per_pixel : UInt32, @channels_per_pixel : UInt32, @data_type : UInt32, @bits_per_channel : UInt8[8], @compression : UInt32, @photometric_interp : UInt32, @line_order : UInt32, @raw_data_offset : UInt32, @raw_data_size : UInt32, @palette_offset : UInt32, @palette_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record WIA_BARCODE_INFO,
-    size : UInt32,
-    type__ : UInt32,
-    page : UInt32,
-    confidence : UInt32,
-    x_offset : UInt32,
-    y_offset : UInt32,
-    rotation : UInt32,
-    length : UInt32,
-    text : UInt16*
+  struct WIA_BARCODE_INFO
+    property size : UInt32
+    property type__ : UInt32
+    property page : UInt32
+    property confidence : UInt32
+    property x_offset : UInt32
+    property y_offset : UInt32
+    property rotation : UInt32
+    property length : UInt32
+    property text : UInt16*
+    def initialize(@size : UInt32, @type__ : UInt32, @page : UInt32, @confidence : UInt32, @x_offset : UInt32, @y_offset : UInt32, @rotation : UInt32, @length : UInt32, @text : UInt16*)
+    end
+  end
 
   @[Extern]
-  record WIA_BARCODES,
-    tag : UInt32,
-    version : UInt32,
-    size : UInt32,
-    count : UInt32,
-    barcodes : Win32cr::Devices::ImageAcquisition::WIA_BARCODE_INFO*
+  struct WIA_BARCODES
+    property tag : UInt32
+    property version : UInt32
+    property size : UInt32
+    property count : UInt32
+    property barcodes : Win32cr::Devices::ImageAcquisition::WIA_BARCODE_INFO*
+    def initialize(@tag : UInt32, @version : UInt32, @size : UInt32, @count : UInt32, @barcodes : Win32cr::Devices::ImageAcquisition::WIA_BARCODE_INFO*)
+    end
+  end
 
   @[Extern]
-  record WIA_PATCH_CODE_INFO,
-    type__ : UInt32
+  struct WIA_PATCH_CODE_INFO
+    property type__ : UInt32
+    def initialize(@type__ : UInt32)
+    end
+  end
 
   @[Extern]
-  record WIA_PATCH_CODES,
-    tag : UInt32,
-    version : UInt32,
-    size : UInt32,
-    count : UInt32,
-    patch_codes : Win32cr::Devices::ImageAcquisition::WIA_PATCH_CODE_INFO*
+  struct WIA_PATCH_CODES
+    property tag : UInt32
+    property version : UInt32
+    property size : UInt32
+    property count : UInt32
+    property patch_codes : Win32cr::Devices::ImageAcquisition::WIA_PATCH_CODE_INFO*
+    def initialize(@tag : UInt32, @version : UInt32, @size : UInt32, @count : UInt32, @patch_codes : Win32cr::Devices::ImageAcquisition::WIA_PATCH_CODE_INFO*)
+    end
+  end
 
   @[Extern]
-  record WIA_MICR_INFO,
-    size : UInt32,
-    page : UInt32,
-    length : UInt32,
-    text : UInt16*
+  struct WIA_MICR_INFO
+    property size : UInt32
+    property page : UInt32
+    property length : UInt32
+    property text : UInt16*
+    def initialize(@size : UInt32, @page : UInt32, @length : UInt32, @text : UInt16*)
+    end
+  end
 
   @[Extern]
-  record WIA_MICR,
-    tag : UInt32,
-    version : UInt32,
-    size : UInt32,
-    placeholder : UInt16,
-    reserved : UInt16,
-    count : UInt32,
-    micr : Win32cr::Devices::ImageAcquisition::WIA_MICR_INFO*
+  struct WIA_MICR
+    property tag : UInt32
+    property version : UInt32
+    property size : UInt32
+    property placeholder : UInt16
+    property reserved : UInt16
+    property count : UInt32
+    property micr : Win32cr::Devices::ImageAcquisition::WIA_MICR_INFO*
+    def initialize(@tag : UInt32, @version : UInt32, @size : UInt32, @placeholder : UInt16, @reserved : UInt16, @count : UInt32, @micr : Win32cr::Devices::ImageAcquisition::WIA_MICR_INFO*)
+    end
+  end
 
   @[Extern]
-  record WIA_DATA_CALLBACK_HEADER,
-    lSize : Int32,
-    guidFormatID : LibC::GUID,
-    lBufferSize : Int32,
-    lPageCount : Int32
+  struct WIA_DATA_CALLBACK_HEADER
+    property lSize : Int32
+    property guidFormatID : LibC::GUID
+    property lBufferSize : Int32
+    property lPageCount : Int32
+    def initialize(@lSize : Int32, @guidFormatID : LibC::GUID, @lBufferSize : Int32, @lPageCount : Int32)
+    end
+  end
 
   @[Extern]
-  record WIA_DATA_TRANSFER_INFO,
-    ulSize : UInt32,
-    ulSection : UInt32,
-    ulBufferSize : UInt32,
-    bDoubleBuffer : Win32cr::Foundation::BOOL,
-    ulReserved1 : UInt32,
-    ulReserved2 : UInt32,
-    ulReserved3 : UInt32
+  struct WIA_DATA_TRANSFER_INFO
+    property ulSize : UInt32
+    property ulSection : UInt32
+    property ulBufferSize : UInt32
+    property bDoubleBuffer : Win32cr::Foundation::BOOL
+    property ulReserved1 : UInt32
+    property ulReserved2 : UInt32
+    property ulReserved3 : UInt32
+    def initialize(@ulSize : UInt32, @ulSection : UInt32, @ulBufferSize : UInt32, @bDoubleBuffer : Win32cr::Foundation::BOOL, @ulReserved1 : UInt32, @ulReserved2 : UInt32, @ulReserved3 : UInt32)
+    end
+  end
 
   @[Extern]
-  record WIA_EXTENDED_TRANSFER_INFO,
-    ulSize : UInt32,
-    ulMinBufferSize : UInt32,
-    ulOptimalBufferSize : UInt32,
-    ulMaxBufferSize : UInt32,
-    ulNumBuffers : UInt32
+  struct WIA_EXTENDED_TRANSFER_INFO
+    property ulSize : UInt32
+    property ulMinBufferSize : UInt32
+    property ulOptimalBufferSize : UInt32
+    property ulMaxBufferSize : UInt32
+    property ulNumBuffers : UInt32
+    def initialize(@ulSize : UInt32, @ulMinBufferSize : UInt32, @ulOptimalBufferSize : UInt32, @ulMaxBufferSize : UInt32, @ulNumBuffers : UInt32)
+    end
+  end
 
   @[Extern]
-  record WIA_DEV_CAP,
-    guid : LibC::GUID,
-    ulFlags : UInt32,
-    bstrName : Win32cr::Foundation::BSTR,
-    bstrDescription : Win32cr::Foundation::BSTR,
-    bstrIcon : Win32cr::Foundation::BSTR,
-    bstrCommandline : Win32cr::Foundation::BSTR
+  struct WIA_DEV_CAP
+    property guid : LibC::GUID
+    property ulFlags : UInt32
+    property bstrName : Win32cr::Foundation::BSTR
+    property bstrDescription : Win32cr::Foundation::BSTR
+    property bstrIcon : Win32cr::Foundation::BSTR
+    property bstrCommandline : Win32cr::Foundation::BSTR
+    def initialize(@guid : LibC::GUID, @ulFlags : UInt32, @bstrName : Win32cr::Foundation::BSTR, @bstrDescription : Win32cr::Foundation::BSTR, @bstrIcon : Win32cr::Foundation::BSTR, @bstrCommandline : Win32cr::Foundation::BSTR)
+    end
+  end
 
   @[Extern]
-  record WiaTransferParams,
-    lMessage : Int32,
-    lPercentComplete : Int32,
-    ulTransferredBytes : UInt64,
-    hrErrorStatus : Win32cr::Foundation::HRESULT
+  struct WiaTransferParams
+    property lMessage : Int32
+    property lPercentComplete : Int32
+    property ulTransferredBytes : UInt64
+    property hrErrorStatus : Win32cr::Foundation::HRESULT
+    def initialize(@lMessage : Int32, @lPercentComplete : Int32, @ulTransferredBytes : UInt64, @hrErrorStatus : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record MINIDRV_TRANSFER_CONTEXT,
-    lSize : Int32,
-    lWidthInPixels : Int32,
-    lLines : Int32,
-    lDepth : Int32,
-    lXRes : Int32,
-    lYRes : Int32,
-    lCompression : Int32,
-    guidFormatID : LibC::GUID,
-    tymed : Int32,
-    hFile : LibC::IntPtrT,
-    cbOffset : Int32,
-    lBufferSize : Int32,
-    lActiveBuffer : Int32,
-    lNumBuffers : Int32,
-    pBaseBuffer : UInt8*,
-    pTransferBuffer : UInt8*,
-    bTransferDataCB : Win32cr::Foundation::BOOL,
-    bClassDrvAllocBuf : Win32cr::Foundation::BOOL,
-    lClientAddress : LibC::IntPtrT,
-    pIWiaMiniDrvCallBack : Void*,
-    lImageSize : Int32,
-    lHeaderSize : Int32,
-    lItemSize : Int32,
-    cbWidthInBytes : Int32,
-    lPage : Int32,
-    lCurIfdOffset : Int32,
-    lPrevIfdOffset : Int32
+  struct MINIDRV_TRANSFER_CONTEXT
+    property lSize : Int32
+    property lWidthInPixels : Int32
+    property lLines : Int32
+    property lDepth : Int32
+    property lXRes : Int32
+    property lYRes : Int32
+    property lCompression : Int32
+    property guidFormatID : LibC::GUID
+    property tymed : Int32
+    property hFile : LibC::IntPtrT
+    property cbOffset : Int32
+    property lBufferSize : Int32
+    property lActiveBuffer : Int32
+    property lNumBuffers : Int32
+    property pBaseBuffer : UInt8*
+    property pTransferBuffer : UInt8*
+    property bTransferDataCB : Win32cr::Foundation::BOOL
+    property bClassDrvAllocBuf : Win32cr::Foundation::BOOL
+    property lClientAddress : LibC::IntPtrT
+    property pIWiaMiniDrvCallBack : Void*
+    property lImageSize : Int32
+    property lHeaderSize : Int32
+    property lItemSize : Int32
+    property cbWidthInBytes : Int32
+    property lPage : Int32
+    property lCurIfdOffset : Int32
+    property lPrevIfdOffset : Int32
+    def initialize(@lSize : Int32, @lWidthInPixels : Int32, @lLines : Int32, @lDepth : Int32, @lXRes : Int32, @lYRes : Int32, @lCompression : Int32, @guidFormatID : LibC::GUID, @tymed : Int32, @hFile : LibC::IntPtrT, @cbOffset : Int32, @lBufferSize : Int32, @lActiveBuffer : Int32, @lNumBuffers : Int32, @pBaseBuffer : UInt8*, @pTransferBuffer : UInt8*, @bTransferDataCB : Win32cr::Foundation::BOOL, @bClassDrvAllocBuf : Win32cr::Foundation::BOOL, @lClientAddress : LibC::IntPtrT, @pIWiaMiniDrvCallBack : Void*, @lImageSize : Int32, @lHeaderSize : Int32, @lItemSize : Int32, @cbWidthInBytes : Int32, @lPage : Int32, @lCurIfdOffset : Int32, @lPrevIfdOffset : Int32)
+    end
+  end
 
   @[Extern]
-  record WIA_DEV_CAP_DRV,
-    guid : LibC::GUID*,
-    ulFlags : UInt32,
-    wszName : Win32cr::Foundation::PWSTR,
-    wszDescription : Win32cr::Foundation::PWSTR,
-    wszIcon : Win32cr::Foundation::PWSTR
+  struct WIA_DEV_CAP_DRV
+    property guid : LibC::GUID*
+    property ulFlags : UInt32
+    property wszName : Win32cr::Foundation::PWSTR
+    property wszDescription : Win32cr::Foundation::PWSTR
+    property wszIcon : Win32cr::Foundation::PWSTR
+    def initialize(@guid : LibC::GUID*, @ulFlags : UInt32, @wszName : Win32cr::Foundation::PWSTR, @wszDescription : Win32cr::Foundation::PWSTR, @wszIcon : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WIA_PROPERTY_INFO,
-    lAccessFlags : UInt32,
-    vt : UInt16,
-    valid_val : ValidVal_e__Union_ do
+  struct WIA_PROPERTY_INFO
+    property lAccessFlags : UInt32
+    property vt : UInt16
+    property valid_val : ValidVal_e__Union_
 
     # Nested Type ValidVal_e__Union_
     @[Extern(union: true)]
-    record ValidVal_e__Union_,
-      range : Range_e__Struct_,
-      range_float : RangeFloat_e__Struct_,
-      list : List_e__Struct_,
-      list_float : ListFloat_e__Struct_,
-      list_guid : ListGuid_e__Struct_,
-      list_b_str : ListBStr_e__Struct_,
-      flag : Flag_e__Struct_,
-      none : None_e__Struct_ do
+    struct ValidVal_e__Union_
+    property range : Range_e__Struct_
+    property range_float : RangeFloat_e__Struct_
+    property list : List_e__Struct_
+    property list_float : ListFloat_e__Struct_
+    property list_guid : ListGuid_e__Struct_
+    property list_b_str : ListBStr_e__Struct_
+    property flag : Flag_e__Struct_
+    property none : None_e__Struct_
 
       # Nested Type Flag_e__Struct_
       @[Extern]
-      record Flag_e__Struct_,
-        nom : Int32,
-        valid_bits : Int32
+      struct Flag_e__Struct_
+    property nom : Int32
+    property valid_bits : Int32
+    def initialize(@nom : Int32, @valid_bits : Int32)
+    end
+      end
 
 
       # Nested Type ListGuid_e__Struct_
       @[Extern]
-      record ListGuid_e__Struct_,
-        cNumList : Int32,
-        nom : LibC::GUID,
-        pList : LibC::GUID*
+      struct ListGuid_e__Struct_
+    property cNumList : Int32
+    property nom : LibC::GUID
+    property pList : LibC::GUID*
+    def initialize(@cNumList : Int32, @nom : LibC::GUID, @pList : LibC::GUID*)
+    end
+      end
 
 
       # Nested Type List_e__Struct_
       @[Extern]
-      record List_e__Struct_,
-        cNumList : Int32,
-        nom : Int32,
-        pList : UInt8*
+      struct List_e__Struct_
+    property cNumList : Int32
+    property nom : Int32
+    property pList : UInt8*
+    def initialize(@cNumList : Int32, @nom : Int32, @pList : UInt8*)
+    end
+      end
 
 
       # Nested Type Range_e__Struct_
       @[Extern]
-      record Range_e__Struct_,
-        min : Int32,
-        nom : Int32,
-        max : Int32,
-        inc : Int32
+      struct Range_e__Struct_
+    property min : Int32
+    property nom : Int32
+    property max : Int32
+    property inc : Int32
+    def initialize(@min : Int32, @nom : Int32, @max : Int32, @inc : Int32)
+    end
+      end
 
 
       # Nested Type None_e__Struct_
       @[Extern]
-      record None_e__Struct_,
-        dummy : Int32
+      struct None_e__Struct_
+    property dummy : Int32
+    def initialize(@dummy : Int32)
+    end
+      end
 
 
       # Nested Type ListFloat_e__Struct_
       @[Extern]
-      record ListFloat_e__Struct_,
-        cNumList : Int32,
-        nom : Float64,
-        pList : UInt8*
+      struct ListFloat_e__Struct_
+    property cNumList : Int32
+    property nom : Float64
+    property pList : UInt8*
+    def initialize(@cNumList : Int32, @nom : Float64, @pList : UInt8*)
+    end
+      end
 
 
       # Nested Type ListBStr_e__Struct_
       @[Extern]
-      record ListBStr_e__Struct_,
-        cNumList : Int32,
-        nom : Win32cr::Foundation::BSTR,
-        pList : Win32cr::Foundation::BSTR*
+      struct ListBStr_e__Struct_
+    property cNumList : Int32
+    property nom : Win32cr::Foundation::BSTR
+    property pList : Win32cr::Foundation::BSTR*
+    def initialize(@cNumList : Int32, @nom : Win32cr::Foundation::BSTR, @pList : Win32cr::Foundation::BSTR*)
+    end
+      end
 
 
       # Nested Type RangeFloat_e__Struct_
       @[Extern]
-      record RangeFloat_e__Struct_,
-        min : Float64,
-        nom : Float64,
-        max : Float64,
-        inc : Float64
+      struct RangeFloat_e__Struct_
+    property min : Float64
+    property nom : Float64
+    property max : Float64
+    property inc : Float64
+    def initialize(@min : Float64, @nom : Float64, @max : Float64, @inc : Float64)
+    end
+      end
 
+    def initialize(@range : Range_e__Struct_, @range_float : RangeFloat_e__Struct_, @list : List_e__Struct_, @list_float : ListFloat_e__Struct_, @list_guid : ListGuid_e__Struct_, @list_b_str : ListBStr_e__Struct_, @flag : Flag_e__Struct_, @none : None_e__Struct_)
+    end
     end
 
+    def initialize(@lAccessFlags : UInt32, @vt : UInt16, @valid_val : ValidVal_e__Union_)
+    end
   end
 
   @[Extern]
-  record WIA_PROPERTY_CONTEXT,
-    cProps : UInt32,
-    pProps : UInt32*,
-    pChanged : Win32cr::Foundation::BOOL*
+  struct WIA_PROPERTY_CONTEXT
+    property cProps : UInt32
+    property pProps : UInt32*
+    property pChanged : Win32cr::Foundation::BOOL*
+    def initialize(@cProps : UInt32, @pProps : UInt32*, @pChanged : Win32cr::Foundation::BOOL*)
+    end
+  end
 
   @[Extern]
-  record WIAS_CHANGED_VALUE_INFO,
-    bChanged : Win32cr::Foundation::BOOL,
-    vt : Int32,
-    old : Old_e__Union_,
-    current : Current_e__Union_ do
+  struct WIAS_CHANGED_VALUE_INFO
+    property bChanged : Win32cr::Foundation::BOOL
+    property vt : Int32
+    property old : Old_e__Union_
+    property current : Current_e__Union_
 
     # Nested Type Old_e__Union_
     @[Extern(union: true)]
-    record Old_e__Union_,
-      lVal : Int32,
-      fltVal : Float32,
-      bstrVal : Win32cr::Foundation::BSTR,
-      guidVal : LibC::GUID
+    struct Old_e__Union_
+    property lVal : Int32
+    property fltVal : Float32
+    property bstrVal : Win32cr::Foundation::BSTR
+    property guidVal : LibC::GUID
+    def initialize(@lVal : Int32, @fltVal : Float32, @bstrVal : Win32cr::Foundation::BSTR, @guidVal : LibC::GUID)
+    end
+    end
 
 
     # Nested Type Current_e__Union_
     @[Extern(union: true)]
-    record Current_e__Union_,
-      lVal : Int32,
-      fltVal : Float32,
-      bstrVal : Win32cr::Foundation::BSTR,
-      guidVal : LibC::GUID
+    struct Current_e__Union_
+    property lVal : Int32
+    property fltVal : Float32
+    property bstrVal : Win32cr::Foundation::BSTR
+    property guidVal : LibC::GUID
+    def initialize(@lVal : Int32, @fltVal : Float32, @bstrVal : Win32cr::Foundation::BSTR, @guidVal : LibC::GUID)
+    end
+    end
 
+    def initialize(@bChanged : Win32cr::Foundation::BOOL, @vt : Int32, @old : Old_e__Union_, @current : Current_e__Union_)
+    end
   end
 
   @[Extern]
-  record WIAS_DOWN_SAMPLE_INFO,
-    ulOriginalWidth : UInt32,
-    ulOriginalHeight : UInt32,
-    ulBitsPerPixel : UInt32,
-    ulXRes : UInt32,
-    ulYRes : UInt32,
-    ulDownSampledWidth : UInt32,
-    ulDownSampledHeight : UInt32,
-    ulActualSize : UInt32,
-    ulDestBufSize : UInt32,
-    ulSrcBufSize : UInt32,
-    pSrcBuffer : UInt8*,
-    pDestBuffer : UInt8*
+  struct WIAS_DOWN_SAMPLE_INFO
+    property ulOriginalWidth : UInt32
+    property ulOriginalHeight : UInt32
+    property ulBitsPerPixel : UInt32
+    property ulXRes : UInt32
+    property ulYRes : UInt32
+    property ulDownSampledWidth : UInt32
+    property ulDownSampledHeight : UInt32
+    property ulActualSize : UInt32
+    property ulDestBufSize : UInt32
+    property ulSrcBufSize : UInt32
+    property pSrcBuffer : UInt8*
+    property pDestBuffer : UInt8*
+    def initialize(@ulOriginalWidth : UInt32, @ulOriginalHeight : UInt32, @ulBitsPerPixel : UInt32, @ulXRes : UInt32, @ulYRes : UInt32, @ulDownSampledWidth : UInt32, @ulDownSampledHeight : UInt32, @ulActualSize : UInt32, @ulDestBufSize : UInt32, @ulSrcBufSize : UInt32, @pSrcBuffer : UInt8*, @pDestBuffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record WIAS_ENDORSER_VALUE,
-    wszTokenName : Win32cr::Foundation::PWSTR,
-    wszValue : Win32cr::Foundation::PWSTR
+  struct WIAS_ENDORSER_VALUE
+    property wszTokenName : Win32cr::Foundation::PWSTR
+    property wszValue : Win32cr::Foundation::PWSTR
+    def initialize(@wszTokenName : Win32cr::Foundation::PWSTR, @wszValue : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WIAS_ENDORSER_INFO,
-    ulPageCount : UInt32,
-    ulNumEndorserValues : UInt32,
-    pEndorserValues : Win32cr::Devices::ImageAcquisition::WIAS_ENDORSER_VALUE*
+  struct WIAS_ENDORSER_INFO
+    property ulPageCount : UInt32
+    property ulNumEndorserValues : UInt32
+    property pEndorserValues : Win32cr::Devices::ImageAcquisition::WIAS_ENDORSER_VALUE*
+    def initialize(@ulPageCount : UInt32, @ulNumEndorserValues : UInt32, @pEndorserValues : Win32cr::Devices::ImageAcquisition::WIAS_ENDORSER_VALUE*)
+    end
+  end
 
   @[Extern]
-  record DEVICEDIALOGDATA2,
-    cbSize : UInt32,
-    pIWiaItemRoot : Void*,
-    dwFlags : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    bstrFolderName : Win32cr::Foundation::BSTR,
-    bstrFilename : Win32cr::Foundation::BSTR,
-    lNumFiles : Int32,
-    pbstrFilePaths : Win32cr::Foundation::BSTR*,
-    pWiaItem : Void*
+  struct DEVICEDIALOGDATA2
+    property cbSize : UInt32
+    property pIWiaItemRoot : Void*
+    property dwFlags : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property bstrFolderName : Win32cr::Foundation::BSTR
+    property bstrFilename : Win32cr::Foundation::BSTR
+    property lNumFiles : Int32
+    property pbstrFilePaths : Win32cr::Foundation::BSTR*
+    property pWiaItem : Void*
+    def initialize(@cbSize : UInt32, @pIWiaItemRoot : Void*, @dwFlags : UInt32, @hwndParent : Win32cr::Foundation::HWND, @bstrFolderName : Win32cr::Foundation::BSTR, @bstrFilename : Win32cr::Foundation::BSTR, @lNumFiles : Int32, @pbstrFilePaths : Win32cr::Foundation::BSTR*, @pWiaItem : Void*)
+    end
+  end
 
   @[Extern]
-  record DEVICEDIALOGDATA,
-    cbSize : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    pIWiaItemRoot : Void*,
-    dwFlags : UInt32,
-    lIntent : Int32,
-    lItemCount : Int32,
-    ppWiaItems : Void**
+  struct DEVICEDIALOGDATA
+    property cbSize : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property pIWiaItemRoot : Void*
+    property dwFlags : UInt32
+    property lIntent : Int32
+    property lItemCount : Int32
+    property ppWiaItems : Void**
+    def initialize(@cbSize : UInt32, @hwndParent : Win32cr::Foundation::HWND, @pIWiaItemRoot : Void*, @dwFlags : UInt32, @lIntent : Int32, @lItemCount : Int32, @ppWiaItems : Void**)
+    end
+  end
 
   @[Extern]
-  record RANGEVALUE,
-    lMin : Int32,
-    lMax : Int32,
-    lStep : Int32
+  struct RANGEVALUE
+    property lMin : Int32
+    property lMax : Int32
+    property lStep : Int32
+    def initialize(@lMin : Int32, @lMax : Int32, @lStep : Int32)
+    end
+  end
 
   @[Extern]
-  record SCANWINDOW,
-    xPos : Int32,
-    yPos : Int32,
-    xExtent : Int32,
-    yExtent : Int32
+  struct SCANWINDOW
+    property xPos : Int32
+    property yPos : Int32
+    property xExtent : Int32
+    property yExtent : Int32
+    def initialize(@xPos : Int32, @yPos : Int32, @xExtent : Int32, @yExtent : Int32)
+    end
+  end
 
   @[Extern]
-  record SCANINFO,
-    adf : Int32,
-    tpa : Int32,
-    endorser : Int32,
-    optical_x_resolution : Int32,
-    optical_y_resolution : Int32,
-    bed_width : Int32,
-    bed_height : Int32,
-    intensity_range : Win32cr::Devices::ImageAcquisition::RANGEVALUE,
-    contrast_range : Win32cr::Devices::ImageAcquisition::RANGEVALUE,
-    supported_compression_type : Int32,
-    supported_data_types : Int32,
-    width_pixels : Int32,
-    width_bytes : Int32,
-    lines : Int32,
-    data_type : Int32,
-    pixel_bits : Int32,
-    intensity : Int32,
-    contrast : Int32,
-    xresolution : Int32,
-    yresolution : Int32,
-    window : Win32cr::Devices::ImageAcquisition::SCANWINDOW,
-    dither_pattern : Int32,
-    negative : Int32,
-    mirror : Int32,
-    auto_back : Int32,
-    color_dither_pattern : Int32,
-    tone_map : Int32,
-    compression : Int32,
-    raw_data_format : Int32,
-    raw_pixel_order : Int32,
-    bNeedDataAlignment : Int32,
-    delay_between_read : Int32,
-    max_buffer_size : Int32,
-    device_io_handles : Win32cr::Foundation::HANDLE[16],
-    lReserved : Int32[4],
-    pMicroDriverContext : Void*
+  struct SCANINFO
+    property adf : Int32
+    property tpa : Int32
+    property endorser : Int32
+    property optical_x_resolution : Int32
+    property optical_y_resolution : Int32
+    property bed_width : Int32
+    property bed_height : Int32
+    property intensity_range : Win32cr::Devices::ImageAcquisition::RANGEVALUE
+    property contrast_range : Win32cr::Devices::ImageAcquisition::RANGEVALUE
+    property supported_compression_type : Int32
+    property supported_data_types : Int32
+    property width_pixels : Int32
+    property width_bytes : Int32
+    property lines : Int32
+    property data_type : Int32
+    property pixel_bits : Int32
+    property intensity : Int32
+    property contrast : Int32
+    property xresolution : Int32
+    property yresolution : Int32
+    property window : Win32cr::Devices::ImageAcquisition::SCANWINDOW
+    property dither_pattern : Int32
+    property negative : Int32
+    property mirror : Int32
+    property auto_back : Int32
+    property color_dither_pattern : Int32
+    property tone_map : Int32
+    property compression : Int32
+    property raw_data_format : Int32
+    property raw_pixel_order : Int32
+    property bNeedDataAlignment : Int32
+    property delay_between_read : Int32
+    property max_buffer_size : Int32
+    property device_io_handles : Win32cr::Foundation::HANDLE[16]
+    property lReserved : Int32[4]
+    property pMicroDriverContext : Void*
+    def initialize(@adf : Int32, @tpa : Int32, @endorser : Int32, @optical_x_resolution : Int32, @optical_y_resolution : Int32, @bed_width : Int32, @bed_height : Int32, @intensity_range : Win32cr::Devices::ImageAcquisition::RANGEVALUE, @contrast_range : Win32cr::Devices::ImageAcquisition::RANGEVALUE, @supported_compression_type : Int32, @supported_data_types : Int32, @width_pixels : Int32, @width_bytes : Int32, @lines : Int32, @data_type : Int32, @pixel_bits : Int32, @intensity : Int32, @contrast : Int32, @xresolution : Int32, @yresolution : Int32, @window : Win32cr::Devices::ImageAcquisition::SCANWINDOW, @dither_pattern : Int32, @negative : Int32, @mirror : Int32, @auto_back : Int32, @color_dither_pattern : Int32, @tone_map : Int32, @compression : Int32, @raw_data_format : Int32, @raw_pixel_order : Int32, @bNeedDataAlignment : Int32, @delay_between_read : Int32, @max_buffer_size : Int32, @device_io_handles : Win32cr::Foundation::HANDLE[16], @lReserved : Int32[4], @pMicroDriverContext : Void*)
+    end
+  end
 
   @[Extern]
-  record VAL,
-    lVal : Int32,
-    dblVal : Float64,
-    pGuid : LibC::GUID*,
-    pScanInfo : Win32cr::Devices::ImageAcquisition::SCANINFO*,
-    handle : LibC::IntPtrT,
-    ppButtonNames : UInt16**,
-    pHandle : Win32cr::Foundation::HANDLE*,
-    lReserved : Int32,
-    szVal : Win32cr::Foundation::CHAR[255]
+  struct VAL
+    property lVal : Int32
+    property dblVal : Float64
+    property pGuid : LibC::GUID*
+    property pScanInfo : Win32cr::Devices::ImageAcquisition::SCANINFO*
+    property handle : LibC::IntPtrT
+    property ppButtonNames : UInt16**
+    property pHandle : Win32cr::Foundation::HANDLE*
+    property lReserved : Int32
+    property szVal : Win32cr::Foundation::CHAR[255]
+    def initialize(@lVal : Int32, @dblVal : Float64, @pGuid : LibC::GUID*, @pScanInfo : Win32cr::Devices::ImageAcquisition::SCANINFO*, @handle : LibC::IntPtrT, @ppButtonNames : UInt16**, @pHandle : Win32cr::Foundation::HANDLE*, @lReserved : Int32, @szVal : Win32cr::Foundation::CHAR[255])
+    end
+  end
 
   @[Extern]
-  record TWAIN_CAPABILITY,
-    lSize : Int32,
-    lMSG : Int32,
-    lCapID : Int32,
-    lConType : Int32,
-    lRC : Int32,
-    lCC : Int32,
-    lDataSize : Int32,
-    data : UInt8*
+  struct TWAIN_CAPABILITY
+    property lSize : Int32
+    property lMSG : Int32
+    property lCapID : Int32
+    property lConType : Int32
+    property lRC : Int32
+    property lCC : Int32
+    property lDataSize : Int32
+    property data : UInt8*
+    def initialize(@lSize : Int32, @lMSG : Int32, @lCapID : Int32, @lConType : Int32, @lRC : Int32, @lCC : Int32, @lDataSize : Int32, @data : UInt8*)
+    end
+  end
 
   @[Extern]
   record IWiaDevMgrVtbl,
@@ -1692,7 +1812,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("5eb2502a-8cf1-11d1-bf92-0060081ed811")]
   record IWiaDevMgr, lpVtbl : IWiaDevMgrVtbl* do
     GUID = LibC::GUID.new(0x5eb2502a_u32, 0x8cf1_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x92_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x1e_u8, 0xd8_u8, 0x11_u8])
     def query_interface(this : IWiaDevMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1747,7 +1866,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("5e38b83c-8cf1-11d1-bf92-0060081ed811")]
   record IEnumWIA_DEV_INFO, lpVtbl : IEnumWIA_DEV_INFOVtbl* do
     GUID = LibC::GUID.new(0x5e38b83c_u32, 0x8cf1_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x92_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x1e_u8, 0xd8_u8, 0x11_u8])
     def query_interface(this : IEnumWIA_DEV_INFO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1786,7 +1904,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("ae6287b0-0084-11d2-973b-00a0c9068f2e")]
   record IWiaEventCallback, lpVtbl : IWiaEventCallbackVtbl* do
     GUID = LibC::GUID.new(0xae6287b0_u32, 0x84_u16, 0x11d2_u16, StaticArray[0x97_u8, 0x3b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x8f_u8, 0x2e_u8])
     def query_interface(this : IWiaEventCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1813,7 +1930,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("a558a866-a5b0-11d2-a08f-00c04f72dc3c")]
   record IWiaDataCallback, lpVtbl : IWiaDataCallbackVtbl* do
     GUID = LibC::GUID.new(0xa558a866_u32, 0xa5b0_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x8f_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xdc_u8, 0x3c_u8])
     def query_interface(this : IWiaDataCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1844,7 +1960,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("a6cef998-a5b0-11d2-a08f-00c04f72dc3c")]
   record IWiaDataTransfer, lpVtbl : IWiaDataTransferVtbl* do
     GUID = LibC::GUID.new(0xa6cef998_u32, 0xa5b0_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x8f_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xdc_u8, 0x3c_u8])
     def query_interface(this : IWiaDataTransfer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1897,7 +2012,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("4db1ad10-3391-11d2-9a33-00c04fa36145")]
   record IWiaItem, lpVtbl : IWiaItemVtbl* do
     GUID = LibC::GUID.new(0x4db1ad10_u32, 0x3391_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x61_u8, 0x45_u8])
     def query_interface(this : IWiaItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1981,7 +2095,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("98b5e8a0-29cc-491a-aac0-e6db4fdcceb6")]
   record IWiaPropertyStorage, lpVtbl : IWiaPropertyStorageVtbl* do
     GUID = LibC::GUID.new(0x98b5e8a0_u32, 0x29cc_u16, 0x491a_u16, StaticArray[0xaa_u8, 0xc0_u8, 0xe6_u8, 0xdb_u8, 0x4f_u8, 0xdc_u8, 0xce_u8, 0xb6_u8])
     def query_interface(this : IWiaPropertyStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2057,7 +2170,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("5e8383fc-3391-11d2-9a33-00c04fa36145")]
   record IEnumWiaItem, lpVtbl : IEnumWiaItemVtbl* do
     GUID = LibC::GUID.new(0x5e8383fc_u32, 0x3391_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x61_u8, 0x45_u8])
     def query_interface(this : IEnumWiaItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2100,7 +2212,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("1fcc4287-aca6-11d2-a093-00c04f72dc3c")]
   record IEnumWIA_DEV_CAPS, lpVtbl : IEnumWIA_DEV_CAPSVtbl* do
     GUID = LibC::GUID.new(0x1fcc4287_u32, 0xaca6_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x93_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xdc_u8, 0x3c_u8])
     def query_interface(this : IEnumWIA_DEV_CAPS*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2143,7 +2254,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("81befc5b-656d-44f1-b24c-d41d51b4dc81")]
   record IEnumWIA_FORMAT_INFO, lpVtbl : IEnumWIA_FORMAT_INFOVtbl* do
     GUID = LibC::GUID.new(0x81befc5b_u32, 0x656d_u16, 0x44f1_u16, StaticArray[0xb2_u8, 0x4c_u8, 0xd4_u8, 0x1d_u8, 0x51_u8, 0xb4_u8, 0xdc_u8, 0x81_u8])
     def query_interface(this : IEnumWIA_FORMAT_INFO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2184,7 +2294,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("a00c10b6-82a1-452f-8b6c-86062aad6890")]
   record IWiaLog, lpVtbl : IWiaLogVtbl* do
     GUID = LibC::GUID.new(0xa00c10b6_u32, 0x82a1_u16, 0x452f_u16, StaticArray[0x8b_u8, 0x6c_u8, 0x86_u8, 0x6_u8, 0x2a_u8, 0xad_u8, 0x68_u8, 0x90_u8])
     def query_interface(this : IWiaLog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2221,7 +2330,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("af1f22ac-7a40-4787-b421-aeb47a1fbd0b")]
   record IWiaLogEx, lpVtbl : IWiaLogExVtbl* do
     GUID = LibC::GUID.new(0xaf1f22ac_u32, 0x7a40_u16, 0x4787_u16, StaticArray[0xb4_u8, 0x21_u8, 0xae_u8, 0xb4_u8, 0x7a_u8, 0x1f_u8, 0xbd_u8, 0xb_u8])
     def query_interface(this : IWiaLogEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2260,7 +2368,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("70681ea0-e7bf-4291-9fb1-4e8813a3f78e")]
   record IWiaNotifyDevMgr, lpVtbl : IWiaNotifyDevMgrVtbl* do
     GUID = LibC::GUID.new(0x70681ea0_u32, 0xe7bf_u16, 0x4291_u16, StaticArray[0x9f_u8, 0xb1_u8, 0x4e_u8, 0x88_u8, 0x13_u8, 0xa3_u8, 0xf7_u8, 0x8e_u8])
     def query_interface(this : IWiaNotifyDevMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2289,7 +2396,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("6291ef2c-36ef-4532-876a-8e132593778d")]
   record IWiaItemExtras, lpVtbl : IWiaItemExtrasVtbl* do
     GUID = LibC::GUID.new(0x6291ef2c_u32, 0x36ef_u16, 0x4532_u16, StaticArray[0x87_u8, 0x6a_u8, 0x8e_u8, 0x13_u8, 0x25_u8, 0x93_u8, 0x77_u8, 0x8d_u8])
     def query_interface(this : IWiaItemExtras*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2323,7 +2429,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("6c16186c-d0a6-400c-80f4-d26986a0e734")]
   record IWiaAppErrorHandler, lpVtbl : IWiaAppErrorHandlerVtbl* do
     GUID = LibC::GUID.new(0x6c16186c_u32, 0xd0a6_u16, 0x400c_u16, StaticArray[0x80_u8, 0xf4_u8, 0xd2_u8, 0x69_u8, 0x86_u8, 0xa0_u8, 0xe7_u8, 0x34_u8])
     def query_interface(this : IWiaAppErrorHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2354,7 +2459,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("0e4a51b1-bc1f-443d-a835-72e890759ef3")]
   record IWiaErrorHandler, lpVtbl : IWiaErrorHandlerVtbl* do
     GUID = LibC::GUID.new(0xe4a51b1_u32, 0xbc1f_u16, 0x443d_u16, StaticArray[0xa8_u8, 0x35_u8, 0x72_u8, 0xe8_u8, 0x90_u8, 0x75_u8, 0x9e_u8, 0xf3_u8])
     def query_interface(this : IWiaErrorHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2387,7 +2491,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("c39d6942-2f4e-4d04-92fe-4ef4d3a1de5a")]
   record IWiaTransfer, lpVtbl : IWiaTransferVtbl* do
     GUID = LibC::GUID.new(0xc39d6942_u32, 0x2f4e_u16, 0x4d04_u16, StaticArray[0x92_u8, 0xfe_u8, 0x4e_u8, 0xf4_u8, 0xd3_u8, 0xa1_u8, 0xde_u8, 0x5a_u8])
     def query_interface(this : IWiaTransfer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2424,7 +2527,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("27d4eaaf-28a6-4ca5-9aab-e678168b9527")]
   record IWiaTransferCallback, lpVtbl : IWiaTransferCallbackVtbl* do
     GUID = LibC::GUID.new(0x27d4eaaf_u32, 0x28a6_u16, 0x4ca5_u16, StaticArray[0x9a_u8, 0xab_u8, 0xe6_u8, 0x78_u8, 0x16_u8, 0x8b_u8, 0x95_u8, 0x27_u8])
     def query_interface(this : IWiaTransferCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2454,7 +2556,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("ec46a697-ac04-4447-8f65-ff63d5154b21")]
   record IWiaSegmentationFilter, lpVtbl : IWiaSegmentationFilterVtbl* do
     GUID = LibC::GUID.new(0xec46a697_u32, 0xac04_u16, 0x4447_u16, StaticArray[0x8f_u8, 0x65_u8, 0xff_u8, 0x63_u8, 0xd5_u8, 0x15_u8, 0x4b_u8, 0x21_u8])
     def query_interface(this : IWiaSegmentationFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2484,7 +2585,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("a8a79ffa-450b-41f1-8f87-849ccd94ebf6")]
   record IWiaImageFilter, lpVtbl : IWiaImageFilterVtbl* do
     GUID = LibC::GUID.new(0xa8a79ffa_u32, 0x450b_u16, 0x41f1_u16, StaticArray[0x8f_u8, 0x87_u8, 0x84_u8, 0x9c_u8, 0xcd_u8, 0x94_u8, 0xeb_u8, 0xf6_u8])
     def query_interface(this : IWiaImageFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2523,7 +2623,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("95c2b4fd-33f2-4d86-ad40-9431f0df08f7")]
   record IWiaPreview, lpVtbl : IWiaPreviewVtbl* do
     GUID = LibC::GUID.new(0x95c2b4fd_u32, 0x33f2_u16, 0x4d86_u16, StaticArray[0xad_u8, 0x40_u8, 0x94_u8, 0x31_u8, 0xf0_u8, 0xdf_u8, 0x8_u8, 0xf7_u8])
     def query_interface(this : IWiaPreview*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2563,7 +2662,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("59970af4-cd0d-44d9-ab24-52295630e582")]
   record IEnumWiaItem2, lpVtbl : IEnumWiaItem2Vtbl* do
     GUID = LibC::GUID.new(0x59970af4_u32, 0xcd0d_u16, 0x44d9_u16, StaticArray[0xab_u8, 0x24_u8, 0x52_u8, 0x29_u8, 0x56_u8, 0x30_u8, 0xe5_u8, 0x82_u8])
     def query_interface(this : IEnumWiaItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2617,7 +2715,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("6cba0075-1287-407d-9b77-cf0e030435cc")]
   record IWiaItem2, lpVtbl : IWiaItem2Vtbl* do
     GUID = LibC::GUID.new(0x6cba0075_u32, 0x1287_u16, 0x407d_u16, StaticArray[0x9b_u8, 0x77_u8, 0xcf_u8, 0xe_u8, 0x3_u8, 0x4_u8, 0x35_u8, 0xcc_u8])
     def query_interface(this : IWiaItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2696,7 +2793,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("79c07cf1-cbdd-41ee-8ec3-f00080cada7a")]
   record IWiaDevMgr2, lpVtbl : IWiaDevMgr2Vtbl* do
     GUID = LibC::GUID.new(0x79c07cf1_u32, 0xcbdd_u16, 0x41ee_u16, StaticArray[0x8e_u8, 0xc3_u8, 0xf0_u8, 0x0_u8, 0x80_u8, 0xca_u8, 0xda_u8, 0x7a_u8])
     def query_interface(this : IWiaDevMgr2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2760,7 +2856,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("d8cdee14-3c6c-11d2-9a35-00c04fa36145")]
   record IWiaMiniDrv, lpVtbl : IWiaMiniDrvVtbl* do
     GUID = LibC::GUID.new(0xd8cdee14_u32, 0x3c6c_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x35_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x61_u8, 0x45_u8])
     def query_interface(this : IWiaMiniDrv*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2835,7 +2930,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("33a57d5a-3de8-11d2-9a36-00c04fa36145")]
   record IWiaMiniDrvCallBack, lpVtbl : IWiaMiniDrvCallBackVtbl* do
     GUID = LibC::GUID.new(0x33a57d5a_u32, 0x3de8_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x36_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x61_u8, 0x45_u8])
     def query_interface(this : IWiaMiniDrvCallBack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2863,7 +2957,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("a9d2ee89-2ce5-4ff0-8adb-c961d1d774ca")]
   record IWiaMiniDrvTransferCallback, lpVtbl : IWiaMiniDrvTransferCallbackVtbl* do
     GUID = LibC::GUID.new(0xa9d2ee89_u32, 0x2ce5_u16, 0x4ff0_u16, StaticArray[0x8a_u8, 0xdb_u8, 0xc9_u8, 0x61_u8, 0xd1_u8, 0xd7_u8, 0x74_u8, 0xca_u8])
     def query_interface(this : IWiaMiniDrvTransferCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2905,7 +2998,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("1f02b5c5-b00c-11d2-a094-00c04f72dc3c")]
   record IWiaDrvItem, lpVtbl : IWiaDrvItemVtbl* do
     GUID = LibC::GUID.new(0x1f02b5c5_u32, 0xb00c_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x94_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xdc_u8, 0x3c_u8])
     def query_interface(this : IWiaDrvItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2980,7 +3072,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("d52920aa-db88-41f0-946c-e00dc0a19cfa")]
   record IWiaVideo, lpVtbl : IWiaVideoVtbl* do
     GUID = LibC::GUID.new(0xd52920aa_u32, 0xdb88_u16, 0x41f0_u16, StaticArray[0x94_u8, 0x6c_u8, 0xe0_u8, 0xd_u8, 0xc0_u8, 0xa1_u8, 0x9c_u8, 0xfa_u8])
     def query_interface(this : IWiaVideo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3044,7 +3135,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("305600d7-5088-46d7-9a15-b77b09cdba7a")]
   record IWiaUIExtension2, lpVtbl : IWiaUIExtension2Vtbl* do
     GUID = LibC::GUID.new(0x305600d7_u32, 0x5088_u16, 0x46d7_u16, StaticArray[0x9a_u8, 0x15_u8, 0xb7_u8, 0x7b_u8, 0x9_u8, 0xcd_u8, 0xba_u8, 0x7a_u8])
     def query_interface(this : IWiaUIExtension2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3076,7 +3166,6 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  #@[Com("da319113-50ee-4c80-b460-57d005d44a2c")]
   record IWiaUIExtension, lpVtbl : IWiaUIExtensionVtbl* do
     GUID = LibC::GUID.new(0xda319113_u32, 0x50ee_u16, 0x4c80_u16, StaticArray[0xb4_u8, 0x60_u8, 0x57_u8, 0xd0_u8, 0x5_u8, 0xd4_u8, 0x4a_u8, 0x2c_u8])
     def query_interface(this : IWiaUIExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

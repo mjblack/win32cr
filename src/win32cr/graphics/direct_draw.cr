@@ -3,325 +3,325 @@ require "./gdi.cr"
 require "./../system/com.cr"
 
 module Win32cr::Graphics::DirectDraw
-  alias LPDDENUMCALLBACKA = Proc(LibC::GUID*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDDENUMCALLBACKA = Proc(LibC::GUID*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPDDENUMCALLBACKW = Proc(LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDDENUMCALLBACKW = Proc(LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPDDENUMCALLBACKEXA = Proc(LibC::GUID*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, Win32cr::Graphics::Gdi::HMONITOR, Win32cr::Foundation::BOOL)*
+  alias LPDDENUMCALLBACKEXA = Proc(LibC::GUID*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, Win32cr::Graphics::Gdi::HMONITOR, Win32cr::Foundation::BOOL)
 
-  alias LPDDENUMCALLBACKEXW = Proc(LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::Gdi::HMONITOR, Win32cr::Foundation::BOOL)*
+  alias LPDDENUMCALLBACKEXW = Proc(LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::Gdi::HMONITOR, Win32cr::Foundation::BOOL)
 
-  alias LPDIRECTDRAWENUMERATEEXA = Proc(Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKEXA, Void*, UInt32, Win32cr::Foundation::HRESULT)*
+  alias LPDIRECTDRAWENUMERATEEXA = Proc(Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKEXA, Void*, UInt32, Win32cr::Foundation::HRESULT)
 
-  alias LPDIRECTDRAWENUMERATEEXW = Proc(Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKEXW, Void*, UInt32, Win32cr::Foundation::HRESULT)*
+  alias LPDIRECTDRAWENUMERATEEXW = Proc(Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKEXW, Void*, UInt32, Win32cr::Foundation::HRESULT)
 
-  alias LPDDENUMMODESCALLBACK = Proc(Win32cr::Graphics::DirectDraw::DDSURFACEDESC*, Void*, Win32cr::Foundation::HRESULT)*
+  alias LPDDENUMMODESCALLBACK = Proc(Win32cr::Graphics::DirectDraw::DDSURFACEDESC*, Void*, Win32cr::Foundation::HRESULT)
 
-  alias LPDDENUMMODESCALLBACK2 = Proc(Win32cr::Graphics::DirectDraw::DDSURFACEDESC2*, Void*, Win32cr::Foundation::HRESULT)*
+  alias LPDDENUMMODESCALLBACK2 = Proc(Win32cr::Graphics::DirectDraw::DDSURFACEDESC2*, Void*, Win32cr::Foundation::HRESULT)
 
-  alias LPDDENUMSURFACESCALLBACK = Proc(Void*, Win32cr::Graphics::DirectDraw::DDSURFACEDESC*, Void*, Win32cr::Foundation::HRESULT)*
+  alias LPDDENUMSURFACESCALLBACK = Proc(Void*, Win32cr::Graphics::DirectDraw::DDSURFACEDESC*, Void*, Win32cr::Foundation::HRESULT)
 
-  alias LPDDENUMSURFACESCALLBACK2 = Proc(Void*, Win32cr::Graphics::DirectDraw::DDSURFACEDESC2*, Void*, Win32cr::Foundation::HRESULT)*
+  alias LPDDENUMSURFACESCALLBACK2 = Proc(Void*, Win32cr::Graphics::DirectDraw::DDSURFACEDESC2*, Void*, Win32cr::Foundation::HRESULT)
 
-  alias LPDDENUMSURFACESCALLBACK7 = Proc(Void*, Win32cr::Graphics::DirectDraw::DDSURFACEDESC2*, Void*, Win32cr::Foundation::HRESULT)*
+  alias LPDDENUMSURFACESCALLBACK7 = Proc(Void*, Win32cr::Graphics::DirectDraw::DDSURFACEDESC2*, Void*, Win32cr::Foundation::HRESULT)
 
-  alias LPCLIPPERCALLBACK = Proc(Void*, Win32cr::Foundation::HWND, UInt32, Void*, UInt32)*
+  alias LPCLIPPERCALLBACK = Proc(Void*, Win32cr::Foundation::HWND, UInt32, Void*, UInt32)
 
-  alias LPDDENUMVIDEOCALLBACK = Proc(Win32cr::Graphics::DirectDraw::DDVIDEOPORTCAPS*, Void*, Win32cr::Foundation::HRESULT)*
+  alias LPDDENUMVIDEOCALLBACK = Proc(Win32cr::Graphics::DirectDraw::DDVIDEOPORTCAPS*, Void*, Win32cr::Foundation::HRESULT)
 
-  alias LPDD32BITDRIVERINIT = Proc(UInt32, UInt32)*
+  alias LPDD32BITDRIVERINIT = Proc(UInt32, UInt32)
 
-  alias LPDDHEL_INIT = Proc(Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL)*
+  alias LPDDHEL_INIT = Proc(Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL)
 
-  alias LPDDHAL_SETCOLORKEY = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DRVSETCOLORKEYDATA*, UInt32)*
+  alias LPDDHAL_SETCOLORKEY = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DRVSETCOLORKEYDATA*, UInt32)
 
-  alias LPDDHAL_CANCREATESURFACE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CANCREATESURFACEDATA*, UInt32)*
+  alias LPDDHAL_CANCREATESURFACE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CANCREATESURFACEDATA*, UInt32)
 
-  alias LPDDHAL_WAITFORVERTICALBLANK = Proc(Win32cr::Graphics::DirectDraw::DDHAL_WAITFORVERTICALBLANKDATA*, UInt32)*
+  alias LPDDHAL_WAITFORVERTICALBLANK = Proc(Win32cr::Graphics::DirectDraw::DDHAL_WAITFORVERTICALBLANKDATA*, UInt32)
 
-  alias LPDDHAL_CREATESURFACE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CREATESURFACEDATA*, UInt32)*
+  alias LPDDHAL_CREATESURFACE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CREATESURFACEDATA*, UInt32)
 
-  alias LPDDHAL_DESTROYDRIVER = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYDRIVERDATA*, UInt32)*
+  alias LPDDHAL_DESTROYDRIVER = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYDRIVERDATA*, UInt32)
 
-  alias LPDDHAL_SETMODE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETMODEDATA*, UInt32)*
+  alias LPDDHAL_SETMODE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETMODEDATA*, UInt32)
 
-  alias LPDDHAL_CREATEPALETTE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CREATEPALETTEDATA*, UInt32)*
+  alias LPDDHAL_CREATEPALETTE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CREATEPALETTEDATA*, UInt32)
 
-  alias LPDDHAL_GETSCANLINE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETSCANLINEDATA*, UInt32)*
+  alias LPDDHAL_GETSCANLINE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETSCANLINEDATA*, UInt32)
 
-  alias LPDDHAL_SETEXCLUSIVEMODE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETEXCLUSIVEMODEDATA*, UInt32)*
+  alias LPDDHAL_SETEXCLUSIVEMODE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETEXCLUSIVEMODEDATA*, UInt32)
 
-  alias LPDDHAL_FLIPTOGDISURFACE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_FLIPTOGDISURFACEDATA*, UInt32)*
+  alias LPDDHAL_FLIPTOGDISURFACE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_FLIPTOGDISURFACEDATA*, UInt32)
 
-  alias LPDDHAL_GETDRIVERINFO = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETDRIVERINFODATA*, UInt32)*
+  alias LPDDHAL_GETDRIVERINFO = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETDRIVERINFODATA*, UInt32)
 
-  alias LPDDHALPALCB_DESTROYPALETTE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYPALETTEDATA*, UInt32)*
+  alias LPDDHALPALCB_DESTROYPALETTE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYPALETTEDATA*, UInt32)
 
-  alias LPDDHALPALCB_SETENTRIES = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETENTRIESDATA*, UInt32)*
+  alias LPDDHALPALCB_SETENTRIES = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETENTRIESDATA*, UInt32)
 
-  alias LPDDHALSURFCB_LOCK = Proc(Win32cr::Graphics::DirectDraw::DDHAL_LOCKDATA*, UInt32)*
+  alias LPDDHALSURFCB_LOCK = Proc(Win32cr::Graphics::DirectDraw::DDHAL_LOCKDATA*, UInt32)
 
-  alias LPDDHALSURFCB_UNLOCK = Proc(Win32cr::Graphics::DirectDraw::DDHAL_UNLOCKDATA*, UInt32)*
+  alias LPDDHALSURFCB_UNLOCK = Proc(Win32cr::Graphics::DirectDraw::DDHAL_UNLOCKDATA*, UInt32)
 
-  alias LPDDHALSURFCB_BLT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_BLTDATA*, UInt32)*
+  alias LPDDHALSURFCB_BLT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_BLTDATA*, UInt32)
 
-  alias LPDDHALSURFCB_UPDATEOVERLAY = Proc(Win32cr::Graphics::DirectDraw::DDHAL_UPDATEOVERLAYDATA*, UInt32)*
+  alias LPDDHALSURFCB_UPDATEOVERLAY = Proc(Win32cr::Graphics::DirectDraw::DDHAL_UPDATEOVERLAYDATA*, UInt32)
 
-  alias LPDDHALSURFCB_SETOVERLAYPOSITION = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETOVERLAYPOSITIONDATA*, UInt32)*
+  alias LPDDHALSURFCB_SETOVERLAYPOSITION = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETOVERLAYPOSITIONDATA*, UInt32)
 
-  alias LPDDHALSURFCB_SETPALETTE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETPALETTEDATA*, UInt32)*
+  alias LPDDHALSURFCB_SETPALETTE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETPALETTEDATA*, UInt32)
 
-  alias LPDDHALSURFCB_FLIP = Proc(Win32cr::Graphics::DirectDraw::DDHAL_FLIPDATA*, UInt32)*
+  alias LPDDHALSURFCB_FLIP = Proc(Win32cr::Graphics::DirectDraw::DDHAL_FLIPDATA*, UInt32)
 
-  alias LPDDHALSURFCB_DESTROYSURFACE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYSURFACEDATA*, UInt32)*
+  alias LPDDHALSURFCB_DESTROYSURFACE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYSURFACEDATA*, UInt32)
 
-  alias LPDDHALSURFCB_SETCLIPLIST = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETCLIPLISTDATA*, UInt32)*
+  alias LPDDHALSURFCB_SETCLIPLIST = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETCLIPLISTDATA*, UInt32)
 
-  alias LPDDHALSURFCB_ADDATTACHEDSURFACE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_ADDATTACHEDSURFACEDATA*, UInt32)*
+  alias LPDDHALSURFCB_ADDATTACHEDSURFACE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_ADDATTACHEDSURFACEDATA*, UInt32)
 
-  alias LPDDHALSURFCB_SETCOLORKEY = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETCOLORKEYDATA*, UInt32)*
+  alias LPDDHALSURFCB_SETCOLORKEY = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SETCOLORKEYDATA*, UInt32)
 
-  alias LPDDHALSURFCB_GETBLTSTATUS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETBLTSTATUSDATA*, UInt32)*
+  alias LPDDHALSURFCB_GETBLTSTATUS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETBLTSTATUSDATA*, UInt32)
 
-  alias LPDDHALSURFCB_GETFLIPSTATUS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETFLIPSTATUSDATA*, UInt32)*
+  alias LPDDHALSURFCB_GETFLIPSTATUS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETFLIPSTATUSDATA*, UInt32)
 
-  alias LPDDHAL_GETAVAILDRIVERMEMORY = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETAVAILDRIVERMEMORYDATA*, UInt32)*
+  alias LPDDHAL_GETAVAILDRIVERMEMORY = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETAVAILDRIVERMEMORYDATA*, UInt32)
 
-  alias LPDDHAL_UPDATENONLOCALHEAP = Proc(Win32cr::Graphics::DirectDraw::DDHAL_UPDATENONLOCALHEAPDATA*, UInt32)*
+  alias LPDDHAL_UPDATENONLOCALHEAP = Proc(Win32cr::Graphics::DirectDraw::DDHAL_UPDATENONLOCALHEAPDATA*, UInt32)
 
-  alias LPDDHAL_GETHEAPALIGNMENT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETHEAPALIGNMENTDATA*, UInt32)*
+  alias LPDDHAL_GETHEAPALIGNMENT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETHEAPALIGNMENTDATA*, UInt32)
 
-  alias LPDDHAL_CREATESURFACEEX = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CREATESURFACEEXDATA*, UInt32)*
+  alias LPDDHAL_CREATESURFACEEX = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CREATESURFACEEXDATA*, UInt32)
 
-  alias LPDDHAL_GETDRIVERSTATE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETDRIVERSTATEDATA*, UInt32)*
+  alias LPDDHAL_GETDRIVERSTATE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETDRIVERSTATEDATA*, UInt32)
 
-  alias LPDDHAL_DESTROYDDLOCAL = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYDDLOCALDATA*, UInt32)*
+  alias LPDDHAL_DESTROYDDLOCAL = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYDDLOCALDATA*, UInt32)
 
-  alias LPDDHALEXEBUFCB_CANCREATEEXEBUF = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CANCREATESURFACEDATA*, UInt32)*
+  alias LPDDHALEXEBUFCB_CANCREATEEXEBUF = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CANCREATESURFACEDATA*, UInt32)
 
-  alias LPDDHALEXEBUFCB_CREATEEXEBUF = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CREATESURFACEDATA*, UInt32)*
+  alias LPDDHALEXEBUFCB_CREATEEXEBUF = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CREATESURFACEDATA*, UInt32)
 
-  alias LPDDHALEXEBUFCB_DESTROYEXEBUF = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYSURFACEDATA*, UInt32)*
+  alias LPDDHALEXEBUFCB_DESTROYEXEBUF = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYSURFACEDATA*, UInt32)
 
-  alias LPDDHALEXEBUFCB_LOCKEXEBUF = Proc(Win32cr::Graphics::DirectDraw::DDHAL_LOCKDATA*, UInt32)*
+  alias LPDDHALEXEBUFCB_LOCKEXEBUF = Proc(Win32cr::Graphics::DirectDraw::DDHAL_LOCKDATA*, UInt32)
 
-  alias LPDDHALEXEBUFCB_UNLOCKEXEBUF = Proc(Win32cr::Graphics::DirectDraw::DDHAL_UNLOCKDATA*, UInt32)*
+  alias LPDDHALEXEBUFCB_UNLOCKEXEBUF = Proc(Win32cr::Graphics::DirectDraw::DDHAL_UNLOCKDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_CANCREATEVIDEOPORT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CANCREATEVPORTDATA*, UInt32)*
+  alias LPDDHALVPORTCB_CANCREATEVIDEOPORT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CANCREATEVPORTDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_CREATEVIDEOPORT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CREATEVPORTDATA*, UInt32)*
+  alias LPDDHALVPORTCB_CREATEVIDEOPORT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CREATEVPORTDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_FLIP = Proc(Win32cr::Graphics::DirectDraw::DDHAL_FLIPVPORTDATA*, UInt32)*
+  alias LPDDHALVPORTCB_FLIP = Proc(Win32cr::Graphics::DirectDraw::DDHAL_FLIPVPORTDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_GETBANDWIDTH = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTBANDWIDTHDATA*, UInt32)*
+  alias LPDDHALVPORTCB_GETBANDWIDTH = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTBANDWIDTHDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_GETINPUTFORMATS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTINPUTFORMATDATA*, UInt32)*
+  alias LPDDHALVPORTCB_GETINPUTFORMATS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTINPUTFORMATDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_GETOUTPUTFORMATS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTOUTPUTFORMATDATA*, UInt32)*
+  alias LPDDHALVPORTCB_GETOUTPUTFORMATS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTOUTPUTFORMATDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_GETFIELD = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTFIELDDATA*, UInt32)*
+  alias LPDDHALVPORTCB_GETFIELD = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTFIELDDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_GETLINE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTLINEDATA*, UInt32)*
+  alias LPDDHALVPORTCB_GETLINE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTLINEDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_GETVPORTCONNECT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTCONNECTDATA*, UInt32)*
+  alias LPDDHALVPORTCB_GETVPORTCONNECT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTCONNECTDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_DESTROYVPORT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYVPORTDATA*, UInt32)*
+  alias LPDDHALVPORTCB_DESTROYVPORT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYVPORTDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_GETFLIPSTATUS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTFLIPSTATUSDATA*, UInt32)*
+  alias LPDDHALVPORTCB_GETFLIPSTATUS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTFLIPSTATUSDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_UPDATE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_UPDATEVPORTDATA*, UInt32)*
+  alias LPDDHALVPORTCB_UPDATE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_UPDATEVPORTDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_WAITFORSYNC = Proc(Win32cr::Graphics::DirectDraw::DDHAL_WAITFORVPORTSYNCDATA*, UInt32)*
+  alias LPDDHALVPORTCB_WAITFORSYNC = Proc(Win32cr::Graphics::DirectDraw::DDHAL_WAITFORVPORTSYNCDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_GETSIGNALSTATUS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTSIGNALDATA*, UInt32)*
+  alias LPDDHALVPORTCB_GETSIGNALSTATUS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETVPORTSIGNALDATA*, UInt32)
 
-  alias LPDDHALVPORTCB_COLORCONTROL = Proc(Win32cr::Graphics::DirectDraw::DDHAL_VPORTCOLORDATA*, UInt32)*
+  alias LPDDHALVPORTCB_COLORCONTROL = Proc(Win32cr::Graphics::DirectDraw::DDHAL_VPORTCOLORDATA*, UInt32)
 
-  alias LPDDHALCOLORCB_COLORCONTROL = Proc(Win32cr::Graphics::DirectDraw::DDHAL_COLORCONTROLDATA*, UInt32)*
+  alias LPDDHALCOLORCB_COLORCONTROL = Proc(Win32cr::Graphics::DirectDraw::DDHAL_COLORCONTROLDATA*, UInt32)
 
-  alias LPDDHALKERNELCB_SYNCSURFACE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SYNCSURFACEDATA*, UInt32)*
+  alias LPDDHALKERNELCB_SYNCSURFACE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SYNCSURFACEDATA*, UInt32)
 
-  alias LPDDHALKERNELCB_SYNCVIDEOPORT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SYNCVIDEOPORTDATA*, UInt32)*
+  alias LPDDHALKERNELCB_SYNCVIDEOPORT = Proc(Win32cr::Graphics::DirectDraw::DDHAL_SYNCVIDEOPORTDATA*, UInt32)
 
-  alias LPDDGAMMACALIBRATORPROC = Proc(Win32cr::Graphics::DirectDraw::DDGAMMARAMP*, UInt8*, Win32cr::Foundation::HRESULT)*
+  alias LPDDGAMMACALIBRATORPROC = Proc(Win32cr::Graphics::DirectDraw::DDGAMMARAMP*, UInt8*, Win32cr::Foundation::HRESULT)
 
-  alias LPDDHALMOCOMPCB_GETGUIDS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETMOCOMPGUIDSDATA*, UInt32)*
+  alias LPDDHALMOCOMPCB_GETGUIDS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETMOCOMPGUIDSDATA*, UInt32)
 
-  alias LPDDHALMOCOMPCB_GETFORMATS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETMOCOMPFORMATSDATA*, UInt32)*
+  alias LPDDHALMOCOMPCB_GETFORMATS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETMOCOMPFORMATSDATA*, UInt32)
 
-  alias LPDDHALMOCOMPCB_CREATE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CREATEMOCOMPDATA*, UInt32)*
+  alias LPDDHALMOCOMPCB_CREATE = Proc(Win32cr::Graphics::DirectDraw::DDHAL_CREATEMOCOMPDATA*, UInt32)
 
-  alias LPDDHALMOCOMPCB_GETCOMPBUFFINFO = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETMOCOMPCOMPBUFFDATA*, UInt32)*
+  alias LPDDHALMOCOMPCB_GETCOMPBUFFINFO = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETMOCOMPCOMPBUFFDATA*, UInt32)
 
-  alias LPDDHALMOCOMPCB_GETINTERNALINFO = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETINTERNALMOCOMPDATA*, UInt32)*
+  alias LPDDHALMOCOMPCB_GETINTERNALINFO = Proc(Win32cr::Graphics::DirectDraw::DDHAL_GETINTERNALMOCOMPDATA*, UInt32)
 
-  alias LPDDHALMOCOMPCB_BEGINFRAME = Proc(Win32cr::Graphics::DirectDraw::DDHAL_BEGINMOCOMPFRAMEDATA*, UInt32)*
+  alias LPDDHALMOCOMPCB_BEGINFRAME = Proc(Win32cr::Graphics::DirectDraw::DDHAL_BEGINMOCOMPFRAMEDATA*, UInt32)
 
-  alias LPDDHALMOCOMPCB_ENDFRAME = Proc(Win32cr::Graphics::DirectDraw::DDHAL_ENDMOCOMPFRAMEDATA*, UInt32)*
+  alias LPDDHALMOCOMPCB_ENDFRAME = Proc(Win32cr::Graphics::DirectDraw::DDHAL_ENDMOCOMPFRAMEDATA*, UInt32)
 
-  alias LPDDHALMOCOMPCB_RENDER = Proc(Win32cr::Graphics::DirectDraw::DDHAL_RENDERMOCOMPDATA*, UInt32)*
+  alias LPDDHALMOCOMPCB_RENDER = Proc(Win32cr::Graphics::DirectDraw::DDHAL_RENDERMOCOMPDATA*, UInt32)
 
-  alias LPDDHALMOCOMPCB_QUERYSTATUS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_QUERYMOCOMPSTATUSDATA*, UInt32)*
+  alias LPDDHALMOCOMPCB_QUERYSTATUS = Proc(Win32cr::Graphics::DirectDraw::DDHAL_QUERYMOCOMPSTATUSDATA*, UInt32)
 
-  alias LPDDHALMOCOMPCB_DESTROY = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYMOCOMPDATA*, UInt32)*
+  alias LPDDHALMOCOMPCB_DESTROY = Proc(Win32cr::Graphics::DirectDraw::DDHAL_DESTROYMOCOMPDATA*, UInt32)
 
-  alias LPDDHAL_SETINFO = Proc(Win32cr::Graphics::DirectDraw::DDHALINFO*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL)*
+  alias LPDDHAL_SETINFO = Proc(Win32cr::Graphics::DirectDraw::DDHALINFO*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL)
 
-  alias LPDDHAL_VIDMEMALLOC = Proc(Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, Int32, UInt32, UInt32, LibC::UIntPtrT)*
+  alias LPDDHAL_VIDMEMALLOC = Proc(Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, Int32, UInt32, UInt32, LibC::UIntPtrT)
 
-  alias LPDDHAL_VIDMEMFREE = Proc(Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, Int32, LibC::UIntPtrT, Void)*
+  alias LPDDHAL_VIDMEMFREE = Proc(Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, Int32, LibC::UIntPtrT, Void)
 
-  alias PDD_SETCOLORKEY = Proc(Win32cr::Graphics::DirectDraw::DD_DRVSETCOLORKEYDATA*, UInt32)*
+  alias PDD_SETCOLORKEY = Proc(Win32cr::Graphics::DirectDraw::DD_DRVSETCOLORKEYDATA*, UInt32)
 
-  alias PDD_CANCREATESURFACE = Proc(Win32cr::Graphics::DirectDraw::DD_CANCREATESURFACEDATA*, UInt32)*
+  alias PDD_CANCREATESURFACE = Proc(Win32cr::Graphics::DirectDraw::DD_CANCREATESURFACEDATA*, UInt32)
 
-  alias PDD_WAITFORVERTICALBLANK = Proc(Win32cr::Graphics::DirectDraw::DD_WAITFORVERTICALBLANKDATA*, UInt32)*
+  alias PDD_WAITFORVERTICALBLANK = Proc(Win32cr::Graphics::DirectDraw::DD_WAITFORVERTICALBLANKDATA*, UInt32)
 
-  alias PDD_CREATESURFACE = Proc(Win32cr::Graphics::DirectDraw::DD_CREATESURFACEDATA*, UInt32)*
+  alias PDD_CREATESURFACE = Proc(Win32cr::Graphics::DirectDraw::DD_CREATESURFACEDATA*, UInt32)
 
-  alias PDD_DESTROYDRIVER = Proc(Win32cr::Graphics::DirectDraw::DD_DESTROYDRIVERDATA_*, UInt32)*
+  alias PDD_DESTROYDRIVER = Proc(Win32cr::Graphics::DirectDraw::DD_DESTROYDRIVERDATA_*, UInt32)
 
-  alias PDD_SETMODE = Proc(Win32cr::Graphics::DirectDraw::DD_SETMODEDATA_*, UInt32)*
+  alias PDD_SETMODE = Proc(Win32cr::Graphics::DirectDraw::DD_SETMODEDATA_*, UInt32)
 
-  alias PDD_CREATEPALETTE = Proc(Win32cr::Graphics::DirectDraw::DD_CREATEPALETTEDATA*, UInt32)*
+  alias PDD_CREATEPALETTE = Proc(Win32cr::Graphics::DirectDraw::DD_CREATEPALETTEDATA*, UInt32)
 
-  alias PDD_GETSCANLINE = Proc(Win32cr::Graphics::DirectDraw::DD_GETSCANLINEDATA*, UInt32)*
+  alias PDD_GETSCANLINE = Proc(Win32cr::Graphics::DirectDraw::DD_GETSCANLINEDATA*, UInt32)
 
-  alias PDD_MAPMEMORY = Proc(Win32cr::Graphics::DirectDraw::DD_MAPMEMORYDATA*, UInt32)*
+  alias PDD_MAPMEMORY = Proc(Win32cr::Graphics::DirectDraw::DD_MAPMEMORYDATA*, UInt32)
 
-  alias PDD_GETDRIVERINFO = Proc(Win32cr::Graphics::DirectDraw::DD_GETDRIVERINFODATA*, UInt32)*
+  alias PDD_GETDRIVERINFO = Proc(Win32cr::Graphics::DirectDraw::DD_GETDRIVERINFODATA*, UInt32)
 
-  alias PDD_GETAVAILDRIVERMEMORY = Proc(Win32cr::Graphics::DirectDraw::DD_GETAVAILDRIVERMEMORYDATA*, UInt32)*
+  alias PDD_GETAVAILDRIVERMEMORY = Proc(Win32cr::Graphics::DirectDraw::DD_GETAVAILDRIVERMEMORYDATA*, UInt32)
 
-  alias PDD_ALPHABLT = Proc(Win32cr::Graphics::DirectDraw::DD_BLTDATA*, UInt32)*
+  alias PDD_ALPHABLT = Proc(Win32cr::Graphics::DirectDraw::DD_BLTDATA*, UInt32)
 
-  alias PDD_CREATESURFACEEX = Proc(Win32cr::Graphics::DirectDraw::DD_CREATESURFACEEXDATA*, UInt32)*
+  alias PDD_CREATESURFACEEX = Proc(Win32cr::Graphics::DirectDraw::DD_CREATESURFACEEXDATA*, UInt32)
 
-  alias PDD_GETDRIVERSTATE = Proc(Win32cr::Graphics::DirectDraw::DD_GETDRIVERSTATEDATA*, UInt32)*
+  alias PDD_GETDRIVERSTATE = Proc(Win32cr::Graphics::DirectDraw::DD_GETDRIVERSTATEDATA*, UInt32)
 
-  alias PDD_DESTROYDDLOCAL = Proc(Win32cr::Graphics::DirectDraw::DD_DESTROYDDLOCALDATA*, UInt32)*
+  alias PDD_DESTROYDDLOCAL = Proc(Win32cr::Graphics::DirectDraw::DD_DESTROYDDLOCALDATA*, UInt32)
 
-  alias PDD_FREEDRIVERMEMORY = Proc(Win32cr::Graphics::DirectDraw::DD_FREEDRIVERMEMORYDATA*, UInt32)*
+  alias PDD_FREEDRIVERMEMORY = Proc(Win32cr::Graphics::DirectDraw::DD_FREEDRIVERMEMORYDATA*, UInt32)
 
-  alias PDD_SETEXCLUSIVEMODE = Proc(Win32cr::Graphics::DirectDraw::DD_SETEXCLUSIVEMODEDATA*, UInt32)*
+  alias PDD_SETEXCLUSIVEMODE = Proc(Win32cr::Graphics::DirectDraw::DD_SETEXCLUSIVEMODEDATA*, UInt32)
 
-  alias PDD_FLIPTOGDISURFACE = Proc(Win32cr::Graphics::DirectDraw::DD_FLIPTOGDISURFACEDATA*, UInt32)*
+  alias PDD_FLIPTOGDISURFACE = Proc(Win32cr::Graphics::DirectDraw::DD_FLIPTOGDISURFACEDATA*, UInt32)
 
-  alias PDD_PALCB_DESTROYPALETTE = Proc(Win32cr::Graphics::DirectDraw::DD_DESTROYPALETTEDATA*, UInt32)*
+  alias PDD_PALCB_DESTROYPALETTE = Proc(Win32cr::Graphics::DirectDraw::DD_DESTROYPALETTEDATA*, UInt32)
 
-  alias PDD_PALCB_SETENTRIES = Proc(Win32cr::Graphics::DirectDraw::DD_SETENTRIESDATA*, UInt32)*
+  alias PDD_PALCB_SETENTRIES = Proc(Win32cr::Graphics::DirectDraw::DD_SETENTRIESDATA*, UInt32)
 
-  alias PDD_SURFCB_LOCK = Proc(Win32cr::Graphics::DirectDraw::DD_LOCKDATA*, UInt32)*
+  alias PDD_SURFCB_LOCK = Proc(Win32cr::Graphics::DirectDraw::DD_LOCKDATA*, UInt32)
 
-  alias PDD_SURFCB_UNLOCK = Proc(Win32cr::Graphics::DirectDraw::DD_UNLOCKDATA*, UInt32)*
+  alias PDD_SURFCB_UNLOCK = Proc(Win32cr::Graphics::DirectDraw::DD_UNLOCKDATA*, UInt32)
 
-  alias PDD_SURFCB_BLT = Proc(Win32cr::Graphics::DirectDraw::DD_BLTDATA*, UInt32)*
+  alias PDD_SURFCB_BLT = Proc(Win32cr::Graphics::DirectDraw::DD_BLTDATA*, UInt32)
 
-  alias PDD_SURFCB_UPDATEOVERLAY = Proc(Win32cr::Graphics::DirectDraw::DD_UPDATEOVERLAYDATA*, UInt32)*
+  alias PDD_SURFCB_UPDATEOVERLAY = Proc(Win32cr::Graphics::DirectDraw::DD_UPDATEOVERLAYDATA*, UInt32)
 
-  alias PDD_SURFCB_SETOVERLAYPOSITION = Proc(Win32cr::Graphics::DirectDraw::DD_SETOVERLAYPOSITIONDATA*, UInt32)*
+  alias PDD_SURFCB_SETOVERLAYPOSITION = Proc(Win32cr::Graphics::DirectDraw::DD_SETOVERLAYPOSITIONDATA*, UInt32)
 
-  alias PDD_SURFCB_SETPALETTE = Proc(Win32cr::Graphics::DirectDraw::DD_SETPALETTEDATA*, UInt32)*
+  alias PDD_SURFCB_SETPALETTE = Proc(Win32cr::Graphics::DirectDraw::DD_SETPALETTEDATA*, UInt32)
 
-  alias PDD_SURFCB_FLIP = Proc(Win32cr::Graphics::DirectDraw::DD_FLIPDATA*, UInt32)*
+  alias PDD_SURFCB_FLIP = Proc(Win32cr::Graphics::DirectDraw::DD_FLIPDATA*, UInt32)
 
-  alias PDD_SURFCB_DESTROYSURFACE = Proc(Win32cr::Graphics::DirectDraw::DD_DESTROYSURFACEDATA*, UInt32)*
+  alias PDD_SURFCB_DESTROYSURFACE = Proc(Win32cr::Graphics::DirectDraw::DD_DESTROYSURFACEDATA*, UInt32)
 
-  alias PDD_SURFCB_SETCLIPLIST = Proc(Win32cr::Graphics::DirectDraw::DD_SETCLIPLISTDATA*, UInt32)*
+  alias PDD_SURFCB_SETCLIPLIST = Proc(Win32cr::Graphics::DirectDraw::DD_SETCLIPLISTDATA*, UInt32)
 
-  alias PDD_SURFCB_ADDATTACHEDSURFACE = Proc(Win32cr::Graphics::DirectDraw::DD_ADDATTACHEDSURFACEDATA*, UInt32)*
+  alias PDD_SURFCB_ADDATTACHEDSURFACE = Proc(Win32cr::Graphics::DirectDraw::DD_ADDATTACHEDSURFACEDATA*, UInt32)
 
-  alias PDD_SURFCB_SETCOLORKEY = Proc(Win32cr::Graphics::DirectDraw::DD_SETCOLORKEYDATA*, UInt32)*
+  alias PDD_SURFCB_SETCOLORKEY = Proc(Win32cr::Graphics::DirectDraw::DD_SETCOLORKEYDATA*, UInt32)
 
-  alias PDD_SURFCB_GETBLTSTATUS = Proc(Win32cr::Graphics::DirectDraw::DD_GETBLTSTATUSDATA*, UInt32)*
+  alias PDD_SURFCB_GETBLTSTATUS = Proc(Win32cr::Graphics::DirectDraw::DD_GETBLTSTATUSDATA*, UInt32)
 
-  alias PDD_SURFCB_GETFLIPSTATUS = Proc(Win32cr::Graphics::DirectDraw::DD_GETFLIPSTATUSDATA*, UInt32)*
+  alias PDD_SURFCB_GETFLIPSTATUS = Proc(Win32cr::Graphics::DirectDraw::DD_GETFLIPSTATUSDATA*, UInt32)
 
-  alias PDD_VPORTCB_CANCREATEVIDEOPORT = Proc(Win32cr::Graphics::DirectDraw::DD_CANCREATEVPORTDATA*, UInt32)*
+  alias PDD_VPORTCB_CANCREATEVIDEOPORT = Proc(Win32cr::Graphics::DirectDraw::DD_CANCREATEVPORTDATA*, UInt32)
 
-  alias PDD_VPORTCB_CREATEVIDEOPORT = Proc(Win32cr::Graphics::DirectDraw::DD_CREATEVPORTDATA*, UInt32)*
+  alias PDD_VPORTCB_CREATEVIDEOPORT = Proc(Win32cr::Graphics::DirectDraw::DD_CREATEVPORTDATA*, UInt32)
 
-  alias PDD_VPORTCB_FLIP = Proc(Win32cr::Graphics::DirectDraw::DD_FLIPVPORTDATA*, UInt32)*
+  alias PDD_VPORTCB_FLIP = Proc(Win32cr::Graphics::DirectDraw::DD_FLIPVPORTDATA*, UInt32)
 
-  alias PDD_VPORTCB_GETBANDWIDTH = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTBANDWIDTHDATA*, UInt32)*
+  alias PDD_VPORTCB_GETBANDWIDTH = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTBANDWIDTHDATA*, UInt32)
 
-  alias PDD_VPORTCB_GETINPUTFORMATS = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTINPUTFORMATDATA*, UInt32)*
+  alias PDD_VPORTCB_GETINPUTFORMATS = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTINPUTFORMATDATA*, UInt32)
 
-  alias PDD_VPORTCB_GETOUTPUTFORMATS = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTOUTPUTFORMATDATA*, UInt32)*
+  alias PDD_VPORTCB_GETOUTPUTFORMATS = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTOUTPUTFORMATDATA*, UInt32)
 
-  alias PDD_VPORTCB_GETAUTOFLIPSURF = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTAUTOFLIPSURFACEDATA_*, UInt32)*
+  alias PDD_VPORTCB_GETAUTOFLIPSURF = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTAUTOFLIPSURFACEDATA_*, UInt32)
 
-  alias PDD_VPORTCB_GETFIELD = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTFIELDDATA*, UInt32)*
+  alias PDD_VPORTCB_GETFIELD = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTFIELDDATA*, UInt32)
 
-  alias PDD_VPORTCB_GETLINE = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTLINEDATA*, UInt32)*
+  alias PDD_VPORTCB_GETLINE = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTLINEDATA*, UInt32)
 
-  alias PDD_VPORTCB_GETVPORTCONNECT = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTCONNECTDATA*, UInt32)*
+  alias PDD_VPORTCB_GETVPORTCONNECT = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTCONNECTDATA*, UInt32)
 
-  alias PDD_VPORTCB_DESTROYVPORT = Proc(Win32cr::Graphics::DirectDraw::DD_DESTROYVPORTDATA*, UInt32)*
+  alias PDD_VPORTCB_DESTROYVPORT = Proc(Win32cr::Graphics::DirectDraw::DD_DESTROYVPORTDATA*, UInt32)
 
-  alias PDD_VPORTCB_GETFLIPSTATUS = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTFLIPSTATUSDATA*, UInt32)*
+  alias PDD_VPORTCB_GETFLIPSTATUS = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTFLIPSTATUSDATA*, UInt32)
 
-  alias PDD_VPORTCB_UPDATE = Proc(Win32cr::Graphics::DirectDraw::DD_UPDATEVPORTDATA*, UInt32)*
+  alias PDD_VPORTCB_UPDATE = Proc(Win32cr::Graphics::DirectDraw::DD_UPDATEVPORTDATA*, UInt32)
 
-  alias PDD_VPORTCB_WAITFORSYNC = Proc(Win32cr::Graphics::DirectDraw::DD_WAITFORVPORTSYNCDATA*, UInt32)*
+  alias PDD_VPORTCB_WAITFORSYNC = Proc(Win32cr::Graphics::DirectDraw::DD_WAITFORVPORTSYNCDATA*, UInt32)
 
-  alias PDD_VPORTCB_GETSIGNALSTATUS = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTSIGNALDATA*, UInt32)*
+  alias PDD_VPORTCB_GETSIGNALSTATUS = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTSIGNALDATA*, UInt32)
 
-  alias PDD_VPORTCB_COLORCONTROL = Proc(Win32cr::Graphics::DirectDraw::DD_VPORTCOLORDATA*, UInt32)*
+  alias PDD_VPORTCB_COLORCONTROL = Proc(Win32cr::Graphics::DirectDraw::DD_VPORTCOLORDATA*, UInt32)
 
-  alias PDD_COLORCB_COLORCONTROL = Proc(Win32cr::Graphics::DirectDraw::DD_COLORCONTROLDATA*, UInt32)*
+  alias PDD_COLORCB_COLORCONTROL = Proc(Win32cr::Graphics::DirectDraw::DD_COLORCONTROLDATA*, UInt32)
 
-  alias PDD_KERNELCB_SYNCSURFACE = Proc(Win32cr::Graphics::DirectDraw::DD_SYNCSURFACEDATA*, UInt32)*
+  alias PDD_KERNELCB_SYNCSURFACE = Proc(Win32cr::Graphics::DirectDraw::DD_SYNCSURFACEDATA*, UInt32)
 
-  alias PDD_KERNELCB_SYNCVIDEOPORT = Proc(Win32cr::Graphics::DirectDraw::DD_SYNCVIDEOPORTDATA*, UInt32)*
+  alias PDD_KERNELCB_SYNCVIDEOPORT = Proc(Win32cr::Graphics::DirectDraw::DD_SYNCVIDEOPORTDATA*, UInt32)
 
-  alias PDD_MOCOMPCB_GETGUIDS = Proc(Win32cr::Graphics::DirectDraw::DD_GETMOCOMPGUIDSDATA*, UInt32)*
+  alias PDD_MOCOMPCB_GETGUIDS = Proc(Win32cr::Graphics::DirectDraw::DD_GETMOCOMPGUIDSDATA*, UInt32)
 
-  alias PDD_MOCOMPCB_GETFORMATS = Proc(Win32cr::Graphics::DirectDraw::DD_GETMOCOMPFORMATSDATA*, UInt32)*
+  alias PDD_MOCOMPCB_GETFORMATS = Proc(Win32cr::Graphics::DirectDraw::DD_GETMOCOMPFORMATSDATA*, UInt32)
 
-  alias PDD_MOCOMPCB_CREATE = Proc(Win32cr::Graphics::DirectDraw::DD_CREATEMOCOMPDATA*, UInt32)*
+  alias PDD_MOCOMPCB_CREATE = Proc(Win32cr::Graphics::DirectDraw::DD_CREATEMOCOMPDATA*, UInt32)
 
-  alias PDD_MOCOMPCB_GETCOMPBUFFINFO = Proc(Win32cr::Graphics::DirectDraw::DD_GETMOCOMPCOMPBUFFDATA*, UInt32)*
+  alias PDD_MOCOMPCB_GETCOMPBUFFINFO = Proc(Win32cr::Graphics::DirectDraw::DD_GETMOCOMPCOMPBUFFDATA*, UInt32)
 
-  alias PDD_MOCOMPCB_GETINTERNALINFO = Proc(Win32cr::Graphics::DirectDraw::DD_GETINTERNALMOCOMPDATA*, UInt32)*
+  alias PDD_MOCOMPCB_GETINTERNALINFO = Proc(Win32cr::Graphics::DirectDraw::DD_GETINTERNALMOCOMPDATA*, UInt32)
 
-  alias PDD_MOCOMPCB_BEGINFRAME = Proc(Win32cr::Graphics::DirectDraw::DD_BEGINMOCOMPFRAMEDATA*, UInt32)*
+  alias PDD_MOCOMPCB_BEGINFRAME = Proc(Win32cr::Graphics::DirectDraw::DD_BEGINMOCOMPFRAMEDATA*, UInt32)
 
-  alias PDD_MOCOMPCB_ENDFRAME = Proc(Win32cr::Graphics::DirectDraw::DD_ENDMOCOMPFRAMEDATA*, UInt32)*
+  alias PDD_MOCOMPCB_ENDFRAME = Proc(Win32cr::Graphics::DirectDraw::DD_ENDMOCOMPFRAMEDATA*, UInt32)
 
-  alias PDD_MOCOMPCB_RENDER = Proc(Win32cr::Graphics::DirectDraw::DD_RENDERMOCOMPDATA*, UInt32)*
+  alias PDD_MOCOMPCB_RENDER = Proc(Win32cr::Graphics::DirectDraw::DD_RENDERMOCOMPDATA*, UInt32)
 
-  alias PDD_MOCOMPCB_QUERYSTATUS = Proc(Win32cr::Graphics::DirectDraw::DD_QUERYMOCOMPSTATUSDATA*, UInt32)*
+  alias PDD_MOCOMPCB_QUERYSTATUS = Proc(Win32cr::Graphics::DirectDraw::DD_QUERYMOCOMPSTATUSDATA*, UInt32)
 
-  alias PDD_MOCOMPCB_DESTROY = Proc(Win32cr::Graphics::DirectDraw::DD_DESTROYMOCOMPDATA*, UInt32)*
+  alias PDD_MOCOMPCB_DESTROY = Proc(Win32cr::Graphics::DirectDraw::DD_DESTROYMOCOMPDATA*, UInt32)
 
-  alias PDX_IRQCALLBACK = Proc(Win32cr::Graphics::DirectDraw::DX_IRQDATA*, Void)*
+  alias PDX_IRQCALLBACK = Proc(Win32cr::Graphics::DirectDraw::DX_IRQDATA*, Void)
 
-  alias PDX_GETIRQINFO = Proc(Void*, Void*, Win32cr::Graphics::DirectDraw::DDGETIRQINFO*, UInt32)*
+  alias PDX_GETIRQINFO = Proc(Void*, Void*, Win32cr::Graphics::DirectDraw::DDGETIRQINFO*, UInt32)
 
-  alias PDX_ENABLEIRQ = Proc(Void*, Win32cr::Graphics::DirectDraw::DDENABLEIRQINFO*, Void*, UInt32)*
+  alias PDX_ENABLEIRQ = Proc(Void*, Win32cr::Graphics::DirectDraw::DDENABLEIRQINFO*, Void*, UInt32)
 
-  alias PDX_SKIPNEXTFIELD = Proc(Void*, Win32cr::Graphics::DirectDraw::DDSKIPNEXTFIELDINFO*, Void*, UInt32)*
+  alias PDX_SKIPNEXTFIELD = Proc(Void*, Win32cr::Graphics::DirectDraw::DDSKIPNEXTFIELDINFO*, Void*, UInt32)
 
-  alias PDX_BOBNEXTFIELD = Proc(Void*, Win32cr::Graphics::DirectDraw::DDBOBNEXTFIELDINFO*, Void*, UInt32)*
+  alias PDX_BOBNEXTFIELD = Proc(Void*, Win32cr::Graphics::DirectDraw::DDBOBNEXTFIELDINFO*, Void*, UInt32)
 
-  alias PDX_SETSTATE = Proc(Void*, Win32cr::Graphics::DirectDraw::DDSETSTATEININFO*, Win32cr::Graphics::DirectDraw::DDSETSTATEOUTINFO*, UInt32)*
+  alias PDX_SETSTATE = Proc(Void*, Win32cr::Graphics::DirectDraw::DDSETSTATEININFO*, Win32cr::Graphics::DirectDraw::DDSETSTATEOUTINFO*, UInt32)
 
-  alias PDX_LOCK = Proc(Void*, Win32cr::Graphics::DirectDraw::DDLOCKININFO*, Win32cr::Graphics::DirectDraw::DDLOCKOUTINFO*, UInt32)*
+  alias PDX_LOCK = Proc(Void*, Win32cr::Graphics::DirectDraw::DDLOCKININFO*, Win32cr::Graphics::DirectDraw::DDLOCKOUTINFO*, UInt32)
 
-  alias PDX_FLIPOVERLAY = Proc(Void*, Win32cr::Graphics::DirectDraw::DDFLIPOVERLAYINFO*, Void*, UInt32)*
+  alias PDX_FLIPOVERLAY = Proc(Void*, Win32cr::Graphics::DirectDraw::DDFLIPOVERLAYINFO*, Void*, UInt32)
 
-  alias PDX_FLIPVIDEOPORT = Proc(Void*, Win32cr::Graphics::DirectDraw::DDFLIPVIDEOPORTINFO*, Void*, UInt32)*
+  alias PDX_FLIPVIDEOPORT = Proc(Void*, Win32cr::Graphics::DirectDraw::DDFLIPVIDEOPORTINFO*, Void*, UInt32)
 
-  alias PDX_GETPOLARITY = Proc(Void*, Win32cr::Graphics::DirectDraw::DDGETPOLARITYININFO*, Win32cr::Graphics::DirectDraw::DDGETPOLARITYOUTINFO*, UInt32)*
+  alias PDX_GETPOLARITY = Proc(Void*, Win32cr::Graphics::DirectDraw::DDGETPOLARITYININFO*, Win32cr::Graphics::DirectDraw::DDGETPOLARITYOUTINFO*, UInt32)
 
-  alias PDX_GETCURRENTAUTOFLIP = Proc(Void*, Win32cr::Graphics::DirectDraw::DDGETCURRENTAUTOFLIPININFO*, Win32cr::Graphics::DirectDraw::DDGETCURRENTAUTOFLIPOUTINFO*, UInt32)*
+  alias PDX_GETCURRENTAUTOFLIP = Proc(Void*, Win32cr::Graphics::DirectDraw::DDGETCURRENTAUTOFLIPININFO*, Win32cr::Graphics::DirectDraw::DDGETCURRENTAUTOFLIPOUTINFO*, UInt32)
 
-  alias PDX_GETPREVIOUSAUTOFLIP = Proc(Void*, Win32cr::Graphics::DirectDraw::DDGETPREVIOUSAUTOFLIPININFO*, Win32cr::Graphics::DirectDraw::DDGETPREVIOUSAUTOFLIPOUTINFO*, UInt32)*
+  alias PDX_GETPREVIOUSAUTOFLIP = Proc(Void*, Win32cr::Graphics::DirectDraw::DDGETPREVIOUSAUTOFLIPININFO*, Win32cr::Graphics::DirectDraw::DDGETPREVIOUSAUTOFLIPOUTINFO*, UInt32)
 
-  alias PDX_TRANSFER = Proc(Void*, Win32cr::Graphics::DirectDraw::DDTRANSFERININFO*, Win32cr::Graphics::DirectDraw::DDTRANSFEROUTINFO*, UInt32)*
+  alias PDX_TRANSFER = Proc(Void*, Win32cr::Graphics::DirectDraw::DDTRANSFERININFO*, Win32cr::Graphics::DirectDraw::DDTRANSFEROUTINFO*, UInt32)
 
-  alias PDX_GETTRANSFERSTATUS = Proc(Void*, Void*, Win32cr::Graphics::DirectDraw::DDGETTRANSFERSTATUSOUTINFO*, UInt32)*
+  alias PDX_GETTRANSFERSTATUS = Proc(Void*, Void*, Win32cr::Graphics::DirectDraw::DDGETTRANSFERSTATUSOUTINFO*, UInt32)
 
   DIRECTDRAW_VERSION = 1792_u32
   FACDD_ = 2166_u32
@@ -1264,3418 +1264,4423 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record DDFXROP_
-  @[Extern]
-  record DDARGB,
-    blue : UInt8,
-    green : UInt8,
-    red : UInt8,
-    alpha : UInt8
+  struct DDFXROP_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record DDRGBA,
-    red : UInt8,
-    green : UInt8,
-    blue : UInt8,
-    alpha : UInt8
+  struct DDARGB
+    property blue : UInt8
+    property green : UInt8
+    property red : UInt8
+    property alpha : UInt8
+    def initialize(@blue : UInt8, @green : UInt8, @red : UInt8, @alpha : UInt8)
+    end
+  end
 
   @[Extern]
-  record DDCOLORKEY,
-    dwColorSpaceLowValue : UInt32,
-    dwColorSpaceHighValue : UInt32
+  struct DDRGBA
+    property red : UInt8
+    property green : UInt8
+    property blue : UInt8
+    property alpha : UInt8
+    def initialize(@red : UInt8, @green : UInt8, @blue : UInt8, @alpha : UInt8)
+    end
+  end
 
   @[Extern]
-  record DDBLTFX,
-    dwSize : UInt32,
-    dwDDFX : UInt32,
-    dwROP : UInt32,
-    dwDDROP : UInt32,
-    dwRotationAngle : UInt32,
-    dwZBufferOpCode : UInt32,
-    dwZBufferLow : UInt32,
-    dwZBufferHigh : UInt32,
-    dwZBufferBaseDest : UInt32,
-    dwZDestConstBitDepth : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    dwZSrcConstBitDepth : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    dwAlphaEdgeBlendBitDepth : UInt32,
-    dwAlphaEdgeBlend : UInt32,
-    dwReserved : UInt32,
-    dwAlphaDestConstBitDepth : UInt32,
-    anonymous3 : Anonymous3_e__Union_,
-    dwAlphaSrcConstBitDepth : UInt32,
-    anonymous4 : Anonymous4_e__Union_,
-    anonymous5 : Anonymous5_e__Union_,
-    ddckDestColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddckSrcColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY do
+  struct DDCOLORKEY
+    property dwColorSpaceLowValue : UInt32
+    property dwColorSpaceHighValue : UInt32
+    def initialize(@dwColorSpaceLowValue : UInt32, @dwColorSpaceHighValue : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DDBLTFX
+    property dwSize : UInt32
+    property dwDDFX : UInt32
+    property dwROP : UInt32
+    property dwDDROP : UInt32
+    property dwRotationAngle : UInt32
+    property dwZBufferOpCode : UInt32
+    property dwZBufferLow : UInt32
+    property dwZBufferHigh : UInt32
+    property dwZBufferBaseDest : UInt32
+    property dwZDestConstBitDepth : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property dwZSrcConstBitDepth : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property dwAlphaEdgeBlendBitDepth : UInt32
+    property dwAlphaEdgeBlend : UInt32
+    property dwReserved : UInt32
+    property dwAlphaDestConstBitDepth : UInt32
+    property anonymous3 : Anonymous3_e__Union_
+    property dwAlphaSrcConstBitDepth : UInt32
+    property anonymous4 : Anonymous4_e__Union_
+    property anonymous5 : Anonymous5_e__Union_
+    property ddckDestColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddckSrcColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY
 
     # Nested Type Anonymous4_e__Union_
     @[Extern(union: true)]
-    record Anonymous4_e__Union_,
-      dwAlphaSrcConst : UInt32,
-      lpDDSAlphaSrc : Void*
+    struct Anonymous4_e__Union_
+    property dwAlphaSrcConst : UInt32
+    property lpDDSAlphaSrc : Void*
+    def initialize(@dwAlphaSrcConst : UInt32, @lpDDSAlphaSrc : Void*)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      dwZSrcConst : UInt32,
-      lpDDSZBufferSrc : Void*
+    struct Anonymous2_e__Union_
+    property dwZSrcConst : UInt32
+    property lpDDSZBufferSrc : Void*
+    def initialize(@dwZSrcConst : UInt32, @lpDDSZBufferSrc : Void*)
+    end
+    end
 
 
     # Nested Type Anonymous5_e__Union_
     @[Extern(union: true)]
-    record Anonymous5_e__Union_,
-      dwFillColor : UInt32,
-      dwFillDepth : UInt32,
-      dwFillPixel : UInt32,
-      lpDDSPattern : Void*
-
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      dwZDestConst : UInt32,
-      lpDDSZBufferDest : Void*
-
-
-    # Nested Type Anonymous3_e__Union_
-    @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      dwAlphaDestConst : UInt32,
-      lpDDSAlphaDest : Void*
-
-  end
-
-  @[Extern]
-  record DDSCAPS,
-    dwCaps : UInt32
-
-  @[Extern]
-  record DDOSCAPS,
-    dwCaps : UInt32
-
-  @[Extern]
-  record DDSCAPSEX,
-    dwCaps2 : UInt32,
-    dwCaps3 : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwCaps4 : UInt32,
-      dwVolumeDepth : UInt32
-
-  end
-
-  @[Extern]
-  record DDSCAPS2,
-    dwCaps : UInt32,
-    dwCaps2 : UInt32,
-    dwCaps3 : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwCaps4 : UInt32,
-      dwVolumeDepth : UInt32
-
-  end
-
-  @[Extern]
-  record DDCAPS_DX1,
-    dwSize : UInt32,
-    dwCaps : UInt32,
-    dwCaps2 : UInt32,
-    dwCKeyCaps : UInt32,
-    dwFXCaps : UInt32,
-    dwFXAlphaCaps : UInt32,
-    dwPalCaps : UInt32,
-    dwSVCaps : UInt32,
-    dwAlphaBltConstBitDepths : UInt32,
-    dwAlphaBltPixelBitDepths : UInt32,
-    dwAlphaBltSurfaceBitDepths : UInt32,
-    dwAlphaOverlayConstBitDepths : UInt32,
-    dwAlphaOverlayPixelBitDepths : UInt32,
-    dwAlphaOverlaySurfaceBitDepths : UInt32,
-    dwZBufferBitDepths : UInt32,
-    dwVidMemTotal : UInt32,
-    dwVidMemFree : UInt32,
-    dwMaxVisibleOverlays : UInt32,
-    dwCurrVisibleOverlays : UInt32,
-    dwNumFourCCCodes : UInt32,
-    dwAlignBoundarySrc : UInt32,
-    dwAlignSizeSrc : UInt32,
-    dwAlignBoundaryDest : UInt32,
-    dwAlignSizeDest : UInt32,
-    dwAlignStrideAlign : UInt32,
-    dwRops : UInt32[8],
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    dwMinOverlayStretch : UInt32,
-    dwMaxOverlayStretch : UInt32,
-    dwMinLiveVideoStretch : UInt32,
-    dwMaxLiveVideoStretch : UInt32,
-    dwMinHwCodecStretch : UInt32,
-    dwMaxHwCodecStretch : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    dwReserved3 : UInt32
-
-  @[Extern]
-  record DDCAPS_DX3,
-    dwSize : UInt32,
-    dwCaps : UInt32,
-    dwCaps2 : UInt32,
-    dwCKeyCaps : UInt32,
-    dwFXCaps : UInt32,
-    dwFXAlphaCaps : UInt32,
-    dwPalCaps : UInt32,
-    dwSVCaps : UInt32,
-    dwAlphaBltConstBitDepths : UInt32,
-    dwAlphaBltPixelBitDepths : UInt32,
-    dwAlphaBltSurfaceBitDepths : UInt32,
-    dwAlphaOverlayConstBitDepths : UInt32,
-    dwAlphaOverlayPixelBitDepths : UInt32,
-    dwAlphaOverlaySurfaceBitDepths : UInt32,
-    dwZBufferBitDepths : UInt32,
-    dwVidMemTotal : UInt32,
-    dwVidMemFree : UInt32,
-    dwMaxVisibleOverlays : UInt32,
-    dwCurrVisibleOverlays : UInt32,
-    dwNumFourCCCodes : UInt32,
-    dwAlignBoundarySrc : UInt32,
-    dwAlignSizeSrc : UInt32,
-    dwAlignBoundaryDest : UInt32,
-    dwAlignSizeDest : UInt32,
-    dwAlignStrideAlign : UInt32,
-    dwRops : UInt32[8],
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    dwMinOverlayStretch : UInt32,
-    dwMaxOverlayStretch : UInt32,
-    dwMinLiveVideoStretch : UInt32,
-    dwMaxLiveVideoStretch : UInt32,
-    dwMinHwCodecStretch : UInt32,
-    dwMaxHwCodecStretch : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    dwReserved3 : UInt32,
-    dwSVBCaps : UInt32,
-    dwSVBCKeyCaps : UInt32,
-    dwSVBFXCaps : UInt32,
-    dwSVBRops : UInt32[8],
-    dwVSBCaps : UInt32,
-    dwVSBCKeyCaps : UInt32,
-    dwVSBFXCaps : UInt32,
-    dwVSBRops : UInt32[8],
-    dwSSBCaps : UInt32,
-    dwSSBCKeyCaps : UInt32,
-    dwSSBFXCaps : UInt32,
-    dwSSBRops : UInt32[8],
-    dwReserved4 : UInt32,
-    dwReserved5 : UInt32,
-    dwReserved6 : UInt32
-
-  @[Extern]
-  record DDCAPS_DX5,
-    dwSize : UInt32,
-    dwCaps : UInt32,
-    dwCaps2 : UInt32,
-    dwCKeyCaps : UInt32,
-    dwFXCaps : UInt32,
-    dwFXAlphaCaps : UInt32,
-    dwPalCaps : UInt32,
-    dwSVCaps : UInt32,
-    dwAlphaBltConstBitDepths : UInt32,
-    dwAlphaBltPixelBitDepths : UInt32,
-    dwAlphaBltSurfaceBitDepths : UInt32,
-    dwAlphaOverlayConstBitDepths : UInt32,
-    dwAlphaOverlayPixelBitDepths : UInt32,
-    dwAlphaOverlaySurfaceBitDepths : UInt32,
-    dwZBufferBitDepths : UInt32,
-    dwVidMemTotal : UInt32,
-    dwVidMemFree : UInt32,
-    dwMaxVisibleOverlays : UInt32,
-    dwCurrVisibleOverlays : UInt32,
-    dwNumFourCCCodes : UInt32,
-    dwAlignBoundarySrc : UInt32,
-    dwAlignSizeSrc : UInt32,
-    dwAlignBoundaryDest : UInt32,
-    dwAlignSizeDest : UInt32,
-    dwAlignStrideAlign : UInt32,
-    dwRops : UInt32[8],
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    dwMinOverlayStretch : UInt32,
-    dwMaxOverlayStretch : UInt32,
-    dwMinLiveVideoStretch : UInt32,
-    dwMaxLiveVideoStretch : UInt32,
-    dwMinHwCodecStretch : UInt32,
-    dwMaxHwCodecStretch : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    dwReserved3 : UInt32,
-    dwSVBCaps : UInt32,
-    dwSVBCKeyCaps : UInt32,
-    dwSVBFXCaps : UInt32,
-    dwSVBRops : UInt32[8],
-    dwVSBCaps : UInt32,
-    dwVSBCKeyCaps : UInt32,
-    dwVSBFXCaps : UInt32,
-    dwVSBRops : UInt32[8],
-    dwSSBCaps : UInt32,
-    dwSSBCKeyCaps : UInt32,
-    dwSSBFXCaps : UInt32,
-    dwSSBRops : UInt32[8],
-    dwMaxVideoPorts : UInt32,
-    dwCurrVideoPorts : UInt32,
-    dwSVBCaps2 : UInt32,
-    dwNLVBCaps : UInt32,
-    dwNLVBCaps2 : UInt32,
-    dwNLVBCKeyCaps : UInt32,
-    dwNLVBFXCaps : UInt32,
-    dwNLVBRops : UInt32[8]
-
-  @[Extern]
-  record DDCAPS_DX6,
-    dwSize : UInt32,
-    dwCaps : UInt32,
-    dwCaps2 : UInt32,
-    dwCKeyCaps : UInt32,
-    dwFXCaps : UInt32,
-    dwFXAlphaCaps : UInt32,
-    dwPalCaps : UInt32,
-    dwSVCaps : UInt32,
-    dwAlphaBltConstBitDepths : UInt32,
-    dwAlphaBltPixelBitDepths : UInt32,
-    dwAlphaBltSurfaceBitDepths : UInt32,
-    dwAlphaOverlayConstBitDepths : UInt32,
-    dwAlphaOverlayPixelBitDepths : UInt32,
-    dwAlphaOverlaySurfaceBitDepths : UInt32,
-    dwZBufferBitDepths : UInt32,
-    dwVidMemTotal : UInt32,
-    dwVidMemFree : UInt32,
-    dwMaxVisibleOverlays : UInt32,
-    dwCurrVisibleOverlays : UInt32,
-    dwNumFourCCCodes : UInt32,
-    dwAlignBoundarySrc : UInt32,
-    dwAlignSizeSrc : UInt32,
-    dwAlignBoundaryDest : UInt32,
-    dwAlignSizeDest : UInt32,
-    dwAlignStrideAlign : UInt32,
-    dwRops : UInt32[8],
-    ddsOldCaps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    dwMinOverlayStretch : UInt32,
-    dwMaxOverlayStretch : UInt32,
-    dwMinLiveVideoStretch : UInt32,
-    dwMaxLiveVideoStretch : UInt32,
-    dwMinHwCodecStretch : UInt32,
-    dwMaxHwCodecStretch : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    dwReserved3 : UInt32,
-    dwSVBCaps : UInt32,
-    dwSVBCKeyCaps : UInt32,
-    dwSVBFXCaps : UInt32,
-    dwSVBRops : UInt32[8],
-    dwVSBCaps : UInt32,
-    dwVSBCKeyCaps : UInt32,
-    dwVSBFXCaps : UInt32,
-    dwVSBRops : UInt32[8],
-    dwSSBCaps : UInt32,
-    dwSSBCKeyCaps : UInt32,
-    dwSSBFXCaps : UInt32,
-    dwSSBRops : UInt32[8],
-    dwMaxVideoPorts : UInt32,
-    dwCurrVideoPorts : UInt32,
-    dwSVBCaps2 : UInt32,
-    dwNLVBCaps : UInt32,
-    dwNLVBCaps2 : UInt32,
-    dwNLVBCKeyCaps : UInt32,
-    dwNLVBFXCaps : UInt32,
-    dwNLVBRops : UInt32[8],
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2
-
-  @[Extern]
-  record DDCAPS_DX7,
-    dwSize : UInt32,
-    dwCaps : UInt32,
-    dwCaps2 : UInt32,
-    dwCKeyCaps : UInt32,
-    dwFXCaps : UInt32,
-    dwFXAlphaCaps : UInt32,
-    dwPalCaps : UInt32,
-    dwSVCaps : UInt32,
-    dwAlphaBltConstBitDepths : UInt32,
-    dwAlphaBltPixelBitDepths : UInt32,
-    dwAlphaBltSurfaceBitDepths : UInt32,
-    dwAlphaOverlayConstBitDepths : UInt32,
-    dwAlphaOverlayPixelBitDepths : UInt32,
-    dwAlphaOverlaySurfaceBitDepths : UInt32,
-    dwZBufferBitDepths : UInt32,
-    dwVidMemTotal : UInt32,
-    dwVidMemFree : UInt32,
-    dwMaxVisibleOverlays : UInt32,
-    dwCurrVisibleOverlays : UInt32,
-    dwNumFourCCCodes : UInt32,
-    dwAlignBoundarySrc : UInt32,
-    dwAlignSizeSrc : UInt32,
-    dwAlignBoundaryDest : UInt32,
-    dwAlignSizeDest : UInt32,
-    dwAlignStrideAlign : UInt32,
-    dwRops : UInt32[8],
-    ddsOldCaps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    dwMinOverlayStretch : UInt32,
-    dwMaxOverlayStretch : UInt32,
-    dwMinLiveVideoStretch : UInt32,
-    dwMaxLiveVideoStretch : UInt32,
-    dwMinHwCodecStretch : UInt32,
-    dwMaxHwCodecStretch : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    dwReserved3 : UInt32,
-    dwSVBCaps : UInt32,
-    dwSVBCKeyCaps : UInt32,
-    dwSVBFXCaps : UInt32,
-    dwSVBRops : UInt32[8],
-    dwVSBCaps : UInt32,
-    dwVSBCKeyCaps : UInt32,
-    dwVSBFXCaps : UInt32,
-    dwVSBRops : UInt32[8],
-    dwSSBCaps : UInt32,
-    dwSSBCKeyCaps : UInt32,
-    dwSSBFXCaps : UInt32,
-    dwSSBRops : UInt32[8],
-    dwMaxVideoPorts : UInt32,
-    dwCurrVideoPorts : UInt32,
-    dwSVBCaps2 : UInt32,
-    dwNLVBCaps : UInt32,
-    dwNLVBCaps2 : UInt32,
-    dwNLVBCKeyCaps : UInt32,
-    dwNLVBFXCaps : UInt32,
-    dwNLVBRops : UInt32[8],
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2
-
-  @[Extern]
-  record DDPIXELFORMAT,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwFourCC : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    anonymous3 : Anonymous3_e__Union_,
-    anonymous4 : Anonymous4_e__Union_,
-    anonymous5 : Anonymous5_e__Union_ do
-
-    # Nested Type Anonymous5_e__Union_
-    @[Extern(union: true)]
-    record Anonymous5_e__Union_,
-      dwRGBAlphaBitMask : UInt32,
-      dwYUVAlphaBitMask : UInt32,
-      dwLuminanceAlphaBitMask : UInt32,
-      dwRGBZBitMask : UInt32,
-      dwYUVZBitMask : UInt32
-
-
-    # Nested Type Anonymous3_e__Union_
-    @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      dwGBitMask : UInt32,
-      dwUBitMask : UInt32,
-      dwZBitMask : UInt32,
-      dwBumpDvBitMask : UInt32,
-      multi_sample_caps : MultiSampleCaps_e__Struct_ do
-
-      # Nested Type MultiSampleCaps_e__Struct_
-      @[Extern]
-      record MultiSampleCaps_e__Struct_,
-        wFlipMSTypes : UInt16,
-        wBltMSTypes : UInt16
-
+    struct Anonymous5_e__Union_
+    property dwFillColor : UInt32
+    property dwFillDepth : UInt32
+    property dwFillPixel : UInt32
+    property lpDDSPattern : Void*
+    def initialize(@dwFillColor : UInt32, @dwFillDepth : UInt32, @dwFillPixel : UInt32, @lpDDSPattern : Void*)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      dwRGBBitCount : UInt32,
-      dwYUVBitCount : UInt32,
-      dwZBufferBitDepth : UInt32,
-      dwAlphaBitDepth : UInt32,
-      dwLuminanceBitCount : UInt32,
-      dwBumpBitCount : UInt32,
-      dwPrivateFormatBitCount : UInt32
-
-
-    # Nested Type Anonymous4_e__Union_
-    @[Extern(union: true)]
-    record Anonymous4_e__Union_,
-      dwBBitMask : UInt32,
-      dwVBitMask : UInt32,
-      dwStencilBitMask : UInt32,
-      dwBumpLuminanceBitMask : UInt32
-
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      dwRBitMask : UInt32,
-      dwYBitMask : UInt32,
-      dwStencilBitDepth : UInt32,
-      dwLuminanceBitMask : UInt32,
-      dwBumpDuBitMask : UInt32,
-      dwOperations : UInt32
-
-  end
-
-  @[Extern]
-  record DDOVERLAYFX,
-    dwSize : UInt32,
-    dwAlphaEdgeBlendBitDepth : UInt32,
-    dwAlphaEdgeBlend : UInt32,
-    dwReserved : UInt32,
-    dwAlphaDestConstBitDepth : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    dwAlphaSrcConstBitDepth : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    dckDestColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    dckSrcColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    dwDDFX : UInt32,
-    dwFlags : UInt32 do
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      dwAlphaSrcConst : UInt32,
-      lpDDSAlphaSrc : Void*
-
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      dwAlphaDestConst : UInt32,
-      lpDDSAlphaDest : Void*
-
-  end
-
-  @[Extern]
-  record DDBLTBATCH,
-    lprDest : Win32cr::Foundation::RECT*,
-    lpDDSSrc : Void*,
-    lprSrc : Win32cr::Foundation::RECT*,
-    dwFlags : UInt32,
-    lpDDBltFx : Win32cr::Graphics::DirectDraw::DDBLTFX*
-
-  @[Extern]
-  record DDGAMMARAMP,
-    red : UInt16[256],
-    green : UInt16[256],
-    blue : UInt16[256]
-
-  @[Extern]
-  record DDDEVICEIDENTIFIER,
-    szDriver : Win32cr::Foundation::CHAR[512],
-    szDescription : Win32cr::Foundation::CHAR[512],
-    liDriverVersion : Win32cr::Foundation::LARGE_INTEGER,
-    dwVendorId : UInt32,
-    dwDeviceId : UInt32,
-    dwSubSysId : UInt32,
-    dwRevision : UInt32,
-    guidDeviceIdentifier : LibC::GUID
-
-  @[Extern]
-  record DDDEVICEIDENTIFIER2,
-    szDriver : Win32cr::Foundation::CHAR[512],
-    szDescription : Win32cr::Foundation::CHAR[512],
-    liDriverVersion : Win32cr::Foundation::LARGE_INTEGER,
-    dwVendorId : UInt32,
-    dwDeviceId : UInt32,
-    dwSubSysId : UInt32,
-    dwRevision : UInt32,
-    guidDeviceIdentifier : LibC::GUID,
-    dwWHQLLevel : UInt32
-
-  @[Extern]
-  record DDSURFACEDESC,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwHeight : UInt32,
-    dwWidth : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    dwBackBufferCount : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    dwAlphaBitDepth : UInt32,
-    dwReserved : UInt32,
-    lpSurface : Void*,
-    ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddpfPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT,
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS do
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      dwMipMapCount : UInt32,
-      dwZBufferBitDepth : UInt32,
-      dwRefreshRate : UInt32
-
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      lPitch : Int32,
-      dwLinearSize : UInt32
-
-  end
-
-  @[Extern]
-  record DDSURFACEDESC2,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwHeight : UInt32,
-    dwWidth : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    anonymous3 : Anonymous3_e__Union_,
-    dwAlphaBitDepth : UInt32,
-    dwReserved : UInt32,
-    lpSurface : Void*,
-    anonymous4 : Anonymous4_e__Union_,
-    ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    anonymous5 : Anonymous5_e__Union_,
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2,
-    dwTextureStage : UInt32 do
-
-    # Nested Type Anonymous4_e__Union_
-    @[Extern(union: true)]
-    record Anonymous4_e__Union_,
-      ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-      dwEmptyFaceColor : UInt32
-
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      dwBackBufferCount : UInt32,
-      dwDepth : UInt32
+    struct Anonymous1_e__Union_
+    property dwZDestConst : UInt32
+    property lpDDSZBufferDest : Void*
+    def initialize(@dwZDestConst : UInt32, @lpDDSZBufferDest : Void*)
+    end
+    end
 
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      dwMipMapCount : UInt32,
-      dwRefreshRate : UInt32,
-      dwSrcVBHandle : UInt32
+    struct Anonymous3_e__Union_
+    property dwAlphaDestConst : UInt32
+    property lpDDSAlphaDest : Void*
+    def initialize(@dwAlphaDestConst : UInt32, @lpDDSAlphaDest : Void*)
+    end
+    end
+
+    def initialize(@dwSize : UInt32, @dwDDFX : UInt32, @dwROP : UInt32, @dwDDROP : UInt32, @dwRotationAngle : UInt32, @dwZBufferOpCode : UInt32, @dwZBufferLow : UInt32, @dwZBufferHigh : UInt32, @dwZBufferBaseDest : UInt32, @dwZDestConstBitDepth : UInt32, @anonymous1 : Anonymous1_e__Union_, @dwZSrcConstBitDepth : UInt32, @anonymous2 : Anonymous2_e__Union_, @dwAlphaEdgeBlendBitDepth : UInt32, @dwAlphaEdgeBlend : UInt32, @dwReserved : UInt32, @dwAlphaDestConstBitDepth : UInt32, @anonymous3 : Anonymous3_e__Union_, @dwAlphaSrcConstBitDepth : UInt32, @anonymous4 : Anonymous4_e__Union_, @anonymous5 : Anonymous5_e__Union_, @ddckDestColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckSrcColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY)
+    end
+  end
+
+  @[Extern]
+  struct DDSCAPS
+    property dwCaps : UInt32
+    def initialize(@dwCaps : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DDOSCAPS
+    property dwCaps : UInt32
+    def initialize(@dwCaps : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DDSCAPSEX
+    property dwCaps2 : UInt32
+    property dwCaps3 : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dwCaps4 : UInt32
+    property dwVolumeDepth : UInt32
+    def initialize(@dwCaps4 : UInt32, @dwVolumeDepth : UInt32)
+    end
+    end
+
+    def initialize(@dwCaps2 : UInt32, @dwCaps3 : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct DDSCAPS2
+    property dwCaps : UInt32
+    property dwCaps2 : UInt32
+    property dwCaps3 : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dwCaps4 : UInt32
+    property dwVolumeDepth : UInt32
+    def initialize(@dwCaps4 : UInt32, @dwVolumeDepth : UInt32)
+    end
+    end
+
+    def initialize(@dwCaps : UInt32, @dwCaps2 : UInt32, @dwCaps3 : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct DDCAPS_DX1
+    property dwSize : UInt32
+    property dwCaps : UInt32
+    property dwCaps2 : UInt32
+    property dwCKeyCaps : UInt32
+    property dwFXCaps : UInt32
+    property dwFXAlphaCaps : UInt32
+    property dwPalCaps : UInt32
+    property dwSVCaps : UInt32
+    property dwAlphaBltConstBitDepths : UInt32
+    property dwAlphaBltPixelBitDepths : UInt32
+    property dwAlphaBltSurfaceBitDepths : UInt32
+    property dwAlphaOverlayConstBitDepths : UInt32
+    property dwAlphaOverlayPixelBitDepths : UInt32
+    property dwAlphaOverlaySurfaceBitDepths : UInt32
+    property dwZBufferBitDepths : UInt32
+    property dwVidMemTotal : UInt32
+    property dwVidMemFree : UInt32
+    property dwMaxVisibleOverlays : UInt32
+    property dwCurrVisibleOverlays : UInt32
+    property dwNumFourCCCodes : UInt32
+    property dwAlignBoundarySrc : UInt32
+    property dwAlignSizeSrc : UInt32
+    property dwAlignBoundaryDest : UInt32
+    property dwAlignSizeDest : UInt32
+    property dwAlignStrideAlign : UInt32
+    property dwRops : UInt32[8]
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property dwMinOverlayStretch : UInt32
+    property dwMaxOverlayStretch : UInt32
+    property dwMinLiveVideoStretch : UInt32
+    property dwMaxLiveVideoStretch : UInt32
+    property dwMinHwCodecStretch : UInt32
+    property dwMaxHwCodecStretch : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property dwReserved3 : UInt32
+    def initialize(@dwSize : UInt32, @dwCaps : UInt32, @dwCaps2 : UInt32, @dwCKeyCaps : UInt32, @dwFXCaps : UInt32, @dwFXAlphaCaps : UInt32, @dwPalCaps : UInt32, @dwSVCaps : UInt32, @dwAlphaBltConstBitDepths : UInt32, @dwAlphaBltPixelBitDepths : UInt32, @dwAlphaBltSurfaceBitDepths : UInt32, @dwAlphaOverlayConstBitDepths : UInt32, @dwAlphaOverlayPixelBitDepths : UInt32, @dwAlphaOverlaySurfaceBitDepths : UInt32, @dwZBufferBitDepths : UInt32, @dwVidMemTotal : UInt32, @dwVidMemFree : UInt32, @dwMaxVisibleOverlays : UInt32, @dwCurrVisibleOverlays : UInt32, @dwNumFourCCCodes : UInt32, @dwAlignBoundarySrc : UInt32, @dwAlignSizeSrc : UInt32, @dwAlignBoundaryDest : UInt32, @dwAlignSizeDest : UInt32, @dwAlignStrideAlign : UInt32, @dwRops : UInt32[8], @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS, @dwMinOverlayStretch : UInt32, @dwMaxOverlayStretch : UInt32, @dwMinLiveVideoStretch : UInt32, @dwMaxLiveVideoStretch : UInt32, @dwMinHwCodecStretch : UInt32, @dwMaxHwCodecStretch : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @dwReserved3 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DDCAPS_DX3
+    property dwSize : UInt32
+    property dwCaps : UInt32
+    property dwCaps2 : UInt32
+    property dwCKeyCaps : UInt32
+    property dwFXCaps : UInt32
+    property dwFXAlphaCaps : UInt32
+    property dwPalCaps : UInt32
+    property dwSVCaps : UInt32
+    property dwAlphaBltConstBitDepths : UInt32
+    property dwAlphaBltPixelBitDepths : UInt32
+    property dwAlphaBltSurfaceBitDepths : UInt32
+    property dwAlphaOverlayConstBitDepths : UInt32
+    property dwAlphaOverlayPixelBitDepths : UInt32
+    property dwAlphaOverlaySurfaceBitDepths : UInt32
+    property dwZBufferBitDepths : UInt32
+    property dwVidMemTotal : UInt32
+    property dwVidMemFree : UInt32
+    property dwMaxVisibleOverlays : UInt32
+    property dwCurrVisibleOverlays : UInt32
+    property dwNumFourCCCodes : UInt32
+    property dwAlignBoundarySrc : UInt32
+    property dwAlignSizeSrc : UInt32
+    property dwAlignBoundaryDest : UInt32
+    property dwAlignSizeDest : UInt32
+    property dwAlignStrideAlign : UInt32
+    property dwRops : UInt32[8]
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property dwMinOverlayStretch : UInt32
+    property dwMaxOverlayStretch : UInt32
+    property dwMinLiveVideoStretch : UInt32
+    property dwMaxLiveVideoStretch : UInt32
+    property dwMinHwCodecStretch : UInt32
+    property dwMaxHwCodecStretch : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property dwReserved3 : UInt32
+    property dwSVBCaps : UInt32
+    property dwSVBCKeyCaps : UInt32
+    property dwSVBFXCaps : UInt32
+    property dwSVBRops : UInt32[8]
+    property dwVSBCaps : UInt32
+    property dwVSBCKeyCaps : UInt32
+    property dwVSBFXCaps : UInt32
+    property dwVSBRops : UInt32[8]
+    property dwSSBCaps : UInt32
+    property dwSSBCKeyCaps : UInt32
+    property dwSSBFXCaps : UInt32
+    property dwSSBRops : UInt32[8]
+    property dwReserved4 : UInt32
+    property dwReserved5 : UInt32
+    property dwReserved6 : UInt32
+    def initialize(@dwSize : UInt32, @dwCaps : UInt32, @dwCaps2 : UInt32, @dwCKeyCaps : UInt32, @dwFXCaps : UInt32, @dwFXAlphaCaps : UInt32, @dwPalCaps : UInt32, @dwSVCaps : UInt32, @dwAlphaBltConstBitDepths : UInt32, @dwAlphaBltPixelBitDepths : UInt32, @dwAlphaBltSurfaceBitDepths : UInt32, @dwAlphaOverlayConstBitDepths : UInt32, @dwAlphaOverlayPixelBitDepths : UInt32, @dwAlphaOverlaySurfaceBitDepths : UInt32, @dwZBufferBitDepths : UInt32, @dwVidMemTotal : UInt32, @dwVidMemFree : UInt32, @dwMaxVisibleOverlays : UInt32, @dwCurrVisibleOverlays : UInt32, @dwNumFourCCCodes : UInt32, @dwAlignBoundarySrc : UInt32, @dwAlignSizeSrc : UInt32, @dwAlignBoundaryDest : UInt32, @dwAlignSizeDest : UInt32, @dwAlignStrideAlign : UInt32, @dwRops : UInt32[8], @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS, @dwMinOverlayStretch : UInt32, @dwMaxOverlayStretch : UInt32, @dwMinLiveVideoStretch : UInt32, @dwMaxLiveVideoStretch : UInt32, @dwMinHwCodecStretch : UInt32, @dwMaxHwCodecStretch : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @dwReserved3 : UInt32, @dwSVBCaps : UInt32, @dwSVBCKeyCaps : UInt32, @dwSVBFXCaps : UInt32, @dwSVBRops : UInt32[8], @dwVSBCaps : UInt32, @dwVSBCKeyCaps : UInt32, @dwVSBFXCaps : UInt32, @dwVSBRops : UInt32[8], @dwSSBCaps : UInt32, @dwSSBCKeyCaps : UInt32, @dwSSBFXCaps : UInt32, @dwSSBRops : UInt32[8], @dwReserved4 : UInt32, @dwReserved5 : UInt32, @dwReserved6 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DDCAPS_DX5
+    property dwSize : UInt32
+    property dwCaps : UInt32
+    property dwCaps2 : UInt32
+    property dwCKeyCaps : UInt32
+    property dwFXCaps : UInt32
+    property dwFXAlphaCaps : UInt32
+    property dwPalCaps : UInt32
+    property dwSVCaps : UInt32
+    property dwAlphaBltConstBitDepths : UInt32
+    property dwAlphaBltPixelBitDepths : UInt32
+    property dwAlphaBltSurfaceBitDepths : UInt32
+    property dwAlphaOverlayConstBitDepths : UInt32
+    property dwAlphaOverlayPixelBitDepths : UInt32
+    property dwAlphaOverlaySurfaceBitDepths : UInt32
+    property dwZBufferBitDepths : UInt32
+    property dwVidMemTotal : UInt32
+    property dwVidMemFree : UInt32
+    property dwMaxVisibleOverlays : UInt32
+    property dwCurrVisibleOverlays : UInt32
+    property dwNumFourCCCodes : UInt32
+    property dwAlignBoundarySrc : UInt32
+    property dwAlignSizeSrc : UInt32
+    property dwAlignBoundaryDest : UInt32
+    property dwAlignSizeDest : UInt32
+    property dwAlignStrideAlign : UInt32
+    property dwRops : UInt32[8]
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property dwMinOverlayStretch : UInt32
+    property dwMaxOverlayStretch : UInt32
+    property dwMinLiveVideoStretch : UInt32
+    property dwMaxLiveVideoStretch : UInt32
+    property dwMinHwCodecStretch : UInt32
+    property dwMaxHwCodecStretch : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property dwReserved3 : UInt32
+    property dwSVBCaps : UInt32
+    property dwSVBCKeyCaps : UInt32
+    property dwSVBFXCaps : UInt32
+    property dwSVBRops : UInt32[8]
+    property dwVSBCaps : UInt32
+    property dwVSBCKeyCaps : UInt32
+    property dwVSBFXCaps : UInt32
+    property dwVSBRops : UInt32[8]
+    property dwSSBCaps : UInt32
+    property dwSSBCKeyCaps : UInt32
+    property dwSSBFXCaps : UInt32
+    property dwSSBRops : UInt32[8]
+    property dwMaxVideoPorts : UInt32
+    property dwCurrVideoPorts : UInt32
+    property dwSVBCaps2 : UInt32
+    property dwNLVBCaps : UInt32
+    property dwNLVBCaps2 : UInt32
+    property dwNLVBCKeyCaps : UInt32
+    property dwNLVBFXCaps : UInt32
+    property dwNLVBRops : UInt32[8]
+    def initialize(@dwSize : UInt32, @dwCaps : UInt32, @dwCaps2 : UInt32, @dwCKeyCaps : UInt32, @dwFXCaps : UInt32, @dwFXAlphaCaps : UInt32, @dwPalCaps : UInt32, @dwSVCaps : UInt32, @dwAlphaBltConstBitDepths : UInt32, @dwAlphaBltPixelBitDepths : UInt32, @dwAlphaBltSurfaceBitDepths : UInt32, @dwAlphaOverlayConstBitDepths : UInt32, @dwAlphaOverlayPixelBitDepths : UInt32, @dwAlphaOverlaySurfaceBitDepths : UInt32, @dwZBufferBitDepths : UInt32, @dwVidMemTotal : UInt32, @dwVidMemFree : UInt32, @dwMaxVisibleOverlays : UInt32, @dwCurrVisibleOverlays : UInt32, @dwNumFourCCCodes : UInt32, @dwAlignBoundarySrc : UInt32, @dwAlignSizeSrc : UInt32, @dwAlignBoundaryDest : UInt32, @dwAlignSizeDest : UInt32, @dwAlignStrideAlign : UInt32, @dwRops : UInt32[8], @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS, @dwMinOverlayStretch : UInt32, @dwMaxOverlayStretch : UInt32, @dwMinLiveVideoStretch : UInt32, @dwMaxLiveVideoStretch : UInt32, @dwMinHwCodecStretch : UInt32, @dwMaxHwCodecStretch : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @dwReserved3 : UInt32, @dwSVBCaps : UInt32, @dwSVBCKeyCaps : UInt32, @dwSVBFXCaps : UInt32, @dwSVBRops : UInt32[8], @dwVSBCaps : UInt32, @dwVSBCKeyCaps : UInt32, @dwVSBFXCaps : UInt32, @dwVSBRops : UInt32[8], @dwSSBCaps : UInt32, @dwSSBCKeyCaps : UInt32, @dwSSBFXCaps : UInt32, @dwSSBRops : UInt32[8], @dwMaxVideoPorts : UInt32, @dwCurrVideoPorts : UInt32, @dwSVBCaps2 : UInt32, @dwNLVBCaps : UInt32, @dwNLVBCaps2 : UInt32, @dwNLVBCKeyCaps : UInt32, @dwNLVBFXCaps : UInt32, @dwNLVBRops : UInt32[8])
+    end
+  end
+
+  @[Extern]
+  struct DDCAPS_DX6
+    property dwSize : UInt32
+    property dwCaps : UInt32
+    property dwCaps2 : UInt32
+    property dwCKeyCaps : UInt32
+    property dwFXCaps : UInt32
+    property dwFXAlphaCaps : UInt32
+    property dwPalCaps : UInt32
+    property dwSVCaps : UInt32
+    property dwAlphaBltConstBitDepths : UInt32
+    property dwAlphaBltPixelBitDepths : UInt32
+    property dwAlphaBltSurfaceBitDepths : UInt32
+    property dwAlphaOverlayConstBitDepths : UInt32
+    property dwAlphaOverlayPixelBitDepths : UInt32
+    property dwAlphaOverlaySurfaceBitDepths : UInt32
+    property dwZBufferBitDepths : UInt32
+    property dwVidMemTotal : UInt32
+    property dwVidMemFree : UInt32
+    property dwMaxVisibleOverlays : UInt32
+    property dwCurrVisibleOverlays : UInt32
+    property dwNumFourCCCodes : UInt32
+    property dwAlignBoundarySrc : UInt32
+    property dwAlignSizeSrc : UInt32
+    property dwAlignBoundaryDest : UInt32
+    property dwAlignSizeDest : UInt32
+    property dwAlignStrideAlign : UInt32
+    property dwRops : UInt32[8]
+    property ddsOldCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property dwMinOverlayStretch : UInt32
+    property dwMaxOverlayStretch : UInt32
+    property dwMinLiveVideoStretch : UInt32
+    property dwMaxLiveVideoStretch : UInt32
+    property dwMinHwCodecStretch : UInt32
+    property dwMaxHwCodecStretch : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property dwReserved3 : UInt32
+    property dwSVBCaps : UInt32
+    property dwSVBCKeyCaps : UInt32
+    property dwSVBFXCaps : UInt32
+    property dwSVBRops : UInt32[8]
+    property dwVSBCaps : UInt32
+    property dwVSBCKeyCaps : UInt32
+    property dwVSBFXCaps : UInt32
+    property dwVSBRops : UInt32[8]
+    property dwSSBCaps : UInt32
+    property dwSSBCKeyCaps : UInt32
+    property dwSSBFXCaps : UInt32
+    property dwSSBRops : UInt32[8]
+    property dwMaxVideoPorts : UInt32
+    property dwCurrVideoPorts : UInt32
+    property dwSVBCaps2 : UInt32
+    property dwNLVBCaps : UInt32
+    property dwNLVBCaps2 : UInt32
+    property dwNLVBCKeyCaps : UInt32
+    property dwNLVBFXCaps : UInt32
+    property dwNLVBRops : UInt32[8]
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2
+    def initialize(@dwSize : UInt32, @dwCaps : UInt32, @dwCaps2 : UInt32, @dwCKeyCaps : UInt32, @dwFXCaps : UInt32, @dwFXAlphaCaps : UInt32, @dwPalCaps : UInt32, @dwSVCaps : UInt32, @dwAlphaBltConstBitDepths : UInt32, @dwAlphaBltPixelBitDepths : UInt32, @dwAlphaBltSurfaceBitDepths : UInt32, @dwAlphaOverlayConstBitDepths : UInt32, @dwAlphaOverlayPixelBitDepths : UInt32, @dwAlphaOverlaySurfaceBitDepths : UInt32, @dwZBufferBitDepths : UInt32, @dwVidMemTotal : UInt32, @dwVidMemFree : UInt32, @dwMaxVisibleOverlays : UInt32, @dwCurrVisibleOverlays : UInt32, @dwNumFourCCCodes : UInt32, @dwAlignBoundarySrc : UInt32, @dwAlignSizeSrc : UInt32, @dwAlignBoundaryDest : UInt32, @dwAlignSizeDest : UInt32, @dwAlignStrideAlign : UInt32, @dwRops : UInt32[8], @ddsOldCaps : Win32cr::Graphics::DirectDraw::DDSCAPS, @dwMinOverlayStretch : UInt32, @dwMaxOverlayStretch : UInt32, @dwMinLiveVideoStretch : UInt32, @dwMaxLiveVideoStretch : UInt32, @dwMinHwCodecStretch : UInt32, @dwMaxHwCodecStretch : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @dwReserved3 : UInt32, @dwSVBCaps : UInt32, @dwSVBCKeyCaps : UInt32, @dwSVBFXCaps : UInt32, @dwSVBRops : UInt32[8], @dwVSBCaps : UInt32, @dwVSBCKeyCaps : UInt32, @dwVSBFXCaps : UInt32, @dwVSBRops : UInt32[8], @dwSSBCaps : UInt32, @dwSSBCKeyCaps : UInt32, @dwSSBFXCaps : UInt32, @dwSSBRops : UInt32[8], @dwMaxVideoPorts : UInt32, @dwCurrVideoPorts : UInt32, @dwSVBCaps2 : UInt32, @dwNLVBCaps : UInt32, @dwNLVBCaps2 : UInt32, @dwNLVBCKeyCaps : UInt32, @dwNLVBFXCaps : UInt32, @dwNLVBRops : UInt32[8], @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2)
+    end
+  end
+
+  @[Extern]
+  struct DDCAPS_DX7
+    property dwSize : UInt32
+    property dwCaps : UInt32
+    property dwCaps2 : UInt32
+    property dwCKeyCaps : UInt32
+    property dwFXCaps : UInt32
+    property dwFXAlphaCaps : UInt32
+    property dwPalCaps : UInt32
+    property dwSVCaps : UInt32
+    property dwAlphaBltConstBitDepths : UInt32
+    property dwAlphaBltPixelBitDepths : UInt32
+    property dwAlphaBltSurfaceBitDepths : UInt32
+    property dwAlphaOverlayConstBitDepths : UInt32
+    property dwAlphaOverlayPixelBitDepths : UInt32
+    property dwAlphaOverlaySurfaceBitDepths : UInt32
+    property dwZBufferBitDepths : UInt32
+    property dwVidMemTotal : UInt32
+    property dwVidMemFree : UInt32
+    property dwMaxVisibleOverlays : UInt32
+    property dwCurrVisibleOverlays : UInt32
+    property dwNumFourCCCodes : UInt32
+    property dwAlignBoundarySrc : UInt32
+    property dwAlignSizeSrc : UInt32
+    property dwAlignBoundaryDest : UInt32
+    property dwAlignSizeDest : UInt32
+    property dwAlignStrideAlign : UInt32
+    property dwRops : UInt32[8]
+    property ddsOldCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property dwMinOverlayStretch : UInt32
+    property dwMaxOverlayStretch : UInt32
+    property dwMinLiveVideoStretch : UInt32
+    property dwMaxLiveVideoStretch : UInt32
+    property dwMinHwCodecStretch : UInt32
+    property dwMaxHwCodecStretch : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property dwReserved3 : UInt32
+    property dwSVBCaps : UInt32
+    property dwSVBCKeyCaps : UInt32
+    property dwSVBFXCaps : UInt32
+    property dwSVBRops : UInt32[8]
+    property dwVSBCaps : UInt32
+    property dwVSBCKeyCaps : UInt32
+    property dwVSBFXCaps : UInt32
+    property dwVSBRops : UInt32[8]
+    property dwSSBCaps : UInt32
+    property dwSSBCKeyCaps : UInt32
+    property dwSSBFXCaps : UInt32
+    property dwSSBRops : UInt32[8]
+    property dwMaxVideoPorts : UInt32
+    property dwCurrVideoPorts : UInt32
+    property dwSVBCaps2 : UInt32
+    property dwNLVBCaps : UInt32
+    property dwNLVBCaps2 : UInt32
+    property dwNLVBCKeyCaps : UInt32
+    property dwNLVBFXCaps : UInt32
+    property dwNLVBRops : UInt32[8]
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2
+    def initialize(@dwSize : UInt32, @dwCaps : UInt32, @dwCaps2 : UInt32, @dwCKeyCaps : UInt32, @dwFXCaps : UInt32, @dwFXAlphaCaps : UInt32, @dwPalCaps : UInt32, @dwSVCaps : UInt32, @dwAlphaBltConstBitDepths : UInt32, @dwAlphaBltPixelBitDepths : UInt32, @dwAlphaBltSurfaceBitDepths : UInt32, @dwAlphaOverlayConstBitDepths : UInt32, @dwAlphaOverlayPixelBitDepths : UInt32, @dwAlphaOverlaySurfaceBitDepths : UInt32, @dwZBufferBitDepths : UInt32, @dwVidMemTotal : UInt32, @dwVidMemFree : UInt32, @dwMaxVisibleOverlays : UInt32, @dwCurrVisibleOverlays : UInt32, @dwNumFourCCCodes : UInt32, @dwAlignBoundarySrc : UInt32, @dwAlignSizeSrc : UInt32, @dwAlignBoundaryDest : UInt32, @dwAlignSizeDest : UInt32, @dwAlignStrideAlign : UInt32, @dwRops : UInt32[8], @ddsOldCaps : Win32cr::Graphics::DirectDraw::DDSCAPS, @dwMinOverlayStretch : UInt32, @dwMaxOverlayStretch : UInt32, @dwMinLiveVideoStretch : UInt32, @dwMaxLiveVideoStretch : UInt32, @dwMinHwCodecStretch : UInt32, @dwMaxHwCodecStretch : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @dwReserved3 : UInt32, @dwSVBCaps : UInt32, @dwSVBCKeyCaps : UInt32, @dwSVBFXCaps : UInt32, @dwSVBRops : UInt32[8], @dwVSBCaps : UInt32, @dwVSBCKeyCaps : UInt32, @dwVSBFXCaps : UInt32, @dwVSBRops : UInt32[8], @dwSSBCaps : UInt32, @dwSSBCKeyCaps : UInt32, @dwSSBFXCaps : UInt32, @dwSSBRops : UInt32[8], @dwMaxVideoPorts : UInt32, @dwCurrVideoPorts : UInt32, @dwSVBCaps2 : UInt32, @dwNLVBCaps : UInt32, @dwNLVBCaps2 : UInt32, @dwNLVBCKeyCaps : UInt32, @dwNLVBFXCaps : UInt32, @dwNLVBRops : UInt32[8], @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2)
+    end
+  end
+
+  @[Extern]
+  struct DDPIXELFORMAT
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwFourCC : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property anonymous3 : Anonymous3_e__Union_
+    property anonymous4 : Anonymous4_e__Union_
+    property anonymous5 : Anonymous5_e__Union_
+
+    # Nested Type Anonymous5_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous5_e__Union_
+    property dwRGBAlphaBitMask : UInt32
+    property dwYUVAlphaBitMask : UInt32
+    property dwLuminanceAlphaBitMask : UInt32
+    property dwRGBZBitMask : UInt32
+    property dwYUVZBitMask : UInt32
+    def initialize(@dwRGBAlphaBitMask : UInt32, @dwYUVAlphaBitMask : UInt32, @dwLuminanceAlphaBitMask : UInt32, @dwRGBZBitMask : UInt32, @dwYUVZBitMask : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous3_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous3_e__Union_
+    property dwGBitMask : UInt32
+    property dwUBitMask : UInt32
+    property dwZBitMask : UInt32
+    property dwBumpDvBitMask : UInt32
+    property multi_sample_caps : MultiSampleCaps_e__Struct_
+
+      # Nested Type MultiSampleCaps_e__Struct_
+      @[Extern]
+      struct MultiSampleCaps_e__Struct_
+    property wFlipMSTypes : UInt16
+    property wBltMSTypes : UInt16
+    def initialize(@wFlipMSTypes : UInt16, @wBltMSTypes : UInt16)
+    end
+      end
+
+    def initialize(@dwGBitMask : UInt32, @dwUBitMask : UInt32, @dwZBitMask : UInt32, @dwBumpDvBitMask : UInt32, @multi_sample_caps : MultiSampleCaps_e__Struct_)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      lPitch : Int32,
-      dwLinearSize : UInt32
+    struct Anonymous1_e__Union_
+    property dwRGBBitCount : UInt32
+    property dwYUVBitCount : UInt32
+    property dwZBufferBitDepth : UInt32
+    property dwAlphaBitDepth : UInt32
+    property dwLuminanceBitCount : UInt32
+    property dwBumpBitCount : UInt32
+    property dwPrivateFormatBitCount : UInt32
+    def initialize(@dwRGBBitCount : UInt32, @dwYUVBitCount : UInt32, @dwZBufferBitDepth : UInt32, @dwAlphaBitDepth : UInt32, @dwLuminanceBitCount : UInt32, @dwBumpBitCount : UInt32, @dwPrivateFormatBitCount : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous4_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous4_e__Union_
+    property dwBBitMask : UInt32
+    property dwVBitMask : UInt32
+    property dwStencilBitMask : UInt32
+    property dwBumpLuminanceBitMask : UInt32
+    def initialize(@dwBBitMask : UInt32, @dwVBitMask : UInt32, @dwStencilBitMask : UInt32, @dwBumpLuminanceBitMask : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property dwRBitMask : UInt32
+    property dwYBitMask : UInt32
+    property dwStencilBitDepth : UInt32
+    property dwLuminanceBitMask : UInt32
+    property dwBumpDuBitMask : UInt32
+    property dwOperations : UInt32
+    def initialize(@dwRBitMask : UInt32, @dwYBitMask : UInt32, @dwStencilBitDepth : UInt32, @dwLuminanceBitMask : UInt32, @dwBumpDuBitMask : UInt32, @dwOperations : UInt32)
+    end
+    end
+
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwFourCC : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_, @anonymous4 : Anonymous4_e__Union_, @anonymous5 : Anonymous5_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct DDOVERLAYFX
+    property dwSize : UInt32
+    property dwAlphaEdgeBlendBitDepth : UInt32
+    property dwAlphaEdgeBlend : UInt32
+    property dwReserved : UInt32
+    property dwAlphaDestConstBitDepth : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property dwAlphaSrcConstBitDepth : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property dckDestColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property dckSrcColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property dwDDFX : UInt32
+    property dwFlags : UInt32
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property dwAlphaSrcConst : UInt32
+    property lpDDSAlphaSrc : Void*
+    def initialize(@dwAlphaSrcConst : UInt32, @lpDDSAlphaSrc : Void*)
+    end
+    end
+
+
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property dwAlphaDestConst : UInt32
+    property lpDDSAlphaDest : Void*
+    def initialize(@dwAlphaDestConst : UInt32, @lpDDSAlphaDest : Void*)
+    end
+    end
+
+    def initialize(@dwSize : UInt32, @dwAlphaEdgeBlendBitDepth : UInt32, @dwAlphaEdgeBlend : UInt32, @dwReserved : UInt32, @dwAlphaDestConstBitDepth : UInt32, @anonymous1 : Anonymous1_e__Union_, @dwAlphaSrcConstBitDepth : UInt32, @anonymous2 : Anonymous2_e__Union_, @dckDestColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @dckSrcColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @dwDDFX : UInt32, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DDBLTBATCH
+    property lprDest : Win32cr::Foundation::RECT*
+    property lpDDSSrc : Void*
+    property lprSrc : Win32cr::Foundation::RECT*
+    property dwFlags : UInt32
+    property lpDDBltFx : Win32cr::Graphics::DirectDraw::DDBLTFX*
+    def initialize(@lprDest : Win32cr::Foundation::RECT*, @lpDDSSrc : Void*, @lprSrc : Win32cr::Foundation::RECT*, @dwFlags : UInt32, @lpDDBltFx : Win32cr::Graphics::DirectDraw::DDBLTFX*)
+    end
+  end
+
+  @[Extern]
+  struct DDGAMMARAMP
+    property red : UInt16[256]
+    property green : UInt16[256]
+    property blue : UInt16[256]
+    def initialize(@red : UInt16[256], @green : UInt16[256], @blue : UInt16[256])
+    end
+  end
+
+  @[Extern]
+  struct DDDEVICEIDENTIFIER
+    property szDriver : Win32cr::Foundation::CHAR[512]
+    property szDescription : Win32cr::Foundation::CHAR[512]
+    property liDriverVersion : Win32cr::Foundation::LARGE_INTEGER
+    property dwVendorId : UInt32
+    property dwDeviceId : UInt32
+    property dwSubSysId : UInt32
+    property dwRevision : UInt32
+    property guidDeviceIdentifier : LibC::GUID
+    def initialize(@szDriver : Win32cr::Foundation::CHAR[512], @szDescription : Win32cr::Foundation::CHAR[512], @liDriverVersion : Win32cr::Foundation::LARGE_INTEGER, @dwVendorId : UInt32, @dwDeviceId : UInt32, @dwSubSysId : UInt32, @dwRevision : UInt32, @guidDeviceIdentifier : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct DDDEVICEIDENTIFIER2
+    property szDriver : Win32cr::Foundation::CHAR[512]
+    property szDescription : Win32cr::Foundation::CHAR[512]
+    property liDriverVersion : Win32cr::Foundation::LARGE_INTEGER
+    property dwVendorId : UInt32
+    property dwDeviceId : UInt32
+    property dwSubSysId : UInt32
+    property dwRevision : UInt32
+    property guidDeviceIdentifier : LibC::GUID
+    property dwWHQLLevel : UInt32
+    def initialize(@szDriver : Win32cr::Foundation::CHAR[512], @szDescription : Win32cr::Foundation::CHAR[512], @liDriverVersion : Win32cr::Foundation::LARGE_INTEGER, @dwVendorId : UInt32, @dwDeviceId : UInt32, @dwSubSysId : UInt32, @dwRevision : UInt32, @guidDeviceIdentifier : LibC::GUID, @dwWHQLLevel : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DDSURFACEDESC
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwHeight : UInt32
+    property dwWidth : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property dwBackBufferCount : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property dwAlphaBitDepth : UInt32
+    property dwReserved : UInt32
+    property lpSurface : Void*
+    property ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddpfPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property dwMipMapCount : UInt32
+    property dwZBufferBitDepth : UInt32
+    property dwRefreshRate : UInt32
+    def initialize(@dwMipMapCount : UInt32, @dwZBufferBitDepth : UInt32, @dwRefreshRate : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property lPitch : Int32
+    property dwLinearSize : UInt32
+    def initialize(@lPitch : Int32, @dwLinearSize : UInt32)
+    end
+    end
+
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwHeight : UInt32, @dwWidth : UInt32, @anonymous1 : Anonymous1_e__Union_, @dwBackBufferCount : UInt32, @anonymous2 : Anonymous2_e__Union_, @dwAlphaBitDepth : UInt32, @dwReserved : UInt32, @lpSurface : Void*, @ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddpfPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS)
+    end
+  end
+
+  @[Extern]
+  struct DDSURFACEDESC2
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwHeight : UInt32
+    property dwWidth : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property anonymous3 : Anonymous3_e__Union_
+    property dwAlphaBitDepth : UInt32
+    property dwReserved : UInt32
+    property lpSurface : Void*
+    property anonymous4 : Anonymous4_e__Union_
+    property ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property anonymous5 : Anonymous5_e__Union_
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2
+    property dwTextureStage : UInt32
+
+    # Nested Type Anonymous4_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous4_e__Union_
+    property ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property dwEmptyFaceColor : UInt32
+    def initialize(@ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @dwEmptyFaceColor : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property dwBackBufferCount : UInt32
+    property dwDepth : UInt32
+    def initialize(@dwBackBufferCount : UInt32, @dwDepth : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous3_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous3_e__Union_
+    property dwMipMapCount : UInt32
+    property dwRefreshRate : UInt32
+    property dwSrcVBHandle : UInt32
+    def initialize(@dwMipMapCount : UInt32, @dwRefreshRate : UInt32, @dwSrcVBHandle : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property lPitch : Int32
+    property dwLinearSize : UInt32
+    def initialize(@lPitch : Int32, @dwLinearSize : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous5_e__Union_
     @[Extern(union: true)]
-    record Anonymous5_e__Union_,
-      ddpfPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT,
-      dwFVF : UInt32
+    struct Anonymous5_e__Union_
+    property ddpfPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property dwFVF : UInt32
+    def initialize(@ddpfPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @dwFVF : UInt32)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwHeight : UInt32, @dwWidth : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_, @dwAlphaBitDepth : UInt32, @dwReserved : UInt32, @lpSurface : Void*, @anonymous4 : Anonymous4_e__Union_, @ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @anonymous5 : Anonymous5_e__Union_, @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2, @dwTextureStage : UInt32)
+    end
   end
 
   @[Extern]
-  record DDOPTSURFACEDESC,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    ddSCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2,
-    ddOSCaps : Win32cr::Graphics::DirectDraw::DDOSCAPS,
-    guid : LibC::GUID,
-    dwCompressionRatio : UInt32
+  struct DDOPTSURFACEDESC
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property ddSCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2
+    property ddOSCaps : Win32cr::Graphics::DirectDraw::DDOSCAPS
+    property guid : LibC::GUID
+    property dwCompressionRatio : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @ddSCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2, @ddOSCaps : Win32cr::Graphics::DirectDraw::DDOSCAPS, @guid : LibC::GUID, @dwCompressionRatio : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDCOLORCONTROL,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    lBrightness : Int32,
-    lContrast : Int32,
-    lHue : Int32,
-    lSaturation : Int32,
-    lSharpness : Int32,
-    lGamma : Int32,
-    lColorEnable : Int32,
-    dwReserved1 : UInt32
+  struct DDCOLORCONTROL
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property lBrightness : Int32
+    property lContrast : Int32
+    property lHue : Int32
+    property lSaturation : Int32
+    property lSharpness : Int32
+    property lGamma : Int32
+    property lColorEnable : Int32
+    property dwReserved1 : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @lBrightness : Int32, @lContrast : Int32, @lHue : Int32, @lSaturation : Int32, @lSharpness : Int32, @lGamma : Int32, @lColorEnable : Int32, @dwReserved1 : UInt32)
+    end
+  end
 
   @[Extern]
-  record IDDVideoPortContainerVtbl
-  @[Extern]
-  record IDirectDrawVideoPortVtbl
-  @[Extern]
-  record IDirectDrawVideoPortNotifyVtbl
-  @[Extern]
-  record DDVIDEOPORTCONNECT,
-    dwSize : UInt32,
-    dwPortWidth : UInt32,
-    guidTypeID : LibC::GUID,
-    dwFlags : UInt32,
-    dwReserved1 : LibC::UIntPtrT
+  struct IDDVideoPortContainerVtbl
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record DDVIDEOPORTCAPS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwMaxWidth : UInt32,
-    dwMaxVBIWidth : UInt32,
-    dwMaxHeight : UInt32,
-    dwVideoPortID : UInt32,
-    dwCaps : UInt32,
-    dwFX : UInt32,
-    dwNumAutoFlipSurfaces : UInt32,
-    dwAlignVideoPortBoundary : UInt32,
-    dwAlignVideoPortPrescaleWidth : UInt32,
-    dwAlignVideoPortCropBoundary : UInt32,
-    dwAlignVideoPortCropWidth : UInt32,
-    dwPreshrinkXStep : UInt32,
-    dwPreshrinkYStep : UInt32,
-    dwNumVBIAutoFlipSurfaces : UInt32,
-    dwNumPreferredAutoflip : UInt32,
-    wNumFilterTapsX : UInt16,
-    wNumFilterTapsY : UInt16
+  struct IDirectDrawVideoPortVtbl
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record DDVIDEOPORTDESC,
-    dwSize : UInt32,
-    dwFieldWidth : UInt32,
-    dwVBIWidth : UInt32,
-    dwFieldHeight : UInt32,
-    dwMicrosecondsPerField : UInt32,
-    dwMaxPixelsPerSecond : UInt32,
-    dwVideoPortID : UInt32,
-    dwReserved1 : UInt32,
-    video_port_type : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCONNECT,
-    dwReserved2 : LibC::UIntPtrT,
-    dwReserved3 : LibC::UIntPtrT
+  struct IDirectDrawVideoPortNotifyVtbl
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record DDVIDEOPORTINFO,
-    dwSize : UInt32,
-    dwOriginX : UInt32,
-    dwOriginY : UInt32,
-    dwVPFlags : UInt32,
-    rCrop : Win32cr::Foundation::RECT,
-    dwPrescaleWidth : UInt32,
-    dwPrescaleHeight : UInt32,
-    lpddpfInputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    lpddpfVBIInputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    lpddpfVBIOutputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    dwVBIHeight : UInt32,
-    dwReserved1 : LibC::UIntPtrT,
-    dwReserved2 : LibC::UIntPtrT
+  struct DDVIDEOPORTCONNECT
+    property dwSize : UInt32
+    property dwPortWidth : UInt32
+    property guidTypeID : LibC::GUID
+    property dwFlags : UInt32
+    property dwReserved1 : LibC::UIntPtrT
+    def initialize(@dwSize : UInt32, @dwPortWidth : UInt32, @guidTypeID : LibC::GUID, @dwFlags : UInt32, @dwReserved1 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DDVIDEOPORTBANDWIDTH,
-    dwSize : UInt32,
-    dwCaps : UInt32,
-    dwOverlay : UInt32,
-    dwColorkey : UInt32,
-    dwYInterpolate : UInt32,
-    dwYInterpAndColorkey : UInt32,
-    dwReserved1 : LibC::UIntPtrT,
-    dwReserved2 : LibC::UIntPtrT
+  struct DDVIDEOPORTCAPS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwMaxWidth : UInt32
+    property dwMaxVBIWidth : UInt32
+    property dwMaxHeight : UInt32
+    property dwVideoPortID : UInt32
+    property dwCaps : UInt32
+    property dwFX : UInt32
+    property dwNumAutoFlipSurfaces : UInt32
+    property dwAlignVideoPortBoundary : UInt32
+    property dwAlignVideoPortPrescaleWidth : UInt32
+    property dwAlignVideoPortCropBoundary : UInt32
+    property dwAlignVideoPortCropWidth : UInt32
+    property dwPreshrinkXStep : UInt32
+    property dwPreshrinkYStep : UInt32
+    property dwNumVBIAutoFlipSurfaces : UInt32
+    property dwNumPreferredAutoflip : UInt32
+    property wNumFilterTapsX : UInt16
+    property wNumFilterTapsY : UInt16
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwMaxWidth : UInt32, @dwMaxVBIWidth : UInt32, @dwMaxHeight : UInt32, @dwVideoPortID : UInt32, @dwCaps : UInt32, @dwFX : UInt32, @dwNumAutoFlipSurfaces : UInt32, @dwAlignVideoPortBoundary : UInt32, @dwAlignVideoPortPrescaleWidth : UInt32, @dwAlignVideoPortCropBoundary : UInt32, @dwAlignVideoPortCropWidth : UInt32, @dwPreshrinkXStep : UInt32, @dwPreshrinkYStep : UInt32, @dwNumVBIAutoFlipSurfaces : UInt32, @dwNumPreferredAutoflip : UInt32, @wNumFilterTapsX : UInt16, @wNumFilterTapsY : UInt16)
+    end
+  end
 
   @[Extern]
-  record DDVIDEOPORTSTATUS,
-    dwSize : UInt32,
-    bInUse : Win32cr::Foundation::BOOL,
-    dwFlags : UInt32,
-    dwReserved1 : UInt32,
-    video_port_type : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCONNECT,
-    dwReserved2 : LibC::UIntPtrT,
-    dwReserved3 : LibC::UIntPtrT
+  struct DDVIDEOPORTDESC
+    property dwSize : UInt32
+    property dwFieldWidth : UInt32
+    property dwVBIWidth : UInt32
+    property dwFieldHeight : UInt32
+    property dwMicrosecondsPerField : UInt32
+    property dwMaxPixelsPerSecond : UInt32
+    property dwVideoPortID : UInt32
+    property dwReserved1 : UInt32
+    property video_port_type : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCONNECT
+    property dwReserved2 : LibC::UIntPtrT
+    property dwReserved3 : LibC::UIntPtrT
+    def initialize(@dwSize : UInt32, @dwFieldWidth : UInt32, @dwVBIWidth : UInt32, @dwFieldHeight : UInt32, @dwMicrosecondsPerField : UInt32, @dwMaxPixelsPerSecond : UInt32, @dwVideoPortID : UInt32, @dwReserved1 : UInt32, @video_port_type : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCONNECT, @dwReserved2 : LibC::UIntPtrT, @dwReserved3 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DDVIDEOPORTNOTIFY,
-    approximate_time_stamp : Win32cr::Foundation::LARGE_INTEGER,
-    lField : Int32,
-    dwSurfaceIndex : UInt32,
-    lDone : Int32
+  struct DDVIDEOPORTINFO
+    property dwSize : UInt32
+    property dwOriginX : UInt32
+    property dwOriginY : UInt32
+    property dwVPFlags : UInt32
+    property rCrop : Win32cr::Foundation::RECT
+    property dwPrescaleWidth : UInt32
+    property dwPrescaleHeight : UInt32
+    property lpddpfInputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property lpddpfVBIInputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property lpddpfVBIOutputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property dwVBIHeight : UInt32
+    property dwReserved1 : LibC::UIntPtrT
+    property dwReserved2 : LibC::UIntPtrT
+    def initialize(@dwSize : UInt32, @dwOriginX : UInt32, @dwOriginY : UInt32, @dwVPFlags : UInt32, @rCrop : Win32cr::Foundation::RECT, @dwPrescaleWidth : UInt32, @dwPrescaleHeight : UInt32, @lpddpfInputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @lpddpfVBIInputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @lpddpfVBIOutputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @dwVBIHeight : UInt32, @dwReserved1 : LibC::UIntPtrT, @dwReserved2 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DDKERNELCAPS,
-    dwSize : UInt32,
-    dwCaps : UInt32,
-    dwIRQCaps : UInt32
+  struct DDVIDEOPORTBANDWIDTH
+    property dwSize : UInt32
+    property dwCaps : UInt32
+    property dwOverlay : UInt32
+    property dwColorkey : UInt32
+    property dwYInterpolate : UInt32
+    property dwYInterpAndColorkey : UInt32
+    property dwReserved1 : LibC::UIntPtrT
+    property dwReserved2 : LibC::UIntPtrT
+    def initialize(@dwSize : UInt32, @dwCaps : UInt32, @dwOverlay : UInt32, @dwColorkey : UInt32, @dwYInterpolate : UInt32, @dwYInterpAndColorkey : UInt32, @dwReserved1 : LibC::UIntPtrT, @dwReserved2 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record SURFACEALIGNMENT,
-    anonymous : Anonymous_e__Union_ do
+  struct DDVIDEOPORTSTATUS
+    property dwSize : UInt32
+    property bInUse : Win32cr::Foundation::BOOL
+    property dwFlags : UInt32
+    property dwReserved1 : UInt32
+    property video_port_type : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCONNECT
+    property dwReserved2 : LibC::UIntPtrT
+    property dwReserved3 : LibC::UIntPtrT
+    def initialize(@dwSize : UInt32, @bInUse : Win32cr::Foundation::BOOL, @dwFlags : UInt32, @dwReserved1 : UInt32, @video_port_type : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCONNECT, @dwReserved2 : LibC::UIntPtrT, @dwReserved3 : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct DDVIDEOPORTNOTIFY
+    property approximate_time_stamp : Win32cr::Foundation::LARGE_INTEGER
+    property lField : Int32
+    property dwSurfaceIndex : UInt32
+    property lDone : Int32
+    def initialize(@approximate_time_stamp : Win32cr::Foundation::LARGE_INTEGER, @lField : Int32, @dwSurfaceIndex : UInt32, @lDone : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DDKERNELCAPS
+    property dwSize : UInt32
+    property dwCaps : UInt32
+    property dwIRQCaps : UInt32
+    def initialize(@dwSize : UInt32, @dwCaps : UInt32, @dwIRQCaps : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SURFACEALIGNMENT
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      linear : Linear_e__Struct_,
-      rectangular : Rectangular_e__Struct_ do
+    struct Anonymous_e__Union_
+    property linear : Linear_e__Struct_
+    property rectangular : Rectangular_e__Struct_
 
       # Nested Type Linear_e__Struct_
       @[Extern]
-      record Linear_e__Struct_,
-        dwStartAlignment : UInt32,
-        dwPitchAlignment : UInt32,
-        dwFlags : UInt32,
-        dwReserved2 : UInt32
+      struct Linear_e__Struct_
+    property dwStartAlignment : UInt32
+    property dwPitchAlignment : UInt32
+    property dwFlags : UInt32
+    property dwReserved2 : UInt32
+    def initialize(@dwStartAlignment : UInt32, @dwPitchAlignment : UInt32, @dwFlags : UInt32, @dwReserved2 : UInt32)
+    end
+      end
 
 
       # Nested Type Rectangular_e__Struct_
       @[Extern]
-      record Rectangular_e__Struct_,
-        dwXAlignment : UInt32,
-        dwYAlignment : UInt32,
-        dwFlags : UInt32,
-        dwReserved2 : UInt32
+      struct Rectangular_e__Struct_
+    property dwXAlignment : UInt32
+    property dwYAlignment : UInt32
+    property dwFlags : UInt32
+    property dwReserved2 : UInt32
+    def initialize(@dwXAlignment : UInt32, @dwYAlignment : UInt32, @dwFlags : UInt32, @dwReserved2 : UInt32)
+    end
+      end
 
+    def initialize(@linear : Linear_e__Struct_, @rectangular : Rectangular_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record HEAPALIGNMENT,
-    dwSize : UInt32,
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    dwReserved : UInt32,
-    execute_buffer : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT,
-    overlay : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT,
-    texture : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT,
-    z_buffer : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT,
-    alpha_buffer : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT,
-    offscreen : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT,
-    flip_target : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT
+  struct HEAPALIGNMENT
+    property dwSize : UInt32
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property dwReserved : UInt32
+    property execute_buffer : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT
+    property overlay : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT
+    property texture : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT
+    property z_buffer : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT
+    property alpha_buffer : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT
+    property offscreen : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT
+    property flip_target : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT
+    def initialize(@dwSize : UInt32, @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS, @dwReserved : UInt32, @execute_buffer : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT, @overlay : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT, @texture : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT, @z_buffer : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT, @alpha_buffer : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT, @offscreen : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT, @flip_target : Win32cr::Graphics::DirectDraw::SURFACEALIGNMENT)
+    end
+  end
 
   @[Extern]
-  record DD_GETHEAPALIGNMENTDATA,
-    dwInstance : LibC::UIntPtrT,
-    dwHeap : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_heap_alignment : Void*,
-    alignment : Win32cr::Graphics::DirectDraw::HEAPALIGNMENT
+  struct DD_GETHEAPALIGNMENTDATA
+    property dwInstance : LibC::UIntPtrT
+    property dwHeap : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_heap_alignment : Void*
+    property alignment : Win32cr::Graphics::DirectDraw::HEAPALIGNMENT
+    def initialize(@dwInstance : LibC::UIntPtrT, @dwHeap : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_heap_alignment : Void*, @alignment : Win32cr::Graphics::DirectDraw::HEAPALIGNMENT)
+    end
+  end
 
   @[Extern]
-  record VMEML,
-    next__ : Win32cr::Graphics::DirectDraw::VMEML*,
-    ptr : LibC::UIntPtrT,
-    size : UInt32,
-    bDiscardable : Win32cr::Foundation::BOOL
+  struct VMEML
+    property next__ : Win32cr::Graphics::DirectDraw::VMEML*
+    property ptr : LibC::UIntPtrT
+    property size : UInt32
+    property bDiscardable : Win32cr::Foundation::BOOL
+    def initialize(@next__ : Win32cr::Graphics::DirectDraw::VMEML*, @ptr : LibC::UIntPtrT, @size : UInt32, @bDiscardable : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record VMEMR,
-    next__ : Win32cr::Graphics::DirectDraw::VMEMR*,
-    prev : Win32cr::Graphics::DirectDraw::VMEMR*,
-    pUp : Win32cr::Graphics::DirectDraw::VMEMR*,
-    pDown : Win32cr::Graphics::DirectDraw::VMEMR*,
-    pLeft : Win32cr::Graphics::DirectDraw::VMEMR*,
-    pRight : Win32cr::Graphics::DirectDraw::VMEMR*,
-    ptr : LibC::UIntPtrT,
-    size : UInt32,
-    x : UInt32,
-    y : UInt32,
-    cx : UInt32,
-    cy : UInt32,
-    flags : UInt32,
-    pBits : LibC::UIntPtrT,
-    bDiscardable : Win32cr::Foundation::BOOL
+  struct VMEMR
+    property next__ : Win32cr::Graphics::DirectDraw::VMEMR*
+    property prev : Win32cr::Graphics::DirectDraw::VMEMR*
+    property pUp : Win32cr::Graphics::DirectDraw::VMEMR*
+    property pDown : Win32cr::Graphics::DirectDraw::VMEMR*
+    property pLeft : Win32cr::Graphics::DirectDraw::VMEMR*
+    property pRight : Win32cr::Graphics::DirectDraw::VMEMR*
+    property ptr : LibC::UIntPtrT
+    property size : UInt32
+    property x : UInt32
+    property y : UInt32
+    property cx : UInt32
+    property cy : UInt32
+    property flags : UInt32
+    property pBits : LibC::UIntPtrT
+    property bDiscardable : Win32cr::Foundation::BOOL
+    def initialize(@next__ : Win32cr::Graphics::DirectDraw::VMEMR*, @prev : Win32cr::Graphics::DirectDraw::VMEMR*, @pUp : Win32cr::Graphics::DirectDraw::VMEMR*, @pDown : Win32cr::Graphics::DirectDraw::VMEMR*, @pLeft : Win32cr::Graphics::DirectDraw::VMEMR*, @pRight : Win32cr::Graphics::DirectDraw::VMEMR*, @ptr : LibC::UIntPtrT, @size : UInt32, @x : UInt32, @y : UInt32, @cx : UInt32, @cy : UInt32, @flags : UInt32, @pBits : LibC::UIntPtrT, @bDiscardable : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record VMEMHEAP,
-    dwFlags : UInt32,
-    stride : UInt32,
-    freeList : Void*,
-    allocList : Void*,
-    dwTotalSize : UInt32,
-    fpGARTLin : LibC::UIntPtrT,
-    fpGARTDev : LibC::UIntPtrT,
-    dwCommitedSize : UInt32,
-    dwCoalesceCount : UInt32,
-    alignment : Win32cr::Graphics::DirectDraw::HEAPALIGNMENT,
-    ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX,
-    ddsCapsExAlt : Win32cr::Graphics::DirectDraw::DDSCAPSEX,
-    liPhysAGPBase : Win32cr::Foundation::LARGE_INTEGER,
-    hdevAGP : Win32cr::Foundation::HANDLE,
-    pvPhysRsrv : Void*,
-    pAgpCommitMask : UInt8*,
-    dwAgpCommitMaskSize : UInt32
+  struct VMEMHEAP
+    property dwFlags : UInt32
+    property stride : UInt32
+    property freeList : Void*
+    property allocList : Void*
+    property dwTotalSize : UInt32
+    property fpGARTLin : LibC::UIntPtrT
+    property fpGARTDev : LibC::UIntPtrT
+    property dwCommitedSize : UInt32
+    property dwCoalesceCount : UInt32
+    property alignment : Win32cr::Graphics::DirectDraw::HEAPALIGNMENT
+    property ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    property ddsCapsExAlt : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    property liPhysAGPBase : Win32cr::Foundation::LARGE_INTEGER
+    property hdevAGP : Win32cr::Foundation::HANDLE
+    property pvPhysRsrv : Void*
+    property pAgpCommitMask : UInt8*
+    property dwAgpCommitMaskSize : UInt32
+    def initialize(@dwFlags : UInt32, @stride : UInt32, @freeList : Void*, @allocList : Void*, @dwTotalSize : UInt32, @fpGARTLin : LibC::UIntPtrT, @fpGARTDev : LibC::UIntPtrT, @dwCommitedSize : UInt32, @dwCoalesceCount : UInt32, @alignment : Win32cr::Graphics::DirectDraw::HEAPALIGNMENT, @ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @ddsCapsExAlt : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @liPhysAGPBase : Win32cr::Foundation::LARGE_INTEGER, @hdevAGP : Win32cr::Foundation::HANDLE, @pvPhysRsrv : Void*, @pAgpCommitMask : UInt8*, @dwAgpCommitMaskSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record PROCESS_LIST,
-    lpLink : Win32cr::Graphics::DirectDraw::PROCESS_LIST*,
-    dwProcessId : UInt32,
-    dwRefCnt : UInt32,
-    dwAlphaDepth : UInt32,
-    dwZDepth : UInt32
+  struct PROCESS_LIST
+    property lpLink : Win32cr::Graphics::DirectDraw::PROCESS_LIST*
+    property dwProcessId : UInt32
+    property dwRefCnt : UInt32
+    property dwAlphaDepth : UInt32
+    property dwZDepth : UInt32
+    def initialize(@lpLink : Win32cr::Graphics::DirectDraw::PROCESS_LIST*, @dwProcessId : UInt32, @dwRefCnt : UInt32, @dwAlphaDepth : UInt32, @dwZDepth : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDMONITORINFO,
-    manufacturer : UInt16,
-    product : UInt16,
-    serial_number : UInt32,
-    device_identifier : LibC::GUID,
-    mode640x480 : Int32,
-    mode800x600 : Int32,
-    mode1024x768 : Int32,
-    mode1280x1024 : Int32,
-    mode1600x1200 : Int32,
-    mode_reserved1 : Int32,
-    mode_reserved2 : Int32,
-    mode_reserved3 : Int32
+  struct DDMONITORINFO
+    property manufacturer : UInt16
+    property product : UInt16
+    property serial_number : UInt32
+    property device_identifier : LibC::GUID
+    property mode640x480 : Int32
+    property mode800x600 : Int32
+    property mode1024x768 : Int32
+    property mode1280x1024 : Int32
+    property mode1600x1200 : Int32
+    property mode_reserved1 : Int32
+    property mode_reserved2 : Int32
+    property mode_reserved3 : Int32
+    def initialize(@manufacturer : UInt16, @product : UInt16, @serial_number : UInt32, @device_identifier : LibC::GUID, @mode640x480 : Int32, @mode800x600 : Int32, @mode1024x768 : Int32, @mode1280x1024 : Int32, @mode1600x1200 : Int32, @mode_reserved1 : Int32, @mode_reserved2 : Int32, @mode_reserved3 : Int32)
+    end
+  end
 
   @[Extern]
-  record IDirectDrawClipperVtbl
-  @[Extern]
-  record IDirectDrawPaletteVtbl
-  @[Extern]
-  record IDirectDrawSurfaceVtbl
-  @[Extern]
-  record IDirectDrawSurface2Vtbl
-  @[Extern]
-  record IDirectDrawSurface3Vtbl
-  @[Extern]
-  record IDirectDrawSurface4Vtbl
-  @[Extern]
-  record IDirectDrawSurface7Vtbl
-  @[Extern]
-  record IDirectDrawColorControlVtbl
-  @[Extern]
-  record IDirectDrawVtbl
-  @[Extern]
-  record IDirectDraw2Vtbl
-  @[Extern]
-  record IDirectDraw4Vtbl
-  @[Extern]
-  record IDirectDraw7Vtbl
-  @[Extern]
-  record IDirectDrawKernelVtbl
-  @[Extern]
-  record IDirectDrawSurfaceKernelVtbl
-  @[Extern]
-  record IDirectDrawGammaControlVtbl
-  @[Extern]
-  record DD32BITDRIVERDATA,
-    szName : Win32cr::Foundation::CHAR[260],
-    szEntryPoint : Win32cr::Foundation::CHAR[64],
-    dwContext : UInt32
+  struct IDirectDrawClipperVtbl
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record DDVERSIONDATA,
-    dwHALVersion : UInt32,
-    dwReserved1 : LibC::UIntPtrT,
-    dwReserved2 : LibC::UIntPtrT
+  struct IDirectDrawPaletteVtbl
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record VIDMEM,
-    dwFlags : UInt32,
-    fpStart : LibC::UIntPtrT,
-    anonymous1 : Anonymous1_e__Union_,
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    ddsCapsAlt : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct IDirectDrawSurfaceVtbl
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IDirectDrawSurface2Vtbl
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IDirectDrawSurface3Vtbl
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IDirectDrawSurface4Vtbl
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IDirectDrawSurface7Vtbl
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IDirectDrawColorControlVtbl
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IDirectDrawVtbl
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IDirectDraw2Vtbl
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IDirectDraw4Vtbl
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IDirectDraw7Vtbl
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IDirectDrawKernelVtbl
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IDirectDrawSurfaceKernelVtbl
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IDirectDrawGammaControlVtbl
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct DD32BITDRIVERDATA
+    property szName : Win32cr::Foundation::CHAR[260]
+    property szEntryPoint : Win32cr::Foundation::CHAR[64]
+    property dwContext : UInt32
+    def initialize(@szName : Win32cr::Foundation::CHAR[260], @szEntryPoint : Win32cr::Foundation::CHAR[64], @dwContext : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DDVERSIONDATA
+    property dwHALVersion : UInt32
+    property dwReserved1 : LibC::UIntPtrT
+    property dwReserved2 : LibC::UIntPtrT
+    def initialize(@dwHALVersion : UInt32, @dwReserved1 : LibC::UIntPtrT, @dwReserved2 : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct VIDMEM
+    property dwFlags : UInt32
+    property fpStart : LibC::UIntPtrT
+    property anonymous1 : Anonymous1_e__Union_
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property ddsCapsAlt : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      fpEnd : LibC::UIntPtrT,
-      dwWidth : UInt32
+    struct Anonymous1_e__Union_
+    property fpEnd : LibC::UIntPtrT
+    property dwWidth : UInt32
+    def initialize(@fpEnd : LibC::UIntPtrT, @dwWidth : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      lpHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*,
-      dwHeight : UInt32
+    struct Anonymous2_e__Union_
+    property lpHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*
+    property dwHeight : UInt32
+    def initialize(@lpHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*, @dwHeight : UInt32)
+    end
+    end
 
+    def initialize(@dwFlags : UInt32, @fpStart : LibC::UIntPtrT, @anonymous1 : Anonymous1_e__Union_, @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS, @ddsCapsAlt : Win32cr::Graphics::DirectDraw::DDSCAPS, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record VIDMEMINFO,
-    fpPrimary : LibC::UIntPtrT,
-    dwFlags : UInt32,
-    dwDisplayWidth : UInt32,
-    dwDisplayHeight : UInt32,
-    lDisplayPitch : Int32,
-    ddpfDisplay : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT,
-    dwOffscreenAlign : UInt32,
-    dwOverlayAlign : UInt32,
-    dwTextureAlign : UInt32,
-    dwZBufferAlign : UInt32,
-    dwAlphaAlign : UInt32,
-    dwNumHeaps : UInt32,
-    pvmList : Win32cr::Graphics::DirectDraw::VIDMEM*
+  struct VIDMEMINFO
+    property fpPrimary : LibC::UIntPtrT
+    property dwFlags : UInt32
+    property dwDisplayWidth : UInt32
+    property dwDisplayHeight : UInt32
+    property lDisplayPitch : Int32
+    property ddpfDisplay : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property dwOffscreenAlign : UInt32
+    property dwOverlayAlign : UInt32
+    property dwTextureAlign : UInt32
+    property dwZBufferAlign : UInt32
+    property dwAlphaAlign : UInt32
+    property dwNumHeaps : UInt32
+    property pvmList : Win32cr::Graphics::DirectDraw::VIDMEM*
+    def initialize(@fpPrimary : LibC::UIntPtrT, @dwFlags : UInt32, @dwDisplayWidth : UInt32, @dwDisplayHeight : UInt32, @lDisplayPitch : Int32, @ddpfDisplay : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @dwOffscreenAlign : UInt32, @dwOverlayAlign : UInt32, @dwTextureAlign : UInt32, @dwZBufferAlign : UInt32, @dwAlphaAlign : UInt32, @dwNumHeaps : UInt32, @pvmList : Win32cr::Graphics::DirectDraw::VIDMEM*)
+    end
+  end
 
   @[Extern]
-  record HEAPALIAS,
-    fpVidMem : LibC::UIntPtrT,
-    lpAlias : Void*,
-    dwAliasSize : UInt32
+  struct HEAPALIAS
+    property fpVidMem : LibC::UIntPtrT
+    property lpAlias : Void*
+    property dwAliasSize : UInt32
+    def initialize(@fpVidMem : LibC::UIntPtrT, @lpAlias : Void*, @dwAliasSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record HEAPALIASINFO,
-    dwRefCnt : UInt32,
-    dwFlags : UInt32,
-    dwNumHeaps : UInt32,
-    lpAliases : Win32cr::Graphics::DirectDraw::HEAPALIAS*
+  struct HEAPALIASINFO
+    property dwRefCnt : UInt32
+    property dwFlags : UInt32
+    property dwNumHeaps : UInt32
+    property lpAliases : Win32cr::Graphics::DirectDraw::HEAPALIAS*
+    def initialize(@dwRefCnt : UInt32, @dwFlags : UInt32, @dwNumHeaps : UInt32, @lpAliases : Win32cr::Graphics::DirectDraw::HEAPALIAS*)
+    end
+  end
 
   @[Extern]
-  record IUNKNOWN_LIST,
-    lpLink : Win32cr::Graphics::DirectDraw::IUNKNOWN_LIST*,
-    lpGuid : LibC::GUID*,
-    lpIUnknown : Void*
+  struct IUNKNOWN_LIST
+    property lpLink : Win32cr::Graphics::DirectDraw::IUNKNOWN_LIST*
+    property lpGuid : LibC::GUID*
+    property lpIUnknown : Void*
+    def initialize(@lpLink : Win32cr::Graphics::DirectDraw::IUNKNOWN_LIST*, @lpGuid : LibC::GUID*, @lpIUnknown : Void*)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DDCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    destroy_driver : Win32cr::Graphics::DirectDraw::LPDDHAL_DESTROYDRIVER,
-    create_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATESURFACE,
-    set_color_key : Win32cr::Graphics::DirectDraw::LPDDHAL_SETCOLORKEY,
-    set_mode : Win32cr::Graphics::DirectDraw::LPDDHAL_SETMODE,
-    wait_for_vertical_blank : Win32cr::Graphics::DirectDraw::LPDDHAL_WAITFORVERTICALBLANK,
-    can_create_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_CANCREATESURFACE,
-    create_palette : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATEPALETTE,
-    get_scan_line : Win32cr::Graphics::DirectDraw::LPDDHAL_GETSCANLINE,
-    set_exclusive_mode : Win32cr::Graphics::DirectDraw::LPDDHAL_SETEXCLUSIVEMODE,
-    flip_to_gdi_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_FLIPTOGDISURFACE
+  struct DDHAL_DDCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property destroy_driver : Win32cr::Graphics::DirectDraw::LPDDHAL_DESTROYDRIVER
+    property create_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATESURFACE
+    property set_color_key : Win32cr::Graphics::DirectDraw::LPDDHAL_SETCOLORKEY
+    property set_mode : Win32cr::Graphics::DirectDraw::LPDDHAL_SETMODE
+    property wait_for_vertical_blank : Win32cr::Graphics::DirectDraw::LPDDHAL_WAITFORVERTICALBLANK
+    property can_create_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_CANCREATESURFACE
+    property create_palette : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATEPALETTE
+    property get_scan_line : Win32cr::Graphics::DirectDraw::LPDDHAL_GETSCANLINE
+    property set_exclusive_mode : Win32cr::Graphics::DirectDraw::LPDDHAL_SETEXCLUSIVEMODE
+    property flip_to_gdi_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_FLIPTOGDISURFACE
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @destroy_driver : Win32cr::Graphics::DirectDraw::LPDDHAL_DESTROYDRIVER, @create_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATESURFACE, @set_color_key : Win32cr::Graphics::DirectDraw::LPDDHAL_SETCOLORKEY, @set_mode : Win32cr::Graphics::DirectDraw::LPDDHAL_SETMODE, @wait_for_vertical_blank : Win32cr::Graphics::DirectDraw::LPDDHAL_WAITFORVERTICALBLANK, @can_create_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_CANCREATESURFACE, @create_palette : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATEPALETTE, @get_scan_line : Win32cr::Graphics::DirectDraw::LPDDHAL_GETSCANLINE, @set_exclusive_mode : Win32cr::Graphics::DirectDraw::LPDDHAL_SETEXCLUSIVEMODE, @flip_to_gdi_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_FLIPTOGDISURFACE)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DDPALETTECALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    destroy_palette : Win32cr::Graphics::DirectDraw::LPDDHALPALCB_DESTROYPALETTE,
-    set_entries : Win32cr::Graphics::DirectDraw::LPDDHALPALCB_SETENTRIES
+  struct DDHAL_DDPALETTECALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property destroy_palette : Win32cr::Graphics::DirectDraw::LPDDHALPALCB_DESTROYPALETTE
+    property set_entries : Win32cr::Graphics::DirectDraw::LPDDHALPALCB_SETENTRIES
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @destroy_palette : Win32cr::Graphics::DirectDraw::LPDDHALPALCB_DESTROYPALETTE, @set_entries : Win32cr::Graphics::DirectDraw::LPDDHALPALCB_SETENTRIES)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DDSURFACECALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    destroy_surface : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_DESTROYSURFACE,
-    flip : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_FLIP,
-    set_clip_list : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETCLIPLIST,
-    lock : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_LOCK,
-    unlock : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_UNLOCK,
-    blt : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_BLT,
-    set_color_key : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETCOLORKEY,
-    add_attached_surface : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_ADDATTACHEDSURFACE,
-    get_blt_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETBLTSTATUS,
-    get_flip_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETFLIPSTATUS,
-    update_overlay : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_UPDATEOVERLAY,
-    set_overlay_position : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETOVERLAYPOSITION,
-    reserved4 : Void*,
-    set_palette : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETPALETTE
+  struct DDHAL_DDSURFACECALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property destroy_surface : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_DESTROYSURFACE
+    property flip : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_FLIP
+    property set_clip_list : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETCLIPLIST
+    property lock : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_LOCK
+    property unlock : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_UNLOCK
+    property blt : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_BLT
+    property set_color_key : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETCOLORKEY
+    property add_attached_surface : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_ADDATTACHEDSURFACE
+    property get_blt_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETBLTSTATUS
+    property get_flip_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETFLIPSTATUS
+    property update_overlay : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_UPDATEOVERLAY
+    property set_overlay_position : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETOVERLAYPOSITION
+    property reserved4 : Void*
+    property set_palette : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETPALETTE
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @destroy_surface : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_DESTROYSURFACE, @flip : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_FLIP, @set_clip_list : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETCLIPLIST, @lock : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_LOCK, @unlock : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_UNLOCK, @blt : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_BLT, @set_color_key : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETCOLORKEY, @add_attached_surface : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_ADDATTACHEDSURFACE, @get_blt_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETBLTSTATUS, @get_flip_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETFLIPSTATUS, @update_overlay : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_UPDATEOVERLAY, @set_overlay_position : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETOVERLAYPOSITION, @reserved4 : Void*, @set_palette : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETPALETTE)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DDMISCELLANEOUSCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    get_avail_driver_memory : Win32cr::Graphics::DirectDraw::LPDDHAL_GETAVAILDRIVERMEMORY,
-    update_non_local_heap : Win32cr::Graphics::DirectDraw::LPDDHAL_UPDATENONLOCALHEAP,
-    get_heap_alignment : Win32cr::Graphics::DirectDraw::LPDDHAL_GETHEAPALIGNMENT,
-    get_sysmem_blt_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETBLTSTATUS
+  struct DDHAL_DDMISCELLANEOUSCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property get_avail_driver_memory : Win32cr::Graphics::DirectDraw::LPDDHAL_GETAVAILDRIVERMEMORY
+    property update_non_local_heap : Win32cr::Graphics::DirectDraw::LPDDHAL_UPDATENONLOCALHEAP
+    property get_heap_alignment : Win32cr::Graphics::DirectDraw::LPDDHAL_GETHEAPALIGNMENT
+    property get_sysmem_blt_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETBLTSTATUS
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @get_avail_driver_memory : Win32cr::Graphics::DirectDraw::LPDDHAL_GETAVAILDRIVERMEMORY, @update_non_local_heap : Win32cr::Graphics::DirectDraw::LPDDHAL_UPDATENONLOCALHEAP, @get_heap_alignment : Win32cr::Graphics::DirectDraw::LPDDHAL_GETHEAPALIGNMENT, @get_sysmem_blt_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETBLTSTATUS)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DDMISCELLANEOUS2CALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    reserved : Void*,
-    create_surface_ex : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATESURFACEEX,
-    get_driver_state : Win32cr::Graphics::DirectDraw::LPDDHAL_GETDRIVERSTATE,
-    destroy_dd_local : Win32cr::Graphics::DirectDraw::LPDDHAL_DESTROYDDLOCAL
+  struct DDHAL_DDMISCELLANEOUS2CALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property reserved : Void*
+    property create_surface_ex : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATESURFACEEX
+    property get_driver_state : Win32cr::Graphics::DirectDraw::LPDDHAL_GETDRIVERSTATE
+    property destroy_dd_local : Win32cr::Graphics::DirectDraw::LPDDHAL_DESTROYDDLOCAL
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @reserved : Void*, @create_surface_ex : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATESURFACEEX, @get_driver_state : Win32cr::Graphics::DirectDraw::LPDDHAL_GETDRIVERSTATE, @destroy_dd_local : Win32cr::Graphics::DirectDraw::LPDDHAL_DESTROYDDLOCAL)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DDEXEBUFCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    can_create_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_CANCREATEEXEBUF,
-    create_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_CREATEEXEBUF,
-    destroy_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_DESTROYEXEBUF,
-    lock_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_LOCKEXEBUF,
-    unlock_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_UNLOCKEXEBUF
+  struct DDHAL_DDEXEBUFCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property can_create_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_CANCREATEEXEBUF
+    property create_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_CREATEEXEBUF
+    property destroy_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_DESTROYEXEBUF
+    property lock_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_LOCKEXEBUF
+    property unlock_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_UNLOCKEXEBUF
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @can_create_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_CANCREATEEXEBUF, @create_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_CREATEEXEBUF, @destroy_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_DESTROYEXEBUF, @lock_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_LOCKEXEBUF, @unlock_execute_buffer : Win32cr::Graphics::DirectDraw::LPDDHALEXEBUFCB_UNLOCKEXEBUF)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DDVIDEOPORTCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    can_create_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_CANCREATEVIDEOPORT,
-    create_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_CREATEVIDEOPORT,
-    flip_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_FLIP,
-    get_video_port_bandwidth : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETBANDWIDTH,
-    get_video_port_input_formats : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETINPUTFORMATS,
-    get_video_port_output_formats : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETOUTPUTFORMATS,
-    lpReserved1 : Void*,
-    get_video_port_field : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETFIELD,
-    get_video_port_line : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETLINE,
-    get_video_port_connect_info : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETVPORTCONNECT,
-    destroy_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_DESTROYVPORT,
-    get_video_port_flip_status : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETFLIPSTATUS,
-    update_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_UPDATE,
-    wait_for_video_port_sync : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_WAITFORSYNC,
-    get_video_signal_status : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETSIGNALSTATUS,
-    color_control : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_COLORCONTROL
+  struct DDHAL_DDVIDEOPORTCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property can_create_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_CANCREATEVIDEOPORT
+    property create_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_CREATEVIDEOPORT
+    property flip_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_FLIP
+    property get_video_port_bandwidth : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETBANDWIDTH
+    property get_video_port_input_formats : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETINPUTFORMATS
+    property get_video_port_output_formats : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETOUTPUTFORMATS
+    property lpReserved1 : Void*
+    property get_video_port_field : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETFIELD
+    property get_video_port_line : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETLINE
+    property get_video_port_connect_info : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETVPORTCONNECT
+    property destroy_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_DESTROYVPORT
+    property get_video_port_flip_status : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETFLIPSTATUS
+    property update_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_UPDATE
+    property wait_for_video_port_sync : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_WAITFORSYNC
+    property get_video_signal_status : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETSIGNALSTATUS
+    property color_control : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_COLORCONTROL
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @can_create_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_CANCREATEVIDEOPORT, @create_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_CREATEVIDEOPORT, @flip_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_FLIP, @get_video_port_bandwidth : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETBANDWIDTH, @get_video_port_input_formats : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETINPUTFORMATS, @get_video_port_output_formats : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETOUTPUTFORMATS, @lpReserved1 : Void*, @get_video_port_field : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETFIELD, @get_video_port_line : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETLINE, @get_video_port_connect_info : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETVPORTCONNECT, @destroy_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_DESTROYVPORT, @get_video_port_flip_status : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETFLIPSTATUS, @update_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_UPDATE, @wait_for_video_port_sync : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_WAITFORSYNC, @get_video_signal_status : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETSIGNALSTATUS, @color_control : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_COLORCONTROL)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DDCOLORCONTROLCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    color_control : Win32cr::Graphics::DirectDraw::LPDDHALCOLORCB_COLORCONTROL
+  struct DDHAL_DDCOLORCONTROLCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property color_control : Win32cr::Graphics::DirectDraw::LPDDHALCOLORCB_COLORCONTROL
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @color_control : Win32cr::Graphics::DirectDraw::LPDDHALCOLORCB_COLORCONTROL)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DDKERNELCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    sync_surface_data : Win32cr::Graphics::DirectDraw::LPDDHALKERNELCB_SYNCSURFACE,
-    sync_video_port_data : Win32cr::Graphics::DirectDraw::LPDDHALKERNELCB_SYNCVIDEOPORT
+  struct DDHAL_DDKERNELCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property sync_surface_data : Win32cr::Graphics::DirectDraw::LPDDHALKERNELCB_SYNCSURFACE
+    property sync_video_port_data : Win32cr::Graphics::DirectDraw::LPDDHALKERNELCB_SYNCVIDEOPORT
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @sync_surface_data : Win32cr::Graphics::DirectDraw::LPDDHALKERNELCB_SYNCSURFACE, @sync_video_port_data : Win32cr::Graphics::DirectDraw::LPDDHALKERNELCB_SYNCVIDEOPORT)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DDMOTIONCOMPCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    get_mo_comp_guids : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETGUIDS,
-    get_mo_comp_formats : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETFORMATS,
-    create_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_CREATE,
-    get_mo_comp_buff_info : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETCOMPBUFFINFO,
-    get_internal_mo_comp_info : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETINTERNALINFO,
-    begin_mo_comp_frame : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_BEGINFRAME,
-    end_mo_comp_frame : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_ENDFRAME,
-    render_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_RENDER,
-    query_mo_comp_status : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_QUERYSTATUS,
-    destroy_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_DESTROY
+  struct DDHAL_DDMOTIONCOMPCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property get_mo_comp_guids : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETGUIDS
+    property get_mo_comp_formats : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETFORMATS
+    property create_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_CREATE
+    property get_mo_comp_buff_info : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETCOMPBUFFINFO
+    property get_internal_mo_comp_info : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETINTERNALINFO
+    property begin_mo_comp_frame : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_BEGINFRAME
+    property end_mo_comp_frame : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_ENDFRAME
+    property render_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_RENDER
+    property query_mo_comp_status : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_QUERYSTATUS
+    property destroy_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_DESTROY
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @get_mo_comp_guids : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETGUIDS, @get_mo_comp_formats : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETFORMATS, @create_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_CREATE, @get_mo_comp_buff_info : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETCOMPBUFFINFO, @get_internal_mo_comp_info : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETINTERNALINFO, @begin_mo_comp_frame : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_BEGINFRAME, @end_mo_comp_frame : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_ENDFRAME, @render_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_RENDER, @query_mo_comp_status : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_QUERYSTATUS, @destroy_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_DESTROY)
+    end
+  end
 
   @[Extern]
-  record DDNONLOCALVIDMEMCAPS,
-    dwSize : UInt32,
-    dwNLVBCaps : UInt32,
-    dwNLVBCaps2 : UInt32,
-    dwNLVBCKeyCaps : UInt32,
-    dwNLVBFXCaps : UInt32,
-    dwNLVBRops : UInt32[8]
+  struct DDNONLOCALVIDMEMCAPS
+    property dwSize : UInt32
+    property dwNLVBCaps : UInt32
+    property dwNLVBCaps2 : UInt32
+    property dwNLVBCKeyCaps : UInt32
+    property dwNLVBFXCaps : UInt32
+    property dwNLVBRops : UInt32[8]
+    def initialize(@dwSize : UInt32, @dwNLVBCaps : UInt32, @dwNLVBCaps2 : UInt32, @dwNLVBCKeyCaps : UInt32, @dwNLVBFXCaps : UInt32, @dwNLVBRops : UInt32[8])
+    end
+  end
 
   @[Extern]
-  record DDMORESURFACECAPS,
-    dwSize : UInt32,
-    ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX,
-    ddsExtendedHeapRestrictions : ExtendedHeapRestrictions* do
+  struct DDMORESURFACECAPS
+    property dwSize : UInt32
+    property ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    property ddsExtendedHeapRestrictions : ExtendedHeapRestrictions*
 
     # Nested Type ExtendedHeapRestrictions
     @[Extern]
-    record ExtendedHeapRestrictions,
-      ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX,
-      ddsCapsExAlt : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    struct ExtendedHeapRestrictions
+    property ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    property ddsCapsExAlt : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    def initialize(@ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @ddsCapsExAlt : Win32cr::Graphics::DirectDraw::DDSCAPSEX)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @ddsExtendedHeapRestrictions : ExtendedHeapRestrictions*)
+    end
   end
 
   @[Extern]
-  record DDSTEREOMODE,
-    dwSize : UInt32,
-    dwHeight : UInt32,
-    dwWidth : UInt32,
-    dwBpp : UInt32,
-    dwRefreshRate : UInt32,
-    bSupported : Win32cr::Foundation::BOOL
+  struct DDSTEREOMODE
+    property dwSize : UInt32
+    property dwHeight : UInt32
+    property dwWidth : UInt32
+    property dwBpp : UInt32
+    property dwRefreshRate : UInt32
+    property bSupported : Win32cr::Foundation::BOOL
+    def initialize(@dwSize : UInt32, @dwHeight : UInt32, @dwWidth : UInt32, @dwBpp : UInt32, @dwRefreshRate : UInt32, @bSupported : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DDRAWPALETTE_INT,
-    lpVtbl : Void*,
-    lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_LCL*,
-    lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*,
-    dwIntRefCnt : UInt32
+  struct DDRAWI_DDRAWPALETTE_INT
+    property lpVtbl : Void*
+    property lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_LCL*
+    property lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*
+    property dwIntRefCnt : UInt32
+    def initialize(@lpVtbl : Void*, @lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_LCL*, @lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*, @dwIntRefCnt : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DDRAWPALETTE_GBL,
-    dwRefCnt : UInt32,
-    dwFlags : UInt32,
-    lpDD_lcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    dwProcessId : UInt32,
-    lpColorTable : Win32cr::Graphics::Gdi::PALETTEENTRY*,
-    anonymous : Anonymous_e__Union_,
-    dwDriverReserved : UInt32,
-    dwContentsStamp : UInt32,
-    dwSaveStamp : UInt32,
-    dwHandle : UInt32 do
+  struct DDRAWI_DDRAWPALETTE_GBL
+    property dwRefCnt : UInt32
+    property dwFlags : UInt32
+    property lpDD_lcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property dwProcessId : UInt32
+    property lpColorTable : Win32cr::Graphics::Gdi::PALETTEENTRY*
+    property anonymous : Anonymous_e__Union_
+    property dwDriverReserved : UInt32
+    property dwContentsStamp : UInt32
+    property dwSaveStamp : UInt32
+    property dwHandle : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwReserved1 : LibC::UIntPtrT,
-      hHELGDIPalette : Win32cr::Graphics::Gdi::HPALETTE
+    struct Anonymous_e__Union_
+    property dwReserved1 : LibC::UIntPtrT
+    property hHELGDIPalette : Win32cr::Graphics::Gdi::HPALETTE
+    def initialize(@dwReserved1 : LibC::UIntPtrT, @hHELGDIPalette : Win32cr::Graphics::Gdi::HPALETTE)
+    end
+    end
 
+    def initialize(@dwRefCnt : UInt32, @dwFlags : UInt32, @lpDD_lcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @dwProcessId : UInt32, @lpColorTable : Win32cr::Graphics::Gdi::PALETTEENTRY*, @anonymous : Anonymous_e__Union_, @dwDriverReserved : UInt32, @dwContentsStamp : UInt32, @dwSaveStamp : UInt32, @dwHandle : UInt32)
+    end
   end
 
   @[Extern]
-  record DDRAWI_DDRAWPALETTE_LCL,
-    lpPalMore : UInt32,
-    lpGbl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*,
-    dwUnused0 : LibC::UIntPtrT,
-    dwLocalRefCnt : UInt32,
-    pUnkOuter : Void*,
-    lpDD_lcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    dwReserved1 : LibC::UIntPtrT,
-    dwDDRAWReserved1 : LibC::UIntPtrT,
-    dwDDRAWReserved2 : LibC::UIntPtrT,
-    dwDDRAWReserved3 : LibC::UIntPtrT
+  struct DDRAWI_DDRAWPALETTE_LCL
+    property lpPalMore : UInt32
+    property lpGbl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*
+    property dwUnused0 : LibC::UIntPtrT
+    property dwLocalRefCnt : UInt32
+    property pUnkOuter : Void*
+    property lpDD_lcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property dwReserved1 : LibC::UIntPtrT
+    property dwDDRAWReserved1 : LibC::UIntPtrT
+    property dwDDRAWReserved2 : LibC::UIntPtrT
+    property dwDDRAWReserved3 : LibC::UIntPtrT
+    def initialize(@lpPalMore : UInt32, @lpGbl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*, @dwUnused0 : LibC::UIntPtrT, @dwLocalRefCnt : UInt32, @pUnkOuter : Void*, @lpDD_lcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @dwReserved1 : LibC::UIntPtrT, @dwDDRAWReserved1 : LibC::UIntPtrT, @dwDDRAWReserved2 : LibC::UIntPtrT, @dwDDRAWReserved3 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DDRAWCLIPPER_INT,
-    lpVtbl : Void*,
-    lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_LCL*,
-    lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*,
-    dwIntRefCnt : UInt32
+  struct DDRAWI_DDRAWCLIPPER_INT
+    property lpVtbl : Void*
+    property lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_LCL*
+    property lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*
+    property dwIntRefCnt : UInt32
+    def initialize(@lpVtbl : Void*, @lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_LCL*, @lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*, @dwIntRefCnt : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DDRAWCLIPPER_GBL,
-    dwRefCnt : UInt32,
-    dwFlags : UInt32,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    dwProcessId : UInt32,
-    dwReserved1 : LibC::UIntPtrT,
-    hWnd : LibC::UIntPtrT,
-    lpStaticClipList : Win32cr::Graphics::Gdi::RGNDATA*
+  struct DDRAWI_DDRAWCLIPPER_GBL
+    property dwRefCnt : UInt32
+    property dwFlags : UInt32
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property dwProcessId : UInt32
+    property dwReserved1 : LibC::UIntPtrT
+    property hWnd : LibC::UIntPtrT
+    property lpStaticClipList : Win32cr::Graphics::Gdi::RGNDATA*
+    def initialize(@dwRefCnt : UInt32, @dwFlags : UInt32, @lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @dwProcessId : UInt32, @dwReserved1 : LibC::UIntPtrT, @hWnd : LibC::UIntPtrT, @lpStaticClipList : Win32cr::Graphics::Gdi::RGNDATA*)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DDRAWCLIPPER_LCL,
-    lpClipMore : UInt32,
-    lpGbl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_GBL*,
-    lpDD_lcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    dwLocalRefCnt : UInt32,
-    pUnkOuter : Void*,
-    lpDD_int : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_INT*,
-    dwReserved1 : LibC::UIntPtrT,
-    pAddrefedThisOwner : Void*
+  struct DDRAWI_DDRAWCLIPPER_LCL
+    property lpClipMore : UInt32
+    property lpGbl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_GBL*
+    property lpDD_lcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property dwLocalRefCnt : UInt32
+    property pUnkOuter : Void*
+    property lpDD_int : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_INT*
+    property dwReserved1 : LibC::UIntPtrT
+    property pAddrefedThisOwner : Void*
+    def initialize(@lpClipMore : UInt32, @lpGbl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_GBL*, @lpDD_lcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @dwLocalRefCnt : UInt32, @pUnkOuter : Void*, @lpDD_int : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_INT*, @dwReserved1 : LibC::UIntPtrT, @pAddrefedThisOwner : Void*)
+    end
+  end
 
   @[Extern]
-  record ATTACHLIST,
-    dwFlags : UInt32,
-    lpLink : Win32cr::Graphics::DirectDraw::ATTACHLIST*,
-    lpAttached : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    lpIAttached : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*
+  struct ATTACHLIST
+    property dwFlags : UInt32
+    property lpLink : Win32cr::Graphics::DirectDraw::ATTACHLIST*
+    property lpAttached : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property lpIAttached : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*
+    def initialize(@dwFlags : UInt32, @lpLink : Win32cr::Graphics::DirectDraw::ATTACHLIST*, @lpAttached : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @lpIAttached : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*)
+    end
+  end
 
   @[Extern]
-  record DBLNODE,
-    next__ : Win32cr::Graphics::DirectDraw::DBLNODE*,
-    prev : Win32cr::Graphics::DirectDraw::DBLNODE*,
-    object : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    object_int : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*
+  struct DBLNODE
+    property next__ : Win32cr::Graphics::DirectDraw::DBLNODE*
+    property prev : Win32cr::Graphics::DirectDraw::DBLNODE*
+    property object : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property object_int : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*
+    def initialize(@next__ : Win32cr::Graphics::DirectDraw::DBLNODE*, @prev : Win32cr::Graphics::DirectDraw::DBLNODE*, @object : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @object_int : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*)
+    end
+  end
 
   @[Extern]
-  record ACCESSRECTLIST,
-    lpLink : Win32cr::Graphics::DirectDraw::ACCESSRECTLIST*,
-    rDest : Win32cr::Foundation::RECT,
-    lpOwner : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpSurfaceData : Void*,
-    dwFlags : UInt32,
-    lpHeapAliasInfo : Win32cr::Graphics::DirectDraw::HEAPALIASINFO*
+  struct ACCESSRECTLIST
+    property lpLink : Win32cr::Graphics::DirectDraw::ACCESSRECTLIST*
+    property rDest : Win32cr::Foundation::RECT
+    property lpOwner : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpSurfaceData : Void*
+    property dwFlags : UInt32
+    property lpHeapAliasInfo : Win32cr::Graphics::DirectDraw::HEAPALIASINFO*
+    def initialize(@lpLink : Win32cr::Graphics::DirectDraw::ACCESSRECTLIST*, @rDest : Win32cr::Foundation::RECT, @lpOwner : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpSurfaceData : Void*, @dwFlags : UInt32, @lpHeapAliasInfo : Win32cr::Graphics::DirectDraw::HEAPALIASINFO*)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DDRAWSURFACE_INT,
-    lpVtbl : Void*,
-    lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*,
-    dwIntRefCnt : UInt32
+  struct DDRAWI_DDRAWSURFACE_INT
+    property lpVtbl : Void*
+    property lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*
+    property dwIntRefCnt : UInt32
+    def initialize(@lpVtbl : Void*, @lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*, @dwIntRefCnt : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DDRAWSURFACE_GBL,
-    dwRefCnt : UInt32,
-    dwGlobalFlags : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    anonymous3 : Anonymous3_e__Union_,
-    fpVidMem : LibC::UIntPtrT,
-    anonymous4 : Anonymous4_e__Union_,
-    wHeight : UInt16,
-    wWidth : UInt16,
-    dwUsageCount : UInt32,
-    dwReserved1 : LibC::UIntPtrT,
-    ddpfSurface : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT do
+  struct DDRAWI_DDRAWSURFACE_GBL
+    property dwRefCnt : UInt32
+    property dwGlobalFlags : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property anonymous3 : Anonymous3_e__Union_
+    property fpVidMem : LibC::UIntPtrT
+    property anonymous4 : Anonymous4_e__Union_
+    property wHeight : UInt16
+    property wWidth : UInt16
+    property dwUsageCount : UInt32
+    property dwReserved1 : LibC::UIntPtrT
+    property ddpfSurface : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-      lpDDHandle : Void*
+    struct Anonymous3_e__Union_
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDHandle : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDHandle : Void*)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      lpRectList : Win32cr::Graphics::DirectDraw::ACCESSRECTLIST*,
-      dwBlockSizeY : UInt32,
-      lSlicePitch : Int32
+    struct Anonymous1_e__Union_
+    property lpRectList : Win32cr::Graphics::DirectDraw::ACCESSRECTLIST*
+    property dwBlockSizeY : UInt32
+    property lSlicePitch : Int32
+    def initialize(@lpRectList : Win32cr::Graphics::DirectDraw::ACCESSRECTLIST*, @dwBlockSizeY : UInt32, @lSlicePitch : Int32)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      lpVidMemHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*,
-      dwBlockSizeX : UInt32
+    struct Anonymous2_e__Union_
+    property lpVidMemHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*
+    property dwBlockSizeX : UInt32
+    def initialize(@lpVidMemHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*, @dwBlockSizeX : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous4_e__Union_
     @[Extern(union: true)]
-    record Anonymous4_e__Union_,
-      lPitch : Int32,
-      dwLinearSize : UInt32
+    struct Anonymous4_e__Union_
+    property lPitch : Int32
+    property dwLinearSize : UInt32
+    def initialize(@lPitch : Int32, @dwLinearSize : UInt32)
+    end
+    end
 
+    def initialize(@dwRefCnt : UInt32, @dwGlobalFlags : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_, @fpVidMem : LibC::UIntPtrT, @anonymous4 : Anonymous4_e__Union_, @wHeight : UInt16, @wWidth : UInt16, @dwUsageCount : UInt32, @dwReserved1 : LibC::UIntPtrT, @ddpfSurface : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT)
+    end
   end
 
   @[Extern]
-  record DDRAWI_DDRAWSURFACE_GBL_MORE,
-    dwSize : UInt32,
-    anonymous : Anonymous_e__Union_,
-    pPageTable : UInt32*,
-    cPages : UInt32,
-    dwSavedDCContext : LibC::UIntPtrT,
-    fpAliasedVidMem : LibC::UIntPtrT,
-    dwDriverReserved : LibC::UIntPtrT,
-    dwHELReserved : LibC::UIntPtrT,
-    cPageUnlocks : UInt32,
-    hKernelSurface : LibC::UIntPtrT,
-    dwKernelRefCnt : UInt32,
-    lpColorInfo : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*,
-    fpNTAlias : LibC::UIntPtrT,
-    dwContentsStamp : UInt32,
-    lpvUnswappedDriverReserved : Void*,
-    lpDDRAWReserved2 : Void*,
-    dwDDRAWReserved1 : UInt32,
-    dwDDRAWReserved2 : UInt32,
-    fpAliasOfVidMem : LibC::UIntPtrT do
+  struct DDRAWI_DDRAWSURFACE_GBL_MORE
+    property dwSize : UInt32
+    property anonymous : Anonymous_e__Union_
+    property pPageTable : UInt32*
+    property cPages : UInt32
+    property dwSavedDCContext : LibC::UIntPtrT
+    property fpAliasedVidMem : LibC::UIntPtrT
+    property dwDriverReserved : LibC::UIntPtrT
+    property dwHELReserved : LibC::UIntPtrT
+    property cPageUnlocks : UInt32
+    property hKernelSurface : LibC::UIntPtrT
+    property dwKernelRefCnt : UInt32
+    property lpColorInfo : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*
+    property fpNTAlias : LibC::UIntPtrT
+    property dwContentsStamp : UInt32
+    property lpvUnswappedDriverReserved : Void*
+    property lpDDRAWReserved2 : Void*
+    property dwDDRAWReserved1 : UInt32
+    property dwDDRAWReserved2 : UInt32
+    property fpAliasOfVidMem : LibC::UIntPtrT
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwPhysicalPageTable : UInt32,
-      fpPhysicalVidMem : LibC::UIntPtrT
+    struct Anonymous_e__Union_
+    property dwPhysicalPageTable : UInt32
+    property fpPhysicalVidMem : LibC::UIntPtrT
+    def initialize(@dwPhysicalPageTable : UInt32, @fpPhysicalVidMem : LibC::UIntPtrT)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @anonymous : Anonymous_e__Union_, @pPageTable : UInt32*, @cPages : UInt32, @dwSavedDCContext : LibC::UIntPtrT, @fpAliasedVidMem : LibC::UIntPtrT, @dwDriverReserved : LibC::UIntPtrT, @dwHELReserved : LibC::UIntPtrT, @cPageUnlocks : UInt32, @hKernelSurface : LibC::UIntPtrT, @dwKernelRefCnt : UInt32, @lpColorInfo : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*, @fpNTAlias : LibC::UIntPtrT, @dwContentsStamp : UInt32, @lpvUnswappedDriverReserved : Void*, @lpDDRAWReserved2 : Void*, @dwDDRAWReserved1 : UInt32, @dwDDRAWReserved2 : UInt32, @fpAliasOfVidMem : LibC::UIntPtrT)
+    end
   end
 
   @[Extern]
-  record DDRAWI_DDRAWSURFACE_MORE,
-    dwSize : UInt32,
-    lpIUnknowns : Win32cr::Graphics::DirectDraw::IUNKNOWN_LIST*,
-    lpDD_lcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    dwPageLockCount : UInt32,
-    dwBytesAllocated : UInt32,
-    lpDD_int : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_INT*,
-    dwMipMapCount : UInt32,
-    lpDDIClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*,
-    lpHeapAliasInfo : Win32cr::Graphics::DirectDraw::HEAPALIASINFO*,
-    dwOverlayFlags : UInt32,
-    rgjunc : Void*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    lpddOverlayFX : Win32cr::Graphics::DirectDraw::DDOVERLAYFX*,
-    ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX,
-    dwTextureStage : UInt32,
-    lpDDRAWReserved : Void*,
-    lpDDRAWReserved2 : Void*,
-    lpDDrawReserved3 : Void*,
-    dwDDrawReserved4 : UInt32,
-    lpDDrawReserved5 : Void*,
-    lpGammaRamp : UInt32*,
-    lpOriginalGammaRamp : UInt32*,
-    lpDDrawReserved6 : Void*,
-    dwSurfaceHandle : UInt32,
-    qwDDrawReserved8 : UInt32[2],
-    lpDDrawReserved9 : Void*,
-    cSurfaces : UInt32,
-    pCreatedDDSurfaceDesc2 : Win32cr::Graphics::DirectDraw::DDSURFACEDESC2*,
-    slist : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL**,
-    dwFVF : UInt32,
-    lpVB : Void*
+  struct DDRAWI_DDRAWSURFACE_MORE
+    property dwSize : UInt32
+    property lpIUnknowns : Win32cr::Graphics::DirectDraw::IUNKNOWN_LIST*
+    property lpDD_lcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property dwPageLockCount : UInt32
+    property dwBytesAllocated : UInt32
+    property lpDD_int : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_INT*
+    property dwMipMapCount : UInt32
+    property lpDDIClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*
+    property lpHeapAliasInfo : Win32cr::Graphics::DirectDraw::HEAPALIASINFO*
+    property dwOverlayFlags : UInt32
+    property rgjunc : Void*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property lpddOverlayFX : Win32cr::Graphics::DirectDraw::DDOVERLAYFX*
+    property ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    property dwTextureStage : UInt32
+    property lpDDRAWReserved : Void*
+    property lpDDRAWReserved2 : Void*
+    property lpDDrawReserved3 : Void*
+    property dwDDrawReserved4 : UInt32
+    property lpDDrawReserved5 : Void*
+    property lpGammaRamp : UInt32*
+    property lpOriginalGammaRamp : UInt32*
+    property lpDDrawReserved6 : Void*
+    property dwSurfaceHandle : UInt32
+    property qwDDrawReserved8 : UInt32[2]
+    property lpDDrawReserved9 : Void*
+    property cSurfaces : UInt32
+    property pCreatedDDSurfaceDesc2 : Win32cr::Graphics::DirectDraw::DDSURFACEDESC2*
+    property slist : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL**
+    property dwFVF : UInt32
+    property lpVB : Void*
+    def initialize(@dwSize : UInt32, @lpIUnknowns : Win32cr::Graphics::DirectDraw::IUNKNOWN_LIST*, @lpDD_lcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @dwPageLockCount : UInt32, @dwBytesAllocated : UInt32, @lpDD_int : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_INT*, @dwMipMapCount : UInt32, @lpDDIClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*, @lpHeapAliasInfo : Win32cr::Graphics::DirectDraw::HEAPALIASINFO*, @dwOverlayFlags : UInt32, @rgjunc : Void*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @lpddOverlayFX : Win32cr::Graphics::DirectDraw::DDOVERLAYFX*, @ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @dwTextureStage : UInt32, @lpDDRAWReserved : Void*, @lpDDRAWReserved2 : Void*, @lpDDrawReserved3 : Void*, @dwDDrawReserved4 : UInt32, @lpDDrawReserved5 : Void*, @lpGammaRamp : UInt32*, @lpOriginalGammaRamp : UInt32*, @lpDDrawReserved6 : Void*, @dwSurfaceHandle : UInt32, @qwDDrawReserved8 : UInt32[2], @lpDDrawReserved9 : Void*, @cSurfaces : UInt32, @pCreatedDDSurfaceDesc2 : Win32cr::Graphics::DirectDraw::DDSURFACEDESC2*, @slist : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL**, @dwFVF : UInt32, @lpVB : Void*)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DDRAWSURFACE_LCL,
-    lpSurfMore : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_MORE*,
-    lpGbl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_GBL*,
-    hDDSurface : LibC::UIntPtrT,
-    lpAttachList : Win32cr::Graphics::DirectDraw::ATTACHLIST*,
-    lpAttachListFrom : Win32cr::Graphics::DirectDraw::ATTACHLIST*,
-    dwLocalRefCnt : UInt32,
-    dwProcessId : UInt32,
-    dwFlags : UInt32,
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    dwModeCreatedIn : UInt32,
-    dwBackBufferCount : UInt32,
-    ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    hDC : LibC::UIntPtrT,
-    dwReserved1 : LibC::UIntPtrT,
-    ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    lpSurfaceOverlaying : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*,
-    dbnOverlayNode : Win32cr::Graphics::DirectDraw::DBLNODE,
-    rcOverlaySrc : Win32cr::Foundation::RECT,
-    rcOverlayDest : Win32cr::Foundation::RECT,
-    dwClrXparent : UInt32,
-    dwAlpha : UInt32,
-    lOverlayX : Int32,
-    lOverlayY : Int32 do
+  struct DDRAWI_DDRAWSURFACE_LCL
+    property lpSurfMore : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_MORE*
+    property lpGbl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_GBL*
+    property hDDSurface : LibC::UIntPtrT
+    property lpAttachList : Win32cr::Graphics::DirectDraw::ATTACHLIST*
+    property lpAttachListFrom : Win32cr::Graphics::DirectDraw::ATTACHLIST*
+    property dwLocalRefCnt : UInt32
+    property dwProcessId : UInt32
+    property dwFlags : UInt32
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property dwModeCreatedIn : UInt32
+    property dwBackBufferCount : UInt32
+    property ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property hDC : LibC::UIntPtrT
+    property dwReserved1 : LibC::UIntPtrT
+    property ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property lpSurfaceOverlaying : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*
+    property dbnOverlayNode : Win32cr::Graphics::DirectDraw::DBLNODE
+    property rcOverlaySrc : Win32cr::Foundation::RECT
+    property rcOverlayDest : Win32cr::Foundation::RECT
+    property dwClrXparent : UInt32
+    property dwAlpha : UInt32
+    property lOverlayX : Int32
+    property lOverlayY : Int32
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      lpDDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_LCL*,
-      lp16DDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*
+    struct Anonymous2_e__Union_
+    property lpDDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_LCL*
+    property lp16DDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*
+    def initialize(@lpDDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_LCL*, @lp16DDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*,
-      lp16DDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*
+    struct Anonymous1_e__Union_
+    property lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*
+    property lp16DDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*
+    def initialize(@lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*, @lp16DDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*)
+    end
+    end
 
+    def initialize(@lpSurfMore : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_MORE*, @lpGbl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_GBL*, @hDDSurface : LibC::UIntPtrT, @lpAttachList : Win32cr::Graphics::DirectDraw::ATTACHLIST*, @lpAttachListFrom : Win32cr::Graphics::DirectDraw::ATTACHLIST*, @dwLocalRefCnt : UInt32, @dwProcessId : UInt32, @dwFlags : UInt32, @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @dwModeCreatedIn : UInt32, @dwBackBufferCount : UInt32, @ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @hDC : LibC::UIntPtrT, @dwReserved1 : LibC::UIntPtrT, @ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @lpSurfaceOverlaying : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*, @dbnOverlayNode : Win32cr::Graphics::DirectDraw::DBLNODE, @rcOverlaySrc : Win32cr::Foundation::RECT, @rcOverlayDest : Win32cr::Foundation::RECT, @dwClrXparent : UInt32, @dwAlpha : UInt32, @lOverlayX : Int32, @lOverlayY : Int32)
+    end
   end
 
   @[Extern]
-  record DDHALMODEINFO,
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    lPitch : Int32,
-    dwBPP : UInt32,
-    wFlags : UInt16,
-    wRefreshRate : UInt16,
-    dwRBitMask : UInt32,
-    dwGBitMask : UInt32,
-    dwBBitMask : UInt32,
-    dwAlphaBitMask : UInt32
+  struct DDHALMODEINFO
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property lPitch : Int32
+    property dwBPP : UInt32
+    property wFlags : UInt16
+    property wRefreshRate : UInt16
+    property dwRBitMask : UInt32
+    property dwGBitMask : UInt32
+    property dwBBitMask : UInt32
+    property dwAlphaBitMask : UInt32
+    def initialize(@dwWidth : UInt32, @dwHeight : UInt32, @lPitch : Int32, @dwBPP : UInt32, @wFlags : UInt16, @wRefreshRate : UInt16, @dwRBitMask : UInt32, @dwGBitMask : UInt32, @dwBBitMask : UInt32, @dwAlphaBitMask : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DIRECTDRAW_INT,
-    lpVtbl : Void*,
-    lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_INT*,
-    dwIntRefCnt : UInt32
+  struct DDRAWI_DIRECTDRAW_INT
+    property lpVtbl : Void*
+    property lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_INT*
+    property dwIntRefCnt : UInt32
+    def initialize(@lpVtbl : Void*, @lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_INT*, @dwIntRefCnt : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDHAL_CALLBACKS,
-    cbDDCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDCALLBACKS,
-    cbDDSurfaceCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDSURFACECALLBACKS,
-    cbDDPaletteCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDPALETTECALLBACKS,
-    haldd : Win32cr::Graphics::DirectDraw::DDHAL_DDCALLBACKS,
-    haldd_surface : Win32cr::Graphics::DirectDraw::DDHAL_DDSURFACECALLBACKS,
-    haldd_palette : Win32cr::Graphics::DirectDraw::DDHAL_DDPALETTECALLBACKS,
-    heldd : Win32cr::Graphics::DirectDraw::DDHAL_DDCALLBACKS,
-    heldd_surface : Win32cr::Graphics::DirectDraw::DDHAL_DDSURFACECALLBACKS,
-    heldd_palette : Win32cr::Graphics::DirectDraw::DDHAL_DDPALETTECALLBACKS,
-    cbDDExeBufCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDEXEBUFCALLBACKS,
-    haldd_exe_buf : Win32cr::Graphics::DirectDraw::DDHAL_DDEXEBUFCALLBACKS,
-    heldd_exe_buf : Win32cr::Graphics::DirectDraw::DDHAL_DDEXEBUFCALLBACKS,
-    cbDDVideoPortCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDVIDEOPORTCALLBACKS,
-    haldd_video_port : Win32cr::Graphics::DirectDraw::DDHAL_DDVIDEOPORTCALLBACKS,
-    cbDDColorControlCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDCOLORCONTROLCALLBACKS,
-    haldd_color_control : Win32cr::Graphics::DirectDraw::DDHAL_DDCOLORCONTROLCALLBACKS,
-    cbDDMiscellaneousCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDMISCELLANEOUSCALLBACKS,
-    haldd_miscellaneous : Win32cr::Graphics::DirectDraw::DDHAL_DDMISCELLANEOUSCALLBACKS,
-    cbDDKernelCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDKERNELCALLBACKS,
-    haldd_kernel : Win32cr::Graphics::DirectDraw::DDHAL_DDKERNELCALLBACKS,
-    cbDDMotionCompCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDMOTIONCOMPCALLBACKS,
-    haldd_motion_comp : Win32cr::Graphics::DirectDraw::DDHAL_DDMOTIONCOMPCALLBACKS
+  struct DDHAL_CALLBACKS
+    property cbDDCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDCALLBACKS
+    property cbDDSurfaceCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDSURFACECALLBACKS
+    property cbDDPaletteCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDPALETTECALLBACKS
+    property haldd : Win32cr::Graphics::DirectDraw::DDHAL_DDCALLBACKS
+    property haldd_surface : Win32cr::Graphics::DirectDraw::DDHAL_DDSURFACECALLBACKS
+    property haldd_palette : Win32cr::Graphics::DirectDraw::DDHAL_DDPALETTECALLBACKS
+    property heldd : Win32cr::Graphics::DirectDraw::DDHAL_DDCALLBACKS
+    property heldd_surface : Win32cr::Graphics::DirectDraw::DDHAL_DDSURFACECALLBACKS
+    property heldd_palette : Win32cr::Graphics::DirectDraw::DDHAL_DDPALETTECALLBACKS
+    property cbDDExeBufCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDEXEBUFCALLBACKS
+    property haldd_exe_buf : Win32cr::Graphics::DirectDraw::DDHAL_DDEXEBUFCALLBACKS
+    property heldd_exe_buf : Win32cr::Graphics::DirectDraw::DDHAL_DDEXEBUFCALLBACKS
+    property cbDDVideoPortCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDVIDEOPORTCALLBACKS
+    property haldd_video_port : Win32cr::Graphics::DirectDraw::DDHAL_DDVIDEOPORTCALLBACKS
+    property cbDDColorControlCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDCOLORCONTROLCALLBACKS
+    property haldd_color_control : Win32cr::Graphics::DirectDraw::DDHAL_DDCOLORCONTROLCALLBACKS
+    property cbDDMiscellaneousCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDMISCELLANEOUSCALLBACKS
+    property haldd_miscellaneous : Win32cr::Graphics::DirectDraw::DDHAL_DDMISCELLANEOUSCALLBACKS
+    property cbDDKernelCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDKERNELCALLBACKS
+    property haldd_kernel : Win32cr::Graphics::DirectDraw::DDHAL_DDKERNELCALLBACKS
+    property cbDDMotionCompCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDMOTIONCOMPCALLBACKS
+    property haldd_motion_comp : Win32cr::Graphics::DirectDraw::DDHAL_DDMOTIONCOMPCALLBACKS
+    def initialize(@cbDDCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDCALLBACKS, @cbDDSurfaceCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDSURFACECALLBACKS, @cbDDPaletteCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDPALETTECALLBACKS, @haldd : Win32cr::Graphics::DirectDraw::DDHAL_DDCALLBACKS, @haldd_surface : Win32cr::Graphics::DirectDraw::DDHAL_DDSURFACECALLBACKS, @haldd_palette : Win32cr::Graphics::DirectDraw::DDHAL_DDPALETTECALLBACKS, @heldd : Win32cr::Graphics::DirectDraw::DDHAL_DDCALLBACKS, @heldd_surface : Win32cr::Graphics::DirectDraw::DDHAL_DDSURFACECALLBACKS, @heldd_palette : Win32cr::Graphics::DirectDraw::DDHAL_DDPALETTECALLBACKS, @cbDDExeBufCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDEXEBUFCALLBACKS, @haldd_exe_buf : Win32cr::Graphics::DirectDraw::DDHAL_DDEXEBUFCALLBACKS, @heldd_exe_buf : Win32cr::Graphics::DirectDraw::DDHAL_DDEXEBUFCALLBACKS, @cbDDVideoPortCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDVIDEOPORTCALLBACKS, @haldd_video_port : Win32cr::Graphics::DirectDraw::DDHAL_DDVIDEOPORTCALLBACKS, @cbDDColorControlCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDCOLORCONTROLCALLBACKS, @haldd_color_control : Win32cr::Graphics::DirectDraw::DDHAL_DDCOLORCONTROLCALLBACKS, @cbDDMiscellaneousCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDMISCELLANEOUSCALLBACKS, @haldd_miscellaneous : Win32cr::Graphics::DirectDraw::DDHAL_DDMISCELLANEOUSCALLBACKS, @cbDDKernelCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDKERNELCALLBACKS, @haldd_kernel : Win32cr::Graphics::DirectDraw::DDHAL_DDKERNELCALLBACKS, @cbDDMotionCompCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDMOTIONCOMPCALLBACKS, @haldd_motion_comp : Win32cr::Graphics::DirectDraw::DDHAL_DDMOTIONCOMPCALLBACKS)
+    end
+  end
 
   @[Extern]
-  record DDCORECAPS,
-    dwSize : UInt32,
-    dwCaps : UInt32,
-    dwCaps2 : UInt32,
-    dwCKeyCaps : UInt32,
-    dwFXCaps : UInt32,
-    dwFXAlphaCaps : UInt32,
-    dwPalCaps : UInt32,
-    dwSVCaps : UInt32,
-    dwAlphaBltConstBitDepths : UInt32,
-    dwAlphaBltPixelBitDepths : UInt32,
-    dwAlphaBltSurfaceBitDepths : UInt32,
-    dwAlphaOverlayConstBitDepths : UInt32,
-    dwAlphaOverlayPixelBitDepths : UInt32,
-    dwAlphaOverlaySurfaceBitDepths : UInt32,
-    dwZBufferBitDepths : UInt32,
-    dwVidMemTotal : UInt32,
-    dwVidMemFree : UInt32,
-    dwMaxVisibleOverlays : UInt32,
-    dwCurrVisibleOverlays : UInt32,
-    dwNumFourCCCodes : UInt32,
-    dwAlignBoundarySrc : UInt32,
-    dwAlignSizeSrc : UInt32,
-    dwAlignBoundaryDest : UInt32,
-    dwAlignSizeDest : UInt32,
-    dwAlignStrideAlign : UInt32,
-    dwRops : UInt32[8],
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    dwMinOverlayStretch : UInt32,
-    dwMaxOverlayStretch : UInt32,
-    dwMinLiveVideoStretch : UInt32,
-    dwMaxLiveVideoStretch : UInt32,
-    dwMinHwCodecStretch : UInt32,
-    dwMaxHwCodecStretch : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    dwReserved3 : UInt32,
-    dwSVBCaps : UInt32,
-    dwSVBCKeyCaps : UInt32,
-    dwSVBFXCaps : UInt32,
-    dwSVBRops : UInt32[8],
-    dwVSBCaps : UInt32,
-    dwVSBCKeyCaps : UInt32,
-    dwVSBFXCaps : UInt32,
-    dwVSBRops : UInt32[8],
-    dwSSBCaps : UInt32,
-    dwSSBCKeyCaps : UInt32,
-    dwSSBFXCaps : UInt32,
-    dwSSBRops : UInt32[8],
-    dwMaxVideoPorts : UInt32,
-    dwCurrVideoPorts : UInt32,
-    dwSVBCaps2 : UInt32
+  struct DDCORECAPS
+    property dwSize : UInt32
+    property dwCaps : UInt32
+    property dwCaps2 : UInt32
+    property dwCKeyCaps : UInt32
+    property dwFXCaps : UInt32
+    property dwFXAlphaCaps : UInt32
+    property dwPalCaps : UInt32
+    property dwSVCaps : UInt32
+    property dwAlphaBltConstBitDepths : UInt32
+    property dwAlphaBltPixelBitDepths : UInt32
+    property dwAlphaBltSurfaceBitDepths : UInt32
+    property dwAlphaOverlayConstBitDepths : UInt32
+    property dwAlphaOverlayPixelBitDepths : UInt32
+    property dwAlphaOverlaySurfaceBitDepths : UInt32
+    property dwZBufferBitDepths : UInt32
+    property dwVidMemTotal : UInt32
+    property dwVidMemFree : UInt32
+    property dwMaxVisibleOverlays : UInt32
+    property dwCurrVisibleOverlays : UInt32
+    property dwNumFourCCCodes : UInt32
+    property dwAlignBoundarySrc : UInt32
+    property dwAlignSizeSrc : UInt32
+    property dwAlignBoundaryDest : UInt32
+    property dwAlignSizeDest : UInt32
+    property dwAlignStrideAlign : UInt32
+    property dwRops : UInt32[8]
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property dwMinOverlayStretch : UInt32
+    property dwMaxOverlayStretch : UInt32
+    property dwMinLiveVideoStretch : UInt32
+    property dwMaxLiveVideoStretch : UInt32
+    property dwMinHwCodecStretch : UInt32
+    property dwMaxHwCodecStretch : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property dwReserved3 : UInt32
+    property dwSVBCaps : UInt32
+    property dwSVBCKeyCaps : UInt32
+    property dwSVBFXCaps : UInt32
+    property dwSVBRops : UInt32[8]
+    property dwVSBCaps : UInt32
+    property dwVSBCKeyCaps : UInt32
+    property dwVSBFXCaps : UInt32
+    property dwVSBRops : UInt32[8]
+    property dwSSBCaps : UInt32
+    property dwSSBCKeyCaps : UInt32
+    property dwSSBFXCaps : UInt32
+    property dwSSBRops : UInt32[8]
+    property dwMaxVideoPorts : UInt32
+    property dwCurrVideoPorts : UInt32
+    property dwSVBCaps2 : UInt32
+    def initialize(@dwSize : UInt32, @dwCaps : UInt32, @dwCaps2 : UInt32, @dwCKeyCaps : UInt32, @dwFXCaps : UInt32, @dwFXAlphaCaps : UInt32, @dwPalCaps : UInt32, @dwSVCaps : UInt32, @dwAlphaBltConstBitDepths : UInt32, @dwAlphaBltPixelBitDepths : UInt32, @dwAlphaBltSurfaceBitDepths : UInt32, @dwAlphaOverlayConstBitDepths : UInt32, @dwAlphaOverlayPixelBitDepths : UInt32, @dwAlphaOverlaySurfaceBitDepths : UInt32, @dwZBufferBitDepths : UInt32, @dwVidMemTotal : UInt32, @dwVidMemFree : UInt32, @dwMaxVisibleOverlays : UInt32, @dwCurrVisibleOverlays : UInt32, @dwNumFourCCCodes : UInt32, @dwAlignBoundarySrc : UInt32, @dwAlignSizeSrc : UInt32, @dwAlignBoundaryDest : UInt32, @dwAlignSizeDest : UInt32, @dwAlignStrideAlign : UInt32, @dwRops : UInt32[8], @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS, @dwMinOverlayStretch : UInt32, @dwMaxOverlayStretch : UInt32, @dwMinLiveVideoStretch : UInt32, @dwMaxLiveVideoStretch : UInt32, @dwMinHwCodecStretch : UInt32, @dwMaxHwCodecStretch : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @dwReserved3 : UInt32, @dwSVBCaps : UInt32, @dwSVBCKeyCaps : UInt32, @dwSVBFXCaps : UInt32, @dwSVBRops : UInt32[8], @dwVSBCaps : UInt32, @dwVSBCKeyCaps : UInt32, @dwVSBFXCaps : UInt32, @dwVSBRops : UInt32[8], @dwSSBCaps : UInt32, @dwSSBCKeyCaps : UInt32, @dwSSBFXCaps : UInt32, @dwSSBRops : UInt32[8], @dwMaxVideoPorts : UInt32, @dwCurrVideoPorts : UInt32, @dwSVBCaps2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DIRECTDRAW_GBL,
-    dwRefCnt : UInt32,
-    dwFlags : UInt32,
-    fpPrimaryOrig : LibC::UIntPtrT,
-    ddCaps : Win32cr::Graphics::DirectDraw::DDCORECAPS,
-    dwInternal1 : UInt32,
-    dwUnused1 : UInt32[9],
-    lpDDCBtmp : Win32cr::Graphics::DirectDraw::DDHAL_CALLBACKS*,
-    dsList : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*,
-    palList : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*,
-    clipperList : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*,
-    lp16DD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    dwMaxOverlays : UInt32,
-    dwCurrOverlays : UInt32,
-    dwMonitorFrequency : UInt32,
-    ddHELCaps : Win32cr::Graphics::DirectDraw::DDCORECAPS,
-    dwUnused2 : UInt32[50],
-    ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    vmiData : Win32cr::Graphics::DirectDraw::VIDMEMINFO,
-    lpDriverHandle : Void*,
-    lpExclusiveOwner : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    dwModeIndex : UInt32,
-    dwModeIndexOrig : UInt32,
-    dwNumFourCC : UInt32,
-    lpdwFourCC : UInt32*,
-    dwNumModes : UInt32,
-    lpModeInfo : Win32cr::Graphics::DirectDraw::DDHALMODEINFO*,
-    plProcessList : Win32cr::Graphics::DirectDraw::PROCESS_LIST,
-    dwSurfaceLockCount : UInt32,
-    dwAliasedLockCnt : UInt32,
-    dwReserved3 : LibC::UIntPtrT,
-    hDD : LibC::UIntPtrT,
-    cObsolete : Win32cr::Foundation::CHAR[12],
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    dbnOverlayRoot : Win32cr::Graphics::DirectDraw::DBLNODE,
-    lpwPDeviceFlags : UInt16*,
-    dwPDevice : UInt32,
-    dwWin16LockCnt : UInt32,
-    dwUnused3 : UInt32,
-    hInstance : UInt32,
-    dwEvent16 : UInt32,
-    dwSaveNumModes : UInt32,
-    lpD3DGlobalDriverData : LibC::UIntPtrT,
-    lpD3DHALCallbacks : LibC::UIntPtrT,
-    ddBothCaps : Win32cr::Graphics::DirectDraw::DDCORECAPS,
-    lpDDVideoPortCaps : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCAPS*,
-    dvpList : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_INT*,
-    lpD3DHALCallbacks2 : LibC::UIntPtrT,
-    rectDevice : Win32cr::Foundation::RECT,
-    cMonitors : UInt32,
-    gpbmiSrc : Void*,
-    gpbmiDest : Void*,
-    phaiHeapAliases : Win32cr::Graphics::DirectDraw::HEAPALIASINFO*,
-    hKernelHandle : LibC::UIntPtrT,
-    pfnNotifyProc : LibC::UIntPtrT,
-    lpDDKernelCaps : Win32cr::Graphics::DirectDraw::DDKERNELCAPS*,
-    lpddNLVCaps : Win32cr::Graphics::DirectDraw::DDNONLOCALVIDMEMCAPS*,
-    lpddNLVHELCaps : Win32cr::Graphics::DirectDraw::DDNONLOCALVIDMEMCAPS*,
-    lpddNLVBothCaps : Win32cr::Graphics::DirectDraw::DDNONLOCALVIDMEMCAPS*,
-    lpD3DExtendedCaps : LibC::UIntPtrT,
-    dwDOSBoxEvent : UInt32,
-    rectDesktop : Win32cr::Foundation::RECT,
-    cDriverName : Win32cr::Foundation::CHAR[32],
-    lpD3DHALCallbacks3 : LibC::UIntPtrT,
-    dwNumZPixelFormats : UInt32,
-    lpZPixelFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    mcList : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_INT*,
-    hDDVxd : UInt32,
-    ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+  struct DDRAWI_DIRECTDRAW_GBL
+    property dwRefCnt : UInt32
+    property dwFlags : UInt32
+    property fpPrimaryOrig : LibC::UIntPtrT
+    property ddCaps : Win32cr::Graphics::DirectDraw::DDCORECAPS
+    property dwInternal1 : UInt32
+    property dwUnused1 : UInt32[9]
+    property lpDDCBtmp : Win32cr::Graphics::DirectDraw::DDHAL_CALLBACKS*
+    property dsList : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*
+    property palList : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*
+    property clipperList : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*
+    property lp16DD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property dwMaxOverlays : UInt32
+    property dwCurrOverlays : UInt32
+    property dwMonitorFrequency : UInt32
+    property ddHELCaps : Win32cr::Graphics::DirectDraw::DDCORECAPS
+    property dwUnused2 : UInt32[50]
+    property ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property vmiData : Win32cr::Graphics::DirectDraw::VIDMEMINFO
+    property lpDriverHandle : Void*
+    property lpExclusiveOwner : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property dwModeIndex : UInt32
+    property dwModeIndexOrig : UInt32
+    property dwNumFourCC : UInt32
+    property lpdwFourCC : UInt32*
+    property dwNumModes : UInt32
+    property lpModeInfo : Win32cr::Graphics::DirectDraw::DDHALMODEINFO*
+    property plProcessList : Win32cr::Graphics::DirectDraw::PROCESS_LIST
+    property dwSurfaceLockCount : UInt32
+    property dwAliasedLockCnt : UInt32
+    property dwReserved3 : LibC::UIntPtrT
+    property hDD : LibC::UIntPtrT
+    property cObsolete : Win32cr::Foundation::CHAR[12]
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property dbnOverlayRoot : Win32cr::Graphics::DirectDraw::DBLNODE
+    property lpwPDeviceFlags : UInt16*
+    property dwPDevice : UInt32
+    property dwWin16LockCnt : UInt32
+    property dwUnused3 : UInt32
+    property hInstance : UInt32
+    property dwEvent16 : UInt32
+    property dwSaveNumModes : UInt32
+    property lpD3DGlobalDriverData : LibC::UIntPtrT
+    property lpD3DHALCallbacks : LibC::UIntPtrT
+    property ddBothCaps : Win32cr::Graphics::DirectDraw::DDCORECAPS
+    property lpDDVideoPortCaps : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCAPS*
+    property dvpList : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_INT*
+    property lpD3DHALCallbacks2 : LibC::UIntPtrT
+    property rectDevice : Win32cr::Foundation::RECT
+    property cMonitors : UInt32
+    property gpbmiSrc : Void*
+    property gpbmiDest : Void*
+    property phaiHeapAliases : Win32cr::Graphics::DirectDraw::HEAPALIASINFO*
+    property hKernelHandle : LibC::UIntPtrT
+    property pfnNotifyProc : LibC::UIntPtrT
+    property lpDDKernelCaps : Win32cr::Graphics::DirectDraw::DDKERNELCAPS*
+    property lpddNLVCaps : Win32cr::Graphics::DirectDraw::DDNONLOCALVIDMEMCAPS*
+    property lpddNLVHELCaps : Win32cr::Graphics::DirectDraw::DDNONLOCALVIDMEMCAPS*
+    property lpddNLVBothCaps : Win32cr::Graphics::DirectDraw::DDNONLOCALVIDMEMCAPS*
+    property lpD3DExtendedCaps : LibC::UIntPtrT
+    property dwDOSBoxEvent : UInt32
+    property rectDesktop : Win32cr::Foundation::RECT
+    property cDriverName : Win32cr::Foundation::CHAR[32]
+    property lpD3DHALCallbacks3 : LibC::UIntPtrT
+    property dwNumZPixelFormats : UInt32
+    property lpZPixelFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property mcList : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_INT*
+    property hDDVxd : UInt32
+    property ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    def initialize(@dwRefCnt : UInt32, @dwFlags : UInt32, @fpPrimaryOrig : LibC::UIntPtrT, @ddCaps : Win32cr::Graphics::DirectDraw::DDCORECAPS, @dwInternal1 : UInt32, @dwUnused1 : UInt32[9], @lpDDCBtmp : Win32cr::Graphics::DirectDraw::DDHAL_CALLBACKS*, @dsList : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*, @palList : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*, @clipperList : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*, @lp16DD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @dwMaxOverlays : UInt32, @dwCurrOverlays : UInt32, @dwMonitorFrequency : UInt32, @ddHELCaps : Win32cr::Graphics::DirectDraw::DDCORECAPS, @dwUnused2 : UInt32[50], @ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @vmiData : Win32cr::Graphics::DirectDraw::VIDMEMINFO, @lpDriverHandle : Void*, @lpExclusiveOwner : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @dwModeIndex : UInt32, @dwModeIndexOrig : UInt32, @dwNumFourCC : UInt32, @lpdwFourCC : UInt32*, @dwNumModes : UInt32, @lpModeInfo : Win32cr::Graphics::DirectDraw::DDHALMODEINFO*, @plProcessList : Win32cr::Graphics::DirectDraw::PROCESS_LIST, @dwSurfaceLockCount : UInt32, @dwAliasedLockCnt : UInt32, @dwReserved3 : LibC::UIntPtrT, @hDD : LibC::UIntPtrT, @cObsolete : Win32cr::Foundation::CHAR[12], @dwReserved1 : UInt32, @dwReserved2 : UInt32, @dbnOverlayRoot : Win32cr::Graphics::DirectDraw::DBLNODE, @lpwPDeviceFlags : UInt16*, @dwPDevice : UInt32, @dwWin16LockCnt : UInt32, @dwUnused3 : UInt32, @hInstance : UInt32, @dwEvent16 : UInt32, @dwSaveNumModes : UInt32, @lpD3DGlobalDriverData : LibC::UIntPtrT, @lpD3DHALCallbacks : LibC::UIntPtrT, @ddBothCaps : Win32cr::Graphics::DirectDraw::DDCORECAPS, @lpDDVideoPortCaps : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCAPS*, @dvpList : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_INT*, @lpD3DHALCallbacks2 : LibC::UIntPtrT, @rectDevice : Win32cr::Foundation::RECT, @cMonitors : UInt32, @gpbmiSrc : Void*, @gpbmiDest : Void*, @phaiHeapAliases : Win32cr::Graphics::DirectDraw::HEAPALIASINFO*, @hKernelHandle : LibC::UIntPtrT, @pfnNotifyProc : LibC::UIntPtrT, @lpDDKernelCaps : Win32cr::Graphics::DirectDraw::DDKERNELCAPS*, @lpddNLVCaps : Win32cr::Graphics::DirectDraw::DDNONLOCALVIDMEMCAPS*, @lpddNLVHELCaps : Win32cr::Graphics::DirectDraw::DDNONLOCALVIDMEMCAPS*, @lpddNLVBothCaps : Win32cr::Graphics::DirectDraw::DDNONLOCALVIDMEMCAPS*, @lpD3DExtendedCaps : LibC::UIntPtrT, @dwDOSBoxEvent : UInt32, @rectDesktop : Win32cr::Foundation::RECT, @cDriverName : Win32cr::Foundation::CHAR[32], @lpD3DHALCallbacks3 : LibC::UIntPtrT, @dwNumZPixelFormats : UInt32, @lpZPixelFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @mcList : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_INT*, @hDDVxd : UInt32, @ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DIRECTDRAW_LCL,
-    lpDDMore : UInt32,
-    lpGbl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    dwUnused0 : UInt32,
-    dwLocalFlags : UInt32,
-    dwLocalRefCnt : UInt32,
-    dwProcessId : UInt32,
-    pUnkOuter : Void*,
-    dwObsolete1 : UInt32,
-    hWnd : LibC::UIntPtrT,
-    hDC : LibC::UIntPtrT,
-    dwErrorMode : UInt32,
-    lpPrimary : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*,
-    lpCB : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*,
-    dwPreferredMode : UInt32,
-    hD3DInstance : Win32cr::Foundation::HINSTANCE,
-    pD3DIUnknown : Void*,
-    lpDDCB : Win32cr::Graphics::DirectDraw::DDHAL_CALLBACKS*,
-    hDDVxd : LibC::UIntPtrT,
-    dwAppHackFlags : UInt32,
-    hFocusWnd : LibC::UIntPtrT,
-    dwHotTracking : UInt32,
-    dwIMEState : UInt32,
-    hWndPopup : LibC::UIntPtrT,
-    hDD : LibC::UIntPtrT,
-    hGammaCalibrator : LibC::UIntPtrT,
-    lpGammaCalibrator : Win32cr::Graphics::DirectDraw::LPDDGAMMACALIBRATORPROC
+  struct DDRAWI_DIRECTDRAW_LCL
+    property lpDDMore : UInt32
+    property lpGbl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property dwUnused0 : UInt32
+    property dwLocalFlags : UInt32
+    property dwLocalRefCnt : UInt32
+    property dwProcessId : UInt32
+    property pUnkOuter : Void*
+    property dwObsolete1 : UInt32
+    property hWnd : LibC::UIntPtrT
+    property hDC : LibC::UIntPtrT
+    property dwErrorMode : UInt32
+    property lpPrimary : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*
+    property lpCB : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*
+    property dwPreferredMode : UInt32
+    property hD3DInstance : Win32cr::Foundation::HINSTANCE
+    property pD3DIUnknown : Void*
+    property lpDDCB : Win32cr::Graphics::DirectDraw::DDHAL_CALLBACKS*
+    property hDDVxd : LibC::UIntPtrT
+    property dwAppHackFlags : UInt32
+    property hFocusWnd : LibC::UIntPtrT
+    property dwHotTracking : UInt32
+    property dwIMEState : UInt32
+    property hWndPopup : LibC::UIntPtrT
+    property hDD : LibC::UIntPtrT
+    property hGammaCalibrator : LibC::UIntPtrT
+    property lpGammaCalibrator : Win32cr::Graphics::DirectDraw::LPDDGAMMACALIBRATORPROC
+    def initialize(@lpDDMore : UInt32, @lpGbl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @dwUnused0 : UInt32, @dwLocalFlags : UInt32, @dwLocalRefCnt : UInt32, @dwProcessId : UInt32, @pUnkOuter : Void*, @dwObsolete1 : UInt32, @hWnd : LibC::UIntPtrT, @hDC : LibC::UIntPtrT, @dwErrorMode : UInt32, @lpPrimary : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*, @lpCB : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*, @dwPreferredMode : UInt32, @hD3DInstance : Win32cr::Foundation::HINSTANCE, @pD3DIUnknown : Void*, @lpDDCB : Win32cr::Graphics::DirectDraw::DDHAL_CALLBACKS*, @hDDVxd : LibC::UIntPtrT, @dwAppHackFlags : UInt32, @hFocusWnd : LibC::UIntPtrT, @dwHotTracking : UInt32, @dwIMEState : UInt32, @hWndPopup : LibC::UIntPtrT, @hDD : LibC::UIntPtrT, @hGammaCalibrator : LibC::UIntPtrT, @lpGammaCalibrator : Win32cr::Graphics::DirectDraw::LPDDGAMMACALIBRATORPROC)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DDVIDEOPORT_INT,
-    lpVtbl : Void*,
-    lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_INT*,
-    dwIntRefCnt : UInt32,
-    dwFlags : UInt32
+  struct DDRAWI_DDVIDEOPORT_INT
+    property lpVtbl : Void*
+    property lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_INT*
+    property dwIntRefCnt : UInt32
+    property dwFlags : UInt32
+    def initialize(@lpVtbl : Void*, @lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_INT*, @dwIntRefCnt : UInt32, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DDVIDEOPORT_LCL,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    ddvpDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC,
-    ddvpInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO,
-    lpSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*,
-    lpVBISurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*,
-    lpFlipInts : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT**,
-    dwNumAutoflip : UInt32,
-    dwProcessID : UInt32,
-    dwStateFlags : UInt32,
-    dwFlags : UInt32,
-    dwRefCnt : UInt32,
-    fpLastFlip : LibC::UIntPtrT,
-    dwReserved1 : LibC::UIntPtrT,
-    dwReserved2 : LibC::UIntPtrT,
-    hDDVideoPort : Win32cr::Foundation::HANDLE,
-    dwNumVBIAutoflip : UInt32,
-    lpVBIDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*,
-    lpVideoDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*,
-    lpVBIInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO*,
-    lpVideoInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO*,
-    dwVBIProcessID : UInt32,
-    lpVPNotify : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_INT*
+  struct DDRAWI_DDVIDEOPORT_LCL
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property ddvpDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC
+    property ddvpInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO
+    property lpSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*
+    property lpVBISurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*
+    property lpFlipInts : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT**
+    property dwNumAutoflip : UInt32
+    property dwProcessID : UInt32
+    property dwStateFlags : UInt32
+    property dwFlags : UInt32
+    property dwRefCnt : UInt32
+    property fpLastFlip : LibC::UIntPtrT
+    property dwReserved1 : LibC::UIntPtrT
+    property dwReserved2 : LibC::UIntPtrT
+    property hDDVideoPort : Win32cr::Foundation::HANDLE
+    property dwNumVBIAutoflip : UInt32
+    property lpVBIDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*
+    property lpVideoDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*
+    property lpVBIInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO*
+    property lpVideoInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO*
+    property dwVBIProcessID : UInt32
+    property lpVPNotify : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_INT*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @ddvpDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC, @ddvpInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO, @lpSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*, @lpVBISurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT*, @lpFlipInts : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT**, @dwNumAutoflip : UInt32, @dwProcessID : UInt32, @dwStateFlags : UInt32, @dwFlags : UInt32, @dwRefCnt : UInt32, @fpLastFlip : LibC::UIntPtrT, @dwReserved1 : LibC::UIntPtrT, @dwReserved2 : LibC::UIntPtrT, @hDDVideoPort : Win32cr::Foundation::HANDLE, @dwNumVBIAutoflip : UInt32, @lpVBIDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*, @lpVideoDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*, @lpVBIInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO*, @lpVideoInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO*, @dwVBIProcessID : UInt32, @lpVPNotify : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_INT*)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DDMOTIONCOMP_INT,
-    lpVtbl : Void*,
-    lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*,
-    lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_INT*,
-    dwIntRefCnt : UInt32
+  struct DDRAWI_DDMOTIONCOMP_INT
+    property lpVtbl : Void*
+    property lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*
+    property lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_INT*
+    property dwIntRefCnt : UInt32
+    def initialize(@lpVtbl : Void*, @lpLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*, @lpLink : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_INT*, @dwIntRefCnt : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDRAWI_DDMOTIONCOMP_LCL,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    guid : LibC::GUID,
-    dwUncompWidth : UInt32,
-    dwUncompHeight : UInt32,
-    ddUncompPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT,
-    dwInternalFlags : UInt32,
-    dwRefCnt : UInt32,
-    dwProcessId : UInt32,
-    hMoComp : Win32cr::Foundation::HANDLE,
-    dwDriverReserved1 : UInt32,
-    dwDriverReserved2 : UInt32,
-    dwDriverReserved3 : UInt32,
-    lpDriverReserved1 : Void*,
-    lpDriverReserved2 : Void*,
-    lpDriverReserved3 : Void*
+  struct DDRAWI_DDMOTIONCOMP_LCL
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property guid : LibC::GUID
+    property dwUncompWidth : UInt32
+    property dwUncompHeight : UInt32
+    property ddUncompPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property dwInternalFlags : UInt32
+    property dwRefCnt : UInt32
+    property dwProcessId : UInt32
+    property hMoComp : Win32cr::Foundation::HANDLE
+    property dwDriverReserved1 : UInt32
+    property dwDriverReserved2 : UInt32
+    property dwDriverReserved3 : UInt32
+    property lpDriverReserved1 : Void*
+    property lpDriverReserved2 : Void*
+    property lpDriverReserved3 : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @guid : LibC::GUID, @dwUncompWidth : UInt32, @dwUncompHeight : UInt32, @ddUncompPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @dwInternalFlags : UInt32, @dwRefCnt : UInt32, @dwProcessId : UInt32, @hMoComp : Win32cr::Foundation::HANDLE, @dwDriverReserved1 : UInt32, @dwDriverReserved2 : UInt32, @dwDriverReserved3 : UInt32, @lpDriverReserved1 : Void*, @lpDriverReserved2 : Void*, @lpDriverReserved3 : Void*)
+    end
+  end
 
   @[Extern]
-  record DDHALINFO,
-    dwSize : UInt32,
-    lpDDCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDCALLBACKS*,
-    lpDDSurfaceCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDSURFACECALLBACKS*,
-    lpDDPaletteCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDPALETTECALLBACKS*,
-    vmiData : Win32cr::Graphics::DirectDraw::VIDMEMINFO,
-    ddCaps : Win32cr::Graphics::DirectDraw::DDCORECAPS,
-    dwMonitorFrequency : UInt32,
-    get_driver_info : Win32cr::Graphics::DirectDraw::LPDDHAL_GETDRIVERINFO,
-    dwModeIndex : UInt32,
-    lpdwFourCC : UInt32*,
-    dwNumModes : UInt32,
-    lpModeInfo : Win32cr::Graphics::DirectDraw::DDHALMODEINFO*,
-    dwFlags : UInt32,
-    lpPDevice : Void*,
-    hInstance : UInt32,
-    lpD3DGlobalDriverData : LibC::UIntPtrT,
-    lpD3DHALCallbacks : LibC::UIntPtrT,
-    lpDDExeBufCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDEXEBUFCALLBACKS*
+  struct DDHALINFO
+    property dwSize : UInt32
+    property lpDDCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDCALLBACKS*
+    property lpDDSurfaceCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDSURFACECALLBACKS*
+    property lpDDPaletteCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDPALETTECALLBACKS*
+    property vmiData : Win32cr::Graphics::DirectDraw::VIDMEMINFO
+    property ddCaps : Win32cr::Graphics::DirectDraw::DDCORECAPS
+    property dwMonitorFrequency : UInt32
+    property get_driver_info : Win32cr::Graphics::DirectDraw::LPDDHAL_GETDRIVERINFO
+    property dwModeIndex : UInt32
+    property lpdwFourCC : UInt32*
+    property dwNumModes : UInt32
+    property lpModeInfo : Win32cr::Graphics::DirectDraw::DDHALMODEINFO*
+    property dwFlags : UInt32
+    property lpPDevice : Void*
+    property hInstance : UInt32
+    property lpD3DGlobalDriverData : LibC::UIntPtrT
+    property lpD3DHALCallbacks : LibC::UIntPtrT
+    property lpDDExeBufCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDEXEBUFCALLBACKS*
+    def initialize(@dwSize : UInt32, @lpDDCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDCALLBACKS*, @lpDDSurfaceCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDSURFACECALLBACKS*, @lpDDPaletteCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDPALETTECALLBACKS*, @vmiData : Win32cr::Graphics::DirectDraw::VIDMEMINFO, @ddCaps : Win32cr::Graphics::DirectDraw::DDCORECAPS, @dwMonitorFrequency : UInt32, @get_driver_info : Win32cr::Graphics::DirectDraw::LPDDHAL_GETDRIVERINFO, @dwModeIndex : UInt32, @lpdwFourCC : UInt32*, @dwNumModes : UInt32, @lpModeInfo : Win32cr::Graphics::DirectDraw::DDHALMODEINFO*, @dwFlags : UInt32, @lpPDevice : Void*, @hInstance : UInt32, @lpD3DGlobalDriverData : LibC::UIntPtrT, @lpD3DHALCallbacks : LibC::UIntPtrT, @lpDDExeBufCallbacks : Win32cr::Graphics::DirectDraw::DDHAL_DDEXEBUFCALLBACKS*)
+    end
+  end
 
   @[Extern]
-  record DDHALDDRAWFNS,
-    dwSize : UInt32,
-    lpSetInfo : Win32cr::Graphics::DirectDraw::LPDDHAL_SETINFO,
-    lpVidMemAlloc : Win32cr::Graphics::DirectDraw::LPDDHAL_VIDMEMALLOC,
-    lpVidMemFree : Win32cr::Graphics::DirectDraw::LPDDHAL_VIDMEMFREE
+  struct DDHALDDRAWFNS
+    property dwSize : UInt32
+    property lpSetInfo : Win32cr::Graphics::DirectDraw::LPDDHAL_SETINFO
+    property lpVidMemAlloc : Win32cr::Graphics::DirectDraw::LPDDHAL_VIDMEMALLOC
+    property lpVidMemFree : Win32cr::Graphics::DirectDraw::LPDDHAL_VIDMEMFREE
+    def initialize(@dwSize : UInt32, @lpSetInfo : Win32cr::Graphics::DirectDraw::LPDDHAL_SETINFO, @lpVidMemAlloc : Win32cr::Graphics::DirectDraw::LPDDHAL_VIDMEMALLOC, @lpVidMemFree : Win32cr::Graphics::DirectDraw::LPDDHAL_VIDMEMFREE)
+    end
+  end
 
   @[Extern]
-  record DDHAL_BLTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDDestSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    rDest : Win32cr::Foundation::RECTL,
-    lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    rSrc : Win32cr::Foundation::RECTL,
-    dwFlags : UInt32,
-    dwROPFlags : UInt32,
-    bltFX : Win32cr::Graphics::DirectDraw::DDBLTFX,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    blt : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_BLT,
-    is_clipped : Win32cr::Foundation::BOOL,
-    rOrigDest : Win32cr::Foundation::RECTL,
-    rOrigSrc : Win32cr::Foundation::RECTL,
-    dwRectCnt : UInt32,
-    prDestRects : Win32cr::Foundation::RECT*
+  struct DDHAL_BLTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDDestSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property rDest : Win32cr::Foundation::RECTL
+    property lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property rSrc : Win32cr::Foundation::RECTL
+    property dwFlags : UInt32
+    property dwROPFlags : UInt32
+    property bltFX : Win32cr::Graphics::DirectDraw::DDBLTFX
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property blt : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_BLT
+    property is_clipped : Win32cr::Foundation::BOOL
+    property rOrigDest : Win32cr::Foundation::RECTL
+    property rOrigSrc : Win32cr::Foundation::RECTL
+    property dwRectCnt : UInt32
+    property prDestRects : Win32cr::Foundation::RECT*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDDestSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @rDest : Win32cr::Foundation::RECTL, @lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @rSrc : Win32cr::Foundation::RECTL, @dwFlags : UInt32, @dwROPFlags : UInt32, @bltFX : Win32cr::Graphics::DirectDraw::DDBLTFX, @ddRVal : Win32cr::Foundation::HRESULT, @blt : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_BLT, @is_clipped : Win32cr::Foundation::BOOL, @rOrigDest : Win32cr::Foundation::RECTL, @rOrigSrc : Win32cr::Foundation::RECTL, @dwRectCnt : UInt32, @prDestRects : Win32cr::Foundation::RECT*)
+    end
+  end
 
   @[Extern]
-  record DDHAL_LOCKDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    bHasRect : UInt32,
-    rArea : Win32cr::Foundation::RECTL,
-    lpSurfData : Void*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    lock : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_LOCK,
-    dwFlags : UInt32
+  struct DDHAL_LOCKDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property bHasRect : UInt32
+    property rArea : Win32cr::Foundation::RECTL
+    property lpSurfData : Void*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property lock : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_LOCK
+    property dwFlags : UInt32
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @bHasRect : UInt32, @rArea : Win32cr::Foundation::RECTL, @lpSurfData : Void*, @ddRVal : Win32cr::Foundation::HRESULT, @lock : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_LOCK, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDHAL_UNLOCKDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    unlock : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_UNLOCK
+  struct DDHAL_UNLOCKDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property unlock : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_UNLOCK
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @ddRVal : Win32cr::Foundation::HRESULT, @unlock : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_UNLOCK)
+    end
+  end
 
   @[Extern]
-  record DDHAL_UPDATEOVERLAYDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDDestSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    rDest : Win32cr::Foundation::RECTL,
-    lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    rSrc : Win32cr::Foundation::RECTL,
-    dwFlags : UInt32,
-    overlayFX : Win32cr::Graphics::DirectDraw::DDOVERLAYFX,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    update_overlay : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_UPDATEOVERLAY
+  struct DDHAL_UPDATEOVERLAYDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDDestSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property rDest : Win32cr::Foundation::RECTL
+    property lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property rSrc : Win32cr::Foundation::RECTL
+    property dwFlags : UInt32
+    property overlayFX : Win32cr::Graphics::DirectDraw::DDOVERLAYFX
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property update_overlay : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_UPDATEOVERLAY
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDDestSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @rDest : Win32cr::Foundation::RECTL, @lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @rSrc : Win32cr::Foundation::RECTL, @dwFlags : UInt32, @overlayFX : Win32cr::Graphics::DirectDraw::DDOVERLAYFX, @ddRVal : Win32cr::Foundation::HRESULT, @update_overlay : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_UPDATEOVERLAY)
+    end
+  end
 
   @[Extern]
-  record DDHAL_SETOVERLAYPOSITIONDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    lpDDDestSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    lXPos : Int32,
-    lYPos : Int32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_overlay_position : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETOVERLAYPOSITION
+  struct DDHAL_SETOVERLAYPOSITIONDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property lpDDDestSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property lXPos : Int32
+    property lYPos : Int32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_overlay_position : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETOVERLAYPOSITION
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @lpDDDestSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @lXPos : Int32, @lYPos : Int32, @ddRVal : Win32cr::Foundation::HRESULT, @set_overlay_position : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETOVERLAYPOSITION)
+    end
+  end
 
   @[Extern]
-  record DDHAL_SETPALETTEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_palette : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETPALETTE,
-    attach : Win32cr::Foundation::BOOL
+  struct DDHAL_SETPALETTEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_palette : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETPALETTE
+    property attach : Win32cr::Foundation::BOOL
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*, @ddRVal : Win32cr::Foundation::HRESULT, @set_palette : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETPALETTE, @attach : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DDHAL_FLIPDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpSurfCurr : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    lpSurfTarg : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    dwFlags : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    flip : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_FLIP,
-    lpSurfCurrLeft : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    lpSurfTargLeft : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+  struct DDHAL_FLIPDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpSurfCurr : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property lpSurfTarg : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property dwFlags : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property flip : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_FLIP
+    property lpSurfCurrLeft : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property lpSurfTargLeft : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpSurfCurr : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @lpSurfTarg : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @dwFlags : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @flip : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_FLIP, @lpSurfCurrLeft : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @lpSurfTargLeft : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DESTROYSURFACEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    destroy_surface : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_DESTROYSURFACE
+  struct DDHAL_DESTROYSURFACEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property destroy_surface : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_DESTROYSURFACE
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @ddRVal : Win32cr::Foundation::HRESULT, @destroy_surface : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_DESTROYSURFACE)
+    end
+  end
 
   @[Extern]
-  record DDHAL_SETCLIPLISTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_clip_list : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETCLIPLIST
+  struct DDHAL_SETCLIPLISTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_clip_list : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETCLIPLIST
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @ddRVal : Win32cr::Foundation::HRESULT, @set_clip_list : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETCLIPLIST)
+    end
+  end
 
   @[Extern]
-  record DDHAL_ADDATTACHEDSURFACEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    lpSurfAttached : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    add_attached_surface : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_ADDATTACHEDSURFACE
+  struct DDHAL_ADDATTACHEDSURFACEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property lpSurfAttached : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property add_attached_surface : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_ADDATTACHEDSURFACE
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @lpSurfAttached : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @ddRVal : Win32cr::Foundation::HRESULT, @add_attached_surface : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_ADDATTACHEDSURFACE)
+    end
+  end
 
   @[Extern]
-  record DDHAL_SETCOLORKEYDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    dwFlags : UInt32,
-    ckNew : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_color_key : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETCOLORKEY
+  struct DDHAL_SETCOLORKEYDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property dwFlags : UInt32
+    property ckNew : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_color_key : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETCOLORKEY
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @dwFlags : UInt32, @ckNew : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddRVal : Win32cr::Foundation::HRESULT, @set_color_key : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_SETCOLORKEY)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETBLTSTATUSDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    dwFlags : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_blt_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETBLTSTATUS
+  struct DDHAL_GETBLTSTATUSDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property dwFlags : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_blt_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETBLTSTATUS
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @dwFlags : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_blt_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETBLTSTATUS)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETFLIPSTATUSDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    dwFlags : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_flip_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETFLIPSTATUS
+  struct DDHAL_GETFLIPSTATUSDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property dwFlags : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_flip_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETFLIPSTATUS
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @dwFlags : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_flip_status : Win32cr::Graphics::DirectDraw::LPDDHALSURFCB_GETFLIPSTATUS)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DESTROYPALETTEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    destroy_palette : Win32cr::Graphics::DirectDraw::LPDDHALPALCB_DESTROYPALETTE
+  struct DDHAL_DESTROYPALETTEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property destroy_palette : Win32cr::Graphics::DirectDraw::LPDDHALPALCB_DESTROYPALETTE
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*, @ddRVal : Win32cr::Foundation::HRESULT, @destroy_palette : Win32cr::Graphics::DirectDraw::LPDDHALPALCB_DESTROYPALETTE)
+    end
+  end
 
   @[Extern]
-  record DDHAL_SETENTRIESDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*,
-    dwBase : UInt32,
-    dwNumEntries : UInt32,
-    lpEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_entries : Win32cr::Graphics::DirectDraw::LPDDHALPALCB_SETENTRIES
+  struct DDHAL_SETENTRIESDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*
+    property dwBase : UInt32
+    property dwNumEntries : UInt32
+    property lpEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_entries : Win32cr::Graphics::DirectDraw::LPDDHALPALCB_SETENTRIES
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*, @dwBase : UInt32, @dwNumEntries : UInt32, @lpEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*, @ddRVal : Win32cr::Foundation::HRESULT, @set_entries : Win32cr::Graphics::DirectDraw::LPDDHALPALCB_SETENTRIES)
+    end
+  end
 
   @[Extern]
-  record DDHAL_CREATESURFACEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDSurfaceDesc : Win32cr::Graphics::DirectDraw::DDSURFACEDESC*,
-    lplpSList : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL**,
-    dwSCnt : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    create_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATESURFACE
+  struct DDHAL_CREATESURFACEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDSurfaceDesc : Win32cr::Graphics::DirectDraw::DDSURFACEDESC*
+    property lplpSList : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL**
+    property dwSCnt : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property create_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATESURFACE
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDSurfaceDesc : Win32cr::Graphics::DirectDraw::DDSURFACEDESC*, @lplpSList : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL**, @dwSCnt : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @create_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATESURFACE)
+    end
+  end
 
   @[Extern]
-  record DDHAL_CANCREATESURFACEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDSurfaceDesc : Win32cr::Graphics::DirectDraw::DDSURFACEDESC*,
-    bIsDifferentPixelFormat : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    can_create_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_CANCREATESURFACE
+  struct DDHAL_CANCREATESURFACEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDSurfaceDesc : Win32cr::Graphics::DirectDraw::DDSURFACEDESC*
+    property bIsDifferentPixelFormat : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property can_create_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_CANCREATESURFACE
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDSurfaceDesc : Win32cr::Graphics::DirectDraw::DDSURFACEDESC*, @bIsDifferentPixelFormat : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @can_create_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_CANCREATESURFACE)
+    end
+  end
 
   @[Extern]
-  record DDHAL_CREATEPALETTEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*,
-    lpColorTable : Win32cr::Graphics::Gdi::PALETTEENTRY*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    create_palette : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATEPALETTE,
-    is_excl : Win32cr::Foundation::BOOL
+  struct DDHAL_CREATEPALETTEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*
+    property lpColorTable : Win32cr::Graphics::Gdi::PALETTEENTRY*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property create_palette : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATEPALETTE
+    property is_excl : Win32cr::Foundation::BOOL
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_GBL*, @lpColorTable : Win32cr::Graphics::Gdi::PALETTEENTRY*, @ddRVal : Win32cr::Foundation::HRESULT, @create_palette : Win32cr::Graphics::DirectDraw::LPDDHAL_CREATEPALETTE, @is_excl : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DDHAL_WAITFORVERTICALBLANKDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    dwFlags : UInt32,
-    bIsInVB : UInt32,
-    hEvent : LibC::UIntPtrT,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    wait_for_vertical_blank : Win32cr::Graphics::DirectDraw::LPDDHAL_WAITFORVERTICALBLANK
+  struct DDHAL_WAITFORVERTICALBLANKDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property dwFlags : UInt32
+    property bIsInVB : UInt32
+    property hEvent : LibC::UIntPtrT
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property wait_for_vertical_blank : Win32cr::Graphics::DirectDraw::LPDDHAL_WAITFORVERTICALBLANK
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @dwFlags : UInt32, @bIsInVB : UInt32, @hEvent : LibC::UIntPtrT, @ddRVal : Win32cr::Foundation::HRESULT, @wait_for_vertical_blank : Win32cr::Graphics::DirectDraw::LPDDHAL_WAITFORVERTICALBLANK)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DESTROYDRIVERDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    destroy_driver : Win32cr::Graphics::DirectDraw::LPDDHAL_DESTROYDRIVER
+  struct DDHAL_DESTROYDRIVERDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property destroy_driver : Win32cr::Graphics::DirectDraw::LPDDHAL_DESTROYDRIVER
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @ddRVal : Win32cr::Foundation::HRESULT, @destroy_driver : Win32cr::Graphics::DirectDraw::LPDDHAL_DESTROYDRIVER)
+    end
+  end
 
   @[Extern]
-  record DDHAL_SETMODEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    dwModeIndex : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_mode : Win32cr::Graphics::DirectDraw::LPDDHAL_SETMODE,
-    inexcl : Win32cr::Foundation::BOOL,
-    useRefreshRate : Win32cr::Foundation::BOOL
+  struct DDHAL_SETMODEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property dwModeIndex : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_mode : Win32cr::Graphics::DirectDraw::LPDDHAL_SETMODE
+    property inexcl : Win32cr::Foundation::BOOL
+    property useRefreshRate : Win32cr::Foundation::BOOL
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @dwModeIndex : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @set_mode : Win32cr::Graphics::DirectDraw::LPDDHAL_SETMODE, @inexcl : Win32cr::Foundation::BOOL, @useRefreshRate : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DRVSETCOLORKEYDATA,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    dwFlags : UInt32,
-    ckNew : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_color_key : Win32cr::Graphics::DirectDraw::LPDDHAL_SETCOLORKEY
+  struct DDHAL_DRVSETCOLORKEYDATA
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property dwFlags : UInt32
+    property ckNew : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_color_key : Win32cr::Graphics::DirectDraw::LPDDHAL_SETCOLORKEY
+    def initialize(@lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @dwFlags : UInt32, @ckNew : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddRVal : Win32cr::Foundation::HRESULT, @set_color_key : Win32cr::Graphics::DirectDraw::LPDDHAL_SETCOLORKEY)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETSCANLINEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    dwScanLine : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_scan_line : Win32cr::Graphics::DirectDraw::LPDDHAL_GETSCANLINE
+  struct DDHAL_GETSCANLINEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property dwScanLine : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_scan_line : Win32cr::Graphics::DirectDraw::LPDDHAL_GETSCANLINE
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @dwScanLine : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_scan_line : Win32cr::Graphics::DirectDraw::LPDDHAL_GETSCANLINE)
+    end
+  end
 
   @[Extern]
-  record DDHAL_SETEXCLUSIVEMODEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    dwEnterExcl : UInt32,
-    dwReserved : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_exclusive_mode : Win32cr::Graphics::DirectDraw::LPDDHAL_SETEXCLUSIVEMODE
+  struct DDHAL_SETEXCLUSIVEMODEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property dwEnterExcl : UInt32
+    property dwReserved : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_exclusive_mode : Win32cr::Graphics::DirectDraw::LPDDHAL_SETEXCLUSIVEMODE
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @dwEnterExcl : UInt32, @dwReserved : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @set_exclusive_mode : Win32cr::Graphics::DirectDraw::LPDDHAL_SETEXCLUSIVEMODE)
+    end
+  end
 
   @[Extern]
-  record DDHAL_FLIPTOGDISURFACEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    dwToGDI : UInt32,
-    dwReserved : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    flip_to_gdi_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_FLIPTOGDISURFACE
+  struct DDHAL_FLIPTOGDISURFACEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property dwToGDI : UInt32
+    property dwReserved : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property flip_to_gdi_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_FLIPTOGDISURFACE
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @dwToGDI : UInt32, @dwReserved : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @flip_to_gdi_surface : Win32cr::Graphics::DirectDraw::LPDDHAL_FLIPTOGDISURFACE)
+    end
+  end
 
   @[Extern]
-  record DDHAL_CANCREATEVPORTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpDDVideoPortDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    can_create_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_CANCREATEVIDEOPORT
+  struct DDHAL_CANCREATEVPORTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpDDVideoPortDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property can_create_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_CANCREATEVIDEOPORT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpDDVideoPortDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*, @ddRVal : Win32cr::Foundation::HRESULT, @can_create_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_CANCREATEVIDEOPORT)
+    end
+  end
 
   @[Extern]
-  record DDHAL_CREATEVPORTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpDDVideoPortDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    create_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_CREATEVIDEOPORT
+  struct DDHAL_CREATEVPORTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpDDVideoPortDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property create_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_CREATEVIDEOPORT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpDDVideoPortDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @ddRVal : Win32cr::Foundation::HRESULT, @create_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_CREATEVIDEOPORT)
+    end
+  end
 
   @[Extern]
-  record DDHAL_FLIPVPORTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    lpSurfCurr : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    lpSurfTarg : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    flip_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_FLIP
+  struct DDHAL_FLIPVPORTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property lpSurfCurr : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property lpSurfTarg : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property flip_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_FLIP
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @lpSurfCurr : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @lpSurfTarg : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @ddRVal : Win32cr::Foundation::HRESULT, @flip_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_FLIP)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETVPORTBANDWIDTHDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    lpddpfFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    dwFlags : UInt32,
-    lpBandwidth : Win32cr::Graphics::DirectDraw::DDVIDEOPORTBANDWIDTH*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_bandwidth : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETBANDWIDTH
+  struct DDHAL_GETVPORTBANDWIDTHDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property lpddpfFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property dwFlags : UInt32
+    property lpBandwidth : Win32cr::Graphics::DirectDraw::DDVIDEOPORTBANDWIDTH*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_bandwidth : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETBANDWIDTH
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @lpddpfFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @dwWidth : UInt32, @dwHeight : UInt32, @dwFlags : UInt32, @lpBandwidth : Win32cr::Graphics::DirectDraw::DDVIDEOPORTBANDWIDTH*, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_bandwidth : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETBANDWIDTH)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETVPORTINPUTFORMATDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    dwFlags : UInt32,
-    lpddpfFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    dwNumFormats : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_input_formats : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETINPUTFORMATS
+  struct DDHAL_GETVPORTINPUTFORMATDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property dwFlags : UInt32
+    property lpddpfFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property dwNumFormats : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_input_formats : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETINPUTFORMATS
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @dwFlags : UInt32, @lpddpfFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @dwNumFormats : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_input_formats : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETINPUTFORMATS)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETVPORTOUTPUTFORMATDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    dwFlags : UInt32,
-    lpddpfInputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    lpddpfOutputFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    dwNumFormats : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_output_formats : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETOUTPUTFORMATS
+  struct DDHAL_GETVPORTOUTPUTFORMATDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property dwFlags : UInt32
+    property lpddpfInputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property lpddpfOutputFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property dwNumFormats : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_output_formats : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETOUTPUTFORMATS
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @dwFlags : UInt32, @lpddpfInputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @lpddpfOutputFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @dwNumFormats : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_output_formats : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETOUTPUTFORMATS)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETVPORTFIELDDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    bField : Win32cr::Foundation::BOOL,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_field : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETFIELD
+  struct DDHAL_GETVPORTFIELDDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property bField : Win32cr::Foundation::BOOL
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_field : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETFIELD
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @bField : Win32cr::Foundation::BOOL, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_field : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETFIELD)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETVPORTLINEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    dwLine : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_line : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETLINE
+  struct DDHAL_GETVPORTLINEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property dwLine : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_line : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETLINE
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @dwLine : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_line : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETLINE)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETVPORTCONNECTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    dwPortId : UInt32,
-    lpConnect : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCONNECT*,
-    dwNumEntries : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_connect_info : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETVPORTCONNECT
+  struct DDHAL_GETVPORTCONNECTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property dwPortId : UInt32
+    property lpConnect : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCONNECT*
+    property dwNumEntries : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_connect_info : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETVPORTCONNECT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @dwPortId : UInt32, @lpConnect : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCONNECT*, @dwNumEntries : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_connect_info : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETVPORTCONNECT)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DESTROYVPORTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    destroy_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_DESTROYVPORT
+  struct DDHAL_DESTROYVPORTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property destroy_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_DESTROYVPORT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @ddRVal : Win32cr::Foundation::HRESULT, @destroy_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_DESTROYVPORT)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETVPORTFLIPSTATUSDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    fpSurface : LibC::UIntPtrT,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_flip_status : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETFLIPSTATUS
+  struct DDHAL_GETVPORTFLIPSTATUSDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property fpSurface : LibC::UIntPtrT
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_flip_status : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETFLIPSTATUS
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @fpSurface : LibC::UIntPtrT, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_flip_status : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETFLIPSTATUS)
+    end
+  end
 
   @[Extern]
-  record DDHAL_UPDATEVPORTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    lplpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT**,
-    lplpDDVBISurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT**,
-    lpVideoInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO*,
-    dwFlags : UInt32,
-    dwNumAutoflip : UInt32,
-    dwNumVBIAutoflip : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    update_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_UPDATE
+  struct DDHAL_UPDATEVPORTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property lplpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT**
+    property lplpDDVBISurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT**
+    property lpVideoInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO*
+    property dwFlags : UInt32
+    property dwNumAutoflip : UInt32
+    property dwNumVBIAutoflip : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property update_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_UPDATE
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @lplpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT**, @lplpDDVBISurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_INT**, @lpVideoInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO*, @dwFlags : UInt32, @dwNumAutoflip : UInt32, @dwNumVBIAutoflip : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @update_video_port : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_UPDATE)
+    end
+  end
 
   @[Extern]
-  record DDHAL_WAITFORVPORTSYNCDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    dwFlags : UInt32,
-    dwLine : UInt32,
-    dwTimeOut : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    wait_for_video_port_sync : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_WAITFORSYNC
+  struct DDHAL_WAITFORVPORTSYNCDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property dwFlags : UInt32
+    property dwLine : UInt32
+    property dwTimeOut : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property wait_for_video_port_sync : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_WAITFORSYNC
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @dwFlags : UInt32, @dwLine : UInt32, @dwTimeOut : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @wait_for_video_port_sync : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_WAITFORSYNC)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETVPORTSIGNALDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    dwStatus : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_signal_status : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETSIGNALSTATUS
+  struct DDHAL_GETVPORTSIGNALDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property dwStatus : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_signal_status : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETSIGNALSTATUS
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @dwStatus : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_signal_status : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_GETSIGNALSTATUS)
+    end
+  end
 
   @[Extern]
-  record DDHAL_VPORTCOLORDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    dwFlags : UInt32,
-    lpColorData : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    color_control : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_COLORCONTROL
+  struct DDHAL_VPORTCOLORDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property dwFlags : UInt32
+    property lpColorData : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property color_control : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_COLORCONTROL
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @dwFlags : UInt32, @lpColorData : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*, @ddRVal : Win32cr::Foundation::HRESULT, @color_control : Win32cr::Graphics::DirectDraw::LPDDHALVPORTCB_COLORCONTROL)
+    end
+  end
 
   @[Extern]
-  record DDHAL_COLORCONTROLDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    lpColorData : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*,
-    dwFlags : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    color_control : Win32cr::Graphics::DirectDraw::LPDDHALCOLORCB_COLORCONTROL
+  struct DDHAL_COLORCONTROLDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property lpColorData : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*
+    property dwFlags : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property color_control : Win32cr::Graphics::DirectDraw::LPDDHALCOLORCB_COLORCONTROL
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @lpColorData : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*, @dwFlags : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @color_control : Win32cr::Graphics::DirectDraw::LPDDHALCOLORCB_COLORCONTROL)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETDRIVERINFODATA,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    guidInfo : LibC::GUID,
-    dwExpectedSize : UInt32,
-    lpvData : Void*,
-    dwActualSize : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    dwContext : LibC::UIntPtrT
+  struct DDHAL_GETDRIVERINFODATA
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property guidInfo : LibC::GUID
+    property dwExpectedSize : UInt32
+    property lpvData : Void*
+    property dwActualSize : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property dwContext : LibC::UIntPtrT
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @guidInfo : LibC::GUID, @dwExpectedSize : UInt32, @lpvData : Void*, @dwActualSize : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @dwContext : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETAVAILDRIVERMEMORYDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    dds_caps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    dwTotal : UInt32,
-    dwFree : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_avail_driver_memory : Win32cr::Graphics::DirectDraw::LPDDHAL_GETAVAILDRIVERMEMORY,
-    ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+  struct DDHAL_GETAVAILDRIVERMEMORYDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property dds_caps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property dwTotal : UInt32
+    property dwFree : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_avail_driver_memory : Win32cr::Graphics::DirectDraw::LPDDHAL_GETAVAILDRIVERMEMORY
+    property ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @dds_caps : Win32cr::Graphics::DirectDraw::DDSCAPS, @dwTotal : UInt32, @dwFree : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_avail_driver_memory : Win32cr::Graphics::DirectDraw::LPDDHAL_GETAVAILDRIVERMEMORY, @ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX)
+    end
+  end
 
   @[Extern]
-  record DDHAL_UPDATENONLOCALHEAPDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*,
-    dwHeap : UInt32,
-    fpGARTLin : LibC::UIntPtrT,
-    fpGARTDev : LibC::UIntPtrT,
-    ulPolicyMaxBytes : LibC::UIntPtrT,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    update_non_local_heap : Win32cr::Graphics::DirectDraw::LPDDHAL_UPDATENONLOCALHEAP
+  struct DDHAL_UPDATENONLOCALHEAPDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property dwHeap : UInt32
+    property fpGARTLin : LibC::UIntPtrT
+    property fpGARTDev : LibC::UIntPtrT
+    property ulPolicyMaxBytes : LibC::UIntPtrT
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property update_non_local_heap : Win32cr::Graphics::DirectDraw::LPDDHAL_UPDATENONLOCALHEAP
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @dwHeap : UInt32, @fpGARTLin : LibC::UIntPtrT, @fpGARTDev : LibC::UIntPtrT, @ulPolicyMaxBytes : LibC::UIntPtrT, @ddRVal : Win32cr::Foundation::HRESULT, @update_non_local_heap : Win32cr::Graphics::DirectDraw::LPDDHAL_UPDATENONLOCALHEAP)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETHEAPALIGNMENTDATA,
-    dwInstance : LibC::UIntPtrT,
-    dwHeap : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_heap_alignment : Win32cr::Graphics::DirectDraw::LPDDHAL_GETHEAPALIGNMENT,
-    alignment : Win32cr::Graphics::DirectDraw::HEAPALIGNMENT
+  struct DDHAL_GETHEAPALIGNMENTDATA
+    property dwInstance : LibC::UIntPtrT
+    property dwHeap : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_heap_alignment : Win32cr::Graphics::DirectDraw::LPDDHAL_GETHEAPALIGNMENT
+    property alignment : Win32cr::Graphics::DirectDraw::HEAPALIGNMENT
+    def initialize(@dwInstance : LibC::UIntPtrT, @dwHeap : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_heap_alignment : Win32cr::Graphics::DirectDraw::LPDDHAL_GETHEAPALIGNMENT, @alignment : Win32cr::Graphics::DirectDraw::HEAPALIGNMENT)
+    end
+  end
 
   @[Extern]
-  record DDHAL_CREATESURFACEEXDATA,
-    dwFlags : UInt32,
-    lpDDLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpDDSLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DDHAL_CREATESURFACEEXDATA
+    property dwFlags : UInt32
+    property lpDDLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpDDSLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@dwFlags : UInt32, @lpDDLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpDDSLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETDRIVERSTATEDATA,
-    dwFlags : UInt32,
-    anonymous : Anonymous_e__Union_,
-    lpdwStates : UInt32*,
-    dwLength : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT do
+  struct DDHAL_GETDRIVERSTATEDATA
+    property dwFlags : UInt32
+    property anonymous : Anonymous_e__Union_
+    property lpdwStates : UInt32*
+    property dwLength : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwhContext : LibC::UIntPtrT
+    struct Anonymous_e__Union_
+    property dwhContext : LibC::UIntPtrT
+    def initialize(@dwhContext : LibC::UIntPtrT)
+    end
+    end
 
+    def initialize(@dwFlags : UInt32, @anonymous : Anonymous_e__Union_, @lpdwStates : UInt32*, @dwLength : UInt32, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
   end
 
   @[Extern]
-  record DDHAL_DESTROYDDLOCALDATA,
-    dwFlags : UInt32,
-    pDDLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DDHAL_DESTROYDDLOCALDATA
+    property dwFlags : UInt32
+    property pDDLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@dwFlags : UInt32, @pDDLcl : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DDHAL_SYNCSURFACEDATA,
-    dwSize : UInt32,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    dwSurfaceOffset : UInt32,
-    fpLockPtr : LibC::UIntPtrT,
-    lPitch : Int32,
-    dwOverlayOffset : UInt32,
-    dwOverlaySrcWidth : UInt32,
-    dwOverlaySrcHeight : UInt32,
-    dwOverlayDestWidth : UInt32,
-    dwOverlayDestHeight : UInt32,
-    dwDriverReserved1 : LibC::UIntPtrT,
-    dwDriverReserved2 : LibC::UIntPtrT,
-    dwDriverReserved3 : LibC::UIntPtrT,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DDHAL_SYNCSURFACEDATA
+    property dwSize : UInt32
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property dwSurfaceOffset : UInt32
+    property fpLockPtr : LibC::UIntPtrT
+    property lPitch : Int32
+    property dwOverlayOffset : UInt32
+    property dwOverlaySrcWidth : UInt32
+    property dwOverlaySrcHeight : UInt32
+    property dwOverlayDestWidth : UInt32
+    property dwOverlayDestHeight : UInt32
+    property dwDriverReserved1 : LibC::UIntPtrT
+    property dwDriverReserved2 : LibC::UIntPtrT
+    property dwDriverReserved3 : LibC::UIntPtrT
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@dwSize : UInt32, @lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @dwSurfaceOffset : UInt32, @fpLockPtr : LibC::UIntPtrT, @lPitch : Int32, @dwOverlayOffset : UInt32, @dwOverlaySrcWidth : UInt32, @dwOverlaySrcHeight : UInt32, @dwOverlayDestWidth : UInt32, @dwOverlayDestHeight : UInt32, @dwDriverReserved1 : LibC::UIntPtrT, @dwDriverReserved2 : LibC::UIntPtrT, @dwDriverReserved3 : LibC::UIntPtrT, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DDHAL_SYNCVIDEOPORTDATA,
-    dwSize : UInt32,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*,
-    dwOriginOffset : UInt32,
-    dwHeight : UInt32,
-    dwVBIHeight : UInt32,
-    dwDriverReserved1 : LibC::UIntPtrT,
-    dwDriverReserved2 : LibC::UIntPtrT,
-    dwDriverReserved3 : LibC::UIntPtrT,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DDHAL_SYNCVIDEOPORTDATA
+    property dwSize : UInt32
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*
+    property dwOriginOffset : UInt32
+    property dwHeight : UInt32
+    property dwVBIHeight : UInt32
+    property dwDriverReserved1 : LibC::UIntPtrT
+    property dwDriverReserved2 : LibC::UIntPtrT
+    property dwDriverReserved3 : LibC::UIntPtrT
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@dwSize : UInt32, @lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DDRAWI_DDVIDEOPORT_LCL*, @dwOriginOffset : UInt32, @dwHeight : UInt32, @dwVBIHeight : UInt32, @dwDriverReserved1 : LibC::UIntPtrT, @dwDriverReserved2 : LibC::UIntPtrT, @dwDriverReserved3 : LibC::UIntPtrT, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETMOCOMPGUIDSDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    dwNumGuids : UInt32,
-    lpGuids : LibC::GUID*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_mo_comp_guids : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETGUIDS
+  struct DDHAL_GETMOCOMPGUIDSDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property dwNumGuids : UInt32
+    property lpGuids : LibC::GUID*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_mo_comp_guids : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETGUIDS
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @dwNumGuids : UInt32, @lpGuids : LibC::GUID*, @ddRVal : Win32cr::Foundation::HRESULT, @get_mo_comp_guids : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETGUIDS)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETMOCOMPFORMATSDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpGuid : LibC::GUID*,
-    dwNumFormats : UInt32,
-    lpFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_mo_comp_formats : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETFORMATS
+  struct DDHAL_GETMOCOMPFORMATSDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpGuid : LibC::GUID*
+    property dwNumFormats : UInt32
+    property lpFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_mo_comp_formats : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETFORMATS
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpGuid : LibC::GUID*, @dwNumFormats : UInt32, @lpFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @ddRVal : Win32cr::Foundation::HRESULT, @get_mo_comp_formats : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETFORMATS)
+    end
+  end
 
   @[Extern]
-  record DDHAL_CREATEMOCOMPDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*,
-    lpGuid : LibC::GUID*,
-    dwUncompWidth : UInt32,
-    dwUncompHeight : UInt32,
-    ddUncompPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT,
-    lpData : Void*,
-    dwDataSize : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    create_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_CREATE
+  struct DDHAL_CREATEMOCOMPDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*
+    property lpGuid : LibC::GUID*
+    property dwUncompWidth : UInt32
+    property dwUncompHeight : UInt32
+    property ddUncompPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property lpData : Void*
+    property dwDataSize : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property create_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_CREATE
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*, @lpGuid : LibC::GUID*, @dwUncompWidth : UInt32, @dwUncompHeight : UInt32, @ddUncompPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @lpData : Void*, @dwDataSize : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @create_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_CREATE)
+    end
+  end
 
   @[Extern]
-  record DDMCCOMPBUFFERINFO,
-    dwSize : UInt32,
-    dwNumCompBuffers : UInt32,
-    dwWidthToCreate : UInt32,
-    dwHeightToCreate : UInt32,
-    dwBytesToAllocate : UInt32,
-    ddCompCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2,
-    ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+  struct DDMCCOMPBUFFERINFO
+    property dwSize : UInt32
+    property dwNumCompBuffers : UInt32
+    property dwWidthToCreate : UInt32
+    property dwHeightToCreate : UInt32
+    property dwBytesToAllocate : UInt32
+    property ddCompCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2
+    property ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    def initialize(@dwSize : UInt32, @dwNumCompBuffers : UInt32, @dwWidthToCreate : UInt32, @dwHeightToCreate : UInt32, @dwBytesToAllocate : UInt32, @ddCompCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2, @ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETMOCOMPCOMPBUFFDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpGuid : LibC::GUID*,
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT,
-    dwNumTypesCompBuffs : UInt32,
-    lpCompBuffInfo : Win32cr::Graphics::DirectDraw::DDMCCOMPBUFFERINFO*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_mo_comp_buff_info : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETCOMPBUFFINFO
+  struct DDHAL_GETMOCOMPCOMPBUFFDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpGuid : LibC::GUID*
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property dwNumTypesCompBuffs : UInt32
+    property lpCompBuffInfo : Win32cr::Graphics::DirectDraw::DDMCCOMPBUFFERINFO*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_mo_comp_buff_info : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETCOMPBUFFINFO
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpGuid : LibC::GUID*, @dwWidth : UInt32, @dwHeight : UInt32, @ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @dwNumTypesCompBuffs : UInt32, @lpCompBuffInfo : Win32cr::Graphics::DirectDraw::DDMCCOMPBUFFERINFO*, @ddRVal : Win32cr::Foundation::HRESULT, @get_mo_comp_buff_info : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETCOMPBUFFINFO)
+    end
+  end
 
   @[Extern]
-  record DDHAL_GETINTERNALMOCOMPDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpGuid : LibC::GUID*,
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT,
-    dwScratchMemAlloc : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_internal_mo_comp_info : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETINTERNALINFO
+  struct DDHAL_GETINTERNALMOCOMPDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpGuid : LibC::GUID*
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property dwScratchMemAlloc : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_internal_mo_comp_info : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETINTERNALINFO
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpGuid : LibC::GUID*, @dwWidth : UInt32, @dwHeight : UInt32, @ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @dwScratchMemAlloc : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_internal_mo_comp_info : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_GETINTERNALINFO)
+    end
+  end
 
   @[Extern]
-  record DDHAL_BEGINMOCOMPFRAMEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*,
-    lpDestSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    dwInputDataSize : UInt32,
-    lpInputData : Void*,
-    dwOutputDataSize : UInt32,
-    lpOutputData : Void*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    begin_mo_comp_frame : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_BEGINFRAME
+  struct DDHAL_BEGINMOCOMPFRAMEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*
+    property lpDestSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property dwInputDataSize : UInt32
+    property lpInputData : Void*
+    property dwOutputDataSize : UInt32
+    property lpOutputData : Void*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property begin_mo_comp_frame : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_BEGINFRAME
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*, @lpDestSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @dwInputDataSize : UInt32, @lpInputData : Void*, @dwOutputDataSize : UInt32, @lpOutputData : Void*, @ddRVal : Win32cr::Foundation::HRESULT, @begin_mo_comp_frame : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_BEGINFRAME)
+    end
+  end
 
   @[Extern]
-  record DDHAL_ENDMOCOMPFRAMEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*,
-    lpInputData : Void*,
-    dwInputDataSize : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    end_mo_comp_frame : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_ENDFRAME
+  struct DDHAL_ENDMOCOMPFRAMEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*
+    property lpInputData : Void*
+    property dwInputDataSize : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property end_mo_comp_frame : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_ENDFRAME
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*, @lpInputData : Void*, @dwInputDataSize : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @end_mo_comp_frame : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_ENDFRAME)
+    end
+  end
 
   @[Extern]
-  record DDMCBUFFERINFO,
-    dwSize : UInt32,
-    lpCompSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    dwDataOffset : UInt32,
-    dwDataSize : UInt32,
-    lpPrivate : Void*
+  struct DDMCBUFFERINFO
+    property dwSize : UInt32
+    property lpCompSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property dwDataOffset : UInt32
+    property dwDataSize : UInt32
+    property lpPrivate : Void*
+    def initialize(@dwSize : UInt32, @lpCompSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @dwDataOffset : UInt32, @dwDataSize : UInt32, @lpPrivate : Void*)
+    end
+  end
 
   @[Extern]
-  record DDHAL_RENDERMOCOMPDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*,
-    dwNumBuffers : UInt32,
-    lpBufferInfo : Win32cr::Graphics::DirectDraw::DDMCBUFFERINFO*,
-    dwFunction : UInt32,
-    lpInputData : Void*,
-    dwInputDataSize : UInt32,
-    lpOutputData : Void*,
-    dwOutputDataSize : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    render_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_RENDER
+  struct DDHAL_RENDERMOCOMPDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*
+    property dwNumBuffers : UInt32
+    property lpBufferInfo : Win32cr::Graphics::DirectDraw::DDMCBUFFERINFO*
+    property dwFunction : UInt32
+    property lpInputData : Void*
+    property dwInputDataSize : UInt32
+    property lpOutputData : Void*
+    property dwOutputDataSize : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property render_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_RENDER
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*, @dwNumBuffers : UInt32, @lpBufferInfo : Win32cr::Graphics::DirectDraw::DDMCBUFFERINFO*, @dwFunction : UInt32, @lpInputData : Void*, @dwInputDataSize : UInt32, @lpOutputData : Void*, @dwOutputDataSize : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @render_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_RENDER)
+    end
+  end
 
   @[Extern]
-  record DDHAL_QUERYMOCOMPSTATUSDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*,
-    lpSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*,
-    dwFlags : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    query_mo_comp_status : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_QUERYSTATUS
+  struct DDHAL_QUERYMOCOMPSTATUSDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*
+    property lpSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*
+    property dwFlags : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property query_mo_comp_status : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_QUERYSTATUS
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*, @lpSurface : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWSURFACE_LCL*, @dwFlags : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @query_mo_comp_status : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_QUERYSTATUS)
+    end
+  end
 
   @[Extern]
-  record DDHAL_DESTROYMOCOMPDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*,
-    lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    destroy_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_DESTROY
+  struct DDHAL_DESTROYMOCOMPDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*
+    property lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property destroy_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_DESTROY
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_LCL*, @lpMoComp : Win32cr::Graphics::DirectDraw::DDRAWI_DDMOTIONCOMP_LCL*, @ddRVal : Win32cr::Foundation::HRESULT, @destroy_mo_comp : Win32cr::Graphics::DirectDraw::LPDDHALMOCOMPCB_DESTROY)
+    end
+  end
 
   @[Extern]
-  record DD_DESTROYDRIVERDATA_
+  struct DD_DESTROYDRIVERDATA_
+    def initialize()
+    end
+  end
+
   @[Extern]
-  record DD_SETMODEDATA_
+  struct DD_SETMODEDATA_
+    def initialize()
+    end
+  end
+
   @[Extern]
-  record DD_GETVPORTAUTOFLIPSURFACEDATA_
+  struct DD_GETVPORTAUTOFLIPSURFACEDATA_
+    def initialize()
+    end
+  end
+
   @[Extern]
-  record VIDEOMEMORY,
-    dwFlags : UInt32,
-    fpStart : LibC::UIntPtrT,
-    anonymous1 : Anonymous1_e__Union_,
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    ddsCapsAlt : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct VIDEOMEMORY
+    property dwFlags : UInt32
+    property fpStart : LibC::UIntPtrT
+    property anonymous1 : Anonymous1_e__Union_
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property ddsCapsAlt : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      fpEnd : LibC::UIntPtrT,
-      dwWidth : UInt32
+    struct Anonymous1_e__Union_
+    property fpEnd : LibC::UIntPtrT
+    property dwWidth : UInt32
+    def initialize(@fpEnd : LibC::UIntPtrT, @dwWidth : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      lpHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*,
-      dwHeight : UInt32
+    struct Anonymous2_e__Union_
+    property lpHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*
+    property dwHeight : UInt32
+    def initialize(@lpHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*, @dwHeight : UInt32)
+    end
+    end
 
+    def initialize(@dwFlags : UInt32, @fpStart : LibC::UIntPtrT, @anonymous1 : Anonymous1_e__Union_, @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS, @ddsCapsAlt : Win32cr::Graphics::DirectDraw::DDSCAPS, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record VIDEOMEMORYINFO,
-    fpPrimary : LibC::UIntPtrT,
-    dwFlags : UInt32,
-    dwDisplayWidth : UInt32,
-    dwDisplayHeight : UInt32,
-    lDisplayPitch : Int32,
-    ddpfDisplay : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT,
-    dwOffscreenAlign : UInt32,
-    dwOverlayAlign : UInt32,
-    dwTextureAlign : UInt32,
-    dwZBufferAlign : UInt32,
-    dwAlphaAlign : UInt32,
-    pvPrimary : Void*
+  struct VIDEOMEMORYINFO
+    property fpPrimary : LibC::UIntPtrT
+    property dwFlags : UInt32
+    property dwDisplayWidth : UInt32
+    property dwDisplayHeight : UInt32
+    property lDisplayPitch : Int32
+    property ddpfDisplay : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property dwOffscreenAlign : UInt32
+    property dwOverlayAlign : UInt32
+    property dwTextureAlign : UInt32
+    property dwZBufferAlign : UInt32
+    property dwAlphaAlign : UInt32
+    property pvPrimary : Void*
+    def initialize(@fpPrimary : LibC::UIntPtrT, @dwFlags : UInt32, @dwDisplayWidth : UInt32, @dwDisplayHeight : UInt32, @lDisplayPitch : Int32, @ddpfDisplay : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @dwOffscreenAlign : UInt32, @dwOverlayAlign : UInt32, @dwTextureAlign : UInt32, @dwZBufferAlign : UInt32, @dwAlphaAlign : UInt32, @pvPrimary : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_CALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    destroy_driver : Win32cr::Graphics::DirectDraw::PDD_DESTROYDRIVER,
-    create_surface : Win32cr::Graphics::DirectDraw::PDD_CREATESURFACE,
-    set_color_key : Win32cr::Graphics::DirectDraw::PDD_SETCOLORKEY,
-    set_mode : Win32cr::Graphics::DirectDraw::PDD_SETMODE,
-    wait_for_vertical_blank : Win32cr::Graphics::DirectDraw::PDD_WAITFORVERTICALBLANK,
-    can_create_surface : Win32cr::Graphics::DirectDraw::PDD_CANCREATESURFACE,
-    create_palette : Win32cr::Graphics::DirectDraw::PDD_CREATEPALETTE,
-    get_scan_line : Win32cr::Graphics::DirectDraw::PDD_GETSCANLINE,
-    map_memory : Win32cr::Graphics::DirectDraw::PDD_MAPMEMORY
+  struct DD_CALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property destroy_driver : Win32cr::Graphics::DirectDraw::PDD_DESTROYDRIVER
+    property create_surface : Win32cr::Graphics::DirectDraw::PDD_CREATESURFACE
+    property set_color_key : Win32cr::Graphics::DirectDraw::PDD_SETCOLORKEY
+    property set_mode : Win32cr::Graphics::DirectDraw::PDD_SETMODE
+    property wait_for_vertical_blank : Win32cr::Graphics::DirectDraw::PDD_WAITFORVERTICALBLANK
+    property can_create_surface : Win32cr::Graphics::DirectDraw::PDD_CANCREATESURFACE
+    property create_palette : Win32cr::Graphics::DirectDraw::PDD_CREATEPALETTE
+    property get_scan_line : Win32cr::Graphics::DirectDraw::PDD_GETSCANLINE
+    property map_memory : Win32cr::Graphics::DirectDraw::PDD_MAPMEMORY
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @destroy_driver : Win32cr::Graphics::DirectDraw::PDD_DESTROYDRIVER, @create_surface : Win32cr::Graphics::DirectDraw::PDD_CREATESURFACE, @set_color_key : Win32cr::Graphics::DirectDraw::PDD_SETCOLORKEY, @set_mode : Win32cr::Graphics::DirectDraw::PDD_SETMODE, @wait_for_vertical_blank : Win32cr::Graphics::DirectDraw::PDD_WAITFORVERTICALBLANK, @can_create_surface : Win32cr::Graphics::DirectDraw::PDD_CANCREATESURFACE, @create_palette : Win32cr::Graphics::DirectDraw::PDD_CREATEPALETTE, @get_scan_line : Win32cr::Graphics::DirectDraw::PDD_GETSCANLINE, @map_memory : Win32cr::Graphics::DirectDraw::PDD_MAPMEMORY)
+    end
+  end
 
   @[Extern]
-  record DD_MISCELLANEOUSCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    get_avail_driver_memory : Win32cr::Graphics::DirectDraw::PDD_GETAVAILDRIVERMEMORY
+  struct DD_MISCELLANEOUSCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property get_avail_driver_memory : Win32cr::Graphics::DirectDraw::PDD_GETAVAILDRIVERMEMORY
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @get_avail_driver_memory : Win32cr::Graphics::DirectDraw::PDD_GETAVAILDRIVERMEMORY)
+    end
+  end
 
   @[Extern]
-  record DD_MISCELLANEOUS2CALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    alpha_blt : Win32cr::Graphics::DirectDraw::PDD_ALPHABLT,
-    create_surface_ex : Win32cr::Graphics::DirectDraw::PDD_CREATESURFACEEX,
-    get_driver_state : Win32cr::Graphics::DirectDraw::PDD_GETDRIVERSTATE,
-    destroy_dd_local : Win32cr::Graphics::DirectDraw::PDD_DESTROYDDLOCAL
+  struct DD_MISCELLANEOUS2CALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property alpha_blt : Win32cr::Graphics::DirectDraw::PDD_ALPHABLT
+    property create_surface_ex : Win32cr::Graphics::DirectDraw::PDD_CREATESURFACEEX
+    property get_driver_state : Win32cr::Graphics::DirectDraw::PDD_GETDRIVERSTATE
+    property destroy_dd_local : Win32cr::Graphics::DirectDraw::PDD_DESTROYDDLOCAL
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @alpha_blt : Win32cr::Graphics::DirectDraw::PDD_ALPHABLT, @create_surface_ex : Win32cr::Graphics::DirectDraw::PDD_CREATESURFACEEX, @get_driver_state : Win32cr::Graphics::DirectDraw::PDD_GETDRIVERSTATE, @destroy_dd_local : Win32cr::Graphics::DirectDraw::PDD_DESTROYDDLOCAL)
+    end
+  end
 
   @[Extern]
-  record DD_NTCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    free_driver_memory : Win32cr::Graphics::DirectDraw::PDD_FREEDRIVERMEMORY,
-    set_exclusive_mode : Win32cr::Graphics::DirectDraw::PDD_SETEXCLUSIVEMODE,
-    flip_to_gdi_surface : Win32cr::Graphics::DirectDraw::PDD_FLIPTOGDISURFACE
+  struct DD_NTCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property free_driver_memory : Win32cr::Graphics::DirectDraw::PDD_FREEDRIVERMEMORY
+    property set_exclusive_mode : Win32cr::Graphics::DirectDraw::PDD_SETEXCLUSIVEMODE
+    property flip_to_gdi_surface : Win32cr::Graphics::DirectDraw::PDD_FLIPTOGDISURFACE
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @free_driver_memory : Win32cr::Graphics::DirectDraw::PDD_FREEDRIVERMEMORY, @set_exclusive_mode : Win32cr::Graphics::DirectDraw::PDD_SETEXCLUSIVEMODE, @flip_to_gdi_surface : Win32cr::Graphics::DirectDraw::PDD_FLIPTOGDISURFACE)
+    end
+  end
 
   @[Extern]
-  record DD_PALETTECALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    destroy_palette : Win32cr::Graphics::DirectDraw::PDD_PALCB_DESTROYPALETTE,
-    set_entries : Win32cr::Graphics::DirectDraw::PDD_PALCB_SETENTRIES
+  struct DD_PALETTECALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property destroy_palette : Win32cr::Graphics::DirectDraw::PDD_PALCB_DESTROYPALETTE
+    property set_entries : Win32cr::Graphics::DirectDraw::PDD_PALCB_SETENTRIES
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @destroy_palette : Win32cr::Graphics::DirectDraw::PDD_PALCB_DESTROYPALETTE, @set_entries : Win32cr::Graphics::DirectDraw::PDD_PALCB_SETENTRIES)
+    end
+  end
 
   @[Extern]
-  record DD_SURFACECALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    destroy_surface : Win32cr::Graphics::DirectDraw::PDD_SURFCB_DESTROYSURFACE,
-    flip : Win32cr::Graphics::DirectDraw::PDD_SURFCB_FLIP,
-    set_clip_list : Win32cr::Graphics::DirectDraw::PDD_SURFCB_SETCLIPLIST,
-    lock : Win32cr::Graphics::DirectDraw::PDD_SURFCB_LOCK,
-    unlock : Win32cr::Graphics::DirectDraw::PDD_SURFCB_UNLOCK,
-    blt : Win32cr::Graphics::DirectDraw::PDD_SURFCB_BLT,
-    set_color_key : Win32cr::Graphics::DirectDraw::PDD_SURFCB_SETCOLORKEY,
-    add_attached_surface : Win32cr::Graphics::DirectDraw::PDD_SURFCB_ADDATTACHEDSURFACE,
-    get_blt_status : Win32cr::Graphics::DirectDraw::PDD_SURFCB_GETBLTSTATUS,
-    get_flip_status : Win32cr::Graphics::DirectDraw::PDD_SURFCB_GETFLIPSTATUS,
-    update_overlay : Win32cr::Graphics::DirectDraw::PDD_SURFCB_UPDATEOVERLAY,
-    set_overlay_position : Win32cr::Graphics::DirectDraw::PDD_SURFCB_SETOVERLAYPOSITION,
-    reserved4 : Void*,
-    set_palette : Win32cr::Graphics::DirectDraw::PDD_SURFCB_SETPALETTE
+  struct DD_SURFACECALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property destroy_surface : Win32cr::Graphics::DirectDraw::PDD_SURFCB_DESTROYSURFACE
+    property flip : Win32cr::Graphics::DirectDraw::PDD_SURFCB_FLIP
+    property set_clip_list : Win32cr::Graphics::DirectDraw::PDD_SURFCB_SETCLIPLIST
+    property lock : Win32cr::Graphics::DirectDraw::PDD_SURFCB_LOCK
+    property unlock : Win32cr::Graphics::DirectDraw::PDD_SURFCB_UNLOCK
+    property blt : Win32cr::Graphics::DirectDraw::PDD_SURFCB_BLT
+    property set_color_key : Win32cr::Graphics::DirectDraw::PDD_SURFCB_SETCOLORKEY
+    property add_attached_surface : Win32cr::Graphics::DirectDraw::PDD_SURFCB_ADDATTACHEDSURFACE
+    property get_blt_status : Win32cr::Graphics::DirectDraw::PDD_SURFCB_GETBLTSTATUS
+    property get_flip_status : Win32cr::Graphics::DirectDraw::PDD_SURFCB_GETFLIPSTATUS
+    property update_overlay : Win32cr::Graphics::DirectDraw::PDD_SURFCB_UPDATEOVERLAY
+    property set_overlay_position : Win32cr::Graphics::DirectDraw::PDD_SURFCB_SETOVERLAYPOSITION
+    property reserved4 : Void*
+    property set_palette : Win32cr::Graphics::DirectDraw::PDD_SURFCB_SETPALETTE
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @destroy_surface : Win32cr::Graphics::DirectDraw::PDD_SURFCB_DESTROYSURFACE, @flip : Win32cr::Graphics::DirectDraw::PDD_SURFCB_FLIP, @set_clip_list : Win32cr::Graphics::DirectDraw::PDD_SURFCB_SETCLIPLIST, @lock : Win32cr::Graphics::DirectDraw::PDD_SURFCB_LOCK, @unlock : Win32cr::Graphics::DirectDraw::PDD_SURFCB_UNLOCK, @blt : Win32cr::Graphics::DirectDraw::PDD_SURFCB_BLT, @set_color_key : Win32cr::Graphics::DirectDraw::PDD_SURFCB_SETCOLORKEY, @add_attached_surface : Win32cr::Graphics::DirectDraw::PDD_SURFCB_ADDATTACHEDSURFACE, @get_blt_status : Win32cr::Graphics::DirectDraw::PDD_SURFCB_GETBLTSTATUS, @get_flip_status : Win32cr::Graphics::DirectDraw::PDD_SURFCB_GETFLIPSTATUS, @update_overlay : Win32cr::Graphics::DirectDraw::PDD_SURFCB_UPDATEOVERLAY, @set_overlay_position : Win32cr::Graphics::DirectDraw::PDD_SURFCB_SETOVERLAYPOSITION, @reserved4 : Void*, @set_palette : Win32cr::Graphics::DirectDraw::PDD_SURFCB_SETPALETTE)
+    end
+  end
 
   @[Extern]
-  record DD_VIDEOPORTCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    can_create_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_CANCREATEVIDEOPORT,
-    create_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_CREATEVIDEOPORT,
-    flip_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_FLIP,
-    get_video_port_bandwidth : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETBANDWIDTH,
-    get_video_port_input_formats : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETINPUTFORMATS,
-    get_video_port_output_formats : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETOUTPUTFORMATS,
-    lpReserved1 : Void*,
-    get_video_port_field : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETFIELD,
-    get_video_port_line : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETLINE,
-    get_video_port_connect_info : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETVPORTCONNECT,
-    destroy_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_DESTROYVPORT,
-    get_video_port_flip_status : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETFLIPSTATUS,
-    update_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_UPDATE,
-    wait_for_video_port_sync : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_WAITFORSYNC,
-    get_video_signal_status : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETSIGNALSTATUS,
-    color_control : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_COLORCONTROL
+  struct DD_VIDEOPORTCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property can_create_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_CANCREATEVIDEOPORT
+    property create_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_CREATEVIDEOPORT
+    property flip_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_FLIP
+    property get_video_port_bandwidth : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETBANDWIDTH
+    property get_video_port_input_formats : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETINPUTFORMATS
+    property get_video_port_output_formats : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETOUTPUTFORMATS
+    property lpReserved1 : Void*
+    property get_video_port_field : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETFIELD
+    property get_video_port_line : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETLINE
+    property get_video_port_connect_info : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETVPORTCONNECT
+    property destroy_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_DESTROYVPORT
+    property get_video_port_flip_status : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETFLIPSTATUS
+    property update_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_UPDATE
+    property wait_for_video_port_sync : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_WAITFORSYNC
+    property get_video_signal_status : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETSIGNALSTATUS
+    property color_control : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_COLORCONTROL
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @can_create_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_CANCREATEVIDEOPORT, @create_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_CREATEVIDEOPORT, @flip_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_FLIP, @get_video_port_bandwidth : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETBANDWIDTH, @get_video_port_input_formats : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETINPUTFORMATS, @get_video_port_output_formats : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETOUTPUTFORMATS, @lpReserved1 : Void*, @get_video_port_field : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETFIELD, @get_video_port_line : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETLINE, @get_video_port_connect_info : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETVPORTCONNECT, @destroy_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_DESTROYVPORT, @get_video_port_flip_status : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETFLIPSTATUS, @update_video_port : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_UPDATE, @wait_for_video_port_sync : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_WAITFORSYNC, @get_video_signal_status : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_GETSIGNALSTATUS, @color_control : Win32cr::Graphics::DirectDraw::PDD_VPORTCB_COLORCONTROL)
+    end
+  end
 
   @[Extern]
-  record DD_COLORCONTROLCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    color_control : Win32cr::Graphics::DirectDraw::PDD_COLORCB_COLORCONTROL
+  struct DD_COLORCONTROLCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property color_control : Win32cr::Graphics::DirectDraw::PDD_COLORCB_COLORCONTROL
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @color_control : Win32cr::Graphics::DirectDraw::PDD_COLORCB_COLORCONTROL)
+    end
+  end
 
   @[Extern]
-  record DD_KERNELCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    sync_surface_data : Win32cr::Graphics::DirectDraw::PDD_KERNELCB_SYNCSURFACE,
-    sync_video_port_data : Win32cr::Graphics::DirectDraw::PDD_KERNELCB_SYNCVIDEOPORT
+  struct DD_KERNELCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property sync_surface_data : Win32cr::Graphics::DirectDraw::PDD_KERNELCB_SYNCSURFACE
+    property sync_video_port_data : Win32cr::Graphics::DirectDraw::PDD_KERNELCB_SYNCVIDEOPORT
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @sync_surface_data : Win32cr::Graphics::DirectDraw::PDD_KERNELCB_SYNCSURFACE, @sync_video_port_data : Win32cr::Graphics::DirectDraw::PDD_KERNELCB_SYNCVIDEOPORT)
+    end
+  end
 
   @[Extern]
-  record DD_MOTIONCOMPCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    get_mo_comp_guids : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_GETGUIDS,
-    get_mo_comp_formats : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_GETFORMATS,
-    create_mo_comp : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_CREATE,
-    get_mo_comp_buff_info : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_GETCOMPBUFFINFO,
-    get_internal_mo_comp_info : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_GETINTERNALINFO,
-    begin_mo_comp_frame : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_BEGINFRAME,
-    end_mo_comp_frame : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_ENDFRAME,
-    render_mo_comp : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_RENDER,
-    query_mo_comp_status : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_QUERYSTATUS,
-    destroy_mo_comp : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_DESTROY
+  struct DD_MOTIONCOMPCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property get_mo_comp_guids : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_GETGUIDS
+    property get_mo_comp_formats : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_GETFORMATS
+    property create_mo_comp : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_CREATE
+    property get_mo_comp_buff_info : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_GETCOMPBUFFINFO
+    property get_internal_mo_comp_info : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_GETINTERNALINFO
+    property begin_mo_comp_frame : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_BEGINFRAME
+    property end_mo_comp_frame : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_ENDFRAME
+    property render_mo_comp : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_RENDER
+    property query_mo_comp_status : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_QUERYSTATUS
+    property destroy_mo_comp : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_DESTROY
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @get_mo_comp_guids : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_GETGUIDS, @get_mo_comp_formats : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_GETFORMATS, @create_mo_comp : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_CREATE, @get_mo_comp_buff_info : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_GETCOMPBUFFINFO, @get_internal_mo_comp_info : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_GETINTERNALINFO, @begin_mo_comp_frame : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_BEGINFRAME, @end_mo_comp_frame : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_ENDFRAME, @render_mo_comp : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_RENDER, @query_mo_comp_status : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_QUERYSTATUS, @destroy_mo_comp : Win32cr::Graphics::DirectDraw::PDD_MOCOMPCB_DESTROY)
+    end
+  end
 
   @[Extern]
-  record DD_NONLOCALVIDMEMCAPS,
-    dwSize : UInt32,
-    dwNLVBCaps : UInt32,
-    dwNLVBCaps2 : UInt32,
-    dwNLVBCKeyCaps : UInt32,
-    dwNLVBFXCaps : UInt32,
-    dwNLVBRops : UInt32[8]
+  struct DD_NONLOCALVIDMEMCAPS
+    property dwSize : UInt32
+    property dwNLVBCaps : UInt32
+    property dwNLVBCaps2 : UInt32
+    property dwNLVBCKeyCaps : UInt32
+    property dwNLVBFXCaps : UInt32
+    property dwNLVBRops : UInt32[8]
+    def initialize(@dwSize : UInt32, @dwNLVBCaps : UInt32, @dwNLVBCaps2 : UInt32, @dwNLVBCKeyCaps : UInt32, @dwNLVBFXCaps : UInt32, @dwNLVBRops : UInt32[8])
+    end
+  end
 
   @[Extern]
-  record DD_PALETTE_GLOBAL,
-    dwReserved1 : LibC::UIntPtrT
+  struct DD_PALETTE_GLOBAL
+    property dwReserved1 : LibC::UIntPtrT
+    def initialize(@dwReserved1 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DD_PALETTE_LOCAL,
-    dwReserved0 : UInt32,
-    dwReserved1 : LibC::UIntPtrT
+  struct DD_PALETTE_LOCAL
+    property dwReserved0 : UInt32
+    property dwReserved1 : LibC::UIntPtrT
+    def initialize(@dwReserved0 : UInt32, @dwReserved1 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DD_CLIPPER_GLOBAL,
-    dwReserved1 : LibC::UIntPtrT
+  struct DD_CLIPPER_GLOBAL
+    property dwReserved1 : LibC::UIntPtrT
+    def initialize(@dwReserved1 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DD_CLIPPER_LOCAL,
-    dwReserved1 : LibC::UIntPtrT
+  struct DD_CLIPPER_LOCAL
+    property dwReserved1 : LibC::UIntPtrT
+    def initialize(@dwReserved1 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DD_ATTACHLIST,
-    lpLink : Win32cr::Graphics::DirectDraw::DD_ATTACHLIST*,
-    lpAttached : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+  struct DD_ATTACHLIST
+    property lpLink : Win32cr::Graphics::DirectDraw::DD_ATTACHLIST*
+    property lpAttached : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    def initialize(@lpLink : Win32cr::Graphics::DirectDraw::DD_ATTACHLIST*, @lpAttached : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*)
+    end
+  end
 
   @[Extern]
-  record DD_SURFACE_INT,
-    lpLcl : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+  struct DD_SURFACE_INT
+    property lpLcl : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    def initialize(@lpLcl : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*)
+    end
+  end
 
   @[Extern]
-  record DD_SURFACE_GLOBAL,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    fpVidMem : LibC::UIntPtrT,
-    anonymous3 : Anonymous3_e__Union_,
-    yHint : Int32,
-    xHint : Int32,
-    wHeight : UInt32,
-    wWidth : UInt32,
-    dwReserved1 : LibC::UIntPtrT,
-    ddpfSurface : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT,
-    fpHeapOffset : LibC::UIntPtrT,
-    hCreatorProcess : Win32cr::Foundation::HANDLE do
+  struct DD_SURFACE_GLOBAL
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property fpVidMem : LibC::UIntPtrT
+    property anonymous3 : Anonymous3_e__Union_
+    property yHint : Int32
+    property xHint : Int32
+    property wHeight : UInt32
+    property wWidth : UInt32
+    property dwReserved1 : LibC::UIntPtrT
+    property ddpfSurface : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property fpHeapOffset : LibC::UIntPtrT
+    property hCreatorProcess : Win32cr::Foundation::HANDLE
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      lPitch : Int32,
-      dwLinearSize : UInt32
+    struct Anonymous3_e__Union_
+    property lPitch : Int32
+    property dwLinearSize : UInt32
+    def initialize(@lPitch : Int32, @dwLinearSize : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      dwBlockSizeY : UInt32,
-      lSlicePitch : Int32
+    struct Anonymous1_e__Union_
+    property dwBlockSizeY : UInt32
+    property lSlicePitch : Int32
+    def initialize(@dwBlockSizeY : UInt32, @lSlicePitch : Int32)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      lpVidMemHeap : Win32cr::Graphics::DirectDraw::VIDEOMEMORY*,
-      dwBlockSizeX : UInt32,
-      dwUserMemSize : UInt32
+    struct Anonymous2_e__Union_
+    property lpVidMemHeap : Win32cr::Graphics::DirectDraw::VIDEOMEMORY*
+    property dwBlockSizeX : UInt32
+    property dwUserMemSize : UInt32
+    def initialize(@lpVidMemHeap : Win32cr::Graphics::DirectDraw::VIDEOMEMORY*, @dwBlockSizeX : UInt32, @dwUserMemSize : UInt32)
+    end
+    end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @fpVidMem : LibC::UIntPtrT, @anonymous3 : Anonymous3_e__Union_, @yHint : Int32, @xHint : Int32, @wHeight : UInt32, @wWidth : UInt32, @dwReserved1 : LibC::UIntPtrT, @ddpfSurface : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @fpHeapOffset : LibC::UIntPtrT, @hCreatorProcess : Win32cr::Foundation::HANDLE)
+    end
   end
 
   @[Extern]
-  record DD_SURFACE_MORE,
-    dwMipMapCount : UInt32,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    dwOverlayFlags : UInt32,
-    ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX,
-    dwSurfaceHandle : UInt32
+  struct DD_SURFACE_MORE
+    property dwMipMapCount : UInt32
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property dwOverlayFlags : UInt32
+    property ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    property dwSurfaceHandle : UInt32
+    def initialize(@dwMipMapCount : UInt32, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @dwOverlayFlags : UInt32, @ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @dwSurfaceHandle : UInt32)
+    end
+  end
 
   @[Extern]
-  record DD_SURFACE_LOCAL,
-    lpGbl : Win32cr::Graphics::DirectDraw::DD_SURFACE_GLOBAL*,
-    dwFlags : UInt32,
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    dwReserved1 : LibC::UIntPtrT,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    lpSurfMore : Win32cr::Graphics::DirectDraw::DD_SURFACE_MORE*,
-    lpAttachList : Win32cr::Graphics::DirectDraw::DD_ATTACHLIST*,
-    lpAttachListFrom : Win32cr::Graphics::DirectDraw::DD_ATTACHLIST*,
-    rcOverlaySrc : Win32cr::Foundation::RECT do
+  struct DD_SURFACE_LOCAL
+    property lpGbl : Win32cr::Graphics::DirectDraw::DD_SURFACE_GLOBAL*
+    property dwFlags : UInt32
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property dwReserved1 : LibC::UIntPtrT
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property lpSurfMore : Win32cr::Graphics::DirectDraw::DD_SURFACE_MORE*
+    property lpAttachList : Win32cr::Graphics::DirectDraw::DD_ATTACHLIST*
+    property lpAttachListFrom : Win32cr::Graphics::DirectDraw::DD_ATTACHLIST*
+    property rcOverlaySrc : Win32cr::Foundation::RECT
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-      ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    struct Anonymous2_e__Union_
+    property ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    def initialize(@ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-      ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    struct Anonymous1_e__Union_
+    property ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    def initialize(@ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY)
+    end
+    end
 
+    def initialize(@lpGbl : Win32cr::Graphics::DirectDraw::DD_SURFACE_GLOBAL*, @dwFlags : UInt32, @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS, @dwReserved1 : LibC::UIntPtrT, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @lpSurfMore : Win32cr::Graphics::DirectDraw::DD_SURFACE_MORE*, @lpAttachList : Win32cr::Graphics::DirectDraw::DD_ATTACHLIST*, @lpAttachListFrom : Win32cr::Graphics::DirectDraw::DD_ATTACHLIST*, @rcOverlaySrc : Win32cr::Foundation::RECT)
+    end
   end
 
   @[Extern]
-  record DD_MORECAPS,
-    dwSize : UInt32,
-    dwAlphaCaps : UInt32,
-    dwSVBAlphaCaps : UInt32,
-    dwVSBAlphaCaps : UInt32,
-    dwSSBAlphaCaps : UInt32,
-    dwFilterCaps : UInt32,
-    dwSVBFilterCaps : UInt32,
-    dwVSBFilterCaps : UInt32,
-    dwSSBFilterCaps : UInt32
+  struct DD_MORECAPS
+    property dwSize : UInt32
+    property dwAlphaCaps : UInt32
+    property dwSVBAlphaCaps : UInt32
+    property dwVSBAlphaCaps : UInt32
+    property dwSSBAlphaCaps : UInt32
+    property dwFilterCaps : UInt32
+    property dwSVBFilterCaps : UInt32
+    property dwVSBFilterCaps : UInt32
+    property dwSSBFilterCaps : UInt32
+    def initialize(@dwSize : UInt32, @dwAlphaCaps : UInt32, @dwSVBAlphaCaps : UInt32, @dwVSBAlphaCaps : UInt32, @dwSSBAlphaCaps : UInt32, @dwFilterCaps : UInt32, @dwSVBFilterCaps : UInt32, @dwVSBFilterCaps : UInt32, @dwSSBFilterCaps : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDNTCORECAPS,
-    dwSize : UInt32,
-    dwCaps : UInt32,
-    dwCaps2 : UInt32,
-    dwCKeyCaps : UInt32,
-    dwFXCaps : UInt32,
-    dwFXAlphaCaps : UInt32,
-    dwPalCaps : UInt32,
-    dwSVCaps : UInt32,
-    dwAlphaBltConstBitDepths : UInt32,
-    dwAlphaBltPixelBitDepths : UInt32,
-    dwAlphaBltSurfaceBitDepths : UInt32,
-    dwAlphaOverlayConstBitDepths : UInt32,
-    dwAlphaOverlayPixelBitDepths : UInt32,
-    dwAlphaOverlaySurfaceBitDepths : UInt32,
-    dwZBufferBitDepths : UInt32,
-    dwVidMemTotal : UInt32,
-    dwVidMemFree : UInt32,
-    dwMaxVisibleOverlays : UInt32,
-    dwCurrVisibleOverlays : UInt32,
-    dwNumFourCCCodes : UInt32,
-    dwAlignBoundarySrc : UInt32,
-    dwAlignSizeSrc : UInt32,
-    dwAlignBoundaryDest : UInt32,
-    dwAlignSizeDest : UInt32,
-    dwAlignStrideAlign : UInt32,
-    dwRops : UInt32[8],
-    ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    dwMinOverlayStretch : UInt32,
-    dwMaxOverlayStretch : UInt32,
-    dwMinLiveVideoStretch : UInt32,
-    dwMaxLiveVideoStretch : UInt32,
-    dwMinHwCodecStretch : UInt32,
-    dwMaxHwCodecStretch : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    dwReserved3 : UInt32,
-    dwSVBCaps : UInt32,
-    dwSVBCKeyCaps : UInt32,
-    dwSVBFXCaps : UInt32,
-    dwSVBRops : UInt32[8],
-    dwVSBCaps : UInt32,
-    dwVSBCKeyCaps : UInt32,
-    dwVSBFXCaps : UInt32,
-    dwVSBRops : UInt32[8],
-    dwSSBCaps : UInt32,
-    dwSSBCKeyCaps : UInt32,
-    dwSSBFXCaps : UInt32,
-    dwSSBRops : UInt32[8],
-    dwMaxVideoPorts : UInt32,
-    dwCurrVideoPorts : UInt32,
-    dwSVBCaps2 : UInt32
+  struct DDNTCORECAPS
+    property dwSize : UInt32
+    property dwCaps : UInt32
+    property dwCaps2 : UInt32
+    property dwCKeyCaps : UInt32
+    property dwFXCaps : UInt32
+    property dwFXAlphaCaps : UInt32
+    property dwPalCaps : UInt32
+    property dwSVCaps : UInt32
+    property dwAlphaBltConstBitDepths : UInt32
+    property dwAlphaBltPixelBitDepths : UInt32
+    property dwAlphaBltSurfaceBitDepths : UInt32
+    property dwAlphaOverlayConstBitDepths : UInt32
+    property dwAlphaOverlayPixelBitDepths : UInt32
+    property dwAlphaOverlaySurfaceBitDepths : UInt32
+    property dwZBufferBitDepths : UInt32
+    property dwVidMemTotal : UInt32
+    property dwVidMemFree : UInt32
+    property dwMaxVisibleOverlays : UInt32
+    property dwCurrVisibleOverlays : UInt32
+    property dwNumFourCCCodes : UInt32
+    property dwAlignBoundarySrc : UInt32
+    property dwAlignSizeSrc : UInt32
+    property dwAlignBoundaryDest : UInt32
+    property dwAlignSizeDest : UInt32
+    property dwAlignStrideAlign : UInt32
+    property dwRops : UInt32[8]
+    property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property dwMinOverlayStretch : UInt32
+    property dwMaxOverlayStretch : UInt32
+    property dwMinLiveVideoStretch : UInt32
+    property dwMaxLiveVideoStretch : UInt32
+    property dwMinHwCodecStretch : UInt32
+    property dwMaxHwCodecStretch : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property dwReserved3 : UInt32
+    property dwSVBCaps : UInt32
+    property dwSVBCKeyCaps : UInt32
+    property dwSVBFXCaps : UInt32
+    property dwSVBRops : UInt32[8]
+    property dwVSBCaps : UInt32
+    property dwVSBCKeyCaps : UInt32
+    property dwVSBFXCaps : UInt32
+    property dwVSBRops : UInt32[8]
+    property dwSSBCaps : UInt32
+    property dwSSBCKeyCaps : UInt32
+    property dwSSBFXCaps : UInt32
+    property dwSSBRops : UInt32[8]
+    property dwMaxVideoPorts : UInt32
+    property dwCurrVideoPorts : UInt32
+    property dwSVBCaps2 : UInt32
+    def initialize(@dwSize : UInt32, @dwCaps : UInt32, @dwCaps2 : UInt32, @dwCKeyCaps : UInt32, @dwFXCaps : UInt32, @dwFXAlphaCaps : UInt32, @dwPalCaps : UInt32, @dwSVCaps : UInt32, @dwAlphaBltConstBitDepths : UInt32, @dwAlphaBltPixelBitDepths : UInt32, @dwAlphaBltSurfaceBitDepths : UInt32, @dwAlphaOverlayConstBitDepths : UInt32, @dwAlphaOverlayPixelBitDepths : UInt32, @dwAlphaOverlaySurfaceBitDepths : UInt32, @dwZBufferBitDepths : UInt32, @dwVidMemTotal : UInt32, @dwVidMemFree : UInt32, @dwMaxVisibleOverlays : UInt32, @dwCurrVisibleOverlays : UInt32, @dwNumFourCCCodes : UInt32, @dwAlignBoundarySrc : UInt32, @dwAlignSizeSrc : UInt32, @dwAlignBoundaryDest : UInt32, @dwAlignSizeDest : UInt32, @dwAlignStrideAlign : UInt32, @dwRops : UInt32[8], @ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS, @dwMinOverlayStretch : UInt32, @dwMaxOverlayStretch : UInt32, @dwMinLiveVideoStretch : UInt32, @dwMaxLiveVideoStretch : UInt32, @dwMinHwCodecStretch : UInt32, @dwMaxHwCodecStretch : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @dwReserved3 : UInt32, @dwSVBCaps : UInt32, @dwSVBCKeyCaps : UInt32, @dwSVBFXCaps : UInt32, @dwSVBRops : UInt32[8], @dwVSBCaps : UInt32, @dwVSBCKeyCaps : UInt32, @dwVSBFXCaps : UInt32, @dwVSBRops : UInt32[8], @dwSSBCaps : UInt32, @dwSSBCKeyCaps : UInt32, @dwSSBFXCaps : UInt32, @dwSSBRops : UInt32[8], @dwMaxVideoPorts : UInt32, @dwCurrVideoPorts : UInt32, @dwSVBCaps2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record DD_D3DBUFCALLBACKS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    can_create_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_CANCREATESURFACE,
-    create_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_CREATESURFACE,
-    destroy_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_SURFCB_DESTROYSURFACE,
-    lock_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_SURFCB_LOCK,
-    unlock_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_SURFCB_UNLOCK
+  struct DD_D3DBUFCALLBACKS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property can_create_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_CANCREATESURFACE
+    property create_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_CREATESURFACE
+    property destroy_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_SURFCB_DESTROYSURFACE
+    property lock_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_SURFCB_LOCK
+    property unlock_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_SURFCB_UNLOCK
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @can_create_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_CANCREATESURFACE, @create_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_CREATESURFACE, @destroy_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_SURFCB_DESTROYSURFACE, @lock_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_SURFCB_LOCK, @unlock_d3_d_buffer : Win32cr::Graphics::DirectDraw::PDD_SURFCB_UNLOCK)
+    end
+  end
 
   @[Extern]
-  record DD_HALINFO_V4,
-    dwSize : UInt32,
-    vmiData : Win32cr::Graphics::DirectDraw::VIDEOMEMORYINFO,
-    ddCaps : Win32cr::Graphics::DirectDraw::DDNTCORECAPS,
-    get_driver_info : Win32cr::Graphics::DirectDraw::PDD_GETDRIVERINFO,
-    dwFlags : UInt32
+  struct DD_HALINFO_V4
+    property dwSize : UInt32
+    property vmiData : Win32cr::Graphics::DirectDraw::VIDEOMEMORYINFO
+    property ddCaps : Win32cr::Graphics::DirectDraw::DDNTCORECAPS
+    property get_driver_info : Win32cr::Graphics::DirectDraw::PDD_GETDRIVERINFO
+    property dwFlags : UInt32
+    def initialize(@dwSize : UInt32, @vmiData : Win32cr::Graphics::DirectDraw::VIDEOMEMORYINFO, @ddCaps : Win32cr::Graphics::DirectDraw::DDNTCORECAPS, @get_driver_info : Win32cr::Graphics::DirectDraw::PDD_GETDRIVERINFO, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DD_HALINFO,
-    dwSize : UInt32,
-    vmiData : Win32cr::Graphics::DirectDraw::VIDEOMEMORYINFO,
-    ddCaps : Win32cr::Graphics::DirectDraw::DDNTCORECAPS,
-    get_driver_info : Win32cr::Graphics::DirectDraw::PDD_GETDRIVERINFO,
-    dwFlags : UInt32,
-    lpD3DGlobalDriverData : Void*,
-    lpD3DHALCallbacks : Void*,
-    lpD3DBufCallbacks : Win32cr::Graphics::DirectDraw::DD_D3DBUFCALLBACKS*
+  struct DD_HALINFO
+    property dwSize : UInt32
+    property vmiData : Win32cr::Graphics::DirectDraw::VIDEOMEMORYINFO
+    property ddCaps : Win32cr::Graphics::DirectDraw::DDNTCORECAPS
+    property get_driver_info : Win32cr::Graphics::DirectDraw::PDD_GETDRIVERINFO
+    property dwFlags : UInt32
+    property lpD3DGlobalDriverData : Void*
+    property lpD3DHALCallbacks : Void*
+    property lpD3DBufCallbacks : Win32cr::Graphics::DirectDraw::DD_D3DBUFCALLBACKS*
+    def initialize(@dwSize : UInt32, @vmiData : Win32cr::Graphics::DirectDraw::VIDEOMEMORYINFO, @ddCaps : Win32cr::Graphics::DirectDraw::DDNTCORECAPS, @get_driver_info : Win32cr::Graphics::DirectDraw::PDD_GETDRIVERINFO, @dwFlags : UInt32, @lpD3DGlobalDriverData : Void*, @lpD3DHALCallbacks : Void*, @lpD3DBufCallbacks : Win32cr::Graphics::DirectDraw::DD_D3DBUFCALLBACKS*)
+    end
+  end
 
   @[Extern]
-  record DD_DIRECTDRAW_GLOBAL,
-    dhpdev : Void*,
-    dwReserved1 : LibC::UIntPtrT,
-    dwReserved2 : LibC::UIntPtrT,
-    lpDDVideoPortCaps : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCAPS*
+  struct DD_DIRECTDRAW_GLOBAL
+    property dhpdev : Void*
+    property dwReserved1 : LibC::UIntPtrT
+    property dwReserved2 : LibC::UIntPtrT
+    property lpDDVideoPortCaps : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCAPS*
+    def initialize(@dhpdev : Void*, @dwReserved1 : LibC::UIntPtrT, @dwReserved2 : LibC::UIntPtrT, @lpDDVideoPortCaps : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCAPS*)
+    end
+  end
 
   @[Extern]
-  record DD_DIRECTDRAW_LOCAL,
-    lpGbl : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+  struct DD_DIRECTDRAW_LOCAL
+    property lpGbl : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    def initialize(@lpGbl : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*)
+    end
+  end
 
   @[Extern]
-  record DD_VIDEOPORT_LOCAL,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    ddvpDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC,
-    ddvpInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO,
-    lpSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_INT*,
-    lpVBISurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_INT*,
-    dwNumAutoflip : UInt32,
-    dwNumVBIAutoflip : UInt32,
-    dwReserved1 : LibC::UIntPtrT,
-    dwReserved2 : LibC::UIntPtrT,
-    dwReserved3 : LibC::UIntPtrT
+  struct DD_VIDEOPORT_LOCAL
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property ddvpDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC
+    property ddvpInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO
+    property lpSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_INT*
+    property lpVBISurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_INT*
+    property dwNumAutoflip : UInt32
+    property dwNumVBIAutoflip : UInt32
+    property dwReserved1 : LibC::UIntPtrT
+    property dwReserved2 : LibC::UIntPtrT
+    property dwReserved3 : LibC::UIntPtrT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @ddvpDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC, @ddvpInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO, @lpSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_INT*, @lpVBISurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_INT*, @dwNumAutoflip : UInt32, @dwNumVBIAutoflip : UInt32, @dwReserved1 : LibC::UIntPtrT, @dwReserved2 : LibC::UIntPtrT, @dwReserved3 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DD_MOTIONCOMP_LOCAL,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    guid : LibC::GUID,
-    dwUncompWidth : UInt32,
-    dwUncompHeight : UInt32,
-    ddUncompPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT,
-    dwDriverReserved1 : UInt32,
-    dwDriverReserved2 : UInt32,
-    dwDriverReserved3 : UInt32,
-    lpDriverReserved1 : Void*,
-    lpDriverReserved2 : Void*,
-    lpDriverReserved3 : Void*
+  struct DD_MOTIONCOMP_LOCAL
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property guid : LibC::GUID
+    property dwUncompWidth : UInt32
+    property dwUncompHeight : UInt32
+    property ddUncompPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property dwDriverReserved1 : UInt32
+    property dwDriverReserved2 : UInt32
+    property dwDriverReserved3 : UInt32
+    property lpDriverReserved1 : Void*
+    property lpDriverReserved2 : Void*
+    property lpDriverReserved3 : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @guid : LibC::GUID, @dwUncompWidth : UInt32, @dwUncompHeight : UInt32, @ddUncompPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @dwDriverReserved1 : UInt32, @dwDriverReserved2 : UInt32, @dwDriverReserved3 : UInt32, @lpDriverReserved1 : Void*, @lpDriverReserved2 : Void*, @lpDriverReserved3 : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_MORESURFACECAPS,
-    dwSize : UInt32,
-    ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX,
-    ddsExtendedHeapRestrictions : NTExtendedHeapRestrictions* do
+  struct DD_MORESURFACECAPS
+    property dwSize : UInt32
+    property ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    property ddsExtendedHeapRestrictions : NTExtendedHeapRestrictions*
 
     # Nested Type NTExtendedHeapRestrictions
     @[Extern]
-    record NTExtendedHeapRestrictions,
-      ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX,
-      ddsCapsExAlt : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    struct NTExtendedHeapRestrictions
+    property ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    property ddsCapsExAlt : Win32cr::Graphics::DirectDraw::DDSCAPSEX
+    def initialize(@ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @ddsCapsExAlt : Win32cr::Graphics::DirectDraw::DDSCAPSEX)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @ddsExtendedHeapRestrictions : NTExtendedHeapRestrictions*)
+    end
   end
 
   @[Extern]
-  record DD_STEREOMODE,
-    dwSize : UInt32,
-    dwHeight : UInt32,
-    dwWidth : UInt32,
-    dwBpp : UInt32,
-    dwRefreshRate : UInt32,
-    bSupported : Win32cr::Foundation::BOOL
+  struct DD_STEREOMODE
+    property dwSize : UInt32
+    property dwHeight : UInt32
+    property dwWidth : UInt32
+    property dwBpp : UInt32
+    property dwRefreshRate : UInt32
+    property bSupported : Win32cr::Foundation::BOOL
+    def initialize(@dwSize : UInt32, @dwHeight : UInt32, @dwWidth : UInt32, @dwBpp : UInt32, @dwRefreshRate : UInt32, @bSupported : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DD_UPDATENONLOCALHEAPDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    dwHeap : UInt32,
-    fpGARTLin : LibC::UIntPtrT,
-    fpGARTDev : LibC::UIntPtrT,
-    ulPolicyMaxBytes : LibC::UIntPtrT,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    update_non_local_heap : Void*
+  struct DD_UPDATENONLOCALHEAPDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property dwHeap : UInt32
+    property fpGARTLin : LibC::UIntPtrT
+    property fpGARTDev : LibC::UIntPtrT
+    property ulPolicyMaxBytes : LibC::UIntPtrT
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property update_non_local_heap : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @dwHeap : UInt32, @fpGARTLin : LibC::UIntPtrT, @fpGARTDev : LibC::UIntPtrT, @ulPolicyMaxBytes : LibC::UIntPtrT, @ddRVal : Win32cr::Foundation::HRESULT, @update_non_local_heap : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_NTPRIVATEDRIVERCAPS,
-    dwSize : UInt32,
-    dwPrivateCaps : UInt32
+  struct DD_NTPRIVATEDRIVERCAPS
+    property dwSize : UInt32
+    property dwPrivateCaps : UInt32
+    def initialize(@dwSize : UInt32, @dwPrivateCaps : UInt32)
+    end
+  end
 
   @[Extern]
-  record DD_BLTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDDestSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    rDest : Win32cr::Foundation::RECTL,
-    lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    rSrc : Win32cr::Foundation::RECTL,
-    dwFlags : UInt32,
-    dwROPFlags : UInt32,
-    bltFX : Win32cr::Graphics::DirectDraw::DDBLTFX,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    blt : Void*,
-    is_clipped : Win32cr::Foundation::BOOL,
-    rOrigDest : Win32cr::Foundation::RECTL,
-    rOrigSrc : Win32cr::Foundation::RECTL,
-    dwRectCnt : UInt32,
-    prDestRects : Win32cr::Foundation::RECT*,
-    dwAFlags : UInt32,
-    ddargbScaleFactors : Win32cr::Graphics::DirectDraw::DDARGB
+  struct DD_BLTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDDestSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property rDest : Win32cr::Foundation::RECTL
+    property lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property rSrc : Win32cr::Foundation::RECTL
+    property dwFlags : UInt32
+    property dwROPFlags : UInt32
+    property bltFX : Win32cr::Graphics::DirectDraw::DDBLTFX
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property blt : Void*
+    property is_clipped : Win32cr::Foundation::BOOL
+    property rOrigDest : Win32cr::Foundation::RECTL
+    property rOrigSrc : Win32cr::Foundation::RECTL
+    property dwRectCnt : UInt32
+    property prDestRects : Win32cr::Foundation::RECT*
+    property dwAFlags : UInt32
+    property ddargbScaleFactors : Win32cr::Graphics::DirectDraw::DDARGB
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDDestSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @rDest : Win32cr::Foundation::RECTL, @lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @rSrc : Win32cr::Foundation::RECTL, @dwFlags : UInt32, @dwROPFlags : UInt32, @bltFX : Win32cr::Graphics::DirectDraw::DDBLTFX, @ddRVal : Win32cr::Foundation::HRESULT, @blt : Void*, @is_clipped : Win32cr::Foundation::BOOL, @rOrigDest : Win32cr::Foundation::RECTL, @rOrigSrc : Win32cr::Foundation::RECTL, @dwRectCnt : UInt32, @prDestRects : Win32cr::Foundation::RECT*, @dwAFlags : UInt32, @ddargbScaleFactors : Win32cr::Graphics::DirectDraw::DDARGB)
+    end
+  end
 
   @[Extern]
-  record DD_LOCKDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    bHasRect : UInt32,
-    rArea : Win32cr::Foundation::RECTL,
-    lpSurfData : Void*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    lock : Void*,
-    dwFlags : UInt32,
-    fpProcess : LibC::UIntPtrT
+  struct DD_LOCKDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property bHasRect : UInt32
+    property rArea : Win32cr::Foundation::RECTL
+    property lpSurfData : Void*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property lock : Void*
+    property dwFlags : UInt32
+    property fpProcess : LibC::UIntPtrT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @bHasRect : UInt32, @rArea : Win32cr::Foundation::RECTL, @lpSurfData : Void*, @ddRVal : Win32cr::Foundation::HRESULT, @lock : Void*, @dwFlags : UInt32, @fpProcess : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DD_UNLOCKDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    unlock : Void*
+  struct DD_UNLOCKDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property unlock : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @ddRVal : Win32cr::Foundation::HRESULT, @unlock : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_UPDATEOVERLAYDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDDestSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    rDest : Win32cr::Foundation::RECTL,
-    lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    rSrc : Win32cr::Foundation::RECTL,
-    dwFlags : UInt32,
-    overlayFX : Win32cr::Graphics::DirectDraw::DDOVERLAYFX,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    update_overlay : Void*
+  struct DD_UPDATEOVERLAYDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDDestSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property rDest : Win32cr::Foundation::RECTL
+    property lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property rSrc : Win32cr::Foundation::RECTL
+    property dwFlags : UInt32
+    property overlayFX : Win32cr::Graphics::DirectDraw::DDOVERLAYFX
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property update_overlay : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDDestSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @rDest : Win32cr::Foundation::RECTL, @lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @rSrc : Win32cr::Foundation::RECTL, @dwFlags : UInt32, @overlayFX : Win32cr::Graphics::DirectDraw::DDOVERLAYFX, @ddRVal : Win32cr::Foundation::HRESULT, @update_overlay : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_SETOVERLAYPOSITIONDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    lpDDDestSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    lXPos : Int32,
-    lYPos : Int32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_overlay_position : Void*
+  struct DD_SETOVERLAYPOSITIONDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property lpDDDestSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property lXPos : Int32
+    property lYPos : Int32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_overlay_position : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSrcSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @lpDDDestSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @lXPos : Int32, @lYPos : Int32, @ddRVal : Win32cr::Foundation::HRESULT, @set_overlay_position : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_SETPALETTEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    lpDDPalette : Win32cr::Graphics::DirectDraw::DD_PALETTE_GLOBAL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_palette : Void*,
-    attach : Win32cr::Foundation::BOOL
+  struct DD_SETPALETTEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property lpDDPalette : Win32cr::Graphics::DirectDraw::DD_PALETTE_GLOBAL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_palette : Void*
+    property attach : Win32cr::Foundation::BOOL
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @lpDDPalette : Win32cr::Graphics::DirectDraw::DD_PALETTE_GLOBAL*, @ddRVal : Win32cr::Foundation::HRESULT, @set_palette : Void*, @attach : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DD_FLIPDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpSurfCurr : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    lpSurfTarg : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    dwFlags : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    flip : Void*,
-    lpSurfCurrLeft : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    lpSurfTargLeft : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+  struct DD_FLIPDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpSurfCurr : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property lpSurfTarg : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property dwFlags : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property flip : Void*
+    property lpSurfCurrLeft : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property lpSurfTargLeft : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpSurfCurr : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @lpSurfTarg : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @dwFlags : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @flip : Void*, @lpSurfCurrLeft : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @lpSurfTargLeft : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*)
+    end
+  end
 
   @[Extern]
-  record DD_DESTROYSURFACEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    destroy_surface : Void*
+  struct DD_DESTROYSURFACEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property destroy_surface : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @ddRVal : Win32cr::Foundation::HRESULT, @destroy_surface : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_SETCLIPLISTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_clip_list : Void*
+  struct DD_SETCLIPLISTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_clip_list : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @ddRVal : Win32cr::Foundation::HRESULT, @set_clip_list : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_ADDATTACHEDSURFACEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    lpSurfAttached : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    add_attached_surface : Void*
+  struct DD_ADDATTACHEDSURFACEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property lpSurfAttached : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property add_attached_surface : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @lpSurfAttached : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @ddRVal : Win32cr::Foundation::HRESULT, @add_attached_surface : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_SETCOLORKEYDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    dwFlags : UInt32,
-    ckNew : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_color_key : Void*
+  struct DD_SETCOLORKEYDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property dwFlags : UInt32
+    property ckNew : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_color_key : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @dwFlags : UInt32, @ckNew : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddRVal : Win32cr::Foundation::HRESULT, @set_color_key : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_GETBLTSTATUSDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    dwFlags : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_blt_status : Void*
+  struct DD_GETBLTSTATUSDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property dwFlags : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_blt_status : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @dwFlags : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_blt_status : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_GETFLIPSTATUSDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    dwFlags : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_flip_status : Void*
+  struct DD_GETFLIPSTATUSDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property dwFlags : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_flip_status : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @dwFlags : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_flip_status : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_DESTROYPALETTEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDPalette : Win32cr::Graphics::DirectDraw::DD_PALETTE_GLOBAL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    destroy_palette : Void*
+  struct DD_DESTROYPALETTEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDPalette : Win32cr::Graphics::DirectDraw::DD_PALETTE_GLOBAL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property destroy_palette : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDPalette : Win32cr::Graphics::DirectDraw::DD_PALETTE_GLOBAL*, @ddRVal : Win32cr::Foundation::HRESULT, @destroy_palette : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_SETENTRIESDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDPalette : Win32cr::Graphics::DirectDraw::DD_PALETTE_GLOBAL*,
-    dwBase : UInt32,
-    dwNumEntries : UInt32,
-    lpEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_entries : Void*
+  struct DD_SETENTRIESDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDPalette : Win32cr::Graphics::DirectDraw::DD_PALETTE_GLOBAL*
+    property dwBase : UInt32
+    property dwNumEntries : UInt32
+    property lpEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_entries : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDPalette : Win32cr::Graphics::DirectDraw::DD_PALETTE_GLOBAL*, @dwBase : UInt32, @dwNumEntries : UInt32, @lpEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*, @ddRVal : Win32cr::Foundation::HRESULT, @set_entries : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_CREATESURFACEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSurfaceDesc : Win32cr::Graphics::DirectDraw::DDSURFACEDESC*,
-    lplpSList : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL**,
-    dwSCnt : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    create_surface : Void*
+  struct DD_CREATESURFACEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSurfaceDesc : Win32cr::Graphics::DirectDraw::DDSURFACEDESC*
+    property lplpSList : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL**
+    property dwSCnt : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property create_surface : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSurfaceDesc : Win32cr::Graphics::DirectDraw::DDSURFACEDESC*, @lplpSList : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL**, @dwSCnt : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @create_surface : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_CANCREATESURFACEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSurfaceDesc : Win32cr::Graphics::DirectDraw::DDSURFACEDESC*,
-    bIsDifferentPixelFormat : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    can_create_surface : Void*
+  struct DD_CANCREATESURFACEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSurfaceDesc : Win32cr::Graphics::DirectDraw::DDSURFACEDESC*
+    property bIsDifferentPixelFormat : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property can_create_surface : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSurfaceDesc : Win32cr::Graphics::DirectDraw::DDSURFACEDESC*, @bIsDifferentPixelFormat : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @can_create_surface : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_CREATEPALETTEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDPalette : Win32cr::Graphics::DirectDraw::DD_PALETTE_GLOBAL*,
-    lpColorTable : Win32cr::Graphics::Gdi::PALETTEENTRY*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    create_palette : Void*,
-    is_excl : Win32cr::Foundation::BOOL
+  struct DD_CREATEPALETTEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDPalette : Win32cr::Graphics::DirectDraw::DD_PALETTE_GLOBAL*
+    property lpColorTable : Win32cr::Graphics::Gdi::PALETTEENTRY*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property create_palette : Void*
+    property is_excl : Win32cr::Foundation::BOOL
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDPalette : Win32cr::Graphics::DirectDraw::DD_PALETTE_GLOBAL*, @lpColorTable : Win32cr::Graphics::Gdi::PALETTEENTRY*, @ddRVal : Win32cr::Foundation::HRESULT, @create_palette : Void*, @is_excl : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DD_WAITFORVERTICALBLANKDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    dwFlags : UInt32,
-    bIsInVB : UInt32,
-    hEvent : LibC::UIntPtrT,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    wait_for_vertical_blank : Void*
+  struct DD_WAITFORVERTICALBLANKDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property dwFlags : UInt32
+    property bIsInVB : UInt32
+    property hEvent : LibC::UIntPtrT
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property wait_for_vertical_blank : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @dwFlags : UInt32, @bIsInVB : UInt32, @hEvent : LibC::UIntPtrT, @ddRVal : Win32cr::Foundation::HRESULT, @wait_for_vertical_blank : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_DRVSETCOLORKEYDATA,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    dwFlags : UInt32,
-    ckNew : Win32cr::Graphics::DirectDraw::DDCOLORKEY,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_color_key : Void*
+  struct DD_DRVSETCOLORKEYDATA
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property dwFlags : UInt32
+    property ckNew : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_color_key : Void*
+    def initialize(@lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @dwFlags : UInt32, @ckNew : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddRVal : Win32cr::Foundation::HRESULT, @set_color_key : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_GETSCANLINEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    dwScanLine : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_scan_line : Void*
+  struct DD_GETSCANLINEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property dwScanLine : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_scan_line : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @dwScanLine : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_scan_line : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_MAPMEMORYDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    bMap : Win32cr::Foundation::BOOL,
-    hProcess : Win32cr::Foundation::HANDLE,
-    fpProcess : LibC::UIntPtrT,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_MAPMEMORYDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property bMap : Win32cr::Foundation::BOOL
+    property hProcess : Win32cr::Foundation::HANDLE
+    property fpProcess : LibC::UIntPtrT
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @bMap : Win32cr::Foundation::BOOL, @hProcess : Win32cr::Foundation::HANDLE, @fpProcess : LibC::UIntPtrT, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DD_CANCREATEVPORTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpDDVideoPortDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    can_create_video_port : Void*
+  struct DD_CANCREATEVPORTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpDDVideoPortDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property can_create_video_port : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpDDVideoPortDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*, @ddRVal : Win32cr::Foundation::HRESULT, @can_create_video_port : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_CREATEVPORTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpDDVideoPortDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    create_video_port : Void*
+  struct DD_CREATEVPORTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpDDVideoPortDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property create_video_port : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpDDVideoPortDesc : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDESC*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @ddRVal : Win32cr::Foundation::HRESULT, @create_video_port : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_FLIPVPORTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    lpSurfCurr : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    lpSurfTarg : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    flip_video_port : Void*
+  struct DD_FLIPVPORTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property lpSurfCurr : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property lpSurfTarg : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property flip_video_port : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @lpSurfCurr : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @lpSurfTarg : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @ddRVal : Win32cr::Foundation::HRESULT, @flip_video_port : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_GETVPORTBANDWIDTHDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    lpddpfFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    dwFlags : UInt32,
-    lpBandwidth : Win32cr::Graphics::DirectDraw::DDVIDEOPORTBANDWIDTH*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_bandwidth : Void*
+  struct DD_GETVPORTBANDWIDTHDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property lpddpfFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property dwFlags : UInt32
+    property lpBandwidth : Win32cr::Graphics::DirectDraw::DDVIDEOPORTBANDWIDTH*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_bandwidth : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @lpddpfFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @dwWidth : UInt32, @dwHeight : UInt32, @dwFlags : UInt32, @lpBandwidth : Win32cr::Graphics::DirectDraw::DDVIDEOPORTBANDWIDTH*, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_bandwidth : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_GETVPORTINPUTFORMATDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    dwFlags : UInt32,
-    lpddpfFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    dwNumFormats : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_input_formats : Void*
+  struct DD_GETVPORTINPUTFORMATDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property dwFlags : UInt32
+    property lpddpfFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property dwNumFormats : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_input_formats : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @dwFlags : UInt32, @lpddpfFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @dwNumFormats : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_input_formats : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_GETVPORTOUTPUTFORMATDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    dwFlags : UInt32,
-    lpddpfInputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    lpddpfOutputFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    dwNumFormats : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_input_formats : Void*
+  struct DD_GETVPORTOUTPUTFORMATDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property dwFlags : UInt32
+    property lpddpfInputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property lpddpfOutputFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property dwNumFormats : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_input_formats : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @dwFlags : UInt32, @lpddpfInputFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @lpddpfOutputFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @dwNumFormats : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_input_formats : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_GETVPORTFIELDDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    bField : Win32cr::Foundation::BOOL,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_field : Void*
+  struct DD_GETVPORTFIELDDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property bField : Win32cr::Foundation::BOOL
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_field : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @bField : Win32cr::Foundation::BOOL, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_field : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_GETVPORTLINEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    dwLine : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_line : Void*
+  struct DD_GETVPORTLINEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property dwLine : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_line : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @dwLine : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_line : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_GETVPORTCONNECTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    dwPortId : UInt32,
-    lpConnect : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCONNECT*,
-    dwNumEntries : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_connect_info : Void*
+  struct DD_GETVPORTCONNECTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property dwPortId : UInt32
+    property lpConnect : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCONNECT*
+    property dwNumEntries : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_connect_info : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @dwPortId : UInt32, @lpConnect : Win32cr::Graphics::DirectDraw::DDVIDEOPORTCONNECT*, @dwNumEntries : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_connect_info : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_DESTROYVPORTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    destroy_video_port : Void*
+  struct DD_DESTROYVPORTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property destroy_video_port : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @ddRVal : Win32cr::Foundation::HRESULT, @destroy_video_port : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_GETVPORTFLIPSTATUSDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    fpSurface : LibC::UIntPtrT,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_port_flip_status : Void*
+  struct DD_GETVPORTFLIPSTATUSDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property fpSurface : LibC::UIntPtrT
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_port_flip_status : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @fpSurface : LibC::UIntPtrT, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_port_flip_status : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_UPDATEVPORTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    lplpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_INT**,
-    lplpDDVBISurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_INT**,
-    lpVideoInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO*,
-    dwFlags : UInt32,
-    dwNumAutoflip : UInt32,
-    dwNumVBIAutoflip : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    update_video_port : Void*
+  struct DD_UPDATEVPORTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property lplpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_INT**
+    property lplpDDVBISurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_INT**
+    property lpVideoInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO*
+    property dwFlags : UInt32
+    property dwNumAutoflip : UInt32
+    property dwNumVBIAutoflip : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property update_video_port : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @lplpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_INT**, @lplpDDVBISurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_INT**, @lpVideoInfo : Win32cr::Graphics::DirectDraw::DDVIDEOPORTINFO*, @dwFlags : UInt32, @dwNumAutoflip : UInt32, @dwNumVBIAutoflip : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @update_video_port : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_WAITFORVPORTSYNCDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    dwFlags : UInt32,
-    dwLine : UInt32,
-    dwTimeOut : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    update_video_port : Void*
+  struct DD_WAITFORVPORTSYNCDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property dwFlags : UInt32
+    property dwLine : UInt32
+    property dwTimeOut : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property update_video_port : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @dwFlags : UInt32, @dwLine : UInt32, @dwTimeOut : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @update_video_port : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_GETVPORTSIGNALDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    dwStatus : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_video_signal_status : Void*
+  struct DD_GETVPORTSIGNALDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property dwStatus : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_video_signal_status : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @dwStatus : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_video_signal_status : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_VPORTCOLORDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    dwFlags : UInt32,
-    lpColorData : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    color_control : Void*
+  struct DD_VPORTCOLORDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property dwFlags : UInt32
+    property lpColorData : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property color_control : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @dwFlags : UInt32, @lpColorData : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*, @ddRVal : Win32cr::Foundation::HRESULT, @color_control : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_COLORCONTROLDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    lpColorData : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*,
-    dwFlags : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    color_control : Void*
+  struct DD_COLORCONTROLDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property lpColorData : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*
+    property dwFlags : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property color_control : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @lpColorData : Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*, @dwFlags : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @color_control : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_GETDRIVERINFODATA,
-    dhpdev : Void*,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    guidInfo : LibC::GUID,
-    dwExpectedSize : UInt32,
-    lpvData : Void*,
-    dwActualSize : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_GETDRIVERINFODATA
+    property dhpdev : Void*
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property guidInfo : LibC::GUID
+    property dwExpectedSize : UInt32
+    property lpvData : Void*
+    property dwActualSize : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@dhpdev : Void*, @dwSize : UInt32, @dwFlags : UInt32, @guidInfo : LibC::GUID, @dwExpectedSize : UInt32, @lpvData : Void*, @dwActualSize : UInt32, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DD_GETAVAILDRIVERMEMORYDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    dds_caps : Win32cr::Graphics::DirectDraw::DDSCAPS,
-    dwTotal : UInt32,
-    dwFree : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    get_avail_driver_memory : Void*
+  struct DD_GETAVAILDRIVERMEMORYDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property dds_caps : Win32cr::Graphics::DirectDraw::DDSCAPS
+    property dwTotal : UInt32
+    property dwFree : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property get_avail_driver_memory : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @dds_caps : Win32cr::Graphics::DirectDraw::DDSCAPS, @dwTotal : UInt32, @dwFree : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @get_avail_driver_memory : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_FREEDRIVERMEMORYDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    free_driver_memory : Void*
+  struct DD_FREEDRIVERMEMORYDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property free_driver_memory : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @ddRVal : Win32cr::Foundation::HRESULT, @free_driver_memory : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_SETEXCLUSIVEMODEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    dwEnterExcl : UInt32,
-    dwReserved : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    set_exclusive_mode : Void*
+  struct DD_SETEXCLUSIVEMODEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property dwEnterExcl : UInt32
+    property dwReserved : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property set_exclusive_mode : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @dwEnterExcl : UInt32, @dwReserved : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @set_exclusive_mode : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_FLIPTOGDISURFACEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-    dwToGDI : UInt32,
-    dwReserved : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT,
-    flip_to_gdi_surface : Void*
+  struct DD_FLIPTOGDISURFACEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property dwToGDI : UInt32
+    property dwReserved : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    property flip_to_gdi_surface : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @dwToGDI : UInt32, @dwReserved : UInt32, @ddRVal : Win32cr::Foundation::HRESULT, @flip_to_gdi_surface : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_SYNCSURFACEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    dwSurfaceOffset : UInt32,
-    fpLockPtr : LibC::UIntPtrT,
-    lPitch : Int32,
-    dwOverlayOffset : UInt32,
-    dwDriverReserved1 : UInt32,
-    dwDriverReserved2 : UInt32,
-    dwDriverReserved3 : UInt32,
-    dwDriverReserved4 : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_SYNCSURFACEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property dwSurfaceOffset : UInt32
+    property fpLockPtr : LibC::UIntPtrT
+    property lPitch : Int32
+    property dwOverlayOffset : UInt32
+    property dwDriverReserved1 : UInt32
+    property dwDriverReserved2 : UInt32
+    property dwDriverReserved3 : UInt32
+    property dwDriverReserved4 : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpDDSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @dwSurfaceOffset : UInt32, @fpLockPtr : LibC::UIntPtrT, @lPitch : Int32, @dwOverlayOffset : UInt32, @dwDriverReserved1 : UInt32, @dwDriverReserved2 : UInt32, @dwDriverReserved3 : UInt32, @dwDriverReserved4 : UInt32, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DD_SYNCVIDEOPORTDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*,
-    dwOriginOffset : UInt32,
-    dwHeight : UInt32,
-    dwVBIHeight : UInt32,
-    dwDriverReserved1 : UInt32,
-    dwDriverReserved2 : UInt32,
-    dwDriverReserved3 : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_SYNCVIDEOPORTDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*
+    property dwOriginOffset : UInt32
+    property dwHeight : UInt32
+    property dwVBIHeight : UInt32
+    property dwDriverReserved1 : UInt32
+    property dwDriverReserved2 : UInt32
+    property dwDriverReserved3 : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpVideoPort : Win32cr::Graphics::DirectDraw::DD_VIDEOPORT_LOCAL*, @dwOriginOffset : UInt32, @dwHeight : UInt32, @dwVBIHeight : UInt32, @dwDriverReserved1 : UInt32, @dwDriverReserved2 : UInt32, @dwDriverReserved3 : UInt32, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DD_GETMOCOMPGUIDSDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    dwNumGuids : UInt32,
-    lpGuids : LibC::GUID*,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_GETMOCOMPGUIDSDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property dwNumGuids : UInt32
+    property lpGuids : LibC::GUID*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @dwNumGuids : UInt32, @lpGuids : LibC::GUID*, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DD_GETMOCOMPFORMATSDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpGuid : LibC::GUID*,
-    dwNumFormats : UInt32,
-    lpFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_GETMOCOMPFORMATSDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpGuid : LibC::GUID*
+    property dwNumFormats : UInt32
+    property lpFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpGuid : LibC::GUID*, @dwNumFormats : UInt32, @lpFormats : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DD_CREATEMOCOMPDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*,
-    lpGuid : LibC::GUID*,
-    dwUncompWidth : UInt32,
-    dwUncompHeight : UInt32,
-    ddUncompPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT,
-    lpData : Void*,
-    dwDataSize : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_CREATEMOCOMPDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*
+    property lpGuid : LibC::GUID*
+    property dwUncompWidth : UInt32
+    property dwUncompHeight : UInt32
+    property ddUncompPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property lpData : Void*
+    property dwDataSize : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*, @lpGuid : LibC::GUID*, @dwUncompWidth : UInt32, @dwUncompHeight : UInt32, @ddUncompPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @lpData : Void*, @dwDataSize : UInt32, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DDCOMPBUFFERINFO,
-    dwSize : UInt32,
-    dwNumCompBuffers : UInt32,
-    dwWidthToCreate : UInt32,
-    dwHeightToCreate : UInt32,
-    dwBytesToAllocate : UInt32,
-    ddCompCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2,
-    ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+  struct DDCOMPBUFFERINFO
+    property dwSize : UInt32
+    property dwNumCompBuffers : UInt32
+    property dwWidthToCreate : UInt32
+    property dwHeightToCreate : UInt32
+    property dwBytesToAllocate : UInt32
+    property ddCompCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2
+    property ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    def initialize(@dwSize : UInt32, @dwNumCompBuffers : UInt32, @dwWidthToCreate : UInt32, @dwHeightToCreate : UInt32, @dwBytesToAllocate : UInt32, @ddCompCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2, @ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT)
+    end
+  end
 
   @[Extern]
-  record DD_GETMOCOMPCOMPBUFFDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpGuid : LibC::GUID*,
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT,
-    dwNumTypesCompBuffs : UInt32,
-    lpCompBuffInfo : Win32cr::Graphics::DirectDraw::DDCOMPBUFFERINFO*,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_GETMOCOMPCOMPBUFFDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpGuid : LibC::GUID*
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property dwNumTypesCompBuffs : UInt32
+    property lpCompBuffInfo : Win32cr::Graphics::DirectDraw::DDCOMPBUFFERINFO*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpGuid : LibC::GUID*, @dwWidth : UInt32, @dwHeight : UInt32, @ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @dwNumTypesCompBuffs : UInt32, @lpCompBuffInfo : Win32cr::Graphics::DirectDraw::DDCOMPBUFFERINFO*, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DD_GETINTERNALMOCOMPDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpGuid : LibC::GUID*,
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT,
-    dwScratchMemAlloc : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_GETINTERNALMOCOMPDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpGuid : LibC::GUID*
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property dwScratchMemAlloc : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpGuid : LibC::GUID*, @dwWidth : UInt32, @dwHeight : UInt32, @ddPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @dwScratchMemAlloc : UInt32, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DD_BEGINMOCOMPFRAMEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*,
-    lpDestSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    dwInputDataSize : UInt32,
-    lpInputData : Void*,
-    dwOutputDataSize : UInt32,
-    lpOutputData : Void*,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_BEGINMOCOMPFRAMEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*
+    property lpDestSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property dwInputDataSize : UInt32
+    property lpInputData : Void*
+    property dwOutputDataSize : UInt32
+    property lpOutputData : Void*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*, @lpDestSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @dwInputDataSize : UInt32, @lpInputData : Void*, @dwOutputDataSize : UInt32, @lpOutputData : Void*, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DD_ENDMOCOMPFRAMEDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*,
-    lpInputData : Void*,
-    dwInputDataSize : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_ENDMOCOMPFRAMEDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*
+    property lpInputData : Void*
+    property dwInputDataSize : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*, @lpInputData : Void*, @dwInputDataSize : UInt32, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DDMOCOMPBUFFERINFO,
-    dwSize : UInt32,
-    lpCompSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    dwDataOffset : UInt32,
-    dwDataSize : UInt32,
-    lpPrivate : Void*
+  struct DDMOCOMPBUFFERINFO
+    property dwSize : UInt32
+    property lpCompSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property dwDataOffset : UInt32
+    property dwDataSize : UInt32
+    property lpPrivate : Void*
+    def initialize(@dwSize : UInt32, @lpCompSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @dwDataOffset : UInt32, @dwDataSize : UInt32, @lpPrivate : Void*)
+    end
+  end
 
   @[Extern]
-  record DD_RENDERMOCOMPDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*,
-    dwNumBuffers : UInt32,
-    lpBufferInfo : Win32cr::Graphics::DirectDraw::DDMOCOMPBUFFERINFO*,
-    dwFunction : UInt32,
-    lpInputData : Void*,
-    dwInputDataSize : UInt32,
-    lpOutputData : Void*,
-    dwOutputDataSize : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_RENDERMOCOMPDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*
+    property dwNumBuffers : UInt32
+    property lpBufferInfo : Win32cr::Graphics::DirectDraw::DDMOCOMPBUFFERINFO*
+    property dwFunction : UInt32
+    property lpInputData : Void*
+    property dwInputDataSize : UInt32
+    property lpOutputData : Void*
+    property dwOutputDataSize : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*, @dwNumBuffers : UInt32, @lpBufferInfo : Win32cr::Graphics::DirectDraw::DDMOCOMPBUFFERINFO*, @dwFunction : UInt32, @lpInputData : Void*, @dwInputDataSize : UInt32, @lpOutputData : Void*, @dwOutputDataSize : UInt32, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DD_QUERYMOCOMPSTATUSDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*,
-    lpSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    dwFlags : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_QUERYMOCOMPSTATUSDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*
+    property lpSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property dwFlags : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*, @lpSurface : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @dwFlags : UInt32, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DD_DESTROYMOCOMPDATA,
-    lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_DESTROYMOCOMPDATA
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpMoComp : Win32cr::Graphics::DirectDraw::DD_MOTIONCOMP_LOCAL*, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DD_CREATESURFACEEXDATA,
-    dwFlags : UInt32,
-    lpDDLcl : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    lpDDSLcl : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_CREATESURFACEEXDATA
+    property dwFlags : UInt32
+    property lpDDLcl : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property lpDDSLcl : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@dwFlags : UInt32, @lpDDLcl : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @lpDDSLcl : Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DD_GETDRIVERSTATEDATA,
-    dwFlags : UInt32,
-    anonymous : Anonymous_e__Union_,
-    lpdwStates : UInt32*,
-    dwLength : UInt32,
-    ddRVal : Win32cr::Foundation::HRESULT do
+  struct DD_GETDRIVERSTATEDATA
+    property dwFlags : UInt32
+    property anonymous : Anonymous_e__Union_
+    property lpdwStates : UInt32*
+    property dwLength : UInt32
+    property ddRVal : Win32cr::Foundation::HRESULT
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*,
-      dwhContext : LibC::UIntPtrT
+    struct Anonymous_e__Union_
+    property lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*
+    property dwhContext : LibC::UIntPtrT
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, @dwhContext : LibC::UIntPtrT)
+    end
+    end
 
+    def initialize(@dwFlags : UInt32, @anonymous : Anonymous_e__Union_, @lpdwStates : UInt32*, @dwLength : UInt32, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
   end
 
   @[Extern]
-  record DD_DESTROYDDLOCALDATA,
-    dwFlags : UInt32,
-    pDDLcl : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*,
-    ddRVal : Win32cr::Foundation::HRESULT
+  struct DD_DESTROYDDLOCALDATA
+    property dwFlags : UInt32
+    property pDDLcl : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*
+    property ddRVal : Win32cr::Foundation::HRESULT
+    def initialize(@dwFlags : UInt32, @pDDLcl : Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_LOCAL*, @ddRVal : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record MDL,
-    mdl_next : Win32cr::Graphics::DirectDraw::MDL*,
-    mdl_size : Int16,
-    mdl_flags : Int16,
-    process : EPROCESS_*,
-    lpMappedSystemVa : UInt32*,
-    lpStartVa : UInt32*,
-    byte_count : UInt32,
-    byte_offset : UInt32 do
+  struct MDL
+    property mdl_next : Win32cr::Graphics::DirectDraw::MDL*
+    property mdl_size : Int16
+    property mdl_flags : Int16
+    property process : EPROCESS_*
+    property lpMappedSystemVa : UInt32*
+    property lpStartVa : UInt32*
+    property byte_count : UInt32
+    property byte_offset : UInt32
 
     # Nested Type EPROCESS_
     @[Extern]
-    record EPROCESS_
+    struct EPROCESS_
+    def initialize()
+    end
+    end
+
+    def initialize(@mdl_next : Win32cr::Graphics::DirectDraw::MDL*, @mdl_size : Int16, @mdl_flags : Int16, @process : EPROCESS_*, @lpMappedSystemVa : UInt32*, @lpStartVa : UInt32*, @byte_count : UInt32, @byte_offset : UInt32)
+    end
   end
 
   @[Extern]
-  record DDSURFACEDATA,
-    ddsCaps : UInt32,
-    dwSurfaceOffset : UInt32,
-    fpLockPtr : LibC::UIntPtrT,
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    lPitch : Int32,
-    dwOverlayFlags : UInt32,
-    dwOverlayOffset : UInt32,
-    dwOverlaySrcWidth : UInt32,
-    dwOverlaySrcHeight : UInt32,
-    dwOverlayDestWidth : UInt32,
-    dwOverlayDestHeight : UInt32,
-    dwVideoPortId : UInt32,
-    dwFormatFlags : UInt32,
-    dwFormatFourCC : UInt32,
-    dwFormatBitCount : UInt32,
-    dwRBitMask : UInt32,
-    dwGBitMask : UInt32,
-    dwBBitMask : UInt32,
-    dwDriverReserved1 : UInt32,
-    dwDriverReserved2 : UInt32,
-    dwDriverReserved3 : UInt32,
-    dwDriverReserved4 : UInt32
+  struct DDSURFACEDATA
+    property ddsCaps : UInt32
+    property dwSurfaceOffset : UInt32
+    property fpLockPtr : LibC::UIntPtrT
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property lPitch : Int32
+    property dwOverlayFlags : UInt32
+    property dwOverlayOffset : UInt32
+    property dwOverlaySrcWidth : UInt32
+    property dwOverlaySrcHeight : UInt32
+    property dwOverlayDestWidth : UInt32
+    property dwOverlayDestHeight : UInt32
+    property dwVideoPortId : UInt32
+    property dwFormatFlags : UInt32
+    property dwFormatFourCC : UInt32
+    property dwFormatBitCount : UInt32
+    property dwRBitMask : UInt32
+    property dwGBitMask : UInt32
+    property dwBBitMask : UInt32
+    property dwDriverReserved1 : UInt32
+    property dwDriverReserved2 : UInt32
+    property dwDriverReserved3 : UInt32
+    property dwDriverReserved4 : UInt32
+    def initialize(@ddsCaps : UInt32, @dwSurfaceOffset : UInt32, @fpLockPtr : LibC::UIntPtrT, @dwWidth : UInt32, @dwHeight : UInt32, @lPitch : Int32, @dwOverlayFlags : UInt32, @dwOverlayOffset : UInt32, @dwOverlaySrcWidth : UInt32, @dwOverlaySrcHeight : UInt32, @dwOverlayDestWidth : UInt32, @dwOverlayDestHeight : UInt32, @dwVideoPortId : UInt32, @dwFormatFlags : UInt32, @dwFormatFourCC : UInt32, @dwFormatBitCount : UInt32, @dwRBitMask : UInt32, @dwGBitMask : UInt32, @dwBBitMask : UInt32, @dwDriverReserved1 : UInt32, @dwDriverReserved2 : UInt32, @dwDriverReserved3 : UInt32, @dwDriverReserved4 : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDVIDEOPORTDATA,
-    dwVideoPortId : UInt32,
-    dwVPFlags : UInt32,
-    dwOriginOffset : UInt32,
-    dwHeight : UInt32,
-    dwVBIHeight : UInt32,
-    dwDriverReserved1 : UInt32,
-    dwDriverReserved2 : UInt32,
-    dwDriverReserved3 : UInt32
+  struct DDVIDEOPORTDATA
+    property dwVideoPortId : UInt32
+    property dwVPFlags : UInt32
+    property dwOriginOffset : UInt32
+    property dwHeight : UInt32
+    property dwVBIHeight : UInt32
+    property dwDriverReserved1 : UInt32
+    property dwDriverReserved2 : UInt32
+    property dwDriverReserved3 : UInt32
+    def initialize(@dwVideoPortId : UInt32, @dwVPFlags : UInt32, @dwOriginOffset : UInt32, @dwHeight : UInt32, @dwVBIHeight : UInt32, @dwDriverReserved1 : UInt32, @dwDriverReserved2 : UInt32, @dwDriverReserved3 : UInt32)
+    end
+  end
 
   @[Extern]
-  record DX_IRQDATA,
-    dwIrqFlags : UInt32
+  struct DX_IRQDATA
+    property dwIrqFlags : UInt32
+    def initialize(@dwIrqFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDGETIRQINFO,
-    dwFlags : UInt32
+  struct DDGETIRQINFO
+    property dwFlags : UInt32
+    def initialize(@dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDENABLEIRQINFO,
-    dwIRQSources : UInt32,
-    dwLine : UInt32,
-    irq_callback : Win32cr::Graphics::DirectDraw::PDX_IRQCALLBACK,
-    lpIRQData : Win32cr::Graphics::DirectDraw::DX_IRQDATA*
+  struct DDENABLEIRQINFO
+    property dwIRQSources : UInt32
+    property dwLine : UInt32
+    property irq_callback : Win32cr::Graphics::DirectDraw::PDX_IRQCALLBACK
+    property lpIRQData : Win32cr::Graphics::DirectDraw::DX_IRQDATA*
+    def initialize(@dwIRQSources : UInt32, @dwLine : UInt32, @irq_callback : Win32cr::Graphics::DirectDraw::PDX_IRQCALLBACK, @lpIRQData : Win32cr::Graphics::DirectDraw::DX_IRQDATA*)
+    end
+  end
 
   @[Extern]
-  record DDSKIPNEXTFIELDINFO,
-    lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*,
-    dwSkipFlags : UInt32
+  struct DDSKIPNEXTFIELDINFO
+    property lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*
+    property dwSkipFlags : UInt32
+    def initialize(@lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*, @dwSkipFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDBOBNEXTFIELDINFO,
-    lpSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*
+  struct DDBOBNEXTFIELDINFO
+    property lpSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*
+    def initialize(@lpSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*)
+    end
+  end
 
   @[Extern]
-  record DDSETSTATEININFO,
-    lpSurfaceData : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*,
-    lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*
+  struct DDSETSTATEININFO
+    property lpSurfaceData : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*
+    property lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*
+    def initialize(@lpSurfaceData : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*, @lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*)
+    end
+  end
 
   @[Extern]
-  record DDSETSTATEOUTINFO,
-    bSoftwareAutoflip : Win32cr::Foundation::BOOL,
-    dwSurfaceIndex : UInt32,
-    dwVBISurfaceIndex : UInt32
+  struct DDSETSTATEOUTINFO
+    property bSoftwareAutoflip : Win32cr::Foundation::BOOL
+    property dwSurfaceIndex : UInt32
+    property dwVBISurfaceIndex : UInt32
+    def initialize(@bSoftwareAutoflip : Win32cr::Foundation::BOOL, @dwSurfaceIndex : UInt32, @dwVBISurfaceIndex : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDLOCKININFO,
-    lpSurfaceData : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*
+  struct DDLOCKININFO
+    property lpSurfaceData : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*
+    def initialize(@lpSurfaceData : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*)
+    end
+  end
 
   @[Extern]
-  record DDLOCKOUTINFO,
-    dwSurfacePtr : LibC::UIntPtrT
+  struct DDLOCKOUTINFO
+    property dwSurfacePtr : LibC::UIntPtrT
+    def initialize(@dwSurfacePtr : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DDFLIPOVERLAYINFO,
-    lpCurrentSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*,
-    lpTargetSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*,
-    dwFlags : UInt32
+  struct DDFLIPOVERLAYINFO
+    property lpCurrentSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*
+    property lpTargetSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*
+    property dwFlags : UInt32
+    def initialize(@lpCurrentSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*, @lpTargetSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDFLIPVIDEOPORTINFO,
-    lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*,
-    lpCurrentSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*,
-    lpTargetSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*,
-    dwFlipVPFlags : UInt32
+  struct DDFLIPVIDEOPORTINFO
+    property lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*
+    property lpCurrentSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*
+    property lpTargetSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*
+    property dwFlipVPFlags : UInt32
+    def initialize(@lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*, @lpCurrentSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*, @lpTargetSurface : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*, @dwFlipVPFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDGETPOLARITYININFO,
-    lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*
+  struct DDGETPOLARITYININFO
+    property lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*
+    def initialize(@lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*)
+    end
+  end
 
   @[Extern]
-  record DDGETPOLARITYOUTINFO,
-    bPolarity : UInt32
+  struct DDGETPOLARITYOUTINFO
+    property bPolarity : UInt32
+    def initialize(@bPolarity : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDGETCURRENTAUTOFLIPININFO,
-    lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*
+  struct DDGETCURRENTAUTOFLIPININFO
+    property lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*
+    def initialize(@lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*)
+    end
+  end
 
   @[Extern]
-  record DDGETCURRENTAUTOFLIPOUTINFO,
-    dwSurfaceIndex : UInt32,
-    dwVBISurfaceIndex : UInt32
+  struct DDGETCURRENTAUTOFLIPOUTINFO
+    property dwSurfaceIndex : UInt32
+    property dwVBISurfaceIndex : UInt32
+    def initialize(@dwSurfaceIndex : UInt32, @dwVBISurfaceIndex : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDGETPREVIOUSAUTOFLIPININFO,
-    lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*
+  struct DDGETPREVIOUSAUTOFLIPININFO
+    property lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*
+    def initialize(@lpVideoPortData : Win32cr::Graphics::DirectDraw::DDVIDEOPORTDATA*)
+    end
+  end
 
   @[Extern]
-  record DDGETPREVIOUSAUTOFLIPOUTINFO,
-    dwSurfaceIndex : UInt32,
-    dwVBISurfaceIndex : UInt32
+  struct DDGETPREVIOUSAUTOFLIPOUTINFO
+    property dwSurfaceIndex : UInt32
+    property dwVBISurfaceIndex : UInt32
+    def initialize(@dwSurfaceIndex : UInt32, @dwVBISurfaceIndex : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDTRANSFERININFO,
-    lpSurfaceData : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*,
-    dwStartLine : UInt32,
-    dwEndLine : UInt32,
-    dwTransferID : LibC::UIntPtrT,
-    dwTransferFlags : UInt32,
-    lpDestMDL : Win32cr::Graphics::DirectDraw::MDL*
+  struct DDTRANSFERININFO
+    property lpSurfaceData : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*
+    property dwStartLine : UInt32
+    property dwEndLine : UInt32
+    property dwTransferID : LibC::UIntPtrT
+    property dwTransferFlags : UInt32
+    property lpDestMDL : Win32cr::Graphics::DirectDraw::MDL*
+    def initialize(@lpSurfaceData : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*, @dwStartLine : UInt32, @dwEndLine : UInt32, @dwTransferID : LibC::UIntPtrT, @dwTransferFlags : UInt32, @lpDestMDL : Win32cr::Graphics::DirectDraw::MDL*)
+    end
+  end
 
   @[Extern]
-  record DDTRANSFEROUTINFO,
-    dwBufferPolarity : UInt32
+  struct DDTRANSFEROUTINFO
+    property dwBufferPolarity : UInt32
+    def initialize(@dwBufferPolarity : UInt32)
+    end
+  end
 
   @[Extern]
-  record DDGETTRANSFERSTATUSOUTINFO,
-    dwTransferID : LibC::UIntPtrT
+  struct DDGETTRANSFERSTATUSOUTINFO
+    property dwTransferID : LibC::UIntPtrT
+    def initialize(@dwTransferID : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DXAPI_INTERFACE,
-    size : UInt16,
-    version : UInt16,
-    context : Void*,
-    interface_reference : Void*,
-    interface_dereference : Void*,
-    dx_get_irq_info : Win32cr::Graphics::DirectDraw::PDX_GETIRQINFO,
-    dx_enable_irq : Win32cr::Graphics::DirectDraw::PDX_ENABLEIRQ,
-    dx_skip_next_field : Win32cr::Graphics::DirectDraw::PDX_SKIPNEXTFIELD,
-    dx_bob_next_field : Win32cr::Graphics::DirectDraw::PDX_BOBNEXTFIELD,
-    dx_set_state : Win32cr::Graphics::DirectDraw::PDX_SETSTATE,
-    dx_lock : Win32cr::Graphics::DirectDraw::PDX_LOCK,
-    dx_flip_overlay : Win32cr::Graphics::DirectDraw::PDX_FLIPOVERLAY,
-    dx_flip_video_port : Win32cr::Graphics::DirectDraw::PDX_FLIPVIDEOPORT,
-    dx_get_polarity : Win32cr::Graphics::DirectDraw::PDX_GETPOLARITY,
-    dx_get_current_autoflip : Win32cr::Graphics::DirectDraw::PDX_GETCURRENTAUTOFLIP,
-    dx_get_previous_autoflip : Win32cr::Graphics::DirectDraw::PDX_GETPREVIOUSAUTOFLIP,
-    dx_transfer : Win32cr::Graphics::DirectDraw::PDX_TRANSFER,
-    dx_get_transfer_status : Win32cr::Graphics::DirectDraw::PDX_GETTRANSFERSTATUS
+  struct DXAPI_INTERFACE
+    property size : UInt16
+    property version : UInt16
+    property context : Void*
+    property interface_reference : Void*
+    property interface_dereference : Void*
+    property dx_get_irq_info : Win32cr::Graphics::DirectDraw::PDX_GETIRQINFO
+    property dx_enable_irq : Win32cr::Graphics::DirectDraw::PDX_ENABLEIRQ
+    property dx_skip_next_field : Win32cr::Graphics::DirectDraw::PDX_SKIPNEXTFIELD
+    property dx_bob_next_field : Win32cr::Graphics::DirectDraw::PDX_BOBNEXTFIELD
+    property dx_set_state : Win32cr::Graphics::DirectDraw::PDX_SETSTATE
+    property dx_lock : Win32cr::Graphics::DirectDraw::PDX_LOCK
+    property dx_flip_overlay : Win32cr::Graphics::DirectDraw::PDX_FLIPOVERLAY
+    property dx_flip_video_port : Win32cr::Graphics::DirectDraw::PDX_FLIPVIDEOPORT
+    property dx_get_polarity : Win32cr::Graphics::DirectDraw::PDX_GETPOLARITY
+    property dx_get_current_autoflip : Win32cr::Graphics::DirectDraw::PDX_GETCURRENTAUTOFLIP
+    property dx_get_previous_autoflip : Win32cr::Graphics::DirectDraw::PDX_GETPREVIOUSAUTOFLIP
+    property dx_transfer : Win32cr::Graphics::DirectDraw::PDX_TRANSFER
+    property dx_get_transfer_status : Win32cr::Graphics::DirectDraw::PDX_GETTRANSFERSTATUS
+    def initialize(@size : UInt16, @version : UInt16, @context : Void*, @interface_reference : Void*, @interface_dereference : Void*, @dx_get_irq_info : Win32cr::Graphics::DirectDraw::PDX_GETIRQINFO, @dx_enable_irq : Win32cr::Graphics::DirectDraw::PDX_ENABLEIRQ, @dx_skip_next_field : Win32cr::Graphics::DirectDraw::PDX_SKIPNEXTFIELD, @dx_bob_next_field : Win32cr::Graphics::DirectDraw::PDX_BOBNEXTFIELD, @dx_set_state : Win32cr::Graphics::DirectDraw::PDX_SETSTATE, @dx_lock : Win32cr::Graphics::DirectDraw::PDX_LOCK, @dx_flip_overlay : Win32cr::Graphics::DirectDraw::PDX_FLIPOVERLAY, @dx_flip_video_port : Win32cr::Graphics::DirectDraw::PDX_FLIPVIDEOPORT, @dx_get_polarity : Win32cr::Graphics::DirectDraw::PDX_GETPOLARITY, @dx_get_current_autoflip : Win32cr::Graphics::DirectDraw::PDX_GETCURRENTAUTOFLIP, @dx_get_previous_autoflip : Win32cr::Graphics::DirectDraw::PDX_GETPREVIOUSAUTOFLIP, @dx_transfer : Win32cr::Graphics::DirectDraw::PDX_TRANSFER, @dx_get_transfer_status : Win32cr::Graphics::DirectDraw::PDX_GETTRANSFERSTATUS)
+    end
+  end
 
   @[Extern]
   record IDirectDrawVtbl,
@@ -4705,7 +5710,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("6c14db80-a733-11ce-a521-0020af0be560")]
   record IDirectDraw, lpVtbl : IDirectDrawVtbl* do
     GUID = LibC::GUID.new(0x6c14db80_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectDraw*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4809,7 +5813,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("b3a6f3e0-2b43-11cf-a2de-00aa00b93356")]
   record IDirectDraw2, lpVtbl : IDirectDraw2Vtbl* do
     GUID = LibC::GUID.new(0xb3a6f3e0_u32, 0x2b43_u16, 0x11cf_u16, StaticArray[0xa2_u8, 0xde_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb9_u8, 0x33_u8, 0x56_u8])
     def query_interface(this : IDirectDraw2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4920,7 +5923,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("9c59509a-39bd-11d1-8c4a-00c04fd930c5")]
   record IDirectDraw4, lpVtbl : IDirectDraw4Vtbl* do
     GUID = LibC::GUID.new(0x9c59509a_u32, 0x39bd_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0x4a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x30_u8, 0xc5_u8])
     def query_interface(this : IDirectDraw4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5045,7 +6047,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("15e65ec0-3b9c-11d2-b92f-00609797ea5b")]
   record IDirectDraw7, lpVtbl : IDirectDraw7Vtbl* do
     GUID = LibC::GUID.new(0x15e65ec0_u32, 0x3b9c_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0x2f_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x5b_u8])
     def query_interface(this : IDirectDraw7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5153,7 +6154,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("6c14db84-a733-11ce-a521-0020af0be560")]
   record IDirectDrawPalette, lpVtbl : IDirectDrawPaletteVtbl* do
     GUID = LibC::GUID.new(0x6c14db84_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectDrawPalette*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5194,7 +6194,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("6c14db85-a733-11ce-a521-0020af0be560")]
   record IDirectDrawClipper, lpVtbl : IDirectDrawClipperVtbl* do
     GUID = LibC::GUID.new(0x6c14db85_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectDrawClipper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5268,7 +6267,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("6c14db81-a733-11ce-a521-0020af0be560")]
   record IDirectDrawSurface, lpVtbl : IDirectDrawSurfaceVtbl* do
     GUID = LibC::GUID.new(0x6c14db81_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectDrawSurface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5426,7 +6424,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("57805885-6eec-11cf-9441-a82303c10e27")]
   record IDirectDrawSurface2, lpVtbl : IDirectDrawSurface2Vtbl* do
     GUID = LibC::GUID.new(0x57805885_u32, 0x6eec_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x41_u8, 0xa8_u8, 0x23_u8, 0x3_u8, 0xc1_u8, 0xe_u8, 0x27_u8])
     def query_interface(this : IDirectDrawSurface2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5594,7 +6591,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("da044e00-69b2-11d0-a1d5-00aa00b8dfbb")]
   record IDirectDrawSurface3, lpVtbl : IDirectDrawSurface3Vtbl* do
     GUID = LibC::GUID.new(0xda044e00_u32, 0x69b2_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0xd5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb8_u8, 0xdf_u8, 0xbb_u8])
     def query_interface(this : IDirectDrawSurface3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5770,7 +6766,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("0b2b8630-ad35-11d0-8ea6-00609797ea5b")]
   record IDirectDrawSurface4, lpVtbl : IDirectDrawSurface4Vtbl* do
     GUID = LibC::GUID.new(0xb2b8630_u32, 0xad35_u16, 0x11d0_u16, StaticArray[0x8e_u8, 0xa6_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x5b_u8])
     def query_interface(this : IDirectDrawSurface4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5965,7 +6960,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("06675a80-3b9b-11d2-b92f-00609797ea5b")]
   record IDirectDrawSurface7, lpVtbl : IDirectDrawSurface7Vtbl* do
     GUID = LibC::GUID.new(0x6675a80_u32, 0x3b9b_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0x2f_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x5b_u8])
     def query_interface(this : IDirectDrawSurface7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6128,7 +7122,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("4b9f0ee0-0d7e-11d0-9b06-00a0c903a3b8")]
   record IDirectDrawColorControl, lpVtbl : IDirectDrawColorControlVtbl* do
     GUID = LibC::GUID.new(0x4b9f0ee0_u32, 0xd7e_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
     def query_interface(this : IDirectDrawColorControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6159,7 +7152,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("69c11c3e-b46b-11d1-ad7a-00c04fc29b4e")]
   record IDirectDrawGammaControl, lpVtbl : IDirectDrawGammaControlVtbl* do
     GUID = LibC::GUID.new(0x69c11c3e_u32, 0xb46b_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x7a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x9b_u8, 0x4e_u8])
     def query_interface(this : IDirectDrawGammaControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6192,7 +7184,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("6c142760-a733-11ce-a521-0020af0be560")]
   record IDDVideoPortContainer, lpVtbl : IDDVideoPortContainerVtbl* do
     GUID = LibC::GUID.new(0x6c142760_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDDVideoPortContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6241,7 +7232,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("b36d93e0-2b43-11cf-a2de-00aa00b93356")]
   record IDirectDrawVideoPort, lpVtbl : IDirectDrawVideoPortVtbl* do
     GUID = LibC::GUID.new(0xb36d93e0_u32, 0x2b43_u16, 0x11cf_u16, StaticArray[0xa2_u8, 0xde_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb9_u8, 0x33_u8, 0x56_u8])
     def query_interface(this : IDirectDrawVideoPort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6308,7 +7298,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("a655fb94-0589-4e57-b333-567a89468c88")]
   record IDirectDrawVideoPortNotify, lpVtbl : IDirectDrawVideoPortNotifyVtbl* do
     GUID = LibC::GUID.new(0xa655fb94_u32, 0x589_u16, 0x4e57_u16, StaticArray[0xb3_u8, 0x33_u8, 0x56_u8, 0x7a_u8, 0x89_u8, 0x46_u8, 0x8c_u8, 0x88_u8])
     def query_interface(this : IDirectDrawVideoPortNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6340,7 +7329,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("8d56c120-6a08-11d0-9b06-00a0c903a3b8")]
   record IDirectDrawKernel, lpVtbl : IDirectDrawKernelVtbl* do
     GUID = LibC::GUID.new(0x8d56c120_u32, 0x6a08_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
     def query_interface(this : IDirectDrawKernel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6374,7 +7362,6 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  #@[Com("60755da0-6a40-11d0-9b06-00a0c903a3b8")]
   record IDirectDrawSurfaceKernel, lpVtbl : IDirectDrawSurfaceKernelVtbl* do
     GUID = LibC::GUID.new(0x60755da0_u32, 0x6a40_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
     def query_interface(this : IDirectDrawSurfaceKernel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

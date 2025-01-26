@@ -5,16 +5,19 @@ require "./../foundation.cr"
 require "./direct3_d12.cr"
 
 module Win32cr::Graphics::Direct3D11on12
-  alias PFN_D3D11ON12_CREATE_DEVICE = Proc(Void*, UInt32, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, UInt32, Void**, UInt32, UInt32, Void**, Void**, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, Win32cr::Foundation::HRESULT)*
+  alias PFN_D3D11ON12_CREATE_DEVICE = Proc(Void*, UInt32, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, UInt32, Void**, UInt32, UInt32, Void**, Void**, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, Win32cr::Foundation::HRESULT)
 
 
 
   @[Extern]
-  record D3D11_RESOURCE_FLAGS,
-    bind_flags : UInt32,
-    misc_flags : UInt32,
-    cpu_access_flags : UInt32,
-    structure_byte_stride : UInt32
+  struct D3D11_RESOURCE_FLAGS
+    property bind_flags : UInt32
+    property misc_flags : UInt32
+    property cpu_access_flags : UInt32
+    property structure_byte_stride : UInt32
+    def initialize(@bind_flags : UInt32, @misc_flags : UInt32, @cpu_access_flags : UInt32, @structure_byte_stride : UInt32)
+    end
+  end
 
   @[Extern]
   record ID3D11On12DeviceVtbl,
@@ -27,7 +30,6 @@ module Win32cr::Graphics::Direct3D11on12
 
 
   @[Extern]
-  #@[Com("85611e73-70a9-490e-9614-a9e302777904")]
   record ID3D11On12Device, lpVtbl : ID3D11On12DeviceVtbl* do
     GUID = LibC::GUID.new(0x85611e73_u32, 0x70a9_u16, 0x490e_u16, StaticArray[0x96_u8, 0x14_u8, 0xa9_u8, 0xe3_u8, 0x2_u8, 0x77_u8, 0x79_u8, 0x4_u8])
     def query_interface(this : ID3D11On12Device*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -63,7 +65,6 @@ module Win32cr::Graphics::Direct3D11on12
 
 
   @[Extern]
-  #@[Com("bdb64df4-ea2f-4c70-b861-aaab1258bb5d")]
   record ID3D11On12Device1, lpVtbl : ID3D11On12Device1Vtbl* do
     GUID = LibC::GUID.new(0xbdb64df4_u32, 0xea2f_u16, 0x4c70_u16, StaticArray[0xb8_u8, 0x61_u8, 0xaa_u8, 0xab_u8, 0x12_u8, 0x58_u8, 0xbb_u8, 0x5d_u8])
     def query_interface(this : ID3D11On12Device1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -104,7 +105,6 @@ module Win32cr::Graphics::Direct3D11on12
 
 
   @[Extern]
-  #@[Com("dc90f331-4740-43fa-866e-67f12cb58223")]
   record ID3D11On12Device2, lpVtbl : ID3D11On12Device2Vtbl* do
     GUID = LibC::GUID.new(0xdc90f331_u32, 0x4740_u16, 0x43fa_u16, StaticArray[0x86_u8, 0x6e_u8, 0x67_u8, 0xf1_u8, 0x2c_u8, 0xb5_u8, 0x82_u8, 0x23_u8])
     def query_interface(this : ID3D11On12Device2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -21,7 +21,6 @@ module Win32cr::System::WinRT::Holographic
 
 
   @[Extern]
-  #@[Com("7cc1f9c5-6d02-41fa-9500-e1809eb48eec")]
   record IHolographicCameraInterop, lpVtbl : IHolographicCameraInteropVtbl* do
     GUID = LibC::GUID.new(0x7cc1f9c5_u32, 0x6d02_u16, 0x41fa_u16, StaticArray[0x95_u8, 0x0_u8, 0xe1_u8, 0x80_u8, 0x9e_u8, 0xb4_u8, 0x8e_u8, 0xec_u8])
     def query_interface(this : IHolographicCameraInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -73,7 +72,6 @@ module Win32cr::System::WinRT::Holographic
 
 
   @[Extern]
-  #@[Com("f75b68d6-d1fd-4707-aafd-fa6f4c0e3bf4")]
   record IHolographicCameraRenderingParametersInterop, lpVtbl : IHolographicCameraRenderingParametersInteropVtbl* do
     GUID = LibC::GUID.new(0xf75b68d6_u32, 0xd1fd_u16, 0x4707_u16, StaticArray[0xaa_u8, 0xfd_u8, 0xfa_u8, 0x6f_u8, 0x4c_u8, 0xe_u8, 0x3b_u8, 0xf4_u8])
     def query_interface(this : IHolographicCameraRenderingParametersInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -119,7 +117,6 @@ module Win32cr::System::WinRT::Holographic
 
 
   @[Extern]
-  #@[Com("cfa688f0-639e-4a47-83d7-6b7f5ebf7fed")]
   record IHolographicQuadLayerInterop, lpVtbl : IHolographicQuadLayerInteropVtbl* do
     GUID = LibC::GUID.new(0xcfa688f0_u32, 0x639e_u16, 0x4a47_u16, StaticArray[0x83_u8, 0xd7_u8, 0x6b_u8, 0x7f_u8, 0x5e_u8, 0xbf_u8, 0x7f_u8, 0xed_u8])
     def query_interface(this : IHolographicQuadLayerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -170,7 +167,6 @@ module Win32cr::System::WinRT::Holographic
 
 
   @[Extern]
-  #@[Com("e5f549cd-c909-444f-8809-7cc18a9c8920")]
   record IHolographicQuadLayerUpdateParametersInterop, lpVtbl : IHolographicQuadLayerUpdateParametersInteropVtbl* do
     GUID = LibC::GUID.new(0xe5f549cd_u32, 0xc909_u16, 0x444f_u16, StaticArray[0x88_u8, 0x9_u8, 0x7c_u8, 0xc1_u8, 0x8a_u8, 0x9c_u8, 0x89_u8, 0x20_u8])
     def query_interface(this : IHolographicQuadLayerUpdateParametersInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

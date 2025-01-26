@@ -3,9 +3,9 @@ require "./foundation.cr"
 require "./system/win_rt.cr"
 
 module Win32cr::Gaming
-  alias GameUICompletionRoutine = Proc(Win32cr::Foundation::HRESULT, Void*, Void)*
+  alias GameUICompletionRoutine = Proc(Win32cr::Foundation::HRESULT, Void*, Void)
 
-  alias PlayerPickerUICompletionRoutine = Proc(Win32cr::Foundation::HRESULT, Void*, Win32cr::System::WinRT::HSTRING*, LibC::UIntPtrT, Void)*
+  alias PlayerPickerUICompletionRoutine = Proc(Win32cr::Foundation::HRESULT, Void*, Win32cr::System::WinRT::HSTRING*, LibC::UIntPtrT, Void)
 
   ID_GDF_XML_STR = "__GDF_XML"
   ID_GDF_THUMBNAIL_STR = "__GDF_THUMBNAIL"
@@ -79,9 +79,12 @@ module Win32cr::Gaming
   end
 
   @[Extern]
-  record GAMING_DEVICE_MODEL_INFORMATION,
-    vendorId : Win32cr::Gaming::GAMING_DEVICE_VENDOR_ID,
-    deviceId : Win32cr::Gaming::GAMING_DEVICE_DEVICE_ID
+  struct GAMING_DEVICE_MODEL_INFORMATION
+    property vendorId : Win32cr::Gaming::GAMING_DEVICE_VENDOR_ID
+    property deviceId : Win32cr::Gaming::GAMING_DEVICE_DEVICE_ID
+    def initialize(@vendorId : Win32cr::Gaming::GAMING_DEVICE_VENDOR_ID, @deviceId : Win32cr::Gaming::GAMING_DEVICE_DEVICE_ID)
+    end
+  end
 
   @[Extern]
   record IGameExplorerVtbl,
@@ -95,7 +98,6 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  #@[Com("e7b2fb72-d728-49b3-a5f2-18ebf5f1349e")]
   record IGameExplorer, lpVtbl : IGameExplorerVtbl* do
     GUID = LibC::GUID.new(0xe7b2fb72_u32, 0xd728_u16, 0x49b3_u16, StaticArray[0xa5_u8, 0xf2_u8, 0x18_u8, 0xeb_u8, 0xf5_u8, 0xf1_u8, 0x34_u8, 0x9e_u8])
     def query_interface(this : IGameExplorer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -142,7 +144,6 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  #@[Com("3887c9ca-04a0-42ae-bc4c-5fa6c7721145")]
   record IGameStatistics, lpVtbl : IGameStatisticsVtbl* do
     GUID = LibC::GUID.new(0x3887c9ca_u32, 0x4a0_u16, 0x42ae_u16, StaticArray[0xbc_u8, 0x4c_u8, 0x5f_u8, 0xa6_u8, 0xc7_u8, 0x72_u8, 0x11_u8, 0x45_u8])
     def query_interface(this : IGameStatistics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -203,7 +204,6 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  #@[Com("aff3ea11-e70e-407d-95dd-35e612c41ce2")]
   record IGameStatisticsMgr, lpVtbl : IGameStatisticsMgrVtbl* do
     GUID = LibC::GUID.new(0xaff3ea11_u32, 0xe70e_u16, 0x407d_u16, StaticArray[0x95_u8, 0xdd_u8, 0x35_u8, 0xe6_u8, 0x12_u8, 0xc4_u8, 0x1c_u8, 0xe2_u8])
     def query_interface(this : IGameStatisticsMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -235,7 +235,6 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  #@[Com("86874aa7-a1ed-450d-a7eb-b89e20b2fff3")]
   record IGameExplorer2, lpVtbl : IGameExplorer2Vtbl* do
     GUID = LibC::GUID.new(0x86874aa7_u32, 0xa1ed_u16, 0x450d_u16, StaticArray[0xa7_u8, 0xeb_u8, 0xb8_u8, 0x9e_u8, 0x20_u8, 0xb2_u8, 0xff_u8, 0xf3_u8])
     def query_interface(this : IGameExplorer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -273,7 +272,6 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  #@[Com("eb5ddb08-8bbf-449b-ac21-b02ddeb3b136")]
   record IXblIdpAuthManager, lpVtbl : IXblIdpAuthManagerVtbl* do
     GUID = LibC::GUID.new(0xeb5ddb08_u32, 0x8bbf_u16, 0x449b_u16, StaticArray[0xac_u8, 0x21_u8, 0xb0_u8, 0x2d_u8, 0xde_u8, 0xb3_u8, 0xb1_u8, 0x36_u8])
     def query_interface(this : IXblIdpAuthManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -334,7 +332,6 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  #@[Com("46ce0225-f267-4d68-b299-b2762552dec1")]
   record IXblIdpAuthTokenResult, lpVtbl : IXblIdpAuthTokenResultVtbl* do
     GUID = LibC::GUID.new(0x46ce0225_u32, 0xf267_u16, 0x4d68_u16, StaticArray[0xb2_u8, 0x99_u8, 0xb2_u8, 0x76_u8, 0x25_u8, 0x52_u8, 0xde_u8, 0xc1_u8])
     def query_interface(this : IXblIdpAuthTokenResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -420,7 +417,6 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  #@[Com("75d760b0-60b9-412d-994f-26b2cd5f7812")]
   record IXblIdpAuthTokenResult2, lpVtbl : IXblIdpAuthTokenResult2Vtbl* do
     GUID = LibC::GUID.new(0x75d760b0_u32, 0x60b9_u16, 0x412d_u16, StaticArray[0x99_u8, 0x4f_u8, 0x26_u8, 0xb2_u8, 0xcd_u8, 0x5f_u8, 0x78_u8, 0x12_u8])
     def query_interface(this : IXblIdpAuthTokenResult2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -444,13 +440,6 @@ module Win32cr::Gaming
 
   end
 
-  @[Link("api-ms-win-gaming-expandedresources-l1-1-0")]
-  @[Link("api-ms-win-gaming-deviceinformation-l1-1-0")]
-  @[Link("api-ms-win-gaming-tcui-l1-1-0")]
-  @[Link("api-ms-win-gaming-tcui-l1-1-1")]
-  @[Link("api-ms-win-gaming-tcui-l1-1-2")]
-  @[Link("api-ms-win-gaming-tcui-l1-1-3")]
-  @[Link("api-ms-win-gaming-tcui-l1-1-4")]
   lib C
     fun HasExpandedResources(hasExpandedResources : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 

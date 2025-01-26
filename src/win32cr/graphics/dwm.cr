@@ -116,88 +116,106 @@ module Win32cr::Graphics::Dwm
   end
 
   @[Extern]
-  record DWM_BLURBEHIND,
-    dwFlags : UInt32,
-    fEnable : Win32cr::Foundation::BOOL,
-    hRgnBlur : Win32cr::Graphics::Gdi::HRGN,
-    fTransitionOnMaximized : Win32cr::Foundation::BOOL
+  struct DWM_BLURBEHIND
+    property dwFlags : UInt32
+    property fEnable : Win32cr::Foundation::BOOL
+    property hRgnBlur : Win32cr::Graphics::Gdi::HRGN
+    property fTransitionOnMaximized : Win32cr::Foundation::BOOL
+    def initialize(@dwFlags : UInt32, @fEnable : Win32cr::Foundation::BOOL, @hRgnBlur : Win32cr::Graphics::Gdi::HRGN, @fTransitionOnMaximized : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DWM_THUMBNAIL_PROPERTIES,
-    dwFlags : UInt32,
-    rcDestination : Win32cr::Foundation::RECT,
-    rcSource : Win32cr::Foundation::RECT,
-    opacity : UInt8,
-    fVisible : Win32cr::Foundation::BOOL,
-    fSourceClientAreaOnly : Win32cr::Foundation::BOOL
+  struct DWM_THUMBNAIL_PROPERTIES
+    property dwFlags : UInt32
+    property rcDestination : Win32cr::Foundation::RECT
+    property rcSource : Win32cr::Foundation::RECT
+    property opacity : UInt8
+    property fVisible : Win32cr::Foundation::BOOL
+    property fSourceClientAreaOnly : Win32cr::Foundation::BOOL
+    def initialize(@dwFlags : UInt32, @rcDestination : Win32cr::Foundation::RECT, @rcSource : Win32cr::Foundation::RECT, @opacity : UInt8, @fVisible : Win32cr::Foundation::BOOL, @fSourceClientAreaOnly : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record UNSIGNED_RATIO,
-    uiNumerator : UInt32,
-    uiDenominator : UInt32
+  struct UNSIGNED_RATIO
+    property uiNumerator : UInt32
+    property uiDenominator : UInt32
+    def initialize(@uiNumerator : UInt32, @uiDenominator : UInt32)
+    end
+  end
 
   @[Extern]
-  record DWM_TIMING_INFO,
-    cbSize : UInt32,
-    rateRefresh : Win32cr::Graphics::Dwm::UNSIGNED_RATIO,
-    qpcRefreshPeriod : UInt64,
-    rateCompose : Win32cr::Graphics::Dwm::UNSIGNED_RATIO,
-    qpcVBlank : UInt64,
-    cRefresh : UInt64,
-    cDXRefresh : UInt32,
-    qpcCompose : UInt64,
-    cFrame : UInt64,
-    cDXPresent : UInt32,
-    cRefreshFrame : UInt64,
-    cFrameSubmitted : UInt64,
-    cDXPresentSubmitted : UInt32,
-    cFrameConfirmed : UInt64,
-    cDXPresentConfirmed : UInt32,
-    cRefreshConfirmed : UInt64,
-    cDXRefreshConfirmed : UInt32,
-    cFramesLate : UInt64,
-    cFramesOutstanding : UInt32,
-    cFrameDisplayed : UInt64,
-    qpcFrameDisplayed : UInt64,
-    cRefreshFrameDisplayed : UInt64,
-    cFrameComplete : UInt64,
-    qpcFrameComplete : UInt64,
-    cFramePending : UInt64,
-    qpcFramePending : UInt64,
-    cFramesDisplayed : UInt64,
-    cFramesComplete : UInt64,
-    cFramesPending : UInt64,
-    cFramesAvailable : UInt64,
-    cFramesDropped : UInt64,
-    cFramesMissed : UInt64,
-    cRefreshNextDisplayed : UInt64,
-    cRefreshNextPresented : UInt64,
-    cRefreshesDisplayed : UInt64,
-    cRefreshesPresented : UInt64,
-    cRefreshStarted : UInt64,
-    cPixelsReceived : UInt64,
-    cPixelsDrawn : UInt64,
-    cBuffersEmpty : UInt64
+  struct DWM_TIMING_INFO
+    property cbSize : UInt32
+    property rateRefresh : Win32cr::Graphics::Dwm::UNSIGNED_RATIO
+    property qpcRefreshPeriod : UInt64
+    property rateCompose : Win32cr::Graphics::Dwm::UNSIGNED_RATIO
+    property qpcVBlank : UInt64
+    property cRefresh : UInt64
+    property cDXRefresh : UInt32
+    property qpcCompose : UInt64
+    property cFrame : UInt64
+    property cDXPresent : UInt32
+    property cRefreshFrame : UInt64
+    property cFrameSubmitted : UInt64
+    property cDXPresentSubmitted : UInt32
+    property cFrameConfirmed : UInt64
+    property cDXPresentConfirmed : UInt32
+    property cRefreshConfirmed : UInt64
+    property cDXRefreshConfirmed : UInt32
+    property cFramesLate : UInt64
+    property cFramesOutstanding : UInt32
+    property cFrameDisplayed : UInt64
+    property qpcFrameDisplayed : UInt64
+    property cRefreshFrameDisplayed : UInt64
+    property cFrameComplete : UInt64
+    property qpcFrameComplete : UInt64
+    property cFramePending : UInt64
+    property qpcFramePending : UInt64
+    property cFramesDisplayed : UInt64
+    property cFramesComplete : UInt64
+    property cFramesPending : UInt64
+    property cFramesAvailable : UInt64
+    property cFramesDropped : UInt64
+    property cFramesMissed : UInt64
+    property cRefreshNextDisplayed : UInt64
+    property cRefreshNextPresented : UInt64
+    property cRefreshesDisplayed : UInt64
+    property cRefreshesPresented : UInt64
+    property cRefreshStarted : UInt64
+    property cPixelsReceived : UInt64
+    property cPixelsDrawn : UInt64
+    property cBuffersEmpty : UInt64
+    def initialize(@cbSize : UInt32, @rateRefresh : Win32cr::Graphics::Dwm::UNSIGNED_RATIO, @qpcRefreshPeriod : UInt64, @rateCompose : Win32cr::Graphics::Dwm::UNSIGNED_RATIO, @qpcVBlank : UInt64, @cRefresh : UInt64, @cDXRefresh : UInt32, @qpcCompose : UInt64, @cFrame : UInt64, @cDXPresent : UInt32, @cRefreshFrame : UInt64, @cFrameSubmitted : UInt64, @cDXPresentSubmitted : UInt32, @cFrameConfirmed : UInt64, @cDXPresentConfirmed : UInt32, @cRefreshConfirmed : UInt64, @cDXRefreshConfirmed : UInt32, @cFramesLate : UInt64, @cFramesOutstanding : UInt32, @cFrameDisplayed : UInt64, @qpcFrameDisplayed : UInt64, @cRefreshFrameDisplayed : UInt64, @cFrameComplete : UInt64, @qpcFrameComplete : UInt64, @cFramePending : UInt64, @qpcFramePending : UInt64, @cFramesDisplayed : UInt64, @cFramesComplete : UInt64, @cFramesPending : UInt64, @cFramesAvailable : UInt64, @cFramesDropped : UInt64, @cFramesMissed : UInt64, @cRefreshNextDisplayed : UInt64, @cRefreshNextPresented : UInt64, @cRefreshesDisplayed : UInt64, @cRefreshesPresented : UInt64, @cRefreshStarted : UInt64, @cPixelsReceived : UInt64, @cPixelsDrawn : UInt64, @cBuffersEmpty : UInt64)
+    end
+  end
 
   @[Extern]
-  record DWM_PRESENT_PARAMETERS,
-    cbSize : UInt32,
-    fQueue : Win32cr::Foundation::BOOL,
-    cRefreshStart : UInt64,
-    cBuffer : UInt32,
-    fUseSourceRate : Win32cr::Foundation::BOOL,
-    rateSource : Win32cr::Graphics::Dwm::UNSIGNED_RATIO,
-    cRefreshesPerFrame : UInt32,
-    eSampling : Win32cr::Graphics::Dwm::DWM_SOURCE_FRAME_SAMPLING
+  struct DWM_PRESENT_PARAMETERS
+    property cbSize : UInt32
+    property fQueue : Win32cr::Foundation::BOOL
+    property cRefreshStart : UInt64
+    property cBuffer : UInt32
+    property fUseSourceRate : Win32cr::Foundation::BOOL
+    property rateSource : Win32cr::Graphics::Dwm::UNSIGNED_RATIO
+    property cRefreshesPerFrame : UInt32
+    property eSampling : Win32cr::Graphics::Dwm::DWM_SOURCE_FRAME_SAMPLING
+    def initialize(@cbSize : UInt32, @fQueue : Win32cr::Foundation::BOOL, @cRefreshStart : UInt64, @cBuffer : UInt32, @fUseSourceRate : Win32cr::Foundation::BOOL, @rateSource : Win32cr::Graphics::Dwm::UNSIGNED_RATIO, @cRefreshesPerFrame : UInt32, @eSampling : Win32cr::Graphics::Dwm::DWM_SOURCE_FRAME_SAMPLING)
+    end
+  end
 
   @[Extern]
-  record MilMatrix3x2D,
-    s_11 : Float64,
-    s_12 : Float64,
-    s_21 : Float64,
-    s_22 : Float64,
-    dx : Float64,
-    dy : Float64
+  struct MilMatrix3x2D
+    property s_11 : Float64
+    property s_12 : Float64
+    property s_21 : Float64
+    property s_22 : Float64
+    property dx : Float64
+    property dy : Float64
+    def initialize(@s_11 : Float64, @s_12 : Float64, @s_21 : Float64, @s_22 : Float64, @dx : Float64, @dy : Float64)
+    end
+  end
 
   @[Link("dwmapi")]
   lib C

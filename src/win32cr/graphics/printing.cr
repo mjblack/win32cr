@@ -12,23 +12,23 @@ require "./../storage/xps.cr"
 require "./dxgi.cr"
 
 module Win32cr::Graphics::Printing
-  alias CPSUICALLBACK_ = Proc(Win32cr::Graphics::Printing::CPSUICBPARAM*, Int32)*
+  alias CPSUICALLBACK_ = Proc(Win32cr::Graphics::Printing::CPSUICBPARAM*, Int32)
 
-  alias PFNCOMPROPSHEET = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, LibC::IntPtrT)*
+  alias PFNCOMPROPSHEET = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, LibC::IntPtrT)
 
-  alias PFNPROPSHEETUI = Proc(Win32cr::Graphics::Printing::PROPSHEETUI_INFO*, Win32cr::Foundation::LPARAM, Int32)*
+  alias PFNPROPSHEETUI = Proc(Win32cr::Graphics::Printing::PROPSHEETUI_INFO*, Win32cr::Foundation::LPARAM, Int32)
 
-  alias PFN_DrvGetDriverSetting = Proc(Void*, Win32cr::Foundation::PSTR, Void*, UInt32, UInt32*, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFN_DrvGetDriverSetting = Proc(Void*, Win32cr::Foundation::PSTR, Void*, UInt32, UInt32*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFN_DrvUpgradeRegistrySetting = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias PFN_DrvUpgradeRegistrySetting = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias PFN_DrvUpdateUISetting = Proc(Void*, Void*, UInt32, UInt32, Win32cr::Foundation::BOOL)*
+  alias PFN_DrvUpdateUISetting = Proc(Void*, Void*, UInt32, UInt32, Win32cr::Foundation::BOOL)
 
-  alias OEMCUIPCALLBACK = Proc(Win32cr::Graphics::Printing::CPSUICBPARAM*, Win32cr::Graphics::Printing::OEMCUIPPARAM*, Int32)*
+  alias OEMCUIPCALLBACK = Proc(Win32cr::Graphics::Printing::CPSUICBPARAM*, Win32cr::Graphics::Printing::OEMCUIPPARAM*, Int32)
 
-  alias EMFPLAYPROC = Proc(Win32cr::Graphics::Gdi::HDC, Int32, Win32cr::Foundation::HANDLE, Int32)*
+  alias EMFPLAYPROC = Proc(Win32cr::Graphics::Gdi::HDC, Int32, Win32cr::Foundation::HANDLE, Int32)
 
-  alias ROUTER_NOTIFY_CALLBACK = Proc(UInt32, Void*, UInt32, Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO*, UInt32, UInt32*, Win32cr::Foundation::BOOL)*
+  alias ROUTER_NOTIFY_CALLBACK = Proc(UInt32, Void*, UInt32, Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO*, UInt32, UInt32*, Win32cr::Foundation::BOOL)
 
   USB_PRINTER_INTERFACE_CLASSIC = 1_u32
   USB_PRINTER_INTERFACE_IPP = 2_u32
@@ -1682,2011 +1682,2617 @@ module Win32cr::Graphics::Printing
   end
 
   @[Extern]
-  record ImgErrorInfo,
-    description : Win32cr::Foundation::BSTR,
-    guid : LibC::GUID,
-    helpContext : UInt32,
-    helpFile : Win32cr::Foundation::BSTR,
-    source : Win32cr::Foundation::BSTR,
-    devDescription : Win32cr::Foundation::BSTR,
-    errorID : LibC::GUID,
-    cUserParameters : UInt32,
-    aUserParameters : Win32cr::Foundation::BSTR*,
-    userFallback : Win32cr::Foundation::BSTR,
-    exceptionID : UInt32
+  struct ImgErrorInfo
+    property description : Win32cr::Foundation::BSTR
+    property guid : LibC::GUID
+    property helpContext : UInt32
+    property helpFile : Win32cr::Foundation::BSTR
+    property source : Win32cr::Foundation::BSTR
+    property devDescription : Win32cr::Foundation::BSTR
+    property errorID : LibC::GUID
+    property cUserParameters : UInt32
+    property aUserParameters : Win32cr::Foundation::BSTR*
+    property userFallback : Win32cr::Foundation::BSTR
+    property exceptionID : UInt32
+    def initialize(@description : Win32cr::Foundation::BSTR, @guid : LibC::GUID, @helpContext : UInt32, @helpFile : Win32cr::Foundation::BSTR, @source : Win32cr::Foundation::BSTR, @devDescription : Win32cr::Foundation::BSTR, @errorID : LibC::GUID, @cUserParameters : UInt32, @aUserParameters : Win32cr::Foundation::BSTR*, @userFallback : Win32cr::Foundation::BSTR, @exceptionID : UInt32)
+    end
+  end
 
   @[Extern]
-  record OPTPARAM,
-    cbSize : UInt16,
-    flags : UInt8,
-    style : UInt8,
-    pData : Int8*,
-    icon_id : LibC::UIntPtrT,
-    lParam : Win32cr::Foundation::LPARAM,
-    dwReserved : LibC::UIntPtrT[2]
+  struct OPTPARAM
+    property cbSize : UInt16
+    property flags : UInt8
+    property style : UInt8
+    property pData : Int8*
+    property icon_id : LibC::UIntPtrT
+    property lParam : Win32cr::Foundation::LPARAM
+    property dwReserved : LibC::UIntPtrT[2]
+    def initialize(@cbSize : UInt16, @flags : UInt8, @style : UInt8, @pData : Int8*, @icon_id : LibC::UIntPtrT, @lParam : Win32cr::Foundation::LPARAM, @dwReserved : LibC::UIntPtrT[2])
+    end
+  end
 
   @[Extern]
-  record OPTCOMBO,
-    cbSize : UInt16,
-    flags : UInt8,
-    cListItem : UInt16,
-    pListItem : Win32cr::Graphics::Printing::OPTPARAM*,
-    sel : Int32,
-    dwReserved : UInt32[3]
+  struct OPTCOMBO
+    property cbSize : UInt16
+    property flags : UInt8
+    property cListItem : UInt16
+    property pListItem : Win32cr::Graphics::Printing::OPTPARAM*
+    property sel : Int32
+    property dwReserved : UInt32[3]
+    def initialize(@cbSize : UInt16, @flags : UInt8, @cListItem : UInt16, @pListItem : Win32cr::Graphics::Printing::OPTPARAM*, @sel : Int32, @dwReserved : UInt32[3])
+    end
+  end
 
   @[Extern]
-  record OPTTYPE,
-    cbSize : UInt16,
-    type__ : UInt8,
-    flags : UInt8,
-    count : UInt16,
-    beg_ctrl_id : UInt16,
-    pOptParam : Win32cr::Graphics::Printing::OPTPARAM*,
-    style : UInt16,
-    wReserved : UInt16[3],
-    dwReserved : LibC::UIntPtrT[3]
+  struct OPTTYPE
+    property cbSize : UInt16
+    property type__ : UInt8
+    property flags : UInt8
+    property count : UInt16
+    property beg_ctrl_id : UInt16
+    property pOptParam : Win32cr::Graphics::Printing::OPTPARAM*
+    property style : UInt16
+    property wReserved : UInt16[3]
+    property dwReserved : LibC::UIntPtrT[3]
+    def initialize(@cbSize : UInt16, @type__ : UInt8, @flags : UInt8, @count : UInt16, @beg_ctrl_id : UInt16, @pOptParam : Win32cr::Graphics::Printing::OPTPARAM*, @style : UInt16, @wReserved : UInt16[3], @dwReserved : LibC::UIntPtrT[3])
+    end
+  end
 
   @[Extern]
-  record EXTPUSH,
-    cbSize : UInt16,
-    flags : UInt16,
-    pTitle : Int8*,
-    anonymous1 : Anonymous1_e__Union_,
-    icon_id : LibC::UIntPtrT,
-    anonymous2 : Anonymous2_e__Union_,
-    dwReserved : LibC::UIntPtrT[3] do
+  struct EXTPUSH
+    property cbSize : UInt16
+    property flags : UInt16
+    property pTitle : Int8*
+    property anonymous1 : Anonymous1_e__Union_
+    property icon_id : LibC::UIntPtrT
+    property anonymous2 : Anonymous2_e__Union_
+    property dwReserved : LibC::UIntPtrT[3]
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      dlg_template_id : UInt16,
-      hDlgTemplate : Win32cr::Foundation::HANDLE
+    struct Anonymous2_e__Union_
+    property dlg_template_id : UInt16
+    property hDlgTemplate : Win32cr::Foundation::HANDLE
+    def initialize(@dlg_template_id : UInt16, @hDlgTemplate : Win32cr::Foundation::HANDLE)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      dlg_proc : Win32cr::UI::WindowsAndMessaging::DLGPROC,
-      pfnCallBack : Win32cr::Foundation::FARPROC
+    struct Anonymous1_e__Union_
+    property dlg_proc : Win32cr::UI::WindowsAndMessaging::DLGPROC
+    property pfnCallBack : Win32cr::Foundation::FARPROC
+    def initialize(@dlg_proc : Win32cr::UI::WindowsAndMessaging::DLGPROC, @pfnCallBack : Win32cr::Foundation::FARPROC)
+    end
+    end
 
+    def initialize(@cbSize : UInt16, @flags : UInt16, @pTitle : Int8*, @anonymous1 : Anonymous1_e__Union_, @icon_id : LibC::UIntPtrT, @anonymous2 : Anonymous2_e__Union_, @dwReserved : LibC::UIntPtrT[3])
+    end
   end
 
   @[Extern]
-  record EXTCHKBOX,
-    cbSize : UInt16,
-    flags : UInt16,
-    pTitle : Int8*,
-    pSeparator : Int8*,
-    pCheckedName : Int8*,
-    icon_id : LibC::UIntPtrT,
-    wReserved : UInt16[4],
-    dwReserved : LibC::UIntPtrT[2]
+  struct EXTCHKBOX
+    property cbSize : UInt16
+    property flags : UInt16
+    property pTitle : Int8*
+    property pSeparator : Int8*
+    property pCheckedName : Int8*
+    property icon_id : LibC::UIntPtrT
+    property wReserved : UInt16[4]
+    property dwReserved : LibC::UIntPtrT[2]
+    def initialize(@cbSize : UInt16, @flags : UInt16, @pTitle : Int8*, @pSeparator : Int8*, @pCheckedName : Int8*, @icon_id : LibC::UIntPtrT, @wReserved : UInt16[4], @dwReserved : LibC::UIntPtrT[2])
+    end
+  end
 
   @[Extern]
-  record OIEXT,
-    cbSize : UInt16,
-    flags : UInt16,
-    hInstCaller : Win32cr::Foundation::HINSTANCE,
-    pHelpFile : Int8*,
-    dwReserved : LibC::UIntPtrT[4]
+  struct OIEXT
+    property cbSize : UInt16
+    property flags : UInt16
+    property hInstCaller : Win32cr::Foundation::HINSTANCE
+    property pHelpFile : Int8*
+    property dwReserved : LibC::UIntPtrT[4]
+    def initialize(@cbSize : UInt16, @flags : UInt16, @hInstCaller : Win32cr::Foundation::HINSTANCE, @pHelpFile : Int8*, @dwReserved : LibC::UIntPtrT[4])
+    end
+  end
 
   @[Extern]
-  record OPTITEM,
-    cbSize : UInt16,
-    level : UInt8,
-    dlg_page_idx : UInt8,
-    flags : UInt32,
-    user_data : LibC::UIntPtrT,
-    pName : Int8*,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    pOptType : Win32cr::Graphics::Printing::OPTTYPE*,
-    help_index : UInt32,
-    dm_pub_id : UInt8,
-    user_item_id : UInt8,
-    wReserved : UInt16,
-    pOIExt : Win32cr::Graphics::Printing::OIEXT*,
-    dwReserved : LibC::UIntPtrT[3] do
+  struct OPTITEM
+    property cbSize : UInt16
+    property level : UInt8
+    property dlg_page_idx : UInt8
+    property flags : UInt32
+    property user_data : LibC::UIntPtrT
+    property pName : Int8*
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property pOptType : Win32cr::Graphics::Printing::OPTTYPE*
+    property help_index : UInt32
+    property dm_pub_id : UInt8
+    property user_item_id : UInt8
+    property wReserved : UInt16
+    property pOIExt : Win32cr::Graphics::Printing::OIEXT*
+    property dwReserved : LibC::UIntPtrT[3]
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      pExtChkBox : Win32cr::Graphics::Printing::EXTCHKBOX*,
-      pExtPush : Win32cr::Graphics::Printing::EXTPUSH*
+    struct Anonymous2_e__Union_
+    property pExtChkBox : Win32cr::Graphics::Printing::EXTCHKBOX*
+    property pExtPush : Win32cr::Graphics::Printing::EXTPUSH*
+    def initialize(@pExtChkBox : Win32cr::Graphics::Printing::EXTCHKBOX*, @pExtPush : Win32cr::Graphics::Printing::EXTPUSH*)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      sel : Int32,
-      pSel : Int8*
+    struct Anonymous1_e__Union_
+    property sel : Int32
+    property pSel : Int8*
+    def initialize(@sel : Int32, @pSel : Int8*)
+    end
+    end
 
+    def initialize(@cbSize : UInt16, @level : UInt8, @dlg_page_idx : UInt8, @flags : UInt32, @user_data : LibC::UIntPtrT, @pName : Int8*, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @pOptType : Win32cr::Graphics::Printing::OPTTYPE*, @help_index : UInt32, @dm_pub_id : UInt8, @user_item_id : UInt8, @wReserved : UInt16, @pOIExt : Win32cr::Graphics::Printing::OIEXT*, @dwReserved : LibC::UIntPtrT[3])
+    end
   end
 
   @[Extern]
-  record CPSUICBPARAM,
-    cbSize : UInt16,
-    reason : UInt16,
-    hDlg : Win32cr::Foundation::HWND,
-    pOptItem : Win32cr::Graphics::Printing::OPTITEM*,
-    cOptItem : UInt16,
-    flags : UInt16,
-    pCurItem : Win32cr::Graphics::Printing::OPTITEM*,
-    anonymous : Anonymous_e__Union_,
-    user_data : LibC::UIntPtrT,
-    result : LibC::UIntPtrT do
+  struct CPSUICBPARAM
+    property cbSize : UInt16
+    property reason : UInt16
+    property hDlg : Win32cr::Foundation::HWND
+    property pOptItem : Win32cr::Graphics::Printing::OPTITEM*
+    property cOptItem : UInt16
+    property flags : UInt16
+    property pCurItem : Win32cr::Graphics::Printing::OPTITEM*
+    property anonymous : Anonymous_e__Union_
+    property user_data : LibC::UIntPtrT
+    property result : LibC::UIntPtrT
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      old_sel : Int32,
-      pOldSel : Int8*
+    struct Anonymous_e__Union_
+    property old_sel : Int32
+    property pOldSel : Int8*
+    def initialize(@old_sel : Int32, @pOldSel : Int8*)
+    end
+    end
 
+    def initialize(@cbSize : UInt16, @reason : UInt16, @hDlg : Win32cr::Foundation::HWND, @pOptItem : Win32cr::Graphics::Printing::OPTITEM*, @cOptItem : UInt16, @flags : UInt16, @pCurItem : Win32cr::Graphics::Printing::OPTITEM*, @anonymous : Anonymous_e__Union_, @user_data : LibC::UIntPtrT, @result : LibC::UIntPtrT)
+    end
   end
 
   @[Extern]
-  record DLGPAGE,
-    cbSize : UInt16,
-    flags : UInt16,
-    dlg_proc : Win32cr::UI::WindowsAndMessaging::DLGPROC,
-    pTabName : Int8*,
-    icon_id : LibC::UIntPtrT,
-    anonymous : Anonymous_e__Union_ do
+  struct DLGPAGE
+    property cbSize : UInt16
+    property flags : UInt16
+    property dlg_proc : Win32cr::UI::WindowsAndMessaging::DLGPROC
+    property pTabName : Int8*
+    property icon_id : LibC::UIntPtrT
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dlg_template_id : UInt16,
-      hDlgTemplate : Win32cr::Foundation::HANDLE
+    struct Anonymous_e__Union_
+    property dlg_template_id : UInt16
+    property hDlgTemplate : Win32cr::Foundation::HANDLE
+    def initialize(@dlg_template_id : UInt16, @hDlgTemplate : Win32cr::Foundation::HANDLE)
+    end
+    end
 
+    def initialize(@cbSize : UInt16, @flags : UInt16, @dlg_proc : Win32cr::UI::WindowsAndMessaging::DLGPROC, @pTabName : Int8*, @icon_id : LibC::UIntPtrT, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record COMPROPSHEETUI,
-    cbSize : UInt16,
-    flags : UInt16,
-    hInstCaller : Win32cr::Foundation::HINSTANCE,
-    pCallerName : Int8*,
-    user_data : LibC::UIntPtrT,
-    pHelpFile : Int8*,
-    pfnCallBack : Win32cr::Graphics::Printing::CPSUICALLBACK_,
-    pOptItem : Win32cr::Graphics::Printing::OPTITEM*,
-    pDlgPage : Win32cr::Graphics::Printing::DLGPAGE*,
-    cOptItem : UInt16,
-    cDlgPage : UInt16,
-    icon_id : LibC::UIntPtrT,
-    pOptItemName : Int8*,
-    caller_version : UInt16,
-    opt_item_version : UInt16,
-    dwReserved : LibC::UIntPtrT[4]
+  struct COMPROPSHEETUI
+    property cbSize : UInt16
+    property flags : UInt16
+    property hInstCaller : Win32cr::Foundation::HINSTANCE
+    property pCallerName : Int8*
+    property user_data : LibC::UIntPtrT
+    property pHelpFile : Int8*
+    property pfnCallBack : Win32cr::Graphics::Printing::CPSUICALLBACK_
+    property pOptItem : Win32cr::Graphics::Printing::OPTITEM*
+    property pDlgPage : Win32cr::Graphics::Printing::DLGPAGE*
+    property cOptItem : UInt16
+    property cDlgPage : UInt16
+    property icon_id : LibC::UIntPtrT
+    property pOptItemName : Int8*
+    property caller_version : UInt16
+    property opt_item_version : UInt16
+    property dwReserved : LibC::UIntPtrT[4]
+    def initialize(@cbSize : UInt16, @flags : UInt16, @hInstCaller : Win32cr::Foundation::HINSTANCE, @pCallerName : Int8*, @user_data : LibC::UIntPtrT, @pHelpFile : Int8*, @pfnCallBack : Win32cr::Graphics::Printing::CPSUICALLBACK_, @pOptItem : Win32cr::Graphics::Printing::OPTITEM*, @pDlgPage : Win32cr::Graphics::Printing::DLGPAGE*, @cOptItem : UInt16, @cDlgPage : UInt16, @icon_id : LibC::UIntPtrT, @pOptItemName : Int8*, @caller_version : UInt16, @opt_item_version : UInt16, @dwReserved : LibC::UIntPtrT[4])
+    end
+  end
 
   @[Extern]
-  record SETRESULT_INFO,
-    cbSize : UInt16,
-    wReserved : UInt16,
-    hSetResult : Win32cr::Foundation::HANDLE,
-    result : Win32cr::Foundation::LRESULT
+  struct SETRESULT_INFO
+    property cbSize : UInt16
+    property wReserved : UInt16
+    property hSetResult : Win32cr::Foundation::HANDLE
+    property result : Win32cr::Foundation::LRESULT
+    def initialize(@cbSize : UInt16, @wReserved : UInt16, @hSetResult : Win32cr::Foundation::HANDLE, @result : Win32cr::Foundation::LRESULT)
+    end
+  end
 
   @[Extern]
-  record INSERTPSUIPAGE_INFO,
-    cbSize : UInt16,
-    type__ : UInt8,
-    mode : UInt8,
-    dwData1 : LibC::UIntPtrT,
-    dwData2 : LibC::UIntPtrT,
-    dwData3 : LibC::UIntPtrT
+  struct INSERTPSUIPAGE_INFO
+    property cbSize : UInt16
+    property type__ : UInt8
+    property mode : UInt8
+    property dwData1 : LibC::UIntPtrT
+    property dwData2 : LibC::UIntPtrT
+    property dwData3 : LibC::UIntPtrT
+    def initialize(@cbSize : UInt16, @type__ : UInt8, @mode : UInt8, @dwData1 : LibC::UIntPtrT, @dwData2 : LibC::UIntPtrT, @dwData3 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record PSPINFO,
-    cbSize : UInt16,
-    wReserved : UInt16,
-    hComPropSheet : Win32cr::Foundation::HANDLE,
-    hCPSUIPage : Win32cr::Foundation::HANDLE,
-    pfnComPropSheet : Win32cr::Graphics::Printing::PFNCOMPROPSHEET
+  struct PSPINFO
+    property cbSize : UInt16
+    property wReserved : UInt16
+    property hComPropSheet : Win32cr::Foundation::HANDLE
+    property hCPSUIPage : Win32cr::Foundation::HANDLE
+    property pfnComPropSheet : Win32cr::Graphics::Printing::PFNCOMPROPSHEET
+    def initialize(@cbSize : UInt16, @wReserved : UInt16, @hComPropSheet : Win32cr::Foundation::HANDLE, @hCPSUIPage : Win32cr::Foundation::HANDLE, @pfnComPropSheet : Win32cr::Graphics::Printing::PFNCOMPROPSHEET)
+    end
+  end
 
   @[Extern]
-  record CPSUIDATABLOCK,
-    cbData : UInt32,
-    pbData : UInt8*
+  struct CPSUIDATABLOCK
+    property cbData : UInt32
+    property pbData : UInt8*
+    def initialize(@cbData : UInt32, @pbData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record PROPSHEETUI_INFO,
-    cbSize : UInt16,
-    version : UInt16,
-    flags : UInt16,
-    reason : UInt16,
-    hComPropSheet : Win32cr::Foundation::HANDLE,
-    pfnComPropSheet : Win32cr::Graphics::Printing::PFNCOMPROPSHEET,
-    lParamInit : Win32cr::Foundation::LPARAM,
-    user_data : LibC::UIntPtrT,
-    result : LibC::UIntPtrT
+  struct PROPSHEETUI_INFO
+    property cbSize : UInt16
+    property version : UInt16
+    property flags : UInt16
+    property reason : UInt16
+    property hComPropSheet : Win32cr::Foundation::HANDLE
+    property pfnComPropSheet : Win32cr::Graphics::Printing::PFNCOMPROPSHEET
+    property lParamInit : Win32cr::Foundation::LPARAM
+    property user_data : LibC::UIntPtrT
+    property result : LibC::UIntPtrT
+    def initialize(@cbSize : UInt16, @version : UInt16, @flags : UInt16, @reason : UInt16, @hComPropSheet : Win32cr::Foundation::HANDLE, @pfnComPropSheet : Win32cr::Graphics::Printing::PFNCOMPROPSHEET, @lParamInit : Win32cr::Foundation::LPARAM, @user_data : LibC::UIntPtrT, @result : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record PROPSHEETUI_GETICON_INFO,
-    cbSize : UInt16,
-    flags : UInt16,
-    cxIcon : UInt16,
-    cyIcon : UInt16,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+  struct PROPSHEETUI_GETICON_INFO
+    property cbSize : UInt16
+    property flags : UInt16
+    property cxIcon : UInt16
+    property cyIcon : UInt16
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    def initialize(@cbSize : UInt16, @flags : UInt16, @cxIcon : UInt16, @cyIcon : UInt16, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON)
+    end
+  end
 
   @[Extern]
-  record PROPSHEETUI_INFO_HEADER,
-    cbSize : UInt16,
-    flags : UInt16,
-    pTitle : Int8*,
-    hWndParent : Win32cr::Foundation::HWND,
-    hInst : Win32cr::Foundation::HINSTANCE,
-    anonymous : Anonymous_e__Union_ do
+  struct PROPSHEETUI_INFO_HEADER
+    property cbSize : UInt16
+    property flags : UInt16
+    property pTitle : Int8*
+    property hWndParent : Win32cr::Foundation::HWND
+    property hInst : Win32cr::Foundation::HINSTANCE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      icon_id : LibC::UIntPtrT
+    struct Anonymous_e__Union_
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property icon_id : LibC::UIntPtrT
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @icon_id : LibC::UIntPtrT)
+    end
+    end
 
+    def initialize(@cbSize : UInt16, @flags : UInt16, @pTitle : Int8*, @hWndParent : Win32cr::Foundation::HWND, @hInst : Win32cr::Foundation::HINSTANCE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PRINTER_INFO_1A,
-    flags : UInt32,
-    pDescription : Win32cr::Foundation::PSTR,
-    pName : Win32cr::Foundation::PSTR,
-    pComment : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record PRINTER_INFO_1W,
-    flags : UInt32,
-    pDescription : Win32cr::Foundation::PWSTR,
-    pName : Win32cr::Foundation::PWSTR,
-    pComment : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PRINTER_INFO_2A,
-    pServerName : Win32cr::Foundation::PSTR,
-    pPrinterName : Win32cr::Foundation::PSTR,
-    pShareName : Win32cr::Foundation::PSTR,
-    pPortName : Win32cr::Foundation::PSTR,
-    pDriverName : Win32cr::Foundation::PSTR,
-    pComment : Win32cr::Foundation::PSTR,
-    pLocation : Win32cr::Foundation::PSTR,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*,
-    pSepFile : Win32cr::Foundation::PSTR,
-    pPrintProcessor : Win32cr::Foundation::PSTR,
-    pDatatype : Win32cr::Foundation::PSTR,
-    pParameters : Win32cr::Foundation::PSTR,
-    pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR,
-    attributes : UInt32,
-    priority : UInt32,
-    default_priority : UInt32,
-    start_time : UInt32,
-    until_time : UInt32,
-    status : UInt32,
-    cJobs : UInt32,
-    average_ppm : UInt32
-
-  @[Extern]
-  record PRINTER_INFO_2W,
-    pServerName : Win32cr::Foundation::PWSTR,
-    pPrinterName : Win32cr::Foundation::PWSTR,
-    pShareName : Win32cr::Foundation::PWSTR,
-    pPortName : Win32cr::Foundation::PWSTR,
-    pDriverName : Win32cr::Foundation::PWSTR,
-    pComment : Win32cr::Foundation::PWSTR,
-    pLocation : Win32cr::Foundation::PWSTR,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*,
-    pSepFile : Win32cr::Foundation::PWSTR,
-    pPrintProcessor : Win32cr::Foundation::PWSTR,
-    pDatatype : Win32cr::Foundation::PWSTR,
-    pParameters : Win32cr::Foundation::PWSTR,
-    pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR,
-    attributes : UInt32,
-    priority : UInt32,
-    default_priority : UInt32,
-    start_time : UInt32,
-    until_time : UInt32,
-    status : UInt32,
-    cJobs : UInt32,
-    average_ppm : UInt32
-
-  @[Extern]
-  record PRINTER_INFO_3,
-    pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
-
-  @[Extern]
-  record PRINTER_INFO_4A,
-    pPrinterName : Win32cr::Foundation::PSTR,
-    pServerName : Win32cr::Foundation::PSTR,
-    attributes : UInt32
-
-  @[Extern]
-  record PRINTER_INFO_4W,
-    pPrinterName : Win32cr::Foundation::PWSTR,
-    pServerName : Win32cr::Foundation::PWSTR,
-    attributes : UInt32
-
-  @[Extern]
-  record PRINTER_INFO_5A,
-    pPrinterName : Win32cr::Foundation::PSTR,
-    pPortName : Win32cr::Foundation::PSTR,
-    attributes : UInt32,
-    device_not_selected_timeout : UInt32,
-    transmission_retry_timeout : UInt32
-
-  @[Extern]
-  record PRINTER_INFO_5W,
-    pPrinterName : Win32cr::Foundation::PWSTR,
-    pPortName : Win32cr::Foundation::PWSTR,
-    attributes : UInt32,
-    device_not_selected_timeout : UInt32,
-    transmission_retry_timeout : UInt32
-
-  @[Extern]
-  record PRINTER_INFO_6,
-    dwStatus : UInt32
-
-  @[Extern]
-  record PRINTER_INFO_7A,
-    pszObjectGUID : Win32cr::Foundation::PSTR,
-    dwAction : UInt32
-
-  @[Extern]
-  record PRINTER_INFO_7W,
-    pszObjectGUID : Win32cr::Foundation::PWSTR,
-    dwAction : UInt32
-
-  @[Extern]
-  record PRINTER_INFO_8A,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*
-
-  @[Extern]
-  record PRINTER_INFO_8W,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*
-
-  @[Extern]
-  record PRINTER_INFO_9A,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*
-
-  @[Extern]
-  record PRINTER_INFO_9W,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*
-
-  @[Extern]
-  record JOB_INFO_1A,
-    job_id : UInt32,
-    pPrinterName : Win32cr::Foundation::PSTR,
-    pMachineName : Win32cr::Foundation::PSTR,
-    pUserName : Win32cr::Foundation::PSTR,
-    pDocument : Win32cr::Foundation::PSTR,
-    pDatatype : Win32cr::Foundation::PSTR,
-    pStatus : Win32cr::Foundation::PSTR,
-    status : UInt32,
-    priority : UInt32,
-    position : UInt32,
-    total_pages : UInt32,
-    pages_printed : UInt32,
-    submitted : Win32cr::Foundation::SYSTEMTIME
-
-  @[Extern]
-  record JOB_INFO_1W,
-    job_id : UInt32,
-    pPrinterName : Win32cr::Foundation::PWSTR,
-    pMachineName : Win32cr::Foundation::PWSTR,
-    pUserName : Win32cr::Foundation::PWSTR,
-    pDocument : Win32cr::Foundation::PWSTR,
-    pDatatype : Win32cr::Foundation::PWSTR,
-    pStatus : Win32cr::Foundation::PWSTR,
-    status : UInt32,
-    priority : UInt32,
-    position : UInt32,
-    total_pages : UInt32,
-    pages_printed : UInt32,
-    submitted : Win32cr::Foundation::SYSTEMTIME
-
-  @[Extern]
-  record JOB_INFO_2A,
-    job_id : UInt32,
-    pPrinterName : Win32cr::Foundation::PSTR,
-    pMachineName : Win32cr::Foundation::PSTR,
-    pUserName : Win32cr::Foundation::PSTR,
-    pDocument : Win32cr::Foundation::PSTR,
-    pNotifyName : Win32cr::Foundation::PSTR,
-    pDatatype : Win32cr::Foundation::PSTR,
-    pPrintProcessor : Win32cr::Foundation::PSTR,
-    pParameters : Win32cr::Foundation::PSTR,
-    pDriverName : Win32cr::Foundation::PSTR,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*,
-    pStatus : Win32cr::Foundation::PSTR,
-    pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR,
-    status : UInt32,
-    priority : UInt32,
-    position : UInt32,
-    start_time : UInt32,
-    until_time : UInt32,
-    total_pages : UInt32,
-    size : UInt32,
-    submitted : Win32cr::Foundation::SYSTEMTIME,
-    time : UInt32,
-    pages_printed : UInt32
-
-  @[Extern]
-  record JOB_INFO_2W,
-    job_id : UInt32,
-    pPrinterName : Win32cr::Foundation::PWSTR,
-    pMachineName : Win32cr::Foundation::PWSTR,
-    pUserName : Win32cr::Foundation::PWSTR,
-    pDocument : Win32cr::Foundation::PWSTR,
-    pNotifyName : Win32cr::Foundation::PWSTR,
-    pDatatype : Win32cr::Foundation::PWSTR,
-    pPrintProcessor : Win32cr::Foundation::PWSTR,
-    pParameters : Win32cr::Foundation::PWSTR,
-    pDriverName : Win32cr::Foundation::PWSTR,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*,
-    pStatus : Win32cr::Foundation::PWSTR,
-    pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR,
-    status : UInt32,
-    priority : UInt32,
-    position : UInt32,
-    start_time : UInt32,
-    until_time : UInt32,
-    total_pages : UInt32,
-    size : UInt32,
-    submitted : Win32cr::Foundation::SYSTEMTIME,
-    time : UInt32,
-    pages_printed : UInt32
-
-  @[Extern]
-  record JOB_INFO_3,
-    job_id : UInt32,
-    next_job_id : UInt32,
-    reserved : UInt32
-
-  @[Extern]
-  record JOB_INFO_4A,
-    job_id : UInt32,
-    pPrinterName : Win32cr::Foundation::PSTR,
-    pMachineName : Win32cr::Foundation::PSTR,
-    pUserName : Win32cr::Foundation::PSTR,
-    pDocument : Win32cr::Foundation::PSTR,
-    pNotifyName : Win32cr::Foundation::PSTR,
-    pDatatype : Win32cr::Foundation::PSTR,
-    pPrintProcessor : Win32cr::Foundation::PSTR,
-    pParameters : Win32cr::Foundation::PSTR,
-    pDriverName : Win32cr::Foundation::PSTR,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*,
-    pStatus : Win32cr::Foundation::PSTR,
-    pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR,
-    status : UInt32,
-    priority : UInt32,
-    position : UInt32,
-    start_time : UInt32,
-    until_time : UInt32,
-    total_pages : UInt32,
-    size : UInt32,
-    submitted : Win32cr::Foundation::SYSTEMTIME,
-    time : UInt32,
-    pages_printed : UInt32,
-    size_high : Int32
-
-  @[Extern]
-  record JOB_INFO_4W,
-    job_id : UInt32,
-    pPrinterName : Win32cr::Foundation::PWSTR,
-    pMachineName : Win32cr::Foundation::PWSTR,
-    pUserName : Win32cr::Foundation::PWSTR,
-    pDocument : Win32cr::Foundation::PWSTR,
-    pNotifyName : Win32cr::Foundation::PWSTR,
-    pDatatype : Win32cr::Foundation::PWSTR,
-    pPrintProcessor : Win32cr::Foundation::PWSTR,
-    pParameters : Win32cr::Foundation::PWSTR,
-    pDriverName : Win32cr::Foundation::PWSTR,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*,
-    pStatus : Win32cr::Foundation::PWSTR,
-    pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR,
-    status : UInt32,
-    priority : UInt32,
-    position : UInt32,
-    start_time : UInt32,
-    until_time : UInt32,
-    total_pages : UInt32,
-    size : UInt32,
-    submitted : Win32cr::Foundation::SYSTEMTIME,
-    time : UInt32,
-    pages_printed : UInt32,
-    size_high : Int32
-
-  @[Extern]
-  record ADDJOB_INFO_1A,
-    path : Win32cr::Foundation::PSTR,
-    job_id : UInt32
-
-  @[Extern]
-  record ADDJOB_INFO_1W,
-    path : Win32cr::Foundation::PWSTR,
-    job_id : UInt32
-
-  @[Extern]
-  record DRIVER_INFO_1A,
-    pName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DRIVER_INFO_1W,
-    pName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DRIVER_INFO_2A,
-    cVersion : UInt32,
-    pName : Win32cr::Foundation::PSTR,
-    pEnvironment : Win32cr::Foundation::PSTR,
-    pDriverPath : Win32cr::Foundation::PSTR,
-    pDataFile : Win32cr::Foundation::PSTR,
-    pConfigFile : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DRIVER_INFO_2W,
-    cVersion : UInt32,
-    pName : Win32cr::Foundation::PWSTR,
-    pEnvironment : Win32cr::Foundation::PWSTR,
-    pDriverPath : Win32cr::Foundation::PWSTR,
-    pDataFile : Win32cr::Foundation::PWSTR,
-    pConfigFile : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DRIVER_INFO_3A,
-    cVersion : UInt32,
-    pName : Win32cr::Foundation::PSTR,
-    pEnvironment : Win32cr::Foundation::PSTR,
-    pDriverPath : Win32cr::Foundation::PSTR,
-    pDataFile : Win32cr::Foundation::PSTR,
-    pConfigFile : Win32cr::Foundation::PSTR,
-    pHelpFile : Win32cr::Foundation::PSTR,
-    pDependentFiles : Win32cr::Foundation::PSTR,
-    pMonitorName : Win32cr::Foundation::PSTR,
-    pDefaultDataType : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DRIVER_INFO_3W,
-    cVersion : UInt32,
-    pName : Win32cr::Foundation::PWSTR,
-    pEnvironment : Win32cr::Foundation::PWSTR,
-    pDriverPath : Win32cr::Foundation::PWSTR,
-    pDataFile : Win32cr::Foundation::PWSTR,
-    pConfigFile : Win32cr::Foundation::PWSTR,
-    pHelpFile : Win32cr::Foundation::PWSTR,
-    pDependentFiles : Win32cr::Foundation::PWSTR,
-    pMonitorName : Win32cr::Foundation::PWSTR,
-    pDefaultDataType : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DRIVER_INFO_4A,
-    cVersion : UInt32,
-    pName : Win32cr::Foundation::PSTR,
-    pEnvironment : Win32cr::Foundation::PSTR,
-    pDriverPath : Win32cr::Foundation::PSTR,
-    pDataFile : Win32cr::Foundation::PSTR,
-    pConfigFile : Win32cr::Foundation::PSTR,
-    pHelpFile : Win32cr::Foundation::PSTR,
-    pDependentFiles : Win32cr::Foundation::PSTR,
-    pMonitorName : Win32cr::Foundation::PSTR,
-    pDefaultDataType : Win32cr::Foundation::PSTR,
-    pszzPreviousNames : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DRIVER_INFO_4W,
-    cVersion : UInt32,
-    pName : Win32cr::Foundation::PWSTR,
-    pEnvironment : Win32cr::Foundation::PWSTR,
-    pDriverPath : Win32cr::Foundation::PWSTR,
-    pDataFile : Win32cr::Foundation::PWSTR,
-    pConfigFile : Win32cr::Foundation::PWSTR,
-    pHelpFile : Win32cr::Foundation::PWSTR,
-    pDependentFiles : Win32cr::Foundation::PWSTR,
-    pMonitorName : Win32cr::Foundation::PWSTR,
-    pDefaultDataType : Win32cr::Foundation::PWSTR,
-    pszzPreviousNames : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DRIVER_INFO_5A,
-    cVersion : UInt32,
-    pName : Win32cr::Foundation::PSTR,
-    pEnvironment : Win32cr::Foundation::PSTR,
-    pDriverPath : Win32cr::Foundation::PSTR,
-    pDataFile : Win32cr::Foundation::PSTR,
-    pConfigFile : Win32cr::Foundation::PSTR,
-    dwDriverAttributes : UInt32,
-    dwConfigVersion : UInt32,
-    dwDriverVersion : UInt32
-
-  @[Extern]
-  record DRIVER_INFO_5W,
-    cVersion : UInt32,
-    pName : Win32cr::Foundation::PWSTR,
-    pEnvironment : Win32cr::Foundation::PWSTR,
-    pDriverPath : Win32cr::Foundation::PWSTR,
-    pDataFile : Win32cr::Foundation::PWSTR,
-    pConfigFile : Win32cr::Foundation::PWSTR,
-    dwDriverAttributes : UInt32,
-    dwConfigVersion : UInt32,
-    dwDriverVersion : UInt32
-
-  @[Extern]
-  record DRIVER_INFO_6A,
-    cVersion : UInt32,
-    pName : Win32cr::Foundation::PSTR,
-    pEnvironment : Win32cr::Foundation::PSTR,
-    pDriverPath : Win32cr::Foundation::PSTR,
-    pDataFile : Win32cr::Foundation::PSTR,
-    pConfigFile : Win32cr::Foundation::PSTR,
-    pHelpFile : Win32cr::Foundation::PSTR,
-    pDependentFiles : Win32cr::Foundation::PSTR,
-    pMonitorName : Win32cr::Foundation::PSTR,
-    pDefaultDataType : Win32cr::Foundation::PSTR,
-    pszzPreviousNames : Win32cr::Foundation::PSTR,
-    ftDriverDate : Win32cr::Foundation::FILETIME,
-    dwlDriverVersion : UInt64,
-    pszMfgName : Win32cr::Foundation::PSTR,
-    pszOEMUrl : Win32cr::Foundation::PSTR,
-    pszHardwareID : Win32cr::Foundation::PSTR,
-    pszProvider : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DRIVER_INFO_6W,
-    cVersion : UInt32,
-    pName : Win32cr::Foundation::PWSTR,
-    pEnvironment : Win32cr::Foundation::PWSTR,
-    pDriverPath : Win32cr::Foundation::PWSTR,
-    pDataFile : Win32cr::Foundation::PWSTR,
-    pConfigFile : Win32cr::Foundation::PWSTR,
-    pHelpFile : Win32cr::Foundation::PWSTR,
-    pDependentFiles : Win32cr::Foundation::PWSTR,
-    pMonitorName : Win32cr::Foundation::PWSTR,
-    pDefaultDataType : Win32cr::Foundation::PWSTR,
-    pszzPreviousNames : Win32cr::Foundation::PWSTR,
-    ftDriverDate : Win32cr::Foundation::FILETIME,
-    dwlDriverVersion : UInt64,
-    pszMfgName : Win32cr::Foundation::PWSTR,
-    pszOEMUrl : Win32cr::Foundation::PWSTR,
-    pszHardwareID : Win32cr::Foundation::PWSTR,
-    pszProvider : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DRIVER_INFO_8A,
-    cVersion : UInt32,
-    pName : Win32cr::Foundation::PSTR,
-    pEnvironment : Win32cr::Foundation::PSTR,
-    pDriverPath : Win32cr::Foundation::PSTR,
-    pDataFile : Win32cr::Foundation::PSTR,
-    pConfigFile : Win32cr::Foundation::PSTR,
-    pHelpFile : Win32cr::Foundation::PSTR,
-    pDependentFiles : Win32cr::Foundation::PSTR,
-    pMonitorName : Win32cr::Foundation::PSTR,
-    pDefaultDataType : Win32cr::Foundation::PSTR,
-    pszzPreviousNames : Win32cr::Foundation::PSTR,
-    ftDriverDate : Win32cr::Foundation::FILETIME,
-    dwlDriverVersion : UInt64,
-    pszMfgName : Win32cr::Foundation::PSTR,
-    pszOEMUrl : Win32cr::Foundation::PSTR,
-    pszHardwareID : Win32cr::Foundation::PSTR,
-    pszProvider : Win32cr::Foundation::PSTR,
-    pszPrintProcessor : Win32cr::Foundation::PSTR,
-    pszVendorSetup : Win32cr::Foundation::PSTR,
-    pszzColorProfiles : Win32cr::Foundation::PSTR,
-    pszInfPath : Win32cr::Foundation::PSTR,
-    dwPrinterDriverAttributes : UInt32,
-    pszzCoreDriverDependencies : Win32cr::Foundation::PSTR,
-    ftMinInboxDriverVerDate : Win32cr::Foundation::FILETIME,
-    dwlMinInboxDriverVerVersion : UInt64
-
-  @[Extern]
-  record DRIVER_INFO_8W,
-    cVersion : UInt32,
-    pName : Win32cr::Foundation::PWSTR,
-    pEnvironment : Win32cr::Foundation::PWSTR,
-    pDriverPath : Win32cr::Foundation::PWSTR,
-    pDataFile : Win32cr::Foundation::PWSTR,
-    pConfigFile : Win32cr::Foundation::PWSTR,
-    pHelpFile : Win32cr::Foundation::PWSTR,
-    pDependentFiles : Win32cr::Foundation::PWSTR,
-    pMonitorName : Win32cr::Foundation::PWSTR,
-    pDefaultDataType : Win32cr::Foundation::PWSTR,
-    pszzPreviousNames : Win32cr::Foundation::PWSTR,
-    ftDriverDate : Win32cr::Foundation::FILETIME,
-    dwlDriverVersion : UInt64,
-    pszMfgName : Win32cr::Foundation::PWSTR,
-    pszOEMUrl : Win32cr::Foundation::PWSTR,
-    pszHardwareID : Win32cr::Foundation::PWSTR,
-    pszProvider : Win32cr::Foundation::PWSTR,
-    pszPrintProcessor : Win32cr::Foundation::PWSTR,
-    pszVendorSetup : Win32cr::Foundation::PWSTR,
-    pszzColorProfiles : Win32cr::Foundation::PWSTR,
-    pszInfPath : Win32cr::Foundation::PWSTR,
-    dwPrinterDriverAttributes : UInt32,
-    pszzCoreDriverDependencies : Win32cr::Foundation::PWSTR,
-    ftMinInboxDriverVerDate : Win32cr::Foundation::FILETIME,
-    dwlMinInboxDriverVerVersion : UInt64
-
-  @[Extern]
-  record DOC_INFO_1A,
-    pDocName : Win32cr::Foundation::PSTR,
-    pOutputFile : Win32cr::Foundation::PSTR,
-    pDatatype : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DOC_INFO_1W,
-    pDocName : Win32cr::Foundation::PWSTR,
-    pOutputFile : Win32cr::Foundation::PWSTR,
-    pDatatype : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record FORM_INFO_1A,
-    flags : UInt32,
-    pName : Win32cr::Foundation::PSTR,
-    size : Win32cr::Foundation::SIZE,
-    imageable_area : Win32cr::Foundation::RECTL
-
-  @[Extern]
-  record FORM_INFO_1W,
-    flags : UInt32,
-    pName : Win32cr::Foundation::PWSTR,
-    size : Win32cr::Foundation::SIZE,
-    imageable_area : Win32cr::Foundation::RECTL
-
-  @[Extern]
-  record FORM_INFO_2A,
-    flags : UInt32,
-    pName : Win32cr::Foundation::PSTR,
-    size : Win32cr::Foundation::SIZE,
-    imageable_area : Win32cr::Foundation::RECTL,
-    pKeyword : Win32cr::Foundation::PSTR,
-    string_type : UInt32,
-    pMuiDll : Win32cr::Foundation::PSTR,
-    dwResourceId : UInt32,
-    pDisplayName : Win32cr::Foundation::PSTR,
-    wLangId : UInt16
-
-  @[Extern]
-  record FORM_INFO_2W,
-    flags : UInt32,
-    pName : Win32cr::Foundation::PWSTR,
-    size : Win32cr::Foundation::SIZE,
-    imageable_area : Win32cr::Foundation::RECTL,
-    pKeyword : Win32cr::Foundation::PSTR,
-    string_type : UInt32,
-    pMuiDll : Win32cr::Foundation::PWSTR,
-    dwResourceId : UInt32,
-    pDisplayName : Win32cr::Foundation::PWSTR,
-    wLangId : UInt16
-
-  @[Extern]
-  record DOC_INFO_2A,
-    pDocName : Win32cr::Foundation::PSTR,
-    pOutputFile : Win32cr::Foundation::PSTR,
-    pDatatype : Win32cr::Foundation::PSTR,
-    dwMode : UInt32,
-    job_id : UInt32
-
-  @[Extern]
-  record DOC_INFO_2W,
-    pDocName : Win32cr::Foundation::PWSTR,
-    pOutputFile : Win32cr::Foundation::PWSTR,
-    pDatatype : Win32cr::Foundation::PWSTR,
-    dwMode : UInt32,
-    job_id : UInt32
-
-  @[Extern]
-  record DOC_INFO_3A,
-    pDocName : Win32cr::Foundation::PSTR,
-    pOutputFile : Win32cr::Foundation::PSTR,
-    pDatatype : Win32cr::Foundation::PSTR,
-    dwFlags : UInt32
-
-  @[Extern]
-  record DOC_INFO_3W,
-    pDocName : Win32cr::Foundation::PWSTR,
-    pOutputFile : Win32cr::Foundation::PWSTR,
-    pDatatype : Win32cr::Foundation::PWSTR,
-    dwFlags : UInt32
-
-  @[Extern]
-  record PRINTPROCESSOR_INFO_1A,
-    pName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record PRINTPROCESSOR_INFO_1W,
-    pName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PRINTPROCESSOR_CAPS_1,
-    dwLevel : UInt32,
-    dwNupOptions : UInt32,
-    dwPageOrderFlags : UInt32,
-    dwNumberOfCopies : UInt32
-
-  @[Extern]
-  record PRINTPROCESSOR_CAPS_2,
-    dwLevel : UInt32,
-    dwNupOptions : UInt32,
-    dwPageOrderFlags : UInt32,
-    dwNumberOfCopies : UInt32,
-    dwDuplexHandlingCaps : UInt32,
-    dwNupDirectionCaps : UInt32,
-    dwNupBorderCaps : UInt32,
-    dwBookletHandlingCaps : UInt32,
-    dwScalingCaps : UInt32
-
-  @[Extern]
-  record PORT_INFO_1A,
-    pName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record PORT_INFO_1W,
-    pName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PORT_INFO_2A,
-    pPortName : Win32cr::Foundation::PSTR,
-    pMonitorName : Win32cr::Foundation::PSTR,
-    pDescription : Win32cr::Foundation::PSTR,
-    fPortType : UInt32,
-    reserved : UInt32
-
-  @[Extern]
-  record PORT_INFO_2W,
-    pPortName : Win32cr::Foundation::PWSTR,
-    pMonitorName : Win32cr::Foundation::PWSTR,
-    pDescription : Win32cr::Foundation::PWSTR,
-    fPortType : UInt32,
-    reserved : UInt32
-
-  @[Extern]
-  record PORT_INFO_3A,
-    dwStatus : UInt32,
-    pszStatus : Win32cr::Foundation::PSTR,
-    dwSeverity : UInt32
-
-  @[Extern]
-  record PORT_INFO_3W,
-    dwStatus : UInt32,
-    pszStatus : Win32cr::Foundation::PWSTR,
-    dwSeverity : UInt32
-
-  @[Extern]
-  record MONITOR_INFO_1A,
-    pName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record MONITOR_INFO_1W,
-    pName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MONITOR_INFO_2A,
-    pName : Win32cr::Foundation::PSTR,
-    pEnvironment : Win32cr::Foundation::PSTR,
-    pDLLName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record MONITOR_INFO_2W,
-    pName : Win32cr::Foundation::PWSTR,
-    pEnvironment : Win32cr::Foundation::PWSTR,
-    pDLLName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DATATYPES_INFO_1A,
-    pName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DATATYPES_INFO_1W,
-    pName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PRINTER_DEFAULTSA,
-    pDatatype : Win32cr::Foundation::PSTR,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*,
-    desired_access : Win32cr::Graphics::Printing::PRINTER_ACCESS_RIGHTS
-
-  @[Extern]
-  record PRINTER_DEFAULTSW,
-    pDatatype : Win32cr::Foundation::PWSTR,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*,
-    desired_access : Win32cr::Graphics::Printing::PRINTER_ACCESS_RIGHTS
-
-  @[Extern]
-  record PRINTER_ENUM_VALUESA,
-    pValueName : Win32cr::Foundation::PSTR,
-    cbValueName : UInt32,
-    dwType : UInt32,
-    pData : UInt8*,
-    cbData : UInt32
-
-  @[Extern]
-  record PRINTER_ENUM_VALUESW,
-    pValueName : Win32cr::Foundation::PWSTR,
-    cbValueName : UInt32,
-    dwType : UInt32,
-    pData : UInt8*,
-    cbData : UInt32
-
-  @[Extern]
-  record PRINTER_NOTIFY_OPTIONS_TYPE,
-    type__ : UInt16,
-    reserved0 : UInt16,
-    reserved1 : UInt32,
-    reserved2 : UInt32,
-    count : UInt32,
-    pFields : UInt16*
-
-  @[Extern]
-  record PRINTER_NOTIFY_OPTIONS,
-    version : UInt32,
-    flags : UInt32,
-    count : UInt32,
-    pTypes : Win32cr::Graphics::Printing::PRINTER_NOTIFY_OPTIONS_TYPE*
-
-  @[Extern]
-  record PRINTER_NOTIFY_INFO_DATA,
-    type__ : UInt16,
-    field : UInt16,
-    reserved : UInt32,
-    id : UInt32,
-    notify_data : NotifyData_e__Union_ do
+  struct PRINTER_INFO_1A
+    property flags : UInt32
+    property pDescription : Win32cr::Foundation::PSTR
+    property pName : Win32cr::Foundation::PSTR
+    property pComment : Win32cr::Foundation::PSTR
+    def initialize(@flags : UInt32, @pDescription : Win32cr::Foundation::PSTR, @pName : Win32cr::Foundation::PSTR, @pComment : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_1W
+    property flags : UInt32
+    property pDescription : Win32cr::Foundation::PWSTR
+    property pName : Win32cr::Foundation::PWSTR
+    property pComment : Win32cr::Foundation::PWSTR
+    def initialize(@flags : UInt32, @pDescription : Win32cr::Foundation::PWSTR, @pName : Win32cr::Foundation::PWSTR, @pComment : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_2A
+    property pServerName : Win32cr::Foundation::PSTR
+    property pPrinterName : Win32cr::Foundation::PSTR
+    property pShareName : Win32cr::Foundation::PSTR
+    property pPortName : Win32cr::Foundation::PSTR
+    property pDriverName : Win32cr::Foundation::PSTR
+    property pComment : Win32cr::Foundation::PSTR
+    property pLocation : Win32cr::Foundation::PSTR
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*
+    property pSepFile : Win32cr::Foundation::PSTR
+    property pPrintProcessor : Win32cr::Foundation::PSTR
+    property pDatatype : Win32cr::Foundation::PSTR
+    property pParameters : Win32cr::Foundation::PSTR
+    property pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+    property attributes : UInt32
+    property priority : UInt32
+    property default_priority : UInt32
+    property start_time : UInt32
+    property until_time : UInt32
+    property status : UInt32
+    property cJobs : UInt32
+    property average_ppm : UInt32
+    def initialize(@pServerName : Win32cr::Foundation::PSTR, @pPrinterName : Win32cr::Foundation::PSTR, @pShareName : Win32cr::Foundation::PSTR, @pPortName : Win32cr::Foundation::PSTR, @pDriverName : Win32cr::Foundation::PSTR, @pComment : Win32cr::Foundation::PSTR, @pLocation : Win32cr::Foundation::PSTR, @pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, @pSepFile : Win32cr::Foundation::PSTR, @pPrintProcessor : Win32cr::Foundation::PSTR, @pDatatype : Win32cr::Foundation::PSTR, @pParameters : Win32cr::Foundation::PSTR, @pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, @attributes : UInt32, @priority : UInt32, @default_priority : UInt32, @start_time : UInt32, @until_time : UInt32, @status : UInt32, @cJobs : UInt32, @average_ppm : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_2W
+    property pServerName : Win32cr::Foundation::PWSTR
+    property pPrinterName : Win32cr::Foundation::PWSTR
+    property pShareName : Win32cr::Foundation::PWSTR
+    property pPortName : Win32cr::Foundation::PWSTR
+    property pDriverName : Win32cr::Foundation::PWSTR
+    property pComment : Win32cr::Foundation::PWSTR
+    property pLocation : Win32cr::Foundation::PWSTR
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*
+    property pSepFile : Win32cr::Foundation::PWSTR
+    property pPrintProcessor : Win32cr::Foundation::PWSTR
+    property pDatatype : Win32cr::Foundation::PWSTR
+    property pParameters : Win32cr::Foundation::PWSTR
+    property pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+    property attributes : UInt32
+    property priority : UInt32
+    property default_priority : UInt32
+    property start_time : UInt32
+    property until_time : UInt32
+    property status : UInt32
+    property cJobs : UInt32
+    property average_ppm : UInt32
+    def initialize(@pServerName : Win32cr::Foundation::PWSTR, @pPrinterName : Win32cr::Foundation::PWSTR, @pShareName : Win32cr::Foundation::PWSTR, @pPortName : Win32cr::Foundation::PWSTR, @pDriverName : Win32cr::Foundation::PWSTR, @pComment : Win32cr::Foundation::PWSTR, @pLocation : Win32cr::Foundation::PWSTR, @pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, @pSepFile : Win32cr::Foundation::PWSTR, @pPrintProcessor : Win32cr::Foundation::PWSTR, @pDatatype : Win32cr::Foundation::PWSTR, @pParameters : Win32cr::Foundation::PWSTR, @pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, @attributes : UInt32, @priority : UInt32, @default_priority : UInt32, @start_time : UInt32, @until_time : UInt32, @status : UInt32, @cJobs : UInt32, @average_ppm : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_3
+    property pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+    def initialize(@pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_4A
+    property pPrinterName : Win32cr::Foundation::PSTR
+    property pServerName : Win32cr::Foundation::PSTR
+    property attributes : UInt32
+    def initialize(@pPrinterName : Win32cr::Foundation::PSTR, @pServerName : Win32cr::Foundation::PSTR, @attributes : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_4W
+    property pPrinterName : Win32cr::Foundation::PWSTR
+    property pServerName : Win32cr::Foundation::PWSTR
+    property attributes : UInt32
+    def initialize(@pPrinterName : Win32cr::Foundation::PWSTR, @pServerName : Win32cr::Foundation::PWSTR, @attributes : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_5A
+    property pPrinterName : Win32cr::Foundation::PSTR
+    property pPortName : Win32cr::Foundation::PSTR
+    property attributes : UInt32
+    property device_not_selected_timeout : UInt32
+    property transmission_retry_timeout : UInt32
+    def initialize(@pPrinterName : Win32cr::Foundation::PSTR, @pPortName : Win32cr::Foundation::PSTR, @attributes : UInt32, @device_not_selected_timeout : UInt32, @transmission_retry_timeout : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_5W
+    property pPrinterName : Win32cr::Foundation::PWSTR
+    property pPortName : Win32cr::Foundation::PWSTR
+    property attributes : UInt32
+    property device_not_selected_timeout : UInt32
+    property transmission_retry_timeout : UInt32
+    def initialize(@pPrinterName : Win32cr::Foundation::PWSTR, @pPortName : Win32cr::Foundation::PWSTR, @attributes : UInt32, @device_not_selected_timeout : UInt32, @transmission_retry_timeout : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_6
+    property dwStatus : UInt32
+    def initialize(@dwStatus : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_7A
+    property pszObjectGUID : Win32cr::Foundation::PSTR
+    property dwAction : UInt32
+    def initialize(@pszObjectGUID : Win32cr::Foundation::PSTR, @dwAction : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_7W
+    property pszObjectGUID : Win32cr::Foundation::PWSTR
+    property dwAction : UInt32
+    def initialize(@pszObjectGUID : Win32cr::Foundation::PWSTR, @dwAction : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_8A
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*
+    def initialize(@pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_8W
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*
+    def initialize(@pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_9A
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*
+    def initialize(@pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_INFO_9W
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*
+    def initialize(@pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*)
+    end
+  end
+
+  @[Extern]
+  struct JOB_INFO_1A
+    property job_id : UInt32
+    property pPrinterName : Win32cr::Foundation::PSTR
+    property pMachineName : Win32cr::Foundation::PSTR
+    property pUserName : Win32cr::Foundation::PSTR
+    property pDocument : Win32cr::Foundation::PSTR
+    property pDatatype : Win32cr::Foundation::PSTR
+    property pStatus : Win32cr::Foundation::PSTR
+    property status : UInt32
+    property priority : UInt32
+    property position : UInt32
+    property total_pages : UInt32
+    property pages_printed : UInt32
+    property submitted : Win32cr::Foundation::SYSTEMTIME
+    def initialize(@job_id : UInt32, @pPrinterName : Win32cr::Foundation::PSTR, @pMachineName : Win32cr::Foundation::PSTR, @pUserName : Win32cr::Foundation::PSTR, @pDocument : Win32cr::Foundation::PSTR, @pDatatype : Win32cr::Foundation::PSTR, @pStatus : Win32cr::Foundation::PSTR, @status : UInt32, @priority : UInt32, @position : UInt32, @total_pages : UInt32, @pages_printed : UInt32, @submitted : Win32cr::Foundation::SYSTEMTIME)
+    end
+  end
+
+  @[Extern]
+  struct JOB_INFO_1W
+    property job_id : UInt32
+    property pPrinterName : Win32cr::Foundation::PWSTR
+    property pMachineName : Win32cr::Foundation::PWSTR
+    property pUserName : Win32cr::Foundation::PWSTR
+    property pDocument : Win32cr::Foundation::PWSTR
+    property pDatatype : Win32cr::Foundation::PWSTR
+    property pStatus : Win32cr::Foundation::PWSTR
+    property status : UInt32
+    property priority : UInt32
+    property position : UInt32
+    property total_pages : UInt32
+    property pages_printed : UInt32
+    property submitted : Win32cr::Foundation::SYSTEMTIME
+    def initialize(@job_id : UInt32, @pPrinterName : Win32cr::Foundation::PWSTR, @pMachineName : Win32cr::Foundation::PWSTR, @pUserName : Win32cr::Foundation::PWSTR, @pDocument : Win32cr::Foundation::PWSTR, @pDatatype : Win32cr::Foundation::PWSTR, @pStatus : Win32cr::Foundation::PWSTR, @status : UInt32, @priority : UInt32, @position : UInt32, @total_pages : UInt32, @pages_printed : UInt32, @submitted : Win32cr::Foundation::SYSTEMTIME)
+    end
+  end
+
+  @[Extern]
+  struct JOB_INFO_2A
+    property job_id : UInt32
+    property pPrinterName : Win32cr::Foundation::PSTR
+    property pMachineName : Win32cr::Foundation::PSTR
+    property pUserName : Win32cr::Foundation::PSTR
+    property pDocument : Win32cr::Foundation::PSTR
+    property pNotifyName : Win32cr::Foundation::PSTR
+    property pDatatype : Win32cr::Foundation::PSTR
+    property pPrintProcessor : Win32cr::Foundation::PSTR
+    property pParameters : Win32cr::Foundation::PSTR
+    property pDriverName : Win32cr::Foundation::PSTR
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*
+    property pStatus : Win32cr::Foundation::PSTR
+    property pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+    property status : UInt32
+    property priority : UInt32
+    property position : UInt32
+    property start_time : UInt32
+    property until_time : UInt32
+    property total_pages : UInt32
+    property size : UInt32
+    property submitted : Win32cr::Foundation::SYSTEMTIME
+    property time : UInt32
+    property pages_printed : UInt32
+    def initialize(@job_id : UInt32, @pPrinterName : Win32cr::Foundation::PSTR, @pMachineName : Win32cr::Foundation::PSTR, @pUserName : Win32cr::Foundation::PSTR, @pDocument : Win32cr::Foundation::PSTR, @pNotifyName : Win32cr::Foundation::PSTR, @pDatatype : Win32cr::Foundation::PSTR, @pPrintProcessor : Win32cr::Foundation::PSTR, @pParameters : Win32cr::Foundation::PSTR, @pDriverName : Win32cr::Foundation::PSTR, @pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, @pStatus : Win32cr::Foundation::PSTR, @pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, @status : UInt32, @priority : UInt32, @position : UInt32, @start_time : UInt32, @until_time : UInt32, @total_pages : UInt32, @size : UInt32, @submitted : Win32cr::Foundation::SYSTEMTIME, @time : UInt32, @pages_printed : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JOB_INFO_2W
+    property job_id : UInt32
+    property pPrinterName : Win32cr::Foundation::PWSTR
+    property pMachineName : Win32cr::Foundation::PWSTR
+    property pUserName : Win32cr::Foundation::PWSTR
+    property pDocument : Win32cr::Foundation::PWSTR
+    property pNotifyName : Win32cr::Foundation::PWSTR
+    property pDatatype : Win32cr::Foundation::PWSTR
+    property pPrintProcessor : Win32cr::Foundation::PWSTR
+    property pParameters : Win32cr::Foundation::PWSTR
+    property pDriverName : Win32cr::Foundation::PWSTR
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*
+    property pStatus : Win32cr::Foundation::PWSTR
+    property pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+    property status : UInt32
+    property priority : UInt32
+    property position : UInt32
+    property start_time : UInt32
+    property until_time : UInt32
+    property total_pages : UInt32
+    property size : UInt32
+    property submitted : Win32cr::Foundation::SYSTEMTIME
+    property time : UInt32
+    property pages_printed : UInt32
+    def initialize(@job_id : UInt32, @pPrinterName : Win32cr::Foundation::PWSTR, @pMachineName : Win32cr::Foundation::PWSTR, @pUserName : Win32cr::Foundation::PWSTR, @pDocument : Win32cr::Foundation::PWSTR, @pNotifyName : Win32cr::Foundation::PWSTR, @pDatatype : Win32cr::Foundation::PWSTR, @pPrintProcessor : Win32cr::Foundation::PWSTR, @pParameters : Win32cr::Foundation::PWSTR, @pDriverName : Win32cr::Foundation::PWSTR, @pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, @pStatus : Win32cr::Foundation::PWSTR, @pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, @status : UInt32, @priority : UInt32, @position : UInt32, @start_time : UInt32, @until_time : UInt32, @total_pages : UInt32, @size : UInt32, @submitted : Win32cr::Foundation::SYSTEMTIME, @time : UInt32, @pages_printed : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JOB_INFO_3
+    property job_id : UInt32
+    property next_job_id : UInt32
+    property reserved : UInt32
+    def initialize(@job_id : UInt32, @next_job_id : UInt32, @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JOB_INFO_4A
+    property job_id : UInt32
+    property pPrinterName : Win32cr::Foundation::PSTR
+    property pMachineName : Win32cr::Foundation::PSTR
+    property pUserName : Win32cr::Foundation::PSTR
+    property pDocument : Win32cr::Foundation::PSTR
+    property pNotifyName : Win32cr::Foundation::PSTR
+    property pDatatype : Win32cr::Foundation::PSTR
+    property pPrintProcessor : Win32cr::Foundation::PSTR
+    property pParameters : Win32cr::Foundation::PSTR
+    property pDriverName : Win32cr::Foundation::PSTR
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*
+    property pStatus : Win32cr::Foundation::PSTR
+    property pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+    property status : UInt32
+    property priority : UInt32
+    property position : UInt32
+    property start_time : UInt32
+    property until_time : UInt32
+    property total_pages : UInt32
+    property size : UInt32
+    property submitted : Win32cr::Foundation::SYSTEMTIME
+    property time : UInt32
+    property pages_printed : UInt32
+    property size_high : Int32
+    def initialize(@job_id : UInt32, @pPrinterName : Win32cr::Foundation::PSTR, @pMachineName : Win32cr::Foundation::PSTR, @pUserName : Win32cr::Foundation::PSTR, @pDocument : Win32cr::Foundation::PSTR, @pNotifyName : Win32cr::Foundation::PSTR, @pDatatype : Win32cr::Foundation::PSTR, @pPrintProcessor : Win32cr::Foundation::PSTR, @pParameters : Win32cr::Foundation::PSTR, @pDriverName : Win32cr::Foundation::PSTR, @pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, @pStatus : Win32cr::Foundation::PSTR, @pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, @status : UInt32, @priority : UInt32, @position : UInt32, @start_time : UInt32, @until_time : UInt32, @total_pages : UInt32, @size : UInt32, @submitted : Win32cr::Foundation::SYSTEMTIME, @time : UInt32, @pages_printed : UInt32, @size_high : Int32)
+    end
+  end
+
+  @[Extern]
+  struct JOB_INFO_4W
+    property job_id : UInt32
+    property pPrinterName : Win32cr::Foundation::PWSTR
+    property pMachineName : Win32cr::Foundation::PWSTR
+    property pUserName : Win32cr::Foundation::PWSTR
+    property pDocument : Win32cr::Foundation::PWSTR
+    property pNotifyName : Win32cr::Foundation::PWSTR
+    property pDatatype : Win32cr::Foundation::PWSTR
+    property pPrintProcessor : Win32cr::Foundation::PWSTR
+    property pParameters : Win32cr::Foundation::PWSTR
+    property pDriverName : Win32cr::Foundation::PWSTR
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*
+    property pStatus : Win32cr::Foundation::PWSTR
+    property pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+    property status : UInt32
+    property priority : UInt32
+    property position : UInt32
+    property start_time : UInt32
+    property until_time : UInt32
+    property total_pages : UInt32
+    property size : UInt32
+    property submitted : Win32cr::Foundation::SYSTEMTIME
+    property time : UInt32
+    property pages_printed : UInt32
+    property size_high : Int32
+    def initialize(@job_id : UInt32, @pPrinterName : Win32cr::Foundation::PWSTR, @pMachineName : Win32cr::Foundation::PWSTR, @pUserName : Win32cr::Foundation::PWSTR, @pDocument : Win32cr::Foundation::PWSTR, @pNotifyName : Win32cr::Foundation::PWSTR, @pDatatype : Win32cr::Foundation::PWSTR, @pPrintProcessor : Win32cr::Foundation::PWSTR, @pParameters : Win32cr::Foundation::PWSTR, @pDriverName : Win32cr::Foundation::PWSTR, @pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, @pStatus : Win32cr::Foundation::PWSTR, @pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, @status : UInt32, @priority : UInt32, @position : UInt32, @start_time : UInt32, @until_time : UInt32, @total_pages : UInt32, @size : UInt32, @submitted : Win32cr::Foundation::SYSTEMTIME, @time : UInt32, @pages_printed : UInt32, @size_high : Int32)
+    end
+  end
+
+  @[Extern]
+  struct ADDJOB_INFO_1A
+    property path : Win32cr::Foundation::PSTR
+    property job_id : UInt32
+    def initialize(@path : Win32cr::Foundation::PSTR, @job_id : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ADDJOB_INFO_1W
+    property path : Win32cr::Foundation::PWSTR
+    property job_id : UInt32
+    def initialize(@path : Win32cr::Foundation::PWSTR, @job_id : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_1A
+    property pName : Win32cr::Foundation::PSTR
+    def initialize(@pName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_1W
+    property pName : Win32cr::Foundation::PWSTR
+    def initialize(@pName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_2A
+    property cVersion : UInt32
+    property pName : Win32cr::Foundation::PSTR
+    property pEnvironment : Win32cr::Foundation::PSTR
+    property pDriverPath : Win32cr::Foundation::PSTR
+    property pDataFile : Win32cr::Foundation::PSTR
+    property pConfigFile : Win32cr::Foundation::PSTR
+    def initialize(@cVersion : UInt32, @pName : Win32cr::Foundation::PSTR, @pEnvironment : Win32cr::Foundation::PSTR, @pDriverPath : Win32cr::Foundation::PSTR, @pDataFile : Win32cr::Foundation::PSTR, @pConfigFile : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_2W
+    property cVersion : UInt32
+    property pName : Win32cr::Foundation::PWSTR
+    property pEnvironment : Win32cr::Foundation::PWSTR
+    property pDriverPath : Win32cr::Foundation::PWSTR
+    property pDataFile : Win32cr::Foundation::PWSTR
+    property pConfigFile : Win32cr::Foundation::PWSTR
+    def initialize(@cVersion : UInt32, @pName : Win32cr::Foundation::PWSTR, @pEnvironment : Win32cr::Foundation::PWSTR, @pDriverPath : Win32cr::Foundation::PWSTR, @pDataFile : Win32cr::Foundation::PWSTR, @pConfigFile : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_3A
+    property cVersion : UInt32
+    property pName : Win32cr::Foundation::PSTR
+    property pEnvironment : Win32cr::Foundation::PSTR
+    property pDriverPath : Win32cr::Foundation::PSTR
+    property pDataFile : Win32cr::Foundation::PSTR
+    property pConfigFile : Win32cr::Foundation::PSTR
+    property pHelpFile : Win32cr::Foundation::PSTR
+    property pDependentFiles : Win32cr::Foundation::PSTR
+    property pMonitorName : Win32cr::Foundation::PSTR
+    property pDefaultDataType : Win32cr::Foundation::PSTR
+    def initialize(@cVersion : UInt32, @pName : Win32cr::Foundation::PSTR, @pEnvironment : Win32cr::Foundation::PSTR, @pDriverPath : Win32cr::Foundation::PSTR, @pDataFile : Win32cr::Foundation::PSTR, @pConfigFile : Win32cr::Foundation::PSTR, @pHelpFile : Win32cr::Foundation::PSTR, @pDependentFiles : Win32cr::Foundation::PSTR, @pMonitorName : Win32cr::Foundation::PSTR, @pDefaultDataType : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_3W
+    property cVersion : UInt32
+    property pName : Win32cr::Foundation::PWSTR
+    property pEnvironment : Win32cr::Foundation::PWSTR
+    property pDriverPath : Win32cr::Foundation::PWSTR
+    property pDataFile : Win32cr::Foundation::PWSTR
+    property pConfigFile : Win32cr::Foundation::PWSTR
+    property pHelpFile : Win32cr::Foundation::PWSTR
+    property pDependentFiles : Win32cr::Foundation::PWSTR
+    property pMonitorName : Win32cr::Foundation::PWSTR
+    property pDefaultDataType : Win32cr::Foundation::PWSTR
+    def initialize(@cVersion : UInt32, @pName : Win32cr::Foundation::PWSTR, @pEnvironment : Win32cr::Foundation::PWSTR, @pDriverPath : Win32cr::Foundation::PWSTR, @pDataFile : Win32cr::Foundation::PWSTR, @pConfigFile : Win32cr::Foundation::PWSTR, @pHelpFile : Win32cr::Foundation::PWSTR, @pDependentFiles : Win32cr::Foundation::PWSTR, @pMonitorName : Win32cr::Foundation::PWSTR, @pDefaultDataType : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_4A
+    property cVersion : UInt32
+    property pName : Win32cr::Foundation::PSTR
+    property pEnvironment : Win32cr::Foundation::PSTR
+    property pDriverPath : Win32cr::Foundation::PSTR
+    property pDataFile : Win32cr::Foundation::PSTR
+    property pConfigFile : Win32cr::Foundation::PSTR
+    property pHelpFile : Win32cr::Foundation::PSTR
+    property pDependentFiles : Win32cr::Foundation::PSTR
+    property pMonitorName : Win32cr::Foundation::PSTR
+    property pDefaultDataType : Win32cr::Foundation::PSTR
+    property pszzPreviousNames : Win32cr::Foundation::PSTR
+    def initialize(@cVersion : UInt32, @pName : Win32cr::Foundation::PSTR, @pEnvironment : Win32cr::Foundation::PSTR, @pDriverPath : Win32cr::Foundation::PSTR, @pDataFile : Win32cr::Foundation::PSTR, @pConfigFile : Win32cr::Foundation::PSTR, @pHelpFile : Win32cr::Foundation::PSTR, @pDependentFiles : Win32cr::Foundation::PSTR, @pMonitorName : Win32cr::Foundation::PSTR, @pDefaultDataType : Win32cr::Foundation::PSTR, @pszzPreviousNames : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_4W
+    property cVersion : UInt32
+    property pName : Win32cr::Foundation::PWSTR
+    property pEnvironment : Win32cr::Foundation::PWSTR
+    property pDriverPath : Win32cr::Foundation::PWSTR
+    property pDataFile : Win32cr::Foundation::PWSTR
+    property pConfigFile : Win32cr::Foundation::PWSTR
+    property pHelpFile : Win32cr::Foundation::PWSTR
+    property pDependentFiles : Win32cr::Foundation::PWSTR
+    property pMonitorName : Win32cr::Foundation::PWSTR
+    property pDefaultDataType : Win32cr::Foundation::PWSTR
+    property pszzPreviousNames : Win32cr::Foundation::PWSTR
+    def initialize(@cVersion : UInt32, @pName : Win32cr::Foundation::PWSTR, @pEnvironment : Win32cr::Foundation::PWSTR, @pDriverPath : Win32cr::Foundation::PWSTR, @pDataFile : Win32cr::Foundation::PWSTR, @pConfigFile : Win32cr::Foundation::PWSTR, @pHelpFile : Win32cr::Foundation::PWSTR, @pDependentFiles : Win32cr::Foundation::PWSTR, @pMonitorName : Win32cr::Foundation::PWSTR, @pDefaultDataType : Win32cr::Foundation::PWSTR, @pszzPreviousNames : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_5A
+    property cVersion : UInt32
+    property pName : Win32cr::Foundation::PSTR
+    property pEnvironment : Win32cr::Foundation::PSTR
+    property pDriverPath : Win32cr::Foundation::PSTR
+    property pDataFile : Win32cr::Foundation::PSTR
+    property pConfigFile : Win32cr::Foundation::PSTR
+    property dwDriverAttributes : UInt32
+    property dwConfigVersion : UInt32
+    property dwDriverVersion : UInt32
+    def initialize(@cVersion : UInt32, @pName : Win32cr::Foundation::PSTR, @pEnvironment : Win32cr::Foundation::PSTR, @pDriverPath : Win32cr::Foundation::PSTR, @pDataFile : Win32cr::Foundation::PSTR, @pConfigFile : Win32cr::Foundation::PSTR, @dwDriverAttributes : UInt32, @dwConfigVersion : UInt32, @dwDriverVersion : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_5W
+    property cVersion : UInt32
+    property pName : Win32cr::Foundation::PWSTR
+    property pEnvironment : Win32cr::Foundation::PWSTR
+    property pDriverPath : Win32cr::Foundation::PWSTR
+    property pDataFile : Win32cr::Foundation::PWSTR
+    property pConfigFile : Win32cr::Foundation::PWSTR
+    property dwDriverAttributes : UInt32
+    property dwConfigVersion : UInt32
+    property dwDriverVersion : UInt32
+    def initialize(@cVersion : UInt32, @pName : Win32cr::Foundation::PWSTR, @pEnvironment : Win32cr::Foundation::PWSTR, @pDriverPath : Win32cr::Foundation::PWSTR, @pDataFile : Win32cr::Foundation::PWSTR, @pConfigFile : Win32cr::Foundation::PWSTR, @dwDriverAttributes : UInt32, @dwConfigVersion : UInt32, @dwDriverVersion : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_6A
+    property cVersion : UInt32
+    property pName : Win32cr::Foundation::PSTR
+    property pEnvironment : Win32cr::Foundation::PSTR
+    property pDriverPath : Win32cr::Foundation::PSTR
+    property pDataFile : Win32cr::Foundation::PSTR
+    property pConfigFile : Win32cr::Foundation::PSTR
+    property pHelpFile : Win32cr::Foundation::PSTR
+    property pDependentFiles : Win32cr::Foundation::PSTR
+    property pMonitorName : Win32cr::Foundation::PSTR
+    property pDefaultDataType : Win32cr::Foundation::PSTR
+    property pszzPreviousNames : Win32cr::Foundation::PSTR
+    property ftDriverDate : Win32cr::Foundation::FILETIME
+    property dwlDriverVersion : UInt64
+    property pszMfgName : Win32cr::Foundation::PSTR
+    property pszOEMUrl : Win32cr::Foundation::PSTR
+    property pszHardwareID : Win32cr::Foundation::PSTR
+    property pszProvider : Win32cr::Foundation::PSTR
+    def initialize(@cVersion : UInt32, @pName : Win32cr::Foundation::PSTR, @pEnvironment : Win32cr::Foundation::PSTR, @pDriverPath : Win32cr::Foundation::PSTR, @pDataFile : Win32cr::Foundation::PSTR, @pConfigFile : Win32cr::Foundation::PSTR, @pHelpFile : Win32cr::Foundation::PSTR, @pDependentFiles : Win32cr::Foundation::PSTR, @pMonitorName : Win32cr::Foundation::PSTR, @pDefaultDataType : Win32cr::Foundation::PSTR, @pszzPreviousNames : Win32cr::Foundation::PSTR, @ftDriverDate : Win32cr::Foundation::FILETIME, @dwlDriverVersion : UInt64, @pszMfgName : Win32cr::Foundation::PSTR, @pszOEMUrl : Win32cr::Foundation::PSTR, @pszHardwareID : Win32cr::Foundation::PSTR, @pszProvider : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_6W
+    property cVersion : UInt32
+    property pName : Win32cr::Foundation::PWSTR
+    property pEnvironment : Win32cr::Foundation::PWSTR
+    property pDriverPath : Win32cr::Foundation::PWSTR
+    property pDataFile : Win32cr::Foundation::PWSTR
+    property pConfigFile : Win32cr::Foundation::PWSTR
+    property pHelpFile : Win32cr::Foundation::PWSTR
+    property pDependentFiles : Win32cr::Foundation::PWSTR
+    property pMonitorName : Win32cr::Foundation::PWSTR
+    property pDefaultDataType : Win32cr::Foundation::PWSTR
+    property pszzPreviousNames : Win32cr::Foundation::PWSTR
+    property ftDriverDate : Win32cr::Foundation::FILETIME
+    property dwlDriverVersion : UInt64
+    property pszMfgName : Win32cr::Foundation::PWSTR
+    property pszOEMUrl : Win32cr::Foundation::PWSTR
+    property pszHardwareID : Win32cr::Foundation::PWSTR
+    property pszProvider : Win32cr::Foundation::PWSTR
+    def initialize(@cVersion : UInt32, @pName : Win32cr::Foundation::PWSTR, @pEnvironment : Win32cr::Foundation::PWSTR, @pDriverPath : Win32cr::Foundation::PWSTR, @pDataFile : Win32cr::Foundation::PWSTR, @pConfigFile : Win32cr::Foundation::PWSTR, @pHelpFile : Win32cr::Foundation::PWSTR, @pDependentFiles : Win32cr::Foundation::PWSTR, @pMonitorName : Win32cr::Foundation::PWSTR, @pDefaultDataType : Win32cr::Foundation::PWSTR, @pszzPreviousNames : Win32cr::Foundation::PWSTR, @ftDriverDate : Win32cr::Foundation::FILETIME, @dwlDriverVersion : UInt64, @pszMfgName : Win32cr::Foundation::PWSTR, @pszOEMUrl : Win32cr::Foundation::PWSTR, @pszHardwareID : Win32cr::Foundation::PWSTR, @pszProvider : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_8A
+    property cVersion : UInt32
+    property pName : Win32cr::Foundation::PSTR
+    property pEnvironment : Win32cr::Foundation::PSTR
+    property pDriverPath : Win32cr::Foundation::PSTR
+    property pDataFile : Win32cr::Foundation::PSTR
+    property pConfigFile : Win32cr::Foundation::PSTR
+    property pHelpFile : Win32cr::Foundation::PSTR
+    property pDependentFiles : Win32cr::Foundation::PSTR
+    property pMonitorName : Win32cr::Foundation::PSTR
+    property pDefaultDataType : Win32cr::Foundation::PSTR
+    property pszzPreviousNames : Win32cr::Foundation::PSTR
+    property ftDriverDate : Win32cr::Foundation::FILETIME
+    property dwlDriverVersion : UInt64
+    property pszMfgName : Win32cr::Foundation::PSTR
+    property pszOEMUrl : Win32cr::Foundation::PSTR
+    property pszHardwareID : Win32cr::Foundation::PSTR
+    property pszProvider : Win32cr::Foundation::PSTR
+    property pszPrintProcessor : Win32cr::Foundation::PSTR
+    property pszVendorSetup : Win32cr::Foundation::PSTR
+    property pszzColorProfiles : Win32cr::Foundation::PSTR
+    property pszInfPath : Win32cr::Foundation::PSTR
+    property dwPrinterDriverAttributes : UInt32
+    property pszzCoreDriverDependencies : Win32cr::Foundation::PSTR
+    property ftMinInboxDriverVerDate : Win32cr::Foundation::FILETIME
+    property dwlMinInboxDriverVerVersion : UInt64
+    def initialize(@cVersion : UInt32, @pName : Win32cr::Foundation::PSTR, @pEnvironment : Win32cr::Foundation::PSTR, @pDriverPath : Win32cr::Foundation::PSTR, @pDataFile : Win32cr::Foundation::PSTR, @pConfigFile : Win32cr::Foundation::PSTR, @pHelpFile : Win32cr::Foundation::PSTR, @pDependentFiles : Win32cr::Foundation::PSTR, @pMonitorName : Win32cr::Foundation::PSTR, @pDefaultDataType : Win32cr::Foundation::PSTR, @pszzPreviousNames : Win32cr::Foundation::PSTR, @ftDriverDate : Win32cr::Foundation::FILETIME, @dwlDriverVersion : UInt64, @pszMfgName : Win32cr::Foundation::PSTR, @pszOEMUrl : Win32cr::Foundation::PSTR, @pszHardwareID : Win32cr::Foundation::PSTR, @pszProvider : Win32cr::Foundation::PSTR, @pszPrintProcessor : Win32cr::Foundation::PSTR, @pszVendorSetup : Win32cr::Foundation::PSTR, @pszzColorProfiles : Win32cr::Foundation::PSTR, @pszInfPath : Win32cr::Foundation::PSTR, @dwPrinterDriverAttributes : UInt32, @pszzCoreDriverDependencies : Win32cr::Foundation::PSTR, @ftMinInboxDriverVerDate : Win32cr::Foundation::FILETIME, @dwlMinInboxDriverVerVersion : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct DRIVER_INFO_8W
+    property cVersion : UInt32
+    property pName : Win32cr::Foundation::PWSTR
+    property pEnvironment : Win32cr::Foundation::PWSTR
+    property pDriverPath : Win32cr::Foundation::PWSTR
+    property pDataFile : Win32cr::Foundation::PWSTR
+    property pConfigFile : Win32cr::Foundation::PWSTR
+    property pHelpFile : Win32cr::Foundation::PWSTR
+    property pDependentFiles : Win32cr::Foundation::PWSTR
+    property pMonitorName : Win32cr::Foundation::PWSTR
+    property pDefaultDataType : Win32cr::Foundation::PWSTR
+    property pszzPreviousNames : Win32cr::Foundation::PWSTR
+    property ftDriverDate : Win32cr::Foundation::FILETIME
+    property dwlDriverVersion : UInt64
+    property pszMfgName : Win32cr::Foundation::PWSTR
+    property pszOEMUrl : Win32cr::Foundation::PWSTR
+    property pszHardwareID : Win32cr::Foundation::PWSTR
+    property pszProvider : Win32cr::Foundation::PWSTR
+    property pszPrintProcessor : Win32cr::Foundation::PWSTR
+    property pszVendorSetup : Win32cr::Foundation::PWSTR
+    property pszzColorProfiles : Win32cr::Foundation::PWSTR
+    property pszInfPath : Win32cr::Foundation::PWSTR
+    property dwPrinterDriverAttributes : UInt32
+    property pszzCoreDriverDependencies : Win32cr::Foundation::PWSTR
+    property ftMinInboxDriverVerDate : Win32cr::Foundation::FILETIME
+    property dwlMinInboxDriverVerVersion : UInt64
+    def initialize(@cVersion : UInt32, @pName : Win32cr::Foundation::PWSTR, @pEnvironment : Win32cr::Foundation::PWSTR, @pDriverPath : Win32cr::Foundation::PWSTR, @pDataFile : Win32cr::Foundation::PWSTR, @pConfigFile : Win32cr::Foundation::PWSTR, @pHelpFile : Win32cr::Foundation::PWSTR, @pDependentFiles : Win32cr::Foundation::PWSTR, @pMonitorName : Win32cr::Foundation::PWSTR, @pDefaultDataType : Win32cr::Foundation::PWSTR, @pszzPreviousNames : Win32cr::Foundation::PWSTR, @ftDriverDate : Win32cr::Foundation::FILETIME, @dwlDriverVersion : UInt64, @pszMfgName : Win32cr::Foundation::PWSTR, @pszOEMUrl : Win32cr::Foundation::PWSTR, @pszHardwareID : Win32cr::Foundation::PWSTR, @pszProvider : Win32cr::Foundation::PWSTR, @pszPrintProcessor : Win32cr::Foundation::PWSTR, @pszVendorSetup : Win32cr::Foundation::PWSTR, @pszzColorProfiles : Win32cr::Foundation::PWSTR, @pszInfPath : Win32cr::Foundation::PWSTR, @dwPrinterDriverAttributes : UInt32, @pszzCoreDriverDependencies : Win32cr::Foundation::PWSTR, @ftMinInboxDriverVerDate : Win32cr::Foundation::FILETIME, @dwlMinInboxDriverVerVersion : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct DOC_INFO_1A
+    property pDocName : Win32cr::Foundation::PSTR
+    property pOutputFile : Win32cr::Foundation::PSTR
+    property pDatatype : Win32cr::Foundation::PSTR
+    def initialize(@pDocName : Win32cr::Foundation::PSTR, @pOutputFile : Win32cr::Foundation::PSTR, @pDatatype : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DOC_INFO_1W
+    property pDocName : Win32cr::Foundation::PWSTR
+    property pOutputFile : Win32cr::Foundation::PWSTR
+    property pDatatype : Win32cr::Foundation::PWSTR
+    def initialize(@pDocName : Win32cr::Foundation::PWSTR, @pOutputFile : Win32cr::Foundation::PWSTR, @pDatatype : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct FORM_INFO_1A
+    property flags : UInt32
+    property pName : Win32cr::Foundation::PSTR
+    property size : Win32cr::Foundation::SIZE
+    property imageable_area : Win32cr::Foundation::RECTL
+    def initialize(@flags : UInt32, @pName : Win32cr::Foundation::PSTR, @size : Win32cr::Foundation::SIZE, @imageable_area : Win32cr::Foundation::RECTL)
+    end
+  end
+
+  @[Extern]
+  struct FORM_INFO_1W
+    property flags : UInt32
+    property pName : Win32cr::Foundation::PWSTR
+    property size : Win32cr::Foundation::SIZE
+    property imageable_area : Win32cr::Foundation::RECTL
+    def initialize(@flags : UInt32, @pName : Win32cr::Foundation::PWSTR, @size : Win32cr::Foundation::SIZE, @imageable_area : Win32cr::Foundation::RECTL)
+    end
+  end
+
+  @[Extern]
+  struct FORM_INFO_2A
+    property flags : UInt32
+    property pName : Win32cr::Foundation::PSTR
+    property size : Win32cr::Foundation::SIZE
+    property imageable_area : Win32cr::Foundation::RECTL
+    property pKeyword : Win32cr::Foundation::PSTR
+    property string_type : UInt32
+    property pMuiDll : Win32cr::Foundation::PSTR
+    property dwResourceId : UInt32
+    property pDisplayName : Win32cr::Foundation::PSTR
+    property wLangId : UInt16
+    def initialize(@flags : UInt32, @pName : Win32cr::Foundation::PSTR, @size : Win32cr::Foundation::SIZE, @imageable_area : Win32cr::Foundation::RECTL, @pKeyword : Win32cr::Foundation::PSTR, @string_type : UInt32, @pMuiDll : Win32cr::Foundation::PSTR, @dwResourceId : UInt32, @pDisplayName : Win32cr::Foundation::PSTR, @wLangId : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct FORM_INFO_2W
+    property flags : UInt32
+    property pName : Win32cr::Foundation::PWSTR
+    property size : Win32cr::Foundation::SIZE
+    property imageable_area : Win32cr::Foundation::RECTL
+    property pKeyword : Win32cr::Foundation::PSTR
+    property string_type : UInt32
+    property pMuiDll : Win32cr::Foundation::PWSTR
+    property dwResourceId : UInt32
+    property pDisplayName : Win32cr::Foundation::PWSTR
+    property wLangId : UInt16
+    def initialize(@flags : UInt32, @pName : Win32cr::Foundation::PWSTR, @size : Win32cr::Foundation::SIZE, @imageable_area : Win32cr::Foundation::RECTL, @pKeyword : Win32cr::Foundation::PSTR, @string_type : UInt32, @pMuiDll : Win32cr::Foundation::PWSTR, @dwResourceId : UInt32, @pDisplayName : Win32cr::Foundation::PWSTR, @wLangId : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DOC_INFO_2A
+    property pDocName : Win32cr::Foundation::PSTR
+    property pOutputFile : Win32cr::Foundation::PSTR
+    property pDatatype : Win32cr::Foundation::PSTR
+    property dwMode : UInt32
+    property job_id : UInt32
+    def initialize(@pDocName : Win32cr::Foundation::PSTR, @pOutputFile : Win32cr::Foundation::PSTR, @pDatatype : Win32cr::Foundation::PSTR, @dwMode : UInt32, @job_id : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOC_INFO_2W
+    property pDocName : Win32cr::Foundation::PWSTR
+    property pOutputFile : Win32cr::Foundation::PWSTR
+    property pDatatype : Win32cr::Foundation::PWSTR
+    property dwMode : UInt32
+    property job_id : UInt32
+    def initialize(@pDocName : Win32cr::Foundation::PWSTR, @pOutputFile : Win32cr::Foundation::PWSTR, @pDatatype : Win32cr::Foundation::PWSTR, @dwMode : UInt32, @job_id : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOC_INFO_3A
+    property pDocName : Win32cr::Foundation::PSTR
+    property pOutputFile : Win32cr::Foundation::PSTR
+    property pDatatype : Win32cr::Foundation::PSTR
+    property dwFlags : UInt32
+    def initialize(@pDocName : Win32cr::Foundation::PSTR, @pOutputFile : Win32cr::Foundation::PSTR, @pDatatype : Win32cr::Foundation::PSTR, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOC_INFO_3W
+    property pDocName : Win32cr::Foundation::PWSTR
+    property pOutputFile : Win32cr::Foundation::PWSTR
+    property pDatatype : Win32cr::Foundation::PWSTR
+    property dwFlags : UInt32
+    def initialize(@pDocName : Win32cr::Foundation::PWSTR, @pOutputFile : Win32cr::Foundation::PWSTR, @pDatatype : Win32cr::Foundation::PWSTR, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINTPROCESSOR_INFO_1A
+    property pName : Win32cr::Foundation::PSTR
+    def initialize(@pName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct PRINTPROCESSOR_INFO_1W
+    property pName : Win32cr::Foundation::PWSTR
+    def initialize(@pName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct PRINTPROCESSOR_CAPS_1
+    property dwLevel : UInt32
+    property dwNupOptions : UInt32
+    property dwPageOrderFlags : UInt32
+    property dwNumberOfCopies : UInt32
+    def initialize(@dwLevel : UInt32, @dwNupOptions : UInt32, @dwPageOrderFlags : UInt32, @dwNumberOfCopies : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINTPROCESSOR_CAPS_2
+    property dwLevel : UInt32
+    property dwNupOptions : UInt32
+    property dwPageOrderFlags : UInt32
+    property dwNumberOfCopies : UInt32
+    property dwDuplexHandlingCaps : UInt32
+    property dwNupDirectionCaps : UInt32
+    property dwNupBorderCaps : UInt32
+    property dwBookletHandlingCaps : UInt32
+    property dwScalingCaps : UInt32
+    def initialize(@dwLevel : UInt32, @dwNupOptions : UInt32, @dwPageOrderFlags : UInt32, @dwNumberOfCopies : UInt32, @dwDuplexHandlingCaps : UInt32, @dwNupDirectionCaps : UInt32, @dwNupBorderCaps : UInt32, @dwBookletHandlingCaps : UInt32, @dwScalingCaps : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PORT_INFO_1A
+    property pName : Win32cr::Foundation::PSTR
+    def initialize(@pName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct PORT_INFO_1W
+    property pName : Win32cr::Foundation::PWSTR
+    def initialize(@pName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct PORT_INFO_2A
+    property pPortName : Win32cr::Foundation::PSTR
+    property pMonitorName : Win32cr::Foundation::PSTR
+    property pDescription : Win32cr::Foundation::PSTR
+    property fPortType : UInt32
+    property reserved : UInt32
+    def initialize(@pPortName : Win32cr::Foundation::PSTR, @pMonitorName : Win32cr::Foundation::PSTR, @pDescription : Win32cr::Foundation::PSTR, @fPortType : UInt32, @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PORT_INFO_2W
+    property pPortName : Win32cr::Foundation::PWSTR
+    property pMonitorName : Win32cr::Foundation::PWSTR
+    property pDescription : Win32cr::Foundation::PWSTR
+    property fPortType : UInt32
+    property reserved : UInt32
+    def initialize(@pPortName : Win32cr::Foundation::PWSTR, @pMonitorName : Win32cr::Foundation::PWSTR, @pDescription : Win32cr::Foundation::PWSTR, @fPortType : UInt32, @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PORT_INFO_3A
+    property dwStatus : UInt32
+    property pszStatus : Win32cr::Foundation::PSTR
+    property dwSeverity : UInt32
+    def initialize(@dwStatus : UInt32, @pszStatus : Win32cr::Foundation::PSTR, @dwSeverity : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PORT_INFO_3W
+    property dwStatus : UInt32
+    property pszStatus : Win32cr::Foundation::PWSTR
+    property dwSeverity : UInt32
+    def initialize(@dwStatus : UInt32, @pszStatus : Win32cr::Foundation::PWSTR, @dwSeverity : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MONITOR_INFO_1A
+    property pName : Win32cr::Foundation::PSTR
+    def initialize(@pName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct MONITOR_INFO_1W
+    property pName : Win32cr::Foundation::PWSTR
+    def initialize(@pName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MONITOR_INFO_2A
+    property pName : Win32cr::Foundation::PSTR
+    property pEnvironment : Win32cr::Foundation::PSTR
+    property pDLLName : Win32cr::Foundation::PSTR
+    def initialize(@pName : Win32cr::Foundation::PSTR, @pEnvironment : Win32cr::Foundation::PSTR, @pDLLName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct MONITOR_INFO_2W
+    property pName : Win32cr::Foundation::PWSTR
+    property pEnvironment : Win32cr::Foundation::PWSTR
+    property pDLLName : Win32cr::Foundation::PWSTR
+    def initialize(@pName : Win32cr::Foundation::PWSTR, @pEnvironment : Win32cr::Foundation::PWSTR, @pDLLName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DATATYPES_INFO_1A
+    property pName : Win32cr::Foundation::PSTR
+    def initialize(@pName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DATATYPES_INFO_1W
+    property pName : Win32cr::Foundation::PWSTR
+    def initialize(@pName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_DEFAULTSA
+    property pDatatype : Win32cr::Foundation::PSTR
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*
+    property desired_access : Win32cr::Graphics::Printing::PRINTER_ACCESS_RIGHTS
+    def initialize(@pDatatype : Win32cr::Foundation::PSTR, @pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, @desired_access : Win32cr::Graphics::Printing::PRINTER_ACCESS_RIGHTS)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_DEFAULTSW
+    property pDatatype : Win32cr::Foundation::PWSTR
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*
+    property desired_access : Win32cr::Graphics::Printing::PRINTER_ACCESS_RIGHTS
+    def initialize(@pDatatype : Win32cr::Foundation::PWSTR, @pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, @desired_access : Win32cr::Graphics::Printing::PRINTER_ACCESS_RIGHTS)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_ENUM_VALUESA
+    property pValueName : Win32cr::Foundation::PSTR
+    property cbValueName : UInt32
+    property dwType : UInt32
+    property pData : UInt8*
+    property cbData : UInt32
+    def initialize(@pValueName : Win32cr::Foundation::PSTR, @cbValueName : UInt32, @dwType : UInt32, @pData : UInt8*, @cbData : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_ENUM_VALUESW
+    property pValueName : Win32cr::Foundation::PWSTR
+    property cbValueName : UInt32
+    property dwType : UInt32
+    property pData : UInt8*
+    property cbData : UInt32
+    def initialize(@pValueName : Win32cr::Foundation::PWSTR, @cbValueName : UInt32, @dwType : UInt32, @pData : UInt8*, @cbData : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_NOTIFY_OPTIONS_TYPE
+    property type__ : UInt16
+    property reserved0 : UInt16
+    property reserved1 : UInt32
+    property reserved2 : UInt32
+    property count : UInt32
+    property pFields : UInt16*
+    def initialize(@type__ : UInt16, @reserved0 : UInt16, @reserved1 : UInt32, @reserved2 : UInt32, @count : UInt32, @pFields : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_NOTIFY_OPTIONS
+    property version : UInt32
+    property flags : UInt32
+    property count : UInt32
+    property pTypes : Win32cr::Graphics::Printing::PRINTER_NOTIFY_OPTIONS_TYPE*
+    def initialize(@version : UInt32, @flags : UInt32, @count : UInt32, @pTypes : Win32cr::Graphics::Printing::PRINTER_NOTIFY_OPTIONS_TYPE*)
+    end
+  end
+
+  @[Extern]
+  struct PRINTER_NOTIFY_INFO_DATA
+    property type__ : UInt16
+    property field : UInt16
+    property reserved : UInt32
+    property id : UInt32
+    property notify_data : NotifyData_e__Union_
 
     # Nested Type NotifyData_e__Union_
     @[Extern(union: true)]
-    record NotifyData_e__Union_,
-      adwData : UInt32[2],
-      data : Data_e__Struct_ do
+    struct NotifyData_e__Union_
+    property adwData : UInt32[2]
+    property data : Data_e__Struct_
 
       # Nested Type Data_e__Struct_
       @[Extern]
-      record Data_e__Struct_,
-        cbBuf : UInt32,
-        pBuf : Void*
+      struct Data_e__Struct_
+    property cbBuf : UInt32
+    property pBuf : Void*
+    def initialize(@cbBuf : UInt32, @pBuf : Void*)
+    end
+      end
 
+    def initialize(@adwData : UInt32[2], @data : Data_e__Struct_)
+    end
     end
 
+    def initialize(@type__ : UInt16, @field : UInt16, @reserved : UInt32, @id : UInt32, @notify_data : NotifyData_e__Union_)
+    end
   end
 
   @[Extern]
-  record PRINTER_NOTIFY_INFO,
-    version : UInt32,
-    flags : UInt32,
-    count : UInt32,
-    aData : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO_DATA*
+  struct PRINTER_NOTIFY_INFO
+    property version : UInt32
+    property flags : UInt32
+    property count : UInt32
+    property aData : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO_DATA*
+    def initialize(@version : UInt32, @flags : UInt32, @count : UInt32, @aData : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO_DATA*)
+    end
+  end
 
   @[Extern]
-  record BINARY_CONTAINER,
-    cbBuf : UInt32,
-    pData : UInt8*
+  struct BINARY_CONTAINER
+    property cbBuf : UInt32
+    property pData : UInt8*
+    def initialize(@cbBuf : UInt32, @pData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record BIDI_DATA,
-    dwBidiType : UInt32,
-    u : U_e__union_ do
+  struct BIDI_DATA
+    property dwBidiType : UInt32
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      bData : Win32cr::Foundation::BOOL,
-      iData : Int32,
-      sData : Win32cr::Foundation::PWSTR,
-      fData : Float32,
-      biData : Win32cr::Graphics::Printing::BINARY_CONTAINER
+    struct U_e__union_
+    property bData : Win32cr::Foundation::BOOL
+    property iData : Int32
+    property sData : Win32cr::Foundation::PWSTR
+    property fData : Float32
+    property biData : Win32cr::Graphics::Printing::BINARY_CONTAINER
+    def initialize(@bData : Win32cr::Foundation::BOOL, @iData : Int32, @sData : Win32cr::Foundation::PWSTR, @fData : Float32, @biData : Win32cr::Graphics::Printing::BINARY_CONTAINER)
+    end
+    end
 
+    def initialize(@dwBidiType : UInt32, @u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record BIDI_REQUEST_DATA,
-    dwReqNumber : UInt32,
-    pSchema : Win32cr::Foundation::PWSTR,
-    data : Win32cr::Graphics::Printing::BIDI_DATA
+  struct BIDI_REQUEST_DATA
+    property dwReqNumber : UInt32
+    property pSchema : Win32cr::Foundation::PWSTR
+    property data : Win32cr::Graphics::Printing::BIDI_DATA
+    def initialize(@dwReqNumber : UInt32, @pSchema : Win32cr::Foundation::PWSTR, @data : Win32cr::Graphics::Printing::BIDI_DATA)
+    end
+  end
 
   @[Extern]
-  record BIDI_REQUEST_CONTAINER,
-    version : UInt32,
-    flags : UInt32,
-    count : UInt32,
-    aData : Win32cr::Graphics::Printing::BIDI_REQUEST_DATA*
+  struct BIDI_REQUEST_CONTAINER
+    property version : UInt32
+    property flags : UInt32
+    property count : UInt32
+    property aData : Win32cr::Graphics::Printing::BIDI_REQUEST_DATA*
+    def initialize(@version : UInt32, @flags : UInt32, @count : UInt32, @aData : Win32cr::Graphics::Printing::BIDI_REQUEST_DATA*)
+    end
+  end
 
   @[Extern]
-  record BIDI_RESPONSE_DATA,
-    dwResult : UInt32,
-    dwReqNumber : UInt32,
-    pSchema : Win32cr::Foundation::PWSTR,
-    data : Win32cr::Graphics::Printing::BIDI_DATA
+  struct BIDI_RESPONSE_DATA
+    property dwResult : UInt32
+    property dwReqNumber : UInt32
+    property pSchema : Win32cr::Foundation::PWSTR
+    property data : Win32cr::Graphics::Printing::BIDI_DATA
+    def initialize(@dwResult : UInt32, @dwReqNumber : UInt32, @pSchema : Win32cr::Foundation::PWSTR, @data : Win32cr::Graphics::Printing::BIDI_DATA)
+    end
+  end
 
   @[Extern]
-  record BIDI_RESPONSE_CONTAINER,
-    version : UInt32,
-    flags : UInt32,
-    count : UInt32,
-    aData : Win32cr::Graphics::Printing::BIDI_RESPONSE_DATA*
+  struct BIDI_RESPONSE_CONTAINER
+    property version : UInt32
+    property flags : UInt32
+    property count : UInt32
+    property aData : Win32cr::Graphics::Printing::BIDI_RESPONSE_DATA*
+    def initialize(@version : UInt32, @flags : UInt32, @count : UInt32, @aData : Win32cr::Graphics::Printing::BIDI_RESPONSE_DATA*)
+    end
+  end
 
   @[Extern]
-  record PROVIDOR_INFO_1A,
-    pName : Win32cr::Foundation::PSTR,
-    pEnvironment : Win32cr::Foundation::PSTR,
-    pDLLName : Win32cr::Foundation::PSTR
+  struct PROVIDOR_INFO_1A
+    property pName : Win32cr::Foundation::PSTR
+    property pEnvironment : Win32cr::Foundation::PSTR
+    property pDLLName : Win32cr::Foundation::PSTR
+    def initialize(@pName : Win32cr::Foundation::PSTR, @pEnvironment : Win32cr::Foundation::PSTR, @pDLLName : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record PROVIDOR_INFO_1W,
-    pName : Win32cr::Foundation::PWSTR,
-    pEnvironment : Win32cr::Foundation::PWSTR,
-    pDLLName : Win32cr::Foundation::PWSTR
+  struct PROVIDOR_INFO_1W
+    property pName : Win32cr::Foundation::PWSTR
+    property pEnvironment : Win32cr::Foundation::PWSTR
+    property pDLLName : Win32cr::Foundation::PWSTR
+    def initialize(@pName : Win32cr::Foundation::PWSTR, @pEnvironment : Win32cr::Foundation::PWSTR, @pDLLName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record PROVIDOR_INFO_2A,
-    pOrder : Win32cr::Foundation::PSTR
+  struct PROVIDOR_INFO_2A
+    property pOrder : Win32cr::Foundation::PSTR
+    def initialize(@pOrder : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record PROVIDOR_INFO_2W,
-    pOrder : Win32cr::Foundation::PWSTR
+  struct PROVIDOR_INFO_2W
+    property pOrder : Win32cr::Foundation::PWSTR
+    def initialize(@pOrder : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record PRINTER_OPTIONSA,
-    cbSize : UInt32,
-    dwFlags : Win32cr::Graphics::Printing::PRINTER_OPTION_FLAGS
+  struct PRINTER_OPTIONSA
+    property cbSize : UInt32
+    property dwFlags : Win32cr::Graphics::Printing::PRINTER_OPTION_FLAGS
+    def initialize(@cbSize : UInt32, @dwFlags : Win32cr::Graphics::Printing::PRINTER_OPTION_FLAGS)
+    end
+  end
 
   @[Extern]
-  record PRINTER_OPTIONSW,
-    cbSize : UInt32,
-    dwFlags : Win32cr::Graphics::Printing::PRINTER_OPTION_FLAGS
+  struct PRINTER_OPTIONSW
+    property cbSize : UInt32
+    property dwFlags : Win32cr::Graphics::Printing::PRINTER_OPTION_FLAGS
+    def initialize(@cbSize : UInt32, @dwFlags : Win32cr::Graphics::Printing::PRINTER_OPTION_FLAGS)
+    end
+  end
 
   @[Extern]
-  record PRINTER_CONNECTION_INFO_1A,
-    dwFlags : UInt32,
-    pszDriverName : Win32cr::Foundation::PSTR
+  struct PRINTER_CONNECTION_INFO_1A
+    property dwFlags : UInt32
+    property pszDriverName : Win32cr::Foundation::PSTR
+    def initialize(@dwFlags : UInt32, @pszDriverName : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record PRINTER_CONNECTION_INFO_1W,
-    dwFlags : UInt32,
-    pszDriverName : Win32cr::Foundation::PWSTR
+  struct PRINTER_CONNECTION_INFO_1W
+    property dwFlags : UInt32
+    property pszDriverName : Win32cr::Foundation::PWSTR
+    def initialize(@dwFlags : UInt32, @pszDriverName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record CORE_PRINTER_DRIVERA,
-    core_driver_guid : LibC::GUID,
-    ftDriverDate : Win32cr::Foundation::FILETIME,
-    dwlDriverVersion : UInt64,
-    szPackageID : Win32cr::Foundation::CHAR[260]
+  struct CORE_PRINTER_DRIVERA
+    property core_driver_guid : LibC::GUID
+    property ftDriverDate : Win32cr::Foundation::FILETIME
+    property dwlDriverVersion : UInt64
+    property szPackageID : Win32cr::Foundation::CHAR[260]
+    def initialize(@core_driver_guid : LibC::GUID, @ftDriverDate : Win32cr::Foundation::FILETIME, @dwlDriverVersion : UInt64, @szPackageID : Win32cr::Foundation::CHAR[260])
+    end
+  end
 
   @[Extern]
-  record CORE_PRINTER_DRIVERW,
-    core_driver_guid : LibC::GUID,
-    ftDriverDate : Win32cr::Foundation::FILETIME,
-    dwlDriverVersion : UInt64,
-    szPackageID : UInt16[260]
+  struct CORE_PRINTER_DRIVERW
+    property core_driver_guid : LibC::GUID
+    property ftDriverDate : Win32cr::Foundation::FILETIME
+    property dwlDriverVersion : UInt64
+    property szPackageID : UInt16[260]
+    def initialize(@core_driver_guid : LibC::GUID, @ftDriverDate : Win32cr::Foundation::FILETIME, @dwlDriverVersion : UInt64, @szPackageID : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record PrintPropertyValue,
-    ePropertyType : Win32cr::Graphics::Printing::EPrintPropertyType,
-    value : Value_e__union_ do
+  struct PrintPropertyValue
+    property ePropertyType : Win32cr::Graphics::Printing::EPrintPropertyType
+    property value : Value_e__union_
 
     # Nested Type Value_e__union_
     @[Extern(union: true)]
-    record Value_e__union_,
-      propertyByte : UInt8,
-      propertyString : Win32cr::Foundation::PWSTR,
-      propertyInt32 : Int32,
-      propertyInt64 : Int64,
-      propertyBlob : Propertyblob_e__struct_ do
+    struct Value_e__union_
+    property propertyByte : UInt8
+    property propertyString : Win32cr::Foundation::PWSTR
+    property propertyInt32 : Int32
+    property propertyInt64 : Int64
+    property propertyBlob : Propertyblob_e__struct_
 
       # Nested Type Propertyblob_e__struct_
       @[Extern]
-      record Propertyblob_e__struct_,
-        cbBuf : UInt32,
-        pBuf : Void*
+      struct Propertyblob_e__struct_
+    property cbBuf : UInt32
+    property pBuf : Void*
+    def initialize(@cbBuf : UInt32, @pBuf : Void*)
+    end
+      end
 
+    def initialize(@propertyByte : UInt8, @propertyString : Win32cr::Foundation::PWSTR, @propertyInt32 : Int32, @propertyInt64 : Int64, @propertyBlob : Propertyblob_e__struct_)
+    end
     end
 
+    def initialize(@ePropertyType : Win32cr::Graphics::Printing::EPrintPropertyType, @value : Value_e__union_)
+    end
   end
 
   @[Extern]
-  record PrintNamedProperty,
-    propertyName : Win32cr::Foundation::PWSTR,
-    propertyValue : Win32cr::Graphics::Printing::PrintPropertyValue
+  struct PrintNamedProperty
+    property propertyName : Win32cr::Foundation::PWSTR
+    property propertyValue : Win32cr::Graphics::Printing::PrintPropertyValue
+    def initialize(@propertyName : Win32cr::Foundation::PWSTR, @propertyValue : Win32cr::Graphics::Printing::PrintPropertyValue)
+    end
+  end
 
   @[Extern]
-  record PrintPropertiesCollection,
-    numberOfProperties : UInt32,
-    propertiesCollection : Win32cr::Graphics::Printing::PrintNamedProperty*
+  struct PrintPropertiesCollection
+    property numberOfProperties : UInt32
+    property propertiesCollection : Win32cr::Graphics::Printing::PrintNamedProperty*
+    def initialize(@numberOfProperties : UInt32, @propertiesCollection : Win32cr::Graphics::Printing::PrintNamedProperty*)
+    end
+  end
 
   @[Extern]
-  record PRINT_EXECUTION_DATA,
-    context : Win32cr::Graphics::Printing::PRINT_EXECUTION_CONTEXT,
-    clientAppPID : UInt32
+  struct PRINT_EXECUTION_DATA
+    property context : Win32cr::Graphics::Printing::PRINT_EXECUTION_CONTEXT
+    property clientAppPID : UInt32
+    def initialize(@context : Win32cr::Graphics::Printing::PRINT_EXECUTION_CONTEXT, @clientAppPID : UInt32)
+    end
+  end
 
   @[Extern]
-  record MxdcEscapeHeader,
-    cbInput : UInt32,
-    cbOutput : UInt32,
-    opCode : UInt32
+  struct MxdcEscapeHeader
+    property cbInput : UInt32
+    property cbOutput : UInt32
+    property opCode : UInt32
+    def initialize(@cbInput : UInt32, @cbOutput : UInt32, @opCode : UInt32)
+    end
+  end
 
   @[Extern]
-  record MxdcGetFileNameData,
-    cbOutput : UInt32,
-    wszData : UInt16*
+  struct MxdcGetFileNameData
+    property cbOutput : UInt32
+    property wszData : UInt16*
+    def initialize(@cbOutput : UInt32, @wszData : UInt16*)
+    end
+  end
 
   @[Extern]
-  record MxdcS0PageData,
-    dwSize : UInt32,
-    bData : UInt8*
+  struct MxdcS0PageData
+    property dwSize : UInt32
+    property bData : UInt8*
+    def initialize(@dwSize : UInt32, @bData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record MxdcXpsS0PageResource,
-    dwSize : UInt32,
-    dwResourceType : UInt32,
-    szUri : UInt8[260],
-    dwDataSize : UInt32,
-    bData : UInt8*
+  struct MxdcXpsS0PageResource
+    property dwSize : UInt32
+    property dwResourceType : UInt32
+    property szUri : UInt8[260]
+    property dwDataSize : UInt32
+    property bData : UInt8*
+    def initialize(@dwSize : UInt32, @dwResourceType : UInt32, @szUri : UInt8[260], @dwDataSize : UInt32, @bData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record MxdcPrintTicketPassthrough,
-    dwDataSize : UInt32,
-    bData : UInt8*
+  struct MxdcPrintTicketPassthrough
+    property dwDataSize : UInt32
+    property bData : UInt8*
+    def initialize(@dwDataSize : UInt32, @bData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record MxdcPrintTicketEscape,
-    mxdcEscape : Win32cr::Graphics::Printing::MxdcEscapeHeader,
-    printTicketData : Win32cr::Graphics::Printing::MxdcPrintTicketPassthrough
+  struct MxdcPrintTicketEscape
+    property mxdcEscape : Win32cr::Graphics::Printing::MxdcEscapeHeader
+    property printTicketData : Win32cr::Graphics::Printing::MxdcPrintTicketPassthrough
+    def initialize(@mxdcEscape : Win32cr::Graphics::Printing::MxdcEscapeHeader, @printTicketData : Win32cr::Graphics::Printing::MxdcPrintTicketPassthrough)
+    end
+  end
 
   @[Extern]
-  record MxdcS0PagePassthroughEscape,
-    mxdcEscape : Win32cr::Graphics::Printing::MxdcEscapeHeader,
-    xpsS0PageData : Win32cr::Graphics::Printing::MxdcS0PageData
+  struct MxdcS0PagePassthroughEscape
+    property mxdcEscape : Win32cr::Graphics::Printing::MxdcEscapeHeader
+    property xpsS0PageData : Win32cr::Graphics::Printing::MxdcS0PageData
+    def initialize(@mxdcEscape : Win32cr::Graphics::Printing::MxdcEscapeHeader, @xpsS0PageData : Win32cr::Graphics::Printing::MxdcS0PageData)
+    end
+  end
 
   @[Extern]
-  record MxdcS0PageResourceEscape,
-    mxdcEscape : Win32cr::Graphics::Printing::MxdcEscapeHeader,
-    xpsS0PageResourcePassthrough : Win32cr::Graphics::Printing::MxdcXpsS0PageResource
+  struct MxdcS0PageResourceEscape
+    property mxdcEscape : Win32cr::Graphics::Printing::MxdcEscapeHeader
+    property xpsS0PageResourcePassthrough : Win32cr::Graphics::Printing::MxdcXpsS0PageResource
+    def initialize(@mxdcEscape : Win32cr::Graphics::Printing::MxdcEscapeHeader, @xpsS0PageResourcePassthrough : Win32cr::Graphics::Printing::MxdcXpsS0PageResource)
+    end
+  end
 
   @[Extern]
-  record DEVICEPROPERTYHEADER,
-    cbSize : UInt16,
-    flags : UInt16,
-    hPrinter : Win32cr::Foundation::HANDLE,
-    pszPrinterName : Int8*
+  struct DEVICEPROPERTYHEADER
+    property cbSize : UInt16
+    property flags : UInt16
+    property hPrinter : Win32cr::Foundation::HANDLE
+    property pszPrinterName : Int8*
+    def initialize(@cbSize : UInt16, @flags : UInt16, @hPrinter : Win32cr::Foundation::HANDLE, @pszPrinterName : Int8*)
+    end
+  end
 
   @[Extern]
-  record DOCUMENTPROPERTYHEADER,
-    cbSize : UInt16,
-    reserved : UInt16,
-    hPrinter : Win32cr::Foundation::HANDLE,
-    pszPrinterName : Int8*,
-    pdmIn : Win32cr::Graphics::Gdi::DEVMODEA*,
-    pdmOut : Win32cr::Graphics::Gdi::DEVMODEA*,
-    cbOut : UInt32,
-    fMode : UInt32
+  struct DOCUMENTPROPERTYHEADER
+    property cbSize : UInt16
+    property reserved : UInt16
+    property hPrinter : Win32cr::Foundation::HANDLE
+    property pszPrinterName : Int8*
+    property pdmIn : Win32cr::Graphics::Gdi::DEVMODEA*
+    property pdmOut : Win32cr::Graphics::Gdi::DEVMODEA*
+    property cbOut : UInt32
+    property fMode : UInt32
+    def initialize(@cbSize : UInt16, @reserved : UInt16, @hPrinter : Win32cr::Foundation::HANDLE, @pszPrinterName : Int8*, @pdmIn : Win32cr::Graphics::Gdi::DEVMODEA*, @pdmOut : Win32cr::Graphics::Gdi::DEVMODEA*, @cbOut : UInt32, @fMode : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEVQUERYPRINT_INFO,
-    cbSize : UInt16,
-    level : UInt16,
-    hPrinter : Win32cr::Foundation::HANDLE,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*,
-    pszErrorStr : Win32cr::Foundation::PWSTR,
-    cchErrorStr : UInt32,
-    cchNeeded : UInt32
+  struct DEVQUERYPRINT_INFO
+    property cbSize : UInt16
+    property level : UInt16
+    property hPrinter : Win32cr::Foundation::HANDLE
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*
+    property pszErrorStr : Win32cr::Foundation::PWSTR
+    property cchErrorStr : UInt32
+    property cchNeeded : UInt32
+    def initialize(@cbSize : UInt16, @level : UInt16, @hPrinter : Win32cr::Foundation::HANDLE, @pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, @pszErrorStr : Win32cr::Foundation::PWSTR, @cchErrorStr : UInt32, @cchNeeded : UInt32)
+    end
+  end
 
   @[Extern]
-  record DRIVER_UPGRADE_INFO_1,
-    pPrinterName : Int8*,
-    pOldDriverDirectory : Int8*
+  struct DRIVER_UPGRADE_INFO_1
+    property pPrinterName : Int8*
+    property pOldDriverDirectory : Int8*
+    def initialize(@pPrinterName : Int8*, @pOldDriverDirectory : Int8*)
+    end
+  end
 
   @[Extern]
-  record DRIVER_UPGRADE_INFO_2,
-    pPrinterName : Int8*,
-    pOldDriverDirectory : Int8*,
-    cVersion : UInt32,
-    pName : Int8*,
-    pEnvironment : Int8*,
-    pDriverPath : Int8*,
-    pDataFile : Int8*,
-    pConfigFile : Int8*,
-    pHelpFile : Int8*,
-    pDependentFiles : Int8*,
-    pMonitorName : Int8*,
-    pDefaultDataType : Int8*,
-    pszzPreviousNames : Int8*
+  struct DRIVER_UPGRADE_INFO_2
+    property pPrinterName : Int8*
+    property pOldDriverDirectory : Int8*
+    property cVersion : UInt32
+    property pName : Int8*
+    property pEnvironment : Int8*
+    property pDriverPath : Int8*
+    property pDataFile : Int8*
+    property pConfigFile : Int8*
+    property pHelpFile : Int8*
+    property pDependentFiles : Int8*
+    property pMonitorName : Int8*
+    property pDefaultDataType : Int8*
+    property pszzPreviousNames : Int8*
+    def initialize(@pPrinterName : Int8*, @pOldDriverDirectory : Int8*, @cVersion : UInt32, @pName : Int8*, @pEnvironment : Int8*, @pDriverPath : Int8*, @pDataFile : Int8*, @pConfigFile : Int8*, @pHelpFile : Int8*, @pDependentFiles : Int8*, @pMonitorName : Int8*, @pDefaultDataType : Int8*, @pszzPreviousNames : Int8*)
+    end
+  end
 
   @[Extern]
-  record DOCEVENT_FILTER,
-    cbSize : UInt32,
-    cElementsAllocated : UInt32,
-    cElementsNeeded : UInt32,
-    cElementsReturned : UInt32,
-    aDocEventCall : UInt32*
+  struct DOCEVENT_FILTER
+    property cbSize : UInt32
+    property cElementsAllocated : UInt32
+    property cElementsNeeded : UInt32
+    property cElementsReturned : UInt32
+    property aDocEventCall : UInt32*
+    def initialize(@cbSize : UInt32, @cElementsAllocated : UInt32, @cElementsNeeded : UInt32, @cElementsReturned : UInt32, @aDocEventCall : UInt32*)
+    end
+  end
 
   @[Extern]
-  record DOCEVENT_CREATEDCPRE,
-    pszDriver : Win32cr::Foundation::PWSTR,
-    pszDevice : Win32cr::Foundation::PWSTR,
-    pdm : Win32cr::Graphics::Gdi::DEVMODEW*,
-    bIC : Win32cr::Foundation::BOOL
+  struct DOCEVENT_CREATEDCPRE
+    property pszDriver : Win32cr::Foundation::PWSTR
+    property pszDevice : Win32cr::Foundation::PWSTR
+    property pdm : Win32cr::Graphics::Gdi::DEVMODEW*
+    property bIC : Win32cr::Foundation::BOOL
+    def initialize(@pszDriver : Win32cr::Foundation::PWSTR, @pszDevice : Win32cr::Foundation::PWSTR, @pdm : Win32cr::Graphics::Gdi::DEVMODEW*, @bIC : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DOCEVENT_ESCAPE,
-    iEscape : Int32,
-    cjInput : Int32,
-    pvInData : Void*
+  struct DOCEVENT_ESCAPE
+    property iEscape : Int32
+    property cjInput : Int32
+    property pvInData : Void*
+    def initialize(@iEscape : Int32, @cjInput : Int32, @pvInData : Void*)
+    end
+  end
 
   @[Extern]
-  record PRINTER_EVENT_ATTRIBUTES_INFO,
-    cbSize : UInt32,
-    dwOldAttributes : UInt32,
-    dwNewAttributes : UInt32
+  struct PRINTER_EVENT_ATTRIBUTES_INFO
+    property cbSize : UInt32
+    property dwOldAttributes : UInt32
+    property dwNewAttributes : UInt32
+    def initialize(@cbSize : UInt32, @dwOldAttributes : UInt32, @dwNewAttributes : UInt32)
+    end
+  end
 
   @[Extern]
-  record ATTRIBUTE_INFO_1,
-    dwJobNumberOfPagesPerSide : UInt32,
-    dwDrvNumberOfPagesPerSide : UInt32,
-    dwNupBorderFlags : UInt32,
-    dwJobPageOrderFlags : UInt32,
-    dwDrvPageOrderFlags : UInt32,
-    dwJobNumberOfCopies : UInt32,
-    dwDrvNumberOfCopies : UInt32
+  struct ATTRIBUTE_INFO_1
+    property dwJobNumberOfPagesPerSide : UInt32
+    property dwDrvNumberOfPagesPerSide : UInt32
+    property dwNupBorderFlags : UInt32
+    property dwJobPageOrderFlags : UInt32
+    property dwDrvPageOrderFlags : UInt32
+    property dwJobNumberOfCopies : UInt32
+    property dwDrvNumberOfCopies : UInt32
+    def initialize(@dwJobNumberOfPagesPerSide : UInt32, @dwDrvNumberOfPagesPerSide : UInt32, @dwNupBorderFlags : UInt32, @dwJobPageOrderFlags : UInt32, @dwDrvPageOrderFlags : UInt32, @dwJobNumberOfCopies : UInt32, @dwDrvNumberOfCopies : UInt32)
+    end
+  end
 
   @[Extern]
-  record ATTRIBUTE_INFO_2,
-    dwJobNumberOfPagesPerSide : UInt32,
-    dwDrvNumberOfPagesPerSide : UInt32,
-    dwNupBorderFlags : UInt32,
-    dwJobPageOrderFlags : UInt32,
-    dwDrvPageOrderFlags : UInt32,
-    dwJobNumberOfCopies : UInt32,
-    dwDrvNumberOfCopies : UInt32,
-    dwColorOptimization : UInt32
+  struct ATTRIBUTE_INFO_2
+    property dwJobNumberOfPagesPerSide : UInt32
+    property dwDrvNumberOfPagesPerSide : UInt32
+    property dwNupBorderFlags : UInt32
+    property dwJobPageOrderFlags : UInt32
+    property dwDrvPageOrderFlags : UInt32
+    property dwJobNumberOfCopies : UInt32
+    property dwDrvNumberOfCopies : UInt32
+    property dwColorOptimization : UInt32
+    def initialize(@dwJobNumberOfPagesPerSide : UInt32, @dwDrvNumberOfPagesPerSide : UInt32, @dwNupBorderFlags : UInt32, @dwJobPageOrderFlags : UInt32, @dwDrvPageOrderFlags : UInt32, @dwJobNumberOfCopies : UInt32, @dwDrvNumberOfCopies : UInt32, @dwColorOptimization : UInt32)
+    end
+  end
 
   @[Extern]
-  record ATTRIBUTE_INFO_3,
-    dwJobNumberOfPagesPerSide : UInt32,
-    dwDrvNumberOfPagesPerSide : UInt32,
-    dwNupBorderFlags : UInt32,
-    dwJobPageOrderFlags : UInt32,
-    dwDrvPageOrderFlags : UInt32,
-    dwJobNumberOfCopies : UInt32,
-    dwDrvNumberOfCopies : UInt32,
-    dwColorOptimization : UInt32,
-    dmPrintQuality : Int16,
-    dmYResolution : Int16
+  struct ATTRIBUTE_INFO_3
+    property dwJobNumberOfPagesPerSide : UInt32
+    property dwDrvNumberOfPagesPerSide : UInt32
+    property dwNupBorderFlags : UInt32
+    property dwJobPageOrderFlags : UInt32
+    property dwDrvPageOrderFlags : UInt32
+    property dwJobNumberOfCopies : UInt32
+    property dwDrvNumberOfCopies : UInt32
+    property dwColorOptimization : UInt32
+    property dmPrintQuality : Int16
+    property dmYResolution : Int16
+    def initialize(@dwJobNumberOfPagesPerSide : UInt32, @dwDrvNumberOfPagesPerSide : UInt32, @dwNupBorderFlags : UInt32, @dwJobPageOrderFlags : UInt32, @dwDrvPageOrderFlags : UInt32, @dwJobNumberOfCopies : UInt32, @dwDrvNumberOfCopies : UInt32, @dwColorOptimization : UInt32, @dmPrintQuality : Int16, @dmYResolution : Int16)
+    end
+  end
 
   @[Extern]
-  record ATTRIBUTE_INFO_4,
-    dwJobNumberOfPagesPerSide : UInt32,
-    dwDrvNumberOfPagesPerSide : UInt32,
-    dwNupBorderFlags : UInt32,
-    dwJobPageOrderFlags : UInt32,
-    dwDrvPageOrderFlags : UInt32,
-    dwJobNumberOfCopies : UInt32,
-    dwDrvNumberOfCopies : UInt32,
-    dwColorOptimization : UInt32,
-    dmPrintQuality : Int16,
-    dmYResolution : Int16,
-    dwDuplexFlags : UInt32,
-    dwNupDirection : UInt32,
-    dwBookletFlags : UInt32,
-    dwScalingPercentX : UInt32,
-    dwScalingPercentY : UInt32
+  struct ATTRIBUTE_INFO_4
+    property dwJobNumberOfPagesPerSide : UInt32
+    property dwDrvNumberOfPagesPerSide : UInt32
+    property dwNupBorderFlags : UInt32
+    property dwJobPageOrderFlags : UInt32
+    property dwDrvPageOrderFlags : UInt32
+    property dwJobNumberOfCopies : UInt32
+    property dwDrvNumberOfCopies : UInt32
+    property dwColorOptimization : UInt32
+    property dmPrintQuality : Int16
+    property dmYResolution : Int16
+    property dwDuplexFlags : UInt32
+    property dwNupDirection : UInt32
+    property dwBookletFlags : UInt32
+    property dwScalingPercentX : UInt32
+    property dwScalingPercentY : UInt32
+    def initialize(@dwJobNumberOfPagesPerSide : UInt32, @dwDrvNumberOfPagesPerSide : UInt32, @dwNupBorderFlags : UInt32, @dwJobPageOrderFlags : UInt32, @dwDrvPageOrderFlags : UInt32, @dwJobNumberOfCopies : UInt32, @dwDrvNumberOfCopies : UInt32, @dwColorOptimization : UInt32, @dmPrintQuality : Int16, @dmYResolution : Int16, @dwDuplexFlags : UInt32, @dwNupDirection : UInt32, @dwBookletFlags : UInt32, @dwScalingPercentX : UInt32, @dwScalingPercentY : UInt32)
+    end
+  end
 
   @[Extern]
-  record PSCRIPT5_PRIVATE_DEVMODE,
-    wReserved : UInt16[57],
-    wSize : UInt16
+  struct PSCRIPT5_PRIVATE_DEVMODE
+    property wReserved : UInt16[57]
+    property wSize : UInt16
+    def initialize(@wReserved : UInt16[57], @wSize : UInt16)
+    end
+  end
 
   @[Extern]
-  record UNIDRV_PRIVATE_DEVMODE,
-    wReserved : UInt16[4],
-    wSize : UInt16
+  struct UNIDRV_PRIVATE_DEVMODE
+    property wReserved : UInt16[4]
+    property wSize : UInt16
+    def initialize(@wReserved : UInt16[4], @wSize : UInt16)
+    end
+  end
 
   @[Extern]
-  record PUBLISHERINFO,
-    dwMode : UInt32,
-    wMinoutlinePPEM : UInt16,
-    wMaxbitmapPPEM : UInt16
+  struct PUBLISHERINFO
+    property dwMode : UInt32
+    property wMinoutlinePPEM : UInt16
+    property wMaxbitmapPPEM : UInt16
+    def initialize(@dwMode : UInt32, @wMinoutlinePPEM : UInt16, @wMaxbitmapPPEM : UInt16)
+    end
+  end
 
   @[Extern]
-  record OEMDMPARAM,
-    cbSize : UInt32,
-    pdriverobj : Void*,
-    hPrinter : Win32cr::Foundation::HANDLE,
-    hModule : Win32cr::Foundation::HANDLE,
-    pPublicDMIn : Win32cr::Graphics::Gdi::DEVMODEA*,
-    pPublicDMOut : Win32cr::Graphics::Gdi::DEVMODEA*,
-    pOEMDMIn : Void*,
-    pOEMDMOut : Void*,
-    cbBufSize : UInt32
+  struct OEMDMPARAM
+    property cbSize : UInt32
+    property pdriverobj : Void*
+    property hPrinter : Win32cr::Foundation::HANDLE
+    property hModule : Win32cr::Foundation::HANDLE
+    property pPublicDMIn : Win32cr::Graphics::Gdi::DEVMODEA*
+    property pPublicDMOut : Win32cr::Graphics::Gdi::DEVMODEA*
+    property pOEMDMIn : Void*
+    property pOEMDMOut : Void*
+    property cbBufSize : UInt32
+    def initialize(@cbSize : UInt32, @pdriverobj : Void*, @hPrinter : Win32cr::Foundation::HANDLE, @hModule : Win32cr::Foundation::HANDLE, @pPublicDMIn : Win32cr::Graphics::Gdi::DEVMODEA*, @pPublicDMOut : Win32cr::Graphics::Gdi::DEVMODEA*, @pOEMDMIn : Void*, @pOEMDMOut : Void*, @cbBufSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record OEM_DMEXTRAHEADER,
-    dwSize : UInt32,
-    dwSignature : UInt32,
-    dwVersion : UInt32
+  struct OEM_DMEXTRAHEADER
+    property dwSize : UInt32
+    property dwSignature : UInt32
+    property dwVersion : UInt32
+    def initialize(@dwSize : UInt32, @dwSignature : UInt32, @dwVersion : UInt32)
+    end
+  end
 
   @[Extern]
-  record USERDATA,
-    dwSize : UInt32,
-    dwItemID : LibC::UIntPtrT,
-    pKeyWordName : Win32cr::Foundation::PSTR,
-    dwReserved : UInt32[8]
+  struct USERDATA
+    property dwSize : UInt32
+    property dwItemID : LibC::UIntPtrT
+    property pKeyWordName : Win32cr::Foundation::PSTR
+    property dwReserved : UInt32[8]
+    def initialize(@dwSize : UInt32, @dwItemID : LibC::UIntPtrT, @pKeyWordName : Win32cr::Foundation::PSTR, @dwReserved : UInt32[8])
+    end
+  end
 
   @[Extern]
-  record SIMULATE_CAPS_1,
-    dwLevel : UInt32,
-    dwPageOrderFlags : UInt32,
-    dwNumberOfCopies : UInt32,
-    dwCollate : UInt32,
-    dwNupOptions : UInt32
+  struct SIMULATE_CAPS_1
+    property dwLevel : UInt32
+    property dwPageOrderFlags : UInt32
+    property dwNumberOfCopies : UInt32
+    property dwCollate : UInt32
+    property dwNupOptions : UInt32
+    def initialize(@dwLevel : UInt32, @dwPageOrderFlags : UInt32, @dwNumberOfCopies : UInt32, @dwCollate : UInt32, @dwNupOptions : UInt32)
+    end
+  end
 
   @[Extern]
-  record OEMUIPROCS,
-    drv_get_driver_setting : Win32cr::Graphics::Printing::PFN_DrvGetDriverSetting,
-    drv_update_ui_setting : Win32cr::Graphics::Printing::PFN_DrvUpdateUISetting
+  struct OEMUIPROCS
+    property drv_get_driver_setting : Win32cr::Graphics::Printing::PFN_DrvGetDriverSetting
+    property drv_update_ui_setting : Win32cr::Graphics::Printing::PFN_DrvUpdateUISetting
+    def initialize(@drv_get_driver_setting : Win32cr::Graphics::Printing::PFN_DrvGetDriverSetting, @drv_update_ui_setting : Win32cr::Graphics::Printing::PFN_DrvUpdateUISetting)
+    end
+  end
 
   @[Extern]
-  record OEMUIOBJ,
-    cbSize : UInt32,
-    pOemUIProcs : Win32cr::Graphics::Printing::OEMUIPROCS*
+  struct OEMUIOBJ
+    property cbSize : UInt32
+    property pOemUIProcs : Win32cr::Graphics::Printing::OEMUIPROCS*
+    def initialize(@cbSize : UInt32, @pOemUIProcs : Win32cr::Graphics::Printing::OEMUIPROCS*)
+    end
+  end
 
   @[Extern]
-  record OEMCUIPPARAM,
-    cbSize : UInt32,
-    poemuiobj : Win32cr::Graphics::Printing::OEMUIOBJ*,
-    hPrinter : Win32cr::Foundation::HANDLE,
-    pPrinterName : Win32cr::Foundation::PWSTR,
-    hModule : Win32cr::Foundation::HANDLE,
-    hOEMHeap : Win32cr::Foundation::HANDLE,
-    pPublicDM : Win32cr::Graphics::Gdi::DEVMODEA*,
-    pOEMDM : Void*,
-    dwFlags : UInt32,
-    pDrvOptItems : Win32cr::Graphics::Printing::OPTITEM*,
-    cDrvOptItems : UInt32,
-    pOEMOptItems : Win32cr::Graphics::Printing::OPTITEM*,
-    cOEMOptItems : UInt32,
-    pOEMUserData : Void*,
-    oemcuip_callback : Win32cr::Graphics::Printing::OEMCUIPCALLBACK
+  struct OEMCUIPPARAM
+    property cbSize : UInt32
+    property poemuiobj : Win32cr::Graphics::Printing::OEMUIOBJ*
+    property hPrinter : Win32cr::Foundation::HANDLE
+    property pPrinterName : Win32cr::Foundation::PWSTR
+    property hModule : Win32cr::Foundation::HANDLE
+    property hOEMHeap : Win32cr::Foundation::HANDLE
+    property pPublicDM : Win32cr::Graphics::Gdi::DEVMODEA*
+    property pOEMDM : Void*
+    property dwFlags : UInt32
+    property pDrvOptItems : Win32cr::Graphics::Printing::OPTITEM*
+    property cDrvOptItems : UInt32
+    property pOEMOptItems : Win32cr::Graphics::Printing::OPTITEM*
+    property cOEMOptItems : UInt32
+    property pOEMUserData : Void*
+    property oemcuip_callback : Win32cr::Graphics::Printing::OEMCUIPCALLBACK
+    def initialize(@cbSize : UInt32, @poemuiobj : Win32cr::Graphics::Printing::OEMUIOBJ*, @hPrinter : Win32cr::Foundation::HANDLE, @pPrinterName : Win32cr::Foundation::PWSTR, @hModule : Win32cr::Foundation::HANDLE, @hOEMHeap : Win32cr::Foundation::HANDLE, @pPublicDM : Win32cr::Graphics::Gdi::DEVMODEA*, @pOEMDM : Void*, @dwFlags : UInt32, @pDrvOptItems : Win32cr::Graphics::Printing::OPTITEM*, @cDrvOptItems : UInt32, @pOEMOptItems : Win32cr::Graphics::Printing::OPTITEM*, @cOEMOptItems : UInt32, @pOEMUserData : Void*, @oemcuip_callback : Win32cr::Graphics::Printing::OEMCUIPCALLBACK)
+    end
+  end
 
   @[Extern]
-  record OEMUIPSPARAM,
-    cbSize : UInt32,
-    poemuiobj : Win32cr::Graphics::Printing::OEMUIOBJ*,
-    hPrinter : Win32cr::Foundation::HANDLE,
-    pPrinterName : Win32cr::Foundation::PWSTR,
-    hModule : Win32cr::Foundation::HANDLE,
-    hOEMHeap : Win32cr::Foundation::HANDLE,
-    pPublicDM : Win32cr::Graphics::Gdi::DEVMODEA*,
-    pOEMDM : Void*,
-    pOEMUserData : Void*,
-    dwFlags : UInt32,
-    pOemEntry : Void*
+  struct OEMUIPSPARAM
+    property cbSize : UInt32
+    property poemuiobj : Win32cr::Graphics::Printing::OEMUIOBJ*
+    property hPrinter : Win32cr::Foundation::HANDLE
+    property pPrinterName : Win32cr::Foundation::PWSTR
+    property hModule : Win32cr::Foundation::HANDLE
+    property hOEMHeap : Win32cr::Foundation::HANDLE
+    property pPublicDM : Win32cr::Graphics::Gdi::DEVMODEA*
+    property pOEMDM : Void*
+    property pOEMUserData : Void*
+    property dwFlags : UInt32
+    property pOemEntry : Void*
+    def initialize(@cbSize : UInt32, @poemuiobj : Win32cr::Graphics::Printing::OEMUIOBJ*, @hPrinter : Win32cr::Foundation::HANDLE, @pPrinterName : Win32cr::Foundation::PWSTR, @hModule : Win32cr::Foundation::HANDLE, @hOEMHeap : Win32cr::Foundation::HANDLE, @pPublicDM : Win32cr::Graphics::Gdi::DEVMODEA*, @pOEMDM : Void*, @pOEMUserData : Void*, @dwFlags : UInt32, @pOemEntry : Void*)
+    end
+  end
 
   @[Extern]
-  record CUSTOMSIZEPARAM,
-    dwOrder : Int32,
-    lMinVal : Int32,
-    lMaxVal : Int32
+  struct CUSTOMSIZEPARAM
+    property dwOrder : Int32
+    property lMinVal : Int32
+    property lMaxVal : Int32
+    def initialize(@dwOrder : Int32, @lMinVal : Int32, @lMaxVal : Int32)
+    end
+  end
 
   @[Extern]
-  record PRINT_FEATURE_OPTION,
-    pszFeature : Win32cr::Foundation::PSTR,
-    pszOption : Win32cr::Foundation::PSTR
+  struct PRINT_FEATURE_OPTION
+    property pszFeature : Win32cr::Foundation::PSTR
+    property pszOption : Win32cr::Foundation::PSTR
+    def initialize(@pszFeature : Win32cr::Foundation::PSTR, @pszOption : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record UNIFM_HDR,
-    dwSize : UInt32,
-    dwVersion : UInt32,
-    ulDefaultCodepage : UInt32,
-    lGlyphSetDataRCID : Int32,
-    loUnidrvInfo : UInt32,
-    loIFIMetrics : UInt32,
-    loExtTextMetric : UInt32,
-    loWidthTable : UInt32,
-    loKernPair : UInt32,
-    dwReserved : UInt32[2]
+  struct UNIFM_HDR
+    property dwSize : UInt32
+    property dwVersion : UInt32
+    property ulDefaultCodepage : UInt32
+    property lGlyphSetDataRCID : Int32
+    property loUnidrvInfo : UInt32
+    property loIFIMetrics : UInt32
+    property loExtTextMetric : UInt32
+    property loWidthTable : UInt32
+    property loKernPair : UInt32
+    property dwReserved : UInt32[2]
+    def initialize(@dwSize : UInt32, @dwVersion : UInt32, @ulDefaultCodepage : UInt32, @lGlyphSetDataRCID : Int32, @loUnidrvInfo : UInt32, @loIFIMetrics : UInt32, @loExtTextMetric : UInt32, @loWidthTable : UInt32, @loKernPair : UInt32, @dwReserved : UInt32[2])
+    end
+  end
 
   @[Extern]
-  record INVOC,
-    dwCount : UInt32,
-    loOffset : UInt32
+  struct INVOC
+    property dwCount : UInt32
+    property loOffset : UInt32
+    def initialize(@dwCount : UInt32, @loOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record UNIDRVINFO,
-    dwSize : UInt32,
-    flGenFlags : UInt32,
-    wType : UInt16,
-    fCaps : UInt16,
-    wXRes : UInt16,
-    wYRes : UInt16,
-    sYAdjust : Int16,
-    sYMoved : Int16,
-    wPrivateData : UInt16,
-    sShift : Int16,
-    select_font : Win32cr::Graphics::Printing::INVOC,
-    un_select_font : Win32cr::Graphics::Printing::INVOC,
-    wReserved : UInt16[4]
+  struct UNIDRVINFO
+    property dwSize : UInt32
+    property flGenFlags : UInt32
+    property wType : UInt16
+    property fCaps : UInt16
+    property wXRes : UInt16
+    property wYRes : UInt16
+    property sYAdjust : Int16
+    property sYMoved : Int16
+    property wPrivateData : UInt16
+    property sShift : Int16
+    property select_font : Win32cr::Graphics::Printing::INVOC
+    property un_select_font : Win32cr::Graphics::Printing::INVOC
+    property wReserved : UInt16[4]
+    def initialize(@dwSize : UInt32, @flGenFlags : UInt32, @wType : UInt16, @fCaps : UInt16, @wXRes : UInt16, @wYRes : UInt16, @sYAdjust : Int16, @sYMoved : Int16, @wPrivateData : UInt16, @sShift : Int16, @select_font : Win32cr::Graphics::Printing::INVOC, @un_select_font : Win32cr::Graphics::Printing::INVOC, @wReserved : UInt16[4])
+    end
+  end
 
   @[Extern]
-  record PRINTIFI32,
-    cjThis : UInt32,
-    cjIfiExtra : UInt32,
-    dpwszFamilyName : Int32,
-    dpwszStyleName : Int32,
-    dpwszFaceName : Int32,
-    dpwszUniqueName : Int32,
-    dpFontSim : Int32,
-    lEmbedId : Int32,
-    lItalicAngle : Int32,
-    lCharBias : Int32,
-    dpCharSets : Int32,
-    jWinCharSet : UInt8,
-    jWinPitchAndFamily : UInt8,
-    usWinWeight : UInt16,
-    flInfo : UInt32,
-    fsSelection : UInt16,
-    fsType : UInt16,
-    fwdUnitsPerEm : Int16,
-    fwdLowestPPEm : Int16,
-    fwdWinAscender : Int16,
-    fwdWinDescender : Int16,
-    fwdMacAscender : Int16,
-    fwdMacDescender : Int16,
-    fwdMacLineGap : Int16,
-    fwdTypoAscender : Int16,
-    fwdTypoDescender : Int16,
-    fwdTypoLineGap : Int16,
-    fwdAveCharWidth : Int16,
-    fwdMaxCharInc : Int16,
-    fwdCapHeight : Int16,
-    fwdXHeight : Int16,
-    fwdSubscriptXSize : Int16,
-    fwdSubscriptYSize : Int16,
-    fwdSubscriptXOffset : Int16,
-    fwdSubscriptYOffset : Int16,
-    fwdSuperscriptXSize : Int16,
-    fwdSuperscriptYSize : Int16,
-    fwdSuperscriptXOffset : Int16,
-    fwdSuperscriptYOffset : Int16,
-    fwdUnderscoreSize : Int16,
-    fwdUnderscorePosition : Int16,
-    fwdStrikeoutSize : Int16,
-    fwdStrikeoutPosition : Int16,
-    chFirstChar : UInt8,
-    chLastChar : UInt8,
-    chDefaultChar : UInt8,
-    chBreakChar : UInt8,
-    wcFirstChar : UInt16,
-    wcLastChar : UInt16,
-    wcDefaultChar : UInt16,
-    wcBreakChar : UInt16,
-    ptlBaseline : Win32cr::Foundation::POINTL,
-    ptlAspect : Win32cr::Foundation::POINTL,
-    ptlCaret : Win32cr::Foundation::POINTL,
-    rclFontBox : Win32cr::Foundation::RECTL,
-    achVendId : UInt8[4],
-    cKerningPairs : UInt32,
-    ulPanoseCulture : UInt32,
-    panose : Win32cr::Graphics::Gdi::PANOSE
+  struct PRINTIFI32
+    property cjThis : UInt32
+    property cjIfiExtra : UInt32
+    property dpwszFamilyName : Int32
+    property dpwszStyleName : Int32
+    property dpwszFaceName : Int32
+    property dpwszUniqueName : Int32
+    property dpFontSim : Int32
+    property lEmbedId : Int32
+    property lItalicAngle : Int32
+    property lCharBias : Int32
+    property dpCharSets : Int32
+    property jWinCharSet : UInt8
+    property jWinPitchAndFamily : UInt8
+    property usWinWeight : UInt16
+    property flInfo : UInt32
+    property fsSelection : UInt16
+    property fsType : UInt16
+    property fwdUnitsPerEm : Int16
+    property fwdLowestPPEm : Int16
+    property fwdWinAscender : Int16
+    property fwdWinDescender : Int16
+    property fwdMacAscender : Int16
+    property fwdMacDescender : Int16
+    property fwdMacLineGap : Int16
+    property fwdTypoAscender : Int16
+    property fwdTypoDescender : Int16
+    property fwdTypoLineGap : Int16
+    property fwdAveCharWidth : Int16
+    property fwdMaxCharInc : Int16
+    property fwdCapHeight : Int16
+    property fwdXHeight : Int16
+    property fwdSubscriptXSize : Int16
+    property fwdSubscriptYSize : Int16
+    property fwdSubscriptXOffset : Int16
+    property fwdSubscriptYOffset : Int16
+    property fwdSuperscriptXSize : Int16
+    property fwdSuperscriptYSize : Int16
+    property fwdSuperscriptXOffset : Int16
+    property fwdSuperscriptYOffset : Int16
+    property fwdUnderscoreSize : Int16
+    property fwdUnderscorePosition : Int16
+    property fwdStrikeoutSize : Int16
+    property fwdStrikeoutPosition : Int16
+    property chFirstChar : UInt8
+    property chLastChar : UInt8
+    property chDefaultChar : UInt8
+    property chBreakChar : UInt8
+    property wcFirstChar : UInt16
+    property wcLastChar : UInt16
+    property wcDefaultChar : UInt16
+    property wcBreakChar : UInt16
+    property ptlBaseline : Win32cr::Foundation::POINTL
+    property ptlAspect : Win32cr::Foundation::POINTL
+    property ptlCaret : Win32cr::Foundation::POINTL
+    property rclFontBox : Win32cr::Foundation::RECTL
+    property achVendId : UInt8[4]
+    property cKerningPairs : UInt32
+    property ulPanoseCulture : UInt32
+    property panose : Win32cr::Graphics::Gdi::PANOSE
+    def initialize(@cjThis : UInt32, @cjIfiExtra : UInt32, @dpwszFamilyName : Int32, @dpwszStyleName : Int32, @dpwszFaceName : Int32, @dpwszUniqueName : Int32, @dpFontSim : Int32, @lEmbedId : Int32, @lItalicAngle : Int32, @lCharBias : Int32, @dpCharSets : Int32, @jWinCharSet : UInt8, @jWinPitchAndFamily : UInt8, @usWinWeight : UInt16, @flInfo : UInt32, @fsSelection : UInt16, @fsType : UInt16, @fwdUnitsPerEm : Int16, @fwdLowestPPEm : Int16, @fwdWinAscender : Int16, @fwdWinDescender : Int16, @fwdMacAscender : Int16, @fwdMacDescender : Int16, @fwdMacLineGap : Int16, @fwdTypoAscender : Int16, @fwdTypoDescender : Int16, @fwdTypoLineGap : Int16, @fwdAveCharWidth : Int16, @fwdMaxCharInc : Int16, @fwdCapHeight : Int16, @fwdXHeight : Int16, @fwdSubscriptXSize : Int16, @fwdSubscriptYSize : Int16, @fwdSubscriptXOffset : Int16, @fwdSubscriptYOffset : Int16, @fwdSuperscriptXSize : Int16, @fwdSuperscriptYSize : Int16, @fwdSuperscriptXOffset : Int16, @fwdSuperscriptYOffset : Int16, @fwdUnderscoreSize : Int16, @fwdUnderscorePosition : Int16, @fwdStrikeoutSize : Int16, @fwdStrikeoutPosition : Int16, @chFirstChar : UInt8, @chLastChar : UInt8, @chDefaultChar : UInt8, @chBreakChar : UInt8, @wcFirstChar : UInt16, @wcLastChar : UInt16, @wcDefaultChar : UInt16, @wcBreakChar : UInt16, @ptlBaseline : Win32cr::Foundation::POINTL, @ptlAspect : Win32cr::Foundation::POINTL, @ptlCaret : Win32cr::Foundation::POINTL, @rclFontBox : Win32cr::Foundation::RECTL, @achVendId : UInt8[4], @cKerningPairs : UInt32, @ulPanoseCulture : UInt32, @panose : Win32cr::Graphics::Gdi::PANOSE)
+    end
+  end
 
   @[Extern]
-  record EXTTEXTMETRIC,
-    emSize : Int16,
-    emPointSize : Int16,
-    emOrientation : Int16,
-    emMasterHeight : Int16,
-    emMinScale : Int16,
-    emMaxScale : Int16,
-    emMasterUnits : Int16,
-    emCapHeight : Int16,
-    emXHeight : Int16,
-    emLowerCaseAscent : Int16,
-    emLowerCaseDescent : Int16,
-    emSlant : Int16,
-    emSuperScript : Int16,
-    emSubScript : Int16,
-    emSuperScriptSize : Int16,
-    emSubScriptSize : Int16,
-    emUnderlineOffset : Int16,
-    emUnderlineWidth : Int16,
-    emDoubleUpperUnderlineOffset : Int16,
-    emDoubleLowerUnderlineOffset : Int16,
-    emDoubleUpperUnderlineWidth : Int16,
-    emDoubleLowerUnderlineWidth : Int16,
-    emStrikeOutOffset : Int16,
-    emStrikeOutWidth : Int16,
-    emKernPairs : UInt16,
-    emKernTracks : UInt16
+  struct EXTTEXTMETRIC
+    property emSize : Int16
+    property emPointSize : Int16
+    property emOrientation : Int16
+    property emMasterHeight : Int16
+    property emMinScale : Int16
+    property emMaxScale : Int16
+    property emMasterUnits : Int16
+    property emCapHeight : Int16
+    property emXHeight : Int16
+    property emLowerCaseAscent : Int16
+    property emLowerCaseDescent : Int16
+    property emSlant : Int16
+    property emSuperScript : Int16
+    property emSubScript : Int16
+    property emSuperScriptSize : Int16
+    property emSubScriptSize : Int16
+    property emUnderlineOffset : Int16
+    property emUnderlineWidth : Int16
+    property emDoubleUpperUnderlineOffset : Int16
+    property emDoubleLowerUnderlineOffset : Int16
+    property emDoubleUpperUnderlineWidth : Int16
+    property emDoubleLowerUnderlineWidth : Int16
+    property emStrikeOutOffset : Int16
+    property emStrikeOutWidth : Int16
+    property emKernPairs : UInt16
+    property emKernTracks : UInt16
+    def initialize(@emSize : Int16, @emPointSize : Int16, @emOrientation : Int16, @emMasterHeight : Int16, @emMinScale : Int16, @emMaxScale : Int16, @emMasterUnits : Int16, @emCapHeight : Int16, @emXHeight : Int16, @emLowerCaseAscent : Int16, @emLowerCaseDescent : Int16, @emSlant : Int16, @emSuperScript : Int16, @emSubScript : Int16, @emSuperScriptSize : Int16, @emSubScriptSize : Int16, @emUnderlineOffset : Int16, @emUnderlineWidth : Int16, @emDoubleUpperUnderlineOffset : Int16, @emDoubleLowerUnderlineOffset : Int16, @emDoubleUpperUnderlineWidth : Int16, @emDoubleLowerUnderlineWidth : Int16, @emStrikeOutOffset : Int16, @emStrikeOutWidth : Int16, @emKernPairs : UInt16, @emKernTracks : UInt16)
+    end
+  end
 
   @[Extern]
-  record WIDTHRUN,
-    wStartGlyph : UInt16,
-    wGlyphCount : UInt16,
-    loCharWidthOffset : UInt32
+  struct WIDTHRUN
+    property wStartGlyph : UInt16
+    property wGlyphCount : UInt16
+    property loCharWidthOffset : UInt32
+    def initialize(@wStartGlyph : UInt16, @wGlyphCount : UInt16, @loCharWidthOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record WIDTHTABLE,
-    dwSize : UInt32,
-    dwRunNum : UInt32,
-    width_run : Win32cr::Graphics::Printing::WIDTHRUN*
+  struct WIDTHTABLE
+    property dwSize : UInt32
+    property dwRunNum : UInt32
+    property width_run : Win32cr::Graphics::Printing::WIDTHRUN*
+    def initialize(@dwSize : UInt32, @dwRunNum : UInt32, @width_run : Win32cr::Graphics::Printing::WIDTHRUN*)
+    end
+  end
 
   @[Extern]
-  record KERNDATA,
-    dwSize : UInt32,
-    dwKernPairNum : UInt32,
-    kern_pair : Win32cr::Devices::Display::FD_KERNINGPAIR*
+  struct KERNDATA
+    property dwSize : UInt32
+    property dwKernPairNum : UInt32
+    property kern_pair : Win32cr::Devices::Display::FD_KERNINGPAIR*
+    def initialize(@dwSize : UInt32, @dwKernPairNum : UInt32, @kern_pair : Win32cr::Devices::Display::FD_KERNINGPAIR*)
+    end
+  end
 
   @[Extern]
-  record UNI_GLYPHSETDATA,
-    dwSize : UInt32,
-    dwVersion : UInt32,
-    dwFlags : UInt32,
-    lPredefinedID : Int32,
-    dwGlyphCount : UInt32,
-    dwRunCount : UInt32,
-    loRunOffset : UInt32,
-    dwCodePageCount : UInt32,
-    loCodePageOffset : UInt32,
-    loMapTableOffset : UInt32,
-    dwReserved : UInt32[2]
+  struct UNI_GLYPHSETDATA
+    property dwSize : UInt32
+    property dwVersion : UInt32
+    property dwFlags : UInt32
+    property lPredefinedID : Int32
+    property dwGlyphCount : UInt32
+    property dwRunCount : UInt32
+    property loRunOffset : UInt32
+    property dwCodePageCount : UInt32
+    property loCodePageOffset : UInt32
+    property loMapTableOffset : UInt32
+    property dwReserved : UInt32[2]
+    def initialize(@dwSize : UInt32, @dwVersion : UInt32, @dwFlags : UInt32, @lPredefinedID : Int32, @dwGlyphCount : UInt32, @dwRunCount : UInt32, @loRunOffset : UInt32, @dwCodePageCount : UInt32, @loCodePageOffset : UInt32, @loMapTableOffset : UInt32, @dwReserved : UInt32[2])
+    end
+  end
 
   @[Extern]
-  record UNI_CODEPAGEINFO,
-    dwCodePage : UInt32,
-    select_symbol_set : Win32cr::Graphics::Printing::INVOC,
-    un_select_symbol_set : Win32cr::Graphics::Printing::INVOC
+  struct UNI_CODEPAGEINFO
+    property dwCodePage : UInt32
+    property select_symbol_set : Win32cr::Graphics::Printing::INVOC
+    property un_select_symbol_set : Win32cr::Graphics::Printing::INVOC
+    def initialize(@dwCodePage : UInt32, @select_symbol_set : Win32cr::Graphics::Printing::INVOC, @un_select_symbol_set : Win32cr::Graphics::Printing::INVOC)
+    end
+  end
 
   @[Extern]
-  record GLYPHRUN,
-    wcLow : UInt16,
-    wGlyphCount : UInt16
+  struct GLYPHRUN
+    property wcLow : UInt16
+    property wGlyphCount : UInt16
+    def initialize(@wcLow : UInt16, @wGlyphCount : UInt16)
+    end
+  end
 
   @[Extern]
-  record TRANSDATA,
-    ubCodePageID : UInt8,
-    ubType : UInt8,
-    uCode : Ucode_e__union_ do
+  struct TRANSDATA
+    property ubCodePageID : UInt8
+    property ubType : UInt8
+    property uCode : Ucode_e__union_
 
     # Nested Type Ucode_e__union_
     @[Extern(union: true)]
-    record Ucode_e__union_,
-      sCode : Int16,
-      ubCode : UInt8,
-      ubPairs : UInt8[2]
+    struct Ucode_e__union_
+    property sCode : Int16
+    property ubCode : UInt8
+    property ubPairs : UInt8[2]
+    def initialize(@sCode : Int16, @ubCode : UInt8, @ubPairs : UInt8[2])
+    end
+    end
 
+    def initialize(@ubCodePageID : UInt8, @ubType : UInt8, @uCode : Ucode_e__union_)
+    end
   end
 
   @[Extern]
-  record MAPTABLE,
-    dwSize : UInt32,
-    dwGlyphNum : UInt32,
-    trans : Win32cr::Graphics::Printing::TRANSDATA*
+  struct MAPTABLE
+    property dwSize : UInt32
+    property dwGlyphNum : UInt32
+    property trans : Win32cr::Graphics::Printing::TRANSDATA*
+    def initialize(@dwSize : UInt32, @dwGlyphNum : UInt32, @trans : Win32cr::Graphics::Printing::TRANSDATA*)
+    end
+  end
 
   @[Extern]
-  record UFF_FILEHEADER,
-    dwSignature : UInt32,
-    dwVersion : UInt32,
-    dwSize : UInt32,
-    nFonts : UInt32,
-    nGlyphSets : UInt32,
-    nVarData : UInt32,
-    offFontDir : UInt32,
-    dwFlags : UInt32,
-    dwReserved : UInt32[4]
+  struct UFF_FILEHEADER
+    property dwSignature : UInt32
+    property dwVersion : UInt32
+    property dwSize : UInt32
+    property nFonts : UInt32
+    property nGlyphSets : UInt32
+    property nVarData : UInt32
+    property offFontDir : UInt32
+    property dwFlags : UInt32
+    property dwReserved : UInt32[4]
+    def initialize(@dwSignature : UInt32, @dwVersion : UInt32, @dwSize : UInt32, @nFonts : UInt32, @nGlyphSets : UInt32, @nVarData : UInt32, @offFontDir : UInt32, @dwFlags : UInt32, @dwReserved : UInt32[4])
+    end
+  end
 
   @[Extern]
-  record UFF_FONTDIRECTORY,
-    dwSignature : UInt32,
-    wSize : UInt16,
-    wFontID : UInt16,
-    sGlyphID : Int16,
-    wFlags : UInt16,
-    dwInstallerSig : UInt32,
-    offFontName : UInt32,
-    offCartridgeName : UInt32,
-    offFontData : UInt32,
-    offGlyphData : UInt32,
-    offVarData : UInt32
+  struct UFF_FONTDIRECTORY
+    property dwSignature : UInt32
+    property wSize : UInt16
+    property wFontID : UInt16
+    property sGlyphID : Int16
+    property wFlags : UInt16
+    property dwInstallerSig : UInt32
+    property offFontName : UInt32
+    property offCartridgeName : UInt32
+    property offFontData : UInt32
+    property offGlyphData : UInt32
+    property offVarData : UInt32
+    def initialize(@dwSignature : UInt32, @wSize : UInt16, @wFontID : UInt16, @sGlyphID : Int16, @wFlags : UInt16, @dwInstallerSig : UInt32, @offFontName : UInt32, @offCartridgeName : UInt32, @offFontData : UInt32, @offGlyphData : UInt32, @offVarData : UInt32)
+    end
+  end
 
   @[Extern]
-  record DATA_HEADER,
-    dwSignature : UInt32,
-    wSize : UInt16,
-    wDataID : UInt16,
-    dwDataSize : UInt32,
-    dwReserved : UInt32
+  struct DATA_HEADER
+    property dwSignature : UInt32
+    property wSize : UInt16
+    property wDataID : UInt16
+    property dwDataSize : UInt32
+    property dwReserved : UInt32
+    def initialize(@dwSignature : UInt32, @wSize : UInt16, @wDataID : UInt16, @dwDataSize : UInt32, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record OEMFONTINSTPARAM,
-    cbSize : UInt32,
-    hPrinter : Win32cr::Foundation::HANDLE,
-    hModule : Win32cr::Foundation::HANDLE,
-    hHeap : Win32cr::Foundation::HANDLE,
-    dwFlags : UInt32,
-    pFontInstallerName : Win32cr::Foundation::PWSTR
+  struct OEMFONTINSTPARAM
+    property cbSize : UInt32
+    property hPrinter : Win32cr::Foundation::HANDLE
+    property hModule : Win32cr::Foundation::HANDLE
+    property hHeap : Win32cr::Foundation::HANDLE
+    property dwFlags : UInt32
+    property pFontInstallerName : Win32cr::Foundation::PWSTR
+    def initialize(@cbSize : UInt32, @hPrinter : Win32cr::Foundation::HANDLE, @hModule : Win32cr::Foundation::HANDLE, @hHeap : Win32cr::Foundation::HANDLE, @dwFlags : UInt32, @pFontInstallerName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record PORT_DATA_1,
-    sztPortName : UInt16[64],
-    dwVersion : UInt32,
-    dwProtocol : UInt32,
-    cbSize : UInt32,
-    dwReserved : UInt32,
-    sztHostAddress : UInt16[49],
-    sztSNMPCommunity : UInt16[33],
-    dwDoubleSpool : UInt32,
-    sztQueue : UInt16[33],
-    sztIPAddress : UInt16[16],
-    reserved : UInt8[540],
-    dwPortNumber : UInt32,
-    dwSNMPEnabled : UInt32,
-    dwSNMPDevIndex : UInt32
+  struct PORT_DATA_1
+    property sztPortName : UInt16[64]
+    property dwVersion : UInt32
+    property dwProtocol : UInt32
+    property cbSize : UInt32
+    property dwReserved : UInt32
+    property sztHostAddress : UInt16[49]
+    property sztSNMPCommunity : UInt16[33]
+    property dwDoubleSpool : UInt32
+    property sztQueue : UInt16[33]
+    property sztIPAddress : UInt16[16]
+    property reserved : UInt8[540]
+    property dwPortNumber : UInt32
+    property dwSNMPEnabled : UInt32
+    property dwSNMPDevIndex : UInt32
+    def initialize(@sztPortName : UInt16[64], @dwVersion : UInt32, @dwProtocol : UInt32, @cbSize : UInt32, @dwReserved : UInt32, @sztHostAddress : UInt16[49], @sztSNMPCommunity : UInt16[33], @dwDoubleSpool : UInt32, @sztQueue : UInt16[33], @sztIPAddress : UInt16[16], @reserved : UInt8[540], @dwPortNumber : UInt32, @dwSNMPEnabled : UInt32, @dwSNMPDevIndex : UInt32)
+    end
+  end
 
   @[Extern]
-  record PORT_DATA_2,
-    sztPortName : UInt16[64],
-    dwVersion : UInt32,
-    dwProtocol : UInt32,
-    cbSize : UInt32,
-    dwReserved : UInt32,
-    sztHostAddress : UInt16[128],
-    sztSNMPCommunity : UInt16[33],
-    dwDoubleSpool : UInt32,
-    sztQueue : UInt16[33],
-    reserved : UInt8[514],
-    dwPortNumber : UInt32,
-    dwSNMPEnabled : UInt32,
-    dwSNMPDevIndex : UInt32,
-    dwPortMonitorMibIndex : UInt32
+  struct PORT_DATA_2
+    property sztPortName : UInt16[64]
+    property dwVersion : UInt32
+    property dwProtocol : UInt32
+    property cbSize : UInt32
+    property dwReserved : UInt32
+    property sztHostAddress : UInt16[128]
+    property sztSNMPCommunity : UInt16[33]
+    property dwDoubleSpool : UInt32
+    property sztQueue : UInt16[33]
+    property reserved : UInt8[514]
+    property dwPortNumber : UInt32
+    property dwSNMPEnabled : UInt32
+    property dwSNMPDevIndex : UInt32
+    property dwPortMonitorMibIndex : UInt32
+    def initialize(@sztPortName : UInt16[64], @dwVersion : UInt32, @dwProtocol : UInt32, @cbSize : UInt32, @dwReserved : UInt32, @sztHostAddress : UInt16[128], @sztSNMPCommunity : UInt16[33], @dwDoubleSpool : UInt32, @sztQueue : UInt16[33], @reserved : UInt8[514], @dwPortNumber : UInt32, @dwSNMPEnabled : UInt32, @dwSNMPDevIndex : UInt32, @dwPortMonitorMibIndex : UInt32)
+    end
+  end
 
   @[Extern]
-  record PORT_DATA_LIST_1,
-    dwVersion : UInt32,
-    cPortData : UInt32,
-    pPortData : Win32cr::Graphics::Printing::PORT_DATA_2*
+  struct PORT_DATA_LIST_1
+    property dwVersion : UInt32
+    property cPortData : UInt32
+    property pPortData : Win32cr::Graphics::Printing::PORT_DATA_2*
+    def initialize(@dwVersion : UInt32, @cPortData : UInt32, @pPortData : Win32cr::Graphics::Printing::PORT_DATA_2*)
+    end
+  end
 
   @[Extern]
-  record DELETE_PORT_DATA_1,
-    psztPortName : UInt16[64],
-    reserved : UInt8[98],
-    dwVersion : UInt32,
-    dwReserved : UInt32
+  struct DELETE_PORT_DATA_1
+    property psztPortName : UInt16[64]
+    property reserved : UInt8[98]
+    property dwVersion : UInt32
+    property dwReserved : UInt32
+    def initialize(@psztPortName : UInt16[64], @reserved : UInt8[98], @dwVersion : UInt32, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record CONFIG_INFO_DATA_1,
-    reserved : UInt8[128],
-    dwVersion : UInt32
+  struct CONFIG_INFO_DATA_1
+    property reserved : UInt8[128]
+    property dwVersion : UInt32
+    def initialize(@reserved : UInt8[128], @dwVersion : UInt32)
+    end
+  end
 
   @[Extern]
-  record BranchOfficeJobDataPrinted,
-    status : UInt32,
-    pDocumentName : Win32cr::Foundation::PWSTR,
-    pUserName : Win32cr::Foundation::PWSTR,
-    pMachineName : Win32cr::Foundation::PWSTR,
-    pPrinterName : Win32cr::Foundation::PWSTR,
-    pPortName : Win32cr::Foundation::PWSTR,
-    size : Int64,
-    total_pages : UInt32
+  struct BranchOfficeJobDataPrinted
+    property status : UInt32
+    property pDocumentName : Win32cr::Foundation::PWSTR
+    property pUserName : Win32cr::Foundation::PWSTR
+    property pMachineName : Win32cr::Foundation::PWSTR
+    property pPrinterName : Win32cr::Foundation::PWSTR
+    property pPortName : Win32cr::Foundation::PWSTR
+    property size : Int64
+    property total_pages : UInt32
+    def initialize(@status : UInt32, @pDocumentName : Win32cr::Foundation::PWSTR, @pUserName : Win32cr::Foundation::PWSTR, @pMachineName : Win32cr::Foundation::PWSTR, @pPrinterName : Win32cr::Foundation::PWSTR, @pPortName : Win32cr::Foundation::PWSTR, @size : Int64, @total_pages : UInt32)
+    end
+  end
 
   @[Extern]
-  record BranchOfficeJobDataError,
-    last_error : UInt32,
-    pDocumentName : Win32cr::Foundation::PWSTR,
-    pUserName : Win32cr::Foundation::PWSTR,
-    pPrinterName : Win32cr::Foundation::PWSTR,
-    pDataType : Win32cr::Foundation::PWSTR,
-    total_size : Int64,
-    printed_size : Int64,
-    total_pages : UInt32,
-    printed_pages : UInt32,
-    pMachineName : Win32cr::Foundation::PWSTR,
-    pJobError : Win32cr::Foundation::PWSTR,
-    pErrorDescription : Win32cr::Foundation::PWSTR
+  struct BranchOfficeJobDataError
+    property last_error : UInt32
+    property pDocumentName : Win32cr::Foundation::PWSTR
+    property pUserName : Win32cr::Foundation::PWSTR
+    property pPrinterName : Win32cr::Foundation::PWSTR
+    property pDataType : Win32cr::Foundation::PWSTR
+    property total_size : Int64
+    property printed_size : Int64
+    property total_pages : UInt32
+    property printed_pages : UInt32
+    property pMachineName : Win32cr::Foundation::PWSTR
+    property pJobError : Win32cr::Foundation::PWSTR
+    property pErrorDescription : Win32cr::Foundation::PWSTR
+    def initialize(@last_error : UInt32, @pDocumentName : Win32cr::Foundation::PWSTR, @pUserName : Win32cr::Foundation::PWSTR, @pPrinterName : Win32cr::Foundation::PWSTR, @pDataType : Win32cr::Foundation::PWSTR, @total_size : Int64, @printed_size : Int64, @total_pages : UInt32, @printed_pages : UInt32, @pMachineName : Win32cr::Foundation::PWSTR, @pJobError : Win32cr::Foundation::PWSTR, @pErrorDescription : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record BranchOfficeJobDataRendered,
-    size : Int64,
-    icm_method : UInt32,
-    color : Int16,
-    print_quality : Int16,
-    y_resolution : Int16,
-    copies : Int16,
-    tt_option : Int16
+  struct BranchOfficeJobDataRendered
+    property size : Int64
+    property icm_method : UInt32
+    property color : Int16
+    property print_quality : Int16
+    property y_resolution : Int16
+    property copies : Int16
+    property tt_option : Int16
+    def initialize(@size : Int64, @icm_method : UInt32, @color : Int16, @print_quality : Int16, @y_resolution : Int16, @copies : Int16, @tt_option : Int16)
+    end
+  end
 
   @[Extern]
-  record BranchOfficeJobDataPipelineFailed,
-    pDocumentName : Win32cr::Foundation::PWSTR,
-    pPrinterName : Win32cr::Foundation::PWSTR,
-    pExtraErrorInfo : Win32cr::Foundation::PWSTR
+  struct BranchOfficeJobDataPipelineFailed
+    property pDocumentName : Win32cr::Foundation::PWSTR
+    property pPrinterName : Win32cr::Foundation::PWSTR
+    property pExtraErrorInfo : Win32cr::Foundation::PWSTR
+    def initialize(@pDocumentName : Win32cr::Foundation::PWSTR, @pPrinterName : Win32cr::Foundation::PWSTR, @pExtraErrorInfo : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record BranchOfficeLogOfflineFileFull,
-    pMachineName : Win32cr::Foundation::PWSTR
+  struct BranchOfficeLogOfflineFileFull
+    property pMachineName : Win32cr::Foundation::PWSTR
+    def initialize(@pMachineName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record BranchOfficeJobData,
-    eEventType : Win32cr::Graphics::Printing::EBranchOfficeJobEventType,
-    job_id : UInt32,
-    job_info : JobInfo_e__Union_ do
+  struct BranchOfficeJobData
+    property eEventType : Win32cr::Graphics::Printing::EBranchOfficeJobEventType
+    property job_id : UInt32
+    property job_info : JobInfo_e__Union_
 
     # Nested Type JobInfo_e__Union_
     @[Extern(union: true)]
-    record JobInfo_e__Union_,
-      log_job_printed : Win32cr::Graphics::Printing::BranchOfficeJobDataPrinted,
-      log_job_rendered : Win32cr::Graphics::Printing::BranchOfficeJobDataRendered,
-      log_job_error : Win32cr::Graphics::Printing::BranchOfficeJobDataError,
-      log_pipeline_failed : Win32cr::Graphics::Printing::BranchOfficeJobDataPipelineFailed,
-      log_offline_file_full : Win32cr::Graphics::Printing::BranchOfficeLogOfflineFileFull
+    struct JobInfo_e__Union_
+    property log_job_printed : Win32cr::Graphics::Printing::BranchOfficeJobDataPrinted
+    property log_job_rendered : Win32cr::Graphics::Printing::BranchOfficeJobDataRendered
+    property log_job_error : Win32cr::Graphics::Printing::BranchOfficeJobDataError
+    property log_pipeline_failed : Win32cr::Graphics::Printing::BranchOfficeJobDataPipelineFailed
+    property log_offline_file_full : Win32cr::Graphics::Printing::BranchOfficeLogOfflineFileFull
+    def initialize(@log_job_printed : Win32cr::Graphics::Printing::BranchOfficeJobDataPrinted, @log_job_rendered : Win32cr::Graphics::Printing::BranchOfficeJobDataRendered, @log_job_error : Win32cr::Graphics::Printing::BranchOfficeJobDataError, @log_pipeline_failed : Win32cr::Graphics::Printing::BranchOfficeJobDataPipelineFailed, @log_offline_file_full : Win32cr::Graphics::Printing::BranchOfficeLogOfflineFileFull)
+    end
+    end
 
+    def initialize(@eEventType : Win32cr::Graphics::Printing::EBranchOfficeJobEventType, @job_id : UInt32, @job_info : JobInfo_e__Union_)
+    end
   end
 
   @[Extern]
-  record BranchOfficeJobDataContainer,
-    cJobDataEntries : UInt32,
-    job_data : Win32cr::Graphics::Printing::BranchOfficeJobData*
+  struct BranchOfficeJobDataContainer
+    property cJobDataEntries : UInt32
+    property job_data : Win32cr::Graphics::Printing::BranchOfficeJobData*
+    def initialize(@cJobDataEntries : UInt32, @job_data : Win32cr::Graphics::Printing::BranchOfficeJobData*)
+    end
+  end
 
   @[Extern]
-  record PRINTER_NOTIFY_INIT,
-    size : UInt32,
-    reserved : UInt32,
-    poll_time : UInt32
+  struct PRINTER_NOTIFY_INIT
+    property size : UInt32
+    property reserved : UInt32
+    property poll_time : UInt32
+    def initialize(@size : UInt32, @reserved : UInt32, @poll_time : UInt32)
+    end
+  end
 
   @[Extern]
-  record SPLCLIENT_INFO_1,
-    dwSize : UInt32,
-    pMachineName : Win32cr::Foundation::PWSTR,
-    pUserName : Win32cr::Foundation::PWSTR,
-    dwBuildNum : UInt32,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32,
-    wProcessorArchitecture : UInt16
+  struct SPLCLIENT_INFO_1
+    property dwSize : UInt32
+    property pMachineName : Win32cr::Foundation::PWSTR
+    property pUserName : Win32cr::Foundation::PWSTR
+    property dwBuildNum : UInt32
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    property wProcessorArchitecture : UInt16
+    def initialize(@dwSize : UInt32, @pMachineName : Win32cr::Foundation::PWSTR, @pUserName : Win32cr::Foundation::PWSTR, @dwBuildNum : UInt32, @dwMajorVersion : UInt32, @dwMinorVersion : UInt32, @wProcessorArchitecture : UInt16)
+    end
+  end
 
   @[Extern]
-  record SPLCLIENT_INFO_2_V1_,
-    hSplPrinter : LibC::UIntPtrT
+  struct SPLCLIENT_INFO_2_V1_
+    property hSplPrinter : LibC::UIntPtrT
+    def initialize(@hSplPrinter : LibC::UIntPtrT)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SPLCLIENT_INFO_2_V2_,
-    hSplPrinter : UInt64
+  struct SPLCLIENT_INFO_2_V2_
+    property hSplPrinter : UInt64
+    def initialize(@hSplPrinter : UInt64)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record SPLCLIENT_INFO_2_V3_,
-    hSplPrinter : UInt64
+  struct SPLCLIENT_INFO_2_V3_
+    property hSplPrinter : UInt64
+    def initialize(@hSplPrinter : UInt64)
+    end
+  end
 
   @[Extern]
-  record SPLCLIENT_INFO_3_VISTA,
-    cbSize : UInt32,
-    dwFlags : UInt32,
-    dwSize : UInt32,
-    pMachineName : Win32cr::Foundation::PWSTR,
-    pUserName : Win32cr::Foundation::PWSTR,
-    dwBuildNum : UInt32,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32,
-    wProcessorArchitecture : UInt16,
-    hSplPrinter : UInt64
+  struct SPLCLIENT_INFO_3_VISTA
+    property cbSize : UInt32
+    property dwFlags : UInt32
+    property dwSize : UInt32
+    property pMachineName : Win32cr::Foundation::PWSTR
+    property pUserName : Win32cr::Foundation::PWSTR
+    property dwBuildNum : UInt32
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    property wProcessorArchitecture : UInt16
+    property hSplPrinter : UInt64
+    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @dwSize : UInt32, @pMachineName : Win32cr::Foundation::PWSTR, @pUserName : Win32cr::Foundation::PWSTR, @dwBuildNum : UInt32, @dwMajorVersion : UInt32, @dwMinorVersion : UInt32, @wProcessorArchitecture : UInt16, @hSplPrinter : UInt64)
+    end
+  end
 
   @[Extern]
-  record PRINTPROVIDOR,
-    fpOpenPrinter : LibC::IntPtrT,
-    fpSetJob : LibC::IntPtrT,
-    fpGetJob : LibC::IntPtrT,
-    fpEnumJobs : LibC::IntPtrT,
-    fpAddPrinter : LibC::IntPtrT,
-    fpDeletePrinter : LibC::IntPtrT,
-    fpSetPrinter : LibC::IntPtrT,
-    fpGetPrinter : LibC::IntPtrT,
-    fpEnumPrinters : LibC::IntPtrT,
-    fpAddPrinterDriver : LibC::IntPtrT,
-    fpEnumPrinterDrivers : LibC::IntPtrT,
-    fpGetPrinterDriver : LibC::IntPtrT,
-    fpGetPrinterDriverDirectory : LibC::IntPtrT,
-    fpDeletePrinterDriver : LibC::IntPtrT,
-    fpAddPrintProcessor : LibC::IntPtrT,
-    fpEnumPrintProcessors : LibC::IntPtrT,
-    fpGetPrintProcessorDirectory : LibC::IntPtrT,
-    fpDeletePrintProcessor : LibC::IntPtrT,
-    fpEnumPrintProcessorDatatypes : LibC::IntPtrT,
-    fpStartDocPrinter : LibC::IntPtrT,
-    fpStartPagePrinter : LibC::IntPtrT,
-    fpWritePrinter : LibC::IntPtrT,
-    fpEndPagePrinter : LibC::IntPtrT,
-    fpAbortPrinter : LibC::IntPtrT,
-    fpReadPrinter : LibC::IntPtrT,
-    fpEndDocPrinter : LibC::IntPtrT,
-    fpAddJob : LibC::IntPtrT,
-    fpScheduleJob : LibC::IntPtrT,
-    fpGetPrinterData : LibC::IntPtrT,
-    fpSetPrinterData : LibC::IntPtrT,
-    fpWaitForPrinterChange : LibC::IntPtrT,
-    fpClosePrinter : LibC::IntPtrT,
-    fpAddForm : LibC::IntPtrT,
-    fpDeleteForm : LibC::IntPtrT,
-    fpGetForm : LibC::IntPtrT,
-    fpSetForm : LibC::IntPtrT,
-    fpEnumForms : LibC::IntPtrT,
-    fpEnumMonitors : LibC::IntPtrT,
-    fpEnumPorts : LibC::IntPtrT,
-    fpAddPort : LibC::IntPtrT,
-    fpConfigurePort : LibC::IntPtrT,
-    fpDeletePort : LibC::IntPtrT,
-    fpCreatePrinterIC : LibC::IntPtrT,
-    fpPlayGdiScriptOnPrinterIC : LibC::IntPtrT,
-    fpDeletePrinterIC : LibC::IntPtrT,
-    fpAddPrinterConnection : LibC::IntPtrT,
-    fpDeletePrinterConnection : LibC::IntPtrT,
-    fpPrinterMessageBox : LibC::IntPtrT,
-    fpAddMonitor : LibC::IntPtrT,
-    fpDeleteMonitor : LibC::IntPtrT,
-    fpResetPrinter : LibC::IntPtrT,
-    fpGetPrinterDriverEx : LibC::IntPtrT,
-    fpFindFirstPrinterChangeNotification : LibC::IntPtrT,
-    fpFindClosePrinterChangeNotification : LibC::IntPtrT,
-    fpAddPortEx : LibC::IntPtrT,
-    fpShutDown : LibC::IntPtrT,
-    fpRefreshPrinterChangeNotification : LibC::IntPtrT,
-    fpOpenPrinterEx : LibC::IntPtrT,
-    fpAddPrinterEx : LibC::IntPtrT,
-    fpSetPort : LibC::IntPtrT,
-    fpEnumPrinterData : LibC::IntPtrT,
-    fpDeletePrinterData : LibC::IntPtrT,
-    fpClusterSplOpen : LibC::IntPtrT,
-    fpClusterSplClose : LibC::IntPtrT,
-    fpClusterSplIsAlive : LibC::IntPtrT,
-    fpSetPrinterDataEx : LibC::IntPtrT,
-    fpGetPrinterDataEx : LibC::IntPtrT,
-    fpEnumPrinterDataEx : LibC::IntPtrT,
-    fpEnumPrinterKey : LibC::IntPtrT,
-    fpDeletePrinterDataEx : LibC::IntPtrT,
-    fpDeletePrinterKey : LibC::IntPtrT,
-    fpSeekPrinter : LibC::IntPtrT,
-    fpDeletePrinterDriverEx : LibC::IntPtrT,
-    fpAddPerMachineConnection : LibC::IntPtrT,
-    fpDeletePerMachineConnection : LibC::IntPtrT,
-    fpEnumPerMachineConnections : LibC::IntPtrT,
-    fpXcvData : LibC::IntPtrT,
-    fpAddPrinterDriverEx : LibC::IntPtrT,
-    fpSplReadPrinter : LibC::IntPtrT,
-    fpDriverUnloadComplete : LibC::IntPtrT,
-    fpGetSpoolFileInfo : LibC::IntPtrT,
-    fpCommitSpoolData : LibC::IntPtrT,
-    fpCloseSpoolFileHandle : LibC::IntPtrT,
-    fpFlushPrinter : LibC::IntPtrT,
-    fpSendRecvBidiData : LibC::IntPtrT,
-    fpAddPrinterConnection2 : LibC::IntPtrT,
-    fpGetPrintClassObject : LibC::IntPtrT,
-    fpReportJobProcessingProgress : LibC::IntPtrT,
-    fpEnumAndLogProvidorObjects : LibC::IntPtrT,
-    fpInternalGetPrinterDriver : LibC::IntPtrT,
-    fpFindCompatibleDriver : LibC::IntPtrT,
-    fpGetJobNamedPropertyValue : LibC::IntPtrT,
-    fpSetJobNamedProperty : LibC::IntPtrT,
-    fpDeleteJobNamedProperty : LibC::IntPtrT,
-    fpEnumJobNamedProperties : LibC::IntPtrT,
-    fpPowerEvent : LibC::IntPtrT,
-    fpGetUserPropertyBag : LibC::IntPtrT,
-    fpCanShutdown : LibC::IntPtrT,
-    fpLogJobInfoForBranchOffice : LibC::IntPtrT,
-    fpRegeneratePrintDeviceCapabilities : LibC::IntPtrT,
-    fpPrintSupportOperation : LibC::IntPtrT,
-    fpIppCreateJobOnPrinter : LibC::IntPtrT,
-    fpIppGetJobAttributes : LibC::IntPtrT,
-    fpIppSetJobAttributes : LibC::IntPtrT,
-    fpIppGetPrinterAttributes : LibC::IntPtrT,
-    fpIppSetPrinterAttributes : LibC::IntPtrT
+  struct PRINTPROVIDOR
+    property fpOpenPrinter : LibC::IntPtrT
+    property fpSetJob : LibC::IntPtrT
+    property fpGetJob : LibC::IntPtrT
+    property fpEnumJobs : LibC::IntPtrT
+    property fpAddPrinter : LibC::IntPtrT
+    property fpDeletePrinter : LibC::IntPtrT
+    property fpSetPrinter : LibC::IntPtrT
+    property fpGetPrinter : LibC::IntPtrT
+    property fpEnumPrinters : LibC::IntPtrT
+    property fpAddPrinterDriver : LibC::IntPtrT
+    property fpEnumPrinterDrivers : LibC::IntPtrT
+    property fpGetPrinterDriver : LibC::IntPtrT
+    property fpGetPrinterDriverDirectory : LibC::IntPtrT
+    property fpDeletePrinterDriver : LibC::IntPtrT
+    property fpAddPrintProcessor : LibC::IntPtrT
+    property fpEnumPrintProcessors : LibC::IntPtrT
+    property fpGetPrintProcessorDirectory : LibC::IntPtrT
+    property fpDeletePrintProcessor : LibC::IntPtrT
+    property fpEnumPrintProcessorDatatypes : LibC::IntPtrT
+    property fpStartDocPrinter : LibC::IntPtrT
+    property fpStartPagePrinter : LibC::IntPtrT
+    property fpWritePrinter : LibC::IntPtrT
+    property fpEndPagePrinter : LibC::IntPtrT
+    property fpAbortPrinter : LibC::IntPtrT
+    property fpReadPrinter : LibC::IntPtrT
+    property fpEndDocPrinter : LibC::IntPtrT
+    property fpAddJob : LibC::IntPtrT
+    property fpScheduleJob : LibC::IntPtrT
+    property fpGetPrinterData : LibC::IntPtrT
+    property fpSetPrinterData : LibC::IntPtrT
+    property fpWaitForPrinterChange : LibC::IntPtrT
+    property fpClosePrinter : LibC::IntPtrT
+    property fpAddForm : LibC::IntPtrT
+    property fpDeleteForm : LibC::IntPtrT
+    property fpGetForm : LibC::IntPtrT
+    property fpSetForm : LibC::IntPtrT
+    property fpEnumForms : LibC::IntPtrT
+    property fpEnumMonitors : LibC::IntPtrT
+    property fpEnumPorts : LibC::IntPtrT
+    property fpAddPort : LibC::IntPtrT
+    property fpConfigurePort : LibC::IntPtrT
+    property fpDeletePort : LibC::IntPtrT
+    property fpCreatePrinterIC : LibC::IntPtrT
+    property fpPlayGdiScriptOnPrinterIC : LibC::IntPtrT
+    property fpDeletePrinterIC : LibC::IntPtrT
+    property fpAddPrinterConnection : LibC::IntPtrT
+    property fpDeletePrinterConnection : LibC::IntPtrT
+    property fpPrinterMessageBox : LibC::IntPtrT
+    property fpAddMonitor : LibC::IntPtrT
+    property fpDeleteMonitor : LibC::IntPtrT
+    property fpResetPrinter : LibC::IntPtrT
+    property fpGetPrinterDriverEx : LibC::IntPtrT
+    property fpFindFirstPrinterChangeNotification : LibC::IntPtrT
+    property fpFindClosePrinterChangeNotification : LibC::IntPtrT
+    property fpAddPortEx : LibC::IntPtrT
+    property fpShutDown : LibC::IntPtrT
+    property fpRefreshPrinterChangeNotification : LibC::IntPtrT
+    property fpOpenPrinterEx : LibC::IntPtrT
+    property fpAddPrinterEx : LibC::IntPtrT
+    property fpSetPort : LibC::IntPtrT
+    property fpEnumPrinterData : LibC::IntPtrT
+    property fpDeletePrinterData : LibC::IntPtrT
+    property fpClusterSplOpen : LibC::IntPtrT
+    property fpClusterSplClose : LibC::IntPtrT
+    property fpClusterSplIsAlive : LibC::IntPtrT
+    property fpSetPrinterDataEx : LibC::IntPtrT
+    property fpGetPrinterDataEx : LibC::IntPtrT
+    property fpEnumPrinterDataEx : LibC::IntPtrT
+    property fpEnumPrinterKey : LibC::IntPtrT
+    property fpDeletePrinterDataEx : LibC::IntPtrT
+    property fpDeletePrinterKey : LibC::IntPtrT
+    property fpSeekPrinter : LibC::IntPtrT
+    property fpDeletePrinterDriverEx : LibC::IntPtrT
+    property fpAddPerMachineConnection : LibC::IntPtrT
+    property fpDeletePerMachineConnection : LibC::IntPtrT
+    property fpEnumPerMachineConnections : LibC::IntPtrT
+    property fpXcvData : LibC::IntPtrT
+    property fpAddPrinterDriverEx : LibC::IntPtrT
+    property fpSplReadPrinter : LibC::IntPtrT
+    property fpDriverUnloadComplete : LibC::IntPtrT
+    property fpGetSpoolFileInfo : LibC::IntPtrT
+    property fpCommitSpoolData : LibC::IntPtrT
+    property fpCloseSpoolFileHandle : LibC::IntPtrT
+    property fpFlushPrinter : LibC::IntPtrT
+    property fpSendRecvBidiData : LibC::IntPtrT
+    property fpAddPrinterConnection2 : LibC::IntPtrT
+    property fpGetPrintClassObject : LibC::IntPtrT
+    property fpReportJobProcessingProgress : LibC::IntPtrT
+    property fpEnumAndLogProvidorObjects : LibC::IntPtrT
+    property fpInternalGetPrinterDriver : LibC::IntPtrT
+    property fpFindCompatibleDriver : LibC::IntPtrT
+    property fpGetJobNamedPropertyValue : LibC::IntPtrT
+    property fpSetJobNamedProperty : LibC::IntPtrT
+    property fpDeleteJobNamedProperty : LibC::IntPtrT
+    property fpEnumJobNamedProperties : LibC::IntPtrT
+    property fpPowerEvent : LibC::IntPtrT
+    property fpGetUserPropertyBag : LibC::IntPtrT
+    property fpCanShutdown : LibC::IntPtrT
+    property fpLogJobInfoForBranchOffice : LibC::IntPtrT
+    property fpRegeneratePrintDeviceCapabilities : LibC::IntPtrT
+    property fpPrintSupportOperation : LibC::IntPtrT
+    property fpIppCreateJobOnPrinter : LibC::IntPtrT
+    property fpIppGetJobAttributes : LibC::IntPtrT
+    property fpIppSetJobAttributes : LibC::IntPtrT
+    property fpIppGetPrinterAttributes : LibC::IntPtrT
+    property fpIppSetPrinterAttributes : LibC::IntPtrT
+    def initialize(@fpOpenPrinter : LibC::IntPtrT, @fpSetJob : LibC::IntPtrT, @fpGetJob : LibC::IntPtrT, @fpEnumJobs : LibC::IntPtrT, @fpAddPrinter : LibC::IntPtrT, @fpDeletePrinter : LibC::IntPtrT, @fpSetPrinter : LibC::IntPtrT, @fpGetPrinter : LibC::IntPtrT, @fpEnumPrinters : LibC::IntPtrT, @fpAddPrinterDriver : LibC::IntPtrT, @fpEnumPrinterDrivers : LibC::IntPtrT, @fpGetPrinterDriver : LibC::IntPtrT, @fpGetPrinterDriverDirectory : LibC::IntPtrT, @fpDeletePrinterDriver : LibC::IntPtrT, @fpAddPrintProcessor : LibC::IntPtrT, @fpEnumPrintProcessors : LibC::IntPtrT, @fpGetPrintProcessorDirectory : LibC::IntPtrT, @fpDeletePrintProcessor : LibC::IntPtrT, @fpEnumPrintProcessorDatatypes : LibC::IntPtrT, @fpStartDocPrinter : LibC::IntPtrT, @fpStartPagePrinter : LibC::IntPtrT, @fpWritePrinter : LibC::IntPtrT, @fpEndPagePrinter : LibC::IntPtrT, @fpAbortPrinter : LibC::IntPtrT, @fpReadPrinter : LibC::IntPtrT, @fpEndDocPrinter : LibC::IntPtrT, @fpAddJob : LibC::IntPtrT, @fpScheduleJob : LibC::IntPtrT, @fpGetPrinterData : LibC::IntPtrT, @fpSetPrinterData : LibC::IntPtrT, @fpWaitForPrinterChange : LibC::IntPtrT, @fpClosePrinter : LibC::IntPtrT, @fpAddForm : LibC::IntPtrT, @fpDeleteForm : LibC::IntPtrT, @fpGetForm : LibC::IntPtrT, @fpSetForm : LibC::IntPtrT, @fpEnumForms : LibC::IntPtrT, @fpEnumMonitors : LibC::IntPtrT, @fpEnumPorts : LibC::IntPtrT, @fpAddPort : LibC::IntPtrT, @fpConfigurePort : LibC::IntPtrT, @fpDeletePort : LibC::IntPtrT, @fpCreatePrinterIC : LibC::IntPtrT, @fpPlayGdiScriptOnPrinterIC : LibC::IntPtrT, @fpDeletePrinterIC : LibC::IntPtrT, @fpAddPrinterConnection : LibC::IntPtrT, @fpDeletePrinterConnection : LibC::IntPtrT, @fpPrinterMessageBox : LibC::IntPtrT, @fpAddMonitor : LibC::IntPtrT, @fpDeleteMonitor : LibC::IntPtrT, @fpResetPrinter : LibC::IntPtrT, @fpGetPrinterDriverEx : LibC::IntPtrT, @fpFindFirstPrinterChangeNotification : LibC::IntPtrT, @fpFindClosePrinterChangeNotification : LibC::IntPtrT, @fpAddPortEx : LibC::IntPtrT, @fpShutDown : LibC::IntPtrT, @fpRefreshPrinterChangeNotification : LibC::IntPtrT, @fpOpenPrinterEx : LibC::IntPtrT, @fpAddPrinterEx : LibC::IntPtrT, @fpSetPort : LibC::IntPtrT, @fpEnumPrinterData : LibC::IntPtrT, @fpDeletePrinterData : LibC::IntPtrT, @fpClusterSplOpen : LibC::IntPtrT, @fpClusterSplClose : LibC::IntPtrT, @fpClusterSplIsAlive : LibC::IntPtrT, @fpSetPrinterDataEx : LibC::IntPtrT, @fpGetPrinterDataEx : LibC::IntPtrT, @fpEnumPrinterDataEx : LibC::IntPtrT, @fpEnumPrinterKey : LibC::IntPtrT, @fpDeletePrinterDataEx : LibC::IntPtrT, @fpDeletePrinterKey : LibC::IntPtrT, @fpSeekPrinter : LibC::IntPtrT, @fpDeletePrinterDriverEx : LibC::IntPtrT, @fpAddPerMachineConnection : LibC::IntPtrT, @fpDeletePerMachineConnection : LibC::IntPtrT, @fpEnumPerMachineConnections : LibC::IntPtrT, @fpXcvData : LibC::IntPtrT, @fpAddPrinterDriverEx : LibC::IntPtrT, @fpSplReadPrinter : LibC::IntPtrT, @fpDriverUnloadComplete : LibC::IntPtrT, @fpGetSpoolFileInfo : LibC::IntPtrT, @fpCommitSpoolData : LibC::IntPtrT, @fpCloseSpoolFileHandle : LibC::IntPtrT, @fpFlushPrinter : LibC::IntPtrT, @fpSendRecvBidiData : LibC::IntPtrT, @fpAddPrinterConnection2 : LibC::IntPtrT, @fpGetPrintClassObject : LibC::IntPtrT, @fpReportJobProcessingProgress : LibC::IntPtrT, @fpEnumAndLogProvidorObjects : LibC::IntPtrT, @fpInternalGetPrinterDriver : LibC::IntPtrT, @fpFindCompatibleDriver : LibC::IntPtrT, @fpGetJobNamedPropertyValue : LibC::IntPtrT, @fpSetJobNamedProperty : LibC::IntPtrT, @fpDeleteJobNamedProperty : LibC::IntPtrT, @fpEnumJobNamedProperties : LibC::IntPtrT, @fpPowerEvent : LibC::IntPtrT, @fpGetUserPropertyBag : LibC::IntPtrT, @fpCanShutdown : LibC::IntPtrT, @fpLogJobInfoForBranchOffice : LibC::IntPtrT, @fpRegeneratePrintDeviceCapabilities : LibC::IntPtrT, @fpPrintSupportOperation : LibC::IntPtrT, @fpIppCreateJobOnPrinter : LibC::IntPtrT, @fpIppGetJobAttributes : LibC::IntPtrT, @fpIppSetJobAttributes : LibC::IntPtrT, @fpIppGetPrinterAttributes : LibC::IntPtrT, @fpIppSetPrinterAttributes : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record PRINTPROCESSOROPENDATA,
-    pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*,
-    pDatatype : Win32cr::Foundation::PWSTR,
-    pParameters : Win32cr::Foundation::PWSTR,
-    pDocumentName : Win32cr::Foundation::PWSTR,
-    job_id : UInt32,
-    pOutputFile : Win32cr::Foundation::PWSTR,
-    pPrinterName : Win32cr::Foundation::PWSTR
+  struct PRINTPROCESSOROPENDATA
+    property pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*
+    property pDatatype : Win32cr::Foundation::PWSTR
+    property pParameters : Win32cr::Foundation::PWSTR
+    property pDocumentName : Win32cr::Foundation::PWSTR
+    property job_id : UInt32
+    property pOutputFile : Win32cr::Foundation::PWSTR
+    property pPrinterName : Win32cr::Foundation::PWSTR
+    def initialize(@pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, @pDatatype : Win32cr::Foundation::PWSTR, @pParameters : Win32cr::Foundation::PWSTR, @pDocumentName : Win32cr::Foundation::PWSTR, @job_id : UInt32, @pOutputFile : Win32cr::Foundation::PWSTR, @pPrinterName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record MONITORREG,
-    cbSize : UInt32,
-    fpCreateKey : LibC::IntPtrT,
-    fpOpenKey : LibC::IntPtrT,
-    fpCloseKey : LibC::IntPtrT,
-    fpDeleteKey : LibC::IntPtrT,
-    fpEnumKey : LibC::IntPtrT,
-    fpQueryInfoKey : LibC::IntPtrT,
-    fpSetValue : LibC::IntPtrT,
-    fpDeleteValue : LibC::IntPtrT,
-    fpEnumValue : LibC::IntPtrT,
-    fpQueryValue : LibC::IntPtrT
+  struct MONITORREG
+    property cbSize : UInt32
+    property fpCreateKey : LibC::IntPtrT
+    property fpOpenKey : LibC::IntPtrT
+    property fpCloseKey : LibC::IntPtrT
+    property fpDeleteKey : LibC::IntPtrT
+    property fpEnumKey : LibC::IntPtrT
+    property fpQueryInfoKey : LibC::IntPtrT
+    property fpSetValue : LibC::IntPtrT
+    property fpDeleteValue : LibC::IntPtrT
+    property fpEnumValue : LibC::IntPtrT
+    property fpQueryValue : LibC::IntPtrT
+    def initialize(@cbSize : UInt32, @fpCreateKey : LibC::IntPtrT, @fpOpenKey : LibC::IntPtrT, @fpCloseKey : LibC::IntPtrT, @fpDeleteKey : LibC::IntPtrT, @fpEnumKey : LibC::IntPtrT, @fpQueryInfoKey : LibC::IntPtrT, @fpSetValue : LibC::IntPtrT, @fpDeleteValue : LibC::IntPtrT, @fpEnumValue : LibC::IntPtrT, @fpQueryValue : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MONITORINIT,
-    cbSize : UInt32,
-    hSpooler : Win32cr::Foundation::HANDLE,
-    hckRegistryRoot : Win32cr::System::Registry::HKEY,
-    pMonitorReg : Win32cr::Graphics::Printing::MONITORREG*,
-    bLocal : Win32cr::Foundation::BOOL,
-    pszServerName : Win32cr::Foundation::PWSTR
+  struct MONITORINIT
+    property cbSize : UInt32
+    property hSpooler : Win32cr::Foundation::HANDLE
+    property hckRegistryRoot : Win32cr::System::Registry::HKEY
+    property pMonitorReg : Win32cr::Graphics::Printing::MONITORREG*
+    property bLocal : Win32cr::Foundation::BOOL
+    property pszServerName : Win32cr::Foundation::PWSTR
+    def initialize(@cbSize : UInt32, @hSpooler : Win32cr::Foundation::HANDLE, @hckRegistryRoot : Win32cr::System::Registry::HKEY, @pMonitorReg : Win32cr::Graphics::Printing::MONITORREG*, @bLocal : Win32cr::Foundation::BOOL, @pszServerName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record MONITOR,
-    pfnEnumPorts : LibC::IntPtrT,
-    pfnOpenPort : LibC::IntPtrT,
-    pfnOpenPortEx : LibC::IntPtrT,
-    pfnStartDocPort : LibC::IntPtrT,
-    pfnWritePort : LibC::IntPtrT,
-    pfnReadPort : LibC::IntPtrT,
-    pfnEndDocPort : LibC::IntPtrT,
-    pfnClosePort : LibC::IntPtrT,
-    pfnAddPort : LibC::IntPtrT,
-    pfnAddPortEx : LibC::IntPtrT,
-    pfnConfigurePort : LibC::IntPtrT,
-    pfnDeletePort : LibC::IntPtrT,
-    pfnGetPrinterDataFromPort : LibC::IntPtrT,
-    pfnSetPortTimeOuts : LibC::IntPtrT,
-    pfnXcvOpenPort : LibC::IntPtrT,
-    pfnXcvDataPort : LibC::IntPtrT,
-    pfnXcvClosePort : LibC::IntPtrT
+  struct MONITOR
+    property pfnEnumPorts : LibC::IntPtrT
+    property pfnOpenPort : LibC::IntPtrT
+    property pfnOpenPortEx : LibC::IntPtrT
+    property pfnStartDocPort : LibC::IntPtrT
+    property pfnWritePort : LibC::IntPtrT
+    property pfnReadPort : LibC::IntPtrT
+    property pfnEndDocPort : LibC::IntPtrT
+    property pfnClosePort : LibC::IntPtrT
+    property pfnAddPort : LibC::IntPtrT
+    property pfnAddPortEx : LibC::IntPtrT
+    property pfnConfigurePort : LibC::IntPtrT
+    property pfnDeletePort : LibC::IntPtrT
+    property pfnGetPrinterDataFromPort : LibC::IntPtrT
+    property pfnSetPortTimeOuts : LibC::IntPtrT
+    property pfnXcvOpenPort : LibC::IntPtrT
+    property pfnXcvDataPort : LibC::IntPtrT
+    property pfnXcvClosePort : LibC::IntPtrT
+    def initialize(@pfnEnumPorts : LibC::IntPtrT, @pfnOpenPort : LibC::IntPtrT, @pfnOpenPortEx : LibC::IntPtrT, @pfnStartDocPort : LibC::IntPtrT, @pfnWritePort : LibC::IntPtrT, @pfnReadPort : LibC::IntPtrT, @pfnEndDocPort : LibC::IntPtrT, @pfnClosePort : LibC::IntPtrT, @pfnAddPort : LibC::IntPtrT, @pfnAddPortEx : LibC::IntPtrT, @pfnConfigurePort : LibC::IntPtrT, @pfnDeletePort : LibC::IntPtrT, @pfnGetPrinterDataFromPort : LibC::IntPtrT, @pfnSetPortTimeOuts : LibC::IntPtrT, @pfnXcvOpenPort : LibC::IntPtrT, @pfnXcvDataPort : LibC::IntPtrT, @pfnXcvClosePort : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MONITOREX,
-    dwMonitorSize : UInt32,
-    monitor : Win32cr::Graphics::Printing::MONITOR
+  struct MONITOREX
+    property dwMonitorSize : UInt32
+    property monitor : Win32cr::Graphics::Printing::MONITOR
+    def initialize(@dwMonitorSize : UInt32, @monitor : Win32cr::Graphics::Printing::MONITOR)
+    end
+  end
 
   @[Extern]
-  record MONITOR2,
-    cbSize : UInt32,
-    pfnEnumPorts : LibC::IntPtrT,
-    pfnOpenPort : LibC::IntPtrT,
-    pfnOpenPortEx : LibC::IntPtrT,
-    pfnStartDocPort : LibC::IntPtrT,
-    pfnWritePort : LibC::IntPtrT,
-    pfnReadPort : LibC::IntPtrT,
-    pfnEndDocPort : LibC::IntPtrT,
-    pfnClosePort : LibC::IntPtrT,
-    pfnAddPort : LibC::IntPtrT,
-    pfnAddPortEx : LibC::IntPtrT,
-    pfnConfigurePort : LibC::IntPtrT,
-    pfnDeletePort : LibC::IntPtrT,
-    pfnGetPrinterDataFromPort : LibC::IntPtrT,
-    pfnSetPortTimeOuts : LibC::IntPtrT,
-    pfnXcvOpenPort : LibC::IntPtrT,
-    pfnXcvDataPort : LibC::IntPtrT,
-    pfnXcvClosePort : LibC::IntPtrT,
-    pfnShutdown : LibC::IntPtrT,
-    pfnSendRecvBidiDataFromPort : LibC::IntPtrT,
-    pfnNotifyUsedPorts : LibC::IntPtrT,
-    pfnNotifyUnusedPorts : LibC::IntPtrT,
-    pfnPowerEvent : LibC::IntPtrT
+  struct MONITOR2
+    property cbSize : UInt32
+    property pfnEnumPorts : LibC::IntPtrT
+    property pfnOpenPort : LibC::IntPtrT
+    property pfnOpenPortEx : LibC::IntPtrT
+    property pfnStartDocPort : LibC::IntPtrT
+    property pfnWritePort : LibC::IntPtrT
+    property pfnReadPort : LibC::IntPtrT
+    property pfnEndDocPort : LibC::IntPtrT
+    property pfnClosePort : LibC::IntPtrT
+    property pfnAddPort : LibC::IntPtrT
+    property pfnAddPortEx : LibC::IntPtrT
+    property pfnConfigurePort : LibC::IntPtrT
+    property pfnDeletePort : LibC::IntPtrT
+    property pfnGetPrinterDataFromPort : LibC::IntPtrT
+    property pfnSetPortTimeOuts : LibC::IntPtrT
+    property pfnXcvOpenPort : LibC::IntPtrT
+    property pfnXcvDataPort : LibC::IntPtrT
+    property pfnXcvClosePort : LibC::IntPtrT
+    property pfnShutdown : LibC::IntPtrT
+    property pfnSendRecvBidiDataFromPort : LibC::IntPtrT
+    property pfnNotifyUsedPorts : LibC::IntPtrT
+    property pfnNotifyUnusedPorts : LibC::IntPtrT
+    property pfnPowerEvent : LibC::IntPtrT
+    def initialize(@cbSize : UInt32, @pfnEnumPorts : LibC::IntPtrT, @pfnOpenPort : LibC::IntPtrT, @pfnOpenPortEx : LibC::IntPtrT, @pfnStartDocPort : LibC::IntPtrT, @pfnWritePort : LibC::IntPtrT, @pfnReadPort : LibC::IntPtrT, @pfnEndDocPort : LibC::IntPtrT, @pfnClosePort : LibC::IntPtrT, @pfnAddPort : LibC::IntPtrT, @pfnAddPortEx : LibC::IntPtrT, @pfnConfigurePort : LibC::IntPtrT, @pfnDeletePort : LibC::IntPtrT, @pfnGetPrinterDataFromPort : LibC::IntPtrT, @pfnSetPortTimeOuts : LibC::IntPtrT, @pfnXcvOpenPort : LibC::IntPtrT, @pfnXcvDataPort : LibC::IntPtrT, @pfnXcvClosePort : LibC::IntPtrT, @pfnShutdown : LibC::IntPtrT, @pfnSendRecvBidiDataFromPort : LibC::IntPtrT, @pfnNotifyUsedPorts : LibC::IntPtrT, @pfnNotifyUnusedPorts : LibC::IntPtrT, @pfnPowerEvent : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MONITORUI,
-    dwMonitorUISize : UInt32,
-    pfnAddPortUI : LibC::IntPtrT,
-    pfnConfigurePortUI : LibC::IntPtrT,
-    pfnDeletePortUI : LibC::IntPtrT
+  struct MONITORUI
+    property dwMonitorUISize : UInt32
+    property pfnAddPortUI : LibC::IntPtrT
+    property pfnConfigurePortUI : LibC::IntPtrT
+    property pfnDeletePortUI : LibC::IntPtrT
+    def initialize(@dwMonitorUISize : UInt32, @pfnAddPortUI : LibC::IntPtrT, @pfnConfigurePortUI : LibC::IntPtrT, @pfnDeletePortUI : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record NOTIFICATION_CONFIG_1,
-    cbSize : UInt32,
-    fdwFlags : UInt32,
-    pfnNotifyCallback : Win32cr::Graphics::Printing::ROUTER_NOTIFY_CALLBACK,
-    pContext : Void*
+  struct NOTIFICATION_CONFIG_1
+    property cbSize : UInt32
+    property fdwFlags : UInt32
+    property pfnNotifyCallback : Win32cr::Graphics::Printing::ROUTER_NOTIFY_CALLBACK
+    property pContext : Void*
+    def initialize(@cbSize : UInt32, @fdwFlags : UInt32, @pfnNotifyCallback : Win32cr::Graphics::Printing::ROUTER_NOTIFY_CALLBACK, @pContext : Void*)
+    end
+  end
 
   @[Extern]
-  record MESSAGEBOX_PARAMS,
-    cbSize : UInt32,
-    pTitle : Win32cr::Foundation::PWSTR,
-    pMessage : Win32cr::Foundation::PWSTR,
-    style : UInt32,
-    dwTimeout : UInt32,
-    bWait : Win32cr::Foundation::BOOL
+  struct MESSAGEBOX_PARAMS
+    property cbSize : UInt32
+    property pTitle : Win32cr::Foundation::PWSTR
+    property pMessage : Win32cr::Foundation::PWSTR
+    property style : UInt32
+    property dwTimeout : UInt32
+    property bWait : Win32cr::Foundation::BOOL
+    def initialize(@cbSize : UInt32, @pTitle : Win32cr::Foundation::PWSTR, @pMessage : Win32cr::Foundation::PWSTR, @style : UInt32, @dwTimeout : UInt32, @bWait : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record SHOWUIPARAMS,
-    ui_type : Win32cr::Graphics::Printing::UI_TYPE,
-    message_box_params : Win32cr::Graphics::Printing::MESSAGEBOX_PARAMS
+  struct SHOWUIPARAMS
+    property ui_type : Win32cr::Graphics::Printing::UI_TYPE
+    property message_box_params : Win32cr::Graphics::Printing::MESSAGEBOX_PARAMS
+    def initialize(@ui_type : Win32cr::Graphics::Printing::UI_TYPE, @message_box_params : Win32cr::Graphics::Printing::MESSAGEBOX_PARAMS)
+    end
+  end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SPLCLIENT_INFO_2_V2_,
-    hSplPrinter : UInt32
+  struct SPLCLIENT_INFO_2_V2_
+    property hSplPrinter : UInt32
+    def initialize(@hSplPrinter : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
@@ -3702,7 +4308,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("8f348bd7-4b47-4755-8a9d-0f422df3dc89")]
   record IBidiRequest, lpVtbl : IBidiRequestVtbl* do
     GUID = LibC::GUID.new(0x8f348bd7_u32, 0x4b47_u16, 0x4755_u16, StaticArray[0x8a_u8, 0x9d_u8, 0xf_u8, 0x42_u8, 0x2d_u8, 0xf3_u8, 0xdc_u8, 0x89_u8])
     def query_interface(this : IBidiRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3743,7 +4348,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("d752f6c0-94a8-4275-a77d-8f1d1a1121ae")]
   record IBidiRequestContainer, lpVtbl : IBidiRequestContainerVtbl* do
     GUID = LibC::GUID.new(0xd752f6c0_u32, 0x94a8_u16, 0x4275_u16, StaticArray[0xa7_u8, 0x7d_u8, 0x8f_u8, 0x1d_u8, 0x1a_u8, 0x11_u8, 0x21_u8, 0xae_u8])
     def query_interface(this : IBidiRequestContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3779,7 +4383,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("d580dc0e-de39-4649-baa8-bf0b85a03a97")]
   record IBidiSpl, lpVtbl : IBidiSplVtbl* do
     GUID = LibC::GUID.new(0xd580dc0e_u32, 0xde39_u16, 0x4649_u16, StaticArray[0xba_u8, 0xa8_u8, 0xbf_u8, 0xb_u8, 0x85_u8, 0xa0_u8, 0x3a_u8, 0x97_u8])
     def query_interface(this : IBidiSpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3818,7 +4421,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("0e8f51b8-8273-4906-8e7b-be453ffd2e2b")]
   record IBidiSpl2, lpVtbl : IBidiSpl2Vtbl* do
     GUID = LibC::GUID.new(0xe8f51b8_u32, 0x8273_u16, 0x4906_u16, StaticArray[0x8e_u8, 0x7b_u8, 0xbe_u8, 0x45_u8, 0x3f_u8, 0xfd_u8, 0x2e_u8, 0x2b_u8])
     def query_interface(this : IBidiSpl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3865,7 +4467,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("2bce4ece-d30e-445a-9423-6829be945ad8")]
   record IImgErrorInfo, lpVtbl : IImgErrorInfoVtbl* do
     GUID = LibC::GUID.new(0x2bce4ece_u32, 0xd30e_u16, 0x445a_u16, StaticArray[0x94_u8, 0x23_u8, 0x68_u8, 0x29_u8, 0xbe_u8, 0x94_u8, 0x5a_u8, 0xd8_u8])
     def query_interface(this : IImgErrorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3930,7 +4531,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("1c55a64c-07cd-4fb5-90f7-b753d91f0c9e")]
   record IImgCreateErrorInfo, lpVtbl : IImgCreateErrorInfoVtbl* do
     GUID = LibC::GUID.new(0x1c55a64c_u32, 0x7cd_u16, 0x4fb5_u16, StaticArray[0x90_u8, 0xf7_u8, 0xb7_u8, 0x53_u8, 0xd9_u8, 0x1f_u8, 0xc_u8, 0x9e_u8])
     def query_interface(this : IImgCreateErrorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3973,7 +4573,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("4d47a67c-66cc-4430-850e-daf466fe5bc4")]
   record IPrintReadStream, lpVtbl : IPrintReadStreamVtbl* do
     GUID = LibC::GUID.new(0x4d47a67c_u32, 0x66cc_u16, 0x4430_u16, StaticArray[0x85_u8, 0xe_u8, 0xda_u8, 0xf4_u8, 0x66_u8, 0xfe_u8, 0x5b_u8, 0xc4_u8])
     def query_interface(this : IPrintReadStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4004,7 +4603,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("65bb7f1b-371e-4571-8ac7-912f510c1a38")]
   record IPrintWriteStream, lpVtbl : IPrintWriteStreamVtbl* do
     GUID = LibC::GUID.new(0x65bb7f1b_u32, 0x371e_u16, 0x4571_u16, StaticArray[0x8a_u8, 0xc7_u8, 0x91_u8, 0x2f_u8, 0x51_u8, 0xc_u8, 0x1a_u8, 0x38_u8])
     def query_interface(this : IPrintWriteStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4034,7 +4632,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("07d11ff8-1753-4873-b749-6cdaf068e4c3")]
   record IPrintWriteStreamFlush, lpVtbl : IPrintWriteStreamFlushVtbl* do
     GUID = LibC::GUID.new(0x7d11ff8_u32, 0x1753_u16, 0x4873_u16, StaticArray[0xb7_u8, 0x49_u8, 0x6c_u8, 0xda_u8, 0xf0_u8, 0x68_u8, 0xe4_u8, 0xc3_u8])
     def query_interface(this : IPrintWriteStreamFlush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4062,7 +4659,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("4daf1e69-81fd-462d-940f-8cd3ddf56fca")]
   record IInterFilterCommunicator, lpVtbl : IInterFilterCommunicatorVtbl* do
     GUID = LibC::GUID.new(0x4daf1e69_u32, 0x81fd_u16, 0x462d_u16, StaticArray[0x94_u8, 0xf_u8, 0x8c_u8, 0xd3_u8, 0xdd_u8, 0xf5_u8, 0x6f_u8, 0xca_u8])
     def query_interface(this : IInterFilterCommunicator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4093,7 +4689,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("aa3e4910-5889-4681-91ef-823ad4ed4e44")]
   record IPrintPipelineManagerControl, lpVtbl : IPrintPipelineManagerControlVtbl* do
     GUID = LibC::GUID.new(0xaa3e4910_u32, 0x5889_u16, 0x4681_u16, StaticArray[0x91_u8, 0xef_u8, 0x82_u8, 0x3a_u8, 0xd4_u8, 0xed_u8, 0x4e_u8, 0x44_u8])
     def query_interface(this : IPrintPipelineManagerControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4125,7 +4720,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("8b8c99dc-7892-4a95-8a04-57422e9fbb47")]
   record IPrintPipelinePropertyBag, lpVtbl : IPrintPipelinePropertyBagVtbl* do
     GUID = LibC::GUID.new(0x8b8c99dc_u32, 0x7892_u16, 0x4a95_u16, StaticArray[0x8a_u8, 0x4_u8, 0x57_u8, 0x42_u8, 0x2e_u8, 0x9f_u8, 0xbb_u8, 0x47_u8])
     def query_interface(this : IPrintPipelinePropertyBag*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4158,7 +4752,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("edc12c7c-ed40-4ea5-96a6-5e4397497a61")]
   record IPrintPipelineProgressReport, lpVtbl : IPrintPipelineProgressReportVtbl* do
     GUID = LibC::GUID.new(0xedc12c7c_u32, 0xed40_u16, 0x4ea5_u16, StaticArray[0x96_u8, 0xa6_u8, 0x5e_u8, 0x43_u8, 0x97_u8, 0x49_u8, 0x7a_u8, 0x61_u8])
     def query_interface(this : IPrintPipelineProgressReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4185,7 +4778,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("9af593dd-9b02-48a8-9bad-69ace423f88b")]
   record IPrintClassObjectFactory, lpVtbl : IPrintClassObjectFactoryVtbl* do
     GUID = LibC::GUID.new(0x9af593dd_u32, 0x9b02_u16, 0x48a8_u16, StaticArray[0x9b_u8, 0xad_u8, 0x69_u8, 0xac_u8, 0xe4_u8, 0x23_u8, 0xf8_u8, 0x8b_u8])
     def query_interface(this : IPrintClassObjectFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4214,7 +4806,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("cdb62fc0-8bed-434e-86fb-a2cae55f19ea")]
   record IPrintPipelineFilter, lpVtbl : IPrintPipelineFilterVtbl* do
     GUID = LibC::GUID.new(0xcdb62fc0_u32, 0x8bed_u16, 0x434e_u16, StaticArray[0x86_u8, 0xfb_u8, 0xa2_u8, 0xca_u8, 0xe5_u8, 0x5f_u8, 0x19_u8, 0xea_u8])
     def query_interface(this : IPrintPipelineFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4247,7 +4838,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("b8cf8530-5562-47c4-ab67-b1f69ecf961e")]
   record IXpsDocumentProvider, lpVtbl : IXpsDocumentProviderVtbl* do
     GUID = LibC::GUID.new(0xb8cf8530_u32, 0x5562_u16, 0x47c4_u16, StaticArray[0xab_u8, 0x67_u8, 0xb1_u8, 0xf6_u8, 0x9e_u8, 0xcf_u8, 0x96_u8, 0x1e_u8])
     def query_interface(this : IXpsDocumentProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4280,7 +4870,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("4368d8a2-4181-4a9f-b295-3d9a38bb9ba0")]
   record IXpsDocumentConsumer, lpVtbl : IXpsDocumentConsumerVtbl* do
     GUID = LibC::GUID.new(0x4368d8a2_u32, 0x4181_u16, 0x4a9f_u16, StaticArray[0xb2_u8, 0x95_u8, 0x3d_u8, 0x9a_u8, 0x38_u8, 0xbb_u8, 0x9b_u8, 0xa0_u8])
     def query_interface(this : IXpsDocumentConsumer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4326,7 +4915,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("e8d907db-62a9-4a95-abe7-e01763dd30f8")]
   record IXpsDocument, lpVtbl : IXpsDocumentVtbl* do
     GUID = LibC::GUID.new(0xe8d907db_u32, 0x62a9_u16, 0x4a95_u16, StaticArray[0xab_u8, 0xe7_u8, 0xe0_u8, 0x17_u8, 0x63_u8, 0xdd_u8, 0x30_u8, 0xf8_u8])
     def query_interface(this : IXpsDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4358,7 +4946,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("8028d181-2c32-4249-8493-1bfb22045574")]
   record IFixedDocumentSequence, lpVtbl : IFixedDocumentSequenceVtbl* do
     GUID = LibC::GUID.new(0x8028d181_u32, 0x2c32_u16, 0x4249_u16, StaticArray[0x84_u8, 0x93_u8, 0x1b_u8, 0xfb_u8, 0x22_u8, 0x4_u8, 0x55_u8, 0x74_u8])
     def query_interface(this : IFixedDocumentSequence*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4393,7 +4980,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("f222ca9f-9968-4db9-81bd-abaebf15f93f")]
   record IFixedDocument, lpVtbl : IFixedDocumentVtbl* do
     GUID = LibC::GUID.new(0xf222ca9f_u32, 0x9968_u16, 0x4db9_u16, StaticArray[0x81_u8, 0xbd_u8, 0xab_u8, 0xae_u8, 0xbf_u8, 0x15_u8, 0xf9_u8, 0x3f_u8])
     def query_interface(this : IFixedDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4429,7 +5015,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("36d51e28-369e-43ba-a666-9540c62c3f58")]
   record IPartBase, lpVtbl : IPartBaseVtbl* do
     GUID = LibC::GUID.new(0x36d51e28_u32, 0x369e_u16, 0x43ba_u16, StaticArray[0xa6_u8, 0x66_u8, 0x95_u8, 0x40_u8, 0xc6_u8, 0x2c_u8, 0x3f_u8, 0x58_u8])
     def query_interface(this : IPartBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4475,7 +5060,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("3d9f6448-7e95-4cb5-94fb-0180c2883a57")]
   record IFixedPage, lpVtbl : IFixedPageVtbl* do
     GUID = LibC::GUID.new(0x3d9f6448_u32, 0x7e95_u16, 0x4cb5_u16, StaticArray[0x94_u8, 0xfb_u8, 0x1_u8, 0x80_u8, 0xc2_u8, 0x88_u8, 0x3a_u8, 0x57_u8])
     def query_interface(this : IFixedPage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4537,7 +5121,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("725f2e3c-401a-4705-9de0-fe6f1353b87f")]
   record IPartImage, lpVtbl : IPartImageVtbl* do
     GUID = LibC::GUID.new(0x725f2e3c_u32, 0x401a_u16, 0x4705_u16, StaticArray[0x9d_u8, 0xe0_u8, 0xfe_u8, 0x6f_u8, 0x13_u8, 0x53_u8, 0xb8_u8, 0x7f_u8])
     def query_interface(this : IPartImage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4585,7 +5168,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("e07fe0ab-1124-43d0-a865-e8ffb6a3ea82")]
   record IPartFont, lpVtbl : IPartFontVtbl* do
     GUID = LibC::GUID.new(0xe07fe0ab_u32, 0x1124_u16, 0x43d0_u16, StaticArray[0xa8_u8, 0x65_u8, 0xe8_u8, 0xff_u8, 0xb6_u8, 0xa3_u8, 0xea_u8, 0x82_u8])
     def query_interface(this : IPartFont*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4637,7 +5219,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("511e025f-d6cb-43be-bf65-63fe88515a39")]
   record IPartFont2, lpVtbl : IPartFont2Vtbl* do
     GUID = LibC::GUID.new(0x511e025f_u32, 0xd6cb_u16, 0x43be_u16, StaticArray[0xbf_u8, 0x65_u8, 0x63_u8, 0xfe_u8, 0x88_u8, 0x51_u8, 0x5a_u8, 0x39_u8])
     def query_interface(this : IPartFont2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4690,7 +5271,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("027ed1c9-ba39-4cc5-aa55-7ec3a0de171a")]
   record IPartThumbnail, lpVtbl : IPartThumbnailVtbl* do
     GUID = LibC::GUID.new(0x27ed1c9_u32, 0xba39_u16, 0x4cc5_u16, StaticArray[0xaa_u8, 0x55_u8, 0x7e_u8, 0xc3_u8, 0xa0_u8, 0xde_u8, 0x17_u8, 0x1a_u8])
     def query_interface(this : IPartThumbnail*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4735,7 +5315,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("4a0f50f6-f9a2-41f0-99e7-5ae955be8e9e")]
   record IPartPrintTicket, lpVtbl : IPartPrintTicketVtbl* do
     GUID = LibC::GUID.new(0x4a0f50f6_u32, 0xf9a2_u16, 0x41f0_u16, StaticArray[0x99_u8, 0xe7_u8, 0x5a_u8, 0xe9_u8, 0x55_u8, 0xbe_u8, 0x8e_u8, 0x9e_u8])
     def query_interface(this : IPartPrintTicket*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4774,7 +5353,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("63cca95b-7d18-4762-b15e-98658693d24a")]
   record IPartColorProfile, lpVtbl : IPartColorProfileVtbl* do
     GUID = LibC::GUID.new(0x63cca95b_u32, 0x7d18_u16, 0x4762_u16, StaticArray[0xb1_u8, 0x5e_u8, 0x98_u8, 0x65_u8, 0x86_u8, 0x93_u8, 0xd2_u8, 0x4a_u8])
     def query_interface(this : IPartColorProfile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4813,7 +5391,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("16cfce6d-e744-4fb3-b474-f1d54f024a01")]
   record IPartResourceDictionary, lpVtbl : IPartResourceDictionaryVtbl* do
     GUID = LibC::GUID.new(0x16cfce6d_u32, 0xe744_u16, 0x4fb3_u16, StaticArray[0xb4_u8, 0x74_u8, 0xf1_u8, 0xd5_u8, 0x4f_u8, 0x2_u8, 0x4a_u8, 0x1_u8])
     def query_interface(this : IPartResourceDictionary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4852,7 +5429,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("0021d3cd-af6f-42ab-9999-14bc82a62d2e")]
   record IXpsPartIterator, lpVtbl : IXpsPartIteratorVtbl* do
     GUID = LibC::GUID.new(0x21d3cd_u32, 0xaf6f_u16, 0x42ab_u16, StaticArray[0x99_u8, 0x99_u8, 0x14_u8, 0xbc_u8, 0x82_u8, 0xa6_u8, 0x2d_u8, 0x2e_u8])
     def query_interface(this : IXpsPartIterator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4888,7 +5464,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("acb971e3-df8d-4fc2-bee6-0609d15f3cf9")]
   record IPrintReadStreamFactory, lpVtbl : IPrintReadStreamFactoryVtbl* do
     GUID = LibC::GUID.new(0xacb971e3_u32, 0xdf8d_u16, 0x4fc2_u16, StaticArray[0xbe_u8, 0xe6_u8, 0x6_u8, 0x9_u8, 0xd1_u8, 0x5f_u8, 0x3c_u8, 0xf9_u8])
     def query_interface(this : IPrintReadStreamFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4915,7 +5490,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("cc350c00-095b-42a5-bf0f-c8780edadb3c")]
   record IPartDiscardControl, lpVtbl : IPartDiscardControlVtbl* do
     GUID = LibC::GUID.new(0xcc350c00_u32, 0x95b_u16, 0x42a5_u16, StaticArray[0xbf_u8, 0xf_u8, 0xc8_u8, 0x78_u8, 0xe_u8, 0xda_u8, 0xdb_u8, 0x3c_u8])
     def query_interface(this : IPartDiscardControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4950,7 +5524,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("a89ec53e-3905-49c6-9c1a-c0a88117fdb6")]
   record IPrintCoreHelper, lpVtbl : IPrintCoreHelperVtbl* do
     GUID = LibC::GUID.new(0xa89ec53e_u32, 0x3905_u16, 0x49c6_u16, StaticArray[0x9c_u8, 0x1a_u8, 0xc0_u8, 0xa8_u8, 0x81_u8, 0x17_u8, 0xfd_u8, 0xb6_u8])
     def query_interface(this : IPrintCoreHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5011,7 +5584,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("7e8e51d6-e5ee-4426-817b-958b9444eb79")]
   record IPrintCoreHelperUni, lpVtbl : IPrintCoreHelperUniVtbl* do
     GUID = LibC::GUID.new(0x7e8e51d6_u32, 0xe5ee_u16, 0x4426_u16, StaticArray[0x81_u8, 0x7b_u8, 0x95_u8, 0x8b_u8, 0x94_u8, 0x44_u8, 0xeb_u8, 0x79_u8])
     def query_interface(this : IPrintCoreHelperUni*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5079,7 +5651,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("6c8afdfc-ead0-4d2d-8071-9bf0175a6c3a")]
   record IPrintCoreHelperUni2, lpVtbl : IPrintCoreHelperUni2Vtbl* do
     GUID = LibC::GUID.new(0x6c8afdfc_u32, 0xead0_u16, 0x4d2d_u16, StaticArray[0x80_u8, 0x71_u8, 0x9b_u8, 0xf0_u8, 0x17_u8, 0x5a_u8, 0x6c_u8, 0x3a_u8])
     def query_interface(this : IPrintCoreHelperUni2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5150,7 +5721,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("c2c14f6f-95d3-4d63-96cf-6bd9e6c907c2")]
   record IPrintCoreHelperPS, lpVtbl : IPrintCoreHelperPSVtbl* do
     GUID = LibC::GUID.new(0xc2c14f6f_u32, 0x95d3_u16, 0x4d63_u16, StaticArray[0x96_u8, 0xcf_u8, 0x6b_u8, 0xd9_u8, 0xe6_u8, 0xc9_u8, 0x7_u8, 0xc2_u8])
     def query_interface(this : IPrintCoreHelperPS*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5211,7 +5781,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("7f42285e-91d5-11d1-8820-00c04fb961ec")]
   record IPrintOemCommon, lpVtbl : IPrintOemCommonVtbl* do
     GUID = LibC::GUID.new(0x7f42285e_u32, 0x91d5_u16, 0x11d1_u16, StaticArray[0x88_u8, 0x20_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0xec_u8])
     def query_interface(this : IPrintOemCommon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5254,7 +5823,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("c6a7a9d0-774c-11d1-947f-00a0c90640b8")]
   record IPrintOemUI, lpVtbl : IPrintOemUIVtbl* do
     GUID = LibC::GUID.new(0xc6a7a9d0_u32, 0x774c_u16, 0x11d1_u16, StaticArray[0x94_u8, 0x7f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x40_u8, 0xb8_u8])
     def query_interface(this : IPrintOemUI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5336,7 +5904,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("292515f9-b54b-489b-9275-bab56821395e")]
   record IPrintOemUI2, lpVtbl : IPrintOemUI2Vtbl* do
     GUID = LibC::GUID.new(0x292515f9_u32, 0xb54b_u16, 0x489b_u16, StaticArray[0x92_u8, 0x75_u8, 0xba_u8, 0xb5_u8, 0x68_u8, 0x21_u8, 0x39_u8, 0x5e_u8])
     def query_interface(this : IPrintOemUI2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5413,7 +5980,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("7349d725-e2c1-4dca-afb5-c13e91bc9306")]
   record IPrintOemUIMXDC, lpVtbl : IPrintOemUIMXDCVtbl* do
     GUID = LibC::GUID.new(0x7349d725_u32, 0xe2c1_u16, 0x4dca_u16, StaticArray[0xaf_u8, 0xb5_u8, 0xc1_u8, 0x3e_u8, 0x91_u8, 0xbc_u8, 0x93_u8, 0x6_u8])
     def query_interface(this : IPrintOemUIMXDC*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5448,7 +6014,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("92b05d50-78bc-11d1-9480-00a0c90640b8")]
   record IPrintOemDriverUI, lpVtbl : IPrintOemDriverUIVtbl* do
     GUID = LibC::GUID.new(0x92b05d50_u32, 0x78bc_u16, 0x11d1_u16, StaticArray[0x94_u8, 0x80_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x40_u8, 0xb8_u8])
     def query_interface(this : IPrintOemDriverUI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5493,7 +6058,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("085ccfca-3adf-4c9e-b491-d851a6edc997")]
   record IPrintCoreUI2, lpVtbl : IPrintCoreUI2Vtbl* do
     GUID = LibC::GUID.new(0x85ccfca_u32, 0x3adf_u16, 0x4c9e_u16, StaticArray[0xb4_u8, 0x91_u8, 0xd8_u8, 0x51_u8, 0xa6_u8, 0xed_u8, 0xc9_u8, 0x97_u8])
     def query_interface(this : IPrintCoreUI2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5562,7 +6126,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("bb5116db-0a23-4c3a-a6b6-89e5558dfb5d")]
   record IPrintTicketProvider, lpVtbl : IPrintTicketProviderVtbl* do
     GUID = LibC::GUID.new(0xbb5116db_u32, 0xa23_u16, 0x4c3a_u16, StaticArray[0xa6_u8, 0xb6_u8, 0x89_u8, 0xe5_u8, 0x55_u8, 0x8d_u8, 0xfb_u8, 0x5d_u8])
     def query_interface(this : IPrintTicketProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5615,7 +6178,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("b8a70ab2-3dfc-4fec-a074-511b13c651cb")]
   record IPrintTicketProvider2, lpVtbl : IPrintTicketProvider2Vtbl* do
     GUID = LibC::GUID.new(0xb8a70ab2_u32, 0x3dfc_u16, 0x4fec_u16, StaticArray[0xa0_u8, 0x74_u8, 0x51_u8, 0x1b_u8, 0x13_u8, 0xc6_u8, 0x51_u8, 0xcb_u8])
     def query_interface(this : IPrintTicketProvider2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5672,7 +6234,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("724c1646-e64b-4bbf-8eb4-d45e4fd580da")]
   record IPrintSchemaElement, lpVtbl : IPrintSchemaElementVtbl* do
     GUID = LibC::GUID.new(0x724c1646_u32, 0xe64b_u16, 0x4bbf_u16, StaticArray[0x8e_u8, 0xb4_u8, 0xd4_u8, 0x5e_u8, 0x4f_u8, 0xd5_u8, 0x80_u8, 0xda_u8])
     def query_interface(this : IPrintSchemaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5724,7 +6285,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("af45af49-d6aa-407d-bf87-3912236e9d94")]
   record IPrintSchemaDisplayableElement, lpVtbl : IPrintSchemaDisplayableElementVtbl* do
     GUID = LibC::GUID.new(0xaf45af49_u32, 0xd6aa_u16, 0x407d_u16, StaticArray[0xbf_u8, 0x87_u8, 0x39_u8, 0x12_u8, 0x23_u8, 0x6e_u8, 0x9d_u8, 0x94_u8])
     def query_interface(this : IPrintSchemaDisplayableElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5782,7 +6342,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("66bb2f51-5844-4997-8d70-4b7cc221cf92")]
   record IPrintSchemaOption, lpVtbl : IPrintSchemaOptionVtbl* do
     GUID = LibC::GUID.new(0x66bb2f51_u32, 0x5844_u16, 0x4997_u16, StaticArray[0x8d_u8, 0x70_u8, 0x4b_u8, 0x7c_u8, 0xc2_u8, 0x21_u8, 0xcf_u8, 0x92_u8])
     def query_interface(this : IPrintSchemaOption*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5851,7 +6410,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("68746729-f493-4830-a10f-69028774605d")]
   record IPrintSchemaPageMediaSizeOption, lpVtbl : IPrintSchemaPageMediaSizeOptionVtbl* do
     GUID = LibC::GUID.new(0x68746729_u32, 0xf493_u16, 0x4830_u16, StaticArray[0xa1_u8, 0xf_u8, 0x69_u8, 0x2_u8, 0x87_u8, 0x74_u8, 0x60_u8, 0x5d_u8])
     def query_interface(this : IPrintSchemaPageMediaSizeOption*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5925,7 +6483,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("1f6342f2-d848-42e3-8995-c10a9ef9a3ba")]
   record IPrintSchemaNUpOption, lpVtbl : IPrintSchemaNUpOptionVtbl* do
     GUID = LibC::GUID.new(0x1f6342f2_u32, 0xd848_u16, 0x42e3_u16, StaticArray[0x89_u8, 0x95_u8, 0xc1_u8, 0xa_u8, 0x9e_u8, 0xf9_u8, 0xa3_u8, 0xba_u8])
     def query_interface(this : IPrintSchemaNUpOption*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5991,7 +6548,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("baecb0bd-a946-4771-bc30-e8b24f8d45c1")]
   record IPrintSchemaOptionCollection, lpVtbl : IPrintSchemaOptionCollectionVtbl* do
     GUID = LibC::GUID.new(0xbaecb0bd_u32, 0xa946_u16, 0x4771_u16, StaticArray[0xbc_u8, 0x30_u8, 0xe8_u8, 0xb2_u8, 0x4f_u8, 0x8d_u8, 0x45_u8, 0xc1_u8])
     def query_interface(this : IPrintSchemaOptionCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6048,7 +6604,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("ef189461-5d62-4626-8e57-ff83583c4826")]
   record IPrintSchemaFeature, lpVtbl : IPrintSchemaFeatureVtbl* do
     GUID = LibC::GUID.new(0xef189461_u32, 0x5d62_u16, 0x4626_u16, StaticArray[0x8e_u8, 0x57_u8, 0xff_u8, 0x83_u8, 0x58_u8, 0x3c_u8, 0x48_u8, 0x26_u8])
     def query_interface(this : IPrintSchemaFeature*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6123,7 +6678,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("7c85bf5e-dc7c-4f61-839b-4107e1c9b68e")]
   record IPrintSchemaPageImageableSize, lpVtbl : IPrintSchemaPageImageableSizeVtbl* do
     GUID = LibC::GUID.new(0x7c85bf5e_u32, 0xdc7c_u16, 0x4f61_u16, StaticArray[0x83_u8, 0x9b_u8, 0x41_u8, 0x7_u8, 0xe1_u8, 0xc9_u8, 0xb6_u8, 0x8e_u8])
     def query_interface(this : IPrintSchemaPageImageableSize*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6198,7 +6752,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("b5ade81e-0e61-4fe1-81c6-c333e4ffe0f1")]
   record IPrintSchemaParameterDefinition, lpVtbl : IPrintSchemaParameterDefinitionVtbl* do
     GUID = LibC::GUID.new(0xb5ade81e_u32, 0xe61_u16, 0x4fe1_u16, StaticArray[0x81_u8, 0xc6_u8, 0xc3_u8, 0x33_u8, 0xe4_u8, 0xff_u8, 0xe0_u8, 0xf1_u8])
     def query_interface(this : IPrintSchemaParameterDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6269,7 +6822,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("52027082-0b74-4648-9564-828cc6cb656c")]
   record IPrintSchemaParameterInitializer, lpVtbl : IPrintSchemaParameterInitializerVtbl* do
     GUID = LibC::GUID.new(0x52027082_u32, 0xb74_u16, 0x4648_u16, StaticArray[0x95_u8, 0x64_u8, 0x82_u8, 0x8c_u8, 0xc6_u8, 0xcb_u8, 0x65_u8, 0x6c_u8])
     def query_interface(this : IPrintSchemaParameterInitializer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6333,7 +6885,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("5a577640-501d-4927-bcd0-5ef57a7ed175")]
   record IPrintSchemaCapabilities, lpVtbl : IPrintSchemaCapabilitiesVtbl* do
     GUID = LibC::GUID.new(0x5a577640_u32, 0x501d_u16, 0x4927_u16, StaticArray[0xbc_u8, 0xd0_u8, 0x5e_u8, 0xf5_u8, 0x7a_u8, 0x7e_u8, 0xd1_u8, 0x75_u8])
     def query_interface(this : IPrintSchemaCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6413,7 +6964,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("b58845f4-9970-4d87-a636-169fb82ed642")]
   record IPrintSchemaCapabilities2, lpVtbl : IPrintSchemaCapabilities2Vtbl* do
     GUID = LibC::GUID.new(0xb58845f4_u32, 0x9970_u16, 0x4d87_u16, StaticArray[0xa6_u8, 0x36_u8, 0x16_u8, 0x9f_u8, 0xb8_u8, 0x2e_u8, 0xd6_u8, 0x42_u8])
     def query_interface(this : IPrintSchemaCapabilities2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6487,7 +7037,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("143c8dcb-d37f-47f7-88e8-6b1d21f2c5f7")]
   record IPrintSchemaAsyncOperation, lpVtbl : IPrintSchemaAsyncOperationVtbl* do
     GUID = LibC::GUID.new(0x143c8dcb_u32, 0xd37f_u16, 0x47f7_u16, StaticArray[0x88_u8, 0xe8_u8, 0x6b_u8, 0x1d_u8, 0x21_u8, 0xf2_u8, 0xc5_u8, 0xf7_u8])
     def query_interface(this : IPrintSchemaAsyncOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6543,7 +7092,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("e480b861-4708-4e6d-a5b4-a2b4eeb9baa4")]
   record IPrintSchemaTicket, lpVtbl : IPrintSchemaTicketVtbl* do
     GUID = LibC::GUID.new(0xe480b861_u32, 0x4708_u16, 0x4e6d_u16, StaticArray[0xa5_u8, 0xb4_u8, 0xa2_u8, 0xb4_u8, 0xee_u8, 0xb9_u8, 0xba_u8, 0xa4_u8])
     def query_interface(this : IPrintSchemaTicket*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6627,7 +7175,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("2ec1f844-766a-47a1-91f4-2eeb6190f80c")]
   record IPrintSchemaTicket2, lpVtbl : IPrintSchemaTicket2Vtbl* do
     GUID = LibC::GUID.new(0x2ec1f844_u32, 0x766a_u16, 0x47a1_u16, StaticArray[0x91_u8, 0xf4_u8, 0x2e_u8, 0xeb_u8, 0x61_u8, 0x90_u8, 0xf8_u8, 0xc_u8])
     def query_interface(this : IPrintSchemaTicket2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6703,7 +7250,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("23adbb16-0133-4906-b29a-1dce1d026379")]
   record IPrintSchemaAsyncOperationEvent, lpVtbl : IPrintSchemaAsyncOperationEventVtbl* do
     GUID = LibC::GUID.new(0x23adbb16_u32, 0x133_u16, 0x4906_u16, StaticArray[0xb2_u8, 0x9a_u8, 0x1d_u8, 0xce_u8, 0x1d_u8, 0x2_u8, 0x63_u8, 0x79_u8])
     def query_interface(this : IPrintSchemaAsyncOperationEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6747,7 +7293,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("2072838a-316f-467a-a949-27f68c44a854")]
   record IPrinterScriptableSequentialStream, lpVtbl : IPrinterScriptableSequentialStreamVtbl* do
     GUID = LibC::GUID.new(0x2072838a_u32, 0x316f_u16, 0x467a_u16, StaticArray[0xa9_u8, 0x49_u8, 0x27_u8, 0xf6_u8, 0x8c_u8, 0x44_u8, 0xa8_u8, 0x54_u8])
     def query_interface(this : IPrinterScriptableSequentialStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6797,7 +7342,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("7edf9a92-4750-41a5-a17f-879a6f4f7dcb")]
   record IPrinterScriptableStream, lpVtbl : IPrinterScriptableStreamVtbl* do
     GUID = LibC::GUID.new(0x7edf9a92_u32, 0x4750_u16, 0x41a5_u16, StaticArray[0xa1_u8, 0x7f_u8, 0x87_u8, 0x9a_u8, 0x6f_u8, 0x4f_u8, 0x7d_u8, 0xcb_u8])
     def query_interface(this : IPrinterScriptableStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6861,7 +7405,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("fea77364-df95-4a23-a905-019b79a8e481")]
   record IPrinterPropertyBag, lpVtbl : IPrinterPropertyBagVtbl* do
     GUID = LibC::GUID.new(0xfea77364_u32, 0xdf95_u16, 0x4a23_u16, StaticArray[0xa9_u8, 0x5_u8, 0x1_u8, 0x9b_u8, 0x79_u8, 0xa8_u8, 0xe4_u8, 0x81_u8])
     def query_interface(this : IPrinterPropertyBag*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6940,7 +7483,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("91c7765f-ed57-49ad-8b01-dc24816a5294")]
   record IPrinterScriptablePropertyBag, lpVtbl : IPrinterScriptablePropertyBagVtbl* do
     GUID = LibC::GUID.new(0x91c7765f_u32, 0xed57_u16, 0x49ad_u16, StaticArray[0x8b_u8, 0x1_u8, 0xdc_u8, 0x24_u8, 0x81_u8, 0x6a_u8, 0x52_u8, 0x94_u8])
     def query_interface(this : IPrinterScriptablePropertyBag*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7020,7 +7562,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("2a1c53c4-8638-4b3e-b518-2773c94556a3")]
   record IPrinterScriptablePropertyBag2, lpVtbl : IPrinterScriptablePropertyBag2Vtbl* do
     GUID = LibC::GUID.new(0x2a1c53c4_u32, 0x8638_u16, 0x4b3e_u16, StaticArray[0xb5_u8, 0x18_u8, 0x27_u8, 0x73_u8, 0xc9_u8, 0x45_u8, 0x56_u8, 0xa3_u8])
     def query_interface(this : IPrinterScriptablePropertyBag2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7096,7 +7637,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("3580a828-07fe-4b94-ac1a-757d9d2d3056")]
   record IPrinterQueue, lpVtbl : IPrinterQueueVtbl* do
     GUID = LibC::GUID.new(0x3580a828_u32, 0x7fe_u16, 0x4b94_u16, StaticArray[0xac_u8, 0x1a_u8, 0x75_u8, 0x7d_u8, 0x9d_u8, 0x2d_u8, 0x30_u8, 0x56_u8])
     def query_interface(this : IPrinterQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7150,7 +7690,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("b771dab8-1282-41b7-858c-f206e4d20577")]
   record IPrintJob, lpVtbl : IPrintJobVtbl* do
     GUID = LibC::GUID.new(0xb771dab8_u32, 0x1282_u16, 0x41b7_u16, StaticArray[0x85_u8, 0x8c_u8, 0xf2_u8, 0x6_u8, 0xe4_u8, 0xd2_u8, 0x5_u8, 0x77_u8])
     def query_interface(this : IPrintJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7201,7 +7740,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("72b82a24-a598-4e87-895f-cdb23a49e9dc")]
   record IPrintJobCollection, lpVtbl : IPrintJobCollectionVtbl* do
     GUID = LibC::GUID.new(0x72b82a24_u32, 0xa598_u16, 0x4e87_u16, StaticArray[0x89_u8, 0x5f_u8, 0xcd_u8, 0xb2_u8, 0x3a_u8, 0x49_u8, 0xe9_u8, 0xdc_u8])
     def query_interface(this : IPrintJobCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7250,7 +7788,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("c5b6042b-fd21-404a-a0ef-e2fbb52b9080")]
   record IPrinterQueueViewEvent, lpVtbl : IPrinterQueueViewEventVtbl* do
     GUID = LibC::GUID.new(0xc5b6042b_u32, 0xfd21_u16, 0x404a_u16, StaticArray[0xa0_u8, 0xef_u8, 0xe2_u8, 0xfb_u8, 0xb5_u8, 0x2b_u8, 0x90_u8, 0x80_u8])
     def query_interface(this : IPrinterQueueViewEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7293,7 +7830,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("476e2969-3b2b-4b3f-8277-cff6056042aa")]
   record IPrinterQueueView, lpVtbl : IPrinterQueueViewVtbl* do
     GUID = LibC::GUID.new(0x476e2969_u32, 0x3b2b_u16, 0x4b3f_u16, StaticArray[0x82_u8, 0x77_u8, 0xcf_u8, 0xf6_u8, 0x5_u8, 0x60_u8, 0x42_u8, 0xaa_u8])
     def query_interface(this : IPrinterQueueView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7336,7 +7872,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("214685f6-7b78-4681-87e0-495f739273d1")]
   record IPrinterQueueEvent, lpVtbl : IPrinterQueueEventVtbl* do
     GUID = LibC::GUID.new(0x214685f6_u32, 0x7b78_u16, 0x4681_u16, StaticArray[0x87_u8, 0xe0_u8, 0x49_u8, 0x5f_u8, 0x73_u8, 0x92_u8, 0x73_u8, 0xd1_u8])
     def query_interface(this : IPrinterQueueEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7375,7 +7910,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("c52d32dd-f2b4-4052-8502-ec4305ecb71f")]
   record IPrinterBidiSetRequestCallback, lpVtbl : IPrinterBidiSetRequestCallbackVtbl* do
     GUID = LibC::GUID.new(0xc52d32dd_u32, 0xf2b4_u16, 0x4052_u16, StaticArray[0x85_u8, 0x2_u8, 0xec_u8, 0x43_u8, 0x5_u8, 0xec_u8, 0xb7_u8, 0x1f_u8])
     def query_interface(this : IPrinterBidiSetRequestCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7402,7 +7936,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("108d6a23-6a4b-4552-9448-68b427186acd")]
   record IPrinterExtensionAsyncOperation, lpVtbl : IPrinterExtensionAsyncOperationVtbl* do
     GUID = LibC::GUID.new(0x108d6a23_u32, 0x6a4b_u16, 0x4552_u16, StaticArray[0x94_u8, 0x48_u8, 0x68_u8, 0xb4_u8, 0x27_u8, 0x18_u8, 0x6a_u8, 0xcd_u8])
     def query_interface(this : IPrinterExtensionAsyncOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7438,7 +7971,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("8cd444e8-c9bb-49b3-8e38-e03209416131")]
   record IPrinterQueue2, lpVtbl : IPrinterQueue2Vtbl* do
     GUID = LibC::GUID.new(0x8cd444e8_u32, 0xc9bb_u16, 0x49b3_u16, StaticArray[0x8e_u8, 0x38_u8, 0xe0_u8, 0x32_u8, 0x9_u8, 0x41_u8, 0x61_u8, 0x31_u8])
     def query_interface(this : IPrinterQueue2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7499,7 +8031,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("39843bf2-c4d2-41fd-b4b2-aedbee5e1900")]
   record IPrinterExtensionContext, lpVtbl : IPrinterExtensionContextVtbl* do
     GUID = LibC::GUID.new(0x39843bf2_u32, 0xc4d2_u16, 0x41fd_u16, StaticArray[0xb4_u8, 0xb2_u8, 0xae_u8, 0xdb_u8, 0xee_u8, 0x5e_u8, 0x19_u8, 0x0_u8])
     def query_interface(this : IPrinterExtensionContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7552,7 +8083,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("39843bf3-c4d2-41fd-b4b2-aedbee5e1900")]
   record IPrinterExtensionRequest, lpVtbl : IPrinterExtensionRequestVtbl* do
     GUID = LibC::GUID.new(0x39843bf3_u32, 0xc4d2_u16, 0x41fd_u16, StaticArray[0xb4_u8, 0xb2_u8, 0xae_u8, 0xdb_u8, 0xee_u8, 0x5e_u8, 0x19_u8, 0x0_u8])
     def query_interface(this : IPrinterExtensionRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7608,7 +8138,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("39843bf4-c4d2-41fd-b4b2-aedbee5e1900")]
   record IPrinterExtensionEventArgs, lpVtbl : IPrinterExtensionEventArgsVtbl* do
     GUID = LibC::GUID.new(0x39843bf4_u32, 0xc4d2_u16, 0x41fd_u16, StaticArray[0xb4_u8, 0xb2_u8, 0xae_u8, 0xdb_u8, 0xee_u8, 0x5e_u8, 0x19_u8, 0x0_u8])
     def query_interface(this : IPrinterExtensionEventArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7683,7 +8212,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("fb476970-9bab-4861-811e-3e98b0c5addf")]
   record IPrinterExtensionContextCollection, lpVtbl : IPrinterExtensionContextCollectionVtbl* do
     GUID = LibC::GUID.new(0xfb476970_u32, 0x9bab_u16, 0x4861_u16, StaticArray[0x81_u8, 0x1e_u8, 0x3e_u8, 0x98_u8, 0xb0_u8, 0xc5_u8, 0xad_u8, 0xdf_u8])
     def query_interface(this : IPrinterExtensionContextCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7733,7 +8261,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("c093cb63-5ef5-4585-af8e-4d5637487b57")]
   record IPrinterExtensionEvent, lpVtbl : IPrinterExtensionEventVtbl* do
     GUID = LibC::GUID.new(0xc093cb63_u32, 0x5ef5_u16, 0x4585_u16, StaticArray[0xaf_u8, 0x8e_u8, 0x4d_u8, 0x56_u8, 0x37_u8, 0x48_u8, 0x7b_u8, 0x57_u8])
     def query_interface(this : IPrinterExtensionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7776,7 +8303,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("93c6eb8c-b001-4355-9629-8e8a1b3f8e77")]
   record IPrinterExtensionManager, lpVtbl : IPrinterExtensionManagerVtbl* do
     GUID = LibC::GUID.new(0x93c6eb8c_u32, 0xb001_u16, 0x4355_u16, StaticArray[0x96_u8, 0x29_u8, 0x8e_u8, 0x8a_u8, 0x1b_u8, 0x3f_u8, 0x8e_u8, 0x77_u8])
     def query_interface(this : IPrinterExtensionManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7812,7 +8338,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("066acbca-8881-49c9-bb98-fae16b4889e1")]
   record IPrinterScriptContext, lpVtbl : IPrinterScriptContextVtbl* do
     GUID = LibC::GUID.new(0x66acbca_u32, 0x8881_u16, 0x49c9_u16, StaticArray[0xbb_u8, 0x98_u8, 0xfa_u8, 0xe1_u8, 0x6b_u8, 0x48_u8, 0x89_u8, 0xe1_u8])
     def query_interface(this : IPrinterScriptContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7858,7 +8383,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("77cf513e-5d49-4789-9f30-d0822b335c0d")]
   record IPrintAsyncNotifyDataObject, lpVtbl : IPrintAsyncNotifyDataObjectVtbl* do
     GUID = LibC::GUID.new(0x77cf513e_u32, 0x5d49_u16, 0x4789_u16, StaticArray[0x9f_u8, 0x30_u8, 0xd0_u8, 0x82_u8, 0x2b_u8, 0x33_u8, 0x5c_u8, 0xd_u8])
     def query_interface(this : IPrintAsyncNotifyDataObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7889,7 +8413,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("4a5031b1-1f3f-4db0-a462-4530ed8b0451")]
   record IPrintAsyncNotifyChannel, lpVtbl : IPrintAsyncNotifyChannelVtbl* do
     GUID = LibC::GUID.new(0x4a5031b1_u32, 0x1f3f_u16, 0x4db0_u16, StaticArray[0xa4_u8, 0x62_u8, 0x45_u8, 0x30_u8, 0xed_u8, 0x8b_u8, 0x4_u8, 0x51_u8])
     def query_interface(this : IPrintAsyncNotifyChannel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7920,7 +8443,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("7def34c1-9d92-4c99-b3b3-db94a9d4191b")]
   record IPrintAsyncNotifyCallback, lpVtbl : IPrintAsyncNotifyCallbackVtbl* do
     GUID = LibC::GUID.new(0x7def34c1_u32, 0x9d92_u16, 0x4c99_u16, StaticArray[0xb3_u8, 0xb3_u8, 0xdb_u8, 0x94_u8, 0xa9_u8, 0xd4_u8, 0x19_u8, 0x1b_u8])
     def query_interface(this : IPrintAsyncNotifyCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7951,7 +8473,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("0f6f27b6-6f86-4591-9203-64c3bfadedfe")]
   record IPrintAsyncNotifyRegistration, lpVtbl : IPrintAsyncNotifyRegistrationVtbl* do
     GUID = LibC::GUID.new(0xf6f27b6_u32, 0x6f86_u16, 0x4591_u16, StaticArray[0x92_u8, 0x3_u8, 0x64_u8, 0xc3_u8, 0xbf_u8, 0xad_u8, 0xed_u8, 0xfe_u8])
     def query_interface(this : IPrintAsyncNotifyRegistration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7982,7 +8503,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("532818f7-921b-4fb2-bff8-2f4fd52ebebf")]
   record IPrintAsyncNotify, lpVtbl : IPrintAsyncNotifyVtbl* do
     GUID = LibC::GUID.new(0x532818f7_u32, 0x921b_u16, 0x4fb2_u16, StaticArray[0xbf_u8, 0xf8_u8, 0x2f_u8, 0x4f_u8, 0xd5_u8, 0x2e_u8, 0xbe_u8, 0xbf_u8])
     def query_interface(this : IPrintAsyncNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8252,7 +8772,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("532818f7-921b-4fb2-bff8-2f4fd52ebebf")]
   record IBidiAsyncNotifyChannel, lpVtbl : IBidiAsyncNotifyChannelVtbl* do
     GUID = LibC::GUID.new(0x532818f7_u32, 0x921b_u16, 0x4fb2_u16, StaticArray[0xbf_u8, 0xf8_u8, 0x2f_u8, 0x4f_u8, 0xd5_u8, 0x2e_u8, 0xbe_u8, 0xbf_u8])
     def query_interface(this : IBidiAsyncNotifyChannel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8297,7 +8816,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("9ab8fd0d-cb94-49c2-9cb0-97ec1d5469d2")]
   record IXpsRasterizerNotificationCallback, lpVtbl : IXpsRasterizerNotificationCallbackVtbl* do
     GUID = LibC::GUID.new(0x9ab8fd0d_u32, 0xcb94_u16, 0x49c2_u16, StaticArray[0x9c_u8, 0xb0_u8, 0x97_u8, 0xec_u8, 0x1d_u8, 0x54_u8, 0x69_u8, 0xd2_u8])
     def query_interface(this : IXpsRasterizerNotificationCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8325,7 +8843,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("7567cfc8-c156-47a8-9dac-11a2ae5bdd6b")]
   record IXpsRasterizer, lpVtbl : IXpsRasterizerVtbl* do
     GUID = LibC::GUID.new(0x7567cfc8_u32, 0xc156_u16, 0x47a8_u16, StaticArray[0x9d_u8, 0xac_u8, 0x11_u8, 0xa2_u8, 0xae_u8, 0x5b_u8, 0xdd_u8, 0x6b_u8])
     def query_interface(this : IXpsRasterizer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8355,7 +8872,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("e094808a-24c6-482b-a3a7-c21ac9b55f17")]
   record IXpsRasterizationFactory, lpVtbl : IXpsRasterizationFactoryVtbl* do
     GUID = LibC::GUID.new(0xe094808a_u32, 0x24c6_u16, 0x482b_u16, StaticArray[0xa3_u8, 0xa7_u8, 0xc2_u8, 0x1a_u8, 0xc9_u8, 0xb5_u8, 0x5f_u8, 0x17_u8])
     def query_interface(this : IXpsRasterizationFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8382,7 +8898,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("2d6e5f77-6414-4a1e-a8e0-d4194ce6a26f")]
   record IXpsRasterizationFactory1, lpVtbl : IXpsRasterizationFactory1Vtbl* do
     GUID = LibC::GUID.new(0x2d6e5f77_u32, 0x6414_u16, 0x4a1e_u16, StaticArray[0xa8_u8, 0xe0_u8, 0xd4_u8, 0x19_u8, 0x4c_u8, 0xe6_u8, 0xa2_u8, 0x6f_u8])
     def query_interface(this : IXpsRasterizationFactory1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8409,7 +8924,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("9c16ce3e-10f5-41fd-9ddc-6826669c2ff6")]
   record IXpsRasterizationFactory2, lpVtbl : IXpsRasterizationFactory2Vtbl* do
     GUID = LibC::GUID.new(0x9c16ce3e_u32, 0x10f5_u16, 0x41fd_u16, StaticArray[0x9d_u8, 0xdc_u8, 0x68_u8, 0x26_u8, 0x66_u8, 0x9c_u8, 0x2f_u8, 0xf6_u8])
     def query_interface(this : IXpsRasterizationFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8438,7 +8952,6 @@ module Win32cr::Graphics::Printing
 
 
   @[Extern]
-  #@[Com("1a6dd0ad-1e2a-4e99-a5ba-91f17818290e")]
   record IPrintPreviewDxgiPackageTarget, lpVtbl : IPrintPreviewDxgiPackageTargetVtbl* do
     GUID = LibC::GUID.new(0x1a6dd0ad_u32, 0x1e2a_u16, 0x4e99_u16, StaticArray[0xa5_u8, 0xba_u8, 0x91_u8, 0xf1_u8, 0x78_u8, 0x18_u8, 0x29_u8, 0xe_u8])
     def query_interface(this : IPrintPreviewDxgiPackageTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

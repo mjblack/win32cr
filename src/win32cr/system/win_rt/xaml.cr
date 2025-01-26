@@ -12,8 +12,11 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record TrackerHandle__,
-    unused : Int32
+  struct TrackerHandle__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
   record ISurfaceImageSourceNativeVtbl,
@@ -26,7 +29,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("f2e9edc1-d307-4525-9886-0fafaa44163c")]
   record ISurfaceImageSourceNative, lpVtbl : ISurfaceImageSourceNativeVtbl* do
     GUID = LibC::GUID.new(0xf2e9edc1_u32, 0xd307_u16, 0x4525_u16, StaticArray[0x98_u8, 0x86_u8, 0xf_u8, 0xaf_u8, 0xaa_u8, 0x44_u8, 0x16_u8, 0x3c_u8])
     def query_interface(this : ISurfaceImageSourceNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -59,7 +61,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("dbf2e947-8e6c-4254-9eee-7738f71386c9")]
   record IVirtualSurfaceUpdatesCallbackNative, lpVtbl : IVirtualSurfaceUpdatesCallbackNativeVtbl* do
     GUID = LibC::GUID.new(0xdbf2e947_u32, 0x8e6c_u16, 0x4254_u16, StaticArray[0x9e_u8, 0xee_u8, 0x77_u8, 0x38_u8, 0xf7_u8, 0x13_u8, 0x86_u8, 0xc9_u8])
     def query_interface(this : IVirtualSurfaceUpdatesCallbackNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -94,7 +95,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("e9550983-360b-4f53-b391-afd695078691")]
   record IVirtualSurfaceImageSourceNative, lpVtbl : IVirtualSurfaceImageSourceNativeVtbl* do
     GUID = LibC::GUID.new(0xe9550983_u32, 0x360b_u16, 0x4f53_u16, StaticArray[0xb3_u8, 0x91_u8, 0xaf_u8, 0xd6_u8, 0x95_u8, 0x7_u8, 0x86_u8, 0x91_u8])
     def query_interface(this : IVirtualSurfaceImageSourceNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -145,7 +145,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("43bebd4e-add5-4035-8f85-5608d08e9dc9")]
   record ISwapChainBackgroundPanelNative, lpVtbl : ISwapChainBackgroundPanelNativeVtbl* do
     GUID = LibC::GUID.new(0x43bebd4e_u32, 0xadd5_u16, 0x4035_u16, StaticArray[0x8f_u8, 0x85_u8, 0x56_u8, 0x8_u8, 0xd0_u8, 0x8e_u8, 0x9d_u8, 0xc9_u8])
     def query_interface(this : ISwapChainBackgroundPanelNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -172,7 +171,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("4c8798b7-1d88-4a0f-b59b-b93f600de8c8")]
   record ISurfaceImageSourceManagerNative, lpVtbl : ISurfaceImageSourceManagerNativeVtbl* do
     GUID = LibC::GUID.new(0x4c8798b7_u32, 0x1d88_u16, 0x4a0f_u16, StaticArray[0xb5_u8, 0x9b_u8, 0xb9_u8, 0x3f_u8, 0x60_u8, 0xd_u8, 0xe8_u8, 0xc8_u8])
     def query_interface(this : ISurfaceImageSourceManagerNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -203,7 +201,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("54298223-41e1-4a41-9c08-02e8256864a1")]
   record ISurfaceImageSourceNativeWithD2D, lpVtbl : ISurfaceImageSourceNativeWithD2DVtbl* do
     GUID = LibC::GUID.new(0x54298223_u32, 0x41e1_u16, 0x4a41_u16, StaticArray[0x9c_u8, 0x8_u8, 0x2_u8, 0xe8_u8, 0x25_u8, 0x68_u8, 0x64_u8, 0xa1_u8])
     def query_interface(this : ISurfaceImageSourceNativeWithD2D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -242,7 +239,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("f92f19d2-3ade-45a6-a20c-f6f1ea90554b")]
   record ISwapChainPanelNative, lpVtbl : ISwapChainPanelNativeVtbl* do
     GUID = LibC::GUID.new(0xf92f19d2_u32, 0x3ade_u16, 0x45a6_u16, StaticArray[0xa2_u8, 0xc_u8, 0xf6_u8, 0xf1_u8, 0xea_u8, 0x90_u8, 0x55_u8, 0x4b_u8])
     def query_interface(this : ISwapChainPanelNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -270,7 +266,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("d5a2f60c-37b2-44a2-937b-8d8eb9726821")]
   record ISwapChainPanelNative2, lpVtbl : ISwapChainPanelNative2Vtbl* do
     GUID = LibC::GUID.new(0xd5a2f60c_u32, 0x37b2_u16, 0x44a2_u16, StaticArray[0x93_u8, 0x7b_u8, 0x8d_u8, 0x8e_u8, 0xb9_u8, 0x72_u8, 0x68_u8, 0x21_u8])
     def query_interface(this : ISwapChainPanelNative2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -301,7 +296,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("3cbcf1bf-2f76-4e9c-96ab-e84b37972554")]
   record IDesktopWindowXamlSourceNative, lpVtbl : IDesktopWindowXamlSourceNativeVtbl* do
     GUID = LibC::GUID.new(0x3cbcf1bf_u32, 0x2f76_u16, 0x4e9c_u16, StaticArray[0x96_u8, 0xab_u8, 0xe8_u8, 0x4b_u8, 0x37_u8, 0x97_u8, 0x25_u8, 0x54_u8])
     def query_interface(this : IDesktopWindowXamlSourceNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -333,7 +327,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("e3dcd8c7-3057-4692-99c3-7b7720afda31")]
   record IDesktopWindowXamlSourceNative2, lpVtbl : IDesktopWindowXamlSourceNative2Vtbl* do
     GUID = LibC::GUID.new(0xe3dcd8c7_u32, 0x3057_u16, 0x4692_u16, StaticArray[0x99_u8, 0xc3_u8, 0x7b_u8, 0x77_u8, 0x20_u8, 0xaf_u8, 0xda_u8, 0x31_u8])
     def query_interface(this : IDesktopWindowXamlSourceNative2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -369,7 +362,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("64bd43f8-bfee-4ec4-b7eb-2935158dae21")]
   record IReferenceTrackerTarget, lpVtbl : IReferenceTrackerTargetVtbl* do
     GUID = LibC::GUID.new(0x64bd43f8_u32, 0xbfee_u16, 0x4ec4_u16, StaticArray[0xb7_u8, 0xeb_u8, 0x29_u8, 0x35_u8, 0x15_u8, 0x8d_u8, 0xae_u8, 0x21_u8])
     def query_interface(this : IReferenceTrackerTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -411,7 +403,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("11d3b13a-180e-4789-a8be-7712882893e6")]
   record IReferenceTracker, lpVtbl : IReferenceTrackerVtbl* do
     GUID = LibC::GUID.new(0x11d3b13a_u32, 0x180e_u16, 0x4789_u16, StaticArray[0xa8_u8, 0xbe_u8, 0x77_u8, 0x12_u8, 0x88_u8, 0x28_u8, 0x93_u8, 0xe6_u8])
     def query_interface(this : IReferenceTracker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -459,7 +450,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("3cf184b4-7ccb-4dda-8455-7e6ce99a3298")]
   record IReferenceTrackerManager, lpVtbl : IReferenceTrackerManagerVtbl* do
     GUID = LibC::GUID.new(0x3cf184b4_u32, 0x7ccb_u16, 0x4dda_u16, StaticArray[0x84_u8, 0x55_u8, 0x7e_u8, 0x6c_u8, 0xe9_u8, 0x9a_u8, 0x32_u8, 0x98_u8])
     def query_interface(this : IReferenceTrackerManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -495,7 +485,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("04b3486c-4687-4229-8d14-505ab584dd88")]
   record IFindReferenceTargetsCallback, lpVtbl : IFindReferenceTargetsCallbackVtbl* do
     GUID = LibC::GUID.new(0x4b3486c_u32, 0x4687_u16, 0x4229_u16, StaticArray[0x8d_u8, 0x14_u8, 0x50_u8, 0x5a_u8, 0xb5_u8, 0x84_u8, 0xdd_u8, 0x88_u8])
     def query_interface(this : IFindReferenceTargetsCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -527,7 +516,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("29a71c6a-3c42-4416-a39d-e2825a07a773")]
   record IReferenceTrackerHost, lpVtbl : IReferenceTrackerHostVtbl* do
     GUID = LibC::GUID.new(0x29a71c6a_u32, 0x3c42_u16, 0x4416_u16, StaticArray[0xa3_u8, 0x9d_u8, 0xe2_u8, 0x82_u8, 0x5a_u8, 0x7_u8, 0xa7_u8, 0x73_u8])
     def query_interface(this : IReferenceTrackerHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -568,7 +556,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("4e897caa-59d5-4613-8f8c-f7ebd1f399b0")]
   record IReferenceTrackerExtension, lpVtbl : IReferenceTrackerExtensionVtbl* do
     GUID = LibC::GUID.new(0x4e897caa_u32, 0x59d5_u16, 0x4613_u16, StaticArray[0x8f_u8, 0x8c_u8, 0xf7_u8, 0xeb_u8, 0xd1_u8, 0xf3_u8, 0x99_u8, 0xb0_u8])
     def query_interface(this : IReferenceTrackerExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -595,7 +582,6 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  #@[Com("eb24c20b-9816-4ac7-8cff-36f67a118f4e")]
   record ITrackerOwner, lpVtbl : ITrackerOwnerVtbl* do
     GUID = LibC::GUID.new(0xeb24c20b_u32, 0x9816_u16, 0x4ac7_u16, StaticArray[0x8c_u8, 0xff_u8, 0x36_u8, 0xf6_u8, 0x7a_u8, 0x11_u8, 0x8f_u8, 0x4e_u8])
     def query_interface(this : ITrackerOwner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

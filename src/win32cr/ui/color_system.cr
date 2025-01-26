@@ -5,15 +5,15 @@ require "./windows_and_messaging.cr"
 
 module Win32cr::UI::ColorSystem
   alias HCOLORSPACE = LibC::IntPtrT
-  alias ICMENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::LPARAM, Int32)*
+  alias ICMENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::LPARAM, Int32)
 
-  alias ICMENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Int32)*
+  alias ICMENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Int32)
 
-  alias LPBMCALLBACKFN = Proc(UInt32, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias LPBMCALLBACKFN = Proc(UInt32, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias PCMSCALLBACKW = Proc(Win32cr::UI::ColorSystem::COLORMATCHSETUPW*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias PCMSCALLBACKW = Proc(Win32cr::UI::ColorSystem::COLORMATCHSETUPW*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias PCMSCALLBACKA = Proc(Win32cr::UI::ColorSystem::COLORMATCHSETUPA*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias PCMSCALLBACKA = Proc(Win32cr::UI::ColorSystem::COLORMATCHSETUPA*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
   CATID_WcsPlugin = "a0b402e0-8240-405f-8a16-8a5b4df2f0dd"
   MAX_COLOR_CHANNELS = 8_u32
@@ -212,319 +212,417 @@ module Win32cr::UI::ColorSystem
   end
 
   @[Extern]
-  record LOGCOLORSPACEA,
-    lcsSignature : UInt32,
-    lcsVersion : UInt32,
-    lcsSize : UInt32,
-    lcsCSType : Int32,
-    lcsIntent : Int32,
-    lcsEndpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE,
-    lcsGammaRed : UInt32,
-    lcsGammaGreen : UInt32,
-    lcsGammaBlue : UInt32,
-    lcsFilename : Win32cr::Foundation::CHAR[260]
-
-  @[Extern]
-  record LOGCOLORSPACEW,
-    lcsSignature : UInt32,
-    lcsVersion : UInt32,
-    lcsSize : UInt32,
-    lcsCSType : Int32,
-    lcsIntent : Int32,
-    lcsEndpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE,
-    lcsGammaRed : UInt32,
-    lcsGammaGreen : UInt32,
-    lcsGammaBlue : UInt32,
-    lcsFilename : UInt16[260]
-
-  @[Extern]
-  record EMRCREATECOLORSPACE,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihCS : UInt32,
-    lcs : Win32cr::UI::ColorSystem::LOGCOLORSPACEA
-
-  @[Extern]
-  record EMRCREATECOLORSPACEW,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihCS : UInt32,
-    lcs : Win32cr::UI::ColorSystem::LOGCOLORSPACEW,
-    dwFlags : UInt32,
-    cbData : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record XYZColorF,
-    x : Float32,
-    y : Float32,
-    z : Float32
-
-  @[Extern]
-  record JChColorF,
-    j : Float32,
-    c : Float32,
-    h : Float32
-
-  @[Extern]
-  record JabColorF,
-    j : Float32,
-    a : Float32,
-    b : Float32
-
-  @[Extern]
-  record GamutShellTriangle,
-    aVertexIndex : UInt32[3]
-
-  @[Extern]
-  record GamutShell,
-    j_min : Float32,
-    j_max : Float32,
-    cVertices : UInt32,
-    cTriangles : UInt32,
-    pVertices : Win32cr::UI::ColorSystem::JabColorF*,
-    pTriangles : Win32cr::UI::ColorSystem::GamutShellTriangle*
-
-  @[Extern]
-  record PrimaryJabColors,
-    red : Win32cr::UI::ColorSystem::JabColorF,
-    yellow : Win32cr::UI::ColorSystem::JabColorF,
-    green : Win32cr::UI::ColorSystem::JabColorF,
-    cyan : Win32cr::UI::ColorSystem::JabColorF,
-    blue : Win32cr::UI::ColorSystem::JabColorF,
-    magenta : Win32cr::UI::ColorSystem::JabColorF,
-    black : Win32cr::UI::ColorSystem::JabColorF,
-    white : Win32cr::UI::ColorSystem::JabColorF
-
-  @[Extern]
-  record PrimaryXYZColors,
-    red : Win32cr::UI::ColorSystem::XYZColorF,
-    yellow : Win32cr::UI::ColorSystem::XYZColorF,
-    green : Win32cr::UI::ColorSystem::XYZColorF,
-    cyan : Win32cr::UI::ColorSystem::XYZColorF,
-    blue : Win32cr::UI::ColorSystem::XYZColorF,
-    magenta : Win32cr::UI::ColorSystem::XYZColorF,
-    black : Win32cr::UI::ColorSystem::XYZColorF,
-    white : Win32cr::UI::ColorSystem::XYZColorF
-
-  @[Extern]
-  record GamutBoundaryDescription,
-    pPrimaries : Win32cr::UI::ColorSystem::PrimaryJabColors*,
-    cNeutralSamples : UInt32,
-    pNeutralSamples : Win32cr::UI::ColorSystem::JabColorF*,
-    pReferenceShell : Win32cr::UI::ColorSystem::GamutShell*,
-    pPlausibleShell : Win32cr::UI::ColorSystem::GamutShell*,
-    pPossibleShell : Win32cr::UI::ColorSystem::GamutShell*
-
-  @[Extern]
-  record BlackInformation,
-    fBlackOnly : Win32cr::Foundation::BOOL,
-    blackWeight : Float32
-
-  @[Extern]
-  record NAMED_PROFILE_INFO,
-    dwFlags : UInt32,
-    dwCount : UInt32,
-    dwCountDevCoordinates : UInt32,
-    szPrefix : Int8[32],
-    szSuffix : Int8[32]
-
-  @[Extern]
-  record GRAYCOLOR,
-    gray : UInt16
-
-  @[Extern]
-  record RGBCOLOR,
-    red : UInt16,
-    green : UInt16,
-    blue : UInt16
-
-  @[Extern]
-  record CMYKCOLOR,
-    cyan : UInt16,
-    magenta : UInt16,
-    yellow : UInt16,
-    black : UInt16
-
-  @[Extern]
-  record XYZCOLOR,
-    x : UInt16,
-    y : UInt16,
-    z : UInt16
-
-  @[Extern]
-  record YxyCOLOR,
-    y : UInt16,
-    x : UInt16,
-    y_ : UInt16
-
-  @[Extern]
-  record LabCOLOR,
-    l : UInt16,
-    a : UInt16,
-    b : UInt16
-
-  @[Extern]
-  record GENERIC3CHANNEL,
-    ch1 : UInt16,
-    ch2 : UInt16,
-    ch3 : UInt16
-
-  @[Extern]
-  record NAMEDCOLOR,
-    dwIndex : UInt32
-
-  @[Extern]
-  record HiFiCOLOR,
-    channel : UInt8[8]
-
-  @[Extern(union: true)]
-  record COLOR,
-    gray : Win32cr::UI::ColorSystem::GRAYCOLOR,
-    rgb : Win32cr::UI::ColorSystem::RGBCOLOR,
-    cmyk : Win32cr::UI::ColorSystem::CMYKCOLOR,
-    xyz : Win32cr::UI::ColorSystem::XYZCOLOR,
-    yxy : Win32cr::UI::ColorSystem::YxyCOLOR,
-    lab : Win32cr::UI::ColorSystem::LabCOLOR,
-    gen3ch : Win32cr::UI::ColorSystem::GENERIC3CHANNEL,
-    named : Win32cr::UI::ColorSystem::NAMEDCOLOR,
-    hifi : Win32cr::UI::ColorSystem::HiFiCOLOR,
-    anonymous : Anonymous_e__Struct_ do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      reserved1 : UInt32,
-      reserved2 : Void*
-
+  struct LOGCOLORSPACEA
+    property lcsSignature : UInt32
+    property lcsVersion : UInt32
+    property lcsSize : UInt32
+    property lcsCSType : Int32
+    property lcsIntent : Int32
+    property lcsEndpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE
+    property lcsGammaRed : UInt32
+    property lcsGammaGreen : UInt32
+    property lcsGammaBlue : UInt32
+    property lcsFilename : Win32cr::Foundation::CHAR[260]
+    def initialize(@lcsSignature : UInt32, @lcsVersion : UInt32, @lcsSize : UInt32, @lcsCSType : Int32, @lcsIntent : Int32, @lcsEndpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE, @lcsGammaRed : UInt32, @lcsGammaGreen : UInt32, @lcsGammaBlue : UInt32, @lcsFilename : Win32cr::Foundation::CHAR[260])
+    end
   end
 
   @[Extern]
-  record PROFILEHEADER,
-    phSize : UInt32,
-    phCMMType : UInt32,
-    phVersion : UInt32,
-    phClass : UInt32,
-    phDataColorSpace : UInt32,
-    phConnectionSpace : UInt32,
-    phDateTime : UInt32[3],
-    phSignature : UInt32,
-    phPlatform : UInt32,
-    phProfileFlags : UInt32,
-    phManufacturer : UInt32,
-    phModel : UInt32,
-    phAttributes : UInt32[2],
-    phRenderingIntent : UInt32,
-    phIlluminant : Win32cr::Graphics::Gdi::CIEXYZ,
-    phCreator : UInt32,
-    phReserved : UInt8[44]
+  struct LOGCOLORSPACEW
+    property lcsSignature : UInt32
+    property lcsVersion : UInt32
+    property lcsSize : UInt32
+    property lcsCSType : Int32
+    property lcsIntent : Int32
+    property lcsEndpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE
+    property lcsGammaRed : UInt32
+    property lcsGammaGreen : UInt32
+    property lcsGammaBlue : UInt32
+    property lcsFilename : UInt16[260]
+    def initialize(@lcsSignature : UInt32, @lcsVersion : UInt32, @lcsSize : UInt32, @lcsCSType : Int32, @lcsIntent : Int32, @lcsEndpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE, @lcsGammaRed : UInt32, @lcsGammaGreen : UInt32, @lcsGammaBlue : UInt32, @lcsFilename : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record PROFILE,
-    dwType : UInt32,
-    pProfileData : Void*,
-    cbDataSize : UInt32
+  struct EMRCREATECOLORSPACE
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihCS : UInt32
+    property lcs : Win32cr::UI::ColorSystem::LOGCOLORSPACEA
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihCS : UInt32, @lcs : Win32cr::UI::ColorSystem::LOGCOLORSPACEA)
+    end
+  end
 
   @[Extern]
-  record ENUMTYPEA,
-    dwSize : UInt32,
-    dwVersion : UInt32,
-    dwFields : UInt32,
-    pDeviceName : Win32cr::Foundation::PSTR,
-    dwMediaType : UInt32,
-    dwDitheringMode : UInt32,
-    dwResolution : UInt32[2],
-    dwCMMType : UInt32,
-    dwClass : UInt32,
-    dwDataColorSpace : UInt32,
-    dwConnectionSpace : UInt32,
-    dwSignature : UInt32,
-    dwPlatform : UInt32,
-    dwProfileFlags : UInt32,
-    dwManufacturer : UInt32,
-    dwModel : UInt32,
-    dwAttributes : UInt32[2],
-    dwRenderingIntent : UInt32,
-    dwCreator : UInt32,
-    dwDeviceClass : UInt32
+  struct EMRCREATECOLORSPACEW
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihCS : UInt32
+    property lcs : Win32cr::UI::ColorSystem::LOGCOLORSPACEW
+    property dwFlags : UInt32
+    property cbData : UInt32
+    property data : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihCS : UInt32, @lcs : Win32cr::UI::ColorSystem::LOGCOLORSPACEW, @dwFlags : UInt32, @cbData : UInt32, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record ENUMTYPEW,
-    dwSize : UInt32,
-    dwVersion : UInt32,
-    dwFields : UInt32,
-    pDeviceName : Win32cr::Foundation::PWSTR,
-    dwMediaType : UInt32,
-    dwDitheringMode : UInt32,
-    dwResolution : UInt32[2],
-    dwCMMType : UInt32,
-    dwClass : UInt32,
-    dwDataColorSpace : UInt32,
-    dwConnectionSpace : UInt32,
-    dwSignature : UInt32,
-    dwPlatform : UInt32,
-    dwProfileFlags : UInt32,
-    dwManufacturer : UInt32,
-    dwModel : UInt32,
-    dwAttributes : UInt32[2],
-    dwRenderingIntent : UInt32,
-    dwCreator : UInt32,
-    dwDeviceClass : UInt32
+  struct XYZColorF
+    property x : Float32
+    property y : Float32
+    property z : Float32
+    def initialize(@x : Float32, @y : Float32, @z : Float32)
+    end
+  end
 
   @[Extern]
-  record COLORMATCHSETUPW,
-    dwSize : UInt32,
-    dwVersion : UInt32,
-    dwFlags : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    pSourceName : Win32cr::Foundation::PWSTR,
-    pDisplayName : Win32cr::Foundation::PWSTR,
-    pPrinterName : Win32cr::Foundation::PWSTR,
-    dwRenderIntent : UInt32,
-    dwProofingIntent : UInt32,
-    pMonitorProfile : Win32cr::Foundation::PWSTR,
-    ccMonitorProfile : UInt32,
-    pPrinterProfile : Win32cr::Foundation::PWSTR,
-    ccPrinterProfile : UInt32,
-    pTargetProfile : Win32cr::Foundation::PWSTR,
-    ccTargetProfile : UInt32,
-    lpfnHook : Win32cr::UI::WindowsAndMessaging::DLGPROC,
-    lParam : Win32cr::Foundation::LPARAM,
-    lpfnApplyCallback : Win32cr::UI::ColorSystem::PCMSCALLBACKW,
-    lParamApplyCallback : Win32cr::Foundation::LPARAM
+  struct JChColorF
+    property j : Float32
+    property c : Float32
+    property h : Float32
+    def initialize(@j : Float32, @c : Float32, @h : Float32)
+    end
+  end
 
   @[Extern]
-  record COLORMATCHSETUPA,
-    dwSize : UInt32,
-    dwVersion : UInt32,
-    dwFlags : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    pSourceName : Win32cr::Foundation::PSTR,
-    pDisplayName : Win32cr::Foundation::PSTR,
-    pPrinterName : Win32cr::Foundation::PSTR,
-    dwRenderIntent : UInt32,
-    dwProofingIntent : UInt32,
-    pMonitorProfile : Win32cr::Foundation::PSTR,
-    ccMonitorProfile : UInt32,
-    pPrinterProfile : Win32cr::Foundation::PSTR,
-    ccPrinterProfile : UInt32,
-    pTargetProfile : Win32cr::Foundation::PSTR,
-    ccTargetProfile : UInt32,
-    lpfnHook : Win32cr::UI::WindowsAndMessaging::DLGPROC,
-    lParam : Win32cr::Foundation::LPARAM,
-    lpfnApplyCallback : Win32cr::UI::ColorSystem::PCMSCALLBACKA,
-    lParamApplyCallback : Win32cr::Foundation::LPARAM
+  struct JabColorF
+    property j : Float32
+    property a : Float32
+    property b : Float32
+    def initialize(@j : Float32, @a : Float32, @b : Float32)
+    end
+  end
 
   @[Extern]
-  record WCS_DEVICE_VCGT_CAPABILITIES,
-    size : UInt32,
-    supports_vcgt : Win32cr::Foundation::BOOL
+  struct GamutShellTriangle
+    property aVertexIndex : UInt32[3]
+    def initialize(@aVertexIndex : UInt32[3])
+    end
+  end
 
   @[Extern]
-  record WCS_DEVICE_MHC2_CAPABILITIES,
-    size : UInt32,
-    supports_mhc2 : Win32cr::Foundation::BOOL,
-    regamma_lut_entry_count : UInt32,
-    csc_xyz_matrix_rows : UInt32,
-    csc_xyz_matrix_columns : UInt32
+  struct GamutShell
+    property j_min : Float32
+    property j_max : Float32
+    property cVertices : UInt32
+    property cTriangles : UInt32
+    property pVertices : Win32cr::UI::ColorSystem::JabColorF*
+    property pTriangles : Win32cr::UI::ColorSystem::GamutShellTriangle*
+    def initialize(@j_min : Float32, @j_max : Float32, @cVertices : UInt32, @cTriangles : UInt32, @pVertices : Win32cr::UI::ColorSystem::JabColorF*, @pTriangles : Win32cr::UI::ColorSystem::GamutShellTriangle*)
+    end
+  end
+
+  @[Extern]
+  struct PrimaryJabColors
+    property red : Win32cr::UI::ColorSystem::JabColorF
+    property yellow : Win32cr::UI::ColorSystem::JabColorF
+    property green : Win32cr::UI::ColorSystem::JabColorF
+    property cyan : Win32cr::UI::ColorSystem::JabColorF
+    property blue : Win32cr::UI::ColorSystem::JabColorF
+    property magenta : Win32cr::UI::ColorSystem::JabColorF
+    property black : Win32cr::UI::ColorSystem::JabColorF
+    property white : Win32cr::UI::ColorSystem::JabColorF
+    def initialize(@red : Win32cr::UI::ColorSystem::JabColorF, @yellow : Win32cr::UI::ColorSystem::JabColorF, @green : Win32cr::UI::ColorSystem::JabColorF, @cyan : Win32cr::UI::ColorSystem::JabColorF, @blue : Win32cr::UI::ColorSystem::JabColorF, @magenta : Win32cr::UI::ColorSystem::JabColorF, @black : Win32cr::UI::ColorSystem::JabColorF, @white : Win32cr::UI::ColorSystem::JabColorF)
+    end
+  end
+
+  @[Extern]
+  struct PrimaryXYZColors
+    property red : Win32cr::UI::ColorSystem::XYZColorF
+    property yellow : Win32cr::UI::ColorSystem::XYZColorF
+    property green : Win32cr::UI::ColorSystem::XYZColorF
+    property cyan : Win32cr::UI::ColorSystem::XYZColorF
+    property blue : Win32cr::UI::ColorSystem::XYZColorF
+    property magenta : Win32cr::UI::ColorSystem::XYZColorF
+    property black : Win32cr::UI::ColorSystem::XYZColorF
+    property white : Win32cr::UI::ColorSystem::XYZColorF
+    def initialize(@red : Win32cr::UI::ColorSystem::XYZColorF, @yellow : Win32cr::UI::ColorSystem::XYZColorF, @green : Win32cr::UI::ColorSystem::XYZColorF, @cyan : Win32cr::UI::ColorSystem::XYZColorF, @blue : Win32cr::UI::ColorSystem::XYZColorF, @magenta : Win32cr::UI::ColorSystem::XYZColorF, @black : Win32cr::UI::ColorSystem::XYZColorF, @white : Win32cr::UI::ColorSystem::XYZColorF)
+    end
+  end
+
+  @[Extern]
+  struct GamutBoundaryDescription
+    property pPrimaries : Win32cr::UI::ColorSystem::PrimaryJabColors*
+    property cNeutralSamples : UInt32
+    property pNeutralSamples : Win32cr::UI::ColorSystem::JabColorF*
+    property pReferenceShell : Win32cr::UI::ColorSystem::GamutShell*
+    property pPlausibleShell : Win32cr::UI::ColorSystem::GamutShell*
+    property pPossibleShell : Win32cr::UI::ColorSystem::GamutShell*
+    def initialize(@pPrimaries : Win32cr::UI::ColorSystem::PrimaryJabColors*, @cNeutralSamples : UInt32, @pNeutralSamples : Win32cr::UI::ColorSystem::JabColorF*, @pReferenceShell : Win32cr::UI::ColorSystem::GamutShell*, @pPlausibleShell : Win32cr::UI::ColorSystem::GamutShell*, @pPossibleShell : Win32cr::UI::ColorSystem::GamutShell*)
+    end
+  end
+
+  @[Extern]
+  struct BlackInformation
+    property fBlackOnly : Win32cr::Foundation::BOOL
+    property blackWeight : Float32
+    def initialize(@fBlackOnly : Win32cr::Foundation::BOOL, @blackWeight : Float32)
+    end
+  end
+
+  @[Extern]
+  struct NAMED_PROFILE_INFO
+    property dwFlags : UInt32
+    property dwCount : UInt32
+    property dwCountDevCoordinates : UInt32
+    property szPrefix : Int8[32]
+    property szSuffix : Int8[32]
+    def initialize(@dwFlags : UInt32, @dwCount : UInt32, @dwCountDevCoordinates : UInt32, @szPrefix : Int8[32], @szSuffix : Int8[32])
+    end
+  end
+
+  @[Extern]
+  struct GRAYCOLOR
+    property gray : UInt16
+    def initialize(@gray : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct RGBCOLOR
+    property red : UInt16
+    property green : UInt16
+    property blue : UInt16
+    def initialize(@red : UInt16, @green : UInt16, @blue : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct CMYKCOLOR
+    property cyan : UInt16
+    property magenta : UInt16
+    property yellow : UInt16
+    property black : UInt16
+    def initialize(@cyan : UInt16, @magenta : UInt16, @yellow : UInt16, @black : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct XYZCOLOR
+    property x : UInt16
+    property y : UInt16
+    property z : UInt16
+    def initialize(@x : UInt16, @y : UInt16, @z : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct YxyCOLOR
+    property y : UInt16
+    property x : UInt16
+    property y_ : UInt16
+    def initialize(@y : UInt16, @x : UInt16, @y_ : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct LabCOLOR
+    property l : UInt16
+    property a : UInt16
+    property b : UInt16
+    def initialize(@l : UInt16, @a : UInt16, @b : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct GENERIC3CHANNEL
+    property ch1 : UInt16
+    property ch2 : UInt16
+    property ch3 : UInt16
+    def initialize(@ch1 : UInt16, @ch2 : UInt16, @ch3 : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct NAMEDCOLOR
+    property dwIndex : UInt32
+    def initialize(@dwIndex : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct HiFiCOLOR
+    property channel : UInt8[8]
+    def initialize(@channel : UInt8[8])
+    end
+  end
+
+  @[Extern(union: true)]
+  struct COLOR
+    property gray : Win32cr::UI::ColorSystem::GRAYCOLOR
+    property rgb : Win32cr::UI::ColorSystem::RGBCOLOR
+    property cmyk : Win32cr::UI::ColorSystem::CMYKCOLOR
+    property xyz : Win32cr::UI::ColorSystem::XYZCOLOR
+    property yxy : Win32cr::UI::ColorSystem::YxyCOLOR
+    property lab : Win32cr::UI::ColorSystem::LabCOLOR
+    property gen3ch : Win32cr::UI::ColorSystem::GENERIC3CHANNEL
+    property named : Win32cr::UI::ColorSystem::NAMEDCOLOR
+    property hifi : Win32cr::UI::ColorSystem::HiFiCOLOR
+    property anonymous : Anonymous_e__Struct_
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property reserved1 : UInt32
+    property reserved2 : Void*
+    def initialize(@reserved1 : UInt32, @reserved2 : Void*)
+    end
+    end
+
+    def initialize(@gray : Win32cr::UI::ColorSystem::GRAYCOLOR, @rgb : Win32cr::UI::ColorSystem::RGBCOLOR, @cmyk : Win32cr::UI::ColorSystem::CMYKCOLOR, @xyz : Win32cr::UI::ColorSystem::XYZCOLOR, @yxy : Win32cr::UI::ColorSystem::YxyCOLOR, @lab : Win32cr::UI::ColorSystem::LabCOLOR, @gen3ch : Win32cr::UI::ColorSystem::GENERIC3CHANNEL, @named : Win32cr::UI::ColorSystem::NAMEDCOLOR, @hifi : Win32cr::UI::ColorSystem::HiFiCOLOR, @anonymous : Anonymous_e__Struct_)
+    end
+  end
+
+  @[Extern]
+  struct PROFILEHEADER
+    property phSize : UInt32
+    property phCMMType : UInt32
+    property phVersion : UInt32
+    property phClass : UInt32
+    property phDataColorSpace : UInt32
+    property phConnectionSpace : UInt32
+    property phDateTime : UInt32[3]
+    property phSignature : UInt32
+    property phPlatform : UInt32
+    property phProfileFlags : UInt32
+    property phManufacturer : UInt32
+    property phModel : UInt32
+    property phAttributes : UInt32[2]
+    property phRenderingIntent : UInt32
+    property phIlluminant : Win32cr::Graphics::Gdi::CIEXYZ
+    property phCreator : UInt32
+    property phReserved : UInt8[44]
+    def initialize(@phSize : UInt32, @phCMMType : UInt32, @phVersion : UInt32, @phClass : UInt32, @phDataColorSpace : UInt32, @phConnectionSpace : UInt32, @phDateTime : UInt32[3], @phSignature : UInt32, @phPlatform : UInt32, @phProfileFlags : UInt32, @phManufacturer : UInt32, @phModel : UInt32, @phAttributes : UInt32[2], @phRenderingIntent : UInt32, @phIlluminant : Win32cr::Graphics::Gdi::CIEXYZ, @phCreator : UInt32, @phReserved : UInt8[44])
+    end
+  end
+
+  @[Extern]
+  struct PROFILE
+    property dwType : UInt32
+    property pProfileData : Void*
+    property cbDataSize : UInt32
+    def initialize(@dwType : UInt32, @pProfileData : Void*, @cbDataSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ENUMTYPEA
+    property dwSize : UInt32
+    property dwVersion : UInt32
+    property dwFields : UInt32
+    property pDeviceName : Win32cr::Foundation::PSTR
+    property dwMediaType : UInt32
+    property dwDitheringMode : UInt32
+    property dwResolution : UInt32[2]
+    property dwCMMType : UInt32
+    property dwClass : UInt32
+    property dwDataColorSpace : UInt32
+    property dwConnectionSpace : UInt32
+    property dwSignature : UInt32
+    property dwPlatform : UInt32
+    property dwProfileFlags : UInt32
+    property dwManufacturer : UInt32
+    property dwModel : UInt32
+    property dwAttributes : UInt32[2]
+    property dwRenderingIntent : UInt32
+    property dwCreator : UInt32
+    property dwDeviceClass : UInt32
+    def initialize(@dwSize : UInt32, @dwVersion : UInt32, @dwFields : UInt32, @pDeviceName : Win32cr::Foundation::PSTR, @dwMediaType : UInt32, @dwDitheringMode : UInt32, @dwResolution : UInt32[2], @dwCMMType : UInt32, @dwClass : UInt32, @dwDataColorSpace : UInt32, @dwConnectionSpace : UInt32, @dwSignature : UInt32, @dwPlatform : UInt32, @dwProfileFlags : UInt32, @dwManufacturer : UInt32, @dwModel : UInt32, @dwAttributes : UInt32[2], @dwRenderingIntent : UInt32, @dwCreator : UInt32, @dwDeviceClass : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ENUMTYPEW
+    property dwSize : UInt32
+    property dwVersion : UInt32
+    property dwFields : UInt32
+    property pDeviceName : Win32cr::Foundation::PWSTR
+    property dwMediaType : UInt32
+    property dwDitheringMode : UInt32
+    property dwResolution : UInt32[2]
+    property dwCMMType : UInt32
+    property dwClass : UInt32
+    property dwDataColorSpace : UInt32
+    property dwConnectionSpace : UInt32
+    property dwSignature : UInt32
+    property dwPlatform : UInt32
+    property dwProfileFlags : UInt32
+    property dwManufacturer : UInt32
+    property dwModel : UInt32
+    property dwAttributes : UInt32[2]
+    property dwRenderingIntent : UInt32
+    property dwCreator : UInt32
+    property dwDeviceClass : UInt32
+    def initialize(@dwSize : UInt32, @dwVersion : UInt32, @dwFields : UInt32, @pDeviceName : Win32cr::Foundation::PWSTR, @dwMediaType : UInt32, @dwDitheringMode : UInt32, @dwResolution : UInt32[2], @dwCMMType : UInt32, @dwClass : UInt32, @dwDataColorSpace : UInt32, @dwConnectionSpace : UInt32, @dwSignature : UInt32, @dwPlatform : UInt32, @dwProfileFlags : UInt32, @dwManufacturer : UInt32, @dwModel : UInt32, @dwAttributes : UInt32[2], @dwRenderingIntent : UInt32, @dwCreator : UInt32, @dwDeviceClass : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct COLORMATCHSETUPW
+    property dwSize : UInt32
+    property dwVersion : UInt32
+    property dwFlags : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property pSourceName : Win32cr::Foundation::PWSTR
+    property pDisplayName : Win32cr::Foundation::PWSTR
+    property pPrinterName : Win32cr::Foundation::PWSTR
+    property dwRenderIntent : UInt32
+    property dwProofingIntent : UInt32
+    property pMonitorProfile : Win32cr::Foundation::PWSTR
+    property ccMonitorProfile : UInt32
+    property pPrinterProfile : Win32cr::Foundation::PWSTR
+    property ccPrinterProfile : UInt32
+    property pTargetProfile : Win32cr::Foundation::PWSTR
+    property ccTargetProfile : UInt32
+    property lpfnHook : Win32cr::UI::WindowsAndMessaging::DLGPROC
+    property lParam : Win32cr::Foundation::LPARAM
+    property lpfnApplyCallback : Win32cr::UI::ColorSystem::PCMSCALLBACKW
+    property lParamApplyCallback : Win32cr::Foundation::LPARAM
+    def initialize(@dwSize : UInt32, @dwVersion : UInt32, @dwFlags : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @pSourceName : Win32cr::Foundation::PWSTR, @pDisplayName : Win32cr::Foundation::PWSTR, @pPrinterName : Win32cr::Foundation::PWSTR, @dwRenderIntent : UInt32, @dwProofingIntent : UInt32, @pMonitorProfile : Win32cr::Foundation::PWSTR, @ccMonitorProfile : UInt32, @pPrinterProfile : Win32cr::Foundation::PWSTR, @ccPrinterProfile : UInt32, @pTargetProfile : Win32cr::Foundation::PWSTR, @ccTargetProfile : UInt32, @lpfnHook : Win32cr::UI::WindowsAndMessaging::DLGPROC, @lParam : Win32cr::Foundation::LPARAM, @lpfnApplyCallback : Win32cr::UI::ColorSystem::PCMSCALLBACKW, @lParamApplyCallback : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct COLORMATCHSETUPA
+    property dwSize : UInt32
+    property dwVersion : UInt32
+    property dwFlags : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property pSourceName : Win32cr::Foundation::PSTR
+    property pDisplayName : Win32cr::Foundation::PSTR
+    property pPrinterName : Win32cr::Foundation::PSTR
+    property dwRenderIntent : UInt32
+    property dwProofingIntent : UInt32
+    property pMonitorProfile : Win32cr::Foundation::PSTR
+    property ccMonitorProfile : UInt32
+    property pPrinterProfile : Win32cr::Foundation::PSTR
+    property ccPrinterProfile : UInt32
+    property pTargetProfile : Win32cr::Foundation::PSTR
+    property ccTargetProfile : UInt32
+    property lpfnHook : Win32cr::UI::WindowsAndMessaging::DLGPROC
+    property lParam : Win32cr::Foundation::LPARAM
+    property lpfnApplyCallback : Win32cr::UI::ColorSystem::PCMSCALLBACKA
+    property lParamApplyCallback : Win32cr::Foundation::LPARAM
+    def initialize(@dwSize : UInt32, @dwVersion : UInt32, @dwFlags : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @pSourceName : Win32cr::Foundation::PSTR, @pDisplayName : Win32cr::Foundation::PSTR, @pPrinterName : Win32cr::Foundation::PSTR, @dwRenderIntent : UInt32, @dwProofingIntent : UInt32, @pMonitorProfile : Win32cr::Foundation::PSTR, @ccMonitorProfile : UInt32, @pPrinterProfile : Win32cr::Foundation::PSTR, @ccPrinterProfile : UInt32, @pTargetProfile : Win32cr::Foundation::PSTR, @ccTargetProfile : UInt32, @lpfnHook : Win32cr::UI::WindowsAndMessaging::DLGPROC, @lParam : Win32cr::Foundation::LPARAM, @lpfnApplyCallback : Win32cr::UI::ColorSystem::PCMSCALLBACKA, @lParamApplyCallback : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct WCS_DEVICE_VCGT_CAPABILITIES
+    property size : UInt32
+    property supports_vcgt : Win32cr::Foundation::BOOL
+    def initialize(@size : UInt32, @supports_vcgt : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WCS_DEVICE_MHC2_CAPABILITIES
+    property size : UInt32
+    property supports_mhc2 : Win32cr::Foundation::BOOL
+    property regamma_lut_entry_count : UInt32
+    property csc_xyz_matrix_rows : UInt32
+    property csc_xyz_matrix_columns : UInt32
+    def initialize(@size : UInt32, @supports_mhc2 : Win32cr::Foundation::BOOL, @regamma_lut_entry_count : UInt32, @csc_xyz_matrix_rows : UInt32, @csc_xyz_matrix_columns : UInt32)
+    end
+  end
 
   @[Extern]
   record IDeviceModelPlugInVtbl,
@@ -545,7 +643,6 @@ module Win32cr::UI::ColorSystem
 
 
   @[Extern]
-  #@[Com("1cd63475-07c4-46fe-a903-d655316d11fd")]
   record IDeviceModelPlugIn, lpVtbl : IDeviceModelPlugInVtbl* do
     GUID = LibC::GUID.new(0x1cd63475_u32, 0x7c4_u16, 0x46fe_u16, StaticArray[0xa9_u8, 0x3_u8, 0xd6_u8, 0x55_u8, 0x31_u8, 0x6d_u8, 0x11_u8, 0xfd_u8])
     def query_interface(this : IDeviceModelPlugIn*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -603,7 +700,6 @@ module Win32cr::UI::ColorSystem
 
 
   @[Extern]
-  #@[Com("2dd80115-ad1e-41f6-a219-a4f4b583d1f9")]
   record IGamutMapModelPlugIn, lpVtbl : IGamutMapModelPlugInVtbl* do
     GUID = LibC::GUID.new(0x2dd80115_u32, 0xad1e_u16, 0x41f6_u16, StaticArray[0xa2_u8, 0x19_u8, 0xa4_u8, 0xf4_u8, 0xb5_u8, 0x83_u8, 0xd1_u8, 0xf9_u8])
     def query_interface(this : IGamutMapModelPlugIn*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

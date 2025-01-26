@@ -74,16 +74,22 @@ module Win32cr::Management::MobileDeviceManagementRegistration
   end
 
   @[Extern]
-  record MANAGEMENT_SERVICE_INFO,
-    pszMDMServiceUri : Win32cr::Foundation::PWSTR,
-    pszAuthenticationUri : Win32cr::Foundation::PWSTR
+  struct MANAGEMENT_SERVICE_INFO
+    property pszMDMServiceUri : Win32cr::Foundation::PWSTR
+    property pszAuthenticationUri : Win32cr::Foundation::PWSTR
+    def initialize(@pszMDMServiceUri : Win32cr::Foundation::PWSTR, @pszAuthenticationUri : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record MANAGEMENT_REGISTRATION_INFO,
-    fDeviceRegisteredWithManagement : Win32cr::Foundation::BOOL,
-    dwDeviceRegistionKind : UInt32,
-    pszUPN : Win32cr::Foundation::PWSTR,
-    pszMDMServiceUri : Win32cr::Foundation::PWSTR
+  struct MANAGEMENT_REGISTRATION_INFO
+    property fDeviceRegisteredWithManagement : Win32cr::Foundation::BOOL
+    property dwDeviceRegistionKind : UInt32
+    property pszUPN : Win32cr::Foundation::PWSTR
+    property pszMDMServiceUri : Win32cr::Foundation::PWSTR
+    def initialize(@fDeviceRegisteredWithManagement : Win32cr::Foundation::BOOL, @dwDeviceRegistionKind : UInt32, @pszUPN : Win32cr::Foundation::PWSTR, @pszMDMServiceUri : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Link("mdmregistration")]
   @[Link("mdmlocalmanagement")]

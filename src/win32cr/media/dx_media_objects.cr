@@ -73,28 +73,37 @@ module Win32cr::Media::DxMediaObjects
   end
 
   @[Extern]
-  record DMO_MEDIA_TYPE,
-    majortype : LibC::GUID,
-    subtype : LibC::GUID,
-    bFixedSizeSamples : Win32cr::Foundation::BOOL,
-    bTemporalCompression : Win32cr::Foundation::BOOL,
-    lSampleSize : UInt32,
-    formattype : LibC::GUID,
-    pUnk : Void*,
-    cbFormat : UInt32,
-    pbFormat : UInt8*
+  struct DMO_MEDIA_TYPE
+    property majortype : LibC::GUID
+    property subtype : LibC::GUID
+    property bFixedSizeSamples : Win32cr::Foundation::BOOL
+    property bTemporalCompression : Win32cr::Foundation::BOOL
+    property lSampleSize : UInt32
+    property formattype : LibC::GUID
+    property pUnk : Void*
+    property cbFormat : UInt32
+    property pbFormat : UInt8*
+    def initialize(@majortype : LibC::GUID, @subtype : LibC::GUID, @bFixedSizeSamples : Win32cr::Foundation::BOOL, @bTemporalCompression : Win32cr::Foundation::BOOL, @lSampleSize : UInt32, @formattype : LibC::GUID, @pUnk : Void*, @cbFormat : UInt32, @pbFormat : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DMO_OUTPUT_DATA_BUFFER,
-    pBuffer : Void*,
-    dwStatus : UInt32,
-    rtTimestamp : Int64,
-    rtTimelength : Int64
+  struct DMO_OUTPUT_DATA_BUFFER
+    property pBuffer : Void*
+    property dwStatus : UInt32
+    property rtTimestamp : Int64
+    property rtTimelength : Int64
+    def initialize(@pBuffer : Void*, @dwStatus : UInt32, @rtTimestamp : Int64, @rtTimelength : Int64)
+    end
+  end
 
   @[Extern]
-  record DMO_PARTIAL_MEDIATYPE,
-    type__ : LibC::GUID,
-    subtype : LibC::GUID
+  struct DMO_PARTIAL_MEDIATYPE
+    property type__ : LibC::GUID
+    property subtype : LibC::GUID
+    def initialize(@type__ : LibC::GUID, @subtype : LibC::GUID)
+    end
+  end
 
   @[Extern]
   record IMediaBufferVtbl,
@@ -107,7 +116,6 @@ module Win32cr::Media::DxMediaObjects
 
 
   @[Extern]
-  #@[Com("59eff8b9-938c-4a26-82f2-95cb84cdc837")]
   record IMediaBuffer, lpVtbl : IMediaBufferVtbl* do
     GUID = LibC::GUID.new(0x59eff8b9_u32, 0x938c_u16, 0x4a26_u16, StaticArray[0x82_u8, 0xf2_u8, 0x95_u8, 0xcb_u8, 0x84_u8, 0xcd_u8, 0xc8_u8, 0x37_u8])
     def query_interface(this : IMediaBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -160,7 +168,6 @@ module Win32cr::Media::DxMediaObjects
 
 
   @[Extern]
-  #@[Com("d8ad0f58-5494-4102-97c5-ec798e59bcf4")]
   record IMediaObject, lpVtbl : IMediaObjectVtbl* do
     GUID = LibC::GUID.new(0xd8ad0f58_u32, 0x5494_u16, 0x4102_u16, StaticArray[0x97_u8, 0xc5_u8, 0xec_u8, 0x79_u8, 0x8e_u8, 0x59_u8, 0xbc_u8, 0xf4_u8])
     def query_interface(this : IMediaObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -250,7 +257,6 @@ module Win32cr::Media::DxMediaObjects
 
 
   @[Extern]
-  #@[Com("2c3cd98a-2bfa-4a53-9c27-5249ba64ba0f")]
   record IEnumDMO, lpVtbl : IEnumDMOVtbl* do
     GUID = LibC::GUID.new(0x2c3cd98a_u32, 0x2bfa_u16, 0x4a53_u16, StaticArray[0x9c_u8, 0x27_u8, 0x52_u8, 0x49_u8, 0xba_u8, 0x64_u8, 0xba_u8, 0xf_u8])
     def query_interface(this : IEnumDMO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -288,7 +294,6 @@ module Win32cr::Media::DxMediaObjects
 
 
   @[Extern]
-  #@[Com("651b9ad0-0fc7-4aa9-9538-d89931010741")]
   record IMediaObjectInPlace, lpVtbl : IMediaObjectInPlaceVtbl* do
     GUID = LibC::GUID.new(0x651b9ad0_u32, 0xfc7_u16, 0x4aa9_u16, StaticArray[0x95_u8, 0x38_u8, 0xd8_u8, 0x99_u8, 0x31_u8, 0x1_u8, 0x7_u8, 0x41_u8])
     def query_interface(this : IMediaObjectInPlace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -323,7 +328,6 @@ module Win32cr::Media::DxMediaObjects
 
 
   @[Extern]
-  #@[Com("65abea96-cf36-453f-af8a-705e98f16260")]
   record IDMOQualityControl, lpVtbl : IDMOQualityControlVtbl* do
     GUID = LibC::GUID.new(0x65abea96_u32, 0xcf36_u16, 0x453f_u16, StaticArray[0xaf_u8, 0x8a_u8, 0x70_u8, 0x5e_u8, 0x98_u8, 0xf1_u8, 0x62_u8, 0x60_u8])
     def query_interface(this : IDMOQualityControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -359,7 +363,6 @@ module Win32cr::Media::DxMediaObjects
 
 
   @[Extern]
-  #@[Com("be8f4f4e-5b16-4d29-b350-7f6b5d9298ac")]
   record IDMOVideoOutputOptimizations, lpVtbl : IDMOVideoOutputOptimizationsVtbl* do
     GUID = LibC::GUID.new(0xbe8f4f4e_u32, 0x5b16_u16, 0x4d29_u16, StaticArray[0xb3_u8, 0x50_u8, 0x7f_u8, 0x6b_u8, 0x5d_u8, 0x92_u8, 0x98_u8, 0xac_u8])
     def query_interface(this : IDMOVideoOutputOptimizations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

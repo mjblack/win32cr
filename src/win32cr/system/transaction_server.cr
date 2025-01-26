@@ -87,7 +87,6 @@ module Win32cr::System::TransactionServer
 
 
   @[Extern]
-  #@[Com("6eb22870-8a19-11d0-81b6-00a0c9231c29")]
   record ICatalog, lpVtbl : ICatalogVtbl* do
     GUID = LibC::GUID.new(0x6eb22870_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
     def query_interface(this : ICatalog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -142,7 +141,6 @@ module Win32cr::System::TransactionServer
 
 
   @[Extern]
-  #@[Com("6eb22873-8a19-11d0-81b6-00a0c9231c29")]
   record IComponentUtil, lpVtbl : IComponentUtilVtbl* do
     GUID = LibC::GUID.new(0x6eb22873_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
     def query_interface(this : IComponentUtil*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -196,7 +194,6 @@ module Win32cr::System::TransactionServer
 
 
   @[Extern]
-  #@[Com("6eb22874-8a19-11d0-81b6-00a0c9231c29")]
   record IPackageUtil, lpVtbl : IPackageUtilVtbl* do
     GUID = LibC::GUID.new(0x6eb22874_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
     def query_interface(this : IPackageUtil*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -246,7 +243,6 @@ module Win32cr::System::TransactionServer
 
 
   @[Extern]
-  #@[Com("6eb22875-8a19-11d0-81b6-00a0c9231c29")]
   record IRemoteComponentUtil, lpVtbl : IRemoteComponentUtilVtbl* do
     GUID = LibC::GUID.new(0x6eb22875_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
     def query_interface(this : IRemoteComponentUtil*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -293,7 +289,6 @@ module Win32cr::System::TransactionServer
 
 
   @[Extern]
-  #@[Com("6eb22876-8a19-11d0-81b6-00a0c9231c29")]
   record IRoleAssociationUtil, lpVtbl : IRoleAssociationUtilVtbl* do
     GUID = LibC::GUID.new(0x6eb22876_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
     def query_interface(this : IRoleAssociationUtil*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

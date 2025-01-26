@@ -59,46 +59,67 @@ module Win32cr::Storage::DataDeduplication
   end
 
   @[Extern]
-  record DEDUP_CONTAINER_EXTENT,
-    container_index : UInt32,
-    start_offset : Int64,
-    length : Int64
+  struct DEDUP_CONTAINER_EXTENT
+    property container_index : UInt32
+    property start_offset : Int64
+    property length : Int64
+    def initialize(@container_index : UInt32, @start_offset : Int64, @length : Int64)
+    end
+  end
 
   @[Extern]
-  record DDP_FILE_EXTENT,
-    length : Int64,
-    offset : Int64
+  struct DDP_FILE_EXTENT
+    property length : Int64
+    property offset : Int64
+    def initialize(@length : Int64, @offset : Int64)
+    end
+  end
 
   @[Extern]
-  record DEDUP_CHUNK_INFO_HASH32,
-    chunk_flags : UInt32,
-    chunk_offset_in_stream : UInt64,
-    chunk_size : UInt64,
-    hash_val : UInt8[32]
+  struct DEDUP_CHUNK_INFO_HASH32
+    property chunk_flags : UInt32
+    property chunk_offset_in_stream : UInt64
+    property chunk_size : UInt64
+    property hash_val : UInt8[32]
+    def initialize(@chunk_flags : UInt32, @chunk_offset_in_stream : UInt64, @chunk_size : UInt64, @hash_val : UInt8[32])
+    end
+  end
 
   @[Extern]
-  record DedupHash,
-    hash : UInt8[32]
+  struct DedupHash
+    property hash : UInt8[32]
+    def initialize(@hash : UInt8[32])
+    end
+  end
 
   @[Extern]
-  record DedupChunk,
-    hash : Win32cr::Storage::DataDeduplication::DedupHash,
-    flags : Win32cr::Storage::DataDeduplication::DedupChunkFlags,
-    logical_size : UInt32,
-    data_size : UInt32
+  struct DedupChunk
+    property hash : Win32cr::Storage::DataDeduplication::DedupHash
+    property flags : Win32cr::Storage::DataDeduplication::DedupChunkFlags
+    property logical_size : UInt32
+    property data_size : UInt32
+    def initialize(@hash : Win32cr::Storage::DataDeduplication::DedupHash, @flags : Win32cr::Storage::DataDeduplication::DedupChunkFlags, @logical_size : UInt32, @data_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record DedupStreamEntry,
-    hash : Win32cr::Storage::DataDeduplication::DedupHash,
-    logical_size : UInt32,
-    offset : UInt64
+  struct DedupStreamEntry
+    property hash : Win32cr::Storage::DataDeduplication::DedupHash
+    property logical_size : UInt32
+    property offset : UInt64
+    def initialize(@hash : Win32cr::Storage::DataDeduplication::DedupHash, @logical_size : UInt32, @offset : UInt64)
+    end
+  end
 
   @[Extern]
-  record DedupStream,
-    path : Win32cr::Foundation::BSTR,
-    offset : UInt64,
-    length : UInt64,
-    chunk_count : UInt32
+  struct DedupStream
+    property path : Win32cr::Foundation::BSTR
+    property offset : UInt64
+    property length : UInt64
+    property chunk_count : UInt32
+    def initialize(@path : Win32cr::Foundation::BSTR, @offset : UInt64, @length : UInt64, @chunk_count : UInt32)
+    end
+  end
 
   @[Extern]
   record IDedupReadFileCallbackVtbl,
@@ -111,7 +132,6 @@ module Win32cr::Storage::DataDeduplication
 
 
   @[Extern]
-  #@[Com("7bacc67a-2f1d-42d0-897e-6ff62dd533bb")]
   record IDedupReadFileCallback, lpVtbl : IDedupReadFileCallbackVtbl* do
     GUID = LibC::GUID.new(0x7bacc67a_u32, 0x2f1d_u16, 0x42d0_u16, StaticArray[0x89_u8, 0x7e_u8, 0x6f_u8, 0xf6_u8, 0x2d_u8, 0xd5_u8, 0x33_u8, 0xbb_u8])
     def query_interface(this : IDedupReadFileCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -144,7 +164,6 @@ module Win32cr::Storage::DataDeduplication
 
 
   @[Extern]
-  #@[Com("c719d963-2b2d-415e-acf7-7eb7ca596ff4")]
   record IDedupBackupSupport, lpVtbl : IDedupBackupSupportVtbl* do
     GUID = LibC::GUID.new(0xc719d963_u32, 0x2b2d_u16, 0x415e_u16, StaticArray[0xac_u8, 0xf7_u8, 0x7e_u8, 0xb7_u8, 0xca_u8, 0x59_u8, 0x6f_u8, 0xf4_u8])
     def query_interface(this : IDedupBackupSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -174,7 +193,6 @@ module Win32cr::Storage::DataDeduplication
 
 
   @[Extern]
-  #@[Com("bb5144d7-2720-4dcc-8777-78597416ec23")]
   record IDedupChunkLibrary, lpVtbl : IDedupChunkLibraryVtbl* do
     GUID = LibC::GUID.new(0xbb5144d7_u32, 0x2720_u16, 0x4dcc_u16, StaticArray[0x87_u8, 0x77_u8, 0x78_u8, 0x59_u8, 0x74_u8, 0x16_u8, 0xec_u8, 0x23_u8])
     def query_interface(this : IDedupChunkLibrary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -213,7 +231,6 @@ module Win32cr::Storage::DataDeduplication
 
 
   @[Extern]
-  #@[Com("90b584d3-72aa-400f-9767-cad866a5a2d8")]
   record IDedupIterateChunksHash32, lpVtbl : IDedupIterateChunksHash32Vtbl* do
     GUID = LibC::GUID.new(0x90b584d3_u32, 0x72aa_u16, 0x400f_u16, StaticArray[0x97_u8, 0x67_u8, 0xca_u8, 0xd8_u8, 0x66_u8, 0xa5_u8, 0xa2_u8, 0xd8_u8])
     def query_interface(this : IDedupIterateChunksHash32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -260,7 +277,6 @@ module Win32cr::Storage::DataDeduplication
 
 
   @[Extern]
-  #@[Com("7963d734-40a9-4ea3-bbf6-5a89d26f7ae8")]
   record IDedupDataPort, lpVtbl : IDedupDataPortVtbl* do
     GUID = LibC::GUID.new(0x7963d734_u32, 0x40a9_u16, 0x4ea3_u16, StaticArray[0xbb_u8, 0xf6_u8, 0x5a_u8, 0x89_u8, 0xd2_u8, 0x6f_u8, 0x7a_u8, 0xe8_u8])
     def query_interface(this : IDedupDataPort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -322,7 +338,6 @@ module Win32cr::Storage::DataDeduplication
 
 
   @[Extern]
-  #@[Com("44677452-b90a-445e-8192-cdcfe81511fb")]
   record IDedupDataPortManager, lpVtbl : IDedupDataPortManagerVtbl* do
     GUID = LibC::GUID.new(0x44677452_u32, 0xb90a_u16, 0x445e_u16, StaticArray[0x81_u8, 0x92_u8, 0xcd_u8, 0xcf_u8, 0xe8_u8, 0x15_u8, 0x11_u8, 0xfb_u8])
     def query_interface(this : IDedupDataPortManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

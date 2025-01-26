@@ -436,191 +436,238 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record MACINFO__,
-    fUsed : Win32cr::Foundation::BOOL,
-    abMacState : UInt8[36]
-
-  @[Extern]
-  record WMFILECAPABILITIES,
-    pwszMimeType : Win32cr::Foundation::PWSTR,
-    dwReserved : UInt32
-
-  @[Extern]
-  record OPAQUECOMMAND,
-    guidCommand : LibC::GUID,
-    dwDataLen : UInt32,
-    pData : UInt8*,
-    abMAC : UInt8[20]
-
-  @[Extern]
-  record WMDMID,
-    cbSize : UInt32,
-    dwVendorID : UInt32,
-    pID : UInt8[128],
-    serial_number_length : UInt32
-
-  @[Extern]
-  record WMDMDATETIME,
-    wYear : UInt16,
-    wMonth : UInt16,
-    wDay : UInt16,
-    wHour : UInt16,
-    wMinute : UInt16,
-    wSecond : UInt16
-
-  @[Extern]
-  record WMDMRIGHTS,
-    cbSize : UInt32,
-    dwContentType : UInt32,
-    fuFlags : UInt32,
-    fuRights : UInt32,
-    dwAppSec : UInt32,
-    dwPlaybackCount : UInt32,
-    expiration_date : Win32cr::Media::DeviceManager::WMDMDATETIME
-
-  @[Extern]
-  record WMDMMetadataView,
-    pwszViewName : Win32cr::Foundation::PWSTR,
-    nDepth : UInt32,
-    ppwszTags : UInt16**
-
-  @[Extern]
-  record WMDM_PROP_VALUES_RANGE,
-    rangeMin : Win32cr::System::Com::StructuredStorage::PROPVARIANT,
-    rangeMax : Win32cr::System::Com::StructuredStorage::PROPVARIANT,
-    rangeStep : Win32cr::System::Com::StructuredStorage::PROPVARIANT
-
-  @[Extern]
-  record WMDM_PROP_VALUES_ENUM,
-    cEnumValues : UInt32,
-    pValues : Win32cr::System::Com::StructuredStorage::PROPVARIANT*
-
-  @[Extern]
-  record WMDM_PROP_DESC,
-    pwszPropName : Win32cr::Foundation::PWSTR,
-    valid_values_form : Win32cr::Media::DeviceManager::WMDM_ENUM_PROP_VALID_VALUES_FORM,
-    valid_values : ValidValues_e__Union_ do
-
-    # Nested Type ValidValues_e__Union_
-    @[Extern(union: true)]
-    record ValidValues_e__Union_,
-      valid_values_range : Win32cr::Media::DeviceManager::WMDM_PROP_VALUES_RANGE,
-      enumerated_valid_values : Win32cr::Media::DeviceManager::WMDM_PROP_VALUES_ENUM
-
+  struct MACINFO__
+    property fUsed : Win32cr::Foundation::BOOL
+    property abMacState : UInt8[36]
+    def initialize(@fUsed : Win32cr::Foundation::BOOL, @abMacState : UInt8[36])
+    end
   end
 
   @[Extern]
-  record WMDM_PROP_CONFIG,
-    nPreference : UInt32,
-    nPropDesc : UInt32,
-    pPropDesc : Win32cr::Media::DeviceManager::WMDM_PROP_DESC*
+  struct WMFILECAPABILITIES
+    property pwszMimeType : Win32cr::Foundation::PWSTR
+    property dwReserved : UInt32
+    def initialize(@pwszMimeType : Win32cr::Foundation::PWSTR, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record WMDM_FORMAT_CAPABILITY,
-    nPropConfig : UInt32,
-    pConfigs : Win32cr::Media::DeviceManager::WMDM_PROP_CONFIG*
+  struct OPAQUECOMMAND
+    property guidCommand : LibC::GUID
+    property dwDataLen : UInt32
+    property pData : UInt8*
+    property abMAC : UInt8[20]
+    def initialize(@guidCommand : LibC::GUID, @dwDataLen : UInt32, @pData : UInt8*, @abMAC : UInt8[20])
+    end
+  end
+
+  @[Extern]
+  struct WMDMID
+    property cbSize : UInt32
+    property dwVendorID : UInt32
+    property pID : UInt8[128]
+    property serial_number_length : UInt32
+    def initialize(@cbSize : UInt32, @dwVendorID : UInt32, @pID : UInt8[128], @serial_number_length : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WMDMDATETIME
+    property wYear : UInt16
+    property wMonth : UInt16
+    property wDay : UInt16
+    property wHour : UInt16
+    property wMinute : UInt16
+    property wSecond : UInt16
+    def initialize(@wYear : UInt16, @wMonth : UInt16, @wDay : UInt16, @wHour : UInt16, @wMinute : UInt16, @wSecond : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct WMDMRIGHTS
+    property cbSize : UInt32
+    property dwContentType : UInt32
+    property fuFlags : UInt32
+    property fuRights : UInt32
+    property dwAppSec : UInt32
+    property dwPlaybackCount : UInt32
+    property expiration_date : Win32cr::Media::DeviceManager::WMDMDATETIME
+    def initialize(@cbSize : UInt32, @dwContentType : UInt32, @fuFlags : UInt32, @fuRights : UInt32, @dwAppSec : UInt32, @dwPlaybackCount : UInt32, @expiration_date : Win32cr::Media::DeviceManager::WMDMDATETIME)
+    end
+  end
+
+  @[Extern]
+  struct WMDMMetadataView
+    property pwszViewName : Win32cr::Foundation::PWSTR
+    property nDepth : UInt32
+    property ppwszTags : UInt16**
+    def initialize(@pwszViewName : Win32cr::Foundation::PWSTR, @nDepth : UInt32, @ppwszTags : UInt16**)
+    end
+  end
+
+  @[Extern]
+  struct WMDM_PROP_VALUES_RANGE
+    property rangeMin : Win32cr::System::Com::StructuredStorage::PROPVARIANT
+    property rangeMax : Win32cr::System::Com::StructuredStorage::PROPVARIANT
+    property rangeStep : Win32cr::System::Com::StructuredStorage::PROPVARIANT
+    def initialize(@rangeMin : Win32cr::System::Com::StructuredStorage::PROPVARIANT, @rangeMax : Win32cr::System::Com::StructuredStorage::PROPVARIANT, @rangeStep : Win32cr::System::Com::StructuredStorage::PROPVARIANT)
+    end
+  end
+
+  @[Extern]
+  struct WMDM_PROP_VALUES_ENUM
+    property cEnumValues : UInt32
+    property pValues : Win32cr::System::Com::StructuredStorage::PROPVARIANT*
+    def initialize(@cEnumValues : UInt32, @pValues : Win32cr::System::Com::StructuredStorage::PROPVARIANT*)
+    end
+  end
+
+  @[Extern]
+  struct WMDM_PROP_DESC
+    property pwszPropName : Win32cr::Foundation::PWSTR
+    property valid_values_form : Win32cr::Media::DeviceManager::WMDM_ENUM_PROP_VALID_VALUES_FORM
+    property valid_values : ValidValues_e__Union_
+
+    # Nested Type ValidValues_e__Union_
+    @[Extern(union: true)]
+    struct ValidValues_e__Union_
+    property valid_values_range : Win32cr::Media::DeviceManager::WMDM_PROP_VALUES_RANGE
+    property enumerated_valid_values : Win32cr::Media::DeviceManager::WMDM_PROP_VALUES_ENUM
+    def initialize(@valid_values_range : Win32cr::Media::DeviceManager::WMDM_PROP_VALUES_RANGE, @enumerated_valid_values : Win32cr::Media::DeviceManager::WMDM_PROP_VALUES_ENUM)
+    end
+    end
+
+    def initialize(@pwszPropName : Win32cr::Foundation::PWSTR, @valid_values_form : Win32cr::Media::DeviceManager::WMDM_ENUM_PROP_VALID_VALUES_FORM, @valid_values : ValidValues_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct WMDM_PROP_CONFIG
+    property nPreference : UInt32
+    property nPropDesc : UInt32
+    property pPropDesc : Win32cr::Media::DeviceManager::WMDM_PROP_DESC*
+    def initialize(@nPreference : UInt32, @nPropDesc : UInt32, @pPropDesc : Win32cr::Media::DeviceManager::WMDM_PROP_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct WMDM_FORMAT_CAPABILITY
+    property nPropConfig : UInt32
+    property pConfigs : Win32cr::Media::DeviceManager::WMDM_PROP_CONFIG*
+    def initialize(@nPropConfig : UInt32, @pConfigs : Win32cr::Media::DeviceManager::WMDM_PROP_CONFIG*)
+    end
+  end
 
   @[Extern(union: true)]
-  record WMDMDetermineMaxPropStringLen,
-    sz001 : UInt16[27],
-    sz002 : UInt16[31],
-    sz003 : UInt16[14],
-    sz004 : UInt16[16],
-    sz005 : UInt16[22],
-    sz006 : UInt16[14],
-    sz007 : UInt16[20],
-    sz008 : UInt16[20],
-    sz009 : UInt16[22],
-    sz010 : UInt16[11],
-    sz011 : UInt16[12],
-    sz012 : UInt16[17],
-    sz013 : UInt16[17],
-    sz014 : UInt16[16],
-    sz015 : UInt16[17],
-    sz016 : UInt16[11],
-    sz017 : UInt16[11],
-    sz018 : UInt16[15],
-    sz019 : UInt16[22],
-    sz020 : UInt16[20],
-    sz021 : UInt16[22],
-    sz022 : UInt16[21],
-    sz023 : UInt16[24],
-    sz024 : UInt16[20],
-    sz025 : UInt16[10],
-    sz026 : UInt16[14],
-    sz027 : UInt16[11],
-    sz028 : UInt16[11],
-    sz029 : UInt16[13],
-    sz030 : UInt16[17],
-    sz031 : UInt16[16],
-    sz032 : UInt16[17],
-    sz033 : UInt16[20],
-    sz034 : UInt16[19],
-    sz035 : UInt16[18],
-    sz036 : UInt16[18],
-    sz037 : UInt16[15],
-    sz041 : UInt16[14],
-    sz043 : UInt16[22],
-    sz044 : UInt16[16],
-    sz045 : UInt16[20],
-    sz046 : UInt16[14],
-    sz047 : UInt16[14],
-    sz048 : UInt16[12],
-    sz049 : UInt16[25],
-    sz050 : UInt16[26],
-    sz051 : UInt16[25],
-    sz052 : UInt16[16],
-    sz053 : UInt16[24],
-    sz054 : UInt16[15],
-    sz055 : UInt16[21],
-    sz056 : UInt16[16],
-    sz057 : UInt16[22],
-    sz058 : UInt16[14],
-    sz059 : UInt16[25],
-    sz060 : UInt16[18],
-    sz061 : UInt16[22],
-    sz062 : UInt16[26],
-    sz063 : UInt16[36],
-    sz064 : UInt16[23],
-    sz065 : UInt16[12],
-    sz066 : UInt16[24],
-    sz067 : UInt16[11],
-    sz068 : UInt16[12],
-    sz069 : UInt16[14],
-    sz070 : UInt16[20],
-    sz071 : UInt16[15],
-    sz072 : UInt16[14],
-    sz073 : UInt16[31],
-    sz074 : UInt16[24],
-    sz075 : UInt16[22],
-    sz076 : UInt16[24],
-    sz077 : UInt16[21],
-    sz078 : UInt16[27],
-    sz079 : UInt16[27],
-    sz080 : UInt16[20],
-    sz081 : UInt16[33],
-    sz082 : UInt16[21],
-    sz083 : UInt16[32],
-    sz084 : UInt16[26],
-    sz085 : UInt16[18],
-    sz086 : UInt16[30]
+  struct WMDMDetermineMaxPropStringLen
+    property sz001 : UInt16[27]
+    property sz002 : UInt16[31]
+    property sz003 : UInt16[14]
+    property sz004 : UInt16[16]
+    property sz005 : UInt16[22]
+    property sz006 : UInt16[14]
+    property sz007 : UInt16[20]
+    property sz008 : UInt16[20]
+    property sz009 : UInt16[22]
+    property sz010 : UInt16[11]
+    property sz011 : UInt16[12]
+    property sz012 : UInt16[17]
+    property sz013 : UInt16[17]
+    property sz014 : UInt16[16]
+    property sz015 : UInt16[17]
+    property sz016 : UInt16[11]
+    property sz017 : UInt16[11]
+    property sz018 : UInt16[15]
+    property sz019 : UInt16[22]
+    property sz020 : UInt16[20]
+    property sz021 : UInt16[22]
+    property sz022 : UInt16[21]
+    property sz023 : UInt16[24]
+    property sz024 : UInt16[20]
+    property sz025 : UInt16[10]
+    property sz026 : UInt16[14]
+    property sz027 : UInt16[11]
+    property sz028 : UInt16[11]
+    property sz029 : UInt16[13]
+    property sz030 : UInt16[17]
+    property sz031 : UInt16[16]
+    property sz032 : UInt16[17]
+    property sz033 : UInt16[20]
+    property sz034 : UInt16[19]
+    property sz035 : UInt16[18]
+    property sz036 : UInt16[18]
+    property sz037 : UInt16[15]
+    property sz041 : UInt16[14]
+    property sz043 : UInt16[22]
+    property sz044 : UInt16[16]
+    property sz045 : UInt16[20]
+    property sz046 : UInt16[14]
+    property sz047 : UInt16[14]
+    property sz048 : UInt16[12]
+    property sz049 : UInt16[25]
+    property sz050 : UInt16[26]
+    property sz051 : UInt16[25]
+    property sz052 : UInt16[16]
+    property sz053 : UInt16[24]
+    property sz054 : UInt16[15]
+    property sz055 : UInt16[21]
+    property sz056 : UInt16[16]
+    property sz057 : UInt16[22]
+    property sz058 : UInt16[14]
+    property sz059 : UInt16[25]
+    property sz060 : UInt16[18]
+    property sz061 : UInt16[22]
+    property sz062 : UInt16[26]
+    property sz063 : UInt16[36]
+    property sz064 : UInt16[23]
+    property sz065 : UInt16[12]
+    property sz066 : UInt16[24]
+    property sz067 : UInt16[11]
+    property sz068 : UInt16[12]
+    property sz069 : UInt16[14]
+    property sz070 : UInt16[20]
+    property sz071 : UInt16[15]
+    property sz072 : UInt16[14]
+    property sz073 : UInt16[31]
+    property sz074 : UInt16[24]
+    property sz075 : UInt16[22]
+    property sz076 : UInt16[24]
+    property sz077 : UInt16[21]
+    property sz078 : UInt16[27]
+    property sz079 : UInt16[27]
+    property sz080 : UInt16[20]
+    property sz081 : UInt16[33]
+    property sz082 : UInt16[21]
+    property sz083 : UInt16[32]
+    property sz084 : UInt16[26]
+    property sz085 : UInt16[18]
+    property sz086 : UInt16[30]
+    def initialize(@sz001 : UInt16[27], @sz002 : UInt16[31], @sz003 : UInt16[14], @sz004 : UInt16[16], @sz005 : UInt16[22], @sz006 : UInt16[14], @sz007 : UInt16[20], @sz008 : UInt16[20], @sz009 : UInt16[22], @sz010 : UInt16[11], @sz011 : UInt16[12], @sz012 : UInt16[17], @sz013 : UInt16[17], @sz014 : UInt16[16], @sz015 : UInt16[17], @sz016 : UInt16[11], @sz017 : UInt16[11], @sz018 : UInt16[15], @sz019 : UInt16[22], @sz020 : UInt16[20], @sz021 : UInt16[22], @sz022 : UInt16[21], @sz023 : UInt16[24], @sz024 : UInt16[20], @sz025 : UInt16[10], @sz026 : UInt16[14], @sz027 : UInt16[11], @sz028 : UInt16[11], @sz029 : UInt16[13], @sz030 : UInt16[17], @sz031 : UInt16[16], @sz032 : UInt16[17], @sz033 : UInt16[20], @sz034 : UInt16[19], @sz035 : UInt16[18], @sz036 : UInt16[18], @sz037 : UInt16[15], @sz041 : UInt16[14], @sz043 : UInt16[22], @sz044 : UInt16[16], @sz045 : UInt16[20], @sz046 : UInt16[14], @sz047 : UInt16[14], @sz048 : UInt16[12], @sz049 : UInt16[25], @sz050 : UInt16[26], @sz051 : UInt16[25], @sz052 : UInt16[16], @sz053 : UInt16[24], @sz054 : UInt16[15], @sz055 : UInt16[21], @sz056 : UInt16[16], @sz057 : UInt16[22], @sz058 : UInt16[14], @sz059 : UInt16[25], @sz060 : UInt16[18], @sz061 : UInt16[22], @sz062 : UInt16[26], @sz063 : UInt16[36], @sz064 : UInt16[23], @sz065 : UInt16[12], @sz066 : UInt16[24], @sz067 : UInt16[11], @sz068 : UInt16[12], @sz069 : UInt16[14], @sz070 : UInt16[20], @sz071 : UInt16[15], @sz072 : UInt16[14], @sz073 : UInt16[31], @sz074 : UInt16[24], @sz075 : UInt16[22], @sz076 : UInt16[24], @sz077 : UInt16[21], @sz078 : UInt16[27], @sz079 : UInt16[27], @sz080 : UInt16[20], @sz081 : UInt16[33], @sz082 : UInt16[21], @sz083 : UInt16[32], @sz084 : UInt16[26], @sz085 : UInt16[18], @sz086 : UInt16[30])
+    end
+  end
 
   @[Extern]
-  record MTP_COMMAND_DATA_IN,
-    op_code : UInt16,
-    num_params : UInt32,
-    params : UInt32[5],
-    next_phase : UInt32,
-    command_write_data_size : UInt32,
-    command_write_data : UInt8*
+  struct MTP_COMMAND_DATA_IN
+    property op_code : UInt16
+    property num_params : UInt32
+    property params : UInt32[5]
+    property next_phase : UInt32
+    property command_write_data_size : UInt32
+    property command_write_data : UInt8*
+    def initialize(@op_code : UInt16, @num_params : UInt32, @params : UInt32[5], @next_phase : UInt32, @command_write_data_size : UInt32, @command_write_data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record MTP_COMMAND_DATA_OUT,
-    response_code : UInt16,
-    num_params : UInt32,
-    params : UInt32[5],
-    command_read_data_size : UInt32,
-    command_read_data : UInt8*
+  struct MTP_COMMAND_DATA_OUT
+    property response_code : UInt16
+    property num_params : UInt32
+    property params : UInt32[5]
+    property command_read_data_size : UInt32
+    property command_read_data : UInt8*
+    def initialize(@response_code : UInt16, @num_params : UInt32, @params : UInt32[5], @command_read_data_size : UInt32, @command_read_data : UInt8*)
+    end
+  end
 
   @[Extern]
   record IWMDMMetaDataVtbl,
@@ -634,7 +681,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("ec3b0663-0951-460a-9a80-0dceed3c043c")]
   record IWMDMMetaData, lpVtbl : IWMDMMetaDataVtbl* do
     GUID = LibC::GUID.new(0xec3b0663_u32, 0x951_u16, 0x460a_u16, StaticArray[0x9a_u8, 0x80_u8, 0xd_u8, 0xce_u8, 0xed_u8, 0x3c_u8, 0x4_u8, 0x3c_u8])
     def query_interface(this : IWMDMMetaData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -672,7 +718,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a00-33ed-11d3-8470-00c04f79dbc0")]
   record IWMDeviceManager, lpVtbl : IWMDeviceManagerVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a00_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDeviceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -710,7 +755,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("923e5249-8731-4c5b-9b1c-b8b60b6e46af")]
   record IWMDeviceManager2, lpVtbl : IWMDeviceManager2Vtbl* do
     GUID = LibC::GUID.new(0x923e5249_u32, 0x8731_u16, 0x4c5b_u16, StaticArray[0x9b_u8, 0x1c_u8, 0xb8_u8, 0xb6_u8, 0xb_u8, 0x6e_u8, 0x46_u8, 0xaf_u8])
     def query_interface(this : IWMDeviceManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -758,7 +802,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("af185c41-100d-46ed-be2e-9ce8c44594ef")]
   record IWMDeviceManager3, lpVtbl : IWMDeviceManager3Vtbl* do
     GUID = LibC::GUID.new(0xaf185c41_u32, 0x100d_u16, 0x46ed_u16, StaticArray[0xbe_u8, 0x2e_u8, 0x9c_u8, 0xe8_u8, 0xc4_u8, 0x45_u8, 0x94_u8, 0xef_u8])
     def query_interface(this : IWMDeviceManager3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -809,7 +852,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a07-33ed-11d3-8470-00c04f79dbc0")]
   record IWMDMStorageGlobals, lpVtbl : IWMDMStorageGlobalsVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a07_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMStorageGlobals*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -862,7 +904,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a06-33ed-11d3-8470-00c04f79dbc0")]
   record IWMDMStorage, lpVtbl : IWMDMStorageVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a06_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -924,7 +965,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1ed5a144-5cd5-4683-9eff-72cbdb2d9533")]
   record IWMDMStorage2, lpVtbl : IWMDMStorage2Vtbl* do
     GUID = LibC::GUID.new(0x1ed5a144_u32, 0x5cd5_u16, 0x4683_u16, StaticArray[0x9e_u8, 0xff_u8, 0x72_u8, 0xcb_u8, 0xdb_u8, 0x2d_u8, 0x95_u8, 0x33_u8])
     def query_interface(this : IWMDMStorage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -999,7 +1039,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("97717eea-926a-464e-96a4-247b0216026e")]
   record IWMDMStorage3, lpVtbl : IWMDMStorage3Vtbl* do
     GUID = LibC::GUID.new(0x97717eea_u32, 0x926a_u16, 0x464e_u16, StaticArray[0x96_u8, 0xa4_u8, 0x24_u8, 0x7b_u8, 0x2_u8, 0x16_u8, 0x2_u8, 0x6e_u8])
     def query_interface(this : IWMDMStorage3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1092,7 +1131,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("c225bac5-a03a-40b8-9a23-91cf478c64a6")]
   record IWMDMStorage4, lpVtbl : IWMDMStorage4Vtbl* do
     GUID = LibC::GUID.new(0xc225bac5_u32, 0xa03a_u16, 0x40b8_u16, StaticArray[0x9a_u8, 0x23_u8, 0x91_u8, 0xcf_u8, 0x47_u8, 0x8c_u8, 0x64_u8, 0xa6_u8])
     def query_interface(this : IWMDMStorage4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1191,7 +1229,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a0b-33ed-11d3-8470-00c04f79dbc0")]
   record IWMDMOperation, lpVtbl : IWMDMOperationVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a0b_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1256,7 +1293,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("33445b48-7df7-425c-ad8f-0fc6d82f9f75")]
   record IWMDMOperation2, lpVtbl : IWMDMOperation2Vtbl* do
     GUID = LibC::GUID.new(0x33445b48_u32, 0x7df7_u16, 0x425c_u16, StaticArray[0xad_u8, 0x8f_u8, 0xf_u8, 0xc6_u8, 0xd8_u8, 0x2f_u8, 0x9f_u8, 0x75_u8])
     def query_interface(this : IWMDMOperation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1326,7 +1362,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("d1f9b46a-9ca8-46d8-9d0f-1ec9bae54919")]
   record IWMDMOperation3, lpVtbl : IWMDMOperation3Vtbl* do
     GUID = LibC::GUID.new(0xd1f9b46a_u32, 0x9ca8_u16, 0x46d8_u16, StaticArray[0x9d_u8, 0xf_u8, 0x1e_u8, 0xc9_u8, 0xba_u8, 0xe5_u8, 0x49_u8, 0x19_u8])
     def query_interface(this : IWMDMOperation3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1385,7 +1420,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a0c-33ed-11d3-8470-00c04f79dbc0")]
   record IWMDMProgress, lpVtbl : IWMDMProgressVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a0c_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1421,7 +1455,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("3a43f550-b383-4e92-b04a-e6bbc660fefc")]
   record IWMDMProgress2, lpVtbl : IWMDMProgress2Vtbl* do
     GUID = LibC::GUID.new(0x3a43f550_u32, 0xb383_u16, 0x4e92_u16, StaticArray[0xb0_u8, 0x4a_u8, 0xe6_u8, 0xbb_u8, 0xc6_u8, 0x60_u8, 0xfe_u8, 0xfc_u8])
     def query_interface(this : IWMDMProgress2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1463,7 +1496,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("21de01cb-3bb4-4929-b21a-17af3f80f658")]
   record IWMDMProgress3, lpVtbl : IWMDMProgress3Vtbl* do
     GUID = LibC::GUID.new(0x21de01cb_u32, 0x3bb4_u16, 0x4929_u16, StaticArray[0xb2_u8, 0x1a_u8, 0x17_u8, 0xaf_u8, 0x3f_u8, 0x80_u8, 0xf6_u8, 0x58_u8])
     def query_interface(this : IWMDMProgress3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1518,7 +1550,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a02-33ed-11d3-8470-00c04f79dbc0")]
   record IWMDMDevice, lpVtbl : IWMDMDeviceVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a02_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1589,7 +1620,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("e34f3d37-9d67-4fc1-9252-62d28b2f8b55")]
   record IWMDMDevice2, lpVtbl : IWMDMDevice2Vtbl* do
     GUID = LibC::GUID.new(0xe34f3d37_u32, 0x9d67_u16, 0x4fc1_u16, StaticArray[0x92_u8, 0x52_u8, 0x62_u8, 0xd2_u8, 0x8b_u8, 0x2f_u8, 0x8b_u8, 0x55_u8])
     def query_interface(this : IWMDMDevice2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1677,7 +1707,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("6c03e4fe-05db-4dda-9e3c-06233a6d5d65")]
   record IWMDMDevice3, lpVtbl : IWMDMDevice3Vtbl* do
     GUID = LibC::GUID.new(0x6c03e4fe_u32, 0x5db_u16, 0x4dda_u16, StaticArray[0x9e_u8, 0x3c_u8, 0x6_u8, 0x23_u8, 0x3a_u8, 0x6d_u8, 0x5d_u8, 0x65_u8])
     def query_interface(this : IWMDMDevice3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1762,7 +1791,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("82af0a65-9d96-412c-83e5-3c43e4b06cc7")]
   record IWMDMDeviceSession, lpVtbl : IWMDMDeviceSessionVtbl* do
     GUID = LibC::GUID.new(0x82af0a65_u32, 0x9d96_u16, 0x412c_u16, StaticArray[0x83_u8, 0xe5_u8, 0x3c_u8, 0x43_u8, 0xe4_u8, 0xb0_u8, 0x6c_u8, 0xc7_u8])
     def query_interface(this : IWMDMDeviceSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1795,7 +1823,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a01-33ed-11d3-8470-00c04f79dbc0")]
   record IWMDMEnumDevice, lpVtbl : IWMDMEnumDeviceVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a01_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMEnumDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1838,7 +1865,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a04-33ed-11d3-8470-00c04f79dbc0")]
   record IWMDMDeviceControl, lpVtbl : IWMDMDeviceControlVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a04_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMDeviceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1889,7 +1915,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a05-33ed-11d3-8470-00c04f79dbc0")]
   record IWMDMEnumStorage, lpVtbl : IWMDMEnumStorageVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a05_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMEnumStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1929,7 +1954,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a08-33ed-11d3-8470-00c04f79dbc0")]
   record IWMDMStorageControl, lpVtbl : IWMDMStorageControlVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a08_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMStorageControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1973,7 +1997,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("972c2e88-bd6c-4125-8e09-84f837e637b6")]
   record IWMDMStorageControl2, lpVtbl : IWMDMStorageControl2Vtbl* do
     GUID = LibC::GUID.new(0x972c2e88_u32, 0xbd6c_u16, 0x4125_u16, StaticArray[0x8e_u8, 0x9_u8, 0x84_u8, 0xf8_u8, 0x37_u8, 0xe6_u8, 0x37_u8, 0xb6_u8])
     def query_interface(this : IWMDMStorageControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2021,7 +2044,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("b3266365-d4f3-4696-8d53-bd27ec60993a")]
   record IWMDMStorageControl3, lpVtbl : IWMDMStorageControl3Vtbl* do
     GUID = LibC::GUID.new(0xb3266365_u32, 0xd4f3_u16, 0x4696_u16, StaticArray[0x8d_u8, 0x53_u8, 0xbd_u8, 0x27_u8, 0xec_u8, 0x60_u8, 0x99_u8, 0x3a_u8])
     def query_interface(this : IWMDMStorageControl3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2072,7 +2094,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a09-33ed-11d3-8470-00c04f79dbc0")]
   record IWMDMObjectInfo, lpVtbl : IWMDMObjectInfoVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a09_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMObjectInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2117,7 +2138,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("ebeccedb-88ee-4e55-b6a4-8d9f07d696aa")]
   record IWMDMRevoked, lpVtbl : IWMDMRevokedVtbl* do
     GUID = LibC::GUID.new(0xebeccedb_u32, 0x88ee_u16, 0x4e55_u16, StaticArray[0xb6_u8, 0xa4_u8, 0x8d_u8, 0x9f_u8, 0x7_u8, 0xd6_u8, 0x96_u8, 0xaa_u8])
     def query_interface(this : IWMDMRevoked*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2144,7 +2164,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("3f5e95c0-0f43-4ed4-93d2-c89a45d59b81")]
   record IWMDMNotification, lpVtbl : IWMDMNotificationVtbl* do
     GUID = LibC::GUID.new(0x3f5e95c0_u32, 0xf43_u16, 0x4ed4_u16, StaticArray[0x93_u8, 0xd2_u8, 0xc8_u8, 0x9a_u8, 0x45_u8, 0xd5_u8, 0x9b_u8, 0x81_u8])
     def query_interface(this : IWMDMNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2172,7 +2191,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a10-33ed-11d3-8470-00c04f79dbc0")]
   record IMDServiceProvider, lpVtbl : IMDServiceProviderVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a10_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDServiceProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2204,7 +2222,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("b2fa24b7-cda3-4694-9862-413ae1a34819")]
   record IMDServiceProvider2, lpVtbl : IMDServiceProvider2Vtbl* do
     GUID = LibC::GUID.new(0xb2fa24b7_u32, 0xcda3_u16, 0x4694_u16, StaticArray[0x98_u8, 0x62_u8, 0x41_u8, 0x3a_u8, 0xe1_u8, 0xa3_u8, 0x48_u8, 0x19_u8])
     def query_interface(this : IMDServiceProvider2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2240,7 +2257,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("4ed13ef3-a971-4d19-9f51-0e1826b2da57")]
   record IMDServiceProvider3, lpVtbl : IMDServiceProvider3Vtbl* do
     GUID = LibC::GUID.new(0x4ed13ef3_u32, 0xa971_u16, 0x4d19_u16, StaticArray[0x9f_u8, 0x51_u8, 0xe_u8, 0x18_u8, 0x26_u8, 0xb2_u8, 0xda_u8, 0x57_u8])
     def query_interface(this : IMDServiceProvider3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2279,7 +2295,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a11-33ed-11d3-8470-00c04f79dbc0")]
   record IMDSPEnumDevice, lpVtbl : IMDSPEnumDeviceVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a11_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPEnumDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2325,7 +2340,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a12-33ed-11d3-8470-00c04f79dbc0")]
   record IMDSPDevice, lpVtbl : IMDSPDeviceVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a12_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2396,7 +2410,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("420d16ad-c97d-4e00-82aa-00e9f4335ddd")]
   record IMDSPDevice2, lpVtbl : IMDSPDevice2Vtbl* do
     GUID = LibC::GUID.new(0x420d16ad_u32, 0xc97d_u16, 0x4e00_u16, StaticArray[0x82_u8, 0xaa_u8, 0x0_u8, 0xe9_u8, 0xf4_u8, 0x33_u8, 0x5d_u8, 0xdd_u8])
     def query_interface(this : IMDSPDevice2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2484,7 +2497,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1a839845-fc55-487c-976f-ee38ac0e8c4e")]
   record IMDSPDevice3, lpVtbl : IMDSPDevice3Vtbl* do
     GUID = LibC::GUID.new(0x1a839845_u32, 0xfc55_u16, 0x487c_u16, StaticArray[0x97_u8, 0x6f_u8, 0xee_u8, 0x38_u8, 0xac_u8, 0xe_u8, 0x8c_u8, 0x4e_u8])
     def query_interface(this : IMDSPDevice3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2575,7 +2587,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a14-33ed-11d3-8470-00c04f79dbc0")]
   record IMDSPDeviceControl, lpVtbl : IMDSPDeviceControlVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a14_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPDeviceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2626,7 +2637,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a15-33ed-11d3-8470-00c04f79dbc0")]
   record IMDSPEnumStorage, lpVtbl : IMDSPEnumStorageVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a15_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPEnumStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2671,7 +2681,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a16-33ed-11d3-8470-00c04f79dbc0")]
   record IMDSPStorage, lpVtbl : IMDSPStorageVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a16_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2738,7 +2747,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("0a5e07a5-6454-4451-9c36-1c6ae7e2b1d6")]
   record IMDSPStorage2, lpVtbl : IMDSPStorage2Vtbl* do
     GUID = LibC::GUID.new(0xa5e07a5_u32, 0x6454_u16, 0x4451_u16, StaticArray[0x9c_u8, 0x36_u8, 0x1c_u8, 0x6a_u8, 0xe7_u8, 0xe2_u8, 0xb1_u8, 0xd6_u8])
     def query_interface(this : IMDSPStorage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2819,7 +2827,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("6c669867-97ed-4a67-9706-1c5529d2a414")]
   record IMDSPStorage3, lpVtbl : IMDSPStorage3Vtbl* do
     GUID = LibC::GUID.new(0x6c669867_u32, 0x97ed_u16, 0x4a67_u16, StaticArray[0x97_u8, 0x6_u8, 0x1c_u8, 0x55_u8, 0x29_u8, 0xd2_u8, 0xa4_u8, 0x14_u8])
     def query_interface(this : IMDSPStorage3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2912,7 +2919,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("3133b2c4-515c-481b-b1ce-39327ecb4f74")]
   record IMDSPStorage4, lpVtbl : IMDSPStorage4Vtbl* do
     GUID = LibC::GUID.new(0x3133b2c4_u32, 0x515c_u16, 0x481b_u16, StaticArray[0xb1_u8, 0xce_u8, 0x39_u8, 0x32_u8, 0x7e_u8, 0xcb_u8, 0x4f_u8, 0x74_u8])
     def query_interface(this : IMDSPStorage4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3010,7 +3016,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a17-33ed-11d3-8470-00c04f79dbc0")]
   record IMDSPStorageGlobals, lpVtbl : IMDSPStorageGlobalsVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a17_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPStorageGlobals*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3067,7 +3072,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a19-33ed-11d3-8470-00c04f79dbc0")]
   record IMDSPObjectInfo, lpVtbl : IMDSPObjectInfoVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a19_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPObjectInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3119,7 +3123,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a18-33ed-11d3-8470-00c04f79dbc0")]
   record IMDSPObject, lpVtbl : IMDSPObjectVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a18_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3176,7 +3179,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("3f34cd3e-5907-4341-9af9-97f4187c3aa5")]
   record IMDSPObject2, lpVtbl : IMDSPObject2Vtbl* do
     GUID = LibC::GUID.new(0x3f34cd3e_u32, 0x5907_u16, 0x4341_u16, StaticArray[0x9a_u8, 0xf9_u8, 0x97_u8, 0xf4_u8, 0x18_u8, 0x7c_u8, 0x3a_u8, 0xa5_u8])
     def query_interface(this : IMDSPObject2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3230,7 +3232,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("c2fe57a8-9304-478c-9ee4-47e397b912d7")]
   record IMDSPDirectTransfer, lpVtbl : IMDSPDirectTransferVtbl* do
     GUID = LibC::GUID.new(0xc2fe57a8_u32, 0x9304_u16, 0x478c_u16, StaticArray[0x9e_u8, 0xe4_u8, 0x47_u8, 0xe3_u8, 0x97_u8, 0xb9_u8, 0x12_u8, 0xd7_u8])
     def query_interface(this : IMDSPDirectTransfer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3257,7 +3258,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("a4e8f2d4-3f31-464d-b53d-4fc335998184")]
   record IMDSPRevoked, lpVtbl : IMDSPRevokedVtbl* do
     GUID = LibC::GUID.new(0xa4e8f2d4_u32, 0x3f31_u16, 0x464d_u16, StaticArray[0xb5_u8, 0x3d_u8, 0x4f_u8, 0xc3_u8, 0x35_u8, 0x99_u8, 0x81_u8, 0x84_u8])
     def query_interface(this : IMDSPRevoked*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3284,7 +3284,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a0f-33ed-11d3-8470-00c04f79dbc0")]
   record ISCPSecureAuthenticate, lpVtbl : ISCPSecureAuthenticateVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a0f_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : ISCPSecureAuthenticate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3312,7 +3311,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("b580cfae-1672-47e2-acaa-44bbecbcae5b")]
   record ISCPSecureAuthenticate2, lpVtbl : ISCPSecureAuthenticate2Vtbl* do
     GUID = LibC::GUID.new(0xb580cfae_u32, 0x1672_u16, 0x47e2_u16, StaticArray[0xac_u8, 0xaa_u8, 0x44_u8, 0xbb_u8, 0xec_u8, 0xbc_u8, 0xae_u8, 0x5b_u8])
     def query_interface(this : ISCPSecureAuthenticate2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3345,7 +3343,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a0d-33ed-11d3-8470-00c04f79dbc0")]
   record ISCPSecureQuery, lpVtbl : ISCPSecureQueryVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a0d_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : ISCPSecureQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3385,7 +3382,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("ebe17e25-4fd7-4632-af46-6d93d4fcc72e")]
   record ISCPSecureQuery2, lpVtbl : ISCPSecureQuery2Vtbl* do
     GUID = LibC::GUID.new(0xebe17e25_u32, 0x4fd7_u16, 0x4632_u16, StaticArray[0xaf_u8, 0x46_u8, 0x6d_u8, 0x93_u8, 0xd4_u8, 0xfc_u8, 0xc7_u8, 0x2e_u8])
     def query_interface(this : ISCPSecureQuery2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3426,7 +3422,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("1dcb3a0e-33ed-11d3-8470-00c04f79dbc0")]
   record ISCPSecureExchange, lpVtbl : ISCPSecureExchangeVtbl* do
     GUID = LibC::GUID.new(0x1dcb3a0e_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : ISCPSecureExchange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3462,7 +3457,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("6c62fc7b-2690-483f-9d44-0a20cb35577c")]
   record ISCPSecureExchange2, lpVtbl : ISCPSecureExchange2Vtbl* do
     GUID = LibC::GUID.new(0x6c62fc7b_u32, 0x2690_u16, 0x483f_u16, StaticArray[0x9d_u8, 0x44_u8, 0xa_u8, 0x20_u8, 0xcb_u8, 0x35_u8, 0x57_u8, 0x7c_u8])
     def query_interface(this : ISCPSecureExchange2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3504,7 +3498,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("ab4e77e4-8908-4b17-bd2a-b1dbe6dd69e1")]
   record ISCPSecureExchange3, lpVtbl : ISCPSecureExchange3Vtbl* do
     GUID = LibC::GUID.new(0xab4e77e4_u32, 0x8908_u16, 0x4b17_u16, StaticArray[0xbd_u8, 0x2a_u8, 0xb1_u8, 0xdb_u8, 0xe6_u8, 0xdd_u8, 0x69_u8, 0xe1_u8])
     def query_interface(this : ISCPSecureExchange3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3551,7 +3544,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("88a3e6ed-eee4-4619-bbb3-fd4fb62715d1")]
   record ISCPSession, lpVtbl : ISCPSessionVtbl* do
     GUID = LibC::GUID.new(0x88a3e6ed_u32, 0xeee4_u16, 0x4619_u16, StaticArray[0xbb_u8, 0xb3_u8, 0xfd_u8, 0x4f_u8, 0xb6_u8, 0x27_u8, 0x15_u8, 0xd1_u8])
     def query_interface(this : ISCPSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3590,7 +3582,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("b7edd1a2-4dab-484b-b3c5-ad39b8b4c0b1")]
   record ISCPSecureQuery3, lpVtbl : ISCPSecureQuery3Vtbl* do
     GUID = LibC::GUID.new(0xb7edd1a2_u32, 0x4dab_u16, 0x484b_u16, StaticArray[0xb3_u8, 0xc5_u8, 0xad_u8, 0x39_u8, 0xb8_u8, 0xb4_u8, 0xc0_u8, 0xb1_u8])
     def query_interface(this : ISCPSecureQuery3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3636,7 +3627,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("a9889c00-6d2b-11d3-8496-00c04f79dbc0")]
   record IComponentAuthenticate, lpVtbl : IComponentAuthenticateVtbl* do
     GUID = LibC::GUID.new(0xa9889c00_u32, 0x6d2b_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x96_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IComponentAuthenticate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3674,7 +3664,6 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  #@[Com("110a3200-5a79-11d3-8d78-444553540000")]
   record IWMDMLogger, lpVtbl : IWMDMLoggerVtbl* do
     GUID = LibC::GUID.new(0x110a3200_u32, 0x5a79_u16, 0x11d3_u16, StaticArray[0x8d_u8, 0x78_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IWMDMLogger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

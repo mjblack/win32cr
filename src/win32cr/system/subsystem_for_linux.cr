@@ -10,7 +10,6 @@ module Win32cr::System::SubsystemForLinux
     WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING = 4_u32
   end
 
-  @[Link("api-ms-win-wsl-api-l1-1-0")]
   lib C
     fun WslIsDistributionRegistered(distributionName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 

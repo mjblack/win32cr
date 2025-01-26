@@ -19,7 +19,6 @@ module Win32cr::System::WinRT::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("94bc8415-04ea-4b2e-af13-4de95aa898eb")]
   record ISoftwareBitmapNative, lpVtbl : ISoftwareBitmapNativeVtbl* do
     GUID = LibC::GUID.new(0x94bc8415_u32, 0x4ea_u16, 0x4b2e_u16, StaticArray[0xaf_u8, 0x13_u8, 0x4d_u8, 0xe9_u8, 0x5a_u8, 0xa8_u8, 0x98_u8, 0xeb_u8])
     def query_interface(this : ISoftwareBitmapNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -59,7 +58,6 @@ module Win32cr::System::WinRT::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("c3c181ec-2914-4791-af02-02d224a10b43")]
   record ISoftwareBitmapNativeFactory, lpVtbl : ISoftwareBitmapNativeFactoryVtbl* do
     GUID = LibC::GUID.new(0xc3c181ec_u32, 0x2914_u16, 0x4791_u16, StaticArray[0xaf_u8, 0x2_u8, 0x2_u8, 0xd2_u8, 0x24_u8, 0xa1_u8, 0xb_u8, 0x43_u8])
     def query_interface(this : ISoftwareBitmapNativeFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

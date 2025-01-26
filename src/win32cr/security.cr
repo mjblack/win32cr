@@ -12,9 +12,9 @@ module Win32cr::Security
   alias SAFER_LEVEL_HANDLE = LibC::IntPtrT
   alias SC_HANDLE = LibC::IntPtrT
   alias PSECURITY_DESCRIPTOR = Void*
-  alias PLSA_AP_CALL_PACKAGE_UNTRUSTED = Proc(Void**, Void*, Void*, UInt32, Void**, UInt32*, Int32*, Win32cr::Foundation::NTSTATUS)*
+  alias PLSA_AP_CALL_PACKAGE_UNTRUSTED = Proc(Void**, Void*, Void*, UInt32, Void**, UInt32*, Int32*, Win32cr::Foundation::NTSTATUS)
 
-  alias SEC_THREAD_START = Proc(Void*, UInt32)*
+  alias SEC_THREAD_START = Proc(Void*, UInt32)
 
   Wszcertenrollsharepath = "CertSrv\\CertEnroll"
   Cwchresultstring = 40_u32
@@ -402,501 +402,718 @@ module Win32cr::Security
   end
 
   @[Extern]
-  record SECURITY_ATTRIBUTES,
-    nLength : UInt32,
-    lpSecurityDescriptor : Void*,
-    bInheritHandle : Win32cr::Foundation::BOOL
+  struct SECURITY_ATTRIBUTES
+    property nLength : UInt32
+    property lpSecurityDescriptor : Void*
+    property bInheritHandle : Win32cr::Foundation::BOOL
+    def initialize(@nLength : UInt32, @lpSecurityDescriptor : Void*, @bInheritHandle : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record LLFILETIME,
-    anonymous : Anonymous_e__Union_ do
+  struct LLFILETIME
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ll : Int64,
-      ft : Win32cr::Foundation::FILETIME
+    struct Anonymous_e__Union_
+    property ll : Int64
+    property ft : Win32cr::Foundation::FILETIME
+    def initialize(@ll : Int64, @ft : Win32cr::Foundation::FILETIME)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record GENERIC_MAPPING,
-    generic_read : UInt32,
-    generic_write : UInt32,
-    generic_execute : UInt32,
-    generic_all : UInt32
+  struct GENERIC_MAPPING
+    property generic_read : UInt32
+    property generic_write : UInt32
+    property generic_execute : UInt32
+    property generic_all : UInt32
+    def initialize(@generic_read : UInt32, @generic_write : UInt32, @generic_execute : UInt32, @generic_all : UInt32)
+    end
+  end
 
   @[Extern]
-  record LUID_AND_ATTRIBUTES,
-    luid : Win32cr::Foundation::LUID,
-    attributes : Win32cr::Security::TOKEN_PRIVILEGES_ATTRIBUTES
+  struct LUID_AND_ATTRIBUTES
+    property luid : Win32cr::Foundation::LUID
+    property attributes : Win32cr::Security::TOKEN_PRIVILEGES_ATTRIBUTES
+    def initialize(@luid : Win32cr::Foundation::LUID, @attributes : Win32cr::Security::TOKEN_PRIVILEGES_ATTRIBUTES)
+    end
+  end
 
   @[Extern]
-  record SID_IDENTIFIER_AUTHORITY,
-    value : UInt8[6]
+  struct SID_IDENTIFIER_AUTHORITY
+    property value : UInt8[6]
+    def initialize(@value : UInt8[6])
+    end
+  end
 
   @[Extern]
-  record SID,
-    revision : UInt8,
-    sub_authority_count : UInt8,
-    identifier_authority : Win32cr::Security::SID_IDENTIFIER_AUTHORITY,
-    sub_authority : UInt32*
+  struct SID
+    property revision : UInt8
+    property sub_authority_count : UInt8
+    property identifier_authority : Win32cr::Security::SID_IDENTIFIER_AUTHORITY
+    property sub_authority : UInt32*
+    def initialize(@revision : UInt8, @sub_authority_count : UInt8, @identifier_authority : Win32cr::Security::SID_IDENTIFIER_AUTHORITY, @sub_authority : UInt32*)
+    end
+  end
 
   @[Extern(union: true)]
-  record SE_SID,
-    sid : Win32cr::Security::SID,
-    buffer : UInt8[68]
-
-  @[Extern]
-  record SID_AND_ATTRIBUTES,
-    sid : Win32cr::Foundation::PSID,
-    attributes : UInt32
-
-  @[Extern]
-  record SID_AND_ATTRIBUTES_HASH,
-    sid_count : UInt32,
-    sid_attr : Win32cr::Security::SID_AND_ATTRIBUTES*,
-    hash : LibC::UIntPtrT[32]
-
-  @[Extern]
-  record ACL,
-    acl_revision : UInt8,
-    sbz1 : UInt8,
-    acl_size : UInt16,
-    ace_count : UInt16,
-    sbz2 : UInt16
-
-  @[Extern]
-  record ACE_HEADER,
-    ace_type : UInt8,
-    ace_flags : UInt8,
-    ace_size : UInt16
-
-  @[Extern]
-  record ACCESS_ALLOWED_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    sid_start : UInt32
-
-  @[Extern]
-  record ACCESS_DENIED_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    sid_start : UInt32
-
-  @[Extern]
-  record SYSTEM_AUDIT_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    sid_start : UInt32
-
-  @[Extern]
-  record SYSTEM_ALARM_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    sid_start : UInt32
-
-  @[Extern]
-  record SYSTEM_RESOURCE_ATTRIBUTE_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    sid_start : UInt32
-
-  @[Extern]
-  record SYSTEM_SCOPED_POLICY_ID_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    sid_start : UInt32
-
-  @[Extern]
-  record SYSTEM_MANDATORY_LABEL_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    sid_start : UInt32
-
-  @[Extern]
-  record SYSTEM_PROCESS_TRUST_LABEL_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    sid_start : UInt32
-
-  @[Extern]
-  record SYSTEM_ACCESS_FILTER_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    sid_start : UInt32
-
-  @[Extern]
-  record ACCESS_ALLOWED_OBJECT_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS,
-    object_type : LibC::GUID,
-    inherited_object_type : LibC::GUID,
-    sid_start : UInt32
-
-  @[Extern]
-  record ACCESS_DENIED_OBJECT_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS,
-    object_type : LibC::GUID,
-    inherited_object_type : LibC::GUID,
-    sid_start : UInt32
-
-  @[Extern]
-  record SYSTEM_AUDIT_OBJECT_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS,
-    object_type : LibC::GUID,
-    inherited_object_type : LibC::GUID,
-    sid_start : UInt32
-
-  @[Extern]
-  record SYSTEM_ALARM_OBJECT_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    flags : UInt32,
-    object_type : LibC::GUID,
-    inherited_object_type : LibC::GUID,
-    sid_start : UInt32
-
-  @[Extern]
-  record ACCESS_ALLOWED_CALLBACK_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    sid_start : UInt32
-
-  @[Extern]
-  record ACCESS_DENIED_CALLBACK_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    sid_start : UInt32
-
-  @[Extern]
-  record SYSTEM_AUDIT_CALLBACK_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    sid_start : UInt32
-
-  @[Extern]
-  record SYSTEM_ALARM_CALLBACK_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    sid_start : UInt32
-
-  @[Extern]
-  record ACCESS_ALLOWED_CALLBACK_OBJECT_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS,
-    object_type : LibC::GUID,
-    inherited_object_type : LibC::GUID,
-    sid_start : UInt32
-
-  @[Extern]
-  record ACCESS_DENIED_CALLBACK_OBJECT_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS,
-    object_type : LibC::GUID,
-    inherited_object_type : LibC::GUID,
-    sid_start : UInt32
-
-  @[Extern]
-  record SYSTEM_AUDIT_CALLBACK_OBJECT_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS,
-    object_type : LibC::GUID,
-    inherited_object_type : LibC::GUID,
-    sid_start : UInt32
-
-  @[Extern]
-  record SYSTEM_ALARM_CALLBACK_OBJECT_ACE,
-    header : Win32cr::Security::ACE_HEADER,
-    mask : UInt32,
-    flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS,
-    object_type : LibC::GUID,
-    inherited_object_type : LibC::GUID,
-    sid_start : UInt32
-
-  @[Extern]
-  record ACL_REVISION_INFORMATION,
-    acl_revision : UInt32
-
-  @[Extern]
-  record ACL_SIZE_INFORMATION,
-    ace_count : UInt32,
-    acl_bytes_in_use : UInt32,
-    acl_bytes_free : UInt32
-
-  @[Extern]
-  record SECURITY_DESCRIPTOR,
-    revision : UInt8,
-    sbz1 : UInt8,
-    control : UInt16,
-    owner : Win32cr::Foundation::PSID,
-    group : Win32cr::Foundation::PSID,
-    sacl : Win32cr::Security::ACL*,
-    dacl : Win32cr::Security::ACL*
-
-  @[Extern]
-  record OBJECT_TYPE_LIST,
-    level : UInt16,
-    sbz : UInt16,
-    object_type : LibC::GUID*
-
-  @[Extern]
-  record PRIVILEGE_SET,
-    privilege_count : UInt32,
-    control : UInt32,
-    privilege : Win32cr::Security::LUID_AND_ATTRIBUTES*
-
-  @[Extern]
-  record ACCESS_REASONS,
-    data : UInt32[32]
-
-  @[Extern]
-  record SE_SECURITY_DESCRIPTOR,
-    size : UInt32,
-    flags : UInt32,
-    security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
-
-  @[Extern]
-  record SE_ACCESS_REQUEST,
-    size : UInt32,
-    se_security_descriptor : Win32cr::Security::SE_SECURITY_DESCRIPTOR*,
-    desired_access : UInt32,
-    previously_granted_access : UInt32,
-    principal_self_sid : Win32cr::Foundation::PSID,
-    generic_mapping : Win32cr::Security::GENERIC_MAPPING*,
-    object_type_list_count : UInt32,
-    object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*
-
-  @[Extern]
-  record SE_ACCESS_REPLY,
-    size : UInt32,
-    result_list_count : UInt32,
-    granted_access : UInt32*,
-    access_status : UInt32*,
-    access_reason : Win32cr::Security::ACCESS_REASONS*,
-    privileges : Win32cr::Security::PRIVILEGE_SET**
-
-  @[Extern]
-  record TOKEN_USER,
-    user : Win32cr::Security::SID_AND_ATTRIBUTES
-
-  @[Extern]
-  record TOKEN_GROUPS,
-    group_count : UInt32,
-    groups : Win32cr::Security::SID_AND_ATTRIBUTES*
-
-  @[Extern]
-  record TOKEN_PRIVILEGES,
-    privilege_count : UInt32,
-    privileges : Win32cr::Security::LUID_AND_ATTRIBUTES*
-
-  @[Extern]
-  record TOKEN_OWNER,
-    owner : Win32cr::Foundation::PSID
-
-  @[Extern]
-  record TOKEN_PRIMARY_GROUP,
-    primary_group : Win32cr::Foundation::PSID
-
-  @[Extern]
-  record TOKEN_DEFAULT_DACL,
-    default_dacl : Win32cr::Security::ACL*
-
-  @[Extern]
-  record TOKEN_USER_CLAIMS,
-    user_claims : Void*
-
-  @[Extern]
-  record TOKEN_DEVICE_CLAIMS,
-    device_claims : Void*
-
-  @[Extern]
-  record TOKEN_GROUPS_AND_PRIVILEGES,
-    sid_count : UInt32,
-    sid_length : UInt32,
-    sids : Win32cr::Security::SID_AND_ATTRIBUTES*,
-    restricted_sid_count : UInt32,
-    restricted_sid_length : UInt32,
-    restricted_sids : Win32cr::Security::SID_AND_ATTRIBUTES*,
-    privilege_count : UInt32,
-    privilege_length : UInt32,
-    privileges : Win32cr::Security::LUID_AND_ATTRIBUTES*,
-    authentication_id : Win32cr::Foundation::LUID
-
-  @[Extern]
-  record TOKEN_LINKED_TOKEN,
-    linked_token : Win32cr::Foundation::HANDLE
-
-  @[Extern]
-  record TOKEN_ELEVATION,
-    token_is_elevated : UInt32
-
-  @[Extern]
-  record TOKEN_MANDATORY_LABEL,
-    label : Win32cr::Security::SID_AND_ATTRIBUTES
-
-  @[Extern]
-  record TOKEN_MANDATORY_POLICY,
-    policy : Win32cr::Security::TOKEN_MANDATORY_POLICY_ID
-
-  @[Extern]
-  record TOKEN_ACCESS_INFORMATION,
-    sid_hash : Win32cr::Security::SID_AND_ATTRIBUTES_HASH*,
-    restricted_sid_hash : Win32cr::Security::SID_AND_ATTRIBUTES_HASH*,
-    privileges : Win32cr::Security::TOKEN_PRIVILEGES*,
-    authentication_id : Win32cr::Foundation::LUID,
-    token_type : Win32cr::Security::TOKEN_TYPE,
-    impersonation_level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL,
-    mandatory_policy : Win32cr::Security::TOKEN_MANDATORY_POLICY,
-    flags : UInt32,
-    app_container_number : UInt32,
-    package_sid : Win32cr::Foundation::PSID,
-    capabilities_hash : Win32cr::Security::SID_AND_ATTRIBUTES_HASH*,
-    trust_level_sid : Win32cr::Foundation::PSID,
-    security_attributes : Void*
-
-  @[Extern]
-  record TOKEN_AUDIT_POLICY,
-    per_user_policy : UInt8[30]
-
-  @[Extern]
-  record TOKEN_SOURCE,
-    source_name : Win32cr::Foundation::CHAR[8],
-    source_identifier : Win32cr::Foundation::LUID
-
-  @[Extern]
-  record TOKEN_STATISTICS,
-    token_id : Win32cr::Foundation::LUID,
-    authentication_id : Win32cr::Foundation::LUID,
-    expiration_time : Win32cr::Foundation::LARGE_INTEGER,
-    token_type : Win32cr::Security::TOKEN_TYPE,
-    impersonation_level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL,
-    dynamic_charged : UInt32,
-    dynamic_available : UInt32,
-    group_count : UInt32,
-    privilege_count : UInt32,
-    modified_id : Win32cr::Foundation::LUID
-
-  @[Extern]
-  record TOKEN_CONTROL,
-    token_id : Win32cr::Foundation::LUID,
-    authentication_id : Win32cr::Foundation::LUID,
-    modified_id : Win32cr::Foundation::LUID,
-    token_source : Win32cr::Security::TOKEN_SOURCE
-
-  @[Extern]
-  record TOKEN_ORIGIN,
-    originating_logon_session : Win32cr::Foundation::LUID
-
-  @[Extern]
-  record TOKEN_APPCONTAINER_INFORMATION,
-    token_app_container : Win32cr::Foundation::PSID
-
-  @[Extern]
-  record CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE,
-    version : UInt64,
-    name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE,
-    pValue : Void*,
-    value_length : UInt32
-
-  @[Extern]
-  record CLAIM_SECURITY_ATTRIBUTE_V1,
-    name : Win32cr::Foundation::PWSTR,
-    value_type : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE,
-    reserved : UInt16,
-    flags : UInt32,
-    value_count : UInt32,
-    values : Values_e__Union_ do
-
-    # Nested Type Values_e__Union_
-    @[Extern(union: true)]
-    record Values_e__Union_,
-      pInt64 : Int64*,
-      pUint64 : UInt64*,
-      ppString : Win32cr::Foundation::PWSTR*,
-      pFqbn : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE*,
-      pOctetString : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE*
-
+  struct SE_SID
+    property sid : Win32cr::Security::SID
+    property buffer : UInt8[68]
+    def initialize(@sid : Win32cr::Security::SID, @buffer : UInt8[68])
+    end
   end
 
   @[Extern]
-  record CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1,
-    name : UInt32,
-    value_type : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE,
-    reserved : UInt16,
-    flags : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_FLAGS,
-    value_count : UInt32,
-    values : Values_e__Union_ do
-
-    # Nested Type Values_e__Union_
-    @[Extern(union: true)]
-    record Values_e__Union_,
-      pInt64 : UInt32*,
-      pUint64 : UInt32*,
-      ppString : UInt32*,
-      pFqbn : UInt32*,
-      pOctetString : UInt32*
-
+  struct SID_AND_ATTRIBUTES
+    property sid : Win32cr::Foundation::PSID
+    property attributes : UInt32
+    def initialize(@sid : Win32cr::Foundation::PSID, @attributes : UInt32)
+    end
   end
 
   @[Extern]
-  record CLAIM_SECURITY_ATTRIBUTES_INFORMATION,
-    version : UInt16,
-    reserved : UInt16,
-    attribute_count : UInt32,
-    attribute : Attribute_e__Union_ do
+  struct SID_AND_ATTRIBUTES_HASH
+    property sid_count : UInt32
+    property sid_attr : Win32cr::Security::SID_AND_ATTRIBUTES*
+    property hash : LibC::UIntPtrT[32]
+    def initialize(@sid_count : UInt32, @sid_attr : Win32cr::Security::SID_AND_ATTRIBUTES*, @hash : LibC::UIntPtrT[32])
+    end
+  end
+
+  @[Extern]
+  struct ACL
+    property acl_revision : UInt8
+    property sbz1 : UInt8
+    property acl_size : UInt16
+    property ace_count : UInt16
+    property sbz2 : UInt16
+    def initialize(@acl_revision : UInt8, @sbz1 : UInt8, @acl_size : UInt16, @ace_count : UInt16, @sbz2 : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct ACE_HEADER
+    property ace_type : UInt8
+    property ace_flags : UInt8
+    property ace_size : UInt16
+    def initialize(@ace_type : UInt8, @ace_flags : UInt8, @ace_size : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct ACCESS_ALLOWED_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACCESS_DENIED_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_AUDIT_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_ALARM_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_RESOURCE_ATTRIBUTE_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_SCOPED_POLICY_ID_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_MANDATORY_LABEL_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_PROCESS_TRUST_LABEL_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_ACCESS_FILTER_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACCESS_ALLOWED_OBJECT_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS
+    property object_type : LibC::GUID
+    property inherited_object_type : LibC::GUID
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS, @object_type : LibC::GUID, @inherited_object_type : LibC::GUID, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACCESS_DENIED_OBJECT_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS
+    property object_type : LibC::GUID
+    property inherited_object_type : LibC::GUID
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS, @object_type : LibC::GUID, @inherited_object_type : LibC::GUID, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_AUDIT_OBJECT_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS
+    property object_type : LibC::GUID
+    property inherited_object_type : LibC::GUID
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS, @object_type : LibC::GUID, @inherited_object_type : LibC::GUID, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_ALARM_OBJECT_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property flags : UInt32
+    property object_type : LibC::GUID
+    property inherited_object_type : LibC::GUID
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @flags : UInt32, @object_type : LibC::GUID, @inherited_object_type : LibC::GUID, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACCESS_ALLOWED_CALLBACK_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACCESS_DENIED_CALLBACK_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_AUDIT_CALLBACK_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_ALARM_CALLBACK_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACCESS_ALLOWED_CALLBACK_OBJECT_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS
+    property object_type : LibC::GUID
+    property inherited_object_type : LibC::GUID
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS, @object_type : LibC::GUID, @inherited_object_type : LibC::GUID, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACCESS_DENIED_CALLBACK_OBJECT_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS
+    property object_type : LibC::GUID
+    property inherited_object_type : LibC::GUID
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS, @object_type : LibC::GUID, @inherited_object_type : LibC::GUID, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_AUDIT_CALLBACK_OBJECT_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS
+    property object_type : LibC::GUID
+    property inherited_object_type : LibC::GUID
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS, @object_type : LibC::GUID, @inherited_object_type : LibC::GUID, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_ALARM_CALLBACK_OBJECT_ACE
+    property header : Win32cr::Security::ACE_HEADER
+    property mask : UInt32
+    property flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS
+    property object_type : LibC::GUID
+    property inherited_object_type : LibC::GUID
+    property sid_start : UInt32
+    def initialize(@header : Win32cr::Security::ACE_HEADER, @mask : UInt32, @flags : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS, @object_type : LibC::GUID, @inherited_object_type : LibC::GUID, @sid_start : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACL_REVISION_INFORMATION
+    property acl_revision : UInt32
+    def initialize(@acl_revision : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACL_SIZE_INFORMATION
+    property ace_count : UInt32
+    property acl_bytes_in_use : UInt32
+    property acl_bytes_free : UInt32
+    def initialize(@ace_count : UInt32, @acl_bytes_in_use : UInt32, @acl_bytes_free : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SECURITY_DESCRIPTOR
+    property revision : UInt8
+    property sbz1 : UInt8
+    property control : UInt16
+    property owner : Win32cr::Foundation::PSID
+    property group : Win32cr::Foundation::PSID
+    property sacl : Win32cr::Security::ACL*
+    property dacl : Win32cr::Security::ACL*
+    def initialize(@revision : UInt8, @sbz1 : UInt8, @control : UInt16, @owner : Win32cr::Foundation::PSID, @group : Win32cr::Foundation::PSID, @sacl : Win32cr::Security::ACL*, @dacl : Win32cr::Security::ACL*)
+    end
+  end
+
+  @[Extern]
+  struct OBJECT_TYPE_LIST
+    property level : UInt16
+    property sbz : UInt16
+    property object_type : LibC::GUID*
+    def initialize(@level : UInt16, @sbz : UInt16, @object_type : LibC::GUID*)
+    end
+  end
+
+  @[Extern]
+  struct PRIVILEGE_SET
+    property privilege_count : UInt32
+    property control : UInt32
+    property privilege : Win32cr::Security::LUID_AND_ATTRIBUTES*
+    def initialize(@privilege_count : UInt32, @control : UInt32, @privilege : Win32cr::Security::LUID_AND_ATTRIBUTES*)
+    end
+  end
+
+  @[Extern]
+  struct ACCESS_REASONS
+    property data : UInt32[32]
+    def initialize(@data : UInt32[32])
+    end
+  end
+
+  @[Extern]
+  struct SE_SECURITY_DESCRIPTOR
+    property size : UInt32
+    property flags : UInt32
+    property security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+    def initialize(@size : UInt32, @flags : UInt32, @security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR)
+    end
+  end
+
+  @[Extern]
+  struct SE_ACCESS_REQUEST
+    property size : UInt32
+    property se_security_descriptor : Win32cr::Security::SE_SECURITY_DESCRIPTOR*
+    property desired_access : UInt32
+    property previously_granted_access : UInt32
+    property principal_self_sid : Win32cr::Foundation::PSID
+    property generic_mapping : Win32cr::Security::GENERIC_MAPPING*
+    property object_type_list_count : UInt32
+    property object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*
+    def initialize(@size : UInt32, @se_security_descriptor : Win32cr::Security::SE_SECURITY_DESCRIPTOR*, @desired_access : UInt32, @previously_granted_access : UInt32, @principal_self_sid : Win32cr::Foundation::PSID, @generic_mapping : Win32cr::Security::GENERIC_MAPPING*, @object_type_list_count : UInt32, @object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*)
+    end
+  end
+
+  @[Extern]
+  struct SE_ACCESS_REPLY
+    property size : UInt32
+    property result_list_count : UInt32
+    property granted_access : UInt32*
+    property access_status : UInt32*
+    property access_reason : Win32cr::Security::ACCESS_REASONS*
+    property privileges : Win32cr::Security::PRIVILEGE_SET**
+    def initialize(@size : UInt32, @result_list_count : UInt32, @granted_access : UInt32*, @access_status : UInt32*, @access_reason : Win32cr::Security::ACCESS_REASONS*, @privileges : Win32cr::Security::PRIVILEGE_SET**)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_USER
+    property user : Win32cr::Security::SID_AND_ATTRIBUTES
+    def initialize(@user : Win32cr::Security::SID_AND_ATTRIBUTES)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_GROUPS
+    property group_count : UInt32
+    property groups : Win32cr::Security::SID_AND_ATTRIBUTES*
+    def initialize(@group_count : UInt32, @groups : Win32cr::Security::SID_AND_ATTRIBUTES*)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_PRIVILEGES
+    property privilege_count : UInt32
+    property privileges : Win32cr::Security::LUID_AND_ATTRIBUTES*
+    def initialize(@privilege_count : UInt32, @privileges : Win32cr::Security::LUID_AND_ATTRIBUTES*)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_OWNER
+    property owner : Win32cr::Foundation::PSID
+    def initialize(@owner : Win32cr::Foundation::PSID)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_PRIMARY_GROUP
+    property primary_group : Win32cr::Foundation::PSID
+    def initialize(@primary_group : Win32cr::Foundation::PSID)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_DEFAULT_DACL
+    property default_dacl : Win32cr::Security::ACL*
+    def initialize(@default_dacl : Win32cr::Security::ACL*)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_USER_CLAIMS
+    property user_claims : Void*
+    def initialize(@user_claims : Void*)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_DEVICE_CLAIMS
+    property device_claims : Void*
+    def initialize(@device_claims : Void*)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_GROUPS_AND_PRIVILEGES
+    property sid_count : UInt32
+    property sid_length : UInt32
+    property sids : Win32cr::Security::SID_AND_ATTRIBUTES*
+    property restricted_sid_count : UInt32
+    property restricted_sid_length : UInt32
+    property restricted_sids : Win32cr::Security::SID_AND_ATTRIBUTES*
+    property privilege_count : UInt32
+    property privilege_length : UInt32
+    property privileges : Win32cr::Security::LUID_AND_ATTRIBUTES*
+    property authentication_id : Win32cr::Foundation::LUID
+    def initialize(@sid_count : UInt32, @sid_length : UInt32, @sids : Win32cr::Security::SID_AND_ATTRIBUTES*, @restricted_sid_count : UInt32, @restricted_sid_length : UInt32, @restricted_sids : Win32cr::Security::SID_AND_ATTRIBUTES*, @privilege_count : UInt32, @privilege_length : UInt32, @privileges : Win32cr::Security::LUID_AND_ATTRIBUTES*, @authentication_id : Win32cr::Foundation::LUID)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_LINKED_TOKEN
+    property linked_token : Win32cr::Foundation::HANDLE
+    def initialize(@linked_token : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_ELEVATION
+    property token_is_elevated : UInt32
+    def initialize(@token_is_elevated : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_MANDATORY_LABEL
+    property label : Win32cr::Security::SID_AND_ATTRIBUTES
+    def initialize(@label : Win32cr::Security::SID_AND_ATTRIBUTES)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_MANDATORY_POLICY
+    property policy : Win32cr::Security::TOKEN_MANDATORY_POLICY_ID
+    def initialize(@policy : Win32cr::Security::TOKEN_MANDATORY_POLICY_ID)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_ACCESS_INFORMATION
+    property sid_hash : Win32cr::Security::SID_AND_ATTRIBUTES_HASH*
+    property restricted_sid_hash : Win32cr::Security::SID_AND_ATTRIBUTES_HASH*
+    property privileges : Win32cr::Security::TOKEN_PRIVILEGES*
+    property authentication_id : Win32cr::Foundation::LUID
+    property token_type : Win32cr::Security::TOKEN_TYPE
+    property impersonation_level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL
+    property mandatory_policy : Win32cr::Security::TOKEN_MANDATORY_POLICY
+    property flags : UInt32
+    property app_container_number : UInt32
+    property package_sid : Win32cr::Foundation::PSID
+    property capabilities_hash : Win32cr::Security::SID_AND_ATTRIBUTES_HASH*
+    property trust_level_sid : Win32cr::Foundation::PSID
+    property security_attributes : Void*
+    def initialize(@sid_hash : Win32cr::Security::SID_AND_ATTRIBUTES_HASH*, @restricted_sid_hash : Win32cr::Security::SID_AND_ATTRIBUTES_HASH*, @privileges : Win32cr::Security::TOKEN_PRIVILEGES*, @authentication_id : Win32cr::Foundation::LUID, @token_type : Win32cr::Security::TOKEN_TYPE, @impersonation_level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL, @mandatory_policy : Win32cr::Security::TOKEN_MANDATORY_POLICY, @flags : UInt32, @app_container_number : UInt32, @package_sid : Win32cr::Foundation::PSID, @capabilities_hash : Win32cr::Security::SID_AND_ATTRIBUTES_HASH*, @trust_level_sid : Win32cr::Foundation::PSID, @security_attributes : Void*)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_AUDIT_POLICY
+    property per_user_policy : UInt8[30]
+    def initialize(@per_user_policy : UInt8[30])
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_SOURCE
+    property source_name : Win32cr::Foundation::CHAR[8]
+    property source_identifier : Win32cr::Foundation::LUID
+    def initialize(@source_name : Win32cr::Foundation::CHAR[8], @source_identifier : Win32cr::Foundation::LUID)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_STATISTICS
+    property token_id : Win32cr::Foundation::LUID
+    property authentication_id : Win32cr::Foundation::LUID
+    property expiration_time : Win32cr::Foundation::LARGE_INTEGER
+    property token_type : Win32cr::Security::TOKEN_TYPE
+    property impersonation_level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL
+    property dynamic_charged : UInt32
+    property dynamic_available : UInt32
+    property group_count : UInt32
+    property privilege_count : UInt32
+    property modified_id : Win32cr::Foundation::LUID
+    def initialize(@token_id : Win32cr::Foundation::LUID, @authentication_id : Win32cr::Foundation::LUID, @expiration_time : Win32cr::Foundation::LARGE_INTEGER, @token_type : Win32cr::Security::TOKEN_TYPE, @impersonation_level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL, @dynamic_charged : UInt32, @dynamic_available : UInt32, @group_count : UInt32, @privilege_count : UInt32, @modified_id : Win32cr::Foundation::LUID)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_CONTROL
+    property token_id : Win32cr::Foundation::LUID
+    property authentication_id : Win32cr::Foundation::LUID
+    property modified_id : Win32cr::Foundation::LUID
+    property token_source : Win32cr::Security::TOKEN_SOURCE
+    def initialize(@token_id : Win32cr::Foundation::LUID, @authentication_id : Win32cr::Foundation::LUID, @modified_id : Win32cr::Foundation::LUID, @token_source : Win32cr::Security::TOKEN_SOURCE)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_ORIGIN
+    property originating_logon_session : Win32cr::Foundation::LUID
+    def initialize(@originating_logon_session : Win32cr::Foundation::LUID)
+    end
+  end
+
+  @[Extern]
+  struct TOKEN_APPCONTAINER_INFORMATION
+    property token_app_container : Win32cr::Foundation::PSID
+    def initialize(@token_app_container : Win32cr::Foundation::PSID)
+    end
+  end
+
+  @[Extern]
+  struct CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE
+    property version : UInt64
+    property name : Win32cr::Foundation::PWSTR
+    def initialize(@version : UInt64, @name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE
+    property pValue : Void*
+    property value_length : UInt32
+    def initialize(@pValue : Void*, @value_length : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLAIM_SECURITY_ATTRIBUTE_V1
+    property name : Win32cr::Foundation::PWSTR
+    property value_type : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE
+    property reserved : UInt16
+    property flags : UInt32
+    property value_count : UInt32
+    property values : Values_e__Union_
+
+    # Nested Type Values_e__Union_
+    @[Extern(union: true)]
+    struct Values_e__Union_
+    property pInt64 : Int64*
+    property pUint64 : UInt64*
+    property ppString : Win32cr::Foundation::PWSTR*
+    property pFqbn : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE*
+    property pOctetString : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE*
+    def initialize(@pInt64 : Int64*, @pUint64 : UInt64*, @ppString : Win32cr::Foundation::PWSTR*, @pFqbn : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE*, @pOctetString : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE*)
+    end
+    end
+
+    def initialize(@name : Win32cr::Foundation::PWSTR, @value_type : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE, @reserved : UInt16, @flags : UInt32, @value_count : UInt32, @values : Values_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1
+    property name : UInt32
+    property value_type : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE
+    property reserved : UInt16
+    property flags : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_FLAGS
+    property value_count : UInt32
+    property values : Values_e__Union_
+
+    # Nested Type Values_e__Union_
+    @[Extern(union: true)]
+    struct Values_e__Union_
+    property pInt64 : UInt32*
+    property pUint64 : UInt32*
+    property ppString : UInt32*
+    property pFqbn : UInt32*
+    property pOctetString : UInt32*
+    def initialize(@pInt64 : UInt32*, @pUint64 : UInt32*, @ppString : UInt32*, @pFqbn : UInt32*, @pOctetString : UInt32*)
+    end
+    end
+
+    def initialize(@name : UInt32, @value_type : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE, @reserved : UInt16, @flags : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_FLAGS, @value_count : UInt32, @values : Values_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct CLAIM_SECURITY_ATTRIBUTES_INFORMATION
+    property version : UInt16
+    property reserved : UInt16
+    property attribute_count : UInt32
+    property attribute : Attribute_e__Union_
 
     # Nested Type Attribute_e__Union_
     @[Extern(union: true)]
-    record Attribute_e__Union_,
-      pAttributeV1 : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_V1*
+    struct Attribute_e__Union_
+    property pAttributeV1 : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_V1*
+    def initialize(@pAttributeV1 : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTE_V1*)
+    end
+    end
 
+    def initialize(@version : UInt16, @reserved : UInt16, @attribute_count : UInt32, @attribute : Attribute_e__Union_)
+    end
   end
 
   @[Extern]
-  record SECURITY_QUALITY_OF_SERVICE,
-    length : UInt32,
-    impersonation_level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL,
-    context_tracking_mode : UInt8,
-    effective_only : Win32cr::Foundation::BOOLEAN
+  struct SECURITY_QUALITY_OF_SERVICE
+    property length : UInt32
+    property impersonation_level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL
+    property context_tracking_mode : UInt8
+    property effective_only : Win32cr::Foundation::BOOLEAN
+    def initialize(@length : UInt32, @impersonation_level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL, @context_tracking_mode : UInt8, @effective_only : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record SE_IMPERSONATION_STATE,
-    token : Void*,
-    copy_on_open : Win32cr::Foundation::BOOLEAN,
-    effective_only : Win32cr::Foundation::BOOLEAN,
-    level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL
+  struct SE_IMPERSONATION_STATE
+    property token : Void*
+    property copy_on_open : Win32cr::Foundation::BOOLEAN
+    property effective_only : Win32cr::Foundation::BOOLEAN
+    property level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL
+    def initialize(@token : Void*, @copy_on_open : Win32cr::Foundation::BOOLEAN, @effective_only : Win32cr::Foundation::BOOLEAN, @level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL)
+    end
+  end
 
   @[Extern]
-  record SECURITY_CAPABILITIES,
-    app_container_sid : Win32cr::Foundation::PSID,
-    capabilities : Win32cr::Security::SID_AND_ATTRIBUTES*,
-    capability_count : UInt32,
-    reserved : UInt32
+  struct SECURITY_CAPABILITIES
+    property app_container_sid : Win32cr::Foundation::PSID
+    property capabilities : Win32cr::Security::SID_AND_ATTRIBUTES*
+    property capability_count : UInt32
+    property reserved : UInt32
+    def initialize(@app_container_sid : Win32cr::Foundation::PSID, @capabilities : Win32cr::Security::SID_AND_ATTRIBUTES*, @capability_count : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record QUOTA_LIMITS,
-    paged_pool_limit : LibC::UIntPtrT,
-    non_paged_pool_limit : LibC::UIntPtrT,
-    minimum_working_set_size : LibC::UIntPtrT,
-    maximum_working_set_size : LibC::UIntPtrT,
-    pagefile_limit : LibC::UIntPtrT,
-    time_limit : Win32cr::Foundation::LARGE_INTEGER
+  struct QUOTA_LIMITS
+    property paged_pool_limit : LibC::UIntPtrT
+    property non_paged_pool_limit : LibC::UIntPtrT
+    property minimum_working_set_size : LibC::UIntPtrT
+    property maximum_working_set_size : LibC::UIntPtrT
+    property pagefile_limit : LibC::UIntPtrT
+    property time_limit : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@paged_pool_limit : LibC::UIntPtrT, @non_paged_pool_limit : LibC::UIntPtrT, @minimum_working_set_size : LibC::UIntPtrT, @maximum_working_set_size : LibC::UIntPtrT, @pagefile_limit : LibC::UIntPtrT, @time_limit : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Link("advapi32")]
   @[Link("kernel32")]
-  @[Link("api-ms-win-security-base-l1-2-2")]
   @[Link("ntdll")]
   @[Link("user32")]
   lib C

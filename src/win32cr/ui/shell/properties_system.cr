@@ -297,26 +297,36 @@ module Win32cr::UI::Shell::PropertiesSystem
   end
 
   @[Extern]
-  record PROPERTYKEY,
-    fmtid : LibC::GUID,
-    pid : UInt32
+  struct PROPERTYKEY
+    property fmtid : LibC::GUID
+    property pid : UInt32
+    def initialize(@fmtid : LibC::GUID, @pid : UInt32)
+    end
+  end
 
   @[Extern]
-  record SERIALIZEDPROPSTORAGE
+  struct SERIALIZEDPROPSTORAGE
+    def initialize()
+    end
+  end
+
   @[Extern]
-  record PROPPRG,
-    flPrg : UInt16,
-    flPrgInit : UInt16,
-    achTitle : Win32cr::Foundation::CHAR[30],
-    achCmdLine : Win32cr::Foundation::CHAR[128],
-    achWorkDir : Win32cr::Foundation::CHAR[64],
-    wHotKey : UInt16,
-    achIconFile : Win32cr::Foundation::CHAR[80],
-    wIconIndex : UInt16,
-    dwEnhModeFlags : UInt32,
-    dwRealModeFlags : UInt32,
-    achOtherFile : Win32cr::Foundation::CHAR[80],
-    achPIFFile : Win32cr::Foundation::CHAR[260]
+  struct PROPPRG
+    property flPrg : UInt16
+    property flPrgInit : UInt16
+    property achTitle : Win32cr::Foundation::CHAR[30]
+    property achCmdLine : Win32cr::Foundation::CHAR[128]
+    property achWorkDir : Win32cr::Foundation::CHAR[64]
+    property wHotKey : UInt16
+    property achIconFile : Win32cr::Foundation::CHAR[80]
+    property wIconIndex : UInt16
+    property dwEnhModeFlags : UInt32
+    property dwRealModeFlags : UInt32
+    property achOtherFile : Win32cr::Foundation::CHAR[80]
+    property achPIFFile : Win32cr::Foundation::CHAR[260]
+    def initialize(@flPrg : UInt16, @flPrgInit : UInt16, @achTitle : Win32cr::Foundation::CHAR[30], @achCmdLine : Win32cr::Foundation::CHAR[128], @achWorkDir : Win32cr::Foundation::CHAR[64], @wHotKey : UInt16, @achIconFile : Win32cr::Foundation::CHAR[80], @wIconIndex : UInt16, @dwEnhModeFlags : UInt32, @dwRealModeFlags : UInt32, @achOtherFile : Win32cr::Foundation::CHAR[80], @achPIFFile : Win32cr::Foundation::CHAR[260])
+    end
+  end
 
   @[Extern]
   record IInitializeWithFileVtbl,
@@ -327,7 +337,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("b7d14566-0509-4cce-a71f-0a554233bd9b")]
   record IInitializeWithFile, lpVtbl : IInitializeWithFileVtbl* do
     GUID = LibC::GUID.new(0xb7d14566_u32, 0x509_u16, 0x4cce_u16, StaticArray[0xa7_u8, 0x1f_u8, 0xa_u8, 0x55_u8, 0x42_u8, 0x33_u8, 0xbd_u8, 0x9b_u8])
     def query_interface(this : IInitializeWithFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -354,7 +363,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("b824b49d-22ac-4161-ac8a-9916e8fa3f7f")]
   record IInitializeWithStream, lpVtbl : IInitializeWithStreamVtbl* do
     GUID = LibC::GUID.new(0xb824b49d_u32, 0x22ac_u16, 0x4161_u16, StaticArray[0xac_u8, 0x8a_u8, 0x99_u8, 0x16_u8, 0xe8_u8, 0xfa_u8, 0x3f_u8, 0x7f_u8])
     def query_interface(this : IInitializeWithStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -385,7 +393,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("886d8eeb-8cf2-4446-8d02-cdba1dbdcf99")]
   record IPropertyStore, lpVtbl : IPropertyStoreVtbl* do
     GUID = LibC::GUID.new(0x886d8eeb_u32, 0x8cf2_u16, 0x4446_u16, StaticArray[0x8d_u8, 0x2_u8, 0xcd_u8, 0xba_u8, 0x1d_u8, 0xbd_u8, 0xcf_u8, 0x99_u8])
     def query_interface(this : IPropertyStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -427,7 +434,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("71604b0f-97b0-4764-8577-2f13e98a1422")]
   record INamedPropertyStore, lpVtbl : INamedPropertyStoreVtbl* do
     GUID = LibC::GUID.new(0x71604b0f_u32, 0x97b0_u16, 0x4764_u16, StaticArray[0x85_u8, 0x77_u8, 0x2f_u8, 0x13_u8, 0xe9_u8, 0x8a_u8, 0x14_u8, 0x22_u8])
     def query_interface(this : INamedPropertyStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -464,7 +470,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("fc0ca0a7-c316-4fd2-9031-3e628e6d4f23")]
   record IObjectWithPropertyKey, lpVtbl : IObjectWithPropertyKeyVtbl* do
     GUID = LibC::GUID.new(0xfc0ca0a7_u32, 0xc316_u16, 0x4fd2_u16, StaticArray[0x90_u8, 0x31_u8, 0x3e_u8, 0x62_u8, 0x8e_u8, 0x6d_u8, 0x4f_u8, 0x23_u8])
     def query_interface(this : IObjectWithPropertyKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -496,7 +501,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("f917bc8a-1bba-4478-a245-1bde03eb9431")]
   record IPropertyChange, lpVtbl : IPropertyChangeVtbl* do
     GUID = LibC::GUID.new(0xf917bc8a_u32, 0x1bba_u16, 0x4478_u16, StaticArray[0xa2_u8, 0x45_u8, 0x1b_u8, 0xde_u8, 0x3_u8, 0xeb_u8, 0x94_u8, 0x31_u8])
     def query_interface(this : IPropertyChange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -535,7 +539,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("380f5cad-1b5e-42f2-805d-637fd392d31e")]
   record IPropertyChangeArray, lpVtbl : IPropertyChangeArrayVtbl* do
     GUID = LibC::GUID.new(0x380f5cad_u32, 0x1b5e_u16, 0x42f2_u16, StaticArray[0x80_u8, 0x5d_u8, 0x63_u8, 0x7f_u8, 0xd3_u8, 0x92_u8, 0xd3_u8, 0x1e_u8])
     def query_interface(this : IPropertyChangeArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -580,7 +583,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("c8e2d566-186e-4d49-bf41-6909ead56acc")]
   record IPropertyStoreCapabilities, lpVtbl : IPropertyStoreCapabilitiesVtbl* do
     GUID = LibC::GUID.new(0xc8e2d566_u32, 0x186e_u16, 0x4d49_u16, StaticArray[0xbf_u8, 0x41_u8, 0x69_u8, 0x9_u8, 0xea_u8, 0xd5_u8, 0x6a_u8, 0xcc_u8])
     def query_interface(this : IPropertyStoreCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -615,7 +617,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("3017056d-9a91-4e90-937d-746c72abbf4f")]
   record IPropertyStoreCache, lpVtbl : IPropertyStoreCacheVtbl* do
     GUID = LibC::GUID.new(0x3017056d_u32, 0x9a91_u16, 0x4e90_u16, StaticArray[0x93_u8, 0x7d_u8, 0x74_u8, 0x6c_u8, 0x72_u8, 0xab_u8, 0xbf_u8, 0x4f_u8])
     def query_interface(this : IPropertyStoreCache*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -670,7 +671,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("11e1fbf9-2d56-4a6b-8db3-7cd193a471f2")]
   record IPropertyEnumType, lpVtbl : IPropertyEnumTypeVtbl* do
     GUID = LibC::GUID.new(0x11e1fbf9_u32, 0x2d56_u16, 0x4a6b_u16, StaticArray[0x8d_u8, 0xb3_u8, 0x7c_u8, 0xd1_u8, 0x93_u8, 0xa4_u8, 0x71_u8, 0xf2_u8])
     def query_interface(this : IPropertyEnumType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -714,7 +714,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("9b6e051c-5ddd-4321-9070-fe2acb55e794")]
   record IPropertyEnumType2, lpVtbl : IPropertyEnumType2Vtbl* do
     GUID = LibC::GUID.new(0x9b6e051c_u32, 0x5ddd_u16, 0x4321_u16, StaticArray[0x90_u8, 0x70_u8, 0xfe_u8, 0x2a_u8, 0xcb_u8, 0x55_u8, 0xe7_u8, 0x94_u8])
     def query_interface(this : IPropertyEnumType2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -759,7 +758,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("a99400f4-3d84-4557-94ba-1242fb2cc9a6")]
   record IPropertyEnumTypeList, lpVtbl : IPropertyEnumTypeListVtbl* do
     GUID = LibC::GUID.new(0xa99400f4_u32, 0x3d84_u16, 0x4557_u16, StaticArray[0x94_u8, 0xba_u8, 0x12_u8, 0x42_u8, 0xfb_u8, 0x2c_u8, 0xc9_u8, 0xa6_u8])
     def query_interface(this : IPropertyEnumTypeList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -815,7 +813,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("6f79d558-3e96-4549-a1d1-7d75d2288814")]
   record IPropertyDescription, lpVtbl : IPropertyDescriptionVtbl* do
     GUID = LibC::GUID.new(0x6f79d558_u32, 0x3e96_u16, 0x4549_u16, StaticArray[0xa1_u8, 0xd1_u8, 0x7d_u8, 0x75_u8, 0xd2_u8, 0x28_u8, 0x88_u8, 0x14_u8])
     def query_interface(this : IPropertyDescription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -923,7 +920,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("57d2eded-5062-400e-b107-5dae79fe57a6")]
   record IPropertyDescription2, lpVtbl : IPropertyDescription2Vtbl* do
     GUID = LibC::GUID.new(0x57d2eded_u32, 0x5062_u16, 0x400e_u16, StaticArray[0xb1_u8, 0x7_u8, 0x5d_u8, 0xae_u8, 0x79_u8, 0xfe_u8, 0x57_u8, 0xa6_u8])
     def query_interface(this : IPropertyDescription2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1035,7 +1031,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("f67104fc-2af9-46fd-b32d-243c1404f3d1")]
   record IPropertyDescriptionAliasInfo, lpVtbl : IPropertyDescriptionAliasInfoVtbl* do
     GUID = LibC::GUID.new(0xf67104fc_u32, 0x2af9_u16, 0x46fd_u16, StaticArray[0xb3_u8, 0x2d_u8, 0x24_u8, 0x3c_u8, 0x14_u8, 0x4_u8, 0xf3_u8, 0xd1_u8])
     def query_interface(this : IPropertyDescriptionAliasInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1152,7 +1147,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("078f91bd-29a2-440f-924e-46a291524520")]
   record IPropertyDescriptionSearchInfo, lpVtbl : IPropertyDescriptionSearchInfoVtbl* do
     GUID = LibC::GUID.new(0x78f91bd_u32, 0x29a2_u16, 0x440f_u16, StaticArray[0x92_u8, 0x4e_u8, 0x46_u8, 0xa2_u8, 0x91_u8, 0x52_u8, 0x45_u8, 0x20_u8])
     def query_interface(this : IPropertyDescriptionSearchInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1272,7 +1266,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("507393f4-2a3d-4a60-b59e-d9c75716c2dd")]
   record IPropertyDescriptionRelatedPropertyInfo, lpVtbl : IPropertyDescriptionRelatedPropertyInfoVtbl* do
     GUID = LibC::GUID.new(0x507393f4_u32, 0x2a3d_u16, 0x4a60_u16, StaticArray[0xb5_u8, 0x9e_u8, 0xd9_u8, 0xc7_u8, 0x57_u8, 0x16_u8, 0xc2_u8, 0xdd_u8])
     def query_interface(this : IPropertyDescriptionRelatedPropertyInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1370,7 +1363,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("ca724e8a-c3e6-442b-88a4-6fb0db8035a3")]
   record IPropertySystem, lpVtbl : IPropertySystemVtbl* do
     GUID = LibC::GUID.new(0xca724e8a_u32, 0xc3e6_u16, 0x442b_u16, StaticArray[0x88_u8, 0xa4_u8, 0x6f_u8, 0xb0_u8, 0xdb_u8, 0x80_u8, 0x35_u8, 0xa3_u8])
     def query_interface(this : IPropertySystem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1422,7 +1414,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("1f9fc1d0-c39b-4b26-817f-011967d3440e")]
   record IPropertyDescriptionList, lpVtbl : IPropertyDescriptionListVtbl* do
     GUID = LibC::GUID.new(0x1f9fc1d0_u32, 0xc39b_u16, 0x4b26_u16, StaticArray[0x81_u8, 0x7f_u8, 0x1_u8, 0x19_u8, 0x67_u8, 0xd3_u8, 0x44_u8, 0xe_u8])
     def query_interface(this : IPropertyDescriptionList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1453,7 +1444,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("bc110b6d-57e8-4148-a9c6-91015ab2f3a5")]
   record IPropertyStoreFactory, lpVtbl : IPropertyStoreFactoryVtbl* do
     GUID = LibC::GUID.new(0xbc110b6d_u32, 0x57e8_u16, 0x4148_u16, StaticArray[0xa9_u8, 0xc6_u8, 0x91_u8, 0x1_u8, 0x5a_u8, 0xb2_u8, 0xf3_u8, 0xa5_u8])
     def query_interface(this : IPropertyStoreFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1485,7 +1475,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("40d4577f-e237-4bdb-bd69-58f089431b6a")]
   record IDelayedPropertyStoreFactory, lpVtbl : IDelayedPropertyStoreFactoryVtbl* do
     GUID = LibC::GUID.new(0x40d4577f_u32, 0xe237_u16, 0x4bdb_u16, StaticArray[0xbd_u8, 0x69_u8, 0x58_u8, 0xf0_u8, 0x89_u8, 0x43_u8, 0x1b_u8, 0x6a_u8])
     def query_interface(this : IDelayedPropertyStoreFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1520,7 +1509,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("e318ad57-0aa0-450f-aca5-6fab7103d917")]
   record IPersistSerializedPropStorage, lpVtbl : IPersistSerializedPropStorageVtbl* do
     GUID = LibC::GUID.new(0xe318ad57_u32, 0xaa0_u16, 0x450f_u16, StaticArray[0xac_u8, 0xa5_u8, 0x6f_u8, 0xab_u8, 0x71_u8, 0x3_u8, 0xd9_u8, 0x17_u8])
     def query_interface(this : IPersistSerializedPropStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1557,7 +1545,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("77effa68-4f98-4366-ba72-573b3d880571")]
   record IPersistSerializedPropStorage2, lpVtbl : IPersistSerializedPropStorage2Vtbl* do
     GUID = LibC::GUID.new(0x77effa68_u32, 0x4f98_u16, 0x4366_u16, StaticArray[0xba_u8, 0x72_u8, 0x57_u8, 0x3b_u8, 0x3d_u8, 0x88_u8, 0x5_u8, 0x71_u8])
     def query_interface(this : IPersistSerializedPropStorage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1596,7 +1583,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("fa955fd9-38be-4879-a6ce-824cf52d609f")]
   record IPropertySystemChangeNotify, lpVtbl : IPropertySystemChangeNotifyVtbl* do
     GUID = LibC::GUID.new(0xfa955fd9_u32, 0x38be_u16, 0x4879_u16, StaticArray[0xa6_u8, 0xce_u8, 0x82_u8, 0x4c_u8, 0xf5_u8, 0x2d_u8, 0x60_u8, 0x9f_u8])
     def query_interface(this : IPropertySystemChangeNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1623,7 +1609,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("75121952-e0d0-43e5-9380-1d80483acf72")]
   record ICreateObject, lpVtbl : ICreateObjectVtbl* do
     GUID = LibC::GUID.new(0x75121952_u32, 0xe0d0_u16, 0x43e5_u16, StaticArray[0x93_u8, 0x80_u8, 0x1d_u8, 0x80_u8, 0x48_u8, 0x3a_u8, 0xcf_u8, 0x72_u8])
     def query_interface(this : ICreateObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1657,7 +1642,6 @@ module Win32cr::UI::Shell::PropertiesSystem
 
 
   @[Extern]
-  #@[Com("757a7d9f-919a-4118-99d7-dbb208c8cc66")]
   record IPropertyUI, lpVtbl : IPropertyUIVtbl* do
     GUID = LibC::GUID.new(0x757a7d9f_u32, 0x919a_u16, 0x4118_u16, StaticArray[0x99_u8, 0xd7_u8, 0xdb_u8, 0xb2_u8, 0x8_u8, 0xc8_u8, 0xcc_u8, 0x66_u8])
     def query_interface(this : IPropertyUI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

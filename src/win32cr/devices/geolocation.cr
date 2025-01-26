@@ -175,564 +175,734 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record GNSS_SUPL_VERSION,
-    major_version : UInt32,
-    minor_version : UInt32
-
-  @[Extern]
-  record GNSS_SUPL_VERSION_2,
-    major_version : UInt32,
-    minor_version : UInt32,
-    service_indicator : UInt32
-
-  @[Extern]
-  record GNSS_DEVICE_CAPABILITY,
-    size : UInt32,
-    version : UInt32,
-    support_multiple_fix_sessions : Win32cr::Foundation::BOOL,
-    support_multiple_app_sessions : Win32cr::Foundation::BOOL,
-    require_a_gnss_injection : Win32cr::Foundation::BOOL,
-    agnss_format_supported : UInt32,
-    agnss_format_preferred : UInt32,
-    support_distance_tracking : Win32cr::Foundation::BOOL,
-    support_continuous_tracking : Win32cr::Foundation::BOOL,
-    reserved1 : UInt32,
-    reserved2 : Win32cr::Foundation::BOOL,
-    reserved3 : Win32cr::Foundation::BOOL,
-    reserved4 : Win32cr::Foundation::BOOL,
-    reserved5 : Win32cr::Foundation::BOOL,
-    geofencing_support : UInt32,
-    reserved6 : Win32cr::Foundation::BOOL,
-    reserved7 : Win32cr::Foundation::BOOL,
-    support_cp_location : Win32cr::Foundation::BOOL,
-    support_upl_v2 : Win32cr::Foundation::BOOL,
-    support_supl_v1 : Win32cr::Foundation::BOOL,
-    support_supl_v2 : Win32cr::Foundation::BOOL,
-    supported_supl_version : Win32cr::Devices::Geolocation::GNSS_SUPL_VERSION,
-    max_geofences_supported : UInt32,
-    support_multiple_supl_root_cert : Win32cr::Foundation::BOOL,
-    gnss_bread_crumb_payload_version : UInt32,
-    max_gnss_bread_crumb_fixes : UInt32,
-    unused : UInt8[496]
-
-  @[Extern]
-  record GNSS_PLATFORM_CAPABILITY,
-    size : UInt32,
-    version : UInt32,
-    support_agnss_injection : Win32cr::Foundation::BOOL,
-    agnss_format_supported : UInt32,
-    unused : UInt8[516]
-
-  @[Extern]
-  record GNSS_DRIVERCOMMAND_PARAM,
-    size : UInt32,
-    version : UInt32,
-    command_type : Win32cr::Devices::Geolocation::GNSS_DRIVERCOMMAND_TYPE,
-    reserved : UInt32,
-    command_data_size : UInt32,
-    unused : UInt8[512],
-    command_data : UInt8*
-
-  @[Extern]
-  record GNSS_SINGLESHOT_PARAM,
-    size : UInt32,
-    version : UInt32,
-    response_time : UInt32
-
-  @[Extern]
-  record GNSS_DISTANCETRACKING_PARAM,
-    size : UInt32,
-    version : UInt32,
-    movement_threshold : UInt32
-
-  @[Extern]
-  record GNSS_CONTINUOUSTRACKING_PARAM,
-    size : UInt32,
-    version : UInt32,
-    preferred_interval : UInt32
-
-  @[Extern]
-  record GNSS_LKGFIX_PARAM,
-    size : UInt32,
-    version : UInt32
-
-  @[Extern]
-  record GNSS_FIXSESSION_PARAM,
-    size : UInt32,
-    version : UInt32,
-    fix_session_id : UInt32,
-    session_type : Win32cr::Devices::Geolocation::GNSS_FIXSESSIONTYPE,
-    horizontal_accuracy : UInt32,
-    horizontal_confidence : UInt32,
-    reserved : UInt32[9],
-    fix_level_of_details : UInt32,
-    anonymous : Anonymous_e__Union_,
-    unused : UInt8[256] do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      single_shot_param : Win32cr::Devices::Geolocation::GNSS_SINGLESHOT_PARAM,
-      distance_param : Win32cr::Devices::Geolocation::GNSS_DISTANCETRACKING_PARAM,
-      continuous_param : Win32cr::Devices::Geolocation::GNSS_CONTINUOUSTRACKING_PARAM,
-      lkg_fix_param : Win32cr::Devices::Geolocation::GNSS_LKGFIX_PARAM,
-      unused_param : UInt8[268]
-
+  struct GNSS_SUPL_VERSION
+    property major_version : UInt32
+    property minor_version : UInt32
+    def initialize(@major_version : UInt32, @minor_version : UInt32)
+    end
   end
 
   @[Extern]
-  record GNSS_STOPFIXSESSION_PARAM,
-    size : UInt32,
-    version : UInt32,
-    fix_session_id : UInt32,
-    unused : UInt8[512]
-
-  @[Extern]
-  record GNSS_FIXDATA_BASIC,
-    size : UInt32,
-    version : UInt32,
-    latitude : Float64,
-    longitude : Float64,
-    altitude : Float64,
-    speed : Float64,
-    heading : Float64
-
-  @[Extern]
-  record GNSS_FIXDATA_BASIC_2,
-    size : UInt32,
-    version : UInt32,
-    latitude : Float64,
-    longitude : Float64,
-    altitude : Float64,
-    speed : Float64,
-    heading : Float64,
-    altitude_ellipsoid : Float64
-
-  @[Extern]
-  record GNSS_FIXDATA_ACCURACY,
-    size : UInt32,
-    version : UInt32,
-    horizontal_accuracy : UInt32,
-    horizontal_error_major_axis : UInt32,
-    horizontal_error_minor_axis : UInt32,
-    horizontal_error_angle : UInt32,
-    heading_accuracy : UInt32,
-    altitude_accuracy : UInt32,
-    speed_accuracy : UInt32,
-    horizontal_confidence : UInt32,
-    heading_confidence : UInt32,
-    altitude_confidence : UInt32,
-    speed_confidence : UInt32,
-    position_dilution_of_precision : Float32,
-    horizontal_dilution_of_precision : Float32,
-    vertical_dilution_of_precision : Float32
-
-  @[Extern]
-  record GNSS_FIXDATA_ACCURACY_2,
-    size : UInt32,
-    version : UInt32,
-    horizontal_accuracy : Float64,
-    horizontal_error_major_axis : Float64,
-    horizontal_error_minor_axis : Float64,
-    horizontal_error_angle : Float64,
-    heading_accuracy : Float64,
-    altitude_accuracy : Float64,
-    speed_accuracy : Float64,
-    horizontal_confidence : UInt32,
-    heading_confidence : UInt32,
-    altitude_confidence : UInt32,
-    speed_confidence : UInt32,
-    position_dilution_of_precision : Float64,
-    horizontal_dilution_of_precision : Float64,
-    vertical_dilution_of_precision : Float64,
-    geometric_dilution_of_precision : Float64,
-    time_dilution_of_precision : Float64
-
-  @[Extern]
-  record GNSS_SATELLITEINFO,
-    satellite_id : UInt32,
-    used_in_positiong : Win32cr::Foundation::BOOL,
-    elevation : Float64,
-    azimuth : Float64,
-    signal_to_noise_ratio : Float64
-
-  @[Extern]
-  record GNSS_FIXDATA_SATELLITE,
-    size : UInt32,
-    version : UInt32,
-    satellite_count : UInt32,
-    satellite_array : Win32cr::Devices::Geolocation::GNSS_SATELLITEINFO[64]
-
-  @[Extern]
-  record GNSS_FIXDATA,
-    size : UInt32,
-    version : UInt32,
-    fix_session_id : UInt32,
-    fix_time_stamp : Win32cr::Foundation::FILETIME,
-    is_final_fix : Win32cr::Foundation::BOOL,
-    fix_status : Win32cr::Foundation::NTSTATUS,
-    fix_level_of_details : UInt32,
-    basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC,
-    accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY,
-    satellite_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_SATELLITE
-
-  @[Extern]
-  record GNSS_FIXDATA_2,
-    size : UInt32,
-    version : UInt32,
-    fix_session_id : UInt32,
-    fix_time_stamp : Win32cr::Foundation::FILETIME,
-    is_final_fix : Win32cr::Foundation::BOOL,
-    fix_status : Win32cr::Foundation::NTSTATUS,
-    fix_level_of_details : UInt32,
-    basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC_2,
-    accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY_2,
-    satellite_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_SATELLITE
-
-  @[Extern]
-  record GNSS_BREADCRUMBING_PARAM,
-    size : UInt32,
-    version : UInt32,
-    maximum_horizontal_uncertainty : UInt32,
-    min_distance_between_fixes : UInt32,
-    maximum_error_timeout_ms : UInt32,
-    unused : UInt8[512]
-
-  @[Extern]
-  record GNSS_BREADCRUMBING_ALERT_DATA,
-    size : UInt32,
-    version : UInt32,
-    unused : UInt8[512]
-
-  @[Extern]
-  record GNSS_BREADCRUMB_V1,
-    fix_time_stamp : Win32cr::Foundation::FILETIME,
-    latitude : Float64,
-    longitude : Float64,
-    horizontal_accuracy : UInt32,
-    speed : UInt16,
-    speed_accuracy : UInt16,
-    altitude : Int16,
-    altitude_accuracy : UInt16,
-    heading : Int16,
-    heading_accuracy : UInt8,
-    fix_success : UInt8
-
-  @[Extern]
-  record GNSS_BREADCRUMB_LIST,
-    size : UInt32,
-    version : UInt32,
-    num_crumbs : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      v1 : Win32cr::Devices::Geolocation::GNSS_BREADCRUMB_V1[50]
-
+  struct GNSS_SUPL_VERSION_2
+    property major_version : UInt32
+    property minor_version : UInt32
+    property service_indicator : UInt32
+    def initialize(@major_version : UInt32, @minor_version : UInt32, @service_indicator : UInt32)
+    end
   end
 
   @[Extern]
-  record GNSS_GEOREGION_CIRCLE,
-    latitude : Float64,
-    longitude : Float64,
-    radius_in_meters : Float64
-
-  @[Extern]
-  record GNSS_GEOREGION,
-    size : UInt32,
-    version : UInt32,
-    geo_region_type : Win32cr::Devices::Geolocation::GNSS_GEOREGIONTYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      circle : Win32cr::Devices::Geolocation::GNSS_GEOREGION_CIRCLE,
-      unused : UInt8[512]
-
+  struct GNSS_DEVICE_CAPABILITY
+    property size : UInt32
+    property version : UInt32
+    property support_multiple_fix_sessions : Win32cr::Foundation::BOOL
+    property support_multiple_app_sessions : Win32cr::Foundation::BOOL
+    property require_a_gnss_injection : Win32cr::Foundation::BOOL
+    property agnss_format_supported : UInt32
+    property agnss_format_preferred : UInt32
+    property support_distance_tracking : Win32cr::Foundation::BOOL
+    property support_continuous_tracking : Win32cr::Foundation::BOOL
+    property reserved1 : UInt32
+    property reserved2 : Win32cr::Foundation::BOOL
+    property reserved3 : Win32cr::Foundation::BOOL
+    property reserved4 : Win32cr::Foundation::BOOL
+    property reserved5 : Win32cr::Foundation::BOOL
+    property geofencing_support : UInt32
+    property reserved6 : Win32cr::Foundation::BOOL
+    property reserved7 : Win32cr::Foundation::BOOL
+    property support_cp_location : Win32cr::Foundation::BOOL
+    property support_upl_v2 : Win32cr::Foundation::BOOL
+    property support_supl_v1 : Win32cr::Foundation::BOOL
+    property support_supl_v2 : Win32cr::Foundation::BOOL
+    property supported_supl_version : Win32cr::Devices::Geolocation::GNSS_SUPL_VERSION
+    property max_geofences_supported : UInt32
+    property support_multiple_supl_root_cert : Win32cr::Foundation::BOOL
+    property gnss_bread_crumb_payload_version : UInt32
+    property max_gnss_bread_crumb_fixes : UInt32
+    property unused : UInt8[496]
+    def initialize(@size : UInt32, @version : UInt32, @support_multiple_fix_sessions : Win32cr::Foundation::BOOL, @support_multiple_app_sessions : Win32cr::Foundation::BOOL, @require_a_gnss_injection : Win32cr::Foundation::BOOL, @agnss_format_supported : UInt32, @agnss_format_preferred : UInt32, @support_distance_tracking : Win32cr::Foundation::BOOL, @support_continuous_tracking : Win32cr::Foundation::BOOL, @reserved1 : UInt32, @reserved2 : Win32cr::Foundation::BOOL, @reserved3 : Win32cr::Foundation::BOOL, @reserved4 : Win32cr::Foundation::BOOL, @reserved5 : Win32cr::Foundation::BOOL, @geofencing_support : UInt32, @reserved6 : Win32cr::Foundation::BOOL, @reserved7 : Win32cr::Foundation::BOOL, @support_cp_location : Win32cr::Foundation::BOOL, @support_upl_v2 : Win32cr::Foundation::BOOL, @support_supl_v1 : Win32cr::Foundation::BOOL, @support_supl_v2 : Win32cr::Foundation::BOOL, @supported_supl_version : Win32cr::Devices::Geolocation::GNSS_SUPL_VERSION, @max_geofences_supported : UInt32, @support_multiple_supl_root_cert : Win32cr::Foundation::BOOL, @gnss_bread_crumb_payload_version : UInt32, @max_gnss_bread_crumb_fixes : UInt32, @unused : UInt8[496])
+    end
   end
 
   @[Extern]
-  record GNSS_GEOFENCE_CREATE_PARAM,
-    size : UInt32,
-    version : UInt32,
-    alert_types : UInt32,
-    initial_state : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_STATE,
-    boundary : Win32cr::Devices::Geolocation::GNSS_GEOREGION,
-    unused : UInt8[512]
-
-  @[Extern]
-  record GNSS_GEOFENCE_CREATE_RESPONSE,
-    size : UInt32,
-    version : UInt32,
-    creation_status : Win32cr::Foundation::NTSTATUS,
-    geofence_id : UInt32,
-    unused : UInt8[512]
-
-  @[Extern]
-  record GNSS_GEOFENCE_DELETE_PARAM,
-    size : UInt32,
-    version : UInt32,
-    geofence_id : UInt32,
-    unused : UInt8[512]
-
-  @[Extern]
-  record GNSS_GEOFENCE_ALERT_DATA,
-    size : UInt32,
-    version : UInt32,
-    geofence_id : UInt32,
-    geofence_state : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_STATE,
-    fix_basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC,
-    fix_accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY,
-    unused : UInt8[512]
-
-  @[Extern]
-  record GNSS_GEOFENCES_TRACKINGSTATUS_DATA,
-    size : UInt32,
-    version : UInt32,
-    status : Win32cr::Foundation::NTSTATUS,
-    status_time_stamp : Win32cr::Foundation::FILETIME,
-    unused : UInt8[512]
-
-  @[Extern]
-  record GNSS_ERRORINFO,
-    size : UInt32,
-    version : UInt32,
-    error_code : UInt32,
-    is_recoverable : Win32cr::Foundation::BOOL,
-    error_description : UInt16[256],
-    unused : UInt8[512]
-
-  @[Extern]
-  record GNSS_NMEA_DATA,
-    size : UInt32,
-    version : UInt32,
-    nmea_sentences : Win32cr::Foundation::CHAR[256]
-
-  @[Extern]
-  record GNSS_AGNSS_REQUEST_PARAM,
-    size : UInt32,
-    version : UInt32,
-    request_type : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_TYPE,
-    blob_format : UInt32
-
-  @[Extern]
-  record GNSS_SUPL_NI_INFO,
-    size : UInt32,
-    version : UInt32,
-    requestor_id : UInt16[260],
-    client_name : UInt16[260],
-    supl_ni_url : Win32cr::Foundation::CHAR[260]
-
-  @[Extern]
-  record GNSS_CP_NI_INFO,
-    size : UInt32,
-    version : UInt32,
-    requestor_id : UInt16[260],
-    notification_text : UInt16[260]
-
-  @[Extern]
-  record GNSS_V2UPL_NI_INFO,
-    size : UInt32,
-    version : UInt32,
-    requestor_id : UInt16[260]
-
-  @[Extern]
-  record GNSS_NI_REQUEST_PARAM,
-    size : UInt32,
-    version : UInt32,
-    request_id : UInt32,
-    request_type : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_TYPE,
-    notification_type : Win32cr::Devices::Geolocation::GNSS_NI_NOTIFICATION_TYPE,
-    request_plane_type : Win32cr::Devices::Geolocation::GNSS_NI_PLANE_TYPE,
-    anonymous : Anonymous_e__Union_,
-    response_time_in_sec : UInt32,
-    emergency_location : Win32cr::Foundation::BOOL do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      supl_ni_info : Win32cr::Devices::Geolocation::GNSS_SUPL_NI_INFO,
-      cp_ni_info : Win32cr::Devices::Geolocation::GNSS_CP_NI_INFO,
-      v2_upl_ni_info : Win32cr::Devices::Geolocation::GNSS_V2UPL_NI_INFO
-
+  struct GNSS_PLATFORM_CAPABILITY
+    property size : UInt32
+    property version : UInt32
+    property support_agnss_injection : Win32cr::Foundation::BOOL
+    property agnss_format_supported : UInt32
+    property unused : UInt8[516]
+    def initialize(@size : UInt32, @version : UInt32, @support_agnss_injection : Win32cr::Foundation::BOOL, @agnss_format_supported : UInt32, @unused : UInt8[516])
+    end
   end
 
   @[Extern]
-  record GNSS_DRIVER_REQUEST_DATA,
-    size : UInt32,
-    version : UInt32,
-    request : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST,
-    request_flag : UInt32
-
-  @[Extern]
-  record GNSS_EVENT,
-    size : UInt32,
-    version : UInt32,
-    event_type : Win32cr::Devices::Geolocation::GNSS_EVENT_TYPE,
-    event_data_size : UInt32,
-    unused : UInt8[512],
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      fix_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA,
-      agnss_request : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_PARAM,
-      ni_request : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_PARAM,
-      error_information : Win32cr::Devices::Geolocation::GNSS_ERRORINFO,
-      nmea_data : Win32cr::Devices::Geolocation::GNSS_NMEA_DATA,
-      geofence_alert_data : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_ALERT_DATA,
-      breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA,
-      geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA,
-      driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA,
-      custom_data : UInt8*
-
+  struct GNSS_DRIVERCOMMAND_PARAM
+    property size : UInt32
+    property version : UInt32
+    property command_type : Win32cr::Devices::Geolocation::GNSS_DRIVERCOMMAND_TYPE
+    property reserved : UInt32
+    property command_data_size : UInt32
+    property unused : UInt8[512]
+    property command_data : UInt8*
+    def initialize(@size : UInt32, @version : UInt32, @command_type : Win32cr::Devices::Geolocation::GNSS_DRIVERCOMMAND_TYPE, @reserved : UInt32, @command_data_size : UInt32, @unused : UInt8[512], @command_data : UInt8*)
+    end
   end
 
   @[Extern]
-  record GNSS_EVENT_2,
-    size : UInt32,
-    version : UInt32,
-    event_type : Win32cr::Devices::Geolocation::GNSS_EVENT_TYPE,
-    event_data_size : UInt32,
-    unused : UInt8[512],
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      fix_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA,
-      fix_data2 : Win32cr::Devices::Geolocation::GNSS_FIXDATA_2,
-      agnss_request : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_PARAM,
-      ni_request : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_PARAM,
-      error_information : Win32cr::Devices::Geolocation::GNSS_ERRORINFO,
-      nmea_data : Win32cr::Devices::Geolocation::GNSS_NMEA_DATA,
-      geofence_alert_data : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_ALERT_DATA,
-      breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA,
-      geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA,
-      driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA,
-      custom_data : UInt8*
-
+  struct GNSS_SINGLESHOT_PARAM
+    property size : UInt32
+    property version : UInt32
+    property response_time : UInt32
+    def initialize(@size : UInt32, @version : UInt32, @response_time : UInt32)
+    end
   end
 
   @[Extern]
-  record GNSS_AGNSS_INJECTTIME,
-    size : UInt32,
-    version : UInt32,
-    utc_time : Win32cr::Foundation::FILETIME,
-    time_uncertainty : UInt32
-
-  @[Extern]
-  record GNSS_AGNSS_INJECTPOSITION,
-    size : UInt32,
-    version : UInt32,
-    age : UInt32,
-    basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC,
-    accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY
-
-  @[Extern]
-  record GNSS_AGNSS_INJECTBLOB,
-    size : UInt32,
-    version : UInt32,
-    blob_oui : UInt32,
-    blob_version : UInt32,
-    agnss_format : UInt32,
-    blob_size : UInt32,
-    blob_data : UInt8*
-
-  @[Extern]
-  record GNSS_AGNSS_INJECT,
-    size : UInt32,
-    version : UInt32,
-    injection_type : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_TYPE,
-    injection_status : Win32cr::Foundation::NTSTATUS,
-    injection_data_size : UInt32,
-    unused : UInt8[512],
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      time : Win32cr::Devices::Geolocation::GNSS_AGNSS_INJECTTIME,
-      position : Win32cr::Devices::Geolocation::GNSS_AGNSS_INJECTPOSITION,
-      blob_data : Win32cr::Devices::Geolocation::GNSS_AGNSS_INJECTBLOB
-
+  struct GNSS_DISTANCETRACKING_PARAM
+    property size : UInt32
+    property version : UInt32
+    property movement_threshold : UInt32
+    def initialize(@size : UInt32, @version : UInt32, @movement_threshold : UInt32)
+    end
   end
 
   @[Extern]
-  record GNSS_SUPL_HSLP_CONFIG,
-    size : UInt32,
-    version : UInt32,
-    supl_hslp : Win32cr::Foundation::CHAR[260],
-    supl_hslp_from_imsi : Win32cr::Foundation::CHAR[260],
-    reserved : UInt32,
-    unused : UInt8[512]
+  struct GNSS_CONTINUOUSTRACKING_PARAM
+    property size : UInt32
+    property version : UInt32
+    property preferred_interval : UInt32
+    def initialize(@size : UInt32, @version : UInt32, @preferred_interval : UInt32)
+    end
+  end
 
   @[Extern]
-  record GNSS_SUPL_CERT_CONFIG,
-    size : UInt32,
-    version : UInt32,
-    cert_action : Win32cr::Devices::Geolocation::GNSS_SUPL_CERT_ACTION,
-    supl_cert_name : Win32cr::Foundation::CHAR[260],
-    cert_size : UInt32,
-    unused : UInt8[512],
-    cert_data : UInt8*
+  struct GNSS_LKGFIX_PARAM
+    property size : UInt32
+    property version : UInt32
+    def initialize(@size : UInt32, @version : UInt32)
+    end
+  end
 
   @[Extern]
-  record GNSS_V2UPL_CONFIG,
-    size : UInt32,
-    version : UInt32,
-    mpc : Win32cr::Foundation::CHAR[260],
-    pde : Win32cr::Foundation::CHAR[260],
-    application_type_indicator_mr : UInt8,
-    unused : UInt8[512]
+  struct GNSS_FIXSESSION_PARAM
+    property size : UInt32
+    property version : UInt32
+    property fix_session_id : UInt32
+    property session_type : Win32cr::Devices::Geolocation::GNSS_FIXSESSIONTYPE
+    property horizontal_accuracy : UInt32
+    property horizontal_confidence : UInt32
+    property reserved : UInt32[9]
+    property fix_level_of_details : UInt32
+    property anonymous : Anonymous_e__Union_
+    property unused : UInt8[256]
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property single_shot_param : Win32cr::Devices::Geolocation::GNSS_SINGLESHOT_PARAM
+    property distance_param : Win32cr::Devices::Geolocation::GNSS_DISTANCETRACKING_PARAM
+    property continuous_param : Win32cr::Devices::Geolocation::GNSS_CONTINUOUSTRACKING_PARAM
+    property lkg_fix_param : Win32cr::Devices::Geolocation::GNSS_LKGFIX_PARAM
+    property unused_param : UInt8[268]
+    def initialize(@single_shot_param : Win32cr::Devices::Geolocation::GNSS_SINGLESHOT_PARAM, @distance_param : Win32cr::Devices::Geolocation::GNSS_DISTANCETRACKING_PARAM, @continuous_param : Win32cr::Devices::Geolocation::GNSS_CONTINUOUSTRACKING_PARAM, @lkg_fix_param : Win32cr::Devices::Geolocation::GNSS_LKGFIX_PARAM, @unused_param : UInt8[268])
+    end
+    end
+
+    def initialize(@size : UInt32, @version : UInt32, @fix_session_id : UInt32, @session_type : Win32cr::Devices::Geolocation::GNSS_FIXSESSIONTYPE, @horizontal_accuracy : UInt32, @horizontal_confidence : UInt32, @reserved : UInt32[9], @fix_level_of_details : UInt32, @anonymous : Anonymous_e__Union_, @unused : UInt8[256])
+    end
+  end
 
   @[Extern]
-  record GNSS_NI_RESPONSE,
-    size : UInt32,
-    version : UInt32,
-    request_id : UInt32,
-    user_response : Win32cr::Devices::Geolocation::GNSS_NI_USER_RESPONSE
+  struct GNSS_STOPFIXSESSION_PARAM
+    property size : UInt32
+    property version : UInt32
+    property fix_session_id : UInt32
+    property unused : UInt8[512]
+    def initialize(@size : UInt32, @version : UInt32, @fix_session_id : UInt32, @unused : UInt8[512])
+    end
+  end
 
   @[Extern]
-  record GNSS_CWTESTDATA,
-    size : UInt32,
-    version : UInt32,
-    test_result_status : Win32cr::Foundation::NTSTATUS,
-    signal_to_noise_ratio : Float64,
-    frequency : Float64,
-    unused : UInt8[512]
+  struct GNSS_FIXDATA_BASIC
+    property size : UInt32
+    property version : UInt32
+    property latitude : Float64
+    property longitude : Float64
+    property altitude : Float64
+    property speed : Float64
+    property heading : Float64
+    def initialize(@size : UInt32, @version : UInt32, @latitude : Float64, @longitude : Float64, @altitude : Float64, @speed : Float64, @heading : Float64)
+    end
+  end
 
   @[Extern]
-  record GNSS_SELFTESTCONFIG,
-    size : UInt32,
-    version : UInt32,
-    test_type : UInt32,
-    unused : UInt8[512],
-    in_buf_len : UInt32,
-    in_buffer : UInt8*
+  struct GNSS_FIXDATA_BASIC_2
+    property size : UInt32
+    property version : UInt32
+    property latitude : Float64
+    property longitude : Float64
+    property altitude : Float64
+    property speed : Float64
+    property heading : Float64
+    property altitude_ellipsoid : Float64
+    def initialize(@size : UInt32, @version : UInt32, @latitude : Float64, @longitude : Float64, @altitude : Float64, @speed : Float64, @heading : Float64, @altitude_ellipsoid : Float64)
+    end
+  end
 
   @[Extern]
-  record GNSS_SELFTESTRESULT,
-    size : UInt32,
-    version : UInt32,
-    test_result_status : Win32cr::Foundation::NTSTATUS,
-    result : UInt32,
-    pin_failed_bit_mask : UInt32,
-    unused : UInt8[512],
-    out_buf_len : UInt32,
-    out_buffer : UInt8*
+  struct GNSS_FIXDATA_ACCURACY
+    property size : UInt32
+    property version : UInt32
+    property horizontal_accuracy : UInt32
+    property horizontal_error_major_axis : UInt32
+    property horizontal_error_minor_axis : UInt32
+    property horizontal_error_angle : UInt32
+    property heading_accuracy : UInt32
+    property altitude_accuracy : UInt32
+    property speed_accuracy : UInt32
+    property horizontal_confidence : UInt32
+    property heading_confidence : UInt32
+    property altitude_confidence : UInt32
+    property speed_confidence : UInt32
+    property position_dilution_of_precision : Float32
+    property horizontal_dilution_of_precision : Float32
+    property vertical_dilution_of_precision : Float32
+    def initialize(@size : UInt32, @version : UInt32, @horizontal_accuracy : UInt32, @horizontal_error_major_axis : UInt32, @horizontal_error_minor_axis : UInt32, @horizontal_error_angle : UInt32, @heading_accuracy : UInt32, @altitude_accuracy : UInt32, @speed_accuracy : UInt32, @horizontal_confidence : UInt32, @heading_confidence : UInt32, @altitude_confidence : UInt32, @speed_confidence : UInt32, @position_dilution_of_precision : Float32, @horizontal_dilution_of_precision : Float32, @vertical_dilution_of_precision : Float32)
+    end
+  end
 
   @[Extern]
-  record GNSS_CHIPSETINFO,
-    size : UInt32,
-    version : UInt32,
-    manufacturer_id : UInt16[25],
-    hardware_id : UInt16[25],
-    firmware_version : UInt16[20],
-    unused : UInt8[512]
+  struct GNSS_FIXDATA_ACCURACY_2
+    property size : UInt32
+    property version : UInt32
+    property horizontal_accuracy : Float64
+    property horizontal_error_major_axis : Float64
+    property horizontal_error_minor_axis : Float64
+    property horizontal_error_angle : Float64
+    property heading_accuracy : Float64
+    property altitude_accuracy : Float64
+    property speed_accuracy : Float64
+    property horizontal_confidence : UInt32
+    property heading_confidence : UInt32
+    property altitude_confidence : UInt32
+    property speed_confidence : UInt32
+    property position_dilution_of_precision : Float64
+    property horizontal_dilution_of_precision : Float64
+    property vertical_dilution_of_precision : Float64
+    property geometric_dilution_of_precision : Float64
+    property time_dilution_of_precision : Float64
+    def initialize(@size : UInt32, @version : UInt32, @horizontal_accuracy : Float64, @horizontal_error_major_axis : Float64, @horizontal_error_minor_axis : Float64, @horizontal_error_angle : Float64, @heading_accuracy : Float64, @altitude_accuracy : Float64, @speed_accuracy : Float64, @horizontal_confidence : UInt32, @heading_confidence : UInt32, @altitude_confidence : UInt32, @speed_confidence : UInt32, @position_dilution_of_precision : Float64, @horizontal_dilution_of_precision : Float64, @vertical_dilution_of_precision : Float64, @geometric_dilution_of_precision : Float64, @time_dilution_of_precision : Float64)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_SATELLITEINFO
+    property satellite_id : UInt32
+    property used_in_positiong : Win32cr::Foundation::BOOL
+    property elevation : Float64
+    property azimuth : Float64
+    property signal_to_noise_ratio : Float64
+    def initialize(@satellite_id : UInt32, @used_in_positiong : Win32cr::Foundation::BOOL, @elevation : Float64, @azimuth : Float64, @signal_to_noise_ratio : Float64)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_FIXDATA_SATELLITE
+    property size : UInt32
+    property version : UInt32
+    property satellite_count : UInt32
+    property satellite_array : Win32cr::Devices::Geolocation::GNSS_SATELLITEINFO[64]
+    def initialize(@size : UInt32, @version : UInt32, @satellite_count : UInt32, @satellite_array : Win32cr::Devices::Geolocation::GNSS_SATELLITEINFO[64])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_FIXDATA
+    property size : UInt32
+    property version : UInt32
+    property fix_session_id : UInt32
+    property fix_time_stamp : Win32cr::Foundation::FILETIME
+    property is_final_fix : Win32cr::Foundation::BOOL
+    property fix_status : Win32cr::Foundation::NTSTATUS
+    property fix_level_of_details : UInt32
+    property basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC
+    property accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY
+    property satellite_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_SATELLITE
+    def initialize(@size : UInt32, @version : UInt32, @fix_session_id : UInt32, @fix_time_stamp : Win32cr::Foundation::FILETIME, @is_final_fix : Win32cr::Foundation::BOOL, @fix_status : Win32cr::Foundation::NTSTATUS, @fix_level_of_details : UInt32, @basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC, @accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY, @satellite_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_SATELLITE)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_FIXDATA_2
+    property size : UInt32
+    property version : UInt32
+    property fix_session_id : UInt32
+    property fix_time_stamp : Win32cr::Foundation::FILETIME
+    property is_final_fix : Win32cr::Foundation::BOOL
+    property fix_status : Win32cr::Foundation::NTSTATUS
+    property fix_level_of_details : UInt32
+    property basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC_2
+    property accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY_2
+    property satellite_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_SATELLITE
+    def initialize(@size : UInt32, @version : UInt32, @fix_session_id : UInt32, @fix_time_stamp : Win32cr::Foundation::FILETIME, @is_final_fix : Win32cr::Foundation::BOOL, @fix_status : Win32cr::Foundation::NTSTATUS, @fix_level_of_details : UInt32, @basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC_2, @accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY_2, @satellite_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_SATELLITE)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_BREADCRUMBING_PARAM
+    property size : UInt32
+    property version : UInt32
+    property maximum_horizontal_uncertainty : UInt32
+    property min_distance_between_fixes : UInt32
+    property maximum_error_timeout_ms : UInt32
+    property unused : UInt8[512]
+    def initialize(@size : UInt32, @version : UInt32, @maximum_horizontal_uncertainty : UInt32, @min_distance_between_fixes : UInt32, @maximum_error_timeout_ms : UInt32, @unused : UInt8[512])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_BREADCRUMBING_ALERT_DATA
+    property size : UInt32
+    property version : UInt32
+    property unused : UInt8[512]
+    def initialize(@size : UInt32, @version : UInt32, @unused : UInt8[512])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_BREADCRUMB_V1
+    property fix_time_stamp : Win32cr::Foundation::FILETIME
+    property latitude : Float64
+    property longitude : Float64
+    property horizontal_accuracy : UInt32
+    property speed : UInt16
+    property speed_accuracy : UInt16
+    property altitude : Int16
+    property altitude_accuracy : UInt16
+    property heading : Int16
+    property heading_accuracy : UInt8
+    property fix_success : UInt8
+    def initialize(@fix_time_stamp : Win32cr::Foundation::FILETIME, @latitude : Float64, @longitude : Float64, @horizontal_accuracy : UInt32, @speed : UInt16, @speed_accuracy : UInt16, @altitude : Int16, @altitude_accuracy : UInt16, @heading : Int16, @heading_accuracy : UInt8, @fix_success : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_BREADCRUMB_LIST
+    property size : UInt32
+    property version : UInt32
+    property num_crumbs : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property v1 : Win32cr::Devices::Geolocation::GNSS_BREADCRUMB_V1[50]
+    def initialize(@v1 : Win32cr::Devices::Geolocation::GNSS_BREADCRUMB_V1[50])
+    end
+    end
+
+    def initialize(@size : UInt32, @version : UInt32, @num_crumbs : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_GEOREGION_CIRCLE
+    property latitude : Float64
+    property longitude : Float64
+    property radius_in_meters : Float64
+    def initialize(@latitude : Float64, @longitude : Float64, @radius_in_meters : Float64)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_GEOREGION
+    property size : UInt32
+    property version : UInt32
+    property geo_region_type : Win32cr::Devices::Geolocation::GNSS_GEOREGIONTYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property circle : Win32cr::Devices::Geolocation::GNSS_GEOREGION_CIRCLE
+    property unused : UInt8[512]
+    def initialize(@circle : Win32cr::Devices::Geolocation::GNSS_GEOREGION_CIRCLE, @unused : UInt8[512])
+    end
+    end
+
+    def initialize(@size : UInt32, @version : UInt32, @geo_region_type : Win32cr::Devices::Geolocation::GNSS_GEOREGIONTYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_GEOFENCE_CREATE_PARAM
+    property size : UInt32
+    property version : UInt32
+    property alert_types : UInt32
+    property initial_state : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_STATE
+    property boundary : Win32cr::Devices::Geolocation::GNSS_GEOREGION
+    property unused : UInt8[512]
+    def initialize(@size : UInt32, @version : UInt32, @alert_types : UInt32, @initial_state : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_STATE, @boundary : Win32cr::Devices::Geolocation::GNSS_GEOREGION, @unused : UInt8[512])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_GEOFENCE_CREATE_RESPONSE
+    property size : UInt32
+    property version : UInt32
+    property creation_status : Win32cr::Foundation::NTSTATUS
+    property geofence_id : UInt32
+    property unused : UInt8[512]
+    def initialize(@size : UInt32, @version : UInt32, @creation_status : Win32cr::Foundation::NTSTATUS, @geofence_id : UInt32, @unused : UInt8[512])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_GEOFENCE_DELETE_PARAM
+    property size : UInt32
+    property version : UInt32
+    property geofence_id : UInt32
+    property unused : UInt8[512]
+    def initialize(@size : UInt32, @version : UInt32, @geofence_id : UInt32, @unused : UInt8[512])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_GEOFENCE_ALERT_DATA
+    property size : UInt32
+    property version : UInt32
+    property geofence_id : UInt32
+    property geofence_state : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_STATE
+    property fix_basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC
+    property fix_accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY
+    property unused : UInt8[512]
+    def initialize(@size : UInt32, @version : UInt32, @geofence_id : UInt32, @geofence_state : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_STATE, @fix_basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC, @fix_accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY, @unused : UInt8[512])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_GEOFENCES_TRACKINGSTATUS_DATA
+    property size : UInt32
+    property version : UInt32
+    property status : Win32cr::Foundation::NTSTATUS
+    property status_time_stamp : Win32cr::Foundation::FILETIME
+    property unused : UInt8[512]
+    def initialize(@size : UInt32, @version : UInt32, @status : Win32cr::Foundation::NTSTATUS, @status_time_stamp : Win32cr::Foundation::FILETIME, @unused : UInt8[512])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_ERRORINFO
+    property size : UInt32
+    property version : UInt32
+    property error_code : UInt32
+    property is_recoverable : Win32cr::Foundation::BOOL
+    property error_description : UInt16[256]
+    property unused : UInt8[512]
+    def initialize(@size : UInt32, @version : UInt32, @error_code : UInt32, @is_recoverable : Win32cr::Foundation::BOOL, @error_description : UInt16[256], @unused : UInt8[512])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_NMEA_DATA
+    property size : UInt32
+    property version : UInt32
+    property nmea_sentences : Win32cr::Foundation::CHAR[256]
+    def initialize(@size : UInt32, @version : UInt32, @nmea_sentences : Win32cr::Foundation::CHAR[256])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_AGNSS_REQUEST_PARAM
+    property size : UInt32
+    property version : UInt32
+    property request_type : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_TYPE
+    property blob_format : UInt32
+    def initialize(@size : UInt32, @version : UInt32, @request_type : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_TYPE, @blob_format : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_SUPL_NI_INFO
+    property size : UInt32
+    property version : UInt32
+    property requestor_id : UInt16[260]
+    property client_name : UInt16[260]
+    property supl_ni_url : Win32cr::Foundation::CHAR[260]
+    def initialize(@size : UInt32, @version : UInt32, @requestor_id : UInt16[260], @client_name : UInt16[260], @supl_ni_url : Win32cr::Foundation::CHAR[260])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_CP_NI_INFO
+    property size : UInt32
+    property version : UInt32
+    property requestor_id : UInt16[260]
+    property notification_text : UInt16[260]
+    def initialize(@size : UInt32, @version : UInt32, @requestor_id : UInt16[260], @notification_text : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_V2UPL_NI_INFO
+    property size : UInt32
+    property version : UInt32
+    property requestor_id : UInt16[260]
+    def initialize(@size : UInt32, @version : UInt32, @requestor_id : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_NI_REQUEST_PARAM
+    property size : UInt32
+    property version : UInt32
+    property request_id : UInt32
+    property request_type : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_TYPE
+    property notification_type : Win32cr::Devices::Geolocation::GNSS_NI_NOTIFICATION_TYPE
+    property request_plane_type : Win32cr::Devices::Geolocation::GNSS_NI_PLANE_TYPE
+    property anonymous : Anonymous_e__Union_
+    property response_time_in_sec : UInt32
+    property emergency_location : Win32cr::Foundation::BOOL
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property supl_ni_info : Win32cr::Devices::Geolocation::GNSS_SUPL_NI_INFO
+    property cp_ni_info : Win32cr::Devices::Geolocation::GNSS_CP_NI_INFO
+    property v2_upl_ni_info : Win32cr::Devices::Geolocation::GNSS_V2UPL_NI_INFO
+    def initialize(@supl_ni_info : Win32cr::Devices::Geolocation::GNSS_SUPL_NI_INFO, @cp_ni_info : Win32cr::Devices::Geolocation::GNSS_CP_NI_INFO, @v2_upl_ni_info : Win32cr::Devices::Geolocation::GNSS_V2UPL_NI_INFO)
+    end
+    end
+
+    def initialize(@size : UInt32, @version : UInt32, @request_id : UInt32, @request_type : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_TYPE, @notification_type : Win32cr::Devices::Geolocation::GNSS_NI_NOTIFICATION_TYPE, @request_plane_type : Win32cr::Devices::Geolocation::GNSS_NI_PLANE_TYPE, @anonymous : Anonymous_e__Union_, @response_time_in_sec : UInt32, @emergency_location : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_DRIVER_REQUEST_DATA
+    property size : UInt32
+    property version : UInt32
+    property request : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST
+    property request_flag : UInt32
+    def initialize(@size : UInt32, @version : UInt32, @request : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST, @request_flag : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_EVENT
+    property size : UInt32
+    property version : UInt32
+    property event_type : Win32cr::Devices::Geolocation::GNSS_EVENT_TYPE
+    property event_data_size : UInt32
+    property unused : UInt8[512]
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property fix_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA
+    property agnss_request : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_PARAM
+    property ni_request : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_PARAM
+    property error_information : Win32cr::Devices::Geolocation::GNSS_ERRORINFO
+    property nmea_data : Win32cr::Devices::Geolocation::GNSS_NMEA_DATA
+    property geofence_alert_data : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_ALERT_DATA
+    property breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA
+    property geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA
+    property driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA
+    property custom_data : UInt8*
+    def initialize(@fix_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA, @agnss_request : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_PARAM, @ni_request : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_PARAM, @error_information : Win32cr::Devices::Geolocation::GNSS_ERRORINFO, @nmea_data : Win32cr::Devices::Geolocation::GNSS_NMEA_DATA, @geofence_alert_data : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_ALERT_DATA, @breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA, @geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA, @driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA, @custom_data : UInt8*)
+    end
+    end
+
+    def initialize(@size : UInt32, @version : UInt32, @event_type : Win32cr::Devices::Geolocation::GNSS_EVENT_TYPE, @event_data_size : UInt32, @unused : UInt8[512], @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_EVENT_2
+    property size : UInt32
+    property version : UInt32
+    property event_type : Win32cr::Devices::Geolocation::GNSS_EVENT_TYPE
+    property event_data_size : UInt32
+    property unused : UInt8[512]
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property fix_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA
+    property fix_data2 : Win32cr::Devices::Geolocation::GNSS_FIXDATA_2
+    property agnss_request : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_PARAM
+    property ni_request : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_PARAM
+    property error_information : Win32cr::Devices::Geolocation::GNSS_ERRORINFO
+    property nmea_data : Win32cr::Devices::Geolocation::GNSS_NMEA_DATA
+    property geofence_alert_data : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_ALERT_DATA
+    property breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA
+    property geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA
+    property driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA
+    property custom_data : UInt8*
+    def initialize(@fix_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA, @fix_data2 : Win32cr::Devices::Geolocation::GNSS_FIXDATA_2, @agnss_request : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_PARAM, @ni_request : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_PARAM, @error_information : Win32cr::Devices::Geolocation::GNSS_ERRORINFO, @nmea_data : Win32cr::Devices::Geolocation::GNSS_NMEA_DATA, @geofence_alert_data : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_ALERT_DATA, @breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA, @geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA, @driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA, @custom_data : UInt8*)
+    end
+    end
+
+    def initialize(@size : UInt32, @version : UInt32, @event_type : Win32cr::Devices::Geolocation::GNSS_EVENT_TYPE, @event_data_size : UInt32, @unused : UInt8[512], @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_AGNSS_INJECTTIME
+    property size : UInt32
+    property version : UInt32
+    property utc_time : Win32cr::Foundation::FILETIME
+    property time_uncertainty : UInt32
+    def initialize(@size : UInt32, @version : UInt32, @utc_time : Win32cr::Foundation::FILETIME, @time_uncertainty : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_AGNSS_INJECTPOSITION
+    property size : UInt32
+    property version : UInt32
+    property age : UInt32
+    property basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC
+    property accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY
+    def initialize(@size : UInt32, @version : UInt32, @age : UInt32, @basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC, @accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_AGNSS_INJECTBLOB
+    property size : UInt32
+    property version : UInt32
+    property blob_oui : UInt32
+    property blob_version : UInt32
+    property agnss_format : UInt32
+    property blob_size : UInt32
+    property blob_data : UInt8*
+    def initialize(@size : UInt32, @version : UInt32, @blob_oui : UInt32, @blob_version : UInt32, @agnss_format : UInt32, @blob_size : UInt32, @blob_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_AGNSS_INJECT
+    property size : UInt32
+    property version : UInt32
+    property injection_type : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_TYPE
+    property injection_status : Win32cr::Foundation::NTSTATUS
+    property injection_data_size : UInt32
+    property unused : UInt8[512]
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property time : Win32cr::Devices::Geolocation::GNSS_AGNSS_INJECTTIME
+    property position : Win32cr::Devices::Geolocation::GNSS_AGNSS_INJECTPOSITION
+    property blob_data : Win32cr::Devices::Geolocation::GNSS_AGNSS_INJECTBLOB
+    def initialize(@time : Win32cr::Devices::Geolocation::GNSS_AGNSS_INJECTTIME, @position : Win32cr::Devices::Geolocation::GNSS_AGNSS_INJECTPOSITION, @blob_data : Win32cr::Devices::Geolocation::GNSS_AGNSS_INJECTBLOB)
+    end
+    end
+
+    def initialize(@size : UInt32, @version : UInt32, @injection_type : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_TYPE, @injection_status : Win32cr::Foundation::NTSTATUS, @injection_data_size : UInt32, @unused : UInt8[512], @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_SUPL_HSLP_CONFIG
+    property size : UInt32
+    property version : UInt32
+    property supl_hslp : Win32cr::Foundation::CHAR[260]
+    property supl_hslp_from_imsi : Win32cr::Foundation::CHAR[260]
+    property reserved : UInt32
+    property unused : UInt8[512]
+    def initialize(@size : UInt32, @version : UInt32, @supl_hslp : Win32cr::Foundation::CHAR[260], @supl_hslp_from_imsi : Win32cr::Foundation::CHAR[260], @reserved : UInt32, @unused : UInt8[512])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_SUPL_CERT_CONFIG
+    property size : UInt32
+    property version : UInt32
+    property cert_action : Win32cr::Devices::Geolocation::GNSS_SUPL_CERT_ACTION
+    property supl_cert_name : Win32cr::Foundation::CHAR[260]
+    property cert_size : UInt32
+    property unused : UInt8[512]
+    property cert_data : UInt8*
+    def initialize(@size : UInt32, @version : UInt32, @cert_action : Win32cr::Devices::Geolocation::GNSS_SUPL_CERT_ACTION, @supl_cert_name : Win32cr::Foundation::CHAR[260], @cert_size : UInt32, @unused : UInt8[512], @cert_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_V2UPL_CONFIG
+    property size : UInt32
+    property version : UInt32
+    property mpc : Win32cr::Foundation::CHAR[260]
+    property pde : Win32cr::Foundation::CHAR[260]
+    property application_type_indicator_mr : UInt8
+    property unused : UInt8[512]
+    def initialize(@size : UInt32, @version : UInt32, @mpc : Win32cr::Foundation::CHAR[260], @pde : Win32cr::Foundation::CHAR[260], @application_type_indicator_mr : UInt8, @unused : UInt8[512])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_NI_RESPONSE
+    property size : UInt32
+    property version : UInt32
+    property request_id : UInt32
+    property user_response : Win32cr::Devices::Geolocation::GNSS_NI_USER_RESPONSE
+    def initialize(@size : UInt32, @version : UInt32, @request_id : UInt32, @user_response : Win32cr::Devices::Geolocation::GNSS_NI_USER_RESPONSE)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_CWTESTDATA
+    property size : UInt32
+    property version : UInt32
+    property test_result_status : Win32cr::Foundation::NTSTATUS
+    property signal_to_noise_ratio : Float64
+    property frequency : Float64
+    property unused : UInt8[512]
+    def initialize(@size : UInt32, @version : UInt32, @test_result_status : Win32cr::Foundation::NTSTATUS, @signal_to_noise_ratio : Float64, @frequency : Float64, @unused : UInt8[512])
+    end
+  end
+
+  @[Extern]
+  struct GNSS_SELFTESTCONFIG
+    property size : UInt32
+    property version : UInt32
+    property test_type : UInt32
+    property unused : UInt8[512]
+    property in_buf_len : UInt32
+    property in_buffer : UInt8*
+    def initialize(@size : UInt32, @version : UInt32, @test_type : UInt32, @unused : UInt8[512], @in_buf_len : UInt32, @in_buffer : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_SELFTESTRESULT
+    property size : UInt32
+    property version : UInt32
+    property test_result_status : Win32cr::Foundation::NTSTATUS
+    property result : UInt32
+    property pin_failed_bit_mask : UInt32
+    property unused : UInt8[512]
+    property out_buf_len : UInt32
+    property out_buffer : UInt8*
+    def initialize(@size : UInt32, @version : UInt32, @test_result_status : Win32cr::Foundation::NTSTATUS, @result : UInt32, @pin_failed_bit_mask : UInt32, @unused : UInt8[512], @out_buf_len : UInt32, @out_buffer : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct GNSS_CHIPSETINFO
+    property size : UInt32
+    property version : UInt32
+    property manufacturer_id : UInt16[25]
+    property hardware_id : UInt16[25]
+    property firmware_version : UInt16[20]
+    property unused : UInt8[512]
+    def initialize(@size : UInt32, @version : UInt32, @manufacturer_id : UInt16[25], @hardware_id : UInt16[25], @firmware_version : UInt16[20], @unused : UInt8[512])
+    end
+  end
 
   @[Extern]
   record ILocationReportVtbl,
@@ -745,7 +915,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("c8b7f7ee-75d0-4db9-b62d-7a0f369ca456")]
   record ILocationReport, lpVtbl : ILocationReportVtbl* do
     GUID = LibC::GUID.new(0xc8b7f7ee_u32, 0x75d0_u16, 0x4db9_u16, StaticArray[0xb6_u8, 0x2d_u8, 0x7a_u8, 0xf_u8, 0x36_u8, 0x9c_u8, 0xa4_u8, 0x56_u8])
     def query_interface(this : ILocationReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -785,7 +954,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("7fed806d-0ef8-4f07-80ac-36a0beae3134")]
   record ILatLongReport, lpVtbl : ILatLongReportVtbl* do
     GUID = LibC::GUID.new(0x7fed806d_u32, 0xef8_u16, 0x4f07_u16, StaticArray[0x80_u8, 0xac_u8, 0x36_u8, 0xa0_u8, 0xbe_u8, 0xae_u8, 0x31_u8, 0x34_u8])
     def query_interface(this : ILatLongReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -842,7 +1010,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("c0b19f70-4adf-445d-87f2-cad8fd711792")]
   record ICivicAddressReport, lpVtbl : ICivicAddressReportVtbl* do
     GUID = LibC::GUID.new(0xc0b19f70_u32, 0x4adf_u16, 0x445d_u16, StaticArray[0x87_u8, 0xf2_u8, 0xca_u8, 0xd8_u8, 0xfd_u8, 0x71_u8, 0x17_u8, 0x92_u8])
     def query_interface(this : ICivicAddressReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -904,7 +1071,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("ab2ece69-56d9-4f28-b525-de1b0ee44237")]
   record ILocation, lpVtbl : ILocationVtbl* do
     GUID = LibC::GUID.new(0xab2ece69_u32, 0x56d9_u16, 0x4f28_u16, StaticArray[0xb5_u8, 0x25_u8, 0xde_u8, 0x1b_u8, 0xe_u8, 0xe4_u8, 0x42_u8, 0x37_u8])
     def query_interface(this : ILocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -956,7 +1122,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("193e7729-ab6b-4b12-8617-7596e1bb191c")]
   record ILocationPower, lpVtbl : ILocationPowerVtbl* do
     GUID = LibC::GUID.new(0x193e7729_u32, 0xab6b_u16, 0x4b12_u16, StaticArray[0x86_u8, 0x17_u8, 0x75_u8, 0x96_u8, 0xe1_u8, 0xbb_u8, 0x19_u8, 0x1c_u8])
     def query_interface(this : ILocationPower*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -987,7 +1152,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("a65af77e-969a-4a2e-8aca-33bb7cbb1235")]
   record IDefaultLocation, lpVtbl : IDefaultLocationVtbl* do
     GUID = LibC::GUID.new(0xa65af77e_u32, 0x969a_u16, 0x4a2e_u16, StaticArray[0x8a_u8, 0xca_u8, 0x33_u8, 0xbb_u8, 0x7c_u8, 0xbb_u8, 0x12_u8, 0x35_u8])
     def query_interface(this : IDefaultLocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1018,7 +1182,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("cae02bbf-798b-4508-a207-35a7906dc73d")]
   record ILocationEvents, lpVtbl : ILocationEventsVtbl* do
     GUID = LibC::GUID.new(0xcae02bbf_u32, 0x798b_u16, 0x4508_u16, StaticArray[0xa2_u8, 0x7_u8, 0x35_u8, 0xa7_u8, 0x90_u8, 0x6d_u8, 0xc7_u8, 0x3d_u8])
     def query_interface(this : ILocationEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1057,7 +1220,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("8ae32723-389b-4a11-9957-5bdd48fc9617")]
   record IDispLatLongReport, lpVtbl : IDispLatLongReportVtbl* do
     GUID = LibC::GUID.new(0x8ae32723_u32, 0x389b_u16, 0x4a11_u16, StaticArray[0x99_u8, 0x57_u8, 0x5b_u8, 0xdd_u8, 0x48_u8, 0xfc_u8, 0x96_u8, 0x17_u8])
     def query_interface(this : IDispLatLongReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1122,7 +1284,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("16ff1a34-9e30-42c3-b44d-e22513b5767a")]
   record IDispCivicAddressReport, lpVtbl : IDispCivicAddressReportVtbl* do
     GUID = LibC::GUID.new(0x16ff1a34_u32, 0x9e30_u16, 0x42c3_u16, StaticArray[0xb4_u8, 0x4d_u8, 0xe2_u8, 0x25_u8, 0x13_u8, 0xb5_u8, 0x76_u8, 0x7a_u8])
     def query_interface(this : IDispCivicAddressReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1193,7 +1354,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("2daec322-90b2-47e4-bb08-0da841935a6b")]
   record ILocationReportFactory, lpVtbl : ILocationReportFactoryVtbl* do
     GUID = LibC::GUID.new(0x2daec322_u32, 0x90b2_u16, 0x47e4_u16, StaticArray[0xbb_u8, 0x8_u8, 0xd_u8, 0xa8_u8, 0x41_u8, 0x93_u8, 0x5a_u8, 0x6b_u8])
     def query_interface(this : ILocationReportFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1265,7 +1425,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("3f0804cb-b114-447d-83dd-390174ebb082")]
   record ILatLongReportFactory, lpVtbl : ILatLongReportFactoryVtbl* do
     GUID = LibC::GUID.new(0x3f0804cb_u32, 0xb114_u16, 0x447d_u16, StaticArray[0x83_u8, 0xdd_u8, 0x39_u8, 0x1_u8, 0x74_u8, 0xeb_u8, 0xb0_u8, 0x82_u8])
     def query_interface(this : ILatLongReportFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1340,7 +1499,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("bf773b93-c64f-4bee-beb2-67c0b8df66e0")]
   record ICivicAddressReportFactory, lpVtbl : ICivicAddressReportFactoryVtbl* do
     GUID = LibC::GUID.new(0xbf773b93_u32, 0xc64f_u16, 0x4bee_u16, StaticArray[0xbe_u8, 0xb2_u8, 0x67_u8, 0xc0_u8, 0xb8_u8, 0xdf_u8, 0x66_u8, 0xe0_u8])
     def query_interface(this : ICivicAddressReportFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1406,7 +1564,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("16ee6cb7-ab3c-424b-849f-269be551fcbc")]
   record ILatLongReportFactoryEvents_, lpVtbl : ILatLongReportFactoryEvents_Vtbl* do
     GUID = LibC::GUID.new(0x16ee6cb7_u32, 0xab3c_u16, 0x424b_u16, StaticArray[0x84_u8, 0x9f_u8, 0x26_u8, 0x9b_u8, 0xe5_u8, 0x51_u8, 0xfc_u8, 0xbc_u8])
     def query_interface(this : ILatLongReportFactoryEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1445,7 +1602,6 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  #@[Com("c96039ff-72ec-4617-89bd-84d88bedc722")]
   record ICivicAddressReportFactoryEvents_, lpVtbl : ICivicAddressReportFactoryEvents_Vtbl* do
     GUID = LibC::GUID.new(0xc96039ff_u32, 0x72ec_u16, 0x4617_u16, StaticArray[0x89_u8, 0xbd_u8, 0x84_u8, 0xd8_u8, 0x8b_u8, 0xed_u8, 0xc7_u8, 0x22_u8])
     def query_interface(this : ICivicAddressReportFactoryEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

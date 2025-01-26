@@ -269,234 +269,321 @@ module Win32cr::Media::Audio::XAudio2
   end
 
   @[Extern]
-  record XAPO_REGISTRATION_PROPERTIES,
-    clsid : LibC::GUID,
-    friendly_name : UInt16[256],
-    copyright_info : UInt16[256],
-    major_version : UInt32,
-    minor_version : UInt32,
-    flags : UInt32,
-    min_input_buffer_count : UInt32,
-    max_input_buffer_count : UInt32,
-    min_output_buffer_count : UInt32,
-    max_output_buffer_count : UInt32
+  struct XAPO_REGISTRATION_PROPERTIES
+    property clsid : LibC::GUID
+    property friendly_name : UInt16[256]
+    property copyright_info : UInt16[256]
+    property major_version : UInt32
+    property minor_version : UInt32
+    property flags : UInt32
+    property min_input_buffer_count : UInt32
+    property max_input_buffer_count : UInt32
+    property min_output_buffer_count : UInt32
+    property max_output_buffer_count : UInt32
+    def initialize(@clsid : LibC::GUID, @friendly_name : UInt16[256], @copyright_info : UInt16[256], @major_version : UInt32, @minor_version : UInt32, @flags : UInt32, @min_input_buffer_count : UInt32, @max_input_buffer_count : UInt32, @min_output_buffer_count : UInt32, @max_output_buffer_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record XAPO_LOCKFORPROCESS_PARAMETERS,
-    pFormat : Win32cr::Media::Audio::WAVEFORMATEX*,
-    max_frame_count : UInt32
+  struct XAPO_LOCKFORPROCESS_PARAMETERS
+    property pFormat : Win32cr::Media::Audio::WAVEFORMATEX*
+    property max_frame_count : UInt32
+    def initialize(@pFormat : Win32cr::Media::Audio::WAVEFORMATEX*, @max_frame_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record XAPO_PROCESS_BUFFER_PARAMETERS,
-    pBuffer : Void*,
-    buffer_flags : Win32cr::Media::Audio::XAudio2::XAPO_BUFFER_FLAGS,
-    valid_frame_count : UInt32
+  struct XAPO_PROCESS_BUFFER_PARAMETERS
+    property pBuffer : Void*
+    property buffer_flags : Win32cr::Media::Audio::XAudio2::XAPO_BUFFER_FLAGS
+    property valid_frame_count : UInt32
+    def initialize(@pBuffer : Void*, @buffer_flags : Win32cr::Media::Audio::XAudio2::XAPO_BUFFER_FLAGS, @valid_frame_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record FXEQ_PARAMETERS,
-    frequency_center0 : Float32,
-    gain0 : Float32,
-    bandwidth0 : Float32,
-    frequency_center1 : Float32,
-    gain1 : Float32,
-    bandwidth1 : Float32,
-    frequency_center2 : Float32,
-    gain2 : Float32,
-    bandwidth2 : Float32,
-    frequency_center3 : Float32,
-    gain3 : Float32,
-    bandwidth3 : Float32
+  struct FXEQ_PARAMETERS
+    property frequency_center0 : Float32
+    property gain0 : Float32
+    property bandwidth0 : Float32
+    property frequency_center1 : Float32
+    property gain1 : Float32
+    property bandwidth1 : Float32
+    property frequency_center2 : Float32
+    property gain2 : Float32
+    property bandwidth2 : Float32
+    property frequency_center3 : Float32
+    property gain3 : Float32
+    property bandwidth3 : Float32
+    def initialize(@frequency_center0 : Float32, @gain0 : Float32, @bandwidth0 : Float32, @frequency_center1 : Float32, @gain1 : Float32, @bandwidth1 : Float32, @frequency_center2 : Float32, @gain2 : Float32, @bandwidth2 : Float32, @frequency_center3 : Float32, @gain3 : Float32, @bandwidth3 : Float32)
+    end
+  end
 
   @[Extern]
-  record FXMASTERINGLIMITER_PARAMETERS,
-    release : UInt32,
-    loudness : UInt32
+  struct FXMASTERINGLIMITER_PARAMETERS
+    property release : UInt32
+    property loudness : UInt32
+    def initialize(@release : UInt32, @loudness : UInt32)
+    end
+  end
 
   @[Extern]
-  record FXREVERB_PARAMETERS,
-    diffusion : Float32,
-    room_size : Float32
+  struct FXREVERB_PARAMETERS
+    property diffusion : Float32
+    property room_size : Float32
+    def initialize(@diffusion : Float32, @room_size : Float32)
+    end
+  end
 
   @[Extern]
-  record FXECHO_INITDATA,
-    max_delay : Float32
+  struct FXECHO_INITDATA
+    property max_delay : Float32
+    def initialize(@max_delay : Float32)
+    end
+  end
 
   @[Extern]
-  record FXECHO_PARAMETERS,
-    wet_dry_mix : Float32,
-    feedback : Float32,
-    delay : Float32
+  struct FXECHO_PARAMETERS
+    property wet_dry_mix : Float32
+    property feedback : Float32
+    property delay : Float32
+    def initialize(@wet_dry_mix : Float32, @feedback : Float32, @delay : Float32)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2_VOICE_DETAILS,
-    creation_flags : UInt32,
-    active_flags : UInt32,
-    input_channels : UInt32,
-    input_sample_rate : UInt32
+  struct XAUDIO2_VOICE_DETAILS
+    property creation_flags : UInt32
+    property active_flags : UInt32
+    property input_channels : UInt32
+    property input_sample_rate : UInt32
+    def initialize(@creation_flags : UInt32, @active_flags : UInt32, @input_channels : UInt32, @input_sample_rate : UInt32)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2_SEND_DESCRIPTOR,
-    flags : UInt32,
-    pOutputVoice : Void*
+  struct XAUDIO2_SEND_DESCRIPTOR
+    property flags : UInt32
+    property pOutputVoice : Void*
+    def initialize(@flags : UInt32, @pOutputVoice : Void*)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2_VOICE_SENDS,
-    send_count : UInt32,
-    pSends : Win32cr::Media::Audio::XAudio2::XAUDIO2_SEND_DESCRIPTOR*
+  struct XAUDIO2_VOICE_SENDS
+    property send_count : UInt32
+    property pSends : Win32cr::Media::Audio::XAudio2::XAUDIO2_SEND_DESCRIPTOR*
+    def initialize(@send_count : UInt32, @pSends : Win32cr::Media::Audio::XAudio2::XAUDIO2_SEND_DESCRIPTOR*)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2_EFFECT_DESCRIPTOR,
-    pEffect : Void*,
-    initial_state : Win32cr::Foundation::BOOL,
-    output_channels : UInt32
+  struct XAUDIO2_EFFECT_DESCRIPTOR
+    property pEffect : Void*
+    property initial_state : Win32cr::Foundation::BOOL
+    property output_channels : UInt32
+    def initialize(@pEffect : Void*, @initial_state : Win32cr::Foundation::BOOL, @output_channels : UInt32)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2_EFFECT_CHAIN,
-    effect_count : UInt32,
-    pEffectDescriptors : Win32cr::Media::Audio::XAudio2::XAUDIO2_EFFECT_DESCRIPTOR*
+  struct XAUDIO2_EFFECT_CHAIN
+    property effect_count : UInt32
+    property pEffectDescriptors : Win32cr::Media::Audio::XAudio2::XAUDIO2_EFFECT_DESCRIPTOR*
+    def initialize(@effect_count : UInt32, @pEffectDescriptors : Win32cr::Media::Audio::XAudio2::XAUDIO2_EFFECT_DESCRIPTOR*)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2_FILTER_PARAMETERS,
-    type__ : Win32cr::Media::Audio::XAudio2::XAUDIO2_FILTER_TYPE,
-    frequency : Float32,
-    one_over_q : Float32
+  struct XAUDIO2_FILTER_PARAMETERS
+    property type__ : Win32cr::Media::Audio::XAudio2::XAUDIO2_FILTER_TYPE
+    property frequency : Float32
+    property one_over_q : Float32
+    def initialize(@type__ : Win32cr::Media::Audio::XAudio2::XAUDIO2_FILTER_TYPE, @frequency : Float32, @one_over_q : Float32)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2_BUFFER,
-    flags : UInt32,
-    audio_bytes : UInt32,
-    pAudioData : UInt8*,
-    play_begin : UInt32,
-    play_length : UInt32,
-    loop_begin : UInt32,
-    loop_length : UInt32,
-    loop_count : UInt32,
-    pContext : Void*
+  struct XAUDIO2_BUFFER
+    property flags : UInt32
+    property audio_bytes : UInt32
+    property pAudioData : UInt8*
+    property play_begin : UInt32
+    property play_length : UInt32
+    property loop_begin : UInt32
+    property loop_length : UInt32
+    property loop_count : UInt32
+    property pContext : Void*
+    def initialize(@flags : UInt32, @audio_bytes : UInt32, @pAudioData : UInt8*, @play_begin : UInt32, @play_length : UInt32, @loop_begin : UInt32, @loop_length : UInt32, @loop_count : UInt32, @pContext : Void*)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2_BUFFER_WMA,
-    pDecodedPacketCumulativeBytes : UInt32*,
-    packet_count : UInt32
+  struct XAUDIO2_BUFFER_WMA
+    property pDecodedPacketCumulativeBytes : UInt32*
+    property packet_count : UInt32
+    def initialize(@pDecodedPacketCumulativeBytes : UInt32*, @packet_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2_VOICE_STATE,
-    pCurrentBufferContext : Void*,
-    buffers_queued : UInt32,
-    samples_played : UInt64
+  struct XAUDIO2_VOICE_STATE
+    property pCurrentBufferContext : Void*
+    property buffers_queued : UInt32
+    property samples_played : UInt64
+    def initialize(@pCurrentBufferContext : Void*, @buffers_queued : UInt32, @samples_played : UInt64)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2_PERFORMANCE_DATA,
-    audio_cycles_since_last_query : UInt64,
-    total_cycles_since_last_query : UInt64,
-    minimum_cycles_per_quantum : UInt32,
-    maximum_cycles_per_quantum : UInt32,
-    memory_usage_in_bytes : UInt32,
-    current_latency_in_samples : UInt32,
-    glitches_since_engine_started : UInt32,
-    active_source_voice_count : UInt32,
-    total_source_voice_count : UInt32,
-    active_submix_voice_count : UInt32,
-    active_resampler_count : UInt32,
-    active_matrix_mix_count : UInt32,
-    active_xma_source_voices : UInt32,
-    active_xma_streams : UInt32
+  struct XAUDIO2_PERFORMANCE_DATA
+    property audio_cycles_since_last_query : UInt64
+    property total_cycles_since_last_query : UInt64
+    property minimum_cycles_per_quantum : UInt32
+    property maximum_cycles_per_quantum : UInt32
+    property memory_usage_in_bytes : UInt32
+    property current_latency_in_samples : UInt32
+    property glitches_since_engine_started : UInt32
+    property active_source_voice_count : UInt32
+    property total_source_voice_count : UInt32
+    property active_submix_voice_count : UInt32
+    property active_resampler_count : UInt32
+    property active_matrix_mix_count : UInt32
+    property active_xma_source_voices : UInt32
+    property active_xma_streams : UInt32
+    def initialize(@audio_cycles_since_last_query : UInt64, @total_cycles_since_last_query : UInt64, @minimum_cycles_per_quantum : UInt32, @maximum_cycles_per_quantum : UInt32, @memory_usage_in_bytes : UInt32, @current_latency_in_samples : UInt32, @glitches_since_engine_started : UInt32, @active_source_voice_count : UInt32, @total_source_voice_count : UInt32, @active_submix_voice_count : UInt32, @active_resampler_count : UInt32, @active_matrix_mix_count : UInt32, @active_xma_source_voices : UInt32, @active_xma_streams : UInt32)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2_DEBUG_CONFIGURATION,
-    trace_mask : UInt32,
-    break_mask : UInt32,
-    log_thread_id : Win32cr::Foundation::BOOL,
-    log_fileline : Win32cr::Foundation::BOOL,
-    log_function_name : Win32cr::Foundation::BOOL,
-    log_timing : Win32cr::Foundation::BOOL
+  struct XAUDIO2_DEBUG_CONFIGURATION
+    property trace_mask : UInt32
+    property break_mask : UInt32
+    property log_thread_id : Win32cr::Foundation::BOOL
+    property log_fileline : Win32cr::Foundation::BOOL
+    property log_function_name : Win32cr::Foundation::BOOL
+    property log_timing : Win32cr::Foundation::BOOL
+    def initialize(@trace_mask : UInt32, @break_mask : UInt32, @log_thread_id : Win32cr::Foundation::BOOL, @log_fileline : Win32cr::Foundation::BOOL, @log_function_name : Win32cr::Foundation::BOOL, @log_timing : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2FX_VOLUMEMETER_LEVELS,
-    pPeakLevels : Float32*,
-    pRMSLevels : Float32*,
-    channel_count : UInt32
+  struct XAUDIO2FX_VOLUMEMETER_LEVELS
+    property pPeakLevels : Float32*
+    property pRMSLevels : Float32*
+    property channel_count : UInt32
+    def initialize(@pPeakLevels : Float32*, @pRMSLevels : Float32*, @channel_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2FX_REVERB_PARAMETERS,
-    wet_dry_mix : Float32,
-    reflections_delay : UInt32,
-    reverb_delay : UInt8,
-    rear_delay : UInt8,
-    side_delay : UInt8,
-    position_left : UInt8,
-    position_right : UInt8,
-    position_matrix_left : UInt8,
-    position_matrix_right : UInt8,
-    early_diffusion : UInt8,
-    late_diffusion : UInt8,
-    low_eq_gain : UInt8,
-    low_eq_cutoff : UInt8,
-    high_eq_gain : UInt8,
-    high_eq_cutoff : UInt8,
-    room_filter_freq : Float32,
-    room_filter_main : Float32,
-    room_filter_hf : Float32,
-    reflections_gain : Float32,
-    reverb_gain : Float32,
-    decay_time : Float32,
-    density : Float32,
-    room_size : Float32,
-    disable_late_field : Win32cr::Foundation::BOOL
+  struct XAUDIO2FX_REVERB_PARAMETERS
+    property wet_dry_mix : Float32
+    property reflections_delay : UInt32
+    property reverb_delay : UInt8
+    property rear_delay : UInt8
+    property side_delay : UInt8
+    property position_left : UInt8
+    property position_right : UInt8
+    property position_matrix_left : UInt8
+    property position_matrix_right : UInt8
+    property early_diffusion : UInt8
+    property late_diffusion : UInt8
+    property low_eq_gain : UInt8
+    property low_eq_cutoff : UInt8
+    property high_eq_gain : UInt8
+    property high_eq_cutoff : UInt8
+    property room_filter_freq : Float32
+    property room_filter_main : Float32
+    property room_filter_hf : Float32
+    property reflections_gain : Float32
+    property reverb_gain : Float32
+    property decay_time : Float32
+    property density : Float32
+    property room_size : Float32
+    property disable_late_field : Win32cr::Foundation::BOOL
+    def initialize(@wet_dry_mix : Float32, @reflections_delay : UInt32, @reverb_delay : UInt8, @rear_delay : UInt8, @side_delay : UInt8, @position_left : UInt8, @position_right : UInt8, @position_matrix_left : UInt8, @position_matrix_right : UInt8, @early_diffusion : UInt8, @late_diffusion : UInt8, @low_eq_gain : UInt8, @low_eq_cutoff : UInt8, @high_eq_gain : UInt8, @high_eq_cutoff : UInt8, @room_filter_freq : Float32, @room_filter_main : Float32, @room_filter_hf : Float32, @reflections_gain : Float32, @reverb_gain : Float32, @decay_time : Float32, @density : Float32, @room_size : Float32, @disable_late_field : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record XAUDIO2FX_REVERB_I3DL2_PARAMETERS,
-    wet_dry_mix : Float32,
-    room : Int32,
-    room_hf : Int32,
-    room_rolloff_factor : Float32,
-    decay_time : Float32,
-    decay_hf_ratio : Float32,
-    reflections : Int32,
-    reflections_delay : Float32,
-    reverb : Int32,
-    reverb_delay : Float32,
-    diffusion : Float32,
-    density : Float32,
-    hf_reference : Float32
+  struct XAUDIO2FX_REVERB_I3DL2_PARAMETERS
+    property wet_dry_mix : Float32
+    property room : Int32
+    property room_hf : Int32
+    property room_rolloff_factor : Float32
+    property decay_time : Float32
+    property decay_hf_ratio : Float32
+    property reflections : Int32
+    property reflections_delay : Float32
+    property reverb : Int32
+    property reverb_delay : Float32
+    property diffusion : Float32
+    property density : Float32
+    property hf_reference : Float32
+    def initialize(@wet_dry_mix : Float32, @room : Int32, @room_hf : Int32, @room_rolloff_factor : Float32, @decay_time : Float32, @decay_hf_ratio : Float32, @reflections : Int32, @reflections_delay : Float32, @reverb : Int32, @reverb_delay : Float32, @diffusion : Float32, @density : Float32, @hf_reference : Float32)
+    end
+  end
 
   @[Extern]
-  record HrtfPosition,
-    x : Float32,
-    y : Float32,
-    z : Float32
+  struct HrtfPosition
+    property x : Float32
+    property y : Float32
+    property z : Float32
+    def initialize(@x : Float32, @y : Float32, @z : Float32)
+    end
+  end
 
   @[Extern]
-  record HrtfOrientation,
-    element : Float32[9]
+  struct HrtfOrientation
+    property element : Float32[9]
+    def initialize(@element : Float32[9])
+    end
+  end
 
   @[Extern]
-  record HrtfDirectivity,
-    type__ : Win32cr::Media::Audio::XAudio2::HrtfDirectivityType,
-    scaling : Float32
+  struct HrtfDirectivity
+    property type__ : Win32cr::Media::Audio::XAudio2::HrtfDirectivityType
+    property scaling : Float32
+    def initialize(@type__ : Win32cr::Media::Audio::XAudio2::HrtfDirectivityType, @scaling : Float32)
+    end
+  end
 
   @[Extern]
-  record HrtfDirectivityCardioid,
-    directivity : Win32cr::Media::Audio::XAudio2::HrtfDirectivity,
-    order : Float32
+  struct HrtfDirectivityCardioid
+    property directivity : Win32cr::Media::Audio::XAudio2::HrtfDirectivity
+    property order : Float32
+    def initialize(@directivity : Win32cr::Media::Audio::XAudio2::HrtfDirectivity, @order : Float32)
+    end
+  end
 
   @[Extern]
-  record HrtfDirectivityCone,
-    directivity : Win32cr::Media::Audio::XAudio2::HrtfDirectivity,
-    innerAngle : Float32,
-    outerAngle : Float32
+  struct HrtfDirectivityCone
+    property directivity : Win32cr::Media::Audio::XAudio2::HrtfDirectivity
+    property innerAngle : Float32
+    property outerAngle : Float32
+    def initialize(@directivity : Win32cr::Media::Audio::XAudio2::HrtfDirectivity, @innerAngle : Float32, @outerAngle : Float32)
+    end
+  end
 
   @[Extern]
-  record HrtfDistanceDecay,
-    type__ : Win32cr::Media::Audio::XAudio2::HrtfDistanceDecayType,
-    maxGain : Float32,
-    minGain : Float32,
-    unityGainDistance : Float32,
-    cutoffDistance : Float32
+  struct HrtfDistanceDecay
+    property type__ : Win32cr::Media::Audio::XAudio2::HrtfDistanceDecayType
+    property maxGain : Float32
+    property minGain : Float32
+    property unityGainDistance : Float32
+    property cutoffDistance : Float32
+    def initialize(@type__ : Win32cr::Media::Audio::XAudio2::HrtfDistanceDecayType, @maxGain : Float32, @minGain : Float32, @unityGainDistance : Float32, @cutoffDistance : Float32)
+    end
+  end
 
   @[Extern]
-  record HrtfApoInit,
-    distanceDecay : Win32cr::Media::Audio::XAudio2::HrtfDistanceDecay*,
-    directivity : Win32cr::Media::Audio::XAudio2::HrtfDirectivity*
+  struct HrtfApoInit
+    property distanceDecay : Win32cr::Media::Audio::XAudio2::HrtfDistanceDecay*
+    property directivity : Win32cr::Media::Audio::XAudio2::HrtfDirectivity*
+    def initialize(@distanceDecay : Win32cr::Media::Audio::XAudio2::HrtfDistanceDecay*, @directivity : Win32cr::Media::Audio::XAudio2::HrtfDirectivity*)
+    end
+  end
 
   @[Extern]
   record IXAPOVtbl,
@@ -516,7 +603,6 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  #@[Com("a410b984-9839-4819-a0be-2856ae6b3adb")]
   record IXAPO, lpVtbl : IXAPOVtbl* do
     GUID = LibC::GUID.new(0xa410b984_u32, 0x9839_u16, 0x4819_u16, StaticArray[0xa0_u8, 0xbe_u8, 0x28_u8, 0x56_u8, 0xae_u8, 0x6b_u8, 0x3a_u8, 0xdb_u8])
     def query_interface(this : IXAPO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -571,7 +657,6 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  #@[Com("26d95c66-80f2-499a-ad54-5ae7f01c6d98")]
   record IXAPOParameters, lpVtbl : IXAPOParametersVtbl* do
     GUID = LibC::GUID.new(0x26d95c66_u32, 0x80f2_u16, 0x499a_u16, StaticArray[0xad_u8, 0x54_u8, 0x5a_u8, 0xe7_u8, 0xf0_u8, 0x1c_u8, 0x6d_u8, 0x98_u8])
     def query_interface(this : IXAPOParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -610,7 +695,6 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  #@[Com("2b02e3cf-2e0b-4ec3-be45-1b2a3fe7210d")]
   record IXAudio2, lpVtbl : IXAudio2Vtbl* do
     GUID = LibC::GUID.new(0x2b02e3cf_u32, 0x2e0b_u16, 0x4ec3_u16, StaticArray[0xbe_u8, 0x45_u8, 0x1b_u8, 0x2a_u8, 0x3f_u8, 0xe7_u8, 0x21_u8, 0xd_u8])
     def query_interface(this : IXAudio2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -665,7 +749,6 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  #@[Com("84ac29bb-d619-44d2-b197-e4acf7df3ed6")]
   record IXAudio2Extension, lpVtbl : IXAudio2ExtensionVtbl* do
     GUID = LibC::GUID.new(0x84ac29bb_u32, 0xd619_u16, 0x44d2_u16, StaticArray[0xb1_u8, 0x97_u8, 0xe4_u8, 0xac_u8, 0xf7_u8, 0xdf_u8, 0x3e_u8, 0xd6_u8])
     def query_interface(this : IXAudio2Extension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1146,7 +1229,6 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  #@[Com("15b3cd66-e9de-4464-b6e6-2bc3cf63d455")]
   record IXAPOHrtfParameters, lpVtbl : IXAPOHrtfParametersVtbl* do
     GUID = LibC::GUID.new(0x15b3cd66_u32, 0xe9de_u16, 0x4464_u16, StaticArray[0xb6_u8, 0xe6_u8, 0x2b_u8, 0xc3_u8, 0xcf_u8, 0x63_u8, 0xd4_u8, 0x55_u8])
     def query_interface(this : IXAPOHrtfParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

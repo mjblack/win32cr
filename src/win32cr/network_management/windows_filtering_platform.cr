@@ -3,41 +3,41 @@ require "./../foundation.cr"
 require "./../system/rpc.cr"
 
 module Win32cr::NetworkManagement::WindowsFilteringPlatform
-  alias FWPM_PROVIDER_CHANGE_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CHANGE0*, Void)*
+  alias FWPM_PROVIDER_CHANGE_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CHANGE0*, Void)
 
-  alias FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_CHANGE0*, Void)*
+  alias FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_CHANGE0*, Void)
 
-  alias FWPM_SUBLAYER_CHANGE_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER_CHANGE0*, Void)*
+  alias FWPM_SUBLAYER_CHANGE_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER_CHANGE0*, Void)
 
-  alias FWPM_CALLOUT_CHANGE_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT_CHANGE0*, Void)*
+  alias FWPM_CALLOUT_CHANGE_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT_CHANGE0*, Void)
 
-  alias FWPM_FILTER_CHANGE_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CHANGE0*, Void)*
+  alias FWPM_FILTER_CHANGE_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CHANGE0*, Void)
 
-  alias IPSEC_SA_CONTEXT_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_CHANGE0*, Void)*
+  alias IPSEC_SA_CONTEXT_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_CHANGE0*, Void)
 
-  alias IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0 = Proc(Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_TRAFFIC0*, Win32cr::Foundation::BOOL*, UInt32*, Void)*
+  alias IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0 = Proc(Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_TRAFFIC0*, Win32cr::Foundation::BOOL*, UInt32*, Void)
 
-  alias IPSEC_KEY_MANAGER_DICTATE_KEY0 = Proc(Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*, Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*, Win32cr::Foundation::BOOL*, UInt32)*
+  alias IPSEC_KEY_MANAGER_DICTATE_KEY0 = Proc(Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*, Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*, Win32cr::Foundation::BOOL*, UInt32)
 
-  alias IPSEC_KEY_MANAGER_NOTIFY_KEY0 = Proc(Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*, Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*, Void)*
+  alias IPSEC_KEY_MANAGER_NOTIFY_KEY0 = Proc(Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*, Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*, Void)
 
-  alias FWPM_NET_EVENT_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT1*, Void)*
+  alias FWPM_NET_EVENT_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT1*, Void)
 
-  alias FWPM_NET_EVENT_CALLBACK1 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT2*, Void)*
+  alias FWPM_NET_EVENT_CALLBACK1 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT2*, Void)
 
-  alias FWPM_NET_EVENT_CALLBACK2 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT3*, Void)*
+  alias FWPM_NET_EVENT_CALLBACK2 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT3*, Void)
 
-  alias FWPM_NET_EVENT_CALLBACK3 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT4_*, Void)*
+  alias FWPM_NET_EVENT_CALLBACK3 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT4_*, Void)
 
-  alias FWPM_NET_EVENT_CALLBACK4 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT5_*, Void)*
+  alias FWPM_NET_EVENT_CALLBACK4 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT5_*, Void)
 
-  alias FWPM_DYNAMIC_KEYWORD_CALLBACK0 = Proc(Void*, Void*, Void)*
+  alias FWPM_DYNAMIC_KEYWORD_CALLBACK0 = Proc(Void*, Void*, Void)
 
-  alias FWPM_SYSTEM_PORTS_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SYSTEM_PORTS0*, Void)*
+  alias FWPM_SYSTEM_PORTS_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SYSTEM_PORTS0*, Void)
 
-  alias FWPM_CONNECTION_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION_EVENT_TYPE, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION0*, Void)*
+  alias FWPM_CONNECTION_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION_EVENT_TYPE, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION0*, Void)
 
-  alias FWPM_VSWITCH_EVENT_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_VSWITCH_EVENT0*, UInt32)*
+  alias FWPM_VSWITCH_EVENT_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_VSWITCH_EVENT0*, UInt32)
 
   FWPM_NET_EVENT_KEYWORD_INBOUND_MCAST = 1_u32
   FWPM_NET_EVENT_KEYWORD_INBOUND_BCAST = 2_u32
@@ -1054,2417 +1054,3211 @@ module Win32cr::NetworkManagement::WindowsFilteringPlatform
   end
 
   @[Extern]
-  record FWP_BYTE_ARRAY6,
-    byteArray6 : UInt8[6]
-
-  @[Extern]
-  record FWP_BYTE_ARRAY16,
-    byteArray16 : UInt8[16]
-
-  @[Extern]
-  record FWP_BYTE_BLOB,
-    size : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record FWP_TOKEN_INFORMATION,
-    sidCount : UInt32,
-    sids : Win32cr::Security::SID_AND_ATTRIBUTES*,
-    restrictedSidCount : UInt32,
-    restrictedSids : Win32cr::Security::SID_AND_ATTRIBUTES*
-
-  @[Extern]
-  record FWP_VALUE0,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DATA_TYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      uint8 : UInt8,
-      uint16 : UInt16,
-      uint32 : UInt32,
-      uint64 : UInt64*,
-      int8 : Int8,
-      int16 : Int16,
-      int32 : Int32,
-      int64 : Int64*,
-      float32 : Float32,
-      double64 : Float64*,
-      byteArray16 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16*,
-      byteBlob : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*,
-      sid : Win32cr::Security::SID*,
-      sd : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*,
-      tokenInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_TOKEN_INFORMATION*,
-      tokenAccessInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*,
-      unicodeString : Win32cr::Foundation::PWSTR,
-      byteArray6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6*
-
+  struct FWP_BYTE_ARRAY6
+    property byteArray6 : UInt8[6]
+    def initialize(@byteArray6 : UInt8[6])
+    end
   end
 
   @[Extern]
-  record FWP_V4_ADDR_AND_MASK,
-    addr : UInt32,
-    mask : UInt32
-
-  @[Extern]
-  record FWP_V6_ADDR_AND_MASK,
-    addr : UInt8[16],
-    prefixLength : UInt8
-
-  @[Extern]
-  record FWP_RANGE0,
-    valueLow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0,
-    valueHigh : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0
-
-  @[Extern]
-  record FWP_CONDITION_VALUE0,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DATA_TYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      uint8 : UInt8,
-      uint16 : UInt16,
-      uint32 : UInt32,
-      uint64 : UInt64*,
-      int8 : Int8,
-      int16 : Int16,
-      int32 : Int32,
-      int64 : Int64*,
-      float32 : Float32,
-      double64 : Float64*,
-      byteArray16 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16*,
-      byteBlob : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*,
-      sid : Win32cr::Security::SID*,
-      sd : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*,
-      tokenInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_TOKEN_INFORMATION*,
-      tokenAccessInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*,
-      unicodeString : Win32cr::Foundation::PWSTR,
-      byteArray6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6*,
-      v4AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V4_ADDR_AND_MASK*,
-      v6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK*,
-      rangeValue : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_RANGE0*
-
+  struct FWP_BYTE_ARRAY16
+    property byteArray16 : UInt8[16]
+    def initialize(@byteArray16 : UInt8[16])
+    end
   end
 
   @[Extern]
-  record FWPM_DISPLAY_DATA0,
-    name : Win32cr::Foundation::PWSTR,
-    description : Win32cr::Foundation::PWSTR
+  struct FWP_BYTE_BLOB
+    property size : UInt32
+    property data : UInt8*
+    def initialize(@size : UInt32, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_VIRTUAL_IF_TUNNEL_INFO0,
-    virtualIfTunnelId : UInt64,
-    trafficSelectorId : UInt64
+  struct FWP_TOKEN_INFORMATION
+    property sidCount : UInt32
+    property sids : Win32cr::Security::SID_AND_ATTRIBUTES*
+    property restrictedSidCount : UInt32
+    property restrictedSids : Win32cr::Security::SID_AND_ATTRIBUTES*
+    def initialize(@sidCount : UInt32, @sids : Win32cr::Security::SID_AND_ATTRIBUTES*, @restrictedSidCount : UInt32, @restrictedSids : Win32cr::Security::SID_AND_ATTRIBUTES*)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_PRESHARED_KEY_AUTHENTICATION0,
-    presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+  struct FWP_VALUE0
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DATA_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property uint8 : UInt8
+    property uint16 : UInt16
+    property uint32 : UInt32
+    property uint64 : UInt64*
+    property int8 : Int8
+    property int16 : Int16
+    property int32 : Int32
+    property int64 : Int64*
+    property float32 : Float32
+    property double64 : Float64*
+    property byteArray16 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16*
+    property byteBlob : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*
+    property sid : Win32cr::Security::SID*
+    property sd : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*
+    property tokenInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_TOKEN_INFORMATION*
+    property tokenAccessInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*
+    property unicodeString : Win32cr::Foundation::PWSTR
+    property byteArray6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6*
+    def initialize(@uint8 : UInt8, @uint16 : UInt16, @uint32 : UInt32, @uint64 : UInt64*, @int8 : Int8, @int16 : Int16, @int32 : Int32, @int64 : Int64*, @float32 : Float32, @double64 : Float64*, @byteArray16 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16*, @byteBlob : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*, @sid : Win32cr::Security::SID*, @sd : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*, @tokenInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_TOKEN_INFORMATION*, @tokenAccessInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*, @unicodeString : Win32cr::Foundation::PWSTR, @byteArray6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6*)
+    end
+    end
+
+    def initialize(@type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DATA_TYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
-    presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS
+  struct FWP_V4_ADDR_AND_MASK
+    property addr : UInt32
+    property mask : UInt32
+    def initialize(@addr : UInt32, @mask : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_CERT_ROOT_CONFIG0,
-    certData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_FLAGS
+  struct FWP_V6_ADDR_AND_MASK
+    property addr : UInt8[16]
+    property prefixLength : UInt8
+    def initialize(@addr : UInt8[16], @prefixLength : UInt8)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_CERTIFICATE_AUTHENTICATION0,
-    inboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE,
-    anonymous1 : Anonymous1_e__Union_,
-    outboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE,
-    anonymous2 : Anonymous2_e__Union_,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_AUTH do
+  struct FWP_RANGE0
+    property valueLow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0
+    property valueHigh : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0
+    def initialize(@valueLow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0, @valueHigh : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0)
+    end
+  end
+
+  @[Extern]
+  struct FWP_CONDITION_VALUE0
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DATA_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property uint8 : UInt8
+    property uint16 : UInt16
+    property uint32 : UInt32
+    property uint64 : UInt64*
+    property int8 : Int8
+    property int16 : Int16
+    property int32 : Int32
+    property int64 : Int64*
+    property float32 : Float32
+    property double64 : Float64*
+    property byteArray16 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16*
+    property byteBlob : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*
+    property sid : Win32cr::Security::SID*
+    property sd : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*
+    property tokenInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_TOKEN_INFORMATION*
+    property tokenAccessInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*
+    property unicodeString : Win32cr::Foundation::PWSTR
+    property byteArray6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6*
+    property v4AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V4_ADDR_AND_MASK*
+    property v6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK*
+    property rangeValue : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_RANGE0*
+    def initialize(@uint8 : UInt8, @uint16 : UInt16, @uint32 : UInt32, @uint64 : UInt64*, @int8 : Int8, @int16 : Int16, @int32 : Int32, @int64 : Int64*, @float32 : Float32, @double64 : Float64*, @byteArray16 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16*, @byteBlob : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*, @sid : Win32cr::Security::SID*, @sd : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*, @tokenInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_TOKEN_INFORMATION*, @tokenAccessInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*, @unicodeString : Win32cr::Foundation::PWSTR, @byteArray6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6*, @v4AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V4_ADDR_AND_MASK*, @v6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK*, @rangeValue : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_RANGE0*)
+    end
+    end
+
+    def initialize(@type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DATA_TYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct FWPM_DISPLAY_DATA0
+    property name : Win32cr::Foundation::PWSTR
+    property description : Win32cr::Foundation::PWSTR
+    def initialize(@name : Win32cr::Foundation::PWSTR, @description : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct IPSEC_VIRTUAL_IF_TUNNEL_INFO0
+    property virtualIfTunnelId : UInt64
+    property trafficSelectorId : UInt64
+    def initialize(@virtualIfTunnelId : UInt64, @trafficSelectorId : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct IKEEXT_PRESHARED_KEY_AUTHENTICATION0
+    property presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    def initialize(@presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB)
+    end
+  end
+
+  @[Extern]
+  struct IKEEXT_PRESHARED_KEY_AUTHENTICATION1
+    property presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS
+    def initialize(@presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct IKEEXT_CERT_ROOT_CONFIG0
+    property certData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_FLAGS
+    def initialize(@certData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct IKEEXT_CERTIFICATE_AUTHENTICATION0
+    property inboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE
+    property anonymous1 : Anonymous1_e__Union_
+    property outboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE
+    property anonymous2 : Anonymous2_e__Union_
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_AUTH
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      outboundEnterpriseStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*,
-      outboundTrustedRootStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0* do
+    struct Anonymous2_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property outboundEnterpriseStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
+    property outboundTrustedRootStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        outboundRootArraySize : UInt32,
-        outboundRootArray : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
+      struct Anonymous_e__Struct_
+    property outboundRootArraySize : UInt32
+    property outboundRootArray : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
+    def initialize(@outboundRootArraySize : UInt32, @outboundRootArray : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @outboundEnterpriseStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*, @outboundTrustedRootStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      inboundEnterpriseStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*,
-      inboundTrustedRootStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0* do
+    struct Anonymous1_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property inboundEnterpriseStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
+    property inboundTrustedRootStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        inboundRootArraySize : UInt32,
-        inboundRootArray : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
+      struct Anonymous_e__Struct_
+    property inboundRootArraySize : UInt32
+    property inboundRootArray : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
+    def initialize(@inboundRootArraySize : UInt32, @inboundRootArray : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @inboundEnterpriseStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*, @inboundTrustedRootStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*)
+    end
     end
 
+    def initialize(@inboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE, @anonymous1 : Anonymous1_e__Union_, @outboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE, @anonymous2 : Anonymous2_e__Union_, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_AUTH)
+    end
   end
 
   @[Extern]
-  record IKEEXT_CERTIFICATE_AUTHENTICATION1,
-    inboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE,
-    anonymous1 : Anonymous1_e__Union_,
-    outboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE,
-    anonymous2 : Anonymous2_e__Union_,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_AUTH,
-    localCertLocationUrl : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB do
+  struct IKEEXT_CERTIFICATE_AUTHENTICATION1
+    property inboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE
+    property anonymous1 : Anonymous1_e__Union_
+    property outboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE
+    property anonymous2 : Anonymous2_e__Union_
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_AUTH
+    property localCertLocationUrl : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      outboundEnterpriseStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*,
-      outboundTrustedRootStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0* do
+    struct Anonymous2_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property outboundEnterpriseStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
+    property outboundTrustedRootStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        outboundRootArraySize : UInt32,
-        outboundRootArray : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
+      struct Anonymous_e__Struct_
+    property outboundRootArraySize : UInt32
+    property outboundRootArray : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
+    def initialize(@outboundRootArraySize : UInt32, @outboundRootArray : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @outboundEnterpriseStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*, @outboundTrustedRootStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      inboundEnterpriseStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*,
-      inboundTrustedRootStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0* do
+    struct Anonymous1_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property inboundEnterpriseStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
+    property inboundTrustedRootStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        inboundRootArraySize : UInt32,
-        inboundRootArray : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
+      struct Anonymous_e__Struct_
+    property inboundRootArraySize : UInt32
+    property inboundRootArray : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*
+    def initialize(@inboundRootArraySize : UInt32, @inboundRootArray : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @inboundEnterpriseStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*, @inboundTrustedRootStoreConfig : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_ROOT_CONFIG0*)
+    end
     end
 
+    def initialize(@inboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE, @anonymous1 : Anonymous1_e__Union_, @outboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE, @anonymous2 : Anonymous2_e__Union_, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_AUTH, @localCertLocationUrl : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB)
+    end
   end
 
   @[Extern]
-  record IKEEXT_CERT_EKUS0,
-    numEku : UInt32,
-    eku : Win32cr::Foundation::PSTR*
+  struct IKEEXT_CERT_EKUS0
+    property numEku : UInt32
+    property eku : Win32cr::Foundation::PSTR*
+    def initialize(@numEku : UInt32, @eku : Win32cr::Foundation::PSTR*)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_CERT_NAME0,
-    nameType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CRITERIA_NAME_TYPE,
-    certName : Win32cr::Foundation::PWSTR
+  struct IKEEXT_CERT_NAME0
+    property nameType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CRITERIA_NAME_TYPE
+    property certName : Win32cr::Foundation::PWSTR
+    def initialize(@nameType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CRITERIA_NAME_TYPE, @certName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_CERTIFICATE_CRITERIA0,
-    certData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    certHash : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    eku : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_EKUS0*,
-    name : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_NAME0*,
-    flags : UInt32
+  struct IKEEXT_CERTIFICATE_CRITERIA0
+    property certData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property certHash : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property eku : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_EKUS0*
+    property name : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_NAME0*
+    property flags : UInt32
+    def initialize(@certData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @certHash : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @eku : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_EKUS0*, @name : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_NAME0*, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_CERTIFICATE_AUTHENTICATION2,
-    inboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE,
-    anonymous1 : Anonymous1_e__Union_,
-    outboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE,
-    anonymous2 : Anonymous2_e__Union_,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_AUTH,
-    localCertLocationUrl : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB do
+  struct IKEEXT_CERTIFICATE_AUTHENTICATION2
+    property inboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE
+    property anonymous1 : Anonymous1_e__Union_
+    property outboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE
+    property anonymous2 : Anonymous2_e__Union_
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_AUTH
+    property localCertLocationUrl : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      anonymous2 : Anonymous2_e__Struct_,
-      anonymous3 : Anonymous3_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
+    property anonymous3 : Anonymous3_e__Struct_
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        outboundEnterpriseStoreArraySize : UInt32,
-        outboundEnterpriseStoreCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*
+      struct Anonymous2_e__Struct_
+    property outboundEnterpriseStoreArraySize : UInt32
+    property outboundEnterpriseStoreCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*
+    def initialize(@outboundEnterpriseStoreArraySize : UInt32, @outboundEnterpriseStoreCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*)
+    end
+      end
 
 
       # Nested Type Anonymous3_e__Struct_
       @[Extern]
-      record Anonymous3_e__Struct_,
-        outboundRootStoreArraySize : UInt32,
-        outboundTrustedRootStoreCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*
+      struct Anonymous3_e__Struct_
+    property outboundRootStoreArraySize : UInt32
+    property outboundTrustedRootStoreCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*
+    def initialize(@outboundRootStoreArraySize : UInt32, @outboundTrustedRootStoreCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*)
+    end
+      end
 
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        outboundRootArraySize : UInt32,
-        outboundRootCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*
+      struct Anonymous1_e__Struct_
+    property outboundRootArraySize : UInt32
+    property outboundRootCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*
+    def initialize(@outboundRootArraySize : UInt32, @outboundRootCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_, @anonymous3 : Anonymous3_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      anonymous2 : Anonymous2_e__Struct_,
-      anonymous3 : Anonymous3_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
+    property anonymous3 : Anonymous3_e__Struct_
 
       # Nested Type Anonymous3_e__Struct_
       @[Extern]
-      record Anonymous3_e__Struct_,
-        inboundRootStoreArraySize : UInt32,
-        inboundTrustedRootStoreCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*
+      struct Anonymous3_e__Struct_
+    property inboundRootStoreArraySize : UInt32
+    property inboundTrustedRootStoreCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*
+    def initialize(@inboundRootStoreArraySize : UInt32, @inboundTrustedRootStoreCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*)
+    end
+      end
 
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        inboundRootArraySize : UInt32,
-        inboundRootCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*
+      struct Anonymous1_e__Struct_
+    property inboundRootArraySize : UInt32
+    property inboundRootCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*
+    def initialize(@inboundRootArraySize : UInt32, @inboundRootCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*)
+    end
+      end
 
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        inboundEnterpriseStoreArraySize : UInt32,
-        inboundEnterpriseStoreCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*
+      struct Anonymous2_e__Struct_
+    property inboundEnterpriseStoreArraySize : UInt32
+    property inboundEnterpriseStoreCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*
+    def initialize(@inboundEnterpriseStoreArraySize : UInt32, @inboundEnterpriseStoreCriteria : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CRITERIA0*)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_, @anonymous3 : Anonymous3_e__Struct_)
+    end
     end
 
+    def initialize(@inboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE, @anonymous1 : Anonymous1_e__Union_, @outboundConfigType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_CONFIG_TYPE, @anonymous2 : Anonymous2_e__Union_, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERT_AUTH, @localCertLocationUrl : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB)
+    end
   end
 
   @[Extern]
-  record IKEEXT_IPV6_CGA_AUTHENTICATION0,
-    keyContainerName : Win32cr::Foundation::PWSTR,
-    cspName : Win32cr::Foundation::PWSTR,
-    cspType : UInt32,
-    cgaModifier : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16,
-    cgaCollisionCount : UInt8
+  struct IKEEXT_IPV6_CGA_AUTHENTICATION0
+    property keyContainerName : Win32cr::Foundation::PWSTR
+    property cspName : Win32cr::Foundation::PWSTR
+    property cspType : UInt32
+    property cgaModifier : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    property cgaCollisionCount : UInt8
+    def initialize(@keyContainerName : Win32cr::Foundation::PWSTR, @cspName : Win32cr::Foundation::PWSTR, @cspType : UInt32, @cgaModifier : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16, @cgaCollisionCount : UInt8)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_KERBEROS_AUTHENTICATION0,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION_FLAGS
+  struct IKEEXT_KERBEROS_AUTHENTICATION0
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION_FLAGS
+    def initialize(@flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION_FLAGS)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_KERBEROS_AUTHENTICATION1,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION_FLAGS,
-    proxyServer : Win32cr::Foundation::PWSTR
+  struct IKEEXT_KERBEROS_AUTHENTICATION1
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION_FLAGS
+    property proxyServer : Win32cr::Foundation::PWSTR
+    def initialize(@flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION_FLAGS, @proxyServer : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_RESERVED_AUTHENTICATION0,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_RESERVED_AUTHENTICATION_FLAGS
+  struct IKEEXT_RESERVED_AUTHENTICATION0
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_RESERVED_AUTHENTICATION_FLAGS
+    def initialize(@flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_RESERVED_AUTHENTICATION_FLAGS)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_NTLM_V2_AUTHENTICATION0,
-    flags : UInt32
+  struct IKEEXT_NTLM_V2_AUTHENTICATION0
+    property flags : UInt32
+    def initialize(@flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_EAP_AUTHENTICATION0,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EAP_AUTHENTICATION_FLAGS
+  struct IKEEXT_EAP_AUTHENTICATION0
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EAP_AUTHENTICATION_FLAGS
+    def initialize(@flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EAP_AUTHENTICATION_FLAGS)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_AUTHENTICATION_METHOD0,
-    authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct IKEEXT_AUTHENTICATION_METHOD0
+    property authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      presharedKeyAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION0,
-      certificateAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION0,
-      kerberosAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION0,
-      ntlmV2Authentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NTLM_V2_AUTHENTICATION0,
-      sslAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION0,
-      cgaAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IPV6_CGA_AUTHENTICATION0
+    struct Anonymous_e__Union_
+    property presharedKeyAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION0
+    property certificateAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION0
+    property kerberosAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION0
+    property ntlmV2Authentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NTLM_V2_AUTHENTICATION0
+    property sslAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION0
+    property cgaAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IPV6_CGA_AUTHENTICATION0
+    def initialize(@presharedKeyAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION0, @certificateAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION0, @kerberosAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION0, @ntlmV2Authentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NTLM_V2_AUTHENTICATION0, @sslAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION0, @cgaAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IPV6_CGA_AUTHENTICATION0)
+    end
+    end
 
+    def initialize(@authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IKEEXT_AUTHENTICATION_METHOD1,
-    authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct IKEEXT_AUTHENTICATION_METHOD1
+    property authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      presharedKeyAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
-      certificateAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION1,
-      kerberosAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION0,
-      ntlmV2Authentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NTLM_V2_AUTHENTICATION0,
-      sslAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION1,
-      cgaAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IPV6_CGA_AUTHENTICATION0,
-      eapAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EAP_AUTHENTICATION0
+    struct Anonymous_e__Union_
+    property presharedKeyAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION1
+    property certificateAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION1
+    property kerberosAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION0
+    property ntlmV2Authentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NTLM_V2_AUTHENTICATION0
+    property sslAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION1
+    property cgaAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IPV6_CGA_AUTHENTICATION0
+    property eapAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EAP_AUTHENTICATION0
+    def initialize(@presharedKeyAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION1, @certificateAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION1, @kerberosAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION0, @ntlmV2Authentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NTLM_V2_AUTHENTICATION0, @sslAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION1, @cgaAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IPV6_CGA_AUTHENTICATION0, @eapAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EAP_AUTHENTICATION0)
+    end
+    end
 
+    def initialize(@authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IKEEXT_AUTHENTICATION_METHOD2,
-    authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct IKEEXT_AUTHENTICATION_METHOD2
+    property authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      presharedKeyAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
-      certificateAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION2,
-      kerberosAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION1,
-      reservedAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_RESERVED_AUTHENTICATION0,
-      ntlmV2Authentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NTLM_V2_AUTHENTICATION0,
-      sslAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION2,
-      cgaAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IPV6_CGA_AUTHENTICATION0,
-      eapAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EAP_AUTHENTICATION0
+    struct Anonymous_e__Union_
+    property presharedKeyAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION1
+    property certificateAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION2
+    property kerberosAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION1
+    property reservedAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_RESERVED_AUTHENTICATION0
+    property ntlmV2Authentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NTLM_V2_AUTHENTICATION0
+    property sslAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION2
+    property cgaAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IPV6_CGA_AUTHENTICATION0
+    property eapAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EAP_AUTHENTICATION0
+    def initialize(@presharedKeyAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION1, @certificateAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION2, @kerberosAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KERBEROS_AUTHENTICATION1, @reservedAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_RESERVED_AUTHENTICATION0, @ntlmV2Authentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NTLM_V2_AUTHENTICATION0, @sslAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_AUTHENTICATION2, @cgaAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IPV6_CGA_AUTHENTICATION0, @eapAuthentication : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EAP_AUTHENTICATION0)
+    end
+    end
 
+    def initialize(@authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IKEEXT_CIPHER_ALGORITHM0,
-    algoIdentifier : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CIPHER_TYPE,
-    keyLen : UInt32,
-    rounds : UInt32
+  struct IKEEXT_CIPHER_ALGORITHM0
+    property algoIdentifier : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CIPHER_TYPE
+    property keyLen : UInt32
+    property rounds : UInt32
+    def initialize(@algoIdentifier : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CIPHER_TYPE, @keyLen : UInt32, @rounds : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_INTEGRITY_ALGORITHM0,
-    algoIdentifier : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_INTEGRITY_TYPE
+  struct IKEEXT_INTEGRITY_ALGORITHM0
+    property algoIdentifier : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_INTEGRITY_TYPE
+    def initialize(@algoIdentifier : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_INTEGRITY_TYPE)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_PROPOSAL0,
-    cipherAlgorithm : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CIPHER_ALGORITHM0,
-    integrityAlgorithm : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_INTEGRITY_ALGORITHM0,
-    maxLifetimeSeconds : UInt32,
-    dhGroup : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_DH_GROUP,
-    quickModeLimit : UInt32
+  struct IKEEXT_PROPOSAL0
+    property cipherAlgorithm : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CIPHER_ALGORITHM0
+    property integrityAlgorithm : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_INTEGRITY_ALGORITHM0
+    property maxLifetimeSeconds : UInt32
+    property dhGroup : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_DH_GROUP
+    property quickModeLimit : UInt32
+    def initialize(@cipherAlgorithm : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CIPHER_ALGORITHM0, @integrityAlgorithm : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_INTEGRITY_ALGORITHM0, @maxLifetimeSeconds : UInt32, @dhGroup : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_DH_GROUP, @quickModeLimit : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_POLICY0,
-    softExpirationTime : UInt32,
-    numAuthenticationMethods : UInt32,
-    authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD0*,
-    initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE,
-    numIkeProposals : UInt32,
-    ikeProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0*,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY_FLAG,
-    maxDynamicFilters : UInt32
+  struct IKEEXT_POLICY0
+    property softExpirationTime : UInt32
+    property numAuthenticationMethods : UInt32
+    property authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD0*
+    property initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
+    property numIkeProposals : UInt32
+    property ikeProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0*
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY_FLAG
+    property maxDynamicFilters : UInt32
+    def initialize(@softExpirationTime : UInt32, @numAuthenticationMethods : UInt32, @authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD0*, @initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE, @numIkeProposals : UInt32, @ikeProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0*, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY_FLAG, @maxDynamicFilters : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_POLICY1,
-    softExpirationTime : UInt32,
-    numAuthenticationMethods : UInt32,
-    authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD1*,
-    initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE,
-    numIkeProposals : UInt32,
-    ikeProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0*,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY_FLAG,
-    maxDynamicFilters : UInt32,
-    retransmitDurationSecs : UInt32
+  struct IKEEXT_POLICY1
+    property softExpirationTime : UInt32
+    property numAuthenticationMethods : UInt32
+    property authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD1*
+    property initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
+    property numIkeProposals : UInt32
+    property ikeProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0*
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY_FLAG
+    property maxDynamicFilters : UInt32
+    property retransmitDurationSecs : UInt32
+    def initialize(@softExpirationTime : UInt32, @numAuthenticationMethods : UInt32, @authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD1*, @initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE, @numIkeProposals : UInt32, @ikeProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0*, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY_FLAG, @maxDynamicFilters : UInt32, @retransmitDurationSecs : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_POLICY2,
-    softExpirationTime : UInt32,
-    numAuthenticationMethods : UInt32,
-    authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD2*,
-    initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE,
-    numIkeProposals : UInt32,
-    ikeProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0*,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY_FLAG,
-    maxDynamicFilters : UInt32,
-    retransmitDurationSecs : UInt32
+  struct IKEEXT_POLICY2
+    property softExpirationTime : UInt32
+    property numAuthenticationMethods : UInt32
+    property authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD2*
+    property initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
+    property numIkeProposals : UInt32
+    property ikeProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0*
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY_FLAG
+    property maxDynamicFilters : UInt32
+    property retransmitDurationSecs : UInt32
+    def initialize(@softExpirationTime : UInt32, @numAuthenticationMethods : UInt32, @authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD2*, @initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE, @numIkeProposals : UInt32, @ikeProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0*, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY_FLAG, @maxDynamicFilters : UInt32, @retransmitDurationSecs : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_EM_POLICY0,
-    numAuthenticationMethods : UInt32,
-    authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD0*,
-    initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
+  struct IKEEXT_EM_POLICY0
+    property numAuthenticationMethods : UInt32
+    property authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD0*
+    property initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
+    def initialize(@numAuthenticationMethods : UInt32, @authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD0*, @initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_EM_POLICY1,
-    numAuthenticationMethods : UInt32,
-    authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD1*,
-    initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
+  struct IKEEXT_EM_POLICY1
+    property numAuthenticationMethods : UInt32
+    property authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD1*
+    property initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
+    def initialize(@numAuthenticationMethods : UInt32, @authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD1*, @initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_EM_POLICY2,
-    numAuthenticationMethods : UInt32,
-    authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD2*,
-    initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
+  struct IKEEXT_EM_POLICY2
+    property numAuthenticationMethods : UInt32
+    property authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD2*
+    property initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
+    def initialize(@numAuthenticationMethods : UInt32, @authenticationMethods : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD2*, @initiatorImpersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS0,
-    currentActiveMainModes : UInt32,
-    totalMainModesStarted : UInt32,
-    totalSuccessfulMainModes : UInt32,
-    totalFailedMainModes : UInt32,
-    totalResponderMainModes : UInt32,
-    currentNewResponderMainModes : UInt32,
-    currentActiveQuickModes : UInt32,
-    totalQuickModesStarted : UInt32,
-    totalSuccessfulQuickModes : UInt32,
-    totalFailedQuickModes : UInt32,
-    totalAcquires : UInt32,
-    totalReinitAcquires : UInt32,
-    currentActiveExtendedModes : UInt32,
-    totalExtendedModesStarted : UInt32,
-    totalSuccessfulExtendedModes : UInt32,
-    totalFailedExtendedModes : UInt32,
-    totalImpersonationExtendedModes : UInt32,
-    totalImpersonationMainModes : UInt32
+  struct IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS0
+    property currentActiveMainModes : UInt32
+    property totalMainModesStarted : UInt32
+    property totalSuccessfulMainModes : UInt32
+    property totalFailedMainModes : UInt32
+    property totalResponderMainModes : UInt32
+    property currentNewResponderMainModes : UInt32
+    property currentActiveQuickModes : UInt32
+    property totalQuickModesStarted : UInt32
+    property totalSuccessfulQuickModes : UInt32
+    property totalFailedQuickModes : UInt32
+    property totalAcquires : UInt32
+    property totalReinitAcquires : UInt32
+    property currentActiveExtendedModes : UInt32
+    property totalExtendedModesStarted : UInt32
+    property totalSuccessfulExtendedModes : UInt32
+    property totalFailedExtendedModes : UInt32
+    property totalImpersonationExtendedModes : UInt32
+    property totalImpersonationMainModes : UInt32
+    def initialize(@currentActiveMainModes : UInt32, @totalMainModesStarted : UInt32, @totalSuccessfulMainModes : UInt32, @totalFailedMainModes : UInt32, @totalResponderMainModes : UInt32, @currentNewResponderMainModes : UInt32, @currentActiveQuickModes : UInt32, @totalQuickModesStarted : UInt32, @totalSuccessfulQuickModes : UInt32, @totalFailedQuickModes : UInt32, @totalAcquires : UInt32, @totalReinitAcquires : UInt32, @currentActiveExtendedModes : UInt32, @totalExtendedModesStarted : UInt32, @totalSuccessfulExtendedModes : UInt32, @totalFailedExtendedModes : UInt32, @totalImpersonationExtendedModes : UInt32, @totalImpersonationMainModes : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS1,
-    currentActiveMainModes : UInt32,
-    totalMainModesStarted : UInt32,
-    totalSuccessfulMainModes : UInt32,
-    totalFailedMainModes : UInt32,
-    totalResponderMainModes : UInt32,
-    currentNewResponderMainModes : UInt32,
-    currentActiveQuickModes : UInt32,
-    totalQuickModesStarted : UInt32,
-    totalSuccessfulQuickModes : UInt32,
-    totalFailedQuickModes : UInt32,
-    totalAcquires : UInt32,
-    totalReinitAcquires : UInt32,
-    currentActiveExtendedModes : UInt32,
-    totalExtendedModesStarted : UInt32,
-    totalSuccessfulExtendedModes : UInt32,
-    totalFailedExtendedModes : UInt32,
-    totalImpersonationExtendedModes : UInt32,
-    totalImpersonationMainModes : UInt32
+  struct IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS1
+    property currentActiveMainModes : UInt32
+    property totalMainModesStarted : UInt32
+    property totalSuccessfulMainModes : UInt32
+    property totalFailedMainModes : UInt32
+    property totalResponderMainModes : UInt32
+    property currentNewResponderMainModes : UInt32
+    property currentActiveQuickModes : UInt32
+    property totalQuickModesStarted : UInt32
+    property totalSuccessfulQuickModes : UInt32
+    property totalFailedQuickModes : UInt32
+    property totalAcquires : UInt32
+    property totalReinitAcquires : UInt32
+    property currentActiveExtendedModes : UInt32
+    property totalExtendedModesStarted : UInt32
+    property totalSuccessfulExtendedModes : UInt32
+    property totalFailedExtendedModes : UInt32
+    property totalImpersonationExtendedModes : UInt32
+    property totalImpersonationMainModes : UInt32
+    def initialize(@currentActiveMainModes : UInt32, @totalMainModesStarted : UInt32, @totalSuccessfulMainModes : UInt32, @totalFailedMainModes : UInt32, @totalResponderMainModes : UInt32, @currentNewResponderMainModes : UInt32, @currentActiveQuickModes : UInt32, @totalQuickModesStarted : UInt32, @totalSuccessfulQuickModes : UInt32, @totalFailedQuickModes : UInt32, @totalAcquires : UInt32, @totalReinitAcquires : UInt32, @currentActiveExtendedModes : UInt32, @totalExtendedModesStarted : UInt32, @totalSuccessfulExtendedModes : UInt32, @totalFailedExtendedModes : UInt32, @totalImpersonationExtendedModes : UInt32, @totalImpersonationMainModes : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_KEYMODULE_STATISTICS0,
-    v4Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS0,
-    v6Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS0,
-    errorFrequencyTable : UInt32[97],
-    mainModeNegotiationTime : UInt32,
-    quickModeNegotiationTime : UInt32,
-    extendedModeNegotiationTime : UInt32
+  struct IKEEXT_KEYMODULE_STATISTICS0
+    property v4Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS0
+    property v6Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS0
+    property errorFrequencyTable : UInt32[97]
+    property mainModeNegotiationTime : UInt32
+    property quickModeNegotiationTime : UInt32
+    property extendedModeNegotiationTime : UInt32
+    def initialize(@v4Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS0, @v6Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS0, @errorFrequencyTable : UInt32[97], @mainModeNegotiationTime : UInt32, @quickModeNegotiationTime : UInt32, @extendedModeNegotiationTime : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_KEYMODULE_STATISTICS1,
-    v4Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS1,
-    v6Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS1,
-    errorFrequencyTable : UInt32[97],
-    mainModeNegotiationTime : UInt32,
-    quickModeNegotiationTime : UInt32,
-    extendedModeNegotiationTime : UInt32
+  struct IKEEXT_KEYMODULE_STATISTICS1
+    property v4Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS1
+    property v6Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS1
+    property errorFrequencyTable : UInt32[97]
+    property mainModeNegotiationTime : UInt32
+    property quickModeNegotiationTime : UInt32
+    property extendedModeNegotiationTime : UInt32
+    def initialize(@v4Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS1, @v6Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS1, @errorFrequencyTable : UInt32[97], @mainModeNegotiationTime : UInt32, @quickModeNegotiationTime : UInt32, @extendedModeNegotiationTime : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0,
-    totalSocketReceiveFailures : UInt32,
-    totalSocketSendFailures : UInt32
+  struct IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0
+    property totalSocketReceiveFailures : UInt32
+    property totalSocketSendFailures : UInt32
+    def initialize(@totalSocketReceiveFailures : UInt32, @totalSocketSendFailures : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1,
-    totalSocketReceiveFailures : UInt32,
-    totalSocketSendFailures : UInt32
+  struct IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1
+    property totalSocketReceiveFailures : UInt32
+    property totalSocketSendFailures : UInt32
+    def initialize(@totalSocketReceiveFailures : UInt32, @totalSocketSendFailures : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_COMMON_STATISTICS0,
-    v4Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0,
-    v6Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0,
-    totalPacketsReceived : UInt32,
-    totalInvalidPacketsReceived : UInt32,
-    currentQueuedWorkitems : UInt32
+  struct IKEEXT_COMMON_STATISTICS0
+    property v4Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0
+    property v6Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0
+    property totalPacketsReceived : UInt32
+    property totalInvalidPacketsReceived : UInt32
+    property currentQueuedWorkitems : UInt32
+    def initialize(@v4Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0, @v6Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0, @totalPacketsReceived : UInt32, @totalInvalidPacketsReceived : UInt32, @currentQueuedWorkitems : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_COMMON_STATISTICS1,
-    v4Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1,
-    v6Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1,
-    totalPacketsReceived : UInt32,
-    totalInvalidPacketsReceived : UInt32,
-    currentQueuedWorkitems : UInt32
+  struct IKEEXT_COMMON_STATISTICS1
+    property v4Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1
+    property v6Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1
+    property totalPacketsReceived : UInt32
+    property totalInvalidPacketsReceived : UInt32
+    property currentQueuedWorkitems : UInt32
+    def initialize(@v4Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1, @v6Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1, @totalPacketsReceived : UInt32, @totalInvalidPacketsReceived : UInt32, @currentQueuedWorkitems : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_STATISTICS0,
-    ikeStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS0,
-    authipStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS0,
-    commonStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COMMON_STATISTICS0
+  struct IKEEXT_STATISTICS0
+    property ikeStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS0
+    property authipStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS0
+    property commonStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COMMON_STATISTICS0
+    def initialize(@ikeStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS0, @authipStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS0, @commonStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COMMON_STATISTICS0)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_STATISTICS1,
-    ikeStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS1,
-    authipStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS1,
-    ikeV2Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS1,
-    commonStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COMMON_STATISTICS1
+  struct IKEEXT_STATISTICS1
+    property ikeStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS1
+    property authipStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS1
+    property ikeV2Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS1
+    property commonStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COMMON_STATISTICS1
+    def initialize(@ikeStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS1, @authipStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS1, @ikeV2Statistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEYMODULE_STATISTICS1, @commonStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COMMON_STATISTICS1)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_TRAFFIC0,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    authIpFilterId : UInt64 do
+  struct IKEEXT_TRAFFIC0
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property authIpFilterId : UInt64
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      remoteV4Address : UInt32,
-      remoteV6Address : UInt8[16]
+    struct Anonymous2_e__Union_
+    property remoteV4Address : UInt32
+    property remoteV6Address : UInt8[16]
+    def initialize(@remoteV4Address : UInt32, @remoteV6Address : UInt8[16])
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      localV4Address : UInt32,
-      localV6Address : UInt8[16]
+    struct Anonymous1_e__Union_
+    property localV4Address : UInt32
+    property localV6Address : UInt8[16]
+    def initialize(@localV4Address : UInt32, @localV6Address : UInt8[16])
+    end
+    end
 
+    def initialize(@ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @authIpFilterId : UInt64)
+    end
   end
 
   @[Extern]
-  record IKEEXT_COOKIE_PAIR0,
-    initiator : UInt64,
-    responder : UInt64
+  struct IKEEXT_COOKIE_PAIR0
+    property initiator : UInt64
+    property responder : UInt64
+    def initialize(@initiator : UInt64, @responder : UInt64)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_CERTIFICATE_CREDENTIAL0,
-    subjectName : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    certHash : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    flags : UInt32
+  struct IKEEXT_CERTIFICATE_CREDENTIAL0
+    property subjectName : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property certHash : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property flags : UInt32
+    def initialize(@subjectName : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @certHash : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_NAME_CREDENTIAL0,
-    principalName : Win32cr::Foundation::PWSTR
+  struct IKEEXT_NAME_CREDENTIAL0
+    property principalName : Win32cr::Foundation::PWSTR
+    def initialize(@principalName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_CREDENTIAL0,
-    authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE,
-    impersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct IKEEXT_CREDENTIAL0
+    property authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE
+    property impersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION0*,
-      certificate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CREDENTIAL0*,
-      name : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NAME_CREDENTIAL0*
+    struct Anonymous_e__Union_
+    property presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION0*
+    property certificate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CREDENTIAL0*
+    property name : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NAME_CREDENTIAL0*
+    def initialize(@presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION0*, @certificate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CREDENTIAL0*, @name : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NAME_CREDENTIAL0*)
+    end
+    end
 
+    def initialize(@authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE, @impersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IKEEXT_CREDENTIAL_PAIR0,
-    localCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL0,
-    peerCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL0
+  struct IKEEXT_CREDENTIAL_PAIR0
+    property localCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL0
+    property peerCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL0
+    def initialize(@localCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL0, @peerCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL0)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_CREDENTIALS0,
-    numCredentials : UInt32,
-    credentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL_PAIR0*
+  struct IKEEXT_CREDENTIALS0
+    property numCredentials : UInt32
+    property credentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL_PAIR0*
+    def initialize(@numCredentials : UInt32, @credentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL_PAIR0*)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_SA_DETAILS0,
-    saId : UInt64,
-    keyModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous : Anonymous_e__Union_,
-    ikeTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_TRAFFIC0,
-    ikeProposal : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0,
-    cookiePair : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COOKIE_PAIR0,
-    ikeCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIALS0,
-    ikePolicyKey : LibC::GUID,
-    virtualIfTunnelId : UInt64 do
+  struct IKEEXT_SA_DETAILS0
+    property saId : UInt64
+    property keyModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous : Anonymous_e__Union_
+    property ikeTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_TRAFFIC0
+    property ikeProposal : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0
+    property cookiePair : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COOKIE_PAIR0
+    property ikeCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIALS0
+    property ikePolicyKey : LibC::GUID
+    property virtualIfTunnelId : UInt64
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      v4UdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    struct Anonymous_e__Union_
+    property v4UdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    def initialize(@v4UdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*)
+    end
+    end
 
+    def initialize(@saId : UInt64, @keyModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE, @ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous : Anonymous_e__Union_, @ikeTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_TRAFFIC0, @ikeProposal : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0, @cookiePair : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COOKIE_PAIR0, @ikeCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIALS0, @ikePolicyKey : LibC::GUID, @virtualIfTunnelId : UInt64)
+    end
   end
 
   @[Extern]
-  record IKEEXT_CERTIFICATE_CREDENTIAL1,
-    subjectName : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    certHash : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    flags : UInt32,
-    certificate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+  struct IKEEXT_CERTIFICATE_CREDENTIAL1
+    property subjectName : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property certHash : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property flags : UInt32
+    property certificate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    def initialize(@subjectName : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @certHash : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @flags : UInt32, @certificate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_CREDENTIAL1,
-    authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE,
-    impersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct IKEEXT_CREDENTIAL1
+    property authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE
+    property impersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION1*,
-      certificate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CREDENTIAL1*,
-      name : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NAME_CREDENTIAL0*
+    struct Anonymous_e__Union_
+    property presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION1*
+    property certificate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CREDENTIAL1*
+    property name : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NAME_CREDENTIAL0*
+    def initialize(@presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION1*, @certificate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CREDENTIAL1*, @name : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NAME_CREDENTIAL0*)
+    end
+    end
 
+    def initialize(@authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE, @impersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IKEEXT_CREDENTIAL_PAIR1,
-    localCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL1,
-    peerCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL1
+  struct IKEEXT_CREDENTIAL_PAIR1
+    property localCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL1
+    property peerCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL1
+    def initialize(@localCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL1, @peerCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL1)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_CREDENTIALS1,
-    numCredentials : UInt32,
-    credentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL_PAIR1*
+  struct IKEEXT_CREDENTIALS1
+    property numCredentials : UInt32
+    property credentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL_PAIR1*
+    def initialize(@numCredentials : UInt32, @credentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL_PAIR1*)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_SA_DETAILS1,
-    saId : UInt64,
-    keyModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous : Anonymous_e__Union_,
-    ikeTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_TRAFFIC0,
-    ikeProposal : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0,
-    cookiePair : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COOKIE_PAIR0,
-    ikeCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIALS1,
-    ikePolicyKey : LibC::GUID,
-    virtualIfTunnelId : UInt64,
-    correlationKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB do
+  struct IKEEXT_SA_DETAILS1
+    property saId : UInt64
+    property keyModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous : Anonymous_e__Union_
+    property ikeTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_TRAFFIC0
+    property ikeProposal : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0
+    property cookiePair : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COOKIE_PAIR0
+    property ikeCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIALS1
+    property ikePolicyKey : LibC::GUID
+    property virtualIfTunnelId : UInt64
+    property correlationKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      v4UdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    struct Anonymous_e__Union_
+    property v4UdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    def initialize(@v4UdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*)
+    end
+    end
 
+    def initialize(@saId : UInt64, @keyModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE, @ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous : Anonymous_e__Union_, @ikeTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_TRAFFIC0, @ikeProposal : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0, @cookiePair : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COOKIE_PAIR0, @ikeCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIALS1, @ikePolicyKey : LibC::GUID, @virtualIfTunnelId : UInt64, @correlationKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB)
+    end
   end
 
   @[Extern]
-  record IKEEXT_CREDENTIAL2,
-    authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE,
-    impersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct IKEEXT_CREDENTIAL2
+    property authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE
+    property impersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION1*,
-      certificate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CREDENTIAL1*,
-      name : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NAME_CREDENTIAL0*
+    struct Anonymous_e__Union_
+    property presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION1*
+    property certificate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CREDENTIAL1*
+    property name : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NAME_CREDENTIAL0*
+    def initialize(@presharedKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PRESHARED_KEY_AUTHENTICATION1*, @certificate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CERTIFICATE_CREDENTIAL1*, @name : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_NAME_CREDENTIAL0*)
+    end
+    end
 
+    def initialize(@authenticationMethodType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE, @impersonationType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IKEEXT_CREDENTIAL_PAIR2,
-    localCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL2,
-    peerCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL2
+  struct IKEEXT_CREDENTIAL_PAIR2
+    property localCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL2
+    property peerCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL2
+    def initialize(@localCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL2, @peerCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL2)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_CREDENTIALS2,
-    numCredentials : UInt32,
-    credentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL_PAIR2*
+  struct IKEEXT_CREDENTIALS2
+    property numCredentials : UInt32
+    property credentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL_PAIR2*
+    def initialize(@numCredentials : UInt32, @credentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL_PAIR2*)
+    end
+  end
 
   @[Extern]
-  record IKEEXT_SA_DETAILS2,
-    saId : UInt64,
-    keyModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous : Anonymous_e__Union_,
-    ikeTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_TRAFFIC0,
-    ikeProposal : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0,
-    cookiePair : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COOKIE_PAIR0,
-    ikeCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIALS2,
-    ikePolicyKey : LibC::GUID,
-    virtualIfTunnelId : UInt64,
-    correlationKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB do
+  struct IKEEXT_SA_DETAILS2
+    property saId : UInt64
+    property keyModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous : Anonymous_e__Union_
+    property ikeTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_TRAFFIC0
+    property ikeProposal : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0
+    property cookiePair : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COOKIE_PAIR0
+    property ikeCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIALS2
+    property ikePolicyKey : LibC::GUID
+    property virtualIfTunnelId : UInt64
+    property correlationKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      v4UdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    struct Anonymous_e__Union_
+    property v4UdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    def initialize(@v4UdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*)
+    end
+    end
 
+    def initialize(@saId : UInt64, @keyModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE, @ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous : Anonymous_e__Union_, @ikeTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_TRAFFIC0, @ikeProposal : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0, @cookiePair : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_COOKIE_PAIR0, @ikeCredentials : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIALS2, @ikePolicyKey : LibC::GUID, @virtualIfTunnelId : UInt64, @correlationKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB)
+    end
   end
 
   @[Extern]
-  record IKEEXT_SA_ENUM_TEMPLATE0,
-    localSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0,
-    remoteSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0,
-    localMainModeCertHash : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+  struct IKEEXT_SA_ENUM_TEMPLATE0
+    property localSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+    property remoteSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+    property localMainModeCertHash : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    def initialize(@localSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0, @remoteSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0, @localMainModeCertHash : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB)
+    end
+  end
 
   @[Extern]
-  record IPSEC_SA_LIFETIME0,
-    lifetimeSeconds : UInt32,
-    lifetimeKilobytes : UInt32,
-    lifetimePackets : UInt32
+  struct IPSEC_SA_LIFETIME0
+    property lifetimeSeconds : UInt32
+    property lifetimeKilobytes : UInt32
+    property lifetimePackets : UInt32
+    def initialize(@lifetimeSeconds : UInt32, @lifetimeKilobytes : UInt32, @lifetimePackets : UInt32)
+    end
+  end
 
   @[Extern]
-  record IPSEC_AUTH_TRANSFORM_ID0,
-    authType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TYPE,
-    authConfig : UInt8
+  struct IPSEC_AUTH_TRANSFORM_ID0
+    property authType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TYPE
+    property authConfig : UInt8
+    def initialize(@authType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TYPE, @authConfig : UInt8)
+    end
+  end
 
   @[Extern]
-  record IPSEC_AUTH_TRANSFORM0,
-    authTransformId : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM_ID0,
-    cryptoModuleId : LibC::GUID*
+  struct IPSEC_AUTH_TRANSFORM0
+    property authTransformId : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM_ID0
+    property cryptoModuleId : LibC::GUID*
+    def initialize(@authTransformId : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM_ID0, @cryptoModuleId : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_CIPHER_TRANSFORM_ID0,
-    cipherType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TYPE,
-    cipherConfig : UInt8
+  struct IPSEC_CIPHER_TRANSFORM_ID0
+    property cipherType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TYPE
+    property cipherConfig : UInt8
+    def initialize(@cipherType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TYPE, @cipherConfig : UInt8)
+    end
+  end
 
   @[Extern]
-  record IPSEC_CIPHER_TRANSFORM0,
-    cipherTransformId : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TRANSFORM_ID0,
-    cryptoModuleId : LibC::GUID*
+  struct IPSEC_CIPHER_TRANSFORM0
+    property cipherTransformId : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TRANSFORM_ID0
+    property cryptoModuleId : LibC::GUID*
+    def initialize(@cipherTransformId : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TRANSFORM_ID0, @cryptoModuleId : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_AUTH_AND_CIPHER_TRANSFORM0,
-    authTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0,
-    cipherTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TRANSFORM0
+  struct IPSEC_AUTH_AND_CIPHER_TRANSFORM0
+    property authTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0
+    property cipherTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TRANSFORM0
+    def initialize(@authTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0, @cipherTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TRANSFORM0)
+    end
+  end
 
   @[Extern]
-  record IPSEC_SA_TRANSFORM0,
-    ipsecTransformType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSFORM_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct IPSEC_SA_TRANSFORM0
+    property ipsecTransformType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSFORM_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ahTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0*,
-      espAuthTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0*,
-      espCipherTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TRANSFORM0*,
-      espAuthAndCipherTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_AND_CIPHER_TRANSFORM0*,
-      espAuthFwTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0*
+    struct Anonymous_e__Union_
+    property ahTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0*
+    property espAuthTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0*
+    property espCipherTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TRANSFORM0*
+    property espAuthAndCipherTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_AND_CIPHER_TRANSFORM0*
+    property espAuthFwTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0*
+    def initialize(@ahTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0*, @espAuthTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0*, @espCipherTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TRANSFORM0*, @espAuthAndCipherTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_AND_CIPHER_TRANSFORM0*, @espAuthFwTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0*)
+    end
+    end
 
+    def initialize(@ipsecTransformType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSFORM_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IPSEC_PROPOSAL0,
-    lifetime : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_LIFETIME0,
-    numSaTransforms : UInt32,
-    saTransforms : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_TRANSFORM0*,
-    pfsGroup : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PFS_GROUP
+  struct IPSEC_PROPOSAL0
+    property lifetime : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_LIFETIME0
+    property numSaTransforms : UInt32
+    property saTransforms : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_TRANSFORM0*
+    property pfsGroup : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PFS_GROUP
+    def initialize(@lifetime : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_LIFETIME0, @numSaTransforms : UInt32, @saTransforms : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_TRANSFORM0*, @pfsGroup : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PFS_GROUP)
+    end
+  end
 
   @[Extern]
-  record IPSEC_SA_IDLE_TIMEOUT0,
-    idleTimeoutSeconds : UInt32,
-    idleTimeoutSecondsFailOver : UInt32
+  struct IPSEC_SA_IDLE_TIMEOUT0
+    property idleTimeoutSeconds : UInt32
+    property idleTimeoutSecondsFailOver : UInt32
+    def initialize(@idleTimeoutSeconds : UInt32, @idleTimeoutSecondsFailOver : UInt32)
+    end
+  end
 
   @[Extern]
-  record IPSEC_TRAFFIC_SELECTOR0_,
-    protocolId : UInt8,
-    portStart : UInt16,
-    portEnd : UInt16,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct IPSEC_TRAFFIC_SELECTOR0_
+    property protocolId : UInt8
+    property portStart : UInt16
+    property portEnd : UInt16
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      startV4Address : UInt32,
-      startV6Address : UInt8[16]
+    struct Anonymous1_e__Union_
+    property startV4Address : UInt32
+    property startV6Address : UInt8[16]
+    def initialize(@startV4Address : UInt32, @startV6Address : UInt8[16])
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      endV4Address : UInt32,
-      endV6Address : UInt8[16]
+    struct Anonymous2_e__Union_
+    property endV4Address : UInt32
+    property endV6Address : UInt8[16]
+    def initialize(@endV4Address : UInt32, @endV6Address : UInt8[16])
+    end
+    end
 
+    def initialize(@protocolId : UInt8, @portStart : UInt16, @portEnd : UInt16, @ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record IPSEC_TRAFFIC_SELECTOR_POLICY0_,
-    flags : UInt32,
-    numLocalTrafficSelectors : UInt32,
-    localTrafficSelectors : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_SELECTOR0_*,
-    numRemoteTrafficSelectors : UInt32,
-    remoteTrafficSelectors : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_SELECTOR0_*
+  struct IPSEC_TRAFFIC_SELECTOR_POLICY0_
+    property flags : UInt32
+    property numLocalTrafficSelectors : UInt32
+    property localTrafficSelectors : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_SELECTOR0_*
+    property numRemoteTrafficSelectors : UInt32
+    property remoteTrafficSelectors : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_SELECTOR0_*
+    def initialize(@flags : UInt32, @numLocalTrafficSelectors : UInt32, @localTrafficSelectors : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_SELECTOR0_*, @numRemoteTrafficSelectors : UInt32, @remoteTrafficSelectors : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_SELECTOR0_*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_TRANSPORT_POLICY0,
-    numIpsecProposals : UInt32,
-    ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG,
-    ndAllowClearTimeoutSeconds : UInt32,
-    saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0,
-    emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY0*
+  struct IPSEC_TRANSPORT_POLICY0
+    property numIpsecProposals : UInt32
+    property ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG
+    property ndAllowClearTimeoutSeconds : UInt32
+    property saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0
+    property emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY0*
+    def initialize(@numIpsecProposals : UInt32, @ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG, @ndAllowClearTimeoutSeconds : UInt32, @saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0, @emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY0*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_TRANSPORT_POLICY1,
-    numIpsecProposals : UInt32,
-    ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG,
-    ndAllowClearTimeoutSeconds : UInt32,
-    saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0,
-    emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY1*
+  struct IPSEC_TRANSPORT_POLICY1
+    property numIpsecProposals : UInt32
+    property ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG
+    property ndAllowClearTimeoutSeconds : UInt32
+    property saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0
+    property emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY1*
+    def initialize(@numIpsecProposals : UInt32, @ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG, @ndAllowClearTimeoutSeconds : UInt32, @saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0, @emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY1*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_TRANSPORT_POLICY2,
-    numIpsecProposals : UInt32,
-    ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG,
-    ndAllowClearTimeoutSeconds : UInt32,
-    saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0,
-    emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY2*
+  struct IPSEC_TRANSPORT_POLICY2
+    property numIpsecProposals : UInt32
+    property ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG
+    property ndAllowClearTimeoutSeconds : UInt32
+    property saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0
+    property emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY2*
+    def initialize(@numIpsecProposals : UInt32, @ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG, @ndAllowClearTimeoutSeconds : UInt32, @saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0, @emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY2*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_TUNNEL_ENDPOINTS0,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct IPSEC_TUNNEL_ENDPOINTS0
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      localV4Address : UInt32,
-      localV6Address : UInt8[16]
+    struct Anonymous1_e__Union_
+    property localV4Address : UInt32
+    property localV6Address : UInt8[16]
+    def initialize(@localV4Address : UInt32, @localV6Address : UInt8[16])
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      remoteV4Address : UInt32,
-      remoteV6Address : UInt8[16]
+    struct Anonymous2_e__Union_
+    property remoteV4Address : UInt32
+    property remoteV6Address : UInt8[16]
+    def initialize(@remoteV4Address : UInt32, @remoteV6Address : UInt8[16])
+    end
+    end
 
+    def initialize(@ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record IPSEC_TUNNEL_ENDPOINT0,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct IPSEC_TUNNEL_ENDPOINT0
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      v4Address : UInt32,
-      v6Address : UInt8[16]
+    struct Anonymous_e__Union_
+    property v4Address : UInt32
+    property v6Address : UInt8[16]
+    def initialize(@v4Address : UInt32, @v6Address : UInt8[16])
+    end
+    end
 
+    def initialize(@ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IPSEC_TUNNEL_ENDPOINTS2,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    localIfLuid : UInt64,
-    remoteFqdn : Win32cr::Foundation::PWSTR,
-    numAddresses : UInt32,
-    remoteAddresses : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINT0* do
+  struct IPSEC_TUNNEL_ENDPOINTS2
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property localIfLuid : UInt64
+    property remoteFqdn : Win32cr::Foundation::PWSTR
+    property numAddresses : UInt32
+    property remoteAddresses : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINT0*
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      remoteV4Address : UInt32,
-      remoteV6Address : UInt8[16]
+    struct Anonymous2_e__Union_
+    property remoteV4Address : UInt32
+    property remoteV6Address : UInt8[16]
+    def initialize(@remoteV4Address : UInt32, @remoteV6Address : UInt8[16])
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      localV4Address : UInt32,
-      localV6Address : UInt8[16]
+    struct Anonymous1_e__Union_
+    property localV4Address : UInt32
+    property localV6Address : UInt8[16]
+    def initialize(@localV4Address : UInt32, @localV6Address : UInt8[16])
+    end
+    end
 
+    def initialize(@ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @localIfLuid : UInt64, @remoteFqdn : Win32cr::Foundation::PWSTR, @numAddresses : UInt32, @remoteAddresses : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINT0*)
+    end
   end
 
   @[Extern]
-  record IPSEC_TUNNEL_ENDPOINTS1,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    localIfLuid : UInt64 do
+  struct IPSEC_TUNNEL_ENDPOINTS1
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property localIfLuid : UInt64
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      remoteV4Address : UInt32,
-      remoteV6Address : UInt8[16]
+    struct Anonymous2_e__Union_
+    property remoteV4Address : UInt32
+    property remoteV6Address : UInt8[16]
+    def initialize(@remoteV4Address : UInt32, @remoteV6Address : UInt8[16])
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      localV4Address : UInt32,
-      localV6Address : UInt8[16]
+    struct Anonymous1_e__Union_
+    property localV4Address : UInt32
+    property localV6Address : UInt8[16]
+    def initialize(@localV4Address : UInt32, @localV6Address : UInt8[16])
+    end
+    end
 
+    def initialize(@ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @localIfLuid : UInt64)
+    end
   end
 
   @[Extern]
-  record IPSEC_TUNNEL_POLICY0,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG,
-    numIpsecProposals : UInt32,
-    ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*,
-    tunnelEndpoints : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINTS0,
-    saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0,
-    emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY0*
+  struct IPSEC_TUNNEL_POLICY0
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG
+    property numIpsecProposals : UInt32
+    property ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*
+    property tunnelEndpoints : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINTS0
+    property saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0
+    property emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY0*
+    def initialize(@flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG, @numIpsecProposals : UInt32, @ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*, @tunnelEndpoints : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINTS0, @saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0, @emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY0*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_TUNNEL_POLICY1,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG,
-    numIpsecProposals : UInt32,
-    ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*,
-    tunnelEndpoints : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINTS1,
-    saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0,
-    emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY1*
+  struct IPSEC_TUNNEL_POLICY1
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG
+    property numIpsecProposals : UInt32
+    property ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*
+    property tunnelEndpoints : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINTS1
+    property saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0
+    property emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY1*
+    def initialize(@flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG, @numIpsecProposals : UInt32, @ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*, @tunnelEndpoints : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINTS1, @saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0, @emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY1*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_TUNNEL_POLICY2,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG,
-    numIpsecProposals : UInt32,
-    ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*,
-    tunnelEndpoints : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINTS2,
-    saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0,
-    emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY2*,
-    fwdPathSaLifetime : UInt32
+  struct IPSEC_TUNNEL_POLICY2
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG
+    property numIpsecProposals : UInt32
+    property ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*
+    property tunnelEndpoints : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINTS2
+    property saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0
+    property emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY2*
+    property fwdPathSaLifetime : UInt32
+    def initialize(@flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_POLICY_FLAG, @numIpsecProposals : UInt32, @ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*, @tunnelEndpoints : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINTS2, @saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0, @emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY2*, @fwdPathSaLifetime : UInt32)
+    end
+  end
 
   @[Extern]
-  record IPSEC_TUNNEL_POLICY3_,
-    flags : UInt32,
-    numIpsecProposals : UInt32,
-    ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*,
-    tunnelEndpoints : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINTS2,
-    saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0,
-    emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY2*,
-    fwdPathSaLifetime : UInt32,
-    compartmentId : UInt32,
-    numTrafficSelectorPolicy : UInt32,
-    trafficSelectorPolicies : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_SELECTOR_POLICY0_*
+  struct IPSEC_TUNNEL_POLICY3_
+    property flags : UInt32
+    property numIpsecProposals : UInt32
+    property ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*
+    property tunnelEndpoints : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINTS2
+    property saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0
+    property emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY2*
+    property fwdPathSaLifetime : UInt32
+    property compartmentId : UInt32
+    property numTrafficSelectorPolicy : UInt32
+    property trafficSelectorPolicies : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_SELECTOR_POLICY0_*
+    def initialize(@flags : UInt32, @numIpsecProposals : UInt32, @ipsecProposals : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PROPOSAL0*, @tunnelEndpoints : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_ENDPOINTS2, @saIdleTimeout : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_IDLE_TIMEOUT0, @emPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_POLICY2*, @fwdPathSaLifetime : UInt32, @compartmentId : UInt32, @numTrafficSelectorPolicy : UInt32, @trafficSelectorPolicies : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_SELECTOR_POLICY0_*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_KEYING_POLICY0,
-    numKeyMods : UInt32,
-    keyModKeys : LibC::GUID*
+  struct IPSEC_KEYING_POLICY0
+    property numKeyMods : UInt32
+    property keyModKeys : LibC::GUID*
+    def initialize(@numKeyMods : UInt32, @keyModKeys : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_KEYING_POLICY1,
-    numKeyMods : UInt32,
-    keyModKeys : LibC::GUID*,
-    flags : UInt32
+  struct IPSEC_KEYING_POLICY1
+    property numKeyMods : UInt32
+    property keyModKeys : LibC::GUID*
+    property flags : UInt32
+    def initialize(@numKeyMods : UInt32, @keyModKeys : LibC::GUID*, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record IPSEC_AGGREGATE_SA_STATISTICS0,
-    activeSas : UInt32,
-    pendingSaNegotiations : UInt32,
-    totalSasAdded : UInt32,
-    totalSasDeleted : UInt32,
-    successfulRekeys : UInt32,
-    activeTunnels : UInt32,
-    offloadedSas : UInt32
+  struct IPSEC_AGGREGATE_SA_STATISTICS0
+    property activeSas : UInt32
+    property pendingSaNegotiations : UInt32
+    property totalSasAdded : UInt32
+    property totalSasDeleted : UInt32
+    property successfulRekeys : UInt32
+    property activeTunnels : UInt32
+    property offloadedSas : UInt32
+    def initialize(@activeSas : UInt32, @pendingSaNegotiations : UInt32, @totalSasAdded : UInt32, @totalSasDeleted : UInt32, @successfulRekeys : UInt32, @activeTunnels : UInt32, @offloadedSas : UInt32)
+    end
+  end
 
   @[Extern]
-  record IPSEC_ESP_DROP_PACKET_STATISTICS0,
-    invalidSpisOnInbound : UInt32,
-    decryptionFailuresOnInbound : UInt32,
-    authenticationFailuresOnInbound : UInt32,
-    replayCheckFailuresOnInbound : UInt32,
-    saNotInitializedOnInbound : UInt32
+  struct IPSEC_ESP_DROP_PACKET_STATISTICS0
+    property invalidSpisOnInbound : UInt32
+    property decryptionFailuresOnInbound : UInt32
+    property authenticationFailuresOnInbound : UInt32
+    property replayCheckFailuresOnInbound : UInt32
+    property saNotInitializedOnInbound : UInt32
+    def initialize(@invalidSpisOnInbound : UInt32, @decryptionFailuresOnInbound : UInt32, @authenticationFailuresOnInbound : UInt32, @replayCheckFailuresOnInbound : UInt32, @saNotInitializedOnInbound : UInt32)
+    end
+  end
 
   @[Extern]
-  record IPSEC_AH_DROP_PACKET_STATISTICS0,
-    invalidSpisOnInbound : UInt32,
-    authenticationFailuresOnInbound : UInt32,
-    replayCheckFailuresOnInbound : UInt32,
-    saNotInitializedOnInbound : UInt32
+  struct IPSEC_AH_DROP_PACKET_STATISTICS0
+    property invalidSpisOnInbound : UInt32
+    property authenticationFailuresOnInbound : UInt32
+    property replayCheckFailuresOnInbound : UInt32
+    property saNotInitializedOnInbound : UInt32
+    def initialize(@invalidSpisOnInbound : UInt32, @authenticationFailuresOnInbound : UInt32, @replayCheckFailuresOnInbound : UInt32, @saNotInitializedOnInbound : UInt32)
+    end
+  end
 
   @[Extern]
-  record IPSEC_AGGREGATE_DROP_PACKET_STATISTICS0,
-    invalidSpisOnInbound : UInt32,
-    decryptionFailuresOnInbound : UInt32,
-    authenticationFailuresOnInbound : UInt32,
-    udpEspValidationFailuresOnInbound : UInt32,
-    replayCheckFailuresOnInbound : UInt32,
-    invalidClearTextInbound : UInt32,
-    saNotInitializedOnInbound : UInt32,
-    receiveOverIncorrectSaInbound : UInt32,
-    secureReceivesNotMatchingFilters : UInt32
+  struct IPSEC_AGGREGATE_DROP_PACKET_STATISTICS0
+    property invalidSpisOnInbound : UInt32
+    property decryptionFailuresOnInbound : UInt32
+    property authenticationFailuresOnInbound : UInt32
+    property udpEspValidationFailuresOnInbound : UInt32
+    property replayCheckFailuresOnInbound : UInt32
+    property invalidClearTextInbound : UInt32
+    property saNotInitializedOnInbound : UInt32
+    property receiveOverIncorrectSaInbound : UInt32
+    property secureReceivesNotMatchingFilters : UInt32
+    def initialize(@invalidSpisOnInbound : UInt32, @decryptionFailuresOnInbound : UInt32, @authenticationFailuresOnInbound : UInt32, @udpEspValidationFailuresOnInbound : UInt32, @replayCheckFailuresOnInbound : UInt32, @invalidClearTextInbound : UInt32, @saNotInitializedOnInbound : UInt32, @receiveOverIncorrectSaInbound : UInt32, @secureReceivesNotMatchingFilters : UInt32)
+    end
+  end
 
   @[Extern]
-  record IPSEC_AGGREGATE_DROP_PACKET_STATISTICS1,
-    invalidSpisOnInbound : UInt32,
-    decryptionFailuresOnInbound : UInt32,
-    authenticationFailuresOnInbound : UInt32,
-    udpEspValidationFailuresOnInbound : UInt32,
-    replayCheckFailuresOnInbound : UInt32,
-    invalidClearTextInbound : UInt32,
-    saNotInitializedOnInbound : UInt32,
-    receiveOverIncorrectSaInbound : UInt32,
-    secureReceivesNotMatchingFilters : UInt32,
-    totalDropPacketsInbound : UInt32
+  struct IPSEC_AGGREGATE_DROP_PACKET_STATISTICS1
+    property invalidSpisOnInbound : UInt32
+    property decryptionFailuresOnInbound : UInt32
+    property authenticationFailuresOnInbound : UInt32
+    property udpEspValidationFailuresOnInbound : UInt32
+    property replayCheckFailuresOnInbound : UInt32
+    property invalidClearTextInbound : UInt32
+    property saNotInitializedOnInbound : UInt32
+    property receiveOverIncorrectSaInbound : UInt32
+    property secureReceivesNotMatchingFilters : UInt32
+    property totalDropPacketsInbound : UInt32
+    def initialize(@invalidSpisOnInbound : UInt32, @decryptionFailuresOnInbound : UInt32, @authenticationFailuresOnInbound : UInt32, @udpEspValidationFailuresOnInbound : UInt32, @replayCheckFailuresOnInbound : UInt32, @invalidClearTextInbound : UInt32, @saNotInitializedOnInbound : UInt32, @receiveOverIncorrectSaInbound : UInt32, @secureReceivesNotMatchingFilters : UInt32, @totalDropPacketsInbound : UInt32)
+    end
+  end
 
   @[Extern]
-  record IPSEC_TRAFFIC_STATISTICS0,
-    encryptedByteCount : UInt64,
-    authenticatedAHByteCount : UInt64,
-    authenticatedESPByteCount : UInt64,
-    transportByteCount : UInt64,
-    tunnelByteCount : UInt64,
-    offloadByteCount : UInt64
+  struct IPSEC_TRAFFIC_STATISTICS0
+    property encryptedByteCount : UInt64
+    property authenticatedAHByteCount : UInt64
+    property authenticatedESPByteCount : UInt64
+    property transportByteCount : UInt64
+    property tunnelByteCount : UInt64
+    property offloadByteCount : UInt64
+    def initialize(@encryptedByteCount : UInt64, @authenticatedAHByteCount : UInt64, @authenticatedESPByteCount : UInt64, @transportByteCount : UInt64, @tunnelByteCount : UInt64, @offloadByteCount : UInt64)
+    end
+  end
 
   @[Extern]
-  record IPSEC_TRAFFIC_STATISTICS1,
-    encryptedByteCount : UInt64,
-    authenticatedAHByteCount : UInt64,
-    authenticatedESPByteCount : UInt64,
-    transportByteCount : UInt64,
-    tunnelByteCount : UInt64,
-    offloadByteCount : UInt64,
-    totalSuccessfulPackets : UInt64
+  struct IPSEC_TRAFFIC_STATISTICS1
+    property encryptedByteCount : UInt64
+    property authenticatedAHByteCount : UInt64
+    property authenticatedESPByteCount : UInt64
+    property transportByteCount : UInt64
+    property tunnelByteCount : UInt64
+    property offloadByteCount : UInt64
+    property totalSuccessfulPackets : UInt64
+    def initialize(@encryptedByteCount : UInt64, @authenticatedAHByteCount : UInt64, @authenticatedESPByteCount : UInt64, @transportByteCount : UInt64, @tunnelByteCount : UInt64, @offloadByteCount : UInt64, @totalSuccessfulPackets : UInt64)
+    end
+  end
 
   @[Extern]
-  record IPSEC_STATISTICS0,
-    aggregateSaStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AGGREGATE_SA_STATISTICS0,
-    espDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_ESP_DROP_PACKET_STATISTICS0,
-    ahDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AH_DROP_PACKET_STATISTICS0,
-    aggregateDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AGGREGATE_DROP_PACKET_STATISTICS0,
-    inboundTrafficStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_STATISTICS0,
-    outboundTrafficStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_STATISTICS0
+  struct IPSEC_STATISTICS0
+    property aggregateSaStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AGGREGATE_SA_STATISTICS0
+    property espDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_ESP_DROP_PACKET_STATISTICS0
+    property ahDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AH_DROP_PACKET_STATISTICS0
+    property aggregateDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AGGREGATE_DROP_PACKET_STATISTICS0
+    property inboundTrafficStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_STATISTICS0
+    property outboundTrafficStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_STATISTICS0
+    def initialize(@aggregateSaStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AGGREGATE_SA_STATISTICS0, @espDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_ESP_DROP_PACKET_STATISTICS0, @ahDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AH_DROP_PACKET_STATISTICS0, @aggregateDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AGGREGATE_DROP_PACKET_STATISTICS0, @inboundTrafficStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_STATISTICS0, @outboundTrafficStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_STATISTICS0)
+    end
+  end
 
   @[Extern]
-  record IPSEC_STATISTICS1,
-    aggregateSaStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AGGREGATE_SA_STATISTICS0,
-    espDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_ESP_DROP_PACKET_STATISTICS0,
-    ahDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AH_DROP_PACKET_STATISTICS0,
-    aggregateDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AGGREGATE_DROP_PACKET_STATISTICS1,
-    inboundTrafficStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_STATISTICS1,
-    outboundTrafficStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_STATISTICS1
+  struct IPSEC_STATISTICS1
+    property aggregateSaStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AGGREGATE_SA_STATISTICS0
+    property espDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_ESP_DROP_PACKET_STATISTICS0
+    property ahDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AH_DROP_PACKET_STATISTICS0
+    property aggregateDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AGGREGATE_DROP_PACKET_STATISTICS1
+    property inboundTrafficStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_STATISTICS1
+    property outboundTrafficStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_STATISTICS1
+    def initialize(@aggregateSaStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AGGREGATE_SA_STATISTICS0, @espDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_ESP_DROP_PACKET_STATISTICS0, @ahDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AH_DROP_PACKET_STATISTICS0, @aggregateDropPacketStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AGGREGATE_DROP_PACKET_STATISTICS1, @inboundTrafficStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_STATISTICS1, @outboundTrafficStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_STATISTICS1)
+    end
+  end
 
   @[Extern]
-  record IPSEC_SA_AUTH_INFORMATION0,
-    authTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0,
-    authKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+  struct IPSEC_SA_AUTH_INFORMATION0
+    property authTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0
+    property authKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    def initialize(@authTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_AUTH_TRANSFORM0, @authKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB)
+    end
+  end
 
   @[Extern]
-  record IPSEC_SA_CIPHER_INFORMATION0,
-    cipherTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TRANSFORM0,
-    cipherKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+  struct IPSEC_SA_CIPHER_INFORMATION0
+    property cipherTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TRANSFORM0
+    property cipherKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    def initialize(@cipherTransform : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_CIPHER_TRANSFORM0, @cipherKey : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB)
+    end
+  end
 
   @[Extern]
-  record IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0,
-    saCipherInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CIPHER_INFORMATION0,
-    saAuthInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_INFORMATION0
+  struct IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0
+    property saCipherInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CIPHER_INFORMATION0
+    property saAuthInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_INFORMATION0
+    def initialize(@saCipherInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CIPHER_INFORMATION0, @saAuthInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_INFORMATION0)
+    end
+  end
 
   @[Extern]
-  record IPSEC_SA0,
-    spi : UInt32,
-    saTransformType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSFORM_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct IPSEC_SA0
+    property spi : UInt32
+    property saTransformType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSFORM_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ahInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_INFORMATION0*,
-      espAuthInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_INFORMATION0*,
-      espCipherInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CIPHER_INFORMATION0*,
-      espAuthAndCipherInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0*,
-      espAuthFwInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_INFORMATION0*
+    struct Anonymous_e__Union_
+    property ahInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_INFORMATION0*
+    property espAuthInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_INFORMATION0*
+    property espCipherInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CIPHER_INFORMATION0*
+    property espAuthAndCipherInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0*
+    property espAuthFwInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_INFORMATION0*
+    def initialize(@ahInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_INFORMATION0*, @espAuthInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_INFORMATION0*, @espCipherInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CIPHER_INFORMATION0*, @espAuthAndCipherInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0*, @espAuthFwInformation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_AUTH_INFORMATION0*)
+    end
+    end
 
+    def initialize(@spi : UInt32, @saTransformType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSFORM_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IPSEC_KEYMODULE_STATE0,
-    keyModuleKey : LibC::GUID,
-    stateBlob : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+  struct IPSEC_KEYMODULE_STATE0
+    property keyModuleKey : LibC::GUID
+    property stateBlob : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    def initialize(@keyModuleKey : LibC::GUID, @stateBlob : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB)
+    end
+  end
 
   @[Extern]
-  record IPSEC_TOKEN0,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TOKEN_TYPE,
-    principal : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TOKEN_PRINCIPAL,
-    mode : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TOKEN_MODE,
-    token : UInt64
+  struct IPSEC_TOKEN0
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TOKEN_TYPE
+    property principal : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TOKEN_PRINCIPAL
+    property mode : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TOKEN_MODE
+    property token : UInt64
+    def initialize(@type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TOKEN_TYPE, @principal : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TOKEN_PRINCIPAL, @mode : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TOKEN_MODE, @token : UInt64)
+    end
+  end
 
   @[Extern]
-  record IPSEC_ID0,
-    mmTargetName : Win32cr::Foundation::PWSTR,
-    emTargetName : Win32cr::Foundation::PWSTR,
-    numTokens : UInt32,
-    tokens : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TOKEN0*,
-    explicitCredentials : UInt64,
-    logonId : UInt64
+  struct IPSEC_ID0
+    property mmTargetName : Win32cr::Foundation::PWSTR
+    property emTargetName : Win32cr::Foundation::PWSTR
+    property numTokens : UInt32
+    property tokens : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TOKEN0*
+    property explicitCredentials : UInt64
+    property logonId : UInt64
+    def initialize(@mmTargetName : Win32cr::Foundation::PWSTR, @emTargetName : Win32cr::Foundation::PWSTR, @numTokens : UInt32, @tokens : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TOKEN0*, @explicitCredentials : UInt64, @logonId : UInt64)
+    end
+  end
 
   @[Extern]
-  record IPSEC_SA_BUNDLE0,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE_FLAGS,
-    lifetime : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_LIFETIME0,
-    idleTimeoutSeconds : UInt32,
-    ndAllowClearTimeoutSeconds : UInt32,
-    ipsecId : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_ID0*,
-    napContext : UInt32,
-    qmSaId : UInt32,
-    numSAs : UInt32,
-    saList : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA0*,
-    keyModuleState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYMODULE_STATE0*,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous : Anonymous_e__Union_,
-    mmSaId : UInt64,
-    pfsGroup : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PFS_GROUP do
+  struct IPSEC_SA_BUNDLE0
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE_FLAGS
+    property lifetime : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_LIFETIME0
+    property idleTimeoutSeconds : UInt32
+    property ndAllowClearTimeoutSeconds : UInt32
+    property ipsecId : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_ID0*
+    property napContext : UInt32
+    property qmSaId : UInt32
+    property numSAs : UInt32
+    property saList : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA0*
+    property keyModuleState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYMODULE_STATE0*
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous : Anonymous_e__Union_
+    property mmSaId : UInt64
+    property pfsGroup : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PFS_GROUP
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      peerV4PrivateAddress : UInt32
+    struct Anonymous_e__Union_
+    property peerV4PrivateAddress : UInt32
+    def initialize(@peerV4PrivateAddress : UInt32)
+    end
+    end
 
+    def initialize(@flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE_FLAGS, @lifetime : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_LIFETIME0, @idleTimeoutSeconds : UInt32, @ndAllowClearTimeoutSeconds : UInt32, @ipsecId : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_ID0*, @napContext : UInt32, @qmSaId : UInt32, @numSAs : UInt32, @saList : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA0*, @keyModuleState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYMODULE_STATE0*, @ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous : Anonymous_e__Union_, @mmSaId : UInt64, @pfsGroup : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PFS_GROUP)
+    end
   end
 
   @[Extern]
-  record IPSEC_SA_BUNDLE1,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE_FLAGS,
-    lifetime : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_LIFETIME0,
-    idleTimeoutSeconds : UInt32,
-    ndAllowClearTimeoutSeconds : UInt32,
-    ipsecId : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_ID0*,
-    napContext : UInt32,
-    qmSaId : UInt32,
-    numSAs : UInt32,
-    saList : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA0*,
-    keyModuleState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYMODULE_STATE0*,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous : Anonymous_e__Union_,
-    mmSaId : UInt64,
-    pfsGroup : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PFS_GROUP,
-    saLookupContext : LibC::GUID,
-    qmFilterId : UInt64 do
+  struct IPSEC_SA_BUNDLE1
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE_FLAGS
+    property lifetime : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_LIFETIME0
+    property idleTimeoutSeconds : UInt32
+    property ndAllowClearTimeoutSeconds : UInt32
+    property ipsecId : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_ID0*
+    property napContext : UInt32
+    property qmSaId : UInt32
+    property numSAs : UInt32
+    property saList : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA0*
+    property keyModuleState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYMODULE_STATE0*
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous : Anonymous_e__Union_
+    property mmSaId : UInt64
+    property pfsGroup : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PFS_GROUP
+    property saLookupContext : LibC::GUID
+    property qmFilterId : UInt64
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      peerV4PrivateAddress : UInt32
+    struct Anonymous_e__Union_
+    property peerV4PrivateAddress : UInt32
+    def initialize(@peerV4PrivateAddress : UInt32)
+    end
+    end
 
+    def initialize(@flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE_FLAGS, @lifetime : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_LIFETIME0, @idleTimeoutSeconds : UInt32, @ndAllowClearTimeoutSeconds : UInt32, @ipsecId : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_ID0*, @napContext : UInt32, @qmSaId : UInt32, @numSAs : UInt32, @saList : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA0*, @keyModuleState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYMODULE_STATE0*, @ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous : Anonymous_e__Union_, @mmSaId : UInt64, @pfsGroup : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_PFS_GROUP, @saLookupContext : LibC::GUID, @qmFilterId : UInt64)
+    end
   end
 
   @[Extern]
-  record IPSEC_TRAFFIC0,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    trafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE,
-    anonymous3 : Anonymous3_e__Union_,
-    remotePort : UInt16 do
+  struct IPSEC_TRAFFIC0
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property trafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE
+    property anonymous3 : Anonymous3_e__Union_
+    property remotePort : UInt16
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      ipsecFilterId : UInt64,
-      tunnelPolicyId : UInt64
+    struct Anonymous3_e__Union_
+    property ipsecFilterId : UInt64
+    property tunnelPolicyId : UInt64
+    def initialize(@ipsecFilterId : UInt64, @tunnelPolicyId : UInt64)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      localV4Address : UInt32,
-      localV6Address : UInt8[16]
+    struct Anonymous1_e__Union_
+    property localV4Address : UInt32
+    property localV6Address : UInt8[16]
+    def initialize(@localV4Address : UInt32, @localV6Address : UInt8[16])
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      remoteV4Address : UInt32,
-      remoteV6Address : UInt8[16]
+    struct Anonymous2_e__Union_
+    property remoteV4Address : UInt32
+    property remoteV6Address : UInt8[16]
+    def initialize(@remoteV4Address : UInt32, @remoteV6Address : UInt8[16])
+    end
+    end
 
+    def initialize(@ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @trafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE, @anonymous3 : Anonymous3_e__Union_, @remotePort : UInt16)
+    end
   end
 
   @[Extern]
-  record IPSEC_TRAFFIC1,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    trafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE,
-    anonymous3 : Anonymous3_e__Union_,
-    remotePort : UInt16,
-    localPort : UInt16,
-    ipProtocol : UInt8,
-    localIfLuid : UInt64,
-    realIfProfileId : UInt32 do
+  struct IPSEC_TRAFFIC1
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property trafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE
+    property anonymous3 : Anonymous3_e__Union_
+    property remotePort : UInt16
+    property localPort : UInt16
+    property ipProtocol : UInt8
+    property localIfLuid : UInt64
+    property realIfProfileId : UInt32
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      remoteV4Address : UInt32,
-      remoteV6Address : UInt8[16]
+    struct Anonymous2_e__Union_
+    property remoteV4Address : UInt32
+    property remoteV6Address : UInt8[16]
+    def initialize(@remoteV4Address : UInt32, @remoteV6Address : UInt8[16])
+    end
+    end
 
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      ipsecFilterId : UInt64,
-      tunnelPolicyId : UInt64
+    struct Anonymous3_e__Union_
+    property ipsecFilterId : UInt64
+    property tunnelPolicyId : UInt64
+    def initialize(@ipsecFilterId : UInt64, @tunnelPolicyId : UInt64)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      localV4Address : UInt32,
-      localV6Address : UInt8[16]
+    struct Anonymous1_e__Union_
+    property localV4Address : UInt32
+    property localV6Address : UInt8[16]
+    def initialize(@localV4Address : UInt32, @localV6Address : UInt8[16])
+    end
+    end
 
+    def initialize(@ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @trafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE, @anonymous3 : Anonymous3_e__Union_, @remotePort : UInt16, @localPort : UInt16, @ipProtocol : UInt8, @localIfLuid : UInt64, @realIfProfileId : UInt32)
+    end
   end
 
   @[Extern]
-  record IPSEC_V4_UDP_ENCAPSULATION0,
-    localUdpEncapPort : UInt16,
-    remoteUdpEncapPort : UInt16
+  struct IPSEC_V4_UDP_ENCAPSULATION0
+    property localUdpEncapPort : UInt16
+    property remoteUdpEncapPort : UInt16
+    def initialize(@localUdpEncapPort : UInt16, @remoteUdpEncapPort : UInt16)
+    end
+  end
 
   @[Extern]
-  record IPSEC_GETSPI0,
-    inboundIpsecTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC0,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous : Anonymous_e__Union_,
-    rngCryptoModuleID : LibC::GUID* do
+  struct IPSEC_GETSPI0
+    property inboundIpsecTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC0
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous : Anonymous_e__Union_
+    property rngCryptoModuleID : LibC::GUID*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      inboundUdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    struct Anonymous_e__Union_
+    property inboundUdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    def initialize(@inboundUdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*)
+    end
+    end
 
+    def initialize(@inboundIpsecTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC0, @ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous : Anonymous_e__Union_, @rngCryptoModuleID : LibC::GUID*)
+    end
   end
 
   @[Extern]
-  record IPSEC_GETSPI1,
-    inboundIpsecTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC1,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous : Anonymous_e__Union_,
-    rngCryptoModuleID : LibC::GUID* do
+  struct IPSEC_GETSPI1
+    property inboundIpsecTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC1
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous : Anonymous_e__Union_
+    property rngCryptoModuleID : LibC::GUID*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      inboundUdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    struct Anonymous_e__Union_
+    property inboundUdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    def initialize(@inboundUdpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*)
+    end
+    end
 
+    def initialize(@inboundIpsecTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC1, @ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous : Anonymous_e__Union_, @rngCryptoModuleID : LibC::GUID*)
+    end
   end
 
   @[Extern]
-  record IPSEC_SA_DETAILS0,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    saDirection : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION,
-    traffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC0,
-    saBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE0,
-    anonymous : Anonymous_e__Union_,
-    transportFilter : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0* do
+  struct IPSEC_SA_DETAILS0
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property saDirection : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION
+    property traffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC0
+    property saBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE0
+    property anonymous : Anonymous_e__Union_
+    property transportFilter : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      udpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    struct Anonymous_e__Union_
+    property udpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    def initialize(@udpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*)
+    end
+    end
 
+    def initialize(@ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @saDirection : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION, @traffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC0, @saBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE0, @anonymous : Anonymous_e__Union_, @transportFilter : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0*)
+    end
   end
 
   @[Extern]
-  record IPSEC_SA_DETAILS1,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    saDirection : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION,
-    traffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC1,
-    saBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE1,
-    anonymous : Anonymous_e__Union_,
-    transportFilter : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0*,
-    virtualIfTunnelInfo : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_VIRTUAL_IF_TUNNEL_INFO0 do
+  struct IPSEC_SA_DETAILS1
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property saDirection : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION
+    property traffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC1
+    property saBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE1
+    property anonymous : Anonymous_e__Union_
+    property transportFilter : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0*
+    property virtualIfTunnelInfo : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_VIRTUAL_IF_TUNNEL_INFO0
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      udpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    struct Anonymous_e__Union_
+    property udpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*
+    def initialize(@udpEncapsulation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_V4_UDP_ENCAPSULATION0*)
+    end
+    end
 
+    def initialize(@ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @saDirection : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION, @traffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC1, @saBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE1, @anonymous : Anonymous_e__Union_, @transportFilter : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0*, @virtualIfTunnelInfo : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_VIRTUAL_IF_TUNNEL_INFO0)
+    end
   end
 
   @[Extern]
-  record IPSEC_SA_CONTEXT0,
-    saContextId : UInt64,
-    inboundSa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS0*,
-    outboundSa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS0*
+  struct IPSEC_SA_CONTEXT0
+    property saContextId : UInt64
+    property inboundSa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS0*
+    property outboundSa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS0*
+    def initialize(@saContextId : UInt64, @inboundSa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS0*, @outboundSa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS0*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_SA_CONTEXT1,
-    saContextId : UInt64,
-    inboundSa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*,
-    outboundSa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*
+  struct IPSEC_SA_CONTEXT1
+    property saContextId : UInt64
+    property inboundSa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*
+    property outboundSa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*
+    def initialize(@saContextId : UInt64, @inboundSa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*, @outboundSa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_SA_CONTEXT_ENUM_TEMPLATE0,
-    localSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0,
-    remoteSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+  struct IPSEC_SA_CONTEXT_ENUM_TEMPLATE0
+    property localSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+    property remoteSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+    def initialize(@localSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0, @remoteSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0)
+    end
+  end
 
   @[Extern]
-  record IPSEC_SA_ENUM_TEMPLATE0,
-    saDirection : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION
+  struct IPSEC_SA_ENUM_TEMPLATE0
+    property saDirection : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION
+    def initialize(@saDirection : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION)
+    end
+  end
 
   @[Extern]
-  record IPSEC_SA_CONTEXT_SUBSCRIPTION0,
-    enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_ENUM_TEMPLATE0*,
-    flags : UInt32,
-    sessionKey : LibC::GUID
+  struct IPSEC_SA_CONTEXT_SUBSCRIPTION0
+    property enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_ENUM_TEMPLATE0*
+    property flags : UInt32
+    property sessionKey : LibC::GUID
+    def initialize(@enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_ENUM_TEMPLATE0*, @flags : UInt32, @sessionKey : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record IPSEC_SA_CONTEXT_CHANGE0,
-    changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_EVENT_TYPE0,
-    saContextId : UInt64
+  struct IPSEC_SA_CONTEXT_CHANGE0
+    property changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_EVENT_TYPE0
+    property saContextId : UInt64
+    def initialize(@changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_EVENT_TYPE0, @saContextId : UInt64)
+    end
+  end
 
   @[Extern]
-  record IPSEC_ADDRESS_INFO0,
-    numV4Addresses : UInt32,
-    v4Addresses : UInt32*,
-    numV6Addresses : UInt32,
-    v6Addresses : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16*
+  struct IPSEC_ADDRESS_INFO0
+    property numV4Addresses : UInt32
+    property v4Addresses : UInt32*
+    property numV6Addresses : UInt32
+    property v6Addresses : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16*
+    def initialize(@numV4Addresses : UInt32, @v4Addresses : UInt32*, @numV6Addresses : UInt32, @v6Addresses : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16*)
+    end
+  end
 
   @[Extern]
-  record IPSEC_DOSP_OPTIONS0,
-    stateIdleTimeoutSeconds : UInt32,
-    perIPRateLimitQueueIdleTimeoutSeconds : UInt32,
-    ipV6IPsecUnauthDscp : UInt8,
-    ipV6IPsecUnauthRateLimitBytesPerSec : UInt32,
-    ipV6IPsecUnauthPerIPRateLimitBytesPerSec : UInt32,
-    ipV6IPsecAuthDscp : UInt8,
-    ipV6IPsecAuthRateLimitBytesPerSec : UInt32,
-    icmpV6Dscp : UInt8,
-    icmpV6RateLimitBytesPerSec : UInt32,
-    ipV6FilterExemptDscp : UInt8,
-    ipV6FilterExemptRateLimitBytesPerSec : UInt32,
-    defBlockExemptDscp : UInt8,
-    defBlockExemptRateLimitBytesPerSec : UInt32,
-    maxStateEntries : UInt32,
-    maxPerIPRateLimitQueues : UInt32,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_FLAGS,
-    numPublicIFLuids : UInt32,
-    publicIFLuids : UInt64*,
-    numInternalIFLuids : UInt32,
-    internalIFLuids : UInt64*,
-    publicV6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK,
-    internalV6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK
+  struct IPSEC_DOSP_OPTIONS0
+    property stateIdleTimeoutSeconds : UInt32
+    property perIPRateLimitQueueIdleTimeoutSeconds : UInt32
+    property ipV6IPsecUnauthDscp : UInt8
+    property ipV6IPsecUnauthRateLimitBytesPerSec : UInt32
+    property ipV6IPsecUnauthPerIPRateLimitBytesPerSec : UInt32
+    property ipV6IPsecAuthDscp : UInt8
+    property ipV6IPsecAuthRateLimitBytesPerSec : UInt32
+    property icmpV6Dscp : UInt8
+    property icmpV6RateLimitBytesPerSec : UInt32
+    property ipV6FilterExemptDscp : UInt8
+    property ipV6FilterExemptRateLimitBytesPerSec : UInt32
+    property defBlockExemptDscp : UInt8
+    property defBlockExemptRateLimitBytesPerSec : UInt32
+    property maxStateEntries : UInt32
+    property maxPerIPRateLimitQueues : UInt32
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_FLAGS
+    property numPublicIFLuids : UInt32
+    property publicIFLuids : UInt64*
+    property numInternalIFLuids : UInt32
+    property internalIFLuids : UInt64*
+    property publicV6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK
+    property internalV6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK
+    def initialize(@stateIdleTimeoutSeconds : UInt32, @perIPRateLimitQueueIdleTimeoutSeconds : UInt32, @ipV6IPsecUnauthDscp : UInt8, @ipV6IPsecUnauthRateLimitBytesPerSec : UInt32, @ipV6IPsecUnauthPerIPRateLimitBytesPerSec : UInt32, @ipV6IPsecAuthDscp : UInt8, @ipV6IPsecAuthRateLimitBytesPerSec : UInt32, @icmpV6Dscp : UInt8, @icmpV6RateLimitBytesPerSec : UInt32, @ipV6FilterExemptDscp : UInt8, @ipV6FilterExemptRateLimitBytesPerSec : UInt32, @defBlockExemptDscp : UInt8, @defBlockExemptRateLimitBytesPerSec : UInt32, @maxStateEntries : UInt32, @maxPerIPRateLimitQueues : UInt32, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_FLAGS, @numPublicIFLuids : UInt32, @publicIFLuids : UInt64*, @numInternalIFLuids : UInt32, @internalIFLuids : UInt64*, @publicV6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK, @internalV6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK)
+    end
+  end
 
   @[Extern]
-  record IPSEC_DOSP_STATISTICS0,
-    totalStateEntriesCreated : UInt64,
-    currentStateEntries : UInt64,
-    totalInboundAllowedIPv6IPsecUnauthPkts : UInt64,
-    totalInboundRatelimitDiscardedIPv6IPsecUnauthPkts : UInt64,
-    totalInboundPerIPRatelimitDiscardedIPv6IPsecUnauthPkts : UInt64,
-    totalInboundOtherDiscardedIPv6IPsecUnauthPkts : UInt64,
-    totalInboundAllowedIPv6IPsecAuthPkts : UInt64,
-    totalInboundRatelimitDiscardedIPv6IPsecAuthPkts : UInt64,
-    totalInboundOtherDiscardedIPv6IPsecAuthPkts : UInt64,
-    totalInboundAllowedICMPv6Pkts : UInt64,
-    totalInboundRatelimitDiscardedICMPv6Pkts : UInt64,
-    totalInboundAllowedIPv6FilterExemptPkts : UInt64,
-    totalInboundRatelimitDiscardedIPv6FilterExemptPkts : UInt64,
-    totalInboundDiscardedIPv6FilterBlockPkts : UInt64,
-    totalInboundAllowedDefBlockExemptPkts : UInt64,
-    totalInboundRatelimitDiscardedDefBlockExemptPkts : UInt64,
-    totalInboundDiscardedDefBlockPkts : UInt64,
-    currentInboundIPv6IPsecUnauthPerIPRateLimitQueues : UInt64
+  struct IPSEC_DOSP_STATISTICS0
+    property totalStateEntriesCreated : UInt64
+    property currentStateEntries : UInt64
+    property totalInboundAllowedIPv6IPsecUnauthPkts : UInt64
+    property totalInboundRatelimitDiscardedIPv6IPsecUnauthPkts : UInt64
+    property totalInboundPerIPRatelimitDiscardedIPv6IPsecUnauthPkts : UInt64
+    property totalInboundOtherDiscardedIPv6IPsecUnauthPkts : UInt64
+    property totalInboundAllowedIPv6IPsecAuthPkts : UInt64
+    property totalInboundRatelimitDiscardedIPv6IPsecAuthPkts : UInt64
+    property totalInboundOtherDiscardedIPv6IPsecAuthPkts : UInt64
+    property totalInboundAllowedICMPv6Pkts : UInt64
+    property totalInboundRatelimitDiscardedICMPv6Pkts : UInt64
+    property totalInboundAllowedIPv6FilterExemptPkts : UInt64
+    property totalInboundRatelimitDiscardedIPv6FilterExemptPkts : UInt64
+    property totalInboundDiscardedIPv6FilterBlockPkts : UInt64
+    property totalInboundAllowedDefBlockExemptPkts : UInt64
+    property totalInboundRatelimitDiscardedDefBlockExemptPkts : UInt64
+    property totalInboundDiscardedDefBlockPkts : UInt64
+    property currentInboundIPv6IPsecUnauthPerIPRateLimitQueues : UInt64
+    def initialize(@totalStateEntriesCreated : UInt64, @currentStateEntries : UInt64, @totalInboundAllowedIPv6IPsecUnauthPkts : UInt64, @totalInboundRatelimitDiscardedIPv6IPsecUnauthPkts : UInt64, @totalInboundPerIPRatelimitDiscardedIPv6IPsecUnauthPkts : UInt64, @totalInboundOtherDiscardedIPv6IPsecUnauthPkts : UInt64, @totalInboundAllowedIPv6IPsecAuthPkts : UInt64, @totalInboundRatelimitDiscardedIPv6IPsecAuthPkts : UInt64, @totalInboundOtherDiscardedIPv6IPsecAuthPkts : UInt64, @totalInboundAllowedICMPv6Pkts : UInt64, @totalInboundRatelimitDiscardedICMPv6Pkts : UInt64, @totalInboundAllowedIPv6FilterExemptPkts : UInt64, @totalInboundRatelimitDiscardedIPv6FilterExemptPkts : UInt64, @totalInboundDiscardedIPv6FilterBlockPkts : UInt64, @totalInboundAllowedDefBlockExemptPkts : UInt64, @totalInboundRatelimitDiscardedDefBlockExemptPkts : UInt64, @totalInboundDiscardedDefBlockPkts : UInt64, @currentInboundIPv6IPsecUnauthPerIPRateLimitQueues : UInt64)
+    end
+  end
 
   @[Extern]
-  record IPSEC_DOSP_STATE0,
-    publicHostV6Addr : UInt8[16],
-    internalHostV6Addr : UInt8[16],
-    totalInboundIPv6IPsecAuthPackets : UInt64,
-    totalOutboundIPv6IPsecAuthPackets : UInt64,
-    durationSecs : UInt32
+  struct IPSEC_DOSP_STATE0
+    property publicHostV6Addr : UInt8[16]
+    property internalHostV6Addr : UInt8[16]
+    property totalInboundIPv6IPsecAuthPackets : UInt64
+    property totalOutboundIPv6IPsecAuthPackets : UInt64
+    property durationSecs : UInt32
+    def initialize(@publicHostV6Addr : UInt8[16], @internalHostV6Addr : UInt8[16], @totalInboundIPv6IPsecAuthPackets : UInt64, @totalOutboundIPv6IPsecAuthPackets : UInt64, @durationSecs : UInt32)
+    end
+  end
 
   @[Extern]
-  record IPSEC_DOSP_STATE_ENUM_TEMPLATE0,
-    publicV6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK,
-    internalV6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK
+  struct IPSEC_DOSP_STATE_ENUM_TEMPLATE0
+    property publicV6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK
+    property internalV6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK
+    def initialize(@publicV6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK, @internalV6AddrMask : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_V6_ADDR_AND_MASK)
+    end
+  end
 
   @[Extern]
-  record IPSEC_KEY_MANAGER0,
-    keyManagerKey : LibC::GUID,
-    displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0,
-    flags : UInt32,
-    keyDictationTimeoutHint : UInt8
+  struct IPSEC_KEY_MANAGER0
+    property keyManagerKey : LibC::GUID
+    property displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0
+    property flags : UInt32
+    property keyDictationTimeoutHint : UInt8
+    def initialize(@keyManagerKey : LibC::GUID, @displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0, @flags : UInt32, @keyDictationTimeoutHint : UInt8)
+    end
+  end
 
   @[Extern]
-  record FWPM_SESSION0,
-    sessionKey : LibC::GUID,
-    displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0,
-    flags : UInt32,
-    txnWaitTimeoutInMSec : UInt32,
-    processId : UInt32,
-    sid : Win32cr::Security::SID*,
-    username : Win32cr::Foundation::PWSTR,
-    kernelMode : Win32cr::Foundation::BOOL
+  struct FWPM_SESSION0
+    property sessionKey : LibC::GUID
+    property displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0
+    property flags : UInt32
+    property txnWaitTimeoutInMSec : UInt32
+    property processId : UInt32
+    property sid : Win32cr::Security::SID*
+    property username : Win32cr::Foundation::PWSTR
+    property kernelMode : Win32cr::Foundation::BOOL
+    def initialize(@sessionKey : LibC::GUID, @displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0, @flags : UInt32, @txnWaitTimeoutInMSec : UInt32, @processId : UInt32, @sid : Win32cr::Security::SID*, @username : Win32cr::Foundation::PWSTR, @kernelMode : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record FWPM_SESSION_ENUM_TEMPLATE0,
-    reserved : UInt64
+  struct FWPM_SESSION_ENUM_TEMPLATE0
+    property reserved : UInt64
+    def initialize(@reserved : UInt64)
+    end
+  end
 
   @[Extern]
-  record FWPM_PROVIDER0,
-    providerKey : LibC::GUID,
-    displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0,
-    flags : UInt32,
-    providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    serviceName : Win32cr::Foundation::PWSTR
+  struct FWPM_PROVIDER0
+    property providerKey : LibC::GUID
+    property displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0
+    property flags : UInt32
+    property providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property serviceName : Win32cr::Foundation::PWSTR
+    def initialize(@providerKey : LibC::GUID, @displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0, @flags : UInt32, @providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @serviceName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record FWPM_PROVIDER_ENUM_TEMPLATE0,
-    reserved : UInt64
+  struct FWPM_PROVIDER_ENUM_TEMPLATE0
+    property reserved : UInt64
+    def initialize(@reserved : UInt64)
+    end
+  end
 
   @[Extern]
-  record FWPM_PROVIDER_CHANGE0,
-    changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE,
-    providerKey : LibC::GUID
+  struct FWPM_PROVIDER_CHANGE0
+    property changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE
+    property providerKey : LibC::GUID
+    def initialize(@changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE, @providerKey : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record FWPM_PROVIDER_SUBSCRIPTION0,
-    enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_ENUM_TEMPLATE0*,
-    flags : UInt32,
-    sessionKey : LibC::GUID
+  struct FWPM_PROVIDER_SUBSCRIPTION0
+    property enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_ENUM_TEMPLATE0*
+    property flags : UInt32
+    property sessionKey : LibC::GUID
+    def initialize(@enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_ENUM_TEMPLATE0*, @flags : UInt32, @sessionKey : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record FWPM_CLASSIFY_OPTION0,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CLASSIFY_OPTION_TYPE,
-    value : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0
+  struct FWPM_CLASSIFY_OPTION0
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CLASSIFY_OPTION_TYPE
+    property value : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0
+    def initialize(@type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CLASSIFY_OPTION_TYPE, @value : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0)
+    end
+  end
 
   @[Extern]
-  record FWPM_CLASSIFY_OPTIONS0,
-    numOptions : UInt32,
-    options : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTION0*
+  struct FWPM_CLASSIFY_OPTIONS0
+    property numOptions : UInt32
+    property options : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTION0*
+    def initialize(@numOptions : UInt32, @options : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTION0*)
+    end
+  end
 
   @[Extern]
-  record FWPM_PROVIDER_CONTEXT0,
-    providerContextKey : LibC::GUID,
-    displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0,
-    flags : UInt32,
-    providerKey : LibC::GUID*,
-    providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE,
-    anonymous : Anonymous_e__Union_,
-    providerContextId : UInt64 do
+  struct FWPM_PROVIDER_CONTEXT0
+    property providerContextKey : LibC::GUID
+    property displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0
+    property flags : UInt32
+    property providerKey : LibC::GUID*
+    property providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE
+    property anonymous : Anonymous_e__Union_
+    property providerContextId : UInt64
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      keyingPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYING_POLICY0*,
-      ikeQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY0*,
-      ikeQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY0*,
-      authipQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY0*,
-      authipQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY0*,
-      ikeMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY0*,
-      authIpMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY0*,
-      dataBuffer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*,
-      classifyOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTIONS0*
+    struct Anonymous_e__Union_
+    property keyingPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYING_POLICY0*
+    property ikeQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY0*
+    property ikeQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY0*
+    property authipQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY0*
+    property authipQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY0*
+    property ikeMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY0*
+    property authIpMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY0*
+    property dataBuffer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*
+    property classifyOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTIONS0*
+    def initialize(@keyingPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYING_POLICY0*, @ikeQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY0*, @ikeQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY0*, @authipQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY0*, @authipQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY0*, @ikeMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY0*, @authIpMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY0*, @dataBuffer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*, @classifyOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTIONS0*)
+    end
+    end
 
+    def initialize(@providerContextKey : LibC::GUID, @displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0, @flags : UInt32, @providerKey : LibC::GUID*, @providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE, @anonymous : Anonymous_e__Union_, @providerContextId : UInt64)
+    end
   end
 
   @[Extern]
-  record FWPM_PROVIDER_CONTEXT1,
-    providerContextKey : LibC::GUID,
-    displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0,
-    flags : UInt32,
-    providerKey : LibC::GUID*,
-    providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE,
-    anonymous : Anonymous_e__Union_,
-    providerContextId : UInt64 do
+  struct FWPM_PROVIDER_CONTEXT1
+    property providerContextKey : LibC::GUID
+    property displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0
+    property flags : UInt32
+    property providerKey : LibC::GUID*
+    property providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE
+    property anonymous : Anonymous_e__Union_
+    property providerContextId : UInt64
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      keyingPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYING_POLICY0*,
-      ikeQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY1*,
-      ikeQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY1*,
-      authipQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY1*,
-      authipQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY1*,
-      ikeMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY1*,
-      authIpMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY1*,
-      dataBuffer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*,
-      classifyOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTIONS0*,
-      ikeV2QmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY1*,
-      ikeV2MmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY1*,
-      idpOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_OPTIONS0*
+    struct Anonymous_e__Union_
+    property keyingPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYING_POLICY0*
+    property ikeQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY1*
+    property ikeQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY1*
+    property authipQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY1*
+    property authipQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY1*
+    property ikeMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY1*
+    property authIpMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY1*
+    property dataBuffer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*
+    property classifyOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTIONS0*
+    property ikeV2QmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY1*
+    property ikeV2MmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY1*
+    property idpOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_OPTIONS0*
+    def initialize(@keyingPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYING_POLICY0*, @ikeQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY1*, @ikeQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY1*, @authipQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY1*, @authipQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY1*, @ikeMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY1*, @authIpMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY1*, @dataBuffer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*, @classifyOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTIONS0*, @ikeV2QmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY1*, @ikeV2MmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY1*, @idpOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_OPTIONS0*)
+    end
+    end
 
+    def initialize(@providerContextKey : LibC::GUID, @displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0, @flags : UInt32, @providerKey : LibC::GUID*, @providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE, @anonymous : Anonymous_e__Union_, @providerContextId : UInt64)
+    end
   end
 
   @[Extern]
-  record FWPM_PROVIDER_CONTEXT2,
-    providerContextKey : LibC::GUID,
-    displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0,
-    flags : UInt32,
-    providerKey : LibC::GUID*,
-    providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE,
-    anonymous : Anonymous_e__Union_,
-    providerContextId : UInt64 do
+  struct FWPM_PROVIDER_CONTEXT2
+    property providerContextKey : LibC::GUID
+    property displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0
+    property flags : UInt32
+    property providerKey : LibC::GUID*
+    property providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE
+    property anonymous : Anonymous_e__Union_
+    property providerContextId : UInt64
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      keyingPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYING_POLICY1*,
-      ikeQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*,
-      ikeQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY2*,
-      authipQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*,
-      authipQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY2*,
-      ikeMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*,
-      authIpMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*,
-      dataBuffer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*,
-      classifyOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTIONS0*,
-      ikeV2QmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY2*,
-      ikeV2QmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*,
-      ikeV2MmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*,
-      idpOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_OPTIONS0*
+    struct Anonymous_e__Union_
+    property keyingPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYING_POLICY1*
+    property ikeQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*
+    property ikeQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY2*
+    property authipQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*
+    property authipQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY2*
+    property ikeMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*
+    property authIpMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*
+    property dataBuffer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*
+    property classifyOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTIONS0*
+    property ikeV2QmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY2*
+    property ikeV2QmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*
+    property ikeV2MmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*
+    property idpOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_OPTIONS0*
+    def initialize(@keyingPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYING_POLICY1*, @ikeQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*, @ikeQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY2*, @authipQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*, @authipQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY2*, @ikeMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*, @authIpMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*, @dataBuffer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*, @classifyOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTIONS0*, @ikeV2QmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY2*, @ikeV2QmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*, @ikeV2MmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*, @idpOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_OPTIONS0*)
+    end
+    end
 
+    def initialize(@providerContextKey : LibC::GUID, @displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0, @flags : UInt32, @providerKey : LibC::GUID*, @providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE, @anonymous : Anonymous_e__Union_, @providerContextId : UInt64)
+    end
   end
 
   @[Extern]
-  record FWPM_PROVIDER_CONTEXT3_,
-    providerContextKey : LibC::GUID,
-    displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0,
-    flags : UInt32,
-    providerKey : LibC::GUID*,
-    providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE,
-    anonymous : Anonymous_e__Union_,
-    providerContextId : UInt64 do
+  struct FWPM_PROVIDER_CONTEXT3_
+    property providerContextKey : LibC::GUID
+    property displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0
+    property flags : UInt32
+    property providerKey : LibC::GUID*
+    property providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE
+    property anonymous : Anonymous_e__Union_
+    property providerContextId : UInt64
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      keyingPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYING_POLICY1*,
-      ikeQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*,
-      ikeQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY3_*,
-      authipQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*,
-      authipQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY3_*,
-      ikeMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*,
-      authIpMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*,
-      dataBuffer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*,
-      classifyOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTIONS0*,
-      ikeV2QmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY3_*,
-      ikeV2QmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*,
-      ikeV2MmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*,
-      idpOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_OPTIONS0*
+    struct Anonymous_e__Union_
+    property keyingPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYING_POLICY1*
+    property ikeQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*
+    property ikeQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY3_*
+    property authipQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*
+    property authipQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY3_*
+    property ikeMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*
+    property authIpMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*
+    property dataBuffer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*
+    property classifyOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTIONS0*
+    property ikeV2QmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY3_*
+    property ikeV2QmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*
+    property ikeV2MmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*
+    property idpOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_OPTIONS0*
+    def initialize(@keyingPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEYING_POLICY1*, @ikeQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*, @ikeQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY3_*, @authipQmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*, @authipQmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY3_*, @ikeMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*, @authIpMmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*, @dataBuffer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB*, @classifyOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CLASSIFY_OPTIONS0*, @ikeV2QmTunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TUNNEL_POLICY3_*, @ikeV2QmTransportPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRANSPORT_POLICY2*, @ikeV2MmPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_POLICY2*, @idpOptions : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_OPTIONS0*)
+    end
+    end
 
+    def initialize(@providerContextKey : LibC::GUID, @displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0, @flags : UInt32, @providerKey : LibC::GUID*, @providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE, @anonymous : Anonymous_e__Union_, @providerContextId : UInt64)
+    end
   end
 
   @[Extern]
-  record FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0,
-    providerKey : LibC::GUID*,
-    providerContextType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE
+  struct FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0
+    property providerKey : LibC::GUID*
+    property providerContextType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE
+    def initialize(@providerKey : LibC::GUID*, @providerContextType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_TYPE)
+    end
+  end
 
   @[Extern]
-  record FWPM_PROVIDER_CONTEXT_CHANGE0,
-    changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE,
-    providerContextKey : LibC::GUID,
-    providerContextId : UInt64
+  struct FWPM_PROVIDER_CONTEXT_CHANGE0
+    property changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE
+    property providerContextKey : LibC::GUID
+    property providerContextId : UInt64
+    def initialize(@changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE, @providerContextKey : LibC::GUID, @providerContextId : UInt64)
+    end
+  end
 
   @[Extern]
-  record FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0,
-    enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0*,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBSCRIPTION_FLAGS,
-    sessionKey : LibC::GUID
+  struct FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0
+    property enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0*
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBSCRIPTION_FLAGS
+    property sessionKey : LibC::GUID
+    def initialize(@enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0*, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBSCRIPTION_FLAGS, @sessionKey : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record FWPM_SUBLAYER0,
-    subLayerKey : LibC::GUID,
-    displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0,
-    flags : UInt32,
-    providerKey : LibC::GUID*,
-    providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    weight : UInt16
+  struct FWPM_SUBLAYER0
+    property subLayerKey : LibC::GUID
+    property displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0
+    property flags : UInt32
+    property providerKey : LibC::GUID*
+    property providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property weight : UInt16
+    def initialize(@subLayerKey : LibC::GUID, @displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0, @flags : UInt32, @providerKey : LibC::GUID*, @providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @weight : UInt16)
+    end
+  end
 
   @[Extern]
-  record FWPM_SUBLAYER_ENUM_TEMPLATE0,
-    providerKey : LibC::GUID*
+  struct FWPM_SUBLAYER_ENUM_TEMPLATE0
+    property providerKey : LibC::GUID*
+    def initialize(@providerKey : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record FWPM_SUBLAYER_CHANGE0,
-    changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE,
-    subLayerKey : LibC::GUID
+  struct FWPM_SUBLAYER_CHANGE0
+    property changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE
+    property subLayerKey : LibC::GUID
+    def initialize(@changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE, @subLayerKey : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record FWPM_SUBLAYER_SUBSCRIPTION0,
-    enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER_ENUM_TEMPLATE0*,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBSCRIPTION_FLAGS,
-    sessionKey : LibC::GUID
+  struct FWPM_SUBLAYER_SUBSCRIPTION0
+    property enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER_ENUM_TEMPLATE0*
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBSCRIPTION_FLAGS
+    property sessionKey : LibC::GUID
+    def initialize(@enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER_ENUM_TEMPLATE0*, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBSCRIPTION_FLAGS, @sessionKey : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record FWPM_FIELD0,
-    fieldKey : LibC::GUID*,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FIELD_TYPE,
-    dataType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DATA_TYPE
+  struct FWPM_FIELD0
+    property fieldKey : LibC::GUID*
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FIELD_TYPE
+    property dataType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DATA_TYPE
+    def initialize(@fieldKey : LibC::GUID*, @type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FIELD_TYPE, @dataType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DATA_TYPE)
+    end
+  end
 
   @[Extern]
-  record FWPM_LAYER0,
-    layerKey : LibC::GUID,
-    displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0,
-    flags : UInt32,
-    numFields : UInt32,
-    field : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FIELD0*,
-    defaultSubLayerKey : LibC::GUID,
-    layerId : UInt16
+  struct FWPM_LAYER0
+    property layerKey : LibC::GUID
+    property displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0
+    property flags : UInt32
+    property numFields : UInt32
+    property field : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FIELD0*
+    property defaultSubLayerKey : LibC::GUID
+    property layerId : UInt16
+    def initialize(@layerKey : LibC::GUID, @displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0, @flags : UInt32, @numFields : UInt32, @field : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FIELD0*, @defaultSubLayerKey : LibC::GUID, @layerId : UInt16)
+    end
+  end
 
   @[Extern]
-  record FWPM_LAYER_ENUM_TEMPLATE0,
-    reserved : UInt64
+  struct FWPM_LAYER_ENUM_TEMPLATE0
+    property reserved : UInt64
+    def initialize(@reserved : UInt64)
+    end
+  end
 
   @[Extern]
-  record FWPM_CALLOUT0,
-    calloutKey : LibC::GUID,
-    displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0,
-    flags : UInt32,
-    providerKey : LibC::GUID*,
-    providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    applicableLayer : LibC::GUID,
-    calloutId : UInt32
+  struct FWPM_CALLOUT0
+    property calloutKey : LibC::GUID
+    property displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0
+    property flags : UInt32
+    property providerKey : LibC::GUID*
+    property providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property applicableLayer : LibC::GUID
+    property calloutId : UInt32
+    def initialize(@calloutKey : LibC::GUID, @displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0, @flags : UInt32, @providerKey : LibC::GUID*, @providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @applicableLayer : LibC::GUID, @calloutId : UInt32)
+    end
+  end
 
   @[Extern]
-  record FWPM_CALLOUT_ENUM_TEMPLATE0,
-    providerKey : LibC::GUID*,
-    layerKey : LibC::GUID
+  struct FWPM_CALLOUT_ENUM_TEMPLATE0
+    property providerKey : LibC::GUID*
+    property layerKey : LibC::GUID
+    def initialize(@providerKey : LibC::GUID*, @layerKey : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record FWPM_CALLOUT_CHANGE0,
-    changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE,
-    calloutKey : LibC::GUID,
-    calloutId : UInt32
+  struct FWPM_CALLOUT_CHANGE0
+    property changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE
+    property calloutKey : LibC::GUID
+    property calloutId : UInt32
+    def initialize(@changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE, @calloutKey : LibC::GUID, @calloutId : UInt32)
+    end
+  end
 
   @[Extern]
-  record FWPM_CALLOUT_SUBSCRIPTION0,
-    enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT_ENUM_TEMPLATE0*,
-    flags : UInt32,
-    sessionKey : LibC::GUID
+  struct FWPM_CALLOUT_SUBSCRIPTION0
+    property enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT_ENUM_TEMPLATE0*
+    property flags : UInt32
+    property sessionKey : LibC::GUID
+    def initialize(@enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT_ENUM_TEMPLATE0*, @flags : UInt32, @sessionKey : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record FWPM_ACTION0,
-    type__ : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct FWPM_ACTION0
+    property type__ : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      filterType : LibC::GUID,
-      calloutKey : LibC::GUID
+    struct Anonymous_e__Union_
+    property filterType : LibC::GUID
+    property calloutKey : LibC::GUID
+    def initialize(@filterType : LibC::GUID, @calloutKey : LibC::GUID)
+    end
+    end
 
+    def initialize(@type__ : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record FWPM_FILTER_CONDITION0,
-    fieldKey : LibC::GUID,
-    matchType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_MATCH_TYPE,
-    conditionValue : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+  struct FWPM_FILTER_CONDITION0
+    property fieldKey : LibC::GUID
+    property matchType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_MATCH_TYPE
+    property conditionValue : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+    def initialize(@fieldKey : LibC::GUID, @matchType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_MATCH_TYPE, @conditionValue : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0)
+    end
+  end
 
   @[Extern]
-  record FWPM_FILTER0,
-    filterKey : LibC::GUID,
-    displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0,
-    flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_FLAGS,
-    providerKey : LibC::GUID*,
-    providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    layerKey : LibC::GUID,
-    subLayerKey : LibC::GUID,
-    weight : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0,
-    numFilterConditions : UInt32,
-    filterCondition : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*,
-    action : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_ACTION0,
-    anonymous : Anonymous_e__Union_,
-    reserved : LibC::GUID*,
-    filterId : UInt64,
-    effectiveWeight : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0 do
+  struct FWPM_FILTER0
+    property filterKey : LibC::GUID
+    property displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0
+    property flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_FLAGS
+    property providerKey : LibC::GUID*
+    property providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property layerKey : LibC::GUID
+    property subLayerKey : LibC::GUID
+    property weight : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0
+    property numFilterConditions : UInt32
+    property filterCondition : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*
+    property action : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_ACTION0
+    property anonymous : Anonymous_e__Union_
+    property reserved : LibC::GUID*
+    property filterId : UInt64
+    property effectiveWeight : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      rawContext : UInt64,
-      providerContextKey : LibC::GUID
+    struct Anonymous_e__Union_
+    property rawContext : UInt64
+    property providerContextKey : LibC::GUID
+    def initialize(@rawContext : UInt64, @providerContextKey : LibC::GUID)
+    end
+    end
 
+    def initialize(@filterKey : LibC::GUID, @displayData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DISPLAY_DATA0, @flags : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_FLAGS, @providerKey : LibC::GUID*, @providerData : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @layerKey : LibC::GUID, @subLayerKey : LibC::GUID, @weight : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0, @numFilterConditions : UInt32, @filterCondition : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*, @action : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_ACTION0, @anonymous : Anonymous_e__Union_, @reserved : LibC::GUID*, @filterId : UInt64, @effectiveWeight : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0)
+    end
   end
 
   @[Extern]
-  record FWPM_FILTER_ENUM_TEMPLATE0,
-    providerKey : LibC::GUID*,
-    layerKey : LibC::GUID,
-    enumType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_FILTER_ENUM_TYPE,
-    flags : UInt32,
-    providerContextTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0*,
-    numFilterConditions : UInt32,
-    filterCondition : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*,
-    actionMask : UInt32,
-    calloutKey : LibC::GUID*
+  struct FWPM_FILTER_ENUM_TEMPLATE0
+    property providerKey : LibC::GUID*
+    property layerKey : LibC::GUID
+    property enumType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_FILTER_ENUM_TYPE
+    property flags : UInt32
+    property providerContextTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0*
+    property numFilterConditions : UInt32
+    property filterCondition : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*
+    property actionMask : UInt32
+    property calloutKey : LibC::GUID*
+    def initialize(@providerKey : LibC::GUID*, @layerKey : LibC::GUID, @enumType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_FILTER_ENUM_TYPE, @flags : UInt32, @providerContextTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0*, @numFilterConditions : UInt32, @filterCondition : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*, @actionMask : UInt32, @calloutKey : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record FWPM_FILTER_CHANGE0,
-    changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE,
-    filterKey : LibC::GUID,
-    filterId : UInt64
+  struct FWPM_FILTER_CHANGE0
+    property changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE
+    property filterKey : LibC::GUID
+    property filterId : UInt64
+    def initialize(@changeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CHANGE_TYPE, @filterKey : LibC::GUID, @filterId : UInt64)
+    end
+  end
 
   @[Extern]
-  record FWPM_FILTER_SUBSCRIPTION0,
-    enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_ENUM_TEMPLATE0*,
-    flags : UInt32,
-    sessionKey : LibC::GUID
+  struct FWPM_FILTER_SUBSCRIPTION0
+    property enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_ENUM_TEMPLATE0*
+    property flags : UInt32
+    property sessionKey : LibC::GUID
+    def initialize(@enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_ENUM_TEMPLATE0*, @flags : UInt32, @sessionKey : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record FWPM_LAYER_STATISTICS0,
-    layerId : LibC::GUID,
-    classifyPermitCount : UInt32,
-    classifyBlockCount : UInt32,
-    classifyVetoCount : UInt32,
-    numCacheEntries : UInt32
+  struct FWPM_LAYER_STATISTICS0
+    property layerId : LibC::GUID
+    property classifyPermitCount : UInt32
+    property classifyBlockCount : UInt32
+    property classifyVetoCount : UInt32
+    property numCacheEntries : UInt32
+    def initialize(@layerId : LibC::GUID, @classifyPermitCount : UInt32, @classifyBlockCount : UInt32, @classifyVetoCount : UInt32, @numCacheEntries : UInt32)
+    end
+  end
 
   @[Extern]
-  record FWPM_STATISTICS0,
-    numLayerStatistics : UInt32,
-    layerStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_LAYER_STATISTICS0*,
-    inboundAllowedConnectionsV4 : UInt32,
-    inboundBlockedConnectionsV4 : UInt32,
-    outboundAllowedConnectionsV4 : UInt32,
-    outboundBlockedConnectionsV4 : UInt32,
-    inboundAllowedConnectionsV6 : UInt32,
-    inboundBlockedConnectionsV6 : UInt32,
-    outboundAllowedConnectionsV6 : UInt32,
-    outboundBlockedConnectionsV6 : UInt32,
-    inboundActiveConnectionsV4 : UInt32,
-    outboundActiveConnectionsV4 : UInt32,
-    inboundActiveConnectionsV6 : UInt32,
-    outboundActiveConnectionsV6 : UInt32,
-    reauthDirInbound : UInt64,
-    reauthDirOutbound : UInt64,
-    reauthFamilyV4 : UInt64,
-    reauthFamilyV6 : UInt64,
-    reauthProtoOther : UInt64,
-    reauthProtoIPv4 : UInt64,
-    reauthProtoIPv6 : UInt64,
-    reauthProtoICMP : UInt64,
-    reauthProtoICMP6 : UInt64,
-    reauthProtoUDP : UInt64,
-    reauthProtoTCP : UInt64,
-    reauthReasonPolicyChange : UInt64,
-    reauthReasonNewArrivalInterface : UInt64,
-    reauthReasonNewNextHopInterface : UInt64,
-    reauthReasonProfileCrossing : UInt64,
-    reauthReasonClassifyCompletion : UInt64,
-    reauthReasonIPSecPropertiesChanged : UInt64,
-    reauthReasonMidStreamInspection : UInt64,
-    reauthReasonSocketPropertyChanged : UInt64,
-    reauthReasonNewInboundMCastBCastPacket : UInt64,
-    reauthReasonEDPPolicyChanged : UInt64,
-    reauthReasonProxyHandleChanged : UInt64
+  struct FWPM_STATISTICS0
+    property numLayerStatistics : UInt32
+    property layerStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_LAYER_STATISTICS0*
+    property inboundAllowedConnectionsV4 : UInt32
+    property inboundBlockedConnectionsV4 : UInt32
+    property outboundAllowedConnectionsV4 : UInt32
+    property outboundBlockedConnectionsV4 : UInt32
+    property inboundAllowedConnectionsV6 : UInt32
+    property inboundBlockedConnectionsV6 : UInt32
+    property outboundAllowedConnectionsV6 : UInt32
+    property outboundBlockedConnectionsV6 : UInt32
+    property inboundActiveConnectionsV4 : UInt32
+    property outboundActiveConnectionsV4 : UInt32
+    property inboundActiveConnectionsV6 : UInt32
+    property outboundActiveConnectionsV6 : UInt32
+    property reauthDirInbound : UInt64
+    property reauthDirOutbound : UInt64
+    property reauthFamilyV4 : UInt64
+    property reauthFamilyV6 : UInt64
+    property reauthProtoOther : UInt64
+    property reauthProtoIPv4 : UInt64
+    property reauthProtoIPv6 : UInt64
+    property reauthProtoICMP : UInt64
+    property reauthProtoICMP6 : UInt64
+    property reauthProtoUDP : UInt64
+    property reauthProtoTCP : UInt64
+    property reauthReasonPolicyChange : UInt64
+    property reauthReasonNewArrivalInterface : UInt64
+    property reauthReasonNewNextHopInterface : UInt64
+    property reauthReasonProfileCrossing : UInt64
+    property reauthReasonClassifyCompletion : UInt64
+    property reauthReasonIPSecPropertiesChanged : UInt64
+    property reauthReasonMidStreamInspection : UInt64
+    property reauthReasonSocketPropertyChanged : UInt64
+    property reauthReasonNewInboundMCastBCastPacket : UInt64
+    property reauthReasonEDPPolicyChanged : UInt64
+    property reauthReasonProxyHandleChanged : UInt64
+    def initialize(@numLayerStatistics : UInt32, @layerStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_LAYER_STATISTICS0*, @inboundAllowedConnectionsV4 : UInt32, @inboundBlockedConnectionsV4 : UInt32, @outboundAllowedConnectionsV4 : UInt32, @outboundBlockedConnectionsV4 : UInt32, @inboundAllowedConnectionsV6 : UInt32, @inboundBlockedConnectionsV6 : UInt32, @outboundAllowedConnectionsV6 : UInt32, @outboundBlockedConnectionsV6 : UInt32, @inboundActiveConnectionsV4 : UInt32, @outboundActiveConnectionsV4 : UInt32, @inboundActiveConnectionsV6 : UInt32, @outboundActiveConnectionsV6 : UInt32, @reauthDirInbound : UInt64, @reauthDirOutbound : UInt64, @reauthFamilyV4 : UInt64, @reauthFamilyV6 : UInt64, @reauthProtoOther : UInt64, @reauthProtoIPv4 : UInt64, @reauthProtoIPv6 : UInt64, @reauthProtoICMP : UInt64, @reauthProtoICMP6 : UInt64, @reauthProtoUDP : UInt64, @reauthProtoTCP : UInt64, @reauthReasonPolicyChange : UInt64, @reauthReasonNewArrivalInterface : UInt64, @reauthReasonNewNextHopInterface : UInt64, @reauthReasonProfileCrossing : UInt64, @reauthReasonClassifyCompletion : UInt64, @reauthReasonIPSecPropertiesChanged : UInt64, @reauthReasonMidStreamInspection : UInt64, @reauthReasonSocketPropertyChanged : UInt64, @reauthReasonNewInboundMCastBCastPacket : UInt64, @reauthReasonEDPPolicyChanged : UInt64, @reauthReasonProxyHandleChanged : UInt64)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_HEADER0,
-    timeStamp : Win32cr::Foundation::FILETIME,
-    flags : UInt32,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    ipProtocol : UInt8,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    localPort : UInt16,
-    remotePort : UInt16,
-    scopeId : UInt32,
-    appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    userId : Win32cr::Security::SID* do
+  struct FWPM_NET_EVENT_HEADER0
+    property timeStamp : Win32cr::Foundation::FILETIME
+    property flags : UInt32
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property ipProtocol : UInt8
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property localPort : UInt16
+    property remotePort : UInt16
+    property scopeId : UInt32
+    property appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property userId : Win32cr::Security::SID*
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      localAddrV4 : UInt32,
-      localAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    struct Anonymous1_e__Union_
+    property localAddrV4 : UInt32
+    property localAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    def initialize(@localAddrV4 : UInt32, @localAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      remoteAddrV4 : UInt32,
-      remoteAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    struct Anonymous2_e__Union_
+    property remoteAddrV4 : UInt32
+    property remoteAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    def initialize(@remoteAddrV4 : UInt32, @remoteAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16)
+    end
+    end
 
+    def initialize(@timeStamp : Win32cr::Foundation::FILETIME, @flags : UInt32, @ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @ipProtocol : UInt8, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @localPort : UInt16, @remotePort : UInt16, @scopeId : UInt32, @appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @userId : Win32cr::Security::SID*)
+    end
   end
 
   @[Extern]
-  record FWPM_NET_EVENT_HEADER1,
-    timeStamp : Win32cr::Foundation::FILETIME,
-    flags : UInt32,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    ipProtocol : UInt8,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    localPort : UInt16,
-    remotePort : UInt16,
-    scopeId : UInt32,
-    appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    userId : Win32cr::Security::SID*,
-    anonymous3 : Anonymous3_e__Union_ do
+  struct FWPM_NET_EVENT_HEADER1
+    property timeStamp : Win32cr::Foundation::FILETIME
+    property flags : UInt32
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property ipProtocol : UInt8
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property localPort : UInt16
+    property remotePort : UInt16
+    property scopeId : UInt32
+    property appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property userId : Win32cr::Security::SID*
+    property anonymous3 : Anonymous3_e__Union_
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous3_e__Union_
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        reserved1 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_AF,
-        anonymous : Anonymous_e__Union_ do
+      struct Anonymous_e__Struct_
+    property reserved1 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_AF
+    property anonymous : Anonymous_e__Union_
 
         # Nested Type Anonymous_e__Union_
         @[Extern(union: true)]
-        record Anonymous_e__Union_,
-          anonymous : Anonymous_e__Struct_ do
+        struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
 
           # Nested Type Anonymous_e__Struct_
           @[Extern]
-          record Anonymous_e__Struct_,
-            reserved2 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6,
-            reserved3 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6,
-            reserved4 : UInt32,
-            reserved5 : UInt32,
-            reserved6 : UInt16,
-            reserved7 : UInt32,
-            reserved8 : UInt32,
-            reserved9 : UInt16,
-            reserved10 : UInt64
+          struct Anonymous_e__Struct_
+    property reserved2 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6
+    property reserved3 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6
+    property reserved4 : UInt32
+    property reserved5 : UInt32
+    property reserved6 : UInt16
+    property reserved7 : UInt32
+    property reserved8 : UInt32
+    property reserved9 : UInt16
+    property reserved10 : UInt64
+    def initialize(@reserved2 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6, @reserved3 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6, @reserved4 : UInt32, @reserved5 : UInt32, @reserved6 : UInt16, @reserved7 : UInt32, @reserved8 : UInt32, @reserved9 : UInt16, @reserved10 : UInt64)
+    end
+          end
 
+    def initialize(@anonymous : Anonymous_e__Struct_)
+    end
         end
 
+    def initialize(@reserved1 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_AF, @anonymous : Anonymous_e__Union_)
+    end
       end
 
+    def initialize(@anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      localAddrV4 : UInt32,
-      localAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    struct Anonymous1_e__Union_
+    property localAddrV4 : UInt32
+    property localAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    def initialize(@localAddrV4 : UInt32, @localAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      remoteAddrV4 : UInt32,
-      remoteAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    struct Anonymous2_e__Union_
+    property remoteAddrV4 : UInt32
+    property remoteAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    def initialize(@remoteAddrV4 : UInt32, @remoteAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16)
+    end
+    end
 
+    def initialize(@timeStamp : Win32cr::Foundation::FILETIME, @flags : UInt32, @ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @ipProtocol : UInt8, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @localPort : UInt16, @remotePort : UInt16, @scopeId : UInt32, @appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @userId : Win32cr::Security::SID*, @anonymous3 : Anonymous3_e__Union_)
+    end
   end
 
   @[Extern]
-  record FWPM_NET_EVENT_HEADER2,
-    timeStamp : Win32cr::Foundation::FILETIME,
-    flags : UInt32,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    ipProtocol : UInt8,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    localPort : UInt16,
-    remotePort : UInt16,
-    scopeId : UInt32,
-    appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    userId : Win32cr::Security::SID*,
-    addressFamily : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_AF,
-    packageSid : Win32cr::Security::SID* do
+  struct FWPM_NET_EVENT_HEADER2
+    property timeStamp : Win32cr::Foundation::FILETIME
+    property flags : UInt32
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property ipProtocol : UInt8
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property localPort : UInt16
+    property remotePort : UInt16
+    property scopeId : UInt32
+    property appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property userId : Win32cr::Security::SID*
+    property addressFamily : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_AF
+    property packageSid : Win32cr::Security::SID*
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      localAddrV4 : UInt32,
-      localAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    struct Anonymous1_e__Union_
+    property localAddrV4 : UInt32
+    property localAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    def initialize(@localAddrV4 : UInt32, @localAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      remoteAddrV4 : UInt32,
-      remoteAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    struct Anonymous2_e__Union_
+    property remoteAddrV4 : UInt32
+    property remoteAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    def initialize(@remoteAddrV4 : UInt32, @remoteAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16)
+    end
+    end
 
+    def initialize(@timeStamp : Win32cr::Foundation::FILETIME, @flags : UInt32, @ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @ipProtocol : UInt8, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @localPort : UInt16, @remotePort : UInt16, @scopeId : UInt32, @appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @userId : Win32cr::Security::SID*, @addressFamily : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_AF, @packageSid : Win32cr::Security::SID*)
+    end
   end
 
   @[Extern]
-  record FWPM_NET_EVENT_HEADER3,
-    timeStamp : Win32cr::Foundation::FILETIME,
-    flags : UInt32,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    ipProtocol : UInt8,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    localPort : UInt16,
-    remotePort : UInt16,
-    scopeId : UInt32,
-    appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    userId : Win32cr::Security::SID*,
-    addressFamily : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_AF,
-    packageSid : Win32cr::Security::SID*,
-    enterpriseId : Win32cr::Foundation::PWSTR,
-    policyFlags : UInt64,
-    effectiveName : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB do
+  struct FWPM_NET_EVENT_HEADER3
+    property timeStamp : Win32cr::Foundation::FILETIME
+    property flags : UInt32
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property ipProtocol : UInt8
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property localPort : UInt16
+    property remotePort : UInt16
+    property scopeId : UInt32
+    property appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property userId : Win32cr::Security::SID*
+    property addressFamily : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_AF
+    property packageSid : Win32cr::Security::SID*
+    property enterpriseId : Win32cr::Foundation::PWSTR
+    property policyFlags : UInt64
+    property effectiveName : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      localAddrV4 : UInt32,
-      localAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    struct Anonymous1_e__Union_
+    property localAddrV4 : UInt32
+    property localAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    def initialize(@localAddrV4 : UInt32, @localAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      remoteAddrV4 : UInt32,
-      remoteAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    struct Anonymous2_e__Union_
+    property remoteAddrV4 : UInt32
+    property remoteAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16
+    def initialize(@remoteAddrV4 : UInt32, @remoteAddrV6 : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY16)
+    end
+    end
 
+    def initialize(@timeStamp : Win32cr::Foundation::FILETIME, @flags : UInt32, @ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @ipProtocol : UInt8, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @localPort : UInt16, @remotePort : UInt16, @scopeId : UInt32, @appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @userId : Win32cr::Security::SID*, @addressFamily : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_AF, @packageSid : Win32cr::Security::SID*, @enterpriseId : Win32cr::Foundation::PWSTR, @policyFlags : UInt64, @effectiveName : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB)
+    end
   end
 
   @[Extern]
-  record FWPM_NET_EVENT_IKEEXT_MM_FAILURE0,
-    failureErrorCode : UInt32,
-    failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT,
-    flags : UInt32,
-    keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE,
-    mmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_MM_SA_STATE,
-    saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE,
-    mmAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE,
-    endCertHash : UInt8[20],
-    mmId : UInt64,
-    mmFilterId : UInt64
+  struct FWPM_NET_EVENT_IKEEXT_MM_FAILURE0
+    property failureErrorCode : UInt32
+    property failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT
+    property flags : UInt32
+    property keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE
+    property mmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_MM_SA_STATE
+    property saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE
+    property mmAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE
+    property endCertHash : UInt8[20]
+    property mmId : UInt64
+    property mmFilterId : UInt64
+    def initialize(@failureErrorCode : UInt32, @failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT, @flags : UInt32, @keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE, @mmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_MM_SA_STATE, @saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE, @mmAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE, @endCertHash : UInt8[20], @mmId : UInt64, @mmFilterId : UInt64)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_IKEEXT_MM_FAILURE1,
-    failureErrorCode : UInt32,
-    failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT,
-    flags : UInt32,
-    keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE,
-    mmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_MM_SA_STATE,
-    saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE,
-    mmAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE,
-    endCertHash : UInt8[20],
-    mmId : UInt64,
-    mmFilterId : UInt64,
-    localPrincipalNameForAuth : Win32cr::Foundation::PWSTR,
-    remotePrincipalNameForAuth : Win32cr::Foundation::PWSTR,
-    numLocalPrincipalGroupSids : UInt32,
-    localPrincipalGroupSids : Win32cr::Foundation::PWSTR*,
-    numRemotePrincipalGroupSids : UInt32,
-    remotePrincipalGroupSids : Win32cr::Foundation::PWSTR*
+  struct FWPM_NET_EVENT_IKEEXT_MM_FAILURE1
+    property failureErrorCode : UInt32
+    property failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT
+    property flags : UInt32
+    property keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE
+    property mmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_MM_SA_STATE
+    property saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE
+    property mmAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE
+    property endCertHash : UInt8[20]
+    property mmId : UInt64
+    property mmFilterId : UInt64
+    property localPrincipalNameForAuth : Win32cr::Foundation::PWSTR
+    property remotePrincipalNameForAuth : Win32cr::Foundation::PWSTR
+    property numLocalPrincipalGroupSids : UInt32
+    property localPrincipalGroupSids : Win32cr::Foundation::PWSTR*
+    property numRemotePrincipalGroupSids : UInt32
+    property remotePrincipalGroupSids : Win32cr::Foundation::PWSTR*
+    def initialize(@failureErrorCode : UInt32, @failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT, @flags : UInt32, @keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE, @mmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_MM_SA_STATE, @saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE, @mmAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE, @endCertHash : UInt8[20], @mmId : UInt64, @mmFilterId : UInt64, @localPrincipalNameForAuth : Win32cr::Foundation::PWSTR, @remotePrincipalNameForAuth : Win32cr::Foundation::PWSTR, @numLocalPrincipalGroupSids : UInt32, @localPrincipalGroupSids : Win32cr::Foundation::PWSTR*, @numRemotePrincipalGroupSids : UInt32, @remotePrincipalGroupSids : Win32cr::Foundation::PWSTR*)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_,
-    failureErrorCode : UInt32,
-    failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT,
-    flags : UInt32,
-    keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE,
-    mmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_MM_SA_STATE,
-    saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE,
-    mmAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE,
-    endCertHash : UInt8[20],
-    mmId : UInt64,
-    mmFilterId : UInt64,
-    localPrincipalNameForAuth : Win32cr::Foundation::PWSTR,
-    remotePrincipalNameForAuth : Win32cr::Foundation::PWSTR,
-    numLocalPrincipalGroupSids : UInt32,
-    localPrincipalGroupSids : Win32cr::Foundation::PWSTR*,
-    numRemotePrincipalGroupSids : UInt32,
-    remotePrincipalGroupSids : Win32cr::Foundation::PWSTR*,
-    providerContextKey : LibC::GUID*
+  struct FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_
+    property failureErrorCode : UInt32
+    property failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT
+    property flags : UInt32
+    property keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE
+    property mmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_MM_SA_STATE
+    property saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE
+    property mmAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE
+    property endCertHash : UInt8[20]
+    property mmId : UInt64
+    property mmFilterId : UInt64
+    property localPrincipalNameForAuth : Win32cr::Foundation::PWSTR
+    property remotePrincipalNameForAuth : Win32cr::Foundation::PWSTR
+    property numLocalPrincipalGroupSids : UInt32
+    property localPrincipalGroupSids : Win32cr::Foundation::PWSTR*
+    property numRemotePrincipalGroupSids : UInt32
+    property remotePrincipalGroupSids : Win32cr::Foundation::PWSTR*
+    property providerContextKey : LibC::GUID*
+    def initialize(@failureErrorCode : UInt32, @failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT, @flags : UInt32, @keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE, @mmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_MM_SA_STATE, @saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE, @mmAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE, @endCertHash : UInt8[20], @mmId : UInt64, @mmFilterId : UInt64, @localPrincipalNameForAuth : Win32cr::Foundation::PWSTR, @remotePrincipalNameForAuth : Win32cr::Foundation::PWSTR, @numLocalPrincipalGroupSids : UInt32, @localPrincipalGroupSids : Win32cr::Foundation::PWSTR*, @numRemotePrincipalGroupSids : UInt32, @remotePrincipalGroupSids : Win32cr::Foundation::PWSTR*, @providerContextKey : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_IKEEXT_QM_FAILURE0,
-    failureErrorCode : UInt32,
-    failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT,
-    keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE,
-    qmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_QM_SA_STATE,
-    saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE,
-    saTrafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    qmFilterId : UInt64 do
+  struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE0
+    property failureErrorCode : UInt32
+    property failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT
+    property keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE
+    property qmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_QM_SA_STATE
+    property saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE
+    property saTrafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property qmFilterId : UInt64
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      localSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+    struct Anonymous1_e__Union_
+    property localSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+    def initialize(@localSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      remoteSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+    struct Anonymous2_e__Union_
+    property remoteSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+    def initialize(@remoteSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0)
+    end
+    end
 
+    def initialize(@failureErrorCode : UInt32, @failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT, @keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE, @qmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_QM_SA_STATE, @saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE, @saTrafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @qmFilterId : UInt64)
+    end
   end
 
   @[Extern]
-  record FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_,
-    failureErrorCode : UInt32,
-    failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT,
-    keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE,
-    qmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_QM_SA_STATE,
-    saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE,
-    saTrafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    qmFilterId : UInt64,
-    mmSaLuid : UInt64,
-    mmProviderContextKey : LibC::GUID do
+  struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_
+    property failureErrorCode : UInt32
+    property failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT
+    property keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE
+    property qmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_QM_SA_STATE
+    property saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE
+    property saTrafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property qmFilterId : UInt64
+    property mmSaLuid : UInt64
+    property mmProviderContextKey : LibC::GUID
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      localSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+    struct Anonymous1_e__Union_
+    property localSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+    def initialize(@localSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      remoteSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+    struct Anonymous2_e__Union_
+    property remoteSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0
+    def initialize(@remoteSubNet : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_CONDITION_VALUE0)
+    end
+    end
 
+    def initialize(@failureErrorCode : UInt32, @failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT, @keyingModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE, @qmState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_QM_SA_STATE, @saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE, @saTrafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @qmFilterId : UInt64, @mmSaLuid : UInt64, @mmProviderContextKey : LibC::GUID)
+    end
   end
 
   @[Extern]
-  record FWPM_NET_EVENT_IKEEXT_EM_FAILURE0,
-    failureErrorCode : UInt32,
-    failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT,
-    flags : UInt32,
-    emState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_SA_STATE,
-    saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE,
-    emAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE,
-    endCertHash : UInt8[20],
-    mmId : UInt64,
-    qmFilterId : UInt64
+  struct FWPM_NET_EVENT_IKEEXT_EM_FAILURE0
+    property failureErrorCode : UInt32
+    property failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT
+    property flags : UInt32
+    property emState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_SA_STATE
+    property saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE
+    property emAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE
+    property endCertHash : UInt8[20]
+    property mmId : UInt64
+    property qmFilterId : UInt64
+    def initialize(@failureErrorCode : UInt32, @failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT, @flags : UInt32, @emState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_SA_STATE, @saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE, @emAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE, @endCertHash : UInt8[20], @mmId : UInt64, @qmFilterId : UInt64)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_IKEEXT_EM_FAILURE1,
-    failureErrorCode : UInt32,
-    failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT,
-    flags : UInt32,
-    emState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_SA_STATE,
-    saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE,
-    emAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE,
-    endCertHash : UInt8[20],
-    mmId : UInt64,
-    qmFilterId : UInt64,
-    localPrincipalNameForAuth : Win32cr::Foundation::PWSTR,
-    remotePrincipalNameForAuth : Win32cr::Foundation::PWSTR,
-    numLocalPrincipalGroupSids : UInt32,
-    localPrincipalGroupSids : Win32cr::Foundation::PWSTR*,
-    numRemotePrincipalGroupSids : UInt32,
-    remotePrincipalGroupSids : Win32cr::Foundation::PWSTR*,
-    saTrafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE
+  struct FWPM_NET_EVENT_IKEEXT_EM_FAILURE1
+    property failureErrorCode : UInt32
+    property failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT
+    property flags : UInt32
+    property emState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_SA_STATE
+    property saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE
+    property emAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE
+    property endCertHash : UInt8[20]
+    property mmId : UInt64
+    property qmFilterId : UInt64
+    property localPrincipalNameForAuth : Win32cr::Foundation::PWSTR
+    property remotePrincipalNameForAuth : Win32cr::Foundation::PWSTR
+    property numLocalPrincipalGroupSids : UInt32
+    property localPrincipalGroupSids : Win32cr::Foundation::PWSTR*
+    property numRemotePrincipalGroupSids : UInt32
+    property remotePrincipalGroupSids : Win32cr::Foundation::PWSTR*
+    property saTrafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE
+    def initialize(@failureErrorCode : UInt32, @failurePoint : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_FAILURE_POINT, @flags : UInt32, @emState : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_EM_SA_STATE, @saRole : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ROLE, @emAuthMethod : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_AUTHENTICATION_METHOD_TYPE, @endCertHash : UInt8[20], @mmId : UInt64, @qmFilterId : UInt64, @localPrincipalNameForAuth : Win32cr::Foundation::PWSTR, @remotePrincipalNameForAuth : Win32cr::Foundation::PWSTR, @numLocalPrincipalGroupSids : UInt32, @localPrincipalGroupSids : Win32cr::Foundation::PWSTR*, @numRemotePrincipalGroupSids : UInt32, @remotePrincipalGroupSids : Win32cr::Foundation::PWSTR*, @saTrafficType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_CLASSIFY_DROP0,
-    filterId : UInt64,
-    layerId : UInt16
+  struct FWPM_NET_EVENT_CLASSIFY_DROP0
+    property filterId : UInt64
+    property layerId : UInt16
+    def initialize(@filterId : UInt64, @layerId : UInt16)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_CLASSIFY_DROP1,
-    filterId : UInt64,
-    layerId : UInt16,
-    reauthReason : UInt32,
-    originalProfile : UInt32,
-    currentProfile : UInt32,
-    msFwpDirection : UInt32,
-    isLoopback : Win32cr::Foundation::BOOL
+  struct FWPM_NET_EVENT_CLASSIFY_DROP1
+    property filterId : UInt64
+    property layerId : UInt16
+    property reauthReason : UInt32
+    property originalProfile : UInt32
+    property currentProfile : UInt32
+    property msFwpDirection : UInt32
+    property isLoopback : Win32cr::Foundation::BOOL
+    def initialize(@filterId : UInt64, @layerId : UInt16, @reauthReason : UInt32, @originalProfile : UInt32, @currentProfile : UInt32, @msFwpDirection : UInt32, @isLoopback : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_CLASSIFY_DROP2,
-    filterId : UInt64,
-    layerId : UInt16,
-    reauthReason : UInt32,
-    originalProfile : UInt32,
-    currentProfile : UInt32,
-    msFwpDirection : UInt32,
-    isLoopback : Win32cr::Foundation::BOOL,
-    vSwitchId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    vSwitchSourcePort : UInt32,
-    vSwitchDestinationPort : UInt32
+  struct FWPM_NET_EVENT_CLASSIFY_DROP2
+    property filterId : UInt64
+    property layerId : UInt16
+    property reauthReason : UInt32
+    property originalProfile : UInt32
+    property currentProfile : UInt32
+    property msFwpDirection : UInt32
+    property isLoopback : Win32cr::Foundation::BOOL
+    property vSwitchId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property vSwitchSourcePort : UInt32
+    property vSwitchDestinationPort : UInt32
+    def initialize(@filterId : UInt64, @layerId : UInt16, @reauthReason : UInt32, @originalProfile : UInt32, @currentProfile : UInt32, @msFwpDirection : UInt32, @isLoopback : Win32cr::Foundation::BOOL, @vSwitchId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @vSwitchSourcePort : UInt32, @vSwitchDestinationPort : UInt32)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_CLASSIFY_DROP_MAC0,
-    localMacAddr : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6,
-    remoteMacAddr : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6,
-    mediaType : UInt32,
-    ifType : UInt32,
-    etherType : UInt16,
-    ndisPortNumber : UInt32,
-    reserved : UInt32,
-    vlanTag : UInt16,
-    ifLuid : UInt64,
-    filterId : UInt64,
-    layerId : UInt16,
-    reauthReason : UInt32,
-    originalProfile : UInt32,
-    currentProfile : UInt32,
-    msFwpDirection : UInt32,
-    isLoopback : Win32cr::Foundation::BOOL,
-    vSwitchId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB,
-    vSwitchSourcePort : UInt32,
-    vSwitchDestinationPort : UInt32
+  struct FWPM_NET_EVENT_CLASSIFY_DROP_MAC0
+    property localMacAddr : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6
+    property remoteMacAddr : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6
+    property mediaType : UInt32
+    property ifType : UInt32
+    property etherType : UInt16
+    property ndisPortNumber : UInt32
+    property reserved : UInt32
+    property vlanTag : UInt16
+    property ifLuid : UInt64
+    property filterId : UInt64
+    property layerId : UInt16
+    property reauthReason : UInt32
+    property originalProfile : UInt32
+    property currentProfile : UInt32
+    property msFwpDirection : UInt32
+    property isLoopback : Win32cr::Foundation::BOOL
+    property vSwitchId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB
+    property vSwitchSourcePort : UInt32
+    property vSwitchDestinationPort : UInt32
+    def initialize(@localMacAddr : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6, @remoteMacAddr : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_ARRAY6, @mediaType : UInt32, @ifType : UInt32, @etherType : UInt16, @ndisPortNumber : UInt32, @reserved : UInt32, @vlanTag : UInt16, @ifLuid : UInt64, @filterId : UInt64, @layerId : UInt16, @reauthReason : UInt32, @originalProfile : UInt32, @currentProfile : UInt32, @msFwpDirection : UInt32, @isLoopback : Win32cr::Foundation::BOOL, @vSwitchId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB, @vSwitchSourcePort : UInt32, @vSwitchDestinationPort : UInt32)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_CLASSIFY_ALLOW0,
-    filterId : UInt64,
-    layerId : UInt16,
-    reauthReason : UInt32,
-    originalProfile : UInt32,
-    currentProfile : UInt32,
-    msFwpDirection : UInt32,
-    isLoopback : Win32cr::Foundation::BOOL
+  struct FWPM_NET_EVENT_CLASSIFY_ALLOW0
+    property filterId : UInt64
+    property layerId : UInt16
+    property reauthReason : UInt32
+    property originalProfile : UInt32
+    property currentProfile : UInt32
+    property msFwpDirection : UInt32
+    property isLoopback : Win32cr::Foundation::BOOL
+    def initialize(@filterId : UInt64, @layerId : UInt16, @reauthReason : UInt32, @originalProfile : UInt32, @currentProfile : UInt32, @msFwpDirection : UInt32, @isLoopback : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_IPSEC_KERNEL_DROP0,
-    failureStatus : Int32,
-    direction : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION,
-    spi : UInt32,
-    filterId : UInt64,
-    layerId : UInt16
+  struct FWPM_NET_EVENT_IPSEC_KERNEL_DROP0
+    property failureStatus : Int32
+    property direction : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION
+    property spi : UInt32
+    property filterId : UInt64
+    property layerId : UInt16
+    def initialize(@failureStatus : Int32, @direction : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION, @spi : UInt32, @filterId : UInt64, @layerId : UInt16)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_IPSEC_DOSP_DROP0,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    failureStatus : Int32,
-    direction : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION do
+  struct FWPM_NET_EVENT_IPSEC_DOSP_DROP0
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property failureStatus : Int32
+    property direction : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      publicHostV4Addr : UInt32,
-      publicHostV6Addr : UInt8[16]
+    struct Anonymous1_e__Union_
+    property publicHostV4Addr : UInt32
+    property publicHostV6Addr : UInt8[16]
+    def initialize(@publicHostV4Addr : UInt32, @publicHostV6Addr : UInt8[16])
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      internalHostV4Addr : UInt32,
-      internalHostV6Addr : UInt8[16]
+    struct Anonymous2_e__Union_
+    property internalHostV4Addr : UInt32
+    property internalHostV6Addr : UInt8[16]
+    def initialize(@internalHostV4Addr : UInt32, @internalHostV6Addr : UInt8[16])
+    end
+    end
 
+    def initialize(@ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @failureStatus : Int32, @direction : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_DIRECTION)
+    end
   end
 
   @[Extern]
-  record FWPM_NET_EVENT_CAPABILITY_DROP0,
-    networkCapabilityId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_APPC_NETWORK_CAPABILITY_TYPE,
-    filterId : UInt64,
-    isLoopback : Win32cr::Foundation::BOOL
+  struct FWPM_NET_EVENT_CAPABILITY_DROP0
+    property networkCapabilityId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_APPC_NETWORK_CAPABILITY_TYPE
+    property filterId : UInt64
+    property isLoopback : Win32cr::Foundation::BOOL
+    def initialize(@networkCapabilityId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_APPC_NETWORK_CAPABILITY_TYPE, @filterId : UInt64, @isLoopback : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_CAPABILITY_ALLOW0,
-    networkCapabilityId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_APPC_NETWORK_CAPABILITY_TYPE,
-    filterId : UInt64,
-    isLoopback : Win32cr::Foundation::BOOL
+  struct FWPM_NET_EVENT_CAPABILITY_ALLOW0
+    property networkCapabilityId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_APPC_NETWORK_CAPABILITY_TYPE
+    property filterId : UInt64
+    property isLoopback : Win32cr::Foundation::BOOL
+    def initialize(@networkCapabilityId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_APPC_NETWORK_CAPABILITY_TYPE, @filterId : UInt64, @isLoopback : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0_,
-    spi : UInt32
+  struct FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0_
+    property spi : UInt32
+    def initialize(@spi : UInt32)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT0,
-    header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER0,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct FWPM_NET_EVENT0
+    property header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER0
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE0*,
-      ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*,
-      ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE0*,
-      classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP0*,
-      ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*,
-      idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+    struct Anonymous_e__Union_
+    property ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE0*
+    property ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*
+    property ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE0*
+    property classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP0*
+    property ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
+    property idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+    def initialize(@ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE0*, @ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*, @ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE0*, @classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP0*, @ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*, @idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*)
+    end
+    end
 
+    def initialize(@header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER0, @type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record FWPM_NET_EVENT1,
-    header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER1,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct FWPM_NET_EVENT1
+    property header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER1
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*,
-      ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*,
-      ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*,
-      classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP1*,
-      ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*,
-      idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+    struct Anonymous_e__Union_
+    property ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*
+    property ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*
+    property ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
+    property classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP1*
+    property ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
+    property idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+    def initialize(@ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*, @ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*, @ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*, @classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP1*, @ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*, @idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*)
+    end
+    end
 
+    def initialize(@header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER1, @type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record FWPM_NET_EVENT2,
-    header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER2,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct FWPM_NET_EVENT2
+    property header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER2
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*,
-      ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*,
-      ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*,
-      classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP2*,
-      ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*,
-      idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*,
-      classifyAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_ALLOW0*,
-      capabilityDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_DROP0*,
-      capabilityAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_ALLOW0*,
-      classifyDropMac : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
+    struct Anonymous_e__Union_
+    property ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*
+    property ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*
+    property ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
+    property classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP2*
+    property ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
+    property idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+    property classifyAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_ALLOW0*
+    property capabilityDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_DROP0*
+    property capabilityAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_ALLOW0*
+    property classifyDropMac : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
+    def initialize(@ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*, @ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*, @ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*, @classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP2*, @ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*, @idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*, @classifyAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_ALLOW0*, @capabilityDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_DROP0*, @capabilityAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_ALLOW0*, @classifyDropMac : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*)
+    end
+    end
 
+    def initialize(@header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER2, @type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record FWPM_NET_EVENT3,
-    header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER3,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct FWPM_NET_EVENT3
+    property header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER3
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*,
-      ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*,
-      ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*,
-      classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP2*,
-      ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*,
-      idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*,
-      classifyAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_ALLOW0*,
-      capabilityDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_DROP0*,
-      capabilityAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_ALLOW0*,
-      classifyDropMac : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
+    struct Anonymous_e__Union_
+    property ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*
+    property ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*
+    property ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
+    property classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP2*
+    property ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
+    property idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+    property classifyAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_ALLOW0*
+    property capabilityDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_DROP0*
+    property capabilityAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_ALLOW0*
+    property classifyDropMac : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
+    def initialize(@ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*, @ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*, @ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*, @classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP2*, @ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*, @idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*, @classifyAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_ALLOW0*, @capabilityDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_DROP0*, @capabilityAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_ALLOW0*, @classifyDropMac : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*)
+    end
+    end
 
+    def initialize(@header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER3, @type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record FWPM_NET_EVENT4_,
-    header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER3,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct FWPM_NET_EVENT4_
+    property header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER3
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_*,
-      ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_*,
-      ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*,
-      classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP2*,
-      ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*,
-      idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*,
-      classifyAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_ALLOW0*,
-      capabilityDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_DROP0*,
-      capabilityAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_ALLOW0*,
-      classifyDropMac : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
+    struct Anonymous_e__Union_
+    property ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_*
+    property ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_*
+    property ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
+    property classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP2*
+    property ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
+    property idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+    property classifyAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_ALLOW0*
+    property capabilityDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_DROP0*
+    property capabilityAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_ALLOW0*
+    property classifyDropMac : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
+    def initialize(@ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_*, @ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_*, @ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*, @classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP2*, @ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*, @idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*, @classifyAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_ALLOW0*, @capabilityDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_DROP0*, @capabilityAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_ALLOW0*, @classifyDropMac : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*)
+    end
+    end
 
+    def initialize(@header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER3, @type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record FWPM_NET_EVENT5_,
-    header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER3,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct FWPM_NET_EVENT5_
+    property header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER3
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_*,
-      ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_*,
-      ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*,
-      classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP2*,
-      ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*,
-      idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*,
-      classifyAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_ALLOW0*,
-      capabilityDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_DROP0*,
-      capabilityAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_ALLOW0*,
-      classifyDropMac : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*,
-      lpmPacketArrival : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0_*
+    struct Anonymous_e__Union_
+    property ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_*
+    property ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_*
+    property ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
+    property classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP2*
+    property ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
+    property idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+    property classifyAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_ALLOW0*
+    property capabilityDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_DROP0*
+    property capabilityAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_ALLOW0*
+    property classifyDropMac : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
+    property lpmPacketArrival : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0_*
+    def initialize(@ikeMmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_*, @ikeQmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_*, @ikeEmFailure : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*, @classifyDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP2*, @ipsecDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*, @idpDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_IPSEC_DOSP_DROP0*, @classifyAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_ALLOW0*, @capabilityDrop : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_DROP0*, @capabilityAllow : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CAPABILITY_ALLOW0*, @classifyDropMac : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*, @lpmPacketArrival : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0_*)
+    end
+    end
 
+    def initialize(@header : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_HEADER3, @type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record FWPM_NET_EVENT_ENUM_TEMPLATE0,
-    startTime : Win32cr::Foundation::FILETIME,
-    endTime : Win32cr::Foundation::FILETIME,
-    numFilterConditions : UInt32,
-    filterCondition : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*
+  struct FWPM_NET_EVENT_ENUM_TEMPLATE0
+    property startTime : Win32cr::Foundation::FILETIME
+    property endTime : Win32cr::Foundation::FILETIME
+    property numFilterConditions : UInt32
+    property filterCondition : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*
+    def initialize(@startTime : Win32cr::Foundation::FILETIME, @endTime : Win32cr::Foundation::FILETIME, @numFilterConditions : UInt32, @filterCondition : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*)
+    end
+  end
 
   @[Extern]
-  record FWPM_NET_EVENT_SUBSCRIPTION0,
-    enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_ENUM_TEMPLATE0*,
-    flags : UInt32,
-    sessionKey : LibC::GUID
+  struct FWPM_NET_EVENT_SUBSCRIPTION0
+    property enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_ENUM_TEMPLATE0*
+    property flags : UInt32
+    property sessionKey : LibC::GUID
+    def initialize(@enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_ENUM_TEMPLATE0*, @flags : UInt32, @sessionKey : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record FWPM_SYSTEM_PORTS_BY_TYPE0,
-    type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SYSTEM_PORT_TYPE,
-    numPorts : UInt32,
-    ports : UInt16*
+  struct FWPM_SYSTEM_PORTS_BY_TYPE0
+    property type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SYSTEM_PORT_TYPE
+    property numPorts : UInt32
+    property ports : UInt16*
+    def initialize(@type__ : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SYSTEM_PORT_TYPE, @numPorts : UInt32, @ports : UInt16*)
+    end
+  end
 
   @[Extern]
-  record FWPM_SYSTEM_PORTS0,
-    numTypes : UInt32,
-    types : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SYSTEM_PORTS_BY_TYPE0*
+  struct FWPM_SYSTEM_PORTS0
+    property numTypes : UInt32
+    property types : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SYSTEM_PORTS_BY_TYPE0*
+    def initialize(@numTypes : UInt32, @types : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SYSTEM_PORTS_BY_TYPE0*)
+    end
+  end
 
   @[Extern]
-  record FWPM_CONNECTION0,
-    connectionId : UInt64,
-    ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    providerKey : LibC::GUID*,
-    ipsecTrafficModeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE,
-    keyModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE,
-    mmCrypto : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0,
-    mmPeer : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL2,
-    emPeer : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL2,
-    bytesTransferredIn : UInt64,
-    bytesTransferredOut : UInt64,
-    bytesTransferredTotal : UInt64,
-    startSysTime : Win32cr::Foundation::FILETIME do
+  struct FWPM_CONNECTION0
+    property connectionId : UInt64
+    property ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property providerKey : LibC::GUID*
+    property ipsecTrafficModeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE
+    property keyModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE
+    property mmCrypto : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0
+    property mmPeer : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL2
+    property emPeer : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL2
+    property bytesTransferredIn : UInt64
+    property bytesTransferredOut : UInt64
+    property bytesTransferredTotal : UInt64
+    property startSysTime : Win32cr::Foundation::FILETIME
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      localV4Address : UInt32,
-      localV6Address : UInt8[16]
+    struct Anonymous1_e__Union_
+    property localV4Address : UInt32
+    property localV6Address : UInt8[16]
+    def initialize(@localV4Address : UInt32, @localV6Address : UInt8[16])
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      remoteV4Address : UInt32,
-      remoteV6Address : UInt8[16]
+    struct Anonymous2_e__Union_
+    property remoteV4Address : UInt32
+    property remoteV6Address : UInt8[16]
+    def initialize(@remoteV4Address : UInt32, @remoteV6Address : UInt8[16])
+    end
+    end
 
+    def initialize(@connectionId : UInt64, @ipVersion : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_IP_VERSION, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @providerKey : LibC::GUID*, @ipsecTrafficModeType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC_TYPE, @keyModuleType : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_KEY_MODULE_TYPE, @mmCrypto : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_PROPOSAL0, @mmPeer : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL2, @emPeer : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_CREDENTIAL2, @bytesTransferredIn : UInt64, @bytesTransferredOut : UInt64, @bytesTransferredTotal : UInt64, @startSysTime : Win32cr::Foundation::FILETIME)
+    end
   end
 
   @[Extern]
-  record FWPM_CONNECTION_ENUM_TEMPLATE0,
-    connectionId : UInt64,
-    flags : UInt32
+  struct FWPM_CONNECTION_ENUM_TEMPLATE0
+    property connectionId : UInt64
+    property flags : UInt32
+    def initialize(@connectionId : UInt64, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record FWPM_CONNECTION_SUBSCRIPTION0,
-    enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION_ENUM_TEMPLATE0*,
-    flags : UInt32,
-    sessionKey : LibC::GUID
+  struct FWPM_CONNECTION_SUBSCRIPTION0
+    property enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION_ENUM_TEMPLATE0*
+    property flags : UInt32
+    property sessionKey : LibC::GUID
+    def initialize(@enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION_ENUM_TEMPLATE0*, @flags : UInt32, @sessionKey : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record FWPM_VSWITCH_EVENT0,
-    eventType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_VSWITCH_EVENT_TYPE,
-    vSwitchId : Win32cr::Foundation::PWSTR,
-    anonymous : Anonymous_e__Union_ do
+  struct FWPM_VSWITCH_EVENT0
+    property eventType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_VSWITCH_EVENT_TYPE
+    property vSwitchId : Win32cr::Foundation::PWSTR
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      positionInfo : Positioninfo_e__struct_,
-      reorderInfo : Reorderinfo_e__struct_ do
+    struct Anonymous_e__Union_
+    property positionInfo : Positioninfo_e__struct_
+    property reorderInfo : Reorderinfo_e__struct_
 
       # Nested Type Positioninfo_e__struct_
       @[Extern]
-      record Positioninfo_e__struct_,
-        numvSwitchFilterExtensions : UInt32,
-        vSwitchFilterExtensions : Win32cr::Foundation::PWSTR*
+      struct Positioninfo_e__struct_
+    property numvSwitchFilterExtensions : UInt32
+    property vSwitchFilterExtensions : Win32cr::Foundation::PWSTR*
+    def initialize(@numvSwitchFilterExtensions : UInt32, @vSwitchFilterExtensions : Win32cr::Foundation::PWSTR*)
+    end
+      end
 
 
       # Nested Type Reorderinfo_e__struct_
       @[Extern]
-      record Reorderinfo_e__struct_,
-        inRequiredPosition : Win32cr::Foundation::BOOL,
-        numvSwitchFilterExtensions : UInt32,
-        vSwitchFilterExtensions : Win32cr::Foundation::PWSTR*
+      struct Reorderinfo_e__struct_
+    property inRequiredPosition : Win32cr::Foundation::BOOL
+    property numvSwitchFilterExtensions : UInt32
+    property vSwitchFilterExtensions : Win32cr::Foundation::PWSTR*
+    def initialize(@inRequiredPosition : Win32cr::Foundation::BOOL, @numvSwitchFilterExtensions : UInt32, @vSwitchFilterExtensions : Win32cr::Foundation::PWSTR*)
+    end
+      end
 
+    def initialize(@positionInfo : Positioninfo_e__struct_, @reorderInfo : Reorderinfo_e__struct_)
+    end
     end
 
+    def initialize(@eventType : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_VSWITCH_EVENT_TYPE, @vSwitchId : Win32cr::Foundation::PWSTR, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record FWPM_VSWITCH_EVENT_SUBSCRIPTION0,
-    flags : UInt32,
-    sessionKey : LibC::GUID
+  struct FWPM_VSWITCH_EVENT_SUBSCRIPTION0
+    property flags : UInt32
+    property sessionKey : LibC::GUID
+    def initialize(@flags : UInt32, @sessionKey : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record IPSEC_KEY_MANAGER_CALLBACKS0,
-    reserved : LibC::GUID,
-    flags : UInt32,
-    keyDictationCheck : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0,
-    keyDictation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER_DICTATE_KEY0,
-    keyNotify : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER_NOTIFY_KEY0
+  struct IPSEC_KEY_MANAGER_CALLBACKS0
+    property reserved : LibC::GUID
+    property flags : UInt32
+    property keyDictationCheck : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0
+    property keyDictation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER_DICTATE_KEY0
+    property keyNotify : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER_NOTIFY_KEY0
+    def initialize(@reserved : LibC::GUID, @flags : UInt32, @keyDictationCheck : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0, @keyDictation : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER_DICTATE_KEY0, @keyNotify : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER_NOTIFY_KEY0)
+    end
+  end
 
   @[Link("fwpuclnt")]
   lib C

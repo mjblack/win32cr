@@ -89,120 +89,150 @@ module Win32cr::NetworkManagement::NetBios
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record NCB,
-    ncb_command : UInt8,
-    ncb_retcode : UInt8,
-    ncb_lsn : UInt8,
-    ncb_num : UInt8,
-    ncb_buffer : UInt8*,
-    ncb_length : UInt16,
-    ncb_callname : UInt8[16],
-    ncb_name : UInt8[16],
-    ncb_rto : UInt8,
-    ncb_sto : UInt8,
-    ncb_post : LibC::IntPtrT,
-    ncb_lana_num : UInt8,
-    ncb_cmd_cplt : UInt8,
-    ncb_reserve : UInt8[18],
-    ncb_event : Win32cr::Foundation::HANDLE
+  struct NCB
+    property ncb_command : UInt8
+    property ncb_retcode : UInt8
+    property ncb_lsn : UInt8
+    property ncb_num : UInt8
+    property ncb_buffer : UInt8*
+    property ncb_length : UInt16
+    property ncb_callname : UInt8[16]
+    property ncb_name : UInt8[16]
+    property ncb_rto : UInt8
+    property ncb_sto : UInt8
+    property ncb_post : LibC::IntPtrT
+    property ncb_lana_num : UInt8
+    property ncb_cmd_cplt : UInt8
+    property ncb_reserve : UInt8[18]
+    property ncb_event : Win32cr::Foundation::HANDLE
+    def initialize(@ncb_command : UInt8, @ncb_retcode : UInt8, @ncb_lsn : UInt8, @ncb_num : UInt8, @ncb_buffer : UInt8*, @ncb_length : UInt16, @ncb_callname : UInt8[16], @ncb_name : UInt8[16], @ncb_rto : UInt8, @ncb_sto : UInt8, @ncb_post : LibC::IntPtrT, @ncb_lana_num : UInt8, @ncb_cmd_cplt : UInt8, @ncb_reserve : UInt8[18], @ncb_event : Win32cr::Foundation::HANDLE)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record ADAPTER_STATUS,
-    adapter_address : UInt8[6],
-    rev_major : UInt8,
-    reserved0 : UInt8,
-    adapter_type : UInt8,
-    rev_minor : UInt8,
-    duration : UInt16,
-    frmr_recv : UInt16,
-    frmr_xmit : UInt16,
-    iframe_recv_err : UInt16,
-    xmit_aborts : UInt16,
-    xmit_success : UInt32,
-    recv_success : UInt32,
-    iframe_xmit_err : UInt16,
-    recv_buff_unavail : UInt16,
-    t1_timeouts : UInt16,
-    ti_timeouts : UInt16,
-    reserved1 : UInt32,
-    free_ncbs : UInt16,
-    max_cfg_ncbs : UInt16,
-    max_ncbs : UInt16,
-    xmit_buf_unavail : UInt16,
-    max_dgram_size : UInt16,
-    pending_sess : UInt16,
-    max_cfg_sess : UInt16,
-    max_sess : UInt16,
-    max_sess_pkt_size : UInt16,
-    name_count : UInt16
+  struct ADAPTER_STATUS
+    property adapter_address : UInt8[6]
+    property rev_major : UInt8
+    property reserved0 : UInt8
+    property adapter_type : UInt8
+    property rev_minor : UInt8
+    property duration : UInt16
+    property frmr_recv : UInt16
+    property frmr_xmit : UInt16
+    property iframe_recv_err : UInt16
+    property xmit_aborts : UInt16
+    property xmit_success : UInt32
+    property recv_success : UInt32
+    property iframe_xmit_err : UInt16
+    property recv_buff_unavail : UInt16
+    property t1_timeouts : UInt16
+    property ti_timeouts : UInt16
+    property reserved1 : UInt32
+    property free_ncbs : UInt16
+    property max_cfg_ncbs : UInt16
+    property max_ncbs : UInt16
+    property xmit_buf_unavail : UInt16
+    property max_dgram_size : UInt16
+    property pending_sess : UInt16
+    property max_cfg_sess : UInt16
+    property max_sess : UInt16
+    property max_sess_pkt_size : UInt16
+    property name_count : UInt16
+    def initialize(@adapter_address : UInt8[6], @rev_major : UInt8, @reserved0 : UInt8, @adapter_type : UInt8, @rev_minor : UInt8, @duration : UInt16, @frmr_recv : UInt16, @frmr_xmit : UInt16, @iframe_recv_err : UInt16, @xmit_aborts : UInt16, @xmit_success : UInt32, @recv_success : UInt32, @iframe_xmit_err : UInt16, @recv_buff_unavail : UInt16, @t1_timeouts : UInt16, @ti_timeouts : UInt16, @reserved1 : UInt32, @free_ncbs : UInt16, @max_cfg_ncbs : UInt16, @max_ncbs : UInt16, @xmit_buf_unavail : UInt16, @max_dgram_size : UInt16, @pending_sess : UInt16, @max_cfg_sess : UInt16, @max_sess : UInt16, @max_sess_pkt_size : UInt16, @name_count : UInt16)
+    end
+  end
 
   @[Extern]
-  record NAME_BUFFER,
-    name : UInt8[16],
-    name_num : UInt8,
-    name_flags : UInt8
+  struct NAME_BUFFER
+    property name : UInt8[16]
+    property name_num : UInt8
+    property name_flags : UInt8
+    def initialize(@name : UInt8[16], @name_num : UInt8, @name_flags : UInt8)
+    end
+  end
 
   @[Extern]
-  record SESSION_HEADER,
-    sess_name : UInt8,
-    num_sess : UInt8,
-    rcv_dg_outstanding : UInt8,
-    rcv_any_outstanding : UInt8
+  struct SESSION_HEADER
+    property sess_name : UInt8
+    property num_sess : UInt8
+    property rcv_dg_outstanding : UInt8
+    property rcv_any_outstanding : UInt8
+    def initialize(@sess_name : UInt8, @num_sess : UInt8, @rcv_dg_outstanding : UInt8, @rcv_any_outstanding : UInt8)
+    end
+  end
 
   @[Extern]
-  record SESSION_BUFFER,
-    lsn : UInt8,
-    state : UInt8,
-    local_name : UInt8[16],
-    remote_name : UInt8[16],
-    rcvs_outstanding : UInt8,
-    sends_outstanding : UInt8
+  struct SESSION_BUFFER
+    property lsn : UInt8
+    property state : UInt8
+    property local_name : UInt8[16]
+    property remote_name : UInt8[16]
+    property rcvs_outstanding : UInt8
+    property sends_outstanding : UInt8
+    def initialize(@lsn : UInt8, @state : UInt8, @local_name : UInt8[16], @remote_name : UInt8[16], @rcvs_outstanding : UInt8, @sends_outstanding : UInt8)
+    end
+  end
 
   @[Extern]
-  record LANA_ENUM,
-    length : UInt8,
-    lana : UInt8[255]
+  struct LANA_ENUM
+    property length : UInt8
+    property lana : UInt8[255]
+    def initialize(@length : UInt8, @lana : UInt8[255])
+    end
+  end
 
   @[Extern]
-  record FIND_NAME_HEADER,
-    node_count : UInt16,
-    reserved : UInt8,
-    unique_group : UInt8
+  struct FIND_NAME_HEADER
+    property node_count : UInt16
+    property reserved : UInt8
+    property unique_group : UInt8
+    def initialize(@node_count : UInt16, @reserved : UInt8, @unique_group : UInt8)
+    end
+  end
 
   @[Extern]
-  record FIND_NAME_BUFFER,
-    length : UInt8,
-    access_control : UInt8,
-    frame_control : UInt8,
-    destination_addr : UInt8[6],
-    source_addr : UInt8[6],
-    routing_info : UInt8[18]
+  struct FIND_NAME_BUFFER
+    property length : UInt8
+    property access_control : UInt8
+    property frame_control : UInt8
+    property destination_addr : UInt8[6]
+    property source_addr : UInt8[6]
+    property routing_info : UInt8[18]
+    def initialize(@length : UInt8, @access_control : UInt8, @frame_control : UInt8, @destination_addr : UInt8[6], @source_addr : UInt8[6], @routing_info : UInt8[18])
+    end
+  end
 
   @[Extern]
-  record ACTION_HEADER,
-    transport_id : UInt32,
-    action_code : UInt16,
-    reserved : UInt16
+  struct ACTION_HEADER
+    property transport_id : UInt32
+    property action_code : UInt16
+    property reserved : UInt16
+    def initialize(@transport_id : UInt32, @action_code : UInt16, @reserved : UInt16)
+    end
+  end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record NCB,
-    ncb_command : UInt8,
-    ncb_retcode : UInt8,
-    ncb_lsn : UInt8,
-    ncb_num : UInt8,
-    ncb_buffer : UInt8*,
-    ncb_length : UInt16,
-    ncb_callname : UInt8[16],
-    ncb_name : UInt8[16],
-    ncb_rto : UInt8,
-    ncb_sto : UInt8,
-    ncb_post : LibC::IntPtrT,
-    ncb_lana_num : UInt8,
-    ncb_cmd_cplt : UInt8,
-    ncb_reserve : UInt8[10],
-    ncb_event : Win32cr::Foundation::HANDLE
+  struct NCB
+    property ncb_command : UInt8
+    property ncb_retcode : UInt8
+    property ncb_lsn : UInt8
+    property ncb_num : UInt8
+    property ncb_buffer : UInt8*
+    property ncb_length : UInt16
+    property ncb_callname : UInt8[16]
+    property ncb_name : UInt8[16]
+    property ncb_rto : UInt8
+    property ncb_sto : UInt8
+    property ncb_post : LibC::IntPtrT
+    property ncb_lana_num : UInt8
+    property ncb_cmd_cplt : UInt8
+    property ncb_reserve : UInt8[10]
+    property ncb_event : Win32cr::Foundation::HANDLE
+    def initialize(@ncb_command : UInt8, @ncb_retcode : UInt8, @ncb_lsn : UInt8, @ncb_num : UInt8, @ncb_buffer : UInt8*, @ncb_length : UInt16, @ncb_callname : UInt8[16], @ncb_name : UInt8[16], @ncb_rto : UInt8, @ncb_sto : UInt8, @ncb_post : LibC::IntPtrT, @ncb_lana_num : UInt8, @ncb_cmd_cplt : UInt8, @ncb_reserve : UInt8[10], @ncb_event : Win32cr::Foundation::HANDLE)
+    end
+  end
   {% end %}
 
   @[Link("netapi32")]

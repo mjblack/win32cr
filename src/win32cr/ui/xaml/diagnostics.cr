@@ -52,67 +52,91 @@ module Win32cr::UI::Xaml::Diagnostics
   end
 
   @[Extern]
-  record SourceInfo,
-    file_name : Win32cr::Foundation::BSTR,
-    line_number : UInt32,
-    column_number : UInt32,
-    char_position : UInt32,
-    hash : Win32cr::Foundation::BSTR
+  struct SourceInfo
+    property file_name : Win32cr::Foundation::BSTR
+    property line_number : UInt32
+    property column_number : UInt32
+    property char_position : UInt32
+    property hash : Win32cr::Foundation::BSTR
+    def initialize(@file_name : Win32cr::Foundation::BSTR, @line_number : UInt32, @column_number : UInt32, @char_position : UInt32, @hash : Win32cr::Foundation::BSTR)
+    end
+  end
 
   @[Extern]
-  record ParentChildRelation,
-    parent : UInt64,
-    child : UInt64,
-    child_index : UInt32
+  struct ParentChildRelation
+    property parent : UInt64
+    property child : UInt64
+    property child_index : UInt32
+    def initialize(@parent : UInt64, @child : UInt64, @child_index : UInt32)
+    end
+  end
 
   @[Extern]
-  record VisualElement,
-    handle : UInt64,
-    src_info : Win32cr::UI::Xaml::Diagnostics::SourceInfo,
-    type__ : Win32cr::Foundation::BSTR,
-    name : Win32cr::Foundation::BSTR,
-    num_children : UInt32
+  struct VisualElement
+    property handle : UInt64
+    property src_info : Win32cr::UI::Xaml::Diagnostics::SourceInfo
+    property type__ : Win32cr::Foundation::BSTR
+    property name : Win32cr::Foundation::BSTR
+    property num_children : UInt32
+    def initialize(@handle : UInt64, @src_info : Win32cr::UI::Xaml::Diagnostics::SourceInfo, @type__ : Win32cr::Foundation::BSTR, @name : Win32cr::Foundation::BSTR, @num_children : UInt32)
+    end
+  end
 
   @[Extern]
-  record PropertyChainSource,
-    handle : UInt64,
-    target_type : Win32cr::Foundation::BSTR,
-    name : Win32cr::Foundation::BSTR,
-    source : Win32cr::UI::Xaml::Diagnostics::BaseValueSource,
-    src_info : Win32cr::UI::Xaml::Diagnostics::SourceInfo
+  struct PropertyChainSource
+    property handle : UInt64
+    property target_type : Win32cr::Foundation::BSTR
+    property name : Win32cr::Foundation::BSTR
+    property source : Win32cr::UI::Xaml::Diagnostics::BaseValueSource
+    property src_info : Win32cr::UI::Xaml::Diagnostics::SourceInfo
+    def initialize(@handle : UInt64, @target_type : Win32cr::Foundation::BSTR, @name : Win32cr::Foundation::BSTR, @source : Win32cr::UI::Xaml::Diagnostics::BaseValueSource, @src_info : Win32cr::UI::Xaml::Diagnostics::SourceInfo)
+    end
+  end
 
   @[Extern]
-  record PropertyChainValue,
-    index : UInt32,
-    type__ : Win32cr::Foundation::BSTR,
-    declaring_type : Win32cr::Foundation::BSTR,
-    value_type : Win32cr::Foundation::BSTR,
-    item_type : Win32cr::Foundation::BSTR,
-    value : Win32cr::Foundation::BSTR,
-    overridden : Win32cr::Foundation::BOOL,
-    metadata_bits : Int64,
-    property_name : Win32cr::Foundation::BSTR,
-    property_chain_index : UInt32
+  struct PropertyChainValue
+    property index : UInt32
+    property type__ : Win32cr::Foundation::BSTR
+    property declaring_type : Win32cr::Foundation::BSTR
+    property value_type : Win32cr::Foundation::BSTR
+    property item_type : Win32cr::Foundation::BSTR
+    property value : Win32cr::Foundation::BSTR
+    property overridden : Win32cr::Foundation::BOOL
+    property metadata_bits : Int64
+    property property_name : Win32cr::Foundation::BSTR
+    property property_chain_index : UInt32
+    def initialize(@index : UInt32, @type__ : Win32cr::Foundation::BSTR, @declaring_type : Win32cr::Foundation::BSTR, @value_type : Win32cr::Foundation::BSTR, @item_type : Win32cr::Foundation::BSTR, @value : Win32cr::Foundation::BSTR, @overridden : Win32cr::Foundation::BOOL, @metadata_bits : Int64, @property_name : Win32cr::Foundation::BSTR, @property_chain_index : UInt32)
+    end
+  end
 
   @[Extern]
-  record EnumType,
-    name : Win32cr::Foundation::BSTR,
-    value_ints : Win32cr::System::Com::SAFEARRAY*,
-    value_strings : Win32cr::System::Com::SAFEARRAY*
+  struct EnumType
+    property name : Win32cr::Foundation::BSTR
+    property value_ints : Win32cr::System::Com::SAFEARRAY*
+    property value_strings : Win32cr::System::Com::SAFEARRAY*
+    def initialize(@name : Win32cr::Foundation::BSTR, @value_ints : Win32cr::System::Com::SAFEARRAY*, @value_strings : Win32cr::System::Com::SAFEARRAY*)
+    end
+  end
 
   @[Extern]
-  record CollectionElementValue,
-    index : UInt32,
-    value_type : Win32cr::Foundation::BSTR,
-    value : Win32cr::Foundation::BSTR,
-    metadata_bits : Int64
+  struct CollectionElementValue
+    property index : UInt32
+    property value_type : Win32cr::Foundation::BSTR
+    property value : Win32cr::Foundation::BSTR
+    property metadata_bits : Int64
+    def initialize(@index : UInt32, @value_type : Win32cr::Foundation::BSTR, @value : Win32cr::Foundation::BSTR, @metadata_bits : Int64)
+    end
+  end
 
   @[Extern]
-  record BitmapDescription,
-    width : UInt32,
-    height : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    alpha_mode : Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE
+  struct BitmapDescription
+    property width : UInt32
+    property height : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property alpha_mode : Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE
+    def initialize(@width : UInt32, @height : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @alpha_mode : Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE)
+    end
+  end
 
   @[Extern]
   record IVisualTreeServiceCallbackVtbl,
@@ -123,7 +147,6 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  #@[Com("aa7a8931-80e4-4fec-8f3b-553f87b4966e")]
   record IVisualTreeServiceCallback, lpVtbl : IVisualTreeServiceCallbackVtbl* do
     GUID = LibC::GUID.new(0xaa7a8931_u32, 0x80e4_u16, 0x4fec_u16, StaticArray[0x8f_u8, 0x3b_u8, 0x55_u8, 0x3f_u8, 0x87_u8, 0xb4_u8, 0x96_u8, 0x6e_u8])
     def query_interface(this : IVisualTreeServiceCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -151,7 +174,6 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  #@[Com("bad9eb88-ae77-4397-b948-5fa2db0a19ea")]
   record IVisualTreeServiceCallback2, lpVtbl : IVisualTreeServiceCallback2Vtbl* do
     GUID = LibC::GUID.new(0xbad9eb88_u32, 0xae77_u16, 0x4397_u16, StaticArray[0xb9_u8, 0x48_u8, 0x5f_u8, 0xa2_u8, 0xdb_u8, 0xa_u8, 0x19_u8, 0xea_u8])
     def query_interface(this : IVisualTreeServiceCallback2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -192,7 +214,6 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  #@[Com("a593b11a-d17f-48bb-8f66-83910731c8a5")]
   record IVisualTreeService, lpVtbl : IVisualTreeServiceVtbl* do
     GUID = LibC::GUID.new(0xa593b11a_u32, 0xd17f_u16, 0x48bb_u16, StaticArray[0x8f_u8, 0x66_u8, 0x83_u8, 0x91_u8, 0x7_u8, 0x31_u8, 0xc8_u8, 0xa5_u8])
     def query_interface(this : IVisualTreeService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -259,7 +280,6 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  #@[Com("18c9e2b6-3f43-4116-9f2b-ff935d7770d2")]
   record IXamlDiagnostics, lpVtbl : IXamlDiagnosticsVtbl* do
     GUID = LibC::GUID.new(0x18c9e2b6_u32, 0x3f43_u16, 0x4116_u16, StaticArray[0x9f_u8, 0x2b_u8, 0xff_u8, 0x93_u8, 0x5d_u8, 0x77_u8, 0x70_u8, 0xd2_u8])
     def query_interface(this : IXamlDiagnostics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -310,7 +330,6 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  #@[Com("d1a34ef2-cad8-4635-a3d2-fcda8d3f3caf")]
   record IBitmapData, lpVtbl : IBitmapDataVtbl* do
     GUID = LibC::GUID.new(0xd1a34ef2_u32, 0xcad8_u16, 0x4635_u16, StaticArray[0xa3_u8, 0xd2_u8, 0xfc_u8, 0xda_u8, 0x8d_u8, 0x3f_u8, 0x3c_u8, 0xaf_u8])
     def query_interface(this : IBitmapData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -361,7 +380,6 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  #@[Com("130f5136-ec43-4f61-89c7-9801a36d2e95")]
   record IVisualTreeService2, lpVtbl : IVisualTreeService2Vtbl* do
     GUID = LibC::GUID.new(0x130f5136_u32, 0xec43_u16, 0x4f61_u16, StaticArray[0x89_u8, 0xc7_u8, 0x98_u8, 0x1_u8, 0xa3_u8, 0x6d_u8, 0x2e_u8, 0x95_u8])
     def query_interface(this : IVisualTreeService2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -452,7 +470,6 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  #@[Com("0e79c6e0-85a0-4be8-b41a-655cf1fd19bd")]
   record IVisualTreeService3, lpVtbl : IVisualTreeService3Vtbl* do
     GUID = LibC::GUID.new(0xe79c6e0_u32, 0x85a0_u16, 0x4be8_u16, StaticArray[0xb4_u8, 0x1a_u8, 0x65_u8, 0x5c_u8, 0xf1_u8, 0xfd_u8, 0x19_u8, 0xbd_u8])
     def query_interface(this : IVisualTreeService3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

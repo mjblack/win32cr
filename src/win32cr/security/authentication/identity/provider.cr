@@ -60,7 +60,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("4e982fed-d14b-440c-b8d6-bb386453d386")]
   record IIdentityAdvise, lpVtbl : IIdentityAdviseVtbl* do
     GUID = LibC::GUID.new(0x4e982fed_u32, 0xd14b_u16, 0x440c_u16, StaticArray[0xb8_u8, 0xd6_u8, 0xbb_u8, 0x38_u8, 0x64_u8, 0x53_u8, 0xd3_u8, 0x86_u8])
     def query_interface(this : IIdentityAdvise*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -88,7 +87,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("3ab4c8da-d038-4830-8dd9-3253c55a127f")]
   record AsyncIIdentityAdvise, lpVtbl : AsyncIIdentityAdviseVtbl* do
     GUID = LibC::GUID.new(0x3ab4c8da_u32, 0xd038_u16, 0x4830_u16, StaticArray[0x8d_u8, 0xd9_u8, 0x32_u8, 0x53_u8, 0xc5_u8, 0x5a_u8, 0x12_u8, 0x7f_u8])
     def query_interface(this : AsyncIIdentityAdvise*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -125,7 +123,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("0d1b9e0c-e8ba-4f55-a81b-bce934b948f5")]
   record IIdentityProvider, lpVtbl : IIdentityProviderVtbl* do
     GUID = LibC::GUID.new(0xd1b9e0c_u32, 0xe8ba_u16, 0x4f55_u16, StaticArray[0xa8_u8, 0x1b_u8, 0xbc_u8, 0xe9_u8, 0x34_u8, 0xb9_u8, 0x48_u8, 0xf5_u8])
     def query_interface(this : IIdentityProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -188,7 +185,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("c6fc9901-c433-4646-8f48-4e4687aae2a0")]
   record AsyncIIdentityProvider, lpVtbl : AsyncIIdentityProviderVtbl* do
     GUID = LibC::GUID.new(0xc6fc9901_u32, 0xc433_u16, 0x4646_u16, StaticArray[0x8f_u8, 0x48_u8, 0x4e_u8, 0x46_u8, 0x87_u8, 0xaa_u8, 0xe2_u8, 0xa0_u8])
     def query_interface(this : AsyncIIdentityProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -262,7 +258,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("2af066b3-4cbb-4cba-a798-204b6af68cc0")]
   record IAssociatedIdentityProvider, lpVtbl : IAssociatedIdentityProviderVtbl* do
     GUID = LibC::GUID.new(0x2af066b3_u32, 0x4cbb_u16, 0x4cba_u16, StaticArray[0xa7_u8, 0x98_u8, 0x20_u8, 0x4b_u8, 0x6a_u8, 0xf6_u8, 0x8c_u8, 0xc0_u8])
     def query_interface(this : IAssociatedIdentityProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -300,7 +295,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("2834d6ed-297e-4e72-8a51-961e86f05152")]
   record AsyncIAssociatedIdentityProvider, lpVtbl : AsyncIAssociatedIdentityProviderVtbl* do
     GUID = LibC::GUID.new(0x2834d6ed_u32, 0x297e_u16, 0x4e72_u16, StaticArray[0x8a_u8, 0x51_u8, 0x96_u8, 0x1e_u8, 0x86_u8, 0xf0_u8, 0x51_u8, 0x52_u8])
     def query_interface(this : AsyncIAssociatedIdentityProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -346,7 +340,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("b7417b54-e08c-429b-96c8-678d1369ecb1")]
   record IConnectedIdentityProvider, lpVtbl : IConnectedIdentityProviderVtbl* do
     GUID = LibC::GUID.new(0xb7417b54_u32, 0xe08c_u16, 0x429b_u16, StaticArray[0x96_u8, 0xc8_u8, 0x67_u8, 0x8d_u8, 0x13_u8, 0x69_u8, 0xec_u8, 0xb1_u8])
     def query_interface(this : IConnectedIdentityProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -394,7 +387,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("9ce55141-bce9-4e15-824d-43d79f512f93")]
   record AsyncIConnectedIdentityProvider, lpVtbl : AsyncIConnectedIdentityProviderVtbl* do
     GUID = LibC::GUID.new(0x9ce55141_u32, 0xbce9_u16, 0x4e15_u16, StaticArray[0x82_u8, 0x4d_u8, 0x43_u8, 0xd7_u8, 0x9f_u8, 0x51_u8, 0x2f_u8, 0x93_u8])
     def query_interface(this : AsyncIConnectedIdentityProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -449,7 +441,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("5e7ef254-979f-43b5-b74e-06e4eb7df0f9")]
   record IIdentityAuthentication, lpVtbl : IIdentityAuthenticationVtbl* do
     GUID = LibC::GUID.new(0x5e7ef254_u32, 0x979f_u16, 0x43b5_u16, StaticArray[0xb7_u8, 0x4e_u8, 0x6_u8, 0xe4_u8, 0xeb_u8, 0x7d_u8, 0xf0_u8, 0xf9_u8])
     def query_interface(this : IIdentityAuthentication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -482,7 +473,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("f9a2f918-feca-4e9c-9633-61cbf13ed34d")]
   record AsyncIIdentityAuthentication, lpVtbl : AsyncIIdentityAuthenticationVtbl* do
     GUID = LibC::GUID.new(0xf9a2f918_u32, 0xfeca_u16, 0x4e9c_u16, StaticArray[0x96_u8, 0x33_u8, 0x61_u8, 0xcb_u8, 0xf1_u8, 0x3e_u8, 0xd3_u8, 0x4d_u8])
     def query_interface(this : AsyncIIdentityAuthentication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -523,7 +513,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("df586fa5-6f35-44f1-b209-b38e169772eb")]
   record IIdentityStore, lpVtbl : IIdentityStoreVtbl* do
     GUID = LibC::GUID.new(0xdf586fa5_u32, 0x6f35_u16, 0x44f1_u16, StaticArray[0xb2_u8, 0x9_u8, 0xb3_u8, 0x8e_u8, 0x16_u8, 0x97_u8, 0x72_u8, 0xeb_u8])
     def query_interface(this : IIdentityStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -576,7 +565,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("eefa1616-48de-4872-aa64-6e6206535a51")]
   record AsyncIIdentityStore, lpVtbl : AsyncIIdentityStoreVtbl* do
     GUID = LibC::GUID.new(0xeefa1616_u32, 0x48de_u16, 0x4872_u16, StaticArray[0xaa_u8, 0x64_u8, 0x6e_u8, 0x62_u8, 0x6_u8, 0x53_u8, 0x5a_u8, 0x51_u8])
     def query_interface(this : AsyncIIdentityStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -637,7 +625,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("f9f9eb98-8f7f-4e38-9577-6980114ce32b")]
   record IIdentityStoreEx, lpVtbl : IIdentityStoreExVtbl* do
     GUID = LibC::GUID.new(0xf9f9eb98_u32, 0x8f7f_u16, 0x4e38_u16, StaticArray[0x95_u8, 0x77_u8, 0x69_u8, 0x80_u8, 0x11_u8, 0x4c_u8, 0xe3_u8, 0x2b_u8])
     def query_interface(this : IIdentityStoreEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -670,7 +657,6 @@ module Win32cr::Security::Authentication::Identity::Provider
 
 
   @[Extern]
-  #@[Com("fca3af9a-8a07-4eae-8632-ec3de658a36a")]
   record AsyncIIdentityStoreEx, lpVtbl : AsyncIIdentityStoreExVtbl* do
     GUID = LibC::GUID.new(0xfca3af9a_u32, 0x8a07_u16, 0x4eae_u16, StaticArray[0x86_u8, 0x32_u8, 0xec_u8, 0x3d_u8, 0xe6_u8, 0x58_u8, 0xa3_u8, 0x6a_u8])
     def query_interface(this : AsyncIIdentityStoreEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -104,219 +104,289 @@ module Win32cr::Graphics::Direct2D::Common
   end
 
   @[Extern]
-  record D2D_COLOR_F,
-    r : Float32,
-    g : Float32,
-    b : Float32,
-    a : Float32
+  struct D2D_COLOR_F
+    property r : Float32
+    property g : Float32
+    property b : Float32
+    property a : Float32
+    def initialize(@r : Float32, @g : Float32, @b : Float32, @a : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D1_COLOR_F,
-    r : Float32,
-    g : Float32,
-    b : Float32,
-    a : Float32
+  struct D2D1_COLOR_F
+    property r : Float32
+    property g : Float32
+    property b : Float32
+    property a : Float32
+    def initialize(@r : Float32, @g : Float32, @b : Float32, @a : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D1_PIXEL_FORMAT,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    alphaMode : Win32cr::Graphics::Direct2D::Common::D2D1_ALPHA_MODE
+  struct D2D1_PIXEL_FORMAT
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property alphaMode : Win32cr::Graphics::Direct2D::Common::D2D1_ALPHA_MODE
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @alphaMode : Win32cr::Graphics::Direct2D::Common::D2D1_ALPHA_MODE)
+    end
+  end
 
   @[Extern]
-  record D2D_POINT_2U,
-    x : UInt32,
-    y : UInt32
+  struct D2D_POINT_2U
+    property x : UInt32
+    property y : UInt32
+    def initialize(@x : UInt32, @y : UInt32)
+    end
+  end
 
   @[Extern]
-  record D2D_POINT_2F,
-    x : Float32,
-    y : Float32
+  struct D2D_POINT_2F
+    property x : Float32
+    property y : Float32
+    def initialize(@x : Float32, @y : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D_VECTOR_2F,
-    x : Float32,
-    y : Float32
+  struct D2D_VECTOR_2F
+    property x : Float32
+    property y : Float32
+    def initialize(@x : Float32, @y : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D_VECTOR_3F,
-    x : Float32,
-    y : Float32,
-    z : Float32
+  struct D2D_VECTOR_3F
+    property x : Float32
+    property y : Float32
+    property z : Float32
+    def initialize(@x : Float32, @y : Float32, @z : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D_VECTOR_4F,
-    x : Float32,
-    y : Float32,
-    z : Float32,
-    w : Float32
+  struct D2D_VECTOR_4F
+    property x : Float32
+    property y : Float32
+    property z : Float32
+    property w : Float32
+    def initialize(@x : Float32, @y : Float32, @z : Float32, @w : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D_RECT_F,
-    left : Float32,
-    top : Float32,
-    right : Float32,
-    bottom : Float32
+  struct D2D_RECT_F
+    property left : Float32
+    property top : Float32
+    property right : Float32
+    property bottom : Float32
+    def initialize(@left : Float32, @top : Float32, @right : Float32, @bottom : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D_RECT_U,
-    left : UInt32,
-    top : UInt32,
-    right : UInt32,
-    bottom : UInt32
+  struct D2D_RECT_U
+    property left : UInt32
+    property top : UInt32
+    property right : UInt32
+    property bottom : UInt32
+    def initialize(@left : UInt32, @top : UInt32, @right : UInt32, @bottom : UInt32)
+    end
+  end
 
   @[Extern]
-  record D2D_SIZE_F,
-    width : Float32,
-    height : Float32
+  struct D2D_SIZE_F
+    property width : Float32
+    property height : Float32
+    def initialize(@width : Float32, @height : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D_SIZE_U,
-    width : UInt32,
-    height : UInt32
+  struct D2D_SIZE_U
+    property width : UInt32
+    property height : UInt32
+    def initialize(@width : UInt32, @height : UInt32)
+    end
+  end
 
   @[Extern]
-  record D2D_MATRIX_3X2_F,
-    anonymous : Anonymous_e__Union_ do
+  struct D2D_MATRIX_3X2_F
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      anonymous2 : Anonymous2_e__Struct_,
-      m : Float32[6] do
+    struct Anonymous_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
+    property m : Float32[6]
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        m11 : Float32,
-        m12 : Float32,
-        m21 : Float32,
-        m22 : Float32,
-        dx : Float32,
-        dy : Float32
+      struct Anonymous1_e__Struct_
+    property m11 : Float32
+    property m12 : Float32
+    property m21 : Float32
+    property m22 : Float32
+    property dx : Float32
+    property dy : Float32
+    def initialize(@m11 : Float32, @m12 : Float32, @m21 : Float32, @m22 : Float32, @dx : Float32, @dy : Float32)
+    end
+      end
 
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        _11 : Float32,
-        _12 : Float32,
-        _21 : Float32,
-        _22 : Float32,
-        _31 : Float32,
-        _32 : Float32
+      struct Anonymous2_e__Struct_
+    property _11 : Float32
+    property _12 : Float32
+    property _21 : Float32
+    property _22 : Float32
+    property _31 : Float32
+    property _32 : Float32
+    def initialize(@_11 : Float32, @_12 : Float32, @_21 : Float32, @_22 : Float32, @_31 : Float32, @_32 : Float32)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_, @m : Float32[6])
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D2D_MATRIX_4X3_F,
-    anonymous : Anonymous_e__Union_ do
+  struct D2D_MATRIX_4X3_F
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      m : Float32[12] do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property m : Float32[12]
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _11 : Float32,
-        _12 : Float32,
-        _13 : Float32,
-        _21 : Float32,
-        _22 : Float32,
-        _23 : Float32,
-        _31 : Float32,
-        _32 : Float32,
-        _33 : Float32,
-        _41 : Float32,
-        _42 : Float32,
-        _43 : Float32
+      struct Anonymous_e__Struct_
+    property _11 : Float32
+    property _12 : Float32
+    property _13 : Float32
+    property _21 : Float32
+    property _22 : Float32
+    property _23 : Float32
+    property _31 : Float32
+    property _32 : Float32
+    property _33 : Float32
+    property _41 : Float32
+    property _42 : Float32
+    property _43 : Float32
+    def initialize(@_11 : Float32, @_12 : Float32, @_13 : Float32, @_21 : Float32, @_22 : Float32, @_23 : Float32, @_31 : Float32, @_32 : Float32, @_33 : Float32, @_41 : Float32, @_42 : Float32, @_43 : Float32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @m : Float32[12])
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D2D_MATRIX_4X4_F,
-    anonymous : Anonymous_e__Union_ do
+  struct D2D_MATRIX_4X4_F
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      m : Float32[16] do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property m : Float32[16]
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _11 : Float32,
-        _12 : Float32,
-        _13 : Float32,
-        _14 : Float32,
-        _21 : Float32,
-        _22 : Float32,
-        _23 : Float32,
-        _24 : Float32,
-        _31 : Float32,
-        _32 : Float32,
-        _33 : Float32,
-        _34 : Float32,
-        _41 : Float32,
-        _42 : Float32,
-        _43 : Float32,
-        _44 : Float32
+      struct Anonymous_e__Struct_
+    property _11 : Float32
+    property _12 : Float32
+    property _13 : Float32
+    property _14 : Float32
+    property _21 : Float32
+    property _22 : Float32
+    property _23 : Float32
+    property _24 : Float32
+    property _31 : Float32
+    property _32 : Float32
+    property _33 : Float32
+    property _34 : Float32
+    property _41 : Float32
+    property _42 : Float32
+    property _43 : Float32
+    property _44 : Float32
+    def initialize(@_11 : Float32, @_12 : Float32, @_13 : Float32, @_14 : Float32, @_21 : Float32, @_22 : Float32, @_23 : Float32, @_24 : Float32, @_31 : Float32, @_32 : Float32, @_33 : Float32, @_34 : Float32, @_41 : Float32, @_42 : Float32, @_43 : Float32, @_44 : Float32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @m : Float32[16])
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D2D_MATRIX_5X4_F,
-    anonymous : Anonymous_e__Union_ do
+  struct D2D_MATRIX_5X4_F
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      m : Float32[20] do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property m : Float32[20]
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _11 : Float32,
-        _12 : Float32,
-        _13 : Float32,
-        _14 : Float32,
-        _21 : Float32,
-        _22 : Float32,
-        _23 : Float32,
-        _24 : Float32,
-        _31 : Float32,
-        _32 : Float32,
-        _33 : Float32,
-        _34 : Float32,
-        _41 : Float32,
-        _42 : Float32,
-        _43 : Float32,
-        _44 : Float32,
-        _51 : Float32,
-        _52 : Float32,
-        _53 : Float32,
-        _54 : Float32
+      struct Anonymous_e__Struct_
+    property _11 : Float32
+    property _12 : Float32
+    property _13 : Float32
+    property _14 : Float32
+    property _21 : Float32
+    property _22 : Float32
+    property _23 : Float32
+    property _24 : Float32
+    property _31 : Float32
+    property _32 : Float32
+    property _33 : Float32
+    property _34 : Float32
+    property _41 : Float32
+    property _42 : Float32
+    property _43 : Float32
+    property _44 : Float32
+    property _51 : Float32
+    property _52 : Float32
+    property _53 : Float32
+    property _54 : Float32
+    def initialize(@_11 : Float32, @_12 : Float32, @_13 : Float32, @_14 : Float32, @_21 : Float32, @_22 : Float32, @_23 : Float32, @_24 : Float32, @_31 : Float32, @_32 : Float32, @_33 : Float32, @_34 : Float32, @_41 : Float32, @_42 : Float32, @_43 : Float32, @_44 : Float32, @_51 : Float32, @_52 : Float32, @_53 : Float32, @_54 : Float32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @m : Float32[20])
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D2D1_BEZIER_SEGMENT,
-    point1 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point2 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point3 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+  struct D2D1_BEZIER_SEGMENT
+    property point1 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point2 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point3 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    def initialize(@point1 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point2 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point3 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F)
+    end
+  end
 
   @[Extern]
   record ID2D1SimplifiedGeometrySinkVtbl,
@@ -333,7 +403,6 @@ module Win32cr::Graphics::Direct2D::Common
 
 
   @[Extern]
-  #@[Com("2cd9069e-12e2-11dc-9fed-001143a055f9")]
   record ID2D1SimplifiedGeometrySink, lpVtbl : ID2D1SimplifiedGeometrySinkVtbl* do
     GUID = LibC::GUID.new(0x2cd9069e_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1SimplifiedGeometrySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

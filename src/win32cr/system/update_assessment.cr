@@ -27,23 +27,29 @@ module Win32cr::System::UpdateAssessment
   end
 
   @[Extern]
-  record UpdateAssessment,
-    status : Win32cr::System::UpdateAssessment::UpdateAssessmentStatus,
-    impact : Win32cr::System::UpdateAssessment::UpdateImpactLevel,
-    daysOutOfDate : UInt32
+  struct UpdateAssessment
+    property status : Win32cr::System::UpdateAssessment::UpdateAssessmentStatus
+    property impact : Win32cr::System::UpdateAssessment::UpdateImpactLevel
+    property daysOutOfDate : UInt32
+    def initialize(@status : Win32cr::System::UpdateAssessment::UpdateAssessmentStatus, @impact : Win32cr::System::UpdateAssessment::UpdateImpactLevel, @daysOutOfDate : UInt32)
+    end
+  end
 
   @[Extern]
-  record OSUpdateAssessment,
-    isEndOfSupport : Win32cr::Foundation::BOOL,
-    assessmentForCurrent : Win32cr::System::UpdateAssessment::UpdateAssessment,
-    assessmentForUpToDate : Win32cr::System::UpdateAssessment::UpdateAssessment,
-    securityStatus : Win32cr::System::UpdateAssessment::UpdateAssessmentStatus,
-    assessmentTime : Win32cr::Foundation::FILETIME,
-    releaseInfoTime : Win32cr::Foundation::FILETIME,
-    currentOSBuild : Win32cr::Foundation::PWSTR,
-    currentOSReleaseTime : Win32cr::Foundation::FILETIME,
-    upToDateOSBuild : Win32cr::Foundation::PWSTR,
-    upToDateOSReleaseTime : Win32cr::Foundation::FILETIME
+  struct OSUpdateAssessment
+    property isEndOfSupport : Win32cr::Foundation::BOOL
+    property assessmentForCurrent : Win32cr::System::UpdateAssessment::UpdateAssessment
+    property assessmentForUpToDate : Win32cr::System::UpdateAssessment::UpdateAssessment
+    property securityStatus : Win32cr::System::UpdateAssessment::UpdateAssessmentStatus
+    property assessmentTime : Win32cr::Foundation::FILETIME
+    property releaseInfoTime : Win32cr::Foundation::FILETIME
+    property currentOSBuild : Win32cr::Foundation::PWSTR
+    property currentOSReleaseTime : Win32cr::Foundation::FILETIME
+    property upToDateOSBuild : Win32cr::Foundation::PWSTR
+    property upToDateOSReleaseTime : Win32cr::Foundation::FILETIME
+    def initialize(@isEndOfSupport : Win32cr::Foundation::BOOL, @assessmentForCurrent : Win32cr::System::UpdateAssessment::UpdateAssessment, @assessmentForUpToDate : Win32cr::System::UpdateAssessment::UpdateAssessment, @securityStatus : Win32cr::System::UpdateAssessment::UpdateAssessmentStatus, @assessmentTime : Win32cr::Foundation::FILETIME, @releaseInfoTime : Win32cr::Foundation::FILETIME, @currentOSBuild : Win32cr::Foundation::PWSTR, @currentOSReleaseTime : Win32cr::Foundation::FILETIME, @upToDateOSBuild : Win32cr::Foundation::PWSTR, @upToDateOSReleaseTime : Win32cr::Foundation::FILETIME)
+    end
+  end
 
   @[Extern]
   record IWaaSAssessorVtbl,
@@ -54,7 +60,6 @@ module Win32cr::System::UpdateAssessment
 
 
   @[Extern]
-  #@[Com("2347bbef-1a3b-45a4-902d-3e09c269b45e")]
   record IWaaSAssessor, lpVtbl : IWaaSAssessorVtbl* do
     GUID = LibC::GUID.new(0x2347bbef_u32, 0x1a3b_u16, 0x45a4_u16, StaticArray[0x90_u8, 0x2d_u8, 0x3e_u8, 0x9_u8, 0xc2_u8, 0x69_u8, 0xb4_u8, 0x5e_u8])
     def query_interface(this : IWaaSAssessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

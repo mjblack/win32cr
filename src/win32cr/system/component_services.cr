@@ -472,159 +472,204 @@ module Win32cr::System::ComponentServices
   end
 
   @[Extern]
-  record COMSVCSEVENTINFO,
-    cbSize : UInt32,
-    dwPid : UInt32,
-    lTime : Int64,
-    lMicroTime : Int32,
-    perfCount : Int64,
-    guidApp : LibC::GUID,
-    sMachineName : Win32cr::Foundation::PWSTR
+  struct COMSVCSEVENTINFO
+    property cbSize : UInt32
+    property dwPid : UInt32
+    property lTime : Int64
+    property lMicroTime : Int32
+    property perfCount : Int64
+    property guidApp : LibC::GUID
+    property sMachineName : Win32cr::Foundation::PWSTR
+    def initialize(@cbSize : UInt32, @dwPid : UInt32, @lTime : Int64, @lMicroTime : Int32, @perfCount : Int64, @guidApp : LibC::GUID, @sMachineName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record RECYCLE_INFO,
-    guidCombaseProcessIdentifier : LibC::GUID,
-    process_start_time : Int64,
-    dwRecycleLifetimeLimit : UInt32,
-    dwRecycleMemoryLimit : UInt32,
-    dwRecycleExpirationTimeout : UInt32
+  struct RECYCLE_INFO
+    property guidCombaseProcessIdentifier : LibC::GUID
+    property process_start_time : Int64
+    property dwRecycleLifetimeLimit : UInt32
+    property dwRecycleMemoryLimit : UInt32
+    property dwRecycleExpirationTimeout : UInt32
+    def initialize(@guidCombaseProcessIdentifier : LibC::GUID, @process_start_time : Int64, @dwRecycleLifetimeLimit : UInt32, @dwRecycleMemoryLimit : UInt32, @dwRecycleExpirationTimeout : UInt32)
+    end
+  end
 
   @[Extern]
-  record HANG_INFO,
-    fAppHangMonitorEnabled : Win32cr::Foundation::BOOL,
-    fTerminateOnHang : Win32cr::Foundation::BOOL,
-    dump_type : Win32cr::System::ComponentServices::DUMPTYPE,
-    dwHangTimeout : UInt32,
-    dwDumpCount : UInt32,
-    dwInfoMsgCount : UInt32
+  struct HANG_INFO
+    property fAppHangMonitorEnabled : Win32cr::Foundation::BOOL
+    property fTerminateOnHang : Win32cr::Foundation::BOOL
+    property dump_type : Win32cr::System::ComponentServices::DUMPTYPE
+    property dwHangTimeout : UInt32
+    property dwDumpCount : UInt32
+    property dwInfoMsgCount : UInt32
+    def initialize(@fAppHangMonitorEnabled : Win32cr::Foundation::BOOL, @fTerminateOnHang : Win32cr::Foundation::BOOL, @dump_type : Win32cr::System::ComponentServices::DUMPTYPE, @dwHangTimeout : UInt32, @dwDumpCount : UInt32, @dwInfoMsgCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record CAppStatistics,
-    m_cTotalCalls : UInt32,
-    m_cTotalInstances : UInt32,
-    m_cTotalClasses : UInt32,
-    m_cCallsPerSecond : UInt32
+  struct CAppStatistics
+    property m_cTotalCalls : UInt32
+    property m_cTotalInstances : UInt32
+    property m_cTotalClasses : UInt32
+    property m_cCallsPerSecond : UInt32
+    def initialize(@m_cTotalCalls : UInt32, @m_cTotalInstances : UInt32, @m_cTotalClasses : UInt32, @m_cCallsPerSecond : UInt32)
+    end
+  end
 
   @[Extern]
-  record CAppData,
-    m_idApp : UInt32,
-    m_szAppGuid : UInt16[40],
-    m_dwAppProcessId : UInt32,
-    m_AppStatistics : Win32cr::System::ComponentServices::CAppStatistics
+  struct CAppData
+    property m_idApp : UInt32
+    property m_szAppGuid : UInt16[40]
+    property m_dwAppProcessId : UInt32
+    property m_AppStatistics : Win32cr::System::ComponentServices::CAppStatistics
+    def initialize(@m_idApp : UInt32, @m_szAppGuid : UInt16[40], @m_dwAppProcessId : UInt32, @m_AppStatistics : Win32cr::System::ComponentServices::CAppStatistics)
+    end
+  end
 
   @[Extern]
-  record CCLSIDData,
-    m_clsid : LibC::GUID,
-    m_cReferences : UInt32,
-    m_cBound : UInt32,
-    m_cPooled : UInt32,
-    m_cInCall : UInt32,
-    m_dwRespTime : UInt32,
-    m_cCallsCompleted : UInt32,
-    m_cCallsFailed : UInt32
+  struct CCLSIDData
+    property m_clsid : LibC::GUID
+    property m_cReferences : UInt32
+    property m_cBound : UInt32
+    property m_cPooled : UInt32
+    property m_cInCall : UInt32
+    property m_dwRespTime : UInt32
+    property m_cCallsCompleted : UInt32
+    property m_cCallsFailed : UInt32
+    def initialize(@m_clsid : LibC::GUID, @m_cReferences : UInt32, @m_cBound : UInt32, @m_cPooled : UInt32, @m_cInCall : UInt32, @m_dwRespTime : UInt32, @m_cCallsCompleted : UInt32, @m_cCallsFailed : UInt32)
+    end
+  end
 
   @[Extern]
-  record CCLSIDData2,
-    m_clsid : LibC::GUID,
-    m_appid : LibC::GUID,
-    m_partid : LibC::GUID,
-    m_pwszAppName : Win32cr::Foundation::PWSTR,
-    m_pwszCtxName : Win32cr::Foundation::PWSTR,
-    m_eAppType : Win32cr::System::ComponentServices::COMPLUS_APPTYPE,
-    m_cReferences : UInt32,
-    m_cBound : UInt32,
-    m_cPooled : UInt32,
-    m_cInCall : UInt32,
-    m_dwRespTime : UInt32,
-    m_cCallsCompleted : UInt32,
-    m_cCallsFailed : UInt32
+  struct CCLSIDData2
+    property m_clsid : LibC::GUID
+    property m_appid : LibC::GUID
+    property m_partid : LibC::GUID
+    property m_pwszAppName : Win32cr::Foundation::PWSTR
+    property m_pwszCtxName : Win32cr::Foundation::PWSTR
+    property m_eAppType : Win32cr::System::ComponentServices::COMPLUS_APPTYPE
+    property m_cReferences : UInt32
+    property m_cBound : UInt32
+    property m_cPooled : UInt32
+    property m_cInCall : UInt32
+    property m_dwRespTime : UInt32
+    property m_cCallsCompleted : UInt32
+    property m_cCallsFailed : UInt32
+    def initialize(@m_clsid : LibC::GUID, @m_appid : LibC::GUID, @m_partid : LibC::GUID, @m_pwszAppName : Win32cr::Foundation::PWSTR, @m_pwszCtxName : Win32cr::Foundation::PWSTR, @m_eAppType : Win32cr::System::ComponentServices::COMPLUS_APPTYPE, @m_cReferences : UInt32, @m_cBound : UInt32, @m_cPooled : UInt32, @m_cInCall : UInt32, @m_dwRespTime : UInt32, @m_cCallsCompleted : UInt32, @m_cCallsFailed : UInt32)
+    end
+  end
 
   @[Extern]
-  record ApplicationProcessSummary,
-    partition_id_primary_application : LibC::GUID,
-    application_id_primary_application : LibC::GUID,
-    application_instance_id : LibC::GUID,
-    process_id : UInt32,
-    type__ : Win32cr::System::ComponentServices::COMPLUS_APPTYPE,
-    process_exe_name : Win32cr::Foundation::PWSTR,
-    is_service : Win32cr::Foundation::BOOL,
-    is_paused : Win32cr::Foundation::BOOL,
-    is_recycled : Win32cr::Foundation::BOOL
+  struct ApplicationProcessSummary
+    property partition_id_primary_application : LibC::GUID
+    property application_id_primary_application : LibC::GUID
+    property application_instance_id : LibC::GUID
+    property process_id : UInt32
+    property type__ : Win32cr::System::ComponentServices::COMPLUS_APPTYPE
+    property process_exe_name : Win32cr::Foundation::PWSTR
+    property is_service : Win32cr::Foundation::BOOL
+    property is_paused : Win32cr::Foundation::BOOL
+    property is_recycled : Win32cr::Foundation::BOOL
+    def initialize(@partition_id_primary_application : LibC::GUID, @application_id_primary_application : LibC::GUID, @application_instance_id : LibC::GUID, @process_id : UInt32, @type__ : Win32cr::System::ComponentServices::COMPLUS_APPTYPE, @process_exe_name : Win32cr::Foundation::PWSTR, @is_service : Win32cr::Foundation::BOOL, @is_paused : Win32cr::Foundation::BOOL, @is_recycled : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record ApplicationProcessStatistics,
-    num_calls_outstanding : UInt32,
-    num_tracked_components : UInt32,
-    num_component_instances : UInt32,
-    avg_calls_per_second : UInt32,
-    reserved1 : UInt32,
-    reserved2 : UInt32,
-    reserved3 : UInt32,
-    reserved4 : UInt32
+  struct ApplicationProcessStatistics
+    property num_calls_outstanding : UInt32
+    property num_tracked_components : UInt32
+    property num_component_instances : UInt32
+    property avg_calls_per_second : UInt32
+    property reserved1 : UInt32
+    property reserved2 : UInt32
+    property reserved3 : UInt32
+    property reserved4 : UInt32
+    def initialize(@num_calls_outstanding : UInt32, @num_tracked_components : UInt32, @num_component_instances : UInt32, @avg_calls_per_second : UInt32, @reserved1 : UInt32, @reserved2 : UInt32, @reserved3 : UInt32, @reserved4 : UInt32)
+    end
+  end
 
   @[Extern]
-  record ApplicationProcessRecycleInfo,
-    is_recyclable : Win32cr::Foundation::BOOL,
-    is_recycled : Win32cr::Foundation::BOOL,
-    time_recycled : Win32cr::Foundation::FILETIME,
-    time_to_terminate : Win32cr::Foundation::FILETIME,
-    recycle_reason_code : Int32,
-    is_pending_recycle : Win32cr::Foundation::BOOL,
-    has_automatic_lifetime_recycling : Win32cr::Foundation::BOOL,
-    time_for_automatic_recycling : Win32cr::Foundation::FILETIME,
-    memory_limit_in_kb : UInt32,
-    memory_usage_in_kb_last_check : UInt32,
-    activation_limit : UInt32,
-    num_activations_last_reported : UInt32,
-    call_limit : UInt32,
-    num_calls_last_reported : UInt32
+  struct ApplicationProcessRecycleInfo
+    property is_recyclable : Win32cr::Foundation::BOOL
+    property is_recycled : Win32cr::Foundation::BOOL
+    property time_recycled : Win32cr::Foundation::FILETIME
+    property time_to_terminate : Win32cr::Foundation::FILETIME
+    property recycle_reason_code : Int32
+    property is_pending_recycle : Win32cr::Foundation::BOOL
+    property has_automatic_lifetime_recycling : Win32cr::Foundation::BOOL
+    property time_for_automatic_recycling : Win32cr::Foundation::FILETIME
+    property memory_limit_in_kb : UInt32
+    property memory_usage_in_kb_last_check : UInt32
+    property activation_limit : UInt32
+    property num_activations_last_reported : UInt32
+    property call_limit : UInt32
+    property num_calls_last_reported : UInt32
+    def initialize(@is_recyclable : Win32cr::Foundation::BOOL, @is_recycled : Win32cr::Foundation::BOOL, @time_recycled : Win32cr::Foundation::FILETIME, @time_to_terminate : Win32cr::Foundation::FILETIME, @recycle_reason_code : Int32, @is_pending_recycle : Win32cr::Foundation::BOOL, @has_automatic_lifetime_recycling : Win32cr::Foundation::BOOL, @time_for_automatic_recycling : Win32cr::Foundation::FILETIME, @memory_limit_in_kb : UInt32, @memory_usage_in_kb_last_check : UInt32, @activation_limit : UInt32, @num_activations_last_reported : UInt32, @call_limit : UInt32, @num_calls_last_reported : UInt32)
+    end
+  end
 
   @[Extern]
-  record ApplicationSummary,
-    application_instance_id : LibC::GUID,
-    partition_id : LibC::GUID,
-    application_id : LibC::GUID,
-    type__ : Win32cr::System::ComponentServices::COMPLUS_APPTYPE,
-    application_name : Win32cr::Foundation::PWSTR,
-    num_tracked_components : UInt32,
-    num_component_instances : UInt32
+  struct ApplicationSummary
+    property application_instance_id : LibC::GUID
+    property partition_id : LibC::GUID
+    property application_id : LibC::GUID
+    property type__ : Win32cr::System::ComponentServices::COMPLUS_APPTYPE
+    property application_name : Win32cr::Foundation::PWSTR
+    property num_tracked_components : UInt32
+    property num_component_instances : UInt32
+    def initialize(@application_instance_id : LibC::GUID, @partition_id : LibC::GUID, @application_id : LibC::GUID, @type__ : Win32cr::System::ComponentServices::COMPLUS_APPTYPE, @application_name : Win32cr::Foundation::PWSTR, @num_tracked_components : UInt32, @num_component_instances : UInt32)
+    end
+  end
 
   @[Extern]
-  record ComponentSummary,
-    application_instance_id : LibC::GUID,
-    partition_id : LibC::GUID,
-    application_id : LibC::GUID,
-    clsid : LibC::GUID,
-    class_name : Win32cr::Foundation::PWSTR,
-    application_name : Win32cr::Foundation::PWSTR
+  struct ComponentSummary
+    property application_instance_id : LibC::GUID
+    property partition_id : LibC::GUID
+    property application_id : LibC::GUID
+    property clsid : LibC::GUID
+    property class_name : Win32cr::Foundation::PWSTR
+    property application_name : Win32cr::Foundation::PWSTR
+    def initialize(@application_instance_id : LibC::GUID, @partition_id : LibC::GUID, @application_id : LibC::GUID, @clsid : LibC::GUID, @class_name : Win32cr::Foundation::PWSTR, @application_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record ComponentStatistics,
-    num_instances : UInt32,
-    num_bound_references : UInt32,
-    num_pooled_objects : UInt32,
-    num_objects_in_call : UInt32,
-    avg_response_time_in_ms : UInt32,
-    num_calls_completed_recent : UInt32,
-    num_calls_failed_recent : UInt32,
-    num_calls_completed_total : UInt32,
-    num_calls_failed_total : UInt32,
-    reserved1 : UInt32,
-    reserved2 : UInt32,
-    reserved3 : UInt32,
-    reserved4 : UInt32
+  struct ComponentStatistics
+    property num_instances : UInt32
+    property num_bound_references : UInt32
+    property num_pooled_objects : UInt32
+    property num_objects_in_call : UInt32
+    property avg_response_time_in_ms : UInt32
+    property num_calls_completed_recent : UInt32
+    property num_calls_failed_recent : UInt32
+    property num_calls_completed_total : UInt32
+    property num_calls_failed_total : UInt32
+    property reserved1 : UInt32
+    property reserved2 : UInt32
+    property reserved3 : UInt32
+    property reserved4 : UInt32
+    def initialize(@num_instances : UInt32, @num_bound_references : UInt32, @num_pooled_objects : UInt32, @num_objects_in_call : UInt32, @avg_response_time_in_ms : UInt32, @num_calls_completed_recent : UInt32, @num_calls_failed_recent : UInt32, @num_calls_completed_total : UInt32, @num_calls_failed_total : UInt32, @reserved1 : UInt32, @reserved2 : UInt32, @reserved3 : UInt32, @reserved4 : UInt32)
+    end
+  end
 
   @[Extern]
-  record ComponentHangMonitorInfo,
-    is_monitored : Win32cr::Foundation::BOOL,
-    terminate_on_hang : Win32cr::Foundation::BOOL,
-    avg_call_threshold_in_ms : UInt32
+  struct ComponentHangMonitorInfo
+    property is_monitored : Win32cr::Foundation::BOOL
+    property terminate_on_hang : Win32cr::Foundation::BOOL
+    property avg_call_threshold_in_ms : UInt32
+    def initialize(@is_monitored : Win32cr::Foundation::BOOL, @terminate_on_hang : Win32cr::Foundation::BOOL, @avg_call_threshold_in_ms : UInt32)
+    end
+  end
 
   @[Extern]
-  record CrmLogRecordRead,
-    dwCrmFlags : UInt32,
-    dwSequenceNumber : UInt32,
-    blobUserData : Win32cr::System::Com::BLOB
+  struct CrmLogRecordRead
+    property dwCrmFlags : UInt32
+    property dwSequenceNumber : UInt32
+    property blobUserData : Win32cr::System::Com::BLOB
+    def initialize(@dwCrmFlags : UInt32, @dwSequenceNumber : UInt32, @blobUserData : Win32cr::System::Com::BLOB)
+    end
+  end
 
   @[Extern]
   record ICOMAdminCatalogVtbl,
@@ -664,7 +709,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("dd662187-dfc2-11d1-a2cf-00805fc79235")]
   record ICOMAdminCatalog, lpVtbl : ICOMAdminCatalogVtbl* do
     GUID = LibC::GUID.new(0xdd662187_u32, 0xdfc2_u16, 0x11d1_u16, StaticArray[0xa2_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc7_u8, 0x92_u8, 0x35_u8])
     def query_interface(this : ICOMAdminCatalog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -838,7 +882,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("790c6e0b-9194-4cc9-9426-a48a63185696")]
   record ICOMAdminCatalog2, lpVtbl : ICOMAdminCatalog2Vtbl* do
     GUID = LibC::GUID.new(0x790c6e0b_u32, 0x9194_u16, 0x4cc9_u16, StaticArray[0x94_u8, 0x26_u8, 0xa4_u8, 0x8a_u8, 0x63_u8, 0x18_u8, 0x56_u8, 0x96_u8])
     def query_interface(this : ICOMAdminCatalog2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1055,7 +1098,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("6eb22871-8a19-11d0-81b6-00a0c9231c29")]
   record ICatalogObject, lpVtbl : ICatalogObjectVtbl* do
     GUID = LibC::GUID.new(0x6eb22871_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
     def query_interface(this : ICatalogObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1131,7 +1173,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("6eb22872-8a19-11d0-81b6-00a0c9231c29")]
   record ICatalogCollection, lpVtbl : ICatalogCollectionVtbl* do
     GUID = LibC::GUID.new(0x6eb22872_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
     def query_interface(this : ICatalogCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1221,7 +1262,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("cafc823c-b441-11d1-b82b-0000f8757e2a")]
   record ISecurityIdentityColl, lpVtbl : ISecurityIdentityCollVtbl* do
     GUID = LibC::GUID.new(0xcafc823c_u32, 0xb441_u16, 0x11d1_u16, StaticArray[0xb8_u8, 0x2b_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x7e_u8, 0x2a_u8])
     def query_interface(this : ISecurityIdentityColl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1272,7 +1312,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("cafc823d-b441-11d1-b82b-0000f8757e2a")]
   record ISecurityCallersColl, lpVtbl : ISecurityCallersCollVtbl* do
     GUID = LibC::GUID.new(0xcafc823d_u32, 0xb441_u16, 0x11d1_u16, StaticArray[0xb8_u8, 0x2b_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x7e_u8, 0x2a_u8])
     def query_interface(this : ISecurityCallersColl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1326,7 +1365,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("cafc823e-b441-11d1-b82b-0000f8757e2a")]
   record ISecurityCallContext, lpVtbl : ISecurityCallContextVtbl* do
     GUID = LibC::GUID.new(0xcafc823e_u32, 0xb441_u16, 0x11d1_u16, StaticArray[0xb8_u8, 0x2b_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x7e_u8, 0x2a_u8])
     def query_interface(this : ISecurityCallContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1384,7 +1422,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("cafc823f-b441-11d1-b82b-0000f8757e2a")]
   record IGetSecurityCallContext, lpVtbl : IGetSecurityCallContextVtbl* do
     GUID = LibC::GUID.new(0xcafc823f_u32, 0xb441_u16, 0x11d1_u16, StaticArray[0xb8_u8, 0x2b_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x7e_u8, 0x2a_u8])
     def query_interface(this : IGetSecurityCallContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1430,7 +1467,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("e74a7215-014d-11d1-a63c-00a0c911b4e0")]
   record SecurityProperty, lpVtbl : SecurityPropertyVtbl* do
     GUID = LibC::GUID.new(0xe74a7215_u32, 0x14d_u16, 0x11d1_u16, StaticArray[0xa6_u8, 0x3c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xb4_u8, 0xe0_u8])
     def query_interface(this : SecurityProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1486,7 +1522,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("19a5a02c-0ac8-11d2-b286-00c04f8ef934")]
   record ContextInfo, lpVtbl : ContextInfoVtbl* do
     GUID = LibC::GUID.new(0x19a5a02c_u32, 0xac8_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0x86_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf9_u8, 0x34_u8])
     def query_interface(this : ContextInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1548,7 +1583,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("c99d6e75-2375-11d4-8331-00c04f605588")]
   record ContextInfo2, lpVtbl : ContextInfo2Vtbl* do
     GUID = LibC::GUID.new(0xc99d6e75_u32, 0x2375_u16, 0x11d4_u16, StaticArray[0x83_u8, 0x31_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x60_u8, 0x55_u8, 0x88_u8])
     def query_interface(this : ContextInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1624,7 +1658,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("74c08646-cedb-11cf-8b49-00aa00b8a790")]
   record ObjectContext, lpVtbl : ObjectContextVtbl* do
     GUID = LibC::GUID.new(0x74c08646_u32, 0xcedb_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x49_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb8_u8, 0xa7_u8, 0x90_u8])
     def query_interface(this : ObjectContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1701,7 +1734,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("7999fc22-d3c6-11cf-acab-00a024a55aef")]
   record ITransactionContextEx, lpVtbl : ITransactionContextExVtbl* do
     GUID = LibC::GUID.new(0x7999fc22_u32, 0xd3c6_u16, 0x11cf_u16, StaticArray[0xac_u8, 0xab_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0xa5_u8, 0x5a_u8, 0xef_u8])
     def query_interface(this : ITransactionContextEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1740,7 +1772,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("7999fc21-d3c6-11cf-acab-00a024a55aef")]
   record ITransactionContext, lpVtbl : ITransactionContextVtbl* do
     GUID = LibC::GUID.new(0x7999fc21_u32, 0xd3c6_u16, 0x11cf_u16, StaticArray[0xac_u8, 0xab_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0xa5_u8, 0x5a_u8, 0xef_u8])
     def query_interface(this : ITransactionContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1785,7 +1816,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("455acf57-5345-11d2-99cf-00c04f797bc9")]
   record ICreateWithTransactionEx, lpVtbl : ICreateWithTransactionExVtbl* do
     GUID = LibC::GUID.new(0x455acf57_u32, 0x5345_u16, 0x11d2_u16, StaticArray[0x99_u8, 0xcf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x7b_u8, 0xc9_u8])
     def query_interface(this : ICreateWithTransactionEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1812,7 +1842,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("227ac7a8-8423-42ce-b7cf-03061ec9aaa3")]
   record ICreateWithLocalTransaction, lpVtbl : ICreateWithLocalTransactionVtbl* do
     GUID = LibC::GUID.new(0x227ac7a8_u32, 0x8423_u16, 0x42ce_u16, StaticArray[0xb7_u8, 0xcf_u8, 0x3_u8, 0x6_u8, 0x1e_u8, 0xc9_u8, 0xaa_u8, 0xa3_u8])
     def query_interface(this : ICreateWithLocalTransaction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1839,7 +1868,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("455acf59-5345-11d2-99cf-00c04f797bc9")]
   record ICreateWithTipTransactionEx, lpVtbl : ICreateWithTipTransactionExVtbl* do
     GUID = LibC::GUID.new(0x455acf59_u32, 0x5345_u16, 0x11d2_u16, StaticArray[0x99_u8, 0xcf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x7b_u8, 0xc9_u8])
     def query_interface(this : ICreateWithTipTransactionEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1870,7 +1898,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("605cf82c-578e-4298-975d-82babcd9e053")]
   record IComLTxEvents, lpVtbl : IComLTxEventsVtbl* do
     GUID = LibC::GUID.new(0x605cf82c_u32, 0x578e_u16, 0x4298_u16, StaticArray[0x97_u8, 0x5d_u8, 0x82_u8, 0xba_u8, 0xbc_u8, 0xd9_u8, 0xe0_u8, 0x53_u8])
     def query_interface(this : IComLTxEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1909,7 +1936,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130a4-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComUserEvent, lpVtbl : IComUserEventVtbl* do
     GUID = LibC::GUID.new(0x683130a4_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComUserEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1946,7 +1972,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130a5-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComThreadEvents, lpVtbl : IComThreadEventsVtbl* do
     GUID = LibC::GUID.new(0x683130a5_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComThreadEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2005,7 +2030,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130a6-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComAppEvents, lpVtbl : IComAppEventsVtbl* do
     GUID = LibC::GUID.new(0x683130a6_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComAppEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2039,7 +2063,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130a7-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComInstanceEvents, lpVtbl : IComInstanceEventsVtbl* do
     GUID = LibC::GUID.new(0x683130a7_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComInstanceEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2072,7 +2095,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130a8-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComTransactionEvents, lpVtbl : IComTransactionEventsVtbl* do
     GUID = LibC::GUID.new(0x683130a8_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComTransactionEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2110,7 +2132,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130a9-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComMethodEvents, lpVtbl : IComMethodEventsVtbl* do
     GUID = LibC::GUID.new(0x683130a9_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComMethodEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2148,7 +2169,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130aa-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComObjectEvents, lpVtbl : IComObjectEventsVtbl* do
     GUID = LibC::GUID.new(0x683130aa_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComObjectEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2194,7 +2214,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130ab-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComResourceEvents, lpVtbl : IComResourceEventsVtbl* do
     GUID = LibC::GUID.new(0x683130ab_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComResourceEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2234,7 +2253,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130ac-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComSecurityEvents, lpVtbl : IComSecurityEventsVtbl* do
     GUID = LibC::GUID.new(0x683130ac_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComSecurityEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2267,7 +2285,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130ad-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComObjectPoolEvents, lpVtbl : IComObjectPoolEventsVtbl* do
     GUID = LibC::GUID.new(0x683130ad_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComObjectPoolEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2307,7 +2324,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130ae-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComObjectPoolEvents2, lpVtbl : IComObjectPoolEvents2Vtbl* do
     GUID = LibC::GUID.new(0x683130ae_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComObjectPoolEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2346,7 +2362,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130af-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComObjectConstructionEvents, lpVtbl : IComObjectConstructionEventsVtbl* do
     GUID = LibC::GUID.new(0x683130af_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComObjectConstructionEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2379,7 +2394,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130b0-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComActivityEvents, lpVtbl : IComActivityEventsVtbl* do
     GUID = LibC::GUID.new(0x683130b0_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComActivityEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2424,7 +2438,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130b1-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComIdentityEvents, lpVtbl : IComIdentityEventsVtbl* do
     GUID = LibC::GUID.new(0x683130b1_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComIdentityEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2457,7 +2470,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130b2-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComQCEvents, lpVtbl : IComQCEventsVtbl* do
     GUID = LibC::GUID.new(0x683130b2_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComQCEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2502,7 +2514,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130b3-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComExceptionEvents, lpVtbl : IComExceptionEventsVtbl* do
     GUID = LibC::GUID.new(0x683130b3_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComExceptionEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2531,7 +2542,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130b4-2e50-11d2-98a5-00c04f8ee1c4")]
   record ILBEvents, lpVtbl : ILBEventsVtbl* do
     GUID = LibC::GUID.new(0x683130b4_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : ILBEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2578,7 +2588,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("683130b5-2e50-11d2-98a5-00c04f8ee1c4")]
   record IComCRMEvents, lpVtbl : IComCRMEventsVtbl* do
     GUID = LibC::GUID.new(0x683130b5_u32, 0x2e50_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComCRMEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2649,7 +2658,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("fb388aaa-567d-4024-af8e-6e93ee748573")]
   record IComMethod2Events, lpVtbl : IComMethod2EventsVtbl* do
     GUID = LibC::GUID.new(0xfb388aaa_u32, 0x567d_u16, 0x4024_u16, StaticArray[0xaf_u8, 0x8e_u8, 0x6e_u8, 0x93_u8, 0xee_u8, 0x74_u8, 0x85_u8, 0x73_u8])
     def query_interface(this : IComMethod2Events*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2682,7 +2690,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("4e6cdcc9-fb25-4fd5-9cc5-c9f4b6559cec")]
   record IComTrackingInfoEvents, lpVtbl : IComTrackingInfoEventsVtbl* do
     GUID = LibC::GUID.new(0x4e6cdcc9_u32, 0xfb25_u16, 0x4fd5_u16, StaticArray[0x9c_u8, 0xc5_u8, 0xc9_u8, 0xf4_u8, 0xb6_u8, 0x55_u8, 0x9c_u8, 0xec_u8])
     def query_interface(this : IComTrackingInfoEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2711,7 +2718,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("c266c677-c9ad-49ab-9fd9-d9661078588a")]
   record IComTrackingInfoCollection, lpVtbl : IComTrackingInfoCollectionVtbl* do
     GUID = LibC::GUID.new(0xc266c677_u32, 0xc9ad_u16, 0x49ab_u16, StaticArray[0x9f_u8, 0xd9_u8, 0xd9_u8, 0x66_u8, 0x10_u8, 0x78_u8, 0x58_u8, 0x8a_u8])
     def query_interface(this : IComTrackingInfoCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2744,7 +2750,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("116e42c5-d8b1-47bf-ab1e-c895ed3e2372")]
   record IComTrackingInfoObject, lpVtbl : IComTrackingInfoObjectVtbl* do
     GUID = LibC::GUID.new(0x116e42c5_u32, 0xd8b1_u16, 0x47bf_u16, StaticArray[0xab_u8, 0x1e_u8, 0xc8_u8, 0x95_u8, 0xed_u8, 0x3e_u8, 0x23_u8, 0x72_u8])
     def query_interface(this : IComTrackingInfoObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2772,7 +2777,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("789b42be-6f6b-443a-898e-67abf390aa14")]
   record IComTrackingInfoProperties, lpVtbl : IComTrackingInfoPropertiesVtbl* do
     GUID = LibC::GUID.new(0x789b42be_u32, 0x6f6b_u16, 0x443a_u16, StaticArray[0x89_u8, 0x8e_u8, 0x67_u8, 0xab_u8, 0xf3_u8, 0x90_u8, 0xaa_u8, 0x14_u8])
     def query_interface(this : IComTrackingInfoProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2806,7 +2810,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("1290bc1a-b219-418d-b078-5934ded08242")]
   record IComApp2Events, lpVtbl : IComApp2EventsVtbl* do
     GUID = LibC::GUID.new(0x1290bc1a_u32, 0xb219_u16, 0x418d_u16, StaticArray[0xb0_u8, 0x78_u8, 0x59_u8, 0x34_u8, 0xde_u8, 0xd0_u8, 0x82_u8, 0x42_u8])
     def query_interface(this : IComApp2Events*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2848,7 +2851,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("a136f62a-2f94-4288-86e0-d8a1fa4c0299")]
   record IComTransaction2Events, lpVtbl : IComTransaction2EventsVtbl* do
     GUID = LibC::GUID.new(0xa136f62a_u32, 0x2f94_u16, 0x4288_u16, StaticArray[0x86_u8, 0xe0_u8, 0xd8_u8, 0xa1_u8, 0xfa_u8, 0x4c_u8, 0x2_u8, 0x99_u8])
     def query_interface(this : IComTransaction2Events*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2885,7 +2887,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("20e3bf07-b506-4ad5-a50c-d2ca5b9c158e")]
   record IComInstance2Events, lpVtbl : IComInstance2EventsVtbl* do
     GUID = LibC::GUID.new(0x20e3bf07_u32, 0xb506_u16, 0x4ad5_u16, StaticArray[0xa5_u8, 0xc_u8, 0xd2_u8, 0xca_u8, 0x5b_u8, 0x9c_u8, 0x15_u8, 0x8e_u8])
     def query_interface(this : IComInstance2Events*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2918,7 +2919,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("65bf6534-85ea-4f64-8cf4-3d974b2ab1cf")]
   record IComObjectPool2Events, lpVtbl : IComObjectPool2EventsVtbl* do
     GUID = LibC::GUID.new(0x65bf6534_u32, 0x85ea_u16, 0x4f64_u16, StaticArray[0x8c_u8, 0xf4_u8, 0x3d_u8, 0x97_u8, 0x4b_u8, 0x2a_u8, 0xb1_u8, 0xcf_u8])
     def query_interface(this : IComObjectPool2Events*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2954,7 +2954,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("4b5a7827-8df2-45c0-8f6f-57ea1f856a9f")]
   record IComObjectConstruction2Events, lpVtbl : IComObjectConstruction2EventsVtbl* do
     GUID = LibC::GUID.new(0x4b5a7827_u32, 0x8df2_u16, 0x45c0_u16, StaticArray[0x8f_u8, 0x6f_u8, 0x57_u8, 0xea_u8, 0x1f_u8, 0x85_u8, 0x6a_u8, 0x9f_u8])
     def query_interface(this : IComObjectConstruction2Events*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2982,7 +2981,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("d6d48a3c-d5c5-49e7-8c74-99e4889ed52f")]
   record ISystemAppEventData, lpVtbl : ISystemAppEventDataVtbl* do
     GUID = LibC::GUID.new(0xd6d48a3c_u32, 0xd5c5_u16, 0x49e7_u16, StaticArray[0x8c_u8, 0x74_u8, 0x99_u8, 0xe4_u8, 0x88_u8, 0x9e_u8, 0xd5_u8, 0x2f_u8])
     def query_interface(this : ISystemAppEventData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3020,7 +3018,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("bacedf4d-74ab-11d0-b162-00aa00ba3258")]
   record IMtsEvents, lpVtbl : IMtsEventsVtbl* do
     GUID = LibC::GUID.new(0xbacedf4d_u32, 0x74ab_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x62_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xba_u8, 0x32_u8, 0x58_u8])
     def query_interface(this : IMtsEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3079,7 +3076,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("d56c3dc1-8482-11d0-b170-00aa00ba3258")]
   record IMtsEventInfo, lpVtbl : IMtsEventInfoVtbl* do
     GUID = LibC::GUID.new(0xd56c3dc1_u32, 0x8482_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x70_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xba_u8, 0x32_u8, 0x58_u8])
     def query_interface(this : IMtsEventInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3134,7 +3130,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("d19b8bfd-7f88-11d0-b16e-00aa00ba3258")]
   record IMTSLocator, lpVtbl : IMTSLocatorVtbl* do
     GUID = LibC::GUID.new(0xd19b8bfd_u32, 0x7f88_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x6e_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xba_u8, 0x32_u8, 0x58_u8])
     def query_interface(this : IMTSLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3179,7 +3174,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("4b2e958c-0393-11d1-b1ab-00aa00ba3258")]
   record IMtsGrp, lpVtbl : IMtsGrpVtbl* do
     GUID = LibC::GUID.new(0x4b2e958c_u32, 0x393_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xab_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xba_u8, 0x32_u8, 0x58_u8])
     def query_interface(this : IMtsGrp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3234,7 +3228,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("588a085a-b795-11d1-8054-00c04fc340ee")]
   record IMessageMover, lpVtbl : IMessageMoverVtbl* do
     GUID = LibC::GUID.new(0x588a085a_u32, 0xb795_u16, 0x11d1_u16, StaticArray[0x80_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x40_u8, 0xee_u8])
     def query_interface(this : IMessageMover*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3297,7 +3290,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("9a9f12b8-80af-47ab-a579-35ea57725370")]
   record IEventServerTrace, lpVtbl : IEventServerTraceVtbl* do
     GUID = LibC::GUID.new(0x9a9f12b8_u32, 0x80af_u16, 0x47ab_u16, StaticArray[0xa5_u8, 0x79_u8, 0x35_u8, 0xea_u8, 0x57_u8, 0x72_u8, 0x53_u8, 0x70_u8])
     def query_interface(this : IEventServerTrace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3348,7 +3340,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("507c3ac8-3e12-4cb0-9366-653d3e050638")]
   record IGetAppTrackerData, lpVtbl : IGetAppTrackerDataVtbl* do
     GUID = LibC::GUID.new(0x507c3ac8_u32, 0x3e12_u16, 0x4cb0_u16, StaticArray[0x93_u8, 0x66_u8, 0x65_u8, 0x3d_u8, 0x3e_u8, 0x5_u8, 0x6_u8, 0x38_u8])
     def query_interface(this : IGetAppTrackerData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3394,7 +3385,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("5cb31e10-2b5f-11cf-be10-00aa00a2fa25")]
   record IDispenserManager, lpVtbl : IDispenserManagerVtbl* do
     GUID = LibC::GUID.new(0x5cb31e10_u32, 0x2b5f_u16, 0x11cf_u16, StaticArray[0xbe_u8, 0x10_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0xfa_u8, 0x25_u8])
     def query_interface(this : IDispenserManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3431,7 +3421,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("bf6a1850-2b45-11cf-be10-00aa00a2fa25")]
   record IHolder, lpVtbl : IHolderVtbl* do
     GUID = LibC::GUID.new(0xbf6a1850_u32, 0x2b45_u16, 0x11cf_u16, StaticArray[0xbe_u8, 0x10_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0xfa_u8, 0x25_u8])
     def query_interface(this : IHolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3484,7 +3473,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("208b3651-2b48-11cf-be10-00aa00a2fa25")]
   record IDispenserDriver, lpVtbl : IDispenserDriverVtbl* do
     GUID = LibC::GUID.new(0x208b3651_u32, 0x2b48_u16, 0x11cf_u16, StaticArray[0xbe_u8, 0x10_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0xfa_u8, 0x25_u8])
     def query_interface(this : IDispenserDriver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3532,7 +3520,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("02558374-df2e-4dae-bd6b-1d5c994f9bdc")]
   record ITransactionProxy, lpVtbl : ITransactionProxyVtbl* do
     GUID = LibC::GUID.new(0x2558374_u32, 0xdf2e_u16, 0x4dae_u16, StaticArray[0xbd_u8, 0x6b_u8, 0x1d_u8, 0x5c_u8, 0x99_u8, 0x4f_u8, 0x9b_u8, 0xdc_u8])
     def query_interface(this : ITransactionProxy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3578,7 +3565,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("a7549a29-a7c4-42e1-8dc1-7e3d748dc24a")]
   record IContextSecurityPerimeter, lpVtbl : IContextSecurityPerimeterVtbl* do
     GUID = LibC::GUID.new(0xa7549a29_u32, 0xa7c4_u16, 0x42e1_u16, StaticArray[0x8d_u8, 0xc1_u8, 0x7e_u8, 0x3d_u8, 0x74_u8, 0x8d_u8, 0xc2_u8, 0x4a_u8])
     def query_interface(this : IContextSecurityPerimeter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3608,7 +3594,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("13d86f31-0139-41af-bcad-c7d50435fe9f")]
   record ITxProxyHolder, lpVtbl : ITxProxyHolderVtbl* do
     GUID = LibC::GUID.new(0x13d86f31_u32, 0x139_u16, 0x41af_u16, StaticArray[0xbc_u8, 0xad_u8, 0xc7_u8, 0xd5_u8, 0x4_u8, 0x35_u8, 0xfe_u8, 0x9f_u8])
     def query_interface(this : ITxProxyHolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3642,7 +3627,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("51372ae0-cae7-11cf-be81-00aa00a2fa25")]
   record IObjectContext, lpVtbl : IObjectContextVtbl* do
     GUID = LibC::GUID.new(0x51372ae0_u32, 0xcae7_u16, 0x11cf_u16, StaticArray[0xbe_u8, 0x81_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0xfa_u8, 0x25_u8])
     def query_interface(this : IObjectContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3692,7 +3676,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("51372aec-cae7-11cf-be81-00aa00a2fa25")]
   record IObjectControl, lpVtbl : IObjectControlVtbl* do
     GUID = LibC::GUID.new(0x51372aec_u32, 0xcae7_u16, 0x11cf_u16, StaticArray[0xbe_u8, 0x81_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0xfa_u8, 0x25_u8])
     def query_interface(this : IObjectControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3728,7 +3711,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("51372af2-cae7-11cf-be81-00aa00a2fa25")]
   record IEnumNames, lpVtbl : IEnumNamesVtbl* do
     GUID = LibC::GUID.new(0x51372af2_u32, 0xcae7_u16, 0x11cf_u16, StaticArray[0xbe_u8, 0x81_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0xfa_u8, 0x25_u8])
     def query_interface(this : IEnumNames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3768,7 +3750,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("51372aea-cae7-11cf-be81-00aa00a2fa25")]
   record ISecurityProperty, lpVtbl : ISecurityPropertyVtbl* do
     GUID = LibC::GUID.new(0x51372aea_u32, 0xcae7_u16, 0x11cf_u16, StaticArray[0xbe_u8, 0x81_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0xfa_u8, 0x25_u8])
     def query_interface(this : ISecurityProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3809,7 +3790,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("7dc41850-0c31-11d0-8b79-00aa00b8a790")]
   record ObjectControl, lpVtbl : ObjectControlVtbl* do
     GUID = LibC::GUID.new(0x7dc41850_u32, 0xc31_u16, 0x11d0_u16, StaticArray[0x8b_u8, 0x79_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb8_u8, 0xa7_u8, 0x90_u8])
     def query_interface(this : ObjectControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3847,7 +3827,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("2a005c01-a5de-11cf-9e66-00aa00a3f464")]
   record ISharedProperty, lpVtbl : ISharedPropertyVtbl* do
     GUID = LibC::GUID.new(0x2a005c01_u32, 0xa5de_u16, 0x11cf_u16, StaticArray[0x9e_u8, 0x66_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xf4_u8, 0x64_u8])
     def query_interface(this : ISharedProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3896,7 +3875,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("2a005c07-a5de-11cf-9e66-00aa00a3f464")]
   record ISharedPropertyGroup, lpVtbl : ISharedPropertyGroupVtbl* do
     GUID = LibC::GUID.new(0x2a005c07_u32, 0xa5de_u16, 0x11cf_u16, StaticArray[0x9e_u8, 0x66_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xf4_u8, 0x64_u8])
     def query_interface(this : ISharedPropertyGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3950,7 +3928,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("2a005c0d-a5de-11cf-9e66-00aa00a3f464")]
   record ISharedPropertyGroupManager, lpVtbl : ISharedPropertyGroupManagerVtbl* do
     GUID = LibC::GUID.new(0x2a005c0d_u32, 0xa5de_u16, 0x11cf_u16, StaticArray[0x9e_u8, 0x66_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xf4_u8, 0x64_u8])
     def query_interface(this : ISharedPropertyGroupManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3995,7 +3972,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("41c4f8b3-7439-11d2-98cb-00c04f8ee1c4")]
   record IObjectConstruct, lpVtbl : IObjectConstructVtbl* do
     GUID = LibC::GUID.new(0x41c4f8b3_u32, 0x7439_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xcb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IObjectConstruct*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4026,7 +4002,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("41c4f8b2-7439-11d2-98cb-00c04f8ee1c4")]
   record IObjectConstructString, lpVtbl : IObjectConstructStringVtbl* do
     GUID = LibC::GUID.new(0x41c4f8b2_u32, 0x7439_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xcb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IObjectConstructString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4065,7 +4040,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("51372afc-cae7-11cf-be81-00aa00a2fa25")]
   record IObjectContextActivity, lpVtbl : IObjectContextActivityVtbl* do
     GUID = LibC::GUID.new(0x51372afc_u32, 0xcae7_u16, 0x11cf_u16, StaticArray[0xbe_u8, 0x81_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0xfa_u8, 0x25_u8])
     def query_interface(this : IObjectContextActivity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4096,7 +4070,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("75b52ddb-e8ed-11d1-93ad-00aa00ba3258")]
   record IObjectContextInfo, lpVtbl : IObjectContextInfoVtbl* do
     GUID = LibC::GUID.new(0x75b52ddb_u32, 0xe8ed_u16, 0x11d1_u16, StaticArray[0x93_u8, 0xad_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xba_u8, 0x32_u8, 0x58_u8])
     def query_interface(this : IObjectContextInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4142,7 +4115,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("594be71a-4bc4-438b-9197-cfd176248b09")]
   record IObjectContextInfo2, lpVtbl : IObjectContextInfo2Vtbl* do
     GUID = LibC::GUID.new(0x594be71a_u32, 0x4bc4_u16, 0x438b_u16, StaticArray[0x91_u8, 0x97_u8, 0xcf_u8, 0xd1_u8, 0x76_u8, 0x24_u8, 0x8b_u8, 0x9_u8])
     def query_interface(this : IObjectContextInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4191,7 +4163,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("61f589e8-3724-4898-a0a4-664ae9e1d1b4")]
   record ITransactionStatus, lpVtbl : ITransactionStatusVtbl* do
     GUID = LibC::GUID.new(0x61f589e8_u32, 0x3724_u16, 0x4898_u16, StaticArray[0xa0_u8, 0xa4_u8, 0x66_u8, 0x4a_u8, 0xe9_u8, 0xe1_u8, 0xd1_u8, 0xb4_u8])
     def query_interface(this : ITransactionStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4221,7 +4192,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("92fd41ca-bad9-11d2-9a2d-00c04f797bc9")]
   record IObjectContextTip, lpVtbl : IObjectContextTipVtbl* do
     GUID = LibC::GUID.new(0x92fd41ca_u32, 0xbad9_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x2d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x7b_u8, 0xc9_u8])
     def query_interface(this : IObjectContextTip*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4249,7 +4219,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("51372afd-cae7-11cf-be81-00aa00a2fa25")]
   record IPlaybackControl, lpVtbl : IPlaybackControlVtbl* do
     GUID = LibC::GUID.new(0x51372afd_u32, 0xcae7_u16, 0x11cf_u16, StaticArray[0xbe_u8, 0x81_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0xfa_u8, 0x25_u8])
     def query_interface(this : IPlaybackControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4281,7 +4250,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("51372af4-cae7-11cf-be81-00aa00a2fa25")]
   record IGetContextProperties, lpVtbl : IGetContextPropertiesVtbl* do
     GUID = LibC::GUID.new(0x51372af4_u32, 0xcae7_u16, 0x11cf_u16, StaticArray[0xbe_u8, 0x81_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0xfa_u8, 0x25_u8])
     def query_interface(this : IGetContextProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4317,7 +4285,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("3c05e54b-a42a-11d2-afc4-00c04f8ee1c4")]
   record IContextState, lpVtbl : IContextStateVtbl* do
     GUID = LibC::GUID.new(0x3c05e54b_u32, 0xa42a_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xc4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IContextState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4357,7 +4324,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("0a469861-5a91-43a0-99b6-d5e179bb0631")]
   record IPoolManager, lpVtbl : IPoolManagerVtbl* do
     GUID = LibC::GUID.new(0xa469861_u32, 0x5a91_u16, 0x43a0_u16, StaticArray[0x99_u8, 0xb6_u8, 0xd5_u8, 0xe1_u8, 0x79_u8, 0xbb_u8, 0x6_u8, 0x31_u8])
     def query_interface(this : IPoolManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4397,7 +4363,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("dcf443f4-3f8a-4872-b9f0-369a796d12d6")]
   record ISelectCOMLBServer, lpVtbl : ISelectCOMLBServerVtbl* do
     GUID = LibC::GUID.new(0xdcf443f4_u32, 0x3f8a_u16, 0x4872_u16, StaticArray[0xb9_u8, 0xf0_u8, 0x36_u8, 0x9a_u8, 0x79_u8, 0x6d_u8, 0x12_u8, 0xd6_u8])
     def query_interface(this : ISelectCOMLBServer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4430,7 +4395,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("3a0f150f-8ee5-4b94-b40e-aef2f9e42ed2")]
   record ICOMLBArguments, lpVtbl : ICOMLBArgumentsVtbl* do
     GUID = LibC::GUID.new(0x3a0f150f_u32, 0x8ee5_u16, 0x4b94_u16, StaticArray[0xb4_u8, 0xe_u8, 0xae_u8, 0xf2_u8, 0xf9_u8, 0xe4_u8, 0x2e_u8, 0xd2_u8])
     def query_interface(this : ICOMLBArguments*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4472,7 +4436,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("a0e174b3-d26e-11d2-8f84-00805fc7bcd9")]
   record ICrmLogControl, lpVtbl : ICrmLogControlVtbl* do
     GUID = LibC::GUID.new(0xa0e174b3_u32, 0xd26e_u16, 0x11d2_u16, StaticArray[0x8f_u8, 0x84_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc7_u8, 0xbc_u8, 0xd9_u8])
     def query_interface(this : ICrmLogControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4526,7 +4489,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("f0baf8e4-7804-11d1-82e9-00a0c91eede9")]
   record ICrmCompensatorVariants, lpVtbl : ICrmCompensatorVariantsVtbl* do
     GUID = LibC::GUID.new(0xf0baf8e4_u32, 0x7804_u16, 0x11d1_u16, StaticArray[0x82_u8, 0xe9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1e_u8, 0xed_u8, 0xe9_u8])
     def query_interface(this : ICrmCompensatorVariants*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4589,7 +4551,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("bbc01830-8d3b-11d1-82ec-00a0c91eede9")]
   record ICrmCompensator, lpVtbl : ICrmCompensatorVtbl* do
     GUID = LibC::GUID.new(0xbbc01830_u32, 0x8d3b_u16, 0x11d1_u16, StaticArray[0x82_u8, 0xec_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1e_u8, 0xed_u8, 0xe9_u8])
     def query_interface(this : ICrmCompensator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4647,7 +4608,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("70c8e441-c7ed-11d1-82fb-00a0c91eede9")]
   record ICrmMonitorLogRecords, lpVtbl : ICrmMonitorLogRecordsVtbl* do
     GUID = LibC::GUID.new(0x70c8e441_u32, 0xc7ed_u16, 0x11d1_u16, StaticArray[0x82_u8, 0xfb_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1e_u8, 0xed_u8, 0xe9_u8])
     def query_interface(this : ICrmMonitorLogRecords*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4696,7 +4656,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("70c8e442-c7ed-11d1-82fb-00a0c91eede9")]
   record ICrmMonitorClerks, lpVtbl : ICrmMonitorClerksVtbl* do
     GUID = LibC::GUID.new(0x70c8e442_u32, 0xc7ed_u16, 0x11d1_u16, StaticArray[0x82_u8, 0xfb_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1e_u8, 0xed_u8, 0xe9_u8])
     def query_interface(this : ICrmMonitorClerks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4754,7 +4713,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("70c8e443-c7ed-11d1-82fb-00a0c91eede9")]
   record ICrmMonitor, lpVtbl : ICrmMonitorVtbl* do
     GUID = LibC::GUID.new(0x70c8e443_u32, 0xc7ed_u16, 0x11d1_u16, StaticArray[0x82_u8, 0xfb_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1e_u8, 0xed_u8, 0xe9_u8])
     def query_interface(this : ICrmMonitor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4787,7 +4745,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("9c51d821-c98b-11d1-82fb-00a0c91eede9")]
   record ICrmFormatLogRecords, lpVtbl : ICrmFormatLogRecordsVtbl* do
     GUID = LibC::GUID.new(0x9c51d821_u32, 0xc98b_u16, 0x11d1_u16, StaticArray[0x82_u8, 0xfb_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1e_u8, 0xed_u8, 0xe9_u8])
     def query_interface(this : ICrmFormatLogRecords*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4823,7 +4780,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("1a0cf920-d452-46f4-bc36-48118d54ea52")]
   record IServiceIISIntrinsicsConfig, lpVtbl : IServiceIISIntrinsicsConfigVtbl* do
     GUID = LibC::GUID.new(0x1a0cf920_u32, 0xd452_u16, 0x46f4_u16, StaticArray[0xbc_u8, 0x36_u8, 0x48_u8, 0x11_u8, 0x8d_u8, 0x54_u8, 0xea_u8, 0x52_u8])
     def query_interface(this : IServiceIISIntrinsicsConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4850,7 +4806,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("09e6831e-04e1-4ed4-9d0f-e8b168bafeaf")]
   record IServiceComTIIntrinsicsConfig, lpVtbl : IServiceComTIIntrinsicsConfigVtbl* do
     GUID = LibC::GUID.new(0x9e6831e_u32, 0x4e1_u16, 0x4ed4_u16, StaticArray[0x9d_u8, 0xf_u8, 0xe8_u8, 0xb1_u8, 0x68_u8, 0xba_u8, 0xfe_u8, 0xaf_u8])
     def query_interface(this : IServiceComTIIntrinsicsConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4879,7 +4834,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("c7cd7379-f3f2-4634-811b-703281d73e08")]
   record IServiceSxsConfig, lpVtbl : IServiceSxsConfigVtbl* do
     GUID = LibC::GUID.new(0xc7cd7379_u32, 0xf3f2_u16, 0x4634_u16, StaticArray[0x81_u8, 0x1b_u8, 0x70_u8, 0x32_u8, 0x81_u8, 0xd7_u8, 0x3e_u8, 0x8_u8])
     def query_interface(this : IServiceSxsConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4912,7 +4866,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("0ff5a96f-11fc-47d1-baa6-25dd347e7242")]
   record ICheckSxsConfig, lpVtbl : ICheckSxsConfigVtbl* do
     GUID = LibC::GUID.new(0xff5a96f_u32, 0x11fc_u16, 0x47d1_u16, StaticArray[0xba_u8, 0xa6_u8, 0x25_u8, 0xdd_u8, 0x34_u8, 0x7e_u8, 0x72_u8, 0x42_u8])
     def query_interface(this : ICheckSxsConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4939,7 +4892,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("92186771-d3b4-4d77-a8ea-ee842d586f35")]
   record IServiceInheritanceConfig, lpVtbl : IServiceInheritanceConfigVtbl* do
     GUID = LibC::GUID.new(0x92186771_u32, 0xd3b4_u16, 0x4d77_u16, StaticArray[0xa8_u8, 0xea_u8, 0xee_u8, 0x84_u8, 0x2d_u8, 0x58_u8, 0x6f_u8, 0x35_u8])
     def query_interface(this : IServiceInheritanceConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4967,7 +4919,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("186d89bc-f277-4bcc-80d5-4df7b836ef4a")]
   record IServiceThreadPoolConfig, lpVtbl : IServiceThreadPoolConfigVtbl* do
     GUID = LibC::GUID.new(0x186d89bc_u32, 0xf277_u16, 0x4bcc_u16, StaticArray[0x80_u8, 0xd5_u8, 0x4d_u8, 0xf7_u8, 0xb8_u8, 0x36_u8, 0xef_u8, 0x4a_u8])
     def query_interface(this : IServiceThreadPoolConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5001,7 +4952,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("772b3fbe-6ffd-42fb-b5f8-8f9b260f3810")]
   record IServiceTransactionConfigBase, lpVtbl : IServiceTransactionConfigBaseVtbl* do
     GUID = LibC::GUID.new(0x772b3fbe_u32, 0x6ffd_u16, 0x42fb_u16, StaticArray[0xb5_u8, 0xf8_u8, 0x8f_u8, 0x9b_u8, 0x26_u8, 0xf_u8, 0x38_u8, 0x10_u8])
     def query_interface(this : IServiceTransactionConfigBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5045,7 +4995,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("59f4c2a3-d3d7-4a31-b6e4-6ab3177c50b9")]
   record IServiceTransactionConfig, lpVtbl : IServiceTransactionConfigVtbl* do
     GUID = LibC::GUID.new(0x59f4c2a3_u32, 0xd3d7_u16, 0x4a31_u16, StaticArray[0xb6_u8, 0xe4_u8, 0x6a_u8, 0xb3_u8, 0x17_u8, 0x7c_u8, 0x50_u8, 0xb9_u8])
     def query_interface(this : IServiceTransactionConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5093,7 +5042,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("33caf1a1-fcb8-472b-b45e-967448ded6d8")]
   record IServiceSysTxnConfig, lpVtbl : IServiceSysTxnConfigVtbl* do
     GUID = LibC::GUID.new(0x33caf1a1_u32, 0xfcb8_u16, 0x472b_u16, StaticArray[0xb4_u8, 0x5e_u8, 0x96_u8, 0x74_u8, 0x48_u8, 0xde_u8, 0xd6_u8, 0xd8_u8])
     def query_interface(this : IServiceSysTxnConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5138,7 +5086,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("fd880e81-6dce-4c58-af83-a208846c0030")]
   record IServiceSynchronizationConfig, lpVtbl : IServiceSynchronizationConfigVtbl* do
     GUID = LibC::GUID.new(0xfd880e81_u32, 0x6dce_u16, 0x4c58_u16, StaticArray[0xaf_u8, 0x83_u8, 0xa2_u8, 0x8_u8, 0x84_u8, 0x6c_u8, 0x0_u8, 0x30_u8])
     def query_interface(this : IServiceSynchronizationConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5165,7 +5112,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("6c3a3e1d-0ba6-4036-b76f-d0404db816c9")]
   record IServiceTrackerConfig, lpVtbl : IServiceTrackerConfigVtbl* do
     GUID = LibC::GUID.new(0x6c3a3e1d_u32, 0xba6_u16, 0x4036_u16, StaticArray[0xb7_u8, 0x6f_u8, 0xd0_u8, 0x40_u8, 0x4d_u8, 0xb8_u8, 0x16_u8, 0xc9_u8])
     def query_interface(this : IServiceTrackerConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5193,7 +5139,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("80182d03-5ea4-4831-ae97-55beffc2e590")]
   record IServicePartitionConfig, lpVtbl : IServicePartitionConfigVtbl* do
     GUID = LibC::GUID.new(0x80182d03_u32, 0x5ea4_u16, 0x4831_u16, StaticArray[0xae_u8, 0x97_u8, 0x55_u8, 0xbe_u8, 0xff_u8, 0xc2_u8, 0xe5_u8, 0x90_u8])
     def query_interface(this : IServicePartitionConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5223,7 +5168,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("bd3e2e12-42dd-40f4-a09a-95a50c58304b")]
   record IServiceCall, lpVtbl : IServiceCallVtbl* do
     GUID = LibC::GUID.new(0xbd3e2e12_u32, 0x42dd_u16, 0x40f4_u16, StaticArray[0xa0_u8, 0x9a_u8, 0x95_u8, 0xa5_u8, 0xc_u8, 0x58_u8, 0x30_u8, 0x4b_u8])
     def query_interface(this : IServiceCall*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5250,7 +5194,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("fe6777fb-a674-4177-8f32-6d707e113484")]
   record IAsyncErrorNotify, lpVtbl : IAsyncErrorNotifyVtbl* do
     GUID = LibC::GUID.new(0xfe6777fb_u32, 0xa674_u16, 0x4177_u16, StaticArray[0x8f_u8, 0x32_u8, 0x6d_u8, 0x70_u8, 0x7e_u8, 0x11_u8, 0x34_u8, 0x84_u8])
     def query_interface(this : IAsyncErrorNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5280,7 +5223,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("67532e0c-9e2f-4450-a354-035633944e17")]
   record IServiceActivity, lpVtbl : IServiceActivityVtbl* do
     GUID = LibC::GUID.new(0x67532e0c_u32, 0x9e2f_u16, 0x4450_u16, StaticArray[0xa3_u8, 0x54_u8, 0x3_u8, 0x56_u8, 0x33_u8, 0x94_u8, 0x4e_u8, 0x17_u8])
     def query_interface(this : IServiceActivity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5325,7 +5267,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("51372af7-cae7-11cf-be81-00aa00a2fa25")]
   record IThreadPoolKnobs, lpVtbl : IThreadPoolKnobsVtbl* do
     GUID = LibC::GUID.new(0x51372af7_u32, 0xcae7_u16, 0x11cf_u16, StaticArray[0xbe_u8, 0x81_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0xfa_u8, 0x25_u8])
     def query_interface(this : IThreadPoolKnobs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5389,7 +5330,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("324b64fa-33b6-11d2-98b7-00c04f8ee1c4")]
   record IComStaThreadPoolKnobs, lpVtbl : IComStaThreadPoolKnobsVtbl* do
     GUID = LibC::GUID.new(0x324b64fa_u32, 0x33b6_u16, 0x11d2_u16, StaticArray[0x98_u8, 0xb7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe1_u8, 0xc4_u8])
     def query_interface(this : IComStaThreadPoolKnobs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5449,7 +5389,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("f9a76d2e-76a5-43eb-a0c4-49bec8e48480")]
   record IComMtaThreadPoolKnobs, lpVtbl : IComMtaThreadPoolKnobsVtbl* do
     GUID = LibC::GUID.new(0xf9a76d2e_u32, 0x76a5_u16, 0x43eb_u16, StaticArray[0xa0_u8, 0xc4_u8, 0x49_u8, 0xbe_u8, 0xc8_u8, 0xe4_u8, 0x84_u8, 0x80_u8])
     def query_interface(this : IComMtaThreadPoolKnobs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5505,7 +5444,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("73707523-ff9a-4974-bf84-2108dc213740")]
   record IComStaThreadPoolKnobs2, lpVtbl : IComStaThreadPoolKnobs2Vtbl* do
     GUID = LibC::GUID.new(0x73707523_u32, 0xff9a_u16, 0x4974_u16, StaticArray[0xbf_u8, 0x84_u8, 0x21_u8, 0x8_u8, 0xdc_u8, 0x21_u8, 0x37_u8, 0x40_u8])
     def query_interface(this : IComStaThreadPoolKnobs2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5593,7 +5531,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("1113f52d-dc7f-4943-aed6-88d04027e32a")]
   record IProcessInitializer, lpVtbl : IProcessInitializerVtbl* do
     GUID = LibC::GUID.new(0x1113f52d_u32, 0xdc7f_u16, 0x4943_u16, StaticArray[0xae_u8, 0xd6_u8, 0x88_u8, 0xd0_u8, 0x40_u8, 0x27_u8, 0xe3_u8, 0x2a_u8])
     def query_interface(this : IProcessInitializer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5632,7 +5569,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("a9690656-5bca-470c-8451-250c1f43a33e")]
   record IServicePoolConfig, lpVtbl : IServicePoolConfigVtbl* do
     GUID = LibC::GUID.new(0xa9690656_u32, 0x5bca_u16, 0x470c_u16, StaticArray[0x84_u8, 0x51_u8, 0x25_u8, 0xc_u8, 0x1f_u8, 0x43_u8, 0xa3_u8, 0x3e_u8])
     def query_interface(this : IServicePoolConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5688,7 +5624,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("b302df81-ea45-451e-99a2-09f9fd1b1e13")]
   record IServicePool, lpVtbl : IServicePoolVtbl* do
     GUID = LibC::GUID.new(0xb302df81_u32, 0xea45_u16, 0x451e_u16, StaticArray[0x99_u8, 0xa2_u8, 0x9_u8, 0xf9_u8, 0xfd_u8, 0x1b_u8, 0x1e_u8, 0x13_u8])
     def query_interface(this : IServicePool*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5721,7 +5656,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("c5da4bea-1b42-4437-8926-b6a38860a770")]
   record IManagedPooledObj, lpVtbl : IManagedPooledObjVtbl* do
     GUID = LibC::GUID.new(0xc5da4bea_u32, 0x1b42_u16, 0x4437_u16, StaticArray[0x89_u8, 0x26_u8, 0xb6_u8, 0xa3_u8, 0x88_u8, 0x60_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IManagedPooledObj*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5748,7 +5682,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("da91b74e-5388-4783-949d-c1cd5fb00506")]
   record IManagedPoolAction, lpVtbl : IManagedPoolActionVtbl* do
     GUID = LibC::GUID.new(0xda91b74e_u32, 0x5388_u16, 0x4783_u16, StaticArray[0x94_u8, 0x9d_u8, 0xc1_u8, 0xcd_u8, 0x5f_u8, 0xb0_u8, 0x5_u8, 0x6_u8])
     def query_interface(this : IManagedPoolAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5778,7 +5711,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("1427c51a-4584-49d8-90a0-c50d8086cbe9")]
   record IManagedObjectInfo, lpVtbl : IManagedObjectInfoVtbl* do
     GUID = LibC::GUID.new(0x1427c51a_u32, 0x4584_u16, 0x49d8_u16, StaticArray[0x90_u8, 0xa0_u8, 0xc5_u8, 0xd_u8, 0x80_u8, 0x86_u8, 0xcb_u8, 0xe9_u8])
     def query_interface(this : IManagedObjectInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5819,7 +5751,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("c7b67079-8255-42c6-9ec0-6994a3548780")]
   record IAppDomainHelper, lpVtbl : IAppDomainHelperVtbl* do
     GUID = LibC::GUID.new(0xc7b67079_u32, 0x8255_u16, 0x42c6_u16, StaticArray[0x9e_u8, 0xc0_u8, 0x69_u8, 0x94_u8, 0xa3_u8, 0x54_u8, 0x87_u8, 0x80_u8])
     def query_interface(this : IAppDomainHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5865,7 +5796,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("391ffbb9-a8ee-432a-abc8-baa238dab90f")]
   record IAssemblyLocator, lpVtbl : IAssemblyLocatorVtbl* do
     GUID = LibC::GUID.new(0x391ffbb9_u32, 0xa8ee_u16, 0x432a_u16, StaticArray[0xab_u8, 0xc8_u8, 0xba_u8, 0xa2_u8, 0x38_u8, 0xda_u8, 0xb9_u8, 0xf_u8])
     def query_interface(this : IAssemblyLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5905,7 +5835,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("a5f325af-572f-46da-b8ab-827c3d95d99e")]
   record IManagedActivationEvents, lpVtbl : IManagedActivationEventsVtbl* do
     GUID = LibC::GUID.new(0xa5f325af_u32, 0x572f_u16, 0x46da_u16, StaticArray[0xb8_u8, 0xab_u8, 0x82_u8, 0x7c_u8, 0x3d_u8, 0x95_u8, 0xd9_u8, 0x9e_u8])
     def query_interface(this : IManagedActivationEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5936,7 +5865,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("2732fd59-b2b4-4d44-878c-8b8f09626008")]
   record ISendMethodEvents, lpVtbl : ISendMethodEventsVtbl* do
     GUID = LibC::GUID.new(0x2732fd59_u32, 0xb2b4_u16, 0x4d44_u16, StaticArray[0x87_u8, 0x8c_u8, 0x8b_u8, 0x8f_u8, 0x9_u8, 0x62_u8, 0x60_u8, 0x8_u8])
     def query_interface(this : ISendMethodEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5967,7 +5895,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("c5feb7c1-346a-11d1-b1cc-00aa00ba3258")]
   record ITransactionResourcePool, lpVtbl : ITransactionResourcePoolVtbl* do
     GUID = LibC::GUID.new(0xc5feb7c1_u32, 0x346a_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xcc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xba_u8, 0x32_u8, 0x58_u8])
     def query_interface(this : ITransactionResourcePool*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5997,7 +5924,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("51372aef-cae7-11cf-be81-00aa00a2fa25")]
   record IMTSCall, lpVtbl : IMTSCallVtbl* do
     GUID = LibC::GUID.new(0x51372aef_u32, 0xcae7_u16, 0x11cf_u16, StaticArray[0xbe_u8, 0x81_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0xfa_u8, 0x25_u8])
     def query_interface(this : IMTSCall*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6028,7 +5954,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("d396da85-bf8f-11d1-bbae-00c04fc2fa5f")]
   record IContextProperties, lpVtbl : IContextPropertiesVtbl* do
     GUID = LibC::GUID.new(0xd396da85_u32, 0xbf8f_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0xae_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xfa_u8, 0x5f_u8])
     def query_interface(this : IContextProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6073,7 +5998,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("7d8805a0-2ea7-11d1-b1cc-00aa00ba3258")]
   record IObjPool, lpVtbl : IObjPoolVtbl* do
     GUID = LibC::GUID.new(0x7d8805a0_u32, 0x2ea7_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xcc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xba_u8, 0x32_u8, 0x58_u8])
     def query_interface(this : IObjPool*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6135,7 +6059,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("788ea814-87b1-11d1-bba6-00c04fc2fa5f")]
   record ITransactionProperty, lpVtbl : ITransactionPropertyVtbl* do
     GUID = LibC::GUID.new(0x788ea814_u32, 0x87b1_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xfa_u8, 0x5f_u8])
     def query_interface(this : ITransactionProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6217,7 +6140,6 @@ module Win32cr::System::ComponentServices
 
 
   @[Extern]
-  #@[Com("51372af0-cae7-11cf-be81-00aa00a2fa25")]
   record IMTSActivity, lpVtbl : IMTSActivityVtbl* do
     GUID = LibC::GUID.new(0x51372af0_u32, 0xcae7_u16, 0x11cf_u16, StaticArray[0xbe_u8, 0x81_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0xfa_u8, 0x25_u8])
     def query_interface(this : IMTSActivity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

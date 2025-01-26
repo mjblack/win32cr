@@ -6,19 +6,19 @@ require "./../windows_and_messaging.cr"
 require "./../text_services.cr"
 
 module Win32cr::UI::Input::Ime
-  alias IMCENUMPROC = Proc(Win32cr::Globalization::HIMC, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias IMCENUMPROC = Proc(Win32cr::Globalization::HIMC, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias REGISTERWORDENUMPROCA = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Void*, Int32)*
+  alias REGISTERWORDENUMPROCA = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Void*, Int32)
 
-  alias REGISTERWORDENUMPROCW = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Void*, Int32)*
+  alias REGISTERWORDENUMPROCW = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Void*, Int32)
 
-  alias PFNLOG = Proc(Win32cr::UI::Input::Ime::IMEDP*, Win32cr::Foundation::HRESULT, Win32cr::Foundation::BOOL)*
+  alias PFNLOG = Proc(Win32cr::UI::Input::Ime::IMEDP*, Win32cr::Foundation::HRESULT, Win32cr::Foundation::BOOL)
 
-  alias Fpcreateifecommoninstancetype = Proc(Void**, Win32cr::Foundation::HRESULT)*
+  alias Fpcreateifecommoninstancetype = Proc(Void**, Win32cr::Foundation::HRESULT)
 
-  alias Fpcreateifelanguageinstancetype = Proc(LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)*
+  alias Fpcreateifelanguageinstancetype = Proc(LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
 
-  alias Fpcreateifedictionaryinstancetype = Proc(Void**, Win32cr::Foundation::HRESULT)*
+  alias Fpcreateifedictionaryinstancetype = Proc(Void**, Win32cr::Foundation::HRESULT)
 
   Szimejapan = "MSIME.Japan"
   Szimekorea = "MSIME.Korea"
@@ -802,457 +802,616 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record COMPOSITIONFORM,
-    dwStyle : UInt32,
-    ptCurrentPos : Win32cr::Foundation::POINT,
-    rcArea : Win32cr::Foundation::RECT
+  struct COMPOSITIONFORM
+    property dwStyle : UInt32
+    property ptCurrentPos : Win32cr::Foundation::POINT
+    property rcArea : Win32cr::Foundation::RECT
+    def initialize(@dwStyle : UInt32, @ptCurrentPos : Win32cr::Foundation::POINT, @rcArea : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record CANDIDATEFORM,
-    dwIndex : UInt32,
-    dwStyle : UInt32,
-    ptCurrentPos : Win32cr::Foundation::POINT,
-    rcArea : Win32cr::Foundation::RECT
+  struct CANDIDATEFORM
+    property dwIndex : UInt32
+    property dwStyle : UInt32
+    property ptCurrentPos : Win32cr::Foundation::POINT
+    property rcArea : Win32cr::Foundation::RECT
+    def initialize(@dwIndex : UInt32, @dwStyle : UInt32, @ptCurrentPos : Win32cr::Foundation::POINT, @rcArea : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record CANDIDATELIST,
-    dwSize : UInt32,
-    dwStyle : UInt32,
-    dwCount : UInt32,
-    dwSelection : UInt32,
-    dwPageStart : UInt32,
-    dwPageSize : UInt32,
-    dwOffset : UInt32*
+  struct CANDIDATELIST
+    property dwSize : UInt32
+    property dwStyle : UInt32
+    property dwCount : UInt32
+    property dwSelection : UInt32
+    property dwPageStart : UInt32
+    property dwPageSize : UInt32
+    property dwOffset : UInt32*
+    def initialize(@dwSize : UInt32, @dwStyle : UInt32, @dwCount : UInt32, @dwSelection : UInt32, @dwPageStart : UInt32, @dwPageSize : UInt32, @dwOffset : UInt32*)
+    end
+  end
 
   @[Extern]
-  record REGISTERWORDA,
-    lpReading : Win32cr::Foundation::PSTR,
-    lpWord : Win32cr::Foundation::PSTR
+  struct REGISTERWORDA
+    property lpReading : Win32cr::Foundation::PSTR
+    property lpWord : Win32cr::Foundation::PSTR
+    def initialize(@lpReading : Win32cr::Foundation::PSTR, @lpWord : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record REGISTERWORDW,
-    lpReading : Win32cr::Foundation::PWSTR,
-    lpWord : Win32cr::Foundation::PWSTR
+  struct REGISTERWORDW
+    property lpReading : Win32cr::Foundation::PWSTR
+    property lpWord : Win32cr::Foundation::PWSTR
+    def initialize(@lpReading : Win32cr::Foundation::PWSTR, @lpWord : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record RECONVERTSTRING,
-    dwSize : UInt32,
-    dwVersion : UInt32,
-    dwStrLen : UInt32,
-    dwStrOffset : UInt32,
-    dwCompStrLen : UInt32,
-    dwCompStrOffset : UInt32,
-    dwTargetStrLen : UInt32,
-    dwTargetStrOffset : UInt32
+  struct RECONVERTSTRING
+    property dwSize : UInt32
+    property dwVersion : UInt32
+    property dwStrLen : UInt32
+    property dwStrOffset : UInt32
+    property dwCompStrLen : UInt32
+    property dwCompStrOffset : UInt32
+    property dwTargetStrLen : UInt32
+    property dwTargetStrOffset : UInt32
+    def initialize(@dwSize : UInt32, @dwVersion : UInt32, @dwStrLen : UInt32, @dwStrOffset : UInt32, @dwCompStrLen : UInt32, @dwCompStrOffset : UInt32, @dwTargetStrLen : UInt32, @dwTargetStrOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record STYLEBUFA,
-    dwStyle : UInt32,
-    szDescription : Win32cr::Foundation::CHAR[32]
+  struct STYLEBUFA
+    property dwStyle : UInt32
+    property szDescription : Win32cr::Foundation::CHAR[32]
+    def initialize(@dwStyle : UInt32, @szDescription : Win32cr::Foundation::CHAR[32])
+    end
+  end
 
   @[Extern]
-  record STYLEBUFW,
-    dwStyle : UInt32,
-    szDescription : UInt16[32]
+  struct STYLEBUFW
+    property dwStyle : UInt32
+    property szDescription : UInt16[32]
+    def initialize(@dwStyle : UInt32, @szDescription : UInt16[32])
+    end
+  end
 
   @[Extern]
-  record IMEMENUITEMINFOA,
-    cbSize : UInt32,
-    fType : UInt32,
-    fState : UInt32,
-    wID : UInt32,
-    hbmpChecked : Win32cr::Graphics::Gdi::HBITMAP,
-    hbmpUnchecked : Win32cr::Graphics::Gdi::HBITMAP,
-    dwItemData : UInt32,
-    szString : Win32cr::Foundation::CHAR[80],
-    hbmpItem : Win32cr::Graphics::Gdi::HBITMAP
+  struct IMEMENUITEMINFOA
+    property cbSize : UInt32
+    property fType : UInt32
+    property fState : UInt32
+    property wID : UInt32
+    property hbmpChecked : Win32cr::Graphics::Gdi::HBITMAP
+    property hbmpUnchecked : Win32cr::Graphics::Gdi::HBITMAP
+    property dwItemData : UInt32
+    property szString : Win32cr::Foundation::CHAR[80]
+    property hbmpItem : Win32cr::Graphics::Gdi::HBITMAP
+    def initialize(@cbSize : UInt32, @fType : UInt32, @fState : UInt32, @wID : UInt32, @hbmpChecked : Win32cr::Graphics::Gdi::HBITMAP, @hbmpUnchecked : Win32cr::Graphics::Gdi::HBITMAP, @dwItemData : UInt32, @szString : Win32cr::Foundation::CHAR[80], @hbmpItem : Win32cr::Graphics::Gdi::HBITMAP)
+    end
+  end
 
   @[Extern]
-  record IMEMENUITEMINFOW,
-    cbSize : UInt32,
-    fType : UInt32,
-    fState : UInt32,
-    wID : UInt32,
-    hbmpChecked : Win32cr::Graphics::Gdi::HBITMAP,
-    hbmpUnchecked : Win32cr::Graphics::Gdi::HBITMAP,
-    dwItemData : UInt32,
-    szString : UInt16[80],
-    hbmpItem : Win32cr::Graphics::Gdi::HBITMAP
+  struct IMEMENUITEMINFOW
+    property cbSize : UInt32
+    property fType : UInt32
+    property fState : UInt32
+    property wID : UInt32
+    property hbmpChecked : Win32cr::Graphics::Gdi::HBITMAP
+    property hbmpUnchecked : Win32cr::Graphics::Gdi::HBITMAP
+    property dwItemData : UInt32
+    property szString : UInt16[80]
+    property hbmpItem : Win32cr::Graphics::Gdi::HBITMAP
+    def initialize(@cbSize : UInt32, @fType : UInt32, @fState : UInt32, @wID : UInt32, @hbmpChecked : Win32cr::Graphics::Gdi::HBITMAP, @hbmpUnchecked : Win32cr::Graphics::Gdi::HBITMAP, @dwItemData : UInt32, @szString : UInt16[80], @hbmpItem : Win32cr::Graphics::Gdi::HBITMAP)
+    end
+  end
 
   @[Extern]
-  record IMECHARPOSITION,
-    dwSize : UInt32,
-    dwCharPos : UInt32,
-    pt : Win32cr::Foundation::POINT,
-    cLineHeight : UInt32,
-    rcDocument : Win32cr::Foundation::RECT
+  struct IMECHARPOSITION
+    property dwSize : UInt32
+    property dwCharPos : UInt32
+    property pt : Win32cr::Foundation::POINT
+    property cLineHeight : UInt32
+    property rcDocument : Win32cr::Foundation::RECT
+    def initialize(@dwSize : UInt32, @dwCharPos : UInt32, @pt : Win32cr::Foundation::POINT, @cLineHeight : UInt32, @rcDocument : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record IMEDLG,
-    cbIMEDLG : Int32,
-    hwnd : Win32cr::Foundation::HWND,
-    lpwstrWord : Win32cr::Foundation::PWSTR,
-    nTabId : Int32
+  struct IMEDLG
+    property cbIMEDLG : Int32
+    property hwnd : Win32cr::Foundation::HWND
+    property lpwstrWord : Win32cr::Foundation::PWSTR
+    property nTabId : Int32
+    def initialize(@cbIMEDLG : Int32, @hwnd : Win32cr::Foundation::HWND, @lpwstrWord : Win32cr::Foundation::PWSTR, @nTabId : Int32)
+    end
+  end
 
   @[Extern]
-  record WDD,
-    wDispPos : UInt16,
-    anonymous1 : Anonymous1_e__Union_,
-    cchDisp : UInt16,
-    anonymous2 : Anonymous2_e__Union_,
-    wdd_n_reserve1 : UInt32,
-    nPos : UInt16,
-    _bitfield : UInt16,
-    pReserved : Void* do
+  struct WDD
+    property wDispPos : UInt16
+    property anonymous1 : Anonymous1_e__Union_
+    property cchDisp : UInt16
+    property anonymous2 : Anonymous2_e__Union_
+    property wdd_n_reserve1 : UInt32
+    property nPos : UInt16
+    property _bitfield : UInt16
+    property pReserved : Void*
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      cchRead : UInt16,
-      cchComp : UInt16
+    struct Anonymous2_e__Union_
+    property cchRead : UInt16
+    property cchComp : UInt16
+    def initialize(@cchRead : UInt16, @cchComp : UInt16)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      wReadPos : UInt16,
-      wCompPos : UInt16
+    struct Anonymous1_e__Union_
+    property wReadPos : UInt16
+    property wCompPos : UInt16
+    def initialize(@wReadPos : UInt16, @wCompPos : UInt16)
+    end
+    end
 
+    def initialize(@wDispPos : UInt16, @anonymous1 : Anonymous1_e__Union_, @cchDisp : UInt16, @anonymous2 : Anonymous2_e__Union_, @wdd_n_reserve1 : UInt32, @nPos : UInt16, @_bitfield : UInt16, @pReserved : Void*)
+    end
   end
 
   @[Extern]
-  record MORRSLT,
-    dwSize : UInt32,
-    pwchOutput : Win32cr::Foundation::PWSTR,
-    cchOutput : UInt16,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    pchInputPos : UInt16*,
-    pchOutputIdxWDD : UInt16*,
-    anonymous3 : Anonymous3_e__Union_,
-    paMonoRubyPos : UInt16*,
-    pWDD : Win32cr::UI::Input::Ime::WDD*,
-    cWDD : Int32,
-    pPrivate : Void*,
-    blk_buff : UInt16* do
+  struct MORRSLT
+    property dwSize : UInt32
+    property pwchOutput : Win32cr::Foundation::PWSTR
+    property cchOutput : UInt16
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property pchInputPos : UInt16*
+    property pchOutputIdxWDD : UInt16*
+    property anonymous3 : Anonymous3_e__Union_
+    property paMonoRubyPos : UInt16*
+    property pWDD : Win32cr::UI::Input::Ime::WDD*
+    property cWDD : Int32
+    property pPrivate : Void*
+    property blk_buff : UInt16*
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      cchRead : UInt16,
-      cchComp : UInt16
+    struct Anonymous2_e__Union_
+    property cchRead : UInt16
+    property cchComp : UInt16
+    def initialize(@cchRead : UInt16, @cchComp : UInt16)
+    end
+    end
 
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      pchReadIdxWDD : UInt16*,
-      pchCompIdxWDD : UInt16*
+    struct Anonymous3_e__Union_
+    property pchReadIdxWDD : UInt16*
+    property pchCompIdxWDD : UInt16*
+    def initialize(@pchReadIdxWDD : UInt16*, @pchCompIdxWDD : UInt16*)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      pwchRead : Win32cr::Foundation::PWSTR,
-      pwchComp : Win32cr::Foundation::PWSTR
+    struct Anonymous1_e__Union_
+    property pwchRead : Win32cr::Foundation::PWSTR
+    property pwchComp : Win32cr::Foundation::PWSTR
+    def initialize(@pwchRead : Win32cr::Foundation::PWSTR, @pwchComp : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @pwchOutput : Win32cr::Foundation::PWSTR, @cchOutput : UInt16, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @pchInputPos : UInt16*, @pchOutputIdxWDD : UInt16*, @anonymous3 : Anonymous3_e__Union_, @paMonoRubyPos : UInt16*, @pWDD : Win32cr::UI::Input::Ime::WDD*, @cWDD : Int32, @pPrivate : Void*, @blk_buff : UInt16*)
+    end
   end
 
   @[Extern]
-  record IMEWRD,
-    pwchReading : Win32cr::Foundation::PWSTR,
-    pwchDisplay : Win32cr::Foundation::PWSTR,
-    anonymous : Anonymous_e__Union_,
-    rgulAttrs : UInt32[2],
-    cbComment : Int32,
-    uct : Win32cr::UI::Input::Ime::IMEUCT,
-    pvComment : Void* do
+  struct IMEWRD
+    property pwchReading : Win32cr::Foundation::PWSTR
+    property pwchDisplay : Win32cr::Foundation::PWSTR
+    property anonymous : Anonymous_e__Union_
+    property rgulAttrs : UInt32[2]
+    property cbComment : Int32
+    property uct : Win32cr::UI::Input::Ime::IMEUCT
+    property pvComment : Void*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ulPos : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property ulPos : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        nPos1 : UInt16,
-        nPos2 : UInt16
+      struct Anonymous_e__Struct_
+    property nPos1 : UInt16
+    property nPos2 : UInt16
+    def initialize(@nPos1 : UInt16, @nPos2 : UInt16)
+    end
+      end
 
+    def initialize(@ulPos : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@pwchReading : Win32cr::Foundation::PWSTR, @pwchDisplay : Win32cr::Foundation::PWSTR, @anonymous : Anonymous_e__Union_, @rgulAttrs : UInt32[2], @cbComment : Int32, @uct : Win32cr::UI::Input::Ime::IMEUCT, @pvComment : Void*)
+    end
   end
 
   @[Extern]
-  record IMESHF,
-    cbShf : UInt16,
-    verDic : UInt16,
-    szTitle : Win32cr::Foundation::CHAR[48],
-    szDescription : Win32cr::Foundation::CHAR[256],
-    szCopyright : Win32cr::Foundation::CHAR[128]
+  struct IMESHF
+    property cbShf : UInt16
+    property verDic : UInt16
+    property szTitle : Win32cr::Foundation::CHAR[48]
+    property szDescription : Win32cr::Foundation::CHAR[256]
+    property szCopyright : Win32cr::Foundation::CHAR[128]
+    def initialize(@cbShf : UInt16, @verDic : UInt16, @szTitle : Win32cr::Foundation::CHAR[48], @szDescription : Win32cr::Foundation::CHAR[256], @szCopyright : Win32cr::Foundation::CHAR[128])
+    end
+  end
 
   @[Extern]
-  record POSTBL,
-    nPos : UInt16,
-    szName : UInt8*
+  struct POSTBL
+    property nPos : UInt16
+    property szName : UInt8*
+    def initialize(@nPos : UInt16, @szName : UInt8*)
+    end
+  end
 
   @[Extern]
-  record IMEDP,
-    wrdModifier : Win32cr::UI::Input::Ime::IMEWRD,
-    wrdModifiee : Win32cr::UI::Input::Ime::IMEWRD,
-    relID : Win32cr::UI::Input::Ime::IMEREL
+  struct IMEDP
+    property wrdModifier : Win32cr::UI::Input::Ime::IMEWRD
+    property wrdModifiee : Win32cr::UI::Input::Ime::IMEWRD
+    property relID : Win32cr::UI::Input::Ime::IMEREL
+    def initialize(@wrdModifier : Win32cr::UI::Input::Ime::IMEWRD, @wrdModifiee : Win32cr::UI::Input::Ime::IMEWRD, @relID : Win32cr::UI::Input::Ime::IMEREL)
+    end
+  end
 
   @[Extern]
-  record IMEKMSINIT,
-    cbSize : Int32,
-    hWnd : Win32cr::Foundation::HWND
+  struct IMEKMSINIT
+    property cbSize : Int32
+    property hWnd : Win32cr::Foundation::HWND
+    def initialize(@cbSize : Int32, @hWnd : Win32cr::Foundation::HWND)
+    end
+  end
 
   @[Extern]
-  record IMEKMSKEY,
-    dwStatus : UInt32,
-    dwCompStatus : UInt32,
-    dwVKEY : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct IMEKMSKEY
+    property dwStatus : UInt32
+    property dwCompStatus : UInt32
+    property dwVKEY : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      dwControl : UInt32,
-      dwNotUsed : UInt32
+    struct Anonymous1_e__Union_
+    property dwControl : UInt32
+    property dwNotUsed : UInt32
+    def initialize(@dwControl : UInt32, @dwNotUsed : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      pwszDscr : UInt16[31],
-      pwszNoUse : UInt16[31]
+    struct Anonymous2_e__Union_
+    property pwszDscr : UInt16[31]
+    property pwszNoUse : UInt16[31]
+    def initialize(@pwszDscr : UInt16[31], @pwszNoUse : UInt16[31])
+    end
+    end
 
+    def initialize(@dwStatus : UInt32, @dwCompStatus : UInt32, @dwVKEY : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record IMEKMS,
-    cbSize : Int32,
-    hIMC : Win32cr::Globalization::HIMC,
-    cKeyList : UInt32,
-    pKeyList : Win32cr::UI::Input::Ime::IMEKMSKEY*
+  struct IMEKMS
+    property cbSize : Int32
+    property hIMC : Win32cr::Globalization::HIMC
+    property cKeyList : UInt32
+    property pKeyList : Win32cr::UI::Input::Ime::IMEKMSKEY*
+    def initialize(@cbSize : Int32, @hIMC : Win32cr::Globalization::HIMC, @cKeyList : UInt32, @pKeyList : Win32cr::UI::Input::Ime::IMEKMSKEY*)
+    end
+  end
 
   @[Extern]
-  record IMEKMSNTFY,
-    cbSize : Int32,
-    hIMC : Win32cr::Globalization::HIMC,
-    fSelect : Win32cr::Foundation::BOOL
+  struct IMEKMSNTFY
+    property cbSize : Int32
+    property hIMC : Win32cr::Globalization::HIMC
+    property fSelect : Win32cr::Foundation::BOOL
+    def initialize(@cbSize : Int32, @hIMC : Win32cr::Globalization::HIMC, @fSelect : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record IMEKMSKMP,
-    cbSize : Int32,
-    hIMC : Win32cr::Globalization::HIMC,
-    idLang : UInt16,
-    wVKStart : UInt16,
-    wVKEnd : UInt16,
-    cKeyList : Int32,
-    pKeyList : Win32cr::UI::Input::Ime::IMEKMSKEY*
+  struct IMEKMSKMP
+    property cbSize : Int32
+    property hIMC : Win32cr::Globalization::HIMC
+    property idLang : UInt16
+    property wVKStart : UInt16
+    property wVKEnd : UInt16
+    property cKeyList : Int32
+    property pKeyList : Win32cr::UI::Input::Ime::IMEKMSKEY*
+    def initialize(@cbSize : Int32, @hIMC : Win32cr::Globalization::HIMC, @idLang : UInt16, @wVKStart : UInt16, @wVKEnd : UInt16, @cKeyList : Int32, @pKeyList : Win32cr::UI::Input::Ime::IMEKMSKEY*)
+    end
+  end
 
   @[Extern]
-  record IMEKMSINVK,
-    cbSize : Int32,
-    hIMC : Win32cr::Globalization::HIMC,
-    dwControl : UInt32
+  struct IMEKMSINVK
+    property cbSize : Int32
+    property hIMC : Win32cr::Globalization::HIMC
+    property dwControl : UInt32
+    def initialize(@cbSize : Int32, @hIMC : Win32cr::Globalization::HIMC, @dwControl : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMEKMSFUNCDESC,
-    cbSize : Int32,
-    idLang : UInt16,
-    dwControl : UInt32,
-    pwszDescription : UInt16[128]
+  struct IMEKMSFUNCDESC
+    property cbSize : Int32
+    property idLang : UInt16
+    property dwControl : UInt32
+    property pwszDescription : UInt16[128]
+    def initialize(@cbSize : Int32, @idLang : UInt16, @dwControl : UInt32, @pwszDescription : UInt16[128])
+    end
+  end
 
   @[Extern]
-  record COMPOSITIONSTRING,
-    dwSize : UInt32,
-    dwCompReadAttrLen : UInt32,
-    dwCompReadAttrOffset : UInt32,
-    dwCompReadClauseLen : UInt32,
-    dwCompReadClauseOffset : UInt32,
-    dwCompReadStrLen : UInt32,
-    dwCompReadStrOffset : UInt32,
-    dwCompAttrLen : UInt32,
-    dwCompAttrOffset : UInt32,
-    dwCompClauseLen : UInt32,
-    dwCompClauseOffset : UInt32,
-    dwCompStrLen : UInt32,
-    dwCompStrOffset : UInt32,
-    dwCursorPos : UInt32,
-    dwDeltaStart : UInt32,
-    dwResultReadClauseLen : UInt32,
-    dwResultReadClauseOffset : UInt32,
-    dwResultReadStrLen : UInt32,
-    dwResultReadStrOffset : UInt32,
-    dwResultClauseLen : UInt32,
-    dwResultClauseOffset : UInt32,
-    dwResultStrLen : UInt32,
-    dwResultStrOffset : UInt32,
-    dwPrivateSize : UInt32,
-    dwPrivateOffset : UInt32
+  struct COMPOSITIONSTRING
+    property dwSize : UInt32
+    property dwCompReadAttrLen : UInt32
+    property dwCompReadAttrOffset : UInt32
+    property dwCompReadClauseLen : UInt32
+    property dwCompReadClauseOffset : UInt32
+    property dwCompReadStrLen : UInt32
+    property dwCompReadStrOffset : UInt32
+    property dwCompAttrLen : UInt32
+    property dwCompAttrOffset : UInt32
+    property dwCompClauseLen : UInt32
+    property dwCompClauseOffset : UInt32
+    property dwCompStrLen : UInt32
+    property dwCompStrOffset : UInt32
+    property dwCursorPos : UInt32
+    property dwDeltaStart : UInt32
+    property dwResultReadClauseLen : UInt32
+    property dwResultReadClauseOffset : UInt32
+    property dwResultReadStrLen : UInt32
+    property dwResultReadStrOffset : UInt32
+    property dwResultClauseLen : UInt32
+    property dwResultClauseOffset : UInt32
+    property dwResultStrLen : UInt32
+    property dwResultStrOffset : UInt32
+    property dwPrivateSize : UInt32
+    property dwPrivateOffset : UInt32
+    def initialize(@dwSize : UInt32, @dwCompReadAttrLen : UInt32, @dwCompReadAttrOffset : UInt32, @dwCompReadClauseLen : UInt32, @dwCompReadClauseOffset : UInt32, @dwCompReadStrLen : UInt32, @dwCompReadStrOffset : UInt32, @dwCompAttrLen : UInt32, @dwCompAttrOffset : UInt32, @dwCompClauseLen : UInt32, @dwCompClauseOffset : UInt32, @dwCompStrLen : UInt32, @dwCompStrOffset : UInt32, @dwCursorPos : UInt32, @dwDeltaStart : UInt32, @dwResultReadClauseLen : UInt32, @dwResultReadClauseOffset : UInt32, @dwResultReadStrLen : UInt32, @dwResultReadStrOffset : UInt32, @dwResultClauseLen : UInt32, @dwResultClauseOffset : UInt32, @dwResultStrLen : UInt32, @dwResultStrOffset : UInt32, @dwPrivateSize : UInt32, @dwPrivateOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record GUIDELINE,
-    dwSize : UInt32,
-    dwLevel : UInt32,
-    dwIndex : UInt32,
-    dwStrLen : UInt32,
-    dwStrOffset : UInt32,
-    dwPrivateSize : UInt32,
-    dwPrivateOffset : UInt32
+  struct GUIDELINE
+    property dwSize : UInt32
+    property dwLevel : UInt32
+    property dwIndex : UInt32
+    property dwStrLen : UInt32
+    property dwStrOffset : UInt32
+    property dwPrivateSize : UInt32
+    property dwPrivateOffset : UInt32
+    def initialize(@dwSize : UInt32, @dwLevel : UInt32, @dwIndex : UInt32, @dwStrLen : UInt32, @dwStrOffset : UInt32, @dwPrivateSize : UInt32, @dwPrivateOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record TRANSMSG,
-    message : UInt32,
-    wParam : Win32cr::Foundation::WPARAM,
-    lParam : Win32cr::Foundation::LPARAM
+  struct TRANSMSG
+    property message : UInt32
+    property wParam : Win32cr::Foundation::WPARAM
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@message : UInt32, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record TRANSMSGLIST,
-    uMsgCount : UInt32,
-    trans_msg : Win32cr::UI::Input::Ime::TRANSMSG*
+  struct TRANSMSGLIST
+    property uMsgCount : UInt32
+    property trans_msg : Win32cr::UI::Input::Ime::TRANSMSG*
+    def initialize(@uMsgCount : UInt32, @trans_msg : Win32cr::UI::Input::Ime::TRANSMSG*)
+    end
+  end
 
   @[Extern]
-  record CANDIDATEINFO,
-    dwSize : UInt32,
-    dwCount : UInt32,
-    dwOffset : UInt32[32],
-    dwPrivateSize : UInt32,
-    dwPrivateOffset : UInt32
+  struct CANDIDATEINFO
+    property dwSize : UInt32
+    property dwCount : UInt32
+    property dwOffset : UInt32[32]
+    property dwPrivateSize : UInt32
+    property dwPrivateOffset : UInt32
+    def initialize(@dwSize : UInt32, @dwCount : UInt32, @dwOffset : UInt32[32], @dwPrivateSize : UInt32, @dwPrivateOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record INPUTCONTEXT,
-    hWnd : Win32cr::Foundation::HWND,
-    fOpen : Win32cr::Foundation::BOOL,
-    ptStatusWndPos : Win32cr::Foundation::POINT,
-    ptSoftKbdPos : Win32cr::Foundation::POINT,
-    fdwConversion : UInt32,
-    fdwSentence : UInt32,
-    lfFont : Lffont_e__union_,
-    cfCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM,
-    cfCandForm : Win32cr::UI::Input::Ime::CANDIDATEFORM[4],
-    hCompStr : Win32cr::Globalization::HIMCC,
-    hCandInfo : Win32cr::Globalization::HIMCC,
-    hGuideLine : Win32cr::Globalization::HIMCC,
-    hPrivate : Win32cr::Globalization::HIMCC,
-    dwNumMsgBuf : UInt32,
-    hMsgBuf : Win32cr::Globalization::HIMCC,
-    fdwInit : UInt32,
-    dwReserve : UInt32[3] do
+  struct INPUTCONTEXT
+    property hWnd : Win32cr::Foundation::HWND
+    property fOpen : Win32cr::Foundation::BOOL
+    property ptStatusWndPos : Win32cr::Foundation::POINT
+    property ptSoftKbdPos : Win32cr::Foundation::POINT
+    property fdwConversion : UInt32
+    property fdwSentence : UInt32
+    property lfFont : Lffont_e__union_
+    property cfCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM
+    property cfCandForm : Win32cr::UI::Input::Ime::CANDIDATEFORM[4]
+    property hCompStr : Win32cr::Globalization::HIMCC
+    property hCandInfo : Win32cr::Globalization::HIMCC
+    property hGuideLine : Win32cr::Globalization::HIMCC
+    property hPrivate : Win32cr::Globalization::HIMCC
+    property dwNumMsgBuf : UInt32
+    property hMsgBuf : Win32cr::Globalization::HIMCC
+    property fdwInit : UInt32
+    property dwReserve : UInt32[3]
 
     # Nested Type Lffont_e__union_
     @[Extern(union: true)]
-    record Lffont_e__union_,
-      a : Win32cr::Graphics::Gdi::LOGFONTA,
-      w : Win32cr::Graphics::Gdi::LOGFONTW
+    struct Lffont_e__union_
+    property a : Win32cr::Graphics::Gdi::LOGFONTA
+    property w : Win32cr::Graphics::Gdi::LOGFONTW
+    def initialize(@a : Win32cr::Graphics::Gdi::LOGFONTA, @w : Win32cr::Graphics::Gdi::LOGFONTW)
+    end
+    end
 
+    def initialize(@hWnd : Win32cr::Foundation::HWND, @fOpen : Win32cr::Foundation::BOOL, @ptStatusWndPos : Win32cr::Foundation::POINT, @ptSoftKbdPos : Win32cr::Foundation::POINT, @fdwConversion : UInt32, @fdwSentence : UInt32, @lfFont : Lffont_e__union_, @cfCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM, @cfCandForm : Win32cr::UI::Input::Ime::CANDIDATEFORM[4], @hCompStr : Win32cr::Globalization::HIMCC, @hCandInfo : Win32cr::Globalization::HIMCC, @hGuideLine : Win32cr::Globalization::HIMCC, @hPrivate : Win32cr::Globalization::HIMCC, @dwNumMsgBuf : UInt32, @hMsgBuf : Win32cr::Globalization::HIMCC, @fdwInit : UInt32, @dwReserve : UInt32[3])
+    end
   end
 
   @[Extern]
-  record IMEINFO,
-    dwPrivateDataSize : UInt32,
-    fdwProperty : UInt32,
-    fdwConversionCaps : UInt32,
-    fdwSentenceCaps : UInt32,
-    fdwUICaps : UInt32,
-    fdwSCSCaps : UInt32,
-    fdwSelectCaps : UInt32
+  struct IMEINFO
+    property dwPrivateDataSize : UInt32
+    property fdwProperty : UInt32
+    property fdwConversionCaps : UInt32
+    property fdwSentenceCaps : UInt32
+    property fdwUICaps : UInt32
+    property fdwSCSCaps : UInt32
+    property fdwSelectCaps : UInt32
+    def initialize(@dwPrivateDataSize : UInt32, @fdwProperty : UInt32, @fdwConversionCaps : UInt32, @fdwSentenceCaps : UInt32, @fdwUICaps : UInt32, @fdwSCSCaps : UInt32, @fdwSelectCaps : UInt32)
+    end
+  end
 
   @[Extern]
-  record SOFTKBDDATA,
-    uCount : UInt32,
-    wCode : UInt16[256]
+  struct SOFTKBDDATA
+    property uCount : UInt32
+    property wCode : UInt16[256]
+    def initialize(@uCount : UInt32, @wCode : UInt16[256])
+    end
+  end
 
   @[Extern]
-  record APPLETIDLIST,
-    count : Int32,
-    pIIDList : LibC::GUID*
+  struct APPLETIDLIST
+    property count : Int32
+    property pIIDList : LibC::GUID*
+    def initialize(@count : Int32, @pIIDList : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record IMESTRINGCANDIDATE,
-    uCount : UInt32,
-    lpwstr : Win32cr::Foundation::PWSTR*
+  struct IMESTRINGCANDIDATE
+    property uCount : UInt32
+    property lpwstr : Win32cr::Foundation::PWSTR*
+    def initialize(@uCount : UInt32, @lpwstr : Win32cr::Foundation::PWSTR*)
+    end
+  end
 
   @[Extern]
-  record IMEITEM,
-    cbSize : Int32,
-    iType : Int32,
-    lpItemData : Void*
+  struct IMEITEM
+    property cbSize : Int32
+    property iType : Int32
+    property lpItemData : Void*
+    def initialize(@cbSize : Int32, @iType : Int32, @lpItemData : Void*)
+    end
+  end
 
   @[Extern]
-  record IMEITEMCANDIDATE,
-    uCount : UInt32,
-    imeItem : Win32cr::UI::Input::Ime::IMEITEM*
+  struct IMEITEMCANDIDATE
+    property uCount : UInt32
+    property imeItem : Win32cr::UI::Input::Ime::IMEITEM*
+    def initialize(@uCount : UInt32, @imeItem : Win32cr::UI::Input::Ime::IMEITEM*)
+    end
+  end
 
   @[Extern]
-  record Tabimestringinfo,
-    dwFarEastId : UInt32,
-    lpwstr : Win32cr::Foundation::PWSTR
+  struct Tabimestringinfo
+    property dwFarEastId : UInt32
+    property lpwstr : Win32cr::Foundation::PWSTR
+    def initialize(@dwFarEastId : UInt32, @lpwstr : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record Tabimefareastinfo,
-    dwSize : UInt32,
-    dwType : UInt32,
-    dwData : UInt32*
+  struct Tabimefareastinfo
+    property dwSize : UInt32
+    property dwType : UInt32
+    property dwData : UInt32*
+    def initialize(@dwSize : UInt32, @dwType : UInt32, @dwData : UInt32*)
+    end
+  end
 
   @[Extern]
-  record IMESTRINGCANDIDATEINFO,
-    dwFarEastId : UInt32,
-    lpFarEastInfo : Win32cr::UI::Input::Ime::Tabimefareastinfo*,
-    fInfoMask : UInt32,
-    iSelIndex : Int32,
-    uCount : UInt32,
-    lpwstr : Win32cr::Foundation::PWSTR*
+  struct IMESTRINGCANDIDATEINFO
+    property dwFarEastId : UInt32
+    property lpFarEastInfo : Win32cr::UI::Input::Ime::Tabimefareastinfo*
+    property fInfoMask : UInt32
+    property iSelIndex : Int32
+    property uCount : UInt32
+    property lpwstr : Win32cr::Foundation::PWSTR*
+    def initialize(@dwFarEastId : UInt32, @lpFarEastInfo : Win32cr::UI::Input::Ime::Tabimefareastinfo*, @fInfoMask : UInt32, @iSelIndex : Int32, @uCount : UInt32, @lpwstr : Win32cr::Foundation::PWSTR*)
+    end
+  end
 
   @[Extern]
-  record IMECOMPOSITIONSTRINGINFO,
-    iCompStrLen : Int32,
-    iCaretPos : Int32,
-    iEditStart : Int32,
-    iEditLen : Int32,
-    iTargetStart : Int32,
-    iTargetLen : Int32
+  struct IMECOMPOSITIONSTRINGINFO
+    property iCompStrLen : Int32
+    property iCaretPos : Int32
+    property iEditStart : Int32
+    property iEditLen : Int32
+    property iTargetStart : Int32
+    property iTargetLen : Int32
+    def initialize(@iCompStrLen : Int32, @iCaretPos : Int32, @iEditStart : Int32, @iEditLen : Int32, @iTargetStart : Int32, @iTargetLen : Int32)
+    end
+  end
 
   @[Extern]
-  record IMECHARINFO,
-    wch : UInt16,
-    dwCharInfo : UInt32
+  struct IMECHARINFO
+    property wch : UInt16
+    property dwCharInfo : UInt32
+    def initialize(@wch : UInt16, @dwCharInfo : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMEAPPLETCFG,
-    dwConfig : UInt32,
-    wchTitle : UInt16[64],
-    wchTitleFontFace : UInt16[32],
-    dwCharSet : UInt32,
-    iCategory : Int32,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    langID : UInt16,
-    dummy : UInt16,
-    lReserved1 : Win32cr::Foundation::LPARAM
+  struct IMEAPPLETCFG
+    property dwConfig : UInt32
+    property wchTitle : UInt16[64]
+    property wchTitleFontFace : UInt16[32]
+    property dwCharSet : UInt32
+    property iCategory : Int32
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property langID : UInt16
+    property dummy : UInt16
+    property lReserved1 : Win32cr::Foundation::LPARAM
+    def initialize(@dwConfig : UInt32, @wchTitle : UInt16[64], @wchTitleFontFace : UInt16[32], @dwCharSet : UInt32, @iCategory : Int32, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @langID : UInt16, @dummy : UInt16, @lReserved1 : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record IMEAPPLETUI,
-    hwnd : Win32cr::Foundation::HWND,
-    dwStyle : UInt32,
-    width : Int32,
-    height : Int32,
-    minWidth : Int32,
-    minHeight : Int32,
-    maxWidth : Int32,
-    maxHeight : Int32,
-    lReserved1 : Win32cr::Foundation::LPARAM,
-    lReserved2 : Win32cr::Foundation::LPARAM
+  struct IMEAPPLETUI
+    property hwnd : Win32cr::Foundation::HWND
+    property dwStyle : UInt32
+    property width : Int32
+    property height : Int32
+    property minWidth : Int32
+    property minHeight : Int32
+    property maxWidth : Int32
+    property maxHeight : Int32
+    property lReserved1 : Win32cr::Foundation::LPARAM
+    property lReserved2 : Win32cr::Foundation::LPARAM
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @dwStyle : UInt32, @width : Int32, @height : Int32, @minWidth : Int32, @minHeight : Int32, @maxWidth : Int32, @maxHeight : Int32, @lReserved1 : Win32cr::Foundation::LPARAM, @lReserved2 : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record APPLYCANDEXPARAM,
-    dwSize : UInt32,
-    lpwstrDisplay : Win32cr::Foundation::PWSTR,
-    lpwstrReading : Win32cr::Foundation::PWSTR,
-    dwReserved : UInt32
+  struct APPLYCANDEXPARAM
+    property dwSize : UInt32
+    property lpwstrDisplay : Win32cr::Foundation::PWSTR
+    property lpwstrReading : Win32cr::Foundation::PWSTR
+    property dwReserved : UInt32
+    def initialize(@dwSize : UInt32, @lpwstrDisplay : Win32cr::Foundation::PWSTR, @lpwstrReading : Win32cr::Foundation::PWSTR, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
   record IFEClassFactoryVtbl,
@@ -1296,7 +1455,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("019f7151-e6db-11d0-83c3-00c04fddb82e")]
   record IFECommon, lpVtbl : IFECommonVtbl* do
     GUID = LibC::GUID.new(0x19f7151_u32, 0xe6db_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xc3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xdd_u8, 0xb8_u8, 0x2e_u8])
     def query_interface(this : IFECommon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1337,7 +1495,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("019f7152-e6db-11d0-83c3-00c04fddb82e")]
   record IFELanguage, lpVtbl : IFELanguageVtbl* do
     GUID = LibC::GUID.new(0x19f7152_u32, 0xe6db_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xc3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xdd_u8, 0xb8_u8, 0x2e_u8])
     def query_interface(this : IFELanguage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1395,7 +1552,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("019f7153-e6db-11d0-83c3-00c04fddb82e")]
   record IFEDictionary, lpVtbl : IFEDictionaryVtbl* do
     GUID = LibC::GUID.new(0x19f7153_u32, 0xe6db_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xc3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xdd_u8, 0xb8_u8, 0x2e_u8])
     def query_interface(this : IFEDictionary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1470,7 +1626,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("5d8e643c-c3a9-11d1-afef-00805f0c8b6d")]
   record IImeSpecifyApplets, lpVtbl : IImeSpecifyAppletsVtbl* do
     GUID = LibC::GUID.new(0x5d8e643c_u32, 0xc3a9_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xef_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc_u8, 0x8b_u8, 0x6d_u8])
     def query_interface(this : IImeSpecifyApplets*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1501,7 +1656,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("5d8e643b-c3a9-11d1-afef-00805f0c8b6d")]
   record IImePadApplet, lpVtbl : IImePadAppletVtbl* do
     GUID = LibC::GUID.new(0x5d8e643b_u32, 0xc3a9_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xef_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc_u8, 0x8b_u8, 0x6d_u8])
     def query_interface(this : IImePadApplet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1540,7 +1694,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("5d8e643a-c3a9-11d1-afef-00805f0c8b6d")]
   record IImePad, lpVtbl : IImePadVtbl* do
     GUID = LibC::GUID.new(0x5d8e643a_u32, 0xc3a9_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xef_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc_u8, 0x8b_u8, 0x6d_u8])
     def query_interface(this : IImePad*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1568,7 +1721,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("98752974-b0a6-489b-8f6f-bff3769c8eeb")]
   record IImePlugInDictDictionaryList, lpVtbl : IImePlugInDictDictionaryListVtbl* do
     GUID = LibC::GUID.new(0x98752974_u32, 0xb0a6_u16, 0x489b_u16, StaticArray[0x8f_u8, 0x6f_u8, 0xbf_u8, 0xf3_u8, 0x76_u8, 0x9c_u8, 0x8e_u8, 0xeb_u8])
     def query_interface(this : IImePlugInDictDictionaryList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1601,7 +1753,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("08c03412-f96b-11d0-a475-00aa006bcc59")]
   record IEnumRegisterWordA, lpVtbl : IEnumRegisterWordAVtbl* do
     GUID = LibC::GUID.new(0x8c03412_u32, 0xf96b_u16, 0x11d0_u16, StaticArray[0xa4_u8, 0x75_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
     def query_interface(this : IEnumRegisterWordA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1640,7 +1791,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("4955dd31-b159-11d0-8fcf-00aa006bcc59")]
   record IEnumRegisterWordW, lpVtbl : IEnumRegisterWordWVtbl* do
     GUID = LibC::GUID.new(0x4955dd31_u32, 0xb159_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xcf_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
     def query_interface(this : IEnumRegisterWordW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1679,7 +1829,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("09b5eab0-f997-11d1-93d4-0060b067b86e")]
   record IEnumInputContext, lpVtbl : IEnumInputContextVtbl* do
     GUID = LibC::GUID.new(0x9b5eab0_u32, 0xf997_u16, 0x11d1_u16, StaticArray[0x93_u8, 0xd4_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IEnumInputContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1716,7 +1865,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("b3458082-bd00-11d1-939b-0060b067b86e")]
   record IActiveIMMRegistrar, lpVtbl : IActiveIMMRegistrarVtbl* do
     GUID = LibC::GUID.new(0xb3458082_u32, 0xbd00_u16, 0x11d1_u16, StaticArray[0x93_u8, 0x9b_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IActiveIMMRegistrar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1750,7 +1898,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("b5cf2cfa-8aeb-11d1-9364-0060b067b86e")]
   record IActiveIMMMessagePumpOwner, lpVtbl : IActiveIMMMessagePumpOwnerVtbl* do
     GUID = LibC::GUID.new(0xb5cf2cfa_u32, 0x8aeb_u16, 0x11d1_u16, StaticArray[0x93_u8, 0x64_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IActiveIMMMessagePumpOwner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1856,7 +2003,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("08c0e040-62d1-11d1-9326-0060b067b86e")]
   record IActiveIMMApp, lpVtbl : IActiveIMMAppVtbl* do
     GUID = LibC::GUID.new(0x8c0e040_u32, 0x62d1_u16, 0x11d1_u16, StaticArray[0x93_u8, 0x26_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IActiveIMMApp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2171,7 +2317,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("08c03411-f96b-11d0-a475-00aa006bcc59")]
   record IActiveIMMIME, lpVtbl : IActiveIMMIMEVtbl* do
     GUID = LibC::GUID.new(0x8c03411_u32, 0xf96b_u16, 0x11d0_u16, StaticArray[0xa4_u8, 0x75_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
     def query_interface(this : IActiveIMMIME*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2475,7 +2620,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("6fe20962-d077-11d0-8fe7-00aa006bcc59")]
   record IActiveIME, lpVtbl : IActiveIMEVtbl* do
     GUID = LibC::GUID.new(0x6fe20962_u32, 0xd077_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xe7_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
     def query_interface(this : IActiveIME*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2568,7 +2712,6 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  #@[Com("e1c4bf0e-2d53-11d2-93e1-0060b067b86e")]
   record IActiveIME2, lpVtbl : IActiveIME2Vtbl* do
     GUID = LibC::GUID.new(0xe1c4bf0e_u32, 0x2d53_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe1_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IActiveIME2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

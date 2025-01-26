@@ -7,7 +7,7 @@ module Win32cr::System::DataExchange
   alias HCONV = LibC::IntPtrT
   alias HCONVLIST = LibC::IntPtrT
   alias HDDEDATA = LibC::IntPtrT
-  alias PFNCALLBACK = Proc(UInt32, UInt32, Win32cr::System::DataExchange::HCONV, Win32cr::System::DataExchange::HSZ, Win32cr::System::DataExchange::HSZ, Win32cr::System::DataExchange::HDDEDATA, LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::System::DataExchange::HDDEDATA)*
+  alias PFNCALLBACK = Proc(UInt32, UInt32, Win32cr::System::DataExchange::HCONV, Win32cr::System::DataExchange::HSZ, Win32cr::System::DataExchange::HSZ, Win32cr::System::DataExchange::HDDEDATA, LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::System::DataExchange::HDDEDATA)
 
   WM_DDE_FIRST = 992_u32
   WM_DDE_INITIATE = 992_u32
@@ -172,170 +172,227 @@ module Win32cr::System::DataExchange
   end
 
   @[Extern]
-  record DDEACK,
-    _bitfield : UInt16
+  struct DDEACK
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+  end
 
   @[Extern]
-  record DDEADVISE,
-    _bitfield : UInt16,
-    cfFormat : Int16
+  struct DDEADVISE
+    property _bitfield : UInt16
+    property cfFormat : Int16
+    def initialize(@_bitfield : UInt16, @cfFormat : Int16)
+    end
+  end
 
   @[Extern]
-  record DDEDATA,
-    _bitfield : UInt16,
-    cfFormat : Int16,
-    value : UInt8*
+  struct DDEDATA
+    property _bitfield : UInt16
+    property cfFormat : Int16
+    property value : UInt8*
+    def initialize(@_bitfield : UInt16, @cfFormat : Int16, @value : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DDEPOKE,
-    _bitfield : UInt16,
-    cfFormat : Int16,
-    value : UInt8*
+  struct DDEPOKE
+    property _bitfield : UInt16
+    property cfFormat : Int16
+    property value : UInt8*
+    def initialize(@_bitfield : UInt16, @cfFormat : Int16, @value : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DDELN,
-    _bitfield : UInt16,
-    cfFormat : Int16
+  struct DDELN
+    property _bitfield : UInt16
+    property cfFormat : Int16
+    def initialize(@_bitfield : UInt16, @cfFormat : Int16)
+    end
+  end
 
   @[Extern]
-  record DDEUP,
-    _bitfield : UInt16,
-    cfFormat : Int16,
-    rgb : UInt8*
+  struct DDEUP
+    property _bitfield : UInt16
+    property cfFormat : Int16
+    property rgb : UInt8*
+    def initialize(@_bitfield : UInt16, @cfFormat : Int16, @rgb : UInt8*)
+    end
+  end
 
   @[Extern]
-  record HSZPAIR,
-    hszSvc : Win32cr::System::DataExchange::HSZ,
-    hszTopic : Win32cr::System::DataExchange::HSZ
+  struct HSZPAIR
+    property hszSvc : Win32cr::System::DataExchange::HSZ
+    property hszTopic : Win32cr::System::DataExchange::HSZ
+    def initialize(@hszSvc : Win32cr::System::DataExchange::HSZ, @hszTopic : Win32cr::System::DataExchange::HSZ)
+    end
+  end
 
   @[Extern]
-  record CONVCONTEXT,
-    cb : UInt32,
-    wFlags : UInt32,
-    wCountryID : UInt32,
-    iCodePage : Int32,
-    dwLangID : UInt32,
-    dwSecurity : UInt32,
-    qos : Win32cr::Security::SECURITY_QUALITY_OF_SERVICE
+  struct CONVCONTEXT
+    property cb : UInt32
+    property wFlags : UInt32
+    property wCountryID : UInt32
+    property iCodePage : Int32
+    property dwLangID : UInt32
+    property dwSecurity : UInt32
+    property qos : Win32cr::Security::SECURITY_QUALITY_OF_SERVICE
+    def initialize(@cb : UInt32, @wFlags : UInt32, @wCountryID : UInt32, @iCodePage : Int32, @dwLangID : UInt32, @dwSecurity : UInt32, @qos : Win32cr::Security::SECURITY_QUALITY_OF_SERVICE)
+    end
+  end
 
   @[Extern]
-  record CONVINFO,
-    cb : UInt32,
-    hUser : LibC::UIntPtrT,
-    hConvPartner : Win32cr::System::DataExchange::HCONV,
-    hszSvcPartner : Win32cr::System::DataExchange::HSZ,
-    hszServiceReq : Win32cr::System::DataExchange::HSZ,
-    hszTopic : Win32cr::System::DataExchange::HSZ,
-    hszItem : Win32cr::System::DataExchange::HSZ,
-    wFmt : UInt32,
-    wType : Win32cr::System::DataExchange::DDE_CLIENT_TRANSACTION_TYPE,
-    wStatus : Win32cr::System::DataExchange::CONVINFO_STATUS,
-    wConvst : Win32cr::System::DataExchange::CONVINFO_CONVERSATION_STATE,
-    wLastError : UInt32,
-    hConvList : Win32cr::System::DataExchange::HCONVLIST,
-    conv_ctxt : Win32cr::System::DataExchange::CONVCONTEXT,
-    hwnd : Win32cr::Foundation::HWND,
-    hwndPartner : Win32cr::Foundation::HWND
+  struct CONVINFO
+    property cb : UInt32
+    property hUser : LibC::UIntPtrT
+    property hConvPartner : Win32cr::System::DataExchange::HCONV
+    property hszSvcPartner : Win32cr::System::DataExchange::HSZ
+    property hszServiceReq : Win32cr::System::DataExchange::HSZ
+    property hszTopic : Win32cr::System::DataExchange::HSZ
+    property hszItem : Win32cr::System::DataExchange::HSZ
+    property wFmt : UInt32
+    property wType : Win32cr::System::DataExchange::DDE_CLIENT_TRANSACTION_TYPE
+    property wStatus : Win32cr::System::DataExchange::CONVINFO_STATUS
+    property wConvst : Win32cr::System::DataExchange::CONVINFO_CONVERSATION_STATE
+    property wLastError : UInt32
+    property hConvList : Win32cr::System::DataExchange::HCONVLIST
+    property conv_ctxt : Win32cr::System::DataExchange::CONVCONTEXT
+    property hwnd : Win32cr::Foundation::HWND
+    property hwndPartner : Win32cr::Foundation::HWND
+    def initialize(@cb : UInt32, @hUser : LibC::UIntPtrT, @hConvPartner : Win32cr::System::DataExchange::HCONV, @hszSvcPartner : Win32cr::System::DataExchange::HSZ, @hszServiceReq : Win32cr::System::DataExchange::HSZ, @hszTopic : Win32cr::System::DataExchange::HSZ, @hszItem : Win32cr::System::DataExchange::HSZ, @wFmt : UInt32, @wType : Win32cr::System::DataExchange::DDE_CLIENT_TRANSACTION_TYPE, @wStatus : Win32cr::System::DataExchange::CONVINFO_STATUS, @wConvst : Win32cr::System::DataExchange::CONVINFO_CONVERSATION_STATE, @wLastError : UInt32, @hConvList : Win32cr::System::DataExchange::HCONVLIST, @conv_ctxt : Win32cr::System::DataExchange::CONVCONTEXT, @hwnd : Win32cr::Foundation::HWND, @hwndPartner : Win32cr::Foundation::HWND)
+    end
+  end
 
   @[Extern]
-  record DDEML_MSG_HOOK_DATA,
-    uiLo : LibC::UIntPtrT,
-    uiHi : LibC::UIntPtrT,
-    cbData : UInt32,
-    data : UInt32[8]
+  struct DDEML_MSG_HOOK_DATA
+    property uiLo : LibC::UIntPtrT
+    property uiHi : LibC::UIntPtrT
+    property cbData : UInt32
+    property data : UInt32[8]
+    def initialize(@uiLo : LibC::UIntPtrT, @uiHi : LibC::UIntPtrT, @cbData : UInt32, @data : UInt32[8])
+    end
+  end
 
   @[Extern]
-  record MONMSGSTRUCT,
-    cb : UInt32,
-    hwndTo : Win32cr::Foundation::HWND,
-    dwTime : UInt32,
-    hTask : Win32cr::Foundation::HANDLE,
-    wMsg : UInt32,
-    wParam : Win32cr::Foundation::WPARAM,
-    lParam : Win32cr::Foundation::LPARAM,
-    dmhd : Win32cr::System::DataExchange::DDEML_MSG_HOOK_DATA
+  struct MONMSGSTRUCT
+    property cb : UInt32
+    property hwndTo : Win32cr::Foundation::HWND
+    property dwTime : UInt32
+    property hTask : Win32cr::Foundation::HANDLE
+    property wMsg : UInt32
+    property wParam : Win32cr::Foundation::WPARAM
+    property lParam : Win32cr::Foundation::LPARAM
+    property dmhd : Win32cr::System::DataExchange::DDEML_MSG_HOOK_DATA
+    def initialize(@cb : UInt32, @hwndTo : Win32cr::Foundation::HWND, @dwTime : UInt32, @hTask : Win32cr::Foundation::HANDLE, @wMsg : UInt32, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM, @dmhd : Win32cr::System::DataExchange::DDEML_MSG_HOOK_DATA)
+    end
+  end
 
   @[Extern]
-  record MONCBSTRUCT,
-    cb : UInt32,
-    dwTime : UInt32,
-    hTask : Win32cr::Foundation::HANDLE,
-    dwRet : UInt32,
-    wType : UInt32,
-    wFmt : UInt32,
-    hConv : Win32cr::System::DataExchange::HCONV,
-    hsz1 : Win32cr::System::DataExchange::HSZ,
-    hsz2 : Win32cr::System::DataExchange::HSZ,
-    hData : Win32cr::System::DataExchange::HDDEDATA,
-    dwData1 : LibC::UIntPtrT,
-    dwData2 : LibC::UIntPtrT,
-    cc : Win32cr::System::DataExchange::CONVCONTEXT,
-    cbData : UInt32,
-    data : UInt32[8]
+  struct MONCBSTRUCT
+    property cb : UInt32
+    property dwTime : UInt32
+    property hTask : Win32cr::Foundation::HANDLE
+    property dwRet : UInt32
+    property wType : UInt32
+    property wFmt : UInt32
+    property hConv : Win32cr::System::DataExchange::HCONV
+    property hsz1 : Win32cr::System::DataExchange::HSZ
+    property hsz2 : Win32cr::System::DataExchange::HSZ
+    property hData : Win32cr::System::DataExchange::HDDEDATA
+    property dwData1 : LibC::UIntPtrT
+    property dwData2 : LibC::UIntPtrT
+    property cc : Win32cr::System::DataExchange::CONVCONTEXT
+    property cbData : UInt32
+    property data : UInt32[8]
+    def initialize(@cb : UInt32, @dwTime : UInt32, @hTask : Win32cr::Foundation::HANDLE, @dwRet : UInt32, @wType : UInt32, @wFmt : UInt32, @hConv : Win32cr::System::DataExchange::HCONV, @hsz1 : Win32cr::System::DataExchange::HSZ, @hsz2 : Win32cr::System::DataExchange::HSZ, @hData : Win32cr::System::DataExchange::HDDEDATA, @dwData1 : LibC::UIntPtrT, @dwData2 : LibC::UIntPtrT, @cc : Win32cr::System::DataExchange::CONVCONTEXT, @cbData : UInt32, @data : UInt32[8])
+    end
+  end
 
   @[Extern]
-  record MONHSZSTRUCTA,
-    cb : UInt32,
-    fsAction : Win32cr::Foundation::BOOL,
-    dwTime : UInt32,
-    hsz : Win32cr::System::DataExchange::HSZ,
-    hTask : Win32cr::Foundation::HANDLE,
-    str : Win32cr::Foundation::CHAR*
+  struct MONHSZSTRUCTA
+    property cb : UInt32
+    property fsAction : Win32cr::Foundation::BOOL
+    property dwTime : UInt32
+    property hsz : Win32cr::System::DataExchange::HSZ
+    property hTask : Win32cr::Foundation::HANDLE
+    property str : Win32cr::Foundation::CHAR*
+    def initialize(@cb : UInt32, @fsAction : Win32cr::Foundation::BOOL, @dwTime : UInt32, @hsz : Win32cr::System::DataExchange::HSZ, @hTask : Win32cr::Foundation::HANDLE, @str : Win32cr::Foundation::CHAR*)
+    end
+  end
 
   @[Extern]
-  record MONHSZSTRUCTW,
-    cb : UInt32,
-    fsAction : Win32cr::Foundation::BOOL,
-    dwTime : UInt32,
-    hsz : Win32cr::System::DataExchange::HSZ,
-    hTask : Win32cr::Foundation::HANDLE,
-    str : UInt16*
+  struct MONHSZSTRUCTW
+    property cb : UInt32
+    property fsAction : Win32cr::Foundation::BOOL
+    property dwTime : UInt32
+    property hsz : Win32cr::System::DataExchange::HSZ
+    property hTask : Win32cr::Foundation::HANDLE
+    property str : UInt16*
+    def initialize(@cb : UInt32, @fsAction : Win32cr::Foundation::BOOL, @dwTime : UInt32, @hsz : Win32cr::System::DataExchange::HSZ, @hTask : Win32cr::Foundation::HANDLE, @str : UInt16*)
+    end
+  end
 
   @[Extern]
-  record MONERRSTRUCT,
-    cb : UInt32,
-    wLastError : UInt32,
-    dwTime : UInt32,
-    hTask : Win32cr::Foundation::HANDLE
+  struct MONERRSTRUCT
+    property cb : UInt32
+    property wLastError : UInt32
+    property dwTime : UInt32
+    property hTask : Win32cr::Foundation::HANDLE
+    def initialize(@cb : UInt32, @wLastError : UInt32, @dwTime : UInt32, @hTask : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record MONLINKSTRUCT,
-    cb : UInt32,
-    dwTime : UInt32,
-    hTask : Win32cr::Foundation::HANDLE,
-    fEstablished : Win32cr::Foundation::BOOL,
-    fNoData : Win32cr::Foundation::BOOL,
-    hszSvc : Win32cr::System::DataExchange::HSZ,
-    hszTopic : Win32cr::System::DataExchange::HSZ,
-    hszItem : Win32cr::System::DataExchange::HSZ,
-    wFmt : UInt32,
-    fServer : Win32cr::Foundation::BOOL,
-    hConvServer : Win32cr::System::DataExchange::HCONV,
-    hConvClient : Win32cr::System::DataExchange::HCONV
+  struct MONLINKSTRUCT
+    property cb : UInt32
+    property dwTime : UInt32
+    property hTask : Win32cr::Foundation::HANDLE
+    property fEstablished : Win32cr::Foundation::BOOL
+    property fNoData : Win32cr::Foundation::BOOL
+    property hszSvc : Win32cr::System::DataExchange::HSZ
+    property hszTopic : Win32cr::System::DataExchange::HSZ
+    property hszItem : Win32cr::System::DataExchange::HSZ
+    property wFmt : UInt32
+    property fServer : Win32cr::Foundation::BOOL
+    property hConvServer : Win32cr::System::DataExchange::HCONV
+    property hConvClient : Win32cr::System::DataExchange::HCONV
+    def initialize(@cb : UInt32, @dwTime : UInt32, @hTask : Win32cr::Foundation::HANDLE, @fEstablished : Win32cr::Foundation::BOOL, @fNoData : Win32cr::Foundation::BOOL, @hszSvc : Win32cr::System::DataExchange::HSZ, @hszTopic : Win32cr::System::DataExchange::HSZ, @hszItem : Win32cr::System::DataExchange::HSZ, @wFmt : UInt32, @fServer : Win32cr::Foundation::BOOL, @hConvServer : Win32cr::System::DataExchange::HCONV, @hConvClient : Win32cr::System::DataExchange::HCONV)
+    end
+  end
 
   @[Extern]
-  record MONCONVSTRUCT,
-    cb : UInt32,
-    fConnect : Win32cr::Foundation::BOOL,
-    dwTime : UInt32,
-    hTask : Win32cr::Foundation::HANDLE,
-    hszSvc : Win32cr::System::DataExchange::HSZ,
-    hszTopic : Win32cr::System::DataExchange::HSZ,
-    hConvClient : Win32cr::System::DataExchange::HCONV,
-    hConvServer : Win32cr::System::DataExchange::HCONV
+  struct MONCONVSTRUCT
+    property cb : UInt32
+    property fConnect : Win32cr::Foundation::BOOL
+    property dwTime : UInt32
+    property hTask : Win32cr::Foundation::HANDLE
+    property hszSvc : Win32cr::System::DataExchange::HSZ
+    property hszTopic : Win32cr::System::DataExchange::HSZ
+    property hConvClient : Win32cr::System::DataExchange::HCONV
+    property hConvServer : Win32cr::System::DataExchange::HCONV
+    def initialize(@cb : UInt32, @fConnect : Win32cr::Foundation::BOOL, @dwTime : UInt32, @hTask : Win32cr::Foundation::HANDLE, @hszSvc : Win32cr::System::DataExchange::HSZ, @hszTopic : Win32cr::System::DataExchange::HSZ, @hConvClient : Win32cr::System::DataExchange::HCONV, @hConvServer : Win32cr::System::DataExchange::HCONV)
+    end
+  end
 
   @[Extern]
-  record METAFILEPICT,
-    mm : Int32,
-    xExt : Int32,
-    yExt : Int32,
-    hMF : Win32cr::Graphics::Gdi::HMETAFILE
+  struct METAFILEPICT
+    property mm : Int32
+    property xExt : Int32
+    property yExt : Int32
+    property hMF : Win32cr::Graphics::Gdi::HMETAFILE
+    def initialize(@mm : Int32, @xExt : Int32, @yExt : Int32, @hMF : Win32cr::Graphics::Gdi::HMETAFILE)
+    end
+  end
 
   @[Extern]
-  record COPYDATASTRUCT,
-    dwData : LibC::UIntPtrT,
-    cbData : UInt32,
-    lpData : Void*
+  struct COPYDATASTRUCT
+    property dwData : LibC::UIntPtrT
+    property cbData : UInt32
+    property lpData : Void*
+    def initialize(@dwData : LibC::UIntPtrT, @cbData : UInt32, @lpData : Void*)
+    end
+  end
 
   @[Link("user32")]
   @[Link("gdi32")]

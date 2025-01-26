@@ -6,21 +6,21 @@ require "./../system/io.cr"
 module Win32cr::NetworkManagement::QoS
   alias LPM_HANDLE = LibC::IntPtrT
   alias RHANDLE = LibC::IntPtrT
-  alias PALLOCMEM = Proc(UInt32, Void*)*
+  alias PALLOCMEM = Proc(UInt32, Void*)
 
-  alias PFREEMEM = Proc(Void*, Void)*
+  alias PFREEMEM = Proc(Void*, Void)
 
-  alias CBADMITRESULT = Proc(Win32cr::NetworkManagement::QoS::LPM_HANDLE, Win32cr::NetworkManagement::QoS::RHANDLE, UInt32, Int32, Int32, Win32cr::NetworkManagement::QoS::Policy_decision*, UInt32*)*
+  alias CBADMITRESULT = Proc(Win32cr::NetworkManagement::QoS::LPM_HANDLE, Win32cr::NetworkManagement::QoS::RHANDLE, UInt32, Int32, Int32, Win32cr::NetworkManagement::QoS::Policy_decision*, UInt32*)
 
-  alias CBGETRSVPOBJECTS = Proc(Win32cr::NetworkManagement::QoS::LPM_HANDLE, Win32cr::NetworkManagement::QoS::RHANDLE, Int32, Int32, Win32cr::NetworkManagement::QoS::RsvpObjHdr**, UInt32*)*
+  alias CBGETRSVPOBJECTS = Proc(Win32cr::NetworkManagement::QoS::LPM_HANDLE, Win32cr::NetworkManagement::QoS::RHANDLE, Int32, Int32, Win32cr::NetworkManagement::QoS::RsvpObjHdr**, UInt32*)
 
-  alias TCI_NOTIFY_HANDLER = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::HANDLE, UInt32, Void*, Void)*
+  alias TCI_NOTIFY_HANDLER = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::HANDLE, UInt32, Void*, Void)
 
-  alias TCI_ADD_FLOW_COMPLETE_HANDLER = Proc(Win32cr::Foundation::HANDLE, UInt32, Void)*
+  alias TCI_ADD_FLOW_COMPLETE_HANDLER = Proc(Win32cr::Foundation::HANDLE, UInt32, Void)
 
-  alias TCI_MOD_FLOW_COMPLETE_HANDLER = Proc(Win32cr::Foundation::HANDLE, UInt32, Void)*
+  alias TCI_MOD_FLOW_COMPLETE_HANDLER = Proc(Win32cr::Foundation::HANDLE, UInt32, Void)
 
-  alias TCI_DEL_FLOW_COMPLETE_HANDLER = Proc(Win32cr::Foundation::HANDLE, UInt32, Void)*
+  alias TCI_DEL_FLOW_COMPLETE_HANDLER = Proc(Win32cr::Foundation::HANDLE, UInt32, Void)
 
   QOS_MAX_OBJECT_STRING_LENGTH = 256_u32
   QOS_TRAFFIC_GENERAL_ID_BASE = 4000_u32
@@ -599,728 +599,1038 @@ module Win32cr::NetworkManagement::QoS
   end
 
   @[Extern]
-  record QOS_OBJECT_HDR,
-    object_type : UInt32,
-    object_length : UInt32
+  struct QOS_OBJECT_HDR
+    property object_type : UInt32
+    property object_length : UInt32
+    def initialize(@object_type : UInt32, @object_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record QOS_SD_MODE,
-    object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR,
-    shape_discard_mode : UInt32
+  struct QOS_SD_MODE
+    property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
+    property shape_discard_mode : UInt32
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @shape_discard_mode : UInt32)
+    end
+  end
 
   @[Extern]
-  record QOS_SHAPING_RATE,
-    object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR,
-    shaping_rate : UInt32
+  struct QOS_SHAPING_RATE
+    property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
+    property shaping_rate : UInt32
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @shaping_rate : UInt32)
+    end
+  end
 
   @[Extern]
-  record RsvpObjHdr,
-    obj_length : UInt16,
-    obj_class : UInt8,
-    obj_ctype : UInt8
+  struct RsvpObjHdr
+    property obj_length : UInt16
+    property obj_class : UInt8
+    property obj_ctype : UInt8
+    def initialize(@obj_length : UInt16, @obj_class : UInt8, @obj_ctype : UInt8)
+    end
+  end
 
   @[Extern]
-  record Session_IPv4,
-    sess_destaddr : Win32cr::Networking::WinSock::IN_ADDR,
-    sess_protid : UInt8,
-    sess_flags : UInt8,
-    sess_destport : UInt16
+  struct Session_IPv4
+    property sess_destaddr : Win32cr::Networking::WinSock::IN_ADDR
+    property sess_protid : UInt8
+    property sess_flags : UInt8
+    property sess_destport : UInt16
+    def initialize(@sess_destaddr : Win32cr::Networking::WinSock::IN_ADDR, @sess_protid : UInt8, @sess_flags : UInt8, @sess_destport : UInt16)
+    end
+  end
 
   @[Extern]
-  record RSVP_SESSION,
-    sess_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr,
-    sess_u : Sess_u_e__union_ do
+  struct RSVP_SESSION
+    property sess_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
+    property sess_u : Sess_u_e__union_
 
     # Nested Type Sess_u_e__union_
     @[Extern(union: true)]
-    record Sess_u_e__union_,
-      sess_ipv4 : Win32cr::NetworkManagement::QoS::Session_IPv4
+    struct Sess_u_e__union_
+    property sess_ipv4 : Win32cr::NetworkManagement::QoS::Session_IPv4
+    def initialize(@sess_ipv4 : Win32cr::NetworkManagement::QoS::Session_IPv4)
+    end
+    end
 
+    def initialize(@sess_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @sess_u : Sess_u_e__union_)
+    end
   end
 
   @[Extern]
-  record Rsvp_Hop_IPv4,
-    hop_ipaddr : Win32cr::Networking::WinSock::IN_ADDR,
-    hop_LIH : UInt32
+  struct Rsvp_Hop_IPv4
+    property hop_ipaddr : Win32cr::Networking::WinSock::IN_ADDR
+    property hop_LIH : UInt32
+    def initialize(@hop_ipaddr : Win32cr::Networking::WinSock::IN_ADDR, @hop_LIH : UInt32)
+    end
+  end
 
   @[Extern]
-  record RSVP_HOP,
-    hop_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr,
-    hop_u : Hop_u_e__union_ do
+  struct RSVP_HOP
+    property hop_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
+    property hop_u : Hop_u_e__union_
 
     # Nested Type Hop_u_e__union_
     @[Extern(union: true)]
-    record Hop_u_e__union_,
-      hop_ipv4 : Win32cr::NetworkManagement::QoS::Rsvp_Hop_IPv4
+    struct Hop_u_e__union_
+    property hop_ipv4 : Win32cr::NetworkManagement::QoS::Rsvp_Hop_IPv4
+    def initialize(@hop_ipv4 : Win32cr::NetworkManagement::QoS::Rsvp_Hop_IPv4)
+    end
+    end
 
+    def initialize(@hop_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @hop_u : Hop_u_e__union_)
+    end
   end
 
   @[Extern]
-  record RESV_STYLE,
-    style_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr,
-    style_word : UInt32
+  struct RESV_STYLE
+    property style_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
+    property style_word : UInt32
+    def initialize(@style_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @style_word : UInt32)
+    end
+  end
 
   @[Extern]
-  record Filter_Spec_IPv4,
-    filt_ipaddr : Win32cr::Networking::WinSock::IN_ADDR,
-    filt_unused : UInt16,
-    filt_port : UInt16
+  struct Filter_Spec_IPv4
+    property filt_ipaddr : Win32cr::Networking::WinSock::IN_ADDR
+    property filt_unused : UInt16
+    property filt_port : UInt16
+    def initialize(@filt_ipaddr : Win32cr::Networking::WinSock::IN_ADDR, @filt_unused : UInt16, @filt_port : UInt16)
+    end
+  end
 
   @[Extern]
-  record Filter_Spec_IPv4GPI,
-    filt_ipaddr : Win32cr::Networking::WinSock::IN_ADDR,
-    filt_gpi : UInt32
+  struct Filter_Spec_IPv4GPI
+    property filt_ipaddr : Win32cr::Networking::WinSock::IN_ADDR
+    property filt_gpi : UInt32
+    def initialize(@filt_ipaddr : Win32cr::Networking::WinSock::IN_ADDR, @filt_gpi : UInt32)
+    end
+  end
 
   @[Extern]
-  record FILTER_SPEC,
-    filt_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr,
-    filt_u : Filt_u_e__union_ do
+  struct FILTER_SPEC
+    property filt_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
+    property filt_u : Filt_u_e__union_
 
     # Nested Type Filt_u_e__union_
     @[Extern(union: true)]
-    record Filt_u_e__union_,
-      filt_ipv4 : Win32cr::NetworkManagement::QoS::Filter_Spec_IPv4,
-      filt_ipv4gpi : Win32cr::NetworkManagement::QoS::Filter_Spec_IPv4GPI
+    struct Filt_u_e__union_
+    property filt_ipv4 : Win32cr::NetworkManagement::QoS::Filter_Spec_IPv4
+    property filt_ipv4gpi : Win32cr::NetworkManagement::QoS::Filter_Spec_IPv4GPI
+    def initialize(@filt_ipv4 : Win32cr::NetworkManagement::QoS::Filter_Spec_IPv4, @filt_ipv4gpi : Win32cr::NetworkManagement::QoS::Filter_Spec_IPv4GPI)
+    end
+    end
 
+    def initialize(@filt_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @filt_u : Filt_u_e__union_)
+    end
   end
 
   @[Extern]
-  record Scope_list_ipv4,
-    scopl_ipaddr : Win32cr::Networking::WinSock::IN_ADDR*
+  struct Scope_list_ipv4
+    property scopl_ipaddr : Win32cr::Networking::WinSock::IN_ADDR*
+    def initialize(@scopl_ipaddr : Win32cr::Networking::WinSock::IN_ADDR*)
+    end
+  end
 
   @[Extern]
-  record RSVP_SCOPE,
-    scopl_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr,
-    scope_u : Scope_u_e__union_ do
+  struct RSVP_SCOPE
+    property scopl_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
+    property scope_u : Scope_u_e__union_
 
     # Nested Type Scope_u_e__union_
     @[Extern(union: true)]
-    record Scope_u_e__union_,
-      scopl_ipv4 : Win32cr::NetworkManagement::QoS::Scope_list_ipv4
+    struct Scope_u_e__union_
+    property scopl_ipv4 : Win32cr::NetworkManagement::QoS::Scope_list_ipv4
+    def initialize(@scopl_ipv4 : Win32cr::NetworkManagement::QoS::Scope_list_ipv4)
+    end
+    end
 
+    def initialize(@scopl_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @scope_u : Scope_u_e__union_)
+    end
   end
 
   @[Extern]
-  record Error_Spec_IPv4,
-    errs_errnode : Win32cr::Networking::WinSock::IN_ADDR,
-    errs_flags : UInt8,
-    errs_code : UInt8,
-    errs_value : UInt16
+  struct Error_Spec_IPv4
+    property errs_errnode : Win32cr::Networking::WinSock::IN_ADDR
+    property errs_flags : UInt8
+    property errs_code : UInt8
+    property errs_value : UInt16
+    def initialize(@errs_errnode : Win32cr::Networking::WinSock::IN_ADDR, @errs_flags : UInt8, @errs_code : UInt8, @errs_value : UInt16)
+    end
+  end
 
   @[Extern]
-  record ERROR_SPEC,
-    errs_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr,
-    errs_u : Errs_u_e__union_ do
+  struct ERROR_SPEC
+    property errs_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
+    property errs_u : Errs_u_e__union_
 
     # Nested Type Errs_u_e__union_
     @[Extern(union: true)]
-    record Errs_u_e__union_,
-      errs_ipv4 : Win32cr::NetworkManagement::QoS::Error_Spec_IPv4
+    struct Errs_u_e__union_
+    property errs_ipv4 : Win32cr::NetworkManagement::QoS::Error_Spec_IPv4
+    def initialize(@errs_ipv4 : Win32cr::NetworkManagement::QoS::Error_Spec_IPv4)
+    end
+    end
 
+    def initialize(@errs_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @errs_u : Errs_u_e__union_)
+    end
   end
 
   @[Extern]
-  record POLICY_DATA,
-    policy_obj_hdr : Win32cr::NetworkManagement::QoS::RsvpObjHdr,
-    usPeOffset : UInt16,
-    usReserved : UInt16
+  struct POLICY_DATA
+    property policy_obj_hdr : Win32cr::NetworkManagement::QoS::RsvpObjHdr
+    property usPeOffset : UInt16
+    property usReserved : UInt16
+    def initialize(@policy_obj_hdr : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @usPeOffset : UInt16, @usReserved : UInt16)
+    end
+  end
 
   @[Extern]
-  record POLICY_ELEMENT,
-    usPeLength : UInt16,
-    usPeType : UInt16,
-    ucPeData : UInt8[4]
+  struct POLICY_ELEMENT
+    property usPeLength : UInt16
+    property usPeType : UInt16
+    property ucPeData : UInt8[4]
+    def initialize(@usPeLength : UInt16, @usPeType : UInt16, @ucPeData : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record IntServMainHdr,
-    ismh_version : UInt8,
-    ismh_unused : UInt8,
-    ismh_len32b : UInt16
+  struct IntServMainHdr
+    property ismh_version : UInt8
+    property ismh_unused : UInt8
+    property ismh_len32b : UInt16
+    def initialize(@ismh_version : UInt8, @ismh_unused : UInt8, @ismh_len32b : UInt16)
+    end
+  end
 
   @[Extern]
-  record IntServServiceHdr,
-    issh_service : UInt8,
-    issh_flags : UInt8,
-    issh_len32b : UInt16
+  struct IntServServiceHdr
+    property issh_service : UInt8
+    property issh_flags : UInt8
+    property issh_len32b : UInt16
+    def initialize(@issh_service : UInt8, @issh_flags : UInt8, @issh_len32b : UInt16)
+    end
+  end
 
   @[Extern]
-  record IntServParmHdr,
-    isph_parm_num : UInt8,
-    isph_flags : UInt8,
-    isph_len32b : UInt16
+  struct IntServParmHdr
+    property isph_parm_num : UInt8
+    property isph_flags : UInt8
+    property isph_len32b : UInt16
+    def initialize(@isph_parm_num : UInt8, @isph_flags : UInt8, @isph_len32b : UInt16)
+    end
+  end
 
   @[Extern]
-  record GenTspecParms,
-    tb_tspec_r : Float32,
-    tb_tspec_b : Float32,
-    tb_tspec_p : Float32,
-    tb_tspec_m : UInt32,
-    tb_tspec_m_ : UInt32
+  struct GenTspecParms
+    property tb_tspec_r : Float32
+    property tb_tspec_b : Float32
+    property tb_tspec_p : Float32
+    property tb_tspec_m : UInt32
+    property tb_tspec_m_ : UInt32
+    def initialize(@tb_tspec_r : Float32, @tb_tspec_b : Float32, @tb_tspec_p : Float32, @tb_tspec_m : UInt32, @tb_tspec_m_ : UInt32)
+    end
+  end
 
   @[Extern]
-  record GenTspec,
-    gen_Tspec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr,
-    gen_Tspec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    gen_Tspec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms
+  struct GenTspec
+    property gen_Tspec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
+    property gen_Tspec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property gen_Tspec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms
+    def initialize(@gen_Tspec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @gen_Tspec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gen_Tspec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms)
+    end
+  end
 
   @[Extern]
-  record QualTspecParms,
-    tb_tspec_m : UInt32
+  struct QualTspecParms
+    property tb_tspec_m : UInt32
+    def initialize(@tb_tspec_m : UInt32)
+    end
+  end
 
   @[Extern]
-  record QualTspec,
-    qual_Tspec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr,
-    qual_Tspec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    qual_Tspec_parms : Win32cr::NetworkManagement::QoS::QualTspecParms
+  struct QualTspec
+    property qual_Tspec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
+    property qual_Tspec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property qual_Tspec_parms : Win32cr::NetworkManagement::QoS::QualTspecParms
+    def initialize(@qual_Tspec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @qual_Tspec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @qual_Tspec_parms : Win32cr::NetworkManagement::QoS::QualTspecParms)
+    end
+  end
 
   @[Extern]
-  record QualAppFlowSpec,
-    q_spec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr,
-    q_spec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    q_spec_parms : Win32cr::NetworkManagement::QoS::QualTspecParms
+  struct QualAppFlowSpec
+    property q_spec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
+    property q_spec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property q_spec_parms : Win32cr::NetworkManagement::QoS::QualTspecParms
+    def initialize(@q_spec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @q_spec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @q_spec_parms : Win32cr::NetworkManagement::QoS::QualTspecParms)
+    end
+  end
 
   @[Extern]
-  record IntServTspecBody,
-    st_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr,
-    tspec_u : Tspec_u_e__union_ do
+  struct IntServTspecBody
+    property st_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr
+    property tspec_u : Tspec_u_e__union_
 
     # Nested Type Tspec_u_e__union_
     @[Extern(union: true)]
-    record Tspec_u_e__union_,
-      gen_stspec : Win32cr::NetworkManagement::QoS::GenTspec,
-      qual_stspec : Win32cr::NetworkManagement::QoS::QualTspec
+    struct Tspec_u_e__union_
+    property gen_stspec : Win32cr::NetworkManagement::QoS::GenTspec
+    property qual_stspec : Win32cr::NetworkManagement::QoS::QualTspec
+    def initialize(@gen_stspec : Win32cr::NetworkManagement::QoS::GenTspec, @qual_stspec : Win32cr::NetworkManagement::QoS::QualTspec)
+    end
+    end
 
+    def initialize(@st_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr, @tspec_u : Tspec_u_e__union_)
+    end
   end
 
   @[Extern]
-  record SENDER_TSPEC,
-    stspec_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr,
-    stspec_body : Win32cr::NetworkManagement::QoS::IntServTspecBody
+  struct SENDER_TSPEC
+    property stspec_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
+    property stspec_body : Win32cr::NetworkManagement::QoS::IntServTspecBody
+    def initialize(@stspec_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @stspec_body : Win32cr::NetworkManagement::QoS::IntServTspecBody)
+    end
+  end
 
   @[Extern]
-  record CtrlLoadFlowspec,
-    cl_spec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr,
-    cl_spec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    cl_spec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms
+  struct CtrlLoadFlowspec
+    property cl_spec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
+    property cl_spec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property cl_spec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms
+    def initialize(@cl_spec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @cl_spec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @cl_spec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms)
+    end
+  end
 
   @[Extern]
-  record GuarRspec,
-    guar_r : Float32,
-    guar_s : UInt32
+  struct GuarRspec
+    property guar_r : Float32
+    property guar_s : UInt32
+    def initialize(@guar_r : Float32, @guar_s : UInt32)
+    end
+  end
 
   @[Extern]
-  record GuarFlowSpec,
-    guar_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr,
-    guar_tspec_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    guar_tspec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms,
-    guar_rspec_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    guar_rspec : Win32cr::NetworkManagement::QoS::GuarRspec
+  struct GuarFlowSpec
+    property guar_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
+    property guar_tspec_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property guar_tspec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms
+    property guar_rspec_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property guar_rspec : Win32cr::NetworkManagement::QoS::GuarRspec
+    def initialize(@guar_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @guar_tspec_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @guar_tspec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms, @guar_rspec_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @guar_rspec : Win32cr::NetworkManagement::QoS::GuarRspec)
+    end
+  end
 
   @[Extern]
-  record IntServFlowSpec,
-    spec_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr,
-    spec_u : Spec_u_e__union_ do
+  struct IntServFlowSpec
+    property spec_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr
+    property spec_u : Spec_u_e__union_
 
     # Nested Type Spec_u_e__union_
     @[Extern(union: true)]
-    record Spec_u_e__union_,
-      cl_spec : Win32cr::NetworkManagement::QoS::CtrlLoadFlowspec,
-      g_spec : Win32cr::NetworkManagement::QoS::GuarFlowSpec,
-      q_spec : Win32cr::NetworkManagement::QoS::QualAppFlowSpec
+    struct Spec_u_e__union_
+    property cl_spec : Win32cr::NetworkManagement::QoS::CtrlLoadFlowspec
+    property g_spec : Win32cr::NetworkManagement::QoS::GuarFlowSpec
+    property q_spec : Win32cr::NetworkManagement::QoS::QualAppFlowSpec
+    def initialize(@cl_spec : Win32cr::NetworkManagement::QoS::CtrlLoadFlowspec, @g_spec : Win32cr::NetworkManagement::QoS::GuarFlowSpec, @q_spec : Win32cr::NetworkManagement::QoS::QualAppFlowSpec)
+    end
+    end
 
+    def initialize(@spec_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr, @spec_u : Spec_u_e__union_)
+    end
   end
 
   @[Extern]
-  record IS_FLOWSPEC,
-    flow_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr,
-    flow_body : Win32cr::NetworkManagement::QoS::IntServFlowSpec
+  struct IS_FLOWSPEC
+    property flow_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
+    property flow_body : Win32cr::NetworkManagement::QoS::IntServFlowSpec
+    def initialize(@flow_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @flow_body : Win32cr::NetworkManagement::QoS::IntServFlowSpec)
+    end
+  end
 
   @[Extern]
-  record Flow_desc,
-    u1 : U1_e__union_,
-    u2 : U2_e__union_ do
+  struct Flow_desc
+    property u1 : U1_e__union_
+    property u2 : U2_e__union_
 
     # Nested Type U1_e__union_
     @[Extern(union: true)]
-    record U1_e__union_,
-      stspec : Win32cr::NetworkManagement::QoS::SENDER_TSPEC*,
-      isflow : Win32cr::NetworkManagement::QoS::IS_FLOWSPEC*
+    struct U1_e__union_
+    property stspec : Win32cr::NetworkManagement::QoS::SENDER_TSPEC*
+    property isflow : Win32cr::NetworkManagement::QoS::IS_FLOWSPEC*
+    def initialize(@stspec : Win32cr::NetworkManagement::QoS::SENDER_TSPEC*, @isflow : Win32cr::NetworkManagement::QoS::IS_FLOWSPEC*)
+    end
+    end
 
 
     # Nested Type U2_e__union_
     @[Extern(union: true)]
-    record U2_e__union_,
-      stemp : Win32cr::NetworkManagement::QoS::FILTER_SPEC*,
-      fspec : Win32cr::NetworkManagement::QoS::FILTER_SPEC*
+    struct U2_e__union_
+    property stemp : Win32cr::NetworkManagement::QoS::FILTER_SPEC*
+    property fspec : Win32cr::NetworkManagement::QoS::FILTER_SPEC*
+    def initialize(@stemp : Win32cr::NetworkManagement::QoS::FILTER_SPEC*, @fspec : Win32cr::NetworkManagement::QoS::FILTER_SPEC*)
+    end
+    end
 
+    def initialize(@u1 : U1_e__union_, @u2 : U2_e__union_)
+    end
   end
 
   @[Extern]
-  record Gads_parms_t,
-    gads_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr,
-    gads_ctot_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    gads_ctot : UInt32,
-    gads_dtot_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    gads_dtot : UInt32,
-    gads_csum_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    gads_csum : UInt32,
-    gads_dsum_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    gads_dsum : UInt32
+  struct Gads_parms_t
+    property gads_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
+    property gads_ctot_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property gads_ctot : UInt32
+    property gads_dtot_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property gads_dtot : UInt32
+    property gads_csum_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property gads_csum : UInt32
+    property gads_dsum_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property gads_dsum : UInt32
+    def initialize(@gads_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @gads_ctot_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gads_ctot : UInt32, @gads_dtot_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gads_dtot : UInt32, @gads_csum_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gads_csum : UInt32, @gads_dsum_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gads_dsum : UInt32)
+    end
+  end
 
   @[Extern]
-  record GenAdspecParams,
-    gen_parm_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr,
-    gen_parm_hopcnt_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    gen_parm_hopcnt : UInt32,
-    gen_parm_pathbw_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    gen_parm_path_bw : Float32,
-    gen_parm_minlat_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    gen_parm_min_latency : UInt32,
-    gen_parm_compmtu_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr,
-    gen_parm_composed_MTU : UInt32
+  struct GenAdspecParams
+    property gen_parm_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
+    property gen_parm_hopcnt_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property gen_parm_hopcnt : UInt32
+    property gen_parm_pathbw_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property gen_parm_path_bw : Float32
+    property gen_parm_minlat_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property gen_parm_min_latency : UInt32
+    property gen_parm_compmtu_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
+    property gen_parm_composed_MTU : UInt32
+    def initialize(@gen_parm_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @gen_parm_hopcnt_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gen_parm_hopcnt : UInt32, @gen_parm_pathbw_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gen_parm_path_bw : Float32, @gen_parm_minlat_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gen_parm_min_latency : UInt32, @gen_parm_compmtu_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gen_parm_composed_MTU : UInt32)
+    end
+  end
 
   @[Extern]
-  record IS_ADSPEC_BODY,
-    adspec_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr,
-    adspec_genparms : Win32cr::NetworkManagement::QoS::GenAdspecParams
+  struct IS_ADSPEC_BODY
+    property adspec_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr
+    property adspec_genparms : Win32cr::NetworkManagement::QoS::GenAdspecParams
+    def initialize(@adspec_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr, @adspec_genparms : Win32cr::NetworkManagement::QoS::GenAdspecParams)
+    end
+  end
 
   @[Extern]
-  record ADSPEC,
-    adspec_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr,
-    adspec_body : Win32cr::NetworkManagement::QoS::IS_ADSPEC_BODY
+  struct ADSPEC
+    property adspec_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
+    property adspec_body : Win32cr::NetworkManagement::QoS::IS_ADSPEC_BODY
+    def initialize(@adspec_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @adspec_body : Win32cr::NetworkManagement::QoS::IS_ADSPEC_BODY)
+    end
+  end
 
   @[Extern]
-  record ID_ERROR_OBJECT,
-    usIdErrLength : UInt16,
-    ucAType : UInt8,
-    ucSubType : UInt8,
-    usReserved : UInt16,
-    usIdErrorValue : UInt16,
-    ucIdErrData : UInt8[4]
+  struct ID_ERROR_OBJECT
+    property usIdErrLength : UInt16
+    property ucAType : UInt8
+    property ucSubType : UInt8
+    property usReserved : UInt16
+    property usIdErrorValue : UInt16
+    property ucIdErrData : UInt8[4]
+    def initialize(@usIdErrLength : UInt16, @ucAType : UInt8, @ucSubType : UInt8, @usReserved : UInt16, @usIdErrorValue : UInt16, @ucIdErrData : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record RSVP_MSG_OBJS,
-    rsvp_msg_type : Int32,
-    pRsvpSession : Win32cr::NetworkManagement::QoS::RSVP_SESSION*,
-    pRsvpFromHop : Win32cr::NetworkManagement::QoS::RSVP_HOP*,
-    pRsvpToHop : Win32cr::NetworkManagement::QoS::RSVP_HOP*,
-    pResvStyle : Win32cr::NetworkManagement::QoS::RESV_STYLE*,
-    pRsvpScope : Win32cr::NetworkManagement::QoS::RSVP_SCOPE*,
-    flow_desc_count : Int32,
-    pFlowDescs : Win32cr::NetworkManagement::QoS::Flow_desc*,
-    pd_object_count : Int32,
-    ppPdObjects : Win32cr::NetworkManagement::QoS::POLICY_DATA**,
-    pErrorSpec : Win32cr::NetworkManagement::QoS::ERROR_SPEC*,
-    pAdspec : Win32cr::NetworkManagement::QoS::ADSPEC*
+  struct RSVP_MSG_OBJS
+    property rsvp_msg_type : Int32
+    property pRsvpSession : Win32cr::NetworkManagement::QoS::RSVP_SESSION*
+    property pRsvpFromHop : Win32cr::NetworkManagement::QoS::RSVP_HOP*
+    property pRsvpToHop : Win32cr::NetworkManagement::QoS::RSVP_HOP*
+    property pResvStyle : Win32cr::NetworkManagement::QoS::RESV_STYLE*
+    property pRsvpScope : Win32cr::NetworkManagement::QoS::RSVP_SCOPE*
+    property flow_desc_count : Int32
+    property pFlowDescs : Win32cr::NetworkManagement::QoS::Flow_desc*
+    property pd_object_count : Int32
+    property ppPdObjects : Win32cr::NetworkManagement::QoS::POLICY_DATA**
+    property pErrorSpec : Win32cr::NetworkManagement::QoS::ERROR_SPEC*
+    property pAdspec : Win32cr::NetworkManagement::QoS::ADSPEC*
+    def initialize(@rsvp_msg_type : Int32, @pRsvpSession : Win32cr::NetworkManagement::QoS::RSVP_SESSION*, @pRsvpFromHop : Win32cr::NetworkManagement::QoS::RSVP_HOP*, @pRsvpToHop : Win32cr::NetworkManagement::QoS::RSVP_HOP*, @pResvStyle : Win32cr::NetworkManagement::QoS::RESV_STYLE*, @pRsvpScope : Win32cr::NetworkManagement::QoS::RSVP_SCOPE*, @flow_desc_count : Int32, @pFlowDescs : Win32cr::NetworkManagement::QoS::Flow_desc*, @pd_object_count : Int32, @ppPdObjects : Win32cr::NetworkManagement::QoS::POLICY_DATA**, @pErrorSpec : Win32cr::NetworkManagement::QoS::ERROR_SPEC*, @pAdspec : Win32cr::NetworkManagement::QoS::ADSPEC*)
+    end
+  end
 
   @[Extern]
-  record Policy_decision,
-    lpvResult : UInt32,
-    wPolicyErrCode : UInt16,
-    wPolicyErrValue : UInt16
+  struct Policy_decision
+    property lpvResult : UInt32
+    property wPolicyErrCode : UInt16
+    property wPolicyErrValue : UInt16
+    def initialize(@lpvResult : UInt32, @wPolicyErrCode : UInt16, @wPolicyErrValue : UInt16)
+    end
+  end
 
   @[Extern]
-  record LPM_INIT_INFO,
-    pcm_version_number : UInt32,
-    result_time_limit : UInt32,
-    configured_lpm_count : Int32,
-    alloc_memory : Win32cr::NetworkManagement::QoS::PALLOCMEM,
-    free_memory : Win32cr::NetworkManagement::QoS::PFREEMEM,
-    pcm_admit_result_callback : Win32cr::NetworkManagement::QoS::CBADMITRESULT,
-    get_rsvp_objects_callback : Win32cr::NetworkManagement::QoS::CBGETRSVPOBJECTS
+  struct LPM_INIT_INFO
+    property pcm_version_number : UInt32
+    property result_time_limit : UInt32
+    property configured_lpm_count : Int32
+    property alloc_memory : Win32cr::NetworkManagement::QoS::PALLOCMEM
+    property free_memory : Win32cr::NetworkManagement::QoS::PFREEMEM
+    property pcm_admit_result_callback : Win32cr::NetworkManagement::QoS::CBADMITRESULT
+    property get_rsvp_objects_callback : Win32cr::NetworkManagement::QoS::CBGETRSVPOBJECTS
+    def initialize(@pcm_version_number : UInt32, @result_time_limit : UInt32, @configured_lpm_count : Int32, @alloc_memory : Win32cr::NetworkManagement::QoS::PALLOCMEM, @free_memory : Win32cr::NetworkManagement::QoS::PFREEMEM, @pcm_admit_result_callback : Win32cr::NetworkManagement::QoS::CBADMITRESULT, @get_rsvp_objects_callback : Win32cr::NetworkManagement::QoS::CBGETRSVPOBJECTS)
+    end
+  end
 
   @[Extern]
-  record Lpmiptable,
-    ulIfIndex : UInt32,
-    media_type : UInt32,
-    if_ip_addr : Win32cr::Networking::WinSock::IN_ADDR,
-    if_net_mask : Win32cr::Networking::WinSock::IN_ADDR
+  struct Lpmiptable
+    property ulIfIndex : UInt32
+    property media_type : UInt32
+    property if_ip_addr : Win32cr::Networking::WinSock::IN_ADDR
+    property if_net_mask : Win32cr::Networking::WinSock::IN_ADDR
+    def initialize(@ulIfIndex : UInt32, @media_type : UInt32, @if_ip_addr : Win32cr::Networking::WinSock::IN_ADDR, @if_net_mask : Win32cr::Networking::WinSock::IN_ADDR)
+    end
+  end
 
   @[Extern]
-  record QOS_PACKET_PRIORITY,
-    conformant_dscp_value : UInt32,
-    non_conformant_dscp_value : UInt32,
-    conformant_l2_value : UInt32,
-    non_conformant_l2_value : UInt32
+  struct QOS_PACKET_PRIORITY
+    property conformant_dscp_value : UInt32
+    property non_conformant_dscp_value : UInt32
+    property conformant_l2_value : UInt32
+    property non_conformant_l2_value : UInt32
+    def initialize(@conformant_dscp_value : UInt32, @non_conformant_dscp_value : UInt32, @conformant_l2_value : UInt32, @non_conformant_l2_value : UInt32)
+    end
+  end
 
   @[Extern]
-  record QOS_FLOW_FUNDAMENTALS,
-    bottleneck_bandwidth_set : Win32cr::Foundation::BOOL,
-    bottleneck_bandwidth : UInt64,
-    available_bandwidth_set : Win32cr::Foundation::BOOL,
-    available_bandwidth : UInt64,
-    rtt_set : Win32cr::Foundation::BOOL,
-    rtt : UInt32
+  struct QOS_FLOW_FUNDAMENTALS
+    property bottleneck_bandwidth_set : Win32cr::Foundation::BOOL
+    property bottleneck_bandwidth : UInt64
+    property available_bandwidth_set : Win32cr::Foundation::BOOL
+    property available_bandwidth : UInt64
+    property rtt_set : Win32cr::Foundation::BOOL
+    property rtt : UInt32
+    def initialize(@bottleneck_bandwidth_set : Win32cr::Foundation::BOOL, @bottleneck_bandwidth : UInt64, @available_bandwidth_set : Win32cr::Foundation::BOOL, @available_bandwidth : UInt64, @rtt_set : Win32cr::Foundation::BOOL, @rtt : UInt32)
+    end
+  end
 
   @[Extern]
-  record QOS_FLOWRATE_OUTGOING,
-    bandwidth : UInt64,
-    shaping_behavior : Win32cr::NetworkManagement::QoS::QOS_SHAPING,
-    reason : Win32cr::NetworkManagement::QoS::QOS_FLOWRATE_REASON
+  struct QOS_FLOWRATE_OUTGOING
+    property bandwidth : UInt64
+    property shaping_behavior : Win32cr::NetworkManagement::QoS::QOS_SHAPING
+    property reason : Win32cr::NetworkManagement::QoS::QOS_FLOWRATE_REASON
+    def initialize(@bandwidth : UInt64, @shaping_behavior : Win32cr::NetworkManagement::QoS::QOS_SHAPING, @reason : Win32cr::NetworkManagement::QoS::QOS_FLOWRATE_REASON)
+    end
+  end
 
   @[Extern]
-  record QOS_VERSION,
-    major_version : UInt16,
-    minor_version : UInt16
+  struct QOS_VERSION
+    property major_version : UInt16
+    property minor_version : UInt16
+    def initialize(@major_version : UInt16, @minor_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record QOS_FRIENDLY_NAME,
-    object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR,
-    friendly_name : UInt16[256]
+  struct QOS_FRIENDLY_NAME
+    property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
+    property friendly_name : UInt16[256]
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @friendly_name : UInt16[256])
+    end
+  end
 
   @[Extern]
-  record QOS_TRAFFIC_CLASS,
-    object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR,
-    traffic_class : UInt32
+  struct QOS_TRAFFIC_CLASS
+    property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
+    property traffic_class : UInt32
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @traffic_class : UInt32)
+    end
+  end
 
   @[Extern]
-  record QOS_DS_CLASS,
-    object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR,
-    ds_field : UInt32
+  struct QOS_DS_CLASS
+    property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
+    property ds_field : UInt32
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @ds_field : UInt32)
+    end
+  end
 
   @[Extern]
-  record QOS_DIFFSERV,
-    object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR,
-    ds_field_count : UInt32,
-    diffserv_rule : UInt8*
+  struct QOS_DIFFSERV
+    property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
+    property ds_field_count : UInt32
+    property diffserv_rule : UInt8*
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @ds_field_count : UInt32, @diffserv_rule : UInt8*)
+    end
+  end
 
   @[Extern]
-  record QOS_DIFFSERV_RULE,
-    inbound_ds_field : UInt8,
-    conforming_outbound_ds_field : UInt8,
-    non_conforming_outbound_ds_field : UInt8,
-    conforming_user_priority : UInt8,
-    non_conforming_user_priority : UInt8
+  struct QOS_DIFFSERV_RULE
+    property inbound_ds_field : UInt8
+    property conforming_outbound_ds_field : UInt8
+    property non_conforming_outbound_ds_field : UInt8
+    property conforming_user_priority : UInt8
+    property non_conforming_user_priority : UInt8
+    def initialize(@inbound_ds_field : UInt8, @conforming_outbound_ds_field : UInt8, @non_conforming_outbound_ds_field : UInt8, @conforming_user_priority : UInt8, @non_conforming_user_priority : UInt8)
+    end
+  end
 
   @[Extern]
-  record QOS_TCP_TRAFFIC,
-    object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
+  struct QOS_TCP_TRAFFIC
+    property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR)
+    end
+  end
 
   @[Extern]
-  record TCI_CLIENT_FUNC_LIST,
-    cl_notify_handler : Win32cr::NetworkManagement::QoS::TCI_NOTIFY_HANDLER,
-    cl_add_flow_complete_handler : Win32cr::NetworkManagement::QoS::TCI_ADD_FLOW_COMPLETE_HANDLER,
-    cl_modify_flow_complete_handler : Win32cr::NetworkManagement::QoS::TCI_MOD_FLOW_COMPLETE_HANDLER,
-    cl_delete_flow_complete_handler : Win32cr::NetworkManagement::QoS::TCI_DEL_FLOW_COMPLETE_HANDLER
+  struct TCI_CLIENT_FUNC_LIST
+    property cl_notify_handler : Win32cr::NetworkManagement::QoS::TCI_NOTIFY_HANDLER
+    property cl_add_flow_complete_handler : Win32cr::NetworkManagement::QoS::TCI_ADD_FLOW_COMPLETE_HANDLER
+    property cl_modify_flow_complete_handler : Win32cr::NetworkManagement::QoS::TCI_MOD_FLOW_COMPLETE_HANDLER
+    property cl_delete_flow_complete_handler : Win32cr::NetworkManagement::QoS::TCI_DEL_FLOW_COMPLETE_HANDLER
+    def initialize(@cl_notify_handler : Win32cr::NetworkManagement::QoS::TCI_NOTIFY_HANDLER, @cl_add_flow_complete_handler : Win32cr::NetworkManagement::QoS::TCI_ADD_FLOW_COMPLETE_HANDLER, @cl_modify_flow_complete_handler : Win32cr::NetworkManagement::QoS::TCI_MOD_FLOW_COMPLETE_HANDLER, @cl_delete_flow_complete_handler : Win32cr::NetworkManagement::QoS::TCI_DEL_FLOW_COMPLETE_HANDLER)
+    end
+  end
 
   @[Extern]
-  record ADDRESS_LIST_DESCRIPTOR,
-    media_type : UInt32,
-    address_list : Win32cr::NetworkManagement::Ndis::NETWORK_ADDRESS_LIST
+  struct ADDRESS_LIST_DESCRIPTOR
+    property media_type : UInt32
+    property address_list : Win32cr::NetworkManagement::Ndis::NETWORK_ADDRESS_LIST
+    def initialize(@media_type : UInt32, @address_list : Win32cr::NetworkManagement::Ndis::NETWORK_ADDRESS_LIST)
+    end
+  end
 
   @[Extern]
-  record TC_IFC_DESCRIPTOR,
-    length : UInt32,
-    pInterfaceName : Win32cr::Foundation::PWSTR,
-    pInterfaceID : Win32cr::Foundation::PWSTR,
-    address_list_desc : Win32cr::NetworkManagement::QoS::ADDRESS_LIST_DESCRIPTOR
+  struct TC_IFC_DESCRIPTOR
+    property length : UInt32
+    property pInterfaceName : Win32cr::Foundation::PWSTR
+    property pInterfaceID : Win32cr::Foundation::PWSTR
+    property address_list_desc : Win32cr::NetworkManagement::QoS::ADDRESS_LIST_DESCRIPTOR
+    def initialize(@length : UInt32, @pInterfaceName : Win32cr::Foundation::PWSTR, @pInterfaceID : Win32cr::Foundation::PWSTR, @address_list_desc : Win32cr::NetworkManagement::QoS::ADDRESS_LIST_DESCRIPTOR)
+    end
+  end
 
   @[Extern]
-  record TC_SUPPORTED_INFO_BUFFER,
-    instance_id_length : UInt16,
-    instance_id : UInt16[256],
-    interface_luid : UInt64,
-    addr_list_desc : Win32cr::NetworkManagement::QoS::ADDRESS_LIST_DESCRIPTOR
+  struct TC_SUPPORTED_INFO_BUFFER
+    property instance_id_length : UInt16
+    property instance_id : UInt16[256]
+    property interface_luid : UInt64
+    property addr_list_desc : Win32cr::NetworkManagement::QoS::ADDRESS_LIST_DESCRIPTOR
+    def initialize(@instance_id_length : UInt16, @instance_id : UInt16[256], @interface_luid : UInt64, @addr_list_desc : Win32cr::NetworkManagement::QoS::ADDRESS_LIST_DESCRIPTOR)
+    end
+  end
 
   @[Extern]
-  record TC_GEN_FILTER,
-    address_type : UInt16,
-    pattern_size : UInt32,
-    pattern : Void*,
-    mask : Void*
+  struct TC_GEN_FILTER
+    property address_type : UInt16
+    property pattern_size : UInt32
+    property pattern : Void*
+    property mask : Void*
+    def initialize(@address_type : UInt16, @pattern_size : UInt32, @pattern : Void*, @mask : Void*)
+    end
+  end
 
   @[Extern]
-  record TC_GEN_FLOW,
-    sending_flowspec : Win32cr::Networking::WinSock::FLOWSPEC,
-    receiving_flowspec : Win32cr::Networking::WinSock::FLOWSPEC,
-    tc_objects_length : UInt32,
-    tc_objects : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR*
+  struct TC_GEN_FLOW
+    property sending_flowspec : Win32cr::Networking::WinSock::FLOWSPEC
+    property receiving_flowspec : Win32cr::Networking::WinSock::FLOWSPEC
+    property tc_objects_length : UInt32
+    property tc_objects : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR*
+    def initialize(@sending_flowspec : Win32cr::Networking::WinSock::FLOWSPEC, @receiving_flowspec : Win32cr::Networking::WinSock::FLOWSPEC, @tc_objects_length : UInt32, @tc_objects : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR*)
+    end
+  end
 
   @[Extern]
-  record IP_PATTERN,
-    reserved1 : UInt32,
-    reserved2 : UInt32,
-    src_addr : UInt32,
-    dst_addr : UInt32,
-    s_un : S_un_e__Union_,
-    protocol_id : UInt8,
-    reserved3 : UInt8[3] do
+  struct IP_PATTERN
+    property reserved1 : UInt32
+    property reserved2 : UInt32
+    property src_addr : UInt32
+    property dst_addr : UInt32
+    property s_un : S_un_e__Union_
+    property protocol_id : UInt8
+    property reserved3 : UInt8[3]
 
     # Nested Type S_un_e__Union_
     @[Extern(union: true)]
-    record S_un_e__Union_,
-      s_un_ports : S_un_ports_e__Struct_,
-      s_un_icmp : S_un_icmp_e__Struct_,
-      s_spi : UInt32 do
+    struct S_un_e__Union_
+    property s_un_ports : S_un_ports_e__Struct_
+    property s_un_icmp : S_un_icmp_e__Struct_
+    property s_spi : UInt32
 
       # Nested Type S_un_icmp_e__Struct_
       @[Extern]
-      record S_un_icmp_e__Struct_,
-        s_type : UInt8,
-        s_code : UInt8,
-        filler : UInt16
+      struct S_un_icmp_e__Struct_
+    property s_type : UInt8
+    property s_code : UInt8
+    property filler : UInt16
+    def initialize(@s_type : UInt8, @s_code : UInt8, @filler : UInt16)
+    end
+      end
 
 
       # Nested Type S_un_ports_e__Struct_
       @[Extern]
-      record S_un_ports_e__Struct_,
-        s_srcport : UInt16,
-        s_dstport : UInt16
+      struct S_un_ports_e__Struct_
+    property s_srcport : UInt16
+    property s_dstport : UInt16
+    def initialize(@s_srcport : UInt16, @s_dstport : UInt16)
+    end
+      end
 
+    def initialize(@s_un_ports : S_un_ports_e__Struct_, @s_un_icmp : S_un_icmp_e__Struct_, @s_spi : UInt32)
+    end
     end
 
+    def initialize(@reserved1 : UInt32, @reserved2 : UInt32, @src_addr : UInt32, @dst_addr : UInt32, @s_un : S_un_e__Union_, @protocol_id : UInt8, @reserved3 : UInt8[3])
+    end
   end
 
   @[Extern]
-  record IPX_PATTERN,
-    src : Src_e__Struct_,
-    dest : Src_e__Struct_ do
+  struct IPX_PATTERN
+    property src : Src_e__Struct_
+    property dest : Src_e__Struct_
 
     # Nested Type Src_e__Struct_
     @[Extern]
-    record Src_e__Struct_,
-      network_address : UInt32,
-      node_address : UInt8[6],
-      socket : UInt16
+    struct Src_e__Struct_
+    property network_address : UInt32
+    property node_address : UInt8[6]
+    property socket : UInt16
+    def initialize(@network_address : UInt32, @node_address : UInt8[6], @socket : UInt16)
+    end
+    end
 
+    def initialize(@src : Src_e__Struct_, @dest : Src_e__Struct_)
+    end
   end
 
   @[Extern]
-  record ENUMERATION_BUFFER,
-    length : UInt32,
-    owner_process_id : UInt32,
-    flow_name_length : UInt16,
-    flow_name : UInt16[256],
-    pFlow : Win32cr::NetworkManagement::QoS::TC_GEN_FLOW*,
-    number_of_filters : UInt32,
-    generic_filter : Win32cr::NetworkManagement::QoS::TC_GEN_FILTER*
+  struct ENUMERATION_BUFFER
+    property length : UInt32
+    property owner_process_id : UInt32
+    property flow_name_length : UInt16
+    property flow_name : UInt16[256]
+    property pFlow : Win32cr::NetworkManagement::QoS::TC_GEN_FLOW*
+    property number_of_filters : UInt32
+    property generic_filter : Win32cr::NetworkManagement::QoS::TC_GEN_FILTER*
+    def initialize(@length : UInt32, @owner_process_id : UInt32, @flow_name_length : UInt16, @flow_name : UInt16[256], @pFlow : Win32cr::NetworkManagement::QoS::TC_GEN_FLOW*, @number_of_filters : UInt32, @generic_filter : Win32cr::NetworkManagement::QoS::TC_GEN_FILTER*)
+    end
+  end
 
   @[Extern(union: true)]
-  record IN_ADDR_IPV4,
-    addr : UInt32,
-    addr_bytes : UInt8[4]
-
-  @[Extern]
-  record IN_ADDR_IPV6,
-    addr : UInt8[16]
-
-  @[Extern]
-  record RSVP_FILTERSPEC_V4,
-    address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV4,
-    unused : UInt16,
-    port : UInt16
-
-  @[Extern]
-  record RSVP_FILTERSPEC_V6,
-    address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV6,
-    un_used : UInt16,
-    port : UInt16
-
-  @[Extern]
-  record RSVP_FILTERSPEC_V6_FLOW,
-    address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV6,
-    un_used : UInt8,
-    flow_label : UInt8[3]
-
-  @[Extern]
-  record RSVP_FILTERSPEC_V4_GPI,
-    address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV4,
-    general_port_id : UInt32
-
-  @[Extern]
-  record RSVP_FILTERSPEC_V6_GPI,
-    address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV6,
-    general_port_id : UInt32
-
-  @[Extern]
-  record RSVP_FILTERSPEC,
-    type__ : Win32cr::NetworkManagement::QoS::FilterType,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      filter_spec_v4 : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V4,
-      filter_spec_v6 : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V6,
-      filter_spec_v6_flow : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V6_FLOW,
-      filter_spec_v4_gpi : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V4_GPI,
-      filter_spec_v6_gpi : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V6_GPI
-
+  struct IN_ADDR_IPV4
+    property addr : UInt32
+    property addr_bytes : UInt8[4]
+    def initialize(@addr : UInt32, @addr_bytes : UInt8[4])
+    end
   end
 
   @[Extern]
-  record FLOWDESCRIPTOR,
-    flow_spec : Win32cr::Networking::WinSock::FLOWSPEC,
-    num_filters : UInt32,
-    filter_list : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC*
-
-  @[Extern]
-  record RSVP_POLICY,
-    len : UInt16,
-    type__ : UInt16,
-    info : UInt8[4]
-
-  @[Extern]
-  record RSVP_POLICY_INFO,
-    object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR,
-    num_policy_element : UInt32,
-    policy_element : Win32cr::NetworkManagement::QoS::RSVP_POLICY*
-
-  @[Extern]
-  record RSVP_RESERVE_INFO,
-    object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR,
-    style : UInt32,
-    confirm_request : UInt32,
-    policy_element_list : Win32cr::NetworkManagement::QoS::RSVP_POLICY_INFO*,
-    num_flow_desc : UInt32,
-    flow_desc_list : Win32cr::NetworkManagement::QoS::FLOWDESCRIPTOR*
-
-  @[Extern]
-  record RSVP_STATUS_INFO,
-    object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR,
-    status_code : UInt32,
-    extended_status1 : UInt32,
-    extended_status2 : UInt32
-
-  @[Extern]
-  record QOS_DESTADDR,
-    object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR,
-    socket_address : Win32cr::Networking::WinSock::SOCKADDR*,
-    socket_address_length : UInt32
-
-  @[Extern]
-  record AD_GENERAL_PARAMS,
-    int_serv_aware_hop_count : UInt32,
-    path_bandwidth_estimate : UInt32,
-    minimum_latency : UInt32,
-    path_mtu : UInt32,
-    flags : UInt32
-
-  @[Extern]
-  record AD_GUARANTEED,
-    c_total : UInt32,
-    d_total : UInt32,
-    c_sum : UInt32,
-    d_sum : UInt32
-
-  @[Extern]
-  record PARAM_BUFFER,
-    parameter_id : UInt32,
-    length : UInt32,
-    buffer : UInt8*
-
-  @[Extern]
-  record CONTROL_SERVICE,
-    length : UInt32,
-    service : UInt32,
-    overrides : Win32cr::NetworkManagement::QoS::AD_GENERAL_PARAMS,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      guaranteed : Win32cr::NetworkManagement::QoS::AD_GUARANTEED,
-      param_buffer : Win32cr::NetworkManagement::QoS::PARAM_BUFFER*
-
+  struct IN_ADDR_IPV6
+    property addr : UInt8[16]
+    def initialize(@addr : UInt8[16])
+    end
   end
 
   @[Extern]
-  record RSVP_ADSPEC,
-    object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR,
-    general_params : Win32cr::NetworkManagement::QoS::AD_GENERAL_PARAMS,
-    number_of_services : UInt32,
-    services : Win32cr::NetworkManagement::QoS::CONTROL_SERVICE*
-
-  @[Extern]
-  record IDPE_ATTR,
-    pe_attrib_length : UInt16,
-    pe_attrib_type : UInt8,
-    pe_attrib_sub_type : UInt8,
-    pe_attrib_value : UInt8[4]
-
-  @[Extern]
-  record WBCL_Iterator,
-    firstElementPtr : Void*,
-    logSize : UInt32,
-    currentElementPtr : Void*,
-    currentElementSize : UInt32,
-    digestSize : UInt16,
-    logFormat : UInt16,
-    numberOfDigests : UInt32,
-    digestSizes : Void*,
-    supportedAlgorithms : UInt32,
-    hashAlgorithm : UInt16
-
-  @[Extern]
-  record TCG_PCClientPCREventStruct,
-    pcrIndex : UInt32,
-    eventType : UInt32,
-    digest : UInt8[20],
-    eventDataSize : UInt32,
-    event : UInt8*
-
-  @[Extern]
-  record TCG_PCClientTaggedEventStruct,
-    event_id : UInt32,
-    event_data_size : UInt32,
-    event_data : UInt8*
-
-  @[Extern]
-  record WBCL_LogHdr,
-    signature : UInt32,
-    version : UInt32,
-    entries : UInt32,
-    length : UInt32
-
-  @[Extern]
-  record SIPAEVENT_VSM_IDK_RSA_INFO_,
-    key_bit_length : UInt32,
-    public_exp_length_bytes : UInt32,
-    modulus_size_bytes : UInt32,
-    public_key_data : UInt8*
-
-  @[Extern]
-  record SIPAEVENT_VSM_IDK_INFO_PAYLOAD_,
-    key_alg_id : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      rsa_key_info : Win32cr::NetworkManagement::QoS::SIPAEVENT_VSM_IDK_RSA_INFO_
-
+  struct RSVP_FILTERSPEC_V4
+    property address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV4
+    property unused : UInt16
+    property port : UInt16
+    def initialize(@address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV4, @unused : UInt16, @port : UInt16)
+    end
   end
 
   @[Extern]
-  record SIPAEVENT_SI_POLICY_PAYLOAD_,
-    policy_version : UInt64,
-    policy_name_length : UInt16,
-    hash_alg_id : UInt16,
-    digest_length : UInt32,
-    var_length_data : UInt8*
+  struct RSVP_FILTERSPEC_V6
+    property address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV6
+    property un_used : UInt16
+    property port : UInt16
+    def initialize(@address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV6, @un_used : UInt16, @port : UInt16)
+    end
+  end
 
   @[Extern]
-  record SIPAEVENT_REVOCATION_LIST_PAYLOAD_,
-    creation_time : Int64,
-    digest_length : UInt32,
-    hash_alg_id : UInt16,
-    digest : UInt8*
+  struct RSVP_FILTERSPEC_V6_FLOW
+    property address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV6
+    property un_used : UInt8
+    property flow_label : UInt8[3]
+    def initialize(@address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV6, @un_used : UInt8, @flow_label : UInt8[3])
+    end
+  end
 
   @[Extern]
-  record SIPAEVENT_KSR_SIGNATURE_PAYLOAD_,
-    sign_alg_id : UInt32,
-    signature_length : UInt32,
-    signature : UInt8*
+  struct RSVP_FILTERSPEC_V4_GPI
+    property address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV4
+    property general_port_id : UInt32
+    def initialize(@address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV4, @general_port_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record SIPAEVENT_SBCP_INFO_PAYLOAD_V1_,
-    payload_version : UInt32,
-    var_data_offset : UInt32,
-    hash_alg_id : UInt16,
-    digest_length : UInt16,
-    options : UInt32,
-    signers_count : UInt32,
-    var_data : UInt8*
+  struct RSVP_FILTERSPEC_V6_GPI
+    property address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV6
+    property general_port_id : UInt32
+    def initialize(@address : Win32cr::NetworkManagement::QoS::IN_ADDR_IPV6, @general_port_id : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RSVP_FILTERSPEC
+    property type__ : Win32cr::NetworkManagement::QoS::FilterType
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property filter_spec_v4 : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V4
+    property filter_spec_v6 : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V6
+    property filter_spec_v6_flow : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V6_FLOW
+    property filter_spec_v4_gpi : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V4_GPI
+    property filter_spec_v6_gpi : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V6_GPI
+    def initialize(@filter_spec_v4 : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V4, @filter_spec_v6 : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V6, @filter_spec_v6_flow : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V6_FLOW, @filter_spec_v4_gpi : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V4_GPI, @filter_spec_v6_gpi : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC_V6_GPI)
+    end
+    end
+
+    def initialize(@type__ : Win32cr::NetworkManagement::QoS::FilterType, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct FLOWDESCRIPTOR
+    property flow_spec : Win32cr::Networking::WinSock::FLOWSPEC
+    property num_filters : UInt32
+    property filter_list : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC*
+    def initialize(@flow_spec : Win32cr::Networking::WinSock::FLOWSPEC, @num_filters : UInt32, @filter_list : Win32cr::NetworkManagement::QoS::RSVP_FILTERSPEC*)
+    end
+  end
+
+  @[Extern]
+  struct RSVP_POLICY
+    property len : UInt16
+    property type__ : UInt16
+    property info : UInt8[4]
+    def initialize(@len : UInt16, @type__ : UInt16, @info : UInt8[4])
+    end
+  end
+
+  @[Extern]
+  struct RSVP_POLICY_INFO
+    property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
+    property num_policy_element : UInt32
+    property policy_element : Win32cr::NetworkManagement::QoS::RSVP_POLICY*
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @num_policy_element : UInt32, @policy_element : Win32cr::NetworkManagement::QoS::RSVP_POLICY*)
+    end
+  end
+
+  @[Extern]
+  struct RSVP_RESERVE_INFO
+    property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
+    property style : UInt32
+    property confirm_request : UInt32
+    property policy_element_list : Win32cr::NetworkManagement::QoS::RSVP_POLICY_INFO*
+    property num_flow_desc : UInt32
+    property flow_desc_list : Win32cr::NetworkManagement::QoS::FLOWDESCRIPTOR*
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @style : UInt32, @confirm_request : UInt32, @policy_element_list : Win32cr::NetworkManagement::QoS::RSVP_POLICY_INFO*, @num_flow_desc : UInt32, @flow_desc_list : Win32cr::NetworkManagement::QoS::FLOWDESCRIPTOR*)
+    end
+  end
+
+  @[Extern]
+  struct RSVP_STATUS_INFO
+    property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
+    property status_code : UInt32
+    property extended_status1 : UInt32
+    property extended_status2 : UInt32
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @status_code : UInt32, @extended_status1 : UInt32, @extended_status2 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct QOS_DESTADDR
+    property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
+    property socket_address : Win32cr::Networking::WinSock::SOCKADDR*
+    property socket_address_length : UInt32
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @socket_address : Win32cr::Networking::WinSock::SOCKADDR*, @socket_address_length : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AD_GENERAL_PARAMS
+    property int_serv_aware_hop_count : UInt32
+    property path_bandwidth_estimate : UInt32
+    property minimum_latency : UInt32
+    property path_mtu : UInt32
+    property flags : UInt32
+    def initialize(@int_serv_aware_hop_count : UInt32, @path_bandwidth_estimate : UInt32, @minimum_latency : UInt32, @path_mtu : UInt32, @flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AD_GUARANTEED
+    property c_total : UInt32
+    property d_total : UInt32
+    property c_sum : UInt32
+    property d_sum : UInt32
+    def initialize(@c_total : UInt32, @d_total : UInt32, @c_sum : UInt32, @d_sum : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PARAM_BUFFER
+    property parameter_id : UInt32
+    property length : UInt32
+    property buffer : UInt8*
+    def initialize(@parameter_id : UInt32, @length : UInt32, @buffer : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct CONTROL_SERVICE
+    property length : UInt32
+    property service : UInt32
+    property overrides : Win32cr::NetworkManagement::QoS::AD_GENERAL_PARAMS
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property guaranteed : Win32cr::NetworkManagement::QoS::AD_GUARANTEED
+    property param_buffer : Win32cr::NetworkManagement::QoS::PARAM_BUFFER*
+    def initialize(@guaranteed : Win32cr::NetworkManagement::QoS::AD_GUARANTEED, @param_buffer : Win32cr::NetworkManagement::QoS::PARAM_BUFFER*)
+    end
+    end
+
+    def initialize(@length : UInt32, @service : UInt32, @overrides : Win32cr::NetworkManagement::QoS::AD_GENERAL_PARAMS, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct RSVP_ADSPEC
+    property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
+    property general_params : Win32cr::NetworkManagement::QoS::AD_GENERAL_PARAMS
+    property number_of_services : UInt32
+    property services : Win32cr::NetworkManagement::QoS::CONTROL_SERVICE*
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @general_params : Win32cr::NetworkManagement::QoS::AD_GENERAL_PARAMS, @number_of_services : UInt32, @services : Win32cr::NetworkManagement::QoS::CONTROL_SERVICE*)
+    end
+  end
+
+  @[Extern]
+  struct IDPE_ATTR
+    property pe_attrib_length : UInt16
+    property pe_attrib_type : UInt8
+    property pe_attrib_sub_type : UInt8
+    property pe_attrib_value : UInt8[4]
+    def initialize(@pe_attrib_length : UInt16, @pe_attrib_type : UInt8, @pe_attrib_sub_type : UInt8, @pe_attrib_value : UInt8[4])
+    end
+  end
+
+  @[Extern]
+  struct WBCL_Iterator
+    property firstElementPtr : Void*
+    property logSize : UInt32
+    property currentElementPtr : Void*
+    property currentElementSize : UInt32
+    property digestSize : UInt16
+    property logFormat : UInt16
+    property numberOfDigests : UInt32
+    property digestSizes : Void*
+    property supportedAlgorithms : UInt32
+    property hashAlgorithm : UInt16
+    def initialize(@firstElementPtr : Void*, @logSize : UInt32, @currentElementPtr : Void*, @currentElementSize : UInt32, @digestSize : UInt16, @logFormat : UInt16, @numberOfDigests : UInt32, @digestSizes : Void*, @supportedAlgorithms : UInt32, @hashAlgorithm : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct TCG_PCClientPCREventStruct
+    property pcrIndex : UInt32
+    property eventType : UInt32
+    property digest : UInt8[20]
+    property eventDataSize : UInt32
+    property event : UInt8*
+    def initialize(@pcrIndex : UInt32, @eventType : UInt32, @digest : UInt8[20], @eventDataSize : UInt32, @event : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct TCG_PCClientTaggedEventStruct
+    property event_id : UInt32
+    property event_data_size : UInt32
+    property event_data : UInt8*
+    def initialize(@event_id : UInt32, @event_data_size : UInt32, @event_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct WBCL_LogHdr
+    property signature : UInt32
+    property version : UInt32
+    property entries : UInt32
+    property length : UInt32
+    def initialize(@signature : UInt32, @version : UInt32, @entries : UInt32, @length : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SIPAEVENT_VSM_IDK_RSA_INFO_
+    property key_bit_length : UInt32
+    property public_exp_length_bytes : UInt32
+    property modulus_size_bytes : UInt32
+    property public_key_data : UInt8*
+    def initialize(@key_bit_length : UInt32, @public_exp_length_bytes : UInt32, @modulus_size_bytes : UInt32, @public_key_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct SIPAEVENT_VSM_IDK_INFO_PAYLOAD_
+    property key_alg_id : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property rsa_key_info : Win32cr::NetworkManagement::QoS::SIPAEVENT_VSM_IDK_RSA_INFO_
+    def initialize(@rsa_key_info : Win32cr::NetworkManagement::QoS::SIPAEVENT_VSM_IDK_RSA_INFO_)
+    end
+    end
+
+    def initialize(@key_alg_id : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct SIPAEVENT_SI_POLICY_PAYLOAD_
+    property policy_version : UInt64
+    property policy_name_length : UInt16
+    property hash_alg_id : UInt16
+    property digest_length : UInt32
+    property var_length_data : UInt8*
+    def initialize(@policy_version : UInt64, @policy_name_length : UInt16, @hash_alg_id : UInt16, @digest_length : UInt32, @var_length_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct SIPAEVENT_REVOCATION_LIST_PAYLOAD_
+    property creation_time : Int64
+    property digest_length : UInt32
+    property hash_alg_id : UInt16
+    property digest : UInt8*
+    def initialize(@creation_time : Int64, @digest_length : UInt32, @hash_alg_id : UInt16, @digest : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct SIPAEVENT_KSR_SIGNATURE_PAYLOAD_
+    property sign_alg_id : UInt32
+    property signature_length : UInt32
+    property signature : UInt8*
+    def initialize(@sign_alg_id : UInt32, @signature_length : UInt32, @signature : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct SIPAEVENT_SBCP_INFO_PAYLOAD_V1_
+    property payload_version : UInt32
+    property var_data_offset : UInt32
+    property hash_alg_id : UInt16
+    property digest_length : UInt16
+    property options : UInt32
+    property signers_count : UInt32
+    property var_data : UInt8*
+    def initialize(@payload_version : UInt32, @var_data_offset : UInt32, @hash_alg_id : UInt16, @digest_length : UInt16, @options : UInt32, @signers_count : UInt32, @var_data : UInt8*)
+    end
+  end
 
   @[Link("qwave")]
   @[Link("traffic")]

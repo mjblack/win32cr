@@ -1,7 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::System::SetupAndMigration
-  alias OOBE_COMPLETED_CALLBACK = Proc(Void*, Void)*
+  alias OOBE_COMPLETED_CALLBACK = Proc(Void*, Void)
 
 
 

@@ -337,71 +337,107 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record BG_FILE_PROGRESS,
-    bytes_total : UInt64,
-    bytes_transferred : UInt64,
-    completed : Win32cr::Foundation::BOOL
+  struct BG_FILE_PROGRESS
+    property bytes_total : UInt64
+    property bytes_transferred : UInt64
+    property completed : Win32cr::Foundation::BOOL
+    def initialize(@bytes_total : UInt64, @bytes_transferred : UInt64, @completed : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record BG_FILE_INFO,
-    remote_name : Win32cr::Foundation::PWSTR,
-    local_name : Win32cr::Foundation::PWSTR
+  struct BG_FILE_INFO
+    property remote_name : Win32cr::Foundation::PWSTR
+    property local_name : Win32cr::Foundation::PWSTR
+    def initialize(@remote_name : Win32cr::Foundation::PWSTR, @local_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record BG_JOB_PROGRESS,
-    bytes_total : UInt64,
-    bytes_transferred : UInt64,
-    files_total : UInt32,
-    files_transferred : UInt32
+  struct BG_JOB_PROGRESS
+    property bytes_total : UInt64
+    property bytes_transferred : UInt64
+    property files_total : UInt32
+    property files_transferred : UInt32
+    def initialize(@bytes_total : UInt64, @bytes_transferred : UInt64, @files_total : UInt32, @files_transferred : UInt32)
+    end
+  end
 
   @[Extern]
-  record BG_JOB_TIMES,
-    creation_time : Win32cr::Foundation::FILETIME,
-    modification_time : Win32cr::Foundation::FILETIME,
-    transfer_completion_time : Win32cr::Foundation::FILETIME
+  struct BG_JOB_TIMES
+    property creation_time : Win32cr::Foundation::FILETIME
+    property modification_time : Win32cr::Foundation::FILETIME
+    property transfer_completion_time : Win32cr::Foundation::FILETIME
+    def initialize(@creation_time : Win32cr::Foundation::FILETIME, @modification_time : Win32cr::Foundation::FILETIME, @transfer_completion_time : Win32cr::Foundation::FILETIME)
+    end
+  end
 
   @[Extern]
-  record BG_JOB_REPLY_PROGRESS,
-    bytes_total : UInt64,
-    bytes_transferred : UInt64
+  struct BG_JOB_REPLY_PROGRESS
+    property bytes_total : UInt64
+    property bytes_transferred : UInt64
+    def initialize(@bytes_total : UInt64, @bytes_transferred : UInt64)
+    end
+  end
 
   @[Extern]
-  record BG_BASIC_CREDENTIALS,
-    user_name : Win32cr::Foundation::PWSTR,
-    password : Win32cr::Foundation::PWSTR
+  struct BG_BASIC_CREDENTIALS
+    property user_name : Win32cr::Foundation::PWSTR
+    property password : Win32cr::Foundation::PWSTR
+    def initialize(@user_name : Win32cr::Foundation::PWSTR, @password : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern(union: true)]
-  record BG_AUTH_CREDENTIALS_UNION,
-    basic : Win32cr::Networking::BackgroundIntelligentTransferService::BG_BASIC_CREDENTIALS
+  struct BG_AUTH_CREDENTIALS_UNION
+    property basic : Win32cr::Networking::BackgroundIntelligentTransferService::BG_BASIC_CREDENTIALS
+    def initialize(@basic : Win32cr::Networking::BackgroundIntelligentTransferService::BG_BASIC_CREDENTIALS)
+    end
+  end
 
   @[Extern]
-  record BG_AUTH_CREDENTIALS,
-    target : Win32cr::Networking::BackgroundIntelligentTransferService::BG_AUTH_TARGET,
-    scheme : Win32cr::Networking::BackgroundIntelligentTransferService::BG_AUTH_SCHEME,
-    credentials : Win32cr::Networking::BackgroundIntelligentTransferService::BG_AUTH_CREDENTIALS_UNION
+  struct BG_AUTH_CREDENTIALS
+    property target : Win32cr::Networking::BackgroundIntelligentTransferService::BG_AUTH_TARGET
+    property scheme : Win32cr::Networking::BackgroundIntelligentTransferService::BG_AUTH_SCHEME
+    property credentials : Win32cr::Networking::BackgroundIntelligentTransferService::BG_AUTH_CREDENTIALS_UNION
+    def initialize(@target : Win32cr::Networking::BackgroundIntelligentTransferService::BG_AUTH_TARGET, @scheme : Win32cr::Networking::BackgroundIntelligentTransferService::BG_AUTH_SCHEME, @credentials : Win32cr::Networking::BackgroundIntelligentTransferService::BG_AUTH_CREDENTIALS_UNION)
+    end
+  end
 
   @[Extern]
-  record BG_FILE_RANGE,
-    initial_offset : UInt64,
-    length : UInt64
+  struct BG_FILE_RANGE
+    property initial_offset : UInt64
+    property length : UInt64
+    def initialize(@initial_offset : UInt64, @length : UInt64)
+    end
+  end
 
   @[Extern(union: true)]
-  record BITS_JOB_PROPERTY_VALUE,
-    dword : UInt32,
-    cls_id : LibC::GUID,
-    enable : Win32cr::Foundation::BOOL,
-    uint64 : UInt64,
-    target : Win32cr::Networking::BackgroundIntelligentTransferService::BG_AUTH_TARGET
+  struct BITS_JOB_PROPERTY_VALUE
+    property dword : UInt32
+    property cls_id : LibC::GUID
+    property enable : Win32cr::Foundation::BOOL
+    property uint64 : UInt64
+    property target : Win32cr::Networking::BackgroundIntelligentTransferService::BG_AUTH_TARGET
+    def initialize(@dword : UInt32, @cls_id : LibC::GUID, @enable : Win32cr::Foundation::BOOL, @uint64 : UInt64, @target : Win32cr::Networking::BackgroundIntelligentTransferService::BG_AUTH_TARGET)
+    end
+  end
 
   @[Extern(union: true)]
-  record BITS_FILE_PROPERTY_VALUE,
-    string : Win32cr::Foundation::PWSTR
+  struct BITS_FILE_PROPERTY_VALUE
+    property string : Win32cr::Foundation::PWSTR
+    def initialize(@string : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record FILESETINFO,
-    bstrRemoteFile : Win32cr::Foundation::BSTR,
-    bstrLocalFile : Win32cr::Foundation::BSTR,
-    dwSizeHint : UInt32
+  struct FILESETINFO
+    property bstrRemoteFile : Win32cr::Foundation::BSTR
+    property bstrLocalFile : Win32cr::Foundation::BSTR
+    property dwSizeHint : UInt32
+    def initialize(@bstrRemoteFile : Win32cr::Foundation::BSTR, @bstrLocalFile : Win32cr::Foundation::BSTR, @dwSizeHint : UInt32)
+    end
+  end
 
   @[Extern]
   record IBackgroundCopyFileVtbl,
@@ -414,7 +450,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("01b7bd23-fb88-4a77-8490-5891d3e4653a")]
   record IBackgroundCopyFile, lpVtbl : IBackgroundCopyFileVtbl* do
     GUID = LibC::GUID.new(0x1b7bd23_u32, 0xfb88_u16, 0x4a77_u16, StaticArray[0x84_u8, 0x90_u8, 0x58_u8, 0x91_u8, 0xd3_u8, 0xe4_u8, 0x65_u8, 0x3a_u8])
     def query_interface(this : IBackgroundCopyFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -451,7 +486,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("ca51e165-c365-424c-8d41-24aaa4ff3c40")]
   record IEnumBackgroundCopyFiles, lpVtbl : IEnumBackgroundCopyFilesVtbl* do
     GUID = LibC::GUID.new(0xca51e165_u32, 0xc365_u16, 0x424c_u16, StaticArray[0x8d_u8, 0x41_u8, 0x24_u8, 0xaa_u8, 0xa4_u8, 0xff_u8, 0x3c_u8, 0x40_u8])
     def query_interface(this : IEnumBackgroundCopyFiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -494,7 +528,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("19c613a0-fcb8-4f28-81ae-897c3d078f81")]
   record IBackgroundCopyError, lpVtbl : IBackgroundCopyErrorVtbl* do
     GUID = LibC::GUID.new(0x19c613a0_u32, 0xfcb8_u16, 0x4f28_u16, StaticArray[0x81_u8, 0xae_u8, 0x89_u8, 0x7c_u8, 0x3d_u8, 0x7_u8, 0x8f_u8, 0x81_u8])
     def query_interface(this : IBackgroundCopyError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -564,7 +597,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("37668d37-507e-4160-9316-26306d150b12")]
   record IBackgroundCopyJob, lpVtbl : IBackgroundCopyJobVtbl* do
     GUID = LibC::GUID.new(0x37668d37_u32, 0x507e_u16, 0x4160_u16, StaticArray[0x93_u8, 0x16_u8, 0x26_u8, 0x30_u8, 0x6d_u8, 0x15_u8, 0xb_u8, 0x12_u8])
     def query_interface(this : IBackgroundCopyJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -688,7 +720,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("1af4f612-3b71-466f-8f58-7b6f73ac57ad")]
   record IEnumBackgroundCopyJobs, lpVtbl : IEnumBackgroundCopyJobsVtbl* do
     GUID = LibC::GUID.new(0x1af4f612_u32, 0x3b71_u16, 0x466f_u16, StaticArray[0x8f_u8, 0x58_u8, 0x7b_u8, 0x6f_u8, 0x73_u8, 0xac_u8, 0x57_u8, 0xad_u8])
     def query_interface(this : IEnumBackgroundCopyJobs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -729,7 +760,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("97ea99c7-0186-4ad4-8df9-c5b4e0ed6b22")]
   record IBackgroundCopyCallback, lpVtbl : IBackgroundCopyCallbackVtbl* do
     GUID = LibC::GUID.new(0x97ea99c7_u32, 0x186_u16, 0x4ad4_u16, StaticArray[0x8d_u8, 0xf9_u8, 0xc5_u8, 0xb4_u8, 0xe0_u8, 0xed_u8, 0x6b_u8, 0x22_u8])
     def query_interface(this : IBackgroundCopyCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -767,7 +797,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("ca29d251-b4bb-4679-a3d9-ae8006119d54")]
   record AsyncIBackgroundCopyCallback, lpVtbl : AsyncIBackgroundCopyCallbackVtbl* do
     GUID = LibC::GUID.new(0xca29d251_u32, 0xb4bb_u16, 0x4679_u16, StaticArray[0xa3_u8, 0xd9_u8, 0xae_u8, 0x80_u8, 0x6_u8, 0x11_u8, 0x9d_u8, 0x54_u8])
     def query_interface(this : AsyncIBackgroundCopyCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -812,7 +841,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("5ce34c0d-0dc9-4c1f-897c-daa1b78cee7c")]
   record IBackgroundCopyManager, lpVtbl : IBackgroundCopyManagerVtbl* do
     GUID = LibC::GUID.new(0x5ce34c0d_u32, 0xdc9_u16, 0x4c1f_u16, StaticArray[0x89_u8, 0x7c_u8, 0xda_u8, 0xa1_u8, 0xb7_u8, 0x8c_u8, 0xee_u8, 0x7c_u8])
     def query_interface(this : IBackgroundCopyManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -887,7 +915,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("54b50739-686f-45eb-9dff-d6a9a0faa9af")]
   record IBackgroundCopyJob2, lpVtbl : IBackgroundCopyJob2Vtbl* do
     GUID = LibC::GUID.new(0x54b50739_u32, 0x686f_u16, 0x45eb_u16, StaticArray[0x9d_u8, 0xff_u8, 0xd6_u8, 0xa9_u8, 0xa0_u8, 0xfa_u8, 0xa9_u8, 0xaf_u8])
     def query_interface(this : IBackgroundCopyJob2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1074,7 +1101,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("443c8934-90ff-48ed-bcde-26f5c7450042")]
   record IBackgroundCopyJob3, lpVtbl : IBackgroundCopyJob3Vtbl* do
     GUID = LibC::GUID.new(0x443c8934_u32, 0x90ff_u16, 0x48ed_u16, StaticArray[0xbc_u8, 0xde_u8, 0x26_u8, 0xf5_u8, 0xc7_u8, 0x45_u8, 0x0_u8, 0x42_u8])
     def query_interface(this : IBackgroundCopyJob3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1234,7 +1260,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("83e81b93-0873-474d-8a8c-f2018b1a939c")]
   record IBackgroundCopyFile2, lpVtbl : IBackgroundCopyFile2Vtbl* do
     GUID = LibC::GUID.new(0x83e81b93_u32, 0x873_u16, 0x474d_u16, StaticArray[0x8a_u8, 0x8c_u8, 0xf2_u8, 0x1_u8, 0x8b_u8, 0x1a_u8, 0x93_u8, 0x9c_u8])
     def query_interface(this : IBackgroundCopyFile2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1280,7 +1305,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("f1bd1079-9f01-4bdc-8036-f09b70095066")]
   record IBackgroundCopyJobHttpOptions, lpVtbl : IBackgroundCopyJobHttpOptionsVtbl* do
     GUID = LibC::GUID.new(0xf1bd1079_u32, 0x9f01_u16, 0x4bdc_u16, StaticArray[0x80_u8, 0x36_u8, 0xf0_u8, 0x9b_u8, 0x70_u8, 0x9_u8, 0x50_u8, 0x66_u8])
     def query_interface(this : IBackgroundCopyJobHttpOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1334,7 +1358,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("659cdeaf-489e-11d9-a9cd-000d56965251")]
   record IBitsPeerCacheRecord, lpVtbl : IBitsPeerCacheRecordVtbl* do
     GUID = LibC::GUID.new(0x659cdeaf_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IBitsPeerCacheRecord*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1383,7 +1406,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("659cdea4-489e-11d9-a9cd-000d56965251")]
   record IEnumBitsPeerCacheRecords, lpVtbl : IEnumBitsPeerCacheRecordsVtbl* do
     GUID = LibC::GUID.new(0x659cdea4_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IEnumBitsPeerCacheRecords*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1424,7 +1446,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("659cdea2-489e-11d9-a9cd-000d56965251")]
   record IBitsPeer, lpVtbl : IBitsPeerVtbl* do
     GUID = LibC::GUID.new(0x659cdea2_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IBitsPeer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1461,7 +1482,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("659cdea5-489e-11d9-a9cd-000d56965251")]
   record IEnumBitsPeers, lpVtbl : IEnumBitsPeersVtbl* do
     GUID = LibC::GUID.new(0x659cdea5_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IEnumBitsPeers*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1513,7 +1533,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("659cdead-489e-11d9-a9cd-000d56965251")]
   record IBitsPeerCacheAdministration, lpVtbl : IBitsPeerCacheAdministrationVtbl* do
     GUID = LibC::GUID.new(0x659cdead_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IBitsPeerCacheAdministration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1628,7 +1647,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("659cdeae-489e-11d9-a9cd-000d56965251")]
   record IBackgroundCopyJob4, lpVtbl : IBackgroundCopyJob4Vtbl* do
     GUID = LibC::GUID.new(0x659cdeae_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IBackgroundCopyJob4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1810,7 +1828,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("659cdeaa-489e-11d9-a9cd-000d56965251")]
   record IBackgroundCopyFile3, lpVtbl : IBackgroundCopyFile3Vtbl* do
     GUID = LibC::GUID.new(0x659cdeaa_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IBackgroundCopyFile3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1864,7 +1881,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("659cdeac-489e-11d9-a9cd-000d56965251")]
   record IBackgroundCopyCallback2, lpVtbl : IBackgroundCopyCallback2Vtbl* do
     GUID = LibC::GUID.new(0x659cdeac_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IBackgroundCopyCallback2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1904,7 +1920,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("9a2584c3-f7d2-457a-9a5e-22b67bffc7d2")]
   record IBitsTokenOptions, lpVtbl : IBitsTokenOptionsVtbl* do
     GUID = LibC::GUID.new(0x9a2584c3_u32, 0xf7d2_u16, 0x457a_u16, StaticArray[0x9a_u8, 0x5e_u8, 0x22_u8, 0xb6_u8, 0x7b_u8, 0xff_u8, 0xc7_u8, 0xd2_u8])
     def query_interface(this : IBitsTokenOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1952,7 +1967,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("ef7e0655-7888-4960-b0e5-730846e03492")]
   record IBackgroundCopyFile4, lpVtbl : IBackgroundCopyFile4Vtbl* do
     GUID = LibC::GUID.new(0xef7e0655_u32, 0x7888_u16, 0x4960_u16, StaticArray[0xb0_u8, 0xe5_u8, 0x73_u8, 0x8_u8, 0x46_u8, 0xe0_u8, 0x34_u8, 0x92_u8])
     def query_interface(this : IBackgroundCopyFile4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2057,7 +2071,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("e847030c-bbba-4657-af6d-484aa42bf1fe")]
   record IBackgroundCopyJob5, lpVtbl : IBackgroundCopyJob5Vtbl* do
     GUID = LibC::GUID.new(0xe847030c_u32, 0xbbba_u16, 0x4657_u16, StaticArray[0xaf_u8, 0x6d_u8, 0x48_u8, 0x4a_u8, 0xa4_u8, 0x2b_u8, 0xf1_u8, 0xfe_u8])
     def query_interface(this : IBackgroundCopyJob5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2248,7 +2261,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("85c1657f-dafc-40e8-8834-df18ea25717e")]
   record IBackgroundCopyFile5, lpVtbl : IBackgroundCopyFile5Vtbl* do
     GUID = LibC::GUID.new(0x85c1657f_u32, 0xdafc_u16, 0x40e8_u16, StaticArray[0x88_u8, 0x34_u8, 0xdf_u8, 0x18_u8, 0xea_u8, 0x25_u8, 0x71_u8, 0x7e_u8])
     def query_interface(this : IBackgroundCopyFile5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2312,7 +2324,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("98c97bd2-e32b-4ad8-a528-95fd8b16bd42")]
   record IBackgroundCopyCallback3, lpVtbl : IBackgroundCopyCallback3Vtbl* do
     GUID = LibC::GUID.new(0x98c97bd2_u32, 0xe32b_u16, 0x4ad8_u16, StaticArray[0xa5_u8, 0x28_u8, 0x95_u8, 0xfd_u8, 0x8b_u8, 0x16_u8, 0xbd_u8, 0x42_u8])
     def query_interface(this : IBackgroundCopyCallback3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2365,7 +2376,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("cf6784f7-d677-49fd-9368-cb47aee9d1ad")]
   record IBackgroundCopyFile6, lpVtbl : IBackgroundCopyFile6Vtbl* do
     GUID = LibC::GUID.new(0xcf6784f7_u32, 0xd677_u16, 0x49fd_u16, StaticArray[0x93_u8, 0x68_u8, 0xcb_u8, 0x47_u8, 0xae_u8, 0xe9_u8, 0xd1_u8, 0xad_u8])
     def query_interface(this : IBackgroundCopyFile6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2443,7 +2453,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("b591a192-a405-4fc3-8323-4c5c542578fc")]
   record IBackgroundCopyJobHttpOptions2, lpVtbl : IBackgroundCopyJobHttpOptions2Vtbl* do
     GUID = LibC::GUID.new(0xb591a192_u32, 0xa405_u16, 0x4fc3_u16, StaticArray[0x83_u8, 0x23_u8, 0x4c_u8, 0x5c_u8, 0x54_u8, 0x25_u8, 0x78_u8, 0xfc_u8])
     def query_interface(this : IBackgroundCopyJobHttpOptions2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2497,7 +2506,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("4cec0d02-def7-4158-813a-c32a46945ff7")]
   record IBackgroundCopyServerCertificateValidationCallback, lpVtbl : IBackgroundCopyServerCertificateValidationCallbackVtbl* do
     GUID = LibC::GUID.new(0x4cec0d02_u32, 0xdef7_u16, 0x4158_u16, StaticArray[0x81_u8, 0x3a_u8, 0xc3_u8, 0x2a_u8, 0x46_u8, 0x94_u8, 0x5f_u8, 0xf7_u8])
     def query_interface(this : IBackgroundCopyServerCertificateValidationCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2535,7 +2543,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("8a9263d3-fd4c-4eda-9b28-30132a4d4e3c")]
   record IBackgroundCopyJobHttpOptions3, lpVtbl : IBackgroundCopyJobHttpOptions3Vtbl* do
     GUID = LibC::GUID.new(0x8a9263d3_u32, 0xfd4c_u16, 0x4eda_u16, StaticArray[0x9b_u8, 0x28_u8, 0x30_u8, 0x13_u8, 0x2a_u8, 0x4d_u8, 0x4e_u8, 0x3c_u8])
     def query_interface(this : IBackgroundCopyJobHttpOptions3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2602,7 +2609,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("29cfbbf7-09e4-4b97-b0bc-f2287e3d8eb3")]
   record IBITSExtensionSetup, lpVtbl : IBITSExtensionSetupVtbl* do
     GUID = LibC::GUID.new(0x29cfbbf7_u32, 0x9e4_u16, 0x4b97_u16, StaticArray[0xb0_u8, 0xbc_u8, 0xf2_u8, 0x28_u8, 0x7e_u8, 0x3d_u8, 0x8e_u8, 0xb3_u8])
     def query_interface(this : IBITSExtensionSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2654,7 +2660,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("d5d2d542-5503-4e64-8b48-72ef91a32ee1")]
   record IBITSExtensionSetupFactory, lpVtbl : IBITSExtensionSetupFactoryVtbl* do
     GUID = LibC::GUID.new(0xd5d2d542_u32, 0x5503_u16, 0x4e64_u16, StaticArray[0x8b_u8, 0x48_u8, 0x72_u8, 0xef_u8, 0x91_u8, 0xa3_u8, 0x2e_u8, 0xe1_u8])
     def query_interface(this : IBITSExtensionSetupFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2700,7 +2705,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("59f5553c-2031-4629-bb18-2645a6970947")]
   record IBackgroundCopyJob1, lpVtbl : IBackgroundCopyJob1Vtbl* do
     GUID = LibC::GUID.new(0x59f5553c_u32, 0x2031_u16, 0x4629_u16, StaticArray[0xbb_u8, 0x18_u8, 0x26_u8, 0x45_u8, 0xa6_u8, 0x97_u8, 0x9_u8, 0x47_u8])
     def query_interface(this : IBackgroundCopyJob1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2752,7 +2756,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("8baeba9d-8f1c-42c4-b82c-09ae79980d25")]
   record IEnumBackgroundCopyJobs1, lpVtbl : IEnumBackgroundCopyJobs1Vtbl* do
     GUID = LibC::GUID.new(0x8baeba9d_u32, 0x8f1c_u16, 0x42c4_u16, StaticArray[0xb8_u8, 0x2c_u8, 0x9_u8, 0xae_u8, 0x79_u8, 0x98_u8, 0xd_u8, 0x25_u8])
     def query_interface(this : IEnumBackgroundCopyJobs1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2805,7 +2808,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("1ded80a7-53ea-424f-8a04-17fea9adc4f5")]
   record IBackgroundCopyGroup, lpVtbl : IBackgroundCopyGroupVtbl* do
     GUID = LibC::GUID.new(0x1ded80a7_u32, 0x53ea_u16, 0x424f_u16, StaticArray[0x8a_u8, 0x4_u8, 0x17_u8, 0xfe_u8, 0xa9_u8, 0xad_u8, 0xc4_u8, 0xf5_u8])
     def query_interface(this : IBackgroundCopyGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2878,7 +2880,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("d993e603-4aa4-47c5-8665-c20d39c2ba4f")]
   record IEnumBackgroundCopyGroups, lpVtbl : IEnumBackgroundCopyGroupsVtbl* do
     GUID = LibC::GUID.new(0xd993e603_u32, 0x4aa4_u16, 0x47c5_u16, StaticArray[0x86_u8, 0x65_u8, 0xc2_u8, 0xd_u8, 0x39_u8, 0xc2_u8, 0xba_u8, 0x4f_u8])
     def query_interface(this : IEnumBackgroundCopyGroups*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2919,7 +2920,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("084f6593-3800-4e08-9b59-99fa59addf82")]
   record IBackgroundCopyCallback1, lpVtbl : IBackgroundCopyCallback1Vtbl* do
     GUID = LibC::GUID.new(0x84f6593_u32, 0x3800_u16, 0x4e08_u16, StaticArray[0x9b_u8, 0x59_u8, 0x99_u8, 0xfa_u8, 0x59_u8, 0xad_u8, 0xdf_u8, 0x82_u8])
     def query_interface(this : IBackgroundCopyCallback1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2954,7 +2954,6 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  #@[Com("16f41c69-09f5-41d2-8cd8-3c08c47bc8a8")]
   record IBackgroundCopyQMgr, lpVtbl : IBackgroundCopyQMgrVtbl* do
     GUID = LibC::GUID.new(0x16f41c69_u32, 0x9f5_u16, 0x41d2_u16, StaticArray[0x8c_u8, 0xd8_u8, 0x3c_u8, 0x8_u8, 0xc4_u8, 0x7b_u8, 0xc8_u8, 0xa8_u8])
     def query_interface(this : IBackgroundCopyQMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

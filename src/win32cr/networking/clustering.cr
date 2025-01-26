@@ -7,703 +7,703 @@ require "./../graphics/gdi.cr"
 require "./../ui/windows_and_messaging.cr"
 
 module Win32cr::Networking::Clustering
-  alias PCLUSAPI_GET_NODE_CLUSTER_STATE = Proc(Win32cr::Foundation::PWSTR, UInt32*, UInt32)*
+  alias PCLUSAPI_GET_NODE_CLUSTER_STATE = Proc(Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
-  alias PCLUSAPI_OPEN_CLUSTER = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HCLUSTER_*)*
+  alias PCLUSAPI_OPEN_CLUSTER = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HCLUSTER_*)
 
-  alias PCLUSAPI_OPEN_CLUSTER_EX = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HCLUSTER_*)*
+  alias PCLUSAPI_OPEN_CLUSTER_EX = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HCLUSTER_*)
 
-  alias PCLUSAPI_CLOSE_CLUSTER = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::BOOL)*
+  alias PCLUSAPI_CLOSE_CLUSTER = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_SetClusterName = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_SetClusterName = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_INFORMATION = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt16*, UInt32*, Win32cr::Networking::Clustering::CLUSTERVERSIONINFO*, UInt32)*
+  alias PCLUSAPI_GET_CLUSTER_INFORMATION = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt16*, UInt32*, Win32cr::Networking::Clustering::CLUSTERVERSIONINFO*, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_QUORUM_RESOURCE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt16*, UInt32*, UInt16*, UInt32*, UInt32*, UInt32)*
+  alias PCLUSAPI_GET_CLUSTER_QUORUM_RESOURCE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt16*, UInt32*, UInt16*, UInt32*, UInt32*, UInt32)
 
-  alias PCLUSAPI_SET_CLUSTER_QUORUM_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, UInt32, UInt32)*
+  alias PCLUSAPI_SET_CLUSTER_QUORUM_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, UInt32, UInt32)
 
-  alias PCLUSAPI_BACKUP_CLUSTER_DATABASE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_BACKUP_CLUSTER_DATABASE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_RESTORE_CLUSTER_DATABASE = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_RESTORE_CLUSTER_DATABASE = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_SET_CLUSTER_NETWORK_PRIORITY_ORDER = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Win32cr::Networking::Clustering::HNETWORK_**, UInt32)*
+  alias PCLUSAPI_SET_CLUSTER_NETWORK_PRIORITY_ORDER = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Win32cr::Networking::Clustering::HNETWORK_**, UInt32)
 
-  alias PCLUSAPI_SET_CLUSTER_SERVICE_ACCOUNT_PASSWORD = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::CLUSTER_SET_PASSWORD_STATUS*, UInt32*, UInt32)*
+  alias PCLUSAPI_SET_CLUSTER_SERVICE_ACCOUNT_PASSWORD = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::CLUSTER_SET_PASSWORD_STATUS*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_CONTROL = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_CONTROL = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSTER_UPGRADE_PROGRESS_CALLBACK = Proc(Void*, Win32cr::Networking::Clustering::CLUSTER_UPGRADE_PHASE, Win32cr::Foundation::BOOL)*
+  alias PCLUSTER_UPGRADE_PROGRESS_CALLBACK = Proc(Void*, Win32cr::Networking::Clustering::CLUSTER_UPGRADE_PHASE, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CLUSTER_UPGRADE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::BOOL, Win32cr::Networking::Clustering::PCLUSTER_UPGRADE_PROGRESS_CALLBACK, Void*, UInt32)*
+  alias PCLUSAPI_CLUSTER_UPGRADE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::BOOL, Win32cr::Networking::Clustering::PCLUSTER_UPGRADE_PROGRESS_CALLBACK, Void*, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, UInt32, LibC::UIntPtrT, Win32cr::Networking::Clustering::HCHANGE_*)*
+  alias PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, UInt32, LibC::UIntPtrT, Win32cr::Networking::Clustering::HCHANGE_*)
 
-  alias PCLUSAPI_REGISTER_CLUSTER_NOTIFY_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, UInt32)*
+  alias PCLUSAPI_REGISTER_CLUSTER_NOTIFY_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, UInt32)
 
-  alias PCLUSAPI_GET_NOTIFY_EVENT_HANDLE_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Foundation::HANDLE*, UInt32)*
+  alias PCLUSAPI_GET_NOTIFY_EVENT_HANDLE_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Foundation::HANDLE*, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_NOTIFY_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE_*, LibC::UIntPtrT*, Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, UInt8*, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32, UInt32)*
+  alias PCLUSAPI_GET_CLUSTER_NOTIFY_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE_*, LibC::UIntPtrT*, Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, UInt8*, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, LibC::UIntPtrT, Win32cr::Networking::Clustering::HCHANGE_*)*
+  alias PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, LibC::UIntPtrT, Win32cr::Networking::Clustering::HCHANGE_*)
 
-  alias PCLUSAPI_REGISTER_CLUSTER_NOTIFY = Proc(Win32cr::Networking::Clustering::HCHANGE_*, UInt32, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, UInt32)*
+  alias PCLUSAPI_REGISTER_CLUSTER_NOTIFY = Proc(Win32cr::Networking::Clustering::HCHANGE_*, UInt32, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_NOTIFY = Proc(Win32cr::Networking::Clustering::HCHANGE_*, LibC::UIntPtrT*, UInt32*, UInt16*, UInt32*, UInt32, UInt32)*
+  alias PCLUSAPI_GET_CLUSTER_NOTIFY = Proc(Win32cr::Networking::Clustering::HCHANGE_*, LibC::UIntPtrT*, UInt32*, UInt16*, UInt32*, UInt32, UInt32)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_NOTIFY_PORT = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Foundation::BOOL)*
+  alias PCLUSAPI_CLOSE_CLUSTER_NOTIFY_PORT = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CLUSTER_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Win32cr::Networking::Clustering::HCLUSENUM_*)*
+  alias PCLUSAPI_CLUSTER_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Win32cr::Networking::Clustering::HCLUSENUM_*)
 
-  alias PCLUSAPI_CLUSTER_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HCLUSENUM_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HCLUSENUM_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSENUM_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSENUM_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Void*, Win32cr::Networking::Clustering::HCLUSENUMEX_*)*
+  alias PCLUSAPI_CLUSTER_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Void*, Win32cr::Networking::Clustering::HCLUSENUMEX_*)
 
-  alias PCLUSAPI_CLUSTER_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HCLUSENUMEX_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HCLUSENUMEX_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSENUMEX_*, UInt32, Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSENUMEX_*, UInt32, Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSENUMEX_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSENUMEX_*, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUPSET_*)*
+  alias PCLUSAPI_CREATE_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUPSET_*)
 
-  alias PCLUSAPI_OPEN_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUPSET_*)*
+  alias PCLUSAPI_OPEN_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUPSET_*)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Foundation::BOOL)*
+  alias PCLUSAPI_CLOSE_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_DELETE_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)*
+  alias PCLUSAPI_DELETE_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_ADD_GROUP_TO_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_ADD_GROUP_TO_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_GROUPSET_CONTROL = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_GROUP_GROUPSET_CONTROL = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_ADD_CLUSTER_GROUP_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)*
+  alias PCLUSAPI_ADD_CLUSTER_GROUP_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
 
-  alias PCLUSAPI_SET_GROUP_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_SET_GROUP_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)*
+  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
 
-  alias PCLUSAPI_ADD_CLUSTER_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)*
+  alias PCLUSAPI_ADD_CLUSTER_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)
 
-  alias PCLUSAPI_SET_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_SET_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)*
+  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)
 
-  alias PCLUSAPI_ADD_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)*
+  alias PCLUSAPI_ADD_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)
 
-  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)*
+  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_FROM_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HCLUSTER_*)*
+  alias PCLUSAPI_GET_CLUSTER_FROM_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HCLUSTER_*)
 
-  alias PCLUSAPI_ADD_CROSS_CLUSTER_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_ADD_CROSS_CLUSTER_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_REMOVE_CROSS_CLUSTER_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_REMOVE_CROSS_CLUSTER_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_AVAILABILITY_SET = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUSTER_AVAILABILITY_SET_CONFIG*, Win32cr::Networking::Clustering::HGROUPSET_*)*
+  alias PCLUSAPI_CREATE_CLUSTER_AVAILABILITY_SET = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUSTER_AVAILABILITY_SET_CONFIG*, Win32cr::Networking::Clustering::HGROUPSET_*)
 
-  alias PCLUSAPI_CLUSTER_CREATE_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUS_AFFINITY_RULE_TYPE, UInt32)*
+  alias PCLUSAPI_CLUSTER_CREATE_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUS_AFFINITY_RULE_TYPE, UInt32)
 
-  alias PCLUSAPI_CLUSTER_REMOVE_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_CLUSTER_REMOVE_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_ADD_GROUP_TO_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_ADD_GROUP_TO_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_AFFINITY_RULE_CONTROL = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_AFFINITY_RULE_CONTROL = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_OPEN_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE_*)*
+  alias PCLUSAPI_OPEN_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE_*)
 
-  alias PCLUSAPI_OPEN_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HNODE_*)*
+  alias PCLUSAPI_OPEN_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HNODE_*)
 
-  alias PCLUSAPI_OPEN_NODE_BY_ID = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Win32cr::Networking::Clustering::HNODE_*)*
+  alias PCLUSAPI_OPEN_NODE_BY_ID = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Win32cr::Networking::Clustering::HNODE_*)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Foundation::BOOL)*
+  alias PCLUSAPI_CLOSE_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_GET_CLUSTER_NODE_STATE = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::CLUSTER_NODE_STATE)*
+  alias PCLUSAPI_GET_CLUSTER_NODE_STATE = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::CLUSTER_NODE_STATE)
 
-  alias PCLUSAPI_GET_CLUSTER_NODE_ID = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt16*, UInt32*, UInt32)*
+  alias PCLUSAPI_GET_CLUSTER_NODE_ID = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt16*, UInt32*, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_FROM_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::HCLUSTER_*)*
+  alias PCLUSAPI_GET_CLUSTER_FROM_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::HCLUSTER_*)
 
-  alias PCLUSAPI_PAUSE_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32)*
+  alias PCLUSAPI_PAUSE_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32)
 
-  alias PCLUSAPI_RESUME_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32)*
+  alias PCLUSAPI_RESUME_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32)
 
-  alias PCLUSAPI_EVICT_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32)*
+  alias PCLUSAPI_EVICT_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NODE_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32, Win32cr::Networking::Clustering::HNODEENUM_*)*
+  alias PCLUSAPI_CLUSTER_NODE_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32, Win32cr::Networking::Clustering::HNODEENUM_*)
 
-  alias PCLUSAPI_CLUSTER_NODE_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, Win32cr::Networking::Clustering::HNODEENUMEX_*)*
+  alias PCLUSAPI_CLUSTER_NODE_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, Win32cr::Networking::Clustering::HNODEENUMEX_*)
 
-  alias PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HNODEENUMEX_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HNODEENUMEX_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NODE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HNODEENUMEX_*, UInt32, Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_NODE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HNODEENUMEX_*, UInt32, Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HNODEENUMEX_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HNODEENUMEX_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HNODEENUM_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HNODEENUM_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HNODEENUM_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HNODEENUM_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NODE_ENUM = Proc(Win32cr::Networking::Clustering::HNODEENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_NODE_ENUM = Proc(Win32cr::Networking::Clustering::HNODEENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)
 
-  alias PCLUSAPI_EVICT_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32, Win32cr::Foundation::HRESULT*, UInt32)*
+  alias PCLUSAPI_EVICT_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32, Win32cr::Foundation::HRESULT*, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_RESOURCE_TYPE_KEY = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::System::Registry::HKEY)*
+  alias PCLUSAPI_GET_CLUSTER_RESOURCE_TYPE_KEY = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::System::Registry::HKEY)
 
-  alias PCLUSAPI_CREATE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP_*)*
+  alias PCLUSAPI_CREATE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP_*)
 
-  alias PCLUSAPI_OPEN_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP_*)*
+  alias PCLUSAPI_OPEN_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP_*)
 
-  alias PCLUSAPI_OPEN_CLUSTER_GROUP_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HGROUP_*)*
+  alias PCLUSAPI_OPEN_CLUSTER_GROUP_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HGROUP_*)
 
-  alias PCLUSAPI_PAUSE_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Foundation::BOOL, UInt32, Win32cr::Networking::Clustering::HNODE_*, UInt32)*
+  alias PCLUSAPI_PAUSE_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Foundation::BOOL, UInt32, Win32cr::Networking::Clustering::HNODE_*, UInt32)
 
-  alias PCLUSAPI_RESUME_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::CLUSTER_NODE_RESUME_FAILBACK_TYPE, UInt32, UInt32)*
+  alias PCLUSAPI_RESUME_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::CLUSTER_NODE_RESUME_FAILBACK_TYPE, UInt32, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_GROUPEX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUSTER_CREATE_GROUP_INFO*, Win32cr::Networking::Clustering::HGROUP_*)*
+  alias PCLUSAPI_CREATE_CLUSTER_GROUPEX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUSTER_CREATE_GROUP_INFO*, Win32cr::Networking::Clustering::HGROUP_*)
 
-  alias PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Networking::Clustering::HGROUPENUMEX_*)*
+  alias PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Networking::Clustering::HGROUPENUMEX_*)
 
-  alias PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HGROUPENUMEX_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HGROUPENUMEX_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_ENUM_EX = Proc(Win32cr::Networking::Clustering::HGROUPENUMEX_*, UInt32, Win32cr::Networking::Clustering::CLUSTER_GROUP_ENUM_ITEM*, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_GROUP_ENUM_EX = Proc(Win32cr::Networking::Clustering::HGROUPENUMEX_*, UInt32, Win32cr::Networking::Clustering::CLUSTER_GROUP_ENUM_ITEM*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HGROUPENUMEX_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HGROUPENUMEX_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Networking::Clustering::HRESENUMEX_*)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Networking::Clustering::HRESENUMEX_*)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HRESENUMEX_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HRESENUMEX_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HRESENUMEX_*, UInt32, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_ENUM_ITEM*, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HRESENUMEX_*, UInt32, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_ENUM_ITEM*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HRESENUMEX_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HRESENUMEX_*, UInt32)
 
-  alias PCLUSAPI_RESTART_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32, UInt32)*
+  alias PCLUSAPI_RESTART_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32, UInt32)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Foundation::BOOL)*
+  alias PCLUSAPI_CLOSE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_GET_CLUSTER_FROM_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HCLUSTER_*)*
+  alias PCLUSAPI_GET_CLUSTER_FROM_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HCLUSTER_*)
 
-  alias PCLUSAPI_GET_CLUSTER_GROUP_STATE = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt16*, UInt32*, Win32cr::Networking::Clustering::CLUSTER_GROUP_STATE)*
+  alias PCLUSAPI_GET_CLUSTER_GROUP_STATE = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt16*, UInt32*, Win32cr::Networking::Clustering::CLUSTER_GROUP_STATE)
 
-  alias PCLUSAPI_SET_CLUSTER_GROUP_NAME = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_SET_CLUSTER_GROUP_NAME = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_SET_CLUSTER_GROUP_NODE_LIST = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32, Win32cr::Networking::Clustering::HNODE_**, UInt32)*
+  alias PCLUSAPI_SET_CLUSTER_GROUP_NODE_LIST = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32, Win32cr::Networking::Clustering::HNODE_**, UInt32)
 
-  alias PCLUSAPI_ONLINE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HNODE_*, UInt32)*
+  alias PCLUSAPI_ONLINE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HNODE_*, UInt32)
 
-  alias PCLUSAPI_MOVE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HNODE_*, UInt32)*
+  alias PCLUSAPI_MOVE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HNODE_*, UInt32)
 
-  alias PCLUSAPI_OFFLINE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32)*
+  alias PCLUSAPI_OFFLINE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32)
 
-  alias PCLUSAPI_DELETE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32)*
+  alias PCLUSAPI_DELETE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32)
 
-  alias PCLUSAPI_DESTROY_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32)*
+  alias PCLUSAPI_DESTROY_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32, Win32cr::Networking::Clustering::HGROUPENUM_*)*
+  alias PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32, Win32cr::Networking::Clustering::HGROUPENUM_*)
 
-  alias PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HGROUPENUM_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HGROUPENUM_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_ENUM = Proc(Win32cr::Networking::Clustering::HGROUPENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_GROUP_ENUM = Proc(Win32cr::Networking::Clustering::HGROUPENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HGROUPENUM_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HGROUPENUM_*, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)*
+  alias PCLUSAPI_CREATE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)
 
-  alias PCLUSAPI_OPEN_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*)*
+  alias PCLUSAPI_OPEN_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*)
 
-  alias PCLUSAPI_OPEN_CLUSTER_RESOURCE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HRESOURCE_*)*
+  alias PCLUSAPI_OPEN_CLUSTER_RESOURCE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HRESOURCE_*)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)*
+  alias PCLUSAPI_CLOSE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_GET_CLUSTER_FROM_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HCLUSTER_*)*
+  alias PCLUSAPI_GET_CLUSTER_FROM_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HCLUSTER_*)
 
-  alias PCLUSAPI_DELETE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)*
+  alias PCLUSAPI_DELETE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_RESOURCE_STATE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt16*, UInt32*, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE)*
+  alias PCLUSAPI_GET_CLUSTER_RESOURCE_STATE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt16*, UInt32*, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE)
 
-  alias PCLUSAPI_SET_CLUSTER_RESOURCE_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_SET_CLUSTER_RESOURCE_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_FAIL_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)*
+  alias PCLUSAPI_FAIL_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
 
-  alias PCLUSAPI_ONLINE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)*
+  alias PCLUSAPI_ONLINE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
 
-  alias PCLUSAPI_OFFLINE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)*
+  alias PCLUSAPI_OFFLINE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
 
-  alias PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)*
+  alias PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
 
-  alias PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HGROUP_*, UInt64, UInt32)*
+  alias PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HGROUP_*, UInt64, UInt32)
 
-  alias PCLUSAPI_ADD_CLUSTER_RESOURCE_NODE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32)*
+  alias PCLUSAPI_ADD_CLUSTER_RESOURCE_NODE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32)
 
-  alias PCLUSAPI_REMOVE_CLUSTER_RESOURCE_NODE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32)*
+  alias PCLUSAPI_REMOVE_CLUSTER_RESOURCE_NODE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32)
 
-  alias PCLUSAPI_ADD_CLUSTER_RESOURCE_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)*
+  alias PCLUSAPI_ADD_CLUSTER_RESOURCE_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
 
-  alias PCLUSAPI_REMOVE_CLUSTER_RESOURCE_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)*
+  alias PCLUSAPI_REMOVE_CLUSTER_RESOURCE_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
 
-  alias PCLUSAPI_SET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_SET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt32)*
+  alias PCLUSAPI_GET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt32)
 
-  alias PCLUSAPI_ADD_RESOURCE_TO_CLUSTER_SHARED_VOLUMES = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)*
+  alias PCLUSAPI_ADD_RESOURCE_TO_CLUSTER_SHARED_VOLUMES = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
 
-  alias PCLUSAPI_REMOVE_RESOURCE_FROM_CLUSTER_SHARED_VOLUMES = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)*
+  alias PCLUSAPI_REMOVE_RESOURCE_FROM_CLUSTER_SHARED_VOLUMES = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
 
-  alias PCLUSAPI_IS_FILE_ON_CLUSTER_SHARED_VOLUME = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL*, UInt32)*
+  alias PCLUSAPI_IS_FILE_ON_CLUSTER_SHARED_VOLUME = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL*, UInt32)
 
-  alias PCLUSAPI_SHARED_VOLUME_SET_SNAPSHOT_STATE = Proc(LibC::GUID, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE, UInt32)*
+  alias PCLUSAPI_SHARED_VOLUME_SET_SNAPSHOT_STATE = Proc(LibC::GUID, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE, UInt32)
 
-  alias PCLUSAPI_CAN_RESOURCE_BE_DEPENDENT = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)*
+  alias PCLUSAPI_CAN_RESOURCE_BE_DEPENDENT = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_CONTROL = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_CONTROL = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_CONTROL = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_GROUP_CONTROL = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NODE_CONTROL = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_NODE_CONTROL = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_RESOURCE_NETWORK_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PCLUSAPI_GET_CLUSTER_RESOURCE_NETWORK_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32, Win32cr::Networking::Clustering::HRESENUM_*)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32, Win32cr::Networking::Clustering::HRESENUM_*)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HRESENUM_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HRESENUM_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_ENUM = Proc(Win32cr::Networking::Clustering::HRESENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_ENUM = Proc(Win32cr::Networking::Clustering::HRESENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HRESENUM_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HRESENUM_*, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_RESOURCE_TYPE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32)*
+  alias PCLUSAPI_CREATE_CLUSTER_RESOURCE_TYPE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32)
 
-  alias PCLUSAPI_DELETE_CLUSTER_RESOURCE_TYPE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_DELETE_CLUSTER_RESOURCE_TYPE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESTYPEENUM_*)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESTYPEENUM_*)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HRESTYPEENUM_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HRESTYPEENUM_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_ENUM = Proc(Win32cr::Networking::Clustering::HRESTYPEENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_ENUM = Proc(Win32cr::Networking::Clustering::HRESTYPEENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HRESTYPEENUM_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HRESTYPEENUM_*, UInt32)
 
-  alias PCLUSAPI_OPEN_CLUSTER_NETWORK = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNETWORK_*)*
+  alias PCLUSAPI_OPEN_CLUSTER_NETWORK = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNETWORK_*)
 
-  alias PCLUSAPI_OPEN_CLUSTER_NETWORK_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HNETWORK_*)*
+  alias PCLUSAPI_OPEN_CLUSTER_NETWORK_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HNETWORK_*)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_NETWORK = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Foundation::BOOL)*
+  alias PCLUSAPI_CLOSE_CLUSTER_NETWORK = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_GET_CLUSTER_FROM_NETWORK = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Networking::Clustering::HCLUSTER_*)*
+  alias PCLUSAPI_GET_CLUSTER_FROM_NETWORK = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Networking::Clustering::HCLUSTER_*)
 
-  alias PCLUSAPI_CLUSTER_NETWORK_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HNETWORK_*, UInt32, Win32cr::Networking::Clustering::HNETWORKENUM_*)*
+  alias PCLUSAPI_CLUSTER_NETWORK_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HNETWORK_*, UInt32, Win32cr::Networking::Clustering::HNETWORKENUM_*)
 
-  alias PCLUSAPI_CLUSTER_NETWORK_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HNETWORKENUM_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_NETWORK_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HNETWORKENUM_*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NETWORK_ENUM = Proc(Win32cr::Networking::Clustering::HNETWORKENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_NETWORK_ENUM = Proc(Win32cr::Networking::Clustering::HNETWORKENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NETWORK_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HNETWORKENUM_*, UInt32)*
+  alias PCLUSAPI_CLUSTER_NETWORK_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HNETWORKENUM_*, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_NETWORK_STATE = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Networking::Clustering::CLUSTER_NETWORK_STATE)*
+  alias PCLUSAPI_GET_CLUSTER_NETWORK_STATE = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Networking::Clustering::CLUSTER_NETWORK_STATE)
 
-  alias PCLUSAPI_SET_CLUSTER_NETWORK_NAME = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_SET_CLUSTER_NETWORK_NAME = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_NETWORK_ID = Proc(Win32cr::Networking::Clustering::HNETWORK_*, UInt16*, UInt32*, UInt32)*
+  alias PCLUSAPI_GET_CLUSTER_NETWORK_ID = Proc(Win32cr::Networking::Clustering::HNETWORK_*, UInt16*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NETWORK_CONTROL = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_NETWORK_CONTROL = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_OPEN_CLUSTER_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNETINTERFACE_*)*
+  alias PCLUSAPI_OPEN_CLUSTER_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNETINTERFACE_*)
 
-  alias PCLUSAPI_OPEN_CLUSTER_NETINTERFACE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HNETINTERFACE_*)*
+  alias PCLUSAPI_OPEN_CLUSTER_NETINTERFACE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HNETINTERFACE_*)
 
-  alias PCLUSAPI_GET_CLUSTER_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt16*, UInt32*, UInt32)*
+  alias PCLUSAPI_GET_CLUSTER_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt16*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, Win32cr::Foundation::BOOL)*
+  alias PCLUSAPI_CLOSE_CLUSTER_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_GET_CLUSTER_FROM_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, Win32cr::Networking::Clustering::HCLUSTER_*)*
+  alias PCLUSAPI_GET_CLUSTER_FROM_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, Win32cr::Networking::Clustering::HCLUSTER_*)
 
-  alias PCLUSAPI_GET_CLUSTER_NET_INTERFACE_STATE = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, Win32cr::Networking::Clustering::CLUSTER_NETINTERFACE_STATE)*
+  alias PCLUSAPI_GET_CLUSTER_NET_INTERFACE_STATE = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, Win32cr::Networking::Clustering::CLUSTER_NETINTERFACE_STATE)
 
-  alias PCLUSAPI_CLUSTER_NET_INTERFACE_CONTROL = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_NET_INTERFACE_CONTROL = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_KEY = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Win32cr::System::Registry::HKEY)*
+  alias PCLUSAPI_GET_CLUSTER_KEY = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Win32cr::System::Registry::HKEY)
 
-  alias PCLUSAPI_GET_CLUSTER_GROUP_KEY = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32, Win32cr::System::Registry::HKEY)*
+  alias PCLUSAPI_GET_CLUSTER_GROUP_KEY = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32, Win32cr::System::Registry::HKEY)
 
-  alias PCLUSAPI_GET_CLUSTER_RESOURCE_KEY = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32, Win32cr::System::Registry::HKEY)*
+  alias PCLUSAPI_GET_CLUSTER_RESOURCE_KEY = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32, Win32cr::System::Registry::HKEY)
 
-  alias PCLUSAPI_GET_CLUSTER_NODE_KEY = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32, Win32cr::System::Registry::HKEY)*
+  alias PCLUSAPI_GET_CLUSTER_NODE_KEY = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32, Win32cr::System::Registry::HKEY)
 
-  alias PCLUSAPI_GET_CLUSTER_NETWORK_KEY = Proc(Win32cr::Networking::Clustering::HNETWORK_*, UInt32, Win32cr::System::Registry::HKEY)*
+  alias PCLUSAPI_GET_CLUSTER_NETWORK_KEY = Proc(Win32cr::Networking::Clustering::HNETWORK_*, UInt32, Win32cr::System::Registry::HKEY)
 
-  alias PCLUSAPI_GET_CLUSTER_NET_INTERFACE_KEY = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, UInt32, Win32cr::System::Registry::HKEY)*
+  alias PCLUSAPI_GET_CLUSTER_NET_INTERFACE_KEY = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, UInt32, Win32cr::System::Registry::HKEY)
 
-  alias PCLUSAPI_CLUSTER_REG_CREATE_KEY = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Security::SECURITY_ATTRIBUTES*, Win32cr::System::Registry::HKEY*, UInt32*, Int32)*
+  alias PCLUSAPI_CLUSTER_REG_CREATE_KEY = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Security::SECURITY_ATTRIBUTES*, Win32cr::System::Registry::HKEY*, UInt32*, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_OPEN_KEY = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, Win32cr::System::Registry::HKEY*, Int32)*
+  alias PCLUSAPI_CLUSTER_REG_OPEN_KEY = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, Win32cr::System::Registry::HKEY*, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_DELETE_KEY = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Int32)*
+  alias PCLUSAPI_CLUSTER_REG_DELETE_KEY = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_CLOSE_KEY = Proc(Win32cr::System::Registry::HKEY, Int32)*
+  alias PCLUSAPI_CLUSTER_REG_CLOSE_KEY = Proc(Win32cr::System::Registry::HKEY, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_ENUM_KEY = Proc(Win32cr::System::Registry::HKEY, UInt32, UInt16*, UInt32*, Win32cr::Foundation::FILETIME*, Int32)*
+  alias PCLUSAPI_CLUSTER_REG_ENUM_KEY = Proc(Win32cr::System::Registry::HKEY, UInt32, UInt16*, UInt32*, Win32cr::Foundation::FILETIME*, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_SET_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, UInt8*, UInt32, UInt32)*
+  alias PCLUSAPI_CLUSTER_REG_SET_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, UInt8*, UInt32, UInt32)
 
-  alias PCLUSAPI_CLUSTER_REG_DELETE_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSAPI_CLUSTER_REG_DELETE_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_REG_QUERY_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32*, UInt8*, UInt32*, Int32)*
+  alias PCLUSAPI_CLUSTER_REG_QUERY_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32*, UInt8*, UInt32*, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_ENUM_VALUE = Proc(Win32cr::System::Registry::HKEY, UInt32, UInt16*, UInt32*, UInt32*, UInt8*, UInt32*, UInt32)*
+  alias PCLUSAPI_CLUSTER_REG_ENUM_VALUE = Proc(Win32cr::System::Registry::HKEY, UInt32, UInt16*, UInt32*, UInt32*, UInt8*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_REG_QUERY_INFO_KEY = Proc(Win32cr::System::Registry::HKEY, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::FILETIME*, Int32)*
+  alias PCLUSAPI_CLUSTER_REG_QUERY_INFO_KEY = Proc(Win32cr::System::Registry::HKEY, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::FILETIME*, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_GET_KEY_SECURITY = Proc(Win32cr::System::Registry::HKEY, UInt32, Win32cr::Security::PSECURITY_DESCRIPTOR, UInt32*, Int32)*
+  alias PCLUSAPI_CLUSTER_REG_GET_KEY_SECURITY = Proc(Win32cr::System::Registry::HKEY, UInt32, Win32cr::Security::PSECURITY_DESCRIPTOR, UInt32*, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_SET_KEY_SECURITY = Proc(Win32cr::System::Registry::HKEY, UInt32, Win32cr::Security::PSECURITY_DESCRIPTOR, Int32)*
+  alias PCLUSAPI_CLUSTER_REG_SET_KEY_SECURITY = Proc(Win32cr::System::Registry::HKEY, UInt32, Win32cr::Security::PSECURITY_DESCRIPTOR, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_SYNC_DATABASE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Int32)*
+  alias PCLUSAPI_CLUSTER_REG_SYNC_DATABASE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_CREATE_BATCH = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::HREGBATCH_**, Int32)*
+  alias PCLUSAPI_CLUSTER_REG_CREATE_BATCH = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::HREGBATCH_**, Int32)
 
-  alias PCLUSTER_REG_BATCH_ADD_COMMAND = Proc(Win32cr::Networking::Clustering::HREGBATCH_*, Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND, Win32cr::Foundation::PWSTR, UInt32, Void*, UInt32, Int32)*
+  alias PCLUSTER_REG_BATCH_ADD_COMMAND = Proc(Win32cr::Networking::Clustering::HREGBATCH_*, Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND, Win32cr::Foundation::PWSTR, UInt32, Void*, UInt32, Int32)
 
-  alias PCLUSTER_REG_CLOSE_BATCH = Proc(Win32cr::Networking::Clustering::HREGBATCH_*, Win32cr::Foundation::BOOL, Int32*, Int32)*
+  alias PCLUSTER_REG_CLOSE_BATCH = Proc(Win32cr::Networking::Clustering::HREGBATCH_*, Win32cr::Foundation::BOOL, Int32*, Int32)
 
-  alias PCLUSTER_REG_BATCH_READ_COMMAND = Proc(Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*, Win32cr::Networking::Clustering::CLUSTER_BATCH_COMMAND*, Int32)*
+  alias PCLUSTER_REG_BATCH_READ_COMMAND = Proc(Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*, Win32cr::Networking::Clustering::CLUSTER_BATCH_COMMAND*, Int32)
 
-  alias PCLUSTER_REG_BATCH_CLOSE_NOTIFICATION = Proc(Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*, Int32)*
+  alias PCLUSTER_REG_BATCH_CLOSE_NOTIFICATION = Proc(Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*, Int32)
 
-  alias PCLUSTER_REG_CREATE_BATCH_NOTIFY_PORT = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::HREGBATCHPORT_**, Int32)*
+  alias PCLUSTER_REG_CREATE_BATCH_NOTIFY_PORT = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::HREGBATCHPORT_**, Int32)
 
-  alias PCLUSTER_REG_CLOSE_BATCH_NOTIFY_PORT = Proc(Win32cr::Networking::Clustering::HREGBATCHPORT_*, Int32)*
+  alias PCLUSTER_REG_CLOSE_BATCH_NOTIFY_PORT = Proc(Win32cr::Networking::Clustering::HREGBATCHPORT_*, Int32)
 
-  alias PCLUSTER_REG_GET_BATCH_NOTIFICATION = Proc(Win32cr::Networking::Clustering::HREGBATCHPORT_*, Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_**, Int32)*
+  alias PCLUSTER_REG_GET_BATCH_NOTIFICATION = Proc(Win32cr::Networking::Clustering::HREGBATCHPORT_*, Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_**, Int32)
 
-  alias PCLUSTER_REG_CREATE_READ_BATCH = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::HREGREADBATCH_**, Int32)*
+  alias PCLUSTER_REG_CREATE_READ_BATCH = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::HREGREADBATCH_**, Int32)
 
-  alias PCLUSTER_REG_READ_BATCH_ADD_COMMAND = Proc(Win32cr::Networking::Clustering::HREGREADBATCH_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Int32)*
+  alias PCLUSTER_REG_READ_BATCH_ADD_COMMAND = Proc(Win32cr::Networking::Clustering::HREGREADBATCH_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Int32)
 
-  alias PCLUSTER_REG_CLOSE_READ_BATCH = Proc(Win32cr::Networking::Clustering::HREGREADBATCH_*, Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**, Int32)*
+  alias PCLUSTER_REG_CLOSE_READ_BATCH = Proc(Win32cr::Networking::Clustering::HREGREADBATCH_*, Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**, Int32)
 
-  alias PCLUSTER_REG_CLOSE_READ_BATCH_EX = Proc(Win32cr::Networking::Clustering::HREGREADBATCH_*, UInt32, Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**, Int32)*
+  alias PCLUSTER_REG_CLOSE_READ_BATCH_EX = Proc(Win32cr::Networking::Clustering::HREGREADBATCH_*, UInt32, Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**, Int32)
 
-  alias PCLUSTER_REG_READ_BATCH_REPLY_NEXT_COMMAND = Proc(Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*, Win32cr::Networking::Clustering::CLUSTER_READ_BATCH_COMMAND*, Int32)*
+  alias PCLUSTER_REG_READ_BATCH_REPLY_NEXT_COMMAND = Proc(Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*, Win32cr::Networking::Clustering::CLUSTER_READ_BATCH_COMMAND*, Int32)
 
-  alias PCLUSTER_REG_CLOSE_READ_BATCH_REPLY = Proc(Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*, Int32)*
+  alias PCLUSTER_REG_CLOSE_READ_BATCH_REPLY = Proc(Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*, Int32)
 
-  alias PCLUSTER_SET_ACCOUNT_ACCESS = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32)*
+  alias PCLUSTER_SET_ACCOUNT_ACCESS = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32)
 
-  alias PCLUSTER_SETUP_PROGRESS_CALLBACK = Proc(Void*, Win32cr::Networking::Clustering::CLUSTER_SETUP_PHASE, Win32cr::Networking::Clustering::CLUSTER_SETUP_PHASE_TYPE, Win32cr::Networking::Clustering::CLUSTER_SETUP_PHASE_SEVERITY, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL)*
+  alias PCLUSTER_SETUP_PROGRESS_CALLBACK = Proc(Void*, Win32cr::Networking::Clustering::CLUSTER_SETUP_PHASE, Win32cr::Networking::Clustering::CLUSTER_SETUP_PHASE_TYPE, Win32cr::Networking::Clustering::CLUSTER_SETUP_PHASE_SEVERITY, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CREATE_CLUSTER = Proc(Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HCLUSTER_*)*
+  alias PCLUSAPI_CREATE_CLUSTER = Proc(Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HCLUSTER_*)
 
-  alias PCLUSAPI_CREATE_CLUSTER_CNOLESS = Proc(Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HCLUSTER_*)*
+  alias PCLUSAPI_CREATE_CLUSTER_CNOLESS = Proc(Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HCLUSTER_*)
 
-  alias PCLUSAPI_CREATE_CLUSTER_NAME_ACCOUNT = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::CREATE_CLUSTER_NAME_ACCOUNT*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, UInt32)*
+  alias PCLUSAPI_CREATE_CLUSTER_NAME_ACCOUNT = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::CREATE_CLUSTER_NAME_ACCOUNT*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, UInt32)
 
-  alias PCLUSAPI_REMOVE_CLUSTER_NAME_ACCOUNT = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32)*
+  alias PCLUSAPI_REMOVE_CLUSTER_NAME_ACCOUNT = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32)
 
-  alias PCLUSAPI_ADD_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HNODE_*)*
+  alias PCLUSAPI_ADD_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HNODE_*)
 
-  alias PCLUSAPI_ADD_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HNODE_*)*
+  alias PCLUSAPI_ADD_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HNODE_*)
 
-  alias PCLUSAPI_DESTROY_CLUSTER = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Foundation::BOOL, UInt32)*
+  alias PCLUSAPI_DESTROY_CLUSTER = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Foundation::BOOL, UInt32)
 
-  alias PSET_RESOURCE_STATUS_ROUTINE_EX = Proc(LibC::IntPtrT, Win32cr::Networking::Clustering::RESOURCE_STATUS_EX*, UInt32)*
+  alias PSET_RESOURCE_STATUS_ROUTINE_EX = Proc(LibC::IntPtrT, Win32cr::Networking::Clustering::RESOURCE_STATUS_EX*, UInt32)
 
-  alias PSET_RESOURCE_STATUS_ROUTINE = Proc(LibC::IntPtrT, Win32cr::Networking::Clustering::RESOURCE_STATUS*, UInt32)*
+  alias PSET_RESOURCE_STATUS_ROUTINE = Proc(LibC::IntPtrT, Win32cr::Networking::Clustering::RESOURCE_STATUS*, UInt32)
 
-  alias PQUORUM_RESOURCE_LOST = Proc(LibC::IntPtrT, Void)*
+  alias PQUORUM_RESOURCE_LOST = Proc(LibC::IntPtrT, Void)
 
-  alias PLOG_EVENT_ROUTINE = Proc(LibC::IntPtrT, Win32cr::Networking::Clustering::LOG_LEVEL, Win32cr::Foundation::PWSTR, Void)*
+  alias PLOG_EVENT_ROUTINE = Proc(LibC::IntPtrT, Win32cr::Networking::Clustering::LOG_LEVEL, Win32cr::Foundation::PWSTR, Void)
 
-  alias POPEN_ROUTINE = Proc(Win32cr::Foundation::PWSTR, Win32cr::System::Registry::HKEY, LibC::IntPtrT, Void*)*
+  alias POPEN_ROUTINE = Proc(Win32cr::Foundation::PWSTR, Win32cr::System::Registry::HKEY, LibC::IntPtrT, Void*)
 
-  alias PCLOSE_ROUTINE = Proc(Void*, Void)*
+  alias PCLOSE_ROUTINE = Proc(Void*, Void)
 
-  alias PONLINE_ROUTINE = Proc(Void*, Win32cr::Foundation::HANDLE*, UInt32)*
+  alias PONLINE_ROUTINE = Proc(Void*, Win32cr::Foundation::HANDLE*, UInt32)
 
-  alias POFFLINE_ROUTINE = Proc(Void*, UInt32)*
+  alias POFFLINE_ROUTINE = Proc(Void*, UInt32)
 
-  alias PTERMINATE_ROUTINE = Proc(Void*, Void)*
+  alias PTERMINATE_ROUTINE = Proc(Void*, Void)
 
-  alias PIS_ALIVE_ROUTINE = Proc(Void*, Win32cr::Foundation::BOOL)*
+  alias PIS_ALIVE_ROUTINE = Proc(Void*, Win32cr::Foundation::BOOL)
 
-  alias PLOOKS_ALIVE_ROUTINE = Proc(Void*, Win32cr::Foundation::BOOL)*
+  alias PLOOKS_ALIVE_ROUTINE = Proc(Void*, Win32cr::Foundation::BOOL)
 
-  alias PARBITRATE_ROUTINE = Proc(Void*, Win32cr::Networking::Clustering::PQUORUM_RESOURCE_LOST, UInt32)*
+  alias PARBITRATE_ROUTINE = Proc(Void*, Win32cr::Networking::Clustering::PQUORUM_RESOURCE_LOST, UInt32)
 
-  alias PRELEASE_ROUTINE = Proc(Void*, UInt32)*
+  alias PRELEASE_ROUTINE = Proc(Void*, UInt32)
 
-  alias PRESOURCE_CONTROL_ROUTINE = Proc(Void*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)*
+  alias PRESOURCE_CONTROL_ROUTINE = Proc(Void*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PRESOURCE_TYPE_CONTROL_ROUTINE = Proc(Win32cr::Foundation::PWSTR, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)*
+  alias PRESOURCE_TYPE_CONTROL_ROUTINE = Proc(Win32cr::Foundation::PWSTR, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias POPEN_V2_ROUTINE = Proc(Win32cr::Foundation::PWSTR, Win32cr::System::Registry::HKEY, LibC::IntPtrT, UInt32, Void*)*
+  alias POPEN_V2_ROUTINE = Proc(Win32cr::Foundation::PWSTR, Win32cr::System::Registry::HKEY, LibC::IntPtrT, UInt32, Void*)
 
-  alias PONLINE_V2_ROUTINE = Proc(Void*, Win32cr::Foundation::HANDLE*, UInt32, UInt8*, UInt32, UInt32, UInt32)*
+  alias PONLINE_V2_ROUTINE = Proc(Void*, Win32cr::Foundation::HANDLE*, UInt32, UInt8*, UInt32, UInt32, UInt32)
 
-  alias POFFLINE_V2_ROUTINE = Proc(Void*, Win32cr::Foundation::PWSTR, UInt32, UInt8*, UInt32, UInt32, UInt32)*
+  alias POFFLINE_V2_ROUTINE = Proc(Void*, Win32cr::Foundation::PWSTR, UInt32, UInt8*, UInt32, UInt32, UInt32)
 
-  alias PCANCEL_ROUTINE = Proc(Void*, UInt32, UInt32)*
+  alias PCANCEL_ROUTINE = Proc(Void*, UInt32, UInt32)
 
-  alias PBEGIN_RESCALL_ROUTINE = Proc(Void*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Int64, Win32cr::Foundation::BOOL*, UInt32)*
+  alias PBEGIN_RESCALL_ROUTINE = Proc(Void*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Int64, Win32cr::Foundation::BOOL*, UInt32)
 
-  alias PBEGIN_RESTYPECALL_ROUTINE = Proc(Win32cr::Foundation::PWSTR, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Int64, Win32cr::Foundation::BOOL*, UInt32)*
+  alias PBEGIN_RESTYPECALL_ROUTINE = Proc(Win32cr::Foundation::PWSTR, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Int64, Win32cr::Foundation::BOOL*, UInt32)
 
-  alias PBEGIN_RESCALL_AS_USER_ROUTINE = Proc(Void*, Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Int64, Win32cr::Foundation::BOOL*, UInt32)*
+  alias PBEGIN_RESCALL_AS_USER_ROUTINE = Proc(Void*, Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Int64, Win32cr::Foundation::BOOL*, UInt32)
 
-  alias PBEGIN_RESTYPECALL_AS_USER_ROUTINE = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Int64, Win32cr::Foundation::BOOL*, UInt32)*
+  alias PBEGIN_RESTYPECALL_AS_USER_ROUTINE = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Int64, Win32cr::Foundation::BOOL*, UInt32)
 
-  alias PSTARTUP_ROUTINE = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Networking::Clustering::PSET_RESOURCE_STATUS_ROUTINE, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, Win32cr::Networking::Clustering::CLRES_FUNCTION_TABLE**, UInt32)*
+  alias PSTARTUP_ROUTINE = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Networking::Clustering::PSET_RESOURCE_STATUS_ROUTINE, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, Win32cr::Networking::Clustering::CLRES_FUNCTION_TABLE**, UInt32)
 
-  alias PSET_RESOURCE_LOCKED_MODE_ROUTINE = Proc(LibC::IntPtrT, Win32cr::Foundation::BOOL, UInt32, UInt32)*
+  alias PSET_RESOURCE_LOCKED_MODE_ROUTINE = Proc(LibC::IntPtrT, Win32cr::Foundation::BOOL, UInt32, UInt32)
 
-  alias PSIGNAL_FAILURE_ROUTINE = Proc(LibC::IntPtrT, Win32cr::Networking::Clustering::FAILURE_TYPE, UInt32, UInt32)*
+  alias PSIGNAL_FAILURE_ROUTINE = Proc(LibC::IntPtrT, Win32cr::Networking::Clustering::FAILURE_TYPE, UInt32, UInt32)
 
-  alias PSET_RESOURCE_INMEMORY_NODELOCAL_PROPERTIES_ROUTINE = Proc(LibC::IntPtrT, UInt8*, UInt32, UInt32)*
+  alias PSET_RESOURCE_INMEMORY_NODELOCAL_PROPERTIES_ROUTINE = Proc(LibC::IntPtrT, UInt8*, UInt32, UInt32)
 
-  alias PEND_CONTROL_CALL = Proc(Int64, UInt32, UInt32)*
+  alias PEND_CONTROL_CALL = Proc(Int64, UInt32, UInt32)
 
-  alias PEND_TYPE_CONTROL_CALL = Proc(Int64, UInt32, UInt32)*
+  alias PEND_TYPE_CONTROL_CALL = Proc(Int64, UInt32, UInt32)
 
-  alias PEXTEND_RES_CONTROL_CALL = Proc(Int64, UInt32, UInt32)*
+  alias PEXTEND_RES_CONTROL_CALL = Proc(Int64, UInt32, UInt32)
 
-  alias PEXTEND_RES_TYPE_CONTROL_CALL = Proc(Int64, UInt32, UInt32)*
+  alias PEXTEND_RES_TYPE_CONTROL_CALL = Proc(Int64, UInt32, UInt32)
 
-  alias PRAISE_RES_TYPE_NOTIFICATION = Proc(Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32)*
+  alias PRAISE_RES_TYPE_NOTIFICATION = Proc(Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32)
 
-  alias PCHANGE_RESOURCE_PROCESS_FOR_DUMPS = Proc(LibC::IntPtrT, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, UInt32)*
+  alias PCHANGE_RESOURCE_PROCESS_FOR_DUMPS = Proc(LibC::IntPtrT, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, UInt32)
 
-  alias PCHANGE_RES_TYPE_PROCESS_FOR_DUMPS = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, UInt32)*
+  alias PCHANGE_RES_TYPE_PROCESS_FOR_DUMPS = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, UInt32)
 
-  alias PSET_INTERNAL_STATE = Proc(LibC::IntPtrT, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_APPLICATION_STATE, Win32cr::Foundation::BOOL, UInt32)*
+  alias PSET_INTERNAL_STATE = Proc(LibC::IntPtrT, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_APPLICATION_STATE, Win32cr::Foundation::BOOL, UInt32)
 
-  alias PSET_RESOURCE_LOCKED_MODE_EX_ROUTINE = Proc(LibC::IntPtrT, Win32cr::Foundation::BOOL, UInt32, UInt32, UInt32)*
+  alias PSET_RESOURCE_LOCKED_MODE_EX_ROUTINE = Proc(LibC::IntPtrT, Win32cr::Foundation::BOOL, UInt32, UInt32, UInt32)
 
-  alias PREQUEST_DUMP_ROUTINE = Proc(LibC::IntPtrT, Win32cr::Foundation::BOOL, UInt32, UInt32)*
+  alias PREQUEST_DUMP_ROUTINE = Proc(LibC::IntPtrT, Win32cr::Foundation::BOOL, UInt32, UInt32)
 
-  alias PSTARTUP_EX_ROUTINE = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Networking::Clustering::CLRES_CALLBACK_FUNCTION_TABLE*, Win32cr::Networking::Clustering::CLRES_FUNCTION_TABLE**, UInt32)*
+  alias PSTARTUP_EX_ROUTINE = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Networking::Clustering::CLRES_CALLBACK_FUNCTION_TABLE*, Win32cr::Networking::Clustering::CLRES_FUNCTION_TABLE**, UInt32)
 
-  alias PRESUTIL_START_RESOURCE_SERVICE = Proc(Win32cr::Foundation::PWSTR, LibC::IntPtrT*, UInt32)*
+  alias PRESUTIL_START_RESOURCE_SERVICE = Proc(Win32cr::Foundation::PWSTR, LibC::IntPtrT*, UInt32)
 
-  alias PRESUTIL_VERIFY_RESOURCE_SERVICE = Proc(Win32cr::Foundation::PWSTR, UInt32)*
+  alias PRESUTIL_VERIFY_RESOURCE_SERVICE = Proc(Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PRESUTIL_STOP_RESOURCE_SERVICE = Proc(Win32cr::Foundation::PWSTR, UInt32)*
+  alias PRESUTIL_STOP_RESOURCE_SERVICE = Proc(Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PRESUTIL_VERIFY_SERVICE = Proc(Win32cr::Security::SC_HANDLE, UInt32)*
+  alias PRESUTIL_VERIFY_SERVICE = Proc(Win32cr::Security::SC_HANDLE, UInt32)
 
-  alias PRESUTIL_STOP_SERVICE = Proc(Win32cr::Security::SC_HANDLE, UInt32)*
+  alias PRESUTIL_STOP_SERVICE = Proc(Win32cr::Security::SC_HANDLE, UInt32)
 
-  alias PRESUTIL_CREATE_DIRECTORY_TREE = Proc(Win32cr::Foundation::PWSTR, UInt32)*
+  alias PRESUTIL_CREATE_DIRECTORY_TREE = Proc(Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PRESUTIL_IS_PATH_VALID = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias PRESUTIL_IS_PATH_VALID = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias PRESUTIL_ENUM_PROPERTIES = Proc(Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, UInt32*, UInt32)*
+  alias PRESUTIL_ENUM_PROPERTIES = Proc(Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, UInt32*, UInt32)
 
-  alias PRESUTIL_ENUM_PRIVATE_PROPERTIES = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, UInt32*, UInt32*, UInt32)*
+  alias PRESUTIL_ENUM_PRIVATE_PROPERTIES = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, UInt32*, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_PROPERTIES = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt32, UInt32*, UInt32*, UInt32)*
+  alias PRESUTIL_GET_PROPERTIES = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt32, UInt32*, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_ALL_PROPERTIES = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt32, UInt32*, UInt32*, UInt32)*
+  alias PRESUTIL_GET_ALL_PROPERTIES = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt32, UInt32*, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_PRIVATE_PROPERTIES = Proc(Win32cr::System::Registry::HKEY, Void*, UInt32, UInt32*, UInt32*, UInt32)*
+  alias PRESUTIL_GET_PRIVATE_PROPERTIES = Proc(Win32cr::System::Registry::HKEY, Void*, UInt32, UInt32*, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_PROPERTY_SIZE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, UInt32*, UInt32*, UInt32)*
+  alias PRESUTIL_GET_PROPERTY_SIZE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, UInt32*, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_PROPERTY = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void**, UInt32*, UInt32)*
+  alias PRESUTIL_GET_PROPERTY = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void**, UInt32*, UInt32)
 
-  alias PRESUTIL_VERIFY_PROPERTY_TABLE = Proc(Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, Win32cr::Foundation::BOOL, Void*, UInt32, UInt8*, UInt32)*
+  alias PRESUTIL_VERIFY_PROPERTY_TABLE = Proc(Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, Win32cr::Foundation::BOOL, Void*, UInt32, UInt8*, UInt32)
 
-  alias PRESUTIL_SET_PROPERTY_TABLE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, Win32cr::Foundation::BOOL, Void*, UInt32, UInt8*, UInt32)*
+  alias PRESUTIL_SET_PROPERTY_TABLE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, Win32cr::Foundation::BOOL, Void*, UInt32, UInt8*, UInt32)
 
-  alias PRESUTIL_SET_PROPERTY_TABLE_EX = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, Win32cr::Foundation::BOOL, Void*, UInt32, Win32cr::Foundation::BOOL, UInt8*, UInt32)*
+  alias PRESUTIL_SET_PROPERTY_TABLE_EX = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, Win32cr::Foundation::BOOL, Void*, UInt32, Win32cr::Foundation::BOOL, UInt8*, UInt32)
 
-  alias PRESUTIL_SET_PROPERTY_PARAMETER_BLOCK = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt8*, Void*, UInt32, UInt8*, UInt32)*
+  alias PRESUTIL_SET_PROPERTY_PARAMETER_BLOCK = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt8*, Void*, UInt32, UInt8*, UInt32)
 
-  alias PRESUTIL_SET_PROPERTY_PARAMETER_BLOCK_EX = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt8*, Void*, UInt32, Win32cr::Foundation::BOOL, UInt8*, UInt32)*
+  alias PRESUTIL_SET_PROPERTY_PARAMETER_BLOCK_EX = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt8*, Void*, UInt32, Win32cr::Foundation::BOOL, UInt8*, UInt32)
 
-  alias PRESUTIL_SET_UNKNOWN_PROPERTIES = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt32, UInt32)*
+  alias PRESUTIL_SET_UNKNOWN_PROPERTIES = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt32, UInt32)
 
-  alias PRESUTIL_GET_PROPERTIES_TO_PARAMETER_BLOCK = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, UInt8*, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR*, UInt32)*
+  alias PRESUTIL_GET_PROPERTIES_TO_PARAMETER_BLOCK = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, UInt8*, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR*, UInt32)
 
-  alias PRESUTIL_PROPERTY_LIST_FROM_PARAMETER_BLOCK = Proc(Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt32*, UInt8*, UInt32*, UInt32*, UInt32)*
+  alias PRESUTIL_PROPERTY_LIST_FROM_PARAMETER_BLOCK = Proc(Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt32*, UInt8*, UInt32*, UInt32*, UInt32)
 
-  alias PRESUTIL_DUP_PARAMETER_BLOCK = Proc(UInt8*, UInt8*, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, UInt32)*
+  alias PRESUTIL_DUP_PARAMETER_BLOCK = Proc(UInt8*, UInt8*, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, UInt32)
 
-  alias PRESUTIL_FREE_PARAMETER_BLOCK = Proc(UInt8*, UInt8*, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void)*
+  alias PRESUTIL_FREE_PARAMETER_BLOCK = Proc(UInt8*, UInt8*, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void)
 
-  alias PRESUTIL_ADD_UNKNOWN_PROPERTIES = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt32, UInt32*, UInt32*, UInt32)*
+  alias PRESUTIL_ADD_UNKNOWN_PROPERTIES = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt32, UInt32*, UInt32*, UInt32)
 
-  alias PRESUTIL_SET_PRIVATE_PROPERTY_LIST = Proc(Win32cr::System::Registry::HKEY, Void*, UInt32, UInt32)*
+  alias PRESUTIL_SET_PRIVATE_PROPERTY_LIST = Proc(Win32cr::System::Registry::HKEY, Void*, UInt32, UInt32)
 
-  alias PRESUTIL_VERIFY_PRIVATE_PROPERTY_LIST = Proc(Void*, UInt32, UInt32)*
+  alias PRESUTIL_VERIFY_PRIVATE_PROPERTY_LIST = Proc(Void*, UInt32, UInt32)
 
-  alias PRESUTIL_DUP_STRING = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR)*
+  alias PRESUTIL_DUP_STRING = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR)
 
-  alias PRESUTIL_GET_BINARY_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt8**, UInt32*, UInt32)*
+  alias PRESUTIL_GET_BINARY_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt8**, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_SZ_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR)*
+  alias PRESUTIL_GET_SZ_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR)
 
-  alias PRESUTIL_GET_EXPAND_SZ_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR)*
+  alias PRESUTIL_GET_EXPAND_SZ_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR)
 
-  alias PRESUTIL_GET_DWORD_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32*, UInt32, UInt32)*
+  alias PRESUTIL_GET_DWORD_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32*, UInt32, UInt32)
 
-  alias PRESUTIL_GET_QWORD_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt64*, UInt64, UInt32)*
+  alias PRESUTIL_GET_QWORD_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt64*, UInt64, UInt32)
 
-  alias PRESUTIL_SET_BINARY_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt8**, UInt32*, UInt32)*
+  alias PRESUTIL_SET_BINARY_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt8**, UInt32*, UInt32)
 
-  alias PRESUTIL_SET_SZ_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, UInt32)*
+  alias PRESUTIL_SET_SZ_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, UInt32)
 
-  alias PRESUTIL_SET_EXPAND_SZ_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, UInt32)*
+  alias PRESUTIL_SET_EXPAND_SZ_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, UInt32)
 
-  alias PRESUTIL_SET_MULTI_SZ_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR*, UInt32*, UInt32)*
+  alias PRESUTIL_SET_MULTI_SZ_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR*, UInt32*, UInt32)
 
-  alias PRESUTIL_SET_DWORD_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, UInt32*, UInt32)*
+  alias PRESUTIL_SET_DWORD_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, UInt32*, UInt32)
 
-  alias PRESUTIL_SET_QWORD_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt64, UInt64*, UInt32)*
+  alias PRESUTIL_SET_QWORD_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt64, UInt64*, UInt32)
 
-  alias PRESUTIL_GET_BINARY_PROPERTY = Proc(UInt8**, UInt32*, Win32cr::Networking::Clustering::CLUSPROP_BINARY*, UInt8*, UInt32, UInt8**, UInt32*, UInt32)*
+  alias PRESUTIL_GET_BINARY_PROPERTY = Proc(UInt8**, UInt32*, Win32cr::Networking::Clustering::CLUSPROP_BINARY*, UInt8*, UInt32, UInt8**, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_SZ_PROPERTY = Proc(Win32cr::Foundation::PWSTR*, Win32cr::Networking::Clustering::CLUSPROP_SZ*, Win32cr::Foundation::PWSTR, UInt8**, UInt32*, UInt32)*
+  alias PRESUTIL_GET_SZ_PROPERTY = Proc(Win32cr::Foundation::PWSTR*, Win32cr::Networking::Clustering::CLUSPROP_SZ*, Win32cr::Foundation::PWSTR, UInt8**, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_MULTI_SZ_PROPERTY = Proc(Win32cr::Foundation::PWSTR*, UInt32*, Win32cr::Networking::Clustering::CLUSPROP_SZ*, Win32cr::Foundation::PWSTR, UInt32, UInt8**, UInt32*, UInt32)*
+  alias PRESUTIL_GET_MULTI_SZ_PROPERTY = Proc(Win32cr::Foundation::PWSTR*, UInt32*, Win32cr::Networking::Clustering::CLUSPROP_SZ*, Win32cr::Foundation::PWSTR, UInt32, UInt8**, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_DWORD_PROPERTY = Proc(UInt32*, Win32cr::Networking::Clustering::CLUSPROP_DWORD*, UInt32, UInt32, UInt32, UInt8**, UInt32*, UInt32)*
+  alias PRESUTIL_GET_DWORD_PROPERTY = Proc(UInt32*, Win32cr::Networking::Clustering::CLUSPROP_DWORD*, UInt32, UInt32, UInt32, UInt8**, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_LONG_PROPERTY = Proc(Int32*, Win32cr::Networking::Clustering::CLUSPROP_LONG*, Int32, Int32, Int32, UInt8**, UInt32*, UInt32)*
+  alias PRESUTIL_GET_LONG_PROPERTY = Proc(Int32*, Win32cr::Networking::Clustering::CLUSPROP_LONG*, Int32, Int32, Int32, UInt8**, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_FILETIME_PROPERTY = Proc(Win32cr::Foundation::FILETIME*, Win32cr::Networking::Clustering::CLUSPROP_FILETIME*, Win32cr::Foundation::FILETIME, Win32cr::Foundation::FILETIME, Win32cr::Foundation::FILETIME, UInt8**, UInt32*, UInt32)*
+  alias PRESUTIL_GET_FILETIME_PROPERTY = Proc(Win32cr::Foundation::FILETIME*, Win32cr::Networking::Clustering::CLUSPROP_FILETIME*, Win32cr::Foundation::FILETIME, Win32cr::Foundation::FILETIME, Win32cr::Foundation::FILETIME, UInt8**, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_ENVIRONMENT_WITH_NET_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Void*)*
+  alias PRESUTIL_GET_ENVIRONMENT_WITH_NET_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Void*)
 
-  alias PRESUTIL_FREE_ENVIRONMENT = Proc(Void*, UInt32)*
+  alias PRESUTIL_FREE_ENVIRONMENT = Proc(Void*, UInt32)
 
-  alias PRESUTIL_EXPAND_ENVIRONMENT_STRINGS = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR)*
+  alias PRESUTIL_EXPAND_ENVIRONMENT_STRINGS = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR)
 
-  alias PRESUTIL_SET_RESOURCE_SERVICE_ENVIRONMENT = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)*
+  alias PRESUTIL_SET_RESOURCE_SERVICE_ENVIRONMENT = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)
 
-  alias PRESUTIL_REMOVE_RESOURCE_SERVICE_ENVIRONMENT = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)*
+  alias PRESUTIL_REMOVE_RESOURCE_SERVICE_ENVIRONMENT = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)
 
-  alias PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS = Proc(Win32cr::Foundation::PWSTR, Win32cr::Security::SC_HANDLE, LibC::IntPtrT*, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)*
+  alias PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS = Proc(Win32cr::Foundation::PWSTR, Win32cr::Security::SC_HANDLE, LibC::IntPtrT*, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)
 
-  alias PRESUTIL_FIND_SZ_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, UInt32)*
+  alias PRESUTIL_FIND_SZ_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, UInt32)
 
-  alias PRESUTIL_FIND_EXPAND_SZ_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, UInt32)*
+  alias PRESUTIL_FIND_EXPAND_SZ_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, UInt32)
 
-  alias PRESUTIL_FIND_EXPANDED_SZ_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, UInt32)*
+  alias PRESUTIL_FIND_EXPANDED_SZ_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, UInt32)
 
-  alias PRESUTIL_FIND_DWORD_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, UInt32*, UInt32)*
+  alias PRESUTIL_FIND_DWORD_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
-  alias PRESUTIL_FIND_BINARY_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, UInt8**, UInt32*, UInt32)*
+  alias PRESUTIL_FIND_BINARY_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, UInt8**, UInt32*, UInt32)
 
-  alias PRESUTIL_FIND_MULTI_SZ_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, UInt32*, UInt32)*
+  alias PRESUTIL_FIND_MULTI_SZ_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, UInt32*, UInt32)
 
-  alias PRESUTIL_FIND_LONG_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Int32*, UInt32)*
+  alias PRESUTIL_FIND_LONG_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Int32*, UInt32)
 
-  alias PRESUTIL_FIND_ULARGEINTEGER_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, UInt64*, UInt32)*
+  alias PRESUTIL_FIND_ULARGEINTEGER_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, UInt64*, UInt32)
 
-  alias PRESUTIL_FIND_FILETIME_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::FILETIME*, UInt32)*
+  alias PRESUTIL_FIND_FILETIME_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::FILETIME*, UInt32)
 
-  alias PWORKER_START_ROUTINE = Proc(Win32cr::Networking::Clustering::CLUS_WORKER*, Void*, UInt32)*
+  alias PWORKER_START_ROUTINE = Proc(Win32cr::Networking::Clustering::CLUS_WORKER*, Void*, UInt32)
 
-  alias PCLUSAPI_CLUS_WORKER_CREATE = Proc(Win32cr::Networking::Clustering::CLUS_WORKER*, Win32cr::Networking::Clustering::PWORKER_START_ROUTINE, Void*, UInt32)*
+  alias PCLUSAPI_CLUS_WORKER_CREATE = Proc(Win32cr::Networking::Clustering::CLUS_WORKER*, Win32cr::Networking::Clustering::PWORKER_START_ROUTINE, Void*, UInt32)
 
-  alias PCLUSAPIClusWorkerCheckTerminate = Proc(Win32cr::Networking::Clustering::CLUS_WORKER*, Win32cr::Foundation::BOOL)*
+  alias PCLUSAPIClusWorkerCheckTerminate = Proc(Win32cr::Networking::Clustering::CLUS_WORKER*, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CLUS_WORKER_TERMINATE = Proc(Win32cr::Networking::Clustering::CLUS_WORKER*, Void)*
+  alias PCLUSAPI_CLUS_WORKER_TERMINATE = Proc(Win32cr::Networking::Clustering::CLUS_WORKER*, Void)
 
-  alias LPRESOURCE_CALLBACK = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, Void*, UInt32)*
+  alias LPRESOURCE_CALLBACK = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, Void*, UInt32)
 
-  alias LPRESOURCE_CALLBACK_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, Void*, UInt32)*
+  alias LPRESOURCE_CALLBACK_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, Void*, UInt32)
 
-  alias LPGROUP_CALLBACK_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUP_*, Void*, UInt32)*
+  alias LPGROUP_CALLBACK_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUP_*, Void*, UInt32)
 
-  alias LPNODE_CALLBACK = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::CLUSTER_NODE_STATE, Void*, UInt32)*
+  alias LPNODE_CALLBACK = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::CLUSTER_NODE_STATE, Void*, UInt32)
 
-  alias PRESUTIL_RESOURCES_EQUAL = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)*
+  alias PRESUTIL_RESOURCES_EQUAL = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)
 
-  alias PRESUTIL_RESOURCE_TYPES_EQUAL = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)*
+  alias PRESUTIL_RESOURCE_TYPES_EQUAL = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)
 
-  alias PRESUTIL_IS_RESOURCE_CLASS_EQUAL = Proc(Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)*
+  alias PRESUTIL_IS_RESOURCE_CLASS_EQUAL = Proc(Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)
 
-  alias PRESUTIL_ENUM_RESOURCES = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK, Void*, UInt32)*
+  alias PRESUTIL_ENUM_RESOURCES = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK, Void*, UInt32)
 
-  alias PRESUTIL_ENUM_RESOURCES_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, Void*, UInt32)*
+  alias PRESUTIL_ENUM_RESOURCES_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, Void*, UInt32)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENCY = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*)*
+  alias PRESUTIL_GET_RESOURCE_DEPENDENCY = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Networking::Clustering::HRESOURCE_*)*
+  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Networking::Clustering::HRESOURCE_*)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::HANDLE, Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, Win32cr::Foundation::BOOL, Win32cr::Networking::Clustering::HRESOURCE_*)*
+  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::HANDLE, Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, Win32cr::Foundation::BOOL, Win32cr::Networking::Clustering::HRESOURCE_*)
 
-  alias PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*)*
+  alias PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENTIP_ADDRESS_PROPS = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt16*, UInt32*, UInt16*, UInt32*, UInt32)*
+  alias PRESUTIL_GET_RESOURCE_DEPENDENTIP_ADDRESS_PROPS = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt16*, UInt32*, UInt16*, UInt32*, UInt32)
 
-  alias PRESUTIL_FIND_DEPENDENT_DISK_RESOURCE_DRIVE_LETTER = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt32)*
+  alias PRESUTIL_FIND_DEPENDENT_DISK_RESOURCE_DRIVE_LETTER = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt32)
 
-  alias PRESUTIL_TERMINATE_SERVICE_PROCESS_FROM_RES_DLL = Proc(UInt32, Win32cr::Foundation::BOOL, UInt32*, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)*
+  alias PRESUTIL_TERMINATE_SERVICE_PROCESS_FROM_RES_DLL = Proc(UInt32, Win32cr::Foundation::BOOL, UInt32*, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)
 
-  alias PRESUTIL_GET_PROPERTY_FORMATS = Proc(Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt32, UInt32*, UInt32*, UInt32)*
+  alias PRESUTIL_GET_PROPERTY_FORMATS = Proc(Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt32, UInt32*, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_CORE_CLUSTER_RESOURCES = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_**, Win32cr::Networking::Clustering::HRESOURCE_**, Win32cr::Networking::Clustering::HRESOURCE_**, UInt32)*
+  alias PRESUTIL_GET_CORE_CLUSTER_RESOURCES = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_**, Win32cr::Networking::Clustering::HRESOURCE_**, Win32cr::Networking::Clustering::HRESOURCE_**, UInt32)
 
-  alias PRESUTIL_GET_RESOURCE_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt32)*
+  alias PRESUTIL_GET_RESOURCE_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt32)
 
-  alias PCLUSTER_IS_PATH_ON_SHARED_VOLUME = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias PCLUSTER_IS_PATH_ON_SHARED_VOLUME = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias PCLUSTER_GET_VOLUME_PATH_NAME = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL)*
+  alias PCLUSTER_GET_VOLUME_PATH_NAME = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PCLUSTER_GET_VOLUME_NAME_FOR_VOLUME_MOUNT_POINT = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL)*
+  alias PCLUSTER_GET_VOLUME_NAME_FOR_VOLUME_MOUNT_POINT = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PCLUSTER_PREPARE_SHARED_VOLUME_FOR_BACKUP = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32)*
+  alias PCLUSTER_PREPARE_SHARED_VOLUME_FOR_BACKUP = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
-  alias PCLUSTER_CLEAR_BACKUP_STATE_FOR_SHARED_VOLUME = Proc(Win32cr::Foundation::PWSTR, UInt32)*
+  alias PCLUSTER_CLEAR_BACKUP_STATE_FOR_SHARED_VOLUME = Proc(Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS_EX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Security::SC_HANDLE, LibC::IntPtrT*, UInt32, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)*
+  alias PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS_EX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Security::SC_HANDLE, LibC::IntPtrT*, UInt32, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)
 
-  alias PRESUTIL_ENUM_RESOURCES_EX2 = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, Void*, UInt32, UInt32)*
+  alias PRESUTIL_ENUM_RESOURCES_EX2 = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, Void*, UInt32, UInt32)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_EX = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)*
+  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_EX = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)*
+  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::HANDLE, Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, Win32cr::Foundation::BOOL, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)*
+  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::HANDLE, Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, Win32cr::Foundation::BOOL, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)
 
-  alias PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY_EX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)*
+  alias PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY_EX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)
 
-  alias PRESUTIL_GET_CORE_CLUSTER_RESOURCES_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_**, Win32cr::Networking::Clustering::HRESOURCE_**, Win32cr::Networking::Clustering::HRESOURCE_**, UInt32, UInt32)*
+  alias PRESUTIL_GET_CORE_CLUSTER_RESOURCES_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_**, Win32cr::Networking::Clustering::HRESOURCE_**, Win32cr::Networking::Clustering::HRESOURCE_**, UInt32, UInt32)
 
-  alias POPEN_CLUSTER_CRYPT_PROVIDER = Proc(Win32cr::Foundation::PWSTR, Int8*, UInt32, UInt32, Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*)*
+  alias POPEN_CLUSTER_CRYPT_PROVIDER = Proc(Win32cr::Foundation::PWSTR, Int8*, UInt32, UInt32, Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*)
 
-  alias POPEN_CLUSTER_CRYPT_PROVIDEREX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Int8*, UInt32, UInt32, Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*)*
+  alias POPEN_CLUSTER_CRYPT_PROVIDEREX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Int8*, UInt32, UInt32, Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*)
 
-  alias PCLOSE_CLUSTER_CRYPT_PROVIDER = Proc(Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, UInt32)*
+  alias PCLOSE_CLUSTER_CRYPT_PROVIDER = Proc(Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, UInt32)
 
-  alias PCLUSTER_ENCRYPT = Proc(Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, UInt8*, UInt32, UInt8**, UInt32*, UInt32)*
+  alias PCLUSTER_ENCRYPT = Proc(Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, UInt8*, UInt32, UInt8**, UInt32*, UInt32)
 
-  alias PCLUSTER_DECRYPT = Proc(Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, UInt8*, UInt32, UInt8**, UInt32*, UInt32)*
+  alias PCLUSTER_DECRYPT = Proc(Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, UInt8*, UInt32, UInt8**, UInt32*, UInt32)
 
-  alias PFREE_CLUSTER_CRYPT = Proc(Void*, UInt32)*
+  alias PFREE_CLUSTER_CRYPT = Proc(Void*, UInt32)
 
-  alias PRES_UTIL_VERIFY_SHUTDOWN_SAFE = Proc(UInt32, UInt32, UInt32*, UInt32)*
+  alias PRES_UTIL_VERIFY_SHUTDOWN_SAFE = Proc(UInt32, UInt32, UInt32*, UInt32)
 
-  alias PREGISTER_APPINSTANCE = Proc(Win32cr::Foundation::HANDLE, LibC::GUID*, Win32cr::Foundation::BOOL, UInt32)*
+  alias PREGISTER_APPINSTANCE = Proc(Win32cr::Foundation::HANDLE, LibC::GUID*, Win32cr::Foundation::BOOL, UInt32)
 
-  alias PREGISTER_APPINSTANCE_VERSION = Proc(LibC::GUID*, UInt64, UInt64, UInt32)*
+  alias PREGISTER_APPINSTANCE_VERSION = Proc(LibC::GUID*, UInt64, UInt64, UInt32)
 
-  alias PQUERY_APPINSTANCE_VERSION = Proc(LibC::GUID*, UInt64*, UInt64*, Win32cr::Foundation::NTSTATUS*, UInt32)*
+  alias PQUERY_APPINSTANCE_VERSION = Proc(LibC::GUID*, UInt64*, UInt64*, Win32cr::Foundation::NTSTATUS*, UInt32)
 
-  alias PRESET_ALL_APPINSTANCE_VERSIONS = Proc(UInt32)*
+  alias PRESET_ALL_APPINSTANCE_VERSIONS = Proc(UInt32)
 
-  alias SET_APP_INSTANCE_CSV_FLAGS = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, UInt32)*
+  alias SET_APP_INSTANCE_CSV_FLAGS = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, UInt32)
 
   CLUSTER_VERSION_FLAG_MIXED_MODE = 1_u32
   CLUSTER_VERSION_UNKNOWN = 4294967295_u32
@@ -2731,984 +2731,1471 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record HCLUSTER_
-  @[Extern]
-  record HNODE_
-  @[Extern]
-  record HRESOURCE_
-  @[Extern]
-  record HGROUP_
-  @[Extern]
-  record HNETWORK_
-  @[Extern]
-  record HNETINTERFACE_
-  @[Extern]
-  record HCHANGE_
-  @[Extern]
-  record HCLUSENUM_
-  @[Extern]
-  record HGROUPENUM_
-  @[Extern]
-  record HRESENUM_
-  @[Extern]
-  record HNETWORKENUM_
-  @[Extern]
-  record HNODEENUM_
-  @[Extern]
-  record HNETINTERFACEENUM_
-  @[Extern]
-  record HRESTYPEENUM_
-  @[Extern]
-  record HREGBATCH_
-  @[Extern]
-  record HREGBATCHPORT_
-  @[Extern]
-  record HREGBATCHNOTIFICATION_
-  @[Extern]
-  record HREGREADBATCH_
-  @[Extern]
-  record HREGREADBATCHREPLY_
-  @[Extern]
-  record HNODEENUMEX_
-  @[Extern]
-  record HCLUSENUMEX_
-  @[Extern]
-  record HGROUPENUMEX_
-  @[Extern]
-  record HRESENUMEX_
-  @[Extern]
-  record HGROUPSET_
-  @[Extern]
-  record HGROUPSETENUM_
-  @[Extern]
-  record CLUSTERVERSIONINFO_NT4,
-    dwVersionInfoSize : UInt32,
-    major_version : UInt16,
-    minor_version : UInt16,
-    build_number : UInt16,
-    szVendorId : UInt16[64],
-    szCSDVersion : UInt16[64]
+  struct HCLUSTER_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTERVERSIONINFO,
-    dwVersionInfoSize : UInt32,
-    major_version : UInt16,
-    minor_version : UInt16,
-    build_number : UInt16,
-    szVendorId : UInt16[64],
-    szCSDVersion : UInt16[64],
-    dwClusterHighestVersion : UInt32,
-    dwClusterLowestVersion : UInt32,
-    dwFlags : UInt32,
-    dwReserved : UInt32
+  struct HNODE_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUS_STARTING_PARAMS,
-    dwSize : UInt32,
-    bForm : Win32cr::Foundation::BOOL,
-    bFirst : Win32cr::Foundation::BOOL
+  struct HRESOURCE_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSCTL_RESOURCE_STATE_CHANGE_REASON_STRUCT,
-    dwSize : UInt32,
-    dwVersion : UInt32,
-    eReason : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE_CHANGE_REASON
+  struct HGROUP_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_BATCH_COMMAND,
-    command : Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND,
-    dwOptions : UInt32,
-    wzName : Win32cr::Foundation::PWSTR,
-    lpData : UInt8*,
-    cbData : UInt32
+  struct HNETWORK_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_READ_BATCH_COMMAND,
-    command : Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND,
-    dwOptions : UInt32,
-    wzSubkeyName : Win32cr::Foundation::PWSTR,
-    wzValueName : Win32cr::Foundation::PWSTR,
-    lpData : UInt8*,
-    cbData : UInt32
+  struct HNETINTERFACE_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_ENUM_ITEM,
-    dwVersion : UInt32,
-    dwType : UInt32,
-    cbId : UInt32,
-    lpszId : Win32cr::Foundation::PWSTR,
-    cbName : UInt32,
-    lpszName : Win32cr::Foundation::PWSTR
+  struct HCHANGE_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_CREATE_GROUP_INFO,
-    dwVersion : UInt32,
-    groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE
+  struct HCLUSENUM_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_VALIDATE_PATH,
-    szPath : UInt16*
+  struct HGROUPENUM_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_VALIDATE_DIRECTORY,
-    szPath : UInt16*
+  struct HRESENUM_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_VALIDATE_NETNAME,
-    szNetworkName : UInt16*
+  struct HNETWORKENUM_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_VALIDATE_CSV_FILENAME,
-    szFileName : UInt16*
+  struct HNODEENUM_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_SET_PASSWORD_STATUS,
-    node_id : UInt32,
-    set_attempted : Win32cr::Foundation::BOOLEAN,
-    return_status : UInt32
+  struct HNETINTERFACEENUM_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_IP_ENTRY,
-    lpszIpAddress : Win32cr::Foundation::PWSTR,
-    dwPrefixLength : UInt32
+  struct HRESTYPEENUM_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CREATE_CLUSTER_CONFIG,
-    dwVersion : UInt32,
-    lpszClusterName : Win32cr::Foundation::PWSTR,
-    cNodes : UInt32,
-    ppszNodeNames : Win32cr::Foundation::PWSTR*,
-    cIpEntries : UInt32,
-    pIpEntries : Win32cr::Networking::Clustering::CLUSTER_IP_ENTRY*,
-    fEmptyCluster : Win32cr::Foundation::BOOLEAN,
-    managementPointType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_TYPE,
-    managementPointResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE
+  struct HREGBATCH_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CREATE_CLUSTER_NAME_ACCOUNT,
-    dwVersion : UInt32,
-    lpszClusterName : Win32cr::Foundation::PWSTR,
-    dwFlags : UInt32,
-    pszUserName : Win32cr::Foundation::PWSTR,
-    pszPassword : Win32cr::Foundation::PWSTR,
-    pszDomain : Win32cr::Foundation::PWSTR,
-    managementPointType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_TYPE,
-    managementPointResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE,
-    bUpgradeVCOs : Win32cr::Foundation::BOOLEAN
+  struct HREGBATCHPORT_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record NOTIFY_FILTER_AND_TYPE,
-    dwObjectType : UInt32,
-    filter_flags : Int64
+  struct HREGBATCHNOTIFICATION_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_MEMBERSHIP_INFO,
-    has_quorum : Win32cr::Foundation::BOOL,
-    upnodes_size : UInt32,
-    upnodes : UInt8*
+  struct HREGREADBATCH_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_AVAILABILITY_SET_CONFIG,
-    dwVersion : UInt32,
-    dwUpdateDomains : UInt32,
-    dwFaultDomains : UInt32,
-    bReserveSpareNode : Win32cr::Foundation::BOOL
+  struct HREGREADBATCHREPLY_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_GROUP_ENUM_ITEM,
-    dwVersion : UInt32,
-    cbId : UInt32,
-    lpszId : Win32cr::Foundation::PWSTR,
-    cbName : UInt32,
-    lpszName : Win32cr::Foundation::PWSTR,
-    state : Win32cr::Networking::Clustering::CLUSTER_GROUP_STATE,
-    cbOwnerNode : UInt32,
-    lpszOwnerNode : Win32cr::Foundation::PWSTR,
-    dwFlags : UInt32,
-    cbProperties : UInt32,
-    pProperties : Void*,
-    cbRoProperties : UInt32,
-    pRoProperties : Void*
+  struct HNODEENUMEX_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record CLUSTER_RESOURCE_ENUM_ITEM,
-    dwVersion : UInt32,
-    cbId : UInt32,
-    lpszId : Win32cr::Foundation::PWSTR,
-    cbName : UInt32,
-    lpszName : Win32cr::Foundation::PWSTR,
-    cbOwnerGroupName : UInt32,
-    lpszOwnerGroupName : Win32cr::Foundation::PWSTR,
-    cbOwnerGroupId : UInt32,
-    lpszOwnerGroupId : Win32cr::Foundation::PWSTR,
-    cbProperties : UInt32,
-    pProperties : Void*,
-    cbRoProperties : UInt32,
-    pRoProperties : Void*
+  struct HCLUSENUMEX_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record GROUP_FAILURE_INFO,
-    dwFailoverAttemptsRemaining : UInt32,
-    dwFailoverPeriodRemaining : UInt32
+  struct HGROUPENUMEX_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record GROUP_FAILURE_INFO_BUFFER,
-    dwVersion : UInt32,
-    info : Win32cr::Networking::Clustering::GROUP_FAILURE_INFO
+  struct HRESENUMEX_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record RESOURCE_FAILURE_INFO,
-    dwRestartAttemptsRemaining : UInt32,
-    dwRestartPeriodRemaining : UInt32
+  struct HGROUPSET_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record RESOURCE_FAILURE_INFO_BUFFER,
-    dwVersion : UInt32,
-    info : Win32cr::Networking::Clustering::RESOURCE_FAILURE_INFO
+  struct HGROUPSETENUM_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record RESOURCE_TERMINAL_FAILURE_INFO_BUFFER,
-    isTerminalFailure : Win32cr::Foundation::BOOL,
-    restartPeriodRemaining : UInt32
+  struct CLUSTERVERSIONINFO_NT4
+    property dwVersionInfoSize : UInt32
+    property major_version : UInt16
+    property minor_version : UInt16
+    property build_number : UInt16
+    property szVendorId : UInt16[64]
+    property szCSDVersion : UInt16[64]
+    def initialize(@dwVersionInfoSize : UInt32, @major_version : UInt16, @minor_version : UInt16, @build_number : UInt16, @szVendorId : UInt16[64], @szCSDVersion : UInt16[64])
+    end
+  end
+
+  @[Extern]
+  struct CLUSTERVERSIONINFO
+    property dwVersionInfoSize : UInt32
+    property major_version : UInt16
+    property minor_version : UInt16
+    property build_number : UInt16
+    property szVendorId : UInt16[64]
+    property szCSDVersion : UInt16[64]
+    property dwClusterHighestVersion : UInt32
+    property dwClusterLowestVersion : UInt32
+    property dwFlags : UInt32
+    property dwReserved : UInt32
+    def initialize(@dwVersionInfoSize : UInt32, @major_version : UInt16, @minor_version : UInt16, @build_number : UInt16, @szVendorId : UInt16[64], @szCSDVersion : UInt16[64], @dwClusterHighestVersion : UInt32, @dwClusterLowestVersion : UInt32, @dwFlags : UInt32, @dwReserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLUS_STARTING_PARAMS
+    property dwSize : UInt32
+    property bForm : Win32cr::Foundation::BOOL
+    property bFirst : Win32cr::Foundation::BOOL
+    def initialize(@dwSize : UInt32, @bForm : Win32cr::Foundation::BOOL, @bFirst : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct CLUSCTL_RESOURCE_STATE_CHANGE_REASON_STRUCT
+    property dwSize : UInt32
+    property dwVersion : UInt32
+    property eReason : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE_CHANGE_REASON
+    def initialize(@dwSize : UInt32, @dwVersion : UInt32, @eReason : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE_CHANGE_REASON)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_BATCH_COMMAND
+    property command : Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND
+    property dwOptions : UInt32
+    property wzName : Win32cr::Foundation::PWSTR
+    property lpData : UInt8*
+    property cbData : UInt32
+    def initialize(@command : Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND, @dwOptions : UInt32, @wzName : Win32cr::Foundation::PWSTR, @lpData : UInt8*, @cbData : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_READ_BATCH_COMMAND
+    property command : Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND
+    property dwOptions : UInt32
+    property wzSubkeyName : Win32cr::Foundation::PWSTR
+    property wzValueName : Win32cr::Foundation::PWSTR
+    property lpData : UInt8*
+    property cbData : UInt32
+    def initialize(@command : Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND, @dwOptions : UInt32, @wzSubkeyName : Win32cr::Foundation::PWSTR, @wzValueName : Win32cr::Foundation::PWSTR, @lpData : UInt8*, @cbData : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_ENUM_ITEM
+    property dwVersion : UInt32
+    property dwType : UInt32
+    property cbId : UInt32
+    property lpszId : Win32cr::Foundation::PWSTR
+    property cbName : UInt32
+    property lpszName : Win32cr::Foundation::PWSTR
+    def initialize(@dwVersion : UInt32, @dwType : UInt32, @cbId : UInt32, @lpszId : Win32cr::Foundation::PWSTR, @cbName : UInt32, @lpszName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_CREATE_GROUP_INFO
+    property dwVersion : UInt32
+    property groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE
+    def initialize(@dwVersion : UInt32, @groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_VALIDATE_PATH
+    property szPath : UInt16*
+    def initialize(@szPath : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_VALIDATE_DIRECTORY
+    property szPath : UInt16*
+    def initialize(@szPath : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_VALIDATE_NETNAME
+    property szNetworkName : UInt16*
+    def initialize(@szNetworkName : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_VALIDATE_CSV_FILENAME
+    property szFileName : UInt16*
+    def initialize(@szFileName : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_SET_PASSWORD_STATUS
+    property node_id : UInt32
+    property set_attempted : Win32cr::Foundation::BOOLEAN
+    property return_status : UInt32
+    def initialize(@node_id : UInt32, @set_attempted : Win32cr::Foundation::BOOLEAN, @return_status : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_IP_ENTRY
+    property lpszIpAddress : Win32cr::Foundation::PWSTR
+    property dwPrefixLength : UInt32
+    def initialize(@lpszIpAddress : Win32cr::Foundation::PWSTR, @dwPrefixLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CREATE_CLUSTER_CONFIG
+    property dwVersion : UInt32
+    property lpszClusterName : Win32cr::Foundation::PWSTR
+    property cNodes : UInt32
+    property ppszNodeNames : Win32cr::Foundation::PWSTR*
+    property cIpEntries : UInt32
+    property pIpEntries : Win32cr::Networking::Clustering::CLUSTER_IP_ENTRY*
+    property fEmptyCluster : Win32cr::Foundation::BOOLEAN
+    property managementPointType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_TYPE
+    property managementPointResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE
+    def initialize(@dwVersion : UInt32, @lpszClusterName : Win32cr::Foundation::PWSTR, @cNodes : UInt32, @ppszNodeNames : Win32cr::Foundation::PWSTR*, @cIpEntries : UInt32, @pIpEntries : Win32cr::Networking::Clustering::CLUSTER_IP_ENTRY*, @fEmptyCluster : Win32cr::Foundation::BOOLEAN, @managementPointType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_TYPE, @managementPointResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE)
+    end
+  end
+
+  @[Extern]
+  struct CREATE_CLUSTER_NAME_ACCOUNT
+    property dwVersion : UInt32
+    property lpszClusterName : Win32cr::Foundation::PWSTR
+    property dwFlags : UInt32
+    property pszUserName : Win32cr::Foundation::PWSTR
+    property pszPassword : Win32cr::Foundation::PWSTR
+    property pszDomain : Win32cr::Foundation::PWSTR
+    property managementPointType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_TYPE
+    property managementPointResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE
+    property bUpgradeVCOs : Win32cr::Foundation::BOOLEAN
+    def initialize(@dwVersion : UInt32, @lpszClusterName : Win32cr::Foundation::PWSTR, @dwFlags : UInt32, @pszUserName : Win32cr::Foundation::PWSTR, @pszPassword : Win32cr::Foundation::PWSTR, @pszDomain : Win32cr::Foundation::PWSTR, @managementPointType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_TYPE, @managementPointResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE, @bUpgradeVCOs : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct NOTIFY_FILTER_AND_TYPE
+    property dwObjectType : UInt32
+    property filter_flags : Int64
+    def initialize(@dwObjectType : UInt32, @filter_flags : Int64)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_MEMBERSHIP_INFO
+    property has_quorum : Win32cr::Foundation::BOOL
+    property upnodes_size : UInt32
+    property upnodes : UInt8*
+    def initialize(@has_quorum : Win32cr::Foundation::BOOL, @upnodes_size : UInt32, @upnodes : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_AVAILABILITY_SET_CONFIG
+    property dwVersion : UInt32
+    property dwUpdateDomains : UInt32
+    property dwFaultDomains : UInt32
+    property bReserveSpareNode : Win32cr::Foundation::BOOL
+    def initialize(@dwVersion : UInt32, @dwUpdateDomains : UInt32, @dwFaultDomains : UInt32, @bReserveSpareNode : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_GROUP_ENUM_ITEM
+    property dwVersion : UInt32
+    property cbId : UInt32
+    property lpszId : Win32cr::Foundation::PWSTR
+    property cbName : UInt32
+    property lpszName : Win32cr::Foundation::PWSTR
+    property state : Win32cr::Networking::Clustering::CLUSTER_GROUP_STATE
+    property cbOwnerNode : UInt32
+    property lpszOwnerNode : Win32cr::Foundation::PWSTR
+    property dwFlags : UInt32
+    property cbProperties : UInt32
+    property pProperties : Void*
+    property cbRoProperties : UInt32
+    property pRoProperties : Void*
+    def initialize(@dwVersion : UInt32, @cbId : UInt32, @lpszId : Win32cr::Foundation::PWSTR, @cbName : UInt32, @lpszName : Win32cr::Foundation::PWSTR, @state : Win32cr::Networking::Clustering::CLUSTER_GROUP_STATE, @cbOwnerNode : UInt32, @lpszOwnerNode : Win32cr::Foundation::PWSTR, @dwFlags : UInt32, @cbProperties : UInt32, @pProperties : Void*, @cbRoProperties : UInt32, @pRoProperties : Void*)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_RESOURCE_ENUM_ITEM
+    property dwVersion : UInt32
+    property cbId : UInt32
+    property lpszId : Win32cr::Foundation::PWSTR
+    property cbName : UInt32
+    property lpszName : Win32cr::Foundation::PWSTR
+    property cbOwnerGroupName : UInt32
+    property lpszOwnerGroupName : Win32cr::Foundation::PWSTR
+    property cbOwnerGroupId : UInt32
+    property lpszOwnerGroupId : Win32cr::Foundation::PWSTR
+    property cbProperties : UInt32
+    property pProperties : Void*
+    property cbRoProperties : UInt32
+    property pRoProperties : Void*
+    def initialize(@dwVersion : UInt32, @cbId : UInt32, @lpszId : Win32cr::Foundation::PWSTR, @cbName : UInt32, @lpszName : Win32cr::Foundation::PWSTR, @cbOwnerGroupName : UInt32, @lpszOwnerGroupName : Win32cr::Foundation::PWSTR, @cbOwnerGroupId : UInt32, @lpszOwnerGroupId : Win32cr::Foundation::PWSTR, @cbProperties : UInt32, @pProperties : Void*, @cbRoProperties : UInt32, @pRoProperties : Void*)
+    end
+  end
+
+  @[Extern]
+  struct GROUP_FAILURE_INFO
+    property dwFailoverAttemptsRemaining : UInt32
+    property dwFailoverPeriodRemaining : UInt32
+    def initialize(@dwFailoverAttemptsRemaining : UInt32, @dwFailoverPeriodRemaining : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct GROUP_FAILURE_INFO_BUFFER
+    property dwVersion : UInt32
+    property info : Win32cr::Networking::Clustering::GROUP_FAILURE_INFO
+    def initialize(@dwVersion : UInt32, @info : Win32cr::Networking::Clustering::GROUP_FAILURE_INFO)
+    end
+  end
+
+  @[Extern]
+  struct RESOURCE_FAILURE_INFO
+    property dwRestartAttemptsRemaining : UInt32
+    property dwRestartPeriodRemaining : UInt32
+    def initialize(@dwRestartAttemptsRemaining : UInt32, @dwRestartPeriodRemaining : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RESOURCE_FAILURE_INFO_BUFFER
+    property dwVersion : UInt32
+    property info : Win32cr::Networking::Clustering::RESOURCE_FAILURE_INFO
+    def initialize(@dwVersion : UInt32, @info : Win32cr::Networking::Clustering::RESOURCE_FAILURE_INFO)
+    end
+  end
+
+  @[Extern]
+  struct RESOURCE_TERMINAL_FAILURE_INFO_BUFFER
+    property isTerminalFailure : Win32cr::Foundation::BOOL
+    property restartPeriodRemaining : UInt32
+    def initialize(@isTerminalFailure : Win32cr::Foundation::BOOL, @restartPeriodRemaining : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record CLUSPROP_SYNTAX,
-    dw : UInt32,
-    anonymous : Anonymous_e__Struct_ do
+  struct CLUSPROP_SYNTAX
+    property dw : UInt32
+    property anonymous : Anonymous_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      wFormat : UInt16,
-      wType : UInt16
+    struct Anonymous_e__Struct_
+    property wFormat : UInt16
+    property wType : UInt16
+    def initialize(@wFormat : UInt16, @wType : UInt16)
+    end
+    end
 
+    def initialize(@dw : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
   end
 
   @[Extern]
-  record CLUSPROP_VALUE,
-    syntax : Win32cr::Networking::Clustering::CLUSPROP_SYNTAX,
-    cbLength : UInt32
-
-  @[Extern]
-  record CLUSPROP_BINARY,
-    __anonymous_base_clusapi_l5129_c41 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    rgb : UInt8*
-
-  @[Extern]
-  record CLUSPROP_WORD,
-    __anonymous_base_clusapi_l5139_c39 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    w : UInt16
-
-  @[Extern]
-  record CLUSPROP_DWORD,
-    __anonymous_base_clusapi_l5149_c40 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    dw : UInt32
-
-  @[Extern]
-  record CLUSPROP_LONG,
-    __anonymous_base_clusapi_l5159_c39 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    l : Int32
-
-  @[Extern]
-  record CLUSPROP_SZ,
-    __anonymous_base_clusapi_l5169_c37 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    sz : UInt16*
-
-  @[Extern]
-  record CLUSPROP_ULARGE_INTEGER,
-    __anonymous_base_clusapi_l5186_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    li : Win32cr::Foundation::ULARGE_INTEGER
-
-  @[Extern]
-  record CLUSPROP_LARGE_INTEGER,
-    __anonymous_base_clusapi_l5199_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    li : Win32cr::Foundation::LARGE_INTEGER
-
-  @[Extern]
-  record CLUSPROP_SECURITY_DESCRIPTOR,
-    __anonymous_base_clusapi_l5211_c54 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      sd : Win32cr::System::SystemServices::SECURITY_DESCRIPTOR_RELATIVE,
-      rgbSecurityDescriptor : UInt8*
-
+  struct CLUSPROP_VALUE
+    property syntax : Win32cr::Networking::Clustering::CLUSPROP_SYNTAX
+    property cbLength : UInt32
+    def initialize(@syntax : Win32cr::Networking::Clustering::CLUSPROP_SYNTAX, @cbLength : UInt32)
+    end
   end
 
   @[Extern]
-  record CLUSPROP_FILETIME,
-    __anonymous_base_clusapi_l5225_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    ft : Win32cr::Foundation::FILETIME
+  struct CLUSPROP_BINARY
+    property __anonymous_base_clusapi_l5129_c41 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property rgb : UInt8*
+    def initialize(@__anonymous_base_clusapi_l5129_c41 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @rgb : UInt8*)
+    end
+  end
 
   @[Extern]
-  record CLUS_RESOURCE_CLASS_INFO,
-    anonymous : Anonymous_e__Union_ do
+  struct CLUSPROP_WORD
+    property __anonymous_base_clusapi_l5139_c39 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property w : UInt16
+    def initialize(@__anonymous_base_clusapi_l5139_c39 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @w : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct CLUSPROP_DWORD
+    property __anonymous_base_clusapi_l5149_c40 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property dw : UInt32
+    def initialize(@__anonymous_base_clusapi_l5149_c40 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @dw : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLUSPROP_LONG
+    property __anonymous_base_clusapi_l5159_c39 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property l : Int32
+    def initialize(@__anonymous_base_clusapi_l5159_c39 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @l : Int32)
+    end
+  end
+
+  @[Extern]
+  struct CLUSPROP_SZ
+    property __anonymous_base_clusapi_l5169_c37 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property sz : UInt16*
+    def initialize(@__anonymous_base_clusapi_l5169_c37 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @sz : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct CLUSPROP_ULARGE_INTEGER
+    property __anonymous_base_clusapi_l5186_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property li : Win32cr::Foundation::ULARGE_INTEGER
+    def initialize(@__anonymous_base_clusapi_l5186_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @li : Win32cr::Foundation::ULARGE_INTEGER)
+    end
+  end
+
+  @[Extern]
+  struct CLUSPROP_LARGE_INTEGER
+    property __anonymous_base_clusapi_l5199_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property li : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@__anonymous_base_clusapi_l5199_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @li : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
+
+  @[Extern]
+  struct CLUSPROP_SECURITY_DESCRIPTOR
+    property __anonymous_base_clusapi_l5211_c54 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      li : Win32cr::Foundation::ULARGE_INTEGER do
+    struct Anonymous_e__Union_
+    property sd : Win32cr::System::SystemServices::SECURITY_DESCRIPTOR_RELATIVE
+    property rgbSecurityDescriptor : UInt8*
+    def initialize(@sd : Win32cr::System::SystemServices::SECURITY_DESCRIPTOR_RELATIVE, @rgbSecurityDescriptor : UInt8*)
+    end
+    end
+
+    def initialize(@__anonymous_base_clusapi_l5211_c54 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct CLUSPROP_FILETIME
+    property __anonymous_base_clusapi_l5225_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property ft : Win32cr::Foundation::FILETIME
+    def initialize(@__anonymous_base_clusapi_l5225_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @ft : Win32cr::Foundation::FILETIME)
+    end
+  end
+
+  @[Extern]
+  struct CLUS_RESOURCE_CLASS_INFO
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property li : Win32cr::Foundation::ULARGE_INTEGER
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        anonymous : Anonymous_e__Union_,
-        sub_class : UInt32 do
+      struct Anonymous_e__Struct_
+    property anonymous : Anonymous_e__Union_
+    property sub_class : UInt32
 
         # Nested Type Anonymous_e__Union_
         @[Extern(union: true)]
-        record Anonymous_e__Union_,
-          dw : UInt32,
-          rc : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CLASS
+        struct Anonymous_e__Union_
+    property dw : UInt32
+    property rc : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CLASS
+    def initialize(@dw : UInt32, @rc : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CLASS)
+    end
+        end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @sub_class : UInt32)
+    end
       end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @li : Win32cr::Foundation::ULARGE_INTEGER)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record CLUSPROP_RESOURCE_CLASS,
-    __anonymous_base_clusapi_l5250_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    rc : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CLASS
+  struct CLUSPROP_RESOURCE_CLASS
+    property __anonymous_base_clusapi_l5250_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property rc : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CLASS
+    def initialize(@__anonymous_base_clusapi_l5250_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @rc : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CLASS)
+    end
+  end
 
   @[Extern]
-  record CLUSPROP_RESOURCE_CLASS_INFO,
-    __anonymous_base_clusapi_l5261_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    __anonymous_base_clusapi_l5262_c14 : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO
+  struct CLUSPROP_RESOURCE_CLASS_INFO
+    property __anonymous_base_clusapi_l5261_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property __anonymous_base_clusapi_l5262_c14 : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO
+    def initialize(@__anonymous_base_clusapi_l5261_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @__anonymous_base_clusapi_l5262_c14 : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO)
+    end
+  end
 
   @[Extern(union: true)]
-  record CLUSPROP_REQUIRED_DEPENDENCY,
-    value : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    res_class : Win32cr::Networking::Clustering::CLUSPROP_RESOURCE_CLASS,
-    res_type_name : Win32cr::Networking::Clustering::CLUSPROP_SZ
-
-  @[Extern]
-  record CLUS_FORCE_QUORUM_INFO,
-    dwSize : UInt32,
-    dwNodeBitMask : UInt32,
-    dwMaxNumberofNodes : UInt32,
-    multiszNodeList : UInt16*
-
-  @[Extern]
-  record CLUS_PARTITION_INFO,
-    dwFlags : UInt32,
-    szDeviceName : UInt16[260],
-    szVolumeLabel : UInt16[260],
-    dwSerialNumber : UInt32,
-    rgdwMaximumComponentLength : UInt32,
-    dwFileSystemFlags : UInt32,
-    szFileSystem : UInt16[32]
-
-  @[Extern]
-  record CLUS_PARTITION_INFO_EX,
-    dwFlags : UInt32,
-    szDeviceName : UInt16[260],
-    szVolumeLabel : UInt16[260],
-    dwSerialNumber : UInt32,
-    rgdwMaximumComponentLength : UInt32,
-    dwFileSystemFlags : UInt32,
-    szFileSystem : UInt16[32],
-    total_size_in_bytes : Win32cr::Foundation::ULARGE_INTEGER,
-    free_size_in_bytes : Win32cr::Foundation::ULARGE_INTEGER,
-    device_number : UInt32,
-    partition_number : UInt32,
-    volume_guid : LibC::GUID
-
-  @[Extern]
-  record CLUS_PARTITION_INFO_EX2,
-    gpt_partition_id : LibC::GUID,
-    szPartitionName : UInt16[260],
-    encryption_flags : UInt32
-
-  @[Extern]
-  record CLUS_CSV_VOLUME_INFO,
-    volume_offset : Win32cr::Foundation::ULARGE_INTEGER,
-    partition_number : UInt32,
-    fault_state : Win32cr::Networking::Clustering::CLUSTER_CSV_VOLUME_FAULT_STATE,
-    backup_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_BACKUP_STATE,
-    szVolumeFriendlyName : UInt16[260],
-    szVolumeName : UInt16[50]
-
-  @[Extern]
-  record CLUS_CSV_VOLUME_NAME,
-    volume_offset : Win32cr::Foundation::LARGE_INTEGER,
-    szVolumeName : UInt16[260],
-    szRootPath : UInt16[263]
-
-  @[Extern]
-  record CLUSTER_SHARED_VOLUME_STATE_INFO,
-    szVolumeName : UInt16[260],
-    szNodeName : UInt16[260],
-    volume_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_STATE
-
-  @[Extern]
-  record CLUSTER_SHARED_VOLUME_STATE_INFO_EX,
-    szVolumeName : UInt16[260],
-    szNodeName : UInt16[260],
-    volume_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_STATE,
-    szVolumeFriendlyName : UInt16[260],
-    redirected_io_reason : UInt64,
-    volume_redirected_io_reason : UInt64
-
-  @[Extern]
-  record CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME,
-    input_type : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_TYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      volume_offset : UInt64,
-      volume_id : UInt16[260],
-      volume_name : UInt16[260],
-      volume_guid : UInt16[50]
-
+  struct CLUSPROP_REQUIRED_DEPENDENCY
+    property value : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property res_class : Win32cr::Networking::Clustering::CLUSPROP_RESOURCE_CLASS
+    property res_type_name : Win32cr::Networking::Clustering::CLUSPROP_SZ
+    def initialize(@value : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @res_class : Win32cr::Networking::Clustering::CLUSPROP_RESOURCE_CLASS, @res_type_name : Win32cr::Networking::Clustering::CLUSPROP_SZ)
+    end
   end
 
   @[Extern]
-  record CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME,
-    new_volume_name : UInt16[260]
+  struct CLUS_FORCE_QUORUM_INFO
+    property dwSize : UInt32
+    property dwNodeBitMask : UInt32
+    property dwMaxNumberofNodes : UInt32
+    property multiszNodeList : UInt16*
+    def initialize(@dwSize : UInt32, @dwNodeBitMask : UInt32, @dwMaxNumberofNodes : UInt32, @multiszNodeList : UInt16*)
+    end
+  end
 
   @[Extern]
-  record CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME,
-    new_volume_name : UInt16[260],
-    new_volume_guid : UInt16[50]
+  struct CLUS_PARTITION_INFO
+    property dwFlags : UInt32
+    property szDeviceName : UInt16[260]
+    property szVolumeLabel : UInt16[260]
+    property dwSerialNumber : UInt32
+    property rgdwMaximumComponentLength : UInt32
+    property dwFileSystemFlags : UInt32
+    property szFileSystem : UInt16[32]
+    def initialize(@dwFlags : UInt32, @szDeviceName : UInt16[260], @szVolumeLabel : UInt16[260], @dwSerialNumber : UInt32, @rgdwMaximumComponentLength : UInt32, @dwFileSystemFlags : UInt32, @szFileSystem : UInt16[32])
+    end
+  end
 
   @[Extern]
-  record CLUSTER_SHARED_VOLUME_RENAME_INPUT,
-    __anonymous_base_clusapi_l5464_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME,
-    __anonymous_base_clusapi_l5465_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME
+  struct CLUS_PARTITION_INFO_EX
+    property dwFlags : UInt32
+    property szDeviceName : UInt16[260]
+    property szVolumeLabel : UInt16[260]
+    property dwSerialNumber : UInt32
+    property rgdwMaximumComponentLength : UInt32
+    property dwFileSystemFlags : UInt32
+    property szFileSystem : UInt16[32]
+    property total_size_in_bytes : Win32cr::Foundation::ULARGE_INTEGER
+    property free_size_in_bytes : Win32cr::Foundation::ULARGE_INTEGER
+    property device_number : UInt32
+    property partition_number : UInt32
+    property volume_guid : LibC::GUID
+    def initialize(@dwFlags : UInt32, @szDeviceName : UInt16[260], @szVolumeLabel : UInt16[260], @dwSerialNumber : UInt32, @rgdwMaximumComponentLength : UInt32, @dwFileSystemFlags : UInt32, @szFileSystem : UInt16[32], @total_size_in_bytes : Win32cr::Foundation::ULARGE_INTEGER, @free_size_in_bytes : Win32cr::Foundation::ULARGE_INTEGER, @device_number : UInt32, @partition_number : UInt32, @volume_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record CLUSTER_SHARED_VOLUME_RENAME_GUID_INPUT,
-    __anonymous_base_clusapi_l5475_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME,
-    __anonymous_base_clusapi_l5476_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME
+  struct CLUS_PARTITION_INFO_EX2
+    property gpt_partition_id : LibC::GUID
+    property szPartitionName : UInt16[260]
+    property encryption_flags : UInt32
+    def initialize(@gpt_partition_id : LibC::GUID, @szPartitionName : UInt16[260], @encryption_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record CLUS_CHKDSK_INFO,
-    partition_number : UInt32,
-    chkdsk_state : UInt32,
-    file_id_count : UInt32,
-    file_id_list : UInt64*
+  struct CLUS_CSV_VOLUME_INFO
+    property volume_offset : Win32cr::Foundation::ULARGE_INTEGER
+    property partition_number : UInt32
+    property fault_state : Win32cr::Networking::Clustering::CLUSTER_CSV_VOLUME_FAULT_STATE
+    property backup_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_BACKUP_STATE
+    property szVolumeFriendlyName : UInt16[260]
+    property szVolumeName : UInt16[50]
+    def initialize(@volume_offset : Win32cr::Foundation::ULARGE_INTEGER, @partition_number : UInt32, @fault_state : Win32cr::Networking::Clustering::CLUSTER_CSV_VOLUME_FAULT_STATE, @backup_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_BACKUP_STATE, @szVolumeFriendlyName : UInt16[260], @szVolumeName : UInt16[50])
+    end
+  end
 
   @[Extern]
-  record CLUS_DISK_NUMBER_INFO,
-    disk_number : UInt32,
-    bytes_per_sector : UInt32
+  struct CLUS_CSV_VOLUME_NAME
+    property volume_offset : Win32cr::Foundation::LARGE_INTEGER
+    property szVolumeName : UInt16[260]
+    property szRootPath : UInt16[263]
+    def initialize(@volume_offset : Win32cr::Foundation::LARGE_INTEGER, @szVolumeName : UInt16[260], @szRootPath : UInt16[263])
+    end
+  end
 
   @[Extern]
-  record CLUS_SHARED_VOLUME_BACKUP_MODE,
-    backup_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_BACKUP_STATE,
-    delay_timer_in_secs : UInt32,
-    volume_name : UInt16[260]
+  struct CLUSTER_SHARED_VOLUME_STATE_INFO
+    property szVolumeName : UInt16[260]
+    property szNodeName : UInt16[260]
+    property volume_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_STATE
+    def initialize(@szVolumeName : UInt16[260], @szNodeName : UInt16[260], @volume_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_STATE)
+    end
+  end
 
   @[Extern]
-  record CLUSPROP_PARTITION_INFO,
-    __anonymous_base_clusapi_l5507_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    __anonymous_base_clusapi_l5508_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO
+  struct CLUSTER_SHARED_VOLUME_STATE_INFO_EX
+    property szVolumeName : UInt16[260]
+    property szNodeName : UInt16[260]
+    property volume_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_STATE
+    property szVolumeFriendlyName : UInt16[260]
+    property redirected_io_reason : UInt64
+    property volume_redirected_io_reason : UInt64
+    def initialize(@szVolumeName : UInt16[260], @szNodeName : UInt16[260], @volume_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_STATE, @szVolumeFriendlyName : UInt16[260], @redirected_io_reason : UInt64, @volume_redirected_io_reason : UInt64)
+    end
+  end
 
   @[Extern]
-  record CLUSPROP_PARTITION_INFO_EX,
-    __anonymous_base_clusapi_l5519_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    __anonymous_base_clusapi_l5520_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX
-
-  @[Extern]
-  record CLUSPROP_PARTITION_INFO_EX2,
-    __anonymous_base_clusapi_l5533_c14 : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO_EX,
-    __anonymous_base_clusapi_l5534_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX2
-
-  @[Extern]
-  record CLUS_FTSET_INFO,
-    dwRootSignature : UInt32,
-    dwFtType : UInt32
-
-  @[Extern]
-  record CLUSPROP_FTSET_INFO,
-    __anonymous_base_clusapi_l5555_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    __anonymous_base_clusapi_l5556_c14 : Win32cr::Networking::Clustering::CLUS_FTSET_INFO
-
-  @[Extern]
-  record CLUS_SCSI_ADDRESS,
-    anonymous : Anonymous_e__Union_ do
+  struct CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME
+    property input_type : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      dw : UInt32 do
+    struct Anonymous_e__Union_
+    property volume_offset : UInt64
+    property volume_id : UInt16[260]
+    property volume_name : UInt16[260]
+    property volume_guid : UInt16[50]
+    def initialize(@volume_offset : UInt64, @volume_id : UInt16[260], @volume_name : UInt16[260], @volume_guid : UInt16[50])
+    end
+    end
+
+    def initialize(@input_type : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_TYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME
+    property new_volume_name : UInt16[260]
+    def initialize(@new_volume_name : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME
+    property new_volume_name : UInt16[260]
+    property new_volume_guid : UInt16[50]
+    def initialize(@new_volume_name : UInt16[260], @new_volume_guid : UInt16[50])
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_SHARED_VOLUME_RENAME_INPUT
+    property __anonymous_base_clusapi_l5464_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME
+    property __anonymous_base_clusapi_l5465_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME
+    def initialize(@__anonymous_base_clusapi_l5464_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME, @__anonymous_base_clusapi_l5465_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_SHARED_VOLUME_RENAME_GUID_INPUT
+    property __anonymous_base_clusapi_l5475_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME
+    property __anonymous_base_clusapi_l5476_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME
+    def initialize(@__anonymous_base_clusapi_l5475_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME, @__anonymous_base_clusapi_l5476_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME)
+    end
+  end
+
+  @[Extern]
+  struct CLUS_CHKDSK_INFO
+    property partition_number : UInt32
+    property chkdsk_state : UInt32
+    property file_id_count : UInt32
+    property file_id_list : UInt64*
+    def initialize(@partition_number : UInt32, @chkdsk_state : UInt32, @file_id_count : UInt32, @file_id_list : UInt64*)
+    end
+  end
+
+  @[Extern]
+  struct CLUS_DISK_NUMBER_INFO
+    property disk_number : UInt32
+    property bytes_per_sector : UInt32
+    def initialize(@disk_number : UInt32, @bytes_per_sector : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLUS_SHARED_VOLUME_BACKUP_MODE
+    property backup_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_BACKUP_STATE
+    property delay_timer_in_secs : UInt32
+    property volume_name : UInt16[260]
+    def initialize(@backup_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_BACKUP_STATE, @delay_timer_in_secs : UInt32, @volume_name : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct CLUSPROP_PARTITION_INFO
+    property __anonymous_base_clusapi_l5507_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property __anonymous_base_clusapi_l5508_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO
+    def initialize(@__anonymous_base_clusapi_l5507_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @__anonymous_base_clusapi_l5508_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO)
+    end
+  end
+
+  @[Extern]
+  struct CLUSPROP_PARTITION_INFO_EX
+    property __anonymous_base_clusapi_l5519_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property __anonymous_base_clusapi_l5520_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX
+    def initialize(@__anonymous_base_clusapi_l5519_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @__anonymous_base_clusapi_l5520_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX)
+    end
+  end
+
+  @[Extern]
+  struct CLUSPROP_PARTITION_INFO_EX2
+    property __anonymous_base_clusapi_l5533_c14 : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO_EX
+    property __anonymous_base_clusapi_l5534_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX2
+    def initialize(@__anonymous_base_clusapi_l5533_c14 : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO_EX, @__anonymous_base_clusapi_l5534_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX2)
+    end
+  end
+
+  @[Extern]
+  struct CLUS_FTSET_INFO
+    property dwRootSignature : UInt32
+    property dwFtType : UInt32
+    def initialize(@dwRootSignature : UInt32, @dwFtType : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLUSPROP_FTSET_INFO
+    property __anonymous_base_clusapi_l5555_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property __anonymous_base_clusapi_l5556_c14 : Win32cr::Networking::Clustering::CLUS_FTSET_INFO
+    def initialize(@__anonymous_base_clusapi_l5555_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @__anonymous_base_clusapi_l5556_c14 : Win32cr::Networking::Clustering::CLUS_FTSET_INFO)
+    end
+  end
+
+  @[Extern]
+  struct CLUS_SCSI_ADDRESS
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property dw : UInt32
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        port_number : UInt8,
-        path_id : UInt8,
-        target_id : UInt8,
-        lun : UInt8
+      struct Anonymous_e__Struct_
+    property port_number : UInt8
+    property path_id : UInt8
+    property target_id : UInt8
+    property lun : UInt8
+    def initialize(@port_number : UInt8, @path_id : UInt8, @target_id : UInt8, @lun : UInt8)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @dw : UInt32)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record CLUSPROP_SCSI_ADDRESS,
-    __anonymous_base_clusapi_l5583_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE,
-    __anonymous_base_clusapi_l5584_c14 : Win32cr::Networking::Clustering::CLUS_SCSI_ADDRESS
+  struct CLUSPROP_SCSI_ADDRESS
+    property __anonymous_base_clusapi_l5583_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property __anonymous_base_clusapi_l5584_c14 : Win32cr::Networking::Clustering::CLUS_SCSI_ADDRESS
+    def initialize(@__anonymous_base_clusapi_l5583_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @__anonymous_base_clusapi_l5584_c14 : Win32cr::Networking::Clustering::CLUS_SCSI_ADDRESS)
+    end
+  end
 
   @[Extern]
-  record CLUS_NETNAME_VS_TOKEN_INFO,
-    process_id : UInt32,
-    desired_access : UInt32,
-    inherit_handle : Win32cr::Foundation::BOOL
+  struct CLUS_NETNAME_VS_TOKEN_INFO
+    property process_id : UInt32
+    property desired_access : UInt32
+    property inherit_handle : Win32cr::Foundation::BOOL
+    def initialize(@process_id : UInt32, @desired_access : UInt32, @inherit_handle : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record CLUS_NETNAME_PWD_INFO,
-    flags : UInt32,
-    password : UInt16[16],
-    creating_dc : UInt16[258],
-    object_guid : UInt16[64]
+  struct CLUS_NETNAME_PWD_INFO
+    property flags : UInt32
+    property password : UInt16[16]
+    property creating_dc : UInt16[258]
+    property object_guid : UInt16[64]
+    def initialize(@flags : UInt32, @password : UInt16[16], @creating_dc : UInt16[258], @object_guid : UInt16[64])
+    end
+  end
 
   @[Extern]
-  record CLUS_NETNAME_PWD_INFOEX,
-    flags : UInt32,
-    password : UInt16[128],
-    creating_dc : UInt16[258],
-    object_guid : UInt16[64]
+  struct CLUS_NETNAME_PWD_INFOEX
+    property flags : UInt32
+    property password : UInt16[128]
+    property creating_dc : UInt16[258]
+    property object_guid : UInt16[64]
+    def initialize(@flags : UInt32, @password : UInt16[128], @creating_dc : UInt16[258], @object_guid : UInt16[64])
+    end
+  end
 
   @[Extern]
-  record CLUS_DNN_LEADER_STATUS,
-    is_online : Win32cr::Foundation::BOOL,
-    is_file_server_present : Win32cr::Foundation::BOOL
+  struct CLUS_DNN_LEADER_STATUS
+    property is_online : Win32cr::Foundation::BOOL
+    property is_file_server_present : Win32cr::Foundation::BOOL
+    def initialize(@is_online : Win32cr::Foundation::BOOL, @is_file_server_present : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record CLUS_DNN_SODAFS_CLONE_STATUS,
-    node_id : UInt32,
-    status : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE
+  struct CLUS_DNN_SODAFS_CLONE_STATUS
+    property node_id : UInt32
+    property status : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE
+    def initialize(@node_id : UInt32, @status : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE)
+    end
+  end
 
   @[Extern]
-  record CLUS_NETNAME_IP_INFO_ENTRY,
-    node_id : UInt32,
-    address_size : UInt32,
-    address : UInt8*
+  struct CLUS_NETNAME_IP_INFO_ENTRY
+    property node_id : UInt32
+    property address_size : UInt32
+    property address : UInt8*
+    def initialize(@node_id : UInt32, @address_size : UInt32, @address : UInt8*)
+    end
+  end
 
   @[Extern]
-  record CLUS_NETNAME_IP_INFO_FOR_MULTICHANNEL,
-    szName : UInt16[64],
-    num_entries : UInt32,
-    ip_info : Win32cr::Networking::Clustering::CLUS_NETNAME_IP_INFO_ENTRY*
+  struct CLUS_NETNAME_IP_INFO_FOR_MULTICHANNEL
+    property szName : UInt16[64]
+    property num_entries : UInt32
+    property ip_info : Win32cr::Networking::Clustering::CLUS_NETNAME_IP_INFO_ENTRY*
+    def initialize(@szName : UInt16[64], @num_entries : UInt32, @ip_info : Win32cr::Networking::Clustering::CLUS_NETNAME_IP_INFO_ENTRY*)
+    end
+  end
 
   @[Extern]
-  record CLUS_MAINTENANCE_MODE_INFO,
-    in_maintenance : Win32cr::Foundation::BOOL
+  struct CLUS_MAINTENANCE_MODE_INFO
+    property in_maintenance : Win32cr::Foundation::BOOL
+    def initialize(@in_maintenance : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record CLUS_CSV_MAINTENANCE_MODE_INFO,
-    in_maintenance : Win32cr::Foundation::BOOL,
-    volume_name : UInt16[260]
+  struct CLUS_CSV_MAINTENANCE_MODE_INFO
+    property in_maintenance : Win32cr::Foundation::BOOL
+    property volume_name : UInt16[260]
+    def initialize(@in_maintenance : Win32cr::Foundation::BOOL, @volume_name : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record CLUS_MAINTENANCE_MODE_INFOEX,
-    in_maintenance : Win32cr::Foundation::BOOL,
-    maintainence_mode_type : Win32cr::Networking::Clustering::MAINTENANCE_MODE_TYPE_ENUM,
-    internal_state : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE,
-    signature : UInt32
+  struct CLUS_MAINTENANCE_MODE_INFOEX
+    property in_maintenance : Win32cr::Foundation::BOOL
+    property maintainence_mode_type : Win32cr::Networking::Clustering::MAINTENANCE_MODE_TYPE_ENUM
+    property internal_state : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE
+    property signature : UInt32
+    def initialize(@in_maintenance : Win32cr::Foundation::BOOL, @maintainence_mode_type : Win32cr::Networking::Clustering::MAINTENANCE_MODE_TYPE_ENUM, @internal_state : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE, @signature : UInt32)
+    end
+  end
 
   @[Extern]
-  record CLUS_SET_MAINTENANCE_MODE_INPUT,
-    in_maintenance : Win32cr::Foundation::BOOL,
-    extra_parameter_size : UInt32,
-    extra_parameter : UInt8*
+  struct CLUS_SET_MAINTENANCE_MODE_INPUT
+    property in_maintenance : Win32cr::Foundation::BOOL
+    property extra_parameter_size : UInt32
+    property extra_parameter : UInt8*
+    def initialize(@in_maintenance : Win32cr::Foundation::BOOL, @extra_parameter_size : UInt32, @extra_parameter : UInt8*)
+    end
+  end
 
   @[Extern]
-  record CLUS_STORAGE_SET_DRIVELETTER,
-    partition_number : UInt32,
-    drive_letter_mask : UInt32
+  struct CLUS_STORAGE_SET_DRIVELETTER
+    property partition_number : UInt32
+    property drive_letter_mask : UInt32
+    def initialize(@partition_number : UInt32, @drive_letter_mask : UInt32)
+    end
+  end
 
   @[Extern]
-  record CLUS_STORAGE_GET_AVAILABLE_DRIVELETTERS,
-    avail_driveletters_mask : UInt32
+  struct CLUS_STORAGE_GET_AVAILABLE_DRIVELETTERS
+    property avail_driveletters_mask : UInt32
+    def initialize(@avail_driveletters_mask : UInt32)
+    end
+  end
 
   @[Extern]
-  record CLUS_STORAGE_REMAP_DRIVELETTER,
-    current_drive_letter_mask : UInt32,
-    target_drive_letter_mask : UInt32
+  struct CLUS_STORAGE_REMAP_DRIVELETTER
+    property current_drive_letter_mask : UInt32
+    property target_drive_letter_mask : UInt32
+    def initialize(@current_drive_letter_mask : UInt32, @target_drive_letter_mask : UInt32)
+    end
+  end
 
   @[Extern]
-  record CLUS_PROVIDER_STATE_CHANGE_INFO,
-    dwSize : UInt32,
-    resourceState : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE,
-    szProviderId : UInt16*
+  struct CLUS_PROVIDER_STATE_CHANGE_INFO
+    property dwSize : UInt32
+    property resourceState : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE
+    property szProviderId : UInt16*
+    def initialize(@dwSize : UInt32, @resourceState : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE, @szProviderId : UInt16*)
+    end
+  end
 
   @[Extern]
-  record CLUS_CREATE_INFRASTRUCTURE_FILESERVER_INPUT,
-    file_server_name : UInt16[16]
+  struct CLUS_CREATE_INFRASTRUCTURE_FILESERVER_INPUT
+    property file_server_name : UInt16[16]
+    def initialize(@file_server_name : UInt16[16])
+    end
+  end
 
   @[Extern]
-  record CLUS_CREATE_INFRASTRUCTURE_FILESERVER_OUTPUT,
-    file_server_name : UInt16[260]
+  struct CLUS_CREATE_INFRASTRUCTURE_FILESERVER_OUTPUT
+    property file_server_name : UInt16[260]
+    def initialize(@file_server_name : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record CLUSPROP_LIST,
-    nPropertyCount : UInt32,
-    property_name : Win32cr::Networking::Clustering::CLUSPROP_SZ
+  struct CLUSPROP_LIST
+    property nPropertyCount : UInt32
+    property property_name : Win32cr::Networking::Clustering::CLUSPROP_SZ
+    def initialize(@nPropertyCount : UInt32, @property_name : Win32cr::Networking::Clustering::CLUSPROP_SZ)
+    end
+  end
 
   @[Extern]
-  record FILESHARE_CHANGE,
-    change : Win32cr::Networking::Clustering::FILESHARE_CHANGE_ENUM,
-    share_name : UInt16[84]
+  struct FILESHARE_CHANGE
+    property change : Win32cr::Networking::Clustering::FILESHARE_CHANGE_ENUM
+    property share_name : UInt16[84]
+    def initialize(@change : Win32cr::Networking::Clustering::FILESHARE_CHANGE_ENUM, @share_name : UInt16[84])
+    end
+  end
 
   @[Extern]
-  record FILESHARE_CHANGE_LIST,
-    num_entries : UInt32,
-    change_entry : Win32cr::Networking::Clustering::FILESHARE_CHANGE*
+  struct FILESHARE_CHANGE_LIST
+    property num_entries : UInt32
+    property change_entry : Win32cr::Networking::Clustering::FILESHARE_CHANGE*
+    def initialize(@num_entries : UInt32, @change_entry : Win32cr::Networking::Clustering::FILESHARE_CHANGE*)
+    end
+  end
 
   @[Extern]
-  record CLUSCTL_GROUP_GET_LAST_MOVE_TIME_OUTPUT,
-    get_tick_count64 : UInt64,
-    get_system_time : Win32cr::Foundation::SYSTEMTIME,
-    node_id : UInt32
+  struct CLUSCTL_GROUP_GET_LAST_MOVE_TIME_OUTPUT
+    property get_tick_count64 : UInt64
+    property get_system_time : Win32cr::Foundation::SYSTEMTIME
+    property node_id : UInt32
+    def initialize(@get_tick_count64 : UInt64, @get_system_time : Win32cr::Foundation::SYSTEMTIME, @node_id : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record CLUSPROP_BUFFER_HELPER,
-    pb : UInt8*,
-    pw : UInt16*,
-    pdw : UInt32*,
-    pl : Int32*,
-    psz : Win32cr::Foundation::PWSTR,
-    pList : Win32cr::Networking::Clustering::CLUSPROP_LIST*,
-    pSyntax : Win32cr::Networking::Clustering::CLUSPROP_SYNTAX*,
-    pName : Win32cr::Networking::Clustering::CLUSPROP_SZ*,
-    pValue : Win32cr::Networking::Clustering::CLUSPROP_VALUE*,
-    pBinaryValue : Win32cr::Networking::Clustering::CLUSPROP_BINARY*,
-    pWordValue : Win32cr::Networking::Clustering::CLUSPROP_WORD*,
-    pDwordValue : Win32cr::Networking::Clustering::CLUSPROP_DWORD*,
-    pLongValue : Win32cr::Networking::Clustering::CLUSPROP_LONG*,
-    pULargeIntegerValue : Win32cr::Networking::Clustering::CLUSPROP_ULARGE_INTEGER*,
-    pLargeIntegerValue : Win32cr::Networking::Clustering::CLUSPROP_LARGE_INTEGER*,
-    pStringValue : Win32cr::Networking::Clustering::CLUSPROP_SZ*,
-    pMultiSzValue : Win32cr::Networking::Clustering::CLUSPROP_SZ*,
-    pSecurityDescriptor : Win32cr::Networking::Clustering::CLUSPROP_SECURITY_DESCRIPTOR*,
-    pResourceClassValue : Win32cr::Networking::Clustering::CLUSPROP_RESOURCE_CLASS*,
-    pResourceClassInfoValue : Win32cr::Networking::Clustering::CLUSPROP_RESOURCE_CLASS_INFO*,
-    pDiskSignatureValue : Win32cr::Networking::Clustering::CLUSPROP_DWORD*,
-    pScsiAddressValue : Win32cr::Networking::Clustering::CLUSPROP_SCSI_ADDRESS*,
-    pDiskNumberValue : Win32cr::Networking::Clustering::CLUSPROP_DWORD*,
-    pPartitionInfoValue : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO*,
-    pRequiredDependencyValue : Win32cr::Networking::Clustering::CLUSPROP_REQUIRED_DEPENDENCY*,
-    pPartitionInfoValueEx : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO_EX*,
-    pPartitionInfoValueEx2 : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO_EX2*,
-    pFileTimeValue : Win32cr::Networking::Clustering::CLUSPROP_FILETIME*
-
-  @[Extern]
-  record SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO,
-    partition_offset : UInt64,
-    capabilities : UInt32
-
-  @[Extern]
-  record SR_RESOURCE_TYPE_REPLICATED_PARTITION_ARRAY,
-    count : UInt32,
-    partition_array : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO*
-
-  @[Extern]
-  record SR_RESOURCE_TYPE_QUERY_ELIGIBLE_LOGDISKS,
-    data_disk_guid : LibC::GUID,
-    include_offline_disks : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record SR_RESOURCE_TYPE_QUERY_ELIGIBLE_TARGET_DATADISKS,
-    source_data_disk_guid : LibC::GUID,
-    target_replication_group_guid : LibC::GUID,
-    skip_connectivity_check : Win32cr::Foundation::BOOLEAN,
-    include_offline_disks : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record SR_RESOURCE_TYPE_QUERY_ELIGIBLE_SOURCE_DATADISKS,
-    data_disk_guid : LibC::GUID,
-    include_available_stoarge_disks : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record SR_RESOURCE_TYPE_DISK_INFO,
-    reason : Win32cr::Networking::Clustering::SR_DISK_REPLICATION_ELIGIBLE,
-    disk_guid : LibC::GUID
-
-  @[Extern]
-  record SR_RESOURCE_TYPE_ELIGIBLE_DISKS_RESULT,
-    count : UInt16,
-    disk_info : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_DISK_INFO*
-
-  @[Extern]
-  record SR_RESOURCE_TYPE_REPLICATED_DISK,
-    type__ : Win32cr::Networking::Clustering::SR_REPLICATED_DISK_TYPE,
-    cluster_disk_resource_guid : LibC::GUID,
-    replication_group_id : LibC::GUID,
-    replication_group_name : UInt16[260]
-
-  @[Extern]
-  record SR_RESOURCE_TYPE_REPLICATED_DISKS_RESULT,
-    count : UInt16,
-    replicated_disks : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_DISK*
-
-  @[Extern]
-  record SR_RESOURCE_TYPE_ADD_REPLICATION_GROUP,
-    replication_group_name : UInt16[260],
-    description : UInt16[260],
-    log_path : UInt16[260],
-    max_log_size_in_bytes : UInt64,
-    log_type : UInt16,
-    replication_mode : UInt32,
-    minimum_partners_in_sync : UInt32,
-    enable_write_consistency : Win32cr::Foundation::BOOLEAN,
-    enable_encryption : Win32cr::Foundation::BOOLEAN,
-    certificate_thumbprint : UInt16[260],
-    volume_name_count : UInt32,
-    volume_names : UInt16[260]
-
-  @[Extern]
-  record SR_RESOURCE_TYPE_ADD_REPLICATION_GROUP_RESULT,
-    result : UInt32,
-    error_string : UInt16[260]
-
-  @[Extern]
-  record CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS_EX2_INPUT,
-    dwFlags : UInt32,
-    guidPoolFilter : LibC::GUID
-
-  @[Extern]
-  record RESOURCE_STATUS,
-    resource_state : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE,
-    check_point : UInt32,
-    wait_hint : UInt32,
-    event_handle : Win32cr::Foundation::HANDLE
-
-  @[Extern]
-  record NodeUtilizationInfoElement,
-    id : UInt64,
-    available_memory : UInt64,
-    available_memory_after_reclamation : UInt64
-
-  @[Extern]
-  record ResourceUtilizationInfoElement,
-    physical_numa_id : UInt64,
-    current_memory : UInt64
-
-  @[Extern]
-  record GET_OPERATION_CONTEXT_PARAMS,
-    size : UInt32,
-    version : UInt32,
-    type__ : Win32cr::Networking::Clustering::RESDLL_CONTEXT_OPERATION_TYPE,
-    priority : UInt32
-
-  @[Extern]
-  record RESOURCE_STATUS_EX,
-    resource_state : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE,
-    check_point : UInt32,
-    event_handle : Win32cr::Foundation::HANDLE,
-    application_specific_error_code : UInt32,
-    flags : UInt32,
-    wait_hint : UInt32
-
-  @[Extern]
-  record CLRES_V1_FUNCTIONS,
-    open : Win32cr::Networking::Clustering::POPEN_ROUTINE,
-    close : Win32cr::Networking::Clustering::PCLOSE_ROUTINE,
-    online : Win32cr::Networking::Clustering::PONLINE_ROUTINE,
-    offline : Win32cr::Networking::Clustering::POFFLINE_ROUTINE,
-    terminate : Win32cr::Networking::Clustering::PTERMINATE_ROUTINE,
-    looks_alive : Win32cr::Networking::Clustering::PLOOKS_ALIVE_ROUTINE,
-    is_alive : Win32cr::Networking::Clustering::PIS_ALIVE_ROUTINE,
-    arbitrate : Win32cr::Networking::Clustering::PARBITRATE_ROUTINE,
-    release : Win32cr::Networking::Clustering::PRELEASE_ROUTINE,
-    resource_control : Win32cr::Networking::Clustering::PRESOURCE_CONTROL_ROUTINE,
-    resource_type_control : Win32cr::Networking::Clustering::PRESOURCE_TYPE_CONTROL_ROUTINE
-
-  @[Extern]
-  record CLRES_V2_FUNCTIONS,
-    open : Win32cr::Networking::Clustering::POPEN_V2_ROUTINE,
-    close : Win32cr::Networking::Clustering::PCLOSE_ROUTINE,
-    online : Win32cr::Networking::Clustering::PONLINE_V2_ROUTINE,
-    offline : Win32cr::Networking::Clustering::POFFLINE_V2_ROUTINE,
-    terminate : Win32cr::Networking::Clustering::PTERMINATE_ROUTINE,
-    looks_alive : Win32cr::Networking::Clustering::PLOOKS_ALIVE_ROUTINE,
-    is_alive : Win32cr::Networking::Clustering::PIS_ALIVE_ROUTINE,
-    arbitrate : Win32cr::Networking::Clustering::PARBITRATE_ROUTINE,
-    release : Win32cr::Networking::Clustering::PRELEASE_ROUTINE,
-    resource_control : Win32cr::Networking::Clustering::PRESOURCE_CONTROL_ROUTINE,
-    resource_type_control : Win32cr::Networking::Clustering::PRESOURCE_TYPE_CONTROL_ROUTINE,
-    cancel : Win32cr::Networking::Clustering::PCANCEL_ROUTINE
-
-  @[Extern]
-  record CLRES_V3_FUNCTIONS,
-    open : Win32cr::Networking::Clustering::POPEN_V2_ROUTINE,
-    close : Win32cr::Networking::Clustering::PCLOSE_ROUTINE,
-    online : Win32cr::Networking::Clustering::PONLINE_V2_ROUTINE,
-    offline : Win32cr::Networking::Clustering::POFFLINE_V2_ROUTINE,
-    terminate : Win32cr::Networking::Clustering::PTERMINATE_ROUTINE,
-    looks_alive : Win32cr::Networking::Clustering::PLOOKS_ALIVE_ROUTINE,
-    is_alive : Win32cr::Networking::Clustering::PIS_ALIVE_ROUTINE,
-    arbitrate : Win32cr::Networking::Clustering::PARBITRATE_ROUTINE,
-    release : Win32cr::Networking::Clustering::PRELEASE_ROUTINE,
-    begin_resource_control : Win32cr::Networking::Clustering::PBEGIN_RESCALL_ROUTINE,
-    begin_resource_type_control : Win32cr::Networking::Clustering::PBEGIN_RESTYPECALL_ROUTINE,
-    cancel : Win32cr::Networking::Clustering::PCANCEL_ROUTINE
-
-  @[Extern]
-  record CLRES_V4_FUNCTIONS,
-    open : Win32cr::Networking::Clustering::POPEN_V2_ROUTINE,
-    close : Win32cr::Networking::Clustering::PCLOSE_ROUTINE,
-    online : Win32cr::Networking::Clustering::PONLINE_V2_ROUTINE,
-    offline : Win32cr::Networking::Clustering::POFFLINE_V2_ROUTINE,
-    terminate : Win32cr::Networking::Clustering::PTERMINATE_ROUTINE,
-    looks_alive : Win32cr::Networking::Clustering::PLOOKS_ALIVE_ROUTINE,
-    is_alive : Win32cr::Networking::Clustering::PIS_ALIVE_ROUTINE,
-    arbitrate : Win32cr::Networking::Clustering::PARBITRATE_ROUTINE,
-    release : Win32cr::Networking::Clustering::PRELEASE_ROUTINE,
-    begin_resource_control : Win32cr::Networking::Clustering::PBEGIN_RESCALL_ROUTINE,
-    begin_resource_type_control : Win32cr::Networking::Clustering::PBEGIN_RESTYPECALL_ROUTINE,
-    cancel : Win32cr::Networking::Clustering::PCANCEL_ROUTINE,
-    begin_resource_control_as_user : Win32cr::Networking::Clustering::PBEGIN_RESCALL_AS_USER_ROUTINE,
-    begin_resource_type_control_as_user : Win32cr::Networking::Clustering::PBEGIN_RESTYPECALL_AS_USER_ROUTINE
-
-  @[Extern]
-  record CLRES_FUNCTION_TABLE,
-    table_size : UInt32,
-    version : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      v1_functions : Win32cr::Networking::Clustering::CLRES_V1_FUNCTIONS,
-      v2_functions : Win32cr::Networking::Clustering::CLRES_V2_FUNCTIONS,
-      v3_functions : Win32cr::Networking::Clustering::CLRES_V3_FUNCTIONS,
-      v4_functions : Win32cr::Networking::Clustering::CLRES_V4_FUNCTIONS
-
+  struct CLUSPROP_BUFFER_HELPER
+    property pb : UInt8*
+    property pw : UInt16*
+    property pdw : UInt32*
+    property pl : Int32*
+    property psz : Win32cr::Foundation::PWSTR
+    property pList : Win32cr::Networking::Clustering::CLUSPROP_LIST*
+    property pSyntax : Win32cr::Networking::Clustering::CLUSPROP_SYNTAX*
+    property pName : Win32cr::Networking::Clustering::CLUSPROP_SZ*
+    property pValue : Win32cr::Networking::Clustering::CLUSPROP_VALUE*
+    property pBinaryValue : Win32cr::Networking::Clustering::CLUSPROP_BINARY*
+    property pWordValue : Win32cr::Networking::Clustering::CLUSPROP_WORD*
+    property pDwordValue : Win32cr::Networking::Clustering::CLUSPROP_DWORD*
+    property pLongValue : Win32cr::Networking::Clustering::CLUSPROP_LONG*
+    property pULargeIntegerValue : Win32cr::Networking::Clustering::CLUSPROP_ULARGE_INTEGER*
+    property pLargeIntegerValue : Win32cr::Networking::Clustering::CLUSPROP_LARGE_INTEGER*
+    property pStringValue : Win32cr::Networking::Clustering::CLUSPROP_SZ*
+    property pMultiSzValue : Win32cr::Networking::Clustering::CLUSPROP_SZ*
+    property pSecurityDescriptor : Win32cr::Networking::Clustering::CLUSPROP_SECURITY_DESCRIPTOR*
+    property pResourceClassValue : Win32cr::Networking::Clustering::CLUSPROP_RESOURCE_CLASS*
+    property pResourceClassInfoValue : Win32cr::Networking::Clustering::CLUSPROP_RESOURCE_CLASS_INFO*
+    property pDiskSignatureValue : Win32cr::Networking::Clustering::CLUSPROP_DWORD*
+    property pScsiAddressValue : Win32cr::Networking::Clustering::CLUSPROP_SCSI_ADDRESS*
+    property pDiskNumberValue : Win32cr::Networking::Clustering::CLUSPROP_DWORD*
+    property pPartitionInfoValue : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO*
+    property pRequiredDependencyValue : Win32cr::Networking::Clustering::CLUSPROP_REQUIRED_DEPENDENCY*
+    property pPartitionInfoValueEx : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO_EX*
+    property pPartitionInfoValueEx2 : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO_EX2*
+    property pFileTimeValue : Win32cr::Networking::Clustering::CLUSPROP_FILETIME*
+    def initialize(@pb : UInt8*, @pw : UInt16*, @pdw : UInt32*, @pl : Int32*, @psz : Win32cr::Foundation::PWSTR, @pList : Win32cr::Networking::Clustering::CLUSPROP_LIST*, @pSyntax : Win32cr::Networking::Clustering::CLUSPROP_SYNTAX*, @pName : Win32cr::Networking::Clustering::CLUSPROP_SZ*, @pValue : Win32cr::Networking::Clustering::CLUSPROP_VALUE*, @pBinaryValue : Win32cr::Networking::Clustering::CLUSPROP_BINARY*, @pWordValue : Win32cr::Networking::Clustering::CLUSPROP_WORD*, @pDwordValue : Win32cr::Networking::Clustering::CLUSPROP_DWORD*, @pLongValue : Win32cr::Networking::Clustering::CLUSPROP_LONG*, @pULargeIntegerValue : Win32cr::Networking::Clustering::CLUSPROP_ULARGE_INTEGER*, @pLargeIntegerValue : Win32cr::Networking::Clustering::CLUSPROP_LARGE_INTEGER*, @pStringValue : Win32cr::Networking::Clustering::CLUSPROP_SZ*, @pMultiSzValue : Win32cr::Networking::Clustering::CLUSPROP_SZ*, @pSecurityDescriptor : Win32cr::Networking::Clustering::CLUSPROP_SECURITY_DESCRIPTOR*, @pResourceClassValue : Win32cr::Networking::Clustering::CLUSPROP_RESOURCE_CLASS*, @pResourceClassInfoValue : Win32cr::Networking::Clustering::CLUSPROP_RESOURCE_CLASS_INFO*, @pDiskSignatureValue : Win32cr::Networking::Clustering::CLUSPROP_DWORD*, @pScsiAddressValue : Win32cr::Networking::Clustering::CLUSPROP_SCSI_ADDRESS*, @pDiskNumberValue : Win32cr::Networking::Clustering::CLUSPROP_DWORD*, @pPartitionInfoValue : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO*, @pRequiredDependencyValue : Win32cr::Networking::Clustering::CLUSPROP_REQUIRED_DEPENDENCY*, @pPartitionInfoValueEx : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO_EX*, @pPartitionInfoValueEx2 : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO_EX2*, @pFileTimeValue : Win32cr::Networking::Clustering::CLUSPROP_FILETIME*)
+    end
   end
 
   @[Extern]
-  record RESUTIL_LARGEINT_DATA,
-    default : Win32cr::Foundation::LARGE_INTEGER,
-    minimum : Win32cr::Foundation::LARGE_INTEGER,
-    maximum : Win32cr::Foundation::LARGE_INTEGER
-
-  @[Extern]
-  record RESUTIL_ULARGEINT_DATA,
-    default : Win32cr::Foundation::ULARGE_INTEGER,
-    minimum : Win32cr::Foundation::ULARGE_INTEGER,
-    maximum : Win32cr::Foundation::ULARGE_INTEGER
-
-  @[Extern]
-  record RESUTIL_FILETIME_DATA,
-    default : Win32cr::Foundation::FILETIME,
-    minimum : Win32cr::Foundation::FILETIME,
-    maximum : Win32cr::Foundation::FILETIME
-
-  @[Extern]
-  record RESUTIL_PROPERTY_ITEM,
-    name : Win32cr::Foundation::PWSTR,
-    key_name : Win32cr::Foundation::PWSTR,
-    format : UInt32,
-    anonymous : Anonymous_e__Union_,
-    minimum : UInt32,
-    maximum : UInt32,
-    flags : UInt32,
-    offset : UInt32 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      default_ptr : LibC::UIntPtrT,
-      default : UInt32,
-      lpDefault : Void*,
-      large_int_data : Win32cr::Networking::Clustering::RESUTIL_LARGEINT_DATA*,
-      u_large_int_data : Win32cr::Networking::Clustering::RESUTIL_ULARGEINT_DATA*,
-      file_time_data : Win32cr::Networking::Clustering::RESUTIL_FILETIME_DATA*
-
+  struct SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO
+    property partition_offset : UInt64
+    property capabilities : UInt32
+    def initialize(@partition_offset : UInt64, @capabilities : UInt32)
+    end
   end
 
   @[Extern]
-  record CLRES_CALLBACK_FUNCTION_TABLE,
-    log_event : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE,
-    set_resource_status_ex : Win32cr::Networking::Clustering::PSET_RESOURCE_STATUS_ROUTINE_EX,
-    set_resource_locked_mode : Win32cr::Networking::Clustering::PSET_RESOURCE_LOCKED_MODE_ROUTINE,
-    signal_failure : Win32cr::Networking::Clustering::PSIGNAL_FAILURE_ROUTINE,
-    set_resource_in_memory_node_local_properties : Win32cr::Networking::Clustering::PSET_RESOURCE_INMEMORY_NODELOCAL_PROPERTIES_ROUTINE,
-    end_control_call : Win32cr::Networking::Clustering::PEND_CONTROL_CALL,
-    end_type_control_call : Win32cr::Networking::Clustering::PEND_TYPE_CONTROL_CALL,
-    extend_control_call : Win32cr::Networking::Clustering::PEXTEND_RES_CONTROL_CALL,
-    extend_type_control_call : Win32cr::Networking::Clustering::PEXTEND_RES_TYPE_CONTROL_CALL,
-    raise_res_type_notification : Win32cr::Networking::Clustering::PRAISE_RES_TYPE_NOTIFICATION,
-    change_resource_process_for_dumps : Win32cr::Networking::Clustering::PCHANGE_RESOURCE_PROCESS_FOR_DUMPS,
-    change_res_type_process_for_dumps : Win32cr::Networking::Clustering::PCHANGE_RES_TYPE_PROCESS_FOR_DUMPS,
-    set_internal_state : Win32cr::Networking::Clustering::PSET_INTERNAL_STATE,
-    set_resource_locked_mode_ex : Win32cr::Networking::Clustering::PSET_RESOURCE_LOCKED_MODE_EX_ROUTINE,
-    request_dump : Win32cr::Networking::Clustering::PREQUEST_DUMP_ROUTINE
+  struct SR_RESOURCE_TYPE_REPLICATED_PARTITION_ARRAY
+    property count : UInt32
+    property partition_array : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO*
+    def initialize(@count : UInt32, @partition_array : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO*)
+    end
+  end
 
   @[Extern]
-  record MONITOR_STATE,
-    last_update : Win32cr::Foundation::LARGE_INTEGER,
-    state : Win32cr::Networking::Clustering::RESOURCE_MONITOR_STATE,
-    active_resource : Win32cr::Foundation::HANDLE,
-    resmon_stop : Win32cr::Foundation::BOOL
+  struct SR_RESOURCE_TYPE_QUERY_ELIGIBLE_LOGDISKS
+    property data_disk_guid : LibC::GUID
+    property include_offline_disks : Win32cr::Foundation::BOOLEAN
+    def initialize(@data_disk_guid : LibC::GUID, @include_offline_disks : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record POST_UPGRADE_VERSION_INFO,
-    newMajorVersion : UInt32,
-    newUpgradeVersion : UInt32,
-    oldMajorVersion : UInt32,
-    oldUpgradeVersion : UInt32,
-    reserved : UInt32
+  struct SR_RESOURCE_TYPE_QUERY_ELIGIBLE_TARGET_DATADISKS
+    property source_data_disk_guid : LibC::GUID
+    property target_replication_group_guid : LibC::GUID
+    property skip_connectivity_check : Win32cr::Foundation::BOOLEAN
+    property include_offline_disks : Win32cr::Foundation::BOOLEAN
+    def initialize(@source_data_disk_guid : LibC::GUID, @target_replication_group_guid : LibC::GUID, @skip_connectivity_check : Win32cr::Foundation::BOOLEAN, @include_offline_disks : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record CLUSTER_HEALTH_FAULT,
-    id : Win32cr::Foundation::PWSTR,
-    error_type : UInt32,
-    error_code : UInt32,
-    description : Win32cr::Foundation::PWSTR,
-    provider : Win32cr::Foundation::PWSTR,
-    flags : UInt32,
-    reserved : UInt32
+  struct SR_RESOURCE_TYPE_QUERY_ELIGIBLE_SOURCE_DATADISKS
+    property data_disk_guid : LibC::GUID
+    property include_available_stoarge_disks : Win32cr::Foundation::BOOLEAN
+    def initialize(@data_disk_guid : LibC::GUID, @include_available_stoarge_disks : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record CLUSTER_HEALTH_FAULT_ARRAY,
-    numFaults : UInt32,
-    faults : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*
+  struct SR_RESOURCE_TYPE_DISK_INFO
+    property reason : Win32cr::Networking::Clustering::SR_DISK_REPLICATION_ELIGIBLE
+    property disk_guid : LibC::GUID
+    def initialize(@reason : Win32cr::Networking::Clustering::SR_DISK_REPLICATION_ELIGIBLE, @disk_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record CLUS_WORKER,
-    hThread : Win32cr::Foundation::HANDLE,
-    terminate : Win32cr::Foundation::BOOL
+  struct SR_RESOURCE_TYPE_ELIGIBLE_DISKS_RESULT
+    property count : UInt16
+    property disk_info : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_DISK_INFO*
+    def initialize(@count : UInt16, @disk_info : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_DISK_INFO*)
+    end
+  end
 
   @[Extern]
-  record HCLUSCRYPTPROVIDER_
-  @[Extern]
-  record PaxosTagCStruct,
-    __padding__paxos_tag_vtable : UInt64,
-    __padding__next_epoch_vtable : UInt64,
-    __padding__next_epoch_date_time_vtable : UInt64,
-    next_epoch_date_time_ticks : UInt64,
-    next_epoch_value : Int32,
-    __padding__boundry_next_epoch : UInt32,
-    __padding__epoch_vtable : UInt64,
-    __padding__epoch_date_time_vtable : UInt64,
-    epoch_date_time_ticks : UInt64,
-    epoch_value : Int32,
-    __padding__boundry_epoch : UInt32,
-    sequence : Int32,
-    __padding__boundry_sequence : UInt32
+  struct SR_RESOURCE_TYPE_REPLICATED_DISK
+    property type__ : Win32cr::Networking::Clustering::SR_REPLICATED_DISK_TYPE
+    property cluster_disk_resource_guid : LibC::GUID
+    property replication_group_id : LibC::GUID
+    property replication_group_name : UInt16[260]
+    def initialize(@type__ : Win32cr::Networking::Clustering::SR_REPLICATED_DISK_TYPE, @cluster_disk_resource_guid : LibC::GUID, @replication_group_id : LibC::GUID, @replication_group_name : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record WitnessTagUpdateHelper,
-    version : Int32,
-    paxosToSet : Win32cr::Networking::Clustering::PaxosTagCStruct,
-    paxosToValidate : Win32cr::Networking::Clustering::PaxosTagCStruct
+  struct SR_RESOURCE_TYPE_REPLICATED_DISKS_RESULT
+    property count : UInt16
+    property replicated_disks : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_DISK*
+    def initialize(@count : UInt16, @replicated_disks : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_DISK*)
+    end
+  end
 
   @[Extern]
-  record WitnessTagHelper,
-    version : Int32,
-    paxosToValidate : Win32cr::Networking::Clustering::PaxosTagCStruct
+  struct SR_RESOURCE_TYPE_ADD_REPLICATION_GROUP
+    property replication_group_name : UInt16[260]
+    property description : UInt16[260]
+    property log_path : UInt16[260]
+    property max_log_size_in_bytes : UInt64
+    property log_type : UInt16
+    property replication_mode : UInt32
+    property minimum_partners_in_sync : UInt32
+    property enable_write_consistency : Win32cr::Foundation::BOOLEAN
+    property enable_encryption : Win32cr::Foundation::BOOLEAN
+    property certificate_thumbprint : UInt16[260]
+    property volume_name_count : UInt32
+    property volume_names : UInt16[260]
+    def initialize(@replication_group_name : UInt16[260], @description : UInt16[260], @log_path : UInt16[260], @max_log_size_in_bytes : UInt64, @log_type : UInt16, @replication_mode : UInt32, @minimum_partners_in_sync : UInt32, @enable_write_consistency : Win32cr::Foundation::BOOLEAN, @enable_encryption : Win32cr::Foundation::BOOLEAN, @certificate_thumbprint : UInt16[260], @volume_name_count : UInt32, @volume_names : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct SR_RESOURCE_TYPE_ADD_REPLICATION_GROUP_RESULT
+    property result : UInt32
+    property error_string : UInt16[260]
+    def initialize(@result : UInt32, @error_string : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS_EX2_INPUT
+    property dwFlags : UInt32
+    property guidPoolFilter : LibC::GUID
+    def initialize(@dwFlags : UInt32, @guidPoolFilter : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct RESOURCE_STATUS
+    property resource_state : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE
+    property check_point : UInt32
+    property wait_hint : UInt32
+    property event_handle : Win32cr::Foundation::HANDLE
+    def initialize(@resource_state : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE, @check_point : UInt32, @wait_hint : UInt32, @event_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct NodeUtilizationInfoElement
+    property id : UInt64
+    property available_memory : UInt64
+    property available_memory_after_reclamation : UInt64
+    def initialize(@id : UInt64, @available_memory : UInt64, @available_memory_after_reclamation : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct ResourceUtilizationInfoElement
+    property physical_numa_id : UInt64
+    property current_memory : UInt64
+    def initialize(@physical_numa_id : UInt64, @current_memory : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct GET_OPERATION_CONTEXT_PARAMS
+    property size : UInt32
+    property version : UInt32
+    property type__ : Win32cr::Networking::Clustering::RESDLL_CONTEXT_OPERATION_TYPE
+    property priority : UInt32
+    def initialize(@size : UInt32, @version : UInt32, @type__ : Win32cr::Networking::Clustering::RESDLL_CONTEXT_OPERATION_TYPE, @priority : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RESOURCE_STATUS_EX
+    property resource_state : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE
+    property check_point : UInt32
+    property event_handle : Win32cr::Foundation::HANDLE
+    property application_specific_error_code : UInt32
+    property flags : UInt32
+    property wait_hint : UInt32
+    def initialize(@resource_state : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE, @check_point : UInt32, @event_handle : Win32cr::Foundation::HANDLE, @application_specific_error_code : UInt32, @flags : UInt32, @wait_hint : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLRES_V1_FUNCTIONS
+    property open : Win32cr::Networking::Clustering::POPEN_ROUTINE
+    property close : Win32cr::Networking::Clustering::PCLOSE_ROUTINE
+    property online : Win32cr::Networking::Clustering::PONLINE_ROUTINE
+    property offline : Win32cr::Networking::Clustering::POFFLINE_ROUTINE
+    property terminate : Win32cr::Networking::Clustering::PTERMINATE_ROUTINE
+    property looks_alive : Win32cr::Networking::Clustering::PLOOKS_ALIVE_ROUTINE
+    property is_alive : Win32cr::Networking::Clustering::PIS_ALIVE_ROUTINE
+    property arbitrate : Win32cr::Networking::Clustering::PARBITRATE_ROUTINE
+    property release : Win32cr::Networking::Clustering::PRELEASE_ROUTINE
+    property resource_control : Win32cr::Networking::Clustering::PRESOURCE_CONTROL_ROUTINE
+    property resource_type_control : Win32cr::Networking::Clustering::PRESOURCE_TYPE_CONTROL_ROUTINE
+    def initialize(@open : Win32cr::Networking::Clustering::POPEN_ROUTINE, @close : Win32cr::Networking::Clustering::PCLOSE_ROUTINE, @online : Win32cr::Networking::Clustering::PONLINE_ROUTINE, @offline : Win32cr::Networking::Clustering::POFFLINE_ROUTINE, @terminate : Win32cr::Networking::Clustering::PTERMINATE_ROUTINE, @looks_alive : Win32cr::Networking::Clustering::PLOOKS_ALIVE_ROUTINE, @is_alive : Win32cr::Networking::Clustering::PIS_ALIVE_ROUTINE, @arbitrate : Win32cr::Networking::Clustering::PARBITRATE_ROUTINE, @release : Win32cr::Networking::Clustering::PRELEASE_ROUTINE, @resource_control : Win32cr::Networking::Clustering::PRESOURCE_CONTROL_ROUTINE, @resource_type_control : Win32cr::Networking::Clustering::PRESOURCE_TYPE_CONTROL_ROUTINE)
+    end
+  end
+
+  @[Extern]
+  struct CLRES_V2_FUNCTIONS
+    property open : Win32cr::Networking::Clustering::POPEN_V2_ROUTINE
+    property close : Win32cr::Networking::Clustering::PCLOSE_ROUTINE
+    property online : Win32cr::Networking::Clustering::PONLINE_V2_ROUTINE
+    property offline : Win32cr::Networking::Clustering::POFFLINE_V2_ROUTINE
+    property terminate : Win32cr::Networking::Clustering::PTERMINATE_ROUTINE
+    property looks_alive : Win32cr::Networking::Clustering::PLOOKS_ALIVE_ROUTINE
+    property is_alive : Win32cr::Networking::Clustering::PIS_ALIVE_ROUTINE
+    property arbitrate : Win32cr::Networking::Clustering::PARBITRATE_ROUTINE
+    property release : Win32cr::Networking::Clustering::PRELEASE_ROUTINE
+    property resource_control : Win32cr::Networking::Clustering::PRESOURCE_CONTROL_ROUTINE
+    property resource_type_control : Win32cr::Networking::Clustering::PRESOURCE_TYPE_CONTROL_ROUTINE
+    property cancel : Win32cr::Networking::Clustering::PCANCEL_ROUTINE
+    def initialize(@open : Win32cr::Networking::Clustering::POPEN_V2_ROUTINE, @close : Win32cr::Networking::Clustering::PCLOSE_ROUTINE, @online : Win32cr::Networking::Clustering::PONLINE_V2_ROUTINE, @offline : Win32cr::Networking::Clustering::POFFLINE_V2_ROUTINE, @terminate : Win32cr::Networking::Clustering::PTERMINATE_ROUTINE, @looks_alive : Win32cr::Networking::Clustering::PLOOKS_ALIVE_ROUTINE, @is_alive : Win32cr::Networking::Clustering::PIS_ALIVE_ROUTINE, @arbitrate : Win32cr::Networking::Clustering::PARBITRATE_ROUTINE, @release : Win32cr::Networking::Clustering::PRELEASE_ROUTINE, @resource_control : Win32cr::Networking::Clustering::PRESOURCE_CONTROL_ROUTINE, @resource_type_control : Win32cr::Networking::Clustering::PRESOURCE_TYPE_CONTROL_ROUTINE, @cancel : Win32cr::Networking::Clustering::PCANCEL_ROUTINE)
+    end
+  end
+
+  @[Extern]
+  struct CLRES_V3_FUNCTIONS
+    property open : Win32cr::Networking::Clustering::POPEN_V2_ROUTINE
+    property close : Win32cr::Networking::Clustering::PCLOSE_ROUTINE
+    property online : Win32cr::Networking::Clustering::PONLINE_V2_ROUTINE
+    property offline : Win32cr::Networking::Clustering::POFFLINE_V2_ROUTINE
+    property terminate : Win32cr::Networking::Clustering::PTERMINATE_ROUTINE
+    property looks_alive : Win32cr::Networking::Clustering::PLOOKS_ALIVE_ROUTINE
+    property is_alive : Win32cr::Networking::Clustering::PIS_ALIVE_ROUTINE
+    property arbitrate : Win32cr::Networking::Clustering::PARBITRATE_ROUTINE
+    property release : Win32cr::Networking::Clustering::PRELEASE_ROUTINE
+    property begin_resource_control : Win32cr::Networking::Clustering::PBEGIN_RESCALL_ROUTINE
+    property begin_resource_type_control : Win32cr::Networking::Clustering::PBEGIN_RESTYPECALL_ROUTINE
+    property cancel : Win32cr::Networking::Clustering::PCANCEL_ROUTINE
+    def initialize(@open : Win32cr::Networking::Clustering::POPEN_V2_ROUTINE, @close : Win32cr::Networking::Clustering::PCLOSE_ROUTINE, @online : Win32cr::Networking::Clustering::PONLINE_V2_ROUTINE, @offline : Win32cr::Networking::Clustering::POFFLINE_V2_ROUTINE, @terminate : Win32cr::Networking::Clustering::PTERMINATE_ROUTINE, @looks_alive : Win32cr::Networking::Clustering::PLOOKS_ALIVE_ROUTINE, @is_alive : Win32cr::Networking::Clustering::PIS_ALIVE_ROUTINE, @arbitrate : Win32cr::Networking::Clustering::PARBITRATE_ROUTINE, @release : Win32cr::Networking::Clustering::PRELEASE_ROUTINE, @begin_resource_control : Win32cr::Networking::Clustering::PBEGIN_RESCALL_ROUTINE, @begin_resource_type_control : Win32cr::Networking::Clustering::PBEGIN_RESTYPECALL_ROUTINE, @cancel : Win32cr::Networking::Clustering::PCANCEL_ROUTINE)
+    end
+  end
+
+  @[Extern]
+  struct CLRES_V4_FUNCTIONS
+    property open : Win32cr::Networking::Clustering::POPEN_V2_ROUTINE
+    property close : Win32cr::Networking::Clustering::PCLOSE_ROUTINE
+    property online : Win32cr::Networking::Clustering::PONLINE_V2_ROUTINE
+    property offline : Win32cr::Networking::Clustering::POFFLINE_V2_ROUTINE
+    property terminate : Win32cr::Networking::Clustering::PTERMINATE_ROUTINE
+    property looks_alive : Win32cr::Networking::Clustering::PLOOKS_ALIVE_ROUTINE
+    property is_alive : Win32cr::Networking::Clustering::PIS_ALIVE_ROUTINE
+    property arbitrate : Win32cr::Networking::Clustering::PARBITRATE_ROUTINE
+    property release : Win32cr::Networking::Clustering::PRELEASE_ROUTINE
+    property begin_resource_control : Win32cr::Networking::Clustering::PBEGIN_RESCALL_ROUTINE
+    property begin_resource_type_control : Win32cr::Networking::Clustering::PBEGIN_RESTYPECALL_ROUTINE
+    property cancel : Win32cr::Networking::Clustering::PCANCEL_ROUTINE
+    property begin_resource_control_as_user : Win32cr::Networking::Clustering::PBEGIN_RESCALL_AS_USER_ROUTINE
+    property begin_resource_type_control_as_user : Win32cr::Networking::Clustering::PBEGIN_RESTYPECALL_AS_USER_ROUTINE
+    def initialize(@open : Win32cr::Networking::Clustering::POPEN_V2_ROUTINE, @close : Win32cr::Networking::Clustering::PCLOSE_ROUTINE, @online : Win32cr::Networking::Clustering::PONLINE_V2_ROUTINE, @offline : Win32cr::Networking::Clustering::POFFLINE_V2_ROUTINE, @terminate : Win32cr::Networking::Clustering::PTERMINATE_ROUTINE, @looks_alive : Win32cr::Networking::Clustering::PLOOKS_ALIVE_ROUTINE, @is_alive : Win32cr::Networking::Clustering::PIS_ALIVE_ROUTINE, @arbitrate : Win32cr::Networking::Clustering::PARBITRATE_ROUTINE, @release : Win32cr::Networking::Clustering::PRELEASE_ROUTINE, @begin_resource_control : Win32cr::Networking::Clustering::PBEGIN_RESCALL_ROUTINE, @begin_resource_type_control : Win32cr::Networking::Clustering::PBEGIN_RESTYPECALL_ROUTINE, @cancel : Win32cr::Networking::Clustering::PCANCEL_ROUTINE, @begin_resource_control_as_user : Win32cr::Networking::Clustering::PBEGIN_RESCALL_AS_USER_ROUTINE, @begin_resource_type_control_as_user : Win32cr::Networking::Clustering::PBEGIN_RESTYPECALL_AS_USER_ROUTINE)
+    end
+  end
+
+  @[Extern]
+  struct CLRES_FUNCTION_TABLE
+    property table_size : UInt32
+    property version : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property v1_functions : Win32cr::Networking::Clustering::CLRES_V1_FUNCTIONS
+    property v2_functions : Win32cr::Networking::Clustering::CLRES_V2_FUNCTIONS
+    property v3_functions : Win32cr::Networking::Clustering::CLRES_V3_FUNCTIONS
+    property v4_functions : Win32cr::Networking::Clustering::CLRES_V4_FUNCTIONS
+    def initialize(@v1_functions : Win32cr::Networking::Clustering::CLRES_V1_FUNCTIONS, @v2_functions : Win32cr::Networking::Clustering::CLRES_V2_FUNCTIONS, @v3_functions : Win32cr::Networking::Clustering::CLRES_V3_FUNCTIONS, @v4_functions : Win32cr::Networking::Clustering::CLRES_V4_FUNCTIONS)
+    end
+    end
+
+    def initialize(@table_size : UInt32, @version : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct RESUTIL_LARGEINT_DATA
+    property default : Win32cr::Foundation::LARGE_INTEGER
+    property minimum : Win32cr::Foundation::LARGE_INTEGER
+    property maximum : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@default : Win32cr::Foundation::LARGE_INTEGER, @minimum : Win32cr::Foundation::LARGE_INTEGER, @maximum : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
+
+  @[Extern]
+  struct RESUTIL_ULARGEINT_DATA
+    property default : Win32cr::Foundation::ULARGE_INTEGER
+    property minimum : Win32cr::Foundation::ULARGE_INTEGER
+    property maximum : Win32cr::Foundation::ULARGE_INTEGER
+    def initialize(@default : Win32cr::Foundation::ULARGE_INTEGER, @minimum : Win32cr::Foundation::ULARGE_INTEGER, @maximum : Win32cr::Foundation::ULARGE_INTEGER)
+    end
+  end
+
+  @[Extern]
+  struct RESUTIL_FILETIME_DATA
+    property default : Win32cr::Foundation::FILETIME
+    property minimum : Win32cr::Foundation::FILETIME
+    property maximum : Win32cr::Foundation::FILETIME
+    def initialize(@default : Win32cr::Foundation::FILETIME, @minimum : Win32cr::Foundation::FILETIME, @maximum : Win32cr::Foundation::FILETIME)
+    end
+  end
+
+  @[Extern]
+  struct RESUTIL_PROPERTY_ITEM
+    property name : Win32cr::Foundation::PWSTR
+    property key_name : Win32cr::Foundation::PWSTR
+    property format : UInt32
+    property anonymous : Anonymous_e__Union_
+    property minimum : UInt32
+    property maximum : UInt32
+    property flags : UInt32
+    property offset : UInt32
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property default_ptr : LibC::UIntPtrT
+    property default : UInt32
+    property lpDefault : Void*
+    property large_int_data : Win32cr::Networking::Clustering::RESUTIL_LARGEINT_DATA*
+    property u_large_int_data : Win32cr::Networking::Clustering::RESUTIL_ULARGEINT_DATA*
+    property file_time_data : Win32cr::Networking::Clustering::RESUTIL_FILETIME_DATA*
+    def initialize(@default_ptr : LibC::UIntPtrT, @default : UInt32, @lpDefault : Void*, @large_int_data : Win32cr::Networking::Clustering::RESUTIL_LARGEINT_DATA*, @u_large_int_data : Win32cr::Networking::Clustering::RESUTIL_ULARGEINT_DATA*, @file_time_data : Win32cr::Networking::Clustering::RESUTIL_FILETIME_DATA*)
+    end
+    end
+
+    def initialize(@name : Win32cr::Foundation::PWSTR, @key_name : Win32cr::Foundation::PWSTR, @format : UInt32, @anonymous : Anonymous_e__Union_, @minimum : UInt32, @maximum : UInt32, @flags : UInt32, @offset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLRES_CALLBACK_FUNCTION_TABLE
+    property log_event : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE
+    property set_resource_status_ex : Win32cr::Networking::Clustering::PSET_RESOURCE_STATUS_ROUTINE_EX
+    property set_resource_locked_mode : Win32cr::Networking::Clustering::PSET_RESOURCE_LOCKED_MODE_ROUTINE
+    property signal_failure : Win32cr::Networking::Clustering::PSIGNAL_FAILURE_ROUTINE
+    property set_resource_in_memory_node_local_properties : Win32cr::Networking::Clustering::PSET_RESOURCE_INMEMORY_NODELOCAL_PROPERTIES_ROUTINE
+    property end_control_call : Win32cr::Networking::Clustering::PEND_CONTROL_CALL
+    property end_type_control_call : Win32cr::Networking::Clustering::PEND_TYPE_CONTROL_CALL
+    property extend_control_call : Win32cr::Networking::Clustering::PEXTEND_RES_CONTROL_CALL
+    property extend_type_control_call : Win32cr::Networking::Clustering::PEXTEND_RES_TYPE_CONTROL_CALL
+    property raise_res_type_notification : Win32cr::Networking::Clustering::PRAISE_RES_TYPE_NOTIFICATION
+    property change_resource_process_for_dumps : Win32cr::Networking::Clustering::PCHANGE_RESOURCE_PROCESS_FOR_DUMPS
+    property change_res_type_process_for_dumps : Win32cr::Networking::Clustering::PCHANGE_RES_TYPE_PROCESS_FOR_DUMPS
+    property set_internal_state : Win32cr::Networking::Clustering::PSET_INTERNAL_STATE
+    property set_resource_locked_mode_ex : Win32cr::Networking::Clustering::PSET_RESOURCE_LOCKED_MODE_EX_ROUTINE
+    property request_dump : Win32cr::Networking::Clustering::PREQUEST_DUMP_ROUTINE
+    def initialize(@log_event : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, @set_resource_status_ex : Win32cr::Networking::Clustering::PSET_RESOURCE_STATUS_ROUTINE_EX, @set_resource_locked_mode : Win32cr::Networking::Clustering::PSET_RESOURCE_LOCKED_MODE_ROUTINE, @signal_failure : Win32cr::Networking::Clustering::PSIGNAL_FAILURE_ROUTINE, @set_resource_in_memory_node_local_properties : Win32cr::Networking::Clustering::PSET_RESOURCE_INMEMORY_NODELOCAL_PROPERTIES_ROUTINE, @end_control_call : Win32cr::Networking::Clustering::PEND_CONTROL_CALL, @end_type_control_call : Win32cr::Networking::Clustering::PEND_TYPE_CONTROL_CALL, @extend_control_call : Win32cr::Networking::Clustering::PEXTEND_RES_CONTROL_CALL, @extend_type_control_call : Win32cr::Networking::Clustering::PEXTEND_RES_TYPE_CONTROL_CALL, @raise_res_type_notification : Win32cr::Networking::Clustering::PRAISE_RES_TYPE_NOTIFICATION, @change_resource_process_for_dumps : Win32cr::Networking::Clustering::PCHANGE_RESOURCE_PROCESS_FOR_DUMPS, @change_res_type_process_for_dumps : Win32cr::Networking::Clustering::PCHANGE_RES_TYPE_PROCESS_FOR_DUMPS, @set_internal_state : Win32cr::Networking::Clustering::PSET_INTERNAL_STATE, @set_resource_locked_mode_ex : Win32cr::Networking::Clustering::PSET_RESOURCE_LOCKED_MODE_EX_ROUTINE, @request_dump : Win32cr::Networking::Clustering::PREQUEST_DUMP_ROUTINE)
+    end
+  end
+
+  @[Extern]
+  struct MONITOR_STATE
+    property last_update : Win32cr::Foundation::LARGE_INTEGER
+    property state : Win32cr::Networking::Clustering::RESOURCE_MONITOR_STATE
+    property active_resource : Win32cr::Foundation::HANDLE
+    property resmon_stop : Win32cr::Foundation::BOOL
+    def initialize(@last_update : Win32cr::Foundation::LARGE_INTEGER, @state : Win32cr::Networking::Clustering::RESOURCE_MONITOR_STATE, @active_resource : Win32cr::Foundation::HANDLE, @resmon_stop : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct POST_UPGRADE_VERSION_INFO
+    property newMajorVersion : UInt32
+    property newUpgradeVersion : UInt32
+    property oldMajorVersion : UInt32
+    property oldUpgradeVersion : UInt32
+    property reserved : UInt32
+    def initialize(@newMajorVersion : UInt32, @newUpgradeVersion : UInt32, @oldMajorVersion : UInt32, @oldUpgradeVersion : UInt32, @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_HEALTH_FAULT
+    property id : Win32cr::Foundation::PWSTR
+    property error_type : UInt32
+    property error_code : UInt32
+    property description : Win32cr::Foundation::PWSTR
+    property provider : Win32cr::Foundation::PWSTR
+    property flags : UInt32
+    property reserved : UInt32
+    def initialize(@id : Win32cr::Foundation::PWSTR, @error_type : UInt32, @error_code : UInt32, @description : Win32cr::Foundation::PWSTR, @provider : Win32cr::Foundation::PWSTR, @flags : UInt32, @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_HEALTH_FAULT_ARRAY
+    property numFaults : UInt32
+    property faults : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*
+    def initialize(@numFaults : UInt32, @faults : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*)
+    end
+  end
+
+  @[Extern]
+  struct CLUS_WORKER
+    property hThread : Win32cr::Foundation::HANDLE
+    property terminate : Win32cr::Foundation::BOOL
+    def initialize(@hThread : Win32cr::Foundation::HANDLE, @terminate : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct HCLUSCRYPTPROVIDER_
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct PaxosTagCStruct
+    property __padding__paxos_tag_vtable : UInt64
+    property __padding__next_epoch_vtable : UInt64
+    property __padding__next_epoch_date_time_vtable : UInt64
+    property next_epoch_date_time_ticks : UInt64
+    property next_epoch_value : Int32
+    property __padding__boundry_next_epoch : UInt32
+    property __padding__epoch_vtable : UInt64
+    property __padding__epoch_date_time_vtable : UInt64
+    property epoch_date_time_ticks : UInt64
+    property epoch_value : Int32
+    property __padding__boundry_epoch : UInt32
+    property sequence : Int32
+    property __padding__boundry_sequence : UInt32
+    def initialize(@__padding__paxos_tag_vtable : UInt64, @__padding__next_epoch_vtable : UInt64, @__padding__next_epoch_date_time_vtable : UInt64, @next_epoch_date_time_ticks : UInt64, @next_epoch_value : Int32, @__padding__boundry_next_epoch : UInt32, @__padding__epoch_vtable : UInt64, @__padding__epoch_date_time_vtable : UInt64, @epoch_date_time_ticks : UInt64, @epoch_value : Int32, @__padding__boundry_epoch : UInt32, @sequence : Int32, @__padding__boundry_sequence : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WitnessTagUpdateHelper
+    property version : Int32
+    property paxosToSet : Win32cr::Networking::Clustering::PaxosTagCStruct
+    property paxosToValidate : Win32cr::Networking::Clustering::PaxosTagCStruct
+    def initialize(@version : Int32, @paxosToSet : Win32cr::Networking::Clustering::PaxosTagCStruct, @paxosToValidate : Win32cr::Networking::Clustering::PaxosTagCStruct)
+    end
+  end
+
+  @[Extern]
+  struct WitnessTagHelper
+    property version : Int32
+    property paxosToValidate : Win32cr::Networking::Clustering::PaxosTagCStruct
+    def initialize(@version : Int32, @paxosToValidate : Win32cr::Networking::Clustering::PaxosTagCStruct)
+    end
+  end
 
   @[Extern]
   record IGetClusterUIInfoVtbl,
@@ -3722,7 +4209,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede50-fc6b-11cf-b5f5-00a0c90ab505")]
   record IGetClusterUIInfo, lpVtbl : IGetClusterUIInfoVtbl* do
     GUID = LibC::GUID.new(0x97dede50_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterUIInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3760,7 +4246,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede51-fc6b-11cf-b5f5-00a0c90ab505")]
   record IGetClusterDataInfo, lpVtbl : IGetClusterDataInfoVtbl* do
     GUID = LibC::GUID.new(0x97dede51_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterDataInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3794,7 +4279,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede52-fc6b-11cf-b5f5-00a0c90ab505")]
   record IGetClusterObjectInfo, lpVtbl : IGetClusterObjectInfoVtbl* do
     GUID = LibC::GUID.new(0x97dede52_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterObjectInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3824,7 +4308,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede53-fc6b-11cf-b5f5-00a0c90ab505")]
   record IGetClusterNodeInfo, lpVtbl : IGetClusterNodeInfoVtbl* do
     GUID = LibC::GUID.new(0x97dede53_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterNodeInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3851,7 +4334,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede54-fc6b-11cf-b5f5-00a0c90ab505")]
   record IGetClusterGroupInfo, lpVtbl : IGetClusterGroupInfoVtbl* do
     GUID = LibC::GUID.new(0x97dede54_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterGroupInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3880,7 +4362,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede55-fc6b-11cf-b5f5-00a0c90ab505")]
   record IGetClusterResourceInfo, lpVtbl : IGetClusterResourceInfoVtbl* do
     GUID = LibC::GUID.new(0x97dede55_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterResourceInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3913,7 +4394,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede56-fc6b-11cf-b5f5-00a0c90ab505")]
   record IGetClusterNetworkInfo, lpVtbl : IGetClusterNetworkInfoVtbl* do
     GUID = LibC::GUID.new(0x97dede56_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterNetworkInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3940,7 +4420,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede57-fc6b-11cf-b5f5-00a0c90ab505")]
   record IGetClusterNetInterfaceInfo, lpVtbl : IGetClusterNetInterfaceInfoVtbl* do
     GUID = LibC::GUID.new(0x97dede57_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterNetInterfaceInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3967,7 +4446,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede60-fc6b-11cf-b5f5-00a0c90ab505")]
   record IWCPropertySheetCallback, lpVtbl : IWCPropertySheetCallbackVtbl* do
     GUID = LibC::GUID.new(0x97dede60_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWCPropertySheetCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3994,7 +4472,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede61-fc6b-11cf-b5f5-00a0c90ab505")]
   record IWEExtendPropertySheet, lpVtbl : IWEExtendPropertySheetVtbl* do
     GUID = LibC::GUID.new(0x97dede61_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWEExtendPropertySheet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4022,7 +4499,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede62-fc6b-11cf-b5f5-00a0c90ab505")]
   record IWCWizardCallback, lpVtbl : IWCWizardCallbackVtbl* do
     GUID = LibC::GUID.new(0x97dede62_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWCWizardCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4052,7 +4528,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede63-fc6b-11cf-b5f5-00a0c90ab505")]
   record IWEExtendWizard, lpVtbl : IWEExtendWizardVtbl* do
     GUID = LibC::GUID.new(0x97dede63_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWEExtendWizard*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4079,7 +4554,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede64-fc6b-11cf-b5f5-00a0c90ab505")]
   record IWCContextMenuCallback, lpVtbl : IWCContextMenuCallbackVtbl* do
     GUID = LibC::GUID.new(0x97dede64_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWCContextMenuCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4106,7 +4580,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede65-fc6b-11cf-b5f5-00a0c90ab505")]
   record IWEExtendContextMenu, lpVtbl : IWEExtendContextMenuVtbl* do
     GUID = LibC::GUID.new(0x97dede65_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWEExtendContextMenu*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4133,7 +4606,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede66-fc6b-11cf-b5f5-00a0c90ab505")]
   record IWEInvokeCommand, lpVtbl : IWEInvokeCommandVtbl* do
     GUID = LibC::GUID.new(0x97dede66_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWEInvokeCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4161,7 +4633,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede67-fc6b-11cf-b5f5-00a0c90ab505")]
   record IWCWizard97Callback, lpVtbl : IWCWizard97CallbackVtbl* do
     GUID = LibC::GUID.new(0x97dede67_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWCWizard97Callback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4191,7 +4662,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("97dede68-fc6b-11cf-b5f5-00a0c90ab505")]
   record IWEExtendWizard97, lpVtbl : IWEExtendWizard97Vtbl* do
     GUID = LibC::GUID.new(0x97dede68_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWEExtendWizard97*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4224,7 +4694,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606e6-2631-11d1-89f1-00a0c90d061e")]
   record ISClusApplication, lpVtbl : ISClusApplicationVtbl* do
     GUID = LibC::GUID.new(0xf2e606e6_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4276,7 +4745,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606e2-2631-11d1-89f1-00a0c90d061e")]
   record ISDomainNames, lpVtbl : ISDomainNamesVtbl* do
     GUID = LibC::GUID.new(0xf2e606e2_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISDomainNames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4332,7 +4800,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606ec-2631-11d1-89f1-00a0c90d061e")]
   record ISClusterNames, lpVtbl : ISClusterNamesVtbl* do
     GUID = LibC::GUID.new(0xf2e606ec_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusterNames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4387,7 +4854,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60702-2631-11d1-89f1-00a0c90d061e")]
   record ISClusRefObject, lpVtbl : ISClusRefObjectVtbl* do
     GUID = LibC::GUID.new(0xf2e60702_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusRefObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4439,7 +4905,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60716-2631-11d1-89f1-00a0c90d061e")]
   record ISClusVersion, lpVtbl : ISClusVersionVtbl* do
     GUID = LibC::GUID.new(0xf2e60716_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusVersion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4529,7 +4994,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606e4-2631-11d1-89f1-00a0c90d061e")]
   record ISCluster, lpVtbl : ISClusterVtbl* do
     GUID = LibC::GUID.new(0xf2e606e4_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISCluster*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4645,7 +5109,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606f8-2631-11d1-89f1-00a0c90d061e")]
   record ISClusNode, lpVtbl : ISClusNodeVtbl* do
     GUID = LibC::GUID.new(0xf2e606f8_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4730,7 +5193,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606fa-2631-11d1-89f1-00a0c90d061e")]
   record ISClusNodes, lpVtbl : ISClusNodesVtbl* do
     GUID = LibC::GUID.new(0xf2e606fa_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNodes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4792,7 +5254,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606f2-2631-11d1-89f1-00a0c90d061e")]
   record ISClusNetwork, lpVtbl : ISClusNetworkVtbl* do
     GUID = LibC::GUID.new(0xf2e606f2_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNetwork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4868,7 +5329,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606f4-2631-11d1-89f1-00a0c90d061e")]
   record ISClusNetworks, lpVtbl : ISClusNetworksVtbl* do
     GUID = LibC::GUID.new(0xf2e606f4_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNetworks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4927,7 +5387,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606ee-2631-11d1-89f1-00a0c90d061e")]
   record ISClusNetInterface, lpVtbl : ISClusNetInterfaceVtbl* do
     GUID = LibC::GUID.new(0xf2e606ee_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNetInterface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4994,7 +5453,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606f0-2631-11d1-89f1-00a0c90d061e")]
   record ISClusNetInterfaces, lpVtbl : ISClusNetInterfacesVtbl* do
     GUID = LibC::GUID.new(0xf2e606f0_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNetInterfaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5049,7 +5507,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606fc-2631-11d1-89f1-00a0c90d061e")]
   record ISClusNodeNetInterfaces, lpVtbl : ISClusNodeNetInterfacesVtbl* do
     GUID = LibC::GUID.new(0xf2e606fc_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNodeNetInterfaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5104,7 +5561,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606f6-2631-11d1-89f1-00a0c90d061e")]
   record ISClusNetworkNetInterfaces, lpVtbl : ISClusNetworkNetInterfacesVtbl* do
     GUID = LibC::GUID.new(0xf2e606f6_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNetworkNetInterfaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5171,7 +5627,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60706-2631-11d1-89f1-00a0c90d061e")]
   record ISClusResGroup, lpVtbl : ISClusResGroupVtbl* do
     GUID = LibC::GUID.new(0xf2e60706_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5264,7 +5719,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60708-2631-11d1-89f1-00a0c90d061e")]
   record ISClusResGroups, lpVtbl : ISClusResGroupsVtbl* do
     GUID = LibC::GUID.new(0xf2e60708_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResGroups*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5353,7 +5807,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e6070a-2631-11d1-89f1-00a0c90d061e")]
   record ISClusResource, lpVtbl : ISClusResourceVtbl* do
     GUID = LibC::GUID.new(0xf2e6070a_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5496,7 +5949,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60704-2631-11d1-89f1-00a0c90d061e")]
   record ISClusResDependencies, lpVtbl : ISClusResDependenciesVtbl* do
     GUID = LibC::GUID.new(0xf2e60704_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResDependencies*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5565,7 +6017,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606ea-2631-11d1-89f1-00a0c90d061e")]
   record ISClusResGroupResources, lpVtbl : ISClusResGroupResourcesVtbl* do
     GUID = LibC::GUID.new(0xf2e606ea_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResGroupResources*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5628,7 +6079,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60714-2631-11d1-89f1-00a0c90d061e")]
   record ISClusResTypeResources, lpVtbl : ISClusResTypeResourcesVtbl* do
     GUID = LibC::GUID.new(0xf2e60714_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResTypeResources*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5691,7 +6141,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e6070c-2631-11d1-89f1-00a0c90d061e")]
   record ISClusResources, lpVtbl : ISClusResourcesVtbl* do
     GUID = LibC::GUID.new(0xf2e6070c_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResources*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5757,7 +6206,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606e8-2631-11d1-89f1-00a0c90d061e")]
   record ISClusResGroupPreferredOwnerNodes, lpVtbl : ISClusResGroupPreferredOwnerNodesVtbl* do
     GUID = LibC::GUID.new(0xf2e606e8_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResGroupPreferredOwnerNodes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5830,7 +6278,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e6070e-2631-11d1-89f1-00a0c90d061e")]
   record ISClusResPossibleOwnerNodes, lpVtbl : ISClusResPossibleOwnerNodesVtbl* do
     GUID = LibC::GUID.new(0xf2e6070e_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResPossibleOwnerNodes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5894,7 +6341,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60718-2631-11d1-89f1-00a0c90d061e")]
   record ISClusResTypePossibleOwnerNodes, lpVtbl : ISClusResTypePossibleOwnerNodesVtbl* do
     GUID = LibC::GUID.new(0xf2e60718_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResTypePossibleOwnerNodes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5955,7 +6401,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60710-2631-11d1-89f1-00a0c90d061e")]
   record ISClusResType, lpVtbl : ISClusResTypeVtbl* do
     GUID = LibC::GUID.new(0xf2e60710_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6030,7 +6475,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60712-2631-11d1-89f1-00a0c90d061e")]
   record ISClusResTypes, lpVtbl : ISClusResTypesVtbl* do
     GUID = LibC::GUID.new(0xf2e60712_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResTypes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6102,7 +6546,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e606fe-2631-11d1-89f1-00a0c90d061e")]
   record ISClusProperty, lpVtbl : ISClusPropertyVtbl* do
     GUID = LibC::GUID.new(0xf2e606fe_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6195,7 +6638,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e6071a-2631-11d1-89f1-00a0c90d061e")]
   record ISClusPropertyValue, lpVtbl : ISClusPropertyValueVtbl* do
     GUID = LibC::GUID.new(0xf2e6071a_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusPropertyValue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6266,7 +6708,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e6071c-2631-11d1-89f1-00a0c90d061e")]
   record ISClusPropertyValues, lpVtbl : ISClusPropertyValuesVtbl* do
     GUID = LibC::GUID.new(0xf2e6071c_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusPropertyValues*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6331,7 +6772,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60700-2631-11d1-89f1-00a0c90d061e")]
   record ISClusProperties, lpVtbl : ISClusPropertiesVtbl* do
     GUID = LibC::GUID.new(0xf2e60700_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6408,7 +6848,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e6071e-2631-11d1-89f1-00a0c90d061e")]
   record ISClusPropertyValueData, lpVtbl : ISClusPropertyValueDataVtbl* do
     GUID = LibC::GUID.new(0xf2e6071e_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusPropertyValueData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6469,7 +6908,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60720-2631-11d1-89f1-00a0c90d061e")]
   record ISClusPartition, lpVtbl : ISClusPartitionVtbl* do
     GUID = LibC::GUID.new(0xf2e60720_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusPartition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6541,7 +6979,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("8802d4fe-b32e-4ad1-9dbd-64f18e1166ce")]
   record ISClusPartitionEx, lpVtbl : ISClusPartitionExVtbl* do
     GUID = LibC::GUID.new(0x8802d4fe_u32, 0xb32e_u16, 0x4ad1_u16, StaticArray[0x9d_u8, 0xbd_u8, 0x64_u8, 0xf1_u8, 0x8e_u8, 0x11_u8, 0x66_u8, 0xce_u8])
     def query_interface(this : ISClusPartitionEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6619,7 +7056,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60722-2631-11d1-89f1-00a0c90d061e")]
   record ISClusPartitions, lpVtbl : ISClusPartitionsVtbl* do
     GUID = LibC::GUID.new(0xf2e60722_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusPartitions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6671,7 +7107,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60724-2631-11d1-89f1-00a0c90d061e")]
   record ISClusDisk, lpVtbl : ISClusDiskVtbl* do
     GUID = LibC::GUID.new(0xf2e60724_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusDisk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6725,7 +7160,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60726-2631-11d1-89f1-00a0c90d061e")]
   record ISClusDisks, lpVtbl : ISClusDisksVtbl* do
     GUID = LibC::GUID.new(0xf2e60726_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusDisks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6777,7 +7211,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e60728-2631-11d1-89f1-00a0c90d061e")]
   record ISClusScsiAddress, lpVtbl : ISClusScsiAddressVtbl* do
     GUID = LibC::GUID.new(0xf2e60728_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusScsiAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6834,7 +7267,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e6072a-2631-11d1-89f1-00a0c90d061e")]
   record ISClusRegistryKeys, lpVtbl : ISClusRegistryKeysVtbl* do
     GUID = LibC::GUID.new(0xf2e6072a_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusRegistryKeys*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6897,7 +7329,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e6072c-2631-11d1-89f1-00a0c90d061e")]
   record ISClusCryptoKeys, lpVtbl : ISClusCryptoKeysVtbl* do
     GUID = LibC::GUID.new(0xf2e6072c_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusCryptoKeys*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6962,7 +7393,6 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  #@[Com("f2e6072e-2631-11d1-89f1-00a0c90d061e")]
   record ISClusResDependents, lpVtbl : ISClusResDependentsVtbl* do
     GUID = LibC::GUID.new(0xf2e6072e_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResDependents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

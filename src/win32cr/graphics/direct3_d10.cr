@@ -5,9 +5,9 @@ require "./direct3_d.cr"
 require "./dxgi.cr"
 
 module Win32cr::Graphics::Direct3D10
-  alias PFN_D3D10_CREATE_DEVICE1 = Proc(Void*, Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Graphics::Direct3D10::D3D10_FEATURE_LEVEL1, UInt32, Void**, Win32cr::Foundation::HRESULT)*
+  alias PFN_D3D10_CREATE_DEVICE1 = Proc(Void*, Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Graphics::Direct3D10::D3D10_FEATURE_LEVEL1, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
-  alias PFN_D3D10_CREATE_DEVICE_AND_SWAP_CHAIN1 = Proc(Void*, Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Graphics::Direct3D10::D3D10_FEATURE_LEVEL1, UInt32, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, Void**, Void**, Win32cr::Foundation::HRESULT)*
+  alias PFN_D3D10_CREATE_DEVICE_AND_SWAP_CHAIN1 = Proc(Void*, Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Graphics::Direct3D10::D3D10_FEATURE_LEVEL1, UInt32, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, Void**, Void**, Win32cr::Foundation::HRESULT)
 
   D3D10_16BIT_INDEX_STRIP_CUT_VALUE = 65535_u32
   D3D10_32BIT_INDEX_STRIP_CUT_VALUE = 4294967295_u32
@@ -1179,749 +1179,1004 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record D3D10_INPUT_ELEMENT_DESC,
-    semantic_name : Win32cr::Foundation::PSTR,
-    semantic_index : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    input_slot : UInt32,
-    aligned_byte_offset : UInt32,
-    input_slot_class : Win32cr::Graphics::Direct3D10::D3D10_INPUT_CLASSIFICATION,
-    instance_data_step_rate : UInt32
+  struct D3D10_INPUT_ELEMENT_DESC
+    property semantic_name : Win32cr::Foundation::PSTR
+    property semantic_index : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property input_slot : UInt32
+    property aligned_byte_offset : UInt32
+    property input_slot_class : Win32cr::Graphics::Direct3D10::D3D10_INPUT_CLASSIFICATION
+    property instance_data_step_rate : UInt32
+    def initialize(@semantic_name : Win32cr::Foundation::PSTR, @semantic_index : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @input_slot : UInt32, @aligned_byte_offset : UInt32, @input_slot_class : Win32cr::Graphics::Direct3D10::D3D10_INPUT_CLASSIFICATION, @instance_data_step_rate : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SO_DECLARATION_ENTRY,
-    semantic_name : Win32cr::Foundation::PSTR,
-    semantic_index : UInt32,
-    start_component : UInt8,
-    component_count : UInt8,
-    output_slot : UInt8
+  struct D3D10_SO_DECLARATION_ENTRY
+    property semantic_name : Win32cr::Foundation::PSTR
+    property semantic_index : UInt32
+    property start_component : UInt8
+    property component_count : UInt8
+    property output_slot : UInt8
+    def initialize(@semantic_name : Win32cr::Foundation::PSTR, @semantic_index : UInt32, @start_component : UInt8, @component_count : UInt8, @output_slot : UInt8)
+    end
+  end
 
   @[Extern]
-  record D3D10_VIEWPORT,
-    top_left_x : Int32,
-    top_left_y : Int32,
-    width : UInt32,
-    height : UInt32,
-    min_depth : Float32,
-    max_depth : Float32
+  struct D3D10_VIEWPORT
+    property top_left_x : Int32
+    property top_left_y : Int32
+    property width : UInt32
+    property height : UInt32
+    property min_depth : Float32
+    property max_depth : Float32
+    def initialize(@top_left_x : Int32, @top_left_y : Int32, @width : UInt32, @height : UInt32, @min_depth : Float32, @max_depth : Float32)
+    end
+  end
 
   @[Extern]
-  record D3D10_BOX,
-    left : UInt32,
-    top : UInt32,
-    front : UInt32,
-    right : UInt32,
-    bottom : UInt32,
-    back : UInt32
+  struct D3D10_BOX
+    property left : UInt32
+    property top : UInt32
+    property front : UInt32
+    property right : UInt32
+    property bottom : UInt32
+    property back : UInt32
+    def initialize(@left : UInt32, @top : UInt32, @front : UInt32, @right : UInt32, @bottom : UInt32, @back : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_DEPTH_STENCILOP_DESC,
-    stencil_fail_op : Win32cr::Graphics::Direct3D10::D3D10_STENCIL_OP,
-    stencil_depth_fail_op : Win32cr::Graphics::Direct3D10::D3D10_STENCIL_OP,
-    stencil_pass_op : Win32cr::Graphics::Direct3D10::D3D10_STENCIL_OP,
-    stencil_func : Win32cr::Graphics::Direct3D10::D3D10_COMPARISON_FUNC
+  struct D3D10_DEPTH_STENCILOP_DESC
+    property stencil_fail_op : Win32cr::Graphics::Direct3D10::D3D10_STENCIL_OP
+    property stencil_depth_fail_op : Win32cr::Graphics::Direct3D10::D3D10_STENCIL_OP
+    property stencil_pass_op : Win32cr::Graphics::Direct3D10::D3D10_STENCIL_OP
+    property stencil_func : Win32cr::Graphics::Direct3D10::D3D10_COMPARISON_FUNC
+    def initialize(@stencil_fail_op : Win32cr::Graphics::Direct3D10::D3D10_STENCIL_OP, @stencil_depth_fail_op : Win32cr::Graphics::Direct3D10::D3D10_STENCIL_OP, @stencil_pass_op : Win32cr::Graphics::Direct3D10::D3D10_STENCIL_OP, @stencil_func : Win32cr::Graphics::Direct3D10::D3D10_COMPARISON_FUNC)
+    end
+  end
 
   @[Extern]
-  record D3D10_DEPTH_STENCIL_DESC,
-    depth_enable : Win32cr::Foundation::BOOL,
-    depth_write_mask : Win32cr::Graphics::Direct3D10::D3D10_DEPTH_WRITE_MASK,
-    depth_func : Win32cr::Graphics::Direct3D10::D3D10_COMPARISON_FUNC,
-    stencil_enable : Win32cr::Foundation::BOOL,
-    stencil_read_mask : UInt8,
-    stencil_write_mask : UInt8,
-    front_face : Win32cr::Graphics::Direct3D10::D3D10_DEPTH_STENCILOP_DESC,
-    back_face : Win32cr::Graphics::Direct3D10::D3D10_DEPTH_STENCILOP_DESC
+  struct D3D10_DEPTH_STENCIL_DESC
+    property depth_enable : Win32cr::Foundation::BOOL
+    property depth_write_mask : Win32cr::Graphics::Direct3D10::D3D10_DEPTH_WRITE_MASK
+    property depth_func : Win32cr::Graphics::Direct3D10::D3D10_COMPARISON_FUNC
+    property stencil_enable : Win32cr::Foundation::BOOL
+    property stencil_read_mask : UInt8
+    property stencil_write_mask : UInt8
+    property front_face : Win32cr::Graphics::Direct3D10::D3D10_DEPTH_STENCILOP_DESC
+    property back_face : Win32cr::Graphics::Direct3D10::D3D10_DEPTH_STENCILOP_DESC
+    def initialize(@depth_enable : Win32cr::Foundation::BOOL, @depth_write_mask : Win32cr::Graphics::Direct3D10::D3D10_DEPTH_WRITE_MASK, @depth_func : Win32cr::Graphics::Direct3D10::D3D10_COMPARISON_FUNC, @stencil_enable : Win32cr::Foundation::BOOL, @stencil_read_mask : UInt8, @stencil_write_mask : UInt8, @front_face : Win32cr::Graphics::Direct3D10::D3D10_DEPTH_STENCILOP_DESC, @back_face : Win32cr::Graphics::Direct3D10::D3D10_DEPTH_STENCILOP_DESC)
+    end
+  end
 
   @[Extern]
-  record D3D10_BLEND_DESC,
-    alpha_to_coverage_enable : Win32cr::Foundation::BOOL,
-    blend_enable : Win32cr::Foundation::BOOL[8],
-    src_blend : Win32cr::Graphics::Direct3D10::D3D10_BLEND,
-    dest_blend : Win32cr::Graphics::Direct3D10::D3D10_BLEND,
-    blend_op : Win32cr::Graphics::Direct3D10::D3D10_BLEND_OP,
-    src_blend_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND,
-    dest_blend_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND,
-    blend_op_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND_OP,
-    render_target_write_mask : UInt8[8]
+  struct D3D10_BLEND_DESC
+    property alpha_to_coverage_enable : Win32cr::Foundation::BOOL
+    property blend_enable : Win32cr::Foundation::BOOL[8]
+    property src_blend : Win32cr::Graphics::Direct3D10::D3D10_BLEND
+    property dest_blend : Win32cr::Graphics::Direct3D10::D3D10_BLEND
+    property blend_op : Win32cr::Graphics::Direct3D10::D3D10_BLEND_OP
+    property src_blend_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND
+    property dest_blend_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND
+    property blend_op_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND_OP
+    property render_target_write_mask : UInt8[8]
+    def initialize(@alpha_to_coverage_enable : Win32cr::Foundation::BOOL, @blend_enable : Win32cr::Foundation::BOOL[8], @src_blend : Win32cr::Graphics::Direct3D10::D3D10_BLEND, @dest_blend : Win32cr::Graphics::Direct3D10::D3D10_BLEND, @blend_op : Win32cr::Graphics::Direct3D10::D3D10_BLEND_OP, @src_blend_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND, @dest_blend_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND, @blend_op_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND_OP, @render_target_write_mask : UInt8[8])
+    end
+  end
 
   @[Extern]
-  record D3D10_RASTERIZER_DESC,
-    fill_mode : Win32cr::Graphics::Direct3D10::D3D10_FILL_MODE,
-    cull_mode : Win32cr::Graphics::Direct3D10::D3D10_CULL_MODE,
-    front_counter_clockwise : Win32cr::Foundation::BOOL,
-    depth_bias : Int32,
-    depth_bias_clamp : Float32,
-    slope_scaled_depth_bias : Float32,
-    depth_clip_enable : Win32cr::Foundation::BOOL,
-    scissor_enable : Win32cr::Foundation::BOOL,
-    multisample_enable : Win32cr::Foundation::BOOL,
-    antialiased_line_enable : Win32cr::Foundation::BOOL
+  struct D3D10_RASTERIZER_DESC
+    property fill_mode : Win32cr::Graphics::Direct3D10::D3D10_FILL_MODE
+    property cull_mode : Win32cr::Graphics::Direct3D10::D3D10_CULL_MODE
+    property front_counter_clockwise : Win32cr::Foundation::BOOL
+    property depth_bias : Int32
+    property depth_bias_clamp : Float32
+    property slope_scaled_depth_bias : Float32
+    property depth_clip_enable : Win32cr::Foundation::BOOL
+    property scissor_enable : Win32cr::Foundation::BOOL
+    property multisample_enable : Win32cr::Foundation::BOOL
+    property antialiased_line_enable : Win32cr::Foundation::BOOL
+    def initialize(@fill_mode : Win32cr::Graphics::Direct3D10::D3D10_FILL_MODE, @cull_mode : Win32cr::Graphics::Direct3D10::D3D10_CULL_MODE, @front_counter_clockwise : Win32cr::Foundation::BOOL, @depth_bias : Int32, @depth_bias_clamp : Float32, @slope_scaled_depth_bias : Float32, @depth_clip_enable : Win32cr::Foundation::BOOL, @scissor_enable : Win32cr::Foundation::BOOL, @multisample_enable : Win32cr::Foundation::BOOL, @antialiased_line_enable : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D10_SUBRESOURCE_DATA,
-    pSysMem : Void*,
-    sys_mem_pitch : UInt32,
-    sys_mem_slice_pitch : UInt32
+  struct D3D10_SUBRESOURCE_DATA
+    property pSysMem : Void*
+    property sys_mem_pitch : UInt32
+    property sys_mem_slice_pitch : UInt32
+    def initialize(@pSysMem : Void*, @sys_mem_pitch : UInt32, @sys_mem_slice_pitch : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_BUFFER_DESC,
-    byte_width : UInt32,
-    usage : Win32cr::Graphics::Direct3D10::D3D10_USAGE,
-    bind_flags : UInt32,
-    cpu_access_flags : UInt32,
-    misc_flags : UInt32
+  struct D3D10_BUFFER_DESC
+    property byte_width : UInt32
+    property usage : Win32cr::Graphics::Direct3D10::D3D10_USAGE
+    property bind_flags : UInt32
+    property cpu_access_flags : UInt32
+    property misc_flags : UInt32
+    def initialize(@byte_width : UInt32, @usage : Win32cr::Graphics::Direct3D10::D3D10_USAGE, @bind_flags : UInt32, @cpu_access_flags : UInt32, @misc_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEXTURE1D_DESC,
-    width : UInt32,
-    mip_levels : UInt32,
-    array_size : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    usage : Win32cr::Graphics::Direct3D10::D3D10_USAGE,
-    bind_flags : UInt32,
-    cpu_access_flags : UInt32,
-    misc_flags : UInt32
+  struct D3D10_TEXTURE1D_DESC
+    property width : UInt32
+    property mip_levels : UInt32
+    property array_size : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property usage : Win32cr::Graphics::Direct3D10::D3D10_USAGE
+    property bind_flags : UInt32
+    property cpu_access_flags : UInt32
+    property misc_flags : UInt32
+    def initialize(@width : UInt32, @mip_levels : UInt32, @array_size : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @usage : Win32cr::Graphics::Direct3D10::D3D10_USAGE, @bind_flags : UInt32, @cpu_access_flags : UInt32, @misc_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEXTURE2D_DESC,
-    width : UInt32,
-    height : UInt32,
-    mip_levels : UInt32,
-    array_size : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    sample_desc : Win32cr::Graphics::Dxgi::Common::DXGI_SAMPLE_DESC,
-    usage : Win32cr::Graphics::Direct3D10::D3D10_USAGE,
-    bind_flags : UInt32,
-    cpu_access_flags : UInt32,
-    misc_flags : UInt32
+  struct D3D10_TEXTURE2D_DESC
+    property width : UInt32
+    property height : UInt32
+    property mip_levels : UInt32
+    property array_size : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property sample_desc : Win32cr::Graphics::Dxgi::Common::DXGI_SAMPLE_DESC
+    property usage : Win32cr::Graphics::Direct3D10::D3D10_USAGE
+    property bind_flags : UInt32
+    property cpu_access_flags : UInt32
+    property misc_flags : UInt32
+    def initialize(@width : UInt32, @height : UInt32, @mip_levels : UInt32, @array_size : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @sample_desc : Win32cr::Graphics::Dxgi::Common::DXGI_SAMPLE_DESC, @usage : Win32cr::Graphics::Direct3D10::D3D10_USAGE, @bind_flags : UInt32, @cpu_access_flags : UInt32, @misc_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_MAPPED_TEXTURE2D,
-    pData : Void*,
-    row_pitch : UInt32
+  struct D3D10_MAPPED_TEXTURE2D
+    property pData : Void*
+    property row_pitch : UInt32
+    def initialize(@pData : Void*, @row_pitch : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEXTURE3D_DESC,
-    width : UInt32,
-    height : UInt32,
-    depth : UInt32,
-    mip_levels : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    usage : Win32cr::Graphics::Direct3D10::D3D10_USAGE,
-    bind_flags : UInt32,
-    cpu_access_flags : UInt32,
-    misc_flags : UInt32
+  struct D3D10_TEXTURE3D_DESC
+    property width : UInt32
+    property height : UInt32
+    property depth : UInt32
+    property mip_levels : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property usage : Win32cr::Graphics::Direct3D10::D3D10_USAGE
+    property bind_flags : UInt32
+    property cpu_access_flags : UInt32
+    property misc_flags : UInt32
+    def initialize(@width : UInt32, @height : UInt32, @depth : UInt32, @mip_levels : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @usage : Win32cr::Graphics::Direct3D10::D3D10_USAGE, @bind_flags : UInt32, @cpu_access_flags : UInt32, @misc_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_MAPPED_TEXTURE3D,
-    pData : Void*,
-    row_pitch : UInt32,
-    depth_pitch : UInt32
+  struct D3D10_MAPPED_TEXTURE3D
+    property pData : Void*
+    property row_pitch : UInt32
+    property depth_pitch : UInt32
+    def initialize(@pData : Void*, @row_pitch : UInt32, @depth_pitch : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_BUFFER_SRV,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct D3D10_BUFFER_SRV
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      first_element : UInt32,
-      element_offset : UInt32
+    struct Anonymous1_e__Union_
+    property first_element : UInt32
+    property element_offset : UInt32
+    def initialize(@first_element : UInt32, @element_offset : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      num_elements : UInt32,
-      element_width : UInt32
+    struct Anonymous2_e__Union_
+    property num_elements : UInt32
+    property element_width : UInt32
+    def initialize(@num_elements : UInt32, @element_width : UInt32)
+    end
+    end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D10_TEX1D_SRV,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32
+  struct D3D10_TEX1D_SRV
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX1D_ARRAY_SRV,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D10_TEX1D_ARRAY_SRV
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX2D_SRV,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32
+  struct D3D10_TEX2D_SRV
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX2D_ARRAY_SRV,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D10_TEX2D_ARRAY_SRV
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX3D_SRV,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32
+  struct D3D10_TEX3D_SRV
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEXCUBE_SRV,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32
+  struct D3D10_TEXCUBE_SRV
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX2DMS_SRV,
-    unused_field_nothing_to_define : UInt32
+  struct D3D10_TEX2DMS_SRV
+    property unused_field_nothing_to_define : UInt32
+    def initialize(@unused_field_nothing_to_define : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX2DMS_ARRAY_SRV,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D10_TEX2DMS_ARRAY_SRV
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_RESOURCE_VIEW_DESC,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    view_dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D10_SHADER_RESOURCE_VIEW_DESC
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property view_dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      buffer : Win32cr::Graphics::Direct3D10::D3D10_BUFFER_SRV,
-      texture1_d : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_SRV,
-      texture1_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_ARRAY_SRV,
-      texture2_d : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_SRV,
-      texture2_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_ARRAY_SRV,
-      texture2_dms : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_SRV,
-      texture2_dms_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_ARRAY_SRV,
-      texture3_d : Win32cr::Graphics::Direct3D10::D3D10_TEX3D_SRV,
-      texture_cube : Win32cr::Graphics::Direct3D10::D3D10_TEXCUBE_SRV
+    struct Anonymous_e__Union_
+    property buffer : Win32cr::Graphics::Direct3D10::D3D10_BUFFER_SRV
+    property texture1_d : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_SRV
+    property texture1_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_ARRAY_SRV
+    property texture2_d : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_SRV
+    property texture2_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_ARRAY_SRV
+    property texture2_dms : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_SRV
+    property texture2_dms_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_ARRAY_SRV
+    property texture3_d : Win32cr::Graphics::Direct3D10::D3D10_TEX3D_SRV
+    property texture_cube : Win32cr::Graphics::Direct3D10::D3D10_TEXCUBE_SRV
+    def initialize(@buffer : Win32cr::Graphics::Direct3D10::D3D10_BUFFER_SRV, @texture1_d : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_SRV, @texture1_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_ARRAY_SRV, @texture2_d : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_SRV, @texture2_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_ARRAY_SRV, @texture2_dms : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_SRV, @texture2_dms_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_ARRAY_SRV, @texture3_d : Win32cr::Graphics::Direct3D10::D3D10_TEX3D_SRV, @texture_cube : Win32cr::Graphics::Direct3D10::D3D10_TEXCUBE_SRV)
+    end
+    end
 
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @view_dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D10_BUFFER_RTV,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct D3D10_BUFFER_RTV
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      num_elements : UInt32,
-      element_width : UInt32
+    struct Anonymous2_e__Union_
+    property num_elements : UInt32
+    property element_width : UInt32
+    def initialize(@num_elements : UInt32, @element_width : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      first_element : UInt32,
-      element_offset : UInt32
+    struct Anonymous1_e__Union_
+    property first_element : UInt32
+    property element_offset : UInt32
+    def initialize(@first_element : UInt32, @element_offset : UInt32)
+    end
+    end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D10_TEX1D_RTV,
-    mip_slice : UInt32
+  struct D3D10_TEX1D_RTV
+    property mip_slice : UInt32
+    def initialize(@mip_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX1D_ARRAY_RTV,
-    mip_slice : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D10_TEX1D_ARRAY_RTV
+    property mip_slice : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX2D_RTV,
-    mip_slice : UInt32
+  struct D3D10_TEX2D_RTV
+    property mip_slice : UInt32
+    def initialize(@mip_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX2DMS_RTV,
-    unused_field_nothing_to_define : UInt32
+  struct D3D10_TEX2DMS_RTV
+    property unused_field_nothing_to_define : UInt32
+    def initialize(@unused_field_nothing_to_define : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX2D_ARRAY_RTV,
-    mip_slice : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D10_TEX2D_ARRAY_RTV
+    property mip_slice : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX2DMS_ARRAY_RTV,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D10_TEX2DMS_ARRAY_RTV
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX3D_RTV,
-    mip_slice : UInt32,
-    first_w_slice : UInt32,
-    w_size : UInt32
+  struct D3D10_TEX3D_RTV
+    property mip_slice : UInt32
+    property first_w_slice : UInt32
+    property w_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_w_slice : UInt32, @w_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_RENDER_TARGET_VIEW_DESC,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    view_dimension : Win32cr::Graphics::Direct3D10::D3D10_RTV_DIMENSION,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D10_RENDER_TARGET_VIEW_DESC
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property view_dimension : Win32cr::Graphics::Direct3D10::D3D10_RTV_DIMENSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      buffer : Win32cr::Graphics::Direct3D10::D3D10_BUFFER_RTV,
-      texture1_d : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_RTV,
-      texture1_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_ARRAY_RTV,
-      texture2_d : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_RTV,
-      texture2_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_ARRAY_RTV,
-      texture2_dms : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_RTV,
-      texture2_dms_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_ARRAY_RTV,
-      texture3_d : Win32cr::Graphics::Direct3D10::D3D10_TEX3D_RTV
+    struct Anonymous_e__Union_
+    property buffer : Win32cr::Graphics::Direct3D10::D3D10_BUFFER_RTV
+    property texture1_d : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_RTV
+    property texture1_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_ARRAY_RTV
+    property texture2_d : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_RTV
+    property texture2_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_ARRAY_RTV
+    property texture2_dms : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_RTV
+    property texture2_dms_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_ARRAY_RTV
+    property texture3_d : Win32cr::Graphics::Direct3D10::D3D10_TEX3D_RTV
+    def initialize(@buffer : Win32cr::Graphics::Direct3D10::D3D10_BUFFER_RTV, @texture1_d : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_RTV, @texture1_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_ARRAY_RTV, @texture2_d : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_RTV, @texture2_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_ARRAY_RTV, @texture2_dms : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_RTV, @texture2_dms_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_ARRAY_RTV, @texture3_d : Win32cr::Graphics::Direct3D10::D3D10_TEX3D_RTV)
+    end
+    end
 
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @view_dimension : Win32cr::Graphics::Direct3D10::D3D10_RTV_DIMENSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D10_TEX1D_DSV,
-    mip_slice : UInt32
+  struct D3D10_TEX1D_DSV
+    property mip_slice : UInt32
+    def initialize(@mip_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX1D_ARRAY_DSV,
-    mip_slice : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D10_TEX1D_ARRAY_DSV
+    property mip_slice : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX2D_DSV,
-    mip_slice : UInt32
+  struct D3D10_TEX2D_DSV
+    property mip_slice : UInt32
+    def initialize(@mip_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX2D_ARRAY_DSV,
-    mip_slice : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D10_TEX2D_ARRAY_DSV
+    property mip_slice : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX2DMS_DSV,
-    unused_field_nothing_to_define : UInt32
+  struct D3D10_TEX2DMS_DSV
+    property unused_field_nothing_to_define : UInt32
+    def initialize(@unused_field_nothing_to_define : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TEX2DMS_ARRAY_DSV,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D10_TEX2DMS_ARRAY_DSV
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_DEPTH_STENCIL_VIEW_DESC,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    view_dimension : Win32cr::Graphics::Direct3D10::D3D10_DSV_DIMENSION,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D10_DEPTH_STENCIL_VIEW_DESC
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property view_dimension : Win32cr::Graphics::Direct3D10::D3D10_DSV_DIMENSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      texture1_d : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_DSV,
-      texture1_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_ARRAY_DSV,
-      texture2_d : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_DSV,
-      texture2_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_ARRAY_DSV,
-      texture2_dms : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_DSV,
-      texture2_dms_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_ARRAY_DSV
+    struct Anonymous_e__Union_
+    property texture1_d : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_DSV
+    property texture1_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_ARRAY_DSV
+    property texture2_d : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_DSV
+    property texture2_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_ARRAY_DSV
+    property texture2_dms : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_DSV
+    property texture2_dms_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_ARRAY_DSV
+    def initialize(@texture1_d : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_DSV, @texture1_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_ARRAY_DSV, @texture2_d : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_DSV, @texture2_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_ARRAY_DSV, @texture2_dms : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_DSV, @texture2_dms_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_ARRAY_DSV)
+    end
+    end
 
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @view_dimension : Win32cr::Graphics::Direct3D10::D3D10_DSV_DIMENSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D10_SAMPLER_DESC,
-    filter : Win32cr::Graphics::Direct3D10::D3D10_FILTER,
-    address_u : Win32cr::Graphics::Direct3D10::D3D10_TEXTURE_ADDRESS_MODE,
-    address_v : Win32cr::Graphics::Direct3D10::D3D10_TEXTURE_ADDRESS_MODE,
-    address_w : Win32cr::Graphics::Direct3D10::D3D10_TEXTURE_ADDRESS_MODE,
-    mip_lod_bias : Float32,
-    max_anisotropy : UInt32,
-    comparison_func : Win32cr::Graphics::Direct3D10::D3D10_COMPARISON_FUNC,
-    border_color : Float32[4],
-    min_lod : Float32,
-    max_lod : Float32
+  struct D3D10_SAMPLER_DESC
+    property filter : Win32cr::Graphics::Direct3D10::D3D10_FILTER
+    property address_u : Win32cr::Graphics::Direct3D10::D3D10_TEXTURE_ADDRESS_MODE
+    property address_v : Win32cr::Graphics::Direct3D10::D3D10_TEXTURE_ADDRESS_MODE
+    property address_w : Win32cr::Graphics::Direct3D10::D3D10_TEXTURE_ADDRESS_MODE
+    property mip_lod_bias : Float32
+    property max_anisotropy : UInt32
+    property comparison_func : Win32cr::Graphics::Direct3D10::D3D10_COMPARISON_FUNC
+    property border_color : Float32[4]
+    property min_lod : Float32
+    property max_lod : Float32
+    def initialize(@filter : Win32cr::Graphics::Direct3D10::D3D10_FILTER, @address_u : Win32cr::Graphics::Direct3D10::D3D10_TEXTURE_ADDRESS_MODE, @address_v : Win32cr::Graphics::Direct3D10::D3D10_TEXTURE_ADDRESS_MODE, @address_w : Win32cr::Graphics::Direct3D10::D3D10_TEXTURE_ADDRESS_MODE, @mip_lod_bias : Float32, @max_anisotropy : UInt32, @comparison_func : Win32cr::Graphics::Direct3D10::D3D10_COMPARISON_FUNC, @border_color : Float32[4], @min_lod : Float32, @max_lod : Float32)
+    end
+  end
 
   @[Extern]
-  record D3D10_QUERY_DESC,
-    query : Win32cr::Graphics::Direct3D10::D3D10_QUERY,
-    misc_flags : UInt32
+  struct D3D10_QUERY_DESC
+    property query : Win32cr::Graphics::Direct3D10::D3D10_QUERY
+    property misc_flags : UInt32
+    def initialize(@query : Win32cr::Graphics::Direct3D10::D3D10_QUERY, @misc_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_QUERY_DATA_TIMESTAMP_DISJOINT,
-    frequency : UInt64,
-    disjoint : Win32cr::Foundation::BOOL
+  struct D3D10_QUERY_DATA_TIMESTAMP_DISJOINT
+    property frequency : UInt64
+    property disjoint : Win32cr::Foundation::BOOL
+    def initialize(@frequency : UInt64, @disjoint : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D10_QUERY_DATA_PIPELINE_STATISTICS,
-    ia_vertices : UInt64,
-    ia_primitives : UInt64,
-    vs_invocations : UInt64,
-    gs_invocations : UInt64,
-    gs_primitives : UInt64,
-    c_invocations : UInt64,
-    c_primitives : UInt64,
-    ps_invocations : UInt64
+  struct D3D10_QUERY_DATA_PIPELINE_STATISTICS
+    property ia_vertices : UInt64
+    property ia_primitives : UInt64
+    property vs_invocations : UInt64
+    property gs_invocations : UInt64
+    property gs_primitives : UInt64
+    property c_invocations : UInt64
+    property c_primitives : UInt64
+    property ps_invocations : UInt64
+    def initialize(@ia_vertices : UInt64, @ia_primitives : UInt64, @vs_invocations : UInt64, @gs_invocations : UInt64, @gs_primitives : UInt64, @c_invocations : UInt64, @c_primitives : UInt64, @ps_invocations : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3D10_QUERY_DATA_SO_STATISTICS,
-    num_primitives_written : UInt64,
-    primitives_storage_needed : UInt64
+  struct D3D10_QUERY_DATA_SO_STATISTICS
+    property num_primitives_written : UInt64
+    property primitives_storage_needed : UInt64
+    def initialize(@num_primitives_written : UInt64, @primitives_storage_needed : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3D10_COUNTER_DESC,
-    counter : Win32cr::Graphics::Direct3D10::D3D10_COUNTER,
-    misc_flags : UInt32
+  struct D3D10_COUNTER_DESC
+    property counter : Win32cr::Graphics::Direct3D10::D3D10_COUNTER
+    property misc_flags : UInt32
+    def initialize(@counter : Win32cr::Graphics::Direct3D10::D3D10_COUNTER, @misc_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_COUNTER_INFO,
-    last_device_dependent_counter : Win32cr::Graphics::Direct3D10::D3D10_COUNTER,
-    num_simultaneous_counters : UInt32,
-    num_detectable_parallel_units : UInt8
+  struct D3D10_COUNTER_INFO
+    property last_device_dependent_counter : Win32cr::Graphics::Direct3D10::D3D10_COUNTER
+    property num_simultaneous_counters : UInt32
+    property num_detectable_parallel_units : UInt8
+    def initialize(@last_device_dependent_counter : Win32cr::Graphics::Direct3D10::D3D10_COUNTER, @num_simultaneous_counters : UInt32, @num_detectable_parallel_units : UInt8)
+    end
+  end
 
   @[Extern]
-  record D3D10_MESSAGE,
-    category : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_CATEGORY,
-    severity : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_SEVERITY,
-    id : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_ID,
-    pDescription : UInt8*,
-    description_byte_length : LibC::UIntPtrT
+  struct D3D10_MESSAGE
+    property category : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_CATEGORY
+    property severity : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_SEVERITY
+    property id : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_ID
+    property pDescription : UInt8*
+    property description_byte_length : LibC::UIntPtrT
+    def initialize(@category : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_CATEGORY, @severity : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_SEVERITY, @id : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_ID, @pDescription : UInt8*, @description_byte_length : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record D3D10_INFO_QUEUE_FILTER_DESC,
-    num_categories : UInt32,
-    pCategoryList : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_CATEGORY*,
-    num_severities : UInt32,
-    pSeverityList : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_SEVERITY*,
-    num_i_ds : UInt32,
-    pIDList : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_ID*
+  struct D3D10_INFO_QUEUE_FILTER_DESC
+    property num_categories : UInt32
+    property pCategoryList : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_CATEGORY*
+    property num_severities : UInt32
+    property pSeverityList : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_SEVERITY*
+    property num_i_ds : UInt32
+    property pIDList : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_ID*
+    def initialize(@num_categories : UInt32, @pCategoryList : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_CATEGORY*, @num_severities : UInt32, @pSeverityList : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_SEVERITY*, @num_i_ds : UInt32, @pIDList : Win32cr::Graphics::Direct3D10::D3D10_MESSAGE_ID*)
+    end
+  end
 
   @[Extern]
-  record D3D10_INFO_QUEUE_FILTER,
-    allow_list : Win32cr::Graphics::Direct3D10::D3D10_INFO_QUEUE_FILTER_DESC,
-    deny_list : Win32cr::Graphics::Direct3D10::D3D10_INFO_QUEUE_FILTER_DESC
+  struct D3D10_INFO_QUEUE_FILTER
+    property allow_list : Win32cr::Graphics::Direct3D10::D3D10_INFO_QUEUE_FILTER_DESC
+    property deny_list : Win32cr::Graphics::Direct3D10::D3D10_INFO_QUEUE_FILTER_DESC
+    def initialize(@allow_list : Win32cr::Graphics::Direct3D10::D3D10_INFO_QUEUE_FILTER_DESC, @deny_list : Win32cr::Graphics::Direct3D10::D3D10_INFO_QUEUE_FILTER_DESC)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_DESC,
-    version : UInt32,
-    creator : Win32cr::Foundation::PSTR,
-    flags : UInt32,
-    constant_buffers : UInt32,
-    bound_resources : UInt32,
-    input_parameters : UInt32,
-    output_parameters : UInt32,
-    instruction_count : UInt32,
-    temp_register_count : UInt32,
-    temp_array_count : UInt32,
-    def_count : UInt32,
-    dcl_count : UInt32,
-    texture_normal_instructions : UInt32,
-    texture_load_instructions : UInt32,
-    texture_comp_instructions : UInt32,
-    texture_bias_instructions : UInt32,
-    texture_gradient_instructions : UInt32,
-    float_instruction_count : UInt32,
-    int_instruction_count : UInt32,
-    uint_instruction_count : UInt32,
-    static_flow_control_count : UInt32,
-    dynamic_flow_control_count : UInt32,
-    macro_instruction_count : UInt32,
-    array_instruction_count : UInt32,
-    cut_instruction_count : UInt32,
-    emit_instruction_count : UInt32,
-    gs_output_topology : Win32cr::Graphics::Direct3D::D3D_PRIMITIVE_TOPOLOGY,
-    gs_max_output_vertex_count : UInt32
+  struct D3D10_SHADER_DESC
+    property version : UInt32
+    property creator : Win32cr::Foundation::PSTR
+    property flags : UInt32
+    property constant_buffers : UInt32
+    property bound_resources : UInt32
+    property input_parameters : UInt32
+    property output_parameters : UInt32
+    property instruction_count : UInt32
+    property temp_register_count : UInt32
+    property temp_array_count : UInt32
+    property def_count : UInt32
+    property dcl_count : UInt32
+    property texture_normal_instructions : UInt32
+    property texture_load_instructions : UInt32
+    property texture_comp_instructions : UInt32
+    property texture_bias_instructions : UInt32
+    property texture_gradient_instructions : UInt32
+    property float_instruction_count : UInt32
+    property int_instruction_count : UInt32
+    property uint_instruction_count : UInt32
+    property static_flow_control_count : UInt32
+    property dynamic_flow_control_count : UInt32
+    property macro_instruction_count : UInt32
+    property array_instruction_count : UInt32
+    property cut_instruction_count : UInt32
+    property emit_instruction_count : UInt32
+    property gs_output_topology : Win32cr::Graphics::Direct3D::D3D_PRIMITIVE_TOPOLOGY
+    property gs_max_output_vertex_count : UInt32
+    def initialize(@version : UInt32, @creator : Win32cr::Foundation::PSTR, @flags : UInt32, @constant_buffers : UInt32, @bound_resources : UInt32, @input_parameters : UInt32, @output_parameters : UInt32, @instruction_count : UInt32, @temp_register_count : UInt32, @temp_array_count : UInt32, @def_count : UInt32, @dcl_count : UInt32, @texture_normal_instructions : UInt32, @texture_load_instructions : UInt32, @texture_comp_instructions : UInt32, @texture_bias_instructions : UInt32, @texture_gradient_instructions : UInt32, @float_instruction_count : UInt32, @int_instruction_count : UInt32, @uint_instruction_count : UInt32, @static_flow_control_count : UInt32, @dynamic_flow_control_count : UInt32, @macro_instruction_count : UInt32, @array_instruction_count : UInt32, @cut_instruction_count : UInt32, @emit_instruction_count : UInt32, @gs_output_topology : Win32cr::Graphics::Direct3D::D3D_PRIMITIVE_TOPOLOGY, @gs_max_output_vertex_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_BUFFER_DESC,
-    name : Win32cr::Foundation::PSTR,
-    type__ : Win32cr::Graphics::Direct3D::D3D_CBUFFER_TYPE,
-    variables : UInt32,
-    size : UInt32,
-    uFlags : UInt32
+  struct D3D10_SHADER_BUFFER_DESC
+    property name : Win32cr::Foundation::PSTR
+    property type__ : Win32cr::Graphics::Direct3D::D3D_CBUFFER_TYPE
+    property variables : UInt32
+    property size : UInt32
+    property uFlags : UInt32
+    def initialize(@name : Win32cr::Foundation::PSTR, @type__ : Win32cr::Graphics::Direct3D::D3D_CBUFFER_TYPE, @variables : UInt32, @size : UInt32, @uFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_VARIABLE_DESC,
-    name : Win32cr::Foundation::PSTR,
-    start_offset : UInt32,
-    size : UInt32,
-    uFlags : UInt32,
-    default_value : Void*
+  struct D3D10_SHADER_VARIABLE_DESC
+    property name : Win32cr::Foundation::PSTR
+    property start_offset : UInt32
+    property size : UInt32
+    property uFlags : UInt32
+    property default_value : Void*
+    def initialize(@name : Win32cr::Foundation::PSTR, @start_offset : UInt32, @size : UInt32, @uFlags : UInt32, @default_value : Void*)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_TYPE_DESC,
-    class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS,
-    type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE,
-    rows : UInt32,
-    columns : UInt32,
-    elements : UInt32,
-    members : UInt32,
-    offset : UInt32
+  struct D3D10_SHADER_TYPE_DESC
+    property class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS
+    property type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE
+    property rows : UInt32
+    property columns : UInt32
+    property elements : UInt32
+    property members : UInt32
+    property offset : UInt32
+    def initialize(@class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS, @type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE, @rows : UInt32, @columns : UInt32, @elements : UInt32, @members : UInt32, @offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_INPUT_BIND_DESC,
-    name : Win32cr::Foundation::PSTR,
-    type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_INPUT_TYPE,
-    bind_point : UInt32,
-    bind_count : UInt32,
-    uFlags : UInt32,
-    return_type : Win32cr::Graphics::Direct3D::D3D_RESOURCE_RETURN_TYPE,
-    dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION,
-    num_samples : UInt32
+  struct D3D10_SHADER_INPUT_BIND_DESC
+    property name : Win32cr::Foundation::PSTR
+    property type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_INPUT_TYPE
+    property bind_point : UInt32
+    property bind_count : UInt32
+    property uFlags : UInt32
+    property return_type : Win32cr::Graphics::Direct3D::D3D_RESOURCE_RETURN_TYPE
+    property dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION
+    property num_samples : UInt32
+    def initialize(@name : Win32cr::Foundation::PSTR, @type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_INPUT_TYPE, @bind_point : UInt32, @bind_count : UInt32, @uFlags : UInt32, @return_type : Win32cr::Graphics::Direct3D::D3D_RESOURCE_RETURN_TYPE, @dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION, @num_samples : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SIGNATURE_PARAMETER_DESC,
-    semantic_name : Win32cr::Foundation::PSTR,
-    semantic_index : UInt32,
-    register : UInt32,
-    system_value_type : Win32cr::Graphics::Direct3D::D3D_NAME,
-    component_type : Win32cr::Graphics::Direct3D::D3D_REGISTER_COMPONENT_TYPE,
-    mask : UInt8,
-    read_write_mask : UInt8
+  struct D3D10_SIGNATURE_PARAMETER_DESC
+    property semantic_name : Win32cr::Foundation::PSTR
+    property semantic_index : UInt32
+    property register : UInt32
+    property system_value_type : Win32cr::Graphics::Direct3D::D3D_NAME
+    property component_type : Win32cr::Graphics::Direct3D::D3D_REGISTER_COMPONENT_TYPE
+    property mask : UInt8
+    property read_write_mask : UInt8
+    def initialize(@semantic_name : Win32cr::Foundation::PSTR, @semantic_index : UInt32, @register : UInt32, @system_value_type : Win32cr::Graphics::Direct3D::D3D_NAME, @component_type : Win32cr::Graphics::Direct3D::D3D_REGISTER_COMPONENT_TYPE, @mask : UInt8, @read_write_mask : UInt8)
+    end
+  end
 
   @[Extern]
-  record D3D10_STATE_BLOCK_MASK,
-    vs : UInt8,
-    vs_samplers : UInt8[2],
-    vs_shader_resources : UInt8[16],
-    vs_constant_buffers : UInt8[2],
-    gs : UInt8,
-    gs_samplers : UInt8[2],
-    gs_shader_resources : UInt8[16],
-    gs_constant_buffers : UInt8[2],
-    ps : UInt8,
-    ps_samplers : UInt8[2],
-    ps_shader_resources : UInt8[16],
-    ps_constant_buffers : UInt8[2],
-    ia_vertex_buffers : UInt8[2],
-    ia_index_buffer : UInt8,
-    ia_input_layout : UInt8,
-    ia_primitive_topology : UInt8,
-    om_render_targets : UInt8,
-    om_depth_stencil_state : UInt8,
-    om_blend_state : UInt8,
-    rs_viewports : UInt8,
-    rs_scissor_rects : UInt8,
-    rs_rasterizer_state : UInt8,
-    so_buffers : UInt8,
-    predication : UInt8
+  struct D3D10_STATE_BLOCK_MASK
+    property vs : UInt8
+    property vs_samplers : UInt8[2]
+    property vs_shader_resources : UInt8[16]
+    property vs_constant_buffers : UInt8[2]
+    property gs : UInt8
+    property gs_samplers : UInt8[2]
+    property gs_shader_resources : UInt8[16]
+    property gs_constant_buffers : UInt8[2]
+    property ps : UInt8
+    property ps_samplers : UInt8[2]
+    property ps_shader_resources : UInt8[16]
+    property ps_constant_buffers : UInt8[2]
+    property ia_vertex_buffers : UInt8[2]
+    property ia_index_buffer : UInt8
+    property ia_input_layout : UInt8
+    property ia_primitive_topology : UInt8
+    property om_render_targets : UInt8
+    property om_depth_stencil_state : UInt8
+    property om_blend_state : UInt8
+    property rs_viewports : UInt8
+    property rs_scissor_rects : UInt8
+    property rs_rasterizer_state : UInt8
+    property so_buffers : UInt8
+    property predication : UInt8
+    def initialize(@vs : UInt8, @vs_samplers : UInt8[2], @vs_shader_resources : UInt8[16], @vs_constant_buffers : UInt8[2], @gs : UInt8, @gs_samplers : UInt8[2], @gs_shader_resources : UInt8[16], @gs_constant_buffers : UInt8[2], @ps : UInt8, @ps_samplers : UInt8[2], @ps_shader_resources : UInt8[16], @ps_constant_buffers : UInt8[2], @ia_vertex_buffers : UInt8[2], @ia_index_buffer : UInt8, @ia_input_layout : UInt8, @ia_primitive_topology : UInt8, @om_render_targets : UInt8, @om_depth_stencil_state : UInt8, @om_blend_state : UInt8, @rs_viewports : UInt8, @rs_scissor_rects : UInt8, @rs_rasterizer_state : UInt8, @so_buffers : UInt8, @predication : UInt8)
+    end
+  end
 
   @[Extern]
-  record D3D10_EFFECT_TYPE_DESC,
-    type_name : Win32cr::Foundation::PSTR,
-    class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS,
-    type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE,
-    elements : UInt32,
-    members : UInt32,
-    rows : UInt32,
-    columns : UInt32,
-    packed_size : UInt32,
-    unpacked_size : UInt32,
-    stride : UInt32
+  struct D3D10_EFFECT_TYPE_DESC
+    property type_name : Win32cr::Foundation::PSTR
+    property class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS
+    property type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE
+    property elements : UInt32
+    property members : UInt32
+    property rows : UInt32
+    property columns : UInt32
+    property packed_size : UInt32
+    property unpacked_size : UInt32
+    property stride : UInt32
+    def initialize(@type_name : Win32cr::Foundation::PSTR, @class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS, @type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE, @elements : UInt32, @members : UInt32, @rows : UInt32, @columns : UInt32, @packed_size : UInt32, @unpacked_size : UInt32, @stride : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_EFFECT_VARIABLE_DESC,
-    name : Win32cr::Foundation::PSTR,
-    semantic : Win32cr::Foundation::PSTR,
-    flags : UInt32,
-    annotations : UInt32,
-    buffer_offset : UInt32,
-    explicit_bind_point : UInt32
+  struct D3D10_EFFECT_VARIABLE_DESC
+    property name : Win32cr::Foundation::PSTR
+    property semantic : Win32cr::Foundation::PSTR
+    property flags : UInt32
+    property annotations : UInt32
+    property buffer_offset : UInt32
+    property explicit_bind_point : UInt32
+    def initialize(@name : Win32cr::Foundation::PSTR, @semantic : Win32cr::Foundation::PSTR, @flags : UInt32, @annotations : UInt32, @buffer_offset : UInt32, @explicit_bind_point : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_EFFECT_SHADER_DESC,
-    pInputSignature : UInt8*,
-    is_inline : Win32cr::Foundation::BOOL,
-    pBytecode : UInt8*,
-    bytecode_length : UInt32,
-    so_decl : Win32cr::Foundation::PSTR,
-    num_input_signature_entries : UInt32,
-    num_output_signature_entries : UInt32
+  struct D3D10_EFFECT_SHADER_DESC
+    property pInputSignature : UInt8*
+    property is_inline : Win32cr::Foundation::BOOL
+    property pBytecode : UInt8*
+    property bytecode_length : UInt32
+    property so_decl : Win32cr::Foundation::PSTR
+    property num_input_signature_entries : UInt32
+    property num_output_signature_entries : UInt32
+    def initialize(@pInputSignature : UInt8*, @is_inline : Win32cr::Foundation::BOOL, @pBytecode : UInt8*, @bytecode_length : UInt32, @so_decl : Win32cr::Foundation::PSTR, @num_input_signature_entries : UInt32, @num_output_signature_entries : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_PASS_DESC,
-    name : Win32cr::Foundation::PSTR,
-    annotations : UInt32,
-    pIAInputSignature : UInt8*,
-    ia_input_signature_size : LibC::UIntPtrT,
-    stencil_ref : UInt32,
-    sample_mask : UInt32,
-    blend_factor : Float32[4]
+  struct D3D10_PASS_DESC
+    property name : Win32cr::Foundation::PSTR
+    property annotations : UInt32
+    property pIAInputSignature : UInt8*
+    property ia_input_signature_size : LibC::UIntPtrT
+    property stencil_ref : UInt32
+    property sample_mask : UInt32
+    property blend_factor : Float32[4]
+    def initialize(@name : Win32cr::Foundation::PSTR, @annotations : UInt32, @pIAInputSignature : UInt8*, @ia_input_signature_size : LibC::UIntPtrT, @stencil_ref : UInt32, @sample_mask : UInt32, @blend_factor : Float32[4])
+    end
+  end
 
   @[Extern]
-  record D3D10_PASS_SHADER_DESC,
-    pShaderVariable : Void*,
-    shader_index : UInt32
+  struct D3D10_PASS_SHADER_DESC
+    property pShaderVariable : Void*
+    property shader_index : UInt32
+    def initialize(@pShaderVariable : Void*, @shader_index : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_TECHNIQUE_DESC,
-    name : Win32cr::Foundation::PSTR,
-    passes : UInt32,
-    annotations : UInt32
+  struct D3D10_TECHNIQUE_DESC
+    property name : Win32cr::Foundation::PSTR
+    property passes : UInt32
+    property annotations : UInt32
+    def initialize(@name : Win32cr::Foundation::PSTR, @passes : UInt32, @annotations : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_EFFECT_DESC,
-    is_child_effect : Win32cr::Foundation::BOOL,
-    constant_buffers : UInt32,
-    shared_constant_buffers : UInt32,
-    global_variables : UInt32,
-    shared_global_variables : UInt32,
-    techniques : UInt32
+  struct D3D10_EFFECT_DESC
+    property is_child_effect : Win32cr::Foundation::BOOL
+    property constant_buffers : UInt32
+    property shared_constant_buffers : UInt32
+    property global_variables : UInt32
+    property shared_global_variables : UInt32
+    property techniques : UInt32
+    def initialize(@is_child_effect : Win32cr::Foundation::BOOL, @constant_buffers : UInt32, @shared_constant_buffers : UInt32, @global_variables : UInt32, @shared_global_variables : UInt32, @techniques : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_RENDER_TARGET_BLEND_DESC1,
-    blend_enable : Win32cr::Foundation::BOOL,
-    src_blend : Win32cr::Graphics::Direct3D10::D3D10_BLEND,
-    dest_blend : Win32cr::Graphics::Direct3D10::D3D10_BLEND,
-    blend_op : Win32cr::Graphics::Direct3D10::D3D10_BLEND_OP,
-    src_blend_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND,
-    dest_blend_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND,
-    blend_op_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND_OP,
-    render_target_write_mask : UInt8
+  struct D3D10_RENDER_TARGET_BLEND_DESC1
+    property blend_enable : Win32cr::Foundation::BOOL
+    property src_blend : Win32cr::Graphics::Direct3D10::D3D10_BLEND
+    property dest_blend : Win32cr::Graphics::Direct3D10::D3D10_BLEND
+    property blend_op : Win32cr::Graphics::Direct3D10::D3D10_BLEND_OP
+    property src_blend_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND
+    property dest_blend_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND
+    property blend_op_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND_OP
+    property render_target_write_mask : UInt8
+    def initialize(@blend_enable : Win32cr::Foundation::BOOL, @src_blend : Win32cr::Graphics::Direct3D10::D3D10_BLEND, @dest_blend : Win32cr::Graphics::Direct3D10::D3D10_BLEND, @blend_op : Win32cr::Graphics::Direct3D10::D3D10_BLEND_OP, @src_blend_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND, @dest_blend_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND, @blend_op_alpha : Win32cr::Graphics::Direct3D10::D3D10_BLEND_OP, @render_target_write_mask : UInt8)
+    end
+  end
 
   @[Extern]
-  record D3D10_BLEND_DESC1,
-    alpha_to_coverage_enable : Win32cr::Foundation::BOOL,
-    independent_blend_enable : Win32cr::Foundation::BOOL,
-    render_target : Win32cr::Graphics::Direct3D10::D3D10_RENDER_TARGET_BLEND_DESC1[8]
+  struct D3D10_BLEND_DESC1
+    property alpha_to_coverage_enable : Win32cr::Foundation::BOOL
+    property independent_blend_enable : Win32cr::Foundation::BOOL
+    property render_target : Win32cr::Graphics::Direct3D10::D3D10_RENDER_TARGET_BLEND_DESC1[8]
+    def initialize(@alpha_to_coverage_enable : Win32cr::Foundation::BOOL, @independent_blend_enable : Win32cr::Foundation::BOOL, @render_target : Win32cr::Graphics::Direct3D10::D3D10_RENDER_TARGET_BLEND_DESC1[8])
+    end
+  end
 
   @[Extern]
-  record D3D10_TEXCUBE_ARRAY_SRV1,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32,
-    first2_d_array_face : UInt32,
-    num_cubes : UInt32
+  struct D3D10_TEXCUBE_ARRAY_SRV1
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    property first2_d_array_face : UInt32
+    property num_cubes : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32, @first2_d_array_face : UInt32, @num_cubes : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_RESOURCE_VIEW_DESC1,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    view_dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D10_SHADER_RESOURCE_VIEW_DESC1
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property view_dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      buffer : Win32cr::Graphics::Direct3D10::D3D10_BUFFER_SRV,
-      texture1_d : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_SRV,
-      texture1_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_ARRAY_SRV,
-      texture2_d : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_SRV,
-      texture2_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_ARRAY_SRV,
-      texture2_dms : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_SRV,
-      texture2_dms_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_ARRAY_SRV,
-      texture3_d : Win32cr::Graphics::Direct3D10::D3D10_TEX3D_SRV,
-      texture_cube : Win32cr::Graphics::Direct3D10::D3D10_TEXCUBE_SRV,
-      texture_cube_array : Win32cr::Graphics::Direct3D10::D3D10_TEXCUBE_ARRAY_SRV1
+    struct Anonymous_e__Union_
+    property buffer : Win32cr::Graphics::Direct3D10::D3D10_BUFFER_SRV
+    property texture1_d : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_SRV
+    property texture1_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_ARRAY_SRV
+    property texture2_d : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_SRV
+    property texture2_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_ARRAY_SRV
+    property texture2_dms : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_SRV
+    property texture2_dms_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_ARRAY_SRV
+    property texture3_d : Win32cr::Graphics::Direct3D10::D3D10_TEX3D_SRV
+    property texture_cube : Win32cr::Graphics::Direct3D10::D3D10_TEXCUBE_SRV
+    property texture_cube_array : Win32cr::Graphics::Direct3D10::D3D10_TEXCUBE_ARRAY_SRV1
+    def initialize(@buffer : Win32cr::Graphics::Direct3D10::D3D10_BUFFER_SRV, @texture1_d : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_SRV, @texture1_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX1D_ARRAY_SRV, @texture2_d : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_SRV, @texture2_d_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2D_ARRAY_SRV, @texture2_dms : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_SRV, @texture2_dms_array : Win32cr::Graphics::Direct3D10::D3D10_TEX2DMS_ARRAY_SRV, @texture3_d : Win32cr::Graphics::Direct3D10::D3D10_TEX3D_SRV, @texture_cube : Win32cr::Graphics::Direct3D10::D3D10_TEXCUBE_SRV, @texture_cube_array : Win32cr::Graphics::Direct3D10::D3D10_TEXCUBE_ARRAY_SRV1)
+    end
+    end
 
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @view_dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D10_SHADER_DEBUG_TOKEN_INFO,
-    file : UInt32,
-    line : UInt32,
-    column : UInt32,
-    token_length : UInt32,
-    token_id : UInt32
+  struct D3D10_SHADER_DEBUG_TOKEN_INFO
+    property file : UInt32
+    property line : UInt32
+    property column : UInt32
+    property token_length : UInt32
+    property token_id : UInt32
+    def initialize(@file : UInt32, @line : UInt32, @column : UInt32, @token_length : UInt32, @token_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_DEBUG_VAR_INFO,
-    token_id : UInt32,
-    type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE,
-    register : UInt32,
-    component : UInt32,
-    scope_var : UInt32,
-    scope_var_offset : UInt32
+  struct D3D10_SHADER_DEBUG_VAR_INFO
+    property token_id : UInt32
+    property type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE
+    property register : UInt32
+    property component : UInt32
+    property scope_var : UInt32
+    property scope_var_offset : UInt32
+    def initialize(@token_id : UInt32, @type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE, @register : UInt32, @component : UInt32, @scope_var : UInt32, @scope_var_offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_DEBUG_INPUT_INFO,
-    var : UInt32,
-    initial_register_set : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_REGTYPE,
-    initial_bank : UInt32,
-    initial_register : UInt32,
-    initial_component : UInt32,
-    initial_value : UInt32
+  struct D3D10_SHADER_DEBUG_INPUT_INFO
+    property var : UInt32
+    property initial_register_set : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_REGTYPE
+    property initial_bank : UInt32
+    property initial_register : UInt32
+    property initial_component : UInt32
+    property initial_value : UInt32
+    def initialize(@var : UInt32, @initial_register_set : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_REGTYPE, @initial_bank : UInt32, @initial_register : UInt32, @initial_component : UInt32, @initial_value : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_DEBUG_SCOPEVAR_INFO,
-    token_id : UInt32,
-    var_type : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_VARTYPE,
-    class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS,
-    rows : UInt32,
-    columns : UInt32,
-    struct_member_scope : UInt32,
-    uArrayIndices : UInt32,
-    array_elements : UInt32,
-    array_strides : UInt32,
-    uVariables : UInt32,
-    uFirstVariable : UInt32
+  struct D3D10_SHADER_DEBUG_SCOPEVAR_INFO
+    property token_id : UInt32
+    property var_type : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_VARTYPE
+    property class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS
+    property rows : UInt32
+    property columns : UInt32
+    property struct_member_scope : UInt32
+    property uArrayIndices : UInt32
+    property array_elements : UInt32
+    property array_strides : UInt32
+    property uVariables : UInt32
+    property uFirstVariable : UInt32
+    def initialize(@token_id : UInt32, @var_type : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_VARTYPE, @class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS, @rows : UInt32, @columns : UInt32, @struct_member_scope : UInt32, @uArrayIndices : UInt32, @array_elements : UInt32, @array_strides : UInt32, @uVariables : UInt32, @uFirstVariable : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_DEBUG_SCOPE_INFO,
-    scope_type : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_SCOPETYPE,
-    name : UInt32,
-    uNameLen : UInt32,
-    uVariables : UInt32,
-    variable_data : UInt32
+  struct D3D10_SHADER_DEBUG_SCOPE_INFO
+    property scope_type : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_SCOPETYPE
+    property name : UInt32
+    property uNameLen : UInt32
+    property uVariables : UInt32
+    property variable_data : UInt32
+    def initialize(@scope_type : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_SCOPETYPE, @name : UInt32, @uNameLen : UInt32, @uVariables : UInt32, @variable_data : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_DEBUG_OUTPUTVAR,
-    var : UInt32,
-    uValueMin : UInt32,
-    uValueMax : UInt32,
-    iValueMin : Int32,
-    iValueMax : Int32,
-    fValueMin : Float32,
-    fValueMax : Float32,
-    bNaNPossible : Win32cr::Foundation::BOOL,
-    bInfPossible : Win32cr::Foundation::BOOL
+  struct D3D10_SHADER_DEBUG_OUTPUTVAR
+    property var : UInt32
+    property uValueMin : UInt32
+    property uValueMax : UInt32
+    property iValueMin : Int32
+    property iValueMax : Int32
+    property fValueMin : Float32
+    property fValueMax : Float32
+    property bNaNPossible : Win32cr::Foundation::BOOL
+    property bInfPossible : Win32cr::Foundation::BOOL
+    def initialize(@var : UInt32, @uValueMin : UInt32, @uValueMax : UInt32, @iValueMin : Int32, @iValueMax : Int32, @fValueMin : Float32, @fValueMax : Float32, @bNaNPossible : Win32cr::Foundation::BOOL, @bInfPossible : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_DEBUG_OUTPUTREG_INFO,
-    output_register_set : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_REGTYPE,
-    output_reg : UInt32,
-    temp_array_reg : UInt32,
-    output_components : UInt32[4],
-    output_vars : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_OUTPUTVAR[4],
-    index_reg : UInt32,
-    index_comp : UInt32
+  struct D3D10_SHADER_DEBUG_OUTPUTREG_INFO
+    property output_register_set : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_REGTYPE
+    property output_reg : UInt32
+    property temp_array_reg : UInt32
+    property output_components : UInt32[4]
+    property output_vars : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_OUTPUTVAR[4]
+    property index_reg : UInt32
+    property index_comp : UInt32
+    def initialize(@output_register_set : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_REGTYPE, @output_reg : UInt32, @temp_array_reg : UInt32, @output_components : UInt32[4], @output_vars : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_OUTPUTVAR[4], @index_reg : UInt32, @index_comp : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_DEBUG_INST_INFO,
-    id : UInt32,
-    opcode : UInt32,
-    uOutputs : UInt32,
-    pOutputs : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_OUTPUTREG_INFO[2],
-    token_id : UInt32,
-    nesting_level : UInt32,
-    scopes : UInt32,
-    scope_info : UInt32,
-    accessed_vars : UInt32,
-    accessed_vars_info : UInt32
+  struct D3D10_SHADER_DEBUG_INST_INFO
+    property id : UInt32
+    property opcode : UInt32
+    property uOutputs : UInt32
+    property pOutputs : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_OUTPUTREG_INFO[2]
+    property token_id : UInt32
+    property nesting_level : UInt32
+    property scopes : UInt32
+    property scope_info : UInt32
+    property accessed_vars : UInt32
+    property accessed_vars_info : UInt32
+    def initialize(@id : UInt32, @opcode : UInt32, @uOutputs : UInt32, @pOutputs : Win32cr::Graphics::Direct3D10::D3D10_SHADER_DEBUG_OUTPUTREG_INFO[2], @token_id : UInt32, @nesting_level : UInt32, @scopes : UInt32, @scope_info : UInt32, @accessed_vars : UInt32, @accessed_vars_info : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_DEBUG_FILE_INFO,
-    file_name : UInt32,
-    file_name_len : UInt32,
-    file_data : UInt32,
-    file_len : UInt32
+  struct D3D10_SHADER_DEBUG_FILE_INFO
+    property file_name : UInt32
+    property file_name_len : UInt32
+    property file_data : UInt32
+    property file_len : UInt32
+    def initialize(@file_name : UInt32, @file_name_len : UInt32, @file_data : UInt32, @file_len : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D10_SHADER_DEBUG_INFO,
-    size : UInt32,
-    creator : UInt32,
-    entrypoint_name : UInt32,
-    shader_target : UInt32,
-    compile_flags : UInt32,
-    files : UInt32,
-    file_info : UInt32,
-    instructions : UInt32,
-    instruction_info : UInt32,
-    variables : UInt32,
-    variable_info : UInt32,
-    input_variables : UInt32,
-    input_variable_info : UInt32,
-    tokens : UInt32,
-    token_info : UInt32,
-    scopes : UInt32,
-    scope_info : UInt32,
-    scope_variables : UInt32,
-    scope_variable_info : UInt32,
-    uint_offset : UInt32,
-    string_offset : UInt32
+  struct D3D10_SHADER_DEBUG_INFO
+    property size : UInt32
+    property creator : UInt32
+    property entrypoint_name : UInt32
+    property shader_target : UInt32
+    property compile_flags : UInt32
+    property files : UInt32
+    property file_info : UInt32
+    property instructions : UInt32
+    property instruction_info : UInt32
+    property variables : UInt32
+    property variable_info : UInt32
+    property input_variables : UInt32
+    property input_variable_info : UInt32
+    property tokens : UInt32
+    property token_info : UInt32
+    property scopes : UInt32
+    property scope_info : UInt32
+    property scope_variables : UInt32
+    property scope_variable_info : UInt32
+    property uint_offset : UInt32
+    property string_offset : UInt32
+    def initialize(@size : UInt32, @creator : UInt32, @entrypoint_name : UInt32, @shader_target : UInt32, @compile_flags : UInt32, @files : UInt32, @file_info : UInt32, @instructions : UInt32, @instruction_info : UInt32, @variables : UInt32, @variable_info : UInt32, @input_variables : UInt32, @input_variable_info : UInt32, @tokens : UInt32, @token_info : UInt32, @scopes : UInt32, @scope_info : UInt32, @scope_variables : UInt32, @scope_variable_info : UInt32, @uint_offset : UInt32, @string_offset : UInt32)
+    end
+  end
 
   @[Extern]
   record ID3D10DeviceChildVtbl,
@@ -1935,7 +2190,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c00-342c-4106-a19f-4f2704f689f0")]
   record ID3D10DeviceChild, lpVtbl : ID3D10DeviceChildVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c00_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10DeviceChild*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1975,7 +2229,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("2b4b1cc8-a4ad-41f8-8322-ca86fc3ec675")]
   record ID3D10DepthStencilState, lpVtbl : ID3D10DepthStencilStateVtbl* do
     GUID = LibC::GUID.new(0x2b4b1cc8_u32, 0xa4ad_u16, 0x41f8_u16, StaticArray[0x83_u8, 0x22_u8, 0xca_u8, 0x86_u8, 0xfc_u8, 0x3e_u8, 0xc6_u8, 0x75_u8])
     def query_interface(this : ID3D10DepthStencilState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2018,7 +2271,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("edad8d19-8a35-4d6d-8566-2ea276cde161")]
   record ID3D10BlendState, lpVtbl : ID3D10BlendStateVtbl* do
     GUID = LibC::GUID.new(0xedad8d19_u32, 0x8a35_u16, 0x4d6d_u16, StaticArray[0x85_u8, 0x66_u8, 0x2e_u8, 0xa2_u8, 0x76_u8, 0xcd_u8, 0xe1_u8, 0x61_u8])
     def query_interface(this : ID3D10BlendState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2061,7 +2313,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("a2a07292-89af-4345-be2e-c53d9fbb6e9f")]
   record ID3D10RasterizerState, lpVtbl : ID3D10RasterizerStateVtbl* do
     GUID = LibC::GUID.new(0xa2a07292_u32, 0x89af_u16, 0x4345_u16, StaticArray[0xbe_u8, 0x2e_u8, 0xc5_u8, 0x3d_u8, 0x9f_u8, 0xbb_u8, 0x6e_u8, 0x9f_u8])
     def query_interface(this : ID3D10RasterizerState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2106,7 +2357,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c01-342c-4106-a19f-4f2704f689f0")]
   record ID3D10Resource, lpVtbl : ID3D10ResourceVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c01_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Resource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2160,7 +2410,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c02-342c-4106-a19f-4f2704f689f0")]
   record ID3D10Buffer, lpVtbl : ID3D10BufferVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c02_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Buffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2223,7 +2472,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c03-342c-4106-a19f-4f2704f689f0")]
   record ID3D10Texture1D, lpVtbl : ID3D10Texture1DVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c03_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Texture1D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2286,7 +2534,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c04-342c-4106-a19f-4f2704f689f0")]
   record ID3D10Texture2D, lpVtbl : ID3D10Texture2DVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c04_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Texture2D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2349,7 +2596,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c05-342c-4106-a19f-4f2704f689f0")]
   record ID3D10Texture3D, lpVtbl : ID3D10Texture3DVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c05_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Texture3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2407,7 +2653,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("c902b03f-60a7-49ba-9936-2a3ab37a7e33")]
   record ID3D10View, lpVtbl : ID3D10ViewVtbl* do
     GUID = LibC::GUID.new(0xc902b03f_u32, 0x60a7_u16, 0x49ba_u16, StaticArray[0x99_u8, 0x36_u8, 0x2a_u8, 0x3a_u8, 0xb3_u8, 0x7a_u8, 0x7e_u8, 0x33_u8])
     def query_interface(this : ID3D10View*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2451,7 +2696,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c07-342c-4106-a19f-4f2704f689f0")]
   record ID3D10ShaderResourceView, lpVtbl : ID3D10ShaderResourceViewVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c07_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10ShaderResourceView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2498,7 +2742,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c08-342c-4106-a19f-4f2704f689f0")]
   record ID3D10RenderTargetView, lpVtbl : ID3D10RenderTargetViewVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c08_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10RenderTargetView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2545,7 +2788,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c09-342c-4106-a19f-4f2704f689f0")]
   record ID3D10DepthStencilView, lpVtbl : ID3D10DepthStencilViewVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c09_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10DepthStencilView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2590,7 +2832,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c0a-342c-4106-a19f-4f2704f689f0")]
   record ID3D10VertexShader, lpVtbl : ID3D10VertexShaderVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c0a_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10VertexShader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2629,7 +2870,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("6316be88-54cd-4040-ab44-20461bc81f68")]
   record ID3D10GeometryShader, lpVtbl : ID3D10GeometryShaderVtbl* do
     GUID = LibC::GUID.new(0x6316be88_u32, 0x54cd_u16, 0x4040_u16, StaticArray[0xab_u8, 0x44_u8, 0x20_u8, 0x46_u8, 0x1b_u8, 0xc8_u8, 0x1f_u8, 0x68_u8])
     def query_interface(this : ID3D10GeometryShader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2668,7 +2908,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("4968b601-9d00-4cde-8346-8e7f675819b6")]
   record ID3D10PixelShader, lpVtbl : ID3D10PixelShaderVtbl* do
     GUID = LibC::GUID.new(0x4968b601_u32, 0x9d00_u16, 0x4cde_u16, StaticArray[0x83_u8, 0x46_u8, 0x8e_u8, 0x7f_u8, 0x67_u8, 0x58_u8, 0x19_u8, 0xb6_u8])
     def query_interface(this : ID3D10PixelShader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2707,7 +2946,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c0b-342c-4106-a19f-4f2704f689f0")]
   record ID3D10InputLayout, lpVtbl : ID3D10InputLayoutVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c0b_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10InputLayout*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2747,7 +2985,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c0c-342c-4106-a19f-4f2704f689f0")]
   record ID3D10SamplerState, lpVtbl : ID3D10SamplerStateVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c0c_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10SamplerState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2793,7 +3030,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c0d-342c-4106-a19f-4f2704f689f0")]
   record ID3D10Asynchronous, lpVtbl : ID3D10AsynchronousVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c0d_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Asynchronous*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2849,7 +3085,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c0e-342c-4106-a19f-4f2704f689f0")]
   record ID3D10Query, lpVtbl : ID3D10QueryVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c0e_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Query*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2908,7 +3143,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c10-342c-4106-a19f-4f2704f689f0")]
   record ID3D10Predicate, lpVtbl : ID3D10PredicateVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c10_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Predicate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2967,7 +3201,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c11-342c-4106-a19f-4f2704f689f0")]
   record ID3D10Counter, lpVtbl : ID3D10CounterVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c11_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Counter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3112,7 +3345,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c0f-342c-4106-a19f-4f2704f689f0")]
   record ID3D10Device, lpVtbl : ID3D10DeviceVtbl* do
     GUID = LibC::GUID.new(0x9b7e4c0f_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Device*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3424,7 +3656,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4e00-342c-4106-a19f-4f2704f689f0")]
   record ID3D10Multithread, lpVtbl : ID3D10MultithreadVtbl* do
     GUID = LibC::GUID.new(0x9b7e4e00_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Multithread*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3466,7 +3697,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4e01-342c-4106-a19f-4f2704f689f0")]
   record ID3D10Debug, lpVtbl : ID3D10DebugVtbl* do
     GUID = LibC::GUID.new(0x9b7e4e01_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Debug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3512,7 +3742,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4e02-342c-4106-a19f-4f2704f689f0")]
   record ID3D10SwitchToRef, lpVtbl : ID3D10SwitchToRefVtbl* do
     GUID = LibC::GUID.new(0x9b7e4e02_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10SwitchToRef*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3576,7 +3805,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("1b940b17-2642-4d1f-ab1f-b99bad0c395f")]
   record ID3D10InfoQueue, lpVtbl : ID3D10InfoQueueVtbl* do
     GUID = LibC::GUID.new(0x1b940b17_u32, 0x2642_u16, 0x4d1f_u16, StaticArray[0xab_u8, 0x1f_u8, 0xb9_u8, 0x9b_u8, 0xad_u8, 0xc_u8, 0x39_u8, 0x5f_u8])
     def query_interface(this : ID3D10InfoQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3705,7 +3933,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("c530ad7d-9b16-4395-a979-ba2ecff83add")]
   record ID3D10ShaderReflectionType, lpVtbl : ID3D10ShaderReflectionTypeVtbl* do
     GUID = LibC::GUID.new(0xc530ad7d_u32, 0x9b16_u16, 0x4395_u16, StaticArray[0xa9_u8, 0x79_u8, 0xba_u8, 0x2e_u8, 0xcf_u8, 0xf8_u8, 0x3a_u8, 0xdd_u8])
     def get_desc(this : ID3D10ShaderReflectionType*, pDesc : Win32cr::Graphics::Direct3D10::D3D10_SHADER_TYPE_DESC*) : Win32cr::Foundation::HRESULT
@@ -3730,7 +3957,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("1bf63c95-2650-405d-99c1-3636bd1da0a1")]
   record ID3D10ShaderReflectionVariable, lpVtbl : ID3D10ShaderReflectionVariableVtbl* do
     GUID = LibC::GUID.new(0x1bf63c95_u32, 0x2650_u16, 0x405d_u16, StaticArray[0x99_u8, 0xc1_u8, 0x36_u8, 0x36_u8, 0xbd_u8, 0x1d_u8, 0xa0_u8, 0xa1_u8])
     def get_desc(this : ID3D10ShaderReflectionVariable*, pDesc : Win32cr::Graphics::Direct3D10::D3D10_SHADER_VARIABLE_DESC*) : Win32cr::Foundation::HRESULT
@@ -3750,7 +3976,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("66c66a94-dddd-4b62-a66a-f0da33c2b4d0")]
   record ID3D10ShaderReflectionConstantBuffer, lpVtbl : ID3D10ShaderReflectionConstantBufferVtbl* do
     GUID = LibC::GUID.new(0x66c66a94_u32, 0xdddd_u16, 0x4b62_u16, StaticArray[0xa6_u8, 0x6a_u8, 0xf0_u8, 0xda_u8, 0x33_u8, 0xc2_u8, 0xb4_u8, 0xd0_u8])
     def get_desc(this : ID3D10ShaderReflectionConstantBuffer*, pDesc : Win32cr::Graphics::Direct3D10::D3D10_SHADER_BUFFER_DESC*) : Win32cr::Foundation::HRESULT
@@ -3779,7 +4004,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("d40e20b6-f8f7-42ad-ab20-4baf8f15dfaa")]
   record ID3D10ShaderReflection, lpVtbl : ID3D10ShaderReflectionVtbl* do
     GUID = LibC::GUID.new(0xd40e20b6_u32, 0xf8f7_u16, 0x42ad_u16, StaticArray[0xab_u8, 0x20_u8, 0x4b_u8, 0xaf_u8, 0x8f_u8, 0x15_u8, 0xdf_u8, 0xaa_u8])
     def query_interface(this : ID3D10ShaderReflection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3824,7 +4048,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("0803425a-57f5-4dd6-9465-a87570834a08")]
   record ID3D10StateBlock, lpVtbl : ID3D10StateBlockVtbl* do
     GUID = LibC::GUID.new(0x803425a_u32, 0x57f5_u16, 0x4dd6_u16, StaticArray[0x94_u8, 0x65_u8, 0xa8_u8, 0x75_u8, 0x70_u8, 0x83_u8, 0x4a_u8, 0x8_u8])
     def query_interface(this : ID3D10StateBlock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3863,7 +4086,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("4e9e1ddc-cd9d-4772-a837-00180b9b88fd")]
   record ID3D10EffectType, lpVtbl : ID3D10EffectTypeVtbl* do
     GUID = LibC::GUID.new(0x4e9e1ddc_u32, 0xcd9d_u16, 0x4772_u16, StaticArray[0xa8_u8, 0x37_u8, 0x0_u8, 0x18_u8, 0xb_u8, 0x9b_u8, 0x88_u8, 0xfd_u8])
     def is_valid(this : ID3D10EffectType*) : Win32cr::Foundation::BOOL
@@ -3920,7 +4142,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("ae897105-00e6-45bf-bb8e-281dd6db8e1b")]
   record ID3D10EffectVariable, lpVtbl : ID3D10EffectVariableVtbl* do
     GUID = LibC::GUID.new(0xae897105_u32, 0xe6_u16, 0x45bf_u16, StaticArray[0xbb_u8, 0x8e_u8, 0x28_u8, 0x1d_u8, 0xd6_u8, 0xdb_u8, 0x8e_u8, 0x1b_u8])
     def is_valid(this : ID3D10EffectVariable*) : Win32cr::Foundation::BOOL
@@ -4043,7 +4264,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("00e48f7b-d2c8-49e8-a86c-022dee53431f")]
   record ID3D10EffectScalarVariable, lpVtbl : ID3D10EffectScalarVariableVtbl* do
     GUID = LibC::GUID.new(0xe48f7b_u32, 0xd2c8_u16, 0x49e8_u16, StaticArray[0xa8_u8, 0x6c_u8, 0x2_u8, 0x2d_u8, 0xee_u8, 0x53_u8, 0x43_u8, 0x1f_u8])
     def is_valid(this : ID3D10EffectScalarVariable*) : Win32cr::Foundation::BOOL
@@ -4202,7 +4422,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("62b98c44-1f82-4c67-bcd0-72cf8f217e81")]
   record ID3D10EffectVectorVariable, lpVtbl : ID3D10EffectVectorVariableVtbl* do
     GUID = LibC::GUID.new(0x62b98c44_u32, 0x1f82_u16, 0x4c67_u16, StaticArray[0xbc_u8, 0xd0_u8, 0x72_u8, 0xcf_u8, 0x8f_u8, 0x21_u8, 0x7e_u8, 0x81_u8])
     def is_valid(this : ID3D10EffectVectorVariable*) : Win32cr::Foundation::BOOL
@@ -4357,7 +4576,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("50666c24-b82f-4eed-a172-5b6e7e8522e0")]
   record ID3D10EffectMatrixVariable, lpVtbl : ID3D10EffectMatrixVariableVtbl* do
     GUID = LibC::GUID.new(0x50666c24_u32, 0xb82f_u16, 0x4eed_u16, StaticArray[0xa1_u8, 0x72_u8, 0x5b_u8, 0x6e_u8, 0x7e_u8, 0x85_u8, 0x22_u8, 0xe0_u8])
     def is_valid(this : ID3D10EffectMatrixVariable*) : Win32cr::Foundation::BOOL
@@ -4494,7 +4712,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("71417501-8df9-4e0a-a78a-255f9756baff")]
   record ID3D10EffectStringVariable, lpVtbl : ID3D10EffectStringVariableVtbl* do
     GUID = LibC::GUID.new(0x71417501_u32, 0x8df9_u16, 0x4e0a_u16, StaticArray[0xa7_u8, 0x8a_u8, 0x25_u8, 0x5f_u8, 0x97_u8, 0x56_u8, 0xba_u8, 0xff_u8])
     def is_valid(this : ID3D10EffectStringVariable*) : Win32cr::Foundation::BOOL
@@ -4615,7 +4832,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("c0a7157b-d872-4b1d-8073-efc2acd4b1fc")]
   record ID3D10EffectShaderResourceVariable, lpVtbl : ID3D10EffectShaderResourceVariableVtbl* do
     GUID = LibC::GUID.new(0xc0a7157b_u32, 0xd872_u16, 0x4b1d_u16, StaticArray[0x80_u8, 0x73_u8, 0xef_u8, 0xc2_u8, 0xac_u8, 0xd4_u8, 0xb1_u8, 0xfc_u8])
     def is_valid(this : ID3D10EffectShaderResourceVariable*) : Win32cr::Foundation::BOOL
@@ -4742,7 +4958,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("28ca0cc3-c2c9-40bb-b57f-67b737122b17")]
   record ID3D10EffectRenderTargetViewVariable, lpVtbl : ID3D10EffectRenderTargetViewVariableVtbl* do
     GUID = LibC::GUID.new(0x28ca0cc3_u32, 0xc2c9_u16, 0x40bb_u16, StaticArray[0xb5_u8, 0x7f_u8, 0x67_u8, 0xb7_u8, 0x37_u8, 0x12_u8, 0x2b_u8, 0x17_u8])
     def is_valid(this : ID3D10EffectRenderTargetViewVariable*) : Win32cr::Foundation::BOOL
@@ -4869,7 +5084,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("3e02c918-cc79-4985-b622-2d92ad701623")]
   record ID3D10EffectDepthStencilViewVariable, lpVtbl : ID3D10EffectDepthStencilViewVariableVtbl* do
     GUID = LibC::GUID.new(0x3e02c918_u32, 0xcc79_u16, 0x4985_u16, StaticArray[0xb6_u8, 0x22_u8, 0x2d_u8, 0x92_u8, 0xad_u8, 0x70_u8, 0x16_u8, 0x23_u8])
     def is_valid(this : ID3D10EffectDepthStencilViewVariable*) : Win32cr::Foundation::BOOL
@@ -4996,7 +5210,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("56648f4d-cc8b-4444-a5ad-b5a3d76e91b3")]
   record ID3D10EffectConstantBuffer, lpVtbl : ID3D10EffectConstantBufferVtbl* do
     GUID = LibC::GUID.new(0x56648f4d_u32, 0xcc8b_u16, 0x4444_u16, StaticArray[0xa5_u8, 0xad_u8, 0xb5_u8, 0xa3_u8, 0xd7_u8, 0x6e_u8, 0x91_u8, 0xb3_u8])
     def is_valid(this : ID3D10EffectConstantBuffer*) : Win32cr::Foundation::BOOL
@@ -5125,7 +5338,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("80849279-c799-4797-8c33-0407a07d9e06")]
   record ID3D10EffectShaderVariable, lpVtbl : ID3D10EffectShaderVariableVtbl* do
     GUID = LibC::GUID.new(0x80849279_u32, 0xc799_u16, 0x4797_u16, StaticArray[0x8c_u8, 0x33_u8, 0x4_u8, 0x7_u8, 0xa0_u8, 0x7d_u8, 0x9e_u8, 0x6_u8])
     def is_valid(this : ID3D10EffectShaderVariable*) : Win32cr::Foundation::BOOL
@@ -5256,7 +5468,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("1fcd2294-df6d-4eae-86b3-0e9160cfb07b")]
   record ID3D10EffectBlendVariable, lpVtbl : ID3D10EffectBlendVariableVtbl* do
     GUID = LibC::GUID.new(0x1fcd2294_u32, 0xdf6d_u16, 0x4eae_u16, StaticArray[0x86_u8, 0xb3_u8, 0xe_u8, 0x91_u8, 0x60_u8, 0xcf_u8, 0xb0_u8, 0x7b_u8])
     def is_valid(this : ID3D10EffectBlendVariable*) : Win32cr::Foundation::BOOL
@@ -5375,7 +5586,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("af482368-330a-46a5-9a5c-01c71af24c8d")]
   record ID3D10EffectDepthStencilVariable, lpVtbl : ID3D10EffectDepthStencilVariableVtbl* do
     GUID = LibC::GUID.new(0xaf482368_u32, 0x330a_u16, 0x46a5_u16, StaticArray[0x9a_u8, 0x5c_u8, 0x1_u8, 0xc7_u8, 0x1a_u8, 0xf2_u8, 0x4c_u8, 0x8d_u8])
     def is_valid(this : ID3D10EffectDepthStencilVariable*) : Win32cr::Foundation::BOOL
@@ -5494,7 +5704,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("21af9f0e-4d94-4ea9-9785-2cb76b8c0b34")]
   record ID3D10EffectRasterizerVariable, lpVtbl : ID3D10EffectRasterizerVariableVtbl* do
     GUID = LibC::GUID.new(0x21af9f0e_u32, 0x4d94_u16, 0x4ea9_u16, StaticArray[0x97_u8, 0x85_u8, 0x2c_u8, 0xb7_u8, 0x6b_u8, 0x8c_u8, 0xb_u8, 0x34_u8])
     def is_valid(this : ID3D10EffectRasterizerVariable*) : Win32cr::Foundation::BOOL
@@ -5613,7 +5822,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("6530d5c7-07e9-4271-a418-e7ce4bd1e480")]
   record ID3D10EffectSamplerVariable, lpVtbl : ID3D10EffectSamplerVariableVtbl* do
     GUID = LibC::GUID.new(0x6530d5c7_u32, 0x7e9_u16, 0x4271_u16, StaticArray[0xa4_u8, 0x18_u8, 0xe7_u8, 0xce_u8, 0x4b_u8, 0xd1_u8, 0xe4_u8, 0x80_u8])
     def is_valid(this : ID3D10EffectSamplerVariable*) : Win32cr::Foundation::BOOL
@@ -5714,7 +5922,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("5cfbeb89-1a06-46e0-b282-e3f9bfa36a54")]
   record ID3D10EffectPass, lpVtbl : ID3D10EffectPassVtbl* do
     GUID = LibC::GUID.new(0x5cfbeb89_u32, 0x1a06_u16, 0x46e0_u16, StaticArray[0xb2_u8, 0x82_u8, 0xe3_u8, 0xf9_u8, 0xbf_u8, 0xa3_u8, 0x6a_u8, 0x54_u8])
     def is_valid(this : ID3D10EffectPass*) : Win32cr::Foundation::BOOL
@@ -5759,7 +5966,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("db122ce8-d1c9-4292-b237-24ed3de8b175")]
   record ID3D10EffectTechnique, lpVtbl : ID3D10EffectTechniqueVtbl* do
     GUID = LibC::GUID.new(0xdb122ce8_u32, 0xd1c9_u16, 0x4292_u16, StaticArray[0xb2_u8, 0x37_u8, 0x24_u8, 0xed_u8, 0x3d_u8, 0xe8_u8, 0xb1_u8, 0x75_u8])
     def is_valid(this : ID3D10EffectTechnique*) : Win32cr::Foundation::BOOL
@@ -5807,7 +6013,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("51b0ca8b-ec0b-4519-870d-8ee1cb5017c7")]
   record ID3D10Effect, lpVtbl : ID3D10EffectVtbl* do
     GUID = LibC::GUID.new(0x51b0ca8b_u32, 0xec0b_u16, 0x4519_u16, StaticArray[0x87_u8, 0xd_u8, 0x8e_u8, 0xe1_u8, 0xcb_u8, 0x50_u8, 0x17_u8, 0xc7_u8])
     def query_interface(this : ID3D10Effect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5870,7 +6075,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9537ab04-3250-412e-8213-fcd2f8677933")]
   record ID3D10EffectPool, lpVtbl : ID3D10EffectPoolVtbl* do
     GUID = LibC::GUID.new(0x9537ab04_u32, 0x3250_u16, 0x412e_u16, StaticArray[0x82_u8, 0x13_u8, 0xfc_u8, 0xd2_u8, 0xf8_u8, 0x67_u8, 0x79_u8, 0x33_u8])
     def query_interface(this : ID3D10EffectPool*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5902,7 +6106,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("edad8d99-8a35-4d6d-8566-2ea276cde161")]
   record ID3D10BlendState1, lpVtbl : ID3D10BlendState1Vtbl* do
     GUID = LibC::GUID.new(0xedad8d99_u32, 0x8a35_u16, 0x4d6d_u16, StaticArray[0x85_u8, 0x66_u8, 0x2e_u8, 0xa2_u8, 0x76_u8, 0xcd_u8, 0xe1_u8, 0x61_u8])
     def query_interface(this : ID3D10BlendState1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5950,7 +6153,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c87-342c-4106-a19f-4f2704f689f0")]
   record ID3D10ShaderResourceView1, lpVtbl : ID3D10ShaderResourceView1Vtbl* do
     GUID = LibC::GUID.new(0x9b7e4c87_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10ShaderResourceView1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6092,7 +6294,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("9b7e4c8f-342c-4106-a19f-4f2704f689f0")]
   record ID3D10Device1, lpVtbl : ID3D10Device1Vtbl* do
     GUID = LibC::GUID.new(0x9b7e4c8f_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Device1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6424,7 +6625,6 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  #@[Com("c3457783-a846-47ce-9520-cea6f66e7447")]
   record ID3D10ShaderReflection1, lpVtbl : ID3D10ShaderReflection1Vtbl* do
     GUID = LibC::GUID.new(0xc3457783_u32, 0xa846_u16, 0x47ce_u16, StaticArray[0x95_u8, 0x20_u8, 0xce_u8, 0xa6_u8, 0xf6_u8, 0x6e_u8, 0x74_u8, 0x47_u8])
     def query_interface(this : ID3D10ShaderReflection1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

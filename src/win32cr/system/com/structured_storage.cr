@@ -132,299 +132,416 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record BSTRBLOB,
-    cbSize : UInt32,
-    pData : UInt8*
+  struct BSTRBLOB
+    property cbSize : UInt32
+    property pData : UInt8*
+    def initialize(@cbSize : UInt32, @pData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record CLIPDATA,
-    cbSize : UInt32,
-    ulClipFmt : Int32,
-    pClipData : UInt8*
+  struct CLIPDATA
+    property cbSize : UInt32
+    property ulClipFmt : Int32
+    property pClipData : UInt8*
+    def initialize(@cbSize : UInt32, @ulClipFmt : Int32, @pClipData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record RemSNB,
-    ulCntStr : UInt32,
-    ulCntChar : UInt32,
-    rgString : UInt16*
+  struct RemSNB
+    property ulCntStr : UInt32
+    property ulCntChar : UInt32
+    property rgString : UInt16*
+    def initialize(@ulCntStr : UInt32, @ulCntChar : UInt32, @rgString : UInt16*)
+    end
+  end
 
   @[Extern]
-  record VERSIONEDSTREAM,
-    guidVersion : LibC::GUID,
-    pStream : Void*
+  struct VERSIONEDSTREAM
+    property guidVersion : LibC::GUID
+    property pStream : Void*
+    def initialize(@guidVersion : LibC::GUID, @pStream : Void*)
+    end
+  end
 
   @[Extern]
-  record CAC,
-    cElems : UInt32,
-    pElems : Win32cr::Foundation::PSTR
+  struct CAC
+    property cElems : UInt32
+    property pElems : Win32cr::Foundation::PSTR
+    def initialize(@cElems : UInt32, @pElems : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record CAUB,
-    cElems : UInt32,
-    pElems : UInt8*
+  struct CAUB
+    property cElems : UInt32
+    property pElems : UInt8*
+    def initialize(@cElems : UInt32, @pElems : UInt8*)
+    end
+  end
 
   @[Extern]
-  record CAI,
-    cElems : UInt32,
-    pElems : Int16*
+  struct CAI
+    property cElems : UInt32
+    property pElems : Int16*
+    def initialize(@cElems : UInt32, @pElems : Int16*)
+    end
+  end
 
   @[Extern]
-  record CAUI,
-    cElems : UInt32,
-    pElems : UInt16*
+  struct CAUI
+    property cElems : UInt32
+    property pElems : UInt16*
+    def initialize(@cElems : UInt32, @pElems : UInt16*)
+    end
+  end
 
   @[Extern]
-  record CAL,
-    cElems : UInt32,
-    pElems : Int32*
+  struct CAL
+    property cElems : UInt32
+    property pElems : Int32*
+    def initialize(@cElems : UInt32, @pElems : Int32*)
+    end
+  end
 
   @[Extern]
-  record CAUL,
-    cElems : UInt32,
-    pElems : UInt32*
+  struct CAUL
+    property cElems : UInt32
+    property pElems : UInt32*
+    def initialize(@cElems : UInt32, @pElems : UInt32*)
+    end
+  end
 
   @[Extern]
-  record CAFLT,
-    cElems : UInt32,
-    pElems : Float32*
+  struct CAFLT
+    property cElems : UInt32
+    property pElems : Float32*
+    def initialize(@cElems : UInt32, @pElems : Float32*)
+    end
+  end
 
   @[Extern]
-  record CADBL,
-    cElems : UInt32,
-    pElems : Float64*
+  struct CADBL
+    property cElems : UInt32
+    property pElems : Float64*
+    def initialize(@cElems : UInt32, @pElems : Float64*)
+    end
+  end
 
   @[Extern]
-  record CACY,
-    cElems : UInt32,
-    pElems : Win32cr::System::Com::CY*
+  struct CACY
+    property cElems : UInt32
+    property pElems : Win32cr::System::Com::CY*
+    def initialize(@cElems : UInt32, @pElems : Win32cr::System::Com::CY*)
+    end
+  end
 
   @[Extern]
-  record CADATE,
-    cElems : UInt32,
-    pElems : Float64*
+  struct CADATE
+    property cElems : UInt32
+    property pElems : Float64*
+    def initialize(@cElems : UInt32, @pElems : Float64*)
+    end
+  end
 
   @[Extern]
-  record CABSTR,
-    cElems : UInt32,
-    pElems : Win32cr::Foundation::BSTR*
+  struct CABSTR
+    property cElems : UInt32
+    property pElems : Win32cr::Foundation::BSTR*
+    def initialize(@cElems : UInt32, @pElems : Win32cr::Foundation::BSTR*)
+    end
+  end
 
   @[Extern]
-  record CABSTRBLOB,
-    cElems : UInt32,
-    pElems : Win32cr::System::Com::StructuredStorage::BSTRBLOB*
+  struct CABSTRBLOB
+    property cElems : UInt32
+    property pElems : Win32cr::System::Com::StructuredStorage::BSTRBLOB*
+    def initialize(@cElems : UInt32, @pElems : Win32cr::System::Com::StructuredStorage::BSTRBLOB*)
+    end
+  end
 
   @[Extern]
-  record CABOOL,
-    cElems : UInt32,
-    pElems : Int16*
+  struct CABOOL
+    property cElems : UInt32
+    property pElems : Int16*
+    def initialize(@cElems : UInt32, @pElems : Int16*)
+    end
+  end
 
   @[Extern]
-  record CASCODE,
-    cElems : UInt32,
-    pElems : Int32*
+  struct CASCODE
+    property cElems : UInt32
+    property pElems : Int32*
+    def initialize(@cElems : UInt32, @pElems : Int32*)
+    end
+  end
 
   @[Extern]
-  record CAPROPVARIANT,
-    cElems : UInt32,
-    pElems : Win32cr::System::Com::StructuredStorage::PROPVARIANT*
+  struct CAPROPVARIANT
+    property cElems : UInt32
+    property pElems : Win32cr::System::Com::StructuredStorage::PROPVARIANT*
+    def initialize(@cElems : UInt32, @pElems : Win32cr::System::Com::StructuredStorage::PROPVARIANT*)
+    end
+  end
 
   @[Extern]
-  record CAH,
-    cElems : UInt32,
-    pElems : Win32cr::Foundation::LARGE_INTEGER*
+  struct CAH
+    property cElems : UInt32
+    property pElems : Win32cr::Foundation::LARGE_INTEGER*
+    def initialize(@cElems : UInt32, @pElems : Win32cr::Foundation::LARGE_INTEGER*)
+    end
+  end
 
   @[Extern]
-  record CAUH,
-    cElems : UInt32,
-    pElems : Win32cr::Foundation::ULARGE_INTEGER*
+  struct CAUH
+    property cElems : UInt32
+    property pElems : Win32cr::Foundation::ULARGE_INTEGER*
+    def initialize(@cElems : UInt32, @pElems : Win32cr::Foundation::ULARGE_INTEGER*)
+    end
+  end
 
   @[Extern]
-  record CALPSTR,
-    cElems : UInt32,
-    pElems : Win32cr::Foundation::PSTR*
+  struct CALPSTR
+    property cElems : UInt32
+    property pElems : Win32cr::Foundation::PSTR*
+    def initialize(@cElems : UInt32, @pElems : Win32cr::Foundation::PSTR*)
+    end
+  end
 
   @[Extern]
-  record CALPWSTR,
-    cElems : UInt32,
-    pElems : Win32cr::Foundation::PWSTR*
+  struct CALPWSTR
+    property cElems : UInt32
+    property pElems : Win32cr::Foundation::PWSTR*
+    def initialize(@cElems : UInt32, @pElems : Win32cr::Foundation::PWSTR*)
+    end
+  end
 
   @[Extern]
-  record CAFILETIME,
-    cElems : UInt32,
-    pElems : Win32cr::Foundation::FILETIME*
+  struct CAFILETIME
+    property cElems : UInt32
+    property pElems : Win32cr::Foundation::FILETIME*
+    def initialize(@cElems : UInt32, @pElems : Win32cr::Foundation::FILETIME*)
+    end
+  end
 
   @[Extern]
-  record CACLIPDATA,
-    cElems : UInt32,
-    pElems : Win32cr::System::Com::StructuredStorage::CLIPDATA*
+  struct CACLIPDATA
+    property cElems : UInt32
+    property pElems : Win32cr::System::Com::StructuredStorage::CLIPDATA*
+    def initialize(@cElems : UInt32, @pElems : Win32cr::System::Com::StructuredStorage::CLIPDATA*)
+    end
+  end
 
   @[Extern]
-  record CACLSID,
-    cElems : UInt32,
-    pElems : LibC::GUID*
+  struct CACLSID
+    property cElems : UInt32
+    property pElems : LibC::GUID*
+    def initialize(@cElems : UInt32, @pElems : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record PROPVARIANT,
-    anonymous : Anonymous_e__Union_ do
+  struct PROPVARIANT
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      decVal : Win32cr::Foundation::DECIMAL do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property decVal : Win32cr::Foundation::DECIMAL
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        vt : UInt16,
-        wReserved1 : UInt16,
-        wReserved2 : UInt16,
-        wReserved3 : UInt16,
-        anonymous : Anonymous_e__Union_ do
+      struct Anonymous_e__Struct_
+    property vt : UInt16
+    property wReserved1 : UInt16
+    property wReserved2 : UInt16
+    property wReserved3 : UInt16
+    property anonymous : Anonymous_e__Union_
 
         # Nested Type Anonymous_e__Union_
         @[Extern(union: true)]
-        record Anonymous_e__Union_,
-          cVal : Win32cr::Foundation::CHAR,
-          bVal : UInt8,
-          iVal : Int16,
-          uiVal : UInt16,
-          lVal : Int32,
-          ulVal : UInt32,
-          intVal : Int32,
-          uintVal : UInt32,
-          hVal : Win32cr::Foundation::LARGE_INTEGER,
-          uhVal : Win32cr::Foundation::ULARGE_INTEGER,
-          fltVal : Float32,
-          dblVal : Float64,
-          boolVal : Int16,
-          __obsolete__variant_bool : Int16,
-          scode : Int32,
-          cyVal : Win32cr::System::Com::CY,
-          date : Float64,
-          filetime : Win32cr::Foundation::FILETIME,
-          puuid : LibC::GUID*,
-          pclipdata : Win32cr::System::Com::StructuredStorage::CLIPDATA*,
-          bstrVal : Win32cr::Foundation::BSTR,
-          bstrblobVal : Win32cr::System::Com::StructuredStorage::BSTRBLOB,
-          blob : Win32cr::System::Com::BLOB,
-          pszVal : Win32cr::Foundation::PSTR,
-          pwszVal : Win32cr::Foundation::PWSTR,
-          punkVal : Void*,
-          pdispVal : Void*,
-          pStream : Void*,
-          pStorage : Void*,
-          pVersionedStream : Win32cr::System::Com::StructuredStorage::VERSIONEDSTREAM*,
-          parray : Win32cr::System::Com::SAFEARRAY*,
-          cac : Win32cr::System::Com::StructuredStorage::CAC,
-          caub : Win32cr::System::Com::StructuredStorage::CAUB,
-          cai : Win32cr::System::Com::StructuredStorage::CAI,
-          caui : Win32cr::System::Com::StructuredStorage::CAUI,
-          cal : Win32cr::System::Com::StructuredStorage::CAL,
-          caul : Win32cr::System::Com::StructuredStorage::CAUL,
-          cah : Win32cr::System::Com::StructuredStorage::CAH,
-          cauh : Win32cr::System::Com::StructuredStorage::CAUH,
-          caflt : Win32cr::System::Com::StructuredStorage::CAFLT,
-          cadbl : Win32cr::System::Com::StructuredStorage::CADBL,
-          cabool : Win32cr::System::Com::StructuredStorage::CABOOL,
-          cascode : Win32cr::System::Com::StructuredStorage::CASCODE,
-          cacy : Win32cr::System::Com::StructuredStorage::CACY,
-          cadate : Win32cr::System::Com::StructuredStorage::CADATE,
-          cafiletime : Win32cr::System::Com::StructuredStorage::CAFILETIME,
-          cauuid : Win32cr::System::Com::StructuredStorage::CACLSID,
-          caclipdata : Win32cr::System::Com::StructuredStorage::CACLIPDATA,
-          cabstr : Win32cr::System::Com::StructuredStorage::CABSTR,
-          cabstrblob : Win32cr::System::Com::StructuredStorage::CABSTRBLOB,
-          calpstr : Win32cr::System::Com::StructuredStorage::CALPSTR,
-          calpwstr : Win32cr::System::Com::StructuredStorage::CALPWSTR,
-          capropvar : Win32cr::System::Com::StructuredStorage::CAPROPVARIANT,
-          pcVal : Win32cr::Foundation::PSTR,
-          pbVal : UInt8*,
-          piVal : Int16*,
-          puiVal : UInt16*,
-          plVal : Int32*,
-          pulVal : UInt32*,
-          pintVal : Int32*,
-          puintVal : UInt32*,
-          pfltVal : Float32*,
-          pdblVal : Float64*,
-          pboolVal : Int16*,
-          pdecVal : Win32cr::Foundation::DECIMAL*,
-          pscode : Int32*,
-          pcyVal : Win32cr::System::Com::CY*,
-          pdate : Float64*,
-          pbstrVal : Win32cr::Foundation::BSTR*,
-          ppunkVal : Void**,
-          ppdispVal : Void**,
-          pparray : Win32cr::System::Com::SAFEARRAY**,
-          pvarVal : Win32cr::System::Com::StructuredStorage::PROPVARIANT*
+        struct Anonymous_e__Union_
+    property cVal : Win32cr::Foundation::CHAR
+    property bVal : UInt8
+    property iVal : Int16
+    property uiVal : UInt16
+    property lVal : Int32
+    property ulVal : UInt32
+    property intVal : Int32
+    property uintVal : UInt32
+    property hVal : Win32cr::Foundation::LARGE_INTEGER
+    property uhVal : Win32cr::Foundation::ULARGE_INTEGER
+    property fltVal : Float32
+    property dblVal : Float64
+    property boolVal : Int16
+    property __obsolete__variant_bool : Int16
+    property scode : Int32
+    property cyVal : Win32cr::System::Com::CY
+    property date : Float64
+    property filetime : Win32cr::Foundation::FILETIME
+    property puuid : LibC::GUID*
+    property pclipdata : Win32cr::System::Com::StructuredStorage::CLIPDATA*
+    property bstrVal : Win32cr::Foundation::BSTR
+    property bstrblobVal : Win32cr::System::Com::StructuredStorage::BSTRBLOB
+    property blob : Win32cr::System::Com::BLOB
+    property pszVal : Win32cr::Foundation::PSTR
+    property pwszVal : Win32cr::Foundation::PWSTR
+    property punkVal : Void*
+    property pdispVal : Void*
+    property pStream : Void*
+    property pStorage : Void*
+    property pVersionedStream : Win32cr::System::Com::StructuredStorage::VERSIONEDSTREAM*
+    property parray : Win32cr::System::Com::SAFEARRAY*
+    property cac : Win32cr::System::Com::StructuredStorage::CAC
+    property caub : Win32cr::System::Com::StructuredStorage::CAUB
+    property cai : Win32cr::System::Com::StructuredStorage::CAI
+    property caui : Win32cr::System::Com::StructuredStorage::CAUI
+    property cal : Win32cr::System::Com::StructuredStorage::CAL
+    property caul : Win32cr::System::Com::StructuredStorage::CAUL
+    property cah : Win32cr::System::Com::StructuredStorage::CAH
+    property cauh : Win32cr::System::Com::StructuredStorage::CAUH
+    property caflt : Win32cr::System::Com::StructuredStorage::CAFLT
+    property cadbl : Win32cr::System::Com::StructuredStorage::CADBL
+    property cabool : Win32cr::System::Com::StructuredStorage::CABOOL
+    property cascode : Win32cr::System::Com::StructuredStorage::CASCODE
+    property cacy : Win32cr::System::Com::StructuredStorage::CACY
+    property cadate : Win32cr::System::Com::StructuredStorage::CADATE
+    property cafiletime : Win32cr::System::Com::StructuredStorage::CAFILETIME
+    property cauuid : Win32cr::System::Com::StructuredStorage::CACLSID
+    property caclipdata : Win32cr::System::Com::StructuredStorage::CACLIPDATA
+    property cabstr : Win32cr::System::Com::StructuredStorage::CABSTR
+    property cabstrblob : Win32cr::System::Com::StructuredStorage::CABSTRBLOB
+    property calpstr : Win32cr::System::Com::StructuredStorage::CALPSTR
+    property calpwstr : Win32cr::System::Com::StructuredStorage::CALPWSTR
+    property capropvar : Win32cr::System::Com::StructuredStorage::CAPROPVARIANT
+    property pcVal : Win32cr::Foundation::PSTR
+    property pbVal : UInt8*
+    property piVal : Int16*
+    property puiVal : UInt16*
+    property plVal : Int32*
+    property pulVal : UInt32*
+    property pintVal : Int32*
+    property puintVal : UInt32*
+    property pfltVal : Float32*
+    property pdblVal : Float64*
+    property pboolVal : Int16*
+    property pdecVal : Win32cr::Foundation::DECIMAL*
+    property pscode : Int32*
+    property pcyVal : Win32cr::System::Com::CY*
+    property pdate : Float64*
+    property pbstrVal : Win32cr::Foundation::BSTR*
+    property ppunkVal : Void**
+    property ppdispVal : Void**
+    property pparray : Win32cr::System::Com::SAFEARRAY**
+    property pvarVal : Win32cr::System::Com::StructuredStorage::PROPVARIANT*
+    def initialize(@cVal : Win32cr::Foundation::CHAR, @bVal : UInt8, @iVal : Int16, @uiVal : UInt16, @lVal : Int32, @ulVal : UInt32, @intVal : Int32, @uintVal : UInt32, @hVal : Win32cr::Foundation::LARGE_INTEGER, @uhVal : Win32cr::Foundation::ULARGE_INTEGER, @fltVal : Float32, @dblVal : Float64, @boolVal : Int16, @__obsolete__variant_bool : Int16, @scode : Int32, @cyVal : Win32cr::System::Com::CY, @date : Float64, @filetime : Win32cr::Foundation::FILETIME, @puuid : LibC::GUID*, @pclipdata : Win32cr::System::Com::StructuredStorage::CLIPDATA*, @bstrVal : Win32cr::Foundation::BSTR, @bstrblobVal : Win32cr::System::Com::StructuredStorage::BSTRBLOB, @blob : Win32cr::System::Com::BLOB, @pszVal : Win32cr::Foundation::PSTR, @pwszVal : Win32cr::Foundation::PWSTR, @punkVal : Void*, @pdispVal : Void*, @pStream : Void*, @pStorage : Void*, @pVersionedStream : Win32cr::System::Com::StructuredStorage::VERSIONEDSTREAM*, @parray : Win32cr::System::Com::SAFEARRAY*, @cac : Win32cr::System::Com::StructuredStorage::CAC, @caub : Win32cr::System::Com::StructuredStorage::CAUB, @cai : Win32cr::System::Com::StructuredStorage::CAI, @caui : Win32cr::System::Com::StructuredStorage::CAUI, @cal : Win32cr::System::Com::StructuredStorage::CAL, @caul : Win32cr::System::Com::StructuredStorage::CAUL, @cah : Win32cr::System::Com::StructuredStorage::CAH, @cauh : Win32cr::System::Com::StructuredStorage::CAUH, @caflt : Win32cr::System::Com::StructuredStorage::CAFLT, @cadbl : Win32cr::System::Com::StructuredStorage::CADBL, @cabool : Win32cr::System::Com::StructuredStorage::CABOOL, @cascode : Win32cr::System::Com::StructuredStorage::CASCODE, @cacy : Win32cr::System::Com::StructuredStorage::CACY, @cadate : Win32cr::System::Com::StructuredStorage::CADATE, @cafiletime : Win32cr::System::Com::StructuredStorage::CAFILETIME, @cauuid : Win32cr::System::Com::StructuredStorage::CACLSID, @caclipdata : Win32cr::System::Com::StructuredStorage::CACLIPDATA, @cabstr : Win32cr::System::Com::StructuredStorage::CABSTR, @cabstrblob : Win32cr::System::Com::StructuredStorage::CABSTRBLOB, @calpstr : Win32cr::System::Com::StructuredStorage::CALPSTR, @calpwstr : Win32cr::System::Com::StructuredStorage::CALPWSTR, @capropvar : Win32cr::System::Com::StructuredStorage::CAPROPVARIANT, @pcVal : Win32cr::Foundation::PSTR, @pbVal : UInt8*, @piVal : Int16*, @puiVal : UInt16*, @plVal : Int32*, @pulVal : UInt32*, @pintVal : Int32*, @puintVal : UInt32*, @pfltVal : Float32*, @pdblVal : Float64*, @pboolVal : Int16*, @pdecVal : Win32cr::Foundation::DECIMAL*, @pscode : Int32*, @pcyVal : Win32cr::System::Com::CY*, @pdate : Float64*, @pbstrVal : Win32cr::Foundation::BSTR*, @ppunkVal : Void**, @ppdispVal : Void**, @pparray : Win32cr::System::Com::SAFEARRAY**, @pvarVal : Win32cr::System::Com::StructuredStorage::PROPVARIANT*)
+    end
+        end
 
+    def initialize(@vt : UInt16, @wReserved1 : UInt16, @wReserved2 : UInt16, @wReserved3 : UInt16, @anonymous : Anonymous_e__Union_)
+    end
       end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @decVal : Win32cr::Foundation::DECIMAL)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROPSPEC,
-    ulKind : Win32cr::System::Com::StructuredStorage::PROPSPEC_KIND,
-    anonymous : Anonymous_e__Union_ do
+  struct PROPSPEC
+    property ulKind : Win32cr::System::Com::StructuredStorage::PROPSPEC_KIND
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      propid : UInt32,
-      lpwstr : Win32cr::Foundation::PWSTR
+    struct Anonymous_e__Union_
+    property propid : UInt32
+    property lpwstr : Win32cr::Foundation::PWSTR
+    def initialize(@propid : UInt32, @lpwstr : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@ulKind : Win32cr::System::Com::StructuredStorage::PROPSPEC_KIND, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record STATPROPSTG,
-    lpwstrName : Win32cr::Foundation::PWSTR,
-    propid : UInt32,
-    vt : UInt16
+  struct STATPROPSTG
+    property lpwstrName : Win32cr::Foundation::PWSTR
+    property propid : UInt32
+    property vt : UInt16
+    def initialize(@lpwstrName : Win32cr::Foundation::PWSTR, @propid : UInt32, @vt : UInt16)
+    end
+  end
 
   @[Extern]
-  record STATPROPSETSTG,
-    fmtid : LibC::GUID,
-    clsid : LibC::GUID,
-    grfFlags : UInt32,
-    mtime : Win32cr::Foundation::FILETIME,
-    ctime : Win32cr::Foundation::FILETIME,
-    atime : Win32cr::Foundation::FILETIME,
-    dwOSVersion : UInt32
+  struct STATPROPSETSTG
+    property fmtid : LibC::GUID
+    property clsid : LibC::GUID
+    property grfFlags : UInt32
+    property mtime : Win32cr::Foundation::FILETIME
+    property ctime : Win32cr::Foundation::FILETIME
+    property atime : Win32cr::Foundation::FILETIME
+    property dwOSVersion : UInt32
+    def initialize(@fmtid : LibC::GUID, @clsid : LibC::GUID, @grfFlags : UInt32, @mtime : Win32cr::Foundation::FILETIME, @ctime : Win32cr::Foundation::FILETIME, @atime : Win32cr::Foundation::FILETIME, @dwOSVersion : UInt32)
+    end
+  end
 
   @[Extern]
-  record STGOPTIONS,
-    usVersion : UInt16,
-    reserved : UInt16,
-    ulSectorSize : UInt32,
-    pwcsTemplateFile : Win32cr::Foundation::PWSTR
+  struct STGOPTIONS
+    property usVersion : UInt16
+    property reserved : UInt16
+    property ulSectorSize : UInt32
+    property pwcsTemplateFile : Win32cr::Foundation::PWSTR
+    def initialize(@usVersion : UInt16, @reserved : UInt16, @ulSectorSize : UInt32, @pwcsTemplateFile : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record SERIALIZEDPROPERTYVALUE,
-    dwType : UInt32,
-    rgb : UInt8*
+  struct SERIALIZEDPROPERTYVALUE
+    property dwType : UInt32
+    property rgb : UInt8*
+    def initialize(@dwType : UInt32, @rgb : UInt8*)
+    end
+  end
 
   @[Extern]
-  record PMemoryAllocator
-  @[Extern]
-  record OLESTREAMVTBL,
-    get : LibC::IntPtrT,
-    put : LibC::IntPtrT
+  struct PMemoryAllocator
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record OLESTREAM,
-    lpstbl : Win32cr::System::Com::StructuredStorage::OLESTREAMVTBL*
+  struct OLESTREAMVTBL
+    property get : LibC::IntPtrT
+    property put : LibC::IntPtrT
+    def initialize(@get : LibC::IntPtrT, @put : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record PROPBAG2,
-    dwType : UInt32,
-    vt : UInt16,
-    cfType : UInt16,
-    dwHint : UInt32,
-    pstrName : Win32cr::Foundation::PWSTR,
-    clsid : LibC::GUID
+  struct OLESTREAM
+    property lpstbl : Win32cr::System::Com::StructuredStorage::OLESTREAMVTBL*
+    def initialize(@lpstbl : Win32cr::System::Com::StructuredStorage::OLESTREAMVTBL*)
+    end
+  end
+
+  @[Extern]
+  struct PROPBAG2
+    property dwType : UInt32
+    property vt : UInt16
+    property cfType : UInt16
+    property dwHint : UInt32
+    property pstrName : Win32cr::Foundation::PWSTR
+    property clsid : LibC::GUID
+    def initialize(@dwType : UInt32, @vt : UInt16, @cfType : UInt16, @dwHint : UInt32, @pstrName : Win32cr::Foundation::PWSTR, @clsid : LibC::GUID)
+    end
+  end
 
   @[Extern]
   record IEnumSTATSTGVtbl,
@@ -438,7 +555,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("0000000d-0000-0000-c000-000000000046")]
   record IEnumSTATSTG, lpVtbl : IEnumSTATSTGVtbl* do
     GUID = LibC::GUID.new(0xd_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IEnumSTATSTG*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -488,7 +604,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("0000000b-0000-0000-c000-000000000046")]
   record IStorage, lpVtbl : IStorageVtbl* do
     GUID = LibC::GUID.new(0xb_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -563,7 +678,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("0000010a-0000-0000-c000-000000000046")]
   record IPersistStorage, lpVtbl : IPersistStorageVtbl* do
     GUID = LibC::GUID.new(0x10a_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IPersistStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -614,7 +728,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("0000000a-0000-0000-c000-000000000046")]
   record ILockBytes, lpVtbl : ILockBytesVtbl* do
     GUID = LibC::GUID.new(0xa_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : ILockBytes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -659,7 +772,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("00000012-0000-0000-c000-000000000046")]
   record IRootStorage, lpVtbl : IRootStorageVtbl* do
     GUID = LibC::GUID.new(0x12_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IRootStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -689,7 +801,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("99caf010-415e-11cf-8814-00aa00b569f5")]
   record IFillLockBytes, lpVtbl : IFillLockBytesVtbl* do
     GUID = LibC::GUID.new(0x99caf010_u32, 0x415e_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x14_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb5_u8, 0x69_u8, 0xf5_u8])
     def query_interface(this : IFillLockBytes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -729,7 +840,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("0e6d4d90-6738-11cf-9608-00aa00680db4")]
   record ILayoutStorage, lpVtbl : ILayoutStorageVtbl* do
     GUID = LibC::GUID.new(0xe6d4d90_u32, 0x6738_u16, 0x11cf_u16, StaticArray[0x96_u8, 0x8_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x68_u8, 0xd_u8, 0xb4_u8])
     def query_interface(this : ILayoutStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -770,7 +880,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("0e6d4d92-6738-11cf-9608-00aa00680db4")]
   record IDirectWriterLock, lpVtbl : IDirectWriterLockVtbl* do
     GUID = LibC::GUID.new(0xe6d4d92_u32, 0x6738_u16, 0x11cf_u16, StaticArray[0x96_u8, 0x8_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x68_u8, 0xd_u8, 0xb4_u8])
     def query_interface(this : IDirectWriterLock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -814,7 +923,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("00000138-0000-0000-c000-000000000046")]
   record IPropertyStorage, lpVtbl : IPropertyStorageVtbl* do
     GUID = LibC::GUID.new(0x138_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IPropertyStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -877,7 +985,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("0000013a-0000-0000-c000-000000000046")]
   record IPropertySetStorage, lpVtbl : IPropertySetStorageVtbl* do
     GUID = LibC::GUID.new(0x13a_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IPropertySetStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -916,7 +1023,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("00000139-0000-0000-c000-000000000046")]
   record IEnumSTATPROPSTG, lpVtbl : IEnumSTATPROPSTGVtbl* do
     GUID = LibC::GUID.new(0x139_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IEnumSTATPROPSTG*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -955,7 +1061,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("0000013b-0000-0000-c000-000000000046")]
   record IEnumSTATPROPSETSTG, lpVtbl : IEnumSTATPROPSETSTGVtbl* do
     GUID = LibC::GUID.new(0x13b_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IEnumSTATPROPSETSTG*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -992,7 +1097,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("55272a00-42cb-11ce-8135-00aa004bb851")]
   record IPropertyBag, lpVtbl : IPropertyBagVtbl* do
     GUID = LibC::GUID.new(0x55272a00_u32, 0x42cb_u16, 0x11ce_u16, StaticArray[0x81_u8, 0x35_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xb8_u8, 0x51_u8])
     def query_interface(this : IPropertyBag*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1026,7 +1130,6 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  #@[Com("22f55882-280b-11d0-a8a9-00a0c90c2004")]
   record IPropertyBag2, lpVtbl : IPropertyBag2Vtbl* do
     GUID = LibC::GUID.new(0x22f55882_u32, 0x280b_u16, 0x11d0_u16, StaticArray[0xa8_u8, 0xa9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xc_u8, 0x20_u8, 0x4_u8])
     def query_interface(this : IPropertyBag2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

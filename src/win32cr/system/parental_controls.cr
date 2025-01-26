@@ -483,7 +483,6 @@ module Win32cr::System::ParentalControls
 
 
   @[Extern]
-  #@[Com("50b6a267-c4bd-450b-adb5-759073837c9e")]
   record IWPCProviderState, lpVtbl : IWPCProviderStateVtbl* do
     GUID = LibC::GUID.new(0x50b6a267_u32, 0xc4bd_u16, 0x450b_u16, StaticArray[0xad_u8, 0xb5_u8, 0x75_u8, 0x90_u8, 0x73_u8, 0x83_u8, 0x7c_u8, 0x9e_u8])
     def query_interface(this : IWPCProviderState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -515,7 +514,6 @@ module Win32cr::System::ParentalControls
 
 
   @[Extern]
-  #@[Com("bef54196-2d02-4a26-b6e5-d65af295d0f1")]
   record IWPCProviderConfig, lpVtbl : IWPCProviderConfigVtbl* do
     GUID = LibC::GUID.new(0xbef54196_u32, 0x2d02_u16, 0x4a26_u16, StaticArray[0xb6_u8, 0xe5_u8, 0xd6_u8, 0x5a_u8, 0xf2_u8, 0x95_u8, 0xd0_u8, 0xf1_u8])
     def query_interface(this : IWPCProviderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -550,7 +548,6 @@ module Win32cr::System::ParentalControls
 
 
   @[Extern]
-  #@[Com("8fdf6ca1-0189-47e4-b670-1a8a4636e340")]
   record IWPCSettings, lpVtbl : IWPCSettingsVtbl* do
     GUID = LibC::GUID.new(0x8fdf6ca1_u32, 0x189_u16, 0x47e4_u16, StaticArray[0xb6_u8, 0x70_u8, 0x1a_u8, 0x8a_u8, 0x46_u8, 0x36_u8, 0xe3_u8, 0x40_u8])
     def query_interface(this : IWPCSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -586,7 +583,6 @@ module Win32cr::System::ParentalControls
 
 
   @[Extern]
-  #@[Com("95e87780-e158-489e-b452-bbb850790715")]
   record IWPCGamesSettings, lpVtbl : IWPCGamesSettingsVtbl* do
     GUID = LibC::GUID.new(0x95e87780_u32, 0xe158_u16, 0x489e_u16, StaticArray[0xb4_u8, 0x52_u8, 0xbb_u8, 0xb8_u8, 0x50_u8, 0x79_u8, 0x7_u8, 0x15_u8])
     def query_interface(this : IWPCGamesSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -626,7 +622,6 @@ module Win32cr::System::ParentalControls
 
 
   @[Extern]
-  #@[Com("ffccbdb8-0992-4c30-b0f1-1cbb09c240aa")]
   record IWPCWebSettings, lpVtbl : IWPCWebSettingsVtbl* do
     GUID = LibC::GUID.new(0xffccbdb8_u32, 0x992_u16, 0x4c30_u16, StaticArray[0xb0_u8, 0xf1_u8, 0x1c_u8, 0xbb_u8, 0x9_u8, 0xc2_u8, 0x40_u8, 0xaa_u8])
     def query_interface(this : IWPCWebSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -668,7 +663,6 @@ module Win32cr::System::ParentalControls
 
 
   @[Extern]
-  #@[Com("4ff40a0f-3f3b-4d7c-a41b-4f39d7b44d05")]
   record IWindowsParentalControlsCore, lpVtbl : IWindowsParentalControlsCoreVtbl* do
     GUID = LibC::GUID.new(0x4ff40a0f_u32, 0x3f3b_u16, 0x4d7c_u16, StaticArray[0xa4_u8, 0x1b_u8, 0x4f_u8, 0x39_u8, 0xd7_u8, 0xb4_u8, 0x4d_u8, 0x5_u8])
     def query_interface(this : IWindowsParentalControlsCore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -708,7 +702,6 @@ module Win32cr::System::ParentalControls
 
 
   @[Extern]
-  #@[Com("28b4d88b-e072-49e6-804d-26edbe21a7b9")]
   record IWindowsParentalControls, lpVtbl : IWindowsParentalControlsVtbl* do
     GUID = LibC::GUID.new(0x28b4d88b_u32, 0xe072_u16, 0x49e6_u16, StaticArray[0x80_u8, 0x4d_u8, 0x26_u8, 0xed_u8, 0xbe_u8, 0x21_u8, 0xa7_u8, 0xb9_u8])
     def query_interface(this : IWindowsParentalControls*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -747,7 +740,6 @@ module Win32cr::System::ParentalControls
 
 
   @[Extern]
-  #@[Com("41eba572-23ed-4779-bec1-8df96206c44c")]
   record IWPCProviderSupport, lpVtbl : IWPCProviderSupportVtbl* do
     GUID = LibC::GUID.new(0x41eba572_u32, 0x23ed_u16, 0x4779_u16, StaticArray[0xbe_u8, 0xc1_u8, 0x8d_u8, 0xf9_u8, 0x62_u8, 0x6_u8, 0xc4_u8, 0x4c_u8])
     def query_interface(this : IWPCProviderSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

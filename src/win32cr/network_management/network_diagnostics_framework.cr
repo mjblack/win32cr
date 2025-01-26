@@ -96,117 +96,160 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
   end
 
   @[Extern]
-  record OCTET_STRING,
-    dwLength : UInt32,
-    lpValue : UInt8*
-
-  @[Extern]
-  record LIFE_TIME,
-    startTime : Win32cr::Foundation::FILETIME,
-    endTime : Win32cr::Foundation::FILETIME
-
-  @[Extern]
-  record DIAG_SOCKADDR,
-    family : UInt16,
-    data : Win32cr::Foundation::CHAR[126]
-
-  @[Extern]
-  record HELPER_ATTRIBUTE,
-    pwszName : Win32cr::Foundation::PWSTR,
-    type__ : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::ATTRIBUTE_TYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      boolean : Win32cr::Foundation::BOOL,
-      char : UInt8,
-      byte : UInt8,
-      short : Int16,
-      word : UInt16,
-      int : Int32,
-      d_word : UInt32,
-      int64 : Int64,
-      u_int64 : UInt64,
-      pw_str : Win32cr::Foundation::PWSTR,
-      guid : LibC::GUID,
-      life_time : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::LIFE_TIME,
-      address : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::DIAG_SOCKADDR,
-      octet_string : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::OCTET_STRING
-
+  struct OCTET_STRING
+    property dwLength : UInt32
+    property lpValue : UInt8*
+    def initialize(@dwLength : UInt32, @lpValue : UInt8*)
+    end
   end
 
   @[Extern]
-  record ShellCommandInfo,
-    pwszOperation : Win32cr::Foundation::PWSTR,
-    pwszFile : Win32cr::Foundation::PWSTR,
-    pwszParameters : Win32cr::Foundation::PWSTR,
-    pwszDirectory : Win32cr::Foundation::PWSTR,
-    nShowCmd : UInt32
-
-  @[Extern]
-  record UiInfo,
-    type__ : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::UI_INFO_TYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pwzNull : Win32cr::Foundation::PWSTR,
-      shell_info : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::ShellCommandInfo,
-      pwzHelpUrl : Win32cr::Foundation::PWSTR,
-      pwzDui : Win32cr::Foundation::PWSTR
-
+  struct LIFE_TIME
+    property startTime : Win32cr::Foundation::FILETIME
+    property endTime : Win32cr::Foundation::FILETIME
+    def initialize(@startTime : Win32cr::Foundation::FILETIME, @endTime : Win32cr::Foundation::FILETIME)
+    end
   end
 
   @[Extern]
-  record RepairInfo,
-    guid : LibC::GUID,
-    pwszClassName : Win32cr::Foundation::PWSTR,
-    pwszDescription : Win32cr::Foundation::PWSTR,
-    sidType : UInt32,
-    cost : Int32,
-    flags : UInt32,
-    scope : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::REPAIR_SCOPE,
-    risk : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::REPAIR_RISK,
-    ui_info : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::UiInfo,
-    rootCauseIndex : Int32
+  struct DIAG_SOCKADDR
+    property family : UInt16
+    property data : Win32cr::Foundation::CHAR[126]
+    def initialize(@family : UInt16, @data : Win32cr::Foundation::CHAR[126])
+    end
+  end
 
   @[Extern]
-  record RepairInfoEx,
-    repair : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::RepairInfo,
-    repairRank : UInt16
+  struct HELPER_ATTRIBUTE
+    property pwszName : Win32cr::Foundation::PWSTR
+    property type__ : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::ATTRIBUTE_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property boolean : Win32cr::Foundation::BOOL
+    property char : UInt8
+    property byte : UInt8
+    property short : Int16
+    property word : UInt16
+    property int : Int32
+    property d_word : UInt32
+    property int64 : Int64
+    property u_int64 : UInt64
+    property pw_str : Win32cr::Foundation::PWSTR
+    property guid : LibC::GUID
+    property life_time : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::LIFE_TIME
+    property address : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::DIAG_SOCKADDR
+    property octet_string : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::OCTET_STRING
+    def initialize(@boolean : Win32cr::Foundation::BOOL, @char : UInt8, @byte : UInt8, @short : Int16, @word : UInt16, @int : Int32, @d_word : UInt32, @int64 : Int64, @u_int64 : UInt64, @pw_str : Win32cr::Foundation::PWSTR, @guid : LibC::GUID, @life_time : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::LIFE_TIME, @address : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::DIAG_SOCKADDR, @octet_string : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::OCTET_STRING)
+    end
+    end
+
+    def initialize(@pwszName : Win32cr::Foundation::PWSTR, @type__ : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::ATTRIBUTE_TYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record RootCauseInfo,
-    pwszDescription : Win32cr::Foundation::PWSTR,
-    rootCauseID : LibC::GUID,
-    rootCauseFlags : UInt32,
-    networkInterfaceID : LibC::GUID,
-    pRepairs : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::RepairInfoEx*,
-    repairCount : UInt16
+  struct ShellCommandInfo
+    property pwszOperation : Win32cr::Foundation::PWSTR
+    property pwszFile : Win32cr::Foundation::PWSTR
+    property pwszParameters : Win32cr::Foundation::PWSTR
+    property pwszDirectory : Win32cr::Foundation::PWSTR
+    property nShowCmd : UInt32
+    def initialize(@pwszOperation : Win32cr::Foundation::PWSTR, @pwszFile : Win32cr::Foundation::PWSTR, @pwszParameters : Win32cr::Foundation::PWSTR, @pwszDirectory : Win32cr::Foundation::PWSTR, @nShowCmd : UInt32)
+    end
+  end
 
   @[Extern]
-  record HYPOTHESIS,
-    pwszClassName : Win32cr::Foundation::PWSTR,
-    pwszDescription : Win32cr::Foundation::PWSTR,
-    celt : UInt32,
-    rgAttributes : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::HELPER_ATTRIBUTE*
+  struct UiInfo
+    property type__ : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::UI_INFO_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pwzNull : Win32cr::Foundation::PWSTR
+    property shell_info : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::ShellCommandInfo
+    property pwzHelpUrl : Win32cr::Foundation::PWSTR
+    property pwzDui : Win32cr::Foundation::PWSTR
+    def initialize(@pwzNull : Win32cr::Foundation::PWSTR, @shell_info : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::ShellCommandInfo, @pwzHelpUrl : Win32cr::Foundation::PWSTR, @pwzDui : Win32cr::Foundation::PWSTR)
+    end
+    end
+
+    def initialize(@type__ : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::UI_INFO_TYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record HelperAttributeInfo,
-    pwszName : Win32cr::Foundation::PWSTR,
-    type__ : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::ATTRIBUTE_TYPE
+  struct RepairInfo
+    property guid : LibC::GUID
+    property pwszClassName : Win32cr::Foundation::PWSTR
+    property pwszDescription : Win32cr::Foundation::PWSTR
+    property sidType : UInt32
+    property cost : Int32
+    property flags : UInt32
+    property scope : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::REPAIR_SCOPE
+    property risk : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::REPAIR_RISK
+    property ui_info : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::UiInfo
+    property rootCauseIndex : Int32
+    def initialize(@guid : LibC::GUID, @pwszClassName : Win32cr::Foundation::PWSTR, @pwszDescription : Win32cr::Foundation::PWSTR, @sidType : UInt32, @cost : Int32, @flags : UInt32, @scope : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::REPAIR_SCOPE, @risk : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::REPAIR_RISK, @ui_info : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::UiInfo, @rootCauseIndex : Int32)
+    end
+  end
 
   @[Extern]
-  record DiagnosticsInfo,
-    cost : Int32,
-    flags : UInt32
+  struct RepairInfoEx
+    property repair : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::RepairInfo
+    property repairRank : UInt16
+    def initialize(@repair : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::RepairInfo, @repairRank : UInt16)
+    end
+  end
 
   @[Extern]
-  record HypothesisResult,
-    hypothesis : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::HYPOTHESIS,
-    pathStatus : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::DIAGNOSIS_STATUS
+  struct RootCauseInfo
+    property pwszDescription : Win32cr::Foundation::PWSTR
+    property rootCauseID : LibC::GUID
+    property rootCauseFlags : UInt32
+    property networkInterfaceID : LibC::GUID
+    property pRepairs : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::RepairInfoEx*
+    property repairCount : UInt16
+    def initialize(@pwszDescription : Win32cr::Foundation::PWSTR, @rootCauseID : LibC::GUID, @rootCauseFlags : UInt32, @networkInterfaceID : LibC::GUID, @pRepairs : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::RepairInfoEx*, @repairCount : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct HYPOTHESIS
+    property pwszClassName : Win32cr::Foundation::PWSTR
+    property pwszDescription : Win32cr::Foundation::PWSTR
+    property celt : UInt32
+    property rgAttributes : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::HELPER_ATTRIBUTE*
+    def initialize(@pwszClassName : Win32cr::Foundation::PWSTR, @pwszDescription : Win32cr::Foundation::PWSTR, @celt : UInt32, @rgAttributes : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::HELPER_ATTRIBUTE*)
+    end
+  end
+
+  @[Extern]
+  struct HelperAttributeInfo
+    property pwszName : Win32cr::Foundation::PWSTR
+    property type__ : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::ATTRIBUTE_TYPE
+    def initialize(@pwszName : Win32cr::Foundation::PWSTR, @type__ : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::ATTRIBUTE_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct DiagnosticsInfo
+    property cost : Int32
+    property flags : UInt32
+    def initialize(@cost : Int32, @flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct HypothesisResult
+    property hypothesis : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::HYPOTHESIS
+    property pathStatus : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::DIAGNOSIS_STATUS
+    def initialize(@hypothesis : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::HYPOTHESIS, @pathStatus : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::DIAGNOSIS_STATUS)
+    end
+  end
 
   @[Extern]
   record INetDiagHelperVtbl,
@@ -234,7 +277,6 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
 
 
   @[Extern]
-  #@[Com("c0b35746-ebf5-11d8-bbe9-505054503030")]
   record INetDiagHelper, lpVtbl : INetDiagHelperVtbl* do
     GUID = LibC::GUID.new(0xc0b35746_u32, 0xebf5_u16, 0x11d8_u16, StaticArray[0xbb_u8, 0xe9_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : INetDiagHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -312,7 +354,6 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
 
 
   @[Extern]
-  #@[Com("104613fb-bc57-4178-95ba-88809698354a")]
   record INetDiagHelperUtilFactory, lpVtbl : INetDiagHelperUtilFactoryVtbl* do
     GUID = LibC::GUID.new(0x104613fb_u32, 0xbc57_u16, 0x4178_u16, StaticArray[0x95_u8, 0xba_u8, 0x88_u8, 0x80_u8, 0x96_u8, 0x98_u8, 0x35_u8, 0x4a_u8])
     def query_interface(this : INetDiagHelperUtilFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -341,7 +382,6 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
 
 
   @[Extern]
-  #@[Com("972dab4d-e4e3-4fc6-ae54-5f65ccde4a15")]
   record INetDiagHelperEx, lpVtbl : INetDiagHelperExVtbl* do
     GUID = LibC::GUID.new(0x972dab4d_u32, 0xe4e3_u16, 0x4fc6_u16, StaticArray[0xae_u8, 0x54_u8, 0x5f_u8, 0x65_u8, 0xcc_u8, 0xde_u8, 0x4a_u8, 0x15_u8])
     def query_interface(this : INetDiagHelperEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -374,7 +414,6 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
 
 
   @[Extern]
-  #@[Com("c0b35747-ebf5-11d8-bbe9-505054503030")]
   record INetDiagHelperInfo, lpVtbl : INetDiagHelperInfoVtbl* do
     GUID = LibC::GUID.new(0xc0b35747_u32, 0xebf5_u16, 0x11d8_u16, StaticArray[0xbb_u8, 0xe9_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : INetDiagHelperInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -401,7 +440,6 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
 
 
   @[Extern]
-  #@[Com("c0b35748-ebf5-11d8-bbe9-505054503030")]
   record INetDiagExtensibleHelper, lpVtbl : INetDiagExtensibleHelperVtbl* do
     GUID = LibC::GUID.new(0xc0b35748_u32, 0xebf5_u16, 0x11d8_u16, StaticArray[0xbb_u8, 0xe9_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : INetDiagExtensibleHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -6,129 +6,129 @@ module Win32cr::Globalization
   alias HIMC = LibC::IntPtrT
   alias HIMCC = LibC::IntPtrT
   alias HSAVEDUILANGUAGES = LibC::IntPtrT
-  alias LOCALE_ENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias LOCALE_ENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias LOCALE_ENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias LOCALE_ENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias LANGUAGEGROUP_ENUMPROCA = Proc(UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, LibC::IntPtrT, Win32cr::Foundation::BOOL)*
+  alias LANGUAGEGROUP_ENUMPROCA = Proc(UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, LibC::IntPtrT, Win32cr::Foundation::BOOL)
 
-  alias LANGGROUPLOCALE_ENUMPROCA = Proc(UInt32, UInt32, Win32cr::Foundation::PSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)*
+  alias LANGGROUPLOCALE_ENUMPROCA = Proc(UInt32, UInt32, Win32cr::Foundation::PSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)
 
-  alias UILANGUAGE_ENUMPROCA = Proc(Win32cr::Foundation::PSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)*
+  alias UILANGUAGE_ENUMPROCA = Proc(Win32cr::Foundation::PSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)
 
-  alias CODEPAGE_ENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias CODEPAGE_ENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias DATEFMT_ENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias DATEFMT_ENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias DATEFMT_ENUMPROCEXA = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::BOOL)*
+  alias DATEFMT_ENUMPROCEXA = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::BOOL)
 
-  alias TIMEFMT_ENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias TIMEFMT_ENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias CALINFO_ENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias CALINFO_ENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias CALINFO_ENUMPROCEXA = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::BOOL)*
+  alias CALINFO_ENUMPROCEXA = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::BOOL)
 
-  alias LANGUAGEGROUP_ENUMPROCW = Proc(UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, LibC::IntPtrT, Win32cr::Foundation::BOOL)*
+  alias LANGUAGEGROUP_ENUMPROCW = Proc(UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, LibC::IntPtrT, Win32cr::Foundation::BOOL)
 
-  alias LANGGROUPLOCALE_ENUMPROCW = Proc(UInt32, UInt32, Win32cr::Foundation::PWSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)*
+  alias LANGGROUPLOCALE_ENUMPROCW = Proc(UInt32, UInt32, Win32cr::Foundation::PWSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)
 
-  alias UILANGUAGE_ENUMPROCW = Proc(Win32cr::Foundation::PWSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)*
+  alias UILANGUAGE_ENUMPROCW = Proc(Win32cr::Foundation::PWSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)
 
-  alias CODEPAGE_ENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias CODEPAGE_ENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias DATEFMT_ENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias DATEFMT_ENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias DATEFMT_ENUMPROCEXW = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL)*
+  alias DATEFMT_ENUMPROCEXW = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL)
 
-  alias TIMEFMT_ENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias TIMEFMT_ENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias CALINFO_ENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias CALINFO_ENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias CALINFO_ENUMPROCEXW = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL)*
+  alias CALINFO_ENUMPROCEXW = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL)
 
-  alias GEO_ENUMPROC = Proc(Int32, Win32cr::Foundation::BOOL)*
+  alias GEO_ENUMPROC = Proc(Int32, Win32cr::Foundation::BOOL)
 
-  alias GEO_ENUMNAMEPROC = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias GEO_ENUMNAMEPROC = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias CALINFO_ENUMPROCEXEX = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias CALINFO_ENUMPROCEXEX = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias DATEFMT_ENUMPROCEXEX = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias DATEFMT_ENUMPROCEXEX = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias TIMEFMT_ENUMPROCEX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias TIMEFMT_ENUMPROCEX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias LOCALE_ENUMPROCEX = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias LOCALE_ENUMPROCEX = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias PFN_MAPPINGCALLBACKPROC = Proc(Win32cr::Globalization::MAPPING_PROPERTY_BAG*, Void*, UInt32, Win32cr::Foundation::HRESULT, Void)*
+  alias PFN_MAPPINGCALLBACKPROC = Proc(Win32cr::Globalization::MAPPING_PROPERTY_BAG*, Void*, UInt32, Win32cr::Foundation::HRESULT, Void)
 
-  alias UTraceEntry = Proc(Void*, Int32, Void)*
+  alias UTraceEntry = Proc(Void*, Int32, Void)
 
-  alias UTraceExit = Proc(Void*, Int32, Win32cr::Foundation::PSTR, Int8*, Void)*
+  alias UTraceExit = Proc(Void*, Int32, Win32cr::Foundation::PSTR, Int8*, Void)
 
-  alias UTraceData = Proc(Void*, Int32, Int32, Win32cr::Foundation::PSTR, Int8*, Void)*
+  alias UTraceData = Proc(Void*, Int32, Int32, Win32cr::Foundation::PSTR, Int8*, Void)
 
-  alias UCharIteratorGetIndex = Proc(Win32cr::Globalization::UCharIterator*, Win32cr::Globalization::UCharIteratorOrigin, Int32)*
+  alias UCharIteratorGetIndex = Proc(Win32cr::Globalization::UCharIterator*, Win32cr::Globalization::UCharIteratorOrigin, Int32)
 
-  alias UCharIteratorMove = Proc(Win32cr::Globalization::UCharIterator*, Int32, Win32cr::Globalization::UCharIteratorOrigin, Int32)*
+  alias UCharIteratorMove = Proc(Win32cr::Globalization::UCharIterator*, Int32, Win32cr::Globalization::UCharIteratorOrigin, Int32)
 
-  alias UCharIteratorHasNext = Proc(Win32cr::Globalization::UCharIterator*, Int8)*
+  alias UCharIteratorHasNext = Proc(Win32cr::Globalization::UCharIterator*, Int8)
 
-  alias UCharIteratorHasPrevious = Proc(Win32cr::Globalization::UCharIterator*, Int8)*
+  alias UCharIteratorHasPrevious = Proc(Win32cr::Globalization::UCharIterator*, Int8)
 
-  alias UCharIteratorCurrent = Proc(Win32cr::Globalization::UCharIterator*, Int32)*
+  alias UCharIteratorCurrent = Proc(Win32cr::Globalization::UCharIterator*, Int32)
 
-  alias UCharIteratorNext = Proc(Win32cr::Globalization::UCharIterator*, Int32)*
+  alias UCharIteratorNext = Proc(Win32cr::Globalization::UCharIterator*, Int32)
 
-  alias UCharIteratorPrevious = Proc(Win32cr::Globalization::UCharIterator*, Int32)*
+  alias UCharIteratorPrevious = Proc(Win32cr::Globalization::UCharIterator*, Int32)
 
-  alias UCharIteratorReserved = Proc(Win32cr::Globalization::UCharIterator*, Int32, Int32)*
+  alias UCharIteratorReserved = Proc(Win32cr::Globalization::UCharIterator*, Int32, Int32)
 
-  alias UCharIteratorGetState = Proc(Win32cr::Globalization::UCharIterator*, UInt32)*
+  alias UCharIteratorGetState = Proc(Win32cr::Globalization::UCharIterator*, UInt32)
 
-  alias UCharIteratorSetState = Proc(Win32cr::Globalization::UCharIterator*, UInt32, Win32cr::Globalization::UErrorCode*, Void)*
+  alias UCharIteratorSetState = Proc(Win32cr::Globalization::UCharIterator*, UInt32, Win32cr::Globalization::UErrorCode*, Void)
 
-  alias UCPMapValueFilter = Proc(Void*, UInt32, UInt32)*
+  alias UCPMapValueFilter = Proc(Void*, UInt32, UInt32)
 
-  alias UConverterToUCallback = Proc(Void*, Win32cr::Globalization::UConverterToUnicodeArgs*, Win32cr::Foundation::PSTR, Int32, Win32cr::Globalization::UConverterCallbackReason, Win32cr::Globalization::UErrorCode*, Void)*
+  alias UConverterToUCallback = Proc(Void*, Win32cr::Globalization::UConverterToUnicodeArgs*, Win32cr::Foundation::PSTR, Int32, Win32cr::Globalization::UConverterCallbackReason, Win32cr::Globalization::UErrorCode*, Void)
 
-  alias UConverterFromUCallback = Proc(Void*, Win32cr::Globalization::UConverterFromUnicodeArgs*, UInt16*, Int32, Int32, Win32cr::Globalization::UConverterCallbackReason, Win32cr::Globalization::UErrorCode*, Void)*
+  alias UConverterFromUCallback = Proc(Void*, Win32cr::Globalization::UConverterFromUnicodeArgs*, UInt16*, Int32, Int32, Win32cr::Globalization::UConverterCallbackReason, Win32cr::Globalization::UErrorCode*, Void)
 
-  alias UMemAllocFn = Proc(Void*, LibC::UIntPtrT, Void*)*
+  alias UMemAllocFn = Proc(Void*, LibC::UIntPtrT, Void*)
 
-  alias UMemReallocFn = Proc(Void*, Void*, LibC::UIntPtrT, Void*)*
+  alias UMemReallocFn = Proc(Void*, Void*, LibC::UIntPtrT, Void*)
 
-  alias UMemFreeFn = Proc(Void*, Void*, Void)*
+  alias UMemFreeFn = Proc(Void*, Void*, Void)
 
-  alias UCharEnumTypeRange = Proc(Void*, Int32, Int32, Win32cr::Globalization::UCharCategory, Int8)*
+  alias UCharEnumTypeRange = Proc(Void*, Int32, Int32, Win32cr::Globalization::UCharCategory, Int8)
 
-  alias UEnumCharNamesFn = Proc(Void*, Int32, Win32cr::Globalization::UCharNameChoice, Win32cr::Foundation::PSTR, Int32, Int8)*
+  alias UEnumCharNamesFn = Proc(Void*, Int32, Win32cr::Globalization::UCharNameChoice, Win32cr::Foundation::PSTR, Int32, Int8)
 
-  alias UBiDiClassCallback = Proc(Void*, Int32, Win32cr::Globalization::UCharDirection)*
+  alias UBiDiClassCallback = Proc(Void*, Int32, Win32cr::Globalization::UCharDirection)
 
-  alias UTextClone = Proc(Win32cr::Globalization::UText*, Win32cr::Globalization::UText*, Int8, Win32cr::Globalization::UErrorCode*, Win32cr::Globalization::UText*)*
+  alias UTextClone = Proc(Win32cr::Globalization::UText*, Win32cr::Globalization::UText*, Int8, Win32cr::Globalization::UErrorCode*, Win32cr::Globalization::UText*)
 
-  alias UTextNativeLength = Proc(Win32cr::Globalization::UText*, Int64)*
+  alias UTextNativeLength = Proc(Win32cr::Globalization::UText*, Int64)
 
-  alias UTextAccess = Proc(Win32cr::Globalization::UText*, Int64, Int8, Int8)*
+  alias UTextAccess = Proc(Win32cr::Globalization::UText*, Int64, Int8, Int8)
 
-  alias UTextExtract = Proc(Win32cr::Globalization::UText*, Int64, Int64, UInt16*, Int32, Win32cr::Globalization::UErrorCode*, Int32)*
+  alias UTextExtract = Proc(Win32cr::Globalization::UText*, Int64, Int64, UInt16*, Int32, Win32cr::Globalization::UErrorCode*, Int32)
 
-  alias UTextReplace = Proc(Win32cr::Globalization::UText*, Int64, Int64, UInt16*, Int32, Win32cr::Globalization::UErrorCode*, Int32)*
+  alias UTextReplace = Proc(Win32cr::Globalization::UText*, Int64, Int64, UInt16*, Int32, Win32cr::Globalization::UErrorCode*, Int32)
 
-  alias UTextCopy = Proc(Win32cr::Globalization::UText*, Int64, Int64, Int64, Int8, Win32cr::Globalization::UErrorCode*, Void)*
+  alias UTextCopy = Proc(Win32cr::Globalization::UText*, Int64, Int64, Int64, Int8, Win32cr::Globalization::UErrorCode*, Void)
 
-  alias UTextMapOffsetToNative = Proc(Win32cr::Globalization::UText*, Int64)*
+  alias UTextMapOffsetToNative = Proc(Win32cr::Globalization::UText*, Int64)
 
-  alias UTextMapNativeIndexToUTF16 = Proc(Win32cr::Globalization::UText*, Int64, Int32)*
+  alias UTextMapNativeIndexToUTF16 = Proc(Win32cr::Globalization::UText*, Int64, Int32)
 
-  alias UTextClose = Proc(Win32cr::Globalization::UText*, Void)*
+  alias UTextClose = Proc(Win32cr::Globalization::UText*, Void)
 
-  alias UNESCAPE_CHAR_AT = Proc(Int32, Void*, UInt16)*
+  alias UNESCAPE_CHAR_AT = Proc(Int32, Void*, UInt16)
 
-  alias URegexMatchCallback = Proc(Void*, Int32, Int8)*
+  alias URegexMatchCallback = Proc(Void*, Int32, Int8)
 
-  alias URegexFindProgressCallback = Proc(Void*, Int64, Int8)*
+  alias URegexFindProgressCallback = Proc(Void*, Int64, Int8)
 
-  alias UStringCaseMapper = Proc(Win32cr::Globalization::UCaseMap*, UInt16*, Int32, UInt16*, Int32, Win32cr::Globalization::UErrorCode*, Int32)*
+  alias UStringCaseMapper = Proc(Win32cr::Globalization::UCaseMap*, UInt16*, Int32, UInt16*, Int32, Win32cr::Globalization::UErrorCode*, Int32)
 
   ALL_SERVICE_TYPES = 0_u32
   HIGHLEVEL_SERVICE_TYPES = 1_u32
@@ -3517,589 +3517,932 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record FONTSIGNATURE,
-    fsUsb : UInt32[4],
-    fsCsb : UInt32[2]
+  struct FONTSIGNATURE
+    property fsUsb : UInt32[4]
+    property fsCsb : UInt32[2]
+    def initialize(@fsUsb : UInt32[4], @fsCsb : UInt32[2])
+    end
+  end
 
   @[Extern]
-  record CHARSETINFO,
-    ciCharset : UInt32,
-    ciACP : UInt32,
-    fs : Win32cr::Globalization::FONTSIGNATURE
+  struct CHARSETINFO
+    property ciCharset : UInt32
+    property ciACP : UInt32
+    property fs : Win32cr::Globalization::FONTSIGNATURE
+    def initialize(@ciCharset : UInt32, @ciACP : UInt32, @fs : Win32cr::Globalization::FONTSIGNATURE)
+    end
+  end
 
   @[Extern]
-  record LOCALESIGNATURE,
-    lsUsb : UInt32[4],
-    lsCsbDefault : UInt32[2],
-    lsCsbSupported : UInt32[2]
+  struct LOCALESIGNATURE
+    property lsUsb : UInt32[4]
+    property lsCsbDefault : UInt32[2]
+    property lsCsbSupported : UInt32[2]
+    def initialize(@lsUsb : UInt32[4], @lsCsbDefault : UInt32[2], @lsCsbSupported : UInt32[2])
+    end
+  end
 
   @[Extern]
-  record NEWTEXTMETRICEXA,
-    ntmTm : Win32cr::Graphics::Gdi::NEWTEXTMETRICA,
-    ntmFontSig : Win32cr::Globalization::FONTSIGNATURE
+  struct NEWTEXTMETRICEXA
+    property ntmTm : Win32cr::Graphics::Gdi::NEWTEXTMETRICA
+    property ntmFontSig : Win32cr::Globalization::FONTSIGNATURE
+    def initialize(@ntmTm : Win32cr::Graphics::Gdi::NEWTEXTMETRICA, @ntmFontSig : Win32cr::Globalization::FONTSIGNATURE)
+    end
+  end
 
   @[Extern]
-  record NEWTEXTMETRICEXW,
-    ntmTm : Win32cr::Graphics::Gdi::NEWTEXTMETRICW,
-    ntmFontSig : Win32cr::Globalization::FONTSIGNATURE
+  struct NEWTEXTMETRICEXW
+    property ntmTm : Win32cr::Graphics::Gdi::NEWTEXTMETRICW
+    property ntmFontSig : Win32cr::Globalization::FONTSIGNATURE
+    def initialize(@ntmTm : Win32cr::Graphics::Gdi::NEWTEXTMETRICW, @ntmFontSig : Win32cr::Globalization::FONTSIGNATURE)
+    end
+  end
 
   @[Extern]
-  record ENUMTEXTMETRICA,
-    etmNewTextMetricEx : Win32cr::Globalization::NEWTEXTMETRICEXA,
-    etmAxesList : Win32cr::Graphics::Gdi::AXESLISTA
+  struct ENUMTEXTMETRICA
+    property etmNewTextMetricEx : Win32cr::Globalization::NEWTEXTMETRICEXA
+    property etmAxesList : Win32cr::Graphics::Gdi::AXESLISTA
+    def initialize(@etmNewTextMetricEx : Win32cr::Globalization::NEWTEXTMETRICEXA, @etmAxesList : Win32cr::Graphics::Gdi::AXESLISTA)
+    end
+  end
 
   @[Extern]
-  record ENUMTEXTMETRICW,
-    etmNewTextMetricEx : Win32cr::Globalization::NEWTEXTMETRICEXW,
-    etmAxesList : Win32cr::Graphics::Gdi::AXESLISTW
+  struct ENUMTEXTMETRICW
+    property etmNewTextMetricEx : Win32cr::Globalization::NEWTEXTMETRICEXW
+    property etmAxesList : Win32cr::Graphics::Gdi::AXESLISTW
+    def initialize(@etmNewTextMetricEx : Win32cr::Globalization::NEWTEXTMETRICEXW, @etmAxesList : Win32cr::Graphics::Gdi::AXESLISTW)
+    end
+  end
 
   @[Extern]
-  record CPINFO,
-    max_char_size : UInt32,
-    default_char : UInt8[2],
-    lead_byte : UInt8[12]
+  struct CPINFO
+    property max_char_size : UInt32
+    property default_char : UInt8[2]
+    property lead_byte : UInt8[12]
+    def initialize(@max_char_size : UInt32, @default_char : UInt8[2], @lead_byte : UInt8[12])
+    end
+  end
 
   @[Extern]
-  record CPINFOEXA,
-    max_char_size : UInt32,
-    default_char : UInt8[2],
-    lead_byte : UInt8[12],
-    unicode_default_char : UInt16,
-    code_page : UInt32,
-    code_page_name : Win32cr::Foundation::CHAR[260]
+  struct CPINFOEXA
+    property max_char_size : UInt32
+    property default_char : UInt8[2]
+    property lead_byte : UInt8[12]
+    property unicode_default_char : UInt16
+    property code_page : UInt32
+    property code_page_name : Win32cr::Foundation::CHAR[260]
+    def initialize(@max_char_size : UInt32, @default_char : UInt8[2], @lead_byte : UInt8[12], @unicode_default_char : UInt16, @code_page : UInt32, @code_page_name : Win32cr::Foundation::CHAR[260])
+    end
+  end
 
   @[Extern]
-  record CPINFOEXW,
-    max_char_size : UInt32,
-    default_char : UInt8[2],
-    lead_byte : UInt8[12],
-    unicode_default_char : UInt16,
-    code_page : UInt32,
-    code_page_name : UInt16[260]
+  struct CPINFOEXW
+    property max_char_size : UInt32
+    property default_char : UInt8[2]
+    property lead_byte : UInt8[12]
+    property unicode_default_char : UInt16
+    property code_page : UInt32
+    property code_page_name : UInt16[260]
+    def initialize(@max_char_size : UInt32, @default_char : UInt8[2], @lead_byte : UInt8[12], @unicode_default_char : UInt16, @code_page : UInt32, @code_page_name : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record NUMBERFMTA,
-    num_digits : UInt32,
-    leading_zero : UInt32,
-    grouping : UInt32,
-    lpDecimalSep : Win32cr::Foundation::PSTR,
-    lpThousandSep : Win32cr::Foundation::PSTR,
-    negative_order : UInt32
+  struct NUMBERFMTA
+    property num_digits : UInt32
+    property leading_zero : UInt32
+    property grouping : UInt32
+    property lpDecimalSep : Win32cr::Foundation::PSTR
+    property lpThousandSep : Win32cr::Foundation::PSTR
+    property negative_order : UInt32
+    def initialize(@num_digits : UInt32, @leading_zero : UInt32, @grouping : UInt32, @lpDecimalSep : Win32cr::Foundation::PSTR, @lpThousandSep : Win32cr::Foundation::PSTR, @negative_order : UInt32)
+    end
+  end
 
   @[Extern]
-  record NUMBERFMTW,
-    num_digits : UInt32,
-    leading_zero : UInt32,
-    grouping : UInt32,
-    lpDecimalSep : Win32cr::Foundation::PWSTR,
-    lpThousandSep : Win32cr::Foundation::PWSTR,
-    negative_order : UInt32
+  struct NUMBERFMTW
+    property num_digits : UInt32
+    property leading_zero : UInt32
+    property grouping : UInt32
+    property lpDecimalSep : Win32cr::Foundation::PWSTR
+    property lpThousandSep : Win32cr::Foundation::PWSTR
+    property negative_order : UInt32
+    def initialize(@num_digits : UInt32, @leading_zero : UInt32, @grouping : UInt32, @lpDecimalSep : Win32cr::Foundation::PWSTR, @lpThousandSep : Win32cr::Foundation::PWSTR, @negative_order : UInt32)
+    end
+  end
 
   @[Extern]
-  record CURRENCYFMTA,
-    num_digits : UInt32,
-    leading_zero : UInt32,
-    grouping : UInt32,
-    lpDecimalSep : Win32cr::Foundation::PSTR,
-    lpThousandSep : Win32cr::Foundation::PSTR,
-    negative_order : UInt32,
-    positive_order : UInt32,
-    lpCurrencySymbol : Win32cr::Foundation::PSTR
+  struct CURRENCYFMTA
+    property num_digits : UInt32
+    property leading_zero : UInt32
+    property grouping : UInt32
+    property lpDecimalSep : Win32cr::Foundation::PSTR
+    property lpThousandSep : Win32cr::Foundation::PSTR
+    property negative_order : UInt32
+    property positive_order : UInt32
+    property lpCurrencySymbol : Win32cr::Foundation::PSTR
+    def initialize(@num_digits : UInt32, @leading_zero : UInt32, @grouping : UInt32, @lpDecimalSep : Win32cr::Foundation::PSTR, @lpThousandSep : Win32cr::Foundation::PSTR, @negative_order : UInt32, @positive_order : UInt32, @lpCurrencySymbol : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record CURRENCYFMTW,
-    num_digits : UInt32,
-    leading_zero : UInt32,
-    grouping : UInt32,
-    lpDecimalSep : Win32cr::Foundation::PWSTR,
-    lpThousandSep : Win32cr::Foundation::PWSTR,
-    negative_order : UInt32,
-    positive_order : UInt32,
-    lpCurrencySymbol : Win32cr::Foundation::PWSTR
+  struct CURRENCYFMTW
+    property num_digits : UInt32
+    property leading_zero : UInt32
+    property grouping : UInt32
+    property lpDecimalSep : Win32cr::Foundation::PWSTR
+    property lpThousandSep : Win32cr::Foundation::PWSTR
+    property negative_order : UInt32
+    property positive_order : UInt32
+    property lpCurrencySymbol : Win32cr::Foundation::PWSTR
+    def initialize(@num_digits : UInt32, @leading_zero : UInt32, @grouping : UInt32, @lpDecimalSep : Win32cr::Foundation::PWSTR, @lpThousandSep : Win32cr::Foundation::PWSTR, @negative_order : UInt32, @positive_order : UInt32, @lpCurrencySymbol : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record NLSVERSIONINFO,
-    dwNLSVersionInfoSize : UInt32,
-    dwNLSVersion : UInt32,
-    dwDefinedVersion : UInt32,
-    dwEffectiveId : UInt32,
-    guidCustomVersion : LibC::GUID
+  struct NLSVERSIONINFO
+    property dwNLSVersionInfoSize : UInt32
+    property dwNLSVersion : UInt32
+    property dwDefinedVersion : UInt32
+    property dwEffectiveId : UInt32
+    property guidCustomVersion : LibC::GUID
+    def initialize(@dwNLSVersionInfoSize : UInt32, @dwNLSVersion : UInt32, @dwDefinedVersion : UInt32, @dwEffectiveId : UInt32, @guidCustomVersion : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record NLSVERSIONINFOEX,
-    dwNLSVersionInfoSize : UInt32,
-    dwNLSVersion : UInt32,
-    dwDefinedVersion : UInt32,
-    dwEffectiveId : UInt32,
-    guidCustomVersion : LibC::GUID
+  struct NLSVERSIONINFOEX
+    property dwNLSVersionInfoSize : UInt32
+    property dwNLSVersion : UInt32
+    property dwDefinedVersion : UInt32
+    property dwEffectiveId : UInt32
+    property guidCustomVersion : LibC::GUID
+    def initialize(@dwNLSVersionInfoSize : UInt32, @dwNLSVersion : UInt32, @dwDefinedVersion : UInt32, @dwEffectiveId : UInt32, @guidCustomVersion : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record FILEMUIINFO,
-    dwSize : UInt32,
-    dwVersion : UInt32,
-    dwFileType : UInt32,
-    pChecksum : UInt8[16],
-    pServiceChecksum : UInt8[16],
-    dwLanguageNameOffset : UInt32,
-    dwTypeIDMainSize : UInt32,
-    dwTypeIDMainOffset : UInt32,
-    dwTypeNameMainOffset : UInt32,
-    dwTypeIDMUISize : UInt32,
-    dwTypeIDMUIOffset : UInt32,
-    dwTypeNameMUIOffset : UInt32,
-    abBuffer : UInt8[8]
+  struct FILEMUIINFO
+    property dwSize : UInt32
+    property dwVersion : UInt32
+    property dwFileType : UInt32
+    property pChecksum : UInt8[16]
+    property pServiceChecksum : UInt8[16]
+    property dwLanguageNameOffset : UInt32
+    property dwTypeIDMainSize : UInt32
+    property dwTypeIDMainOffset : UInt32
+    property dwTypeNameMainOffset : UInt32
+    property dwTypeIDMUISize : UInt32
+    property dwTypeIDMUIOffset : UInt32
+    property dwTypeNameMUIOffset : UInt32
+    property abBuffer : UInt8[8]
+    def initialize(@dwSize : UInt32, @dwVersion : UInt32, @dwFileType : UInt32, @pChecksum : UInt8[16], @pServiceChecksum : UInt8[16], @dwLanguageNameOffset : UInt32, @dwTypeIDMainSize : UInt32, @dwTypeIDMainOffset : UInt32, @dwTypeNameMainOffset : UInt32, @dwTypeIDMUISize : UInt32, @dwTypeIDMUIOffset : UInt32, @dwTypeNameMUIOffset : UInt32, @abBuffer : UInt8[8])
+    end
+  end
 
   @[Extern]
-  record MAPPING_SERVICE_INFO,
-    size : LibC::UIntPtrT,
-    pszCopyright : Win32cr::Foundation::PWSTR,
-    wMajorVersion : UInt16,
-    wMinorVersion : UInt16,
-    wBuildVersion : UInt16,
-    wStepVersion : UInt16,
-    dwInputContentTypesCount : UInt32,
-    prgInputContentTypes : Win32cr::Foundation::PWSTR*,
-    dwOutputContentTypesCount : UInt32,
-    prgOutputContentTypes : Win32cr::Foundation::PWSTR*,
-    dwInputLanguagesCount : UInt32,
-    prgInputLanguages : Win32cr::Foundation::PWSTR*,
-    dwOutputLanguagesCount : UInt32,
-    prgOutputLanguages : Win32cr::Foundation::PWSTR*,
-    dwInputScriptsCount : UInt32,
-    prgInputScripts : Win32cr::Foundation::PWSTR*,
-    dwOutputScriptsCount : UInt32,
-    prgOutputScripts : Win32cr::Foundation::PWSTR*,
-    guid : LibC::GUID,
-    pszCategory : Win32cr::Foundation::PWSTR,
-    pszDescription : Win32cr::Foundation::PWSTR,
-    dwPrivateDataSize : UInt32,
-    pPrivateData : Void*,
-    pContext : Void*,
-    _bitfield : UInt32
+  struct MAPPING_SERVICE_INFO
+    property size : LibC::UIntPtrT
+    property pszCopyright : Win32cr::Foundation::PWSTR
+    property wMajorVersion : UInt16
+    property wMinorVersion : UInt16
+    property wBuildVersion : UInt16
+    property wStepVersion : UInt16
+    property dwInputContentTypesCount : UInt32
+    property prgInputContentTypes : Win32cr::Foundation::PWSTR*
+    property dwOutputContentTypesCount : UInt32
+    property prgOutputContentTypes : Win32cr::Foundation::PWSTR*
+    property dwInputLanguagesCount : UInt32
+    property prgInputLanguages : Win32cr::Foundation::PWSTR*
+    property dwOutputLanguagesCount : UInt32
+    property prgOutputLanguages : Win32cr::Foundation::PWSTR*
+    property dwInputScriptsCount : UInt32
+    property prgInputScripts : Win32cr::Foundation::PWSTR*
+    property dwOutputScriptsCount : UInt32
+    property prgOutputScripts : Win32cr::Foundation::PWSTR*
+    property guid : LibC::GUID
+    property pszCategory : Win32cr::Foundation::PWSTR
+    property pszDescription : Win32cr::Foundation::PWSTR
+    property dwPrivateDataSize : UInt32
+    property pPrivateData : Void*
+    property pContext : Void*
+    property _bitfield : UInt32
+    def initialize(@size : LibC::UIntPtrT, @pszCopyright : Win32cr::Foundation::PWSTR, @wMajorVersion : UInt16, @wMinorVersion : UInt16, @wBuildVersion : UInt16, @wStepVersion : UInt16, @dwInputContentTypesCount : UInt32, @prgInputContentTypes : Win32cr::Foundation::PWSTR*, @dwOutputContentTypesCount : UInt32, @prgOutputContentTypes : Win32cr::Foundation::PWSTR*, @dwInputLanguagesCount : UInt32, @prgInputLanguages : Win32cr::Foundation::PWSTR*, @dwOutputLanguagesCount : UInt32, @prgOutputLanguages : Win32cr::Foundation::PWSTR*, @dwInputScriptsCount : UInt32, @prgInputScripts : Win32cr::Foundation::PWSTR*, @dwOutputScriptsCount : UInt32, @prgOutputScripts : Win32cr::Foundation::PWSTR*, @guid : LibC::GUID, @pszCategory : Win32cr::Foundation::PWSTR, @pszDescription : Win32cr::Foundation::PWSTR, @dwPrivateDataSize : UInt32, @pPrivateData : Void*, @pContext : Void*, @_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record MAPPING_ENUM_OPTIONS,
-    size : LibC::UIntPtrT,
-    pszCategory : Win32cr::Foundation::PWSTR,
-    pszInputLanguage : Win32cr::Foundation::PWSTR,
-    pszOutputLanguage : Win32cr::Foundation::PWSTR,
-    pszInputScript : Win32cr::Foundation::PWSTR,
-    pszOutputScript : Win32cr::Foundation::PWSTR,
-    pszInputContentType : Win32cr::Foundation::PWSTR,
-    pszOutputContentType : Win32cr::Foundation::PWSTR,
-    pGuid : LibC::GUID*,
-    _bitfield : UInt32
+  struct MAPPING_ENUM_OPTIONS
+    property size : LibC::UIntPtrT
+    property pszCategory : Win32cr::Foundation::PWSTR
+    property pszInputLanguage : Win32cr::Foundation::PWSTR
+    property pszOutputLanguage : Win32cr::Foundation::PWSTR
+    property pszInputScript : Win32cr::Foundation::PWSTR
+    property pszOutputScript : Win32cr::Foundation::PWSTR
+    property pszInputContentType : Win32cr::Foundation::PWSTR
+    property pszOutputContentType : Win32cr::Foundation::PWSTR
+    property pGuid : LibC::GUID*
+    property _bitfield : UInt32
+    def initialize(@size : LibC::UIntPtrT, @pszCategory : Win32cr::Foundation::PWSTR, @pszInputLanguage : Win32cr::Foundation::PWSTR, @pszOutputLanguage : Win32cr::Foundation::PWSTR, @pszInputScript : Win32cr::Foundation::PWSTR, @pszOutputScript : Win32cr::Foundation::PWSTR, @pszInputContentType : Win32cr::Foundation::PWSTR, @pszOutputContentType : Win32cr::Foundation::PWSTR, @pGuid : LibC::GUID*, @_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record MAPPING_OPTIONS,
-    size : LibC::UIntPtrT,
-    pszInputLanguage : Win32cr::Foundation::PWSTR,
-    pszOutputLanguage : Win32cr::Foundation::PWSTR,
-    pszInputScript : Win32cr::Foundation::PWSTR,
-    pszOutputScript : Win32cr::Foundation::PWSTR,
-    pszInputContentType : Win32cr::Foundation::PWSTR,
-    pszOutputContentType : Win32cr::Foundation::PWSTR,
-    pszUILanguage : Win32cr::Foundation::PWSTR,
-    pfnRecognizeCallback : Win32cr::Globalization::PFN_MAPPINGCALLBACKPROC,
-    pRecognizeCallerData : Void*,
-    dwRecognizeCallerDataSize : UInt32,
-    pfnActionCallback : Win32cr::Globalization::PFN_MAPPINGCALLBACKPROC,
-    pActionCallerData : Void*,
-    dwActionCallerDataSize : UInt32,
-    dwServiceFlag : UInt32,
-    _bitfield : UInt32
+  struct MAPPING_OPTIONS
+    property size : LibC::UIntPtrT
+    property pszInputLanguage : Win32cr::Foundation::PWSTR
+    property pszOutputLanguage : Win32cr::Foundation::PWSTR
+    property pszInputScript : Win32cr::Foundation::PWSTR
+    property pszOutputScript : Win32cr::Foundation::PWSTR
+    property pszInputContentType : Win32cr::Foundation::PWSTR
+    property pszOutputContentType : Win32cr::Foundation::PWSTR
+    property pszUILanguage : Win32cr::Foundation::PWSTR
+    property pfnRecognizeCallback : Win32cr::Globalization::PFN_MAPPINGCALLBACKPROC
+    property pRecognizeCallerData : Void*
+    property dwRecognizeCallerDataSize : UInt32
+    property pfnActionCallback : Win32cr::Globalization::PFN_MAPPINGCALLBACKPROC
+    property pActionCallerData : Void*
+    property dwActionCallerDataSize : UInt32
+    property dwServiceFlag : UInt32
+    property _bitfield : UInt32
+    def initialize(@size : LibC::UIntPtrT, @pszInputLanguage : Win32cr::Foundation::PWSTR, @pszOutputLanguage : Win32cr::Foundation::PWSTR, @pszInputScript : Win32cr::Foundation::PWSTR, @pszOutputScript : Win32cr::Foundation::PWSTR, @pszInputContentType : Win32cr::Foundation::PWSTR, @pszOutputContentType : Win32cr::Foundation::PWSTR, @pszUILanguage : Win32cr::Foundation::PWSTR, @pfnRecognizeCallback : Win32cr::Globalization::PFN_MAPPINGCALLBACKPROC, @pRecognizeCallerData : Void*, @dwRecognizeCallerDataSize : UInt32, @pfnActionCallback : Win32cr::Globalization::PFN_MAPPINGCALLBACKPROC, @pActionCallerData : Void*, @dwActionCallerDataSize : UInt32, @dwServiceFlag : UInt32, @_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record MAPPING_DATA_RANGE,
-    dwStartIndex : UInt32,
-    dwEndIndex : UInt32,
-    pszDescription : Win32cr::Foundation::PWSTR,
-    dwDescriptionLength : UInt32,
-    pData : Void*,
-    dwDataSize : UInt32,
-    pszContentType : Win32cr::Foundation::PWSTR,
-    prgActionIds : Win32cr::Foundation::PWSTR*,
-    dwActionsCount : UInt32,
-    prgActionDisplayNames : Win32cr::Foundation::PWSTR*
+  struct MAPPING_DATA_RANGE
+    property dwStartIndex : UInt32
+    property dwEndIndex : UInt32
+    property pszDescription : Win32cr::Foundation::PWSTR
+    property dwDescriptionLength : UInt32
+    property pData : Void*
+    property dwDataSize : UInt32
+    property pszContentType : Win32cr::Foundation::PWSTR
+    property prgActionIds : Win32cr::Foundation::PWSTR*
+    property dwActionsCount : UInt32
+    property prgActionDisplayNames : Win32cr::Foundation::PWSTR*
+    def initialize(@dwStartIndex : UInt32, @dwEndIndex : UInt32, @pszDescription : Win32cr::Foundation::PWSTR, @dwDescriptionLength : UInt32, @pData : Void*, @dwDataSize : UInt32, @pszContentType : Win32cr::Foundation::PWSTR, @prgActionIds : Win32cr::Foundation::PWSTR*, @dwActionsCount : UInt32, @prgActionDisplayNames : Win32cr::Foundation::PWSTR*)
+    end
+  end
 
   @[Extern]
-  record MAPPING_PROPERTY_BAG,
-    size : LibC::UIntPtrT,
-    prgResultRanges : Win32cr::Globalization::MAPPING_DATA_RANGE*,
-    dwRangesCount : UInt32,
-    pServiceData : Void*,
-    dwServiceDataSize : UInt32,
-    pCallerData : Void*,
-    dwCallerDataSize : UInt32,
-    pContext : Void*
+  struct MAPPING_PROPERTY_BAG
+    property size : LibC::UIntPtrT
+    property prgResultRanges : Win32cr::Globalization::MAPPING_DATA_RANGE*
+    property dwRangesCount : UInt32
+    property pServiceData : Void*
+    property dwServiceDataSize : UInt32
+    property pCallerData : Void*
+    property dwCallerDataSize : UInt32
+    property pContext : Void*
+    def initialize(@size : LibC::UIntPtrT, @prgResultRanges : Win32cr::Globalization::MAPPING_DATA_RANGE*, @dwRangesCount : UInt32, @pServiceData : Void*, @dwServiceDataSize : UInt32, @pCallerData : Void*, @dwCallerDataSize : UInt32, @pContext : Void*)
+    end
+  end
 
   @[Extern]
-  record SCRIPT_CONTROL,
-    _bitfield : UInt32
+  struct SCRIPT_CONTROL
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record SCRIPT_STATE,
-    _bitfield : UInt16
+  struct SCRIPT_STATE
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+  end
 
   @[Extern]
-  record SCRIPT_ANALYSIS,
-    _bitfield : UInt16,
-    s : Win32cr::Globalization::SCRIPT_STATE
+  struct SCRIPT_ANALYSIS
+    property _bitfield : UInt16
+    property s : Win32cr::Globalization::SCRIPT_STATE
+    def initialize(@_bitfield : UInt16, @s : Win32cr::Globalization::SCRIPT_STATE)
+    end
+  end
 
   @[Extern]
-  record SCRIPT_ITEM,
-    iCharPos : Int32,
-    a : Win32cr::Globalization::SCRIPT_ANALYSIS
+  struct SCRIPT_ITEM
+    property iCharPos : Int32
+    property a : Win32cr::Globalization::SCRIPT_ANALYSIS
+    def initialize(@iCharPos : Int32, @a : Win32cr::Globalization::SCRIPT_ANALYSIS)
+    end
+  end
 
   @[Extern]
-  record SCRIPT_VISATTR,
-    _bitfield : UInt16
+  struct SCRIPT_VISATTR
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+  end
 
   @[Extern]
-  record GOFFSET,
-    du : Int32,
-    dv : Int32
+  struct GOFFSET
+    property du : Int32
+    property dv : Int32
+    def initialize(@du : Int32, @dv : Int32)
+    end
+  end
 
   @[Extern]
-  record SCRIPT_LOGATTR,
-    _bitfield : UInt8
+  struct SCRIPT_LOGATTR
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
 
   @[Extern]
-  record SCRIPT_PROPERTIES,
-    _bitfield1 : UInt32,
-    _bitfield2 : UInt32
+  struct SCRIPT_PROPERTIES
+    property _bitfield1 : UInt32
+    property _bitfield2 : UInt32
+    def initialize(@_bitfield1 : UInt32, @_bitfield2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record SCRIPT_FONTPROPERTIES,
-    cBytes : Int32,
-    wgBlank : UInt16,
-    wgDefault : UInt16,
-    wgInvalid : UInt16,
-    wgKashida : UInt16,
-    iKashidaWidth : Int32
+  struct SCRIPT_FONTPROPERTIES
+    property cBytes : Int32
+    property wgBlank : UInt16
+    property wgDefault : UInt16
+    property wgInvalid : UInt16
+    property wgKashida : UInt16
+    property iKashidaWidth : Int32
+    def initialize(@cBytes : Int32, @wgBlank : UInt16, @wgDefault : UInt16, @wgInvalid : UInt16, @wgKashida : UInt16, @iKashidaWidth : Int32)
+    end
+  end
 
   @[Extern]
-  record SCRIPT_TABDEF,
-    cTabStops : Int32,
-    iScale : Int32,
-    pTabStops : Int32*,
-    iTabOrigin : Int32
+  struct SCRIPT_TABDEF
+    property cTabStops : Int32
+    property iScale : Int32
+    property pTabStops : Int32*
+    property iTabOrigin : Int32
+    def initialize(@cTabStops : Int32, @iScale : Int32, @pTabStops : Int32*, @iTabOrigin : Int32)
+    end
+  end
 
   @[Extern]
-  record SCRIPT_DIGITSUBSTITUTE,
-    _bitfield1 : UInt32,
-    _bitfield2 : UInt32,
-    dwReserved : UInt32
+  struct SCRIPT_DIGITSUBSTITUTE
+    property _bitfield1 : UInt32
+    property _bitfield2 : UInt32
+    property dwReserved : UInt32
+    def initialize(@_bitfield1 : UInt32, @_bitfield2 : UInt32, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record Opentype_feature_record,
-    tagFeature : UInt32,
-    lParameter : Int32
+  struct Opentype_feature_record
+    property tagFeature : UInt32
+    property lParameter : Int32
+    def initialize(@tagFeature : UInt32, @lParameter : Int32)
+    end
+  end
 
   @[Extern]
-  record Textrange_properties,
-    potfRecords : Win32cr::Globalization::Opentype_feature_record*,
-    cotfRecords : Int32
+  struct Textrange_properties
+    property potfRecords : Win32cr::Globalization::Opentype_feature_record*
+    property cotfRecords : Int32
+    def initialize(@potfRecords : Win32cr::Globalization::Opentype_feature_record*, @cotfRecords : Int32)
+    end
+  end
 
   @[Extern]
-  record Script_charprop,
-    _bitfield : UInt16
+  struct Script_charprop
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+  end
 
   @[Extern]
-  record Script_glyphprop,
-    sva : Win32cr::Globalization::SCRIPT_VISATTR,
-    reserved : UInt16
+  struct Script_glyphprop
+    property sva : Win32cr::Globalization::SCRIPT_VISATTR
+    property reserved : UInt16
+    def initialize(@sva : Win32cr::Globalization::SCRIPT_VISATTR, @reserved : UInt16)
+    end
+  end
 
   @[Extern]
-  record UReplaceableCallbacks,
-    length : LibC::IntPtrT,
-    charAt : LibC::IntPtrT,
-    char32At : LibC::IntPtrT,
-    replace : LibC::IntPtrT,
-    extract : LibC::IntPtrT,
-    copy : LibC::IntPtrT
+  struct UReplaceableCallbacks
+    property length : LibC::IntPtrT
+    property charAt : LibC::IntPtrT
+    property char32At : LibC::IntPtrT
+    property replace : LibC::IntPtrT
+    property extract : LibC::IntPtrT
+    property copy : LibC::IntPtrT
+    def initialize(@length : LibC::IntPtrT, @charAt : LibC::IntPtrT, @char32At : LibC::IntPtrT, @replace : LibC::IntPtrT, @extract : LibC::IntPtrT, @copy : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record UFieldPosition,
-    field : Int32,
-    beginIndex : Int32,
-    endIndex : Int32
+  struct UFieldPosition
+    property field : Int32
+    property beginIndex : Int32
+    property endIndex : Int32
+    def initialize(@field : Int32, @beginIndex : Int32, @endIndex : Int32)
+    end
+  end
 
   @[Extern]
-  record UCharIterator,
-    context : Void*,
-    length : Int32,
-    start : Int32,
-    index : Int32,
-    limit : Int32,
-    reservedField : Int32,
-    getIndex : Win32cr::Globalization::UCharIteratorGetIndex,
-    move : Win32cr::Globalization::UCharIteratorMove,
-    hasNext : Win32cr::Globalization::UCharIteratorHasNext,
-    hasPrevious : Win32cr::Globalization::UCharIteratorHasPrevious,
-    current : Win32cr::Globalization::UCharIteratorCurrent,
-    next__ : Win32cr::Globalization::UCharIteratorNext,
-    previous : Win32cr::Globalization::UCharIteratorPrevious,
-    reservedFn : Win32cr::Globalization::UCharIteratorReserved,
-    getState : Win32cr::Globalization::UCharIteratorGetState,
-    setState : Win32cr::Globalization::UCharIteratorSetState
+  struct UCharIterator
+    property context : Void*
+    property length : Int32
+    property start : Int32
+    property index : Int32
+    property limit : Int32
+    property reservedField : Int32
+    property getIndex : Win32cr::Globalization::UCharIteratorGetIndex
+    property move : Win32cr::Globalization::UCharIteratorMove
+    property hasNext : Win32cr::Globalization::UCharIteratorHasNext
+    property hasPrevious : Win32cr::Globalization::UCharIteratorHasPrevious
+    property current : Win32cr::Globalization::UCharIteratorCurrent
+    property next__ : Win32cr::Globalization::UCharIteratorNext
+    property previous : Win32cr::Globalization::UCharIteratorPrevious
+    property reservedFn : Win32cr::Globalization::UCharIteratorReserved
+    property getState : Win32cr::Globalization::UCharIteratorGetState
+    property setState : Win32cr::Globalization::UCharIteratorSetState
+    def initialize(@context : Void*, @length : Int32, @start : Int32, @index : Int32, @limit : Int32, @reservedField : Int32, @getIndex : Win32cr::Globalization::UCharIteratorGetIndex, @move : Win32cr::Globalization::UCharIteratorMove, @hasNext : Win32cr::Globalization::UCharIteratorHasNext, @hasPrevious : Win32cr::Globalization::UCharIteratorHasPrevious, @current : Win32cr::Globalization::UCharIteratorCurrent, @next__ : Win32cr::Globalization::UCharIteratorNext, @previous : Win32cr::Globalization::UCharIteratorPrevious, @reservedFn : Win32cr::Globalization::UCharIteratorReserved, @getState : Win32cr::Globalization::UCharIteratorGetState, @setState : Win32cr::Globalization::UCharIteratorSetState)
+    end
+  end
 
   @[Extern]
-  record UEnumeration
+  struct UEnumeration
+    def initialize()
+    end
+  end
+
   @[Extern]
-  record UResourceBundle
+  struct UResourceBundle
+    def initialize()
+    end
+  end
+
   @[Extern]
-  record ULocaleDisplayNames
+  struct ULocaleDisplayNames
+    def initialize()
+    end
+  end
+
   @[Extern]
-  record UCPMap
+  struct UCPMap
+    def initialize()
+    end
+  end
+
   @[Extern(union: true)]
-  record UCPTrieData,
-    ptr0 : Void*,
-    ptr16 : UInt16*,
-    ptr32 : UInt32*,
-    ptr8 : UInt8*
+  struct UCPTrieData
+    property ptr0 : Void*
+    property ptr16 : UInt16*
+    property ptr32 : UInt32*
+    property ptr8 : UInt8*
+    def initialize(@ptr0 : Void*, @ptr16 : UInt16*, @ptr32 : UInt32*, @ptr8 : UInt8*)
+    end
+  end
 
   @[Extern]
-  record UCPTrie,
-    index : UInt16*,
-    data : Win32cr::Globalization::UCPTrieData,
-    indexLength : Int32,
-    dataLength : Int32,
-    highStart : Int32,
-    shifted12HighStart : UInt16,
-    type__ : Int8,
-    valueWidth : Int8,
-    reserved32 : UInt32,
-    reserved16 : UInt16,
-    index3NullOffset : UInt16,
-    dataNullOffset : Int32,
-    nullValue : UInt32
+  struct UCPTrie
+    property index : UInt16*
+    property data : Win32cr::Globalization::UCPTrieData
+    property indexLength : Int32
+    property dataLength : Int32
+    property highStart : Int32
+    property shifted12HighStart : UInt16
+    property type__ : Int8
+    property valueWidth : Int8
+    property reserved32 : UInt32
+    property reserved16 : UInt16
+    property index3NullOffset : UInt16
+    property dataNullOffset : Int32
+    property nullValue : UInt32
+    def initialize(@index : UInt16*, @data : Win32cr::Globalization::UCPTrieData, @indexLength : Int32, @dataLength : Int32, @highStart : Int32, @shifted12HighStart : UInt16, @type__ : Int8, @valueWidth : Int8, @reserved32 : UInt32, @reserved16 : UInt16, @index3NullOffset : UInt16, @dataNullOffset : Int32, @nullValue : UInt32)
+    end
+  end
 
   @[Extern]
-  record UMutableCPTrie
-  @[Extern]
-  record UConverter
-  @[Extern]
-  record UConverterFromUnicodeArgs,
-    size : UInt16,
-    flush : Int8,
-    converter : Win32cr::Globalization::UConverter*,
-    source : UInt16*,
-    sourceLimit : UInt16*,
-    target : Win32cr::Foundation::PSTR,
-    targetLimit : Win32cr::Foundation::PSTR,
-    offsets : Int32*
+  struct UMutableCPTrie
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record UConverterToUnicodeArgs,
-    size : UInt16,
-    flush : Int8,
-    converter : Win32cr::Globalization::UConverter*,
-    source : Win32cr::Foundation::PSTR,
-    sourceLimit : Win32cr::Foundation::PSTR,
-    target : UInt16*,
-    targetLimit : UInt16*,
-    offsets : Int32*
+  struct UConverter
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record USet
-  @[Extern]
-  record UBiDi
-  @[Extern]
-  record UBiDiTransform
-  @[Extern]
-  record UTextFuncs,
-    tableSize : Int32,
-    reserved1 : Int32,
-    reserved2 : Int32,
-    reserved3 : Int32,
-    clone : Win32cr::Globalization::UTextClone,
-    nativeLength : Win32cr::Globalization::UTextNativeLength,
-    access : Win32cr::Globalization::UTextAccess,
-    extract : Win32cr::Globalization::UTextExtract,
-    replace : Win32cr::Globalization::UTextReplace,
-    copy : Win32cr::Globalization::UTextCopy,
-    mapOffsetToNative : Win32cr::Globalization::UTextMapOffsetToNative,
-    mapNativeIndexToUTF16 : Win32cr::Globalization::UTextMapNativeIndexToUTF16,
-    close : Win32cr::Globalization::UTextClose,
-    spare1 : Win32cr::Globalization::UTextClose,
-    spare2 : Win32cr::Globalization::UTextClose,
-    spare3 : Win32cr::Globalization::UTextClose
+  struct UConverterFromUnicodeArgs
+    property size : UInt16
+    property flush : Int8
+    property converter : Win32cr::Globalization::UConverter*
+    property source : UInt16*
+    property sourceLimit : UInt16*
+    property target : Win32cr::Foundation::PSTR
+    property targetLimit : Win32cr::Foundation::PSTR
+    property offsets : Int32*
+    def initialize(@size : UInt16, @flush : Int8, @converter : Win32cr::Globalization::UConverter*, @source : UInt16*, @sourceLimit : UInt16*, @target : Win32cr::Foundation::PSTR, @targetLimit : Win32cr::Foundation::PSTR, @offsets : Int32*)
+    end
+  end
 
   @[Extern]
-  record UText,
-    magic : UInt32,
-    flags : Int32,
-    providerProperties : Int32,
-    sizeOfStruct : Int32,
-    chunkNativeLimit : Int64,
-    extraSize : Int32,
-    nativeIndexingLimit : Int32,
-    chunkNativeStart : Int64,
-    chunkOffset : Int32,
-    chunkLength : Int32,
-    chunkContents : UInt16*,
-    pFuncs : Win32cr::Globalization::UTextFuncs*,
-    pExtra : Void*,
-    context : Void*,
-    p : Void*,
-    q : Void*,
-    r : Void*,
-    privP : Void*,
-    a : Int64,
-    b : Int32,
-    c : Int32,
-    privA : Int64,
-    privB : Int32,
-    privC : Int32
+  struct UConverterToUnicodeArgs
+    property size : UInt16
+    property flush : Int8
+    property converter : Win32cr::Globalization::UConverter*
+    property source : Win32cr::Foundation::PSTR
+    property sourceLimit : Win32cr::Foundation::PSTR
+    property target : UInt16*
+    property targetLimit : UInt16*
+    property offsets : Int32*
+    def initialize(@size : UInt16, @flush : Int8, @converter : Win32cr::Globalization::UConverter*, @source : Win32cr::Foundation::PSTR, @sourceLimit : Win32cr::Foundation::PSTR, @target : UInt16*, @targetLimit : UInt16*, @offsets : Int32*)
+    end
+  end
 
   @[Extern]
-  record USerializedSet,
-    array : UInt16*,
-    bmpLength : Int32,
-    length : Int32,
-    staticArray : UInt16[8]
+  struct USet
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record UNormalizer2
-  @[Extern]
-  record UConverterSelector
-  @[Extern]
-  record UBreakIterator
-  @[Extern]
-  record UCaseMap
-  @[Extern]
-  record UParseError,
-    line : Int32,
-    offset : Int32,
-    preContext : UInt16[16],
-    postContext : UInt16[16]
+  struct UBiDi
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record UStringPrepProfile
-  @[Extern]
-  record UIDNA
-  @[Extern]
-  record UIDNAInfo,
-    size : Int16,
-    isTransitionalDifferent : Int8,
-    reservedB3 : Int8,
-    errors : UInt32,
-    reservedI2 : Int32,
-    reservedI3 : Int32
+  struct UBiDiTransform
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record UCollator
-  @[Extern]
-  record UCollationElements
-  @[Extern]
-  record UCharsetDetector
-  @[Extern]
-  record UCharsetMatch
-  @[Extern]
-  record UFieldPositionIterator
-  @[Extern]
-  record UConstrainedFieldPosition
-  @[Extern]
-  record UFormattedValue
-  @[Extern]
-  record UDateIntervalFormat
-  @[Extern]
-  record UFormattedDateInterval
-  @[Extern]
-  record UGenderInfo
-  @[Extern]
-  record UListFormatter
-  @[Extern]
-  record UFormattedList
-  @[Extern]
-  record ULocaleData
-  @[Extern]
-  record UDateFormatSymbols
-  @[Extern]
-  record UNumberFormatter
-  @[Extern]
-  record UFormattedNumber
-  @[Extern]
-  record UNumberingSystem
-  @[Extern]
-  record UFormattedNumberRange
-  @[Extern]
-  record UPluralRules
-  @[Extern]
-  record URegularExpression
-  @[Extern]
-  record URegion
-  @[Extern]
-  record URelativeDateTimeFormatter
-  @[Extern]
-  record UFormattedRelativeDateTime
-  @[Extern]
-  record UStringSearch
-  @[Extern]
-  record USpoofChecker
-  @[Extern]
-  record USpoofCheckResult
-  @[Extern]
-  record UTransPosition,
-    contextStart : Int32,
-    contextLimit : Int32,
-    start : Int32,
-    limit : Int32
+  struct UTextFuncs
+    property tableSize : Int32
+    property reserved1 : Int32
+    property reserved2 : Int32
+    property reserved3 : Int32
+    property clone : Win32cr::Globalization::UTextClone
+    property nativeLength : Win32cr::Globalization::UTextNativeLength
+    property access : Win32cr::Globalization::UTextAccess
+    property extract : Win32cr::Globalization::UTextExtract
+    property replace : Win32cr::Globalization::UTextReplace
+    property copy : Win32cr::Globalization::UTextCopy
+    property mapOffsetToNative : Win32cr::Globalization::UTextMapOffsetToNative
+    property mapNativeIndexToUTF16 : Win32cr::Globalization::UTextMapNativeIndexToUTF16
+    property close : Win32cr::Globalization::UTextClose
+    property spare1 : Win32cr::Globalization::UTextClose
+    property spare2 : Win32cr::Globalization::UTextClose
+    property spare3 : Win32cr::Globalization::UTextClose
+    def initialize(@tableSize : Int32, @reserved1 : Int32, @reserved2 : Int32, @reserved3 : Int32, @clone : Win32cr::Globalization::UTextClone, @nativeLength : Win32cr::Globalization::UTextNativeLength, @access : Win32cr::Globalization::UTextAccess, @extract : Win32cr::Globalization::UTextExtract, @replace : Win32cr::Globalization::UTextReplace, @copy : Win32cr::Globalization::UTextCopy, @mapOffsetToNative : Win32cr::Globalization::UTextMapOffsetToNative, @mapNativeIndexToUTF16 : Win32cr::Globalization::UTextMapNativeIndexToUTF16, @close : Win32cr::Globalization::UTextClose, @spare1 : Win32cr::Globalization::UTextClose, @spare2 : Win32cr::Globalization::UTextClose, @spare3 : Win32cr::Globalization::UTextClose)
+    end
+  end
 
   @[Extern]
-  record UHashtable
-  @[Extern]
-  record USearch
-  @[Extern]
-  record MIMECPINFO,
-    dwFlags : UInt32,
-    uiCodePage : UInt32,
-    uiFamilyCodePage : UInt32,
-    wszDescription : UInt16[64],
-    wszWebCharset : UInt16[50],
-    wszHeaderCharset : UInt16[50],
-    wszBodyCharset : UInt16[50],
-    wszFixedWidthFont : UInt16[32],
-    wszProportionalFont : UInt16[32],
-    bGDICharset : UInt8
+  struct UText
+    property magic : UInt32
+    property flags : Int32
+    property providerProperties : Int32
+    property sizeOfStruct : Int32
+    property chunkNativeLimit : Int64
+    property extraSize : Int32
+    property nativeIndexingLimit : Int32
+    property chunkNativeStart : Int64
+    property chunkOffset : Int32
+    property chunkLength : Int32
+    property chunkContents : UInt16*
+    property pFuncs : Win32cr::Globalization::UTextFuncs*
+    property pExtra : Void*
+    property context : Void*
+    property p : Void*
+    property q : Void*
+    property r : Void*
+    property privP : Void*
+    property a : Int64
+    property b : Int32
+    property c : Int32
+    property privA : Int64
+    property privB : Int32
+    property privC : Int32
+    def initialize(@magic : UInt32, @flags : Int32, @providerProperties : Int32, @sizeOfStruct : Int32, @chunkNativeLimit : Int64, @extraSize : Int32, @nativeIndexingLimit : Int32, @chunkNativeStart : Int64, @chunkOffset : Int32, @chunkLength : Int32, @chunkContents : UInt16*, @pFuncs : Win32cr::Globalization::UTextFuncs*, @pExtra : Void*, @context : Void*, @p : Void*, @q : Void*, @r : Void*, @privP : Void*, @a : Int64, @b : Int32, @c : Int32, @privA : Int64, @privB : Int32, @privC : Int32)
+    end
+  end
 
   @[Extern]
-  record MIMECSETINFO,
-    uiCodePage : UInt32,
-    uiInternetEncoding : UInt32,
-    wszCharset : UInt16[50]
+  struct USerializedSet
+    property array : UInt16*
+    property bmpLength : Int32
+    property length : Int32
+    property staticArray : UInt16[8]
+    def initialize(@array : UInt16*, @bmpLength : Int32, @length : Int32, @staticArray : UInt16[8])
+    end
+  end
 
   @[Extern]
-  record RFC1766INFO,
-    lcid : UInt32,
-    wszRfc1766 : UInt16[6],
-    wszLocaleName : UInt16[32]
+  struct UNormalizer2
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record SCRIPTINFO,
-    script_id : UInt8,
-    uiCodePage : UInt32,
-    wszDescription : UInt16[48],
-    wszFixedWidthFont : UInt16[32],
-    wszProportionalFont : UInt16[32]
+  struct UConverterSelector
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record DetectEncodingInfo,
-    nLangID : UInt32,
-    nCodePage : UInt32,
-    nDocPercent : Int32,
-    nConfidence : Int32
+  struct UBreakIterator
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record SCRIPFONTINFO,
-    scripts : Int64,
-    wszFont : UInt16[32]
+  struct UCaseMap
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record UNICODERANGE,
-    wcFrom : UInt16,
-    wcTo : UInt16
+  struct UParseError
+    property line : Int32
+    property offset : Int32
+    property preContext : UInt16[16]
+    property postContext : UInt16[16]
+    def initialize(@line : Int32, @offset : Int32, @preContext : UInt16[16], @postContext : UInt16[16])
+    end
+  end
+
+  @[Extern]
+  struct UStringPrepProfile
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UIDNA
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UIDNAInfo
+    property size : Int16
+    property isTransitionalDifferent : Int8
+    property reservedB3 : Int8
+    property errors : UInt32
+    property reservedI2 : Int32
+    property reservedI3 : Int32
+    def initialize(@size : Int16, @isTransitionalDifferent : Int8, @reservedB3 : Int8, @errors : UInt32, @reservedI2 : Int32, @reservedI3 : Int32)
+    end
+  end
+
+  @[Extern]
+  struct UCollator
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UCollationElements
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UCharsetDetector
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UCharsetMatch
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UFieldPositionIterator
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UConstrainedFieldPosition
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UFormattedValue
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UDateIntervalFormat
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UFormattedDateInterval
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UGenderInfo
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UListFormatter
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UFormattedList
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct ULocaleData
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UDateFormatSymbols
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UNumberFormatter
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UFormattedNumber
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UNumberingSystem
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UFormattedNumberRange
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UPluralRules
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct URegularExpression
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct URegion
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct URelativeDateTimeFormatter
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UFormattedRelativeDateTime
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UStringSearch
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct USpoofChecker
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct USpoofCheckResult
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct UTransPosition
+    property contextStart : Int32
+    property contextLimit : Int32
+    property start : Int32
+    property limit : Int32
+    def initialize(@contextStart : Int32, @contextLimit : Int32, @start : Int32, @limit : Int32)
+    end
+  end
+
+  @[Extern]
+  struct UHashtable
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct USearch
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct MIMECPINFO
+    property dwFlags : UInt32
+    property uiCodePage : UInt32
+    property uiFamilyCodePage : UInt32
+    property wszDescription : UInt16[64]
+    property wszWebCharset : UInt16[50]
+    property wszHeaderCharset : UInt16[50]
+    property wszBodyCharset : UInt16[50]
+    property wszFixedWidthFont : UInt16[32]
+    property wszProportionalFont : UInt16[32]
+    property bGDICharset : UInt8
+    def initialize(@dwFlags : UInt32, @uiCodePage : UInt32, @uiFamilyCodePage : UInt32, @wszDescription : UInt16[64], @wszWebCharset : UInt16[50], @wszHeaderCharset : UInt16[50], @wszBodyCharset : UInt16[50], @wszFixedWidthFont : UInt16[32], @wszProportionalFont : UInt16[32], @bGDICharset : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MIMECSETINFO
+    property uiCodePage : UInt32
+    property uiInternetEncoding : UInt32
+    property wszCharset : UInt16[50]
+    def initialize(@uiCodePage : UInt32, @uiInternetEncoding : UInt32, @wszCharset : UInt16[50])
+    end
+  end
+
+  @[Extern]
+  struct RFC1766INFO
+    property lcid : UInt32
+    property wszRfc1766 : UInt16[6]
+    property wszLocaleName : UInt16[32]
+    def initialize(@lcid : UInt32, @wszRfc1766 : UInt16[6], @wszLocaleName : UInt16[32])
+    end
+  end
+
+  @[Extern]
+  struct SCRIPTINFO
+    property script_id : UInt8
+    property uiCodePage : UInt32
+    property wszDescription : UInt16[48]
+    property wszFixedWidthFont : UInt16[32]
+    property wszProportionalFont : UInt16[32]
+    def initialize(@script_id : UInt8, @uiCodePage : UInt32, @wszDescription : UInt16[48], @wszFixedWidthFont : UInt16[32], @wszProportionalFont : UInt16[32])
+    end
+  end
+
+  @[Extern]
+  struct DetectEncodingInfo
+    property nLangID : UInt32
+    property nCodePage : UInt32
+    property nDocPercent : Int32
+    property nConfidence : Int32
+    def initialize(@nLangID : UInt32, @nCodePage : UInt32, @nDocPercent : Int32, @nConfidence : Int32)
+    end
+  end
+
+  @[Extern]
+  struct SCRIPFONTINFO
+    property scripts : Int64
+    property wszFont : UInt16[32]
+    def initialize(@scripts : Int64, @wszFont : UInt16[32])
+    end
+  end
+
+  @[Extern]
+  struct UNICODERANGE
+    property wcFrom : UInt16
+    property wcTo : UInt16
+    def initialize(@wcFrom : UInt16, @wcTo : UInt16)
+    end
+  end
 
   @[Extern]
   record ISpellingErrorVtbl,
@@ -4113,7 +4456,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("b7c82d61-fbe8-4b47-9b27-6c0d2e0de0a3")]
   record ISpellingError, lpVtbl : ISpellingErrorVtbl* do
     GUID = LibC::GUID.new(0xb7c82d61_u32, 0xfbe8_u16, 0x4b47_u16, StaticArray[0x9b_u8, 0x27_u8, 0x6c_u8, 0xd_u8, 0x2e_u8, 0xd_u8, 0xe0_u8, 0xa3_u8])
     def query_interface(this : ISpellingError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4149,7 +4491,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("803e3bd4-2828-4410-8290-418d1d73c762")]
   record IEnumSpellingError, lpVtbl : IEnumSpellingErrorVtbl* do
     GUID = LibC::GUID.new(0x803e3bd4_u32, 0x2828_u16, 0x4410_u16, StaticArray[0x82_u8, 0x90_u8, 0x41_u8, 0x8d_u8, 0x1d_u8, 0x73_u8, 0xc7_u8, 0x62_u8])
     def query_interface(this : IEnumSpellingError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4179,7 +4520,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("432e5f85-35cf-4606-a801-6f70277e1d7a")]
   record IOptionDescription, lpVtbl : IOptionDescriptionVtbl* do
     GUID = LibC::GUID.new(0x432e5f85_u32, 0x35cf_u16, 0x4606_u16, StaticArray[0xa8_u8, 0x1_u8, 0x6f_u8, 0x70_u8, 0x27_u8, 0x7e_u8, 0x1d_u8, 0x7a_u8])
     def query_interface(this : IOptionDescription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4215,7 +4555,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("0b83a5b0-792f-4eab-9799-acf52c5ed08a")]
   record ISpellCheckerChangedEventHandler, lpVtbl : ISpellCheckerChangedEventHandlerVtbl* do
     GUID = LibC::GUID.new(0xb83a5b0_u32, 0x792f_u16, 0x4eab_u16, StaticArray[0x97_u8, 0x99_u8, 0xac_u8, 0xf5_u8, 0x2c_u8, 0x5e_u8, 0xd0_u8, 0x8a_u8])
     def query_interface(this : ISpellCheckerChangedEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4255,7 +4594,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("b6fd0b71-e2bc-4653-8d05-f197e412770b")]
   record ISpellChecker, lpVtbl : ISpellCheckerVtbl* do
     GUID = LibC::GUID.new(0xb6fd0b71_u32, 0xe2bc_u16, 0x4653_u16, StaticArray[0x8d_u8, 0x5_u8, 0xf1_u8, 0x97_u8, 0xe4_u8, 0x12_u8, 0x77_u8, 0xb_u8])
     def query_interface(this : ISpellChecker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4335,7 +4673,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("e7ed1c71-87f7-4378-a840-c9200dacee47")]
   record ISpellChecker2, lpVtbl : ISpellChecker2Vtbl* do
     GUID = LibC::GUID.new(0xe7ed1c71_u32, 0x87f7_u16, 0x4378_u16, StaticArray[0xa8_u8, 0x40_u8, 0xc9_u8, 0x20_u8, 0xd_u8, 0xac_u8, 0xee_u8, 0x47_u8])
     def query_interface(this : ISpellChecker2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4406,7 +4743,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("8e018a9d-2415-4677-bf08-794ea61f94bb")]
   record ISpellCheckerFactory, lpVtbl : ISpellCheckerFactoryVtbl* do
     GUID = LibC::GUID.new(0x8e018a9d_u32, 0x2415_u16, 0x4677_u16, StaticArray[0xbf_u8, 0x8_u8, 0x79_u8, 0x4e_u8, 0xa6_u8, 0x1f_u8, 0x94_u8, 0xbb_u8])
     def query_interface(this : ISpellCheckerFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4440,7 +4776,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("aa176b85-0e12-4844-8e1a-eef1da77f586")]
   record IUserDictionariesRegistrar, lpVtbl : IUserDictionariesRegistrarVtbl* do
     GUID = LibC::GUID.new(0xaa176b85_u32, 0xe12_u16, 0x4844_u16, StaticArray[0x8e_u8, 0x1a_u8, 0xee_u8, 0xf1_u8, 0xda_u8, 0x77_u8, 0xf5_u8, 0x86_u8])
     def query_interface(this : IUserDictionariesRegistrar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4479,7 +4814,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("73e976e0-8ed4-4eb1-80d7-1be0a16b0c38")]
   record ISpellCheckProvider, lpVtbl : ISpellCheckProviderVtbl* do
     GUID = LibC::GUID.new(0x73e976e0_u32, 0x8ed4_u16, 0x4eb1_u16, StaticArray[0x80_u8, 0xd7_u8, 0x1b_u8, 0xe0_u8, 0xa1_u8, 0x6b_u8, 0xc_u8, 0x38_u8])
     def query_interface(this : ISpellCheckProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4533,7 +4867,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("0c58f8de-8e94-479e-9717-70c42c4ad2c3")]
   record IComprehensiveSpellCheckProvider, lpVtbl : IComprehensiveSpellCheckProviderVtbl* do
     GUID = LibC::GUID.new(0xc58f8de_u32, 0x8e94_u16, 0x479e_u16, StaticArray[0x97_u8, 0x17_u8, 0x70_u8, 0xc4_u8, 0x2c_u8, 0x4a_u8, 0xd2_u8, 0xc3_u8])
     def query_interface(this : IComprehensiveSpellCheckProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4562,7 +4895,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("9f671e11-77d6-4c92-aefb-615215e3a4be")]
   record ISpellCheckProviderFactory, lpVtbl : ISpellCheckProviderFactoryVtbl* do
     GUID = LibC::GUID.new(0x9f671e11_u32, 0x77d6_u16, 0x4c92_u16, StaticArray[0xae_u8, 0xfb_u8, 0x61_u8, 0x52_u8, 0x15_u8, 0xe3_u8, 0xa4_u8, 0xbe_u8])
     def query_interface(this : ISpellCheckProviderFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4599,7 +4931,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("d24acd21-ba72-11d0-b188-00aa0038c969")]
   record IMLangStringBufW, lpVtbl : IMLangStringBufWVtbl* do
     GUID = LibC::GUID.new(0xd24acd21_u32, 0xba72_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangStringBufW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4642,7 +4973,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("d24acd23-ba72-11d0-b188-00aa0038c969")]
   record IMLangStringBufA, lpVtbl : IMLangStringBufAVtbl* do
     GUID = LibC::GUID.new(0xd24acd23_u32, 0xba72_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangStringBufA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4684,7 +5014,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("c04d65ce-b70d-11d0-b188-00aa0038c969")]
   record IMLangString, lpVtbl : IMLangStringVtbl* do
     GUID = LibC::GUID.new(0xc04d65ce_u32, 0xb70d_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4731,7 +5060,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("c04d65d0-b70d-11d0-b188-00aa0038c969")]
   record IMLangStringWStr, lpVtbl : IMLangStringWStrVtbl* do
     GUID = LibC::GUID.new(0xc04d65d0_u32, 0xb70d_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangStringWStr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4802,7 +5130,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("c04d65d2-b70d-11d0-b188-00aa0038c969")]
   record IMLangStringAStr, lpVtbl : IMLangStringAStrVtbl* do
     GUID = LibC::GUID.new(0xc04d65d2_u32, 0xb70d_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangStringAStr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4864,7 +5191,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("f5be2ee1-bfd7-11d0-b188-00aa0038c969")]
   record IMLangLineBreakConsole, lpVtbl : IMLangLineBreakConsoleVtbl* do
     GUID = LibC::GUID.new(0xf5be2ee1_u32, 0xbfd7_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangLineBreakConsole*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4900,7 +5226,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("275c23e3-3747-11d0-9fea-00aa003f8646")]
   record IEnumCodePage, lpVtbl : IEnumCodePageVtbl* do
     GUID = LibC::GUID.new(0x275c23e3_u32, 0x3747_u16, 0x11d0_u16, StaticArray[0x9f_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3f_u8, 0x86_u8, 0x46_u8])
     def query_interface(this : IEnumCodePage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4939,7 +5264,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("3dc39d1d-c030-11d0-b81b-00c04fc9b31f")]
   record IEnumRfc1766, lpVtbl : IEnumRfc1766Vtbl* do
     GUID = LibC::GUID.new(0x3dc39d1d_u32, 0xc030_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0x1b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xb3_u8, 0x1f_u8])
     def query_interface(this : IEnumRfc1766*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4978,7 +5302,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("ae5f1430-388b-11d2-8380-00c04f8f5da1")]
   record IEnumScript, lpVtbl : IEnumScriptVtbl* do
     GUID = LibC::GUID.new(0xae5f1430_u32, 0x388b_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x80_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8f_u8, 0x5d_u8, 0xa1_u8])
     def query_interface(this : IEnumScript*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5020,7 +5343,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("d66d6f98-cdaa-11d0-b822-00c04fc9b31f")]
   record IMLangConvertCharset, lpVtbl : IMLangConvertCharsetVtbl* do
     GUID = LibC::GUID.new(0xd66d6f98_u32, 0xcdaa_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0x22_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xb3_u8, 0x1f_u8])
     def query_interface(this : IMLangConvertCharset*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5079,7 +5401,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("275c23e1-3747-11d0-9fea-00aa003f8646")]
   record IMultiLanguage, lpVtbl : IMultiLanguageVtbl* do
     GUID = LibC::GUID.new(0x275c23e1_u32, 0x3747_u16, 0x11d0_u16, StaticArray[0x9f_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3f_u8, 0x86_u8, 0x46_u8])
     def query_interface(this : IMultiLanguage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5174,7 +5495,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("dccfc164-2b38-11d2-b7ec-00c04f8f5d9a")]
   record IMultiLanguage2, lpVtbl : IMultiLanguage2Vtbl* do
     GUID = LibC::GUID.new(0xdccfc164_u32, 0x2b38_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0xec_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8f_u8, 0x5d_u8, 0x9a_u8])
     def query_interface(this : IMultiLanguage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5282,7 +5602,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("359f3443-bd4a-11d0-b188-00aa0038c969")]
   record IMLangCodePages, lpVtbl : IMLangCodePagesVtbl* do
     GUID = LibC::GUID.new(0x359f3443_u32, 0xbd4a_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangCodePages*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5325,7 +5644,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("359f3441-bd4a-11d0-b188-00aa0038c969")]
   record IMLangFontLink, lpVtbl : IMLangFontLinkVtbl* do
     GUID = LibC::GUID.new(0x359f3441_u32, 0xbd4a_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangFontLink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5383,7 +5701,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("dccfc162-2b38-11d2-b7ec-00c04f8f5d9a")]
   record IMLangFontLink2, lpVtbl : IMLangFontLink2Vtbl* do
     GUID = LibC::GUID.new(0xdccfc162_u32, 0x2b38_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0xec_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8f_u8, 0x5d_u8, 0x9a_u8])
     def query_interface(this : IMLangFontLink2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5468,7 +5785,6 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  #@[Com("4e5868ab-b157-4623-9acc-6a1d9caebe04")]
   record IMultiLanguage3, lpVtbl : IMultiLanguage3Vtbl* do
     GUID = LibC::GUID.new(0x4e5868ab_u32, 0xb157_u16, 0x4623_u16, StaticArray[0x9a_u8, 0xcc_u8, 0x6a_u8, 0x1d_u8, 0x9c_u8, 0xae_u8, 0xbe_u8, 0x4_u8])
     def query_interface(this : IMultiLanguage3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -3,80 +3,80 @@ require "./../foundation.cr"
 require "./diagnostics/debug.cr"
 
 module Win32cr::System::VirtualDosMachines
-  alias DEBUGEVENTPROC = Proc(Win32cr::System::Diagnostics::Debug::DEBUG_EVENT*, Void*, UInt32)*
+  alias DEBUGEVENTPROC = Proc(Win32cr::System::Diagnostics::Debug::DEBUG_EVENT*, Void*, UInt32)
 
-  alias PROCESSENUMPROC = Proc(UInt32, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias PROCESSENUMPROC = Proc(UInt32, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias TASKENUMPROC = Proc(UInt32, UInt16, UInt16, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias TASKENUMPROC = Proc(UInt32, UInt16, UInt16, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias TASKENUMPROCEX = Proc(UInt32, UInt16, UInt16, Int8*, Int8*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias TASKENUMPROCEX = Proc(UInt32, UInt16, UInt16, Int8*, Int8*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias VDMPROCESSEXCEPTIONPROC = Proc(Win32cr::System::Diagnostics::Debug::DEBUG_EVENT*, Win32cr::Foundation::BOOL)*
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  alias VDMGETTHREADSELECTORENTRYPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::System::VirtualDosMachines::VDMLDT_ENTRY*, Win32cr::Foundation::BOOL)*
-  {% end %}
-
-  alias VDMGETPOINTERPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt16, UInt32, Win32cr::Foundation::BOOL, UInt32)*
+  alias VDMPROCESSEXCEPTIONPROC = Proc(Win32cr::System::Diagnostics::Debug::DEBUG_EVENT*, Win32cr::Foundation::BOOL)
 
   {% if flag?(:x86_64) || flag?(:arm) %}
-  alias VDMGETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::VDMCONTEXT*, Win32cr::Foundation::BOOL)*
+  alias VDMGETTHREADSELECTORENTRYPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::System::VirtualDosMachines::VDMLDT_ENTRY*, Win32cr::Foundation::BOOL)
+  {% end %}
+
+  alias VDMGETPOINTERPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt16, UInt32, Win32cr::Foundation::BOOL, UInt32)
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  alias VDMGETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::VDMCONTEXT*, Win32cr::Foundation::BOOL)
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
-  alias VDMSETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::VDMCONTEXT*, Win32cr::Foundation::BOOL)*
+  alias VDMSETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::VDMCONTEXT*, Win32cr::Foundation::BOOL)
   {% end %}
 
-  alias VDMKILLWOWPROC = Proc(Win32cr::Foundation::BOOL)*
+  alias VDMKILLWOWPROC = Proc(Win32cr::Foundation::BOOL)
 
-  alias VDMDETECTWOWPROC = Proc(Win32cr::Foundation::BOOL)*
+  alias VDMDETECTWOWPROC = Proc(Win32cr::Foundation::BOOL)
 
-  alias VDMBREAKTHREADPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)*
+  alias VDMBREAKTHREADPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)
 
-  alias VDMGETSELECTORMODULEPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt16, UInt32*, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::BOOL)*
+  alias VDMGETSELECTORMODULEPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt16, UInt32*, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::BOOL)
 
-  alias VDMGETMODULESELECTORPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::PSTR, UInt16*, Win32cr::Foundation::BOOL)*
+  alias VDMGETMODULESELECTORPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::PSTR, UInt16*, Win32cr::Foundation::BOOL)
 
-  alias VDMMODULEFIRSTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::MODULEENTRY*, Win32cr::System::VirtualDosMachines::DEBUGEVENTPROC, Void*, Win32cr::Foundation::BOOL)*
+  alias VDMMODULEFIRSTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::MODULEENTRY*, Win32cr::System::VirtualDosMachines::DEBUGEVENTPROC, Void*, Win32cr::Foundation::BOOL)
 
-  alias VDMMODULENEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::MODULEENTRY*, Win32cr::System::VirtualDosMachines::DEBUGEVENTPROC, Void*, Win32cr::Foundation::BOOL)*
+  alias VDMMODULENEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::MODULEENTRY*, Win32cr::System::VirtualDosMachines::DEBUGEVENTPROC, Void*, Win32cr::Foundation::BOOL)
 
-  alias VDMGLOBALFIRSTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::GLOBALENTRY*, UInt16, Win32cr::System::VirtualDosMachines::DEBUGEVENTPROC, Void*, Win32cr::Foundation::BOOL)*
+  alias VDMGLOBALFIRSTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::GLOBALENTRY*, UInt16, Win32cr::System::VirtualDosMachines::DEBUGEVENTPROC, Void*, Win32cr::Foundation::BOOL)
 
-  alias VDMGLOBALNEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::GLOBALENTRY*, UInt16, Win32cr::System::VirtualDosMachines::DEBUGEVENTPROC, Void*, Win32cr::Foundation::BOOL)*
+  alias VDMGLOBALNEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::GLOBALENTRY*, UInt16, Win32cr::System::VirtualDosMachines::DEBUGEVENTPROC, Void*, Win32cr::Foundation::BOOL)
 
-  alias VDMENUMPROCESSWOWPROC = Proc(Win32cr::System::VirtualDosMachines::PROCESSENUMPROC, Win32cr::Foundation::LPARAM, Int32)*
+  alias VDMENUMPROCESSWOWPROC = Proc(Win32cr::System::VirtualDosMachines::PROCESSENUMPROC, Win32cr::Foundation::LPARAM, Int32)
 
-  alias VDMENUMTASKWOWPROC = Proc(UInt32, Win32cr::System::VirtualDosMachines::TASKENUMPROC, Win32cr::Foundation::LPARAM, Int32)*
+  alias VDMENUMTASKWOWPROC = Proc(UInt32, Win32cr::System::VirtualDosMachines::TASKENUMPROC, Win32cr::Foundation::LPARAM, Int32)
 
-  alias VDMENUMTASKWOWEXPROC = Proc(UInt32, Win32cr::System::VirtualDosMachines::TASKENUMPROCEX, Win32cr::Foundation::LPARAM, Int32)*
+  alias VDMENUMTASKWOWEXPROC = Proc(UInt32, Win32cr::System::VirtualDosMachines::TASKENUMPROCEX, Win32cr::Foundation::LPARAM, Int32)
 
-  alias VDMTERMINATETASKINWOWPROC = Proc(UInt32, UInt16, Win32cr::Foundation::BOOL)*
+  alias VDMTERMINATETASKINWOWPROC = Proc(UInt32, UInt16, Win32cr::Foundation::BOOL)
 
-  alias VDMSTARTTASKINWOWPROC = Proc(UInt32, Win32cr::Foundation::PSTR, UInt16, Win32cr::Foundation::BOOL)*
+  alias VDMSTARTTASKINWOWPROC = Proc(UInt32, Win32cr::Foundation::PSTR, UInt16, Win32cr::Foundation::BOOL)
 
-  alias VDMGETDBGFLAGSPROC = Proc(Win32cr::Foundation::HANDLE, UInt32)*
+  alias VDMGETDBGFLAGSPROC = Proc(Win32cr::Foundation::HANDLE, UInt32)
 
-  alias VDMSETDBGFLAGSPROC = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::BOOL)*
+  alias VDMSETDBGFLAGSPROC = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::BOOL)
 
-  alias VDMISMODULELOADEDPROC = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias VDMISMODULELOADEDPROC = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias VDMGETSEGMENTINFOPROC = Proc(UInt16, UInt32, Win32cr::Foundation::BOOL, Win32cr::System::VirtualDosMachines::VDM_SEGINFO, Win32cr::Foundation::BOOL)*
+  alias VDMGETSEGMENTINFOPROC = Proc(UInt16, UInt32, Win32cr::Foundation::BOOL, Win32cr::System::VirtualDosMachines::VDM_SEGINFO, Win32cr::Foundation::BOOL)
 
-  alias VDMGETSYMBOLPROC = Proc(Win32cr::Foundation::PSTR, UInt16, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, UInt8*, UInt32*, Win32cr::Foundation::BOOL)*
+  alias VDMGETSYMBOLPROC = Proc(Win32cr::Foundation::PSTR, UInt16, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, UInt8*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias VDMGETADDREXPRESSIONPROC = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt16*, UInt32*, UInt16*, Win32cr::Foundation::BOOL)*
+  alias VDMGETADDREXPRESSIONPROC = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt16*, UInt32*, UInt16*, Win32cr::Foundation::BOOL)
 
   {% if flag?(:i386) %}
-  alias VDMGETTHREADSELECTORENTRYPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::System::Diagnostics::Debug::LDT_ENTRY*, Win32cr::Foundation::BOOL)*
-  {% end %}
-
-  {% if flag?(:i386) %}
-  alias VDMGETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::Diagnostics::Debug::CONTEXT*, Win32cr::Foundation::BOOL)*
+  alias VDMGETTHREADSELECTORENTRYPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::System::Diagnostics::Debug::LDT_ENTRY*, Win32cr::Foundation::BOOL)
   {% end %}
 
   {% if flag?(:i386) %}
-  alias VDMSETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::Diagnostics::Debug::CONTEXT*, Win32cr::Foundation::BOOL)*
+  alias VDMGETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::Diagnostics::Debug::CONTEXT*, Win32cr::Foundation::BOOL)
+  {% end %}
+
+  {% if flag?(:i386) %}
+  alias VDMSETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::Diagnostics::Debug::CONTEXT*, Win32cr::Foundation::BOOL)
   {% end %}
 
   VDMCONTEXT_i386 = 65536_u32
@@ -177,148 +177,182 @@ module Win32cr::System::VirtualDosMachines
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record VDMCONTEXT,
-    context_flags : UInt32,
-    dr0 : UInt32,
-    dr1 : UInt32,
-    dr2 : UInt32,
-    dr3 : UInt32,
-    dr6 : UInt32,
-    dr7 : UInt32,
-    float_save : Win32cr::System::Kernel::FLOATING_SAVE_AREA,
-    seg_gs : UInt32,
-    seg_fs : UInt32,
-    seg_es : UInt32,
-    seg_ds : UInt32,
-    edi : UInt32,
-    esi : UInt32,
-    ebx : UInt32,
-    edx : UInt32,
-    ecx : UInt32,
-    eax : UInt32,
-    ebp : UInt32,
-    eip : UInt32,
-    seg_cs : UInt32,
-    e_flags : UInt32,
-    esp : UInt32,
-    seg_ss : UInt32,
-    extended_registers : UInt8[512]
+  struct VDMCONTEXT
+    property context_flags : UInt32
+    property dr0 : UInt32
+    property dr1 : UInt32
+    property dr2 : UInt32
+    property dr3 : UInt32
+    property dr6 : UInt32
+    property dr7 : UInt32
+    property float_save : Win32cr::System::Kernel::FLOATING_SAVE_AREA
+    property seg_gs : UInt32
+    property seg_fs : UInt32
+    property seg_es : UInt32
+    property seg_ds : UInt32
+    property edi : UInt32
+    property esi : UInt32
+    property ebx : UInt32
+    property edx : UInt32
+    property ecx : UInt32
+    property eax : UInt32
+    property ebp : UInt32
+    property eip : UInt32
+    property seg_cs : UInt32
+    property e_flags : UInt32
+    property esp : UInt32
+    property seg_ss : UInt32
+    property extended_registers : UInt8[512]
+    def initialize(@context_flags : UInt32, @dr0 : UInt32, @dr1 : UInt32, @dr2 : UInt32, @dr3 : UInt32, @dr6 : UInt32, @dr7 : UInt32, @float_save : Win32cr::System::Kernel::FLOATING_SAVE_AREA, @seg_gs : UInt32, @seg_fs : UInt32, @seg_es : UInt32, @seg_ds : UInt32, @edi : UInt32, @esi : UInt32, @ebx : UInt32, @edx : UInt32, @ecx : UInt32, @eax : UInt32, @ebp : UInt32, @eip : UInt32, @seg_cs : UInt32, @e_flags : UInt32, @esp : UInt32, @seg_ss : UInt32, @extended_registers : UInt8[512])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record VDMLDT_ENTRY,
-    limit_low : UInt16,
-    base_low : UInt16,
-    high_word : HighWord_e__Union_ do
+  struct VDMLDT_ENTRY
+    property limit_low : UInt16
+    property base_low : UInt16
+    property high_word : HighWord_e__Union_
 
     # Nested Type HighWord_e__Union_
     @[Extern(union: true)]
-    record HighWord_e__Union_,
-      bytes : Bytes_e__Struct_,
-      bits : Bits_e__Struct_ do
+    struct HighWord_e__Union_
+    property bytes : Bytes_e__Struct_
+    property bits : Bits_e__Struct_
 
       # Nested Type Bits_e__Struct_
       @[Extern]
-      record Bits_e__Struct_,
-        _bitfield : UInt32
+      struct Bits_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
 
       # Nested Type Bytes_e__Struct_
       @[Extern]
-      record Bytes_e__Struct_,
-        base_mid : UInt8,
-        flags1 : UInt8,
-        flags2 : UInt8,
-        base_hi : UInt8
+      struct Bytes_e__Struct_
+    property base_mid : UInt8
+    property flags1 : UInt8
+    property flags2 : UInt8
+    property base_hi : UInt8
+    def initialize(@base_mid : UInt8, @flags1 : UInt8, @flags2 : UInt8, @base_hi : UInt8)
+    end
+      end
 
+    def initialize(@bytes : Bytes_e__Struct_, @bits : Bits_e__Struct_)
+    end
     end
 
+    def initialize(@limit_low : UInt16, @base_low : UInt16, @high_word : HighWord_e__Union_)
+    end
   end
   {% end %}
 
   @[Extern]
-  record VDMCONTEXT_WITHOUT_XSAVE,
-    context_flags : UInt32,
-    dr0 : UInt32,
-    dr1 : UInt32,
-    dr2 : UInt32,
-    dr3 : UInt32,
-    dr6 : UInt32,
-    dr7 : UInt32,
-    float_save : Win32cr::System::Kernel::FLOATING_SAVE_AREA,
-    seg_gs : UInt32,
-    seg_fs : UInt32,
-    seg_es : UInt32,
-    seg_ds : UInt32,
-    edi : UInt32,
-    esi : UInt32,
-    ebx : UInt32,
-    edx : UInt32,
-    ecx : UInt32,
-    eax : UInt32,
-    ebp : UInt32,
-    eip : UInt32,
-    seg_cs : UInt32,
-    e_flags : UInt32,
-    esp : UInt32,
-    seg_ss : UInt32
+  struct VDMCONTEXT_WITHOUT_XSAVE
+    property context_flags : UInt32
+    property dr0 : UInt32
+    property dr1 : UInt32
+    property dr2 : UInt32
+    property dr3 : UInt32
+    property dr6 : UInt32
+    property dr7 : UInt32
+    property float_save : Win32cr::System::Kernel::FLOATING_SAVE_AREA
+    property seg_gs : UInt32
+    property seg_fs : UInt32
+    property seg_es : UInt32
+    property seg_ds : UInt32
+    property edi : UInt32
+    property esi : UInt32
+    property ebx : UInt32
+    property edx : UInt32
+    property ecx : UInt32
+    property eax : UInt32
+    property ebp : UInt32
+    property eip : UInt32
+    property seg_cs : UInt32
+    property e_flags : UInt32
+    property esp : UInt32
+    property seg_ss : UInt32
+    def initialize(@context_flags : UInt32, @dr0 : UInt32, @dr1 : UInt32, @dr2 : UInt32, @dr3 : UInt32, @dr6 : UInt32, @dr7 : UInt32, @float_save : Win32cr::System::Kernel::FLOATING_SAVE_AREA, @seg_gs : UInt32, @seg_fs : UInt32, @seg_es : UInt32, @seg_ds : UInt32, @edi : UInt32, @esi : UInt32, @ebx : UInt32, @edx : UInt32, @ecx : UInt32, @eax : UInt32, @ebp : UInt32, @eip : UInt32, @seg_cs : UInt32, @e_flags : UInt32, @esp : UInt32, @seg_ss : UInt32)
+    end
+  end
 
   @[Extern]
-  record SEGMENT_NOTE,
-    selector1 : UInt16,
-    selector2 : UInt16,
-    segment : UInt16,
-    module__ : Win32cr::Foundation::CHAR[10],
-    file_name : Win32cr::Foundation::CHAR[256],
-    type__ : UInt16,
-    length : UInt32
+  struct SEGMENT_NOTE
+    property selector1 : UInt16
+    property selector2 : UInt16
+    property segment : UInt16
+    property module__ : Win32cr::Foundation::CHAR[10]
+    property file_name : Win32cr::Foundation::CHAR[256]
+    property type__ : UInt16
+    property length : UInt32
+    def initialize(@selector1 : UInt16, @selector2 : UInt16, @segment : UInt16, @module__ : Win32cr::Foundation::CHAR[10], @file_name : Win32cr::Foundation::CHAR[256], @type__ : UInt16, @length : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_NOTE,
-    module__ : Win32cr::Foundation::CHAR[10],
-    file_name : Win32cr::Foundation::CHAR[256],
-    hModule : UInt16,
-    hTask : UInt16
+  struct IMAGE_NOTE
+    property module__ : Win32cr::Foundation::CHAR[10]
+    property file_name : Win32cr::Foundation::CHAR[256]
+    property hModule : UInt16
+    property hTask : UInt16
+    def initialize(@module__ : Win32cr::Foundation::CHAR[10], @file_name : Win32cr::Foundation::CHAR[256], @hModule : UInt16, @hTask : UInt16)
+    end
+  end
 
   @[Extern]
-  record MODULEENTRY,
-    dwSize : UInt32,
-    szModule : Win32cr::Foundation::CHAR[10],
-    hModule : Win32cr::Foundation::HANDLE,
-    wcUsage : UInt16,
-    szExePath : Win32cr::Foundation::CHAR[256],
-    wNext : UInt16
+  struct MODULEENTRY
+    property dwSize : UInt32
+    property szModule : Win32cr::Foundation::CHAR[10]
+    property hModule : Win32cr::Foundation::HANDLE
+    property wcUsage : UInt16
+    property szExePath : Win32cr::Foundation::CHAR[256]
+    property wNext : UInt16
+    def initialize(@dwSize : UInt32, @szModule : Win32cr::Foundation::CHAR[10], @hModule : Win32cr::Foundation::HANDLE, @wcUsage : UInt16, @szExePath : Win32cr::Foundation::CHAR[256], @wNext : UInt16)
+    end
+  end
 
   @[Extern]
-  record TEMP_BP_NOTE,
-    seg : UInt16,
-    offset : UInt32,
-    bPM : Win32cr::Foundation::BOOL
+  struct TEMP_BP_NOTE
+    property seg : UInt16
+    property offset : UInt32
+    property bPM : Win32cr::Foundation::BOOL
+    def initialize(@seg : UInt16, @offset : UInt32, @bPM : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record VDM_SEGINFO,
-    selector : UInt16,
-    seg_number : UInt16,
-    length : UInt32,
-    type__ : UInt16,
-    module_name : Win32cr::Foundation::CHAR[9],
-    file_name : Win32cr::Foundation::CHAR[255]
+  struct VDM_SEGINFO
+    property selector : UInt16
+    property seg_number : UInt16
+    property length : UInt32
+    property type__ : UInt16
+    property module_name : Win32cr::Foundation::CHAR[9]
+    property file_name : Win32cr::Foundation::CHAR[255]
+    def initialize(@selector : UInt16, @seg_number : UInt16, @length : UInt32, @type__ : UInt16, @module_name : Win32cr::Foundation::CHAR[9], @file_name : Win32cr::Foundation::CHAR[255])
+    end
+  end
 
   @[Extern]
-  record GLOBALENTRY,
-    dwSize : UInt32,
-    dwAddress : UInt32,
-    dwBlockSize : UInt32,
-    hBlock : Win32cr::Foundation::HANDLE,
-    wcLock : UInt16,
-    wcPageLock : UInt16,
-    wFlags : UInt16,
-    wHeapPresent : Win32cr::Foundation::BOOL,
-    hOwner : Win32cr::Foundation::HANDLE,
-    wType : UInt16,
-    wData : UInt16,
-    dwNext : UInt32,
-    dwNextAlt : UInt32
+  struct GLOBALENTRY
+    property dwSize : UInt32
+    property dwAddress : UInt32
+    property dwBlockSize : UInt32
+    property hBlock : Win32cr::Foundation::HANDLE
+    property wcLock : UInt16
+    property wcPageLock : UInt16
+    property wFlags : UInt16
+    property wHeapPresent : Win32cr::Foundation::BOOL
+    property hOwner : Win32cr::Foundation::HANDLE
+    property wType : UInt16
+    property wData : UInt16
+    property dwNext : UInt32
+    property dwNextAlt : UInt32
+    def initialize(@dwSize : UInt32, @dwAddress : UInt32, @dwBlockSize : UInt32, @hBlock : Win32cr::Foundation::HANDLE, @wcLock : UInt16, @wcPageLock : UInt16, @wFlags : UInt16, @wHeapPresent : Win32cr::Foundation::BOOL, @hOwner : Win32cr::Foundation::HANDLE, @wType : UInt16, @wData : UInt16, @dwNext : UInt32, @dwNextAlt : UInt32)
+    end
+  end
 
 end

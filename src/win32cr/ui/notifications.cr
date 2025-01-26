@@ -5,9 +5,12 @@ module Win32cr::UI::Notifications
 
 
   @[Extern]
-  record NOTIFICATION_USER_INPUT_DATA,
-    key : Win32cr::Foundation::PWSTR,
-    value : Win32cr::Foundation::PWSTR
+  struct NOTIFICATION_USER_INPUT_DATA
+    property key : Win32cr::Foundation::PWSTR
+    property value : Win32cr::Foundation::PWSTR
+    def initialize(@key : Win32cr::Foundation::PWSTR, @value : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
   record INotificationActivationCallbackVtbl,
@@ -18,7 +21,6 @@ module Win32cr::UI::Notifications
 
 
   @[Extern]
-  #@[Com("53e31837-6600-4a81-9395-75cffe746f94")]
   record INotificationActivationCallback, lpVtbl : INotificationActivationCallbackVtbl* do
     GUID = LibC::GUID.new(0x53e31837_u32, 0x6600_u16, 0x4a81_u16, StaticArray[0x93_u8, 0x95_u8, 0x75_u8, 0xcf_u8, 0xfe_u8, 0x74_u8, 0x6f_u8, 0x94_u8])
     def query_interface(this : INotificationActivationCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -9,9 +9,12 @@ module Win32cr::System::CorrelationVector
 
 
   @[Extern]
-  record CORRELATION_VECTOR,
-    version : Win32cr::Foundation::CHAR,
-    vector : Win32cr::Foundation::CHAR[129]
+  struct CORRELATION_VECTOR
+    property version : Win32cr::Foundation::CHAR
+    property vector : Win32cr::Foundation::CHAR[129]
+    def initialize(@version : Win32cr::Foundation::CHAR, @vector : Win32cr::Foundation::CHAR[129])
+    end
+  end
 
   @[Link("ntdll")]
   lib C

@@ -18,13 +18,13 @@ module Win32cr::Foundation
   alias CHAR = UInt8
   alias SHANDLE_PTR = LibC::IntPtrT
   alias HANDLE_PTR = LibC::UIntPtrT
-  alias FARPROC = Proc(LibC::IntPtrT)*
+  alias FARPROC = Proc(LibC::IntPtrT)
 
-  alias NEARPROC = Proc(LibC::IntPtrT)*
+  alias NEARPROC = Proc(LibC::IntPtrT)
 
-  alias PROC = Proc(LibC::IntPtrT)*
+  alias PROC = Proc(LibC::IntPtrT)
 
-  alias PAPCFUNC = Proc(LibC::UIntPtrT, Void)*
+  alias PAPCFUNC = Proc(LibC::UIntPtrT, Void)
 
   INVALID_HANDLE_VALUE = -1_i32
   CO_E_NOTINITIALIZED = -2147221008_i32
@@ -9824,170 +9824,246 @@ module Win32cr::Foundation
   end
 
   @[Extern]
-  record SYSTEMTIME,
-    wYear : UInt16,
-    wMonth : UInt16,
-    wDayOfWeek : UInt16,
-    wDay : UInt16,
-    wHour : UInt16,
-    wMinute : UInt16,
-    wSecond : UInt16,
-    wMilliseconds : UInt16
+  struct SYSTEMTIME
+    property wYear : UInt16
+    property wMonth : UInt16
+    property wDayOfWeek : UInt16
+    property wDay : UInt16
+    property wHour : UInt16
+    property wMinute : UInt16
+    property wSecond : UInt16
+    property wMilliseconds : UInt16
+    def initialize(@wYear : UInt16, @wMonth : UInt16, @wDayOfWeek : UInt16, @wDay : UInt16, @wHour : UInt16, @wMinute : UInt16, @wSecond : UInt16, @wMilliseconds : UInt16)
+    end
+  end
 
   @[Extern]
-  record DECIMAL,
-    wReserved : UInt16,
-    anonymous1 : Anonymous1_e__Union_,
-    hi32 : UInt32,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct DECIMAL
+    property wReserved : UInt16
+    property anonymous1 : Anonymous1_e__Union_
+    property hi32 : UInt32
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      lo64 : UInt64 do
+    struct Anonymous2_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property lo64 : UInt64
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        lo32 : UInt32,
-        mid32 : UInt32
+      struct Anonymous_e__Struct_
+    property lo32 : UInt32
+    property mid32 : UInt32
+    def initialize(@lo32 : UInt32, @mid32 : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @lo64 : UInt64)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      signscale : UInt16 do
+    struct Anonymous1_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property signscale : UInt16
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        scale : UInt8,
-        sign : UInt8
+      struct Anonymous_e__Struct_
+    property scale : UInt8
+    property sign : UInt8
+    def initialize(@scale : UInt8, @sign : UInt8)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @signscale : UInt16)
+    end
     end
 
+    def initialize(@wReserved : UInt16, @anonymous1 : Anonymous1_e__Union_, @hi32 : UInt32, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record HSPRITE__,
-    unused : Int32
+  struct HSPRITE__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record HLSURF__,
-    unused : Int32
+  struct HLSURF__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record HSTR__,
-    unused : Int32
+  struct HSTR__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record FILETIME,
-    dwLowDateTime : UInt32,
-    dwHighDateTime : UInt32
+  struct FILETIME
+    property dwLowDateTime : UInt32
+    property dwHighDateTime : UInt32
+    def initialize(@dwLowDateTime : UInt32, @dwHighDateTime : UInt32)
+    end
+  end
 
   @[Extern]
-  record HUMPD__,
-    unused : Int32
+  struct HUMPD__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record RECT,
-    left : Int32,
-    top : Int32,
-    right : Int32,
-    bottom : Int32
+  struct RECT
+    property left : Int32
+    property top : Int32
+    property right : Int32
+    property bottom : Int32
+    def initialize(@left : Int32, @top : Int32, @right : Int32, @bottom : Int32)
+    end
+  end
 
   @[Extern]
-  record RECTL,
-    left : Int32,
-    top : Int32,
-    right : Int32,
-    bottom : Int32
+  struct RECTL
+    property left : Int32
+    property top : Int32
+    property right : Int32
+    property bottom : Int32
+    def initialize(@left : Int32, @top : Int32, @right : Int32, @bottom : Int32)
+    end
+  end
 
   @[Extern]
-  record POINT,
-    x : Int32,
-    y : Int32
+  struct POINT
+    property x : Int32
+    property y : Int32
+    def initialize(@x : Int32, @y : Int32)
+    end
+  end
 
   @[Extern]
-  record POINTL,
-    x : Int32,
-    y : Int32
+  struct POINTL
+    property x : Int32
+    property y : Int32
+    def initialize(@x : Int32, @y : Int32)
+    end
+  end
 
   @[Extern]
-  record SIZE,
-    cx : Int32,
-    cy : Int32
+  struct SIZE
+    property cx : Int32
+    property cy : Int32
+    def initialize(@cx : Int32, @cy : Int32)
+    end
+  end
 
   @[Extern]
-  record POINTS,
-    x : Int16,
-    y : Int16
+  struct POINTS
+    property x : Int16
+    property y : Int16
+    def initialize(@x : Int16, @y : Int16)
+    end
+  end
 
   @[Extern]
-  record APP_LOCAL_DEVICE_ID,
-    value : UInt8[32]
+  struct APP_LOCAL_DEVICE_ID
+    property value : UInt8[32]
+    def initialize(@value : UInt8[32])
+    end
+  end
 
   @[Extern]
-  record UNICODE_STRING,
-    length : UInt16,
-    maximum_length : UInt16,
-    buffer : Win32cr::Foundation::PWSTR
+  struct UNICODE_STRING
+    property length : UInt16
+    property maximum_length : UInt16
+    property buffer : Win32cr::Foundation::PWSTR
+    def initialize(@length : UInt16, @maximum_length : UInt16, @buffer : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record FLOAT128,
-    low_part : Int64,
-    high_part : Int64
+  struct FLOAT128
+    property low_part : Int64
+    property high_part : Int64
+    def initialize(@low_part : Int64, @high_part : Int64)
+    end
+  end
 
   @[Extern(union: true)]
-  record LARGE_INTEGER,
-    anonymous : Anonymous_e__Struct_,
-    u : U_e__struct_,
-    quad_part : Int64 do
+  struct LARGE_INTEGER
+    property anonymous : Anonymous_e__Struct_
+    property u : U_e__struct_
+    property quad_part : Int64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      low_part : UInt32,
-      high_part : Int32
+    struct Anonymous_e__Struct_
+    property low_part : UInt32
+    property high_part : Int32
+    def initialize(@low_part : UInt32, @high_part : Int32)
+    end
+    end
 
 
     # Nested Type U_e__struct_
     @[Extern]
-    record U_e__struct_,
-      low_part : UInt32,
-      high_part : Int32
+    struct U_e__struct_
+    property low_part : UInt32
+    property high_part : Int32
+    def initialize(@low_part : UInt32, @high_part : Int32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @u : U_e__struct_, @quad_part : Int64)
+    end
   end
 
   @[Extern(union: true)]
-  record ULARGE_INTEGER,
-    anonymous : Anonymous_e__Struct_,
-    u : U_e__struct_,
-    quad_part : UInt64 do
+  struct ULARGE_INTEGER
+    property anonymous : Anonymous_e__Struct_
+    property u : U_e__struct_
+    property quad_part : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      low_part : UInt32,
-      high_part : UInt32
+    struct Anonymous_e__Struct_
+    property low_part : UInt32
+    property high_part : UInt32
+    def initialize(@low_part : UInt32, @high_part : UInt32)
+    end
+    end
 
 
     # Nested Type U_e__struct_
     @[Extern]
-    record U_e__struct_,
-      low_part : UInt32,
-      high_part : UInt32
+    struct U_e__struct_
+    property low_part : UInt32
+    property high_part : UInt32
+    def initialize(@low_part : UInt32, @high_part : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @u : U_e__struct_, @quad_part : UInt64)
+    end
   end
 
   @[Extern]
-  record LUID,
-    low_part : UInt32,
-    high_part : Int32
+  struct LUID
+    property low_part : UInt32
+    property high_part : Int32
+    def initialize(@low_part : UInt32, @high_part : Int32)
+    end
+  end
 
   @[Link("oleaut32")]
   @[Link("kernel32")]

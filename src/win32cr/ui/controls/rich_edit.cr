@@ -9,15 +9,15 @@ require "./../../graphics/direct2_d.cr"
 require "./../../system/com/structured_storage.cr"
 
 module Win32cr::UI::Controls::RichEdit
-  alias AutoCorrectProc = Proc(UInt16, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Int32, Int32*, Int32)*
+  alias AutoCorrectProc = Proc(UInt16, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Int32, Int32*, Int32)
 
-  alias EDITWORDBREAKPROCEX = Proc(Win32cr::Foundation::PSTR, Int32, UInt8, Int32, Int32)*
+  alias EDITWORDBREAKPROCEX = Proc(Win32cr::Foundation::PSTR, Int32, UInt8, Int32, Int32)
 
-  alias EDITSTREAMCALLBACK = Proc(LibC::UIntPtrT, UInt8*, Int32, Int32*, UInt32)*
+  alias EDITSTREAMCALLBACK = Proc(LibC::UIntPtrT, UInt8*, Int32, Int32*, UInt32)
 
-  alias PCreateTextServices = Proc(Void*, Void*, Void**, Win32cr::Foundation::HRESULT)*
+  alias PCreateTextServices = Proc(Void*, Void*, Void**, Win32cr::Foundation::HRESULT)
 
-  alias PShutdownTextServices = Proc(Void*, Win32cr::Foundation::HRESULT)*
+  alias PShutdownTextServices = Proc(Void*, Win32cr::Foundation::HRESULT)
 
   Cchtextlimitdefault = 32767_u32
   MSFTEDIT_CLASS = "RICHEDIT50W"
@@ -1369,376 +1369,520 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record IMECOMPTEXT,
-    cb : Int32,
-    flags : Win32cr::UI::Controls::RichEdit::IMECOMPTEXT_FLAGS
-
-  @[Extern]
-  record TABLEROWPARMS,
-    cbRow : UInt8,
-    cbCell : UInt8,
-    cCell : UInt8,
-    cRow : UInt8,
-    dxCellMargin : Int32,
-    dxIndent : Int32,
-    dyHeight : Int32,
-    _bitfield : UInt32,
-    cpStartRow : Int32,
-    bTableLevel : UInt8,
-    iCell : UInt8
-
-  @[Extern]
-  record TABLECELLPARMS,
-    dxWidth : Int32,
-    _bitfield : UInt16,
-    wShading : UInt16,
-    dxBrdrLeft : Int16,
-    dyBrdrTop : Int16,
-    dxBrdrRight : Int16,
-    dyBrdrBottom : Int16,
-    crBrdrLeft : UInt32,
-    crBrdrTop : UInt32,
-    crBrdrRight : UInt32,
-    crBrdrBottom : UInt32,
-    crBackPat : UInt32,
-    crForePat : UInt32
-
-  @[Extern]
-  record RICHEDIT_IMAGE_PARAMETERS,
-    xWidth : Int32,
-    yHeight : Int32,
-    ascent : Int32,
-    type__ : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS,
-    pwszAlternateText : Win32cr::Foundation::PWSTR,
-    pIStream : Void*
-
-  @[Extern]
-  record ENDCOMPOSITIONNOTIFY,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    dwCode : Win32cr::UI::Controls::RichEdit::ENDCOMPOSITIONNOTIFY_CODE
-
-  @[Extern]
-  record CHARFORMATA,
-    cbSize : UInt32,
-    dwMask : Win32cr::UI::Controls::RichEdit::CFM_MASK,
-    dwEffects : Win32cr::UI::Controls::RichEdit::CFE_EFFECTS,
-    yHeight : Int32,
-    yOffset : Int32,
-    crTextColor : UInt32,
-    bCharSet : UInt8,
-    bPitchAndFamily : UInt8,
-    szFaceName : Win32cr::Foundation::CHAR[32]
-
-  @[Extern]
-  record CHARFORMATW,
-    cbSize : UInt32,
-    dwMask : Win32cr::UI::Controls::RichEdit::CFM_MASK,
-    dwEffects : Win32cr::UI::Controls::RichEdit::CFE_EFFECTS,
-    yHeight : Int32,
-    yOffset : Int32,
-    crTextColor : UInt32,
-    bCharSet : UInt8,
-    bPitchAndFamily : UInt8,
-    szFaceName : UInt16[32]
-
-  @[Extern]
-  record CHARFORMAT2W,
-    __anonymous_base_richedit_l711_c23 : Win32cr::UI::Controls::RichEdit::CHARFORMATW,
-    wWeight : UInt16,
-    sSpacing : Int16,
-    crBackColor : UInt32,
-    lcid : UInt32,
-    anonymous : Anonymous_e__Union_,
-    sStyle : Int16,
-    wKerning : UInt16,
-    bUnderlineType : UInt8,
-    bAnimation : UInt8,
-    bRevAuthor : UInt8,
-    bUnderlineColor : UInt8 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwReserved : UInt32,
-      dwCookie : UInt32
-
+  struct IMECOMPTEXT
+    property cb : Int32
+    property flags : Win32cr::UI::Controls::RichEdit::IMECOMPTEXT_FLAGS
+    def initialize(@cb : Int32, @flags : Win32cr::UI::Controls::RichEdit::IMECOMPTEXT_FLAGS)
+    end
   end
 
   @[Extern]
-  record CHARFORMAT2A,
-    __anonymous_base_richedit_l736_c23 : Win32cr::UI::Controls::RichEdit::CHARFORMATA,
-    wWeight : UInt16,
-    sSpacing : Int16,
-    crBackColor : UInt32,
-    lcid : UInt32,
-    anonymous : Anonymous_e__Union_,
-    sStyle : Int16,
-    wKerning : UInt16,
-    bUnderlineType : UInt8,
-    bAnimation : UInt8,
-    bRevAuthor : UInt8,
-    bUnderlineColor : UInt8 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwReserved : UInt32,
-      dwCookie : UInt32
-
+  struct TABLEROWPARMS
+    property cbRow : UInt8
+    property cbCell : UInt8
+    property cCell : UInt8
+    property cRow : UInt8
+    property dxCellMargin : Int32
+    property dxIndent : Int32
+    property dyHeight : Int32
+    property _bitfield : UInt32
+    property cpStartRow : Int32
+    property bTableLevel : UInt8
+    property iCell : UInt8
+    def initialize(@cbRow : UInt8, @cbCell : UInt8, @cCell : UInt8, @cRow : UInt8, @dxCellMargin : Int32, @dxIndent : Int32, @dyHeight : Int32, @_bitfield : UInt32, @cpStartRow : Int32, @bTableLevel : UInt8, @iCell : UInt8)
+    end
   end
 
   @[Extern]
-  record CHARRANGE,
-    cpMin : Int32,
-    cpMax : Int32
-
-  @[Extern]
-  record TEXTRANGEA,
-    chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE,
-    lpstrText : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record TEXTRANGEW,
-    chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE,
-    lpstrText : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record EDITSTREAM,
-    dwCookie : LibC::UIntPtrT,
-    dwError : UInt32,
-    pfnCallback : Win32cr::UI::Controls::RichEdit::EDITSTREAMCALLBACK
-
-  @[Extern]
-  record FINDTEXTA,
-    chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE,
-    lpstrText : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record FINDTEXTW,
-    chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE,
-    lpstrText : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record FINDTEXTEXA,
-    chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE,
-    lpstrText : Win32cr::Foundation::PSTR,
-    chrgText : Win32cr::UI::Controls::RichEdit::CHARRANGE
-
-  @[Extern]
-  record FINDTEXTEXW,
-    chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE,
-    lpstrText : Win32cr::Foundation::PWSTR,
-    chrgText : Win32cr::UI::Controls::RichEdit::CHARRANGE
-
-  @[Extern]
-  record FORMATRANGE,
-    hdc : Win32cr::Graphics::Gdi::HDC,
-    hdcTarget : Win32cr::Graphics::Gdi::HDC,
-    rc : Win32cr::Foundation::RECT,
-    rcPage : Win32cr::Foundation::RECT,
-    chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
-
-  @[Extern]
-  record PARAFORMAT,
-    cbSize : UInt32,
-    dwMask : Win32cr::UI::Controls::RichEdit::PARAFORMAT_MASK,
-    wNumbering : UInt16,
-    anonymous : Anonymous_e__Union_,
-    dxStartIndent : Int32,
-    dxRightIndent : Int32,
-    dxOffset : Int32,
-    wAlignment : Win32cr::UI::Controls::RichEdit::PARAFORMAT_ALIGNMENT,
-    cTabCount : Int16,
-    rgxTabs : UInt32[32] do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      wReserved : UInt16,
-      wEffects : UInt16
-
+  struct TABLECELLPARMS
+    property dxWidth : Int32
+    property _bitfield : UInt16
+    property wShading : UInt16
+    property dxBrdrLeft : Int16
+    property dyBrdrTop : Int16
+    property dxBrdrRight : Int16
+    property dyBrdrBottom : Int16
+    property crBrdrLeft : UInt32
+    property crBrdrTop : UInt32
+    property crBrdrRight : UInt32
+    property crBrdrBottom : UInt32
+    property crBackPat : UInt32
+    property crForePat : UInt32
+    def initialize(@dxWidth : Int32, @_bitfield : UInt16, @wShading : UInt16, @dxBrdrLeft : Int16, @dyBrdrTop : Int16, @dxBrdrRight : Int16, @dyBrdrBottom : Int16, @crBrdrLeft : UInt32, @crBrdrTop : UInt32, @crBrdrRight : UInt32, @crBrdrBottom : UInt32, @crBackPat : UInt32, @crForePat : UInt32)
+    end
   end
 
   @[Extern]
-  record PARAFORMAT2,
-    __anonymous_base_richedit_l1149_c22 : Win32cr::UI::Controls::RichEdit::PARAFORMAT,
-    dySpaceBefore : Int32,
-    dySpaceAfter : Int32,
-    dyLineSpacing : Int32,
-    sStyle : Int16,
-    bLineSpacingRule : UInt8,
-    bOutlineLevel : UInt8,
-    wShadingWeight : UInt16,
-    wShadingStyle : Win32cr::UI::Controls::RichEdit::PARAFORMAT_SHADING_STYLE,
-    wNumberingStart : UInt16,
-    wNumberingStyle : Win32cr::UI::Controls::RichEdit::PARAFORMAT_NUMBERING_STYLE,
-    wNumberingTab : UInt16,
-    wBorderSpace : UInt16,
-    wBorderWidth : UInt16,
-    wBorders : Win32cr::UI::Controls::RichEdit::PARAFORMAT_BORDERS
+  struct RICHEDIT_IMAGE_PARAMETERS
+    property xWidth : Int32
+    property yHeight : Int32
+    property ascent : Int32
+    property type__ : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS
+    property pwszAlternateText : Win32cr::Foundation::PWSTR
+    property pIStream : Void*
+    def initialize(@xWidth : Int32, @yHeight : Int32, @ascent : Int32, @type__ : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS, @pwszAlternateText : Win32cr::Foundation::PWSTR, @pIStream : Void*)
+    end
+  end
 
   @[Extern]
-  record MSGFILTER,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    msg : UInt32,
-    wParam : Win32cr::Foundation::WPARAM,
-    lParam : Win32cr::Foundation::LPARAM
+  struct ENDCOMPOSITIONNOTIFY
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property dwCode : Win32cr::UI::Controls::RichEdit::ENDCOMPOSITIONNOTIFY_CODE
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @dwCode : Win32cr::UI::Controls::RichEdit::ENDCOMPOSITIONNOTIFY_CODE)
+    end
+  end
 
   @[Extern]
-  record REQRESIZE,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    rc : Win32cr::Foundation::RECT
+  struct CHARFORMATA
+    property cbSize : UInt32
+    property dwMask : Win32cr::UI::Controls::RichEdit::CFM_MASK
+    property dwEffects : Win32cr::UI::Controls::RichEdit::CFE_EFFECTS
+    property yHeight : Int32
+    property yOffset : Int32
+    property crTextColor : UInt32
+    property bCharSet : UInt8
+    property bPitchAndFamily : UInt8
+    property szFaceName : Win32cr::Foundation::CHAR[32]
+    def initialize(@cbSize : UInt32, @dwMask : Win32cr::UI::Controls::RichEdit::CFM_MASK, @dwEffects : Win32cr::UI::Controls::RichEdit::CFE_EFFECTS, @yHeight : Int32, @yOffset : Int32, @crTextColor : UInt32, @bCharSet : UInt8, @bPitchAndFamily : UInt8, @szFaceName : Win32cr::Foundation::CHAR[32])
+    end
+  end
 
   @[Extern]
-  record SELCHANGE,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE,
-    seltyp : Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE
+  struct CHARFORMATW
+    property cbSize : UInt32
+    property dwMask : Win32cr::UI::Controls::RichEdit::CFM_MASK
+    property dwEffects : Win32cr::UI::Controls::RichEdit::CFE_EFFECTS
+    property yHeight : Int32
+    property yOffset : Int32
+    property crTextColor : UInt32
+    property bCharSet : UInt8
+    property bPitchAndFamily : UInt8
+    property szFaceName : UInt16[32]
+    def initialize(@cbSize : UInt32, @dwMask : Win32cr::UI::Controls::RichEdit::CFM_MASK, @dwEffects : Win32cr::UI::Controls::RichEdit::CFE_EFFECTS, @yHeight : Int32, @yOffset : Int32, @crTextColor : UInt32, @bCharSet : UInt8, @bPitchAndFamily : UInt8, @szFaceName : UInt16[32])
+    end
+  end
 
   @[Extern]
-  record Grouptypingchange_,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    fGroupTyping : Win32cr::Foundation::BOOL
+  struct CHARFORMAT2W
+    property __anonymous_base_richedit_l711_c23 : Win32cr::UI::Controls::RichEdit::CHARFORMATW
+    property wWeight : UInt16
+    property sSpacing : Int16
+    property crBackColor : UInt32
+    property lcid : UInt32
+    property anonymous : Anonymous_e__Union_
+    property sStyle : Int16
+    property wKerning : UInt16
+    property bUnderlineType : UInt8
+    property bAnimation : UInt8
+    property bRevAuthor : UInt8
+    property bUnderlineColor : UInt8
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dwReserved : UInt32
+    property dwCookie : UInt32
+    def initialize(@dwReserved : UInt32, @dwCookie : UInt32)
+    end
+    end
+
+    def initialize(@__anonymous_base_richedit_l711_c23 : Win32cr::UI::Controls::RichEdit::CHARFORMATW, @wWeight : UInt16, @sSpacing : Int16, @crBackColor : UInt32, @lcid : UInt32, @anonymous : Anonymous_e__Union_, @sStyle : Int16, @wKerning : UInt16, @bUnderlineType : UInt8, @bAnimation : UInt8, @bRevAuthor : UInt8, @bUnderlineColor : UInt8)
+    end
+  end
 
   @[Extern]
-  record CLIPBOARDFORMAT,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    cf : UInt16
+  struct CHARFORMAT2A
+    property __anonymous_base_richedit_l736_c23 : Win32cr::UI::Controls::RichEdit::CHARFORMATA
+    property wWeight : UInt16
+    property sSpacing : Int16
+    property crBackColor : UInt32
+    property lcid : UInt32
+    property anonymous : Anonymous_e__Union_
+    property sStyle : Int16
+    property wKerning : UInt16
+    property bUnderlineType : UInt8
+    property bAnimation : UInt8
+    property bRevAuthor : UInt8
+    property bUnderlineColor : UInt8
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dwReserved : UInt32
+    property dwCookie : UInt32
+    def initialize(@dwReserved : UInt32, @dwCookie : UInt32)
+    end
+    end
+
+    def initialize(@__anonymous_base_richedit_l736_c23 : Win32cr::UI::Controls::RichEdit::CHARFORMATA, @wWeight : UInt16, @sSpacing : Int16, @crBackColor : UInt32, @lcid : UInt32, @anonymous : Anonymous_e__Union_, @sStyle : Int16, @wKerning : UInt16, @bUnderlineType : UInt8, @bAnimation : UInt8, @bRevAuthor : UInt8, @bUnderlineColor : UInt8)
+    end
+  end
 
   @[Extern]
-  record GETCONTEXTMENUEX,
-    chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE,
-    dwFlags : UInt32,
-    pt : Win32cr::Foundation::POINT,
-    pvReserved : Void*
+  struct CHARRANGE
+    property cpMin : Int32
+    property cpMax : Int32
+    def initialize(@cpMin : Int32, @cpMax : Int32)
+    end
+  end
 
   @[Extern]
-  record ENDROPFILES,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    hDrop : Win32cr::Foundation::HANDLE,
-    cp : Int32,
-    fProtected : Win32cr::Foundation::BOOL
+  struct TEXTRANGEA
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property lpstrText : Win32cr::Foundation::PSTR
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record ENPROTECTED,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    msg : UInt32,
-    wParam : Win32cr::Foundation::WPARAM,
-    lParam : Win32cr::Foundation::LPARAM,
-    chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+  struct TEXTRANGEW
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property lpstrText : Win32cr::Foundation::PWSTR
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record ENSAVECLIPBOARD,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    cObjectCount : Int32,
-    cch : Int32
+  struct EDITSTREAM
+    property dwCookie : LibC::UIntPtrT
+    property dwError : UInt32
+    property pfnCallback : Win32cr::UI::Controls::RichEdit::EDITSTREAMCALLBACK
+    def initialize(@dwCookie : LibC::UIntPtrT, @dwError : UInt32, @pfnCallback : Win32cr::UI::Controls::RichEdit::EDITSTREAMCALLBACK)
+    end
+  end
 
   @[Extern]
-  record ENOLEOPFAILED,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    iob : Int32,
-    lOper : Int32,
-    hr : Win32cr::Foundation::HRESULT
+  struct FINDTEXTA
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property lpstrText : Win32cr::Foundation::PSTR
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record OBJECTPOSITIONS,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    cObjectCount : Int32,
-    pcpPositions : Int32*
+  struct FINDTEXTW
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property lpstrText : Win32cr::Foundation::PWSTR
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record ENLINK,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    msg : UInt32,
-    wParam : Win32cr::Foundation::WPARAM,
-    lParam : Win32cr::Foundation::LPARAM,
-    chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+  struct FINDTEXTEXA
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property lpstrText : Win32cr::Foundation::PSTR
+    property chrgText : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PSTR, @chrgText : Win32cr::UI::Controls::RichEdit::CHARRANGE)
+    end
+  end
 
   @[Extern]
-  record ENLOWFIRTF,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    szControl : Win32cr::Foundation::PSTR
+  struct FINDTEXTEXW
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property lpstrText : Win32cr::Foundation::PWSTR
+    property chrgText : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PWSTR, @chrgText : Win32cr::UI::Controls::RichEdit::CHARRANGE)
+    end
+  end
 
   @[Extern]
-  record ENCORRECTTEXT,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE,
-    seltyp : Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE
+  struct FORMATRANGE
+    property hdc : Win32cr::Graphics::Gdi::HDC
+    property hdcTarget : Win32cr::Graphics::Gdi::HDC
+    property rc : Win32cr::Foundation::RECT
+    property rcPage : Win32cr::Foundation::RECT
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    def initialize(@hdc : Win32cr::Graphics::Gdi::HDC, @hdcTarget : Win32cr::Graphics::Gdi::HDC, @rc : Win32cr::Foundation::RECT, @rcPage : Win32cr::Foundation::RECT, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE)
+    end
+  end
 
   @[Extern]
-  record PUNCTUATION,
-    iSize : UInt32,
-    szPunctuation : Win32cr::Foundation::PSTR
+  struct PARAFORMAT
+    property cbSize : UInt32
+    property dwMask : Win32cr::UI::Controls::RichEdit::PARAFORMAT_MASK
+    property wNumbering : UInt16
+    property anonymous : Anonymous_e__Union_
+    property dxStartIndent : Int32
+    property dxRightIndent : Int32
+    property dxOffset : Int32
+    property wAlignment : Win32cr::UI::Controls::RichEdit::PARAFORMAT_ALIGNMENT
+    property cTabCount : Int16
+    property rgxTabs : UInt32[32]
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property wReserved : UInt16
+    property wEffects : UInt16
+    def initialize(@wReserved : UInt16, @wEffects : UInt16)
+    end
+    end
+
+    def initialize(@cbSize : UInt32, @dwMask : Win32cr::UI::Controls::RichEdit::PARAFORMAT_MASK, @wNumbering : UInt16, @anonymous : Anonymous_e__Union_, @dxStartIndent : Int32, @dxRightIndent : Int32, @dxOffset : Int32, @wAlignment : Win32cr::UI::Controls::RichEdit::PARAFORMAT_ALIGNMENT, @cTabCount : Int16, @rgxTabs : UInt32[32])
+    end
+  end
 
   @[Extern]
-  record COMPCOLOR,
-    crText : UInt32,
-    crBackground : UInt32,
-    dwEffects : UInt32
+  struct PARAFORMAT2
+    property __anonymous_base_richedit_l1149_c22 : Win32cr::UI::Controls::RichEdit::PARAFORMAT
+    property dySpaceBefore : Int32
+    property dySpaceAfter : Int32
+    property dyLineSpacing : Int32
+    property sStyle : Int16
+    property bLineSpacingRule : UInt8
+    property bOutlineLevel : UInt8
+    property wShadingWeight : UInt16
+    property wShadingStyle : Win32cr::UI::Controls::RichEdit::PARAFORMAT_SHADING_STYLE
+    property wNumberingStart : UInt16
+    property wNumberingStyle : Win32cr::UI::Controls::RichEdit::PARAFORMAT_NUMBERING_STYLE
+    property wNumberingTab : UInt16
+    property wBorderSpace : UInt16
+    property wBorderWidth : UInt16
+    property wBorders : Win32cr::UI::Controls::RichEdit::PARAFORMAT_BORDERS
+    def initialize(@__anonymous_base_richedit_l1149_c22 : Win32cr::UI::Controls::RichEdit::PARAFORMAT, @dySpaceBefore : Int32, @dySpaceAfter : Int32, @dyLineSpacing : Int32, @sStyle : Int16, @bLineSpacingRule : UInt8, @bOutlineLevel : UInt8, @wShadingWeight : UInt16, @wShadingStyle : Win32cr::UI::Controls::RichEdit::PARAFORMAT_SHADING_STYLE, @wNumberingStart : UInt16, @wNumberingStyle : Win32cr::UI::Controls::RichEdit::PARAFORMAT_NUMBERING_STYLE, @wNumberingTab : UInt16, @wBorderSpace : UInt16, @wBorderWidth : UInt16, @wBorders : Win32cr::UI::Controls::RichEdit::PARAFORMAT_BORDERS)
+    end
+  end
 
   @[Extern]
-  record REPASTESPECIAL,
-    dwAspect : Win32cr::System::Com::DVASPECT,
-    dwParam : LibC::UIntPtrT
+  struct MSGFILTER
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property msg : UInt32
+    property wParam : Win32cr::Foundation::WPARAM
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @msg : UInt32, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record SETTEXTEX,
-    flags : UInt32,
-    codepage : UInt32
+  struct REQRESIZE
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @rc : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record GETTEXTEX,
-    cb : UInt32,
-    flags : Win32cr::UI::Controls::RichEdit::GETTEXTEX_FLAGS,
-    codepage : UInt32,
-    lpDefaultChar : Win32cr::Foundation::PSTR,
-    lpUsedDefChar : Int32*
+  struct SELCHANGE
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property seltyp : Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @seltyp : Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE)
+    end
+  end
 
   @[Extern]
-  record GETTEXTLENGTHEX,
-    flags : Win32cr::UI::Controls::RichEdit::GETTEXTLENGTHEX_FLAGS,
-    codepage : UInt32
+  struct Grouptypingchange_
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property fGroupTyping : Win32cr::Foundation::BOOL
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @fGroupTyping : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record BIDIOPTIONS,
-    cbSize : UInt32,
-    wMask : UInt16,
-    wEffects : UInt16
+  struct CLIPBOARDFORMAT
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property cf : UInt16
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @cf : UInt16)
+    end
+  end
 
   @[Extern]
-  record Hyphresult,
-    khyph : Win32cr::UI::Controls::RichEdit::KHYPH,
-    ichHyph : Int32,
-    chHyph : UInt16
+  struct GETCONTEXTMENUEX
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property dwFlags : UInt32
+    property pt : Win32cr::Foundation::POINT
+    property pvReserved : Void*
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @dwFlags : UInt32, @pt : Win32cr::Foundation::POINT, @pvReserved : Void*)
+    end
+  end
 
   @[Extern]
-  record HYPHENATEINFO,
-    cbSize : Int16,
-    dxHyphenateZone : Int16,
-    pfnHyphenate : LibC::IntPtrT
+  struct ENDROPFILES
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property hDrop : Win32cr::Foundation::HANDLE
+    property cp : Int32
+    property fProtected : Win32cr::Foundation::BOOL
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @hDrop : Win32cr::Foundation::HANDLE, @cp : Int32, @fProtected : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record CHANGENOTIFY,
-    dwChangeType : Win32cr::UI::Controls::RichEdit::CHANGETYPE,
-    pvCookieData : Void*
+  struct ENPROTECTED
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property msg : UInt32
+    property wParam : Win32cr::Foundation::WPARAM
+    property lParam : Win32cr::Foundation::LPARAM
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @msg : UInt32, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE)
+    end
+  end
+
+  @[Extern]
+  struct ENSAVECLIPBOARD
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property cObjectCount : Int32
+    property cch : Int32
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @cObjectCount : Int32, @cch : Int32)
+    end
+  end
+
+  @[Extern]
+  struct ENOLEOPFAILED
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property iob : Int32
+    property lOper : Int32
+    property hr : Win32cr::Foundation::HRESULT
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @iob : Int32, @lOper : Int32, @hr : Win32cr::Foundation::HRESULT)
+    end
+  end
+
+  @[Extern]
+  struct OBJECTPOSITIONS
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property cObjectCount : Int32
+    property pcpPositions : Int32*
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @cObjectCount : Int32, @pcpPositions : Int32*)
+    end
+  end
+
+  @[Extern]
+  struct ENLINK
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property msg : UInt32
+    property wParam : Win32cr::Foundation::WPARAM
+    property lParam : Win32cr::Foundation::LPARAM
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @msg : UInt32, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE)
+    end
+  end
+
+  @[Extern]
+  struct ENLOWFIRTF
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property szControl : Win32cr::Foundation::PSTR
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @szControl : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct ENCORRECTTEXT
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property seltyp : Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @seltyp : Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct PUNCTUATION
+    property iSize : UInt32
+    property szPunctuation : Win32cr::Foundation::PSTR
+    def initialize(@iSize : UInt32, @szPunctuation : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct COMPCOLOR
+    property crText : UInt32
+    property crBackground : UInt32
+    property dwEffects : UInt32
+    def initialize(@crText : UInt32, @crBackground : UInt32, @dwEffects : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct REPASTESPECIAL
+    property dwAspect : Win32cr::System::Com::DVASPECT
+    property dwParam : LibC::UIntPtrT
+    def initialize(@dwAspect : Win32cr::System::Com::DVASPECT, @dwParam : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct SETTEXTEX
+    property flags : UInt32
+    property codepage : UInt32
+    def initialize(@flags : UInt32, @codepage : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct GETTEXTEX
+    property cb : UInt32
+    property flags : Win32cr::UI::Controls::RichEdit::GETTEXTEX_FLAGS
+    property codepage : UInt32
+    property lpDefaultChar : Win32cr::Foundation::PSTR
+    property lpUsedDefChar : Int32*
+    def initialize(@cb : UInt32, @flags : Win32cr::UI::Controls::RichEdit::GETTEXTEX_FLAGS, @codepage : UInt32, @lpDefaultChar : Win32cr::Foundation::PSTR, @lpUsedDefChar : Int32*)
+    end
+  end
+
+  @[Extern]
+  struct GETTEXTLENGTHEX
+    property flags : Win32cr::UI::Controls::RichEdit::GETTEXTLENGTHEX_FLAGS
+    property codepage : UInt32
+    def initialize(@flags : Win32cr::UI::Controls::RichEdit::GETTEXTLENGTHEX_FLAGS, @codepage : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct BIDIOPTIONS
+    property cbSize : UInt32
+    property wMask : UInt16
+    property wEffects : UInt16
+    def initialize(@cbSize : UInt32, @wMask : UInt16, @wEffects : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct Hyphresult
+    property khyph : Win32cr::UI::Controls::RichEdit::KHYPH
+    property ichHyph : Int32
+    property chHyph : UInt16
+    def initialize(@khyph : Win32cr::UI::Controls::RichEdit::KHYPH, @ichHyph : Int32, @chHyph : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct HYPHENATEINFO
+    property cbSize : Int16
+    property dxHyphenateZone : Int16
+    property pfnHyphenate : LibC::IntPtrT
+    def initialize(@cbSize : Int16, @dxHyphenateZone : Int16, @pfnHyphenate : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct CHANGENOTIFY
+    property dwChangeType : Win32cr::UI::Controls::RichEdit::CHANGETYPE
+    property pvCookieData : Void*
+    def initialize(@dwChangeType : Win32cr::UI::Controls::RichEdit::CHANGETYPE, @pvCookieData : Void*)
+    end
+  end
 
   @[Extern(union: true)]
-  record CARET_INFO,
-    hbitmap : Win32cr::Graphics::Gdi::HBITMAP,
-    caretFlags : Win32cr::UI::Controls::RichEdit::CARET_FLAGS
+  struct CARET_INFO
+    property hbitmap : Win32cr::Graphics::Gdi::HBITMAP
+    property caretFlags : Win32cr::UI::Controls::RichEdit::CARET_FLAGS
+    def initialize(@hbitmap : Win32cr::Graphics::Gdi::HBITMAP, @caretFlags : Win32cr::UI::Controls::RichEdit::CARET_FLAGS)
+    end
+  end
 
   @[Extern]
-  record REOBJECT,
-    cbStruct : UInt32,
-    cp : Int32,
-    clsid : LibC::GUID,
-    poleobj : Void*,
-    pstg : Void*,
-    polesite : Void*,
-    sizel : Win32cr::Foundation::SIZE,
-    dvaspect : UInt32,
-    dwFlags : Win32cr::UI::Controls::RichEdit::REOBJECT_FLAGS,
-    dwUser : UInt32
+  struct REOBJECT
+    property cbStruct : UInt32
+    property cp : Int32
+    property clsid : LibC::GUID
+    property poleobj : Void*
+    property pstg : Void*
+    property polesite : Void*
+    property sizel : Win32cr::Foundation::SIZE
+    property dvaspect : UInt32
+    property dwFlags : Win32cr::UI::Controls::RichEdit::REOBJECT_FLAGS
+    property dwUser : UInt32
+    def initialize(@cbStruct : UInt32, @cp : Int32, @clsid : LibC::GUID, @poleobj : Void*, @pstg : Void*, @polesite : Void*, @sizel : Win32cr::Foundation::SIZE, @dvaspect : UInt32, @dwFlags : Win32cr::UI::Controls::RichEdit::REOBJECT_FLAGS, @dwUser : UInt32)
+    end
+  end
 
   @[Extern]
   record ITextServicesVtbl,
@@ -2390,7 +2534,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("00020d00-0000-0000-c000-000000000046")]
   record IRichEditOle, lpVtbl : IRichEditOleVtbl* do
     GUID = LibC::GUID.new(0x20d00_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IRichEditOle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2471,7 +2614,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("00020d03-0000-0000-c000-000000000046")]
   record IRichEditOleCallback, lpVtbl : IRichEditOleCallbackVtbl* do
     GUID = LibC::GUID.new(0x20d03_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IRichEditOleCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2547,7 +2689,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("8cc497c0-a1df-11ce-8098-00aa0047be5d")]
   record ITextDocument, lpVtbl : ITextDocumentVtbl* do
     GUID = LibC::GUID.new(0x8cc497c0_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
     def query_interface(this : ITextDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2694,7 +2835,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("8cc497c2-a1df-11ce-8098-00aa0047be5d")]
   record ITextRange, lpVtbl : ITextRangeVtbl* do
     GUID = LibC::GUID.new(0x8cc497c2_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
     def query_interface(this : ITextRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2947,7 +3087,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("8cc497c1-a1df-11ce-8098-00aa0047be5d")]
   record ITextSelection, lpVtbl : ITextSelectionVtbl* do
     GUID = LibC::GUID.new(0x8cc497c1_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
     def query_interface(this : ITextSelection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3224,7 +3363,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("8cc497c3-a1df-11ce-8098-00aa0047be5d")]
   record ITextFont, lpVtbl : ITextFontVtbl* do
     GUID = LibC::GUID.new(0x8cc497c3_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
     def query_interface(this : ITextFont*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3476,7 +3614,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("8cc497c4-a1df-11ce-8098-00aa0047be5d")]
   record ITextPara, lpVtbl : ITextParaVtbl* do
     GUID = LibC::GUID.new(0x8cc497c4_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
     def query_interface(this : ITextPara*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3662,7 +3799,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("8cc497c5-a1df-11ce-8098-00aa0047be5d")]
   record ITextStoryRanges, lpVtbl : ITextStoryRangesVtbl* do
     GUID = LibC::GUID.new(0x8cc497c5_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
     def query_interface(this : ITextStoryRanges*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3773,7 +3909,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("c241f5e0-7206-11d8-a2c7-00a0d1d6c6b3")]
   record ITextDocument2, lpVtbl : ITextDocument2Vtbl* do
     GUID = LibC::GUID.new(0xc241f5e0_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextDocument2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4102,7 +4237,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("c241f5e2-7206-11d8-a2c7-00a0d1d6c6b3")]
   record ITextRange2, lpVtbl : ITextRange2Vtbl* do
     GUID = LibC::GUID.new(0xc241f5e2_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextRange2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4545,7 +4679,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("c241f5e1-7206-11d8-a2c7-00a0d1d6c6b3")]
   record ITextSelection2, lpVtbl : ITextSelection2Vtbl* do
     GUID = LibC::GUID.new(0xc241f5e1_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextSelection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4988,7 +5121,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("c241f5e3-7206-11d8-a2c7-00a0d1d6c6b3")]
   record ITextFont2, lpVtbl : ITextFont2Vtbl* do
     GUID = LibC::GUID.new(0xc241f5e3_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextFont2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5394,7 +5526,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("c241f5e4-7206-11d8-a2c7-00a0d1d6c6b3")]
   record ITextPara2, lpVtbl : ITextPara2Vtbl* do
     GUID = LibC::GUID.new(0xc241f5e4_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextPara2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5629,7 +5760,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("c241f5e5-7206-11d8-a2c7-00a0d1d6c6b3")]
   record ITextStoryRanges2, lpVtbl : ITextStoryRanges2Vtbl* do
     GUID = LibC::GUID.new(0xc241f5e5_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextStoryRanges2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5688,7 +5818,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("c241f5f3-7206-11d8-a2c7-00a0d1d6c6b3")]
   record ITextStory, lpVtbl : ITextStoryVtbl* do
     GUID = LibC::GUID.new(0xc241f5f3_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextStory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5768,7 +5897,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("c241f5e7-7206-11d8-a2c7-00a0d1d6c6b3")]
   record ITextStrings, lpVtbl : ITextStringsVtbl* do
     GUID = LibC::GUID.new(0xc241f5e7_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextStrings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5904,7 +6032,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("c241f5ef-7206-11d8-a2c7-00a0d1d6c6b3")]
   record ITextRow, lpVtbl : ITextRowVtbl* do
     GUID = LibC::GUID.new(0xc241f5ef_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextRow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6081,7 +6208,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("c241f5f2-7206-11d8-a2c7-00a0d1d6c6b3")]
   record ITextDisplays, lpVtbl : ITextDisplaysVtbl* do
     GUID = LibC::GUID.new(0xc241f5f2_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextDisplays*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6163,7 +6289,6 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  #@[Com("01c25500-4268-11d1-883a-3c8b00c10000")]
   record ITextDocument2Old, lpVtbl : ITextDocument2OldVtbl* do
     GUID = LibC::GUID.new(0x1c25500_u32, 0x4268_u16, 0x11d1_u16, StaticArray[0x88_u8, 0x3a_u8, 0x3c_u8, 0x8b_u8, 0x0_u8, 0xc1_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ITextDocument2Old*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -737,117 +737,156 @@ module Win32cr::System::Com::Urlmon
   end
 
   @[Extern]
-  record REMSECURITY_ATTRIBUTES,
-    nLength : UInt32,
-    lpSecurityDescriptor : UInt32,
-    bInheritHandle : Win32cr::Foundation::BOOL
+  struct REMSECURITY_ATTRIBUTES
+    property nLength : UInt32
+    property lpSecurityDescriptor : UInt32
+    property bInheritHandle : Win32cr::Foundation::BOOL
+    def initialize(@nLength : UInt32, @lpSecurityDescriptor : UInt32, @bInheritHandle : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record RemBINDINFO,
-    cbSize : UInt32,
-    szExtraInfo : Win32cr::Foundation::PWSTR,
-    grfBindInfoF : UInt32,
-    dwBindVerb : UInt32,
-    szCustomVerb : Win32cr::Foundation::PWSTR,
-    cbstgmedData : UInt32,
-    dwOptions : UInt32,
-    dwOptionsFlags : UInt32,
-    dwCodePage : UInt32,
-    securityAttributes : Win32cr::System::Com::Urlmon::REMSECURITY_ATTRIBUTES,
-    iid : LibC::GUID,
-    pUnk : Void*,
-    dwReserved : UInt32
+  struct RemBINDINFO
+    property cbSize : UInt32
+    property szExtraInfo : Win32cr::Foundation::PWSTR
+    property grfBindInfoF : UInt32
+    property dwBindVerb : UInt32
+    property szCustomVerb : Win32cr::Foundation::PWSTR
+    property cbstgmedData : UInt32
+    property dwOptions : UInt32
+    property dwOptionsFlags : UInt32
+    property dwCodePage : UInt32
+    property securityAttributes : Win32cr::System::Com::Urlmon::REMSECURITY_ATTRIBUTES
+    property iid : LibC::GUID
+    property pUnk : Void*
+    property dwReserved : UInt32
+    def initialize(@cbSize : UInt32, @szExtraInfo : Win32cr::Foundation::PWSTR, @grfBindInfoF : UInt32, @dwBindVerb : UInt32, @szCustomVerb : Win32cr::Foundation::PWSTR, @cbstgmedData : UInt32, @dwOptions : UInt32, @dwOptionsFlags : UInt32, @dwCodePage : UInt32, @securityAttributes : Win32cr::System::Com::Urlmon::REMSECURITY_ATTRIBUTES, @iid : LibC::GUID, @pUnk : Void*, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record RemFORMATETC,
-    cfFormat : UInt32,
-    ptd : UInt32,
-    dwAspect : UInt32,
-    lindex : Int32,
-    tymed : UInt32
+  struct RemFORMATETC
+    property cfFormat : UInt32
+    property ptd : UInt32
+    property dwAspect : UInt32
+    property lindex : Int32
+    property tymed : UInt32
+    def initialize(@cfFormat : UInt32, @ptd : UInt32, @dwAspect : UInt32, @lindex : Int32, @tymed : UInt32)
+    end
+  end
 
   @[Extern]
-  record PROTOCOLDATA,
-    grfFlags : UInt32,
-    dwState : UInt32,
-    pData : Void*,
-    cbData : UInt32
+  struct PROTOCOLDATA
+    property grfFlags : UInt32
+    property dwState : UInt32
+    property pData : Void*
+    property cbData : UInt32
+    def initialize(@grfFlags : UInt32, @dwState : UInt32, @pData : Void*, @cbData : UInt32)
+    end
+  end
 
   @[Extern]
-  record StartParam,
-    iid : LibC::GUID,
-    pIBindCtx : Void*,
-    pItf : Void*
+  struct StartParam
+    property iid : LibC::GUID
+    property pIBindCtx : Void*
+    property pItf : Void*
+    def initialize(@iid : LibC::GUID, @pIBindCtx : Void*, @pItf : Void*)
+    end
+  end
 
   @[Extern]
-  record ZONEATTRIBUTES,
-    cbSize : UInt32,
-    szDisplayName : UInt16[260],
-    szDescription : UInt16[200],
-    szIconPath : UInt16[260],
-    dwTemplateMinLevel : UInt32,
-    dwTemplateRecommended : UInt32,
-    dwTemplateCurrentLevel : UInt32,
-    dwFlags : UInt32
+  struct ZONEATTRIBUTES
+    property cbSize : UInt32
+    property szDisplayName : UInt16[260]
+    property szDescription : UInt16[200]
+    property szIconPath : UInt16[260]
+    property dwTemplateMinLevel : UInt32
+    property dwTemplateRecommended : UInt32
+    property dwTemplateCurrentLevel : UInt32
+    property dwFlags : UInt32
+    def initialize(@cbSize : UInt32, @szDisplayName : UInt16[260], @szDescription : UInt16[200], @szIconPath : UInt16[260], @dwTemplateMinLevel : UInt32, @dwTemplateRecommended : UInt32, @dwTemplateCurrentLevel : UInt32, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record CODEBASEHOLD,
-    cbSize : UInt32,
-    szDistUnit : Win32cr::Foundation::PWSTR,
-    szCodeBase : Win32cr::Foundation::PWSTR,
-    dwVersionMS : UInt32,
-    dwVersionLS : UInt32,
-    dwStyle : UInt32
+  struct CODEBASEHOLD
+    property cbSize : UInt32
+    property szDistUnit : Win32cr::Foundation::PWSTR
+    property szCodeBase : Win32cr::Foundation::PWSTR
+    property dwVersionMS : UInt32
+    property dwVersionLS : UInt32
+    property dwStyle : UInt32
+    def initialize(@cbSize : UInt32, @szDistUnit : Win32cr::Foundation::PWSTR, @szCodeBase : Win32cr::Foundation::PWSTR, @dwVersionMS : UInt32, @dwVersionLS : UInt32, @dwStyle : UInt32)
+    end
+  end
 
   @[Extern]
-  record SOFTDISTINFO,
-    cbSize : UInt32,
-    dwFlags : UInt32,
-    dwAdState : UInt32,
-    szTitle : Win32cr::Foundation::PWSTR,
-    szAbstract : Win32cr::Foundation::PWSTR,
-    szHREF : Win32cr::Foundation::PWSTR,
-    dwInstalledVersionMS : UInt32,
-    dwInstalledVersionLS : UInt32,
-    dwUpdateVersionMS : UInt32,
-    dwUpdateVersionLS : UInt32,
-    dwAdvertisedVersionMS : UInt32,
-    dwAdvertisedVersionLS : UInt32,
-    dwReserved : UInt32
+  struct SOFTDISTINFO
+    property cbSize : UInt32
+    property dwFlags : UInt32
+    property dwAdState : UInt32
+    property szTitle : Win32cr::Foundation::PWSTR
+    property szAbstract : Win32cr::Foundation::PWSTR
+    property szHREF : Win32cr::Foundation::PWSTR
+    property dwInstalledVersionMS : UInt32
+    property dwInstalledVersionLS : UInt32
+    property dwUpdateVersionMS : UInt32
+    property dwUpdateVersionLS : UInt32
+    property dwAdvertisedVersionMS : UInt32
+    property dwAdvertisedVersionLS : UInt32
+    property dwReserved : UInt32
+    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @dwAdState : UInt32, @szTitle : Win32cr::Foundation::PWSTR, @szAbstract : Win32cr::Foundation::PWSTR, @szHREF : Win32cr::Foundation::PWSTR, @dwInstalledVersionMS : UInt32, @dwInstalledVersionLS : UInt32, @dwUpdateVersionMS : UInt32, @dwUpdateVersionLS : UInt32, @dwAdvertisedVersionMS : UInt32, @dwAdvertisedVersionLS : UInt32, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record PROTOCOLFILTERDATA,
-    cbSize : UInt32,
-    pProtocolSink : Void*,
-    pProtocol : Void*,
-    pUnk : Void*,
-    dwFilterFlags : UInt32
+  struct PROTOCOLFILTERDATA
+    property cbSize : UInt32
+    property pProtocolSink : Void*
+    property pProtocol : Void*
+    property pUnk : Void*
+    property dwFilterFlags : UInt32
+    def initialize(@cbSize : UInt32, @pProtocolSink : Void*, @pProtocol : Void*, @pUnk : Void*, @dwFilterFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DATAINFO,
-    ulTotalSize : UInt32,
-    ulavrPacketSize : UInt32,
-    ulConnectSpeed : UInt32,
-    ulProcessorSpeed : UInt32
+  struct DATAINFO
+    property ulTotalSize : UInt32
+    property ulavrPacketSize : UInt32
+    property ulConnectSpeed : UInt32
+    property ulProcessorSpeed : UInt32
+    def initialize(@ulTotalSize : UInt32, @ulavrPacketSize : UInt32, @ulConnectSpeed : UInt32, @ulProcessorSpeed : UInt32)
+    end
+  end
 
   @[Extern]
-  record HIT_LOGGING_INFO,
-    dwStructSize : UInt32,
-    lpszLoggedUrlName : Win32cr::Foundation::PSTR,
-    start_time : Win32cr::Foundation::SYSTEMTIME,
-    end_time : Win32cr::Foundation::SYSTEMTIME,
-    lpszExtendedInfo : Win32cr::Foundation::PSTR
+  struct HIT_LOGGING_INFO
+    property dwStructSize : UInt32
+    property lpszLoggedUrlName : Win32cr::Foundation::PSTR
+    property start_time : Win32cr::Foundation::SYSTEMTIME
+    property end_time : Win32cr::Foundation::SYSTEMTIME
+    property lpszExtendedInfo : Win32cr::Foundation::PSTR
+    def initialize(@dwStructSize : UInt32, @lpszLoggedUrlName : Win32cr::Foundation::PSTR, @start_time : Win32cr::Foundation::SYSTEMTIME, @end_time : Win32cr::Foundation::SYSTEMTIME, @lpszExtendedInfo : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record CONFIRMSAFETY,
-    clsid : LibC::GUID,
-    pUnk : Void*,
-    dwFlags : UInt32
+  struct CONFIRMSAFETY
+    property clsid : LibC::GUID
+    property pUnk : Void*
+    property dwFlags : UInt32
+    def initialize(@clsid : LibC::GUID, @pUnk : Void*, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record PROTOCOL_ARGUMENT,
-    szMethod : Win32cr::Foundation::PWSTR,
-    szTargetUrl : Win32cr::Foundation::PWSTR
+  struct PROTOCOL_ARGUMENT
+    property szMethod : Win32cr::Foundation::PWSTR
+    property szTargetUrl : Win32cr::Foundation::PWSTR
+    def initialize(@szMethod : Win32cr::Foundation::PWSTR, @szTargetUrl : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
   record IPersistMonikerVtbl,
@@ -863,7 +902,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9c9-baf9-11ce-8c82-00aa004ba90b")]
   record IPersistMoniker, lpVtbl : IPersistMonikerVtbl* do
     GUID = LibC::GUID.new(0x79eac9c9_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IPersistMoniker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -905,7 +943,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("a5ca5f7f-1847-4d87-9c5b-918509f7511d")]
   record IMonikerProp, lpVtbl : IMonikerPropVtbl* do
     GUID = LibC::GUID.new(0xa5ca5f7f_u32, 0x1847_u16, 0x4d87_u16, StaticArray[0x9c_u8, 0x5b_u8, 0x91_u8, 0x85_u8, 0x9_u8, 0xf7_u8, 0x51_u8, 0x1d_u8])
     def query_interface(this : IMonikerProp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -932,7 +969,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9cd-baf9-11ce-8c82-00aa004ba90b")]
   record IBindProtocol, lpVtbl : IBindProtocolVtbl* do
     GUID = LibC::GUID.new(0x79eac9cd_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IBindProtocol*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -960,7 +996,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9d2-baf9-11ce-8c82-00aa004ba90b")]
   record IHttpNegotiate, lpVtbl : IHttpNegotiateVtbl* do
     GUID = LibC::GUID.new(0x79eac9d2_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IHttpNegotiate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -992,7 +1027,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("4f9f9fcb-e0f4-48eb-b7ab-fa2ea9365cb4")]
   record IHttpNegotiate2, lpVtbl : IHttpNegotiate2Vtbl* do
     GUID = LibC::GUID.new(0x4f9f9fcb_u32, 0xe0f4_u16, 0x48eb_u16, StaticArray[0xb7_u8, 0xab_u8, 0xfa_u8, 0x2e_u8, 0xa9_u8, 0x36_u8, 0x5c_u8, 0xb4_u8])
     def query_interface(this : IHttpNegotiate2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1028,7 +1062,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("57b6c80a-34c2-4602-bc26-66a02fc57153")]
   record IHttpNegotiate3, lpVtbl : IHttpNegotiate3Vtbl* do
     GUID = LibC::GUID.new(0x57b6c80a_u32, 0x34c2_u16, 0x4602_u16, StaticArray[0xbc_u8, 0x26_u8, 0x66_u8, 0xa0_u8, 0x2f_u8, 0xc5_u8, 0x71_u8, 0x53_u8])
     def query_interface(this : IHttpNegotiate3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1065,7 +1098,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("f134c4b7-b1f8-4e75-b886-74b90943becb")]
   record IWinInetFileStream, lpVtbl : IWinInetFileStreamVtbl* do
     GUID = LibC::GUID.new(0xf134c4b7_u32, 0xb1f8_u16, 0x4e75_u16, StaticArray[0xb8_u8, 0x86_u8, 0x74_u8, 0xb9_u8, 0x9_u8, 0x43_u8, 0xbe_u8, 0xcb_u8])
     def query_interface(this : IWinInetFileStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1095,7 +1127,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9d5-bafa-11ce-8c82-00aa004ba90b")]
   record IWindowForBindingUI, lpVtbl : IWindowForBindingUIVtbl* do
     GUID = LibC::GUID.new(0x79eac9d5_u32, 0xbafa_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IWindowForBindingUI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1123,7 +1154,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9d1-baf9-11ce-8c82-00aa004ba90b")]
   record ICodeInstall, lpVtbl : ICodeInstallVtbl* do
     GUID = LibC::GUID.new(0x79eac9d1_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : ICodeInstall*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1153,7 +1183,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("a158a630-ed6f-45fb-b987-f68676f57752")]
   record IUriContainer, lpVtbl : IUriContainerVtbl* do
     GUID = LibC::GUID.new(0xa158a630_u32, 0xed6f_u16, 0x45fb_u16, StaticArray[0xb9_u8, 0x87_u8, 0xf6_u8, 0x86_u8, 0x76_u8, 0xf5_u8, 0x77_u8, 0x52_u8])
     def query_interface(this : IUriContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1181,7 +1210,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("e982ce48-0b96-440c-bc37-0c869b27a29e")]
   record IUriBuilderFactory, lpVtbl : IUriBuilderFactoryVtbl* do
     GUID = LibC::GUID.new(0xe982ce48_u32, 0xb96_u16, 0x440c_u16, StaticArray[0xbc_u8, 0x37_u8, 0xc_u8, 0x86_u8, 0x9b_u8, 0x27_u8, 0xa2_u8, 0x9e_u8])
     def query_interface(this : IUriBuilderFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1211,7 +1239,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9d6-bafa-11ce-8c82-00aa004ba90b")]
   record IWinInetInfo, lpVtbl : IWinInetInfoVtbl* do
     GUID = LibC::GUID.new(0x79eac9d6_u32, 0xbafa_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IWinInetInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1239,7 +1266,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9d7-bafa-11ce-8c82-00aa004ba90b")]
   record IHttpSecurity, lpVtbl : IHttpSecurityVtbl* do
     GUID = LibC::GUID.new(0x79eac9d7_u32, 0xbafa_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IHttpSecurity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1270,7 +1296,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9d8-bafa-11ce-8c82-00aa004ba90b")]
   record IWinInetHttpInfo, lpVtbl : IWinInetHttpInfoVtbl* do
     GUID = LibC::GUID.new(0x79eac9d8_u32, 0xbafa_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IWinInetHttpInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1300,7 +1325,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("f286fa56-c1fd-4270-8e67-b3eb790a81e8")]
   record IWinInetHttpTimeouts, lpVtbl : IWinInetHttpTimeoutsVtbl* do
     GUID = LibC::GUID.new(0xf286fa56_u32, 0xc1fd_u16, 0x4270_u16, StaticArray[0x8e_u8, 0x67_u8, 0xb3_u8, 0xeb_u8, 0x79_u8, 0xa_u8, 0x81_u8, 0xe8_u8])
     def query_interface(this : IWinInetHttpTimeouts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1327,7 +1351,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("dd1ec3b3-8391-4fdb-a9e6-347c3caaa7dd")]
   record IWinInetCacheHints, lpVtbl : IWinInetCacheHintsVtbl* do
     GUID = LibC::GUID.new(0xdd1ec3b3_u32, 0x8391_u16, 0x4fdb_u16, StaticArray[0xa9_u8, 0xe6_u8, 0x34_u8, 0x7c_u8, 0x3c_u8, 0xaa_u8, 0xa7_u8, 0xdd_u8])
     def query_interface(this : IWinInetCacheHints*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1355,7 +1378,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("7857aeac-d31f-49bf-884e-dd46df36780a")]
   record IWinInetCacheHints2, lpVtbl : IWinInetCacheHints2Vtbl* do
     GUID = LibC::GUID.new(0x7857aeac_u32, 0xd31f_u16, 0x49bf_u16, StaticArray[0x88_u8, 0x4e_u8, 0xdd_u8, 0x46_u8, 0xdf_u8, 0x36_u8, 0x78_u8, 0xa_u8])
     def query_interface(this : IWinInetCacheHints2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1384,7 +1406,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9e0-baf9-11ce-8c82-00aa004ba90b")]
   record IInternet, lpVtbl : IInternetVtbl* do
     GUID = LibC::GUID.new(0x79eac9e0_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IInternet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1409,7 +1430,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9e1-baf9-11ce-8c82-00aa004ba90b")]
   record IInternetBindInfo, lpVtbl : IInternetBindInfoVtbl* do
     GUID = LibC::GUID.new(0x79eac9e1_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IInternetBindInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1441,7 +1461,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("a3e015b7-a82c-4dcd-a150-569aeeed36ab")]
   record IInternetBindInfoEx, lpVtbl : IInternetBindInfoExVtbl* do
     GUID = LibC::GUID.new(0xa3e015b7_u32, 0xa82c_u16, 0x4dcd_u16, StaticArray[0xa1_u8, 0x50_u8, 0x56_u8, 0x9a_u8, 0xee_u8, 0xed_u8, 0x36_u8, 0xab_u8])
     def query_interface(this : IInternetBindInfoEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1479,7 +1498,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9e3-baf9-11ce-8c82-00aa004ba90b")]
   record IInternetProtocolRoot, lpVtbl : IInternetProtocolRootVtbl* do
     GUID = LibC::GUID.new(0x79eac9e3_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IInternetProtocolRoot*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1530,7 +1548,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9e4-baf9-11ce-8c82-00aa004ba90b")]
   record IInternetProtocol, lpVtbl : IInternetProtocolVtbl* do
     GUID = LibC::GUID.new(0x79eac9e4_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IInternetProtocol*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1594,7 +1611,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("c7a98e66-1010-492c-a1c8-c809e1f75905")]
   record IInternetProtocolEx, lpVtbl : IInternetProtocolExVtbl* do
     GUID = LibC::GUID.new(0xc7a98e66_u32, 0x1010_u16, 0x492c_u16, StaticArray[0xa1_u8, 0xc8_u8, 0xc8_u8, 0x9_u8, 0xe1_u8, 0xf7_u8, 0x59_u8, 0x5_u8])
     def query_interface(this : IInternetProtocolEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1654,7 +1670,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9e5-baf9-11ce-8c82-00aa004ba90b")]
   record IInternetProtocolSink, lpVtbl : IInternetProtocolSinkVtbl* do
     GUID = LibC::GUID.new(0x79eac9e5_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IInternetProtocolSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1692,7 +1707,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9f0-baf9-11ce-8c82-00aa004ba90b")]
   record IInternetProtocolSinkStackable, lpVtbl : IInternetProtocolSinkStackableVtbl* do
     GUID = LibC::GUID.new(0x79eac9f0_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IInternetProtocolSinkStackable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1731,7 +1745,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9e7-baf9-11ce-8c82-00aa004ba90b")]
   record IInternetSession, lpVtbl : IInternetSessionVtbl* do
     GUID = LibC::GUID.new(0x79eac9e7_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IInternetSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1777,7 +1790,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9e8-baf9-11ce-8c82-00aa004ba90b")]
   record IInternetThreadSwitch, lpVtbl : IInternetThreadSwitchVtbl* do
     GUID = LibC::GUID.new(0x79eac9e8_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IInternetThreadSwitch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1808,7 +1820,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9eb-baf9-11ce-8c82-00aa004ba90b")]
   record IInternetPriority, lpVtbl : IInternetPriorityVtbl* do
     GUID = LibC::GUID.new(0x79eac9eb_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IInternetPriority*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1841,7 +1852,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9ec-baf9-11ce-8c82-00aa004ba90b")]
   record IInternetProtocolInfo, lpVtbl : IInternetProtocolInfoVtbl* do
     GUID = LibC::GUID.new(0x79eac9ec_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IInternetProtocolInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1878,7 +1888,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9ed-baf9-11ce-8c82-00aa004ba90b")]
   record IInternetSecurityMgrSite, lpVtbl : IInternetSecurityMgrSiteVtbl* do
     GUID = LibC::GUID.new(0x79eac9ed_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IInternetSecurityMgrSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1915,7 +1924,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9ee-baf9-11ce-8c82-00aa004ba90b")]
   record IInternetSecurityManager, lpVtbl : IInternetSecurityManagerVtbl* do
     GUID = LibC::GUID.new(0x79eac9ee_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IInternetSecurityManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1971,7 +1979,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("f164edf1-cc7c-4f0d-9a94-34222625c393")]
   record IInternetSecurityManagerEx, lpVtbl : IInternetSecurityManagerExVtbl* do
     GUID = LibC::GUID.new(0xf164edf1_u32, 0xcc7c_u16, 0x4f0d_u16, StaticArray[0x9a_u8, 0x94_u8, 0x34_u8, 0x22_u8, 0x26_u8, 0x25_u8, 0xc3_u8, 0x93_u8])
     def query_interface(this : IInternetSecurityManagerEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2034,7 +2041,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("f1e50292-a795-4117-8e09-2b560a72ac60")]
   record IInternetSecurityManagerEx2, lpVtbl : IInternetSecurityManagerEx2Vtbl* do
     GUID = LibC::GUID.new(0xf1e50292_u32, 0xa795_u16, 0x4117_u16, StaticArray[0x8e_u8, 0x9_u8, 0x2b_u8, 0x56_u8, 0xa_u8, 0x72_u8, 0xac_u8, 0x60_u8])
     def query_interface(this : IInternetSecurityManagerEx2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2099,7 +2105,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("cd45f185-1b21-48e2-967b-ead743a8914e")]
   record IZoneIdentifier, lpVtbl : IZoneIdentifierVtbl* do
     GUID = LibC::GUID.new(0xcd45f185_u32, 0x1b21_u16, 0x48e2_u16, StaticArray[0x96_u8, 0x7b_u8, 0xea_u8, 0xd7_u8, 0x43_u8, 0xa8_u8, 0x91_u8, 0x4e_u8])
     def query_interface(this : IZoneIdentifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2140,7 +2145,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("eb5e760c-09ef-45c0-b510-70830ce31e6a")]
   record IZoneIdentifier2, lpVtbl : IZoneIdentifier2Vtbl* do
     GUID = LibC::GUID.new(0xeb5e760c_u32, 0x9ef_u16, 0x45c0_u16, StaticArray[0xb5_u8, 0x10_u8, 0x70_u8, 0x83_u8, 0xc_u8, 0xe3_u8, 0x1e_u8, 0x6a_u8])
     def query_interface(this : IZoneIdentifier2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2193,7 +2197,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("3af280b6-cb3f-11d0-891e-00c04fb6bfc4")]
   record IInternetHostSecurityManager, lpVtbl : IInternetHostSecurityManagerVtbl* do
     GUID = LibC::GUID.new(0x3af280b6_u32, 0xcb3f_u16, 0x11d0_u16, StaticArray[0x89_u8, 0x1e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xbf_u8, 0xc4_u8])
     def query_interface(this : IInternetHostSecurityManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2237,7 +2240,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("79eac9ef-baf9-11ce-8c82-00aa004ba90b")]
   record IInternetZoneManager, lpVtbl : IInternetZoneManagerVtbl* do
     GUID = LibC::GUID.new(0x79eac9ef_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IInternetZoneManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2310,7 +2312,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("a4c23339-8e06-431e-9bf4-7e711c085648")]
   record IInternetZoneManagerEx, lpVtbl : IInternetZoneManagerExVtbl* do
     GUID = LibC::GUID.new(0xa4c23339_u32, 0x8e06_u16, 0x431e_u16, StaticArray[0x9b_u8, 0xf4_u8, 0x7e_u8, 0x71_u8, 0x1c_u8, 0x8_u8, 0x56_u8, 0x48_u8])
     def query_interface(this : IInternetZoneManagerEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2393,7 +2394,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("edc17559-dd5d-4846-8eef-8becba5a4abf")]
   record IInternetZoneManagerEx2, lpVtbl : IInternetZoneManagerEx2Vtbl* do
     GUID = LibC::GUID.new(0xedc17559_u32, 0xdd5d_u16, 0x4846_u16, StaticArray[0x8e_u8, 0xef_u8, 0x8b_u8, 0xec_u8, 0xba_u8, 0x5a_u8, 0x4a_u8, 0xbf_u8])
     def query_interface(this : IInternetZoneManagerEx2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2474,7 +2474,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("b15b8dc1-c7e1-11d0-8680-00aa00bdcb71")]
   record ISoftDistExt, lpVtbl : ISoftDistExtVtbl* do
     GUID = LibC::GUID.new(0xb15b8dc1_u32, 0xc7e1_u16, 0x11d0_u16, StaticArray[0x86_u8, 0x80_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xcb_u8, 0x71_u8])
     def query_interface(this : ISoftDistExt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2511,7 +2510,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("711c7600-6b48-11d1-b403-00aa00b92af1")]
   record ICatalogFileInfo, lpVtbl : ICatalogFileInfoVtbl* do
     GUID = LibC::GUID.new(0x711c7600_u32, 0x6b48_u16, 0x11d1_u16, StaticArray[0xb4_u8, 0x3_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb9_u8, 0x2a_u8, 0xf1_u8])
     def query_interface(this : ICatalogFileInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2543,7 +2541,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("69d14c80-c18e-11d0-a9ce-006097942311")]
   record IDataFilter, lpVtbl : IDataFilterVtbl* do
     GUID = LibC::GUID.new(0x69d14c80_u32, 0xc18e_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0xce_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x94_u8, 0x23_u8, 0x11_u8])
     def query_interface(this : IDataFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2577,7 +2574,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("70bdde00-c18e-11d0-a9ce-006097942311")]
   record IEncodingFilterFactory, lpVtbl : IEncodingFilterFactoryVtbl* do
     GUID = LibC::GUID.new(0x70bdde00_u32, 0xc18e_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0xce_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x94_u8, 0x23_u8, 0x11_u8])
     def query_interface(this : IEncodingFilterFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2607,7 +2603,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("53c84785-8425-4dc5-971b-e58d9c19f9b6")]
   record IWrappedProtocol, lpVtbl : IWrappedProtocolVtbl* do
     GUID = LibC::GUID.new(0x53c84785_u32, 0x8425_u16, 0x4dc5_u16, StaticArray[0x97_u8, 0x1b_u8, 0xe5_u8, 0x8d_u8, 0x9c_u8, 0x19_u8, 0xf9_u8, 0xb6_u8])
     def query_interface(this : IWrappedProtocol*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2634,7 +2629,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("af0ff408-129d-4b20-91f0-02bd23d88352")]
   record IGetBindHandle, lpVtbl : IGetBindHandleVtbl* do
     GUID = LibC::GUID.new(0xaf0ff408_u32, 0x129d_u16, 0x4b20_u16, StaticArray[0x91_u8, 0xf0_u8, 0x2_u8, 0xbd_u8, 0x23_u8, 0xd8_u8, 0x83_u8, 0x52_u8])
     def query_interface(this : IGetBindHandle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2661,7 +2655,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("11c81bc2-121e-4ed5-b9c4-b430bd54f2c0")]
   record IBindCallbackRedirect, lpVtbl : IBindCallbackRedirectVtbl* do
     GUID = LibC::GUID.new(0x11c81bc2_u32, 0x121e_u16, 0x4ed5_u16, StaticArray[0xb9_u8, 0xc4_u8, 0xb4_u8, 0x30_u8, 0xbd_u8, 0x54_u8, 0xf2_u8, 0xc0_u8])
     def query_interface(this : IBindCallbackRedirect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2688,7 +2681,6 @@ module Win32cr::System::Com::Urlmon
 
 
   @[Extern]
-  #@[Com("a9eda967-f50e-4a33-b358-206f6ef3086d")]
   record IBindHttpSecurity, lpVtbl : IBindHttpSecurityVtbl* do
     GUID = LibC::GUID.new(0xa9eda967_u32, 0xf50e_u16, 0x4a33_u16, StaticArray[0xb3_u8, 0x58_u8, 0x20_u8, 0x6f_u8, 0x6e_u8, 0xf3_u8, 0x8_u8, 0x6d_u8])
     def query_interface(this : IBindHttpSecurity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

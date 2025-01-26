@@ -1,21 +1,21 @@
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::Dhcp
-  alias LPDHCP_CONTROL = Proc(UInt32, Void*, UInt32)*
+  alias LPDHCP_CONTROL = Proc(UInt32, Void*, UInt32)
 
-  alias LPDHCP_NEWPKT = Proc(UInt8**, UInt32*, UInt32, Void*, Void**, Int32*, UInt32)*
+  alias LPDHCP_NEWPKT = Proc(UInt8**, UInt32*, UInt32, Void*, Void**, Int32*, UInt32)
 
-  alias LPDHCP_DROP_SEND = Proc(UInt8**, UInt32*, UInt32, UInt32, Void*, Void*, UInt32)*
+  alias LPDHCP_DROP_SEND = Proc(UInt8**, UInt32*, UInt32, UInt32, Void*, Void*, UInt32)
 
-  alias LPDHCP_PROB = Proc(UInt8*, UInt32, UInt32, UInt32, UInt32, Void*, Void*, UInt32)*
+  alias LPDHCP_PROB = Proc(UInt8*, UInt32, UInt32, UInt32, UInt32, Void*, Void*, UInt32)
 
-  alias LPDHCP_GIVE_ADDRESS = Proc(UInt8*, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, Void*, Void*, UInt32)*
+  alias LPDHCP_GIVE_ADDRESS = Proc(UInt8*, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, Void*, Void*, UInt32)
 
-  alias LPDHCP_HANDLE_OPTIONS = Proc(UInt8*, UInt32, Void*, Void*, Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_OPTIONS*, UInt32)*
+  alias LPDHCP_HANDLE_OPTIONS = Proc(UInt8*, UInt32, Void*, Void*, Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_OPTIONS*, UInt32)
 
-  alias LPDHCP_DELETE_CLIENT = Proc(UInt32, UInt8*, UInt32, UInt32, UInt32, UInt32)*
+  alias LPDHCP_DELETE_CLIENT = Proc(UInt32, UInt8*, UInt32, UInt32, UInt32, UInt32)
 
-  alias LPDHCP_ENTRY_POINT_FUNC = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::NetworkManagement::Dhcp::DHCP_CALLOUT_TABLE*, UInt32)*
+  alias LPDHCP_ENTRY_POINT_FUNC = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::NetworkManagement::Dhcp::DHCP_CALLOUT_TABLE*, UInt32)
 
   OPTION_PAD = 0_u32
   OPTION_SUBNET_MASK = 1_u32
@@ -498,1204 +498,1634 @@ module Win32cr::NetworkManagement::Dhcp
   end
 
   @[Extern]
-  record DHCPV6CAPI_PARAMS,
-    flags : UInt32,
-    option_id : UInt32,
-    is_vendor : Win32cr::Foundation::BOOL,
-    data : UInt8*,
-    nBytesData : UInt32
+  struct DHCPV6CAPI_PARAMS
+    property flags : UInt32
+    property option_id : UInt32
+    property is_vendor : Win32cr::Foundation::BOOL
+    property data : UInt8*
+    property nBytesData : UInt32
+    def initialize(@flags : UInt32, @option_id : UInt32, @is_vendor : Win32cr::Foundation::BOOL, @data : UInt8*, @nBytesData : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCPV6CAPI_PARAMS_ARRAY,
-    nParams : UInt32,
-    params : Win32cr::NetworkManagement::Dhcp::DHCPV6CAPI_PARAMS*
+  struct DHCPV6CAPI_PARAMS_ARRAY
+    property nParams : UInt32
+    property params : Win32cr::NetworkManagement::Dhcp::DHCPV6CAPI_PARAMS*
+    def initialize(@nParams : UInt32, @params : Win32cr::NetworkManagement::Dhcp::DHCPV6CAPI_PARAMS*)
+    end
+  end
 
   @[Extern]
-  record DHCPV6CAPI_CLASSID,
-    flags : UInt32,
-    data : UInt8*,
-    nBytesData : UInt32
+  struct DHCPV6CAPI_CLASSID
+    property flags : UInt32
+    property data : UInt8*
+    property nBytesData : UInt32
+    def initialize(@flags : UInt32, @data : UInt8*, @nBytesData : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCPV6Prefix,
-    prefix : UInt8[16],
-    prefixLength : UInt32,
-    preferredLifeTime : UInt32,
-    validLifeTime : UInt32,
-    status : Win32cr::NetworkManagement::Dhcp::StatusCode
+  struct DHCPV6Prefix
+    property prefix : UInt8[16]
+    property prefixLength : UInt32
+    property preferredLifeTime : UInt32
+    property validLifeTime : UInt32
+    property status : Win32cr::NetworkManagement::Dhcp::StatusCode
+    def initialize(@prefix : UInt8[16], @prefixLength : UInt32, @preferredLifeTime : UInt32, @validLifeTime : UInt32, @status : Win32cr::NetworkManagement::Dhcp::StatusCode)
+    end
+  end
 
   @[Extern]
-  record DHCPV6PrefixLeaseInformation,
-    nPrefixes : UInt32,
-    prefixArray : Win32cr::NetworkManagement::Dhcp::DHCPV6Prefix*,
-    iaid : UInt32,
-    t1 : Int64,
-    t2 : Int64,
-    max_lease_expiration_time : Int64,
-    last_renewal_time : Int64,
-    status : Win32cr::NetworkManagement::Dhcp::StatusCode,
-    server_id : UInt8*,
-    server_id_len : UInt32
+  struct DHCPV6PrefixLeaseInformation
+    property nPrefixes : UInt32
+    property prefixArray : Win32cr::NetworkManagement::Dhcp::DHCPV6Prefix*
+    property iaid : UInt32
+    property t1 : Int64
+    property t2 : Int64
+    property max_lease_expiration_time : Int64
+    property last_renewal_time : Int64
+    property status : Win32cr::NetworkManagement::Dhcp::StatusCode
+    property server_id : UInt8*
+    property server_id_len : UInt32
+    def initialize(@nPrefixes : UInt32, @prefixArray : Win32cr::NetworkManagement::Dhcp::DHCPV6Prefix*, @iaid : UInt32, @t1 : Int64, @t2 : Int64, @max_lease_expiration_time : Int64, @last_renewal_time : Int64, @status : Win32cr::NetworkManagement::Dhcp::StatusCode, @server_id : UInt8*, @server_id_len : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCPAPI_PARAMS,
-    flags : UInt32,
-    option_id : UInt32,
-    is_vendor : Win32cr::Foundation::BOOL,
-    data : UInt8*,
-    nBytesData : UInt32
+  struct DHCPAPI_PARAMS
+    property flags : UInt32
+    property option_id : UInt32
+    property is_vendor : Win32cr::Foundation::BOOL
+    property data : UInt8*
+    property nBytesData : UInt32
+    def initialize(@flags : UInt32, @option_id : UInt32, @is_vendor : Win32cr::Foundation::BOOL, @data : UInt8*, @nBytesData : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCPCAPI_PARAMS_ARRAY,
-    nParams : UInt32,
-    params : Win32cr::NetworkManagement::Dhcp::DHCPAPI_PARAMS*
+  struct DHCPCAPI_PARAMS_ARRAY
+    property nParams : UInt32
+    property params : Win32cr::NetworkManagement::Dhcp::DHCPAPI_PARAMS*
+    def initialize(@nParams : UInt32, @params : Win32cr::NetworkManagement::Dhcp::DHCPAPI_PARAMS*)
+    end
+  end
 
   @[Extern]
-  record DHCPCAPI_CLASSID,
-    flags : UInt32,
-    data : UInt8*,
-    nBytesData : UInt32
+  struct DHCPCAPI_CLASSID
+    property flags : UInt32
+    property data : UInt8*
+    property nBytesData : UInt32
+    def initialize(@flags : UInt32, @data : UInt8*, @nBytesData : UInt32)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record DHCP_SERVER_OPTIONS,
-    message_type : UInt8*,
-    subnet_mask : UInt32*,
-    requested_address : UInt32*,
-    request_lease_time : UInt32*,
-    overlay_fields : UInt8*,
-    router_address : UInt32*,
-    server : UInt32*,
-    parameter_request_list : UInt8*,
-    parameter_request_list_length : UInt32,
-    machine_name : Win32cr::Foundation::PSTR,
-    machine_name_length : UInt32,
-    client_hardware_address_type : UInt8,
-    client_hardware_address_length : UInt8,
-    client_hardware_address : UInt8*,
-    class_identifier : Win32cr::Foundation::PSTR,
-    class_identifier_length : UInt32,
-    vendor_class : UInt8*,
-    vendor_class_length : UInt32,
-    dns_flags : UInt32,
-    dns_name_length : UInt32,
-    dns_name : UInt8*,
-    ds_domain_name_requested : Win32cr::Foundation::BOOLEAN,
-    ds_domain_name : Win32cr::Foundation::PSTR,
-    ds_domain_name_len : UInt32,
-    scope_id : UInt32*
+  struct DHCP_SERVER_OPTIONS
+    property message_type : UInt8*
+    property subnet_mask : UInt32*
+    property requested_address : UInt32*
+    property request_lease_time : UInt32*
+    property overlay_fields : UInt8*
+    property router_address : UInt32*
+    property server : UInt32*
+    property parameter_request_list : UInt8*
+    property parameter_request_list_length : UInt32
+    property machine_name : Win32cr::Foundation::PSTR
+    property machine_name_length : UInt32
+    property client_hardware_address_type : UInt8
+    property client_hardware_address_length : UInt8
+    property client_hardware_address : UInt8*
+    property class_identifier : Win32cr::Foundation::PSTR
+    property class_identifier_length : UInt32
+    property vendor_class : UInt8*
+    property vendor_class_length : UInt32
+    property dns_flags : UInt32
+    property dns_name_length : UInt32
+    property dns_name : UInt8*
+    property ds_domain_name_requested : Win32cr::Foundation::BOOLEAN
+    property ds_domain_name : Win32cr::Foundation::PSTR
+    property ds_domain_name_len : UInt32
+    property scope_id : UInt32*
+    def initialize(@message_type : UInt8*, @subnet_mask : UInt32*, @requested_address : UInt32*, @request_lease_time : UInt32*, @overlay_fields : UInt8*, @router_address : UInt32*, @server : UInt32*, @parameter_request_list : UInt8*, @parameter_request_list_length : UInt32, @machine_name : Win32cr::Foundation::PSTR, @machine_name_length : UInt32, @client_hardware_address_type : UInt8, @client_hardware_address_length : UInt8, @client_hardware_address : UInt8*, @class_identifier : Win32cr::Foundation::PSTR, @class_identifier_length : UInt32, @vendor_class : UInt8*, @vendor_class_length : UInt32, @dns_flags : UInt32, @dns_name_length : UInt32, @dns_name : UInt8*, @ds_domain_name_requested : Win32cr::Foundation::BOOLEAN, @ds_domain_name : Win32cr::Foundation::PSTR, @ds_domain_name_len : UInt32, @scope_id : UInt32*)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record DHCP_CALLOUT_TABLE,
-    dhcp_control_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_CONTROL,
-    dhcp_new_pkt_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_NEWPKT,
-    dhcp_pkt_drop_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_DROP_SEND,
-    dhcp_pkt_send_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_DROP_SEND,
-    dhcp_address_del_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_PROB,
-    dhcp_address_offer_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_GIVE_ADDRESS,
-    dhcp_handle_options_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_HANDLE_OPTIONS,
-    dhcp_delete_client_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_DELETE_CLIENT,
-    dhcp_extension_hook : Void*,
-    dhcp_reserved_hook : Void*
+  struct DHCP_CALLOUT_TABLE
+    property dhcp_control_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_CONTROL
+    property dhcp_new_pkt_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_NEWPKT
+    property dhcp_pkt_drop_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_DROP_SEND
+    property dhcp_pkt_send_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_DROP_SEND
+    property dhcp_address_del_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_PROB
+    property dhcp_address_offer_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_GIVE_ADDRESS
+    property dhcp_handle_options_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_HANDLE_OPTIONS
+    property dhcp_delete_client_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_DELETE_CLIENT
+    property dhcp_extension_hook : Void*
+    property dhcp_reserved_hook : Void*
+    def initialize(@dhcp_control_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_CONTROL, @dhcp_new_pkt_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_NEWPKT, @dhcp_pkt_drop_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_DROP_SEND, @dhcp_pkt_send_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_DROP_SEND, @dhcp_address_del_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_PROB, @dhcp_address_offer_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_GIVE_ADDRESS, @dhcp_handle_options_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_HANDLE_OPTIONS, @dhcp_delete_client_hook : Win32cr::NetworkManagement::Dhcp::LPDHCP_DELETE_CLIENT, @dhcp_extension_hook : Void*, @dhcp_reserved_hook : Void*)
+    end
+  end
 
   @[Extern]
-  record DATE_TIME,
-    dwLowDateTime : UInt32,
-    dwHighDateTime : UInt32
+  struct DATE_TIME
+    property dwLowDateTime : UInt32
+    property dwHighDateTime : UInt32
+    def initialize(@dwLowDateTime : UInt32, @dwHighDateTime : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCP_IP_RANGE,
-    start_address : UInt32,
-    end_address : UInt32
+  struct DHCP_IP_RANGE
+    property start_address : UInt32
+    property end_address : UInt32
+    def initialize(@start_address : UInt32, @end_address : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCP_BINARY_DATA,
-    data_length : UInt32,
-    data : UInt8*
+  struct DHCP_BINARY_DATA
+    property data_length : UInt32
+    property data : UInt8*
+    def initialize(@data_length : UInt32, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DHCP_HOST_INFO,
-    ip_address : UInt32,
-    net_bios_name : Win32cr::Foundation::PWSTR,
-    host_name : Win32cr::Foundation::PWSTR
+  struct DHCP_HOST_INFO
+    property ip_address : UInt32
+    property net_bios_name : Win32cr::Foundation::PWSTR
+    property host_name : Win32cr::Foundation::PWSTR
+    def initialize(@ip_address : UInt32, @net_bios_name : Win32cr::Foundation::PWSTR, @host_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DWORD_DWORD,
-    d_word1 : UInt32,
-    d_word2 : UInt32
+  struct DWORD_DWORD
+    property d_word1 : UInt32
+    property d_word2 : UInt32
+    def initialize(@d_word1 : UInt32, @d_word2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCP_SUBNET_INFO,
-    subnet_address : UInt32,
-    subnet_mask : UInt32,
-    subnet_name : Win32cr::Foundation::PWSTR,
-    subnet_comment : Win32cr::Foundation::PWSTR,
-    primary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO,
-    subnet_state : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_STATE
+  struct DHCP_SUBNET_INFO
+    property subnet_address : UInt32
+    property subnet_mask : UInt32
+    property subnet_name : Win32cr::Foundation::PWSTR
+    property subnet_comment : Win32cr::Foundation::PWSTR
+    property primary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO
+    property subnet_state : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_STATE
+    def initialize(@subnet_address : UInt32, @subnet_mask : UInt32, @subnet_name : Win32cr::Foundation::PWSTR, @subnet_comment : Win32cr::Foundation::PWSTR, @primary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO, @subnet_state : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_STATE)
+    end
+  end
 
   @[Extern]
-  record DHCP_SUBNET_INFO_VQ,
-    subnet_address : UInt32,
-    subnet_mask : UInt32,
-    subnet_name : Win32cr::Foundation::PWSTR,
-    subnet_comment : Win32cr::Foundation::PWSTR,
-    primary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO,
-    subnet_state : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_STATE,
-    quarantine_on : UInt32,
-    reserved1 : UInt32,
-    reserved2 : UInt32,
-    reserved3 : Int64,
-    reserved4 : Int64
+  struct DHCP_SUBNET_INFO_VQ
+    property subnet_address : UInt32
+    property subnet_mask : UInt32
+    property subnet_name : Win32cr::Foundation::PWSTR
+    property subnet_comment : Win32cr::Foundation::PWSTR
+    property primary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO
+    property subnet_state : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_STATE
+    property quarantine_on : UInt32
+    property reserved1 : UInt32
+    property reserved2 : UInt32
+    property reserved3 : Int64
+    property reserved4 : Int64
+    def initialize(@subnet_address : UInt32, @subnet_mask : UInt32, @subnet_name : Win32cr::Foundation::PWSTR, @subnet_comment : Win32cr::Foundation::PWSTR, @primary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO, @subnet_state : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_STATE, @quarantine_on : UInt32, @reserved1 : UInt32, @reserved2 : UInt32, @reserved3 : Int64, @reserved4 : Int64)
+    end
+  end
 
   @[Extern]
-  record DHCP_IP_ARRAY,
-    num_elements : UInt32,
-    elements : UInt32*
+  struct DHCP_IP_ARRAY
+    property num_elements : UInt32
+    property elements : UInt32*
+    def initialize(@num_elements : UInt32, @elements : UInt32*)
+    end
+  end
 
   @[Extern]
-  record DHCP_IP_CLUSTER,
-    cluster_address : UInt32,
-    cluster_mask : UInt32
+  struct DHCP_IP_CLUSTER
+    property cluster_address : UInt32
+    property cluster_mask : UInt32
+    def initialize(@cluster_address : UInt32, @cluster_mask : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCP_IP_RESERVATION,
-    reserved_ip_address : UInt32,
-    reserved_for_client : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA*
+  struct DHCP_IP_RESERVATION
+    property reserved_ip_address : UInt32
+    property reserved_for_client : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA*
+    def initialize(@reserved_ip_address : UInt32, @reserved_for_client : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA*)
+    end
+  end
 
   @[Extern]
-  record DHCP_SUBNET_ELEMENT_DATA,
-    element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE,
-    element : DHCP_SUBNET_ELEMENT_UNION do
+  struct DHCP_SUBNET_ELEMENT_DATA
+    property element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE
+    property element : DHCP_SUBNET_ELEMENT_UNION
 
     # Nested Type DHCP_SUBNET_ELEMENT_UNION
     @[Extern(union: true)]
-    record DHCP_SUBNET_ELEMENT_UNION,
-      ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*,
-      secondary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO*,
-      reserved_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION*,
-      exclude_ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*,
-      ip_used_cluster : Win32cr::NetworkManagement::Dhcp::DHCP_IP_CLUSTER*
+    struct DHCP_SUBNET_ELEMENT_UNION
+    property ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*
+    property secondary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO*
+    property reserved_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION*
+    property exclude_ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*
+    property ip_used_cluster : Win32cr::NetworkManagement::Dhcp::DHCP_IP_CLUSTER*
+    def initialize(@ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*, @secondary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO*, @reserved_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION*, @exclude_ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*, @ip_used_cluster : Win32cr::NetworkManagement::Dhcp::DHCP_IP_CLUSTER*)
+    end
+    end
 
+    def initialize(@element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE, @element : DHCP_SUBNET_ELEMENT_UNION)
+    end
   end
 
   @[Extern(union: true)]
-  record DHCP_SUBNET_ELEMENT_UNION
-  @[Extern]
-  record DHCP_SUBNET_ELEMENT_INFO_ARRAY,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA*
+  struct DHCP_SUBNET_ELEMENT_UNION
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record DHCP_IPV6_ADDRESS,
-    high_order_bits : UInt64,
-    low_order_bits : UInt64
+  struct DHCP_SUBNET_ELEMENT_INFO_ARRAY
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA*)
+    end
+  end
 
   @[Extern]
-  record DHCP_ADDR_PATTERN,
-    match_hw_type : Win32cr::Foundation::BOOL,
-    hw_type : UInt8,
-    is_wildcard : Win32cr::Foundation::BOOL,
-    length : UInt8,
-    pattern : UInt8[255]
+  struct DHCP_IPV6_ADDRESS
+    property high_order_bits : UInt64
+    property low_order_bits : UInt64
+    def initialize(@high_order_bits : UInt64, @low_order_bits : UInt64)
+    end
+  end
 
   @[Extern]
-  record DHCP_FILTER_ADD_INFO,
-    addr_patt : Win32cr::NetworkManagement::Dhcp::DHCP_ADDR_PATTERN,
-    comment : Win32cr::Foundation::PWSTR,
-    list_type : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_LIST_TYPE
+  struct DHCP_ADDR_PATTERN
+    property match_hw_type : Win32cr::Foundation::BOOL
+    property hw_type : UInt8
+    property is_wildcard : Win32cr::Foundation::BOOL
+    property length : UInt8
+    property pattern : UInt8[255]
+    def initialize(@match_hw_type : Win32cr::Foundation::BOOL, @hw_type : UInt8, @is_wildcard : Win32cr::Foundation::BOOL, @length : UInt8, @pattern : UInt8[255])
+    end
+  end
 
   @[Extern]
-  record DHCP_FILTER_GLOBAL_INFO,
-    enforce_allow_list : Win32cr::Foundation::BOOL,
-    enforce_deny_list : Win32cr::Foundation::BOOL
+  struct DHCP_FILTER_ADD_INFO
+    property addr_patt : Win32cr::NetworkManagement::Dhcp::DHCP_ADDR_PATTERN
+    property comment : Win32cr::Foundation::PWSTR
+    property list_type : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_LIST_TYPE
+    def initialize(@addr_patt : Win32cr::NetworkManagement::Dhcp::DHCP_ADDR_PATTERN, @comment : Win32cr::Foundation::PWSTR, @list_type : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_LIST_TYPE)
+    end
+  end
 
   @[Extern]
-  record DHCP_FILTER_RECORD,
-    addr_patt : Win32cr::NetworkManagement::Dhcp::DHCP_ADDR_PATTERN,
-    comment : Win32cr::Foundation::PWSTR
+  struct DHCP_FILTER_GLOBAL_INFO
+    property enforce_allow_list : Win32cr::Foundation::BOOL
+    property enforce_deny_list : Win32cr::Foundation::BOOL
+    def initialize(@enforce_allow_list : Win32cr::Foundation::BOOL, @enforce_deny_list : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DHCP_FILTER_ENUM_INFO,
-    num_elements : UInt32,
-    pEnumRecords : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_RECORD*
+  struct DHCP_FILTER_RECORD
+    property addr_patt : Win32cr::NetworkManagement::Dhcp::DHCP_ADDR_PATTERN
+    property comment : Win32cr::Foundation::PWSTR
+    def initialize(@addr_patt : Win32cr::NetworkManagement::Dhcp::DHCP_ADDR_PATTERN, @comment : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DHCP_OPTION_DATA_ELEMENT,
-    option_type : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA_TYPE,
-    element : DHCP_OPTION_ELEMENT_UNION do
+  struct DHCP_FILTER_ENUM_INFO
+    property num_elements : UInt32
+    property pEnumRecords : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_RECORD*
+    def initialize(@num_elements : UInt32, @pEnumRecords : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_RECORD*)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_OPTION_DATA_ELEMENT
+    property option_type : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA_TYPE
+    property element : DHCP_OPTION_ELEMENT_UNION
 
     # Nested Type DHCP_OPTION_ELEMENT_UNION
     @[Extern(union: true)]
-    record DHCP_OPTION_ELEMENT_UNION,
-      byte_option : UInt8,
-      word_option : UInt16,
-      d_word_option : UInt32,
-      d_word_d_word_option : Win32cr::NetworkManagement::Dhcp::DWORD_DWORD,
-      ip_address_option : UInt32,
-      string_data_option : Win32cr::Foundation::PWSTR,
-      binary_data_option : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-      encapsulated_data_option : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-      ipv6_address_data_option : Win32cr::Foundation::PWSTR
+    struct DHCP_OPTION_ELEMENT_UNION
+    property byte_option : UInt8
+    property word_option : UInt16
+    property d_word_option : UInt32
+    property d_word_d_word_option : Win32cr::NetworkManagement::Dhcp::DWORD_DWORD
+    property ip_address_option : UInt32
+    property string_data_option : Win32cr::Foundation::PWSTR
+    property binary_data_option : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property encapsulated_data_option : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property ipv6_address_data_option : Win32cr::Foundation::PWSTR
+    def initialize(@byte_option : UInt8, @word_option : UInt16, @d_word_option : UInt32, @d_word_d_word_option : Win32cr::NetworkManagement::Dhcp::DWORD_DWORD, @ip_address_option : UInt32, @string_data_option : Win32cr::Foundation::PWSTR, @binary_data_option : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @encapsulated_data_option : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @ipv6_address_data_option : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@option_type : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA_TYPE, @element : DHCP_OPTION_ELEMENT_UNION)
+    end
   end
 
   @[Extern(union: true)]
-  record DHCP_OPTION_ELEMENT_UNION
-  @[Extern]
-  record DHCP_OPTION_DATA,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA_ELEMENT*
+  struct DHCP_OPTION_ELEMENT_UNION
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record DHCP_OPTION,
-    option_id : UInt32,
-    option_name : Win32cr::Foundation::PWSTR,
-    option_comment : Win32cr::Foundation::PWSTR,
-    default_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA,
-    option_type : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_TYPE
+  struct DHCP_OPTION_DATA
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA_ELEMENT*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA_ELEMENT*)
+    end
+  end
 
   @[Extern]
-  record DHCP_OPTION_ARRAY,
-    num_elements : UInt32,
-    options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*
+  struct DHCP_OPTION
+    property option_id : UInt32
+    property option_name : Win32cr::Foundation::PWSTR
+    property option_comment : Win32cr::Foundation::PWSTR
+    property default_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA
+    property option_type : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_TYPE
+    def initialize(@option_id : UInt32, @option_name : Win32cr::Foundation::PWSTR, @option_comment : Win32cr::Foundation::PWSTR, @default_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA, @option_type : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_TYPE)
+    end
+  end
 
   @[Extern]
-  record DHCP_OPTION_VALUE,
-    option_id : UInt32,
-    value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA
+  struct DHCP_OPTION_ARRAY
+    property num_elements : UInt32
+    property options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*
+    def initialize(@num_elements : UInt32, @options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*)
+    end
+  end
 
   @[Extern]
-  record DHCP_OPTION_VALUE_ARRAY,
-    num_elements : UInt32,
-    values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE*
+  struct DHCP_OPTION_VALUE
+    property option_id : UInt32
+    property value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA
+    def initialize(@option_id : UInt32, @value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA)
+    end
+  end
 
   @[Extern]
-  record DHCP_RESERVED_SCOPE,
-    reserved_ip_address : UInt32,
-    reserved_ip_subnet_address : UInt32
+  struct DHCP_OPTION_VALUE_ARRAY
+    property num_elements : UInt32
+    property values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE*
+    def initialize(@num_elements : UInt32, @values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE*)
+    end
+  end
 
   @[Extern]
-  record DHCP_OPTION_SCOPE_INFO,
-    scope_type : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_TYPE,
-    scope_info : DHCP_OPTION_SCOPE_UNION_ do
+  struct DHCP_RESERVED_SCOPE
+    property reserved_ip_address : UInt32
+    property reserved_ip_subnet_address : UInt32
+    def initialize(@reserved_ip_address : UInt32, @reserved_ip_subnet_address : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_OPTION_SCOPE_INFO
+    property scope_type : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_TYPE
+    property scope_info : DHCP_OPTION_SCOPE_UNION_
 
     # Nested Type DHCP_OPTION_SCOPE_UNION_
     @[Extern(union: true)]
-    record DHCP_OPTION_SCOPE_UNION_,
-      default_scope_info : Void*,
-      global_scope_info : Void*,
-      subnet_scope_info : UInt32,
-      reserved_scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_RESERVED_SCOPE,
-      m_scope_info : Win32cr::Foundation::PWSTR
+    struct DHCP_OPTION_SCOPE_UNION_
+    property default_scope_info : Void*
+    property global_scope_info : Void*
+    property subnet_scope_info : UInt32
+    property reserved_scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_RESERVED_SCOPE
+    property m_scope_info : Win32cr::Foundation::PWSTR
+    def initialize(@default_scope_info : Void*, @global_scope_info : Void*, @subnet_scope_info : UInt32, @reserved_scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_RESERVED_SCOPE, @m_scope_info : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@scope_type : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_TYPE, @scope_info : DHCP_OPTION_SCOPE_UNION_)
+    end
   end
 
   @[Extern]
-  record DHCP_RESERVED_SCOPE6,
-    reserved_ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS,
-    reserved_ip_subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+  struct DHCP_RESERVED_SCOPE6
+    property reserved_ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    property reserved_ip_subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    def initialize(@reserved_ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, @reserved_ip_subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS)
+    end
+  end
 
   @[Extern]
-  record DHCP_OPTION_SCOPE_INFO6,
-    scope_type : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_TYPE6,
-    scope_info : DHCP_OPTION_SCOPE_UNION6 do
+  struct DHCP_OPTION_SCOPE_INFO6
+    property scope_type : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_TYPE6
+    property scope_info : DHCP_OPTION_SCOPE_UNION6
 
     # Nested Type DHCP_OPTION_SCOPE_UNION6
     @[Extern(union: true)]
-    record DHCP_OPTION_SCOPE_UNION6,
-      default_scope_info : Void*,
-      subnet_scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS,
-      reserved_scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_RESERVED_SCOPE6
+    struct DHCP_OPTION_SCOPE_UNION6
+    property default_scope_info : Void*
+    property subnet_scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    property reserved_scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_RESERVED_SCOPE6
+    def initialize(@default_scope_info : Void*, @subnet_scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, @reserved_scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_RESERVED_SCOPE6)
+    end
+    end
 
+    def initialize(@scope_type : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_TYPE6, @scope_info : DHCP_OPTION_SCOPE_UNION6)
+    end
   end
 
   @[Extern(union: true)]
-  record DHCP_OPTION_SCOPE_UNION6
-  @[Extern]
-  record DHCP_OPTION_LIST,
-    num_options : UInt32,
-    options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE*
+  struct DHCP_OPTION_SCOPE_UNION6
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record DHCP_CLIENT_INFO,
-    client_ip_address : UInt32,
-    subnet_mask : UInt32,
-    client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-    client_name : Win32cr::Foundation::PWSTR,
-    client_comment : Win32cr::Foundation::PWSTR,
-    client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO
+  struct DHCP_OPTION_LIST
+    property num_options : UInt32
+    property options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE*
+    def initialize(@num_options : UInt32, @options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE*)
+    end
+  end
 
   @[Extern]
-  record DHCP_CLIENT_INFO_ARRAY,
-    num_elements : UInt32,
-    clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO**
+  struct DHCP_CLIENT_INFO
+    property client_ip_address : UInt32
+    property subnet_mask : UInt32
+    property client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property client_name : Win32cr::Foundation::PWSTR
+    property client_comment : Win32cr::Foundation::PWSTR
+    property client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO
+    def initialize(@client_ip_address : UInt32, @subnet_mask : UInt32, @client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @client_name : Win32cr::Foundation::PWSTR, @client_comment : Win32cr::Foundation::PWSTR, @client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO)
+    end
+  end
 
   @[Extern]
-  record DHCP_CLIENT_INFO_VQ,
-    client_ip_address : UInt32,
-    subnet_mask : UInt32,
-    client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-    client_name : Win32cr::Foundation::PWSTR,
-    client_comment : Win32cr::Foundation::PWSTR,
-    client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO,
-    bClientType : UInt8,
-    address_state : UInt8,
-    status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus,
-    probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    quarantine_capable : Win32cr::Foundation::BOOL
+  struct DHCP_CLIENT_INFO_ARRAY
+    property num_elements : UInt32
+    property clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO**
+    def initialize(@num_elements : UInt32, @clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO**)
+    end
+  end
 
   @[Extern]
-  record DHCP_CLIENT_INFO_ARRAY_VQ,
-    num_elements : UInt32,
-    clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_VQ**
+  struct DHCP_CLIENT_INFO_VQ
+    property client_ip_address : UInt32
+    property subnet_mask : UInt32
+    property client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property client_name : Win32cr::Foundation::PWSTR
+    property client_comment : Win32cr::Foundation::PWSTR
+    property client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO
+    property bClientType : UInt8
+    property address_state : UInt8
+    property status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus
+    property probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property quarantine_capable : Win32cr::Foundation::BOOL
+    def initialize(@client_ip_address : UInt32, @subnet_mask : UInt32, @client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @client_name : Win32cr::Foundation::PWSTR, @client_comment : Win32cr::Foundation::PWSTR, @client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO, @bClientType : UInt8, @address_state : UInt8, @status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus, @probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @quarantine_capable : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DHCP_CLIENT_FILTER_STATUS_INFO,
-    client_ip_address : UInt32,
-    subnet_mask : UInt32,
-    client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-    client_name : Win32cr::Foundation::PWSTR,
-    client_comment : Win32cr::Foundation::PWSTR,
-    client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO,
-    bClientType : UInt8,
-    address_state : UInt8,
-    status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus,
-    probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    quarantine_capable : Win32cr::Foundation::BOOL,
-    filter_status : UInt32
+  struct DHCP_CLIENT_INFO_ARRAY_VQ
+    property num_elements : UInt32
+    property clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_VQ**
+    def initialize(@num_elements : UInt32, @clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_VQ**)
+    end
+  end
 
   @[Extern]
-  record DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY,
-    num_elements : UInt32,
-    clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_FILTER_STATUS_INFO**
+  struct DHCP_CLIENT_FILTER_STATUS_INFO
+    property client_ip_address : UInt32
+    property subnet_mask : UInt32
+    property client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property client_name : Win32cr::Foundation::PWSTR
+    property client_comment : Win32cr::Foundation::PWSTR
+    property client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO
+    property bClientType : UInt8
+    property address_state : UInt8
+    property status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus
+    property probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property quarantine_capable : Win32cr::Foundation::BOOL
+    property filter_status : UInt32
+    def initialize(@client_ip_address : UInt32, @subnet_mask : UInt32, @client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @client_name : Win32cr::Foundation::PWSTR, @client_comment : Win32cr::Foundation::PWSTR, @client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO, @bClientType : UInt8, @address_state : UInt8, @status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus, @probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @quarantine_capable : Win32cr::Foundation::BOOL, @filter_status : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCP_CLIENT_INFO_PB,
-    client_ip_address : UInt32,
-    subnet_mask : UInt32,
-    client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-    client_name : Win32cr::Foundation::PWSTR,
-    client_comment : Win32cr::Foundation::PWSTR,
-    client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO,
-    bClientType : UInt8,
-    address_state : UInt8,
-    status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus,
-    probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    quarantine_capable : Win32cr::Foundation::BOOL,
-    filter_status : UInt32,
-    policy_name : Win32cr::Foundation::PWSTR
+  struct DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY
+    property num_elements : UInt32
+    property clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_FILTER_STATUS_INFO**
+    def initialize(@num_elements : UInt32, @clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_FILTER_STATUS_INFO**)
+    end
+  end
 
   @[Extern]
-  record DHCP_CLIENT_INFO_PB_ARRAY,
-    num_elements : UInt32,
-    clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_PB**
+  struct DHCP_CLIENT_INFO_PB
+    property client_ip_address : UInt32
+    property subnet_mask : UInt32
+    property client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property client_name : Win32cr::Foundation::PWSTR
+    property client_comment : Win32cr::Foundation::PWSTR
+    property client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO
+    property bClientType : UInt8
+    property address_state : UInt8
+    property status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus
+    property probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property quarantine_capable : Win32cr::Foundation::BOOL
+    property filter_status : UInt32
+    property policy_name : Win32cr::Foundation::PWSTR
+    def initialize(@client_ip_address : UInt32, @subnet_mask : UInt32, @client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @client_name : Win32cr::Foundation::PWSTR, @client_comment : Win32cr::Foundation::PWSTR, @client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO, @bClientType : UInt8, @address_state : UInt8, @status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus, @probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @quarantine_capable : Win32cr::Foundation::BOOL, @filter_status : UInt32, @policy_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DHCP_SEARCH_INFO,
-    search_type : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO_TYPE,
-    search_info : DHCP_CLIENT_SEARCH_UNION do
+  struct DHCP_CLIENT_INFO_PB_ARRAY
+    property num_elements : UInt32
+    property clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_PB**
+    def initialize(@num_elements : UInt32, @clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_PB**)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_SEARCH_INFO
+    property search_type : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO_TYPE
+    property search_info : DHCP_CLIENT_SEARCH_UNION
 
     # Nested Type DHCP_CLIENT_SEARCH_UNION
     @[Extern(union: true)]
-    record DHCP_CLIENT_SEARCH_UNION,
-      client_ip_address : UInt32,
-      client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-      client_name : Win32cr::Foundation::PWSTR
+    struct DHCP_CLIENT_SEARCH_UNION
+    property client_ip_address : UInt32
+    property client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property client_name : Win32cr::Foundation::PWSTR
+    def initialize(@client_ip_address : UInt32, @client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @client_name : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@search_type : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO_TYPE, @search_info : DHCP_CLIENT_SEARCH_UNION)
+    end
   end
 
   @[Extern(union: true)]
-  record DHCP_CLIENT_SEARCH_UNION
+  struct DHCP_CLIENT_SEARCH_UNION
+    def initialize()
+    end
+  end
+
   @[Extern]
-  record DHCP_PROPERTY,
-    id : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ID,
-    type__ : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_TYPE,
-    value : DHCP_PROPERTY_VALUE_UNION_ do
+  struct DHCP_PROPERTY
+    property id : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ID
+    property type__ : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_TYPE
+    property value : DHCP_PROPERTY_VALUE_UNION_
 
     # Nested Type DHCP_PROPERTY_VALUE_UNION_
     @[Extern(union: true)]
-    record DHCP_PROPERTY_VALUE_UNION_,
-      byte_value : UInt8,
-      word_value : UInt16,
-      d_word_value : UInt32,
-      string_value : Win32cr::Foundation::PWSTR,
-      binary_value : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    struct DHCP_PROPERTY_VALUE_UNION_
+    property byte_value : UInt8
+    property word_value : UInt16
+    property d_word_value : UInt32
+    property string_value : Win32cr::Foundation::PWSTR
+    property binary_value : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    def initialize(@byte_value : UInt8, @word_value : UInt16, @d_word_value : UInt32, @string_value : Win32cr::Foundation::PWSTR, @binary_value : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA)
+    end
+    end
 
+    def initialize(@id : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ID, @type__ : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_TYPE, @value : DHCP_PROPERTY_VALUE_UNION_)
+    end
   end
 
   @[Extern]
-  record DHCP_PROPERTY_ARRAY,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY*
+  struct DHCP_PROPERTY_ARRAY
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY*)
+    end
+  end
 
   @[Extern]
-  record DHCP_CLIENT_INFO_EX,
-    client_ip_address : UInt32,
-    subnet_mask : UInt32,
-    client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-    client_name : Win32cr::Foundation::PWSTR,
-    client_comment : Win32cr::Foundation::PWSTR,
-    client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO,
-    bClientType : UInt8,
-    address_state : UInt8,
-    status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus,
-    probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    quarantine_capable : Win32cr::Foundation::BOOL,
-    filter_status : UInt32,
-    policy_name : Win32cr::Foundation::PWSTR,
-    properties : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ARRAY*
+  struct DHCP_CLIENT_INFO_EX
+    property client_ip_address : UInt32
+    property subnet_mask : UInt32
+    property client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property client_name : Win32cr::Foundation::PWSTR
+    property client_comment : Win32cr::Foundation::PWSTR
+    property client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO
+    property bClientType : UInt8
+    property address_state : UInt8
+    property status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus
+    property probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property quarantine_capable : Win32cr::Foundation::BOOL
+    property filter_status : UInt32
+    property policy_name : Win32cr::Foundation::PWSTR
+    property properties : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ARRAY*
+    def initialize(@client_ip_address : UInt32, @subnet_mask : UInt32, @client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @client_name : Win32cr::Foundation::PWSTR, @client_comment : Win32cr::Foundation::PWSTR, @client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO, @bClientType : UInt8, @address_state : UInt8, @status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus, @probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @quarantine_capable : Win32cr::Foundation::BOOL, @filter_status : UInt32, @policy_name : Win32cr::Foundation::PWSTR, @properties : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ARRAY*)
+    end
+  end
 
   @[Extern]
-  record DHCP_CLIENT_INFO_EX_ARRAY,
-    num_elements : UInt32,
-    clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_EX**
+  struct DHCP_CLIENT_INFO_EX_ARRAY
+    property num_elements : UInt32
+    property clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_EX**
+    def initialize(@num_elements : UInt32, @clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_EX**)
+    end
+  end
 
   @[Extern]
-  record SCOPE_MIB_INFO,
-    subnet : UInt32,
-    num_addresses_inuse : UInt32,
-    num_addresses_free : UInt32,
-    num_pending_offers : UInt32
+  struct SCOPE_MIB_INFO
+    property subnet : UInt32
+    property num_addresses_inuse : UInt32
+    property num_addresses_free : UInt32
+    property num_pending_offers : UInt32
+    def initialize(@subnet : UInt32, @num_addresses_inuse : UInt32, @num_addresses_free : UInt32, @num_pending_offers : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCP_MIB_INFO,
-    discovers : UInt32,
-    offers : UInt32,
-    requests : UInt32,
-    acks : UInt32,
-    naks : UInt32,
-    declines : UInt32,
-    releases : UInt32,
-    server_start_time : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    scopes : UInt32,
-    scope_info : Win32cr::NetworkManagement::Dhcp::SCOPE_MIB_INFO*
+  struct DHCP_MIB_INFO
+    property discovers : UInt32
+    property offers : UInt32
+    property requests : UInt32
+    property acks : UInt32
+    property naks : UInt32
+    property declines : UInt32
+    property releases : UInt32
+    property server_start_time : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property scopes : UInt32
+    property scope_info : Win32cr::NetworkManagement::Dhcp::SCOPE_MIB_INFO*
+    def initialize(@discovers : UInt32, @offers : UInt32, @requests : UInt32, @acks : UInt32, @naks : UInt32, @declines : UInt32, @releases : UInt32, @server_start_time : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @scopes : UInt32, @scope_info : Win32cr::NetworkManagement::Dhcp::SCOPE_MIB_INFO*)
+    end
+  end
 
   @[Extern]
-  record SCOPE_MIB_INFO_VQ,
-    subnet : UInt32,
-    num_addresses_inuse : UInt32,
-    num_addresses_free : UInt32,
-    num_pending_offers : UInt32,
-    qtn_num_leases : UInt32,
-    qtn_pct_qtn_leases : UInt32,
-    qtn_probation_leases : UInt32,
-    qtn_non_qtn_leases : UInt32,
-    qtn_exempt_leases : UInt32,
-    qtn_capable_clients : UInt32
+  struct SCOPE_MIB_INFO_VQ
+    property subnet : UInt32
+    property num_addresses_inuse : UInt32
+    property num_addresses_free : UInt32
+    property num_pending_offers : UInt32
+    property qtn_num_leases : UInt32
+    property qtn_pct_qtn_leases : UInt32
+    property qtn_probation_leases : UInt32
+    property qtn_non_qtn_leases : UInt32
+    property qtn_exempt_leases : UInt32
+    property qtn_capable_clients : UInt32
+    def initialize(@subnet : UInt32, @num_addresses_inuse : UInt32, @num_addresses_free : UInt32, @num_pending_offers : UInt32, @qtn_num_leases : UInt32, @qtn_pct_qtn_leases : UInt32, @qtn_probation_leases : UInt32, @qtn_non_qtn_leases : UInt32, @qtn_exempt_leases : UInt32, @qtn_capable_clients : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCP_MIB_INFO_VQ,
-    discovers : UInt32,
-    offers : UInt32,
-    requests : UInt32,
-    acks : UInt32,
-    naks : UInt32,
-    declines : UInt32,
-    releases : UInt32,
-    server_start_time : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    qtn_num_leases : UInt32,
-    qtn_pct_qtn_leases : UInt32,
-    qtn_probation_leases : UInt32,
-    qtn_non_qtn_leases : UInt32,
-    qtn_exempt_leases : UInt32,
-    qtn_capable_clients : UInt32,
-    qtn_ias_errors : UInt32,
-    scopes : UInt32,
-    scope_info : Win32cr::NetworkManagement::Dhcp::SCOPE_MIB_INFO_VQ*
+  struct DHCP_MIB_INFO_VQ
+    property discovers : UInt32
+    property offers : UInt32
+    property requests : UInt32
+    property acks : UInt32
+    property naks : UInt32
+    property declines : UInt32
+    property releases : UInt32
+    property server_start_time : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property qtn_num_leases : UInt32
+    property qtn_pct_qtn_leases : UInt32
+    property qtn_probation_leases : UInt32
+    property qtn_non_qtn_leases : UInt32
+    property qtn_exempt_leases : UInt32
+    property qtn_capable_clients : UInt32
+    property qtn_ias_errors : UInt32
+    property scopes : UInt32
+    property scope_info : Win32cr::NetworkManagement::Dhcp::SCOPE_MIB_INFO_VQ*
+    def initialize(@discovers : UInt32, @offers : UInt32, @requests : UInt32, @acks : UInt32, @naks : UInt32, @declines : UInt32, @releases : UInt32, @server_start_time : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @qtn_num_leases : UInt32, @qtn_pct_qtn_leases : UInt32, @qtn_probation_leases : UInt32, @qtn_non_qtn_leases : UInt32, @qtn_exempt_leases : UInt32, @qtn_capable_clients : UInt32, @qtn_ias_errors : UInt32, @scopes : UInt32, @scope_info : Win32cr::NetworkManagement::Dhcp::SCOPE_MIB_INFO_VQ*)
+    end
+  end
 
   @[Extern]
-  record SCOPE_MIB_INFO_V5,
-    subnet : UInt32,
-    num_addresses_inuse : UInt32,
-    num_addresses_free : UInt32,
-    num_pending_offers : UInt32
+  struct SCOPE_MIB_INFO_V5
+    property subnet : UInt32
+    property num_addresses_inuse : UInt32
+    property num_addresses_free : UInt32
+    property num_pending_offers : UInt32
+    def initialize(@subnet : UInt32, @num_addresses_inuse : UInt32, @num_addresses_free : UInt32, @num_pending_offers : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCP_MIB_INFO_V5,
-    discovers : UInt32,
-    offers : UInt32,
-    requests : UInt32,
-    acks : UInt32,
-    naks : UInt32,
-    declines : UInt32,
-    releases : UInt32,
-    server_start_time : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    qtn_num_leases : UInt32,
-    qtn_pct_qtn_leases : UInt32,
-    qtn_probation_leases : UInt32,
-    qtn_non_qtn_leases : UInt32,
-    qtn_exempt_leases : UInt32,
-    qtn_capable_clients : UInt32,
-    qtn_ias_errors : UInt32,
-    delayed_offers : UInt32,
-    scopes_with_delayed_offers : UInt32,
-    scopes : UInt32,
-    scope_info : Win32cr::NetworkManagement::Dhcp::SCOPE_MIB_INFO_V5*
+  struct DHCP_MIB_INFO_V5
+    property discovers : UInt32
+    property offers : UInt32
+    property requests : UInt32
+    property acks : UInt32
+    property naks : UInt32
+    property declines : UInt32
+    property releases : UInt32
+    property server_start_time : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property qtn_num_leases : UInt32
+    property qtn_pct_qtn_leases : UInt32
+    property qtn_probation_leases : UInt32
+    property qtn_non_qtn_leases : UInt32
+    property qtn_exempt_leases : UInt32
+    property qtn_capable_clients : UInt32
+    property qtn_ias_errors : UInt32
+    property delayed_offers : UInt32
+    property scopes_with_delayed_offers : UInt32
+    property scopes : UInt32
+    property scope_info : Win32cr::NetworkManagement::Dhcp::SCOPE_MIB_INFO_V5*
+    def initialize(@discovers : UInt32, @offers : UInt32, @requests : UInt32, @acks : UInt32, @naks : UInt32, @declines : UInt32, @releases : UInt32, @server_start_time : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @qtn_num_leases : UInt32, @qtn_pct_qtn_leases : UInt32, @qtn_probation_leases : UInt32, @qtn_non_qtn_leases : UInt32, @qtn_exempt_leases : UInt32, @qtn_capable_clients : UInt32, @qtn_ias_errors : UInt32, @delayed_offers : UInt32, @scopes_with_delayed_offers : UInt32, @scopes : UInt32, @scope_info : Win32cr::NetworkManagement::Dhcp::SCOPE_MIB_INFO_V5*)
+    end
+  end
 
   @[Extern]
-  record DHCP_SERVER_CONFIG_INFO,
-    api_protocol_support : UInt32,
-    database_name : Win32cr::Foundation::PWSTR,
-    database_path : Win32cr::Foundation::PWSTR,
-    backup_path : Win32cr::Foundation::PWSTR,
-    backup_interval : UInt32,
-    database_logging_flag : UInt32,
-    restore_flag : UInt32,
-    database_cleanup_interval : UInt32,
-    debug_flag : UInt32
+  struct DHCP_SERVER_CONFIG_INFO
+    property api_protocol_support : UInt32
+    property database_name : Win32cr::Foundation::PWSTR
+    property database_path : Win32cr::Foundation::PWSTR
+    property backup_path : Win32cr::Foundation::PWSTR
+    property backup_interval : UInt32
+    property database_logging_flag : UInt32
+    property restore_flag : UInt32
+    property database_cleanup_interval : UInt32
+    property debug_flag : UInt32
+    def initialize(@api_protocol_support : UInt32, @database_name : Win32cr::Foundation::PWSTR, @database_path : Win32cr::Foundation::PWSTR, @backup_path : Win32cr::Foundation::PWSTR, @backup_interval : UInt32, @database_logging_flag : UInt32, @restore_flag : UInt32, @database_cleanup_interval : UInt32, @debug_flag : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCP_SCAN_ITEM,
-    ip_address : UInt32,
-    scan_flag : Win32cr::NetworkManagement::Dhcp::DHCP_SCAN_FLAG
+  struct DHCP_SCAN_ITEM
+    property ip_address : UInt32
+    property scan_flag : Win32cr::NetworkManagement::Dhcp::DHCP_SCAN_FLAG
+    def initialize(@ip_address : UInt32, @scan_flag : Win32cr::NetworkManagement::Dhcp::DHCP_SCAN_FLAG)
+    end
+  end
 
   @[Extern]
-  record DHCP_SCAN_LIST,
-    num_scan_items : UInt32,
-    scan_items : Win32cr::NetworkManagement::Dhcp::DHCP_SCAN_ITEM*
+  struct DHCP_SCAN_LIST
+    property num_scan_items : UInt32
+    property scan_items : Win32cr::NetworkManagement::Dhcp::DHCP_SCAN_ITEM*
+    def initialize(@num_scan_items : UInt32, @scan_items : Win32cr::NetworkManagement::Dhcp::DHCP_SCAN_ITEM*)
+    end
+  end
 
   @[Extern]
-  record DHCP_CLASS_INFO,
-    class_name : Win32cr::Foundation::PWSTR,
-    class_comment : Win32cr::Foundation::PWSTR,
-    class_data_length : UInt32,
-    is_vendor : Win32cr::Foundation::BOOL,
-    flags : UInt32,
-    class_data : UInt8*
+  struct DHCP_CLASS_INFO
+    property class_name : Win32cr::Foundation::PWSTR
+    property class_comment : Win32cr::Foundation::PWSTR
+    property class_data_length : UInt32
+    property is_vendor : Win32cr::Foundation::BOOL
+    property flags : UInt32
+    property class_data : UInt8*
+    def initialize(@class_name : Win32cr::Foundation::PWSTR, @class_comment : Win32cr::Foundation::PWSTR, @class_data_length : UInt32, @is_vendor : Win32cr::Foundation::BOOL, @flags : UInt32, @class_data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DHCP_CLASS_INFO_ARRAY,
-    num_elements : UInt32,
-    classes : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO*
+  struct DHCP_CLASS_INFO_ARRAY
+    property num_elements : UInt32
+    property classes : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO*
+    def initialize(@num_elements : UInt32, @classes : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO*)
+    end
+  end
 
   @[Extern]
-  record DHCP_CLASS_INFO_V6,
-    class_name : Win32cr::Foundation::PWSTR,
-    class_comment : Win32cr::Foundation::PWSTR,
-    class_data_length : UInt32,
-    is_vendor : Win32cr::Foundation::BOOL,
-    enterprise_number : UInt32,
-    flags : UInt32,
-    class_data : UInt8*
+  struct DHCP_CLASS_INFO_V6
+    property class_name : Win32cr::Foundation::PWSTR
+    property class_comment : Win32cr::Foundation::PWSTR
+    property class_data_length : UInt32
+    property is_vendor : Win32cr::Foundation::BOOL
+    property enterprise_number : UInt32
+    property flags : UInt32
+    property class_data : UInt8*
+    def initialize(@class_name : Win32cr::Foundation::PWSTR, @class_comment : Win32cr::Foundation::PWSTR, @class_data_length : UInt32, @is_vendor : Win32cr::Foundation::BOOL, @enterprise_number : UInt32, @flags : UInt32, @class_data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DHCP_CLASS_INFO_ARRAY_V6,
-    num_elements : UInt32,
-    classes : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO_V6*
+  struct DHCP_CLASS_INFO_ARRAY_V6
+    property num_elements : UInt32
+    property classes : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO_V6*
+    def initialize(@num_elements : UInt32, @classes : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO_V6*)
+    end
+  end
 
   @[Extern]
-  record DHCP_SERVER_SPECIFIC_STRINGS,
-    default_vendor_class_name : Win32cr::Foundation::PWSTR,
-    default_user_class_name : Win32cr::Foundation::PWSTR
+  struct DHCP_SERVER_SPECIFIC_STRINGS
+    property default_vendor_class_name : Win32cr::Foundation::PWSTR
+    property default_user_class_name : Win32cr::Foundation::PWSTR
+    def initialize(@default_vendor_class_name : Win32cr::Foundation::PWSTR, @default_user_class_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DHCP_IP_RESERVATION_V4,
-    reserved_ip_address : UInt32,
-    reserved_for_client : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA*,
-    bAllowedClientTypes : UInt8
+  struct DHCP_IP_RESERVATION_V4
+    property reserved_ip_address : UInt32
+    property reserved_for_client : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA*
+    property bAllowedClientTypes : UInt8
+    def initialize(@reserved_ip_address : UInt32, @reserved_for_client : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA*, @bAllowedClientTypes : UInt8)
+    end
+  end
 
   @[Extern]
-  record DHCP_IP_RESERVATION_INFO,
-    reserved_ip_address : UInt32,
-    reserved_for_client : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-    reserved_client_name : Win32cr::Foundation::PWSTR,
-    reserved_client_desc : Win32cr::Foundation::PWSTR,
-    bAllowedClientTypes : UInt8,
-    fOptionsPresent : UInt8
+  struct DHCP_IP_RESERVATION_INFO
+    property reserved_ip_address : UInt32
+    property reserved_for_client : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property reserved_client_name : Win32cr::Foundation::PWSTR
+    property reserved_client_desc : Win32cr::Foundation::PWSTR
+    property bAllowedClientTypes : UInt8
+    property fOptionsPresent : UInt8
+    def initialize(@reserved_ip_address : UInt32, @reserved_for_client : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @reserved_client_name : Win32cr::Foundation::PWSTR, @reserved_client_desc : Win32cr::Foundation::PWSTR, @bAllowedClientTypes : UInt8, @fOptionsPresent : UInt8)
+    end
+  end
 
   @[Extern]
-  record DHCP_RESERVATION_INFO_ARRAY,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION_INFO**
+  struct DHCP_RESERVATION_INFO_ARRAY
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION_INFO**
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION_INFO**)
+    end
+  end
 
   @[Extern]
-  record DHCP_SUBNET_ELEMENT_DATA_V4,
-    element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE,
-    element : DHCP_SUBNET_ELEMENT_UNION_V4 do
+  struct DHCP_SUBNET_ELEMENT_DATA_V4
+    property element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE
+    property element : DHCP_SUBNET_ELEMENT_UNION_V4
 
     # Nested Type DHCP_SUBNET_ELEMENT_UNION_V4
     @[Extern(union: true)]
-    record DHCP_SUBNET_ELEMENT_UNION_V4,
-      ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*,
-      secondary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO*,
-      reserved_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION_V4*,
-      exclude_ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*,
-      ip_used_cluster : Win32cr::NetworkManagement::Dhcp::DHCP_IP_CLUSTER*
+    struct DHCP_SUBNET_ELEMENT_UNION_V4
+    property ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*
+    property secondary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO*
+    property reserved_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION_V4*
+    property exclude_ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*
+    property ip_used_cluster : Win32cr::NetworkManagement::Dhcp::DHCP_IP_CLUSTER*
+    def initialize(@ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*, @secondary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO*, @reserved_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION_V4*, @exclude_ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*, @ip_used_cluster : Win32cr::NetworkManagement::Dhcp::DHCP_IP_CLUSTER*)
+    end
+    end
 
+    def initialize(@element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE, @element : DHCP_SUBNET_ELEMENT_UNION_V4)
+    end
   end
 
   @[Extern(union: true)]
-  record DHCP_SUBNET_ELEMENT_UNION_V4
-  @[Extern]
-  record DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V4*
-
-  @[Extern]
-  record DHCP_CLIENT_INFO_V4,
-    client_ip_address : UInt32,
-    subnet_mask : UInt32,
-    client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-    client_name : Win32cr::Foundation::PWSTR,
-    client_comment : Win32cr::Foundation::PWSTR,
-    client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO,
-    bClientType : UInt8
-
-  @[Extern]
-  record DHCP_CLIENT_INFO_ARRAY_V4,
-    num_elements : UInt32,
-    clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V4**
-
-  @[Extern]
-  record DHCP_SERVER_CONFIG_INFO_V4,
-    api_protocol_support : UInt32,
-    database_name : Win32cr::Foundation::PWSTR,
-    database_path : Win32cr::Foundation::PWSTR,
-    backup_path : Win32cr::Foundation::PWSTR,
-    backup_interval : UInt32,
-    database_logging_flag : UInt32,
-    restore_flag : UInt32,
-    database_cleanup_interval : UInt32,
-    debug_flag : UInt32,
-    dwPingRetries : UInt32,
-    cbBootTableString : UInt32,
-    wszBootTableString : Win32cr::Foundation::PWSTR,
-    fAuditLog : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DHCP_SERVER_CONFIG_INFO_VQ,
-    api_protocol_support : UInt32,
-    database_name : Win32cr::Foundation::PWSTR,
-    database_path : Win32cr::Foundation::PWSTR,
-    backup_path : Win32cr::Foundation::PWSTR,
-    backup_interval : UInt32,
-    database_logging_flag : UInt32,
-    restore_flag : UInt32,
-    database_cleanup_interval : UInt32,
-    debug_flag : UInt32,
-    dwPingRetries : UInt32,
-    cbBootTableString : UInt32,
-    wszBootTableString : Win32cr::Foundation::PWSTR,
-    fAuditLog : Win32cr::Foundation::BOOL,
-    quarantine_on : Win32cr::Foundation::BOOL,
-    quar_def_fail : UInt32,
-    quar_runtime_status : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DHCP_SERVER_CONFIG_INFO_V6,
-    unicast_flag : Win32cr::Foundation::BOOL,
-    rapid_commit_flag : Win32cr::Foundation::BOOL,
-    preferred_lifetime : UInt32,
-    valid_lifetime : UInt32,
-    t1 : UInt32,
-    t2 : UInt32,
-    preferred_lifetime_iata : UInt32,
-    valid_lifetime_iata : UInt32,
-    fAuditLog : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DHCP_SUPER_SCOPE_TABLE_ENTRY,
-    subnet_address : UInt32,
-    super_scope_number : UInt32,
-    next_in_super_scope : UInt32,
-    super_scope_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DHCP_SUPER_SCOPE_TABLE,
-    cEntries : UInt32,
-    pEntries : Win32cr::NetworkManagement::Dhcp::DHCP_SUPER_SCOPE_TABLE_ENTRY*
-
-  @[Extern]
-  record DHCP_CLIENT_INFO_V5,
-    client_ip_address : UInt32,
-    subnet_mask : UInt32,
-    client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-    client_name : Win32cr::Foundation::PWSTR,
-    client_comment : Win32cr::Foundation::PWSTR,
-    client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO,
-    bClientType : UInt8,
-    address_state : UInt8
-
-  @[Extern]
-  record DHCP_CLIENT_INFO_ARRAY_V5,
-    num_elements : UInt32,
-    clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V5**
-
-  @[Extern]
-  record DHCP_ALL_OPTIONS,
-    flags : UInt32,
-    non_vendor_options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_ARRAY*,
-    num_vendor_options : UInt32,
-    vendor_options : Anonymous_e__Struct_* do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      option : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION,
-      vendor_name : Win32cr::Foundation::PWSTR,
-      class_name : Win32cr::Foundation::PWSTR
-
+  struct DHCP_SUBNET_ELEMENT_UNION_V4
+    def initialize()
+    end
   end
 
   @[Extern]
-  record DHCP_ALL_OPTION_VALUES,
-    flags : UInt32,
-    num_elements : UInt32,
-    options : Anonymous_e__Struct_* do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      class_name : Win32cr::Foundation::PWSTR,
-      vendor_name : Win32cr::Foundation::PWSTR,
-      is_vendor : Win32cr::Foundation::BOOL,
-      options_array : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY*
-
+  struct DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V4*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V4*)
+    end
   end
 
   @[Extern]
-  record DHCP_ALL_OPTION_VALUES_PB,
-    flags : UInt32,
-    num_elements : UInt32,
-    options : Anonymous_e__Struct_* do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      policy_name : Win32cr::Foundation::PWSTR,
-      vendor_name : Win32cr::Foundation::PWSTR,
-      is_vendor : Win32cr::Foundation::BOOL,
-      options_array : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY*
-
+  struct DHCP_CLIENT_INFO_V4
+    property client_ip_address : UInt32
+    property subnet_mask : UInt32
+    property client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property client_name : Win32cr::Foundation::PWSTR
+    property client_comment : Win32cr::Foundation::PWSTR
+    property client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO
+    property bClientType : UInt8
+    def initialize(@client_ip_address : UInt32, @subnet_mask : UInt32, @client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @client_name : Win32cr::Foundation::PWSTR, @client_comment : Win32cr::Foundation::PWSTR, @client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO, @bClientType : UInt8)
+    end
   end
 
   @[Extern]
-  record DHCPDS_SERVER,
-    version : UInt32,
-    server_name : Win32cr::Foundation::PWSTR,
-    server_address : UInt32,
-    flags : UInt32,
-    state : UInt32,
-    ds_location : Win32cr::Foundation::PWSTR,
-    ds_loc_type : UInt32
+  struct DHCP_CLIENT_INFO_ARRAY_V4
+    property num_elements : UInt32
+    property clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V4**
+    def initialize(@num_elements : UInt32, @clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V4**)
+    end
+  end
 
   @[Extern]
-  record DHCPDS_SERVERS,
-    flags : UInt32,
-    num_elements : UInt32,
-    servers : Win32cr::NetworkManagement::Dhcp::DHCPDS_SERVER*
+  struct DHCP_SERVER_CONFIG_INFO_V4
+    property api_protocol_support : UInt32
+    property database_name : Win32cr::Foundation::PWSTR
+    property database_path : Win32cr::Foundation::PWSTR
+    property backup_path : Win32cr::Foundation::PWSTR
+    property backup_interval : UInt32
+    property database_logging_flag : UInt32
+    property restore_flag : UInt32
+    property database_cleanup_interval : UInt32
+    property debug_flag : UInt32
+    property dwPingRetries : UInt32
+    property cbBootTableString : UInt32
+    property wszBootTableString : Win32cr::Foundation::PWSTR
+    property fAuditLog : Win32cr::Foundation::BOOL
+    def initialize(@api_protocol_support : UInt32, @database_name : Win32cr::Foundation::PWSTR, @database_path : Win32cr::Foundation::PWSTR, @backup_path : Win32cr::Foundation::PWSTR, @backup_interval : UInt32, @database_logging_flag : UInt32, @restore_flag : UInt32, @database_cleanup_interval : UInt32, @debug_flag : UInt32, @dwPingRetries : UInt32, @cbBootTableString : UInt32, @wszBootTableString : Win32cr::Foundation::PWSTR, @fAuditLog : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DHCP_ATTRIB,
-    dhcp_attrib_id : UInt32,
-    dhcp_attrib_type : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct DHCP_SERVER_CONFIG_INFO_VQ
+    property api_protocol_support : UInt32
+    property database_name : Win32cr::Foundation::PWSTR
+    property database_path : Win32cr::Foundation::PWSTR
+    property backup_path : Win32cr::Foundation::PWSTR
+    property backup_interval : UInt32
+    property database_logging_flag : UInt32
+    property restore_flag : UInt32
+    property database_cleanup_interval : UInt32
+    property debug_flag : UInt32
+    property dwPingRetries : UInt32
+    property cbBootTableString : UInt32
+    property wszBootTableString : Win32cr::Foundation::PWSTR
+    property fAuditLog : Win32cr::Foundation::BOOL
+    property quarantine_on : Win32cr::Foundation::BOOL
+    property quar_def_fail : UInt32
+    property quar_runtime_status : Win32cr::Foundation::BOOL
+    def initialize(@api_protocol_support : UInt32, @database_name : Win32cr::Foundation::PWSTR, @database_path : Win32cr::Foundation::PWSTR, @backup_path : Win32cr::Foundation::PWSTR, @backup_interval : UInt32, @database_logging_flag : UInt32, @restore_flag : UInt32, @database_cleanup_interval : UInt32, @debug_flag : UInt32, @dwPingRetries : UInt32, @cbBootTableString : UInt32, @wszBootTableString : Win32cr::Foundation::PWSTR, @fAuditLog : Win32cr::Foundation::BOOL, @quarantine_on : Win32cr::Foundation::BOOL, @quar_def_fail : UInt32, @quar_runtime_status : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_SERVER_CONFIG_INFO_V6
+    property unicast_flag : Win32cr::Foundation::BOOL
+    property rapid_commit_flag : Win32cr::Foundation::BOOL
+    property preferred_lifetime : UInt32
+    property valid_lifetime : UInt32
+    property t1 : UInt32
+    property t2 : UInt32
+    property preferred_lifetime_iata : UInt32
+    property valid_lifetime_iata : UInt32
+    property fAuditLog : Win32cr::Foundation::BOOL
+    def initialize(@unicast_flag : Win32cr::Foundation::BOOL, @rapid_commit_flag : Win32cr::Foundation::BOOL, @preferred_lifetime : UInt32, @valid_lifetime : UInt32, @t1 : UInt32, @t2 : UInt32, @preferred_lifetime_iata : UInt32, @valid_lifetime_iata : UInt32, @fAuditLog : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_SUPER_SCOPE_TABLE_ENTRY
+    property subnet_address : UInt32
+    property super_scope_number : UInt32
+    property next_in_super_scope : UInt32
+    property super_scope_name : Win32cr::Foundation::PWSTR
+    def initialize(@subnet_address : UInt32, @super_scope_number : UInt32, @next_in_super_scope : UInt32, @super_scope_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_SUPER_SCOPE_TABLE
+    property cEntries : UInt32
+    property pEntries : Win32cr::NetworkManagement::Dhcp::DHCP_SUPER_SCOPE_TABLE_ENTRY*
+    def initialize(@cEntries : UInt32, @pEntries : Win32cr::NetworkManagement::Dhcp::DHCP_SUPER_SCOPE_TABLE_ENTRY*)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_CLIENT_INFO_V5
+    property client_ip_address : UInt32
+    property subnet_mask : UInt32
+    property client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property client_name : Win32cr::Foundation::PWSTR
+    property client_comment : Win32cr::Foundation::PWSTR
+    property client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO
+    property bClientType : UInt8
+    property address_state : UInt8
+    def initialize(@client_ip_address : UInt32, @subnet_mask : UInt32, @client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @client_name : Win32cr::Foundation::PWSTR, @client_comment : Win32cr::Foundation::PWSTR, @client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO, @bClientType : UInt8, @address_state : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_CLIENT_INFO_ARRAY_V5
+    property num_elements : UInt32
+    property clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V5**
+    def initialize(@num_elements : UInt32, @clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V5**)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_ALL_OPTIONS
+    property flags : UInt32
+    property non_vendor_options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_ARRAY*
+    property num_vendor_options : UInt32
+    property vendor_options : Anonymous_e__Struct_*
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property option : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION
+    property vendor_name : Win32cr::Foundation::PWSTR
+    property class_name : Win32cr::Foundation::PWSTR
+    def initialize(@option : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION, @vendor_name : Win32cr::Foundation::PWSTR, @class_name : Win32cr::Foundation::PWSTR)
+    end
+    end
+
+    def initialize(@flags : UInt32, @non_vendor_options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_ARRAY*, @num_vendor_options : UInt32, @vendor_options : Anonymous_e__Struct_*)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_ALL_OPTION_VALUES
+    property flags : UInt32
+    property num_elements : UInt32
+    property options : Anonymous_e__Struct_*
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property class_name : Win32cr::Foundation::PWSTR
+    property vendor_name : Win32cr::Foundation::PWSTR
+    property is_vendor : Win32cr::Foundation::BOOL
+    property options_array : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY*
+    def initialize(@class_name : Win32cr::Foundation::PWSTR, @vendor_name : Win32cr::Foundation::PWSTR, @is_vendor : Win32cr::Foundation::BOOL, @options_array : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY*)
+    end
+    end
+
+    def initialize(@flags : UInt32, @num_elements : UInt32, @options : Anonymous_e__Struct_*)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_ALL_OPTION_VALUES_PB
+    property flags : UInt32
+    property num_elements : UInt32
+    property options : Anonymous_e__Struct_*
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property policy_name : Win32cr::Foundation::PWSTR
+    property vendor_name : Win32cr::Foundation::PWSTR
+    property is_vendor : Win32cr::Foundation::BOOL
+    property options_array : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY*
+    def initialize(@policy_name : Win32cr::Foundation::PWSTR, @vendor_name : Win32cr::Foundation::PWSTR, @is_vendor : Win32cr::Foundation::BOOL, @options_array : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY*)
+    end
+    end
+
+    def initialize(@flags : UInt32, @num_elements : UInt32, @options : Anonymous_e__Struct_*)
+    end
+  end
+
+  @[Extern]
+  struct DHCPDS_SERVER
+    property version : UInt32
+    property server_name : Win32cr::Foundation::PWSTR
+    property server_address : UInt32
+    property flags : UInt32
+    property state : UInt32
+    property ds_location : Win32cr::Foundation::PWSTR
+    property ds_loc_type : UInt32
+    def initialize(@version : UInt32, @server_name : Win32cr::Foundation::PWSTR, @server_address : UInt32, @flags : UInt32, @state : UInt32, @ds_location : Win32cr::Foundation::PWSTR, @ds_loc_type : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DHCPDS_SERVERS
+    property flags : UInt32
+    property num_elements : UInt32
+    property servers : Win32cr::NetworkManagement::Dhcp::DHCPDS_SERVER*
+    def initialize(@flags : UInt32, @num_elements : UInt32, @servers : Win32cr::NetworkManagement::Dhcp::DHCPDS_SERVER*)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_ATTRIB
+    property dhcp_attrib_id : UInt32
+    property dhcp_attrib_type : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dhcp_attrib_bool : Win32cr::Foundation::BOOL,
-      dhcp_attrib_ulong : UInt32
+    struct Anonymous_e__Union_
+    property dhcp_attrib_bool : Win32cr::Foundation::BOOL
+    property dhcp_attrib_ulong : UInt32
+    def initialize(@dhcp_attrib_bool : Win32cr::Foundation::BOOL, @dhcp_attrib_ulong : UInt32)
+    end
+    end
 
+    def initialize(@dhcp_attrib_id : UInt32, @dhcp_attrib_type : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record DHCP_ATTRIB_ARRAY,
-    num_elements : UInt32,
-    dhcp_attribs : Win32cr::NetworkManagement::Dhcp::DHCP_ATTRIB*
+  struct DHCP_ATTRIB_ARRAY
+    property num_elements : UInt32
+    property dhcp_attribs : Win32cr::NetworkManagement::Dhcp::DHCP_ATTRIB*
+    def initialize(@num_elements : UInt32, @dhcp_attribs : Win32cr::NetworkManagement::Dhcp::DHCP_ATTRIB*)
+    end
+  end
 
   @[Extern]
-  record DHCP_BOOTP_IP_RANGE,
-    start_address : UInt32,
-    end_address : UInt32,
-    bootp_allocated : UInt32,
-    max_bootp_allowed : UInt32
+  struct DHCP_BOOTP_IP_RANGE
+    property start_address : UInt32
+    property end_address : UInt32
+    property bootp_allocated : UInt32
+    property max_bootp_allowed : UInt32
+    def initialize(@start_address : UInt32, @end_address : UInt32, @bootp_allocated : UInt32, @max_bootp_allowed : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCP_SUBNET_ELEMENT_DATA_V5,
-    element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE,
-    element : DHCP_SUBNET_ELEMENT_UNION_V5_ do
+  struct DHCP_SUBNET_ELEMENT_DATA_V5
+    property element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE
+    property element : DHCP_SUBNET_ELEMENT_UNION_V5_
 
     # Nested Type DHCP_SUBNET_ELEMENT_UNION_V5_
     @[Extern(union: true)]
-    record DHCP_SUBNET_ELEMENT_UNION_V5_,
-      ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_BOOTP_IP_RANGE*,
-      secondary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO*,
-      reserved_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION_V4*,
-      exclude_ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*,
-      ip_used_cluster : Win32cr::NetworkManagement::Dhcp::DHCP_IP_CLUSTER*
+    struct DHCP_SUBNET_ELEMENT_UNION_V5_
+    property ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_BOOTP_IP_RANGE*
+    property secondary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO*
+    property reserved_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION_V4*
+    property exclude_ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*
+    property ip_used_cluster : Win32cr::NetworkManagement::Dhcp::DHCP_IP_CLUSTER*
+    def initialize(@ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_BOOTP_IP_RANGE*, @secondary_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO*, @reserved_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION_V4*, @exclude_ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*, @ip_used_cluster : Win32cr::NetworkManagement::Dhcp::DHCP_IP_CLUSTER*)
+    end
+    end
 
+    def initialize(@element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE, @element : DHCP_SUBNET_ELEMENT_UNION_V5_)
+    end
   end
 
   @[Extern]
-  record DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V5*
+  struct DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V5*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V5*)
+    end
+  end
 
   @[Extern]
-  record DHCP_PERF_STATS,
-    dwNumPacketsReceived : UInt32,
-    dwNumPacketsDuplicate : UInt32,
-    dwNumPacketsExpired : UInt32,
-    dwNumMilliSecondsProcessed : UInt32,
-    dwNumPacketsInActiveQueue : UInt32,
-    dwNumPacketsInPingQueue : UInt32,
-    dwNumDiscoversReceived : UInt32,
-    dwNumOffersSent : UInt32,
-    dwNumRequestsReceived : UInt32,
-    dwNumInformsReceived : UInt32,
-    dwNumAcksSent : UInt32,
-    dwNumNacksSent : UInt32,
-    dwNumDeclinesReceived : UInt32,
-    dwNumReleasesReceived : UInt32,
-    dwNumDelayedOfferInQueue : UInt32,
-    dwNumPacketsProcessed : UInt32,
-    dwNumPacketsInQuarWaitingQueue : UInt32,
-    dwNumPacketsInQuarReadyQueue : UInt32,
-    dwNumPacketsInQuarDecisionQueue : UInt32
+  struct DHCP_PERF_STATS
+    property dwNumPacketsReceived : UInt32
+    property dwNumPacketsDuplicate : UInt32
+    property dwNumPacketsExpired : UInt32
+    property dwNumMilliSecondsProcessed : UInt32
+    property dwNumPacketsInActiveQueue : UInt32
+    property dwNumPacketsInPingQueue : UInt32
+    property dwNumDiscoversReceived : UInt32
+    property dwNumOffersSent : UInt32
+    property dwNumRequestsReceived : UInt32
+    property dwNumInformsReceived : UInt32
+    property dwNumAcksSent : UInt32
+    property dwNumNacksSent : UInt32
+    property dwNumDeclinesReceived : UInt32
+    property dwNumReleasesReceived : UInt32
+    property dwNumDelayedOfferInQueue : UInt32
+    property dwNumPacketsProcessed : UInt32
+    property dwNumPacketsInQuarWaitingQueue : UInt32
+    property dwNumPacketsInQuarReadyQueue : UInt32
+    property dwNumPacketsInQuarDecisionQueue : UInt32
+    def initialize(@dwNumPacketsReceived : UInt32, @dwNumPacketsDuplicate : UInt32, @dwNumPacketsExpired : UInt32, @dwNumMilliSecondsProcessed : UInt32, @dwNumPacketsInActiveQueue : UInt32, @dwNumPacketsInPingQueue : UInt32, @dwNumDiscoversReceived : UInt32, @dwNumOffersSent : UInt32, @dwNumRequestsReceived : UInt32, @dwNumInformsReceived : UInt32, @dwNumAcksSent : UInt32, @dwNumNacksSent : UInt32, @dwNumDeclinesReceived : UInt32, @dwNumReleasesReceived : UInt32, @dwNumDelayedOfferInQueue : UInt32, @dwNumPacketsProcessed : UInt32, @dwNumPacketsInQuarWaitingQueue : UInt32, @dwNumPacketsInQuarReadyQueue : UInt32, @dwNumPacketsInQuarDecisionQueue : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCP_BIND_ELEMENT,
-    flags : UInt32,
-    fBoundToDHCPServer : Win32cr::Foundation::BOOL,
-    adapter_primary_address : UInt32,
-    adapter_subnet_address : UInt32,
-    if_description : Win32cr::Foundation::PWSTR,
-    if_id_size : UInt32,
-    if_id : UInt8*
+  struct DHCP_BIND_ELEMENT
+    property flags : UInt32
+    property fBoundToDHCPServer : Win32cr::Foundation::BOOL
+    property adapter_primary_address : UInt32
+    property adapter_subnet_address : UInt32
+    property if_description : Win32cr::Foundation::PWSTR
+    property if_id_size : UInt32
+    property if_id : UInt8*
+    def initialize(@flags : UInt32, @fBoundToDHCPServer : Win32cr::Foundation::BOOL, @adapter_primary_address : UInt32, @adapter_subnet_address : UInt32, @if_description : Win32cr::Foundation::PWSTR, @if_id_size : UInt32, @if_id : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DHCP_BIND_ELEMENT_ARRAY,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_BIND_ELEMENT*
+  struct DHCP_BIND_ELEMENT_ARRAY
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_BIND_ELEMENT*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_BIND_ELEMENT*)
+    end
+  end
 
   @[Extern]
-  record DHCPV6_BIND_ELEMENT,
-    flags : UInt32,
-    fBoundToDHCPServer : Win32cr::Foundation::BOOL,
-    adapter_primary_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS,
-    adapter_subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS,
-    if_description : Win32cr::Foundation::PWSTR,
-    ip_v6_if_index : UInt32,
-    if_id_size : UInt32,
-    if_id : UInt8*
+  struct DHCPV6_BIND_ELEMENT
+    property flags : UInt32
+    property fBoundToDHCPServer : Win32cr::Foundation::BOOL
+    property adapter_primary_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    property adapter_subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    property if_description : Win32cr::Foundation::PWSTR
+    property ip_v6_if_index : UInt32
+    property if_id_size : UInt32
+    property if_id : UInt8*
+    def initialize(@flags : UInt32, @fBoundToDHCPServer : Win32cr::Foundation::BOOL, @adapter_primary_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, @adapter_subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, @if_description : Win32cr::Foundation::PWSTR, @ip_v6_if_index : UInt32, @if_id_size : UInt32, @if_id : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DHCPV6_BIND_ELEMENT_ARRAY,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCPV6_BIND_ELEMENT*
+  struct DHCPV6_BIND_ELEMENT_ARRAY
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCPV6_BIND_ELEMENT*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCPV6_BIND_ELEMENT*)
+    end
+  end
 
   @[Extern]
-  record DHCP_IP_RANGE_V6,
-    start_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS,
-    end_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+  struct DHCP_IP_RANGE_V6
+    property start_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    property end_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    def initialize(@start_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, @end_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS)
+    end
+  end
 
   @[Extern]
-  record DHCP_HOST_INFO_V6,
-    ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS,
-    net_bios_name : Win32cr::Foundation::PWSTR,
-    host_name : Win32cr::Foundation::PWSTR
+  struct DHCP_HOST_INFO_V6
+    property ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    property net_bios_name : Win32cr::Foundation::PWSTR
+    property host_name : Win32cr::Foundation::PWSTR
+    def initialize(@ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, @net_bios_name : Win32cr::Foundation::PWSTR, @host_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DHCP_SUBNET_INFO_V6,
-    subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS,
-    prefix : UInt32,
-    preference : UInt16,
-    subnet_name : Win32cr::Foundation::PWSTR,
-    subnet_comment : Win32cr::Foundation::PWSTR,
-    state : UInt32,
-    scope_id : UInt32
+  struct DHCP_SUBNET_INFO_V6
+    property subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    property prefix : UInt32
+    property preference : UInt16
+    property subnet_name : Win32cr::Foundation::PWSTR
+    property subnet_comment : Win32cr::Foundation::PWSTR
+    property state : UInt32
+    property scope_id : UInt32
+    def initialize(@subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, @prefix : UInt32, @preference : UInt16, @subnet_name : Win32cr::Foundation::PWSTR, @subnet_comment : Win32cr::Foundation::PWSTR, @state : UInt32, @scope_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record SCOPE_MIB_INFO_V6,
-    subnet : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS,
-    num_addresses_inuse : UInt64,
-    num_addresses_free : UInt64,
-    num_pending_advertises : UInt64
+  struct SCOPE_MIB_INFO_V6
+    property subnet : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    property num_addresses_inuse : UInt64
+    property num_addresses_free : UInt64
+    property num_pending_advertises : UInt64
+    def initialize(@subnet : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, @num_addresses_inuse : UInt64, @num_addresses_free : UInt64, @num_pending_advertises : UInt64)
+    end
+  end
 
   @[Extern]
-  record DHCP_MIB_INFO_V6,
-    solicits : UInt32,
-    advertises : UInt32,
-    requests : UInt32,
-    renews : UInt32,
-    rebinds : UInt32,
-    replies : UInt32,
-    confirms : UInt32,
-    declines : UInt32,
-    releases : UInt32,
-    informs : UInt32,
-    server_start_time : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    scopes : UInt32,
-    scope_info : Win32cr::NetworkManagement::Dhcp::SCOPE_MIB_INFO_V6*
+  struct DHCP_MIB_INFO_V6
+    property solicits : UInt32
+    property advertises : UInt32
+    property requests : UInt32
+    property renews : UInt32
+    property rebinds : UInt32
+    property replies : UInt32
+    property confirms : UInt32
+    property declines : UInt32
+    property releases : UInt32
+    property informs : UInt32
+    property server_start_time : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property scopes : UInt32
+    property scope_info : Win32cr::NetworkManagement::Dhcp::SCOPE_MIB_INFO_V6*
+    def initialize(@solicits : UInt32, @advertises : UInt32, @requests : UInt32, @renews : UInt32, @rebinds : UInt32, @replies : UInt32, @confirms : UInt32, @declines : UInt32, @releases : UInt32, @informs : UInt32, @server_start_time : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @scopes : UInt32, @scope_info : Win32cr::NetworkManagement::Dhcp::SCOPE_MIB_INFO_V6*)
+    end
+  end
 
   @[Extern]
-  record DHCP_IP_RESERVATION_V6,
-    reserved_ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS,
-    reserved_for_client : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA*,
-    interface_id : UInt32
+  struct DHCP_IP_RESERVATION_V6
+    property reserved_ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    property reserved_for_client : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA*
+    property interface_id : UInt32
+    def initialize(@reserved_ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, @reserved_for_client : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA*, @interface_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCP_SUBNET_ELEMENT_DATA_V6,
-    element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE_V6,
-    element : DHCP_SUBNET_ELEMENT_UNION_V6 do
+  struct DHCP_SUBNET_ELEMENT_DATA_V6
+    property element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE_V6
+    property element : DHCP_SUBNET_ELEMENT_UNION_V6
 
     # Nested Type DHCP_SUBNET_ELEMENT_UNION_V6
     @[Extern(union: true)]
-    record DHCP_SUBNET_ELEMENT_UNION_V6,
-      ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE_V6*,
-      reserved_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION_V6*,
-      exclude_ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE_V6*
+    struct DHCP_SUBNET_ELEMENT_UNION_V6
+    property ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE_V6*
+    property reserved_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION_V6*
+    property exclude_ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE_V6*
+    def initialize(@ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE_V6*, @reserved_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RESERVATION_V6*, @exclude_ip_range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE_V6*)
+    end
+    end
 
+    def initialize(@element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE_V6, @element : DHCP_SUBNET_ELEMENT_UNION_V6)
+    end
   end
 
   @[Extern(union: true)]
-  record DHCP_SUBNET_ELEMENT_UNION_V6
-  @[Extern]
-  record DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V6*
-
-  @[Extern]
-  record DHCP_CLIENT_INFO_V6,
-    client_ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS,
-    client_duid : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-    address_type : UInt32,
-    iaid : UInt32,
-    client_name : Win32cr::Foundation::PWSTR,
-    client_comment : Win32cr::Foundation::PWSTR,
-    client_valid_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    client_pref_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO_V6
-
-  @[Extern]
-  record DHCPV6_IP_ARRAY,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS*
-
-  @[Extern]
-  record DHCP_CLIENT_INFO_ARRAY_V6,
-    num_elements : UInt32,
-    clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V6**
-
-  @[Extern]
-  record DHCP_SEARCH_INFO_V6,
-    search_type : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO_TYPE_V6,
-    search_info : DHCP_CLIENT_SEARCH_UNION_V6_ do
-
-    # Nested Type DHCP_CLIENT_SEARCH_UNION_V6_
-    @[Extern(union: true)]
-    record DHCP_CLIENT_SEARCH_UNION_V6_,
-      client_ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS,
-      client_duid : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-      client_name : Win32cr::Foundation::PWSTR
-
+  struct DHCP_SUBNET_ELEMENT_UNION_V6
+    def initialize()
+    end
   end
 
   @[Extern]
-  record DHCP_POL_COND,
-    parent_expr : UInt32,
-    type__ : Win32cr::NetworkManagement::Dhcp::DHCP_POL_ATTR_TYPE,
-    option_id : UInt32,
-    sub_option_id : UInt32,
-    vendor_name : Win32cr::Foundation::PWSTR,
-    operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COMPARATOR,
-    value : UInt8*,
-    value_length : UInt32
+  struct DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V6*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V6*)
+    end
+  end
 
   @[Extern]
-  record DHCP_POL_COND_ARRAY,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COND*
+  struct DHCP_CLIENT_INFO_V6
+    property client_ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    property client_duid : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property address_type : UInt32
+    property iaid : UInt32
+    property client_name : Win32cr::Foundation::PWSTR
+    property client_comment : Win32cr::Foundation::PWSTR
+    property client_valid_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property client_pref_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO_V6
+    def initialize(@client_ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, @client_duid : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @address_type : UInt32, @iaid : UInt32, @client_name : Win32cr::Foundation::PWSTR, @client_comment : Win32cr::Foundation::PWSTR, @client_valid_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @client_pref_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO_V6)
+    end
+  end
 
   @[Extern]
-  record DHCP_POL_EXPR,
-    parent_expr : UInt32,
-    operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_LOGIC_OPER
+  struct DHCPV6_IP_ARRAY
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS*)
+    end
+  end
 
   @[Extern]
-  record DHCP_POL_EXPR_ARRAY,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_POL_EXPR*
+  struct DHCP_CLIENT_INFO_ARRAY_V6
+    property num_elements : UInt32
+    property clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V6**
+    def initialize(@num_elements : UInt32, @clients : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V6**)
+    end
+  end
 
   @[Extern]
-  record DHCP_IP_RANGE_ARRAY,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*
+  struct DHCP_SEARCH_INFO_V6
+    property search_type : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO_TYPE_V6
+    property search_info : DHCP_CLIENT_SEARCH_UNION_V6_
+
+    # Nested Type DHCP_CLIENT_SEARCH_UNION_V6_
+    @[Extern(union: true)]
+    struct DHCP_CLIENT_SEARCH_UNION_V6_
+    property client_ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    property client_duid : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property client_name : Win32cr::Foundation::PWSTR
+    def initialize(@client_ip_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, @client_duid : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @client_name : Win32cr::Foundation::PWSTR)
+    end
+    end
+
+    def initialize(@search_type : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO_TYPE_V6, @search_info : DHCP_CLIENT_SEARCH_UNION_V6_)
+    end
+  end
 
   @[Extern]
-  record DHCP_POLICY,
-    policy_name : Win32cr::Foundation::PWSTR,
-    is_global_policy : Win32cr::Foundation::BOOL,
-    subnet : UInt32,
-    processing_order : UInt32,
-    conditions : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COND_ARRAY*,
-    expressions : Win32cr::NetworkManagement::Dhcp::DHCP_POL_EXPR_ARRAY*,
-    ranges : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE_ARRAY*,
-    description : Win32cr::Foundation::PWSTR,
-    enabled : Win32cr::Foundation::BOOL
+  struct DHCP_POL_COND
+    property parent_expr : UInt32
+    property type__ : Win32cr::NetworkManagement::Dhcp::DHCP_POL_ATTR_TYPE
+    property option_id : UInt32
+    property sub_option_id : UInt32
+    property vendor_name : Win32cr::Foundation::PWSTR
+    property operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COMPARATOR
+    property value : UInt8*
+    property value_length : UInt32
+    def initialize(@parent_expr : UInt32, @type__ : Win32cr::NetworkManagement::Dhcp::DHCP_POL_ATTR_TYPE, @option_id : UInt32, @sub_option_id : UInt32, @vendor_name : Win32cr::Foundation::PWSTR, @operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COMPARATOR, @value : UInt8*, @value_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCP_POLICY_ARRAY,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*
+  struct DHCP_POL_COND_ARRAY
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COND*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COND*)
+    end
+  end
 
   @[Extern]
-  record DHCP_POLICY_EX,
-    policy_name : Win32cr::Foundation::PWSTR,
-    is_global_policy : Win32cr::Foundation::BOOL,
-    subnet : UInt32,
-    processing_order : UInt32,
-    conditions : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COND_ARRAY*,
-    expressions : Win32cr::NetworkManagement::Dhcp::DHCP_POL_EXPR_ARRAY*,
-    ranges : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE_ARRAY*,
-    description : Win32cr::Foundation::PWSTR,
-    enabled : Win32cr::Foundation::BOOL,
-    properties : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ARRAY*
+  struct DHCP_POL_EXPR
+    property parent_expr : UInt32
+    property operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_LOGIC_OPER
+    def initialize(@parent_expr : UInt32, @operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_LOGIC_OPER)
+    end
+  end
 
   @[Extern]
-  record DHCP_POLICY_EX_ARRAY,
-    num_elements : UInt32,
-    elements : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX*
+  struct DHCP_POL_EXPR_ARRAY
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_POL_EXPR*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_POL_EXPR*)
+    end
+  end
 
   @[Extern]
-  record DHCPV6_STATELESS_PARAMS,
-    status : Win32cr::Foundation::BOOL,
-    purge_interval : UInt32
+  struct DHCP_IP_RANGE_ARRAY
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*)
+    end
+  end
 
   @[Extern]
-  record DHCPV6_STATELESS_SCOPE_STATS,
-    subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS,
-    num_stateless_clients_added : UInt64,
-    num_stateless_clients_removed : UInt64
+  struct DHCP_POLICY
+    property policy_name : Win32cr::Foundation::PWSTR
+    property is_global_policy : Win32cr::Foundation::BOOL
+    property subnet : UInt32
+    property processing_order : UInt32
+    property conditions : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COND_ARRAY*
+    property expressions : Win32cr::NetworkManagement::Dhcp::DHCP_POL_EXPR_ARRAY*
+    property ranges : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE_ARRAY*
+    property description : Win32cr::Foundation::PWSTR
+    property enabled : Win32cr::Foundation::BOOL
+    def initialize(@policy_name : Win32cr::Foundation::PWSTR, @is_global_policy : Win32cr::Foundation::BOOL, @subnet : UInt32, @processing_order : UInt32, @conditions : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COND_ARRAY*, @expressions : Win32cr::NetworkManagement::Dhcp::DHCP_POL_EXPR_ARRAY*, @ranges : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE_ARRAY*, @description : Win32cr::Foundation::PWSTR, @enabled : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DHCPV6_STATELESS_STATS,
-    num_scopes : UInt32,
-    scope_stats : Win32cr::NetworkManagement::Dhcp::DHCPV6_STATELESS_SCOPE_STATS*
+  struct DHCP_POLICY_ARRAY
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*)
+    end
+  end
 
   @[Extern]
-  record DHCP_FAILOVER_RELATIONSHIP,
-    primary_server : UInt32,
-    secondary_server : UInt32,
-    mode : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_MODE,
-    server_type : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_SERVER,
-    state : Win32cr::NetworkManagement::Dhcp::FSM_STATE,
-    prev_state : Win32cr::NetworkManagement::Dhcp::FSM_STATE,
-    mclt : UInt32,
-    safe_period : UInt32,
-    relationship_name : Win32cr::Foundation::PWSTR,
-    primary_server_name : Win32cr::Foundation::PWSTR,
-    secondary_server_name : Win32cr::Foundation::PWSTR,
-    pScopes : Win32cr::NetworkManagement::Dhcp::DHCP_IP_ARRAY*,
-    percentage : UInt8,
-    shared_secret : Win32cr::Foundation::PWSTR
+  struct DHCP_POLICY_EX
+    property policy_name : Win32cr::Foundation::PWSTR
+    property is_global_policy : Win32cr::Foundation::BOOL
+    property subnet : UInt32
+    property processing_order : UInt32
+    property conditions : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COND_ARRAY*
+    property expressions : Win32cr::NetworkManagement::Dhcp::DHCP_POL_EXPR_ARRAY*
+    property ranges : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE_ARRAY*
+    property description : Win32cr::Foundation::PWSTR
+    property enabled : Win32cr::Foundation::BOOL
+    property properties : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ARRAY*
+    def initialize(@policy_name : Win32cr::Foundation::PWSTR, @is_global_policy : Win32cr::Foundation::BOOL, @subnet : UInt32, @processing_order : UInt32, @conditions : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COND_ARRAY*, @expressions : Win32cr::NetworkManagement::Dhcp::DHCP_POL_EXPR_ARRAY*, @ranges : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE_ARRAY*, @description : Win32cr::Foundation::PWSTR, @enabled : Win32cr::Foundation::BOOL, @properties : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ARRAY*)
+    end
+  end
 
   @[Extern]
-  record DHCP_FAILOVER_RELATIONSHIP_ARRAY,
-    num_elements : UInt32,
-    pRelationships : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP*
+  struct DHCP_POLICY_EX_ARRAY
+    property num_elements : UInt32
+    property elements : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX*
+    def initialize(@num_elements : UInt32, @elements : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX*)
+    end
+  end
 
   @[Extern]
-  record DHCPV4_FAILOVER_CLIENT_INFO,
-    client_ip_address : UInt32,
-    subnet_mask : UInt32,
-    client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-    client_name : Win32cr::Foundation::PWSTR,
-    client_comment : Win32cr::Foundation::PWSTR,
-    client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO,
-    bClientType : UInt8,
-    address_state : UInt8,
-    status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus,
-    probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    quarantine_capable : Win32cr::Foundation::BOOL,
-    sent_pot_exp_time : UInt32,
-    ack_pot_exp_time : UInt32,
-    recv_pot_exp_time : UInt32,
-    start_time : UInt32,
-    clt_last_trans_time : UInt32,
-    last_bnd_upd_time : UInt32,
-    bnd_msg_status : UInt32,
-    policy_name : Win32cr::Foundation::PWSTR,
-    flags : UInt8
+  struct DHCPV6_STATELESS_PARAMS
+    property status : Win32cr::Foundation::BOOL
+    property purge_interval : UInt32
+    def initialize(@status : Win32cr::Foundation::BOOL, @purge_interval : UInt32)
+    end
+  end
 
   @[Extern]
-  record DHCPV4_FAILOVER_CLIENT_INFO_ARRAY,
-    num_elements : UInt32,
-    clients : Win32cr::NetworkManagement::Dhcp::DHCPV4_FAILOVER_CLIENT_INFO**
+  struct DHCPV6_STATELESS_SCOPE_STATS
+    property subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS
+    property num_stateless_clients_added : UInt64
+    property num_stateless_clients_removed : UInt64
+    def initialize(@subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, @num_stateless_clients_added : UInt64, @num_stateless_clients_removed : UInt64)
+    end
+  end
 
   @[Extern]
-  record DHCPV4_FAILOVER_CLIENT_INFO_EX,
-    client_ip_address : UInt32,
-    subnet_mask : UInt32,
-    client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA,
-    client_name : Win32cr::Foundation::PWSTR,
-    client_comment : Win32cr::Foundation::PWSTR,
-    client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO,
-    bClientType : UInt8,
-    address_state : UInt8,
-    status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus,
-    probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME,
-    quarantine_capable : Win32cr::Foundation::BOOL,
-    sent_pot_exp_time : UInt32,
-    ack_pot_exp_time : UInt32,
-    recv_pot_exp_time : UInt32,
-    start_time : UInt32,
-    clt_last_trans_time : UInt32,
-    last_bnd_upd_time : UInt32,
-    bnd_msg_status : UInt32,
-    policy_name : Win32cr::Foundation::PWSTR,
-    flags : UInt8,
-    address_state_ex : UInt32
+  struct DHCPV6_STATELESS_STATS
+    property num_scopes : UInt32
+    property scope_stats : Win32cr::NetworkManagement::Dhcp::DHCPV6_STATELESS_SCOPE_STATS*
+    def initialize(@num_scopes : UInt32, @scope_stats : Win32cr::NetworkManagement::Dhcp::DHCPV6_STATELESS_SCOPE_STATS*)
+    end
+  end
 
   @[Extern]
-  record DHCP_FAILOVER_STATISTICS,
-    num_addr : UInt32,
-    addr_free : UInt32,
-    addr_in_use : UInt32,
-    partner_addr_free : UInt32,
-    this_addr_free : UInt32,
-    partner_addr_in_use : UInt32,
-    this_addr_in_use : UInt32
+  struct DHCP_FAILOVER_RELATIONSHIP
+    property primary_server : UInt32
+    property secondary_server : UInt32
+    property mode : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_MODE
+    property server_type : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_SERVER
+    property state : Win32cr::NetworkManagement::Dhcp::FSM_STATE
+    property prev_state : Win32cr::NetworkManagement::Dhcp::FSM_STATE
+    property mclt : UInt32
+    property safe_period : UInt32
+    property relationship_name : Win32cr::Foundation::PWSTR
+    property primary_server_name : Win32cr::Foundation::PWSTR
+    property secondary_server_name : Win32cr::Foundation::PWSTR
+    property pScopes : Win32cr::NetworkManagement::Dhcp::DHCP_IP_ARRAY*
+    property percentage : UInt8
+    property shared_secret : Win32cr::Foundation::PWSTR
+    def initialize(@primary_server : UInt32, @secondary_server : UInt32, @mode : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_MODE, @server_type : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_SERVER, @state : Win32cr::NetworkManagement::Dhcp::FSM_STATE, @prev_state : Win32cr::NetworkManagement::Dhcp::FSM_STATE, @mclt : UInt32, @safe_period : UInt32, @relationship_name : Win32cr::Foundation::PWSTR, @primary_server_name : Win32cr::Foundation::PWSTR, @secondary_server_name : Win32cr::Foundation::PWSTR, @pScopes : Win32cr::NetworkManagement::Dhcp::DHCP_IP_ARRAY*, @percentage : UInt8, @shared_secret : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_FAILOVER_RELATIONSHIP_ARRAY
+    property num_elements : UInt32
+    property pRelationships : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP*
+    def initialize(@num_elements : UInt32, @pRelationships : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP*)
+    end
+  end
+
+  @[Extern]
+  struct DHCPV4_FAILOVER_CLIENT_INFO
+    property client_ip_address : UInt32
+    property subnet_mask : UInt32
+    property client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property client_name : Win32cr::Foundation::PWSTR
+    property client_comment : Win32cr::Foundation::PWSTR
+    property client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO
+    property bClientType : UInt8
+    property address_state : UInt8
+    property status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus
+    property probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property quarantine_capable : Win32cr::Foundation::BOOL
+    property sent_pot_exp_time : UInt32
+    property ack_pot_exp_time : UInt32
+    property recv_pot_exp_time : UInt32
+    property start_time : UInt32
+    property clt_last_trans_time : UInt32
+    property last_bnd_upd_time : UInt32
+    property bnd_msg_status : UInt32
+    property policy_name : Win32cr::Foundation::PWSTR
+    property flags : UInt8
+    def initialize(@client_ip_address : UInt32, @subnet_mask : UInt32, @client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @client_name : Win32cr::Foundation::PWSTR, @client_comment : Win32cr::Foundation::PWSTR, @client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO, @bClientType : UInt8, @address_state : UInt8, @status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus, @probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @quarantine_capable : Win32cr::Foundation::BOOL, @sent_pot_exp_time : UInt32, @ack_pot_exp_time : UInt32, @recv_pot_exp_time : UInt32, @start_time : UInt32, @clt_last_trans_time : UInt32, @last_bnd_upd_time : UInt32, @bnd_msg_status : UInt32, @policy_name : Win32cr::Foundation::PWSTR, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct DHCPV4_FAILOVER_CLIENT_INFO_ARRAY
+    property num_elements : UInt32
+    property clients : Win32cr::NetworkManagement::Dhcp::DHCPV4_FAILOVER_CLIENT_INFO**
+    def initialize(@num_elements : UInt32, @clients : Win32cr::NetworkManagement::Dhcp::DHCPV4_FAILOVER_CLIENT_INFO**)
+    end
+  end
+
+  @[Extern]
+  struct DHCPV4_FAILOVER_CLIENT_INFO_EX
+    property client_ip_address : UInt32
+    property subnet_mask : UInt32
+    property client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA
+    property client_name : Win32cr::Foundation::PWSTR
+    property client_comment : Win32cr::Foundation::PWSTR
+    property client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO
+    property bClientType : UInt8
+    property address_state : UInt8
+    property status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus
+    property probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME
+    property quarantine_capable : Win32cr::Foundation::BOOL
+    property sent_pot_exp_time : UInt32
+    property ack_pot_exp_time : UInt32
+    property recv_pot_exp_time : UInt32
+    property start_time : UInt32
+    property clt_last_trans_time : UInt32
+    property last_bnd_upd_time : UInt32
+    property bnd_msg_status : UInt32
+    property policy_name : Win32cr::Foundation::PWSTR
+    property flags : UInt8
+    property address_state_ex : UInt32
+    def initialize(@client_ip_address : UInt32, @subnet_mask : UInt32, @client_hardware_address : Win32cr::NetworkManagement::Dhcp::DHCP_BINARY_DATA, @client_name : Win32cr::Foundation::PWSTR, @client_comment : Win32cr::Foundation::PWSTR, @client_lease_expires : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @owner_host : Win32cr::NetworkManagement::Dhcp::DHCP_HOST_INFO, @bClientType : UInt8, @address_state : UInt8, @status : Win32cr::NetworkManagement::Dhcp::QuarantineStatus, @probation_ends : Win32cr::NetworkManagement::Dhcp::DATE_TIME, @quarantine_capable : Win32cr::Foundation::BOOL, @sent_pot_exp_time : UInt32, @ack_pot_exp_time : UInt32, @recv_pot_exp_time : UInt32, @start_time : UInt32, @clt_last_trans_time : UInt32, @last_bnd_upd_time : UInt32, @bnd_msg_status : UInt32, @policy_name : Win32cr::Foundation::PWSTR, @flags : UInt8, @address_state_ex : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DHCP_FAILOVER_STATISTICS
+    property num_addr : UInt32
+    property addr_free : UInt32
+    property addr_in_use : UInt32
+    property partner_addr_free : UInt32
+    property this_addr_free : UInt32
+    property partner_addr_in_use : UInt32
+    property this_addr_in_use : UInt32
+    def initialize(@num_addr : UInt32, @addr_free : UInt32, @addr_in_use : UInt32, @partner_addr_free : UInt32, @this_addr_free : UInt32, @partner_addr_in_use : UInt32, @this_addr_in_use : UInt32)
+    end
+  end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record DHCP_SERVER_OPTIONS,
-    message_type : UInt8*,
-    subnet_mask : UInt32*,
-    requested_address : UInt32*,
-    request_lease_time : UInt32*,
-    overlay_fields : UInt8*,
-    router_address : UInt32*,
-    server : UInt32*,
-    parameter_request_list : UInt8*,
-    parameter_request_list_length : UInt32,
-    machine_name : Win32cr::Foundation::PSTR,
-    machine_name_length : UInt32,
-    client_hardware_address_type : UInt8,
-    client_hardware_address_length : UInt8,
-    client_hardware_address : UInt8*,
-    class_identifier : Win32cr::Foundation::PSTR,
-    class_identifier_length : UInt32,
-    vendor_class : UInt8*,
-    vendor_class_length : UInt32,
-    dns_flags : UInt32,
-    dns_name_length : UInt32,
-    dns_name : UInt8*,
-    ds_domain_name_requested : Win32cr::Foundation::BOOLEAN,
-    ds_domain_name : Win32cr::Foundation::PSTR,
-    ds_domain_name_len : UInt32,
-    scope_id : UInt32*
+  struct DHCP_SERVER_OPTIONS
+    property message_type : UInt8*
+    property subnet_mask : UInt32*
+    property requested_address : UInt32*
+    property request_lease_time : UInt32*
+    property overlay_fields : UInt8*
+    property router_address : UInt32*
+    property server : UInt32*
+    property parameter_request_list : UInt8*
+    property parameter_request_list_length : UInt32
+    property machine_name : Win32cr::Foundation::PSTR
+    property machine_name_length : UInt32
+    property client_hardware_address_type : UInt8
+    property client_hardware_address_length : UInt8
+    property client_hardware_address : UInt8*
+    property class_identifier : Win32cr::Foundation::PSTR
+    property class_identifier_length : UInt32
+    property vendor_class : UInt8*
+    property vendor_class_length : UInt32
+    property dns_flags : UInt32
+    property dns_name_length : UInt32
+    property dns_name : UInt8*
+    property ds_domain_name_requested : Win32cr::Foundation::BOOLEAN
+    property ds_domain_name : Win32cr::Foundation::PSTR
+    property ds_domain_name_len : UInt32
+    property scope_id : UInt32*
+    def initialize(@message_type : UInt8*, @subnet_mask : UInt32*, @requested_address : UInt32*, @request_lease_time : UInt32*, @overlay_fields : UInt8*, @router_address : UInt32*, @server : UInt32*, @parameter_request_list : UInt8*, @parameter_request_list_length : UInt32, @machine_name : Win32cr::Foundation::PSTR, @machine_name_length : UInt32, @client_hardware_address_type : UInt8, @client_hardware_address_length : UInt8, @client_hardware_address : UInt8*, @class_identifier : Win32cr::Foundation::PSTR, @class_identifier_length : UInt32, @vendor_class : UInt8*, @vendor_class_length : UInt32, @dns_flags : UInt32, @dns_name_length : UInt32, @dns_name : UInt8*, @ds_domain_name_requested : Win32cr::Foundation::BOOLEAN, @ds_domain_name : Win32cr::Foundation::PSTR, @ds_domain_name_len : UInt32, @scope_id : UInt32*)
+    end
+  end
   {% end %}
 
   @[Link("dhcpcsvc6")]

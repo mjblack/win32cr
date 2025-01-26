@@ -123,9 +123,12 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record CONTACT_AGGREGATION_BLOB,
-    dwCount : UInt32,
-    lpb : UInt8*
+  struct CONTACT_AGGREGATION_BLOB
+    property dwCount : UInt32
+    property lpb : UInt8*
+    def initialize(@dwCount : UInt32, @lpb : UInt8*)
+    end
+  end
 
   @[Extern]
   record IContactManagerVtbl,
@@ -141,7 +144,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("ad553d98-deb1-474a-8e17-fc0c2075b738")]
   record IContactManager, lpVtbl : IContactManagerVtbl* do
     GUID = LibC::GUID.new(0xad553d98_u32, 0xdeb1_u16, 0x474a_u16, StaticArray[0x8e_u8, 0x17_u8, 0xfc_u8, 0xc_u8, 0x20_u8, 0x75_u8, 0xb7_u8, 0x38_u8])
     def query_interface(this : IContactManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -185,7 +187,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("b6afa338-d779-11d9-8bde-f66bad1e3f3a")]
   record IContactCollection, lpVtbl : IContactCollectionVtbl* do
     GUID = LibC::GUID.new(0xb6afa338_u32, 0xd779_u16, 0x11d9_u16, StaticArray[0x8b_u8, 0xde_u8, 0xf6_u8, 0x6b_u8, 0xad_u8, 0x1e_u8, 0x3f_u8, 0x3a_u8])
     def query_interface(this : IContactCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -230,7 +231,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("70dd27dd-5cbd-46e8-bef0-23b6b346288f")]
   record IContactProperties, lpVtbl : IContactPropertiesVtbl* do
     GUID = LibC::GUID.new(0x70dd27dd_u32, 0x5cbd_u16, 0x46e8_u16, StaticArray[0xbe_u8, 0xf0_u8, 0x23_u8, 0xb6_u8, 0xb3_u8, 0x46_u8, 0x28_u8, 0x8f_u8])
     def query_interface(this : IContactProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -295,7 +295,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("f941b671-bda7-4f77-884a-f46462f226a7")]
   record IContact, lpVtbl : IContactVtbl* do
     GUID = LibC::GUID.new(0xf941b671_u32, 0xbda7_u16, 0x4f77_u16, StaticArray[0x88_u8, 0x4a_u8, 0xf4_u8, 0x64_u8, 0x62_u8, 0xf2_u8, 0x26_u8, 0xa7_u8])
     def query_interface(this : IContact*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -334,7 +333,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("ffd3adf8-fa64-4328-b1b6-2e0db509cb3c")]
   record IContactPropertyCollection, lpVtbl : IContactPropertyCollectionVtbl* do
     GUID = LibC::GUID.new(0xffd3adf8_u32, 0xfa64_u16, 0x4328_u16, StaticArray[0xb1_u8, 0xb6_u8, 0x2e_u8, 0xd_u8, 0xb5_u8, 0x9_u8, 0xcb_u8, 0x3c_u8])
     def query_interface(this : IContactPropertyCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -393,7 +391,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("1d865989-4b1f-4b60-8f34-c2ad468b2b50")]
   record IContactAggregationManager, lpVtbl : IContactAggregationManagerVtbl* do
     GUID = LibC::GUID.new(0x1d865989_u32, 0x4b1f_u16, 0x4b60_u16, StaticArray[0x8f_u8, 0x34_u8, 0xc2_u8, 0xad_u8, 0x46_u8, 0x8b_u8, 0x2b_u8, 0x50_u8])
     def query_interface(this : IContactAggregationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -479,7 +476,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("1eb22e86-4c86-41f0-9f9f-c251e9fda6c3")]
   record IContactAggregationContact, lpVtbl : IContactAggregationContactVtbl* do
     GUID = LibC::GUID.new(0x1eb22e86_u32, 0x4c86_u16, 0x41f0_u16, StaticArray[0x9f_u8, 0x9f_u8, 0xc2_u8, 0x51_u8, 0xe9_u8, 0xfd_u8, 0xa6_u8, 0xc3_u8])
     def query_interface(this : IContactAggregationContact*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -561,7 +557,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("826e66fa-81de-43ca-a6fb-8c785cd996c6")]
   record IContactAggregationContactCollection, lpVtbl : IContactAggregationContactCollectionVtbl* do
     GUID = LibC::GUID.new(0x826e66fa_u32, 0x81de_u16, 0x43ca_u16, StaticArray[0xa6_u8, 0xfb_u8, 0x8c_u8, 0x78_u8, 0x5c_u8, 0xd9_u8, 0x96_u8, 0xc6_u8])
     def query_interface(this : IContactAggregationContactCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -608,7 +603,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("7ed1c814-cd30-43c8-9b8d-2e489e53d54b")]
   record IContactAggregationAggregate, lpVtbl : IContactAggregationAggregateVtbl* do
     GUID = LibC::GUID.new(0x7ed1c814_u32, 0xcd30_u16, 0x43c8_u16, StaticArray[0x9b_u8, 0x8d_u8, 0x2e_u8, 0x48_u8, 0x9e_u8, 0x53_u8, 0xd5_u8, 0x4b_u8])
     def query_interface(this : IContactAggregationAggregate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -662,7 +656,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("2359f3a6-3a68-40af-98db-0f9eb143c3bb")]
   record IContactAggregationAggregateCollection, lpVtbl : IContactAggregationAggregateCollectionVtbl* do
     GUID = LibC::GUID.new(0x2359f3a6_u32, 0x3a68_u16, 0x40af_u16, StaticArray[0x98_u8, 0xdb_u8, 0xf_u8, 0x9e_u8, 0xb1_u8, 0x43_u8, 0xc3_u8, 0xbb_u8])
     def query_interface(this : IContactAggregationAggregateCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -707,7 +700,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("c93c545f-1284-499b-96af-07372af473e0")]
   record IContactAggregationGroup, lpVtbl : IContactAggregationGroupVtbl* do
     GUID = LibC::GUID.new(0xc93c545f_u32, 0x1284_u16, 0x499b_u16, StaticArray[0x96_u8, 0xaf_u8, 0x7_u8, 0x37_u8, 0x2a_u8, 0xf4_u8, 0x73_u8, 0xe0_u8])
     def query_interface(this : IContactAggregationGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -764,7 +756,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("20a19a9c-d2f3-4b83-9143-beffd2cc226d")]
   record IContactAggregationGroupCollection, lpVtbl : IContactAggregationGroupCollectionVtbl* do
     GUID = LibC::GUID.new(0x20a19a9c_u32, 0xd2f3_u16, 0x4b83_u16, StaticArray[0x91_u8, 0x43_u8, 0xbe_u8, 0xff_u8, 0xd2_u8, 0xcc_u8, 0x22_u8, 0x6d_u8])
     def query_interface(this : IContactAggregationGroupCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -816,7 +807,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("b6813323-a183-4654-8627-79b30de3a0ec")]
   record IContactAggregationLink, lpVtbl : IContactAggregationLinkVtbl* do
     GUID = LibC::GUID.new(0xb6813323_u32, 0xa183_u16, 0x4654_u16, StaticArray[0x86_u8, 0x27_u8, 0x79_u8, 0xb3_u8, 0xd_u8, 0xe3_u8, 0xa0_u8, 0xec_u8])
     def query_interface(this : IContactAggregationLink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -894,7 +884,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("f8bc0e93-fb55-4f28-b9fa-b1c274153292")]
   record IContactAggregationLinkCollection, lpVtbl : IContactAggregationLinkCollectionVtbl* do
     GUID = LibC::GUID.new(0xf8bc0e93_u32, 0xfb55_u16, 0x4f28_u16, StaticArray[0xb9_u8, 0xfa_u8, 0xb1_u8, 0xc2_u8, 0x74_u8, 0x15_u8, 0x32_u8, 0x92_u8])
     def query_interface(this : IContactAggregationLinkCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -952,7 +941,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("7fdc3d4b-1b82-4334-85c5-25184ee5a5f2")]
   record IContactAggregationServerPerson, lpVtbl : IContactAggregationServerPersonVtbl* do
     GUID = LibC::GUID.new(0x7fdc3d4b_u32, 0x1b82_u16, 0x4334_u16, StaticArray[0x85_u8, 0xc5_u8, 0x25_u8, 0x18_u8, 0x4e_u8, 0xe5_u8, 0xa5_u8, 0xf2_u8])
     def query_interface(this : IContactAggregationServerPerson*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1050,7 +1038,6 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  #@[Com("4f730a4a-6604-47b6-a987-669ecf1e5751")]
   record IContactAggregationServerPersonCollection, lpVtbl : IContactAggregationServerPersonCollectionVtbl* do
     GUID = LibC::GUID.new(0x4f730a4a_u32, 0x6604_u16, 0x47b6_u16, StaticArray[0xa9_u8, 0x87_u8, 0x66_u8, 0x9e_u8, 0xcf_u8, 0x1e_u8, 0x57_u8, 0x51_u8])
     def query_interface(this : IContactAggregationServerPersonCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

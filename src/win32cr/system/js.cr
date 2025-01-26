@@ -3,17 +3,17 @@ require "./../foundation.cr"
 require "./com.cr"
 
 module Win32cr::System::Js
-  alias JsMemoryAllocationCallback = Proc(Void*, Win32cr::System::Js::JsMemoryEventType, LibC::UIntPtrT, Bool)*
+  alias JsMemoryAllocationCallback = Proc(Void*, Win32cr::System::Js::JsMemoryEventType, LibC::UIntPtrT, Bool)
 
-  alias JsBeforeCollectCallback = Proc(Void*, Void)*
+  alias JsBeforeCollectCallback = Proc(Void*, Void)
 
-  alias JsBackgroundWorkItemCallback = Proc(Void*, Void)*
+  alias JsBackgroundWorkItemCallback = Proc(Void*, Void)
 
-  alias JsThreadServiceCallback = Proc(Win32cr::System::Js::JsBackgroundWorkItemCallback, Void*, Bool)*
+  alias JsThreadServiceCallback = Proc(Win32cr::System::Js::JsBackgroundWorkItemCallback, Void*, Bool)
 
-  alias JsFinalizeCallback = Proc(Void*, Void)*
+  alias JsFinalizeCallback = Proc(Void*, Void)
 
-  alias JsNativeFunction = Proc(Void*, Bool, Void**, UInt16, Void*, Void*)*
+  alias JsNativeFunction = Proc(Void*, Bool, Void**, UInt16, Void*, Void*)
 
   JS_SOURCE_CONTEXT_NONE = 18446744073709551615_u64
 

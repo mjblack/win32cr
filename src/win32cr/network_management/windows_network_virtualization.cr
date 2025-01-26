@@ -25,77 +25,105 @@ module Win32cr::NetworkManagement::WindowsNetworkVirtualization
   end
 
   @[Extern]
-  record WNV_OBJECT_HEADER,
-    major_version : UInt8,
-    minor_version : UInt8,
-    size : UInt32
+  struct WNV_OBJECT_HEADER
+    property major_version : UInt8
+    property minor_version : UInt8
+    property size : UInt32
+    def initialize(@major_version : UInt8, @minor_version : UInt8, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record WNV_NOTIFICATION_PARAM,
-    header : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_OBJECT_HEADER,
-    notification_type : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_NOTIFICATION_TYPE,
-    pending_notifications : UInt32,
-    buffer : UInt8*
+  struct WNV_NOTIFICATION_PARAM
+    property header : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_OBJECT_HEADER
+    property notification_type : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_NOTIFICATION_TYPE
+    property pending_notifications : UInt32
+    property buffer : UInt8*
+    def initialize(@header : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_OBJECT_HEADER, @notification_type : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_NOTIFICATION_TYPE, @pending_notifications : UInt32, @buffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record WNV_IP_ADDRESS,
-    ip : IP_e__Union_ do
+  struct WNV_IP_ADDRESS
+    property ip : IP_e__Union_
 
     # Nested Type IP_e__Union_
     @[Extern(union: true)]
-    record IP_e__Union_,
-      v4 : Win32cr::Networking::WinSock::IN_ADDR,
-      v6 : Win32cr::Networking::WinSock::IN6_ADDR,
-      addr : UInt8[16]
+    struct IP_e__Union_
+    property v4 : Win32cr::Networking::WinSock::IN_ADDR
+    property v6 : Win32cr::Networking::WinSock::IN6_ADDR
+    property addr : UInt8[16]
+    def initialize(@v4 : Win32cr::Networking::WinSock::IN_ADDR, @v6 : Win32cr::Networking::WinSock::IN6_ADDR, @addr : UInt8[16])
+    end
+    end
 
+    def initialize(@ip : IP_e__Union_)
+    end
   end
 
   @[Extern]
-  record WNV_POLICY_MISMATCH_PARAM,
-    ca_family : UInt16,
-    pa_family : UInt16,
-    virtual_subnet_id : UInt32,
-    ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS,
-    pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
+  struct WNV_POLICY_MISMATCH_PARAM
+    property ca_family : UInt16
+    property pa_family : UInt16
+    property virtual_subnet_id : UInt32
+    property ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
+    property pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
+    def initialize(@ca_family : UInt16, @pa_family : UInt16, @virtual_subnet_id : UInt32, @ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS)
+    end
+  end
 
   @[Extern]
-  record WNV_PROVIDER_ADDRESS_CHANGE_PARAM,
-    pa_family : UInt16,
-    pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS,
-    address_state : Win32cr::Networking::WinSock::NL_DAD_STATE
+  struct WNV_PROVIDER_ADDRESS_CHANGE_PARAM
+    property pa_family : UInt16
+    property pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
+    property address_state : Win32cr::Networking::WinSock::NL_DAD_STATE
+    def initialize(@pa_family : UInt16, @pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @address_state : Win32cr::Networking::WinSock::NL_DAD_STATE)
+    end
+  end
 
   @[Extern]
-  record WNV_CUSTOMER_ADDRESS_CHANGE_PARAM,
-    mac_address : Win32cr::Networking::WinSock::DL_EUI48,
-    ca_family : UInt16,
-    ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS,
-    virtual_subnet_id : UInt32,
-    pa_family : UInt16,
-    pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS,
-    notification_reason : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_CA_NOTIFICATION_TYPE
+  struct WNV_CUSTOMER_ADDRESS_CHANGE_PARAM
+    property mac_address : Win32cr::Networking::WinSock::DL_EUI48
+    property ca_family : UInt16
+    property ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
+    property virtual_subnet_id : UInt32
+    property pa_family : UInt16
+    property pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
+    property notification_reason : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_CA_NOTIFICATION_TYPE
+    def initialize(@mac_address : Win32cr::Networking::WinSock::DL_EUI48, @ca_family : UInt16, @ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @virtual_subnet_id : UInt32, @pa_family : UInt16, @pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @notification_reason : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_CA_NOTIFICATION_TYPE)
+    end
+  end
 
   @[Extern]
-  record WNV_OBJECT_CHANGE_PARAM,
-    object_type : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_OBJECT_TYPE,
-    object_param : ObjectParam_e__Union_ do
+  struct WNV_OBJECT_CHANGE_PARAM
+    property object_type : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_OBJECT_TYPE
+    property object_param : ObjectParam_e__Union_
 
     # Nested Type ObjectParam_e__Union_
     @[Extern(union: true)]
-    record ObjectParam_e__Union_,
-      provider_address_change : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_PROVIDER_ADDRESS_CHANGE_PARAM,
-      customer_address_change : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_CUSTOMER_ADDRESS_CHANGE_PARAM
+    struct ObjectParam_e__Union_
+    property provider_address_change : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_PROVIDER_ADDRESS_CHANGE_PARAM
+    property customer_address_change : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_CUSTOMER_ADDRESS_CHANGE_PARAM
+    def initialize(@provider_address_change : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_PROVIDER_ADDRESS_CHANGE_PARAM, @customer_address_change : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_CUSTOMER_ADDRESS_CHANGE_PARAM)
+    end
+    end
 
+    def initialize(@object_type : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_OBJECT_TYPE, @object_param : ObjectParam_e__Union_)
+    end
   end
 
   @[Extern]
-  record WNV_REDIRECT_PARAM,
-    ca_family : UInt16,
-    pa_family : UInt16,
-    new_pa_family : UInt16,
-    virtual_subnet_id : UInt32,
-    ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS,
-    pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS,
-    new_pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
+  struct WNV_REDIRECT_PARAM
+    property ca_family : UInt16
+    property pa_family : UInt16
+    property new_pa_family : UInt16
+    property virtual_subnet_id : UInt32
+    property ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
+    property pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
+    property new_pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
+    def initialize(@ca_family : UInt16, @pa_family : UInt16, @new_pa_family : UInt16, @virtual_subnet_id : UInt32, @ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @new_pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS)
+    end
+  end
 
   @[Link("wnvapi")]
   lib C

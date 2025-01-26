@@ -446,247 +446,357 @@ module Win32cr::UI::Input::KeyboardAndMouse
   end
 
   @[Extern]
-  record VK_TO_BIT,
-    vk : UInt8,
-    mod_bits : UInt8
-
-  @[Extern]
-  record MODIFIERS,
-    pVkToBit : Win32cr::UI::Input::KeyboardAndMouse::VK_TO_BIT*,
-    wMaxModBits : UInt16,
-    mod_number : UInt8*
-
-  @[Extern]
-  record VSC_VK,
-    vsc : UInt8,
-    vk : UInt16
-
-  @[Extern]
-  record VK_VSC,
-    vk : UInt8,
-    vsc : UInt8
-
-  @[Extern]
-  record VK_TO_WCHARS1,
-    virtual_key : UInt8,
-    attributes : UInt8,
-    wch : UInt16*
-
-  @[Extern]
-  record VK_TO_WCHARS2,
-    virtual_key : UInt8,
-    attributes : UInt8,
-    wch : UInt16[2]
-
-  @[Extern]
-  record VK_TO_WCHARS3,
-    virtual_key : UInt8,
-    attributes : UInt8,
-    wch : UInt16[3]
-
-  @[Extern]
-  record VK_TO_WCHARS4,
-    virtual_key : UInt8,
-    attributes : UInt8,
-    wch : UInt16[4]
-
-  @[Extern]
-  record VK_TO_WCHARS5,
-    virtual_key : UInt8,
-    attributes : UInt8,
-    wch : UInt16[5]
-
-  @[Extern]
-  record VK_TO_WCHARS6,
-    virtual_key : UInt8,
-    attributes : UInt8,
-    wch : UInt16[6]
-
-  @[Extern]
-  record VK_TO_WCHARS7,
-    virtual_key : UInt8,
-    attributes : UInt8,
-    wch : UInt16[7]
-
-  @[Extern]
-  record VK_TO_WCHARS8,
-    virtual_key : UInt8,
-    attributes : UInt8,
-    wch : UInt16[8]
-
-  @[Extern]
-  record VK_TO_WCHARS9,
-    virtual_key : UInt8,
-    attributes : UInt8,
-    wch : UInt16[9]
-
-  @[Extern]
-  record VK_TO_WCHARS10,
-    virtual_key : UInt8,
-    attributes : UInt8,
-    wch : UInt16[10]
-
-  @[Extern]
-  record VK_TO_WCHAR_TABLE,
-    pVkToWchars : Win32cr::UI::Input::KeyboardAndMouse::VK_TO_WCHARS1*,
-    nModifications : UInt8,
-    cbSize : UInt8
-
-  @[Extern]
-  record DEADKEY,
-    dwBoth : UInt32,
-    wchComposed : UInt16,
-    uFlags : UInt16
-
-  @[Extern]
-  record LIGATURE1,
-    virtual_key : UInt8,
-    modification_number : UInt16,
-    wch : UInt16*
-
-  @[Extern]
-  record LIGATURE2,
-    virtual_key : UInt8,
-    modification_number : UInt16,
-    wch : UInt16[2]
-
-  @[Extern]
-  record LIGATURE3,
-    virtual_key : UInt8,
-    modification_number : UInt16,
-    wch : UInt16[3]
-
-  @[Extern]
-  record LIGATURE4,
-    virtual_key : UInt8,
-    modification_number : UInt16,
-    wch : UInt16[4]
-
-  @[Extern]
-  record LIGATURE5,
-    virtual_key : UInt8,
-    modification_number : UInt16,
-    wch : UInt16[5]
-
-  @[Extern]
-  record VSC_LPWSTR,
-    vsc : UInt8,
-    pwsz : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record KbdLayer,
-    pCharModifiers : Win32cr::UI::Input::KeyboardAndMouse::MODIFIERS*,
-    pVkToWcharTable : Win32cr::UI::Input::KeyboardAndMouse::VK_TO_WCHAR_TABLE*,
-    pDeadKey : Win32cr::UI::Input::KeyboardAndMouse::DEADKEY*,
-    pKeyNames : Win32cr::UI::Input::KeyboardAndMouse::VSC_LPWSTR*,
-    pKeyNamesExt : Win32cr::UI::Input::KeyboardAndMouse::VSC_LPWSTR*,
-    pKeyNamesDead : UInt16**,
-    pusVSCtoVK : UInt16*,
-    bMaxVSCtoVK : UInt8,
-    pVSCtoVK_E0 : Win32cr::UI::Input::KeyboardAndMouse::VSC_VK*,
-    pVSCtoVK_E1 : Win32cr::UI::Input::KeyboardAndMouse::VSC_VK*,
-    fLocaleFlags : UInt32,
-    nLgMax : UInt8,
-    cbLgEntry : UInt8,
-    pLigature : Win32cr::UI::Input::KeyboardAndMouse::LIGATURE1*,
-    dwType : UInt32,
-    dwSubType : UInt32
-
-  @[Extern]
-  record VK_FUNCTION_PARAM_,
-    nlsfe_proc_index : UInt8,
-    nlsfe_proc_param : UInt32
-
-  @[Extern]
-  record VK_TO_FUNCTION_TABLE_,
-    vk : UInt8,
-    nlsfe_proc_type : UInt8,
-    nlsfe_proc_current : UInt8,
-    nlsfe_proc_switch : UInt8,
-    nlsfe_proc : Win32cr::UI::Input::KeyboardAndMouse::VK_FUNCTION_PARAM_[8],
-    nlsfe_proc_alt : Win32cr::UI::Input::KeyboardAndMouse::VK_FUNCTION_PARAM_[8]
-
-  @[Extern]
-  record KbdNlsLayer,
-    oem_identifier : UInt16,
-    layout_information : UInt16,
-    num_of_vk_to_f : UInt32,
-    pVkToF : Win32cr::UI::Input::KeyboardAndMouse::VK_TO_FUNCTION_TABLE_*,
-    num_of_mouse_v_key : Int32,
-    pusMouseVKey : UInt16*
-
-  @[Extern]
-  record KBDTABLE_DESC,
-    wszDllName : UInt16[32],
-    dwType : UInt32,
-    dwSubType : UInt32
-
-  @[Extern]
-  record KBDTABLE_MULTI,
-    nTables : UInt32,
-    aKbdTables : Win32cr::UI::Input::KeyboardAndMouse::KBDTABLE_DESC[8]
-
-  @[Extern]
-  record KBD_TYPE_INFO,
-    dwVersion : UInt32,
-    dwType : UInt32,
-    dwSubType : UInt32
-
-  @[Extern]
-  record MOUSEMOVEPOINT,
-    x : Int32,
-    y : Int32,
-    time : UInt32,
-    dwExtraInfo : LibC::UIntPtrT
-
-  @[Extern]
-  record TRACKMOUSEEVENT,
-    cbSize : UInt32,
-    dwFlags : Win32cr::UI::Input::KeyboardAndMouse::TRACKMOUSEEVENT_FLAGS,
-    hwndTrack : Win32cr::Foundation::HWND,
-    dwHoverTime : UInt32
-
-  @[Extern]
-  record MOUSEINPUT,
-    dx : Int32,
-    dy : Int32,
-    mouseData : Int32,
-    dwFlags : Win32cr::UI::Input::KeyboardAndMouse::MOUSE_EVENT_FLAGS,
-    time : UInt32,
-    dwExtraInfo : LibC::UIntPtrT
-
-  @[Extern]
-  record KEYBDINPUT,
-    wVk : Win32cr::UI::Input::KeyboardAndMouse::VIRTUAL_KEY,
-    wScan : UInt16,
-    dwFlags : Win32cr::UI::Input::KeyboardAndMouse::KEYBD_EVENT_FLAGS,
-    time : UInt32,
-    dwExtraInfo : LibC::UIntPtrT
-
-  @[Extern]
-  record HARDWAREINPUT,
-    uMsg : UInt32,
-    wParamL : UInt16,
-    wParamH : UInt16
-
-  @[Extern]
-  record INPUT,
-    type__ : Win32cr::UI::Input::KeyboardAndMouse::INPUT_TYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      mi : Win32cr::UI::Input::KeyboardAndMouse::MOUSEINPUT,
-      ki : Win32cr::UI::Input::KeyboardAndMouse::KEYBDINPUT,
-      hi : Win32cr::UI::Input::KeyboardAndMouse::HARDWAREINPUT
-
+  struct VK_TO_BIT
+    property vk : UInt8
+    property mod_bits : UInt8
+    def initialize(@vk : UInt8, @mod_bits : UInt8)
+    end
   end
 
   @[Extern]
-  record LASTINPUTINFO,
-    cbSize : UInt32,
-    dwTime : UInt32
+  struct MODIFIERS
+    property pVkToBit : Win32cr::UI::Input::KeyboardAndMouse::VK_TO_BIT*
+    property wMaxModBits : UInt16
+    property mod_number : UInt8*
+    def initialize(@pVkToBit : Win32cr::UI::Input::KeyboardAndMouse::VK_TO_BIT*, @wMaxModBits : UInt16, @mod_number : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct VSC_VK
+    property vsc : UInt8
+    property vk : UInt16
+    def initialize(@vsc : UInt8, @vk : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct VK_VSC
+    property vk : UInt8
+    property vsc : UInt8
+    def initialize(@vk : UInt8, @vsc : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct VK_TO_WCHARS1
+    property virtual_key : UInt8
+    property attributes : UInt8
+    property wch : UInt16*
+    def initialize(@virtual_key : UInt8, @attributes : UInt8, @wch : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct VK_TO_WCHARS2
+    property virtual_key : UInt8
+    property attributes : UInt8
+    property wch : UInt16[2]
+    def initialize(@virtual_key : UInt8, @attributes : UInt8, @wch : UInt16[2])
+    end
+  end
+
+  @[Extern]
+  struct VK_TO_WCHARS3
+    property virtual_key : UInt8
+    property attributes : UInt8
+    property wch : UInt16[3]
+    def initialize(@virtual_key : UInt8, @attributes : UInt8, @wch : UInt16[3])
+    end
+  end
+
+  @[Extern]
+  struct VK_TO_WCHARS4
+    property virtual_key : UInt8
+    property attributes : UInt8
+    property wch : UInt16[4]
+    def initialize(@virtual_key : UInt8, @attributes : UInt8, @wch : UInt16[4])
+    end
+  end
+
+  @[Extern]
+  struct VK_TO_WCHARS5
+    property virtual_key : UInt8
+    property attributes : UInt8
+    property wch : UInt16[5]
+    def initialize(@virtual_key : UInt8, @attributes : UInt8, @wch : UInt16[5])
+    end
+  end
+
+  @[Extern]
+  struct VK_TO_WCHARS6
+    property virtual_key : UInt8
+    property attributes : UInt8
+    property wch : UInt16[6]
+    def initialize(@virtual_key : UInt8, @attributes : UInt8, @wch : UInt16[6])
+    end
+  end
+
+  @[Extern]
+  struct VK_TO_WCHARS7
+    property virtual_key : UInt8
+    property attributes : UInt8
+    property wch : UInt16[7]
+    def initialize(@virtual_key : UInt8, @attributes : UInt8, @wch : UInt16[7])
+    end
+  end
+
+  @[Extern]
+  struct VK_TO_WCHARS8
+    property virtual_key : UInt8
+    property attributes : UInt8
+    property wch : UInt16[8]
+    def initialize(@virtual_key : UInt8, @attributes : UInt8, @wch : UInt16[8])
+    end
+  end
+
+  @[Extern]
+  struct VK_TO_WCHARS9
+    property virtual_key : UInt8
+    property attributes : UInt8
+    property wch : UInt16[9]
+    def initialize(@virtual_key : UInt8, @attributes : UInt8, @wch : UInt16[9])
+    end
+  end
+
+  @[Extern]
+  struct VK_TO_WCHARS10
+    property virtual_key : UInt8
+    property attributes : UInt8
+    property wch : UInt16[10]
+    def initialize(@virtual_key : UInt8, @attributes : UInt8, @wch : UInt16[10])
+    end
+  end
+
+  @[Extern]
+  struct VK_TO_WCHAR_TABLE
+    property pVkToWchars : Win32cr::UI::Input::KeyboardAndMouse::VK_TO_WCHARS1*
+    property nModifications : UInt8
+    property cbSize : UInt8
+    def initialize(@pVkToWchars : Win32cr::UI::Input::KeyboardAndMouse::VK_TO_WCHARS1*, @nModifications : UInt8, @cbSize : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct DEADKEY
+    property dwBoth : UInt32
+    property wchComposed : UInt16
+    property uFlags : UInt16
+    def initialize(@dwBoth : UInt32, @wchComposed : UInt16, @uFlags : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct LIGATURE1
+    property virtual_key : UInt8
+    property modification_number : UInt16
+    property wch : UInt16*
+    def initialize(@virtual_key : UInt8, @modification_number : UInt16, @wch : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct LIGATURE2
+    property virtual_key : UInt8
+    property modification_number : UInt16
+    property wch : UInt16[2]
+    def initialize(@virtual_key : UInt8, @modification_number : UInt16, @wch : UInt16[2])
+    end
+  end
+
+  @[Extern]
+  struct LIGATURE3
+    property virtual_key : UInt8
+    property modification_number : UInt16
+    property wch : UInt16[3]
+    def initialize(@virtual_key : UInt8, @modification_number : UInt16, @wch : UInt16[3])
+    end
+  end
+
+  @[Extern]
+  struct LIGATURE4
+    property virtual_key : UInt8
+    property modification_number : UInt16
+    property wch : UInt16[4]
+    def initialize(@virtual_key : UInt8, @modification_number : UInt16, @wch : UInt16[4])
+    end
+  end
+
+  @[Extern]
+  struct LIGATURE5
+    property virtual_key : UInt8
+    property modification_number : UInt16
+    property wch : UInt16[5]
+    def initialize(@virtual_key : UInt8, @modification_number : UInt16, @wch : UInt16[5])
+    end
+  end
+
+  @[Extern]
+  struct VSC_LPWSTR
+    property vsc : UInt8
+    property pwsz : Win32cr::Foundation::PWSTR
+    def initialize(@vsc : UInt8, @pwsz : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct KbdLayer
+    property pCharModifiers : Win32cr::UI::Input::KeyboardAndMouse::MODIFIERS*
+    property pVkToWcharTable : Win32cr::UI::Input::KeyboardAndMouse::VK_TO_WCHAR_TABLE*
+    property pDeadKey : Win32cr::UI::Input::KeyboardAndMouse::DEADKEY*
+    property pKeyNames : Win32cr::UI::Input::KeyboardAndMouse::VSC_LPWSTR*
+    property pKeyNamesExt : Win32cr::UI::Input::KeyboardAndMouse::VSC_LPWSTR*
+    property pKeyNamesDead : UInt16**
+    property pusVSCtoVK : UInt16*
+    property bMaxVSCtoVK : UInt8
+    property pVSCtoVK_E0 : Win32cr::UI::Input::KeyboardAndMouse::VSC_VK*
+    property pVSCtoVK_E1 : Win32cr::UI::Input::KeyboardAndMouse::VSC_VK*
+    property fLocaleFlags : UInt32
+    property nLgMax : UInt8
+    property cbLgEntry : UInt8
+    property pLigature : Win32cr::UI::Input::KeyboardAndMouse::LIGATURE1*
+    property dwType : UInt32
+    property dwSubType : UInt32
+    def initialize(@pCharModifiers : Win32cr::UI::Input::KeyboardAndMouse::MODIFIERS*, @pVkToWcharTable : Win32cr::UI::Input::KeyboardAndMouse::VK_TO_WCHAR_TABLE*, @pDeadKey : Win32cr::UI::Input::KeyboardAndMouse::DEADKEY*, @pKeyNames : Win32cr::UI::Input::KeyboardAndMouse::VSC_LPWSTR*, @pKeyNamesExt : Win32cr::UI::Input::KeyboardAndMouse::VSC_LPWSTR*, @pKeyNamesDead : UInt16**, @pusVSCtoVK : UInt16*, @bMaxVSCtoVK : UInt8, @pVSCtoVK_E0 : Win32cr::UI::Input::KeyboardAndMouse::VSC_VK*, @pVSCtoVK_E1 : Win32cr::UI::Input::KeyboardAndMouse::VSC_VK*, @fLocaleFlags : UInt32, @nLgMax : UInt8, @cbLgEntry : UInt8, @pLigature : Win32cr::UI::Input::KeyboardAndMouse::LIGATURE1*, @dwType : UInt32, @dwSubType : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VK_FUNCTION_PARAM_
+    property nlsfe_proc_index : UInt8
+    property nlsfe_proc_param : UInt32
+    def initialize(@nlsfe_proc_index : UInt8, @nlsfe_proc_param : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VK_TO_FUNCTION_TABLE_
+    property vk : UInt8
+    property nlsfe_proc_type : UInt8
+    property nlsfe_proc_current : UInt8
+    property nlsfe_proc_switch : UInt8
+    property nlsfe_proc : Win32cr::UI::Input::KeyboardAndMouse::VK_FUNCTION_PARAM_[8]
+    property nlsfe_proc_alt : Win32cr::UI::Input::KeyboardAndMouse::VK_FUNCTION_PARAM_[8]
+    def initialize(@vk : UInt8, @nlsfe_proc_type : UInt8, @nlsfe_proc_current : UInt8, @nlsfe_proc_switch : UInt8, @nlsfe_proc : Win32cr::UI::Input::KeyboardAndMouse::VK_FUNCTION_PARAM_[8], @nlsfe_proc_alt : Win32cr::UI::Input::KeyboardAndMouse::VK_FUNCTION_PARAM_[8])
+    end
+  end
+
+  @[Extern]
+  struct KbdNlsLayer
+    property oem_identifier : UInt16
+    property layout_information : UInt16
+    property num_of_vk_to_f : UInt32
+    property pVkToF : Win32cr::UI::Input::KeyboardAndMouse::VK_TO_FUNCTION_TABLE_*
+    property num_of_mouse_v_key : Int32
+    property pusMouseVKey : UInt16*
+    def initialize(@oem_identifier : UInt16, @layout_information : UInt16, @num_of_vk_to_f : UInt32, @pVkToF : Win32cr::UI::Input::KeyboardAndMouse::VK_TO_FUNCTION_TABLE_*, @num_of_mouse_v_key : Int32, @pusMouseVKey : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct KBDTABLE_DESC
+    property wszDllName : UInt16[32]
+    property dwType : UInt32
+    property dwSubType : UInt32
+    def initialize(@wszDllName : UInt16[32], @dwType : UInt32, @dwSubType : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct KBDTABLE_MULTI
+    property nTables : UInt32
+    property aKbdTables : Win32cr::UI::Input::KeyboardAndMouse::KBDTABLE_DESC[8]
+    def initialize(@nTables : UInt32, @aKbdTables : Win32cr::UI::Input::KeyboardAndMouse::KBDTABLE_DESC[8])
+    end
+  end
+
+  @[Extern]
+  struct KBD_TYPE_INFO
+    property dwVersion : UInt32
+    property dwType : UInt32
+    property dwSubType : UInt32
+    def initialize(@dwVersion : UInt32, @dwType : UInt32, @dwSubType : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MOUSEMOVEPOINT
+    property x : Int32
+    property y : Int32
+    property time : UInt32
+    property dwExtraInfo : LibC::UIntPtrT
+    def initialize(@x : Int32, @y : Int32, @time : UInt32, @dwExtraInfo : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct TRACKMOUSEEVENT
+    property cbSize : UInt32
+    property dwFlags : Win32cr::UI::Input::KeyboardAndMouse::TRACKMOUSEEVENT_FLAGS
+    property hwndTrack : Win32cr::Foundation::HWND
+    property dwHoverTime : UInt32
+    def initialize(@cbSize : UInt32, @dwFlags : Win32cr::UI::Input::KeyboardAndMouse::TRACKMOUSEEVENT_FLAGS, @hwndTrack : Win32cr::Foundation::HWND, @dwHoverTime : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MOUSEINPUT
+    property dx : Int32
+    property dy : Int32
+    property mouseData : Int32
+    property dwFlags : Win32cr::UI::Input::KeyboardAndMouse::MOUSE_EVENT_FLAGS
+    property time : UInt32
+    property dwExtraInfo : LibC::UIntPtrT
+    def initialize(@dx : Int32, @dy : Int32, @mouseData : Int32, @dwFlags : Win32cr::UI::Input::KeyboardAndMouse::MOUSE_EVENT_FLAGS, @time : UInt32, @dwExtraInfo : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct KEYBDINPUT
+    property wVk : Win32cr::UI::Input::KeyboardAndMouse::VIRTUAL_KEY
+    property wScan : UInt16
+    property dwFlags : Win32cr::UI::Input::KeyboardAndMouse::KEYBD_EVENT_FLAGS
+    property time : UInt32
+    property dwExtraInfo : LibC::UIntPtrT
+    def initialize(@wVk : Win32cr::UI::Input::KeyboardAndMouse::VIRTUAL_KEY, @wScan : UInt16, @dwFlags : Win32cr::UI::Input::KeyboardAndMouse::KEYBD_EVENT_FLAGS, @time : UInt32, @dwExtraInfo : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct HARDWAREINPUT
+    property uMsg : UInt32
+    property wParamL : UInt16
+    property wParamH : UInt16
+    def initialize(@uMsg : UInt32, @wParamL : UInt16, @wParamH : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct INPUT
+    property type__ : Win32cr::UI::Input::KeyboardAndMouse::INPUT_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property mi : Win32cr::UI::Input::KeyboardAndMouse::MOUSEINPUT
+    property ki : Win32cr::UI::Input::KeyboardAndMouse::KEYBDINPUT
+    property hi : Win32cr::UI::Input::KeyboardAndMouse::HARDWAREINPUT
+    def initialize(@mi : Win32cr::UI::Input::KeyboardAndMouse::MOUSEINPUT, @ki : Win32cr::UI::Input::KeyboardAndMouse::KEYBDINPUT, @hi : Win32cr::UI::Input::KeyboardAndMouse::HARDWAREINPUT)
+    end
+    end
+
+    def initialize(@type__ : Win32cr::UI::Input::KeyboardAndMouse::INPUT_TYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct LASTINPUTINFO
+    property cbSize : UInt32
+    property dwTime : UInt32
+    def initialize(@cbSize : UInt32, @dwTime : UInt32)
+    end
+  end
 
   @[Link("comctl32")]
   @[Link("user32")]

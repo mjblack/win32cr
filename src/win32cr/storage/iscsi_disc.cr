@@ -2,7 +2,7 @@ require "./../foundation.cr"
 require "./../system/ioctl.cr"
 
 module Win32cr::Storage::IscsiDisc
-  alias PDUMP_DEVICE_POWERON_ROUTINE = Proc(Void*, Int32)*
+  alias PDUMP_DEVICE_POWERON_ROUTINE = Proc(Void*, Int32)
 
   IOCTL_SCSI_BASE = 4_u32
   ScsiRawInterfaceGuid = "53f56309-b6bf-11d0-94f2-00a0c91efb8b"
@@ -241,931 +241,1195 @@ module Win32cr::Storage::IscsiDisc
   end
 
   @[Extern]
-  record ADAPTER_OBJECT_
-  @[Extern]
-  record SCSI_PASS_THROUGH,
-    length : UInt16,
-    scsi_status : UInt8,
-    path_id : UInt8,
-    target_id : UInt8,
-    lun : UInt8,
-    cdb_length : UInt8,
-    sense_info_length : UInt8,
-    data_in : UInt8,
-    data_transfer_length : UInt32,
-    time_out_value : UInt32,
-    data_buffer_offset : LibC::UIntPtrT,
-    sense_info_offset : UInt32,
-    cdb : UInt8[16]
-
-  @[Extern]
-  record SCSI_PASS_THROUGH_DIRECT,
-    length : UInt16,
-    scsi_status : UInt8,
-    path_id : UInt8,
-    target_id : UInt8,
-    lun : UInt8,
-    cdb_length : UInt8,
-    sense_info_length : UInt8,
-    data_in : UInt8,
-    data_transfer_length : UInt32,
-    time_out_value : UInt32,
-    data_buffer : Void*,
-    sense_info_offset : UInt32,
-    cdb : UInt8[16]
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SCSI_PASS_THROUGH32,
-    length : UInt16,
-    scsi_status : UInt8,
-    path_id : UInt8,
-    target_id : UInt8,
-    lun : UInt8,
-    cdb_length : UInt8,
-    sense_info_length : UInt8,
-    data_in : UInt8,
-    data_transfer_length : UInt32,
-    time_out_value : UInt32,
-    data_buffer_offset : UInt32,
-    sense_info_offset : UInt32,
-    cdb : UInt8[16]
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SCSI_PASS_THROUGH_DIRECT32,
-    length : UInt16,
-    scsi_status : UInt8,
-    path_id : UInt8,
-    target_id : UInt8,
-    lun : UInt8,
-    cdb_length : UInt8,
-    sense_info_length : UInt8,
-    data_in : UInt8,
-    data_transfer_length : UInt32,
-    time_out_value : UInt32,
-    data_buffer : Void*,
-    sense_info_offset : UInt32,
-    cdb : UInt8[16]
-  {% end %}
-
-  @[Extern]
-  record SCSI_PASS_THROUGH_EX,
-    version : UInt32,
-    length : UInt32,
-    cdb_length : UInt32,
-    stor_address_length : UInt32,
-    scsi_status : UInt8,
-    sense_info_length : UInt8,
-    data_direction : UInt8,
-    reserved : UInt8,
-    time_out_value : UInt32,
-    stor_address_offset : UInt32,
-    sense_info_offset : UInt32,
-    data_out_transfer_length : UInt32,
-    data_in_transfer_length : UInt32,
-    data_out_buffer_offset : LibC::UIntPtrT,
-    data_in_buffer_offset : LibC::UIntPtrT,
-    cdb : UInt8*
-
-  @[Extern]
-  record SCSI_PASS_THROUGH_DIRECT_EX,
-    version : UInt32,
-    length : UInt32,
-    cdb_length : UInt32,
-    stor_address_length : UInt32,
-    scsi_status : UInt8,
-    sense_info_length : UInt8,
-    data_direction : UInt8,
-    reserved : UInt8,
-    time_out_value : UInt32,
-    stor_address_offset : UInt32,
-    sense_info_offset : UInt32,
-    data_out_transfer_length : UInt32,
-    data_in_transfer_length : UInt32,
-    data_out_buffer : Void*,
-    data_in_buffer : Void*,
-    cdb : UInt8*
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SCSI_PASS_THROUGH32_EX,
-    version : UInt32,
-    length : UInt32,
-    cdb_length : UInt32,
-    stor_address_length : UInt32,
-    scsi_status : UInt8,
-    sense_info_length : UInt8,
-    data_direction : UInt8,
-    reserved : UInt8,
-    time_out_value : UInt32,
-    stor_address_offset : UInt32,
-    sense_info_offset : UInt32,
-    data_out_transfer_length : UInt32,
-    data_in_transfer_length : UInt32,
-    data_out_buffer_offset : UInt32,
-    data_in_buffer_offset : UInt32,
-    cdb : UInt8*
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SCSI_PASS_THROUGH_DIRECT32_EX,
-    version : UInt32,
-    length : UInt32,
-    cdb_length : UInt32,
-    stor_address_length : UInt32,
-    scsi_status : UInt8,
-    sense_info_length : UInt8,
-    data_direction : UInt8,
-    reserved : UInt8,
-    time_out_value : UInt32,
-    stor_address_offset : UInt32,
-    sense_info_offset : UInt32,
-    data_out_transfer_length : UInt32,
-    data_in_transfer_length : UInt32,
-    data_out_buffer : Void*,
-    data_in_buffer : Void*,
-    cdb : UInt8*
-  {% end %}
-
-  @[Extern]
-  record ATA_PASS_THROUGH_EX,
-    length : UInt16,
-    ata_flags : UInt16,
-    path_id : UInt8,
-    target_id : UInt8,
-    lun : UInt8,
-    reserved_as_uchar : UInt8,
-    data_transfer_length : UInt32,
-    time_out_value : UInt32,
-    reserved_as_ulong : UInt32,
-    data_buffer_offset : LibC::UIntPtrT,
-    previous_task_file : UInt8[8],
-    current_task_file : UInt8[8]
-
-  @[Extern]
-  record ATA_PASS_THROUGH_DIRECT,
-    length : UInt16,
-    ata_flags : UInt16,
-    path_id : UInt8,
-    target_id : UInt8,
-    lun : UInt8,
-    reserved_as_uchar : UInt8,
-    data_transfer_length : UInt32,
-    time_out_value : UInt32,
-    reserved_as_ulong : UInt32,
-    data_buffer : Void*,
-    previous_task_file : UInt8[8],
-    current_task_file : UInt8[8]
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record ATA_PASS_THROUGH_EX32,
-    length : UInt16,
-    ata_flags : UInt16,
-    path_id : UInt8,
-    target_id : UInt8,
-    lun : UInt8,
-    reserved_as_uchar : UInt8,
-    data_transfer_length : UInt32,
-    time_out_value : UInt32,
-    reserved_as_ulong : UInt32,
-    data_buffer_offset : UInt32,
-    previous_task_file : UInt8[8],
-    current_task_file : UInt8[8]
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record ATA_PASS_THROUGH_DIRECT32,
-    length : UInt16,
-    ata_flags : UInt16,
-    path_id : UInt8,
-    target_id : UInt8,
-    lun : UInt8,
-    reserved_as_uchar : UInt8,
-    data_transfer_length : UInt32,
-    time_out_value : UInt32,
-    reserved_as_ulong : UInt32,
-    data_buffer : Void*,
-    previous_task_file : UInt8[8],
-    current_task_file : UInt8[8]
-  {% end %}
-
-  @[Extern]
-  record IDE_IO_CONTROL,
-    header_length : UInt32,
-    signature : UInt8[8],
-    timeout : UInt32,
-    control_code : UInt32,
-    return_status : UInt32,
-    data_length : UInt32
-
-  @[Extern]
-  record MPIO_PASS_THROUGH_PATH,
-    pass_through : Win32cr::Storage::IscsiDisc::SCSI_PASS_THROUGH,
-    version : UInt32,
-    length : UInt16,
-    flags : UInt8,
-    port_number : UInt8,
-    mpio_path_id : UInt64
-
-  @[Extern]
-  record MPIO_PASS_THROUGH_PATH_DIRECT,
-    pass_through : Win32cr::Storage::IscsiDisc::SCSI_PASS_THROUGH_DIRECT,
-    version : UInt32,
-    length : UInt16,
-    flags : UInt8,
-    port_number : UInt8,
-    mpio_path_id : UInt64
-
-  @[Extern]
-  record MPIO_PASS_THROUGH_PATH_EX,
-    pass_through_offset : UInt32,
-    version : UInt32,
-    length : UInt16,
-    flags : UInt8,
-    port_number : UInt8,
-    mpio_path_id : UInt64
-
-  @[Extern]
-  record MPIO_PASS_THROUGH_PATH_DIRECT_EX,
-    pass_through_offset : UInt32,
-    version : UInt32,
-    length : UInt16,
-    flags : UInt8,
-    port_number : UInt8,
-    mpio_path_id : UInt64
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record MPIO_PASS_THROUGH_PATH32,
-    pass_through : Win32cr::Storage::IscsiDisc::SCSI_PASS_THROUGH32,
-    version : UInt32,
-    length : UInt16,
-    flags : UInt8,
-    port_number : UInt8,
-    mpio_path_id : UInt64
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record MPIO_PASS_THROUGH_PATH_DIRECT32,
-    pass_through : Win32cr::Storage::IscsiDisc::SCSI_PASS_THROUGH_DIRECT32,
-    version : UInt32,
-    length : UInt16,
-    flags : UInt8,
-    port_number : UInt8,
-    mpio_path_id : UInt64
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record MPIO_PASS_THROUGH_PATH32_EX,
-    pass_through_offset : UInt32,
-    version : UInt32,
-    length : UInt16,
-    flags : UInt8,
-    port_number : UInt8,
-    mpio_path_id : UInt64
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record MPIO_PASS_THROUGH_PATH_DIRECT32_EX,
-    pass_through_offset : UInt32,
-    version : UInt32,
-    length : UInt16,
-    flags : UInt8,
-    port_number : UInt8,
-    mpio_path_id : UInt64
-  {% end %}
-
-  @[Extern]
-  record SCSI_BUS_DATA,
-    number_of_logical_units : UInt8,
-    initiator_bus_id : UInt8,
-    inquiry_data_offset : UInt32
-
-  @[Extern]
-  record SCSI_ADAPTER_BUS_INFO,
-    number_of_buses : UInt8,
-    bus_data : Win32cr::Storage::IscsiDisc::SCSI_BUS_DATA*
-
-  @[Extern]
-  record SCSI_INQUIRY_DATA,
-    path_id : UInt8,
-    target_id : UInt8,
-    lun : UInt8,
-    device_claimed : Win32cr::Foundation::BOOLEAN,
-    inquiry_data_length : UInt32,
-    next_inquiry_data_offset : UInt32,
-    inquiry_data : UInt8*
-
-  @[Extern]
-  record SRB_IO_CONTROL,
-    header_length : UInt32,
-    signature : UInt8[8],
-    timeout : UInt32,
-    control_code : UInt32,
-    return_code : UInt32,
-    length : UInt32
-
-  @[Extern]
-  record NVCACHE_REQUEST_BLOCK,
-    nrb_size : UInt32,
-    function : UInt16,
-    nrb_flags : UInt32,
-    nrb_status : UInt32,
-    count : UInt32,
-    lba : UInt64,
-    data_buf_size : UInt32,
-    nv_cache_status : UInt32,
-    nv_cache_sub_status : UInt32
-
-  @[Extern]
-  record NV_FEATURE_PARAMETER,
-    nv_power_mode_enabled : UInt16,
-    nv_parameter_reserv1 : UInt16,
-    nv_cmd_enabled : UInt16,
-    nv_parameter_reserv2 : UInt16,
-    nv_power_mode_ver : UInt16,
-    nv_cmd_ver : UInt16,
-    nv_size : UInt32,
-    nv_read_speed : UInt16,
-    nv_wrt_speed : UInt16,
-    device_spin_up_time : UInt32
-
-  @[Extern]
-  record NVCACHE_HINT_PAYLOAD,
-    command : UInt8,
-    feature7_0 : UInt8,
-    feature15_8 : UInt8,
-    count15_8 : UInt8,
-    lba7_0 : UInt8,
-    lba15_8 : UInt8,
-    lba23_16 : UInt8,
-    lba31_24 : UInt8,
-    lba39_32 : UInt8,
-    lba47_40 : UInt8,
-    auxiliary7_0 : UInt8,
-    auxiliary23_16 : UInt8,
-    reserved : UInt8[4]
-
-  @[Extern]
-  record NV_SEP_CACHE_PARAMETER,
-    version : UInt32,
-    size : UInt32,
-    flags : Flags_e__Union_,
-    write_cache_type : UInt8,
-    write_cache_type_effective : UInt8,
-    parameter_reserve1 : UInt8[3] do
-
-    # Nested Type Flags_e__Union_
-    @[Extern(union: true)]
-    record Flags_e__Union_,
-      cache_flags : CacheFlags_e__Struct_,
-      cache_flags_set : UInt8 do
-
-      # Nested Type CacheFlags_e__Struct_
-      @[Extern]
-      record CacheFlags_e__Struct_,
-        _bitfield : UInt8
-
+  struct ADAPTER_OBJECT_
+    def initialize()
     end
-
   end
 
   @[Extern]
-  record STORAGE_DIAGNOSTIC_MP_REQUEST,
-    version : UInt32,
-    size : UInt32,
-    target_type : Win32cr::Storage::IscsiDisc::MP_STORAGE_DIAGNOSTIC_TARGET_TYPE,
-    level : Win32cr::Storage::IscsiDisc::MP_STORAGE_DIAGNOSTIC_LEVEL,
-    provider_id : LibC::GUID,
-    buffer_size : UInt32,
-    reserved : UInt32,
-    data_buffer : UInt8*
+  struct SCSI_PASS_THROUGH
+    property length : UInt16
+    property scsi_status : UInt8
+    property path_id : UInt8
+    property target_id : UInt8
+    property lun : UInt8
+    property cdb_length : UInt8
+    property sense_info_length : UInt8
+    property data_in : UInt8
+    property data_transfer_length : UInt32
+    property time_out_value : UInt32
+    property data_buffer_offset : LibC::UIntPtrT
+    property sense_info_offset : UInt32
+    property cdb : UInt8[16]
+    def initialize(@length : UInt16, @scsi_status : UInt8, @path_id : UInt8, @target_id : UInt8, @lun : UInt8, @cdb_length : UInt8, @sense_info_length : UInt8, @data_in : UInt8, @data_transfer_length : UInt32, @time_out_value : UInt32, @data_buffer_offset : LibC::UIntPtrT, @sense_info_offset : UInt32, @cdb : UInt8[16])
+    end
+  end
 
   @[Extern]
-  record MP_DEVICE_DATA_SET_RANGE,
-    starting_offset : Int64,
-    length_in_bytes : UInt64
+  struct SCSI_PASS_THROUGH_DIRECT
+    property length : UInt16
+    property scsi_status : UInt8
+    property path_id : UInt8
+    property target_id : UInt8
+    property lun : UInt8
+    property cdb_length : UInt8
+    property sense_info_length : UInt8
+    property data_in : UInt8
+    property data_transfer_length : UInt32
+    property time_out_value : UInt32
+    property data_buffer : Void*
+    property sense_info_offset : UInt32
+    property cdb : UInt8[16]
+    def initialize(@length : UInt16, @scsi_status : UInt8, @path_id : UInt8, @target_id : UInt8, @lun : UInt8, @cdb_length : UInt8, @sense_info_length : UInt8, @data_in : UInt8, @data_transfer_length : UInt32, @time_out_value : UInt32, @data_buffer : Void*, @sense_info_offset : UInt32, @cdb : UInt8[16])
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SCSI_PASS_THROUGH32
+    property length : UInt16
+    property scsi_status : UInt8
+    property path_id : UInt8
+    property target_id : UInt8
+    property lun : UInt8
+    property cdb_length : UInt8
+    property sense_info_length : UInt8
+    property data_in : UInt8
+    property data_transfer_length : UInt32
+    property time_out_value : UInt32
+    property data_buffer_offset : UInt32
+    property sense_info_offset : UInt32
+    property cdb : UInt8[16]
+    def initialize(@length : UInt16, @scsi_status : UInt8, @path_id : UInt8, @target_id : UInt8, @lun : UInt8, @cdb_length : UInt8, @sense_info_length : UInt8, @data_in : UInt8, @data_transfer_length : UInt32, @time_out_value : UInt32, @data_buffer_offset : UInt32, @sense_info_offset : UInt32, @cdb : UInt8[16])
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SCSI_PASS_THROUGH_DIRECT32
+    property length : UInt16
+    property scsi_status : UInt8
+    property path_id : UInt8
+    property target_id : UInt8
+    property lun : UInt8
+    property cdb_length : UInt8
+    property sense_info_length : UInt8
+    property data_in : UInt8
+    property data_transfer_length : UInt32
+    property time_out_value : UInt32
+    property data_buffer : Void*
+    property sense_info_offset : UInt32
+    property cdb : UInt8[16]
+    def initialize(@length : UInt16, @scsi_status : UInt8, @path_id : UInt8, @target_id : UInt8, @lun : UInt8, @cdb_length : UInt8, @sense_info_length : UInt8, @data_in : UInt8, @data_transfer_length : UInt32, @time_out_value : UInt32, @data_buffer : Void*, @sense_info_offset : UInt32, @cdb : UInt8[16])
+    end
+  end
+  {% end %}
 
   @[Extern]
-  record DSM_NOTIFICATION_REQUEST_BLOCK,
-    size : UInt32,
-    version : UInt32,
-    notify_flags : UInt32,
-    data_set_profile : UInt32,
-    reserved : UInt32[3],
-    data_set_ranges_count : UInt32,
-    data_set_ranges : Win32cr::Storage::IscsiDisc::MP_DEVICE_DATA_SET_RANGE*
+  struct SCSI_PASS_THROUGH_EX
+    property version : UInt32
+    property length : UInt32
+    property cdb_length : UInt32
+    property stor_address_length : UInt32
+    property scsi_status : UInt8
+    property sense_info_length : UInt8
+    property data_direction : UInt8
+    property reserved : UInt8
+    property time_out_value : UInt32
+    property stor_address_offset : UInt32
+    property sense_info_offset : UInt32
+    property data_out_transfer_length : UInt32
+    property data_in_transfer_length : UInt32
+    property data_out_buffer_offset : LibC::UIntPtrT
+    property data_in_buffer_offset : LibC::UIntPtrT
+    property cdb : UInt8*
+    def initialize(@version : UInt32, @length : UInt32, @cdb_length : UInt32, @stor_address_length : UInt32, @scsi_status : UInt8, @sense_info_length : UInt8, @data_direction : UInt8, @reserved : UInt8, @time_out_value : UInt32, @stor_address_offset : UInt32, @sense_info_offset : UInt32, @data_out_transfer_length : UInt32, @data_in_transfer_length : UInt32, @data_out_buffer_offset : LibC::UIntPtrT, @data_in_buffer_offset : LibC::UIntPtrT, @cdb : UInt8*)
+    end
+  end
 
   @[Extern]
-  record HYBRID_REQUEST_BLOCK,
-    version : UInt32,
-    size : UInt32,
-    function : UInt32,
-    flags : UInt32,
-    data_buffer_offset : UInt32,
-    data_buffer_length : UInt32
+  struct SCSI_PASS_THROUGH_DIRECT_EX
+    property version : UInt32
+    property length : UInt32
+    property cdb_length : UInt32
+    property stor_address_length : UInt32
+    property scsi_status : UInt8
+    property sense_info_length : UInt8
+    property data_direction : UInt8
+    property reserved : UInt8
+    property time_out_value : UInt32
+    property stor_address_offset : UInt32
+    property sense_info_offset : UInt32
+    property data_out_transfer_length : UInt32
+    property data_in_transfer_length : UInt32
+    property data_out_buffer : Void*
+    property data_in_buffer : Void*
+    property cdb : UInt8*
+    def initialize(@version : UInt32, @length : UInt32, @cdb_length : UInt32, @stor_address_length : UInt32, @scsi_status : UInt8, @sense_info_length : UInt8, @data_direction : UInt8, @reserved : UInt8, @time_out_value : UInt32, @stor_address_offset : UInt32, @sense_info_offset : UInt32, @data_out_transfer_length : UInt32, @data_in_transfer_length : UInt32, @data_out_buffer : Void*, @data_in_buffer : Void*, @cdb : UInt8*)
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SCSI_PASS_THROUGH32_EX
+    property version : UInt32
+    property length : UInt32
+    property cdb_length : UInt32
+    property stor_address_length : UInt32
+    property scsi_status : UInt8
+    property sense_info_length : UInt8
+    property data_direction : UInt8
+    property reserved : UInt8
+    property time_out_value : UInt32
+    property stor_address_offset : UInt32
+    property sense_info_offset : UInt32
+    property data_out_transfer_length : UInt32
+    property data_in_transfer_length : UInt32
+    property data_out_buffer_offset : UInt32
+    property data_in_buffer_offset : UInt32
+    property cdb : UInt8*
+    def initialize(@version : UInt32, @length : UInt32, @cdb_length : UInt32, @stor_address_length : UInt32, @scsi_status : UInt8, @sense_info_length : UInt8, @data_direction : UInt8, @reserved : UInt8, @time_out_value : UInt32, @stor_address_offset : UInt32, @sense_info_offset : UInt32, @data_out_transfer_length : UInt32, @data_in_transfer_length : UInt32, @data_out_buffer_offset : UInt32, @data_in_buffer_offset : UInt32, @cdb : UInt8*)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SCSI_PASS_THROUGH_DIRECT32_EX
+    property version : UInt32
+    property length : UInt32
+    property cdb_length : UInt32
+    property stor_address_length : UInt32
+    property scsi_status : UInt8
+    property sense_info_length : UInt8
+    property data_direction : UInt8
+    property reserved : UInt8
+    property time_out_value : UInt32
+    property stor_address_offset : UInt32
+    property sense_info_offset : UInt32
+    property data_out_transfer_length : UInt32
+    property data_in_transfer_length : UInt32
+    property data_out_buffer : Void*
+    property data_in_buffer : Void*
+    property cdb : UInt8*
+    def initialize(@version : UInt32, @length : UInt32, @cdb_length : UInt32, @stor_address_length : UInt32, @scsi_status : UInt8, @sense_info_length : UInt8, @data_direction : UInt8, @reserved : UInt8, @time_out_value : UInt32, @stor_address_offset : UInt32, @sense_info_offset : UInt32, @data_out_transfer_length : UInt32, @data_in_transfer_length : UInt32, @data_out_buffer : Void*, @data_in_buffer : Void*, @cdb : UInt8*)
+    end
+  end
+  {% end %}
 
   @[Extern]
-  record NVCACHE_PRIORITY_LEVEL_DESCRIPTOR,
-    priority_level : UInt8,
-    reserved0 : UInt8[3],
-    consumed_nvm_size_fraction : UInt32,
-    consumed_mapping_resources_fraction : UInt32,
-    consumed_nvm_size_for_dirty_data_fraction : UInt32,
-    consumed_mapping_resources_for_dirty_data_fraction : UInt32,
-    reserved1 : UInt32
+  struct ATA_PASS_THROUGH_EX
+    property length : UInt16
+    property ata_flags : UInt16
+    property path_id : UInt8
+    property target_id : UInt8
+    property lun : UInt8
+    property reserved_as_uchar : UInt8
+    property data_transfer_length : UInt32
+    property time_out_value : UInt32
+    property reserved_as_ulong : UInt32
+    property data_buffer_offset : LibC::UIntPtrT
+    property previous_task_file : UInt8[8]
+    property current_task_file : UInt8[8]
+    def initialize(@length : UInt16, @ata_flags : UInt16, @path_id : UInt8, @target_id : UInt8, @lun : UInt8, @reserved_as_uchar : UInt8, @data_transfer_length : UInt32, @time_out_value : UInt32, @reserved_as_ulong : UInt32, @data_buffer_offset : LibC::UIntPtrT, @previous_task_file : UInt8[8], @current_task_file : UInt8[8])
+    end
+  end
 
   @[Extern]
-  record HYBRID_INFORMATION,
-    version : UInt32,
-    size : UInt32,
-    hybrid_supported : Win32cr::Foundation::BOOLEAN,
-    status : Win32cr::Storage::IscsiDisc::NVCACHE_STATUS,
-    cache_type_effective : Win32cr::Storage::IscsiDisc::NVCACHE_TYPE,
-    cache_type_default : Win32cr::Storage::IscsiDisc::NVCACHE_TYPE,
-    fraction_base : UInt32,
-    cache_size : UInt64,
-    attributes : Attributes_e__Struct_,
-    priorities : Priorities_e__Struct_ do
+  struct ATA_PASS_THROUGH_DIRECT
+    property length : UInt16
+    property ata_flags : UInt16
+    property path_id : UInt8
+    property target_id : UInt8
+    property lun : UInt8
+    property reserved_as_uchar : UInt8
+    property data_transfer_length : UInt32
+    property time_out_value : UInt32
+    property reserved_as_ulong : UInt32
+    property data_buffer : Void*
+    property previous_task_file : UInt8[8]
+    property current_task_file : UInt8[8]
+    def initialize(@length : UInt16, @ata_flags : UInt16, @path_id : UInt8, @target_id : UInt8, @lun : UInt8, @reserved_as_uchar : UInt8, @data_transfer_length : UInt32, @time_out_value : UInt32, @reserved_as_ulong : UInt32, @data_buffer : Void*, @previous_task_file : UInt8[8], @current_task_file : UInt8[8])
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct ATA_PASS_THROUGH_EX32
+    property length : UInt16
+    property ata_flags : UInt16
+    property path_id : UInt8
+    property target_id : UInt8
+    property lun : UInt8
+    property reserved_as_uchar : UInt8
+    property data_transfer_length : UInt32
+    property time_out_value : UInt32
+    property reserved_as_ulong : UInt32
+    property data_buffer_offset : UInt32
+    property previous_task_file : UInt8[8]
+    property current_task_file : UInt8[8]
+    def initialize(@length : UInt16, @ata_flags : UInt16, @path_id : UInt8, @target_id : UInt8, @lun : UInt8, @reserved_as_uchar : UInt8, @data_transfer_length : UInt32, @time_out_value : UInt32, @reserved_as_ulong : UInt32, @data_buffer_offset : UInt32, @previous_task_file : UInt8[8], @current_task_file : UInt8[8])
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct ATA_PASS_THROUGH_DIRECT32
+    property length : UInt16
+    property ata_flags : UInt16
+    property path_id : UInt8
+    property target_id : UInt8
+    property lun : UInt8
+    property reserved_as_uchar : UInt8
+    property data_transfer_length : UInt32
+    property time_out_value : UInt32
+    property reserved_as_ulong : UInt32
+    property data_buffer : Void*
+    property previous_task_file : UInt8[8]
+    property current_task_file : UInt8[8]
+    def initialize(@length : UInt16, @ata_flags : UInt16, @path_id : UInt8, @target_id : UInt8, @lun : UInt8, @reserved_as_uchar : UInt8, @data_transfer_length : UInt32, @time_out_value : UInt32, @reserved_as_ulong : UInt32, @data_buffer : Void*, @previous_task_file : UInt8[8], @current_task_file : UInt8[8])
+    end
+  end
+  {% end %}
+
+  @[Extern]
+  struct IDE_IO_CONTROL
+    property header_length : UInt32
+    property signature : UInt8[8]
+    property timeout : UInt32
+    property control_code : UInt32
+    property return_status : UInt32
+    property data_length : UInt32
+    def initialize(@header_length : UInt32, @signature : UInt8[8], @timeout : UInt32, @control_code : UInt32, @return_status : UInt32, @data_length : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MPIO_PASS_THROUGH_PATH
+    property pass_through : Win32cr::Storage::IscsiDisc::SCSI_PASS_THROUGH
+    property version : UInt32
+    property length : UInt16
+    property flags : UInt8
+    property port_number : UInt8
+    property mpio_path_id : UInt64
+    def initialize(@pass_through : Win32cr::Storage::IscsiDisc::SCSI_PASS_THROUGH, @version : UInt32, @length : UInt16, @flags : UInt8, @port_number : UInt8, @mpio_path_id : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct MPIO_PASS_THROUGH_PATH_DIRECT
+    property pass_through : Win32cr::Storage::IscsiDisc::SCSI_PASS_THROUGH_DIRECT
+    property version : UInt32
+    property length : UInt16
+    property flags : UInt8
+    property port_number : UInt8
+    property mpio_path_id : UInt64
+    def initialize(@pass_through : Win32cr::Storage::IscsiDisc::SCSI_PASS_THROUGH_DIRECT, @version : UInt32, @length : UInt16, @flags : UInt8, @port_number : UInt8, @mpio_path_id : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct MPIO_PASS_THROUGH_PATH_EX
+    property pass_through_offset : UInt32
+    property version : UInt32
+    property length : UInt16
+    property flags : UInt8
+    property port_number : UInt8
+    property mpio_path_id : UInt64
+    def initialize(@pass_through_offset : UInt32, @version : UInt32, @length : UInt16, @flags : UInt8, @port_number : UInt8, @mpio_path_id : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct MPIO_PASS_THROUGH_PATH_DIRECT_EX
+    property pass_through_offset : UInt32
+    property version : UInt32
+    property length : UInt16
+    property flags : UInt8
+    property port_number : UInt8
+    property mpio_path_id : UInt64
+    def initialize(@pass_through_offset : UInt32, @version : UInt32, @length : UInt16, @flags : UInt8, @port_number : UInt8, @mpio_path_id : UInt64)
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct MPIO_PASS_THROUGH_PATH32
+    property pass_through : Win32cr::Storage::IscsiDisc::SCSI_PASS_THROUGH32
+    property version : UInt32
+    property length : UInt16
+    property flags : UInt8
+    property port_number : UInt8
+    property mpio_path_id : UInt64
+    def initialize(@pass_through : Win32cr::Storage::IscsiDisc::SCSI_PASS_THROUGH32, @version : UInt32, @length : UInt16, @flags : UInt8, @port_number : UInt8, @mpio_path_id : UInt64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct MPIO_PASS_THROUGH_PATH_DIRECT32
+    property pass_through : Win32cr::Storage::IscsiDisc::SCSI_PASS_THROUGH_DIRECT32
+    property version : UInt32
+    property length : UInt16
+    property flags : UInt8
+    property port_number : UInt8
+    property mpio_path_id : UInt64
+    def initialize(@pass_through : Win32cr::Storage::IscsiDisc::SCSI_PASS_THROUGH_DIRECT32, @version : UInt32, @length : UInt16, @flags : UInt8, @port_number : UInt8, @mpio_path_id : UInt64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct MPIO_PASS_THROUGH_PATH32_EX
+    property pass_through_offset : UInt32
+    property version : UInt32
+    property length : UInt16
+    property flags : UInt8
+    property port_number : UInt8
+    property mpio_path_id : UInt64
+    def initialize(@pass_through_offset : UInt32, @version : UInt32, @length : UInt16, @flags : UInt8, @port_number : UInt8, @mpio_path_id : UInt64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct MPIO_PASS_THROUGH_PATH_DIRECT32_EX
+    property pass_through_offset : UInt32
+    property version : UInt32
+    property length : UInt16
+    property flags : UInt8
+    property port_number : UInt8
+    property mpio_path_id : UInt64
+    def initialize(@pass_through_offset : UInt32, @version : UInt32, @length : UInt16, @flags : UInt8, @port_number : UInt8, @mpio_path_id : UInt64)
+    end
+  end
+  {% end %}
+
+  @[Extern]
+  struct SCSI_BUS_DATA
+    property number_of_logical_units : UInt8
+    property initiator_bus_id : UInt8
+    property inquiry_data_offset : UInt32
+    def initialize(@number_of_logical_units : UInt8, @initiator_bus_id : UInt8, @inquiry_data_offset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SCSI_ADAPTER_BUS_INFO
+    property number_of_buses : UInt8
+    property bus_data : Win32cr::Storage::IscsiDisc::SCSI_BUS_DATA*
+    def initialize(@number_of_buses : UInt8, @bus_data : Win32cr::Storage::IscsiDisc::SCSI_BUS_DATA*)
+    end
+  end
+
+  @[Extern]
+  struct SCSI_INQUIRY_DATA
+    property path_id : UInt8
+    property target_id : UInt8
+    property lun : UInt8
+    property device_claimed : Win32cr::Foundation::BOOLEAN
+    property inquiry_data_length : UInt32
+    property next_inquiry_data_offset : UInt32
+    property inquiry_data : UInt8*
+    def initialize(@path_id : UInt8, @target_id : UInt8, @lun : UInt8, @device_claimed : Win32cr::Foundation::BOOLEAN, @inquiry_data_length : UInt32, @next_inquiry_data_offset : UInt32, @inquiry_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct SRB_IO_CONTROL
+    property header_length : UInt32
+    property signature : UInt8[8]
+    property timeout : UInt32
+    property control_code : UInt32
+    property return_code : UInt32
+    property length : UInt32
+    def initialize(@header_length : UInt32, @signature : UInt8[8], @timeout : UInt32, @control_code : UInt32, @return_code : UInt32, @length : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NVCACHE_REQUEST_BLOCK
+    property nrb_size : UInt32
+    property function : UInt16
+    property nrb_flags : UInt32
+    property nrb_status : UInt32
+    property count : UInt32
+    property lba : UInt64
+    property data_buf_size : UInt32
+    property nv_cache_status : UInt32
+    property nv_cache_sub_status : UInt32
+    def initialize(@nrb_size : UInt32, @function : UInt16, @nrb_flags : UInt32, @nrb_status : UInt32, @count : UInt32, @lba : UInt64, @data_buf_size : UInt32, @nv_cache_status : UInt32, @nv_cache_sub_status : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NV_FEATURE_PARAMETER
+    property nv_power_mode_enabled : UInt16
+    property nv_parameter_reserv1 : UInt16
+    property nv_cmd_enabled : UInt16
+    property nv_parameter_reserv2 : UInt16
+    property nv_power_mode_ver : UInt16
+    property nv_cmd_ver : UInt16
+    property nv_size : UInt32
+    property nv_read_speed : UInt16
+    property nv_wrt_speed : UInt16
+    property device_spin_up_time : UInt32
+    def initialize(@nv_power_mode_enabled : UInt16, @nv_parameter_reserv1 : UInt16, @nv_cmd_enabled : UInt16, @nv_parameter_reserv2 : UInt16, @nv_power_mode_ver : UInt16, @nv_cmd_ver : UInt16, @nv_size : UInt32, @nv_read_speed : UInt16, @nv_wrt_speed : UInt16, @device_spin_up_time : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NVCACHE_HINT_PAYLOAD
+    property command : UInt8
+    property feature7_0 : UInt8
+    property feature15_8 : UInt8
+    property count15_8 : UInt8
+    property lba7_0 : UInt8
+    property lba15_8 : UInt8
+    property lba23_16 : UInt8
+    property lba31_24 : UInt8
+    property lba39_32 : UInt8
+    property lba47_40 : UInt8
+    property auxiliary7_0 : UInt8
+    property auxiliary23_16 : UInt8
+    property reserved : UInt8[4]
+    def initialize(@command : UInt8, @feature7_0 : UInt8, @feature15_8 : UInt8, @count15_8 : UInt8, @lba7_0 : UInt8, @lba15_8 : UInt8, @lba23_16 : UInt8, @lba31_24 : UInt8, @lba39_32 : UInt8, @lba47_40 : UInt8, @auxiliary7_0 : UInt8, @auxiliary23_16 : UInt8, @reserved : UInt8[4])
+    end
+  end
+
+  @[Extern]
+  struct NV_SEP_CACHE_PARAMETER
+    property version : UInt32
+    property size : UInt32
+    property flags : Flags_e__Union_
+    property write_cache_type : UInt8
+    property write_cache_type_effective : UInt8
+    property parameter_reserve1 : UInt8[3]
+
+    # Nested Type Flags_e__Union_
+    @[Extern(union: true)]
+    struct Flags_e__Union_
+    property cache_flags : CacheFlags_e__Struct_
+    property cache_flags_set : UInt8
+
+      # Nested Type CacheFlags_e__Struct_
+      @[Extern]
+      struct CacheFlags_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
+
+    def initialize(@cache_flags : CacheFlags_e__Struct_, @cache_flags_set : UInt8)
+    end
+    end
+
+    def initialize(@version : UInt32, @size : UInt32, @flags : Flags_e__Union_, @write_cache_type : UInt8, @write_cache_type_effective : UInt8, @parameter_reserve1 : UInt8[3])
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_DIAGNOSTIC_MP_REQUEST
+    property version : UInt32
+    property size : UInt32
+    property target_type : Win32cr::Storage::IscsiDisc::MP_STORAGE_DIAGNOSTIC_TARGET_TYPE
+    property level : Win32cr::Storage::IscsiDisc::MP_STORAGE_DIAGNOSTIC_LEVEL
+    property provider_id : LibC::GUID
+    property buffer_size : UInt32
+    property reserved : UInt32
+    property data_buffer : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @target_type : Win32cr::Storage::IscsiDisc::MP_STORAGE_DIAGNOSTIC_TARGET_TYPE, @level : Win32cr::Storage::IscsiDisc::MP_STORAGE_DIAGNOSTIC_LEVEL, @provider_id : LibC::GUID, @buffer_size : UInt32, @reserved : UInt32, @data_buffer : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct MP_DEVICE_DATA_SET_RANGE
+    property starting_offset : Int64
+    property length_in_bytes : UInt64
+    def initialize(@starting_offset : Int64, @length_in_bytes : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct DSM_NOTIFICATION_REQUEST_BLOCK
+    property size : UInt32
+    property version : UInt32
+    property notify_flags : UInt32
+    property data_set_profile : UInt32
+    property reserved : UInt32[3]
+    property data_set_ranges_count : UInt32
+    property data_set_ranges : Win32cr::Storage::IscsiDisc::MP_DEVICE_DATA_SET_RANGE*
+    def initialize(@size : UInt32, @version : UInt32, @notify_flags : UInt32, @data_set_profile : UInt32, @reserved : UInt32[3], @data_set_ranges_count : UInt32, @data_set_ranges : Win32cr::Storage::IscsiDisc::MP_DEVICE_DATA_SET_RANGE*)
+    end
+  end
+
+  @[Extern]
+  struct HYBRID_REQUEST_BLOCK
+    property version : UInt32
+    property size : UInt32
+    property function : UInt32
+    property flags : UInt32
+    property data_buffer_offset : UInt32
+    property data_buffer_length : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @function : UInt32, @flags : UInt32, @data_buffer_offset : UInt32, @data_buffer_length : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NVCACHE_PRIORITY_LEVEL_DESCRIPTOR
+    property priority_level : UInt8
+    property reserved0 : UInt8[3]
+    property consumed_nvm_size_fraction : UInt32
+    property consumed_mapping_resources_fraction : UInt32
+    property consumed_nvm_size_for_dirty_data_fraction : UInt32
+    property consumed_mapping_resources_for_dirty_data_fraction : UInt32
+    property reserved1 : UInt32
+    def initialize(@priority_level : UInt8, @reserved0 : UInt8[3], @consumed_nvm_size_fraction : UInt32, @consumed_mapping_resources_fraction : UInt32, @consumed_nvm_size_for_dirty_data_fraction : UInt32, @consumed_mapping_resources_for_dirty_data_fraction : UInt32, @reserved1 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct HYBRID_INFORMATION
+    property version : UInt32
+    property size : UInt32
+    property hybrid_supported : Win32cr::Foundation::BOOLEAN
+    property status : Win32cr::Storage::IscsiDisc::NVCACHE_STATUS
+    property cache_type_effective : Win32cr::Storage::IscsiDisc::NVCACHE_TYPE
+    property cache_type_default : Win32cr::Storage::IscsiDisc::NVCACHE_TYPE
+    property fraction_base : UInt32
+    property cache_size : UInt64
+    property attributes : Attributes_e__Struct_
+    property priorities : Priorities_e__Struct_
 
     # Nested Type Priorities_e__Struct_
     @[Extern]
-    record Priorities_e__Struct_,
-      priority_level_count : UInt8,
-      max_priority_behavior : Win32cr::Foundation::BOOLEAN,
-      optimal_write_granularity : UInt8,
-      reserved : UInt8,
-      dirty_threshold_low : UInt32,
-      dirty_threshold_high : UInt32,
-      supported_commands : SupportedCommands_e__Struct_,
-      priority : Win32cr::Storage::IscsiDisc::NVCACHE_PRIORITY_LEVEL_DESCRIPTOR* do
+    struct Priorities_e__Struct_
+    property priority_level_count : UInt8
+    property max_priority_behavior : Win32cr::Foundation::BOOLEAN
+    property optimal_write_granularity : UInt8
+    property reserved : UInt8
+    property dirty_threshold_low : UInt32
+    property dirty_threshold_high : UInt32
+    property supported_commands : SupportedCommands_e__Struct_
+    property priority : Win32cr::Storage::IscsiDisc::NVCACHE_PRIORITY_LEVEL_DESCRIPTOR*
 
       # Nested Type SupportedCommands_e__Struct_
       @[Extern]
-      record SupportedCommands_e__Struct_,
-        _bitfield : UInt32,
-        max_evict_commands : UInt32,
-        max_lba_range_count_for_evict : UInt32,
-        max_lba_range_count_for_change_lba : UInt32
+      struct SupportedCommands_e__Struct_
+    property _bitfield : UInt32
+    property max_evict_commands : UInt32
+    property max_lba_range_count_for_evict : UInt32
+    property max_lba_range_count_for_change_lba : UInt32
+    def initialize(@_bitfield : UInt32, @max_evict_commands : UInt32, @max_lba_range_count_for_evict : UInt32, @max_lba_range_count_for_change_lba : UInt32)
+    end
+      end
 
+    def initialize(@priority_level_count : UInt8, @max_priority_behavior : Win32cr::Foundation::BOOLEAN, @optimal_write_granularity : UInt8, @reserved : UInt8, @dirty_threshold_low : UInt32, @dirty_threshold_high : UInt32, @supported_commands : SupportedCommands_e__Struct_, @priority : Win32cr::Storage::IscsiDisc::NVCACHE_PRIORITY_LEVEL_DESCRIPTOR*)
+    end
     end
 
 
     # Nested Type Attributes_e__Struct_
     @[Extern]
-    record Attributes_e__Struct_,
-      _bitfield : UInt32
+    struct Attributes_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@version : UInt32, @size : UInt32, @hybrid_supported : Win32cr::Foundation::BOOLEAN, @status : Win32cr::Storage::IscsiDisc::NVCACHE_STATUS, @cache_type_effective : Win32cr::Storage::IscsiDisc::NVCACHE_TYPE, @cache_type_default : Win32cr::Storage::IscsiDisc::NVCACHE_TYPE, @fraction_base : UInt32, @cache_size : UInt64, @attributes : Attributes_e__Struct_, @priorities : Priorities_e__Struct_)
+    end
   end
 
   @[Extern]
-  record HYBRID_DIRTY_THRESHOLDS,
-    version : UInt32,
-    size : UInt32,
-    dirty_low_threshold : UInt32,
-    dirty_high_threshold : UInt32
+  struct HYBRID_DIRTY_THRESHOLDS
+    property version : UInt32
+    property size : UInt32
+    property dirty_low_threshold : UInt32
+    property dirty_high_threshold : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @dirty_low_threshold : UInt32, @dirty_high_threshold : UInt32)
+    end
+  end
 
   @[Extern]
-  record HYBRID_DEMOTE_BY_SIZE,
-    version : UInt32,
-    size : UInt32,
-    source_priority : UInt8,
-    target_priority : UInt8,
-    reserved0 : UInt16,
-    reserved1 : UInt32,
-    lba_count : UInt64
+  struct HYBRID_DEMOTE_BY_SIZE
+    property version : UInt32
+    property size : UInt32
+    property source_priority : UInt8
+    property target_priority : UInt8
+    property reserved0 : UInt16
+    property reserved1 : UInt32
+    property lba_count : UInt64
+    def initialize(@version : UInt32, @size : UInt32, @source_priority : UInt8, @target_priority : UInt8, @reserved0 : UInt16, @reserved1 : UInt32, @lba_count : UInt64)
+    end
+  end
 
   @[Extern]
-  record FIRMWARE_REQUEST_BLOCK,
-    version : UInt32,
-    size : UInt32,
-    function : UInt32,
-    flags : UInt32,
-    data_buffer_offset : UInt32,
-    data_buffer_length : UInt32
+  struct FIRMWARE_REQUEST_BLOCK
+    property version : UInt32
+    property size : UInt32
+    property function : UInt32
+    property flags : UInt32
+    property data_buffer_offset : UInt32
+    property data_buffer_length : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @function : UInt32, @flags : UInt32, @data_buffer_offset : UInt32, @data_buffer_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_FIRMWARE_SLOT_INFO,
-    slot_number : UInt8,
-    read_only : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8[6],
-    revision : Revision_e__Union_ do
+  struct STORAGE_FIRMWARE_SLOT_INFO
+    property slot_number : UInt8
+    property read_only : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8[6]
+    property revision : Revision_e__Union_
 
     # Nested Type Revision_e__Union_
     @[Extern(union: true)]
-    record Revision_e__Union_,
-      info : UInt8[8],
-      as_ulonglong : UInt64
+    struct Revision_e__Union_
+    property info : UInt8[8]
+    property as_ulonglong : UInt64
+    def initialize(@info : UInt8[8], @as_ulonglong : UInt64)
+    end
+    end
 
+    def initialize(@slot_number : UInt8, @read_only : Win32cr::Foundation::BOOLEAN, @reserved : UInt8[6], @revision : Revision_e__Union_)
+    end
   end
 
   @[Extern]
-  record STORAGE_FIRMWARE_SLOT_INFO_V2,
-    slot_number : UInt8,
-    read_only : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8[6],
-    revision : UInt8[16]
+  struct STORAGE_FIRMWARE_SLOT_INFO_V2
+    property slot_number : UInt8
+    property read_only : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8[6]
+    property revision : UInt8[16]
+    def initialize(@slot_number : UInt8, @read_only : Win32cr::Foundation::BOOLEAN, @reserved : UInt8[6], @revision : UInt8[16])
+    end
+  end
 
   @[Extern]
-  record STORAGE_FIRMWARE_INFO,
-    version : UInt32,
-    size : UInt32,
-    upgrade_support : Win32cr::Foundation::BOOLEAN,
-    slot_count : UInt8,
-    active_slot : UInt8,
-    pending_activate_slot : UInt8,
-    reserved : UInt32,
-    slot : Win32cr::Storage::IscsiDisc::STORAGE_FIRMWARE_SLOT_INFO*
+  struct STORAGE_FIRMWARE_INFO
+    property version : UInt32
+    property size : UInt32
+    property upgrade_support : Win32cr::Foundation::BOOLEAN
+    property slot_count : UInt8
+    property active_slot : UInt8
+    property pending_activate_slot : UInt8
+    property reserved : UInt32
+    property slot : Win32cr::Storage::IscsiDisc::STORAGE_FIRMWARE_SLOT_INFO*
+    def initialize(@version : UInt32, @size : UInt32, @upgrade_support : Win32cr::Foundation::BOOLEAN, @slot_count : UInt8, @active_slot : UInt8, @pending_activate_slot : UInt8, @reserved : UInt32, @slot : Win32cr::Storage::IscsiDisc::STORAGE_FIRMWARE_SLOT_INFO*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_FIRMWARE_INFO_V2,
-    version : UInt32,
-    size : UInt32,
-    upgrade_support : Win32cr::Foundation::BOOLEAN,
-    slot_count : UInt8,
-    active_slot : UInt8,
-    pending_activate_slot : UInt8,
-    firmware_shared : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8[3],
-    image_payload_alignment : UInt32,
-    image_payload_max_size : UInt32,
-    slot : Win32cr::Storage::IscsiDisc::STORAGE_FIRMWARE_SLOT_INFO_V2*
+  struct STORAGE_FIRMWARE_INFO_V2
+    property version : UInt32
+    property size : UInt32
+    property upgrade_support : Win32cr::Foundation::BOOLEAN
+    property slot_count : UInt8
+    property active_slot : UInt8
+    property pending_activate_slot : UInt8
+    property firmware_shared : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8[3]
+    property image_payload_alignment : UInt32
+    property image_payload_max_size : UInt32
+    property slot : Win32cr::Storage::IscsiDisc::STORAGE_FIRMWARE_SLOT_INFO_V2*
+    def initialize(@version : UInt32, @size : UInt32, @upgrade_support : Win32cr::Foundation::BOOLEAN, @slot_count : UInt8, @active_slot : UInt8, @pending_activate_slot : UInt8, @firmware_shared : Win32cr::Foundation::BOOLEAN, @reserved : UInt8[3], @image_payload_alignment : UInt32, @image_payload_max_size : UInt32, @slot : Win32cr::Storage::IscsiDisc::STORAGE_FIRMWARE_SLOT_INFO_V2*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_FIRMWARE_DOWNLOAD,
-    version : UInt32,
-    size : UInt32,
-    offset : UInt64,
-    buffer_size : UInt64,
-    image_buffer : UInt8*
+  struct STORAGE_FIRMWARE_DOWNLOAD
+    property version : UInt32
+    property size : UInt32
+    property offset : UInt64
+    property buffer_size : UInt64
+    property image_buffer : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @offset : UInt64, @buffer_size : UInt64, @image_buffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_FIRMWARE_DOWNLOAD_V2,
-    version : UInt32,
-    size : UInt32,
-    offset : UInt64,
-    buffer_size : UInt64,
-    slot : UInt8,
-    reserved : UInt8[3],
-    image_size : UInt32,
-    image_buffer : UInt8*
+  struct STORAGE_FIRMWARE_DOWNLOAD_V2
+    property version : UInt32
+    property size : UInt32
+    property offset : UInt64
+    property buffer_size : UInt64
+    property slot : UInt8
+    property reserved : UInt8[3]
+    property image_size : UInt32
+    property image_buffer : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @offset : UInt64, @buffer_size : UInt64, @slot : UInt8, @reserved : UInt8[3], @image_size : UInt32, @image_buffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_FIRMWARE_ACTIVATE,
-    version : UInt32,
-    size : UInt32,
-    slot_to_activate : UInt8,
-    reserved0 : UInt8[3]
+  struct STORAGE_FIRMWARE_ACTIVATE
+    property version : UInt32
+    property size : UInt32
+    property slot_to_activate : UInt8
+    property reserved0 : UInt8[3]
+    def initialize(@version : UInt32, @size : UInt32, @slot_to_activate : UInt8, @reserved0 : UInt8[3])
+    end
+  end
 
   @[Extern]
-  record IO_SCSI_CAPABILITIES,
-    length : UInt32,
-    maximum_transfer_length : UInt32,
-    maximum_physical_pages : UInt32,
-    supported_asynchronous_events : UInt32,
-    alignment_mask : UInt32,
-    tagged_queuing : Win32cr::Foundation::BOOLEAN,
-    adapter_scans_down : Win32cr::Foundation::BOOLEAN,
-    adapter_uses_pio : Win32cr::Foundation::BOOLEAN
+  struct IO_SCSI_CAPABILITIES
+    property length : UInt32
+    property maximum_transfer_length : UInt32
+    property maximum_physical_pages : UInt32
+    property supported_asynchronous_events : UInt32
+    property alignment_mask : UInt32
+    property tagged_queuing : Win32cr::Foundation::BOOLEAN
+    property adapter_scans_down : Win32cr::Foundation::BOOLEAN
+    property adapter_uses_pio : Win32cr::Foundation::BOOLEAN
+    def initialize(@length : UInt32, @maximum_transfer_length : UInt32, @maximum_physical_pages : UInt32, @supported_asynchronous_events : UInt32, @alignment_mask : UInt32, @tagged_queuing : Win32cr::Foundation::BOOLEAN, @adapter_scans_down : Win32cr::Foundation::BOOLEAN, @adapter_uses_pio : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record SCSI_ADDRESS,
-    length : UInt32,
-    port_number : UInt8,
-    path_id : UInt8,
-    target_id : UInt8,
-    lun : UInt8
+  struct SCSI_ADDRESS
+    property length : UInt32
+    property port_number : UInt8
+    property path_id : UInt8
+    property target_id : UInt8
+    property lun : UInt8
+    def initialize(@length : UInt32, @port_number : UInt8, @path_id : UInt8, @target_id : UInt8, @lun : UInt8)
+    end
+  end
 
   @[Extern]
-  record DUMP_POINTERS_VERSION,
-    version : UInt32,
-    size : UInt32
+  struct DUMP_POINTERS_VERSION
+    property version : UInt32
+    property size : UInt32
+    def initialize(@version : UInt32, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record DUMP_POINTERS,
-    adapter_object : Win32cr::Storage::IscsiDisc::ADAPTER_OBJECT_*,
-    mapped_register_base : Void*,
-    dump_data : Void*,
-    common_buffer_va : Void*,
-    common_buffer_pa : Win32cr::Foundation::LARGE_INTEGER,
-    common_buffer_size : UInt32,
-    allocate_common_buffers : Win32cr::Foundation::BOOLEAN,
-    use_disk_dump : Win32cr::Foundation::BOOLEAN,
-    spare1 : UInt8[2],
-    device_object : Void*
+  struct DUMP_POINTERS
+    property adapter_object : Win32cr::Storage::IscsiDisc::ADAPTER_OBJECT_*
+    property mapped_register_base : Void*
+    property dump_data : Void*
+    property common_buffer_va : Void*
+    property common_buffer_pa : Win32cr::Foundation::LARGE_INTEGER
+    property common_buffer_size : UInt32
+    property allocate_common_buffers : Win32cr::Foundation::BOOLEAN
+    property use_disk_dump : Win32cr::Foundation::BOOLEAN
+    property spare1 : UInt8[2]
+    property device_object : Void*
+    def initialize(@adapter_object : Win32cr::Storage::IscsiDisc::ADAPTER_OBJECT_*, @mapped_register_base : Void*, @dump_data : Void*, @common_buffer_va : Void*, @common_buffer_pa : Win32cr::Foundation::LARGE_INTEGER, @common_buffer_size : UInt32, @allocate_common_buffers : Win32cr::Foundation::BOOLEAN, @use_disk_dump : Win32cr::Foundation::BOOLEAN, @spare1 : UInt8[2], @device_object : Void*)
+    end
+  end
 
   @[Extern]
-  record DUMP_POINTERS_EX,
-    header : Win32cr::Storage::IscsiDisc::DUMP_POINTERS_VERSION,
-    dump_data : Void*,
-    common_buffer_va : Void*,
-    common_buffer_size : UInt32,
-    allocate_common_buffers : Win32cr::Foundation::BOOLEAN,
-    device_object : Void*,
-    driver_list : Void*,
-    dwPortFlags : UInt32,
-    max_device_dump_section_size : UInt32,
-    max_device_dump_level : UInt32,
-    max_transfer_size : UInt32,
-    adapter_object : Void*,
-    mapped_register_base : Void*,
-    device_ready : Win32cr::Foundation::BOOLEAN*,
-    dump_device_power_on : Win32cr::Storage::IscsiDisc::PDUMP_DEVICE_POWERON_ROUTINE,
-    dump_device_power_on_context : Void*
+  struct DUMP_POINTERS_EX
+    property header : Win32cr::Storage::IscsiDisc::DUMP_POINTERS_VERSION
+    property dump_data : Void*
+    property common_buffer_va : Void*
+    property common_buffer_size : UInt32
+    property allocate_common_buffers : Win32cr::Foundation::BOOLEAN
+    property device_object : Void*
+    property driver_list : Void*
+    property dwPortFlags : UInt32
+    property max_device_dump_section_size : UInt32
+    property max_device_dump_level : UInt32
+    property max_transfer_size : UInt32
+    property adapter_object : Void*
+    property mapped_register_base : Void*
+    property device_ready : Win32cr::Foundation::BOOLEAN*
+    property dump_device_power_on : Win32cr::Storage::IscsiDisc::PDUMP_DEVICE_POWERON_ROUTINE
+    property dump_device_power_on_context : Void*
+    def initialize(@header : Win32cr::Storage::IscsiDisc::DUMP_POINTERS_VERSION, @dump_data : Void*, @common_buffer_va : Void*, @common_buffer_size : UInt32, @allocate_common_buffers : Win32cr::Foundation::BOOLEAN, @device_object : Void*, @driver_list : Void*, @dwPortFlags : UInt32, @max_device_dump_section_size : UInt32, @max_device_dump_level : UInt32, @max_transfer_size : UInt32, @adapter_object : Void*, @mapped_register_base : Void*, @device_ready : Win32cr::Foundation::BOOLEAN*, @dump_device_power_on : Win32cr::Storage::IscsiDisc::PDUMP_DEVICE_POWERON_ROUTINE, @dump_device_power_on_context : Void*)
+    end
+  end
 
   @[Extern]
-  record DUMP_DRIVER,
-    dump_driver_list : Void*,
-    driver_name : UInt16[15],
-    base_name : UInt16[15]
+  struct DUMP_DRIVER
+    property dump_driver_list : Void*
+    property driver_name : UInt16[15]
+    property base_name : UInt16[15]
+    def initialize(@dump_driver_list : Void*, @driver_name : UInt16[15], @base_name : UInt16[15])
+    end
+  end
 
   @[Extern]
-  record NTSCSI_UNICODE_STRING,
-    length : UInt16,
-    maximum_length : UInt16,
-    buffer : Win32cr::Foundation::PWSTR
+  struct NTSCSI_UNICODE_STRING
+    property length : UInt16
+    property maximum_length : UInt16
+    property buffer : Win32cr::Foundation::PWSTR
+    def initialize(@length : UInt16, @maximum_length : UInt16, @buffer : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DUMP_DRIVER_EX,
-    dump_driver_list : Void*,
-    driver_name : UInt16[15],
-    base_name : UInt16[15],
-    driver_full_path : Win32cr::Storage::IscsiDisc::NTSCSI_UNICODE_STRING
+  struct DUMP_DRIVER_EX
+    property dump_driver_list : Void*
+    property driver_name : UInt16[15]
+    property base_name : UInt16[15]
+    property driver_full_path : Win32cr::Storage::IscsiDisc::NTSCSI_UNICODE_STRING
+    def initialize(@dump_driver_list : Void*, @driver_name : UInt16[15], @base_name : UInt16[15], @driver_full_path : Win32cr::Storage::IscsiDisc::NTSCSI_UNICODE_STRING)
+    end
+  end
 
   @[Extern]
-  record STORAGE_ENDURANCE_INFO,
-    valid_fields : UInt32,
-    group_id : UInt32,
-    flags : Flags_e__Struct_,
-    life_percentage : UInt32,
-    bytes_read_count : UInt8[16],
-    byte_write_count : UInt8[16] do
+  struct STORAGE_ENDURANCE_INFO
+    property valid_fields : UInt32
+    property group_id : UInt32
+    property flags : Flags_e__Struct_
+    property life_percentage : UInt32
+    property bytes_read_count : UInt8[16]
+    property byte_write_count : UInt8[16]
 
     # Nested Type Flags_e__Struct_
     @[Extern]
-    record Flags_e__Struct_,
-      _bitfield : UInt32
+    struct Flags_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@valid_fields : UInt32, @group_id : UInt32, @flags : Flags_e__Struct_, @life_percentage : UInt32, @bytes_read_count : UInt8[16], @byte_write_count : UInt8[16])
+    end
   end
 
   @[Extern]
-  record STORAGE_ENDURANCE_DATA_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    endurance_info : Win32cr::Storage::IscsiDisc::STORAGE_ENDURANCE_INFO
+  struct STORAGE_ENDURANCE_DATA_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property endurance_info : Win32cr::Storage::IscsiDisc::STORAGE_ENDURANCE_INFO
+    def initialize(@version : UInt32, @size : UInt32, @endurance_info : Win32cr::Storage::IscsiDisc::STORAGE_ENDURANCE_INFO)
+    end
+  end
 
   @[Extern]
-  record ISCSI_LOGIN_OPTIONS,
-    version : UInt32,
-    information_specified : UInt32,
-    login_flags : UInt32,
-    auth_type : Win32cr::Storage::IscsiDisc::ISCSI_AUTH_TYPES,
-    header_digest : Win32cr::Storage::IscsiDisc::ISCSI_DIGEST_TYPES,
-    data_digest : Win32cr::Storage::IscsiDisc::ISCSI_DIGEST_TYPES,
-    maximum_connections : UInt32,
-    default_time2_wait : UInt32,
-    default_time2_retain : UInt32,
-    username_length : UInt32,
-    password_length : UInt32,
-    username : UInt8*,
-    password : UInt8*
+  struct ISCSI_LOGIN_OPTIONS
+    property version : UInt32
+    property information_specified : UInt32
+    property login_flags : UInt32
+    property auth_type : Win32cr::Storage::IscsiDisc::ISCSI_AUTH_TYPES
+    property header_digest : Win32cr::Storage::IscsiDisc::ISCSI_DIGEST_TYPES
+    property data_digest : Win32cr::Storage::IscsiDisc::ISCSI_DIGEST_TYPES
+    property maximum_connections : UInt32
+    property default_time2_wait : UInt32
+    property default_time2_retain : UInt32
+    property username_length : UInt32
+    property password_length : UInt32
+    property username : UInt8*
+    property password : UInt8*
+    def initialize(@version : UInt32, @information_specified : UInt32, @login_flags : UInt32, @auth_type : Win32cr::Storage::IscsiDisc::ISCSI_AUTH_TYPES, @header_digest : Win32cr::Storage::IscsiDisc::ISCSI_DIGEST_TYPES, @data_digest : Win32cr::Storage::IscsiDisc::ISCSI_DIGEST_TYPES, @maximum_connections : UInt32, @default_time2_wait : UInt32, @default_time2_retain : UInt32, @username_length : UInt32, @password_length : UInt32, @username : UInt8*, @password : UInt8*)
+    end
+  end
 
   @[Extern]
-  record IKE_AUTHENTICATION_PRESHARED_KEY,
-    security_flags : UInt64,
-    id_type : UInt8,
-    id_length_in_bytes : UInt32,
-    id : UInt8*,
-    key_length_in_bytes : UInt32,
-    key : UInt8*
+  struct IKE_AUTHENTICATION_PRESHARED_KEY
+    property security_flags : UInt64
+    property id_type : UInt8
+    property id_length_in_bytes : UInt32
+    property id : UInt8*
+    property key_length_in_bytes : UInt32
+    property key : UInt8*
+    def initialize(@security_flags : UInt64, @id_type : UInt8, @id_length_in_bytes : UInt32, @id : UInt8*, @key_length_in_bytes : UInt32, @key : UInt8*)
+    end
+  end
 
   @[Extern]
-  record IKE_AUTHENTICATION_INFORMATION,
-    auth_method : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_METHOD,
-    anonymous : Anonymous_e__Union_ do
+  struct IKE_AUTHENTICATION_INFORMATION
+    property auth_method : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_METHOD
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ps_key : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_PRESHARED_KEY
+    struct Anonymous_e__Union_
+    property ps_key : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_PRESHARED_KEY
+    def initialize(@ps_key : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_PRESHARED_KEY)
+    end
+    end
 
+    def initialize(@auth_method : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_METHOD, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record ISCSI_UNIQUE_SESSION_ID,
-    adapter_unique : UInt64,
-    adapter_specific : UInt64
+  struct ISCSI_UNIQUE_SESSION_ID
+    property adapter_unique : UInt64
+    property adapter_specific : UInt64
+    def initialize(@adapter_unique : UInt64, @adapter_specific : UInt64)
+    end
+  end
 
   @[Extern]
-  record SCSI_LUN_LIST,
-    oslun : UInt32,
-    target_lun : UInt64
+  struct SCSI_LUN_LIST
+    property oslun : UInt32
+    property target_lun : UInt64
+    def initialize(@oslun : UInt32, @target_lun : UInt64)
+    end
+  end
 
   @[Extern]
-  record ISCSI_TARGET_MAPPINGW,
-    initiator_name : UInt16[256],
-    target_name : UInt16[224],
-    os_device_name : UInt16[260],
-    session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID,
-    os_bus_number : UInt32,
-    os_target_number : UInt32,
-    lun_count : UInt32,
-    lun_list : Win32cr::Storage::IscsiDisc::SCSI_LUN_LIST*
+  struct ISCSI_TARGET_MAPPINGW
+    property initiator_name : UInt16[256]
+    property target_name : UInt16[224]
+    property os_device_name : UInt16[260]
+    property session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID
+    property os_bus_number : UInt32
+    property os_target_number : UInt32
+    property lun_count : UInt32
+    property lun_list : Win32cr::Storage::IscsiDisc::SCSI_LUN_LIST*
+    def initialize(@initiator_name : UInt16[256], @target_name : UInt16[224], @os_device_name : UInt16[260], @session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID, @os_bus_number : UInt32, @os_target_number : UInt32, @lun_count : UInt32, @lun_list : Win32cr::Storage::IscsiDisc::SCSI_LUN_LIST*)
+    end
+  end
 
   @[Extern]
-  record ISCSI_TARGET_MAPPINGA,
-    initiator_name : Win32cr::Foundation::CHAR[256],
-    target_name : Win32cr::Foundation::CHAR[224],
-    os_device_name : Win32cr::Foundation::CHAR[260],
-    session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID,
-    os_bus_number : UInt32,
-    os_target_number : UInt32,
-    lun_count : UInt32,
-    lun_list : Win32cr::Storage::IscsiDisc::SCSI_LUN_LIST*
+  struct ISCSI_TARGET_MAPPINGA
+    property initiator_name : Win32cr::Foundation::CHAR[256]
+    property target_name : Win32cr::Foundation::CHAR[224]
+    property os_device_name : Win32cr::Foundation::CHAR[260]
+    property session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID
+    property os_bus_number : UInt32
+    property os_target_number : UInt32
+    property lun_count : UInt32
+    property lun_list : Win32cr::Storage::IscsiDisc::SCSI_LUN_LIST*
+    def initialize(@initiator_name : Win32cr::Foundation::CHAR[256], @target_name : Win32cr::Foundation::CHAR[224], @os_device_name : Win32cr::Foundation::CHAR[260], @session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID, @os_bus_number : UInt32, @os_target_number : UInt32, @lun_count : UInt32, @lun_list : Win32cr::Storage::IscsiDisc::SCSI_LUN_LIST*)
+    end
+  end
 
   @[Extern]
-  record ISCSI_TARGET_PORTALW,
-    symbolic_name : UInt16[256],
-    address : UInt16[256],
-    socket : UInt16
+  struct ISCSI_TARGET_PORTALW
+    property symbolic_name : UInt16[256]
+    property address : UInt16[256]
+    property socket : UInt16
+    def initialize(@symbolic_name : UInt16[256], @address : UInt16[256], @socket : UInt16)
+    end
+  end
 
   @[Extern]
-  record ISCSI_TARGET_PORTALA,
-    symbolic_name : Win32cr::Foundation::CHAR[256],
-    address : Win32cr::Foundation::CHAR[256],
-    socket : UInt16
+  struct ISCSI_TARGET_PORTALA
+    property symbolic_name : Win32cr::Foundation::CHAR[256]
+    property address : Win32cr::Foundation::CHAR[256]
+    property socket : UInt16
+    def initialize(@symbolic_name : Win32cr::Foundation::CHAR[256], @address : Win32cr::Foundation::CHAR[256], @socket : UInt16)
+    end
+  end
 
   @[Extern]
-  record ISCSI_TARGET_PORTAL_INFOW,
-    initiator_name : UInt16[256],
-    initiator_port_number : UInt32,
-    symbolic_name : UInt16[256],
-    address : UInt16[256],
-    socket : UInt16
+  struct ISCSI_TARGET_PORTAL_INFOW
+    property initiator_name : UInt16[256]
+    property initiator_port_number : UInt32
+    property symbolic_name : UInt16[256]
+    property address : UInt16[256]
+    property socket : UInt16
+    def initialize(@initiator_name : UInt16[256], @initiator_port_number : UInt32, @symbolic_name : UInt16[256], @address : UInt16[256], @socket : UInt16)
+    end
+  end
 
   @[Extern]
-  record ISCSI_TARGET_PORTAL_INFOA,
-    initiator_name : Win32cr::Foundation::CHAR[256],
-    initiator_port_number : UInt32,
-    symbolic_name : Win32cr::Foundation::CHAR[256],
-    address : Win32cr::Foundation::CHAR[256],
-    socket : UInt16
+  struct ISCSI_TARGET_PORTAL_INFOA
+    property initiator_name : Win32cr::Foundation::CHAR[256]
+    property initiator_port_number : UInt32
+    property symbolic_name : Win32cr::Foundation::CHAR[256]
+    property address : Win32cr::Foundation::CHAR[256]
+    property socket : UInt16
+    def initialize(@initiator_name : Win32cr::Foundation::CHAR[256], @initiator_port_number : UInt32, @symbolic_name : Win32cr::Foundation::CHAR[256], @address : Win32cr::Foundation::CHAR[256], @socket : UInt16)
+    end
+  end
 
   @[Extern]
-  record ISCSI_TARGET_PORTAL_INFO_EXW,
-    initiator_name : UInt16[256],
-    initiator_port_number : UInt32,
-    symbolic_name : UInt16[256],
-    address : UInt16[256],
-    socket : UInt16,
-    security_flags : UInt64,
-    login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS
+  struct ISCSI_TARGET_PORTAL_INFO_EXW
+    property initiator_name : UInt16[256]
+    property initiator_port_number : UInt32
+    property symbolic_name : UInt16[256]
+    property address : UInt16[256]
+    property socket : UInt16
+    property security_flags : UInt64
+    property login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS
+    def initialize(@initiator_name : UInt16[256], @initiator_port_number : UInt32, @symbolic_name : UInt16[256], @address : UInt16[256], @socket : UInt16, @security_flags : UInt64, @login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS)
+    end
+  end
 
   @[Extern]
-  record ISCSI_TARGET_PORTAL_INFO_EXA,
-    initiator_name : Win32cr::Foundation::CHAR[256],
-    initiator_port_number : UInt32,
-    symbolic_name : Win32cr::Foundation::CHAR[256],
-    address : Win32cr::Foundation::CHAR[256],
-    socket : UInt16,
-    security_flags : UInt64,
-    login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS
+  struct ISCSI_TARGET_PORTAL_INFO_EXA
+    property initiator_name : Win32cr::Foundation::CHAR[256]
+    property initiator_port_number : UInt32
+    property symbolic_name : Win32cr::Foundation::CHAR[256]
+    property address : Win32cr::Foundation::CHAR[256]
+    property socket : UInt16
+    property security_flags : UInt64
+    property login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS
+    def initialize(@initiator_name : Win32cr::Foundation::CHAR[256], @initiator_port_number : UInt32, @symbolic_name : Win32cr::Foundation::CHAR[256], @address : Win32cr::Foundation::CHAR[256], @socket : UInt16, @security_flags : UInt64, @login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS)
+    end
+  end
 
   @[Extern]
-  record ISCSI_TARGET_PORTAL_GROUPW,
-    count : UInt32,
-    portals : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*
+  struct ISCSI_TARGET_PORTAL_GROUPW
+    property count : UInt32
+    property portals : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*
+    def initialize(@count : UInt32, @portals : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*)
+    end
+  end
 
   @[Extern]
-  record ISCSI_TARGET_PORTAL_GROUPA,
-    count : UInt32,
-    portals : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*
+  struct ISCSI_TARGET_PORTAL_GROUPA
+    property count : UInt32
+    property portals : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*
+    def initialize(@count : UInt32, @portals : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*)
+    end
+  end
 
   @[Extern]
-  record ISCSI_CONNECTION_INFOW,
-    connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID,
-    initiator_address : Win32cr::Foundation::PWSTR,
-    target_address : Win32cr::Foundation::PWSTR,
-    initiator_socket : UInt16,
-    target_socket : UInt16,
-    cid : UInt8[2]
+  struct ISCSI_CONNECTION_INFOW
+    property connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID
+    property initiator_address : Win32cr::Foundation::PWSTR
+    property target_address : Win32cr::Foundation::PWSTR
+    property initiator_socket : UInt16
+    property target_socket : UInt16
+    property cid : UInt8[2]
+    def initialize(@connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID, @initiator_address : Win32cr::Foundation::PWSTR, @target_address : Win32cr::Foundation::PWSTR, @initiator_socket : UInt16, @target_socket : UInt16, @cid : UInt8[2])
+    end
+  end
 
   @[Extern]
-  record ISCSI_SESSION_INFOW,
-    session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID,
-    initiator_name : Win32cr::Foundation::PWSTR,
-    target_node_name : Win32cr::Foundation::PWSTR,
-    target_name : Win32cr::Foundation::PWSTR,
-    isid : UInt8[6],
-    tsid : UInt8[2],
-    connection_count : UInt32,
-    connections : Win32cr::Storage::IscsiDisc::ISCSI_CONNECTION_INFOW*
+  struct ISCSI_SESSION_INFOW
+    property session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID
+    property initiator_name : Win32cr::Foundation::PWSTR
+    property target_node_name : Win32cr::Foundation::PWSTR
+    property target_name : Win32cr::Foundation::PWSTR
+    property isid : UInt8[6]
+    property tsid : UInt8[2]
+    property connection_count : UInt32
+    property connections : Win32cr::Storage::IscsiDisc::ISCSI_CONNECTION_INFOW*
+    def initialize(@session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID, @initiator_name : Win32cr::Foundation::PWSTR, @target_node_name : Win32cr::Foundation::PWSTR, @target_name : Win32cr::Foundation::PWSTR, @isid : UInt8[6], @tsid : UInt8[2], @connection_count : UInt32, @connections : Win32cr::Storage::IscsiDisc::ISCSI_CONNECTION_INFOW*)
+    end
+  end
 
   @[Extern]
-  record ISCSI_CONNECTION_INFOA,
-    connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID,
-    initiator_address : Win32cr::Foundation::PSTR,
-    target_address : Win32cr::Foundation::PSTR,
-    initiator_socket : UInt16,
-    target_socket : UInt16,
-    cid : UInt8[2]
+  struct ISCSI_CONNECTION_INFOA
+    property connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID
+    property initiator_address : Win32cr::Foundation::PSTR
+    property target_address : Win32cr::Foundation::PSTR
+    property initiator_socket : UInt16
+    property target_socket : UInt16
+    property cid : UInt8[2]
+    def initialize(@connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID, @initiator_address : Win32cr::Foundation::PSTR, @target_address : Win32cr::Foundation::PSTR, @initiator_socket : UInt16, @target_socket : UInt16, @cid : UInt8[2])
+    end
+  end
 
   @[Extern]
-  record ISCSI_SESSION_INFOA,
-    session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID,
-    initiator_name : Win32cr::Foundation::PSTR,
-    target_node_name : Win32cr::Foundation::PSTR,
-    target_name : Win32cr::Foundation::PSTR,
-    isid : UInt8[6],
-    tsid : UInt8[2],
-    connection_count : UInt32,
-    connections : Win32cr::Storage::IscsiDisc::ISCSI_CONNECTION_INFOA*
+  struct ISCSI_SESSION_INFOA
+    property session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID
+    property initiator_name : Win32cr::Foundation::PSTR
+    property target_node_name : Win32cr::Foundation::PSTR
+    property target_name : Win32cr::Foundation::PSTR
+    property isid : UInt8[6]
+    property tsid : UInt8[2]
+    property connection_count : UInt32
+    property connections : Win32cr::Storage::IscsiDisc::ISCSI_CONNECTION_INFOA*
+    def initialize(@session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID, @initiator_name : Win32cr::Foundation::PSTR, @target_node_name : Win32cr::Foundation::PSTR, @target_name : Win32cr::Foundation::PSTR, @isid : UInt8[6], @tsid : UInt8[2], @connection_count : UInt32, @connections : Win32cr::Storage::IscsiDisc::ISCSI_CONNECTION_INFOA*)
+    end
+  end
 
   @[Extern]
-  record ISCSI_CONNECTION_INFO_EX,
-    connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID,
-    state : UInt8,
-    protocol : UInt8,
-    header_digest : UInt8,
-    data_digest : UInt8,
-    max_recv_data_segment_length : UInt32,
-    auth_type : Win32cr::Storage::IscsiDisc::ISCSI_AUTH_TYPES,
-    estimated_throughput : UInt64,
-    max_datagram_size : UInt32
+  struct ISCSI_CONNECTION_INFO_EX
+    property connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID
+    property state : UInt8
+    property protocol : UInt8
+    property header_digest : UInt8
+    property data_digest : UInt8
+    property max_recv_data_segment_length : UInt32
+    property auth_type : Win32cr::Storage::IscsiDisc::ISCSI_AUTH_TYPES
+    property estimated_throughput : UInt64
+    property max_datagram_size : UInt32
+    def initialize(@connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID, @state : UInt8, @protocol : UInt8, @header_digest : UInt8, @data_digest : UInt8, @max_recv_data_segment_length : UInt32, @auth_type : Win32cr::Storage::IscsiDisc::ISCSI_AUTH_TYPES, @estimated_throughput : UInt64, @max_datagram_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record ISCSI_SESSION_INFO_EX,
-    session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID,
-    initial_r2t : Win32cr::Foundation::BOOLEAN,
-    immediate_data : Win32cr::Foundation::BOOLEAN,
-    type__ : UInt8,
-    data_sequence_in_order : Win32cr::Foundation::BOOLEAN,
-    data_pdu_in_order : Win32cr::Foundation::BOOLEAN,
-    error_recovery_level : UInt8,
-    max_outstanding_r2t : UInt32,
-    first_burst_length : UInt32,
-    max_burst_length : UInt32,
-    maximum_connections : UInt32,
-    connection_count : UInt32,
-    connections : Win32cr::Storage::IscsiDisc::ISCSI_CONNECTION_INFO_EX*
+  struct ISCSI_SESSION_INFO_EX
+    property session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID
+    property initial_r2t : Win32cr::Foundation::BOOLEAN
+    property immediate_data : Win32cr::Foundation::BOOLEAN
+    property type__ : UInt8
+    property data_sequence_in_order : Win32cr::Foundation::BOOLEAN
+    property data_pdu_in_order : Win32cr::Foundation::BOOLEAN
+    property error_recovery_level : UInt8
+    property max_outstanding_r2t : UInt32
+    property first_burst_length : UInt32
+    property max_burst_length : UInt32
+    property maximum_connections : UInt32
+    property connection_count : UInt32
+    property connections : Win32cr::Storage::IscsiDisc::ISCSI_CONNECTION_INFO_EX*
+    def initialize(@session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID, @initial_r2t : Win32cr::Foundation::BOOLEAN, @immediate_data : Win32cr::Foundation::BOOLEAN, @type__ : UInt8, @data_sequence_in_order : Win32cr::Foundation::BOOLEAN, @data_pdu_in_order : Win32cr::Foundation::BOOLEAN, @error_recovery_level : UInt8, @max_outstanding_r2t : UInt32, @first_burst_length : UInt32, @max_burst_length : UInt32, @maximum_connections : UInt32, @connection_count : UInt32, @connections : Win32cr::Storage::IscsiDisc::ISCSI_CONNECTION_INFO_EX*)
+    end
+  end
 
   @[Extern]
-  record ISCSI_DEVICE_ON_SESSIONW,
-    initiator_name : UInt16[256],
-    target_name : UInt16[224],
-    scsi_address : Win32cr::Storage::IscsiDisc::SCSI_ADDRESS,
-    device_interface_type : LibC::GUID,
-    device_interface_name : UInt16[260],
-    legacy_name : UInt16[260],
-    storage_device_number : Win32cr::System::Ioctl::STORAGE_DEVICE_NUMBER,
-    device_instance : UInt32
+  struct ISCSI_DEVICE_ON_SESSIONW
+    property initiator_name : UInt16[256]
+    property target_name : UInt16[224]
+    property scsi_address : Win32cr::Storage::IscsiDisc::SCSI_ADDRESS
+    property device_interface_type : LibC::GUID
+    property device_interface_name : UInt16[260]
+    property legacy_name : UInt16[260]
+    property storage_device_number : Win32cr::System::Ioctl::STORAGE_DEVICE_NUMBER
+    property device_instance : UInt32
+    def initialize(@initiator_name : UInt16[256], @target_name : UInt16[224], @scsi_address : Win32cr::Storage::IscsiDisc::SCSI_ADDRESS, @device_interface_type : LibC::GUID, @device_interface_name : UInt16[260], @legacy_name : UInt16[260], @storage_device_number : Win32cr::System::Ioctl::STORAGE_DEVICE_NUMBER, @device_instance : UInt32)
+    end
+  end
 
   @[Extern]
-  record ISCSI_DEVICE_ON_SESSIONA,
-    initiator_name : Win32cr::Foundation::CHAR[256],
-    target_name : Win32cr::Foundation::CHAR[224],
-    scsi_address : Win32cr::Storage::IscsiDisc::SCSI_ADDRESS,
-    device_interface_type : LibC::GUID,
-    device_interface_name : Win32cr::Foundation::CHAR[260],
-    legacy_name : Win32cr::Foundation::CHAR[260],
-    storage_device_number : Win32cr::System::Ioctl::STORAGE_DEVICE_NUMBER,
-    device_instance : UInt32
+  struct ISCSI_DEVICE_ON_SESSIONA
+    property initiator_name : Win32cr::Foundation::CHAR[256]
+    property target_name : Win32cr::Foundation::CHAR[224]
+    property scsi_address : Win32cr::Storage::IscsiDisc::SCSI_ADDRESS
+    property device_interface_type : LibC::GUID
+    property device_interface_name : Win32cr::Foundation::CHAR[260]
+    property legacy_name : Win32cr::Foundation::CHAR[260]
+    property storage_device_number : Win32cr::System::Ioctl::STORAGE_DEVICE_NUMBER
+    property device_instance : UInt32
+    def initialize(@initiator_name : Win32cr::Foundation::CHAR[256], @target_name : Win32cr::Foundation::CHAR[224], @scsi_address : Win32cr::Storage::IscsiDisc::SCSI_ADDRESS, @device_interface_type : LibC::GUID, @device_interface_name : Win32cr::Foundation::CHAR[260], @legacy_name : Win32cr::Foundation::CHAR[260], @storage_device_number : Win32cr::System::Ioctl::STORAGE_DEVICE_NUMBER, @device_instance : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERSISTENT_ISCSI_LOGIN_INFOW,
-    target_name : UInt16[224],
-    is_informational_session : Win32cr::Foundation::BOOLEAN,
-    initiator_instance : UInt16[256],
-    initiator_port_number : UInt32,
-    target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW,
-    security_flags : UInt64,
-    mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGW*,
-    login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS
+  struct PERSISTENT_ISCSI_LOGIN_INFOW
+    property target_name : UInt16[224]
+    property is_informational_session : Win32cr::Foundation::BOOLEAN
+    property initiator_instance : UInt16[256]
+    property initiator_port_number : UInt32
+    property target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW
+    property security_flags : UInt64
+    property mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGW*
+    property login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS
+    def initialize(@target_name : UInt16[224], @is_informational_session : Win32cr::Foundation::BOOLEAN, @initiator_instance : UInt16[256], @initiator_port_number : UInt32, @target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW, @security_flags : UInt64, @mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGW*, @login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS)
+    end
+  end
 
   @[Extern]
-  record PERSISTENT_ISCSI_LOGIN_INFOA,
-    target_name : Win32cr::Foundation::CHAR[224],
-    is_informational_session : Win32cr::Foundation::BOOLEAN,
-    initiator_instance : Win32cr::Foundation::CHAR[256],
-    initiator_port_number : UInt32,
-    target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA,
-    security_flags : UInt64,
-    mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGA*,
-    login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS
+  struct PERSISTENT_ISCSI_LOGIN_INFOA
+    property target_name : Win32cr::Foundation::CHAR[224]
+    property is_informational_session : Win32cr::Foundation::BOOLEAN
+    property initiator_instance : Win32cr::Foundation::CHAR[256]
+    property initiator_port_number : UInt32
+    property target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA
+    property security_flags : UInt64
+    property mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGA*
+    property login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS
+    def initialize(@target_name : Win32cr::Foundation::CHAR[224], @is_informational_session : Win32cr::Foundation::BOOLEAN, @initiator_instance : Win32cr::Foundation::CHAR[256], @initiator_port_number : UInt32, @target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA, @security_flags : UInt64, @mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGA*, @login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS)
+    end
+  end
 
   @[Extern]
-  record ISCSI_VERSION_INFO,
-    major_version : UInt32,
-    minor_version : UInt32,
-    build_number : UInt32
+  struct ISCSI_VERSION_INFO
+    property major_version : UInt32
+    property minor_version : UInt32
+    property build_number : UInt32
+    def initialize(@major_version : UInt32, @minor_version : UInt32, @build_number : UInt32)
+    end
+  end
 
   @[Link("iscsidsc")]
   lib C

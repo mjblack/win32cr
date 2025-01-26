@@ -3,9 +3,9 @@ require "./../security.cr"
 
 module Win32cr::System::Memory
   alias HeapHandle = LibC::IntPtrT
-  alias PBAD_MEMORY_CALLBACK_ROUTINE = Proc(Void)*
+  alias PBAD_MEMORY_CALLBACK_ROUTINE = Proc(Void)
 
-  alias PSECURE_MEMORY_CACHE_CALLBACK = Proc(Void*, LibC::UIntPtrT, Win32cr::Foundation::BOOLEAN)*
+  alias PSECURE_MEMORY_CACHE_CALLBACK = Proc(Void*, LibC::UIntPtrT, Win32cr::Foundation::BOOLEAN)
 
   FILE_CACHE_MAX_HARD_ENABLE = 1_u32
   FILE_CACHE_MAX_HARD_DISABLE = 2_u32
@@ -165,182 +165,228 @@ module Win32cr::System::Memory
   end
 
   @[Extern]
-  record PROCESS_HEAP_ENTRY,
-    lpData : Void*,
-    cbData : UInt32,
-    cbOverhead : UInt8,
-    iRegionIndex : UInt8,
-    wFlags : UInt16,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_HEAP_ENTRY
+    property lpData : Void*
+    property cbData : UInt32
+    property cbOverhead : UInt8
+    property iRegionIndex : UInt8
+    property wFlags : UInt16
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      block : Block_e__Struct_,
-      region : Region_e__Struct_ do
+    struct Anonymous_e__Union_
+    property block : Block_e__Struct_
+    property region : Region_e__Struct_
 
       # Nested Type Region_e__Struct_
       @[Extern]
-      record Region_e__Struct_,
-        dwCommittedSize : UInt32,
-        dwUnCommittedSize : UInt32,
-        lpFirstBlock : Void*,
-        lpLastBlock : Void*
+      struct Region_e__Struct_
+    property dwCommittedSize : UInt32
+    property dwUnCommittedSize : UInt32
+    property lpFirstBlock : Void*
+    property lpLastBlock : Void*
+    def initialize(@dwCommittedSize : UInt32, @dwUnCommittedSize : UInt32, @lpFirstBlock : Void*, @lpLastBlock : Void*)
+    end
+      end
 
 
       # Nested Type Block_e__Struct_
       @[Extern]
-      record Block_e__Struct_,
-        hMem : Win32cr::Foundation::HANDLE,
-        dwReserved : UInt32[3]
+      struct Block_e__Struct_
+    property hMem : Win32cr::Foundation::HANDLE
+    property dwReserved : UInt32[3]
+    def initialize(@hMem : Win32cr::Foundation::HANDLE, @dwReserved : UInt32[3])
+    end
+      end
 
+    def initialize(@block : Block_e__Struct_, @region : Region_e__Struct_)
+    end
     end
 
+    def initialize(@lpData : Void*, @cbData : UInt32, @cbOverhead : UInt8, @iRegionIndex : UInt8, @wFlags : UInt16, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record HEAP_SUMMARY,
-    cb : UInt32,
-    cbAllocated : LibC::UIntPtrT,
-    cbCommitted : LibC::UIntPtrT,
-    cbReserved : LibC::UIntPtrT,
-    cbMaxReserve : LibC::UIntPtrT
+  struct HEAP_SUMMARY
+    property cb : UInt32
+    property cbAllocated : LibC::UIntPtrT
+    property cbCommitted : LibC::UIntPtrT
+    property cbReserved : LibC::UIntPtrT
+    property cbMaxReserve : LibC::UIntPtrT
+    def initialize(@cb : UInt32, @cbAllocated : LibC::UIntPtrT, @cbCommitted : LibC::UIntPtrT, @cbReserved : LibC::UIntPtrT, @cbMaxReserve : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record WIN32_MEMORY_RANGE_ENTRY,
-    virtual_address : Void*,
-    number_of_bytes : LibC::UIntPtrT
+  struct WIN32_MEMORY_RANGE_ENTRY
+    property virtual_address : Void*
+    property number_of_bytes : LibC::UIntPtrT
+    def initialize(@virtual_address : Void*, @number_of_bytes : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record WIN32_MEMORY_REGION_INFORMATION,
-    allocation_base : Void*,
-    allocation_protect : UInt32,
-    anonymous : Anonymous_e__Union_,
-    region_size : LibC::UIntPtrT,
-    commit_size : LibC::UIntPtrT do
+  struct WIN32_MEMORY_REGION_INFORMATION
+    property allocation_base : Void*
+    property allocation_protect : UInt32
+    property anonymous : Anonymous_e__Union_
+    property region_size : LibC::UIntPtrT
+    property commit_size : LibC::UIntPtrT
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@allocation_base : Void*, @allocation_protect : UInt32, @anonymous : Anonymous_e__Union_, @region_size : LibC::UIntPtrT, @commit_size : LibC::UIntPtrT)
+    end
   end
 
   @[Extern]
-  record WIN32_MEMORY_PARTITION_INFORMATION,
-    flags : UInt32,
-    numa_node : UInt32,
-    channel : UInt32,
-    number_of_numa_nodes : UInt32,
-    resident_available_pages : UInt64,
-    committed_pages : UInt64,
-    commit_limit : UInt64,
-    peak_commitment : UInt64,
-    total_number_of_pages : UInt64,
-    available_pages : UInt64,
-    zero_pages : UInt64,
-    free_pages : UInt64,
-    standby_pages : UInt64,
-    reserved : UInt64[16],
-    maximum_commit_limit : UInt64,
-    reserved2 : UInt64,
-    partition_id : UInt32
+  struct WIN32_MEMORY_PARTITION_INFORMATION
+    property flags : UInt32
+    property numa_node : UInt32
+    property channel : UInt32
+    property number_of_numa_nodes : UInt32
+    property resident_available_pages : UInt64
+    property committed_pages : UInt64
+    property commit_limit : UInt64
+    property peak_commitment : UInt64
+    property total_number_of_pages : UInt64
+    property available_pages : UInt64
+    property zero_pages : UInt64
+    property free_pages : UInt64
+    property standby_pages : UInt64
+    property reserved : UInt64[16]
+    property maximum_commit_limit : UInt64
+    property reserved2 : UInt64
+    property partition_id : UInt32
+    def initialize(@flags : UInt32, @numa_node : UInt32, @channel : UInt32, @number_of_numa_nodes : UInt32, @resident_available_pages : UInt64, @committed_pages : UInt64, @commit_limit : UInt64, @peak_commitment : UInt64, @total_number_of_pages : UInt64, @available_pages : UInt64, @zero_pages : UInt64, @free_pages : UInt64, @standby_pages : UInt64, @reserved : UInt64[16], @maximum_commit_limit : UInt64, @reserved2 : UInt64, @partition_id : UInt32)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record MEMORY_BASIC_INFORMATION,
-    base_address : Void*,
-    allocation_base : Void*,
-    allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS,
-    partition_id : UInt16,
-    region_size : LibC::UIntPtrT,
-    state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE,
-    protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS,
-    type__ : Win32cr::System::Memory::PAGE_TYPE
+  struct MEMORY_BASIC_INFORMATION
+    property base_address : Void*
+    property allocation_base : Void*
+    property allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS
+    property partition_id : UInt16
+    property region_size : LibC::UIntPtrT
+    property state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE
+    property protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS
+    property type__ : Win32cr::System::Memory::PAGE_TYPE
+    def initialize(@base_address : Void*, @allocation_base : Void*, @allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @partition_id : UInt16, @region_size : LibC::UIntPtrT, @state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, @protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @type__ : Win32cr::System::Memory::PAGE_TYPE)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record MEMORY_BASIC_INFORMATION32,
-    base_address : UInt32,
-    allocation_base : UInt32,
-    allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS,
-    region_size : UInt32,
-    state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE,
-    protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS,
-    type__ : Win32cr::System::Memory::PAGE_TYPE
+  struct MEMORY_BASIC_INFORMATION32
+    property base_address : UInt32
+    property allocation_base : UInt32
+    property allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS
+    property region_size : UInt32
+    property state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE
+    property protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS
+    property type__ : Win32cr::System::Memory::PAGE_TYPE
+    def initialize(@base_address : UInt32, @allocation_base : UInt32, @allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @region_size : UInt32, @state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, @protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @type__ : Win32cr::System::Memory::PAGE_TYPE)
+    end
+  end
 
   @[Extern]
-  record MEMORY_BASIC_INFORMATION64,
-    base_address : UInt64,
-    allocation_base : UInt64,
-    allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS,
-    __alignment1 : UInt32,
-    region_size : UInt64,
-    state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE,
-    protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS,
-    type__ : Win32cr::System::Memory::PAGE_TYPE,
-    __alignment2 : UInt32
+  struct MEMORY_BASIC_INFORMATION64
+    property base_address : UInt64
+    property allocation_base : UInt64
+    property allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS
+    property __alignment1 : UInt32
+    property region_size : UInt64
+    property state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE
+    property protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS
+    property type__ : Win32cr::System::Memory::PAGE_TYPE
+    property __alignment2 : UInt32
+    def initialize(@base_address : UInt64, @allocation_base : UInt64, @allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @__alignment1 : UInt32, @region_size : UInt64, @state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, @protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @type__ : Win32cr::System::Memory::PAGE_TYPE, @__alignment2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record CFG_CALL_TARGET_INFO,
-    offset : LibC::UIntPtrT,
-    flags : LibC::UIntPtrT
+  struct CFG_CALL_TARGET_INFO
+    property offset : LibC::UIntPtrT
+    property flags : LibC::UIntPtrT
+    def initialize(@offset : LibC::UIntPtrT, @flags : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record MEM_ADDRESS_REQUIREMENTS,
-    lowest_starting_address : Void*,
-    highest_ending_address : Void*,
-    alignment : LibC::UIntPtrT
+  struct MEM_ADDRESS_REQUIREMENTS
+    property lowest_starting_address : Void*
+    property highest_ending_address : Void*
+    property alignment : LibC::UIntPtrT
+    def initialize(@lowest_starting_address : Void*, @highest_ending_address : Void*, @alignment : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record MEM_EXTENDED_PARAMETER,
-    anonymous1 : Anonymous1_e__Struct_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct MEM_EXTENDED_PARAMETER
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      u_long64 : UInt64,
-      pointer : Void*,
-      size : LibC::UIntPtrT,
-      handle : Win32cr::Foundation::HANDLE,
-      u_long : UInt32
+    struct Anonymous2_e__Union_
+    property u_long64 : UInt64
+    property pointer : Void*
+    property size : LibC::UIntPtrT
+    property handle : Win32cr::Foundation::HANDLE
+    property u_long : UInt32
+    def initialize(@u_long64 : UInt64, @pointer : Void*, @size : LibC::UIntPtrT, @handle : Win32cr::Foundation::HANDLE, @u_long : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Struct_
     @[Extern]
-    record Anonymous1_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous1_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record MEMORY_BASIC_INFORMATION,
-    base_address : Void*,
-    allocation_base : Void*,
-    allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS,
-    region_size : LibC::UIntPtrT,
-    state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE,
-    protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS,
-    type__ : Win32cr::System::Memory::PAGE_TYPE
+  struct MEMORY_BASIC_INFORMATION
+    property base_address : Void*
+    property allocation_base : Void*
+    property allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS
+    property region_size : LibC::UIntPtrT
+    property state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE
+    property protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS
+    property type__ : Win32cr::System::Memory::PAGE_TYPE
+    def initialize(@base_address : Void*, @allocation_base : Void*, @allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @region_size : LibC::UIntPtrT, @state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, @protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @type__ : Win32cr::System::Memory::PAGE_TYPE)
+    end
+  end
   {% end %}
 
   @[Link("kernel32")]
-  @[Link("api-ms-win-core-memory-l1-1-3")]
-  @[Link("api-ms-win-core-memory-l1-1-7")]
-  @[Link("api-ms-win-core-memory-l1-1-4")]
-  @[Link("api-ms-win-core-memory-l1-1-5")]
-  @[Link("api-ms-win-core-memory-l1-1-6")]
-  @[Link("api-ms-win-core-memory-l1-1-8")]
   @[Link("ntdll")]
   lib C
     fun HeapCreate(flOptions : Win32cr::System::Memory::HEAP_FLAGS, dwInitialSize : LibC::UIntPtrT, dwMaximumSize : LibC::UIntPtrT) : Win32cr::System::Memory::HeapHandle

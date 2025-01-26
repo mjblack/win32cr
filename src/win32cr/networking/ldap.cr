@@ -3,17 +3,17 @@ require "./../security/authentication/identity.cr"
 require "./../security/cryptography.cr"
 
 module Win32cr::Networking::Ldap
-  alias DBGPRINT = Proc(Win32cr::Foundation::PSTR, UInt32)*
+  alias DBGPRINT = Proc(Win32cr::Foundation::PSTR, UInt32)
 
-  alias QUERYFORCONNECTION = Proc(Win32cr::Networking::Ldap::Ldap*, Win32cr::Networking::Ldap::Ldap*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PSTR, UInt32, Void*, Void*, Win32cr::Networking::Ldap::Ldap**, UInt32)*
+  alias QUERYFORCONNECTION = Proc(Win32cr::Networking::Ldap::Ldap*, Win32cr::Networking::Ldap::Ldap*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PSTR, UInt32, Void*, Void*, Win32cr::Networking::Ldap::Ldap**, UInt32)
 
-  alias NOTIFYOFNEWCONNECTION = Proc(Win32cr::Networking::Ldap::Ldap*, Win32cr::Networking::Ldap::Ldap*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PSTR, Win32cr::Networking::Ldap::Ldap*, UInt32, Void*, Void*, UInt32, Win32cr::Foundation::BOOLEAN)*
+  alias NOTIFYOFNEWCONNECTION = Proc(Win32cr::Networking::Ldap::Ldap*, Win32cr::Networking::Ldap::Ldap*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PSTR, Win32cr::Networking::Ldap::Ldap*, UInt32, Void*, Void*, UInt32, Win32cr::Foundation::BOOLEAN)
 
-  alias DEREFERENCECONNECTION = Proc(Win32cr::Networking::Ldap::Ldap*, Win32cr::Networking::Ldap::Ldap*, UInt32)*
+  alias DEREFERENCECONNECTION = Proc(Win32cr::Networking::Ldap::Ldap*, Win32cr::Networking::Ldap::Ldap*, UInt32)
 
-  alias QUERYCLIENTCERT = Proc(Win32cr::Networking::Ldap::Ldap*, Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx*, Win32cr::Security::Cryptography::CERT_CONTEXT**, Win32cr::Foundation::BOOLEAN)*
+  alias QUERYCLIENTCERT = Proc(Win32cr::Networking::Ldap::Ldap*, Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx*, Win32cr::Security::Cryptography::CERT_CONTEXT**, Win32cr::Foundation::BOOLEAN)
 
-  alias VERIFYSERVERCERT = Proc(Win32cr::Networking::Ldap::Ldap*, Win32cr::Security::Cryptography::CERT_CONTEXT**, Win32cr::Foundation::BOOLEAN)*
+  alias VERIFYSERVERCERT = Proc(Win32cr::Networking::Ldap::Ldap*, Win32cr::Security::Cryptography::CERT_CONTEXT**, Win32cr::Foundation::BOOLEAN)
 
   LBER_ERROR = -1_i32
   LBER_DEFAULT = -1_i32
@@ -405,171 +405,235 @@ module Win32cr::Networking::Ldap
   end
 
   @[Extern]
-  record Ldap,
-    ld_sb : Ld_sb_e__struct_,
-    ld_host : Win32cr::Foundation::PSTR,
-    ld_version : UInt32,
-    ld_lberoptions : UInt8,
-    ld_deref : UInt32,
-    ld_timelimit : UInt32,
-    ld_sizelimit : UInt32,
-    ld_errno : UInt32,
-    ld_matched : Win32cr::Foundation::PSTR,
-    ld_error : Win32cr::Foundation::PSTR,
-    ld_msgid : UInt32,
-    reserved3 : UInt8[25],
-    ld_cldaptries : UInt32,
-    ld_cldaptimeout : UInt32,
-    ld_refhoplimit : UInt32,
-    ld_options : UInt32 do
+  struct Ldap
+    property ld_sb : Ld_sb_e__struct_
+    property ld_host : Win32cr::Foundation::PSTR
+    property ld_version : UInt32
+    property ld_lberoptions : UInt8
+    property ld_deref : UInt32
+    property ld_timelimit : UInt32
+    property ld_sizelimit : UInt32
+    property ld_errno : UInt32
+    property ld_matched : Win32cr::Foundation::PSTR
+    property ld_error : Win32cr::Foundation::PSTR
+    property ld_msgid : UInt32
+    property reserved3 : UInt8[25]
+    property ld_cldaptries : UInt32
+    property ld_cldaptimeout : UInt32
+    property ld_refhoplimit : UInt32
+    property ld_options : UInt32
 
     # Nested Type Ld_sb_e__struct_
     @[Extern]
-    record Ld_sb_e__struct_,
-      sb_sd : LibC::UIntPtrT,
-      reserved1 : UInt8[41],
-      sb_naddr : LibC::UIntPtrT,
-      reserved2 : UInt8[24]
+    struct Ld_sb_e__struct_
+    property sb_sd : LibC::UIntPtrT
+    property reserved1 : UInt8[41]
+    property sb_naddr : LibC::UIntPtrT
+    property reserved2 : UInt8[24]
+    def initialize(@sb_sd : LibC::UIntPtrT, @reserved1 : UInt8[41], @sb_naddr : LibC::UIntPtrT, @reserved2 : UInt8[24])
+    end
+    end
 
+    def initialize(@ld_sb : Ld_sb_e__struct_, @ld_host : Win32cr::Foundation::PSTR, @ld_version : UInt32, @ld_lberoptions : UInt8, @ld_deref : UInt32, @ld_timelimit : UInt32, @ld_sizelimit : UInt32, @ld_errno : UInt32, @ld_matched : Win32cr::Foundation::PSTR, @ld_error : Win32cr::Foundation::PSTR, @ld_msgid : UInt32, @reserved3 : UInt8[25], @ld_cldaptries : UInt32, @ld_cldaptimeout : UInt32, @ld_refhoplimit : UInt32, @ld_options : UInt32)
+    end
   end
 
   @[Extern]
-  record LDAP_TIMEVAL,
-    tv_sec : Int32,
-    tv_usec : Int32
+  struct LDAP_TIMEVAL
+    property tv_sec : Int32
+    property tv_usec : Int32
+    def initialize(@tv_sec : Int32, @tv_usec : Int32)
+    end
+  end
 
   @[Extern]
-  record LDAP_BERVAL,
-    bv_len : UInt32,
-    bv_val : Win32cr::Foundation::PSTR
+  struct LDAP_BERVAL
+    property bv_len : UInt32
+    property bv_val : Win32cr::Foundation::PSTR
+    def initialize(@bv_len : UInt32, @bv_val : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record LDAPMessage,
-    lm_msgid : UInt32,
-    lm_msgtype : UInt32,
-    lm_ber : Void*,
-    lm_chain : Win32cr::Networking::Ldap::LDAPMessage*,
-    lm_next : Win32cr::Networking::Ldap::LDAPMessage*,
-    lm_time : UInt32,
-    connection : Win32cr::Networking::Ldap::Ldap*,
-    request : Void*,
-    lm_returncode : UInt32,
-    lm_referral : UInt16,
-    lm_chased : Win32cr::Foundation::BOOLEAN,
-    lm_eom : Win32cr::Foundation::BOOLEAN,
-    connection_referenced : Win32cr::Foundation::BOOLEAN
+  struct LDAPMessage
+    property lm_msgid : UInt32
+    property lm_msgtype : UInt32
+    property lm_ber : Void*
+    property lm_chain : Win32cr::Networking::Ldap::LDAPMessage*
+    property lm_next : Win32cr::Networking::Ldap::LDAPMessage*
+    property lm_time : UInt32
+    property connection : Win32cr::Networking::Ldap::Ldap*
+    property request : Void*
+    property lm_returncode : UInt32
+    property lm_referral : UInt16
+    property lm_chased : Win32cr::Foundation::BOOLEAN
+    property lm_eom : Win32cr::Foundation::BOOLEAN
+    property connection_referenced : Win32cr::Foundation::BOOLEAN
+    def initialize(@lm_msgid : UInt32, @lm_msgtype : UInt32, @lm_ber : Void*, @lm_chain : Win32cr::Networking::Ldap::LDAPMessage*, @lm_next : Win32cr::Networking::Ldap::LDAPMessage*, @lm_time : UInt32, @connection : Win32cr::Networking::Ldap::Ldap*, @request : Void*, @lm_returncode : UInt32, @lm_referral : UInt16, @lm_chased : Win32cr::Foundation::BOOLEAN, @lm_eom : Win32cr::Foundation::BOOLEAN, @connection_referenced : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record Ldapcontrola,
-    ldctl_oid : Win32cr::Foundation::PSTR,
-    ldctl_value : Win32cr::Networking::Ldap::LDAP_BERVAL,
-    ldctl_iscritical : Win32cr::Foundation::BOOLEAN
+  struct Ldapcontrola
+    property ldctl_oid : Win32cr::Foundation::PSTR
+    property ldctl_value : Win32cr::Networking::Ldap::LDAP_BERVAL
+    property ldctl_iscritical : Win32cr::Foundation::BOOLEAN
+    def initialize(@ldctl_oid : Win32cr::Foundation::PSTR, @ldctl_value : Win32cr::Networking::Ldap::LDAP_BERVAL, @ldctl_iscritical : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record Ldapcontrolw,
-    ldctl_oid : Win32cr::Foundation::PWSTR,
-    ldctl_value : Win32cr::Networking::Ldap::LDAP_BERVAL,
-    ldctl_iscritical : Win32cr::Foundation::BOOLEAN
+  struct Ldapcontrolw
+    property ldctl_oid : Win32cr::Foundation::PWSTR
+    property ldctl_value : Win32cr::Networking::Ldap::LDAP_BERVAL
+    property ldctl_iscritical : Win32cr::Foundation::BOOLEAN
+    def initialize(@ldctl_oid : Win32cr::Foundation::PWSTR, @ldctl_value : Win32cr::Networking::Ldap::LDAP_BERVAL, @ldctl_iscritical : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record Ldapmodw,
-    mod_op : UInt32,
-    mod_type : Win32cr::Foundation::PWSTR,
-    mod_vals : Mod_vals_e__union_ do
+  struct Ldapmodw
+    property mod_op : UInt32
+    property mod_type : Win32cr::Foundation::PWSTR
+    property mod_vals : Mod_vals_e__union_
 
     # Nested Type Mod_vals_e__union_
     @[Extern(union: true)]
-    record Mod_vals_e__union_,
-      modv_strvals : Win32cr::Foundation::PWSTR*,
-      modv_bvals : Win32cr::Networking::Ldap::LDAP_BERVAL**
+    struct Mod_vals_e__union_
+    property modv_strvals : Win32cr::Foundation::PWSTR*
+    property modv_bvals : Win32cr::Networking::Ldap::LDAP_BERVAL**
+    def initialize(@modv_strvals : Win32cr::Foundation::PWSTR*, @modv_bvals : Win32cr::Networking::Ldap::LDAP_BERVAL**)
+    end
+    end
 
+    def initialize(@mod_op : UInt32, @mod_type : Win32cr::Foundation::PWSTR, @mod_vals : Mod_vals_e__union_)
+    end
   end
 
   @[Extern]
-  record Ldapmoda,
-    mod_op : UInt32,
-    mod_type : Win32cr::Foundation::PSTR,
-    mod_vals : Mod_vals_e__union_ do
+  struct Ldapmoda
+    property mod_op : UInt32
+    property mod_type : Win32cr::Foundation::PSTR
+    property mod_vals : Mod_vals_e__union_
 
     # Nested Type Mod_vals_e__union_
     @[Extern(union: true)]
-    record Mod_vals_e__union_,
-      modv_strvals : Win32cr::Foundation::PSTR*,
-      modv_bvals : Win32cr::Networking::Ldap::LDAP_BERVAL**
+    struct Mod_vals_e__union_
+    property modv_strvals : Win32cr::Foundation::PSTR*
+    property modv_bvals : Win32cr::Networking::Ldap::LDAP_BERVAL**
+    def initialize(@modv_strvals : Win32cr::Foundation::PSTR*, @modv_bvals : Win32cr::Networking::Ldap::LDAP_BERVAL**)
+    end
+    end
 
+    def initialize(@mod_op : UInt32, @mod_type : Win32cr::Foundation::PSTR, @mod_vals : Mod_vals_e__union_)
+    end
   end
 
   @[Extern]
-  record Berelement,
-    opaque : Win32cr::Foundation::PSTR
+  struct Berelement
+    property opaque : Win32cr::Foundation::PSTR
+    def initialize(@opaque : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record Ldap_version_info,
-    lv_size : UInt32,
-    lv_major : UInt32,
-    lv_minor : UInt32
+  struct Ldap_version_info
+    property lv_size : UInt32
+    property lv_major : UInt32
+    property lv_minor : UInt32
+    def initialize(@lv_size : UInt32, @lv_major : UInt32, @lv_minor : UInt32)
+    end
+  end
 
   @[Extern]
-  record Ldapapiinfoa,
-    ldapai_info_version : Int32,
-    ldapai_api_version : Int32,
-    ldapai_protocol_version : Int32,
-    ldapai_extensions : Int8**,
-    ldapai_vendor_name : Win32cr::Foundation::PSTR,
-    ldapai_vendor_version : Int32
+  struct Ldapapiinfoa
+    property ldapai_info_version : Int32
+    property ldapai_api_version : Int32
+    property ldapai_protocol_version : Int32
+    property ldapai_extensions : Int8**
+    property ldapai_vendor_name : Win32cr::Foundation::PSTR
+    property ldapai_vendor_version : Int32
+    def initialize(@ldapai_info_version : Int32, @ldapai_api_version : Int32, @ldapai_protocol_version : Int32, @ldapai_extensions : Int8**, @ldapai_vendor_name : Win32cr::Foundation::PSTR, @ldapai_vendor_version : Int32)
+    end
+  end
 
   @[Extern]
-  record Ldapapiinfow,
-    ldapai_info_version : Int32,
-    ldapai_api_version : Int32,
-    ldapai_protocol_version : Int32,
-    ldapai_extensions : Win32cr::Foundation::PWSTR*,
-    ldapai_vendor_name : Win32cr::Foundation::PWSTR,
-    ldapai_vendor_version : Int32
+  struct Ldapapiinfow
+    property ldapai_info_version : Int32
+    property ldapai_api_version : Int32
+    property ldapai_protocol_version : Int32
+    property ldapai_extensions : Win32cr::Foundation::PWSTR*
+    property ldapai_vendor_name : Win32cr::Foundation::PWSTR
+    property ldapai_vendor_version : Int32
+    def initialize(@ldapai_info_version : Int32, @ldapai_api_version : Int32, @ldapai_protocol_version : Int32, @ldapai_extensions : Win32cr::Foundation::PWSTR*, @ldapai_vendor_name : Win32cr::Foundation::PWSTR, @ldapai_vendor_version : Int32)
+    end
+  end
 
   @[Extern]
-  record LDAPAPIFeatureInfoA,
-    ldapaif_info_version : Int32,
-    ldapaif_name : Win32cr::Foundation::PSTR,
-    ldapaif_version : Int32
+  struct LDAPAPIFeatureInfoA
+    property ldapaif_info_version : Int32
+    property ldapaif_name : Win32cr::Foundation::PSTR
+    property ldapaif_version : Int32
+    def initialize(@ldapaif_info_version : Int32, @ldapaif_name : Win32cr::Foundation::PSTR, @ldapaif_version : Int32)
+    end
+  end
 
   @[Extern]
-  record LDAPAPIFeatureInfoW,
-    ldapaif_info_version : Int32,
-    ldapaif_name : Win32cr::Foundation::PWSTR,
-    ldapaif_version : Int32
+  struct LDAPAPIFeatureInfoW
+    property ldapaif_info_version : Int32
+    property ldapaif_name : Win32cr::Foundation::PWSTR
+    property ldapaif_version : Int32
+    def initialize(@ldapaif_info_version : Int32, @ldapaif_name : Win32cr::Foundation::PWSTR, @ldapaif_version : Int32)
+    end
+  end
 
   @[Extern]
-  record Ldapsearch
-  @[Extern]
-  record Ldapsortkeyw,
-    sk_attrtype : Win32cr::Foundation::PWSTR,
-    sk_matchruleoid : Win32cr::Foundation::PWSTR,
-    sk_reverseorder : Win32cr::Foundation::BOOLEAN
+  struct Ldapsearch
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record Ldapsortkeya,
-    sk_attrtype : Win32cr::Foundation::PSTR,
-    sk_matchruleoid : Win32cr::Foundation::PSTR,
-    sk_reverseorder : Win32cr::Foundation::BOOLEAN
+  struct Ldapsortkeyw
+    property sk_attrtype : Win32cr::Foundation::PWSTR
+    property sk_matchruleoid : Win32cr::Foundation::PWSTR
+    property sk_reverseorder : Win32cr::Foundation::BOOLEAN
+    def initialize(@sk_attrtype : Win32cr::Foundation::PWSTR, @sk_matchruleoid : Win32cr::Foundation::PWSTR, @sk_reverseorder : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record Ldapvlvinfo,
-    ldvlv_version : Int32,
-    ldvlv_before_count : UInt32,
-    ldvlv_after_count : UInt32,
-    ldvlv_offset : UInt32,
-    ldvlv_count : UInt32,
-    ldvlv_attrvalue : Win32cr::Networking::Ldap::LDAP_BERVAL*,
-    ldvlv_context : Win32cr::Networking::Ldap::LDAP_BERVAL*,
-    ldvlv_extradata : Void*
+  struct Ldapsortkeya
+    property sk_attrtype : Win32cr::Foundation::PSTR
+    property sk_matchruleoid : Win32cr::Foundation::PSTR
+    property sk_reverseorder : Win32cr::Foundation::BOOLEAN
+    def initialize(@sk_attrtype : Win32cr::Foundation::PSTR, @sk_matchruleoid : Win32cr::Foundation::PSTR, @sk_reverseorder : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record LDAP_REFERRAL_CALLBACK,
-    size_of_callbacks : UInt32,
-    query_for_connection : Win32cr::Networking::Ldap::QUERYFORCONNECTION,
-    notify_routine : Win32cr::Networking::Ldap::NOTIFYOFNEWCONNECTION,
-    dereference_routine : Win32cr::Networking::Ldap::DEREFERENCECONNECTION
+  struct Ldapvlvinfo
+    property ldvlv_version : Int32
+    property ldvlv_before_count : UInt32
+    property ldvlv_after_count : UInt32
+    property ldvlv_offset : UInt32
+    property ldvlv_count : UInt32
+    property ldvlv_attrvalue : Win32cr::Networking::Ldap::LDAP_BERVAL*
+    property ldvlv_context : Win32cr::Networking::Ldap::LDAP_BERVAL*
+    property ldvlv_extradata : Void*
+    def initialize(@ldvlv_version : Int32, @ldvlv_before_count : UInt32, @ldvlv_after_count : UInt32, @ldvlv_offset : UInt32, @ldvlv_count : UInt32, @ldvlv_attrvalue : Win32cr::Networking::Ldap::LDAP_BERVAL*, @ldvlv_context : Win32cr::Networking::Ldap::LDAP_BERVAL*, @ldvlv_extradata : Void*)
+    end
+  end
+
+  @[Extern]
+  struct LDAP_REFERRAL_CALLBACK
+    property size_of_callbacks : UInt32
+    property query_for_connection : Win32cr::Networking::Ldap::QUERYFORCONNECTION
+    property notify_routine : Win32cr::Networking::Ldap::NOTIFYOFNEWCONNECTION
+    property dereference_routine : Win32cr::Networking::Ldap::DEREFERENCECONNECTION
+    def initialize(@size_of_callbacks : UInt32, @query_for_connection : Win32cr::Networking::Ldap::QUERYFORCONNECTION, @notify_routine : Win32cr::Networking::Ldap::NOTIFYOFNEWCONNECTION, @dereference_routine : Win32cr::Networking::Ldap::DEREFERENCECONNECTION)
+    end
+  end
 
   @[Link("wldap32")]
   lib C

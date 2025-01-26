@@ -1,7 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::System::HostComputeNetwork
-  alias HCN_NOTIFICATION_CALLBACK = Proc(UInt32, Void*, Win32cr::Foundation::HRESULT, Win32cr::Foundation::PWSTR, Void)*
+  alias HCN_NOTIFICATION_CALLBACK = Proc(UInt32, Void*, Win32cr::Foundation::HRESULT, Win32cr::Foundation::PWSTR, Void)
 
 
   enum HCN_NOTIFICATIONS
@@ -32,21 +32,27 @@ module Win32cr::System::HostComputeNetwork
   end
 
   @[Extern]
-  record HCN_PORT_RANGE_RESERVATION,
-    startingPort : UInt16,
-    endingPort : UInt16
+  struct HCN_PORT_RANGE_RESERVATION
+    property startingPort : UInt16
+    property endingPort : UInt16
+    def initialize(@startingPort : UInt16, @endingPort : UInt16)
+    end
+  end
 
   @[Extern]
-  record HCN_PORT_RANGE_ENTRY,
-    owning_partition_id : LibC::GUID,
-    target_partition_id : LibC::GUID,
-    protocol : Win32cr::System::HostComputeNetwork::HCN_PORT_PROTOCOL,
-    priority : UInt64,
-    reservation_type : UInt32,
-    sharing_flags : UInt32,
-    delivery_mode : UInt32,
-    starting_port : UInt16,
-    ending_port : UInt16
+  struct HCN_PORT_RANGE_ENTRY
+    property owning_partition_id : LibC::GUID
+    property target_partition_id : LibC::GUID
+    property protocol : Win32cr::System::HostComputeNetwork::HCN_PORT_PROTOCOL
+    property priority : UInt64
+    property reservation_type : UInt32
+    property sharing_flags : UInt32
+    property delivery_mode : UInt32
+    property starting_port : UInt16
+    property ending_port : UInt16
+    def initialize(@owning_partition_id : LibC::GUID, @target_partition_id : LibC::GUID, @protocol : Win32cr::System::HostComputeNetwork::HCN_PORT_PROTOCOL, @priority : UInt64, @reservation_type : UInt32, @sharing_flags : UInt32, @delivery_mode : UInt32, @starting_port : UInt16, @ending_port : UInt16)
+    end
+  end
 
   @[Link("computenetwork")]
   lib C

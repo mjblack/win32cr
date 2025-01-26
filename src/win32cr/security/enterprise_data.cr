@@ -22,13 +22,19 @@ module Win32cr::Security::EnterpriseData
   end
 
   @[Extern]
-  record HTHREAD_NETWORK_CONTEXT,
-    thread_id : UInt32,
-    thread_context : Win32cr::Foundation::HANDLE
+  struct HTHREAD_NETWORK_CONTEXT
+    property thread_id : UInt32
+    property thread_context : Win32cr::Foundation::HANDLE
+    def initialize(@thread_id : UInt32, @thread_context : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record FILE_UNPROTECT_OPTIONS,
-    audit : Bool
+  struct FILE_UNPROTECT_OPTIONS
+    property audit : Bool
+    def initialize(@audit : Bool)
+    end
+  end
 
   @[Extern]
   record IProtectionPolicyManagerInteropVtbl,
@@ -43,7 +49,6 @@ module Win32cr::Security::EnterpriseData
 
 
   @[Extern]
-  #@[Com("4652651d-c1fe-4ba1-9f0a-c0f56596f721")]
   record IProtectionPolicyManagerInterop, lpVtbl : IProtectionPolicyManagerInteropVtbl* do
     GUID = LibC::GUID.new(0x4652651d_u32, 0xc1fe_u16, 0x4ba1_u16, StaticArray[0x9f_u8, 0xa_u8, 0xc0_u8, 0xf5_u8, 0x65_u8, 0x96_u8, 0xf7_u8, 0x21_u8])
     def query_interface(this : IProtectionPolicyManagerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -89,7 +94,6 @@ module Win32cr::Security::EnterpriseData
 
 
   @[Extern]
-  #@[Com("157cfbe4-a78d-4156-b384-61fdac41e686")]
   record IProtectionPolicyManagerInterop2, lpVtbl : IProtectionPolicyManagerInterop2Vtbl* do
     GUID = LibC::GUID.new(0x157cfbe4_u32, 0xa78d_u16, 0x4156_u16, StaticArray[0xb3_u8, 0x84_u8, 0x61_u8, 0xfd_u8, 0xac_u8, 0x41_u8, 0xe6_u8, 0x86_u8])
     def query_interface(this : IProtectionPolicyManagerInterop2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -145,7 +149,6 @@ module Win32cr::Security::EnterpriseData
 
 
   @[Extern]
-  #@[Com("c1c03933-b398-4d93-b0fd-2972adf802c2")]
   record IProtectionPolicyManagerInterop3, lpVtbl : IProtectionPolicyManagerInterop3Vtbl* do
     GUID = LibC::GUID.new(0xc1c03933_u32, 0xb398_u16, 0x4d93_u16, StaticArray[0xb0_u8, 0xfd_u8, 0x29_u8, 0x72_u8, 0xad_u8, 0xf8_u8, 0x2_u8, 0xc2_u8])
     def query_interface(this : IProtectionPolicyManagerInterop3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

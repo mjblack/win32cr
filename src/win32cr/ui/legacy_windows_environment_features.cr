@@ -46,7 +46,6 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
 
 
   @[Extern]
-  #@[Com("6e793361-73c6-11d0-8469-00aa00442901")]
   record IEmptyVolumeCacheCallBack, lpVtbl : IEmptyVolumeCacheCallBackVtbl* do
     GUID = LibC::GUID.new(0x6e793361_u32, 0x73c6_u16, 0x11d0_u16, StaticArray[0x84_u8, 0x69_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x29_u8, 0x1_u8])
     def query_interface(this : IEmptyVolumeCacheCallBack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -80,7 +79,6 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
 
 
   @[Extern]
-  #@[Com("8fce5227-04da-11d1-a004-00805f8abe06")]
   record IEmptyVolumeCache, lpVtbl : IEmptyVolumeCacheVtbl* do
     GUID = LibC::GUID.new(0x8fce5227_u32, 0x4da_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x4_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x8a_u8, 0xbe_u8, 0x6_u8])
     def query_interface(this : IEmptyVolumeCache*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -124,7 +122,6 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
 
 
   @[Extern]
-  #@[Com("02b7e3ba-4db3-11d2-b2d9-00c04f8eec8c")]
   record IEmptyVolumeCache2, lpVtbl : IEmptyVolumeCache2Vtbl* do
     GUID = LibC::GUID.new(0x2b7e3ba_u32, 0x4db3_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xd9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xec_u8, 0x8c_u8])
     def query_interface(this : IEmptyVolumeCache2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -167,7 +164,6 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
 
 
   @[Extern]
-  #@[Com("99180161-da16-101a-935c-444553540000")]
   record IReconcileInitiator, lpVtbl : IReconcileInitiatorVtbl* do
     GUID = LibC::GUID.new(0x99180161_u32, 0xda16_u16, 0x101a_u16, StaticArray[0x93_u8, 0x5c_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IReconcileInitiator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -198,7 +194,6 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
 
 
   @[Extern]
-  #@[Com("99180162-da16-101a-935c-444553540000")]
   record IReconcilableObject, lpVtbl : IReconcilableObjectVtbl* do
     GUID = LibC::GUID.new(0x99180162_u32, 0xda16_u16, 0x101a_u16, StaticArray[0x93_u8, 0x5c_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IReconcilableObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -228,7 +223,6 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
 
 
   @[Extern]
-  #@[Com("99180164-da16-101a-935c-444553540000")]
   record IBriefcaseInitiator, lpVtbl : IBriefcaseInitiatorVtbl* do
     GUID = LibC::GUID.new(0x99180164_u32, 0xda16_u16, 0x101a_u16, StaticArray[0x93_u8, 0x5c_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IBriefcaseInitiator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -258,7 +252,6 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
 
 
   @[Extern]
-  #@[Com("52502ee0-ec80-11d0-89ab-00c04fc2972d")]
   record IActiveDesktopP, lpVtbl : IActiveDesktopPVtbl* do
     GUID = LibC::GUID.new(0x52502ee0_u32, 0xec80_u16, 0x11d0_u16, StaticArray[0x89_u8, 0xab_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x97_u8, 0x2d_u8])
     def query_interface(this : IActiveDesktopP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -297,7 +290,6 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
 
 
   @[Extern]
-  #@[Com("b22754e2-4574-11d1-9888-006097deacf9")]
   record IADesktopP2, lpVtbl : IADesktopP2Vtbl* do
     GUID = LibC::GUID.new(0xb22754e2_u32, 0x4574_u16, 0x11d1_u16, StaticArray[0x98_u8, 0x88_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xde_u8, 0xac_u8, 0xf9_u8])
     def query_interface(this : IADesktopP2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

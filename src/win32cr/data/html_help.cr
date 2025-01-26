@@ -4,7 +4,7 @@ require "./../system/com.cr"
 require "./../system/search.cr"
 
 module Win32cr::Data::HtmlHelp
-  alias PFNCOLHEAPFREE = Proc(Void*, Int32)*
+  alias PFNCOLHEAPFREE = Proc(Void*, Int32)
 
   HH_DISPLAY_TOPIC = 0_u32
   HH_HELP_FINDER = 0_u32
@@ -299,149 +299,202 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record HHN_NOTIFY,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    pszUrl : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record HH_POPUP,
-    cbStruct : Int32,
-    hinst : Win32cr::Foundation::HINSTANCE,
-    idString : UInt32,
-    pszText : Int8*,
-    pt : Win32cr::Foundation::POINT,
-    clrForeground : UInt32,
-    clrBackground : UInt32,
-    rcMargins : Win32cr::Foundation::RECT,
-    pszFont : Int8*
-
-  @[Extern]
-  record HH_AKLINK,
-    cbStruct : Int32,
-    fReserved : Win32cr::Foundation::BOOL,
-    pszKeywords : Int8*,
-    pszUrl : Int8*,
-    pszMsgText : Int8*,
-    pszMsgTitle : Int8*,
-    pszWindow : Int8*,
-    fIndexOnFail : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record HH_ENUM_IT,
-    cbStruct : Int32,
-    iType : Int32,
-    pszCatName : Win32cr::Foundation::PSTR,
-    pszITName : Win32cr::Foundation::PSTR,
-    pszITDescription : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record HH_ENUM_CAT,
-    cbStruct : Int32,
-    pszCatName : Win32cr::Foundation::PSTR,
-    pszCatDescription : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record HH_SET_INFOTYPE,
-    cbStruct : Int32,
-    pszCatName : Win32cr::Foundation::PSTR,
-    pszInfoTypeName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record HH_FTS_QUERY,
-    cbStruct : Int32,
-    fUniCodeStrings : Win32cr::Foundation::BOOL,
-    pszSearchQuery : Int8*,
-    iProximity : Int32,
-    fStemmedSearch : Win32cr::Foundation::BOOL,
-    fTitleOnly : Win32cr::Foundation::BOOL,
-    fExecute : Win32cr::Foundation::BOOL,
-    pszWindow : Int8*
-
-  @[Extern]
-  record HH_WINTYPE,
-    cbStruct : Int32,
-    fUniCodeStrings : Win32cr::Foundation::BOOL,
-    pszType : Int8*,
-    fsValidMembers : UInt32,
-    fsWinProperties : UInt32,
-    pszCaption : Int8*,
-    dwStyles : UInt32,
-    dwExStyles : UInt32,
-    rcWindowPos : Win32cr::Foundation::RECT,
-    nShowState : Int32,
-    hwndHelp : Win32cr::Foundation::HWND,
-    hwndCaller : Win32cr::Foundation::HWND,
-    paInfoTypes : UInt32*,
-    hwndToolBar : Win32cr::Foundation::HWND,
-    hwndNavigation : Win32cr::Foundation::HWND,
-    hwndHTML : Win32cr::Foundation::HWND,
-    iNavWidth : Int32,
-    rcHTML : Win32cr::Foundation::RECT,
-    pszToc : Int8*,
-    pszIndex : Int8*,
-    pszFile : Int8*,
-    pszHome : Int8*,
-    fsToolBarFlags : UInt32,
-    fNotExpanded : Win32cr::Foundation::BOOL,
-    curNavType : Int32,
-    tabpos : Int32,
-    idNotify : Int32,
-    tabOrder : UInt8[20],
-    cHistory : Int32,
-    pszJump1 : Int8*,
-    pszJump2 : Int8*,
-    pszUrlJump1 : Int8*,
-    pszUrlJump2 : Int8*,
-    rcMinSize : Win32cr::Foundation::RECT,
-    cbInfoTypes : Int32,
-    pszCustomTabs : Int8*
-
-  @[Extern]
-  record HHNTRACK,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    pszCurUrl : Win32cr::Foundation::PSTR,
-    idAction : Int32,
-    phhWinType : Win32cr::Data::HtmlHelp::HH_WINTYPE*
-
-  @[Extern]
-  record HH_GLOBAL_PROPERTY,
-    id : Win32cr::Data::HtmlHelp::HH_GPROPID,
-    var : Win32cr::System::Com::VARIANT
-
-  @[Extern]
-  record CProperty,
-    dwPropID : UInt32,
-    cbData : UInt32,
-    dwType : UInt32,
-    anonymous : Anonymous_e__Union_,
-    fPersist : Win32cr::Foundation::BOOL do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      lpszwData : Win32cr::Foundation::PWSTR,
-      lpvData : Void*,
-      dwValue : UInt32
-
+  struct HHN_NOTIFY
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property pszUrl : Win32cr::Foundation::PSTR
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @pszUrl : Win32cr::Foundation::PSTR)
+    end
   end
 
   @[Extern]
-  record IITGroup
-  @[Extern]
-  record IITQuery
-  @[Extern]
-  record IITStopWordList
-  @[Extern]
-  record ROWSTATUS,
-    lRowFirst : Int32,
-    cRows : Int32,
-    cProperties : Int32,
-    cRowsTotal : Int32
+  struct HH_POPUP
+    property cbStruct : Int32
+    property hinst : Win32cr::Foundation::HINSTANCE
+    property idString : UInt32
+    property pszText : Int8*
+    property pt : Win32cr::Foundation::POINT
+    property clrForeground : UInt32
+    property clrBackground : UInt32
+    property rcMargins : Win32cr::Foundation::RECT
+    property pszFont : Int8*
+    def initialize(@cbStruct : Int32, @hinst : Win32cr::Foundation::HINSTANCE, @idString : UInt32, @pszText : Int8*, @pt : Win32cr::Foundation::POINT, @clrForeground : UInt32, @clrBackground : UInt32, @rcMargins : Win32cr::Foundation::RECT, @pszFont : Int8*)
+    end
+  end
 
   @[Extern]
-  record COLUMNSTATUS,
-    cPropCount : Int32,
-    cPropsLoaded : Int32
+  struct HH_AKLINK
+    property cbStruct : Int32
+    property fReserved : Win32cr::Foundation::BOOL
+    property pszKeywords : Int8*
+    property pszUrl : Int8*
+    property pszMsgText : Int8*
+    property pszMsgTitle : Int8*
+    property pszWindow : Int8*
+    property fIndexOnFail : Win32cr::Foundation::BOOL
+    def initialize(@cbStruct : Int32, @fReserved : Win32cr::Foundation::BOOL, @pszKeywords : Int8*, @pszUrl : Int8*, @pszMsgText : Int8*, @pszMsgTitle : Int8*, @pszWindow : Int8*, @fIndexOnFail : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct HH_ENUM_IT
+    property cbStruct : Int32
+    property iType : Int32
+    property pszCatName : Win32cr::Foundation::PSTR
+    property pszITName : Win32cr::Foundation::PSTR
+    property pszITDescription : Win32cr::Foundation::PSTR
+    def initialize(@cbStruct : Int32, @iType : Int32, @pszCatName : Win32cr::Foundation::PSTR, @pszITName : Win32cr::Foundation::PSTR, @pszITDescription : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct HH_ENUM_CAT
+    property cbStruct : Int32
+    property pszCatName : Win32cr::Foundation::PSTR
+    property pszCatDescription : Win32cr::Foundation::PSTR
+    def initialize(@cbStruct : Int32, @pszCatName : Win32cr::Foundation::PSTR, @pszCatDescription : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct HH_SET_INFOTYPE
+    property cbStruct : Int32
+    property pszCatName : Win32cr::Foundation::PSTR
+    property pszInfoTypeName : Win32cr::Foundation::PSTR
+    def initialize(@cbStruct : Int32, @pszCatName : Win32cr::Foundation::PSTR, @pszInfoTypeName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct HH_FTS_QUERY
+    property cbStruct : Int32
+    property fUniCodeStrings : Win32cr::Foundation::BOOL
+    property pszSearchQuery : Int8*
+    property iProximity : Int32
+    property fStemmedSearch : Win32cr::Foundation::BOOL
+    property fTitleOnly : Win32cr::Foundation::BOOL
+    property fExecute : Win32cr::Foundation::BOOL
+    property pszWindow : Int8*
+    def initialize(@cbStruct : Int32, @fUniCodeStrings : Win32cr::Foundation::BOOL, @pszSearchQuery : Int8*, @iProximity : Int32, @fStemmedSearch : Win32cr::Foundation::BOOL, @fTitleOnly : Win32cr::Foundation::BOOL, @fExecute : Win32cr::Foundation::BOOL, @pszWindow : Int8*)
+    end
+  end
+
+  @[Extern]
+  struct HH_WINTYPE
+    property cbStruct : Int32
+    property fUniCodeStrings : Win32cr::Foundation::BOOL
+    property pszType : Int8*
+    property fsValidMembers : UInt32
+    property fsWinProperties : UInt32
+    property pszCaption : Int8*
+    property dwStyles : UInt32
+    property dwExStyles : UInt32
+    property rcWindowPos : Win32cr::Foundation::RECT
+    property nShowState : Int32
+    property hwndHelp : Win32cr::Foundation::HWND
+    property hwndCaller : Win32cr::Foundation::HWND
+    property paInfoTypes : UInt32*
+    property hwndToolBar : Win32cr::Foundation::HWND
+    property hwndNavigation : Win32cr::Foundation::HWND
+    property hwndHTML : Win32cr::Foundation::HWND
+    property iNavWidth : Int32
+    property rcHTML : Win32cr::Foundation::RECT
+    property pszToc : Int8*
+    property pszIndex : Int8*
+    property pszFile : Int8*
+    property pszHome : Int8*
+    property fsToolBarFlags : UInt32
+    property fNotExpanded : Win32cr::Foundation::BOOL
+    property curNavType : Int32
+    property tabpos : Int32
+    property idNotify : Int32
+    property tabOrder : UInt8[20]
+    property cHistory : Int32
+    property pszJump1 : Int8*
+    property pszJump2 : Int8*
+    property pszUrlJump1 : Int8*
+    property pszUrlJump2 : Int8*
+    property rcMinSize : Win32cr::Foundation::RECT
+    property cbInfoTypes : Int32
+    property pszCustomTabs : Int8*
+    def initialize(@cbStruct : Int32, @fUniCodeStrings : Win32cr::Foundation::BOOL, @pszType : Int8*, @fsValidMembers : UInt32, @fsWinProperties : UInt32, @pszCaption : Int8*, @dwStyles : UInt32, @dwExStyles : UInt32, @rcWindowPos : Win32cr::Foundation::RECT, @nShowState : Int32, @hwndHelp : Win32cr::Foundation::HWND, @hwndCaller : Win32cr::Foundation::HWND, @paInfoTypes : UInt32*, @hwndToolBar : Win32cr::Foundation::HWND, @hwndNavigation : Win32cr::Foundation::HWND, @hwndHTML : Win32cr::Foundation::HWND, @iNavWidth : Int32, @rcHTML : Win32cr::Foundation::RECT, @pszToc : Int8*, @pszIndex : Int8*, @pszFile : Int8*, @pszHome : Int8*, @fsToolBarFlags : UInt32, @fNotExpanded : Win32cr::Foundation::BOOL, @curNavType : Int32, @tabpos : Int32, @idNotify : Int32, @tabOrder : UInt8[20], @cHistory : Int32, @pszJump1 : Int8*, @pszJump2 : Int8*, @pszUrlJump1 : Int8*, @pszUrlJump2 : Int8*, @rcMinSize : Win32cr::Foundation::RECT, @cbInfoTypes : Int32, @pszCustomTabs : Int8*)
+    end
+  end
+
+  @[Extern]
+  struct HHNTRACK
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property pszCurUrl : Win32cr::Foundation::PSTR
+    property idAction : Int32
+    property phhWinType : Win32cr::Data::HtmlHelp::HH_WINTYPE*
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @pszCurUrl : Win32cr::Foundation::PSTR, @idAction : Int32, @phhWinType : Win32cr::Data::HtmlHelp::HH_WINTYPE*)
+    end
+  end
+
+  @[Extern]
+  struct HH_GLOBAL_PROPERTY
+    property id : Win32cr::Data::HtmlHelp::HH_GPROPID
+    property var : Win32cr::System::Com::VARIANT
+    def initialize(@id : Win32cr::Data::HtmlHelp::HH_GPROPID, @var : Win32cr::System::Com::VARIANT)
+    end
+  end
+
+  @[Extern]
+  struct CProperty
+    property dwPropID : UInt32
+    property cbData : UInt32
+    property dwType : UInt32
+    property anonymous : Anonymous_e__Union_
+    property fPersist : Win32cr::Foundation::BOOL
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property lpszwData : Win32cr::Foundation::PWSTR
+    property lpvData : Void*
+    property dwValue : UInt32
+    def initialize(@lpszwData : Win32cr::Foundation::PWSTR, @lpvData : Void*, @dwValue : UInt32)
+    end
+    end
+
+    def initialize(@dwPropID : UInt32, @cbData : UInt32, @dwType : UInt32, @anonymous : Anonymous_e__Union_, @fPersist : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct IITGroup
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IITQuery
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IITStopWordList
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct ROWSTATUS
+    property lRowFirst : Int32
+    property cRows : Int32
+    property cProperties : Int32
+    property cRowsTotal : Int32
+    def initialize(@lRowFirst : Int32, @cRows : Int32, @cProperties : Int32, @cRowsTotal : Int32)
+    end
+  end
+
+  @[Extern]
+  struct COLUMNSTATUS
+    property cPropCount : Int32
+    property cPropsLoaded : Int32
+    def initialize(@cPropCount : Int32, @cPropsLoaded : Int32)
+    end
+  end
 
   @[Extern]
   record IITPropListVtbl,
@@ -475,7 +528,6 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  #@[Com("1f403bb1-9997-11d0-a850-00aa006c7d01")]
   record IITPropList, lpVtbl : IITPropListVtbl* do
     GUID = LibC::GUID.new(0x1f403bb1_u32, 0x9997_u16, 0x11d0_u16, StaticArray[0xa8_u8, 0x50_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x7d_u8, 0x1_u8])
     def query_interface(this : IITPropList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -575,7 +627,6 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  #@[Com("8fa0d5a2-dedf-11d0-9a61-00c04fb68bf7")]
   record IITDatabase, lpVtbl : IITDatabaseVtbl* do
     GUID = LibC::GUID.new(0x8fa0d5a2_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
     def query_interface(this : IITDatabase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -626,7 +677,6 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  #@[Com("8fa0d5a4-dedf-11d0-9a61-00c04fb68bf7")]
   record IITWordWheel, lpVtbl : IITWordWheelVtbl* do
     GUID = LibC::GUID.new(0x8fa0d5a4_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
     def query_interface(this : IITWordWheel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -690,7 +740,6 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  #@[Com("fe77c330-7f42-11ce-be57-00aa0051fe20")]
   record IStemSink, lpVtbl : IStemSinkVtbl* do
     GUID = LibC::GUID.new(0xfe77c330_u32, 0x7f42_u16, 0x11ce_u16, StaticArray[0xbe_u8, 0x57_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x51_u8, 0xfe_u8, 0x20_u8])
     def query_interface(this : IStemSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -724,7 +773,6 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  #@[Com("8fa0d5a7-dedf-11d0-9a61-00c04fb68bf7")]
   record IStemmerConfig, lpVtbl : IStemmerConfigVtbl* do
     GUID = LibC::GUID.new(0x8fa0d5a7_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
     def query_interface(this : IStemmerConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -771,7 +819,6 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  #@[Com("8fa0d5a6-dedf-11d0-9a61-00c04fb68bf7")]
   record IWordBreakerConfig, lpVtbl : IWordBreakerConfigVtbl* do
     GUID = LibC::GUID.new(0x8fa0d5a6_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
     def query_interface(this : IWordBreakerConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -851,7 +898,6 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  #@[Com("3bb91d41-998b-11d0-a850-00aa006c7d01")]
   record IITResultSet, lpVtbl : IITResultSetVtbl* do
     GUID = LibC::GUID.new(0x3bb91d41_u32, 0x998b_u16, 0x11d0_u16, StaticArray[0xa8_u8, 0x50_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x7d_u8, 0x1_u8])
     def query_interface(this : IITResultSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

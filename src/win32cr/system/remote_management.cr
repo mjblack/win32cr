@@ -2,35 +2,35 @@ require "./../foundation.cr"
 require "./com.cr"
 
 module Win32cr::System::RemoteManagement
-  alias WSMAN_SHELL_COMPLETION_FUNCTION = Proc(Void*, UInt32, Win32cr::System::RemoteManagement::WSMAN_ERROR*, Win32cr::System::RemoteManagement::WSMAN_SHELL*, Win32cr::System::RemoteManagement::WSMAN_COMMAND*, Win32cr::System::RemoteManagement::WSMAN_OPERATION*, Win32cr::System::RemoteManagement::WSMAN_RESPONSE_DATA*, Void)*
+  alias WSMAN_SHELL_COMPLETION_FUNCTION = Proc(Void*, UInt32, Win32cr::System::RemoteManagement::WSMAN_ERROR*, Win32cr::System::RemoteManagement::WSMAN_SHELL*, Win32cr::System::RemoteManagement::WSMAN_COMMAND*, Win32cr::System::RemoteManagement::WSMAN_OPERATION*, Win32cr::System::RemoteManagement::WSMAN_RESPONSE_DATA*, Void)
 
-  alias WSMAN_PLUGIN_RELEASE_SHELL_CONTEXT = Proc(Void*, Void)*
+  alias WSMAN_PLUGIN_RELEASE_SHELL_CONTEXT = Proc(Void*, Void)
 
-  alias WSMAN_PLUGIN_RELEASE_COMMAND_CONTEXT = Proc(Void*, Void*, Void)*
+  alias WSMAN_PLUGIN_RELEASE_COMMAND_CONTEXT = Proc(Void*, Void*, Void)
 
-  alias WSMAN_PLUGIN_STARTUP = Proc(UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void**, UInt32)*
+  alias WSMAN_PLUGIN_STARTUP = Proc(UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void**, UInt32)
 
-  alias WSMAN_PLUGIN_SHUTDOWN = Proc(Void*, UInt32, UInt32, UInt32)*
+  alias WSMAN_PLUGIN_SHUTDOWN = Proc(Void*, UInt32, UInt32, UInt32)
 
-  alias WSMAN_PLUGIN_SHELL = Proc(Void*, Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, UInt32, Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, Win32cr::System::RemoteManagement::WSMAN_DATA*, Void)*
+  alias WSMAN_PLUGIN_SHELL = Proc(Void*, Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, UInt32, Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, Win32cr::System::RemoteManagement::WSMAN_DATA*, Void)
 
-  alias WSMAN_PLUGIN_COMMAND = Proc(Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, UInt32, Void*, Win32cr::Foundation::PWSTR, Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, Void)*
+  alias WSMAN_PLUGIN_COMMAND = Proc(Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, UInt32, Void*, Win32cr::Foundation::PWSTR, Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, Void)
 
-  alias WSMAN_PLUGIN_SEND = Proc(Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, UInt32, Void*, Void*, Win32cr::Foundation::PWSTR, Win32cr::System::RemoteManagement::WSMAN_DATA*, Void)*
+  alias WSMAN_PLUGIN_SEND = Proc(Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, UInt32, Void*, Void*, Win32cr::Foundation::PWSTR, Win32cr::System::RemoteManagement::WSMAN_DATA*, Void)
 
-  alias WSMAN_PLUGIN_RECEIVE = Proc(Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, UInt32, Void*, Void*, Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*, Void)*
+  alias WSMAN_PLUGIN_RECEIVE = Proc(Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, UInt32, Void*, Void*, Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*, Void)
 
-  alias WSMAN_PLUGIN_SIGNAL = Proc(Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, UInt32, Void*, Void*, Win32cr::Foundation::PWSTR, Void)*
+  alias WSMAN_PLUGIN_SIGNAL = Proc(Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, UInt32, Void*, Void*, Win32cr::Foundation::PWSTR, Void)
 
-  alias WSMAN_PLUGIN_CONNECT = Proc(Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, UInt32, Void*, Void*, Win32cr::System::RemoteManagement::WSMAN_DATA*, Void)*
+  alias WSMAN_PLUGIN_CONNECT = Proc(Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, UInt32, Void*, Void*, Win32cr::System::RemoteManagement::WSMAN_DATA*, Void)
 
-  alias WSMAN_PLUGIN_AUTHORIZE_USER = Proc(Void*, Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, UInt32, Void)*
+  alias WSMAN_PLUGIN_AUTHORIZE_USER = Proc(Void*, Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, UInt32, Void)
 
-  alias WSMAN_PLUGIN_AUTHORIZE_OPERATION = Proc(Void*, Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, UInt32, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void)*
+  alias WSMAN_PLUGIN_AUTHORIZE_OPERATION = Proc(Void*, Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, UInt32, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void)
 
-  alias WSMAN_PLUGIN_AUTHORIZE_QUERY_QUOTA = Proc(Void*, Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, UInt32, Void)*
+  alias WSMAN_PLUGIN_AUTHORIZE_QUERY_QUOTA = Proc(Void*, Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, UInt32, Void)
 
-  alias WSMAN_PLUGIN_AUTHORIZE_RELEASE_CONTEXT = Proc(Void*, Void)*
+  alias WSMAN_PLUGIN_AUTHORIZE_RELEASE_CONTEXT = Proc(Void*, Void)
 
   WSMAN_FLAG_REQUESTED_API_VERSION_1_0 = 0_u32
   WSMAN_FLAG_REQUESTED_API_VERSION_1_1 = 1_u32
@@ -692,222 +692,342 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  record WSMAN_DATA_TEXT,
-    bufferLength : UInt32,
-    buffer : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WSMAN_DATA_BINARY,
-    dataLength : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record WSMAN_DATA,
-    type__ : Win32cr::System::RemoteManagement::WSManDataType,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      text : Win32cr::System::RemoteManagement::WSMAN_DATA_TEXT,
-      binaryData : Win32cr::System::RemoteManagement::WSMAN_DATA_BINARY,
-      number : UInt32
-
+  struct WSMAN_DATA_TEXT
+    property bufferLength : UInt32
+    property buffer : Win32cr::Foundation::PWSTR
+    def initialize(@bufferLength : UInt32, @buffer : Win32cr::Foundation::PWSTR)
+    end
   end
 
   @[Extern]
-  record WSMAN_ERROR,
-    code : UInt32,
-    errorDetail : Win32cr::Foundation::PWSTR,
-    language : Win32cr::Foundation::PWSTR,
-    machineName : Win32cr::Foundation::PWSTR,
-    pluginName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WSMAN_USERNAME_PASSWORD_CREDS,
-    username : Win32cr::Foundation::PWSTR,
-    password : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WSMAN_AUTHENTICATION_CREDENTIALS,
-    authenticationMechanism : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      userAccount : Win32cr::System::RemoteManagement::WSMAN_USERNAME_PASSWORD_CREDS,
-      certificateThumbprint : Win32cr::Foundation::PWSTR
-
+  struct WSMAN_DATA_BINARY
+    property dataLength : UInt32
+    property data : UInt8*
+    def initialize(@dataLength : UInt32, @data : UInt8*)
+    end
   end
 
   @[Extern]
-  record WSMAN_OPTION,
-    name : Win32cr::Foundation::PWSTR,
-    value : Win32cr::Foundation::PWSTR,
-    mustComply : Win32cr::Foundation::BOOL
+  struct WSMAN_DATA
+    property type__ : Win32cr::System::RemoteManagement::WSManDataType
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property text : Win32cr::System::RemoteManagement::WSMAN_DATA_TEXT
+    property binaryData : Win32cr::System::RemoteManagement::WSMAN_DATA_BINARY
+    property number : UInt32
+    def initialize(@text : Win32cr::System::RemoteManagement::WSMAN_DATA_TEXT, @binaryData : Win32cr::System::RemoteManagement::WSMAN_DATA_BINARY, @number : UInt32)
+    end
+    end
+
+    def initialize(@type__ : Win32cr::System::RemoteManagement::WSManDataType, @anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record WSMAN_OPTION_SET,
-    optionsCount : UInt32,
-    options : Win32cr::System::RemoteManagement::WSMAN_OPTION*,
-    optionsMustUnderstand : Win32cr::Foundation::BOOL
+  struct WSMAN_ERROR
+    property code : UInt32
+    property errorDetail : Win32cr::Foundation::PWSTR
+    property language : Win32cr::Foundation::PWSTR
+    property machineName : Win32cr::Foundation::PWSTR
+    property pluginName : Win32cr::Foundation::PWSTR
+    def initialize(@code : UInt32, @errorDetail : Win32cr::Foundation::PWSTR, @language : Win32cr::Foundation::PWSTR, @machineName : Win32cr::Foundation::PWSTR, @pluginName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WSMAN_OPTION_SETEX,
-    optionsCount : UInt32,
-    options : Win32cr::System::RemoteManagement::WSMAN_OPTION*,
-    optionsMustUnderstand : Win32cr::Foundation::BOOL,
-    optionTypes : Win32cr::Foundation::PWSTR*
+  struct WSMAN_USERNAME_PASSWORD_CREDS
+    property username : Win32cr::Foundation::PWSTR
+    property password : Win32cr::Foundation::PWSTR
+    def initialize(@username : Win32cr::Foundation::PWSTR, @password : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WSMAN_KEY,
-    key : Win32cr::Foundation::PWSTR,
-    value : Win32cr::Foundation::PWSTR
+  struct WSMAN_AUTHENTICATION_CREDENTIALS
+    property authenticationMechanism : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property userAccount : Win32cr::System::RemoteManagement::WSMAN_USERNAME_PASSWORD_CREDS
+    property certificateThumbprint : Win32cr::Foundation::PWSTR
+    def initialize(@userAccount : Win32cr::System::RemoteManagement::WSMAN_USERNAME_PASSWORD_CREDS, @certificateThumbprint : Win32cr::Foundation::PWSTR)
+    end
+    end
+
+    def initialize(@authenticationMechanism : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record WSMAN_SELECTOR_SET,
-    numberKeys : UInt32,
-    keys : Win32cr::System::RemoteManagement::WSMAN_KEY*
+  struct WSMAN_OPTION
+    property name : Win32cr::Foundation::PWSTR
+    property value : Win32cr::Foundation::PWSTR
+    property mustComply : Win32cr::Foundation::BOOL
+    def initialize(@name : Win32cr::Foundation::PWSTR, @value : Win32cr::Foundation::PWSTR, @mustComply : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record WSMAN_FRAGMENT,
-    path : Win32cr::Foundation::PWSTR,
-    dialect : Win32cr::Foundation::PWSTR
+  struct WSMAN_OPTION_SET
+    property optionsCount : UInt32
+    property options : Win32cr::System::RemoteManagement::WSMAN_OPTION*
+    property optionsMustUnderstand : Win32cr::Foundation::BOOL
+    def initialize(@optionsCount : UInt32, @options : Win32cr::System::RemoteManagement::WSMAN_OPTION*, @optionsMustUnderstand : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record WSMAN_FILTER,
-    filter : Win32cr::Foundation::PWSTR,
-    dialect : Win32cr::Foundation::PWSTR
+  struct WSMAN_OPTION_SETEX
+    property optionsCount : UInt32
+    property options : Win32cr::System::RemoteManagement::WSMAN_OPTION*
+    property optionsMustUnderstand : Win32cr::Foundation::BOOL
+    property optionTypes : Win32cr::Foundation::PWSTR*
+    def initialize(@optionsCount : UInt32, @options : Win32cr::System::RemoteManagement::WSMAN_OPTION*, @optionsMustUnderstand : Win32cr::Foundation::BOOL, @optionTypes : Win32cr::Foundation::PWSTR*)
+    end
+  end
 
   @[Extern]
-  record WSMAN_OPERATION_INFO,
-    fragment : Win32cr::System::RemoteManagement::WSMAN_FRAGMENT,
-    filter : Win32cr::System::RemoteManagement::WSMAN_FILTER,
-    selectorSet : Win32cr::System::RemoteManagement::WSMAN_SELECTOR_SET,
-    optionSet : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET,
-    reserved : Void*,
-    version : UInt32
+  struct WSMAN_KEY
+    property key : Win32cr::Foundation::PWSTR
+    property value : Win32cr::Foundation::PWSTR
+    def initialize(@key : Win32cr::Foundation::PWSTR, @value : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WSMAN_OPERATION_INFOEX,
-    fragment : Win32cr::System::RemoteManagement::WSMAN_FRAGMENT,
-    filter : Win32cr::System::RemoteManagement::WSMAN_FILTER,
-    selectorSet : Win32cr::System::RemoteManagement::WSMAN_SELECTOR_SET,
-    optionSet : Win32cr::System::RemoteManagement::WSMAN_OPTION_SETEX,
-    version : UInt32,
-    uiLocale : Win32cr::Foundation::PWSTR,
-    dataLocale : Win32cr::Foundation::PWSTR
+  struct WSMAN_SELECTOR_SET
+    property numberKeys : UInt32
+    property keys : Win32cr::System::RemoteManagement::WSMAN_KEY*
+    def initialize(@numberKeys : UInt32, @keys : Win32cr::System::RemoteManagement::WSMAN_KEY*)
+    end
+  end
 
   @[Extern]
-  record WSMAN_API
-  @[Extern]
-  record WSMAN_PROXY_INFO,
-    accessType : UInt32,
-    authenticationCredentials : Win32cr::System::RemoteManagement::WSMAN_AUTHENTICATION_CREDENTIALS
+  struct WSMAN_FRAGMENT
+    property path : Win32cr::Foundation::PWSTR
+    property dialect : Win32cr::Foundation::PWSTR
+    def initialize(@path : Win32cr::Foundation::PWSTR, @dialect : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WSMAN_SESSION
-  @[Extern]
-  record WSMAN_OPERATION
-  @[Extern]
-  record WSMAN_SHELL
-  @[Extern]
-  record WSMAN_COMMAND
-  @[Extern]
-  record WSMAN_STREAM_ID_SET,
-    streamIDsCount : UInt32,
-    streamIDs : Win32cr::Foundation::PWSTR*
+  struct WSMAN_FILTER
+    property filter : Win32cr::Foundation::PWSTR
+    property dialect : Win32cr::Foundation::PWSTR
+    def initialize(@filter : Win32cr::Foundation::PWSTR, @dialect : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WSMAN_ENVIRONMENT_VARIABLE,
-    name : Win32cr::Foundation::PWSTR,
-    value : Win32cr::Foundation::PWSTR
+  struct WSMAN_OPERATION_INFO
+    property fragment : Win32cr::System::RemoteManagement::WSMAN_FRAGMENT
+    property filter : Win32cr::System::RemoteManagement::WSMAN_FILTER
+    property selectorSet : Win32cr::System::RemoteManagement::WSMAN_SELECTOR_SET
+    property optionSet : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET
+    property reserved : Void*
+    property version : UInt32
+    def initialize(@fragment : Win32cr::System::RemoteManagement::WSMAN_FRAGMENT, @filter : Win32cr::System::RemoteManagement::WSMAN_FILTER, @selectorSet : Win32cr::System::RemoteManagement::WSMAN_SELECTOR_SET, @optionSet : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET, @reserved : Void*, @version : UInt32)
+    end
+  end
 
   @[Extern]
-  record WSMAN_ENVIRONMENT_VARIABLE_SET,
-    varsCount : UInt32,
-    vars : Win32cr::System::RemoteManagement::WSMAN_ENVIRONMENT_VARIABLE*
+  struct WSMAN_OPERATION_INFOEX
+    property fragment : Win32cr::System::RemoteManagement::WSMAN_FRAGMENT
+    property filter : Win32cr::System::RemoteManagement::WSMAN_FILTER
+    property selectorSet : Win32cr::System::RemoteManagement::WSMAN_SELECTOR_SET
+    property optionSet : Win32cr::System::RemoteManagement::WSMAN_OPTION_SETEX
+    property version : UInt32
+    property uiLocale : Win32cr::Foundation::PWSTR
+    property dataLocale : Win32cr::Foundation::PWSTR
+    def initialize(@fragment : Win32cr::System::RemoteManagement::WSMAN_FRAGMENT, @filter : Win32cr::System::RemoteManagement::WSMAN_FILTER, @selectorSet : Win32cr::System::RemoteManagement::WSMAN_SELECTOR_SET, @optionSet : Win32cr::System::RemoteManagement::WSMAN_OPTION_SETEX, @version : UInt32, @uiLocale : Win32cr::Foundation::PWSTR, @dataLocale : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WSMAN_SHELL_STARTUP_INFO_V10,
-    inputStreamSet : Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*,
-    outputStreamSet : Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*,
-    idleTimeoutMs : UInt32,
-    workingDirectory : Win32cr::Foundation::PWSTR,
-    variableSet : Win32cr::System::RemoteManagement::WSMAN_ENVIRONMENT_VARIABLE_SET*
+  struct WSMAN_API
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record WSMAN_SHELL_STARTUP_INFO_V11,
-    __anonymous_base_wsman_l665_c48 : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V10,
-    name : Win32cr::Foundation::PWSTR
+  struct WSMAN_PROXY_INFO
+    property accessType : UInt32
+    property authenticationCredentials : Win32cr::System::RemoteManagement::WSMAN_AUTHENTICATION_CREDENTIALS
+    def initialize(@accessType : UInt32, @authenticationCredentials : Win32cr::System::RemoteManagement::WSMAN_AUTHENTICATION_CREDENTIALS)
+    end
+  end
 
   @[Extern]
-  record WSMAN_SHELL_DISCONNECT_INFO,
-    idleTimeoutMs : UInt32
+  struct WSMAN_SESSION
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record WSMAN_RECEIVE_DATA_RESULT,
-    streamId : Win32cr::Foundation::PWSTR,
-    streamData : Win32cr::System::RemoteManagement::WSMAN_DATA,
-    commandState : Win32cr::Foundation::PWSTR,
-    exitCode : UInt32
+  struct WSMAN_OPERATION
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record WSMAN_CONNECT_DATA,
-    data : Win32cr::System::RemoteManagement::WSMAN_DATA
+  struct WSMAN_SHELL
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record WSMAN_CREATE_SHELL_DATA,
-    data : Win32cr::System::RemoteManagement::WSMAN_DATA
+  struct WSMAN_COMMAND
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct WSMAN_STREAM_ID_SET
+    property streamIDsCount : UInt32
+    property streamIDs : Win32cr::Foundation::PWSTR*
+    def initialize(@streamIDsCount : UInt32, @streamIDs : Win32cr::Foundation::PWSTR*)
+    end
+  end
+
+  @[Extern]
+  struct WSMAN_ENVIRONMENT_VARIABLE
+    property name : Win32cr::Foundation::PWSTR
+    property value : Win32cr::Foundation::PWSTR
+    def initialize(@name : Win32cr::Foundation::PWSTR, @value : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WSMAN_ENVIRONMENT_VARIABLE_SET
+    property varsCount : UInt32
+    property vars : Win32cr::System::RemoteManagement::WSMAN_ENVIRONMENT_VARIABLE*
+    def initialize(@varsCount : UInt32, @vars : Win32cr::System::RemoteManagement::WSMAN_ENVIRONMENT_VARIABLE*)
+    end
+  end
+
+  @[Extern]
+  struct WSMAN_SHELL_STARTUP_INFO_V10
+    property inputStreamSet : Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*
+    property outputStreamSet : Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*
+    property idleTimeoutMs : UInt32
+    property workingDirectory : Win32cr::Foundation::PWSTR
+    property variableSet : Win32cr::System::RemoteManagement::WSMAN_ENVIRONMENT_VARIABLE_SET*
+    def initialize(@inputStreamSet : Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*, @outputStreamSet : Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*, @idleTimeoutMs : UInt32, @workingDirectory : Win32cr::Foundation::PWSTR, @variableSet : Win32cr::System::RemoteManagement::WSMAN_ENVIRONMENT_VARIABLE_SET*)
+    end
+  end
+
+  @[Extern]
+  struct WSMAN_SHELL_STARTUP_INFO_V11
+    property __anonymous_base_wsman_l665_c48 : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V10
+    property name : Win32cr::Foundation::PWSTR
+    def initialize(@__anonymous_base_wsman_l665_c48 : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V10, @name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WSMAN_SHELL_DISCONNECT_INFO
+    property idleTimeoutMs : UInt32
+    def initialize(@idleTimeoutMs : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WSMAN_RECEIVE_DATA_RESULT
+    property streamId : Win32cr::Foundation::PWSTR
+    property streamData : Win32cr::System::RemoteManagement::WSMAN_DATA
+    property commandState : Win32cr::Foundation::PWSTR
+    property exitCode : UInt32
+    def initialize(@streamId : Win32cr::Foundation::PWSTR, @streamData : Win32cr::System::RemoteManagement::WSMAN_DATA, @commandState : Win32cr::Foundation::PWSTR, @exitCode : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WSMAN_CONNECT_DATA
+    property data : Win32cr::System::RemoteManagement::WSMAN_DATA
+    def initialize(@data : Win32cr::System::RemoteManagement::WSMAN_DATA)
+    end
+  end
+
+  @[Extern]
+  struct WSMAN_CREATE_SHELL_DATA
+    property data : Win32cr::System::RemoteManagement::WSMAN_DATA
+    def initialize(@data : Win32cr::System::RemoteManagement::WSMAN_DATA)
+    end
+  end
 
   @[Extern(union: true)]
-  record WSMAN_RESPONSE_DATA,
-    receiveData : Win32cr::System::RemoteManagement::WSMAN_RECEIVE_DATA_RESULT,
-    connectData : Win32cr::System::RemoteManagement::WSMAN_CONNECT_DATA,
-    createData : Win32cr::System::RemoteManagement::WSMAN_CREATE_SHELL_DATA
+  struct WSMAN_RESPONSE_DATA
+    property receiveData : Win32cr::System::RemoteManagement::WSMAN_RECEIVE_DATA_RESULT
+    property connectData : Win32cr::System::RemoteManagement::WSMAN_CONNECT_DATA
+    property createData : Win32cr::System::RemoteManagement::WSMAN_CREATE_SHELL_DATA
+    def initialize(@receiveData : Win32cr::System::RemoteManagement::WSMAN_RECEIVE_DATA_RESULT, @connectData : Win32cr::System::RemoteManagement::WSMAN_CONNECT_DATA, @createData : Win32cr::System::RemoteManagement::WSMAN_CREATE_SHELL_DATA)
+    end
+  end
 
   @[Extern]
-  record WSMAN_SHELL_ASYNC,
-    operationContext : Void*,
-    completionFunction : Win32cr::System::RemoteManagement::WSMAN_SHELL_COMPLETION_FUNCTION
+  struct WSMAN_SHELL_ASYNC
+    property operationContext : Void*
+    property completionFunction : Win32cr::System::RemoteManagement::WSMAN_SHELL_COMPLETION_FUNCTION
+    def initialize(@operationContext : Void*, @completionFunction : Win32cr::System::RemoteManagement::WSMAN_SHELL_COMPLETION_FUNCTION)
+    end
+  end
 
   @[Extern]
-  record WSMAN_COMMAND_ARG_SET,
-    argsCount : UInt32,
-    args : Win32cr::Foundation::PWSTR*
+  struct WSMAN_COMMAND_ARG_SET
+    property argsCount : UInt32
+    property args : Win32cr::Foundation::PWSTR*
+    def initialize(@argsCount : UInt32, @args : Win32cr::Foundation::PWSTR*)
+    end
+  end
 
   @[Extern]
-  record WSMAN_CERTIFICATE_DETAILS,
-    subject : Win32cr::Foundation::PWSTR,
-    issuerName : Win32cr::Foundation::PWSTR,
-    issuerThumbprint : Win32cr::Foundation::PWSTR,
-    subjectName : Win32cr::Foundation::PWSTR
+  struct WSMAN_CERTIFICATE_DETAILS
+    property subject : Win32cr::Foundation::PWSTR
+    property issuerName : Win32cr::Foundation::PWSTR
+    property issuerThumbprint : Win32cr::Foundation::PWSTR
+    property subjectName : Win32cr::Foundation::PWSTR
+    def initialize(@subject : Win32cr::Foundation::PWSTR, @issuerName : Win32cr::Foundation::PWSTR, @issuerThumbprint : Win32cr::Foundation::PWSTR, @subjectName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WSMAN_SENDER_DETAILS,
-    senderName : Win32cr::Foundation::PWSTR,
-    authenticationMechanism : Win32cr::Foundation::PWSTR,
-    certificateDetails : Win32cr::System::RemoteManagement::WSMAN_CERTIFICATE_DETAILS*,
-    clientToken : Win32cr::Foundation::HANDLE,
-    httpURL : Win32cr::Foundation::PWSTR
+  struct WSMAN_SENDER_DETAILS
+    property senderName : Win32cr::Foundation::PWSTR
+    property authenticationMechanism : Win32cr::Foundation::PWSTR
+    property certificateDetails : Win32cr::System::RemoteManagement::WSMAN_CERTIFICATE_DETAILS*
+    property clientToken : Win32cr::Foundation::HANDLE
+    property httpURL : Win32cr::Foundation::PWSTR
+    def initialize(@senderName : Win32cr::Foundation::PWSTR, @authenticationMechanism : Win32cr::Foundation::PWSTR, @certificateDetails : Win32cr::System::RemoteManagement::WSMAN_CERTIFICATE_DETAILS*, @clientToken : Win32cr::Foundation::HANDLE, @httpURL : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WSMAN_PLUGIN_REQUEST,
-    senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*,
-    locale : Win32cr::Foundation::PWSTR,
-    resourceUri : Win32cr::Foundation::PWSTR,
-    operationInfo : Win32cr::System::RemoteManagement::WSMAN_OPERATION_INFO*,
-    shutdownNotification : Int32,
-    shutdownNotificationHandle : Win32cr::Foundation::HANDLE,
-    dataLocale : Win32cr::Foundation::PWSTR
+  struct WSMAN_PLUGIN_REQUEST
+    property senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*
+    property locale : Win32cr::Foundation::PWSTR
+    property resourceUri : Win32cr::Foundation::PWSTR
+    property operationInfo : Win32cr::System::RemoteManagement::WSMAN_OPERATION_INFO*
+    property shutdownNotification : Int32
+    property shutdownNotificationHandle : Win32cr::Foundation::HANDLE
+    property dataLocale : Win32cr::Foundation::PWSTR
+    def initialize(@senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, @locale : Win32cr::Foundation::PWSTR, @resourceUri : Win32cr::Foundation::PWSTR, @operationInfo : Win32cr::System::RemoteManagement::WSMAN_OPERATION_INFO*, @shutdownNotification : Int32, @shutdownNotificationHandle : Win32cr::Foundation::HANDLE, @dataLocale : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WSMAN_AUTHZ_QUOTA,
-    maxAllowedConcurrentShells : UInt32,
-    maxAllowedConcurrentOperations : UInt32,
-    timeslotSize : UInt32,
-    maxAllowedOperationsPerTimeslot : UInt32
+  struct WSMAN_AUTHZ_QUOTA
+    property maxAllowedConcurrentShells : UInt32
+    property maxAllowedConcurrentOperations : UInt32
+    property timeslotSize : UInt32
+    property maxAllowedOperationsPerTimeslot : UInt32
+    def initialize(@maxAllowedConcurrentShells : UInt32, @maxAllowedConcurrentOperations : UInt32, @timeslotSize : UInt32, @maxAllowedOperationsPerTimeslot : UInt32)
+    end
+  end
 
   @[Extern]
   record IWSManVtbl,
@@ -925,7 +1045,6 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  #@[Com("190d8637-5cd3-496d-ad24-69636bb5a3b5")]
   record IWSMan, lpVtbl : IWSManVtbl* do
     GUID = LibC::GUID.new(0x190d8637_u32, 0x5cd3_u16, 0x496d_u16, StaticArray[0xad_u8, 0x24_u8, 0x69_u8, 0x63_u8, 0x6b_u8, 0xb5_u8, 0xa3_u8, 0xb5_u8])
     def query_interface(this : IWSMan*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1000,7 +1119,6 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  #@[Com("2d53bdaa-798e-49e6-a1aa-74d01256f411")]
   record IWSManEx, lpVtbl : IWSManExVtbl* do
     GUID = LibC::GUID.new(0x2d53bdaa_u32, 0x798e_u16, 0x49e6_u16, StaticArray[0xa1_u8, 0xaa_u8, 0x74_u8, 0xd0_u8, 0x12_u8, 0x56_u8, 0xf4_u8, 0x11_u8])
     def query_interface(this : IWSManEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1136,7 +1254,6 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  #@[Com("1d1b5ae0-42d9-4021-8261-3987619512e9")]
   record IWSManEx2, lpVtbl : IWSManEx2Vtbl* do
     GUID = LibC::GUID.new(0x1d1b5ae0_u32, 0x42d9_u16, 0x4021_u16, StaticArray[0x82_u8, 0x61_u8, 0x39_u8, 0x87_u8, 0x61_u8, 0x95_u8, 0x12_u8, 0xe9_u8])
     def query_interface(this : IWSManEx2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1282,7 +1399,6 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  #@[Com("6400e966-011d-4eac-8474-049e0848afad")]
   record IWSManEx3, lpVtbl : IWSManEx3Vtbl* do
     GUID = LibC::GUID.new(0x6400e966_u32, 0x11d_u16, 0x4eac_u16, StaticArray[0x84_u8, 0x74_u8, 0x4_u8, 0x9e_u8, 0x8_u8, 0x48_u8, 0xaf_u8, 0xad_u8])
     def query_interface(this : IWSManEx3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1420,7 +1536,6 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  #@[Com("f704e861-9e52-464f-b786-da5eb2320fdd")]
   record IWSManConnectionOptions, lpVtbl : IWSManConnectionOptionsVtbl* do
     GUID = LibC::GUID.new(0xf704e861_u32, 0x9e52_u16, 0x464f_u16, StaticArray[0xb7_u8, 0x86_u8, 0xda_u8, 0x5e_u8, 0xb2_u8, 0x32_u8, 0xf_u8, 0xdd_u8])
     def query_interface(this : IWSManConnectionOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1473,7 +1588,6 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  #@[Com("ef43edf7-2a48-4d93-9526-8bd6ab6d4a6b")]
   record IWSManConnectionOptionsEx, lpVtbl : IWSManConnectionOptionsExVtbl* do
     GUID = LibC::GUID.new(0xef43edf7_u32, 0x2a48_u16, 0x4d93_u16, StaticArray[0x95_u8, 0x26_u8, 0x8b_u8, 0xd6_u8, 0xab_u8, 0x6d_u8, 0x4a_u8, 0x6b_u8])
     def query_interface(this : IWSManConnectionOptionsEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1540,7 +1654,6 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  #@[Com("f500c9ec-24ee-48ab-b38d-fc9a164c658e")]
   record IWSManConnectionOptionsEx2, lpVtbl : IWSManConnectionOptionsEx2Vtbl* do
     GUID = LibC::GUID.new(0xf500c9ec_u32, 0x24ee_u16, 0x48ab_u16, StaticArray[0xb3_u8, 0x8d_u8, 0xfc_u8, 0x9a_u8, 0x16_u8, 0x4c_u8, 0x65_u8, 0x8e_u8])
     def query_interface(this : IWSManConnectionOptionsEx2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1630,7 +1743,6 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  #@[Com("fc84fc58-1286-40c4-9da0-c8ef6ec241e0")]
   record IWSManSession, lpVtbl : IWSManSessionVtbl* do
     GUID = LibC::GUID.new(0xfc84fc58_u32, 0x1286_u16, 0x40c4_u16, StaticArray[0x9d_u8, 0xa0_u8, 0xc8_u8, 0xef_u8, 0x6e_u8, 0xc2_u8, 0x41_u8, 0xe0_u8])
     def query_interface(this : IWSManSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1708,7 +1820,6 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  #@[Com("f3457ca9-abb9-4fa5-b850-90e8ca300e7f")]
   record IWSManEnumerator, lpVtbl : IWSManEnumeratorVtbl* do
     GUID = LibC::GUID.new(0xf3457ca9_u32, 0xabb9_u16, 0x4fa5_u16, StaticArray[0xb8_u8, 0x50_u8, 0x90_u8, 0xe8_u8, 0xca_u8, 0x30_u8, 0xe_u8, 0x7f_u8])
     def query_interface(this : IWSManEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1769,7 +1880,6 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  #@[Com("a7a1ba28-de41-466a-ad0a-c4059ead7428")]
   record IWSManResourceLocator, lpVtbl : IWSManResourceLocatorVtbl* do
     GUID = LibC::GUID.new(0xa7a1ba28_u32, 0xde41_u16, 0x466a_u16, StaticArray[0xad_u8, 0xa_u8, 0xc4_u8, 0x5_u8, 0x9e_u8, 0xad_u8, 0x74_u8, 0x28_u8])
     def query_interface(this : IWSManResourceLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1843,7 +1953,6 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  #@[Com("effaead7-7ec8-4716-b9be-f2e7e9fb4adb")]
   record IWSManResourceLocatorInternal, lpVtbl : IWSManResourceLocatorInternalVtbl* do
     GUID = LibC::GUID.new(0xeffaead7_u32, 0x7ec8_u16, 0x4716_u16, StaticArray[0xb9_u8, 0xbe_u8, 0xf2_u8, 0xe7_u8, 0xe9_u8, 0xfb_u8, 0x4a_u8, 0xdb_u8])
     def query_interface(this : IWSManResourceLocatorInternal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1871,7 +1980,6 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  #@[Com("04ae2b1d-9954-4d99-94a9-a961e72c3a13")]
   record IWSManInternal, lpVtbl : IWSManInternalVtbl* do
     GUID = LibC::GUID.new(0x4ae2b1d_u32, 0x9954_u16, 0x4d99_u16, StaticArray[0x94_u8, 0xa9_u8, 0xa9_u8, 0x61_u8, 0xe7_u8, 0x2c_u8, 0x3a_u8, 0x13_u8])
     def query_interface(this : IWSManInternal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

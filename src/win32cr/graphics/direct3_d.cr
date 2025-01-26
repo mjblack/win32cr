@@ -2,7 +2,7 @@ require "./../foundation.cr"
 require "./../system/com.cr"
 
 module Win32cr::Graphics::Direct3D
-  alias PFN_DESTRUCTION_CALLBACK = Proc(Void*, Void)*
+  alias PFN_DESTRUCTION_CALLBACK = Proc(Void*, Void)
 
   D3D_FL9_1_REQ_TEXTURE1D_U_DIMENSION = 2048_u32
   D3D_FL9_3_REQ_TEXTURE1D_U_DIMENSION = 4096_u32
@@ -673,48 +673,61 @@ module Win32cr::Graphics::Direct3D
   end
 
   @[Extern]
-  record D3D_SHADER_MACRO,
-    name : Win32cr::Foundation::PSTR,
-    definition : Win32cr::Foundation::PSTR
+  struct D3D_SHADER_MACRO
+    property name : Win32cr::Foundation::PSTR
+    property definition : Win32cr::Foundation::PSTR
+    def initialize(@name : Win32cr::Foundation::PSTR, @definition : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record D3DVECTOR,
-    x : Float32,
-    y : Float32,
-    z : Float32
+  struct D3DVECTOR
+    property x : Float32
+    property y : Float32
+    property z : Float32
+    def initialize(@x : Float32, @y : Float32, @z : Float32)
+    end
+  end
 
   @[Extern]
-  record D3DMATRIX,
-    anonymous : Anonymous_e__Union_ do
+  struct D3DMATRIX
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      m : Float32[16] do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property m : Float32[16]
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _11 : Float32,
-        _12 : Float32,
-        _13 : Float32,
-        _14 : Float32,
-        _21 : Float32,
-        _22 : Float32,
-        _23 : Float32,
-        _24 : Float32,
-        _31 : Float32,
-        _32 : Float32,
-        _33 : Float32,
-        _34 : Float32,
-        _41 : Float32,
-        _42 : Float32,
-        _43 : Float32,
-        _44 : Float32
+      struct Anonymous_e__Struct_
+    property _11 : Float32
+    property _12 : Float32
+    property _13 : Float32
+    property _14 : Float32
+    property _21 : Float32
+    property _22 : Float32
+    property _23 : Float32
+    property _24 : Float32
+    property _31 : Float32
+    property _32 : Float32
+    property _33 : Float32
+    property _34 : Float32
+    property _41 : Float32
+    property _42 : Float32
+    property _43 : Float32
+    property _44 : Float32
+    def initialize(@_11 : Float32, @_12 : Float32, @_13 : Float32, @_14 : Float32, @_21 : Float32, @_22 : Float32, @_23 : Float32, @_24 : Float32, @_31 : Float32, @_32 : Float32, @_33 : Float32, @_34 : Float32, @_41 : Float32, @_42 : Float32, @_43 : Float32, @_44 : Float32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @m : Float32[16])
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
@@ -727,7 +740,6 @@ module Win32cr::Graphics::Direct3D
 
 
   @[Extern]
-  #@[Com("8ba5fb08-5195-40e2-ac58-0d989c3a0102")]
   record ID3DBlob, lpVtbl : ID3DBlobVtbl* do
     GUID = LibC::GUID.new(0x8ba5fb08_u32, 0x5195_u16, 0x40e2_u16, StaticArray[0xac_u8, 0x58_u8, 0xd_u8, 0x98_u8, 0x9c_u8, 0x3a_u8, 0x1_u8, 0x2_u8])
     def query_interface(this : ID3DBlob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -758,7 +770,6 @@ module Win32cr::Graphics::Direct3D
 
 
   @[Extern]
-  #@[Com("a06eb39a-50da-425b-8c31-4eecd6c270f3")]
   record ID3DDestructionNotifier, lpVtbl : ID3DDestructionNotifierVtbl* do
     GUID = LibC::GUID.new(0xa06eb39a_u32, 0x50da_u16, 0x425b_u16, StaticArray[0x8c_u8, 0x31_u8, 0x4e_u8, 0xec_u8, 0xd6_u8, 0xc2_u8, 0x70_u8, 0xf3_u8])
     def query_interface(this : ID3DDestructionNotifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

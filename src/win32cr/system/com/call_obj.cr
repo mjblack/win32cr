@@ -29,34 +29,43 @@ module Win32cr::System::Com::CallObj
   end
 
   @[Extern]
-  record CALLFRAMEINFO,
-    iMethod : UInt32,
-    fHasInValues : Win32cr::Foundation::BOOL,
-    fHasInOutValues : Win32cr::Foundation::BOOL,
-    fHasOutValues : Win32cr::Foundation::BOOL,
-    fDerivesFromIDispatch : Win32cr::Foundation::BOOL,
-    cInInterfacesMax : Int32,
-    cInOutInterfacesMax : Int32,
-    cOutInterfacesMax : Int32,
-    cTopLevelInInterfaces : Int32,
-    iid : LibC::GUID,
-    cMethod : UInt32,
-    cParams : UInt32
+  struct CALLFRAMEINFO
+    property iMethod : UInt32
+    property fHasInValues : Win32cr::Foundation::BOOL
+    property fHasInOutValues : Win32cr::Foundation::BOOL
+    property fHasOutValues : Win32cr::Foundation::BOOL
+    property fDerivesFromIDispatch : Win32cr::Foundation::BOOL
+    property cInInterfacesMax : Int32
+    property cInOutInterfacesMax : Int32
+    property cOutInterfacesMax : Int32
+    property cTopLevelInInterfaces : Int32
+    property iid : LibC::GUID
+    property cMethod : UInt32
+    property cParams : UInt32
+    def initialize(@iMethod : UInt32, @fHasInValues : Win32cr::Foundation::BOOL, @fHasInOutValues : Win32cr::Foundation::BOOL, @fHasOutValues : Win32cr::Foundation::BOOL, @fDerivesFromIDispatch : Win32cr::Foundation::BOOL, @cInInterfacesMax : Int32, @cInOutInterfacesMax : Int32, @cOutInterfacesMax : Int32, @cTopLevelInInterfaces : Int32, @iid : LibC::GUID, @cMethod : UInt32, @cParams : UInt32)
+    end
+  end
 
   @[Extern]
-  record CALLFRAMEPARAMINFO,
-    fIn : Win32cr::Foundation::BOOLEAN,
-    fOut : Win32cr::Foundation::BOOLEAN,
-    stackOffset : UInt32,
-    cbParam : UInt32
+  struct CALLFRAMEPARAMINFO
+    property fIn : Win32cr::Foundation::BOOLEAN
+    property fOut : Win32cr::Foundation::BOOLEAN
+    property stackOffset : UInt32
+    property cbParam : UInt32
+    def initialize(@fIn : Win32cr::Foundation::BOOLEAN, @fOut : Win32cr::Foundation::BOOLEAN, @stackOffset : UInt32, @cbParam : UInt32)
+    end
+  end
 
   @[Extern]
-  record CALLFRAME_MARSHALCONTEXT,
-    fIn : Win32cr::Foundation::BOOLEAN,
-    dwDestContext : UInt32,
-    pvDestContext : Void*,
-    punkReserved : Void*,
-    guidTransferSyntax : LibC::GUID
+  struct CALLFRAME_MARSHALCONTEXT
+    property fIn : Win32cr::Foundation::BOOLEAN
+    property dwDestContext : UInt32
+    property pvDestContext : Void*
+    property punkReserved : Void*
+    property guidTransferSyntax : LibC::GUID
+    def initialize(@fIn : Win32cr::Foundation::BOOLEAN, @dwDestContext : UInt32, @pvDestContext : Void*, @punkReserved : Void*, @guidTransferSyntax : LibC::GUID)
+    end
+  end
 
   @[Extern]
   record ICallFrameVtbl,
@@ -85,7 +94,6 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  #@[Com("d573b4b0-894e-11d2-b8b6-00c04fb9618a")]
   record ICallFrame, lpVtbl : ICallFrameVtbl* do
     GUID = LibC::GUID.new(0xd573b4b0_u32, 0x894e_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0xb6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
     def query_interface(this : ICallFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -169,7 +177,6 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  #@[Com("d573b4b1-894e-11d2-b8b6-00c04fb9618a")]
   record ICallIndirect, lpVtbl : ICallIndirectVtbl* do
     GUID = LibC::GUID.new(0xd573b4b1_u32, 0x894e_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0xb6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
     def query_interface(this : ICallIndirect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -210,7 +217,6 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  #@[Com("60c7ca75-896d-11d2-b8b6-00c04fb9618a")]
   record ICallInterceptor, lpVtbl : ICallInterceptorVtbl* do
     GUID = LibC::GUID.new(0x60c7ca75_u32, 0x896d_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0xb6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
     def query_interface(this : ICallInterceptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -252,7 +258,6 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  #@[Com("fd5e0843-fc91-11d0-97d7-00c04fb9618a")]
   record ICallFrameEvents, lpVtbl : ICallFrameEventsVtbl* do
     GUID = LibC::GUID.new(0xfd5e0843_u32, 0xfc91_u16, 0x11d0_u16, StaticArray[0x97_u8, 0xd7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
     def query_interface(this : ICallFrameEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -280,7 +285,6 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  #@[Com("5333b003-2e42-11d2-b89d-00c04fb9618a")]
   record ICallUnmarshal, lpVtbl : ICallUnmarshalVtbl* do
     GUID = LibC::GUID.new(0x5333b003_u32, 0x2e42_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0x9d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
     def query_interface(this : ICallUnmarshal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -310,7 +314,6 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  #@[Com("08b23919-392d-11d2-b8a4-00c04fb9618a")]
   record ICallFrameWalker, lpVtbl : ICallFrameWalkerVtbl* do
     GUID = LibC::GUID.new(0x8b23919_u32, 0x392d_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
     def query_interface(this : ICallFrameWalker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -338,7 +341,6 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  #@[Com("d1fb5a79-7706-11d1-adba-00c04fc2adc0")]
   record IInterfaceRelated, lpVtbl : IInterfaceRelatedVtbl* do
     GUID = LibC::GUID.new(0xd1fb5a79_u32, 0x7706_u16, 0x11d1_u16, StaticArray[0xad_u8, 0xba_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xad_u8, 0xc0_u8])
     def query_interface(this : IInterfaceRelated*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

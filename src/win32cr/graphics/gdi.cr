@@ -15,37 +15,37 @@ module Win32cr::Graphics::Gdi
   alias HdcMetdataEnhFileHandle = LibC::IntPtrT
   alias HGDIOBJ = LibC::IntPtrT
   alias HMONITOR = LibC::IntPtrT
-  alias FONTENUMPROCA = Proc(Win32cr::Graphics::Gdi::LOGFONTA*, Win32cr::Graphics::Gdi::TEXTMETRICA*, UInt32, Win32cr::Foundation::LPARAM, Int32)*
+  alias FONTENUMPROCA = Proc(Win32cr::Graphics::Gdi::LOGFONTA*, Win32cr::Graphics::Gdi::TEXTMETRICA*, UInt32, Win32cr::Foundation::LPARAM, Int32)
 
-  alias FONTENUMPROCW = Proc(Win32cr::Graphics::Gdi::LOGFONTW*, Win32cr::Graphics::Gdi::TEXTMETRICW*, UInt32, Win32cr::Foundation::LPARAM, Int32)*
+  alias FONTENUMPROCW = Proc(Win32cr::Graphics::Gdi::LOGFONTW*, Win32cr::Graphics::Gdi::TEXTMETRICW*, UInt32, Win32cr::Foundation::LPARAM, Int32)
 
-  alias GOBJENUMPROC = Proc(Void*, Win32cr::Foundation::LPARAM, Int32)*
+  alias GOBJENUMPROC = Proc(Void*, Win32cr::Foundation::LPARAM, Int32)
 
-  alias LINEDDAPROC = Proc(Int32, Int32, Win32cr::Foundation::LPARAM, Void)*
+  alias LINEDDAPROC = Proc(Int32, Int32, Win32cr::Foundation::LPARAM, Void)
 
-  alias LPFNDEVMODE = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::HINSTANCE, Win32cr::Graphics::Gdi::DEVMODEA*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Graphics::Gdi::DEVMODEA*, Win32cr::Foundation::PSTR, UInt32, UInt32)*
+  alias LPFNDEVMODE = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::HINSTANCE, Win32cr::Graphics::Gdi::DEVMODEA*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Graphics::Gdi::DEVMODEA*, Win32cr::Foundation::PSTR, UInt32, UInt32)
 
-  alias LPFNDEVCAPS = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Win32cr::Graphics::Gdi::DEVMODEA*, UInt32)*
+  alias LPFNDEVCAPS = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Win32cr::Graphics::Gdi::DEVMODEA*, UInt32)
 
-  alias MFENUMPROC = Proc(Win32cr::Graphics::Gdi::HDC, Win32cr::Graphics::Gdi::HANDLETABLE*, Win32cr::Graphics::Gdi::METARECORD*, Int32, Win32cr::Foundation::LPARAM, Int32)*
+  alias MFENUMPROC = Proc(Win32cr::Graphics::Gdi::HDC, Win32cr::Graphics::Gdi::HANDLETABLE*, Win32cr::Graphics::Gdi::METARECORD*, Int32, Win32cr::Foundation::LPARAM, Int32)
 
-  alias ENHMFENUMPROC = Proc(Win32cr::Graphics::Gdi::HDC, Win32cr::Graphics::Gdi::HANDLETABLE*, Win32cr::Graphics::Gdi::ENHMETARECORD*, Int32, Win32cr::Foundation::LPARAM, Int32)*
+  alias ENHMFENUMPROC = Proc(Win32cr::Graphics::Gdi::HDC, Win32cr::Graphics::Gdi::HANDLETABLE*, Win32cr::Graphics::Gdi::ENHMETARECORD*, Int32, Win32cr::Foundation::LPARAM, Int32)
 
-  alias CFP_ALLOCPROC = Proc(LibC::UIntPtrT, Void*)*
+  alias CFP_ALLOCPROC = Proc(LibC::UIntPtrT, Void*)
 
-  alias CFP_REALLOCPROC = Proc(Void*, LibC::UIntPtrT, Void*)*
+  alias CFP_REALLOCPROC = Proc(Void*, LibC::UIntPtrT, Void*)
 
-  alias CFP_FREEPROC = Proc(Void*, Void)*
+  alias CFP_FREEPROC = Proc(Void*, Void)
 
-  alias READEMBEDPROC = Proc(Void*, Void*, UInt32, UInt32)*
+  alias READEMBEDPROC = Proc(Void*, Void*, UInt32, UInt32)
 
-  alias WRITEEMBEDPROC = Proc(Void*, Void*, UInt32, UInt32)*
+  alias WRITEEMBEDPROC = Proc(Void*, Void*, UInt32, UInt32)
 
-  alias GRAYSTRINGPROC = Proc(Win32cr::Graphics::Gdi::HDC, Win32cr::Foundation::LPARAM, Int32, Win32cr::Foundation::BOOL)*
+  alias GRAYSTRINGPROC = Proc(Win32cr::Graphics::Gdi::HDC, Win32cr::Foundation::LPARAM, Int32, Win32cr::Foundation::BOOL)
 
-  alias DRAWSTATEPROC = Proc(Win32cr::Graphics::Gdi::HDC, Win32cr::Foundation::LPARAM, Win32cr::Foundation::WPARAM, Int32, Int32, Win32cr::Foundation::BOOL)*
+  alias DRAWSTATEPROC = Proc(Win32cr::Graphics::Gdi::HDC, Win32cr::Foundation::LPARAM, Win32cr::Foundation::WPARAM, Int32, Int32, Win32cr::Foundation::BOOL)
 
-  alias MONITORENUMPROC = Proc(Win32cr::Graphics::Gdi::HMONITOR, Win32cr::Graphics::Gdi::HDC, Win32cr::Foundation::RECT*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias MONITORENUMPROC = Proc(Win32cr::Graphics::Gdi::HMONITOR, Win32cr::Graphics::Gdi::HDC, Win32cr::Foundation::RECT*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
   GDI_ERROR = -1_i32
   ERROR = 0_i32
@@ -1815,1531 +1815,2013 @@ module Win32cr::Graphics::Gdi
   end
 
   @[Extern]
-  record MONITORINFOEXA,
-    monitorInfo : Win32cr::Graphics::Gdi::MONITORINFO,
-    szDevice : Win32cr::Foundation::CHAR[32]
+  struct MONITORINFOEXA
+    property monitorInfo : Win32cr::Graphics::Gdi::MONITORINFO
+    property szDevice : Win32cr::Foundation::CHAR[32]
+    def initialize(@monitorInfo : Win32cr::Graphics::Gdi::MONITORINFO, @szDevice : Win32cr::Foundation::CHAR[32])
+    end
+  end
 
   @[Extern]
-  record MONITORINFOEXW,
-    monitorInfo : Win32cr::Graphics::Gdi::MONITORINFO,
-    szDevice : UInt16[32]
+  struct MONITORINFOEXW
+    property monitorInfo : Win32cr::Graphics::Gdi::MONITORINFO
+    property szDevice : UInt16[32]
+    def initialize(@monitorInfo : Win32cr::Graphics::Gdi::MONITORINFO, @szDevice : UInt16[32])
+    end
+  end
 
   @[Extern]
-  record XFORM,
-    eM11 : Float32,
-    eM12 : Float32,
-    eM21 : Float32,
-    eM22 : Float32,
-    eDx : Float32,
-    eDy : Float32
+  struct XFORM
+    property eM11 : Float32
+    property eM12 : Float32
+    property eM21 : Float32
+    property eM22 : Float32
+    property eDx : Float32
+    property eDy : Float32
+    def initialize(@eM11 : Float32, @eM12 : Float32, @eM21 : Float32, @eM22 : Float32, @eDx : Float32, @eDy : Float32)
+    end
+  end
 
   @[Extern]
-  record BITMAP,
-    bmType : Int32,
-    bmWidth : Int32,
-    bmHeight : Int32,
-    bmWidthBytes : Int32,
-    bmPlanes : UInt16,
-    bmBitsPixel : UInt16,
-    bmBits : Void*
+  struct BITMAP
+    property bmType : Int32
+    property bmWidth : Int32
+    property bmHeight : Int32
+    property bmWidthBytes : Int32
+    property bmPlanes : UInt16
+    property bmBitsPixel : UInt16
+    property bmBits : Void*
+    def initialize(@bmType : Int32, @bmWidth : Int32, @bmHeight : Int32, @bmWidthBytes : Int32, @bmPlanes : UInt16, @bmBitsPixel : UInt16, @bmBits : Void*)
+    end
+  end
 
   @[Extern]
-  record RGBTRIPLE,
-    rgbtBlue : UInt8,
-    rgbtGreen : UInt8,
-    rgbtRed : UInt8
+  struct RGBTRIPLE
+    property rgbtBlue : UInt8
+    property rgbtGreen : UInt8
+    property rgbtRed : UInt8
+    def initialize(@rgbtBlue : UInt8, @rgbtGreen : UInt8, @rgbtRed : UInt8)
+    end
+  end
 
   @[Extern]
-  record RGBQUAD,
-    rgbBlue : UInt8,
-    rgbGreen : UInt8,
-    rgbRed : UInt8,
-    rgbReserved : UInt8
+  struct RGBQUAD
+    property rgbBlue : UInt8
+    property rgbGreen : UInt8
+    property rgbRed : UInt8
+    property rgbReserved : UInt8
+    def initialize(@rgbBlue : UInt8, @rgbGreen : UInt8, @rgbRed : UInt8, @rgbReserved : UInt8)
+    end
+  end
 
   @[Extern]
-  record CIEXYZ,
-    ciexyzX : Int32,
-    ciexyzY : Int32,
-    ciexyzZ : Int32
+  struct CIEXYZ
+    property ciexyzX : Int32
+    property ciexyzY : Int32
+    property ciexyzZ : Int32
+    def initialize(@ciexyzX : Int32, @ciexyzY : Int32, @ciexyzZ : Int32)
+    end
+  end
 
   @[Extern]
-  record CIEXYZTRIPLE,
-    ciexyzRed : Win32cr::Graphics::Gdi::CIEXYZ,
-    ciexyzGreen : Win32cr::Graphics::Gdi::CIEXYZ,
-    ciexyzBlue : Win32cr::Graphics::Gdi::CIEXYZ
+  struct CIEXYZTRIPLE
+    property ciexyzRed : Win32cr::Graphics::Gdi::CIEXYZ
+    property ciexyzGreen : Win32cr::Graphics::Gdi::CIEXYZ
+    property ciexyzBlue : Win32cr::Graphics::Gdi::CIEXYZ
+    def initialize(@ciexyzRed : Win32cr::Graphics::Gdi::CIEXYZ, @ciexyzGreen : Win32cr::Graphics::Gdi::CIEXYZ, @ciexyzBlue : Win32cr::Graphics::Gdi::CIEXYZ)
+    end
+  end
 
   @[Extern]
-  record BITMAPCOREHEADER,
-    bcSize : UInt32,
-    bcWidth : UInt16,
-    bcHeight : UInt16,
-    bcPlanes : UInt16,
-    bcBitCount : UInt16
+  struct BITMAPCOREHEADER
+    property bcSize : UInt32
+    property bcWidth : UInt16
+    property bcHeight : UInt16
+    property bcPlanes : UInt16
+    property bcBitCount : UInt16
+    def initialize(@bcSize : UInt32, @bcWidth : UInt16, @bcHeight : UInt16, @bcPlanes : UInt16, @bcBitCount : UInt16)
+    end
+  end
 
   @[Extern]
-  record BITMAPINFOHEADER,
-    biSize : UInt32,
-    biWidth : Int32,
-    biHeight : Int32,
-    biPlanes : UInt16,
-    biBitCount : UInt16,
-    biCompression : UInt32,
-    biSizeImage : UInt32,
-    biXPelsPerMeter : Int32,
-    biYPelsPerMeter : Int32,
-    biClrUsed : UInt32,
-    biClrImportant : UInt32
+  struct BITMAPINFOHEADER
+    property biSize : UInt32
+    property biWidth : Int32
+    property biHeight : Int32
+    property biPlanes : UInt16
+    property biBitCount : UInt16
+    property biCompression : UInt32
+    property biSizeImage : UInt32
+    property biXPelsPerMeter : Int32
+    property biYPelsPerMeter : Int32
+    property biClrUsed : UInt32
+    property biClrImportant : UInt32
+    def initialize(@biSize : UInt32, @biWidth : Int32, @biHeight : Int32, @biPlanes : UInt16, @biBitCount : UInt16, @biCompression : UInt32, @biSizeImage : UInt32, @biXPelsPerMeter : Int32, @biYPelsPerMeter : Int32, @biClrUsed : UInt32, @biClrImportant : UInt32)
+    end
+  end
 
   @[Extern]
-  record BITMAPV4HEADER,
-    bV4Size : UInt32,
-    bV4Width : Int32,
-    bV4Height : Int32,
-    bV4Planes : UInt16,
-    bV4BitCount : UInt16,
-    bV4V4Compression : UInt32,
-    bV4SizeImage : UInt32,
-    bV4XPelsPerMeter : Int32,
-    bV4YPelsPerMeter : Int32,
-    bV4ClrUsed : UInt32,
-    bV4ClrImportant : UInt32,
-    bV4RedMask : UInt32,
-    bV4GreenMask : UInt32,
-    bV4BlueMask : UInt32,
-    bV4AlphaMask : UInt32,
-    bV4CSType : UInt32,
-    bV4Endpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE,
-    bV4GammaRed : UInt32,
-    bV4GammaGreen : UInt32,
-    bV4GammaBlue : UInt32
+  struct BITMAPV4HEADER
+    property bV4Size : UInt32
+    property bV4Width : Int32
+    property bV4Height : Int32
+    property bV4Planes : UInt16
+    property bV4BitCount : UInt16
+    property bV4V4Compression : UInt32
+    property bV4SizeImage : UInt32
+    property bV4XPelsPerMeter : Int32
+    property bV4YPelsPerMeter : Int32
+    property bV4ClrUsed : UInt32
+    property bV4ClrImportant : UInt32
+    property bV4RedMask : UInt32
+    property bV4GreenMask : UInt32
+    property bV4BlueMask : UInt32
+    property bV4AlphaMask : UInt32
+    property bV4CSType : UInt32
+    property bV4Endpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE
+    property bV4GammaRed : UInt32
+    property bV4GammaGreen : UInt32
+    property bV4GammaBlue : UInt32
+    def initialize(@bV4Size : UInt32, @bV4Width : Int32, @bV4Height : Int32, @bV4Planes : UInt16, @bV4BitCount : UInt16, @bV4V4Compression : UInt32, @bV4SizeImage : UInt32, @bV4XPelsPerMeter : Int32, @bV4YPelsPerMeter : Int32, @bV4ClrUsed : UInt32, @bV4ClrImportant : UInt32, @bV4RedMask : UInt32, @bV4GreenMask : UInt32, @bV4BlueMask : UInt32, @bV4AlphaMask : UInt32, @bV4CSType : UInt32, @bV4Endpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE, @bV4GammaRed : UInt32, @bV4GammaGreen : UInt32, @bV4GammaBlue : UInt32)
+    end
+  end
 
   @[Extern]
-  record BITMAPV5HEADER,
-    bV5Size : UInt32,
-    bV5Width : Int32,
-    bV5Height : Int32,
-    bV5Planes : UInt16,
-    bV5BitCount : UInt16,
-    bV5Compression : UInt32,
-    bV5SizeImage : UInt32,
-    bV5XPelsPerMeter : Int32,
-    bV5YPelsPerMeter : Int32,
-    bV5ClrUsed : UInt32,
-    bV5ClrImportant : UInt32,
-    bV5RedMask : UInt32,
-    bV5GreenMask : UInt32,
-    bV5BlueMask : UInt32,
-    bV5AlphaMask : UInt32,
-    bV5CSType : UInt32,
-    bV5Endpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE,
-    bV5GammaRed : UInt32,
-    bV5GammaGreen : UInt32,
-    bV5GammaBlue : UInt32,
-    bV5Intent : UInt32,
-    bV5ProfileData : UInt32,
-    bV5ProfileSize : UInt32,
-    bV5Reserved : UInt32
+  struct BITMAPV5HEADER
+    property bV5Size : UInt32
+    property bV5Width : Int32
+    property bV5Height : Int32
+    property bV5Planes : UInt16
+    property bV5BitCount : UInt16
+    property bV5Compression : UInt32
+    property bV5SizeImage : UInt32
+    property bV5XPelsPerMeter : Int32
+    property bV5YPelsPerMeter : Int32
+    property bV5ClrUsed : UInt32
+    property bV5ClrImportant : UInt32
+    property bV5RedMask : UInt32
+    property bV5GreenMask : UInt32
+    property bV5BlueMask : UInt32
+    property bV5AlphaMask : UInt32
+    property bV5CSType : UInt32
+    property bV5Endpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE
+    property bV5GammaRed : UInt32
+    property bV5GammaGreen : UInt32
+    property bV5GammaBlue : UInt32
+    property bV5Intent : UInt32
+    property bV5ProfileData : UInt32
+    property bV5ProfileSize : UInt32
+    property bV5Reserved : UInt32
+    def initialize(@bV5Size : UInt32, @bV5Width : Int32, @bV5Height : Int32, @bV5Planes : UInt16, @bV5BitCount : UInt16, @bV5Compression : UInt32, @bV5SizeImage : UInt32, @bV5XPelsPerMeter : Int32, @bV5YPelsPerMeter : Int32, @bV5ClrUsed : UInt32, @bV5ClrImportant : UInt32, @bV5RedMask : UInt32, @bV5GreenMask : UInt32, @bV5BlueMask : UInt32, @bV5AlphaMask : UInt32, @bV5CSType : UInt32, @bV5Endpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE, @bV5GammaRed : UInt32, @bV5GammaGreen : UInt32, @bV5GammaBlue : UInt32, @bV5Intent : UInt32, @bV5ProfileData : UInt32, @bV5ProfileSize : UInt32, @bV5Reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record BITMAPINFO,
-    bmiHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER,
-    bmiColors : Win32cr::Graphics::Gdi::RGBQUAD*
+  struct BITMAPINFO
+    property bmiHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER
+    property bmiColors : Win32cr::Graphics::Gdi::RGBQUAD*
+    def initialize(@bmiHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER, @bmiColors : Win32cr::Graphics::Gdi::RGBQUAD*)
+    end
+  end
 
   @[Extern]
-  record BITMAPCOREINFO,
-    bmciHeader : Win32cr::Graphics::Gdi::BITMAPCOREHEADER,
-    bmciColors : Win32cr::Graphics::Gdi::RGBTRIPLE*
+  struct BITMAPCOREINFO
+    property bmciHeader : Win32cr::Graphics::Gdi::BITMAPCOREHEADER
+    property bmciColors : Win32cr::Graphics::Gdi::RGBTRIPLE*
+    def initialize(@bmciHeader : Win32cr::Graphics::Gdi::BITMAPCOREHEADER, @bmciColors : Win32cr::Graphics::Gdi::RGBTRIPLE*)
+    end
+  end
 
   @[Extern]
-  record BITMAPFILEHEADER,
-    bfType : UInt16,
-    bfSize : UInt32,
-    bfReserved1 : UInt16,
-    bfReserved2 : UInt16,
-    bfOffBits : UInt32
+  struct BITMAPFILEHEADER
+    property bfType : UInt16
+    property bfSize : UInt32
+    property bfReserved1 : UInt16
+    property bfReserved2 : UInt16
+    property bfOffBits : UInt32
+    def initialize(@bfType : UInt16, @bfSize : UInt32, @bfReserved1 : UInt16, @bfReserved2 : UInt16, @bfOffBits : UInt32)
+    end
+  end
 
   @[Extern]
-  record HANDLETABLE,
-    objectHandle : Win32cr::Graphics::Gdi::HGDIOBJ*
+  struct HANDLETABLE
+    property objectHandle : Win32cr::Graphics::Gdi::HGDIOBJ*
+    def initialize(@objectHandle : Win32cr::Graphics::Gdi::HGDIOBJ*)
+    end
+  end
 
   @[Extern]
-  record METARECORD,
-    rdSize : UInt32,
-    rdFunction : UInt16,
-    rdParm : UInt16*
+  struct METARECORD
+    property rdSize : UInt32
+    property rdFunction : UInt16
+    property rdParm : UInt16*
+    def initialize(@rdSize : UInt32, @rdFunction : UInt16, @rdParm : UInt16*)
+    end
+  end
 
   @[Extern]
-  record METAHEADER,
-    mtType : UInt16,
-    mtHeaderSize : UInt16,
-    mtVersion : UInt16,
-    mtSize : UInt32,
-    mtNoObjects : UInt16,
-    mtMaxRecord : UInt32,
-    mtNoParameters : UInt16
+  struct METAHEADER
+    property mtType : UInt16
+    property mtHeaderSize : UInt16
+    property mtVersion : UInt16
+    property mtSize : UInt32
+    property mtNoObjects : UInt16
+    property mtMaxRecord : UInt32
+    property mtNoParameters : UInt16
+    def initialize(@mtType : UInt16, @mtHeaderSize : UInt16, @mtVersion : UInt16, @mtSize : UInt32, @mtNoObjects : UInt16, @mtMaxRecord : UInt32, @mtNoParameters : UInt16)
+    end
+  end
 
   @[Extern]
-  record ENHMETARECORD,
-    iType : UInt32,
-    nSize : UInt32,
-    dParm : UInt32*
+  struct ENHMETARECORD
+    property iType : UInt32
+    property nSize : UInt32
+    property dParm : UInt32*
+    def initialize(@iType : UInt32, @nSize : UInt32, @dParm : UInt32*)
+    end
+  end
 
   @[Extern]
-  record ENHMETAHEADER,
-    iType : UInt32,
-    nSize : UInt32,
-    rclBounds : Win32cr::Foundation::RECTL,
-    rclFrame : Win32cr::Foundation::RECTL,
-    dSignature : UInt32,
-    nVersion : UInt32,
-    nBytes : UInt32,
-    nRecords : UInt32,
-    nHandles : UInt16,
-    sReserved : UInt16,
-    nDescription : UInt32,
-    offDescription : UInt32,
-    nPalEntries : UInt32,
-    szlDevice : Win32cr::Foundation::SIZE,
-    szlMillimeters : Win32cr::Foundation::SIZE,
-    cbPixelFormat : UInt32,
-    offPixelFormat : UInt32,
-    bOpenGL : UInt32,
-    szlMicrometers : Win32cr::Foundation::SIZE
+  struct ENHMETAHEADER
+    property iType : UInt32
+    property nSize : UInt32
+    property rclBounds : Win32cr::Foundation::RECTL
+    property rclFrame : Win32cr::Foundation::RECTL
+    property dSignature : UInt32
+    property nVersion : UInt32
+    property nBytes : UInt32
+    property nRecords : UInt32
+    property nHandles : UInt16
+    property sReserved : UInt16
+    property nDescription : UInt32
+    property offDescription : UInt32
+    property nPalEntries : UInt32
+    property szlDevice : Win32cr::Foundation::SIZE
+    property szlMillimeters : Win32cr::Foundation::SIZE
+    property cbPixelFormat : UInt32
+    property offPixelFormat : UInt32
+    property bOpenGL : UInt32
+    property szlMicrometers : Win32cr::Foundation::SIZE
+    def initialize(@iType : UInt32, @nSize : UInt32, @rclBounds : Win32cr::Foundation::RECTL, @rclFrame : Win32cr::Foundation::RECTL, @dSignature : UInt32, @nVersion : UInt32, @nBytes : UInt32, @nRecords : UInt32, @nHandles : UInt16, @sReserved : UInt16, @nDescription : UInt32, @offDescription : UInt32, @nPalEntries : UInt32, @szlDevice : Win32cr::Foundation::SIZE, @szlMillimeters : Win32cr::Foundation::SIZE, @cbPixelFormat : UInt32, @offPixelFormat : UInt32, @bOpenGL : UInt32, @szlMicrometers : Win32cr::Foundation::SIZE)
+    end
+  end
 
   @[Extern]
-  record TEXTMETRICA,
-    tmHeight : Int32,
-    tmAscent : Int32,
-    tmDescent : Int32,
-    tmInternalLeading : Int32,
-    tmExternalLeading : Int32,
-    tmAveCharWidth : Int32,
-    tmMaxCharWidth : Int32,
-    tmWeight : Int32,
-    tmOverhang : Int32,
-    tmDigitizedAspectX : Int32,
-    tmDigitizedAspectY : Int32,
-    tmFirstChar : UInt8,
-    tmLastChar : UInt8,
-    tmDefaultChar : UInt8,
-    tmBreakChar : UInt8,
-    tmItalic : UInt8,
-    tmUnderlined : UInt8,
-    tmStruckOut : UInt8,
-    tmPitchAndFamily : UInt8,
-    tmCharSet : UInt8
+  struct TEXTMETRICA
+    property tmHeight : Int32
+    property tmAscent : Int32
+    property tmDescent : Int32
+    property tmInternalLeading : Int32
+    property tmExternalLeading : Int32
+    property tmAveCharWidth : Int32
+    property tmMaxCharWidth : Int32
+    property tmWeight : Int32
+    property tmOverhang : Int32
+    property tmDigitizedAspectX : Int32
+    property tmDigitizedAspectY : Int32
+    property tmFirstChar : UInt8
+    property tmLastChar : UInt8
+    property tmDefaultChar : UInt8
+    property tmBreakChar : UInt8
+    property tmItalic : UInt8
+    property tmUnderlined : UInt8
+    property tmStruckOut : UInt8
+    property tmPitchAndFamily : UInt8
+    property tmCharSet : UInt8
+    def initialize(@tmHeight : Int32, @tmAscent : Int32, @tmDescent : Int32, @tmInternalLeading : Int32, @tmExternalLeading : Int32, @tmAveCharWidth : Int32, @tmMaxCharWidth : Int32, @tmWeight : Int32, @tmOverhang : Int32, @tmDigitizedAspectX : Int32, @tmDigitizedAspectY : Int32, @tmFirstChar : UInt8, @tmLastChar : UInt8, @tmDefaultChar : UInt8, @tmBreakChar : UInt8, @tmItalic : UInt8, @tmUnderlined : UInt8, @tmStruckOut : UInt8, @tmPitchAndFamily : UInt8, @tmCharSet : UInt8)
+    end
+  end
 
   @[Extern]
-  record TEXTMETRICW,
-    tmHeight : Int32,
-    tmAscent : Int32,
-    tmDescent : Int32,
-    tmInternalLeading : Int32,
-    tmExternalLeading : Int32,
-    tmAveCharWidth : Int32,
-    tmMaxCharWidth : Int32,
-    tmWeight : Int32,
-    tmOverhang : Int32,
-    tmDigitizedAspectX : Int32,
-    tmDigitizedAspectY : Int32,
-    tmFirstChar : UInt16,
-    tmLastChar : UInt16,
-    tmDefaultChar : UInt16,
-    tmBreakChar : UInt16,
-    tmItalic : UInt8,
-    tmUnderlined : UInt8,
-    tmStruckOut : UInt8,
-    tmPitchAndFamily : UInt8,
-    tmCharSet : UInt8
+  struct TEXTMETRICW
+    property tmHeight : Int32
+    property tmAscent : Int32
+    property tmDescent : Int32
+    property tmInternalLeading : Int32
+    property tmExternalLeading : Int32
+    property tmAveCharWidth : Int32
+    property tmMaxCharWidth : Int32
+    property tmWeight : Int32
+    property tmOverhang : Int32
+    property tmDigitizedAspectX : Int32
+    property tmDigitizedAspectY : Int32
+    property tmFirstChar : UInt16
+    property tmLastChar : UInt16
+    property tmDefaultChar : UInt16
+    property tmBreakChar : UInt16
+    property tmItalic : UInt8
+    property tmUnderlined : UInt8
+    property tmStruckOut : UInt8
+    property tmPitchAndFamily : UInt8
+    property tmCharSet : UInt8
+    def initialize(@tmHeight : Int32, @tmAscent : Int32, @tmDescent : Int32, @tmInternalLeading : Int32, @tmExternalLeading : Int32, @tmAveCharWidth : Int32, @tmMaxCharWidth : Int32, @tmWeight : Int32, @tmOverhang : Int32, @tmDigitizedAspectX : Int32, @tmDigitizedAspectY : Int32, @tmFirstChar : UInt16, @tmLastChar : UInt16, @tmDefaultChar : UInt16, @tmBreakChar : UInt16, @tmItalic : UInt8, @tmUnderlined : UInt8, @tmStruckOut : UInt8, @tmPitchAndFamily : UInt8, @tmCharSet : UInt8)
+    end
+  end
 
   @[Extern]
-  record NEWTEXTMETRICA,
-    tmHeight : Int32,
-    tmAscent : Int32,
-    tmDescent : Int32,
-    tmInternalLeading : Int32,
-    tmExternalLeading : Int32,
-    tmAveCharWidth : Int32,
-    tmMaxCharWidth : Int32,
-    tmWeight : Int32,
-    tmOverhang : Int32,
-    tmDigitizedAspectX : Int32,
-    tmDigitizedAspectY : Int32,
-    tmFirstChar : UInt8,
-    tmLastChar : UInt8,
-    tmDefaultChar : UInt8,
-    tmBreakChar : UInt8,
-    tmItalic : UInt8,
-    tmUnderlined : UInt8,
-    tmStruckOut : UInt8,
-    tmPitchAndFamily : UInt8,
-    tmCharSet : UInt8,
-    ntmFlags : UInt32,
-    ntmSizeEM : UInt32,
-    ntmCellHeight : UInt32,
-    ntmAvgWidth : UInt32
+  struct NEWTEXTMETRICA
+    property tmHeight : Int32
+    property tmAscent : Int32
+    property tmDescent : Int32
+    property tmInternalLeading : Int32
+    property tmExternalLeading : Int32
+    property tmAveCharWidth : Int32
+    property tmMaxCharWidth : Int32
+    property tmWeight : Int32
+    property tmOverhang : Int32
+    property tmDigitizedAspectX : Int32
+    property tmDigitizedAspectY : Int32
+    property tmFirstChar : UInt8
+    property tmLastChar : UInt8
+    property tmDefaultChar : UInt8
+    property tmBreakChar : UInt8
+    property tmItalic : UInt8
+    property tmUnderlined : UInt8
+    property tmStruckOut : UInt8
+    property tmPitchAndFamily : UInt8
+    property tmCharSet : UInt8
+    property ntmFlags : UInt32
+    property ntmSizeEM : UInt32
+    property ntmCellHeight : UInt32
+    property ntmAvgWidth : UInt32
+    def initialize(@tmHeight : Int32, @tmAscent : Int32, @tmDescent : Int32, @tmInternalLeading : Int32, @tmExternalLeading : Int32, @tmAveCharWidth : Int32, @tmMaxCharWidth : Int32, @tmWeight : Int32, @tmOverhang : Int32, @tmDigitizedAspectX : Int32, @tmDigitizedAspectY : Int32, @tmFirstChar : UInt8, @tmLastChar : UInt8, @tmDefaultChar : UInt8, @tmBreakChar : UInt8, @tmItalic : UInt8, @tmUnderlined : UInt8, @tmStruckOut : UInt8, @tmPitchAndFamily : UInt8, @tmCharSet : UInt8, @ntmFlags : UInt32, @ntmSizeEM : UInt32, @ntmCellHeight : UInt32, @ntmAvgWidth : UInt32)
+    end
+  end
 
   @[Extern]
-  record NEWTEXTMETRICW,
-    tmHeight : Int32,
-    tmAscent : Int32,
-    tmDescent : Int32,
-    tmInternalLeading : Int32,
-    tmExternalLeading : Int32,
-    tmAveCharWidth : Int32,
-    tmMaxCharWidth : Int32,
-    tmWeight : Int32,
-    tmOverhang : Int32,
-    tmDigitizedAspectX : Int32,
-    tmDigitizedAspectY : Int32,
-    tmFirstChar : UInt16,
-    tmLastChar : UInt16,
-    tmDefaultChar : UInt16,
-    tmBreakChar : UInt16,
-    tmItalic : UInt8,
-    tmUnderlined : UInt8,
-    tmStruckOut : UInt8,
-    tmPitchAndFamily : UInt8,
-    tmCharSet : UInt8,
-    ntmFlags : UInt32,
-    ntmSizeEM : UInt32,
-    ntmCellHeight : UInt32,
-    ntmAvgWidth : UInt32
+  struct NEWTEXTMETRICW
+    property tmHeight : Int32
+    property tmAscent : Int32
+    property tmDescent : Int32
+    property tmInternalLeading : Int32
+    property tmExternalLeading : Int32
+    property tmAveCharWidth : Int32
+    property tmMaxCharWidth : Int32
+    property tmWeight : Int32
+    property tmOverhang : Int32
+    property tmDigitizedAspectX : Int32
+    property tmDigitizedAspectY : Int32
+    property tmFirstChar : UInt16
+    property tmLastChar : UInt16
+    property tmDefaultChar : UInt16
+    property tmBreakChar : UInt16
+    property tmItalic : UInt8
+    property tmUnderlined : UInt8
+    property tmStruckOut : UInt8
+    property tmPitchAndFamily : UInt8
+    property tmCharSet : UInt8
+    property ntmFlags : UInt32
+    property ntmSizeEM : UInt32
+    property ntmCellHeight : UInt32
+    property ntmAvgWidth : UInt32
+    def initialize(@tmHeight : Int32, @tmAscent : Int32, @tmDescent : Int32, @tmInternalLeading : Int32, @tmExternalLeading : Int32, @tmAveCharWidth : Int32, @tmMaxCharWidth : Int32, @tmWeight : Int32, @tmOverhang : Int32, @tmDigitizedAspectX : Int32, @tmDigitizedAspectY : Int32, @tmFirstChar : UInt16, @tmLastChar : UInt16, @tmDefaultChar : UInt16, @tmBreakChar : UInt16, @tmItalic : UInt8, @tmUnderlined : UInt8, @tmStruckOut : UInt8, @tmPitchAndFamily : UInt8, @tmCharSet : UInt8, @ntmFlags : UInt32, @ntmSizeEM : UInt32, @ntmCellHeight : UInt32, @ntmAvgWidth : UInt32)
+    end
+  end
 
   @[Extern]
-  record PELARRAY,
-    paXCount : Int32,
-    paYCount : Int32,
-    paXExt : Int32,
-    paYExt : Int32,
-    paRGBs : UInt8
+  struct PELARRAY
+    property paXCount : Int32
+    property paYCount : Int32
+    property paXExt : Int32
+    property paYExt : Int32
+    property paRGBs : UInt8
+    def initialize(@paXCount : Int32, @paYCount : Int32, @paXExt : Int32, @paYExt : Int32, @paRGBs : UInt8)
+    end
+  end
 
   @[Extern]
-  record LOGBRUSH,
-    lbStyle : UInt32,
-    lbColor : UInt32,
-    lbHatch : LibC::UIntPtrT
+  struct LOGBRUSH
+    property lbStyle : UInt32
+    property lbColor : UInt32
+    property lbHatch : LibC::UIntPtrT
+    def initialize(@lbStyle : UInt32, @lbColor : UInt32, @lbHatch : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record LOGBRUSH32,
-    lbStyle : UInt32,
-    lbColor : UInt32,
-    lbHatch : UInt32
+  struct LOGBRUSH32
+    property lbStyle : UInt32
+    property lbColor : UInt32
+    property lbHatch : UInt32
+    def initialize(@lbStyle : UInt32, @lbColor : UInt32, @lbHatch : UInt32)
+    end
+  end
 
   @[Extern]
-  record LOGPEN,
-    lopnStyle : UInt32,
-    lopnWidth : Win32cr::Foundation::POINT,
-    lopnColor : UInt32
+  struct LOGPEN
+    property lopnStyle : UInt32
+    property lopnWidth : Win32cr::Foundation::POINT
+    property lopnColor : UInt32
+    def initialize(@lopnStyle : UInt32, @lopnWidth : Win32cr::Foundation::POINT, @lopnColor : UInt32)
+    end
+  end
 
   @[Extern]
-  record EXTLOGPEN,
-    elpPenStyle : UInt32,
-    elpWidth : UInt32,
-    elpBrushStyle : UInt32,
-    elpColor : UInt32,
-    elpHatch : LibC::UIntPtrT,
-    elpNumEntries : UInt32,
-    elpStyleEntry : UInt32*
+  struct EXTLOGPEN
+    property elpPenStyle : UInt32
+    property elpWidth : UInt32
+    property elpBrushStyle : UInt32
+    property elpColor : UInt32
+    property elpHatch : LibC::UIntPtrT
+    property elpNumEntries : UInt32
+    property elpStyleEntry : UInt32*
+    def initialize(@elpPenStyle : UInt32, @elpWidth : UInt32, @elpBrushStyle : UInt32, @elpColor : UInt32, @elpHatch : LibC::UIntPtrT, @elpNumEntries : UInt32, @elpStyleEntry : UInt32*)
+    end
+  end
 
   @[Extern]
-  record EXTLOGPEN32,
-    elpPenStyle : UInt32,
-    elpWidth : UInt32,
-    elpBrushStyle : UInt32,
-    elpColor : UInt32,
-    elpHatch : UInt32,
-    elpNumEntries : UInt32,
-    elpStyleEntry : UInt32*
+  struct EXTLOGPEN32
+    property elpPenStyle : UInt32
+    property elpWidth : UInt32
+    property elpBrushStyle : UInt32
+    property elpColor : UInt32
+    property elpHatch : UInt32
+    property elpNumEntries : UInt32
+    property elpStyleEntry : UInt32*
+    def initialize(@elpPenStyle : UInt32, @elpWidth : UInt32, @elpBrushStyle : UInt32, @elpColor : UInt32, @elpHatch : UInt32, @elpNumEntries : UInt32, @elpStyleEntry : UInt32*)
+    end
+  end
 
   @[Extern]
-  record PALETTEENTRY,
-    peRed : UInt8,
-    peGreen : UInt8,
-    peBlue : UInt8,
-    peFlags : UInt8
+  struct PALETTEENTRY
+    property peRed : UInt8
+    property peGreen : UInt8
+    property peBlue : UInt8
+    property peFlags : UInt8
+    def initialize(@peRed : UInt8, @peGreen : UInt8, @peBlue : UInt8, @peFlags : UInt8)
+    end
+  end
 
   @[Extern]
-  record LOGPALETTE,
-    palVersion : UInt16,
-    palNumEntries : UInt16,
-    palPalEntry : Win32cr::Graphics::Gdi::PALETTEENTRY*
+  struct LOGPALETTE
+    property palVersion : UInt16
+    property palNumEntries : UInt16
+    property palPalEntry : Win32cr::Graphics::Gdi::PALETTEENTRY*
+    def initialize(@palVersion : UInt16, @palNumEntries : UInt16, @palPalEntry : Win32cr::Graphics::Gdi::PALETTEENTRY*)
+    end
+  end
 
   @[Extern]
-  record LOGFONTA,
-    lfHeight : Int32,
-    lfWidth : Int32,
-    lfEscapement : Int32,
-    lfOrientation : Int32,
-    lfWeight : Int32,
-    lfItalic : UInt8,
-    lfUnderline : UInt8,
-    lfStrikeOut : UInt8,
-    lfCharSet : UInt8,
-    lfOutPrecision : UInt8,
-    lfClipPrecision : UInt8,
-    lfQuality : UInt8,
-    lfPitchAndFamily : UInt8,
-    lfFaceName : Win32cr::Foundation::CHAR[32]
+  struct LOGFONTA
+    property lfHeight : Int32
+    property lfWidth : Int32
+    property lfEscapement : Int32
+    property lfOrientation : Int32
+    property lfWeight : Int32
+    property lfItalic : UInt8
+    property lfUnderline : UInt8
+    property lfStrikeOut : UInt8
+    property lfCharSet : UInt8
+    property lfOutPrecision : UInt8
+    property lfClipPrecision : UInt8
+    property lfQuality : UInt8
+    property lfPitchAndFamily : UInt8
+    property lfFaceName : Win32cr::Foundation::CHAR[32]
+    def initialize(@lfHeight : Int32, @lfWidth : Int32, @lfEscapement : Int32, @lfOrientation : Int32, @lfWeight : Int32, @lfItalic : UInt8, @lfUnderline : UInt8, @lfStrikeOut : UInt8, @lfCharSet : UInt8, @lfOutPrecision : UInt8, @lfClipPrecision : UInt8, @lfQuality : UInt8, @lfPitchAndFamily : UInt8, @lfFaceName : Win32cr::Foundation::CHAR[32])
+    end
+  end
 
   @[Extern]
-  record LOGFONTW,
-    lfHeight : Int32,
-    lfWidth : Int32,
-    lfEscapement : Int32,
-    lfOrientation : Int32,
-    lfWeight : Int32,
-    lfItalic : UInt8,
-    lfUnderline : UInt8,
-    lfStrikeOut : UInt8,
-    lfCharSet : UInt8,
-    lfOutPrecision : UInt8,
-    lfClipPrecision : UInt8,
-    lfQuality : UInt8,
-    lfPitchAndFamily : UInt8,
-    lfFaceName : UInt16[32]
+  struct LOGFONTW
+    property lfHeight : Int32
+    property lfWidth : Int32
+    property lfEscapement : Int32
+    property lfOrientation : Int32
+    property lfWeight : Int32
+    property lfItalic : UInt8
+    property lfUnderline : UInt8
+    property lfStrikeOut : UInt8
+    property lfCharSet : UInt8
+    property lfOutPrecision : UInt8
+    property lfClipPrecision : UInt8
+    property lfQuality : UInt8
+    property lfPitchAndFamily : UInt8
+    property lfFaceName : UInt16[32]
+    def initialize(@lfHeight : Int32, @lfWidth : Int32, @lfEscapement : Int32, @lfOrientation : Int32, @lfWeight : Int32, @lfItalic : UInt8, @lfUnderline : UInt8, @lfStrikeOut : UInt8, @lfCharSet : UInt8, @lfOutPrecision : UInt8, @lfClipPrecision : UInt8, @lfQuality : UInt8, @lfPitchAndFamily : UInt8, @lfFaceName : UInt16[32])
+    end
+  end
 
   @[Extern]
-  record ENUMLOGFONTA,
-    elfLogFont : Win32cr::Graphics::Gdi::LOGFONTA,
-    elfFullName : UInt8[64],
-    elfStyle : UInt8[32]
+  struct ENUMLOGFONTA
+    property elfLogFont : Win32cr::Graphics::Gdi::LOGFONTA
+    property elfFullName : UInt8[64]
+    property elfStyle : UInt8[32]
+    def initialize(@elfLogFont : Win32cr::Graphics::Gdi::LOGFONTA, @elfFullName : UInt8[64], @elfStyle : UInt8[32])
+    end
+  end
 
   @[Extern]
-  record ENUMLOGFONTW,
-    elfLogFont : Win32cr::Graphics::Gdi::LOGFONTW,
-    elfFullName : UInt16[64],
-    elfStyle : UInt16[32]
+  struct ENUMLOGFONTW
+    property elfLogFont : Win32cr::Graphics::Gdi::LOGFONTW
+    property elfFullName : UInt16[64]
+    property elfStyle : UInt16[32]
+    def initialize(@elfLogFont : Win32cr::Graphics::Gdi::LOGFONTW, @elfFullName : UInt16[64], @elfStyle : UInt16[32])
+    end
+  end
 
   @[Extern]
-  record ENUMLOGFONTEXA,
-    elfLogFont : Win32cr::Graphics::Gdi::LOGFONTA,
-    elfFullName : UInt8[64],
-    elfStyle : UInt8[32],
-    elfScript : UInt8[32]
+  struct ENUMLOGFONTEXA
+    property elfLogFont : Win32cr::Graphics::Gdi::LOGFONTA
+    property elfFullName : UInt8[64]
+    property elfStyle : UInt8[32]
+    property elfScript : UInt8[32]
+    def initialize(@elfLogFont : Win32cr::Graphics::Gdi::LOGFONTA, @elfFullName : UInt8[64], @elfStyle : UInt8[32], @elfScript : UInt8[32])
+    end
+  end
 
   @[Extern]
-  record ENUMLOGFONTEXW,
-    elfLogFont : Win32cr::Graphics::Gdi::LOGFONTW,
-    elfFullName : UInt16[64],
-    elfStyle : UInt16[32],
-    elfScript : UInt16[32]
+  struct ENUMLOGFONTEXW
+    property elfLogFont : Win32cr::Graphics::Gdi::LOGFONTW
+    property elfFullName : UInt16[64]
+    property elfStyle : UInt16[32]
+    property elfScript : UInt16[32]
+    def initialize(@elfLogFont : Win32cr::Graphics::Gdi::LOGFONTW, @elfFullName : UInt16[64], @elfStyle : UInt16[32], @elfScript : UInt16[32])
+    end
+  end
 
   @[Extern]
-  record PANOSE,
-    bFamilyType : UInt8,
-    bSerifStyle : UInt8,
-    bWeight : UInt8,
-    bProportion : UInt8,
-    bContrast : UInt8,
-    bStrokeVariation : UInt8,
-    bArmStyle : UInt8,
-    bLetterform : UInt8,
-    bMidline : UInt8,
-    bXHeight : UInt8
+  struct PANOSE
+    property bFamilyType : UInt8
+    property bSerifStyle : UInt8
+    property bWeight : UInt8
+    property bProportion : UInt8
+    property bContrast : UInt8
+    property bStrokeVariation : UInt8
+    property bArmStyle : UInt8
+    property bLetterform : UInt8
+    property bMidline : UInt8
+    property bXHeight : UInt8
+    def initialize(@bFamilyType : UInt8, @bSerifStyle : UInt8, @bWeight : UInt8, @bProportion : UInt8, @bContrast : UInt8, @bStrokeVariation : UInt8, @bArmStyle : UInt8, @bLetterform : UInt8, @bMidline : UInt8, @bXHeight : UInt8)
+    end
+  end
 
   @[Extern]
-  record EXTLOGFONTA,
-    elfLogFont : Win32cr::Graphics::Gdi::LOGFONTA,
-    elfFullName : UInt8[64],
-    elfStyle : UInt8[32],
-    elfVersion : UInt32,
-    elfStyleSize : UInt32,
-    elfMatch : UInt32,
-    elfReserved : UInt32,
-    elfVendorId : UInt8[4],
-    elfCulture : UInt32,
-    elfPanose : Win32cr::Graphics::Gdi::PANOSE
+  struct EXTLOGFONTA
+    property elfLogFont : Win32cr::Graphics::Gdi::LOGFONTA
+    property elfFullName : UInt8[64]
+    property elfStyle : UInt8[32]
+    property elfVersion : UInt32
+    property elfStyleSize : UInt32
+    property elfMatch : UInt32
+    property elfReserved : UInt32
+    property elfVendorId : UInt8[4]
+    property elfCulture : UInt32
+    property elfPanose : Win32cr::Graphics::Gdi::PANOSE
+    def initialize(@elfLogFont : Win32cr::Graphics::Gdi::LOGFONTA, @elfFullName : UInt8[64], @elfStyle : UInt8[32], @elfVersion : UInt32, @elfStyleSize : UInt32, @elfMatch : UInt32, @elfReserved : UInt32, @elfVendorId : UInt8[4], @elfCulture : UInt32, @elfPanose : Win32cr::Graphics::Gdi::PANOSE)
+    end
+  end
 
   @[Extern]
-  record EXTLOGFONTW,
-    elfLogFont : Win32cr::Graphics::Gdi::LOGFONTW,
-    elfFullName : UInt16[64],
-    elfStyle : UInt16[32],
-    elfVersion : UInt32,
-    elfStyleSize : UInt32,
-    elfMatch : UInt32,
-    elfReserved : UInt32,
-    elfVendorId : UInt8[4],
-    elfCulture : UInt32,
-    elfPanose : Win32cr::Graphics::Gdi::PANOSE
+  struct EXTLOGFONTW
+    property elfLogFont : Win32cr::Graphics::Gdi::LOGFONTW
+    property elfFullName : UInt16[64]
+    property elfStyle : UInt16[32]
+    property elfVersion : UInt32
+    property elfStyleSize : UInt32
+    property elfMatch : UInt32
+    property elfReserved : UInt32
+    property elfVendorId : UInt8[4]
+    property elfCulture : UInt32
+    property elfPanose : Win32cr::Graphics::Gdi::PANOSE
+    def initialize(@elfLogFont : Win32cr::Graphics::Gdi::LOGFONTW, @elfFullName : UInt16[64], @elfStyle : UInt16[32], @elfVersion : UInt32, @elfStyleSize : UInt32, @elfMatch : UInt32, @elfReserved : UInt32, @elfVendorId : UInt8[4], @elfCulture : UInt32, @elfPanose : Win32cr::Graphics::Gdi::PANOSE)
+    end
+  end
 
   @[Extern]
-  record DEVMODEA,
-    dmDeviceName : UInt8[32],
-    dmSpecVersion : UInt16,
-    dmDriverVersion : UInt16,
-    dmSize : UInt16,
-    dmDriverExtra : UInt16,
-    dmFields : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    dmColor : Int16,
-    dmDuplex : Int16,
-    dmYResolution : Int16,
-    dmTTOption : Int16,
-    dmCollate : Int16,
-    dmFormName : UInt8[32],
-    dmLogPixels : UInt16,
-    dmBitsPerPel : UInt32,
-    dmPelsWidth : UInt32,
-    dmPelsHeight : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    dmDisplayFrequency : UInt32,
-    dmICMMethod : UInt32,
-    dmICMIntent : UInt32,
-    dmMediaType : UInt32,
-    dmDitherType : UInt32,
-    dmReserved1 : UInt32,
-    dmReserved2 : UInt32,
-    dmPanningWidth : UInt32,
-    dmPanningHeight : UInt32 do
+  struct DEVMODEA
+    property dmDeviceName : UInt8[32]
+    property dmSpecVersion : UInt16
+    property dmDriverVersion : UInt16
+    property dmSize : UInt16
+    property dmDriverExtra : UInt16
+    property dmFields : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property dmColor : Int16
+    property dmDuplex : Int16
+    property dmYResolution : Int16
+    property dmTTOption : Int16
+    property dmCollate : Int16
+    property dmFormName : UInt8[32]
+    property dmLogPixels : UInt16
+    property dmBitsPerPel : UInt32
+    property dmPelsWidth : UInt32
+    property dmPelsHeight : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property dmDisplayFrequency : UInt32
+    property dmICMMethod : UInt32
+    property dmICMIntent : UInt32
+    property dmMediaType : UInt32
+    property dmDitherType : UInt32
+    property dmReserved1 : UInt32
+    property dmReserved2 : UInt32
+    property dmPanningWidth : UInt32
+    property dmPanningHeight : UInt32
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      anonymous2 : Anonymous2_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        dmPosition : Win32cr::Foundation::POINTL,
-        dmDisplayOrientation : UInt32,
-        dmDisplayFixedOutput : UInt32
+      struct Anonymous2_e__Struct_
+    property dmPosition : Win32cr::Foundation::POINTL
+    property dmDisplayOrientation : UInt32
+    property dmDisplayFixedOutput : UInt32
+    def initialize(@dmPosition : Win32cr::Foundation::POINTL, @dmDisplayOrientation : UInt32, @dmDisplayFixedOutput : UInt32)
+    end
+      end
 
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        dmOrientation : Int16,
-        dmPaperSize : Int16,
-        dmPaperLength : Int16,
-        dmPaperWidth : Int16,
-        dmScale : Int16,
-        dmCopies : Int16,
-        dmDefaultSource : Int16,
-        dmPrintQuality : Int16
+      struct Anonymous1_e__Struct_
+    property dmOrientation : Int16
+    property dmPaperSize : Int16
+    property dmPaperLength : Int16
+    property dmPaperWidth : Int16
+    property dmScale : Int16
+    property dmCopies : Int16
+    property dmDefaultSource : Int16
+    property dmPrintQuality : Int16
+    def initialize(@dmOrientation : Int16, @dmPaperSize : Int16, @dmPaperLength : Int16, @dmPaperWidth : Int16, @dmScale : Int16, @dmCopies : Int16, @dmDefaultSource : Int16, @dmPrintQuality : Int16)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      dmDisplayFlags : UInt32,
-      dmNup : UInt32
+    struct Anonymous2_e__Union_
+    property dmDisplayFlags : UInt32
+    property dmNup : UInt32
+    def initialize(@dmDisplayFlags : UInt32, @dmNup : UInt32)
+    end
+    end
 
+    def initialize(@dmDeviceName : UInt8[32], @dmSpecVersion : UInt16, @dmDriverVersion : UInt16, @dmSize : UInt16, @dmDriverExtra : UInt16, @dmFields : UInt32, @anonymous1 : Anonymous1_e__Union_, @dmColor : Int16, @dmDuplex : Int16, @dmYResolution : Int16, @dmTTOption : Int16, @dmCollate : Int16, @dmFormName : UInt8[32], @dmLogPixels : UInt16, @dmBitsPerPel : UInt32, @dmPelsWidth : UInt32, @dmPelsHeight : UInt32, @anonymous2 : Anonymous2_e__Union_, @dmDisplayFrequency : UInt32, @dmICMMethod : UInt32, @dmICMIntent : UInt32, @dmMediaType : UInt32, @dmDitherType : UInt32, @dmReserved1 : UInt32, @dmReserved2 : UInt32, @dmPanningWidth : UInt32, @dmPanningHeight : UInt32)
+    end
   end
 
   @[Extern]
-  record DEVMODEW,
-    dmDeviceName : UInt16[32],
-    dmSpecVersion : UInt16,
-    dmDriverVersion : UInt16,
-    dmSize : UInt16,
-    dmDriverExtra : UInt16,
-    dmFields : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    dmColor : Int16,
-    dmDuplex : Int16,
-    dmYResolution : Int16,
-    dmTTOption : Int16,
-    dmCollate : Int16,
-    dmFormName : UInt16[32],
-    dmLogPixels : UInt16,
-    dmBitsPerPel : UInt32,
-    dmPelsWidth : UInt32,
-    dmPelsHeight : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    dmDisplayFrequency : UInt32,
-    dmICMMethod : UInt32,
-    dmICMIntent : UInt32,
-    dmMediaType : UInt32,
-    dmDitherType : UInt32,
-    dmReserved1 : UInt32,
-    dmReserved2 : UInt32,
-    dmPanningWidth : UInt32,
-    dmPanningHeight : UInt32 do
+  struct DEVMODEW
+    property dmDeviceName : UInt16[32]
+    property dmSpecVersion : UInt16
+    property dmDriverVersion : UInt16
+    property dmSize : UInt16
+    property dmDriverExtra : UInt16
+    property dmFields : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property dmColor : Int16
+    property dmDuplex : Int16
+    property dmYResolution : Int16
+    property dmTTOption : Int16
+    property dmCollate : Int16
+    property dmFormName : UInt16[32]
+    property dmLogPixels : UInt16
+    property dmBitsPerPel : UInt32
+    property dmPelsWidth : UInt32
+    property dmPelsHeight : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property dmDisplayFrequency : UInt32
+    property dmICMMethod : UInt32
+    property dmICMIntent : UInt32
+    property dmMediaType : UInt32
+    property dmDitherType : UInt32
+    property dmReserved1 : UInt32
+    property dmReserved2 : UInt32
+    property dmPanningWidth : UInt32
+    property dmPanningHeight : UInt32
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      anonymous2 : Anonymous2_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        dmOrientation : Int16,
-        dmPaperSize : Int16,
-        dmPaperLength : Int16,
-        dmPaperWidth : Int16,
-        dmScale : Int16,
-        dmCopies : Int16,
-        dmDefaultSource : Int16,
-        dmPrintQuality : Int16
+      struct Anonymous1_e__Struct_
+    property dmOrientation : Int16
+    property dmPaperSize : Int16
+    property dmPaperLength : Int16
+    property dmPaperWidth : Int16
+    property dmScale : Int16
+    property dmCopies : Int16
+    property dmDefaultSource : Int16
+    property dmPrintQuality : Int16
+    def initialize(@dmOrientation : Int16, @dmPaperSize : Int16, @dmPaperLength : Int16, @dmPaperWidth : Int16, @dmScale : Int16, @dmCopies : Int16, @dmDefaultSource : Int16, @dmPrintQuality : Int16)
+    end
+      end
 
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        dmPosition : Win32cr::Foundation::POINTL,
-        dmDisplayOrientation : UInt32,
-        dmDisplayFixedOutput : UInt32
+      struct Anonymous2_e__Struct_
+    property dmPosition : Win32cr::Foundation::POINTL
+    property dmDisplayOrientation : UInt32
+    property dmDisplayFixedOutput : UInt32
+    def initialize(@dmPosition : Win32cr::Foundation::POINTL, @dmDisplayOrientation : UInt32, @dmDisplayFixedOutput : UInt32)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      dmDisplayFlags : UInt32,
-      dmNup : UInt32
+    struct Anonymous2_e__Union_
+    property dmDisplayFlags : UInt32
+    property dmNup : UInt32
+    def initialize(@dmDisplayFlags : UInt32, @dmNup : UInt32)
+    end
+    end
 
+    def initialize(@dmDeviceName : UInt16[32], @dmSpecVersion : UInt16, @dmDriverVersion : UInt16, @dmSize : UInt16, @dmDriverExtra : UInt16, @dmFields : UInt32, @anonymous1 : Anonymous1_e__Union_, @dmColor : Int16, @dmDuplex : Int16, @dmYResolution : Int16, @dmTTOption : Int16, @dmCollate : Int16, @dmFormName : UInt16[32], @dmLogPixels : UInt16, @dmBitsPerPel : UInt32, @dmPelsWidth : UInt32, @dmPelsHeight : UInt32, @anonymous2 : Anonymous2_e__Union_, @dmDisplayFrequency : UInt32, @dmICMMethod : UInt32, @dmICMIntent : UInt32, @dmMediaType : UInt32, @dmDitherType : UInt32, @dmReserved1 : UInt32, @dmReserved2 : UInt32, @dmPanningWidth : UInt32, @dmPanningHeight : UInt32)
+    end
   end
 
   @[Extern]
-  record DISPLAY_DEVICEA,
-    cb : UInt32,
-    device_name : Win32cr::Foundation::CHAR[32],
-    device_string : Win32cr::Foundation::CHAR[128],
-    state_flags : UInt32,
-    device_id : Win32cr::Foundation::CHAR[128],
-    device_key : Win32cr::Foundation::CHAR[128]
-
-  @[Extern]
-  record DISPLAY_DEVICEW,
-    cb : UInt32,
-    device_name : UInt16[32],
-    device_string : UInt16[128],
-    state_flags : UInt32,
-    device_id : UInt16[128],
-    device_key : UInt16[128]
-
-  @[Extern]
-  record RGNDATAHEADER,
-    dwSize : UInt32,
-    iType : UInt32,
-    nCount : UInt32,
-    nRgnSize : UInt32,
-    rcBound : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record RGNDATA,
-    rdh : Win32cr::Graphics::Gdi::RGNDATAHEADER,
-    buffer : Win32cr::Foundation::CHAR*
-
-  @[Extern]
-  record ABC,
-    abcA : Int32,
-    abcB : UInt32,
-    abcC : Int32
-
-  @[Extern]
-  record ABCFLOAT,
-    abcfA : Float32,
-    abcfB : Float32,
-    abcfC : Float32
-
-  @[Extern]
-  record OUTLINETEXTMETRICA,
-    otmSize : UInt32,
-    otmTextMetrics : Win32cr::Graphics::Gdi::TEXTMETRICA,
-    otmFiller : UInt8,
-    otmPanoseNumber : Win32cr::Graphics::Gdi::PANOSE,
-    otmfsSelection : UInt32,
-    otmfsType : UInt32,
-    otmsCharSlopeRise : Int32,
-    otmsCharSlopeRun : Int32,
-    otmItalicAngle : Int32,
-    otmEMSquare : UInt32,
-    otmAscent : Int32,
-    otmDescent : Int32,
-    otmLineGap : UInt32,
-    otmsCapEmHeight : UInt32,
-    otmsXHeight : UInt32,
-    otmrcFontBox : Win32cr::Foundation::RECT,
-    otmMacAscent : Int32,
-    otmMacDescent : Int32,
-    otmMacLineGap : UInt32,
-    otmusMinimumPPEM : UInt32,
-    otmptSubscriptSize : Win32cr::Foundation::POINT,
-    otmptSubscriptOffset : Win32cr::Foundation::POINT,
-    otmptSuperscriptSize : Win32cr::Foundation::POINT,
-    otmptSuperscriptOffset : Win32cr::Foundation::POINT,
-    otmsStrikeoutSize : UInt32,
-    otmsStrikeoutPosition : Int32,
-    otmsUnderscoreSize : Int32,
-    otmsUnderscorePosition : Int32,
-    otmpFamilyName : Win32cr::Foundation::PSTR,
-    otmpFaceName : Win32cr::Foundation::PSTR,
-    otmpStyleName : Win32cr::Foundation::PSTR,
-    otmpFullName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record OUTLINETEXTMETRICW,
-    otmSize : UInt32,
-    otmTextMetrics : Win32cr::Graphics::Gdi::TEXTMETRICW,
-    otmFiller : UInt8,
-    otmPanoseNumber : Win32cr::Graphics::Gdi::PANOSE,
-    otmfsSelection : UInt32,
-    otmfsType : UInt32,
-    otmsCharSlopeRise : Int32,
-    otmsCharSlopeRun : Int32,
-    otmItalicAngle : Int32,
-    otmEMSquare : UInt32,
-    otmAscent : Int32,
-    otmDescent : Int32,
-    otmLineGap : UInt32,
-    otmsCapEmHeight : UInt32,
-    otmsXHeight : UInt32,
-    otmrcFontBox : Win32cr::Foundation::RECT,
-    otmMacAscent : Int32,
-    otmMacDescent : Int32,
-    otmMacLineGap : UInt32,
-    otmusMinimumPPEM : UInt32,
-    otmptSubscriptSize : Win32cr::Foundation::POINT,
-    otmptSubscriptOffset : Win32cr::Foundation::POINT,
-    otmptSuperscriptSize : Win32cr::Foundation::POINT,
-    otmptSuperscriptOffset : Win32cr::Foundation::POINT,
-    otmsStrikeoutSize : UInt32,
-    otmsStrikeoutPosition : Int32,
-    otmsUnderscoreSize : Int32,
-    otmsUnderscorePosition : Int32,
-    otmpFamilyName : Win32cr::Foundation::PSTR,
-    otmpFaceName : Win32cr::Foundation::PSTR,
-    otmpStyleName : Win32cr::Foundation::PSTR,
-    otmpFullName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record POLYTEXTA,
-    x : Int32,
-    y : Int32,
-    n : UInt32,
-    lpstr : Win32cr::Foundation::PSTR,
-    uiFlags : UInt32,
-    rcl : Win32cr::Foundation::RECT,
-    pdx : Int32*
-
-  @[Extern]
-  record POLYTEXTW,
-    x : Int32,
-    y : Int32,
-    n : UInt32,
-    lpstr : Win32cr::Foundation::PWSTR,
-    uiFlags : UInt32,
-    rcl : Win32cr::Foundation::RECT,
-    pdx : Int32*
-
-  @[Extern]
-  record FIXED,
-    fract : UInt16,
-    value : Int16
-
-  @[Extern]
-  record MAT2,
-    eM11 : Win32cr::Graphics::Gdi::FIXED,
-    eM12 : Win32cr::Graphics::Gdi::FIXED,
-    eM21 : Win32cr::Graphics::Gdi::FIXED,
-    eM22 : Win32cr::Graphics::Gdi::FIXED
-
-  @[Extern]
-  record GLYPHMETRICS,
-    gmBlackBoxX : UInt32,
-    gmBlackBoxY : UInt32,
-    gmptGlyphOrigin : Win32cr::Foundation::POINT,
-    gmCellIncX : Int16,
-    gmCellIncY : Int16
-
-  @[Extern]
-  record POINTFX,
-    x : Win32cr::Graphics::Gdi::FIXED,
-    y : Win32cr::Graphics::Gdi::FIXED
-
-  @[Extern]
-  record TTPOLYCURVE,
-    wType : UInt16,
-    cpfx : UInt16,
-    apfx : Win32cr::Graphics::Gdi::POINTFX*
-
-  @[Extern]
-  record TTPOLYGONHEADER,
-    cb : UInt32,
-    dwType : UInt32,
-    pfxStart : Win32cr::Graphics::Gdi::POINTFX
-
-  @[Extern]
-  record GCP_RESULTSA,
-    lStructSize : UInt32,
-    lpOutString : Win32cr::Foundation::PSTR,
-    lpOrder : UInt32*,
-    lpDx : Int32*,
-    lpCaretPos : Int32*,
-    lpClass : Win32cr::Foundation::PSTR,
-    lpGlyphs : Win32cr::Foundation::PWSTR,
-    nGlyphs : UInt32,
-    nMaxFit : Int32
-
-  @[Extern]
-  record GCP_RESULTSW,
-    lStructSize : UInt32,
-    lpOutString : Win32cr::Foundation::PWSTR,
-    lpOrder : UInt32*,
-    lpDx : Int32*,
-    lpCaretPos : Int32*,
-    lpClass : Win32cr::Foundation::PSTR,
-    lpGlyphs : Win32cr::Foundation::PWSTR,
-    nGlyphs : UInt32,
-    nMaxFit : Int32
-
-  @[Extern]
-  record RASTERIZER_STATUS,
-    nSize : Int16,
-    wFlags : Int16,
-    nLanguageID : Int16
-
-  @[Extern]
-  record WCRANGE,
-    wcLow : UInt16,
-    cGlyphs : UInt16
-
-  @[Extern]
-  record GLYPHSET,
-    cbThis : UInt32,
-    flAccel : UInt32,
-    cGlyphsSupported : UInt32,
-    cRanges : UInt32,
-    ranges : Win32cr::Graphics::Gdi::WCRANGE*
-
-  @[Extern]
-  record DESIGNVECTOR,
-    dvReserved : UInt32,
-    dvNumAxes : UInt32,
-    dvValues : Int32[16]
-
-  @[Extern]
-  record AXISINFOA,
-    axMinValue : Int32,
-    axMaxValue : Int32,
-    axAxisName : UInt8[16]
-
-  @[Extern]
-  record AXISINFOW,
-    axMinValue : Int32,
-    axMaxValue : Int32,
-    axAxisName : UInt16[16]
-
-  @[Extern]
-  record AXESLISTA,
-    axlReserved : UInt32,
-    axlNumAxes : UInt32,
-    axlAxisInfo : Win32cr::Graphics::Gdi::AXISINFOA[16]
-
-  @[Extern]
-  record AXESLISTW,
-    axlReserved : UInt32,
-    axlNumAxes : UInt32,
-    axlAxisInfo : Win32cr::Graphics::Gdi::AXISINFOW[16]
-
-  @[Extern]
-  record ENUMLOGFONTEXDVA,
-    elfEnumLogfontEx : Win32cr::Graphics::Gdi::ENUMLOGFONTEXA,
-    elfDesignVector : Win32cr::Graphics::Gdi::DESIGNVECTOR
-
-  @[Extern]
-  record ENUMLOGFONTEXDVW,
-    elfEnumLogfontEx : Win32cr::Graphics::Gdi::ENUMLOGFONTEXW,
-    elfDesignVector : Win32cr::Graphics::Gdi::DESIGNVECTOR
-
-  @[Extern]
-  record TRIVERTEX,
-    x : Int32,
-    y : Int32,
-    red : UInt16,
-    green : UInt16,
-    blue : UInt16,
-    alpha : UInt16
-
-  @[Extern]
-  record GRADIENT_TRIANGLE,
-    vertex1 : UInt32,
-    vertex2 : UInt32,
-    vertex3 : UInt32
-
-  @[Extern]
-  record GRADIENT_RECT,
-    upper_left : UInt32,
-    lower_right : UInt32
-
-  @[Extern]
-  record BLENDFUNCTION,
-    blend_op : UInt8,
-    blend_flags : UInt8,
-    source_constant_alpha : UInt8,
-    alpha_format : UInt8
-
-  @[Extern]
-  record DIBSECTION,
-    dsBm : Win32cr::Graphics::Gdi::BITMAP,
-    dsBmih : Win32cr::Graphics::Gdi::BITMAPINFOHEADER,
-    dsBitfields : UInt32[3],
-    dshSection : Win32cr::Foundation::HANDLE,
-    dsOffset : UInt32
-
-  @[Extern]
-  record COLORADJUSTMENT,
-    caSize : UInt16,
-    caFlags : UInt16,
-    caIlluminantIndex : UInt16,
-    caRedGamma : UInt16,
-    caGreenGamma : UInt16,
-    caBlueGamma : UInt16,
-    caReferenceBlack : UInt16,
-    caReferenceWhite : UInt16,
-    caContrast : Int16,
-    caBrightness : Int16,
-    caColorfulness : Int16,
-    caRedGreenTint : Int16
-
-  @[Extern]
-  record KERNINGPAIR,
-    wFirst : UInt16,
-    wSecond : UInt16,
-    iKernAmount : Int32
-
-  @[Extern]
-  record EMR,
-    iType : UInt32,
-    nSize : UInt32
-
-  @[Extern]
-  record EMRTEXT,
-    ptlReference : Win32cr::Foundation::POINTL,
-    nChars : UInt32,
-    offString : UInt32,
-    fOptions : UInt32,
-    rcl : Win32cr::Foundation::RECTL,
-    offDx : UInt32
-
-  @[Extern]
-  record ABORTPATH,
-    emr : Win32cr::Graphics::Gdi::EMR
-
-  @[Extern]
-  record EMRSELECTCLIPPATH,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    iMode : UInt32
-
-  @[Extern]
-  record EMRSETMITERLIMIT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    eMiterLimit : Float32
-
-  @[Extern]
-  record EMRRESTOREDC,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    iRelative : Int32
-
-  @[Extern]
-  record EMRSETARCDIRECTION,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    iArcDirection : UInt32
-
-  @[Extern]
-  record EMRSETMAPPERFLAGS,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    dwFlags : UInt32
-
-  @[Extern]
-  record EMRSETTEXTCOLOR,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    crColor : UInt32
-
-  @[Extern]
-  record EMRSELECTOBJECT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihObject : UInt32
-
-  @[Extern]
-  record EMRSELECTPALETTE,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihPal : UInt32
-
-  @[Extern]
-  record EMRRESIZEPALETTE,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihPal : UInt32,
-    cEntries : UInt32
-
-  @[Extern]
-  record EMRSETPALETTEENTRIES,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihPal : UInt32,
-    iStart : UInt32,
-    cEntries : UInt32,
-    aPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*
-
-  @[Extern]
-  record EMRSETCOLORADJUSTMENT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    color_adjustment : Win32cr::Graphics::Gdi::COLORADJUSTMENT
-
-  @[Extern]
-  record EMRGDICOMMENT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    cbData : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record EMREOF,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    nPalEntries : UInt32,
-    offPalEntries : UInt32,
-    nSizeLast : UInt32
-
-  @[Extern]
-  record EMRLINETO,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ptl : Win32cr::Foundation::POINTL
-
-  @[Extern]
-  record EMROFFSETCLIPRGN,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ptlOffset : Win32cr::Foundation::POINTL
-
-  @[Extern]
-  record EMRFILLPATH,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL
-
-  @[Extern]
-  record EMREXCLUDECLIPRECT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclClip : Win32cr::Foundation::RECTL
-
-  @[Extern]
-  record EMRSETVIEWPORTORGEX,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ptlOrigin : Win32cr::Foundation::POINTL
-
-  @[Extern]
-  record EMRSETVIEWPORTEXTEX,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    szlExtent : Win32cr::Foundation::SIZE
-
-  @[Extern]
-  record EMRSCALEVIEWPORTEXTEX,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    xNum : Int32,
-    xDenom : Int32,
-    yNum : Int32,
-    yDenom : Int32
-
-  @[Extern]
-  record EMRSETWORLDTRANSFORM,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    xform : Win32cr::Graphics::Gdi::XFORM
-
-  @[Extern]
-  record EMRMODIFYWORLDTRANSFORM,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    xform : Win32cr::Graphics::Gdi::XFORM,
-    iMode : UInt32
-
-  @[Extern]
-  record EMRSETPIXELV,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ptlPixel : Win32cr::Foundation::POINTL,
-    crColor : UInt32
-
-  @[Extern]
-  record EMREXTFLOODFILL,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ptlStart : Win32cr::Foundation::POINTL,
-    crColor : UInt32,
-    iMode : UInt32
-
-  @[Extern]
-  record EMRELLIPSE,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBox : Win32cr::Foundation::RECTL
-
-  @[Extern]
-  record EMRROUNDRECT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBox : Win32cr::Foundation::RECTL,
-    szlCorner : Win32cr::Foundation::SIZE
-
-  @[Extern]
-  record EMRARC,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBox : Win32cr::Foundation::RECTL,
-    ptlStart : Win32cr::Foundation::POINTL,
-    ptlEnd : Win32cr::Foundation::POINTL
-
-  @[Extern]
-  record EMRANGLEARC,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ptlCenter : Win32cr::Foundation::POINTL,
-    nRadius : UInt32,
-    eStartAngle : Float32,
-    eSweepAngle : Float32
-
-  @[Extern]
-  record EMRPOLYLINE,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    cptl : UInt32,
-    aptl : Win32cr::Foundation::POINTL*
-
-  @[Extern]
-  record EMRPOLYLINE16,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    cpts : UInt32,
-    apts : Win32cr::Foundation::POINTS*
-
-  @[Extern]
-  record EMRPOLYDRAW,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    cptl : UInt32,
-    aptl : Win32cr::Foundation::POINTL*,
-    abTypes : UInt8*
-
-  @[Extern]
-  record EMRPOLYDRAW16,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    cpts : UInt32,
-    apts : Win32cr::Foundation::POINTS*,
-    abTypes : UInt8*
-
-  @[Extern]
-  record EMRPOLYPOLYLINE,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    nPolys : UInt32,
-    cptl : UInt32,
-    aPolyCounts : UInt32*,
-    aptl : Win32cr::Foundation::POINTL*
-
-  @[Extern]
-  record EMRPOLYPOLYLINE16,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    nPolys : UInt32,
-    cpts : UInt32,
-    aPolyCounts : UInt32*,
-    apts : Win32cr::Foundation::POINTS*
-
-  @[Extern]
-  record EMRINVERTRGN,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    cbRgnData : UInt32,
-    rgn_data : UInt8*
-
-  @[Extern]
-  record EMRFILLRGN,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    cbRgnData : UInt32,
-    ihBrush : UInt32,
-    rgn_data : UInt8*
-
-  @[Extern]
-  record EMRFRAMERGN,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    cbRgnData : UInt32,
-    ihBrush : UInt32,
-    szlStroke : Win32cr::Foundation::SIZE,
-    rgn_data : UInt8*
-
-  @[Extern]
-  record EMREXTSELECTCLIPRGN,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    cbRgnData : UInt32,
-    iMode : UInt32,
-    rgn_data : UInt8*
-
-  @[Extern]
-  record EMREXTTEXTOUTA,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    iGraphicsMode : UInt32,
-    exScale : Float32,
-    eyScale : Float32,
-    emrtext : Win32cr::Graphics::Gdi::EMRTEXT
-
-  @[Extern]
-  record EMRPOLYTEXTOUTA,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    iGraphicsMode : UInt32,
-    exScale : Float32,
-    eyScale : Float32,
-    cStrings : Int32,
-    aemrtext : Win32cr::Graphics::Gdi::EMRTEXT*
-
-  @[Extern]
-  record EMRBITBLT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    xDest : Int32,
-    yDest : Int32,
-    cxDest : Int32,
-    cyDest : Int32,
-    dwRop : UInt32,
-    xSrc : Int32,
-    ySrc : Int32,
-    xformSrc : Win32cr::Graphics::Gdi::XFORM,
-    crBkColorSrc : UInt32,
-    iUsageSrc : UInt32,
-    offBmiSrc : UInt32,
-    cbBmiSrc : UInt32,
-    offBitsSrc : UInt32,
-    cbBitsSrc : UInt32
-
-  @[Extern]
-  record EMRSTRETCHBLT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    xDest : Int32,
-    yDest : Int32,
-    cxDest : Int32,
-    cyDest : Int32,
-    dwRop : UInt32,
-    xSrc : Int32,
-    ySrc : Int32,
-    xformSrc : Win32cr::Graphics::Gdi::XFORM,
-    crBkColorSrc : UInt32,
-    iUsageSrc : UInt32,
-    offBmiSrc : UInt32,
-    cbBmiSrc : UInt32,
-    offBitsSrc : UInt32,
-    cbBitsSrc : UInt32,
-    cxSrc : Int32,
-    cySrc : Int32
-
-  @[Extern]
-  record EMRMASKBLT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    xDest : Int32,
-    yDest : Int32,
-    cxDest : Int32,
-    cyDest : Int32,
-    dwRop : UInt32,
-    xSrc : Int32,
-    ySrc : Int32,
-    xformSrc : Win32cr::Graphics::Gdi::XFORM,
-    crBkColorSrc : UInt32,
-    iUsageSrc : UInt32,
-    offBmiSrc : UInt32,
-    cbBmiSrc : UInt32,
-    offBitsSrc : UInt32,
-    cbBitsSrc : UInt32,
-    xMask : Int32,
-    yMask : Int32,
-    iUsageMask : UInt32,
-    offBmiMask : UInt32,
-    cbBmiMask : UInt32,
-    offBitsMask : UInt32,
-    cbBitsMask : UInt32
-
-  @[Extern]
-  record EMRPLGBLT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    aptlDest : Win32cr::Foundation::POINTL[3],
-    xSrc : Int32,
-    ySrc : Int32,
-    cxSrc : Int32,
-    cySrc : Int32,
-    xformSrc : Win32cr::Graphics::Gdi::XFORM,
-    crBkColorSrc : UInt32,
-    iUsageSrc : UInt32,
-    offBmiSrc : UInt32,
-    cbBmiSrc : UInt32,
-    offBitsSrc : UInt32,
-    cbBitsSrc : UInt32,
-    xMask : Int32,
-    yMask : Int32,
-    iUsageMask : UInt32,
-    offBmiMask : UInt32,
-    cbBmiMask : UInt32,
-    offBitsMask : UInt32,
-    cbBitsMask : UInt32
-
-  @[Extern]
-  record EMRSETDIBITSTODEVICE,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    xDest : Int32,
-    yDest : Int32,
-    xSrc : Int32,
-    ySrc : Int32,
-    cxSrc : Int32,
-    cySrc : Int32,
-    offBmiSrc : UInt32,
-    cbBmiSrc : UInt32,
-    offBitsSrc : UInt32,
-    cbBitsSrc : UInt32,
-    iUsageSrc : UInt32,
-    iStartScan : UInt32,
-    cScans : UInt32
-
-  @[Extern]
-  record EMRSTRETCHDIBITS,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    xDest : Int32,
-    yDest : Int32,
-    xSrc : Int32,
-    ySrc : Int32,
-    cxSrc : Int32,
-    cySrc : Int32,
-    offBmiSrc : UInt32,
-    cbBmiSrc : UInt32,
-    offBitsSrc : UInt32,
-    cbBitsSrc : UInt32,
-    iUsageSrc : UInt32,
-    dwRop : UInt32,
-    cxDest : Int32,
-    cyDest : Int32
-
-  @[Extern]
-  record EMREXTCREATEFONTINDIRECTW,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihFont : UInt32,
-    elfw : Win32cr::Graphics::Gdi::EXTLOGFONTW
-
-  @[Extern]
-  record EMRCREATEPALETTE,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihPal : UInt32,
-    lgpl : Win32cr::Graphics::Gdi::LOGPALETTE
-
-  @[Extern]
-  record EMRCREATEPEN,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihPen : UInt32,
-    lopn : Win32cr::Graphics::Gdi::LOGPEN
-
-  @[Extern]
-  record EMREXTCREATEPEN,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihPen : UInt32,
-    offBmi : UInt32,
-    cbBmi : UInt32,
-    offBits : UInt32,
-    cbBits : UInt32,
-    elp : Win32cr::Graphics::Gdi::EXTLOGPEN32
-
-  @[Extern]
-  record EMRCREATEBRUSHINDIRECT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihBrush : UInt32,
-    lb : Win32cr::Graphics::Gdi::LOGBRUSH32
-
-  @[Extern]
-  record EMRCREATEMONOBRUSH,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihBrush : UInt32,
-    iUsage : UInt32,
-    offBmi : UInt32,
-    cbBmi : UInt32,
-    offBits : UInt32,
-    cbBits : UInt32
-
-  @[Extern]
-  record EMRCREATEDIBPATTERNBRUSHPT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihBrush : UInt32,
-    iUsage : UInt32,
-    offBmi : UInt32,
-    cbBmi : UInt32,
-    offBits : UInt32,
-    cbBits : UInt32
-
-  @[Extern]
-  record EMRFORMAT,
-    dSignature : UInt32,
-    nVersion : UInt32,
-    cbData : UInt32,
-    offData : UInt32
-
-  @[Extern]
-  record EMRGLSRECORD,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    cbData : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record EMRGLSBOUNDEDRECORD,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    cbData : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record EMRSETCOLORSPACE,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihCS : UInt32
-
-  @[Extern]
-  record EMREXTESCAPE,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    iEscape : Int32,
-    cbEscData : Int32,
-    esc_data : UInt8*
-
-  @[Extern]
-  record EMRNAMEDESCAPE,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    iEscape : Int32,
-    cbDriver : Int32,
-    cbEscData : Int32,
-    esc_data : UInt8*
-
-  @[Extern]
-  record EMRSETICMPROFILE,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    dwFlags : UInt32,
-    cbName : UInt32,
-    cbData : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record COLORMATCHTOTARGET,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    dwAction : UInt32,
-    dwFlags : UInt32,
-    cbName : UInt32,
-    cbData : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record COLORCORRECTPALETTE,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    ihPalette : UInt32,
-    nFirstEntry : UInt32,
-    nPalEntries : UInt32,
-    nReserved : UInt32
-
-  @[Extern]
-  record EMRALPHABLEND,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    xDest : Int32,
-    yDest : Int32,
-    cxDest : Int32,
-    cyDest : Int32,
-    dwRop : UInt32,
-    xSrc : Int32,
-    ySrc : Int32,
-    xformSrc : Win32cr::Graphics::Gdi::XFORM,
-    crBkColorSrc : UInt32,
-    iUsageSrc : UInt32,
-    offBmiSrc : UInt32,
-    cbBmiSrc : UInt32,
-    offBitsSrc : UInt32,
-    cbBitsSrc : UInt32,
-    cxSrc : Int32,
-    cySrc : Int32
-
-  @[Extern]
-  record EMRGRADIENTFILL,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    nVer : UInt32,
-    nTri : UInt32,
-    ulMode : Win32cr::Graphics::Gdi::GRADIENT_FILL,
-    ver : Win32cr::Graphics::Gdi::TRIVERTEX*
-
-  @[Extern]
-  record EMRTRANSPARENTBLT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    rclBounds : Win32cr::Foundation::RECTL,
-    xDest : Int32,
-    yDest : Int32,
-    cxDest : Int32,
-    cyDest : Int32,
-    dwRop : UInt32,
-    xSrc : Int32,
-    ySrc : Int32,
-    xformSrc : Win32cr::Graphics::Gdi::XFORM,
-    crBkColorSrc : UInt32,
-    iUsageSrc : UInt32,
-    offBmiSrc : UInt32,
-    cbBmiSrc : UInt32,
-    offBitsSrc : UInt32,
-    cbBitsSrc : UInt32,
-    cxSrc : Int32,
-    cySrc : Int32
-
-  @[Extern]
-  record WGLSWAP,
-    hdc : Win32cr::Graphics::Gdi::HDC,
-    uiFlags : UInt32
-
-  @[Extern]
-  record TTLOADINFO,
-    usStructSize : UInt16,
-    usRefStrSize : UInt16,
-    pusRefStr : UInt16*
-
-  @[Extern]
-  record TTEMBEDINFO,
-    usStructSize : UInt16,
-    usRootStrSize : UInt16,
-    pusRootStr : UInt16*
-
-  @[Extern]
-  record TTVALIDATIONTESTSPARAMS,
-    ulStructSize : UInt32,
-    lTestFromSize : Int32,
-    lTestToSize : Int32,
-    ulCharSet : UInt32,
-    usReserved1 : UInt16,
-    usCharCodeCount : UInt16,
-    pusCharCodeSet : UInt16*
-
-  @[Extern]
-  record TTVALIDATIONTESTSPARAMSEX,
-    ulStructSize : UInt32,
-    lTestFromSize : Int32,
-    lTestToSize : Int32,
-    ulCharSet : UInt32,
-    usReserved1 : UInt16,
-    usCharCodeCount : UInt16,
-    pulCharCodeSet : UInt32*
-
-  @[Extern]
-  record PAINTSTRUCT,
-    hdc : Win32cr::Graphics::Gdi::HDC,
-    fErase : Win32cr::Foundation::BOOL,
-    rcPaint : Win32cr::Foundation::RECT,
-    fRestore : Win32cr::Foundation::BOOL,
-    fIncUpdate : Win32cr::Foundation::BOOL,
-    rgbReserved : UInt8[32]
-
-  @[Extern]
-  record DRAWTEXTPARAMS,
-    cbSize : UInt32,
-    iTabLength : Int32,
-    iLeftMargin : Int32,
-    iRightMargin : Int32,
-    uiLengthDrawn : UInt32
-
-  @[Extern]
-  record MONITORINFO,
-    cbSize : UInt32,
-    rcMonitor : Win32cr::Foundation::RECT,
-    rcWork : Win32cr::Foundation::RECT,
-    dwFlags : UInt32
+  struct DISPLAY_DEVICEA
+    property cb : UInt32
+    property device_name : Win32cr::Foundation::CHAR[32]
+    property device_string : Win32cr::Foundation::CHAR[128]
+    property state_flags : UInt32
+    property device_id : Win32cr::Foundation::CHAR[128]
+    property device_key : Win32cr::Foundation::CHAR[128]
+    def initialize(@cb : UInt32, @device_name : Win32cr::Foundation::CHAR[32], @device_string : Win32cr::Foundation::CHAR[128], @state_flags : UInt32, @device_id : Win32cr::Foundation::CHAR[128], @device_key : Win32cr::Foundation::CHAR[128])
+    end
+  end
+
+  @[Extern]
+  struct DISPLAY_DEVICEW
+    property cb : UInt32
+    property device_name : UInt16[32]
+    property device_string : UInt16[128]
+    property state_flags : UInt32
+    property device_id : UInt16[128]
+    property device_key : UInt16[128]
+    def initialize(@cb : UInt32, @device_name : UInt16[32], @device_string : UInt16[128], @state_flags : UInt32, @device_id : UInt16[128], @device_key : UInt16[128])
+    end
+  end
+
+  @[Extern]
+  struct RGNDATAHEADER
+    property dwSize : UInt32
+    property iType : UInt32
+    property nCount : UInt32
+    property nRgnSize : UInt32
+    property rcBound : Win32cr::Foundation::RECT
+    def initialize(@dwSize : UInt32, @iType : UInt32, @nCount : UInt32, @nRgnSize : UInt32, @rcBound : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct RGNDATA
+    property rdh : Win32cr::Graphics::Gdi::RGNDATAHEADER
+    property buffer : Win32cr::Foundation::CHAR*
+    def initialize(@rdh : Win32cr::Graphics::Gdi::RGNDATAHEADER, @buffer : Win32cr::Foundation::CHAR*)
+    end
+  end
+
+  @[Extern]
+  struct ABC
+    property abcA : Int32
+    property abcB : UInt32
+    property abcC : Int32
+    def initialize(@abcA : Int32, @abcB : UInt32, @abcC : Int32)
+    end
+  end
+
+  @[Extern]
+  struct ABCFLOAT
+    property abcfA : Float32
+    property abcfB : Float32
+    property abcfC : Float32
+    def initialize(@abcfA : Float32, @abcfB : Float32, @abcfC : Float32)
+    end
+  end
+
+  @[Extern]
+  struct OUTLINETEXTMETRICA
+    property otmSize : UInt32
+    property otmTextMetrics : Win32cr::Graphics::Gdi::TEXTMETRICA
+    property otmFiller : UInt8
+    property otmPanoseNumber : Win32cr::Graphics::Gdi::PANOSE
+    property otmfsSelection : UInt32
+    property otmfsType : UInt32
+    property otmsCharSlopeRise : Int32
+    property otmsCharSlopeRun : Int32
+    property otmItalicAngle : Int32
+    property otmEMSquare : UInt32
+    property otmAscent : Int32
+    property otmDescent : Int32
+    property otmLineGap : UInt32
+    property otmsCapEmHeight : UInt32
+    property otmsXHeight : UInt32
+    property otmrcFontBox : Win32cr::Foundation::RECT
+    property otmMacAscent : Int32
+    property otmMacDescent : Int32
+    property otmMacLineGap : UInt32
+    property otmusMinimumPPEM : UInt32
+    property otmptSubscriptSize : Win32cr::Foundation::POINT
+    property otmptSubscriptOffset : Win32cr::Foundation::POINT
+    property otmptSuperscriptSize : Win32cr::Foundation::POINT
+    property otmptSuperscriptOffset : Win32cr::Foundation::POINT
+    property otmsStrikeoutSize : UInt32
+    property otmsStrikeoutPosition : Int32
+    property otmsUnderscoreSize : Int32
+    property otmsUnderscorePosition : Int32
+    property otmpFamilyName : Win32cr::Foundation::PSTR
+    property otmpFaceName : Win32cr::Foundation::PSTR
+    property otmpStyleName : Win32cr::Foundation::PSTR
+    property otmpFullName : Win32cr::Foundation::PSTR
+    def initialize(@otmSize : UInt32, @otmTextMetrics : Win32cr::Graphics::Gdi::TEXTMETRICA, @otmFiller : UInt8, @otmPanoseNumber : Win32cr::Graphics::Gdi::PANOSE, @otmfsSelection : UInt32, @otmfsType : UInt32, @otmsCharSlopeRise : Int32, @otmsCharSlopeRun : Int32, @otmItalicAngle : Int32, @otmEMSquare : UInt32, @otmAscent : Int32, @otmDescent : Int32, @otmLineGap : UInt32, @otmsCapEmHeight : UInt32, @otmsXHeight : UInt32, @otmrcFontBox : Win32cr::Foundation::RECT, @otmMacAscent : Int32, @otmMacDescent : Int32, @otmMacLineGap : UInt32, @otmusMinimumPPEM : UInt32, @otmptSubscriptSize : Win32cr::Foundation::POINT, @otmptSubscriptOffset : Win32cr::Foundation::POINT, @otmptSuperscriptSize : Win32cr::Foundation::POINT, @otmptSuperscriptOffset : Win32cr::Foundation::POINT, @otmsStrikeoutSize : UInt32, @otmsStrikeoutPosition : Int32, @otmsUnderscoreSize : Int32, @otmsUnderscorePosition : Int32, @otmpFamilyName : Win32cr::Foundation::PSTR, @otmpFaceName : Win32cr::Foundation::PSTR, @otmpStyleName : Win32cr::Foundation::PSTR, @otmpFullName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct OUTLINETEXTMETRICW
+    property otmSize : UInt32
+    property otmTextMetrics : Win32cr::Graphics::Gdi::TEXTMETRICW
+    property otmFiller : UInt8
+    property otmPanoseNumber : Win32cr::Graphics::Gdi::PANOSE
+    property otmfsSelection : UInt32
+    property otmfsType : UInt32
+    property otmsCharSlopeRise : Int32
+    property otmsCharSlopeRun : Int32
+    property otmItalicAngle : Int32
+    property otmEMSquare : UInt32
+    property otmAscent : Int32
+    property otmDescent : Int32
+    property otmLineGap : UInt32
+    property otmsCapEmHeight : UInt32
+    property otmsXHeight : UInt32
+    property otmrcFontBox : Win32cr::Foundation::RECT
+    property otmMacAscent : Int32
+    property otmMacDescent : Int32
+    property otmMacLineGap : UInt32
+    property otmusMinimumPPEM : UInt32
+    property otmptSubscriptSize : Win32cr::Foundation::POINT
+    property otmptSubscriptOffset : Win32cr::Foundation::POINT
+    property otmptSuperscriptSize : Win32cr::Foundation::POINT
+    property otmptSuperscriptOffset : Win32cr::Foundation::POINT
+    property otmsStrikeoutSize : UInt32
+    property otmsStrikeoutPosition : Int32
+    property otmsUnderscoreSize : Int32
+    property otmsUnderscorePosition : Int32
+    property otmpFamilyName : Win32cr::Foundation::PSTR
+    property otmpFaceName : Win32cr::Foundation::PSTR
+    property otmpStyleName : Win32cr::Foundation::PSTR
+    property otmpFullName : Win32cr::Foundation::PSTR
+    def initialize(@otmSize : UInt32, @otmTextMetrics : Win32cr::Graphics::Gdi::TEXTMETRICW, @otmFiller : UInt8, @otmPanoseNumber : Win32cr::Graphics::Gdi::PANOSE, @otmfsSelection : UInt32, @otmfsType : UInt32, @otmsCharSlopeRise : Int32, @otmsCharSlopeRun : Int32, @otmItalicAngle : Int32, @otmEMSquare : UInt32, @otmAscent : Int32, @otmDescent : Int32, @otmLineGap : UInt32, @otmsCapEmHeight : UInt32, @otmsXHeight : UInt32, @otmrcFontBox : Win32cr::Foundation::RECT, @otmMacAscent : Int32, @otmMacDescent : Int32, @otmMacLineGap : UInt32, @otmusMinimumPPEM : UInt32, @otmptSubscriptSize : Win32cr::Foundation::POINT, @otmptSubscriptOffset : Win32cr::Foundation::POINT, @otmptSuperscriptSize : Win32cr::Foundation::POINT, @otmptSuperscriptOffset : Win32cr::Foundation::POINT, @otmsStrikeoutSize : UInt32, @otmsStrikeoutPosition : Int32, @otmsUnderscoreSize : Int32, @otmsUnderscorePosition : Int32, @otmpFamilyName : Win32cr::Foundation::PSTR, @otmpFaceName : Win32cr::Foundation::PSTR, @otmpStyleName : Win32cr::Foundation::PSTR, @otmpFullName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct POLYTEXTA
+    property x : Int32
+    property y : Int32
+    property n : UInt32
+    property lpstr : Win32cr::Foundation::PSTR
+    property uiFlags : UInt32
+    property rcl : Win32cr::Foundation::RECT
+    property pdx : Int32*
+    def initialize(@x : Int32, @y : Int32, @n : UInt32, @lpstr : Win32cr::Foundation::PSTR, @uiFlags : UInt32, @rcl : Win32cr::Foundation::RECT, @pdx : Int32*)
+    end
+  end
+
+  @[Extern]
+  struct POLYTEXTW
+    property x : Int32
+    property y : Int32
+    property n : UInt32
+    property lpstr : Win32cr::Foundation::PWSTR
+    property uiFlags : UInt32
+    property rcl : Win32cr::Foundation::RECT
+    property pdx : Int32*
+    def initialize(@x : Int32, @y : Int32, @n : UInt32, @lpstr : Win32cr::Foundation::PWSTR, @uiFlags : UInt32, @rcl : Win32cr::Foundation::RECT, @pdx : Int32*)
+    end
+  end
+
+  @[Extern]
+  struct FIXED
+    property fract : UInt16
+    property value : Int16
+    def initialize(@fract : UInt16, @value : Int16)
+    end
+  end
+
+  @[Extern]
+  struct MAT2
+    property eM11 : Win32cr::Graphics::Gdi::FIXED
+    property eM12 : Win32cr::Graphics::Gdi::FIXED
+    property eM21 : Win32cr::Graphics::Gdi::FIXED
+    property eM22 : Win32cr::Graphics::Gdi::FIXED
+    def initialize(@eM11 : Win32cr::Graphics::Gdi::FIXED, @eM12 : Win32cr::Graphics::Gdi::FIXED, @eM21 : Win32cr::Graphics::Gdi::FIXED, @eM22 : Win32cr::Graphics::Gdi::FIXED)
+    end
+  end
+
+  @[Extern]
+  struct GLYPHMETRICS
+    property gmBlackBoxX : UInt32
+    property gmBlackBoxY : UInt32
+    property gmptGlyphOrigin : Win32cr::Foundation::POINT
+    property gmCellIncX : Int16
+    property gmCellIncY : Int16
+    def initialize(@gmBlackBoxX : UInt32, @gmBlackBoxY : UInt32, @gmptGlyphOrigin : Win32cr::Foundation::POINT, @gmCellIncX : Int16, @gmCellIncY : Int16)
+    end
+  end
+
+  @[Extern]
+  struct POINTFX
+    property x : Win32cr::Graphics::Gdi::FIXED
+    property y : Win32cr::Graphics::Gdi::FIXED
+    def initialize(@x : Win32cr::Graphics::Gdi::FIXED, @y : Win32cr::Graphics::Gdi::FIXED)
+    end
+  end
+
+  @[Extern]
+  struct TTPOLYCURVE
+    property wType : UInt16
+    property cpfx : UInt16
+    property apfx : Win32cr::Graphics::Gdi::POINTFX*
+    def initialize(@wType : UInt16, @cpfx : UInt16, @apfx : Win32cr::Graphics::Gdi::POINTFX*)
+    end
+  end
+
+  @[Extern]
+  struct TTPOLYGONHEADER
+    property cb : UInt32
+    property dwType : UInt32
+    property pfxStart : Win32cr::Graphics::Gdi::POINTFX
+    def initialize(@cb : UInt32, @dwType : UInt32, @pfxStart : Win32cr::Graphics::Gdi::POINTFX)
+    end
+  end
+
+  @[Extern]
+  struct GCP_RESULTSA
+    property lStructSize : UInt32
+    property lpOutString : Win32cr::Foundation::PSTR
+    property lpOrder : UInt32*
+    property lpDx : Int32*
+    property lpCaretPos : Int32*
+    property lpClass : Win32cr::Foundation::PSTR
+    property lpGlyphs : Win32cr::Foundation::PWSTR
+    property nGlyphs : UInt32
+    property nMaxFit : Int32
+    def initialize(@lStructSize : UInt32, @lpOutString : Win32cr::Foundation::PSTR, @lpOrder : UInt32*, @lpDx : Int32*, @lpCaretPos : Int32*, @lpClass : Win32cr::Foundation::PSTR, @lpGlyphs : Win32cr::Foundation::PWSTR, @nGlyphs : UInt32, @nMaxFit : Int32)
+    end
+  end
+
+  @[Extern]
+  struct GCP_RESULTSW
+    property lStructSize : UInt32
+    property lpOutString : Win32cr::Foundation::PWSTR
+    property lpOrder : UInt32*
+    property lpDx : Int32*
+    property lpCaretPos : Int32*
+    property lpClass : Win32cr::Foundation::PSTR
+    property lpGlyphs : Win32cr::Foundation::PWSTR
+    property nGlyphs : UInt32
+    property nMaxFit : Int32
+    def initialize(@lStructSize : UInt32, @lpOutString : Win32cr::Foundation::PWSTR, @lpOrder : UInt32*, @lpDx : Int32*, @lpCaretPos : Int32*, @lpClass : Win32cr::Foundation::PSTR, @lpGlyphs : Win32cr::Foundation::PWSTR, @nGlyphs : UInt32, @nMaxFit : Int32)
+    end
+  end
+
+  @[Extern]
+  struct RASTERIZER_STATUS
+    property nSize : Int16
+    property wFlags : Int16
+    property nLanguageID : Int16
+    def initialize(@nSize : Int16, @wFlags : Int16, @nLanguageID : Int16)
+    end
+  end
+
+  @[Extern]
+  struct WCRANGE
+    property wcLow : UInt16
+    property cGlyphs : UInt16
+    def initialize(@wcLow : UInt16, @cGlyphs : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct GLYPHSET
+    property cbThis : UInt32
+    property flAccel : UInt32
+    property cGlyphsSupported : UInt32
+    property cRanges : UInt32
+    property ranges : Win32cr::Graphics::Gdi::WCRANGE*
+    def initialize(@cbThis : UInt32, @flAccel : UInt32, @cGlyphsSupported : UInt32, @cRanges : UInt32, @ranges : Win32cr::Graphics::Gdi::WCRANGE*)
+    end
+  end
+
+  @[Extern]
+  struct DESIGNVECTOR
+    property dvReserved : UInt32
+    property dvNumAxes : UInt32
+    property dvValues : Int32[16]
+    def initialize(@dvReserved : UInt32, @dvNumAxes : UInt32, @dvValues : Int32[16])
+    end
+  end
+
+  @[Extern]
+  struct AXISINFOA
+    property axMinValue : Int32
+    property axMaxValue : Int32
+    property axAxisName : UInt8[16]
+    def initialize(@axMinValue : Int32, @axMaxValue : Int32, @axAxisName : UInt8[16])
+    end
+  end
+
+  @[Extern]
+  struct AXISINFOW
+    property axMinValue : Int32
+    property axMaxValue : Int32
+    property axAxisName : UInt16[16]
+    def initialize(@axMinValue : Int32, @axMaxValue : Int32, @axAxisName : UInt16[16])
+    end
+  end
+
+  @[Extern]
+  struct AXESLISTA
+    property axlReserved : UInt32
+    property axlNumAxes : UInt32
+    property axlAxisInfo : Win32cr::Graphics::Gdi::AXISINFOA[16]
+    def initialize(@axlReserved : UInt32, @axlNumAxes : UInt32, @axlAxisInfo : Win32cr::Graphics::Gdi::AXISINFOA[16])
+    end
+  end
+
+  @[Extern]
+  struct AXESLISTW
+    property axlReserved : UInt32
+    property axlNumAxes : UInt32
+    property axlAxisInfo : Win32cr::Graphics::Gdi::AXISINFOW[16]
+    def initialize(@axlReserved : UInt32, @axlNumAxes : UInt32, @axlAxisInfo : Win32cr::Graphics::Gdi::AXISINFOW[16])
+    end
+  end
+
+  @[Extern]
+  struct ENUMLOGFONTEXDVA
+    property elfEnumLogfontEx : Win32cr::Graphics::Gdi::ENUMLOGFONTEXA
+    property elfDesignVector : Win32cr::Graphics::Gdi::DESIGNVECTOR
+    def initialize(@elfEnumLogfontEx : Win32cr::Graphics::Gdi::ENUMLOGFONTEXA, @elfDesignVector : Win32cr::Graphics::Gdi::DESIGNVECTOR)
+    end
+  end
+
+  @[Extern]
+  struct ENUMLOGFONTEXDVW
+    property elfEnumLogfontEx : Win32cr::Graphics::Gdi::ENUMLOGFONTEXW
+    property elfDesignVector : Win32cr::Graphics::Gdi::DESIGNVECTOR
+    def initialize(@elfEnumLogfontEx : Win32cr::Graphics::Gdi::ENUMLOGFONTEXW, @elfDesignVector : Win32cr::Graphics::Gdi::DESIGNVECTOR)
+    end
+  end
+
+  @[Extern]
+  struct TRIVERTEX
+    property x : Int32
+    property y : Int32
+    property red : UInt16
+    property green : UInt16
+    property blue : UInt16
+    property alpha : UInt16
+    def initialize(@x : Int32, @y : Int32, @red : UInt16, @green : UInt16, @blue : UInt16, @alpha : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct GRADIENT_TRIANGLE
+    property vertex1 : UInt32
+    property vertex2 : UInt32
+    property vertex3 : UInt32
+    def initialize(@vertex1 : UInt32, @vertex2 : UInt32, @vertex3 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct GRADIENT_RECT
+    property upper_left : UInt32
+    property lower_right : UInt32
+    def initialize(@upper_left : UInt32, @lower_right : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct BLENDFUNCTION
+    property blend_op : UInt8
+    property blend_flags : UInt8
+    property source_constant_alpha : UInt8
+    property alpha_format : UInt8
+    def initialize(@blend_op : UInt8, @blend_flags : UInt8, @source_constant_alpha : UInt8, @alpha_format : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct DIBSECTION
+    property dsBm : Win32cr::Graphics::Gdi::BITMAP
+    property dsBmih : Win32cr::Graphics::Gdi::BITMAPINFOHEADER
+    property dsBitfields : UInt32[3]
+    property dshSection : Win32cr::Foundation::HANDLE
+    property dsOffset : UInt32
+    def initialize(@dsBm : Win32cr::Graphics::Gdi::BITMAP, @dsBmih : Win32cr::Graphics::Gdi::BITMAPINFOHEADER, @dsBitfields : UInt32[3], @dshSection : Win32cr::Foundation::HANDLE, @dsOffset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct COLORADJUSTMENT
+    property caSize : UInt16
+    property caFlags : UInt16
+    property caIlluminantIndex : UInt16
+    property caRedGamma : UInt16
+    property caGreenGamma : UInt16
+    property caBlueGamma : UInt16
+    property caReferenceBlack : UInt16
+    property caReferenceWhite : UInt16
+    property caContrast : Int16
+    property caBrightness : Int16
+    property caColorfulness : Int16
+    property caRedGreenTint : Int16
+    def initialize(@caSize : UInt16, @caFlags : UInt16, @caIlluminantIndex : UInt16, @caRedGamma : UInt16, @caGreenGamma : UInt16, @caBlueGamma : UInt16, @caReferenceBlack : UInt16, @caReferenceWhite : UInt16, @caContrast : Int16, @caBrightness : Int16, @caColorfulness : Int16, @caRedGreenTint : Int16)
+    end
+  end
+
+  @[Extern]
+  struct KERNINGPAIR
+    property wFirst : UInt16
+    property wSecond : UInt16
+    property iKernAmount : Int32
+    def initialize(@wFirst : UInt16, @wSecond : UInt16, @iKernAmount : Int32)
+    end
+  end
+
+  @[Extern]
+  struct EMR
+    property iType : UInt32
+    property nSize : UInt32
+    def initialize(@iType : UInt32, @nSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRTEXT
+    property ptlReference : Win32cr::Foundation::POINTL
+    property nChars : UInt32
+    property offString : UInt32
+    property fOptions : UInt32
+    property rcl : Win32cr::Foundation::RECTL
+    property offDx : UInt32
+    def initialize(@ptlReference : Win32cr::Foundation::POINTL, @nChars : UInt32, @offString : UInt32, @fOptions : UInt32, @rcl : Win32cr::Foundation::RECTL, @offDx : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ABORTPATH
+    property emr : Win32cr::Graphics::Gdi::EMR
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR)
+    end
+  end
+
+  @[Extern]
+  struct EMRSELECTCLIPPATH
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property iMode : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @iMode : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRSETMITERLIMIT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property eMiterLimit : Float32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @eMiterLimit : Float32)
+    end
+  end
+
+  @[Extern]
+  struct EMRRESTOREDC
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property iRelative : Int32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @iRelative : Int32)
+    end
+  end
+
+  @[Extern]
+  struct EMRSETARCDIRECTION
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property iArcDirection : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @iArcDirection : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRSETMAPPERFLAGS
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property dwFlags : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRSETTEXTCOLOR
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property crColor : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @crColor : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRSELECTOBJECT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihObject : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihObject : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRSELECTPALETTE
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihPal : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihPal : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRRESIZEPALETTE
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihPal : UInt32
+    property cEntries : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihPal : UInt32, @cEntries : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRSETPALETTEENTRIES
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihPal : UInt32
+    property iStart : UInt32
+    property cEntries : UInt32
+    property aPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihPal : UInt32, @iStart : UInt32, @cEntries : UInt32, @aPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*)
+    end
+  end
+
+  @[Extern]
+  struct EMRSETCOLORADJUSTMENT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property color_adjustment : Win32cr::Graphics::Gdi::COLORADJUSTMENT
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @color_adjustment : Win32cr::Graphics::Gdi::COLORADJUSTMENT)
+    end
+  end
+
+  @[Extern]
+  struct EMRGDICOMMENT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property cbData : UInt32
+    property data : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @cbData : UInt32, @data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct EMREOF
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property nPalEntries : UInt32
+    property offPalEntries : UInt32
+    property nSizeLast : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @nPalEntries : UInt32, @offPalEntries : UInt32, @nSizeLast : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRLINETO
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ptl : Win32cr::Foundation::POINTL
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ptl : Win32cr::Foundation::POINTL)
+    end
+  end
+
+  @[Extern]
+  struct EMROFFSETCLIPRGN
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ptlOffset : Win32cr::Foundation::POINTL
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ptlOffset : Win32cr::Foundation::POINTL)
+    end
+  end
+
+  @[Extern]
+  struct EMRFILLPATH
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL)
+    end
+  end
+
+  @[Extern]
+  struct EMREXCLUDECLIPRECT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclClip : Win32cr::Foundation::RECTL
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclClip : Win32cr::Foundation::RECTL)
+    end
+  end
+
+  @[Extern]
+  struct EMRSETVIEWPORTORGEX
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ptlOrigin : Win32cr::Foundation::POINTL
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ptlOrigin : Win32cr::Foundation::POINTL)
+    end
+  end
+
+  @[Extern]
+  struct EMRSETVIEWPORTEXTEX
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property szlExtent : Win32cr::Foundation::SIZE
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @szlExtent : Win32cr::Foundation::SIZE)
+    end
+  end
+
+  @[Extern]
+  struct EMRSCALEVIEWPORTEXTEX
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property xNum : Int32
+    property xDenom : Int32
+    property yNum : Int32
+    property yDenom : Int32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @xNum : Int32, @xDenom : Int32, @yNum : Int32, @yDenom : Int32)
+    end
+  end
+
+  @[Extern]
+  struct EMRSETWORLDTRANSFORM
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property xform : Win32cr::Graphics::Gdi::XFORM
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @xform : Win32cr::Graphics::Gdi::XFORM)
+    end
+  end
+
+  @[Extern]
+  struct EMRMODIFYWORLDTRANSFORM
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property xform : Win32cr::Graphics::Gdi::XFORM
+    property iMode : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @xform : Win32cr::Graphics::Gdi::XFORM, @iMode : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRSETPIXELV
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ptlPixel : Win32cr::Foundation::POINTL
+    property crColor : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ptlPixel : Win32cr::Foundation::POINTL, @crColor : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMREXTFLOODFILL
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ptlStart : Win32cr::Foundation::POINTL
+    property crColor : UInt32
+    property iMode : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ptlStart : Win32cr::Foundation::POINTL, @crColor : UInt32, @iMode : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRELLIPSE
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBox : Win32cr::Foundation::RECTL
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBox : Win32cr::Foundation::RECTL)
+    end
+  end
+
+  @[Extern]
+  struct EMRROUNDRECT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBox : Win32cr::Foundation::RECTL
+    property szlCorner : Win32cr::Foundation::SIZE
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBox : Win32cr::Foundation::RECTL, @szlCorner : Win32cr::Foundation::SIZE)
+    end
+  end
+
+  @[Extern]
+  struct EMRARC
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBox : Win32cr::Foundation::RECTL
+    property ptlStart : Win32cr::Foundation::POINTL
+    property ptlEnd : Win32cr::Foundation::POINTL
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBox : Win32cr::Foundation::RECTL, @ptlStart : Win32cr::Foundation::POINTL, @ptlEnd : Win32cr::Foundation::POINTL)
+    end
+  end
+
+  @[Extern]
+  struct EMRANGLEARC
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ptlCenter : Win32cr::Foundation::POINTL
+    property nRadius : UInt32
+    property eStartAngle : Float32
+    property eSweepAngle : Float32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ptlCenter : Win32cr::Foundation::POINTL, @nRadius : UInt32, @eStartAngle : Float32, @eSweepAngle : Float32)
+    end
+  end
+
+  @[Extern]
+  struct EMRPOLYLINE
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property cptl : UInt32
+    property aptl : Win32cr::Foundation::POINTL*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @cptl : UInt32, @aptl : Win32cr::Foundation::POINTL*)
+    end
+  end
+
+  @[Extern]
+  struct EMRPOLYLINE16
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property cpts : UInt32
+    property apts : Win32cr::Foundation::POINTS*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @cpts : UInt32, @apts : Win32cr::Foundation::POINTS*)
+    end
+  end
+
+  @[Extern]
+  struct EMRPOLYDRAW
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property cptl : UInt32
+    property aptl : Win32cr::Foundation::POINTL*
+    property abTypes : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @cptl : UInt32, @aptl : Win32cr::Foundation::POINTL*, @abTypes : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct EMRPOLYDRAW16
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property cpts : UInt32
+    property apts : Win32cr::Foundation::POINTS*
+    property abTypes : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @cpts : UInt32, @apts : Win32cr::Foundation::POINTS*, @abTypes : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct EMRPOLYPOLYLINE
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property nPolys : UInt32
+    property cptl : UInt32
+    property aPolyCounts : UInt32*
+    property aptl : Win32cr::Foundation::POINTL*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @nPolys : UInt32, @cptl : UInt32, @aPolyCounts : UInt32*, @aptl : Win32cr::Foundation::POINTL*)
+    end
+  end
+
+  @[Extern]
+  struct EMRPOLYPOLYLINE16
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property nPolys : UInt32
+    property cpts : UInt32
+    property aPolyCounts : UInt32*
+    property apts : Win32cr::Foundation::POINTS*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @nPolys : UInt32, @cpts : UInt32, @aPolyCounts : UInt32*, @apts : Win32cr::Foundation::POINTS*)
+    end
+  end
+
+  @[Extern]
+  struct EMRINVERTRGN
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property cbRgnData : UInt32
+    property rgn_data : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @cbRgnData : UInt32, @rgn_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct EMRFILLRGN
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property cbRgnData : UInt32
+    property ihBrush : UInt32
+    property rgn_data : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @cbRgnData : UInt32, @ihBrush : UInt32, @rgn_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct EMRFRAMERGN
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property cbRgnData : UInt32
+    property ihBrush : UInt32
+    property szlStroke : Win32cr::Foundation::SIZE
+    property rgn_data : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @cbRgnData : UInt32, @ihBrush : UInt32, @szlStroke : Win32cr::Foundation::SIZE, @rgn_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct EMREXTSELECTCLIPRGN
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property cbRgnData : UInt32
+    property iMode : UInt32
+    property rgn_data : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @cbRgnData : UInt32, @iMode : UInt32, @rgn_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct EMREXTTEXTOUTA
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property iGraphicsMode : UInt32
+    property exScale : Float32
+    property eyScale : Float32
+    property emrtext : Win32cr::Graphics::Gdi::EMRTEXT
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @iGraphicsMode : UInt32, @exScale : Float32, @eyScale : Float32, @emrtext : Win32cr::Graphics::Gdi::EMRTEXT)
+    end
+  end
+
+  @[Extern]
+  struct EMRPOLYTEXTOUTA
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property iGraphicsMode : UInt32
+    property exScale : Float32
+    property eyScale : Float32
+    property cStrings : Int32
+    property aemrtext : Win32cr::Graphics::Gdi::EMRTEXT*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @iGraphicsMode : UInt32, @exScale : Float32, @eyScale : Float32, @cStrings : Int32, @aemrtext : Win32cr::Graphics::Gdi::EMRTEXT*)
+    end
+  end
+
+  @[Extern]
+  struct EMRBITBLT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property xDest : Int32
+    property yDest : Int32
+    property cxDest : Int32
+    property cyDest : Int32
+    property dwRop : UInt32
+    property xSrc : Int32
+    property ySrc : Int32
+    property xformSrc : Win32cr::Graphics::Gdi::XFORM
+    property crBkColorSrc : UInt32
+    property iUsageSrc : UInt32
+    property offBmiSrc : UInt32
+    property cbBmiSrc : UInt32
+    property offBitsSrc : UInt32
+    property cbBitsSrc : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : UInt32, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRSTRETCHBLT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property xDest : Int32
+    property yDest : Int32
+    property cxDest : Int32
+    property cyDest : Int32
+    property dwRop : UInt32
+    property xSrc : Int32
+    property ySrc : Int32
+    property xformSrc : Win32cr::Graphics::Gdi::XFORM
+    property crBkColorSrc : UInt32
+    property iUsageSrc : UInt32
+    property offBmiSrc : UInt32
+    property cbBmiSrc : UInt32
+    property offBitsSrc : UInt32
+    property cbBitsSrc : UInt32
+    property cxSrc : Int32
+    property cySrc : Int32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : UInt32, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @cxSrc : Int32, @cySrc : Int32)
+    end
+  end
+
+  @[Extern]
+  struct EMRMASKBLT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property xDest : Int32
+    property yDest : Int32
+    property cxDest : Int32
+    property cyDest : Int32
+    property dwRop : UInt32
+    property xSrc : Int32
+    property ySrc : Int32
+    property xformSrc : Win32cr::Graphics::Gdi::XFORM
+    property crBkColorSrc : UInt32
+    property iUsageSrc : UInt32
+    property offBmiSrc : UInt32
+    property cbBmiSrc : UInt32
+    property offBitsSrc : UInt32
+    property cbBitsSrc : UInt32
+    property xMask : Int32
+    property yMask : Int32
+    property iUsageMask : UInt32
+    property offBmiMask : UInt32
+    property cbBmiMask : UInt32
+    property offBitsMask : UInt32
+    property cbBitsMask : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : UInt32, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @xMask : Int32, @yMask : Int32, @iUsageMask : UInt32, @offBmiMask : UInt32, @cbBmiMask : UInt32, @offBitsMask : UInt32, @cbBitsMask : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRPLGBLT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property aptlDest : Win32cr::Foundation::POINTL[3]
+    property xSrc : Int32
+    property ySrc : Int32
+    property cxSrc : Int32
+    property cySrc : Int32
+    property xformSrc : Win32cr::Graphics::Gdi::XFORM
+    property crBkColorSrc : UInt32
+    property iUsageSrc : UInt32
+    property offBmiSrc : UInt32
+    property cbBmiSrc : UInt32
+    property offBitsSrc : UInt32
+    property cbBitsSrc : UInt32
+    property xMask : Int32
+    property yMask : Int32
+    property iUsageMask : UInt32
+    property offBmiMask : UInt32
+    property cbBmiMask : UInt32
+    property offBitsMask : UInt32
+    property cbBitsMask : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @aptlDest : Win32cr::Foundation::POINTL[3], @xSrc : Int32, @ySrc : Int32, @cxSrc : Int32, @cySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : UInt32, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @xMask : Int32, @yMask : Int32, @iUsageMask : UInt32, @offBmiMask : UInt32, @cbBmiMask : UInt32, @offBitsMask : UInt32, @cbBitsMask : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRSETDIBITSTODEVICE
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property xDest : Int32
+    property yDest : Int32
+    property xSrc : Int32
+    property ySrc : Int32
+    property cxSrc : Int32
+    property cySrc : Int32
+    property offBmiSrc : UInt32
+    property cbBmiSrc : UInt32
+    property offBitsSrc : UInt32
+    property cbBitsSrc : UInt32
+    property iUsageSrc : UInt32
+    property iStartScan : UInt32
+    property cScans : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @xSrc : Int32, @ySrc : Int32, @cxSrc : Int32, @cySrc : Int32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @iUsageSrc : UInt32, @iStartScan : UInt32, @cScans : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRSTRETCHDIBITS
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property xDest : Int32
+    property yDest : Int32
+    property xSrc : Int32
+    property ySrc : Int32
+    property cxSrc : Int32
+    property cySrc : Int32
+    property offBmiSrc : UInt32
+    property cbBmiSrc : UInt32
+    property offBitsSrc : UInt32
+    property cbBitsSrc : UInt32
+    property iUsageSrc : UInt32
+    property dwRop : UInt32
+    property cxDest : Int32
+    property cyDest : Int32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @xSrc : Int32, @ySrc : Int32, @cxSrc : Int32, @cySrc : Int32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @iUsageSrc : UInt32, @dwRop : UInt32, @cxDest : Int32, @cyDest : Int32)
+    end
+  end
+
+  @[Extern]
+  struct EMREXTCREATEFONTINDIRECTW
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihFont : UInt32
+    property elfw : Win32cr::Graphics::Gdi::EXTLOGFONTW
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihFont : UInt32, @elfw : Win32cr::Graphics::Gdi::EXTLOGFONTW)
+    end
+  end
+
+  @[Extern]
+  struct EMRCREATEPALETTE
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihPal : UInt32
+    property lgpl : Win32cr::Graphics::Gdi::LOGPALETTE
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihPal : UInt32, @lgpl : Win32cr::Graphics::Gdi::LOGPALETTE)
+    end
+  end
+
+  @[Extern]
+  struct EMRCREATEPEN
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihPen : UInt32
+    property lopn : Win32cr::Graphics::Gdi::LOGPEN
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihPen : UInt32, @lopn : Win32cr::Graphics::Gdi::LOGPEN)
+    end
+  end
+
+  @[Extern]
+  struct EMREXTCREATEPEN
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihPen : UInt32
+    property offBmi : UInt32
+    property cbBmi : UInt32
+    property offBits : UInt32
+    property cbBits : UInt32
+    property elp : Win32cr::Graphics::Gdi::EXTLOGPEN32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihPen : UInt32, @offBmi : UInt32, @cbBmi : UInt32, @offBits : UInt32, @cbBits : UInt32, @elp : Win32cr::Graphics::Gdi::EXTLOGPEN32)
+    end
+  end
+
+  @[Extern]
+  struct EMRCREATEBRUSHINDIRECT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihBrush : UInt32
+    property lb : Win32cr::Graphics::Gdi::LOGBRUSH32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihBrush : UInt32, @lb : Win32cr::Graphics::Gdi::LOGBRUSH32)
+    end
+  end
+
+  @[Extern]
+  struct EMRCREATEMONOBRUSH
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihBrush : UInt32
+    property iUsage : UInt32
+    property offBmi : UInt32
+    property cbBmi : UInt32
+    property offBits : UInt32
+    property cbBits : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihBrush : UInt32, @iUsage : UInt32, @offBmi : UInt32, @cbBmi : UInt32, @offBits : UInt32, @cbBits : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRCREATEDIBPATTERNBRUSHPT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihBrush : UInt32
+    property iUsage : UInt32
+    property offBmi : UInt32
+    property cbBmi : UInt32
+    property offBits : UInt32
+    property cbBits : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihBrush : UInt32, @iUsage : UInt32, @offBmi : UInt32, @cbBmi : UInt32, @offBits : UInt32, @cbBits : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRFORMAT
+    property dSignature : UInt32
+    property nVersion : UInt32
+    property cbData : UInt32
+    property offData : UInt32
+    def initialize(@dSignature : UInt32, @nVersion : UInt32, @cbData : UInt32, @offData : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRGLSRECORD
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property cbData : UInt32
+    property data : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @cbData : UInt32, @data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct EMRGLSBOUNDEDRECORD
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property cbData : UInt32
+    property data : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @cbData : UInt32, @data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct EMRSETCOLORSPACE
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihCS : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihCS : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMREXTESCAPE
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property iEscape : Int32
+    property cbEscData : Int32
+    property esc_data : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @iEscape : Int32, @cbEscData : Int32, @esc_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct EMRNAMEDESCAPE
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property iEscape : Int32
+    property cbDriver : Int32
+    property cbEscData : Int32
+    property esc_data : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @iEscape : Int32, @cbDriver : Int32, @cbEscData : Int32, @esc_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct EMRSETICMPROFILE
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property dwFlags : UInt32
+    property cbName : UInt32
+    property cbData : UInt32
+    property data : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @dwFlags : UInt32, @cbName : UInt32, @cbData : UInt32, @data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct COLORMATCHTOTARGET
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property dwAction : UInt32
+    property dwFlags : UInt32
+    property cbName : UInt32
+    property cbData : UInt32
+    property data : UInt8*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @dwAction : UInt32, @dwFlags : UInt32, @cbName : UInt32, @cbData : UInt32, @data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct COLORCORRECTPALETTE
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property ihPalette : UInt32
+    property nFirstEntry : UInt32
+    property nPalEntries : UInt32
+    property nReserved : UInt32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ihPalette : UInt32, @nFirstEntry : UInt32, @nPalEntries : UInt32, @nReserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EMRALPHABLEND
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property xDest : Int32
+    property yDest : Int32
+    property cxDest : Int32
+    property cyDest : Int32
+    property dwRop : UInt32
+    property xSrc : Int32
+    property ySrc : Int32
+    property xformSrc : Win32cr::Graphics::Gdi::XFORM
+    property crBkColorSrc : UInt32
+    property iUsageSrc : UInt32
+    property offBmiSrc : UInt32
+    property cbBmiSrc : UInt32
+    property offBitsSrc : UInt32
+    property cbBitsSrc : UInt32
+    property cxSrc : Int32
+    property cySrc : Int32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : UInt32, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @cxSrc : Int32, @cySrc : Int32)
+    end
+  end
+
+  @[Extern]
+  struct EMRGRADIENTFILL
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property nVer : UInt32
+    property nTri : UInt32
+    property ulMode : Win32cr::Graphics::Gdi::GRADIENT_FILL
+    property ver : Win32cr::Graphics::Gdi::TRIVERTEX*
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @nVer : UInt32, @nTri : UInt32, @ulMode : Win32cr::Graphics::Gdi::GRADIENT_FILL, @ver : Win32cr::Graphics::Gdi::TRIVERTEX*)
+    end
+  end
+
+  @[Extern]
+  struct EMRTRANSPARENTBLT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property rclBounds : Win32cr::Foundation::RECTL
+    property xDest : Int32
+    property yDest : Int32
+    property cxDest : Int32
+    property cyDest : Int32
+    property dwRop : UInt32
+    property xSrc : Int32
+    property ySrc : Int32
+    property xformSrc : Win32cr::Graphics::Gdi::XFORM
+    property crBkColorSrc : UInt32
+    property iUsageSrc : UInt32
+    property offBmiSrc : UInt32
+    property cbBmiSrc : UInt32
+    property offBitsSrc : UInt32
+    property cbBitsSrc : UInt32
+    property cxSrc : Int32
+    property cySrc : Int32
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : UInt32, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @cxSrc : Int32, @cySrc : Int32)
+    end
+  end
+
+  @[Extern]
+  struct WGLSWAP
+    property hdc : Win32cr::Graphics::Gdi::HDC
+    property uiFlags : UInt32
+    def initialize(@hdc : Win32cr::Graphics::Gdi::HDC, @uiFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct TTLOADINFO
+    property usStructSize : UInt16
+    property usRefStrSize : UInt16
+    property pusRefStr : UInt16*
+    def initialize(@usStructSize : UInt16, @usRefStrSize : UInt16, @pusRefStr : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct TTEMBEDINFO
+    property usStructSize : UInt16
+    property usRootStrSize : UInt16
+    property pusRootStr : UInt16*
+    def initialize(@usStructSize : UInt16, @usRootStrSize : UInt16, @pusRootStr : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct TTVALIDATIONTESTSPARAMS
+    property ulStructSize : UInt32
+    property lTestFromSize : Int32
+    property lTestToSize : Int32
+    property ulCharSet : UInt32
+    property usReserved1 : UInt16
+    property usCharCodeCount : UInt16
+    property pusCharCodeSet : UInt16*
+    def initialize(@ulStructSize : UInt32, @lTestFromSize : Int32, @lTestToSize : Int32, @ulCharSet : UInt32, @usReserved1 : UInt16, @usCharCodeCount : UInt16, @pusCharCodeSet : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct TTVALIDATIONTESTSPARAMSEX
+    property ulStructSize : UInt32
+    property lTestFromSize : Int32
+    property lTestToSize : Int32
+    property ulCharSet : UInt32
+    property usReserved1 : UInt16
+    property usCharCodeCount : UInt16
+    property pulCharCodeSet : UInt32*
+    def initialize(@ulStructSize : UInt32, @lTestFromSize : Int32, @lTestToSize : Int32, @ulCharSet : UInt32, @usReserved1 : UInt16, @usCharCodeCount : UInt16, @pulCharCodeSet : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct PAINTSTRUCT
+    property hdc : Win32cr::Graphics::Gdi::HDC
+    property fErase : Win32cr::Foundation::BOOL
+    property rcPaint : Win32cr::Foundation::RECT
+    property fRestore : Win32cr::Foundation::BOOL
+    property fIncUpdate : Win32cr::Foundation::BOOL
+    property rgbReserved : UInt8[32]
+    def initialize(@hdc : Win32cr::Graphics::Gdi::HDC, @fErase : Win32cr::Foundation::BOOL, @rcPaint : Win32cr::Foundation::RECT, @fRestore : Win32cr::Foundation::BOOL, @fIncUpdate : Win32cr::Foundation::BOOL, @rgbReserved : UInt8[32])
+    end
+  end
+
+  @[Extern]
+  struct DRAWTEXTPARAMS
+    property cbSize : UInt32
+    property iTabLength : Int32
+    property iLeftMargin : Int32
+    property iRightMargin : Int32
+    property uiLengthDrawn : UInt32
+    def initialize(@cbSize : UInt32, @iTabLength : Int32, @iLeftMargin : Int32, @iRightMargin : Int32, @uiLengthDrawn : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MONITORINFO
+    property cbSize : UInt32
+    property rcMonitor : Win32cr::Foundation::RECT
+    property rcWork : Win32cr::Foundation::RECT
+    property dwFlags : UInt32
+    def initialize(@cbSize : UInt32, @rcMonitor : Win32cr::Foundation::RECT, @rcWork : Win32cr::Foundation::RECT, @dwFlags : UInt32)
+    end
+  end
 
   @[Link("gdi32")]
   @[Link("msimg32")]

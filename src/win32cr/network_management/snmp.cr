@@ -1,25 +1,25 @@
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::Snmp
-  alias PFNSNMPEXTENSIONINIT = Proc(UInt32, Win32cr::Foundation::HANDLE*, Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, Win32cr::Foundation::BOOL)*
+  alias PFNSNMPEXTENSIONINIT = Proc(UInt32, Win32cr::Foundation::HANDLE*, Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, Win32cr::Foundation::BOOL)
 
-  alias PFNSNMPEXTENSIONINITEX = Proc(Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, Win32cr::Foundation::BOOL)*
+  alias PFNSNMPEXTENSIONINITEX = Proc(Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, Win32cr::Foundation::BOOL)
 
-  alias PFNSNMPEXTENSIONMONITOR = Proc(Void*, Win32cr::Foundation::BOOL)*
+  alias PFNSNMPEXTENSIONMONITOR = Proc(Void*, Win32cr::Foundation::BOOL)
 
-  alias PFNSNMPEXTENSIONQUERY = Proc(UInt8, Win32cr::NetworkManagement::Snmp::SnmpVarBindList*, Int32*, Int32*, Win32cr::Foundation::BOOL)*
+  alias PFNSNMPEXTENSIONQUERY = Proc(UInt8, Win32cr::NetworkManagement::Snmp::SnmpVarBindList*, Int32*, Int32*, Win32cr::Foundation::BOOL)
 
-  alias PFNSNMPEXTENSIONQUERYEX = Proc(UInt32, UInt32, Win32cr::NetworkManagement::Snmp::SnmpVarBindList*, Win32cr::NetworkManagement::Snmp::AsnOctetString*, Int32*, Int32*, Win32cr::Foundation::BOOL)*
+  alias PFNSNMPEXTENSIONQUERYEX = Proc(UInt32, UInt32, Win32cr::NetworkManagement::Snmp::SnmpVarBindList*, Win32cr::NetworkManagement::Snmp::AsnOctetString*, Int32*, Int32*, Win32cr::Foundation::BOOL)
 
-  alias PFNSNMPEXTENSIONTRAP = Proc(Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, Int32*, Int32*, UInt32*, Win32cr::NetworkManagement::Snmp::SnmpVarBindList*, Win32cr::Foundation::BOOL)*
+  alias PFNSNMPEXTENSIONTRAP = Proc(Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, Int32*, Int32*, UInt32*, Win32cr::NetworkManagement::Snmp::SnmpVarBindList*, Win32cr::Foundation::BOOL)
 
-  alias PFNSNMPEXTENSIONCLOSE = Proc(Void)*
+  alias PFNSNMPEXTENSIONCLOSE = Proc(Void)
 
-  alias SNMPAPI_CALLBACK = Proc(LibC::IntPtrT, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Void*, UInt32)*
+  alias SNMPAPI_CALLBACK = Proc(LibC::IntPtrT, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Void*, UInt32)
 
-  alias PFNSNMPSTARTUPEX = Proc(UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32)*
+  alias PFNSNMPSTARTUPEX = Proc(UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32)
 
-  alias PFNSNMPCLEANUPEX = Proc(UInt32)*
+  alias PFNSNMPCLEANUPEX = Proc(UInt32)
 
   ASN_UNIVERSAL = 0_u32
   ASN_APPLICATION = 64_u32
@@ -205,88 +205,122 @@ module Win32cr::NetworkManagement::Snmp
   end
 
   @[Extern]
-  record AsnOctetString,
-    stream : UInt8*,
-    length : UInt32,
-    dynamic : Win32cr::Foundation::BOOL
+  struct AsnOctetString
+    property stream : UInt8*
+    property length : UInt32
+    property dynamic : Win32cr::Foundation::BOOL
+    def initialize(@stream : UInt8*, @length : UInt32, @dynamic : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record AsnObjectIdentifier,
-    idLength : UInt32,
-    ids : UInt32*
+  struct AsnObjectIdentifier
+    property idLength : UInt32
+    property ids : UInt32*
+    def initialize(@idLength : UInt32, @ids : UInt32*)
+    end
+  end
 
   @[Extern]
-  record AsnAny,
-    asnType : UInt8,
-    asnValue : Asnvalue_e__union_ do
+  struct AsnAny
+    property asnType : UInt8
+    property asnValue : Asnvalue_e__union_
 
     # Nested Type Asnvalue_e__union_
     @[Extern(union: true)]
-    record Asnvalue_e__union_,
-      number : Int32,
-      unsigned32 : UInt32,
-      counter64 : Win32cr::Foundation::ULARGE_INTEGER,
-      string : Win32cr::NetworkManagement::Snmp::AsnOctetString,
-      bits : Win32cr::NetworkManagement::Snmp::AsnOctetString,
-      object : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier,
-      sequence : Win32cr::NetworkManagement::Snmp::AsnOctetString,
-      address : Win32cr::NetworkManagement::Snmp::AsnOctetString,
-      counter : UInt32,
-      gauge : UInt32,
-      ticks : UInt32,
-      arbitrary : Win32cr::NetworkManagement::Snmp::AsnOctetString
+    struct Asnvalue_e__union_
+    property number : Int32
+    property unsigned32 : UInt32
+    property counter64 : Win32cr::Foundation::ULARGE_INTEGER
+    property string : Win32cr::NetworkManagement::Snmp::AsnOctetString
+    property bits : Win32cr::NetworkManagement::Snmp::AsnOctetString
+    property object : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier
+    property sequence : Win32cr::NetworkManagement::Snmp::AsnOctetString
+    property address : Win32cr::NetworkManagement::Snmp::AsnOctetString
+    property counter : UInt32
+    property gauge : UInt32
+    property ticks : UInt32
+    property arbitrary : Win32cr::NetworkManagement::Snmp::AsnOctetString
+    def initialize(@number : Int32, @unsigned32 : UInt32, @counter64 : Win32cr::Foundation::ULARGE_INTEGER, @string : Win32cr::NetworkManagement::Snmp::AsnOctetString, @bits : Win32cr::NetworkManagement::Snmp::AsnOctetString, @object : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier, @sequence : Win32cr::NetworkManagement::Snmp::AsnOctetString, @address : Win32cr::NetworkManagement::Snmp::AsnOctetString, @counter : UInt32, @gauge : UInt32, @ticks : UInt32, @arbitrary : Win32cr::NetworkManagement::Snmp::AsnOctetString)
+    end
+    end
 
+    def initialize(@asnType : UInt8, @asnValue : Asnvalue_e__union_)
+    end
   end
 
   @[Extern]
-  record SnmpVarBind,
-    name : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier,
-    value : Win32cr::NetworkManagement::Snmp::AsnAny
+  struct SnmpVarBind
+    property name : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier
+    property value : Win32cr::NetworkManagement::Snmp::AsnAny
+    def initialize(@name : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier, @value : Win32cr::NetworkManagement::Snmp::AsnAny)
+    end
+  end
 
   @[Extern]
-  record SnmpVarBindList,
-    list : Win32cr::NetworkManagement::Snmp::SnmpVarBind*,
-    len : UInt32
+  struct SnmpVarBindList
+    property list : Win32cr::NetworkManagement::Snmp::SnmpVarBind*
+    property len : UInt32
+    def initialize(@list : Win32cr::NetworkManagement::Snmp::SnmpVarBind*, @len : UInt32)
+    end
+  end
 
   @[Extern]
-  record Smioctets,
-    len : UInt32,
-    ptr : UInt8*
+  struct Smioctets
+    property len : UInt32
+    property ptr : UInt8*
+    def initialize(@len : UInt32, @ptr : UInt8*)
+    end
+  end
 
   @[Extern]
-  record Smioid,
-    len : UInt32,
-    ptr : UInt32*
+  struct Smioid
+    property len : UInt32
+    property ptr : UInt32*
+    def initialize(@len : UInt32, @ptr : UInt32*)
+    end
+  end
 
   @[Extern]
-  record Smicntr64,
-    hipart : UInt32,
-    lopart : UInt32
+  struct Smicntr64
+    property hipart : UInt32
+    property lopart : UInt32
+    def initialize(@hipart : UInt32, @lopart : UInt32)
+    end
+  end
 
   @[Extern]
-  record Smivalue,
-    syntax : UInt32,
-    value : Value_e__union_ do
+  struct Smivalue
+    property syntax : UInt32
+    property value : Value_e__union_
 
     # Nested Type Value_e__union_
     @[Extern(union: true)]
-    record Value_e__union_,
-      sNumber : Int32,
-      uNumber : UInt32,
-      hNumber : Win32cr::NetworkManagement::Snmp::Smicntr64,
-      string : Win32cr::NetworkManagement::Snmp::Smioctets,
-      oid : Win32cr::NetworkManagement::Snmp::Smioid,
-      empty : UInt8
+    struct Value_e__union_
+    property sNumber : Int32
+    property uNumber : UInt32
+    property hNumber : Win32cr::NetworkManagement::Snmp::Smicntr64
+    property string : Win32cr::NetworkManagement::Snmp::Smioctets
+    property oid : Win32cr::NetworkManagement::Snmp::Smioid
+    property empty : UInt8
+    def initialize(@sNumber : Int32, @uNumber : UInt32, @hNumber : Win32cr::NetworkManagement::Snmp::Smicntr64, @string : Win32cr::NetworkManagement::Snmp::Smioctets, @oid : Win32cr::NetworkManagement::Snmp::Smioid, @empty : UInt8)
+    end
+    end
 
+    def initialize(@syntax : UInt32, @value : Value_e__union_)
+    end
   end
 
   @[Extern]
-  record Smivendorinfo,
-    vendorName : Win32cr::Foundation::CHAR[64],
-    vendorContact : Win32cr::Foundation::CHAR[64],
-    vendorVersionId : Win32cr::Foundation::CHAR[32],
-    vendorVersionDate : Win32cr::Foundation::CHAR[32],
-    vendorEnterprise : UInt32
+  struct Smivendorinfo
+    property vendorName : Win32cr::Foundation::CHAR[64]
+    property vendorContact : Win32cr::Foundation::CHAR[64]
+    property vendorVersionId : Win32cr::Foundation::CHAR[32]
+    property vendorVersionDate : Win32cr::Foundation::CHAR[32]
+    property vendorEnterprise : UInt32
+    def initialize(@vendorName : Win32cr::Foundation::CHAR[64], @vendorContact : Win32cr::Foundation::CHAR[64], @vendorVersionId : Win32cr::Foundation::CHAR[32], @vendorVersionDate : Win32cr::Foundation::CHAR[32], @vendorEnterprise : UInt32)
+    end
+  end
 
   @[Link("snmpapi")]
   @[Link("mgmtapi")]

@@ -20,7 +20,6 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  #@[Com("fd04e6e3-fe0c-4c3c-ab19-a07601a576ee")]
   record ICompositionDrawingSurfaceInterop, lpVtbl : ICompositionDrawingSurfaceInteropVtbl* do
     GUID = LibC::GUID.new(0xfd04e6e3_u32, 0xfe0c_u16, 0x4c3c_u16, StaticArray[0xab_u8, 0x19_u8, 0xa0_u8, 0x76_u8, 0x1_u8, 0xa5_u8, 0x76_u8, 0xee_u8])
     def query_interface(this : ICompositionDrawingSurfaceInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -68,7 +67,6 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  #@[Com("41e64aae-98c0-4239-8e95-a330dd6aa18b")]
   record ICompositionDrawingSurfaceInterop2, lpVtbl : ICompositionDrawingSurfaceInterop2Vtbl* do
     GUID = LibC::GUID.new(0x41e64aae_u32, 0x98c0_u16, 0x4239_u16, StaticArray[0x8e_u8, 0x95_u8, 0xa3_u8, 0x30_u8, 0xdd_u8, 0x6a_u8, 0xa1_u8, 0x8b_u8])
     def query_interface(this : ICompositionDrawingSurfaceInterop2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -114,7 +112,6 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  #@[Com("a116ff71-f8bf-4c8a-9c98-70779a32a9c8")]
   record ICompositionGraphicsDeviceInterop, lpVtbl : ICompositionGraphicsDeviceInteropVtbl* do
     GUID = LibC::GUID.new(0xa116ff71_u32, 0xf8bf_u16, 0x4c8a_u16, StaticArray[0x9c_u8, 0x98_u8, 0x70_u8, 0x77_u8, 0x9a_u8, 0x32_u8, 0xa9_u8, 0xc8_u8])
     def query_interface(this : ICompositionGraphicsDeviceInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -146,7 +143,6 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  #@[Com("25297d5c-3ad4-4c9c-b5cf-e36a38512330")]
   record ICompositorInterop, lpVtbl : ICompositorInteropVtbl* do
     GUID = LibC::GUID.new(0x25297d5c_u32, 0x3ad4_u16, 0x4c9c_u16, StaticArray[0xb5_u8, 0xcf_u8, 0xe3_u8, 0x6a_u8, 0x38_u8, 0x51_u8, 0x23_u8, 0x30_u8])
     def query_interface(this : ICompositorInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -179,7 +175,6 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  #@[Com("26f496a0-7f38-45fb-88f7-faaabe67dd59")]
   record ISwapChainInterop, lpVtbl : ISwapChainInteropVtbl* do
     GUID = LibC::GUID.new(0x26f496a0_u32, 0x7f38_u16, 0x45fb_u16, StaticArray[0x88_u8, 0xf7_u8, 0xfa_u8, 0xaa_u8, 0xbe_u8, 0x67_u8, 0xdd_u8, 0x59_u8])
     def query_interface(this : ISwapChainInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -206,7 +201,6 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  #@[Com("11f62cd1-2f9d-42d3-b05f-d6790d9e9f8e")]
   record IVisualInteractionSourceInterop, lpVtbl : IVisualInteractionSourceInteropVtbl* do
     GUID = LibC::GUID.new(0x11f62cd1_u32, 0x2f9d_u16, 0x42d3_u16, StaticArray[0xb0_u8, 0x5f_u8, 0xd6_u8, 0x79_u8, 0xd_u8, 0x9e_u8, 0x9f_u8, 0x8e_u8])
     def query_interface(this : IVisualInteractionSourceInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -236,7 +230,6 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  #@[Com("2c9db356-e70d-4642-8298-bc4aa5b4865c")]
   record ICompositionCapabilitiesInteropFactory, lpVtbl : ICompositionCapabilitiesInteropFactoryVtbl* do
     GUID = LibC::GUID.new(0x2c9db356_u32, 0xe70d_u16, 0x4642_u16, StaticArray[0x82_u8, 0x98_u8, 0xbc_u8, 0x4a_u8, 0xa5_u8, 0xb4_u8, 0x86_u8, 0x5c_u8])
     def query_interface(this : ICompositionCapabilitiesInteropFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -273,7 +266,6 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  #@[Com("29e691fa-4567-4dca-b319-d0f207eb6807")]
   record ICompositorDesktopInterop, lpVtbl : ICompositorDesktopInteropVtbl* do
     GUID = LibC::GUID.new(0x29e691fa_u32, 0x4567_u16, 0x4dca_u16, StaticArray[0xb3_u8, 0x19_u8, 0xd0_u8, 0xf2_u8, 0x7_u8, 0xeb_u8, 0x68_u8, 0x7_u8])
     def query_interface(this : ICompositorDesktopInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -303,7 +295,6 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  #@[Com("35dbf59e-e3f9-45b0-81e7-fe75f4145dc9")]
   record IDesktopWindowTargetInterop, lpVtbl : IDesktopWindowTargetInteropVtbl* do
     GUID = LibC::GUID.new(0x35dbf59e_u32, 0xe3f9_u16, 0x45b0_u16, StaticArray[0x81_u8, 0xe7_u8, 0xfe_u8, 0x75_u8, 0xf4_u8, 0x14_u8, 0x5d_u8, 0xc9_u8])
     def query_interface(this : IDesktopWindowTargetInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

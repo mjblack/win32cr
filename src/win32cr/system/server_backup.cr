@@ -17,31 +17,43 @@ module Win32cr::System::ServerBackup
   end
 
   @[Extern]
-  record WSB_OB_STATUS_ENTRY_VALUE_TYPE_PAIR,
-    m_wszObStatusEntryPairValue : Win32cr::Foundation::PWSTR,
-    m_ObStatusEntryPairType : Win32cr::System::ServerBackup::WSB_OB_STATUS_ENTRY_PAIR_TYPE
+  struct WSB_OB_STATUS_ENTRY_VALUE_TYPE_PAIR
+    property m_wszObStatusEntryPairValue : Win32cr::Foundation::PWSTR
+    property m_ObStatusEntryPairType : Win32cr::System::ServerBackup::WSB_OB_STATUS_ENTRY_PAIR_TYPE
+    def initialize(@m_wszObStatusEntryPairValue : Win32cr::Foundation::PWSTR, @m_ObStatusEntryPairType : Win32cr::System::ServerBackup::WSB_OB_STATUS_ENTRY_PAIR_TYPE)
+    end
+  end
 
   @[Extern]
-  record WSB_OB_STATUS_ENTRY,
-    m_dwIcon : UInt32,
-    m_dwStatusEntryName : UInt32,
-    m_dwStatusEntryValue : UInt32,
-    m_cValueTypePair : UInt32,
-    m_rgValueTypePair : Win32cr::System::ServerBackup::WSB_OB_STATUS_ENTRY_VALUE_TYPE_PAIR*
+  struct WSB_OB_STATUS_ENTRY
+    property m_dwIcon : UInt32
+    property m_dwStatusEntryName : UInt32
+    property m_dwStatusEntryValue : UInt32
+    property m_cValueTypePair : UInt32
+    property m_rgValueTypePair : Win32cr::System::ServerBackup::WSB_OB_STATUS_ENTRY_VALUE_TYPE_PAIR*
+    def initialize(@m_dwIcon : UInt32, @m_dwStatusEntryName : UInt32, @m_dwStatusEntryValue : UInt32, @m_cValueTypePair : UInt32, @m_rgValueTypePair : Win32cr::System::ServerBackup::WSB_OB_STATUS_ENTRY_VALUE_TYPE_PAIR*)
+    end
+  end
 
   @[Extern]
-  record WSB_OB_STATUS_INFO,
-    m_guidSnapinId : LibC::GUID,
-    m_cStatusEntry : UInt32,
-    m_rgStatusEntry : Win32cr::System::ServerBackup::WSB_OB_STATUS_ENTRY*
+  struct WSB_OB_STATUS_INFO
+    property m_guidSnapinId : LibC::GUID
+    property m_cStatusEntry : UInt32
+    property m_rgStatusEntry : Win32cr::System::ServerBackup::WSB_OB_STATUS_ENTRY*
+    def initialize(@m_guidSnapinId : LibC::GUID, @m_cStatusEntry : UInt32, @m_rgStatusEntry : Win32cr::System::ServerBackup::WSB_OB_STATUS_ENTRY*)
+    end
+  end
 
   @[Extern]
-  record WSB_OB_REGISTRATION_INFO,
-    m_wszResourceDLL : Win32cr::Foundation::PWSTR,
-    m_guidSnapinId : LibC::GUID,
-    m_dwProviderName : UInt32,
-    m_dwProviderIcon : UInt32,
-    m_bSupportsRemoting : Win32cr::Foundation::BOOLEAN
+  struct WSB_OB_REGISTRATION_INFO
+    property m_wszResourceDLL : Win32cr::Foundation::PWSTR
+    property m_guidSnapinId : LibC::GUID
+    property m_dwProviderName : UInt32
+    property m_dwProviderIcon : UInt32
+    property m_bSupportsRemoting : Win32cr::Foundation::BOOLEAN
+    def initialize(@m_wszResourceDLL : Win32cr::Foundation::PWSTR, @m_guidSnapinId : LibC::GUID, @m_dwProviderName : UInt32, @m_dwProviderIcon : UInt32, @m_bSupportsRemoting : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
   record IWsbApplicationBackupSupportVtbl,
@@ -52,7 +64,6 @@ module Win32cr::System::ServerBackup
 
 
   @[Extern]
-  #@[Com("1eff3510-4a27-46ad-b9e0-08332f0f4f6d")]
   record IWsbApplicationBackupSupport, lpVtbl : IWsbApplicationBackupSupportVtbl* do
     GUID = LibC::GUID.new(0x1eff3510_u32, 0x4a27_u16, 0x46ad_u16, StaticArray[0xb9_u8, 0xe0_u8, 0x8_u8, 0x33_u8, 0x2f_u8, 0xf_u8, 0x4f_u8, 0x6d_u8])
     def query_interface(this : IWsbApplicationBackupSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -82,7 +93,6 @@ module Win32cr::System::ServerBackup
 
 
   @[Extern]
-  #@[Com("8d3bdb38-4ee8-4718-85f9-c7dbc4ab77aa")]
   record IWsbApplicationRestoreSupport, lpVtbl : IWsbApplicationRestoreSupportVtbl* do
     GUID = LibC::GUID.new(0x8d3bdb38_u32, 0x4ee8_u16, 0x4718_u16, StaticArray[0x85_u8, 0xf9_u8, 0xc7_u8, 0xdb_u8, 0xc4_u8, 0xab_u8, 0x77_u8, 0xaa_u8])
     def query_interface(this : IWsbApplicationRestoreSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -119,7 +129,6 @@ module Win32cr::System::ServerBackup
 
 
   @[Extern]
-  #@[Com("0843f6f7-895c-44a6-b0c2-05a5022aa3a1")]
   record IWsbApplicationAsync, lpVtbl : IWsbApplicationAsyncVtbl* do
     GUID = LibC::GUID.new(0x843f6f7_u32, 0x895c_u16, 0x44a6_u16, StaticArray[0xb0_u8, 0xc2_u8, 0x5_u8, 0xa5_u8, 0x2_u8, 0x2a_u8, 0xa3_u8, 0xa1_u8])
     def query_interface(this : IWsbApplicationAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

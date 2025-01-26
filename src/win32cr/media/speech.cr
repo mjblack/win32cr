@@ -5,7 +5,7 @@ require "./audio.cr"
 require "./../system/com/urlmon.cr"
 
 module Win32cr::Media::Speech
-  alias SPNOTIFYCALLBACK = Proc(Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Void)*
+  alias SPNOTIFYCALLBACK = Proc(Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Void)
 
   SPDUI_EngineProperties = "EngineProperties"
   SPDUI_AddRemoveWord = "AddRemoveWord"
@@ -1354,320 +1354,435 @@ module Win32cr::Media::Speech
   end
 
   @[Extern]
-  record SPEVENT,
-    _bitfield : Int32,
-    ulStreamNum : UInt32,
-    ullAudioStreamOffset : UInt64,
-    wParam : Win32cr::Foundation::WPARAM,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record SPSERIALIZEDEVENT,
-    _bitfield : Int32,
-    ulStreamNum : UInt32,
-    ullAudioStreamOffset : UInt64,
-    serializedw_param : UInt32,
-    serializedl_param : Int32
-
-  @[Extern]
-  record SPSERIALIZEDEVENT64,
-    _bitfield : Int32,
-    ulStreamNum : UInt32,
-    ullAudioStreamOffset : UInt64,
-    serializedw_param : UInt64,
-    serializedl_param : Int64
-
-  @[Extern]
-  record SPEVENTEX,
-    _bitfield : Int32,
-    ulStreamNum : UInt32,
-    ullAudioStreamOffset : UInt64,
-    wParam : Win32cr::Foundation::WPARAM,
-    lParam : Win32cr::Foundation::LPARAM,
-    ullAudioTimeOffset : UInt64
-
-  @[Extern]
-  record SPEVENTSOURCEINFO,
-    ullEventInterest : UInt64,
-    ullQueuedInterest : UInt64,
-    ulCount : UInt32
-
-  @[Extern]
-  record SPAUDIOSTATUS,
-    cbFreeBuffSpace : Int32,
-    cbNonBlockingIO : UInt32,
-    state : Win32cr::Media::Speech::SPAUDIOSTATE,
-    cur_seek_pos : UInt64,
-    cur_device_pos : UInt64,
-    dwAudioLevel : UInt32,
-    dwReserved2 : UInt32
-
-  @[Extern]
-  record SPAUDIOBUFFERINFO,
-    ulMsMinNotification : UInt32,
-    ulMsBufferSize : UInt32,
-    ulMsEventBias : UInt32
-
-  @[Extern]
-  record SPPHRASEELEMENT,
-    ulAudioTimeOffset : UInt32,
-    ulAudioSizeTime : UInt32,
-    ulAudioStreamOffset : UInt32,
-    ulAudioSizeBytes : UInt32,
-    ulRetainedStreamOffset : UInt32,
-    ulRetainedSizeBytes : UInt32,
-    pszDisplayText : Win32cr::Foundation::PWSTR,
-    pszLexicalForm : Win32cr::Foundation::PWSTR,
-    pszPronunciation : UInt16*,
-    bDisplayAttributes : UInt8,
-    required_confidence : Int8,
-    actual_confidence : Int8,
-    reserved : UInt8,
-    sr_engine_confidence : Float32
-
-  @[Extern]
-  record SPPHRASERULE,
-    pszName : Win32cr::Foundation::PWSTR,
-    ulId : UInt32,
-    ulFirstElement : UInt32,
-    ulCountOfElements : UInt32,
-    pNextSibling : Win32cr::Media::Speech::SPPHRASERULE*,
-    pFirstChild : Win32cr::Media::Speech::SPPHRASERULE*,
-    sr_engine_confidence : Float32,
-    confidence : Int8
-
-  @[Extern]
-  record SPPHRASEPROPERTY,
-    pszName : Win32cr::Foundation::PWSTR,
-    anonymous : Anonymous_e__Union_,
-    pszValue : Win32cr::Foundation::PWSTR,
-    vValue : Win32cr::System::Com::VARIANT,
-    ulFirstElement : UInt32,
-    ulCountOfElements : UInt32,
-    pNextSibling : Win32cr::Media::Speech::SPPHRASEPROPERTY*,
-    pFirstChild : Win32cr::Media::Speech::SPPHRASEPROPERTY*,
-    sr_engine_confidence : Float32,
-    confidence : Int8 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ulId : UInt32,
-      anonymous : Anonymous_e__Struct_ do
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      record Anonymous_e__Struct_,
-        bType : UInt8,
-        bReserved : UInt8,
-        usArrayIndex : UInt16
-
+  struct SPEVENT
+    property _bitfield : Int32
+    property ulStreamNum : UInt32
+    property ullAudioStreamOffset : UInt64
+    property wParam : Win32cr::Foundation::WPARAM
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@_bitfield : Int32, @ulStreamNum : UInt32, @ullAudioStreamOffset : UInt64, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM)
     end
-
   end
 
   @[Extern]
-  record SPPHRASEREPLACEMENT,
-    bDisplayAttributes : UInt8,
-    pszReplacementText : Win32cr::Foundation::PWSTR,
-    ulFirstElement : UInt32,
-    ulCountOfElements : UInt32
+  struct SPSERIALIZEDEVENT
+    property _bitfield : Int32
+    property ulStreamNum : UInt32
+    property ullAudioStreamOffset : UInt64
+    property serializedw_param : UInt32
+    property serializedl_param : Int32
+    def initialize(@_bitfield : Int32, @ulStreamNum : UInt32, @ullAudioStreamOffset : UInt64, @serializedw_param : UInt32, @serializedl_param : Int32)
+    end
+  end
 
   @[Extern]
-  record SPSEMANTICERRORINFO,
-    ulLineNumber : UInt32,
-    pszScriptLine : Win32cr::Foundation::PWSTR,
-    pszSource : Win32cr::Foundation::PWSTR,
-    pszDescription : Win32cr::Foundation::PWSTR,
-    hrResultCode : Win32cr::Foundation::HRESULT
+  struct SPSERIALIZEDEVENT64
+    property _bitfield : Int32
+    property ulStreamNum : UInt32
+    property ullAudioStreamOffset : UInt64
+    property serializedw_param : UInt64
+    property serializedl_param : Int64
+    def initialize(@_bitfield : Int32, @ulStreamNum : UInt32, @ullAudioStreamOffset : UInt64, @serializedw_param : UInt64, @serializedl_param : Int64)
+    end
+  end
 
   @[Extern]
-  record SPPHRASE_50,
-    cbSize : UInt32,
-    lang_id : UInt16,
-    wHomophoneGroupId : UInt16,
-    ullGrammarID : UInt64,
-    ftStartTime : UInt64,
-    ullAudioStreamPosition : UInt64,
-    ulAudioSizeBytes : UInt32,
-    ulRetainedSizeBytes : UInt32,
-    ulAudioSizeTime : UInt32,
-    rule : Win32cr::Media::Speech::SPPHRASERULE,
-    pProperties : Win32cr::Media::Speech::SPPHRASEPROPERTY*,
-    pElements : Win32cr::Media::Speech::SPPHRASEELEMENT*,
-    cReplacements : UInt32,
-    pReplacements : Win32cr::Media::Speech::SPPHRASEREPLACEMENT*,
-    sr_engine_id : LibC::GUID,
-    ulSREnginePrivateDataSize : UInt32,
-    pSREnginePrivateData : UInt8*
+  struct SPEVENTEX
+    property _bitfield : Int32
+    property ulStreamNum : UInt32
+    property ullAudioStreamOffset : UInt64
+    property wParam : Win32cr::Foundation::WPARAM
+    property lParam : Win32cr::Foundation::LPARAM
+    property ullAudioTimeOffset : UInt64
+    def initialize(@_bitfield : Int32, @ulStreamNum : UInt32, @ullAudioStreamOffset : UInt64, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM, @ullAudioTimeOffset : UInt64)
+    end
+  end
 
   @[Extern]
-  record SPPHRASE,
-    __anonymous_base_sapi53_l5821_c34 : Win32cr::Media::Speech::SPPHRASE_50,
-    pSML : Win32cr::Foundation::PWSTR,
-    pSemanticErrorInfo : Win32cr::Media::Speech::SPSEMANTICERRORINFO*
+  struct SPEVENTSOURCEINFO
+    property ullEventInterest : UInt64
+    property ullQueuedInterest : UInt64
+    property ulCount : UInt32
+    def initialize(@ullEventInterest : UInt64, @ullQueuedInterest : UInt64, @ulCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record SPSERIALIZEDPHRASE,
-    ulSerializedSize : UInt32
+  struct SPAUDIOSTATUS
+    property cbFreeBuffSpace : Int32
+    property cbNonBlockingIO : UInt32
+    property state : Win32cr::Media::Speech::SPAUDIOSTATE
+    property cur_seek_pos : UInt64
+    property cur_device_pos : UInt64
+    property dwAudioLevel : UInt32
+    property dwReserved2 : UInt32
+    def initialize(@cbFreeBuffSpace : Int32, @cbNonBlockingIO : UInt32, @state : Win32cr::Media::Speech::SPAUDIOSTATE, @cur_seek_pos : UInt64, @cur_device_pos : UInt64, @dwAudioLevel : UInt32, @dwReserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record SPRULE,
-    pszRuleName : Win32cr::Foundation::PWSTR,
-    ulRuleId : UInt32,
-    dwAttributes : UInt32
+  struct SPAUDIOBUFFERINFO
+    property ulMsMinNotification : UInt32
+    property ulMsBufferSize : UInt32
+    property ulMsEventBias : UInt32
+    def initialize(@ulMsMinNotification : UInt32, @ulMsBufferSize : UInt32, @ulMsEventBias : UInt32)
+    end
+  end
 
   @[Extern]
-  record SPBINARYGRAMMAR,
-    ulTotalSerializedSize : UInt32
+  struct SPPHRASEELEMENT
+    property ulAudioTimeOffset : UInt32
+    property ulAudioSizeTime : UInt32
+    property ulAudioStreamOffset : UInt32
+    property ulAudioSizeBytes : UInt32
+    property ulRetainedStreamOffset : UInt32
+    property ulRetainedSizeBytes : UInt32
+    property pszDisplayText : Win32cr::Foundation::PWSTR
+    property pszLexicalForm : Win32cr::Foundation::PWSTR
+    property pszPronunciation : UInt16*
+    property bDisplayAttributes : UInt8
+    property required_confidence : Int8
+    property actual_confidence : Int8
+    property reserved : UInt8
+    property sr_engine_confidence : Float32
+    def initialize(@ulAudioTimeOffset : UInt32, @ulAudioSizeTime : UInt32, @ulAudioStreamOffset : UInt32, @ulAudioSizeBytes : UInt32, @ulRetainedStreamOffset : UInt32, @ulRetainedSizeBytes : UInt32, @pszDisplayText : Win32cr::Foundation::PWSTR, @pszLexicalForm : Win32cr::Foundation::PWSTR, @pszPronunciation : UInt16*, @bDisplayAttributes : UInt8, @required_confidence : Int8, @actual_confidence : Int8, @reserved : UInt8, @sr_engine_confidence : Float32)
+    end
+  end
 
   @[Extern]
-  record SPSTATEHANDLE__,
-    unused : Int32
+  struct SPPHRASERULE
+    property pszName : Win32cr::Foundation::PWSTR
+    property ulId : UInt32
+    property ulFirstElement : UInt32
+    property ulCountOfElements : UInt32
+    property pNextSibling : Win32cr::Media::Speech::SPPHRASERULE*
+    property pFirstChild : Win32cr::Media::Speech::SPPHRASERULE*
+    property sr_engine_confidence : Float32
+    property confidence : Int8
+    def initialize(@pszName : Win32cr::Foundation::PWSTR, @ulId : UInt32, @ulFirstElement : UInt32, @ulCountOfElements : UInt32, @pNextSibling : Win32cr::Media::Speech::SPPHRASERULE*, @pFirstChild : Win32cr::Media::Speech::SPPHRASERULE*, @sr_engine_confidence : Float32, @confidence : Int8)
+    end
+  end
 
   @[Extern]
-  record SPWORDPRONUNCIATION,
-    pNextWordPronunciation : Win32cr::Media::Speech::SPWORDPRONUNCIATION*,
-    eLexiconType : Win32cr::Media::Speech::SPLEXICONTYPE,
-    lang_id : UInt16,
-    wPronunciationFlags : UInt16,
-    ePartOfSpeech : Win32cr::Media::Speech::SPPARTOFSPEECH,
-    szPronunciation : UInt16*
+  struct SPPHRASEPROPERTY
+    property pszName : Win32cr::Foundation::PWSTR
+    property anonymous : Anonymous_e__Union_
+    property pszValue : Win32cr::Foundation::PWSTR
+    property vValue : Win32cr::System::Com::VARIANT
+    property ulFirstElement : UInt32
+    property ulCountOfElements : UInt32
+    property pNextSibling : Win32cr::Media::Speech::SPPHRASEPROPERTY*
+    property pFirstChild : Win32cr::Media::Speech::SPPHRASEPROPERTY*
+    property sr_engine_confidence : Float32
+    property confidence : Int8
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property ulId : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property bType : UInt8
+    property bReserved : UInt8
+    property usArrayIndex : UInt16
+    def initialize(@bType : UInt8, @bReserved : UInt8, @usArrayIndex : UInt16)
+    end
+      end
+
+    def initialize(@ulId : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@pszName : Win32cr::Foundation::PWSTR, @anonymous : Anonymous_e__Union_, @pszValue : Win32cr::Foundation::PWSTR, @vValue : Win32cr::System::Com::VARIANT, @ulFirstElement : UInt32, @ulCountOfElements : UInt32, @pNextSibling : Win32cr::Media::Speech::SPPHRASEPROPERTY*, @pFirstChild : Win32cr::Media::Speech::SPPHRASEPROPERTY*, @sr_engine_confidence : Float32, @confidence : Int8)
+    end
+  end
 
   @[Extern]
-  record SPWORDPRONUNCIATIONLIST,
-    ulSize : UInt32,
-    pvBuffer : UInt8*,
-    pFirstWordPronunciation : Win32cr::Media::Speech::SPWORDPRONUNCIATION*
+  struct SPPHRASEREPLACEMENT
+    property bDisplayAttributes : UInt8
+    property pszReplacementText : Win32cr::Foundation::PWSTR
+    property ulFirstElement : UInt32
+    property ulCountOfElements : UInt32
+    def initialize(@bDisplayAttributes : UInt8, @pszReplacementText : Win32cr::Foundation::PWSTR, @ulFirstElement : UInt32, @ulCountOfElements : UInt32)
+    end
+  end
 
   @[Extern]
-  record SPWORD,
-    pNextWord : Win32cr::Media::Speech::SPWORD*,
-    lang_id : UInt16,
-    wReserved : UInt16,
-    eWordType : Win32cr::Media::Speech::SPWORDTYPE,
-    pszWord : Win32cr::Foundation::PWSTR,
-    pFirstWordPronunciation : Win32cr::Media::Speech::SPWORDPRONUNCIATION*
+  struct SPSEMANTICERRORINFO
+    property ulLineNumber : UInt32
+    property pszScriptLine : Win32cr::Foundation::PWSTR
+    property pszSource : Win32cr::Foundation::PWSTR
+    property pszDescription : Win32cr::Foundation::PWSTR
+    property hrResultCode : Win32cr::Foundation::HRESULT
+    def initialize(@ulLineNumber : UInt32, @pszScriptLine : Win32cr::Foundation::PWSTR, @pszSource : Win32cr::Foundation::PWSTR, @pszDescription : Win32cr::Foundation::PWSTR, @hrResultCode : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record SPWORDLIST,
-    ulSize : UInt32,
-    pvBuffer : UInt8*,
-    pFirstWord : Win32cr::Media::Speech::SPWORD*
+  struct SPPHRASE_50
+    property cbSize : UInt32
+    property lang_id : UInt16
+    property wHomophoneGroupId : UInt16
+    property ullGrammarID : UInt64
+    property ftStartTime : UInt64
+    property ullAudioStreamPosition : UInt64
+    property ulAudioSizeBytes : UInt32
+    property ulRetainedSizeBytes : UInt32
+    property ulAudioSizeTime : UInt32
+    property rule : Win32cr::Media::Speech::SPPHRASERULE
+    property pProperties : Win32cr::Media::Speech::SPPHRASEPROPERTY*
+    property pElements : Win32cr::Media::Speech::SPPHRASEELEMENT*
+    property cReplacements : UInt32
+    property pReplacements : Win32cr::Media::Speech::SPPHRASEREPLACEMENT*
+    property sr_engine_id : LibC::GUID
+    property ulSREnginePrivateDataSize : UInt32
+    property pSREnginePrivateData : UInt8*
+    def initialize(@cbSize : UInt32, @lang_id : UInt16, @wHomophoneGroupId : UInt16, @ullGrammarID : UInt64, @ftStartTime : UInt64, @ullAudioStreamPosition : UInt64, @ulAudioSizeBytes : UInt32, @ulRetainedSizeBytes : UInt32, @ulAudioSizeTime : UInt32, @rule : Win32cr::Media::Speech::SPPHRASERULE, @pProperties : Win32cr::Media::Speech::SPPHRASEPROPERTY*, @pElements : Win32cr::Media::Speech::SPPHRASEELEMENT*, @cReplacements : UInt32, @pReplacements : Win32cr::Media::Speech::SPPHRASEREPLACEMENT*, @sr_engine_id : LibC::GUID, @ulSREnginePrivateDataSize : UInt32, @pSREnginePrivateData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SPSHORTCUTPAIR,
-    pNextSHORTCUTPAIR : Win32cr::Media::Speech::SPSHORTCUTPAIR*,
-    lang_id : UInt16,
-    shType : Win32cr::Media::Speech::SPSHORTCUTTYPE,
-    pszDisplay : Win32cr::Foundation::PWSTR,
-    pszSpoken : Win32cr::Foundation::PWSTR
+  struct SPPHRASE
+    property __anonymous_base_sapi53_l5821_c34 : Win32cr::Media::Speech::SPPHRASE_50
+    property pSML : Win32cr::Foundation::PWSTR
+    property pSemanticErrorInfo : Win32cr::Media::Speech::SPSEMANTICERRORINFO*
+    def initialize(@__anonymous_base_sapi53_l5821_c34 : Win32cr::Media::Speech::SPPHRASE_50, @pSML : Win32cr::Foundation::PWSTR, @pSemanticErrorInfo : Win32cr::Media::Speech::SPSEMANTICERRORINFO*)
+    end
+  end
 
   @[Extern]
-  record SPSHORTCUTPAIRLIST,
-    ulSize : UInt32,
-    pvBuffer : UInt8*,
-    pFirstShortcutPair : Win32cr::Media::Speech::SPSHORTCUTPAIR*
+  struct SPSERIALIZEDPHRASE
+    property ulSerializedSize : UInt32
+    def initialize(@ulSerializedSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record SPVPITCH,
-    middle_adj : Int32,
-    range_adj : Int32
+  struct SPRULE
+    property pszRuleName : Win32cr::Foundation::PWSTR
+    property ulRuleId : UInt32
+    property dwAttributes : UInt32
+    def initialize(@pszRuleName : Win32cr::Foundation::PWSTR, @ulRuleId : UInt32, @dwAttributes : UInt32)
+    end
+  end
 
   @[Extern]
-  record SPVCONTEXT,
-    pCategory : Win32cr::Foundation::PWSTR,
-    pBefore : Win32cr::Foundation::PWSTR,
-    pAfter : Win32cr::Foundation::PWSTR
+  struct SPBINARYGRAMMAR
+    property ulTotalSerializedSize : UInt32
+    def initialize(@ulTotalSerializedSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record SPVSTATE,
-    eAction : Win32cr::Media::Speech::SPVACTIONS,
-    lang_id : UInt16,
-    wReserved : UInt16,
-    emph_adj : Int32,
-    rate_adj : Int32,
-    volume : UInt32,
-    pitch_adj : Win32cr::Media::Speech::SPVPITCH,
-    silence_m_secs : UInt32,
-    pPhoneIds : UInt16*,
-    ePartOfSpeech : Win32cr::Media::Speech::SPPARTOFSPEECH,
-    context : Win32cr::Media::Speech::SPVCONTEXT
+  struct SPSTATEHANDLE__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record SPVOICESTATUS,
-    ulCurrentStream : UInt32,
-    ulLastStreamQueued : UInt32,
-    hrLastResult : Win32cr::Foundation::HRESULT,
-    dwRunningState : UInt32,
-    ulInputWordPos : UInt32,
-    ulInputWordLen : UInt32,
-    ulInputSentPos : UInt32,
-    ulInputSentLen : UInt32,
-    lBookmarkId : Int32,
-    phoneme_id : UInt16,
-    viseme_id : Win32cr::Media::Speech::SPVISEMES,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32
+  struct SPWORDPRONUNCIATION
+    property pNextWordPronunciation : Win32cr::Media::Speech::SPWORDPRONUNCIATION*
+    property eLexiconType : Win32cr::Media::Speech::SPLEXICONTYPE
+    property lang_id : UInt16
+    property wPronunciationFlags : UInt16
+    property ePartOfSpeech : Win32cr::Media::Speech::SPPARTOFSPEECH
+    property szPronunciation : UInt16*
+    def initialize(@pNextWordPronunciation : Win32cr::Media::Speech::SPWORDPRONUNCIATION*, @eLexiconType : Win32cr::Media::Speech::SPLEXICONTYPE, @lang_id : UInt16, @wPronunciationFlags : UInt16, @ePartOfSpeech : Win32cr::Media::Speech::SPPARTOFSPEECH, @szPronunciation : UInt16*)
+    end
+  end
 
   @[Extern]
-  record SPRECORESULTTIMES,
-    ftStreamTime : Win32cr::Foundation::FILETIME,
-    ullLength : UInt64,
-    dwTickCount : UInt32,
-    ullStart : UInt64
+  struct SPWORDPRONUNCIATIONLIST
+    property ulSize : UInt32
+    property pvBuffer : UInt8*
+    property pFirstWordPronunciation : Win32cr::Media::Speech::SPWORDPRONUNCIATION*
+    def initialize(@ulSize : UInt32, @pvBuffer : UInt8*, @pFirstWordPronunciation : Win32cr::Media::Speech::SPWORDPRONUNCIATION*)
+    end
+  end
 
   @[Extern]
-  record SPSERIALIZEDRESULT,
-    ulSerializedSize : UInt32
+  struct SPWORD
+    property pNextWord : Win32cr::Media::Speech::SPWORD*
+    property lang_id : UInt16
+    property wReserved : UInt16
+    property eWordType : Win32cr::Media::Speech::SPWORDTYPE
+    property pszWord : Win32cr::Foundation::PWSTR
+    property pFirstWordPronunciation : Win32cr::Media::Speech::SPWORDPRONUNCIATION*
+    def initialize(@pNextWord : Win32cr::Media::Speech::SPWORD*, @lang_id : UInt16, @wReserved : UInt16, @eWordType : Win32cr::Media::Speech::SPWORDTYPE, @pszWord : Win32cr::Foundation::PWSTR, @pFirstWordPronunciation : Win32cr::Media::Speech::SPWORDPRONUNCIATION*)
+    end
+  end
 
   @[Extern]
-  record SPTEXTSELECTIONINFO,
-    ulStartActiveOffset : UInt32,
-    cchActiveChars : UInt32,
-    ulStartSelection : UInt32,
-    cchSelection : UInt32
+  struct SPWORDLIST
+    property ulSize : UInt32
+    property pvBuffer : UInt8*
+    property pFirstWord : Win32cr::Media::Speech::SPWORD*
+    def initialize(@ulSize : UInt32, @pvBuffer : UInt8*, @pFirstWord : Win32cr::Media::Speech::SPWORD*)
+    end
+  end
 
   @[Extern]
-  record SPPROPERTYINFO,
-    pszName : Win32cr::Foundation::PWSTR,
-    ulId : UInt32,
-    pszValue : Win32cr::Foundation::PWSTR,
-    vValue : Win32cr::System::Com::VARIANT
+  struct SPSHORTCUTPAIR
+    property pNextSHORTCUTPAIR : Win32cr::Media::Speech::SPSHORTCUTPAIR*
+    property lang_id : UInt16
+    property shType : Win32cr::Media::Speech::SPSHORTCUTTYPE
+    property pszDisplay : Win32cr::Foundation::PWSTR
+    property pszSpoken : Win32cr::Foundation::PWSTR
+    def initialize(@pNextSHORTCUTPAIR : Win32cr::Media::Speech::SPSHORTCUTPAIR*, @lang_id : UInt16, @shType : Win32cr::Media::Speech::SPSHORTCUTTYPE, @pszDisplay : Win32cr::Foundation::PWSTR, @pszSpoken : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record SPRECOCONTEXTSTATUS,
-    eInterference : Win32cr::Media::Speech::SPINTERFERENCE,
-    szRequestTypeOfUI : UInt16[255],
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32
+  struct SPSHORTCUTPAIRLIST
+    property ulSize : UInt32
+    property pvBuffer : UInt8*
+    property pFirstShortcutPair : Win32cr::Media::Speech::SPSHORTCUTPAIR*
+    def initialize(@ulSize : UInt32, @pvBuffer : UInt8*, @pFirstShortcutPair : Win32cr::Media::Speech::SPSHORTCUTPAIR*)
+    end
+  end
 
   @[Extern]
-  record SPRECOGNIZERSTATUS,
-    audio_status : Win32cr::Media::Speech::SPAUDIOSTATUS,
-    ullRecognitionStreamPos : UInt64,
-    ulStreamNumber : UInt32,
-    ulNumActive : UInt32,
-    clsidEngine : LibC::GUID,
-    cLangIDs : UInt32,
-    aLangID : UInt16[20],
-    ullRecognitionStreamTime : UInt64
+  struct SPVPITCH
+    property middle_adj : Int32
+    property range_adj : Int32
+    def initialize(@middle_adj : Int32, @range_adj : Int32)
+    end
+  end
 
   @[Extern]
-  record SPNORMALIZATIONLIST,
-    ulSize : UInt32,
-    ppszzNormalizedList : UInt16**
+  struct SPVCONTEXT
+    property pCategory : Win32cr::Foundation::PWSTR
+    property pBefore : Win32cr::Foundation::PWSTR
+    property pAfter : Win32cr::Foundation::PWSTR
+    def initialize(@pCategory : Win32cr::Foundation::PWSTR, @pBefore : Win32cr::Foundation::PWSTR, @pAfter : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record SPDISPLAYTOKEN,
-    pszLexical : Win32cr::Foundation::PWSTR,
-    pszDisplay : Win32cr::Foundation::PWSTR,
-    bDisplayAttributes : UInt8
+  struct SPVSTATE
+    property eAction : Win32cr::Media::Speech::SPVACTIONS
+    property lang_id : UInt16
+    property wReserved : UInt16
+    property emph_adj : Int32
+    property rate_adj : Int32
+    property volume : UInt32
+    property pitch_adj : Win32cr::Media::Speech::SPVPITCH
+    property silence_m_secs : UInt32
+    property pPhoneIds : UInt16*
+    property ePartOfSpeech : Win32cr::Media::Speech::SPPARTOFSPEECH
+    property context : Win32cr::Media::Speech::SPVCONTEXT
+    def initialize(@eAction : Win32cr::Media::Speech::SPVACTIONS, @lang_id : UInt16, @wReserved : UInt16, @emph_adj : Int32, @rate_adj : Int32, @volume : UInt32, @pitch_adj : Win32cr::Media::Speech::SPVPITCH, @silence_m_secs : UInt32, @pPhoneIds : UInt16*, @ePartOfSpeech : Win32cr::Media::Speech::SPPARTOFSPEECH, @context : Win32cr::Media::Speech::SPVCONTEXT)
+    end
+  end
 
   @[Extern]
-  record SPDISPLAYPHRASE,
-    ulNumTokens : UInt32,
-    pTokens : Win32cr::Media::Speech::SPDISPLAYTOKEN*
+  struct SPVOICESTATUS
+    property ulCurrentStream : UInt32
+    property ulLastStreamQueued : UInt32
+    property hrLastResult : Win32cr::Foundation::HRESULT
+    property dwRunningState : UInt32
+    property ulInputWordPos : UInt32
+    property ulInputWordLen : UInt32
+    property ulInputSentPos : UInt32
+    property ulInputSentLen : UInt32
+    property lBookmarkId : Int32
+    property phoneme_id : UInt16
+    property viseme_id : Win32cr::Media::Speech::SPVISEMES
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    def initialize(@ulCurrentStream : UInt32, @ulLastStreamQueued : UInt32, @hrLastResult : Win32cr::Foundation::HRESULT, @dwRunningState : UInt32, @ulInputWordPos : UInt32, @ulInputWordLen : UInt32, @ulInputSentPos : UInt32, @ulInputSentLen : UInt32, @lBookmarkId : Int32, @phoneme_id : UInt16, @viseme_id : Win32cr::Media::Speech::SPVISEMES, @dwReserved1 : UInt32, @dwReserved2 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SPRECORESULTTIMES
+    property ftStreamTime : Win32cr::Foundation::FILETIME
+    property ullLength : UInt64
+    property dwTickCount : UInt32
+    property ullStart : UInt64
+    def initialize(@ftStreamTime : Win32cr::Foundation::FILETIME, @ullLength : UInt64, @dwTickCount : UInt32, @ullStart : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct SPSERIALIZEDRESULT
+    property ulSerializedSize : UInt32
+    def initialize(@ulSerializedSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SPTEXTSELECTIONINFO
+    property ulStartActiveOffset : UInt32
+    property cchActiveChars : UInt32
+    property ulStartSelection : UInt32
+    property cchSelection : UInt32
+    def initialize(@ulStartActiveOffset : UInt32, @cchActiveChars : UInt32, @ulStartSelection : UInt32, @cchSelection : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SPPROPERTYINFO
+    property pszName : Win32cr::Foundation::PWSTR
+    property ulId : UInt32
+    property pszValue : Win32cr::Foundation::PWSTR
+    property vValue : Win32cr::System::Com::VARIANT
+    def initialize(@pszName : Win32cr::Foundation::PWSTR, @ulId : UInt32, @pszValue : Win32cr::Foundation::PWSTR, @vValue : Win32cr::System::Com::VARIANT)
+    end
+  end
+
+  @[Extern]
+  struct SPRECOCONTEXTSTATUS
+    property eInterference : Win32cr::Media::Speech::SPINTERFERENCE
+    property szRequestTypeOfUI : UInt16[255]
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    def initialize(@eInterference : Win32cr::Media::Speech::SPINTERFERENCE, @szRequestTypeOfUI : UInt16[255], @dwReserved1 : UInt32, @dwReserved2 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SPRECOGNIZERSTATUS
+    property audio_status : Win32cr::Media::Speech::SPAUDIOSTATUS
+    property ullRecognitionStreamPos : UInt64
+    property ulStreamNumber : UInt32
+    property ulNumActive : UInt32
+    property clsidEngine : LibC::GUID
+    property cLangIDs : UInt32
+    property aLangID : UInt16[20]
+    property ullRecognitionStreamTime : UInt64
+    def initialize(@audio_status : Win32cr::Media::Speech::SPAUDIOSTATUS, @ullRecognitionStreamPos : UInt64, @ulStreamNumber : UInt32, @ulNumActive : UInt32, @clsidEngine : LibC::GUID, @cLangIDs : UInt32, @aLangID : UInt16[20], @ullRecognitionStreamTime : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct SPNORMALIZATIONLIST
+    property ulSize : UInt32
+    property ppszzNormalizedList : UInt16**
+    def initialize(@ulSize : UInt32, @ppszzNormalizedList : UInt16**)
+    end
+  end
+
+  @[Extern]
+  struct SPDISPLAYTOKEN
+    property pszLexical : Win32cr::Foundation::PWSTR
+    property pszDisplay : Win32cr::Foundation::PWSTR
+    property bDisplayAttributes : UInt8
+    def initialize(@pszLexical : Win32cr::Foundation::PWSTR, @pszDisplay : Win32cr::Foundation::PWSTR, @bDisplayAttributes : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct SPDISPLAYPHRASE
+    property ulNumTokens : UInt32
+    property pTokens : Win32cr::Media::Speech::SPDISPLAYTOKEN*
+    def initialize(@ulNumTokens : UInt32, @pTokens : Win32cr::Media::Speech::SPDISPLAYTOKEN*)
+    end
+  end
 
   @[Extern]
   record ISpNotifyCallbackVtbl,
@@ -1698,7 +1813,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("5eff4aef-8487-11d2-961c-00c04f8ee628")]
   record ISpNotifySource, lpVtbl : ISpNotifySourceVtbl* do
     GUID = LibC::GUID.new(0x5eff4aef_u32, 0x8487_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x1c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
     def query_interface(this : ISpNotifySource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1743,7 +1857,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("259684dc-37c3-11d2-9603-00c04f8ee628")]
   record ISpNotifySink, lpVtbl : ISpNotifySinkVtbl* do
     GUID = LibC::GUID.new(0x259684dc_u32, 0x37c3_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
     def query_interface(this : ISpNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1776,7 +1889,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("aca16614-5d3d-11d2-960e-00c04f8ee628")]
   record ISpNotifyTranslator, lpVtbl : ISpNotifyTranslatorVtbl* do
     GUID = LibC::GUID.new(0xaca16614_u32, 0x5d3d_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
     def query_interface(this : ISpNotifyTranslator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1832,7 +1944,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("14056581-e16c-11d2-bb90-00c04f8ee6c0")]
   record ISpDataKey, lpVtbl : ISpDataKeyVtbl* do
     GUID = LibC::GUID.new(0x14056581_u32, 0xe16c_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
     def query_interface(this : ISpDataKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1904,7 +2015,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("92a66e2b-c830-4149-83df-6fc2ba1e7a5b")]
   record ISpRegDataKey, lpVtbl : ISpRegDataKeyVtbl* do
     GUID = LibC::GUID.new(0x92a66e2b_u32, 0xc830_u16, 0x4149_u16, StaticArray[0x83_u8, 0xdf_u8, 0x6f_u8, 0xc2_u8, 0xba_u8, 0x1e_u8, 0x7a_u8, 0x5b_u8])
     def query_interface(this : ISpRegDataKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1984,7 +2094,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("2d3d3845-39af-4850-bbf9-40b49780011d")]
   record ISpObjectTokenCategory, lpVtbl : ISpObjectTokenCategoryVtbl* do
     GUID = LibC::GUID.new(0x2d3d3845_u32, 0x39af_u16, 0x4850_u16, StaticArray[0xbb_u8, 0xf9_u8, 0x40_u8, 0xb4_u8, 0x97_u8, 0x80_u8, 0x1_u8, 0x1d_u8])
     def query_interface(this : ISpObjectTokenCategory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2083,7 +2192,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("14056589-e16c-11d2-bb90-00c04f8ee6c0")]
   record ISpObjectToken, lpVtbl : ISpObjectTokenVtbl* do
     GUID = LibC::GUID.new(0x14056589_u32, 0xe16c_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
     def query_interface(this : ISpObjectToken*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2195,7 +2303,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("b8aab0cf-346f-49d8-9499-c8b03f161d51")]
   record ISpObjectTokenInit, lpVtbl : ISpObjectTokenInitVtbl* do
     GUID = LibC::GUID.new(0xb8aab0cf_u32, 0x346f_u16, 0x49d8_u16, StaticArray[0x94_u8, 0x99_u8, 0xc8_u8, 0xb0_u8, 0x3f_u8, 0x16_u8, 0x1d_u8, 0x51_u8])
     def query_interface(this : ISpObjectTokenInit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2293,7 +2400,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("06b64f9e-7fda-11d2-b4f2-00c04f797396")]
   record IEnumSpObjectTokens, lpVtbl : IEnumSpObjectTokensVtbl* do
     GUID = LibC::GUID.new(0x6b64f9e_u32, 0x7fda_u16, 0x11d2_u16, StaticArray[0xb4_u8, 0xf2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
     def query_interface(this : IEnumSpObjectTokens*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2336,7 +2442,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("5b559f40-e952-11d2-bb91-00c04f8ee6c0")]
   record ISpObjectWithToken, lpVtbl : ISpObjectWithTokenVtbl* do
     GUID = LibC::GUID.new(0x5b559f40_u32, 0xe952_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x91_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
     def query_interface(this : ISpObjectWithToken*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2368,7 +2473,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("93384e18-5014-43d5-adbb-a78e055926bd")]
   record ISpResourceManager, lpVtbl : ISpResourceManagerVtbl* do
     GUID = LibC::GUID.new(0x93384e18_u32, 0x5014_u16, 0x43d5_u16, StaticArray[0xad_u8, 0xbb_u8, 0xa7_u8, 0x8e_u8, 0x5_u8, 0x59_u8, 0x26_u8, 0xbd_u8])
     def query_interface(this : ISpResourceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2410,7 +2514,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("be7a9cce-5f9e-11d2-960f-00c04f8ee628")]
   record ISpEventSource, lpVtbl : ISpEventSourceVtbl* do
     GUID = LibC::GUID.new(0xbe7a9cce_u32, 0x5f9e_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
     def query_interface(this : ISpEventSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2474,7 +2577,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("2373a435-6a4b-429e-a6ac-d4231a61975b")]
   record ISpEventSource2, lpVtbl : ISpEventSource2Vtbl* do
     GUID = LibC::GUID.new(0x2373a435_u32, 0x6a4b_u16, 0x429e_u16, StaticArray[0xa6_u8, 0xac_u8, 0xd4_u8, 0x23_u8, 0x1a_u8, 0x61_u8, 0x97_u8, 0x5b_u8])
     def query_interface(this : ISpEventSource2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2532,7 +2634,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("be7a9cc9-5f9e-11d2-960f-00c04f8ee628")]
   record ISpEventSink, lpVtbl : ISpEventSinkVtbl* do
     GUID = LibC::GUID.new(0xbe7a9cc9_u32, 0x5f9e_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
     def query_interface(this : ISpEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2573,7 +2674,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("bed530be-2606-4f4d-a1c0-54c5cda5566f")]
   record ISpStreamFormat, lpVtbl : ISpStreamFormatVtbl* do
     GUID = LibC::GUID.new(0xbed530be_u32, 0x2606_u16, 0x4f4d_u16, StaticArray[0xa1_u8, 0xc0_u8, 0x54_u8, 0xc5_u8, 0xcd_u8, 0xa5_u8, 0x56_u8, 0x6f_u8])
     def query_interface(this : ISpStreamFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2648,7 +2748,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("12e3cca9-7518-44c5-a5e7-ba5a79cb929e")]
   record ISpStream, lpVtbl : ISpStreamVtbl* do
     GUID = LibC::GUID.new(0x12e3cca9_u32, 0x7518_u16, 0x44c5_u16, StaticArray[0xa5_u8, 0xe7_u8, 0xba_u8, 0x5a_u8, 0x79_u8, 0xcb_u8, 0x92_u8, 0x9e_u8])
     def query_interface(this : ISpStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2737,7 +2836,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("678a932c-ea71-4446-9b41-78fda6280a29")]
   record ISpStreamFormatConverter, lpVtbl : ISpStreamFormatConverterVtbl* do
     GUID = LibC::GUID.new(0x678a932c_u32, 0xea71_u16, 0x4446_u16, StaticArray[0x9b_u8, 0x41_u8, 0x78_u8, 0xfd_u8, 0xa6_u8, 0x28_u8, 0xa_u8, 0x29_u8])
     def query_interface(this : ISpStreamFormatConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2837,7 +2935,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("c05c768f-fae8-4ec2-8e07-338321c12452")]
   record ISpAudio, lpVtbl : ISpAudioVtbl* do
     GUID = LibC::GUID.new(0xc05c768f_u32, 0xfae8_u16, 0x4ec2_u16, StaticArray[0x8e_u8, 0x7_u8, 0x33_u8, 0x83_u8, 0x21_u8, 0xc1_u8, 0x24_u8, 0x52_u8])
     def query_interface(this : ISpAudio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2957,7 +3054,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("15806f6e-1d70-4b48-98e6-3b1a007509ab")]
   record ISpMMSysAudio, lpVtbl : ISpMMSysAudioVtbl* do
     GUID = LibC::GUID.new(0x15806f6e_u32, 0x1d70_u16, 0x4b48_u16, StaticArray[0x98_u8, 0xe6_u8, 0x3b_u8, 0x1a_u8, 0x0_u8, 0x75_u8, 0x9_u8, 0xab_u8])
     def query_interface(this : ISpMMSysAudio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3066,7 +3162,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("10f63bce-201a-11d3-ac70-00c04f8ee6c0")]
   record ISpTranscript, lpVtbl : ISpTranscriptVtbl* do
     GUID = LibC::GUID.new(0x10f63bce_u32, 0x201a_u16, 0x11d3_u16, StaticArray[0xac_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
     def query_interface(this : ISpTranscript*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3101,7 +3196,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("da41a7c2-5383-4db2-916b-6c1719e3db58")]
   record ISpLexicon, lpVtbl : ISpLexiconVtbl* do
     GUID = LibC::GUID.new(0xda41a7c2_u32, 0x5383_u16, 0x4db2_u16, StaticArray[0x91_u8, 0x6b_u8, 0x6c_u8, 0x17_u8, 0x19_u8, 0xe3_u8, 0xdb_u8, 0x58_u8])
     def query_interface(this : ISpLexicon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3149,7 +3243,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("8565572f-c094-41cc-b56e-10bd9c3ff044")]
   record ISpContainerLexicon, lpVtbl : ISpContainerLexiconVtbl* do
     GUID = LibC::GUID.new(0x8565572f_u32, 0xc094_u16, 0x41cc_u16, StaticArray[0xb5_u8, 0x6e_u8, 0x10_u8, 0xbd_u8, 0x9c_u8, 0x3f_u8, 0xf0_u8, 0x44_u8])
     def query_interface(this : ISpContainerLexicon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3201,7 +3294,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("3df681e2-ea56-11d9-8bde-f66bad1e3f3a")]
   record ISpShortcut, lpVtbl : ISpShortcutVtbl* do
     GUID = LibC::GUID.new(0x3df681e2_u32, 0xea56_u16, 0x11d9_u16, StaticArray[0x8b_u8, 0xde_u8, 0xf6_u8, 0x6b_u8, 0xad_u8, 0x1e_u8, 0x3f_u8, 0x3a_u8])
     def query_interface(this : ISpShortcut*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3252,7 +3344,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("8445c581-0cac-4a38-abfe-9b2ce2826455")]
   record ISpPhoneConverter, lpVtbl : ISpPhoneConverterVtbl* do
     GUID = LibC::GUID.new(0x8445c581_u32, 0xcac_u16, 0x4a38_u16, StaticArray[0xab_u8, 0xfe_u8, 0x9b_u8, 0x2c_u8, 0xe2_u8, 0x82_u8, 0x64_u8, 0x55_u8])
     def query_interface(this : ISpPhoneConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3292,7 +3383,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("133adcd4-19b4-4020-9fdc-842e78253b17")]
   record ISpPhoneticAlphabetConverter, lpVtbl : ISpPhoneticAlphabetConverterVtbl* do
     GUID = LibC::GUID.new(0x133adcd4_u32, 0x19b4_u16, 0x4020_u16, StaticArray[0x9f_u8, 0xdc_u8, 0x84_u8, 0x2e_u8, 0x78_u8, 0x25_u8, 0x3b_u8, 0x17_u8])
     def query_interface(this : ISpPhoneticAlphabetConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3332,7 +3422,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("b2745efd-42ce-48ca-81f1-a96e02538a90")]
   record ISpPhoneticAlphabetSelection, lpVtbl : ISpPhoneticAlphabetSelectionVtbl* do
     GUID = LibC::GUID.new(0xb2745efd_u32, 0x42ce_u16, 0x48ca_u16, StaticArray[0x81_u8, 0xf1_u8, 0xa9_u8, 0x6e_u8, 0x2_u8, 0x53_u8, 0x8a_u8, 0x90_u8])
     def query_interface(this : ISpPhoneticAlphabetSelection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3396,7 +3485,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("6c44df74-72b9-4992-a1ec-ef996e0422d4")]
   record ISpVoice, lpVtbl : ISpVoiceVtbl* do
     GUID = LibC::GUID.new(0x6c44df74_u32, 0x72b9_u16, 0x4992_u16, StaticArray[0xa1_u8, 0xec_u8, 0xef_u8, 0x99_u8, 0x6e_u8, 0x4_u8, 0x22_u8, 0xd4_u8])
     def query_interface(this : ISpVoice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3528,7 +3616,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("1a5c0354-b621-4b5a-8791-d306ed379e53")]
   record ISpPhrase, lpVtbl : ISpPhraseVtbl* do
     GUID = LibC::GUID.new(0x1a5c0354_u32, 0xb621_u16, 0x4b5a_u16, StaticArray[0x87_u8, 0x91_u8, 0xd3_u8, 0x6_u8, 0xed_u8, 0x37_u8, 0x9e_u8, 0x53_u8])
     def query_interface(this : ISpPhrase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3569,7 +3656,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("8fcebc98-4e49-4067-9c6c-d86a0e092e3d")]
   record ISpPhraseAlt, lpVtbl : ISpPhraseAltVtbl* do
     GUID = LibC::GUID.new(0x8fcebc98_u32, 0x4e49_u16, 0x4067_u16, StaticArray[0x9c_u8, 0x6c_u8, 0xd8_u8, 0x6a_u8, 0xe_u8, 0x9_u8, 0x2e_u8, 0x3d_u8])
     def query_interface(this : ISpPhraseAlt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3617,7 +3703,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("f264da52-e457-4696-b856-a737b717af79")]
   record ISpPhrase2, lpVtbl : ISpPhrase2Vtbl* do
     GUID = LibC::GUID.new(0xf264da52_u32, 0xe457_u16, 0x4696_u16, StaticArray[0xb8_u8, 0x56_u8, 0xa7_u8, 0x37_u8, 0xb7_u8, 0x17_u8, 0xaf_u8, 0x79_u8])
     def query_interface(this : ISpPhrase2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3672,7 +3757,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("20b053be-e235-43cd-9a2a-8d17a48b7842")]
   record ISpRecoResult, lpVtbl : ISpRecoResultVtbl* do
     GUID = LibC::GUID.new(0x20b053be_u32, 0xe235_u16, 0x43cd_u16, StaticArray[0x9a_u8, 0x2a_u8, 0x8d_u8, 0x17_u8, 0xa4_u8, 0x8b_u8, 0x78_u8, 0x42_u8])
     def query_interface(this : ISpRecoResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3742,7 +3826,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("27cac6c4-88f2-41f2-8817-0c95e59f1e6e")]
   record ISpRecoResult2, lpVtbl : ISpRecoResult2Vtbl* do
     GUID = LibC::GUID.new(0x27cac6c4_u32, 0x88f2_u16, 0x41f2_u16, StaticArray[0x88_u8, 0x17_u8, 0xc_u8, 0x95_u8, 0xe5_u8, 0x9f_u8, 0x1e_u8, 0x6e_u8])
     def query_interface(this : ISpRecoResult2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3820,7 +3903,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("ae39362b-45a8-4074-9b9e-ccf49aa2d0b6")]
   record ISpXMLRecoResult, lpVtbl : ISpXMLRecoResultVtbl* do
     GUID = LibC::GUID.new(0xae39362b_u32, 0x45a8_u16, 0x4074_u16, StaticArray[0x9b_u8, 0x9e_u8, 0xcc_u8, 0xf4_u8, 0x9a_u8, 0xa2_u8, 0xd0_u8, 0xb6_u8])
     def query_interface(this : ISpXMLRecoResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3890,7 +3972,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("8137828f-591a-4a42-be58-49ea7ebaac68")]
   record ISpGrammarBuilder, lpVtbl : ISpGrammarBuilderVtbl* do
     GUID = LibC::GUID.new(0x8137828f_u32, 0x591a_u16, 0x4a42_u16, StaticArray[0xbe_u8, 0x58_u8, 0x49_u8, 0xea_u8, 0x7e_u8, 0xba_u8, 0xac_u8, 0x68_u8])
     def query_interface(this : ISpGrammarBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3963,7 +4044,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("2177db29-7f45-47d0-8554-067e91c80502")]
   record ISpRecoGrammar, lpVtbl : ISpRecoGrammarVtbl* do
     GUID = LibC::GUID.new(0x2177db29_u32, 0x7f45_u16, 0x47d0_u16, StaticArray[0x85_u8, 0x54_u8, 0x6_u8, 0x7e_u8, 0x91_u8, 0xc8_u8, 0x5_u8, 0x2_u8])
     def query_interface(this : ISpRecoGrammar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4066,7 +4146,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("8ab10026-20cc-4b20-8c22-a49c9ba78f60")]
   record ISpGrammarBuilder2, lpVtbl : ISpGrammarBuilder2Vtbl* do
     GUID = LibC::GUID.new(0x8ab10026_u32, 0x20cc_u16, 0x4b20_u16, StaticArray[0x8c_u8, 0x22_u8, 0xa4_u8, 0x9c_u8, 0x9b_u8, 0xa7_u8, 0x8f_u8, 0x60_u8])
     def query_interface(this : ISpGrammarBuilder2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4103,7 +4182,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("4b37bc9e-9ed6-44a3-93d3-18f022b79ec3")]
   record ISpRecoGrammar2, lpVtbl : ISpRecoGrammar2Vtbl* do
     GUID = LibC::GUID.new(0x4b37bc9e_u32, 0x9ed6_u16, 0x44a3_u16, StaticArray[0x93_u8, 0xd3_u8, 0x18_u8, 0xf0_u8, 0x22_u8, 0xb7_u8, 0x9e_u8, 0xc3_u8])
     def query_interface(this : ISpRecoGrammar2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4157,7 +4235,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("b9ac5783-fcd0-4b21-b119-b4f8da8fd2c3")]
   record ISpeechResourceLoader, lpVtbl : ISpeechResourceLoaderVtbl* do
     GUID = LibC::GUID.new(0xb9ac5783_u32, 0xfcd0_u16, 0x4b21_u16, StaticArray[0xb1_u8, 0x19_u8, 0xb4_u8, 0xf8_u8, 0xda_u8, 0x8f_u8, 0xd2_u8, 0xc3_u8])
     def query_interface(this : ISpeechResourceLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4229,7 +4306,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("f740a62f-7c15-489e-8234-940a33d9272d")]
   record ISpRecoContext, lpVtbl : ISpRecoContextVtbl* do
     GUID = LibC::GUID.new(0xf740a62f_u32, 0x7c15_u16, 0x489e_u16, StaticArray[0x82_u8, 0x34_u8, 0x94_u8, 0xa_u8, 0x33_u8, 0xd9_u8, 0x27_u8, 0x2d_u8])
     def query_interface(this : ISpRecoContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4339,7 +4415,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("bead311c-52ff-437f-9464-6b21054ca73d")]
   record ISpRecoContext2, lpVtbl : ISpRecoContext2Vtbl* do
     GUID = LibC::GUID.new(0xbead311c_u32, 0x52ff_u16, 0x437f_u16, StaticArray[0x94_u8, 0x64_u8, 0x6b_u8, 0x21_u8, 0x5_u8, 0x4c_u8, 0xa7_u8, 0x3d_u8])
     def query_interface(this : ISpRecoContext2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4375,7 +4450,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("5b4fb971-b115-4de1-ad97-e482e3bf6ee4")]
   record ISpProperties, lpVtbl : ISpPropertiesVtbl* do
     GUID = LibC::GUID.new(0x5b4fb971_u32, 0xb115_u16, 0x4de1_u16, StaticArray[0xad_u8, 0x97_u8, 0xe4_u8, 0x82_u8, 0xe3_u8, 0xbf_u8, 0x6e_u8, 0xe4_u8])
     def query_interface(this : ISpProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4430,7 +4504,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("c2b5f241-daa0-4507-9e16-5a1eaa2b7a5c")]
   record ISpRecognizer, lpVtbl : ISpRecognizerVtbl* do
     GUID = LibC::GUID.new(0xc2b5f241_u32, 0xdaa0_u16, 0x4507_u16, StaticArray[0x9e_u8, 0x16_u8, 0x5a_u8, 0x1e_u8, 0xaa_u8, 0x2b_u8, 0x7a_u8, 0x5c_u8])
     def query_interface(this : ISpRecognizer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4515,7 +4588,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("21b501a0-0ec7-46c9-92c3-a2bc784c54b9")]
   record ISpSerializeState, lpVtbl : ISpSerializeStateVtbl* do
     GUID = LibC::GUID.new(0x21b501a0_u32, 0xec7_u16, 0x46c9_u16, StaticArray[0x92_u8, 0xc3_u8, 0xa2_u8, 0xbc_u8, 0x78_u8, 0x4c_u8, 0x54_u8, 0xb9_u8])
     def query_interface(this : ISpSerializeState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4547,7 +4619,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("8fc6d974-c81e-4098-93c5-0147f61ed4d3")]
   record ISpRecognizer2, lpVtbl : ISpRecognizer2Vtbl* do
     GUID = LibC::GUID.new(0x8fc6d974_u32, 0xc81e_u16, 0x4098_u16, StaticArray[0x93_u8, 0xc5_u8, 0x1_u8, 0x47_u8, 0xf6_u8, 0x1e_u8, 0xd4_u8, 0xd3_u8])
     def query_interface(this : ISpRecognizer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4581,7 +4652,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("c360ce4b-76d1-4214-ad68-52657d5083da")]
   record ISpEnginePronunciation, lpVtbl : ISpEnginePronunciationVtbl* do
     GUID = LibC::GUID.new(0xc360ce4b_u32, 0x76d1_u16, 0x4214_u16, StaticArray[0xad_u8, 0x68_u8, 0x52_u8, 0x65_u8, 0x7d_u8, 0x50_u8, 0x83_u8, 0xda_u8])
     def query_interface(this : ISpEnginePronunciation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4612,7 +4682,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("c8d7c7e2-0dde-44b7-afe3-b0c991fbeb5e")]
   record ISpDisplayAlternates, lpVtbl : ISpDisplayAlternatesVtbl* do
     GUID = LibC::GUID.new(0xc8d7c7e2_u32, 0xdde_u16, 0x44b7_u16, StaticArray[0xaf_u8, 0xe3_u8, 0xb0_u8, 0xc9_u8, 0x91_u8, 0xfb_u8, 0xeb_u8, 0x5e_u8])
     def query_interface(this : ISpDisplayAlternates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4657,7 +4726,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("ce17c09b-4efa-44d5-a4c9-59d9585ab0cd")]
   record ISpeechDataKey, lpVtbl : ISpeechDataKeyVtbl* do
     GUID = LibC::GUID.new(0xce17c09b_u32, 0x4efa_u16, 0x44d5_u16, StaticArray[0xa4_u8, 0xc9_u8, 0x59_u8, 0xd9_u8, 0x58_u8, 0x5a_u8, 0xb0_u8, 0xcd_u8])
     def query_interface(this : ISpeechDataKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4745,7 +4813,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("c74a3adc-b727-4500-a84a-b526721c8b8c")]
   record ISpeechObjectToken, lpVtbl : ISpeechObjectTokenVtbl* do
     GUID = LibC::GUID.new(0xc74a3adc_u32, 0xb727_u16, 0x4500_u16, StaticArray[0xa8_u8, 0x4a_u8, 0xb5_u8, 0x26_u8, 0x72_u8, 0x1c_u8, 0x8b_u8, 0x8c_u8])
     def query_interface(this : ISpeechObjectToken*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4826,7 +4893,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("9285b776-2e7b-4bc0-b53e-580eb6fa967f")]
   record ISpeechObjectTokens, lpVtbl : ISpeechObjectTokensVtbl* do
     GUID = LibC::GUID.new(0x9285b776_u32, 0x2e7b_u16, 0x4bc0_u16, StaticArray[0xb5_u8, 0x3e_u8, 0x58_u8, 0xe_u8, 0xb6_u8, 0xfa_u8, 0x96_u8, 0x7f_u8])
     def query_interface(this : ISpeechObjectTokens*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4880,7 +4946,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("ca7eac50-2d01-4145-86d4-5ae7d70f4469")]
   record ISpeechObjectTokenCategory, lpVtbl : ISpeechObjectTokenCategoryVtbl* do
     GUID = LibC::GUID.new(0xca7eac50_u32, 0x2d01_u16, 0x4145_u16, StaticArray[0x86_u8, 0xd4_u8, 0x5a_u8, 0xe7_u8, 0xd7_u8, 0xf_u8, 0x44_u8, 0x69_u8])
     def query_interface(this : ISpeechObjectTokenCategory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4943,7 +5008,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("11b103d8-1142-4edf-a093-82fb3915f8cc")]
   record ISpeechAudioBufferInfo, lpVtbl : ISpeechAudioBufferInfoVtbl* do
     GUID = LibC::GUID.new(0x11b103d8_u32, 0x1142_u16, 0x4edf_u16, StaticArray[0xa0_u8, 0x93_u8, 0x82_u8, 0xfb_u8, 0x39_u8, 0x15_u8, 0xf8_u8, 0xcc_u8])
     def query_interface(this : ISpeechAudioBufferInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5005,7 +5069,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("c62d9c91-7458-47f6-862d-1ef86fb0b278")]
   record ISpeechAudioStatus, lpVtbl : ISpeechAudioStatusVtbl* do
     GUID = LibC::GUID.new(0xc62d9c91_u32, 0x7458_u16, 0x47f6_u16, StaticArray[0x86_u8, 0x2d_u8, 0x1e_u8, 0xf8_u8, 0x6f_u8, 0xb0_u8, 0xb2_u8, 0x78_u8])
     def query_interface(this : ISpeechAudioStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5065,7 +5128,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("e6e9c590-3e18-40e3-8299-061f98bde7c7")]
   record ISpeechAudioFormat, lpVtbl : ISpeechAudioFormatVtbl* do
     GUID = LibC::GUID.new(0xe6e9c590_u32, 0x3e18_u16, 0x40e3_u16, StaticArray[0x82_u8, 0x99_u8, 0x6_u8, 0x1f_u8, 0x98_u8, 0xbd_u8, 0xe7_u8, 0xc7_u8])
     def query_interface(this : ISpeechAudioFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5136,7 +5198,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("7a1ef0d5-1581-4741-88e4-209a49f11a10")]
   record ISpeechWaveFormatEx, lpVtbl : ISpeechWaveFormatExVtbl* do
     GUID = LibC::GUID.new(0x7a1ef0d5_u32, 0x1581_u16, 0x4741_u16, StaticArray[0x88_u8, 0xe4_u8, 0x20_u8, 0x9a_u8, 0x49_u8, 0xf1_u8, 0x1a_u8, 0x10_u8])
     def query_interface(this : ISpeechWaveFormatEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5222,7 +5283,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("6450336f-7d49-4ced-8097-49d6dee37294")]
   record ISpeechBaseStream, lpVtbl : ISpeechBaseStreamVtbl* do
     GUID = LibC::GUID.new(0x6450336f_u32, 0x7d49_u16, 0x4ced_u16, StaticArray[0x80_u8, 0x97_u8, 0x49_u8, 0xd6_u8, 0xde_u8, 0xe3_u8, 0x72_u8, 0x94_u8])
     def query_interface(this : ISpeechBaseStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5283,7 +5343,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("af67f125-ab39-4e93-b4a2-cc2e66e182a7")]
   record ISpeechFileStream, lpVtbl : ISpeechFileStreamVtbl* do
     GUID = LibC::GUID.new(0xaf67f125_u32, 0xab39_u16, 0x4e93_u16, StaticArray[0xb4_u8, 0xa2_u8, 0xcc_u8, 0x2e_u8, 0x66_u8, 0xe1_u8, 0x82_u8, 0xa7_u8])
     def query_interface(this : ISpeechFileStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5350,7 +5409,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("eeb14b68-808b-4abe-a5ea-b51da7588008")]
   record ISpeechMemoryStream, lpVtbl : ISpeechMemoryStreamVtbl* do
     GUID = LibC::GUID.new(0xeeb14b68_u32, 0x808b_u16, 0x4abe_u16, StaticArray[0xa5_u8, 0xea_u8, 0xb5_u8, 0x1d_u8, 0xa7_u8, 0x58_u8, 0x80_u8, 0x8_u8])
     def query_interface(this : ISpeechMemoryStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5417,7 +5475,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("1a9e9f4f-104f-4db8-a115-efd7fd0c97ae")]
   record ISpeechCustomStream, lpVtbl : ISpeechCustomStreamVtbl* do
     GUID = LibC::GUID.new(0x1a9e9f4f_u32, 0x104f_u16, 0x4db8_u16, StaticArray[0xa1_u8, 0x15_u8, 0xef_u8, 0xd7_u8, 0xfd_u8, 0xc_u8, 0x97_u8, 0xae_u8])
     def query_interface(this : ISpeechCustomStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5491,7 +5548,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("cff8e175-019e-11d3-a08e-00c04f8ef9b5")]
   record ISpeechAudio, lpVtbl : ISpeechAudioVtbl* do
     GUID = LibC::GUID.new(0xcff8e175_u32, 0x19e_u16, 0x11d3_u16, StaticArray[0xa0_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf9_u8, 0xb5_u8])
     def query_interface(this : ISpeechAudio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5591,7 +5647,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("3c76af6d-1fd7-4831-81d1-3b71d5a13c44")]
   record ISpeechMMSysAudio, lpVtbl : ISpeechMMSysAudioVtbl* do
     GUID = LibC::GUID.new(0x3c76af6d_u32, 0x1fd7_u16, 0x4831_u16, StaticArray[0x81_u8, 0xd1_u8, 0x3b_u8, 0x71_u8, 0xd5_u8, 0xa1_u8, 0x3c_u8, 0x44_u8])
     def query_interface(this : ISpeechMMSysAudio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5719,7 +5774,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("269316d8-57bd-11d2-9eee-00c04f797396")]
   record ISpeechVoice, lpVtbl : ISpeechVoiceVtbl* do
     GUID = LibC::GUID.new(0x269316d8_u32, 0x57bd_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xee_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
     def query_interface(this : ISpeechVoice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5866,7 +5920,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("8be47b07-57f6-11d2-9eee-00c04f797396")]
   record ISpeechVoiceStatus, lpVtbl : ISpeechVoiceStatusVtbl* do
     GUID = LibC::GUID.new(0x8be47b07_u32, 0x57f6_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xee_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
     def query_interface(this : ISpeechVoiceStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5941,7 +5994,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("a372acd1-3bef-4bbd-8ffb-cb3e2b416af8")]
   record ISpeechVoiceEvents_, lpVtbl : ISpeechVoiceEvents_Vtbl* do
     GUID = LibC::GUID.new(0xa372acd1_u32, 0x3bef_u16, 0x4bbd_u16, StaticArray[0x8f_u8, 0xfb_u8, 0xcb_u8, 0x3e_u8, 0x2b_u8, 0x41_u8, 0x6a_u8, 0xf8_u8])
     def query_interface(this : ISpeechVoiceEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6006,7 +6058,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("2d5f1c0c-bd75-4b08-9478-3b11fea2586c")]
   record ISpeechRecognizer, lpVtbl : ISpeechRecognizerVtbl* do
     GUID = LibC::GUID.new(0x2d5f1c0c_u32, 0xbd75_u16, 0x4b08_u16, StaticArray[0x94_u8, 0x78_u8, 0x3b_u8, 0x11_u8, 0xfe_u8, 0xa2_u8, 0x58_u8, 0x6c_u8])
     def query_interface(this : ISpeechRecognizer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6129,7 +6180,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("bff9e781-53ec-484e-bb8a-0e1b5551e35c")]
   record ISpeechRecognizerStatus, lpVtbl : ISpeechRecognizerStatusVtbl* do
     GUID = LibC::GUID.new(0xbff9e781_u32, 0x53ec_u16, 0x484e_u16, StaticArray[0xbb_u8, 0x8a_u8, 0xe_u8, 0x1b_u8, 0x55_u8, 0x51_u8, 0xe3_u8, 0x5c_u8])
     def query_interface(this : ISpeechRecognizerStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6211,7 +6261,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("580aa49d-7e1e-4809-b8e2-57da806104b8")]
   record ISpeechRecoContext, lpVtbl : ISpeechRecoContextVtbl* do
     GUID = LibC::GUID.new(0x580aa49d_u32, 0x7e1e_u16, 0x4809_u16, StaticArray[0xb8_u8, 0xe2_u8, 0x57_u8, 0xda_u8, 0x80_u8, 0x61_u8, 0x4_u8, 0xb8_u8])
     def query_interface(this : ISpeechRecoContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6344,7 +6393,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("b6d6f79f-2158-4e50-b5bc-9a9ccd852a09")]
   record ISpeechRecoGrammar, lpVtbl : ISpeechRecoGrammarVtbl* do
     GUID = LibC::GUID.new(0xb6d6f79f_u32, 0x2158_u16, 0x4e50_u16, StaticArray[0xb5_u8, 0xbc_u8, 0x9a_u8, 0x9c_u8, 0xcd_u8, 0x85_u8, 0x2a_u8, 0x9_u8])
     def query_interface(this : ISpeechRecoGrammar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6440,7 +6488,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("7b8fcb42-0e9d-4f00-a048-7b04d6179d3d")]
   record ISpeechRecoContextEvents_, lpVtbl : ISpeechRecoContextEvents_Vtbl* do
     GUID = LibC::GUID.new(0x7b8fcb42_u32, 0xe9d_u16, 0x4f00_u16, StaticArray[0xa0_u8, 0x48_u8, 0x7b_u8, 0x4_u8, 0xd6_u8, 0x17_u8, 0x9d_u8, 0x3d_u8])
     def query_interface(this : ISpeechRecoContextEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6486,7 +6533,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("afe719cf-5dd1-44f2-999c-7a399f1cfccc")]
   record ISpeechGrammarRule, lpVtbl : ISpeechGrammarRuleVtbl* do
     GUID = LibC::GUID.new(0xafe719cf_u32, 0x5dd1_u16, 0x44f2_u16, StaticArray[0x99_u8, 0x9c_u8, 0x7a_u8, 0x39_u8, 0x9f_u8, 0x1c_u8, 0xfc_u8, 0xcc_u8])
     def query_interface(this : ISpeechGrammarRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6554,7 +6600,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("6ffa3b44-fc2d-40d1-8afc-32911c7f1ad1")]
   record ISpeechGrammarRules, lpVtbl : ISpeechGrammarRulesVtbl* do
     GUID = LibC::GUID.new(0x6ffa3b44_u32, 0xfc2d_u16, 0x40d1_u16, StaticArray[0x8a_u8, 0xfc_u8, 0x32_u8, 0x91_u8, 0x1c_u8, 0x7f_u8, 0x1a_u8, 0xd1_u8])
     def query_interface(this : ISpeechGrammarRules*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6622,7 +6667,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("d4286f2c-ee67-45ae-b928-28d695362eda")]
   record ISpeechGrammarRuleState, lpVtbl : ISpeechGrammarRuleStateVtbl* do
     GUID = LibC::GUID.new(0xd4286f2c_u32, 0xee67_u16, 0x45ae_u16, StaticArray[0xb9_u8, 0x28_u8, 0x28_u8, 0xd6_u8, 0x95_u8, 0x36_u8, 0x2e_u8, 0xda_u8])
     def query_interface(this : ISpeechGrammarRuleState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6684,7 +6728,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("cafd1db1-41d1-4a06-9863-e2e81da17a9a")]
   record ISpeechGrammarRuleStateTransition, lpVtbl : ISpeechGrammarRuleStateTransitionVtbl* do
     GUID = LibC::GUID.new(0xcafd1db1_u32, 0x41d1_u16, 0x4a06_u16, StaticArray[0x98_u8, 0x63_u8, 0xe2_u8, 0xe8_u8, 0x1d_u8, 0xa1_u8, 0x7a_u8, 0x9a_u8])
     def query_interface(this : ISpeechGrammarRuleStateTransition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6750,7 +6793,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("eabce657-75bc-44a2-aa7f-c56476742963")]
   record ISpeechGrammarRuleStateTransitions, lpVtbl : ISpeechGrammarRuleStateTransitionsVtbl* do
     GUID = LibC::GUID.new(0xeabce657_u32, 0x75bc_u16, 0x44a2_u16, StaticArray[0xaa_u8, 0x7f_u8, 0xc5_u8, 0x64_u8, 0x76_u8, 0x74_u8, 0x29_u8, 0x63_u8])
     def query_interface(this : ISpeechGrammarRuleStateTransitions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6806,7 +6848,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("3b9c7e7a-6eee-4ded-9092-11657279adbe")]
   record ISpeechTextSelectionInformation, lpVtbl : ISpeechTextSelectionInformationVtbl* do
     GUID = LibC::GUID.new(0x3b9c7e7a_u32, 0x6eee_u16, 0x4ded_u16, StaticArray[0x90_u8, 0x92_u8, 0x11_u8, 0x65_u8, 0x72_u8, 0x79_u8, 0xad_u8, 0xbe_u8])
     def query_interface(this : ISpeechTextSelectionInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6879,7 +6920,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("ed2879cf-ced9-4ee6-a534-de0191d5468d")]
   record ISpeechRecoResult, lpVtbl : ISpeechRecoResultVtbl* do
     GUID = LibC::GUID.new(0xed2879cf_u32, 0xced9_u16, 0x4ee6_u16, StaticArray[0xa5_u8, 0x34_u8, 0xde_u8, 0x1_u8, 0x91_u8, 0xd5_u8, 0x46_u8, 0x8d_u8])
     def query_interface(this : ISpeechRecoResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6959,7 +6999,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("8e0a246d-d3c8-45de-8657-04290c458c3c")]
   record ISpeechRecoResult2, lpVtbl : ISpeechRecoResult2Vtbl* do
     GUID = LibC::GUID.new(0x8e0a246d_u32, 0xd3c8_u16, 0x45de_u16, StaticArray[0x86_u8, 0x57_u8, 0x4_u8, 0x29_u8, 0xc_u8, 0x45_u8, 0x8c_u8, 0x3c_u8])
     def query_interface(this : ISpeechRecoResult2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7035,7 +7074,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("62b3b8fb-f6e7-41be-bdcb-056b1c29efc0")]
   record ISpeechRecoResultTimes, lpVtbl : ISpeechRecoResultTimesVtbl* do
     GUID = LibC::GUID.new(0x62b3b8fb_u32, 0xf6e7_u16, 0x41be_u16, StaticArray[0xbd_u8, 0xcb_u8, 0x5_u8, 0x6b_u8, 0x1c_u8, 0x29_u8, 0xef_u8, 0xc0_u8])
     def query_interface(this : ISpeechRecoResultTimes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7091,7 +7129,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("27864a2a-2b9f-4cb8-92d3-0d2722fd1e73")]
   record ISpeechPhraseAlternate, lpVtbl : ISpeechPhraseAlternateVtbl* do
     GUID = LibC::GUID.new(0x27864a2a_u32, 0x2b9f_u16, 0x4cb8_u16, StaticArray[0x92_u8, 0xd3_u8, 0xd_u8, 0x27_u8, 0x22_u8, 0xfd_u8, 0x1e_u8, 0x73_u8])
     def query_interface(this : ISpeechPhraseAlternate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7148,7 +7185,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("b238b6d5-f276-4c3d-a6c1-2974801c3cc2")]
   record ISpeechPhraseAlternates, lpVtbl : ISpeechPhraseAlternatesVtbl* do
     GUID = LibC::GUID.new(0xb238b6d5_u32, 0xf276_u16, 0x4c3d_u16, StaticArray[0xa6_u8, 0xc1_u8, 0x29_u8, 0x74_u8, 0x80_u8, 0x1c_u8, 0x3c_u8, 0xc2_u8])
     def query_interface(this : ISpeechPhraseAlternates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7212,7 +7248,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("961559cf-4e67-4662-8bf0-d93f1fcd61b3")]
   record ISpeechPhraseInfo, lpVtbl : ISpeechPhraseInfoVtbl* do
     GUID = LibC::GUID.new(0x961559cf_u32, 0x4e67_u16, 0x4662_u16, StaticArray[0x8b_u8, 0xf0_u8, 0xd9_u8, 0x3f_u8, 0x1f_u8, 0xcd_u8, 0x61_u8, 0xb3_u8])
     def query_interface(this : ISpeechPhraseInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7312,7 +7347,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("e6176f96-e373-4801-b223-3b62c068c0b4")]
   record ISpeechPhraseElement, lpVtbl : ISpeechPhraseElementVtbl* do
     GUID = LibC::GUID.new(0xe6176f96_u32, 0xe373_u16, 0x4801_u16, StaticArray[0xb2_u8, 0x23_u8, 0x3b_u8, 0x62_u8, 0xc0_u8, 0x68_u8, 0xc0_u8, 0xb4_u8])
     def query_interface(this : ISpeechPhraseElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7393,7 +7427,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("0626b328-3478-467d-a0b3-d0853b93dda3")]
   record ISpeechPhraseElements, lpVtbl : ISpeechPhraseElementsVtbl* do
     GUID = LibC::GUID.new(0x626b328_u32, 0x3478_u16, 0x467d_u16, StaticArray[0xa0_u8, 0xb3_u8, 0xd0_u8, 0x85_u8, 0x3b_u8, 0x93_u8, 0xdd_u8, 0xa3_u8])
     def query_interface(this : ISpeechPhraseElements*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7445,7 +7478,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("2890a410-53a7-4fb5-94ec-06d4998e3d02")]
   record ISpeechPhraseReplacement, lpVtbl : ISpeechPhraseReplacementVtbl* do
     GUID = LibC::GUID.new(0x2890a410_u32, 0x53a7_u16, 0x4fb5_u16, StaticArray[0x94_u8, 0xec_u8, 0x6_u8, 0xd4_u8, 0x99_u8, 0x8e_u8, 0x3d_u8, 0x2_u8])
     def query_interface(this : ISpeechPhraseReplacement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7499,7 +7531,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("38bc662f-2257-4525-959e-2069d2596c05")]
   record ISpeechPhraseReplacements, lpVtbl : ISpeechPhraseReplacementsVtbl* do
     GUID = LibC::GUID.new(0x38bc662f_u32, 0x2257_u16, 0x4525_u16, StaticArray[0x95_u8, 0x9e_u8, 0x20_u8, 0x69_u8, 0xd2_u8, 0x59_u8, 0x6c_u8, 0x5_u8])
     def query_interface(this : ISpeechPhraseReplacements*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7556,7 +7587,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("ce563d48-961e-4732-a2e1-378a42b430be")]
   record ISpeechPhraseProperty, lpVtbl : ISpeechPhrasePropertyVtbl* do
     GUID = LibC::GUID.new(0xce563d48_u32, 0x961e_u16, 0x4732_u16, StaticArray[0xa2_u8, 0xe1_u8, 0x37_u8, 0x8a_u8, 0x42_u8, 0xb4_u8, 0x30_u8, 0xbe_u8])
     def query_interface(this : ISpeechPhraseProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7625,7 +7655,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("08166b47-102e-4b23-a599-bdb98dbfd1f4")]
   record ISpeechPhraseProperties, lpVtbl : ISpeechPhrasePropertiesVtbl* do
     GUID = LibC::GUID.new(0x8166b47_u32, 0x102e_u16, 0x4b23_u16, StaticArray[0xa5_u8, 0x99_u8, 0xbd_u8, 0xb9_u8, 0x8d_u8, 0xbf_u8, 0xd1_u8, 0xf4_u8])
     def query_interface(this : ISpeechPhraseProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7681,7 +7710,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("a7bfe112-a4a0-48d9-b602-c313843f6964")]
   record ISpeechPhraseRule, lpVtbl : ISpeechPhraseRuleVtbl* do
     GUID = LibC::GUID.new(0xa7bfe112_u32, 0xa4a0_u16, 0x48d9_u16, StaticArray[0xb6_u8, 0x2_u8, 0xc3_u8, 0x13_u8, 0x84_u8, 0x3f_u8, 0x69_u8, 0x64_u8])
     def query_interface(this : ISpeechPhraseRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7747,7 +7775,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("9047d593-01dd-4b72-81a3-e4a0ca69f407")]
   record ISpeechPhraseRules, lpVtbl : ISpeechPhraseRulesVtbl* do
     GUID = LibC::GUID.new(0x9047d593_u32, 0x1dd_u16, 0x4b72_u16, StaticArray[0x81_u8, 0xa3_u8, 0xe4_u8, 0xa0_u8, 0xca_u8, 0x69_u8, 0xf4_u8, 0x7_u8])
     def query_interface(this : ISpeechPhraseRules*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7803,7 +7830,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("3da7627a-c7ae-4b23-8708-638c50362c25")]
   record ISpeechLexicon, lpVtbl : ISpeechLexiconVtbl* do
     GUID = LibC::GUID.new(0x3da7627a_u32, 0xc7ae_u16, 0x4b23_u16, StaticArray[0x87_u8, 0x8_u8, 0x63_u8, 0x8c_u8, 0x50_u8, 0x36_u8, 0x2c_u8, 0x25_u8])
     def query_interface(this : ISpeechLexicon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7869,7 +7895,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("8d199862-415e-47d5-ac4f-faa608b424e6")]
   record ISpeechLexiconWords, lpVtbl : ISpeechLexiconWordsVtbl* do
     GUID = LibC::GUID.new(0x8d199862_u32, 0x415e_u16, 0x47d5_u16, StaticArray[0xac_u8, 0x4f_u8, 0xfa_u8, 0xa6_u8, 0x8_u8, 0xb4_u8, 0x24_u8, 0xe6_u8])
     def query_interface(this : ISpeechLexiconWords*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7921,7 +7946,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("4e5b933c-c9be-48ed-8842-1ee51bb1d4ff")]
   record ISpeechLexiconWord, lpVtbl : ISpeechLexiconWordVtbl* do
     GUID = LibC::GUID.new(0x4e5b933c_u32, 0xc9be_u16, 0x48ed_u16, StaticArray[0x88_u8, 0x42_u8, 0x1e_u8, 0xe5_u8, 0x1b_u8, 0xb1_u8, 0xd4_u8, 0xff_u8])
     def query_interface(this : ISpeechLexiconWord*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7975,7 +7999,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("72829128-5682-4704-a0d4-3e2bb6f2ead3")]
   record ISpeechLexiconPronunciations, lpVtbl : ISpeechLexiconPronunciationsVtbl* do
     GUID = LibC::GUID.new(0x72829128_u32, 0x5682_u16, 0x4704_u16, StaticArray[0xa0_u8, 0xd4_u8, 0x3e_u8, 0x2b_u8, 0xb6_u8, 0xf2_u8, 0xea_u8, 0xd3_u8])
     def query_interface(this : ISpeechLexiconPronunciations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8028,7 +8051,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("95252c5d-9e43-4f4a-9899-48ee73352f9f")]
   record ISpeechLexiconPronunciation, lpVtbl : ISpeechLexiconPronunciationVtbl* do
     GUID = LibC::GUID.new(0x95252c5d_u32, 0x9e43_u16, 0x4f4a_u16, StaticArray[0x98_u8, 0x99_u8, 0x48_u8, 0xee_u8, 0x73_u8, 0x35_u8, 0x2f_u8, 0x9f_u8])
     def query_interface(this : ISpeechLexiconPronunciation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8094,7 +8116,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("aaec54af-8f85-4924-944d-b79d39d72e19")]
   record ISpeechXMLRecoResult, lpVtbl : ISpeechXMLRecoResultVtbl* do
     GUID = LibC::GUID.new(0xaaec54af_u32, 0x8f85_u16, 0x4924_u16, StaticArray[0x94_u8, 0x4d_u8, 0xb7_u8, 0x9d_u8, 0x39_u8, 0xd7_u8, 0x2e_u8, 0x19_u8])
     def query_interface(this : ISpeechXMLRecoResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8182,7 +8203,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("6d60eb64-aced-40a6-bbf3-4e557f71dee2")]
   record ISpeechRecoResultDispatch, lpVtbl : ISpeechRecoResultDispatchVtbl* do
     GUID = LibC::GUID.new(0x6d60eb64_u32, 0xaced_u16, 0x40a6_u16, StaticArray[0xbb_u8, 0xf3_u8, 0x4e_u8, 0x55_u8, 0x7f_u8, 0x71_u8, 0xde_u8, 0xe2_u8])
     def query_interface(this : ISpeechRecoResultDispatch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8261,7 +8281,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("3b151836-df3a-4e0a-846c-d2adc9334333")]
   record ISpeechPhraseInfoBuilder, lpVtbl : ISpeechPhraseInfoBuilderVtbl* do
     GUID = LibC::GUID.new(0x3b151836_u32, 0xdf3a_u16, 0x4e0a_u16, StaticArray[0x84_u8, 0x6c_u8, 0xd2_u8, 0xad_u8, 0xc9_u8, 0x33_u8, 0x43_u8, 0x33_u8])
     def query_interface(this : ISpeechPhraseInfoBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8307,7 +8326,6 @@ module Win32cr::Media::Speech
 
 
   @[Extern]
-  #@[Com("c3e4f353-433f-43d6-89a1-6a62a7054c3d")]
   record ISpeechPhoneConverter, lpVtbl : ISpeechPhoneConverterVtbl* do
     GUID = LibC::GUID.new(0xc3e4f353_u32, 0x433f_u16, 0x43d6_u16, StaticArray[0x89_u8, 0xa1_u8, 0x6a_u8, 0x62_u8, 0xa7_u8, 0x5_u8, 0x4c_u8, 0x3d_u8])
     def query_interface(this : ISpeechPhoneConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

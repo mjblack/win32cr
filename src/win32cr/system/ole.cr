@@ -8,7 +8,7 @@ require "./../ui/controls/dialogs.cr"
 require "./../ui/controls.cr"
 
 module Win32cr::System::Ole
-  alias LPFNOLEUIHOOK = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)*
+  alias LPFNOLEUIHOOK = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)
 
   CTL_E_ILLEGALFUNCTIONCALL = -2146828283_i32
   CONNECT_E_FIRST = -2147220992_i32
@@ -1221,772 +1221,984 @@ module Win32cr::System::Ole
   end
 
   @[Extern]
-  record Wiresafearr_bstr_,
-    size : UInt32,
-    aBstr : Win32cr::System::Com::FLAGGED_WORD_BLOB**
+  struct Wiresafearr_bstr_
+    property size : UInt32
+    property aBstr : Win32cr::System::Com::FLAGGED_WORD_BLOB**
+    def initialize(@size : UInt32, @aBstr : Win32cr::System::Com::FLAGGED_WORD_BLOB**)
+    end
+  end
 
   @[Extern]
-  record Wiresafearr_unknown_,
-    size : UInt32,
-    apUnknown : Void**
+  struct Wiresafearr_unknown_
+    property size : UInt32
+    property apUnknown : Void**
+    def initialize(@size : UInt32, @apUnknown : Void**)
+    end
+  end
 
   @[Extern]
-  record Wiresafearr_dispatch_,
-    size : UInt32,
-    apDispatch : Void**
+  struct Wiresafearr_dispatch_
+    property size : UInt32
+    property apDispatch : Void**
+    def initialize(@size : UInt32, @apDispatch : Void**)
+    end
+  end
 
   @[Extern]
-  record Wiresafearr_variant_,
-    size : UInt32,
-    aVariant : Win32cr::System::Ole::Wirevariant_**
+  struct Wiresafearr_variant_
+    property size : UInt32
+    property aVariant : Win32cr::System::Ole::Wirevariant_**
+    def initialize(@size : UInt32, @aVariant : Win32cr::System::Ole::Wirevariant_**)
+    end
+  end
 
   @[Extern]
-  record Wiresafearr_brecord_,
-    size : UInt32,
-    aRecord : Win32cr::System::Ole::Wirebrecord_**
+  struct Wiresafearr_brecord_
+    property size : UInt32
+    property aRecord : Win32cr::System::Ole::Wirebrecord_**
+    def initialize(@size : UInt32, @aRecord : Win32cr::System::Ole::Wirebrecord_**)
+    end
+  end
 
   @[Extern]
-  record Wiresafearr_haveiid_,
-    size : UInt32,
-    apUnknown : Void**,
-    iid : LibC::GUID
+  struct Wiresafearr_haveiid_
+    property size : UInt32
+    property apUnknown : Void**
+    property iid : LibC::GUID
+    def initialize(@size : UInt32, @apUnknown : Void**, @iid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record Wiresafearray_union_,
-    sfType : UInt32,
-    u : U_e__struct_ do
+  struct Wiresafearray_union_
+    property sfType : UInt32
+    property u : U_e__struct_
 
     # Nested Type U_e__struct_
     @[Extern(union: true)]
-    record U_e__struct_,
-      bstr_str : Win32cr::System::Ole::Wiresafearr_bstr_,
-      unknown_str : Win32cr::System::Ole::Wiresafearr_unknown_,
-      dispatch_str : Win32cr::System::Ole::Wiresafearr_dispatch_,
-      variant_str : Win32cr::System::Ole::Wiresafearr_variant_,
-      record_str : Win32cr::System::Ole::Wiresafearr_brecord_,
-      have_iid_str : Win32cr::System::Ole::Wiresafearr_haveiid_,
-      byte_str : Win32cr::System::Com::BYTE_SIZEDARR,
-      word_str : Win32cr::System::Com::SHORT_SIZEDARR,
-      long_str : Win32cr::System::Com::LONG_SIZEDARR,
-      hyper_str : Win32cr::System::Com::HYPER_SIZEDARR
+    struct U_e__struct_
+    property bstr_str : Win32cr::System::Ole::Wiresafearr_bstr_
+    property unknown_str : Win32cr::System::Ole::Wiresafearr_unknown_
+    property dispatch_str : Win32cr::System::Ole::Wiresafearr_dispatch_
+    property variant_str : Win32cr::System::Ole::Wiresafearr_variant_
+    property record_str : Win32cr::System::Ole::Wiresafearr_brecord_
+    property have_iid_str : Win32cr::System::Ole::Wiresafearr_haveiid_
+    property byte_str : Win32cr::System::Com::BYTE_SIZEDARR
+    property word_str : Win32cr::System::Com::SHORT_SIZEDARR
+    property long_str : Win32cr::System::Com::LONG_SIZEDARR
+    property hyper_str : Win32cr::System::Com::HYPER_SIZEDARR
+    def initialize(@bstr_str : Win32cr::System::Ole::Wiresafearr_bstr_, @unknown_str : Win32cr::System::Ole::Wiresafearr_unknown_, @dispatch_str : Win32cr::System::Ole::Wiresafearr_dispatch_, @variant_str : Win32cr::System::Ole::Wiresafearr_variant_, @record_str : Win32cr::System::Ole::Wiresafearr_brecord_, @have_iid_str : Win32cr::System::Ole::Wiresafearr_haveiid_, @byte_str : Win32cr::System::Com::BYTE_SIZEDARR, @word_str : Win32cr::System::Com::SHORT_SIZEDARR, @long_str : Win32cr::System::Com::LONG_SIZEDARR, @hyper_str : Win32cr::System::Com::HYPER_SIZEDARR)
+    end
+    end
 
+    def initialize(@sfType : UInt32, @u : U_e__struct_)
+    end
   end
 
   @[Extern]
-  record Wiresafearray_,
-    cDims : UInt16,
-    fFeatures : UInt16,
-    cbElements : UInt32,
-    cLocks : UInt32,
-    uArrayStructs : Win32cr::System::Ole::Wiresafearray_union_,
-    rgsabound : Win32cr::System::Com::SAFEARRAYBOUND*
-
-  @[Extern]
-  record Wirebrecord_,
-    fFlags : UInt32,
-    clSize : UInt32,
-    pRecInfo : Void*,
-    pRecord : UInt8*
-
-  @[Extern]
-  record Wirevariant_,
-    clSize : UInt32,
-    rpcReserved : UInt32,
-    vt : UInt16,
-    wReserved1 : UInt16,
-    wReserved2 : UInt16,
-    wReserved3 : UInt16,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      llVal : Int64,
-      lVal : Int32,
-      bVal : UInt8,
-      iVal : Int16,
-      fltVal : Float32,
-      dblVal : Float64,
-      boolVal : Int16,
-      scode : Int32,
-      cyVal : Win32cr::System::Com::CY,
-      date : Float64,
-      bstrVal : Win32cr::System::Com::FLAGGED_WORD_BLOB*,
-      punkVal : Void*,
-      pdispVal : Void*,
-      parray : Win32cr::System::Ole::Wiresafearray_**,
-      brecVal : Win32cr::System::Ole::Wirebrecord_*,
-      pbVal : UInt8*,
-      piVal : Int16*,
-      plVal : Int32*,
-      pllVal : Int64*,
-      pfltVal : Float32*,
-      pdblVal : Float64*,
-      pboolVal : Int16*,
-      pscode : Int32*,
-      pcyVal : Win32cr::System::Com::CY*,
-      pdate : Float64*,
-      pbstrVal : Win32cr::System::Com::FLAGGED_WORD_BLOB**,
-      ppunkVal : Void**,
-      ppdispVal : Void**,
-      pparray : Win32cr::System::Ole::Wiresafearray_***,
-      pvarVal : Win32cr::System::Ole::Wirevariant_**,
-      cVal : Win32cr::Foundation::CHAR,
-      uiVal : UInt16,
-      ulVal : UInt32,
-      ullVal : UInt64,
-      intVal : Int32,
-      uintVal : UInt32,
-      decVal : Win32cr::Foundation::DECIMAL,
-      pdecVal : Win32cr::Foundation::DECIMAL*,
-      pcVal : Win32cr::Foundation::PSTR,
-      puiVal : UInt16*,
-      pulVal : UInt32*,
-      pullVal : UInt64*,
-      pintVal : Int32*,
-      puintVal : UInt32*
-
+  struct Wiresafearray_
+    property cDims : UInt16
+    property fFeatures : UInt16
+    property cbElements : UInt32
+    property cLocks : UInt32
+    property uArrayStructs : Win32cr::System::Ole::Wiresafearray_union_
+    property rgsabound : Win32cr::System::Com::SAFEARRAYBOUND*
+    def initialize(@cDims : UInt16, @fFeatures : UInt16, @cbElements : UInt32, @cLocks : UInt32, @uArrayStructs : Win32cr::System::Ole::Wiresafearray_union_, @rgsabound : Win32cr::System::Com::SAFEARRAYBOUND*)
+    end
   end
 
   @[Extern]
-  record ARRAYDESC,
-    tdescElem : Win32cr::System::Com::TYPEDESC,
-    cDims : UInt16,
-    rgbounds : Win32cr::System::Com::SAFEARRAYBOUND*
+  struct Wirebrecord_
+    property fFlags : UInt32
+    property clSize : UInt32
+    property pRecInfo : Void*
+    property pRecord : UInt8*
+    def initialize(@fFlags : UInt32, @clSize : UInt32, @pRecInfo : Void*, @pRecord : UInt8*)
+    end
+  end
 
   @[Extern]
-  record PARAMDESCEX,
-    cBytes : UInt32,
-    varDefaultValue : Win32cr::System::Com::VARIANT
-
-  @[Extern]
-  record PARAMDESC,
-    pparamdescex : Win32cr::System::Ole::PARAMDESCEX*,
-    wParamFlags : UInt16
-
-  @[Extern]
-  record CLEANLOCALSTORAGE,
-    pInterface : Void*,
-    pStorage : Void*,
-    flags : UInt32
-
-  @[Extern]
-  record OBJECTDESCRIPTOR,
-    cbSize : UInt32,
-    clsid : LibC::GUID,
-    dwDrawAspect : UInt32,
-    sizel : Win32cr::Foundation::SIZE,
-    pointl : Win32cr::Foundation::POINTL,
-    dwStatus : UInt32,
-    dwFullUserTypeName : UInt32,
-    dwSrcOfCopy : UInt32
-
-  @[Extern]
-  record OIFI,
-    cb : UInt32,
-    fMDIApp : Win32cr::Foundation::BOOL,
-    hwndFrame : Win32cr::Foundation::HWND,
-    haccel : Win32cr::UI::WindowsAndMessaging::HACCEL,
-    cAccelEntries : UInt32
-
-  @[Extern]
-  record OleMenuGroupWidths,
-    width : Int32[6]
-
-  @[Extern]
-  record OLEVERB,
-    lVerb : Int32,
-    lpszVerbName : Win32cr::Foundation::PWSTR,
-    fuFlags : UInt32,
-    grfAttribs : UInt32
-
-  @[Extern]
-  record NUMPARSE,
-    cDig : Int32,
-    dwInFlags : UInt32,
-    dwOutFlags : UInt32,
-    cchUsed : Int32,
-    nBaseShift : Int32,
-    nPwr10 : Int32
-
-  @[Extern]
-  record UDATE,
-    st : Win32cr::Foundation::SYSTEMTIME,
-    wDayOfYear : UInt16
-
-  @[Extern]
-  record PARAMDATA,
-    szName : Win32cr::Foundation::PWSTR,
-    vt : UInt16
-
-  @[Extern]
-  record METHODDATA,
-    szName : Win32cr::Foundation::PWSTR,
-    ppdata : Win32cr::System::Ole::PARAMDATA*,
-    dispid : Int32,
-    iMeth : UInt32,
-    cc : Win32cr::System::Com::CALLCONV,
-    cArgs : UInt32,
-    wFlags : UInt16,
-    vtReturn : UInt16
-
-  @[Extern]
-  record INTERFACEDATA,
-    pmethdata : Win32cr::System::Ole::METHODDATA*,
-    cMembers : UInt32
-
-  @[Extern]
-  record LICINFO,
-    cbLicInfo : Int32,
-    fRuntimeKeyAvail : Win32cr::Foundation::BOOL,
-    fLicVerified : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record CONTROLINFO,
-    cb : UInt32,
-    hAccel : Win32cr::UI::WindowsAndMessaging::HACCEL,
-    cAccel : UInt16,
-    dwFlags : UInt32
-
-  @[Extern]
-  record POINTF,
-    x : Float32,
-    y : Float32
-
-  @[Extern]
-  record PROPPAGEINFO,
-    cb : UInt32,
-    pszTitle : Win32cr::Foundation::PWSTR,
-    size : Win32cr::Foundation::SIZE,
-    pszDocString : Win32cr::Foundation::PWSTR,
-    pszHelpFile : Win32cr::Foundation::PWSTR,
-    dwHelpContext : UInt32
-
-  @[Extern]
-  record CAUUID,
-    cElems : UInt32,
-    pElems : LibC::GUID*
-
-  @[Extern]
-  record ExtentInfo,
-    cb : UInt32,
-    dwExtentMode : UInt32,
-    sizelProposed : Win32cr::Foundation::SIZE
-
-  @[Extern]
-  record AspectInfo,
-    cb : UInt32,
-    dwFlags : UInt32
-
-  @[Extern]
-  record CALPOLESTR,
-    cElems : UInt32,
-    pElems : Win32cr::Foundation::PWSTR*
-
-  @[Extern]
-  record CADWORD,
-    cElems : UInt32,
-    pElems : UInt32*
-
-  @[Extern]
-  record QACONTAINER,
-    cbSize : UInt32,
-    pClientSite : Void*,
-    pAdviseSink : Void*,
-    pPropertyNotifySink : Void*,
-    pUnkEventSink : Void*,
-    dwAmbientFlags : UInt32,
-    colorFore : UInt32,
-    colorBack : UInt32,
-    pFont : Void*,
-    pUndoMgr : Void*,
-    dwAppearance : UInt32,
-    lcid : Int32,
-    hpal : Win32cr::Graphics::Gdi::HPALETTE,
-    pBindHost : Void*,
-    pOleControlSite : Void*,
-    pServiceProvider : Void*
-
-  @[Extern]
-  record QACONTROL,
-    cbSize : UInt32,
-    dwMiscStatus : UInt32,
-    dwViewStatus : UInt32,
-    dwEventCookie : UInt32,
-    dwPropNotifyCookie : UInt32,
-    dwPointerActivationPolicy : UInt32
-
-  @[Extern]
-  record OCPFIPARAMS,
-    cbStructSize : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    x : Int32,
-    y : Int32,
-    lpszCaption : Win32cr::Foundation::PWSTR,
-    cObjects : UInt32,
-    lplpUnk : Void**,
-    cPages : UInt32,
-    lpPages : LibC::GUID*,
-    lcid : UInt32,
-    dispidInitialProperty : Int32
-
-  @[Extern]
-  record FONTDESC,
-    cbSizeofstruct : UInt32,
-    lpstrName : Win32cr::Foundation::PWSTR,
-    cySize : Win32cr::System::Com::CY,
-    sWeight : Int16,
-    sCharset : Int16,
-    fItalic : Win32cr::Foundation::BOOL,
-    fUnderline : Win32cr::Foundation::BOOL,
-    fStrikethrough : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record PICTDESC,
-    cbSizeofstruct : UInt32,
-    picType : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct Wirevariant_
+    property clSize : UInt32
+    property rpcReserved : UInt32
+    property vt : UInt16
+    property wReserved1 : UInt16
+    property wReserved2 : UInt16
+    property wReserved3 : UInt16
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      bmp : Bmp_e__struct_,
-      wmf : Wmf_e__struct_,
-      icon : Icon_e__struct_,
-      emf : Emf_e__struct_ do
+    struct Anonymous_e__Union_
+    property llVal : Int64
+    property lVal : Int32
+    property bVal : UInt8
+    property iVal : Int16
+    property fltVal : Float32
+    property dblVal : Float64
+    property boolVal : Int16
+    property scode : Int32
+    property cyVal : Win32cr::System::Com::CY
+    property date : Float64
+    property bstrVal : Win32cr::System::Com::FLAGGED_WORD_BLOB*
+    property punkVal : Void*
+    property pdispVal : Void*
+    property parray : Win32cr::System::Ole::Wiresafearray_**
+    property brecVal : Win32cr::System::Ole::Wirebrecord_*
+    property pbVal : UInt8*
+    property piVal : Int16*
+    property plVal : Int32*
+    property pllVal : Int64*
+    property pfltVal : Float32*
+    property pdblVal : Float64*
+    property pboolVal : Int16*
+    property pscode : Int32*
+    property pcyVal : Win32cr::System::Com::CY*
+    property pdate : Float64*
+    property pbstrVal : Win32cr::System::Com::FLAGGED_WORD_BLOB**
+    property ppunkVal : Void**
+    property ppdispVal : Void**
+    property pparray : Win32cr::System::Ole::Wiresafearray_***
+    property pvarVal : Win32cr::System::Ole::Wirevariant_**
+    property cVal : Win32cr::Foundation::CHAR
+    property uiVal : UInt16
+    property ulVal : UInt32
+    property ullVal : UInt64
+    property intVal : Int32
+    property uintVal : UInt32
+    property decVal : Win32cr::Foundation::DECIMAL
+    property pdecVal : Win32cr::Foundation::DECIMAL*
+    property pcVal : Win32cr::Foundation::PSTR
+    property puiVal : UInt16*
+    property pulVal : UInt32*
+    property pullVal : UInt64*
+    property pintVal : Int32*
+    property puintVal : UInt32*
+    def initialize(@llVal : Int64, @lVal : Int32, @bVal : UInt8, @iVal : Int16, @fltVal : Float32, @dblVal : Float64, @boolVal : Int16, @scode : Int32, @cyVal : Win32cr::System::Com::CY, @date : Float64, @bstrVal : Win32cr::System::Com::FLAGGED_WORD_BLOB*, @punkVal : Void*, @pdispVal : Void*, @parray : Win32cr::System::Ole::Wiresafearray_**, @brecVal : Win32cr::System::Ole::Wirebrecord_*, @pbVal : UInt8*, @piVal : Int16*, @plVal : Int32*, @pllVal : Int64*, @pfltVal : Float32*, @pdblVal : Float64*, @pboolVal : Int16*, @pscode : Int32*, @pcyVal : Win32cr::System::Com::CY*, @pdate : Float64*, @pbstrVal : Win32cr::System::Com::FLAGGED_WORD_BLOB**, @ppunkVal : Void**, @ppdispVal : Void**, @pparray : Win32cr::System::Ole::Wiresafearray_***, @pvarVal : Win32cr::System::Ole::Wirevariant_**, @cVal : Win32cr::Foundation::CHAR, @uiVal : UInt16, @ulVal : UInt32, @ullVal : UInt64, @intVal : Int32, @uintVal : UInt32, @decVal : Win32cr::Foundation::DECIMAL, @pdecVal : Win32cr::Foundation::DECIMAL*, @pcVal : Win32cr::Foundation::PSTR, @puiVal : UInt16*, @pulVal : UInt32*, @pullVal : UInt64*, @pintVal : Int32*, @puintVal : UInt32*)
+    end
+    end
+
+    def initialize(@clSize : UInt32, @rpcReserved : UInt32, @vt : UInt16, @wReserved1 : UInt16, @wReserved2 : UInt16, @wReserved3 : UInt16, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct ARRAYDESC
+    property tdescElem : Win32cr::System::Com::TYPEDESC
+    property cDims : UInt16
+    property rgbounds : Win32cr::System::Com::SAFEARRAYBOUND*
+    def initialize(@tdescElem : Win32cr::System::Com::TYPEDESC, @cDims : UInt16, @rgbounds : Win32cr::System::Com::SAFEARRAYBOUND*)
+    end
+  end
+
+  @[Extern]
+  struct PARAMDESCEX
+    property cBytes : UInt32
+    property varDefaultValue : Win32cr::System::Com::VARIANT
+    def initialize(@cBytes : UInt32, @varDefaultValue : Win32cr::System::Com::VARIANT)
+    end
+  end
+
+  @[Extern]
+  struct PARAMDESC
+    property pparamdescex : Win32cr::System::Ole::PARAMDESCEX*
+    property wParamFlags : UInt16
+    def initialize(@pparamdescex : Win32cr::System::Ole::PARAMDESCEX*, @wParamFlags : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct CLEANLOCALSTORAGE
+    property pInterface : Void*
+    property pStorage : Void*
+    property flags : UInt32
+    def initialize(@pInterface : Void*, @pStorage : Void*, @flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct OBJECTDESCRIPTOR
+    property cbSize : UInt32
+    property clsid : LibC::GUID
+    property dwDrawAspect : UInt32
+    property sizel : Win32cr::Foundation::SIZE
+    property pointl : Win32cr::Foundation::POINTL
+    property dwStatus : UInt32
+    property dwFullUserTypeName : UInt32
+    property dwSrcOfCopy : UInt32
+    def initialize(@cbSize : UInt32, @clsid : LibC::GUID, @dwDrawAspect : UInt32, @sizel : Win32cr::Foundation::SIZE, @pointl : Win32cr::Foundation::POINTL, @dwStatus : UInt32, @dwFullUserTypeName : UInt32, @dwSrcOfCopy : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct OIFI
+    property cb : UInt32
+    property fMDIApp : Win32cr::Foundation::BOOL
+    property hwndFrame : Win32cr::Foundation::HWND
+    property haccel : Win32cr::UI::WindowsAndMessaging::HACCEL
+    property cAccelEntries : UInt32
+    def initialize(@cb : UInt32, @fMDIApp : Win32cr::Foundation::BOOL, @hwndFrame : Win32cr::Foundation::HWND, @haccel : Win32cr::UI::WindowsAndMessaging::HACCEL, @cAccelEntries : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct OleMenuGroupWidths
+    property width : Int32[6]
+    def initialize(@width : Int32[6])
+    end
+  end
+
+  @[Extern]
+  struct OLEVERB
+    property lVerb : Int32
+    property lpszVerbName : Win32cr::Foundation::PWSTR
+    property fuFlags : UInt32
+    property grfAttribs : UInt32
+    def initialize(@lVerb : Int32, @lpszVerbName : Win32cr::Foundation::PWSTR, @fuFlags : UInt32, @grfAttribs : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NUMPARSE
+    property cDig : Int32
+    property dwInFlags : UInt32
+    property dwOutFlags : UInt32
+    property cchUsed : Int32
+    property nBaseShift : Int32
+    property nPwr10 : Int32
+    def initialize(@cDig : Int32, @dwInFlags : UInt32, @dwOutFlags : UInt32, @cchUsed : Int32, @nBaseShift : Int32, @nPwr10 : Int32)
+    end
+  end
+
+  @[Extern]
+  struct UDATE
+    property st : Win32cr::Foundation::SYSTEMTIME
+    property wDayOfYear : UInt16
+    def initialize(@st : Win32cr::Foundation::SYSTEMTIME, @wDayOfYear : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct PARAMDATA
+    property szName : Win32cr::Foundation::PWSTR
+    property vt : UInt16
+    def initialize(@szName : Win32cr::Foundation::PWSTR, @vt : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct METHODDATA
+    property szName : Win32cr::Foundation::PWSTR
+    property ppdata : Win32cr::System::Ole::PARAMDATA*
+    property dispid : Int32
+    property iMeth : UInt32
+    property cc : Win32cr::System::Com::CALLCONV
+    property cArgs : UInt32
+    property wFlags : UInt16
+    property vtReturn : UInt16
+    def initialize(@szName : Win32cr::Foundation::PWSTR, @ppdata : Win32cr::System::Ole::PARAMDATA*, @dispid : Int32, @iMeth : UInt32, @cc : Win32cr::System::Com::CALLCONV, @cArgs : UInt32, @wFlags : UInt16, @vtReturn : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct INTERFACEDATA
+    property pmethdata : Win32cr::System::Ole::METHODDATA*
+    property cMembers : UInt32
+    def initialize(@pmethdata : Win32cr::System::Ole::METHODDATA*, @cMembers : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct LICINFO
+    property cbLicInfo : Int32
+    property fRuntimeKeyAvail : Win32cr::Foundation::BOOL
+    property fLicVerified : Win32cr::Foundation::BOOL
+    def initialize(@cbLicInfo : Int32, @fRuntimeKeyAvail : Win32cr::Foundation::BOOL, @fLicVerified : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct CONTROLINFO
+    property cb : UInt32
+    property hAccel : Win32cr::UI::WindowsAndMessaging::HACCEL
+    property cAccel : UInt16
+    property dwFlags : UInt32
+    def initialize(@cb : UInt32, @hAccel : Win32cr::UI::WindowsAndMessaging::HACCEL, @cAccel : UInt16, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct POINTF
+    property x : Float32
+    property y : Float32
+    def initialize(@x : Float32, @y : Float32)
+    end
+  end
+
+  @[Extern]
+  struct PROPPAGEINFO
+    property cb : UInt32
+    property pszTitle : Win32cr::Foundation::PWSTR
+    property size : Win32cr::Foundation::SIZE
+    property pszDocString : Win32cr::Foundation::PWSTR
+    property pszHelpFile : Win32cr::Foundation::PWSTR
+    property dwHelpContext : UInt32
+    def initialize(@cb : UInt32, @pszTitle : Win32cr::Foundation::PWSTR, @size : Win32cr::Foundation::SIZE, @pszDocString : Win32cr::Foundation::PWSTR, @pszHelpFile : Win32cr::Foundation::PWSTR, @dwHelpContext : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CAUUID
+    property cElems : UInt32
+    property pElems : LibC::GUID*
+    def initialize(@cElems : UInt32, @pElems : LibC::GUID*)
+    end
+  end
+
+  @[Extern]
+  struct ExtentInfo
+    property cb : UInt32
+    property dwExtentMode : UInt32
+    property sizelProposed : Win32cr::Foundation::SIZE
+    def initialize(@cb : UInt32, @dwExtentMode : UInt32, @sizelProposed : Win32cr::Foundation::SIZE)
+    end
+  end
+
+  @[Extern]
+  struct AspectInfo
+    property cb : UInt32
+    property dwFlags : UInt32
+    def initialize(@cb : UInt32, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CALPOLESTR
+    property cElems : UInt32
+    property pElems : Win32cr::Foundation::PWSTR*
+    def initialize(@cElems : UInt32, @pElems : Win32cr::Foundation::PWSTR*)
+    end
+  end
+
+  @[Extern]
+  struct CADWORD
+    property cElems : UInt32
+    property pElems : UInt32*
+    def initialize(@cElems : UInt32, @pElems : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct QACONTAINER
+    property cbSize : UInt32
+    property pClientSite : Void*
+    property pAdviseSink : Void*
+    property pPropertyNotifySink : Void*
+    property pUnkEventSink : Void*
+    property dwAmbientFlags : UInt32
+    property colorFore : UInt32
+    property colorBack : UInt32
+    property pFont : Void*
+    property pUndoMgr : Void*
+    property dwAppearance : UInt32
+    property lcid : Int32
+    property hpal : Win32cr::Graphics::Gdi::HPALETTE
+    property pBindHost : Void*
+    property pOleControlSite : Void*
+    property pServiceProvider : Void*
+    def initialize(@cbSize : UInt32, @pClientSite : Void*, @pAdviseSink : Void*, @pPropertyNotifySink : Void*, @pUnkEventSink : Void*, @dwAmbientFlags : UInt32, @colorFore : UInt32, @colorBack : UInt32, @pFont : Void*, @pUndoMgr : Void*, @dwAppearance : UInt32, @lcid : Int32, @hpal : Win32cr::Graphics::Gdi::HPALETTE, @pBindHost : Void*, @pOleControlSite : Void*, @pServiceProvider : Void*)
+    end
+  end
+
+  @[Extern]
+  struct QACONTROL
+    property cbSize : UInt32
+    property dwMiscStatus : UInt32
+    property dwViewStatus : UInt32
+    property dwEventCookie : UInt32
+    property dwPropNotifyCookie : UInt32
+    property dwPointerActivationPolicy : UInt32
+    def initialize(@cbSize : UInt32, @dwMiscStatus : UInt32, @dwViewStatus : UInt32, @dwEventCookie : UInt32, @dwPropNotifyCookie : UInt32, @dwPointerActivationPolicy : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct OCPFIPARAMS
+    property cbStructSize : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property x : Int32
+    property y : Int32
+    property lpszCaption : Win32cr::Foundation::PWSTR
+    property cObjects : UInt32
+    property lplpUnk : Void**
+    property cPages : UInt32
+    property lpPages : LibC::GUID*
+    property lcid : UInt32
+    property dispidInitialProperty : Int32
+    def initialize(@cbStructSize : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @x : Int32, @y : Int32, @lpszCaption : Win32cr::Foundation::PWSTR, @cObjects : UInt32, @lplpUnk : Void**, @cPages : UInt32, @lpPages : LibC::GUID*, @lcid : UInt32, @dispidInitialProperty : Int32)
+    end
+  end
+
+  @[Extern]
+  struct FONTDESC
+    property cbSizeofstruct : UInt32
+    property lpstrName : Win32cr::Foundation::PWSTR
+    property cySize : Win32cr::System::Com::CY
+    property sWeight : Int16
+    property sCharset : Int16
+    property fItalic : Win32cr::Foundation::BOOL
+    property fUnderline : Win32cr::Foundation::BOOL
+    property fStrikethrough : Win32cr::Foundation::BOOL
+    def initialize(@cbSizeofstruct : UInt32, @lpstrName : Win32cr::Foundation::PWSTR, @cySize : Win32cr::System::Com::CY, @sWeight : Int16, @sCharset : Int16, @fItalic : Win32cr::Foundation::BOOL, @fUnderline : Win32cr::Foundation::BOOL, @fStrikethrough : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct PICTDESC
+    property cbSizeofstruct : UInt32
+    property picType : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property bmp : Bmp_e__struct_
+    property wmf : Wmf_e__struct_
+    property icon : Icon_e__struct_
+    property emf : Emf_e__struct_
 
       # Nested Type Icon_e__struct_
       @[Extern]
-      record Icon_e__struct_,
-        hicon : Win32cr::UI::WindowsAndMessaging::HICON
+      struct Icon_e__struct_
+    property hicon : Win32cr::UI::WindowsAndMessaging::HICON
+    def initialize(@hicon : Win32cr::UI::WindowsAndMessaging::HICON)
+    end
+      end
 
 
       # Nested Type Bmp_e__struct_
       @[Extern]
-      record Bmp_e__struct_,
-        hbitmap : Win32cr::Graphics::Gdi::HBITMAP,
-        hpal : Win32cr::Graphics::Gdi::HPALETTE
+      struct Bmp_e__struct_
+    property hbitmap : Win32cr::Graphics::Gdi::HBITMAP
+    property hpal : Win32cr::Graphics::Gdi::HPALETTE
+    def initialize(@hbitmap : Win32cr::Graphics::Gdi::HBITMAP, @hpal : Win32cr::Graphics::Gdi::HPALETTE)
+    end
+      end
 
 
       # Nested Type Wmf_e__struct_
       @[Extern]
-      record Wmf_e__struct_,
-        hmeta : Win32cr::Graphics::Gdi::HMETAFILE,
-        xExt : Int32,
-        yExt : Int32
+      struct Wmf_e__struct_
+    property hmeta : Win32cr::Graphics::Gdi::HMETAFILE
+    property xExt : Int32
+    property yExt : Int32
+    def initialize(@hmeta : Win32cr::Graphics::Gdi::HMETAFILE, @xExt : Int32, @yExt : Int32)
+    end
+      end
 
 
       # Nested Type Emf_e__struct_
       @[Extern]
-      record Emf_e__struct_,
-        hemf : Win32cr::Graphics::Gdi::HENHMETAFILE
+      struct Emf_e__struct_
+    property hemf : Win32cr::Graphics::Gdi::HENHMETAFILE
+    def initialize(@hemf : Win32cr::Graphics::Gdi::HENHMETAFILE)
+    end
+      end
 
+    def initialize(@bmp : Bmp_e__struct_, @wmf : Wmf_e__struct_, @icon : Icon_e__struct_, @emf : Emf_e__struct_)
+    end
     end
 
+    def initialize(@cbSizeofstruct : UInt32, @picType : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PAGERANGE,
-    nFromPage : Int32,
-    nToPage : Int32
+  struct PAGERANGE
+    property nFromPage : Int32
+    property nToPage : Int32
+    def initialize(@nFromPage : Int32, @nToPage : Int32)
+    end
+  end
 
   @[Extern]
-  record PAGESET,
-    cbStruct : UInt32,
-    fOddPages : Win32cr::Foundation::BOOL,
-    fEvenPages : Win32cr::Foundation::BOOL,
-    cPageRange : UInt32,
-    rgPages : Win32cr::System::Ole::PAGERANGE*
+  struct PAGESET
+    property cbStruct : UInt32
+    property fOddPages : Win32cr::Foundation::BOOL
+    property fEvenPages : Win32cr::Foundation::BOOL
+    property cPageRange : UInt32
+    property rgPages : Win32cr::System::Ole::PAGERANGE*
+    def initialize(@cbStruct : UInt32, @fOddPages : Win32cr::Foundation::BOOL, @fEvenPages : Win32cr::Foundation::BOOL, @cPageRange : UInt32, @rgPages : Win32cr::System::Ole::PAGERANGE*)
+    end
+  end
 
   @[Extern]
-  record OLECMD,
-    cmdID : UInt32,
-    cmdf : UInt32
+  struct OLECMD
+    property cmdID : UInt32
+    property cmdf : UInt32
+    def initialize(@cmdID : UInt32, @cmdf : UInt32)
+    end
+  end
 
   @[Extern]
-  record OLECMDTEXT,
-    cmdtextf : UInt32,
-    cwActual : UInt32,
-    cwBuf : UInt32,
-    rgwz : UInt16*
+  struct OLECMDTEXT
+    property cmdtextf : UInt32
+    property cwActual : UInt32
+    property cwBuf : UInt32
+    property rgwz : UInt16*
+    def initialize(@cmdtextf : UInt32, @cwActual : UInt32, @cwBuf : UInt32, @rgwz : UInt16*)
+    end
+  end
 
   @[Extern]
-  record OLEUIINSERTOBJECTW,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PWSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PWSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    clsid : LibC::GUID,
-    lpszFile : Win32cr::Foundation::PWSTR,
-    cchFile : UInt32,
-    cClsidExclude : UInt32,
-    lpClsidExclude : LibC::GUID*,
-    iid : LibC::GUID,
-    oleRender : UInt32,
-    lpFormatEtc : Win32cr::System::Com::FORMATETC*,
-    lpIOleClientSite : Void*,
-    lpIStorage : Void*,
-    ppvObj : Void**,
-    sc : Int32,
-    hMetaPict : LibC::IntPtrT
+  struct OLEUIINSERTOBJECTW
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PWSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PWSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property clsid : LibC::GUID
+    property lpszFile : Win32cr::Foundation::PWSTR
+    property cchFile : UInt32
+    property cClsidExclude : UInt32
+    property lpClsidExclude : LibC::GUID*
+    property iid : LibC::GUID
+    property oleRender : UInt32
+    property lpFormatEtc : Win32cr::System::Com::FORMATETC*
+    property lpIOleClientSite : Void*
+    property lpIStorage : Void*
+    property ppvObj : Void**
+    property sc : Int32
+    property hMetaPict : LibC::IntPtrT
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PWSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PWSTR, @hResource : Win32cr::Foundation::HRSRC, @clsid : LibC::GUID, @lpszFile : Win32cr::Foundation::PWSTR, @cchFile : UInt32, @cClsidExclude : UInt32, @lpClsidExclude : LibC::GUID*, @iid : LibC::GUID, @oleRender : UInt32, @lpFormatEtc : Win32cr::System::Com::FORMATETC*, @lpIOleClientSite : Void*, @lpIStorage : Void*, @ppvObj : Void**, @sc : Int32, @hMetaPict : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record OLEUIINSERTOBJECTA,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    clsid : LibC::GUID,
-    lpszFile : Win32cr::Foundation::PSTR,
-    cchFile : UInt32,
-    cClsidExclude : UInt32,
-    lpClsidExclude : LibC::GUID*,
-    iid : LibC::GUID,
-    oleRender : UInt32,
-    lpFormatEtc : Win32cr::System::Com::FORMATETC*,
-    lpIOleClientSite : Void*,
-    lpIStorage : Void*,
-    ppvObj : Void**,
-    sc : Int32,
-    hMetaPict : LibC::IntPtrT
+  struct OLEUIINSERTOBJECTA
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property clsid : LibC::GUID
+    property lpszFile : Win32cr::Foundation::PSTR
+    property cchFile : UInt32
+    property cClsidExclude : UInt32
+    property lpClsidExclude : LibC::GUID*
+    property iid : LibC::GUID
+    property oleRender : UInt32
+    property lpFormatEtc : Win32cr::System::Com::FORMATETC*
+    property lpIOleClientSite : Void*
+    property lpIStorage : Void*
+    property ppvObj : Void**
+    property sc : Int32
+    property hMetaPict : LibC::IntPtrT
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PSTR, @hResource : Win32cr::Foundation::HRSRC, @clsid : LibC::GUID, @lpszFile : Win32cr::Foundation::PSTR, @cchFile : UInt32, @cClsidExclude : UInt32, @lpClsidExclude : LibC::GUID*, @iid : LibC::GUID, @oleRender : UInt32, @lpFormatEtc : Win32cr::System::Com::FORMATETC*, @lpIOleClientSite : Void*, @lpIStorage : Void*, @ppvObj : Void**, @sc : Int32, @hMetaPict : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record OLEUIPASTEENTRYW,
-    fmtetc : Win32cr::System::Com::FORMATETC,
-    lpstrFormatName : Win32cr::Foundation::PWSTR,
-    lpstrResultText : Win32cr::Foundation::PWSTR,
-    dwFlags : UInt32,
-    dwScratchSpace : UInt32
+  struct OLEUIPASTEENTRYW
+    property fmtetc : Win32cr::System::Com::FORMATETC
+    property lpstrFormatName : Win32cr::Foundation::PWSTR
+    property lpstrResultText : Win32cr::Foundation::PWSTR
+    property dwFlags : UInt32
+    property dwScratchSpace : UInt32
+    def initialize(@fmtetc : Win32cr::System::Com::FORMATETC, @lpstrFormatName : Win32cr::Foundation::PWSTR, @lpstrResultText : Win32cr::Foundation::PWSTR, @dwFlags : UInt32, @dwScratchSpace : UInt32)
+    end
+  end
 
   @[Extern]
-  record OLEUIPASTEENTRYA,
-    fmtetc : Win32cr::System::Com::FORMATETC,
-    lpstrFormatName : Win32cr::Foundation::PSTR,
-    lpstrResultText : Win32cr::Foundation::PSTR,
-    dwFlags : UInt32,
-    dwScratchSpace : UInt32
+  struct OLEUIPASTEENTRYA
+    property fmtetc : Win32cr::System::Com::FORMATETC
+    property lpstrFormatName : Win32cr::Foundation::PSTR
+    property lpstrResultText : Win32cr::Foundation::PSTR
+    property dwFlags : UInt32
+    property dwScratchSpace : UInt32
+    def initialize(@fmtetc : Win32cr::System::Com::FORMATETC, @lpstrFormatName : Win32cr::Foundation::PSTR, @lpstrResultText : Win32cr::Foundation::PSTR, @dwFlags : UInt32, @dwScratchSpace : UInt32)
+    end
+  end
 
   @[Extern]
-  record OLEUIPASTESPECIALW,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PWSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PWSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    lpSrcDataObj : Void*,
-    arrPasteEntries : Win32cr::System::Ole::OLEUIPASTEENTRYW*,
-    cPasteEntries : Int32,
-    arrLinkTypes : UInt32*,
-    cLinkTypes : Int32,
-    cClsidExclude : UInt32,
-    lpClsidExclude : LibC::GUID*,
-    nSelectedIndex : Int32,
-    fLink : Win32cr::Foundation::BOOL,
-    hMetaPict : LibC::IntPtrT,
-    sizel : Win32cr::Foundation::SIZE
+  struct OLEUIPASTESPECIALW
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PWSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PWSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property lpSrcDataObj : Void*
+    property arrPasteEntries : Win32cr::System::Ole::OLEUIPASTEENTRYW*
+    property cPasteEntries : Int32
+    property arrLinkTypes : UInt32*
+    property cLinkTypes : Int32
+    property cClsidExclude : UInt32
+    property lpClsidExclude : LibC::GUID*
+    property nSelectedIndex : Int32
+    property fLink : Win32cr::Foundation::BOOL
+    property hMetaPict : LibC::IntPtrT
+    property sizel : Win32cr::Foundation::SIZE
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PWSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PWSTR, @hResource : Win32cr::Foundation::HRSRC, @lpSrcDataObj : Void*, @arrPasteEntries : Win32cr::System::Ole::OLEUIPASTEENTRYW*, @cPasteEntries : Int32, @arrLinkTypes : UInt32*, @cLinkTypes : Int32, @cClsidExclude : UInt32, @lpClsidExclude : LibC::GUID*, @nSelectedIndex : Int32, @fLink : Win32cr::Foundation::BOOL, @hMetaPict : LibC::IntPtrT, @sizel : Win32cr::Foundation::SIZE)
+    end
+  end
 
   @[Extern]
-  record OLEUIPASTESPECIALA,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    lpSrcDataObj : Void*,
-    arrPasteEntries : Win32cr::System::Ole::OLEUIPASTEENTRYA*,
-    cPasteEntries : Int32,
-    arrLinkTypes : UInt32*,
-    cLinkTypes : Int32,
-    cClsidExclude : UInt32,
-    lpClsidExclude : LibC::GUID*,
-    nSelectedIndex : Int32,
-    fLink : Win32cr::Foundation::BOOL,
-    hMetaPict : LibC::IntPtrT,
-    sizel : Win32cr::Foundation::SIZE
+  struct OLEUIPASTESPECIALA
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property lpSrcDataObj : Void*
+    property arrPasteEntries : Win32cr::System::Ole::OLEUIPASTEENTRYA*
+    property cPasteEntries : Int32
+    property arrLinkTypes : UInt32*
+    property cLinkTypes : Int32
+    property cClsidExclude : UInt32
+    property lpClsidExclude : LibC::GUID*
+    property nSelectedIndex : Int32
+    property fLink : Win32cr::Foundation::BOOL
+    property hMetaPict : LibC::IntPtrT
+    property sizel : Win32cr::Foundation::SIZE
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PSTR, @hResource : Win32cr::Foundation::HRSRC, @lpSrcDataObj : Void*, @arrPasteEntries : Win32cr::System::Ole::OLEUIPASTEENTRYA*, @cPasteEntries : Int32, @arrLinkTypes : UInt32*, @cLinkTypes : Int32, @cClsidExclude : UInt32, @lpClsidExclude : LibC::GUID*, @nSelectedIndex : Int32, @fLink : Win32cr::Foundation::BOOL, @hMetaPict : LibC::IntPtrT, @sizel : Win32cr::Foundation::SIZE)
+    end
+  end
 
   @[Extern]
-  record OLEUIEDITLINKSW,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PWSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PWSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    lpOleUILinkContainer : Void*
+  struct OLEUIEDITLINKSW
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PWSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PWSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property lpOleUILinkContainer : Void*
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PWSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PWSTR, @hResource : Win32cr::Foundation::HRSRC, @lpOleUILinkContainer : Void*)
+    end
+  end
 
   @[Extern]
-  record OLEUIEDITLINKSA,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    lpOleUILinkContainer : Void*
+  struct OLEUIEDITLINKSA
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property lpOleUILinkContainer : Void*
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PSTR, @hResource : Win32cr::Foundation::HRSRC, @lpOleUILinkContainer : Void*)
+    end
+  end
 
   @[Extern]
-  record OLEUICHANGEICONW,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PWSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PWSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    hMetaPict : LibC::IntPtrT,
-    clsid : LibC::GUID,
-    szIconExe : UInt16[260],
-    cchIconExe : Int32
+  struct OLEUICHANGEICONW
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PWSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PWSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property hMetaPict : LibC::IntPtrT
+    property clsid : LibC::GUID
+    property szIconExe : UInt16[260]
+    property cchIconExe : Int32
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PWSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PWSTR, @hResource : Win32cr::Foundation::HRSRC, @hMetaPict : LibC::IntPtrT, @clsid : LibC::GUID, @szIconExe : UInt16[260], @cchIconExe : Int32)
+    end
+  end
 
   @[Extern]
-  record OLEUICHANGEICONA,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    hMetaPict : LibC::IntPtrT,
-    clsid : LibC::GUID,
-    szIconExe : Win32cr::Foundation::CHAR[260],
-    cchIconExe : Int32
+  struct OLEUICHANGEICONA
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property hMetaPict : LibC::IntPtrT
+    property clsid : LibC::GUID
+    property szIconExe : Win32cr::Foundation::CHAR[260]
+    property cchIconExe : Int32
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PSTR, @hResource : Win32cr::Foundation::HRSRC, @hMetaPict : LibC::IntPtrT, @clsid : LibC::GUID, @szIconExe : Win32cr::Foundation::CHAR[260], @cchIconExe : Int32)
+    end
+  end
 
   @[Extern]
-  record OLEUICONVERTW,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PWSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PWSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    clsid : LibC::GUID,
-    clsidConvertDefault : LibC::GUID,
-    clsidActivateDefault : LibC::GUID,
-    clsidNew : LibC::GUID,
-    dvAspect : UInt32,
-    wFormat : UInt16,
-    fIsLinkedObject : Win32cr::Foundation::BOOL,
-    hMetaPict : LibC::IntPtrT,
-    lpszUserType : Win32cr::Foundation::PWSTR,
-    fObjectsIconChanged : Win32cr::Foundation::BOOL,
-    lpszDefLabel : Win32cr::Foundation::PWSTR,
-    cClsidExclude : UInt32,
-    lpClsidExclude : LibC::GUID*
+  struct OLEUICONVERTW
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PWSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PWSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property clsid : LibC::GUID
+    property clsidConvertDefault : LibC::GUID
+    property clsidActivateDefault : LibC::GUID
+    property clsidNew : LibC::GUID
+    property dvAspect : UInt32
+    property wFormat : UInt16
+    property fIsLinkedObject : Win32cr::Foundation::BOOL
+    property hMetaPict : LibC::IntPtrT
+    property lpszUserType : Win32cr::Foundation::PWSTR
+    property fObjectsIconChanged : Win32cr::Foundation::BOOL
+    property lpszDefLabel : Win32cr::Foundation::PWSTR
+    property cClsidExclude : UInt32
+    property lpClsidExclude : LibC::GUID*
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PWSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PWSTR, @hResource : Win32cr::Foundation::HRSRC, @clsid : LibC::GUID, @clsidConvertDefault : LibC::GUID, @clsidActivateDefault : LibC::GUID, @clsidNew : LibC::GUID, @dvAspect : UInt32, @wFormat : UInt16, @fIsLinkedObject : Win32cr::Foundation::BOOL, @hMetaPict : LibC::IntPtrT, @lpszUserType : Win32cr::Foundation::PWSTR, @fObjectsIconChanged : Win32cr::Foundation::BOOL, @lpszDefLabel : Win32cr::Foundation::PWSTR, @cClsidExclude : UInt32, @lpClsidExclude : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record OLEUICONVERTA,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    clsid : LibC::GUID,
-    clsidConvertDefault : LibC::GUID,
-    clsidActivateDefault : LibC::GUID,
-    clsidNew : LibC::GUID,
-    dvAspect : UInt32,
-    wFormat : UInt16,
-    fIsLinkedObject : Win32cr::Foundation::BOOL,
-    hMetaPict : LibC::IntPtrT,
-    lpszUserType : Win32cr::Foundation::PSTR,
-    fObjectsIconChanged : Win32cr::Foundation::BOOL,
-    lpszDefLabel : Win32cr::Foundation::PSTR,
-    cClsidExclude : UInt32,
-    lpClsidExclude : LibC::GUID*
+  struct OLEUICONVERTA
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property clsid : LibC::GUID
+    property clsidConvertDefault : LibC::GUID
+    property clsidActivateDefault : LibC::GUID
+    property clsidNew : LibC::GUID
+    property dvAspect : UInt32
+    property wFormat : UInt16
+    property fIsLinkedObject : Win32cr::Foundation::BOOL
+    property hMetaPict : LibC::IntPtrT
+    property lpszUserType : Win32cr::Foundation::PSTR
+    property fObjectsIconChanged : Win32cr::Foundation::BOOL
+    property lpszDefLabel : Win32cr::Foundation::PSTR
+    property cClsidExclude : UInt32
+    property lpClsidExclude : LibC::GUID*
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PSTR, @hResource : Win32cr::Foundation::HRSRC, @clsid : LibC::GUID, @clsidConvertDefault : LibC::GUID, @clsidActivateDefault : LibC::GUID, @clsidNew : LibC::GUID, @dvAspect : UInt32, @wFormat : UInt16, @fIsLinkedObject : Win32cr::Foundation::BOOL, @hMetaPict : LibC::IntPtrT, @lpszUserType : Win32cr::Foundation::PSTR, @fObjectsIconChanged : Win32cr::Foundation::BOOL, @lpszDefLabel : Win32cr::Foundation::PSTR, @cClsidExclude : UInt32, @lpClsidExclude : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record OLEUIBUSYW,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PWSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PWSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    hTask : Win32cr::Media::HTASK,
-    lphWndDialog : Win32cr::Foundation::HWND*
+  struct OLEUIBUSYW
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PWSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PWSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property hTask : Win32cr::Media::HTASK
+    property lphWndDialog : Win32cr::Foundation::HWND*
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PWSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PWSTR, @hResource : Win32cr::Foundation::HRSRC, @hTask : Win32cr::Media::HTASK, @lphWndDialog : Win32cr::Foundation::HWND*)
+    end
+  end
 
   @[Extern]
-  record OLEUIBUSYA,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    hTask : Win32cr::Media::HTASK,
-    lphWndDialog : Win32cr::Foundation::HWND*
+  struct OLEUIBUSYA
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property hTask : Win32cr::Media::HTASK
+    property lphWndDialog : Win32cr::Foundation::HWND*
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PSTR, @hResource : Win32cr::Foundation::HRSRC, @hTask : Win32cr::Media::HTASK, @lphWndDialog : Win32cr::Foundation::HWND*)
+    end
+  end
 
   @[Extern]
-  record OLEUICHANGESOURCEW,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PWSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PWSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*,
-    dwReserved1 : UInt32[4],
-    lpOleUILinkContainer : Void*,
-    dwLink : UInt32,
-    lpszDisplayName : Win32cr::Foundation::PWSTR,
-    nFileLength : UInt32,
-    lpszFrom : Win32cr::Foundation::PWSTR,
-    lpszTo : Win32cr::Foundation::PWSTR
+  struct OLEUICHANGESOURCEW
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PWSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PWSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*
+    property dwReserved1 : UInt32[4]
+    property lpOleUILinkContainer : Void*
+    property dwLink : UInt32
+    property lpszDisplayName : Win32cr::Foundation::PWSTR
+    property nFileLength : UInt32
+    property lpszFrom : Win32cr::Foundation::PWSTR
+    property lpszTo : Win32cr::Foundation::PWSTR
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PWSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PWSTR, @hResource : Win32cr::Foundation::HRSRC, @lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*, @dwReserved1 : UInt32[4], @lpOleUILinkContainer : Void*, @dwLink : UInt32, @lpszDisplayName : Win32cr::Foundation::PWSTR, @nFileLength : UInt32, @lpszFrom : Win32cr::Foundation::PWSTR, @lpszTo : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record OLEUICHANGESOURCEA,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hWndOwner : Win32cr::Foundation::HWND,
-    lpszCaption : Win32cr::Foundation::PSTR,
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszTemplate : Win32cr::Foundation::PSTR,
-    hResource : Win32cr::Foundation::HRSRC,
-    lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*,
-    dwReserved1 : UInt32[4],
-    lpOleUILinkContainer : Void*,
-    dwLink : UInt32,
-    lpszDisplayName : Win32cr::Foundation::PSTR,
-    nFileLength : UInt32,
-    lpszFrom : Win32cr::Foundation::PSTR,
-    lpszTo : Win32cr::Foundation::PSTR
+  struct OLEUICHANGESOURCEA
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hWndOwner : Win32cr::Foundation::HWND
+    property lpszCaption : Win32cr::Foundation::PSTR
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszTemplate : Win32cr::Foundation::PSTR
+    property hResource : Win32cr::Foundation::HRSRC
+    property lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*
+    property dwReserved1 : UInt32[4]
+    property lpOleUILinkContainer : Void*
+    property dwLink : UInt32
+    property lpszDisplayName : Win32cr::Foundation::PSTR
+    property nFileLength : UInt32
+    property lpszFrom : Win32cr::Foundation::PSTR
+    property lpszTo : Win32cr::Foundation::PSTR
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hWndOwner : Win32cr::Foundation::HWND, @lpszCaption : Win32cr::Foundation::PSTR, @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszTemplate : Win32cr::Foundation::PSTR, @hResource : Win32cr::Foundation::HRSRC, @lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*, @dwReserved1 : UInt32[4], @lpOleUILinkContainer : Void*, @dwLink : UInt32, @lpszDisplayName : Win32cr::Foundation::PSTR, @nFileLength : UInt32, @lpszFrom : Win32cr::Foundation::PSTR, @lpszTo : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record OLEUIGNRLPROPSW,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    dwReserved1 : UInt32[2],
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    dwReserved2 : UInt32[3],
-    lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSW*
+  struct OLEUIGNRLPROPSW
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property dwReserved1 : UInt32[2]
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property dwReserved2 : UInt32[3]
+    property lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSW*
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @dwReserved1 : UInt32[2], @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @dwReserved2 : UInt32[3], @lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSW*)
+    end
+  end
 
   @[Extern]
-  record OLEUIGNRLPROPSA,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    dwReserved1 : UInt32[2],
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    dwReserved2 : UInt32[3],
-    lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSA*
+  struct OLEUIGNRLPROPSA
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property dwReserved1 : UInt32[2]
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property dwReserved2 : UInt32[3]
+    property lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSA*
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @dwReserved1 : UInt32[2], @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @dwReserved2 : UInt32[3], @lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSA*)
+    end
+  end
 
   @[Extern]
-  record OLEUIVIEWPROPSW,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    dwReserved1 : UInt32[2],
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    dwReserved2 : UInt32[3],
-    lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSW*,
-    nScaleMin : Int32,
-    nScaleMax : Int32
+  struct OLEUIVIEWPROPSW
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property dwReserved1 : UInt32[2]
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property dwReserved2 : UInt32[3]
+    property lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSW*
+    property nScaleMin : Int32
+    property nScaleMax : Int32
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @dwReserved1 : UInt32[2], @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @dwReserved2 : UInt32[3], @lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSW*, @nScaleMin : Int32, @nScaleMax : Int32)
+    end
+  end
 
   @[Extern]
-  record OLEUIVIEWPROPSA,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    dwReserved1 : UInt32[2],
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    dwReserved2 : UInt32[3],
-    lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSA*,
-    nScaleMin : Int32,
-    nScaleMax : Int32
+  struct OLEUIVIEWPROPSA
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property dwReserved1 : UInt32[2]
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property dwReserved2 : UInt32[3]
+    property lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSA*
+    property nScaleMin : Int32
+    property nScaleMax : Int32
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @dwReserved1 : UInt32[2], @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @dwReserved2 : UInt32[3], @lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSA*, @nScaleMin : Int32, @nScaleMax : Int32)
+    end
+  end
 
   @[Extern]
-  record OLEUILINKPROPSW,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    dwReserved1 : UInt32[2],
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    dwReserved2 : UInt32[3],
-    lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSW*
+  struct OLEUILINKPROPSW
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property dwReserved1 : UInt32[2]
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property dwReserved2 : UInt32[3]
+    property lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSW*
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @dwReserved1 : UInt32[2], @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @dwReserved2 : UInt32[3], @lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSW*)
+    end
+  end
 
   @[Extern]
-  record OLEUILINKPROPSA,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    dwReserved1 : UInt32[2],
-    lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK,
-    lCustData : Win32cr::Foundation::LPARAM,
-    dwReserved2 : UInt32[3],
-    lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSA*
+  struct OLEUILINKPROPSA
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property dwReserved1 : UInt32[2]
+    property lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK
+    property lCustData : Win32cr::Foundation::LPARAM
+    property dwReserved2 : UInt32[3]
+    property lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSA*
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @dwReserved1 : UInt32[2], @lpfnHook : Win32cr::System::Ole::LPFNOLEUIHOOK, @lCustData : Win32cr::Foundation::LPARAM, @dwReserved2 : UInt32[3], @lpOP : Win32cr::System::Ole::OLEUIOBJECTPROPSA*)
+    end
+  end
 
   @[Extern]
-  record OLEUIOBJECTPROPSW,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    lpPS : Win32cr::UI::Controls::PROPSHEETHEADERW_V2*,
-    dwObject : UInt32,
-    lpObjInfo : Void*,
-    dwLink : UInt32,
-    lpLinkInfo : Void*,
-    lpGP : Win32cr::System::Ole::OLEUIGNRLPROPSW*,
-    lpVP : Win32cr::System::Ole::OLEUIVIEWPROPSW*,
-    lpLP : Win32cr::System::Ole::OLEUILINKPROPSW*
+  struct OLEUIOBJECTPROPSW
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property lpPS : Win32cr::UI::Controls::PROPSHEETHEADERW_V2*
+    property dwObject : UInt32
+    property lpObjInfo : Void*
+    property dwLink : UInt32
+    property lpLinkInfo : Void*
+    property lpGP : Win32cr::System::Ole::OLEUIGNRLPROPSW*
+    property lpVP : Win32cr::System::Ole::OLEUIVIEWPROPSW*
+    property lpLP : Win32cr::System::Ole::OLEUILINKPROPSW*
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @lpPS : Win32cr::UI::Controls::PROPSHEETHEADERW_V2*, @dwObject : UInt32, @lpObjInfo : Void*, @dwLink : UInt32, @lpLinkInfo : Void*, @lpGP : Win32cr::System::Ole::OLEUIGNRLPROPSW*, @lpVP : Win32cr::System::Ole::OLEUIVIEWPROPSW*, @lpLP : Win32cr::System::Ole::OLEUILINKPROPSW*)
+    end
+  end
 
   @[Extern]
-  record OLEUIOBJECTPROPSA,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    lpPS : Win32cr::UI::Controls::PROPSHEETHEADERA_V2*,
-    dwObject : UInt32,
-    lpObjInfo : Void*,
-    dwLink : UInt32,
-    lpLinkInfo : Void*,
-    lpGP : Win32cr::System::Ole::OLEUIGNRLPROPSA*,
-    lpVP : Win32cr::System::Ole::OLEUIVIEWPROPSA*,
-    lpLP : Win32cr::System::Ole::OLEUILINKPROPSA*
+  struct OLEUIOBJECTPROPSA
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property lpPS : Win32cr::UI::Controls::PROPSHEETHEADERA_V2*
+    property dwObject : UInt32
+    property lpObjInfo : Void*
+    property dwLink : UInt32
+    property lpLinkInfo : Void*
+    property lpGP : Win32cr::System::Ole::OLEUIGNRLPROPSA*
+    property lpVP : Win32cr::System::Ole::OLEUIVIEWPROPSA*
+    property lpLP : Win32cr::System::Ole::OLEUILINKPROPSA*
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @lpPS : Win32cr::UI::Controls::PROPSHEETHEADERA_V2*, @dwObject : UInt32, @lpObjInfo : Void*, @dwLink : UInt32, @lpLinkInfo : Void*, @lpGP : Win32cr::System::Ole::OLEUIGNRLPROPSA*, @lpVP : Win32cr::System::Ole::OLEUIVIEWPROPSA*, @lpLP : Win32cr::System::Ole::OLEUILINKPROPSA*)
+    end
+  end
 
   @[Extern]
   record ICreateTypeInfoVtbl,
@@ -2019,7 +2231,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00020405-0000-0000-c000-000000000046")]
   record ICreateTypeInfo, lpVtbl : ICreateTypeInfoVtbl* do
     GUID = LibC::GUID.new(0x20405_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : ICreateTypeInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2149,7 +2360,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("0002040e-0000-0000-c000-000000000046")]
   record ICreateTypeInfo2, lpVtbl : ICreateTypeInfo2Vtbl* do
     GUID = LibC::GUID.new(0x2040e_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : ICreateTypeInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2296,7 +2506,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00020406-0000-0000-c000-000000000046")]
   record ICreateTypeLib, lpVtbl : ICreateTypeLibVtbl* do
     GUID = LibC::GUID.new(0x20406_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : ICreateTypeLib*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2363,7 +2572,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("0002040f-0000-0000-c000-000000000046")]
   record ICreateTypeLib2, lpVtbl : ICreateTypeLib2Vtbl* do
     GUID = LibC::GUID.new(0x2040f_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : ICreateTypeLib2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2432,7 +2640,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00020404-0000-0000-c000-000000000046")]
   record IEnumVARIANT, lpVtbl : IEnumVARIANTVtbl* do
     GUID = LibC::GUID.new(0x20404_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IEnumVARIANT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2469,7 +2676,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00020410-0000-0000-c000-000000000046")]
   record ITypeChangeEvents, lpVtbl : ITypeChangeEventsVtbl* do
     GUID = LibC::GUID.new(0x20410_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : ITypeChangeEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2503,7 +2709,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("22f03340-547d-101b-8e65-08002b2bd119")]
   record ICreateErrorInfo, lpVtbl : ICreateErrorInfoVtbl* do
     GUID = LibC::GUID.new(0x22f03340_u32, 0x547d_u16, 0x101b_u16, StaticArray[0x8e_u8, 0x65_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x2b_u8, 0xd1_u8, 0x19_u8])
     def query_interface(this : ICreateErrorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2542,7 +2747,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("0000002e-0000-0000-c000-000000000046")]
   record ITypeFactory, lpVtbl : ITypeFactoryVtbl* do
     GUID = LibC::GUID.new(0x2e_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : ITypeFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2572,7 +2776,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("0000002d-0000-0000-c000-000000000046")]
   record ITypeMarshal, lpVtbl : ITypeMarshalVtbl* do
     GUID = LibC::GUID.new(0x2d_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : ITypeMarshal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2623,7 +2826,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("0000002f-0000-0000-c000-000000000046")]
   record IRecordInfo, lpVtbl : IRecordInfoVtbl* do
     GUID = LibC::GUID.new(0x2f_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IRecordInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2700,7 +2902,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000111-0000-0000-c000-000000000046")]
   record IOleAdviseHolder, lpVtbl : IOleAdviseHolderVtbl* do
     GUID = LibC::GUID.new(0x111_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleAdviseHolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2746,7 +2947,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("0000011e-0000-0000-c000-000000000046")]
   record IOleCache, lpVtbl : IOleCacheVtbl* do
     GUID = LibC::GUID.new(0x11e_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleCache*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2791,7 +2991,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000128-0000-0000-c000-000000000046")]
   record IOleCache2, lpVtbl : IOleCache2Vtbl* do
     GUID = LibC::GUID.new(0x128_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleCache2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2837,7 +3036,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000129-0000-0000-c000-000000000046")]
   record IOleCacheControl, lpVtbl : IOleCacheControlVtbl* do
     GUID = LibC::GUID.new(0x129_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleCacheControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2867,7 +3065,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("0000011a-0000-0000-c000-000000000046")]
   record IParseDisplayName, lpVtbl : IParseDisplayNameVtbl* do
     GUID = LibC::GUID.new(0x11a_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IParseDisplayName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2896,7 +3093,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("0000011b-0000-0000-c000-000000000046")]
   record IOleContainer, lpVtbl : IOleContainerVtbl* do
     GUID = LibC::GUID.new(0x11b_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2934,7 +3130,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000118-0000-0000-c000-000000000046")]
   record IOleClientSite, lpVtbl : IOleClientSiteVtbl* do
     GUID = LibC::GUID.new(0x118_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleClientSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2996,7 +3191,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000112-0000-0000-c000-000000000046")]
   record IOleObject, lpVtbl : IOleObjectVtbl* do
     GUID = LibC::GUID.new(0x112_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3084,7 +3278,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000114-0000-0000-c000-000000000046")]
   record IOleWindow, lpVtbl : IOleWindowVtbl* do
     GUID = LibC::GUID.new(0x114_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleWindow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3124,7 +3317,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("0000011d-0000-0000-c000-000000000046")]
   record IOleLink, lpVtbl : IOleLinkVtbl* do
     GUID = LibC::GUID.new(0x11d_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleLink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3186,7 +3378,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("0000011c-0000-0000-c000-000000000046")]
   record IOleItemContainer, lpVtbl : IOleItemContainerVtbl* do
     GUID = LibC::GUID.new(0x11c_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleItemContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3233,7 +3424,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000115-0000-0000-c000-000000000046")]
   record IOleInPlaceUIWindow, lpVtbl : IOleInPlaceUIWindowVtbl* do
     GUID = LibC::GUID.new(0x115_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleInPlaceUIWindow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3281,7 +3471,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000117-0000-0000-c000-000000000046")]
   record IOleInPlaceActiveObject, lpVtbl : IOleInPlaceActiveObjectVtbl* do
     GUID = LibC::GUID.new(0x117_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleInPlaceActiveObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3337,7 +3526,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000116-0000-0000-c000-000000000046")]
   record IOleInPlaceFrame, lpVtbl : IOleInPlaceFrameVtbl* do
     GUID = LibC::GUID.new(0x116_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleInPlaceFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3402,7 +3590,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000113-0000-0000-c000-000000000046")]
   record IOleInPlaceObject, lpVtbl : IOleInPlaceObjectVtbl* do
     GUID = LibC::GUID.new(0x113_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleInPlaceObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3455,7 +3642,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000119-0000-0000-c000-000000000046")]
   record IOleInPlaceSite, lpVtbl : IOleInPlaceSiteVtbl* do
     GUID = LibC::GUID.new(0x119_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IOleInPlaceSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3515,7 +3701,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("0000012a-0000-0000-c000-000000000046")]
   record IContinue, lpVtbl : IContinueVtbl* do
     GUID = LibC::GUID.new(0x12a_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IContinue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3547,7 +3732,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("0000010d-0000-0000-c000-000000000046")]
   record IViewObject, lpVtbl : IViewObjectVtbl* do
     GUID = LibC::GUID.new(0x10d_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IViewObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3595,7 +3779,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000127-0000-0000-c000-000000000046")]
   record IViewObject2, lpVtbl : IViewObject2Vtbl* do
     GUID = LibC::GUID.new(0x127_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IViewObject2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3641,7 +3824,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000121-0000-0000-c000-000000000046")]
   record IDropSource, lpVtbl : IDropSourceVtbl* do
     GUID = LibC::GUID.new(0x121_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IDropSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3674,7 +3856,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000122-0000-0000-c000-000000000046")]
   record IDropTarget, lpVtbl : IDropTargetVtbl* do
     GUID = LibC::GUID.new(0x122_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IDropTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3711,7 +3892,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("0000012b-0000-0000-c000-000000000046")]
   record IDropSourceNotify, lpVtbl : IDropSourceNotifyVtbl* do
     GUID = LibC::GUID.new(0x12b_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IDropSourceNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3742,7 +3922,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("390e3878-fd55-4e18-819d-4682081c0cfd")]
   record IEnterpriseDropTarget, lpVtbl : IEnterpriseDropTargetVtbl* do
     GUID = LibC::GUID.new(0x390e3878_u32, 0xfd55_u16, 0x4e18_u16, StaticArray[0x81_u8, 0x9d_u8, 0x46_u8, 0x82_u8, 0x8_u8, 0x1c_u8, 0xc_u8, 0xfd_u8])
     def query_interface(this : IEnterpriseDropTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3775,7 +3954,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("00000104-0000-0000-c000-000000000046")]
   record IEnumOLEVERB, lpVtbl : IEnumOLEVERBVtbl* do
     GUID = LibC::GUID.new(0x104_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IEnumOLEVERB*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3815,7 +3993,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b196b28f-bab4-101a-b69c-00aa00341d07")]
   record IClassFactory2, lpVtbl : IClassFactory2Vtbl* do
     GUID = LibC::GUID.new(0xb196b28f_u32, 0xbab4_u16, 0x101a_u16, StaticArray[0xb6_u8, 0x9c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x34_u8, 0x1d_u8, 0x7_u8])
     def query_interface(this : IClassFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3854,7 +4031,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b196b283-bab4-101a-b69c-00aa00341d07")]
   record IProvideClassInfo, lpVtbl : IProvideClassInfoVtbl* do
     GUID = LibC::GUID.new(0xb196b283_u32, 0xbab4_u16, 0x101a_u16, StaticArray[0xb6_u8, 0x9c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x34_u8, 0x1d_u8, 0x7_u8])
     def query_interface(this : IProvideClassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3882,7 +4058,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("a6bc3ac0-dbaa-11ce-9de3-00aa004bb851")]
   record IProvideClassInfo2, lpVtbl : IProvideClassInfo2Vtbl* do
     GUID = LibC::GUID.new(0xa6bc3ac0_u32, 0xdbaa_u16, 0x11ce_u16, StaticArray[0x9d_u8, 0xe3_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xb8_u8, 0x51_u8])
     def query_interface(this : IProvideClassInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3915,7 +4090,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("a7aba9c1-8983-11cf-8f20-00805f2cd064")]
   record IProvideMultipleClassInfo, lpVtbl : IProvideMultipleClassInfoVtbl* do
     GUID = LibC::GUID.new(0xa7aba9c1_u32, 0x8983_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IProvideMultipleClassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3954,7 +4128,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b196b288-bab4-101a-b69c-00aa00341d07")]
   record IOleControl, lpVtbl : IOleControlVtbl* do
     GUID = LibC::GUID.new(0xb196b288_u32, 0xbab4_u16, 0x101a_u16, StaticArray[0xb6_u8, 0x9c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x34_u8, 0x1d_u8, 0x7_u8])
     def query_interface(this : IOleControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3996,7 +4169,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b196b289-bab4-101a-b69c-00aa00341d07")]
   record IOleControlSite, lpVtbl : IOleControlSiteVtbl* do
     GUID = LibC::GUID.new(0xb196b289_u32, 0xbab4_u16, 0x101a_u16, StaticArray[0xb6_u8, 0x9c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x34_u8, 0x1d_u8, 0x7_u8])
     def query_interface(this : IOleControlSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4051,7 +4223,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b196b28d-bab4-101a-b69c-00aa00341d07")]
   record IPropertyPage, lpVtbl : IPropertyPageVtbl* do
     GUID = LibC::GUID.new(0xb196b28d_u32, 0xbab4_u16, 0x101a_u16, StaticArray[0xb6_u8, 0x9c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x34_u8, 0x1d_u8, 0x7_u8])
     def query_interface(this : IPropertyPage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4119,7 +4290,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("01e44665-24ac-101b-84ed-08002b2ec713")]
   record IPropertyPage2, lpVtbl : IPropertyPage2Vtbl* do
     GUID = LibC::GUID.new(0x1e44665_u32, 0x24ac_u16, 0x101b_u16, StaticArray[0x84_u8, 0xed_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x2e_u8, 0xc7_u8, 0x13_u8])
     def query_interface(this : IPropertyPage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4182,7 +4352,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b196b28c-bab4-101a-b69c-00aa00341d07")]
   record IPropertyPageSite, lpVtbl : IPropertyPageSiteVtbl* do
     GUID = LibC::GUID.new(0xb196b28c_u32, 0xbab4_u16, 0x101a_u16, StaticArray[0xb6_u8, 0x9c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x34_u8, 0x1d_u8, 0x7_u8])
     def query_interface(this : IPropertyPageSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4219,7 +4388,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("9bfbbc02-eff1-101a-84ed-00aa00341d07")]
   record IPropertyNotifySink, lpVtbl : IPropertyNotifySinkVtbl* do
     GUID = LibC::GUID.new(0x9bfbbc02_u32, 0xeff1_u16, 0x101a_u16, StaticArray[0x84_u8, 0xed_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x34_u8, 0x1d_u8, 0x7_u8])
     def query_interface(this : IPropertyNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4249,7 +4417,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b196b28b-bab4-101a-b69c-00aa00341d07")]
   record ISpecifyPropertyPages, lpVtbl : ISpecifyPropertyPagesVtbl* do
     GUID = LibC::GUID.new(0xb196b28b_u32, 0xbab4_u16, 0x101a_u16, StaticArray[0xb6_u8, 0x9c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x34_u8, 0x1d_u8, 0x7_u8])
     def query_interface(this : ISpecifyPropertyPages*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4279,7 +4446,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("37d84f60-42cb-11ce-8135-00aa004bb851")]
   record IPersistPropertyBag, lpVtbl : IPersistPropertyBagVtbl* do
     GUID = LibC::GUID.new(0x37d84f60_u32, 0x42cb_u16, 0x11ce_u16, StaticArray[0x81_u8, 0x35_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xb8_u8, 0x51_u8])
     def query_interface(this : IPersistPropertyBag*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4316,7 +4482,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("742b0e01-14e6-101b-914e-00aa00300cab")]
   record ISimpleFrameSite, lpVtbl : ISimpleFrameSiteVtbl* do
     GUID = LibC::GUID.new(0x742b0e01_u32, 0x14e6_u16, 0x101b_u16, StaticArray[0x91_u8, 0x4e_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x30_u8, 0xc_u8, 0xab_u8])
     def query_interface(this : ISimpleFrameSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4369,7 +4534,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("bef6e002-a874-101a-8bba-00aa00300cab")]
   record IFont, lpVtbl : IFontVtbl* do
     GUID = LibC::GUID.new(0xbef6e002_u32, 0xa874_u16, 0x101a_u16, StaticArray[0x8b_u8, 0xba_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x30_u8, 0xc_u8, 0xab_u8])
     def query_interface(this : IFont*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4478,7 +4642,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("7bf80980-bf32-101a-8bbb-00aa00300cab")]
   record IPicture, lpVtbl : IPictureVtbl* do
     GUID = LibC::GUID.new(0x7bf80980_u32, 0xbf32_u16, 0x101a_u16, StaticArray[0x8b_u8, 0xbb_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x30_u8, 0xc_u8, 0xab_u8])
     def query_interface(this : IPicture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4557,7 +4720,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("f5185dd8-2012-4b0b-aad9-f052c6bd482b")]
   record IPicture2, lpVtbl : IPicture2Vtbl* do
     GUID = LibC::GUID.new(0xf5185dd8_u32, 0x2012_u16, 0x4b0b_u16, StaticArray[0xaa_u8, 0xd9_u8, 0xf0_u8, 0x52_u8, 0xc6_u8, 0xbd_u8, 0x48_u8, 0x2b_u8])
     def query_interface(this : IPicture2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4626,7 +4788,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("4ef6100a-af88-11d0-9846-00c04fc29993")]
   record IFontEventsDisp, lpVtbl : IFontEventsDispVtbl* do
     GUID = LibC::GUID.new(0x4ef6100a_u32, 0xaf88_u16, 0x11d0_u16, StaticArray[0x98_u8, 0x46_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x99_u8, 0x93_u8])
     def query_interface(this : IFontEventsDisp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4665,7 +4826,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("bef6e003-a874-101a-8bba-00aa00300cab")]
   record IFontDisp, lpVtbl : IFontDispVtbl* do
     GUID = LibC::GUID.new(0xbef6e003_u32, 0xa874_u16, 0x101a_u16, StaticArray[0x8b_u8, 0xba_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x30_u8, 0xc_u8, 0xab_u8])
     def query_interface(this : IFontDisp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4704,7 +4864,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("7bf80981-bf32-101a-8bbb-00aa00300cab")]
   record IPictureDisp, lpVtbl : IPictureDispVtbl* do
     GUID = LibC::GUID.new(0x7bf80981_u32, 0xbf32_u16, 0x101a_u16, StaticArray[0x8b_u8, 0xbb_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x30_u8, 0xc_u8, 0xab_u8])
     def query_interface(this : IPictureDisp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4747,7 +4906,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("1c2056cc-5ef4-101b-8bc8-00aa003e3b29")]
   record IOleInPlaceObjectWindowless, lpVtbl : IOleInPlaceObjectWindowlessVtbl* do
     GUID = LibC::GUID.new(0x1c2056cc_u32, 0x5ef4_u16, 0x101b_u16, StaticArray[0x8b_u8, 0xc8_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3e_u8, 0x3b_u8, 0x29_u8])
     def query_interface(this : IOleInPlaceObjectWindowless*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4809,7 +4967,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("9c2cad80-3424-11cf-b670-00aa004cd6d8")]
   record IOleInPlaceSiteEx, lpVtbl : IOleInPlaceSiteExVtbl* do
     GUID = LibC::GUID.new(0x9c2cad80_u32, 0x3424_u16, 0x11cf_u16, StaticArray[0xb6_u8, 0x70_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4c_u8, 0xd6_u8, 0xd8_u8])
     def query_interface(this : IOleInPlaceSiteEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4904,7 +5061,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("922eada0-3424-11cf-b670-00aa004cd6d8")]
   record IOleInPlaceSiteWindowless, lpVtbl : IOleInPlaceSiteWindowlessVtbl* do
     GUID = LibC::GUID.new(0x922eada0_u32, 0x3424_u16, 0x11cf_u16, StaticArray[0xb6_u8, 0x70_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4c_u8, 0xd6_u8, 0xd8_u8])
     def query_interface(this : IOleInPlaceSiteWindowless*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5020,7 +5176,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("3af24292-0c96-11ce-a0cf-00aa00600ab8")]
   record IViewObjectEx, lpVtbl : IViewObjectExVtbl* do
     GUID = LibC::GUID.new(0x3af24292_u32, 0xc96_u16, 0x11ce_u16, StaticArray[0xa0_u8, 0xcf_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0xa_u8, 0xb8_u8])
     def query_interface(this : IViewObjectEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5083,7 +5238,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("894ad3b0-ef97-11ce-9bc9-00aa00608e01")]
   record IOleUndoUnit, lpVtbl : IOleUndoUnitVtbl* do
     GUID = LibC::GUID.new(0x894ad3b0_u32, 0xef97_u16, 0x11ce_u16, StaticArray[0x9b_u8, 0xc9_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0x8e_u8, 0x1_u8])
     def query_interface(this : IOleUndoUnit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5127,7 +5281,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("a1faf330-ef97-11ce-9bc9-00aa00608e01")]
   record IOleParentUndoUnit, lpVtbl : IOleParentUndoUnitVtbl* do
     GUID = LibC::GUID.new(0xa1faf330_u32, 0xef97_u16, 0x11ce_u16, StaticArray[0x9b_u8, 0xc9_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0x8e_u8, 0x1_u8])
     def query_interface(this : IOleParentUndoUnit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5181,7 +5334,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b3e7c340-ef97-11ce-9bc9-00aa00608e01")]
   record IEnumOleUndoUnits, lpVtbl : IEnumOleUndoUnitsVtbl* do
     GUID = LibC::GUID.new(0xb3e7c340_u32, 0xef97_u16, 0x11ce_u16, StaticArray[0x9b_u8, 0xc9_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0x8e_u8, 0x1_u8])
     def query_interface(this : IEnumOleUndoUnits*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5228,7 +5380,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("d001f200-ef97-11ce-9bc9-00aa00608e01")]
   record IOleUndoManager, lpVtbl : IOleUndoManagerVtbl* do
     GUID = LibC::GUID.new(0xd001f200_u32, 0xef97_u16, 0x11ce_u16, StaticArray[0x9b_u8, 0xc9_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0x8e_u8, 0x1_u8])
     def query_interface(this : IOleUndoManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5290,7 +5441,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("55980ba0-35aa-11cf-b671-00aa004cd6d8")]
   record IPointerInactive, lpVtbl : IPointerInactiveVtbl* do
     GUID = LibC::GUID.new(0x55980ba0_u32, 0x35aa_u16, 0x11cf_u16, StaticArray[0xb6_u8, 0x71_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4c_u8, 0xd6_u8, 0xd8_u8])
     def query_interface(this : IPointerInactive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5324,7 +5474,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("fc4801a3-2ba9-11cf-a229-00aa003d7352")]
   record IObjectWithSite, lpVtbl : IObjectWithSiteVtbl* do
     GUID = LibC::GUID.new(0xfc4801a3_u32, 0x2ba9_u16, 0x11cf_u16, StaticArray[0xa2_u8, 0x29_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3d_u8, 0x73_u8, 0x52_u8])
     def query_interface(this : IObjectWithSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5357,7 +5506,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("376bd3aa-3845-101b-84ed-08002b2ec713")]
   record IPerPropertyBrowsing, lpVtbl : IPerPropertyBrowsingVtbl* do
     GUID = LibC::GUID.new(0x376bd3aa_u32, 0x3845_u16, 0x101b_u16, StaticArray[0x84_u8, 0xed_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x2e_u8, 0xc7_u8, 0x13_u8])
     def query_interface(this : IPerPropertyBrowsing*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5397,7 +5545,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("22f55881-280b-11d0-a8a9-00a0c90c2004")]
   record IPersistPropertyBag2, lpVtbl : IPersistPropertyBag2Vtbl* do
     GUID = LibC::GUID.new(0x22f55881_u32, 0x280b_u16, 0x11d0_u16, StaticArray[0xa8_u8, 0xa9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xc_u8, 0x20_u8, 0x4_u8])
     def query_interface(this : IPersistPropertyBag2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5441,7 +5588,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("3af24290-0c96-11ce-a0cf-00aa00600ab8")]
   record IAdviseSinkEx, lpVtbl : IAdviseSinkExVtbl* do
     GUID = LibC::GUID.new(0x3af24290_u32, 0xc96_u16, 0x11ce_u16, StaticArray[0xa0_u8, 0xcf_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0xa_u8, 0xb8_u8])
     def query_interface(this : IAdviseSinkEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5485,7 +5631,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("cf51ed10-62fe-11cf-bf86-00a0c9034836")]
   record IQuickActivate, lpVtbl : IQuickActivateVtbl* do
     GUID = LibC::GUID.new(0xcf51ed10_u32, 0x62fe_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0x86_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0x48_u8, 0x36_u8])
     def query_interface(this : IQuickActivate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5518,7 +5663,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("40a050a0-3c31-101b-a82e-08002b2b2337")]
   record IVBGetControl, lpVtbl : IVBGetControlVtbl* do
     GUID = LibC::GUID.new(0x40a050a0_u32, 0x3c31_u16, 0x101b_u16, StaticArray[0xa8_u8, 0x2e_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x2b_u8, 0x23_u8, 0x37_u8])
     def query_interface(this : IVBGetControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5545,7 +5689,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("8a701da0-4feb-101b-a82e-08002b2b2337")]
   record IGetOleObject, lpVtbl : IGetOleObjectVtbl* do
     GUID = LibC::GUID.new(0x8a701da0_u32, 0x4feb_u16, 0x101b_u16, StaticArray[0xa8_u8, 0x2e_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x2b_u8, 0x23_u8, 0x37_u8])
     def query_interface(this : IGetOleObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5572,7 +5715,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("9849fd60-3768-101b-8d72-ae6164ffe3cf")]
   record IVBFormat, lpVtbl : IVBFormatVtbl* do
     GUID = LibC::GUID.new(0x9849fd60_u32, 0x3768_u16, 0x101b_u16, StaticArray[0x8d_u8, 0x72_u8, 0xae_u8, 0x61_u8, 0x64_u8, 0xff_u8, 0xe3_u8, 0xcf_u8])
     def query_interface(this : IVBFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5599,7 +5741,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("91733a60-3f4c-101b-a3f6-00aa0034e4e9")]
   record IGetVBAObject, lpVtbl : IGetVBAObjectVtbl* do
     GUID = LibC::GUID.new(0x91733a60_u32, 0x3f4c_u16, 0x101b_u16, StaticArray[0xa3_u8, 0xf6_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x34_u8, 0xe4_u8, 0xe9_u8])
     def query_interface(this : IGetVBAObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5628,7 +5769,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b722bcc5-4e68-101b-a2bc-00aa00404770")]
   record IOleDocument, lpVtbl : IOleDocumentVtbl* do
     GUID = LibC::GUID.new(0xb722bcc5_u32, 0x4e68_u16, 0x101b_u16, StaticArray[0xa2_u8, 0xbc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x40_u8, 0x47_u8, 0x70_u8])
     def query_interface(this : IOleDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5661,7 +5801,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b722bcc7-4e68-101b-a2bc-00aa00404770")]
   record IOleDocumentSite, lpVtbl : IOleDocumentSiteVtbl* do
     GUID = LibC::GUID.new(0xb722bcc7_u32, 0x4e68_u16, 0x101b_u16, StaticArray[0xa2_u8, 0xbc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x40_u8, 0x47_u8, 0x70_u8])
     def query_interface(this : IOleDocumentSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5700,7 +5839,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b722bcc6-4e68-101b-a2bc-00aa00404770")]
   record IOleDocumentView, lpVtbl : IOleDocumentViewVtbl* do
     GUID = LibC::GUID.new(0xb722bcc6_u32, 0x4e68_u16, 0x101b_u16, StaticArray[0xa2_u8, 0xbc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x40_u8, 0x47_u8, 0x70_u8])
     def query_interface(this : IOleDocumentView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5766,7 +5904,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b722bcc8-4e68-101b-a2bc-00aa00404770")]
   record IEnumOleDocumentViews, lpVtbl : IEnumOleDocumentViewsVtbl* do
     GUID = LibC::GUID.new(0xb722bcc8_u32, 0x4e68_u16, 0x101b_u16, StaticArray[0xa2_u8, 0xbc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x40_u8, 0x47_u8, 0x70_u8])
     def query_interface(this : IEnumOleDocumentViews*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5803,7 +5940,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b722bcca-4e68-101b-a2bc-00aa00404770")]
   record IContinueCallback, lpVtbl : IContinueCallbackVtbl* do
     GUID = LibC::GUID.new(0xb722bcca_u32, 0x4e68_u16, 0x101b_u16, StaticArray[0xa2_u8, 0xbc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x40_u8, 0x47_u8, 0x70_u8])
     def query_interface(this : IContinueCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5835,7 +5971,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b722bcc9-4e68-101b-a2bc-00aa00404770")]
   record IPrint, lpVtbl : IPrintVtbl* do
     GUID = LibC::GUID.new(0xb722bcc9_u32, 0x4e68_u16, 0x101b_u16, StaticArray[0xa2_u8, 0xbc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x40_u8, 0x47_u8, 0x70_u8])
     def query_interface(this : IPrint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5869,7 +6004,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("b722bccb-4e68-101b-a2bc-00aa00404770")]
   record IOleCommandTarget, lpVtbl : IOleCommandTargetVtbl* do
     GUID = LibC::GUID.new(0xb722bccb_u32, 0x4e68_u16, 0x101b_u16, StaticArray[0xa2_u8, 0xbc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x40_u8, 0x47_u8, 0x70_u8])
     def query_interface(this : IOleCommandTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5899,7 +6033,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("41b68150-904c-4e17-a0ba-a438182e359d")]
   record IZoomEvents, lpVtbl : IZoomEventsVtbl* do
     GUID = LibC::GUID.new(0x41b68150_u32, 0x904c_u16, 0x4e17_u16, StaticArray[0xa0_u8, 0xba_u8, 0xa4_u8, 0x38_u8, 0x18_u8, 0x2e_u8, 0x35_u8, 0x9d_u8])
     def query_interface(this : IZoomEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5926,7 +6059,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("d81f90a3-8156-44f7-ad28-5abb87003274")]
   record IProtectFocus, lpVtbl : IProtectFocusVtbl* do
     GUID = LibC::GUID.new(0xd81f90a3_u32, 0x8156_u16, 0x44f7_u16, StaticArray[0xad_u8, 0x28_u8, 0x5a_u8, 0xbb_u8, 0x87_u8, 0x0_u8, 0x32_u8, 0x74_u8])
     def query_interface(this : IProtectFocus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5955,7 +6087,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("73c105ee-9dff-4a07-b83c-7eff290c266e")]
   record IProtectedModeMenuServices, lpVtbl : IProtectedModeMenuServicesVtbl* do
     GUID = LibC::GUID.new(0x73c105ee_u32, 0x9dff_u16, 0x4a07_u16, StaticArray[0xb8_u8, 0x3c_u8, 0x7e_u8, 0xff_u8, 0x29_u8, 0xc_u8, 0x26_u8, 0x6e_u8])
     def query_interface(this : IProtectedModeMenuServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6307,7 +6438,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("a6ef9860-c720-11d0-9337-00a0c90dcaa9")]
   record IDispatchEx, lpVtbl : IDispatchExVtbl* do
     GUID = LibC::GUID.new(0xa6ef9860_u32, 0xc720_u16, 0x11d0_u16, StaticArray[0x93_u8, 0x37_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xca_u8, 0xa9_u8])
     def query_interface(this : IDispatchEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6372,7 +6502,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("a6ef9861-c720-11d0-9337-00a0c90dcaa9")]
   record IDispError, lpVtbl : IDispErrorVtbl* do
     GUID = LibC::GUID.new(0xa6ef9861_u32, 0xc720_u16, 0x11d0_u16, StaticArray[0x93_u8, 0x37_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xca_u8, 0xa9_u8])
     def query_interface(this : IDispError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6414,7 +6543,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("a6ef9862-c720-11d0-9337-00a0c90dcaa9")]
   record IVariantChangeType, lpVtbl : IVariantChangeTypeVtbl* do
     GUID = LibC::GUID.new(0xa6ef9862_u32, 0xc720_u16, 0x11d0_u16, StaticArray[0x93_u8, 0x37_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xca_u8, 0xa9_u8])
     def query_interface(this : IVariantChangeType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6441,7 +6569,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("ca04b7e6-0d21-11d1-8cc5-00c04fc2b085")]
   record IObjectIdentity, lpVtbl : IObjectIdentityVtbl* do
     GUID = LibC::GUID.new(0xca04b7e6_u32, 0xd21_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0xc5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xb0_u8, 0x85_u8])
     def query_interface(this : IObjectIdentity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6468,7 +6595,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("c5598e60-b307-11d1-b27d-006008c3fbfb")]
   record ICanHandleException, lpVtbl : ICanHandleExceptionVtbl* do
     GUID = LibC::GUID.new(0xc5598e60_u32, 0xb307_u16, 0x11d1_u16, StaticArray[0xb2_u8, 0x7d_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xc3_u8, 0xfb_u8, 0xfb_u8])
     def query_interface(this : ICanHandleException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6495,7 +6621,6 @@ module Win32cr::System::Ole
 
 
   @[Extern]
-  #@[Com("10e2414a-ec59-49d2-bc51-5add2c36febc")]
   record IProvideRuntimeContext, lpVtbl : IProvideRuntimeContextVtbl* do
     GUID = LibC::GUID.new(0x10e2414a_u32, 0xec59_u16, 0x49d2_u16, StaticArray[0xbc_u8, 0x51_u8, 0x5a_u8, 0xdd_u8, 0x2c_u8, 0x36_u8, 0xfe_u8, 0xbc_u8])
     def query_interface(this : IProvideRuntimeContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6515,7 +6640,6 @@ module Win32cr::System::Ole
 
   @[Link("oleaut32")]
   @[Link("ole32")]
-  @[Link("api-ms-win-core-marshal-l1-1-0")]
   @[Link("oledlg")]
   lib C
     fun DosDateTimeToVariantTime(wDosDate : UInt16, wDosTime : UInt16, pvtime : Float64*) : Int32

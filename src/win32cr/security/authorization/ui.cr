@@ -77,55 +77,76 @@ module Win32cr::Security::Authorization::UI
   end
 
   @[Extern]
-  record SI_OBJECT_INFO,
-    dwFlags : Win32cr::Security::Authorization::UI::SI_OBJECT_INFO_FLAGS,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    pszServerName : Win32cr::Foundation::PWSTR,
-    pszObjectName : Win32cr::Foundation::PWSTR,
-    pszPageTitle : Win32cr::Foundation::PWSTR,
-    guidObjectType : LibC::GUID
+  struct SI_OBJECT_INFO
+    property dwFlags : Win32cr::Security::Authorization::UI::SI_OBJECT_INFO_FLAGS
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property pszServerName : Win32cr::Foundation::PWSTR
+    property pszObjectName : Win32cr::Foundation::PWSTR
+    property pszPageTitle : Win32cr::Foundation::PWSTR
+    property guidObjectType : LibC::GUID
+    def initialize(@dwFlags : Win32cr::Security::Authorization::UI::SI_OBJECT_INFO_FLAGS, @hInstance : Win32cr::Foundation::HINSTANCE, @pszServerName : Win32cr::Foundation::PWSTR, @pszObjectName : Win32cr::Foundation::PWSTR, @pszPageTitle : Win32cr::Foundation::PWSTR, @guidObjectType : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record SI_ACCESS,
-    pguid : LibC::GUID*,
-    mask : UInt32,
-    pszName : Win32cr::Foundation::PWSTR,
-    dwFlags : UInt32
+  struct SI_ACCESS
+    property pguid : LibC::GUID*
+    property mask : UInt32
+    property pszName : Win32cr::Foundation::PWSTR
+    property dwFlags : UInt32
+    def initialize(@pguid : LibC::GUID*, @mask : UInt32, @pszName : Win32cr::Foundation::PWSTR, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record SI_INHERIT_TYPE,
-    pguid : LibC::GUID*,
-    dwFlags : Win32cr::Security::ACE_FLAGS,
-    pszName : Win32cr::Foundation::PWSTR
+  struct SI_INHERIT_TYPE
+    property pguid : LibC::GUID*
+    property dwFlags : Win32cr::Security::ACE_FLAGS
+    property pszName : Win32cr::Foundation::PWSTR
+    def initialize(@pguid : LibC::GUID*, @dwFlags : Win32cr::Security::ACE_FLAGS, @pszName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record SID_INFO,
-    pSid : Win32cr::Foundation::PSID,
-    pwzCommonName : Win32cr::Foundation::PWSTR,
-    pwzClass : Win32cr::Foundation::PWSTR,
-    pwzUPN : Win32cr::Foundation::PWSTR
+  struct SID_INFO
+    property pSid : Win32cr::Foundation::PSID
+    property pwzCommonName : Win32cr::Foundation::PWSTR
+    property pwzClass : Win32cr::Foundation::PWSTR
+    property pwzUPN : Win32cr::Foundation::PWSTR
+    def initialize(@pSid : Win32cr::Foundation::PSID, @pwzCommonName : Win32cr::Foundation::PWSTR, @pwzClass : Win32cr::Foundation::PWSTR, @pwzUPN : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record SID_INFO_LIST,
-    cItems : UInt32,
-    aSidInfo : Win32cr::Security::Authorization::UI::SID_INFO*
+  struct SID_INFO_LIST
+    property cItems : UInt32
+    property aSidInfo : Win32cr::Security::Authorization::UI::SID_INFO*
+    def initialize(@cItems : UInt32, @aSidInfo : Win32cr::Security::Authorization::UI::SID_INFO*)
+    end
+  end
 
   @[Extern]
-  record SECURITY_OBJECT,
-    pwszName : Win32cr::Foundation::PWSTR,
-    pData : Void*,
-    cbData : UInt32,
-    pData2 : Void*,
-    cbData2 : UInt32,
-    id : UInt32,
-    fWellKnown : Win32cr::Foundation::BOOLEAN
+  struct SECURITY_OBJECT
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pData : Void*
+    property cbData : UInt32
+    property pData2 : Void*
+    property cbData2 : UInt32
+    property id : UInt32
+    property fWellKnown : Win32cr::Foundation::BOOLEAN
+    def initialize(@pwszName : Win32cr::Foundation::PWSTR, @pData : Void*, @cbData : UInt32, @pData2 : Void*, @cbData2 : UInt32, @id : UInt32, @fWellKnown : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record EFFPERM_RESULT_LIST,
-    fEvaluated : Win32cr::Foundation::BOOLEAN,
-    cObjectTypeListLength : UInt32,
-    pObjectTypeList : Win32cr::Security::OBJECT_TYPE_LIST*,
-    pGrantedAccessList : UInt32*
+  struct EFFPERM_RESULT_LIST
+    property fEvaluated : Win32cr::Foundation::BOOLEAN
+    property cObjectTypeListLength : UInt32
+    property pObjectTypeList : Win32cr::Security::OBJECT_TYPE_LIST*
+    property pGrantedAccessList : UInt32*
+    def initialize(@fEvaluated : Win32cr::Foundation::BOOLEAN, @cObjectTypeListLength : UInt32, @pObjectTypeList : Win32cr::Security::OBJECT_TYPE_LIST*, @pGrantedAccessList : UInt32*)
+    end
+  end
 
   @[Extern]
   record ISecurityInformationVtbl,
@@ -142,7 +163,6 @@ module Win32cr::Security::Authorization::UI
 
 
   @[Extern]
-  #@[Com("965fc360-16ff-11d0-91cb-00aa00bbb723")]
   record ISecurityInformation, lpVtbl : ISecurityInformationVtbl* do
     GUID = LibC::GUID.new(0x965fc360_u32, 0x16ff_u16, 0x11d0_u16, StaticArray[0x91_u8, 0xcb_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbb_u8, 0xb7_u8, 0x23_u8])
     def query_interface(this : ISecurityInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -188,7 +208,6 @@ module Win32cr::Security::Authorization::UI
 
 
   @[Extern]
-  #@[Com("c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a")]
   record ISecurityInformation2, lpVtbl : ISecurityInformation2Vtbl* do
     GUID = LibC::GUID.new(0xc3ccfdb4_u32, 0x6f88_u16, 0x11d2_u16, StaticArray[0xa3_u8, 0xce_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb1_u8, 0x78_u8, 0x2a_u8])
     def query_interface(this : ISecurityInformation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -218,7 +237,6 @@ module Win32cr::Security::Authorization::UI
 
 
   @[Extern]
-  #@[Com("3853dc76-9f35-407c-88a1-d19344365fbc")]
   record IEffectivePermission, lpVtbl : IEffectivePermissionVtbl* do
     GUID = LibC::GUID.new(0x3853dc76_u32, 0x9f35_u16, 0x407c_u16, StaticArray[0x88_u8, 0xa1_u8, 0xd1_u8, 0x93_u8, 0x44_u8, 0x36_u8, 0x5f_u8, 0xbc_u8])
     def query_interface(this : IEffectivePermission*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -245,7 +263,6 @@ module Win32cr::Security::Authorization::UI
 
 
   @[Extern]
-  #@[Com("fc3066eb-79ef-444b-9111-d18a75ebf2fa")]
   record ISecurityObjectTypeInfo, lpVtbl : ISecurityObjectTypeInfoVtbl* do
     GUID = LibC::GUID.new(0xfc3066eb_u32, 0x79ef_u16, 0x444b_u16, StaticArray[0x91_u8, 0x11_u8, 0xd1_u8, 0x8a_u8, 0x75_u8, 0xeb_u8, 0xf2_u8, 0xfa_u8])
     def query_interface(this : ISecurityObjectTypeInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -273,7 +290,6 @@ module Win32cr::Security::Authorization::UI
 
 
   @[Extern]
-  #@[Com("e2cdc9cc-31bd-4f8f-8c8b-b641af516a1a")]
   record ISecurityInformation3, lpVtbl : ISecurityInformation3Vtbl* do
     GUID = LibC::GUID.new(0xe2cdc9cc_u32, 0x31bd_u16, 0x4f8f_u16, StaticArray[0x8c_u8, 0x8b_u8, 0xb6_u8, 0x41_u8, 0xaf_u8, 0x51_u8, 0x6a_u8, 0x1a_u8])
     def query_interface(this : ISecurityInformation3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -303,7 +319,6 @@ module Win32cr::Security::Authorization::UI
 
 
   @[Extern]
-  #@[Com("ea961070-cd14-4621-ace4-f63c03e583e4")]
   record ISecurityInformation4, lpVtbl : ISecurityInformation4Vtbl* do
     GUID = LibC::GUID.new(0xea961070_u32, 0xcd14_u16, 0x4621_u16, StaticArray[0xac_u8, 0xe4_u8, 0xf6_u8, 0x3c_u8, 0x3_u8, 0xe5_u8, 0x83_u8, 0xe4_u8])
     def query_interface(this : ISecurityInformation4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -330,7 +345,6 @@ module Win32cr::Security::Authorization::UI
 
 
   @[Extern]
-  #@[Com("941fabca-dd47-4fca-90bb-b0e10255f20d")]
   record IEffectivePermission2, lpVtbl : IEffectivePermission2Vtbl* do
     GUID = LibC::GUID.new(0x941fabca_u32, 0xdd47_u16, 0x4fca_u16, StaticArray[0x90_u8, 0xbb_u8, 0xb0_u8, 0xe1_u8, 0x2_u8, 0x55_u8, 0xf2_u8, 0xd_u8])
     def query_interface(this : IEffectivePermission2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

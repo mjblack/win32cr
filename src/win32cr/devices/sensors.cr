@@ -412,70 +412,95 @@ module Win32cr::Devices::Sensors
   end
 
   @[Extern]
-  record SENSOR_VALUE_PAIR,
-    key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY,
-    value : Win32cr::System::Com::StructuredStorage::PROPVARIANT
+  struct SENSOR_VALUE_PAIR
+    property key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY
+    property value : Win32cr::System::Com::StructuredStorage::PROPVARIANT
+    def initialize(@key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY, @value : Win32cr::System::Com::StructuredStorage::PROPVARIANT)
+    end
+  end
 
   @[Extern]
-  record SENSOR_COLLECTION_LIST,
-    allocated_size_in_bytes : UInt32,
-    count : UInt32,
-    list : Win32cr::Devices::Sensors::SENSOR_VALUE_PAIR*
+  struct SENSOR_COLLECTION_LIST
+    property allocated_size_in_bytes : UInt32
+    property count : UInt32
+    property list : Win32cr::Devices::Sensors::SENSOR_VALUE_PAIR*
+    def initialize(@allocated_size_in_bytes : UInt32, @count : UInt32, @list : Win32cr::Devices::Sensors::SENSOR_VALUE_PAIR*)
+    end
+  end
 
   @[Extern]
-  record SENSOR_PROPERTY_LIST,
-    allocated_size_in_bytes : UInt32,
-    count : UInt32,
-    list : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*
+  struct SENSOR_PROPERTY_LIST
+    property allocated_size_in_bytes : UInt32
+    property count : UInt32
+    property list : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*
+    def initialize(@allocated_size_in_bytes : UInt32, @count : UInt32, @list : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*)
+    end
+  end
 
   @[Extern]
-  record VEC3D,
-    x : Float32,
-    y : Float32,
-    z : Float32
+  struct VEC3D
+    property x : Float32
+    property y : Float32
+    property z : Float32
+    def initialize(@x : Float32, @y : Float32, @z : Float32)
+    end
+  end
 
   @[Extern]
-  record MATRIX3X3,
-    anonymous : Anonymous_e__Union_ do
+  struct MATRIX3X3
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      anonymous2 : Anonymous2_e__Struct_,
-      m : Float32[9] do
+    struct Anonymous_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
+    property m : Float32[9]
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        a11 : Float32,
-        a12 : Float32,
-        a13 : Float32,
-        a21 : Float32,
-        a22 : Float32,
-        a23 : Float32,
-        a31 : Float32,
-        a32 : Float32,
-        a33 : Float32
+      struct Anonymous1_e__Struct_
+    property a11 : Float32
+    property a12 : Float32
+    property a13 : Float32
+    property a21 : Float32
+    property a22 : Float32
+    property a23 : Float32
+    property a31 : Float32
+    property a32 : Float32
+    property a33 : Float32
+    def initialize(@a11 : Float32, @a12 : Float32, @a13 : Float32, @a21 : Float32, @a22 : Float32, @a23 : Float32, @a31 : Float32, @a32 : Float32, @a33 : Float32)
+    end
+      end
 
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        v1 : Win32cr::Devices::Sensors::VEC3D,
-        v2 : Win32cr::Devices::Sensors::VEC3D,
-        v3 : Win32cr::Devices::Sensors::VEC3D
+      struct Anonymous2_e__Struct_
+    property v1 : Win32cr::Devices::Sensors::VEC3D
+    property v2 : Win32cr::Devices::Sensors::VEC3D
+    property v3 : Win32cr::Devices::Sensors::VEC3D
+    def initialize(@v1 : Win32cr::Devices::Sensors::VEC3D, @v2 : Win32cr::Devices::Sensors::VEC3D, @v3 : Win32cr::Devices::Sensors::VEC3D)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_, @m : Float32[9])
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record QUATERNION,
-    x : Float32,
-    y : Float32,
-    z : Float32,
-    w : Float32
+  struct QUATERNION
+    property x : Float32
+    property y : Float32
+    property z : Float32
+    property w : Float32
+    def initialize(@x : Float32, @y : Float32, @z : Float32, @w : Float32)
+    end
+  end
 
   @[Extern]
   record ISensorManagerVtbl,
@@ -490,7 +515,6 @@ module Win32cr::Devices::Sensors
 
 
   @[Extern]
-  #@[Com("bd77db67-45a8-42dc-8d00-6dcf15f8377a")]
   record ISensorManager, lpVtbl : ISensorManagerVtbl* do
     GUID = LibC::GUID.new(0xbd77db67_u32, 0x45a8_u16, 0x42dc_u16, StaticArray[0x8d_u8, 0x0_u8, 0x6d_u8, 0xcf_u8, 0x15_u8, 0xf8_u8, 0x37_u8, 0x7a_u8])
     def query_interface(this : ISensorManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -530,7 +554,6 @@ module Win32cr::Devices::Sensors
 
 
   @[Extern]
-  #@[Com("d5fb0a7f-e74e-44f5-8e02-4806863a274f")]
   record ILocationPermissions, lpVtbl : ILocationPermissionsVtbl* do
     GUID = LibC::GUID.new(0xd5fb0a7f_u32, 0xe74e_u16, 0x44f5_u16, StaticArray[0x8e_u8, 0x2_u8, 0x48_u8, 0x6_u8, 0x86_u8, 0x3a_u8, 0x27_u8, 0x4f_u8])
     def query_interface(this : ILocationPermissions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -565,7 +588,6 @@ module Win32cr::Devices::Sensors
 
 
   @[Extern]
-  #@[Com("23571e11-e545-4dd8-a337-b89bf44b10df")]
   record ISensorCollection, lpVtbl : ISensorCollectionVtbl* do
     GUID = LibC::GUID.new(0x23571e11_u32, 0xe545_u16, 0x4dd8_u16, StaticArray[0xa3_u8, 0x37_u8, 0xb8_u8, 0x9b_u8, 0xf4_u8, 0x4b_u8, 0x10_u8, 0xdf_u8])
     def query_interface(this : ISensorCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -621,7 +643,6 @@ module Win32cr::Devices::Sensors
 
 
   @[Extern]
-  #@[Com("5fa08f80-2657-458e-af75-46f73fa6ac5c")]
   record ISensor, lpVtbl : ISensorVtbl* do
     GUID = LibC::GUID.new(0x5fa08f80_u32, 0x2657_u16, 0x458e_u16, StaticArray[0xaf_u8, 0x75_u8, 0x46_u8, 0xf7_u8, 0x3f_u8, 0xa6_u8, 0xac_u8, 0x5c_u8])
     def query_interface(this : ISensor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -692,7 +713,6 @@ module Win32cr::Devices::Sensors
 
 
   @[Extern]
-  #@[Com("0ab9df9b-c4b5-4796-8898-0470706a2e1d")]
   record ISensorDataReport, lpVtbl : ISensorDataReportVtbl* do
     GUID = LibC::GUID.new(0xab9df9b_u32, 0xc4b5_u16, 0x4796_u16, StaticArray[0x88_u8, 0x98_u8, 0x4_u8, 0x70_u8, 0x70_u8, 0x6a_u8, 0x2e_u8, 0x1d_u8])
     def query_interface(this : ISensorDataReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -725,7 +745,6 @@ module Win32cr::Devices::Sensors
 
 
   @[Extern]
-  #@[Com("9b3b0b86-266a-4aad-b21f-fde5501001b7")]
   record ISensorManagerEvents, lpVtbl : ISensorManagerEventsVtbl* do
     GUID = LibC::GUID.new(0x9b3b0b86_u32, 0x266a_u16, 0x4aad_u16, StaticArray[0xb2_u8, 0x1f_u8, 0xfd_u8, 0xe5_u8, 0x50_u8, 0x10_u8, 0x1_u8, 0xb7_u8])
     def query_interface(this : ISensorManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -755,7 +774,6 @@ module Win32cr::Devices::Sensors
 
 
   @[Extern]
-  #@[Com("5d8dcc91-4641-47e7-b7c3-b74f48a6c391")]
   record ISensorEvents, lpVtbl : ISensorEventsVtbl* do
     GUID = LibC::GUID.new(0x5d8dcc91_u32, 0x4641_u16, 0x47e7_u16, StaticArray[0xb7_u8, 0xc3_u8, 0xb7_u8, 0x4f_u8, 0x48_u8, 0xa6_u8, 0xc3_u8, 0x91_u8])
     def query_interface(this : ISensorEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

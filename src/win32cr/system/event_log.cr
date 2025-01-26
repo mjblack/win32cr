@@ -3,7 +3,7 @@ require "./../foundation.cr"
 module Win32cr::System::EventLog
   alias EventLogHandle = LibC::IntPtrT
   alias EventSourceHandle = LibC::IntPtrT
-  alias EVT_SUBSCRIBE_CALLBACK = Proc(Win32cr::System::EventLog::EVT_SUBSCRIBE_NOTIFY_ACTION, Void*, LibC::IntPtrT, UInt32)*
+  alias EVT_SUBSCRIBE_CALLBACK = Proc(Win32cr::System::EventLog::EVT_SUBSCRIBE_NOTIFY_ACTION, Void*, LibC::IntPtrT, UInt32)
 
   EVT_VARIANT_TYPE_MASK = 127_u32
   EVT_VARIANT_TYPE_ARRAY = 128_u32
@@ -250,94 +250,111 @@ module Win32cr::System::EventLog
   end
 
   @[Extern]
-  record EVT_VARIANT,
-    anonymous : Anonymous_e__Union_,
-    count : UInt32,
-    type__ : UInt32 do
+  struct EVT_VARIANT
+    property anonymous : Anonymous_e__Union_
+    property count : UInt32
+    property type__ : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      boolean_val : Win32cr::Foundation::BOOL,
-      s_byte_val : Int8,
-      int16_val : Int16,
-      int32_val : Int32,
-      int64_val : Int64,
-      byte_val : UInt8,
-      u_int16_val : UInt16,
-      u_int32_val : UInt32,
-      u_int64_val : UInt64,
-      single_val : Float32,
-      double_val : Float64,
-      file_time_val : UInt64,
-      sys_time_val : Win32cr::Foundation::SYSTEMTIME*,
-      guid_val : LibC::GUID*,
-      string_val : Win32cr::Foundation::PWSTR,
-      ansi_string_val : Win32cr::Foundation::PSTR,
-      binary_val : UInt8*,
-      sid_val : Win32cr::Foundation::PSID,
-      size_t_val : LibC::UIntPtrT,
-      boolean_arr : Win32cr::Foundation::BOOL*,
-      s_byte_arr : Int8*,
-      int16_arr : Int16*,
-      int32_arr : Int32*,
-      int64_arr : Int64*,
-      byte_arr : UInt8*,
-      u_int16_arr : UInt16*,
-      u_int32_arr : UInt32*,
-      u_int64_arr : UInt64*,
-      single_arr : Float32*,
-      double_arr : Float64*,
-      file_time_arr : Win32cr::Foundation::FILETIME*,
-      sys_time_arr : Win32cr::Foundation::SYSTEMTIME*,
-      guid_arr : LibC::GUID*,
-      string_arr : Win32cr::Foundation::PWSTR*,
-      ansi_string_arr : Win32cr::Foundation::PSTR*,
-      sid_arr : Win32cr::Foundation::PSID*,
-      size_t_arr : LibC::UIntPtrT*,
-      evt_handle_val : LibC::IntPtrT,
-      xml_val : Win32cr::Foundation::PWSTR,
-      xml_val_arr : Win32cr::Foundation::PWSTR*
+    struct Anonymous_e__Union_
+    property boolean_val : Win32cr::Foundation::BOOL
+    property s_byte_val : Int8
+    property int16_val : Int16
+    property int32_val : Int32
+    property int64_val : Int64
+    property byte_val : UInt8
+    property u_int16_val : UInt16
+    property u_int32_val : UInt32
+    property u_int64_val : UInt64
+    property single_val : Float32
+    property double_val : Float64
+    property file_time_val : UInt64
+    property sys_time_val : Win32cr::Foundation::SYSTEMTIME*
+    property guid_val : LibC::GUID*
+    property string_val : Win32cr::Foundation::PWSTR
+    property ansi_string_val : Win32cr::Foundation::PSTR
+    property binary_val : UInt8*
+    property sid_val : Win32cr::Foundation::PSID
+    property size_t_val : LibC::UIntPtrT
+    property boolean_arr : Win32cr::Foundation::BOOL*
+    property s_byte_arr : Int8*
+    property int16_arr : Int16*
+    property int32_arr : Int32*
+    property int64_arr : Int64*
+    property byte_arr : UInt8*
+    property u_int16_arr : UInt16*
+    property u_int32_arr : UInt32*
+    property u_int64_arr : UInt64*
+    property single_arr : Float32*
+    property double_arr : Float64*
+    property file_time_arr : Win32cr::Foundation::FILETIME*
+    property sys_time_arr : Win32cr::Foundation::SYSTEMTIME*
+    property guid_arr : LibC::GUID*
+    property string_arr : Win32cr::Foundation::PWSTR*
+    property ansi_string_arr : Win32cr::Foundation::PSTR*
+    property sid_arr : Win32cr::Foundation::PSID*
+    property size_t_arr : LibC::UIntPtrT*
+    property evt_handle_val : LibC::IntPtrT
+    property xml_val : Win32cr::Foundation::PWSTR
+    property xml_val_arr : Win32cr::Foundation::PWSTR*
+    def initialize(@boolean_val : Win32cr::Foundation::BOOL, @s_byte_val : Int8, @int16_val : Int16, @int32_val : Int32, @int64_val : Int64, @byte_val : UInt8, @u_int16_val : UInt16, @u_int32_val : UInt32, @u_int64_val : UInt64, @single_val : Float32, @double_val : Float64, @file_time_val : UInt64, @sys_time_val : Win32cr::Foundation::SYSTEMTIME*, @guid_val : LibC::GUID*, @string_val : Win32cr::Foundation::PWSTR, @ansi_string_val : Win32cr::Foundation::PSTR, @binary_val : UInt8*, @sid_val : Win32cr::Foundation::PSID, @size_t_val : LibC::UIntPtrT, @boolean_arr : Win32cr::Foundation::BOOL*, @s_byte_arr : Int8*, @int16_arr : Int16*, @int32_arr : Int32*, @int64_arr : Int64*, @byte_arr : UInt8*, @u_int16_arr : UInt16*, @u_int32_arr : UInt32*, @u_int64_arr : UInt64*, @single_arr : Float32*, @double_arr : Float64*, @file_time_arr : Win32cr::Foundation::FILETIME*, @sys_time_arr : Win32cr::Foundation::SYSTEMTIME*, @guid_arr : LibC::GUID*, @string_arr : Win32cr::Foundation::PWSTR*, @ansi_string_arr : Win32cr::Foundation::PSTR*, @sid_arr : Win32cr::Foundation::PSID*, @size_t_arr : LibC::UIntPtrT*, @evt_handle_val : LibC::IntPtrT, @xml_val : Win32cr::Foundation::PWSTR, @xml_val_arr : Win32cr::Foundation::PWSTR*)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @count : UInt32, @type__ : UInt32)
+    end
   end
 
   @[Extern]
-  record EVT_RPC_LOGIN,
-    server : Win32cr::Foundation::PWSTR,
-    user : Win32cr::Foundation::PWSTR,
-    domain : Win32cr::Foundation::PWSTR,
-    password : Win32cr::Foundation::PWSTR,
-    flags : UInt32
+  struct EVT_RPC_LOGIN
+    property server : Win32cr::Foundation::PWSTR
+    property user : Win32cr::Foundation::PWSTR
+    property domain : Win32cr::Foundation::PWSTR
+    property password : Win32cr::Foundation::PWSTR
+    property flags : UInt32
+    def initialize(@server : Win32cr::Foundation::PWSTR, @user : Win32cr::Foundation::PWSTR, @domain : Win32cr::Foundation::PWSTR, @password : Win32cr::Foundation::PWSTR, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record EVENTLOGRECORD,
-    length : UInt32,
-    reserved : UInt32,
-    record_number : UInt32,
-    time_generated : UInt32,
-    time_written : UInt32,
-    event_id : UInt32,
-    event_type : Win32cr::System::EventLog::REPORT_EVENT_TYPE,
-    num_strings : UInt16,
-    event_category : UInt16,
-    reserved_flags : UInt16,
-    closing_record_number : UInt32,
-    string_offset : UInt32,
-    user_sid_length : UInt32,
-    user_sid_offset : UInt32,
-    data_length : UInt32,
-    data_offset : UInt32
+  struct EVENTLOGRECORD
+    property length : UInt32
+    property reserved : UInt32
+    property record_number : UInt32
+    property time_generated : UInt32
+    property time_written : UInt32
+    property event_id : UInt32
+    property event_type : Win32cr::System::EventLog::REPORT_EVENT_TYPE
+    property num_strings : UInt16
+    property event_category : UInt16
+    property reserved_flags : UInt16
+    property closing_record_number : UInt32
+    property string_offset : UInt32
+    property user_sid_length : UInt32
+    property user_sid_offset : UInt32
+    property data_length : UInt32
+    property data_offset : UInt32
+    def initialize(@length : UInt32, @reserved : UInt32, @record_number : UInt32, @time_generated : UInt32, @time_written : UInt32, @event_id : UInt32, @event_type : Win32cr::System::EventLog::REPORT_EVENT_TYPE, @num_strings : UInt16, @event_category : UInt16, @reserved_flags : UInt16, @closing_record_number : UInt32, @string_offset : UInt32, @user_sid_length : UInt32, @user_sid_offset : UInt32, @data_length : UInt32, @data_offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record EVENTSFORLOGFILE,
-    ulSize : UInt32,
-    szLogicalLogFile : UInt16[256],
-    ulNumRecords : UInt32,
-    pEventLogRecords : Win32cr::System::EventLog::EVENTLOGRECORD*
+  struct EVENTSFORLOGFILE
+    property ulSize : UInt32
+    property szLogicalLogFile : UInt16[256]
+    property ulNumRecords : UInt32
+    property pEventLogRecords : Win32cr::System::EventLog::EVENTLOGRECORD*
+    def initialize(@ulSize : UInt32, @szLogicalLogFile : UInt16[256], @ulNumRecords : UInt32, @pEventLogRecords : Win32cr::System::EventLog::EVENTLOGRECORD*)
+    end
+  end
 
   @[Extern]
-  record EVENTLOG_FULL_INFORMATION,
-    dwFull : UInt32
+  struct EVENTLOG_FULL_INFORMATION
+    property dwFull : UInt32
+    def initialize(@dwFull : UInt32)
+    end
+  end
 
   @[Link("wevtapi")]
   @[Link("advapi32")]

@@ -1086,650 +1086,885 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record D3DCOLORVALUE,
-    r : Float32,
-    g : Float32,
-    b : Float32,
-    a : Float32
-
-  @[Extern]
-  record D3DRECT,
-    x1 : Int32,
-    y1 : Int32,
-    x2 : Int32,
-    y2 : Int32
-
-  @[Extern]
-  record D3DVIEWPORT9,
-    x : UInt32,
-    y : UInt32,
-    width : UInt32,
-    height : UInt32,
-    min_z : Float32,
-    max_z : Float32
-
-  @[Extern]
-  record D3DCLIPSTATUS9,
-    clip_union : UInt32,
-    clip_intersection : UInt32
-
-  @[Extern]
-  record D3DMATERIAL9,
-    diffuse : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE,
-    ambient : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE,
-    specular : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE,
-    emissive : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE,
-    power : Float32
-
-  @[Extern]
-  record D3DLIGHT9,
-    type__ : Win32cr::Graphics::Direct3D9::D3DLIGHTTYPE,
-    diffuse : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE,
-    specular : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE,
-    ambient : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE,
-    position : Win32cr::Graphics::Direct3D::D3DVECTOR,
-    direction : Win32cr::Graphics::Direct3D::D3DVECTOR,
-    range : Float32,
-    falloff : Float32,
-    attenuation0 : Float32,
-    attenuation1 : Float32,
-    attenuation2 : Float32,
-    theta : Float32,
-    phi : Float32
-
-  @[Extern]
-  record D3DVERTEXELEMENT9,
-    stream : UInt16,
-    offset : UInt16,
-    type__ : UInt8,
-    method : UInt8,
-    usage : UInt8,
-    usage_index : UInt8
-
-  @[Extern]
-  record D3DDISPLAYMODE,
-    width : UInt32,
-    height : UInt32,
-    refresh_rate : UInt32,
-    format : Win32cr::Graphics::Direct3D9::D3DFORMAT
-
-  @[Extern]
-  record D3DDEVICE_CREATION_PARAMETERS,
-    adapter_ordinal : UInt32,
-    device_type : Win32cr::Graphics::Direct3D9::D3DDEVTYPE,
-    hFocusWindow : Win32cr::Foundation::HWND,
-    behavior_flags : UInt32
-
-  @[Extern]
-  record D3DPRESENT_PARAMETERS,
-    back_buffer_width : UInt32,
-    back_buffer_height : UInt32,
-    back_buffer_format : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    back_buffer_count : UInt32,
-    multi_sample_type : Win32cr::Graphics::Direct3D9::D3DMULTISAMPLE_TYPE,
-    multi_sample_quality : UInt32,
-    swap_effect : Win32cr::Graphics::Direct3D9::D3DSWAPEFFECT,
-    hDeviceWindow : Win32cr::Foundation::HWND,
-    windowed : Win32cr::Foundation::BOOL,
-    enable_auto_depth_stencil : Win32cr::Foundation::BOOL,
-    auto_depth_stencil_format : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    flags : UInt32,
-    full_screen_refresh_rate_in_hz : UInt32,
-    presentation_interval : UInt32
-
-  @[Extern]
-  record D3DGAMMARAMP,
-    red : UInt16[256],
-    green : UInt16[256],
-    blue : UInt16[256]
-
-  @[Extern]
-  record D3DVERTEXBUFFER_DESC,
-    format : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    type__ : Win32cr::Graphics::Direct3D9::D3DRESOURCETYPE,
-    usage : UInt32,
-    pool : Win32cr::Graphics::Direct3D9::D3DPOOL,
-    size : UInt32,
-    fvf : UInt32
-
-  @[Extern]
-  record D3DINDEXBUFFER_DESC,
-    format : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    type__ : Win32cr::Graphics::Direct3D9::D3DRESOURCETYPE,
-    usage : UInt32,
-    pool : Win32cr::Graphics::Direct3D9::D3DPOOL,
-    size : UInt32
-
-  @[Extern]
-  record D3DSURFACE_DESC,
-    format : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    type__ : Win32cr::Graphics::Direct3D9::D3DRESOURCETYPE,
-    usage : UInt32,
-    pool : Win32cr::Graphics::Direct3D9::D3DPOOL,
-    multi_sample_type : Win32cr::Graphics::Direct3D9::D3DMULTISAMPLE_TYPE,
-    multi_sample_quality : UInt32,
-    width : UInt32,
-    height : UInt32
-
-  @[Extern]
-  record D3DVOLUME_DESC,
-    format : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    type__ : Win32cr::Graphics::Direct3D9::D3DRESOURCETYPE,
-    usage : UInt32,
-    pool : Win32cr::Graphics::Direct3D9::D3DPOOL,
-    width : UInt32,
-    height : UInt32,
-    depth : UInt32
-
-  @[Extern]
-  record D3DLOCKED_RECT,
-    pitch : Int32,
-    pBits : Void*
-
-  @[Extern]
-  record D3DBOX,
-    left : UInt32,
-    top : UInt32,
-    right : UInt32,
-    bottom : UInt32,
-    front : UInt32,
-    back : UInt32
-
-  @[Extern]
-  record D3DLOCKED_BOX,
-    row_pitch : Int32,
-    slice_pitch : Int32,
-    pBits : Void*
-
-  @[Extern]
-  record D3DRANGE,
-    offset : UInt32,
-    size : UInt32
-
-  @[Extern]
-  record D3DRECTPATCH_INFO,
-    start_vertex_offset_width : UInt32,
-    start_vertex_offset_height : UInt32,
-    width : UInt32,
-    height : UInt32,
-    stride : UInt32,
-    basis : Win32cr::Graphics::Direct3D9::D3DBASISTYPE,
-    degree : Win32cr::Graphics::Direct3D9::D3DDEGREETYPE
-
-  @[Extern]
-  record D3DTRIPATCH_INFO,
-    start_vertex_offset : UInt32,
-    num_vertices : UInt32,
-    basis : Win32cr::Graphics::Direct3D9::D3DBASISTYPE,
-    degree : Win32cr::Graphics::Direct3D9::D3DDEGREETYPE
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record D3DADAPTER_IDENTIFIER9,
-    driver : Win32cr::Foundation::CHAR[512],
-    description : Win32cr::Foundation::CHAR[512],
-    device_name : Win32cr::Foundation::CHAR[32],
-    driver_version : Win32cr::Foundation::LARGE_INTEGER,
-    vendor_id : UInt32,
-    device_id : UInt32,
-    sub_sys_id : UInt32,
-    revision : UInt32,
-    device_identifier : LibC::GUID,
-    whql_level : UInt32
-  {% end %}
-
-  @[Extern]
-  record D3DRASTER_STATUS,
-    in_v_blank : Win32cr::Foundation::BOOL,
-    scan_line : UInt32
-
-  @[Extern]
-  record D3DRESOURCESTATS,
-    bThrashing : Win32cr::Foundation::BOOL,
-    approx_bytes_downloaded : UInt32,
-    num_evicts : UInt32,
-    num_vid_creates : UInt32,
-    last_pri : UInt32,
-    num_used : UInt32,
-    num_used_in_vid_mem : UInt32,
-    working_set : UInt32,
-    working_set_bytes : UInt32,
-    total_managed : UInt32,
-    total_bytes : UInt32
-
-  @[Extern]
-  record D3DDEVINFO_RESOURCEMANAGER,
-    stats : Win32cr::Graphics::Direct3D9::D3DRESOURCESTATS[8]
-
-  @[Extern]
-  record D3DDEVINFO_D3DVERTEXSTATS,
-    num_rendered_triangles : UInt32,
-    num_extra_clipping_triangles : UInt32
-
-  @[Extern]
-  record D3DDEVINFO_VCACHE,
-    pattern : UInt32,
-    opt_method : UInt32,
-    cache_size : UInt32,
-    magic_number : UInt32
-
-  @[Extern]
-  record D3DDEVINFO_D3D9PIPELINETIMINGS,
-    vertex_processing_time_percent : Float32,
-    pixel_processing_time_percent : Float32,
-    other_gpu_processing_time_percent : Float32,
-    gpu_idle_time_percent : Float32
-
-  @[Extern]
-  record D3DDEVINFO_D3D9INTERFACETIMINGS,
-    waiting_for_gpu_to_use_application_resource_time_percent : Float32,
-    waiting_for_gpu_to_accept_more_commands_time_percent : Float32,
-    waiting_for_gpu_to_stay_within_latency_time_percent : Float32,
-    waiting_for_gpu_exclusive_resource_time_percent : Float32,
-    waiting_for_gpu_other_time_percent : Float32
-
-  @[Extern]
-  record D3DDEVINFO_D3D9STAGETIMINGS,
-    memory_processing_percent : Float32,
-    computation_processing_percent : Float32
-
-  @[Extern]
-  record D3DDEVINFO_D3D9BANDWIDTHTIMINGS,
-    max_bandwidth_utilized : Float32,
-    front_end_upload_memory_utilized_percent : Float32,
-    vertex_rate_utilized_percent : Float32,
-    triangle_setup_rate_utilized_percent : Float32,
-    fill_rate_utilized_percent : Float32
-
-  @[Extern]
-  record D3DDEVINFO_D3D9CACHEUTILIZATION,
-    texture_cache_hit_rate : Float32,
-    post_transform_vertex_cache_hit_rate : Float32
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record D3DMEMORYPRESSURE,
-    bytes_evicted_from_process : UInt64,
-    size_of_inefficient_allocation : UInt64,
-    level_of_efficiency : UInt32
-  {% end %}
-
-  @[Extern]
-  record D3DCOMPOSERECTDESC,
-    x : UInt16,
-    y : UInt16,
-    width : UInt16,
-    height : UInt16
-
-  @[Extern]
-  record D3DCOMPOSERECTDESTINATION,
-    src_rect_index : UInt16,
-    reserved : UInt16,
-    x : Int16,
-    y : Int16
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record D3DPRESENTSTATS,
-    present_count : UInt32,
-    present_refresh_count : UInt32,
-    sync_refresh_count : UInt32,
-    sync_qpc_time : Win32cr::Foundation::LARGE_INTEGER,
-    sync_gpu_time : Win32cr::Foundation::LARGE_INTEGER
-  {% end %}
-
-  @[Extern]
-  record D3DDISPLAYMODEEX,
-    size : UInt32,
-    width : UInt32,
-    height : UInt32,
-    refresh_rate : UInt32,
-    format : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    scan_line_ordering : Win32cr::Graphics::Direct3D9::D3DSCANLINEORDERING
-
-  @[Extern]
-  record D3DDISPLAYMODEFILTER,
-    size : UInt32,
-    format : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    scan_line_ordering : Win32cr::Graphics::Direct3D9::D3DSCANLINEORDERING
-
-  @[Extern]
-  record D3D_OMAC,
-    omac : UInt8[16]
-
-  @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
-    query_type : LibC::GUID,
-    hChannel : Win32cr::Foundation::HANDLE,
-    sequence_number : UInt32
-
-  @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    omac : Win32cr::Graphics::Direct3D9::D3D_OMAC,
-    query_type : LibC::GUID,
-    hChannel : Win32cr::Foundation::HANDLE,
-    sequence_number : UInt32,
-    return_code : Win32cr::Foundation::HRESULT
-
-  @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      value : UInt32 do
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
-
+  struct D3DCOLORVALUE
+    property r : Float32
+    property g : Float32
+    property b : Float32
+    property a : Float32
+    def initialize(@r : Float32, @g : Float32, @b : Float32, @a : Float32)
     end
-
   end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYPROTECTION_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    protection_flags : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS
+  struct D3DRECT
+    property x1 : Int32
+    property y1 : Int32
+    property x2 : Int32
+    property y2 : Int32
+    def initialize(@x1 : Int32, @y1 : Int32, @x2 : Int32, @y2 : Int32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYCHANNELTYPE_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    channel_type : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNELTYPE
+  struct D3DVIEWPORT9
+    property x : UInt32
+    property y : UInt32
+    property width : UInt32
+    property height : UInt32
+    property min_z : Float32
+    property max_z : Float32
+    def initialize(@x : UInt32, @y : UInt32, @width : UInt32, @height : UInt32, @min_z : Float32, @max_z : Float32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYDEVICEHANDLE_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    device_handle : Win32cr::Foundation::HANDLE
+  struct D3DCLIPSTATUS9
+    property clip_union : UInt32
+    property clip_intersection : UInt32
+    def initialize(@clip_union : UInt32, @clip_intersection : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYCRYPTOSESSION_INPUT,
-    input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
-    dxva2_decode_handle : Win32cr::Foundation::HANDLE
+  struct D3DMATERIAL9
+    property diffuse : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE
+    property ambient : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE
+    property specular : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE
+    property emissive : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE
+    property power : Float32
+    def initialize(@diffuse : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE, @ambient : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE, @specular : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE, @emissive : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE, @power : Float32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYCRYPTOSESSION_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    dxva2_decode_handle : Win32cr::Foundation::HANDLE,
-    crypto_session_handle : Win32cr::Foundation::HANDLE,
-    device_handle : Win32cr::Foundation::HANDLE
+  struct D3DLIGHT9
+    property type__ : Win32cr::Graphics::Direct3D9::D3DLIGHTTYPE
+    property diffuse : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE
+    property specular : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE
+    property ambient : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE
+    property position : Win32cr::Graphics::Direct3D::D3DVECTOR
+    property direction : Win32cr::Graphics::Direct3D::D3DVECTOR
+    property range : Float32
+    property falloff : Float32
+    property attenuation0 : Float32
+    property attenuation1 : Float32
+    property attenuation2 : Float32
+    property theta : Float32
+    property phi : Float32
+    def initialize(@type__ : Win32cr::Graphics::Direct3D9::D3DLIGHTTYPE, @diffuse : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE, @specular : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE, @ambient : Win32cr::Graphics::Direct3D9::D3DCOLORVALUE, @position : Win32cr::Graphics::Direct3D::D3DVECTOR, @direction : Win32cr::Graphics::Direct3D::D3DVECTOR, @range : Float32, @falloff : Float32, @attenuation0 : Float32, @attenuation1 : Float32, @attenuation2 : Float32, @theta : Float32, @phi : Float32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESSCOUNT_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    num_restricted_shared_resource_processes : UInt32
+  struct D3DVERTEXELEMENT9
+    property stream : UInt16
+    property offset : UInt16
+    property type__ : UInt8
+    property method : UInt8
+    property usage : UInt8
+    property usage_index : UInt8
+    def initialize(@stream : UInt16, @offset : UInt16, @type__ : UInt8, @method : UInt8, @usage : UInt8, @usage_index : UInt8)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESS_INPUT,
-    input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
-    process_index : UInt32
+  struct D3DDISPLAYMODE
+    property width : UInt32
+    property height : UInt32
+    property refresh_rate : UInt32
+    property format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    def initialize(@width : UInt32, @height : UInt32, @refresh_rate : UInt32, @format : Win32cr::Graphics::Direct3D9::D3DFORMAT)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESS_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    process_index : UInt32,
-    process_identifer : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE,
-    process_handle : Win32cr::Foundation::HANDLE
+  struct D3DDEVICE_CREATION_PARAMETERS
+    property adapter_ordinal : UInt32
+    property device_type : Win32cr::Graphics::Direct3D9::D3DDEVTYPE
+    property hFocusWindow : Win32cr::Foundation::HWND
+    property behavior_flags : UInt32
+    def initialize(@adapter_ordinal : UInt32, @device_type : Win32cr::Graphics::Direct3D9::D3DDEVTYPE, @hFocusWindow : Win32cr::Foundation::HWND, @behavior_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYUNRESTRICTEDPROTECTEDSHAREDRESOURCECOUNT_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    num_unrestricted_protected_shared_resources : UInt32
+  struct D3DPRESENT_PARAMETERS
+    property back_buffer_width : UInt32
+    property back_buffer_height : UInt32
+    property back_buffer_format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property back_buffer_count : UInt32
+    property multi_sample_type : Win32cr::Graphics::Direct3D9::D3DMULTISAMPLE_TYPE
+    property multi_sample_quality : UInt32
+    property swap_effect : Win32cr::Graphics::Direct3D9::D3DSWAPEFFECT
+    property hDeviceWindow : Win32cr::Foundation::HWND
+    property windowed : Win32cr::Foundation::BOOL
+    property enable_auto_depth_stencil : Win32cr::Foundation::BOOL
+    property auto_depth_stencil_format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property flags : UInt32
+    property full_screen_refresh_rate_in_hz : UInt32
+    property presentation_interval : UInt32
+    def initialize(@back_buffer_width : UInt32, @back_buffer_height : UInt32, @back_buffer_format : Win32cr::Graphics::Direct3D9::D3DFORMAT, @back_buffer_count : UInt32, @multi_sample_type : Win32cr::Graphics::Direct3D9::D3DMULTISAMPLE_TYPE, @multi_sample_quality : UInt32, @swap_effect : Win32cr::Graphics::Direct3D9::D3DSWAPEFFECT, @hDeviceWindow : Win32cr::Foundation::HWND, @windowed : Win32cr::Foundation::BOOL, @enable_auto_depth_stencil : Win32cr::Foundation::BOOL, @auto_depth_stencil_format : Win32cr::Graphics::Direct3D9::D3DFORMAT, @flags : UInt32, @full_screen_refresh_rate_in_hz : UInt32, @presentation_interval : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTIDCOUNT_INPUT,
-    input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
-    device_handle : Win32cr::Foundation::HANDLE,
-    crypto_session_handle : Win32cr::Foundation::HANDLE
+  struct D3DGAMMARAMP
+    property red : UInt16[256]
+    property green : UInt16[256]
+    property blue : UInt16[256]
+    def initialize(@red : UInt16[256], @green : UInt16[256], @blue : UInt16[256])
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTIDCOUNT_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    device_handle : Win32cr::Foundation::HANDLE,
-    crypto_session_handle : Win32cr::Foundation::HANDLE,
-    num_output_i_ds : UInt32
+  struct D3DVERTEXBUFFER_DESC
+    property format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property type__ : Win32cr::Graphics::Direct3D9::D3DRESOURCETYPE
+    property usage : UInt32
+    property pool : Win32cr::Graphics::Direct3D9::D3DPOOL
+    property size : UInt32
+    property fvf : UInt32
+    def initialize(@format : Win32cr::Graphics::Direct3D9::D3DFORMAT, @type__ : Win32cr::Graphics::Direct3D9::D3DRESOURCETYPE, @usage : UInt32, @pool : Win32cr::Graphics::Direct3D9::D3DPOOL, @size : UInt32, @fvf : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTID_INPUT,
-    input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
-    device_handle : Win32cr::Foundation::HANDLE,
-    crypto_session_handle : Win32cr::Foundation::HANDLE,
-    output_id_index : UInt32
+  struct D3DINDEXBUFFER_DESC
+    property format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property type__ : Win32cr::Graphics::Direct3D9::D3DRESOURCETYPE
+    property usage : UInt32
+    property pool : Win32cr::Graphics::Direct3D9::D3DPOOL
+    property size : UInt32
+    def initialize(@format : Win32cr::Graphics::Direct3D9::D3DFORMAT, @type__ : Win32cr::Graphics::Direct3D9::D3DRESOURCETYPE, @usage : UInt32, @pool : Win32cr::Graphics::Direct3D9::D3DPOOL, @size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DSURFACE_DESC
+    property format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property type__ : Win32cr::Graphics::Direct3D9::D3DRESOURCETYPE
+    property usage : UInt32
+    property pool : Win32cr::Graphics::Direct3D9::D3DPOOL
+    property multi_sample_type : Win32cr::Graphics::Direct3D9::D3DMULTISAMPLE_TYPE
+    property multi_sample_quality : UInt32
+    property width : UInt32
+    property height : UInt32
+    def initialize(@format : Win32cr::Graphics::Direct3D9::D3DFORMAT, @type__ : Win32cr::Graphics::Direct3D9::D3DRESOURCETYPE, @usage : UInt32, @pool : Win32cr::Graphics::Direct3D9::D3DPOOL, @multi_sample_type : Win32cr::Graphics::Direct3D9::D3DMULTISAMPLE_TYPE, @multi_sample_quality : UInt32, @width : UInt32, @height : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DVOLUME_DESC
+    property format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property type__ : Win32cr::Graphics::Direct3D9::D3DRESOURCETYPE
+    property usage : UInt32
+    property pool : Win32cr::Graphics::Direct3D9::D3DPOOL
+    property width : UInt32
+    property height : UInt32
+    property depth : UInt32
+    def initialize(@format : Win32cr::Graphics::Direct3D9::D3DFORMAT, @type__ : Win32cr::Graphics::Direct3D9::D3DRESOURCETYPE, @usage : UInt32, @pool : Win32cr::Graphics::Direct3D9::D3DPOOL, @width : UInt32, @height : UInt32, @depth : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DLOCKED_RECT
+    property pitch : Int32
+    property pBits : Void*
+    def initialize(@pitch : Int32, @pBits : Void*)
+    end
+  end
+
+  @[Extern]
+  struct D3DBOX
+    property left : UInt32
+    property top : UInt32
+    property right : UInt32
+    property bottom : UInt32
+    property front : UInt32
+    property back : UInt32
+    def initialize(@left : UInt32, @top : UInt32, @right : UInt32, @bottom : UInt32, @front : UInt32, @back : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DLOCKED_BOX
+    property row_pitch : Int32
+    property slice_pitch : Int32
+    property pBits : Void*
+    def initialize(@row_pitch : Int32, @slice_pitch : Int32, @pBits : Void*)
+    end
+  end
+
+  @[Extern]
+  struct D3DRANGE
+    property offset : UInt32
+    property size : UInt32
+    def initialize(@offset : UInt32, @size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DRECTPATCH_INFO
+    property start_vertex_offset_width : UInt32
+    property start_vertex_offset_height : UInt32
+    property width : UInt32
+    property height : UInt32
+    property stride : UInt32
+    property basis : Win32cr::Graphics::Direct3D9::D3DBASISTYPE
+    property degree : Win32cr::Graphics::Direct3D9::D3DDEGREETYPE
+    def initialize(@start_vertex_offset_width : UInt32, @start_vertex_offset_height : UInt32, @width : UInt32, @height : UInt32, @stride : UInt32, @basis : Win32cr::Graphics::Direct3D9::D3DBASISTYPE, @degree : Win32cr::Graphics::Direct3D9::D3DDEGREETYPE)
+    end
+  end
+
+  @[Extern]
+  struct D3DTRIPATCH_INFO
+    property start_vertex_offset : UInt32
+    property num_vertices : UInt32
+    property basis : Win32cr::Graphics::Direct3D9::D3DBASISTYPE
+    property degree : Win32cr::Graphics::Direct3D9::D3DDEGREETYPE
+    def initialize(@start_vertex_offset : UInt32, @num_vertices : UInt32, @basis : Win32cr::Graphics::Direct3D9::D3DBASISTYPE, @degree : Win32cr::Graphics::Direct3D9::D3DDEGREETYPE)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTID_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    device_handle : Win32cr::Foundation::HANDLE,
-    crypto_session_handle : Win32cr::Foundation::HANDLE,
-    output_id_index : UInt32,
-    output_id : UInt64
+  struct D3DADAPTER_IDENTIFIER9
+    property driver : Win32cr::Foundation::CHAR[512]
+    property description : Win32cr::Foundation::CHAR[512]
+    property device_name : Win32cr::Foundation::CHAR[32]
+    property driver_version : Win32cr::Foundation::LARGE_INTEGER
+    property vendor_id : UInt32
+    property device_id : UInt32
+    property sub_sys_id : UInt32
+    property revision : UInt32
+    property device_identifier : LibC::GUID
+    property whql_level : UInt32
+    def initialize(@driver : Win32cr::Foundation::CHAR[512], @description : Win32cr::Foundation::CHAR[512], @device_name : Win32cr::Foundation::CHAR[32], @driver_version : Win32cr::Foundation::LARGE_INTEGER, @vendor_id : UInt32, @device_id : UInt32, @sub_sys_id : UInt32, @revision : UInt32, @device_identifier : LibC::GUID, @whql_level : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYINFOBUSTYPE_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    bus_type : Win32cr::Graphics::Direct3D9::D3DBUSTYPE,
-    bAccessibleInContiguousBlocks : Win32cr::Foundation::BOOL,
-    bAccessibleInNonContiguousBlocks : Win32cr::Foundation::BOOL
+  struct D3DRASTER_STATUS
+    property in_v_blank : Win32cr::Foundation::BOOL
+    property scan_line : UInt32
+    def initialize(@in_v_blank : Win32cr::Foundation::BOOL, @scan_line : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUIDCOUNT_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    num_encryption_guids : UInt32
+  struct D3DRESOURCESTATS
+    property bThrashing : Win32cr::Foundation::BOOL
+    property approx_bytes_downloaded : UInt32
+    property num_evicts : UInt32
+    property num_vid_creates : UInt32
+    property last_pri : UInt32
+    property num_used : UInt32
+    property num_used_in_vid_mem : UInt32
+    property working_set : UInt32
+    property working_set_bytes : UInt32
+    property total_managed : UInt32
+    property total_bytes : UInt32
+    def initialize(@bThrashing : Win32cr::Foundation::BOOL, @approx_bytes_downloaded : UInt32, @num_evicts : UInt32, @num_vid_creates : UInt32, @last_pri : UInt32, @num_used : UInt32, @num_used_in_vid_mem : UInt32, @working_set : UInt32, @working_set_bytes : UInt32, @total_managed : UInt32, @total_bytes : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUID_INPUT,
-    input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
-    encryption_guid_index : UInt32
+  struct D3DDEVINFO_RESOURCEMANAGER
+    property stats : Win32cr::Graphics::Direct3D9::D3DRESOURCESTATS[8]
+    def initialize(@stats : Win32cr::Graphics::Direct3D9::D3DRESOURCESTATS[8])
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUID_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    encryption_guid_index : UInt32,
-    encryption_guid : LibC::GUID
+  struct D3DDEVINFO_D3DVERTEXSTATS
+    property num_rendered_triangles : UInt32
+    property num_extra_clipping_triangles : UInt32
+    def initialize(@num_rendered_triangles : UInt32, @num_extra_clipping_triangles : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYUNCOMPRESSEDENCRYPTIONLEVEL_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    encryption_guid : LibC::GUID
+  struct D3DDEVINFO_VCACHE
+    property pattern : UInt32
+    property opt_method : UInt32
+    property cache_size : UInt32
+    property magic_number : UInt32
+    def initialize(@pattern : UInt32, @opt_method : UInt32, @cache_size : UInt32, @magic_number : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
-    omac : Win32cr::Graphics::Direct3D9::D3D_OMAC,
-    configure_type : LibC::GUID,
-    hChannel : Win32cr::Foundation::HANDLE,
-    sequence_number : UInt32
+  struct D3DDEVINFO_D3D9PIPELINETIMINGS
+    property vertex_processing_time_percent : Float32
+    property pixel_processing_time_percent : Float32
+    property other_gpu_processing_time_percent : Float32
+    property gpu_idle_time_percent : Float32
+    def initialize(@vertex_processing_time_percent : Float32, @pixel_processing_time_percent : Float32, @other_gpu_processing_time_percent : Float32, @gpu_idle_time_percent : Float32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT,
-    omac : Win32cr::Graphics::Direct3D9::D3D_OMAC,
-    configure_type : LibC::GUID,
-    hChannel : Win32cr::Foundation::HANDLE,
-    sequence_number : UInt32,
-    return_code : Win32cr::Foundation::HRESULT
+  struct D3DDEVINFO_D3D9INTERFACETIMINGS
+    property waiting_for_gpu_to_use_application_resource_time_percent : Float32
+    property waiting_for_gpu_to_accept_more_commands_time_percent : Float32
+    property waiting_for_gpu_to_stay_within_latency_time_percent : Float32
+    property waiting_for_gpu_exclusive_resource_time_percent : Float32
+    property waiting_for_gpu_other_time_percent : Float32
+    def initialize(@waiting_for_gpu_to_use_application_resource_time_percent : Float32, @waiting_for_gpu_to_accept_more_commands_time_percent : Float32, @waiting_for_gpu_to_stay_within_latency_time_percent : Float32, @waiting_for_gpu_exclusive_resource_time_percent : Float32, @waiting_for_gpu_other_time_percent : Float32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_CONFIGUREINITIALIZE,
-    parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
-    start_sequence_query : UInt32,
-    start_sequence_configure : UInt32
+  struct D3DDEVINFO_D3D9STAGETIMINGS
+    property memory_processing_percent : Float32
+    property computation_processing_percent : Float32
+    def initialize(@memory_processing_percent : Float32, @computation_processing_percent : Float32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_CONFIGUREPROTECTION,
-    parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
-    protections : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS
+  struct D3DDEVINFO_D3D9BANDWIDTHTIMINGS
+    property max_bandwidth_utilized : Float32
+    property front_end_upload_memory_utilized_percent : Float32
+    property vertex_rate_utilized_percent : Float32
+    property triangle_setup_rate_utilized_percent : Float32
+    property fill_rate_utilized_percent : Float32
+    def initialize(@max_bandwidth_utilized : Float32, @front_end_upload_memory_utilized_percent : Float32, @vertex_rate_utilized_percent : Float32, @triangle_setup_rate_utilized_percent : Float32, @fill_rate_utilized_percent : Float32)
+    end
+  end
 
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_CONFIGURECRYPTOSESSION,
-    parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
-    dxva2_decode_handle : Win32cr::Foundation::HANDLE,
-    crypto_session_handle : Win32cr::Foundation::HANDLE,
-    device_handle : Win32cr::Foundation::HANDLE
-
-  @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_CONFIGURESHAREDRESOURCE,
-    parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
-    process_identifer_type : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE,
-    process_handle : Win32cr::Foundation::HANDLE,
-    allow_access : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_CONFIGUREUNCOMPRESSEDENCRYPTION,
-    parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
-    encryption_guid : LibC::GUID
-
-  @[Extern]
-  record D3DENCRYPTED_BLOCK_INFO,
-    num_encrypted_bytes_at_beginning : UInt32,
-    num_bytes_in_skip_pattern : UInt32,
-    num_bytes_in_encrypt_pattern : UInt32
+  struct D3DDEVINFO_D3D9CACHEUTILIZATION
+    property texture_cache_hit_rate : Float32
+    property post_transform_vertex_cache_hit_rate : Float32
+    def initialize(@texture_cache_hit_rate : Float32, @post_transform_vertex_cache_hit_rate : Float32)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record D3DAES_CTR_IV,
-    iv : UInt64,
-    count : UInt64
+  struct D3DMEMORYPRESSURE
+    property bytes_evicted_from_process : UInt64
+    property size_of_inefficient_allocation : UInt64
+    property level_of_efficiency : UInt32
+    def initialize(@bytes_evicted_from_process : UInt64, @size_of_inefficient_allocation : UInt64, @level_of_efficiency : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record D3DVSHADERCAPS2_0,
-    caps : UInt32,
-    dynamic_flow_control_depth : Int32,
-    num_temps : Int32,
-    static_flow_control_depth : Int32
+  struct D3DCOMPOSERECTDESC
+    property x : UInt16
+    property y : UInt16
+    property width : UInt16
+    property height : UInt16
+    def initialize(@x : UInt16, @y : UInt16, @width : UInt16, @height : UInt16)
+    end
+  end
 
   @[Extern]
-  record D3DPSHADERCAPS2_0,
-    caps : UInt32,
-    dynamic_flow_control_depth : Int32,
-    num_temps : Int32,
-    static_flow_control_depth : Int32,
-    num_instruction_slots : Int32
+  struct D3DCOMPOSERECTDESTINATION
+    property src_rect_index : UInt16
+    property reserved : UInt16
+    property x : Int16
+    property y : Int16
+    def initialize(@src_rect_index : UInt16, @reserved : UInt16, @x : Int16, @y : Int16)
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct D3DPRESENTSTATS
+    property present_count : UInt32
+    property present_refresh_count : UInt32
+    property sync_refresh_count : UInt32
+    property sync_qpc_time : Win32cr::Foundation::LARGE_INTEGER
+    property sync_gpu_time : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@present_count : UInt32, @present_refresh_count : UInt32, @sync_refresh_count : UInt32, @sync_qpc_time : Win32cr::Foundation::LARGE_INTEGER, @sync_gpu_time : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
+  {% end %}
 
   @[Extern]
-  record D3DCAPS9,
-    device_type : Win32cr::Graphics::Direct3D9::D3DDEVTYPE,
-    adapter_ordinal : UInt32,
-    caps : UInt32,
-    caps2 : UInt32,
-    caps3 : UInt32,
-    presentation_intervals : UInt32,
-    cursor_caps : UInt32,
-    dev_caps : UInt32,
-    primitive_misc_caps : UInt32,
-    raster_caps : UInt32,
-    z_cmp_caps : UInt32,
-    src_blend_caps : UInt32,
-    dest_blend_caps : UInt32,
-    alpha_cmp_caps : UInt32,
-    shade_caps : UInt32,
-    texture_caps : UInt32,
-    texture_filter_caps : UInt32,
-    cube_texture_filter_caps : UInt32,
-    volume_texture_filter_caps : UInt32,
-    texture_address_caps : UInt32,
-    volume_texture_address_caps : UInt32,
-    line_caps : UInt32,
-    max_texture_width : UInt32,
-    max_texture_height : UInt32,
-    max_volume_extent : UInt32,
-    max_texture_repeat : UInt32,
-    max_texture_aspect_ratio : UInt32,
-    max_anisotropy : UInt32,
-    max_vertex_w : Float32,
-    guard_band_left : Float32,
-    guard_band_top : Float32,
-    guard_band_right : Float32,
-    guard_band_bottom : Float32,
-    extents_adjust : Float32,
-    stencil_caps : UInt32,
-    fvf_caps : UInt32,
-    texture_op_caps : UInt32,
-    max_texture_blend_stages : UInt32,
-    max_simultaneous_textures : UInt32,
-    vertex_processing_caps : UInt32,
-    max_active_lights : UInt32,
-    max_user_clip_planes : UInt32,
-    max_vertex_blend_matrices : UInt32,
-    max_vertex_blend_matrix_index : UInt32,
-    max_point_size : Float32,
-    max_primitive_count : UInt32,
-    max_vertex_index : UInt32,
-    max_streams : UInt32,
-    max_stream_stride : UInt32,
-    vertex_shader_version : UInt32,
-    max_vertex_shader_const : UInt32,
-    pixel_shader_version : UInt32,
-    pixel_shader1x_max_value : Float32,
-    dev_caps2 : UInt32,
-    max_npatch_tessellation_level : Float32,
-    reserved5 : UInt32,
-    master_adapter_ordinal : UInt32,
-    adapter_ordinal_in_group : UInt32,
-    number_of_adapters_in_group : UInt32,
-    decl_types : UInt32,
-    num_simultaneous_r_ts : UInt32,
-    stretch_rect_filter_caps : UInt32,
-    vs20_caps : Win32cr::Graphics::Direct3D9::D3DVSHADERCAPS2_0,
-    ps20_caps : Win32cr::Graphics::Direct3D9::D3DPSHADERCAPS2_0,
-    vertex_texture_filter_caps : UInt32,
-    max_v_shader_instructions_executed : UInt32,
-    max_p_shader_instructions_executed : UInt32,
-    max_vertex_shader30_instruction_slots : UInt32,
-    max_pixel_shader30_instruction_slots : UInt32
+  struct D3DDISPLAYMODEEX
+    property size : UInt32
+    property width : UInt32
+    property height : UInt32
+    property refresh_rate : UInt32
+    property format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property scan_line_ordering : Win32cr::Graphics::Direct3D9::D3DSCANLINEORDERING
+    def initialize(@size : UInt32, @width : UInt32, @height : UInt32, @refresh_rate : UInt32, @format : Win32cr::Graphics::Direct3D9::D3DFORMAT, @scan_line_ordering : Win32cr::Graphics::Direct3D9::D3DSCANLINEORDERING)
+    end
+  end
+
+  @[Extern]
+  struct D3DDISPLAYMODEFILTER
+    property size : UInt32
+    property format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property scan_line_ordering : Win32cr::Graphics::Direct3D9::D3DSCANLINEORDERING
+    def initialize(@size : UInt32, @format : Win32cr::Graphics::Direct3D9::D3DFORMAT, @scan_line_ordering : Win32cr::Graphics::Direct3D9::D3DSCANLINEORDERING)
+    end
+  end
+
+  @[Extern]
+  struct D3D_OMAC
+    property omac : UInt8[16]
+    def initialize(@omac : UInt8[16])
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERY_INPUT
+    property query_type : LibC::GUID
+    property hChannel : Win32cr::Foundation::HANDLE
+    property sequence_number : UInt32
+    def initialize(@query_type : LibC::GUID, @hChannel : Win32cr::Foundation::HANDLE, @sequence_number : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property omac : Win32cr::Graphics::Direct3D9::D3D_OMAC
+    property query_type : LibC::GUID
+    property hChannel : Win32cr::Foundation::HANDLE
+    property sequence_number : UInt32
+    property return_code : Win32cr::Foundation::HRESULT
+    def initialize(@omac : Win32cr::Graphics::Direct3D9::D3D_OMAC, @query_type : LibC::GUID, @hChannel : Win32cr::Foundation::HANDLE, @sequence_number : UInt32, @return_code : Win32cr::Foundation::HRESULT)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property value : UInt32
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @value : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYPROTECTION_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property protection_flags : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @protection_flags : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYCHANNELTYPE_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property channel_type : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNELTYPE
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @channel_type : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNELTYPE)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYDEVICEHANDLE_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property device_handle : Win32cr::Foundation::HANDLE
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @device_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYCRYPTOSESSION_INPUT
+    property input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT
+    property dxva2_decode_handle : Win32cr::Foundation::HANDLE
+    def initialize(@input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT, @dxva2_decode_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYCRYPTOSESSION_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property dxva2_decode_handle : Win32cr::Foundation::HANDLE
+    property crypto_session_handle : Win32cr::Foundation::HANDLE
+    property device_handle : Win32cr::Foundation::HANDLE
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @dxva2_decode_handle : Win32cr::Foundation::HANDLE, @crypto_session_handle : Win32cr::Foundation::HANDLE, @device_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESSCOUNT_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property num_restricted_shared_resource_processes : UInt32
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @num_restricted_shared_resource_processes : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESS_INPUT
+    property input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT
+    property process_index : UInt32
+    def initialize(@input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT, @process_index : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESS_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property process_index : UInt32
+    property process_identifer : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE
+    property process_handle : Win32cr::Foundation::HANDLE
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @process_index : UInt32, @process_identifer : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE, @process_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYUNRESTRICTEDPROTECTEDSHAREDRESOURCECOUNT_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property num_unrestricted_protected_shared_resources : UInt32
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @num_unrestricted_protected_shared_resources : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTIDCOUNT_INPUT
+    property input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT
+    property device_handle : Win32cr::Foundation::HANDLE
+    property crypto_session_handle : Win32cr::Foundation::HANDLE
+    def initialize(@input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT, @device_handle : Win32cr::Foundation::HANDLE, @crypto_session_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTIDCOUNT_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property device_handle : Win32cr::Foundation::HANDLE
+    property crypto_session_handle : Win32cr::Foundation::HANDLE
+    property num_output_i_ds : UInt32
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @device_handle : Win32cr::Foundation::HANDLE, @crypto_session_handle : Win32cr::Foundation::HANDLE, @num_output_i_ds : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTID_INPUT
+    property input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT
+    property device_handle : Win32cr::Foundation::HANDLE
+    property crypto_session_handle : Win32cr::Foundation::HANDLE
+    property output_id_index : UInt32
+    def initialize(@input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT, @device_handle : Win32cr::Foundation::HANDLE, @crypto_session_handle : Win32cr::Foundation::HANDLE, @output_id_index : UInt32)
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTID_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property device_handle : Win32cr::Foundation::HANDLE
+    property crypto_session_handle : Win32cr::Foundation::HANDLE
+    property output_id_index : UInt32
+    property output_id : UInt64
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @device_handle : Win32cr::Foundation::HANDLE, @crypto_session_handle : Win32cr::Foundation::HANDLE, @output_id_index : UInt32, @output_id : UInt64)
+    end
+  end
+  {% end %}
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYINFOBUSTYPE_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property bus_type : Win32cr::Graphics::Direct3D9::D3DBUSTYPE
+    property bAccessibleInContiguousBlocks : Win32cr::Foundation::BOOL
+    property bAccessibleInNonContiguousBlocks : Win32cr::Foundation::BOOL
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @bus_type : Win32cr::Graphics::Direct3D9::D3DBUSTYPE, @bAccessibleInContiguousBlocks : Win32cr::Foundation::BOOL, @bAccessibleInNonContiguousBlocks : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUIDCOUNT_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property num_encryption_guids : UInt32
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @num_encryption_guids : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUID_INPUT
+    property input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT
+    property encryption_guid_index : UInt32
+    def initialize(@input : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_INPUT, @encryption_guid_index : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUID_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property encryption_guid_index : UInt32
+    property encryption_guid : LibC::GUID
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @encryption_guid_index : UInt32, @encryption_guid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_QUERYUNCOMPRESSEDENCRYPTIONLEVEL_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property encryption_guid : LibC::GUID
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @encryption_guid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT
+    property omac : Win32cr::Graphics::Direct3D9::D3D_OMAC
+    property configure_type : LibC::GUID
+    property hChannel : Win32cr::Foundation::HANDLE
+    property sequence_number : UInt32
+    def initialize(@omac : Win32cr::Graphics::Direct3D9::D3D_OMAC, @configure_type : LibC::GUID, @hChannel : Win32cr::Foundation::HANDLE, @sequence_number : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT
+    property omac : Win32cr::Graphics::Direct3D9::D3D_OMAC
+    property configure_type : LibC::GUID
+    property hChannel : Win32cr::Foundation::HANDLE
+    property sequence_number : UInt32
+    property return_code : Win32cr::Foundation::HRESULT
+    def initialize(@omac : Win32cr::Graphics::Direct3D9::D3D_OMAC, @configure_type : LibC::GUID, @hChannel : Win32cr::Foundation::HANDLE, @sequence_number : UInt32, @return_code : Win32cr::Foundation::HRESULT)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_CONFIGUREINITIALIZE
+    property parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT
+    property start_sequence_query : UInt32
+    property start_sequence_configure : UInt32
+    def initialize(@parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT, @start_sequence_query : UInt32, @start_sequence_configure : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_CONFIGUREPROTECTION
+    property parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT
+    property protections : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS
+    def initialize(@parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT, @protections : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_CONFIGURECRYPTOSESSION
+    property parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT
+    property dxva2_decode_handle : Win32cr::Foundation::HANDLE
+    property crypto_session_handle : Win32cr::Foundation::HANDLE
+    property device_handle : Win32cr::Foundation::HANDLE
+    def initialize(@parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT, @dxva2_decode_handle : Win32cr::Foundation::HANDLE, @crypto_session_handle : Win32cr::Foundation::HANDLE, @device_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_CONFIGURESHAREDRESOURCE
+    property parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT
+    property process_identifer_type : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE
+    property process_handle : Win32cr::Foundation::HANDLE
+    property allow_access : Win32cr::Foundation::BOOL
+    def initialize(@parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT, @process_identifer_type : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE, @process_handle : Win32cr::Foundation::HANDLE, @allow_access : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct D3DAUTHENTICATEDCHANNEL_CONFIGUREUNCOMPRESSEDENCRYPTION
+    property parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT
+    property encryption_guid : LibC::GUID
+    def initialize(@parameters : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT, @encryption_guid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct D3DENCRYPTED_BLOCK_INFO
+    property num_encrypted_bytes_at_beginning : UInt32
+    property num_bytes_in_skip_pattern : UInt32
+    property num_bytes_in_encrypt_pattern : UInt32
+    def initialize(@num_encrypted_bytes_at_beginning : UInt32, @num_bytes_in_skip_pattern : UInt32, @num_bytes_in_encrypt_pattern : UInt32)
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct D3DAES_CTR_IV
+    property iv : UInt64
+    property count : UInt64
+    def initialize(@iv : UInt64, @count : UInt64)
+    end
+  end
+  {% end %}
+
+  @[Extern]
+  struct D3DVSHADERCAPS2_0
+    property caps : UInt32
+    property dynamic_flow_control_depth : Int32
+    property num_temps : Int32
+    property static_flow_control_depth : Int32
+    def initialize(@caps : UInt32, @dynamic_flow_control_depth : Int32, @num_temps : Int32, @static_flow_control_depth : Int32)
+    end
+  end
+
+  @[Extern]
+  struct D3DPSHADERCAPS2_0
+    property caps : UInt32
+    property dynamic_flow_control_depth : Int32
+    property num_temps : Int32
+    property static_flow_control_depth : Int32
+    property num_instruction_slots : Int32
+    def initialize(@caps : UInt32, @dynamic_flow_control_depth : Int32, @num_temps : Int32, @static_flow_control_depth : Int32, @num_instruction_slots : Int32)
+    end
+  end
+
+  @[Extern]
+  struct D3DCAPS9
+    property device_type : Win32cr::Graphics::Direct3D9::D3DDEVTYPE
+    property adapter_ordinal : UInt32
+    property caps : UInt32
+    property caps2 : UInt32
+    property caps3 : UInt32
+    property presentation_intervals : UInt32
+    property cursor_caps : UInt32
+    property dev_caps : UInt32
+    property primitive_misc_caps : UInt32
+    property raster_caps : UInt32
+    property z_cmp_caps : UInt32
+    property src_blend_caps : UInt32
+    property dest_blend_caps : UInt32
+    property alpha_cmp_caps : UInt32
+    property shade_caps : UInt32
+    property texture_caps : UInt32
+    property texture_filter_caps : UInt32
+    property cube_texture_filter_caps : UInt32
+    property volume_texture_filter_caps : UInt32
+    property texture_address_caps : UInt32
+    property volume_texture_address_caps : UInt32
+    property line_caps : UInt32
+    property max_texture_width : UInt32
+    property max_texture_height : UInt32
+    property max_volume_extent : UInt32
+    property max_texture_repeat : UInt32
+    property max_texture_aspect_ratio : UInt32
+    property max_anisotropy : UInt32
+    property max_vertex_w : Float32
+    property guard_band_left : Float32
+    property guard_band_top : Float32
+    property guard_band_right : Float32
+    property guard_band_bottom : Float32
+    property extents_adjust : Float32
+    property stencil_caps : UInt32
+    property fvf_caps : UInt32
+    property texture_op_caps : UInt32
+    property max_texture_blend_stages : UInt32
+    property max_simultaneous_textures : UInt32
+    property vertex_processing_caps : UInt32
+    property max_active_lights : UInt32
+    property max_user_clip_planes : UInt32
+    property max_vertex_blend_matrices : UInt32
+    property max_vertex_blend_matrix_index : UInt32
+    property max_point_size : Float32
+    property max_primitive_count : UInt32
+    property max_vertex_index : UInt32
+    property max_streams : UInt32
+    property max_stream_stride : UInt32
+    property vertex_shader_version : UInt32
+    property max_vertex_shader_const : UInt32
+    property pixel_shader_version : UInt32
+    property pixel_shader1x_max_value : Float32
+    property dev_caps2 : UInt32
+    property max_npatch_tessellation_level : Float32
+    property reserved5 : UInt32
+    property master_adapter_ordinal : UInt32
+    property adapter_ordinal_in_group : UInt32
+    property number_of_adapters_in_group : UInt32
+    property decl_types : UInt32
+    property num_simultaneous_r_ts : UInt32
+    property stretch_rect_filter_caps : UInt32
+    property vs20_caps : Win32cr::Graphics::Direct3D9::D3DVSHADERCAPS2_0
+    property ps20_caps : Win32cr::Graphics::Direct3D9::D3DPSHADERCAPS2_0
+    property vertex_texture_filter_caps : UInt32
+    property max_v_shader_instructions_executed : UInt32
+    property max_p_shader_instructions_executed : UInt32
+    property max_vertex_shader30_instruction_slots : UInt32
+    property max_pixel_shader30_instruction_slots : UInt32
+    def initialize(@device_type : Win32cr::Graphics::Direct3D9::D3DDEVTYPE, @adapter_ordinal : UInt32, @caps : UInt32, @caps2 : UInt32, @caps3 : UInt32, @presentation_intervals : UInt32, @cursor_caps : UInt32, @dev_caps : UInt32, @primitive_misc_caps : UInt32, @raster_caps : UInt32, @z_cmp_caps : UInt32, @src_blend_caps : UInt32, @dest_blend_caps : UInt32, @alpha_cmp_caps : UInt32, @shade_caps : UInt32, @texture_caps : UInt32, @texture_filter_caps : UInt32, @cube_texture_filter_caps : UInt32, @volume_texture_filter_caps : UInt32, @texture_address_caps : UInt32, @volume_texture_address_caps : UInt32, @line_caps : UInt32, @max_texture_width : UInt32, @max_texture_height : UInt32, @max_volume_extent : UInt32, @max_texture_repeat : UInt32, @max_texture_aspect_ratio : UInt32, @max_anisotropy : UInt32, @max_vertex_w : Float32, @guard_band_left : Float32, @guard_band_top : Float32, @guard_band_right : Float32, @guard_band_bottom : Float32, @extents_adjust : Float32, @stencil_caps : UInt32, @fvf_caps : UInt32, @texture_op_caps : UInt32, @max_texture_blend_stages : UInt32, @max_simultaneous_textures : UInt32, @vertex_processing_caps : UInt32, @max_active_lights : UInt32, @max_user_clip_planes : UInt32, @max_vertex_blend_matrices : UInt32, @max_vertex_blend_matrix_index : UInt32, @max_point_size : Float32, @max_primitive_count : UInt32, @max_vertex_index : UInt32, @max_streams : UInt32, @max_stream_stride : UInt32, @vertex_shader_version : UInt32, @max_vertex_shader_const : UInt32, @pixel_shader_version : UInt32, @pixel_shader1x_max_value : Float32, @dev_caps2 : UInt32, @max_npatch_tessellation_level : Float32, @reserved5 : UInt32, @master_adapter_ordinal : UInt32, @adapter_ordinal_in_group : UInt32, @number_of_adapters_in_group : UInt32, @decl_types : UInt32, @num_simultaneous_r_ts : UInt32, @stretch_rect_filter_caps : UInt32, @vs20_caps : Win32cr::Graphics::Direct3D9::D3DVSHADERCAPS2_0, @ps20_caps : Win32cr::Graphics::Direct3D9::D3DPSHADERCAPS2_0, @vertex_texture_filter_caps : UInt32, @max_v_shader_instructions_executed : UInt32, @max_p_shader_instructions_executed : UInt32, @max_vertex_shader30_instruction_slots : UInt32, @max_pixel_shader30_instruction_slots : UInt32)
+    end
+  end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record D3DADAPTER_IDENTIFIER9,
-    driver : Win32cr::Foundation::CHAR[512],
-    description : Win32cr::Foundation::CHAR[512],
-    device_name : Win32cr::Foundation::CHAR[32],
-    driver_version : Win32cr::Foundation::LARGE_INTEGER,
-    vendor_id : UInt32,
-    device_id : UInt32,
-    sub_sys_id : UInt32,
-    revision : UInt32,
-    device_identifier : LibC::GUID,
-    whql_level : UInt32
+  struct D3DADAPTER_IDENTIFIER9
+    property driver : Win32cr::Foundation::CHAR[512]
+    property description : Win32cr::Foundation::CHAR[512]
+    property device_name : Win32cr::Foundation::CHAR[32]
+    property driver_version : Win32cr::Foundation::LARGE_INTEGER
+    property vendor_id : UInt32
+    property device_id : UInt32
+    property sub_sys_id : UInt32
+    property revision : UInt32
+    property device_identifier : LibC::GUID
+    property whql_level : UInt32
+    def initialize(@driver : Win32cr::Foundation::CHAR[512], @description : Win32cr::Foundation::CHAR[512], @device_name : Win32cr::Foundation::CHAR[32], @driver_version : Win32cr::Foundation::LARGE_INTEGER, @vendor_id : UInt32, @device_id : UInt32, @sub_sys_id : UInt32, @revision : UInt32, @device_identifier : LibC::GUID, @whql_level : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record D3DMEMORYPRESSURE,
-    bytes_evicted_from_process : UInt64,
-    size_of_inefficient_allocation : UInt64,
-    level_of_efficiency : UInt32
+  struct D3DMEMORYPRESSURE
+    property bytes_evicted_from_process : UInt64
+    property size_of_inefficient_allocation : UInt64
+    property level_of_efficiency : UInt32
+    def initialize(@bytes_evicted_from_process : UInt64, @size_of_inefficient_allocation : UInt64, @level_of_efficiency : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record D3DPRESENTSTATS,
-    present_count : UInt32,
-    present_refresh_count : UInt32,
-    sync_refresh_count : UInt32,
-    sync_qpc_time : Win32cr::Foundation::LARGE_INTEGER,
-    sync_gpu_time : Win32cr::Foundation::LARGE_INTEGER
+  struct D3DPRESENTSTATS
+    property present_count : UInt32
+    property present_refresh_count : UInt32
+    property sync_refresh_count : UInt32
+    property sync_qpc_time : Win32cr::Foundation::LARGE_INTEGER
+    property sync_gpu_time : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@present_count : UInt32, @present_refresh_count : UInt32, @sync_refresh_count : UInt32, @sync_qpc_time : Win32cr::Foundation::LARGE_INTEGER, @sync_gpu_time : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTID_OUTPUT,
-    output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    device_handle : Win32cr::Foundation::HANDLE,
-    crypto_session_handle : Win32cr::Foundation::HANDLE,
-    output_id_index : UInt32,
-    output_id : UInt64
+  struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTID_OUTPUT
+    property output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT
+    property device_handle : Win32cr::Foundation::HANDLE
+    property crypto_session_handle : Win32cr::Foundation::HANDLE
+    property output_id_index : UInt32
+    property output_id : UInt64
+    def initialize(@output : Win32cr::Graphics::Direct3D9::D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT, @device_handle : Win32cr::Foundation::HANDLE, @crypto_session_handle : Win32cr::Foundation::HANDLE, @output_id_index : UInt32, @output_id : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record D3DAES_CTR_IV,
-    iv : UInt64,
-    count : UInt64
+  struct D3DAES_CTR_IV
+    property iv : UInt64
+    property count : UInt64
+    def initialize(@iv : UInt64, @count : UInt64)
+    end
+  end
   {% end %}
 
   @[Extern]
@@ -1754,7 +1989,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("81bdcbca-64d4-426d-ae8d-ad0147f4275c")]
   record IDirect3D9, lpVtbl : IDirect3D9Vtbl* do
     GUID = LibC::GUID.new(0x81bdcbca_u32, 0x64d4_u16, 0x426d_u16, StaticArray[0xae_u8, 0x8d_u8, 0xad_u8, 0x1_u8, 0x47_u8, 0xf4_u8, 0x27_u8, 0x5c_u8])
     def query_interface(this : IDirect3D9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1935,7 +2169,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("d0223b96-bf7a-43fd-92bd-a43b0d82b9eb")]
   record IDirect3DDevice9, lpVtbl : IDirect3DDevice9Vtbl* do
     GUID = LibC::GUID.new(0xd0223b96_u32, 0xbf7a_u16, 0x43fd_u16, StaticArray[0x92_u8, 0xbd_u8, 0xa4_u8, 0x3b_u8, 0xd_u8, 0x82_u8, 0xb9_u8, 0xeb_u8])
     def query_interface(this : IDirect3DDevice9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2309,7 +2542,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("b07c4fe5-310d-4ba8-a23c-4f0f206f218b")]
   record IDirect3DStateBlock9, lpVtbl : IDirect3DStateBlock9Vtbl* do
     GUID = LibC::GUID.new(0xb07c4fe5_u32, 0x310d_u16, 0x4ba8_u16, StaticArray[0xa2_u8, 0x3c_u8, 0x4f_u8, 0xf_u8, 0x20_u8, 0x6f_u8, 0x21_u8, 0x8b_u8])
     def query_interface(this : IDirect3DStateBlock9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2348,7 +2580,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("794950f2-adfc-458a-905e-10a10b0b503b")]
   record IDirect3DSwapChain9, lpVtbl : IDirect3DSwapChain9Vtbl* do
     GUID = LibC::GUID.new(0x794950f2_u32, 0xadfc_u16, 0x458a_u16, StaticArray[0x90_u8, 0x5e_u8, 0x10_u8, 0xa1_u8, 0xb_u8, 0xb_u8, 0x50_u8, 0x3b_u8])
     def query_interface(this : IDirect3DSwapChain9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2400,7 +2631,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("05eec05d-8f7d-4362-b999-d1baf357c704")]
   record IDirect3DResource9, lpVtbl : IDirect3DResource9Vtbl* do
     GUID = LibC::GUID.new(0x5eec05d_u32, 0x8f7d_u16, 0x4362_u16, StaticArray[0xb9_u8, 0x99_u8, 0xd1_u8, 0xba_u8, 0xf3_u8, 0x57_u8, 0xc7_u8, 0x4_u8])
     def query_interface(this : IDirect3DResource9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2449,7 +2679,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("dd13c59c-36fa-4098-a8fb-c7ed39dc8546")]
   record IDirect3DVertexDeclaration9, lpVtbl : IDirect3DVertexDeclaration9Vtbl* do
     GUID = LibC::GUID.new(0xdd13c59c_u32, 0x36fa_u16, 0x4098_u16, StaticArray[0xa8_u8, 0xfb_u8, 0xc7_u8, 0xed_u8, 0x39_u8, 0xdc_u8, 0x85_u8, 0x46_u8])
     def query_interface(this : IDirect3DVertexDeclaration9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2480,7 +2709,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("efc5557e-6265-4613-8a94-43857889eb36")]
   record IDirect3DVertexShader9, lpVtbl : IDirect3DVertexShader9Vtbl* do
     GUID = LibC::GUID.new(0xefc5557e_u32, 0x6265_u16, 0x4613_u16, StaticArray[0x8a_u8, 0x94_u8, 0x43_u8, 0x85_u8, 0x78_u8, 0x89_u8, 0xeb_u8, 0x36_u8])
     def query_interface(this : IDirect3DVertexShader9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2511,7 +2739,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("6d3bdbdc-5b02-4415-b852-ce5e8bccb289")]
   record IDirect3DPixelShader9, lpVtbl : IDirect3DPixelShader9Vtbl* do
     GUID = LibC::GUID.new(0x6d3bdbdc_u32, 0x5b02_u16, 0x4415_u16, StaticArray[0xb8_u8, 0x52_u8, 0xce_u8, 0x5e_u8, 0x8b_u8, 0xcc_u8, 0xb2_u8, 0x89_u8])
     def query_interface(this : IDirect3DPixelShader9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2554,7 +2781,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("580ca87e-1d3c-4d54-991d-b7d3e3c298ce")]
   record IDirect3DBaseTexture9, lpVtbl : IDirect3DBaseTexture9Vtbl* do
     GUID = LibC::GUID.new(0x580ca87e_u32, 0x1d3c_u16, 0x4d54_u16, StaticArray[0x99_u8, 0x1d_u8, 0xb7_u8, 0xd3_u8, 0xe3_u8, 0xc2_u8, 0x98_u8, 0xce_u8])
     def query_interface(this : IDirect3DBaseTexture9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2638,7 +2864,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("85c31227-3de5-4f00-9b3a-f11ac38c18b5")]
   record IDirect3DTexture9, lpVtbl : IDirect3DTexture9Vtbl* do
     GUID = LibC::GUID.new(0x85c31227_u32, 0x3de5_u16, 0x4f00_u16, StaticArray[0x9b_u8, 0x3a_u8, 0xf1_u8, 0x1a_u8, 0xc3_u8, 0x8c_u8, 0x18_u8, 0xb5_u8])
     def query_interface(this : IDirect3DTexture9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2737,7 +2962,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("2518526c-e789-4111-a7b9-47ef328d13e6")]
   record IDirect3DVolumeTexture9, lpVtbl : IDirect3DVolumeTexture9Vtbl* do
     GUID = LibC::GUID.new(0x2518526c_u32, 0xe789_u16, 0x4111_u16, StaticArray[0xa7_u8, 0xb9_u8, 0x47_u8, 0xef_u8, 0x32_u8, 0x8d_u8, 0x13_u8, 0xe6_u8])
     def query_interface(this : IDirect3DVolumeTexture9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2836,7 +3060,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("fff32f81-d953-473a-9223-93d652aba93f")]
   record IDirect3DCubeTexture9, lpVtbl : IDirect3DCubeTexture9Vtbl* do
     GUID = LibC::GUID.new(0xfff32f81_u32, 0xd953_u16, 0x473a_u16, StaticArray[0x92_u8, 0x23_u8, 0x93_u8, 0xd6_u8, 0x52_u8, 0xab_u8, 0xa9_u8, 0x3f_u8])
     def query_interface(this : IDirect3DCubeTexture9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2927,7 +3150,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("b64bb1b5-fd70-4df6-bf91-19d0a12455e3")]
   record IDirect3DVertexBuffer9, lpVtbl : IDirect3DVertexBuffer9Vtbl* do
     GUID = LibC::GUID.new(0xb64bb1b5_u32, 0xfd70_u16, 0x4df6_u16, StaticArray[0xbf_u8, 0x91_u8, 0x19_u8, 0xd0_u8, 0xa1_u8, 0x24_u8, 0x55_u8, 0xe3_u8])
     def query_interface(this : IDirect3DVertexBuffer9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2994,7 +3216,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("7c9dd65e-d3f7-4529-acee-785830acde35")]
   record IDirect3DIndexBuffer9, lpVtbl : IDirect3DIndexBuffer9Vtbl* do
     GUID = LibC::GUID.new(0x7c9dd65e_u32, 0xd3f7_u16, 0x4529_u16, StaticArray[0xac_u8, 0xee_u8, 0x78_u8, 0x58_u8, 0x30_u8, 0xac_u8, 0xde_u8, 0x35_u8])
     def query_interface(this : IDirect3DIndexBuffer9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3064,7 +3285,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("0cfbaf3a-9ff6-429a-99b3-a2796af8b89b")]
   record IDirect3DSurface9, lpVtbl : IDirect3DSurface9Vtbl* do
     GUID = LibC::GUID.new(0xcfbaf3a_u32, 0x9ff6_u16, 0x429a_u16, StaticArray[0x99_u8, 0xb3_u8, 0xa2_u8, 0x79_u8, 0x6a_u8, 0xf8_u8, 0xb8_u8, 0x9b_u8])
     def query_interface(this : IDirect3DSurface9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3137,7 +3357,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("24f416e6-1f67-4aa7-b88e-d33f6f3128a1")]
   record IDirect3DVolume9, lpVtbl : IDirect3DVolume9Vtbl* do
     GUID = LibC::GUID.new(0x24f416e6_u32, 0x1f67_u16, 0x4aa7_u16, StaticArray[0xb8_u8, 0x8e_u8, 0xd3_u8, 0x3f_u8, 0x6f_u8, 0x31_u8, 0x28_u8, 0xa1_u8])
     def query_interface(this : IDirect3DVolume9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3189,7 +3408,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("d9771460-a695-4f26-bbd3-27b840b541cc")]
   record IDirect3DQuery9, lpVtbl : IDirect3DQuery9Vtbl* do
     GUID = LibC::GUID.new(0xd9771460_u32, 0xa695_u16, 0x4f26_u16, StaticArray[0xbb_u8, 0xd3_u8, 0x27_u8, 0xb8_u8, 0x40_u8, 0xb5_u8, 0x41_u8, 0xcc_u8])
     def query_interface(this : IDirect3DQuery9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3246,7 +3464,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("02177241-69fc-400c-8ff1-93a44df6861d")]
   record IDirect3D9Ex, lpVtbl : IDirect3D9ExVtbl* do
     GUID = LibC::GUID.new(0x2177241_u32, 0x69fc_u16, 0x400c_u16, StaticArray[0x8f_u8, 0xf1_u8, 0x93_u8, 0xa4_u8, 0x4d_u8, 0xf6_u8, 0x86_u8, 0x1d_u8])
     def query_interface(this : IDirect3D9Ex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3457,7 +3674,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("b18b10ce-2649-405a-870f-95f777d4313a")]
   record IDirect3DDevice9Ex, lpVtbl : IDirect3DDevice9ExVtbl* do
     GUID = LibC::GUID.new(0xb18b10ce_u32, 0x2649_u16, 0x405a_u16, StaticArray[0x87_u8, 0xf_u8, 0x95_u8, 0xf7_u8, 0x77_u8, 0xd4_u8, 0x31_u8, 0x3a_u8])
     def query_interface(this : IDirect3DDevice9Ex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3883,7 +4099,6 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  #@[Com("91886caf-1c3d-4d2e-a0ab-3e4c7d8d3303")]
   record IDirect3DSwapChain9Ex, lpVtbl : IDirect3DSwapChain9ExVtbl* do
     GUID = LibC::GUID.new(0x91886caf_u32, 0x1c3d_u16, 0x4d2e_u16, StaticArray[0xa0_u8, 0xab_u8, 0x3e_u8, 0x4c_u8, 0x7d_u8, 0x8d_u8, 0x33_u8, 0x3_u8])
     def query_interface(this : IDirect3DSwapChain9Ex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

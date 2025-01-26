@@ -38,31 +38,43 @@ module Win32cr::System::Restore
   end
 
   @[Extern]
-  record RESTOREPOINTINFOA,
-    dwEventType : Win32cr::System::Restore::RESTOREPOINTINFO_EVENT_TYPE,
-    dwRestorePtType : Win32cr::System::Restore::RESTOREPOINTINFO_TYPE,
-    llSequenceNumber : Int64,
-    szDescription : Win32cr::Foundation::CHAR[64]
+  struct RESTOREPOINTINFOA
+    property dwEventType : Win32cr::System::Restore::RESTOREPOINTINFO_EVENT_TYPE
+    property dwRestorePtType : Win32cr::System::Restore::RESTOREPOINTINFO_TYPE
+    property llSequenceNumber : Int64
+    property szDescription : Win32cr::Foundation::CHAR[64]
+    def initialize(@dwEventType : Win32cr::System::Restore::RESTOREPOINTINFO_EVENT_TYPE, @dwRestorePtType : Win32cr::System::Restore::RESTOREPOINTINFO_TYPE, @llSequenceNumber : Int64, @szDescription : Win32cr::Foundation::CHAR[64])
+    end
+  end
 
   @[Extern]
-  record RESTOREPOINTINFOW,
-    dwEventType : Win32cr::System::Restore::RESTOREPOINTINFO_EVENT_TYPE,
-    dwRestorePtType : Win32cr::System::Restore::RESTOREPOINTINFO_TYPE,
-    llSequenceNumber : Int64,
-    szDescription : UInt16[256]
+  struct RESTOREPOINTINFOW
+    property dwEventType : Win32cr::System::Restore::RESTOREPOINTINFO_EVENT_TYPE
+    property dwRestorePtType : Win32cr::System::Restore::RESTOREPOINTINFO_TYPE
+    property llSequenceNumber : Int64
+    property szDescription : UInt16[256]
+    def initialize(@dwEventType : Win32cr::System::Restore::RESTOREPOINTINFO_EVENT_TYPE, @dwRestorePtType : Win32cr::System::Restore::RESTOREPOINTINFO_TYPE, @llSequenceNumber : Int64, @szDescription : UInt16[256])
+    end
+  end
 
   @[Extern]
-  record RESTOREPTINFOEX_,
-    ftCreation : Win32cr::Foundation::FILETIME,
-    dwEventType : UInt32,
-    dwRestorePtType : UInt32,
-    dwRPNum : UInt32,
-    szDescription : UInt16[256]
+  struct RESTOREPTINFOEX_
+    property ftCreation : Win32cr::Foundation::FILETIME
+    property dwEventType : UInt32
+    property dwRestorePtType : UInt32
+    property dwRPNum : UInt32
+    property szDescription : UInt16[256]
+    def initialize(@ftCreation : Win32cr::Foundation::FILETIME, @dwEventType : UInt32, @dwRestorePtType : UInt32, @dwRPNum : UInt32, @szDescription : UInt16[256])
+    end
+  end
 
   @[Extern]
-  record STATEMGRSTATUS,
-    nStatus : UInt32,
-    llSequenceNumber : Int64
+  struct STATEMGRSTATUS
+    property nStatus : UInt32
+    property llSequenceNumber : Int64
+    def initialize(@nStatus : UInt32, @llSequenceNumber : Int64)
+    end
+  end
 
   @[Link("sfc")]
   lib C

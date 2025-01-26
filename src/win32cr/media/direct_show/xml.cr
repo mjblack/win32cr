@@ -18,7 +18,6 @@ module Win32cr::Media::DirectShow::Xml
 
 
   @[Extern]
-  #@[Com("1bb05960-5fbf-11d2-a521-44df07c10000")]
   record IXMLGraphBuilder, lpVtbl : IXMLGraphBuilderVtbl* do
     GUID = LibC::GUID.new(0x1bb05960_u32, 0x5fbf_u16, 0x11d2_u16, StaticArray[0xa5_u8, 0x21_u8, 0x44_u8, 0xdf_u8, 0x7_u8, 0xc1_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IXMLGraphBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

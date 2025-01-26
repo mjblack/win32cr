@@ -114,25 +114,33 @@ module Win32cr::UI::Ribbon
   end
 
   @[Extern]
-  record UI_EVENTPARAMS_COMMAND,
-    command_id : UInt32,
-    command_name : Win32cr::Foundation::PWSTR,
-    parent_command_id : UInt32,
-    parent_command_name : Win32cr::Foundation::PWSTR,
-    selection_index : UInt32,
-    location : Win32cr::UI::Ribbon::UI_EVENTLOCATION
+  struct UI_EVENTPARAMS_COMMAND
+    property command_id : UInt32
+    property command_name : Win32cr::Foundation::PWSTR
+    property parent_command_id : UInt32
+    property parent_command_name : Win32cr::Foundation::PWSTR
+    property selection_index : UInt32
+    property location : Win32cr::UI::Ribbon::UI_EVENTLOCATION
+    def initialize(@command_id : UInt32, @command_name : Win32cr::Foundation::PWSTR, @parent_command_id : UInt32, @parent_command_name : Win32cr::Foundation::PWSTR, @selection_index : UInt32, @location : Win32cr::UI::Ribbon::UI_EVENTLOCATION)
+    end
+  end
 
   @[Extern]
-  record UI_EVENTPARAMS,
-    event_type : Win32cr::UI::Ribbon::UI_EVENTTYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct UI_EVENTPARAMS
+    property event_type : Win32cr::UI::Ribbon::UI_EVENTTYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      modes : Int32,
-      params : Win32cr::UI::Ribbon::UI_EVENTPARAMS_COMMAND
+    struct Anonymous_e__Union_
+    property modes : Int32
+    property params : Win32cr::UI::Ribbon::UI_EVENTPARAMS_COMMAND
+    def initialize(@modes : Int32, @params : Win32cr::UI::Ribbon::UI_EVENTPARAMS_COMMAND)
+    end
+    end
 
+    def initialize(@event_type : Win32cr::UI::Ribbon::UI_EVENTTYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
@@ -144,7 +152,6 @@ module Win32cr::UI::Ribbon
 
 
   @[Extern]
-  #@[Com("c205bb48-5b1c-4219-a106-15bd0a5f24e2")]
   record IUISimplePropertySet, lpVtbl : IUISimplePropertySetVtbl* do
     GUID = LibC::GUID.new(0xc205bb48_u32, 0x5b1c_u16, 0x4219_u16, StaticArray[0xa1_u8, 0x6_u8, 0x15_u8, 0xbd_u8, 0xa_u8, 0x5f_u8, 0x24_u8, 0xe2_u8])
     def query_interface(this : IUISimplePropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -173,7 +180,6 @@ module Win32cr::UI::Ribbon
 
 
   @[Extern]
-  #@[Com("803982ab-370a-4f7e-a9e7-8784036a6e26")]
   record IUIRibbon, lpVtbl : IUIRibbonVtbl* do
     GUID = LibC::GUID.new(0x803982ab_u32, 0x370a_u16, 0x4f7e_u16, StaticArray[0xa9_u8, 0xe7_u8, 0x87_u8, 0x84_u8, 0x3_u8, 0x6a_u8, 0x6e_u8, 0x26_u8])
     def query_interface(this : IUIRibbon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -214,7 +220,6 @@ module Win32cr::UI::Ribbon
 
 
   @[Extern]
-  #@[Com("f4f0385d-6872-43a8-ad09-4c339cb3f5c5")]
   record IUIFramework, lpVtbl : IUIFrameworkVtbl* do
     GUID = LibC::GUID.new(0xf4f0385d_u32, 0x6872_u16, 0x43a8_u16, StaticArray[0xad_u8, 0x9_u8, 0x4c_u8, 0x33_u8, 0x9c_u8, 0xb3_u8, 0xf5_u8, 0xc5_u8])
     def query_interface(this : IUIFramework*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -265,7 +270,6 @@ module Win32cr::UI::Ribbon
 
 
   @[Extern]
-  #@[Com("ec3e1034-dbf4-41a1-95d5-03e0f1026e05")]
   record IUIEventLogger, lpVtbl : IUIEventLoggerVtbl* do
     GUID = LibC::GUID.new(0xec3e1034_u32, 0xdbf4_u16, 0x41a1_u16, StaticArray[0x95_u8, 0xd5_u8, 0x3_u8, 0xe0_u8, 0xf1_u8, 0x2_u8, 0x6e_u8, 0x5_u8])
     def query_interface(this : IUIEventLogger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -292,7 +296,6 @@ module Win32cr::UI::Ribbon
 
 
   @[Extern]
-  #@[Com("3be6ea7f-9a9b-4198-9368-9b0f923bd534")]
   record IUIEventingManager, lpVtbl : IUIEventingManagerVtbl* do
     GUID = LibC::GUID.new(0x3be6ea7f_u32, 0x9a9b_u16, 0x4198_u16, StaticArray[0x93_u8, 0x68_u8, 0x9b_u8, 0xf_u8, 0x92_u8, 0x3b_u8, 0xd5_u8, 0x34_u8])
     def query_interface(this : IUIEventingManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -319,7 +322,6 @@ module Win32cr::UI::Ribbon
 
 
   @[Extern]
-  #@[Com("eea11f37-7c46-437c-8e55-b52122b29293")]
   record IUIContextualUI, lpVtbl : IUIContextualUIVtbl* do
     GUID = LibC::GUID.new(0xeea11f37_u32, 0x7c46_u16, 0x437c_u16, StaticArray[0x8e_u8, 0x55_u8, 0xb5_u8, 0x21_u8, 0x22_u8, 0xb2_u8, 0x92_u8, 0x93_u8])
     def query_interface(this : IUIContextualUI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -352,7 +354,6 @@ module Win32cr::UI::Ribbon
 
 
   @[Extern]
-  #@[Com("df4f45bf-6f9d-4dd7-9d68-d8f9cd18c4db")]
   record IUICollection, lpVtbl : IUICollectionVtbl* do
     GUID = LibC::GUID.new(0xdf4f45bf_u32, 0x6f9d_u16, 0x4dd7_u16, StaticArray[0x9d_u8, 0x68_u8, 0xd8_u8, 0xf9_u8, 0xcd_u8, 0x18_u8, 0xc4_u8, 0xdb_u8])
     def query_interface(this : IUICollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -397,7 +398,6 @@ module Win32cr::UI::Ribbon
 
 
   @[Extern]
-  #@[Com("6502ae91-a14d-44b5-bbd0-62aacc581d52")]
   record IUICollectionChangedEvent, lpVtbl : IUICollectionChangedEventVtbl* do
     GUID = LibC::GUID.new(0x6502ae91_u32, 0xa14d_u16, 0x44b5_u16, StaticArray[0xbb_u8, 0xd0_u8, 0x62_u8, 0xaa_u8, 0xcc_u8, 0x58_u8, 0x1d_u8, 0x52_u8])
     def query_interface(this : IUICollectionChangedEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -425,7 +425,6 @@ module Win32cr::UI::Ribbon
 
 
   @[Extern]
-  #@[Com("75ae0a2d-dc03-4c9f-8883-069660d0beb6")]
   record IUICommandHandler, lpVtbl : IUICommandHandlerVtbl* do
     GUID = LibC::GUID.new(0x75ae0a2d_u32, 0xdc03_u16, 0x4c9f_u16, StaticArray[0x88_u8, 0x83_u8, 0x6_u8, 0x96_u8, 0x60_u8, 0xd0_u8, 0xbe_u8, 0xb6_u8])
     def query_interface(this : IUICommandHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -457,7 +456,6 @@ module Win32cr::UI::Ribbon
 
 
   @[Extern]
-  #@[Com("d428903c-729a-491d-910d-682a08ff2522")]
   record IUIApplication, lpVtbl : IUIApplicationVtbl* do
     GUID = LibC::GUID.new(0xd428903c_u32, 0x729a_u16, 0x491d_u16, StaticArray[0x91_u8, 0xd_u8, 0x68_u8, 0x2a_u8, 0x8_u8, 0xff_u8, 0x25_u8, 0x22_u8])
     def query_interface(this : IUIApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -490,7 +488,6 @@ module Win32cr::UI::Ribbon
 
 
   @[Extern]
-  #@[Com("23c8c838-4de6-436b-ab01-5554bb7c30dd")]
   record IUIImage, lpVtbl : IUIImageVtbl* do
     GUID = LibC::GUID.new(0x23c8c838_u32, 0x4de6_u16, 0x436b_u16, StaticArray[0xab_u8, 0x1_u8, 0x55_u8, 0x54_u8, 0xbb_u8, 0x7c_u8, 0x30_u8, 0xdd_u8])
     def query_interface(this : IUIImage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -517,7 +514,6 @@ module Win32cr::UI::Ribbon
 
 
   @[Extern]
-  #@[Com("18aba7f3-4c1c-4ba2-bf6c-f5c3326fa816")]
   record IUIImageFromBitmap, lpVtbl : IUIImageFromBitmapVtbl* do
     GUID = LibC::GUID.new(0x18aba7f3_u32, 0x4c1c_u16, 0x4ba2_u16, StaticArray[0xbf_u8, 0x6c_u8, 0xf5_u8, 0xc3_u8, 0x32_u8, 0x6f_u8, 0xa8_u8, 0x16_u8])
     def query_interface(this : IUIImageFromBitmap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

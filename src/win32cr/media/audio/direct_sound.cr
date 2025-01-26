@@ -4,9 +4,9 @@ require "./../../foundation.cr"
 require "./../../system/com.cr"
 
 module Win32cr::Media::Audio::DirectSound
-  alias LPDSENUMCALLBACKA = Proc(LibC::GUID*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDSENUMCALLBACKA = Proc(LibC::GUID*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPDSENUMCALLBACKW = Proc(LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDSENUMCALLBACKW = Proc(LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)
 
   DIRECTSOUND_VERSION = 1792_u32
   FACDS_ = 2168_u32
@@ -336,222 +336,294 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record DSCAPS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwMinSecondarySampleRate : UInt32,
-    dwMaxSecondarySampleRate : UInt32,
-    dwPrimaryBuffers : UInt32,
-    dwMaxHwMixingAllBuffers : UInt32,
-    dwMaxHwMixingStaticBuffers : UInt32,
-    dwMaxHwMixingStreamingBuffers : UInt32,
-    dwFreeHwMixingAllBuffers : UInt32,
-    dwFreeHwMixingStaticBuffers : UInt32,
-    dwFreeHwMixingStreamingBuffers : UInt32,
-    dwMaxHw3DAllBuffers : UInt32,
-    dwMaxHw3DStaticBuffers : UInt32,
-    dwMaxHw3DStreamingBuffers : UInt32,
-    dwFreeHw3DAllBuffers : UInt32,
-    dwFreeHw3DStaticBuffers : UInt32,
-    dwFreeHw3DStreamingBuffers : UInt32,
-    dwTotalHwMemBytes : UInt32,
-    dwFreeHwMemBytes : UInt32,
-    dwMaxContigFreeHwMemBytes : UInt32,
-    dwUnlockTransferRateHwBuffers : UInt32,
-    dwPlayCpuOverheadSwBuffers : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32
+  struct DSCAPS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwMinSecondarySampleRate : UInt32
+    property dwMaxSecondarySampleRate : UInt32
+    property dwPrimaryBuffers : UInt32
+    property dwMaxHwMixingAllBuffers : UInt32
+    property dwMaxHwMixingStaticBuffers : UInt32
+    property dwMaxHwMixingStreamingBuffers : UInt32
+    property dwFreeHwMixingAllBuffers : UInt32
+    property dwFreeHwMixingStaticBuffers : UInt32
+    property dwFreeHwMixingStreamingBuffers : UInt32
+    property dwMaxHw3DAllBuffers : UInt32
+    property dwMaxHw3DStaticBuffers : UInt32
+    property dwMaxHw3DStreamingBuffers : UInt32
+    property dwFreeHw3DAllBuffers : UInt32
+    property dwFreeHw3DStaticBuffers : UInt32
+    property dwFreeHw3DStreamingBuffers : UInt32
+    property dwTotalHwMemBytes : UInt32
+    property dwFreeHwMemBytes : UInt32
+    property dwMaxContigFreeHwMemBytes : UInt32
+    property dwUnlockTransferRateHwBuffers : UInt32
+    property dwPlayCpuOverheadSwBuffers : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwMinSecondarySampleRate : UInt32, @dwMaxSecondarySampleRate : UInt32, @dwPrimaryBuffers : UInt32, @dwMaxHwMixingAllBuffers : UInt32, @dwMaxHwMixingStaticBuffers : UInt32, @dwMaxHwMixingStreamingBuffers : UInt32, @dwFreeHwMixingAllBuffers : UInt32, @dwFreeHwMixingStaticBuffers : UInt32, @dwFreeHwMixingStreamingBuffers : UInt32, @dwMaxHw3DAllBuffers : UInt32, @dwMaxHw3DStaticBuffers : UInt32, @dwMaxHw3DStreamingBuffers : UInt32, @dwFreeHw3DAllBuffers : UInt32, @dwFreeHw3DStaticBuffers : UInt32, @dwFreeHw3DStreamingBuffers : UInt32, @dwTotalHwMemBytes : UInt32, @dwFreeHwMemBytes : UInt32, @dwMaxContigFreeHwMemBytes : UInt32, @dwUnlockTransferRateHwBuffers : UInt32, @dwPlayCpuOverheadSwBuffers : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record DSBCAPS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwBufferBytes : UInt32,
-    dwUnlockTransferRate : UInt32,
-    dwPlayCpuOverhead : UInt32
+  struct DSBCAPS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwBufferBytes : UInt32
+    property dwUnlockTransferRate : UInt32
+    property dwPlayCpuOverhead : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwBufferBytes : UInt32, @dwUnlockTransferRate : UInt32, @dwPlayCpuOverhead : UInt32)
+    end
+  end
 
   @[Extern]
-  record DSEFFECTDESC,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    guidDSFXClass : LibC::GUID,
-    dwReserved1 : LibC::UIntPtrT,
-    dwReserved2 : LibC::UIntPtrT
+  struct DSEFFECTDESC
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property guidDSFXClass : LibC::GUID
+    property dwReserved1 : LibC::UIntPtrT
+    property dwReserved2 : LibC::UIntPtrT
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @guidDSFXClass : LibC::GUID, @dwReserved1 : LibC::UIntPtrT, @dwReserved2 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DSCEFFECTDESC,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    guidDSCFXClass : LibC::GUID,
-    guidDSCFXInstance : LibC::GUID,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32
+  struct DSCEFFECTDESC
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property guidDSCFXClass : LibC::GUID
+    property guidDSCFXInstance : LibC::GUID
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @guidDSCFXClass : LibC::GUID, @guidDSCFXInstance : LibC::GUID, @dwReserved1 : UInt32, @dwReserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record DSBUFFERDESC,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwBufferBytes : UInt32,
-    dwReserved : UInt32,
-    lpwfxFormat : Win32cr::Media::Audio::WAVEFORMATEX*,
-    guid3DAlgorithm : LibC::GUID
+  struct DSBUFFERDESC
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwBufferBytes : UInt32
+    property dwReserved : UInt32
+    property lpwfxFormat : Win32cr::Media::Audio::WAVEFORMATEX*
+    property guid3DAlgorithm : LibC::GUID
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwBufferBytes : UInt32, @dwReserved : UInt32, @lpwfxFormat : Win32cr::Media::Audio::WAVEFORMATEX*, @guid3DAlgorithm : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record DSBUFFERDESC1,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwBufferBytes : UInt32,
-    dwReserved : UInt32,
-    lpwfxFormat : Win32cr::Media::Audio::WAVEFORMATEX*
+  struct DSBUFFERDESC1
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwBufferBytes : UInt32
+    property dwReserved : UInt32
+    property lpwfxFormat : Win32cr::Media::Audio::WAVEFORMATEX*
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwBufferBytes : UInt32, @dwReserved : UInt32, @lpwfxFormat : Win32cr::Media::Audio::WAVEFORMATEX*)
+    end
+  end
 
   @[Extern]
-  record DS3DBUFFER,
-    dwSize : UInt32,
-    vPosition : Win32cr::Graphics::Direct3D::D3DVECTOR,
-    vVelocity : Win32cr::Graphics::Direct3D::D3DVECTOR,
-    dwInsideConeAngle : UInt32,
-    dwOutsideConeAngle : UInt32,
-    vConeOrientation : Win32cr::Graphics::Direct3D::D3DVECTOR,
-    lConeOutsideVolume : Int32,
-    flMinDistance : Float32,
-    flMaxDistance : Float32,
-    dwMode : UInt32
+  struct DS3DBUFFER
+    property dwSize : UInt32
+    property vPosition : Win32cr::Graphics::Direct3D::D3DVECTOR
+    property vVelocity : Win32cr::Graphics::Direct3D::D3DVECTOR
+    property dwInsideConeAngle : UInt32
+    property dwOutsideConeAngle : UInt32
+    property vConeOrientation : Win32cr::Graphics::Direct3D::D3DVECTOR
+    property lConeOutsideVolume : Int32
+    property flMinDistance : Float32
+    property flMaxDistance : Float32
+    property dwMode : UInt32
+    def initialize(@dwSize : UInt32, @vPosition : Win32cr::Graphics::Direct3D::D3DVECTOR, @vVelocity : Win32cr::Graphics::Direct3D::D3DVECTOR, @dwInsideConeAngle : UInt32, @dwOutsideConeAngle : UInt32, @vConeOrientation : Win32cr::Graphics::Direct3D::D3DVECTOR, @lConeOutsideVolume : Int32, @flMinDistance : Float32, @flMaxDistance : Float32, @dwMode : UInt32)
+    end
+  end
 
   @[Extern]
-  record DS3DLISTENER,
-    dwSize : UInt32,
-    vPosition : Win32cr::Graphics::Direct3D::D3DVECTOR,
-    vVelocity : Win32cr::Graphics::Direct3D::D3DVECTOR,
-    vOrientFront : Win32cr::Graphics::Direct3D::D3DVECTOR,
-    vOrientTop : Win32cr::Graphics::Direct3D::D3DVECTOR,
-    flDistanceFactor : Float32,
-    flRolloffFactor : Float32,
-    flDopplerFactor : Float32
+  struct DS3DLISTENER
+    property dwSize : UInt32
+    property vPosition : Win32cr::Graphics::Direct3D::D3DVECTOR
+    property vVelocity : Win32cr::Graphics::Direct3D::D3DVECTOR
+    property vOrientFront : Win32cr::Graphics::Direct3D::D3DVECTOR
+    property vOrientTop : Win32cr::Graphics::Direct3D::D3DVECTOR
+    property flDistanceFactor : Float32
+    property flRolloffFactor : Float32
+    property flDopplerFactor : Float32
+    def initialize(@dwSize : UInt32, @vPosition : Win32cr::Graphics::Direct3D::D3DVECTOR, @vVelocity : Win32cr::Graphics::Direct3D::D3DVECTOR, @vOrientFront : Win32cr::Graphics::Direct3D::D3DVECTOR, @vOrientTop : Win32cr::Graphics::Direct3D::D3DVECTOR, @flDistanceFactor : Float32, @flRolloffFactor : Float32, @flDopplerFactor : Float32)
+    end
+  end
 
   @[Extern]
-  record DSCCAPS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwFormats : UInt32,
-    dwChannels : UInt32
+  struct DSCCAPS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwFormats : UInt32
+    property dwChannels : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwFormats : UInt32, @dwChannels : UInt32)
+    end
+  end
 
   @[Extern]
-  record DSCBUFFERDESC1,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwBufferBytes : UInt32,
-    dwReserved : UInt32,
-    lpwfxFormat : Win32cr::Media::Audio::WAVEFORMATEX*
+  struct DSCBUFFERDESC1
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwBufferBytes : UInt32
+    property dwReserved : UInt32
+    property lpwfxFormat : Win32cr::Media::Audio::WAVEFORMATEX*
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwBufferBytes : UInt32, @dwReserved : UInt32, @lpwfxFormat : Win32cr::Media::Audio::WAVEFORMATEX*)
+    end
+  end
 
   @[Extern]
-  record DSCBUFFERDESC,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwBufferBytes : UInt32,
-    dwReserved : UInt32,
-    lpwfxFormat : Win32cr::Media::Audio::WAVEFORMATEX*,
-    dwFXCount : UInt32,
-    lpDSCFXDesc : Win32cr::Media::Audio::DirectSound::DSCEFFECTDESC*
+  struct DSCBUFFERDESC
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwBufferBytes : UInt32
+    property dwReserved : UInt32
+    property lpwfxFormat : Win32cr::Media::Audio::WAVEFORMATEX*
+    property dwFXCount : UInt32
+    property lpDSCFXDesc : Win32cr::Media::Audio::DirectSound::DSCEFFECTDESC*
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwBufferBytes : UInt32, @dwReserved : UInt32, @lpwfxFormat : Win32cr::Media::Audio::WAVEFORMATEX*, @dwFXCount : UInt32, @lpDSCFXDesc : Win32cr::Media::Audio::DirectSound::DSCEFFECTDESC*)
+    end
+  end
 
   @[Extern]
-  record DSCBCAPS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwBufferBytes : UInt32,
-    dwReserved : UInt32
+  struct DSCBCAPS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwBufferBytes : UInt32
+    property dwReserved : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwBufferBytes : UInt32, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record DSBPOSITIONNOTIFY,
-    dwOffset : UInt32,
-    hEventNotify : Win32cr::Foundation::HANDLE
+  struct DSBPOSITIONNOTIFY
+    property dwOffset : UInt32
+    property hEventNotify : Win32cr::Foundation::HANDLE
+    def initialize(@dwOffset : UInt32, @hEventNotify : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record DSFXGargle,
-    dwRateHz : UInt32,
-    dwWaveShape : UInt32
+  struct DSFXGargle
+    property dwRateHz : UInt32
+    property dwWaveShape : UInt32
+    def initialize(@dwRateHz : UInt32, @dwWaveShape : UInt32)
+    end
+  end
 
   @[Extern]
-  record DSFXChorus,
-    fWetDryMix : Float32,
-    fDepth : Float32,
-    fFeedback : Float32,
-    fFrequency : Float32,
-    lWaveform : Int32,
-    fDelay : Float32,
-    lPhase : Int32
+  struct DSFXChorus
+    property fWetDryMix : Float32
+    property fDepth : Float32
+    property fFeedback : Float32
+    property fFrequency : Float32
+    property lWaveform : Int32
+    property fDelay : Float32
+    property lPhase : Int32
+    def initialize(@fWetDryMix : Float32, @fDepth : Float32, @fFeedback : Float32, @fFrequency : Float32, @lWaveform : Int32, @fDelay : Float32, @lPhase : Int32)
+    end
+  end
 
   @[Extern]
-  record DSFXFlanger,
-    fWetDryMix : Float32,
-    fDepth : Float32,
-    fFeedback : Float32,
-    fFrequency : Float32,
-    lWaveform : Int32,
-    fDelay : Float32,
-    lPhase : Int32
+  struct DSFXFlanger
+    property fWetDryMix : Float32
+    property fDepth : Float32
+    property fFeedback : Float32
+    property fFrequency : Float32
+    property lWaveform : Int32
+    property fDelay : Float32
+    property lPhase : Int32
+    def initialize(@fWetDryMix : Float32, @fDepth : Float32, @fFeedback : Float32, @fFrequency : Float32, @lWaveform : Int32, @fDelay : Float32, @lPhase : Int32)
+    end
+  end
 
   @[Extern]
-  record DSFXEcho,
-    fWetDryMix : Float32,
-    fFeedback : Float32,
-    fLeftDelay : Float32,
-    fRightDelay : Float32,
-    lPanDelay : Int32
+  struct DSFXEcho
+    property fWetDryMix : Float32
+    property fFeedback : Float32
+    property fLeftDelay : Float32
+    property fRightDelay : Float32
+    property lPanDelay : Int32
+    def initialize(@fWetDryMix : Float32, @fFeedback : Float32, @fLeftDelay : Float32, @fRightDelay : Float32, @lPanDelay : Int32)
+    end
+  end
 
   @[Extern]
-  record DSFXDistortion,
-    fGain : Float32,
-    fEdge : Float32,
-    fPostEQCenterFrequency : Float32,
-    fPostEQBandwidth : Float32,
-    fPreLowpassCutoff : Float32
+  struct DSFXDistortion
+    property fGain : Float32
+    property fEdge : Float32
+    property fPostEQCenterFrequency : Float32
+    property fPostEQBandwidth : Float32
+    property fPreLowpassCutoff : Float32
+    def initialize(@fGain : Float32, @fEdge : Float32, @fPostEQCenterFrequency : Float32, @fPostEQBandwidth : Float32, @fPreLowpassCutoff : Float32)
+    end
+  end
 
   @[Extern]
-  record DSFXCompressor,
-    fGain : Float32,
-    fAttack : Float32,
-    fRelease : Float32,
-    fThreshold : Float32,
-    fRatio : Float32,
-    fPredelay : Float32
+  struct DSFXCompressor
+    property fGain : Float32
+    property fAttack : Float32
+    property fRelease : Float32
+    property fThreshold : Float32
+    property fRatio : Float32
+    property fPredelay : Float32
+    def initialize(@fGain : Float32, @fAttack : Float32, @fRelease : Float32, @fThreshold : Float32, @fRatio : Float32, @fPredelay : Float32)
+    end
+  end
 
   @[Extern]
-  record DSFXParamEq,
-    fCenter : Float32,
-    fBandwidth : Float32,
-    fGain : Float32
+  struct DSFXParamEq
+    property fCenter : Float32
+    property fBandwidth : Float32
+    property fGain : Float32
+    def initialize(@fCenter : Float32, @fBandwidth : Float32, @fGain : Float32)
+    end
+  end
 
   @[Extern]
-  record DSFXI3DL2Reverb,
-    lRoom : Int32,
-    lRoomHF : Int32,
-    flRoomRolloffFactor : Float32,
-    flDecayTime : Float32,
-    flDecayHFRatio : Float32,
-    lReflections : Int32,
-    flReflectionsDelay : Float32,
-    lReverb : Int32,
-    flReverbDelay : Float32,
-    flDiffusion : Float32,
-    flDensity : Float32,
-    flHFReference : Float32
+  struct DSFXI3DL2Reverb
+    property lRoom : Int32
+    property lRoomHF : Int32
+    property flRoomRolloffFactor : Float32
+    property flDecayTime : Float32
+    property flDecayHFRatio : Float32
+    property lReflections : Int32
+    property flReflectionsDelay : Float32
+    property lReverb : Int32
+    property flReverbDelay : Float32
+    property flDiffusion : Float32
+    property flDensity : Float32
+    property flHFReference : Float32
+    def initialize(@lRoom : Int32, @lRoomHF : Int32, @flRoomRolloffFactor : Float32, @flDecayTime : Float32, @flDecayHFRatio : Float32, @lReflections : Int32, @flReflectionsDelay : Float32, @lReverb : Int32, @flReverbDelay : Float32, @flDiffusion : Float32, @flDensity : Float32, @flHFReference : Float32)
+    end
+  end
 
   @[Extern]
-  record DSFXWavesReverb,
-    fInGain : Float32,
-    fReverbMix : Float32,
-    fReverbTime : Float32,
-    fHighFreqRTRatio : Float32
+  struct DSFXWavesReverb
+    property fInGain : Float32
+    property fReverbMix : Float32
+    property fReverbTime : Float32
+    property fHighFreqRTRatio : Float32
+    def initialize(@fInGain : Float32, @fReverbMix : Float32, @fReverbTime : Float32, @fHighFreqRTRatio : Float32)
+    end
+  end
 
   @[Extern]
-  record DSCFXAec,
-    fEnable : Win32cr::Foundation::BOOL,
-    fNoiseFill : Win32cr::Foundation::BOOL,
-    dwMode : UInt32
+  struct DSCFXAec
+    property fEnable : Win32cr::Foundation::BOOL
+    property fNoiseFill : Win32cr::Foundation::BOOL
+    property dwMode : UInt32
+    def initialize(@fEnable : Win32cr::Foundation::BOOL, @fNoiseFill : Win32cr::Foundation::BOOL, @dwMode : UInt32)
+    end
+  end
 
   @[Extern]
-  record DSCFXNoiseSuppress,
-    fEnable : Win32cr::Foundation::BOOL
+  struct DSCFXNoiseSuppress
+    property fEnable : Win32cr::Foundation::BOOL
+    def initialize(@fEnable : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
   record IDirectSoundVtbl,
@@ -569,7 +641,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("279afa83-4981-11ce-a521-0020af0be560")]
   record IDirectSound, lpVtbl : IDirectSoundVtbl* do
     GUID = LibC::GUID.new(0x279afa83_u32, 0x4981_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectSound*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -625,7 +696,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("c50a7e93-f395-4834-9ef6-7fa99de50966")]
   record IDirectSound8, lpVtbl : IDirectSound8Vtbl* do
     GUID = LibC::GUID.new(0xc50a7e93_u32, 0xf395_u16, 0x4834_u16, StaticArray[0x9e_u8, 0xf6_u8, 0x7f_u8, 0xa9_u8, 0x9d_u8, 0xe5_u8, 0x9_u8, 0x66_u8])
     def query_interface(this : IDirectSound8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -693,7 +763,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("279afa85-4981-11ce-a521-0020af0be560")]
   record IDirectSoundBuffer, lpVtbl : IDirectSoundBufferVtbl* do
     GUID = LibC::GUID.new(0x279afa85_u32, 0x4981_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectSoundBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -791,7 +860,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("6825a449-7524-4d82-920f-50e36ab3ab1e")]
   record IDirectSoundBuffer8, lpVtbl : IDirectSoundBuffer8Vtbl* do
     GUID = LibC::GUID.new(0x6825a449_u32, 0x7524_u16, 0x4d82_u16, StaticArray[0x92_u8, 0xf_u8, 0x50_u8, 0xe3_u8, 0x6a_u8, 0xb3_u8, 0xab_u8, 0x1e_u8])
     def query_interface(this : IDirectSoundBuffer8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -892,7 +960,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("279afa84-4981-11ce-a521-0020af0be560")]
   record IDirectSound3DListener, lpVtbl : IDirectSound3DListenerVtbl* do
     GUID = LibC::GUID.new(0x279afa84_u32, 0x4981_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectSound3DListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -978,7 +1045,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("279afa86-4981-11ce-a521-0020af0be560")]
   record IDirectSound3DBuffer, lpVtbl : IDirectSound3DBufferVtbl* do
     GUID = LibC::GUID.new(0x279afa86_u32, 0x4981_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectSound3DBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1058,7 +1124,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("b0210781-89cd-11d0-af08-00a0c925cd16")]
   record IDirectSoundCapture, lpVtbl : IDirectSoundCaptureVtbl* do
     GUID = LibC::GUID.new(0xb0210781_u32, 0x89cd_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x25_u8, 0xcd_u8, 0x16_u8])
     def query_interface(this : IDirectSoundCapture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1099,7 +1164,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("b0210782-89cd-11d0-af08-00a0c925cd16")]
   record IDirectSoundCaptureBuffer, lpVtbl : IDirectSoundCaptureBufferVtbl* do
     GUID = LibC::GUID.new(0xb0210782_u32, 0x89cd_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x25_u8, 0xcd_u8, 0x16_u8])
     def query_interface(this : IDirectSoundCaptureBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1160,7 +1224,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("00990df4-0dbb-4872-833e-6d303e80aeb6")]
   record IDirectSoundCaptureBuffer8, lpVtbl : IDirectSoundCaptureBuffer8Vtbl* do
     GUID = LibC::GUID.new(0x990df4_u32, 0xdbb_u16, 0x4872_u16, StaticArray[0x83_u8, 0x3e_u8, 0x6d_u8, 0x30_u8, 0x3e_u8, 0x80_u8, 0xae_u8, 0xb6_u8])
     def query_interface(this : IDirectSoundCaptureBuffer8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1217,7 +1280,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("b0210783-89cd-11d0-af08-00a0c925cd16")]
   record IDirectSoundNotify, lpVtbl : IDirectSoundNotifyVtbl* do
     GUID = LibC::GUID.new(0xb0210783_u32, 0x89cd_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x25_u8, 0xcd_u8, 0x16_u8])
     def query_interface(this : IDirectSoundNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1245,7 +1307,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("d616f352-d622-11ce-aac5-0020af0b99a3")]
   record IDirectSoundFXGargle, lpVtbl : IDirectSoundFXGargleVtbl* do
     GUID = LibC::GUID.new(0xd616f352_u32, 0xd622_u16, 0x11ce_u16, StaticArray[0xaa_u8, 0xc5_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0x99_u8, 0xa3_u8])
     def query_interface(this : IDirectSoundFXGargle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1276,7 +1337,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("880842e3-145f-43e6-a934-a71806e50547")]
   record IDirectSoundFXChorus, lpVtbl : IDirectSoundFXChorusVtbl* do
     GUID = LibC::GUID.new(0x880842e3_u32, 0x145f_u16, 0x43e6_u16, StaticArray[0xa9_u8, 0x34_u8, 0xa7_u8, 0x18_u8, 0x6_u8, 0xe5_u8, 0x5_u8, 0x47_u8])
     def query_interface(this : IDirectSoundFXChorus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1307,7 +1367,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("903e9878-2c92-4072-9b2c-ea68f5396783")]
   record IDirectSoundFXFlanger, lpVtbl : IDirectSoundFXFlangerVtbl* do
     GUID = LibC::GUID.new(0x903e9878_u32, 0x2c92_u16, 0x4072_u16, StaticArray[0x9b_u8, 0x2c_u8, 0xea_u8, 0x68_u8, 0xf5_u8, 0x39_u8, 0x67_u8, 0x83_u8])
     def query_interface(this : IDirectSoundFXFlanger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1338,7 +1397,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("8bd28edf-50db-4e92-a2bd-445488d1ed42")]
   record IDirectSoundFXEcho, lpVtbl : IDirectSoundFXEchoVtbl* do
     GUID = LibC::GUID.new(0x8bd28edf_u32, 0x50db_u16, 0x4e92_u16, StaticArray[0xa2_u8, 0xbd_u8, 0x44_u8, 0x54_u8, 0x88_u8, 0xd1_u8, 0xed_u8, 0x42_u8])
     def query_interface(this : IDirectSoundFXEcho*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1369,7 +1427,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("8ecf4326-455f-4d8b-bda9-8d5d3e9e3e0b")]
   record IDirectSoundFXDistortion, lpVtbl : IDirectSoundFXDistortionVtbl* do
     GUID = LibC::GUID.new(0x8ecf4326_u32, 0x455f_u16, 0x4d8b_u16, StaticArray[0xbd_u8, 0xa9_u8, 0x8d_u8, 0x5d_u8, 0x3e_u8, 0x9e_u8, 0x3e_u8, 0xb_u8])
     def query_interface(this : IDirectSoundFXDistortion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1400,7 +1457,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("4bbd1154-62f6-4e2c-a15c-d3b6c417f7a0")]
   record IDirectSoundFXCompressor, lpVtbl : IDirectSoundFXCompressorVtbl* do
     GUID = LibC::GUID.new(0x4bbd1154_u32, 0x62f6_u16, 0x4e2c_u16, StaticArray[0xa1_u8, 0x5c_u8, 0xd3_u8, 0xb6_u8, 0xc4_u8, 0x17_u8, 0xf7_u8, 0xa0_u8])
     def query_interface(this : IDirectSoundFXCompressor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1431,7 +1487,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("c03ca9fe-fe90-4204-8078-82334cd177da")]
   record IDirectSoundFXParamEq, lpVtbl : IDirectSoundFXParamEqVtbl* do
     GUID = LibC::GUID.new(0xc03ca9fe_u32, 0xfe90_u16, 0x4204_u16, StaticArray[0x80_u8, 0x78_u8, 0x82_u8, 0x33_u8, 0x4c_u8, 0xd1_u8, 0x77_u8, 0xda_u8])
     def query_interface(this : IDirectSoundFXParamEq*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1466,7 +1521,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("4b166a6a-0d66-43f3-80e3-ee6280dee1a4")]
   record IDirectSoundFXI3DL2Reverb, lpVtbl : IDirectSoundFXI3DL2ReverbVtbl* do
     GUID = LibC::GUID.new(0x4b166a6a_u32, 0xd66_u16, 0x43f3_u16, StaticArray[0x80_u8, 0xe3_u8, 0xee_u8, 0x62_u8, 0x80_u8, 0xde_u8, 0xe1_u8, 0xa4_u8])
     def query_interface(this : IDirectSoundFXI3DL2Reverb*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1509,7 +1563,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("46858c3a-0dc6-45e3-b760-d4eef16cb325")]
   record IDirectSoundFXWavesReverb, lpVtbl : IDirectSoundFXWavesReverbVtbl* do
     GUID = LibC::GUID.new(0x46858c3a_u32, 0xdc6_u16, 0x45e3_u16, StaticArray[0xb7_u8, 0x60_u8, 0xd4_u8, 0xee_u8, 0xf1_u8, 0x6c_u8, 0xb3_u8, 0x25_u8])
     def query_interface(this : IDirectSoundFXWavesReverb*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1542,7 +1595,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("ad74143d-903d-4ab7-8066-28d363036d65")]
   record IDirectSoundCaptureFXAec, lpVtbl : IDirectSoundCaptureFXAecVtbl* do
     GUID = LibC::GUID.new(0xad74143d_u32, 0x903d_u16, 0x4ab7_u16, StaticArray[0x80_u8, 0x66_u8, 0x28_u8, 0xd3_u8, 0x63_u8, 0x3_u8, 0x6d_u8, 0x65_u8])
     def query_interface(this : IDirectSoundCaptureFXAec*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1580,7 +1632,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("ed311e41-fbae-4175-9625-cd0854f693ca")]
   record IDirectSoundCaptureFXNoiseSuppress, lpVtbl : IDirectSoundCaptureFXNoiseSuppressVtbl* do
     GUID = LibC::GUID.new(0xed311e41_u32, 0xfbae_u16, 0x4175_u16, StaticArray[0x96_u8, 0x25_u8, 0xcd_u8, 0x8_u8, 0x54_u8, 0xf6_u8, 0x93_u8, 0xca_u8])
     def query_interface(this : IDirectSoundCaptureFXNoiseSuppress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1613,7 +1664,6 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  #@[Com("edcb4c7a-daab-4216-a42e-6c50596ddc1d")]
   record IDirectSoundFullDuplex, lpVtbl : IDirectSoundFullDuplexVtbl* do
     GUID = LibC::GUID.new(0xedcb4c7a_u32, 0xdaab_u16, 0x4216_u16, StaticArray[0xa4_u8, 0x2e_u8, 0x6c_u8, 0x50_u8, 0x59_u8, 0x6d_u8, 0xdc_u8, 0x1d_u8])
     def query_interface(this : IDirectSoundFullDuplex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

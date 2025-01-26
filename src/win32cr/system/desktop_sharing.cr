@@ -230,15 +230,18 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record ReferenceRemainingTypes____,
-    __ctrl_level__ : Win32cr::System::DesktopSharing::CTRL_LEVEL,
-    __attendee_disconnect_reason__ : Win32cr::System::DesktopSharing::ATTENDEE_DISCONNECT_REASON,
-    __channel_priority__ : Win32cr::System::DesktopSharing::CHANNEL_PRIORITY,
-    __channel_flags__ : Win32cr::System::DesktopSharing::CHANNEL_FLAGS,
-    __channel_access_enum__ : Win32cr::System::DesktopSharing::CHANNEL_ACCESS_ENUM,
-    __rdpencomapi_attendee_flags__ : Win32cr::System::DesktopSharing::RDPENCOMAPI_ATTENDEE_FLAGS,
-    __rdpsrapi_wnd_flags__ : Win32cr::System::DesktopSharing::RDPSRAPI_WND_FLAGS,
-    __rdpsrapi_app_flags__ : Win32cr::System::DesktopSharing::RDPSRAPI_APP_FLAGS
+  struct ReferenceRemainingTypes____
+    property __ctrl_level__ : Win32cr::System::DesktopSharing::CTRL_LEVEL
+    property __attendee_disconnect_reason__ : Win32cr::System::DesktopSharing::ATTENDEE_DISCONNECT_REASON
+    property __channel_priority__ : Win32cr::System::DesktopSharing::CHANNEL_PRIORITY
+    property __channel_flags__ : Win32cr::System::DesktopSharing::CHANNEL_FLAGS
+    property __channel_access_enum__ : Win32cr::System::DesktopSharing::CHANNEL_ACCESS_ENUM
+    property __rdpencomapi_attendee_flags__ : Win32cr::System::DesktopSharing::RDPENCOMAPI_ATTENDEE_FLAGS
+    property __rdpsrapi_wnd_flags__ : Win32cr::System::DesktopSharing::RDPSRAPI_WND_FLAGS
+    property __rdpsrapi_app_flags__ : Win32cr::System::DesktopSharing::RDPSRAPI_APP_FLAGS
+    def initialize(@__ctrl_level__ : Win32cr::System::DesktopSharing::CTRL_LEVEL, @__attendee_disconnect_reason__ : Win32cr::System::DesktopSharing::ATTENDEE_DISCONNECT_REASON, @__channel_priority__ : Win32cr::System::DesktopSharing::CHANNEL_PRIORITY, @__channel_flags__ : Win32cr::System::DesktopSharing::CHANNEL_FLAGS, @__channel_access_enum__ : Win32cr::System::DesktopSharing::CHANNEL_ACCESS_ENUM, @__rdpencomapi_attendee_flags__ : Win32cr::System::DesktopSharing::RDPENCOMAPI_ATTENDEE_FLAGS, @__rdpsrapi_wnd_flags__ : Win32cr::System::DesktopSharing::RDPSRAPI_WND_FLAGS, @__rdpsrapi_app_flags__ : Win32cr::System::DesktopSharing::RDPSRAPI_APP_FLAGS)
+    end
+  end
 
   @[Extern]
   record IRDPSRAPIDebugVtbl,
@@ -250,7 +253,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("aa1e42b5-496d-4ca4-a690-348dcb2ec4ad")]
   record IRDPSRAPIDebug, lpVtbl : IRDPSRAPIDebugVtbl* do
     GUID = LibC::GUID.new(0xaa1e42b5_u32, 0x496d_u16, 0x4ca4_u16, StaticArray[0xa6_u8, 0x90_u8, 0x34_u8, 0x8d_u8, 0xcb_u8, 0x2e_u8, 0xc4_u8, 0xad_u8])
     def query_interface(this : IRDPSRAPIDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -280,7 +282,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("071c2533-0fa4-4e8f-ae83-9c10b4305ab5")]
   record IRDPSRAPIPerfCounterLogger, lpVtbl : IRDPSRAPIPerfCounterLoggerVtbl* do
     GUID = LibC::GUID.new(0x71c2533_u32, 0xfa4_u16, 0x4e8f_u16, StaticArray[0xae_u8, 0x83_u8, 0x9c_u8, 0x10_u8, 0xb4_u8, 0x30_u8, 0x5a_u8, 0xb5_u8])
     def query_interface(this : IRDPSRAPIPerfCounterLogger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -307,7 +308,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("9a512c86-ac6e-4a8e-b1a4-fcef363f6e64")]
   record IRDPSRAPIPerfCounterLoggingManager, lpVtbl : IRDPSRAPIPerfCounterLoggingManagerVtbl* do
     GUID = LibC::GUID.new(0x9a512c86_u32, 0xac6e_u16, 0x4a8e_u16, StaticArray[0xb1_u8, 0xa4_u8, 0xfc_u8, 0xef_u8, 0x36_u8, 0x3f_u8, 0x6e_u8, 0x64_u8])
     def query_interface(this : IRDPSRAPIPerfCounterLoggingManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -338,7 +338,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("e3e30ef9-89c6-4541-ba3b-19336ac6d31c")]
   record IRDPSRAPIAudioStream, lpVtbl : IRDPSRAPIAudioStreamVtbl* do
     GUID = LibC::GUID.new(0xe3e30ef9_u32, 0x89c6_u16, 0x4541_u16, StaticArray[0xba_u8, 0x3b_u8, 0x19_u8, 0x33_u8, 0x6a_u8, 0xc6_u8, 0xd3_u8, 0x1c_u8])
     def query_interface(this : IRDPSRAPIAudioStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -377,7 +376,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("d559f59a-7a27-4138-8763-247ce5f659a8")]
   record IRDPSRAPIClipboardUseEvents, lpVtbl : IRDPSRAPIClipboardUseEventsVtbl* do
     GUID = LibC::GUID.new(0xd559f59a_u32, 0x7a27_u16, 0x4138_u16, StaticArray[0x87_u8, 0x63_u8, 0x24_u8, 0x7c_u8, 0xe5_u8, 0xf6_u8, 0x59_u8, 0xa8_u8])
     def query_interface(this : IRDPSRAPIClipboardUseEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -414,7 +412,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("beafe0f9-c77b-4933-ba9f-a24cddcc27cf")]
   record IRDPSRAPIWindow, lpVtbl : IRDPSRAPIWindowVtbl* do
     GUID = LibC::GUID.new(0xbeafe0f9_u32, 0xc77b_u16, 0x4933_u16, StaticArray[0xba_u8, 0x9f_u8, 0xa2_u8, 0x4c_u8, 0xdd_u8, 0xcc_u8, 0x27_u8, 0xcf_u8])
     def query_interface(this : IRDPSRAPIWindow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -476,7 +473,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("8a05ce44-715a-4116-a189-a118f30a07bd")]
   record IRDPSRAPIWindowList, lpVtbl : IRDPSRAPIWindowListVtbl* do
     GUID = LibC::GUID.new(0x8a05ce44_u32, 0x715a_u16, 0x4116_u16, StaticArray[0xa1_u8, 0x89_u8, 0xa1_u8, 0x18_u8, 0xf3_u8, 0xa_u8, 0x7_u8, 0xbd_u8])
     def query_interface(this : IRDPSRAPIWindowList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -527,7 +523,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("41e7a09d-eb7a-436e-935d-780ca2628324")]
   record IRDPSRAPIApplication, lpVtbl : IRDPSRAPIApplicationVtbl* do
     GUID = LibC::GUID.new(0x41e7a09d_u32, 0xeb7a_u16, 0x436e_u16, StaticArray[0x93_u8, 0x5d_u8, 0x78_u8, 0xc_u8, 0xa2_u8, 0x62_u8, 0x83_u8, 0x24_u8])
     def query_interface(this : IRDPSRAPIApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -586,7 +581,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("d4b4aeb3-22dc-4837-b3b6-42ea2517849a")]
   record IRDPSRAPIApplicationList, lpVtbl : IRDPSRAPIApplicationListVtbl* do
     GUID = LibC::GUID.new(0xd4b4aeb3_u32, 0x22dc_u16, 0x4837_u16, StaticArray[0xb3_u8, 0xb6_u8, 0x42_u8, 0xea_u8, 0x25_u8, 0x17_u8, 0x84_u8, 0x9a_u8])
     def query_interface(this : IRDPSRAPIApplicationList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -635,7 +629,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("d20f10ca-6637-4f06-b1d5-277ea7e5160d")]
   record IRDPSRAPIApplicationFilter, lpVtbl : IRDPSRAPIApplicationFilterVtbl* do
     GUID = LibC::GUID.new(0xd20f10ca_u32, 0x6637_u16, 0x4f06_u16, StaticArray[0xb1_u8, 0xd5_u8, 0x27_u8, 0x7e_u8, 0xa7_u8, 0xe5_u8, 0x16_u8, 0xd_u8])
     def query_interface(this : IRDPSRAPIApplicationFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -688,7 +681,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("339b24f2-9bc0-4f16-9aac-f165433d13d4")]
   record IRDPSRAPISessionProperties, lpVtbl : IRDPSRAPISessionPropertiesVtbl* do
     GUID = LibC::GUID.new(0x339b24f2_u32, 0x9bc0_u16, 0x4f16_u16, StaticArray[0x9a_u8, 0xac_u8, 0xf1_u8, 0x65_u8, 0x43_u8, 0x3d_u8, 0x13_u8, 0xd4_u8])
     def query_interface(this : IRDPSRAPISessionProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -740,7 +732,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("4fac1d43-fc51-45bb-b1b4-2b53aa562fa3")]
   record IRDPSRAPIInvitation, lpVtbl : IRDPSRAPIInvitationVtbl* do
     GUID = LibC::GUID.new(0x4fac1d43_u32, 0xfc51_u16, 0x45bb_u16, StaticArray[0xb1_u8, 0xb4_u8, 0x2b_u8, 0x53_u8, 0xaa_u8, 0x56_u8, 0x2f_u8, 0xa3_u8])
     def query_interface(this : IRDPSRAPIInvitation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -804,7 +795,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("4722b049-92c3-4c2d-8a65-f7348f644dcf")]
   record IRDPSRAPIInvitationManager, lpVtbl : IRDPSRAPIInvitationManagerVtbl* do
     GUID = LibC::GUID.new(0x4722b049_u32, 0x92c3_u16, 0x4c2d_u16, StaticArray[0x8a_u8, 0x65_u8, 0xf7_u8, 0x34_u8, 0x8f_u8, 0x64_u8, 0x4d_u8, 0xcf_u8])
     def query_interface(this : IRDPSRAPIInvitationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -860,7 +850,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("f74049a4-3d06-4028-8193-0a8c29bc2452")]
   record IRDPSRAPITcpConnectionInfo, lpVtbl : IRDPSRAPITcpConnectionInfoVtbl* do
     GUID = LibC::GUID.new(0xf74049a4_u32, 0x3d06_u16, 0x4028_u16, StaticArray[0x81_u8, 0x93_u8, 0xa_u8, 0x8c_u8, 0x29_u8, 0xbc_u8, 0x24_u8, 0x52_u8])
     def query_interface(this : IRDPSRAPITcpConnectionInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -922,7 +911,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("ec0671b3-1b78-4b80-a464-9132247543e3")]
   record IRDPSRAPIAttendee, lpVtbl : IRDPSRAPIAttendeeVtbl* do
     GUID = LibC::GUID.new(0xec0671b3_u32, 0x1b78_u16, 0x4b80_u16, StaticArray[0xa4_u8, 0x64_u8, 0x91_u8, 0x32_u8, 0x24_u8, 0x75_u8, 0x43_u8, 0xe3_u8])
     def query_interface(this : IRDPSRAPIAttendee*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -987,7 +975,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("ba3a37e8-33da-4749-8da0-07fa34da7944")]
   record IRDPSRAPIAttendeeManager, lpVtbl : IRDPSRAPIAttendeeManagerVtbl* do
     GUID = LibC::GUID.new(0xba3a37e8_u32, 0x33da_u16, 0x4749_u16, StaticArray[0x8d_u8, 0xa0_u8, 0x7_u8, 0xfa_u8, 0x34_u8, 0xda_u8, 0x79_u8, 0x44_u8])
     def query_interface(this : IRDPSRAPIAttendeeManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1035,7 +1022,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("c187689f-447c-44a1-9c14-fffbb3b7ec17")]
   record IRDPSRAPIAttendeeDisconnectInfo, lpVtbl : IRDPSRAPIAttendeeDisconnectInfoVtbl* do
     GUID = LibC::GUID.new(0xc187689f_u32, 0x447c_u16, 0x44a1_u16, StaticArray[0x9c_u8, 0x14_u8, 0xff_u8, 0xfb_u8, 0xb3_u8, 0xb7_u8, 0xec_u8, 0x17_u8])
     def query_interface(this : IRDPSRAPIAttendeeDisconnectInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1088,7 +1074,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("05e12f95-28b3-4c9a-8780-d0248574a1e0")]
   record IRDPSRAPIVirtualChannel, lpVtbl : IRDPSRAPIVirtualChannelVtbl* do
     GUID = LibC::GUID.new(0x5e12f95_u32, 0x28b3_u16, 0x4c9a_u16, StaticArray[0x87_u8, 0x80_u8, 0xd0_u8, 0x24_u8, 0x85_u8, 0x74_u8, 0xa1_u8, 0xe0_u8])
     def query_interface(this : IRDPSRAPIVirtualChannel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1145,7 +1130,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("0d11c661-5d0d-4ee4-89df-2166ae1fdfed")]
   record IRDPSRAPIVirtualChannelManager, lpVtbl : IRDPSRAPIVirtualChannelManagerVtbl* do
     GUID = LibC::GUID.new(0xd11c661_u32, 0x5d0d_u16, 0x4ee4_u16, StaticArray[0x89_u8, 0xdf_u8, 0x21_u8, 0x66_u8, 0xae_u8, 0x1f_u8, 0xdf_u8, 0xed_u8])
     def query_interface(this : IRDPSRAPIVirtualChannelManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1207,7 +1191,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("c6bfcd38-8ce9-404d-8ae8-f31d00c65cb5")]
   record IRDPSRAPIViewer, lpVtbl : IRDPSRAPIViewerVtbl* do
     GUID = LibC::GUID.new(0xc6bfcd38_u32, 0x8ce9_u16, 0x404d_u16, StaticArray[0x8a_u8, 0xe8_u8, 0xf3_u8, 0x1d_u8, 0x0_u8, 0xc6_u8, 0x5c_u8, 0xb5_u8])
     def query_interface(this : IRDPSRAPIViewer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1292,7 +1275,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("bb590853-a6c5-4a7b-8dd4-76b69eea12d5")]
   record IRDPViewerInputSink, lpVtbl : IRDPViewerInputSinkVtbl* do
     GUID = LibC::GUID.new(0xbb590853_u32, 0xa6c5_u16, 0x4a7b_u16, StaticArray[0x8d_u8, 0xd4_u8, 0x76_u8, 0xb6_u8, 0x9e_u8, 0xea_u8, 0x12_u8, 0xd5_u8])
     def query_interface(this : IRDPViewerInputSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1347,7 +1329,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("3d67e7d2-b27b-448e-81b3-c6110ed8b4be")]
   record IRDPSRAPIFrameBuffer, lpVtbl : IRDPSRAPIFrameBufferVtbl* do
     GUID = LibC::GUID.new(0x3d67e7d2_u32, 0xb27b_u16, 0x448e_u16, StaticArray[0x81_u8, 0xb3_u8, 0xc6_u8, 0x11_u8, 0xe_u8, 0xd8_u8, 0xb4_u8, 0xbe_u8])
     def query_interface(this : IRDPSRAPIFrameBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1404,7 +1385,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("81c80290-5085-44b0-b460-f865c39cb4a9")]
   record IRDPSRAPITransportStreamBuffer, lpVtbl : IRDPSRAPITransportStreamBufferVtbl* do
     GUID = LibC::GUID.new(0x81c80290_u32, 0x5085_u16, 0x44b0_u16, StaticArray[0xb4_u8, 0x60_u8, 0xf8_u8, 0x65_u8, 0xc3_u8, 0x9c_u8, 0xb4_u8, 0xa9_u8])
     def query_interface(this : IRDPSRAPITransportStreamBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1460,7 +1440,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("ea81c254-f5af-4e40-982e-3e63bb595276")]
   record IRDPSRAPITransportStreamEvents, lpVtbl : IRDPSRAPITransportStreamEventsVtbl* do
     GUID = LibC::GUID.new(0xea81c254_u32, 0xf5af_u16, 0x4e40_u16, StaticArray[0x98_u8, 0x2e_u8, 0x3e_u8, 0x63_u8, 0xbb_u8, 0x59_u8, 0x52_u8, 0x76_u8])
     def query_interface(this : IRDPSRAPITransportStreamEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1498,7 +1477,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("36cfa065-43bb-4ef7-aed7-9b88a5053036")]
   record IRDPSRAPITransportStream, lpVtbl : IRDPSRAPITransportStreamVtbl* do
     GUID = LibC::GUID.new(0x36cfa065_u32, 0x43bb_u16, 0x4ef7_u16, StaticArray[0xae_u8, 0xd7_u8, 0x9b_u8, 0x88_u8, 0xa5_u8, 0x5_u8, 0x30_u8, 0x36_u8])
     def query_interface(this : IRDPSRAPITransportStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1557,7 +1535,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("eeb20886-e470-4cf6-842b-2739c0ec5cfb")]
   record IRDPSRAPISharingSession, lpVtbl : IRDPSRAPISharingSessionVtbl* do
     GUID = LibC::GUID.new(0xeeb20886_u32, 0xe470_u16, 0x4cf6_u16, StaticArray[0x84_u8, 0x2b_u8, 0x27_u8, 0x39_u8, 0xc0_u8, 0xec_u8, 0x5c_u8, 0xfb_u8])
     def query_interface(this : IRDPSRAPISharingSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1655,7 +1632,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("fee4ee57-e3e8-4205-8fb0-8fd1d0675c21")]
   record IRDPSRAPISharingSession2, lpVtbl : IRDPSRAPISharingSession2Vtbl* do
     GUID = LibC::GUID.new(0xfee4ee57_u32, 0xe3e8_u16, 0x4205_u16, StaticArray[0x8f_u8, 0xb0_u8, 0x8f_u8, 0xd1_u8, 0xd0_u8, 0x67_u8, 0x5c_u8, 0x21_u8])
     def query_interface(this : IRDPSRAPISharingSession2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1745,7 +1721,6 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  #@[Com("98a97042-6698-40e9-8efd-b3200990004b")]
   record IRDPSessionEvents_, lpVtbl : IRDPSessionEvents_Vtbl* do
     GUID = LibC::GUID.new(0x98a97042_u32, 0x6698_u16, 0x40e9_u16, StaticArray[0x8e_u8, 0xfd_u8, 0xb3_u8, 0x20_u8, 0x9_u8, 0x90_u8, 0x0_u8, 0x4b_u8])
     def query_interface(this : IRDPSessionEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

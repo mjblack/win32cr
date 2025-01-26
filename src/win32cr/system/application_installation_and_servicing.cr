@@ -6,19 +6,19 @@ require "./../security/cryptography.cr"
 
 module Win32cr::System::ApplicationInstallationAndServicing
   alias MSIHANDLE = UInt32
-  alias LPDISPLAYVAL = Proc(Void*, Win32cr::System::ApplicationInstallationAndServicing::RESULTTYPES, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias LPDISPLAYVAL = Proc(Void*, Win32cr::System::ApplicationInstallationAndServicing::RESULTTYPES, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias LPEVALCOMCALLBACK = Proc(Win32cr::System::ApplicationInstallationAndServicing::STATUSTYPES, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias LPEVALCOMCALLBACK = Proc(Win32cr::System::ApplicationInstallationAndServicing::STATUSTYPES, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias INSTALLUI_HANDLERA = Proc(Void*, UInt32, Win32cr::Foundation::PSTR, Int32)*
+  alias INSTALLUI_HANDLERA = Proc(Void*, UInt32, Win32cr::Foundation::PSTR, Int32)
 
-  alias INSTALLUI_HANDLERW = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Int32)*
+  alias INSTALLUI_HANDLERW = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Int32)
 
-  alias PINSTALLUI_HANDLER_RECORD = Proc(Void*, UInt32, Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, Int32)*
+  alias PINSTALLUI_HANDLER_RECORD = Proc(Void*, UInt32, Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, Int32)
 
-  alias PPATCH_PROGRESS_CALLBACK = Proc(Void*, UInt32, UInt32, Win32cr::Foundation::BOOL)*
+  alias PPATCH_PROGRESS_CALLBACK = Proc(Void*, UInt32, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PPATCH_SYMLOAD_CALLBACK = Proc(UInt32, Win32cr::Foundation::PSTR, UInt32, UInt32, UInt32, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias PPATCH_SYMLOAD_CALLBACK = Proc(UInt32, Win32cr::Foundation::PSTR, UInt32, UInt32, UInt32, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)
 
   UIALL = 32768_u32
   LOGTOKEN_TYPE_MASK = 3_u32
@@ -1493,384 +1493,512 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record PMSIHANDLE,
-    m_h : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE
+  struct PMSIHANDLE
+    property m_h : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE
+    def initialize(@m_h : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE)
+    end
+  end
 
   @[Extern]
-  record MSIPATCHSEQUENCEINFOA,
-    szPatchData : Win32cr::Foundation::PSTR,
-    ePatchDataType : Win32cr::System::ApplicationInstallationAndServicing::MSIPATCHDATATYPE,
-    dwOrder : UInt32,
-    uStatus : UInt32
+  struct MSIPATCHSEQUENCEINFOA
+    property szPatchData : Win32cr::Foundation::PSTR
+    property ePatchDataType : Win32cr::System::ApplicationInstallationAndServicing::MSIPATCHDATATYPE
+    property dwOrder : UInt32
+    property uStatus : UInt32
+    def initialize(@szPatchData : Win32cr::Foundation::PSTR, @ePatchDataType : Win32cr::System::ApplicationInstallationAndServicing::MSIPATCHDATATYPE, @dwOrder : UInt32, @uStatus : UInt32)
+    end
+  end
 
   @[Extern]
-  record MSIPATCHSEQUENCEINFOW,
-    szPatchData : Win32cr::Foundation::PWSTR,
-    ePatchDataType : Win32cr::System::ApplicationInstallationAndServicing::MSIPATCHDATATYPE,
-    dwOrder : UInt32,
-    uStatus : UInt32
+  struct MSIPATCHSEQUENCEINFOW
+    property szPatchData : Win32cr::Foundation::PWSTR
+    property ePatchDataType : Win32cr::System::ApplicationInstallationAndServicing::MSIPATCHDATATYPE
+    property dwOrder : UInt32
+    property uStatus : UInt32
+    def initialize(@szPatchData : Win32cr::Foundation::PWSTR, @ePatchDataType : Win32cr::System::ApplicationInstallationAndServicing::MSIPATCHDATATYPE, @dwOrder : UInt32, @uStatus : UInt32)
+    end
+  end
 
   @[Extern]
-  record MSIFILEHASHINFO,
-    dwFileHashInfoSize : UInt32,
-    dwData : UInt32[4]
+  struct MSIFILEHASHINFO
+    property dwFileHashInfoSize : UInt32
+    property dwData : UInt32[4]
+    def initialize(@dwFileHashInfoSize : UInt32, @dwData : UInt32[4])
+    end
+  end
 
   @[Extern]
-  record ASSEMBLY_INFO,
-    cbAssemblyInfo : UInt32,
-    dwAssemblyFlags : UInt32,
-    uliAssemblySizeInKB : Win32cr::Foundation::ULARGE_INTEGER,
-    pszCurrentAssemblyPathBuf : Win32cr::Foundation::PWSTR,
-    cchBuf : UInt32
+  struct ASSEMBLY_INFO
+    property cbAssemblyInfo : UInt32
+    property dwAssemblyFlags : UInt32
+    property uliAssemblySizeInKB : Win32cr::Foundation::ULARGE_INTEGER
+    property pszCurrentAssemblyPathBuf : Win32cr::Foundation::PWSTR
+    property cchBuf : UInt32
+    def initialize(@cbAssemblyInfo : UInt32, @dwAssemblyFlags : UInt32, @uliAssemblySizeInKB : Win32cr::Foundation::ULARGE_INTEGER, @pszCurrentAssemblyPathBuf : Win32cr::Foundation::PWSTR, @cchBuf : UInt32)
+    end
+  end
 
   @[Extern]
-  record FUSION_INSTALL_REFERENCE,
-    cbSize : UInt32,
-    dwFlags : UInt32,
-    guidScheme : LibC::GUID,
-    szIdentifier : Win32cr::Foundation::PWSTR,
-    szNonCannonicalData : Win32cr::Foundation::PWSTR
+  struct FUSION_INSTALL_REFERENCE
+    property cbSize : UInt32
+    property dwFlags : UInt32
+    property guidScheme : LibC::GUID
+    property szIdentifier : Win32cr::Foundation::PWSTR
+    property szNonCannonicalData : Win32cr::Foundation::PWSTR
+    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @guidScheme : LibC::GUID, @szIdentifier : Win32cr::Foundation::PWSTR, @szNonCannonicalData : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record PROTECTED_FILE_DATA,
-    file_name : UInt16[260],
-    file_number : UInt32
+  struct PROTECTED_FILE_DATA
+    property file_name : UInt16[260]
+    property file_number : UInt32
+    def initialize(@file_name : UInt16[260], @file_number : UInt32)
+    end
+  end
 
   @[Extern]
-  record Tagapptasktype_,
-    product_id : LibC::GUID,
-    task_type : Win32cr::System::ApplicationInstallationAndServicing::PM_TASK_TYPE
+  struct Tagapptasktype_
+    property product_id : LibC::GUID
+    property task_type : Win32cr::System::ApplicationInstallationAndServicing::PM_TASK_TYPE
+    def initialize(@product_id : LibC::GUID, @task_type : Win32cr::System::ApplicationInstallationAndServicing::PM_TASK_TYPE)
+    end
+  end
 
   @[Extern]
-  record PM_EXTENSIONCONSUMER,
-    consumer_pid : LibC::GUID,
-    extension_id : Win32cr::Foundation::BSTR
+  struct PM_EXTENSIONCONSUMER
+    property consumer_pid : LibC::GUID
+    property extension_id : Win32cr::Foundation::BSTR
+    def initialize(@consumer_pid : LibC::GUID, @extension_id : Win32cr::Foundation::BSTR)
+    end
+  end
 
   @[Extern]
-  record PM_BSATASKID,
-    product_id : LibC::GUID,
-    task_id : Win32cr::Foundation::BSTR
+  struct PM_BSATASKID
+    property product_id : LibC::GUID
+    property task_id : Win32cr::Foundation::BSTR
+    def initialize(@product_id : LibC::GUID, @task_id : Win32cr::Foundation::BSTR)
+    end
+  end
 
   @[Extern]
-  record PM_BWTASKID,
-    product_id : LibC::GUID,
-    task_id : Win32cr::Foundation::BSTR
+  struct PM_BWTASKID
+    property product_id : LibC::GUID
+    property task_id : Win32cr::Foundation::BSTR
+    def initialize(@product_id : LibC::GUID, @task_id : Win32cr::Foundation::BSTR)
+    end
+  end
 
   @[Extern]
-  record PM_ENUM_FILTER,
-    filter_type : Int32,
-    filter_parameter : FilterParameter_e__Union_ do
+  struct PM_ENUM_FILTER
+    property filter_type : Int32
+    property filter_parameter : FilterParameter_e__Union_
 
     # Nested Type FilterParameter_e__Union_
     @[Extern(union: true)]
-    record FilterParameter_e__Union_,
-      dummy : Int32,
-      genre : Win32cr::System::ApplicationInstallationAndServicing::PM_APP_GENRE,
-      app_hub_type : Win32cr::System::ApplicationInstallationAndServicing::PM_APPLICATION_HUBTYPE,
-      hub_type : Win32cr::System::ApplicationInstallationAndServicing::PM_TILE_HUBTYPE,
-      tasktype : Win32cr::System::ApplicationInstallationAndServicing::PM_TASK_TYPE,
-      task_product_id : LibC::GUID,
-      tile_product_id : LibC::GUID,
-      app_task_type : Win32cr::System::ApplicationInstallationAndServicing::Tagapptasktype_,
-      consumer : Win32cr::System::ApplicationInstallationAndServicing::PM_EXTENSIONCONSUMER,
-      bsa_task : Win32cr::System::ApplicationInstallationAndServicing::PM_BSATASKID,
-      bsa_product_id : LibC::GUID,
-      bw_task : Win32cr::System::ApplicationInstallationAndServicing::PM_BWTASKID,
-      protocol_name : Win32cr::Foundation::BSTR,
-      file_type : Win32cr::Foundation::BSTR,
-      content_type : Win32cr::Foundation::BSTR,
-      app_supported_file_ext_pid : LibC::GUID,
-      share_target_file_type : Win32cr::Foundation::BSTR
+    struct FilterParameter_e__Union_
+    property dummy : Int32
+    property genre : Win32cr::System::ApplicationInstallationAndServicing::PM_APP_GENRE
+    property app_hub_type : Win32cr::System::ApplicationInstallationAndServicing::PM_APPLICATION_HUBTYPE
+    property hub_type : Win32cr::System::ApplicationInstallationAndServicing::PM_TILE_HUBTYPE
+    property tasktype : Win32cr::System::ApplicationInstallationAndServicing::PM_TASK_TYPE
+    property task_product_id : LibC::GUID
+    property tile_product_id : LibC::GUID
+    property app_task_type : Win32cr::System::ApplicationInstallationAndServicing::Tagapptasktype_
+    property consumer : Win32cr::System::ApplicationInstallationAndServicing::PM_EXTENSIONCONSUMER
+    property bsa_task : Win32cr::System::ApplicationInstallationAndServicing::PM_BSATASKID
+    property bsa_product_id : LibC::GUID
+    property bw_task : Win32cr::System::ApplicationInstallationAndServicing::PM_BWTASKID
+    property protocol_name : Win32cr::Foundation::BSTR
+    property file_type : Win32cr::Foundation::BSTR
+    property content_type : Win32cr::Foundation::BSTR
+    property app_supported_file_ext_pid : LibC::GUID
+    property share_target_file_type : Win32cr::Foundation::BSTR
+    def initialize(@dummy : Int32, @genre : Win32cr::System::ApplicationInstallationAndServicing::PM_APP_GENRE, @app_hub_type : Win32cr::System::ApplicationInstallationAndServicing::PM_APPLICATION_HUBTYPE, @hub_type : Win32cr::System::ApplicationInstallationAndServicing::PM_TILE_HUBTYPE, @tasktype : Win32cr::System::ApplicationInstallationAndServicing::PM_TASK_TYPE, @task_product_id : LibC::GUID, @tile_product_id : LibC::GUID, @app_task_type : Win32cr::System::ApplicationInstallationAndServicing::Tagapptasktype_, @consumer : Win32cr::System::ApplicationInstallationAndServicing::PM_EXTENSIONCONSUMER, @bsa_task : Win32cr::System::ApplicationInstallationAndServicing::PM_BSATASKID, @bsa_product_id : LibC::GUID, @bw_task : Win32cr::System::ApplicationInstallationAndServicing::PM_BWTASKID, @protocol_name : Win32cr::Foundation::BSTR, @file_type : Win32cr::Foundation::BSTR, @content_type : Win32cr::Foundation::BSTR, @app_supported_file_ext_pid : LibC::GUID, @share_target_file_type : Win32cr::Foundation::BSTR)
+    end
+    end
 
+    def initialize(@filter_type : Int32, @filter_parameter : FilterParameter_e__Union_)
+    end
   end
 
   @[Extern]
-  record PM_STARTAPPBLOB,
-    cbSize : UInt32,
-    product_id : LibC::GUID,
-    app_title : Win32cr::Foundation::BSTR,
-    icon_path : Win32cr::Foundation::BSTR,
-    is_uninstallable : Win32cr::Foundation::BOOL,
-    app_install_type : Win32cr::System::ApplicationInstallationAndServicing::PM_APPLICATION_INSTALL_TYPE,
-    instance_id : LibC::GUID,
-    state : Win32cr::System::ApplicationInstallationAndServicing::PM_APPLICATION_STATE,
-    is_modern : Win32cr::Foundation::BOOL,
-    is_modern_light_up : Win32cr::Foundation::BOOL,
-    light_up_support_mask : UInt16
+  struct PM_STARTAPPBLOB
+    property cbSize : UInt32
+    property product_id : LibC::GUID
+    property app_title : Win32cr::Foundation::BSTR
+    property icon_path : Win32cr::Foundation::BSTR
+    property is_uninstallable : Win32cr::Foundation::BOOL
+    property app_install_type : Win32cr::System::ApplicationInstallationAndServicing::PM_APPLICATION_INSTALL_TYPE
+    property instance_id : LibC::GUID
+    property state : Win32cr::System::ApplicationInstallationAndServicing::PM_APPLICATION_STATE
+    property is_modern : Win32cr::Foundation::BOOL
+    property is_modern_light_up : Win32cr::Foundation::BOOL
+    property light_up_support_mask : UInt16
+    def initialize(@cbSize : UInt32, @product_id : LibC::GUID, @app_title : Win32cr::Foundation::BSTR, @icon_path : Win32cr::Foundation::BSTR, @is_uninstallable : Win32cr::Foundation::BOOL, @app_install_type : Win32cr::System::ApplicationInstallationAndServicing::PM_APPLICATION_INSTALL_TYPE, @instance_id : LibC::GUID, @state : Win32cr::System::ApplicationInstallationAndServicing::PM_APPLICATION_STATE, @is_modern : Win32cr::Foundation::BOOL, @is_modern_light_up : Win32cr::Foundation::BOOL, @light_up_support_mask : UInt16)
+    end
+  end
 
   @[Extern]
-  record PM_INVOCATIONINFO,
-    uri_base_or_aumid : Win32cr::Foundation::BSTR,
-    uri_fragment_or_args : Win32cr::Foundation::BSTR
+  struct PM_INVOCATIONINFO
+    property uri_base_or_aumid : Win32cr::Foundation::BSTR
+    property uri_fragment_or_args : Win32cr::Foundation::BSTR
+    def initialize(@uri_base_or_aumid : Win32cr::Foundation::BSTR, @uri_fragment_or_args : Win32cr::Foundation::BSTR)
+    end
+  end
 
   @[Extern]
-  record PM_STARTTILEBLOB,
-    cbSize : UInt32,
-    product_id : LibC::GUID,
-    tile_id : Win32cr::Foundation::BSTR,
-    template_type : Win32cr::System::ApplicationInstallationAndServicing::TILE_TEMPLATE_TYPE,
-    hub_position : UInt32[32],
-    hub_visibility_bitmask : UInt32,
-    is_default : Win32cr::Foundation::BOOL,
-    tile_type : Win32cr::System::ApplicationInstallationAndServicing::PM_STARTTILE_TYPE,
-    pbPropBlob : UInt8*,
-    cbPropBlob : UInt32,
-    is_restoring : Win32cr::Foundation::BOOL,
-    is_modern : Win32cr::Foundation::BOOL,
-    invocation_info : Win32cr::System::ApplicationInstallationAndServicing::PM_INVOCATIONINFO
+  struct PM_STARTTILEBLOB
+    property cbSize : UInt32
+    property product_id : LibC::GUID
+    property tile_id : Win32cr::Foundation::BSTR
+    property template_type : Win32cr::System::ApplicationInstallationAndServicing::TILE_TEMPLATE_TYPE
+    property hub_position : UInt32[32]
+    property hub_visibility_bitmask : UInt32
+    property is_default : Win32cr::Foundation::BOOL
+    property tile_type : Win32cr::System::ApplicationInstallationAndServicing::PM_STARTTILE_TYPE
+    property pbPropBlob : UInt8*
+    property cbPropBlob : UInt32
+    property is_restoring : Win32cr::Foundation::BOOL
+    property is_modern : Win32cr::Foundation::BOOL
+    property invocation_info : Win32cr::System::ApplicationInstallationAndServicing::PM_INVOCATIONINFO
+    def initialize(@cbSize : UInt32, @product_id : LibC::GUID, @tile_id : Win32cr::Foundation::BSTR, @template_type : Win32cr::System::ApplicationInstallationAndServicing::TILE_TEMPLATE_TYPE, @hub_position : UInt32[32], @hub_visibility_bitmask : UInt32, @is_default : Win32cr::Foundation::BOOL, @tile_type : Win32cr::System::ApplicationInstallationAndServicing::PM_STARTTILE_TYPE, @pbPropBlob : UInt8*, @cbPropBlob : UInt32, @is_restoring : Win32cr::Foundation::BOOL, @is_modern : Win32cr::Foundation::BOOL, @invocation_info : Win32cr::System::ApplicationInstallationAndServicing::PM_INVOCATIONINFO)
+    end
+  end
 
   @[Extern]
-  record PM_INSTALLINFO,
-    product_id : LibC::GUID,
-    package_path : Win32cr::Foundation::BSTR,
-    instance_id : LibC::GUID,
-    pbLicense : UInt8*,
-    cbLicense : UInt32,
-    is_uninstall_disabled : Win32cr::Foundation::BOOL,
-    deployment_options : UInt32,
-    offer_id : LibC::GUID,
-    marketplace_app_version : Win32cr::Foundation::BSTR
+  struct PM_INSTALLINFO
+    property product_id : LibC::GUID
+    property package_path : Win32cr::Foundation::BSTR
+    property instance_id : LibC::GUID
+    property pbLicense : UInt8*
+    property cbLicense : UInt32
+    property is_uninstall_disabled : Win32cr::Foundation::BOOL
+    property deployment_options : UInt32
+    property offer_id : LibC::GUID
+    property marketplace_app_version : Win32cr::Foundation::BSTR
+    def initialize(@product_id : LibC::GUID, @package_path : Win32cr::Foundation::BSTR, @instance_id : LibC::GUID, @pbLicense : UInt8*, @cbLicense : UInt32, @is_uninstall_disabled : Win32cr::Foundation::BOOL, @deployment_options : UInt32, @offer_id : LibC::GUID, @marketplace_app_version : Win32cr::Foundation::BSTR)
+    end
+  end
 
   @[Extern]
-  record PM_UPDATEINFO_LEGACY,
-    product_id : LibC::GUID,
-    package_path : Win32cr::Foundation::BSTR,
-    instance_id : LibC::GUID,
-    pbLicense : UInt8*,
-    cbLicense : UInt32,
-    marketplace_app_version : Win32cr::Foundation::BSTR
+  struct PM_UPDATEINFO_LEGACY
+    property product_id : LibC::GUID
+    property package_path : Win32cr::Foundation::BSTR
+    property instance_id : LibC::GUID
+    property pbLicense : UInt8*
+    property cbLicense : UInt32
+    property marketplace_app_version : Win32cr::Foundation::BSTR
+    def initialize(@product_id : LibC::GUID, @package_path : Win32cr::Foundation::BSTR, @instance_id : LibC::GUID, @pbLicense : UInt8*, @cbLicense : UInt32, @marketplace_app_version : Win32cr::Foundation::BSTR)
+    end
+  end
 
   @[Extern]
-  record PM_UPDATEINFO,
-    product_id : LibC::GUID,
-    package_path : Win32cr::Foundation::BSTR,
-    instance_id : LibC::GUID,
-    pbLicense : UInt8*,
-    cbLicense : UInt32,
-    marketplace_app_version : Win32cr::Foundation::BSTR,
-    deployment_options : UInt32
+  struct PM_UPDATEINFO
+    property product_id : LibC::GUID
+    property package_path : Win32cr::Foundation::BSTR
+    property instance_id : LibC::GUID
+    property pbLicense : UInt8*
+    property cbLicense : UInt32
+    property marketplace_app_version : Win32cr::Foundation::BSTR
+    property deployment_options : UInt32
+    def initialize(@product_id : LibC::GUID, @package_path : Win32cr::Foundation::BSTR, @instance_id : LibC::GUID, @pbLicense : UInt8*, @cbLicense : UInt32, @marketplace_app_version : Win32cr::Foundation::BSTR, @deployment_options : UInt32)
+    end
+  end
 
   @[Extern]
-  record PATCH_IGNORE_RANGE,
-    offset_in_old_file : UInt32,
-    length_in_bytes : UInt32
+  struct PATCH_IGNORE_RANGE
+    property offset_in_old_file : UInt32
+    property length_in_bytes : UInt32
+    def initialize(@offset_in_old_file : UInt32, @length_in_bytes : UInt32)
+    end
+  end
 
   @[Extern]
-  record PATCH_RETAIN_RANGE,
-    offset_in_old_file : UInt32,
-    length_in_bytes : UInt32,
-    offset_in_new_file : UInt32
+  struct PATCH_RETAIN_RANGE
+    property offset_in_old_file : UInt32
+    property length_in_bytes : UInt32
+    property offset_in_new_file : UInt32
+    def initialize(@offset_in_old_file : UInt32, @length_in_bytes : UInt32, @offset_in_new_file : UInt32)
+    end
+  end
 
   @[Extern]
-  record PATCH_OLD_FILE_INFO_A,
-    size_of_this_struct : UInt32,
-    old_file_name : Win32cr::Foundation::PSTR,
-    ignore_range_count : UInt32,
-    ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*,
-    retain_range_count : UInt32,
-    retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*
+  struct PATCH_OLD_FILE_INFO_A
+    property size_of_this_struct : UInt32
+    property old_file_name : Win32cr::Foundation::PSTR
+    property ignore_range_count : UInt32
+    property ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*
+    property retain_range_count : UInt32
+    property retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*
+    def initialize(@size_of_this_struct : UInt32, @old_file_name : Win32cr::Foundation::PSTR, @ignore_range_count : UInt32, @ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*, @retain_range_count : UInt32, @retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*)
+    end
+  end
 
   @[Extern]
-  record PATCH_OLD_FILE_INFO_W,
-    size_of_this_struct : UInt32,
-    old_file_name : Win32cr::Foundation::PWSTR,
-    ignore_range_count : UInt32,
-    ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*,
-    retain_range_count : UInt32,
-    retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*
+  struct PATCH_OLD_FILE_INFO_W
+    property size_of_this_struct : UInt32
+    property old_file_name : Win32cr::Foundation::PWSTR
+    property ignore_range_count : UInt32
+    property ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*
+    property retain_range_count : UInt32
+    property retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*
+    def initialize(@size_of_this_struct : UInt32, @old_file_name : Win32cr::Foundation::PWSTR, @ignore_range_count : UInt32, @ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*, @retain_range_count : UInt32, @retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*)
+    end
+  end
 
   @[Extern]
-  record PATCH_OLD_FILE_INFO_H,
-    size_of_this_struct : UInt32,
-    old_file_handle : Win32cr::Foundation::HANDLE,
-    ignore_range_count : UInt32,
-    ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*,
-    retain_range_count : UInt32,
-    retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*
+  struct PATCH_OLD_FILE_INFO_H
+    property size_of_this_struct : UInt32
+    property old_file_handle : Win32cr::Foundation::HANDLE
+    property ignore_range_count : UInt32
+    property ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*
+    property retain_range_count : UInt32
+    property retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*
+    def initialize(@size_of_this_struct : UInt32, @old_file_handle : Win32cr::Foundation::HANDLE, @ignore_range_count : UInt32, @ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*, @retain_range_count : UInt32, @retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*)
+    end
+  end
 
   @[Extern]
-  record PATCH_OLD_FILE_INFO,
-    size_of_this_struct : UInt32,
-    anonymous : Anonymous_e__Union_,
-    ignore_range_count : UInt32,
-    ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*,
-    retain_range_count : UInt32,
-    retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE* do
+  struct PATCH_OLD_FILE_INFO
+    property size_of_this_struct : UInt32
+    property anonymous : Anonymous_e__Union_
+    property ignore_range_count : UInt32
+    property ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*
+    property retain_range_count : UInt32
+    property retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      old_file_name_a : Win32cr::Foundation::PSTR,
-      old_file_name_w : Win32cr::Foundation::PWSTR,
-      old_file_handle : Win32cr::Foundation::HANDLE
+    struct Anonymous_e__Union_
+    property old_file_name_a : Win32cr::Foundation::PSTR
+    property old_file_name_w : Win32cr::Foundation::PWSTR
+    property old_file_handle : Win32cr::Foundation::HANDLE
+    def initialize(@old_file_name_a : Win32cr::Foundation::PSTR, @old_file_name_w : Win32cr::Foundation::PWSTR, @old_file_handle : Win32cr::Foundation::HANDLE)
+    end
+    end
 
+    def initialize(@size_of_this_struct : UInt32, @anonymous : Anonymous_e__Union_, @ignore_range_count : UInt32, @ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*, @retain_range_count : UInt32, @retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*)
+    end
   end
 
   @[Extern]
-  record PATCH_INTERLEAVE_MAP,
-    count_ranges : UInt32,
-    range : Anonymous_e__Struct_* do
+  struct PATCH_INTERLEAVE_MAP
+    property count_ranges : UInt32
+    property range : Anonymous_e__Struct_*
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      old_offset : UInt32,
-      old_length : UInt32,
-      new_length : UInt32
+    struct Anonymous_e__Struct_
+    property old_offset : UInt32
+    property old_length : UInt32
+    property new_length : UInt32
+    def initialize(@old_offset : UInt32, @old_length : UInt32, @new_length : UInt32)
+    end
+    end
 
+    def initialize(@count_ranges : UInt32, @range : Anonymous_e__Struct_*)
+    end
   end
 
   @[Extern]
-  record PATCH_OPTION_DATA,
-    size_of_this_struct : UInt32,
-    symbol_option_flags : UInt32,
-    new_file_symbol_path : Win32cr::Foundation::PSTR,
-    old_file_symbol_path_array : Win32cr::Foundation::PSTR*,
-    extended_option_flags : UInt32,
-    sym_load_callback : Win32cr::System::ApplicationInstallationAndServicing::PPATCH_SYMLOAD_CALLBACK,
-    sym_load_context : Void*,
-    interleave_map_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_INTERLEAVE_MAP**,
-    max_lzx_window_size : UInt32
+  struct PATCH_OPTION_DATA
+    property size_of_this_struct : UInt32
+    property symbol_option_flags : UInt32
+    property new_file_symbol_path : Win32cr::Foundation::PSTR
+    property old_file_symbol_path_array : Win32cr::Foundation::PSTR*
+    property extended_option_flags : UInt32
+    property sym_load_callback : Win32cr::System::ApplicationInstallationAndServicing::PPATCH_SYMLOAD_CALLBACK
+    property sym_load_context : Void*
+    property interleave_map_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_INTERLEAVE_MAP**
+    property max_lzx_window_size : UInt32
+    def initialize(@size_of_this_struct : UInt32, @symbol_option_flags : UInt32, @new_file_symbol_path : Win32cr::Foundation::PSTR, @old_file_symbol_path_array : Win32cr::Foundation::PSTR*, @extended_option_flags : UInt32, @sym_load_callback : Win32cr::System::ApplicationInstallationAndServicing::PPATCH_SYMLOAD_CALLBACK, @sym_load_context : Void*, @interleave_map_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_INTERLEAVE_MAP**, @max_lzx_window_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record DELTA_INPUT,
-    anonymous : Anonymous_e__Union_,
-    uSize : LibC::UIntPtrT,
-    editable : Win32cr::Foundation::BOOL do
+  struct DELTA_INPUT
+    property anonymous : Anonymous_e__Union_
+    property uSize : LibC::UIntPtrT
+    property editable : Win32cr::Foundation::BOOL
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      lpcStart : Void*,
-      lpStart : Void*
+    struct Anonymous_e__Union_
+    property lpcStart : Void*
+    property lpStart : Void*
+    def initialize(@lpcStart : Void*, @lpStart : Void*)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @uSize : LibC::UIntPtrT, @editable : Win32cr::Foundation::BOOL)
+    end
   end
 
   @[Extern]
-  record DELTA_OUTPUT,
-    lpStart : Void*,
-    uSize : LibC::UIntPtrT
+  struct DELTA_OUTPUT
+    property lpStart : Void*
+    property uSize : LibC::UIntPtrT
+    def initialize(@lpStart : Void*, @uSize : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DELTA_HASH,
-    hash_size : UInt32,
-    hash_value : UInt8[32]
+  struct DELTA_HASH
+    property hash_size : UInt32
+    property hash_value : UInt8[32]
+    def initialize(@hash_size : UInt32, @hash_value : UInt8[32])
+    end
+  end
 
   @[Extern]
-  record DELTA_HEADER_INFO,
-    file_type_set : Int64,
-    file_type : Int64,
-    flags : Int64,
-    target_size : LibC::UIntPtrT,
-    target_file_time : Win32cr::Foundation::FILETIME,
-    target_hash_alg_id : UInt32,
-    target_hash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH
+  struct DELTA_HEADER_INFO
+    property file_type_set : Int64
+    property file_type : Int64
+    property flags : Int64
+    property target_size : LibC::UIntPtrT
+    property target_file_time : Win32cr::Foundation::FILETIME
+    property target_hash_alg_id : UInt32
+    property target_hash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH
+    def initialize(@file_type_set : Int64, @file_type : Int64, @flags : Int64, @target_size : LibC::UIntPtrT, @target_file_time : Win32cr::Foundation::FILETIME, @target_hash_alg_id : UInt32, @target_hash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH)
+    end
+  end
 
   @[Extern]
-  record ACTIVATION_CONTEXT_QUERY_INDEX,
-    ulAssemblyIndex : UInt32,
-    ulFileIndexInAssembly : UInt32
+  struct ACTIVATION_CONTEXT_QUERY_INDEX
+    property ulAssemblyIndex : UInt32
+    property ulFileIndexInAssembly : UInt32
+    def initialize(@ulAssemblyIndex : UInt32, @ulFileIndexInAssembly : UInt32)
+    end
+  end
 
   @[Extern]
-  record ASSEMBLY_FILE_DETAILED_INFORMATION,
-    ulFlags : UInt32,
-    ulFilenameLength : UInt32,
-    ulPathLength : UInt32,
-    lpFileName : Win32cr::Foundation::PWSTR,
-    lpFilePath : Win32cr::Foundation::PWSTR
+  struct ASSEMBLY_FILE_DETAILED_INFORMATION
+    property ulFlags : UInt32
+    property ulFilenameLength : UInt32
+    property ulPathLength : UInt32
+    property lpFileName : Win32cr::Foundation::PWSTR
+    property lpFilePath : Win32cr::Foundation::PWSTR
+    def initialize(@ulFlags : UInt32, @ulFilenameLength : UInt32, @ulPathLength : UInt32, @lpFileName : Win32cr::Foundation::PWSTR, @lpFilePath : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record ACTIVATION_CONTEXT_ASSEMBLY_DETAILED_INFORMATION,
-    ulFlags : UInt32,
-    ulEncodedAssemblyIdentityLength : UInt32,
-    ulManifestPathType : UInt32,
-    ulManifestPathLength : UInt32,
-    liManifestLastWriteTime : Win32cr::Foundation::LARGE_INTEGER,
-    ulPolicyPathType : UInt32,
-    ulPolicyPathLength : UInt32,
-    liPolicyLastWriteTime : Win32cr::Foundation::LARGE_INTEGER,
-    ulMetadataSatelliteRosterIndex : UInt32,
-    ulManifestVersionMajor : UInt32,
-    ulManifestVersionMinor : UInt32,
-    ulPolicyVersionMajor : UInt32,
-    ulPolicyVersionMinor : UInt32,
-    ulAssemblyDirectoryNameLength : UInt32,
-    lpAssemblyEncodedAssemblyIdentity : Win32cr::Foundation::PWSTR,
-    lpAssemblyManifestPath : Win32cr::Foundation::PWSTR,
-    lpAssemblyPolicyPath : Win32cr::Foundation::PWSTR,
-    lpAssemblyDirectoryName : Win32cr::Foundation::PWSTR,
-    ulFileCount : UInt32
+  struct ACTIVATION_CONTEXT_ASSEMBLY_DETAILED_INFORMATION
+    property ulFlags : UInt32
+    property ulEncodedAssemblyIdentityLength : UInt32
+    property ulManifestPathType : UInt32
+    property ulManifestPathLength : UInt32
+    property liManifestLastWriteTime : Win32cr::Foundation::LARGE_INTEGER
+    property ulPolicyPathType : UInt32
+    property ulPolicyPathLength : UInt32
+    property liPolicyLastWriteTime : Win32cr::Foundation::LARGE_INTEGER
+    property ulMetadataSatelliteRosterIndex : UInt32
+    property ulManifestVersionMajor : UInt32
+    property ulManifestVersionMinor : UInt32
+    property ulPolicyVersionMajor : UInt32
+    property ulPolicyVersionMinor : UInt32
+    property ulAssemblyDirectoryNameLength : UInt32
+    property lpAssemblyEncodedAssemblyIdentity : Win32cr::Foundation::PWSTR
+    property lpAssemblyManifestPath : Win32cr::Foundation::PWSTR
+    property lpAssemblyPolicyPath : Win32cr::Foundation::PWSTR
+    property lpAssemblyDirectoryName : Win32cr::Foundation::PWSTR
+    property ulFileCount : UInt32
+    def initialize(@ulFlags : UInt32, @ulEncodedAssemblyIdentityLength : UInt32, @ulManifestPathType : UInt32, @ulManifestPathLength : UInt32, @liManifestLastWriteTime : Win32cr::Foundation::LARGE_INTEGER, @ulPolicyPathType : UInt32, @ulPolicyPathLength : UInt32, @liPolicyLastWriteTime : Win32cr::Foundation::LARGE_INTEGER, @ulMetadataSatelliteRosterIndex : UInt32, @ulManifestVersionMajor : UInt32, @ulManifestVersionMinor : UInt32, @ulPolicyVersionMajor : UInt32, @ulPolicyVersionMinor : UInt32, @ulAssemblyDirectoryNameLength : UInt32, @lpAssemblyEncodedAssemblyIdentity : Win32cr::Foundation::PWSTR, @lpAssemblyManifestPath : Win32cr::Foundation::PWSTR, @lpAssemblyPolicyPath : Win32cr::Foundation::PWSTR, @lpAssemblyDirectoryName : Win32cr::Foundation::PWSTR, @ulFileCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record ACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION,
-    ulFlags : UInt32,
-    run_level : Win32cr::System::ApplicationInstallationAndServicing::ACTCTX_REQUESTED_RUN_LEVEL,
-    ui_access : UInt32
+  struct ACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION
+    property ulFlags : UInt32
+    property run_level : Win32cr::System::ApplicationInstallationAndServicing::ACTCTX_REQUESTED_RUN_LEVEL
+    property ui_access : UInt32
+    def initialize(@ulFlags : UInt32, @run_level : Win32cr::System::ApplicationInstallationAndServicing::ACTCTX_REQUESTED_RUN_LEVEL, @ui_access : UInt32)
+    end
+  end
 
   @[Extern]
-  record COMPATIBILITY_CONTEXT_ELEMENT,
-    id : LibC::GUID,
-    type__ : Win32cr::System::ApplicationInstallationAndServicing::ACTCTX_COMPATIBILITY_ELEMENT_TYPE,
-    max_version_tested : UInt64
+  struct COMPATIBILITY_CONTEXT_ELEMENT
+    property id : LibC::GUID
+    property type__ : Win32cr::System::ApplicationInstallationAndServicing::ACTCTX_COMPATIBILITY_ELEMENT_TYPE
+    property max_version_tested : UInt64
+    def initialize(@id : LibC::GUID, @type__ : Win32cr::System::ApplicationInstallationAndServicing::ACTCTX_COMPATIBILITY_ELEMENT_TYPE, @max_version_tested : UInt64)
+    end
+  end
 
   @[Extern]
-  record ACTIVATION_CONTEXT_COMPATIBILITY_INFORMATION,
-    element_count : UInt32,
-    elements : Win32cr::System::ApplicationInstallationAndServicing::COMPATIBILITY_CONTEXT_ELEMENT*
+  struct ACTIVATION_CONTEXT_COMPATIBILITY_INFORMATION
+    property element_count : UInt32
+    property elements : Win32cr::System::ApplicationInstallationAndServicing::COMPATIBILITY_CONTEXT_ELEMENT*
+    def initialize(@element_count : UInt32, @elements : Win32cr::System::ApplicationInstallationAndServicing::COMPATIBILITY_CONTEXT_ELEMENT*)
+    end
+  end
 
   @[Extern]
-  record ACTIVATION_CONTEXT_DETAILED_INFORMATION,
-    dwFlags : UInt32,
-    ulFormatVersion : UInt32,
-    ulAssemblyCount : UInt32,
-    ulRootManifestPathType : UInt32,
-    ulRootManifestPathChars : UInt32,
-    ulRootConfigurationPathType : UInt32,
-    ulRootConfigurationPathChars : UInt32,
-    ulAppDirPathType : UInt32,
-    ulAppDirPathChars : UInt32,
-    lpRootManifestPath : Win32cr::Foundation::PWSTR,
-    lpRootConfigurationPath : Win32cr::Foundation::PWSTR,
-    lpAppDirPath : Win32cr::Foundation::PWSTR
+  struct ACTIVATION_CONTEXT_DETAILED_INFORMATION
+    property dwFlags : UInt32
+    property ulFormatVersion : UInt32
+    property ulAssemblyCount : UInt32
+    property ulRootManifestPathType : UInt32
+    property ulRootManifestPathChars : UInt32
+    property ulRootConfigurationPathType : UInt32
+    property ulRootConfigurationPathChars : UInt32
+    property ulAppDirPathType : UInt32
+    property ulAppDirPathChars : UInt32
+    property lpRootManifestPath : Win32cr::Foundation::PWSTR
+    property lpRootConfigurationPath : Win32cr::Foundation::PWSTR
+    property lpAppDirPath : Win32cr::Foundation::PWSTR
+    def initialize(@dwFlags : UInt32, @ulFormatVersion : UInt32, @ulAssemblyCount : UInt32, @ulRootManifestPathType : UInt32, @ulRootManifestPathChars : UInt32, @ulRootConfigurationPathType : UInt32, @ulRootConfigurationPathChars : UInt32, @ulAppDirPathType : UInt32, @ulAppDirPathChars : UInt32, @lpRootManifestPath : Win32cr::Foundation::PWSTR, @lpRootConfigurationPath : Win32cr::Foundation::PWSTR, @lpAppDirPath : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record ACTCTXA,
-    cbSize : UInt32,
-    dwFlags : UInt32,
-    lpSource : Win32cr::Foundation::PSTR,
-    wProcessorArchitecture : UInt16,
-    wLangId : UInt16,
-    lpAssemblyDirectory : Win32cr::Foundation::PSTR,
-    lpResourceName : Win32cr::Foundation::PSTR,
-    lpApplicationName : Win32cr::Foundation::PSTR,
-    hModule : Win32cr::Foundation::HINSTANCE
+  struct ACTCTXA
+    property cbSize : UInt32
+    property dwFlags : UInt32
+    property lpSource : Win32cr::Foundation::PSTR
+    property wProcessorArchitecture : UInt16
+    property wLangId : UInt16
+    property lpAssemblyDirectory : Win32cr::Foundation::PSTR
+    property lpResourceName : Win32cr::Foundation::PSTR
+    property lpApplicationName : Win32cr::Foundation::PSTR
+    property hModule : Win32cr::Foundation::HINSTANCE
+    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @lpSource : Win32cr::Foundation::PSTR, @wProcessorArchitecture : UInt16, @wLangId : UInt16, @lpAssemblyDirectory : Win32cr::Foundation::PSTR, @lpResourceName : Win32cr::Foundation::PSTR, @lpApplicationName : Win32cr::Foundation::PSTR, @hModule : Win32cr::Foundation::HINSTANCE)
+    end
+  end
 
   @[Extern]
-  record ACTCTXW,
-    cbSize : UInt32,
-    dwFlags : UInt32,
-    lpSource : Win32cr::Foundation::PWSTR,
-    wProcessorArchitecture : UInt16,
-    wLangId : UInt16,
-    lpAssemblyDirectory : Win32cr::Foundation::PWSTR,
-    lpResourceName : Win32cr::Foundation::PWSTR,
-    lpApplicationName : Win32cr::Foundation::PWSTR,
-    hModule : Win32cr::Foundation::HINSTANCE
+  struct ACTCTXW
+    property cbSize : UInt32
+    property dwFlags : UInt32
+    property lpSource : Win32cr::Foundation::PWSTR
+    property wProcessorArchitecture : UInt16
+    property wLangId : UInt16
+    property lpAssemblyDirectory : Win32cr::Foundation::PWSTR
+    property lpResourceName : Win32cr::Foundation::PWSTR
+    property lpApplicationName : Win32cr::Foundation::PWSTR
+    property hModule : Win32cr::Foundation::HINSTANCE
+    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @lpSource : Win32cr::Foundation::PWSTR, @wProcessorArchitecture : UInt16, @wLangId : UInt16, @lpAssemblyDirectory : Win32cr::Foundation::PWSTR, @lpResourceName : Win32cr::Foundation::PWSTR, @lpApplicationName : Win32cr::Foundation::PWSTR, @hModule : Win32cr::Foundation::HINSTANCE)
+    end
+  end
 
   @[Extern]
-  record ACTCTX_SECTION_KEYED_DATA,
-    cbSize : UInt32,
-    ulDataFormatVersion : UInt32,
-    lpData : Void*,
-    ulLength : UInt32,
-    lpSectionGlobalData : Void*,
-    ulSectionGlobalDataLength : UInt32,
-    lpSectionBase : Void*,
-    ulSectionTotalLength : UInt32,
-    hActCtx : Win32cr::Foundation::HANDLE,
-    ulAssemblyRosterIndex : UInt32,
-    ulFlags : UInt32,
-    assembly_metadata : Win32cr::System::WindowsProgramming::ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA
+  struct ACTCTX_SECTION_KEYED_DATA
+    property cbSize : UInt32
+    property ulDataFormatVersion : UInt32
+    property lpData : Void*
+    property ulLength : UInt32
+    property lpSectionGlobalData : Void*
+    property ulSectionGlobalDataLength : UInt32
+    property lpSectionBase : Void*
+    property ulSectionTotalLength : UInt32
+    property hActCtx : Win32cr::Foundation::HANDLE
+    property ulAssemblyRosterIndex : UInt32
+    property ulFlags : UInt32
+    property assembly_metadata : Win32cr::System::WindowsProgramming::ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA
+    def initialize(@cbSize : UInt32, @ulDataFormatVersion : UInt32, @lpData : Void*, @ulLength : UInt32, @lpSectionGlobalData : Void*, @ulSectionGlobalDataLength : UInt32, @lpSectionBase : Void*, @ulSectionTotalLength : UInt32, @hActCtx : Win32cr::Foundation::HANDLE, @ulAssemblyRosterIndex : UInt32, @ulFlags : UInt32, @assembly_metadata : Win32cr::System::WindowsProgramming::ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA)
+    end
+  end
 
   @[Extern]
   record IValidateVtbl,
@@ -1887,7 +2015,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("e482e5c6-e31e-4143-a2e6-dbc3d8e4b8d3")]
   record IValidate, lpVtbl : IValidateVtbl* do
     GUID = LibC::GUID.new(0xe482e5c6_u32, 0xe31e_u16, 0x4143_u16, StaticArray[0xa2_u8, 0xe6_u8, 0xdb_u8, 0xc3_u8, 0xd8_u8, 0xe4_u8, 0xb8_u8, 0xd3_u8])
     def query_interface(this : IValidate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1935,7 +2062,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("0adda826-2c26-11d2-ad65-00a0c9af11a6")]
   record IEnumMsmString, lpVtbl : IEnumMsmStringVtbl* do
     GUID = LibC::GUID.new(0xadda826_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IEnumMsmString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1977,7 +2103,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("0adda827-2c26-11d2-ad65-00a0c9af11a6")]
   record IMsmStrings, lpVtbl : IMsmStringsVtbl* do
     GUID = LibC::GUID.new(0xadda827_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IMsmStrings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2032,7 +2157,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("0adda828-2c26-11d2-ad65-00a0c9af11a6")]
   record IMsmError, lpVtbl : IMsmErrorVtbl* do
     GUID = LibC::GUID.new(0xadda828_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IMsmError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2092,7 +2216,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("0adda829-2c26-11d2-ad65-00a0c9af11a6")]
   record IEnumMsmError, lpVtbl : IEnumMsmErrorVtbl* do
     GUID = LibC::GUID.new(0xadda829_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IEnumMsmError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2134,7 +2257,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("0adda82a-2c26-11d2-ad65-00a0c9af11a6")]
   record IMsmErrors, lpVtbl : IMsmErrorsVtbl* do
     GUID = LibC::GUID.new(0xadda82a_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IMsmErrors*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2185,7 +2307,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("0adda82b-2c26-11d2-ad65-00a0c9af11a6")]
   record IMsmDependency, lpVtbl : IMsmDependencyVtbl* do
     GUID = LibC::GUID.new(0xadda82b_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IMsmDependency*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2233,7 +2354,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("0adda82c-2c26-11d2-ad65-00a0c9af11a6")]
   record IEnumMsmDependency, lpVtbl : IEnumMsmDependencyVtbl* do
     GUID = LibC::GUID.new(0xadda82c_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IEnumMsmDependency*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2275,7 +2395,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("0adda82d-2c26-11d2-ad65-00a0c9af11a6")]
   record IMsmDependencies, lpVtbl : IMsmDependenciesVtbl* do
     GUID = LibC::GUID.new(0xadda82d_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IMsmDependencies*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2336,7 +2455,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("0adda82e-2c26-11d2-ad65-00a0c9af11a6")]
   record IMsmMerge, lpVtbl : IMsmMergeVtbl* do
     GUID = LibC::GUID.new(0xadda82e_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IMsmMerge*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2415,7 +2533,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("7041ae26-2d78-11d2-888a-00a0c981b015")]
   record IMsmGetFiles, lpVtbl : IMsmGetFilesVtbl* do
     GUID = LibC::GUID.new(0x7041ae26_u32, 0x2d78_u16, 0x11d2_u16, StaticArray[0x88_u8, 0x8a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x81_u8, 0xb0_u8, 0x15_u8])
     def query_interface(this : IMsmGetFiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2462,7 +2579,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("cd193bc0-b4bc-11d2-9833-00c04fc31d2e")]
   record IAssemblyName, lpVtbl : IAssemblyNameVtbl* do
     GUID = LibC::GUID.new(0xcd193bc0_u32, 0xb4bc_u16, 0x11d2_u16, StaticArray[0x98_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1d_u8, 0x2e_u8])
     def query_interface(this : IAssemblyName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2515,7 +2631,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("9e3aaeb4-d1cd-11d2-bab9-00c04f8eceae")]
   record IAssemblyCacheItem, lpVtbl : IAssemblyCacheItemVtbl* do
     GUID = LibC::GUID.new(0x9e3aaeb4_u32, 0xd1cd_u16, 0x11d2_u16, StaticArray[0xba_u8, 0xb9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xce_u8, 0xae_u8])
     def query_interface(this : IAssemblyCacheItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2552,7 +2667,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("e707dcde-d1cd-11d2-bab9-00c04f8eceae")]
   record IAssemblyCache, lpVtbl : IAssemblyCacheVtbl* do
     GUID = LibC::GUID.new(0xe707dcde_u32, 0xd1cd_u16, 0x11d2_u16, StaticArray[0xba_u8, 0xb9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xce_u8, 0xae_u8])
     def query_interface(this : IAssemblyCache*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2645,7 +2759,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("50afb58a-438c-4088-9789-f8c4899829c7")]
   record IPMApplicationInfo, lpVtbl : IPMApplicationInfoVtbl* do
     GUID = LibC::GUID.new(0x50afb58a_u32, 0x438c_u16, 0x4088_u16, StaticArray[0x97_u8, 0x89_u8, 0xf8_u8, 0xc4_u8, 0x89_u8, 0x98_u8, 0x29_u8, 0xc7_u8])
     def query_interface(this : IPMApplicationInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2836,7 +2949,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("6c2b8017-1efa-42a7-86c0-6d4b640bf528")]
   record IPMTilePropertyInfo, lpVtbl : IPMTilePropertyInfoVtbl* do
     GUID = LibC::GUID.new(0x6c2b8017_u32, 0x1efa_u16, 0x42a7_u16, StaticArray[0x86_u8, 0xc0_u8, 0x6d_u8, 0x4b_u8, 0x64_u8, 0xb_u8, 0xf5_u8, 0x28_u8])
     def query_interface(this : IPMTilePropertyInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2869,7 +2981,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("cc4cd629-9047-4250-aac8-930e47812421")]
   record IPMTilePropertyEnumerator, lpVtbl : IPMTilePropertyEnumeratorVtbl* do
     GUID = LibC::GUID.new(0xcc4cd629_u32, 0x9047_u16, 0x4250_u16, StaticArray[0xaa_u8, 0xc8_u8, 0x93_u8, 0xe_u8, 0x47_u8, 0x81_u8, 0x24_u8, 0x21_u8])
     def query_interface(this : IPMTilePropertyEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2919,7 +3030,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("d1604833-2b08-4001-82cd-183ad734f752")]
   record IPMTileInfo, lpVtbl : IPMTileInfoVtbl* do
     GUID = LibC::GUID.new(0xd1604833_u32, 0x2b08_u16, 0x4001_u16, StaticArray[0x82_u8, 0xcd_u8, 0x18_u8, 0x3a_u8, 0xd7_u8, 0x34_u8, 0xf7_u8, 0x52_u8])
     def query_interface(this : IPMTileInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3015,7 +3125,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("ded83065-e462-4b2c-acb5-e39cea61c874")]
   record IPMTileInfoEnumerator, lpVtbl : IPMTileInfoEnumeratorVtbl* do
     GUID = LibC::GUID.new(0xded83065_u32, 0xe462_u16, 0x4b2c_u16, StaticArray[0xac_u8, 0xb5_u8, 0xe3_u8, 0x9c_u8, 0xea_u8, 0x61_u8, 0xc8_u8, 0x74_u8])
     def query_interface(this : IPMTileInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3042,7 +3151,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("0ec42a96-4d46-4dc6-a3d9-a7acaac0f5fa")]
   record IPMApplicationInfoEnumerator, lpVtbl : IPMApplicationInfoEnumeratorVtbl* do
     GUID = LibC::GUID.new(0xec42a96_u32, 0x4d46_u16, 0x4dc6_u16, StaticArray[0xa3_u8, 0xd9_u8, 0xa7_u8, 0xac_u8, 0xaa_u8, 0xc0_u8, 0xf5_u8, 0xfa_u8])
     def query_interface(this : IPMApplicationInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3092,7 +3200,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("6009a81f-4710-4697-b5f6-2208f6057b8e")]
   record IPMLiveTileJobInfo, lpVtbl : IPMLiveTileJobInfoVtbl* do
     GUID = LibC::GUID.new(0x6009a81f_u32, 0x4710_u16, 0x4697_u16, StaticArray[0xb5_u8, 0xf6_u8, 0x22_u8, 0x8_u8, 0xf6_u8, 0x5_u8, 0x7b_u8, 0x8e_u8])
     def query_interface(this : IPMLiveTileJobInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3188,7 +3295,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("bc042582-9415-4f36-9f99-06f104c07c03")]
   record IPMLiveTileJobInfoEnumerator, lpVtbl : IPMLiveTileJobInfoEnumeratorVtbl* do
     GUID = LibC::GUID.new(0xbc042582_u32, 0x9415_u16, 0x4f36_u16, StaticArray[0x9f_u8, 0x99_u8, 0x6_u8, 0xf1_u8, 0x4_u8, 0xc0_u8, 0x7c_u8, 0x3_u8])
     def query_interface(this : IPMLiveTileJobInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3249,7 +3355,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("35f785fa-1979-4a8b-bc8f-fd70eb0d1544")]
   record IPMDeploymentManager, lpVtbl : IPMDeploymentManagerVtbl* do
     GUID = LibC::GUID.new(0x35f785fa_u32, 0x1979_u16, 0x4a8b_u16, StaticArray[0xbc_u8, 0x8f_u8, 0xfd_u8, 0x70_u8, 0xeb_u8, 0xd_u8, 0x15_u8, 0x44_u8])
     def query_interface(this : IPMDeploymentManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3395,7 +3500,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("698d57c2-292d-4cf3-b73c-d95a6922ed9a")]
   record IPMEnumerationManager, lpVtbl : IPMEnumerationManagerVtbl* do
     GUID = LibC::GUID.new(0x698d57c2_u32, 0x292d_u16, 0x4cf3_u16, StaticArray[0xb7_u8, 0x3c_u8, 0xd9_u8, 0x5a_u8, 0x69_u8, 0x22_u8, 0xed_u8, 0x9a_u8])
     def query_interface(this : IPMEnumerationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3493,7 +3597,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("bf1d8c33-1bf5-4ee0-b549-6b9dd3834942")]
   record IPMTaskInfo, lpVtbl : IPMTaskInfoVtbl* do
     GUID = LibC::GUID.new(0xbf1d8c33_u32, 0x1bf5_u16, 0x4ee0_u16, StaticArray[0xb5_u8, 0x49_u8, 0x6b_u8, 0x9d_u8, 0xd3_u8, 0x83_u8, 0x49_u8, 0x42_u8])
     def query_interface(this : IPMTaskInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3580,7 +3683,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("0630b0f8-0bbc-4821-be74-c7995166ed2a")]
   record IPMTaskInfoEnumerator, lpVtbl : IPMTaskInfoEnumeratorVtbl* do
     GUID = LibC::GUID.new(0x630b0f8_u32, 0xbbc_u16, 0x4821_u16, StaticArray[0xbe_u8, 0x74_u8, 0xc7_u8, 0x99_u8, 0x51_u8, 0x66_u8, 0xed_u8, 0x2a_u8])
     def query_interface(this : IPMTaskInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3612,7 +3714,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("49acde79-9788-4d0a-8aa0-1746afdb9e9d")]
   record IPMExtensionInfo, lpVtbl : IPMExtensionInfoVtbl* do
     GUID = LibC::GUID.new(0x49acde79_u32, 0x9788_u16, 0x4d0a_u16, StaticArray[0x8a_u8, 0xa0_u8, 0x17_u8, 0x46_u8, 0xaf_u8, 0xdb_u8, 0x9e_u8, 0x9d_u8])
     def query_interface(this : IPMExtensionInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3660,7 +3761,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("6b87cb6c-0b88-4989-a4ec-033714f710d4")]
   record IPMExtensionFileExtensionInfo, lpVtbl : IPMExtensionFileExtensionInfoVtbl* do
     GUID = LibC::GUID.new(0x6b87cb6c_u32, 0xb88_u16, 0x4989_u16, StaticArray[0xa4_u8, 0xec_u8, 0x3_u8, 0x37_u8, 0x14_u8, 0xf7_u8, 0x10_u8, 0xd4_u8])
     def query_interface(this : IPMExtensionFileExtensionInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3706,7 +3806,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("1e3fa036-51eb-4453-baff-b8d8e4b46c8e")]
   record IPMExtensionProtocolInfo, lpVtbl : IPMExtensionProtocolInfoVtbl* do
     GUID = LibC::GUID.new(0x1e3fa036_u32, 0x51eb_u16, 0x4453_u16, StaticArray[0xba_u8, 0xff_u8, 0xb8_u8, 0xd8_u8, 0xe4_u8, 0xb4_u8, 0x6c_u8, 0x8e_u8])
     def query_interface(this : IPMExtensionProtocolInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3738,7 +3837,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("5471f48b-c65c-4656-8c70-242e31195fea")]
   record IPMExtensionShareTargetInfo, lpVtbl : IPMExtensionShareTargetInfoVtbl* do
     GUID = LibC::GUID.new(0x5471f48b_u32, 0xc65c_u16, 0x4656_u16, StaticArray[0x8c_u8, 0x70_u8, 0x24_u8, 0x2e_u8, 0x31_u8, 0x19_u8, 0x5f_u8, 0xea_u8])
     def query_interface(this : IPMExtensionShareTargetInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3771,7 +3869,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("e5666373-7ba1-467c-b819-b175db1c295b")]
   record IPMExtensionContractInfo, lpVtbl : IPMExtensionContractInfoVtbl* do
     GUID = LibC::GUID.new(0xe5666373_u32, 0x7ba1_u16, 0x467c_u16, StaticArray[0xb8_u8, 0x19_u8, 0xb1_u8, 0x75_u8, 0xdb_u8, 0x1c_u8, 0x29_u8, 0x5b_u8])
     def query_interface(this : IPMExtensionContractInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3799,7 +3896,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("6dc91d25-9606-420c-9a78-e034a3418345")]
   record IPMExtensionFileOpenPickerInfo, lpVtbl : IPMExtensionFileOpenPickerInfoVtbl* do
     GUID = LibC::GUID.new(0x6dc91d25_u32, 0x9606_u16, 0x420c_u16, StaticArray[0x9a_u8, 0x78_u8, 0xe0_u8, 0x34_u8, 0xa3_u8, 0x41_u8, 0x83_u8, 0x45_u8])
     def query_interface(this : IPMExtensionFileOpenPickerInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3830,7 +3926,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("38005cba-f81a-493e-a0f8-922c8680da43")]
   record IPMExtensionFileSavePickerInfo, lpVtbl : IPMExtensionFileSavePickerInfoVtbl* do
     GUID = LibC::GUID.new(0x38005cba_u32, 0xf81a_u16, 0x493e_u16, StaticArray[0xa0_u8, 0xf8_u8, 0x92_u8, 0x2c_u8, 0x86_u8, 0x80_u8, 0xda_u8, 0x43_u8])
     def query_interface(this : IPMExtensionFileSavePickerInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3860,7 +3955,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("e2d77509-4e58-4ba9-af7e-b642e370e1b0")]
   record IPMExtensionCachedFileUpdaterInfo, lpVtbl : IPMExtensionCachedFileUpdaterInfoVtbl* do
     GUID = LibC::GUID.new(0xe2d77509_u32, 0x4e58_u16, 0x4ba9_u16, StaticArray[0xaf_u8, 0x7e_u8, 0xb6_u8, 0x42_u8, 0xe3_u8, 0x70_u8, 0xe1_u8, 0xb0_u8])
     def query_interface(this : IPMExtensionCachedFileUpdaterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3887,7 +3981,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("403b9e82-1171-4573-8e6f-6f33f39b83dd")]
   record IPMExtensionInfoEnumerator, lpVtbl : IPMExtensionInfoEnumeratorVtbl* do
     GUID = LibC::GUID.new(0x403b9e82_u32, 0x1171_u16, 0x4573_u16, StaticArray[0x8e_u8, 0x6f_u8, 0x6f_u8, 0x33_u8, 0xf3_u8, 0x9b_u8, 0x83_u8, 0xdd_u8])
     def query_interface(this : IPMExtensionInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3927,7 +4020,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("3a8b46da-928c-4879-998c-09dc96f3d490")]
   record IPMBackgroundServiceAgentInfo, lpVtbl : IPMBackgroundServiceAgentInfoVtbl* do
     GUID = LibC::GUID.new(0x3a8b46da_u32, 0x928c_u16, 0x4879_u16, StaticArray[0x99_u8, 0x8c_u8, 0x9_u8, 0xdc_u8, 0x96_u8, 0xf3_u8, 0xd4_u8, 0x90_u8])
     def query_interface(this : IPMBackgroundServiceAgentInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3998,7 +4090,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("7dd4531b-d3bf-4b6b-94f3-69c098b1497d")]
   record IPMBackgroundWorkerInfo, lpVtbl : IPMBackgroundWorkerInfoVtbl* do
     GUID = LibC::GUID.new(0x7dd4531b_u32, 0xd3bf_u16, 0x4b6b_u16, StaticArray[0x94_u8, 0xf3_u8, 0x69_u8, 0xc0_u8, 0x98_u8, 0xb1_u8, 0x49_u8, 0x7d_u8])
     def query_interface(this : IPMBackgroundWorkerInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4040,7 +4131,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("18eb2072-ab56-43b3-872c-beafb7a6b391")]
   record IPMBackgroundServiceAgentInfoEnumerator, lpVtbl : IPMBackgroundServiceAgentInfoEnumeratorVtbl* do
     GUID = LibC::GUID.new(0x18eb2072_u32, 0xab56_u16, 0x43b3_u16, StaticArray[0x87_u8, 0x2c_u8, 0xbe_u8, 0xaf_u8, 0xb7_u8, 0xa6_u8, 0xb3_u8, 0x91_u8])
     def query_interface(this : IPMBackgroundServiceAgentInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4067,7 +4157,6 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  #@[Com("87f479f8-90d8-4ec7-92b9-72787e2f636b")]
   record IPMBackgroundWorkerInfoEnumerator, lpVtbl : IPMBackgroundWorkerInfoEnumeratorVtbl* do
     GUID = LibC::GUID.new(0x87f479f8_u32, 0x90d8_u16, 0x4ec7_u16, StaticArray[0x92_u8, 0xb9_u8, 0x72_u8, 0x78_u8, 0x7e_u8, 0x2f_u8, 0x63_u8, 0x6b_u8])
     def query_interface(this : IPMBackgroundWorkerInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

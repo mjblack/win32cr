@@ -31,103 +31,103 @@ module Win32cr::Devices::AllJoyn
   alias Alljoyn_sessionlistener = LibC::IntPtrT
   alias Alljoyn_sessionopts = LibC::IntPtrT
   alias Alljoyn_sessionportlistener = LibC::IntPtrT
-  alias Alljoyn_applicationstatelistener_state_ptr = Proc(Int8*, Int8*, Win32cr::Devices::AllJoyn::Alljoyn_applicationstate, Void*, Void)*
+  alias Alljoyn_applicationstatelistener_state_ptr = Proc(Int8*, Int8*, Win32cr::Devices::AllJoyn::Alljoyn_applicationstate, Void*, Void)
 
-  alias Alljoyn_keystorelistener_loadrequest_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener, Win32cr::Devices::AllJoyn::Alljoyn_keystore, Win32cr::Devices::AllJoyn::QStatus)*
+  alias Alljoyn_keystorelistener_loadrequest_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener, Win32cr::Devices::AllJoyn::Alljoyn_keystore, Win32cr::Devices::AllJoyn::QStatus)
 
-  alias Alljoyn_keystorelistener_storerequest_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener, Win32cr::Devices::AllJoyn::Alljoyn_keystore, Win32cr::Devices::AllJoyn::QStatus)*
+  alias Alljoyn_keystorelistener_storerequest_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener, Win32cr::Devices::AllJoyn::Alljoyn_keystore, Win32cr::Devices::AllJoyn::QStatus)
 
-  alias Alljoyn_keystorelistener_acquireexclusivelock_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener, Win32cr::Devices::AllJoyn::QStatus)*
+  alias Alljoyn_keystorelistener_acquireexclusivelock_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener, Win32cr::Devices::AllJoyn::QStatus)
 
-  alias Alljoyn_keystorelistener_releaseexclusivelock_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener, Void)*
+  alias Alljoyn_keystorelistener_releaseexclusivelock_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener, Void)
 
-  alias Alljoyn_authlistener_requestcredentials_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt16, Win32cr::Foundation::PSTR, UInt16, Win32cr::Devices::AllJoyn::Alljoyn_credentials, Int32)*
+  alias Alljoyn_authlistener_requestcredentials_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt16, Win32cr::Foundation::PSTR, UInt16, Win32cr::Devices::AllJoyn::Alljoyn_credentials, Int32)
 
-  alias Alljoyn_authlistener_requestcredentialsasync_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_authlistener, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt16, Win32cr::Foundation::PSTR, UInt16, Void*, Win32cr::Devices::AllJoyn::QStatus)*
+  alias Alljoyn_authlistener_requestcredentialsasync_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_authlistener, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt16, Win32cr::Foundation::PSTR, UInt16, Void*, Win32cr::Devices::AllJoyn::QStatus)
 
-  alias Alljoyn_authlistener_verifycredentials_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_credentials, Int32)*
+  alias Alljoyn_authlistener_verifycredentials_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_credentials, Int32)
 
-  alias Alljoyn_authlistener_verifycredentialsasync_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_authlistener, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_credentials, Void*, Win32cr::Devices::AllJoyn::QStatus)*
+  alias Alljoyn_authlistener_verifycredentialsasync_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_authlistener, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_credentials, Void*, Win32cr::Devices::AllJoyn::QStatus)
 
-  alias Alljoyn_authlistener_securityviolation_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::QStatus, Win32cr::Devices::AllJoyn::Alljoyn_message, Void)*
+  alias Alljoyn_authlistener_securityviolation_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::QStatus, Win32cr::Devices::AllJoyn::Alljoyn_message, Void)
 
-  alias Alljoyn_authlistener_authenticationcomplete_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Int32, Void)*
+  alias Alljoyn_authlistener_authenticationcomplete_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Int32, Void)
 
-  alias Alljoyn_buslistener_listener_registered_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_busattachment, Void)*
+  alias Alljoyn_buslistener_listener_registered_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_busattachment, Void)
 
-  alias Alljoyn_buslistener_listener_unregistered_ptr = Proc(Void*, Void)*
+  alias Alljoyn_buslistener_listener_unregistered_ptr = Proc(Void*, Void)
 
-  alias Alljoyn_buslistener_found_advertised_name_ptr = Proc(Void*, Win32cr::Foundation::PSTR, UInt16, Win32cr::Foundation::PSTR, Void)*
+  alias Alljoyn_buslistener_found_advertised_name_ptr = Proc(Void*, Win32cr::Foundation::PSTR, UInt16, Win32cr::Foundation::PSTR, Void)
 
-  alias Alljoyn_buslistener_lost_advertised_name_ptr = Proc(Void*, Win32cr::Foundation::PSTR, UInt16, Win32cr::Foundation::PSTR, Void)*
+  alias Alljoyn_buslistener_lost_advertised_name_ptr = Proc(Void*, Win32cr::Foundation::PSTR, UInt16, Win32cr::Foundation::PSTR, Void)
 
-  alias Alljoyn_buslistener_name_owner_changed_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void)*
+  alias Alljoyn_buslistener_name_owner_changed_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void)
 
-  alias Alljoyn_buslistener_bus_stopping_ptr = Proc(Void*, Void)*
+  alias Alljoyn_buslistener_bus_stopping_ptr = Proc(Void*, Void)
 
-  alias Alljoyn_buslistener_bus_disconnected_ptr = Proc(Void*, Void)*
+  alias Alljoyn_buslistener_bus_disconnected_ptr = Proc(Void*, Void)
 
-  alias Alljoyn_buslistener_bus_prop_changed_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Void)*
+  alias Alljoyn_buslistener_bus_prop_changed_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Void)
 
-  alias Alljoyn_interfacedescription_translation_callback_ptr = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR)*
+  alias Alljoyn_interfacedescription_translation_callback_ptr = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR)
 
-  alias Alljoyn_messagereceiver_methodhandler_ptr = Proc(Win32cr::Devices::AllJoyn::Alljoyn_busobject, Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member*, Win32cr::Devices::AllJoyn::Alljoyn_message, Void)*
+  alias Alljoyn_messagereceiver_methodhandler_ptr = Proc(Win32cr::Devices::AllJoyn::Alljoyn_busobject, Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member*, Win32cr::Devices::AllJoyn::Alljoyn_message, Void)
 
-  alias Alljoyn_messagereceiver_replyhandler_ptr = Proc(Win32cr::Devices::AllJoyn::Alljoyn_message, Void*, Void)*
+  alias Alljoyn_messagereceiver_replyhandler_ptr = Proc(Win32cr::Devices::AllJoyn::Alljoyn_message, Void*, Void)
 
-  alias Alljoyn_messagereceiver_signalhandler_ptr = Proc(Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member*, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_message, Void)*
+  alias Alljoyn_messagereceiver_signalhandler_ptr = Proc(Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member*, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_message, Void)
 
-  alias Alljoyn_busobject_prop_get_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Win32cr::Devices::AllJoyn::QStatus)*
+  alias Alljoyn_busobject_prop_get_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Win32cr::Devices::AllJoyn::QStatus)
 
-  alias Alljoyn_busobject_prop_set_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Win32cr::Devices::AllJoyn::QStatus)*
+  alias Alljoyn_busobject_prop_set_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Win32cr::Devices::AllJoyn::QStatus)
 
-  alias Alljoyn_busobject_object_registration_ptr = Proc(Void*, Void)*
+  alias Alljoyn_busobject_object_registration_ptr = Proc(Void*, Void)
 
-  alias Alljoyn_proxybusobject_listener_introspectcb_ptr = Proc(Win32cr::Devices::AllJoyn::QStatus, Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, Void*, Void)*
+  alias Alljoyn_proxybusobject_listener_introspectcb_ptr = Proc(Win32cr::Devices::AllJoyn::QStatus, Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, Void*, Void)
 
-  alias Alljoyn_proxybusobject_listener_getpropertycb_ptr = Proc(Win32cr::Devices::AllJoyn::QStatus, Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Void*, Void)*
+  alias Alljoyn_proxybusobject_listener_getpropertycb_ptr = Proc(Win32cr::Devices::AllJoyn::QStatus, Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Void*, Void)
 
-  alias Alljoyn_proxybusobject_listener_getallpropertiescb_ptr = Proc(Win32cr::Devices::AllJoyn::QStatus, Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Void*, Void)*
+  alias Alljoyn_proxybusobject_listener_getallpropertiescb_ptr = Proc(Win32cr::Devices::AllJoyn::QStatus, Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Void*, Void)
 
-  alias Alljoyn_proxybusobject_listener_setpropertycb_ptr = Proc(Win32cr::Devices::AllJoyn::QStatus, Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, Void*, Void)*
+  alias Alljoyn_proxybusobject_listener_setpropertycb_ptr = Proc(Win32cr::Devices::AllJoyn::QStatus, Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, Void*, Void)
 
-  alias Alljoyn_proxybusobject_listener_propertieschanged_ptr = Proc(Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Void*, Void)*
+  alias Alljoyn_proxybusobject_listener_propertieschanged_ptr = Proc(Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Void*, Void)
 
-  alias Alljoyn_permissionconfigurationlistener_factoryreset_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::QStatus)*
+  alias Alljoyn_permissionconfigurationlistener_factoryreset_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::QStatus)
 
-  alias Alljoyn_permissionconfigurationlistener_policychanged_ptr = Proc(Void*, Void)*
+  alias Alljoyn_permissionconfigurationlistener_policychanged_ptr = Proc(Void*, Void)
 
-  alias Alljoyn_permissionconfigurationlistener_startmanagement_ptr = Proc(Void*, Void)*
+  alias Alljoyn_permissionconfigurationlistener_startmanagement_ptr = Proc(Void*, Void)
 
-  alias Alljoyn_permissionconfigurationlistener_endmanagement_ptr = Proc(Void*, Void)*
+  alias Alljoyn_permissionconfigurationlistener_endmanagement_ptr = Proc(Void*, Void)
 
-  alias Alljoyn_sessionlistener_sessionlost_ptr = Proc(Void*, UInt32, Win32cr::Devices::AllJoyn::Alljoyn_sessionlostreason, Void)*
+  alias Alljoyn_sessionlistener_sessionlost_ptr = Proc(Void*, UInt32, Win32cr::Devices::AllJoyn::Alljoyn_sessionlostreason, Void)
 
-  alias Alljoyn_sessionlistener_sessionmemberadded_ptr = Proc(Void*, UInt32, Win32cr::Foundation::PSTR, Void)*
+  alias Alljoyn_sessionlistener_sessionmemberadded_ptr = Proc(Void*, UInt32, Win32cr::Foundation::PSTR, Void)
 
-  alias Alljoyn_sessionlistener_sessionmemberremoved_ptr = Proc(Void*, UInt32, Win32cr::Foundation::PSTR, Void)*
+  alias Alljoyn_sessionlistener_sessionmemberremoved_ptr = Proc(Void*, UInt32, Win32cr::Foundation::PSTR, Void)
 
-  alias Alljoyn_sessionportlistener_acceptsessionjoiner_ptr = Proc(Void*, UInt16, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_sessionopts, Int32)*
+  alias Alljoyn_sessionportlistener_acceptsessionjoiner_ptr = Proc(Void*, UInt16, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::Alljoyn_sessionopts, Int32)
 
-  alias Alljoyn_sessionportlistener_sessionjoined_ptr = Proc(Void*, UInt16, UInt32, Win32cr::Foundation::PSTR, Void)*
+  alias Alljoyn_sessionportlistener_sessionjoined_ptr = Proc(Void*, UInt16, UInt32, Win32cr::Foundation::PSTR, Void)
 
-  alias Alljoyn_about_announced_ptr = Proc(Void*, Win32cr::Foundation::PSTR, UInt16, UInt16, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Void)*
+  alias Alljoyn_about_announced_ptr = Proc(Void*, Win32cr::Foundation::PSTR, UInt16, UInt16, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Void)
 
-  alias Alljoyn_busattachment_joinsessioncb_ptr = Proc(Win32cr::Devices::AllJoyn::QStatus, UInt32, Win32cr::Devices::AllJoyn::Alljoyn_sessionopts, Void*, Void)*
+  alias Alljoyn_busattachment_joinsessioncb_ptr = Proc(Win32cr::Devices::AllJoyn::QStatus, UInt32, Win32cr::Devices::AllJoyn::Alljoyn_sessionopts, Void*, Void)
 
-  alias Alljoyn_busattachment_setlinktimeoutcb_ptr = Proc(Win32cr::Devices::AllJoyn::QStatus, UInt32, Void*, Void)*
+  alias Alljoyn_busattachment_setlinktimeoutcb_ptr = Proc(Win32cr::Devices::AllJoyn::QStatus, UInt32, Void*, Void)
 
-  alias Alljoyn_aboutdatalistener_getaboutdata_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::QStatus)*
+  alias Alljoyn_aboutdatalistener_getaboutdata_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Win32cr::Foundation::PSTR, Win32cr::Devices::AllJoyn::QStatus)
 
-  alias Alljoyn_aboutdatalistener_getannouncedaboutdata_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Win32cr::Devices::AllJoyn::QStatus)*
+  alias Alljoyn_aboutdatalistener_getannouncedaboutdata_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_msgarg, Win32cr::Devices::AllJoyn::QStatus)
 
-  alias Alljoyn_autopinger_destination_lost_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void)*
+  alias Alljoyn_autopinger_destination_lost_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void)
 
-  alias Alljoyn_autopinger_destination_found_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void)*
+  alias Alljoyn_autopinger_destination_found_ptr = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void)
 
-  alias Alljoyn_observer_object_discovered_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_ref, Void)*
+  alias Alljoyn_observer_object_discovered_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_ref, Void)
 
-  alias Alljoyn_observer_object_lost_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_ref, Void)*
+  alias Alljoyn_observer_object_lost_ptr = Proc(Void*, Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_ref, Void)
 
   QCC_TRUE = 1_u32
   QCC_FALSE = 0_u32
@@ -640,135 +640,207 @@ module Win32cr::Devices::AllJoyn
   end
 
   @[Extern]
-  record Alljoyn_abouticon_handle_
-  @[Extern]
-  record Alljoyn_certificateid,
-    serial : UInt8*,
-    serialLen : LibC::UIntPtrT,
-    issuerPublicKey : Int8*,
-    issuerAki : UInt8*,
-    issuerAkiLen : LibC::UIntPtrT
+  struct Alljoyn_abouticon_handle_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record Alljoyn_certificateidarray,
-    count : LibC::UIntPtrT,
-    ids : Win32cr::Devices::AllJoyn::Alljoyn_certificateid*
+  struct Alljoyn_certificateid
+    property serial : UInt8*
+    property serialLen : LibC::UIntPtrT
+    property issuerPublicKey : Int8*
+    property issuerAki : UInt8*
+    property issuerAkiLen : LibC::UIntPtrT
+    def initialize(@serial : UInt8*, @serialLen : LibC::UIntPtrT, @issuerPublicKey : Int8*, @issuerAki : UInt8*, @issuerAkiLen : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_manifestarray,
-    count : LibC::UIntPtrT,
-    xmls : Int8**
+  struct Alljoyn_certificateidarray
+    property count : LibC::UIntPtrT
+    property ids : Win32cr::Devices::AllJoyn::Alljoyn_certificateid*
+    def initialize(@count : LibC::UIntPtrT, @ids : Win32cr::Devices::AllJoyn::Alljoyn_certificateid*)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_applicationstatelistener_callbacks,
-    state : Win32cr::Devices::AllJoyn::Alljoyn_applicationstatelistener_state_ptr
+  struct Alljoyn_manifestarray
+    property count : LibC::UIntPtrT
+    property xmls : Int8**
+    def initialize(@count : LibC::UIntPtrT, @xmls : Int8**)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_keystorelistener_callbacks,
-    load_request : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_loadrequest_ptr,
-    store_request : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_storerequest_ptr
+  struct Alljoyn_applicationstatelistener_callbacks
+    property state : Win32cr::Devices::AllJoyn::Alljoyn_applicationstatelistener_state_ptr
+    def initialize(@state : Win32cr::Devices::AllJoyn::Alljoyn_applicationstatelistener_state_ptr)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_keystorelistener_with_synchronization_callbacks,
-    load_request : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_loadrequest_ptr,
-    store_request : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_storerequest_ptr,
-    acquire_exclusive_lock : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_acquireexclusivelock_ptr,
-    release_exclusive_lock : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_releaseexclusivelock_ptr
+  struct Alljoyn_keystorelistener_callbacks
+    property load_request : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_loadrequest_ptr
+    property store_request : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_storerequest_ptr
+    def initialize(@load_request : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_loadrequest_ptr, @store_request : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_storerequest_ptr)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_authlistener_callbacks,
-    request_credentials : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_requestcredentials_ptr,
-    verify_credentials : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_verifycredentials_ptr,
-    security_violation : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_securityviolation_ptr,
-    authentication_complete : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_authenticationcomplete_ptr
+  struct Alljoyn_keystorelistener_with_synchronization_callbacks
+    property load_request : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_loadrequest_ptr
+    property store_request : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_storerequest_ptr
+    property acquire_exclusive_lock : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_acquireexclusivelock_ptr
+    property release_exclusive_lock : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_releaseexclusivelock_ptr
+    def initialize(@load_request : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_loadrequest_ptr, @store_request : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_storerequest_ptr, @acquire_exclusive_lock : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_acquireexclusivelock_ptr, @release_exclusive_lock : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_releaseexclusivelock_ptr)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_authlistenerasync_callbacks,
-    request_credentials : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_requestcredentialsasync_ptr,
-    verify_credentials : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_verifycredentialsasync_ptr,
-    security_violation : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_securityviolation_ptr,
-    authentication_complete : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_authenticationcomplete_ptr
+  struct Alljoyn_authlistener_callbacks
+    property request_credentials : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_requestcredentials_ptr
+    property verify_credentials : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_verifycredentials_ptr
+    property security_violation : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_securityviolation_ptr
+    property authentication_complete : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_authenticationcomplete_ptr
+    def initialize(@request_credentials : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_requestcredentials_ptr, @verify_credentials : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_verifycredentials_ptr, @security_violation : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_securityviolation_ptr, @authentication_complete : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_authenticationcomplete_ptr)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_buslistener_callbacks,
-    listener_registered : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_listener_registered_ptr,
-    listener_unregistered : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_listener_unregistered_ptr,
-    found_advertised_name : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_found_advertised_name_ptr,
-    lost_advertised_name : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_lost_advertised_name_ptr,
-    name_owner_changed : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_name_owner_changed_ptr,
-    bus_stopping : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_bus_stopping_ptr,
-    bus_disconnected : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_bus_disconnected_ptr,
-    property_changed : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_bus_prop_changed_ptr
+  struct Alljoyn_authlistenerasync_callbacks
+    property request_credentials : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_requestcredentialsasync_ptr
+    property verify_credentials : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_verifycredentialsasync_ptr
+    property security_violation : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_securityviolation_ptr
+    property authentication_complete : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_authenticationcomplete_ptr
+    def initialize(@request_credentials : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_requestcredentialsasync_ptr, @verify_credentials : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_verifycredentialsasync_ptr, @security_violation : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_securityviolation_ptr, @authentication_complete : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_authenticationcomplete_ptr)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_interfacedescription_member,
-    iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription,
-    memberType : Win32cr::Devices::AllJoyn::Alljoyn_messagetype,
-    name : Win32cr::Foundation::PSTR,
-    signature : Win32cr::Foundation::PSTR,
-    returnSignature : Win32cr::Foundation::PSTR,
-    argNames : Win32cr::Foundation::PSTR,
-    internal_member : Void*
+  struct Alljoyn_buslistener_callbacks
+    property listener_registered : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_listener_registered_ptr
+    property listener_unregistered : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_listener_unregistered_ptr
+    property found_advertised_name : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_found_advertised_name_ptr
+    property lost_advertised_name : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_lost_advertised_name_ptr
+    property name_owner_changed : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_name_owner_changed_ptr
+    property bus_stopping : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_bus_stopping_ptr
+    property bus_disconnected : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_bus_disconnected_ptr
+    property property_changed : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_bus_prop_changed_ptr
+    def initialize(@listener_registered : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_listener_registered_ptr, @listener_unregistered : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_listener_unregistered_ptr, @found_advertised_name : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_found_advertised_name_ptr, @lost_advertised_name : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_lost_advertised_name_ptr, @name_owner_changed : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_name_owner_changed_ptr, @bus_stopping : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_bus_stopping_ptr, @bus_disconnected : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_bus_disconnected_ptr, @property_changed : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_bus_prop_changed_ptr)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_interfacedescription_property,
-    name : Win32cr::Foundation::PSTR,
-    signature : Win32cr::Foundation::PSTR,
-    access : UInt8,
-    internal_property : Void*
+  struct Alljoyn_interfacedescription_member
+    property iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription
+    property memberType : Win32cr::Devices::AllJoyn::Alljoyn_messagetype
+    property name : Win32cr::Foundation::PSTR
+    property signature : Win32cr::Foundation::PSTR
+    property returnSignature : Win32cr::Foundation::PSTR
+    property argNames : Win32cr::Foundation::PSTR
+    property internal_member : Void*
+    def initialize(@iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, @memberType : Win32cr::Devices::AllJoyn::Alljoyn_messagetype, @name : Win32cr::Foundation::PSTR, @signature : Win32cr::Foundation::PSTR, @returnSignature : Win32cr::Foundation::PSTR, @argNames : Win32cr::Foundation::PSTR, @internal_member : Void*)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_busobject_callbacks,
-    property_get : Win32cr::Devices::AllJoyn::Alljoyn_busobject_prop_get_ptr,
-    property_set : Win32cr::Devices::AllJoyn::Alljoyn_busobject_prop_set_ptr,
-    object_registered : Win32cr::Devices::AllJoyn::Alljoyn_busobject_object_registration_ptr,
-    object_unregistered : Win32cr::Devices::AllJoyn::Alljoyn_busobject_object_registration_ptr
+  struct Alljoyn_interfacedescription_property
+    property name : Win32cr::Foundation::PSTR
+    property signature : Win32cr::Foundation::PSTR
+    property access : UInt8
+    property internal_property : Void*
+    def initialize(@name : Win32cr::Foundation::PSTR, @signature : Win32cr::Foundation::PSTR, @access : UInt8, @internal_property : Void*)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_busobject_methodentry,
-    member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member*,
-    method_handler : Win32cr::Devices::AllJoyn::Alljoyn_messagereceiver_methodhandler_ptr
+  struct Alljoyn_busobject_callbacks
+    property property_get : Win32cr::Devices::AllJoyn::Alljoyn_busobject_prop_get_ptr
+    property property_set : Win32cr::Devices::AllJoyn::Alljoyn_busobject_prop_set_ptr
+    property object_registered : Win32cr::Devices::AllJoyn::Alljoyn_busobject_object_registration_ptr
+    property object_unregistered : Win32cr::Devices::AllJoyn::Alljoyn_busobject_object_registration_ptr
+    def initialize(@property_get : Win32cr::Devices::AllJoyn::Alljoyn_busobject_prop_get_ptr, @property_set : Win32cr::Devices::AllJoyn::Alljoyn_busobject_prop_set_ptr, @object_registered : Win32cr::Devices::AllJoyn::Alljoyn_busobject_object_registration_ptr, @object_unregistered : Win32cr::Devices::AllJoyn::Alljoyn_busobject_object_registration_ptr)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_permissionconfigurationlistener_callbacks,
-    factory_reset : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener_factoryreset_ptr,
-    policy_changed : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener_policychanged_ptr,
-    start_management : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener_startmanagement_ptr,
-    end_management : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener_endmanagement_ptr
+  struct Alljoyn_busobject_methodentry
+    property member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member*
+    property method_handler : Win32cr::Devices::AllJoyn::Alljoyn_messagereceiver_methodhandler_ptr
+    def initialize(@member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member*, @method_handler : Win32cr::Devices::AllJoyn::Alljoyn_messagereceiver_methodhandler_ptr)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_sessionlistener_callbacks,
-    session_lost : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener_sessionlost_ptr,
-    session_member_added : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener_sessionmemberadded_ptr,
-    session_member_removed : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener_sessionmemberremoved_ptr
+  struct Alljoyn_permissionconfigurationlistener_callbacks
+    property factory_reset : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener_factoryreset_ptr
+    property policy_changed : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener_policychanged_ptr
+    property start_management : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener_startmanagement_ptr
+    property end_management : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener_endmanagement_ptr
+    def initialize(@factory_reset : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener_factoryreset_ptr, @policy_changed : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener_policychanged_ptr, @start_management : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener_startmanagement_ptr, @end_management : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener_endmanagement_ptr)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_sessionportlistener_callbacks,
-    accept_session_joiner : Win32cr::Devices::AllJoyn::Alljoyn_sessionportlistener_acceptsessionjoiner_ptr,
-    session_joined : Win32cr::Devices::AllJoyn::Alljoyn_sessionportlistener_sessionjoined_ptr
+  struct Alljoyn_sessionlistener_callbacks
+    property session_lost : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener_sessionlost_ptr
+    property session_member_added : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener_sessionmemberadded_ptr
+    property session_member_removed : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener_sessionmemberremoved_ptr
+    def initialize(@session_lost : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener_sessionlost_ptr, @session_member_added : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener_sessionmemberadded_ptr, @session_member_removed : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener_sessionmemberremoved_ptr)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_aboutlistener_callback,
-    about_listener_announced : Win32cr::Devices::AllJoyn::Alljoyn_about_announced_ptr
+  struct Alljoyn_sessionportlistener_callbacks
+    property accept_session_joiner : Win32cr::Devices::AllJoyn::Alljoyn_sessionportlistener_acceptsessionjoiner_ptr
+    property session_joined : Win32cr::Devices::AllJoyn::Alljoyn_sessionportlistener_sessionjoined_ptr
+    def initialize(@accept_session_joiner : Win32cr::Devices::AllJoyn::Alljoyn_sessionportlistener_acceptsessionjoiner_ptr, @session_joined : Win32cr::Devices::AllJoyn::Alljoyn_sessionportlistener_sessionjoined_ptr)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_abouticonobj_handle_
-  @[Extern]
-  record Alljoyn_abouticonproxy_handle_
-  @[Extern]
-  record Alljoyn_aboutdatalistener_callbacks,
-    about_datalistener_getaboutdata : Win32cr::Devices::AllJoyn::Alljoyn_aboutdatalistener_getaboutdata_ptr,
-    about_datalistener_getannouncedaboutdata : Win32cr::Devices::AllJoyn::Alljoyn_aboutdatalistener_getannouncedaboutdata_ptr
+  struct Alljoyn_aboutlistener_callback
+    property about_listener_announced : Win32cr::Devices::AllJoyn::Alljoyn_about_announced_ptr
+    def initialize(@about_listener_announced : Win32cr::Devices::AllJoyn::Alljoyn_about_announced_ptr)
+    end
+  end
 
   @[Extern]
-  record Alljoyn_pinglistener_callback,
-    destination_found : Win32cr::Devices::AllJoyn::Alljoyn_autopinger_destination_found_ptr,
-    destination_lost : Win32cr::Devices::AllJoyn::Alljoyn_autopinger_destination_lost_ptr
+  struct Alljoyn_abouticonobj_handle_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record Alljoyn_observerlistener_callback,
-    object_discovered : Win32cr::Devices::AllJoyn::Alljoyn_observer_object_discovered_ptr,
-    object_lost : Win32cr::Devices::AllJoyn::Alljoyn_observer_object_lost_ptr
+  struct Alljoyn_abouticonproxy_handle_
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct Alljoyn_aboutdatalistener_callbacks
+    property about_datalistener_getaboutdata : Win32cr::Devices::AllJoyn::Alljoyn_aboutdatalistener_getaboutdata_ptr
+    property about_datalistener_getannouncedaboutdata : Win32cr::Devices::AllJoyn::Alljoyn_aboutdatalistener_getannouncedaboutdata_ptr
+    def initialize(@about_datalistener_getaboutdata : Win32cr::Devices::AllJoyn::Alljoyn_aboutdatalistener_getaboutdata_ptr, @about_datalistener_getannouncedaboutdata : Win32cr::Devices::AllJoyn::Alljoyn_aboutdatalistener_getannouncedaboutdata_ptr)
+    end
+  end
+
+  @[Extern]
+  struct Alljoyn_pinglistener_callback
+    property destination_found : Win32cr::Devices::AllJoyn::Alljoyn_autopinger_destination_found_ptr
+    property destination_lost : Win32cr::Devices::AllJoyn::Alljoyn_autopinger_destination_lost_ptr
+    def initialize(@destination_found : Win32cr::Devices::AllJoyn::Alljoyn_autopinger_destination_found_ptr, @destination_lost : Win32cr::Devices::AllJoyn::Alljoyn_autopinger_destination_lost_ptr)
+    end
+  end
+
+  @[Extern]
+  struct Alljoyn_observerlistener_callback
+    property object_discovered : Win32cr::Devices::AllJoyn::Alljoyn_observer_object_discovered_ptr
+    property object_lost : Win32cr::Devices::AllJoyn::Alljoyn_observer_object_lost_ptr
+    def initialize(@object_discovered : Win32cr::Devices::AllJoyn::Alljoyn_observer_object_discovered_ptr, @object_lost : Win32cr::Devices::AllJoyn::Alljoyn_observer_object_lost_ptr)
+    end
+  end
 
   @[Link("msajapi")]
   lib C

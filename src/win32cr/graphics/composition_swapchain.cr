@@ -21,28 +21,37 @@ module Win32cr::Graphics::CompositionSwapchain
   end
 
   @[Extern]
-  record SystemInterruptTime,
-    value : UInt64
+  struct SystemInterruptTime
+    property value : UInt64
+    def initialize(@value : UInt64)
+    end
+  end
 
   @[Extern]
-  record PresentationTransform,
-    m11 : Float32,
-    m12 : Float32,
-    m21 : Float32,
-    m22 : Float32,
-    m31 : Float32,
-    m32 : Float32
+  struct PresentationTransform
+    property m11 : Float32
+    property m12 : Float32
+    property m21 : Float32
+    property m22 : Float32
+    property m31 : Float32
+    property m32 : Float32
+    def initialize(@m11 : Float32, @m12 : Float32, @m21 : Float32, @m22 : Float32, @m31 : Float32, @m32 : Float32)
+    end
+  end
 
   @[Extern]
-  record CompositionFrameDisplayInstance,
-    displayAdapterLUID : Win32cr::Foundation::LUID,
-    displayVidPnSourceId : UInt32,
-    displayUniqueId : UInt32,
-    renderAdapterLUID : Win32cr::Foundation::LUID,
-    instanceKind : Win32cr::Graphics::CompositionSwapchain::CompositionFrameInstanceKind,
-    finalTransform : Win32cr::Graphics::CompositionSwapchain::PresentationTransform,
-    requiredCrossAdapterCopy : UInt8,
-    colorSpace : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
+  struct CompositionFrameDisplayInstance
+    property displayAdapterLUID : Win32cr::Foundation::LUID
+    property displayVidPnSourceId : UInt32
+    property displayUniqueId : UInt32
+    property renderAdapterLUID : Win32cr::Foundation::LUID
+    property instanceKind : Win32cr::Graphics::CompositionSwapchain::CompositionFrameInstanceKind
+    property finalTransform : Win32cr::Graphics::CompositionSwapchain::PresentationTransform
+    property requiredCrossAdapterCopy : UInt8
+    property colorSpace : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
+    def initialize(@displayAdapterLUID : Win32cr::Foundation::LUID, @displayVidPnSourceId : UInt32, @displayUniqueId : UInt32, @renderAdapterLUID : Win32cr::Foundation::LUID, @instanceKind : Win32cr::Graphics::CompositionSwapchain::CompositionFrameInstanceKind, @finalTransform : Win32cr::Graphics::CompositionSwapchain::PresentationTransform, @requiredCrossAdapterCopy : UInt8, @colorSpace : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE)
+    end
+  end
 
   @[Extern]
   record IPresentationBufferVtbl,
@@ -54,7 +63,6 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  #@[Com("2e217d3a-5abb-4138-9a13-a775593c89ca")]
   record IPresentationBuffer, lpVtbl : IPresentationBufferVtbl* do
     GUID = LibC::GUID.new(0x2e217d3a_u32, 0x5abb_u16, 0x4138_u16, StaticArray[0x9a_u8, 0x13_u8, 0xa7_u8, 0x75_u8, 0x59_u8, 0x3c_u8, 0x89_u8, 0xca_u8])
     def query_interface(this : IPresentationBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -84,7 +92,6 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  #@[Com("5668bb79-3d8e-415c-b215-f38020f2d252")]
   record IPresentationContent, lpVtbl : IPresentationContentVtbl* do
     GUID = LibC::GUID.new(0x5668bb79_u32, 0x3d8e_u16, 0x415c_u16, StaticArray[0xb2_u8, 0x15_u8, 0xf3_u8, 0x80_u8, 0x20_u8, 0xf2_u8, 0xd2_u8, 0x52_u8])
     def query_interface(this : IPresentationContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -119,7 +126,6 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  #@[Com("956710fb-ea40-4eba-a3eb-4375a0eb4edc")]
   record IPresentationSurface, lpVtbl : IPresentationSurfaceVtbl* do
     GUID = LibC::GUID.new(0x956710fb_u32, 0xea40_u16, 0x4eba_u16, StaticArray[0xa3_u8, 0xeb_u8, 0x43_u8, 0x75_u8, 0xa0_u8, 0xeb_u8, 0x4e_u8, 0xdc_u8])
     def query_interface(this : IPresentationSurface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -171,7 +177,6 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  #@[Com("b44b8bda-7282-495d-9dd7-ceadd8b4bb86")]
   record IPresentStatistics, lpVtbl : IPresentStatisticsVtbl* do
     GUID = LibC::GUID.new(0xb44b8bda_u32, 0x7282_u16, 0x495d_u16, StaticArray[0x9d_u8, 0xd7_u8, 0xce_u8, 0xad_u8, 0xd8_u8, 0xb4_u8, 0xbb_u8, 0x86_u8])
     def query_interface(this : IPresentStatistics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -213,7 +218,6 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  #@[Com("fb562f82-6292-470a-88b1-843661e7f20c")]
   record IPresentationManager, lpVtbl : IPresentationManagerVtbl* do
     GUID = LibC::GUID.new(0xfb562f82_u32, 0x6292_u16, 0x470a_u16, StaticArray[0x88_u8, 0xb1_u8, 0x84_u8, 0x36_u8, 0x61_u8, 0xe7_u8, 0xf2_u8, 0xc_u8])
     def query_interface(this : IPresentationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -278,7 +282,6 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  #@[Com("8fb37b58-1d74-4f64-a49c-1f97a80a2ec0")]
   record IPresentationFactory, lpVtbl : IPresentationFactoryVtbl* do
     GUID = LibC::GUID.new(0x8fb37b58_u32, 0x1d74_u16, 0x4f64_u16, StaticArray[0xa4_u8, 0x9c_u8, 0x1f_u8, 0x97_u8, 0xa8_u8, 0xa_u8, 0x2e_u8, 0xc0_u8])
     def query_interface(this : IPresentationFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -314,7 +317,6 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  #@[Com("c9ed2a41-79cb-435e-964e-c8553055420c")]
   record IPresentStatusPresentStatistics, lpVtbl : IPresentStatusPresentStatisticsVtbl* do
     GUID = LibC::GUID.new(0xc9ed2a41_u32, 0x79cb_u16, 0x435e_u16, StaticArray[0x96_u8, 0x4e_u8, 0xc8_u8, 0x55_u8, 0x30_u8, 0x55_u8, 0x42_u8, 0xc_u8])
     def query_interface(this : IPresentStatusPresentStatistics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -354,7 +356,6 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  #@[Com("ab41d127-c101-4c0a-911d-f9f2e9d08e64")]
   record ICompositionFramePresentStatistics, lpVtbl : ICompositionFramePresentStatisticsVtbl* do
     GUID = LibC::GUID.new(0xab41d127_u32, 0xc101_u16, 0x4c0a_u16, StaticArray[0x91_u8, 0x1d_u8, 0xf9_u8, 0xf2_u8, 0xe9_u8, 0xd0_u8, 0x8e_u8, 0x64_u8])
     def query_interface(this : ICompositionFramePresentStatistics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -399,7 +400,6 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  #@[Com("8c93be27-ad94-4da0-8fd4-2413132d124e")]
   record IIndependentFlipFramePresentStatistics, lpVtbl : IIndependentFlipFramePresentStatisticsVtbl* do
     GUID = LibC::GUID.new(0x8c93be27_u32, 0xad94_u16, 0x4da0_u16, StaticArray[0x8f_u8, 0xd4_u8, 0x24_u8, 0x13_u8, 0x13_u8, 0x2d_u8, 0x12_u8, 0x4e_u8])
     def query_interface(this : IIndependentFlipFramePresentStatistics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

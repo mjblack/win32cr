@@ -4,101 +4,101 @@ require "./io.cr"
 require "./../security/cryptography.cr"
 
 module Win32cr::System::Rpc
-  alias RPC_OBJECT_INQ_FN = Proc(LibC::GUID*, LibC::GUID*, Win32cr::System::Rpc::RPC_STATUS*, Void)*
+  alias RPC_OBJECT_INQ_FN = Proc(LibC::GUID*, LibC::GUID*, Win32cr::System::Rpc::RPC_STATUS*, Void)
 
-  alias RPC_IF_CALLBACK_FN = Proc(Void*, Void*, Win32cr::System::Rpc::RPC_STATUS)*
+  alias RPC_IF_CALLBACK_FN = Proc(Void*, Void*, Win32cr::System::Rpc::RPC_STATUS)
 
-  alias RPC_SECURITY_CALLBACK_FN = Proc(Void*, Void)*
+  alias RPC_SECURITY_CALLBACK_FN = Proc(Void*, Void)
 
-  alias RPC_NEW_HTTP_PROXY_CHANNEL = Proc(Win32cr::System::Rpc::RPC_HTTP_REDIRECTOR_STAGE, UInt16*, UInt16*, UInt16*, UInt16*, Void*, Void*, Void*, Void*, UInt32, UInt16**, UInt16**, Win32cr::System::Rpc::RPC_STATUS)*
+  alias RPC_NEW_HTTP_PROXY_CHANNEL = Proc(Win32cr::System::Rpc::RPC_HTTP_REDIRECTOR_STAGE, UInt16*, UInt16*, UInt16*, UInt16*, Void*, Void*, Void*, Void*, UInt32, UInt16**, UInt16**, Win32cr::System::Rpc::RPC_STATUS)
 
-  alias RPC_HTTP_PROXY_FREE_STRING = Proc(UInt16*, Void)*
+  alias RPC_HTTP_PROXY_FREE_STRING = Proc(UInt16*, Void)
 
-  alias RPC_AUTH_KEY_RETRIEVAL_FN = Proc(Void*, UInt16*, UInt32, Void**, Win32cr::System::Rpc::RPC_STATUS*, Void)*
+  alias RPC_AUTH_KEY_RETRIEVAL_FN = Proc(Void*, UInt16*, UInt32, Void**, Win32cr::System::Rpc::RPC_STATUS*, Void)
 
-  alias RPC_MGMT_AUTHORIZATION_FN = Proc(Void*, UInt32, Win32cr::System::Rpc::RPC_STATUS*, Int32)*
+  alias RPC_MGMT_AUTHORIZATION_FN = Proc(Void*, UInt32, Win32cr::System::Rpc::RPC_STATUS*, Int32)
 
-  alias RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN = Proc(Void*, Void*, UInt32, Void)*
+  alias RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN = Proc(Void*, Void*, UInt32, Void)
 
-  alias RPC_FORWARD_FUNCTION = Proc(LibC::GUID*, Win32cr::System::Rpc::RPC_VERSION*, LibC::GUID*, UInt8*, Void**, Win32cr::System::Rpc::RPC_STATUS)*
+  alias RPC_FORWARD_FUNCTION = Proc(LibC::GUID*, Win32cr::System::Rpc::RPC_VERSION*, LibC::GUID*, UInt8*, Void**, Win32cr::System::Rpc::RPC_STATUS)
 
-  alias RPC_ADDRESS_CHANGE_FN = Proc(Void*, Void)*
+  alias RPC_ADDRESS_CHANGE_FN = Proc(Void*, Void)
 
-  alias RPC_DISPATCH_FUNCTION = Proc(Win32cr::System::Rpc::RPC_MESSAGE*, Void)*
+  alias RPC_DISPATCH_FUNCTION = Proc(Win32cr::System::Rpc::RPC_MESSAGE*, Void)
 
-  alias PRPC_RUNDOWN = Proc(Void*, Void)*
+  alias PRPC_RUNDOWN = Proc(Void*, Void)
 
-  alias RPCLT_PDU_FILTER_FUNC = Proc(Void*, UInt32, Int32, Void)*
+  alias RPCLT_PDU_FILTER_FUNC = Proc(Void*, UInt32, Int32, Void)
 
-  alias RPC_SETFILTER_FUNC = Proc(Win32cr::System::Rpc::RPCLT_PDU_FILTER_FUNC, Void)*
+  alias RPC_SETFILTER_FUNC = Proc(Win32cr::System::Rpc::RPCLT_PDU_FILTER_FUNC, Void)
 
-  alias RPC_BLOCKING_FN = Proc(Void*, Void*, Void*, Win32cr::System::Rpc::RPC_STATUS)*
+  alias RPC_BLOCKING_FN = Proc(Void*, Void*, Void*, Win32cr::System::Rpc::RPC_STATUS)
 
-  alias I_RpcProxyIsValidMachineFn = Proc(UInt16*, UInt16*, UInt32, Win32cr::System::Rpc::RPC_STATUS)*
+  alias I_RpcProxyIsValidMachineFn = Proc(UInt16*, UInt16*, UInt32, Win32cr::System::Rpc::RPC_STATUS)
 
-  alias I_RpcProxyGetClientAddressFn = Proc(Void*, Win32cr::Foundation::PSTR, UInt32*, Win32cr::System::Rpc::RPC_STATUS)*
+  alias I_RpcProxyGetClientAddressFn = Proc(Void*, Win32cr::Foundation::PSTR, UInt32*, Win32cr::System::Rpc::RPC_STATUS)
 
-  alias I_RpcProxyGetConnectionTimeoutFn = Proc(UInt32*, Win32cr::System::Rpc::RPC_STATUS)*
+  alias I_RpcProxyGetConnectionTimeoutFn = Proc(UInt32*, Win32cr::System::Rpc::RPC_STATUS)
 
-  alias I_RpcPerformCalloutFn = Proc(Void*, Win32cr::System::Rpc::RDR_CALLOUT_STATE*, Win32cr::System::Rpc::RPC_HTTP_REDIRECTOR_STAGE, Win32cr::System::Rpc::RPC_STATUS)*
+  alias I_RpcPerformCalloutFn = Proc(Void*, Win32cr::System::Rpc::RDR_CALLOUT_STATE*, Win32cr::System::Rpc::RPC_HTTP_REDIRECTOR_STAGE, Win32cr::System::Rpc::RPC_STATUS)
 
-  alias I_RpcFreeCalloutStateFn = Proc(Win32cr::System::Rpc::RDR_CALLOUT_STATE*, Void)*
+  alias I_RpcFreeCalloutStateFn = Proc(Win32cr::System::Rpc::RDR_CALLOUT_STATE*, Void)
 
-  alias I_RpcProxyGetClientSessionAndResourceUUID = Proc(Void*, Int32*, LibC::GUID*, Int32*, LibC::GUID*, Win32cr::System::Rpc::RPC_STATUS)*
+  alias I_RpcProxyGetClientSessionAndResourceUUID = Proc(Void*, Int32*, LibC::GUID*, Int32*, LibC::GUID*, Win32cr::System::Rpc::RPC_STATUS)
 
-  alias I_RpcProxyFilterIfFn = Proc(Void*, LibC::GUID*, UInt16, Int32*, Win32cr::System::Rpc::RPC_STATUS)*
+  alias I_RpcProxyFilterIfFn = Proc(Void*, LibC::GUID*, UInt16, Int32*, Win32cr::System::Rpc::RPC_STATUS)
 
-  alias I_RpcProxyUpdatePerfCounterFn = Proc(Win32cr::System::Rpc::RpcProxyPerfCounters, Int32, UInt32, Void)*
+  alias I_RpcProxyUpdatePerfCounterFn = Proc(Win32cr::System::Rpc::RpcProxyPerfCounters, Int32, UInt32, Void)
 
-  alias I_RpcProxyUpdatePerfCounterBackendServerFn = Proc(UInt16*, Int32, Void)*
+  alias I_RpcProxyUpdatePerfCounterBackendServerFn = Proc(UInt16*, Int32, Void)
 
-  alias PFN_RPCNOTIFICATION_ROUTINE = Proc(Win32cr::System::Rpc::RPC_ASYNC_STATE*, Void*, Win32cr::System::Rpc::RPC_ASYNC_EVENT, Void)*
+  alias PFN_RPCNOTIFICATION_ROUTINE = Proc(Win32cr::System::Rpc::RPC_ASYNC_STATE*, Void*, Win32cr::System::Rpc::RPC_ASYNC_EVENT, Void)
 
-  alias NDR_RUNDOWN = Proc(Void*, Void)*
+  alias NDR_RUNDOWN = Proc(Void*, Void)
 
-  alias NDR_NOTIFY_ROUTINE = Proc(Void)*
+  alias NDR_NOTIFY_ROUTINE = Proc(Void)
 
-  alias NDR_NOTIFY2_ROUTINE = Proc(UInt8, Void)*
+  alias NDR_NOTIFY2_ROUTINE = Proc(UInt8, Void)
 
-  alias EXPR_EVAL = Proc(Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, Void)*
+  alias EXPR_EVAL = Proc(Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, Void)
 
-  alias GENERIC_BINDING_ROUTINE = Proc(Void*, Void*)*
+  alias GENERIC_BINDING_ROUTINE = Proc(Void*, Void*)
 
-  alias GENERIC_UNBIND_ROUTINE = Proc(Void*, UInt8*, Void)*
+  alias GENERIC_UNBIND_ROUTINE = Proc(Void*, UInt8*, Void)
 
-  alias XMIT_HELPER_ROUTINE = Proc(Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, Void)*
+  alias XMIT_HELPER_ROUTINE = Proc(Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, Void)
 
-  alias USER_MARSHAL_SIZING_ROUTINE = Proc(UInt32*, UInt32, Void*, UInt32)*
+  alias USER_MARSHAL_SIZING_ROUTINE = Proc(UInt32*, UInt32, Void*, UInt32)
 
-  alias USER_MARSHAL_MARSHALLING_ROUTINE = Proc(UInt32*, UInt8*, Void*, UInt8*)*
+  alias USER_MARSHAL_MARSHALLING_ROUTINE = Proc(UInt32*, UInt8*, Void*, UInt8*)
 
-  alias USER_MARSHAL_UNMARSHALLING_ROUTINE = Proc(UInt32*, UInt8*, Void*, UInt8*)*
+  alias USER_MARSHAL_UNMARSHALLING_ROUTINE = Proc(UInt32*, UInt8*, Void*, UInt8*)
 
-  alias USER_MARSHAL_FREEING_ROUTINE = Proc(UInt32*, Void*, Void)*
+  alias USER_MARSHAL_FREEING_ROUTINE = Proc(UInt32*, Void*, Void)
 
-  alias CS_TYPE_NET_SIZE_ROUTINE = Proc(Void*, UInt32, UInt32, Win32cr::System::Rpc::IDL_CS_CONVERT*, UInt32*, UInt32*, Void)*
+  alias CS_TYPE_NET_SIZE_ROUTINE = Proc(Void*, UInt32, UInt32, Win32cr::System::Rpc::IDL_CS_CONVERT*, UInt32*, UInt32*, Void)
 
-  alias CS_TYPE_LOCAL_SIZE_ROUTINE = Proc(Void*, UInt32, UInt32, Win32cr::System::Rpc::IDL_CS_CONVERT*, UInt32*, UInt32*, Void)*
+  alias CS_TYPE_LOCAL_SIZE_ROUTINE = Proc(Void*, UInt32, UInt32, Win32cr::System::Rpc::IDL_CS_CONVERT*, UInt32*, UInt32*, Void)
 
-  alias CS_TYPE_TO_NETCS_ROUTINE = Proc(Void*, UInt32, Void*, UInt32, UInt8*, UInt32*, UInt32*, Void)*
+  alias CS_TYPE_TO_NETCS_ROUTINE = Proc(Void*, UInt32, Void*, UInt32, UInt8*, UInt32*, UInt32*, Void)
 
-  alias CS_TYPE_FROM_NETCS_ROUTINE = Proc(Void*, UInt32, UInt8*, UInt32, UInt32, Void*, UInt32*, UInt32*, Void)*
+  alias CS_TYPE_FROM_NETCS_ROUTINE = Proc(Void*, UInt32, UInt8*, UInt32, UInt32, Void*, UInt32*, UInt32*, Void)
 
-  alias CS_TAG_GETTING_ROUTINE = Proc(Void*, Int32, UInt32*, UInt32*, UInt32*, UInt32*, Void)*
+  alias CS_TAG_GETTING_ROUTINE = Proc(Void*, Int32, UInt32*, UInt32*, UInt32*, UInt32*, Void)
 
-  alias STUB_THUNK = Proc(Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, Void)*
+  alias STUB_THUNK = Proc(Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, Void)
 
-  alias SERVER_ROUTINE = Proc(Int32)*
+  alias SERVER_ROUTINE = Proc(Int32)
 
-  alias RPC_CLIENT_ALLOC = Proc(LibC::UIntPtrT, Void*)*
+  alias RPC_CLIENT_ALLOC = Proc(LibC::UIntPtrT, Void*)
 
-  alias RPC_CLIENT_FREE = Proc(Void*, Void)*
+  alias RPC_CLIENT_FREE = Proc(Void*, Void)
 
-  alias MIDL_ES_ALLOC = Proc(Void*, Int8**, UInt32*, Void)*
+  alias MIDL_ES_ALLOC = Proc(Void*, Int8**, UInt32*, Void)
 
-  alias MIDL_ES_WRITE = Proc(Void*, Win32cr::Foundation::PSTR, UInt32, Void)*
+  alias MIDL_ES_WRITE = Proc(Void*, Win32cr::Foundation::PSTR, UInt32, Void)
 
-  alias MIDL_ES_READ = Proc(Void*, Int8**, UInt32*, Void)*
+  alias MIDL_ES_READ = Proc(Void*, Int8**, UInt32*, Void)
 
   RPC_C_BINDING_INFINITE_TIMEOUT = 10_u32
   RPC_C_BINDING_MIN_TIMEOUT = 0_u32
@@ -619,1460 +619,1981 @@ module Win32cr::System::Rpc
   end
 
   @[Extern]
-  record NDR_SCONTEXT_1,
-    pad : Void*[2],
-    userContext : Void*
-
-  @[Extern]
-  record RPC_BINDING_VECTOR,
-    count : UInt32,
-    binding_h : Void**
-
-  @[Extern]
-  record UUID_VECTOR,
-    count : UInt32,
-    uuid : LibC::GUID**
-
-  @[Extern]
-  record RPC_IF_ID,
-    uuid : LibC::GUID,
-    vers_major : UInt16,
-    vers_minor : UInt16
-
-  @[Extern]
-  record RPC_PROTSEQ_VECTORA,
-    count : UInt32,
-    protseq : UInt8**
-
-  @[Extern]
-  record RPC_PROTSEQ_VECTORW,
-    count : UInt32,
-    protseq : UInt16**
-
-  @[Extern]
-  record RPC_POLICY,
-    length : UInt32,
-    endpoint_flags : UInt32,
-    nic_flags : UInt32
-
-  @[Extern]
-  record RPC_STATS_VECTOR,
-    count : UInt32,
-    stats : UInt32*
-
-  @[Extern]
-  record RPC_IF_ID_VECTOR,
-    count : UInt32,
-    if_id : Win32cr::System::Rpc::RPC_IF_ID**
-
-  @[Extern]
-  record RPC_SECURITY_QOS,
-    version : UInt32,
-    capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES,
-    identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY,
-    impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL
-
-  @[Extern]
-  record SEC_WINNT_AUTH_IDENTITY_W,
-    user : UInt16*,
-    user_length : UInt32,
-    domain : UInt16*,
-    domain_length : UInt32,
-    password : UInt16*,
-    password_length : UInt32,
-    flags : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY
-
-  @[Extern]
-  record SEC_WINNT_AUTH_IDENTITY_A,
-    user : UInt8*,
-    user_length : UInt32,
-    domain : UInt8*,
-    domain_length : UInt32,
-    password : UInt8*,
-    password_length : UInt32,
-    flags : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY
-
-  @[Extern]
-  record RPC_HTTP_TRANSPORT_CREDENTIALS_W,
-    transport_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*,
-    flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS,
-    authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET,
-    number_of_authn_schemes : UInt32,
-    authn_schemes : UInt32*,
-    server_certificate_subject : UInt16*
-
-  @[Extern]
-  record RPC_HTTP_TRANSPORT_CREDENTIALS_A,
-    transport_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_A*,
-    flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS,
-    authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET,
-    number_of_authn_schemes : UInt32,
-    authn_schemes : UInt32*,
-    server_certificate_subject : UInt8*
-
-  @[Extern]
-  record RPC_HTTP_TRANSPORT_CREDENTIALS_V2_W,
-    transport_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*,
-    flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS,
-    authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET,
-    number_of_authn_schemes : UInt32,
-    authn_schemes : UInt32*,
-    server_certificate_subject : UInt16*,
-    proxy_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*,
-    number_of_proxy_authn_schemes : UInt32,
-    proxy_authn_schemes : UInt32*
-
-  @[Extern]
-  record RPC_HTTP_TRANSPORT_CREDENTIALS_V2_A,
-    transport_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_A*,
-    flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS,
-    authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET,
-    number_of_authn_schemes : UInt32,
-    authn_schemes : UInt32*,
-    server_certificate_subject : UInt8*,
-    proxy_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_A*,
-    number_of_proxy_authn_schemes : UInt32,
-    proxy_authn_schemes : UInt32*
-
-  @[Extern]
-  record RPC_HTTP_TRANSPORT_CREDENTIALS_V3_W,
-    transport_credentials : Void*,
-    flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS,
-    authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET,
-    number_of_authn_schemes : UInt32,
-    authn_schemes : UInt32*,
-    server_certificate_subject : UInt16*,
-    proxy_credentials : Void*,
-    number_of_proxy_authn_schemes : UInt32,
-    proxy_authn_schemes : UInt32*
-
-  @[Extern]
-  record RPC_HTTP_TRANSPORT_CREDENTIALS_V3_A,
-    transport_credentials : Void*,
-    flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS,
-    authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET,
-    number_of_authn_schemes : UInt32,
-    authn_schemes : UInt32*,
-    server_certificate_subject : UInt8*,
-    proxy_credentials : Void*,
-    number_of_proxy_authn_schemes : UInt32,
-    proxy_authn_schemes : UInt32*
-
-  @[Extern]
-  record RPC_SECURITY_QOS_V2_W,
-    version : UInt32,
-    capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES,
-    identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY,
-    impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL,
-    additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE,
-    u : U_e__union_ do
-
-    # Nested Type U_e__union_
-    @[Extern(union: true)]
-    record U_e__union_,
-      http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_W*
-
+  struct NDR_SCONTEXT_1
+    property pad : Void*[2]
+    property userContext : Void*
+    def initialize(@pad : Void*[2], @userContext : Void*)
+    end
   end
 
   @[Extern]
-  record RPC_SECURITY_QOS_V2_A,
-    version : UInt32,
-    capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES,
-    identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY,
-    impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL,
-    additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE,
-    u : U_e__union_ do
-
-    # Nested Type U_e__union_
-    @[Extern(union: true)]
-    record U_e__union_,
-      http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_A*
-
+  struct RPC_BINDING_VECTOR
+    property count : UInt32
+    property binding_h : Void**
+    def initialize(@count : UInt32, @binding_h : Void**)
+    end
   end
 
   @[Extern]
-  record RPC_SECURITY_QOS_V3_W,
-    version : UInt32,
-    capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES,
-    identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY,
-    impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL,
-    additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE,
-    u : U_e__union_,
-    sid : Void* do
-
-    # Nested Type U_e__union_
-    @[Extern(union: true)]
-    record U_e__union_,
-      http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_W*
-
+  struct UUID_VECTOR
+    property count : UInt32
+    property uuid : LibC::GUID**
+    def initialize(@count : UInt32, @uuid : LibC::GUID**)
+    end
   end
 
   @[Extern]
-  record RPC_SECURITY_QOS_V3_A,
-    version : UInt32,
-    capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES,
-    identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY,
-    impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL,
-    additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE,
-    u : U_e__union_,
-    sid : Void* do
-
-    # Nested Type U_e__union_
-    @[Extern(union: true)]
-    record U_e__union_,
-      http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_A*
-
+  struct RPC_IF_ID
+    property uuid : LibC::GUID
+    property vers_major : UInt16
+    property vers_minor : UInt16
+    def initialize(@uuid : LibC::GUID, @vers_major : UInt16, @vers_minor : UInt16)
+    end
   end
 
   @[Extern]
-  record RPC_SECURITY_QOS_V4_W,
-    version : UInt32,
-    capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES,
-    identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY,
-    impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL,
-    additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE,
-    u : U_e__union_,
-    sid : Void*,
-    effective_only : UInt32 do
-
-    # Nested Type U_e__union_
-    @[Extern(union: true)]
-    record U_e__union_,
-      http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_W*
-
+  struct RPC_PROTSEQ_VECTORA
+    property count : UInt32
+    property protseq : UInt8**
+    def initialize(@count : UInt32, @protseq : UInt8**)
+    end
   end
 
   @[Extern]
-  record RPC_SECURITY_QOS_V4_A,
-    version : UInt32,
-    capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES,
-    identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY,
-    impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL,
-    additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE,
-    u : U_e__union_,
-    sid : Void*,
-    effective_only : UInt32 do
-
-    # Nested Type U_e__union_
-    @[Extern(union: true)]
-    record U_e__union_,
-      http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_A*
-
+  struct RPC_PROTSEQ_VECTORW
+    property count : UInt32
+    property protseq : UInt16**
+    def initialize(@count : UInt32, @protseq : UInt16**)
+    end
   end
 
   @[Extern]
-  record RPC_SECURITY_QOS_V5_W,
-    version : UInt32,
-    capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES,
-    identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY,
-    impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL,
-    additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE,
-    u : U_e__union_,
-    sid : Void*,
-    effective_only : UInt32,
-    server_security_descriptor : Void* do
-
-    # Nested Type U_e__union_
-    @[Extern(union: true)]
-    record U_e__union_,
-      http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_W*
-
+  struct RPC_POLICY
+    property length : UInt32
+    property endpoint_flags : UInt32
+    property nic_flags : UInt32
+    def initialize(@length : UInt32, @endpoint_flags : UInt32, @nic_flags : UInt32)
+    end
   end
 
   @[Extern]
-  record RPC_SECURITY_QOS_V5_A,
-    version : UInt32,
-    capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES,
-    identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY,
-    impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL,
-    additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE,
-    u : U_e__union_,
-    sid : Void*,
-    effective_only : UInt32,
-    server_security_descriptor : Void* do
-
-    # Nested Type U_e__union_
-    @[Extern(union: true)]
-    record U_e__union_,
-      http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_A*
-
+  struct RPC_STATS_VECTOR
+    property count : UInt32
+    property stats : UInt32*
+    def initialize(@count : UInt32, @stats : UInt32*)
+    end
   end
 
   @[Extern]
-  record RPC_BINDING_HANDLE_TEMPLATE_V1_W,
-    version : UInt32,
-    flags : UInt32,
-    protocol_sequence : UInt32,
-    network_address : UInt16*,
-    string_endpoint : UInt16*,
-    u1 : U1_e__union_,
-    object_uuid : LibC::GUID do
+  struct RPC_IF_ID_VECTOR
+    property count : UInt32
+    property if_id : Win32cr::System::Rpc::RPC_IF_ID**
+    def initialize(@count : UInt32, @if_id : Win32cr::System::Rpc::RPC_IF_ID**)
+    end
+  end
+
+  @[Extern]
+  struct RPC_SECURITY_QOS
+    property version : UInt32
+    property capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES
+    property identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY
+    property impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL
+    def initialize(@version : UInt32, @capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES, @identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY, @impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL)
+    end
+  end
+
+  @[Extern]
+  struct SEC_WINNT_AUTH_IDENTITY_W
+    property user : UInt16*
+    property user_length : UInt32
+    property domain : UInt16*
+    property domain_length : UInt32
+    property password : UInt16*
+    property password_length : UInt32
+    property flags : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY
+    def initialize(@user : UInt16*, @user_length : UInt32, @domain : UInt16*, @domain_length : UInt32, @password : UInt16*, @password_length : UInt32, @flags : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY)
+    end
+  end
+
+  @[Extern]
+  struct SEC_WINNT_AUTH_IDENTITY_A
+    property user : UInt8*
+    property user_length : UInt32
+    property domain : UInt8*
+    property domain_length : UInt32
+    property password : UInt8*
+    property password_length : UInt32
+    property flags : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY
+    def initialize(@user : UInt8*, @user_length : UInt32, @domain : UInt8*, @domain_length : UInt32, @password : UInt8*, @password_length : UInt32, @flags : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY)
+    end
+  end
+
+  @[Extern]
+  struct RPC_HTTP_TRANSPORT_CREDENTIALS_W
+    property transport_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*
+    property flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS
+    property authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET
+    property number_of_authn_schemes : UInt32
+    property authn_schemes : UInt32*
+    property server_certificate_subject : UInt16*
+    def initialize(@transport_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*, @flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS, @authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET, @number_of_authn_schemes : UInt32, @authn_schemes : UInt32*, @server_certificate_subject : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct RPC_HTTP_TRANSPORT_CREDENTIALS_A
+    property transport_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_A*
+    property flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS
+    property authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET
+    property number_of_authn_schemes : UInt32
+    property authn_schemes : UInt32*
+    property server_certificate_subject : UInt8*
+    def initialize(@transport_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_A*, @flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS, @authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET, @number_of_authn_schemes : UInt32, @authn_schemes : UInt32*, @server_certificate_subject : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct RPC_HTTP_TRANSPORT_CREDENTIALS_V2_W
+    property transport_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*
+    property flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS
+    property authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET
+    property number_of_authn_schemes : UInt32
+    property authn_schemes : UInt32*
+    property server_certificate_subject : UInt16*
+    property proxy_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*
+    property number_of_proxy_authn_schemes : UInt32
+    property proxy_authn_schemes : UInt32*
+    def initialize(@transport_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*, @flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS, @authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET, @number_of_authn_schemes : UInt32, @authn_schemes : UInt32*, @server_certificate_subject : UInt16*, @proxy_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*, @number_of_proxy_authn_schemes : UInt32, @proxy_authn_schemes : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct RPC_HTTP_TRANSPORT_CREDENTIALS_V2_A
+    property transport_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_A*
+    property flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS
+    property authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET
+    property number_of_authn_schemes : UInt32
+    property authn_schemes : UInt32*
+    property server_certificate_subject : UInt8*
+    property proxy_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_A*
+    property number_of_proxy_authn_schemes : UInt32
+    property proxy_authn_schemes : UInt32*
+    def initialize(@transport_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_A*, @flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS, @authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET, @number_of_authn_schemes : UInt32, @authn_schemes : UInt32*, @server_certificate_subject : UInt8*, @proxy_credentials : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_A*, @number_of_proxy_authn_schemes : UInt32, @proxy_authn_schemes : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct RPC_HTTP_TRANSPORT_CREDENTIALS_V3_W
+    property transport_credentials : Void*
+    property flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS
+    property authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET
+    property number_of_authn_schemes : UInt32
+    property authn_schemes : UInt32*
+    property server_certificate_subject : UInt16*
+    property proxy_credentials : Void*
+    property number_of_proxy_authn_schemes : UInt32
+    property proxy_authn_schemes : UInt32*
+    def initialize(@transport_credentials : Void*, @flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS, @authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET, @number_of_authn_schemes : UInt32, @authn_schemes : UInt32*, @server_certificate_subject : UInt16*, @proxy_credentials : Void*, @number_of_proxy_authn_schemes : UInt32, @proxy_authn_schemes : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct RPC_HTTP_TRANSPORT_CREDENTIALS_V3_A
+    property transport_credentials : Void*
+    property flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS
+    property authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET
+    property number_of_authn_schemes : UInt32
+    property authn_schemes : UInt32*
+    property server_certificate_subject : UInt8*
+    property proxy_credentials : Void*
+    property number_of_proxy_authn_schemes : UInt32
+    property proxy_authn_schemes : UInt32*
+    def initialize(@transport_credentials : Void*, @flags : Win32cr::System::Rpc::RPC_C_HTTP_FLAGS, @authentication_target : Win32cr::System::Rpc::RPC_C_HTTP_AUTHN_TARGET, @number_of_authn_schemes : UInt32, @authn_schemes : UInt32*, @server_certificate_subject : UInt8*, @proxy_credentials : Void*, @number_of_proxy_authn_schemes : UInt32, @proxy_authn_schemes : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct RPC_SECURITY_QOS_V2_W
+    property version : UInt32
+    property capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES
+    property identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY
+    property impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL
+    property additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE
+    property u : U_e__union_
+
+    # Nested Type U_e__union_
+    @[Extern(union: true)]
+    struct U_e__union_
+    property http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_W*
+    def initialize(@http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_W*)
+    end
+    end
+
+    def initialize(@version : UInt32, @capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES, @identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY, @impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL, @additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE, @u : U_e__union_)
+    end
+  end
+
+  @[Extern]
+  struct RPC_SECURITY_QOS_V2_A
+    property version : UInt32
+    property capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES
+    property identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY
+    property impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL
+    property additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE
+    property u : U_e__union_
+
+    # Nested Type U_e__union_
+    @[Extern(union: true)]
+    struct U_e__union_
+    property http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_A*
+    def initialize(@http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_A*)
+    end
+    end
+
+    def initialize(@version : UInt32, @capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES, @identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY, @impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL, @additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE, @u : U_e__union_)
+    end
+  end
+
+  @[Extern]
+  struct RPC_SECURITY_QOS_V3_W
+    property version : UInt32
+    property capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES
+    property identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY
+    property impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL
+    property additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE
+    property u : U_e__union_
+    property sid : Void*
+
+    # Nested Type U_e__union_
+    @[Extern(union: true)]
+    struct U_e__union_
+    property http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_W*
+    def initialize(@http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_W*)
+    end
+    end
+
+    def initialize(@version : UInt32, @capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES, @identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY, @impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL, @additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE, @u : U_e__union_, @sid : Void*)
+    end
+  end
+
+  @[Extern]
+  struct RPC_SECURITY_QOS_V3_A
+    property version : UInt32
+    property capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES
+    property identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY
+    property impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL
+    property additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE
+    property u : U_e__union_
+    property sid : Void*
+
+    # Nested Type U_e__union_
+    @[Extern(union: true)]
+    struct U_e__union_
+    property http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_A*
+    def initialize(@http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_A*)
+    end
+    end
+
+    def initialize(@version : UInt32, @capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES, @identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY, @impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL, @additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE, @u : U_e__union_, @sid : Void*)
+    end
+  end
+
+  @[Extern]
+  struct RPC_SECURITY_QOS_V4_W
+    property version : UInt32
+    property capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES
+    property identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY
+    property impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL
+    property additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE
+    property u : U_e__union_
+    property sid : Void*
+    property effective_only : UInt32
+
+    # Nested Type U_e__union_
+    @[Extern(union: true)]
+    struct U_e__union_
+    property http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_W*
+    def initialize(@http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_W*)
+    end
+    end
+
+    def initialize(@version : UInt32, @capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES, @identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY, @impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL, @additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE, @u : U_e__union_, @sid : Void*, @effective_only : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RPC_SECURITY_QOS_V4_A
+    property version : UInt32
+    property capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES
+    property identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY
+    property impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL
+    property additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE
+    property u : U_e__union_
+    property sid : Void*
+    property effective_only : UInt32
+
+    # Nested Type U_e__union_
+    @[Extern(union: true)]
+    struct U_e__union_
+    property http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_A*
+    def initialize(@http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_A*)
+    end
+    end
+
+    def initialize(@version : UInt32, @capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES, @identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY, @impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL, @additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE, @u : U_e__union_, @sid : Void*, @effective_only : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RPC_SECURITY_QOS_V5_W
+    property version : UInt32
+    property capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES
+    property identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY
+    property impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL
+    property additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE
+    property u : U_e__union_
+    property sid : Void*
+    property effective_only : UInt32
+    property server_security_descriptor : Void*
+
+    # Nested Type U_e__union_
+    @[Extern(union: true)]
+    struct U_e__union_
+    property http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_W*
+    def initialize(@http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_W*)
+    end
+    end
+
+    def initialize(@version : UInt32, @capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES, @identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY, @impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL, @additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE, @u : U_e__union_, @sid : Void*, @effective_only : UInt32, @server_security_descriptor : Void*)
+    end
+  end
+
+  @[Extern]
+  struct RPC_SECURITY_QOS_V5_A
+    property version : UInt32
+    property capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES
+    property identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY
+    property impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL
+    property additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE
+    property u : U_e__union_
+    property sid : Void*
+    property effective_only : UInt32
+    property server_security_descriptor : Void*
+
+    # Nested Type U_e__union_
+    @[Extern(union: true)]
+    struct U_e__union_
+    property http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_A*
+    def initialize(@http_credentials : Win32cr::System::Rpc::RPC_HTTP_TRANSPORT_CREDENTIALS_A*)
+    end
+    end
+
+    def initialize(@version : UInt32, @capabilities : Win32cr::System::Rpc::RPC_C_QOS_CAPABILITIES, @identity_tracking : Win32cr::System::Rpc::RPC_C_QOS_IDENTITY, @impersonation_type : Win32cr::System::Com::RPC_C_IMP_LEVEL, @additional_security_info_type : Win32cr::System::Rpc::RPC_C_AUTHN_INFO_TYPE, @u : U_e__union_, @sid : Void*, @effective_only : UInt32, @server_security_descriptor : Void*)
+    end
+  end
+
+  @[Extern]
+  struct RPC_BINDING_HANDLE_TEMPLATE_V1_W
+    property version : UInt32
+    property flags : UInt32
+    property protocol_sequence : UInt32
+    property network_address : UInt16*
+    property string_endpoint : UInt16*
+    property u1 : U1_e__union_
+    property object_uuid : LibC::GUID
 
     # Nested Type U1_e__union_
     @[Extern(union: true)]
-    record U1_e__union_,
-      reserved : UInt16*
+    struct U1_e__union_
+    property reserved : UInt16*
+    def initialize(@reserved : UInt16*)
+    end
+    end
 
+    def initialize(@version : UInt32, @flags : UInt32, @protocol_sequence : UInt32, @network_address : UInt16*, @string_endpoint : UInt16*, @u1 : U1_e__union_, @object_uuid : LibC::GUID)
+    end
   end
 
   @[Extern]
-  record RPC_BINDING_HANDLE_TEMPLATE_V1_A,
-    version : UInt32,
-    flags : UInt32,
-    protocol_sequence : UInt32,
-    network_address : UInt8*,
-    string_endpoint : UInt8*,
-    u1 : U1_e__union_,
-    object_uuid : LibC::GUID do
+  struct RPC_BINDING_HANDLE_TEMPLATE_V1_A
+    property version : UInt32
+    property flags : UInt32
+    property protocol_sequence : UInt32
+    property network_address : UInt8*
+    property string_endpoint : UInt8*
+    property u1 : U1_e__union_
+    property object_uuid : LibC::GUID
 
     # Nested Type U1_e__union_
     @[Extern(union: true)]
-    record U1_e__union_,
-      reserved : UInt8*
+    struct U1_e__union_
+    property reserved : UInt8*
+    def initialize(@reserved : UInt8*)
+    end
+    end
 
+    def initialize(@version : UInt32, @flags : UInt32, @protocol_sequence : UInt32, @network_address : UInt8*, @string_endpoint : UInt8*, @u1 : U1_e__union_, @object_uuid : LibC::GUID)
+    end
   end
 
   @[Extern]
-  record RPC_BINDING_HANDLE_SECURITY_V1_W,
-    version : UInt32,
-    server_princ_name : UInt16*,
-    authn_level : UInt32,
-    authn_svc : UInt32,
-    auth_identity : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*,
-    security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*
+  struct RPC_BINDING_HANDLE_SECURITY_V1_W
+    property version : UInt32
+    property server_princ_name : UInt16*
+    property authn_level : UInt32
+    property authn_svc : UInt32
+    property auth_identity : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*
+    property security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*
+    def initialize(@version : UInt32, @server_princ_name : UInt16*, @authn_level : UInt32, @authn_svc : UInt32, @auth_identity : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*, @security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*)
+    end
+  end
 
   @[Extern]
-  record RPC_BINDING_HANDLE_SECURITY_V1_A,
-    version : UInt32,
-    server_princ_name : UInt8*,
-    authn_level : UInt32,
-    authn_svc : UInt32,
-    auth_identity : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_A*,
-    security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*
+  struct RPC_BINDING_HANDLE_SECURITY_V1_A
+    property version : UInt32
+    property server_princ_name : UInt8*
+    property authn_level : UInt32
+    property authn_svc : UInt32
+    property auth_identity : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_A*
+    property security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*
+    def initialize(@version : UInt32, @server_princ_name : UInt8*, @authn_level : UInt32, @authn_svc : UInt32, @auth_identity : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_A*, @security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*)
+    end
+  end
 
   @[Extern]
-  record RPC_BINDING_HANDLE_OPTIONS_V1,
-    version : UInt32,
-    flags : Win32cr::System::Rpc::RPC_BINDING_HANDLE_OPTIONS_FLAGS,
-    com_timeout : UInt32,
-    call_timeout : UInt32
+  struct RPC_BINDING_HANDLE_OPTIONS_V1
+    property version : UInt32
+    property flags : Win32cr::System::Rpc::RPC_BINDING_HANDLE_OPTIONS_FLAGS
+    property com_timeout : UInt32
+    property call_timeout : UInt32
+    def initialize(@version : UInt32, @flags : Win32cr::System::Rpc::RPC_BINDING_HANDLE_OPTIONS_FLAGS, @com_timeout : UInt32, @call_timeout : UInt32)
+    end
+  end
 
   @[Extern]
-  record RPC_CLIENT_INFORMATION1,
-    user_name : UInt8*,
-    computer_name : UInt8*,
-    privilege : UInt16,
-    auth_flags : UInt32
+  struct RPC_CLIENT_INFORMATION1
+    property user_name : UInt8*
+    property computer_name : UInt8*
+    property privilege : UInt16
+    property auth_flags : UInt32
+    def initialize(@user_name : UInt8*, @computer_name : UInt8*, @privilege : UInt16, @auth_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record RPC_ENDPOINT_TEMPLATEW,
-    version : UInt32,
-    prot_seq : UInt16*,
-    endpoint : UInt16*,
-    security_descriptor : Void*,
-    backlog : UInt32
+  struct RPC_ENDPOINT_TEMPLATEW
+    property version : UInt32
+    property prot_seq : UInt16*
+    property endpoint : UInt16*
+    property security_descriptor : Void*
+    property backlog : UInt32
+    def initialize(@version : UInt32, @prot_seq : UInt16*, @endpoint : UInt16*, @security_descriptor : Void*, @backlog : UInt32)
+    end
+  end
 
   @[Extern]
-  record RPC_ENDPOINT_TEMPLATEA,
-    version : UInt32,
-    prot_seq : UInt8*,
-    endpoint : UInt8*,
-    security_descriptor : Void*,
-    backlog : UInt32
+  struct RPC_ENDPOINT_TEMPLATEA
+    property version : UInt32
+    property prot_seq : UInt8*
+    property endpoint : UInt8*
+    property security_descriptor : Void*
+    property backlog : UInt32
+    def initialize(@version : UInt32, @prot_seq : UInt8*, @endpoint : UInt8*, @security_descriptor : Void*, @backlog : UInt32)
+    end
+  end
 
   @[Extern]
-  record RPC_INTERFACE_TEMPLATEA,
-    version : UInt32,
-    if_spec : Void*,
-    mgr_type_uuid : LibC::GUID*,
-    mgr_epv : Void*,
-    flags : UInt32,
-    max_calls : UInt32,
-    max_rpc_size : UInt32,
-    if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN,
-    uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*,
-    annotation__ : UInt8*,
-    security_descriptor : Void*
+  struct RPC_INTERFACE_TEMPLATEA
+    property version : UInt32
+    property if_spec : Void*
+    property mgr_type_uuid : LibC::GUID*
+    property mgr_epv : Void*
+    property flags : UInt32
+    property max_calls : UInt32
+    property max_rpc_size : UInt32
+    property if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN
+    property uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*
+    property annotation__ : UInt8*
+    property security_descriptor : Void*
+    def initialize(@version : UInt32, @if_spec : Void*, @mgr_type_uuid : LibC::GUID*, @mgr_epv : Void*, @flags : UInt32, @max_calls : UInt32, @max_rpc_size : UInt32, @if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN, @uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, @annotation__ : UInt8*, @security_descriptor : Void*)
+    end
+  end
 
   @[Extern]
-  record RPC_INTERFACE_TEMPLATEW,
-    version : UInt32,
-    if_spec : Void*,
-    mgr_type_uuid : LibC::GUID*,
-    mgr_epv : Void*,
-    flags : UInt32,
-    max_calls : UInt32,
-    max_rpc_size : UInt32,
-    if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN,
-    uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*,
-    annotation__ : UInt16*,
-    security_descriptor : Void*
+  struct RPC_INTERFACE_TEMPLATEW
+    property version : UInt32
+    property if_spec : Void*
+    property mgr_type_uuid : LibC::GUID*
+    property mgr_epv : Void*
+    property flags : UInt32
+    property max_calls : UInt32
+    property max_rpc_size : UInt32
+    property if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN
+    property uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*
+    property annotation__ : UInt16*
+    property security_descriptor : Void*
+    def initialize(@version : UInt32, @if_spec : Void*, @mgr_type_uuid : LibC::GUID*, @mgr_epv : Void*, @flags : UInt32, @max_calls : UInt32, @max_rpc_size : UInt32, @if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN, @uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, @annotation__ : UInt16*, @security_descriptor : Void*)
+    end
+  end
 
   @[Extern]
-  record RPC_VERSION,
-    major_version : UInt16,
-    minor_version : UInt16
+  struct RPC_VERSION
+    property major_version : UInt16
+    property minor_version : UInt16
+    def initialize(@major_version : UInt16, @minor_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record RPC_SYNTAX_IDENTIFIER,
-    syntax_guid : LibC::GUID,
-    syntax_version : Win32cr::System::Rpc::RPC_VERSION
+  struct RPC_SYNTAX_IDENTIFIER
+    property syntax_guid : LibC::GUID
+    property syntax_version : Win32cr::System::Rpc::RPC_VERSION
+    def initialize(@syntax_guid : LibC::GUID, @syntax_version : Win32cr::System::Rpc::RPC_VERSION)
+    end
+  end
 
   @[Extern]
-  record RPC_MESSAGE,
-    handle : Void*,
-    data_representation : UInt32,
-    buffer : Void*,
-    buffer_length : UInt32,
-    proc_num : UInt32,
-    transfer_syntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER*,
-    rpc_interface_information : Void*,
-    reserved_for_runtime : Void*,
-    manager_epv : Void*,
-    import_context : Void*,
-    rpc_flags : UInt32
+  struct RPC_MESSAGE
+    property handle : Void*
+    property data_representation : UInt32
+    property buffer : Void*
+    property buffer_length : UInt32
+    property proc_num : UInt32
+    property transfer_syntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER*
+    property rpc_interface_information : Void*
+    property reserved_for_runtime : Void*
+    property manager_epv : Void*
+    property import_context : Void*
+    property rpc_flags : UInt32
+    def initialize(@handle : Void*, @data_representation : UInt32, @buffer : Void*, @buffer_length : UInt32, @proc_num : UInt32, @transfer_syntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER*, @rpc_interface_information : Void*, @reserved_for_runtime : Void*, @manager_epv : Void*, @import_context : Void*, @rpc_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record RPC_DISPATCH_TABLE,
-    dispatch_table_count : UInt32,
-    dispatch_table : Win32cr::System::Rpc::RPC_DISPATCH_FUNCTION,
-    reserved : LibC::IntPtrT
+  struct RPC_DISPATCH_TABLE
+    property dispatch_table_count : UInt32
+    property dispatch_table : Win32cr::System::Rpc::RPC_DISPATCH_FUNCTION
+    property reserved : LibC::IntPtrT
+    def initialize(@dispatch_table_count : UInt32, @dispatch_table : Win32cr::System::Rpc::RPC_DISPATCH_FUNCTION, @reserved : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record RPC_PROTSEQ_ENDPOINT,
-    rpc_protocol_sequence : UInt8*,
-    endpoint : UInt8*
+  struct RPC_PROTSEQ_ENDPOINT
+    property rpc_protocol_sequence : UInt8*
+    property endpoint : UInt8*
+    def initialize(@rpc_protocol_sequence : UInt8*, @endpoint : UInt8*)
+    end
+  end
 
   @[Extern]
-  record RPC_SERVER_INTERFACE,
-    length : UInt32,
-    interface_id : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER,
-    transfer_syntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER,
-    dispatch_table : Win32cr::System::Rpc::RPC_DISPATCH_TABLE*,
-    rpc_protseq_endpoint_count : UInt32,
-    rpc_protseq_endpoint : Win32cr::System::Rpc::RPC_PROTSEQ_ENDPOINT*,
-    default_manager_epv : Void*,
-    interpreter_info : Void*,
-    flags : UInt32
+  struct RPC_SERVER_INTERFACE
+    property length : UInt32
+    property interface_id : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER
+    property transfer_syntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER
+    property dispatch_table : Win32cr::System::Rpc::RPC_DISPATCH_TABLE*
+    property rpc_protseq_endpoint_count : UInt32
+    property rpc_protseq_endpoint : Win32cr::System::Rpc::RPC_PROTSEQ_ENDPOINT*
+    property default_manager_epv : Void*
+    property interpreter_info : Void*
+    property flags : UInt32
+    def initialize(@length : UInt32, @interface_id : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER, @transfer_syntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER, @dispatch_table : Win32cr::System::Rpc::RPC_DISPATCH_TABLE*, @rpc_protseq_endpoint_count : UInt32, @rpc_protseq_endpoint : Win32cr::System::Rpc::RPC_PROTSEQ_ENDPOINT*, @default_manager_epv : Void*, @interpreter_info : Void*, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record RPC_CLIENT_INTERFACE,
-    length : UInt32,
-    interface_id : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER,
-    transfer_syntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER,
-    dispatch_table : Win32cr::System::Rpc::RPC_DISPATCH_TABLE*,
-    rpc_protseq_endpoint_count : UInt32,
-    rpc_protseq_endpoint : Win32cr::System::Rpc::RPC_PROTSEQ_ENDPOINT*,
-    reserved : LibC::UIntPtrT,
-    interpreter_info : Void*,
-    flags : UInt32
+  struct RPC_CLIENT_INTERFACE
+    property length : UInt32
+    property interface_id : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER
+    property transfer_syntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER
+    property dispatch_table : Win32cr::System::Rpc::RPC_DISPATCH_TABLE*
+    property rpc_protseq_endpoint_count : UInt32
+    property rpc_protseq_endpoint : Win32cr::System::Rpc::RPC_PROTSEQ_ENDPOINT*
+    property reserved : LibC::UIntPtrT
+    property interpreter_info : Void*
+    property flags : UInt32
+    def initialize(@length : UInt32, @interface_id : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER, @transfer_syntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER, @dispatch_table : Win32cr::System::Rpc::RPC_DISPATCH_TABLE*, @rpc_protseq_endpoint_count : UInt32, @rpc_protseq_endpoint : Win32cr::System::Rpc::RPC_PROTSEQ_ENDPOINT*, @reserved : LibC::UIntPtrT, @interpreter_info : Void*, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record RPC_SEC_CONTEXT_KEY_INFO,
-    encrypt_algorithm : UInt32,
-    key_size : UInt32,
-    signature_algorithm : UInt32
+  struct RPC_SEC_CONTEXT_KEY_INFO
+    property encrypt_algorithm : UInt32
+    property key_size : UInt32
+    property signature_algorithm : UInt32
+    def initialize(@encrypt_algorithm : UInt32, @key_size : UInt32, @signature_algorithm : UInt32)
+    end
+  end
 
   @[Extern]
-  record RPC_TRANSFER_SYNTAX,
-    uuid : LibC::GUID,
-    vers_major : UInt16,
-    vers_minor : UInt16
+  struct RPC_TRANSFER_SYNTAX
+    property uuid : LibC::GUID
+    property vers_major : UInt16
+    property vers_minor : UInt16
+    def initialize(@uuid : LibC::GUID, @vers_major : UInt16, @vers_minor : UInt16)
+    end
+  end
 
   @[Extern]
-  record RPC_C_OPT_COOKIE_AUTH_DESCRIPTOR,
-    buffer_size : UInt32,
-    buffer : Win32cr::Foundation::PSTR
+  struct RPC_C_OPT_COOKIE_AUTH_DESCRIPTOR
+    property buffer_size : UInt32
+    property buffer : Win32cr::Foundation::PSTR
+    def initialize(@buffer_size : UInt32, @buffer : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record RDR_CALLOUT_STATE,
-    last_error : Win32cr::System::Rpc::RPC_STATUS,
-    last_ee_info : Void*,
-    last_called_stage : Win32cr::System::Rpc::RPC_HTTP_REDIRECTOR_STAGE,
-    server_name : UInt16*,
-    server_port : UInt16*,
-    remote_user : UInt16*,
-    auth_type : UInt16*,
-    resource_type_present : UInt8,
-    session_id_present : UInt8,
-    interface_present : UInt8,
-    resource_type : LibC::GUID,
-    session_id : LibC::GUID,
-    interface : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER,
-    cert_context : Void*
+  struct RDR_CALLOUT_STATE
+    property last_error : Win32cr::System::Rpc::RPC_STATUS
+    property last_ee_info : Void*
+    property last_called_stage : Win32cr::System::Rpc::RPC_HTTP_REDIRECTOR_STAGE
+    property server_name : UInt16*
+    property server_port : UInt16*
+    property remote_user : UInt16*
+    property auth_type : UInt16*
+    property resource_type_present : UInt8
+    property session_id_present : UInt8
+    property interface_present : UInt8
+    property resource_type : LibC::GUID
+    property session_id : LibC::GUID
+    property interface : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER
+    property cert_context : Void*
+    def initialize(@last_error : Win32cr::System::Rpc::RPC_STATUS, @last_ee_info : Void*, @last_called_stage : Win32cr::System::Rpc::RPC_HTTP_REDIRECTOR_STAGE, @server_name : UInt16*, @server_port : UInt16*, @remote_user : UInt16*, @auth_type : UInt16*, @resource_type_present : UInt8, @session_id_present : UInt8, @interface_present : UInt8, @resource_type : LibC::GUID, @session_id : LibC::GUID, @interface : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER, @cert_context : Void*)
+    end
+  end
 
   @[Extern]
-  record I_RpcProxyCallbackInterface,
-    is_valid_machine_fn : Win32cr::System::Rpc::I_RpcProxyIsValidMachineFn,
-    get_client_address_fn : Win32cr::System::Rpc::I_RpcProxyGetClientAddressFn,
-    get_connection_timeout_fn : Win32cr::System::Rpc::I_RpcProxyGetConnectionTimeoutFn,
-    perform_callout_fn : Win32cr::System::Rpc::I_RpcPerformCalloutFn,
-    free_callout_state_fn : Win32cr::System::Rpc::I_RpcFreeCalloutStateFn,
-    get_client_session_and_resource_uuid_fn : Win32cr::System::Rpc::I_RpcProxyGetClientSessionAndResourceUUID,
-    proxy_filter_if_fn : Win32cr::System::Rpc::I_RpcProxyFilterIfFn,
-    rpc_proxy_update_perf_counter_fn : Win32cr::System::Rpc::I_RpcProxyUpdatePerfCounterFn,
-    rpc_proxy_update_perf_counter_backend_server_fn : Win32cr::System::Rpc::I_RpcProxyUpdatePerfCounterBackendServerFn
+  struct I_RpcProxyCallbackInterface
+    property is_valid_machine_fn : Win32cr::System::Rpc::I_RpcProxyIsValidMachineFn
+    property get_client_address_fn : Win32cr::System::Rpc::I_RpcProxyGetClientAddressFn
+    property get_connection_timeout_fn : Win32cr::System::Rpc::I_RpcProxyGetConnectionTimeoutFn
+    property perform_callout_fn : Win32cr::System::Rpc::I_RpcPerformCalloutFn
+    property free_callout_state_fn : Win32cr::System::Rpc::I_RpcFreeCalloutStateFn
+    property get_client_session_and_resource_uuid_fn : Win32cr::System::Rpc::I_RpcProxyGetClientSessionAndResourceUUID
+    property proxy_filter_if_fn : Win32cr::System::Rpc::I_RpcProxyFilterIfFn
+    property rpc_proxy_update_perf_counter_fn : Win32cr::System::Rpc::I_RpcProxyUpdatePerfCounterFn
+    property rpc_proxy_update_perf_counter_backend_server_fn : Win32cr::System::Rpc::I_RpcProxyUpdatePerfCounterBackendServerFn
+    def initialize(@is_valid_machine_fn : Win32cr::System::Rpc::I_RpcProxyIsValidMachineFn, @get_client_address_fn : Win32cr::System::Rpc::I_RpcProxyGetClientAddressFn, @get_connection_timeout_fn : Win32cr::System::Rpc::I_RpcProxyGetConnectionTimeoutFn, @perform_callout_fn : Win32cr::System::Rpc::I_RpcPerformCalloutFn, @free_callout_state_fn : Win32cr::System::Rpc::I_RpcFreeCalloutStateFn, @get_client_session_and_resource_uuid_fn : Win32cr::System::Rpc::I_RpcProxyGetClientSessionAndResourceUUID, @proxy_filter_if_fn : Win32cr::System::Rpc::I_RpcProxyFilterIfFn, @rpc_proxy_update_perf_counter_fn : Win32cr::System::Rpc::I_RpcProxyUpdatePerfCounterFn, @rpc_proxy_update_perf_counter_backend_server_fn : Win32cr::System::Rpc::I_RpcProxyUpdatePerfCounterBackendServerFn)
+    end
+  end
 
   @[Extern(union: true)]
-  record RPC_ASYNC_NOTIFICATION_INFO,
-    apc : APC_e__Struct_,
-    ioc : IOC_e__Struct_,
-    int_ptr : IntPtr_e__Struct_,
-    hEvent : Win32cr::Foundation::HANDLE,
-    notification_routine : Win32cr::System::Rpc::PFN_RPCNOTIFICATION_ROUTINE do
+  struct RPC_ASYNC_NOTIFICATION_INFO
+    property apc : APC_e__Struct_
+    property ioc : IOC_e__Struct_
+    property int_ptr : IntPtr_e__Struct_
+    property hEvent : Win32cr::Foundation::HANDLE
+    property notification_routine : Win32cr::System::Rpc::PFN_RPCNOTIFICATION_ROUTINE
 
     # Nested Type IOC_e__Struct_
     @[Extern]
-    record IOC_e__Struct_,
-      hIOPort : Win32cr::Foundation::HANDLE,
-      dwNumberOfBytesTransferred : UInt32,
-      dwCompletionKey : LibC::UIntPtrT,
-      lpOverlapped : Win32cr::System::IO::OVERLAPPED*
+    struct IOC_e__Struct_
+    property hIOPort : Win32cr::Foundation::HANDLE
+    property dwNumberOfBytesTransferred : UInt32
+    property dwCompletionKey : LibC::UIntPtrT
+    property lpOverlapped : Win32cr::System::IO::OVERLAPPED*
+    def initialize(@hIOPort : Win32cr::Foundation::HANDLE, @dwNumberOfBytesTransferred : UInt32, @dwCompletionKey : LibC::UIntPtrT, @lpOverlapped : Win32cr::System::IO::OVERLAPPED*)
+    end
+    end
 
 
     # Nested Type APC_e__Struct_
     @[Extern]
-    record APC_e__Struct_,
-      notification_routine : Win32cr::System::Rpc::PFN_RPCNOTIFICATION_ROUTINE,
-      hThread : Win32cr::Foundation::HANDLE
+    struct APC_e__Struct_
+    property notification_routine : Win32cr::System::Rpc::PFN_RPCNOTIFICATION_ROUTINE
+    property hThread : Win32cr::Foundation::HANDLE
+    def initialize(@notification_routine : Win32cr::System::Rpc::PFN_RPCNOTIFICATION_ROUTINE, @hThread : Win32cr::Foundation::HANDLE)
+    end
+    end
 
 
     # Nested Type IntPtr_e__Struct_
     @[Extern]
-    record IntPtr_e__Struct_,
-      hWnd : Win32cr::Foundation::HWND,
-      msg : UInt32
+    struct IntPtr_e__Struct_
+    property hWnd : Win32cr::Foundation::HWND
+    property msg : UInt32
+    def initialize(@hWnd : Win32cr::Foundation::HWND, @msg : UInt32)
+    end
+    end
 
+    def initialize(@apc : APC_e__Struct_, @ioc : IOC_e__Struct_, @int_ptr : IntPtr_e__Struct_, @hEvent : Win32cr::Foundation::HANDLE, @notification_routine : Win32cr::System::Rpc::PFN_RPCNOTIFICATION_ROUTINE)
+    end
   end
 
   @[Extern]
-  record RPC_ASYNC_STATE,
-    size : UInt32,
-    signature : UInt32,
-    lock : Int32,
-    flags : UInt32,
-    stub_info : Void*,
-    user_info : Void*,
-    runtime_info : Void*,
-    event : Win32cr::System::Rpc::RPC_ASYNC_EVENT,
-    notification_type : Win32cr::System::Rpc::RPC_NOTIFICATION_TYPES,
-    u : Win32cr::System::Rpc::RPC_ASYNC_NOTIFICATION_INFO,
-    reserved : LibC::IntPtrT[4]
+  struct RPC_ASYNC_STATE
+    property size : UInt32
+    property signature : UInt32
+    property lock : Int32
+    property flags : UInt32
+    property stub_info : Void*
+    property user_info : Void*
+    property runtime_info : Void*
+    property event : Win32cr::System::Rpc::RPC_ASYNC_EVENT
+    property notification_type : Win32cr::System::Rpc::RPC_NOTIFICATION_TYPES
+    property u : Win32cr::System::Rpc::RPC_ASYNC_NOTIFICATION_INFO
+    property reserved : LibC::IntPtrT[4]
+    def initialize(@size : UInt32, @signature : UInt32, @lock : Int32, @flags : UInt32, @stub_info : Void*, @user_info : Void*, @runtime_info : Void*, @event : Win32cr::System::Rpc::RPC_ASYNC_EVENT, @notification_type : Win32cr::System::Rpc::RPC_NOTIFICATION_TYPES, @u : Win32cr::System::Rpc::RPC_ASYNC_NOTIFICATION_INFO, @reserved : LibC::IntPtrT[4])
+    end
+  end
 
   @[Extern]
-  record BinaryParam,
-    buffer : Void*,
-    size : Int16
+  struct BinaryParam
+    property buffer : Void*
+    property size : Int16
+    def initialize(@buffer : Void*, @size : Int16)
+    end
+  end
 
   @[Extern]
-  record RPC_EE_INFO_PARAM,
-    parameter_type : Win32cr::System::Rpc::ExtendedErrorParamTypes,
-    u : U_e__union_ do
+  struct RPC_EE_INFO_PARAM
+    property parameter_type : Win32cr::System::Rpc::ExtendedErrorParamTypes
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      ansi_string : Win32cr::Foundation::PSTR,
-      unicode_string : Win32cr::Foundation::PWSTR,
-      l_val : Int32,
-      s_val : Int16,
-      p_val : UInt64,
-      b_val : Win32cr::System::Rpc::BinaryParam
+    struct U_e__union_
+    property ansi_string : Win32cr::Foundation::PSTR
+    property unicode_string : Win32cr::Foundation::PWSTR
+    property l_val : Int32
+    property s_val : Int16
+    property p_val : UInt64
+    property b_val : Win32cr::System::Rpc::BinaryParam
+    def initialize(@ansi_string : Win32cr::Foundation::PSTR, @unicode_string : Win32cr::Foundation::PWSTR, @l_val : Int32, @s_val : Int16, @p_val : UInt64, @b_val : Win32cr::System::Rpc::BinaryParam)
+    end
+    end
 
+    def initialize(@parameter_type : Win32cr::System::Rpc::ExtendedErrorParamTypes, @u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record RPC_EXTENDED_ERROR_INFO,
-    version : UInt32,
-    computer_name : Win32cr::Foundation::PWSTR,
-    process_id : UInt32,
-    u : U_e__union_,
-    generating_component : UInt32,
-    status : UInt32,
-    detection_location : UInt16,
-    flags : UInt16,
-    number_of_parameters : Int32,
-    parameters : Win32cr::System::Rpc::RPC_EE_INFO_PARAM[4] do
+  struct RPC_EXTENDED_ERROR_INFO
+    property version : UInt32
+    property computer_name : Win32cr::Foundation::PWSTR
+    property process_id : UInt32
+    property u : U_e__union_
+    property generating_component : UInt32
+    property status : UInt32
+    property detection_location : UInt16
+    property flags : UInt16
+    property number_of_parameters : Int32
+    property parameters : Win32cr::System::Rpc::RPC_EE_INFO_PARAM[4]
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      system_time : Win32cr::Foundation::SYSTEMTIME,
-      file_time : Win32cr::Foundation::FILETIME
+    struct U_e__union_
+    property system_time : Win32cr::Foundation::SYSTEMTIME
+    property file_time : Win32cr::Foundation::FILETIME
+    def initialize(@system_time : Win32cr::Foundation::SYSTEMTIME, @file_time : Win32cr::Foundation::FILETIME)
+    end
+    end
 
+    def initialize(@version : UInt32, @computer_name : Win32cr::Foundation::PWSTR, @process_id : UInt32, @u : U_e__union_, @generating_component : UInt32, @status : UInt32, @detection_location : UInt16, @flags : UInt16, @number_of_parameters : Int32, @parameters : Win32cr::System::Rpc::RPC_EE_INFO_PARAM[4])
+    end
   end
 
   @[Extern]
-  record RPC_ERROR_ENUM_HANDLE,
-    signature : UInt32,
-    current_pos : Void*,
-    head : Void*
+  struct RPC_ERROR_ENUM_HANDLE
+    property signature : UInt32
+    property current_pos : Void*
+    property head : Void*
+    def initialize(@signature : UInt32, @current_pos : Void*, @head : Void*)
+    end
+  end
 
   @[Extern]
-  record RPC_CALL_LOCAL_ADDRESS_V1,
-    version : UInt32,
-    buffer : Void*,
-    buffer_size : UInt32,
-    address_format : Win32cr::System::Rpc::RpcLocalAddressFormat
+  struct RPC_CALL_LOCAL_ADDRESS_V1
+    property version : UInt32
+    property buffer : Void*
+    property buffer_size : UInt32
+    property address_format : Win32cr::System::Rpc::RpcLocalAddressFormat
+    def initialize(@version : UInt32, @buffer : Void*, @buffer_size : UInt32, @address_format : Win32cr::System::Rpc::RpcLocalAddressFormat)
+    end
+  end
 
   @[Extern]
-  record RPC_CALL_ATTRIBUTES_V1_W,
-    version : UInt32,
-    flags : UInt32,
-    server_principal_name_buffer_length : UInt32,
-    server_principal_name : UInt16*,
-    client_principal_name_buffer_length : UInt32,
-    client_principal_name : UInt16*,
-    authentication_level : UInt32,
-    authentication_service : UInt32,
-    null_session : Win32cr::Foundation::BOOL
+  struct RPC_CALL_ATTRIBUTES_V1_W
+    property version : UInt32
+    property flags : UInt32
+    property server_principal_name_buffer_length : UInt32
+    property server_principal_name : UInt16*
+    property client_principal_name_buffer_length : UInt32
+    property client_principal_name : UInt16*
+    property authentication_level : UInt32
+    property authentication_service : UInt32
+    property null_session : Win32cr::Foundation::BOOL
+    def initialize(@version : UInt32, @flags : UInt32, @server_principal_name_buffer_length : UInt32, @server_principal_name : UInt16*, @client_principal_name_buffer_length : UInt32, @client_principal_name : UInt16*, @authentication_level : UInt32, @authentication_service : UInt32, @null_session : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record RPC_CALL_ATTRIBUTES_V1_A,
-    version : UInt32,
-    flags : UInt32,
-    server_principal_name_buffer_length : UInt32,
-    server_principal_name : UInt8*,
-    client_principal_name_buffer_length : UInt32,
-    client_principal_name : UInt8*,
-    authentication_level : UInt32,
-    authentication_service : UInt32,
-    null_session : Win32cr::Foundation::BOOL
+  struct RPC_CALL_ATTRIBUTES_V1_A
+    property version : UInt32
+    property flags : UInt32
+    property server_principal_name_buffer_length : UInt32
+    property server_principal_name : UInt8*
+    property client_principal_name_buffer_length : UInt32
+    property client_principal_name : UInt8*
+    property authentication_level : UInt32
+    property authentication_service : UInt32
+    property null_session : Win32cr::Foundation::BOOL
+    def initialize(@version : UInt32, @flags : UInt32, @server_principal_name_buffer_length : UInt32, @server_principal_name : UInt8*, @client_principal_name_buffer_length : UInt32, @client_principal_name : UInt8*, @authentication_level : UInt32, @authentication_service : UInt32, @null_session : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record RPC_CALL_ATTRIBUTES_V2_W,
-    version : UInt32,
-    flags : UInt32,
-    server_principal_name_buffer_length : UInt32,
-    server_principal_name : UInt16*,
-    client_principal_name_buffer_length : UInt32,
-    client_principal_name : UInt16*,
-    authentication_level : UInt32,
-    authentication_service : UInt32,
-    null_session : Win32cr::Foundation::BOOL,
-    kernel_mode_caller : Win32cr::Foundation::BOOL,
-    protocol_sequence : UInt32,
-    is_client_local : Win32cr::System::Rpc::RpcCallClientLocality,
-    client_pid : Win32cr::Foundation::HANDLE,
-    call_status : UInt32,
-    call_type : Win32cr::System::Rpc::RpcCallType,
-    call_local_address : Win32cr::System::Rpc::RPC_CALL_LOCAL_ADDRESS_V1*,
-    op_num : UInt16,
-    interface_uuid : LibC::GUID
+  struct RPC_CALL_ATTRIBUTES_V2_W
+    property version : UInt32
+    property flags : UInt32
+    property server_principal_name_buffer_length : UInt32
+    property server_principal_name : UInt16*
+    property client_principal_name_buffer_length : UInt32
+    property client_principal_name : UInt16*
+    property authentication_level : UInt32
+    property authentication_service : UInt32
+    property null_session : Win32cr::Foundation::BOOL
+    property kernel_mode_caller : Win32cr::Foundation::BOOL
+    property protocol_sequence : UInt32
+    property is_client_local : Win32cr::System::Rpc::RpcCallClientLocality
+    property client_pid : Win32cr::Foundation::HANDLE
+    property call_status : UInt32
+    property call_type : Win32cr::System::Rpc::RpcCallType
+    property call_local_address : Win32cr::System::Rpc::RPC_CALL_LOCAL_ADDRESS_V1*
+    property op_num : UInt16
+    property interface_uuid : LibC::GUID
+    def initialize(@version : UInt32, @flags : UInt32, @server_principal_name_buffer_length : UInt32, @server_principal_name : UInt16*, @client_principal_name_buffer_length : UInt32, @client_principal_name : UInt16*, @authentication_level : UInt32, @authentication_service : UInt32, @null_session : Win32cr::Foundation::BOOL, @kernel_mode_caller : Win32cr::Foundation::BOOL, @protocol_sequence : UInt32, @is_client_local : Win32cr::System::Rpc::RpcCallClientLocality, @client_pid : Win32cr::Foundation::HANDLE, @call_status : UInt32, @call_type : Win32cr::System::Rpc::RpcCallType, @call_local_address : Win32cr::System::Rpc::RPC_CALL_LOCAL_ADDRESS_V1*, @op_num : UInt16, @interface_uuid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record RPC_CALL_ATTRIBUTES_V2_A,
-    version : UInt32,
-    flags : UInt32,
-    server_principal_name_buffer_length : UInt32,
-    server_principal_name : UInt8*,
-    client_principal_name_buffer_length : UInt32,
-    client_principal_name : UInt8*,
-    authentication_level : UInt32,
-    authentication_service : UInt32,
-    null_session : Win32cr::Foundation::BOOL,
-    kernel_mode_caller : Win32cr::Foundation::BOOL,
-    protocol_sequence : UInt32,
-    is_client_local : UInt32,
-    client_pid : Win32cr::Foundation::HANDLE,
-    call_status : UInt32,
-    call_type : Win32cr::System::Rpc::RpcCallType,
-    call_local_address : Win32cr::System::Rpc::RPC_CALL_LOCAL_ADDRESS_V1*,
-    op_num : UInt16,
-    interface_uuid : LibC::GUID
+  struct RPC_CALL_ATTRIBUTES_V2_A
+    property version : UInt32
+    property flags : UInt32
+    property server_principal_name_buffer_length : UInt32
+    property server_principal_name : UInt8*
+    property client_principal_name_buffer_length : UInt32
+    property client_principal_name : UInt8*
+    property authentication_level : UInt32
+    property authentication_service : UInt32
+    property null_session : Win32cr::Foundation::BOOL
+    property kernel_mode_caller : Win32cr::Foundation::BOOL
+    property protocol_sequence : UInt32
+    property is_client_local : UInt32
+    property client_pid : Win32cr::Foundation::HANDLE
+    property call_status : UInt32
+    property call_type : Win32cr::System::Rpc::RpcCallType
+    property call_local_address : Win32cr::System::Rpc::RPC_CALL_LOCAL_ADDRESS_V1*
+    property op_num : UInt16
+    property interface_uuid : LibC::GUID
+    def initialize(@version : UInt32, @flags : UInt32, @server_principal_name_buffer_length : UInt32, @server_principal_name : UInt8*, @client_principal_name_buffer_length : UInt32, @client_principal_name : UInt8*, @authentication_level : UInt32, @authentication_service : UInt32, @null_session : Win32cr::Foundation::BOOL, @kernel_mode_caller : Win32cr::Foundation::BOOL, @protocol_sequence : UInt32, @is_client_local : UInt32, @client_pid : Win32cr::Foundation::HANDLE, @call_status : UInt32, @call_type : Win32cr::System::Rpc::RpcCallType, @call_local_address : Win32cr::System::Rpc::RPC_CALL_LOCAL_ADDRESS_V1*, @op_num : UInt16, @interface_uuid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record RPC_CALL_ATTRIBUTES_V3_W,
-    version : UInt32,
-    flags : UInt32,
-    server_principal_name_buffer_length : UInt32,
-    server_principal_name : UInt16*,
-    client_principal_name_buffer_length : UInt32,
-    client_principal_name : UInt16*,
-    authentication_level : UInt32,
-    authentication_service : UInt32,
-    null_session : Win32cr::Foundation::BOOL,
-    kernel_mode_caller : Win32cr::Foundation::BOOL,
-    protocol_sequence : UInt32,
-    is_client_local : Win32cr::System::Rpc::RpcCallClientLocality,
-    client_pid : Win32cr::Foundation::HANDLE,
-    call_status : UInt32,
-    call_type : Win32cr::System::Rpc::RpcCallType,
-    call_local_address : Win32cr::System::Rpc::RPC_CALL_LOCAL_ADDRESS_V1*,
-    op_num : UInt16,
-    interface_uuid : LibC::GUID,
-    client_identifier_buffer_length : UInt32,
-    client_identifier : UInt8*
+  struct RPC_CALL_ATTRIBUTES_V3_W
+    property version : UInt32
+    property flags : UInt32
+    property server_principal_name_buffer_length : UInt32
+    property server_principal_name : UInt16*
+    property client_principal_name_buffer_length : UInt32
+    property client_principal_name : UInt16*
+    property authentication_level : UInt32
+    property authentication_service : UInt32
+    property null_session : Win32cr::Foundation::BOOL
+    property kernel_mode_caller : Win32cr::Foundation::BOOL
+    property protocol_sequence : UInt32
+    property is_client_local : Win32cr::System::Rpc::RpcCallClientLocality
+    property client_pid : Win32cr::Foundation::HANDLE
+    property call_status : UInt32
+    property call_type : Win32cr::System::Rpc::RpcCallType
+    property call_local_address : Win32cr::System::Rpc::RPC_CALL_LOCAL_ADDRESS_V1*
+    property op_num : UInt16
+    property interface_uuid : LibC::GUID
+    property client_identifier_buffer_length : UInt32
+    property client_identifier : UInt8*
+    def initialize(@version : UInt32, @flags : UInt32, @server_principal_name_buffer_length : UInt32, @server_principal_name : UInt16*, @client_principal_name_buffer_length : UInt32, @client_principal_name : UInt16*, @authentication_level : UInt32, @authentication_service : UInt32, @null_session : Win32cr::Foundation::BOOL, @kernel_mode_caller : Win32cr::Foundation::BOOL, @protocol_sequence : UInt32, @is_client_local : Win32cr::System::Rpc::RpcCallClientLocality, @client_pid : Win32cr::Foundation::HANDLE, @call_status : UInt32, @call_type : Win32cr::System::Rpc::RpcCallType, @call_local_address : Win32cr::System::Rpc::RPC_CALL_LOCAL_ADDRESS_V1*, @op_num : UInt16, @interface_uuid : LibC::GUID, @client_identifier_buffer_length : UInt32, @client_identifier : UInt8*)
+    end
+  end
 
   @[Extern]
-  record RPC_CALL_ATTRIBUTES_V3_A,
-    version : UInt32,
-    flags : UInt32,
-    server_principal_name_buffer_length : UInt32,
-    server_principal_name : UInt8*,
-    client_principal_name_buffer_length : UInt32,
-    client_principal_name : UInt8*,
-    authentication_level : UInt32,
-    authentication_service : UInt32,
-    null_session : Win32cr::Foundation::BOOL,
-    kernel_mode_caller : Win32cr::Foundation::BOOL,
-    protocol_sequence : UInt32,
-    is_client_local : UInt32,
-    client_pid : Win32cr::Foundation::HANDLE,
-    call_status : UInt32,
-    call_type : Win32cr::System::Rpc::RpcCallType,
-    call_local_address : Win32cr::System::Rpc::RPC_CALL_LOCAL_ADDRESS_V1*,
-    op_num : UInt16,
-    interface_uuid : LibC::GUID,
-    client_identifier_buffer_length : UInt32,
-    client_identifier : UInt8*
+  struct RPC_CALL_ATTRIBUTES_V3_A
+    property version : UInt32
+    property flags : UInt32
+    property server_principal_name_buffer_length : UInt32
+    property server_principal_name : UInt8*
+    property client_principal_name_buffer_length : UInt32
+    property client_principal_name : UInt8*
+    property authentication_level : UInt32
+    property authentication_service : UInt32
+    property null_session : Win32cr::Foundation::BOOL
+    property kernel_mode_caller : Win32cr::Foundation::BOOL
+    property protocol_sequence : UInt32
+    property is_client_local : UInt32
+    property client_pid : Win32cr::Foundation::HANDLE
+    property call_status : UInt32
+    property call_type : Win32cr::System::Rpc::RpcCallType
+    property call_local_address : Win32cr::System::Rpc::RPC_CALL_LOCAL_ADDRESS_V1*
+    property op_num : UInt16
+    property interface_uuid : LibC::GUID
+    property client_identifier_buffer_length : UInt32
+    property client_identifier : UInt8*
+    def initialize(@version : UInt32, @flags : UInt32, @server_principal_name_buffer_length : UInt32, @server_principal_name : UInt8*, @client_principal_name_buffer_length : UInt32, @client_principal_name : UInt8*, @authentication_level : UInt32, @authentication_service : UInt32, @null_session : Win32cr::Foundation::BOOL, @kernel_mode_caller : Win32cr::Foundation::BOOL, @protocol_sequence : UInt32, @is_client_local : UInt32, @client_pid : Win32cr::Foundation::HANDLE, @call_status : UInt32, @call_type : Win32cr::System::Rpc::RpcCallType, @call_local_address : Win32cr::System::Rpc::RPC_CALL_LOCAL_ADDRESS_V1*, @op_num : UInt16, @interface_uuid : LibC::GUID, @client_identifier_buffer_length : UInt32, @client_identifier : UInt8*)
+    end
+  end
 
   @[Extern]
-  record RPC_IMPORT_CONTEXT_P,
-    lookup_context : Void*,
-    proposed_handle : Void*,
-    bindings : Win32cr::System::Rpc::RPC_BINDING_VECTOR*
+  struct RPC_IMPORT_CONTEXT_P
+    property lookup_context : Void*
+    property proposed_handle : Void*
+    property bindings : Win32cr::System::Rpc::RPC_BINDING_VECTOR*
+    def initialize(@lookup_context : Void*, @proposed_handle : Void*, @bindings : Win32cr::System::Rpc::RPC_BINDING_VECTOR*)
+    end
+  end
 
   @[Extern]
-  record NDR_SCONTEXT_,
-    pad : Void*[2],
-    userContext : Void*
+  struct NDR_SCONTEXT_
+    property pad : Void*[2]
+    property userContext : Void*
+    def initialize(@pad : Void*[2], @userContext : Void*)
+    end
+  end
 
   @[Extern]
-  record SCONTEXT_QUEUE,
-    number_of_objects : UInt32,
-    array_of_objects : Win32cr::System::Rpc::NDR_SCONTEXT_1**
+  struct SCONTEXT_QUEUE
+    property number_of_objects : UInt32
+    property array_of_objects : Win32cr::System::Rpc::NDR_SCONTEXT_1**
+    def initialize(@number_of_objects : UInt32, @array_of_objects : Win32cr::System::Rpc::NDR_SCONTEXT_1**)
+    end
+  end
 
   @[Extern]
-  record ARRAY_INFO,
-    dimension : Int32,
-    buffer_conformance_mark : UInt32*,
-    buffer_variance_mark : UInt32*,
-    max_count_array : UInt32*,
-    offset_array : UInt32*,
-    actual_count_array : UInt32*
+  struct ARRAY_INFO
+    property dimension : Int32
+    property buffer_conformance_mark : UInt32*
+    property buffer_variance_mark : UInt32*
+    property max_count_array : UInt32*
+    property offset_array : UInt32*
+    property actual_count_array : UInt32*
+    def initialize(@dimension : Int32, @buffer_conformance_mark : UInt32*, @buffer_variance_mark : UInt32*, @max_count_array : UInt32*, @offset_array : UInt32*, @actual_count_array : UInt32*)
+    end
+  end
 
   @[Extern]
-  record NDR_ASYNC_MESSAGE_
-  @[Extern]
-  record NDR_CORRELATION_INFO_
-  @[Extern]
-  record NDR_ALLOC_ALL_NODES_CONTEXT
-  @[Extern]
-  record NDR_POINTER_QUEUE_STATE
-  @[Extern]
-  record NDR_PROC_CONTEXT_
-  @[Extern]
-  record MIDL_STUB_MESSAGE,
-    rpc_msg : Win32cr::System::Rpc::RPC_MESSAGE*,
-    buffer : UInt8*,
-    buffer_start : UInt8*,
-    buffer_end : UInt8*,
-    buffer_mark : UInt8*,
-    buffer_length : UInt32,
-    memory_size : UInt32,
-    memory : UInt8*,
-    is_client : UInt8,
-    pad : UInt8,
-    uFlags2 : UInt16,
-    reuse_buffer : Int32,
-    pAllocAllNodesContext : Win32cr::System::Rpc::NDR_ALLOC_ALL_NODES_CONTEXT*,
-    pPointerQueueState : Win32cr::System::Rpc::NDR_POINTER_QUEUE_STATE*,
-    ignore_embedded_pointers : Int32,
-    pointer_buffer_mark : UInt8*,
-    corr_desp_increment : UInt8,
-    uFlags : UInt8,
-    unique_ptr_count : UInt16,
-    max_count : LibC::UIntPtrT,
-    offset : UInt32,
-    actual_count : UInt32,
-    pfnAllocate : LibC::IntPtrT,
-    pfnFree : LibC::IntPtrT,
-    stack_top : UInt8*,
-    pPresentedType : UInt8*,
-    pTransmitType : UInt8*,
-    saved_handle : Void*,
-    stub_desc : Win32cr::System::Rpc::MIDL_STUB_DESC*,
-    full_ptr_xlat_tables : Win32cr::System::Rpc::FULL_PTR_XLAT_TABLES*,
-    full_ptr_ref_id : UInt32,
-    pointer_length : UInt32,
-    _bitfield : Int32,
-    dwDestContext : UInt32,
-    pvDestContext : Void*,
-    saved_context_handles : Win32cr::System::Rpc::NDR_SCONTEXT_1**,
-    param_number : Int32,
-    pRpcChannelBuffer : Void*,
-    pArrayInfo : Win32cr::System::Rpc::ARRAY_INFO*,
-    size_ptr_count_array : UInt32*,
-    size_ptr_offset_array : UInt32*,
-    size_ptr_length_array : UInt32*,
-    pArgQueue : Void*,
-    dwStubPhase : UInt32,
-    low_stack_mark : Void*,
-    pAsyncMsg : Win32cr::System::Rpc::NDR_ASYNC_MESSAGE_*,
-    pCorrInfo : Win32cr::System::Rpc::NDR_CORRELATION_INFO_*,
-    pCorrMemory : UInt8*,
-    pMemoryList : Void*,
-    pCSInfo : LibC::IntPtrT,
-    conformance_mark : UInt8*,
-    variance_mark : UInt8*,
-    unused : LibC::IntPtrT,
-    pContext : Win32cr::System::Rpc::NDR_PROC_CONTEXT_*,
-    context_handle_hash : Void*,
-    pUserMarshalList : Void*,
-    reserved51_3 : LibC::IntPtrT,
-    reserved51_4 : LibC::IntPtrT,
-    reserved51_5 : LibC::IntPtrT
+  struct NDR_ASYNC_MESSAGE_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record GENERIC_BINDING_ROUTINE_PAIR,
-    pfnBind : Win32cr::System::Rpc::GENERIC_BINDING_ROUTINE,
-    pfnUnbind : Win32cr::System::Rpc::GENERIC_UNBIND_ROUTINE
+  struct NDR_CORRELATION_INFO_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record GENERIC_BINDING_INFO,
-    pObj : Void*,
-    size : UInt32,
-    pfnBind : Win32cr::System::Rpc::GENERIC_BINDING_ROUTINE,
-    pfnUnbind : Win32cr::System::Rpc::GENERIC_UNBIND_ROUTINE
+  struct NDR_ALLOC_ALL_NODES_CONTEXT
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record XMIT_ROUTINE_QUINTUPLE,
-    pfnTranslateToXmit : Win32cr::System::Rpc::XMIT_HELPER_ROUTINE,
-    pfnTranslateFromXmit : Win32cr::System::Rpc::XMIT_HELPER_ROUTINE,
-    pfnFreeXmit : Win32cr::System::Rpc::XMIT_HELPER_ROUTINE,
-    pfnFreeInst : Win32cr::System::Rpc::XMIT_HELPER_ROUTINE
+  struct NDR_POINTER_QUEUE_STATE
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record USER_MARSHAL_ROUTINE_QUADRUPLE,
-    pfnBufferSize : Win32cr::System::Rpc::USER_MARSHAL_SIZING_ROUTINE,
-    pfnMarshall : Win32cr::System::Rpc::USER_MARSHAL_MARSHALLING_ROUTINE,
-    pfnUnmarshall : Win32cr::System::Rpc::USER_MARSHAL_UNMARSHALLING_ROUTINE,
-    pfnFree : Win32cr::System::Rpc::USER_MARSHAL_FREEING_ROUTINE
+  struct NDR_PROC_CONTEXT_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record USER_MARSHAL_CB,
-    flags : UInt32,
-    pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*,
-    pReserve : UInt8*,
-    signature : UInt32,
-    cb_type : Win32cr::System::Rpc::USER_MARSHAL_CB_TYPE,
-    pFormat : UInt8*,
-    pTypeFormat : UInt8*
+  struct MIDL_STUB_MESSAGE
+    property rpc_msg : Win32cr::System::Rpc::RPC_MESSAGE*
+    property buffer : UInt8*
+    property buffer_start : UInt8*
+    property buffer_end : UInt8*
+    property buffer_mark : UInt8*
+    property buffer_length : UInt32
+    property memory_size : UInt32
+    property memory : UInt8*
+    property is_client : UInt8
+    property pad : UInt8
+    property uFlags2 : UInt16
+    property reuse_buffer : Int32
+    property pAllocAllNodesContext : Win32cr::System::Rpc::NDR_ALLOC_ALL_NODES_CONTEXT*
+    property pPointerQueueState : Win32cr::System::Rpc::NDR_POINTER_QUEUE_STATE*
+    property ignore_embedded_pointers : Int32
+    property pointer_buffer_mark : UInt8*
+    property corr_desp_increment : UInt8
+    property uFlags : UInt8
+    property unique_ptr_count : UInt16
+    property max_count : LibC::UIntPtrT
+    property offset : UInt32
+    property actual_count : UInt32
+    property pfnAllocate : LibC::IntPtrT
+    property pfnFree : LibC::IntPtrT
+    property stack_top : UInt8*
+    property pPresentedType : UInt8*
+    property pTransmitType : UInt8*
+    property saved_handle : Void*
+    property stub_desc : Win32cr::System::Rpc::MIDL_STUB_DESC*
+    property full_ptr_xlat_tables : Win32cr::System::Rpc::FULL_PTR_XLAT_TABLES*
+    property full_ptr_ref_id : UInt32
+    property pointer_length : UInt32
+    property _bitfield : Int32
+    property dwDestContext : UInt32
+    property pvDestContext : Void*
+    property saved_context_handles : Win32cr::System::Rpc::NDR_SCONTEXT_1**
+    property param_number : Int32
+    property pRpcChannelBuffer : Void*
+    property pArrayInfo : Win32cr::System::Rpc::ARRAY_INFO*
+    property size_ptr_count_array : UInt32*
+    property size_ptr_offset_array : UInt32*
+    property size_ptr_length_array : UInt32*
+    property pArgQueue : Void*
+    property dwStubPhase : UInt32
+    property low_stack_mark : Void*
+    property pAsyncMsg : Win32cr::System::Rpc::NDR_ASYNC_MESSAGE_*
+    property pCorrInfo : Win32cr::System::Rpc::NDR_CORRELATION_INFO_*
+    property pCorrMemory : UInt8*
+    property pMemoryList : Void*
+    property pCSInfo : LibC::IntPtrT
+    property conformance_mark : UInt8*
+    property variance_mark : UInt8*
+    property unused : LibC::IntPtrT
+    property pContext : Win32cr::System::Rpc::NDR_PROC_CONTEXT_*
+    property context_handle_hash : Void*
+    property pUserMarshalList : Void*
+    property reserved51_3 : LibC::IntPtrT
+    property reserved51_4 : LibC::IntPtrT
+    property reserved51_5 : LibC::IntPtrT
+    def initialize(@rpc_msg : Win32cr::System::Rpc::RPC_MESSAGE*, @buffer : UInt8*, @buffer_start : UInt8*, @buffer_end : UInt8*, @buffer_mark : UInt8*, @buffer_length : UInt32, @memory_size : UInt32, @memory : UInt8*, @is_client : UInt8, @pad : UInt8, @uFlags2 : UInt16, @reuse_buffer : Int32, @pAllocAllNodesContext : Win32cr::System::Rpc::NDR_ALLOC_ALL_NODES_CONTEXT*, @pPointerQueueState : Win32cr::System::Rpc::NDR_POINTER_QUEUE_STATE*, @ignore_embedded_pointers : Int32, @pointer_buffer_mark : UInt8*, @corr_desp_increment : UInt8, @uFlags : UInt8, @unique_ptr_count : UInt16, @max_count : LibC::UIntPtrT, @offset : UInt32, @actual_count : UInt32, @pfnAllocate : LibC::IntPtrT, @pfnFree : LibC::IntPtrT, @stack_top : UInt8*, @pPresentedType : UInt8*, @pTransmitType : UInt8*, @saved_handle : Void*, @stub_desc : Win32cr::System::Rpc::MIDL_STUB_DESC*, @full_ptr_xlat_tables : Win32cr::System::Rpc::FULL_PTR_XLAT_TABLES*, @full_ptr_ref_id : UInt32, @pointer_length : UInt32, @_bitfield : Int32, @dwDestContext : UInt32, @pvDestContext : Void*, @saved_context_handles : Win32cr::System::Rpc::NDR_SCONTEXT_1**, @param_number : Int32, @pRpcChannelBuffer : Void*, @pArrayInfo : Win32cr::System::Rpc::ARRAY_INFO*, @size_ptr_count_array : UInt32*, @size_ptr_offset_array : UInt32*, @size_ptr_length_array : UInt32*, @pArgQueue : Void*, @dwStubPhase : UInt32, @low_stack_mark : Void*, @pAsyncMsg : Win32cr::System::Rpc::NDR_ASYNC_MESSAGE_*, @pCorrInfo : Win32cr::System::Rpc::NDR_CORRELATION_INFO_*, @pCorrMemory : UInt8*, @pMemoryList : Void*, @pCSInfo : LibC::IntPtrT, @conformance_mark : UInt8*, @variance_mark : UInt8*, @unused : LibC::IntPtrT, @pContext : Win32cr::System::Rpc::NDR_PROC_CONTEXT_*, @context_handle_hash : Void*, @pUserMarshalList : Void*, @reserved51_3 : LibC::IntPtrT, @reserved51_4 : LibC::IntPtrT, @reserved51_5 : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MALLOC_FREE_STRUCT,
-    pfnAllocate : LibC::IntPtrT,
-    pfnFree : LibC::IntPtrT
+  struct GENERIC_BINDING_ROUTINE_PAIR
+    property pfnBind : Win32cr::System::Rpc::GENERIC_BINDING_ROUTINE
+    property pfnUnbind : Win32cr::System::Rpc::GENERIC_UNBIND_ROUTINE
+    def initialize(@pfnBind : Win32cr::System::Rpc::GENERIC_BINDING_ROUTINE, @pfnUnbind : Win32cr::System::Rpc::GENERIC_UNBIND_ROUTINE)
+    end
+  end
 
   @[Extern]
-  record COMM_FAULT_OFFSETS,
-    comm_offset : Int16,
-    fault_offset : Int16
+  struct GENERIC_BINDING_INFO
+    property pObj : Void*
+    property size : UInt32
+    property pfnBind : Win32cr::System::Rpc::GENERIC_BINDING_ROUTINE
+    property pfnUnbind : Win32cr::System::Rpc::GENERIC_UNBIND_ROUTINE
+    def initialize(@pObj : Void*, @size : UInt32, @pfnBind : Win32cr::System::Rpc::GENERIC_BINDING_ROUTINE, @pfnUnbind : Win32cr::System::Rpc::GENERIC_UNBIND_ROUTINE)
+    end
+  end
 
   @[Extern]
-  record NDR_CS_SIZE_CONVERT_ROUTINES,
-    pfnNetSize : Win32cr::System::Rpc::CS_TYPE_NET_SIZE_ROUTINE,
-    pfnToNetCs : Win32cr::System::Rpc::CS_TYPE_TO_NETCS_ROUTINE,
-    pfnLocalSize : Win32cr::System::Rpc::CS_TYPE_LOCAL_SIZE_ROUTINE,
-    pfnFromNetCs : Win32cr::System::Rpc::CS_TYPE_FROM_NETCS_ROUTINE
+  struct XMIT_ROUTINE_QUINTUPLE
+    property pfnTranslateToXmit : Win32cr::System::Rpc::XMIT_HELPER_ROUTINE
+    property pfnTranslateFromXmit : Win32cr::System::Rpc::XMIT_HELPER_ROUTINE
+    property pfnFreeXmit : Win32cr::System::Rpc::XMIT_HELPER_ROUTINE
+    property pfnFreeInst : Win32cr::System::Rpc::XMIT_HELPER_ROUTINE
+    def initialize(@pfnTranslateToXmit : Win32cr::System::Rpc::XMIT_HELPER_ROUTINE, @pfnTranslateFromXmit : Win32cr::System::Rpc::XMIT_HELPER_ROUTINE, @pfnFreeXmit : Win32cr::System::Rpc::XMIT_HELPER_ROUTINE, @pfnFreeInst : Win32cr::System::Rpc::XMIT_HELPER_ROUTINE)
+    end
+  end
 
   @[Extern]
-  record NDR_CS_ROUTINES,
-    pSizeConvertRoutines : Win32cr::System::Rpc::NDR_CS_SIZE_CONVERT_ROUTINES*,
-    pTagGettingRoutines : Win32cr::System::Rpc::CS_TAG_GETTING_ROUTINE*
+  struct USER_MARSHAL_ROUTINE_QUADRUPLE
+    property pfnBufferSize : Win32cr::System::Rpc::USER_MARSHAL_SIZING_ROUTINE
+    property pfnMarshall : Win32cr::System::Rpc::USER_MARSHAL_MARSHALLING_ROUTINE
+    property pfnUnmarshall : Win32cr::System::Rpc::USER_MARSHAL_UNMARSHALLING_ROUTINE
+    property pfnFree : Win32cr::System::Rpc::USER_MARSHAL_FREEING_ROUTINE
+    def initialize(@pfnBufferSize : Win32cr::System::Rpc::USER_MARSHAL_SIZING_ROUTINE, @pfnMarshall : Win32cr::System::Rpc::USER_MARSHAL_MARSHALLING_ROUTINE, @pfnUnmarshall : Win32cr::System::Rpc::USER_MARSHAL_UNMARSHALLING_ROUTINE, @pfnFree : Win32cr::System::Rpc::USER_MARSHAL_FREEING_ROUTINE)
+    end
+  end
 
   @[Extern]
-  record NDR_EXPR_DESC,
-    pOffset : UInt16*,
-    pFormatExpr : UInt8*
+  struct USER_MARSHAL_CB
+    property flags : UInt32
+    property pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*
+    property pReserve : UInt8*
+    property signature : UInt32
+    property cb_type : Win32cr::System::Rpc::USER_MARSHAL_CB_TYPE
+    property pFormat : UInt8*
+    property pTypeFormat : UInt8*
+    def initialize(@flags : UInt32, @pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, @pReserve : UInt8*, @signature : UInt32, @cb_type : Win32cr::System::Rpc::USER_MARSHAL_CB_TYPE, @pFormat : UInt8*, @pTypeFormat : UInt8*)
+    end
+  end
 
   @[Extern]
-  record MIDL_STUB_DESC,
-    rpc_interface_information : Void*,
-    pfnAllocate : LibC::IntPtrT,
-    pfnFree : LibC::IntPtrT,
-    implicit_handle_info : IMPLICIT_HANDLE_INFO_e__Union_,
-    apfnNdrRundownRoutines : Win32cr::System::Rpc::NDR_RUNDOWN*,
-    aGenericBindingRoutinePairs : Win32cr::System::Rpc::GENERIC_BINDING_ROUTINE_PAIR*,
-    apfnExprEval : Win32cr::System::Rpc::EXPR_EVAL*,
-    aXmitQuintuple : Win32cr::System::Rpc::XMIT_ROUTINE_QUINTUPLE*,
-    pFormatTypes : UInt8*,
-    fCheckBounds : Int32,
-    version : UInt32,
-    pMallocFreeStruct : Win32cr::System::Rpc::MALLOC_FREE_STRUCT*,
-    midl_version : Int32,
-    comm_fault_offsets : Win32cr::System::Rpc::COMM_FAULT_OFFSETS*,
-    aUserMarshalQuadruple : Win32cr::System::Rpc::USER_MARSHAL_ROUTINE_QUADRUPLE*,
-    notify_routine_table : Win32cr::System::Rpc::NDR_NOTIFY_ROUTINE*,
-    mFlags : LibC::UIntPtrT,
-    cs_routine_tables : Win32cr::System::Rpc::NDR_CS_ROUTINES*,
-    proxy_server_info : Void*,
-    pExprInfo : Win32cr::System::Rpc::NDR_EXPR_DESC* do
+  struct MALLOC_FREE_STRUCT
+    property pfnAllocate : LibC::IntPtrT
+    property pfnFree : LibC::IntPtrT
+    def initialize(@pfnAllocate : LibC::IntPtrT, @pfnFree : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct COMM_FAULT_OFFSETS
+    property comm_offset : Int16
+    property fault_offset : Int16
+    def initialize(@comm_offset : Int16, @fault_offset : Int16)
+    end
+  end
+
+  @[Extern]
+  struct NDR_CS_SIZE_CONVERT_ROUTINES
+    property pfnNetSize : Win32cr::System::Rpc::CS_TYPE_NET_SIZE_ROUTINE
+    property pfnToNetCs : Win32cr::System::Rpc::CS_TYPE_TO_NETCS_ROUTINE
+    property pfnLocalSize : Win32cr::System::Rpc::CS_TYPE_LOCAL_SIZE_ROUTINE
+    property pfnFromNetCs : Win32cr::System::Rpc::CS_TYPE_FROM_NETCS_ROUTINE
+    def initialize(@pfnNetSize : Win32cr::System::Rpc::CS_TYPE_NET_SIZE_ROUTINE, @pfnToNetCs : Win32cr::System::Rpc::CS_TYPE_TO_NETCS_ROUTINE, @pfnLocalSize : Win32cr::System::Rpc::CS_TYPE_LOCAL_SIZE_ROUTINE, @pfnFromNetCs : Win32cr::System::Rpc::CS_TYPE_FROM_NETCS_ROUTINE)
+    end
+  end
+
+  @[Extern]
+  struct NDR_CS_ROUTINES
+    property pSizeConvertRoutines : Win32cr::System::Rpc::NDR_CS_SIZE_CONVERT_ROUTINES*
+    property pTagGettingRoutines : Win32cr::System::Rpc::CS_TAG_GETTING_ROUTINE*
+    def initialize(@pSizeConvertRoutines : Win32cr::System::Rpc::NDR_CS_SIZE_CONVERT_ROUTINES*, @pTagGettingRoutines : Win32cr::System::Rpc::CS_TAG_GETTING_ROUTINE*)
+    end
+  end
+
+  @[Extern]
+  struct NDR_EXPR_DESC
+    property pOffset : UInt16*
+    property pFormatExpr : UInt8*
+    def initialize(@pOffset : UInt16*, @pFormatExpr : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct MIDL_STUB_DESC
+    property rpc_interface_information : Void*
+    property pfnAllocate : LibC::IntPtrT
+    property pfnFree : LibC::IntPtrT
+    property implicit_handle_info : IMPLICIT_HANDLE_INFO_e__Union_
+    property apfnNdrRundownRoutines : Win32cr::System::Rpc::NDR_RUNDOWN*
+    property aGenericBindingRoutinePairs : Win32cr::System::Rpc::GENERIC_BINDING_ROUTINE_PAIR*
+    property apfnExprEval : Win32cr::System::Rpc::EXPR_EVAL*
+    property aXmitQuintuple : Win32cr::System::Rpc::XMIT_ROUTINE_QUINTUPLE*
+    property pFormatTypes : UInt8*
+    property fCheckBounds : Int32
+    property version : UInt32
+    property pMallocFreeStruct : Win32cr::System::Rpc::MALLOC_FREE_STRUCT*
+    property midl_version : Int32
+    property comm_fault_offsets : Win32cr::System::Rpc::COMM_FAULT_OFFSETS*
+    property aUserMarshalQuadruple : Win32cr::System::Rpc::USER_MARSHAL_ROUTINE_QUADRUPLE*
+    property notify_routine_table : Win32cr::System::Rpc::NDR_NOTIFY_ROUTINE*
+    property mFlags : LibC::UIntPtrT
+    property cs_routine_tables : Win32cr::System::Rpc::NDR_CS_ROUTINES*
+    property proxy_server_info : Void*
+    property pExprInfo : Win32cr::System::Rpc::NDR_EXPR_DESC*
 
     # Nested Type IMPLICIT_HANDLE_INFO_e__Union_
     @[Extern(union: true)]
-    record IMPLICIT_HANDLE_INFO_e__Union_,
-      pAutoHandle : Void**,
-      pPrimitiveHandle : Void**,
-      pGenericBindingInfo : Win32cr::System::Rpc::GENERIC_BINDING_INFO*
+    struct IMPLICIT_HANDLE_INFO_e__Union_
+    property pAutoHandle : Void**
+    property pPrimitiveHandle : Void**
+    property pGenericBindingInfo : Win32cr::System::Rpc::GENERIC_BINDING_INFO*
+    def initialize(@pAutoHandle : Void**, @pPrimitiveHandle : Void**, @pGenericBindingInfo : Win32cr::System::Rpc::GENERIC_BINDING_INFO*)
+    end
+    end
 
+    def initialize(@rpc_interface_information : Void*, @pfnAllocate : LibC::IntPtrT, @pfnFree : LibC::IntPtrT, @implicit_handle_info : IMPLICIT_HANDLE_INFO_e__Union_, @apfnNdrRundownRoutines : Win32cr::System::Rpc::NDR_RUNDOWN*, @aGenericBindingRoutinePairs : Win32cr::System::Rpc::GENERIC_BINDING_ROUTINE_PAIR*, @apfnExprEval : Win32cr::System::Rpc::EXPR_EVAL*, @aXmitQuintuple : Win32cr::System::Rpc::XMIT_ROUTINE_QUINTUPLE*, @pFormatTypes : UInt8*, @fCheckBounds : Int32, @version : UInt32, @pMallocFreeStruct : Win32cr::System::Rpc::MALLOC_FREE_STRUCT*, @midl_version : Int32, @comm_fault_offsets : Win32cr::System::Rpc::COMM_FAULT_OFFSETS*, @aUserMarshalQuadruple : Win32cr::System::Rpc::USER_MARSHAL_ROUTINE_QUADRUPLE*, @notify_routine_table : Win32cr::System::Rpc::NDR_NOTIFY_ROUTINE*, @mFlags : LibC::UIntPtrT, @cs_routine_tables : Win32cr::System::Rpc::NDR_CS_ROUTINES*, @proxy_server_info : Void*, @pExprInfo : Win32cr::System::Rpc::NDR_EXPR_DESC*)
+    end
   end
 
   @[Extern]
-  record MIDL_FORMAT_STRING,
-    pad : Int16,
-    format : UInt8*
+  struct MIDL_FORMAT_STRING
+    property pad : Int16
+    property format : UInt8*
+    def initialize(@pad : Int16, @format : UInt8*)
+    end
+  end
 
   @[Extern]
-  record MIDL_METHOD_PROPERTY,
-    id : UInt32,
-    value : LibC::UIntPtrT
+  struct MIDL_METHOD_PROPERTY
+    property id : UInt32
+    property value : LibC::UIntPtrT
+    def initialize(@id : UInt32, @value : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record MIDL_METHOD_PROPERTY_MAP,
-    count : UInt32,
-    properties : Win32cr::System::Rpc::MIDL_METHOD_PROPERTY*
+  struct MIDL_METHOD_PROPERTY_MAP
+    property count : UInt32
+    property properties : Win32cr::System::Rpc::MIDL_METHOD_PROPERTY*
+    def initialize(@count : UInt32, @properties : Win32cr::System::Rpc::MIDL_METHOD_PROPERTY*)
+    end
+  end
 
   @[Extern]
-  record MIDL_INTERFACE_METHOD_PROPERTIES,
-    method_count : UInt16,
-    method_properties : Win32cr::System::Rpc::MIDL_METHOD_PROPERTY_MAP**
+  struct MIDL_INTERFACE_METHOD_PROPERTIES
+    property method_count : UInt16
+    property method_properties : Win32cr::System::Rpc::MIDL_METHOD_PROPERTY_MAP**
+    def initialize(@method_count : UInt16, @method_properties : Win32cr::System::Rpc::MIDL_METHOD_PROPERTY_MAP**)
+    end
+  end
 
   @[Extern]
-  record MIDL_SERVER_INFO,
-    pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*,
-    dispatch_table : Win32cr::System::Rpc::SERVER_ROUTINE*,
-    proc_string : UInt8*,
-    fmt_string_offset : UInt16*,
-    thunk_table : Win32cr::System::Rpc::STUB_THUNK*,
-    pTransferSyntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER*,
-    nCount : LibC::UIntPtrT,
-    pSyntaxInfo : Win32cr::System::Rpc::MIDL_SYNTAX_INFO*
+  struct MIDL_SERVER_INFO
+    property pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*
+    property dispatch_table : Win32cr::System::Rpc::SERVER_ROUTINE*
+    property proc_string : UInt8*
+    property fmt_string_offset : UInt16*
+    property thunk_table : Win32cr::System::Rpc::STUB_THUNK*
+    property pTransferSyntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER*
+    property nCount : LibC::UIntPtrT
+    property pSyntaxInfo : Win32cr::System::Rpc::MIDL_SYNTAX_INFO*
+    def initialize(@pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*, @dispatch_table : Win32cr::System::Rpc::SERVER_ROUTINE*, @proc_string : UInt8*, @fmt_string_offset : UInt16*, @thunk_table : Win32cr::System::Rpc::STUB_THUNK*, @pTransferSyntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER*, @nCount : LibC::UIntPtrT, @pSyntaxInfo : Win32cr::System::Rpc::MIDL_SYNTAX_INFO*)
+    end
+  end
 
   @[Extern]
-  record MIDL_STUBLESS_PROXY_INFO,
-    pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*,
-    proc_format_string : UInt8*,
-    format_string_offset : UInt16*,
-    pTransferSyntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER*,
-    nCount : LibC::UIntPtrT,
-    pSyntaxInfo : Win32cr::System::Rpc::MIDL_SYNTAX_INFO*
+  struct MIDL_STUBLESS_PROXY_INFO
+    property pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*
+    property proc_format_string : UInt8*
+    property format_string_offset : UInt16*
+    property pTransferSyntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER*
+    property nCount : LibC::UIntPtrT
+    property pSyntaxInfo : Win32cr::System::Rpc::MIDL_SYNTAX_INFO*
+    def initialize(@pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*, @proc_format_string : UInt8*, @format_string_offset : UInt16*, @pTransferSyntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER*, @nCount : LibC::UIntPtrT, @pSyntaxInfo : Win32cr::System::Rpc::MIDL_SYNTAX_INFO*)
+    end
+  end
 
   @[Extern]
-  record MIDL_SYNTAX_INFO,
-    transfer_syntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER,
-    dispatch_table : Win32cr::System::Rpc::RPC_DISPATCH_TABLE*,
-    proc_string : UInt8*,
-    fmt_string_offset : UInt16*,
-    type_string : UInt8*,
-    aUserMarshalQuadruple : Void*,
-    pMethodProperties : Win32cr::System::Rpc::MIDL_INTERFACE_METHOD_PROPERTIES*,
-    pReserved2 : LibC::UIntPtrT
+  struct MIDL_SYNTAX_INFO
+    property transfer_syntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER
+    property dispatch_table : Win32cr::System::Rpc::RPC_DISPATCH_TABLE*
+    property proc_string : UInt8*
+    property fmt_string_offset : UInt16*
+    property type_string : UInt8*
+    property aUserMarshalQuadruple : Void*
+    property pMethodProperties : Win32cr::System::Rpc::MIDL_INTERFACE_METHOD_PROPERTIES*
+    property pReserved2 : LibC::UIntPtrT
+    def initialize(@transfer_syntax : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER, @dispatch_table : Win32cr::System::Rpc::RPC_DISPATCH_TABLE*, @proc_string : UInt8*, @fmt_string_offset : UInt16*, @type_string : UInt8*, @aUserMarshalQuadruple : Void*, @pMethodProperties : Win32cr::System::Rpc::MIDL_INTERFACE_METHOD_PROPERTIES*, @pReserved2 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern(union: true)]
-  record CLIENT_CALL_RETURN,
-    pointer : Void*,
-    simple : LibC::IntPtrT
+  struct CLIENT_CALL_RETURN
+    property pointer : Void*
+    property simple : LibC::IntPtrT
+    def initialize(@pointer : Void*, @simple : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record FULL_PTR_XLAT_TABLES,
-    ref_id_to_pointer : Void*,
-    pointer_to_ref_id : Void*,
-    next_ref_id : UInt32,
-    xlat_side : Win32cr::System::Rpc::XLAT_SIDE
+  struct FULL_PTR_XLAT_TABLES
+    property ref_id_to_pointer : Void*
+    property pointer_to_ref_id : Void*
+    property next_ref_id : UInt32
+    property xlat_side : Win32cr::System::Rpc::XLAT_SIDE
+    def initialize(@ref_id_to_pointer : Void*, @pointer_to_ref_id : Void*, @next_ref_id : UInt32, @xlat_side : Win32cr::System::Rpc::XLAT_SIDE)
+    end
+  end
 
   @[Extern]
-  record MIDL_INTERCEPTION_INFO,
-    version : UInt32,
-    proc_string : UInt8*,
-    proc_format_offset_table : UInt16*,
-    proc_count : UInt32,
-    type_string : UInt8*
+  struct MIDL_INTERCEPTION_INFO
+    property version : UInt32
+    property proc_string : UInt8*
+    property proc_format_offset_table : UInt16*
+    property proc_count : UInt32
+    property type_string : UInt8*
+    def initialize(@version : UInt32, @proc_string : UInt8*, @proc_format_offset_table : UInt16*, @proc_count : UInt32, @type_string : UInt8*)
+    end
+  end
 
   @[Extern]
-  record MIDL_WINRT_TYPE_SERIALIZATION_INFO,
-    version : UInt32,
-    type_format_string : UInt8*,
-    format_string_size : UInt16,
-    type_offset : UInt16,
-    stub_desc : Win32cr::System::Rpc::MIDL_STUB_DESC*
+  struct MIDL_WINRT_TYPE_SERIALIZATION_INFO
+    property version : UInt32
+    property type_format_string : UInt8*
+    property format_string_size : UInt16
+    property type_offset : UInt16
+    property stub_desc : Win32cr::System::Rpc::MIDL_STUB_DESC*
+    def initialize(@version : UInt32, @type_format_string : UInt8*, @format_string_size : UInt16, @type_offset : UInt16, @stub_desc : Win32cr::System::Rpc::MIDL_STUB_DESC*)
+    end
+  end
 
   @[Extern]
-  record NDR_USER_MARSHAL_INFO_LEVEL1,
-    buffer : Void*,
-    buffer_size : UInt32,
-    pfnAllocate : LibC::IntPtrT,
-    pfnFree : LibC::IntPtrT,
-    pRpcChannelBuffer : Void*,
-    reserved : LibC::UIntPtrT[5]
+  struct NDR_USER_MARSHAL_INFO_LEVEL1
+    property buffer : Void*
+    property buffer_size : UInt32
+    property pfnAllocate : LibC::IntPtrT
+    property pfnFree : LibC::IntPtrT
+    property pRpcChannelBuffer : Void*
+    property reserved : LibC::UIntPtrT[5]
+    def initialize(@buffer : Void*, @buffer_size : UInt32, @pfnAllocate : LibC::IntPtrT, @pfnFree : LibC::IntPtrT, @pRpcChannelBuffer : Void*, @reserved : LibC::UIntPtrT[5])
+    end
+  end
 
   @[Extern]
-  record NDR_USER_MARSHAL_INFO,
-    information_level : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct NDR_USER_MARSHAL_INFO
+    property information_level : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      level1 : Win32cr::System::Rpc::NDR_USER_MARSHAL_INFO_LEVEL1
+    struct Anonymous_e__Union_
+    property level1 : Win32cr::System::Rpc::NDR_USER_MARSHAL_INFO_LEVEL1
+    def initialize(@level1 : Win32cr::System::Rpc::NDR_USER_MARSHAL_INFO_LEVEL1)
+    end
+    end
 
+    def initialize(@information_level : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record MIDL_TYPE_PICKLING_INFO,
-    version : UInt32,
-    flags : UInt32,
-    reserved : LibC::UIntPtrT[3]
+  struct MIDL_TYPE_PICKLING_INFO
+    property version : UInt32
+    property flags : UInt32
+    property reserved : LibC::UIntPtrT[3]
+    def initialize(@version : UInt32, @flags : UInt32, @reserved : LibC::UIntPtrT[3])
+    end
+  end
 
   @[Extern]
-  record NDR64_PROC_FLAGS,
-    _bitfield : UInt32
+  struct NDR64_PROC_FLAGS
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_RPC_FLAGS,
-    _bitfield : UInt16
+  struct NDR64_RPC_FLAGS
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+  end
 
   @[Extern]
-  record NDR64_PROC_FORMAT,
-    flags : UInt32,
-    stack_size : UInt32,
-    constant_client_buffer_size : UInt32,
-    constant_server_buffer_size : UInt32,
-    rpc_flags : UInt16,
-    float_double_mask : UInt16,
-    number_of_params : UInt16,
-    extension_size : UInt16
+  struct NDR64_PROC_FORMAT
+    property flags : UInt32
+    property stack_size : UInt32
+    property constant_client_buffer_size : UInt32
+    property constant_server_buffer_size : UInt32
+    property rpc_flags : UInt16
+    property float_double_mask : UInt16
+    property number_of_params : UInt16
+    property extension_size : UInt16
+    def initialize(@flags : UInt32, @stack_size : UInt32, @constant_client_buffer_size : UInt32, @constant_server_buffer_size : UInt32, @rpc_flags : UInt16, @float_double_mask : UInt16, @number_of_params : UInt16, @extension_size : UInt16)
+    end
+  end
 
   @[Extern]
-  record NDR64_PARAM_FLAGS,
-    _bitfield : UInt16
+  struct NDR64_PARAM_FLAGS
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+  end
 
   @[Extern]
-  record NDR64_PARAM_FORMAT,
-    type__ : Void*,
-    attributes : Win32cr::System::Rpc::NDR64_PARAM_FLAGS,
-    reserved : UInt16,
-    stack_offset : UInt32
+  struct NDR64_PARAM_FORMAT
+    property type__ : Void*
+    property attributes : Win32cr::System::Rpc::NDR64_PARAM_FLAGS
+    property reserved : UInt16
+    property stack_offset : UInt32
+    def initialize(@type__ : Void*, @attributes : Win32cr::System::Rpc::NDR64_PARAM_FLAGS, @reserved : UInt16, @stack_offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_RANGE_FORMAT,
-    format_code : UInt8,
-    range_type : UInt8,
-    reserved : UInt16,
-    min_value : Int64,
-    max_value : Int64
+  struct NDR64_RANGE_FORMAT
+    property format_code : UInt8
+    property range_type : UInt8
+    property reserved : UInt16
+    property min_value : Int64
+    property max_value : Int64
+    def initialize(@format_code : UInt8, @range_type : UInt8, @reserved : UInt16, @min_value : Int64, @max_value : Int64)
+    end
+  end
 
   @[Extern]
-  record NDR64_CONTEXT_HANDLE_FLAGS,
-    _bitfield : UInt8
+  struct NDR64_CONTEXT_HANDLE_FLAGS
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
 
   @[Extern]
-  record NDR64_CONTEXT_HANDLE_FORMAT,
-    format_code : UInt8,
-    context_flags : UInt8,
-    rundown_routine_index : UInt8,
-    ordinal : UInt8
+  struct NDR64_CONTEXT_HANDLE_FORMAT
+    property format_code : UInt8
+    property context_flags : UInt8
+    property rundown_routine_index : UInt8
+    property ordinal : UInt8
+    def initialize(@format_code : UInt8, @context_flags : UInt8, @rundown_routine_index : UInt8, @ordinal : UInt8)
+    end
+  end
 
   @[Extern]
-  record NDR64_BIND_PRIMITIVE,
-    handle_type : UInt8,
-    flags : UInt8,
-    stack_offset : UInt16,
-    reserved : UInt16
+  struct NDR64_BIND_PRIMITIVE
+    property handle_type : UInt8
+    property flags : UInt8
+    property stack_offset : UInt16
+    property reserved : UInt16
+    def initialize(@handle_type : UInt8, @flags : UInt8, @stack_offset : UInt16, @reserved : UInt16)
+    end
+  end
 
   @[Extern]
-  record NDR64_BIND_GENERIC,
-    handle_type : UInt8,
-    flags : UInt8,
-    stack_offset : UInt16,
-    routine_index : UInt8,
-    size : UInt8
+  struct NDR64_BIND_GENERIC
+    property handle_type : UInt8
+    property flags : UInt8
+    property stack_offset : UInt16
+    property routine_index : UInt8
+    property size : UInt8
+    def initialize(@handle_type : UInt8, @flags : UInt8, @stack_offset : UInt16, @routine_index : UInt8, @size : UInt8)
+    end
+  end
 
   @[Extern]
-  record NDR64_BIND_CONTEXT,
-    handle_type : UInt8,
-    flags : UInt8,
-    stack_offset : UInt16,
-    routine_index : UInt8,
-    ordinal : UInt8
+  struct NDR64_BIND_CONTEXT
+    property handle_type : UInt8
+    property flags : UInt8
+    property stack_offset : UInt16
+    property routine_index : UInt8
+    property ordinal : UInt8
+    def initialize(@handle_type : UInt8, @flags : UInt8, @stack_offset : UInt16, @routine_index : UInt8, @ordinal : UInt8)
+    end
+  end
 
   @[Extern(union: true)]
-  record NDR64_BINDINGS,
-    primitive : Win32cr::System::Rpc::NDR64_BIND_PRIMITIVE,
-    generic : Win32cr::System::Rpc::NDR64_BIND_GENERIC,
-    context : Win32cr::System::Rpc::NDR64_BIND_CONTEXT
+  struct NDR64_BINDINGS
+    property primitive : Win32cr::System::Rpc::NDR64_BIND_PRIMITIVE
+    property generic : Win32cr::System::Rpc::NDR64_BIND_GENERIC
+    property context : Win32cr::System::Rpc::NDR64_BIND_CONTEXT
+    def initialize(@primitive : Win32cr::System::Rpc::NDR64_BIND_PRIMITIVE, @generic : Win32cr::System::Rpc::NDR64_BIND_GENERIC, @context : Win32cr::System::Rpc::NDR64_BIND_CONTEXT)
+    end
+  end
 
   @[Extern]
-  record NDR64_BIND_AND_NOTIFY_EXTENSION,
-    binding : Win32cr::System::Rpc::NDR64_BIND_CONTEXT,
-    notify_index : UInt16
+  struct NDR64_BIND_AND_NOTIFY_EXTENSION
+    property binding : Win32cr::System::Rpc::NDR64_BIND_CONTEXT
+    property notify_index : UInt16
+    def initialize(@binding : Win32cr::System::Rpc::NDR64_BIND_CONTEXT, @notify_index : UInt16)
+    end
+  end
 
   @[Extern]
-  record NDR64_SYSTEM_HANDLE_FORMAT,
-    format_code : UInt8,
-    handle_type : UInt8,
-    desired_access : UInt32
+  struct NDR64_SYSTEM_HANDLE_FORMAT
+    property format_code : UInt8
+    property handle_type : UInt8
+    property desired_access : UInt32
+    def initialize(@format_code : UInt8, @handle_type : UInt8, @desired_access : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_POINTER_FORMAT,
-    format_code : UInt8,
-    flags : UInt8,
-    reserved : UInt16,
-    pointee : Void*
+  struct NDR64_POINTER_FORMAT
+    property format_code : UInt8
+    property flags : UInt8
+    property reserved : UInt16
+    property pointee : Void*
+    def initialize(@format_code : UInt8, @flags : UInt8, @reserved : UInt16, @pointee : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_NO_REPEAT_FORMAT,
-    format_code : UInt8,
-    flags : UInt8,
-    reserved1 : UInt16,
-    reserved2 : UInt32
+  struct NDR64_NO_REPEAT_FORMAT
+    property format_code : UInt8
+    property flags : UInt8
+    property reserved1 : UInt16
+    property reserved2 : UInt32
+    def initialize(@format_code : UInt8, @flags : UInt8, @reserved1 : UInt16, @reserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_POINTER_INSTANCE_HEADER_FORMAT,
-    offset : UInt32,
-    reserved : UInt32
+  struct NDR64_POINTER_INSTANCE_HEADER_FORMAT
+    property offset : UInt32
+    property reserved : UInt32
+    def initialize(@offset : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_POINTER_REPEAT_FLAGS,
-    _bitfield : UInt8
+  struct NDR64_POINTER_REPEAT_FLAGS
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
 
   @[Extern]
-  record NDR64_REPEAT_FORMAT,
-    format_code : UInt8,
-    flags : Win32cr::System::Rpc::NDR64_POINTER_REPEAT_FLAGS,
-    reserved : UInt16,
-    increment : UInt32,
-    offset_to_array : UInt32,
-    number_of_pointers : UInt32
+  struct NDR64_REPEAT_FORMAT
+    property format_code : UInt8
+    property flags : Win32cr::System::Rpc::NDR64_POINTER_REPEAT_FLAGS
+    property reserved : UInt16
+    property increment : UInt32
+    property offset_to_array : UInt32
+    property number_of_pointers : UInt32
+    def initialize(@format_code : UInt8, @flags : Win32cr::System::Rpc::NDR64_POINTER_REPEAT_FLAGS, @reserved : UInt16, @increment : UInt32, @offset_to_array : UInt32, @number_of_pointers : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_FIXED_REPEAT_FORMAT,
-    repeat_format : Win32cr::System::Rpc::NDR64_REPEAT_FORMAT,
-    iterations : UInt32,
-    reserved : UInt32
+  struct NDR64_FIXED_REPEAT_FORMAT
+    property repeat_format : Win32cr::System::Rpc::NDR64_REPEAT_FORMAT
+    property iterations : UInt32
+    property reserved : UInt32
+    def initialize(@repeat_format : Win32cr::System::Rpc::NDR64_REPEAT_FORMAT, @iterations : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_IID_FLAGS,
-    _bitfield : UInt8
+  struct NDR64_IID_FLAGS
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
 
   @[Extern]
-  record NDR64_CONSTANT_IID_FORMAT,
-    format_code : UInt8,
-    flags : UInt8,
-    reserved : UInt16,
-    guid : LibC::GUID
+  struct NDR64_CONSTANT_IID_FORMAT
+    property format_code : UInt8
+    property flags : UInt8
+    property reserved : UInt16
+    property guid : LibC::GUID
+    def initialize(@format_code : UInt8, @flags : UInt8, @reserved : UInt16, @guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record NDR64_IID_FORMAT,
-    format_code : UInt8,
-    flags : UInt8,
-    reserved : UInt16,
-    iid_descriptor : Void*
+  struct NDR64_IID_FORMAT
+    property format_code : UInt8
+    property flags : UInt8
+    property reserved : UInt16
+    property iid_descriptor : Void*
+    def initialize(@format_code : UInt8, @flags : UInt8, @reserved : UInt16, @iid_descriptor : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_STRUCTURE_FLAGS,
-    _bitfield : UInt8
+  struct NDR64_STRUCTURE_FLAGS
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
 
   @[Extern]
-  record NDR64_STRUCTURE_HEADER_FORMAT,
-    format_code : UInt8,
-    alignment : UInt8,
-    flags : Win32cr::System::Rpc::NDR64_STRUCTURE_FLAGS,
-    reserve : UInt8,
-    memory_size : UInt32
+  struct NDR64_STRUCTURE_HEADER_FORMAT
+    property format_code : UInt8
+    property alignment : UInt8
+    property flags : Win32cr::System::Rpc::NDR64_STRUCTURE_FLAGS
+    property reserve : UInt8
+    property memory_size : UInt32
+    def initialize(@format_code : UInt8, @alignment : UInt8, @flags : Win32cr::System::Rpc::NDR64_STRUCTURE_FLAGS, @reserve : UInt8, @memory_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_CONF_STRUCTURE_HEADER_FORMAT,
-    format_code : UInt8,
-    alignment : UInt8,
-    flags : Win32cr::System::Rpc::NDR64_STRUCTURE_FLAGS,
-    reserve : UInt8,
-    memory_size : UInt32,
-    array_description : Void*
+  struct NDR64_CONF_STRUCTURE_HEADER_FORMAT
+    property format_code : UInt8
+    property alignment : UInt8
+    property flags : Win32cr::System::Rpc::NDR64_STRUCTURE_FLAGS
+    property reserve : UInt8
+    property memory_size : UInt32
+    property array_description : Void*
+    def initialize(@format_code : UInt8, @alignment : UInt8, @flags : Win32cr::System::Rpc::NDR64_STRUCTURE_FLAGS, @reserve : UInt8, @memory_size : UInt32, @array_description : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_BOGUS_STRUCTURE_HEADER_FORMAT,
-    format_code : UInt8,
-    alignment : UInt8,
-    flags : Win32cr::System::Rpc::NDR64_STRUCTURE_FLAGS,
-    reserve : UInt8,
-    memory_size : UInt32,
-    original_member_layout : Void*,
-    original_pointer_layout : Void*,
-    pointer_layout : Void*
+  struct NDR64_BOGUS_STRUCTURE_HEADER_FORMAT
+    property format_code : UInt8
+    property alignment : UInt8
+    property flags : Win32cr::System::Rpc::NDR64_STRUCTURE_FLAGS
+    property reserve : UInt8
+    property memory_size : UInt32
+    property original_member_layout : Void*
+    property original_pointer_layout : Void*
+    property pointer_layout : Void*
+    def initialize(@format_code : UInt8, @alignment : UInt8, @flags : Win32cr::System::Rpc::NDR64_STRUCTURE_FLAGS, @reserve : UInt8, @memory_size : UInt32, @original_member_layout : Void*, @original_pointer_layout : Void*, @pointer_layout : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_CONF_BOGUS_STRUCTURE_HEADER_FORMAT,
-    format_code : UInt8,
-    alignment : UInt8,
-    flags : Win32cr::System::Rpc::NDR64_STRUCTURE_FLAGS,
-    dimensions : UInt8,
-    memory_size : UInt32,
-    original_member_layout : Void*,
-    original_pointer_layout : Void*,
-    pointer_layout : Void*,
-    conf_array_description : Void*
+  struct NDR64_CONF_BOGUS_STRUCTURE_HEADER_FORMAT
+    property format_code : UInt8
+    property alignment : UInt8
+    property flags : Win32cr::System::Rpc::NDR64_STRUCTURE_FLAGS
+    property dimensions : UInt8
+    property memory_size : UInt32
+    property original_member_layout : Void*
+    property original_pointer_layout : Void*
+    property pointer_layout : Void*
+    property conf_array_description : Void*
+    def initialize(@format_code : UInt8, @alignment : UInt8, @flags : Win32cr::System::Rpc::NDR64_STRUCTURE_FLAGS, @dimensions : UInt8, @memory_size : UInt32, @original_member_layout : Void*, @original_pointer_layout : Void*, @pointer_layout : Void*, @conf_array_description : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_SIMPLE_MEMBER_FORMAT,
-    format_code : UInt8,
-    reserved1 : UInt8,
-    reserved2 : UInt16,
-    reserved3 : UInt32
+  struct NDR64_SIMPLE_MEMBER_FORMAT
+    property format_code : UInt8
+    property reserved1 : UInt8
+    property reserved2 : UInt16
+    property reserved3 : UInt32
+    def initialize(@format_code : UInt8, @reserved1 : UInt8, @reserved2 : UInt16, @reserved3 : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_MEMPAD_FORMAT,
-    format_code : UInt8,
-    reserve1 : UInt8,
-    mem_pad : UInt16,
-    reserved2 : UInt32
+  struct NDR64_MEMPAD_FORMAT
+    property format_code : UInt8
+    property reserve1 : UInt8
+    property mem_pad : UInt16
+    property reserved2 : UInt32
+    def initialize(@format_code : UInt8, @reserve1 : UInt8, @mem_pad : UInt16, @reserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_EMBEDDED_COMPLEX_FORMAT,
-    format_code : UInt8,
-    reserve1 : UInt8,
-    reserve2 : UInt16,
-    type__ : Void*
+  struct NDR64_EMBEDDED_COMPLEX_FORMAT
+    property format_code : UInt8
+    property reserve1 : UInt8
+    property reserve2 : UInt16
+    property type__ : Void*
+    def initialize(@format_code : UInt8, @reserve1 : UInt8, @reserve2 : UInt16, @type__ : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_BUFFER_ALIGN_FORMAT,
-    format_code : UInt8,
-    alignment : UInt8,
-    reserved : UInt16,
-    reserved2 : UInt32
+  struct NDR64_BUFFER_ALIGN_FORMAT
+    property format_code : UInt8
+    property alignment : UInt8
+    property reserved : UInt16
+    property reserved2 : UInt32
+    def initialize(@format_code : UInt8, @alignment : UInt8, @reserved : UInt16, @reserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_SIMPLE_REGION_FORMAT,
-    format_code : UInt8,
-    alignment : UInt8,
-    region_size : UInt16,
-    reserved : UInt32
+  struct NDR64_SIMPLE_REGION_FORMAT
+    property format_code : UInt8
+    property alignment : UInt8
+    property region_size : UInt16
+    property reserved : UInt32
+    def initialize(@format_code : UInt8, @alignment : UInt8, @region_size : UInt16, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_ENCAPSULATED_UNION,
-    format_code : UInt8,
-    alignment : UInt8,
-    flags : UInt8,
-    switch_type : UInt8,
-    memory_offset : UInt32,
-    memory_size : UInt32,
-    reserved : UInt32
+  struct NDR64_ENCAPSULATED_UNION
+    property format_code : UInt8
+    property alignment : UInt8
+    property flags : UInt8
+    property switch_type : UInt8
+    property memory_offset : UInt32
+    property memory_size : UInt32
+    property reserved : UInt32
+    def initialize(@format_code : UInt8, @alignment : UInt8, @flags : UInt8, @switch_type : UInt8, @memory_offset : UInt32, @memory_size : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_NON_ENCAPSULATED_UNION,
-    format_code : UInt8,
-    alignment : UInt8,
-    flags : UInt8,
-    switch_type : UInt8,
-    memory_size : UInt32,
-    switch : Void*,
-    reserved : UInt32
+  struct NDR64_NON_ENCAPSULATED_UNION
+    property format_code : UInt8
+    property alignment : UInt8
+    property flags : UInt8
+    property switch_type : UInt8
+    property memory_size : UInt32
+    property switch : Void*
+    property reserved : UInt32
+    def initialize(@format_code : UInt8, @alignment : UInt8, @flags : UInt8, @switch_type : UInt8, @memory_size : UInt32, @switch : Void*, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_UNION_ARM_SELECTOR,
-    reserved1 : UInt8,
-    alignment : UInt8,
-    reserved2 : UInt16,
-    arms : UInt32
+  struct NDR64_UNION_ARM_SELECTOR
+    property reserved1 : UInt8
+    property alignment : UInt8
+    property reserved2 : UInt16
+    property arms : UInt32
+    def initialize(@reserved1 : UInt8, @alignment : UInt8, @reserved2 : UInt16, @arms : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_UNION_ARM,
-    case_value : Int64,
-    type__ : Void*,
-    reserved : UInt32
+  struct NDR64_UNION_ARM
+    property case_value : Int64
+    property type__ : Void*
+    property reserved : UInt32
+    def initialize(@case_value : Int64, @type__ : Void*, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_ARRAY_FLAGS,
-    _bitfield : UInt8
+  struct NDR64_ARRAY_FLAGS
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
 
   @[Extern]
-  record NDR64_ARRAY_ELEMENT_INFO,
-    element_mem_size : UInt32,
-    element : Void*
+  struct NDR64_ARRAY_ELEMENT_INFO
+    property element_mem_size : UInt32
+    property element : Void*
+    def initialize(@element_mem_size : UInt32, @element : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_FIX_ARRAY_HEADER_FORMAT,
-    format_code : UInt8,
-    alignment : UInt8,
-    flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS,
-    reserved : UInt8,
-    total_size : UInt32
+  struct NDR64_FIX_ARRAY_HEADER_FORMAT
+    property format_code : UInt8
+    property alignment : UInt8
+    property flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS
+    property reserved : UInt8
+    property total_size : UInt32
+    def initialize(@format_code : UInt8, @alignment : UInt8, @flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS, @reserved : UInt8, @total_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_CONF_ARRAY_HEADER_FORMAT,
-    format_code : UInt8,
-    alignment : UInt8,
-    flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS,
-    reserved : UInt8,
-    element_size : UInt32,
-    conf_descriptor : Void*
+  struct NDR64_CONF_ARRAY_HEADER_FORMAT
+    property format_code : UInt8
+    property alignment : UInt8
+    property flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS
+    property reserved : UInt8
+    property element_size : UInt32
+    property conf_descriptor : Void*
+    def initialize(@format_code : UInt8, @alignment : UInt8, @flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS, @reserved : UInt8, @element_size : UInt32, @conf_descriptor : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_CONF_VAR_ARRAY_HEADER_FORMAT,
-    format_code : UInt8,
-    alignment : UInt8,
-    flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS,
-    reserved : UInt8,
-    element_size : UInt32,
-    conf_descriptor : Void*,
-    var_descriptor : Void*
+  struct NDR64_CONF_VAR_ARRAY_HEADER_FORMAT
+    property format_code : UInt8
+    property alignment : UInt8
+    property flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS
+    property reserved : UInt8
+    property element_size : UInt32
+    property conf_descriptor : Void*
+    property var_descriptor : Void*
+    def initialize(@format_code : UInt8, @alignment : UInt8, @flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS, @reserved : UInt8, @element_size : UInt32, @conf_descriptor : Void*, @var_descriptor : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_VAR_ARRAY_HEADER_FORMAT,
-    format_code : UInt8,
-    alignment : UInt8,
-    flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS,
-    reserved : UInt8,
-    total_size : UInt32,
-    element_size : UInt32,
-    var_descriptor : Void*
+  struct NDR64_VAR_ARRAY_HEADER_FORMAT
+    property format_code : UInt8
+    property alignment : UInt8
+    property flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS
+    property reserved : UInt8
+    property total_size : UInt32
+    property element_size : UInt32
+    property var_descriptor : Void*
+    def initialize(@format_code : UInt8, @alignment : UInt8, @flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS, @reserved : UInt8, @total_size : UInt32, @element_size : UInt32, @var_descriptor : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_BOGUS_ARRAY_HEADER_FORMAT,
-    format_code : UInt8,
-    alignment : UInt8,
-    flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS,
-    number_dims : UInt8,
-    number_elements : UInt32,
-    element : Void*
+  struct NDR64_BOGUS_ARRAY_HEADER_FORMAT
+    property format_code : UInt8
+    property alignment : UInt8
+    property flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS
+    property number_dims : UInt8
+    property number_elements : UInt32
+    property element : Void*
+    def initialize(@format_code : UInt8, @alignment : UInt8, @flags : Win32cr::System::Rpc::NDR64_ARRAY_FLAGS, @number_dims : UInt8, @number_elements : UInt32, @element : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_CONF_VAR_BOGUS_ARRAY_HEADER_FORMAT,
-    fixed_array_format : Win32cr::System::Rpc::NDR64_BOGUS_ARRAY_HEADER_FORMAT,
-    conf_description : Void*,
-    var_description : Void*,
-    offset_description : Void*
+  struct NDR64_CONF_VAR_BOGUS_ARRAY_HEADER_FORMAT
+    property fixed_array_format : Win32cr::System::Rpc::NDR64_BOGUS_ARRAY_HEADER_FORMAT
+    property conf_description : Void*
+    property var_description : Void*
+    property offset_description : Void*
+    def initialize(@fixed_array_format : Win32cr::System::Rpc::NDR64_BOGUS_ARRAY_HEADER_FORMAT, @conf_description : Void*, @var_description : Void*, @offset_description : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_STRING_FLAGS,
-    _bitfield : UInt8
+  struct NDR64_STRING_FLAGS
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
 
   @[Extern]
-  record NDR64_STRING_HEADER_FORMAT,
-    format_code : UInt8,
-    flags : Win32cr::System::Rpc::NDR64_STRING_FLAGS,
-    element_size : UInt16
+  struct NDR64_STRING_HEADER_FORMAT
+    property format_code : UInt8
+    property flags : Win32cr::System::Rpc::NDR64_STRING_FLAGS
+    property element_size : UInt16
+    def initialize(@format_code : UInt8, @flags : Win32cr::System::Rpc::NDR64_STRING_FLAGS, @element_size : UInt16)
+    end
+  end
 
   @[Extern]
-  record NDR64_NON_CONFORMANT_STRING_FORMAT,
-    header : Win32cr::System::Rpc::NDR64_STRING_HEADER_FORMAT,
-    total_size : UInt32
+  struct NDR64_NON_CONFORMANT_STRING_FORMAT
+    property header : Win32cr::System::Rpc::NDR64_STRING_HEADER_FORMAT
+    property total_size : UInt32
+    def initialize(@header : Win32cr::System::Rpc::NDR64_STRING_HEADER_FORMAT, @total_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_RANGED_STRING_FORMAT,
-    header : Win32cr::System::Rpc::NDR64_STRING_HEADER_FORMAT,
-    reserved : UInt32,
-    min : UInt64,
-    max : UInt64
+  struct NDR64_RANGED_STRING_FORMAT
+    property header : Win32cr::System::Rpc::NDR64_STRING_HEADER_FORMAT
+    property reserved : UInt32
+    property min : UInt64
+    property max : UInt64
+    def initialize(@header : Win32cr::System::Rpc::NDR64_STRING_HEADER_FORMAT, @reserved : UInt32, @min : UInt64, @max : UInt64)
+    end
+  end
 
   @[Extern]
-  record NDR64_CONFORMANT_STRING_FORMAT,
-    header : Win32cr::System::Rpc::NDR64_STRING_HEADER_FORMAT
+  struct NDR64_CONFORMANT_STRING_FORMAT
+    property header : Win32cr::System::Rpc::NDR64_STRING_HEADER_FORMAT
+    def initialize(@header : Win32cr::System::Rpc::NDR64_STRING_HEADER_FORMAT)
+    end
+  end
 
   @[Extern]
-  record NDR64_SIZED_CONFORMANT_STRING_FORMAT,
-    header : Win32cr::System::Rpc::NDR64_STRING_HEADER_FORMAT,
-    size_description : Void*
+  struct NDR64_SIZED_CONFORMANT_STRING_FORMAT
+    property header : Win32cr::System::Rpc::NDR64_STRING_HEADER_FORMAT
+    property size_description : Void*
+    def initialize(@header : Win32cr::System::Rpc::NDR64_STRING_HEADER_FORMAT, @size_description : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_EXPR_OPERATOR,
-    expr_type : UInt8,
-    operator : UInt8,
-    cast_type : UInt8,
-    reserved : UInt8
+  struct NDR64_EXPR_OPERATOR
+    property expr_type : UInt8
+    property operator : UInt8
+    property cast_type : UInt8
+    property reserved : UInt8
+    def initialize(@expr_type : UInt8, @operator : UInt8, @cast_type : UInt8, @reserved : UInt8)
+    end
+  end
 
   @[Extern]
-  record NDR64_EXPR_CONST32,
-    expr_type : UInt8,
-    reserved : UInt8,
-    reserved1 : UInt16,
-    const_value : UInt32
+  struct NDR64_EXPR_CONST32
+    property expr_type : UInt8
+    property reserved : UInt8
+    property reserved1 : UInt16
+    property const_value : UInt32
+    def initialize(@expr_type : UInt8, @reserved : UInt8, @reserved1 : UInt16, @const_value : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_EXPR_CONST64,
-    expr_type : UInt8,
-    reserved : UInt8,
-    reserved1 : UInt16,
-    const_value : Int64
+  struct NDR64_EXPR_CONST64
+    property expr_type : UInt8
+    property reserved : UInt8
+    property reserved1 : UInt16
+    property const_value : Int64
+    def initialize(@expr_type : UInt8, @reserved : UInt8, @reserved1 : UInt16, @const_value : Int64)
+    end
+  end
 
   @[Extern]
-  record NDR64_EXPR_VAR,
-    expr_type : UInt8,
-    var_type : UInt8,
-    reserved : UInt16,
-    offset : UInt32
+  struct NDR64_EXPR_VAR
+    property expr_type : UInt8
+    property var_type : UInt8
+    property reserved : UInt16
+    property offset : UInt32
+    def initialize(@expr_type : UInt8, @var_type : UInt8, @reserved : UInt16, @offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_EXPR_NOOP,
-    expr_type : UInt8,
-    size : UInt8,
-    reserved : UInt16
+  struct NDR64_EXPR_NOOP
+    property expr_type : UInt8
+    property size : UInt8
+    property reserved : UInt16
+    def initialize(@expr_type : UInt8, @size : UInt8, @reserved : UInt16)
+    end
+  end
 
   @[Extern]
-  record NDR64_TRANSMIT_AS_FLAGS,
-    _bitfield : UInt8
+  struct NDR64_TRANSMIT_AS_FLAGS
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
 
   @[Extern]
-  record NDR64_TRANSMIT_AS_FORMAT,
-    format_code : UInt8,
-    flags : UInt8,
-    routine_index : UInt16,
-    transmitted_type_wire_alignment : UInt16,
-    memory_alignment : UInt16,
-    presented_type_memory_size : UInt32,
-    transmitted_type_buffer_size : UInt32,
-    transmitted_type : Void*
+  struct NDR64_TRANSMIT_AS_FORMAT
+    property format_code : UInt8
+    property flags : UInt8
+    property routine_index : UInt16
+    property transmitted_type_wire_alignment : UInt16
+    property memory_alignment : UInt16
+    property presented_type_memory_size : UInt32
+    property transmitted_type_buffer_size : UInt32
+    property transmitted_type : Void*
+    def initialize(@format_code : UInt8, @flags : UInt8, @routine_index : UInt16, @transmitted_type_wire_alignment : UInt16, @memory_alignment : UInt16, @presented_type_memory_size : UInt32, @transmitted_type_buffer_size : UInt32, @transmitted_type : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_USER_MARSHAL_FLAGS,
-    _bitfield : UInt8
+  struct NDR64_USER_MARSHAL_FLAGS
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
 
   @[Extern]
-  record NDR64_USER_MARSHAL_FORMAT,
-    format_code : UInt8,
-    flags : UInt8,
-    routine_index : UInt16,
-    transmitted_type_wire_alignment : UInt16,
-    memory_alignment : UInt16,
-    user_type_memory_size : UInt32,
-    transmitted_type_buffer_size : UInt32,
-    transmitted_type : Void*
+  struct NDR64_USER_MARSHAL_FORMAT
+    property format_code : UInt8
+    property flags : UInt8
+    property routine_index : UInt16
+    property transmitted_type_wire_alignment : UInt16
+    property memory_alignment : UInt16
+    property user_type_memory_size : UInt32
+    property transmitted_type_buffer_size : UInt32
+    property transmitted_type : Void*
+    def initialize(@format_code : UInt8, @flags : UInt8, @routine_index : UInt16, @transmitted_type_wire_alignment : UInt16, @memory_alignment : UInt16, @user_type_memory_size : UInt32, @transmitted_type_buffer_size : UInt32, @transmitted_type : Void*)
+    end
+  end
 
   @[Extern]
-  record NDR64_PIPE_FLAGS,
-    _bitfield : UInt8
+  struct NDR64_PIPE_FLAGS
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
 
   @[Extern]
-  record NDR64_PIPE_FORMAT,
-    format_code : UInt8,
-    flags : UInt8,
-    alignment : UInt8,
-    reserved : UInt8,
-    type__ : Void*,
-    memory_size : UInt32,
-    buffer_size : UInt32
+  struct NDR64_PIPE_FORMAT
+    property format_code : UInt8
+    property flags : UInt8
+    property alignment : UInt8
+    property reserved : UInt8
+    property type__ : Void*
+    property memory_size : UInt32
+    property buffer_size : UInt32
+    def initialize(@format_code : UInt8, @flags : UInt8, @alignment : UInt8, @reserved : UInt8, @type__ : Void*, @memory_size : UInt32, @buffer_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_RANGE_PIPE_FORMAT,
-    format_code : UInt8,
-    flags : UInt8,
-    alignment : UInt8,
-    reserved : UInt8,
-    type__ : Void*,
-    memory_size : UInt32,
-    buffer_size : UInt32,
-    min_value : UInt32,
-    max_value : UInt32
+  struct NDR64_RANGE_PIPE_FORMAT
+    property format_code : UInt8
+    property flags : UInt8
+    property alignment : UInt8
+    property reserved : UInt8
+    property type__ : Void*
+    property memory_size : UInt32
+    property buffer_size : UInt32
+    property min_value : UInt32
+    property max_value : UInt32
+    def initialize(@format_code : UInt8, @flags : UInt8, @alignment : UInt8, @reserved : UInt8, @type__ : Void*, @memory_size : UInt32, @buffer_size : UInt32, @min_value : UInt32, @max_value : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDR64_TYPE_STRICT_CONTEXT_HANDLE,
-    format_code : UInt8,
-    real_format_code : UInt8,
-    reserved : UInt16,
-    type__ : Void*,
-    ctxt_flags : UInt32,
-    ctxt_id : UInt32
+  struct NDR64_TYPE_STRICT_CONTEXT_HANDLE
+    property format_code : UInt8
+    property real_format_code : UInt8
+    property reserved : UInt16
+    property type__ : Void*
+    property ctxt_flags : UInt32
+    property ctxt_id : UInt32
+    def initialize(@format_code : UInt8, @real_format_code : UInt8, @reserved : UInt16, @type__ : Void*, @ctxt_flags : UInt32, @ctxt_id : UInt32)
+    end
+  end
 
   @[Link("rpcrt4")]
   @[Link("rpcns4")]

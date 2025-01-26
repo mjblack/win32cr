@@ -6,13 +6,13 @@ require "./../ui/windows_and_messaging.cr"
 module Win32cr::System::StationsAndDesktops
   alias HWINSTA = LibC::IntPtrT
   alias HDESK = LibC::IntPtrT
-  alias WINSTAENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias WINSTAENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias WINSTAENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias WINSTAENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias DESKTOPENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias DESKTOPENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias DESKTOPENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias DESKTOPENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
 
   @[Flags]
@@ -45,17 +45,23 @@ module Win32cr::System::StationsAndDesktops
   end
 
   @[Extern]
-  record USEROBJECTFLAGS,
-    fInherit : Win32cr::Foundation::BOOL,
-    fReserved : Win32cr::Foundation::BOOL,
-    dwFlags : UInt32
+  struct USEROBJECTFLAGS
+    property fInherit : Win32cr::Foundation::BOOL
+    property fReserved : Win32cr::Foundation::BOOL
+    property dwFlags : UInt32
+    def initialize(@fInherit : Win32cr::Foundation::BOOL, @fReserved : Win32cr::Foundation::BOOL, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record BSMINFO,
-    cbSize : UInt32,
-    hdesk : Win32cr::System::StationsAndDesktops::HDESK,
-    hwnd : Win32cr::Foundation::HWND,
-    luid : Win32cr::Foundation::LUID
+  struct BSMINFO
+    property cbSize : UInt32
+    property hdesk : Win32cr::System::StationsAndDesktops::HDESK
+    property hwnd : Win32cr::Foundation::HWND
+    property luid : Win32cr::Foundation::LUID
+    def initialize(@cbSize : UInt32, @hdesk : Win32cr::System::StationsAndDesktops::HDESK, @hwnd : Win32cr::Foundation::HWND, @luid : Win32cr::Foundation::LUID)
+    end
+  end
 
   @[Link("user32")]
   lib C

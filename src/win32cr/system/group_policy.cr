@@ -9,13 +9,13 @@ require "./../ui/shell.cr"
 
 module Win32cr::System::GroupPolicy
   alias CriticalPolicySectionHandle = LibC::IntPtrT
-  alias PFNSTATUSMESSAGECALLBACK = Proc(Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PFNSTATUSMESSAGECALLBACK = Proc(Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PFNPROCESSGROUPPOLICY = Proc(UInt32, Win32cr::Foundation::HANDLE, Win32cr::System::Registry::HKEY, Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*, Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*, LibC::UIntPtrT, Win32cr::Foundation::BOOL*, Win32cr::System::GroupPolicy::PFNSTATUSMESSAGECALLBACK, UInt32)*
+  alias PFNPROCESSGROUPPOLICY = Proc(UInt32, Win32cr::Foundation::HANDLE, Win32cr::System::Registry::HKEY, Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*, Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*, LibC::UIntPtrT, Win32cr::Foundation::BOOL*, Win32cr::System::GroupPolicy::PFNSTATUSMESSAGECALLBACK, UInt32)
 
-  alias PFNPROCESSGROUPPOLICYEX = Proc(UInt32, Win32cr::Foundation::HANDLE, Win32cr::System::Registry::HKEY, Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*, Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*, LibC::UIntPtrT, Win32cr::Foundation::BOOL*, Win32cr::System::GroupPolicy::PFNSTATUSMESSAGECALLBACK, Void*, Win32cr::Foundation::HRESULT*, UInt32)*
+  alias PFNPROCESSGROUPPOLICYEX = Proc(UInt32, Win32cr::Foundation::HANDLE, Win32cr::System::Registry::HKEY, Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*, Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*, LibC::UIntPtrT, Win32cr::Foundation::BOOL*, Win32cr::System::GroupPolicy::PFNSTATUSMESSAGECALLBACK, Void*, Win32cr::Foundation::HRESULT*, UInt32)
 
-  alias PFNGENERATEGROUPPOLICY = Proc(UInt32, Win32cr::Foundation::BOOL*, Win32cr::Foundation::PWSTR, Win32cr::System::GroupPolicy::RSOP_TARGET*, Win32cr::System::GroupPolicy::RSOP_TARGET*, UInt32)*
+  alias PFNGENERATEGROUPPOLICY = Proc(UInt32, Win32cr::Foundation::BOOL*, Win32cr::Foundation::PWSTR, Win32cr::System::GroupPolicy::RSOP_TARGET*, Win32cr::System::GroupPolicy::RSOP_TARGET*, UInt32)
 
   GPM_USE_PDC = 0_u32
   GPM_USE_ANYDC = 1_u32
@@ -319,122 +319,154 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record GROUP_POLICY_OBJECTA,
-    dwOptions : UInt32,
-    dwVersion : UInt32,
-    lpDSPath : Win32cr::Foundation::PSTR,
-    lpFileSysPath : Win32cr::Foundation::PSTR,
-    lpDisplayName : Win32cr::Foundation::PSTR,
-    szGPOName : Win32cr::Foundation::CHAR[50],
-    gpo_link : Win32cr::System::GroupPolicy::GPO_LINK,
-    lParam : Win32cr::Foundation::LPARAM,
-    pNext : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*,
-    pPrev : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*,
-    lpExtensions : Win32cr::Foundation::PSTR,
-    lParam2 : Win32cr::Foundation::LPARAM,
-    lpLink : Win32cr::Foundation::PSTR
+  struct GROUP_POLICY_OBJECTA
+    property dwOptions : UInt32
+    property dwVersion : UInt32
+    property lpDSPath : Win32cr::Foundation::PSTR
+    property lpFileSysPath : Win32cr::Foundation::PSTR
+    property lpDisplayName : Win32cr::Foundation::PSTR
+    property szGPOName : Win32cr::Foundation::CHAR[50]
+    property gpo_link : Win32cr::System::GroupPolicy::GPO_LINK
+    property lParam : Win32cr::Foundation::LPARAM
+    property pNext : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*
+    property pPrev : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*
+    property lpExtensions : Win32cr::Foundation::PSTR
+    property lParam2 : Win32cr::Foundation::LPARAM
+    property lpLink : Win32cr::Foundation::PSTR
+    def initialize(@dwOptions : UInt32, @dwVersion : UInt32, @lpDSPath : Win32cr::Foundation::PSTR, @lpFileSysPath : Win32cr::Foundation::PSTR, @lpDisplayName : Win32cr::Foundation::PSTR, @szGPOName : Win32cr::Foundation::CHAR[50], @gpo_link : Win32cr::System::GroupPolicy::GPO_LINK, @lParam : Win32cr::Foundation::LPARAM, @pNext : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*, @pPrev : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*, @lpExtensions : Win32cr::Foundation::PSTR, @lParam2 : Win32cr::Foundation::LPARAM, @lpLink : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record GROUP_POLICY_OBJECTW,
-    dwOptions : UInt32,
-    dwVersion : UInt32,
-    lpDSPath : Win32cr::Foundation::PWSTR,
-    lpFileSysPath : Win32cr::Foundation::PWSTR,
-    lpDisplayName : Win32cr::Foundation::PWSTR,
-    szGPOName : UInt16[50],
-    gpo_link : Win32cr::System::GroupPolicy::GPO_LINK,
-    lParam : Win32cr::Foundation::LPARAM,
-    pNext : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW*,
-    pPrev : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW*,
-    lpExtensions : Win32cr::Foundation::PWSTR,
-    lParam2 : Win32cr::Foundation::LPARAM,
-    lpLink : Win32cr::Foundation::PWSTR
+  struct GROUP_POLICY_OBJECTW
+    property dwOptions : UInt32
+    property dwVersion : UInt32
+    property lpDSPath : Win32cr::Foundation::PWSTR
+    property lpFileSysPath : Win32cr::Foundation::PWSTR
+    property lpDisplayName : Win32cr::Foundation::PWSTR
+    property szGPOName : UInt16[50]
+    property gpo_link : Win32cr::System::GroupPolicy::GPO_LINK
+    property lParam : Win32cr::Foundation::LPARAM
+    property pNext : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW*
+    property pPrev : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW*
+    property lpExtensions : Win32cr::Foundation::PWSTR
+    property lParam2 : Win32cr::Foundation::LPARAM
+    property lpLink : Win32cr::Foundation::PWSTR
+    def initialize(@dwOptions : UInt32, @dwVersion : UInt32, @lpDSPath : Win32cr::Foundation::PWSTR, @lpFileSysPath : Win32cr::Foundation::PWSTR, @lpDisplayName : Win32cr::Foundation::PWSTR, @szGPOName : UInt16[50], @gpo_link : Win32cr::System::GroupPolicy::GPO_LINK, @lParam : Win32cr::Foundation::LPARAM, @pNext : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW*, @pPrev : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW*, @lpExtensions : Win32cr::Foundation::PWSTR, @lParam2 : Win32cr::Foundation::LPARAM, @lpLink : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record RSOP_TARGET,
-    pwszAccountName : Win32cr::Foundation::PWSTR,
-    pwszNewSOM : Win32cr::Foundation::PWSTR,
-    psaSecurityGroups : Win32cr::System::Com::SAFEARRAY*,
-    pRsopToken : Void*,
-    pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*,
-    pWbemServices : Void*
+  struct RSOP_TARGET
+    property pwszAccountName : Win32cr::Foundation::PWSTR
+    property pwszNewSOM : Win32cr::Foundation::PWSTR
+    property psaSecurityGroups : Win32cr::System::Com::SAFEARRAY*
+    property pRsopToken : Void*
+    property pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*
+    property pWbemServices : Void*
+    def initialize(@pwszAccountName : Win32cr::Foundation::PWSTR, @pwszNewSOM : Win32cr::Foundation::PWSTR, @psaSecurityGroups : Win32cr::System::Com::SAFEARRAY*, @pRsopToken : Void*, @pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*, @pWbemServices : Void*)
+    end
+  end
 
   @[Extern]
-  record POLICYSETTINGSTATUSINFO,
-    szKey : Win32cr::Foundation::PWSTR,
-    szEventSource : Win32cr::Foundation::PWSTR,
-    szEventLogName : Win32cr::Foundation::PWSTR,
-    dwEventID : UInt32,
-    dwErrorCode : UInt32,
-    status : Win32cr::System::GroupPolicy::SETTINGSTATUS,
-    timeLogged : Win32cr::Foundation::SYSTEMTIME
+  struct POLICYSETTINGSTATUSINFO
+    property szKey : Win32cr::Foundation::PWSTR
+    property szEventSource : Win32cr::Foundation::PWSTR
+    property szEventLogName : Win32cr::Foundation::PWSTR
+    property dwEventID : UInt32
+    property dwErrorCode : UInt32
+    property status : Win32cr::System::GroupPolicy::SETTINGSTATUS
+    property timeLogged : Win32cr::Foundation::SYSTEMTIME
+    def initialize(@szKey : Win32cr::Foundation::PWSTR, @szEventSource : Win32cr::Foundation::PWSTR, @szEventLogName : Win32cr::Foundation::PWSTR, @dwEventID : UInt32, @dwErrorCode : UInt32, @status : Win32cr::System::GroupPolicy::SETTINGSTATUS, @timeLogged : Win32cr::Foundation::SYSTEMTIME)
+    end
+  end
 
   @[Extern(union: true)]
-  record INSTALLSPEC,
-    app_name : AppName_e__Struct_,
-    file_ext : Win32cr::Foundation::PWSTR,
-    prog_id : Win32cr::Foundation::PWSTR,
-    com_class : COMClass_e__Struct_ do
+  struct INSTALLSPEC
+    property app_name : AppName_e__Struct_
+    property file_ext : Win32cr::Foundation::PWSTR
+    property prog_id : Win32cr::Foundation::PWSTR
+    property com_class : COMClass_e__Struct_
 
     # Nested Type AppName_e__Struct_
     @[Extern]
-    record AppName_e__Struct_,
-      name : Win32cr::Foundation::PWSTR,
-      gpo_id : LibC::GUID
+    struct AppName_e__Struct_
+    property name : Win32cr::Foundation::PWSTR
+    property gpo_id : LibC::GUID
+    def initialize(@name : Win32cr::Foundation::PWSTR, @gpo_id : LibC::GUID)
+    end
+    end
 
 
     # Nested Type COMClass_e__Struct_
     @[Extern]
-    record COMClass_e__Struct_,
-      clsid : LibC::GUID,
-      cls_ctx : UInt32
+    struct COMClass_e__Struct_
+    property clsid : LibC::GUID
+    property cls_ctx : UInt32
+    def initialize(@clsid : LibC::GUID, @cls_ctx : UInt32)
+    end
+    end
 
+    def initialize(@app_name : AppName_e__Struct_, @file_ext : Win32cr::Foundation::PWSTR, @prog_id : Win32cr::Foundation::PWSTR, @com_class : COMClass_e__Struct_)
+    end
   end
 
   @[Extern]
-  record INSTALLDATA,
-    type__ : Win32cr::System::GroupPolicy::INSTALLSPECTYPE,
-    spec : Win32cr::System::GroupPolicy::INSTALLSPEC
+  struct INSTALLDATA
+    property type__ : Win32cr::System::GroupPolicy::INSTALLSPECTYPE
+    property spec : Win32cr::System::GroupPolicy::INSTALLSPEC
+    def initialize(@type__ : Win32cr::System::GroupPolicy::INSTALLSPECTYPE, @spec : Win32cr::System::GroupPolicy::INSTALLSPEC)
+    end
+  end
 
   @[Extern]
-  record LOCALMANAGEDAPPLICATION,
-    pszDeploymentName : Win32cr::Foundation::PWSTR,
-    pszPolicyName : Win32cr::Foundation::PWSTR,
-    pszProductId : Win32cr::Foundation::PWSTR,
-    dwState : UInt32
+  struct LOCALMANAGEDAPPLICATION
+    property pszDeploymentName : Win32cr::Foundation::PWSTR
+    property pszPolicyName : Win32cr::Foundation::PWSTR
+    property pszProductId : Win32cr::Foundation::PWSTR
+    property dwState : UInt32
+    def initialize(@pszDeploymentName : Win32cr::Foundation::PWSTR, @pszPolicyName : Win32cr::Foundation::PWSTR, @pszProductId : Win32cr::Foundation::PWSTR, @dwState : UInt32)
+    end
+  end
 
   @[Extern]
-  record MANAGEDAPPLICATION,
-    pszPackageName : Win32cr::Foundation::PWSTR,
-    pszPublisher : Win32cr::Foundation::PWSTR,
-    dwVersionHi : UInt32,
-    dwVersionLo : UInt32,
-    dwRevision : UInt32,
-    gpo_id : LibC::GUID,
-    pszPolicyName : Win32cr::Foundation::PWSTR,
-    product_id : LibC::GUID,
-    language : UInt16,
-    pszOwner : Win32cr::Foundation::PWSTR,
-    pszCompany : Win32cr::Foundation::PWSTR,
-    pszComments : Win32cr::Foundation::PWSTR,
-    pszContact : Win32cr::Foundation::PWSTR,
-    pszSupportUrl : Win32cr::Foundation::PWSTR,
-    dwPathType : UInt32,
-    bInstalled : Win32cr::Foundation::BOOL
+  struct MANAGEDAPPLICATION
+    property pszPackageName : Win32cr::Foundation::PWSTR
+    property pszPublisher : Win32cr::Foundation::PWSTR
+    property dwVersionHi : UInt32
+    property dwVersionLo : UInt32
+    property dwRevision : UInt32
+    property gpo_id : LibC::GUID
+    property pszPolicyName : Win32cr::Foundation::PWSTR
+    property product_id : LibC::GUID
+    property language : UInt16
+    property pszOwner : Win32cr::Foundation::PWSTR
+    property pszCompany : Win32cr::Foundation::PWSTR
+    property pszComments : Win32cr::Foundation::PWSTR
+    property pszContact : Win32cr::Foundation::PWSTR
+    property pszSupportUrl : Win32cr::Foundation::PWSTR
+    property dwPathType : UInt32
+    property bInstalled : Win32cr::Foundation::BOOL
+    def initialize(@pszPackageName : Win32cr::Foundation::PWSTR, @pszPublisher : Win32cr::Foundation::PWSTR, @dwVersionHi : UInt32, @dwVersionLo : UInt32, @dwRevision : UInt32, @gpo_id : LibC::GUID, @pszPolicyName : Win32cr::Foundation::PWSTR, @product_id : LibC::GUID, @language : UInt16, @pszOwner : Win32cr::Foundation::PWSTR, @pszCompany : Win32cr::Foundation::PWSTR, @pszComments : Win32cr::Foundation::PWSTR, @pszContact : Win32cr::Foundation::PWSTR, @pszSupportUrl : Win32cr::Foundation::PWSTR, @dwPathType : UInt32, @bInstalled : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record GPOBROWSEINFO,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    lpTitle : Win32cr::Foundation::PWSTR,
-    lpInitialOU : Win32cr::Foundation::PWSTR,
-    lpDSPath : Win32cr::Foundation::PWSTR,
-    dwDSPathSize : UInt32,
-    lpName : Win32cr::Foundation::PWSTR,
-    dwNameSize : UInt32,
-    gpoType : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECT_TYPE,
-    gpoHint : Win32cr::System::GroupPolicy::GROUP_POLICY_HINT_TYPE
+  struct GPOBROWSEINFO
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property lpTitle : Win32cr::Foundation::PWSTR
+    property lpInitialOU : Win32cr::Foundation::PWSTR
+    property lpDSPath : Win32cr::Foundation::PWSTR
+    property dwDSPathSize : UInt32
+    property lpName : Win32cr::Foundation::PWSTR
+    property dwNameSize : UInt32
+    property gpoType : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECT_TYPE
+    property gpoHint : Win32cr::System::GroupPolicy::GROUP_POLICY_HINT_TYPE
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @lpTitle : Win32cr::Foundation::PWSTR, @lpInitialOU : Win32cr::Foundation::PWSTR, @lpDSPath : Win32cr::Foundation::PWSTR, @dwDSPathSize : UInt32, @lpName : Win32cr::Foundation::PWSTR, @dwNameSize : UInt32, @gpoType : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECT_TYPE, @gpoHint : Win32cr::System::GroupPolicy::GROUP_POLICY_HINT_TYPE)
+    end
+  end
 
   @[Extern]
   record IGPMVtbl,
@@ -460,7 +492,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("f5fae809-3bd6-4da9-a65e-17665b41d763")]
   record IGPM, lpVtbl : IGPMVtbl* do
     GUID = LibC::GUID.new(0xf5fae809_u32, 0x3bd6_u16, 0x4da9_u16, StaticArray[0xa6_u8, 0x5e_u8, 0x17_u8, 0x66_u8, 0x5b_u8, 0x41_u8, 0xd7_u8, 0x63_u8])
     def query_interface(this : IGPM*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -545,7 +576,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("6b21cc14-5a00-4f44-a738-feec8a94c7e3")]
   record IGPMDomain, lpVtbl : IGPMDomainVtbl* do
     GUID = LibC::GUID.new(0x6b21cc14_u32, 0x5a00_u16, 0x4f44_u16, StaticArray[0xa7_u8, 0x38_u8, 0xfe_u8, 0xec_u8, 0x8a_u8, 0x94_u8, 0xc7_u8, 0xe3_u8])
     def query_interface(this : IGPMDomain*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -617,7 +647,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("b1568bed-0a93-4acc-810f-afe7081019b9")]
   record IGPMBackupDir, lpVtbl : IGPMBackupDirVtbl* do
     GUID = LibC::GUID.new(0xb1568bed_u32, 0xa93_u16, 0x4acc_u16, StaticArray[0x81_u8, 0xf_u8, 0xaf_u8, 0xe7_u8, 0x8_u8, 0x10_u8, 0x19_u8, 0xb9_u8])
     def query_interface(this : IGPMBackupDir*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -670,7 +699,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("4725a899-2782-4d27-a6bb-d499246ffd72")]
   record IGPMSitesContainer, lpVtbl : IGPMSitesContainerVtbl* do
     GUID = LibC::GUID.new(0x4725a899_u32, 0x2782_u16, 0x4d27_u16, StaticArray[0xa6_u8, 0xbb_u8, 0xd4_u8, 0x99_u8, 0x24_u8, 0x6f_u8, 0xfd_u8, 0x72_u8])
     def query_interface(this : IGPMSitesContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -725,7 +753,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("d6f11c42-829b-48d4-83f5-3615b67dfc22")]
   record IGPMSearchCriteria, lpVtbl : IGPMSearchCriteriaVtbl* do
     GUID = LibC::GUID.new(0xd6f11c42_u32, 0x829b_u16, 0x48d4_u16, StaticArray[0x83_u8, 0xf5_u8, 0x36_u8, 0x15_u8, 0xb6_u8, 0x7d_u8, 0xfc_u8, 0x22_u8])
     def query_interface(this : IGPMSearchCriteria*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -772,7 +799,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("3b466da8-c1a4-4b2a-999a-befcdd56cefb")]
   record IGPMTrustee, lpVtbl : IGPMTrusteeVtbl* do
     GUID = LibC::GUID.new(0x3b466da8_u32, 0xc1a4_u16, 0x4b2a_u16, StaticArray[0x99_u8, 0x9a_u8, 0xbe_u8, 0xfc_u8, 0xdd_u8, 0x56_u8, 0xce_u8, 0xfb_u8])
     def query_interface(this : IGPMTrustee*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -831,7 +857,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("35ebca40-e1a1-4a02-8905-d79416fb464a")]
   record IGPMPermission, lpVtbl : IGPMPermissionVtbl* do
     GUID = LibC::GUID.new(0x35ebca40_u32, 0xe1a1_u16, 0x4a02_u16, StaticArray[0x89_u8, 0x5_u8, 0xd7_u8, 0x94_u8, 0x16_u8, 0xfb_u8, 0x46_u8, 0x4a_u8])
     def query_interface(this : IGPMPermission*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -891,7 +916,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("b6c31ed4-1c93-4d3e-ae84-eb6d61161b60")]
   record IGPMSecurityInfo, lpVtbl : IGPMSecurityInfoVtbl* do
     GUID = LibC::GUID.new(0xb6c31ed4_u32, 0x1c93_u16, 0x4d3e_u16, StaticArray[0xae_u8, 0x84_u8, 0xeb_u8, 0x6d_u8, 0x61_u8, 0x16_u8, 0x1b_u8, 0x60_u8])
     def query_interface(this : IGPMSecurityInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -958,7 +982,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("d8a16a35-3b0d-416b-8d02-4df6f95a7119")]
   record IGPMBackup, lpVtbl : IGPMBackupVtbl* do
     GUID = LibC::GUID.new(0xd8a16a35_u32, 0x3b0d_u16, 0x416b_u16, StaticArray[0x8d_u8, 0x2_u8, 0x4d_u8, 0xf6_u8, 0xf9_u8, 0x5a_u8, 0x71_u8, 0x19_u8])
     def query_interface(this : IGPMBackup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1030,7 +1053,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("c786fc0f-26d8-4bab-a745-39ca7e800cac")]
   record IGPMBackupCollection, lpVtbl : IGPMBackupCollectionVtbl* do
     GUID = LibC::GUID.new(0xc786fc0f_u32, 0x26d8_u16, 0x4bab_u16, StaticArray[0xa7_u8, 0x45_u8, 0x39_u8, 0xca_u8, 0x7e_u8, 0x80_u8, 0xc_u8, 0xac_u8])
     def query_interface(this : IGPMBackupCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1088,7 +1110,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("c0a7f09e-05a1-4f0c-8158-9e5c33684f6b")]
   record IGPMSOM, lpVtbl : IGPMSOMVtbl* do
     GUID = LibC::GUID.new(0xc0a7f09e_u32, 0x5a1_u16, 0x4f0c_u16, StaticArray[0x81_u8, 0x58_u8, 0x9e_u8, 0x5c_u8, 0x33_u8, 0x68_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IGPMSOM*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1160,7 +1181,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("adc1688e-00e4-4495-abba-bed200df0cab")]
   record IGPMSOMCollection, lpVtbl : IGPMSOMCollectionVtbl* do
     GUID = LibC::GUID.new(0xadc1688e_u32, 0xe4_u16, 0x4495_u16, StaticArray[0xab_u8, 0xba_u8, 0xbe_u8, 0xd2_u8, 0x0_u8, 0xdf_u8, 0xc_u8, 0xab_u8])
     def query_interface(this : IGPMSOMCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1216,7 +1236,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("ef2ff9b4-3c27-459a-b979-038305cec75d")]
   record IGPMWMIFilter, lpVtbl : IGPMWMIFilterVtbl* do
     GUID = LibC::GUID.new(0xef2ff9b4_u32, 0x3c27_u16, 0x459a_u16, StaticArray[0xb9_u8, 0x79_u8, 0x3_u8, 0x83_u8, 0x5_u8, 0xce_u8, 0xc7_u8, 0x5d_u8])
     def query_interface(this : IGPMWMIFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1282,7 +1301,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("5782d582-1a36-4661-8a94-c3c32551945b")]
   record IGPMWMIFilterCollection, lpVtbl : IGPMWMIFilterCollectionVtbl* do
     GUID = LibC::GUID.new(0x5782d582_u32, 0x1a36_u16, 0x4661_u16, StaticArray[0x8a_u8, 0x94_u8, 0xc3_u8, 0xc3_u8, 0x25_u8, 0x51_u8, 0x94_u8, 0x5b_u8])
     def query_interface(this : IGPMWMIFilterCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1365,7 +1383,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("49ed785a-3237-4ff2-b1f0-fdf5a8d5a1ee")]
   record IGPMRSOP, lpVtbl : IGPMRSOPVtbl* do
     GUID = LibC::GUID.new(0x49ed785a_u32, 0x3237_u16, 0x4ff2_u16, StaticArray[0xb1_u8, 0xf0_u8, 0xfd_u8, 0xf5_u8, 0xa8_u8, 0xd5_u8, 0xa1_u8, 0xee_u8])
     def query_interface(this : IGPMRSOP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1538,7 +1555,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("58cc4352-1ca3-48e5-9864-1da4d6e0d60f")]
   record IGPMGPO, lpVtbl : IGPMGPOVtbl* do
     GUID = LibC::GUID.new(0x58cc4352_u32, 0x1ca3_u16, 0x48e5_u16, StaticArray[0x98_u8, 0x64_u8, 0x1d_u8, 0xa4_u8, 0xd6_u8, 0xe0_u8, 0xd6_u8, 0xf_u8])
     def query_interface(this : IGPMGPO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1667,7 +1683,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("f0f0d5cf-70ca-4c39-9e29-b642f8726c01")]
   record IGPMGPOCollection, lpVtbl : IGPMGPOCollectionVtbl* do
     GUID = LibC::GUID.new(0xf0f0d5cf_u32, 0x70ca_u16, 0x4c39_u16, StaticArray[0x9e_u8, 0x29_u8, 0xb6_u8, 0x42_u8, 0xf8_u8, 0x72_u8, 0x6c_u8, 0x1_u8])
     def query_interface(this : IGPMGPOCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1724,7 +1739,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("434b99bd-5de7-478a-809c-c251721df70c")]
   record IGPMGPOLink, lpVtbl : IGPMGPOLinkVtbl* do
     GUID = LibC::GUID.new(0x434b99bd_u32, 0x5de7_u16, 0x478a_u16, StaticArray[0x80_u8, 0x9c_u8, 0xc2_u8, 0x51_u8, 0x72_u8, 0x1d_u8, 0xf7_u8, 0xc_u8])
     def query_interface(this : IGPMGPOLink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1793,7 +1807,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("189d7b68-16bd-4d0d-a2ec-2e6aa2288c7f")]
   record IGPMGPOLinksCollection, lpVtbl : IGPMGPOLinksCollectionVtbl* do
     GUID = LibC::GUID.new(0x189d7b68_u32, 0x16bd_u16, 0x4d0d_u16, StaticArray[0xa2_u8, 0xec_u8, 0x2e_u8, 0x6a_u8, 0xa2_u8, 0x28_u8, 0x8c_u8, 0x7f_u8])
     def query_interface(this : IGPMGPOLinksCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1844,7 +1857,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("2e52a97d-0a4a-4a6f-85db-201622455da0")]
   record IGPMCSECollection, lpVtbl : IGPMCSECollectionVtbl* do
     GUID = LibC::GUID.new(0x2e52a97d_u32, 0xa4a_u16, 0x4a6f_u16, StaticArray[0x85_u8, 0xdb_u8, 0x20_u8, 0x16_u8, 0x22_u8, 0x45_u8, 0x5d_u8, 0xa0_u8])
     def query_interface(this : IGPMCSECollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1896,7 +1908,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("69da7488-b8db-415e-9266-901be4d49928")]
   record IGPMClientSideExtension, lpVtbl : IGPMClientSideExtensionVtbl* do
     GUID = LibC::GUID.new(0x69da7488_u32, 0xb8db_u16, 0x415e_u16, StaticArray[0x92_u8, 0x66_u8, 0x90_u8, 0x1b_u8, 0xe4_u8, 0xd4_u8, 0x99_u8, 0x28_u8])
     def query_interface(this : IGPMClientSideExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1948,7 +1959,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("ddc67754-be67-4541-8166-f48166868c9c")]
   record IGPMAsyncCancel, lpVtbl : IGPMAsyncCancelVtbl* do
     GUID = LibC::GUID.new(0xddc67754_u32, 0xbe67_u16, 0x4541_u16, StaticArray[0x81_u8, 0x66_u8, 0xf4_u8, 0x81_u8, 0x66_u8, 0x86_u8, 0x8c_u8, 0x9c_u8])
     def query_interface(this : IGPMAsyncCancel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1991,7 +2001,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("6aac29f8-5948-4324-bf70-423818942dbc")]
   record IGPMAsyncProgress, lpVtbl : IGPMAsyncProgressVtbl* do
     GUID = LibC::GUID.new(0x6aac29f8_u32, 0x5948_u16, 0x4324_u16, StaticArray[0xbf_u8, 0x70_u8, 0x42_u8, 0x38_u8, 0x18_u8, 0x94_u8, 0x2d_u8, 0xbc_u8])
     def query_interface(this : IGPMAsyncProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2036,7 +2045,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("9b6e1af0-1a92-40f3-a59d-f36ac1f728b7")]
   record IGPMStatusMsgCollection, lpVtbl : IGPMStatusMsgCollectionVtbl* do
     GUID = LibC::GUID.new(0x9b6e1af0_u32, 0x1a92_u16, 0x40f3_u16, StaticArray[0xa5_u8, 0x9d_u8, 0xf3_u8, 0x6a_u8, 0xc1_u8, 0xf7_u8, 0x28_u8, 0xb7_u8])
     def query_interface(this : IGPMStatusMsgCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2090,7 +2098,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("8496c22f-f3de-4a1f-8f58-603caaa93d7b")]
   record IGPMStatusMessage, lpVtbl : IGPMStatusMessageVtbl* do
     GUID = LibC::GUID.new(0x8496c22f_u32, 0xf3de_u16, 0x4a1f_u16, StaticArray[0x8f_u8, 0x58_u8, 0x60_u8, 0x3c_u8, 0xaa_u8, 0xa9_u8, 0x3d_u8, 0x7b_u8])
     def query_interface(this : IGPMStatusMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2207,7 +2214,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("50ef73e6-d35c-4c8d-be63-7ea5d2aac5c4")]
   record IGPMConstants, lpVtbl : IGPMConstantsVtbl* do
     GUID = LibC::GUID.new(0x50ef73e6_u32, 0xd35c_u16, 0x4c8d_u16, StaticArray[0xbe_u8, 0x63_u8, 0x7e_u8, 0xa5_u8, 0xd2_u8, 0xaa_u8, 0xc5_u8, 0xc4_u8])
     def query_interface(this : IGPMConstants*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2429,7 +2435,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("86dff7e9-f76f-42ab-9570-cebc6be8a52d")]
   record IGPMResult, lpVtbl : IGPMResultVtbl* do
     GUID = LibC::GUID.new(0x86dff7e9_u32, 0xf76f_u16, 0x42ab_u16, StaticArray[0x95_u8, 0x70_u8, 0xce_u8, 0xbc_u8, 0x6b_u8, 0xe8_u8, 0xa5_u8, 0x2d_u8])
     def query_interface(this : IGPMResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2480,7 +2485,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("bb0bf49b-e53f-443f-b807-8be22bfb6d42")]
   record IGPMMapEntryCollection, lpVtbl : IGPMMapEntryCollectionVtbl* do
     GUID = LibC::GUID.new(0xbb0bf49b_u32, 0xe53f_u16, 0x443f_u16, StaticArray[0xb8_u8, 0x7_u8, 0x8b_u8, 0xe2_u8, 0x2b_u8, 0xfb_u8, 0x6d_u8, 0x42_u8])
     def query_interface(this : IGPMMapEntryCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2532,7 +2536,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("8e79ad06-2381-4444-be4c-ff693e6e6f2b")]
   record IGPMMapEntry, lpVtbl : IGPMMapEntryVtbl* do
     GUID = LibC::GUID.new(0x8e79ad06_u32, 0x2381_u16, 0x4444_u16, StaticArray[0xbe_u8, 0x4c_u8, 0xff_u8, 0x69_u8, 0x3e_u8, 0x6e_u8, 0x6f_u8, 0x2b_u8])
     def query_interface(this : IGPMMapEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2591,7 +2594,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("48f823b1-efaf-470b-b6ed-40d14ee1a4ec")]
   record IGPMMigrationTable, lpVtbl : IGPMMigrationTableVtbl* do
     GUID = LibC::GUID.new(0x48f823b1_u32, 0xefaf_u16, 0x470b_u16, StaticArray[0xb6_u8, 0xed_u8, 0x40_u8, 0xd1_u8, 0x4e_u8, 0xe1_u8, 0xa4_u8, 0xec_u8])
     def query_interface(this : IGPMMigrationTable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2658,7 +2660,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("f8dc55ed-3ba0-4864-aad4-d365189ee1d5")]
   record IGPMBackupDirEx, lpVtbl : IGPMBackupDirExVtbl* do
     GUID = LibC::GUID.new(0xf8dc55ed_u32, 0x3ba0_u16, 0x4864_u16, StaticArray[0xaa_u8, 0xd4_u8, 0xd3_u8, 0x65_u8, 0x18_u8, 0x9e_u8, 0xe1_u8, 0xd5_u8])
     def query_interface(this : IGPMBackupDirEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2712,7 +2713,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("c998031d-add0-4bb5-8dea-298505d8423b")]
   record IGPMStarterGPOBackupCollection, lpVtbl : IGPMStarterGPOBackupCollectionVtbl* do
     GUID = LibC::GUID.new(0xc998031d_u32, 0xadd0_u16, 0x4bb5_u16, StaticArray[0x8d_u8, 0xea_u8, 0x29_u8, 0x85_u8, 0x5_u8, 0xd8_u8, 0x42_u8, 0x3b_u8])
     def query_interface(this : IGPMStarterGPOBackupCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2771,7 +2771,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("51d98eda-a87e-43dd-b80a-0b66ef1938d6")]
   record IGPMStarterGPOBackup, lpVtbl : IGPMStarterGPOBackupVtbl* do
     GUID = LibC::GUID.new(0x51d98eda_u32, 0xa87e_u16, 0x43dd_u16, StaticArray[0xb8_u8, 0xa_u8, 0xb_u8, 0x66_u8, 0xef_u8, 0x19_u8, 0x38_u8, 0xd6_u8])
     def query_interface(this : IGPMStarterGPOBackup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2857,7 +2856,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("00238f8a-3d86-41ac-8f5e-06a6638a634a")]
   record IGPM2, lpVtbl : IGPM2Vtbl* do
     GUID = LibC::GUID.new(0x238f8a_u32, 0x3d86_u16, 0x41ac_u16, StaticArray[0x8f_u8, 0x5e_u8, 0x6_u8, 0xa6_u8, 0x63_u8, 0x8a_u8, 0x63_u8, 0x4a_u8])
     def query_interface(this : IGPM2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2959,7 +2957,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("dfc3f61b-8880-4490-9337-d29c7ba8c2f0")]
   record IGPMStarterGPO, lpVtbl : IGPMStarterGPOVtbl* do
     GUID = LibC::GUID.new(0xdfc3f61b_u32, 0x8880_u16, 0x4490_u16, StaticArray[0x93_u8, 0x37_u8, 0xd2_u8, 0x9c_u8, 0x7b_u8, 0xa8_u8, 0xc2_u8, 0xf0_u8])
     def query_interface(this : IGPMStarterGPO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3064,7 +3061,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("2e522729-2219-44ad-933a-64dfd650c423")]
   record IGPMStarterGPOCollection, lpVtbl : IGPMStarterGPOCollectionVtbl* do
     GUID = LibC::GUID.new(0x2e522729_u32, 0x2219_u16, 0x44ad_u16, StaticArray[0x93_u8, 0x3a_u8, 0x64_u8, 0xdf_u8, 0xd6_u8, 0x50_u8, 0xc4_u8, 0x23_u8])
     def query_interface(this : IGPMStarterGPOCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3128,7 +3124,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("7ca6bb8b-f1eb-490a-938d-3c4e51c768e6")]
   record IGPMDomain2, lpVtbl : IGPMDomain2Vtbl* do
     GUID = LibC::GUID.new(0x7ca6bb8b_u32, 0xf1eb_u16, 0x490a_u16, StaticArray[0x93_u8, 0x8d_u8, 0x3c_u8, 0x4e_u8, 0x51_u8, 0xc7_u8, 0x68_u8, 0xe6_u8])
     def query_interface(this : IGPMDomain2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3290,7 +3285,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("05ae21b0-ac09-4032-a26f-9e7da786dc19")]
   record IGPMConstants2, lpVtbl : IGPMConstants2Vtbl* do
     GUID = LibC::GUID.new(0x5ae21b0_u32, 0xac09_u16, 0x4032_u16, StaticArray[0xa2_u8, 0x6f_u8, 0x9e_u8, 0x7d_u8, 0xa7_u8, 0x86_u8, 0xdc_u8, 0x19_u8])
     def query_interface(this : IGPMConstants2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3585,7 +3579,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("8a66a210-b78b-4d99-88e2-c306a817c925")]
   record IGPMGPO2, lpVtbl : IGPMGPO2Vtbl* do
     GUID = LibC::GUID.new(0x8a66a210_u32, 0xb78b_u16, 0x4d99_u16, StaticArray[0x88_u8, 0xe2_u8, 0xc3_u8, 0x6_u8, 0xa8_u8, 0x17_u8, 0xc9_u8, 0x25_u8])
     def query_interface(this : IGPMGPO2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3737,7 +3730,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("0077fdfe-88c7-4acf-a11d-d10a7c310a03")]
   record IGPMDomain3, lpVtbl : IGPMDomain3Vtbl* do
     GUID = LibC::GUID.new(0x77fdfe_u32, 0x88c7_u16, 0x4acf_u16, StaticArray[0xa1_u8, 0x1d_u8, 0xd1_u8, 0xa_u8, 0x7c_u8, 0x31_u8, 0xa_u8, 0x3_u8])
     def query_interface(this : IGPMDomain3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3870,7 +3862,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("7cf123a1-f94a-4112-bfae-6aa1db9cb248")]
   record IGPMGPO3, lpVtbl : IGPMGPO3Vtbl* do
     GUID = LibC::GUID.new(0x7cf123a1_u32, 0xf94a_u16, 0x4112_u16, StaticArray[0xbf_u8, 0xae_u8, 0x6a_u8, 0xa1_u8, 0xdb_u8, 0x9c_u8, 0xb2_u8, 0x48_u8])
     def query_interface(this : IGPMGPO3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4016,7 +4007,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("8fc0b735-a0e1-11d1-a7d3-0000f87571e3")]
   record IGPEInformation, lpVtbl : IGPEInformationVtbl* do
     GUID = LibC::GUID.new(0x8fc0b735_u32, 0xa0e1_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
     def query_interface(this : IGPEInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4084,7 +4074,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("ea502723-a23d-11d1-a7d3-0000f87571e3")]
   record IGroupPolicyObject, lpVtbl : IGroupPolicyObjectVtbl* do
     GUID = LibC::GUID.new(0xea502723_u32, 0xa23d_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
     def query_interface(this : IGroupPolicyObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4164,7 +4153,6 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  #@[Com("9a5a81b5-d9c7-49ef-9d11-ddf50968c48d")]
   record IRSOPInformation, lpVtbl : IRSOPInformationVtbl* do
     GUID = LibC::GUID.new(0x9a5a81b5_u32, 0xd9c7_u16, 0x49ef_u16, StaticArray[0x9d_u8, 0x11_u8, 0xdd_u8, 0xf5_u8, 0x9_u8, 0x68_u8, 0xc4_u8, 0x8d_u8])
     def query_interface(this : IRSOPInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -46,83 +46,102 @@ module Win32cr::UI::Input::Pointer
   end
 
   @[Extern]
-  record POINTER_INFO,
-    pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE,
-    pointerId : UInt32,
-    frameId : UInt32,
-    pointerFlags : Win32cr::UI::Input::Pointer::POINTER_FLAGS,
-    sourceDevice : Win32cr::Foundation::HANDLE,
-    hwndTarget : Win32cr::Foundation::HWND,
-    ptPixelLocation : Win32cr::Foundation::POINT,
-    ptHimetricLocation : Win32cr::Foundation::POINT,
-    ptPixelLocationRaw : Win32cr::Foundation::POINT,
-    ptHimetricLocationRaw : Win32cr::Foundation::POINT,
-    dwTime : UInt32,
-    historyCount : UInt32,
-    input_data : Int32,
-    dwKeyStates : UInt32,
-    performance_count : UInt64,
-    button_change_type : Win32cr::UI::Input::Pointer::POINTER_BUTTON_CHANGE_TYPE
+  struct POINTER_INFO
+    property pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE
+    property pointerId : UInt32
+    property frameId : UInt32
+    property pointerFlags : Win32cr::UI::Input::Pointer::POINTER_FLAGS
+    property sourceDevice : Win32cr::Foundation::HANDLE
+    property hwndTarget : Win32cr::Foundation::HWND
+    property ptPixelLocation : Win32cr::Foundation::POINT
+    property ptHimetricLocation : Win32cr::Foundation::POINT
+    property ptPixelLocationRaw : Win32cr::Foundation::POINT
+    property ptHimetricLocationRaw : Win32cr::Foundation::POINT
+    property dwTime : UInt32
+    property historyCount : UInt32
+    property input_data : Int32
+    property dwKeyStates : UInt32
+    property performance_count : UInt64
+    property button_change_type : Win32cr::UI::Input::Pointer::POINTER_BUTTON_CHANGE_TYPE
+    def initialize(@pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE, @pointerId : UInt32, @frameId : UInt32, @pointerFlags : Win32cr::UI::Input::Pointer::POINTER_FLAGS, @sourceDevice : Win32cr::Foundation::HANDLE, @hwndTarget : Win32cr::Foundation::HWND, @ptPixelLocation : Win32cr::Foundation::POINT, @ptHimetricLocation : Win32cr::Foundation::POINT, @ptPixelLocationRaw : Win32cr::Foundation::POINT, @ptHimetricLocationRaw : Win32cr::Foundation::POINT, @dwTime : UInt32, @historyCount : UInt32, @input_data : Int32, @dwKeyStates : UInt32, @performance_count : UInt64, @button_change_type : Win32cr::UI::Input::Pointer::POINTER_BUTTON_CHANGE_TYPE)
+    end
+  end
 
   @[Extern]
-  record POINTER_TOUCH_INFO,
-    pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO,
-    touchFlags : UInt32,
-    touchMask : UInt32,
-    rcContact : Win32cr::Foundation::RECT,
-    rcContactRaw : Win32cr::Foundation::RECT,
-    orientation : UInt32,
-    pressure : UInt32
+  struct POINTER_TOUCH_INFO
+    property pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO
+    property touchFlags : UInt32
+    property touchMask : UInt32
+    property rcContact : Win32cr::Foundation::RECT
+    property rcContactRaw : Win32cr::Foundation::RECT
+    property orientation : UInt32
+    property pressure : UInt32
+    def initialize(@pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO, @touchFlags : UInt32, @touchMask : UInt32, @rcContact : Win32cr::Foundation::RECT, @rcContactRaw : Win32cr::Foundation::RECT, @orientation : UInt32, @pressure : UInt32)
+    end
+  end
 
   @[Extern]
-  record POINTER_PEN_INFO,
-    pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO,
-    penFlags : UInt32,
-    penMask : UInt32,
-    pressure : UInt32,
-    rotation : UInt32,
-    tiltX : Int32,
-    tiltY : Int32
+  struct POINTER_PEN_INFO
+    property pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO
+    property penFlags : UInt32
+    property penMask : UInt32
+    property pressure : UInt32
+    property rotation : UInt32
+    property tiltX : Int32
+    property tiltY : Int32
+    def initialize(@pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO, @penFlags : UInt32, @penMask : UInt32, @pressure : UInt32, @rotation : UInt32, @tiltX : Int32, @tiltY : Int32)
+    end
+  end
 
   @[Extern]
-  record INPUT_INJECTION_VALUE,
-    page : UInt16,
-    usage : UInt16,
-    value : Int32,
-    index : UInt16
+  struct INPUT_INJECTION_VALUE
+    property page : UInt16
+    property usage : UInt16
+    property value : Int32
+    property index : UInt16
+    def initialize(@page : UInt16, @usage : UInt16, @value : Int32, @index : UInt16)
+    end
+  end
 
   @[Extern]
-  record INPUT_TRANSFORM,
-    anonymous : Anonymous_e__Union_ do
+  struct INPUT_TRANSFORM
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      m : Float32[16] do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property m : Float32[16]
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _11 : Float32,
-        _12 : Float32,
-        _13 : Float32,
-        _14 : Float32,
-        _21 : Float32,
-        _22 : Float32,
-        _23 : Float32,
-        _24 : Float32,
-        _31 : Float32,
-        _32 : Float32,
-        _33 : Float32,
-        _34 : Float32,
-        _41 : Float32,
-        _42 : Float32,
-        _43 : Float32,
-        _44 : Float32
+      struct Anonymous_e__Struct_
+    property _11 : Float32
+    property _12 : Float32
+    property _13 : Float32
+    property _14 : Float32
+    property _21 : Float32
+    property _22 : Float32
+    property _23 : Float32
+    property _24 : Float32
+    property _31 : Float32
+    property _32 : Float32
+    property _33 : Float32
+    property _34 : Float32
+    property _41 : Float32
+    property _42 : Float32
+    property _43 : Float32
+    property _44 : Float32
+    def initialize(@_11 : Float32, @_12 : Float32, @_13 : Float32, @_14 : Float32, @_21 : Float32, @_22 : Float32, @_23 : Float32, @_24 : Float32, @_31 : Float32, @_32 : Float32, @_33 : Float32, @_34 : Float32, @_41 : Float32, @_42 : Float32, @_43 : Float32, @_44 : Float32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @m : Float32[16])
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Link("user32")]

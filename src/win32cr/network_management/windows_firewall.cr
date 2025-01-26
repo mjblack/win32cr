@@ -3,21 +3,21 @@ require "./../foundation.cr"
 require "./../security.cr"
 
 module Win32cr::NetworkManagement::WindowsFirewall
-  alias PAC_CHANGES_CALLBACK_FN = Proc(Void*, Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CHANGE*, Void)*
+  alias PAC_CHANGES_CALLBACK_FN = Proc(Void*, Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CHANGE*, Void)
 
-  alias PNETISO_EDP_ID_CALLBACK_FN = Proc(Void*, Win32cr::Foundation::PWSTR, UInt32, Void)*
+  alias PNETISO_EDP_ID_CALLBACK_FN = Proc(Void*, Win32cr::Foundation::PWSTR, UInt32, Void)
 
-  alias PFN_FWADDDYNAMICKEYWORDADDRESS0 = Proc(Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address0_*, UInt32)*
+  alias PFN_FWADDDYNAMICKEYWORDADDRESS0 = Proc(Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address0_*, UInt32)
 
-  alias PFN_FWDELETEDYNAMICKEYWORDADDRESS0 = Proc(LibC::GUID, UInt32)*
+  alias PFN_FWDELETEDYNAMICKEYWORDADDRESS0 = Proc(LibC::GUID, UInt32)
 
-  alias PFN_FWENUMDYNAMICKEYWORDADDRESSESBYTYPE0 = Proc(UInt32, Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address_data0_**, UInt32)*
+  alias PFN_FWENUMDYNAMICKEYWORDADDRESSESBYTYPE0 = Proc(UInt32, Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address_data0_**, UInt32)
 
-  alias PFN_FWENUMDYNAMICKEYWORDADDRESSBYID0 = Proc(LibC::GUID, Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address_data0_**, UInt32)*
+  alias PFN_FWENUMDYNAMICKEYWORDADDRESSBYID0 = Proc(LibC::GUID, Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address_data0_**, UInt32)
 
-  alias PFN_FWFREEDYNAMICKEYWORDADDRESSDATA0 = Proc(Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address_data0_*, UInt32)*
+  alias PFN_FWFREEDYNAMICKEYWORDADDRESSDATA0 = Proc(Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address_data0_*, UInt32)
 
-  alias PFN_FWUPDATEDYNAMICKEYWORDADDRESS0 = Proc(LibC::GUID, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, UInt32)*
+  alias PFN_FWUPDATEDYNAMICKEYWORDADDRESS0 = Proc(LibC::GUID, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, UInt32)
 
   NETCON_MAX_NAME_LEN = 256_u32
   S_OBJECT_NO_LONGER_VALID = 2_i32
@@ -240,68 +240,91 @@ module Win32cr::NetworkManagement::WindowsFirewall
   end
 
   @[Extern]
-  record NETCON_PROPERTIES,
-    guidId : LibC::GUID,
-    pszwName : Win32cr::Foundation::PWSTR,
-    pszwDeviceName : Win32cr::Foundation::PWSTR,
-    status : Win32cr::NetworkManagement::WindowsFirewall::NETCON_STATUS,
-    media_type : Win32cr::NetworkManagement::WindowsFirewall::NETCON_MEDIATYPE,
-    dwCharacter : UInt32,
-    clsidThisObject : LibC::GUID,
-    clsidUiObject : LibC::GUID
-
-  @[Extern]
-  record INET_FIREWALL_AC_CAPABILITIES,
-    count : UInt32,
-    capabilities : Win32cr::Security::SID_AND_ATTRIBUTES*
-
-  @[Extern]
-  record INET_FIREWALL_AC_BINARIES,
-    count : UInt32,
-    binaries : Win32cr::Foundation::PWSTR*
-
-  @[Extern]
-  record INET_FIREWALL_AC_CHANGE,
-    changeType : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CHANGE_TYPE,
-    createType : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CREATION_TYPE,
-    appContainerSid : Win32cr::Security::SID*,
-    userSid : Win32cr::Security::SID*,
-    displayName : Win32cr::Foundation::PWSTR,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      capabilities : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CAPABILITIES,
-      binaries : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_BINARIES
-
+  struct NETCON_PROPERTIES
+    property guidId : LibC::GUID
+    property pszwName : Win32cr::Foundation::PWSTR
+    property pszwDeviceName : Win32cr::Foundation::PWSTR
+    property status : Win32cr::NetworkManagement::WindowsFirewall::NETCON_STATUS
+    property media_type : Win32cr::NetworkManagement::WindowsFirewall::NETCON_MEDIATYPE
+    property dwCharacter : UInt32
+    property clsidThisObject : LibC::GUID
+    property clsidUiObject : LibC::GUID
+    def initialize(@guidId : LibC::GUID, @pszwName : Win32cr::Foundation::PWSTR, @pszwDeviceName : Win32cr::Foundation::PWSTR, @status : Win32cr::NetworkManagement::WindowsFirewall::NETCON_STATUS, @media_type : Win32cr::NetworkManagement::WindowsFirewall::NETCON_MEDIATYPE, @dwCharacter : UInt32, @clsidThisObject : LibC::GUID, @clsidUiObject : LibC::GUID)
+    end
   end
 
   @[Extern]
-  record INET_FIREWALL_APP_CONTAINER,
-    appContainerSid : Win32cr::Security::SID*,
-    userSid : Win32cr::Security::SID*,
-    appContainerName : Win32cr::Foundation::PWSTR,
-    displayName : Win32cr::Foundation::PWSTR,
-    description : Win32cr::Foundation::PWSTR,
-    capabilities : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CAPABILITIES,
-    binaries : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_BINARIES,
-    workingDirectory : Win32cr::Foundation::PWSTR,
-    packageFullName : Win32cr::Foundation::PWSTR
+  struct INET_FIREWALL_AC_CAPABILITIES
+    property count : UInt32
+    property capabilities : Win32cr::Security::SID_AND_ATTRIBUTES*
+    def initialize(@count : UInt32, @capabilities : Win32cr::Security::SID_AND_ATTRIBUTES*)
+    end
+  end
 
   @[Extern]
-  record Tag_fw_dynamic_keyword_address0_,
-    id : LibC::GUID,
-    keyword : Win32cr::Foundation::PWSTR,
-    flags : UInt32,
-    addresses : Win32cr::Foundation::PWSTR
+  struct INET_FIREWALL_AC_BINARIES
+    property count : UInt32
+    property binaries : Win32cr::Foundation::PWSTR*
+    def initialize(@count : UInt32, @binaries : Win32cr::Foundation::PWSTR*)
+    end
+  end
 
   @[Extern]
-  record Tag_fw_dynamic_keyword_address_data0_,
-    dynamicKeywordAddress : Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address0_,
-    next__ : Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address_data0_*,
-    schemaVersion : UInt16,
-    originType : Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_origin_type_
+  struct INET_FIREWALL_AC_CHANGE
+    property changeType : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CHANGE_TYPE
+    property createType : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CREATION_TYPE
+    property appContainerSid : Win32cr::Security::SID*
+    property userSid : Win32cr::Security::SID*
+    property displayName : Win32cr::Foundation::PWSTR
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property capabilities : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CAPABILITIES
+    property binaries : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_BINARIES
+    def initialize(@capabilities : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CAPABILITIES, @binaries : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_BINARIES)
+    end
+    end
+
+    def initialize(@changeType : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CHANGE_TYPE, @createType : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CREATION_TYPE, @appContainerSid : Win32cr::Security::SID*, @userSid : Win32cr::Security::SID*, @displayName : Win32cr::Foundation::PWSTR, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct INET_FIREWALL_APP_CONTAINER
+    property appContainerSid : Win32cr::Security::SID*
+    property userSid : Win32cr::Security::SID*
+    property appContainerName : Win32cr::Foundation::PWSTR
+    property displayName : Win32cr::Foundation::PWSTR
+    property description : Win32cr::Foundation::PWSTR
+    property capabilities : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CAPABILITIES
+    property binaries : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_BINARIES
+    property workingDirectory : Win32cr::Foundation::PWSTR
+    property packageFullName : Win32cr::Foundation::PWSTR
+    def initialize(@appContainerSid : Win32cr::Security::SID*, @userSid : Win32cr::Security::SID*, @appContainerName : Win32cr::Foundation::PWSTR, @displayName : Win32cr::Foundation::PWSTR, @description : Win32cr::Foundation::PWSTR, @capabilities : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CAPABILITIES, @binaries : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_BINARIES, @workingDirectory : Win32cr::Foundation::PWSTR, @packageFullName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct Tag_fw_dynamic_keyword_address0_
+    property id : LibC::GUID
+    property keyword : Win32cr::Foundation::PWSTR
+    property flags : UInt32
+    property addresses : Win32cr::Foundation::PWSTR
+    def initialize(@id : LibC::GUID, @keyword : Win32cr::Foundation::PWSTR, @flags : UInt32, @addresses : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct Tag_fw_dynamic_keyword_address_data0_
+    property dynamicKeywordAddress : Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address0_
+    property next__ : Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address_data0_*
+    property schemaVersion : UInt16
+    property originType : Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_origin_type_
+    def initialize(@dynamicKeywordAddress : Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address0_, @next__ : Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_address_data0_*, @schemaVersion : UInt16, @originType : Win32cr::NetworkManagement::WindowsFirewall::Tag_fw_dynamic_keyword_origin_type_)
+    end
+  end
 
   @[Extern]
   record IUPnPNATVtbl,
@@ -318,7 +341,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("b171c812-cc76-485a-94d8-b6b3a2794e99")]
   record IUPnPNAT, lpVtbl : IUPnPNATVtbl* do
     GUID = LibC::GUID.new(0xb171c812_u32, 0xcc76_u16, 0x485a_u16, StaticArray[0x94_u8, 0xd8_u8, 0xb6_u8, 0xb3_u8, 0xa2_u8, 0x79_u8, 0x4e_u8, 0x99_u8])
     def query_interface(this : IUPnPNAT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -368,7 +390,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("624bd588-9060-4109-b0b0-1adbbcac32df")]
   record INATEventManager, lpVtbl : INATEventManagerVtbl* do
     GUID = LibC::GUID.new(0x624bd588_u32, 0x9060_u16, 0x4109_u16, StaticArray[0xb0_u8, 0xb0_u8, 0x1a_u8, 0xdb_u8, 0xbc_u8, 0xac_u8, 0x32_u8, 0xdf_u8])
     def query_interface(this : INATEventManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -410,7 +431,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("9c416740-a34e-446f-ba06-abd04c3149ae")]
   record INATExternalIPAddressCallback, lpVtbl : INATExternalIPAddressCallbackVtbl* do
     GUID = LibC::GUID.new(0x9c416740_u32, 0xa34e_u16, 0x446f_u16, StaticArray[0xba_u8, 0x6_u8, 0xab_u8, 0xd0_u8, 0x4c_u8, 0x31_u8, 0x49_u8, 0xae_u8])
     def query_interface(this : INATExternalIPAddressCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -437,7 +457,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("c83a0a74-91ee-41b6-b67a-67e0f00bbd78")]
   record INATNumberOfEntriesCallback, lpVtbl : INATNumberOfEntriesCallbackVtbl* do
     GUID = LibC::GUID.new(0xc83a0a74_u32, 0x91ee_u16, 0x41b6_u16, StaticArray[0xb6_u8, 0x7a_u8, 0x67_u8, 0xe0_u8, 0xf0_u8, 0xb_u8, 0xbd_u8, 0x78_u8])
     def query_interface(this : INATNumberOfEntriesCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -472,7 +491,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("b60de00f-156e-4e8d-9ec1-3a2342c10899")]
   record IDynamicPortMappingCollection, lpVtbl : IDynamicPortMappingCollectionVtbl* do
     GUID = LibC::GUID.new(0xb60de00f_u32, 0x156e_u16, 0x4e8d_u16, StaticArray[0x9e_u8, 0xc1_u8, 0x3a_u8, 0x23_u8, 0x42_u8, 0xc1_u8, 0x8_u8, 0x99_u8])
     def query_interface(this : IDynamicPortMappingCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -540,7 +558,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("4fc80282-23b6-4378-9a27-cd8f17c9400c")]
   record IDynamicPortMapping, lpVtbl : IDynamicPortMappingVtbl* do
     GUID = LibC::GUID.new(0x4fc80282_u32, 0x23b6_u16, 0x4378_u16, StaticArray[0x9a_u8, 0x27_u8, 0xcd_u8, 0x8f_u8, 0x17_u8, 0xc9_u8, 0x40_u8, 0xc_u8])
     def query_interface(this : IDynamicPortMapping*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -626,7 +643,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("cd1f3e77-66d6-4664-82c7-36dbb641d0f1")]
   record IStaticPortMappingCollection, lpVtbl : IStaticPortMappingCollectionVtbl* do
     GUID = LibC::GUID.new(0xcd1f3e77_u32, 0x66d6_u16, 0x4664_u16, StaticArray[0x82_u8, 0xc7_u8, 0x36_u8, 0xdb_u8, 0xb6_u8, 0x41_u8, 0xd0_u8, 0xf1_u8])
     def query_interface(this : IStaticPortMappingCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -691,7 +707,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("6f10711f-729b-41e5-93b8-f21d0f818df1")]
   record IStaticPortMapping, lpVtbl : IStaticPortMappingVtbl* do
     GUID = LibC::GUID.new(0x6f10711f_u32, 0x729b_u16, 0x41e5_u16, StaticArray[0x93_u8, 0xb8_u8, 0xf2_u8, 0x1d_u8, 0xf_u8, 0x81_u8, 0x8d_u8, 0xf1_u8])
     def query_interface(this : IStaticPortMapping*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -763,7 +778,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("c08956a0-1cd3-11d1-b1c5-00805fc1270e")]
   record IEnumNetConnection, lpVtbl : IEnumNetConnectionVtbl* do
     GUID = LibC::GUID.new(0xc08956a0_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : IEnumNetConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -805,7 +819,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("c08956a1-1cd3-11d1-b1c5-00805fc1270e")]
   record INetConnection, lpVtbl : INetConnectionVtbl* do
     GUID = LibC::GUID.new(0xc08956a1_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -850,7 +863,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("c08956a2-1cd3-11d1-b1c5-00805fc1270e")]
   record INetConnectionManager, lpVtbl : INetConnectionManagerVtbl* do
     GUID = LibC::GUID.new(0xc08956a2_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetConnectionManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -879,7 +891,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("c08956a3-1cd3-11d1-b1c5-00805fc1270e")]
   record INetConnectionConnectUi, lpVtbl : INetConnectionConnectUiVtbl* do
     GUID = LibC::GUID.new(0xc08956a3_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetConnectionConnectUi*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -915,7 +926,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("c08956b0-1cd3-11d1-b1c5-00805fc1270e")]
   record IEnumNetSharingPortMapping, lpVtbl : IEnumNetSharingPortMappingVtbl* do
     GUID = LibC::GUID.new(0xc08956b0_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : IEnumNetSharingPortMapping*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -962,7 +972,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("24b7e9b5-e38f-4685-851b-00892cf5f940")]
   record INetSharingPortMappingProps, lpVtbl : INetSharingPortMappingPropsVtbl* do
     GUID = LibC::GUID.new(0x24b7e9b5_u32, 0xe38f_u16, 0x4685_u16, StaticArray[0x85_u8, 0x1b_u8, 0x0_u8, 0x89_u8, 0x2c_u8, 0xf5_u8, 0xf9_u8, 0x40_u8])
     def query_interface(this : INetSharingPortMappingProps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1029,7 +1038,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("c08956b1-1cd3-11d1-b1c5-00805fc1270e")]
   record INetSharingPortMapping, lpVtbl : INetSharingPortMappingVtbl* do
     GUID = LibC::GUID.new(0xc08956b1_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetSharingPortMapping*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1080,7 +1088,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("c08956b8-1cd3-11d1-b1c5-00805fc1270e")]
   record IEnumNetSharingEveryConnection, lpVtbl : IEnumNetSharingEveryConnectionVtbl* do
     GUID = LibC::GUID.new(0xc08956b8_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : IEnumNetSharingEveryConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1119,7 +1126,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("c08956b4-1cd3-11d1-b1c5-00805fc1270e")]
   record IEnumNetSharingPublicConnection, lpVtbl : IEnumNetSharingPublicConnectionVtbl* do
     GUID = LibC::GUID.new(0xc08956b4_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : IEnumNetSharingPublicConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1158,7 +1164,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("c08956b5-1cd3-11d1-b1c5-00805fc1270e")]
   record IEnumNetSharingPrivateConnection, lpVtbl : IEnumNetSharingPrivateConnectionVtbl* do
     GUID = LibC::GUID.new(0xc08956b5_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : IEnumNetSharingPrivateConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1199,7 +1204,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("02e4a2de-da20-4e34-89c8-ac22275a010b")]
   record INetSharingPortMappingCollection, lpVtbl : INetSharingPortMappingCollectionVtbl* do
     GUID = LibC::GUID.new(0x2e4a2de_u32, 0xda20_u16, 0x4e34_u16, StaticArray[0x89_u8, 0xc8_u8, 0xac_u8, 0x22_u8, 0x27_u8, 0x5a_u8, 0x1_u8, 0xb_u8])
     def query_interface(this : INetSharingPortMappingCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1250,7 +1254,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("f4277c95-ce5b-463d-8167-5662d9bcaa72")]
   record INetConnectionProps, lpVtbl : INetConnectionPropsVtbl* do
     GUID = LibC::GUID.new(0xf4277c95_u32, 0xce5b_u16, 0x463d_u16, StaticArray[0x81_u8, 0x67_u8, 0x56_u8, 0x62_u8, 0xd9_u8, 0xbc_u8, 0xaa_u8, 0x72_u8])
     def query_interface(this : INetConnectionProps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1317,7 +1320,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("c08956b6-1cd3-11d1-b1c5-00805fc1270e")]
   record INetSharingConfiguration, lpVtbl : INetSharingConfigurationVtbl* do
     GUID = LibC::GUID.new(0xc08956b6_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetSharingConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1388,7 +1390,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("33c4643c-7811-46fa-a89a-768597bd7223")]
   record INetSharingEveryConnectionCollection, lpVtbl : INetSharingEveryConnectionCollectionVtbl* do
     GUID = LibC::GUID.new(0x33c4643c_u32, 0x7811_u16, 0x46fa_u16, StaticArray[0xa8_u8, 0x9a_u8, 0x76_u8, 0x85_u8, 0x97_u8, 0xbd_u8, 0x72_u8, 0x23_u8])
     def query_interface(this : INetSharingEveryConnectionCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1435,7 +1436,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("7d7a6355-f372-4971-a149-bfc927be762a")]
   record INetSharingPublicConnectionCollection, lpVtbl : INetSharingPublicConnectionCollectionVtbl* do
     GUID = LibC::GUID.new(0x7d7a6355_u32, 0xf372_u16, 0x4971_u16, StaticArray[0xa1_u8, 0x49_u8, 0xbf_u8, 0xc9_u8, 0x27_u8, 0xbe_u8, 0x76_u8, 0x2a_u8])
     def query_interface(this : INetSharingPublicConnectionCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1482,7 +1482,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("38ae69e0-4409-402a-a2cb-e965c727f840")]
   record INetSharingPrivateConnectionCollection, lpVtbl : INetSharingPrivateConnectionCollectionVtbl* do
     GUID = LibC::GUID.new(0x38ae69e0_u32, 0x4409_u16, 0x402a_u16, StaticArray[0xa2_u8, 0xcb_u8, 0xe9_u8, 0x65_u8, 0xc7_u8, 0x27_u8, 0xf8_u8, 0x40_u8])
     def query_interface(this : INetSharingPrivateConnectionCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1533,7 +1532,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("c08956b7-1cd3-11d1-b1c5-00805fc1270e")]
   record INetSharingManager, lpVtbl : INetSharingManagerVtbl* do
     GUID = LibC::GUID.new(0xc08956b7_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetSharingManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1598,7 +1596,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("d4becddf-6f73-4a83-b832-9c66874cd20e")]
   record INetFwRemoteAdminSettings, lpVtbl : INetFwRemoteAdminSettingsVtbl* do
     GUID = LibC::GUID.new(0xd4becddf_u32, 0x6f73_u16, 0x4a83_u16, StaticArray[0xb8_u8, 0x32_u8, 0x9c_u8, 0x66_u8, 0x87_u8, 0x4c_u8, 0xd2_u8, 0xe_u8])
     def query_interface(this : INetFwRemoteAdminSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1681,7 +1678,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("a6207b2e-7cdd-426a-951e-5e1cbc5afead")]
   record INetFwIcmpSettings, lpVtbl : INetFwIcmpSettingsVtbl* do
     GUID = LibC::GUID.new(0xa6207b2e_u32, 0x7cdd_u16, 0x426a_u16, StaticArray[0x95_u8, 0x1e_u8, 0x5e_u8, 0x1c_u8, 0xbc_u8, 0x5a_u8, 0xfe_u8, 0xad_u8])
     def query_interface(this : INetFwIcmpSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1795,7 +1791,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("e0483ba0-47ff-4d9c-a6d6-7741d0b195f7")]
   record INetFwOpenPort, lpVtbl : INetFwOpenPortVtbl* do
     GUID = LibC::GUID.new(0xe0483ba0_u32, 0x47ff_u16, 0x4d9c_u16, StaticArray[0xa6_u8, 0xd6_u8, 0x77_u8, 0x41_u8, 0xd0_u8, 0xb1_u8, 0x95_u8, 0xf7_u8])
     def query_interface(this : INetFwOpenPort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1884,7 +1879,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("c0e9d7fa-e07e-430a-b19a-090ce82d92e2")]
   record INetFwOpenPorts, lpVtbl : INetFwOpenPortsVtbl* do
     GUID = LibC::GUID.new(0xc0e9d7fa_u32, 0xe07e_u16, 0x430a_u16, StaticArray[0xb1_u8, 0x9a_u8, 0x9_u8, 0xc_u8, 0xe8_u8, 0x2d_u8, 0x92_u8, 0xe2_u8])
     def query_interface(this : INetFwOpenPorts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1950,7 +1944,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("79fd57c8-908e-4a36-9888-d5b3f0a444cf")]
   record INetFwService, lpVtbl : INetFwServiceVtbl* do
     GUID = LibC::GUID.new(0x79fd57c8_u32, 0x908e_u16, 0x4a36_u16, StaticArray[0x98_u8, 0x88_u8, 0xd5_u8, 0xb3_u8, 0xf0_u8, 0xa4_u8, 0x44_u8, 0xcf_u8])
     def query_interface(this : INetFwService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2028,7 +2021,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("79649bb4-903e-421b-94c9-79848e79f6ee")]
   record INetFwServices, lpVtbl : INetFwServicesVtbl* do
     GUID = LibC::GUID.new(0x79649bb4_u32, 0x903e_u16, 0x421b_u16, StaticArray[0x94_u8, 0xc9_u8, 0x79_u8, 0x84_u8, 0x8e_u8, 0x79_u8, 0xf6_u8, 0xee_u8])
     def query_interface(this : INetFwServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2088,7 +2080,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("b5e64ffa-c2c5-444e-a301-fb5e00018050")]
   record INetFwAuthorizedApplication, lpVtbl : INetFwAuthorizedApplicationVtbl* do
     GUID = LibC::GUID.new(0xb5e64ffa_u32, 0xc2c5_u16, 0x444e_u16, StaticArray[0xa3_u8, 0x1_u8, 0xfb_u8, 0x5e_u8, 0x0_u8, 0x1_u8, 0x80_u8, 0x50_u8])
     def query_interface(this : INetFwAuthorizedApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2168,7 +2159,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("644efd52-ccf9-486c-97a2-39f352570b30")]
   record INetFwAuthorizedApplications, lpVtbl : INetFwAuthorizedApplicationsVtbl* do
     GUID = LibC::GUID.new(0x644efd52_u32, 0xccf9_u16, 0x486c_u16, StaticArray[0x97_u8, 0xa2_u8, 0x39_u8, 0xf3_u8, 0x52_u8, 0x57_u8, 0xb_u8, 0x30_u8])
     def query_interface(this : INetFwAuthorizedApplications*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2258,7 +2248,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("af230d27-baba-4e42-aced-f524f22cfce2")]
   record INetFwRule, lpVtbl : INetFwRuleVtbl* do
     GUID = LibC::GUID.new(0xaf230d27_u32, 0xbaba_u16, 0x4e42_u16, StaticArray[0xac_u8, 0xed_u8, 0xf5_u8, 0x24_u8, 0xf2_u8, 0x2c_u8, 0xfc_u8, 0xe2_u8])
     def query_interface(this : INetFwRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2443,7 +2432,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("9c27c8da-189b-4dde-89f7-8b39a316782c")]
   record INetFwRule2, lpVtbl : INetFwRule2Vtbl* do
     GUID = LibC::GUID.new(0x9c27c8da_u32, 0x189b_u16, 0x4dde_u16, StaticArray[0x89_u8, 0xf7_u8, 0x8b_u8, 0x39_u8, 0xa3_u8, 0x16_u8, 0x78_u8, 0x2c_u8])
     def query_interface(this : INetFwRule2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2646,7 +2634,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("b21563ff-d696-4222-ab46-4e89b73ab34a")]
   record INetFwRule3, lpVtbl : INetFwRule3Vtbl* do
     GUID = LibC::GUID.new(0xb21563ff_u32, 0xd696_u16, 0x4222_u16, StaticArray[0xab_u8, 0x46_u8, 0x4e_u8, 0x89_u8, 0xb7_u8, 0x3a_u8, 0xb3_u8, 0x4a_u8])
     def query_interface(this : INetFwRule3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2840,7 +2827,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("9c4c6277-5027-441e-afae-ca1f542da009")]
   record INetFwRules, lpVtbl : INetFwRulesVtbl* do
     GUID = LibC::GUID.new(0x9c4c6277_u32, 0x5027_u16, 0x441e_u16, StaticArray[0xaf_u8, 0xae_u8, 0xca_u8, 0x1f_u8, 0x54_u8, 0x2d_u8, 0xa0_u8, 0x9_u8])
     def query_interface(this : INetFwRules*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2897,7 +2883,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("8267bbe3-f890-491c-b7b6-2db1ef0e5d2b")]
   record INetFwServiceRestriction, lpVtbl : INetFwServiceRestrictionVtbl* do
     GUID = LibC::GUID.new(0x8267bbe3_u32, 0xf890_u16, 0x491c_u16, StaticArray[0xb7_u8, 0xb6_u8, 0x2d_u8, 0xb1_u8, 0xef_u8, 0xe_u8, 0x5d_u8, 0x2b_u8])
     def query_interface(this : INetFwServiceRestriction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2959,7 +2944,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("174a0dda-e9f9-449d-993b-21ab667ca456")]
   record INetFwProfile, lpVtbl : INetFwProfileVtbl* do
     GUID = LibC::GUID.new(0x174a0dda_u32, 0xe9f9_u16, 0x449d_u16, StaticArray[0x99_u8, 0x3b_u8, 0x21_u8, 0xab_u8, 0x66_u8, 0x7c_u8, 0xa4_u8, 0x56_u8])
     def query_interface(this : INetFwProfile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3042,7 +3026,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("d46d2478-9ac9-4008-9dc7-5563ce5536cc")]
   record INetFwPolicy, lpVtbl : INetFwPolicyVtbl* do
     GUID = LibC::GUID.new(0xd46d2478_u32, 0x9ac9_u16, 0x4008_u16, StaticArray[0x9d_u8, 0xc7_u8, 0x55_u8, 0x63_u8, 0xce_u8, 0x55_u8, 0x36_u8, 0xcc_u8])
     def query_interface(this : INetFwPolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3109,7 +3092,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("98325047-c671-4174-8d81-defcd3f03186")]
   record INetFwPolicy2, lpVtbl : INetFwPolicy2Vtbl* do
     GUID = LibC::GUID.new(0x98325047_u32, 0xc671_u16, 0x4174_u16, StaticArray[0x8d_u8, 0x81_u8, 0xde_u8, 0xfc_u8, 0xd3_u8, 0xf0_u8, 0x31_u8, 0x86_u8])
     def query_interface(this : INetFwPolicy2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3219,7 +3201,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("f7898af5-cac4-4632-a2ec-da06e5111af2")]
   record INetFwMgr, lpVtbl : INetFwMgrVtbl* do
     GUID = LibC::GUID.new(0xf7898af5_u32, 0xcac4_u16, 0x4632_u16, StaticArray[0xa2_u8, 0xec_u8, 0xda_u8, 0x6_u8, 0xe5_u8, 0x11_u8, 0x1a_u8, 0xf2_u8])
     def query_interface(this : INetFwMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3278,7 +3259,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("71881699-18f4-458b-b892-3ffce5e07f75")]
   record INetFwProduct, lpVtbl : INetFwProductVtbl* do
     GUID = LibC::GUID.new(0x71881699_u32, 0x18f4_u16, 0x458b_u16, StaticArray[0xb8_u8, 0x92_u8, 0x3f_u8, 0xfc_u8, 0xe5_u8, 0xe0_u8, 0x7f_u8, 0x75_u8])
     def query_interface(this : INetFwProduct*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3336,7 +3316,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
 
   @[Extern]
-  #@[Com("39eb36e0-2097-40bd-8af2-63a13b525362")]
   record INetFwProducts, lpVtbl : INetFwProductsVtbl* do
     GUID = LibC::GUID.new(0x39eb36e0_u32, 0x2097_u16, 0x40bd_u16, StaticArray[0x8a_u8, 0xf2_u8, 0x63_u8, 0xa1_u8, 0x3b_u8, 0x52_u8, 0x53_u8, 0x62_u8])
     def query_interface(this : INetFwProducts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3375,7 +3354,6 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
   end
 
-  @[Link("api-ms-win-net-isolation-l1-1-0")]
   lib C
     fun NetworkIsolationSetupAppContainerBinaries(applicationContainerSid : Win32cr::Foundation::PSID, packageFullName : Win32cr::Foundation::PWSTR, packageFolder : Win32cr::Foundation::PWSTR, displayName : Win32cr::Foundation::PWSTR, bBinariesFullyComputed : Win32cr::Foundation::BOOL, binaries : Win32cr::Foundation::PWSTR*, binariesCount : UInt32) : Win32cr::Foundation::HRESULT
 

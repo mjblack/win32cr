@@ -12,43 +12,43 @@ require "./../system/win_rt.cr"
 require "./../devices/properties.cr"
 
 module Win32cr::Media::MediaFoundation
-  alias PDXVAHDSW_CreateDevice = Proc(Void*, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_CreateDevice = Proc(Void*, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_ProposeVideoPrivateFormat = Proc(Win32cr::Foundation::HANDLE, Win32cr::Graphics::Direct3D9::D3DFORMAT*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_ProposeVideoPrivateFormat = Proc(Win32cr::Foundation::HANDLE, Win32cr::Graphics::Direct3D9::D3DFORMAT*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_GetVideoProcessorDeviceCaps = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_CONTENT_DESC*, Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_USAGE, Win32cr::Media::MediaFoundation::DXVAHD_VPDEVCAPS*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_GetVideoProcessorDeviceCaps = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_CONTENT_DESC*, Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_USAGE, Win32cr::Media::MediaFoundation::DXVAHD_VPDEVCAPS*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_GetVideoProcessorOutputFormats = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_CONTENT_DESC*, Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_USAGE, UInt32, Win32cr::Graphics::Direct3D9::D3DFORMAT*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_GetVideoProcessorOutputFormats = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_CONTENT_DESC*, Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_USAGE, UInt32, Win32cr::Graphics::Direct3D9::D3DFORMAT*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_GetVideoProcessorInputFormats = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_CONTENT_DESC*, Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_USAGE, UInt32, Win32cr::Graphics::Direct3D9::D3DFORMAT*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_GetVideoProcessorInputFormats = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_CONTENT_DESC*, Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_USAGE, UInt32, Win32cr::Graphics::Direct3D9::D3DFORMAT*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_GetVideoProcessorCaps = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_CONTENT_DESC*, Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_USAGE, UInt32, Win32cr::Media::MediaFoundation::DXVAHD_VPCAPS*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_GetVideoProcessorCaps = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_CONTENT_DESC*, Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_USAGE, UInt32, Win32cr::Media::MediaFoundation::DXVAHD_VPCAPS*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_GetVideoProcessorCustomRates = Proc(Win32cr::Foundation::HANDLE, LibC::GUID*, UInt32, Win32cr::Media::MediaFoundation::DXVAHD_CUSTOM_RATE_DATA*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_GetVideoProcessorCustomRates = Proc(Win32cr::Foundation::HANDLE, LibC::GUID*, UInt32, Win32cr::Media::MediaFoundation::DXVAHD_CUSTOM_RATE_DATA*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_GetVideoProcessorFilterRange = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_FILTER, Win32cr::Media::MediaFoundation::DXVAHD_FILTER_RANGE_DATA*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_GetVideoProcessorFilterRange = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_FILTER, Win32cr::Media::MediaFoundation::DXVAHD_FILTER_RANGE_DATA*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_DestroyDevice = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_DestroyDevice = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_CreateVideoProcessor = Proc(Win32cr::Foundation::HANDLE, LibC::GUID*, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_CreateVideoProcessor = Proc(Win32cr::Foundation::HANDLE, LibC::GUID*, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_SetVideoProcessBltState = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_BLT_STATE, UInt32, Void*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_SetVideoProcessBltState = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_BLT_STATE, UInt32, Void*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_GetVideoProcessBltStatePrivate = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_BLT_STATE_PRIVATE_DATA*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_GetVideoProcessBltStatePrivate = Proc(Win32cr::Foundation::HANDLE, Win32cr::Media::MediaFoundation::DXVAHD_BLT_STATE_PRIVATE_DATA*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_SetVideoProcessStreamState = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Media::MediaFoundation::DXVAHD_STREAM_STATE, UInt32, Void*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_SetVideoProcessStreamState = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Media::MediaFoundation::DXVAHD_STREAM_STATE, UInt32, Void*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_GetVideoProcessStreamStatePrivate = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Media::MediaFoundation::DXVAHD_STREAM_STATE_PRIVATE_DATA*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_GetVideoProcessStreamStatePrivate = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Media::MediaFoundation::DXVAHD_STREAM_STATE_PRIVATE_DATA*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_VideoProcessBltHD = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32, UInt32, Win32cr::Media::MediaFoundation::DXVAHD_STREAM_DATA*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_VideoProcessBltHD = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32, UInt32, Win32cr::Media::MediaFoundation::DXVAHD_STREAM_DATA*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_DestroyVideoProcessor = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_DestroyVideoProcessor = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHDSW_Plugin = Proc(UInt32, Void*, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHDSW_Plugin = Proc(UInt32, Void*, Win32cr::Foundation::HRESULT)
 
-  alias PDXVAHD_CreateDevice = Proc(Void*, Win32cr::Media::MediaFoundation::DXVAHD_CONTENT_DESC*, Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_USAGE, Win32cr::Media::MediaFoundation::PDXVAHDSW_Plugin, Void**, Win32cr::Foundation::HRESULT)*
+  alias PDXVAHD_CreateDevice = Proc(Void*, Win32cr::Media::MediaFoundation::DXVAHD_CONTENT_DESC*, Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_USAGE, Win32cr::Media::MediaFoundation::PDXVAHDSW_Plugin, Void**, Win32cr::Foundation::HRESULT)
 
-  alias MFPERIODICCALLBACK = Proc(Void*, Void)*
+  alias MFPERIODICCALLBACK = Proc(Void*, Void)
 
   MEDIASUBTYPE_None = "e436eb8e-524f-11ce-9f53-0020af0ba770"
   MEDIATYPE_Video = "73646976-0000-0010-8000-00aa00389b71"
@@ -5885,2677 +5885,3685 @@ module Win32cr::Media::MediaFoundation
   end
 
   @[Extern]
-  record AM_MEDIA_TYPE,
-    majortype : LibC::GUID,
-    subtype : LibC::GUID,
-    bFixedSizeSamples : Win32cr::Foundation::BOOL,
-    bTemporalCompression : Win32cr::Foundation::BOOL,
-    lSampleSize : UInt32,
-    formattype : LibC::GUID,
-    pUnk : Void*,
-    cbFormat : UInt32,
-    pbFormat : UInt8*
-
-  @[Extern]
-  record CodecAPIEventData,
-    guid : LibC::GUID,
-    dataLength : UInt32,
-    reserved : UInt32[3]
-
-  @[Extern]
-  record VIDEOINFOHEADER,
-    rcSource : Win32cr::Foundation::RECT,
-    rcTarget : Win32cr::Foundation::RECT,
-    dwBitRate : UInt32,
-    dwBitErrorRate : UInt32,
-    avg_time_per_frame : Int64,
-    bmiHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER
-
-  @[Extern]
-  record MPEG1VIDEOINFO,
-    hdr : Win32cr::Media::MediaFoundation::VIDEOINFOHEADER,
-    dwStartTimeCode : UInt32,
-    cbSequenceHeader : UInt32,
-    bSequenceHeader : UInt8*
-
-  @[Extern]
-  record VIDEOINFOHEADER2,
-    rcSource : Win32cr::Foundation::RECT,
-    rcTarget : Win32cr::Foundation::RECT,
-    dwBitRate : UInt32,
-    dwBitErrorRate : UInt32,
-    avg_time_per_frame : Int64,
-    dwInterlaceFlags : UInt32,
-    dwCopyProtectFlags : UInt32,
-    dwPictAspectRatioX : UInt32,
-    dwPictAspectRatioY : UInt32,
-    anonymous : Anonymous_e__Union_,
-    dwReserved2 : UInt32,
-    bmiHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwControlFlags : UInt32,
-      dwReserved1 : UInt32
-
+  struct AM_MEDIA_TYPE
+    property majortype : LibC::GUID
+    property subtype : LibC::GUID
+    property bFixedSizeSamples : Win32cr::Foundation::BOOL
+    property bTemporalCompression : Win32cr::Foundation::BOOL
+    property lSampleSize : UInt32
+    property formattype : LibC::GUID
+    property pUnk : Void*
+    property cbFormat : UInt32
+    property pbFormat : UInt8*
+    def initialize(@majortype : LibC::GUID, @subtype : LibC::GUID, @bFixedSizeSamples : Win32cr::Foundation::BOOL, @bTemporalCompression : Win32cr::Foundation::BOOL, @lSampleSize : UInt32, @formattype : LibC::GUID, @pUnk : Void*, @cbFormat : UInt32, @pbFormat : UInt8*)
+    end
   end
 
   @[Extern]
-  record MPEG2VIDEOINFO,
-    hdr : Win32cr::Media::MediaFoundation::VIDEOINFOHEADER2,
-    dwStartTimeCode : UInt32,
-    cbSequenceHeader : UInt32,
-    dwProfile : UInt32,
-    dwLevel : UInt32,
-    dwFlags : Win32cr::Media::MediaFoundation::MPEG2VIDEOINFO_FLAGS,
-    dwSequenceHeader : UInt32*
+  struct CodecAPIEventData
+    property guid : LibC::GUID
+    property dataLength : UInt32
+    property reserved : UInt32[3]
+    def initialize(@guid : LibC::GUID, @dataLength : UInt32, @reserved : UInt32[3])
+    end
+  end
 
   @[Extern]
-  record D3DOVERLAYCAPS,
-    caps : UInt32,
-    max_overlay_display_width : UInt32,
-    max_overlay_display_height : UInt32
+  struct VIDEOINFOHEADER
+    property rcSource : Win32cr::Foundation::RECT
+    property rcTarget : Win32cr::Foundation::RECT
+    property dwBitRate : UInt32
+    property dwBitErrorRate : UInt32
+    property avg_time_per_frame : Int64
+    property bmiHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER
+    def initialize(@rcSource : Win32cr::Foundation::RECT, @rcTarget : Win32cr::Foundation::RECT, @dwBitRate : UInt32, @dwBitErrorRate : UInt32, @avg_time_per_frame : Int64, @bmiHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER)
+    end
+  end
+
+  @[Extern]
+  struct MPEG1VIDEOINFO
+    property hdr : Win32cr::Media::MediaFoundation::VIDEOINFOHEADER
+    property dwStartTimeCode : UInt32
+    property cbSequenceHeader : UInt32
+    property bSequenceHeader : UInt8*
+    def initialize(@hdr : Win32cr::Media::MediaFoundation::VIDEOINFOHEADER, @dwStartTimeCode : UInt32, @cbSequenceHeader : UInt32, @bSequenceHeader : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct VIDEOINFOHEADER2
+    property rcSource : Win32cr::Foundation::RECT
+    property rcTarget : Win32cr::Foundation::RECT
+    property dwBitRate : UInt32
+    property dwBitErrorRate : UInt32
+    property avg_time_per_frame : Int64
+    property dwInterlaceFlags : UInt32
+    property dwCopyProtectFlags : UInt32
+    property dwPictAspectRatioX : UInt32
+    property dwPictAspectRatioY : UInt32
+    property anonymous : Anonymous_e__Union_
+    property dwReserved2 : UInt32
+    property bmiHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dwControlFlags : UInt32
+    property dwReserved1 : UInt32
+    def initialize(@dwControlFlags : UInt32, @dwReserved1 : UInt32)
+    end
+    end
+
+    def initialize(@rcSource : Win32cr::Foundation::RECT, @rcTarget : Win32cr::Foundation::RECT, @dwBitRate : UInt32, @dwBitErrorRate : UInt32, @avg_time_per_frame : Int64, @dwInterlaceFlags : UInt32, @dwCopyProtectFlags : UInt32, @dwPictAspectRatioX : UInt32, @dwPictAspectRatioY : UInt32, @anonymous : Anonymous_e__Union_, @dwReserved2 : UInt32, @bmiHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER)
+    end
+  end
+
+  @[Extern]
+  struct MPEG2VIDEOINFO
+    property hdr : Win32cr::Media::MediaFoundation::VIDEOINFOHEADER2
+    property dwStartTimeCode : UInt32
+    property cbSequenceHeader : UInt32
+    property dwProfile : UInt32
+    property dwLevel : UInt32
+    property dwFlags : Win32cr::Media::MediaFoundation::MPEG2VIDEOINFO_FLAGS
+    property dwSequenceHeader : UInt32*
+    def initialize(@hdr : Win32cr::Media::MediaFoundation::VIDEOINFOHEADER2, @dwStartTimeCode : UInt32, @cbSequenceHeader : UInt32, @dwProfile : UInt32, @dwLevel : UInt32, @dwFlags : Win32cr::Media::MediaFoundation::MPEG2VIDEOINFO_FLAGS, @dwSequenceHeader : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct D3DOVERLAYCAPS
+    property caps : UInt32
+    property max_overlay_display_width : UInt32
+    property max_overlay_display_height : UInt32
+    def initialize(@caps : UInt32, @max_overlay_display_width : UInt32, @max_overlay_display_height : UInt32)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record D3DCONTENTPROTECTIONCAPS,
-    caps : UInt32,
-    key_exchange_type : LibC::GUID,
-    buffer_alignment_start : UInt32,
-    block_alignment_size : UInt32,
-    protected_memory_size : UInt64
+  struct D3DCONTENTPROTECTIONCAPS
+    property caps : UInt32
+    property key_exchange_type : LibC::GUID
+    property buffer_alignment_start : UInt32
+    property block_alignment_size : UInt32
+    property protected_memory_size : UInt64
+    def initialize(@caps : UInt32, @key_exchange_type : LibC::GUID, @buffer_alignment_start : UInt32, @block_alignment_size : UInt32, @protected_memory_size : UInt64)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record D3D12_VIDEO_FORMAT,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
-
-  @[Extern]
-  record D3D12_VIDEO_SAMPLE,
-    width : UInt32,
-    height : UInt32,
-    format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FORMAT
-
-  @[Extern]
-  record D3D12_VIDEO_DECODE_CONFIGURATION,
-    decode_profile : LibC::GUID,
-    bitstream_encryption : Win32cr::Media::MediaFoundation::D3D12_BITSTREAM_ENCRYPTION_TYPE,
-    interlace_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FRAME_CODED_INTERLACE_TYPE
-
-  @[Extern]
-  record D3D12_VIDEO_DECODER_DESC,
-    node_mask : UInt32,
-    configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION
-
-  @[Extern]
-  record D3D12_VIDEO_DECODER_HEAP_DESC,
-    node_mask : UInt32,
-    configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION,
-    decode_width : UInt32,
-    decode_height : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    bit_rate : UInt32,
-    max_decode_picture_buffer_count : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_SIZE_RANGE,
-    max_width : UInt32,
-    max_height : UInt32,
-    min_width : UInt32,
-    min_height : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_PROCESS_ALPHA_BLENDING,
-    enable : Win32cr::Foundation::BOOL,
-    alpha : Float32
-
-  @[Extern]
-  record D3D12_VIDEO_PROCESS_LUMA_KEY,
-    enable : Win32cr::Foundation::BOOL,
-    lower : Float32,
-    upper : Float32
-
-  @[Extern]
-  record D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE,
-    source_aspect_ratio : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    destination_aspect_ratio : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    source_size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE,
-    destination_size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE,
-    enable_orientation : Win32cr::Foundation::BOOL,
-    filter_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FILTER_FLAGS,
-    stereo_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FRAME_STEREO_FORMAT,
-    field_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FIELD_TYPE,
-    deinterlace_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_DEINTERLACE_FLAGS,
-    enable_alpha_blending : Win32cr::Foundation::BOOL,
-    luma_key : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_LUMA_KEY,
-    num_past_frames : UInt32,
-    num_future_frames : UInt32,
-    enable_auto_processing : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE,
-    alpha_fill_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_ALPHA_FILL_MODE,
-    alpha_fill_mode_source_stream_index : UInt32,
-    background_color : Float32[4],
-    frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    enable_stereo : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_DECODE_SUPPORT,
-    node_index : UInt32,
-    configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION,
-    width : UInt32,
-    height : UInt32,
-    decode_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    bit_rate : UInt32,
-    support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_SUPPORT_FLAGS,
-    configuration_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION_FLAGS,
-    decode_tier : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_TIER
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_DECODE_PROFILE_COUNT,
-    node_index : UInt32,
-    profile_count : UInt32
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_DECODE_PROFILES,
-    node_index : UInt32,
-    profile_count : UInt32,
-    pProfiles : LibC::GUID*
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_DECODE_FORMAT_COUNT,
-    node_index : UInt32,
-    configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION,
-    format_count : UInt32
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_DECODE_FORMATS,
-    node_index : UInt32,
-    configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION,
-    format_count : UInt32,
-    pOutputFormats : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT*
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ARCHITECTURE,
-    io_coherent : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_DECODE_HISTOGRAM,
-    node_index : UInt32,
-    decode_profile : LibC::GUID,
-    width : UInt32,
-    height : UInt32,
-    decode_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    components : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_HISTOGRAM_COMPONENT_FLAGS,
-    bin_count : UInt32,
-    counter_bit_depth : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_SCALE_SUPPORT,
-    output_size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE,
-    flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SCALE_SUPPORT_FLAGS
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_DECODE_CONVERSION_SUPPORT,
-    node_index : UInt32,
-    configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION,
-    decode_sample : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SAMPLE,
-    output_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FORMAT,
-    frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    bit_rate : UInt32,
-    support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONVERSION_SUPPORT_FLAGS,
-    scale_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SCALE_SUPPORT
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_DECODER_HEAP_SIZE,
-    video_decoder_heap_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_HEAP_DESC,
-    memory_pool_l0_size : UInt64,
-    memory_pool_l1_size : UInt64
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_PROCESSOR_SIZE,
-    node_mask : UInt32,
-    pOutputStreamDesc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC*,
-    num_input_stream_descs : UInt32,
-    pInputStreamDescs : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*,
-    memory_pool_l0_size : UInt64,
-    memory_pool_l1_size : UInt64
-
-  @[Extern]
-  record D3D12_QUERY_DATA_VIDEO_DECODE_STATISTICS,
-    status : UInt64,
-    num_macroblocks_affected : UInt64,
-    frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    bit_rate : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_DECODE_FRAME_ARGUMENT,
-    type__ : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_ARGUMENT_TYPE,
-    size : UInt32,
-    pData : Void*
-
-  @[Extern]
-  record D3D12_VIDEO_DECODE_REFERENCE_FRAMES,
-    num_texture2_ds : UInt32,
-    ppTexture2Ds : Void**,
-    pSubresources : UInt32*,
-    ppHeaps : Void**
-
-  @[Extern]
-  record D3D12_VIDEO_DECODE_COMPRESSED_BITSTREAM,
-    pBuffer : Void*,
-    offset : UInt64,
-    size : UInt64
-
-  @[Extern]
-  record D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS,
-    enable : Win32cr::Foundation::BOOL,
-    pReferenceTexture2D : Void*,
-    reference_subresource : UInt32,
-    output_color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE,
-    decode_color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
-
-  @[Extern]
-  record D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS,
-    num_frame_arguments : UInt32,
-    frame_arguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_FRAME_ARGUMENT[10],
-    reference_frames : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_REFERENCE_FRAMES,
-    compressed_bitstream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_COMPRESSED_BITSTREAM,
-    pHeap : Void*
-
-  @[Extern]
-  record D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS,
-    pOutputTexture2D : Void*,
-    output_subresource : UInt32,
-    conversion_arguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS
-
-  @[Extern]
-  record D3D12_VIDEO_PROCESS_FILTER_RANGE,
-    minimum : Int32,
-    maximum : Int32,
-    default : Int32,
-    multiplier : Float32
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_PROCESS_SUPPORT,
-    node_index : UInt32,
-    input_sample : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SAMPLE,
-    input_field_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FIELD_TYPE,
-    input_stereo_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FRAME_STEREO_FORMAT,
-    input_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    output_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FORMAT,
-    output_stereo_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FRAME_STEREO_FORMAT,
-    output_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_SUPPORT_FLAGS,
-    scale_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SCALE_SUPPORT,
-    feature_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FEATURE_FLAGS,
-    deinterlace_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_DEINTERLACE_FLAGS,
-    auto_processing_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_AUTO_PROCESSING_FLAGS,
-    filter_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FILTER_FLAGS,
-    filter_range_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FILTER_RANGE[32]
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_PROCESS_MAX_INPUT_STREAMS,
-    node_index : UInt32,
-    max_input_streams : UInt32
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_PROCESS_REFERENCE_INFO,
-    node_index : UInt32,
-    deinterlace_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_DEINTERLACE_FLAGS,
-    filters : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FILTER_FLAGS,
-    feature_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FEATURE_FLAGS,
-    input_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    output_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    enable_auto_processing : Win32cr::Foundation::BOOL,
-    past_frames : UInt32,
-    future_frames : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_PROCESS_REFERENCE_SET,
-    num_past_frames : UInt32,
-    ppPastFrames : Void**,
-    pPastSubresources : UInt32*,
-    num_future_frames : UInt32,
-    ppFutureFrames : Void**,
-    pFutureSubresources : UInt32*
-
-  @[Extern]
-  record D3D12_VIDEO_PROCESS_TRANSFORM,
-    source_rectangle : Win32cr::Foundation::RECT,
-    destination_rectangle : Win32cr::Foundation::RECT,
-    orientation : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_ORIENTATION
-
-  @[Extern]
-  record D3D12_VIDEO_PROCESS_INPUT_STREAM_RATE,
-    output_index : UInt32,
-    input_frame_or_field : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_PROCESS_INPUT_STREAM,
-    pTexture2D : Void*,
-    subresource : UInt32,
-    reference_set : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_REFERENCE_SET
-
-  @[Extern]
-  record D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS,
-    input_stream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM[2],
-    transform : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_TRANSFORM,
-    flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_FLAGS,
-    rate_info : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_RATE,
-    filter_levels : Int32[32],
-    alpha_blending : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_ALPHA_BLENDING
-
-  @[Extern]
-  record D3D12_VIDEO_PROCESS_OUTPUT_STREAM,
-    pTexture2D : Void*,
-    subresource : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS,
-    output_stream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM[2],
-    target_rectangle : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record D3D12_VIDEO_DECODE_OUTPUT_HISTOGRAM,
-    offset : UInt64,
-    pBuffer : Void*
-
-  @[Extern]
-  record D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS1,
-    enable : Win32cr::Foundation::BOOL,
-    pReferenceTexture2D : Void*,
-    reference_subresource : UInt32,
-    output_color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE,
-    decode_color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE,
-    output_width : UInt32,
-    output_height : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1,
-    pOutputTexture2D : Void*,
-    output_subresource : UInt32,
-    conversion_arguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS1,
-    histograms : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_HISTOGRAM[4]
-
-  @[Extern]
-  record D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1,
-    input_stream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM[2],
-    transform : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_TRANSFORM,
-    flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_FLAGS,
-    rate_info : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_RATE,
-    filter_levels : Int32[32],
-    alpha_blending : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_ALPHA_BLENDING,
-    field_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FIELD_TYPE
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_FEATURE_AREA_SUPPORT,
-    node_index : UInt32,
-    video_decode_support : Win32cr::Foundation::BOOL,
-    video_process_support : Win32cr::Foundation::BOOL,
-    video_encode_support : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_MOTION_ESTIMATOR,
-    node_index : UInt32,
-    input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    block_size_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_SEARCH_BLOCK_SIZE_FLAGS,
-    precision_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_VECTOR_PRECISION_FLAGS,
-    size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_MOTION_ESTIMATOR_SIZE,
-    node_index : UInt32,
-    input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    block_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_SEARCH_BLOCK_SIZE,
-    precision : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_VECTOR_PRECISION,
-    size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE,
-    protected__ : Win32cr::Foundation::BOOL,
-    motion_vector_heap_memory_pool_l0_size : UInt64,
-    motion_vector_heap_memory_pool_l1_size : UInt64,
-    motion_estimator_memory_pool_l0_size : UInt64,
-    motion_estimator_memory_pool_l1_size : UInt64
-
-  @[Extern]
-  record D3D12_VIDEO_MOTION_ESTIMATOR_DESC,
-    node_mask : UInt32,
-    input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    block_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_SEARCH_BLOCK_SIZE,
-    precision : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_VECTOR_PRECISION,
-    size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE
-
-  @[Extern]
-  record D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC,
-    node_mask : UInt32,
-    input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    block_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_SEARCH_BLOCK_SIZE,
-    precision : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_VECTOR_PRECISION,
-    size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE
-
-  @[Extern]
-  record D3D12_RESOURCE_COORDINATE,
-    x : UInt64,
-    y : UInt32,
-    z : UInt32,
-    subresource_index : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT,
-    pMotionVectorHeap : Void*
-
-  @[Extern]
-  record D3D12_VIDEO_MOTION_ESTIMATOR_INPUT,
-    pInputTexture2D : Void*,
-    input_subresource_index : UInt32,
-    pReferenceTexture2D : Void*,
-    reference_subresource_index : UInt32,
-    pHintMotionVectorHeap : Void*
-
-  @[Extern]
-  record D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT,
-    pMotionVectorTexture2D : Void*,
-    motion_vector_coordinate : Win32cr::Media::MediaFoundation::D3D12_RESOURCE_COORDINATE
-
-  @[Extern]
-  record D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT,
-    pMotionVectorHeap : Void*,
-    pixel_width : UInt32,
-    pixel_height : UInt32
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_DECODE_PROTECTED_RESOURCES,
-    node_index : UInt32,
-    configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION,
-    support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROTECTED_RESOURCE_SUPPORT_FLAGS
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_PROCESS_PROTECTED_RESOURCES,
-    node_index : UInt32,
-    support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROTECTED_RESOURCE_SUPPORT_FLAGS
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_MOTION_ESTIMATOR_PROTECTED_RESOURCES,
-    node_index : UInt32,
-    support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROTECTED_RESOURCE_SUPPORT_FLAGS
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_DECODER_HEAP_SIZE1,
-    video_decoder_heap_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_HEAP_DESC,
-    protected__ : Win32cr::Foundation::BOOL,
-    memory_pool_l0_size : UInt64,
-    memory_pool_l1_size : UInt64
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_PROCESSOR_SIZE1,
-    node_mask : UInt32,
-    pOutputStreamDesc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC*,
-    num_input_stream_descs : UInt32,
-    pInputStreamDescs : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*,
-    protected__ : Win32cr::Foundation::BOOL,
-    memory_pool_l0_size : UInt64,
-    memory_pool_l1_size : UInt64
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_COUNT,
-    node_index : UInt32,
-    command_count : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_EXTENSION_COMMAND_INFO,
-    command_id : LibC::GUID,
-    name : Win32cr::Foundation::PWSTR,
-    command_list_support_flags : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_SUPPORT_FLAGS
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMANDS,
-    node_index : UInt32,
-    command_count : UInt32,
-    pCommandInfos : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_INFO*
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_PARAMETER_COUNT,
-    command_id : LibC::GUID,
-    stage : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_STAGE,
-    parameter_count : UInt32,
-    parameter_packing : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_INFO,
-    name : Win32cr::Foundation::PWSTR,
-    type__ : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_TYPE,
-    flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_FLAGS
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_PARAMETERS,
-    command_id : LibC::GUID,
-    stage : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_STAGE,
-    parameter_count : UInt32,
-    pParameterInfos : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_INFO*
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_SUPPORT,
-    node_index : UInt32,
-    command_id : LibC::GUID,
-    pInputData : Void*,
-    input_data_size_in_bytes : LibC::UIntPtrT,
-    pOutputData : Void*,
-    output_data_size_in_bytes : LibC::UIntPtrT
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_SIZE,
-    node_index : UInt32,
-    command_id : LibC::GUID,
-    pCreationParameters : Void*,
-    creation_parameters_size_in_bytes : LibC::UIntPtrT,
-    memory_pool_l0_size : UInt64,
-    memory_pool_l1_size : UInt64
-
-  @[Extern]
-  record D3D12_VIDEO_EXTENSION_COMMAND_DESC,
-    node_mask : UInt32,
-    command_id : LibC::GUID
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP,
-    constant_qp_full_intracoded_frame : UInt32,
-    constant_qp_inter_predicted_frame_prev_ref_only : UInt32,
-    constant_qp_inter_predicted_frame_bi_directional_ref : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR,
-    initial_qp : UInt32,
-    min_qp : UInt32,
-    max_qp : UInt32,
-    max_frame_bit_size : UInt64,
-    target_bit_rate : UInt64,
-    vbv_capacity : UInt64,
-    initial_vbv_fullness : UInt64
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR,
-    initial_qp : UInt32,
-    min_qp : UInt32,
-    max_qp : UInt32,
-    max_frame_bit_size : UInt64,
-    target_avg_bit_rate : UInt64,
-    peak_bit_rate : UInt64,
-    vbv_capacity : UInt64,
-    initial_vbv_fullness : UInt64
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR,
-    initial_qp : UInt32,
-    min_qp : UInt32,
-    max_qp : UInt32,
-    max_frame_bit_size : UInt64,
-    target_avg_bit_rate : UInt64,
-    peak_bit_rate : UInt64,
-    constant_quality_target : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS,
-    data_size : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pConfiguration_CQP : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP*,
-      pConfiguration_CBR : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR*,
-      pConfiguration_VBR : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR*,
-      pConfiguration_QVBR : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR*
-
+  struct D3D12_VIDEO_FORMAT
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE)
+    end
   end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_RATE_CONTROL,
-    mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_MODE,
-    flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_FLAGS,
-    config_params : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS,
-    target_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_CODEC,
-    node_index : UInt32,
-    codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    is_supported : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_PROFILE_DESC,
-    data_size : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pH264Profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_H264*,
-      pHEVCProfile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_HEVC*
-
+  struct D3D12_VIDEO_SAMPLE
+    property width : UInt32
+    property height : UInt32
+    property format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FORMAT
+    def initialize(@width : UInt32, @height : UInt32, @format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FORMAT)
+    end
   end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC,
-    level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVELS_HEVC,
-    tier : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_TIER_HEVC
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_LEVEL_SETTING,
-    data_size : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pH264LevelSetting : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVELS_H264*,
-      pHEVCLevelSetting : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC*
-
+  struct D3D12_VIDEO_DECODE_CONFIGURATION
+    property decode_profile : LibC::GUID
+    property bitstream_encryption : Win32cr::Media::MediaFoundation::D3D12_BITSTREAM_ENCRYPTION_TYPE
+    property interlace_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FRAME_CODED_INTERLACE_TYPE
+    def initialize(@decode_profile : LibC::GUID, @bitstream_encryption : Win32cr::Media::MediaFoundation::D3D12_BITSTREAM_ENCRYPTION_TYPE, @interlace_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FRAME_CODED_INTERLACE_TYPE)
+    end
   end
 
   @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_PROFILE_LEVEL,
-    node_index : UInt32,
-    codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC,
-    is_supported : Win32cr::Foundation::BOOL,
-    min_supported_level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING,
-    max_supported_level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC,
-    width : UInt32,
-    height : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_RATIO_DESC,
-    width_ratio : UInt32,
-    height_ratio : UInt32
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_OUTPUT_RESOLUTION_RATIOS_COUNT,
-    node_index : UInt32,
-    codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    resolution_ratios_count : UInt32
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_OUTPUT_RESOLUTION,
-    node_index : UInt32,
-    codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    resolution_ratios_count : UInt32,
-    is_supported : Win32cr::Foundation::BOOL,
-    min_resolution_supported : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC,
-    max_resolution_supported : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC,
-    resolution_width_multiple_requirement : UInt32,
-    resolution_height_multiple_requirement : UInt32,
-    pResolutionRatios : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_RATIO_DESC*
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_INPUT_FORMAT,
-    node_index : UInt32,
-    codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    is_supported : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_RATE_CONTROL_MODE,
-    node_index : UInt32,
-    codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    rate_control_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_MODE,
-    is_supported : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_INTRA_REFRESH_MODE,
-    node_index : UInt32,
-    codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC,
-    level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING,
-    intra_refresh_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_INTRA_REFRESH_MODE,
-    is_supported : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_MODE,
-    node_index : UInt32,
-    codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC,
-    level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING,
-    subregion_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_MODE,
-    is_supported : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_HEAP_DESC,
-    node_mask : UInt32,
-    flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_HEAP_FLAGS,
-    encode_codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    encode_profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC,
-    encode_level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING,
-    resolutions_list_count : UInt32,
-    pResolutionList : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC*
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_HEAP_SIZE,
-    heap_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_HEAP_DESC,
-    is_supported : Win32cr::Foundation::BOOL,
-    memory_pool_l0_size : UInt64,
-    memory_pool_l1_size : UInt64
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264,
-    support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264_FLAGS,
-    disable_deblocking_filter_supported_modes : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264_SLICES_DEBLOCKING_MODE_FLAGS
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC,
-    support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS,
-    min_luma_coding_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_CUSIZE,
-    max_luma_coding_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_CUSIZE,
-    min_luma_transform_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_TUSIZE,
-    max_luma_transform_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_TUSIZE,
-    max_transform_hierarchy_depth_inter : UInt8,
-    max_transform_hierarchy_depth_intra : UInt8
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT,
-    data_size : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pH264Support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264*,
-      pHEVCSupport : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC*
-
+  struct D3D12_VIDEO_DECODER_DESC
+    property node_mask : UInt32
+    property configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION
+    def initialize(@node_mask : UInt32, @configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION)
+    end
   end
 
   @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT,
-    node_index : UInt32,
-    codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC,
-    is_supported : Win32cr::Foundation::BOOL,
-    codec_support_limits : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264,
-    max_l0_references_for_p : UInt32,
-    max_l0_references_for_b : UInt32,
-    max_l1_references_for_b : UInt32,
-    max_long_term_references : UInt32,
-    max_dpb_capacity : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC,
-    max_l0_references_for_p : UInt32,
-    max_l0_references_for_b : UInt32,
-    max_l1_references_for_b : UInt32,
-    max_long_term_references : UInt32,
-    max_dpb_capacity : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT,
-    data_size : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pH264Support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264*,
-      pHEVCSupport : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC*
-
+  struct D3D12_VIDEO_DECODER_HEAP_DESC
+    property node_mask : UInt32
+    property configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION
+    property decode_width : UInt32
+    property decode_height : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property bit_rate : UInt32
+    property max_decode_picture_buffer_count : UInt32
+    def initialize(@node_mask : UInt32, @configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION, @decode_width : UInt32, @decode_height : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @bit_rate : UInt32, @max_decode_picture_buffer_count : UInt32)
+    end
   end
 
   @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT,
-    node_index : UInt32,
-    codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC,
-    is_supported : Win32cr::Foundation::BOOL,
-    picture_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264,
-    configuration_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264_FLAGS,
-    direct_mode_config : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264_DIRECT_MODES,
-    disable_deblocking_filter_config : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264_SLICES_DEBLOCKING_MODES
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC,
-    configuration_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAGS,
-    min_luma_coding_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_CUSIZE,
-    max_luma_coding_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_CUSIZE,
-    min_luma_transform_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_TUSIZE,
-    max_luma_transform_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_TUSIZE,
-    max_transform_hierarchy_depth_inter : UInt8,
-    max_transform_hierarchy_depth_intra : UInt8
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION,
-    data_size : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pH264Config : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264*,
-      pHEVCConfig : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC*
-
+  struct D3D12_VIDEO_SIZE_RANGE
+    property max_width : UInt32
+    property max_height : UInt32
+    property min_width : UInt32
+    property min_height : UInt32
+    def initialize(@max_width : UInt32, @max_height : UInt32, @min_width : UInt32, @min_height : UInt32)
+    end
   end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_INTRA_REFRESH,
-    mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_INTRA_REFRESH_MODE,
-    intra_refresh_duration : UInt32
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_RESOLUTION_SUPPORT_LIMITS,
-    max_subregions_number : UInt32,
-    max_intra_refresh_frame_duration : UInt32,
-    subregion_block_pixels_size : UInt32,
-    qp_map_region_pixels_size : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264,
-    gop_length : UInt32,
-    p_picture_period : UInt32,
-    pic_order_cnt_type : UInt8,
-    log2_max_frame_num_minus4 : UInt8,
-    log2_max_pic_order_cnt_lsb_minus4 : UInt8
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC,
-    gop_length : UInt32,
-    p_picture_period : UInt32,
-    log2_max_pic_order_cnt_lsb_minus4 : UInt8
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE,
-    data_size : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pH264GroupOfPictures : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264*,
-      pHEVCGroupOfPictures : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC*
-
+  struct D3D12_VIDEO_PROCESS_ALPHA_BLENDING
+    property enable : Win32cr::Foundation::BOOL
+    property alpha : Float32
+    def initialize(@enable : Win32cr::Foundation::BOOL, @alpha : Float32)
+    end
   end
 
   @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_SUPPORT,
-    node_index : UInt32,
-    codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    codec_configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION,
-    codec_gop_sequence : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE,
-    rate_control : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL,
-    intra_refresh : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_INTRA_REFRESH_MODE,
-    subregion_frame_encoding : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_MODE,
-    resolutions_list_count : UInt32,
-    pResolutionList : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC*,
-    max_reference_frames_in_dpb : UInt32,
-    validation_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_VALIDATION_FLAGS,
-    support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SUPPORT_FLAGS,
-    suggested_profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC,
-    suggested_level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING,
-    pResolutionDependentSupport : Win32cr::Media::MediaFoundation::D3D12_FEATURE_DATA_VIDEO_ENCODER_RESOLUTION_SUPPORT_LIMITS*
-
-  @[Extern]
-  record D3D12_FEATURE_DATA_VIDEO_ENCODER_RESOURCE_REQUIREMENTS,
-    node_index : UInt32,
-    codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC,
-    input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    picture_target_resolution : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC,
-    is_supported : Win32cr::Foundation::BOOL,
-    compressed_bitstream_buffer_access_alignment : UInt32,
-    encoder_metadata_buffer_access_alignment : UInt32,
-    max_encoder_output_metadata_buffer_size : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_DESC,
-    node_mask : UInt32,
-    flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FLAGS,
-    encode_codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    encode_profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC,
-    input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    codec_configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION,
-    max_motion_estimation_precision : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_MOTION_ESTIMATION_PRECISION_MODE
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_REFERENCE_PICTURE_DESCRIPTOR_H264,
-    reconstructed_picture_resource_index : UInt32,
-    is_long_term_reference : Win32cr::Foundation::BOOL,
-    long_term_picture_idx : UInt32,
-    picture_order_count_number : UInt32,
-    frame_decoding_order_number : UInt32,
-    temporal_layer_index : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_MARKING_OPERATION,
-    memory_management_control_operation : UInt8,
-    difference_of_pic_nums_minus1 : UInt32,
-    long_term_pic_num : UInt32,
-    long_term_frame_idx : UInt32,
-    max_long_term_frame_idx_plus1 : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_LIST_MODIFICATION_OPERATION,
-    modification_of_pic_nums_idc : UInt8,
-    abs_diff_pic_num_minus1 : UInt32,
-    long_term_pic_num : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264,
-    flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_FLAGS,
-    frame_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_TYPE_H264,
-    pic_parameter_set_id : UInt32,
-    idr_pic_id : UInt32,
-    picture_order_count_number : UInt32,
-    frame_decoding_order_number : UInt32,
-    temporal_layer_index : UInt32,
-    list0_reference_frames_count : UInt32,
-    pList0ReferenceFrames : UInt32*,
-    list1_reference_frames_count : UInt32,
-    pList1ReferenceFrames : UInt32*,
-    reference_frames_recon_picture_descriptors_count : UInt32,
-    pReferenceFramesReconPictureDescriptors : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_REFERENCE_PICTURE_DESCRIPTOR_H264*,
-    adaptive_ref_pic_marking_mode_flag : UInt8,
-    ref_pic_marking_operations_commands_count : UInt32,
-    pRefPicMarkingOperationsCommands : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_MARKING_OPERATION*,
-    list0_ref_pic_modifications_count : UInt32,
-    pList0RefPicModifications : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_LIST_MODIFICATION_OPERATION*,
-    list1_ref_pic_modifications_count : UInt32,
-    pList1RefPicModifications : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_LIST_MODIFICATION_OPERATION*,
-    qp_map_values_count : UInt32,
-    pRateControlQPMap : Int8*
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_REFERENCE_PICTURE_DESCRIPTOR_HEVC,
-    reconstructed_picture_resource_index : UInt32,
-    is_ref_used_by_current_pic : Win32cr::Foundation::BOOL,
-    is_long_term_reference : Win32cr::Foundation::BOOL,
-    picture_order_count_number : UInt32,
-    temporal_layer_index : UInt32
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC,
-    flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC_FLAGS,
-    frame_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_TYPE_HEVC,
-    slice_pic_parameter_set_id : UInt32,
-    picture_order_count_number : UInt32,
-    temporal_layer_index : UInt32,
-    list0_reference_frames_count : UInt32,
-    pList0ReferenceFrames : UInt32*,
-    list1_reference_frames_count : UInt32,
-    pList1ReferenceFrames : UInt32*,
-    reference_frames_recon_picture_descriptors_count : UInt32,
-    pReferenceFramesReconPictureDescriptors : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_REFERENCE_PICTURE_DESCRIPTOR_HEVC*,
-    list0_ref_pic_modifications_count : UInt32,
-    pList0RefPicModifications : UInt32*,
-    list1_ref_pic_modifications_count : UInt32,
-    pList1RefPicModifications : UInt32*,
-    qp_map_values_count : UInt32,
-    pRateControlQPMap : Int8*
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA,
-    data_size : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pH264PicData : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264*,
-      pHEVCPicData : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC*
-
+  struct D3D12_VIDEO_PROCESS_LUMA_KEY
+    property enable : Win32cr::Foundation::BOOL
+    property lower : Float32
+    property upper : Float32
+    def initialize(@enable : Win32cr::Foundation::BOOL, @lower : Float32, @upper : Float32)
+    end
   end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODE_REFERENCE_FRAMES,
-    num_texture2_ds : UInt32,
-    ppTexture2Ds : Void**,
-    pSubresources : UInt32*
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_PICTURE_CONTROL_DESC,
-    intra_refresh_frame_index : UInt32,
-    flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_FLAGS,
-    picture_control_codec_data : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA,
-    reference_frames : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODE_REFERENCE_FRAMES
-
-  @[Extern]
-  record D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      max_bytes_per_slice : UInt32,
-      number_of_coding_units_per_slice : UInt32,
-      number_of_rows_per_slice : UInt32,
-      number_of_slices_per_frame : UInt32
-
+  struct D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
+    property source_aspect_ratio : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property destination_aspect_ratio : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property source_size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE
+    property destination_size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE
+    property enable_orientation : Win32cr::Foundation::BOOL
+    property filter_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FILTER_FLAGS
+    property stereo_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FRAME_STEREO_FORMAT
+    property field_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FIELD_TYPE
+    property deinterlace_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_DEINTERLACE_FLAGS
+    property enable_alpha_blending : Win32cr::Foundation::BOOL
+    property luma_key : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_LUMA_KEY
+    property num_past_frames : UInt32
+    property num_future_frames : UInt32
+    property enable_auto_processing : Win32cr::Foundation::BOOL
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE, @source_aspect_ratio : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @destination_aspect_ratio : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @source_size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE, @destination_size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE, @enable_orientation : Win32cr::Foundation::BOOL, @filter_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FILTER_FLAGS, @stereo_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FRAME_STEREO_FORMAT, @field_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FIELD_TYPE, @deinterlace_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_DEINTERLACE_FLAGS, @enable_alpha_blending : Win32cr::Foundation::BOOL, @luma_key : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_LUMA_KEY, @num_past_frames : UInt32, @num_future_frames : UInt32, @enable_auto_processing : Win32cr::Foundation::BOOL)
+    end
   end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA,
-    data_size : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pSlicesPartition_H264 : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES*,
-      pSlicesPartition_HEVC : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES*
-
+  struct D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
+    property alpha_fill_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_ALPHA_FILL_MODE
+    property alpha_fill_mode_source_stream_index : UInt32
+    property background_color : Float32[4]
+    property frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property enable_stereo : Win32cr::Foundation::BOOL
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE, @alpha_fill_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_ALPHA_FILL_MODE, @alpha_fill_mode_source_stream_index : UInt32, @background_color : Float32[4], @frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @enable_stereo : Win32cr::Foundation::BOOL)
+    end
   end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_SEQUENCE_CONTROL_DESC,
-    flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_CONTROL_FLAGS,
-    intra_refresh_config : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_INTRA_REFRESH,
-    rate_control : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL,
-    picture_target_resolution : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC,
-    selected_layout_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_MODE,
-    frame_subregions_layout_data : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA,
-    codec_gop_sequence : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE
+  struct D3D12_FEATURE_DATA_VIDEO_DECODE_SUPPORT
+    property node_index : UInt32
+    property configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION
+    property width : UInt32
+    property height : UInt32
+    property decode_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property bit_rate : UInt32
+    property support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_SUPPORT_FLAGS
+    property configuration_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION_FLAGS
+    property decode_tier : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_TIER
+    def initialize(@node_index : UInt32, @configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION, @width : UInt32, @height : UInt32, @decode_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @bit_rate : UInt32, @support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_SUPPORT_FLAGS, @configuration_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION_FLAGS, @decode_tier : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_TIER)
+    end
+  end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS,
-    sequence_control_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_CONTROL_DESC,
-    picture_control_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_DESC,
-    pInputFrame : Void*,
-    input_frame_subresource : UInt32,
-    current_frame_bitstream_metadata_size : UInt32
+  struct D3D12_FEATURE_DATA_VIDEO_DECODE_PROFILE_COUNT
+    property node_index : UInt32
+    property profile_count : UInt32
+    def initialize(@node_index : UInt32, @profile_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM,
-    pBuffer : Void*,
-    frame_start_offset : UInt64
+  struct D3D12_FEATURE_DATA_VIDEO_DECODE_PROFILES
+    property node_index : UInt32
+    property profile_count : UInt32
+    property pProfiles : LibC::GUID*
+    def initialize(@node_index : UInt32, @profile_count : UInt32, @pProfiles : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_RECONSTRUCTED_PICTURE,
-    pReconstructedPicture : Void*,
-    reconstructed_picture_subresource : UInt32
+  struct D3D12_FEATURE_DATA_VIDEO_DECODE_FORMAT_COUNT
+    property node_index : UInt32
+    property configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION
+    property format_count : UInt32
+    def initialize(@node_index : UInt32, @configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION, @format_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_FRAME_SUBREGION_METADATA,
-    bSize : UInt64,
-    bStartOffset : UInt64,
-    bHeaderSize : UInt64
+  struct D3D12_FEATURE_DATA_VIDEO_DECODE_FORMATS
+    property node_index : UInt32
+    property configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION
+    property format_count : UInt32
+    property pOutputFormats : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT*
+    def initialize(@node_index : UInt32, @configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION, @format_count : UInt32, @pOutputFormats : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT*)
+    end
+  end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_OUTPUT_METADATA_STATISTICS,
-    average_qp : UInt64,
-    intra_coding_units_count : UInt64,
-    inter_coding_units_count : UInt64,
-    skip_coding_units_count : UInt64,
-    average_motion_estimation_x_direction : UInt64,
-    average_motion_estimation_y_direction : UInt64
+  struct D3D12_FEATURE_DATA_VIDEO_ARCHITECTURE
+    property io_coherent : Win32cr::Foundation::BOOL
+    def initialize(@io_coherent : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_OUTPUT_METADATA,
-    encode_error_flags : UInt64,
-    encode_stats : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_OUTPUT_METADATA_STATISTICS,
-    encoded_bitstream_written_bytes_count : UInt64,
-    written_subregions_count : UInt64
+  struct D3D12_FEATURE_DATA_VIDEO_DECODE_HISTOGRAM
+    property node_index : UInt32
+    property decode_profile : LibC::GUID
+    property width : UInt32
+    property height : UInt32
+    property decode_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property components : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_HISTOGRAM_COMPONENT_FLAGS
+    property bin_count : UInt32
+    property counter_bit_depth : UInt32
+    def initialize(@node_index : UInt32, @decode_profile : LibC::GUID, @width : UInt32, @height : UInt32, @decode_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @components : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_HISTOGRAM_COMPONENT_FLAGS, @bin_count : UInt32, @counter_bit_depth : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER,
-    pBuffer : Void*,
-    offset : UInt64
+  struct D3D12_VIDEO_SCALE_SUPPORT
+    property output_size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE
+    property flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SCALE_SUPPORT_FLAGS
+    def initialize(@output_size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE, @flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SCALE_SUPPORT_FLAGS)
+    end
+  end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_RESOLVE_METADATA_INPUT_ARGUMENTS,
-    encoder_codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC,
-    encoder_profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC,
-    encoder_input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    encoded_picture_effective_resolution : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC,
-    hw_layout_metadata : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER
+  struct D3D12_FEATURE_DATA_VIDEO_DECODE_CONVERSION_SUPPORT
+    property node_index : UInt32
+    property configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION
+    property decode_sample : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SAMPLE
+    property output_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FORMAT
+    property frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property bit_rate : UInt32
+    property support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONVERSION_SUPPORT_FLAGS
+    property scale_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SCALE_SUPPORT
+    def initialize(@node_index : UInt32, @configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION, @decode_sample : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SAMPLE, @output_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FORMAT, @frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @bit_rate : UInt32, @support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONVERSION_SUPPORT_FLAGS, @scale_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SCALE_SUPPORT)
+    end
+  end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS,
-    resolved_layout_metadata : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER
+  struct D3D12_FEATURE_DATA_VIDEO_DECODER_HEAP_SIZE
+    property video_decoder_heap_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_HEAP_DESC
+    property memory_pool_l0_size : UInt64
+    property memory_pool_l1_size : UInt64
+    def initialize(@video_decoder_heap_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_HEAP_DESC, @memory_pool_l0_size : UInt64, @memory_pool_l1_size : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS,
-    bitstream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM,
-    reconstructed_picture : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RECONSTRUCTED_PICTURE,
-    encoder_output_metadata : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER
+  struct D3D12_FEATURE_DATA_VIDEO_PROCESSOR_SIZE
+    property node_mask : UInt32
+    property pOutputStreamDesc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC*
+    property num_input_stream_descs : UInt32
+    property pInputStreamDescs : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*
+    property memory_pool_l0_size : UInt64
+    property memory_pool_l1_size : UInt64
+    def initialize(@node_mask : UInt32, @pOutputStreamDesc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC*, @num_input_stream_descs : UInt32, @pInputStreamDescs : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*, @memory_pool_l0_size : UInt64, @memory_pool_l1_size : UInt64)
+    end
+  end
 
   @[Extern]
-  record AecQualityMetrics_Struct,
-    i64Timestamp : Int64,
-    convergence_flag : UInt8,
-    mic_clipped_flag : UInt8,
-    mic_silence_flag : UInt8,
-    pstv_feadback_flag : UInt8,
-    spk_clipped_flag : UInt8,
-    spk_mute_flag : UInt8,
-    glitch_flag : UInt8,
-    double_talk_flag : UInt8,
-    uGlitchCount : UInt32,
-    uMicClipCount : UInt32,
-    fDuration : Float32,
-    fTSVariance : Float32,
-    fTSDriftRate : Float32,
-    fVoiceLevel : Float32,
-    fNoiseLevel : Float32,
-    fERLE : Float32,
-    fAvgERLE : Float32,
-    dwReserved : UInt32
+  struct D3D12_QUERY_DATA_VIDEO_DECODE_STATISTICS
+    property status : UInt64
+    property num_macroblocks_affected : UInt64
+    property frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property bit_rate : UInt32
+    def initialize(@status : UInt64, @num_macroblocks_affected : UInt64, @frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @bit_rate : UInt32)
+    end
+  end
 
   @[Extern]
-  record TOC_DESCRIPTOR,
-    guidID : LibC::GUID,
-    wStreamNumber : UInt16,
-    guidType : LibC::GUID,
-    wLanguageIndex : UInt16
+  struct D3D12_VIDEO_DECODE_FRAME_ARGUMENT
+    property type__ : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_ARGUMENT_TYPE
+    property size : UInt32
+    property pData : Void*
+    def initialize(@type__ : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_ARGUMENT_TYPE, @size : UInt32, @pData : Void*)
+    end
+  end
 
   @[Extern]
-  record TOC_ENTRY_DESCRIPTOR,
-    qwStartTime : UInt64,
-    qwEndTime : UInt64,
-    qwStartPacketOffset : UInt64,
-    qwEndPacketOffset : UInt64,
-    qwRepresentativeFrameTime : UInt64
+  struct D3D12_VIDEO_DECODE_REFERENCE_FRAMES
+    property num_texture2_ds : UInt32
+    property ppTexture2Ds : Void**
+    property pSubresources : UInt32*
+    property ppHeaps : Void**
+    def initialize(@num_texture2_ds : UInt32, @ppTexture2Ds : Void**, @pSubresources : UInt32*, @ppHeaps : Void**)
+    end
+  end
 
   @[Extern]
-  record DXVA_AYUVsample2,
-    bCrValue : UInt8,
-    bCbValue : UInt8,
-    bY_Value : UInt8,
-    bSampleAlpha8 : UInt8
+  struct D3D12_VIDEO_DECODE_COMPRESSED_BITSTREAM
+    property pBuffer : Void*
+    property offset : UInt64
+    property size : UInt64
+    def initialize(@pBuffer : Void*, @offset : UInt64, @size : UInt64)
+    end
+  end
 
   @[Extern]
-  record DXVA_BufferDescription,
-    dwTypeIndex : UInt32,
-    dwBufferIndex : UInt32,
-    dwDataOffset : UInt32,
-    dwDataSize : UInt32,
-    dwFirstMBaddress : UInt32,
-    dwNumMBsInBuffer : UInt32,
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    dwStride : UInt32,
-    dwReservedBits : UInt32
+  struct D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS
+    property enable : Win32cr::Foundation::BOOL
+    property pReferenceTexture2D : Void*
+    property reference_subresource : UInt32
+    property output_color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
+    property decode_color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
+    def initialize(@enable : Win32cr::Foundation::BOOL, @pReferenceTexture2D : Void*, @reference_subresource : UInt32, @output_color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE, @decode_color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE)
+    end
+  end
 
   @[Extern]
-  record DXVA_ConfigPictureDecode,
-    dwFunction : UInt32,
-    dwReservedBits : UInt32[3],
-    guidConfigBitstreamEncryption : LibC::GUID,
-    guidConfigMBcontrolEncryption : LibC::GUID,
-    guidConfigResidDiffEncryption : LibC::GUID,
-    bConfigBitstreamRaw : UInt8,
-    bConfigMBcontrolRasterOrder : UInt8,
-    bConfigResidDiffHost : UInt8,
-    bConfigSpatialResid8 : UInt8,
-    bConfigResid8Subtraction : UInt8,
-    bConfigSpatialHost8or9Clipping : UInt8,
-    bConfigSpatialResidInterleaved : UInt8,
-    bConfigIntraResidUnsigned : UInt8,
-    bConfigResidDiffAccelerator : UInt8,
-    bConfigHostInverseScan : UInt8,
-    bConfigSpecificIDCT : UInt8,
-    bConfig4GroupedCoefs : UInt8
+  struct D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS
+    property num_frame_arguments : UInt32
+    property frame_arguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_FRAME_ARGUMENT[10]
+    property reference_frames : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_REFERENCE_FRAMES
+    property compressed_bitstream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_COMPRESSED_BITSTREAM
+    property pHeap : Void*
+    def initialize(@num_frame_arguments : UInt32, @frame_arguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_FRAME_ARGUMENT[10], @reference_frames : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_REFERENCE_FRAMES, @compressed_bitstream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_COMPRESSED_BITSTREAM, @pHeap : Void*)
+    end
+  end
 
   @[Extern]
-  record DXVA_PictureParameters,
-    wDecodedPictureIndex : UInt16,
-    wDeblockedPictureIndex : UInt16,
-    wForwardRefPictureIndex : UInt16,
-    wBackwardRefPictureIndex : UInt16,
-    wPicWidthInMBminus1 : UInt16,
-    wPicHeightInMBminus1 : UInt16,
-    bMacroblockWidthMinus1 : UInt8,
-    bMacroblockHeightMinus1 : UInt8,
-    bBlockWidthMinus1 : UInt8,
-    bBlockHeightMinus1 : UInt8,
-    bBPPminus1 : UInt8,
-    bPicStructure : UInt8,
-    bSecondField : UInt8,
-    bPicIntra : UInt8,
-    bPicBackwardPrediction : UInt8,
-    bBidirectionalAveragingMode : UInt8,
-    bMVprecisionAndChromaRelation : UInt8,
-    bChromaFormat : UInt8,
-    bPicScanFixed : UInt8,
-    bPicScanMethod : UInt8,
-    bPicReadbackRequests : UInt8,
-    bRcontrol : UInt8,
-    bPicSpatialResid8 : UInt8,
-    bPicOverflowBlocks : UInt8,
-    bPicExtrapolation : UInt8,
-    bPicDeblocked : UInt8,
-    bPicDeblockConfined : UInt8,
-    bPic4MVallowed : UInt8,
-    bPicOBMC : UInt8,
-    bPicBinPB : UInt8,
-    bMV_RPS : UInt8,
-    bReservedBits : UInt8,
-    wBitstreamFcodes : UInt16,
-    wBitstreamPCEelements : UInt16,
-    bBitstreamConcealmentNeed : UInt8,
-    bBitstreamConcealmentMethod : UInt8
+  struct D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS
+    property pOutputTexture2D : Void*
+    property output_subresource : UInt32
+    property conversion_arguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS
+    def initialize(@pOutputTexture2D : Void*, @output_subresource : UInt32, @conversion_arguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS)
+    end
+  end
 
   @[Extern]
-  record DXVAUncompDataInfo,
-    uncomp_width : UInt32,
-    uncomp_height : UInt32,
-    uncomp_format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+  struct D3D12_VIDEO_PROCESS_FILTER_RANGE
+    property minimum : Int32
+    property maximum : Int32
+    property default : Int32
+    property multiplier : Float32
+    def initialize(@minimum : Int32, @maximum : Int32, @default : Int32, @multiplier : Float32)
+    end
+  end
 
   @[Extern]
-  record DXVACompBufferInfo,
-    num_comp_buffers : UInt32,
-    width_to_create : UInt32,
-    height_to_create : UInt32,
-    bytes_to_allocate : UInt32,
-    usage : UInt32,
-    pool : Win32cr::Graphics::Direct3D9::D3DPOOL,
-    format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+  struct D3D12_FEATURE_DATA_VIDEO_PROCESS_SUPPORT
+    property node_index : UInt32
+    property input_sample : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SAMPLE
+    property input_field_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FIELD_TYPE
+    property input_stereo_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FRAME_STEREO_FORMAT
+    property input_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property output_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FORMAT
+    property output_stereo_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FRAME_STEREO_FORMAT
+    property output_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_SUPPORT_FLAGS
+    property scale_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SCALE_SUPPORT
+    property feature_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FEATURE_FLAGS
+    property deinterlace_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_DEINTERLACE_FLAGS
+    property auto_processing_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_AUTO_PROCESSING_FLAGS
+    property filter_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FILTER_FLAGS
+    property filter_range_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FILTER_RANGE[32]
+    def initialize(@node_index : UInt32, @input_sample : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SAMPLE, @input_field_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FIELD_TYPE, @input_stereo_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FRAME_STEREO_FORMAT, @input_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @output_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FORMAT, @output_stereo_format : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FRAME_STEREO_FORMAT, @output_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_SUPPORT_FLAGS, @scale_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SCALE_SUPPORT, @feature_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FEATURE_FLAGS, @deinterlace_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_DEINTERLACE_FLAGS, @auto_processing_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_AUTO_PROCESSING_FLAGS, @filter_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FILTER_FLAGS, @filter_range_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FILTER_RANGE[32])
+    end
+  end
 
   @[Extern]
-  record DXVABufferInfo,
-    pCompSurface : Void*,
-    data_offset : UInt32,
-    data_size : UInt32
+  struct D3D12_FEATURE_DATA_VIDEO_PROCESS_MAX_INPUT_STREAMS
+    property node_index : UInt32
+    property max_input_streams : UInt32
+    def initialize(@node_index : UInt32, @max_input_streams : UInt32)
+    end
+  end
 
   @[Extern]
-  record DXVA_ExtendedFormat,
-    _bitfield : UInt32
+  struct D3D12_FEATURE_DATA_VIDEO_PROCESS_REFERENCE_INFO
+    property node_index : UInt32
+    property deinterlace_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_DEINTERLACE_FLAGS
+    property filters : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FILTER_FLAGS
+    property feature_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FEATURE_FLAGS
+    property input_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property output_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property enable_auto_processing : Win32cr::Foundation::BOOL
+    property past_frames : UInt32
+    property future_frames : UInt32
+    def initialize(@node_index : UInt32, @deinterlace_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_DEINTERLACE_FLAGS, @filters : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FILTER_FLAGS, @feature_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_FEATURE_FLAGS, @input_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @output_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @enable_auto_processing : Win32cr::Foundation::BOOL, @past_frames : UInt32, @future_frames : UInt32)
+    end
+  end
 
   @[Extern]
-  record DXVA_Frequency,
-    numerator : UInt32,
-    denominator : UInt32
+  struct D3D12_VIDEO_PROCESS_REFERENCE_SET
+    property num_past_frames : UInt32
+    property ppPastFrames : Void**
+    property pPastSubresources : UInt32*
+    property num_future_frames : UInt32
+    property ppFutureFrames : Void**
+    property pFutureSubresources : UInt32*
+    def initialize(@num_past_frames : UInt32, @ppPastFrames : Void**, @pPastSubresources : UInt32*, @num_future_frames : UInt32, @ppFutureFrames : Void**, @pFutureSubresources : UInt32*)
+    end
+  end
 
   @[Extern]
-  record DXVA_VideoDesc,
-    size : UInt32,
-    sample_width : UInt32,
-    sample_height : UInt32,
-    sample_format : UInt32,
-    d3dFormat : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    input_sample_freq : Win32cr::Media::MediaFoundation::DXVA_Frequency,
-    output_frame_freq : Win32cr::Media::MediaFoundation::DXVA_Frequency
+  struct D3D12_VIDEO_PROCESS_TRANSFORM
+    property source_rectangle : Win32cr::Foundation::RECT
+    property destination_rectangle : Win32cr::Foundation::RECT
+    property orientation : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_ORIENTATION
+    def initialize(@source_rectangle : Win32cr::Foundation::RECT, @destination_rectangle : Win32cr::Foundation::RECT, @orientation : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_ORIENTATION)
+    end
+  end
 
   @[Extern]
-  record DXVA_VideoSample,
-    rtStart : Int64,
-    rtEnd : Int64,
-    sample_format : Win32cr::Media::MediaFoundation::DXVA_SampleFormat,
-    lpDDSSrcSurface : Void*
+  struct D3D12_VIDEO_PROCESS_INPUT_STREAM_RATE
+    property output_index : UInt32
+    property input_frame_or_field : UInt32
+    def initialize(@output_index : UInt32, @input_frame_or_field : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_PROCESS_INPUT_STREAM
+    property pTexture2D : Void*
+    property subresource : UInt32
+    property reference_set : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_REFERENCE_SET
+    def initialize(@pTexture2D : Void*, @subresource : UInt32, @reference_set : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_REFERENCE_SET)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS
+    property input_stream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM[2]
+    property transform : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_TRANSFORM
+    property flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_FLAGS
+    property rate_info : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_RATE
+    property filter_levels : Int32[32]
+    property alpha_blending : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_ALPHA_BLENDING
+    def initialize(@input_stream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM[2], @transform : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_TRANSFORM, @flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_FLAGS, @rate_info : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_RATE, @filter_levels : Int32[32], @alpha_blending : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_ALPHA_BLENDING)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_PROCESS_OUTPUT_STREAM
+    property pTexture2D : Void*
+    property subresource : UInt32
+    def initialize(@pTexture2D : Void*, @subresource : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS
+    property output_stream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM[2]
+    property target_rectangle : Win32cr::Foundation::RECT
+    def initialize(@output_stream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM[2], @target_rectangle : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_DECODE_OUTPUT_HISTOGRAM
+    property offset : UInt64
+    property pBuffer : Void*
+    def initialize(@offset : UInt64, @pBuffer : Void*)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS1
+    property enable : Win32cr::Foundation::BOOL
+    property pReferenceTexture2D : Void*
+    property reference_subresource : UInt32
+    property output_color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
+    property decode_color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
+    property output_width : UInt32
+    property output_height : UInt32
+    def initialize(@enable : Win32cr::Foundation::BOOL, @pReferenceTexture2D : Void*, @reference_subresource : UInt32, @output_color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE, @decode_color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE, @output_width : UInt32, @output_height : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1
+    property pOutputTexture2D : Void*
+    property output_subresource : UInt32
+    property conversion_arguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS1
+    property histograms : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_HISTOGRAM[4]
+    def initialize(@pOutputTexture2D : Void*, @output_subresource : UInt32, @conversion_arguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS1, @histograms : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_HISTOGRAM[4])
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1
+    property input_stream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM[2]
+    property transform : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_TRANSFORM
+    property flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_FLAGS
+    property rate_info : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_RATE
+    property filter_levels : Int32[32]
+    property alpha_blending : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_ALPHA_BLENDING
+    property field_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FIELD_TYPE
+    def initialize(@input_stream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM[2], @transform : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_TRANSFORM, @flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_FLAGS, @rate_info : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_RATE, @filter_levels : Int32[32], @alpha_blending : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_ALPHA_BLENDING, @field_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_FIELD_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_FEATURE_AREA_SUPPORT
+    property node_index : UInt32
+    property video_decode_support : Win32cr::Foundation::BOOL
+    property video_process_support : Win32cr::Foundation::BOOL
+    property video_encode_support : Win32cr::Foundation::BOOL
+    def initialize(@node_index : UInt32, @video_decode_support : Win32cr::Foundation::BOOL, @video_process_support : Win32cr::Foundation::BOOL, @video_encode_support : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_MOTION_ESTIMATOR
+    property node_index : UInt32
+    property input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property block_size_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_SEARCH_BLOCK_SIZE_FLAGS
+    property precision_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_VECTOR_PRECISION_FLAGS
+    property size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE
+    def initialize(@node_index : UInt32, @input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @block_size_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_SEARCH_BLOCK_SIZE_FLAGS, @precision_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_VECTOR_PRECISION_FLAGS, @size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_MOTION_ESTIMATOR_SIZE
+    property node_index : UInt32
+    property input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property block_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_SEARCH_BLOCK_SIZE
+    property precision : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_VECTOR_PRECISION
+    property size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE
+    property protected__ : Win32cr::Foundation::BOOL
+    property motion_vector_heap_memory_pool_l0_size : UInt64
+    property motion_vector_heap_memory_pool_l1_size : UInt64
+    property motion_estimator_memory_pool_l0_size : UInt64
+    property motion_estimator_memory_pool_l1_size : UInt64
+    def initialize(@node_index : UInt32, @input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @block_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_SEARCH_BLOCK_SIZE, @precision : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_VECTOR_PRECISION, @size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE, @protected__ : Win32cr::Foundation::BOOL, @motion_vector_heap_memory_pool_l0_size : UInt64, @motion_vector_heap_memory_pool_l1_size : UInt64, @motion_estimator_memory_pool_l0_size : UInt64, @motion_estimator_memory_pool_l1_size : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_MOTION_ESTIMATOR_DESC
+    property node_mask : UInt32
+    property input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property block_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_SEARCH_BLOCK_SIZE
+    property precision : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_VECTOR_PRECISION
+    property size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE
+    def initialize(@node_mask : UInt32, @input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @block_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_SEARCH_BLOCK_SIZE, @precision : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_VECTOR_PRECISION, @size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC
+    property node_mask : UInt32
+    property input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property block_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_SEARCH_BLOCK_SIZE
+    property precision : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_VECTOR_PRECISION
+    property size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE
+    def initialize(@node_mask : UInt32, @input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @block_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_SEARCH_BLOCK_SIZE, @precision : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_VECTOR_PRECISION, @size_range : Win32cr::Media::MediaFoundation::D3D12_VIDEO_SIZE_RANGE)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_RESOURCE_COORDINATE
+    property x : UInt64
+    property y : UInt32
+    property z : UInt32
+    property subresource_index : UInt32
+    def initialize(@x : UInt64, @y : UInt32, @z : UInt32, @subresource_index : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT
+    property pMotionVectorHeap : Void*
+    def initialize(@pMotionVectorHeap : Void*)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_MOTION_ESTIMATOR_INPUT
+    property pInputTexture2D : Void*
+    property input_subresource_index : UInt32
+    property pReferenceTexture2D : Void*
+    property reference_subresource_index : UInt32
+    property pHintMotionVectorHeap : Void*
+    def initialize(@pInputTexture2D : Void*, @input_subresource_index : UInt32, @pReferenceTexture2D : Void*, @reference_subresource_index : UInt32, @pHintMotionVectorHeap : Void*)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT
+    property pMotionVectorTexture2D : Void*
+    property motion_vector_coordinate : Win32cr::Media::MediaFoundation::D3D12_RESOURCE_COORDINATE
+    def initialize(@pMotionVectorTexture2D : Void*, @motion_vector_coordinate : Win32cr::Media::MediaFoundation::D3D12_RESOURCE_COORDINATE)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT
+    property pMotionVectorHeap : Void*
+    property pixel_width : UInt32
+    property pixel_height : UInt32
+    def initialize(@pMotionVectorHeap : Void*, @pixel_width : UInt32, @pixel_height : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_DECODE_PROTECTED_RESOURCES
+    property node_index : UInt32
+    property configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION
+    property support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROTECTED_RESOURCE_SUPPORT_FLAGS
+    def initialize(@node_index : UInt32, @configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_CONFIGURATION, @support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROTECTED_RESOURCE_SUPPORT_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_PROCESS_PROTECTED_RESOURCES
+    property node_index : UInt32
+    property support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROTECTED_RESOURCE_SUPPORT_FLAGS
+    def initialize(@node_index : UInt32, @support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROTECTED_RESOURCE_SUPPORT_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_MOTION_ESTIMATOR_PROTECTED_RESOURCES
+    property node_index : UInt32
+    property support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROTECTED_RESOURCE_SUPPORT_FLAGS
+    def initialize(@node_index : UInt32, @support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROTECTED_RESOURCE_SUPPORT_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_DECODER_HEAP_SIZE1
+    property video_decoder_heap_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_HEAP_DESC
+    property protected__ : Win32cr::Foundation::BOOL
+    property memory_pool_l0_size : UInt64
+    property memory_pool_l1_size : UInt64
+    def initialize(@video_decoder_heap_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_HEAP_DESC, @protected__ : Win32cr::Foundation::BOOL, @memory_pool_l0_size : UInt64, @memory_pool_l1_size : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_PROCESSOR_SIZE1
+    property node_mask : UInt32
+    property pOutputStreamDesc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC*
+    property num_input_stream_descs : UInt32
+    property pInputStreamDescs : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*
+    property protected__ : Win32cr::Foundation::BOOL
+    property memory_pool_l0_size : UInt64
+    property memory_pool_l1_size : UInt64
+    def initialize(@node_mask : UInt32, @pOutputStreamDesc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC*, @num_input_stream_descs : UInt32, @pInputStreamDescs : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*, @protected__ : Win32cr::Foundation::BOOL, @memory_pool_l0_size : UInt64, @memory_pool_l1_size : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_COUNT
+    property node_index : UInt32
+    property command_count : UInt32
+    def initialize(@node_index : UInt32, @command_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_EXTENSION_COMMAND_INFO
+    property command_id : LibC::GUID
+    property name : Win32cr::Foundation::PWSTR
+    property command_list_support_flags : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_SUPPORT_FLAGS
+    def initialize(@command_id : LibC::GUID, @name : Win32cr::Foundation::PWSTR, @command_list_support_flags : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_SUPPORT_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMANDS
+    property node_index : UInt32
+    property command_count : UInt32
+    property pCommandInfos : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_INFO*
+    def initialize(@node_index : UInt32, @command_count : UInt32, @pCommandInfos : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_INFO*)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_PARAMETER_COUNT
+    property command_id : LibC::GUID
+    property stage : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_STAGE
+    property parameter_count : UInt32
+    property parameter_packing : UInt32
+    def initialize(@command_id : LibC::GUID, @stage : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_STAGE, @parameter_count : UInt32, @parameter_packing : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_INFO
+    property name : Win32cr::Foundation::PWSTR
+    property type__ : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_TYPE
+    property flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_FLAGS
+    def initialize(@name : Win32cr::Foundation::PWSTR, @type__ : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_TYPE, @flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_PARAMETERS
+    property command_id : LibC::GUID
+    property stage : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_STAGE
+    property parameter_count : UInt32
+    property pParameterInfos : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_INFO*
+    def initialize(@command_id : LibC::GUID, @stage : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_STAGE, @parameter_count : UInt32, @pParameterInfos : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_INFO*)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_SUPPORT
+    property node_index : UInt32
+    property command_id : LibC::GUID
+    property pInputData : Void*
+    property input_data_size_in_bytes : LibC::UIntPtrT
+    property pOutputData : Void*
+    property output_data_size_in_bytes : LibC::UIntPtrT
+    def initialize(@node_index : UInt32, @command_id : LibC::GUID, @pInputData : Void*, @input_data_size_in_bytes : LibC::UIntPtrT, @pOutputData : Void*, @output_data_size_in_bytes : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_SIZE
+    property node_index : UInt32
+    property command_id : LibC::GUID
+    property pCreationParameters : Void*
+    property creation_parameters_size_in_bytes : LibC::UIntPtrT
+    property memory_pool_l0_size : UInt64
+    property memory_pool_l1_size : UInt64
+    def initialize(@node_index : UInt32, @command_id : LibC::GUID, @pCreationParameters : Void*, @creation_parameters_size_in_bytes : LibC::UIntPtrT, @memory_pool_l0_size : UInt64, @memory_pool_l1_size : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_EXTENSION_COMMAND_DESC
+    property node_mask : UInt32
+    property command_id : LibC::GUID
+    def initialize(@node_mask : UInt32, @command_id : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP
+    property constant_qp_full_intracoded_frame : UInt32
+    property constant_qp_inter_predicted_frame_prev_ref_only : UInt32
+    property constant_qp_inter_predicted_frame_bi_directional_ref : UInt32
+    def initialize(@constant_qp_full_intracoded_frame : UInt32, @constant_qp_inter_predicted_frame_prev_ref_only : UInt32, @constant_qp_inter_predicted_frame_bi_directional_ref : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR
+    property initial_qp : UInt32
+    property min_qp : UInt32
+    property max_qp : UInt32
+    property max_frame_bit_size : UInt64
+    property target_bit_rate : UInt64
+    property vbv_capacity : UInt64
+    property initial_vbv_fullness : UInt64
+    def initialize(@initial_qp : UInt32, @min_qp : UInt32, @max_qp : UInt32, @max_frame_bit_size : UInt64, @target_bit_rate : UInt64, @vbv_capacity : UInt64, @initial_vbv_fullness : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR
+    property initial_qp : UInt32
+    property min_qp : UInt32
+    property max_qp : UInt32
+    property max_frame_bit_size : UInt64
+    property target_avg_bit_rate : UInt64
+    property peak_bit_rate : UInt64
+    property vbv_capacity : UInt64
+    property initial_vbv_fullness : UInt64
+    def initialize(@initial_qp : UInt32, @min_qp : UInt32, @max_qp : UInt32, @max_frame_bit_size : UInt64, @target_avg_bit_rate : UInt64, @peak_bit_rate : UInt64, @vbv_capacity : UInt64, @initial_vbv_fullness : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR
+    property initial_qp : UInt32
+    property min_qp : UInt32
+    property max_qp : UInt32
+    property max_frame_bit_size : UInt64
+    property target_avg_bit_rate : UInt64
+    property peak_bit_rate : UInt64
+    property constant_quality_target : UInt32
+    def initialize(@initial_qp : UInt32, @min_qp : UInt32, @max_qp : UInt32, @max_frame_bit_size : UInt64, @target_avg_bit_rate : UInt64, @peak_bit_rate : UInt64, @constant_quality_target : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS
+    property data_size : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pConfiguration_CQP : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP*
+    property pConfiguration_CBR : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR*
+    property pConfiguration_VBR : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR*
+    property pConfiguration_QVBR : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR*
+    def initialize(@pConfiguration_CQP : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP*, @pConfiguration_CBR : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR*, @pConfiguration_VBR : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR*, @pConfiguration_QVBR : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR*)
+    end
+    end
+
+    def initialize(@data_size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_RATE_CONTROL
+    property mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_MODE
+    property flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_FLAGS
+    property config_params : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS
+    property target_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    def initialize(@mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_MODE, @flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_FLAGS, @config_params : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS, @target_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_CODEC
+    property node_index : UInt32
+    property codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property is_supported : Win32cr::Foundation::BOOL
+    def initialize(@node_index : UInt32, @codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @is_supported : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_PROFILE_DESC
+    property data_size : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pH264Profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_H264*
+    property pHEVCProfile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_HEVC*
+    def initialize(@pH264Profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_H264*, @pHEVCProfile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_HEVC*)
+    end
+    end
+
+    def initialize(@data_size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC
+    property level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVELS_HEVC
+    property tier : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_TIER_HEVC
+    def initialize(@level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVELS_HEVC, @tier : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_TIER_HEVC)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_LEVEL_SETTING
+    property data_size : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pH264LevelSetting : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVELS_H264*
+    property pHEVCLevelSetting : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC*
+    def initialize(@pH264LevelSetting : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVELS_H264*, @pHEVCLevelSetting : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC*)
+    end
+    end
+
+    def initialize(@data_size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_PROFILE_LEVEL
+    property node_index : UInt32
+    property codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC
+    property is_supported : Win32cr::Foundation::BOOL
+    property min_supported_level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING
+    property max_supported_level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING
+    def initialize(@node_index : UInt32, @codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC, @is_supported : Win32cr::Foundation::BOOL, @min_supported_level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING, @max_supported_level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC
+    property width : UInt32
+    property height : UInt32
+    def initialize(@width : UInt32, @height : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_RATIO_DESC
+    property width_ratio : UInt32
+    property height_ratio : UInt32
+    def initialize(@width_ratio : UInt32, @height_ratio : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_OUTPUT_RESOLUTION_RATIOS_COUNT
+    property node_index : UInt32
+    property codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property resolution_ratios_count : UInt32
+    def initialize(@node_index : UInt32, @codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @resolution_ratios_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_OUTPUT_RESOLUTION
+    property node_index : UInt32
+    property codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property resolution_ratios_count : UInt32
+    property is_supported : Win32cr::Foundation::BOOL
+    property min_resolution_supported : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC
+    property max_resolution_supported : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC
+    property resolution_width_multiple_requirement : UInt32
+    property resolution_height_multiple_requirement : UInt32
+    property pResolutionRatios : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_RATIO_DESC*
+    def initialize(@node_index : UInt32, @codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @resolution_ratios_count : UInt32, @is_supported : Win32cr::Foundation::BOOL, @min_resolution_supported : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC, @max_resolution_supported : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC, @resolution_width_multiple_requirement : UInt32, @resolution_height_multiple_requirement : UInt32, @pResolutionRatios : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_RATIO_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_INPUT_FORMAT
+    property node_index : UInt32
+    property codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property is_supported : Win32cr::Foundation::BOOL
+    def initialize(@node_index : UInt32, @codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @is_supported : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_RATE_CONTROL_MODE
+    property node_index : UInt32
+    property codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property rate_control_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_MODE
+    property is_supported : Win32cr::Foundation::BOOL
+    def initialize(@node_index : UInt32, @codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @rate_control_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL_MODE, @is_supported : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_INTRA_REFRESH_MODE
+    property node_index : UInt32
+    property codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC
+    property level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING
+    property intra_refresh_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_INTRA_REFRESH_MODE
+    property is_supported : Win32cr::Foundation::BOOL
+    def initialize(@node_index : UInt32, @codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC, @level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING, @intra_refresh_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_INTRA_REFRESH_MODE, @is_supported : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_MODE
+    property node_index : UInt32
+    property codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC
+    property level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING
+    property subregion_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_MODE
+    property is_supported : Win32cr::Foundation::BOOL
+    def initialize(@node_index : UInt32, @codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC, @level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING, @subregion_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_MODE, @is_supported : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_HEAP_DESC
+    property node_mask : UInt32
+    property flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_HEAP_FLAGS
+    property encode_codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property encode_profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC
+    property encode_level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING
+    property resolutions_list_count : UInt32
+    property pResolutionList : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC*
+    def initialize(@node_mask : UInt32, @flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_HEAP_FLAGS, @encode_codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @encode_profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC, @encode_level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING, @resolutions_list_count : UInt32, @pResolutionList : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_HEAP_SIZE
+    property heap_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_HEAP_DESC
+    property is_supported : Win32cr::Foundation::BOOL
+    property memory_pool_l0_size : UInt64
+    property memory_pool_l1_size : UInt64
+    def initialize(@heap_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_HEAP_DESC, @is_supported : Win32cr::Foundation::BOOL, @memory_pool_l0_size : UInt64, @memory_pool_l1_size : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264
+    property support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264_FLAGS
+    property disable_deblocking_filter_supported_modes : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264_SLICES_DEBLOCKING_MODE_FLAGS
+    def initialize(@support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264_FLAGS, @disable_deblocking_filter_supported_modes : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264_SLICES_DEBLOCKING_MODE_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC
+    property support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS
+    property min_luma_coding_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_CUSIZE
+    property max_luma_coding_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_CUSIZE
+    property min_luma_transform_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_TUSIZE
+    property max_luma_transform_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_TUSIZE
+    property max_transform_hierarchy_depth_inter : UInt8
+    property max_transform_hierarchy_depth_intra : UInt8
+    def initialize(@support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS, @min_luma_coding_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_CUSIZE, @max_luma_coding_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_CUSIZE, @min_luma_transform_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_TUSIZE, @max_luma_transform_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_TUSIZE, @max_transform_hierarchy_depth_inter : UInt8, @max_transform_hierarchy_depth_intra : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT
+    property data_size : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pH264Support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264*
+    property pHEVCSupport : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC*
+    def initialize(@pH264Support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264*, @pHEVCSupport : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC*)
+    end
+    end
+
+    def initialize(@data_size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT
+    property node_index : UInt32
+    property codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC
+    property is_supported : Win32cr::Foundation::BOOL
+    property codec_support_limits : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT
+    def initialize(@node_index : UInt32, @codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC, @is_supported : Win32cr::Foundation::BOOL, @codec_support_limits : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264
+    property max_l0_references_for_p : UInt32
+    property max_l0_references_for_b : UInt32
+    property max_l1_references_for_b : UInt32
+    property max_long_term_references : UInt32
+    property max_dpb_capacity : UInt32
+    def initialize(@max_l0_references_for_p : UInt32, @max_l0_references_for_b : UInt32, @max_l1_references_for_b : UInt32, @max_long_term_references : UInt32, @max_dpb_capacity : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC
+    property max_l0_references_for_p : UInt32
+    property max_l0_references_for_b : UInt32
+    property max_l1_references_for_b : UInt32
+    property max_long_term_references : UInt32
+    property max_dpb_capacity : UInt32
+    def initialize(@max_l0_references_for_p : UInt32, @max_l0_references_for_b : UInt32, @max_l1_references_for_b : UInt32, @max_long_term_references : UInt32, @max_dpb_capacity : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT
+    property data_size : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pH264Support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264*
+    property pHEVCSupport : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC*
+    def initialize(@pH264Support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264*, @pHEVCSupport : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC*)
+    end
+    end
+
+    def initialize(@data_size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT
+    property node_index : UInt32
+    property codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC
+    property is_supported : Win32cr::Foundation::BOOL
+    property picture_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT
+    def initialize(@node_index : UInt32, @codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC, @is_supported : Win32cr::Foundation::BOOL, @picture_support : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264
+    property configuration_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264_FLAGS
+    property direct_mode_config : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264_DIRECT_MODES
+    property disable_deblocking_filter_config : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264_SLICES_DEBLOCKING_MODES
+    def initialize(@configuration_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264_FLAGS, @direct_mode_config : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264_DIRECT_MODES, @disable_deblocking_filter_config : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264_SLICES_DEBLOCKING_MODES)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC
+    property configuration_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAGS
+    property min_luma_coding_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_CUSIZE
+    property max_luma_coding_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_CUSIZE
+    property min_luma_transform_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_TUSIZE
+    property max_luma_transform_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_TUSIZE
+    property max_transform_hierarchy_depth_inter : UInt8
+    property max_transform_hierarchy_depth_intra : UInt8
+    def initialize(@configuration_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAGS, @min_luma_coding_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_CUSIZE, @max_luma_coding_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_CUSIZE, @min_luma_transform_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_TUSIZE, @max_luma_transform_unit_size : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_TUSIZE, @max_transform_hierarchy_depth_inter : UInt8, @max_transform_hierarchy_depth_intra : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION
+    property data_size : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pH264Config : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264*
+    property pHEVCConfig : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC*
+    def initialize(@pH264Config : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264*, @pHEVCConfig : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC*)
+    end
+    end
+
+    def initialize(@data_size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_INTRA_REFRESH
+    property mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_INTRA_REFRESH_MODE
+    property intra_refresh_duration : UInt32
+    def initialize(@mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_INTRA_REFRESH_MODE, @intra_refresh_duration : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_RESOLUTION_SUPPORT_LIMITS
+    property max_subregions_number : UInt32
+    property max_intra_refresh_frame_duration : UInt32
+    property subregion_block_pixels_size : UInt32
+    property qp_map_region_pixels_size : UInt32
+    def initialize(@max_subregions_number : UInt32, @max_intra_refresh_frame_duration : UInt32, @subregion_block_pixels_size : UInt32, @qp_map_region_pixels_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264
+    property gop_length : UInt32
+    property p_picture_period : UInt32
+    property pic_order_cnt_type : UInt8
+    property log2_max_frame_num_minus4 : UInt8
+    property log2_max_pic_order_cnt_lsb_minus4 : UInt8
+    def initialize(@gop_length : UInt32, @p_picture_period : UInt32, @pic_order_cnt_type : UInt8, @log2_max_frame_num_minus4 : UInt8, @log2_max_pic_order_cnt_lsb_minus4 : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC
+    property gop_length : UInt32
+    property p_picture_period : UInt32
+    property log2_max_pic_order_cnt_lsb_minus4 : UInt8
+    def initialize(@gop_length : UInt32, @p_picture_period : UInt32, @log2_max_pic_order_cnt_lsb_minus4 : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE
+    property data_size : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pH264GroupOfPictures : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264*
+    property pHEVCGroupOfPictures : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC*
+    def initialize(@pH264GroupOfPictures : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264*, @pHEVCGroupOfPictures : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC*)
+    end
+    end
+
+    def initialize(@data_size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_SUPPORT
+    property node_index : UInt32
+    property codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property codec_configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION
+    property codec_gop_sequence : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE
+    property rate_control : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL
+    property intra_refresh : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_INTRA_REFRESH_MODE
+    property subregion_frame_encoding : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_MODE
+    property resolutions_list_count : UInt32
+    property pResolutionList : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC*
+    property max_reference_frames_in_dpb : UInt32
+    property validation_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_VALIDATION_FLAGS
+    property support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SUPPORT_FLAGS
+    property suggested_profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC
+    property suggested_level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING
+    property pResolutionDependentSupport : Win32cr::Media::MediaFoundation::D3D12_FEATURE_DATA_VIDEO_ENCODER_RESOLUTION_SUPPORT_LIMITS*
+    def initialize(@node_index : UInt32, @codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @codec_configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION, @codec_gop_sequence : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE, @rate_control : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL, @intra_refresh : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_INTRA_REFRESH_MODE, @subregion_frame_encoding : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_MODE, @resolutions_list_count : UInt32, @pResolutionList : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC*, @max_reference_frames_in_dpb : UInt32, @validation_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_VALIDATION_FLAGS, @support_flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SUPPORT_FLAGS, @suggested_profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC, @suggested_level : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_LEVEL_SETTING, @pResolutionDependentSupport : Win32cr::Media::MediaFoundation::D3D12_FEATURE_DATA_VIDEO_ENCODER_RESOLUTION_SUPPORT_LIMITS*)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_FEATURE_DATA_VIDEO_ENCODER_RESOURCE_REQUIREMENTS
+    property node_index : UInt32
+    property codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC
+    property input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property picture_target_resolution : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC
+    property is_supported : Win32cr::Foundation::BOOL
+    property compressed_bitstream_buffer_access_alignment : UInt32
+    property encoder_metadata_buffer_access_alignment : UInt32
+    property max_encoder_output_metadata_buffer_size : UInt32
+    def initialize(@node_index : UInt32, @codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC, @input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @picture_target_resolution : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC, @is_supported : Win32cr::Foundation::BOOL, @compressed_bitstream_buffer_access_alignment : UInt32, @encoder_metadata_buffer_access_alignment : UInt32, @max_encoder_output_metadata_buffer_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_DESC
+    property node_mask : UInt32
+    property flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FLAGS
+    property encode_codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property encode_profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC
+    property input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property codec_configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION
+    property max_motion_estimation_precision : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_MOTION_ESTIMATION_PRECISION_MODE
+    def initialize(@node_mask : UInt32, @flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FLAGS, @encode_codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @encode_profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC, @input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @codec_configuration : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION, @max_motion_estimation_precision : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_MOTION_ESTIMATION_PRECISION_MODE)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_REFERENCE_PICTURE_DESCRIPTOR_H264
+    property reconstructed_picture_resource_index : UInt32
+    property is_long_term_reference : Win32cr::Foundation::BOOL
+    property long_term_picture_idx : UInt32
+    property picture_order_count_number : UInt32
+    property frame_decoding_order_number : UInt32
+    property temporal_layer_index : UInt32
+    def initialize(@reconstructed_picture_resource_index : UInt32, @is_long_term_reference : Win32cr::Foundation::BOOL, @long_term_picture_idx : UInt32, @picture_order_count_number : UInt32, @frame_decoding_order_number : UInt32, @temporal_layer_index : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_MARKING_OPERATION
+    property memory_management_control_operation : UInt8
+    property difference_of_pic_nums_minus1 : UInt32
+    property long_term_pic_num : UInt32
+    property long_term_frame_idx : UInt32
+    property max_long_term_frame_idx_plus1 : UInt32
+    def initialize(@memory_management_control_operation : UInt8, @difference_of_pic_nums_minus1 : UInt32, @long_term_pic_num : UInt32, @long_term_frame_idx : UInt32, @max_long_term_frame_idx_plus1 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_LIST_MODIFICATION_OPERATION
+    property modification_of_pic_nums_idc : UInt8
+    property abs_diff_pic_num_minus1 : UInt32
+    property long_term_pic_num : UInt32
+    def initialize(@modification_of_pic_nums_idc : UInt8, @abs_diff_pic_num_minus1 : UInt32, @long_term_pic_num : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264
+    property flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_FLAGS
+    property frame_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_TYPE_H264
+    property pic_parameter_set_id : UInt32
+    property idr_pic_id : UInt32
+    property picture_order_count_number : UInt32
+    property frame_decoding_order_number : UInt32
+    property temporal_layer_index : UInt32
+    property list0_reference_frames_count : UInt32
+    property pList0ReferenceFrames : UInt32*
+    property list1_reference_frames_count : UInt32
+    property pList1ReferenceFrames : UInt32*
+    property reference_frames_recon_picture_descriptors_count : UInt32
+    property pReferenceFramesReconPictureDescriptors : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_REFERENCE_PICTURE_DESCRIPTOR_H264*
+    property adaptive_ref_pic_marking_mode_flag : UInt8
+    property ref_pic_marking_operations_commands_count : UInt32
+    property pRefPicMarkingOperationsCommands : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_MARKING_OPERATION*
+    property list0_ref_pic_modifications_count : UInt32
+    property pList0RefPicModifications : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_LIST_MODIFICATION_OPERATION*
+    property list1_ref_pic_modifications_count : UInt32
+    property pList1RefPicModifications : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_LIST_MODIFICATION_OPERATION*
+    property qp_map_values_count : UInt32
+    property pRateControlQPMap : Int8*
+    def initialize(@flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_FLAGS, @frame_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_TYPE_H264, @pic_parameter_set_id : UInt32, @idr_pic_id : UInt32, @picture_order_count_number : UInt32, @frame_decoding_order_number : UInt32, @temporal_layer_index : UInt32, @list0_reference_frames_count : UInt32, @pList0ReferenceFrames : UInt32*, @list1_reference_frames_count : UInt32, @pList1ReferenceFrames : UInt32*, @reference_frames_recon_picture_descriptors_count : UInt32, @pReferenceFramesReconPictureDescriptors : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_REFERENCE_PICTURE_DESCRIPTOR_H264*, @adaptive_ref_pic_marking_mode_flag : UInt8, @ref_pic_marking_operations_commands_count : UInt32, @pRefPicMarkingOperationsCommands : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_MARKING_OPERATION*, @list0_ref_pic_modifications_count : UInt32, @pList0RefPicModifications : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_LIST_MODIFICATION_OPERATION*, @list1_ref_pic_modifications_count : UInt32, @pList1RefPicModifications : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_LIST_MODIFICATION_OPERATION*, @qp_map_values_count : UInt32, @pRateControlQPMap : Int8*)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_REFERENCE_PICTURE_DESCRIPTOR_HEVC
+    property reconstructed_picture_resource_index : UInt32
+    property is_ref_used_by_current_pic : Win32cr::Foundation::BOOL
+    property is_long_term_reference : Win32cr::Foundation::BOOL
+    property picture_order_count_number : UInt32
+    property temporal_layer_index : UInt32
+    def initialize(@reconstructed_picture_resource_index : UInt32, @is_ref_used_by_current_pic : Win32cr::Foundation::BOOL, @is_long_term_reference : Win32cr::Foundation::BOOL, @picture_order_count_number : UInt32, @temporal_layer_index : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC
+    property flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC_FLAGS
+    property frame_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_TYPE_HEVC
+    property slice_pic_parameter_set_id : UInt32
+    property picture_order_count_number : UInt32
+    property temporal_layer_index : UInt32
+    property list0_reference_frames_count : UInt32
+    property pList0ReferenceFrames : UInt32*
+    property list1_reference_frames_count : UInt32
+    property pList1ReferenceFrames : UInt32*
+    property reference_frames_recon_picture_descriptors_count : UInt32
+    property pReferenceFramesReconPictureDescriptors : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_REFERENCE_PICTURE_DESCRIPTOR_HEVC*
+    property list0_ref_pic_modifications_count : UInt32
+    property pList0RefPicModifications : UInt32*
+    property list1_ref_pic_modifications_count : UInt32
+    property pList1RefPicModifications : UInt32*
+    property qp_map_values_count : UInt32
+    property pRateControlQPMap : Int8*
+    def initialize(@flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC_FLAGS, @frame_type : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_TYPE_HEVC, @slice_pic_parameter_set_id : UInt32, @picture_order_count_number : UInt32, @temporal_layer_index : UInt32, @list0_reference_frames_count : UInt32, @pList0ReferenceFrames : UInt32*, @list1_reference_frames_count : UInt32, @pList1ReferenceFrames : UInt32*, @reference_frames_recon_picture_descriptors_count : UInt32, @pReferenceFramesReconPictureDescriptors : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_REFERENCE_PICTURE_DESCRIPTOR_HEVC*, @list0_ref_pic_modifications_count : UInt32, @pList0RefPicModifications : UInt32*, @list1_ref_pic_modifications_count : UInt32, @pList1RefPicModifications : UInt32*, @qp_map_values_count : UInt32, @pRateControlQPMap : Int8*)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA
+    property data_size : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pH264PicData : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264*
+    property pHEVCPicData : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC*
+    def initialize(@pH264PicData : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264*, @pHEVCPicData : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC*)
+    end
+    end
+
+    def initialize(@data_size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODE_REFERENCE_FRAMES
+    property num_texture2_ds : UInt32
+    property ppTexture2Ds : Void**
+    property pSubresources : UInt32*
+    def initialize(@num_texture2_ds : UInt32, @ppTexture2Ds : Void**, @pSubresources : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_DESC
+    property intra_refresh_frame_index : UInt32
+    property flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_FLAGS
+    property picture_control_codec_data : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA
+    property reference_frames : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODE_REFERENCE_FRAMES
+    def initialize(@intra_refresh_frame_index : UInt32, @flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_FLAGS, @picture_control_codec_data : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA, @reference_frames : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODE_REFERENCE_FRAMES)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property max_bytes_per_slice : UInt32
+    property number_of_coding_units_per_slice : UInt32
+    property number_of_rows_per_slice : UInt32
+    property number_of_slices_per_frame : UInt32
+    def initialize(@max_bytes_per_slice : UInt32, @number_of_coding_units_per_slice : UInt32, @number_of_rows_per_slice : UInt32, @number_of_slices_per_frame : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA
+    property data_size : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pSlicesPartition_H264 : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES*
+    property pSlicesPartition_HEVC : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES*
+    def initialize(@pSlicesPartition_H264 : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES*, @pSlicesPartition_HEVC : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES*)
+    end
+    end
+
+    def initialize(@data_size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_SEQUENCE_CONTROL_DESC
+    property flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_CONTROL_FLAGS
+    property intra_refresh_config : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_INTRA_REFRESH
+    property rate_control : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL
+    property picture_target_resolution : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC
+    property selected_layout_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_MODE
+    property frame_subregions_layout_data : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA
+    property codec_gop_sequence : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE
+    def initialize(@flags : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_CONTROL_FLAGS, @intra_refresh_config : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_INTRA_REFRESH, @rate_control : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RATE_CONTROL, @picture_target_resolution : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC, @selected_layout_mode : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_MODE, @frame_subregions_layout_data : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA, @codec_gop_sequence : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS
+    property sequence_control_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_CONTROL_DESC
+    property picture_control_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_DESC
+    property pInputFrame : Void*
+    property input_frame_subresource : UInt32
+    property current_frame_bitstream_metadata_size : UInt32
+    def initialize(@sequence_control_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_SEQUENCE_CONTROL_DESC, @picture_control_desc : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_CONTROL_DESC, @pInputFrame : Void*, @input_frame_subresource : UInt32, @current_frame_bitstream_metadata_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM
+    property pBuffer : Void*
+    property frame_start_offset : UInt64
+    def initialize(@pBuffer : Void*, @frame_start_offset : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_RECONSTRUCTED_PICTURE
+    property pReconstructedPicture : Void*
+    property reconstructed_picture_subresource : UInt32
+    def initialize(@pReconstructedPicture : Void*, @reconstructed_picture_subresource : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_FRAME_SUBREGION_METADATA
+    property bSize : UInt64
+    property bStartOffset : UInt64
+    property bHeaderSize : UInt64
+    def initialize(@bSize : UInt64, @bStartOffset : UInt64, @bHeaderSize : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_OUTPUT_METADATA_STATISTICS
+    property average_qp : UInt64
+    property intra_coding_units_count : UInt64
+    property inter_coding_units_count : UInt64
+    property skip_coding_units_count : UInt64
+    property average_motion_estimation_x_direction : UInt64
+    property average_motion_estimation_y_direction : UInt64
+    def initialize(@average_qp : UInt64, @intra_coding_units_count : UInt64, @inter_coding_units_count : UInt64, @skip_coding_units_count : UInt64, @average_motion_estimation_x_direction : UInt64, @average_motion_estimation_y_direction : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_OUTPUT_METADATA
+    property encode_error_flags : UInt64
+    property encode_stats : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_OUTPUT_METADATA_STATISTICS
+    property encoded_bitstream_written_bytes_count : UInt64
+    property written_subregions_count : UInt64
+    def initialize(@encode_error_flags : UInt64, @encode_stats : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_OUTPUT_METADATA_STATISTICS, @encoded_bitstream_written_bytes_count : UInt64, @written_subregions_count : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER
+    property pBuffer : Void*
+    property offset : UInt64
+    def initialize(@pBuffer : Void*, @offset : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_RESOLVE_METADATA_INPUT_ARGUMENTS
+    property encoder_codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC
+    property encoder_profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC
+    property encoder_input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property encoded_picture_effective_resolution : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC
+    property hw_layout_metadata : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER
+    def initialize(@encoder_codec : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC, @encoder_profile : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PROFILE_DESC, @encoder_input_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @encoded_picture_effective_resolution : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC, @hw_layout_metadata : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS
+    property resolved_layout_metadata : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER
+    def initialize(@resolved_layout_metadata : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS
+    property bitstream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM
+    property reconstructed_picture : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RECONSTRUCTED_PICTURE
+    property encoder_output_metadata : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER
+    def initialize(@bitstream : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM, @reconstructed_picture : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RECONSTRUCTED_PICTURE, @encoder_output_metadata : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER)
+    end
+  end
+
+  @[Extern]
+  struct AecQualityMetrics_Struct
+    property i64Timestamp : Int64
+    property convergence_flag : UInt8
+    property mic_clipped_flag : UInt8
+    property mic_silence_flag : UInt8
+    property pstv_feadback_flag : UInt8
+    property spk_clipped_flag : UInt8
+    property spk_mute_flag : UInt8
+    property glitch_flag : UInt8
+    property double_talk_flag : UInt8
+    property uGlitchCount : UInt32
+    property uMicClipCount : UInt32
+    property fDuration : Float32
+    property fTSVariance : Float32
+    property fTSDriftRate : Float32
+    property fVoiceLevel : Float32
+    property fNoiseLevel : Float32
+    property fERLE : Float32
+    property fAvgERLE : Float32
+    property dwReserved : UInt32
+    def initialize(@i64Timestamp : Int64, @convergence_flag : UInt8, @mic_clipped_flag : UInt8, @mic_silence_flag : UInt8, @pstv_feadback_flag : UInt8, @spk_clipped_flag : UInt8, @spk_mute_flag : UInt8, @glitch_flag : UInt8, @double_talk_flag : UInt8, @uGlitchCount : UInt32, @uMicClipCount : UInt32, @fDuration : Float32, @fTSVariance : Float32, @fTSDriftRate : Float32, @fVoiceLevel : Float32, @fNoiseLevel : Float32, @fERLE : Float32, @fAvgERLE : Float32, @dwReserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct TOC_DESCRIPTOR
+    property guidID : LibC::GUID
+    property wStreamNumber : UInt16
+    property guidType : LibC::GUID
+    property wLanguageIndex : UInt16
+    def initialize(@guidID : LibC::GUID, @wStreamNumber : UInt16, @guidType : LibC::GUID, @wLanguageIndex : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct TOC_ENTRY_DESCRIPTOR
+    property qwStartTime : UInt64
+    property qwEndTime : UInt64
+    property qwStartPacketOffset : UInt64
+    property qwEndPacketOffset : UInt64
+    property qwRepresentativeFrameTime : UInt64
+    def initialize(@qwStartTime : UInt64, @qwEndTime : UInt64, @qwStartPacketOffset : UInt64, @qwEndPacketOffset : UInt64, @qwRepresentativeFrameTime : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct DXVA_AYUVsample2
+    property bCrValue : UInt8
+    property bCbValue : UInt8
+    property bY_Value : UInt8
+    property bSampleAlpha8 : UInt8
+    def initialize(@bCrValue : UInt8, @bCbValue : UInt8, @bY_Value : UInt8, @bSampleAlpha8 : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct DXVA_BufferDescription
+    property dwTypeIndex : UInt32
+    property dwBufferIndex : UInt32
+    property dwDataOffset : UInt32
+    property dwDataSize : UInt32
+    property dwFirstMBaddress : UInt32
+    property dwNumMBsInBuffer : UInt32
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property dwStride : UInt32
+    property dwReservedBits : UInt32
+    def initialize(@dwTypeIndex : UInt32, @dwBufferIndex : UInt32, @dwDataOffset : UInt32, @dwDataSize : UInt32, @dwFirstMBaddress : UInt32, @dwNumMBsInBuffer : UInt32, @dwWidth : UInt32, @dwHeight : UInt32, @dwStride : UInt32, @dwReservedBits : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DXVA_ConfigPictureDecode
+    property dwFunction : UInt32
+    property dwReservedBits : UInt32[3]
+    property guidConfigBitstreamEncryption : LibC::GUID
+    property guidConfigMBcontrolEncryption : LibC::GUID
+    property guidConfigResidDiffEncryption : LibC::GUID
+    property bConfigBitstreamRaw : UInt8
+    property bConfigMBcontrolRasterOrder : UInt8
+    property bConfigResidDiffHost : UInt8
+    property bConfigSpatialResid8 : UInt8
+    property bConfigResid8Subtraction : UInt8
+    property bConfigSpatialHost8or9Clipping : UInt8
+    property bConfigSpatialResidInterleaved : UInt8
+    property bConfigIntraResidUnsigned : UInt8
+    property bConfigResidDiffAccelerator : UInt8
+    property bConfigHostInverseScan : UInt8
+    property bConfigSpecificIDCT : UInt8
+    property bConfig4GroupedCoefs : UInt8
+    def initialize(@dwFunction : UInt32, @dwReservedBits : UInt32[3], @guidConfigBitstreamEncryption : LibC::GUID, @guidConfigMBcontrolEncryption : LibC::GUID, @guidConfigResidDiffEncryption : LibC::GUID, @bConfigBitstreamRaw : UInt8, @bConfigMBcontrolRasterOrder : UInt8, @bConfigResidDiffHost : UInt8, @bConfigSpatialResid8 : UInt8, @bConfigResid8Subtraction : UInt8, @bConfigSpatialHost8or9Clipping : UInt8, @bConfigSpatialResidInterleaved : UInt8, @bConfigIntraResidUnsigned : UInt8, @bConfigResidDiffAccelerator : UInt8, @bConfigHostInverseScan : UInt8, @bConfigSpecificIDCT : UInt8, @bConfig4GroupedCoefs : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct DXVA_PictureParameters
+    property wDecodedPictureIndex : UInt16
+    property wDeblockedPictureIndex : UInt16
+    property wForwardRefPictureIndex : UInt16
+    property wBackwardRefPictureIndex : UInt16
+    property wPicWidthInMBminus1 : UInt16
+    property wPicHeightInMBminus1 : UInt16
+    property bMacroblockWidthMinus1 : UInt8
+    property bMacroblockHeightMinus1 : UInt8
+    property bBlockWidthMinus1 : UInt8
+    property bBlockHeightMinus1 : UInt8
+    property bBPPminus1 : UInt8
+    property bPicStructure : UInt8
+    property bSecondField : UInt8
+    property bPicIntra : UInt8
+    property bPicBackwardPrediction : UInt8
+    property bBidirectionalAveragingMode : UInt8
+    property bMVprecisionAndChromaRelation : UInt8
+    property bChromaFormat : UInt8
+    property bPicScanFixed : UInt8
+    property bPicScanMethod : UInt8
+    property bPicReadbackRequests : UInt8
+    property bRcontrol : UInt8
+    property bPicSpatialResid8 : UInt8
+    property bPicOverflowBlocks : UInt8
+    property bPicExtrapolation : UInt8
+    property bPicDeblocked : UInt8
+    property bPicDeblockConfined : UInt8
+    property bPic4MVallowed : UInt8
+    property bPicOBMC : UInt8
+    property bPicBinPB : UInt8
+    property bMV_RPS : UInt8
+    property bReservedBits : UInt8
+    property wBitstreamFcodes : UInt16
+    property wBitstreamPCEelements : UInt16
+    property bBitstreamConcealmentNeed : UInt8
+    property bBitstreamConcealmentMethod : UInt8
+    def initialize(@wDecodedPictureIndex : UInt16, @wDeblockedPictureIndex : UInt16, @wForwardRefPictureIndex : UInt16, @wBackwardRefPictureIndex : UInt16, @wPicWidthInMBminus1 : UInt16, @wPicHeightInMBminus1 : UInt16, @bMacroblockWidthMinus1 : UInt8, @bMacroblockHeightMinus1 : UInt8, @bBlockWidthMinus1 : UInt8, @bBlockHeightMinus1 : UInt8, @bBPPminus1 : UInt8, @bPicStructure : UInt8, @bSecondField : UInt8, @bPicIntra : UInt8, @bPicBackwardPrediction : UInt8, @bBidirectionalAveragingMode : UInt8, @bMVprecisionAndChromaRelation : UInt8, @bChromaFormat : UInt8, @bPicScanFixed : UInt8, @bPicScanMethod : UInt8, @bPicReadbackRequests : UInt8, @bRcontrol : UInt8, @bPicSpatialResid8 : UInt8, @bPicOverflowBlocks : UInt8, @bPicExtrapolation : UInt8, @bPicDeblocked : UInt8, @bPicDeblockConfined : UInt8, @bPic4MVallowed : UInt8, @bPicOBMC : UInt8, @bPicBinPB : UInt8, @bMV_RPS : UInt8, @bReservedBits : UInt8, @wBitstreamFcodes : UInt16, @wBitstreamPCEelements : UInt16, @bBitstreamConcealmentNeed : UInt8, @bBitstreamConcealmentMethod : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct DXVAUncompDataInfo
+    property uncomp_width : UInt32
+    property uncomp_height : UInt32
+    property uncomp_format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    def initialize(@uncomp_width : UInt32, @uncomp_height : UInt32, @uncomp_format : Win32cr::Graphics::Direct3D9::D3DFORMAT)
+    end
+  end
+
+  @[Extern]
+  struct DXVACompBufferInfo
+    property num_comp_buffers : UInt32
+    property width_to_create : UInt32
+    property height_to_create : UInt32
+    property bytes_to_allocate : UInt32
+    property usage : UInt32
+    property pool : Win32cr::Graphics::Direct3D9::D3DPOOL
+    property format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    def initialize(@num_comp_buffers : UInt32, @width_to_create : UInt32, @height_to_create : UInt32, @bytes_to_allocate : UInt32, @usage : UInt32, @pool : Win32cr::Graphics::Direct3D9::D3DPOOL, @format : Win32cr::Graphics::Direct3D9::D3DFORMAT)
+    end
+  end
+
+  @[Extern]
+  struct DXVABufferInfo
+    property pCompSurface : Void*
+    property data_offset : UInt32
+    property data_size : UInt32
+    def initialize(@pCompSurface : Void*, @data_offset : UInt32, @data_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DXVA_ExtendedFormat
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DXVA_Frequency
+    property numerator : UInt32
+    property denominator : UInt32
+    def initialize(@numerator : UInt32, @denominator : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DXVA_VideoDesc
+    property size : UInt32
+    property sample_width : UInt32
+    property sample_height : UInt32
+    property sample_format : UInt32
+    property d3dFormat : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property input_sample_freq : Win32cr::Media::MediaFoundation::DXVA_Frequency
+    property output_frame_freq : Win32cr::Media::MediaFoundation::DXVA_Frequency
+    def initialize(@size : UInt32, @sample_width : UInt32, @sample_height : UInt32, @sample_format : UInt32, @d3dFormat : Win32cr::Graphics::Direct3D9::D3DFORMAT, @input_sample_freq : Win32cr::Media::MediaFoundation::DXVA_Frequency, @output_frame_freq : Win32cr::Media::MediaFoundation::DXVA_Frequency)
+    end
+  end
+
+  @[Extern]
+  struct DXVA_VideoSample
+    property rtStart : Int64
+    property rtEnd : Int64
+    property sample_format : Win32cr::Media::MediaFoundation::DXVA_SampleFormat
+    property lpDDSSrcSurface : Void*
+    def initialize(@rtStart : Int64, @rtEnd : Int64, @sample_format : Win32cr::Media::MediaFoundation::DXVA_SampleFormat, @lpDDSSrcSurface : Void*)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record DXVA_VideoSample2,
-    size : UInt32,
-    reserved : UInt32,
-    rtStart : Int64,
-    rtEnd : Int64,
-    sample_format : UInt32,
-    sample_flags : UInt32,
-    lpDDSSrcSurface : Void*,
-    rcSrc : Win32cr::Foundation::RECT,
-    rcDst : Win32cr::Foundation::RECT,
-    palette : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2[16]
+  struct DXVA_VideoSample2
+    property size : UInt32
+    property reserved : UInt32
+    property rtStart : Int64
+    property rtEnd : Int64
+    property sample_format : UInt32
+    property sample_flags : UInt32
+    property lpDDSSrcSurface : Void*
+    property rcSrc : Win32cr::Foundation::RECT
+    property rcDst : Win32cr::Foundation::RECT
+    property palette : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2[16]
+    def initialize(@size : UInt32, @reserved : UInt32, @rtStart : Int64, @rtEnd : Int64, @sample_format : UInt32, @sample_flags : UInt32, @lpDDSSrcSurface : Void*, @rcSrc : Win32cr::Foundation::RECT, @rcDst : Win32cr::Foundation::RECT, @palette : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2[16])
+    end
+  end
   {% end %}
 
   @[Extern]
-  record DXVA_DeinterlaceCaps,
-    size : UInt32,
-    num_previous_output_frames : UInt32,
-    input_pool : UInt32,
-    num_forward_ref_samples : UInt32,
-    num_backward_ref_samples : UInt32,
-    d3dOutputFormat : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    video_processing_caps : Win32cr::Media::MediaFoundation::DXVA_VideoProcessCaps,
-    deinterlace_technology : Win32cr::Media::MediaFoundation::DXVA_DeinterlaceTech
+  struct DXVA_DeinterlaceCaps
+    property size : UInt32
+    property num_previous_output_frames : UInt32
+    property input_pool : UInt32
+    property num_forward_ref_samples : UInt32
+    property num_backward_ref_samples : UInt32
+    property d3dOutputFormat : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property video_processing_caps : Win32cr::Media::MediaFoundation::DXVA_VideoProcessCaps
+    property deinterlace_technology : Win32cr::Media::MediaFoundation::DXVA_DeinterlaceTech
+    def initialize(@size : UInt32, @num_previous_output_frames : UInt32, @input_pool : UInt32, @num_forward_ref_samples : UInt32, @num_backward_ref_samples : UInt32, @d3dOutputFormat : Win32cr::Graphics::Direct3D9::D3DFORMAT, @video_processing_caps : Win32cr::Media::MediaFoundation::DXVA_VideoProcessCaps, @deinterlace_technology : Win32cr::Media::MediaFoundation::DXVA_DeinterlaceTech)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record DXVA_VideoSample32,
-    rtStart : Int64,
-    rtEnd : Int64,
-    sample_format : UInt32,
-    sample_flags : UInt32,
-    lpDDSSrcSurface : UInt32,
-    rcSrc : Win32cr::Foundation::RECT,
-    rcDst : Win32cr::Foundation::RECT,
-    palette : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2[16]
+  struct DXVA_VideoSample32
+    property rtStart : Int64
+    property rtEnd : Int64
+    property sample_format : UInt32
+    property sample_flags : UInt32
+    property lpDDSSrcSurface : UInt32
+    property rcSrc : Win32cr::Foundation::RECT
+    property rcDst : Win32cr::Foundation::RECT
+    property palette : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2[16]
+    def initialize(@rtStart : Int64, @rtEnd : Int64, @sample_format : UInt32, @sample_flags : UInt32, @lpDDSSrcSurface : UInt32, @rcSrc : Win32cr::Foundation::RECT, @rcDst : Win32cr::Foundation::RECT, @palette : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2[16])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record DXVA_DeinterlaceBltEx32,
-    size : UInt32,
-    background_color : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2,
-    rcTarget : Win32cr::Foundation::RECT,
-    rtTarget : Int64,
-    num_source_surfaces : UInt32,
-    alpha : Float32,
-    source : Win32cr::Media::MediaFoundation::DXVA_VideoSample32[32],
-    destination_format : UInt32,
-    destination_flags : UInt32
+  struct DXVA_DeinterlaceBltEx32
+    property size : UInt32
+    property background_color : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2
+    property rcTarget : Win32cr::Foundation::RECT
+    property rtTarget : Int64
+    property num_source_surfaces : UInt32
+    property alpha : Float32
+    property source : Win32cr::Media::MediaFoundation::DXVA_VideoSample32[32]
+    property destination_format : UInt32
+    property destination_flags : UInt32
+    def initialize(@size : UInt32, @background_color : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2, @rcTarget : Win32cr::Foundation::RECT, @rtTarget : Int64, @num_source_surfaces : UInt32, @alpha : Float32, @source : Win32cr::Media::MediaFoundation::DXVA_VideoSample32[32], @destination_format : UInt32, @destination_flags : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record DXVA_DeinterlaceBlt,
-    size : UInt32,
-    reserved : UInt32,
-    rtTarget : Int64,
-    dst_rect : Win32cr::Foundation::RECT,
-    src_rect : Win32cr::Foundation::RECT,
-    num_source_surfaces : UInt32,
-    alpha : Float32,
-    source : Win32cr::Media::MediaFoundation::DXVA_VideoSample[32]
+  struct DXVA_DeinterlaceBlt
+    property size : UInt32
+    property reserved : UInt32
+    property rtTarget : Int64
+    property dst_rect : Win32cr::Foundation::RECT
+    property src_rect : Win32cr::Foundation::RECT
+    property num_source_surfaces : UInt32
+    property alpha : Float32
+    property source : Win32cr::Media::MediaFoundation::DXVA_VideoSample[32]
+    def initialize(@size : UInt32, @reserved : UInt32, @rtTarget : Int64, @dst_rect : Win32cr::Foundation::RECT, @src_rect : Win32cr::Foundation::RECT, @num_source_surfaces : UInt32, @alpha : Float32, @source : Win32cr::Media::MediaFoundation::DXVA_VideoSample[32])
+    end
+  end
 
   @[Extern]
-  record DXVA_DeinterlaceBltEx,
-    size : UInt32,
-    background_color : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2,
-    rcTarget : Win32cr::Foundation::RECT,
-    rtTarget : Int64,
-    num_source_surfaces : UInt32,
-    alpha : Float32,
-    source : Win32cr::Media::MediaFoundation::DXVA_VideoSample2[32],
-    destination_format : UInt32,
-    destination_flags : UInt32
+  struct DXVA_DeinterlaceBltEx
+    property size : UInt32
+    property background_color : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2
+    property rcTarget : Win32cr::Foundation::RECT
+    property rtTarget : Int64
+    property num_source_surfaces : UInt32
+    property alpha : Float32
+    property source : Win32cr::Media::MediaFoundation::DXVA_VideoSample2[32]
+    property destination_format : UInt32
+    property destination_flags : UInt32
+    def initialize(@size : UInt32, @background_color : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2, @rcTarget : Win32cr::Foundation::RECT, @rtTarget : Int64, @num_source_surfaces : UInt32, @alpha : Float32, @source : Win32cr::Media::MediaFoundation::DXVA_VideoSample2[32], @destination_format : UInt32, @destination_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DXVA_DeinterlaceQueryAvailableModes,
-    size : UInt32,
-    num_guids : UInt32,
-    guids : LibC::GUID[32]
+  struct DXVA_DeinterlaceQueryAvailableModes
+    property size : UInt32
+    property num_guids : UInt32
+    property guids : LibC::GUID[32]
+    def initialize(@size : UInt32, @num_guids : UInt32, @guids : LibC::GUID[32])
+    end
+  end
 
   @[Extern]
-  record DXVA_DeinterlaceQueryModeCaps,
-    size : UInt32,
-    guid : LibC::GUID,
-    video_desc : Win32cr::Media::MediaFoundation::DXVA_VideoDesc
+  struct DXVA_DeinterlaceQueryModeCaps
+    property size : UInt32
+    property guid : LibC::GUID
+    property video_desc : Win32cr::Media::MediaFoundation::DXVA_VideoDesc
+    def initialize(@size : UInt32, @guid : LibC::GUID, @video_desc : Win32cr::Media::MediaFoundation::DXVA_VideoDesc)
+    end
+  end
 
   @[Extern]
-  record DXVA_ProcAmpControlCaps,
-    size : UInt32,
-    input_pool : UInt32,
-    d3dOutputFormat : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    proc_amp_control_props : UInt32,
-    video_processing_caps : UInt32
+  struct DXVA_ProcAmpControlCaps
+    property size : UInt32
+    property input_pool : UInt32
+    property d3dOutputFormat : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property proc_amp_control_props : UInt32
+    property video_processing_caps : UInt32
+    def initialize(@size : UInt32, @input_pool : UInt32, @d3dOutputFormat : Win32cr::Graphics::Direct3D9::D3DFORMAT, @proc_amp_control_props : UInt32, @video_processing_caps : UInt32)
+    end
+  end
 
   @[Extern]
-  record DXVA_ProcAmpControlQueryRange,
-    size : UInt32,
-    proc_amp_control_prop : Win32cr::Media::MediaFoundation::DXVA_ProcAmpControlProp,
-    video_desc : Win32cr::Media::MediaFoundation::DXVA_VideoDesc
+  struct DXVA_ProcAmpControlQueryRange
+    property size : UInt32
+    property proc_amp_control_prop : Win32cr::Media::MediaFoundation::DXVA_ProcAmpControlProp
+    property video_desc : Win32cr::Media::MediaFoundation::DXVA_VideoDesc
+    def initialize(@size : UInt32, @proc_amp_control_prop : Win32cr::Media::MediaFoundation::DXVA_ProcAmpControlProp, @video_desc : Win32cr::Media::MediaFoundation::DXVA_VideoDesc)
+    end
+  end
 
   @[Extern]
-  record DXVA_VideoPropertyRange,
-    min_value : Float32,
-    max_value : Float32,
-    default_value : Float32,
-    step_size : Float32
+  struct DXVA_VideoPropertyRange
+    property min_value : Float32
+    property max_value : Float32
+    property default_value : Float32
+    property step_size : Float32
+    def initialize(@min_value : Float32, @max_value : Float32, @default_value : Float32, @step_size : Float32)
+    end
+  end
 
   @[Extern]
-  record DXVA_ProcAmpControlBlt,
-    size : UInt32,
-    dst_rect : Win32cr::Foundation::RECT,
-    src_rect : Win32cr::Foundation::RECT,
-    alpha : Float32,
-    brightness : Float32,
-    contrast : Float32,
-    hue : Float32,
-    saturation : Float32
+  struct DXVA_ProcAmpControlBlt
+    property size : UInt32
+    property dst_rect : Win32cr::Foundation::RECT
+    property src_rect : Win32cr::Foundation::RECT
+    property alpha : Float32
+    property brightness : Float32
+    property contrast : Float32
+    property hue : Float32
+    property saturation : Float32
+    def initialize(@size : UInt32, @dst_rect : Win32cr::Foundation::RECT, @src_rect : Win32cr::Foundation::RECT, @alpha : Float32, @brightness : Float32, @contrast : Float32, @hue : Float32, @saturation : Float32)
+    end
+  end
 
   @[Extern]
-  record DXVA_COPPSignature,
-    signature : UInt8[256]
+  struct DXVA_COPPSignature
+    property signature : UInt8[256]
+    def initialize(@signature : UInt8[256])
+    end
+  end
 
   @[Extern]
-  record DXVA_COPPCommand,
-    macKDI : LibC::GUID,
-    guidCommandID : LibC::GUID,
-    dwSequence : UInt32,
-    cbSizeData : UInt32,
-    command_data : UInt8[4056]
+  struct DXVA_COPPCommand
+    property macKDI : LibC::GUID
+    property guidCommandID : LibC::GUID
+    property dwSequence : UInt32
+    property cbSizeData : UInt32
+    property command_data : UInt8[4056]
+    def initialize(@macKDI : LibC::GUID, @guidCommandID : LibC::GUID, @dwSequence : UInt32, @cbSizeData : UInt32, @command_data : UInt8[4056])
+    end
+  end
 
   @[Extern]
-  record DXVA_COPPStatusInput,
-    rApp : LibC::GUID,
-    guidStatusRequestID : LibC::GUID,
-    dwSequence : UInt32,
-    cbSizeData : UInt32,
-    status_data : UInt8[4056]
+  struct DXVA_COPPStatusInput
+    property rApp : LibC::GUID
+    property guidStatusRequestID : LibC::GUID
+    property dwSequence : UInt32
+    property cbSizeData : UInt32
+    property status_data : UInt8[4056]
+    def initialize(@rApp : LibC::GUID, @guidStatusRequestID : LibC::GUID, @dwSequence : UInt32, @cbSizeData : UInt32, @status_data : UInt8[4056])
+    end
+  end
 
   @[Extern]
-  record DXVA_COPPStatusOutput,
-    macKDI : LibC::GUID,
-    cbSizeData : UInt32,
-    copp_status : UInt8[4076]
+  struct DXVA_COPPStatusOutput
+    property macKDI : LibC::GUID
+    property cbSizeData : UInt32
+    property copp_status : UInt8[4076]
+    def initialize(@macKDI : LibC::GUID, @cbSizeData : UInt32, @copp_status : UInt8[4076])
+    end
+  end
 
   @[Extern]
-  record DXVAHD_RATIONAL,
-    numerator : UInt32,
-    denominator : UInt32
+  struct DXVAHD_RATIONAL
+    property numerator : UInt32
+    property denominator : UInt32
+    def initialize(@numerator : UInt32, @denominator : UInt32)
+    end
+  end
 
   @[Extern]
-  record DXVAHD_COLOR_RGBA,
-    r : Float32,
-    g : Float32,
-    b : Float32,
-    a : Float32
+  struct DXVAHD_COLOR_RGBA
+    property r : Float32
+    property g : Float32
+    property b : Float32
+    property a : Float32
+    def initialize(@r : Float32, @g : Float32, @b : Float32, @a : Float32)
+    end
+  end
 
   @[Extern]
-  record DXVAHD_COLOR_YCbCrA,
-    y : Float32,
-    cb : Float32,
-    cr : Float32,
-    a : Float32
+  struct DXVAHD_COLOR_YCbCrA
+    property y : Float32
+    property cb : Float32
+    property cr : Float32
+    property a : Float32
+    def initialize(@y : Float32, @cb : Float32, @cr : Float32, @a : Float32)
+    end
+  end
 
   @[Extern(union: true)]
-  record DXVAHD_COLOR,
-    rgb : Win32cr::Media::MediaFoundation::DXVAHD_COLOR_RGBA,
-    y_cb_cr : Win32cr::Media::MediaFoundation::DXVAHD_COLOR_YCbCrA
-
-  @[Extern]
-  record DXVAHD_CONTENT_DESC,
-    input_frame_format : Win32cr::Media::MediaFoundation::DXVAHD_FRAME_FORMAT,
-    input_frame_rate : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL,
-    input_width : UInt32,
-    input_height : UInt32,
-    output_frame_rate : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL,
-    output_width : UInt32,
-    output_height : UInt32
-
-  @[Extern]
-  record DXVAHD_VPDEVCAPS,
-    device_type : Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_TYPE,
-    device_caps : UInt32,
-    feature_caps : UInt32,
-    filter_caps : UInt32,
-    input_format_caps : UInt32,
-    input_pool : Win32cr::Graphics::Direct3D9::D3DPOOL,
-    output_format_count : UInt32,
-    input_format_count : UInt32,
-    video_processor_count : UInt32,
-    max_input_streams : UInt32,
-    max_stream_states : UInt32
-
-  @[Extern]
-  record DXVAHD_VPCAPS,
-    vp_guid : LibC::GUID,
-    past_frames : UInt32,
-    future_frames : UInt32,
-    processor_caps : UInt32,
-    i_telecine_caps : UInt32,
-    custom_rate_count : UInt32
-
-  @[Extern]
-  record DXVAHD_CUSTOM_RATE_DATA,
-    custom_rate : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL,
-    output_frames : UInt32,
-    input_interlaced : Win32cr::Foundation::BOOL,
-    input_frames_or_fields : UInt32
-
-  @[Extern]
-  record DXVAHD_FILTER_RANGE_DATA,
-    minimum : Int32,
-    maximum : Int32,
-    default : Int32,
-    multiplier : Float32
-
-  @[Extern]
-  record DXVAHD_BLT_STATE_TARGET_RECT_DATA,
-    enable : Win32cr::Foundation::BOOL,
-    target_rect : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record DXVAHD_BLT_STATE_BACKGROUND_COLOR_DATA,
-    y_cb_cr : Win32cr::Foundation::BOOL,
-    background_color : Win32cr::Media::MediaFoundation::DXVAHD_COLOR
-
-  @[Extern]
-  record DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      value : UInt32 do
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
-
+  struct DXVAHD_COLOR
+    property rgb : Win32cr::Media::MediaFoundation::DXVAHD_COLOR_RGBA
+    property y_cb_cr : Win32cr::Media::MediaFoundation::DXVAHD_COLOR_YCbCrA
+    def initialize(@rgb : Win32cr::Media::MediaFoundation::DXVAHD_COLOR_RGBA, @y_cb_cr : Win32cr::Media::MediaFoundation::DXVAHD_COLOR_YCbCrA)
     end
-
   end
 
   @[Extern]
-  record DXVAHD_BLT_STATE_ALPHA_FILL_DATA,
-    mode : Win32cr::Media::MediaFoundation::DXVAHD_ALPHA_FILL_MODE,
-    stream_number : UInt32
-
-  @[Extern]
-  record DXVAHD_BLT_STATE_CONSTRICTION_DATA,
-    enable : Win32cr::Foundation::BOOL,
-    size : Win32cr::Foundation::SIZE
-
-  @[Extern]
-  record DXVAHD_BLT_STATE_PRIVATE_DATA,
-    guid : LibC::GUID,
-    data_size : UInt32,
-    pData : Void*
-
-  @[Extern]
-  record DXVAHD_STREAM_STATE_D3DFORMAT_DATA,
-    format : Win32cr::Graphics::Direct3D9::D3DFORMAT
-
-  @[Extern]
-  record DXVAHD_STREAM_STATE_FRAME_FORMAT_DATA,
-    frame_format : Win32cr::Media::MediaFoundation::DXVAHD_FRAME_FORMAT
-
-  @[Extern]
-  record DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      value : UInt32 do
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
-
+  struct DXVAHD_CONTENT_DESC
+    property input_frame_format : Win32cr::Media::MediaFoundation::DXVAHD_FRAME_FORMAT
+    property input_frame_rate : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL
+    property input_width : UInt32
+    property input_height : UInt32
+    property output_frame_rate : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL
+    property output_width : UInt32
+    property output_height : UInt32
+    def initialize(@input_frame_format : Win32cr::Media::MediaFoundation::DXVAHD_FRAME_FORMAT, @input_frame_rate : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL, @input_width : UInt32, @input_height : UInt32, @output_frame_rate : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL, @output_width : UInt32, @output_height : UInt32)
     end
-
   end
 
   @[Extern]
-  record DXVAHD_STREAM_STATE_OUTPUT_RATE_DATA,
-    repeat_frame : Win32cr::Foundation::BOOL,
-    output_rate : Win32cr::Media::MediaFoundation::DXVAHD_OUTPUT_RATE,
-    custom_rate : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL
-
-  @[Extern]
-  record DXVAHD_STREAM_STATE_SOURCE_RECT_DATA,
-    enable : Win32cr::Foundation::BOOL,
-    source_rect : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record DXVAHD_STREAM_STATE_DESTINATION_RECT_DATA,
-    enable : Win32cr::Foundation::BOOL,
-    destination_rect : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record DXVAHD_STREAM_STATE_ALPHA_DATA,
-    enable : Win32cr::Foundation::BOOL,
-    alpha : Float32
-
-  @[Extern]
-  record DXVAHD_STREAM_STATE_PALETTE_DATA,
-    count : UInt32,
-    pEntries : UInt32*
-
-  @[Extern]
-  record DXVAHD_STREAM_STATE_LUMA_KEY_DATA,
-    enable : Win32cr::Foundation::BOOL,
-    lower : Float32,
-    upper : Float32
-
-  @[Extern]
-  record DXVAHD_STREAM_STATE_ASPECT_RATIO_DATA,
-    enable : Win32cr::Foundation::BOOL,
-    source_aspect_ratio : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL,
-    destination_aspect_ratio : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL
-
-  @[Extern]
-  record DXVAHD_STREAM_STATE_FILTER_DATA,
-    enable : Win32cr::Foundation::BOOL,
-    level : Int32
-
-  @[Extern]
-  record DXVAHD_STREAM_STATE_PRIVATE_DATA,
-    guid : LibC::GUID,
-    data_size : UInt32,
-    pData : Void*
-
-  @[Extern]
-  record DXVAHD_STREAM_DATA,
-    enable : Win32cr::Foundation::BOOL,
-    output_index : UInt32,
-    input_frame_or_field : UInt32,
-    past_frames : UInt32,
-    future_frames : UInt32,
-    ppPastSurfaces : Void**,
-    pInputSurface : Void*,
-    ppFutureSurfaces : Void**
-
-  @[Extern]
-  record DXVAHD_STREAM_STATE_PRIVATE_IVTC_DATA,
-    enable : Win32cr::Foundation::BOOL,
-    i_telecine_flags : UInt32,
-    frames : UInt32,
-    input_field : UInt32
-
-  @[Extern]
-  record DXVAHDSW_CALLBACKS,
-    create_device : Win32cr::Media::MediaFoundation::PDXVAHDSW_CreateDevice,
-    propose_video_private_format : Win32cr::Media::MediaFoundation::PDXVAHDSW_ProposeVideoPrivateFormat,
-    get_video_processor_device_caps : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorDeviceCaps,
-    get_video_processor_output_formats : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorOutputFormats,
-    get_video_processor_input_formats : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorInputFormats,
-    get_video_processor_caps : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorCaps,
-    get_video_processor_custom_rates : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorCustomRates,
-    get_video_processor_filter_range : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorFilterRange,
-    destroy_device : Win32cr::Media::MediaFoundation::PDXVAHDSW_DestroyDevice,
-    create_video_processor : Win32cr::Media::MediaFoundation::PDXVAHDSW_CreateVideoProcessor,
-    set_video_process_blt_state : Win32cr::Media::MediaFoundation::PDXVAHDSW_SetVideoProcessBltState,
-    get_video_process_blt_state_private : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessBltStatePrivate,
-    set_video_process_stream_state : Win32cr::Media::MediaFoundation::PDXVAHDSW_SetVideoProcessStreamState,
-    get_video_process_stream_state_private : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessStreamStatePrivate,
-    video_process_blt_hd : Win32cr::Media::MediaFoundation::PDXVAHDSW_VideoProcessBltHD,
-    destroy_video_processor : Win32cr::Media::MediaFoundation::PDXVAHDSW_DestroyVideoProcessor
-
-  @[Extern]
-  record DXVAHDETW_CREATEVIDEOPROCESSOR,
-    pObject : UInt64,
-    pD3D9Ex : UInt64,
-    vp_guid : LibC::GUID
-
-  @[Extern]
-  record DXVAHDETW_VIDEOPROCESSBLTSTATE,
-    pObject : UInt64,
-    state : Win32cr::Media::MediaFoundation::DXVAHD_BLT_STATE,
-    data_size : UInt32,
-    set_state : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DXVAHDETW_VIDEOPROCESSSTREAMSTATE,
-    pObject : UInt64,
-    stream_number : UInt32,
-    state : Win32cr::Media::MediaFoundation::DXVAHD_STREAM_STATE,
-    data_size : UInt32,
-    set_state : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DXVAHDETW_VIDEOPROCESSBLTHD,
-    pObject : UInt64,
-    pOutputSurface : UInt64,
-    target_rect : Win32cr::Foundation::RECT,
-    output_format : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    color_space : UInt32,
-    output_frame : UInt32,
-    stream_count : UInt32,
-    enter : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DXVAHDETW_VIDEOPROCESSBLTHD_STREAM,
-    pObject : UInt64,
-    pInputSurface : UInt64,
-    source_rect : Win32cr::Foundation::RECT,
-    destination_rect : Win32cr::Foundation::RECT,
-    input_format : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    frame_format : Win32cr::Media::MediaFoundation::DXVAHD_FRAME_FORMAT,
-    color_space : UInt32,
-    stream_number : UInt32,
-    output_index : UInt32,
-    input_frame_or_field : UInt32,
-    past_frames : UInt32,
-    future_frames : UInt32
-
-  @[Extern]
-  record DXVAHDETW_DESTROYVIDEOPROCESSOR,
-    pObject : UInt64
-
-  @[Extern]
-  record DXVA2_ExtendedFormat,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      value : UInt32 do
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
-
+  struct DXVAHD_VPDEVCAPS
+    property device_type : Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_TYPE
+    property device_caps : UInt32
+    property feature_caps : UInt32
+    property filter_caps : UInt32
+    property input_format_caps : UInt32
+    property input_pool : Win32cr::Graphics::Direct3D9::D3DPOOL
+    property output_format_count : UInt32
+    property input_format_count : UInt32
+    property video_processor_count : UInt32
+    property max_input_streams : UInt32
+    property max_stream_states : UInt32
+    def initialize(@device_type : Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_TYPE, @device_caps : UInt32, @feature_caps : UInt32, @filter_caps : UInt32, @input_format_caps : UInt32, @input_pool : Win32cr::Graphics::Direct3D9::D3DPOOL, @output_format_count : UInt32, @input_format_count : UInt32, @video_processor_count : UInt32, @max_input_streams : UInt32, @max_stream_states : UInt32)
     end
-
   end
 
   @[Extern]
-  record DXVA2_Frequency,
-    numerator : UInt32,
-    denominator : UInt32
-
-  @[Extern]
-  record DXVA2_VideoDesc,
-    sample_width : UInt32,
-    sample_height : UInt32,
-    sample_format : Win32cr::Media::MediaFoundation::DXVA2_ExtendedFormat,
-    format : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    input_sample_freq : Win32cr::Media::MediaFoundation::DXVA2_Frequency,
-    output_frame_freq : Win32cr::Media::MediaFoundation::DXVA2_Frequency,
-    uab_protection_level : UInt32,
-    reserved : UInt32
-
-  @[Extern]
-  record DXVA2_VideoProcessorCaps,
-    device_caps : UInt32,
-    input_pool : Win32cr::Graphics::Direct3D9::D3DPOOL,
-    num_forward_ref_samples : UInt32,
-    num_backward_ref_samples : UInt32,
-    reserved : UInt32,
-    deinterlace_technology : UInt32,
-    proc_amp_control_caps : UInt32,
-    video_processor_operations : UInt32,
-    noise_filter_technology : UInt32,
-    detail_filter_technology : UInt32
-
-  @[Extern]
-  record DXVA2_Fixed32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      ll : Int32 do
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      record Anonymous_e__Struct_,
-        fraction : UInt16,
-        value : Int16
-
+  struct DXVAHD_VPCAPS
+    property vp_guid : LibC::GUID
+    property past_frames : UInt32
+    property future_frames : UInt32
+    property processor_caps : UInt32
+    property i_telecine_caps : UInt32
+    property custom_rate_count : UInt32
+    def initialize(@vp_guid : LibC::GUID, @past_frames : UInt32, @future_frames : UInt32, @processor_caps : UInt32, @i_telecine_caps : UInt32, @custom_rate_count : UInt32)
     end
-
   end
 
   @[Extern]
-  record DXVA2_AYUVSample8,
-    cr : UInt8,
-    cb : UInt8,
-    y : UInt8,
-    alpha : UInt8
+  struct DXVAHD_CUSTOM_RATE_DATA
+    property custom_rate : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL
+    property output_frames : UInt32
+    property input_interlaced : Win32cr::Foundation::BOOL
+    property input_frames_or_fields : UInt32
+    def initialize(@custom_rate : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL, @output_frames : UInt32, @input_interlaced : Win32cr::Foundation::BOOL, @input_frames_or_fields : UInt32)
+    end
+  end
 
   @[Extern]
-  record DXVA2_AYUVSample16,
-    cr : UInt16,
-    cb : UInt16,
-    y : UInt16,
-    alpha : UInt16
+  struct DXVAHD_FILTER_RANGE_DATA
+    property minimum : Int32
+    property maximum : Int32
+    property default : Int32
+    property multiplier : Float32
+    def initialize(@minimum : Int32, @maximum : Int32, @default : Int32, @multiplier : Float32)
+    end
+  end
 
   @[Extern]
-  record DXVA2_VideoSample,
-    start : Int64,
-    end__ : Int64,
-    sample_format : Win32cr::Media::MediaFoundation::DXVA2_ExtendedFormat,
-    src_surface : Void*,
-    src_rect : Win32cr::Foundation::RECT,
-    dst_rect : Win32cr::Foundation::RECT,
-    pal : Win32cr::Media::MediaFoundation::DXVA2_AYUVSample8[16],
-    planar_alpha : Win32cr::Media::MediaFoundation::DXVA2_Fixed32,
-    sample_data : UInt32
+  struct DXVAHD_BLT_STATE_TARGET_RECT_DATA
+    property enable : Win32cr::Foundation::BOOL
+    property target_rect : Win32cr::Foundation::RECT
+    def initialize(@enable : Win32cr::Foundation::BOOL, @target_rect : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record DXVA2_ValueRange,
-    min_value : Win32cr::Media::MediaFoundation::DXVA2_Fixed32,
-    max_value : Win32cr::Media::MediaFoundation::DXVA2_Fixed32,
-    default_value : Win32cr::Media::MediaFoundation::DXVA2_Fixed32,
-    step_size : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+  struct DXVAHD_BLT_STATE_BACKGROUND_COLOR_DATA
+    property y_cb_cr : Win32cr::Foundation::BOOL
+    property background_color : Win32cr::Media::MediaFoundation::DXVAHD_COLOR
+    def initialize(@y_cb_cr : Win32cr::Foundation::BOOL, @background_color : Win32cr::Media::MediaFoundation::DXVAHD_COLOR)
+    end
+  end
 
   @[Extern]
-  record DXVA2_ProcAmpValues,
-    brightness : Win32cr::Media::MediaFoundation::DXVA2_Fixed32,
-    contrast : Win32cr::Media::MediaFoundation::DXVA2_Fixed32,
-    hue : Win32cr::Media::MediaFoundation::DXVA2_Fixed32,
-    saturation : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+  struct DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property value : UInt32
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @value : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record DXVA2_FilterValues,
-    level : Win32cr::Media::MediaFoundation::DXVA2_Fixed32,
-    threshold : Win32cr::Media::MediaFoundation::DXVA2_Fixed32,
-    radius : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+  struct DXVAHD_BLT_STATE_ALPHA_FILL_DATA
+    property mode : Win32cr::Media::MediaFoundation::DXVAHD_ALPHA_FILL_MODE
+    property stream_number : UInt32
+    def initialize(@mode : Win32cr::Media::MediaFoundation::DXVAHD_ALPHA_FILL_MODE, @stream_number : UInt32)
+    end
+  end
 
   @[Extern]
-  record DXVA2_VideoProcessBltParams,
-    target_frame : Int64,
-    target_rect : Win32cr::Foundation::RECT,
-    constriction_size : Win32cr::Foundation::SIZE,
-    streaming_flags : UInt32,
-    background_color : Win32cr::Media::MediaFoundation::DXVA2_AYUVSample16,
-    dest_format : Win32cr::Media::MediaFoundation::DXVA2_ExtendedFormat,
-    proc_amp_values : Win32cr::Media::MediaFoundation::DXVA2_ProcAmpValues,
-    alpha : Win32cr::Media::MediaFoundation::DXVA2_Fixed32,
-    noise_filter_luma : Win32cr::Media::MediaFoundation::DXVA2_FilterValues,
-    noise_filter_chroma : Win32cr::Media::MediaFoundation::DXVA2_FilterValues,
-    detail_filter_luma : Win32cr::Media::MediaFoundation::DXVA2_FilterValues,
-    detail_filter_chroma : Win32cr::Media::MediaFoundation::DXVA2_FilterValues,
-    dest_data : UInt32
+  struct DXVAHD_BLT_STATE_CONSTRICTION_DATA
+    property enable : Win32cr::Foundation::BOOL
+    property size : Win32cr::Foundation::SIZE
+    def initialize(@enable : Win32cr::Foundation::BOOL, @size : Win32cr::Foundation::SIZE)
+    end
+  end
 
   @[Extern]
-  record DXVA2_ConfigPictureDecode,
-    guidConfigBitstreamEncryption : LibC::GUID,
-    guidConfigMBcontrolEncryption : LibC::GUID,
-    guidConfigResidDiffEncryption : LibC::GUID,
-    config_bitstream_raw : UInt32,
-    config_m_bcontrol_raster_order : UInt32,
-    config_resid_diff_host : UInt32,
-    config_spatial_resid8 : UInt32,
-    config_resid8_subtraction : UInt32,
-    config_spatial_host8or9_clipping : UInt32,
-    config_spatial_resid_interleaved : UInt32,
-    config_intra_resid_unsigned : UInt32,
-    config_resid_diff_accelerator : UInt32,
-    config_host_inverse_scan : UInt32,
-    config_specific_idct : UInt32,
-    config4_grouped_coefs : UInt32,
-    config_min_render_target_buff_count : UInt16,
-    config_decoder_specific : UInt16
+  struct DXVAHD_BLT_STATE_PRIVATE_DATA
+    property guid : LibC::GUID
+    property data_size : UInt32
+    property pData : Void*
+    def initialize(@guid : LibC::GUID, @data_size : UInt32, @pData : Void*)
+    end
+  end
 
   @[Extern]
-  record DXVA2_DecodeBufferDesc,
-    compressed_buffer_type : Win32cr::Media::MediaFoundation::DXVA2_BufferfType,
-    buffer_index : UInt32,
-    data_offset : UInt32,
-    data_size : UInt32,
-    first_m_baddress : UInt32,
-    num_m_bs_in_buffer : UInt32,
-    width : UInt32,
-    height : UInt32,
-    stride : UInt32,
-    reserved_bits : UInt32,
-    pvPVPState : Void*
+  struct DXVAHD_STREAM_STATE_D3DFORMAT_DATA
+    property format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    def initialize(@format : Win32cr::Graphics::Direct3D9::D3DFORMAT)
+    end
+  end
 
   @[Extern]
-  record DXVA2_AES_CTR_IV,
-    iv : UInt64,
-    count : UInt64
+  struct DXVAHD_STREAM_STATE_FRAME_FORMAT_DATA
+    property frame_format : Win32cr::Media::MediaFoundation::DXVAHD_FRAME_FORMAT
+    def initialize(@frame_format : Win32cr::Media::MediaFoundation::DXVAHD_FRAME_FORMAT)
+    end
+  end
 
   @[Extern]
-  record DXVA2_DecodeExtensionData,
-    function : UInt32,
-    pPrivateInputData : Void*,
-    private_input_data_size : UInt32,
-    pPrivateOutputData : Void*,
-    private_output_data_size : UInt32
+  struct DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property value : UInt32
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @value : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record DXVA2_DecodeExecuteParams,
-    num_comp_buffers : UInt32,
-    pCompressedBuffers : Win32cr::Media::MediaFoundation::DXVA2_DecodeBufferDesc*,
-    pExtensionData : Win32cr::Media::MediaFoundation::DXVA2_DecodeExtensionData*
+  struct DXVAHD_STREAM_STATE_OUTPUT_RATE_DATA
+    property repeat_frame : Win32cr::Foundation::BOOL
+    property output_rate : Win32cr::Media::MediaFoundation::DXVAHD_OUTPUT_RATE
+    property custom_rate : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL
+    def initialize(@repeat_frame : Win32cr::Foundation::BOOL, @output_rate : Win32cr::Media::MediaFoundation::DXVAHD_OUTPUT_RATE, @custom_rate : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL)
+    end
+  end
 
   @[Extern]
-  record OPM_RANDOM_NUMBER,
-    abRandomNumber : UInt8[16]
+  struct DXVAHD_STREAM_STATE_SOURCE_RECT_DATA
+    property enable : Win32cr::Foundation::BOOL
+    property source_rect : Win32cr::Foundation::RECT
+    def initialize(@enable : Win32cr::Foundation::BOOL, @source_rect : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record OPM_OMAC,
-    abOMAC : UInt8[16]
+  struct DXVAHD_STREAM_STATE_DESTINATION_RECT_DATA
+    property enable : Win32cr::Foundation::BOOL
+    property destination_rect : Win32cr::Foundation::RECT
+    def initialize(@enable : Win32cr::Foundation::BOOL, @destination_rect : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record OPM_ENCRYPTED_INITIALIZATION_PARAMETERS,
-    abEncryptedInitializationParameters : UInt8[256]
+  struct DXVAHD_STREAM_STATE_ALPHA_DATA
+    property enable : Win32cr::Foundation::BOOL
+    property alpha : Float32
+    def initialize(@enable : Win32cr::Foundation::BOOL, @alpha : Float32)
+    end
+  end
 
   @[Extern]
-  record OPM_GET_INFO_PARAMETERS,
-    omac : Win32cr::Media::MediaFoundation::OPM_OMAC,
-    rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER,
-    guidInformation : LibC::GUID,
-    ulSequenceNumber : UInt32,
-    cbParametersSize : UInt32,
-    abParameters : UInt8[4056]
+  struct DXVAHD_STREAM_STATE_PALETTE_DATA
+    property count : UInt32
+    property pEntries : UInt32*
+    def initialize(@count : UInt32, @pEntries : UInt32*)
+    end
+  end
 
   @[Extern]
-  record OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS,
-    rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER,
-    guidInformation : LibC::GUID,
-    ulSequenceNumber : UInt32,
-    cbParametersSize : UInt32,
-    abParameters : UInt8[4056]
+  struct DXVAHD_STREAM_STATE_LUMA_KEY_DATA
+    property enable : Win32cr::Foundation::BOOL
+    property lower : Float32
+    property upper : Float32
+    def initialize(@enable : Win32cr::Foundation::BOOL, @lower : Float32, @upper : Float32)
+    end
+  end
 
   @[Extern]
-  record OPM_HDCP_KEY_SELECTION_VECTOR,
-    abKeySelectionVector : UInt8[5]
+  struct DXVAHD_STREAM_STATE_ASPECT_RATIO_DATA
+    property enable : Win32cr::Foundation::BOOL
+    property source_aspect_ratio : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL
+    property destination_aspect_ratio : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL
+    def initialize(@enable : Win32cr::Foundation::BOOL, @source_aspect_ratio : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL, @destination_aspect_ratio : Win32cr::Media::MediaFoundation::DXVAHD_RATIONAL)
+    end
+  end
 
   @[Extern]
-  record OPM_CONNECTED_HDCP_DEVICE_INFORMATION,
-    rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER,
-    ulStatusFlags : UInt32,
-    ulHDCPFlags : UInt32,
-    ksvB : Win32cr::Media::MediaFoundation::OPM_HDCP_KEY_SELECTION_VECTOR,
-    reserved : UInt8[11],
-    reserved2 : UInt8[16],
-    reserved3 : UInt8[16]
+  struct DXVAHD_STREAM_STATE_FILTER_DATA
+    property enable : Win32cr::Foundation::BOOL
+    property level : Int32
+    def initialize(@enable : Win32cr::Foundation::BOOL, @level : Int32)
+    end
+  end
 
   @[Extern]
-  record OPM_REQUESTED_INFORMATION,
-    omac : Win32cr::Media::MediaFoundation::OPM_OMAC,
-    cbRequestedInformationSize : UInt32,
-    abRequestedInformation : UInt8[4076]
+  struct DXVAHD_STREAM_STATE_PRIVATE_DATA
+    property guid : LibC::GUID
+    property data_size : UInt32
+    property pData : Void*
+    def initialize(@guid : LibC::GUID, @data_size : UInt32, @pData : Void*)
+    end
+  end
 
   @[Extern]
-  record OPM_STANDARD_INFORMATION,
-    rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER,
-    ulStatusFlags : UInt32,
-    ulInformation : UInt32,
-    ulReserved : UInt32,
-    ulReserved2 : UInt32
+  struct DXVAHD_STREAM_DATA
+    property enable : Win32cr::Foundation::BOOL
+    property output_index : UInt32
+    property input_frame_or_field : UInt32
+    property past_frames : UInt32
+    property future_frames : UInt32
+    property ppPastSurfaces : Void**
+    property pInputSurface : Void*
+    property ppFutureSurfaces : Void**
+    def initialize(@enable : Win32cr::Foundation::BOOL, @output_index : UInt32, @input_frame_or_field : UInt32, @past_frames : UInt32, @future_frames : UInt32, @ppPastSurfaces : Void**, @pInputSurface : Void*, @ppFutureSurfaces : Void**)
+    end
+  end
 
   @[Extern]
-  record OPM_ACTUAL_OUTPUT_FORMAT,
-    rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER,
-    ulStatusFlags : UInt32,
-    ulDisplayWidth : UInt32,
-    ulDisplayHeight : UInt32,
-    dsfSampleInterleaveFormat : Win32cr::Media::MediaFoundation::DXVA2_SampleFormat,
-    d3dFormat : Win32cr::Graphics::Direct3D9::D3DFORMAT,
-    ulFrequencyNumerator : UInt32,
-    ulFrequencyDenominator : UInt32
+  struct DXVAHD_STREAM_STATE_PRIVATE_IVTC_DATA
+    property enable : Win32cr::Foundation::BOOL
+    property i_telecine_flags : UInt32
+    property frames : UInt32
+    property input_field : UInt32
+    def initialize(@enable : Win32cr::Foundation::BOOL, @i_telecine_flags : UInt32, @frames : UInt32, @input_field : UInt32)
+    end
+  end
 
   @[Extern]
-  record OPM_ACP_AND_CGMSA_SIGNALING,
-    rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER,
-    ulStatusFlags : UInt32,
-    ulAvailableTVProtectionStandards : UInt32,
-    ulActiveTVProtectionStandard : UInt32,
-    ulReserved : UInt32,
-    ulAspectRatioValidMask1 : UInt32,
-    ulAspectRatioData1 : UInt32,
-    ulAspectRatioValidMask2 : UInt32,
-    ulAspectRatioData2 : UInt32,
-    ulAspectRatioValidMask3 : UInt32,
-    ulAspectRatioData3 : UInt32,
-    ulReserved2 : UInt32[4],
-    ulReserved3 : UInt32[4]
+  struct DXVAHDSW_CALLBACKS
+    property create_device : Win32cr::Media::MediaFoundation::PDXVAHDSW_CreateDevice
+    property propose_video_private_format : Win32cr::Media::MediaFoundation::PDXVAHDSW_ProposeVideoPrivateFormat
+    property get_video_processor_device_caps : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorDeviceCaps
+    property get_video_processor_output_formats : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorOutputFormats
+    property get_video_processor_input_formats : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorInputFormats
+    property get_video_processor_caps : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorCaps
+    property get_video_processor_custom_rates : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorCustomRates
+    property get_video_processor_filter_range : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorFilterRange
+    property destroy_device : Win32cr::Media::MediaFoundation::PDXVAHDSW_DestroyDevice
+    property create_video_processor : Win32cr::Media::MediaFoundation::PDXVAHDSW_CreateVideoProcessor
+    property set_video_process_blt_state : Win32cr::Media::MediaFoundation::PDXVAHDSW_SetVideoProcessBltState
+    property get_video_process_blt_state_private : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessBltStatePrivate
+    property set_video_process_stream_state : Win32cr::Media::MediaFoundation::PDXVAHDSW_SetVideoProcessStreamState
+    property get_video_process_stream_state_private : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessStreamStatePrivate
+    property video_process_blt_hd : Win32cr::Media::MediaFoundation::PDXVAHDSW_VideoProcessBltHD
+    property destroy_video_processor : Win32cr::Media::MediaFoundation::PDXVAHDSW_DestroyVideoProcessor
+    def initialize(@create_device : Win32cr::Media::MediaFoundation::PDXVAHDSW_CreateDevice, @propose_video_private_format : Win32cr::Media::MediaFoundation::PDXVAHDSW_ProposeVideoPrivateFormat, @get_video_processor_device_caps : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorDeviceCaps, @get_video_processor_output_formats : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorOutputFormats, @get_video_processor_input_formats : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorInputFormats, @get_video_processor_caps : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorCaps, @get_video_processor_custom_rates : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorCustomRates, @get_video_processor_filter_range : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessorFilterRange, @destroy_device : Win32cr::Media::MediaFoundation::PDXVAHDSW_DestroyDevice, @create_video_processor : Win32cr::Media::MediaFoundation::PDXVAHDSW_CreateVideoProcessor, @set_video_process_blt_state : Win32cr::Media::MediaFoundation::PDXVAHDSW_SetVideoProcessBltState, @get_video_process_blt_state_private : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessBltStatePrivate, @set_video_process_stream_state : Win32cr::Media::MediaFoundation::PDXVAHDSW_SetVideoProcessStreamState, @get_video_process_stream_state_private : Win32cr::Media::MediaFoundation::PDXVAHDSW_GetVideoProcessStreamStatePrivate, @video_process_blt_hd : Win32cr::Media::MediaFoundation::PDXVAHDSW_VideoProcessBltHD, @destroy_video_processor : Win32cr::Media::MediaFoundation::PDXVAHDSW_DestroyVideoProcessor)
+    end
+  end
 
   @[Extern]
-  record OPM_OUTPUT_ID_DATA,
-    rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER,
-    ulStatusFlags : UInt32,
-    output_id : UInt64
+  struct DXVAHDETW_CREATEVIDEOPROCESSOR
+    property pObject : UInt64
+    property pD3D9Ex : UInt64
+    property vp_guid : LibC::GUID
+    def initialize(@pObject : UInt64, @pD3D9Ex : UInt64, @vp_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record OPM_CONFIGURE_PARAMETERS,
-    omac : Win32cr::Media::MediaFoundation::OPM_OMAC,
-    guidSetting : LibC::GUID,
-    ulSequenceNumber : UInt32,
-    cbParametersSize : UInt32,
-    abParameters : UInt8[4056]
+  struct DXVAHDETW_VIDEOPROCESSBLTSTATE
+    property pObject : UInt64
+    property state : Win32cr::Media::MediaFoundation::DXVAHD_BLT_STATE
+    property data_size : UInt32
+    property set_state : Win32cr::Foundation::BOOL
+    def initialize(@pObject : UInt64, @state : Win32cr::Media::MediaFoundation::DXVAHD_BLT_STATE, @data_size : UInt32, @set_state : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record OPM_SET_PROTECTION_LEVEL_PARAMETERS,
-    ulProtectionType : UInt32,
-    ulProtectionLevel : UInt32,
-    reserved : UInt32,
-    reserved2 : UInt32
+  struct DXVAHDETW_VIDEOPROCESSSTREAMSTATE
+    property pObject : UInt64
+    property stream_number : UInt32
+    property state : Win32cr::Media::MediaFoundation::DXVAHD_STREAM_STATE
+    property data_size : UInt32
+    property set_state : Win32cr::Foundation::BOOL
+    def initialize(@pObject : UInt64, @stream_number : UInt32, @state : Win32cr::Media::MediaFoundation::DXVAHD_STREAM_STATE, @data_size : UInt32, @set_state : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS,
-    ulNewTVProtectionStandard : UInt32,
-    ulAspectRatioChangeMask1 : UInt32,
-    ulAspectRatioData1 : UInt32,
-    ulAspectRatioChangeMask2 : UInt32,
-    ulAspectRatioData2 : UInt32,
-    ulAspectRatioChangeMask3 : UInt32,
-    ulAspectRatioData3 : UInt32,
-    ulReserved : UInt32[4],
-    ulReserved2 : UInt32[4],
-    ulReserved3 : UInt32
+  struct DXVAHDETW_VIDEOPROCESSBLTHD
+    property pObject : UInt64
+    property pOutputSurface : UInt64
+    property target_rect : Win32cr::Foundation::RECT
+    property output_format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property color_space : UInt32
+    property output_frame : UInt32
+    property stream_count : UInt32
+    property enter : Win32cr::Foundation::BOOL
+    def initialize(@pObject : UInt64, @pOutputSurface : UInt64, @target_rect : Win32cr::Foundation::RECT, @output_format : Win32cr::Graphics::Direct3D9::D3DFORMAT, @color_space : UInt32, @output_frame : UInt32, @stream_count : UInt32, @enter : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record OPM_SET_HDCP_SRM_PARAMETERS,
-    ulSRMVersion : UInt32
+  struct DXVAHDETW_VIDEOPROCESSBLTHD_STREAM
+    property pObject : UInt64
+    property pInputSurface : UInt64
+    property source_rect : Win32cr::Foundation::RECT
+    property destination_rect : Win32cr::Foundation::RECT
+    property input_format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property frame_format : Win32cr::Media::MediaFoundation::DXVAHD_FRAME_FORMAT
+    property color_space : UInt32
+    property stream_number : UInt32
+    property output_index : UInt32
+    property input_frame_or_field : UInt32
+    property past_frames : UInt32
+    property future_frames : UInt32
+    def initialize(@pObject : UInt64, @pInputSurface : UInt64, @source_rect : Win32cr::Foundation::RECT, @destination_rect : Win32cr::Foundation::RECT, @input_format : Win32cr::Graphics::Direct3D9::D3DFORMAT, @frame_format : Win32cr::Media::MediaFoundation::DXVAHD_FRAME_FORMAT, @color_space : UInt32, @stream_number : UInt32, @output_index : UInt32, @input_frame_or_field : UInt32, @past_frames : UInt32, @future_frames : UInt32)
+    end
+  end
 
   @[Extern]
-  record OPM_GET_CODEC_INFO_PARAMETERS,
-    cbVerifier : UInt32,
-    verifier : UInt8[4052]
+  struct DXVAHDETW_DESTROYVIDEOPROCESSOR
+    property pObject : UInt64
+    def initialize(@pObject : UInt64)
+    end
+  end
 
   @[Extern]
-  record OPM_GET_CODEC_INFO_INFORMATION,
-    rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER,
-    merit : UInt32
+  struct DXVA2_ExtendedFormat
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property value : UInt32
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @value : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record MFT_REGISTER_TYPE_INFO,
-    guidMajorType : LibC::GUID,
-    guidSubtype : LibC::GUID
+  struct DXVA2_Frequency
+    property numerator : UInt32
+    property denominator : UInt32
+    def initialize(@numerator : UInt32, @denominator : UInt32)
+    end
+  end
 
   @[Extern]
-  record MFRatio,
-    numerator : UInt32,
-    denominator : UInt32
+  struct DXVA2_VideoDesc
+    property sample_width : UInt32
+    property sample_height : UInt32
+    property sample_format : Win32cr::Media::MediaFoundation::DXVA2_ExtendedFormat
+    property format : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property input_sample_freq : Win32cr::Media::MediaFoundation::DXVA2_Frequency
+    property output_frame_freq : Win32cr::Media::MediaFoundation::DXVA2_Frequency
+    property uab_protection_level : UInt32
+    property reserved : UInt32
+    def initialize(@sample_width : UInt32, @sample_height : UInt32, @sample_format : Win32cr::Media::MediaFoundation::DXVA2_ExtendedFormat, @format : Win32cr::Graphics::Direct3D9::D3DFORMAT, @input_sample_freq : Win32cr::Media::MediaFoundation::DXVA2_Frequency, @output_frame_freq : Win32cr::Media::MediaFoundation::DXVA2_Frequency, @uab_protection_level : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record MFOffset,
-    fract : UInt16,
-    value : Int16
+  struct DXVA2_VideoProcessorCaps
+    property device_caps : UInt32
+    property input_pool : Win32cr::Graphics::Direct3D9::D3DPOOL
+    property num_forward_ref_samples : UInt32
+    property num_backward_ref_samples : UInt32
+    property reserved : UInt32
+    property deinterlace_technology : UInt32
+    property proc_amp_control_caps : UInt32
+    property video_processor_operations : UInt32
+    property noise_filter_technology : UInt32
+    property detail_filter_technology : UInt32
+    def initialize(@device_caps : UInt32, @input_pool : Win32cr::Graphics::Direct3D9::D3DPOOL, @num_forward_ref_samples : UInt32, @num_backward_ref_samples : UInt32, @reserved : UInt32, @deinterlace_technology : UInt32, @proc_amp_control_caps : UInt32, @video_processor_operations : UInt32, @noise_filter_technology : UInt32, @detail_filter_technology : UInt32)
+    end
+  end
 
   @[Extern]
-  record MFVideoArea,
-    offset_x : Win32cr::Media::MediaFoundation::MFOffset,
-    offset_y : Win32cr::Media::MediaFoundation::MFOffset,
-    area : Win32cr::Foundation::SIZE
+  struct DXVA2_Fixed32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property ll : Int32
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property fraction : UInt16
+    property value : Int16
+    def initialize(@fraction : UInt16, @value : Int16)
+    end
+      end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @ll : Int32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record MFVideoInfo,
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    pixel_aspect_ratio : Win32cr::Media::MediaFoundation::MFRatio,
-    source_chroma_subsampling : Win32cr::Media::MediaFoundation::MFVideoChromaSubsampling,
-    interlace_mode : Win32cr::Media::MediaFoundation::MFVideoInterlaceMode,
-    transfer_function : Win32cr::Media::MediaFoundation::MFVideoTransferFunction,
-    color_primaries : Win32cr::Media::MediaFoundation::MFVideoPrimaries,
-    transfer_matrix : Win32cr::Media::MediaFoundation::MFVideoTransferMatrix,
-    source_lighting : Win32cr::Media::MediaFoundation::MFVideoLighting,
-    frames_per_second : Win32cr::Media::MediaFoundation::MFRatio,
-    nominal_range : Win32cr::Media::MediaFoundation::MFNominalRange,
-    geometric_aperture : Win32cr::Media::MediaFoundation::MFVideoArea,
-    minimum_display_aperture : Win32cr::Media::MediaFoundation::MFVideoArea,
-    pan_scan_aperture : Win32cr::Media::MediaFoundation::MFVideoArea,
-    video_flags : UInt64
+  struct DXVA2_AYUVSample8
+    property cr : UInt8
+    property cb : UInt8
+    property y : UInt8
+    property alpha : UInt8
+    def initialize(@cr : UInt8, @cb : UInt8, @y : UInt8, @alpha : UInt8)
+    end
+  end
 
   @[Extern]
-  record MFAYUVSample,
-    bCrValue : UInt8,
-    bCbValue : UInt8,
-    bYValue : UInt8,
-    bSampleAlpha8 : UInt8
+  struct DXVA2_AYUVSample16
+    property cr : UInt16
+    property cb : UInt16
+    property y : UInt16
+    property alpha : UInt16
+    def initialize(@cr : UInt16, @cb : UInt16, @y : UInt16, @alpha : UInt16)
+    end
+  end
 
   @[Extern]
-  record MFARGB,
-    rgbBlue : UInt8,
-    rgbGreen : UInt8,
-    rgbRed : UInt8,
-    rgbAlpha : UInt8
+  struct DXVA2_VideoSample
+    property start : Int64
+    property end__ : Int64
+    property sample_format : Win32cr::Media::MediaFoundation::DXVA2_ExtendedFormat
+    property src_surface : Void*
+    property src_rect : Win32cr::Foundation::RECT
+    property dst_rect : Win32cr::Foundation::RECT
+    property pal : Win32cr::Media::MediaFoundation::DXVA2_AYUVSample8[16]
+    property planar_alpha : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+    property sample_data : UInt32
+    def initialize(@start : Int64, @end__ : Int64, @sample_format : Win32cr::Media::MediaFoundation::DXVA2_ExtendedFormat, @src_surface : Void*, @src_rect : Win32cr::Foundation::RECT, @dst_rect : Win32cr::Foundation::RECT, @pal : Win32cr::Media::MediaFoundation::DXVA2_AYUVSample8[16], @planar_alpha : Win32cr::Media::MediaFoundation::DXVA2_Fixed32, @sample_data : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DXVA2_ValueRange
+    property min_value : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+    property max_value : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+    property default_value : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+    property step_size : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+    def initialize(@min_value : Win32cr::Media::MediaFoundation::DXVA2_Fixed32, @max_value : Win32cr::Media::MediaFoundation::DXVA2_Fixed32, @default_value : Win32cr::Media::MediaFoundation::DXVA2_Fixed32, @step_size : Win32cr::Media::MediaFoundation::DXVA2_Fixed32)
+    end
+  end
+
+  @[Extern]
+  struct DXVA2_ProcAmpValues
+    property brightness : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+    property contrast : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+    property hue : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+    property saturation : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+    def initialize(@brightness : Win32cr::Media::MediaFoundation::DXVA2_Fixed32, @contrast : Win32cr::Media::MediaFoundation::DXVA2_Fixed32, @hue : Win32cr::Media::MediaFoundation::DXVA2_Fixed32, @saturation : Win32cr::Media::MediaFoundation::DXVA2_Fixed32)
+    end
+  end
+
+  @[Extern]
+  struct DXVA2_FilterValues
+    property level : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+    property threshold : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+    property radius : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+    def initialize(@level : Win32cr::Media::MediaFoundation::DXVA2_Fixed32, @threshold : Win32cr::Media::MediaFoundation::DXVA2_Fixed32, @radius : Win32cr::Media::MediaFoundation::DXVA2_Fixed32)
+    end
+  end
+
+  @[Extern]
+  struct DXVA2_VideoProcessBltParams
+    property target_frame : Int64
+    property target_rect : Win32cr::Foundation::RECT
+    property constriction_size : Win32cr::Foundation::SIZE
+    property streaming_flags : UInt32
+    property background_color : Win32cr::Media::MediaFoundation::DXVA2_AYUVSample16
+    property dest_format : Win32cr::Media::MediaFoundation::DXVA2_ExtendedFormat
+    property proc_amp_values : Win32cr::Media::MediaFoundation::DXVA2_ProcAmpValues
+    property alpha : Win32cr::Media::MediaFoundation::DXVA2_Fixed32
+    property noise_filter_luma : Win32cr::Media::MediaFoundation::DXVA2_FilterValues
+    property noise_filter_chroma : Win32cr::Media::MediaFoundation::DXVA2_FilterValues
+    property detail_filter_luma : Win32cr::Media::MediaFoundation::DXVA2_FilterValues
+    property detail_filter_chroma : Win32cr::Media::MediaFoundation::DXVA2_FilterValues
+    property dest_data : UInt32
+    def initialize(@target_frame : Int64, @target_rect : Win32cr::Foundation::RECT, @constriction_size : Win32cr::Foundation::SIZE, @streaming_flags : UInt32, @background_color : Win32cr::Media::MediaFoundation::DXVA2_AYUVSample16, @dest_format : Win32cr::Media::MediaFoundation::DXVA2_ExtendedFormat, @proc_amp_values : Win32cr::Media::MediaFoundation::DXVA2_ProcAmpValues, @alpha : Win32cr::Media::MediaFoundation::DXVA2_Fixed32, @noise_filter_luma : Win32cr::Media::MediaFoundation::DXVA2_FilterValues, @noise_filter_chroma : Win32cr::Media::MediaFoundation::DXVA2_FilterValues, @detail_filter_luma : Win32cr::Media::MediaFoundation::DXVA2_FilterValues, @detail_filter_chroma : Win32cr::Media::MediaFoundation::DXVA2_FilterValues, @dest_data : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DXVA2_ConfigPictureDecode
+    property guidConfigBitstreamEncryption : LibC::GUID
+    property guidConfigMBcontrolEncryption : LibC::GUID
+    property guidConfigResidDiffEncryption : LibC::GUID
+    property config_bitstream_raw : UInt32
+    property config_m_bcontrol_raster_order : UInt32
+    property config_resid_diff_host : UInt32
+    property config_spatial_resid8 : UInt32
+    property config_resid8_subtraction : UInt32
+    property config_spatial_host8or9_clipping : UInt32
+    property config_spatial_resid_interleaved : UInt32
+    property config_intra_resid_unsigned : UInt32
+    property config_resid_diff_accelerator : UInt32
+    property config_host_inverse_scan : UInt32
+    property config_specific_idct : UInt32
+    property config4_grouped_coefs : UInt32
+    property config_min_render_target_buff_count : UInt16
+    property config_decoder_specific : UInt16
+    def initialize(@guidConfigBitstreamEncryption : LibC::GUID, @guidConfigMBcontrolEncryption : LibC::GUID, @guidConfigResidDiffEncryption : LibC::GUID, @config_bitstream_raw : UInt32, @config_m_bcontrol_raster_order : UInt32, @config_resid_diff_host : UInt32, @config_spatial_resid8 : UInt32, @config_resid8_subtraction : UInt32, @config_spatial_host8or9_clipping : UInt32, @config_spatial_resid_interleaved : UInt32, @config_intra_resid_unsigned : UInt32, @config_resid_diff_accelerator : UInt32, @config_host_inverse_scan : UInt32, @config_specific_idct : UInt32, @config4_grouped_coefs : UInt32, @config_min_render_target_buff_count : UInt16, @config_decoder_specific : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DXVA2_DecodeBufferDesc
+    property compressed_buffer_type : Win32cr::Media::MediaFoundation::DXVA2_BufferfType
+    property buffer_index : UInt32
+    property data_offset : UInt32
+    property data_size : UInt32
+    property first_m_baddress : UInt32
+    property num_m_bs_in_buffer : UInt32
+    property width : UInt32
+    property height : UInt32
+    property stride : UInt32
+    property reserved_bits : UInt32
+    property pvPVPState : Void*
+    def initialize(@compressed_buffer_type : Win32cr::Media::MediaFoundation::DXVA2_BufferfType, @buffer_index : UInt32, @data_offset : UInt32, @data_size : UInt32, @first_m_baddress : UInt32, @num_m_bs_in_buffer : UInt32, @width : UInt32, @height : UInt32, @stride : UInt32, @reserved_bits : UInt32, @pvPVPState : Void*)
+    end
+  end
+
+  @[Extern]
+  struct DXVA2_AES_CTR_IV
+    property iv : UInt64
+    property count : UInt64
+    def initialize(@iv : UInt64, @count : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct DXVA2_DecodeExtensionData
+    property function : UInt32
+    property pPrivateInputData : Void*
+    property private_input_data_size : UInt32
+    property pPrivateOutputData : Void*
+    property private_output_data_size : UInt32
+    def initialize(@function : UInt32, @pPrivateInputData : Void*, @private_input_data_size : UInt32, @pPrivateOutputData : Void*, @private_output_data_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DXVA2_DecodeExecuteParams
+    property num_comp_buffers : UInt32
+    property pCompressedBuffers : Win32cr::Media::MediaFoundation::DXVA2_DecodeBufferDesc*
+    property pExtensionData : Win32cr::Media::MediaFoundation::DXVA2_DecodeExtensionData*
+    def initialize(@num_comp_buffers : UInt32, @pCompressedBuffers : Win32cr::Media::MediaFoundation::DXVA2_DecodeBufferDesc*, @pExtensionData : Win32cr::Media::MediaFoundation::DXVA2_DecodeExtensionData*)
+    end
+  end
+
+  @[Extern]
+  struct OPM_RANDOM_NUMBER
+    property abRandomNumber : UInt8[16]
+    def initialize(@abRandomNumber : UInt8[16])
+    end
+  end
+
+  @[Extern]
+  struct OPM_OMAC
+    property abOMAC : UInt8[16]
+    def initialize(@abOMAC : UInt8[16])
+    end
+  end
+
+  @[Extern]
+  struct OPM_ENCRYPTED_INITIALIZATION_PARAMETERS
+    property abEncryptedInitializationParameters : UInt8[256]
+    def initialize(@abEncryptedInitializationParameters : UInt8[256])
+    end
+  end
+
+  @[Extern]
+  struct OPM_GET_INFO_PARAMETERS
+    property omac : Win32cr::Media::MediaFoundation::OPM_OMAC
+    property rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER
+    property guidInformation : LibC::GUID
+    property ulSequenceNumber : UInt32
+    property cbParametersSize : UInt32
+    property abParameters : UInt8[4056]
+    def initialize(@omac : Win32cr::Media::MediaFoundation::OPM_OMAC, @rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER, @guidInformation : LibC::GUID, @ulSequenceNumber : UInt32, @cbParametersSize : UInt32, @abParameters : UInt8[4056])
+    end
+  end
+
+  @[Extern]
+  struct OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS
+    property rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER
+    property guidInformation : LibC::GUID
+    property ulSequenceNumber : UInt32
+    property cbParametersSize : UInt32
+    property abParameters : UInt8[4056]
+    def initialize(@rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER, @guidInformation : LibC::GUID, @ulSequenceNumber : UInt32, @cbParametersSize : UInt32, @abParameters : UInt8[4056])
+    end
+  end
+
+  @[Extern]
+  struct OPM_HDCP_KEY_SELECTION_VECTOR
+    property abKeySelectionVector : UInt8[5]
+    def initialize(@abKeySelectionVector : UInt8[5])
+    end
+  end
+
+  @[Extern]
+  struct OPM_CONNECTED_HDCP_DEVICE_INFORMATION
+    property rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER
+    property ulStatusFlags : UInt32
+    property ulHDCPFlags : UInt32
+    property ksvB : Win32cr::Media::MediaFoundation::OPM_HDCP_KEY_SELECTION_VECTOR
+    property reserved : UInt8[11]
+    property reserved2 : UInt8[16]
+    property reserved3 : UInt8[16]
+    def initialize(@rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER, @ulStatusFlags : UInt32, @ulHDCPFlags : UInt32, @ksvB : Win32cr::Media::MediaFoundation::OPM_HDCP_KEY_SELECTION_VECTOR, @reserved : UInt8[11], @reserved2 : UInt8[16], @reserved3 : UInt8[16])
+    end
+  end
+
+  @[Extern]
+  struct OPM_REQUESTED_INFORMATION
+    property omac : Win32cr::Media::MediaFoundation::OPM_OMAC
+    property cbRequestedInformationSize : UInt32
+    property abRequestedInformation : UInt8[4076]
+    def initialize(@omac : Win32cr::Media::MediaFoundation::OPM_OMAC, @cbRequestedInformationSize : UInt32, @abRequestedInformation : UInt8[4076])
+    end
+  end
+
+  @[Extern]
+  struct OPM_STANDARD_INFORMATION
+    property rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER
+    property ulStatusFlags : UInt32
+    property ulInformation : UInt32
+    property ulReserved : UInt32
+    property ulReserved2 : UInt32
+    def initialize(@rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER, @ulStatusFlags : UInt32, @ulInformation : UInt32, @ulReserved : UInt32, @ulReserved2 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct OPM_ACTUAL_OUTPUT_FORMAT
+    property rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER
+    property ulStatusFlags : UInt32
+    property ulDisplayWidth : UInt32
+    property ulDisplayHeight : UInt32
+    property dsfSampleInterleaveFormat : Win32cr::Media::MediaFoundation::DXVA2_SampleFormat
+    property d3dFormat : Win32cr::Graphics::Direct3D9::D3DFORMAT
+    property ulFrequencyNumerator : UInt32
+    property ulFrequencyDenominator : UInt32
+    def initialize(@rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER, @ulStatusFlags : UInt32, @ulDisplayWidth : UInt32, @ulDisplayHeight : UInt32, @dsfSampleInterleaveFormat : Win32cr::Media::MediaFoundation::DXVA2_SampleFormat, @d3dFormat : Win32cr::Graphics::Direct3D9::D3DFORMAT, @ulFrequencyNumerator : UInt32, @ulFrequencyDenominator : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct OPM_ACP_AND_CGMSA_SIGNALING
+    property rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER
+    property ulStatusFlags : UInt32
+    property ulAvailableTVProtectionStandards : UInt32
+    property ulActiveTVProtectionStandard : UInt32
+    property ulReserved : UInt32
+    property ulAspectRatioValidMask1 : UInt32
+    property ulAspectRatioData1 : UInt32
+    property ulAspectRatioValidMask2 : UInt32
+    property ulAspectRatioData2 : UInt32
+    property ulAspectRatioValidMask3 : UInt32
+    property ulAspectRatioData3 : UInt32
+    property ulReserved2 : UInt32[4]
+    property ulReserved3 : UInt32[4]
+    def initialize(@rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER, @ulStatusFlags : UInt32, @ulAvailableTVProtectionStandards : UInt32, @ulActiveTVProtectionStandard : UInt32, @ulReserved : UInt32, @ulAspectRatioValidMask1 : UInt32, @ulAspectRatioData1 : UInt32, @ulAspectRatioValidMask2 : UInt32, @ulAspectRatioData2 : UInt32, @ulAspectRatioValidMask3 : UInt32, @ulAspectRatioData3 : UInt32, @ulReserved2 : UInt32[4], @ulReserved3 : UInt32[4])
+    end
+  end
+
+  @[Extern]
+  struct OPM_OUTPUT_ID_DATA
+    property rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER
+    property ulStatusFlags : UInt32
+    property output_id : UInt64
+    def initialize(@rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER, @ulStatusFlags : UInt32, @output_id : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct OPM_CONFIGURE_PARAMETERS
+    property omac : Win32cr::Media::MediaFoundation::OPM_OMAC
+    property guidSetting : LibC::GUID
+    property ulSequenceNumber : UInt32
+    property cbParametersSize : UInt32
+    property abParameters : UInt8[4056]
+    def initialize(@omac : Win32cr::Media::MediaFoundation::OPM_OMAC, @guidSetting : LibC::GUID, @ulSequenceNumber : UInt32, @cbParametersSize : UInt32, @abParameters : UInt8[4056])
+    end
+  end
+
+  @[Extern]
+  struct OPM_SET_PROTECTION_LEVEL_PARAMETERS
+    property ulProtectionType : UInt32
+    property ulProtectionLevel : UInt32
+    property reserved : UInt32
+    property reserved2 : UInt32
+    def initialize(@ulProtectionType : UInt32, @ulProtectionLevel : UInt32, @reserved : UInt32, @reserved2 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS
+    property ulNewTVProtectionStandard : UInt32
+    property ulAspectRatioChangeMask1 : UInt32
+    property ulAspectRatioData1 : UInt32
+    property ulAspectRatioChangeMask2 : UInt32
+    property ulAspectRatioData2 : UInt32
+    property ulAspectRatioChangeMask3 : UInt32
+    property ulAspectRatioData3 : UInt32
+    property ulReserved : UInt32[4]
+    property ulReserved2 : UInt32[4]
+    property ulReserved3 : UInt32
+    def initialize(@ulNewTVProtectionStandard : UInt32, @ulAspectRatioChangeMask1 : UInt32, @ulAspectRatioData1 : UInt32, @ulAspectRatioChangeMask2 : UInt32, @ulAspectRatioData2 : UInt32, @ulAspectRatioChangeMask3 : UInt32, @ulAspectRatioData3 : UInt32, @ulReserved : UInt32[4], @ulReserved2 : UInt32[4], @ulReserved3 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct OPM_SET_HDCP_SRM_PARAMETERS
+    property ulSRMVersion : UInt32
+    def initialize(@ulSRMVersion : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct OPM_GET_CODEC_INFO_PARAMETERS
+    property cbVerifier : UInt32
+    property verifier : UInt8[4052]
+    def initialize(@cbVerifier : UInt32, @verifier : UInt8[4052])
+    end
+  end
+
+  @[Extern]
+  struct OPM_GET_CODEC_INFO_INFORMATION
+    property rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER
+    property merit : UInt32
+    def initialize(@rnRandomNumber : Win32cr::Media::MediaFoundation::OPM_RANDOM_NUMBER, @merit : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MFT_REGISTER_TYPE_INFO
+    property guidMajorType : LibC::GUID
+    property guidSubtype : LibC::GUID
+    def initialize(@guidMajorType : LibC::GUID, @guidSubtype : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct MFRatio
+    property numerator : UInt32
+    property denominator : UInt32
+    def initialize(@numerator : UInt32, @denominator : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MFOffset
+    property fract : UInt16
+    property value : Int16
+    def initialize(@fract : UInt16, @value : Int16)
+    end
+  end
+
+  @[Extern]
+  struct MFVideoArea
+    property offset_x : Win32cr::Media::MediaFoundation::MFOffset
+    property offset_y : Win32cr::Media::MediaFoundation::MFOffset
+    property area : Win32cr::Foundation::SIZE
+    def initialize(@offset_x : Win32cr::Media::MediaFoundation::MFOffset, @offset_y : Win32cr::Media::MediaFoundation::MFOffset, @area : Win32cr::Foundation::SIZE)
+    end
+  end
+
+  @[Extern]
+  struct MFVideoInfo
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property pixel_aspect_ratio : Win32cr::Media::MediaFoundation::MFRatio
+    property source_chroma_subsampling : Win32cr::Media::MediaFoundation::MFVideoChromaSubsampling
+    property interlace_mode : Win32cr::Media::MediaFoundation::MFVideoInterlaceMode
+    property transfer_function : Win32cr::Media::MediaFoundation::MFVideoTransferFunction
+    property color_primaries : Win32cr::Media::MediaFoundation::MFVideoPrimaries
+    property transfer_matrix : Win32cr::Media::MediaFoundation::MFVideoTransferMatrix
+    property source_lighting : Win32cr::Media::MediaFoundation::MFVideoLighting
+    property frames_per_second : Win32cr::Media::MediaFoundation::MFRatio
+    property nominal_range : Win32cr::Media::MediaFoundation::MFNominalRange
+    property geometric_aperture : Win32cr::Media::MediaFoundation::MFVideoArea
+    property minimum_display_aperture : Win32cr::Media::MediaFoundation::MFVideoArea
+    property pan_scan_aperture : Win32cr::Media::MediaFoundation::MFVideoArea
+    property video_flags : UInt64
+    def initialize(@dwWidth : UInt32, @dwHeight : UInt32, @pixel_aspect_ratio : Win32cr::Media::MediaFoundation::MFRatio, @source_chroma_subsampling : Win32cr::Media::MediaFoundation::MFVideoChromaSubsampling, @interlace_mode : Win32cr::Media::MediaFoundation::MFVideoInterlaceMode, @transfer_function : Win32cr::Media::MediaFoundation::MFVideoTransferFunction, @color_primaries : Win32cr::Media::MediaFoundation::MFVideoPrimaries, @transfer_matrix : Win32cr::Media::MediaFoundation::MFVideoTransferMatrix, @source_lighting : Win32cr::Media::MediaFoundation::MFVideoLighting, @frames_per_second : Win32cr::Media::MediaFoundation::MFRatio, @nominal_range : Win32cr::Media::MediaFoundation::MFNominalRange, @geometric_aperture : Win32cr::Media::MediaFoundation::MFVideoArea, @minimum_display_aperture : Win32cr::Media::MediaFoundation::MFVideoArea, @pan_scan_aperture : Win32cr::Media::MediaFoundation::MFVideoArea, @video_flags : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct MFAYUVSample
+    property bCrValue : UInt8
+    property bCbValue : UInt8
+    property bYValue : UInt8
+    property bSampleAlpha8 : UInt8
+    def initialize(@bCrValue : UInt8, @bCbValue : UInt8, @bYValue : UInt8, @bSampleAlpha8 : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MFARGB
+    property rgbBlue : UInt8
+    property rgbGreen : UInt8
+    property rgbRed : UInt8
+    property rgbAlpha : UInt8
+    def initialize(@rgbBlue : UInt8, @rgbGreen : UInt8, @rgbRed : UInt8, @rgbAlpha : UInt8)
+    end
+  end
 
   @[Extern(union: true)]
-  record MFPaletteEntry,
-    argb : Win32cr::Media::MediaFoundation::MFARGB,
-    ay_cb_cr : Win32cr::Media::MediaFoundation::MFAYUVSample
-
-  @[Extern]
-  record MFVideoSurfaceInfo,
-    format : UInt32,
-    palette_entries : UInt32,
-    palette : Win32cr::Media::MediaFoundation::MFPaletteEntry*
-
-  @[Extern]
-  record MFVideoCompressedInfo,
-    avg_bitrate : Int64,
-    avg_bit_error_rate : Int64,
-    max_key_frame_spacing : UInt32
-
-  @[Extern]
-  record MFVIDEOFORMAT,
-    dwSize : UInt32,
-    videoInfo : Win32cr::Media::MediaFoundation::MFVideoInfo,
-    guidFormat : LibC::GUID,
-    compressedInfo : Win32cr::Media::MediaFoundation::MFVideoCompressedInfo,
-    surfaceInfo : Win32cr::Media::MediaFoundation::MFVideoSurfaceInfo
-
-  @[Extern]
-  record MFT_INPUT_STREAM_INFO,
-    hnsMaxLatency : Int64,
-    dwFlags : UInt32,
-    cbSize : UInt32,
-    cbMaxLookahead : UInt32,
-    cbAlignment : UInt32
-
-  @[Extern]
-  record MFT_OUTPUT_STREAM_INFO,
-    dwFlags : UInt32,
-    cbSize : UInt32,
-    cbAlignment : UInt32
-
-  @[Extern]
-  record MFT_OUTPUT_DATA_BUFFER,
-    dwStreamID : UInt32,
-    pSample : Void*,
-    dwStatus : UInt32,
-    pEvents : Void*
-
-  @[Extern]
-  record STREAM_MEDIUM,
-    gidMedium : LibC::GUID,
-    unMediumInstance : UInt32
-
-  @[Extern]
-  record MFAudioDecoderDegradationInfo,
-    eDegradationReason : Win32cr::Media::MediaFoundation::MFT_AUDIO_DECODER_DEGRADATION_REASON,
-    eType : Win32cr::Media::MediaFoundation::MFT_AUDIO_DECODER_DEGRADATION_TYPE
-
-  @[Extern]
-  record MFT_STREAM_STATE_PARAM,
-    stream_id : UInt32,
-    state : Win32cr::Media::MediaFoundation::MF_STREAM_STATE
-
-  @[Extern]
-  record MFCLOCK_PROPERTIES,
-    qwCorrelationRate : UInt64,
-    guidClockId : LibC::GUID,
-    dwClockFlags : UInt32,
-    qwClockFrequency : UInt64,
-    dwClockTolerance : UInt32,
-    dwClockJitter : UInt32
-
-  @[Extern]
-  record MFRR_COMPONENT_HASH_INFO,
-    ulReason : UInt32,
-    rgHeaderHash : UInt16[43],
-    rgPublicKeyHash : UInt16[43],
-    wszName : UInt16[260]
-
-  @[Extern]
-  record MFRR_COMPONENTS,
-    dwRRInfoVersion : UInt32,
-    dwRRComponents : UInt32,
-    pRRComponents : Win32cr::Media::MediaFoundation::MFRR_COMPONENT_HASH_INFO*
-
-  @[Extern]
-  record ASF_FLAT_PICTURE,
-    bPictureType : UInt8,
-    dwDataLen : UInt32
-
-  @[Extern]
-  record ASF_FLAT_SYNCHRONISED_LYRICS,
-    bTimeStampFormat : UInt8,
-    bContentType : UInt8,
-    dwLyricsLen : UInt32
-
-  @[Extern]
-  record MFTOPONODE_ATTRIBUTE_UPDATE,
-    node_id : UInt64,
-    guidAttributeKey : LibC::GUID,
-    attrType : Win32cr::Media::MediaFoundation::MF_ATTRIBUTE_TYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      u32 : UInt32,
-      u64 : UInt64,
-      d : Float64
-
+  struct MFPaletteEntry
+    property argb : Win32cr::Media::MediaFoundation::MFARGB
+    property ay_cb_cr : Win32cr::Media::MediaFoundation::MFAYUVSample
+    def initialize(@argb : Win32cr::Media::MediaFoundation::MFARGB, @ay_cb_cr : Win32cr::Media::MediaFoundation::MFAYUVSample)
+    end
   end
 
   @[Extern]
-  record MF_LEAKY_BUCKET_PAIR,
-    dwBitrate : UInt32,
-    msBufferWindow : UInt32
+  struct MFVideoSurfaceInfo
+    property format : UInt32
+    property palette_entries : UInt32
+    property palette : Win32cr::Media::MediaFoundation::MFPaletteEntry*
+    def initialize(@format : UInt32, @palette_entries : UInt32, @palette : Win32cr::Media::MediaFoundation::MFPaletteEntry*)
+    end
+  end
 
   @[Extern]
-  record MFBYTESTREAM_BUFFERING_PARAMS,
-    cbTotalFileSize : UInt64,
-    cbPlayableDataSize : UInt64,
-    prgBuckets : Win32cr::Media::MediaFoundation::MF_LEAKY_BUCKET_PAIR*,
-    cBuckets : UInt32,
-    qwNetBufferingTime : UInt64,
-    qwExtraBufferingTimeDuringSeek : UInt64,
-    qwPlayDuration : UInt64,
-    dRate : Float32
+  struct MFVideoCompressedInfo
+    property avg_bitrate : Int64
+    property avg_bit_error_rate : Int64
+    property max_key_frame_spacing : UInt32
+    def initialize(@avg_bitrate : Int64, @avg_bit_error_rate : Int64, @max_key_frame_spacing : UInt32)
+    end
+  end
 
   @[Extern]
-  record MF_BYTE_STREAM_CACHE_RANGE,
-    qwStartOffset : UInt64,
-    qwEndOffset : UInt64
+  struct MFVIDEOFORMAT
+    property dwSize : UInt32
+    property videoInfo : Win32cr::Media::MediaFoundation::MFVideoInfo
+    property guidFormat : LibC::GUID
+    property compressedInfo : Win32cr::Media::MediaFoundation::MFVideoCompressedInfo
+    property surfaceInfo : Win32cr::Media::MediaFoundation::MFVideoSurfaceInfo
+    def initialize(@dwSize : UInt32, @videoInfo : Win32cr::Media::MediaFoundation::MFVideoInfo, @guidFormat : LibC::GUID, @compressedInfo : Win32cr::Media::MediaFoundation::MFVideoCompressedInfo, @surfaceInfo : Win32cr::Media::MediaFoundation::MFVideoSurfaceInfo)
+    end
+  end
 
   @[Extern]
-  record MFNetCredentialManagerGetParam,
-    hrOp : Win32cr::Foundation::HRESULT,
-    fAllowLoggedOnUser : Win32cr::Foundation::BOOL,
-    fClearTextPackage : Win32cr::Foundation::BOOL,
-    pszUrl : Win32cr::Foundation::PWSTR,
-    pszSite : Win32cr::Foundation::PWSTR,
-    pszRealm : Win32cr::Foundation::PWSTR,
-    pszPackage : Win32cr::Foundation::PWSTR,
-    nRetries : Int32
+  struct MFT_INPUT_STREAM_INFO
+    property hnsMaxLatency : Int64
+    property dwFlags : UInt32
+    property cbSize : UInt32
+    property cbMaxLookahead : UInt32
+    property cbAlignment : UInt32
+    def initialize(@hnsMaxLatency : Int64, @dwFlags : UInt32, @cbSize : UInt32, @cbMaxLookahead : UInt32, @cbAlignment : UInt32)
+    end
+  end
 
   @[Extern]
-  record MFINPUTTRUSTAUTHORITY_ACCESS_ACTION,
-    action : Win32cr::Media::MediaFoundation::MFPOLICYMANAGER_ACTION,
-    pbTicket : UInt8*,
-    cbTicket : UInt32
+  struct MFT_OUTPUT_STREAM_INFO
+    property dwFlags : UInt32
+    property cbSize : UInt32
+    property cbAlignment : UInt32
+    def initialize(@dwFlags : UInt32, @cbSize : UInt32, @cbAlignment : UInt32)
+    end
+  end
 
   @[Extern]
-  record MFINPUTTRUSTAUTHORITY_ACCESS_PARAMS,
-    dwSize : UInt32,
-    dwVer : UInt32,
-    cbSignatureOffset : UInt32,
-    cbSignatureSize : UInt32,
-    cbExtensionOffset : UInt32,
-    cbExtensionSize : UInt32,
-    cActions : UInt32,
-    rgOutputActions : Win32cr::Media::MediaFoundation::MFINPUTTRUSTAUTHORITY_ACCESS_ACTION*
+  struct MFT_OUTPUT_DATA_BUFFER
+    property dwStreamID : UInt32
+    property pSample : Void*
+    property dwStatus : UInt32
+    property pEvents : Void*
+    def initialize(@dwStreamID : UInt32, @pSample : Void*, @dwStatus : UInt32, @pEvents : Void*)
+    end
+  end
 
   @[Extern]
-  record MF_TRANSCODE_SINK_INFO,
-    dwVideoStreamID : UInt32,
-    pVideoMediaType : Void*,
-    dwAudioStreamID : UInt32,
-    pAudioMediaType : Void*
+  struct STREAM_MEDIUM
+    property gidMedium : LibC::GUID
+    property unMediumInstance : UInt32
+    def initialize(@gidMedium : LibC::GUID, @unMediumInstance : UInt32)
+    end
+  end
 
   @[Extern]
-  record MFT_REGISTRATION_INFO,
-    clsid : LibC::GUID,
-    guidCategory : LibC::GUID,
-    uiFlags : UInt32,
-    pszName : Win32cr::Foundation::PWSTR,
-    cInTypes : UInt32,
-    pInTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*,
-    cOutTypes : UInt32,
-    pOutTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*
+  struct MFAudioDecoderDegradationInfo
+    property eDegradationReason : Win32cr::Media::MediaFoundation::MFT_AUDIO_DECODER_DEGRADATION_REASON
+    property eType : Win32cr::Media::MediaFoundation::MFT_AUDIO_DECODER_DEGRADATION_TYPE
+    def initialize(@eDegradationReason : Win32cr::Media::MediaFoundation::MFT_AUDIO_DECODER_DEGRADATION_REASON, @eType : Win32cr::Media::MediaFoundation::MFT_AUDIO_DECODER_DEGRADATION_TYPE)
+    end
+  end
 
   @[Extern]
-  record MFCONTENTPROTECTIONDEVICE_INPUT_DATA,
-    hw_protection_function_id : UInt32,
-    private_data_byte_count : UInt32,
-    hw_protection_data_byte_count : UInt32,
-    reserved : UInt32,
-    input_data : UInt8[4]
+  struct MFT_STREAM_STATE_PARAM
+    property stream_id : UInt32
+    property state : Win32cr::Media::MediaFoundation::MF_STREAM_STATE
+    def initialize(@stream_id : UInt32, @state : Win32cr::Media::MediaFoundation::MF_STREAM_STATE)
+    end
+  end
 
   @[Extern]
-  record MFCONTENTPROTECTIONDEVICE_OUTPUT_DATA,
-    private_data_byte_count : UInt32,
-    max_hw_protection_data_byte_count : UInt32,
-    hw_protection_data_byte_count : UInt32,
-    status : Win32cr::Foundation::HRESULT,
-    transport_time_in_hundreds_of_nanoseconds : Int64,
-    execution_time_in_hundreds_of_nanoseconds : Int64,
-    output_data : UInt8[4]
+  struct MFCLOCK_PROPERTIES
+    property qwCorrelationRate : UInt64
+    property guidClockId : LibC::GUID
+    property dwClockFlags : UInt32
+    property qwClockFrequency : UInt64
+    property dwClockTolerance : UInt32
+    property dwClockJitter : UInt32
+    def initialize(@qwCorrelationRate : UInt64, @guidClockId : LibC::GUID, @dwClockFlags : UInt32, @qwClockFrequency : UInt64, @dwClockTolerance : UInt32, @dwClockJitter : UInt32)
+    end
+  end
 
   @[Extern]
-  record MFCONTENTPROTECTIONDEVICE_REALTIMECLIENT_DATA,
-    task_index : UInt32,
-    class_name : UInt16[260],
-    base_priority : Int32
+  struct MFRR_COMPONENT_HASH_INFO
+    property ulReason : UInt32
+    property rgHeaderHash : UInt16[43]
+    property rgPublicKeyHash : UInt16[43]
+    property wszName : UInt16[260]
+    def initialize(@ulReason : UInt32, @rgHeaderHash : UInt16[43], @rgPublicKeyHash : UInt16[43], @wszName : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record MFMediaKeyStatus,
-    pbKeyId : UInt8*,
-    cbKeyId : UInt32,
-    eMediaKeyStatus : Win32cr::Media::MediaFoundation::MF_MEDIAKEY_STATUS
+  struct MFRR_COMPONENTS
+    property dwRRInfoVersion : UInt32
+    property dwRRComponents : UInt32
+    property pRRComponents : Win32cr::Media::MediaFoundation::MFRR_COMPONENT_HASH_INFO*
+    def initialize(@dwRRInfoVersion : UInt32, @dwRRComponents : UInt32, @pRRComponents : Win32cr::Media::MediaFoundation::MFRR_COMPONENT_HASH_INFO*)
+    end
+  end
 
   @[Extern]
-  record MF_VIDEO_SPHERICAL_VIEWDIRECTION,
-    iHeading : Int32,
-    iPitch : Int32,
-    iRoll : Int32
+  struct ASF_FLAT_PICTURE
+    property bPictureType : UInt8
+    property dwDataLen : UInt32
+    def initialize(@bPictureType : UInt8, @dwDataLen : UInt32)
+    end
+  end
 
   @[Extern]
-  record SENSORPROFILEID,
-    type__ : LibC::GUID,
-    index : UInt32,
-    unused : UInt32
+  struct ASF_FLAT_SYNCHRONISED_LYRICS
+    property bTimeStampFormat : UInt8
+    property bContentType : UInt8
+    property dwLyricsLen : UInt32
+    def initialize(@bTimeStampFormat : UInt8, @bContentType : UInt8, @dwLyricsLen : UInt32)
+    end
+  end
 
   @[Extern]
-  record MFCameraIntrinsic_CameraModel,
-    focal_length_x : Float32,
-    focal_length_y : Float32,
-    principal_point_x : Float32,
-    principal_point_y : Float32
+  struct MFTOPONODE_ATTRIBUTE_UPDATE
+    property node_id : UInt64
+    property guidAttributeKey : LibC::GUID
+    property attrType : Win32cr::Media::MediaFoundation::MF_ATTRIBUTE_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property u32 : UInt32
+    property u64 : UInt64
+    property d : Float64
+    def initialize(@u32 : UInt32, @u64 : UInt64, @d : Float64)
+    end
+    end
+
+    def initialize(@node_id : UInt64, @guidAttributeKey : LibC::GUID, @attrType : Win32cr::Media::MediaFoundation::MF_ATTRIBUTE_TYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record MFCameraIntrinsic_DistortionModel6KT,
-    radial_k1 : Float32,
-    radial_k2 : Float32,
-    radial_k3 : Float32,
-    radial_k4 : Float32,
-    radial_k5 : Float32,
-    radial_k6 : Float32,
-    tangential_p1 : Float32,
-    tangential_p2 : Float32
+  struct MF_LEAKY_BUCKET_PAIR
+    property dwBitrate : UInt32
+    property msBufferWindow : UInt32
+    def initialize(@dwBitrate : UInt32, @msBufferWindow : UInt32)
+    end
+  end
 
   @[Extern]
-  record MFCameraIntrinsic_DistortionModelArcTan,
-    radial_k0 : Float32,
-    distortion_center_x : Float32,
-    distortion_center_y : Float32,
-    tangential_x : Float32,
-    tangential_y : Float32
+  struct MFBYTESTREAM_BUFFERING_PARAMS
+    property cbTotalFileSize : UInt64
+    property cbPlayableDataSize : UInt64
+    property prgBuckets : Win32cr::Media::MediaFoundation::MF_LEAKY_BUCKET_PAIR*
+    property cBuckets : UInt32
+    property qwNetBufferingTime : UInt64
+    property qwExtraBufferingTimeDuringSeek : UInt64
+    property qwPlayDuration : UInt64
+    property dRate : Float32
+    def initialize(@cbTotalFileSize : UInt64, @cbPlayableDataSize : UInt64, @prgBuckets : Win32cr::Media::MediaFoundation::MF_LEAKY_BUCKET_PAIR*, @cBuckets : UInt32, @qwNetBufferingTime : UInt64, @qwExtraBufferingTimeDuringSeek : UInt64, @qwPlayDuration : UInt64, @dRate : Float32)
+    end
+  end
 
   @[Extern]
-  record MFExtendedCameraIntrinsic_IntrinsicModel,
-    width : UInt32,
-    height : UInt32,
-    split_frame_id : UInt32,
-    camera_model : Win32cr::Media::MediaFoundation::MFCameraIntrinsic_CameraModel
+  struct MF_BYTE_STREAM_CACHE_RANGE
+    property qwStartOffset : UInt64
+    property qwEndOffset : UInt64
+    def initialize(@qwStartOffset : UInt64, @qwEndOffset : UInt64)
+    end
+  end
 
   @[Extern]
-  record ASF_INDEX_IDENTIFIER,
-    guidIndexType : LibC::GUID,
-    wStreamNumber : UInt16
+  struct MFNetCredentialManagerGetParam
+    property hrOp : Win32cr::Foundation::HRESULT
+    property fAllowLoggedOnUser : Win32cr::Foundation::BOOL
+    property fClearTextPackage : Win32cr::Foundation::BOOL
+    property pszUrl : Win32cr::Foundation::PWSTR
+    property pszSite : Win32cr::Foundation::PWSTR
+    property pszRealm : Win32cr::Foundation::PWSTR
+    property pszPackage : Win32cr::Foundation::PWSTR
+    property nRetries : Int32
+    def initialize(@hrOp : Win32cr::Foundation::HRESULT, @fAllowLoggedOnUser : Win32cr::Foundation::BOOL, @fClearTextPackage : Win32cr::Foundation::BOOL, @pszUrl : Win32cr::Foundation::PWSTR, @pszSite : Win32cr::Foundation::PWSTR, @pszRealm : Win32cr::Foundation::PWSTR, @pszPackage : Win32cr::Foundation::PWSTR, @nRetries : Int32)
+    end
+  end
 
   @[Extern]
-  record ASF_INDEX_DESCRIPTOR,
-    identifier : Win32cr::Media::MediaFoundation::ASF_INDEX_IDENTIFIER,
-    cPerEntryBytes : UInt16,
-    szDescription : UInt16[32],
-    dwInterval : UInt32
+  struct MFINPUTTRUSTAUTHORITY_ACCESS_ACTION
+    property action : Win32cr::Media::MediaFoundation::MFPOLICYMANAGER_ACTION
+    property pbTicket : UInt8*
+    property cbTicket : UInt32
+    def initialize(@action : Win32cr::Media::MediaFoundation::MFPOLICYMANAGER_ACTION, @pbTicket : UInt8*, @cbTicket : UInt32)
+    end
+  end
 
   @[Extern]
-  record ASF_MUX_STATISTICS,
-    cFramesWritten : UInt32,
-    cFramesDropped : UInt32
+  struct MFINPUTTRUSTAUTHORITY_ACCESS_PARAMS
+    property dwSize : UInt32
+    property dwVer : UInt32
+    property cbSignatureOffset : UInt32
+    property cbSignatureSize : UInt32
+    property cbExtensionOffset : UInt32
+    property cbExtensionSize : UInt32
+    property cActions : UInt32
+    property rgOutputActions : Win32cr::Media::MediaFoundation::MFINPUTTRUSTAUTHORITY_ACCESS_ACTION*
+    def initialize(@dwSize : UInt32, @dwVer : UInt32, @cbSignatureOffset : UInt32, @cbSignatureSize : UInt32, @cbExtensionOffset : UInt32, @cbExtensionSize : UInt32, @cActions : UInt32, @rgOutputActions : Win32cr::Media::MediaFoundation::MFINPUTTRUSTAUTHORITY_ACCESS_ACTION*)
+    end
+  end
 
   @[Extern]
-  record MFVideoNormalizedRect,
-    left : Float32,
-    top : Float32,
-    right : Float32,
-    bottom : Float32
+  struct MF_TRANSCODE_SINK_INFO
+    property dwVideoStreamID : UInt32
+    property pVideoMediaType : Void*
+    property dwAudioStreamID : UInt32
+    property pAudioMediaType : Void*
+    def initialize(@dwVideoStreamID : UInt32, @pVideoMediaType : Void*, @dwAudioStreamID : UInt32, @pAudioMediaType : Void*)
+    end
+  end
 
   @[Extern]
-  record MOVE_RECT,
-    source_point : Win32cr::Foundation::POINT,
-    dest_rect : Win32cr::Foundation::RECT
+  struct MFT_REGISTRATION_INFO
+    property clsid : LibC::GUID
+    property guidCategory : LibC::GUID
+    property uiFlags : UInt32
+    property pszName : Win32cr::Foundation::PWSTR
+    property cInTypes : UInt32
+    property pInTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*
+    property cOutTypes : UInt32
+    property pOutTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*
+    def initialize(@clsid : LibC::GUID, @guidCategory : LibC::GUID, @uiFlags : UInt32, @pszName : Win32cr::Foundation::PWSTR, @cInTypes : UInt32, @pInTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, @cOutTypes : UInt32, @pOutTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*)
+    end
+  end
 
   @[Extern]
-  record DIRTYRECT_INFO,
-    frame_number : UInt32,
-    num_dirty_rects : UInt32,
-    dirty_rects : Win32cr::Foundation::RECT*
+  struct MFCONTENTPROTECTIONDEVICE_INPUT_DATA
+    property hw_protection_function_id : UInt32
+    property private_data_byte_count : UInt32
+    property hw_protection_data_byte_count : UInt32
+    property reserved : UInt32
+    property input_data : UInt8[4]
+    def initialize(@hw_protection_function_id : UInt32, @private_data_byte_count : UInt32, @hw_protection_data_byte_count : UInt32, @reserved : UInt32, @input_data : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record MOVEREGION_INFO,
-    frame_number : UInt32,
-    num_move_regions : UInt32,
-    move_regions : Win32cr::Media::MediaFoundation::MOVE_RECT*
+  struct MFCONTENTPROTECTIONDEVICE_OUTPUT_DATA
+    property private_data_byte_count : UInt32
+    property max_hw_protection_data_byte_count : UInt32
+    property hw_protection_data_byte_count : UInt32
+    property status : Win32cr::Foundation::HRESULT
+    property transport_time_in_hundreds_of_nanoseconds : Int64
+    property execution_time_in_hundreds_of_nanoseconds : Int64
+    property output_data : UInt8[4]
+    def initialize(@private_data_byte_count : UInt32, @max_hw_protection_data_byte_count : UInt32, @hw_protection_data_byte_count : UInt32, @status : Win32cr::Foundation::HRESULT, @transport_time_in_hundreds_of_nanoseconds : Int64, @execution_time_in_hundreds_of_nanoseconds : Int64, @output_data : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record ROI_AREA,
-    rect : Win32cr::Foundation::RECT,
-    qp_delta : Int32
+  struct MFCONTENTPROTECTIONDEVICE_REALTIMECLIENT_DATA
+    property task_index : UInt32
+    property class_name : UInt16[260]
+    property base_priority : Int32
+    def initialize(@task_index : UInt32, @class_name : UInt16[260], @base_priority : Int32)
+    end
+  end
 
   @[Extern]
-  record MACROBLOCK_DATA,
-    flags : UInt32,
-    motionVectorX : Int16,
-    motionVectorY : Int16,
-    qp_delta : Int32
+  struct MFMediaKeyStatus
+    property pbKeyId : UInt8*
+    property cbKeyId : UInt32
+    property eMediaKeyStatus : Win32cr::Media::MediaFoundation::MF_MEDIAKEY_STATUS
+    def initialize(@pbKeyId : UInt8*, @cbKeyId : UInt32, @eMediaKeyStatus : Win32cr::Media::MediaFoundation::MF_MEDIAKEY_STATUS)
+    end
+  end
 
   @[Extern]
-  record DigitalWindowSetting,
-    origin_x : Float64,
-    origin_y : Float64,
-    window_size : Float64
+  struct MF_VIDEO_SPHERICAL_VIEWDIRECTION
+    property iHeading : Int32
+    property iPitch : Int32
+    property iRoll : Int32
+    def initialize(@iHeading : Int32, @iPitch : Int32, @iRoll : Int32)
+    end
+  end
 
   @[Extern]
-  record MFFOLDDOWN_MATRIX,
-    cbSize : UInt32,
-    cSrcChannels : UInt32,
-    cDstChannels : UInt32,
-    dwChannelMask : UInt32,
-    coeff : Int32[64]
+  struct SENSORPROFILEID
+    property type__ : LibC::GUID
+    property index : UInt32
+    property unused : UInt32
+    def initialize(@type__ : LibC::GUID, @index : UInt32, @unused : UInt32)
+    end
+  end
 
   @[Extern]
-  record MT_CUSTOM_VIDEO_PRIMARIES,
-    fRx : Float32,
-    fRy : Float32,
-    fGx : Float32,
-    fGy : Float32,
-    fBx : Float32,
-    fBy : Float32,
-    fWx : Float32,
-    fWy : Float32
+  struct MFCameraIntrinsic_CameraModel
+    property focal_length_x : Float32
+    property focal_length_y : Float32
+    property principal_point_x : Float32
+    property principal_point_y : Float32
+    def initialize(@focal_length_x : Float32, @focal_length_y : Float32, @principal_point_x : Float32, @principal_point_y : Float32)
+    end
+  end
 
   @[Extern]
-  record MT_ARBITRARY_HEADER,
-    majortype : LibC::GUID,
-    subtype : LibC::GUID,
-    bFixedSizeSamples : Win32cr::Foundation::BOOL,
-    bTemporalCompression : Win32cr::Foundation::BOOL,
-    lSampleSize : UInt32,
-    formattype : LibC::GUID
+  struct MFCameraIntrinsic_DistortionModel6KT
+    property radial_k1 : Float32
+    property radial_k2 : Float32
+    property radial_k3 : Float32
+    property radial_k4 : Float32
+    property radial_k5 : Float32
+    property radial_k6 : Float32
+    property tangential_p1 : Float32
+    property tangential_p2 : Float32
+    def initialize(@radial_k1 : Float32, @radial_k2 : Float32, @radial_k3 : Float32, @radial_k4 : Float32, @radial_k5 : Float32, @radial_k6 : Float32, @tangential_p1 : Float32, @tangential_p2 : Float32)
+    end
+  end
 
   @[Extern]
-  record MF_FLOAT2,
-    x : Float32,
-    y : Float32
+  struct MFCameraIntrinsic_DistortionModelArcTan
+    property radial_k0 : Float32
+    property distortion_center_x : Float32
+    property distortion_center_y : Float32
+    property tangential_x : Float32
+    property tangential_y : Float32
+    def initialize(@radial_k0 : Float32, @distortion_center_x : Float32, @distortion_center_y : Float32, @tangential_x : Float32, @tangential_y : Float32)
+    end
+  end
 
   @[Extern]
-  record MF_FLOAT3,
-    x : Float32,
-    y : Float32,
-    z : Float32
+  struct MFExtendedCameraIntrinsic_IntrinsicModel
+    property width : UInt32
+    property height : UInt32
+    property split_frame_id : UInt32
+    property camera_model : Win32cr::Media::MediaFoundation::MFCameraIntrinsic_CameraModel
+    def initialize(@width : UInt32, @height : UInt32, @split_frame_id : UInt32, @camera_model : Win32cr::Media::MediaFoundation::MFCameraIntrinsic_CameraModel)
+    end
+  end
 
   @[Extern]
-  record MF_QUATERNION,
-    x : Float32,
-    y : Float32,
-    z : Float32,
-    w : Float32
+  struct ASF_INDEX_IDENTIFIER
+    property guidIndexType : LibC::GUID
+    property wStreamNumber : UInt16
+    def initialize(@guidIndexType : LibC::GUID, @wStreamNumber : UInt16)
+    end
+  end
 
   @[Extern]
-  record MFCameraExtrinsic_CalibratedTransform,
-    calibration_id : LibC::GUID,
-    position : Win32cr::Media::MediaFoundation::MF_FLOAT3,
-    orientation : Win32cr::Media::MediaFoundation::MF_QUATERNION
+  struct ASF_INDEX_DESCRIPTOR
+    property identifier : Win32cr::Media::MediaFoundation::ASF_INDEX_IDENTIFIER
+    property cPerEntryBytes : UInt16
+    property szDescription : UInt16[32]
+    property dwInterval : UInt32
+    def initialize(@identifier : Win32cr::Media::MediaFoundation::ASF_INDEX_IDENTIFIER, @cPerEntryBytes : UInt16, @szDescription : UInt16[32], @dwInterval : UInt32)
+    end
+  end
 
   @[Extern]
-  record MFCameraExtrinsics,
-    transform_count : UInt32,
-    calibrated_transforms : Win32cr::Media::MediaFoundation::MFCameraExtrinsic_CalibratedTransform*
+  struct ASF_MUX_STATISTICS
+    property cFramesWritten : UInt32
+    property cFramesDropped : UInt32
+    def initialize(@cFramesWritten : UInt32, @cFramesDropped : UInt32)
+    end
+  end
 
   @[Extern]
-  record MFCameraIntrinsic_PinholeCameraModel,
-    focal_length : Win32cr::Media::MediaFoundation::MF_FLOAT2,
-    principal_point : Win32cr::Media::MediaFoundation::MF_FLOAT2
+  struct MFVideoNormalizedRect
+    property left : Float32
+    property top : Float32
+    property right : Float32
+    property bottom : Float32
+    def initialize(@left : Float32, @top : Float32, @right : Float32, @bottom : Float32)
+    end
+  end
 
   @[Extern]
-  record MFCameraIntrinsic_DistortionModel,
-    radial_k1 : Float32,
-    radial_k2 : Float32,
-    radial_k3 : Float32,
-    tangential_p1 : Float32,
-    tangential_p2 : Float32
+  struct MOVE_RECT
+    property source_point : Win32cr::Foundation::POINT
+    property dest_rect : Win32cr::Foundation::RECT
+    def initialize(@source_point : Win32cr::Foundation::POINT, @dest_rect : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record MFPinholeCameraIntrinsic_IntrinsicModel,
-    width : UInt32,
-    height : UInt32,
-    camera_model : Win32cr::Media::MediaFoundation::MFCameraIntrinsic_PinholeCameraModel,
-    distortion_model : Win32cr::Media::MediaFoundation::MFCameraIntrinsic_DistortionModel
+  struct DIRTYRECT_INFO
+    property frame_number : UInt32
+    property num_dirty_rects : UInt32
+    property dirty_rects : Win32cr::Foundation::RECT*
+    def initialize(@frame_number : UInt32, @num_dirty_rects : UInt32, @dirty_rects : Win32cr::Foundation::RECT*)
+    end
+  end
 
   @[Extern]
-  record MFPinholeCameraIntrinsics,
-    intrinsic_model_count : UInt32,
-    intrinsic_models : Win32cr::Media::MediaFoundation::MFPinholeCameraIntrinsic_IntrinsicModel*
+  struct MOVEREGION_INFO
+    property frame_number : UInt32
+    property num_move_regions : UInt32
+    property move_regions : Win32cr::Media::MediaFoundation::MOVE_RECT*
+    def initialize(@frame_number : UInt32, @num_move_regions : UInt32, @move_regions : Win32cr::Media::MediaFoundation::MOVE_RECT*)
+    end
+  end
 
   @[Extern]
-  record MFMPEG2DLNASINKSTATS,
-    cBytesWritten : UInt64,
-    fPAL : Win32cr::Foundation::BOOL,
-    fccVideo : UInt32,
-    dwVideoWidth : UInt32,
-    dwVideoHeight : UInt32,
-    cVideoFramesReceived : UInt64,
-    cVideoFramesEncoded : UInt64,
-    cVideoFramesSkipped : UInt64,
-    cBlackVideoFramesEncoded : UInt64,
-    cVideoFramesDuplicated : UInt64,
-    cAudioSamplesPerSec : UInt32,
-    cAudioChannels : UInt32,
-    cAudioBytesReceived : UInt64,
-    cAudioFramesEncoded : UInt64
+  struct ROI_AREA
+    property rect : Win32cr::Foundation::RECT
+    property qp_delta : Int32
+    def initialize(@rect : Win32cr::Foundation::RECT, @qp_delta : Int32)
+    end
+  end
 
   @[Extern]
-  record MF_SINK_WRITER_STATISTICS,
-    cb : UInt32,
-    llLastTimestampReceived : Int64,
-    llLastTimestampEncoded : Int64,
-    llLastTimestampProcessed : Int64,
-    llLastStreamTickReceived : Int64,
-    llLastSinkSampleRequest : Int64,
-    qwNumSamplesReceived : UInt64,
-    qwNumSamplesEncoded : UInt64,
-    qwNumSamplesProcessed : UInt64,
-    qwNumStreamTicksReceived : UInt64,
-    dwByteCountQueued : UInt32,
-    qwByteCountProcessed : UInt64,
-    dwNumOutstandingSinkSampleRequests : UInt32,
-    dwAverageSampleRateReceived : UInt32,
-    dwAverageSampleRateEncoded : UInt32,
-    dwAverageSampleRateProcessed : UInt32
+  struct MACROBLOCK_DATA
+    property flags : UInt32
+    property motionVectorX : Int16
+    property motionVectorY : Int16
+    property qp_delta : Int32
+    def initialize(@flags : UInt32, @motionVectorX : Int16, @motionVectorY : Int16, @qp_delta : Int32)
+    end
+  end
 
   @[Extern]
-  record MFP_EVENT_HEADER,
-    eEventType : Win32cr::Media::MediaFoundation::MFP_EVENT_TYPE,
-    hrEvent : Win32cr::Foundation::HRESULT,
-    pMediaPlayer : Void*,
-    eState : Win32cr::Media::MediaFoundation::MFP_MEDIAPLAYER_STATE,
-    pPropertyStore : Void*
+  struct DigitalWindowSetting
+    property origin_x : Float64
+    property origin_y : Float64
+    property window_size : Float64
+    def initialize(@origin_x : Float64, @origin_y : Float64, @window_size : Float64)
+    end
+  end
 
   @[Extern]
-  record MFP_PLAY_EVENT,
-    header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER,
-    pMediaItem : Void*
+  struct MFFOLDDOWN_MATRIX
+    property cbSize : UInt32
+    property cSrcChannels : UInt32
+    property cDstChannels : UInt32
+    property dwChannelMask : UInt32
+    property coeff : Int32[64]
+    def initialize(@cbSize : UInt32, @cSrcChannels : UInt32, @cDstChannels : UInt32, @dwChannelMask : UInt32, @coeff : Int32[64])
+    end
+  end
 
   @[Extern]
-  record MFP_PAUSE_EVENT,
-    header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER,
-    pMediaItem : Void*
+  struct MT_CUSTOM_VIDEO_PRIMARIES
+    property fRx : Float32
+    property fRy : Float32
+    property fGx : Float32
+    property fGy : Float32
+    property fBx : Float32
+    property fBy : Float32
+    property fWx : Float32
+    property fWy : Float32
+    def initialize(@fRx : Float32, @fRy : Float32, @fGx : Float32, @fGy : Float32, @fBx : Float32, @fBy : Float32, @fWx : Float32, @fWy : Float32)
+    end
+  end
 
   @[Extern]
-  record MFP_STOP_EVENT,
-    header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER,
-    pMediaItem : Void*
+  struct MT_ARBITRARY_HEADER
+    property majortype : LibC::GUID
+    property subtype : LibC::GUID
+    property bFixedSizeSamples : Win32cr::Foundation::BOOL
+    property bTemporalCompression : Win32cr::Foundation::BOOL
+    property lSampleSize : UInt32
+    property formattype : LibC::GUID
+    def initialize(@majortype : LibC::GUID, @subtype : LibC::GUID, @bFixedSizeSamples : Win32cr::Foundation::BOOL, @bTemporalCompression : Win32cr::Foundation::BOOL, @lSampleSize : UInt32, @formattype : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record MFP_POSITION_SET_EVENT,
-    header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER,
-    pMediaItem : Void*
+  struct MF_FLOAT2
+    property x : Float32
+    property y : Float32
+    def initialize(@x : Float32, @y : Float32)
+    end
+  end
 
   @[Extern]
-  record MFP_RATE_SET_EVENT,
-    header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER,
-    pMediaItem : Void*,
-    flRate : Float32
+  struct MF_FLOAT3
+    property x : Float32
+    property y : Float32
+    property z : Float32
+    def initialize(@x : Float32, @y : Float32, @z : Float32)
+    end
+  end
 
   @[Extern]
-  record MFP_MEDIAITEM_CREATED_EVENT,
-    header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER,
-    pMediaItem : Void*,
-    dwUserData : LibC::UIntPtrT
+  struct MF_QUATERNION
+    property x : Float32
+    property y : Float32
+    property z : Float32
+    property w : Float32
+    def initialize(@x : Float32, @y : Float32, @z : Float32, @w : Float32)
+    end
+  end
 
   @[Extern]
-  record MFP_MEDIAITEM_SET_EVENT,
-    header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER,
-    pMediaItem : Void*
+  struct MFCameraExtrinsic_CalibratedTransform
+    property calibration_id : LibC::GUID
+    property position : Win32cr::Media::MediaFoundation::MF_FLOAT3
+    property orientation : Win32cr::Media::MediaFoundation::MF_QUATERNION
+    def initialize(@calibration_id : LibC::GUID, @position : Win32cr::Media::MediaFoundation::MF_FLOAT3, @orientation : Win32cr::Media::MediaFoundation::MF_QUATERNION)
+    end
+  end
 
   @[Extern]
-  record MFP_FRAME_STEP_EVENT,
-    header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER,
-    pMediaItem : Void*
+  struct MFCameraExtrinsics
+    property transform_count : UInt32
+    property calibrated_transforms : Win32cr::Media::MediaFoundation::MFCameraExtrinsic_CalibratedTransform*
+    def initialize(@transform_count : UInt32, @calibrated_transforms : Win32cr::Media::MediaFoundation::MFCameraExtrinsic_CalibratedTransform*)
+    end
+  end
 
   @[Extern]
-  record MFP_MEDIAITEM_CLEARED_EVENT,
-    header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER,
-    pMediaItem : Void*
+  struct MFCameraIntrinsic_PinholeCameraModel
+    property focal_length : Win32cr::Media::MediaFoundation::MF_FLOAT2
+    property principal_point : Win32cr::Media::MediaFoundation::MF_FLOAT2
+    def initialize(@focal_length : Win32cr::Media::MediaFoundation::MF_FLOAT2, @principal_point : Win32cr::Media::MediaFoundation::MF_FLOAT2)
+    end
+  end
 
   @[Extern]
-  record MFP_MF_EVENT,
-    header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER,
-    mf_event_type : UInt32,
-    pMFMediaEvent : Void*,
-    pMediaItem : Void*
+  struct MFCameraIntrinsic_DistortionModel
+    property radial_k1 : Float32
+    property radial_k2 : Float32
+    property radial_k3 : Float32
+    property tangential_p1 : Float32
+    property tangential_p2 : Float32
+    def initialize(@radial_k1 : Float32, @radial_k2 : Float32, @radial_k3 : Float32, @tangential_p1 : Float32, @tangential_p2 : Float32)
+    end
+  end
 
   @[Extern]
-  record MFP_ERROR_EVENT,
-    header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+  struct MFPinholeCameraIntrinsic_IntrinsicModel
+    property width : UInt32
+    property height : UInt32
+    property camera_model : Win32cr::Media::MediaFoundation::MFCameraIntrinsic_PinholeCameraModel
+    property distortion_model : Win32cr::Media::MediaFoundation::MFCameraIntrinsic_DistortionModel
+    def initialize(@width : UInt32, @height : UInt32, @camera_model : Win32cr::Media::MediaFoundation::MFCameraIntrinsic_PinholeCameraModel, @distortion_model : Win32cr::Media::MediaFoundation::MFCameraIntrinsic_DistortionModel)
+    end
+  end
 
   @[Extern]
-  record MFP_PLAYBACK_ENDED_EVENT,
-    header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER,
-    pMediaItem : Void*
+  struct MFPinholeCameraIntrinsics
+    property intrinsic_model_count : UInt32
+    property intrinsic_models : Win32cr::Media::MediaFoundation::MFPinholeCameraIntrinsic_IntrinsicModel*
+    def initialize(@intrinsic_model_count : UInt32, @intrinsic_models : Win32cr::Media::MediaFoundation::MFPinholeCameraIntrinsic_IntrinsicModel*)
+    end
+  end
 
   @[Extern]
-  record MFP_ACQUIRE_USER_CREDENTIAL_EVENT,
-    header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER,
-    dwUserData : LibC::UIntPtrT,
-    fProceedWithAuthentication : Win32cr::Foundation::BOOL,
-    hrAuthenticationStatus : Win32cr::Foundation::HRESULT,
-    pwszURL : Win32cr::Foundation::PWSTR,
-    pwszSite : Win32cr::Foundation::PWSTR,
-    pwszRealm : Win32cr::Foundation::PWSTR,
-    pwszPackage : Win32cr::Foundation::PWSTR,
-    nRetries : Int32,
-    flags : UInt32,
-    pCredential : Void*
+  struct MFMPEG2DLNASINKSTATS
+    property cBytesWritten : UInt64
+    property fPAL : Win32cr::Foundation::BOOL
+    property fccVideo : UInt32
+    property dwVideoWidth : UInt32
+    property dwVideoHeight : UInt32
+    property cVideoFramesReceived : UInt64
+    property cVideoFramesEncoded : UInt64
+    property cVideoFramesSkipped : UInt64
+    property cBlackVideoFramesEncoded : UInt64
+    property cVideoFramesDuplicated : UInt64
+    property cAudioSamplesPerSec : UInt32
+    property cAudioChannels : UInt32
+    property cAudioBytesReceived : UInt64
+    property cAudioFramesEncoded : UInt64
+    def initialize(@cBytesWritten : UInt64, @fPAL : Win32cr::Foundation::BOOL, @fccVideo : UInt32, @dwVideoWidth : UInt32, @dwVideoHeight : UInt32, @cVideoFramesReceived : UInt64, @cVideoFramesEncoded : UInt64, @cVideoFramesSkipped : UInt64, @cBlackVideoFramesEncoded : UInt64, @cVideoFramesDuplicated : UInt64, @cAudioSamplesPerSec : UInt32, @cAudioChannels : UInt32, @cAudioBytesReceived : UInt64, @cAudioFramesEncoded : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEVICE_INFO,
-    pFriendlyDeviceName : Win32cr::Foundation::BSTR,
-    pUniqueDeviceName : Win32cr::Foundation::BSTR,
-    pManufacturerName : Win32cr::Foundation::BSTR,
-    pModelName : Win32cr::Foundation::BSTR,
-    pIconURL : Win32cr::Foundation::BSTR
+  struct MF_SINK_WRITER_STATISTICS
+    property cb : UInt32
+    property llLastTimestampReceived : Int64
+    property llLastTimestampEncoded : Int64
+    property llLastTimestampProcessed : Int64
+    property llLastStreamTickReceived : Int64
+    property llLastSinkSampleRequest : Int64
+    property qwNumSamplesReceived : UInt64
+    property qwNumSamplesEncoded : UInt64
+    property qwNumSamplesProcessed : UInt64
+    property qwNumStreamTicksReceived : UInt64
+    property dwByteCountQueued : UInt32
+    property qwByteCountProcessed : UInt64
+    property dwNumOutstandingSinkSampleRequests : UInt32
+    property dwAverageSampleRateReceived : UInt32
+    property dwAverageSampleRateEncoded : UInt32
+    property dwAverageSampleRateProcessed : UInt32
+    def initialize(@cb : UInt32, @llLastTimestampReceived : Int64, @llLastTimestampEncoded : Int64, @llLastTimestampProcessed : Int64, @llLastStreamTickReceived : Int64, @llLastSinkSampleRequest : Int64, @qwNumSamplesReceived : UInt64, @qwNumSamplesEncoded : UInt64, @qwNumSamplesProcessed : UInt64, @qwNumStreamTicksReceived : UInt64, @dwByteCountQueued : UInt32, @qwByteCountProcessed : UInt64, @dwNumOutstandingSinkSampleRequests : UInt32, @dwAverageSampleRateReceived : UInt32, @dwAverageSampleRateEncoded : UInt32, @dwAverageSampleRateProcessed : UInt32)
+    end
+  end
 
   @[Extern]
-  record MFVideoAlphaBitmapParams,
-    dwFlags : UInt32,
-    clrSrcKey : UInt32,
-    rcSrc : Win32cr::Foundation::RECT,
-    nrcDest : Win32cr::Media::MediaFoundation::MFVideoNormalizedRect,
-    fAlpha : Float32,
-    dwFilterMode : UInt32
+  struct MFP_EVENT_HEADER
+    property eEventType : Win32cr::Media::MediaFoundation::MFP_EVENT_TYPE
+    property hrEvent : Win32cr::Foundation::HRESULT
+    property pMediaPlayer : Void*
+    property eState : Win32cr::Media::MediaFoundation::MFP_MEDIAPLAYER_STATE
+    property pPropertyStore : Void*
+    def initialize(@eEventType : Win32cr::Media::MediaFoundation::MFP_EVENT_TYPE, @hrEvent : Win32cr::Foundation::HRESULT, @pMediaPlayer : Void*, @eState : Win32cr::Media::MediaFoundation::MFP_MEDIAPLAYER_STATE, @pPropertyStore : Void*)
+    end
+  end
 
   @[Extern]
-  record MFVideoAlphaBitmap,
-    get_bitmap_from_dc : Win32cr::Foundation::BOOL,
-    bitmap : Bitmap_e__union_,
-    params : Win32cr::Media::MediaFoundation::MFVideoAlphaBitmapParams do
+  struct MFP_PLAY_EVENT
+    property header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+    property pMediaItem : Void*
+    def initialize(@header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER, @pMediaItem : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MFP_PAUSE_EVENT
+    property header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+    property pMediaItem : Void*
+    def initialize(@header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER, @pMediaItem : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MFP_STOP_EVENT
+    property header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+    property pMediaItem : Void*
+    def initialize(@header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER, @pMediaItem : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MFP_POSITION_SET_EVENT
+    property header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+    property pMediaItem : Void*
+    def initialize(@header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER, @pMediaItem : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MFP_RATE_SET_EVENT
+    property header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+    property pMediaItem : Void*
+    property flRate : Float32
+    def initialize(@header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER, @pMediaItem : Void*, @flRate : Float32)
+    end
+  end
+
+  @[Extern]
+  struct MFP_MEDIAITEM_CREATED_EVENT
+    property header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+    property pMediaItem : Void*
+    property dwUserData : LibC::UIntPtrT
+    def initialize(@header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER, @pMediaItem : Void*, @dwUserData : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MFP_MEDIAITEM_SET_EVENT
+    property header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+    property pMediaItem : Void*
+    def initialize(@header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER, @pMediaItem : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MFP_FRAME_STEP_EVENT
+    property header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+    property pMediaItem : Void*
+    def initialize(@header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER, @pMediaItem : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MFP_MEDIAITEM_CLEARED_EVENT
+    property header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+    property pMediaItem : Void*
+    def initialize(@header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER, @pMediaItem : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MFP_MF_EVENT
+    property header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+    property mf_event_type : UInt32
+    property pMFMediaEvent : Void*
+    property pMediaItem : Void*
+    def initialize(@header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER, @mf_event_type : UInt32, @pMFMediaEvent : Void*, @pMediaItem : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MFP_ERROR_EVENT
+    property header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+    def initialize(@header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER)
+    end
+  end
+
+  @[Extern]
+  struct MFP_PLAYBACK_ENDED_EVENT
+    property header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+    property pMediaItem : Void*
+    def initialize(@header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER, @pMediaItem : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MFP_ACQUIRE_USER_CREDENTIAL_EVENT
+    property header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER
+    property dwUserData : LibC::UIntPtrT
+    property fProceedWithAuthentication : Win32cr::Foundation::BOOL
+    property hrAuthenticationStatus : Win32cr::Foundation::HRESULT
+    property pwszURL : Win32cr::Foundation::PWSTR
+    property pwszSite : Win32cr::Foundation::PWSTR
+    property pwszRealm : Win32cr::Foundation::PWSTR
+    property pwszPackage : Win32cr::Foundation::PWSTR
+    property nRetries : Int32
+    property flags : UInt32
+    property pCredential : Void*
+    def initialize(@header : Win32cr::Media::MediaFoundation::MFP_EVENT_HEADER, @dwUserData : LibC::UIntPtrT, @fProceedWithAuthentication : Win32cr::Foundation::BOOL, @hrAuthenticationStatus : Win32cr::Foundation::HRESULT, @pwszURL : Win32cr::Foundation::PWSTR, @pwszSite : Win32cr::Foundation::PWSTR, @pwszRealm : Win32cr::Foundation::PWSTR, @pwszPackage : Win32cr::Foundation::PWSTR, @nRetries : Int32, @flags : UInt32, @pCredential : Void*)
+    end
+  end
+
+  @[Extern]
+  struct DEVICE_INFO
+    property pFriendlyDeviceName : Win32cr::Foundation::BSTR
+    property pUniqueDeviceName : Win32cr::Foundation::BSTR
+    property pManufacturerName : Win32cr::Foundation::BSTR
+    property pModelName : Win32cr::Foundation::BSTR
+    property pIconURL : Win32cr::Foundation::BSTR
+    def initialize(@pFriendlyDeviceName : Win32cr::Foundation::BSTR, @pUniqueDeviceName : Win32cr::Foundation::BSTR, @pManufacturerName : Win32cr::Foundation::BSTR, @pModelName : Win32cr::Foundation::BSTR, @pIconURL : Win32cr::Foundation::BSTR)
+    end
+  end
+
+  @[Extern]
+  struct MFVideoAlphaBitmapParams
+    property dwFlags : UInt32
+    property clrSrcKey : UInt32
+    property rcSrc : Win32cr::Foundation::RECT
+    property nrcDest : Win32cr::Media::MediaFoundation::MFVideoNormalizedRect
+    property fAlpha : Float32
+    property dwFilterMode : UInt32
+    def initialize(@dwFlags : UInt32, @clrSrcKey : UInt32, @rcSrc : Win32cr::Foundation::RECT, @nrcDest : Win32cr::Media::MediaFoundation::MFVideoNormalizedRect, @fAlpha : Float32, @dwFilterMode : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MFVideoAlphaBitmap
+    property get_bitmap_from_dc : Win32cr::Foundation::BOOL
+    property bitmap : Bitmap_e__union_
+    property params : Win32cr::Media::MediaFoundation::MFVideoAlphaBitmapParams
 
     # Nested Type Bitmap_e__union_
     @[Extern(union: true)]
-    record Bitmap_e__union_,
-      hdc : Win32cr::Graphics::Gdi::HDC,
-      pDDS : Void*
+    struct Bitmap_e__union_
+    property hdc : Win32cr::Graphics::Gdi::HDC
+    property pDDS : Void*
+    def initialize(@hdc : Win32cr::Graphics::Gdi::HDC, @pDDS : Void*)
+    end
+    end
 
+    def initialize(@get_bitmap_from_dc : Win32cr::Foundation::BOOL, @bitmap : Bitmap_e__union_, @params : Win32cr::Media::MediaFoundation::MFVideoAlphaBitmapParams)
+    end
   end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record D3DCONTENTPROTECTIONCAPS,
-    caps : UInt32,
-    key_exchange_type : LibC::GUID,
-    buffer_alignment_start : UInt32,
-    block_alignment_size : UInt32,
-    protected_memory_size : UInt64
+  struct D3DCONTENTPROTECTIONCAPS
+    property caps : UInt32
+    property key_exchange_type : LibC::GUID
+    property buffer_alignment_start : UInt32
+    property block_alignment_size : UInt32
+    property protected_memory_size : UInt64
+    def initialize(@caps : UInt32, @key_exchange_type : LibC::GUID, @buffer_alignment_start : UInt32, @block_alignment_size : UInt32, @protected_memory_size : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record DXVA_VideoSample2,
-    rtStart : Int64,
-    rtEnd : Int64,
-    sample_format : UInt32,
-    sample_flags : UInt32,
-    lpDDSSrcSurface : Void*,
-    rcSrc : Win32cr::Foundation::RECT,
-    rcDst : Win32cr::Foundation::RECT,
-    palette : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2[16]
+  struct DXVA_VideoSample2
+    property rtStart : Int64
+    property rtEnd : Int64
+    property sample_format : UInt32
+    property sample_flags : UInt32
+    property lpDDSSrcSurface : Void*
+    property rcSrc : Win32cr::Foundation::RECT
+    property rcDst : Win32cr::Foundation::RECT
+    property palette : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2[16]
+    def initialize(@rtStart : Int64, @rtEnd : Int64, @sample_format : UInt32, @sample_flags : UInt32, @lpDDSSrcSurface : Void*, @rcSrc : Win32cr::Foundation::RECT, @rcDst : Win32cr::Foundation::RECT, @palette : Win32cr::Media::MediaFoundation::DXVA_AYUVsample2[16])
+    end
+  end
   {% end %}
 
   @[Extern]
@@ -8581,7 +9589,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("901db4c7-31ce-41a2-85dc-8fa0bf41b8da")]
   record ICodecAPI, lpVtbl : ICodecAPIVtbl* do
     GUID = LibC::GUID.new(0x901db4c7_u32, 0x31ce_u16, 0x41a2_u16, StaticArray[0x85_u8, 0xdc_u8, 0x8f_u8, 0xa0_u8, 0xbf_u8, 0x41_u8, 0xb8_u8, 0xda_u8])
     def query_interface(this : ICodecAPI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8650,7 +9657,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("187aeb13-aaf5-4c59-876d-e059088c0df8")]
   record IDirect3D9ExOverlayExtension, lpVtbl : IDirect3D9ExOverlayExtensionVtbl* do
     GUID = LibC::GUID.new(0x187aeb13_u32, 0xaaf5_u16, 0x4c59_u16, StaticArray[0x87_u8, 0x6d_u8, 0xe0_u8, 0x59_u8, 0x8_u8, 0x8c_u8, 0xd_u8, 0xf8_u8])
     def query_interface(this : IDirect3D9ExOverlayExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8679,7 +9685,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("26dc4561-a1ee-4ae7-96da-118a36c0ec95")]
   record IDirect3DDevice9Video, lpVtbl : IDirect3DDevice9VideoVtbl* do
     GUID = LibC::GUID.new(0x26dc4561_u32, 0xa1ee_u16, 0x4ae7_u16, StaticArray[0x96_u8, 0xda_u8, 0x11_u8, 0x8a_u8, 0x36_u8, 0xc0_u8, 0xec_u8, 0x95_u8])
     def query_interface(this : IDirect3DDevice9Video*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8716,7 +9721,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("ff24beee-da21-4beb-98b5-d2f899f98af9")]
   record IDirect3DAuthenticatedChannel9, lpVtbl : IDirect3DAuthenticatedChannel9Vtbl* do
     GUID = LibC::GUID.new(0xff24beee_u32, 0xda21_u16, 0x4beb_u16, StaticArray[0x98_u8, 0xb5_u8, 0xd2_u8, 0xf8_u8, 0x99_u8, 0xf9_u8, 0x8a_u8, 0xf9_u8])
     def query_interface(this : IDirect3DAuthenticatedChannel9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8763,7 +9767,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fa0ab799-7a9c-48ca-8c5b-237e71a54434")]
   record IDirect3DCryptoSession9, lpVtbl : IDirect3DCryptoSession9Vtbl* do
     GUID = LibC::GUID.new(0xfa0ab799_u32, 0x7a9c_u16, 0x48ca_u16, StaticArray[0x8c_u8, 0x5b_u8, 0x23_u8, 0x7e_u8, 0x71_u8, 0xa5_u8, 0x44_u8, 0x34_u8])
     def query_interface(this : IDirect3DCryptoSession9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8819,7 +9822,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("0946b7c9-ebf6-4047-bb73-8683e27dbb1f")]
   record ID3D12VideoDecoderHeap, lpVtbl : ID3D12VideoDecoderHeapVtbl* do
     GUID = LibC::GUID.new(0x946b7c9_u32, 0xebf6_u16, 0x4047_u16, StaticArray[0xbb_u8, 0x73_u8, 0x86_u8, 0x83_u8, 0xe2_u8, 0x7d_u8, 0xbb_u8, 0x1f_u8])
     def query_interface(this : ID3D12VideoDecoderHeap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8864,7 +9866,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("1f052807-0b46-4acc-8a89-364f793718a4")]
   record ID3D12VideoDevice, lpVtbl : ID3D12VideoDeviceVtbl* do
     GUID = LibC::GUID.new(0x1f052807_u32, 0xb46_u16, 0x4acc_u16, StaticArray[0x8a_u8, 0x89_u8, 0x36_u8, 0x4f_u8, 0x79_u8, 0x37_u8, 0x18_u8, 0xa4_u8])
     def query_interface(this : ID3D12VideoDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8905,7 +9906,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("c59b6bdc-7720-4074-a136-17a156037470")]
   record ID3D12VideoDecoder, lpVtbl : ID3D12VideoDecoderVtbl* do
     GUID = LibC::GUID.new(0xc59b6bdc_u32, 0x7720_u16, 0x4074_u16, StaticArray[0xa1_u8, 0x36_u8, 0x17_u8, 0xa1_u8, 0x56_u8, 0x3_u8, 0x74_u8, 0x70_u8])
     def query_interface(this : ID3D12VideoDecoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8955,7 +9955,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("304fdb32-bede-410a-8545-943ac6a46138")]
   record ID3D12VideoProcessor, lpVtbl : ID3D12VideoProcessorVtbl* do
     GUID = LibC::GUID.new(0x304fdb32_u32, 0xbede_u16, 0x410a_u16, StaticArray[0x85_u8, 0x45_u8, 0x94_u8, 0x3a_u8, 0xc6_u8, 0xa4_u8, 0x61_u8, 0x38_u8])
     def query_interface(this : ID3D12VideoProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9025,7 +10024,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("3b60536e-ad29-4e64-a269-f853837e5e53")]
   record ID3D12VideoDecodeCommandList, lpVtbl : ID3D12VideoDecodeCommandListVtbl* do
     GUID = LibC::GUID.new(0x3b60536e_u32, 0xad29_u16, 0x4e64_u16, StaticArray[0xa2_u8, 0x69_u8, 0xf8_u8, 0x53_u8, 0x83_u8, 0x7e_u8, 0x5e_u8, 0x53_u8])
     def query_interface(this : ID3D12VideoDecodeCommandList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9128,7 +10126,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("aeb2543a-167f-4682-acc8-d159ed4a6209")]
   record ID3D12VideoProcessCommandList, lpVtbl : ID3D12VideoProcessCommandListVtbl* do
     GUID = LibC::GUID.new(0xaeb2543a_u32, 0x167f_u16, 0x4682_u16, StaticArray[0xac_u8, 0xc8_u8, 0xd1_u8, 0x59_u8, 0xed_u8, 0x4a_u8, 0x62_u8, 0x9_u8])
     def query_interface(this : ID3D12VideoProcessCommandList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9232,7 +10229,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d52f011b-b56e-453c-a05a-a7f311c8f472")]
   record ID3D12VideoDecodeCommandList1, lpVtbl : ID3D12VideoDecodeCommandList1Vtbl* do
     GUID = LibC::GUID.new(0xd52f011b_u32, 0xb56e_u16, 0x453c_u16, StaticArray[0xa0_u8, 0x5a_u8, 0xa7_u8, 0xf3_u8, 0x11_u8, 0xc8_u8, 0xf4_u8, 0x72_u8])
     def query_interface(this : ID3D12VideoDecodeCommandList1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9339,7 +10335,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("542c5c4d-7596-434f-8c93-4efa6766f267")]
   record ID3D12VideoProcessCommandList1, lpVtbl : ID3D12VideoProcessCommandList1Vtbl* do
     GUID = LibC::GUID.new(0x542c5c4d_u32, 0x7596_u16, 0x434f_u16, StaticArray[0x8c_u8, 0x93_u8, 0x4e_u8, 0xfa_u8, 0x67_u8, 0x66_u8, 0xf2_u8, 0x67_u8])
     def query_interface(this : ID3D12VideoProcessCommandList1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9432,7 +10427,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("33fdae0e-098b-428f-87bb-34b695de08f8")]
   record ID3D12VideoMotionEstimator, lpVtbl : ID3D12VideoMotionEstimatorVtbl* do
     GUID = LibC::GUID.new(0x33fdae0e_u32, 0x98b_u16, 0x428f_u16, StaticArray[0x87_u8, 0xbb_u8, 0x34_u8, 0xb6_u8, 0x95_u8, 0xde_u8, 0x8_u8, 0xf8_u8])
     def query_interface(this : ID3D12VideoMotionEstimator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9483,7 +10477,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("5be17987-743a-4061-834b-23d22daea505")]
   record ID3D12VideoMotionVectorHeap, lpVtbl : ID3D12VideoMotionVectorHeapVtbl* do
     GUID = LibC::GUID.new(0x5be17987_u32, 0x743a_u16, 0x4061_u16, StaticArray[0x83_u8, 0x4b_u8, 0x23_u8, 0xd2_u8, 0x2d_u8, 0xae_u8, 0xa5_u8, 0x5_u8])
     def query_interface(this : ID3D12VideoMotionVectorHeap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9533,7 +10526,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("981611ad-a144-4c83-9890-f30e26d658ab")]
   record ID3D12VideoDevice1, lpVtbl : ID3D12VideoDevice1Vtbl* do
     GUID = LibC::GUID.new(0x981611ad_u32, 0xa144_u16, 0x4c83_u16, StaticArray[0x98_u8, 0x90_u8, 0xf3_u8, 0xe_u8, 0x26_u8, 0xd6_u8, 0x58_u8, 0xab_u8])
     def query_interface(this : ID3D12VideoDevice1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9596,7 +10588,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("8455293a-0cbd-4831-9b39-fbdbab724723")]
   record ID3D12VideoEncodeCommandList, lpVtbl : ID3D12VideoEncodeCommandListVtbl* do
     GUID = LibC::GUID.new(0x8455293a_u32, 0xcbd_u16, 0x4831_u16, StaticArray[0x9b_u8, 0x39_u8, 0xfb_u8, 0xdb_u8, 0xab_u8, 0x72_u8, 0x47_u8, 0x23_u8])
     def query_interface(this : ID3D12VideoEncodeCommandList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9692,7 +10683,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("79a2e5fb-ccd2-469a-9fde-195d10951f7e")]
   record ID3D12VideoDecoder1, lpVtbl : ID3D12VideoDecoder1Vtbl* do
     GUID = LibC::GUID.new(0x79a2e5fb_u32, 0xccd2_u16, 0x469a_u16, StaticArray[0x9f_u8, 0xde_u8, 0x19_u8, 0x5d_u8, 0x10_u8, 0x95_u8, 0x1f_u8, 0x7e_u8])
     def query_interface(this : ID3D12VideoDecoder1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9743,7 +10733,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("da1d98c5-539f-41b2-bf6b-1198a03b6d26")]
   record ID3D12VideoDecoderHeap1, lpVtbl : ID3D12VideoDecoderHeap1Vtbl* do
     GUID = LibC::GUID.new(0xda1d98c5_u32, 0x539f_u16, 0x41b2_u16, StaticArray[0xbf_u8, 0x6b_u8, 0x11_u8, 0x98_u8, 0xa0_u8, 0x3b_u8, 0x6d_u8, 0x26_u8])
     def query_interface(this : ID3D12VideoDecoderHeap1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9797,7 +10786,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("f3cfe615-553f-425c-86d8-ee8c1b1fb01c")]
   record ID3D12VideoProcessor1, lpVtbl : ID3D12VideoProcessor1Vtbl* do
     GUID = LibC::GUID.new(0xf3cfe615_u32, 0x553f_u16, 0x425c_u16, StaticArray[0x86_u8, 0xd8_u8, 0xee_u8, 0x8c_u8, 0x1b_u8, 0x1f_u8, 0xb0_u8, 0x1c_u8])
     def query_interface(this : ID3D12VideoProcessor1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9857,7 +10845,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("554e41e8-ae8e-4a8c-b7d2-5b4f274a30e4")]
   record ID3D12VideoExtensionCommand, lpVtbl : ID3D12VideoExtensionCommandVtbl* do
     GUID = LibC::GUID.new(0x554e41e8_u32, 0xae8e_u16, 0x4a8c_u16, StaticArray[0xb7_u8, 0xd2_u8, 0x5b_u8, 0x4f_u8, 0x27_u8, 0x4a_u8, 0x30_u8, 0xe4_u8])
     def query_interface(this : ID3D12VideoExtensionCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9912,7 +10899,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("f019ac49-f838-4a95-9b17-579437c8f513")]
   record ID3D12VideoDevice2, lpVtbl : ID3D12VideoDevice2Vtbl* do
     GUID = LibC::GUID.new(0xf019ac49_u32, 0xf838_u16, 0x4a95_u16, StaticArray[0x9b_u8, 0x17_u8, 0x57_u8, 0x94_u8, 0x37_u8, 0xc8_u8, 0xf5_u8, 0x13_u8])
     def query_interface(this : ID3D12VideoDevice2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9992,7 +10978,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("6e120880-c114-4153-8036-d247051e1729")]
   record ID3D12VideoDecodeCommandList2, lpVtbl : ID3D12VideoDecodeCommandList2Vtbl* do
     GUID = LibC::GUID.new(0x6e120880_u32, 0xc114_u16, 0x4153_u16, StaticArray[0x80_u8, 0x36_u8, 0xd2_u8, 0x47_u8, 0x5_u8, 0x1e_u8, 0x17_u8, 0x29_u8])
     def query_interface(this : ID3D12VideoDecodeCommandList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10111,7 +11096,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("db525ae4-6ad6-473c-baa7-59b2e37082e4")]
   record ID3D12VideoProcessCommandList2, lpVtbl : ID3D12VideoProcessCommandList2Vtbl* do
     GUID = LibC::GUID.new(0xdb525ae4_u32, 0x6ad6_u16, 0x473c_u16, StaticArray[0xba_u8, 0xa7_u8, 0x59_u8, 0xb2_u8, 0xe3_u8, 0x70_u8, 0x82_u8, 0xe4_u8])
     def query_interface(this : ID3D12VideoProcessCommandList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10230,7 +11214,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("94971eca-2bdb-4769-88cf-3675ea757ebc")]
   record ID3D12VideoEncodeCommandList1, lpVtbl : ID3D12VideoEncodeCommandList1Vtbl* do
     GUID = LibC::GUID.new(0x94971eca_u32, 0x2bdb_u16, 0x4769_u16, StaticArray[0x88_u8, 0xcf_u8, 0x36_u8, 0x75_u8, 0xea_u8, 0x75_u8, 0x7e_u8, 0xbc_u8])
     def query_interface(this : ID3D12VideoEncodeCommandList1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10337,7 +11320,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("2e0d212d-8df9-44a6-a770-bb289b182737")]
   record ID3D12VideoEncoder, lpVtbl : ID3D12VideoEncoderVtbl* do
     GUID = LibC::GUID.new(0x2e0d212d_u32, 0x8df9_u16, 0x44a6_u16, StaticArray[0xa7_u8, 0x70_u8, 0xbb_u8, 0x28_u8, 0x9b_u8, 0x18_u8, 0x27_u8, 0x37_u8])
     def query_interface(this : ID3D12VideoEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10408,7 +11390,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("22b35d96-876a-44c0-b25e-fb8c9c7f1c4a")]
   record ID3D12VideoEncoderHeap, lpVtbl : ID3D12VideoEncoderHeapVtbl* do
     GUID = LibC::GUID.new(0x22b35d96_u32, 0x876a_u16, 0x44c0_u16, StaticArray[0xb2_u8, 0x5e_u8, 0xfb_u8, 0x8c_u8, 0x9c_u8, 0x7f_u8, 0x1c_u8, 0x4a_u8])
     def query_interface(this : ID3D12VideoEncoderHeap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10480,7 +11461,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("4243adb4-3a32-4666-973c-0ccc5625dc44")]
   record ID3D12VideoDevice3, lpVtbl : ID3D12VideoDevice3Vtbl* do
     GUID = LibC::GUID.new(0x4243adb4_u32, 0x3a32_u16, 0x4666_u16, StaticArray[0x97_u8, 0x3c_u8, 0xc_u8, 0xcc_u8, 0x56_u8, 0x25_u8, 0xdc_u8, 0x44_u8])
     def query_interface(this : ID3D12VideoDevice3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10568,7 +11548,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("895491e2-e701-46a9-9a1f-8d3480ed867a")]
   record ID3D12VideoEncodeCommandList2, lpVtbl : ID3D12VideoEncodeCommandList2Vtbl* do
     GUID = LibC::GUID.new(0x895491e2_u32, 0xe701_u16, 0x46a9_u16, StaticArray[0x9a_u8, 0x1f_u8, 0x8d_u8, 0x34_u8, 0x80_u8, 0xed_u8, 0x86_u8, 0x7a_u8])
     def query_interface(this : ID3D12VideoEncodeCommandList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10670,7 +11649,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("cee3def2-3808-414d-be66-fafd472210bc")]
   record IWMValidate, lpVtbl : IWMValidateVtbl* do
     GUID = LibC::GUID.new(0xcee3def2_u32, 0x3808_u16, 0x414d_u16, StaticArray[0xbe_u8, 0x66_u8, 0xfa_u8, 0xfd_u8, 0x47_u8, 0x22_u8, 0x10_u8, 0xbc_u8])
     def query_interface(this : IWMValidate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10697,7 +11675,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("04a578b2-e778-422a-a805-b3ee54d90bd9")]
   record IValidateBinding, lpVtbl : IValidateBindingVtbl* do
     GUID = LibC::GUID.new(0x4a578b2_u32, 0xe778_u16, 0x422a_u16, StaticArray[0xa8_u8, 0x5_u8, 0xb3_u8, 0xee_u8, 0x54_u8, 0xd9_u8, 0xb_u8, 0xd9_u8])
     def query_interface(this : IValidateBinding*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10725,7 +11702,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("352bb3bd-2d4d-4323-9e71-dcdcfbd53ca6")]
   record IWMVideoDecoderHurryup, lpVtbl : IWMVideoDecoderHurryupVtbl* do
     GUID = LibC::GUID.new(0x352bb3bd_u32, 0x2d4d_u16, 0x4323_u16, StaticArray[0x9e_u8, 0x71_u8, 0xdc_u8, 0xdc_u8, 0xfb_u8, 0xd5_u8, 0x3c_u8, 0xa6_u8])
     def query_interface(this : IWMVideoDecoderHurryup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10755,7 +11731,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("9f8496be-5b9a-41b9-a9e8-f21cd80596c2")]
   record IWMVideoForceKeyFrame, lpVtbl : IWMVideoForceKeyFrameVtbl* do
     GUID = LibC::GUID.new(0x9f8496be_u32, 0x5b9a_u16, 0x41b9_u16, StaticArray[0xa9_u8, 0xe8_u8, 0xf2_u8, 0x1c_u8, 0xd8_u8, 0x5_u8, 0x96_u8, 0xc2_u8])
     def query_interface(this : IWMVideoForceKeyFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10783,7 +11758,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a7b2504b-e58a-47fb-958b-cac7165a057d")]
   record IWMCodecStrings, lpVtbl : IWMCodecStringsVtbl* do
     GUID = LibC::GUID.new(0xa7b2504b_u32, 0xe58a_u16, 0x47fb_u16, StaticArray[0x95_u8, 0x8b_u8, 0xca_u8, 0xc7_u8, 0x16_u8, 0x5a_u8, 0x5_u8, 0x7d_u8])
     def query_interface(this : IWMCodecStrings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10814,7 +11788,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("2573e11a-f01a-4fdd-a98d-63b8e0ba9589")]
   record IWMCodecProps, lpVtbl : IWMCodecPropsVtbl* do
     GUID = LibC::GUID.new(0x2573e11a_u32, 0xf01a_u16, 0x4fdd_u16, StaticArray[0xa9_u8, 0x8d_u8, 0x63_u8, 0xb8_u8, 0xe0_u8, 0xba_u8, 0x95_u8, 0x89_u8])
     def query_interface(this : IWMCodecProps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10847,7 +11820,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a81ba647-6227-43b7-b231-c7b15135dd7d")]
   record IWMCodecLeakyBucket, lpVtbl : IWMCodecLeakyBucketVtbl* do
     GUID = LibC::GUID.new(0xa81ba647_u32, 0x6227_u16, 0x43b7_u16, StaticArray[0xb2_u8, 0x31_u8, 0xc7_u8, 0xb1_u8, 0x51_u8, 0x35_u8, 0xdd_u8, 0x7d_u8])
     def query_interface(this : IWMCodecLeakyBucket*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10883,7 +11855,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("b72adf95-7adc-4a72-bc05-577d8ea6bf68")]
   record IWMCodecOutputTimestamp, lpVtbl : IWMCodecOutputTimestampVtbl* do
     GUID = LibC::GUID.new(0xb72adf95_u32, 0x7adc_u16, 0x4a72_u16, StaticArray[0xbc_u8, 0x5_u8, 0x57_u8, 0x7d_u8, 0x8e_u8, 0xa6_u8, 0xbf_u8, 0x68_u8])
     def query_interface(this : IWMCodecOutputTimestamp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10912,7 +11883,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("45bda2ac-88e2-4923-98ba-3949080711a3")]
   record IWMVideoDecoderReconBuffer, lpVtbl : IWMVideoDecoderReconBufferVtbl* do
     GUID = LibC::GUID.new(0x45bda2ac_u32, 0x88e2_u16, 0x4923_u16, StaticArray[0x98_u8, 0xba_u8, 0x39_u8, 0x49_u8, 0x8_u8, 0x7_u8, 0x11_u8, 0xa3_u8])
     def query_interface(this : IWMVideoDecoderReconBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10946,7 +11916,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("73f0be8e-57f7-4f01-aa66-9f57340cfe0e")]
   record IWMCodecPrivateData, lpVtbl : IWMCodecPrivateDataVtbl* do
     GUID = LibC::GUID.new(0x73f0be8e_u32, 0x57f7_u16, 0x4f01_u16, StaticArray[0xaa_u8, 0x66_u8, 0x9f_u8, 0x57_u8, 0x34_u8, 0xc_u8, 0xfe_u8, 0xe_u8])
     def query_interface(this : IWMCodecPrivateData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10976,7 +11945,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("9bca9884-0604-4c2a-87da-793ff4d586c3")]
   record IWMSampleExtensionSupport, lpVtbl : IWMSampleExtensionSupportVtbl* do
     GUID = LibC::GUID.new(0x9bca9884_u32, 0x604_u16, 0x4c2a_u16, StaticArray[0x87_u8, 0xda_u8, 0x79_u8, 0x3f_u8, 0xf4_u8, 0xd5_u8, 0x86_u8, 0xc3_u8])
     def query_interface(this : IWMSampleExtensionSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11004,7 +11972,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e7e9984f-f09f-4da4-903f-6e2e0efe56b5")]
   record IWMResamplerProps, lpVtbl : IWMResamplerPropsVtbl* do
     GUID = LibC::GUID.new(0xe7e9984f_u32, 0xf09f_u16, 0x4da4_u16, StaticArray[0x90_u8, 0x3f_u8, 0x6e_u8, 0x2e_u8, 0xe_u8, 0xfe_u8, 0x56_u8, 0xb5_u8])
     def query_interface(this : IWMResamplerProps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11038,7 +12005,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("57665d4c-0414-4faa-905b-10e546f81c33")]
   record IWMResizerProps, lpVtbl : IWMResizerPropsVtbl* do
     GUID = LibC::GUID.new(0x57665d4c_u32, 0x414_u16, 0x4faa_u16, StaticArray[0x90_u8, 0x5b_u8, 0x10_u8, 0xe5_u8, 0x46_u8, 0xf8_u8, 0x1c_u8, 0x33_u8])
     def query_interface(this : IWMResizerProps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11077,7 +12043,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("776c93b3-b72d-4508-b6d0-208785f553e7")]
   record IWMColorLegalizerProps, lpVtbl : IWMColorLegalizerPropsVtbl* do
     GUID = LibC::GUID.new(0x776c93b3_u32, 0xb72d_u16, 0x4508_u16, StaticArray[0xb6_u8, 0xd0_u8, 0x20_u8, 0x87_u8, 0x85_u8, 0xf5_u8, 0x53_u8, 0xe7_u8])
     def query_interface(this : IWMColorLegalizerProps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11106,7 +12071,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("7b12e5d1-bd22-48ea-bc06-98e893221c89")]
   record IWMInterlaceProps, lpVtbl : IWMInterlacePropsVtbl* do
     GUID = LibC::GUID.new(0x7b12e5d1_u32, 0xbd22_u16, 0x48ea_u16, StaticArray[0xbc_u8, 0x6_u8, 0x98_u8, 0xe8_u8, 0x93_u8, 0x22_u8, 0x1c_u8, 0x89_u8])
     def query_interface(this : IWMInterlaceProps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11142,7 +12106,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("4c06bb9b-626c-4614-8329-cc6a21b93fa0")]
   record IWMFrameInterpProps, lpVtbl : IWMFrameInterpPropsVtbl* do
     GUID = LibC::GUID.new(0x4c06bb9b_u32, 0x626c_u16, 0x4614_u16, StaticArray[0x83_u8, 0x29_u8, 0xcc_u8, 0x6a_u8, 0x21_u8, 0xb9_u8, 0x3f_u8, 0xa0_u8])
     def query_interface(this : IWMFrameInterpProps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11179,7 +12142,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e6a49e22-c099-421d-aad3-c061fb4ae85b")]
   record IWMColorConvProps, lpVtbl : IWMColorConvPropsVtbl* do
     GUID = LibC::GUID.new(0xe6a49e22_u32, 0xc099_u16, 0x421d_u16, StaticArray[0xaa_u8, 0xd3_u8, 0xc0_u8, 0x61_u8, 0xfb_u8, 0x4a_u8, 0xe8_u8, 0x5b_u8])
     def query_interface(this : IWMColorConvProps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11216,7 +12178,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("f22f5e06-585c-4def-8523-6555cfbc0cb3")]
   record ITocEntry, lpVtbl : ITocEntryVtbl* do
     GUID = LibC::GUID.new(0xf22f5e06_u32, 0x585c_u16, 0x4def_u16, StaticArray[0x85_u8, 0x23_u8, 0x65_u8, 0x55_u8, 0xcf_u8, 0xbc_u8, 0xc_u8, 0xb3_u8])
     def query_interface(this : ITocEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11268,7 +12229,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("3a8cccbd-0efd-43a3-b838-f38a552ba237")]
   record ITocEntryList, lpVtbl : ITocEntryListVtbl* do
     GUID = LibC::GUID.new(0x3a8cccbd_u32, 0xefd_u16, 0x43a3_u16, StaticArray[0xb8_u8, 0x38_u8, 0xf3_u8, 0x8a_u8, 0x55_u8, 0x2b_u8, 0xa2_u8, 0x37_u8])
     def query_interface(this : ITocEntryList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11317,7 +12277,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d6f05441-a919-423b-91a0-89d5b4a8ab77")]
   record IToc, lpVtbl : ITocVtbl* do
     GUID = LibC::GUID.new(0xd6f05441_u32, 0xa919_u16, 0x423b_u16, StaticArray[0x91_u8, 0xa0_u8, 0x89_u8, 0xd5_u8, 0xb4_u8, 0xa8_u8, 0xab_u8, 0x77_u8])
     def query_interface(this : IToc*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11378,7 +12337,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("23fee831-ae96-42df-b170-25a04847a3ca")]
   record ITocCollection, lpVtbl : ITocCollectionVtbl* do
     GUID = LibC::GUID.new(0x23fee831_u32, 0xae96_u16, 0x42df_u16, StaticArray[0xb1_u8, 0x70_u8, 0x25_u8, 0xa0_u8, 0x48_u8, 0x47_u8, 0xa3_u8, 0xca_u8])
     def query_interface(this : ITocCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11424,7 +12382,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("ecfb9a55-9298-4f49-887f-0b36206599d2")]
   record ITocParser, lpVtbl : ITocParserVtbl* do
     GUID = LibC::GUID.new(0xecfb9a55_u32, 0x9298_u16, 0x4f49_u16, StaticArray[0x88_u8, 0x7f_u8, 0xb_u8, 0x36_u8, 0x20_u8, 0x65_u8, 0x99_u8, 0xd2_u8])
     def query_interface(this : ITocParser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11481,7 +12438,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("11993196-1244-4840-ab44-480975c4ffe4")]
   record IFileIo, lpVtbl : IFileIoVtbl* do
     GUID = LibC::GUID.new(0x11993196_u32, 0x1244_u16, 0x4840_u16, StaticArray[0xab_u8, 0x44_u8, 0x48_u8, 0x9_u8, 0x75_u8, 0xc4_u8, 0xff_u8, 0xe4_u8])
     def query_interface(this : IFileIo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11537,7 +12493,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("bfccd196-1244-4840-ab44-480975c4ffe4")]
   record IFileClient, lpVtbl : IFileClientVtbl* do
     GUID = LibC::GUID.new(0xbfccd196_u32, 0x1244_u16, 0x4840_u16, StaticArray[0xab_u8, 0x44_u8, 0x48_u8, 0x9_u8, 0x75_u8, 0xc4_u8, 0xff_u8, 0xe4_u8])
     def query_interface(this : IFileClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11571,7 +12526,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("3f07f7b7-c680-41d9-9423-915107ec9ff9")]
   record IClusterDetector, lpVtbl : IClusterDetectorVtbl* do
     GUID = LibC::GUID.new(0x3f07f7b7_u32, 0xc680_u16, 0x41d9_u16, StaticArray[0x94_u8, 0x23_u8, 0x91_u8, 0x51_u8, 0x7_u8, 0xec_u8, 0x9f_u8, 0xf9_u8])
     def query_interface(this : IClusterDetector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11608,7 +12562,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("95f12dfd-d77e-49be-815f-57d579634d6d")]
   record IDXVAHD_Device, lpVtbl : IDXVAHD_DeviceVtbl* do
     GUID = LibC::GUID.new(0x95f12dfd_u32, 0xd77e_u16, 0x49be_u16, StaticArray[0x81_u8, 0x5f_u8, 0x57_u8, 0xd5_u8, 0x79_u8, 0x63_u8, 0x4d_u8, 0x6d_u8])
     def query_interface(this : IDXVAHD_Device*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11660,7 +12613,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("95f4edf4-6e03-4cd7-be1b-3075d665aa52")]
   record IDXVAHD_VideoProcessor, lpVtbl : IDXVAHD_VideoProcessorVtbl* do
     GUID = LibC::GUID.new(0x95f4edf4_u32, 0x6e03_u16, 0x4cd7_u16, StaticArray[0xbe_u8, 0x1b_u8, 0x30_u8, 0x75_u8, 0xd6_u8, 0x65_u8, 0xaa_u8, 0x52_u8])
     def query_interface(this : IDXVAHD_VideoProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11705,7 +12657,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a0cade0f-06d5-4cf4-a1c7-f3cdd725aa75")]
   record IDirect3DDeviceManager9, lpVtbl : IDirect3DDeviceManager9Vtbl* do
     GUID = LibC::GUID.new(0xa0cade0f_u32, 0x6d5_u16, 0x4cf4_u16, StaticArray[0xa1_u8, 0xc7_u8, 0xf3_u8, 0xcd_u8, 0xd7_u8, 0x25_u8, 0xaa_u8, 0x75_u8])
     def query_interface(this : IDirect3DDeviceManager9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11750,7 +12701,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fc51a550-d5e7-11d9-af55-00054e43ff02")]
   record IDirectXVideoAccelerationService, lpVtbl : IDirectXVideoAccelerationServiceVtbl* do
     GUID = LibC::GUID.new(0xfc51a550_u32, 0xd5e7_u16, 0x11d9_u16, StaticArray[0xaf_u8, 0x55_u8, 0x0_u8, 0x5_u8, 0x4e_u8, 0x43_u8, 0xff_u8, 0x2_u8])
     def query_interface(this : IDirectXVideoAccelerationService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11781,7 +12731,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fc51a551-d5e7-11d9-af55-00054e43ff02")]
   record IDirectXVideoDecoderService, lpVtbl : IDirectXVideoDecoderServiceVtbl* do
     GUID = LibC::GUID.new(0xfc51a551_u32, 0xd5e7_u16, 0x11d9_u16, StaticArray[0xaf_u8, 0x55_u8, 0x0_u8, 0x5_u8, 0x4e_u8, 0x43_u8, 0xff_u8, 0x2_u8])
     def query_interface(this : IDirectXVideoDecoderService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11828,7 +12777,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fc51a552-d5e7-11d9-af55-00054e43ff02")]
   record IDirectXVideoProcessorService, lpVtbl : IDirectXVideoProcessorServiceVtbl* do
     GUID = LibC::GUID.new(0xfc51a552_u32, 0xd5e7_u16, 0x11d9_u16, StaticArray[0xaf_u8, 0x55_u8, 0x0_u8, 0x5_u8, 0x4e_u8, 0x43_u8, 0xff_u8, 0x2_u8])
     def query_interface(this : IDirectXVideoProcessorService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11885,7 +12833,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("f2b0810a-fd00-43c9-918c-df94e2d8ef7d")]
   record IDirectXVideoDecoder, lpVtbl : IDirectXVideoDecoderVtbl* do
     GUID = LibC::GUID.new(0xf2b0810a_u32, 0xfd00_u16, 0x43c9_u16, StaticArray[0x91_u8, 0x8c_u8, 0xdf_u8, 0x94_u8, 0xe2_u8, 0xd8_u8, 0xef_u8, 0x7d_u8])
     def query_interface(this : IDirectXVideoDecoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11935,7 +12882,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("8c3a39f0-916e-4690-804f-4c8001355d25")]
   record IDirectXVideoProcessor, lpVtbl : IDirectXVideoProcessorVtbl* do
     GUID = LibC::GUID.new(0x8c3a39f0_u32, 0x916e_u16, 0x4690_u16, StaticArray[0x80_u8, 0x4f_u8, 0x4c_u8, 0x80_u8, 0x1_u8, 0x35_u8, 0x5d_u8, 0x25_u8])
     def query_interface(this : IDirectXVideoProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11978,7 +12924,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("b7f916dd-db3b-49c1-84d7-e45ef99ec726")]
   record IDirectXVideoMemoryConfiguration, lpVtbl : IDirectXVideoMemoryConfigurationVtbl* do
     GUID = LibC::GUID.new(0xb7f916dd_u32, 0xdb3b_u16, 0x49c1_u16, StaticArray[0x84_u8, 0xd7_u8, 0xe4_u8, 0x5e_u8, 0xf9_u8, 0x9e_u8, 0xc7_u8, 0x26_u8])
     def query_interface(this : IDirectXVideoMemoryConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12012,7 +12957,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("0a15159d-41c7-4456-93e1-284cd61d4e8d")]
   record IOPMVideoOutput, lpVtbl : IOPMVideoOutputVtbl* do
     GUID = LibC::GUID.new(0xa15159d_u32, 0x41c7_u16, 0x4456_u16, StaticArray[0x93_u8, 0xe1_u8, 0x28_u8, 0x4c_u8, 0xd6_u8, 0x1d_u8, 0x4e_u8, 0x8d_u8])
     def query_interface(this : IOPMVideoOutput*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12080,7 +13024,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("2cd2d921-c447-44a7-a13c-4adabfc247e3")]
   record IMFAttributes, lpVtbl : IMFAttributesVtbl* do
     GUID = LibC::GUID.new(0x2cd2d921_u32, 0xc447_u16, 0x44a7_u16, StaticArray[0xa1_u8, 0x3c_u8, 0x4a_u8, 0xda_u8, 0xbf_u8, 0xc2_u8, 0x47_u8, 0xe3_u8])
     def query_interface(this : IMFAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12198,7 +13141,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("045fa593-8799-42b8-bc8d-8968c6453507")]
   record IMFMediaBuffer, lpVtbl : IMFMediaBufferVtbl* do
     GUID = LibC::GUID.new(0x45fa593_u32, 0x8799_u16, 0x42b8_u16, StaticArray[0xbc_u8, 0x8d_u8, 0x89_u8, 0x68_u8, 0xc6_u8, 0x45_u8, 0x35_u8, 0x7_u8])
     def query_interface(this : IMFMediaBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12280,7 +13222,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("c40a00f2-b93a-4d80-ae8c-5a1c634f58e4")]
   record IMFSample, lpVtbl : IMFSampleVtbl* do
     GUID = LibC::GUID.new(0xc40a00f2_u32, 0xb93a_u16, 0x4d80_u16, StaticArray[0xae_u8, 0x8c_u8, 0x5a_u8, 0x1c_u8, 0x63_u8, 0x4f_u8, 0x58_u8, 0xe4_u8])
     def query_interface(this : IMFSample*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12442,7 +13383,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("7dc9d5f9-9ed9-44ec-9bbf-0600bb589fbb")]
   record IMF2DBuffer, lpVtbl : IMF2DBufferVtbl* do
     GUID = LibC::GUID.new(0x7dc9d5f9_u32, 0x9ed9_u16, 0x44ec_u16, StaticArray[0x9b_u8, 0xbf_u8, 0x6_u8, 0x0_u8, 0xbb_u8, 0x58_u8, 0x9f_u8, 0xbb_u8])
     def query_interface(this : IMF2DBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12495,7 +13435,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("33ae5ea6-4316-436f-8ddd-d73d22f829ec")]
   record IMF2DBuffer2, lpVtbl : IMF2DBuffer2Vtbl* do
     GUID = LibC::GUID.new(0x33ae5ea6_u32, 0x4316_u16, 0x436f_u16, StaticArray[0x8d_u8, 0xdd_u8, 0xd7_u8, 0x3d_u8, 0x22_u8, 0xf8_u8, 0x29_u8, 0xec_u8])
     def query_interface(this : IMF2DBuffer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12549,7 +13488,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e7174cfa-1c9e-48b1-8866-626226bfc258")]
   record IMFDXGIBuffer, lpVtbl : IMFDXGIBufferVtbl* do
     GUID = LibC::GUID.new(0xe7174cfa_u32, 0x1c9e_u16, 0x48b1_u16, StaticArray[0x88_u8, 0x66_u8, 0x62_u8, 0x62_u8, 0x26_u8, 0xbf_u8, 0xc2_u8, 0x58_u8])
     def query_interface(this : IMFDXGIBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12619,7 +13557,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("44ae0fa8-ea31-4109-8d2e-4cae4997c555")]
   record IMFMediaType, lpVtbl : IMFMediaTypeVtbl* do
     GUID = LibC::GUID.new(0x44ae0fa8_u32, 0xea31_u16, 0x4109_u16, StaticArray[0x8d_u8, 0x2e_u8, 0x4c_u8, 0xae_u8, 0x49_u8, 0x97_u8, 0xc5_u8, 0x55_u8])
     def query_interface(this : IMFMediaType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12783,7 +13720,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("26a0adc3-ce26-4672-9304-69552edd3faf")]
   record IMFAudioMediaType, lpVtbl : IMFAudioMediaTypeVtbl* do
     GUID = LibC::GUID.new(0x26a0adc3_u32, 0xce26_u16, 0x4672_u16, StaticArray[0x93_u8, 0x4_u8, 0x69_u8, 0x55_u8, 0x2e_u8, 0xdd_u8, 0x3f_u8, 0xaf_u8])
     def query_interface(this : IMFAudioMediaType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12951,7 +13887,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("b99f381f-a8f9-47a2-a5af-ca3a225a3890")]
   record IMFVideoMediaType, lpVtbl : IMFVideoMediaTypeVtbl* do
     GUID = LibC::GUID.new(0xb99f381f_u32, 0xa8f9_u16, 0x47a2_u16, StaticArray[0xa5_u8, 0xaf_u8, 0xca_u8, 0x3a_u8, 0x22_u8, 0x5a_u8, 0x38_u8, 0x90_u8])
     def query_interface(this : IMFVideoMediaType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13090,7 +14025,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("ac6b7889-0740-4d51-8619-905994a55cc6")]
   record IMFAsyncResult, lpVtbl : IMFAsyncResultVtbl* do
     GUID = LibC::GUID.new(0xac6b7889_u32, 0x740_u16, 0x4d51_u16, StaticArray[0x86_u8, 0x19_u8, 0x90_u8, 0x59_u8, 0x94_u8, 0xa5_u8, 0x5c_u8, 0xc6_u8])
     def query_interface(this : IMFAsyncResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13130,7 +14064,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a27003cf-2354-4f2a-8d6a-ab7cff15437e")]
   record IMFAsyncCallback, lpVtbl : IMFAsyncCallbackVtbl* do
     GUID = LibC::GUID.new(0xa27003cf_u32, 0x2354_u16, 0x4f2a_u16, StaticArray[0x8d_u8, 0x6a_u8, 0xab_u8, 0x7c_u8, 0xff_u8, 0x15_u8, 0x43_u8, 0x7e_u8])
     def query_interface(this : IMFAsyncCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13163,7 +14096,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("c7a4dca1-f5f0-47b6-b92b-bf0106d25791")]
   record IMFAsyncCallbackLogging, lpVtbl : IMFAsyncCallbackLoggingVtbl* do
     GUID = LibC::GUID.new(0xc7a4dca1_u32, 0xf5f0_u16, 0x47b6_u16, StaticArray[0xb9_u8, 0x2b_u8, 0xbf_u8, 0x1_u8, 0x6_u8, 0xd2_u8, 0x57_u8, 0x91_u8])
     def query_interface(this : IMFAsyncCallbackLogging*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13232,7 +14164,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("df598932-f10c-4e39-bba2-c308f101daa3")]
   record IMFMediaEvent, lpVtbl : IMFMediaEventVtbl* do
     GUID = LibC::GUID.new(0xdf598932_u32, 0xf10c_u16, 0x4e39_u16, StaticArray[0xbb_u8, 0xa2_u8, 0xc3_u8, 0x8_u8, 0xf1_u8, 0x1_u8, 0xda_u8, 0xa3_u8])
     def query_interface(this : IMFMediaEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13361,7 +14292,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("2cd0bd52-bcd5-4b89-b62c-eadc0c031e7d")]
   record IMFMediaEventGenerator, lpVtbl : IMFMediaEventGeneratorVtbl* do
     GUID = LibC::GUID.new(0x2cd0bd52_u32, 0xbcd5_u16, 0x4b89_u16, StaticArray[0xb6_u8, 0x2c_u8, 0xea_u8, 0xdc_u8, 0xc_u8, 0x3_u8, 0x1e_u8, 0x7d_u8])
     def query_interface(this : IMFMediaEventGenerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13397,7 +14327,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a27003d0-2354-4f2a-8d6a-ab7cff15437e")]
   record IMFRemoteAsyncCallback, lpVtbl : IMFRemoteAsyncCallbackVtbl* do
     GUID = LibC::GUID.new(0xa27003d0_u32, 0x2354_u16, 0x4f2a_u16, StaticArray[0x8d_u8, 0x6a_u8, 0xab_u8, 0x7c_u8, 0xff_u8, 0x15_u8, 0x43_u8, 0x7e_u8])
     def query_interface(this : IMFRemoteAsyncCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13438,7 +14367,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("ad4c1b00-4bf7-422f-9175-756693d9130d")]
   record IMFByteStream, lpVtbl : IMFByteStreamVtbl* do
     GUID = LibC::GUID.new(0xad4c1b00_u32, 0x4bf7_u16, 0x422f_u16, StaticArray[0x91_u8, 0x75_u8, 0x75_u8, 0x66_u8, 0x93_u8, 0xd9_u8, 0x13_u8, 0xd_u8])
     def query_interface(this : IMFByteStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13507,7 +14435,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a6b43f84-5c0a-42e8-a44d-b1857a76992f")]
   record IMFByteStreamProxyClassFactory, lpVtbl : IMFByteStreamProxyClassFactoryVtbl* do
     GUID = LibC::GUID.new(0xa6b43f84_u32, 0x5c0a_u16, 0x42e8_u16, StaticArray[0xa4_u8, 0x4d_u8, 0xb1_u8, 0x85_u8, 0x7a_u8, 0x76_u8, 0x99_u8, 0x2f_u8])
     def query_interface(this : IMFByteStreamProxyClassFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13536,7 +14463,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("8feed468-6f7e-440d-869a-49bdd283ad0d")]
   record IMFSampleOutputStream, lpVtbl : IMFSampleOutputStreamVtbl* do
     GUID = LibC::GUID.new(0x8feed468_u32, 0x6f7e_u16, 0x440d_u16, StaticArray[0x86_u8, 0x9a_u8, 0x49_u8, 0xbd_u8, 0xd2_u8, 0x83_u8, 0xad_u8, 0xd_u8])
     def query_interface(this : IMFSampleOutputStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13574,7 +14500,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("5bc8a76b-869a-46a3-9b03-fa218a66aebe")]
   record IMFCollection, lpVtbl : IMFCollectionVtbl* do
     GUID = LibC::GUID.new(0x5bc8a76b_u32, 0x869a_u16, 0x46a3_u16, StaticArray[0x9b_u8, 0x3_u8, 0xfa_u8, 0x21_u8, 0x8a_u8, 0x66_u8, 0xae_u8, 0xbe_u8])
     def query_interface(this : IMFCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13622,7 +14547,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("36f846fc-2256-48b6-b58e-e2b638316581")]
   record IMFMediaEventQueue, lpVtbl : IMFMediaEventQueueVtbl* do
     GUID = LibC::GUID.new(0x36f846fc_u32, 0x2256_u16, 0x48b6_u16, StaticArray[0xb5_u8, 0x8e_u8, 0xe2_u8, 0xb6_u8, 0x38_u8, 0x31_u8, 0x65_u8, 0x81_u8])
     def query_interface(this : IMFMediaEventQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13699,7 +14623,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("7fee9e9a-4a89-47a6-899c-b6a53a70fb67")]
   record IMFActivate, lpVtbl : IMFActivateVtbl* do
     GUID = LibC::GUID.new(0x7fee9e9a_u32, 0x4a89_u16, 0x47a6_u16, StaticArray[0x89_u8, 0x9c_u8, 0xb6_u8, 0xa5_u8, 0x3a_u8, 0x70_u8, 0xfb_u8, 0x67_u8])
     def query_interface(this : IMFActivate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13827,7 +14750,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("5c6c44bf-1db6-435b-9249-e8cd10fdec96")]
   record IMFPluginControl, lpVtbl : IMFPluginControlVtbl* do
     GUID = LibC::GUID.new(0x5c6c44bf_u32, 0x1db6_u16, 0x435b_u16, StaticArray[0x92_u8, 0x49_u8, 0xe8_u8, 0xcd_u8, 0x10_u8, 0xfd_u8, 0xec_u8, 0x96_u8])
     def query_interface(this : IMFPluginControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13875,7 +14797,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("c6982083-3ddc-45cb-af5e-0f7a8ce4de77")]
   record IMFPluginControl2, lpVtbl : IMFPluginControl2Vtbl* do
     GUID = LibC::GUID.new(0xc6982083_u32, 0x3ddc_u16, 0x45cb_u16, StaticArray[0xaf_u8, 0x5e_u8, 0xf_u8, 0x7a_u8, 0x8c_u8, 0xe4_u8, 0xde_u8, 0x77_u8])
     def query_interface(this : IMFPluginControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13926,7 +14847,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("eb533d5d-2db6-40f8-97a9-494692014f07")]
   record IMFDXGIDeviceManager, lpVtbl : IMFDXGIDeviceManagerVtbl* do
     GUID = LibC::GUID.new(0xeb533d5d_u32, 0x2db6_u16, 0x40f8_u16, StaticArray[0x97_u8, 0xa9_u8, 0x49_u8, 0x46_u8, 0x92_u8, 0x1_u8, 0x4f_u8, 0x7_u8])
     def query_interface(this : IMFDXGIDeviceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13972,7 +14892,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("ce8bd576-e440-43b3-be34-1e53f565f7e8")]
   record IMFMuxStreamAttributesManager, lpVtbl : IMFMuxStreamAttributesManagerVtbl* do
     GUID = LibC::GUID.new(0xce8bd576_u32, 0xe440_u16, 0x43b3_u16, StaticArray[0xbe_u8, 0x34_u8, 0x1e_u8, 0x53_u8, 0xf5_u8, 0x65_u8, 0xf7_u8, 0xe8_u8])
     def query_interface(this : IMFMuxStreamAttributesManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14007,7 +14926,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("505a2c72-42f7-4690-aeab-8f513d0ffdb8")]
   record IMFMuxStreamMediaTypeManager, lpVtbl : IMFMuxStreamMediaTypeManagerVtbl* do
     GUID = LibC::GUID.new(0x505a2c72_u32, 0x42f7_u16, 0x4690_u16, StaticArray[0xae_u8, 0xab_u8, 0x8f_u8, 0x51_u8, 0x3d_u8, 0xf_u8, 0xfd_u8, 0xb8_u8])
     def query_interface(this : IMFMuxStreamMediaTypeManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14051,7 +14969,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("74abbc19-b1cc-4e41-bb8b-9d9b86a8f6ca")]
   record IMFMuxStreamSampleManager, lpVtbl : IMFMuxStreamSampleManagerVtbl* do
     GUID = LibC::GUID.new(0x74abbc19_u32, 0xb1cc_u16, 0x4e41_u16, StaticArray[0xbb_u8, 0x8b_u8, 0x9d_u8, 0x9b_u8, 0x86_u8, 0xa8_u8, 0xf6_u8, 0xca_u8])
     def query_interface(this : IMFMuxStreamSampleManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14084,7 +15001,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("c1209904-e584-4752-a2d6-7f21693f8b21")]
   record IMFSecureBuffer, lpVtbl : IMFSecureBufferVtbl* do
     GUID = LibC::GUID.new(0xc1209904_u32, 0xe584_u16, 0x4752_u16, StaticArray[0xa2_u8, 0xd6_u8, 0x7f_u8, 0x21_u8, 0x69_u8, 0x3f_u8, 0x8b_u8, 0x21_u8])
     def query_interface(this : IMFSecureBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14133,7 +15049,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("bf94c121-5b05-4e6f-8000-ba598961414d")]
   record IMFTransform, lpVtbl : IMFTransformVtbl* do
     GUID = LibC::GUID.new(0xbf94c121_u32, 0x5b05_u16, 0x4e6f_u16, StaticArray[0x80_u8, 0x0_u8, 0xba_u8, 0x59_u8, 0x89_u8, 0x61_u8, 0x41_u8, 0x4d_u8])
     def query_interface(this : IMFTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14245,7 +15160,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d818fbd8-fc46-42f2-87ac-1ea2d1f9bf32")]
   record IMFDeviceTransform, lpVtbl : IMFDeviceTransformVtbl* do
     GUID = LibC::GUID.new(0xd818fbd8_u32, 0xfc46_u16, 0x42f2_u16, StaticArray[0x87_u8, 0xac_u8, 0x1e_u8, 0xa2_u8, 0xd1_u8, 0xf9_u8, 0xbf_u8, 0x32_u8])
     def query_interface(this : IMFDeviceTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14329,7 +15243,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("6d5cb646-29ec-41fb-8179-8c4c6d750811")]
   record IMFDeviceTransformCallback, lpVtbl : IMFDeviceTransformCallbackVtbl* do
     GUID = LibC::GUID.new(0x6d5cb646_u32, 0x29ec_u16, 0x41fb_u16, StaticArray[0x81_u8, 0x79_u8, 0x8c_u8, 0x4c_u8, 0x6d_u8, 0x75_u8, 0x8_u8, 0x11_u8])
     def query_interface(this : IMFDeviceTransformCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14369,7 +15282,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("90377834-21d0-4dee-8214-ba2e3e6c1127")]
   record IMFMediaSession, lpVtbl : IMFMediaSessionVtbl* do
     GUID = LibC::GUID.new(0x90377834_u32, 0x21d0_u16, 0x4dee_u16, StaticArray[0x82_u8, 0x14_u8, 0xba_u8, 0x2e_u8, 0x3e_u8, 0x6c_u8, 0x11_u8, 0x27_u8])
     def query_interface(this : IMFMediaSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14441,7 +15353,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fbe5a32d-a497-4b61-bb85-97b1a848a6e3")]
   record IMFSourceResolver, lpVtbl : IMFSourceResolverVtbl* do
     GUID = LibC::GUID.new(0xfbe5a32d_u32, 0xa497_u16, 0x4b61_u16, StaticArray[0xbb_u8, 0x85_u8, 0x97_u8, 0xb1_u8, 0xa8_u8, 0x48_u8, 0xa6_u8, 0xe3_u8])
     def query_interface(this : IMFSourceResolver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14495,7 +15406,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("279a808d-aec7-40c8-9c6b-a6b492c78a66")]
   record IMFMediaSource, lpVtbl : IMFMediaSourceVtbl* do
     GUID = LibC::GUID.new(0x279a808d_u32, 0xaec7_u16, 0x40c8_u16, StaticArray[0x9c_u8, 0x6b_u8, 0xa6_u8, 0xb4_u8, 0x92_u8, 0xc7_u8, 0x8a_u8, 0x66_u8])
     def query_interface(this : IMFMediaSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14561,7 +15471,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("3c9b2eb9-86d5-4514-a394-f56664f9f0d8")]
   record IMFMediaSourceEx, lpVtbl : IMFMediaSourceExVtbl* do
     GUID = LibC::GUID.new(0x3c9b2eb9_u32, 0x86d5_u16, 0x4514_u16, StaticArray[0xa3_u8, 0x94_u8, 0xf5_u8, 0x66_u8, 0x64_u8, 0xf9_u8, 0xf0_u8, 0xd8_u8])
     def query_interface(this : IMFMediaSourceEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14625,7 +15534,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("6ef2a662-47c0-4666-b13d-cbb717f2fa2c")]
   record IMFClockConsumer, lpVtbl : IMFClockConsumerVtbl* do
     GUID = LibC::GUID.new(0x6ef2a662_u32, 0x47c0_u16, 0x4666_u16, StaticArray[0xb1_u8, 0x3d_u8, 0xcb_u8, 0xb7_u8, 0x17_u8, 0xf2_u8, 0xfa_u8, 0x2c_u8])
     def query_interface(this : IMFClockConsumer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14661,7 +15569,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d182108f-4ec6-443f-aa42-a71106ec825f")]
   record IMFMediaStream, lpVtbl : IMFMediaStreamVtbl* do
     GUID = LibC::GUID.new(0xd182108f_u32, 0x4ec6_u16, 0x443f_u16, StaticArray[0xaa_u8, 0x42_u8, 0xa7_u8, 0x11_u8, 0x6_u8, 0xec_u8, 0x82_u8, 0x5f_u8])
     def query_interface(this : IMFMediaStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14714,7 +15621,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("6ef2a660-47c0-4666-b13d-cbb717f2fa2c")]
   record IMFMediaSink, lpVtbl : IMFMediaSinkVtbl* do
     GUID = LibC::GUID.new(0x6ef2a660_u32, 0x47c0_u16, 0x4666_u16, StaticArray[0xb1_u8, 0x3d_u8, 0xcb_u8, 0xb7_u8, 0x17_u8, 0xf2_u8, 0xfa_u8, 0x2c_u8])
     def query_interface(this : IMFMediaSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14774,7 +15680,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("0a97b3cf-8e7c-4a3d-8f8c-0c843dc247fb")]
   record IMFStreamSink, lpVtbl : IMFStreamSinkVtbl* do
     GUID = LibC::GUID.new(0xa97b3cf_u32, 0x8e7c_u16, 0x4a3d_u16, StaticArray[0x8f_u8, 0x8c_u8, 0xc_u8, 0x84_u8, 0x3d_u8, 0xc2_u8, 0x47_u8, 0xfb_u8])
     def query_interface(this : IMFStreamSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14831,7 +15736,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("86cbc910-e533-4751-8e3b-f19b5b806a03")]
   record IMFVideoSampleAllocator, lpVtbl : IMFVideoSampleAllocatorVtbl* do
     GUID = LibC::GUID.new(0x86cbc910_u32, 0xe533_u16, 0x4751_u16, StaticArray[0x8e_u8, 0x3b_u8, 0xf1_u8, 0x9b_u8, 0x5b_u8, 0x80_u8, 0x6a_u8, 0x3_u8])
     def query_interface(this : IMFVideoSampleAllocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14867,7 +15771,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a792cdbe-c374-4e89-8335-278e7b9956a4")]
   record IMFVideoSampleAllocatorNotify, lpVtbl : IMFVideoSampleAllocatorNotifyVtbl* do
     GUID = LibC::GUID.new(0xa792cdbe_u32, 0xc374_u16, 0x4e89_u16, StaticArray[0x83_u8, 0x35_u8, 0x27_u8, 0x8e_u8, 0x7b_u8, 0x99_u8, 0x56_u8, 0xa4_u8])
     def query_interface(this : IMFVideoSampleAllocatorNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14895,7 +15798,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("3978aa1a-6d5b-4b7f-a340-90899189ae34")]
   record IMFVideoSampleAllocatorNotifyEx, lpVtbl : IMFVideoSampleAllocatorNotifyExVtbl* do
     GUID = LibC::GUID.new(0x3978aa1a_u32, 0x6d5b_u16, 0x4b7f_u16, StaticArray[0xa3_u8, 0x40_u8, 0x90_u8, 0x89_u8, 0x91_u8, 0x89_u8, 0xae_u8, 0x34_u8])
     def query_interface(this : IMFVideoSampleAllocatorNotifyEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14926,7 +15828,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("992388b4-3372-4f67-8b6f-c84c071f4751")]
   record IMFVideoSampleAllocatorCallback, lpVtbl : IMFVideoSampleAllocatorCallbackVtbl* do
     GUID = LibC::GUID.new(0x992388b4_u32, 0x3372_u16, 0x4f67_u16, StaticArray[0x8b_u8, 0x6f_u8, 0xc8_u8, 0x4c_u8, 0x7_u8, 0x1f_u8, 0x47_u8, 0x51_u8])
     def query_interface(this : IMFVideoSampleAllocatorCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14960,7 +15861,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("545b3a48-3283-4f62-866f-a62d8f598f9f")]
   record IMFVideoSampleAllocatorEx, lpVtbl : IMFVideoSampleAllocatorExVtbl* do
     GUID = LibC::GUID.new(0x545b3a48_u32, 0x3283_u16, 0x4f62_u16, StaticArray[0x86_u8, 0x6f_u8, 0xa6_u8, 0x2d_u8, 0x8f_u8, 0x59_u8, 0x8f_u8, 0x9f_u8])
     def query_interface(this : IMFVideoSampleAllocatorEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14999,7 +15899,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("20bc074b-7a8d-4609-8c3b-64a0a3b5d7ce")]
   record IMFDXGIDeviceManagerSource, lpVtbl : IMFDXGIDeviceManagerSourceVtbl* do
     GUID = LibC::GUID.new(0x20bc074b_u32, 0x7a8d_u16, 0x4609_u16, StaticArray[0x8c_u8, 0x3b_u8, 0x64_u8, 0xa0_u8, 0xa3_u8, 0xb5_u8, 0xd7_u8, 0xce_u8])
     def query_interface(this : IMFDXGIDeviceManagerSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15031,7 +15930,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a3f675d5-6119-4f7f-a100-1d8b280f0efb")]
   record IMFVideoProcessorControl, lpVtbl : IMFVideoProcessorControlVtbl* do
     GUID = LibC::GUID.new(0xa3f675d5_u32, 0x6119_u16, 0x4f7f_u16, StaticArray[0xa1_u8, 0x0_u8, 0x1d_u8, 0x8b_u8, 0x28_u8, 0xf_u8, 0xe_u8, 0xfb_u8])
     def query_interface(this : IMFVideoProcessorControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15081,7 +15979,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("bde633d3-e1dc-4a7f-a693-bbae399c4a20")]
   record IMFVideoProcessorControl2, lpVtbl : IMFVideoProcessorControl2Vtbl* do
     GUID = LibC::GUID.new(0xbde633d3_u32, 0xe1dc_u16, 0x4a7f_u16, StaticArray[0xa6_u8, 0x93_u8, 0xbb_u8, 0xae_u8, 0x39_u8, 0x9c_u8, 0x4a_u8, 0x20_u8])
     def query_interface(this : IMFVideoProcessorControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15144,7 +16041,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("2424b3f2-eb23-40f1-91aa-74bddeea0883")]
   record IMFVideoProcessorControl3, lpVtbl : IMFVideoProcessorControl3Vtbl* do
     GUID = LibC::GUID.new(0x2424b3f2_u32, 0xeb23_u16, 0x40f1_u16, StaticArray[0x91_u8, 0xaa_u8, 0x74_u8, 0xbd_u8, 0xde_u8, 0xea_u8, 0x8_u8, 0x83_u8])
     def query_interface(this : IMFVideoProcessorControl3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15207,7 +16103,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("604d33d7-cf23-41d5-8224-5bbbb1a87475")]
   record IMFVideoRendererEffectControl, lpVtbl : IMFVideoRendererEffectControlVtbl* do
     GUID = LibC::GUID.new(0x604d33d7_u32, 0xcf23_u16, 0x41d5_u16, StaticArray[0x82_u8, 0x24_u8, 0x5b_u8, 0xbb_u8, 0xb1_u8, 0xa8_u8, 0x74_u8, 0x75_u8])
     def query_interface(this : IMFVideoRendererEffectControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15273,7 +16168,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("83cf873a-f6da-4bc8-823f-bacfd55dc433")]
   record IMFTopology, lpVtbl : IMFTopologyVtbl* do
     GUID = LibC::GUID.new(0x83cf873a_u32, 0xf6da_u16, 0x4bc8_u16, StaticArray[0x82_u8, 0x3f_u8, 0xba_u8, 0xcf_u8, 0xd5_u8, 0x5d_u8, 0xc4_u8, 0x33_u8])
     def query_interface(this : IMFTopology*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15462,7 +16356,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("83cf873a-f6da-4bc8-823f-bacfd55dc430")]
   record IMFTopologyNode, lpVtbl : IMFTopologyNodeVtbl* do
     GUID = LibC::GUID.new(0x83cf873a_u32, 0xf6da_u16, 0x4bc8_u16, StaticArray[0x82_u8, 0x3f_u8, 0xba_u8, 0xcf_u8, 0xd5_u8, 0x5d_u8, 0xc4_u8, 0x30_u8])
     def query_interface(this : IMFTopologyNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15624,7 +16517,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fa993888-4383-415a-a930-dd472a8cf6f7")]
   record IMFGetService, lpVtbl : IMFGetServiceVtbl* do
     GUID = LibC::GUID.new(0xfa993888_u32, 0x4383_u16, 0x415a_u16, StaticArray[0xa9_u8, 0x30_u8, 0xdd_u8, 0x47_u8, 0x2a_u8, 0x8c_u8, 0xf6_u8, 0xf7_u8])
     def query_interface(this : IMFGetService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15655,7 +16547,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("2eb1e945-18b8-4139-9b1a-d5d584818530")]
   record IMFClock, lpVtbl : IMFClockVtbl* do
     GUID = LibC::GUID.new(0x2eb1e945_u32, 0x18b8_u16, 0x4139_u16, StaticArray[0x9b_u8, 0x1a_u8, 0xd5_u8, 0xd5_u8, 0x84_u8, 0x81_u8, 0x85_u8, 0x30_u8])
     def query_interface(this : IMFClock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15706,7 +16597,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("868ce85c-8ea9-4f55-ab82-b009a910a805")]
   record IMFPresentationClock, lpVtbl : IMFPresentationClockVtbl* do
     GUID = LibC::GUID.new(0x868ce85c_u32, 0x8ea9_u16, 0x4f55_u16, StaticArray[0xab_u8, 0x82_u8, 0xb0_u8, 0x9_u8, 0xa9_u8, 0x10_u8, 0xa8_u8, 0x5_u8])
     def query_interface(this : IMFPresentationClock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15774,7 +16664,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("7ff12cce-f76f-41c2-863b-1666c8e5e139")]
   record IMFPresentationTimeSource, lpVtbl : IMFPresentationTimeSourceVtbl* do
     GUID = LibC::GUID.new(0x7ff12cce_u32, 0xf76f_u16, 0x41c2_u16, StaticArray[0x86_u8, 0x3b_u8, 0x16_u8, 0x66_u8, 0xc8_u8, 0xe5_u8, 0xe1_u8, 0x39_u8])
     def query_interface(this : IMFPresentationTimeSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15820,7 +16709,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("f6696e82-74f7-4f3d-a178-8a5e09c3659f")]
   record IMFClockStateSink, lpVtbl : IMFClockStateSinkVtbl* do
     GUID = LibC::GUID.new(0xf6696e82_u32, 0x74f7_u16, 0x4f3d_u16, StaticArray[0xa1_u8, 0x78_u8, 0x8a_u8, 0x5e_u8, 0x9_u8, 0xc3_u8, 0x65_u8, 0x9f_u8])
     def query_interface(this : IMFClockStateSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15893,7 +16781,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("03cb2711-24d7-4db6-a17f-f3a7a479a536")]
   record IMFPresentationDescriptor, lpVtbl : IMFPresentationDescriptorVtbl* do
     GUID = LibC::GUID.new(0x3cb2711_u32, 0x24d7_u16, 0x4db6_u16, StaticArray[0xa1_u8, 0x7f_u8, 0xf3_u8, 0xa7_u8, 0xa4_u8, 0x79_u8, 0xa5_u8, 0x36_u8])
     def query_interface(this : IMFPresentationDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16053,7 +16940,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("56c03d9c-9dbb-45f5-ab4b-d80f47c05938")]
   record IMFStreamDescriptor, lpVtbl : IMFStreamDescriptorVtbl* do
     GUID = LibC::GUID.new(0x56c03d9c_u32, 0x9dbb_u16, 0x45f5_u16, StaticArray[0xab_u8, 0x4b_u8, 0xd8_u8, 0xf_u8, 0x47_u8, 0xc0_u8, 0x59_u8, 0x38_u8])
     def query_interface(this : IMFStreamDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16178,7 +17064,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e93dcf6c-4b07-4e1e-8123-aa16ed6eadf5")]
   record IMFMediaTypeHandler, lpVtbl : IMFMediaTypeHandlerVtbl* do
     GUID = LibC::GUID.new(0xe93dcf6c_u32, 0x4b07_u16, 0x4e1e_u16, StaticArray[0x81_u8, 0x23_u8, 0xaa_u8, 0x16_u8, 0xed_u8, 0x6e_u8, 0xad_u8, 0xf5_u8])
     def query_interface(this : IMFMediaTypeHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16221,7 +17106,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e56e4cbd-8f70-49d8-a0f8-edb3d6ab9bf2")]
   record IMFTimer, lpVtbl : IMFTimerVtbl* do
     GUID = LibC::GUID.new(0xe56e4cbd_u32, 0x8f70_u16, 0x49d8_u16, StaticArray[0xa0_u8, 0xf8_u8, 0xed_u8, 0xb3_u8, 0xd6_u8, 0xab_u8, 0x9b_u8, 0xf2_u8])
     def query_interface(this : IMFTimer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16252,7 +17136,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("97ec2ea4-0e42-4937-97ac-9d6d328824e1")]
   record IMFShutdown, lpVtbl : IMFShutdownVtbl* do
     GUID = LibC::GUID.new(0x97ec2ea4_u32, 0xe42_u16, 0x4937_u16, StaticArray[0x97_u8, 0xac_u8, 0x9d_u8, 0x6d_u8, 0x32_u8, 0x88_u8, 0x24_u8, 0xe1_u8])
     def query_interface(this : IMFShutdown*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16282,7 +17165,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("de9a6157-f660-4643-b56a-df9f7998c7cd")]
   record IMFTopoLoader, lpVtbl : IMFTopoLoaderVtbl* do
     GUID = LibC::GUID.new(0xde9a6157_u32, 0xf660_u16, 0x4643_u16, StaticArray[0xb5_u8, 0x6a_u8, 0xdf_u8, 0x9f_u8, 0x79_u8, 0x98_u8, 0xc7_u8, 0xcd_u8])
     def query_interface(this : IMFTopoLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16310,7 +17192,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("acf92459-6a61-42bd-b57c-b43e51203cb0")]
   record IMFContentProtectionManager, lpVtbl : IMFContentProtectionManagerVtbl* do
     GUID = LibC::GUID.new(0xacf92459_u32, 0x6a61_u16, 0x42bd_u16, StaticArray[0xb5_u8, 0x7c_u8, 0xb4_u8, 0x3e_u8, 0x51_u8, 0x20_u8, 0x3c_u8, 0xb0_u8])
     def query_interface(this : IMFContentProtectionManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16346,7 +17227,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d3c4ef59-49ce-4381-9071-d5bcd044c770")]
   record IMFContentEnabler, lpVtbl : IMFContentEnablerVtbl* do
     GUID = LibC::GUID.new(0xd3c4ef59_u32, 0x49ce_u16, 0x4381_u16, StaticArray[0x90_u8, 0x71_u8, 0xd5_u8, 0xbc_u8, 0xd0_u8, 0x44_u8, 0xc7_u8, 0x70_u8])
     def query_interface(this : IMFContentEnabler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16397,7 +17277,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("f88cfb8c-ef16-4991-b450-cb8c69e51704")]
   record IMFMetadata, lpVtbl : IMFMetadataVtbl* do
     GUID = LibC::GUID.new(0xf88cfb8c_u32, 0xef16_u16, 0x4991_u16, StaticArray[0xb4_u8, 0x50_u8, 0xcb_u8, 0x8c_u8, 0x69_u8, 0xe5_u8, 0x17_u8, 0x4_u8])
     def query_interface(this : IMFMetadata*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16442,7 +17321,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("56181d2d-e221-4adb-b1c8-3cee6a53f76f")]
   record IMFMetadataProvider, lpVtbl : IMFMetadataProviderVtbl* do
     GUID = LibC::GUID.new(0x56181d2d_u32, 0xe221_u16, 0x4adb_u16, StaticArray[0xb1_u8, 0xc8_u8, 0x3c_u8, 0xee_u8, 0x6a_u8, 0x53_u8, 0xf7_u8, 0x6f_u8])
     def query_interface(this : IMFMetadataProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16471,7 +17349,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("0a9ccdbc-d797-4563-9667-94ec5d79292d")]
   record IMFRateSupport, lpVtbl : IMFRateSupportVtbl* do
     GUID = LibC::GUID.new(0xa9ccdbc_u32, 0xd797_u16, 0x4563_u16, StaticArray[0x96_u8, 0x67_u8, 0x94_u8, 0xec_u8, 0x5d_u8, 0x79_u8, 0x29_u8, 0x2d_u8])
     def query_interface(this : IMFRateSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16505,7 +17382,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("88ddcd21-03c3-4275-91ed-55ee3929328f")]
   record IMFRateControl, lpVtbl : IMFRateControlVtbl* do
     GUID = LibC::GUID.new(0x88ddcd21_u32, 0x3c3_u16, 0x4275_u16, StaticArray[0x91_u8, 0xed_u8, 0x55_u8, 0xee_u8, 0x39_u8, 0x29_u8, 0x32_u8, 0x8f_u8])
     def query_interface(this : IMFRateControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16538,7 +17414,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("ab9d8661-f7e8-4ef4-9861-89f334f94e74")]
   record IMFTimecodeTranslate, lpVtbl : IMFTimecodeTranslateVtbl* do
     GUID = LibC::GUID.new(0xab9d8661_u32, 0xf7e8_u16, 0x4ef4_u16, StaticArray[0x98_u8, 0x61_u8, 0x89_u8, 0xf3_u8, 0x34_u8, 0xf9_u8, 0x4e_u8, 0x74_u8])
     def query_interface(this : IMFTimecodeTranslate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16574,7 +17449,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("26afea53-d9ed-42b5-ab80-e64f9ee34779")]
   record IMFSeekInfo, lpVtbl : IMFSeekInfoVtbl* do
     GUID = LibC::GUID.new(0x26afea53_u32, 0xd9ed_u16, 0x42b5_u16, StaticArray[0xab_u8, 0x80_u8, 0xe6_u8, 0x4f_u8, 0x9e_u8, 0xe3_u8, 0x47_u8, 0x79_u8])
     def query_interface(this : IMFSeekInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16604,7 +17478,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("089edf13-cf71-4338-8d13-9e569dbdc319")]
   record IMFSimpleAudioVolume, lpVtbl : IMFSimpleAudioVolumeVtbl* do
     GUID = LibC::GUID.new(0x89edf13_u32, 0xcf71_u16, 0x4338_u16, StaticArray[0x8d_u8, 0x13_u8, 0x9e_u8, 0x56_u8, 0x9d_u8, 0xbd_u8, 0xc3_u8, 0x19_u8])
     def query_interface(this : IMFSimpleAudioVolume*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16644,7 +17517,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("76b1bbdb-4ec8-4f36-b106-70a9316df593")]
   record IMFAudioStreamVolume, lpVtbl : IMFAudioStreamVolumeVtbl* do
     GUID = LibC::GUID.new(0x76b1bbdb_u32, 0x4ec8_u16, 0x4f36_u16, StaticArray[0xb1_u8, 0x6_u8, 0x70_u8, 0xa9_u8, 0x31_u8, 0x6d_u8, 0xf5_u8, 0x93_u8])
     def query_interface(this : IMFAudioStreamVolume*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16688,7 +17560,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a0638c2b-6465-4395-9ae7-a321a9fd2856")]
   record IMFAudioPolicy, lpVtbl : IMFAudioPolicyVtbl* do
     GUID = LibC::GUID.new(0xa0638c2b_u32, 0x6465_u16, 0x4395_u16, StaticArray[0x9a_u8, 0xe7_u8, 0xa3_u8, 0x21_u8, 0xa9_u8, 0xfd_u8, 0x28_u8, 0x56_u8])
     def query_interface(this : IMFAudioPolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16737,7 +17608,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("8c7b80bf-ee42-4b59-b1df-55668e1bdca8")]
   record IMFSampleGrabberSinkCallback, lpVtbl : IMFSampleGrabberSinkCallbackVtbl* do
     GUID = LibC::GUID.new(0x8c7b80bf_u32, 0xee42_u16, 0x4b59_u16, StaticArray[0xb1_u8, 0xdf_u8, 0x55_u8, 0x66_u8, 0x8e_u8, 0x1b_u8, 0xdc_u8, 0xa8_u8])
     def query_interface(this : IMFSampleGrabberSinkCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16793,7 +17663,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("ca86aa50-c46e-429e-ab27-16d6ac6844cb")]
   record IMFSampleGrabberSinkCallback2, lpVtbl : IMFSampleGrabberSinkCallback2Vtbl* do
     GUID = LibC::GUID.new(0xca86aa50_u32, 0xc46e_u16, 0x429e_u16, StaticArray[0xab_u8, 0x27_u8, 0x16_u8, 0xd6_u8, 0xac_u8, 0x68_u8, 0x44_u8, 0xcb_u8])
     def query_interface(this : IMFSampleGrabberSinkCallback2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16855,7 +17724,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("35fe1bb8-a3a9-40fe-bbec-eb569c9ccca3")]
   record IMFWorkQueueServices, lpVtbl : IMFWorkQueueServicesVtbl* do
     GUID = LibC::GUID.new(0x35fe1bb8_u32, 0xa3a9_u16, 0x40fe_u16, StaticArray[0xbb_u8, 0xec_u8, 0xeb_u8, 0x56_u8, 0x9c_u8, 0x9c_u8, 0xcc_u8, 0xa3_u8])
     def query_interface(this : IMFWorkQueueServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16929,7 +17797,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("96bf961b-40fe-42f1-ba9d-320238b49700")]
   record IMFWorkQueueServicesEx, lpVtbl : IMFWorkQueueServicesExVtbl* do
     GUID = LibC::GUID.new(0x96bf961b_u32, 0x40fe_u16, 0x42f1_u16, StaticArray[0xba_u8, 0x9d_u8, 0x32_u8, 0x2_u8, 0x38_u8, 0xb4_u8, 0x97_u8, 0x0_u8])
     def query_interface(this : IMFWorkQueueServicesEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17003,7 +17870,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("8d009d86-5b9f-4115-b1fc-9f80d52ab8ab")]
   record IMFQualityManager, lpVtbl : IMFQualityManagerVtbl* do
     GUID = LibC::GUID.new(0x8d009d86_u32, 0x5b9f_u16, 0x4115_u16, StaticArray[0xb1_u8, 0xfc_u8, 0x9f_u8, 0x80_u8, 0xd5_u8, 0x2a_u8, 0xb8_u8, 0xab_u8])
     def query_interface(this : IMFQualityManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17049,7 +17915,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("ec15e2e9-e36b-4f7c-8758-77d452ef4ce7")]
   record IMFQualityAdvise, lpVtbl : IMFQualityAdviseVtbl* do
     GUID = LibC::GUID.new(0xec15e2e9_u32, 0xe36b_u16, 0x4f7c_u16, StaticArray[0x87_u8, 0x58_u8, 0x77_u8, 0xd4_u8, 0x52_u8, 0xef_u8, 0x4c_u8, 0xe7_u8])
     def query_interface(this : IMFQualityAdvise*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17093,7 +17958,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("f3706f0d-8ea2-4886-8000-7155e9ec2eae")]
   record IMFQualityAdvise2, lpVtbl : IMFQualityAdvise2Vtbl* do
     GUID = LibC::GUID.new(0xf3706f0d_u32, 0x8ea2_u16, 0x4886_u16, StaticArray[0x80_u8, 0x0_u8, 0x71_u8, 0x55_u8, 0xe9_u8, 0xec_u8, 0x2e_u8, 0xae_u8])
     def query_interface(this : IMFQualityAdvise2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17136,7 +18000,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("dfcd8e4d-30b5-4567-acaa-8eb5b7853dc9")]
   record IMFQualityAdviseLimits, lpVtbl : IMFQualityAdviseLimitsVtbl* do
     GUID = LibC::GUID.new(0xdfcd8e4d_u32, 0x30b5_u16, 0x4567_u16, StaticArray[0xac_u8, 0xaa_u8, 0x8e_u8, 0xb5_u8, 0xb7_u8, 0x85_u8, 0x3d_u8, 0xc9_u8])
     def query_interface(this : IMFQualityAdviseLimits*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17168,7 +18031,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("2347d60b-3fb5-480c-8803-8df3adcd3ef0")]
   record IMFRealTimeClient, lpVtbl : IMFRealTimeClientVtbl* do
     GUID = LibC::GUID.new(0x2347d60b_u32, 0x3fb5_u16, 0x480c_u16, StaticArray[0x88_u8, 0x3_u8, 0x8d_u8, 0xf3_u8, 0xad_u8, 0xcd_u8, 0x3e_u8, 0xf0_u8])
     def query_interface(this : IMFRealTimeClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17203,7 +18065,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("03910848-ab16-4611-b100-17b88ae2f248")]
   record IMFRealTimeClientEx, lpVtbl : IMFRealTimeClientExVtbl* do
     GUID = LibC::GUID.new(0x3910848_u32, 0xab16_u16, 0x4611_u16, StaticArray[0xb1_u8, 0x0_u8, 0x17_u8, 0xb8_u8, 0x8a_u8, 0xe2_u8, 0xf2_u8, 0x48_u8])
     def query_interface(this : IMFRealTimeClientEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17240,7 +18101,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("197cd219-19cb-4de1-a64c-acf2edcbe59e")]
   record IMFSequencerSource, lpVtbl : IMFSequencerSourceVtbl* do
     GUID = LibC::GUID.new(0x197cd219_u32, 0x19cb_u16, 0x4de1_u16, StaticArray[0xa6_u8, 0x4c_u8, 0xac_u8, 0xf2_u8, 0xed_u8, 0xcb_u8, 0xe5_u8, 0x9e_u8])
     def query_interface(this : IMFSequencerSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17279,7 +18139,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("0e1d6009-c9f3-442d-8c51-a42d2d49452f")]
   record IMFMediaSourceTopologyProvider, lpVtbl : IMFMediaSourceTopologyProviderVtbl* do
     GUID = LibC::GUID.new(0xe1d6009_u32, 0xc9f3_u16, 0x442d_u16, StaticArray[0x8c_u8, 0x51_u8, 0xa4_u8, 0x2d_u8, 0x2d_u8, 0x49_u8, 0x45_u8, 0x2f_u8])
     def query_interface(this : IMFMediaSourceTopologyProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17306,7 +18165,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("0e1d600a-c9f3-442d-8c51-a42d2d49452f")]
   record IMFMediaSourcePresentationProvider, lpVtbl : IMFMediaSourcePresentationProviderVtbl* do
     GUID = LibC::GUID.new(0xe1d600a_u32, 0xc9f3_u16, 0x442d_u16, StaticArray[0x8c_u8, 0x51_u8, 0xa4_u8, 0x2d_u8, 0x2d_u8, 0x49_u8, 0x45_u8, 0x2f_u8])
     def query_interface(this : IMFMediaSourcePresentationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17333,7 +18191,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("676aa6dd-238a-410d-bb99-65668d01605a")]
   record IMFTopologyNodeAttributeEditor, lpVtbl : IMFTopologyNodeAttributeEditorVtbl* do
     GUID = LibC::GUID.new(0x676aa6dd_u32, 0x238a_u16, 0x410d_u16, StaticArray[0xbb_u8, 0x99_u8, 0x65_u8, 0x66_u8, 0x8d_u8, 0x1_u8, 0x60_u8, 0x5a_u8])
     def query_interface(this : IMFTopologyNodeAttributeEditor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17362,7 +18219,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("6d66d782-1d4f-4db7-8c63-cb8c77f1ef5e")]
   record IMFByteStreamBuffering, lpVtbl : IMFByteStreamBufferingVtbl* do
     GUID = LibC::GUID.new(0x6d66d782_u32, 0x1d4f_u16, 0x4db7_u16, StaticArray[0x8c_u8, 0x63_u8, 0xcb_u8, 0x8c_u8, 0x77_u8, 0xf1_u8, 0xef_u8, 0x5e_u8])
     def query_interface(this : IMFByteStreamBuffering*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17395,7 +18251,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("f5042ea4-7a96-4a75-aa7b-2be1ef7f88d5")]
   record IMFByteStreamCacheControl, lpVtbl : IMFByteStreamCacheControlVtbl* do
     GUID = LibC::GUID.new(0xf5042ea4_u32, 0x7a96_u16, 0x4a75_u16, StaticArray[0xaa_u8, 0x7b_u8, 0x2b_u8, 0xe1_u8, 0xef_u8, 0x7f_u8, 0x88_u8, 0xd5_u8])
     def query_interface(this : IMFByteStreamCacheControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17424,7 +18279,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("64976bfa-fb61-4041-9069-8c9a5f659beb")]
   record IMFByteStreamTimeSeek, lpVtbl : IMFByteStreamTimeSeekVtbl* do
     GUID = LibC::GUID.new(0x64976bfa_u32, 0xfb61_u16, 0x4041_u16, StaticArray[0x90_u8, 0x69_u8, 0x8c_u8, 0x9a_u8, 0x5f_u8, 0x65_u8, 0x9b_u8, 0xeb_u8])
     def query_interface(this : IMFByteStreamTimeSeek*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17460,7 +18314,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("71ce469c-f34b-49ea-a56b-2d2a10e51149")]
   record IMFByteStreamCacheControl2, lpVtbl : IMFByteStreamCacheControl2Vtbl* do
     GUID = LibC::GUID.new(0x71ce469c_u32, 0xf34b_u16, 0x49ea_u16, StaticArray[0xa5_u8, 0x6b_u8, 0x2d_u8, 0x2a_u8, 0x10_u8, 0xe5_u8, 0x11_u8, 0x49_u8])
     def query_interface(this : IMFByteStreamCacheControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17500,7 +18353,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("5b87ef6a-7ed8-434f-ba0e-184fac1628d1")]
   record IMFNetCredential, lpVtbl : IMFNetCredentialVtbl* do
     GUID = LibC::GUID.new(0x5b87ef6a_u32, 0x7ed8_u16, 0x434f_u16, StaticArray[0xba_u8, 0xe_u8, 0x18_u8, 0x4f_u8, 0xac_u8, 0x16_u8, 0x28_u8, 0xd1_u8])
     def query_interface(this : IMFNetCredential*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17541,7 +18393,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("5b87ef6b-7ed8-434f-ba0e-184fac1628d1")]
   record IMFNetCredentialManager, lpVtbl : IMFNetCredentialManagerVtbl* do
     GUID = LibC::GUID.new(0x5b87ef6b_u32, 0x7ed8_u16, 0x434f_u16, StaticArray[0xba_u8, 0xe_u8, 0x18_u8, 0x4f_u8, 0xac_u8, 0x16_u8, 0x28_u8, 0xd1_u8])
     def query_interface(this : IMFNetCredentialManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17576,7 +18427,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("5b87ef6c-7ed8-434f-ba0e-184fac1628d1")]
   record IMFNetCredentialCache, lpVtbl : IMFNetCredentialCacheVtbl* do
     GUID = LibC::GUID.new(0x5b87ef6c_u32, 0x7ed8_u16, 0x434f_u16, StaticArray[0xba_u8, 0xe_u8, 0x18_u8, 0x4f_u8, 0xac_u8, 0x16_u8, 0x28_u8, 0xd1_u8])
     def query_interface(this : IMFNetCredentialCache*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17613,7 +18463,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("61f7d887-1230-4a8b-aeba-8ad434d1a64d")]
   record IMFSSLCertificateManager, lpVtbl : IMFSSLCertificateManagerVtbl* do
     GUID = LibC::GUID.new(0x61f7d887_u32, 0x1230_u16, 0x4a8b_u16, StaticArray[0xae_u8, 0xba_u8, 0x8a_u8, 0xd4_u8, 0x34_u8, 0xd1_u8, 0xa6_u8, 0x4d_u8])
     def query_interface(this : IMFSSLCertificateManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17653,7 +18502,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("091878a3-bf11-4a5c-bc9f-33995b06ef2d")]
   record IMFNetResourceFilter, lpVtbl : IMFNetResourceFilterVtbl* do
     GUID = LibC::GUID.new(0x91878a3_u32, 0xbf11_u16, 0x4a5c_u16, StaticArray[0xbc_u8, 0x9f_u8, 0x33_u8, 0x99_u8, 0x5b_u8, 0x6_u8, 0xef_u8, 0x2d_u8])
     def query_interface(this : IMFNetResourceFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17683,7 +18531,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("059054b3-027c-494c-a27d-9113291cf87f")]
   record IMFSourceOpenMonitor, lpVtbl : IMFSourceOpenMonitorVtbl* do
     GUID = LibC::GUID.new(0x59054b3_u32, 0x27c_u16, 0x494c_u16, StaticArray[0xa2_u8, 0x7d_u8, 0x91_u8, 0x13_u8, 0x29_u8, 0x1c_u8, 0xf8_u8, 0x7f_u8])
     def query_interface(this : IMFSourceOpenMonitor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17714,7 +18561,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e9cd0383-a268-4bb4-82de-658d53574d41")]
   record IMFNetProxyLocator, lpVtbl : IMFNetProxyLocatorVtbl* do
     GUID = LibC::GUID.new(0xe9cd0383_u32, 0xa268_u16, 0x4bb4_u16, StaticArray[0x82_u8, 0xde_u8, 0x65_u8, 0x8d_u8, 0x53_u8, 0x57_u8, 0x4d_u8, 0x41_u8])
     def query_interface(this : IMFNetProxyLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17753,7 +18599,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e9cd0384-a268-4bb4-82de-658d53574d41")]
   record IMFNetProxyLocatorFactory, lpVtbl : IMFNetProxyLocatorFactoryVtbl* do
     GUID = LibC::GUID.new(0xe9cd0384_u32, 0xa268_u16, 0x4bb4_u16, StaticArray[0x82_u8, 0xde_u8, 0x65_u8, 0x8d_u8, 0x53_u8, 0x57_u8, 0x4d_u8, 0x41_u8])
     def query_interface(this : IMFNetProxyLocatorFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17783,7 +18628,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e9931663-80bf-4c6e-98af-5dcf58747d1f")]
   record IMFSaveJob, lpVtbl : IMFSaveJobVtbl* do
     GUID = LibC::GUID.new(0xe9931663_u32, 0x80bf_u16, 0x4c6e_u16, StaticArray[0x98_u8, 0xaf_u8, 0x5d_u8, 0xcf_u8, 0x58_u8, 0x74_u8, 0x7d_u8, 0x1f_u8])
     def query_interface(this : IMFSaveJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17821,7 +18665,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("7be19e73-c9bf-468a-ac5a-a5e8653bec87")]
   record IMFNetSchemeHandlerConfig, lpVtbl : IMFNetSchemeHandlerConfigVtbl* do
     GUID = LibC::GUID.new(0x7be19e73_u32, 0xc9bf_u16, 0x468a_u16, StaticArray[0xac_u8, 0x5a_u8, 0xa5_u8, 0xe8_u8, 0x65_u8, 0x3b_u8, 0xec_u8, 0x87_u8])
     def query_interface(this : IMFNetSchemeHandlerConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17856,7 +18699,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("6d4c7b74-52a0-4bb7-b0db-55f29f47a668")]
   record IMFSchemeHandler, lpVtbl : IMFSchemeHandlerVtbl* do
     GUID = LibC::GUID.new(0x6d4c7b74_u32, 0x52a0_u16, 0x4bb7_u16, StaticArray[0xb0_u8, 0xdb_u8, 0x55_u8, 0xf2_u8, 0x9f_u8, 0x47_u8, 0xa6_u8, 0x68_u8])
     def query_interface(this : IMFSchemeHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17892,7 +18734,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("bb420aa4-765b-4a1f-91fe-d6a8a143924c")]
   record IMFByteStreamHandler, lpVtbl : IMFByteStreamHandlerVtbl* do
     GUID = LibC::GUID.new(0xbb420aa4_u32, 0x765b_u16, 0x4a1f_u16, StaticArray[0x91_u8, 0xfe_u8, 0xd6_u8, 0xa8_u8, 0xa1_u8, 0x43_u8, 0x92_u8, 0x4c_u8])
     def query_interface(this : IMFByteStreamHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17928,7 +18769,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("542612c4-a1b8-4632-b521-de11ea64a0b0")]
   record IMFTrustedInput, lpVtbl : IMFTrustedInputVtbl* do
     GUID = LibC::GUID.new(0x542612c4_u32, 0xa1b8_u16, 0x4632_u16, StaticArray[0xb5_u8, 0x21_u8, 0xde_u8, 0x11_u8, 0xea_u8, 0x64_u8, 0xa0_u8, 0xb0_u8])
     def query_interface(this : IMFTrustedInput*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17960,7 +18800,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d19f8e98-b126-4446-890c-5dcb7ad71453")]
   record IMFInputTrustAuthority, lpVtbl : IMFInputTrustAuthorityVtbl* do
     GUID = LibC::GUID.new(0xd19f8e98_u32, 0xb126_u16, 0x4446_u16, StaticArray[0x89_u8, 0xc_u8, 0x5d_u8, 0xcb_u8, 0x7a_u8, 0xd7_u8, 0x14_u8, 0x53_u8])
     def query_interface(this : IMFInputTrustAuthority*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18004,7 +18843,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d19f8e95-b126-4446-890c-5dcb7ad71453")]
   record IMFTrustedOutput, lpVtbl : IMFTrustedOutputVtbl* do
     GUID = LibC::GUID.new(0xd19f8e95_u32, 0xb126_u16, 0x4446_u16, StaticArray[0x89_u8, 0xc_u8, 0x5d_u8, 0xcb_u8, 0x7a_u8, 0xd7_u8, 0x14_u8, 0x53_u8])
     def query_interface(this : IMFTrustedOutput*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18038,7 +18876,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d19f8e94-b126-4446-890c-5dcb7ad71453")]
   record IMFOutputTrustAuthority, lpVtbl : IMFOutputTrustAuthorityVtbl* do
     GUID = LibC::GUID.new(0xd19f8e94_u32, 0xb126_u16, 0x4446_u16, StaticArray[0x89_u8, 0xc_u8, 0x5d_u8, 0xcb_u8, 0x7a_u8, 0xd7_u8, 0x14_u8, 0x53_u8])
     def query_interface(this : IMFOutputTrustAuthority*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18100,7 +18937,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("7f00f10a-daed-41af-ab26-5fdfa4dfba3c")]
   record IMFOutputPolicy, lpVtbl : IMFOutputPolicyVtbl* do
     GUID = LibC::GUID.new(0x7f00f10a_u32, 0xdaed_u16, 0x41af_u16, StaticArray[0xab_u8, 0x26_u8, 0x5f_u8, 0xdf_u8, 0xa4_u8, 0xdf_u8, 0xba_u8, 0x3c_u8])
     def query_interface(this : IMFOutputPolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18255,7 +19091,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("7be0fc5b-abd9-44fb-a5c8-f50136e71599")]
   record IMFOutputSchema, lpVtbl : IMFOutputSchemaVtbl* do
     GUID = LibC::GUID.new(0x7be0fc5b_u32, 0xabd9_u16, 0x44fb_u16, StaticArray[0xa5_u8, 0xc8_u8, 0xf5_u8, 0x1_u8, 0x36_u8, 0xe7_u8, 0x15_u8, 0x99_u8])
     def query_interface(this : IMFOutputSchema*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18379,7 +19214,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d0ae555d-3b12-4d97-b060-0990bc5aeb67")]
   record IMFSecureChannel, lpVtbl : IMFSecureChannelVtbl* do
     GUID = LibC::GUID.new(0xd0ae555d_u32, 0x3b12_u16, 0x4d97_u16, StaticArray[0xb0_u8, 0x60_u8, 0x9_u8, 0x90_u8, 0xbc_u8, 0x5a_u8, 0xeb_u8, 0x67_u8])
     def query_interface(this : IMFSecureChannel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18413,7 +19247,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("8e36395f-c7b9-43c4-a54d-512b4af63c95")]
   record IMFSampleProtection, lpVtbl : IMFSampleProtectionVtbl* do
     GUID = LibC::GUID.new(0x8e36395f_u32, 0xc7b9_u16, 0x43c4_u16, StaticArray[0xa5_u8, 0x4d_u8, 0x51_u8, 0x2b_u8, 0x4a_u8, 0xf6_u8, 0x3c_u8, 0x95_u8])
     def query_interface(this : IMFSampleProtection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18452,7 +19285,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("5dfd4b2a-7674-4110-a4e6-8a68fd5f3688")]
   record IMFMediaSinkPreroll, lpVtbl : IMFMediaSinkPrerollVtbl* do
     GUID = LibC::GUID.new(0x5dfd4b2a_u32, 0x7674_u16, 0x4110_u16, StaticArray[0xa4_u8, 0xe6_u8, 0x8a_u8, 0x68_u8, 0xfd_u8, 0x5f_u8, 0x36_u8, 0x88_u8])
     def query_interface(this : IMFMediaSinkPreroll*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18489,7 +19321,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("eaecb74a-9a50-42ce-9541-6a7f57aa4ad7")]
   record IMFFinalizableMediaSink, lpVtbl : IMFFinalizableMediaSinkVtbl* do
     GUID = LibC::GUID.new(0xeaecb74a_u32, 0x9a50_u16, 0x42ce_u16, StaticArray[0x95_u8, 0x41_u8, 0x6a_u8, 0x7f_u8, 0x57_u8, 0xaa_u8, 0x4a_u8, 0xd7_u8])
     def query_interface(this : IMFFinalizableMediaSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18546,7 +19377,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("9db7aa41-3cc5-40d4-8509-555804ad34cc")]
   record IMFStreamingSinkConfig, lpVtbl : IMFStreamingSinkConfigVtbl* do
     GUID = LibC::GUID.new(0x9db7aa41_u32, 0x3cc5_u16, 0x40d4_u16, StaticArray[0x85_u8, 0x9_u8, 0x55_u8, 0x58_u8, 0x4_u8, 0xad_u8, 0x34_u8, 0xcc_u8])
     def query_interface(this : IMFStreamingSinkConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18574,7 +19404,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("994e23ad-1cc2-493c-b9fa-46f1cb040fa4")]
   record IMFRemoteProxy, lpVtbl : IMFRemoteProxyVtbl* do
     GUID = LibC::GUID.new(0x994e23ad_u32, 0x1cc2_u16, 0x493c_u16, StaticArray[0xb9_u8, 0xfa_u8, 0x46_u8, 0xf1_u8, 0xcb_u8, 0x4_u8, 0xf_u8, 0xa4_u8])
     def query_interface(this : IMFRemoteProxy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18605,7 +19434,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("09ef5be3-c8a7-469e-8b70-73bf25bb193f")]
   record IMFObjectReferenceStream, lpVtbl : IMFObjectReferenceStreamVtbl* do
     GUID = LibC::GUID.new(0x9ef5be3_u32, 0xc8a7_u16, 0x469e_u16, StaticArray[0x8b_u8, 0x70_u8, 0x73_u8, 0xbf_u8, 0x25_u8, 0xbb_u8, 0x19_u8, 0x3f_u8])
     def query_interface(this : IMFObjectReferenceStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18637,7 +19465,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("f70ca1a9-fdc7-4782-b994-adffb1c98606")]
   record IMFPMPHost, lpVtbl : IMFPMPHostVtbl* do
     GUID = LibC::GUID.new(0xf70ca1a9_u32, 0xfdc7_u16, 0x4782_u16, StaticArray[0xb9_u8, 0x94_u8, 0xad_u8, 0xff_u8, 0xb1_u8, 0xc9_u8, 0x86_u8, 0x6_u8])
     def query_interface(this : IMFPMPHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18670,7 +19497,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("6c4e655d-ead8-4421-b6b9-54dcdbbdf820")]
   record IMFPMPClient, lpVtbl : IMFPMPClientVtbl* do
     GUID = LibC::GUID.new(0x6c4e655d_u32, 0xead8_u16, 0x4421_u16, StaticArray[0xb6_u8, 0xb9_u8, 0x54_u8, 0xdc_u8, 0xdb_u8, 0xbd_u8, 0xf8_u8, 0x20_u8])
     def query_interface(this : IMFPMPClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18699,7 +19525,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("994e23af-1cc2-493c-b9fa-46f1cb040fa4")]
   record IMFPMPServer, lpVtbl : IMFPMPServerVtbl* do
     GUID = LibC::GUID.new(0x994e23af_u32, 0x1cc2_u16, 0x493c_u16, StaticArray[0xb9_u8, 0xfa_u8, 0x46_u8, 0xf1_u8, 0xcb_u8, 0x4_u8, 0xf_u8, 0xa4_u8])
     def query_interface(this : IMFPMPServer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18732,7 +19557,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("1cde6309-cae0-4940-907e-c1ec9c3d1d4a")]
   record IMFRemoteDesktopPlugin, lpVtbl : IMFRemoteDesktopPluginVtbl* do
     GUID = LibC::GUID.new(0x1cde6309_u32, 0xcae0_u16, 0x4940_u16, StaticArray[0x90_u8, 0x7e_u8, 0xc1_u8, 0xec_u8, 0x9c_u8, 0x3d_u8, 0x1d_u8, 0x4a_u8])
     def query_interface(this : IMFRemoteDesktopPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18762,7 +19586,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a7e025dd-5303-4a62-89d6-e747e1efac73")]
   record IMFSAMIStyle, lpVtbl : IMFSAMIStyleVtbl* do
     GUID = LibC::GUID.new(0xa7e025dd_u32, 0x5303_u16, 0x4a62_u16, StaticArray[0x89_u8, 0xd6_u8, 0xe7_u8, 0x47_u8, 0xe1_u8, 0xef_u8, 0xac_u8, 0x73_u8])
     def query_interface(this : IMFSAMIStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18803,7 +19626,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("4adfdba3-7ab0-4953-a62b-461e7ff3da1e")]
   record IMFTranscodeProfile, lpVtbl : IMFTranscodeProfileVtbl* do
     GUID = LibC::GUID.new(0x4adfdba3_u32, 0x7ab0_u16, 0x4953_u16, StaticArray[0xa6_u8, 0x2b_u8, 0x46_u8, 0x1e_u8, 0x7f_u8, 0xf3_u8, 0xda_u8, 0x1e_u8])
     def query_interface(this : IMFTranscodeProfile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18848,7 +19670,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("8cffcd2e-5a03-4a3a-aff7-edcd107c620e")]
   record IMFTranscodeSinkInfoProvider, lpVtbl : IMFTranscodeSinkInfoProviderVtbl* do
     GUID = LibC::GUID.new(0x8cffcd2e_u32, 0x5a03_u16, 0x4a3a_u16, StaticArray[0xaf_u8, 0xf7_u8, 0xed_u8, 0xcd_u8, 0x10_u8, 0x7c_u8, 0x62_u8, 0xe_u8])
     def query_interface(this : IMFTranscodeSinkInfoProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18884,7 +19705,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("508e71d3-ec66-4fc3-8775-b4b9ed6ba847")]
   record IMFFieldOfUseMFTUnlock, lpVtbl : IMFFieldOfUseMFTUnlockVtbl* do
     GUID = LibC::GUID.new(0x508e71d3_u32, 0xec66_u16, 0x4fc3_u16, StaticArray[0x87_u8, 0x75_u8, 0xb4_u8, 0xb9_u8, 0xed_u8, 0x6b_u8, 0xa8_u8, 0x47_u8])
     def query_interface(this : IMFFieldOfUseMFTUnlock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18911,7 +19731,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("149c4d73-b4be-4f8d-8b87-079e926b6add")]
   record IMFLocalMFTRegistration, lpVtbl : IMFLocalMFTRegistrationVtbl* do
     GUID = LibC::GUID.new(0x149c4d73_u32, 0xb4be_u16, 0x4f8d_u16, StaticArray[0x8b_u8, 0x87_u8, 0x7_u8, 0x9e_u8, 0x92_u8, 0x6b_u8, 0x6a_u8, 0xdd_u8])
     def query_interface(this : IMFLocalMFTRegistration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18940,7 +19759,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("19f68549-ca8a-4706-a4ef-481dbc95e12c")]
   record IMFCapturePhotoConfirmation, lpVtbl : IMFCapturePhotoConfirmationVtbl* do
     GUID = LibC::GUID.new(0x19f68549_u32, 0xca8a_u16, 0x4706_u16, StaticArray[0xa4_u8, 0xef_u8, 0x48_u8, 0x1d_u8, 0xbc_u8, 0x95_u8, 0xe1_u8, 0x2c_u8])
     def query_interface(this : IMFCapturePhotoConfirmation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18975,7 +19793,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("84d2054a-3aa1-4728-a3b0-440a418cf49c")]
   record IMFPMPHostApp, lpVtbl : IMFPMPHostAppVtbl* do
     GUID = LibC::GUID.new(0x84d2054a_u32, 0x3aa1_u16, 0x4728_u16, StaticArray[0xa3_u8, 0xb0_u8, 0x44_u8, 0xa_u8, 0x41_u8, 0x8c_u8, 0xf4_u8, 0x9c_u8])
     def query_interface(this : IMFPMPHostApp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19008,7 +19825,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("c004f646-be2c-48f3-93a2-a0983eba1108")]
   record IMFPMPClientApp, lpVtbl : IMFPMPClientAppVtbl* do
     GUID = LibC::GUID.new(0xc004f646_u32, 0xbe2c_u16, 0x48f3_u16, StaticArray[0x93_u8, 0xa2_u8, 0xa0_u8, 0x98_u8, 0x3e_u8, 0xba_u8, 0x11_u8, 0x8_u8])
     def query_interface(this : IMFPMPClientApp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19035,7 +19851,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("380b9af9-a85b-4e78-a2af-ea5ce645c6b4")]
   record IMFMediaStreamSourceSampleRequest, lpVtbl : IMFMediaStreamSourceSampleRequestVtbl* do
     GUID = LibC::GUID.new(0x380b9af9_u32, 0xa85b_u16, 0x4e78_u16, StaticArray[0xa2_u8, 0xaf_u8, 0xea_u8, 0x5c_u8, 0xe6_u8, 0x45_u8, 0xc6_u8, 0xb4_u8])
     def query_interface(this : IMFMediaStreamSourceSampleRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19062,7 +19877,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("245bf8e9-0755-40f7-88a5-ae0f18d55e17")]
   record IMFTrackedSample, lpVtbl : IMFTrackedSampleVtbl* do
     GUID = LibC::GUID.new(0x245bf8e9_u32, 0x755_u16, 0x40f7_u16, StaticArray[0x88_u8, 0xa5_u8, 0xae_u8, 0xf_u8, 0x18_u8, 0xd5_u8, 0x5e_u8, 0x17_u8])
     def query_interface(this : IMFTrackedSample*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19090,7 +19904,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("ef5dc845-f0d9-4ec9-b00c-cb5183d38434")]
   record IMFProtectedEnvironmentAccess, lpVtbl : IMFProtectedEnvironmentAccessVtbl* do
     GUID = LibC::GUID.new(0xef5dc845_u32, 0xf0d9_u16, 0x4ec9_u16, StaticArray[0xb0_u8, 0xc_u8, 0xcb_u8, 0x51_u8, 0x83_u8, 0xd3_u8, 0x84_u8, 0x34_u8])
     def query_interface(this : IMFProtectedEnvironmentAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19120,7 +19933,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("4a724bca-ff6a-4c07-8e0d-7a358421cf06")]
   record IMFSignedLibrary, lpVtbl : IMFSignedLibraryVtbl* do
     GUID = LibC::GUID.new(0x4a724bca_u32, 0xff6a_u16, 0x4c07_u16, StaticArray[0x8e_u8, 0xd_u8, 0x7a_u8, 0x35_u8, 0x84_u8, 0x21_u8, 0xcf_u8, 0x6_u8])
     def query_interface(this : IMFSignedLibrary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19148,7 +19960,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fff4af3a-1fc1-4ef9-a29b-d26c49e2f31a")]
   record IMFSystemId, lpVtbl : IMFSystemIdVtbl* do
     GUID = LibC::GUID.new(0xfff4af3a_u32, 0x1fc1_u16, 0x4ef9_u16, StaticArray[0xa2_u8, 0x9b_u8, 0xd2_u8, 0x6c_u8, 0x49_u8, 0xe2_u8, 0xf3_u8, 0x1a_u8])
     def query_interface(this : IMFSystemId*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19179,7 +19990,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e6257174-a060-4c9a-a088-3b1b471cad28")]
   record IMFContentProtectionDevice, lpVtbl : IMFContentProtectionDeviceVtbl* do
     GUID = LibC::GUID.new(0xe6257174_u32, 0xa060_u16, 0x4c9a_u16, StaticArray[0xa0_u8, 0x88_u8, 0x3b_u8, 0x1b_u8, 0x47_u8, 0x1c_u8, 0xad_u8, 0x28_u8])
     def query_interface(this : IMFContentProtectionDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19209,7 +20019,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("7ec4b1bd-43fb-4763-85d2-64fcb5c5f4cb")]
   record IMFContentDecryptorContext, lpVtbl : IMFContentDecryptorContextVtbl* do
     GUID = LibC::GUID.new(0x7ec4b1bd_u32, 0x43fb_u16, 0x4763_u16, StaticArray[0x85_u8, 0xd2_u8, 0x64_u8, 0xfc_u8, 0xb5_u8, 0xc5_u8, 0xf4_u8, 0xcb_u8])
     def query_interface(this : IMFContentDecryptorContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19238,7 +20047,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("bc2b7d44-a72d-49d5-8376-1480dee58b22")]
   record IMFNetCrossOriginSupport, lpVtbl : IMFNetCrossOriginSupportVtbl* do
     GUID = LibC::GUID.new(0xbc2b7d44_u32, 0xa72d_u16, 0x49d5_u16, StaticArray[0x83_u8, 0x76_u8, 0x14_u8, 0x80_u8, 0xde_u8, 0xe5_u8, 0x8b_u8, 0x22_u8])
     def query_interface(this : IMFNetCrossOriginSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19286,7 +20094,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("f779fddf-26e7-4270-8a8b-b983d1859de0")]
   record IMFHttpDownloadRequest, lpVtbl : IMFHttpDownloadRequestVtbl* do
     GUID = LibC::GUID.new(0xf779fddf_u32, 0x26e7_u16, 0x4270_u16, StaticArray[0x8a_u8, 0x8b_u8, 0xb9_u8, 0x83_u8, 0xd1_u8, 0x85_u8, 0x9d_u8, 0xe0_u8])
     def query_interface(this : IMFHttpDownloadRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19360,7 +20167,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("71fa9a2c-53ce-4662-a132-1a7e8cbf62db")]
   record IMFHttpDownloadSession, lpVtbl : IMFHttpDownloadSessionVtbl* do
     GUID = LibC::GUID.new(0x71fa9a2c_u32, 0x53ce_u16, 0x4662_u16, StaticArray[0xa1_u8, 0x32_u8, 0x1a_u8, 0x7e_u8, 0x8c_u8, 0xbf_u8, 0x62_u8, 0xdb_u8])
     def query_interface(this : IMFHttpDownloadSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19393,7 +20199,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("1b4cf4b9-3a16-4115-839d-03cc5c99df01")]
   record IMFHttpDownloadSessionProvider, lpVtbl : IMFHttpDownloadSessionProviderVtbl* do
     GUID = LibC::GUID.new(0x1b4cf4b9_u32, 0x3a16_u16, 0x4115_u16, StaticArray[0x83_u8, 0x9d_u8, 0x3_u8, 0xcc_u8, 0x5c_u8, 0x99_u8, 0xdf_u8, 0x1_u8])
     def query_interface(this : IMFHttpDownloadSessionProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19433,7 +20238,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fbb03414-d13b-4786-8319-5ac51fc0a136")]
   record IMFMediaSource2, lpVtbl : IMFMediaSource2Vtbl* do
     GUID = LibC::GUID.new(0xfbb03414_u32, 0xd13b_u16, 0x4786_u16, StaticArray[0x83_u8, 0x19_u8, 0x5a_u8, 0xc5_u8, 0x1f_u8, 0xc0_u8, 0xa1_u8, 0x36_u8])
     def query_interface(this : IMFMediaSource2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19507,7 +20311,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("c5bc37d6-75c7-46a1-a132-81b5f723c20f")]
   record IMFMediaStream2, lpVtbl : IMFMediaStream2Vtbl* do
     GUID = LibC::GUID.new(0xc5bc37d6_u32, 0x75c7_u16, 0x46a1_u16, StaticArray[0xa1_u8, 0x32_u8, 0x81_u8, 0xb5_u8, 0xf7_u8, 0x23_u8, 0xc2_u8, 0xf_u8])
     def query_interface(this : IMFMediaStream2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19566,7 +20369,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fb9f48f2-2a18-4e28-9730-786f30f04dc4")]
   record IMFSensorDevice, lpVtbl : IMFSensorDeviceVtbl* do
     GUID = LibC::GUID.new(0xfb9f48f2_u32, 0x2a18_u16, 0x4e28_u16, StaticArray[0x97_u8, 0x30_u8, 0x78_u8, 0x6f_u8, 0x30_u8, 0xf0_u8, 0x4d_u8, 0xc4_u8])
     def query_interface(this : IMFSensorDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19624,7 +20426,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("4110243a-9757-461f-89f1-f22345bcab4e")]
   record IMFSensorGroup, lpVtbl : IMFSensorGroupVtbl* do
     GUID = LibC::GUID.new(0x4110243a_u32, 0x9757_u16, 0x461f_u16, StaticArray[0x89_u8, 0xf1_u8, 0xf2_u8, 0x23_u8, 0x45_u8, 0xbc_u8, 0xab_u8, 0x4e_u8])
     def query_interface(this : IMFSensorGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19704,7 +20505,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e9a42171-c56e-498a-8b39-eda5a070b7fc")]
   record IMFSensorStream, lpVtbl : IMFSensorStreamVtbl* do
     GUID = LibC::GUID.new(0xe9a42171_u32, 0xc56e_u16, 0x498a_u16, StaticArray[0x8b_u8, 0x39_u8, 0xed_u8, 0xa5_u8, 0xa0_u8, 0x70_u8, 0xb7_u8, 0xfc_u8])
     def query_interface(this : IMFSensorStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19831,7 +20631,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("eed9c2ee-66b4-4f18-a697-ac7d3960215c")]
   record IMFSensorTransformFactory, lpVtbl : IMFSensorTransformFactoryVtbl* do
     GUID = LibC::GUID.new(0xeed9c2ee_u32, 0x66b4_u16, 0x4f18_u16, StaticArray[0xa6_u8, 0x97_u8, 0xac_u8, 0x7d_u8, 0x39_u8, 0x60_u8, 0x21_u8, 0x5c_u8])
     def query_interface(this : IMFSensorTransformFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19873,7 +20672,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("22f765d1-8dab-4107-846d-56baf72215e7")]
   record IMFSensorProfile, lpVtbl : IMFSensorProfileVtbl* do
     GUID = LibC::GUID.new(0x22f765d1_u32, 0x8dab_u16, 0x4107_u16, StaticArray[0x84_u8, 0x6d_u8, 0x56_u8, 0xba_u8, 0xf7_u8, 0x22_u8, 0x15_u8, 0xe7_u8])
     def query_interface(this : IMFSensorProfile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19914,7 +20712,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("c95ea55b-0187-48be-9353-8d2507662351")]
   record IMFSensorProfileCollection, lpVtbl : IMFSensorProfileCollectionVtbl* do
     GUID = LibC::GUID.new(0xc95ea55b_u32, 0x187_u16, 0x48be_u16, StaticArray[0x93_u8, 0x53_u8, 0x8d_u8, 0x25_u8, 0x7_u8, 0x66_u8, 0x23_u8, 0x51_u8])
     def query_interface(this : IMFSensorProfileCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19959,7 +20756,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("39dc7f4a-b141-4719-813c-a7f46162a2b8")]
   record IMFSensorProcessActivity, lpVtbl : IMFSensorProcessActivityVtbl* do
     GUID = LibC::GUID.new(0x39dc7f4a_u32, 0xb141_u16, 0x4719_u16, StaticArray[0x81_u8, 0x3c_u8, 0xa7_u8, 0xf4_u8, 0x61_u8, 0x62_u8, 0xa2_u8, 0xb8_u8])
     def query_interface(this : IMFSensorProcessActivity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19998,7 +20794,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("3e8c4be1-a8c2-4528-90de-2851bde5fead")]
   record IMFSensorActivityReport, lpVtbl : IMFSensorActivityReportVtbl* do
     GUID = LibC::GUID.new(0x3e8c4be1_u32, 0xa8c2_u16, 0x4528_u16, StaticArray[0x90_u8, 0xde_u8, 0x28_u8, 0x51_u8, 0xbd_u8, 0xe5_u8, 0xfe_u8, 0xad_u8])
     def query_interface(this : IMFSensorActivityReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20036,7 +20831,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("683f7a5e-4a19-43cd-b1a9-dbf4ab3f7777")]
   record IMFSensorActivitiesReport, lpVtbl : IMFSensorActivitiesReportVtbl* do
     GUID = LibC::GUID.new(0x683f7a5e_u32, 0x4a19_u16, 0x43cd_u16, StaticArray[0xb1_u8, 0xa9_u8, 0xdb_u8, 0xf4_u8, 0xab_u8, 0x3f_u8, 0x77_u8, 0x77_u8])
     def query_interface(this : IMFSensorActivitiesReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20069,7 +20863,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("de5072ee-dbe3-46dc-8a87-b6f631194751")]
   record IMFSensorActivitiesReportCallback, lpVtbl : IMFSensorActivitiesReportCallbackVtbl* do
     GUID = LibC::GUID.new(0xde5072ee_u32, 0xdbe3_u16, 0x46dc_u16, StaticArray[0x8a_u8, 0x87_u8, 0xb6_u8, 0xf6_u8, 0x31_u8, 0x19_u8, 0x47_u8, 0x51_u8])
     def query_interface(this : IMFSensorActivitiesReportCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20097,7 +20890,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d0cef145-b3f4-4340-a2e5-7a5080ca05cb")]
   record IMFSensorActivityMonitor, lpVtbl : IMFSensorActivityMonitorVtbl* do
     GUID = LibC::GUID.new(0xd0cef145_u32, 0xb3f4_u16, 0x4340_u16, StaticArray[0xa2_u8, 0xe5_u8, 0x7a_u8, 0x50_u8, 0x80_u8, 0xca_u8, 0x5_u8, 0xcb_u8])
     def query_interface(this : IMFSensorActivityMonitor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20129,7 +20921,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("5c595e64-4630-4231-855a-12842f733245")]
   record IMFExtendedCameraIntrinsicModel, lpVtbl : IMFExtendedCameraIntrinsicModelVtbl* do
     GUID = LibC::GUID.new(0x5c595e64_u32, 0x4630_u16, 0x4231_u16, StaticArray[0x85_u8, 0x5a_u8, 0x12_u8, 0x84_u8, 0x2f_u8, 0x73_u8, 0x32_u8, 0x45_u8])
     def query_interface(this : IMFExtendedCameraIntrinsicModel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20163,7 +20954,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("74c2653b-5f55-4eb1-9f0f-18b8f68b7d3d")]
   record IMFExtendedCameraIntrinsicsDistortionModel6KT, lpVtbl : IMFExtendedCameraIntrinsicsDistortionModel6KTVtbl* do
     GUID = LibC::GUID.new(0x74c2653b_u32, 0x5f55_u16, 0x4eb1_u16, StaticArray[0x9f_u8, 0xf_u8, 0x18_u8, 0xb8_u8, 0xf6_u8, 0x8b_u8, 0x7d_u8, 0x3d_u8])
     def query_interface(this : IMFExtendedCameraIntrinsicsDistortionModel6KT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20194,7 +20984,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("812d5f95-b572-45dc-bafc-ae24199ddda8")]
   record IMFExtendedCameraIntrinsicsDistortionModelArcTan, lpVtbl : IMFExtendedCameraIntrinsicsDistortionModelArcTanVtbl* do
     GUID = LibC::GUID.new(0x812d5f95_u32, 0xb572_u16, 0x45dc_u16, StaticArray[0xba_u8, 0xfc_u8, 0xae_u8, 0x24_u8, 0x19_u8, 0x9d_u8, 0xdd_u8, 0xa8_u8])
     def query_interface(this : IMFExtendedCameraIntrinsicsDistortionModelArcTan*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20229,7 +21018,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("687f6dac-6987-4750-a16a-734d1e7a10fe")]
   record IMFExtendedCameraIntrinsics, lpVtbl : IMFExtendedCameraIntrinsicsVtbl* do
     GUID = LibC::GUID.new(0x687f6dac_u32, 0x6987_u16, 0x4750_u16, StaticArray[0xa1_u8, 0x6a_u8, 0x73_u8, 0x4d_u8, 0x1e_u8, 0x7a_u8, 0x10_u8, 0xfe_u8])
     def query_interface(this : IMFExtendedCameraIntrinsics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20276,7 +21064,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("38e33520-fca1-4845-a27a-68b7c6ab3789")]
   record IMFExtendedCameraControl, lpVtbl : IMFExtendedCameraControlVtbl* do
     GUID = LibC::GUID.new(0x38e33520_u32, 0xfca1_u16, 0x4845_u16, StaticArray[0xa2_u8, 0x7a_u8, 0x68_u8, 0xb7_u8, 0xc6_u8, 0xab_u8, 0x37_u8, 0x89_u8])
     def query_interface(this : IMFExtendedCameraControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20318,7 +21105,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("b91ebfee-ca03-4af4-8a82-a31752f4a0fc")]
   record IMFExtendedCameraController, lpVtbl : IMFExtendedCameraControllerVtbl* do
     GUID = LibC::GUID.new(0xb91ebfee_u32, 0xca03_u16, 0x4af4_u16, StaticArray[0x8a_u8, 0x82_u8, 0xa3_u8, 0x17_u8, 0x52_u8, 0xf4_u8, 0xa0_u8, 0xfc_u8])
     def query_interface(this : IMFExtendedCameraController*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20345,7 +21131,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("f25362ea-2c0e-447f-81e2-755914cdc0c3")]
   record IMFRelativePanelReport, lpVtbl : IMFRelativePanelReportVtbl* do
     GUID = LibC::GUID.new(0xf25362ea_u32, 0x2c0e_u16, 0x447f_u16, StaticArray[0x81_u8, 0xe2_u8, 0x75_u8, 0x59_u8, 0x14_u8, 0xcd_u8, 0xc0_u8, 0xc3_u8])
     def query_interface(this : IMFRelativePanelReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20376,7 +21161,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("421af7f6-573e-4ad0-8fda-2e57cedb18c6")]
   record IMFRelativePanelWatcher, lpVtbl : IMFRelativePanelWatcherVtbl* do
     GUID = LibC::GUID.new(0x421af7f6_u32, 0x573e_u16, 0x4ad0_u16, StaticArray[0x8f_u8, 0xda_u8, 0x2e_u8, 0x57_u8, 0xce_u8, 0xdb_u8, 0x18_u8, 0xc6_u8])
     def query_interface(this : IMFRelativePanelWatcher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20415,7 +21199,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("1640b2cf-74da-4462-a43b-b76d3bdc1434")]
   record IMFCameraOcclusionStateReport, lpVtbl : IMFCameraOcclusionStateReportVtbl* do
     GUID = LibC::GUID.new(0x1640b2cf_u32, 0x74da_u16, 0x4462_u16, StaticArray[0xa4_u8, 0x3b_u8, 0xb7_u8, 0x6d_u8, 0x3b_u8, 0xdc_u8, 0x14_u8, 0x34_u8])
     def query_interface(this : IMFCameraOcclusionStateReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20442,7 +21225,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("6e5841c7-3889-4019-9035-783fb19b5948")]
   record IMFCameraOcclusionStateReportCallback, lpVtbl : IMFCameraOcclusionStateReportCallbackVtbl* do
     GUID = LibC::GUID.new(0x6e5841c7_u32, 0x3889_u16, 0x4019_u16, StaticArray[0x90_u8, 0x35_u8, 0x78_u8, 0x3f_u8, 0xb1_u8, 0x9b_u8, 0x59_u8, 0x48_u8])
     def query_interface(this : IMFCameraOcclusionStateReportCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20471,7 +21253,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("cc692f46-c697-47e2-a72d-7b064617749b")]
   record IMFCameraOcclusionStateMonitor, lpVtbl : IMFCameraOcclusionStateMonitorVtbl* do
     GUID = LibC::GUID.new(0xcc692f46_u32, 0xc697_u16, 0x47e2_u16, StaticArray[0xa7_u8, 0x2d_u8, 0x7b_u8, 0x6_u8, 0x46_u8, 0x17_u8, 0x74_u8, 0x9b_u8])
     def query_interface(this : IMFCameraOcclusionStateMonitor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20508,7 +21289,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("725b77c7-ca9f-4fe5-9d72-9946bf9b3c70")]
   record IMFVideoCaptureSampleAllocator, lpVtbl : IMFVideoCaptureSampleAllocatorVtbl* do
     GUID = LibC::GUID.new(0x725b77c7_u32, 0xca9f_u16, 0x4fe5_u16, StaticArray[0x9d_u8, 0x72_u8, 0x99_u8, 0x46_u8, 0xbf_u8, 0x9b_u8, 0x3c_u8, 0x70_u8])
     def query_interface(this : IMFVideoCaptureSampleAllocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20548,7 +21328,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("da62b958-3a38-4a97-bd27-149c640c0771")]
   record IMFSampleAllocatorControl, lpVtbl : IMFSampleAllocatorControlVtbl* do
     GUID = LibC::GUID.new(0xda62b958_u32, 0x3a38_u16, 0x4a97_u16, StaticArray[0xbd_u8, 0x27_u8, 0x14_u8, 0x9c_u8, 0x64_u8, 0xc_u8, 0x7_u8, 0x71_u8])
     def query_interface(this : IMFSampleAllocatorControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20584,7 +21363,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("b1dca5cd-d5da-4451-8e9e-db5c59914ead")]
   record IMFASFContentInfo, lpVtbl : IMFASFContentInfoVtbl* do
     GUID = LibC::GUID.new(0xb1dca5cd_u32, 0xd5da_u16, 0x4451_u16, StaticArray[0x8e_u8, 0x9e_u8, 0xdb_u8, 0x5c_u8, 0x59_u8, 0x91_u8, 0x4e_u8, 0xad_u8])
     def query_interface(this : IMFASFContentInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20674,7 +21452,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d267bf6a-028b-4e0d-903d-43f0ef82d0d4")]
   record IMFASFProfile, lpVtbl : IMFASFProfileVtbl* do
     GUID = LibC::GUID.new(0xd267bf6a_u32, 0x28b_u16, 0x4e0d_u16, StaticArray[0x90_u8, 0x3d_u8, 0x43_u8, 0xf0_u8, 0xef_u8, 0x82_u8, 0xd0_u8, 0xd4_u8])
     def query_interface(this : IMFASFProfile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20875,7 +21652,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("9e8ae8d2-dbbd-4200-9aca-06e6df484913")]
   record IMFASFStreamConfig, lpVtbl : IMFASFStreamConfigVtbl* do
     GUID = LibC::GUID.new(0x9e8ae8d2_u32, 0xdbbd_u16, 0x4200_u16, StaticArray[0x9a_u8, 0xca_u8, 0x6_u8, 0xe6_u8, 0xdf_u8, 0x48_u8, 0x49_u8, 0x13_u8])
     def query_interface(this : IMFASFStreamConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21027,7 +21803,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("12558291-e399-11d5-bc2a-00b0d0f3f4ab")]
   record IMFASFMutualExclusion, lpVtbl : IMFASFMutualExclusionVtbl* do
     GUID = LibC::GUID.new(0x12558291_u32, 0xe399_u16, 0x11d5_u16, StaticArray[0xbc_u8, 0x2a_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0xf3_u8, 0xf4_u8, 0xab_u8])
     def query_interface(this : IMFASFMutualExclusion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21082,7 +21857,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("699bdc27-bbaf-49ff-8e38-9c39c9b5e088")]
   record IMFASFStreamPrioritization, lpVtbl : IMFASFStreamPrioritizationVtbl* do
     GUID = LibC::GUID.new(0x699bdc27_u32, 0xbbaf_u16, 0x49ff_u16, StaticArray[0x8e_u8, 0x38_u8, 0x9c_u8, 0x39_u8, 0xc9_u8, 0xb5_u8, 0xe0_u8, 0x88_u8])
     def query_interface(this : IMFASFStreamPrioritization*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21133,7 +21907,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("53590f48-dc3b-4297-813f-787761ad7b3e")]
   record IMFASFIndexer, lpVtbl : IMFASFIndexerVtbl* do
     GUID = LibC::GUID.new(0x53590f48_u32, 0xdc3b_u16, 0x4297_u16, StaticArray[0x81_u8, 0x3f_u8, 0x78_u8, 0x77_u8, 0x61_u8, 0xad_u8, 0x7b_u8, 0x3e_u8])
     def query_interface(this : IMFASFIndexer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21204,7 +21977,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("12558295-e399-11d5-bc2a-00b0d0f3f4ab")]
   record IMFASFSplitter, lpVtbl : IMFASFSplitterVtbl* do
     GUID = LibC::GUID.new(0x12558295_u32, 0xe399_u16, 0x11d5_u16, StaticArray[0xbc_u8, 0x2a_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0xf3_u8, 0xf4_u8, 0xab_u8])
     def query_interface(this : IMFASFSplitter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21263,7 +22035,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("57bdd80a-9b38-4838-b737-c58f670d7d4f")]
   record IMFASFMultiplexer, lpVtbl : IMFASFMultiplexerVtbl* do
     GUID = LibC::GUID.new(0x57bdd80a_u32, 0x9b38_u16, 0x4838_u16, StaticArray[0xb7_u8, 0x37_u8, 0xc5_u8, 0x8f_u8, 0x67_u8, 0xd_u8, 0x7d_u8, 0x4f_u8])
     def query_interface(this : IMFASFMultiplexer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21327,7 +22098,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d01bad4a-4fa0-4a60-9349-c27e62da9d41")]
   record IMFASFStreamSelector, lpVtbl : IMFASFStreamSelectorVtbl* do
     GUID = LibC::GUID.new(0xd01bad4a_u32, 0x4fa0_u16, 0x4a60_u16, StaticArray[0x93_u8, 0x49_u8, 0xc2_u8, 0x7e_u8, 0x62_u8, 0xda_u8, 0x9d_u8, 0x41_u8])
     def query_interface(this : IMFASFStreamSelector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21394,7 +22164,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("3d1ff0ea-679a-4190-8d46-7fa69e8c7e15")]
   record IMFDRMNetHelper, lpVtbl : IMFDRMNetHelperVtbl* do
     GUID = LibC::GUID.new(0x3d1ff0ea_u32, 0x679a_u16, 0x4190_u16, StaticArray[0x8d_u8, 0x46_u8, 0x7f_u8, 0xa6_u8, 0x9e_u8, 0x8c_u8, 0x7e_u8, 0x15_u8])
     def query_interface(this : IMFDRMNetHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21424,7 +22193,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("aeda51c0-9025-4983-9012-de597b88b089")]
   record IMFCaptureEngineOnEventCallback, lpVtbl : IMFCaptureEngineOnEventCallbackVtbl* do
     GUID = LibC::GUID.new(0xaeda51c0_u32, 0x9025_u16, 0x4983_u16, StaticArray[0x90_u8, 0x12_u8, 0xde_u8, 0x59_u8, 0x7b_u8, 0x88_u8, 0xb0_u8, 0x89_u8])
     def query_interface(this : IMFCaptureEngineOnEventCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21451,7 +22219,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("52150b82-ab39-4467-980f-e48bf0822ecd")]
   record IMFCaptureEngineOnSampleCallback, lpVtbl : IMFCaptureEngineOnSampleCallbackVtbl* do
     GUID = LibC::GUID.new(0x52150b82_u32, 0xab39_u16, 0x4467_u16, StaticArray[0x98_u8, 0xf_u8, 0xe4_u8, 0x8b_u8, 0xf0_u8, 0x82_u8, 0x2e_u8, 0xcd_u8])
     def query_interface(this : IMFCaptureEngineOnSampleCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21482,7 +22249,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("72d6135b-35e9-412c-b926-fd5265f2a885")]
   record IMFCaptureSink, lpVtbl : IMFCaptureSinkVtbl* do
     GUID = LibC::GUID.new(0x72d6135b_u32, 0x35e9_u16, 0x412c_u16, StaticArray[0xb9_u8, 0x26_u8, 0xfd_u8, 0x52_u8, 0x65_u8, 0xf2_u8, 0xa8_u8, 0x85_u8])
     def query_interface(this : IMFCaptureSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21531,7 +22297,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("3323b55a-f92a-4fe2-8edc-e9bfc0634d77")]
   record IMFCaptureRecordSink, lpVtbl : IMFCaptureRecordSinkVtbl* do
     GUID = LibC::GUID.new(0x3323b55a_u32, 0xf92a_u16, 0x4fe2_u16, StaticArray[0x8e_u8, 0xdc_u8, 0xe9_u8, 0xbf_u8, 0xc0_u8, 0x63_u8, 0x4d_u8, 0x77_u8])
     def query_interface(this : IMFCaptureRecordSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21601,7 +22366,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("77346cfd-5b49-4d73-ace0-5b52a859f2e0")]
   record IMFCapturePreviewSink, lpVtbl : IMFCapturePreviewSinkVtbl* do
     GUID = LibC::GUID.new(0x77346cfd_u32, 0x5b49_u16, 0x4d73_u16, StaticArray[0xac_u8, 0xe0_u8, 0x5b_u8, 0x52_u8, 0xa8_u8, 0x59_u8, 0xf2_u8, 0xe0_u8])
     def query_interface(this : IMFCapturePreviewSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21674,7 +22438,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d2d43cc8-48bb-4aa7-95db-10c06977e777")]
   record IMFCapturePhotoSink, lpVtbl : IMFCapturePhotoSinkVtbl* do
     GUID = LibC::GUID.new(0xd2d43cc8_u32, 0x48bb_u16, 0x4aa7_u16, StaticArray[0x95_u8, 0xdb_u8, 0x10_u8, 0xc0_u8, 0x69_u8, 0x77_u8, 0xe7_u8, 0x77_u8])
     def query_interface(this : IMFCapturePhotoSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21735,7 +22498,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("439a42a8-0d2c-4505-be83-f79b2a05d5c4")]
   record IMFCaptureSource, lpVtbl : IMFCaptureSourceVtbl* do
     GUID = LibC::GUID.new(0x439a42a8_u32, 0xd2c_u16, 0x4505_u16, StaticArray[0xbe_u8, 0x83_u8, 0xf7_u8, 0x9b_u8, 0x2a_u8, 0x5_u8, 0xd5_u8, 0xc4_u8])
     def query_interface(this : IMFCaptureSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21808,7 +22570,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a6bba433-176b-48b2-b375-53aa03473207")]
   record IMFCaptureEngine, lpVtbl : IMFCaptureEngineVtbl* do
     GUID = LibC::GUID.new(0xa6bba433_u32, 0x176b_u16, 0x48b2_u16, StaticArray[0xb3_u8, 0x75_u8, 0x53_u8, 0xaa_u8, 0x3_u8, 0x47_u8, 0x32_u8, 0x7_u8])
     def query_interface(this : IMFCaptureEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21856,7 +22617,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("8f02d140-56fc-4302-a705-3a97c78be779")]
   record IMFCaptureEngineClassFactory, lpVtbl : IMFCaptureEngineClassFactoryVtbl* do
     GUID = LibC::GUID.new(0x8f02d140_u32, 0x56fc_u16, 0x4302_u16, StaticArray[0xa7_u8, 0x5_u8, 0x3a_u8, 0x97_u8, 0xc7_u8, 0x8b_u8, 0xe7_u8, 0x79_u8])
     def query_interface(this : IMFCaptureEngineClassFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21884,7 +22644,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e37ceed7-340f-4514-9f4d-9c2ae026100b")]
   record IMFCaptureEngineOnSampleCallback2, lpVtbl : IMFCaptureEngineOnSampleCallback2Vtbl* do
     GUID = LibC::GUID.new(0xe37ceed7_u32, 0x340f_u16, 0x4514_u16, StaticArray[0x9f_u8, 0x4d_u8, 0x9c_u8, 0x2a_u8, 0xe0_u8, 0x26_u8, 0x10_u8, 0xb_u8])
     def query_interface(this : IMFCaptureEngineOnSampleCallback2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21919,7 +22678,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("f9e4219e-6197-4b5e-b888-bee310ab2c59")]
   record IMFCaptureSink2, lpVtbl : IMFCaptureSink2Vtbl* do
     GUID = LibC::GUID.new(0xf9e4219e_u32, 0x6197_u16, 0x4b5e_u16, StaticArray[0xb8_u8, 0x88_u8, 0xbe_u8, 0xe3_u8, 0x10_u8, 0xab_u8, 0x2c_u8, 0x59_u8])
     def query_interface(this : IMFCaptureSink2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21964,7 +22722,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("09d0f835-92ff-4e53-8efa-40faa551f233")]
   record IMFD3D12SynchronizationObjectCommands, lpVtbl : IMFD3D12SynchronizationObjectCommandsVtbl* do
     GUID = LibC::GUID.new(0x9d0f835_u32, 0x92ff_u16, 0x4e53_u16, StaticArray[0x8e_u8, 0xfa_u8, 0x40_u8, 0xfa_u8, 0xa5_u8, 0x51_u8, 0xf2_u8, 0x33_u8])
     def query_interface(this : IMFD3D12SynchronizationObjectCommands*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22001,7 +22758,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("802302b0-82de-45e1-b421-f19ee5bdaf23")]
   record IMFD3D12SynchronizationObject, lpVtbl : IMFD3D12SynchronizationObjectVtbl* do
     GUID = LibC::GUID.new(0x802302b0_u32, 0x82de_u16, 0x45e1_u16, StaticArray[0xb4_u8, 0x21_u8, 0xf1_u8, 0x9e_u8, 0xe5_u8, 0xbd_u8, 0xaf_u8, 0x23_u8])
     def query_interface(this : IMFD3D12SynchronizationObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22076,7 +22832,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fc0e10d2-ab2a-4501-a951-06bb1075184c")]
   record IMFMediaError, lpVtbl : IMFMediaErrorVtbl* do
     GUID = LibC::GUID.new(0xfc0e10d2_u32, 0xab2a_u16, 0x4501_u16, StaticArray[0xa9_u8, 0x51_u8, 0x6_u8, 0xbb_u8, 0x10_u8, 0x75_u8, 0x18_u8, 0x4c_u8])
     def query_interface(this : IMFMediaError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22117,7 +22872,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("db71a2fc-078a-414e-9df9-8c2531b0aa6c")]
   record IMFMediaTimeRange, lpVtbl : IMFMediaTimeRangeVtbl* do
     GUID = LibC::GUID.new(0xdb71a2fc_u32, 0x78a_u16, 0x414e_u16, StaticArray[0x9d_u8, 0xf9_u8, 0x8c_u8, 0x25_u8, 0x31_u8, 0xb0_u8, 0xaa_u8, 0x6c_u8])
     def query_interface(this : IMFMediaTimeRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22159,7 +22913,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fee7c112-e776-42b5-9bbf-0048524e2bd5")]
   record IMFMediaEngineNotify, lpVtbl : IMFMediaEngineNotifyVtbl* do
     GUID = LibC::GUID.new(0xfee7c112_u32, 0xe776_u16, 0x42b5_u16, StaticArray[0x9b_u8, 0xbf_u8, 0x0_u8, 0x48_u8, 0x52_u8, 0x4e_u8, 0x2b_u8, 0xd5_u8])
     def query_interface(this : IMFMediaEngineNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22191,7 +22944,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("7a5e5354-b114-4c72-b991-3131d75032ea")]
   record IMFMediaEngineSrcElements, lpVtbl : IMFMediaEngineSrcElementsVtbl* do
     GUID = LibC::GUID.new(0x7a5e5354_u32, 0xb114_u16, 0x4c72_u16, StaticArray[0xb9_u8, 0x91_u8, 0x31_u8, 0x31_u8, 0xd7_u8, 0x50_u8, 0x32_u8, 0xea_u8])
     def query_interface(this : IMFMediaEngineSrcElements*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22274,7 +23026,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("98a1b0bb-03eb-4935-ae7c-93c1fa0e1c93")]
   record IMFMediaEngine, lpVtbl : IMFMediaEngineVtbl* do
     GUID = LibC::GUID.new(0x98a1b0bb_u32, 0x3eb_u16, 0x4935_u16, StaticArray[0xae_u8, 0x7c_u8, 0x93_u8, 0xc1_u8, 0xfa_u8, 0xe_u8, 0x1c_u8, 0x93_u8])
     def query_interface(this : IMFMediaEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22502,7 +23253,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("83015ead-b1e6-40d0-a98a-37145ffe1ad1")]
   record IMFMediaEngineEx, lpVtbl : IMFMediaEngineExVtbl* do
     GUID = LibC::GUID.new(0x83015ead_u32, 0xb1e6_u16, 0x40d0_u16, StaticArray[0xa9_u8, 0x8a_u8, 0x37_u8, 0x14_u8, 0x5f_u8, 0xfe_u8, 0x1a_u8, 0xd1_u8])
     def query_interface(this : IMFMediaEngineEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22764,7 +23514,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("7a3bac98-0e76-49fb-8c20-8a86fd98eaf2")]
   record IMFMediaEngineAudioEndpointId, lpVtbl : IMFMediaEngineAudioEndpointIdVtbl* do
     GUID = LibC::GUID.new(0x7a3bac98_u32, 0xe76_u16, 0x49fb_u16, StaticArray[0x8c_u8, 0x20_u8, 0x8a_u8, 0x86_u8, 0xfd_u8, 0x98_u8, 0xea_u8, 0xf2_u8])
     def query_interface(this : IMFMediaEngineAudioEndpointId*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22797,7 +23546,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("2f69d622-20b5-41e9-afdf-89ced1dda04e")]
   record IMFMediaEngineExtension, lpVtbl : IMFMediaEngineExtensionVtbl* do
     GUID = LibC::GUID.new(0x2f69d622_u32, 0x20b5_u16, 0x41e9_u16, StaticArray[0xaf_u8, 0xdf_u8, 0x89_u8, 0xce_u8, 0xd1_u8, 0xdd_u8, 0xa0_u8, 0x4e_u8])
     def query_interface(this : IMFMediaEngineExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22838,7 +23586,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("9f8021e8-9c8c-487e-bb5c-79aa4779938c")]
   record IMFMediaEngineProtectedContent, lpVtbl : IMFMediaEngineProtectedContentVtbl* do
     GUID = LibC::GUID.new(0x9f8021e8_u32, 0x9c8c_u16, 0x487e_u16, StaticArray[0xbb_u8, 0x5c_u8, 0x79_u8, 0xaa_u8, 0x47_u8, 0x79_u8, 0x93_u8, 0x8c_u8])
     def query_interface(this : IMFMediaEngineProtectedContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22880,7 +23627,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("ebbaf249-afc2-4582-91c6-b60df2e84954")]
   record IAudioSourceProvider, lpVtbl : IAudioSourceProviderVtbl* do
     GUID = LibC::GUID.new(0xebbaf249_u32, 0xafc2_u16, 0x4582_u16, StaticArray[0x91_u8, 0xc6_u8, 0xb6_u8, 0xd_u8, 0xf2_u8, 0xe8_u8, 0x49_u8, 0x54_u8])
     def query_interface(this : IAudioSourceProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22909,7 +23655,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("ba2743a1-07e0-48ef-84b6-9a2ed023ca6c")]
   record IMFMediaEngineWebSupport, lpVtbl : IMFMediaEngineWebSupportVtbl* do
     GUID = LibC::GUID.new(0xba2743a1_u32, 0x7e0_u16, 0x48ef_u16, StaticArray[0x84_u8, 0xb6_u8, 0x9a_u8, 0x2e_u8, 0xd0_u8, 0x23_u8, 0xca_u8, 0x6c_u8])
     def query_interface(this : IMFMediaEngineWebSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22944,7 +23689,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a7901327-05dd-4469-a7b7-0e01979e361d")]
   record IMFMediaSourceExtensionNotify, lpVtbl : IMFMediaSourceExtensionNotifyVtbl* do
     GUID = LibC::GUID.new(0xa7901327_u32, 0x5dd_u16, 0x4469_u16, StaticArray[0xa7_u8, 0xb7_u8, 0xe_u8, 0x1_u8, 0x97_u8, 0x9e_u8, 0x36_u8, 0x1d_u8])
     def query_interface(this : IMFMediaSourceExtensionNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22978,7 +23722,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("24cd47f7-81d8-4785-adb2-af697a963cd2")]
   record IMFBufferListNotify, lpVtbl : IMFBufferListNotifyVtbl* do
     GUID = LibC::GUID.new(0x24cd47f7_u32, 0x81d8_u16, 0x4785_u16, StaticArray[0xad_u8, 0xb2_u8, 0xaf_u8, 0x69_u8, 0x7a_u8, 0x96_u8, 0x3c_u8, 0xd2_u8])
     def query_interface(this : IMFBufferListNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23012,7 +23755,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("87e47623-2ceb-45d6-9b88-d8520c4dcbbc")]
   record IMFSourceBufferNotify, lpVtbl : IMFSourceBufferNotifyVtbl* do
     GUID = LibC::GUID.new(0x87e47623_u32, 0x2ceb_u16, 0x45d6_u16, StaticArray[0x9b_u8, 0x88_u8, 0xd8_u8, 0x52_u8, 0xc_u8, 0x4d_u8, 0xcb_u8, 0xbc_u8])
     def query_interface(this : IMFSourceBufferNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23062,7 +23804,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e2cd3a4b-af25-4d3d-9110-da0e6f8ee877")]
   record IMFSourceBuffer, lpVtbl : IMFSourceBufferVtbl* do
     GUID = LibC::GUID.new(0xe2cd3a4b_u32, 0xaf25_u16, 0x4d3d_u16, StaticArray[0x91_u8, 0x10_u8, 0xda_u8, 0xe_u8, 0x6f_u8, 0x8e_u8, 0xe8_u8, 0x77_u8])
     def query_interface(this : IMFSourceBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23123,7 +23864,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("19666fb4-babe-4c55-bc03-0a074da37e2a")]
   record IMFSourceBufferAppendMode, lpVtbl : IMFSourceBufferAppendModeVtbl* do
     GUID = LibC::GUID.new(0x19666fb4_u32, 0xbabe_u16, 0x4c55_u16, StaticArray[0xbc_u8, 0x3_u8, 0xa_u8, 0x7_u8, 0x4d_u8, 0xa3_u8, 0x7e_u8, 0x2a_u8])
     def query_interface(this : IMFSourceBufferAppendMode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23154,7 +23894,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("249981f8-8325-41f3-b80c-3b9e3aad0cbe")]
   record IMFSourceBufferList, lpVtbl : IMFSourceBufferListVtbl* do
     GUID = LibC::GUID.new(0x249981f8_u32, 0x8325_u16, 0x41f3_u16, StaticArray[0xb8_u8, 0xc_u8, 0x3b_u8, 0x9e_u8, 0x3a_u8, 0xad_u8, 0xc_u8, 0xbe_u8])
     def query_interface(this : IMFSourceBufferList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23193,7 +23932,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e467b94e-a713-4562-a802-816a42e9008a")]
   record IMFMediaSourceExtension, lpVtbl : IMFMediaSourceExtensionVtbl* do
     GUID = LibC::GUID.new(0xe467b94e_u32, 0xa713_u16, 0x4562_u16, StaticArray[0xa8_u8, 0x2_u8, 0x81_u8, 0x6a_u8, 0x42_u8, 0xe9_u8, 0x0_u8, 0x8a_u8])
     def query_interface(this : IMFMediaSourceExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23248,7 +23986,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("5d1abfd6-450a-4d92-9efc-d6b6cbc1f4da")]
   record IMFMediaSourceExtensionLiveSeekableRange, lpVtbl : IMFMediaSourceExtensionLiveSeekableRangeVtbl* do
     GUID = LibC::GUID.new(0x5d1abfd6_u32, 0x450a_u16, 0x4d92_u16, StaticArray[0x9e_u8, 0xfc_u8, 0xd6_u8, 0xb6_u8, 0xcb_u8, 0xc1_u8, 0xf4_u8, 0xda_u8])
     def query_interface(this : IMFMediaSourceExtensionLiveSeekableRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23279,7 +24016,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("50dc93e4-ba4f-4275-ae66-83e836e57469")]
   record IMFMediaEngineEME, lpVtbl : IMFMediaEngineEMEVtbl* do
     GUID = LibC::GUID.new(0x50dc93e4_u32, 0xba4f_u16, 0x4275_u16, StaticArray[0xae_u8, 0x66_u8, 0x83_u8, 0xe8_u8, 0x36_u8, 0xe5_u8, 0x74_u8, 0x69_u8])
     def query_interface(this : IMFMediaEngineEME*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23316,7 +24052,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("654a6bb3-e1a3-424a-9908-53a43a0dfda0")]
   record IMFMediaEngineSrcElementsEx, lpVtbl : IMFMediaEngineSrcElementsExVtbl* do
     GUID = LibC::GUID.new(0x654a6bb3_u32, 0xe1a3_u16, 0x424a_u16, StaticArray[0x99_u8, 0x8_u8, 0x53_u8, 0xa4_u8, 0x3a_u8, 0xd_u8, 0xfd_u8, 0xa0_u8])
     def query_interface(this : IMFMediaEngineSrcElementsEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23364,7 +24099,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("46a30204-a696-4b18-8804-246b8f031bb1")]
   record IMFMediaEngineNeedKeyNotify, lpVtbl : IMFMediaEngineNeedKeyNotifyVtbl* do
     GUID = LibC::GUID.new(0x46a30204_u32, 0xa696_u16, 0x4b18_u16, StaticArray[0x88_u8, 0x4_u8, 0x24_u8, 0x6b_u8, 0x8f_u8, 0x3_u8, 0x1b_u8, 0xb1_u8])
     def query_interface(this : IMFMediaEngineNeedKeyNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23394,7 +24128,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("5cb31c05-61ff-418f-afda-caaf41421a38")]
   record IMFMediaKeys, lpVtbl : IMFMediaKeysVtbl* do
     GUID = LibC::GUID.new(0x5cb31c05_u32, 0x61ff_u16, 0x418f_u16, StaticArray[0xaf_u8, 0xda_u8, 0xca_u8, 0xaf_u8, 0x41_u8, 0x42_u8, 0x1a_u8, 0x38_u8])
     def query_interface(this : IMFMediaKeys*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23434,7 +24167,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("24fa67d5-d1d0-4dc5-995c-c0efdc191fb5")]
   record IMFMediaKeySession, lpVtbl : IMFMediaKeySessionVtbl* do
     GUID = LibC::GUID.new(0x24fa67d5_u32, 0xd1d0_u16, 0x4dc5_u16, StaticArray[0x99_u8, 0x5c_u8, 0xc0_u8, 0xef_u8, 0xdc_u8, 0x19_u8, 0x1f_u8, 0xb5_u8])
     def query_interface(this : IMFMediaKeySession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23475,7 +24207,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("6a0083f9-8947-4c1d-9ce0-cdee22b23135")]
   record IMFMediaKeySessionNotify, lpVtbl : IMFMediaKeySessionNotifyVtbl* do
     GUID = LibC::GUID.new(0x6a0083f9_u32, 0x8947_u16, 0x4c1d_u16, StaticArray[0x9c_u8, 0xe0_u8, 0xcd_u8, 0xee_u8, 0x22_u8, 0xb2_u8, 0x31_u8, 0x35_u8])
     def query_interface(this : IMFMediaKeySessionNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23509,7 +24240,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("7a5645d2-43bd-47fd-87b7-dcd24cc7d692")]
   record IMFCdmSuspendNotify, lpVtbl : IMFCdmSuspendNotifyVtbl* do
     GUID = LibC::GUID.new(0x7a5645d2_u32, 0x43bd_u16, 0x47fd_u16, StaticArray[0x87_u8, 0xb7_u8, 0xdc_u8, 0xd2_u8, 0x4c_u8, 0xc7_u8, 0xd6_u8, 0x92_u8])
     def query_interface(this : IMFCdmSuspendNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23540,7 +24270,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("de400f54-5bf1-40cf-8964-0bea136b1e3d")]
   record IMFHDCPStatus, lpVtbl : IMFHDCPStatusVtbl* do
     GUID = LibC::GUID.new(0xde400f54_u32, 0x5bf1_u16, 0x40cf_u16, StaticArray[0x89_u8, 0x64_u8, 0xb_u8, 0xea_u8, 0x13_u8, 0x6b_u8, 0x1e_u8, 0x3d_u8])
     def query_interface(this : IMFHDCPStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23570,7 +24299,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("765763e6-6c01-4b01-bb0f-b829f60ed28c")]
   record IMFMediaEngineOPMInfo, lpVtbl : IMFMediaEngineOPMInfoVtbl* do
     GUID = LibC::GUID.new(0x765763e6_u32, 0x6c01_u16, 0x4b01_u16, StaticArray[0xbb_u8, 0xf_u8, 0xb8_u8, 0x29_u8, 0xf6_u8, 0xe_u8, 0xd2_u8, 0x8c_u8])
     def query_interface(this : IMFMediaEngineOPMInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23599,7 +24327,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("4d645ace-26aa-4688-9be1-df3516990b93")]
   record IMFMediaEngineClassFactory, lpVtbl : IMFMediaEngineClassFactoryVtbl* do
     GUID = LibC::GUID.new(0x4d645ace_u32, 0x26aa_u16, 0x4688_u16, StaticArray[0x9b_u8, 0xe1_u8, 0xdf_u8, 0x35_u8, 0x16_u8, 0x99_u8, 0xb_u8, 0x93_u8])
     def query_interface(this : IMFMediaEngineClassFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23637,7 +24364,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("c56156c6-ea5b-48a5-9df8-fbe035d0929e")]
   record IMFMediaEngineClassFactoryEx, lpVtbl : IMFMediaEngineClassFactoryExVtbl* do
     GUID = LibC::GUID.new(0xc56156c6_u32, 0xea5b_u16, 0x48a5_u16, StaticArray[0x9d_u8, 0xf8_u8, 0xfb_u8, 0xe0_u8, 0x35_u8, 0xd0_u8, 0x92_u8, 0x9e_u8])
     def query_interface(this : IMFMediaEngineClassFactoryEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23679,7 +24405,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("09083cef-867f-4bf6-8776-dee3a7b42fca")]
   record IMFMediaEngineClassFactory2, lpVtbl : IMFMediaEngineClassFactory2Vtbl* do
     GUID = LibC::GUID.new(0x9083cef_u32, 0x867f_u16, 0x4bf6_u16, StaticArray[0x87_u8, 0x76_u8, 0xde_u8, 0xe3_u8, 0xa7_u8, 0xb4_u8, 0x2f_u8, 0xca_u8])
     def query_interface(this : IMFMediaEngineClassFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23706,7 +24431,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("332ec562-3758-468d-a784-e38f23552128")]
   record IMFExtendedDRMTypeSupport, lpVtbl : IMFExtendedDRMTypeSupportVtbl* do
     GUID = LibC::GUID.new(0x332ec562_u32, 0x3758_u16, 0x468d_u16, StaticArray[0xa7_u8, 0x84_u8, 0xe3_u8, 0x8f_u8, 0x23_u8, 0x55_u8, 0x21_u8, 0x28_u8])
     def query_interface(this : IMFExtendedDRMTypeSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23735,7 +24459,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a724b056-1b2e-4642-a6f3-db9420c52908")]
   record IMFMediaEngineSupportsSourceTransfer, lpVtbl : IMFMediaEngineSupportsSourceTransferVtbl* do
     GUID = LibC::GUID.new(0xa724b056_u32, 0x1b2e_u16, 0x4642_u16, StaticArray[0xa6_u8, 0xf3_u8, 0xdb_u8, 0x94_u8, 0x20_u8, 0xc5_u8, 0x29_u8, 0x8_u8])
     def query_interface(this : IMFMediaEngineSupportsSourceTransfer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23768,7 +24491,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("24230452-fe54-40cc-94f3-fcc394c340d6")]
   record IMFMediaEngineTransferSource, lpVtbl : IMFMediaEngineTransferSourceVtbl* do
     GUID = LibC::GUID.new(0x24230452_u32, 0xfe54_u16, 0x40cc_u16, StaticArray[0x94_u8, 0xf3_u8, 0xfc_u8, 0xc3_u8, 0x94_u8, 0xc3_u8, 0x40_u8, 0xd6_u8])
     def query_interface(this : IMFMediaEngineTransferSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23808,7 +24530,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("1f2a94c9-a3df-430d-9d0f-acd85ddc29af")]
   record IMFTimedText, lpVtbl : IMFTimedTextVtbl* do
     GUID = LibC::GUID.new(0x1f2a94c9_u32, 0xa3df_u16, 0x430d_u16, StaticArray[0x9d_u8, 0xf_u8, 0xac_u8, 0xd8_u8, 0x5d_u8, 0xdc_u8, 0x29_u8, 0xaf_u8])
     def query_interface(this : IMFTimedText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23880,7 +24601,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("df6b87b6-ce12-45db-aba7-432fe054e57d")]
   record IMFTimedTextNotify, lpVtbl : IMFTimedTextNotifyVtbl* do
     GUID = LibC::GUID.new(0xdf6b87b6_u32, 0xce12_u16, 0x45db_u16, StaticArray[0xab_u8, 0xa7_u8, 0x43_u8, 0x2f_u8, 0xe0_u8, 0x54_u8, 0xe5_u8, 0x7d_u8])
     def query_interface(this : IMFTimedTextNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23937,7 +24657,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("8822c32d-654e-4233-bf21-d7f2e67d30d4")]
   record IMFTimedTextTrack, lpVtbl : IMFTimedTextTrackVtbl* do
     GUID = LibC::GUID.new(0x8822c32d_u32, 0x654e_u16, 0x4233_u16, StaticArray[0xbf_u8, 0x21_u8, 0xd7_u8, 0xf2_u8, 0xe6_u8, 0x7d_u8, 0x30_u8, 0xd4_u8])
     def query_interface(this : IMFTimedTextTrack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24002,7 +24721,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("23ff334c-442c-445f-bccc-edc438aa11e2")]
   record IMFTimedTextTrackList, lpVtbl : IMFTimedTextTrackListVtbl* do
     GUID = LibC::GUID.new(0x23ff334c_u32, 0x442c_u16, 0x445f_u16, StaticArray[0xbc_u8, 0xcc_u8, 0xed_u8, 0xc4_u8, 0x38_u8, 0xaa_u8, 0x11_u8, 0xe2_u8])
     def query_interface(this : IMFTimedTextTrackList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24045,7 +24763,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("1e560447-9a2b-43e1-a94c-b0aaabfbfbc9")]
   record IMFTimedTextCue, lpVtbl : IMFTimedTextCueVtbl* do
     GUID = LibC::GUID.new(0x1e560447_u32, 0x9a2b_u16, 0x43e1_u16, StaticArray[0xa9_u8, 0x4c_u8, 0xb0_u8, 0xaa_u8, 0xab_u8, 0xfb_u8, 0xfb_u8, 0xc9_u8])
     def query_interface(this : IMFTimedTextCue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24104,7 +24821,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e13af3c1-4d47-4354-b1f5-e83ae0ecae60")]
   record IMFTimedTextFormattedText, lpVtbl : IMFTimedTextFormattedTextVtbl* do
     GUID = LibC::GUID.new(0xe13af3c1_u32, 0x4d47_u16, 0x4354_u16, StaticArray[0xb1_u8, 0xf5_u8, 0xe8_u8, 0x3a_u8, 0xe0_u8, 0xec_u8, 0xae_u8, 0x60_u8])
     def query_interface(this : IMFTimedTextFormattedText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24149,7 +24865,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("09b2455d-b834-4f01-a347-9052e21c450e")]
   record IMFTimedTextStyle, lpVtbl : IMFTimedTextStyleVtbl* do
     GUID = LibC::GUID.new(0x9b2455d_u32, 0xb834_u16, 0x4f01_u16, StaticArray[0xa3_u8, 0x47_u8, 0x90_u8, 0x52_u8, 0xe2_u8, 0x1c_u8, 0x45_u8, 0xe_u8])
     def query_interface(this : IMFTimedTextStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24223,7 +24938,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("c8d22afc-bc47-4bdf-9b04-787e49ce3f58")]
   record IMFTimedTextRegion, lpVtbl : IMFTimedTextRegionVtbl* do
     GUID = LibC::GUID.new(0xc8d22afc_u32, 0xbc47_u16, 0x4bdf_u16, StaticArray[0x9b_u8, 0x4_u8, 0x78_u8, 0x7e_u8, 0x49_u8, 0xce_u8, 0x3f_u8, 0x58_u8])
     def query_interface(this : IMFTimedTextRegion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24283,7 +24997,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("4ae3a412-0545-43c4-bf6f-6b97a5c6c432")]
   record IMFTimedTextBinary, lpVtbl : IMFTimedTextBinaryVtbl* do
     GUID = LibC::GUID.new(0x4ae3a412_u32, 0x545_u16, 0x43c4_u16, StaticArray[0xbf_u8, 0x6f_u8, 0x6b_u8, 0x97_u8, 0xa5_u8, 0xc6_u8, 0xc4_u8, 0x32_u8])
     def query_interface(this : IMFTimedTextBinary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24316,7 +25029,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("ad128745-211b-40a0-9981-fe65f166d0fd")]
   record IMFTimedTextCueList, lpVtbl : IMFTimedTextCueListVtbl* do
     GUID = LibC::GUID.new(0xad128745_u32, 0x211b_u16, 0x40a0_u16, StaticArray[0x99_u8, 0x81_u8, 0xfe_u8, 0x65_u8, 0xf1_u8, 0x66_u8, 0xd0_u8, 0xfd_u8])
     def query_interface(this : IMFTimedTextCueList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24364,7 +25076,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("76c6a6f5-4955-4de5-b27b-14b734cc14b4")]
   record IMFTimedTextRuby, lpVtbl : IMFTimedTextRubyVtbl* do
     GUID = LibC::GUID.new(0x76c6a6f5_u32, 0x4955_u16, 0x4de5_u16, StaticArray[0xb2_u8, 0x7b_u8, 0x14_u8, 0xb7_u8, 0x34_u8, 0xcc_u8, 0x14_u8, 0xb4_u8])
     def query_interface(this : IMFTimedTextRuby*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24402,7 +25113,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("3c5f3e8a-90c0-464e-8136-898d2975f847")]
   record IMFTimedTextBouten, lpVtbl : IMFTimedTextBoutenVtbl* do
     GUID = LibC::GUID.new(0x3c5f3e8a_u32, 0x90c0_u16, 0x464e_u16, StaticArray[0x81_u8, 0x36_u8, 0x89_u8, 0x8d_u8, 0x29_u8, 0x75_u8, 0xf8_u8, 0x47_u8])
     def query_interface(this : IMFTimedTextBouten*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24438,7 +25148,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("db639199-c809-4c89-bfca-d0bbb9729d6e")]
   record IMFTimedTextStyle2, lpVtbl : IMFTimedTextStyle2Vtbl* do
     GUID = LibC::GUID.new(0xdb639199_u32, 0xc809_u16, 0x4c89_u16, StaticArray[0xbf_u8, 0xca_u8, 0xd0_u8, 0xbb_u8, 0xb9_u8, 0x72_u8, 0x9d_u8, 0x6e_u8])
     def query_interface(this : IMFTimedTextStyle2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24475,7 +25184,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("9e184d15-cdb7-4f86-b49e-566689f4a601")]
   record IMFMediaEngineEMENotify, lpVtbl : IMFMediaEngineEMENotifyVtbl* do
     GUID = LibC::GUID.new(0x9e184d15_u32, 0xcdb7_u16, 0x4f86_u16, StaticArray[0xb4_u8, 0x9e_u8, 0x56_u8, 0x66_u8, 0x89_u8, 0xf4_u8, 0xa6_u8, 0x1_u8])
     def query_interface(this : IMFMediaEngineEMENotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24509,7 +25217,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("c3a9e92a-da88-46b0-a110-6cf953026cb9")]
   record IMFMediaKeySessionNotify2, lpVtbl : IMFMediaKeySessionNotify2Vtbl* do
     GUID = LibC::GUID.new(0xc3a9e92a_u32, 0xda88_u16, 0x46b0_u16, StaticArray[0xa1_u8, 0x10_u8, 0x6c_u8, 0xf9_u8, 0x53_u8, 0x2_u8, 0x6c_u8, 0xb9_u8])
     def query_interface(this : IMFMediaKeySessionNotify2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24550,7 +25257,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("aec63fda-7a97-4944-b35c-6c6df8085cc3")]
   record IMFMediaKeySystemAccess, lpVtbl : IMFMediaKeySystemAccessVtbl* do
     GUID = LibC::GUID.new(0xaec63fda_u32, 0x7a97_u16, 0x4944_u16, StaticArray[0xb3_u8, 0x5c_u8, 0x6c_u8, 0x6d_u8, 0xf8_u8, 0x8_u8, 0x5c_u8, 0xc3_u8])
     def query_interface(this : IMFMediaKeySystemAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24583,7 +25289,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("3787614f-65f7-4003-b673-ead8293a0e60")]
   record IMFMediaEngineClassFactory3, lpVtbl : IMFMediaEngineClassFactory3Vtbl* do
     GUID = LibC::GUID.new(0x3787614f_u32, 0x65f7_u16, 0x4003_u16, StaticArray[0xb6_u8, 0x73_u8, 0xea_u8, 0xd8_u8, 0x29_u8, 0x3a_u8, 0xe_u8, 0x60_u8])
     def query_interface(this : IMFMediaEngineClassFactory3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24616,7 +25321,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("45892507-ad66-4de2-83a2-acbb13cd8d43")]
   record IMFMediaKeys2, lpVtbl : IMFMediaKeys2Vtbl* do
     GUID = LibC::GUID.new(0x45892507_u32, 0xad66_u16, 0x4de2_u16, StaticArray[0x83_u8, 0xa2_u8, 0xac_u8, 0xbb_u8, 0x13_u8, 0xcd_u8, 0x8d_u8, 0x43_u8])
     def query_interface(this : IMFMediaKeys2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24671,7 +25375,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e9707e05-6d55-4636-b185-3de21210bd75")]
   record IMFMediaKeySession2, lpVtbl : IMFMediaKeySession2Vtbl* do
     GUID = LibC::GUID.new(0xe9707e05_u32, 0x6d55_u16, 0x4636_u16, StaticArray[0xb1_u8, 0x85_u8, 0x3d_u8, 0xe2_u8, 0x12_u8, 0x10_u8, 0xbd_u8, 0x75_u8])
     def query_interface(this : IMFMediaKeySession2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24728,7 +25431,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fbe256c1-43cf-4a9b-8cb8-ce8632a34186")]
   record IMFMediaEngineClassFactory4, lpVtbl : IMFMediaEngineClassFactory4Vtbl* do
     GUID = LibC::GUID.new(0xfbe256c1_u32, 0x43cf_u16, 0x4a9b_u16, StaticArray[0x8c_u8, 0xb8_u8, 0xce_u8, 0x86_u8, 0x32_u8, 0xa3_u8, 0x41_u8, 0x86_u8])
     def query_interface(this : IMFMediaEngineClassFactory4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24755,7 +25457,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("0c012799-1b61-4c10-bda9-04445be5f561")]
   record IMFDLNASinkInit, lpVtbl : IMFDLNASinkInitVtbl* do
     GUID = LibC::GUID.new(0xc012799_u32, 0x1b61_u16, 0x4c10_u16, StaticArray[0xbd_u8, 0xa9_u8, 0x4_u8, 0x44_u8, 0x5b_u8, 0xe5_u8, 0xf5_u8, 0x61_u8])
     def query_interface(this : IMFDLNASinkInit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24783,7 +25484,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("e7fe2e12-661c-40da-92f9-4f002ab67627")]
   record IMFReadWriteClassFactory, lpVtbl : IMFReadWriteClassFactoryVtbl* do
     GUID = LibC::GUID.new(0xe7fe2e12_u32, 0x661c_u16, 0x40da_u16, StaticArray[0x92_u8, 0xf9_u8, 0x4f_u8, 0x0_u8, 0x2a_u8, 0xb6_u8, 0x76_u8, 0x27_u8])
     def query_interface(this : IMFReadWriteClassFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24822,7 +25522,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("70ae66f2-c809-4e4f-8915-bdcb406b7993")]
   record IMFSourceReader, lpVtbl : IMFSourceReaderVtbl* do
     GUID = LibC::GUID.new(0x70ae66f2_u32, 0xc809_u16, 0x4e4f_u16, StaticArray[0x89_u8, 0x15_u8, 0xbd_u8, 0xcb_u8, 0x40_u8, 0x6b_u8, 0x79_u8, 0x93_u8])
     def query_interface(this : IMFSourceReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24889,7 +25588,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("7b981cf0-560e-4116-9875-b099895f23d7")]
   record IMFSourceReaderEx, lpVtbl : IMFSourceReaderExVtbl* do
     GUID = LibC::GUID.new(0x7b981cf0_u32, 0x560e_u16, 0x4116_u16, StaticArray[0x98_u8, 0x75_u8, 0xb0_u8, 0x99_u8, 0x89_u8, 0x5f_u8, 0x23_u8, 0xd7_u8])
     def query_interface(this : IMFSourceReaderEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24957,7 +25655,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("deec8d99-fa1d-4d82-84c2-2c8969944867")]
   record IMFSourceReaderCallback, lpVtbl : IMFSourceReaderCallbackVtbl* do
     GUID = LibC::GUID.new(0xdeec8d99_u32, 0xfa1d_u16, 0x4d82_u16, StaticArray[0x84_u8, 0xc2_u8, 0x2c_u8, 0x89_u8, 0x69_u8, 0x94_u8, 0x48_u8, 0x67_u8])
     def query_interface(this : IMFSourceReaderCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24994,7 +25691,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("cf839fe6-8c2a-4dd2-b6ea-c22d6961af05")]
   record IMFSourceReaderCallback2, lpVtbl : IMFSourceReaderCallback2Vtbl* do
     GUID = LibC::GUID.new(0xcf839fe6_u32, 0x8c2a_u16, 0x4dd2_u16, StaticArray[0xb6_u8, 0xea_u8, 0xc2_u8, 0x2d_u8, 0x69_u8, 0x61_u8, 0xaf_u8, 0x5_u8])
     def query_interface(this : IMFSourceReaderCallback2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25043,7 +25739,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("3137f1cd-fe5e-4805-a5d8-fb477448cb3d")]
   record IMFSinkWriter, lpVtbl : IMFSinkWriterVtbl* do
     GUID = LibC::GUID.new(0x3137f1cd_u32, 0xfe5e_u16, 0x4805_u16, StaticArray[0xa5_u8, 0xd8_u8, 0xfb_u8, 0x47_u8, 0x74_u8, 0x48_u8, 0xcb_u8, 0x3d_u8])
     def query_interface(this : IMFSinkWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25111,7 +25806,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("588d72ab-5bc1-496a-8714-b70617141b25")]
   record IMFSinkWriterEx, lpVtbl : IMFSinkWriterExVtbl* do
     GUID = LibC::GUID.new(0x588d72ab_u32, 0x5bc1_u16, 0x496a_u16, StaticArray[0x87_u8, 0x14_u8, 0xb7_u8, 0x6_u8, 0x17_u8, 0x14_u8, 0x1b_u8, 0x25_u8])
     def query_interface(this : IMFSinkWriterEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25172,7 +25866,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("17c3779e-3cde-4ede-8c60-3899f5f53ad6")]
   record IMFSinkWriterEncoderConfig, lpVtbl : IMFSinkWriterEncoderConfigVtbl* do
     GUID = LibC::GUID.new(0x17c3779e_u32, 0x3cde_u16, 0x4ede_u16, StaticArray[0x8c_u8, 0x60_u8, 0x38_u8, 0x99_u8, 0xf5_u8, 0xf5_u8, 0x3a_u8, 0xd6_u8])
     def query_interface(this : IMFSinkWriterEncoderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25203,7 +25896,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("666f76de-33d2-41b9-a458-29ed0a972c58")]
   record IMFSinkWriterCallback, lpVtbl : IMFSinkWriterCallbackVtbl* do
     GUID = LibC::GUID.new(0x666f76de_u32, 0x33d2_u16, 0x41b9_u16, StaticArray[0xa4_u8, 0x58_u8, 0x29_u8, 0xed_u8, 0xa_u8, 0x97_u8, 0x2c_u8, 0x58_u8])
     def query_interface(this : IMFSinkWriterCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25236,7 +25928,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("2456bd58-c067-4513-84fe-8d0c88ffdc61")]
   record IMFSinkWriterCallback2, lpVtbl : IMFSinkWriterCallback2Vtbl* do
     GUID = LibC::GUID.new(0x2456bd58_u32, 0xc067_u16, 0x4513_u16, StaticArray[0x84_u8, 0xfe_u8, 0x8d_u8, 0xc_u8, 0x88_u8, 0xff_u8, 0xdc_u8, 0x61_u8])
     def query_interface(this : IMFSinkWriterCallback2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25272,7 +25963,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("1f6a9f17-e70b-4e24-8ae4-0b2c3ba7a4ae")]
   record IMFVideoPositionMapper, lpVtbl : IMFVideoPositionMapperVtbl* do
     GUID = LibC::GUID.new(0x1f6a9f17_u32, 0xe70b_u16, 0x4e24_u16, StaticArray[0x8a_u8, 0xe4_u8, 0xb_u8, 0x2c_u8, 0x3b_u8, 0xa7_u8, 0xa4_u8, 0xae_u8])
     def query_interface(this : IMFVideoPositionMapper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25299,7 +25989,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a38d9567-5a9c-4f3c-b293-8eb415b279ba")]
   record IMFVideoDeviceID, lpVtbl : IMFVideoDeviceIDVtbl* do
     GUID = LibC::GUID.new(0xa38d9567_u32, 0x5a9c_u16, 0x4f3c_u16, StaticArray[0xb2_u8, 0x93_u8, 0x8e_u8, 0xb4_u8, 0x15_u8, 0xb2_u8, 0x79_u8, 0xba_u8])
     def query_interface(this : IMFVideoDeviceID*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25341,7 +26030,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a490b1e4-ab84-4d31-a1b2-181e03b1077a")]
   record IMFVideoDisplayControl, lpVtbl : IMFVideoDisplayControlVtbl* do
     GUID = LibC::GUID.new(0xa490b1e4_u32, 0xab84_u16, 0x4d31_u16, StaticArray[0xa1_u8, 0xb2_u8, 0x18_u8, 0x1e_u8, 0x3_u8, 0xb1_u8, 0x7_u8, 0x7a_u8])
     def query_interface(this : IMFVideoDisplayControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25419,7 +26107,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("29aff080-182a-4a5d-af3b-448f3a6346cb")]
   record IMFVideoPresenter, lpVtbl : IMFVideoPresenterVtbl* do
     GUID = LibC::GUID.new(0x29aff080_u32, 0x182a_u16, 0x4a5d_u16, StaticArray[0xaf_u8, 0x3b_u8, 0x44_u8, 0x8f_u8, 0x3a_u8, 0x63_u8, 0x46_u8, 0xcb_u8])
     def query_interface(this : IMFVideoPresenter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25466,7 +26153,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("56c294d0-753e-4260-8d61-a3d8820b1d54")]
   record IMFDesiredSample, lpVtbl : IMFDesiredSampleVtbl* do
     GUID = LibC::GUID.new(0x56c294d0_u32, 0x753e_u16, 0x4260_u16, StaticArray[0x8d_u8, 0x61_u8, 0xa3_u8, 0xd8_u8, 0x82_u8, 0xb_u8, 0x1d_u8, 0x54_u8])
     def query_interface(this : IMFDesiredSample*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25502,7 +26188,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a5c6c53f-c202-4aa5-9695-175ba8c508a5")]
   record IMFVideoMixerControl, lpVtbl : IMFVideoMixerControlVtbl* do
     GUID = LibC::GUID.new(0xa5c6c53f_u32, 0xc202_u16, 0x4aa5_u16, StaticArray[0x96_u8, 0x95_u8, 0x17_u8, 0x5b_u8, 0xa8_u8, 0xc5_u8, 0x8_u8, 0xa5_u8])
     def query_interface(this : IMFVideoMixerControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25543,7 +26228,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("8459616d-966e-4930-b658-54fa7e5a16d3")]
   record IMFVideoMixerControl2, lpVtbl : IMFVideoMixerControl2Vtbl* do
     GUID = LibC::GUID.new(0x8459616d_u32, 0x966e_u16, 0x4930_u16, StaticArray[0xb6_u8, 0x58_u8, 0x54_u8, 0xfa_u8, 0x7e_u8, 0x5a_u8, 0x16_u8, 0xd3_u8])
     def query_interface(this : IMFVideoMixerControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25585,7 +26269,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("dfdfd197-a9ca-43d8-b341-6af3503792cd")]
   record IMFVideoRenderer, lpVtbl : IMFVideoRendererVtbl* do
     GUID = LibC::GUID.new(0xdfdfd197_u32, 0xa9ca_u16, 0x43d8_u16, StaticArray[0xb3_u8, 0x41_u8, 0x6a_u8, 0xf3_u8, 0x50_u8, 0x37_u8, 0x92_u8, 0xcd_u8])
     def query_interface(this : IMFVideoRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25613,7 +26296,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("83e91e85-82c1-4ea7-801d-85dc50b75086")]
   record IEVRFilterConfig, lpVtbl : IEVRFilterConfigVtbl* do
     GUID = LibC::GUID.new(0x83e91e85_u32, 0x82c1_u16, 0x4ea7_u16, StaticArray[0x80_u8, 0x1d_u8, 0x85_u8, 0xdc_u8, 0x50_u8, 0xb7_u8, 0x50_u8, 0x86_u8])
     def query_interface(this : IEVRFilterConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25646,7 +26328,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("aea36028-796d-454f-beee-b48071e24304")]
   record IEVRFilterConfigEx, lpVtbl : IEVRFilterConfigExVtbl* do
     GUID = LibC::GUID.new(0xaea36028_u32, 0x796d_u16, 0x454f_u16, StaticArray[0xbe_u8, 0xee_u8, 0xb4_u8, 0x80_u8, 0x71_u8, 0xe2_u8, 0x43_u8, 0x4_u8])
     def query_interface(this : IEVRFilterConfigEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25682,7 +26363,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fa993889-4383-415a-a930-dd472a8cf6f7")]
   record IMFTopologyServiceLookup, lpVtbl : IMFTopologyServiceLookupVtbl* do
     GUID = LibC::GUID.new(0xfa993889_u32, 0x4383_u16, 0x415a_u16, StaticArray[0xa9_u8, 0x30_u8, 0xdd_u8, 0x47_u8, 0x2a_u8, 0x8c_u8, 0xf6_u8, 0xf7_u8])
     def query_interface(this : IMFTopologyServiceLookup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25710,7 +26390,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("fa99388a-4383-415a-a930-dd472a8cf6f7")]
   record IMFTopologyServiceLookupClient, lpVtbl : IMFTopologyServiceLookupClientVtbl* do
     GUID = LibC::GUID.new(0xfa99388a_u32, 0x4383_u16, 0x415a_u16, StaticArray[0xa9_u8, 0x30_u8, 0xdd_u8, 0x47_u8, 0x2a_u8, 0x8c_u8, 0xf6_u8, 0xf7_u8])
     def query_interface(this : IMFTopologyServiceLookupClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25743,7 +26422,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("83a4ce40-7710-494b-a893-a472049af630")]
   record IEVRTrustedVideoPlugin, lpVtbl : IEVRTrustedVideoPluginVtbl* do
     GUID = LibC::GUID.new(0x83a4ce40_u32, 0x7710_u16, 0x494b_u16, StaticArray[0xa8_u8, 0x93_u8, 0xa4_u8, 0x72_u8, 0x4_u8, 0x9a_u8, 0xf6_u8, 0x30_u8])
     def query_interface(this : IEVRTrustedVideoPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25814,7 +26492,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a714590a-58af-430a-85bf-44f5ec838d85")]
   record IMFPMediaPlayer, lpVtbl : IMFPMediaPlayerVtbl* do
     GUID = LibC::GUID.new(0xa714590a_u32, 0x58af_u16, 0x430a_u16, StaticArray[0x85_u8, 0xbf_u8, 0x44_u8, 0xf5_u8, 0xec_u8, 0x83_u8, 0x8d_u8, 0x85_u8])
     def query_interface(this : IMFPMediaPlayer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25964,7 +26641,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("90eb3e6b-ecbf-45cc-b1da-c6fe3ea70d57")]
   record IMFPMediaItem, lpVtbl : IMFPMediaItemVtbl* do
     GUID = LibC::GUID.new(0x90eb3e6b_u32, 0xecbf_u16, 0x45cc_u16, StaticArray[0xb1_u8, 0xda_u8, 0xc6_u8, 0xfe_u8, 0x3e_u8, 0xa7_u8, 0xd_u8, 0x57_u8])
     def query_interface(this : IMFPMediaItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26045,7 +26721,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("766c8ffb-5fdb-4fea-a28d-b912996f51bd")]
   record IMFPMediaPlayerCallback, lpVtbl : IMFPMediaPlayerCallbackVtbl* do
     GUID = LibC::GUID.new(0x766c8ffb_u32, 0x5fdb_u16, 0x4fea_u16, StaticArray[0xa2_u8, 0x8d_u8, 0xb9_u8, 0x12_u8, 0x99_u8, 0x6f_u8, 0x51_u8, 0xbd_u8])
     def query_interface(this : IMFPMediaPlayerCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26072,7 +26747,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("2ba61f92-8305-413b-9733-faf15f259384")]
   record IMFSharingEngineClassFactory, lpVtbl : IMFSharingEngineClassFactoryVtbl* do
     GUID = LibC::GUID.new(0x2ba61f92_u32, 0x8305_u16, 0x413b_u16, StaticArray[0x97_u8, 0x33_u8, 0xfa_u8, 0xf1_u8, 0x5f_u8, 0x25_u8, 0x93_u8, 0x84_u8])
     def query_interface(this : IMFSharingEngineClassFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26141,7 +26815,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("8d3ce1bf-2367-40e0-9eee-40d377cc1b46")]
   record IMFMediaSharingEngine, lpVtbl : IMFMediaSharingEngineVtbl* do
     GUID = LibC::GUID.new(0x8d3ce1bf_u32, 0x2367_u16, 0x40e0_u16, StaticArray[0x9e_u8, 0xee_u8, 0x40_u8, 0xd3_u8, 0x77_u8, 0xcc_u8, 0x1b_u8, 0x46_u8])
     def query_interface(this : IMFMediaSharingEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26294,7 +26967,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("524d2bc4-b2b1-4fe5-8fac-fa4e4512b4e0")]
   record IMFMediaSharingEngineClassFactory, lpVtbl : IMFMediaSharingEngineClassFactoryVtbl* do
     GUID = LibC::GUID.new(0x524d2bc4_u32, 0xb2b1_u16, 0x4fe5_u16, StaticArray[0x8f_u8, 0xac_u8, 0xfa_u8, 0x4e_u8, 0x45_u8, 0x12_u8, 0xb4_u8, 0xe0_u8])
     def query_interface(this : IMFMediaSharingEngineClassFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26323,7 +26995,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("cfa0ae8e-7e1c-44d2-ae68-fc4c148a6354")]
   record IMFImageSharingEngine, lpVtbl : IMFImageSharingEngineVtbl* do
     GUID = LibC::GUID.new(0xcfa0ae8e_u32, 0x7e1c_u16, 0x44d2_u16, StaticArray[0xae_u8, 0x68_u8, 0xfc_u8, 0x4c_u8, 0x14_u8, 0x8a_u8, 0x63_u8, 0x54_u8])
     def query_interface(this : IMFImageSharingEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26356,7 +27027,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("1fc55727-a7fb-4fc8-83ae-8af024990af1")]
   record IMFImageSharingEngineClassFactory, lpVtbl : IMFImageSharingEngineClassFactoryVtbl* do
     GUID = LibC::GUID.new(0x1fc55727_u32, 0xa7fb_u16, 0x4fc8_u16, StaticArray[0x83_u8, 0xae_u8, 0x8a_u8, 0xf0_u8, 0x24_u8, 0x99_u8, 0xa_u8, 0xf1_u8])
     def query_interface(this : IMFImageSharingEngineClassFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26384,7 +27054,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("607574eb-f4b6-45c1-b08c-cb715122901d")]
   record IPlayToControl, lpVtbl : IPlayToControlVtbl* do
     GUID = LibC::GUID.new(0x607574eb_u32, 0xf4b6_u16, 0x45c1_u16, StaticArray[0xb0_u8, 0x8c_u8, 0xcb_u8, 0x71_u8, 0x51_u8, 0x22_u8, 0x90_u8, 0x1d_u8])
     def query_interface(this : IPlayToControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26416,7 +27085,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("aa9dd80f-c50a-4220-91c1-332287f82a34")]
   record IPlayToControlWithCapabilities, lpVtbl : IPlayToControlWithCapabilitiesVtbl* do
     GUID = LibC::GUID.new(0xaa9dd80f_u32, 0xc50a_u16, 0x4220_u16, StaticArray[0x91_u8, 0xc1_u8, 0x33_u8, 0x22_u8, 0x87_u8, 0xf8_u8, 0x2a_u8, 0x34_u8])
     def query_interface(this : IPlayToControlWithCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26449,7 +27117,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("842b32a3-9b9b-4d1c-b3f3-49193248a554")]
   record IPlayToSourceClassFactory, lpVtbl : IPlayToSourceClassFactoryVtbl* do
     GUID = LibC::GUID.new(0x842b32a3_u32, 0x9b9b_u16, 0x4d1c_u16, StaticArray[0xb3_u8, 0xf3_u8, 0x49_u8, 0x19_u8, 0x32_u8, 0x48_u8, 0xa5_u8, 0x54_u8])
     def query_interface(this : IPlayToSourceClassFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26477,7 +27144,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d0cfe38b-93e7-4772-8957-0400c49a4485")]
   record IEVRVideoStreamControl, lpVtbl : IEVRVideoStreamControlVtbl* do
     GUID = LibC::GUID.new(0xd0cfe38b_u32, 0x93e7_u16, 0x4772_u16, StaticArray[0x89_u8, 0x57_u8, 0x4_u8, 0x0_u8, 0xc4_u8, 0x9a_u8, 0x44_u8, 0x85_u8])
     def query_interface(this : IEVRVideoStreamControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26518,7 +27184,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("6ab0000c-fece-4d1f-a2ac-a9573530656e")]
   record IMFVideoProcessor, lpVtbl : IMFVideoProcessorVtbl* do
     GUID = LibC::GUID.new(0x6ab0000c_u32, 0xfece_u16, 0x4d1f_u16, StaticArray[0xa2_u8, 0xac_u8, 0xa9_u8, 0x57_u8, 0x35_u8, 0x30_u8, 0x65_u8, 0x6e_u8])
     def query_interface(this : IMFVideoProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26581,7 +27246,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("814c7b20-0fdb-4eec-af8f-f957c8f69edc")]
   record IMFVideoMixerBitmap, lpVtbl : IMFVideoMixerBitmapVtbl* do
     GUID = LibC::GUID.new(0x814c7b20_u32, 0xfdb_u16, 0x4eec_u16, StaticArray[0xaf_u8, 0x8f_u8, 0xf9_u8, 0x57_u8, 0xc8_u8, 0xf6_u8, 0x9e_u8, 0xdc_u8])
     def query_interface(this : IMFVideoMixerBitmap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26617,7 +27281,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("3de21209-8ba6-4f2a-a577-2819b56ff14d")]
   record IAdvancedMediaCaptureInitializationSettings, lpVtbl : IAdvancedMediaCaptureInitializationSettingsVtbl* do
     GUID = LibC::GUID.new(0x3de21209_u32, 0x8ba6_u16, 0x4f2a_u16, StaticArray[0xa5_u8, 0x77_u8, 0x28_u8, 0x19_u8, 0xb5_u8, 0x6f_u8, 0xf1_u8, 0x4d_u8])
     def query_interface(this : IAdvancedMediaCaptureInitializationSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26644,7 +27307,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("24e0485f-a33e-4aa1-b564-6019b1d14f65")]
   record IAdvancedMediaCaptureSettings, lpVtbl : IAdvancedMediaCaptureSettingsVtbl* do
     GUID = LibC::GUID.new(0x24e0485f_u32, 0xa33e_u16, 0x4aa1_u16, StaticArray[0xb5_u8, 0x64_u8, 0x60_u8, 0x19_u8, 0xb1_u8, 0xd1_u8, 0x4f_u8, 0x65_u8])
     def query_interface(this : IAdvancedMediaCaptureSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26671,7 +27333,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d0751585-d216-4344-b5bf-463b68f977bb")]
   record IAdvancedMediaCapture, lpVtbl : IAdvancedMediaCaptureVtbl* do
     GUID = LibC::GUID.new(0xd0751585_u32, 0xd216_u16, 0x4344_u16, StaticArray[0xb5_u8, 0xbf_u8, 0x46_u8, 0x3b_u8, 0x68_u8, 0xf9_u8, 0x77_u8, 0xbb_u8])
     def query_interface(this : IAdvancedMediaCapture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26707,7 +27368,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("d396ec8c-605e-4249-978d-72ad1c312872")]
   record IMFSpatialAudioObjectBuffer, lpVtbl : IMFSpatialAudioObjectBufferVtbl* do
     GUID = LibC::GUID.new(0xd396ec8c_u32, 0x605e_u16, 0x4249_u16, StaticArray[0x97_u8, 0x8d_u8, 0x72_u8, 0xad_u8, 0x1c_u8, 0x31_u8, 0x28_u8, 0x72_u8])
     def query_interface(this : IMFSpatialAudioObjectBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26807,7 +27467,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("abf28a9b-3393-4290-ba79-5ffc46d986b2")]
   record IMFSpatialAudioSample, lpVtbl : IMFSpatialAudioSampleVtbl* do
     GUID = LibC::GUID.new(0xabf28a9b_u32, 0x3393_u16, 0x4290_u16, StaticArray[0xba_u8, 0x79_u8, 0x5f_u8, 0xfc_u8, 0x46_u8, 0xd9_u8, 0x86_u8, 0xb2_u8])
     def query_interface(this : IMFSpatialAudioSample*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26979,7 +27638,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("4e233efd-1dd2-49e8-b577-d63eee4c0d33")]
   record IMFContentDecryptionModuleSession, lpVtbl : IMFContentDecryptionModuleSessionVtbl* do
     GUID = LibC::GUID.new(0x4e233efd_u32, 0x1dd2_u16, 0x49e8_u16, StaticArray[0xb5_u8, 0x77_u8, 0xd6_u8, 0x3e_u8, 0xee_u8, 0x4c_u8, 0xd_u8, 0x33_u8])
     def query_interface(this : IMFContentDecryptionModuleSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27028,7 +27686,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("3f96ee40-ad81-4096-8470-59a4b770f89a")]
   record IMFContentDecryptionModuleSessionCallbacks, lpVtbl : IMFContentDecryptionModuleSessionCallbacksVtbl* do
     GUID = LibC::GUID.new(0x3f96ee40_u32, 0xad81_u16, 0x4096_u16, StaticArray[0x84_u8, 0x70_u8, 0x59_u8, 0xa4_u8, 0xb7_u8, 0x70_u8, 0xf8_u8, 0x9a_u8])
     def query_interface(this : IMFContentDecryptionModuleSessionCallbacks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27064,7 +27721,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("87be986c-10be-4943-bf48-4b54ce1983a2")]
   record IMFContentDecryptionModule, lpVtbl : IMFContentDecryptionModuleVtbl* do
     GUID = LibC::GUID.new(0x87be986c_u32, 0x10be_u16, 0x4943_u16, StaticArray[0xbf_u8, 0x48_u8, 0x4b_u8, 0x54_u8, 0xce_u8, 0x19_u8, 0x83_u8, 0xa2_u8])
     def query_interface(this : IMFContentDecryptionModule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27111,7 +27767,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("a853d1f4-e2a0-4303-9edc-f1a68ee43136")]
   record IMFContentDecryptionModuleAccess, lpVtbl : IMFContentDecryptionModuleAccessVtbl* do
     GUID = LibC::GUID.new(0xa853d1f4_u32, 0xe2a0_u16, 0x4303_u16, StaticArray[0x9e_u8, 0xdc_u8, 0xf1_u8, 0xa6_u8, 0x8e_u8, 0xe4_u8, 0x31_u8, 0x36_u8])
     def query_interface(this : IMFContentDecryptionModuleAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27145,7 +27800,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("7d5abf16-4cbb-4e08-b977-9ba59049943e")]
   record IMFContentDecryptionModuleFactory, lpVtbl : IMFContentDecryptionModuleFactoryVtbl* do
     GUID = LibC::GUID.new(0x7d5abf16_u32, 0x4cbb_u16, 0x4e08_u16, StaticArray[0xb9_u8, 0x77_u8, 0x9b_u8, 0xa5_u8, 0x90_u8, 0x49_u8, 0x94_u8, 0x3e_u8])
     def query_interface(this : IMFContentDecryptionModuleFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27176,7 +27830,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("6338b23a-3042-49d2-a3ea-ec0fed815407")]
   record IMFCameraSyncObject, lpVtbl : IMFCameraSyncObjectVtbl* do
     GUID = LibC::GUID.new(0x6338b23a_u32, 0x3042_u16, 0x49d2_u16, StaticArray[0xa3_u8, 0xea_u8, 0xec_u8, 0xf_u8, 0xed_u8, 0x81_u8, 0x54_u8, 0x7_u8])
     def query_interface(this : IMFCameraSyncObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27246,7 +27899,6 @@ module Win32cr::Media::MediaFoundation
 
 
   @[Extern]
-  #@[Com("1c08a864-ef6c-4c75-af59-5f2d68da9563")]
   record IMFVirtualCamera, lpVtbl : IMFVirtualCameraVtbl* do
     GUID = LibC::GUID.new(0x1c08a864_u32, 0xef6c_u16, 0x4c75_u16, StaticArray[0xaf_u8, 0x59_u8, 0x5f_u8, 0x2d_u8, 0x68_u8, 0xda_u8, 0x95_u8, 0x63_u8])
     def query_interface(this : IMFVirtualCamera*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

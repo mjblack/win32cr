@@ -2853,2838 +2853,3979 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsPin
-  @[Extern]
-  record IKsAllocator
-  @[Extern]
-  record IKsAllocatorEx
-  @[Extern]
-  record KSPRIORITY,
-    priority_class : UInt32,
-    priority_sub_class : UInt32
+  struct IKsPin
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record KSIDENTIFIER,
-    anonymous : Anonymous_e__Union_ do
+  struct IKsAllocator
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct IKsAllocatorEx
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct KSPRIORITY
+    property priority_class : UInt32
+    property priority_sub_class : UInt32
+    def initialize(@priority_class : UInt32, @priority_sub_class : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct KSIDENTIFIER
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      alignment : Int64 do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property alignment : Int64
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        set : LibC::GUID,
-        id : UInt32,
-        flags : UInt32
+      struct Anonymous_e__Struct_
+    property set : LibC::GUID
+    property id : UInt32
+    property flags : UInt32
+    def initialize(@set : LibC::GUID, @id : UInt32, @flags : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @alignment : Int64)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record KSP_NODE,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    node_id : UInt32,
-    reserved : UInt32
+  struct KSP_NODE
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property node_id : UInt32
+    property reserved : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @node_id : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSM_NODE,
-    method : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    node_id : UInt32,
-    reserved : UInt32
+  struct KSM_NODE
+    property method : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property node_id : UInt32
+    property reserved : UInt32
+    def initialize(@method : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @node_id : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSE_NODE,
-    event : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    node_id : UInt32,
-    reserved : UInt32
+  struct KSE_NODE
+    property event : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property node_id : UInt32
+    property reserved : UInt32
+    def initialize(@event : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @node_id : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSMULTIPLE_ITEM,
-    size : UInt32,
-    count : UInt32
+  struct KSMULTIPLE_ITEM
+    property size : UInt32
+    property count : UInt32
+    def initialize(@size : UInt32, @count : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_DESCRIPTION,
-    access_flags : UInt32,
-    description_size : UInt32,
-    prop_type_set : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    members_list_count : UInt32,
-    reserved : UInt32
+  struct KSPROPERTY_DESCRIPTION
+    property access_flags : UInt32
+    property description_size : UInt32
+    property prop_type_set : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property members_list_count : UInt32
+    property reserved : UInt32
+    def initialize(@access_flags : UInt32, @description_size : UInt32, @prop_type_set : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @members_list_count : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_MEMBERSHEADER,
-    members_flags : UInt32,
-    members_size : UInt32,
-    members_count : UInt32,
-    flags : UInt32
+  struct KSPROPERTY_MEMBERSHEADER
+    property members_flags : UInt32
+    property members_size : UInt32
+    property members_count : UInt32
+    property flags : UInt32
+    def initialize(@members_flags : UInt32, @members_size : UInt32, @members_count : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record KSPROPERTY_BOUNDS_LONG,
-    anonymous1 : Anonymous1_e__Struct_,
-    anonymous2 : Anonymous2_e__Struct_ do
+  struct KSPROPERTY_BOUNDS_LONG
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
 
     # Nested Type Anonymous1_e__Struct_
     @[Extern]
-    record Anonymous1_e__Struct_,
-      signed_minimum : Int32,
-      signed_maximum : Int32
+    struct Anonymous1_e__Struct_
+    property signed_minimum : Int32
+    property signed_maximum : Int32
+    def initialize(@signed_minimum : Int32, @signed_maximum : Int32)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Struct_
     @[Extern]
-    record Anonymous2_e__Struct_,
-      unsigned_minimum : UInt32,
-      unsigned_maximum : UInt32
+    struct Anonymous2_e__Struct_
+    property unsigned_minimum : UInt32
+    property unsigned_maximum : UInt32
+    def initialize(@unsigned_minimum : UInt32, @unsigned_maximum : UInt32)
+    end
+    end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_)
+    end
   end
 
   @[Extern(union: true)]
-  record KSPROPERTY_BOUNDS_LONGLONG,
-    anonymous1 : Anonymous1_e__Struct_,
-    anonymous2 : Anonymous2_e__Struct_ do
+  struct KSPROPERTY_BOUNDS_LONGLONG
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
 
     # Nested Type Anonymous1_e__Struct_
     @[Extern]
-    record Anonymous1_e__Struct_,
-      signed_minimum : Int64,
-      signed_maximum : Int64
+    struct Anonymous1_e__Struct_
+    property signed_minimum : Int64
+    property signed_maximum : Int64
+    def initialize(@signed_minimum : Int64, @signed_maximum : Int64)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Struct_
     @[Extern]
-    record Anonymous2_e__Struct_,
-      unsigned_minimum : UInt64,
-      unsigned_maximum : UInt64
+    struct Anonymous2_e__Struct_
+    property unsigned_minimum : UInt64
+    property unsigned_maximum : UInt64
+    def initialize(@unsigned_minimum : UInt64, @unsigned_maximum : UInt64)
+    end
+    end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_)
+    end
   end
 
   @[Extern]
-  record KSPROPERTY_STEPPING_LONG,
-    stepping_delta : UInt32,
-    reserved : UInt32,
-    bounds : Win32cr::Media::KernelStreaming::KSPROPERTY_BOUNDS_LONG
+  struct KSPROPERTY_STEPPING_LONG
+    property stepping_delta : UInt32
+    property reserved : UInt32
+    property bounds : Win32cr::Media::KernelStreaming::KSPROPERTY_BOUNDS_LONG
+    def initialize(@stepping_delta : UInt32, @reserved : UInt32, @bounds : Win32cr::Media::KernelStreaming::KSPROPERTY_BOUNDS_LONG)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_STEPPING_LONGLONG,
-    stepping_delta : UInt64,
-    bounds : Win32cr::Media::KernelStreaming::KSPROPERTY_BOUNDS_LONGLONG
+  struct KSPROPERTY_STEPPING_LONGLONG
+    property stepping_delta : UInt64
+    property bounds : Win32cr::Media::KernelStreaming::KSPROPERTY_BOUNDS_LONGLONG
+    def initialize(@stepping_delta : UInt64, @bounds : Win32cr::Media::KernelStreaming::KSPROPERTY_BOUNDS_LONGLONG)
+    end
+  end
 
   @[Extern]
-  record KSEVENTDATA,
-    notification_type : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct KSEVENTDATA
+    property notification_type : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      event_handle : EventHandle_e__Struct_,
-      semaphore_handle : SemaphoreHandle_e__Struct_,
-      alignment : Alignment_e__Struct_ do
+    struct Anonymous_e__Union_
+    property event_handle : EventHandle_e__Struct_
+    property semaphore_handle : SemaphoreHandle_e__Struct_
+    property alignment : Alignment_e__Struct_
 
       # Nested Type SemaphoreHandle_e__Struct_
       @[Extern]
-      record SemaphoreHandle_e__Struct_,
-        semaphore : Win32cr::Foundation::HANDLE,
-        reserved : UInt32,
-        adjustment : Int32
+      struct SemaphoreHandle_e__Struct_
+    property semaphore : Win32cr::Foundation::HANDLE
+    property reserved : UInt32
+    property adjustment : Int32
+    def initialize(@semaphore : Win32cr::Foundation::HANDLE, @reserved : UInt32, @adjustment : Int32)
+    end
+      end
 
 
       # Nested Type EventHandle_e__Struct_
       @[Extern]
-      record EventHandle_e__Struct_,
-        event : Win32cr::Foundation::HANDLE,
-        reserved : LibC::UIntPtrT[2]
+      struct EventHandle_e__Struct_
+    property event : Win32cr::Foundation::HANDLE
+    property reserved : LibC::UIntPtrT[2]
+    def initialize(@event : Win32cr::Foundation::HANDLE, @reserved : LibC::UIntPtrT[2])
+    end
+      end
 
 
       # Nested Type Alignment_e__Struct_
       @[Extern]
-      record Alignment_e__Struct_,
-        unused : Void*,
-        alignment : LibC::IntPtrT[2]
+      struct Alignment_e__Struct_
+    property unused : Void*
+    property alignment : LibC::IntPtrT[2]
+    def initialize(@unused : Void*, @alignment : LibC::IntPtrT[2])
+    end
+      end
 
+    def initialize(@event_handle : EventHandle_e__Struct_, @semaphore_handle : SemaphoreHandle_e__Struct_, @alignment : Alignment_e__Struct_)
+    end
     end
 
+    def initialize(@notification_type : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record KSQUERYBUFFER,
-    event : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA*,
-    reserved : Void*
+  struct KSQUERYBUFFER
+    property event : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA*
+    property reserved : Void*
+    def initialize(@event : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA*, @reserved : Void*)
+    end
+  end
 
   @[Extern]
-  record KSRELATIVEEVENT,
-    size : UInt32,
-    flags : UInt32,
-    anonymous : Anonymous_e__Union_,
-    reserved : Void*,
-    event : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA do
+  struct KSRELATIVEEVENT
+    property size : UInt32
+    property flags : UInt32
+    property anonymous : Anonymous_e__Union_
+    property reserved : Void*
+    property event : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      object_handle : Win32cr::Foundation::HANDLE,
-      object_pointer : Void*
+    struct Anonymous_e__Union_
+    property object_handle : Win32cr::Foundation::HANDLE
+    property object_pointer : Void*
+    def initialize(@object_handle : Win32cr::Foundation::HANDLE, @object_pointer : Void*)
+    end
+    end
 
+    def initialize(@size : UInt32, @flags : UInt32, @anonymous : Anonymous_e__Union_, @reserved : Void*, @event : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA)
+    end
   end
 
   @[Extern]
-  record KSEVENT_TIME_MARK,
-    event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA,
-    mark_time : Int64
+  struct KSEVENT_TIME_MARK
+    property event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA
+    property mark_time : Int64
+    def initialize(@event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA, @mark_time : Int64)
+    end
+  end
 
   @[Extern]
-  record KSEVENT_TIME_INTERVAL,
-    event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA,
-    time_base : Int64,
-    interval : Int64
+  struct KSEVENT_TIME_INTERVAL
+    property event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA
+    property time_base : Int64
+    property interval : Int64
+    def initialize(@event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA, @time_base : Int64, @interval : Int64)
+    end
+  end
 
   @[Extern]
-  record KSINTERVAL,
-    time_base : Int64,
-    interval : Int64
+  struct KSINTERVAL
+    property time_base : Int64
+    property interval : Int64
+    def initialize(@time_base : Int64, @interval : Int64)
+    end
+  end
 
   @[Extern]
-  record KSCOMPONENTID,
-    manufacturer : LibC::GUID,
-    product : LibC::GUID,
-    component : LibC::GUID,
-    name : LibC::GUID,
-    version : UInt32,
-    revision : UInt32
+  struct KSCOMPONENTID
+    property manufacturer : LibC::GUID
+    property product : LibC::GUID
+    property component : LibC::GUID
+    property name : LibC::GUID
+    property version : UInt32
+    property revision : UInt32
+    def initialize(@manufacturer : LibC::GUID, @product : LibC::GUID, @component : LibC::GUID, @name : LibC::GUID, @version : UInt32, @revision : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_POSITIONS,
-    current : Int64,
-    stop : Int64,
-    current_flags : Win32cr::Media::KernelStreaming::KS_SEEKING_FLAGS,
-    stop_flags : Win32cr::Media::KernelStreaming::KS_SEEKING_FLAGS
+  struct KSPROPERTY_POSITIONS
+    property current : Int64
+    property stop : Int64
+    property current_flags : Win32cr::Media::KernelStreaming::KS_SEEKING_FLAGS
+    property stop_flags : Win32cr::Media::KernelStreaming::KS_SEEKING_FLAGS
+    def initialize(@current : Int64, @stop : Int64, @current_flags : Win32cr::Media::KernelStreaming::KS_SEEKING_FLAGS, @stop_flags : Win32cr::Media::KernelStreaming::KS_SEEKING_FLAGS)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_MEDIAAVAILABLE,
-    earliest : Int64,
-    latest : Int64
+  struct KSPROPERTY_MEDIAAVAILABLE
+    property earliest : Int64
+    property latest : Int64
+    def initialize(@earliest : Int64, @latest : Int64)
+    end
+  end
 
   @[Extern]
-  record KSP_TIMEFORMAT,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    source_format : LibC::GUID,
-    target_format : LibC::GUID,
-    time : Int64
+  struct KSP_TIMEFORMAT
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property source_format : LibC::GUID
+    property target_format : LibC::GUID
+    property time : Int64
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @source_format : LibC::GUID, @target_format : LibC::GUID, @time : Int64)
+    end
+  end
 
   @[Extern]
-  record KSTOPOLOGY_CONNECTION,
-    from_node : UInt32,
-    from_node_pin : UInt32,
-    to_node : UInt32,
-    to_node_pin : UInt32
+  struct KSTOPOLOGY_CONNECTION
+    property from_node : UInt32
+    property from_node_pin : UInt32
+    property to_node : UInt32
+    property to_node_pin : UInt32
+    def initialize(@from_node : UInt32, @from_node_pin : UInt32, @to_node : UInt32, @to_node_pin : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSTOPOLOGY,
-    categories_count : UInt32,
-    categories : LibC::GUID*,
-    topology_nodes_count : UInt32,
-    topology_nodes : LibC::GUID*,
-    topology_connections_count : UInt32,
-    topology_connections : Win32cr::Media::KernelStreaming::KSTOPOLOGY_CONNECTION*,
-    topology_nodes_names : LibC::GUID*,
-    reserved : UInt32
+  struct KSTOPOLOGY
+    property categories_count : UInt32
+    property categories : LibC::GUID*
+    property topology_nodes_count : UInt32
+    property topology_nodes : LibC::GUID*
+    property topology_connections_count : UInt32
+    property topology_connections : Win32cr::Media::KernelStreaming::KSTOPOLOGY_CONNECTION*
+    property topology_nodes_names : LibC::GUID*
+    property reserved : UInt32
+    def initialize(@categories_count : UInt32, @categories : LibC::GUID*, @topology_nodes_count : UInt32, @topology_nodes : LibC::GUID*, @topology_connections_count : UInt32, @topology_connections : Win32cr::Media::KernelStreaming::KSTOPOLOGY_CONNECTION*, @topology_nodes_names : LibC::GUID*, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSNODE_CREATE,
-    create_flags : UInt32,
-    node : UInt32
+  struct KSNODE_CREATE
+    property create_flags : UInt32
+    property node : UInt32
+    def initialize(@create_flags : UInt32, @node : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSP_PIN,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    pin_id : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct KSP_PIN
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property pin_id : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      reserved : UInt32,
-      flags : UInt32
+    struct Anonymous_e__Union_
+    property reserved : UInt32
+    property flags : UInt32
+    def initialize(@reserved : UInt32, @flags : UInt32)
+    end
+    end
 
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @pin_id : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record KSE_PIN,
-    event : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    pin_id : UInt32,
-    reserved : UInt32
+  struct KSE_PIN
+    property event : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property pin_id : UInt32
+    property reserved : UInt32
+    def initialize(@event : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @pin_id : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPIN_CINSTANCES,
-    possible_count : UInt32,
-    current_count : UInt32
+  struct KSPIN_CINSTANCES
+    property possible_count : UInt32
+    property current_count : UInt32
+    def initialize(@possible_count : UInt32, @current_count : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record KSDATAFORMAT,
-    anonymous : Anonymous_e__Struct_,
-    alignment : Int64 do
+  struct KSDATAFORMAT
+    property anonymous : Anonymous_e__Struct_
+    property alignment : Int64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      format_size : UInt32,
-      flags : UInt32,
-      sample_size : UInt32,
-      reserved : UInt32,
-      major_format : LibC::GUID,
-      sub_format : LibC::GUID,
-      specifier : LibC::GUID
+    struct Anonymous_e__Struct_
+    property format_size : UInt32
+    property flags : UInt32
+    property sample_size : UInt32
+    property reserved : UInt32
+    property major_format : LibC::GUID
+    property sub_format : LibC::GUID
+    property specifier : LibC::GUID
+    def initialize(@format_size : UInt32, @flags : UInt32, @sample_size : UInt32, @reserved : UInt32, @major_format : LibC::GUID, @sub_format : LibC::GUID, @specifier : LibC::GUID)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @alignment : Int64)
+    end
   end
 
   @[Extern]
-  record KSATTRIBUTE,
-    size : UInt32,
-    flags : UInt32,
-    attribute : LibC::GUID
+  struct KSATTRIBUTE
+    property size : UInt32
+    property flags : UInt32
+    property attribute : LibC::GUID
+    def initialize(@size : UInt32, @flags : UInt32, @attribute : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record KSPIN_CONNECT,
-    interface : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    pin_id : UInt32,
-    pin_to_handle : Win32cr::Foundation::HANDLE,
-    priority : Win32cr::Media::KernelStreaming::KSPRIORITY
+  struct KSPIN_CONNECT
+    property interface : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property pin_id : UInt32
+    property pin_to_handle : Win32cr::Foundation::HANDLE
+    property priority : Win32cr::Media::KernelStreaming::KSPRIORITY
+    def initialize(@interface : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @pin_id : UInt32, @pin_to_handle : Win32cr::Foundation::HANDLE, @priority : Win32cr::Media::KernelStreaming::KSPRIORITY)
+    end
+  end
 
   @[Extern]
-  record KSPIN_PHYSICALCONNECTION,
-    size : UInt32,
-    pin : UInt32,
-    symbolic_link_name : UInt16*
+  struct KSPIN_PHYSICALCONNECTION
+    property size : UInt32
+    property pin : UInt32
+    property symbolic_link_name : UInt16*
+    def initialize(@size : UInt32, @pin : UInt32, @symbolic_link_name : UInt16*)
+    end
+  end
 
   @[Extern]
-  record KSALLOCATOR_FRAMING,
-    anonymous1 : Anonymous1_e__Union_,
-    pool_type : UInt32,
-    frames : UInt32,
-    frame_size : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    reserved : UInt32 do
+  struct KSALLOCATOR_FRAMING
+    property anonymous1 : Anonymous1_e__Union_
+    property pool_type : UInt32
+    property frames : UInt32
+    property frame_size : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property reserved : UInt32
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      file_alignment : UInt32,
-      frame_pitch : Int32
+    struct Anonymous2_e__Union_
+    property file_alignment : UInt32
+    property frame_pitch : Int32
+    def initialize(@file_alignment : UInt32, @frame_pitch : Int32)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      options_flags : UInt32,
-      requirements_flags : UInt32
+    struct Anonymous1_e__Union_
+    property options_flags : UInt32
+    property requirements_flags : UInt32
+    def initialize(@options_flags : UInt32, @requirements_flags : UInt32)
+    end
+    end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @pool_type : UInt32, @frames : UInt32, @frame_size : UInt32, @anonymous2 : Anonymous2_e__Union_, @reserved : UInt32)
+    end
   end
 
   @[Extern]
-  record KS_FRAMING_RANGE,
-    min_frame_size : UInt32,
-    max_frame_size : UInt32,
-    stepping : UInt32
+  struct KS_FRAMING_RANGE
+    property min_frame_size : UInt32
+    property max_frame_size : UInt32
+    property stepping : UInt32
+    def initialize(@min_frame_size : UInt32, @max_frame_size : UInt32, @stepping : UInt32)
+    end
+  end
 
   @[Extern]
-  record KS_FRAMING_RANGE_WEIGHTED,
-    range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE,
-    in_place_weight : UInt32,
-    not_in_place_weight : UInt32
+  struct KS_FRAMING_RANGE_WEIGHTED
+    property range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE
+    property in_place_weight : UInt32
+    property not_in_place_weight : UInt32
+    def initialize(@range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE, @in_place_weight : UInt32, @not_in_place_weight : UInt32)
+    end
+  end
 
   @[Extern]
-  record KS_COMPRESSION,
-    ratio_numerator : UInt32,
-    ratio_denominator : UInt32,
-    ratio_constant_margin : UInt32
+  struct KS_COMPRESSION
+    property ratio_numerator : UInt32
+    property ratio_denominator : UInt32
+    property ratio_constant_margin : UInt32
+    def initialize(@ratio_numerator : UInt32, @ratio_denominator : UInt32, @ratio_constant_margin : UInt32)
+    end
+  end
 
   @[Extern]
-  record KS_FRAMING_ITEM,
-    memory_type : LibC::GUID,
-    bus_type : LibC::GUID,
-    memory_flags : UInt32,
-    bus_flags : UInt32,
-    flags : UInt32,
-    frames : UInt32,
-    anonymous : Anonymous_e__Union_,
-    memory_type_weight : UInt32,
-    physical_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE,
-    framing_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE_WEIGHTED do
+  struct KS_FRAMING_ITEM
+    property memory_type : LibC::GUID
+    property bus_type : LibC::GUID
+    property memory_flags : UInt32
+    property bus_flags : UInt32
+    property flags : UInt32
+    property frames : UInt32
+    property anonymous : Anonymous_e__Union_
+    property memory_type_weight : UInt32
+    property physical_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE
+    property framing_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE_WEIGHTED
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      file_alignment : UInt32,
-      frame_pitch : Int32
+    struct Anonymous_e__Union_
+    property file_alignment : UInt32
+    property frame_pitch : Int32
+    def initialize(@file_alignment : UInt32, @frame_pitch : Int32)
+    end
+    end
 
+    def initialize(@memory_type : LibC::GUID, @bus_type : LibC::GUID, @memory_flags : UInt32, @bus_flags : UInt32, @flags : UInt32, @frames : UInt32, @anonymous : Anonymous_e__Union_, @memory_type_weight : UInt32, @physical_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE, @framing_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE_WEIGHTED)
+    end
   end
 
   @[Extern]
-  record KSALLOCATOR_FRAMING_EX,
-    count_items : UInt32,
-    pin_flags : UInt32,
-    output_compression : Win32cr::Media::KernelStreaming::KS_COMPRESSION,
-    pin_weight : UInt32,
-    framing_item : Win32cr::Media::KernelStreaming::KS_FRAMING_ITEM*
+  struct KSALLOCATOR_FRAMING_EX
+    property count_items : UInt32
+    property pin_flags : UInt32
+    property output_compression : Win32cr::Media::KernelStreaming::KS_COMPRESSION
+    property pin_weight : UInt32
+    property framing_item : Win32cr::Media::KernelStreaming::KS_FRAMING_ITEM*
+    def initialize(@count_items : UInt32, @pin_flags : UInt32, @output_compression : Win32cr::Media::KernelStreaming::KS_COMPRESSION, @pin_weight : UInt32, @framing_item : Win32cr::Media::KernelStreaming::KS_FRAMING_ITEM*)
+    end
+  end
 
   @[Extern]
-  record KSSTREAMALLOCATOR_STATUS,
-    framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING,
-    allocated_frames : UInt32,
-    reserved : UInt32
+  struct KSSTREAMALLOCATOR_STATUS
+    property framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING
+    property allocated_frames : UInt32
+    property reserved : UInt32
+    def initialize(@framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING, @allocated_frames : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSSTREAMALLOCATOR_STATUS_EX,
-    framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING_EX,
-    allocated_frames : UInt32,
-    reserved : UInt32
+  struct KSSTREAMALLOCATOR_STATUS_EX
+    property framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING_EX
+    property allocated_frames : UInt32
+    property reserved : UInt32
+    def initialize(@framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING_EX, @allocated_frames : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSTIME,
-    time : Int64,
-    numerator : UInt32,
-    denominator : UInt32
+  struct KSTIME
+    property time : Int64
+    property numerator : UInt32
+    property denominator : UInt32
+    def initialize(@time : Int64, @numerator : UInt32, @denominator : UInt32)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record KSSTREAM_HEADER,
-    size : UInt32,
-    type_specific_flags : UInt32,
-    presentation_time : Win32cr::Media::KernelStreaming::KSTIME,
-    duration : Int64,
-    frame_extent : UInt32,
-    data_used : UInt32,
-    data : Void*,
-    options_flags : UInt32,
-    reserved : UInt32
+  struct KSSTREAM_HEADER
+    property size : UInt32
+    property type_specific_flags : UInt32
+    property presentation_time : Win32cr::Media::KernelStreaming::KSTIME
+    property duration : Int64
+    property frame_extent : UInt32
+    property data_used : UInt32
+    property data : Void*
+    property options_flags : UInt32
+    property reserved : UInt32
+    def initialize(@size : UInt32, @type_specific_flags : UInt32, @presentation_time : Win32cr::Media::KernelStreaming::KSTIME, @duration : Int64, @frame_extent : UInt32, @data_used : UInt32, @data : Void*, @options_flags : UInt32, @reserved : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record KSSTREAM_METADATA_INFO,
-    buffer_size : UInt32,
-    used_size : UInt32,
-    data : Void*,
-    system_va : Void*,
-    flags : UInt32,
-    reserved : UInt32
+  struct KSSTREAM_METADATA_INFO
+    property buffer_size : UInt32
+    property used_size : UInt32
+    property data : Void*
+    property system_va : Void*
+    property flags : UInt32
+    property reserved : UInt32
+    def initialize(@buffer_size : UInt32, @used_size : UInt32, @data : Void*, @system_va : Void*, @flags : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSSTREAM_UVC_METADATATYPE_TIMESTAMP,
-    presentation_time_stamp : UInt32,
-    source_clock_reference : UInt32,
-    anonymous : Anonymous_e__Union_,
-    reserved0 : UInt16,
-    reserved1 : UInt32 do
+  struct KSSTREAM_UVC_METADATATYPE_TIMESTAMP
+    property presentation_time_stamp : UInt32
+    property source_clock_reference : UInt32
+    property anonymous : Anonymous_e__Union_
+    property reserved0 : UInt16
+    property reserved1 : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      scr_token : UInt16 do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property scr_token : UInt16
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt16
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @scr_token : UInt16)
+    end
     end
 
+    def initialize(@presentation_time_stamp : UInt32, @source_clock_reference : UInt32, @anonymous : Anonymous_e__Union_, @reserved0 : UInt16, @reserved1 : UInt32)
+    end
   end
 
   @[Extern]
-  record KSSTREAM_UVC_METADATA,
-    start_of_frame_timestamp : Win32cr::Media::KernelStreaming::KSSTREAM_UVC_METADATATYPE_TIMESTAMP,
-    end_of_frame_timestamp : Win32cr::Media::KernelStreaming::KSSTREAM_UVC_METADATATYPE_TIMESTAMP
+  struct KSSTREAM_UVC_METADATA
+    property start_of_frame_timestamp : Win32cr::Media::KernelStreaming::KSSTREAM_UVC_METADATATYPE_TIMESTAMP
+    property end_of_frame_timestamp : Win32cr::Media::KernelStreaming::KSSTREAM_UVC_METADATATYPE_TIMESTAMP
+    def initialize(@start_of_frame_timestamp : Win32cr::Media::KernelStreaming::KSSTREAM_UVC_METADATATYPE_TIMESTAMP, @end_of_frame_timestamp : Win32cr::Media::KernelStreaming::KSSTREAM_UVC_METADATATYPE_TIMESTAMP)
+    end
+  end
 
   @[Extern]
-  record KSPIN_MDL_CACHING_NOTIFICATION,
-    event : Win32cr::Media::KernelStreaming::KSPIN_MDL_CACHING_EVENT,
-    buffer : Void*
+  struct KSPIN_MDL_CACHING_NOTIFICATION
+    property event : Win32cr::Media::KernelStreaming::KSPIN_MDL_CACHING_EVENT
+    property buffer : Void*
+    def initialize(@event : Win32cr::Media::KernelStreaming::KSPIN_MDL_CACHING_EVENT, @buffer : Void*)
+    end
+  end
 
   @[Extern]
-  record KSPIN_MDL_CACHING_NOTIFICATION32,
-    event : Win32cr::Media::KernelStreaming::KSPIN_MDL_CACHING_EVENT,
-    buffer : UInt32
+  struct KSPIN_MDL_CACHING_NOTIFICATION32
+    property event : Win32cr::Media::KernelStreaming::KSPIN_MDL_CACHING_EVENT
+    property buffer : UInt32
+    def initialize(@event : Win32cr::Media::KernelStreaming::KSPIN_MDL_CACHING_EVENT, @buffer : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSQUALITY_MANAGER,
-    quality_manager : Win32cr::Foundation::HANDLE,
-    context : Void*
+  struct KSQUALITY_MANAGER
+    property quality_manager : Win32cr::Foundation::HANDLE
+    property context : Void*
+    def initialize(@quality_manager : Win32cr::Foundation::HANDLE, @context : Void*)
+    end
+  end
 
   @[Extern]
-  record KSFRAMETIME,
-    duration : Int64,
-    frame_flags : UInt32,
-    reserved : UInt32
+  struct KSFRAMETIME
+    property duration : Int64
+    property frame_flags : UInt32
+    property reserved : UInt32
+    def initialize(@duration : Int64, @frame_flags : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSRATE,
-    presentation_start : Int64,
-    duration : Int64,
-    interface : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    rate : Int32,
-    flags : UInt32
+  struct KSRATE
+    property presentation_start : Int64
+    property duration : Int64
+    property interface : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property rate : Int32
+    property flags : UInt32
+    def initialize(@presentation_start : Int64, @duration : Int64, @interface : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @rate : Int32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSRATE_CAPABILITY,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    rate : Win32cr::Media::KernelStreaming::KSRATE
+  struct KSRATE_CAPABILITY
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property rate : Win32cr::Media::KernelStreaming::KSRATE
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @rate : Win32cr::Media::KernelStreaming::KSRATE)
+    end
+  end
 
   @[Extern]
-  record KSCLOCK_CREATE,
-    create_flags : UInt32
+  struct KSCLOCK_CREATE
+    property create_flags : UInt32
+    def initialize(@create_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCORRELATED_TIME,
-    time : Int64,
-    system_time : Int64
+  struct KSCORRELATED_TIME
+    property time : Int64
+    property system_time : Int64
+    def initialize(@time : Int64, @system_time : Int64)
+    end
+  end
 
   @[Extern]
-  record KSRESOLUTION,
-    granularity : Int64,
-    error : Int64
+  struct KSRESOLUTION
+    property granularity : Int64
+    property error : Int64
+    def initialize(@granularity : Int64, @error : Int64)
+    end
+  end
 
   @[Extern]
-  record KSQUALITY,
-    context : Void*,
-    proportion : UInt32,
-    delta_time : Int64
+  struct KSQUALITY
+    property context : Void*
+    property proportion : UInt32
+    property delta_time : Int64
+    def initialize(@context : Void*, @proportion : UInt32, @delta_time : Int64)
+    end
+  end
 
   @[Extern]
-  record KSERROR,
-    context : Void*,
-    status : UInt32
+  struct KSERROR
+    property context : Void*
+    property status : UInt32
+    def initialize(@context : Void*, @status : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_SERIALHDR,
-    property_set : LibC::GUID,
-    count : UInt32
+  struct KSPROPERTY_SERIALHDR
+    property property_set : LibC::GUID
+    property count : UInt32
+    def initialize(@property_set : LibC::GUID, @count : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_SERIAL,
-    prop_type_set : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    id : UInt32,
-    property_length : UInt32
+  struct KSPROPERTY_SERIAL
+    property prop_type_set : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property id : UInt32
+    property property_length : UInt32
+    def initialize(@prop_type_set : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @id : UInt32, @property_length : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record MF_MDL_SHARED_PAYLOAD_KEY,
-    combined : Combined_e__struct_,
-    gmdl_handle : LibC::GUID do
+  struct MF_MDL_SHARED_PAYLOAD_KEY
+    property combined : Combined_e__struct_
+    property gmdl_handle : LibC::GUID
 
     # Nested Type Combined_e__struct_
     @[Extern]
-    record Combined_e__struct_,
-      pHandle : UInt32,
-      fHandle : UInt32,
-      uPayload : UInt64
+    struct Combined_e__struct_
+    property pHandle : UInt32
+    property fHandle : UInt32
+    property uPayload : UInt64
+    def initialize(@pHandle : UInt32, @fHandle : UInt32, @uPayload : UInt64)
+    end
+    end
 
+    def initialize(@combined : Combined_e__struct_, @gmdl_handle : LibC::GUID)
+    end
   end
 
   @[Extern]
-  record KSMULTIPLE_DATA_PROP,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    multiple_item : Win32cr::Media::KernelStreaming::KSMULTIPLE_ITEM
+  struct KSMULTIPLE_DATA_PROP
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property multiple_item : Win32cr::Media::KernelStreaming::KSMULTIPLE_ITEM
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @multiple_item : Win32cr::Media::KernelStreaming::KSMULTIPLE_ITEM)
+    end
+  end
 
   @[Extern]
-  record KSAUDIO_POSITION,
-    play_offset : UInt64,
-    write_offset : UInt64
+  struct KSAUDIO_POSITION
+    property play_offset : UInt64
+    property write_offset : UInt64
+    def initialize(@play_offset : UInt64, @write_offset : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSAUDIO_PRESENTATION_POSITION,
-    u64PositionInBlocks : UInt64,
-    u64QPCPosition : UInt64
+  struct KSAUDIO_PRESENTATION_POSITION
+    property u64PositionInBlocks : UInt64
+    property u64QPCPosition : UInt64
+    def initialize(@u64PositionInBlocks : UInt64, @u64QPCPosition : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT_,
-    processing_mode : LibC::GUID,
-    samples_per_processing_packet : UInt32,
-    processing_packet_duration_in_hns : UInt32
+  struct KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT_
+    property processing_mode : LibC::GUID
+    property samples_per_processing_packet : UInt32
+    property processing_packet_duration_in_hns : UInt32
+    def initialize(@processing_mode : LibC::GUID, @samples_per_processing_packet : UInt32, @processing_packet_duration_in_hns : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSAUDIO_PACKETSIZE_CONSTRAINTS,
-    min_packet_period_in_hns : UInt32,
-    packet_size_file_alignment : UInt32,
-    reserved : UInt32,
-    num_processing_mode_constraints : UInt32,
-    processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT_*
+  struct KSAUDIO_PACKETSIZE_CONSTRAINTS
+    property min_packet_period_in_hns : UInt32
+    property packet_size_file_alignment : UInt32
+    property reserved : UInt32
+    property num_processing_mode_constraints : UInt32
+    property processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT_*
+    def initialize(@min_packet_period_in_hns : UInt32, @packet_size_file_alignment : UInt32, @reserved : UInt32, @num_processing_mode_constraints : UInt32, @processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT_*)
+    end
+  end
 
   @[Extern]
-  record KSAUDIO_PACKETSIZE_CONSTRAINTS2,
-    min_packet_period_in_hns : UInt32,
-    packet_size_file_alignment : UInt32,
-    max_packet_size_in_bytes : UInt32,
-    num_processing_mode_constraints : UInt32,
-    processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT_*
+  struct KSAUDIO_PACKETSIZE_CONSTRAINTS2
+    property min_packet_period_in_hns : UInt32
+    property packet_size_file_alignment : UInt32
+    property max_packet_size_in_bytes : UInt32
+    property num_processing_mode_constraints : UInt32
+    property processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT_*
+    def initialize(@min_packet_period_in_hns : UInt32, @packet_size_file_alignment : UInt32, @max_packet_size_in_bytes : UInt32, @num_processing_mode_constraints : UInt32, @processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT_*)
+    end
+  end
 
   @[Extern]
-  record KSAUDIO_MICROPHONE_COORDINATES,
-    usType : UInt16,
-    wXCoord : Int16,
-    wYCoord : Int16,
-    wZCoord : Int16,
-    wVerticalAngle : Int16,
-    wHorizontalAngle : Int16
+  struct KSAUDIO_MICROPHONE_COORDINATES
+    property usType : UInt16
+    property wXCoord : Int16
+    property wYCoord : Int16
+    property wZCoord : Int16
+    property wVerticalAngle : Int16
+    property wHorizontalAngle : Int16
+    def initialize(@usType : UInt16, @wXCoord : Int16, @wYCoord : Int16, @wZCoord : Int16, @wVerticalAngle : Int16, @wHorizontalAngle : Int16)
+    end
+  end
 
   @[Extern]
-  record KSAUDIO_MIC_ARRAY_GEOMETRY,
-    usVersion : UInt16,
-    usMicArrayType : UInt16,
-    wVerticalAngleBegin : Int16,
-    wVerticalAngleEnd : Int16,
-    wHorizontalAngleBegin : Int16,
-    wHorizontalAngleEnd : Int16,
-    usFrequencyBandLo : UInt16,
-    usFrequencyBandHi : UInt16,
-    usNumberOfMicrophones : UInt16,
-    ks_mic_coord : Win32cr::Media::KernelStreaming::KSAUDIO_MICROPHONE_COORDINATES*
+  struct KSAUDIO_MIC_ARRAY_GEOMETRY
+    property usVersion : UInt16
+    property usMicArrayType : UInt16
+    property wVerticalAngleBegin : Int16
+    property wVerticalAngleEnd : Int16
+    property wHorizontalAngleBegin : Int16
+    property wHorizontalAngleEnd : Int16
+    property usFrequencyBandLo : UInt16
+    property usFrequencyBandHi : UInt16
+    property usNumberOfMicrophones : UInt16
+    property ks_mic_coord : Win32cr::Media::KernelStreaming::KSAUDIO_MICROPHONE_COORDINATES*
+    def initialize(@usVersion : UInt16, @usMicArrayType : UInt16, @wVerticalAngleBegin : Int16, @wVerticalAngleEnd : Int16, @wHorizontalAngleBegin : Int16, @wHorizontalAngleEnd : Int16, @usFrequencyBandLo : UInt16, @usFrequencyBandHi : UInt16, @usNumberOfMicrophones : UInt16, @ks_mic_coord : Win32cr::Media::KernelStreaming::KSAUDIO_MICROPHONE_COORDINATES*)
+    end
+  end
 
   @[Extern]
-  record DS3DVECTOR,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    anonymous3 : Anonymous3_e__Union_ do
+  struct DS3DVECTOR
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property anonymous3 : Anonymous3_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      y : Float32,
-      dvY : Float32
+    struct Anonymous2_e__Union_
+    property y : Float32
+    property dvY : Float32
+    def initialize(@y : Float32, @dvY : Float32)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      x : Float32,
-      dvX : Float32
+    struct Anonymous1_e__Union_
+    property x : Float32
+    property dvX : Float32
+    def initialize(@x : Float32, @dvX : Float32)
+    end
+    end
 
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      z : Float32,
-      dvZ : Float32
+    struct Anonymous3_e__Union_
+    property z : Float32
+    property dvZ : Float32
+    def initialize(@z : Float32, @dvZ : Float32)
+    end
+    end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_)
+    end
   end
 
   @[Extern]
-  record KSDS3D_LISTENER_ALL,
-    position : Win32cr::Media::KernelStreaming::DS3DVECTOR,
-    velocity : Win32cr::Media::KernelStreaming::DS3DVECTOR,
-    orient_front : Win32cr::Media::KernelStreaming::DS3DVECTOR,
-    orient_top : Win32cr::Media::KernelStreaming::DS3DVECTOR,
-    distance_factor : Float32,
-    rolloff_factor : Float32,
-    doppler_factor : Float32
+  struct KSDS3D_LISTENER_ALL
+    property position : Win32cr::Media::KernelStreaming::DS3DVECTOR
+    property velocity : Win32cr::Media::KernelStreaming::DS3DVECTOR
+    property orient_front : Win32cr::Media::KernelStreaming::DS3DVECTOR
+    property orient_top : Win32cr::Media::KernelStreaming::DS3DVECTOR
+    property distance_factor : Float32
+    property rolloff_factor : Float32
+    property doppler_factor : Float32
+    def initialize(@position : Win32cr::Media::KernelStreaming::DS3DVECTOR, @velocity : Win32cr::Media::KernelStreaming::DS3DVECTOR, @orient_front : Win32cr::Media::KernelStreaming::DS3DVECTOR, @orient_top : Win32cr::Media::KernelStreaming::DS3DVECTOR, @distance_factor : Float32, @rolloff_factor : Float32, @doppler_factor : Float32)
+    end
+  end
 
   @[Extern]
-  record KSDS3D_LISTENER_ORIENTATION,
-    front : Win32cr::Media::KernelStreaming::DS3DVECTOR,
-    top : Win32cr::Media::KernelStreaming::DS3DVECTOR
+  struct KSDS3D_LISTENER_ORIENTATION
+    property front : Win32cr::Media::KernelStreaming::DS3DVECTOR
+    property top : Win32cr::Media::KernelStreaming::DS3DVECTOR
+    def initialize(@front : Win32cr::Media::KernelStreaming::DS3DVECTOR, @top : Win32cr::Media::KernelStreaming::DS3DVECTOR)
+    end
+  end
 
   @[Extern]
-  record KSDS3D_BUFFER_ALL,
-    position : Win32cr::Media::KernelStreaming::DS3DVECTOR,
-    velocity : Win32cr::Media::KernelStreaming::DS3DVECTOR,
-    inside_cone_angle : UInt32,
-    outside_cone_angle : UInt32,
-    cone_orientation : Win32cr::Media::KernelStreaming::DS3DVECTOR,
-    cone_outside_volume : Int32,
-    min_distance : Float32,
-    max_distance : Float32,
-    mode : UInt32
+  struct KSDS3D_BUFFER_ALL
+    property position : Win32cr::Media::KernelStreaming::DS3DVECTOR
+    property velocity : Win32cr::Media::KernelStreaming::DS3DVECTOR
+    property inside_cone_angle : UInt32
+    property outside_cone_angle : UInt32
+    property cone_orientation : Win32cr::Media::KernelStreaming::DS3DVECTOR
+    property cone_outside_volume : Int32
+    property min_distance : Float32
+    property max_distance : Float32
+    property mode : UInt32
+    def initialize(@position : Win32cr::Media::KernelStreaming::DS3DVECTOR, @velocity : Win32cr::Media::KernelStreaming::DS3DVECTOR, @inside_cone_angle : UInt32, @outside_cone_angle : UInt32, @cone_orientation : Win32cr::Media::KernelStreaming::DS3DVECTOR, @cone_outside_volume : Int32, @min_distance : Float32, @max_distance : Float32, @mode : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSDS3D_BUFFER_CONE_ANGLES,
-    inside_cone_angle : UInt32,
-    outside_cone_angle : UInt32
+  struct KSDS3D_BUFFER_CONE_ANGLES
+    property inside_cone_angle : UInt32
+    property outside_cone_angle : UInt32
+    def initialize(@inside_cone_angle : UInt32, @outside_cone_angle : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSDS3D_HRTF_PARAMS_MSG,
-    size : UInt32,
-    enabled : UInt32,
-    swap_channels : Win32cr::Foundation::BOOL,
-    zero_azimuth : Win32cr::Foundation::BOOL,
-    cross_fade_output : Win32cr::Foundation::BOOL,
-    filter_size : UInt32
+  struct KSDS3D_HRTF_PARAMS_MSG
+    property size : UInt32
+    property enabled : UInt32
+    property swap_channels : Win32cr::Foundation::BOOL
+    property zero_azimuth : Win32cr::Foundation::BOOL
+    property cross_fade_output : Win32cr::Foundation::BOOL
+    property filter_size : UInt32
+    def initialize(@size : UInt32, @enabled : UInt32, @swap_channels : Win32cr::Foundation::BOOL, @zero_azimuth : Win32cr::Foundation::BOOL, @cross_fade_output : Win32cr::Foundation::BOOL, @filter_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSDS3D_HRTF_INIT_MSG,
-    size : UInt32,
-    quality : Win32cr::Media::KernelStreaming::KSDS3D_HRTF_FILTER_QUALITY,
-    sample_rate : Float32,
-    max_filter_size : UInt32,
-    filter_transient_mute_length : UInt32,
-    filter_overlap_buffer_length : UInt32,
-    output_overlap_buffer_length : UInt32,
-    reserved : UInt32
+  struct KSDS3D_HRTF_INIT_MSG
+    property size : UInt32
+    property quality : Win32cr::Media::KernelStreaming::KSDS3D_HRTF_FILTER_QUALITY
+    property sample_rate : Float32
+    property max_filter_size : UInt32
+    property filter_transient_mute_length : UInt32
+    property filter_overlap_buffer_length : UInt32
+    property output_overlap_buffer_length : UInt32
+    property reserved : UInt32
+    def initialize(@size : UInt32, @quality : Win32cr::Media::KernelStreaming::KSDS3D_HRTF_FILTER_QUALITY, @sample_rate : Float32, @max_filter_size : UInt32, @filter_transient_mute_length : UInt32, @filter_overlap_buffer_length : UInt32, @output_overlap_buffer_length : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSDS3D_HRTF_FILTER_FORMAT_MSG,
-    filter_method : Win32cr::Media::KernelStreaming::KSDS3D_HRTF_FILTER_METHOD,
-    coeff_format : Win32cr::Media::KernelStreaming::KSDS3D_HRTF_COEFF_FORMAT,
-    version : Win32cr::Media::KernelStreaming::KSDS3D_HRTF_FILTER_VERSION,
-    reserved : UInt32
+  struct KSDS3D_HRTF_FILTER_FORMAT_MSG
+    property filter_method : Win32cr::Media::KernelStreaming::KSDS3D_HRTF_FILTER_METHOD
+    property coeff_format : Win32cr::Media::KernelStreaming::KSDS3D_HRTF_COEFF_FORMAT
+    property version : Win32cr::Media::KernelStreaming::KSDS3D_HRTF_FILTER_VERSION
+    property reserved : UInt32
+    def initialize(@filter_method : Win32cr::Media::KernelStreaming::KSDS3D_HRTF_FILTER_METHOD, @coeff_format : Win32cr::Media::KernelStreaming::KSDS3D_HRTF_COEFF_FORMAT, @version : Win32cr::Media::KernelStreaming::KSDS3D_HRTF_FILTER_VERSION, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSDS3D_ITD_PARAMS,
-    channel : Int32,
-    vol_smooth_scale : Float32,
-    total_dry_attenuation : Float32,
-    total_wet_attenuation : Float32,
-    smooth_frequency : Int32,
-    delay : Int32
+  struct KSDS3D_ITD_PARAMS
+    property channel : Int32
+    property vol_smooth_scale : Float32
+    property total_dry_attenuation : Float32
+    property total_wet_attenuation : Float32
+    property smooth_frequency : Int32
+    property delay : Int32
+    def initialize(@channel : Int32, @vol_smooth_scale : Float32, @total_dry_attenuation : Float32, @total_wet_attenuation : Float32, @smooth_frequency : Int32, @delay : Int32)
+    end
+  end
 
   @[Extern]
-  record KSDS3D_ITD_PARAMS_MSG,
-    enabled : UInt32,
-    left_params : Win32cr::Media::KernelStreaming::KSDS3D_ITD_PARAMS,
-    right_params : Win32cr::Media::KernelStreaming::KSDS3D_ITD_PARAMS,
-    reserved : UInt32
+  struct KSDS3D_ITD_PARAMS_MSG
+    property enabled : UInt32
+    property left_params : Win32cr::Media::KernelStreaming::KSDS3D_ITD_PARAMS
+    property right_params : Win32cr::Media::KernelStreaming::KSDS3D_ITD_PARAMS
+    property reserved : UInt32
+    def initialize(@enabled : UInt32, @left_params : Win32cr::Media::KernelStreaming::KSDS3D_ITD_PARAMS, @right_params : Win32cr::Media::KernelStreaming::KSDS3D_ITD_PARAMS, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSDATARANGE_AUDIO,
-    data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    maximum_channels : UInt32,
-    minimum_bits_per_sample : UInt32,
-    maximum_bits_per_sample : UInt32,
-    minimum_sample_frequency : UInt32,
-    maximum_sample_frequency : UInt32
+  struct KSDATARANGE_AUDIO
+    property data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property maximum_channels : UInt32
+    property minimum_bits_per_sample : UInt32
+    property maximum_bits_per_sample : UInt32
+    property minimum_sample_frequency : UInt32
+    property maximum_sample_frequency : UInt32
+    def initialize(@data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @maximum_channels : UInt32, @minimum_bits_per_sample : UInt32, @maximum_bits_per_sample : UInt32, @minimum_sample_frequency : UInt32, @maximum_sample_frequency : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_BUFFER_PROPERTY,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    base_address : Void*,
-    requested_buffer_size : UInt32
+  struct KSRTAUDIO_BUFFER_PROPERTY
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property base_address : Void*
+    property requested_buffer_size : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @base_address : Void*, @requested_buffer_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_BUFFER_PROPERTY32,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    base_address : UInt32,
-    requested_buffer_size : UInt32
+  struct KSRTAUDIO_BUFFER_PROPERTY32
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property base_address : UInt32
+    property requested_buffer_size : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @base_address : UInt32, @requested_buffer_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_BUFFER_PROPERTY_WITH_NOTIFICATION,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    base_address : Void*,
-    requested_buffer_size : UInt32,
-    notification_count : UInt32
+  struct KSRTAUDIO_BUFFER_PROPERTY_WITH_NOTIFICATION
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property base_address : Void*
+    property requested_buffer_size : UInt32
+    property notification_count : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @base_address : Void*, @requested_buffer_size : UInt32, @notification_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_BUFFER_PROPERTY_WITH_NOTIFICATION32,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    base_address : UInt32,
-    requested_buffer_size : UInt32,
-    notification_count : UInt32
+  struct KSRTAUDIO_BUFFER_PROPERTY_WITH_NOTIFICATION32
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property base_address : UInt32
+    property requested_buffer_size : UInt32
+    property notification_count : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @base_address : UInt32, @requested_buffer_size : UInt32, @notification_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_BUFFER,
-    buffer_address : Void*,
-    actual_buffer_size : UInt32,
-    call_memory_barrier : Win32cr::Foundation::BOOL
+  struct KSRTAUDIO_BUFFER
+    property buffer_address : Void*
+    property actual_buffer_size : UInt32
+    property call_memory_barrier : Win32cr::Foundation::BOOL
+    def initialize(@buffer_address : Void*, @actual_buffer_size : UInt32, @call_memory_barrier : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_BUFFER32,
-    buffer_address : UInt32,
-    actual_buffer_size : UInt32,
-    call_memory_barrier : Win32cr::Foundation::BOOL
+  struct KSRTAUDIO_BUFFER32
+    property buffer_address : UInt32
+    property actual_buffer_size : UInt32
+    property call_memory_barrier : Win32cr::Foundation::BOOL
+    def initialize(@buffer_address : UInt32, @actual_buffer_size : UInt32, @call_memory_barrier : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_HWLATENCY,
-    fifo_size : UInt32,
-    chipset_delay : UInt32,
-    codec_delay : UInt32
+  struct KSRTAUDIO_HWLATENCY
+    property fifo_size : UInt32
+    property chipset_delay : UInt32
+    property codec_delay : UInt32
+    def initialize(@fifo_size : UInt32, @chipset_delay : UInt32, @codec_delay : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_HWREGISTER_PROPERTY,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    base_address : Void*
+  struct KSRTAUDIO_HWREGISTER_PROPERTY
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property base_address : Void*
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @base_address : Void*)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_HWREGISTER_PROPERTY32,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    base_address : UInt32
+  struct KSRTAUDIO_HWREGISTER_PROPERTY32
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property base_address : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @base_address : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_HWREGISTER,
-    register : Void*,
-    width : UInt32,
-    numerator : UInt64,
-    denominator : UInt64,
-    accuracy : UInt32
+  struct KSRTAUDIO_HWREGISTER
+    property register : Void*
+    property width : UInt32
+    property numerator : UInt64
+    property denominator : UInt64
+    property accuracy : UInt32
+    def initialize(@register : Void*, @width : UInt32, @numerator : UInt64, @denominator : UInt64, @accuracy : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_HWREGISTER32,
-    register : UInt32,
-    width : UInt32,
-    numerator : UInt64,
-    denominator : UInt64,
-    accuracy : UInt32
+  struct KSRTAUDIO_HWREGISTER32
+    property register : UInt32
+    property width : UInt32
+    property numerator : UInt64
+    property denominator : UInt64
+    property accuracy : UInt32
+    def initialize(@register : UInt32, @width : UInt32, @numerator : UInt64, @denominator : UInt64, @accuracy : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_NOTIFICATION_EVENT_PROPERTY,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    notification_event : Win32cr::Foundation::HANDLE
+  struct KSRTAUDIO_NOTIFICATION_EVENT_PROPERTY
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property notification_event : Win32cr::Foundation::HANDLE
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @notification_event : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_NOTIFICATION_EVENT_PROPERTY32,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    notification_event : UInt32
+  struct KSRTAUDIO_NOTIFICATION_EVENT_PROPERTY32
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property notification_event : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @notification_event : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_GETREADPACKET_INFO,
-    packet_number : UInt32,
-    flags : UInt32,
-    performance_counter_value : UInt64,
-    more_data : Win32cr::Foundation::BOOL
+  struct KSRTAUDIO_GETREADPACKET_INFO
+    property packet_number : UInt32
+    property flags : UInt32
+    property performance_counter_value : UInt64
+    property more_data : Win32cr::Foundation::BOOL
+    def initialize(@packet_number : UInt32, @flags : UInt32, @performance_counter_value : UInt64, @more_data : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_SETWRITEPACKET_INFO,
-    packet_number : UInt32,
-    flags : UInt32,
-    eos_packet_length : UInt32
+  struct KSRTAUDIO_SETWRITEPACKET_INFO
+    property packet_number : UInt32
+    property flags : UInt32
+    property eos_packet_length : UInt32
+    def initialize(@packet_number : UInt32, @flags : UInt32, @eos_packet_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_PACKETVREGISTER_PROPERTY,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    base_address : Void*
+  struct KSRTAUDIO_PACKETVREGISTER_PROPERTY
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property base_address : Void*
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @base_address : Void*)
+    end
+  end
 
   @[Extern]
-  record KSRTAUDIO_PACKETVREGISTER,
-    completed_packet_count : UInt64*,
-    completed_packet_qpc : UInt64*,
-    completed_packet_hash : UInt64*
+  struct KSRTAUDIO_PACKETVREGISTER
+    property completed_packet_count : UInt64*
+    property completed_packet_qpc : UInt64*
+    property completed_packet_hash : UInt64*
+    def initialize(@completed_packet_count : UInt64*, @completed_packet_qpc : UInt64*, @completed_packet_hash : UInt64*)
+    end
+  end
 
   @[Extern]
-  record INTERLEAVED_AUDIO_FORMAT_INFORMATION,
-    size : UInt32,
-    primary_channel_count : UInt32,
-    primary_channel_start_position : UInt32,
-    primary_channel_mask : UInt32,
-    interleaved_channel_count : UInt32,
-    interleaved_channel_start_position : UInt32,
-    interleaved_channel_mask : UInt32
+  struct INTERLEAVED_AUDIO_FORMAT_INFORMATION
+    property size : UInt32
+    property primary_channel_count : UInt32
+    property primary_channel_start_position : UInt32
+    property primary_channel_mask : UInt32
+    property interleaved_channel_count : UInt32
+    property interleaved_channel_start_position : UInt32
+    property interleaved_channel_mask : UInt32
+    def initialize(@size : UInt32, @primary_channel_count : UInt32, @primary_channel_start_position : UInt32, @primary_channel_mask : UInt32, @interleaved_channel_count : UInt32, @interleaved_channel_start_position : UInt32, @interleaved_channel_mask : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSSOUNDDETECTORPROPERTY,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    event_id : LibC::GUID
+  struct KSSOUNDDETECTORPROPERTY
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property event_id : LibC::GUID
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @event_id : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record SOUNDDETECTOR_PATTERNHEADER,
-    size : UInt32,
-    pattern_type : LibC::GUID
+  struct SOUNDDETECTOR_PATTERNHEADER
+    property size : UInt32
+    property pattern_type : LibC::GUID
+    def initialize(@size : UInt32, @pattern_type : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record KSAUDIO_COPY_PROTECTION,
-    fCopyrighted : Win32cr::Foundation::BOOL,
-    fOriginal : Win32cr::Foundation::BOOL
+  struct KSAUDIO_COPY_PROTECTION
+    property fCopyrighted : Win32cr::Foundation::BOOL
+    property fOriginal : Win32cr::Foundation::BOOL
+    def initialize(@fCopyrighted : Win32cr::Foundation::BOOL, @fOriginal : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record KSAUDIO_CHANNEL_CONFIG,
-    active_speaker_positions : Int32
+  struct KSAUDIO_CHANNEL_CONFIG
+    property active_speaker_positions : Int32
+    def initialize(@active_speaker_positions : Int32)
+    end
+  end
 
   @[Extern]
-  record KSAUDIO_DYNAMIC_RANGE,
-    quiet_compression : UInt32,
-    loud_compression : UInt32
+  struct KSAUDIO_DYNAMIC_RANGE
+    property quiet_compression : UInt32
+    property loud_compression : UInt32
+    def initialize(@quiet_compression : UInt32, @loud_compression : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSAUDIO_MIXLEVEL,
-    mute : Win32cr::Foundation::BOOL,
-    level : Int32
+  struct KSAUDIO_MIXLEVEL
+    property mute : Win32cr::Foundation::BOOL
+    property level : Int32
+    def initialize(@mute : Win32cr::Foundation::BOOL, @level : Int32)
+    end
+  end
 
   @[Extern]
-  record KSAUDIO_MIX_CAPS,
-    mute : Win32cr::Foundation::BOOL,
-    minimum : Int32,
-    maximum : Int32,
-    anonymous : Anonymous_e__Union_ do
+  struct KSAUDIO_MIX_CAPS
+    property mute : Win32cr::Foundation::BOOL
+    property minimum : Int32
+    property maximum : Int32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      reset : Int32,
-      resolution : Int32
+    struct Anonymous_e__Union_
+    property reset : Int32
+    property resolution : Int32
+    def initialize(@reset : Int32, @resolution : Int32)
+    end
+    end
 
+    def initialize(@mute : Win32cr::Foundation::BOOL, @minimum : Int32, @maximum : Int32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record KSAUDIO_MIXCAP_TABLE,
-    input_channels : UInt32,
-    output_channels : UInt32,
-    capabilities : Win32cr::Media::KernelStreaming::KSAUDIO_MIX_CAPS*
+  struct KSAUDIO_MIXCAP_TABLE
+    property input_channels : UInt32
+    property output_channels : UInt32
+    property capabilities : Win32cr::Media::KernelStreaming::KSAUDIO_MIX_CAPS*
+    def initialize(@input_channels : UInt32, @output_channels : UInt32, @capabilities : Win32cr::Media::KernelStreaming::KSAUDIO_MIX_CAPS*)
+    end
+  end
 
   @[Extern]
-  record KSAUDIO_POSITIONEX,
-    timer_frequency : Win32cr::Foundation::LARGE_INTEGER,
-    time_stamp1 : Win32cr::Foundation::LARGE_INTEGER,
-    position : Win32cr::Media::KernelStreaming::KSAUDIO_POSITION,
-    time_stamp2 : Win32cr::Foundation::LARGE_INTEGER
+  struct KSAUDIO_POSITIONEX
+    property timer_frequency : Win32cr::Foundation::LARGE_INTEGER
+    property time_stamp1 : Win32cr::Foundation::LARGE_INTEGER
+    property position : Win32cr::Media::KernelStreaming::KSAUDIO_POSITION
+    property time_stamp2 : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@timer_frequency : Win32cr::Foundation::LARGE_INTEGER, @time_stamp1 : Win32cr::Foundation::LARGE_INTEGER, @position : Win32cr::Media::KernelStreaming::KSAUDIO_POSITION, @time_stamp2 : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record KSTELEPHONY_CALLCONTROL,
-    call_type : Win32cr::Media::KernelStreaming::TELEPHONY_CALLTYPE,
-    call_control_op : Win32cr::Media::KernelStreaming::TELEPHONY_CALLCONTROLOP
+  struct KSTELEPHONY_CALLCONTROL
+    property call_type : Win32cr::Media::KernelStreaming::TELEPHONY_CALLTYPE
+    property call_control_op : Win32cr::Media::KernelStreaming::TELEPHONY_CALLCONTROLOP
+    def initialize(@call_type : Win32cr::Media::KernelStreaming::TELEPHONY_CALLTYPE, @call_control_op : Win32cr::Media::KernelStreaming::TELEPHONY_CALLCONTROLOP)
+    end
+  end
 
   @[Extern]
-  record KSTELEPHONY_PROVIDERCHANGE,
-    call_type : Win32cr::Media::KernelStreaming::TELEPHONY_CALLTYPE,
-    provider_change_op : Win32cr::Media::KernelStreaming::TELEPHONY_PROVIDERCHANGEOP
+  struct KSTELEPHONY_PROVIDERCHANGE
+    property call_type : Win32cr::Media::KernelStreaming::TELEPHONY_CALLTYPE
+    property provider_change_op : Win32cr::Media::KernelStreaming::TELEPHONY_PROVIDERCHANGEOP
+    def initialize(@call_type : Win32cr::Media::KernelStreaming::TELEPHONY_CALLTYPE, @provider_change_op : Win32cr::Media::KernelStreaming::TELEPHONY_PROVIDERCHANGEOP)
+    end
+  end
 
   @[Extern]
-  record KSTELEPHONY_CALLINFO,
-    call_type : Win32cr::Media::KernelStreaming::TELEPHONY_CALLTYPE,
-    call_state : Win32cr::Media::KernelStreaming::TELEPHONY_CALLSTATE
+  struct KSTELEPHONY_CALLINFO
+    property call_type : Win32cr::Media::KernelStreaming::TELEPHONY_CALLTYPE
+    property call_state : Win32cr::Media::KernelStreaming::TELEPHONY_CALLSTATE
+    def initialize(@call_type : Win32cr::Media::KernelStreaming::TELEPHONY_CALLTYPE, @call_state : Win32cr::Media::KernelStreaming::TELEPHONY_CALLSTATE)
+    end
+  end
 
   @[Extern]
-  record KSTOPOLOGY_ENDPOINTID,
-    topology_name : UInt16[260],
-    pin_id : UInt32
+  struct KSTOPOLOGY_ENDPOINTID
+    property topology_name : UInt16[260]
+    property pin_id : UInt32
+    def initialize(@topology_name : UInt16[260], @pin_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSTOPOLOGY_ENDPOINTIDPAIR,
-    render_endpoint : Win32cr::Media::KernelStreaming::KSTOPOLOGY_ENDPOINTID,
-    capture_endpoint : Win32cr::Media::KernelStreaming::KSTOPOLOGY_ENDPOINTID
+  struct KSTOPOLOGY_ENDPOINTIDPAIR
+    property render_endpoint : Win32cr::Media::KernelStreaming::KSTOPOLOGY_ENDPOINTID
+    property capture_endpoint : Win32cr::Media::KernelStreaming::KSTOPOLOGY_ENDPOINTID
+    def initialize(@render_endpoint : Win32cr::Media::KernelStreaming::KSTOPOLOGY_ENDPOINTID, @capture_endpoint : Win32cr::Media::KernelStreaming::KSTOPOLOGY_ENDPOINTID)
+    end
+  end
 
   @[Extern]
-  record KSWAVETABLE_WAVE_DESC,
-    identifier : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    size : UInt32,
-    looped : Win32cr::Foundation::BOOL,
-    loop_point : UInt32,
-    in_rom : Win32cr::Foundation::BOOL,
-    format : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+  struct KSWAVETABLE_WAVE_DESC
+    property identifier : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property size : UInt32
+    property looped : Win32cr::Foundation::BOOL
+    property loop_point : UInt32
+    property in_rom : Win32cr::Foundation::BOOL
+    property format : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    def initialize(@identifier : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @size : UInt32, @looped : Win32cr::Foundation::BOOL, @loop_point : UInt32, @in_rom : Win32cr::Foundation::BOOL, @format : Win32cr::Media::KernelStreaming::KSDATAFORMAT)
+    end
+  end
 
   @[Extern]
-  record KSWAVE_COMPATCAPS,
-    ulDeviceType : UInt32
+  struct KSWAVE_COMPATCAPS
+    property ulDeviceType : UInt32
+    def initialize(@ulDeviceType : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSWAVE_INPUT_CAPABILITIES,
-    maximum_channels_per_connection : UInt32,
-    minimum_bits_per_sample : UInt32,
-    maximum_bits_per_sample : UInt32,
-    minimum_sample_frequency : UInt32,
-    maximum_sample_frequency : UInt32,
-    total_connections : UInt32,
-    active_connections : UInt32
+  struct KSWAVE_INPUT_CAPABILITIES
+    property maximum_channels_per_connection : UInt32
+    property minimum_bits_per_sample : UInt32
+    property maximum_bits_per_sample : UInt32
+    property minimum_sample_frequency : UInt32
+    property maximum_sample_frequency : UInt32
+    property total_connections : UInt32
+    property active_connections : UInt32
+    def initialize(@maximum_channels_per_connection : UInt32, @minimum_bits_per_sample : UInt32, @maximum_bits_per_sample : UInt32, @minimum_sample_frequency : UInt32, @maximum_sample_frequency : UInt32, @total_connections : UInt32, @active_connections : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSWAVE_OUTPUT_CAPABILITIES,
-    maximum_channels_per_connection : UInt32,
-    minimum_bits_per_sample : UInt32,
-    maximum_bits_per_sample : UInt32,
-    minimum_sample_frequency : UInt32,
-    maximum_sample_frequency : UInt32,
-    total_connections : UInt32,
-    static_connections : UInt32,
-    streaming_connections : UInt32,
-    active_connections : UInt32,
-    active_static_connections : UInt32,
-    active_streaming_connections : UInt32,
-    total3_d_connections : UInt32,
-    static3_d_connections : UInt32,
-    streaming3_d_connections : UInt32,
-    active3_d_connections : UInt32,
-    active_static3_d_connections : UInt32,
-    active_streaming3_d_connections : UInt32,
-    total_sample_memory : UInt32,
-    free_sample_memory : UInt32,
-    largest_free_contiguous_sample_memory : UInt32
+  struct KSWAVE_OUTPUT_CAPABILITIES
+    property maximum_channels_per_connection : UInt32
+    property minimum_bits_per_sample : UInt32
+    property maximum_bits_per_sample : UInt32
+    property minimum_sample_frequency : UInt32
+    property maximum_sample_frequency : UInt32
+    property total_connections : UInt32
+    property static_connections : UInt32
+    property streaming_connections : UInt32
+    property active_connections : UInt32
+    property active_static_connections : UInt32
+    property active_streaming_connections : UInt32
+    property total3_d_connections : UInt32
+    property static3_d_connections : UInt32
+    property streaming3_d_connections : UInt32
+    property active3_d_connections : UInt32
+    property active_static3_d_connections : UInt32
+    property active_streaming3_d_connections : UInt32
+    property total_sample_memory : UInt32
+    property free_sample_memory : UInt32
+    property largest_free_contiguous_sample_memory : UInt32
+    def initialize(@maximum_channels_per_connection : UInt32, @minimum_bits_per_sample : UInt32, @maximum_bits_per_sample : UInt32, @minimum_sample_frequency : UInt32, @maximum_sample_frequency : UInt32, @total_connections : UInt32, @static_connections : UInt32, @streaming_connections : UInt32, @active_connections : UInt32, @active_static_connections : UInt32, @active_streaming_connections : UInt32, @total3_d_connections : UInt32, @static3_d_connections : UInt32, @streaming3_d_connections : UInt32, @active3_d_connections : UInt32, @active_static3_d_connections : UInt32, @active_streaming3_d_connections : UInt32, @total_sample_memory : UInt32, @free_sample_memory : UInt32, @largest_free_contiguous_sample_memory : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSWAVE_VOLUME,
-    left_attenuation : Int32,
-    right_attenuation : Int32
+  struct KSWAVE_VOLUME
+    property left_attenuation : Int32
+    property right_attenuation : Int32
+    def initialize(@left_attenuation : Int32, @right_attenuation : Int32)
+    end
+  end
 
   @[Extern]
-  record KSWAVE_BUFFER,
-    attributes : UInt32,
-    buffer_size : UInt32,
-    buffer_address : Void*
+  struct KSWAVE_BUFFER
+    property attributes : UInt32
+    property buffer_size : UInt32
+    property buffer_address : Void*
+    def initialize(@attributes : UInt32, @buffer_size : UInt32, @buffer_address : Void*)
+    end
+  end
 
   @[Extern]
-  record KSDATARANGE_MUSIC,
-    data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    technology : LibC::GUID,
-    channels : UInt32,
-    notes : UInt32,
-    channel_mask : UInt32
+  struct KSDATARANGE_MUSIC
+    property data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property technology : LibC::GUID
+    property channels : UInt32
+    property notes : UInt32
+    property channel_mask : UInt32
+    def initialize(@data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @technology : LibC::GUID, @channels : UInt32, @notes : UInt32, @channel_mask : UInt32)
+    end
+  end
 
   @[Extern]
-  record LOOPEDSTREAMING_POSITION_EVENT_DATA,
-    ks_event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA,
-    position : UInt64
+  struct LOOPEDSTREAMING_POSITION_EVENT_DATA
+    property ks_event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA
+    property position : UInt64
+    def initialize(@ks_event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA, @position : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSNODEPROPERTY,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    node_id : UInt32,
-    reserved : UInt32
+  struct KSNODEPROPERTY
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property node_id : UInt32
+    property reserved : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @node_id : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSNODEPROPERTY_AUDIO_CHANNEL,
-    node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY,
-    channel : Int32,
-    reserved : UInt32
+  struct KSNODEPROPERTY_AUDIO_CHANNEL
+    property node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY
+    property channel : Int32
+    property reserved : UInt32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @channel : Int32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSNODEPROPERTY_AUDIO_DEV_SPECIFIC,
-    node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY,
-    dev_specific_id : UInt32,
-    device_info : UInt32,
-    length : UInt32
+  struct KSNODEPROPERTY_AUDIO_DEV_SPECIFIC
+    property node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY
+    property dev_specific_id : UInt32
+    property device_info : UInt32
+    property length : UInt32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @dev_specific_id : UInt32, @device_info : UInt32, @length : UInt32)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record KSNODEPROPERTY_AUDIO_3D_LISTENER,
-    node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY,
-    listener_id : Void*
+  struct KSNODEPROPERTY_AUDIO_3D_LISTENER
+    property node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY
+    property listener_id : Void*
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @listener_id : Void*)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record KSNODEPROPERTY_AUDIO_PROPERTY,
-    node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY,
-    app_context : Void*,
-    length : UInt32
+  struct KSNODEPROPERTY_AUDIO_PROPERTY
+    property node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY
+    property app_context : Void*
+    property length : UInt32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @app_context : Void*, @length : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record KSMUSICFORMAT,
-    time_delta_ms : UInt32,
-    byte_count : UInt32
-
-  @[Extern]
-  record KSMPEGVID_RECT,
-    start_x : UInt32,
-    start_y : UInt32,
-    end_x : UInt32,
-    end_y : UInt32
-
-  @[Extern]
-  record KSAC3_ERROR_CONCEALMENT,
-    fRepeatPreviousBlock : Win32cr::Foundation::BOOL,
-    fErrorInCurrentBlock : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record KSAC3_ALTERNATE_AUDIO,
-    fStereo : Win32cr::Foundation::BOOL,
-    dual_mode : UInt32
-
-  @[Extern]
-  record KSAC3_DOWNMIX,
-    fDownMix : Win32cr::Foundation::BOOL,
-    fDolbySurround : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record KSAC3_BIT_STREAM_MODE,
-    bit_stream_mode : Int32
-
-  @[Extern]
-  record KSAC3_DIALOGUE_LEVEL,
-    dialogue_level : UInt32
-
-  @[Extern]
-  record KSAC3_ROOM_TYPE,
-    fLargeRoom : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record KS_DVD_YCrCb,
-    reserved : UInt8,
-    y : UInt8,
-    cr : UInt8,
-    cb : UInt8
-
-  @[Extern]
-  record KS_DVD_YUV,
-    reserved : UInt8,
-    y : UInt8,
-    v : UInt8,
-    u : UInt8
-
-  @[Extern]
-  record KSPROPERTY_SPPAL,
-    sppal : Win32cr::Media::KernelStreaming::KS_DVD_YUV[16]
-
-  @[Extern]
-  record KS_COLCON,
-    _bitfield1 : UInt8,
-    _bitfield2 : UInt8,
-    _bitfield3 : UInt8,
-    _bitfield4 : UInt8
-
-  @[Extern]
-  record KSPROPERTY_SPHLI,
-    hliss : UInt16,
-    reserved : UInt16,
-    start_ptm : UInt32,
-    end_ptm : UInt32,
-    start_x : UInt16,
-    start_y : UInt16,
-    stop_x : UInt16,
-    stop_y : UInt16,
-    col_con : Win32cr::Media::KernelStreaming::KS_COLCON
-
-  @[Extern]
-  record KS_DVDCOPY_CHLGKEY,
-    chlg_key : UInt8[10],
-    reserved : UInt8[2]
-
-  @[Extern]
-  record KS_DVDCOPY_BUSKEY,
-    bus_key : UInt8[5],
-    reserved : UInt8*
-
-  @[Extern]
-  record KS_DVDCOPY_DISCKEY,
-    disc_key : UInt8[2048]
-
-  @[Extern]
-  record KS_DVDCOPY_REGION,
-    reserved : UInt8,
-    region_data : UInt8,
-    reserved2 : UInt8[2]
-
-  @[Extern]
-  record KS_DVDCOPY_TITLEKEY,
-    key_flags : UInt32,
-    reserved_nt : UInt32[2],
-    title_key : UInt8[6],
-    reserved : UInt8[2]
-
-  @[Extern]
-  record KS_COPY_MACROVISION,
-    macrovision_level : UInt32
-
-  @[Extern]
-  record KS_DVDCOPY_SET_COPY_STATE,
-    dvd_copy_state : UInt32
-
-  @[Extern]
-  record KS_RGBQUAD,
-    rgbBlue : UInt8,
-    rgbGreen : UInt8,
-    rgbRed : UInt8,
-    rgbReserved : UInt8
-
-  @[Extern]
-  record KS_BITMAPINFOHEADER,
-    biSize : UInt32,
-    biWidth : Int32,
-    biHeight : Int32,
-    biPlanes : UInt16,
-    biBitCount : UInt16,
-    biCompression : UInt32,
-    biSizeImage : UInt32,
-    biXPelsPerMeter : Int32,
-    biYPelsPerMeter : Int32,
-    biClrUsed : UInt32,
-    biClrImportant : UInt32
-
-  @[Extern]
-  record KS_TRUECOLORINFO,
-    dwBitMasks : UInt32[3],
-    bmiColors : Win32cr::Media::KernelStreaming::KS_RGBQUAD[256]
-
-  @[Extern]
-  record KS_VIDEOINFOHEADER,
-    rcSource : Win32cr::Foundation::RECT,
-    rcTarget : Win32cr::Foundation::RECT,
-    dwBitRate : UInt32,
-    dwBitErrorRate : UInt32,
-    avg_time_per_frame : Int64,
-    bmiHeader : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER
-
-  @[Extern]
-  record KS_VIDEOINFO,
-    rcSource : Win32cr::Foundation::RECT,
-    rcTarget : Win32cr::Foundation::RECT,
-    dwBitRate : UInt32,
-    dwBitErrorRate : UInt32,
-    avg_time_per_frame : Int64,
-    bmiHeader : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      bmiColors : Win32cr::Media::KernelStreaming::KS_RGBQUAD[256],
-      dwBitMasks : UInt32[3],
-      true_color_info : Win32cr::Media::KernelStreaming::KS_TRUECOLORINFO
-
+  struct KSMUSICFORMAT
+    property time_delta_ms : UInt32
+    property byte_count : UInt32
+    def initialize(@time_delta_ms : UInt32, @byte_count : UInt32)
+    end
   end
 
   @[Extern]
-  record KS_VBIINFOHEADER,
-    start_line : UInt32,
-    end_line : UInt32,
-    sampling_frequency : UInt32,
-    min_line_start_time : UInt32,
-    max_line_start_time : UInt32,
-    actual_line_start_time : UInt32,
-    actual_line_end_time : UInt32,
-    video_standard : UInt32,
-    samples_per_line : UInt32,
-    stride_in_bytes : UInt32,
-    buffer_size : UInt32
-
-  @[Extern]
-  record KS_AnalogVideoInfo,
-    rcSource : Win32cr::Foundation::RECT,
-    rcTarget : Win32cr::Foundation::RECT,
-    dwActiveWidth : UInt32,
-    dwActiveHeight : UInt32,
-    avg_time_per_frame : Int64
-
-  @[Extern]
-  record KS_TVTUNER_CHANGE_INFO,
-    dwFlags : UInt32,
-    dwCountryCode : UInt32,
-    dwAnalogVideoStandard : UInt32,
-    dwChannel : UInt32
-
-  @[Extern]
-  record KS_VIDEOINFOHEADER2,
-    rcSource : Win32cr::Foundation::RECT,
-    rcTarget : Win32cr::Foundation::RECT,
-    dwBitRate : UInt32,
-    dwBitErrorRate : UInt32,
-    avg_time_per_frame : Int64,
-    dwInterlaceFlags : UInt32,
-    dwCopyProtectFlags : UInt32,
-    dwPictAspectRatioX : UInt32,
-    dwPictAspectRatioY : UInt32,
-    anonymous : Anonymous_e__Union_,
-    dwReserved2 : UInt32,
-    bmiHeader : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwControlFlags : UInt32,
-      dwReserved1 : UInt32
-
+  struct KSMPEGVID_RECT
+    property start_x : UInt32
+    property start_y : UInt32
+    property end_x : UInt32
+    property end_y : UInt32
+    def initialize(@start_x : UInt32, @start_y : UInt32, @end_x : UInt32, @end_y : UInt32)
+    end
   end
 
   @[Extern]
-  record KS_MPEG1VIDEOINFO,
-    hdr : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER,
-    dwStartTimeCode : UInt32,
-    cbSequenceHeader : UInt32,
-    bSequenceHeader : UInt8*
+  struct KSAC3_ERROR_CONCEALMENT
+    property fRepeatPreviousBlock : Win32cr::Foundation::BOOL
+    property fErrorInCurrentBlock : Win32cr::Foundation::BOOL
+    def initialize(@fRepeatPreviousBlock : Win32cr::Foundation::BOOL, @fErrorInCurrentBlock : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record KS_MPEGVIDEOINFO2,
-    hdr : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER2,
-    dwStartTimeCode : UInt32,
-    cbSequenceHeader : UInt32,
-    dwProfile : UInt32,
-    dwLevel : UInt32,
-    dwFlags : UInt32,
-    bSequenceHeader : UInt32*
+  struct KSAC3_ALTERNATE_AUDIO
+    property fStereo : Win32cr::Foundation::BOOL
+    property dual_mode : UInt32
+    def initialize(@fStereo : Win32cr::Foundation::BOOL, @dual_mode : UInt32)
+    end
+  end
 
   @[Extern]
-  record KS_H264VIDEOINFO,
-    wWidth : UInt16,
-    wHeight : UInt16,
-    wSARwidth : UInt16,
-    wSARheight : UInt16,
-    wProfile : UInt16,
-    bLevelIDC : UInt8,
-    wConstrainedToolset : UInt16,
-    bmSupportedUsages : UInt32,
-    bmCapabilities : UInt16,
-    bmSVCCapabilities : UInt32,
-    bmMVCCapabilities : UInt32,
-    dwFrameInterval : UInt32,
-    bMaxCodecConfigDelay : UInt8,
-    bmSupportedSliceModes : UInt8,
-    bmSupportedSyncFrameTypes : UInt8,
-    bResolutionScaling : UInt8,
-    bSimulcastSupport : UInt8,
-    bmSupportedRateControlModes : UInt8,
-    wMaxMBperSecOneResolutionNoScalability : UInt16,
-    wMaxMBperSecTwoResolutionsNoScalability : UInt16,
-    wMaxMBperSecThreeResolutionsNoScalability : UInt16,
-    wMaxMBperSecFourResolutionsNoScalability : UInt16,
-    wMaxMBperSecOneResolutionTemporalScalability : UInt16,
-    wMaxMBperSecTwoResolutionsTemporalScalablility : UInt16,
-    wMaxMBperSecThreeResolutionsTemporalScalability : UInt16,
-    wMaxMBperSecFourResolutionsTemporalScalability : UInt16,
-    wMaxMBperSecOneResolutionTemporalQualityScalability : UInt16,
-    wMaxMBperSecTwoResolutionsTemporalQualityScalability : UInt16,
-    wMaxMBperSecThreeResolutionsTemporalQualityScalablity : UInt16,
-    wMaxMBperSecFourResolutionsTemporalQualityScalability : UInt16,
-    wMaxMBperSecOneResolutionTemporalSpatialScalability : UInt16,
-    wMaxMBperSecTwoResolutionsTemporalSpatialScalability : UInt16,
-    wMaxMBperSecThreeResolutionsTemporalSpatialScalablity : UInt16,
-    wMaxMBperSecFourResolutionsTemporalSpatialScalability : UInt16,
-    wMaxMBperSecOneResolutionFullScalability : UInt16,
-    wMaxMBperSecTwoResolutionsFullScalability : UInt16,
-    wMaxMBperSecThreeResolutionsFullScalability : UInt16,
-    wMaxMBperSecFourResolutionsFullScalability : UInt16
+  struct KSAC3_DOWNMIX
+    property fDownMix : Win32cr::Foundation::BOOL
+    property fDolbySurround : Win32cr::Foundation::BOOL
+    def initialize(@fDownMix : Win32cr::Foundation::BOOL, @fDolbySurround : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record KS_MPEAUDIOINFO,
-    dwFlags : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    dwReserved3 : UInt32
+  struct KSAC3_BIT_STREAM_MODE
+    property bit_stream_mode : Int32
+    def initialize(@bit_stream_mode : Int32)
+    end
+  end
 
   @[Extern]
-  record KS_DATAFORMAT_VIDEOINFOHEADER,
-    data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    video_info_header : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER
+  struct KSAC3_DIALOGUE_LEVEL
+    property dialogue_level : UInt32
+    def initialize(@dialogue_level : UInt32)
+    end
+  end
 
   @[Extern]
-  record KS_DATAFORMAT_VIDEOINFOHEADER2,
-    data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    video_info_header2 : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER2
+  struct KSAC3_ROOM_TYPE
+    property fLargeRoom : Win32cr::Foundation::BOOL
+    def initialize(@fLargeRoom : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record KS_DATAFORMAT_MPEGVIDEOINFO2,
-    data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    mpeg_video_info_header2 : Win32cr::Media::KernelStreaming::KS_MPEGVIDEOINFO2
+  struct KS_DVD_YCrCb
+    property reserved : UInt8
+    property y : UInt8
+    property cr : UInt8
+    property cb : UInt8
+    def initialize(@reserved : UInt8, @y : UInt8, @cr : UInt8, @cb : UInt8)
+    end
+  end
 
   @[Extern]
-  record KS_DATAFORMAT_H264VIDEOINFO,
-    data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    h264_video_info_header : Win32cr::Media::KernelStreaming::KS_H264VIDEOINFO
+  struct KS_DVD_YUV
+    property reserved : UInt8
+    property y : UInt8
+    property v : UInt8
+    property u : UInt8
+    def initialize(@reserved : UInt8, @y : UInt8, @v : UInt8, @u : UInt8)
+    end
+  end
 
   @[Extern]
-  record KS_DATAFORMAT_IMAGEINFO,
-    data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    image_info_header : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER
+  struct KSPROPERTY_SPPAL
+    property sppal : Win32cr::Media::KernelStreaming::KS_DVD_YUV[16]
+    def initialize(@sppal : Win32cr::Media::KernelStreaming::KS_DVD_YUV[16])
+    end
+  end
 
   @[Extern]
-  record KS_DATAFORMAT_VIDEOINFO_PALETTE,
-    data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    video_info : Win32cr::Media::KernelStreaming::KS_VIDEOINFO
+  struct KS_COLCON
+    property _bitfield1 : UInt8
+    property _bitfield2 : UInt8
+    property _bitfield3 : UInt8
+    property _bitfield4 : UInt8
+    def initialize(@_bitfield1 : UInt8, @_bitfield2 : UInt8, @_bitfield3 : UInt8, @_bitfield4 : UInt8)
+    end
+  end
 
   @[Extern]
-  record KS_DATAFORMAT_VBIINFOHEADER,
-    data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    vbi_info_header : Win32cr::Media::KernelStreaming::KS_VBIINFOHEADER
+  struct KSPROPERTY_SPHLI
+    property hliss : UInt16
+    property reserved : UInt16
+    property start_ptm : UInt32
+    property end_ptm : UInt32
+    property start_x : UInt16
+    property start_y : UInt16
+    property stop_x : UInt16
+    property stop_y : UInt16
+    property col_con : Win32cr::Media::KernelStreaming::KS_COLCON
+    def initialize(@hliss : UInt16, @reserved : UInt16, @start_ptm : UInt32, @end_ptm : UInt32, @start_x : UInt16, @start_y : UInt16, @stop_x : UInt16, @stop_y : UInt16, @col_con : Win32cr::Media::KernelStreaming::KS_COLCON)
+    end
+  end
 
   @[Extern]
-  record KS_VIDEO_STREAM_CONFIG_CAPS,
-    guid : LibC::GUID,
-    video_standard : UInt32,
-    input_size : Win32cr::Foundation::SIZE,
-    min_cropping_size : Win32cr::Foundation::SIZE,
-    max_cropping_size : Win32cr::Foundation::SIZE,
-    crop_granularity_x : Int32,
-    crop_granularity_y : Int32,
-    crop_align_x : Int32,
-    crop_align_y : Int32,
-    min_output_size : Win32cr::Foundation::SIZE,
-    max_output_size : Win32cr::Foundation::SIZE,
-    output_granularity_x : Int32,
-    output_granularity_y : Int32,
-    stretch_taps_x : Int32,
-    stretch_taps_y : Int32,
-    shrink_taps_x : Int32,
-    shrink_taps_y : Int32,
-    min_frame_interval : Int64,
-    max_frame_interval : Int64,
-    min_bits_per_second : Int32,
-    max_bits_per_second : Int32
+  struct KS_DVDCOPY_CHLGKEY
+    property chlg_key : UInt8[10]
+    property reserved : UInt8[2]
+    def initialize(@chlg_key : UInt8[10], @reserved : UInt8[2])
+    end
+  end
 
   @[Extern]
-  record KS_DATARANGE_VIDEO,
-    data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    bFixedSizeSamples : Win32cr::Foundation::BOOL,
-    bTemporalCompression : Win32cr::Foundation::BOOL,
-    stream_description_flags : UInt32,
-    memory_allocation_flags : UInt32,
-    config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS,
-    video_info_header : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER
+  struct KS_DVDCOPY_BUSKEY
+    property bus_key : UInt8[5]
+    property reserved : UInt8*
+    def initialize(@bus_key : UInt8[5], @reserved : UInt8*)
+    end
+  end
 
   @[Extern]
-  record KS_DATARANGE_VIDEO2,
-    data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    bFixedSizeSamples : Win32cr::Foundation::BOOL,
-    bTemporalCompression : Win32cr::Foundation::BOOL,
-    stream_description_flags : UInt32,
-    memory_allocation_flags : UInt32,
-    config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS,
-    video_info_header : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER2
+  struct KS_DVDCOPY_DISCKEY
+    property disc_key : UInt8[2048]
+    def initialize(@disc_key : UInt8[2048])
+    end
+  end
 
   @[Extern]
-  record KS_DATARANGE_MPEG1_VIDEO,
-    data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    bFixedSizeSamples : Win32cr::Foundation::BOOL,
-    bTemporalCompression : Win32cr::Foundation::BOOL,
-    stream_description_flags : UInt32,
-    memory_allocation_flags : UInt32,
-    config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS,
-    video_info_header : Win32cr::Media::KernelStreaming::KS_MPEG1VIDEOINFO
+  struct KS_DVDCOPY_REGION
+    property reserved : UInt8
+    property region_data : UInt8
+    property reserved2 : UInt8[2]
+    def initialize(@reserved : UInt8, @region_data : UInt8, @reserved2 : UInt8[2])
+    end
+  end
 
   @[Extern]
-  record KS_DATARANGE_MPEG2_VIDEO,
-    data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    bFixedSizeSamples : Win32cr::Foundation::BOOL,
-    bTemporalCompression : Win32cr::Foundation::BOOL,
-    stream_description_flags : UInt32,
-    memory_allocation_flags : UInt32,
-    config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS,
-    video_info_header : Win32cr::Media::KernelStreaming::KS_MPEGVIDEOINFO2
+  struct KS_DVDCOPY_TITLEKEY
+    property key_flags : UInt32
+    property reserved_nt : UInt32[2]
+    property title_key : UInt8[6]
+    property reserved : UInt8[2]
+    def initialize(@key_flags : UInt32, @reserved_nt : UInt32[2], @title_key : UInt8[6], @reserved : UInt8[2])
+    end
+  end
 
   @[Extern]
-  record KS_DATARANGE_H264_VIDEO,
-    data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    bFixedSizeSamples : Win32cr::Foundation::BOOL,
-    bTemporalCompression : Win32cr::Foundation::BOOL,
-    stream_description_flags : UInt32,
-    memory_allocation_flags : UInt32,
-    config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS,
-    video_info_header : Win32cr::Media::KernelStreaming::KS_H264VIDEOINFO
+  struct KS_COPY_MACROVISION
+    property macrovision_level : UInt32
+    def initialize(@macrovision_level : UInt32)
+    end
+  end
 
   @[Extern]
-  record KS_DATARANGE_IMAGE,
-    data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS,
-    image_info_header : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER
+  struct KS_DVDCOPY_SET_COPY_STATE
+    property dvd_copy_state : UInt32
+    def initialize(@dvd_copy_state : UInt32)
+    end
+  end
 
   @[Extern]
-  record KS_DATARANGE_VIDEO_PALETTE,
-    data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    bFixedSizeSamples : Win32cr::Foundation::BOOL,
-    bTemporalCompression : Win32cr::Foundation::BOOL,
-    stream_description_flags : UInt32,
-    memory_allocation_flags : UInt32,
-    config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS,
-    video_info : Win32cr::Media::KernelStreaming::KS_VIDEOINFO
+  struct KS_RGBQUAD
+    property rgbBlue : UInt8
+    property rgbGreen : UInt8
+    property rgbRed : UInt8
+    property rgbReserved : UInt8
+    def initialize(@rgbBlue : UInt8, @rgbGreen : UInt8, @rgbRed : UInt8, @rgbReserved : UInt8)
+    end
+  end
 
   @[Extern]
-  record KS_DATARANGE_VIDEO_VBI,
-    data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    bFixedSizeSamples : Win32cr::Foundation::BOOL,
-    bTemporalCompression : Win32cr::Foundation::BOOL,
-    stream_description_flags : UInt32,
-    memory_allocation_flags : UInt32,
-    config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS,
-    vbi_info_header : Win32cr::Media::KernelStreaming::KS_VBIINFOHEADER
+  struct KS_BITMAPINFOHEADER
+    property biSize : UInt32
+    property biWidth : Int32
+    property biHeight : Int32
+    property biPlanes : UInt16
+    property biBitCount : UInt16
+    property biCompression : UInt32
+    property biSizeImage : UInt32
+    property biXPelsPerMeter : Int32
+    property biYPelsPerMeter : Int32
+    property biClrUsed : UInt32
+    property biClrImportant : UInt32
+    def initialize(@biSize : UInt32, @biWidth : Int32, @biHeight : Int32, @biPlanes : UInt16, @biBitCount : UInt16, @biCompression : UInt32, @biSizeImage : UInt32, @biXPelsPerMeter : Int32, @biYPelsPerMeter : Int32, @biClrUsed : UInt32, @biClrImportant : UInt32)
+    end
+  end
 
   @[Extern]
-  record KS_DATARANGE_ANALOGVIDEO,
-    data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT,
-    analog_video_info : Win32cr::Media::KernelStreaming::KS_AnalogVideoInfo
+  struct KS_TRUECOLORINFO
+    property dwBitMasks : UInt32[3]
+    property bmiColors : Win32cr::Media::KernelStreaming::KS_RGBQUAD[256]
+    def initialize(@dwBitMasks : UInt32[3], @bmiColors : Win32cr::Media::KernelStreaming::KS_RGBQUAD[256])
+    end
+  end
 
   @[Extern]
-  record VBICAP_PROPERTIES_PROTECTION_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    stream_index : UInt32,
-    status : UInt32
+  struct KS_VIDEOINFOHEADER
+    property rcSource : Win32cr::Foundation::RECT
+    property rcTarget : Win32cr::Foundation::RECT
+    property dwBitRate : UInt32
+    property dwBitErrorRate : UInt32
+    property avg_time_per_frame : Int64
+    property bmiHeader : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER
+    def initialize(@rcSource : Win32cr::Foundation::RECT, @rcTarget : Win32cr::Foundation::RECT, @dwBitRate : UInt32, @dwBitErrorRate : UInt32, @avg_time_per_frame : Int64, @bmiHeader : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER)
+    end
+  end
 
   @[Extern]
-  record NABTSFEC_BUFFER,
-    dataSize : UInt32,
-    groupID : UInt16,
-    reserved : UInt16,
-    data : UInt8[448]
+  struct KS_VIDEOINFO
+    property rcSource : Win32cr::Foundation::RECT
+    property rcTarget : Win32cr::Foundation::RECT
+    property dwBitRate : UInt32
+    property dwBitErrorRate : UInt32
+    property avg_time_per_frame : Int64
+    property bmiHeader : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property bmiColors : Win32cr::Media::KernelStreaming::KS_RGBQUAD[256]
+    property dwBitMasks : UInt32[3]
+    property true_color_info : Win32cr::Media::KernelStreaming::KS_TRUECOLORINFO
+    def initialize(@bmiColors : Win32cr::Media::KernelStreaming::KS_RGBQUAD[256], @dwBitMasks : UInt32[3], @true_color_info : Win32cr::Media::KernelStreaming::KS_TRUECOLORINFO)
+    end
+    end
+
+    def initialize(@rcSource : Win32cr::Foundation::RECT, @rcTarget : Win32cr::Foundation::RECT, @dwBitRate : UInt32, @dwBitErrorRate : UInt32, @avg_time_per_frame : Int64, @bmiHeader : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER, @anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record VBICODECFILTERING_SCANLINES,
-    dword_bit_array : UInt32[32]
+  struct KS_VBIINFOHEADER
+    property start_line : UInt32
+    property end_line : UInt32
+    property sampling_frequency : UInt32
+    property min_line_start_time : UInt32
+    property max_line_start_time : UInt32
+    property actual_line_start_time : UInt32
+    property actual_line_end_time : UInt32
+    property video_standard : UInt32
+    property samples_per_line : UInt32
+    property stride_in_bytes : UInt32
+    property buffer_size : UInt32
+    def initialize(@start_line : UInt32, @end_line : UInt32, @sampling_frequency : UInt32, @min_line_start_time : UInt32, @max_line_start_time : UInt32, @actual_line_start_time : UInt32, @actual_line_end_time : UInt32, @video_standard : UInt32, @samples_per_line : UInt32, @stride_in_bytes : UInt32, @buffer_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record VBICODECFILTERING_NABTS_SUBSTREAMS,
-    substream_mask : UInt32[128]
+  struct KS_AnalogVideoInfo
+    property rcSource : Win32cr::Foundation::RECT
+    property rcTarget : Win32cr::Foundation::RECT
+    property dwActiveWidth : UInt32
+    property dwActiveHeight : UInt32
+    property avg_time_per_frame : Int64
+    def initialize(@rcSource : Win32cr::Foundation::RECT, @rcTarget : Win32cr::Foundation::RECT, @dwActiveWidth : UInt32, @dwActiveHeight : UInt32, @avg_time_per_frame : Int64)
+    end
+  end
 
   @[Extern]
-  record VBICODECFILTERING_CC_SUBSTREAMS,
-    substream_mask : UInt32
+  struct KS_TVTUNER_CHANGE_INFO
+    property dwFlags : UInt32
+    property dwCountryCode : UInt32
+    property dwAnalogVideoStandard : UInt32
+    property dwChannel : UInt32
+    def initialize(@dwFlags : UInt32, @dwCountryCode : UInt32, @dwAnalogVideoStandard : UInt32, @dwChannel : UInt32)
+    end
+  end
 
   @[Extern]
-  record CC_BYTE_PAIR,
-    decoded : UInt8[2],
-    reserved : UInt16
+  struct KS_VIDEOINFOHEADER2
+    property rcSource : Win32cr::Foundation::RECT
+    property rcTarget : Win32cr::Foundation::RECT
+    property dwBitRate : UInt32
+    property dwBitErrorRate : UInt32
+    property avg_time_per_frame : Int64
+    property dwInterlaceFlags : UInt32
+    property dwCopyProtectFlags : UInt32
+    property dwPictAspectRatioX : UInt32
+    property dwPictAspectRatioY : UInt32
+    property anonymous : Anonymous_e__Union_
+    property dwReserved2 : UInt32
+    property bmiHeader : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dwControlFlags : UInt32
+    property dwReserved1 : UInt32
+    def initialize(@dwControlFlags : UInt32, @dwReserved1 : UInt32)
+    end
+    end
+
+    def initialize(@rcSource : Win32cr::Foundation::RECT, @rcTarget : Win32cr::Foundation::RECT, @dwBitRate : UInt32, @dwBitErrorRate : UInt32, @avg_time_per_frame : Int64, @dwInterlaceFlags : UInt32, @dwCopyProtectFlags : UInt32, @dwPictAspectRatioX : UInt32, @dwPictAspectRatioY : UInt32, @anonymous : Anonymous_e__Union_, @dwReserved2 : UInt32, @bmiHeader : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER)
+    end
+  end
 
   @[Extern]
-  record CC_HW_FIELD,
-    scanlines_requested : Win32cr::Media::KernelStreaming::VBICODECFILTERING_SCANLINES,
-    fieldFlags : UInt32,
-    picture_number : Int64,
-    lines : Win32cr::Media::KernelStreaming::CC_BYTE_PAIR[12]
+  struct KS_MPEG1VIDEOINFO
+    property hdr : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER
+    property dwStartTimeCode : UInt32
+    property cbSequenceHeader : UInt32
+    property bSequenceHeader : UInt8*
+    def initialize(@hdr : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER, @dwStartTimeCode : UInt32, @cbSequenceHeader : UInt32, @bSequenceHeader : UInt8*)
+    end
+  end
 
   @[Extern]
-  record NABTS_BUFFER_LINE,
-    confidence : UInt8,
-    bytes : UInt8[36]
+  struct KS_MPEGVIDEOINFO2
+    property hdr : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER2
+    property dwStartTimeCode : UInt32
+    property cbSequenceHeader : UInt32
+    property dwProfile : UInt32
+    property dwLevel : UInt32
+    property dwFlags : UInt32
+    property bSequenceHeader : UInt32*
+    def initialize(@hdr : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER2, @dwStartTimeCode : UInt32, @cbSequenceHeader : UInt32, @dwProfile : UInt32, @dwLevel : UInt32, @dwFlags : UInt32, @bSequenceHeader : UInt32*)
+    end
+  end
 
   @[Extern]
-  record NABTS_BUFFER,
-    scanlines_requested : Win32cr::Media::KernelStreaming::VBICODECFILTERING_SCANLINES,
-    picture_number : Int64,
-    nabts_lines : Win32cr::Media::KernelStreaming::NABTS_BUFFER_LINE[11]
+  struct KS_H264VIDEOINFO
+    property wWidth : UInt16
+    property wHeight : UInt16
+    property wSARwidth : UInt16
+    property wSARheight : UInt16
+    property wProfile : UInt16
+    property bLevelIDC : UInt8
+    property wConstrainedToolset : UInt16
+    property bmSupportedUsages : UInt32
+    property bmCapabilities : UInt16
+    property bmSVCCapabilities : UInt32
+    property bmMVCCapabilities : UInt32
+    property dwFrameInterval : UInt32
+    property bMaxCodecConfigDelay : UInt8
+    property bmSupportedSliceModes : UInt8
+    property bmSupportedSyncFrameTypes : UInt8
+    property bResolutionScaling : UInt8
+    property bSimulcastSupport : UInt8
+    property bmSupportedRateControlModes : UInt8
+    property wMaxMBperSecOneResolutionNoScalability : UInt16
+    property wMaxMBperSecTwoResolutionsNoScalability : UInt16
+    property wMaxMBperSecThreeResolutionsNoScalability : UInt16
+    property wMaxMBperSecFourResolutionsNoScalability : UInt16
+    property wMaxMBperSecOneResolutionTemporalScalability : UInt16
+    property wMaxMBperSecTwoResolutionsTemporalScalablility : UInt16
+    property wMaxMBperSecThreeResolutionsTemporalScalability : UInt16
+    property wMaxMBperSecFourResolutionsTemporalScalability : UInt16
+    property wMaxMBperSecOneResolutionTemporalQualityScalability : UInt16
+    property wMaxMBperSecTwoResolutionsTemporalQualityScalability : UInt16
+    property wMaxMBperSecThreeResolutionsTemporalQualityScalablity : UInt16
+    property wMaxMBperSecFourResolutionsTemporalQualityScalability : UInt16
+    property wMaxMBperSecOneResolutionTemporalSpatialScalability : UInt16
+    property wMaxMBperSecTwoResolutionsTemporalSpatialScalability : UInt16
+    property wMaxMBperSecThreeResolutionsTemporalSpatialScalablity : UInt16
+    property wMaxMBperSecFourResolutionsTemporalSpatialScalability : UInt16
+    property wMaxMBperSecOneResolutionFullScalability : UInt16
+    property wMaxMBperSecTwoResolutionsFullScalability : UInt16
+    property wMaxMBperSecThreeResolutionsFullScalability : UInt16
+    property wMaxMBperSecFourResolutionsFullScalability : UInt16
+    def initialize(@wWidth : UInt16, @wHeight : UInt16, @wSARwidth : UInt16, @wSARheight : UInt16, @wProfile : UInt16, @bLevelIDC : UInt8, @wConstrainedToolset : UInt16, @bmSupportedUsages : UInt32, @bmCapabilities : UInt16, @bmSVCCapabilities : UInt32, @bmMVCCapabilities : UInt32, @dwFrameInterval : UInt32, @bMaxCodecConfigDelay : UInt8, @bmSupportedSliceModes : UInt8, @bmSupportedSyncFrameTypes : UInt8, @bResolutionScaling : UInt8, @bSimulcastSupport : UInt8, @bmSupportedRateControlModes : UInt8, @wMaxMBperSecOneResolutionNoScalability : UInt16, @wMaxMBperSecTwoResolutionsNoScalability : UInt16, @wMaxMBperSecThreeResolutionsNoScalability : UInt16, @wMaxMBperSecFourResolutionsNoScalability : UInt16, @wMaxMBperSecOneResolutionTemporalScalability : UInt16, @wMaxMBperSecTwoResolutionsTemporalScalablility : UInt16, @wMaxMBperSecThreeResolutionsTemporalScalability : UInt16, @wMaxMBperSecFourResolutionsTemporalScalability : UInt16, @wMaxMBperSecOneResolutionTemporalQualityScalability : UInt16, @wMaxMBperSecTwoResolutionsTemporalQualityScalability : UInt16, @wMaxMBperSecThreeResolutionsTemporalQualityScalablity : UInt16, @wMaxMBperSecFourResolutionsTemporalQualityScalability : UInt16, @wMaxMBperSecOneResolutionTemporalSpatialScalability : UInt16, @wMaxMBperSecTwoResolutionsTemporalSpatialScalability : UInt16, @wMaxMBperSecThreeResolutionsTemporalSpatialScalablity : UInt16, @wMaxMBperSecFourResolutionsTemporalSpatialScalability : UInt16, @wMaxMBperSecOneResolutionFullScalability : UInt16, @wMaxMBperSecTwoResolutionsFullScalability : UInt16, @wMaxMBperSecThreeResolutionsFullScalability : UInt16, @wMaxMBperSecFourResolutionsFullScalability : UInt16)
+    end
+  end
 
   @[Extern]
-  record WST_BUFFER_LINE,
-    confidence : UInt8,
-    bytes : UInt8[42]
+  struct KS_MPEAUDIOINFO
+    property dwFlags : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property dwReserved3 : UInt32
+    def initialize(@dwFlags : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @dwReserved3 : UInt32)
+    end
+  end
 
   @[Extern]
-  record WST_BUFFER,
-    scanlines_requested : Win32cr::Media::KernelStreaming::VBICODECFILTERING_SCANLINES,
-    wst_lines : Win32cr::Media::KernelStreaming::WST_BUFFER_LINE[17]
+  struct KS_DATAFORMAT_VIDEOINFOHEADER
+    property data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property video_info_header : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER
+    def initialize(@data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @video_info_header : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER)
+    end
+  end
 
   @[Extern]
-  record VBICODECFILTERING_STATISTICS_COMMON,
-    input_sr_bs_processed : UInt32,
-    output_sr_bs_processed : UInt32,
-    sr_bs_ignored : UInt32,
-    input_sr_bs_missing : UInt32,
-    output_sr_bs_missing : UInt32,
-    output_failures : UInt32,
-    internal_errors : UInt32,
-    external_errors : UInt32,
-    input_discontinuities : UInt32,
-    dsp_failures : UInt32,
-    tv_tuner_changes : UInt32,
-    vbi_header_changes : UInt32,
-    line_confidence_avg : UInt32,
-    bytes_output : UInt32
+  struct KS_DATAFORMAT_VIDEOINFOHEADER2
+    property data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property video_info_header2 : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER2
+    def initialize(@data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @video_info_header2 : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER2)
+    end
+  end
 
   @[Extern]
-  record VBICODECFILTERING_STATISTICS_COMMON_PIN,
-    sr_bs_processed : UInt32,
-    sr_bs_ignored : UInt32,
-    sr_bs_missing : UInt32,
-    internal_errors : UInt32,
-    external_errors : UInt32,
-    discontinuities : UInt32,
-    line_confidence_avg : UInt32,
-    bytes_output : UInt32
+  struct KS_DATAFORMAT_MPEGVIDEOINFO2
+    property data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property mpeg_video_info_header2 : Win32cr::Media::KernelStreaming::KS_MPEGVIDEOINFO2
+    def initialize(@data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @mpeg_video_info_header2 : Win32cr::Media::KernelStreaming::KS_MPEGVIDEOINFO2)
+    end
+  end
 
   @[Extern]
-  record VBICODECFILTERING_STATISTICS_NABTS,
-    common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON,
-    fec_bundle_bad_lines : UInt32,
-    fec_queue_overflows : UInt32,
-    fec_corrected_lines : UInt32,
-    fec_uncorrectable_lines : UInt32,
-    bundles_processed : UInt32,
-    bundles_sent2_ip : UInt32,
-    filtered_lines : UInt32
+  struct KS_DATAFORMAT_H264VIDEOINFO
+    property data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property h264_video_info_header : Win32cr::Media::KernelStreaming::KS_H264VIDEOINFO
+    def initialize(@data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @h264_video_info_header : Win32cr::Media::KernelStreaming::KS_H264VIDEOINFO)
+    end
+  end
 
   @[Extern]
-  record VBICODECFILTERING_STATISTICS_NABTS_PIN,
-    common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON_PIN
+  struct KS_DATAFORMAT_IMAGEINFO
+    property data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property image_info_header : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER
+    def initialize(@data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @image_info_header : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER)
+    end
+  end
 
   @[Extern]
-  record VBICODECFILTERING_STATISTICS_CC,
-    common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON
+  struct KS_DATAFORMAT_VIDEOINFO_PALETTE
+    property data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property video_info : Win32cr::Media::KernelStreaming::KS_VIDEOINFO
+    def initialize(@data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @video_info : Win32cr::Media::KernelStreaming::KS_VIDEOINFO)
+    end
+  end
 
   @[Extern]
-  record VBICODECFILTERING_STATISTICS_CC_PIN,
-    common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON_PIN
+  struct KS_DATAFORMAT_VBIINFOHEADER
+    property data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property vbi_info_header : Win32cr::Media::KernelStreaming::KS_VBIINFOHEADER
+    def initialize(@data_format : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @vbi_info_header : Win32cr::Media::KernelStreaming::KS_VBIINFOHEADER)
+    end
+  end
 
   @[Extern]
-  record VBICODECFILTERING_STATISTICS_TELETEXT,
-    common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON
+  struct KS_VIDEO_STREAM_CONFIG_CAPS
+    property guid : LibC::GUID
+    property video_standard : UInt32
+    property input_size : Win32cr::Foundation::SIZE
+    property min_cropping_size : Win32cr::Foundation::SIZE
+    property max_cropping_size : Win32cr::Foundation::SIZE
+    property crop_granularity_x : Int32
+    property crop_granularity_y : Int32
+    property crop_align_x : Int32
+    property crop_align_y : Int32
+    property min_output_size : Win32cr::Foundation::SIZE
+    property max_output_size : Win32cr::Foundation::SIZE
+    property output_granularity_x : Int32
+    property output_granularity_y : Int32
+    property stretch_taps_x : Int32
+    property stretch_taps_y : Int32
+    property shrink_taps_x : Int32
+    property shrink_taps_y : Int32
+    property min_frame_interval : Int64
+    property max_frame_interval : Int64
+    property min_bits_per_second : Int32
+    property max_bits_per_second : Int32
+    def initialize(@guid : LibC::GUID, @video_standard : UInt32, @input_size : Win32cr::Foundation::SIZE, @min_cropping_size : Win32cr::Foundation::SIZE, @max_cropping_size : Win32cr::Foundation::SIZE, @crop_granularity_x : Int32, @crop_granularity_y : Int32, @crop_align_x : Int32, @crop_align_y : Int32, @min_output_size : Win32cr::Foundation::SIZE, @max_output_size : Win32cr::Foundation::SIZE, @output_granularity_x : Int32, @output_granularity_y : Int32, @stretch_taps_x : Int32, @stretch_taps_y : Int32, @shrink_taps_x : Int32, @shrink_taps_y : Int32, @min_frame_interval : Int64, @max_frame_interval : Int64, @min_bits_per_second : Int32, @max_bits_per_second : Int32)
+    end
+  end
 
   @[Extern]
-  record VBICODECFILTERING_STATISTICS_TELETEXT_PIN,
-    common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON_PIN
+  struct KS_DATARANGE_VIDEO
+    property data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property bFixedSizeSamples : Win32cr::Foundation::BOOL
+    property bTemporalCompression : Win32cr::Foundation::BOOL
+    property stream_description_flags : UInt32
+    property memory_allocation_flags : UInt32
+    property config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS
+    property video_info_header : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER
+    def initialize(@data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @bFixedSizeSamples : Win32cr::Foundation::BOOL, @bTemporalCompression : Win32cr::Foundation::BOOL, @stream_description_flags : UInt32, @memory_allocation_flags : UInt32, @config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS, @video_info_header : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VBICODECFILTERING_SCANLINES_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    scanlines : Win32cr::Media::KernelStreaming::VBICODECFILTERING_SCANLINES
+  struct KS_DATARANGE_VIDEO2
+    property data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property bFixedSizeSamples : Win32cr::Foundation::BOOL
+    property bTemporalCompression : Win32cr::Foundation::BOOL
+    property stream_description_flags : UInt32
+    property memory_allocation_flags : UInt32
+    property config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS
+    property video_info_header : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER2
+    def initialize(@data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @bFixedSizeSamples : Win32cr::Foundation::BOOL, @bTemporalCompression : Win32cr::Foundation::BOOL, @stream_description_flags : UInt32, @memory_allocation_flags : UInt32, @config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS, @video_info_header : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER2)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VBICODECFILTERING_NABTS_SUBSTREAMS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    substreams : Win32cr::Media::KernelStreaming::VBICODECFILTERING_NABTS_SUBSTREAMS
+  struct KS_DATARANGE_MPEG1_VIDEO
+    property data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property bFixedSizeSamples : Win32cr::Foundation::BOOL
+    property bTemporalCompression : Win32cr::Foundation::BOOL
+    property stream_description_flags : UInt32
+    property memory_allocation_flags : UInt32
+    property config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS
+    property video_info_header : Win32cr::Media::KernelStreaming::KS_MPEG1VIDEOINFO
+    def initialize(@data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @bFixedSizeSamples : Win32cr::Foundation::BOOL, @bTemporalCompression : Win32cr::Foundation::BOOL, @stream_description_flags : UInt32, @memory_allocation_flags : UInt32, @config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS, @video_info_header : Win32cr::Media::KernelStreaming::KS_MPEG1VIDEOINFO)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VBICODECFILTERING_CC_SUBSTREAMS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    substreams : Win32cr::Media::KernelStreaming::VBICODECFILTERING_CC_SUBSTREAMS
+  struct KS_DATARANGE_MPEG2_VIDEO
+    property data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property bFixedSizeSamples : Win32cr::Foundation::BOOL
+    property bTemporalCompression : Win32cr::Foundation::BOOL
+    property stream_description_flags : UInt32
+    property memory_allocation_flags : UInt32
+    property config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS
+    property video_info_header : Win32cr::Media::KernelStreaming::KS_MPEGVIDEOINFO2
+    def initialize(@data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @bFixedSizeSamples : Win32cr::Foundation::BOOL, @bTemporalCompression : Win32cr::Foundation::BOOL, @stream_description_flags : UInt32, @memory_allocation_flags : UInt32, @config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS, @video_info_header : Win32cr::Media::KernelStreaming::KS_MPEGVIDEOINFO2)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VBICODECFILTERING_STATISTICS_COMMON_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON
+  struct KS_DATARANGE_H264_VIDEO
+    property data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property bFixedSizeSamples : Win32cr::Foundation::BOOL
+    property bTemporalCompression : Win32cr::Foundation::BOOL
+    property stream_description_flags : UInt32
+    property memory_allocation_flags : UInt32
+    property config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS
+    property video_info_header : Win32cr::Media::KernelStreaming::KS_H264VIDEOINFO
+    def initialize(@data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @bFixedSizeSamples : Win32cr::Foundation::BOOL, @bTemporalCompression : Win32cr::Foundation::BOOL, @stream_description_flags : UInt32, @memory_allocation_flags : UInt32, @config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS, @video_info_header : Win32cr::Media::KernelStreaming::KS_H264VIDEOINFO)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VBICODECFILTERING_STATISTICS_COMMON_PIN_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON_PIN
+  struct KS_DATARANGE_IMAGE
+    property data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS
+    property image_info_header : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER
+    def initialize(@data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS, @image_info_header : Win32cr::Media::KernelStreaming::KS_BITMAPINFOHEADER)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VBICODECFILTERING_STATISTICS_NABTS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_NABTS
+  struct KS_DATARANGE_VIDEO_PALETTE
+    property data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property bFixedSizeSamples : Win32cr::Foundation::BOOL
+    property bTemporalCompression : Win32cr::Foundation::BOOL
+    property stream_description_flags : UInt32
+    property memory_allocation_flags : UInt32
+    property config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS
+    property video_info : Win32cr::Media::KernelStreaming::KS_VIDEOINFO
+    def initialize(@data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @bFixedSizeSamples : Win32cr::Foundation::BOOL, @bTemporalCompression : Win32cr::Foundation::BOOL, @stream_description_flags : UInt32, @memory_allocation_flags : UInt32, @config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS, @video_info : Win32cr::Media::KernelStreaming::KS_VIDEOINFO)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VBICODECFILTERING_STATISTICS_NABTS_PIN_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_NABTS_PIN
+  struct KS_DATARANGE_VIDEO_VBI
+    property data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property bFixedSizeSamples : Win32cr::Foundation::BOOL
+    property bTemporalCompression : Win32cr::Foundation::BOOL
+    property stream_description_flags : UInt32
+    property memory_allocation_flags : UInt32
+    property config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS
+    property vbi_info_header : Win32cr::Media::KernelStreaming::KS_VBIINFOHEADER
+    def initialize(@data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @bFixedSizeSamples : Win32cr::Foundation::BOOL, @bTemporalCompression : Win32cr::Foundation::BOOL, @stream_description_flags : UInt32, @memory_allocation_flags : UInt32, @config_caps : Win32cr::Media::KernelStreaming::KS_VIDEO_STREAM_CONFIG_CAPS, @vbi_info_header : Win32cr::Media::KernelStreaming::KS_VBIINFOHEADER)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VBICODECFILTERING_STATISTICS_CC_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_CC
+  struct KS_DATARANGE_ANALOGVIDEO
+    property data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT
+    property analog_video_info : Win32cr::Media::KernelStreaming::KS_AnalogVideoInfo
+    def initialize(@data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @analog_video_info : Win32cr::Media::KernelStreaming::KS_AnalogVideoInfo)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VBICODECFILTERING_STATISTICS_CC_PIN_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_CC_PIN
+  struct VBICAP_PROPERTIES_PROTECTION_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property stream_index : UInt32
+    property status : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @stream_index : UInt32, @status : UInt32)
+    end
+  end
 
   @[Extern]
-  record VRAM_SURFACE_INFO,
-    hSurface : LibC::UIntPtrT,
-    vram_physical_address : Int64,
-    cbCaptured : UInt32,
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    dwLinearSize : UInt32,
-    lPitch : Int32,
-    ullReserved : UInt64[16]
+  struct NABTSFEC_BUFFER
+    property dataSize : UInt32
+    property groupID : UInt16
+    property reserved : UInt16
+    property data : UInt8[448]
+    def initialize(@dataSize : UInt32, @groupID : UInt16, @reserved : UInt16, @data : UInt8[448])
+    end
+  end
 
   @[Extern]
-  record VRAM_SURFACE_INFO_PROPERTY_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    pVramSurfaceInfo : Win32cr::Media::KernelStreaming::VRAM_SURFACE_INFO*
+  struct VBICODECFILTERING_SCANLINES
+    property dword_bit_array : UInt32[32]
+    def initialize(@dword_bit_array : UInt32[32])
+    end
+  end
 
   @[Extern]
-  record SECURE_BUFFER_INFO,
-    guidBufferIdentifier : LibC::GUID,
-    cbBufferSize : UInt32,
-    cbCaptured : UInt32,
-    ullReserved : UInt64[16]
+  struct VBICODECFILTERING_NABTS_SUBSTREAMS
+    property substream_mask : UInt32[128]
+    def initialize(@substream_mask : UInt32[128])
+    end
+  end
 
   @[Extern]
-  record KS_FRAME_INFO,
-    extended_header_size : UInt32,
-    dwFrameFlags : UInt32,
-    picture_number : Int64,
-    drop_count : Int64,
-    hDirectDraw : Win32cr::Foundation::HANDLE,
-    hSurfaceHandle : Win32cr::Foundation::HANDLE,
-    direct_draw_rect : Win32cr::Foundation::RECT,
-    anonymous1 : Anonymous1_e__Union_,
-    reserved2 : UInt32,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct VBICODECFILTERING_CC_SUBSTREAMS
+    property substream_mask : UInt32
+    def initialize(@substream_mask : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CC_BYTE_PAIR
+    property decoded : UInt8[2]
+    property reserved : UInt16
+    def initialize(@decoded : UInt8[2], @reserved : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct CC_HW_FIELD
+    property scanlines_requested : Win32cr::Media::KernelStreaming::VBICODECFILTERING_SCANLINES
+    property fieldFlags : UInt32
+    property picture_number : Int64
+    property lines : Win32cr::Media::KernelStreaming::CC_BYTE_PAIR[12]
+    def initialize(@scanlines_requested : Win32cr::Media::KernelStreaming::VBICODECFILTERING_SCANLINES, @fieldFlags : UInt32, @picture_number : Int64, @lines : Win32cr::Media::KernelStreaming::CC_BYTE_PAIR[12])
+    end
+  end
+
+  @[Extern]
+  struct NABTS_BUFFER_LINE
+    property confidence : UInt8
+    property bytes : UInt8[36]
+    def initialize(@confidence : UInt8, @bytes : UInt8[36])
+    end
+  end
+
+  @[Extern]
+  struct NABTS_BUFFER
+    property scanlines_requested : Win32cr::Media::KernelStreaming::VBICODECFILTERING_SCANLINES
+    property picture_number : Int64
+    property nabts_lines : Win32cr::Media::KernelStreaming::NABTS_BUFFER_LINE[11]
+    def initialize(@scanlines_requested : Win32cr::Media::KernelStreaming::VBICODECFILTERING_SCANLINES, @picture_number : Int64, @nabts_lines : Win32cr::Media::KernelStreaming::NABTS_BUFFER_LINE[11])
+    end
+  end
+
+  @[Extern]
+  struct WST_BUFFER_LINE
+    property confidence : UInt8
+    property bytes : UInt8[42]
+    def initialize(@confidence : UInt8, @bytes : UInt8[42])
+    end
+  end
+
+  @[Extern]
+  struct WST_BUFFER
+    property scanlines_requested : Win32cr::Media::KernelStreaming::VBICODECFILTERING_SCANLINES
+    property wst_lines : Win32cr::Media::KernelStreaming::WST_BUFFER_LINE[17]
+    def initialize(@scanlines_requested : Win32cr::Media::KernelStreaming::VBICODECFILTERING_SCANLINES, @wst_lines : Win32cr::Media::KernelStreaming::WST_BUFFER_LINE[17])
+    end
+  end
+
+  @[Extern]
+  struct VBICODECFILTERING_STATISTICS_COMMON
+    property input_sr_bs_processed : UInt32
+    property output_sr_bs_processed : UInt32
+    property sr_bs_ignored : UInt32
+    property input_sr_bs_missing : UInt32
+    property output_sr_bs_missing : UInt32
+    property output_failures : UInt32
+    property internal_errors : UInt32
+    property external_errors : UInt32
+    property input_discontinuities : UInt32
+    property dsp_failures : UInt32
+    property tv_tuner_changes : UInt32
+    property vbi_header_changes : UInt32
+    property line_confidence_avg : UInt32
+    property bytes_output : UInt32
+    def initialize(@input_sr_bs_processed : UInt32, @output_sr_bs_processed : UInt32, @sr_bs_ignored : UInt32, @input_sr_bs_missing : UInt32, @output_sr_bs_missing : UInt32, @output_failures : UInt32, @internal_errors : UInt32, @external_errors : UInt32, @input_discontinuities : UInt32, @dsp_failures : UInt32, @tv_tuner_changes : UInt32, @vbi_header_changes : UInt32, @line_confidence_avg : UInt32, @bytes_output : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VBICODECFILTERING_STATISTICS_COMMON_PIN
+    property sr_bs_processed : UInt32
+    property sr_bs_ignored : UInt32
+    property sr_bs_missing : UInt32
+    property internal_errors : UInt32
+    property external_errors : UInt32
+    property discontinuities : UInt32
+    property line_confidence_avg : UInt32
+    property bytes_output : UInt32
+    def initialize(@sr_bs_processed : UInt32, @sr_bs_ignored : UInt32, @sr_bs_missing : UInt32, @internal_errors : UInt32, @external_errors : UInt32, @discontinuities : UInt32, @line_confidence_avg : UInt32, @bytes_output : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VBICODECFILTERING_STATISTICS_NABTS
+    property common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON
+    property fec_bundle_bad_lines : UInt32
+    property fec_queue_overflows : UInt32
+    property fec_corrected_lines : UInt32
+    property fec_uncorrectable_lines : UInt32
+    property bundles_processed : UInt32
+    property bundles_sent2_ip : UInt32
+    property filtered_lines : UInt32
+    def initialize(@common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON, @fec_bundle_bad_lines : UInt32, @fec_queue_overflows : UInt32, @fec_corrected_lines : UInt32, @fec_uncorrectable_lines : UInt32, @bundles_processed : UInt32, @bundles_sent2_ip : UInt32, @filtered_lines : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VBICODECFILTERING_STATISTICS_NABTS_PIN
+    property common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON_PIN
+    def initialize(@common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON_PIN)
+    end
+  end
+
+  @[Extern]
+  struct VBICODECFILTERING_STATISTICS_CC
+    property common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON
+    def initialize(@common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON)
+    end
+  end
+
+  @[Extern]
+  struct VBICODECFILTERING_STATISTICS_CC_PIN
+    property common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON_PIN
+    def initialize(@common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON_PIN)
+    end
+  end
+
+  @[Extern]
+  struct VBICODECFILTERING_STATISTICS_TELETEXT
+    property common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON
+    def initialize(@common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON)
+    end
+  end
+
+  @[Extern]
+  struct VBICODECFILTERING_STATISTICS_TELETEXT_PIN
+    property common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON_PIN
+    def initialize(@common : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON_PIN)
+    end
+  end
+
+  @[Extern]
+  struct KSPROPERTY_VBICODECFILTERING_SCANLINES_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property scanlines : Win32cr::Media::KernelStreaming::VBICODECFILTERING_SCANLINES
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @scanlines : Win32cr::Media::KernelStreaming::VBICODECFILTERING_SCANLINES)
+    end
+  end
+
+  @[Extern]
+  struct KSPROPERTY_VBICODECFILTERING_NABTS_SUBSTREAMS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property substreams : Win32cr::Media::KernelStreaming::VBICODECFILTERING_NABTS_SUBSTREAMS
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @substreams : Win32cr::Media::KernelStreaming::VBICODECFILTERING_NABTS_SUBSTREAMS)
+    end
+  end
+
+  @[Extern]
+  struct KSPROPERTY_VBICODECFILTERING_CC_SUBSTREAMS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property substreams : Win32cr::Media::KernelStreaming::VBICODECFILTERING_CC_SUBSTREAMS
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @substreams : Win32cr::Media::KernelStreaming::VBICODECFILTERING_CC_SUBSTREAMS)
+    end
+  end
+
+  @[Extern]
+  struct KSPROPERTY_VBICODECFILTERING_STATISTICS_COMMON_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON)
+    end
+  end
+
+  @[Extern]
+  struct KSPROPERTY_VBICODECFILTERING_STATISTICS_COMMON_PIN_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON_PIN
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_COMMON_PIN)
+    end
+  end
+
+  @[Extern]
+  struct KSPROPERTY_VBICODECFILTERING_STATISTICS_NABTS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_NABTS
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_NABTS)
+    end
+  end
+
+  @[Extern]
+  struct KSPROPERTY_VBICODECFILTERING_STATISTICS_NABTS_PIN_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_NABTS_PIN
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_NABTS_PIN)
+    end
+  end
+
+  @[Extern]
+  struct KSPROPERTY_VBICODECFILTERING_STATISTICS_CC_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_CC
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_CC)
+    end
+  end
+
+  @[Extern]
+  struct KSPROPERTY_VBICODECFILTERING_STATISTICS_CC_PIN_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_CC_PIN
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @statistics : Win32cr::Media::KernelStreaming::VBICODECFILTERING_STATISTICS_CC_PIN)
+    end
+  end
+
+  @[Extern]
+  struct VRAM_SURFACE_INFO
+    property hSurface : LibC::UIntPtrT
+    property vram_physical_address : Int64
+    property cbCaptured : UInt32
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property dwLinearSize : UInt32
+    property lPitch : Int32
+    property ullReserved : UInt64[16]
+    def initialize(@hSurface : LibC::UIntPtrT, @vram_physical_address : Int64, @cbCaptured : UInt32, @dwWidth : UInt32, @dwHeight : UInt32, @dwLinearSize : UInt32, @lPitch : Int32, @ullReserved : UInt64[16])
+    end
+  end
+
+  @[Extern]
+  struct VRAM_SURFACE_INFO_PROPERTY_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property pVramSurfaceInfo : Win32cr::Media::KernelStreaming::VRAM_SURFACE_INFO*
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @pVramSurfaceInfo : Win32cr::Media::KernelStreaming::VRAM_SURFACE_INFO*)
+    end
+  end
+
+  @[Extern]
+  struct SECURE_BUFFER_INFO
+    property guidBufferIdentifier : LibC::GUID
+    property cbBufferSize : UInt32
+    property cbCaptured : UInt32
+    property ullReserved : UInt64[16]
+    def initialize(@guidBufferIdentifier : LibC::GUID, @cbBufferSize : UInt32, @cbCaptured : UInt32, @ullReserved : UInt64[16])
+    end
+  end
+
+  @[Extern]
+  struct KS_FRAME_INFO
+    property extended_header_size : UInt32
+    property dwFrameFlags : UInt32
+    property picture_number : Int64
+    property drop_count : Int64
+    property hDirectDraw : Win32cr::Foundation::HANDLE
+    property hSurfaceHandle : Win32cr::Foundation::HANDLE
+    property direct_draw_rect : Win32cr::Foundation::RECT
+    property anonymous1 : Anonymous1_e__Union_
+    property reserved2 : UInt32
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      frame_completion_number : UInt64 do
+    struct Anonymous2_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property frame_completion_number : UInt64
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        reserved3 : UInt32,
-        reserved4 : UInt32
+      struct Anonymous_e__Struct_
+    property reserved3 : UInt32
+    property reserved4 : UInt32
+    def initialize(@reserved3 : UInt32, @reserved4 : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @frame_completion_number : UInt64)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      lSurfacePitch : Int32,
-      reserved1 : UInt32
+    struct Anonymous1_e__Union_
+    property lSurfacePitch : Int32
+    property reserved1 : UInt32
+    def initialize(@lSurfacePitch : Int32, @reserved1 : UInt32)
+    end
+    end
 
+    def initialize(@extended_header_size : UInt32, @dwFrameFlags : UInt32, @picture_number : Int64, @drop_count : Int64, @hDirectDraw : Win32cr::Foundation::HANDLE, @hSurfaceHandle : Win32cr::Foundation::HANDLE, @direct_draw_rect : Win32cr::Foundation::RECT, @anonymous1 : Anonymous1_e__Union_, @reserved2 : UInt32, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record KS_VBI_FRAME_INFO,
-    extended_header_size : UInt32,
-    dwFrameFlags : UInt32,
-    picture_number : Int64,
-    drop_count : Int64,
-    dwSamplingFrequency : UInt32,
-    tv_tuner_change_info : Win32cr::Media::KernelStreaming::KS_TVTUNER_CHANGE_INFO,
-    vbi_info_header : Win32cr::Media::KernelStreaming::KS_VBIINFOHEADER
+  struct KS_VBI_FRAME_INFO
+    property extended_header_size : UInt32
+    property dwFrameFlags : UInt32
+    property picture_number : Int64
+    property drop_count : Int64
+    property dwSamplingFrequency : UInt32
+    property tv_tuner_change_info : Win32cr::Media::KernelStreaming::KS_TVTUNER_CHANGE_INFO
+    property vbi_info_header : Win32cr::Media::KernelStreaming::KS_VBIINFOHEADER
+    def initialize(@extended_header_size : UInt32, @dwFrameFlags : UInt32, @picture_number : Int64, @drop_count : Int64, @dwSamplingFrequency : UInt32, @tv_tuner_change_info : Win32cr::Media::KernelStreaming::KS_TVTUNER_CHANGE_INFO, @vbi_info_header : Win32cr::Media::KernelStreaming::KS_VBIINFOHEADER)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_ALLOCATOR_CONTROL_SURFACE_SIZE_S,
-    cx : UInt32,
-    cy : UInt32
+  struct KSPROPERTY_ALLOCATOR_CONTROL_SURFACE_SIZE_S
+    property cx : UInt32
+    property cy : UInt32
+    def initialize(@cx : UInt32, @cy : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_ALLOCATOR_CONTROL_CAPTURE_CAPS_S,
-    interleaved_cap_supported : UInt32
+  struct KSPROPERTY_ALLOCATOR_CONTROL_CAPTURE_CAPS_S
+    property interleaved_cap_supported : UInt32
+    def initialize(@interleaved_cap_supported : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_ALLOCATOR_CONTROL_CAPTURE_INTERLEAVE_S,
-    interleaved_cap_possible : UInt32
+  struct KSPROPERTY_ALLOCATOR_CONTROL_CAPTURE_INTERLEAVE_S
+    property interleaved_cap_possible : UInt32
+    def initialize(@interleaved_cap_possible : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEOPROCAMP_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    value : Int32,
-    flags : UInt32,
-    capabilities : UInt32
+  struct KSPROPERTY_VIDEOPROCAMP_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property value : Int32
+    property flags : UInt32
+    property capabilities : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @value : Int32, @flags : UInt32, @capabilities : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEOPROCAMP_NODE_S,
-    node_property : Win32cr::Media::KernelStreaming::KSP_NODE,
-    value : Int32,
-    flags : UInt32,
-    capabilities : UInt32
+  struct KSPROPERTY_VIDEOPROCAMP_NODE_S
+    property node_property : Win32cr::Media::KernelStreaming::KSP_NODE
+    property value : Int32
+    property flags : UInt32
+    property capabilities : UInt32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSP_NODE, @value : Int32, @flags : UInt32, @capabilities : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEOPROCAMP_S2,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    value1 : Int32,
-    flags : UInt32,
-    capabilities : UInt32,
-    value2 : Int32
+  struct KSPROPERTY_VIDEOPROCAMP_S2
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property value1 : Int32
+    property flags : UInt32
+    property capabilities : UInt32
+    property value2 : Int32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @value1 : Int32, @flags : UInt32, @capabilities : UInt32, @value2 : Int32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEOPROCAMP_NODE_S2,
-    node_property : Win32cr::Media::KernelStreaming::KSP_NODE,
-    value1 : Int32,
-    flags : UInt32,
-    capabilities : UInt32,
-    value2 : Int32
+  struct KSPROPERTY_VIDEOPROCAMP_NODE_S2
+    property node_property : Win32cr::Media::KernelStreaming::KSP_NODE
+    property value1 : Int32
+    property flags : UInt32
+    property capabilities : UInt32
+    property value2 : Int32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSP_NODE, @value1 : Int32, @flags : UInt32, @capabilities : UInt32, @value2 : Int32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_SELECTOR_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    value : Int32,
-    flags : UInt32,
-    capabilities : UInt32
+  struct KSPROPERTY_SELECTOR_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property value : Int32
+    property flags : UInt32
+    property capabilities : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @value : Int32, @flags : UInt32, @capabilities : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_SELECTOR_NODE_S,
-    node_property : Win32cr::Media::KernelStreaming::KSP_NODE,
-    value : Int32,
-    flags : UInt32,
-    capabilities : UInt32
+  struct KSPROPERTY_SELECTOR_NODE_S
+    property node_property : Win32cr::Media::KernelStreaming::KSP_NODE
+    property value : Int32
+    property flags : UInt32
+    property capabilities : UInt32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSP_NODE, @value : Int32, @flags : UInt32, @capabilities : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TUNER_CAPS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    modes_supported : UInt32,
-    video_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    tv_audio_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    radio_audio_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+  struct KSPROPERTY_TUNER_CAPS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property modes_supported : UInt32
+    property video_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property tv_audio_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property radio_audio_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @modes_supported : UInt32, @video_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @tv_audio_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @radio_audio_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TUNER_IF_MEDIUM_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    if_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+  struct KSPROPERTY_TUNER_IF_MEDIUM_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property if_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @if_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TUNER_MODE_CAPS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    mode : UInt32,
-    standards_supported : UInt32,
-    min_frequency : UInt32,
-    max_frequency : UInt32,
-    tuning_granularity : UInt32,
-    number_of_inputs : UInt32,
-    settling_time : UInt32,
-    strategy : UInt32
+  struct KSPROPERTY_TUNER_MODE_CAPS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property mode : UInt32
+    property standards_supported : UInt32
+    property min_frequency : UInt32
+    property max_frequency : UInt32
+    property tuning_granularity : UInt32
+    property number_of_inputs : UInt32
+    property settling_time : UInt32
+    property strategy : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @mode : UInt32, @standards_supported : UInt32, @min_frequency : UInt32, @max_frequency : UInt32, @tuning_granularity : UInt32, @number_of_inputs : UInt32, @settling_time : UInt32, @strategy : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TUNER_MODE_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    mode : UInt32
+  struct KSPROPERTY_TUNER_MODE_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property mode : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @mode : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TUNER_FREQUENCY_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    frequency : UInt32,
-    last_frequency : UInt32,
-    tuning_flags : UInt32,
-    video_sub_channel : UInt32,
-    audio_sub_channel : UInt32,
-    channel : UInt32,
-    country : UInt32
+  struct KSPROPERTY_TUNER_FREQUENCY_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property frequency : UInt32
+    property last_frequency : UInt32
+    property tuning_flags : UInt32
+    property video_sub_channel : UInt32
+    property audio_sub_channel : UInt32
+    property channel : UInt32
+    property country : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @frequency : UInt32, @last_frequency : UInt32, @tuning_flags : UInt32, @video_sub_channel : UInt32, @audio_sub_channel : UInt32, @channel : UInt32, @country : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TUNER_STANDARD_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    standard : UInt32
+  struct KSPROPERTY_TUNER_STANDARD_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property standard : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @standard : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TUNER_STANDARD_MODE_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    auto_detect : Win32cr::Foundation::BOOL
+  struct KSPROPERTY_TUNER_STANDARD_MODE_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property auto_detect : Win32cr::Foundation::BOOL
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @auto_detect : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TUNER_INPUT_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    input_index : UInt32
+  struct KSPROPERTY_TUNER_INPUT_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property input_index : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @input_index : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TUNER_STATUS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    current_frequency : UInt32,
-    pll_offset : UInt32,
-    signal_strength : UInt32,
-    busy : UInt32
+  struct KSPROPERTY_TUNER_STATUS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property current_frequency : UInt32
+    property pll_offset : UInt32
+    property signal_strength : UInt32
+    property busy : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @current_frequency : UInt32, @pll_offset : UInt32, @signal_strength : UInt32, @busy : UInt32)
+    end
+  end
 
   @[Extern]
-  record TUNER_ANALOG_CAPS_S,
-    mode : UInt32,
-    standards_supported : UInt32,
-    min_frequency : UInt32,
-    max_frequency : UInt32,
-    tuning_granularity : UInt32,
-    settling_time : UInt32,
-    scan_sensing_range : UInt32,
-    fine_tune_sensing_range : UInt32
+  struct TUNER_ANALOG_CAPS_S
+    property mode : UInt32
+    property standards_supported : UInt32
+    property min_frequency : UInt32
+    property max_frequency : UInt32
+    property tuning_granularity : UInt32
+    property settling_time : UInt32
+    property scan_sensing_range : UInt32
+    property fine_tune_sensing_range : UInt32
+    def initialize(@mode : UInt32, @standards_supported : UInt32, @min_frequency : UInt32, @max_frequency : UInt32, @tuning_granularity : UInt32, @settling_time : UInt32, @scan_sensing_range : UInt32, @fine_tune_sensing_range : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TUNER_SCAN_CAPS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    fSupportsHardwareAssistedScanning : Win32cr::Foundation::BOOL,
-    supported_broadcast_standards : UInt32,
-    guid_bucket : Void*,
-    lengthofBucket : UInt32
+  struct KSPROPERTY_TUNER_SCAN_CAPS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property fSupportsHardwareAssistedScanning : Win32cr::Foundation::BOOL
+    property supported_broadcast_standards : UInt32
+    property guid_bucket : Void*
+    property lengthofBucket : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @fSupportsHardwareAssistedScanning : Win32cr::Foundation::BOOL, @supported_broadcast_standards : UInt32, @guid_bucket : Void*, @lengthofBucket : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TUNER_NETWORKTYPE_SCAN_CAPS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    network_type : LibC::GUID,
-    buffer_size : UInt32,
-    network_tuner_capabilities : Void*
+  struct KSPROPERTY_TUNER_NETWORKTYPE_SCAN_CAPS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property network_type : LibC::GUID
+    property buffer_size : UInt32
+    property network_tuner_capabilities : Void*
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @network_type : LibC::GUID, @buffer_size : UInt32, @network_tuner_capabilities : Void*)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TUNER_SCAN_STATUS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    lock_status : Win32cr::Media::KernelStreaming::TunerDecoderLockType_,
-    current_frequency : UInt32
+  struct KSPROPERTY_TUNER_SCAN_STATUS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property lock_status : Win32cr::Media::KernelStreaming::TunerDecoderLockType_
+    property current_frequency : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @lock_status : Win32cr::Media::KernelStreaming::TunerDecoderLockType_, @current_frequency : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSEVENT_TUNER_INITIATE_SCAN_S,
-    event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA,
-    start_frequency : UInt32,
-    end_frequency : UInt32
+  struct KSEVENT_TUNER_INITIATE_SCAN_S
+    property event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA
+    property start_frequency : UInt32
+    property end_frequency : UInt32
+    def initialize(@event_data : Win32cr::Media::KernelStreaming::KSEVENTDATA, @start_frequency : UInt32, @end_frequency : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEOENCODER_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    value : Int32,
-    flags : UInt32,
-    capabilities : UInt32
+  struct KSPROPERTY_VIDEOENCODER_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property value : Int32
+    property flags : UInt32
+    property capabilities : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @value : Int32, @flags : UInt32, @capabilities : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEODECODER_CAPS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    standards_supported : UInt32,
-    capabilities : UInt32,
-    settling_time : UInt32,
-    h_sync_per_v_sync : UInt32
+  struct KSPROPERTY_VIDEODECODER_CAPS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property standards_supported : UInt32
+    property capabilities : UInt32
+    property settling_time : UInt32
+    property h_sync_per_v_sync : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @standards_supported : UInt32, @capabilities : UInt32, @settling_time : UInt32, @h_sync_per_v_sync : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEODECODER_STATUS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    number_of_lines : UInt32,
-    signal_locked : UInt32
+  struct KSPROPERTY_VIDEODECODER_STATUS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property number_of_lines : UInt32
+    property signal_locked : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @number_of_lines : UInt32, @signal_locked : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEODECODER_STATUS2_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    number_of_lines : UInt32,
-    signal_locked : UInt32,
-    chroma_lock : UInt32
+  struct KSPROPERTY_VIDEODECODER_STATUS2_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property number_of_lines : UInt32
+    property signal_locked : UInt32
+    property chroma_lock : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @number_of_lines : UInt32, @signal_locked : UInt32, @chroma_lock : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEODECODER_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    value : UInt32
+  struct KSPROPERTY_VIDEODECODER_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property value : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @value : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CAMERACONTROL_S_EX,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    value : Int32,
-    flags : UInt32,
-    capabilities : UInt32,
-    focus_rect : Win32cr::Foundation::RECT
+  struct KSPROPERTY_CAMERACONTROL_S_EX
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property value : Int32
+    property flags : UInt32
+    property capabilities : UInt32
+    property focus_rect : Win32cr::Foundation::RECT
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @value : Int32, @flags : UInt32, @capabilities : UInt32, @focus_rect : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CAMERACONTROL_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    value : Int32,
-    flags : UInt32,
-    capabilities : UInt32
+  struct KSPROPERTY_CAMERACONTROL_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property value : Int32
+    property flags : UInt32
+    property capabilities : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @value : Int32, @flags : UInt32, @capabilities : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CAMERACONTROL_NODE_S,
-    node_property : Win32cr::Media::KernelStreaming::KSP_NODE,
-    value : Int32,
-    flags : UInt32,
-    capabilities : UInt32
+  struct KSPROPERTY_CAMERACONTROL_NODE_S
+    property node_property : Win32cr::Media::KernelStreaming::KSP_NODE
+    property value : Int32
+    property flags : UInt32
+    property capabilities : UInt32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSP_NODE, @value : Int32, @flags : UInt32, @capabilities : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CAMERACONTROL_S2,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    value1 : Int32,
-    flags : UInt32,
-    capabilities : UInt32,
-    value2 : Int32
+  struct KSPROPERTY_CAMERACONTROL_S2
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property value1 : Int32
+    property flags : UInt32
+    property capabilities : UInt32
+    property value2 : Int32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @value1 : Int32, @flags : UInt32, @capabilities : UInt32, @value2 : Int32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CAMERACONTROL_NODE_S2,
-    node_property : Win32cr::Media::KernelStreaming::KSP_NODE,
-    value1 : Int32,
-    flags : UInt32,
-    capabilities : UInt32,
-    value2 : Int32
+  struct KSPROPERTY_CAMERACONTROL_NODE_S2
+    property node_property : Win32cr::Media::KernelStreaming::KSP_NODE
+    property value1 : Int32
+    property flags : UInt32
+    property capabilities : UInt32
+    property value2 : Int32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSP_NODE, @value1 : Int32, @flags : UInt32, @capabilities : UInt32, @value2 : Int32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CAMERACONTROL_FOCAL_LENGTH_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    lOcularFocalLength : Int32,
-    lObjectiveFocalLengthMin : Int32,
-    lObjectiveFocalLengthMax : Int32
+  struct KSPROPERTY_CAMERACONTROL_FOCAL_LENGTH_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property lOcularFocalLength : Int32
+    property lObjectiveFocalLengthMin : Int32
+    property lObjectiveFocalLengthMax : Int32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @lOcularFocalLength : Int32, @lObjectiveFocalLengthMin : Int32, @lObjectiveFocalLengthMax : Int32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CAMERACONTROL_NODE_FOCAL_LENGTH_S,
-    node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY,
-    lOcularFocalLength : Int32,
-    lObjectiveFocalLengthMin : Int32,
-    lObjectiveFocalLengthMax : Int32
+  struct KSPROPERTY_CAMERACONTROL_NODE_FOCAL_LENGTH_S
+    property node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY
+    property lOcularFocalLength : Int32
+    property lObjectiveFocalLengthMin : Int32
+    property lObjectiveFocalLengthMax : Int32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @lOcularFocalLength : Int32, @lObjectiveFocalLengthMin : Int32, @lObjectiveFocalLengthMax : Int32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CAMERACONTROL_FLASH_S,
-    flash : UInt32,
-    capabilities : UInt32
+  struct KSPROPERTY_CAMERACONTROL_FLASH_S
+    property flash : UInt32
+    property capabilities : UInt32
+    def initialize(@flash : UInt32, @capabilities : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CAMERACONTROL_VIDEOSTABILIZATION_MODE_S,
-    video_stabilization_mode : UInt32,
-    capabilities : UInt32
+  struct KSPROPERTY_CAMERACONTROL_VIDEOSTABILIZATION_MODE_S
+    property video_stabilization_mode : UInt32
+    property capabilities : UInt32
+    def initialize(@video_stabilization_mode : UInt32, @capabilities : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S,
-    focus_rect : Win32cr::Foundation::RECT,
-    auto_focus_lock : Win32cr::Foundation::BOOL,
-    auto_exposure_lock : Win32cr::Foundation::BOOL,
-    auto_whitebalance_lock : Win32cr::Foundation::BOOL,
-    anonymous : Anonymous_e__Union_ do
+  struct KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S
+    property focus_rect : Win32cr::Foundation::RECT
+    property auto_focus_lock : Win32cr::Foundation::BOOL
+    property auto_exposure_lock : Win32cr::Foundation::BOOL
+    property auto_whitebalance_lock : Win32cr::Foundation::BOOL
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      capabilities : UInt32,
-      configuration : UInt32
+    struct Anonymous_e__Union_
+    property capabilities : UInt32
+    property configuration : UInt32
+    def initialize(@capabilities : UInt32, @configuration : UInt32)
+    end
+    end
 
+    def initialize(@focus_rect : Win32cr::Foundation::RECT, @auto_focus_lock : Win32cr::Foundation::BOOL, @auto_exposure_lock : Win32cr::Foundation::BOOL, @auto_whitebalance_lock : Win32cr::Foundation::BOOL, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record KSPROPERTY_CAMERACONTROL_IMAGE_PIN_CAPABILITY_S,
-    capabilities : UInt32,
-    reserved0 : UInt32
+  struct KSPROPERTY_CAMERACONTROL_IMAGE_PIN_CAPABILITY_S
+    property capabilities : UInt32
+    property reserved0 : UInt32
+    def initialize(@capabilities : UInt32, @reserved0 : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_HEADER,
-    version : UInt32,
-    pin_id : UInt32,
-    size : UInt32,
-    result : UInt32,
-    flags : UInt64,
-    capability : UInt64
+  struct KSCAMERA_EXTENDEDPROP_HEADER
+    property version : UInt32
+    property pin_id : UInt32
+    property size : UInt32
+    property result : UInt32
+    property flags : UInt64
+    property capability : UInt64
+    def initialize(@version : UInt32, @pin_id : UInt32, @size : UInt32, @result : UInt32, @flags : UInt64, @capability : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_VALUE,
-    value : Value_e__Union_ do
+  struct KSCAMERA_EXTENDEDPROP_VALUE
+    property value : Value_e__Union_
 
     # Nested Type Value_e__Union_
     @[Extern(union: true)]
-    record Value_e__Union_,
-      dbl : Float64,
-      ull : UInt64,
-      ul : UInt32,
-      ratio : Win32cr::Foundation::ULARGE_INTEGER,
-      l : Int32,
-      ll : Int64
+    struct Value_e__Union_
+    property dbl : Float64
+    property ull : UInt64
+    property ul : UInt32
+    property ratio : Win32cr::Foundation::ULARGE_INTEGER
+    property l : Int32
+    property ll : Int64
+    def initialize(@dbl : Float64, @ull : UInt64, @ul : UInt32, @ratio : Win32cr::Foundation::ULARGE_INTEGER, @l : Int32, @ll : Int64)
+    end
+    end
 
+    def initialize(@value : Value_e__Union_)
+    end
   end
 
   @[Extern]
-  record KSCAMERA_MAXVIDEOFPS_FORPHOTORES,
-    photo_res_width : UInt32,
-    photo_res_height : UInt32,
-    preview_fps_num : UInt32,
-    preview_fps_denom : UInt32,
-    capture_fps_num : UInt32,
-    capture_fps_denom : UInt32
+  struct KSCAMERA_MAXVIDEOFPS_FORPHOTORES
+    property photo_res_width : UInt32
+    property photo_res_height : UInt32
+    property preview_fps_num : UInt32
+    property preview_fps_denom : UInt32
+    property capture_fps_num : UInt32
+    property capture_fps_denom : UInt32
+    def initialize(@photo_res_width : UInt32, @photo_res_height : UInt32, @preview_fps_num : UInt32, @preview_fps_denom : UInt32, @capture_fps_num : UInt32, @capture_fps_denom : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_PHOTOMODE,
-    requested_history_frames : UInt32,
-    max_history_frames : UInt32,
-    sub_mode : UInt32,
-    reserved : UInt32
+  struct KSCAMERA_EXTENDEDPROP_PHOTOMODE
+    property requested_history_frames : UInt32
+    property max_history_frames : UInt32
+    property sub_mode : UInt32
+    property reserved : UInt32
+    def initialize(@requested_history_frames : UInt32, @max_history_frames : UInt32, @sub_mode : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_VIDEOPROCSETTING,
-    mode : UInt32,
-    min : Int32,
-    max : Int32,
-    step : Int32,
-    video_proc : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_VALUE,
-    reserved : UInt64
+  struct KSCAMERA_EXTENDEDPROP_VIDEOPROCSETTING
+    property mode : UInt32
+    property min : Int32
+    property max : Int32
+    property step : Int32
+    property video_proc : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_VALUE
+    property reserved : UInt64
+    def initialize(@mode : UInt32, @min : Int32, @max : Int32, @step : Int32, @video_proc : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_VALUE, @reserved : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_EVCOMPENSATION,
-    mode : UInt32,
-    min : Int32,
-    max : Int32,
-    value : Int32,
-    reserved : UInt64
+  struct KSCAMERA_EXTENDEDPROP_EVCOMPENSATION
+    property mode : UInt32
+    property min : Int32
+    property max : Int32
+    property value : Int32
+    property reserved : UInt64
+    def initialize(@mode : UInt32, @min : Int32, @max : Int32, @value : Int32, @reserved : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_FIELDOFVIEW,
-    normalized_focal_length_x : UInt32,
-    normalized_focal_length_y : UInt32,
-    flag : UInt32,
-    reserved : UInt32
+  struct KSCAMERA_EXTENDEDPROP_FIELDOFVIEW
+    property normalized_focal_length_x : UInt32
+    property normalized_focal_length_y : UInt32
+    property flag : UInt32
+    property reserved : UInt32
+    def initialize(@normalized_focal_length_x : UInt32, @normalized_focal_length_y : UInt32, @flag : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_CAMERAOFFSET,
-    pitch_angle : Int32,
-    yaw_angle : Int32,
-    flag : UInt32,
-    reserved : UInt32
+  struct KSCAMERA_EXTENDEDPROP_CAMERAOFFSET
+    property pitch_angle : Int32
+    property yaw_angle : Int32
+    property flag : UInt32
+    property reserved : UInt32
+    def initialize(@pitch_angle : Int32, @yaw_angle : Int32, @flag : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_METADATAINFO,
-    buffer_alignment : Int32,
-    max_metadata_buffer_size : UInt32
+  struct KSCAMERA_EXTENDEDPROP_METADATAINFO
+    property buffer_alignment : Int32
+    property max_metadata_buffer_size : UInt32
+    def initialize(@buffer_alignment : Int32, @max_metadata_buffer_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_METADATA_ITEMHEADER,
-    metadata_id : UInt32,
-    size : UInt32
+  struct KSCAMERA_METADATA_ITEMHEADER
+    property metadata_id : UInt32
+    property size : UInt32
+    def initialize(@metadata_id : UInt32, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_METADATA_PHOTOCONFIRMATION,
-    header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER,
-    photo_confirmation_index : UInt32,
-    reserved : UInt32
+  struct KSCAMERA_METADATA_PHOTOCONFIRMATION
+    property header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER
+    property photo_confirmation_index : UInt32
+    property reserved : UInt32
+    def initialize(@header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER, @photo_confirmation_index : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_METADATA_FRAMEILLUMINATION,
-    header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER,
-    flags : UInt32,
-    reserved : UInt32
+  struct KSCAMERA_METADATA_FRAMEILLUMINATION
+    property header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER
+    property flags : UInt32
+    property reserved : UInt32
+    def initialize(@header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER, @flags : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_METADATA_CAPTURESTATS,
-    header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER,
-    flags : UInt32,
-    reserved : UInt32,
-    exposure_time : UInt64,
-    exposure_compensation_flags : UInt64,
-    exposure_compensation_value : Int32,
-    iso_speed : UInt32,
-    focus_state : UInt32,
-    lens_position : UInt32,
-    white_balance : UInt32,
-    flash : UInt32,
-    flash_power : UInt32,
-    zoom_factor : UInt32,
-    scene_mode : UInt64,
-    sensor_framerate : UInt64
+  struct KSCAMERA_METADATA_CAPTURESTATS
+    property header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER
+    property flags : UInt32
+    property reserved : UInt32
+    property exposure_time : UInt64
+    property exposure_compensation_flags : UInt64
+    property exposure_compensation_value : Int32
+    property iso_speed : UInt32
+    property focus_state : UInt32
+    property lens_position : UInt32
+    property white_balance : UInt32
+    property flash : UInt32
+    property flash_power : UInt32
+    property zoom_factor : UInt32
+    property scene_mode : UInt64
+    property sensor_framerate : UInt64
+    def initialize(@header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER, @flags : UInt32, @reserved : UInt32, @exposure_time : UInt64, @exposure_compensation_flags : UInt64, @exposure_compensation_value : Int32, @iso_speed : UInt32, @focus_state : UInt32, @lens_position : UInt32, @white_balance : UInt32, @flash : UInt32, @flash_power : UInt32, @zoom_factor : UInt32, @scene_mode : UInt64, @sensor_framerate : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_ROI_CONFIGCAPSHEADER,
-    size : UInt32,
-    config_cap_count : UInt32,
-    reserved : UInt64
+  struct KSCAMERA_EXTENDEDPROP_ROI_CONFIGCAPSHEADER
+    property size : UInt32
+    property config_cap_count : UInt32
+    property reserved : UInt64
+    def initialize(@size : UInt32, @config_cap_count : UInt32, @reserved : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_ROI_CONFIGCAPS,
-    control_id : UInt32,
-    max_number_of_ro_is : UInt32,
-    capability : UInt64
+  struct KSCAMERA_EXTENDEDPROP_ROI_CONFIGCAPS
+    property control_id : UInt32
+    property max_number_of_ro_is : UInt32
+    property capability : UInt64
+    def initialize(@control_id : UInt32, @max_number_of_ro_is : UInt32, @capability : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_ROI_ISPCONTROLHEADER,
-    size : UInt32,
-    control_count : UInt32,
-    reserved : UInt64
+  struct KSCAMERA_EXTENDEDPROP_ROI_ISPCONTROLHEADER
+    property size : UInt32
+    property control_count : UInt32
+    property reserved : UInt64
+    def initialize(@size : UInt32, @control_count : UInt32, @reserved : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_ROI_ISPCONTROL,
-    control_id : UInt32,
-    roi_count : UInt32,
-    result : UInt32,
-    reserved : UInt32
+  struct KSCAMERA_EXTENDEDPROP_ROI_ISPCONTROL
+    property control_id : UInt32
+    property roi_count : UInt32
+    property result : UInt32
+    property reserved : UInt32
+    def initialize(@control_id : UInt32, @roi_count : UInt32, @result : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_ROI_INFO,
-    region : Win32cr::Foundation::RECT,
-    flags : UInt64,
-    weight : Int32,
-    region_of_interest_type : Int32
+  struct KSCAMERA_EXTENDEDPROP_ROI_INFO
+    property region : Win32cr::Foundation::RECT
+    property flags : UInt64
+    property weight : Int32
+    property region_of_interest_type : Int32
+    def initialize(@region : Win32cr::Foundation::RECT, @flags : UInt64, @weight : Int32, @region_of_interest_type : Int32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_ROI_WHITEBALANCE,
-    roi_info : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_ROI_INFO,
-    reserved : UInt64
+  struct KSCAMERA_EXTENDEDPROP_ROI_WHITEBALANCE
+    property roi_info : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_ROI_INFO
+    property reserved : UInt64
+    def initialize(@roi_info : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_ROI_INFO, @reserved : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_ROI_EXPOSURE,
-    roi_info : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_ROI_INFO,
-    reserved : UInt64
+  struct KSCAMERA_EXTENDEDPROP_ROI_EXPOSURE
+    property roi_info : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_ROI_INFO
+    property reserved : UInt64
+    def initialize(@roi_info : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_ROI_INFO, @reserved : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_ROI_FOCUS,
-    roi_info : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_ROI_INFO,
-    reserved : UInt64
+  struct KSCAMERA_EXTENDEDPROP_ROI_FOCUS
+    property roi_info : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_ROI_INFO
+    property reserved : UInt64
+    def initialize(@roi_info : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_ROI_INFO, @reserved : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_PERFRAMESETTING_CAP_ITEM_HEADER,
-    size : UInt32,
-    type__ : UInt32,
-    flags : UInt64
+  struct KSCAMERA_PERFRAMESETTING_CAP_ITEM_HEADER
+    property size : UInt32
+    property type__ : UInt32
+    property flags : UInt64
+    def initialize(@size : UInt32, @type__ : UInt32, @flags : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_PERFRAMESETTING_CAP_HEADER,
-    size : UInt32,
-    item_count : UInt32,
-    flags : UInt64
+  struct KSCAMERA_PERFRAMESETTING_CAP_HEADER
+    property size : UInt32
+    property item_count : UInt32
+    property flags : UInt64
+    def initialize(@size : UInt32, @item_count : UInt32, @flags : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_PERFRAMESETTING_CUSTOM_ITEM,
-    size : UInt32,
-    reserved : UInt32,
-    id : LibC::GUID
+  struct KSCAMERA_PERFRAMESETTING_CUSTOM_ITEM
+    property size : UInt32
+    property reserved : UInt32
+    property id : LibC::GUID
+    def initialize(@size : UInt32, @reserved : UInt32, @id : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_PERFRAMESETTING_ITEM_HEADER,
-    size : UInt32,
-    type__ : UInt32,
-    flags : UInt64
+  struct KSCAMERA_PERFRAMESETTING_ITEM_HEADER
+    property size : UInt32
+    property type__ : UInt32
+    property flags : UInt64
+    def initialize(@size : UInt32, @type__ : UInt32, @flags : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_PERFRAMESETTING_FRAME_HEADER,
-    size : UInt32,
-    id : UInt32,
-    item_count : UInt32,
-    reserved : UInt32
+  struct KSCAMERA_PERFRAMESETTING_FRAME_HEADER
+    property size : UInt32
+    property id : UInt32
+    property item_count : UInt32
+    property reserved : UInt32
+    def initialize(@size : UInt32, @id : UInt32, @item_count : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_PERFRAMESETTING_HEADER,
-    size : UInt32,
-    frame_count : UInt32,
-    id : LibC::GUID,
-    flags : UInt64,
-    loop_count : UInt32,
-    reserved : UInt32
+  struct KSCAMERA_PERFRAMESETTING_HEADER
+    property size : UInt32
+    property frame_count : UInt32
+    property id : LibC::GUID
+    property flags : UInt64
+    property loop_count : UInt32
+    property reserved : UInt32
+    def initialize(@size : UInt32, @frame_count : UInt32, @id : LibC::GUID, @flags : UInt64, @loop_count : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_SETTING,
-    origin_x : Int32,
-    origin_y : Int32,
-    window_size : Int32,
-    reserved : UInt32
+  struct KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_SETTING
+    property origin_x : Int32
+    property origin_y : Int32
+    property window_size : Int32
+    property reserved : UInt32
+    def initialize(@origin_x : Int32, @origin_y : Int32, @window_size : Int32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_METADATA_DIGITALWINDOW,
-    header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER,
-    window : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_SETTING
+  struct KSCAMERA_METADATA_DIGITALWINDOW
+    property header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER
+    property window : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_SETTING
+    def initialize(@header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER, @window : Win32cr::Media::KernelStreaming::KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_SETTING)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_CONFIGCAPSHEADER,
-    size : UInt32,
-    count : UInt32
+  struct KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_CONFIGCAPSHEADER
+    property size : UInt32
+    property count : UInt32
+    def initialize(@size : UInt32, @count : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_CONFIGCAPS,
-    resolution_x : Int32,
-    resolution_y : Int32,
-    porch_top : Int32,
-    porch_left : Int32,
-    porch_bottom : Int32,
-    porch_right : Int32,
-    non_upscaling_window_size : Int32,
-    min_window_size : Int32,
-    max_window_size : Int32,
-    reserved : Int32
+  struct KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_CONFIGCAPS
+    property resolution_x : Int32
+    property resolution_y : Int32
+    property porch_top : Int32
+    property porch_left : Int32
+    property porch_bottom : Int32
+    property porch_right : Int32
+    property non_upscaling_window_size : Int32
+    property min_window_size : Int32
+    property max_window_size : Int32
+    property reserved : Int32
+    def initialize(@resolution_x : Int32, @resolution_y : Int32, @porch_top : Int32, @porch_left : Int32, @porch_bottom : Int32, @porch_right : Int32, @non_upscaling_window_size : Int32, @min_window_size : Int32, @max_window_size : Int32, @reserved : Int32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_BACKGROUNDSEGMENTATION_CONFIGCAPS,
-    resolution : Win32cr::Foundation::SIZE,
-    max_frame_rate : MaxFrameRate_e__Struct_,
-    mask_resolution : Win32cr::Foundation::SIZE,
-    sub_type : LibC::GUID do
+  struct KSCAMERA_EXTENDEDPROP_BACKGROUNDSEGMENTATION_CONFIGCAPS
+    property resolution : Win32cr::Foundation::SIZE
+    property max_frame_rate : MaxFrameRate_e__Struct_
+    property mask_resolution : Win32cr::Foundation::SIZE
+    property sub_type : LibC::GUID
 
     # Nested Type MaxFrameRate_e__Struct_
     @[Extern]
-    record MaxFrameRate_e__Struct_,
-      numerator : Int32,
-      denominator : Int32
+    struct MaxFrameRate_e__Struct_
+    property numerator : Int32
+    property denominator : Int32
+    def initialize(@numerator : Int32, @denominator : Int32)
+    end
+    end
 
+    def initialize(@resolution : Win32cr::Foundation::SIZE, @max_frame_rate : MaxFrameRate_e__Struct_, @mask_resolution : Win32cr::Foundation::SIZE, @sub_type : LibC::GUID)
+    end
   end
 
   @[Extern]
-  record KSCAMERA_METADATA_BACKGROUNDSEGMENTATIONMASK,
-    header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER,
-    mask_coverage_bounding_box : Win32cr::Foundation::RECT,
-    mask_resolution : Win32cr::Foundation::SIZE,
-    foreground_bounding_box : Win32cr::Foundation::RECT,
-    mask_data : UInt8*
+  struct KSCAMERA_METADATA_BACKGROUNDSEGMENTATIONMASK
+    property header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER
+    property mask_coverage_bounding_box : Win32cr::Foundation::RECT
+    property mask_resolution : Win32cr::Foundation::SIZE
+    property foreground_bounding_box : Win32cr::Foundation::RECT
+    property mask_data : UInt8*
+    def initialize(@header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER, @mask_coverage_bounding_box : Win32cr::Foundation::RECT, @mask_resolution : Win32cr::Foundation::SIZE, @foreground_bounding_box : Win32cr::Foundation::RECT, @mask_data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_EXTENDEDPROP_PROFILE,
-    profile_id : LibC::GUID,
-    index : UInt32,
-    reserved : UInt32
+  struct KSCAMERA_EXTENDEDPROP_PROFILE
+    property profile_id : LibC::GUID
+    property index : UInt32
+    property reserved : UInt32
+    def initialize(@profile_id : LibC::GUID, @index : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_PROFILE_MEDIAINFO,
-    resolution : Resolution_e__Struct_,
-    max_frame_rate : MaxFrameRate_e__Struct_,
-    flags : UInt64,
-    data0 : UInt32,
-    data1 : UInt32,
-    data2 : UInt32,
-    data3 : UInt32 do
+  struct KSCAMERA_PROFILE_MEDIAINFO
+    property resolution : Resolution_e__Struct_
+    property max_frame_rate : MaxFrameRate_e__Struct_
+    property flags : UInt64
+    property data0 : UInt32
+    property data1 : UInt32
+    property data2 : UInt32
+    property data3 : UInt32
 
     # Nested Type Resolution_e__Struct_
     @[Extern]
-    record Resolution_e__Struct_,
-      x : UInt32,
-      y : UInt32
+    struct Resolution_e__Struct_
+    property x : UInt32
+    property y : UInt32
+    def initialize(@x : UInt32, @y : UInt32)
+    end
+    end
 
 
     # Nested Type MaxFrameRate_e__Struct_
     @[Extern]
-    record MaxFrameRate_e__Struct_,
-      numerator : UInt32,
-      denominator : UInt32
+    struct MaxFrameRate_e__Struct_
+    property numerator : UInt32
+    property denominator : UInt32
+    def initialize(@numerator : UInt32, @denominator : UInt32)
+    end
+    end
 
+    def initialize(@resolution : Resolution_e__Struct_, @max_frame_rate : MaxFrameRate_e__Struct_, @flags : UInt64, @data0 : UInt32, @data1 : UInt32, @data2 : UInt32, @data3 : UInt32)
+    end
   end
 
   @[Extern]
-  record KSCAMERA_PROFILE_PININFO,
-    pin_category : LibC::GUID,
-    anonymous : Anonymous_e__Union_,
-    media_info_count : UInt32,
-    media_infos : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_MEDIAINFO* do
+  struct KSCAMERA_PROFILE_PININFO
+    property pin_category : LibC::GUID
+    property anonymous : Anonymous_e__Union_
+    property media_info_count : UInt32
+    property media_infos : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_MEDIAINFO*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      reserved : UInt32 do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property reserved : UInt32
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        pin_index : UInt16,
-        profile_sensor_type : UInt16
+      struct Anonymous_e__Struct_
+    property pin_index : UInt16
+    property profile_sensor_type : UInt16
+    def initialize(@pin_index : UInt16, @profile_sensor_type : UInt16)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @reserved : UInt32)
+    end
     end
 
+    def initialize(@pin_category : LibC::GUID, @anonymous : Anonymous_e__Union_, @media_info_count : UInt32, @media_infos : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_MEDIAINFO*)
+    end
   end
 
   @[Extern]
-  record KSCAMERA_PROFILE_INFO,
-    profile_id : LibC::GUID,
-    index : UInt32,
-    pin_count : UInt32,
-    pins : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_PININFO*
+  struct KSCAMERA_PROFILE_INFO
+    property profile_id : LibC::GUID
+    property index : UInt32
+    property pin_count : UInt32
+    property pins : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_PININFO*
+    def initialize(@profile_id : LibC::GUID, @index : UInt32, @pin_count : UInt32, @pins : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_PININFO*)
+    end
+  end
 
   @[Extern]
-  record KSCAMERA_PROFILE_CONCURRENCYINFO,
-    reference_guid : LibC::GUID,
-    reserved : UInt32,
-    profile_count : UInt32,
-    profiles : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_INFO*
+  struct KSCAMERA_PROFILE_CONCURRENCYINFO
+    property reference_guid : LibC::GUID
+    property reserved : UInt32
+    property profile_count : UInt32
+    property profiles : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_INFO*
+    def initialize(@reference_guid : LibC::GUID, @reserved : UInt32, @profile_count : UInt32, @profiles : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_INFO*)
+    end
+  end
 
   @[Extern]
-  record KSDEVICE_PROFILE_INFO,
-    type__ : UInt32,
-    size : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct KSDEVICE_PROFILE_INFO
+    property type__ : UInt32
+    property size : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      camera : Camera_e__Struct_ do
+    struct Anonymous_e__Union_
+    property camera : Camera_e__Struct_
 
       # Nested Type Camera_e__Struct_
       @[Extern]
-      record Camera_e__Struct_,
-        info : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_INFO,
-        reserved : UInt32,
-        concurrency_count : UInt32,
-        concurrency : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_CONCURRENCYINFO*
+      struct Camera_e__Struct_
+    property info : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_INFO
+    property reserved : UInt32
+    property concurrency_count : UInt32
+    property concurrency : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_CONCURRENCYINFO*
+    def initialize(@info : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_INFO, @reserved : UInt32, @concurrency_count : UInt32, @concurrency : Win32cr::Media::KernelStreaming::KSCAMERA_PROFILE_CONCURRENCYINFO*)
+    end
+      end
 
+    def initialize(@camera : Camera_e__Struct_)
+    end
     end
 
+    def initialize(@type__ : UInt32, @size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record WNF_KSCAMERA_STREAMSTATE_INFO,
-    process_id : UInt32,
-    session_id : UInt32,
-    stream_state : UInt32,
-    reserved : UInt32
-
-  @[Extern]
-  record KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_HEADER,
-    size : UInt32,
-    type__ : Win32cr::Media::KernelStreaming::KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE
-
-  @[Extern]
-  record KSPROPERTY_NETWORKCAMERACONTROL_METADATA_INFO,
-    metadata_items : UInt32,
-    size : UInt32,
-    ptz_status : Win32cr::Foundation::BOOL,
-    events : Win32cr::Foundation::BOOL,
-    analytics : Win32cr::Foundation::BOOL,
-    reserved : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record KSPROPERTY_NETWORKCAMERACONTROL_EVENT_INFO,
-    header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER,
-    event_filter : UInt16*
-
-  @[Extern]
-  record DEVCAPS,
-    can_record : Int32,
-    can_record_strobe : Int32,
-    has_audio : Int32,
-    has_video : Int32,
-    uses_files : Int32,
-    can_save : Int32,
-    device_type : Int32,
-    tc_read : Int32,
-    tc_write : Int32,
-    ctl_read : Int32,
-    index_read : Int32,
-    preroll : Int32,
-    postroll : Int32,
-    sync_acc : Int32,
-    norm_rate : Int32,
-    can_preview : Int32,
-    can_monitor_src : Int32,
-    can_test : Int32,
-    video_in : Int32,
-    audio_in : Int32,
-    calibrate : Int32,
-    seek_type : Int32,
-    simulated_hardware : Int32
-
-  @[Extern]
-  record KSPROPERTY_EXTDEVICE_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    u : U_e__union_ do
-
-    # Nested Type U_e__union_
-    @[Extern(union: true)]
-    record U_e__union_,
-      capabilities : Win32cr::Media::KernelStreaming::DEVCAPS,
-      dev_port : UInt32,
-      power_state : UInt32,
-      pawchString : UInt16[260],
-      node_unique_id : UInt32[2]
-
+  struct WNF_KSCAMERA_STREAMSTATE_INFO
+    property process_id : UInt32
+    property session_id : UInt32
+    property stream_state : UInt32
+    property reserved : UInt32
+    def initialize(@process_id : UInt32, @session_id : UInt32, @stream_state : UInt32, @reserved : UInt32)
+    end
   end
 
   @[Extern]
-  record TRANSPORTSTATUS,
-    mode : Int32,
-    last_error : Int32,
-    record_inhibit : Int32,
-    servo_lock : Int32,
-    media_present : Int32,
-    media_length : Int32,
-    media_size : Int32,
-    media_track_count : Int32,
-    media_track_length : Int32,
-    media_track_side : Int32,
-    media_type : Int32,
-    link_mode : Int32,
-    notify_on : Int32
+  struct KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_HEADER
+    property size : UInt32
+    property type__ : Win32cr::Media::KernelStreaming::KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE
+    def initialize(@size : UInt32, @type__ : Win32cr::Media::KernelStreaming::KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE)
+    end
+  end
 
   @[Extern]
-  record TRANSPORTBASICPARMS,
-    time_format : Int32,
-    time_reference : Int32,
-    superimpose : Int32,
-    end_stop_action : Int32,
-    record_format : Int32,
-    step_frames : Int32,
-    setp_field : Int32,
-    preroll : Int32,
-    rec_preroll : Int32,
-    postroll : Int32,
-    edit_delay : Int32,
-    play_tc_delay : Int32,
-    rec_tc_delay : Int32,
-    edit_field : Int32,
-    frame_servo : Int32,
-    color_frame_servo : Int32,
-    servo_ref : Int32,
-    warn_genlock : Int32,
-    set_tracking : Int32,
-    volume_name : Int8[40],
-    ballistic : Int32[20],
-    speed : Int32,
-    counter_format : Int32,
-    tuner_channel : Int32,
-    tuner_number : Int32,
-    timer_event : Int32,
-    timer_start_day : Int32,
-    timer_start_time : Int32,
-    timer_stop_day : Int32,
-    timer_stop_time : Int32
+  struct KSPROPERTY_NETWORKCAMERACONTROL_METADATA_INFO
+    property metadata_items : UInt32
+    property size : UInt32
+    property ptz_status : Win32cr::Foundation::BOOL
+    property events : Win32cr::Foundation::BOOL
+    property analytics : Win32cr::Foundation::BOOL
+    property reserved : Win32cr::Foundation::BOOL
+    def initialize(@metadata_items : UInt32, @size : UInt32, @ptz_status : Win32cr::Foundation::BOOL, @events : Win32cr::Foundation::BOOL, @analytics : Win32cr::Foundation::BOOL, @reserved : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record TRANSPORTVIDEOPARMS,
-    output_mode : Int32,
-    input : Int32
+  struct KSPROPERTY_NETWORKCAMERACONTROL_EVENT_INFO
+    property header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER
+    property event_filter : UInt16*
+    def initialize(@header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER, @event_filter : UInt16*)
+    end
+  end
 
   @[Extern]
-  record TRANSPORTAUDIOPARMS,
-    enable_output : Int32,
-    enable_record : Int32,
-    enable_selsync : Int32,
-    input : Int32,
-    monitor_source : Int32
+  struct DEVCAPS
+    property can_record : Int32
+    property can_record_strobe : Int32
+    property has_audio : Int32
+    property has_video : Int32
+    property uses_files : Int32
+    property can_save : Int32
+    property device_type : Int32
+    property tc_read : Int32
+    property tc_write : Int32
+    property ctl_read : Int32
+    property index_read : Int32
+    property preroll : Int32
+    property postroll : Int32
+    property sync_acc : Int32
+    property norm_rate : Int32
+    property can_preview : Int32
+    property can_monitor_src : Int32
+    property can_test : Int32
+    property video_in : Int32
+    property audio_in : Int32
+    property calibrate : Int32
+    property seek_type : Int32
+    property simulated_hardware : Int32
+    def initialize(@can_record : Int32, @can_record_strobe : Int32, @has_audio : Int32, @has_video : Int32, @uses_files : Int32, @can_save : Int32, @device_type : Int32, @tc_read : Int32, @tc_write : Int32, @ctl_read : Int32, @index_read : Int32, @preroll : Int32, @postroll : Int32, @sync_acc : Int32, @norm_rate : Int32, @can_preview : Int32, @can_monitor_src : Int32, @can_test : Int32, @video_in : Int32, @audio_in : Int32, @calibrate : Int32, @seek_type : Int32, @simulated_hardware : Int32)
+    end
+  end
 
   @[Extern]
-  record MEDIUM_INFO,
-    media_present : Win32cr::Foundation::BOOL,
-    media_type : UInt32,
-    record_inhibit : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record TRANSPORT_STATE,
-    mode : UInt32,
-    state : UInt32
-
-  @[Extern]
-  record KSPROPERTY_EXTXPORT_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    u : U_e__union_ do
+  struct KSPROPERTY_EXTDEVICE_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      capabilities : UInt32,
-      signal_mode : UInt32,
-      load_medium : UInt32,
-      medium_info : Win32cr::Media::KernelStreaming::MEDIUM_INFO,
-      x_prt_state : Win32cr::Media::KernelStreaming::TRANSPORT_STATE,
-      timecode : Timecode_e__Struct_,
-      dwTimecode : UInt32,
-      dwAbsTrackNumber : UInt32,
-      raw_avc : RawAVC_e__Struct_ do
+    struct U_e__union_
+    property capabilities : Win32cr::Media::KernelStreaming::DEVCAPS
+    property dev_port : UInt32
+    property power_state : UInt32
+    property pawchString : UInt16[260]
+    property node_unique_id : UInt32[2]
+    def initialize(@capabilities : Win32cr::Media::KernelStreaming::DEVCAPS, @dev_port : UInt32, @power_state : UInt32, @pawchString : UInt16[260], @node_unique_id : UInt32[2])
+    end
+    end
+
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @u : U_e__union_)
+    end
+  end
+
+  @[Extern]
+  struct TRANSPORTSTATUS
+    property mode : Int32
+    property last_error : Int32
+    property record_inhibit : Int32
+    property servo_lock : Int32
+    property media_present : Int32
+    property media_length : Int32
+    property media_size : Int32
+    property media_track_count : Int32
+    property media_track_length : Int32
+    property media_track_side : Int32
+    property media_type : Int32
+    property link_mode : Int32
+    property notify_on : Int32
+    def initialize(@mode : Int32, @last_error : Int32, @record_inhibit : Int32, @servo_lock : Int32, @media_present : Int32, @media_length : Int32, @media_size : Int32, @media_track_count : Int32, @media_track_length : Int32, @media_track_side : Int32, @media_type : Int32, @link_mode : Int32, @notify_on : Int32)
+    end
+  end
+
+  @[Extern]
+  struct TRANSPORTBASICPARMS
+    property time_format : Int32
+    property time_reference : Int32
+    property superimpose : Int32
+    property end_stop_action : Int32
+    property record_format : Int32
+    property step_frames : Int32
+    property setp_field : Int32
+    property preroll : Int32
+    property rec_preroll : Int32
+    property postroll : Int32
+    property edit_delay : Int32
+    property play_tc_delay : Int32
+    property rec_tc_delay : Int32
+    property edit_field : Int32
+    property frame_servo : Int32
+    property color_frame_servo : Int32
+    property servo_ref : Int32
+    property warn_genlock : Int32
+    property set_tracking : Int32
+    property volume_name : Int8[40]
+    property ballistic : Int32[20]
+    property speed : Int32
+    property counter_format : Int32
+    property tuner_channel : Int32
+    property tuner_number : Int32
+    property timer_event : Int32
+    property timer_start_day : Int32
+    property timer_start_time : Int32
+    property timer_stop_day : Int32
+    property timer_stop_time : Int32
+    def initialize(@time_format : Int32, @time_reference : Int32, @superimpose : Int32, @end_stop_action : Int32, @record_format : Int32, @step_frames : Int32, @setp_field : Int32, @preroll : Int32, @rec_preroll : Int32, @postroll : Int32, @edit_delay : Int32, @play_tc_delay : Int32, @rec_tc_delay : Int32, @edit_field : Int32, @frame_servo : Int32, @color_frame_servo : Int32, @servo_ref : Int32, @warn_genlock : Int32, @set_tracking : Int32, @volume_name : Int8[40], @ballistic : Int32[20], @speed : Int32, @counter_format : Int32, @tuner_channel : Int32, @tuner_number : Int32, @timer_event : Int32, @timer_start_day : Int32, @timer_start_time : Int32, @timer_stop_day : Int32, @timer_stop_time : Int32)
+    end
+  end
+
+  @[Extern]
+  struct TRANSPORTVIDEOPARMS
+    property output_mode : Int32
+    property input : Int32
+    def initialize(@output_mode : Int32, @input : Int32)
+    end
+  end
+
+  @[Extern]
+  struct TRANSPORTAUDIOPARMS
+    property enable_output : Int32
+    property enable_record : Int32
+    property enable_selsync : Int32
+    property input : Int32
+    property monitor_source : Int32
+    def initialize(@enable_output : Int32, @enable_record : Int32, @enable_selsync : Int32, @input : Int32, @monitor_source : Int32)
+    end
+  end
+
+  @[Extern]
+  struct MEDIUM_INFO
+    property media_present : Win32cr::Foundation::BOOL
+    property media_type : UInt32
+    property record_inhibit : Win32cr::Foundation::BOOL
+    def initialize(@media_present : Win32cr::Foundation::BOOL, @media_type : UInt32, @record_inhibit : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct TRANSPORT_STATE
+    property mode : UInt32
+    property state : UInt32
+    def initialize(@mode : UInt32, @state : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct KSPROPERTY_EXTXPORT_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property u : U_e__union_
+
+    # Nested Type U_e__union_
+    @[Extern(union: true)]
+    struct U_e__union_
+    property capabilities : UInt32
+    property signal_mode : UInt32
+    property load_medium : UInt32
+    property medium_info : Win32cr::Media::KernelStreaming::MEDIUM_INFO
+    property x_prt_state : Win32cr::Media::KernelStreaming::TRANSPORT_STATE
+    property timecode : Timecode_e__Struct_
+    property dwTimecode : UInt32
+    property dwAbsTrackNumber : UInt32
+    property raw_avc : RawAVC_e__Struct_
 
       # Nested Type RawAVC_e__Struct_
       @[Extern]
-      record RawAVC_e__Struct_,
-        payload_size : UInt32,
-        payload : UInt8[512]
+      struct RawAVC_e__Struct_
+    property payload_size : UInt32
+    property payload : UInt8[512]
+    def initialize(@payload_size : UInt32, @payload : UInt8[512])
+    end
+      end
 
 
       # Nested Type Timecode_e__Struct_
       @[Extern]
-      record Timecode_e__Struct_,
-        frame : UInt8,
-        second : UInt8,
-        minute : UInt8,
-        hour : UInt8
+      struct Timecode_e__Struct_
+    property frame : UInt8
+    property second : UInt8
+    property minute : UInt8
+    property hour : UInt8
+    def initialize(@frame : UInt8, @second : UInt8, @minute : UInt8, @hour : UInt8)
+    end
+      end
 
+    def initialize(@capabilities : UInt32, @signal_mode : UInt32, @load_medium : UInt32, @medium_info : Win32cr::Media::KernelStreaming::MEDIUM_INFO, @x_prt_state : Win32cr::Media::KernelStreaming::TRANSPORT_STATE, @timecode : Timecode_e__Struct_, @dwTimecode : UInt32, @dwAbsTrackNumber : UInt32, @raw_avc : RawAVC_e__Struct_)
+    end
     end
 
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record KSPROPERTY_EXTXPORT_NODE_S,
-    node_property : Win32cr::Media::KernelStreaming::KSP_NODE,
-    u : U_e__union_ do
+  struct KSPROPERTY_EXTXPORT_NODE_S
+    property node_property : Win32cr::Media::KernelStreaming::KSP_NODE
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      capabilities : UInt32,
-      signal_mode : UInt32,
-      load_medium : UInt32,
-      medium_info : Win32cr::Media::KernelStreaming::MEDIUM_INFO,
-      x_prt_state : Win32cr::Media::KernelStreaming::TRANSPORT_STATE,
-      timecode : Timecode_e__Struct_,
-      dwTimecode : UInt32,
-      dwAbsTrackNumber : UInt32,
-      raw_avc : RawAVC_e__Struct_ do
+    struct U_e__union_
+    property capabilities : UInt32
+    property signal_mode : UInt32
+    property load_medium : UInt32
+    property medium_info : Win32cr::Media::KernelStreaming::MEDIUM_INFO
+    property x_prt_state : Win32cr::Media::KernelStreaming::TRANSPORT_STATE
+    property timecode : Timecode_e__Struct_
+    property dwTimecode : UInt32
+    property dwAbsTrackNumber : UInt32
+    property raw_avc : RawAVC_e__Struct_
 
       # Nested Type RawAVC_e__Struct_
       @[Extern]
-      record RawAVC_e__Struct_,
-        payload_size : UInt32,
-        payload : UInt8[512]
+      struct RawAVC_e__Struct_
+    property payload_size : UInt32
+    property payload : UInt8[512]
+    def initialize(@payload_size : UInt32, @payload : UInt8[512])
+    end
+      end
 
 
       # Nested Type Timecode_e__Struct_
       @[Extern]
-      record Timecode_e__Struct_,
-        frame : UInt8,
-        second : UInt8,
-        minute : UInt8,
-        hour : UInt8
+      struct Timecode_e__Struct_
+    property frame : UInt8
+    property second : UInt8
+    property minute : UInt8
+    property hour : UInt8
+    def initialize(@frame : UInt8, @second : UInt8, @minute : UInt8, @hour : UInt8)
+    end
+      end
 
+    def initialize(@capabilities : UInt32, @signal_mode : UInt32, @load_medium : UInt32, @medium_info : Win32cr::Media::KernelStreaming::MEDIUM_INFO, @x_prt_state : Win32cr::Media::KernelStreaming::TRANSPORT_STATE, @timecode : Timecode_e__Struct_, @dwTimecode : UInt32, @dwAbsTrackNumber : UInt32, @raw_avc : RawAVC_e__Struct_)
+    end
     end
 
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSP_NODE, @u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record KSPROPERTY_TIMECODE_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    timecode_samp : Win32cr::Media::TIMECODE_SAMPLE
+  struct KSPROPERTY_TIMECODE_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property timecode_samp : Win32cr::Media::TIMECODE_SAMPLE
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @timecode_samp : Win32cr::Media::TIMECODE_SAMPLE)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TIMECODE_NODE_S,
-    node_property : Win32cr::Media::KernelStreaming::KSP_NODE,
-    timecode_samp : Win32cr::Media::TIMECODE_SAMPLE
+  struct KSPROPERTY_TIMECODE_NODE_S
+    property node_property : Win32cr::Media::KernelStreaming::KSP_NODE
+    property timecode_samp : Win32cr::Media::TIMECODE_SAMPLE
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSP_NODE, @timecode_samp : Win32cr::Media::TIMECODE_SAMPLE)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CROSSBAR_CAPS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    number_of_inputs : UInt32,
-    number_of_outputs : UInt32
+  struct KSPROPERTY_CROSSBAR_CAPS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property number_of_inputs : UInt32
+    property number_of_outputs : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @number_of_inputs : UInt32, @number_of_outputs : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CROSSBAR_PININFO_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    direction : Win32cr::Media::KernelStreaming::KSPIN_DATAFLOW,
-    index : UInt32,
-    pin_type : UInt32,
-    related_pin_index : UInt32,
-    medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+  struct KSPROPERTY_CROSSBAR_PININFO_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property direction : Win32cr::Media::KernelStreaming::KSPIN_DATAFLOW
+    property index : UInt32
+    property pin_type : UInt32
+    property related_pin_index : UInt32
+    property medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @direction : Win32cr::Media::KernelStreaming::KSPIN_DATAFLOW, @index : UInt32, @pin_type : UInt32, @related_pin_index : UInt32, @medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CROSSBAR_ROUTE_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    index_input_pin : UInt32,
-    index_output_pin : UInt32,
-    can_route : UInt32
+  struct KSPROPERTY_CROSSBAR_ROUTE_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property index_input_pin : UInt32
+    property index_output_pin : UInt32
+    property can_route : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @index_input_pin : UInt32, @index_output_pin : UInt32, @can_route : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_CROSSBAR_ACTIVE_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    index_input_pin : UInt32,
-    active : UInt32
+  struct KSPROPERTY_CROSSBAR_ACTIVE_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property index_input_pin : UInt32
+    property active : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @index_input_pin : UInt32, @active : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TVAUDIO_CAPS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    capabilities : UInt32,
-    input_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    output_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+  struct KSPROPERTY_TVAUDIO_CAPS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property capabilities : UInt32
+    property input_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property output_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @capabilities : UInt32, @input_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @output_medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_TVAUDIO_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    mode : UInt32
+  struct KSPROPERTY_TVAUDIO_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property mode : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @mode : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEOCOMPRESSION_GETINFO_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    stream_index : UInt32,
-    default_key_frame_rate : Int32,
-    default_p_frame_rate : Int32,
-    default_quality : Int32,
-    number_of_quality_settings : Int32,
-    capabilities : Int32
+  struct KSPROPERTY_VIDEOCOMPRESSION_GETINFO_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property stream_index : UInt32
+    property default_key_frame_rate : Int32
+    property default_p_frame_rate : Int32
+    property default_quality : Int32
+    property number_of_quality_settings : Int32
+    property capabilities : Int32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @stream_index : UInt32, @default_key_frame_rate : Int32, @default_p_frame_rate : Int32, @default_quality : Int32, @number_of_quality_settings : Int32, @capabilities : Int32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEOCOMPRESSION_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    stream_index : UInt32,
-    value : Int32
+  struct KSPROPERTY_VIDEOCOMPRESSION_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property stream_index : UInt32
+    property value : Int32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @stream_index : UInt32, @value : Int32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEOCOMPRESSION_S1,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    stream_index : UInt32,
-    value : Int32,
-    flags : UInt32
+  struct KSPROPERTY_VIDEOCOMPRESSION_S1
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property stream_index : UInt32
+    property value : Int32
+    property flags : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @stream_index : UInt32, @value : Int32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSDISPLAYCHANGE,
-    pels_width : UInt32,
-    pels_height : UInt32,
-    bits_per_pel : UInt32,
-    device_id : UInt16*
+  struct KSDISPLAYCHANGE
+    property pels_width : UInt32
+    property pels_height : UInt32
+    property bits_per_pel : UInt32
+    property device_id : UInt16*
+    def initialize(@pels_width : UInt32, @pels_height : UInt32, @bits_per_pel : UInt32, @device_id : UInt16*)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEOCONTROL_CAPS_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    stream_index : UInt32,
-    video_control_caps : UInt32
+  struct KSPROPERTY_VIDEOCONTROL_CAPS_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property stream_index : UInt32
+    property video_control_caps : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @stream_index : UInt32, @video_control_caps : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEOCONTROL_MODE_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    stream_index : UInt32,
-    mode : Int32
+  struct KSPROPERTY_VIDEOCONTROL_MODE_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property stream_index : UInt32
+    property mode : Int32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @stream_index : UInt32, @mode : Int32)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEOCONTROL_ACTUAL_FRAME_RATE_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    stream_index : UInt32,
-    range_index : UInt32,
-    dimensions : Win32cr::Foundation::SIZE,
-    current_actual_frame_rate : Int64,
-    current_max_available_frame_rate : Int64
+  struct KSPROPERTY_VIDEOCONTROL_ACTUAL_FRAME_RATE_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property stream_index : UInt32
+    property range_index : UInt32
+    property dimensions : Win32cr::Foundation::SIZE
+    property current_actual_frame_rate : Int64
+    property current_max_available_frame_rate : Int64
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @stream_index : UInt32, @range_index : UInt32, @dimensions : Win32cr::Foundation::SIZE, @current_actual_frame_rate : Int64, @current_max_available_frame_rate : Int64)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_VIDEOCONTROL_FRAME_RATES_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    stream_index : UInt32,
-    range_index : UInt32,
-    dimensions : Win32cr::Foundation::SIZE
+  struct KSPROPERTY_VIDEOCONTROL_FRAME_RATES_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property stream_index : UInt32
+    property range_index : UInt32
+    property dimensions : Win32cr::Foundation::SIZE
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @stream_index : UInt32, @range_index : UInt32, @dimensions : Win32cr::Foundation::SIZE)
+    end
+  end
 
   @[Extern]
-  record KSPROPERTY_DROPPEDFRAMES_CURRENT_S,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    picture_number : Int64,
-    drop_count : Int64,
-    average_frame_size : UInt32
+  struct KSPROPERTY_DROPPEDFRAMES_CURRENT_S
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property picture_number : Int64
+    property drop_count : Int64
+    property average_frame_size : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @picture_number : Int64, @drop_count : Int64, @average_frame_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record KS_AMVPDIMINFO,
-    dwFieldWidth : UInt32,
-    dwFieldHeight : UInt32,
-    dwVBIWidth : UInt32,
-    dwVBIHeight : UInt32,
-    rcValidRegion : Win32cr::Foundation::RECT
+  struct KS_AMVPDIMINFO
+    property dwFieldWidth : UInt32
+    property dwFieldHeight : UInt32
+    property dwVBIWidth : UInt32
+    property dwVBIHeight : UInt32
+    property rcValidRegion : Win32cr::Foundation::RECT
+    def initialize(@dwFieldWidth : UInt32, @dwFieldHeight : UInt32, @dwVBIWidth : UInt32, @dwVBIHeight : UInt32, @rcValidRegion : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record KS_AMVPDATAINFO,
-    dwSize : UInt32,
-    dwMicrosecondsPerField : UInt32,
-    amvpDimInfo : Win32cr::Media::KernelStreaming::KS_AMVPDIMINFO,
-    dwPictAspectRatioX : UInt32,
-    dwPictAspectRatioY : UInt32,
-    bEnableDoubleClock : Win32cr::Foundation::BOOL,
-    bEnableVACT : Win32cr::Foundation::BOOL,
-    bDataIsInterlaced : Win32cr::Foundation::BOOL,
-    lHalfLinesOdd : Int32,
-    bFieldPolarityInverted : Win32cr::Foundation::BOOL,
-    dwNumLinesInVREF : UInt32,
-    lHalfLinesEven : Int32,
-    dwReserved1 : UInt32
+  struct KS_AMVPDATAINFO
+    property dwSize : UInt32
+    property dwMicrosecondsPerField : UInt32
+    property amvpDimInfo : Win32cr::Media::KernelStreaming::KS_AMVPDIMINFO
+    property dwPictAspectRatioX : UInt32
+    property dwPictAspectRatioY : UInt32
+    property bEnableDoubleClock : Win32cr::Foundation::BOOL
+    property bEnableVACT : Win32cr::Foundation::BOOL
+    property bDataIsInterlaced : Win32cr::Foundation::BOOL
+    property lHalfLinesOdd : Int32
+    property bFieldPolarityInverted : Win32cr::Foundation::BOOL
+    property dwNumLinesInVREF : UInt32
+    property lHalfLinesEven : Int32
+    property dwReserved1 : UInt32
+    def initialize(@dwSize : UInt32, @dwMicrosecondsPerField : UInt32, @amvpDimInfo : Win32cr::Media::KernelStreaming::KS_AMVPDIMINFO, @dwPictAspectRatioX : UInt32, @dwPictAspectRatioY : UInt32, @bEnableDoubleClock : Win32cr::Foundation::BOOL, @bEnableVACT : Win32cr::Foundation::BOOL, @bDataIsInterlaced : Win32cr::Foundation::BOOL, @lHalfLinesOdd : Int32, @bFieldPolarityInverted : Win32cr::Foundation::BOOL, @dwNumLinesInVREF : UInt32, @lHalfLinesEven : Int32, @dwReserved1 : UInt32)
+    end
+  end
 
   @[Extern]
-  record KS_AMVPSIZE,
-    dwWidth : UInt32,
-    dwHeight : UInt32
+  struct KS_AMVPSIZE
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    def initialize(@dwWidth : UInt32, @dwHeight : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSVPMAXPIXELRATE,
-    size : Win32cr::Media::KernelStreaming::KS_AMVPSIZE,
-    max_pixels_per_second : UInt32,
-    reserved : UInt32
+  struct KSVPMAXPIXELRATE
+    property size : Win32cr::Media::KernelStreaming::KS_AMVPSIZE
+    property max_pixels_per_second : UInt32
+    property reserved : UInt32
+    def initialize(@size : Win32cr::Media::KernelStreaming::KS_AMVPSIZE, @max_pixels_per_second : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSVPSIZE_PROP,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    size : Win32cr::Media::KernelStreaming::KS_AMVPSIZE
+  struct KSVPSIZE_PROP
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property size : Win32cr::Media::KernelStreaming::KS_AMVPSIZE
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @size : Win32cr::Media::KernelStreaming::KS_AMVPSIZE)
+    end
+  end
 
   @[Extern]
-  record KSVPSURFACEPARAMS,
-    dwPitch : UInt32,
-    dwXOrigin : UInt32,
-    dwYOrigin : UInt32
+  struct KSVPSURFACEPARAMS
+    property dwPitch : UInt32
+    property dwXOrigin : UInt32
+    property dwYOrigin : UInt32
+    def initialize(@dwPitch : UInt32, @dwXOrigin : UInt32, @dwYOrigin : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSGOP_USERDATA,
-    sc : UInt32,
-    reserved1 : UInt32,
-    cFields : UInt8,
-    l21Data : Win32cr::Foundation::CHAR[3]
+  struct KSGOP_USERDATA
+    property sc : UInt32
+    property reserved1 : UInt32
+    property cFields : UInt8
+    property l21Data : Win32cr::Foundation::CHAR[3]
+    def initialize(@sc : UInt32, @reserved1 : UInt32, @cFields : UInt8, @l21Data : Win32cr::Foundation::CHAR[3])
+    end
+  end
 
   @[Extern]
-  record KS_AM_SimpleRateChange,
-    start_time : Int64,
-    rate : Int32
+  struct KS_AM_SimpleRateChange
+    property start_time : Int64
+    property rate : Int32
+    def initialize(@start_time : Int64, @rate : Int32)
+    end
+  end
 
   @[Extern]
-  record KS_AM_ExactRateChange,
-    output_zero_time : Int64,
-    rate : Int32
+  struct KS_AM_ExactRateChange
+    property output_zero_time : Int64
+    property rate : Int32
+    def initialize(@output_zero_time : Int64, @rate : Int32)
+    end
+  end
 
   @[Extern]
-  record KSJACK_DESCRIPTION,
-    channel_mapping : UInt32,
-    color : UInt32,
-    connection_type : Win32cr::Media::KernelStreaming::EPcxConnectionType,
-    geo_location : Win32cr::Media::KernelStreaming::EPcxGeoLocation,
-    gen_location : Win32cr::Media::KernelStreaming::EPcxGenLocation,
-    port_connection : Win32cr::Media::KernelStreaming::EPxcPortConnection,
-    is_connected : Win32cr::Foundation::BOOL
+  struct KSJACK_DESCRIPTION
+    property channel_mapping : UInt32
+    property color : UInt32
+    property connection_type : Win32cr::Media::KernelStreaming::EPcxConnectionType
+    property geo_location : Win32cr::Media::KernelStreaming::EPcxGeoLocation
+    property gen_location : Win32cr::Media::KernelStreaming::EPcxGenLocation
+    property port_connection : Win32cr::Media::KernelStreaming::EPxcPortConnection
+    property is_connected : Win32cr::Foundation::BOOL
+    def initialize(@channel_mapping : UInt32, @color : UInt32, @connection_type : Win32cr::Media::KernelStreaming::EPcxConnectionType, @geo_location : Win32cr::Media::KernelStreaming::EPcxGeoLocation, @gen_location : Win32cr::Media::KernelStreaming::EPcxGenLocation, @port_connection : Win32cr::Media::KernelStreaming::EPxcPortConnection, @is_connected : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record KSJACK_SINK_INFORMATION,
-    conn_type : Win32cr::Media::KernelStreaming::KSJACK_SINK_CONNECTIONTYPE,
-    manufacturer_id : UInt16,
-    product_id : UInt16,
-    audio_latency : UInt16,
-    hdcp_capable : Win32cr::Foundation::BOOL,
-    ai_capable : Win32cr::Foundation::BOOL,
-    sink_description_length : UInt8,
-    sink_description : UInt16[32],
-    port_id : Win32cr::Foundation::LUID
+  struct KSJACK_SINK_INFORMATION
+    property conn_type : Win32cr::Media::KernelStreaming::KSJACK_SINK_CONNECTIONTYPE
+    property manufacturer_id : UInt16
+    property product_id : UInt16
+    property audio_latency : UInt16
+    property hdcp_capable : Win32cr::Foundation::BOOL
+    property ai_capable : Win32cr::Foundation::BOOL
+    property sink_description_length : UInt8
+    property sink_description : UInt16[32]
+    property port_id : Win32cr::Foundation::LUID
+    def initialize(@conn_type : Win32cr::Media::KernelStreaming::KSJACK_SINK_CONNECTIONTYPE, @manufacturer_id : UInt16, @product_id : UInt16, @audio_latency : UInt16, @hdcp_capable : Win32cr::Foundation::BOOL, @ai_capable : Win32cr::Foundation::BOOL, @sink_description_length : UInt8, @sink_description : UInt16[32], @port_id : Win32cr::Foundation::LUID)
+    end
+  end
 
   @[Extern]
-  record KSJACK_DESCRIPTION2,
-    device_state_info : UInt32,
-    jack_capabilities : UInt32
+  struct KSJACK_DESCRIPTION2
+    property device_state_info : UInt32
+    property jack_capabilities : UInt32
+    def initialize(@device_state_info : UInt32, @jack_capabilities : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSAUDIOENGINE_DESCRIPTOR,
-    nHostPinId : UInt32,
-    nOffloadPinId : UInt32,
-    nLoopbackPinId : UInt32
+  struct KSAUDIOENGINE_DESCRIPTOR
+    property nHostPinId : UInt32
+    property nOffloadPinId : UInt32
+    property nLoopbackPinId : UInt32
+    def initialize(@nHostPinId : UInt32, @nOffloadPinId : UInt32, @nLoopbackPinId : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSAUDIOENGINE_BUFFER_SIZE_RANGE,
-    min_buffer_bytes : UInt32,
-    max_buffer_bytes : UInt32
+  struct KSAUDIOENGINE_BUFFER_SIZE_RANGE
+    property min_buffer_bytes : UInt32
+    property max_buffer_bytes : UInt32
+    def initialize(@min_buffer_bytes : UInt32, @max_buffer_bytes : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSAUDIOENGINE_VOLUMELEVEL,
-    target_volume : Int32,
-    curve_type : Win32cr::Media::KernelStreaming::AUDIO_CURVE_TYPE,
-    curve_duration : UInt64
+  struct KSAUDIOENGINE_VOLUMELEVEL
+    property target_volume : Int32
+    property curve_type : Win32cr::Media::KernelStreaming::AUDIO_CURVE_TYPE
+    property curve_duration : UInt64
+    def initialize(@target_volume : Int32, @curve_type : Win32cr::Media::KernelStreaming::AUDIO_CURVE_TYPE, @curve_duration : UInt64)
+    end
+  end
 
   @[Extern]
-  record KSATTRIBUTE_AUDIOSIGNALPROCESSING_MODE,
-    attribute_header : Win32cr::Media::KernelStreaming::KSATTRIBUTE,
-    signal_processing_mode : LibC::GUID
+  struct KSATTRIBUTE_AUDIOSIGNALPROCESSING_MODE
+    property attribute_header : Win32cr::Media::KernelStreaming::KSATTRIBUTE
+    property signal_processing_mode : LibC::GUID
+    def initialize(@attribute_header : Win32cr::Media::KernelStreaming::KSATTRIBUTE, @signal_processing_mode : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record AUDIORESOURCEMANAGEMENT_RESOURCEGROUP,
-    resource_group_acquired : Win32cr::Foundation::BOOL,
-    resource_group_name : UInt16[256]
+  struct AUDIORESOURCEMANAGEMENT_RESOURCEGROUP
+    property resource_group_acquired : Win32cr::Foundation::BOOL
+    property resource_group_name : UInt16[256]
+    def initialize(@resource_group_acquired : Win32cr::Foundation::BOOL, @resource_group_name : UInt16[256])
+    end
+  end
 
   @[Extern]
-  record KSAUDIOMODULE_DESCRIPTOR,
-    class_id : LibC::GUID,
-    instance_id : UInt32,
-    version_major : UInt32,
-    version_minor : UInt32,
-    name : UInt16[128]
+  struct KSAUDIOMODULE_DESCRIPTOR
+    property class_id : LibC::GUID
+    property instance_id : UInt32
+    property version_major : UInt32
+    property version_minor : UInt32
+    property name : UInt16[128]
+    def initialize(@class_id : LibC::GUID, @instance_id : UInt32, @version_major : UInt32, @version_minor : UInt32, @name : UInt16[128])
+    end
+  end
 
   @[Extern]
-  record KSAUDIOMODULE_PROPERTY,
-    property : Win32cr::Media::KernelStreaming::KSIDENTIFIER,
-    class_id : LibC::GUID,
-    instance_id : UInt32
+  struct KSAUDIOMODULE_PROPERTY
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property class_id : LibC::GUID
+    property instance_id : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @class_id : LibC::GUID, @instance_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record KSAUDIOMODULE_NOTIFICATION,
-    anonymous : Anonymous_e__Union_ do
+  struct KSAUDIOMODULE_NOTIFICATION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      provider_id : ProviderId_e__Struct_,
-      alignment : Int64 do
+    struct Anonymous_e__Union_
+    property provider_id : ProviderId_e__Struct_
+    property alignment : Int64
 
       # Nested Type ProviderId_e__Struct_
       @[Extern]
-      record ProviderId_e__Struct_,
-        device_id : LibC::GUID,
-        class_id : LibC::GUID,
-        instance_id : UInt32,
-        reserved : UInt32
+      struct ProviderId_e__Struct_
+    property device_id : LibC::GUID
+    property class_id : LibC::GUID
+    property instance_id : UInt32
+    property reserved : UInt32
+    def initialize(@device_id : LibC::GUID, @class_id : LibC::GUID, @instance_id : UInt32, @reserved : UInt32)
+    end
+      end
 
+    def initialize(@provider_id : ProviderId_e__Struct_, @alignment : Int64)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record OPTIMAL_WEIGHT_TOTALS,
-    min_total_nominator : Int64,
-    max_total_nominator : Int64,
-    total_denominator : Int64
+  struct OPTIMAL_WEIGHT_TOTALS
+    property min_total_nominator : Int64
+    property max_total_nominator : Int64
+    property total_denominator : Int64
+    def initialize(@min_total_nominator : Int64, @max_total_nominator : Int64, @total_denominator : Int64)
+    end
+  end
 
   @[Extern]
-  record PIPE_DIMENSIONS,
-    allocator_pin : Win32cr::Media::KernelStreaming::KS_COMPRESSION,
-    max_expansion_pin : Win32cr::Media::KernelStreaming::KS_COMPRESSION,
-    end_pin : Win32cr::Media::KernelStreaming::KS_COMPRESSION
+  struct PIPE_DIMENSIONS
+    property allocator_pin : Win32cr::Media::KernelStreaming::KS_COMPRESSION
+    property max_expansion_pin : Win32cr::Media::KernelStreaming::KS_COMPRESSION
+    property end_pin : Win32cr::Media::KernelStreaming::KS_COMPRESSION
+    def initialize(@allocator_pin : Win32cr::Media::KernelStreaming::KS_COMPRESSION, @max_expansion_pin : Win32cr::Media::KernelStreaming::KS_COMPRESSION, @end_pin : Win32cr::Media::KernelStreaming::KS_COMPRESSION)
+    end
+  end
 
   @[Extern]
-  record PIPE_TERMINATION,
-    flags : UInt32,
-    outside_factors : UInt32,
-    weigth : UInt32,
-    physical_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE,
-    optimal_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE_WEIGHTED,
-    compression : Win32cr::Media::KernelStreaming::KS_COMPRESSION
+  struct PIPE_TERMINATION
+    property flags : UInt32
+    property outside_factors : UInt32
+    property weigth : UInt32
+    property physical_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE
+    property optimal_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE_WEIGHTED
+    property compression : Win32cr::Media::KernelStreaming::KS_COMPRESSION
+    def initialize(@flags : UInt32, @outside_factors : UInt32, @weigth : UInt32, @physical_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE, @optimal_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE_WEIGHTED, @compression : Win32cr::Media::KernelStreaming::KS_COMPRESSION)
+    end
+  end
 
   @[Extern]
-  record ALLOCATOR_PROPERTIES_EX,
-    cBuffers : Int32,
-    cbBuffer : Int32,
-    cbAlign : Int32,
-    cbPrefix : Int32,
-    memory_type : LibC::GUID,
-    bus_type : LibC::GUID,
-    state : Win32cr::Media::KernelStreaming::PIPE_STATE,
-    input : Win32cr::Media::KernelStreaming::PIPE_TERMINATION,
-    output : Win32cr::Media::KernelStreaming::PIPE_TERMINATION,
-    strategy : UInt32,
-    flags : UInt32,
-    weight : UInt32,
-    logical_memory_type : Win32cr::Media::KernelStreaming::KS_LogicalMemoryType,
-    allocator_place : Win32cr::Media::KernelStreaming::PIPE_ALLOCATOR_PLACE,
-    dimensions : Win32cr::Media::KernelStreaming::PIPE_DIMENSIONS,
-    physical_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE,
-    prev_segment : Win32cr::Media::KernelStreaming::IKsAllocatorEx*,
-    count_next_segments : UInt32,
-    next_segments : Win32cr::Media::KernelStreaming::IKsAllocatorEx**,
-    inside_factors : UInt32,
-    number_pins : UInt32
+  struct ALLOCATOR_PROPERTIES_EX
+    property cBuffers : Int32
+    property cbBuffer : Int32
+    property cbAlign : Int32
+    property cbPrefix : Int32
+    property memory_type : LibC::GUID
+    property bus_type : LibC::GUID
+    property state : Win32cr::Media::KernelStreaming::PIPE_STATE
+    property input : Win32cr::Media::KernelStreaming::PIPE_TERMINATION
+    property output : Win32cr::Media::KernelStreaming::PIPE_TERMINATION
+    property strategy : UInt32
+    property flags : UInt32
+    property weight : UInt32
+    property logical_memory_type : Win32cr::Media::KernelStreaming::KS_LogicalMemoryType
+    property allocator_place : Win32cr::Media::KernelStreaming::PIPE_ALLOCATOR_PLACE
+    property dimensions : Win32cr::Media::KernelStreaming::PIPE_DIMENSIONS
+    property physical_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE
+    property prev_segment : Win32cr::Media::KernelStreaming::IKsAllocatorEx*
+    property count_next_segments : UInt32
+    property next_segments : Win32cr::Media::KernelStreaming::IKsAllocatorEx**
+    property inside_factors : UInt32
+    property number_pins : UInt32
+    def initialize(@cBuffers : Int32, @cbBuffer : Int32, @cbAlign : Int32, @cbPrefix : Int32, @memory_type : LibC::GUID, @bus_type : LibC::GUID, @state : Win32cr::Media::KernelStreaming::PIPE_STATE, @input : Win32cr::Media::KernelStreaming::PIPE_TERMINATION, @output : Win32cr::Media::KernelStreaming::PIPE_TERMINATION, @strategy : UInt32, @flags : UInt32, @weight : UInt32, @logical_memory_type : Win32cr::Media::KernelStreaming::KS_LogicalMemoryType, @allocator_place : Win32cr::Media::KernelStreaming::PIPE_ALLOCATOR_PLACE, @dimensions : Win32cr::Media::KernelStreaming::PIPE_DIMENSIONS, @physical_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE, @prev_segment : Win32cr::Media::KernelStreaming::IKsAllocatorEx*, @count_next_segments : UInt32, @next_segments : Win32cr::Media::KernelStreaming::IKsAllocatorEx**, @inside_factors : UInt32, @number_pins : UInt32)
+    end
+  end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record KSSTREAM_HEADER,
-    size : UInt32,
-    type_specific_flags : UInt32,
-    presentation_time : Win32cr::Media::KernelStreaming::KSTIME,
-    duration : Int64,
-    frame_extent : UInt32,
-    data_used : UInt32,
-    data : Void*,
-    options_flags : UInt32
+  struct KSSTREAM_HEADER
+    property size : UInt32
+    property type_specific_flags : UInt32
+    property presentation_time : Win32cr::Media::KernelStreaming::KSTIME
+    property duration : Int64
+    property frame_extent : UInt32
+    property data_used : UInt32
+    property data : Void*
+    property options_flags : UInt32
+    def initialize(@size : UInt32, @type_specific_flags : UInt32, @presentation_time : Win32cr::Media::KernelStreaming::KSTIME, @duration : Int64, @frame_extent : UInt32, @data_used : UInt32, @data : Void*, @options_flags : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record KSNODEPROPERTY_AUDIO_3D_LISTENER,
-    node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY,
-    listener_id : Void*,
-    reserved : UInt32
+  struct KSNODEPROPERTY_AUDIO_3D_LISTENER
+    property node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY
+    property listener_id : Void*
+    property reserved : UInt32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @listener_id : Void*, @reserved : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record KSNODEPROPERTY_AUDIO_PROPERTY,
-    node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY,
-    app_context : Void*,
-    length : UInt32,
-    reserved : UInt32
+  struct KSNODEPROPERTY_AUDIO_PROPERTY
+    property node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY
+    property app_context : Void*
+    property length : UInt32
+    property reserved : UInt32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @app_context : Void*, @length : UInt32, @reserved : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
@@ -5698,7 +6839,6 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  #@[Com("28f54685-06fd-11d2-b27a-00a0c9223196")]
   record IKsControl, lpVtbl : IKsControlVtbl* do
     GUID = LibC::GUID.new(0x28f54685_u32, 0x6fd_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0x7a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
     def query_interface(this : IKsControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5732,7 +6872,6 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  #@[Com("3cb4a69d-bb6f-4d2b-95b7-452d2c155db5")]
   record IKsFormatSupport, lpVtbl : IKsFormatSupportVtbl* do
     GUID = LibC::GUID.new(0x3cb4a69d_u32, 0xbb6f_u16, 0x4d2b_u16, StaticArray[0x95_u8, 0xb7_u8, 0x45_u8, 0x2d_u8, 0x2c_u8, 0x15_u8, 0x5d_u8, 0xb5_u8])
     def query_interface(this : IKsFormatSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5763,7 +6902,6 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  #@[Com("4509f757-2d46-4637-8e62-ce7db944f57b")]
   record IKsJackDescription, lpVtbl : IKsJackDescriptionVtbl* do
     GUID = LibC::GUID.new(0x4509f757_u32, 0x2d46_u16, 0x4637_u16, StaticArray[0x8e_u8, 0x62_u8, 0xce_u8, 0x7d_u8, 0xb9_u8, 0x44_u8, 0xf5_u8, 0x7b_u8])
     def query_interface(this : IKsJackDescription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5794,7 +6932,6 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  #@[Com("478f3a9b-e0c9-4827-9228-6f5505ffe76a")]
   record IKsJackDescription2, lpVtbl : IKsJackDescription2Vtbl* do
     GUID = LibC::GUID.new(0x478f3a9b_u32, 0xe0c9_u16, 0x4827_u16, StaticArray[0x92_u8, 0x28_u8, 0x6f_u8, 0x55_u8, 0x5_u8, 0xff_u8, 0xe7_u8, 0x6a_u8])
     def query_interface(this : IKsJackDescription2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5824,7 +6961,6 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  #@[Com("d9bd72ed-290f-4581-9ff3-61027a8fe532")]
   record IKsJackSinkInformation, lpVtbl : IKsJackSinkInformationVtbl* do
     GUID = LibC::GUID.new(0xd9bd72ed_u32, 0x290f_u16, 0x4581_u16, StaticArray[0x9f_u8, 0xf3_u8, 0x61_u8, 0x2_u8, 0x7a_u8, 0x8f_u8, 0xe5_u8, 0x32_u8])
     def query_interface(this : IKsJackSinkInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5851,7 +6987,6 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  #@[Com("c99af463-d629-4ec4-8c00-e54d68154248")]
   record IKsJackContainerId, lpVtbl : IKsJackContainerIdVtbl* do
     GUID = LibC::GUID.new(0xc99af463_u32, 0xd629_u16, 0x4ec4_u16, StaticArray[0x8c_u8, 0x0_u8, 0xe5_u8, 0x4d_u8, 0x68_u8, 0x15_u8, 0x42_u8, 0x48_u8])
     def query_interface(this : IKsJackContainerId*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5880,7 +7015,6 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  #@[Com("31efac30-515c-11d0-a9aa-00aa0061be93")]
   record IKsPropertySet, lpVtbl : IKsPropertySetVtbl* do
     GUID = LibC::GUID.new(0x31efac30_u32, 0x515c_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0xaa_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x61_u8, 0xbe_u8, 0x93_u8])
     def query_interface(this : IKsPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5914,7 +7048,6 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  #@[Com("7f40eac0-3947-11d2-874e-00a0c9223196")]
   record IKsAggregateControl, lpVtbl : IKsAggregateControlVtbl* do
     GUID = LibC::GUID.new(0x7f40eac0_u32, 0x3947_u16, 0x11d2_u16, StaticArray[0x87_u8, 0x4e_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
     def query_interface(this : IKsAggregateControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5944,7 +7077,6 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  #@[Com("28f54683-06fd-11d2-b27a-00a0c9223196")]
   record IKsTopology, lpVtbl : IKsTopologyVtbl* do
     GUID = LibC::GUID.new(0x28f54683_u32, 0x6fd_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0x7a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
     def query_interface(this : IKsTopology*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

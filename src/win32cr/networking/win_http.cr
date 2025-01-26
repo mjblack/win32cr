@@ -2,7 +2,7 @@ require "./../foundation.cr"
 require "./win_sock.cr"
 
 module Win32cr::Networking::WinHttp
-  alias WINHTTP_STATUS_CALLBACK = Proc(Void*, LibC::UIntPtrT, UInt32, Void*, UInt32, Void)*
+  alias WINHTTP_STATUS_CALLBACK = Proc(Void*, LibC::UIntPtrT, UInt32, Void*, UInt32, Void)
 
   WINHTTP_FLAG_ASYNC = 268435456_u32
   WINHTTP_FLAG_SECURE_DEFAULTS = 805306368_u32
@@ -606,271 +606,375 @@ module Win32cr::Networking::WinHttp
   end
 
   @[Extern]
-  record WINHTTP_ASYNC_RESULT,
-    dwResult : LibC::UIntPtrT,
-    dwError : UInt32
+  struct WINHTTP_ASYNC_RESULT
+    property dwResult : LibC::UIntPtrT
+    property dwError : UInt32
+    def initialize(@dwResult : LibC::UIntPtrT, @dwError : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_VERSION_INFO,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32
+  struct HTTP_VERSION_INFO
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    def initialize(@dwMajorVersion : UInt32, @dwMinorVersion : UInt32)
+    end
+  end
 
   @[Extern]
-  record URL_COMPONENTS,
-    dwStructSize : UInt32,
-    lpszScheme : Win32cr::Foundation::PWSTR,
-    dwSchemeLength : UInt32,
-    nScheme : Win32cr::Networking::WinHttp::WINHTTP_INTERNET_SCHEME,
-    lpszHostName : Win32cr::Foundation::PWSTR,
-    dwHostNameLength : UInt32,
-    nPort : UInt16,
-    lpszUserName : Win32cr::Foundation::PWSTR,
-    dwUserNameLength : UInt32,
-    lpszPassword : Win32cr::Foundation::PWSTR,
-    dwPasswordLength : UInt32,
-    lpszUrlPath : Win32cr::Foundation::PWSTR,
-    dwUrlPathLength : UInt32,
-    lpszExtraInfo : Win32cr::Foundation::PWSTR,
-    dwExtraInfoLength : UInt32
+  struct URL_COMPONENTS
+    property dwStructSize : UInt32
+    property lpszScheme : Win32cr::Foundation::PWSTR
+    property dwSchemeLength : UInt32
+    property nScheme : Win32cr::Networking::WinHttp::WINHTTP_INTERNET_SCHEME
+    property lpszHostName : Win32cr::Foundation::PWSTR
+    property dwHostNameLength : UInt32
+    property nPort : UInt16
+    property lpszUserName : Win32cr::Foundation::PWSTR
+    property dwUserNameLength : UInt32
+    property lpszPassword : Win32cr::Foundation::PWSTR
+    property dwPasswordLength : UInt32
+    property lpszUrlPath : Win32cr::Foundation::PWSTR
+    property dwUrlPathLength : UInt32
+    property lpszExtraInfo : Win32cr::Foundation::PWSTR
+    property dwExtraInfoLength : UInt32
+    def initialize(@dwStructSize : UInt32, @lpszScheme : Win32cr::Foundation::PWSTR, @dwSchemeLength : UInt32, @nScheme : Win32cr::Networking::WinHttp::WINHTTP_INTERNET_SCHEME, @lpszHostName : Win32cr::Foundation::PWSTR, @dwHostNameLength : UInt32, @nPort : UInt16, @lpszUserName : Win32cr::Foundation::PWSTR, @dwUserNameLength : UInt32, @lpszPassword : Win32cr::Foundation::PWSTR, @dwPasswordLength : UInt32, @lpszUrlPath : Win32cr::Foundation::PWSTR, @dwUrlPathLength : UInt32, @lpszExtraInfo : Win32cr::Foundation::PWSTR, @dwExtraInfoLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_PROXY_INFO,
-    dwAccessType : Win32cr::Networking::WinHttp::WINHTTP_ACCESS_TYPE,
-    lpszProxy : Win32cr::Foundation::PWSTR,
-    lpszProxyBypass : Win32cr::Foundation::PWSTR
+  struct WINHTTP_PROXY_INFO
+    property dwAccessType : Win32cr::Networking::WinHttp::WINHTTP_ACCESS_TYPE
+    property lpszProxy : Win32cr::Foundation::PWSTR
+    property lpszProxyBypass : Win32cr::Foundation::PWSTR
+    def initialize(@dwAccessType : Win32cr::Networking::WinHttp::WINHTTP_ACCESS_TYPE, @lpszProxy : Win32cr::Foundation::PWSTR, @lpszProxyBypass : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_AUTOPROXY_OPTIONS,
-    dwFlags : UInt32,
-    dwAutoDetectFlags : UInt32,
-    lpszAutoConfigUrl : Win32cr::Foundation::PWSTR,
-    lpvReserved : Void*,
-    dwReserved : UInt32,
-    fAutoLogonIfChallenged : Win32cr::Foundation::BOOL
+  struct WINHTTP_AUTOPROXY_OPTIONS
+    property dwFlags : UInt32
+    property dwAutoDetectFlags : UInt32
+    property lpszAutoConfigUrl : Win32cr::Foundation::PWSTR
+    property lpvReserved : Void*
+    property dwReserved : UInt32
+    property fAutoLogonIfChallenged : Win32cr::Foundation::BOOL
+    def initialize(@dwFlags : UInt32, @dwAutoDetectFlags : UInt32, @lpszAutoConfigUrl : Win32cr::Foundation::PWSTR, @lpvReserved : Void*, @dwReserved : UInt32, @fAutoLogonIfChallenged : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_PROXY_RESULT_ENTRY,
-    fProxy : Win32cr::Foundation::BOOL,
-    fBypass : Win32cr::Foundation::BOOL,
-    proxy_scheme : Win32cr::Networking::WinHttp::WINHTTP_INTERNET_SCHEME,
-    pwszProxy : Win32cr::Foundation::PWSTR,
-    proxy_port : UInt16
+  struct WINHTTP_PROXY_RESULT_ENTRY
+    property fProxy : Win32cr::Foundation::BOOL
+    property fBypass : Win32cr::Foundation::BOOL
+    property proxy_scheme : Win32cr::Networking::WinHttp::WINHTTP_INTERNET_SCHEME
+    property pwszProxy : Win32cr::Foundation::PWSTR
+    property proxy_port : UInt16
+    def initialize(@fProxy : Win32cr::Foundation::BOOL, @fBypass : Win32cr::Foundation::BOOL, @proxy_scheme : Win32cr::Networking::WinHttp::WINHTTP_INTERNET_SCHEME, @pwszProxy : Win32cr::Foundation::PWSTR, @proxy_port : UInt16)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_PROXY_RESULT,
-    cEntries : UInt32,
-    pEntries : Win32cr::Networking::WinHttp::WINHTTP_PROXY_RESULT_ENTRY*
+  struct WINHTTP_PROXY_RESULT
+    property cEntries : UInt32
+    property pEntries : Win32cr::Networking::WinHttp::WINHTTP_PROXY_RESULT_ENTRY*
+    def initialize(@cEntries : UInt32, @pEntries : Win32cr::Networking::WinHttp::WINHTTP_PROXY_RESULT_ENTRY*)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_PROXY_RESULT_EX,
-    cEntries : UInt32,
-    pEntries : Win32cr::Networking::WinHttp::WINHTTP_PROXY_RESULT_ENTRY*,
-    hProxyDetectionHandle : Win32cr::Foundation::HANDLE,
-    dwProxyInterfaceAffinity : UInt32
+  struct WINHTTP_PROXY_RESULT_EX
+    property cEntries : UInt32
+    property pEntries : Win32cr::Networking::WinHttp::WINHTTP_PROXY_RESULT_ENTRY*
+    property hProxyDetectionHandle : Win32cr::Foundation::HANDLE
+    property dwProxyInterfaceAffinity : UInt32
+    def initialize(@cEntries : UInt32, @pEntries : Win32cr::Networking::WinHttp::WINHTTP_PROXY_RESULT_ENTRY*, @hProxyDetectionHandle : Win32cr::Foundation::HANDLE, @dwProxyInterfaceAffinity : UInt32)
+    end
+  end
 
   @[Extern]
-  record WinHttpProxyNetworkKey_,
-    pbBuffer : UInt8[128]
+  struct WinHttpProxyNetworkKey_
+    property pbBuffer : UInt8[128]
+    def initialize(@pbBuffer : UInt8[128])
+    end
+  end
 
   @[Extern]
-  record WINHTTP_PROXY_SETTINGS,
-    dwStructSize : UInt32,
-    dwFlags : UInt32,
-    dwCurrentSettingsVersion : UInt32,
-    pwszConnectionName : Win32cr::Foundation::PWSTR,
-    pwszProxy : Win32cr::Foundation::PWSTR,
-    pwszProxyBypass : Win32cr::Foundation::PWSTR,
-    pwszAutoconfigUrl : Win32cr::Foundation::PWSTR,
-    pwszAutoconfigSecondaryUrl : Win32cr::Foundation::PWSTR,
-    dwAutoDiscoveryFlags : UInt32,
-    pwszLastKnownGoodAutoConfigUrl : Win32cr::Foundation::PWSTR,
-    dwAutoconfigReloadDelayMins : UInt32,
-    ftLastKnownDetectTime : Win32cr::Foundation::FILETIME,
-    dwDetectedInterfaceIpCount : UInt32,
-    pdwDetectedInterfaceIp : UInt32*,
-    cNetworkKeys : UInt32,
-    pNetworkKeys : Win32cr::Networking::WinHttp::WinHttpProxyNetworkKey_*
+  struct WINHTTP_PROXY_SETTINGS
+    property dwStructSize : UInt32
+    property dwFlags : UInt32
+    property dwCurrentSettingsVersion : UInt32
+    property pwszConnectionName : Win32cr::Foundation::PWSTR
+    property pwszProxy : Win32cr::Foundation::PWSTR
+    property pwszProxyBypass : Win32cr::Foundation::PWSTR
+    property pwszAutoconfigUrl : Win32cr::Foundation::PWSTR
+    property pwszAutoconfigSecondaryUrl : Win32cr::Foundation::PWSTR
+    property dwAutoDiscoveryFlags : UInt32
+    property pwszLastKnownGoodAutoConfigUrl : Win32cr::Foundation::PWSTR
+    property dwAutoconfigReloadDelayMins : UInt32
+    property ftLastKnownDetectTime : Win32cr::Foundation::FILETIME
+    property dwDetectedInterfaceIpCount : UInt32
+    property pdwDetectedInterfaceIp : UInt32*
+    property cNetworkKeys : UInt32
+    property pNetworkKeys : Win32cr::Networking::WinHttp::WinHttpProxyNetworkKey_*
+    def initialize(@dwStructSize : UInt32, @dwFlags : UInt32, @dwCurrentSettingsVersion : UInt32, @pwszConnectionName : Win32cr::Foundation::PWSTR, @pwszProxy : Win32cr::Foundation::PWSTR, @pwszProxyBypass : Win32cr::Foundation::PWSTR, @pwszAutoconfigUrl : Win32cr::Foundation::PWSTR, @pwszAutoconfigSecondaryUrl : Win32cr::Foundation::PWSTR, @dwAutoDiscoveryFlags : UInt32, @pwszLastKnownGoodAutoConfigUrl : Win32cr::Foundation::PWSTR, @dwAutoconfigReloadDelayMins : UInt32, @ftLastKnownDetectTime : Win32cr::Foundation::FILETIME, @dwDetectedInterfaceIpCount : UInt32, @pdwDetectedInterfaceIp : UInt32*, @cNetworkKeys : UInt32, @pNetworkKeys : Win32cr::Networking::WinHttp::WinHttpProxyNetworkKey_*)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_CERTIFICATE_INFO,
-    ftExpiry : Win32cr::Foundation::FILETIME,
-    ftStart : Win32cr::Foundation::FILETIME,
-    lpszSubjectInfo : Win32cr::Foundation::PWSTR,
-    lpszIssuerInfo : Win32cr::Foundation::PWSTR,
-    lpszProtocolName : Win32cr::Foundation::PWSTR,
-    lpszSignatureAlgName : Win32cr::Foundation::PWSTR,
-    lpszEncryptionAlgName : Win32cr::Foundation::PWSTR,
-    dwKeySize : UInt32
+  struct WINHTTP_CERTIFICATE_INFO
+    property ftExpiry : Win32cr::Foundation::FILETIME
+    property ftStart : Win32cr::Foundation::FILETIME
+    property lpszSubjectInfo : Win32cr::Foundation::PWSTR
+    property lpszIssuerInfo : Win32cr::Foundation::PWSTR
+    property lpszProtocolName : Win32cr::Foundation::PWSTR
+    property lpszSignatureAlgName : Win32cr::Foundation::PWSTR
+    property lpszEncryptionAlgName : Win32cr::Foundation::PWSTR
+    property dwKeySize : UInt32
+    def initialize(@ftExpiry : Win32cr::Foundation::FILETIME, @ftStart : Win32cr::Foundation::FILETIME, @lpszSubjectInfo : Win32cr::Foundation::PWSTR, @lpszIssuerInfo : Win32cr::Foundation::PWSTR, @lpszProtocolName : Win32cr::Foundation::PWSTR, @lpszSignatureAlgName : Win32cr::Foundation::PWSTR, @lpszEncryptionAlgName : Win32cr::Foundation::PWSTR, @dwKeySize : UInt32)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record WINHTTP_CONNECTION_INFO,
-    cbSize : UInt32,
-    local_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE,
-    remote_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+  struct WINHTTP_CONNECTION_INFO
+    property cbSize : UInt32
+    property local_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    property remote_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    def initialize(@cbSize : UInt32, @local_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE, @remote_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record WINHTTP_REQUEST_TIMES,
-    cTimes : UInt32,
-    rgullTimes : UInt64[64]
+  struct WINHTTP_REQUEST_TIMES
+    property cTimes : UInt32
+    property rgullTimes : UInt64[64]
+    def initialize(@cTimes : UInt32, @rgullTimes : UInt64[64])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record WINHTTP_REQUEST_STATS,
-    ullFlags : UInt64,
-    ulIndex : UInt32,
-    cStats : UInt32,
-    rgullStats : UInt64[32]
+  struct WINHTTP_REQUEST_STATS
+    property ullFlags : UInt64
+    property ulIndex : UInt32
+    property cStats : UInt32
+    property rgullStats : UInt64[32]
+    def initialize(@ullFlags : UInt64, @ulIndex : UInt32, @cStats : UInt32, @rgullStats : UInt64[32])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record WINHTTP_MATCH_CONNECTION_GUID,
-    connection_guid : LibC::GUID,
-    ullFlags : UInt64
+  struct WINHTTP_MATCH_CONNECTION_GUID
+    property connection_guid : LibC::GUID
+    property ullFlags : UInt64
+    def initialize(@connection_guid : LibC::GUID, @ullFlags : UInt64)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record WINHTTP_EXTENDED_HEADER,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct WINHTTP_EXTENDED_HEADER
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      pwszName : Win32cr::Foundation::PWSTR,
-      pszName : Win32cr::Foundation::PSTR
+    struct Anonymous1_e__Union_
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pszName : Win32cr::Foundation::PSTR
+    def initialize(@pwszName : Win32cr::Foundation::PWSTR, @pszName : Win32cr::Foundation::PSTR)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      pwszValue : Win32cr::Foundation::PWSTR,
-      pszValue : Win32cr::Foundation::PSTR
+    struct Anonymous2_e__Union_
+    property pwszValue : Win32cr::Foundation::PWSTR
+    property pszValue : Win32cr::Foundation::PSTR
+    def initialize(@pwszValue : Win32cr::Foundation::PWSTR, @pszValue : Win32cr::Foundation::PSTR)
+    end
+    end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern(union: true)]
-  record WINHTTP_HEADER_NAME,
-    pwszName : Win32cr::Foundation::PWSTR,
-    pszName : Win32cr::Foundation::PSTR
+  struct WINHTTP_HEADER_NAME
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pszName : Win32cr::Foundation::PSTR
+    def initialize(@pwszName : Win32cr::Foundation::PWSTR, @pszName : Win32cr::Foundation::PSTR)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record WINHTTP_RESOLVER_CACHE_CONFIG,
-    ulMaxResolverCacheEntries : UInt32,
-    ulMaxCacheEntryAge : UInt32,
-    ulMinCacheEntryTtl : UInt32,
-    secure_dns_setting : Win32cr::Networking::WinHttp::WINHTTP_SECURE_DNS_SETTING,
-    ullConnResolutionWaitTime : UInt64,
-    ullFlags : UInt64
+  struct WINHTTP_RESOLVER_CACHE_CONFIG
+    property ulMaxResolverCacheEntries : UInt32
+    property ulMaxCacheEntryAge : UInt32
+    property ulMinCacheEntryTtl : UInt32
+    property secure_dns_setting : Win32cr::Networking::WinHttp::WINHTTP_SECURE_DNS_SETTING
+    property ullConnResolutionWaitTime : UInt64
+    property ullFlags : UInt64
+    def initialize(@ulMaxResolverCacheEntries : UInt32, @ulMaxCacheEntryAge : UInt32, @ulMinCacheEntryTtl : UInt32, @secure_dns_setting : Win32cr::Networking::WinHttp::WINHTTP_SECURE_DNS_SETTING, @ullConnResolutionWaitTime : UInt64, @ullFlags : UInt64)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record WINHTTP_CONNECTION_GROUP,
-    cConnections : UInt32,
-    guidGroup : LibC::GUID
+  struct WINHTTP_CONNECTION_GROUP
+    property cConnections : UInt32
+    property guidGroup : LibC::GUID
+    def initialize(@cConnections : UInt32, @guidGroup : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_HOST_CONNECTION_GROUP,
-    pwszHost : Win32cr::Foundation::PWSTR,
-    cConnectionGroups : UInt32,
-    pConnectionGroups : Win32cr::Networking::WinHttp::WINHTTP_CONNECTION_GROUP*
+  struct WINHTTP_HOST_CONNECTION_GROUP
+    property pwszHost : Win32cr::Foundation::PWSTR
+    property cConnectionGroups : UInt32
+    property pConnectionGroups : Win32cr::Networking::WinHttp::WINHTTP_CONNECTION_GROUP*
+    def initialize(@pwszHost : Win32cr::Foundation::PWSTR, @cConnectionGroups : UInt32, @pConnectionGroups : Win32cr::Networking::WinHttp::WINHTTP_CONNECTION_GROUP*)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_QUERY_CONNECTION_GROUP_RESULT,
-    cHosts : UInt32,
-    pHostConnectionGroups : Win32cr::Networking::WinHttp::WINHTTP_HOST_CONNECTION_GROUP*
+  struct WINHTTP_QUERY_CONNECTION_GROUP_RESULT
+    property cHosts : UInt32
+    property pHostConnectionGroups : Win32cr::Networking::WinHttp::WINHTTP_HOST_CONNECTION_GROUP*
+    def initialize(@cHosts : UInt32, @pHostConnectionGroups : Win32cr::Networking::WinHttp::WINHTTP_HOST_CONNECTION_GROUP*)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_HTTP2_RECEIVE_WINDOW,
-    ulStreamWindow : UInt32,
-    ulStreamWindowUpdateDelta : UInt32
+  struct WINHTTP_HTTP2_RECEIVE_WINDOW
+    property ulStreamWindow : UInt32
+    property ulStreamWindowUpdateDelta : UInt32
+    def initialize(@ulStreamWindow : UInt32, @ulStreamWindowUpdateDelta : UInt32)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_FAILED_CONNECTION_RETRIES,
-    dwMaxRetries : UInt32,
-    dwAllowedRetryConditions : UInt32
+  struct WINHTTP_FAILED_CONNECTION_RETRIES
+    property dwMaxRetries : UInt32
+    property dwAllowedRetryConditions : UInt32
+    def initialize(@dwMaxRetries : UInt32, @dwAllowedRetryConditions : UInt32)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_CREDS,
-    lpszUserName : Win32cr::Foundation::PSTR,
-    lpszPassword : Win32cr::Foundation::PSTR,
-    lpszRealm : Win32cr::Foundation::PSTR,
-    dwAuthScheme : Win32cr::Networking::WinHttp::WINHTTP_CREDS_AUTHSCHEME,
-    lpszHostName : Win32cr::Foundation::PSTR,
-    dwPort : UInt32
+  struct WINHTTP_CREDS
+    property lpszUserName : Win32cr::Foundation::PSTR
+    property lpszPassword : Win32cr::Foundation::PSTR
+    property lpszRealm : Win32cr::Foundation::PSTR
+    property dwAuthScheme : Win32cr::Networking::WinHttp::WINHTTP_CREDS_AUTHSCHEME
+    property lpszHostName : Win32cr::Foundation::PSTR
+    property dwPort : UInt32
+    def initialize(@lpszUserName : Win32cr::Foundation::PSTR, @lpszPassword : Win32cr::Foundation::PSTR, @lpszRealm : Win32cr::Foundation::PSTR, @dwAuthScheme : Win32cr::Networking::WinHttp::WINHTTP_CREDS_AUTHSCHEME, @lpszHostName : Win32cr::Foundation::PSTR, @dwPort : UInt32)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_CREDS_EX,
-    lpszUserName : Win32cr::Foundation::PSTR,
-    lpszPassword : Win32cr::Foundation::PSTR,
-    lpszRealm : Win32cr::Foundation::PSTR,
-    dwAuthScheme : Win32cr::Networking::WinHttp::WINHTTP_CREDS_AUTHSCHEME,
-    lpszHostName : Win32cr::Foundation::PSTR,
-    dwPort : UInt32,
-    lpszUrl : Win32cr::Foundation::PSTR
+  struct WINHTTP_CREDS_EX
+    property lpszUserName : Win32cr::Foundation::PSTR
+    property lpszPassword : Win32cr::Foundation::PSTR
+    property lpszRealm : Win32cr::Foundation::PSTR
+    property dwAuthScheme : Win32cr::Networking::WinHttp::WINHTTP_CREDS_AUTHSCHEME
+    property lpszHostName : Win32cr::Foundation::PSTR
+    property dwPort : UInt32
+    property lpszUrl : Win32cr::Foundation::PSTR
+    def initialize(@lpszUserName : Win32cr::Foundation::PSTR, @lpszPassword : Win32cr::Foundation::PSTR, @lpszRealm : Win32cr::Foundation::PSTR, @dwAuthScheme : Win32cr::Networking::WinHttp::WINHTTP_CREDS_AUTHSCHEME, @lpszHostName : Win32cr::Foundation::PSTR, @dwPort : UInt32, @lpszUrl : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_CURRENT_USER_IE_PROXY_CONFIG,
-    fAutoDetect : Win32cr::Foundation::BOOL,
-    lpszAutoConfigUrl : Win32cr::Foundation::PWSTR,
-    lpszProxy : Win32cr::Foundation::PWSTR,
-    lpszProxyBypass : Win32cr::Foundation::PWSTR
+  struct WINHTTP_CURRENT_USER_IE_PROXY_CONFIG
+    property fAutoDetect : Win32cr::Foundation::BOOL
+    property lpszAutoConfigUrl : Win32cr::Foundation::PWSTR
+    property lpszProxy : Win32cr::Foundation::PWSTR
+    property lpszProxyBypass : Win32cr::Foundation::PWSTR
+    def initialize(@fAutoDetect : Win32cr::Foundation::BOOL, @lpszAutoConfigUrl : Win32cr::Foundation::PWSTR, @lpszProxy : Win32cr::Foundation::PWSTR, @lpszProxyBypass : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_WEB_SOCKET_ASYNC_RESULT,
-    async_result : Win32cr::Networking::WinHttp::WINHTTP_ASYNC_RESULT,
-    operation : Win32cr::Networking::WinHttp::WINHTTP_WEB_SOCKET_OPERATION
+  struct WINHTTP_WEB_SOCKET_ASYNC_RESULT
+    property async_result : Win32cr::Networking::WinHttp::WINHTTP_ASYNC_RESULT
+    property operation : Win32cr::Networking::WinHttp::WINHTTP_WEB_SOCKET_OPERATION
+    def initialize(@async_result : Win32cr::Networking::WinHttp::WINHTTP_ASYNC_RESULT, @operation : Win32cr::Networking::WinHttp::WINHTTP_WEB_SOCKET_OPERATION)
+    end
+  end
 
   @[Extern]
-  record WINHTTP_WEB_SOCKET_STATUS,
-    dwBytesTransferred : UInt32,
-    eBufferType : Win32cr::Networking::WinHttp::WINHTTP_WEB_SOCKET_BUFFER_TYPE
+  struct WINHTTP_WEB_SOCKET_STATUS
+    property dwBytesTransferred : UInt32
+    property eBufferType : Win32cr::Networking::WinHttp::WINHTTP_WEB_SOCKET_BUFFER_TYPE
+    def initialize(@dwBytesTransferred : UInt32, @eBufferType : Win32cr::Networking::WinHttp::WINHTTP_WEB_SOCKET_BUFFER_TYPE)
+    end
+  end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record WINHTTP_CONNECTION_INFO,
-    cbSize : UInt32,
-    local_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE,
-    remote_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+  struct WINHTTP_CONNECTION_INFO
+    property cbSize : UInt32
+    property local_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    property remote_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    def initialize(@cbSize : UInt32, @local_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE, @remote_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record WINHTTP_REQUEST_TIMES,
-    cTimes : UInt32,
-    rgullTimes : UInt64[64]
+  struct WINHTTP_REQUEST_TIMES
+    property cTimes : UInt32
+    property rgullTimes : UInt64[64]
+    def initialize(@cTimes : UInt32, @rgullTimes : UInt64[64])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record WINHTTP_REQUEST_STATS,
-    ullFlags : UInt64,
-    ulIndex : UInt32,
-    cStats : UInt32,
-    rgullStats : UInt64[32]
+  struct WINHTTP_REQUEST_STATS
+    property ullFlags : UInt64
+    property ulIndex : UInt32
+    property cStats : UInt32
+    property rgullStats : UInt64[32]
+    def initialize(@ullFlags : UInt64, @ulIndex : UInt32, @cStats : UInt32, @rgullStats : UInt64[32])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record WINHTTP_MATCH_CONNECTION_GUID,
-    connection_guid : LibC::GUID,
-    ullFlags : UInt64
+  struct WINHTTP_MATCH_CONNECTION_GUID
+    property connection_guid : LibC::GUID
+    property ullFlags : UInt64
+    def initialize(@connection_guid : LibC::GUID, @ullFlags : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record WINHTTP_RESOLVER_CACHE_CONFIG,
-    ulMaxResolverCacheEntries : UInt32,
-    ulMaxCacheEntryAge : UInt32,
-    ulMinCacheEntryTtl : UInt32,
-    secure_dns_setting : Win32cr::Networking::WinHttp::WINHTTP_SECURE_DNS_SETTING,
-    ullConnResolutionWaitTime : UInt64,
-    ullFlags : UInt64
+  struct WINHTTP_RESOLVER_CACHE_CONFIG
+    property ulMaxResolverCacheEntries : UInt32
+    property ulMaxCacheEntryAge : UInt32
+    property ulMinCacheEntryTtl : UInt32
+    property secure_dns_setting : Win32cr::Networking::WinHttp::WINHTTP_SECURE_DNS_SETTING
+    property ullConnResolutionWaitTime : UInt64
+    property ullFlags : UInt64
+    def initialize(@ulMaxResolverCacheEntries : UInt32, @ulMaxCacheEntryAge : UInt32, @ulMinCacheEntryTtl : UInt32, @secure_dns_setting : Win32cr::Networking::WinHttp::WINHTTP_SECURE_DNS_SETTING, @ullConnResolutionWaitTime : UInt64, @ullFlags : UInt64)
+    end
+  end
   {% end %}
 
   @[Link("winhttp")]

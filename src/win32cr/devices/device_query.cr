@@ -2,7 +2,7 @@ require "./properties.cr"
 require "./../foundation.cr"
 
 module Win32cr::Devices::DeviceQuery
-  alias PDEV_QUERY_RESULT_CALLBACK = Proc(Win32cr::Devices::DeviceQuery::HDEVQUERY__*, Void*, Win32cr::Devices::DeviceQuery::DEV_QUERY_RESULT_ACTION_DATA*, Void)*
+  alias PDEV_QUERY_RESULT_CALLBACK = Proc(Win32cr::Devices::DeviceQuery::HDEVQUERY__*, Void*, Win32cr::Devices::DeviceQuery::DEV_QUERY_RESULT_ACTION_DATA*, Void)
 
 
   @[Flags]
@@ -85,43 +85,58 @@ module Win32cr::Devices::DeviceQuery
   end
 
   @[Extern]
-  record DEVPROP_FILTER_EXPRESSION,
-    operator : Win32cr::Devices::DeviceQuery::DEVPROP_OPERATOR,
-    property : Win32cr::Devices::Properties::DEVPROPERTY
-
-  @[Extern]
-  record DEV_OBJECT,
-    object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE,
-    pszObjectId : Win32cr::Foundation::PWSTR,
-    cPropertyCount : UInt32,
-    pProperties : Win32cr::Devices::Properties::DEVPROPERTY*
-
-  @[Extern]
-  record DEV_QUERY_RESULT_ACTION_DATA,
-    action : Win32cr::Devices::DeviceQuery::DEV_QUERY_RESULT_ACTION,
-    data : DEV_QUERY_RESULT_UPDATE_PAYLOAD_ do
-
-    # Nested Type DEV_QUERY_RESULT_UPDATE_PAYLOAD_
-    @[Extern(union: true)]
-    record DEV_QUERY_RESULT_UPDATE_PAYLOAD_,
-      state : Win32cr::Devices::DeviceQuery::DEV_QUERY_STATE,
-      device_object : Win32cr::Devices::DeviceQuery::DEV_OBJECT
-
+  struct DEVPROP_FILTER_EXPRESSION
+    property operator : Win32cr::Devices::DeviceQuery::DEVPROP_OPERATOR
+    property property : Win32cr::Devices::Properties::DEVPROPERTY
+    def initialize(@operator : Win32cr::Devices::DeviceQuery::DEVPROP_OPERATOR, @property : Win32cr::Devices::Properties::DEVPROPERTY)
+    end
   end
 
   @[Extern]
-  record DEV_QUERY_PARAMETER,
-    key : Win32cr::Devices::Properties::DEVPROPKEY,
-    type__ : UInt32,
-    buffer_size : UInt32,
-    buffer : Void*
+  struct DEV_OBJECT
+    property object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE
+    property pszObjectId : Win32cr::Foundation::PWSTR
+    property cPropertyCount : UInt32
+    property pProperties : Win32cr::Devices::Properties::DEVPROPERTY*
+    def initialize(@object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, @pszObjectId : Win32cr::Foundation::PWSTR, @cPropertyCount : UInt32, @pProperties : Win32cr::Devices::Properties::DEVPROPERTY*)
+    end
+  end
 
   @[Extern]
-  record HDEVQUERY__,
-    unused : Int32
+  struct DEV_QUERY_RESULT_ACTION_DATA
+    property action : Win32cr::Devices::DeviceQuery::DEV_QUERY_RESULT_ACTION
+    property data : DEV_QUERY_RESULT_UPDATE_PAYLOAD_
 
-  @[Link("api-ms-win-devices-query-l1-1-0")]
-  @[Link("api-ms-win-devices-query-l1-1-1")]
+    # Nested Type DEV_QUERY_RESULT_UPDATE_PAYLOAD_
+    @[Extern(union: true)]
+    struct DEV_QUERY_RESULT_UPDATE_PAYLOAD_
+    property state : Win32cr::Devices::DeviceQuery::DEV_QUERY_STATE
+    property device_object : Win32cr::Devices::DeviceQuery::DEV_OBJECT
+    def initialize(@state : Win32cr::Devices::DeviceQuery::DEV_QUERY_STATE, @device_object : Win32cr::Devices::DeviceQuery::DEV_OBJECT)
+    end
+    end
+
+    def initialize(@action : Win32cr::Devices::DeviceQuery::DEV_QUERY_RESULT_ACTION, @data : DEV_QUERY_RESULT_UPDATE_PAYLOAD_)
+    end
+  end
+
+  @[Extern]
+  struct DEV_QUERY_PARAMETER
+    property key : Win32cr::Devices::Properties::DEVPROPKEY
+    property type__ : UInt32
+    property buffer_size : UInt32
+    property buffer : Void*
+    def initialize(@key : Win32cr::Devices::Properties::DEVPROPKEY, @type__ : UInt32, @buffer_size : UInt32, @buffer : Void*)
+    end
+  end
+
+  @[Extern]
+  struct HDEVQUERY__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
+
   lib C
     fun DevCreateObjectQuery(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, pCallback : Win32cr::Devices::DeviceQuery::PDEV_QUERY_RESULT_CALLBACK, pContext : Void*, phDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__**) : Win32cr::Foundation::HRESULT
 

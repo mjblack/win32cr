@@ -4,7 +4,7 @@ require "./../security.cr"
 require "./../storage/vhd.cr"
 
 module Win32cr::System::Ioctl
-  alias PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK = Proc(Win32cr::System::Ioctl::IO_IRP_EXT_TRACK_OFFSET_HEADER*, Win32cr::System::Ioctl::IO_IRP_EXT_TRACK_OFFSET_HEADER*, Int64, Void)*
+  alias PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK = Proc(Win32cr::System::Ioctl::IO_IRP_EXT_TRACK_OFFSET_HEADER*, Win32cr::System::Ioctl::IO_IRP_EXT_TRACK_OFFSET_HEADER*, Int64, Void)
 
   IOCTL_STORAGE_BASE = 45_u32
   IOCTL_SCMBUS_BASE = 89_u32
@@ -1836,4110 +1836,5597 @@ module Win32cr::System::Ioctl
   end
 
   @[Extern]
-  record STORAGE_HOTPLUG_INFO,
-    size : UInt32,
-    media_removable : Win32cr::Foundation::BOOLEAN,
-    media_hotplug : Win32cr::Foundation::BOOLEAN,
-    device_hotplug : Win32cr::Foundation::BOOLEAN,
-    write_cache_enable_override : Win32cr::Foundation::BOOLEAN
+  struct STORAGE_HOTPLUG_INFO
+    property size : UInt32
+    property media_removable : Win32cr::Foundation::BOOLEAN
+    property media_hotplug : Win32cr::Foundation::BOOLEAN
+    property device_hotplug : Win32cr::Foundation::BOOLEAN
+    property write_cache_enable_override : Win32cr::Foundation::BOOLEAN
+    def initialize(@size : UInt32, @media_removable : Win32cr::Foundation::BOOLEAN, @media_hotplug : Win32cr::Foundation::BOOLEAN, @device_hotplug : Win32cr::Foundation::BOOLEAN, @write_cache_enable_override : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DEVICE_NUMBER,
-    device_type : UInt32,
-    device_number : UInt32,
-    partition_number : UInt32
+  struct STORAGE_DEVICE_NUMBER
+    property device_type : UInt32
+    property device_number : UInt32
+    property partition_number : UInt32
+    def initialize(@device_type : UInt32, @device_number : UInt32, @partition_number : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DEVICE_NUMBERS,
-    version : UInt32,
-    size : UInt32,
-    number_of_devices : UInt32,
-    devices : Win32cr::System::Ioctl::STORAGE_DEVICE_NUMBER*
+  struct STORAGE_DEVICE_NUMBERS
+    property version : UInt32
+    property size : UInt32
+    property number_of_devices : UInt32
+    property devices : Win32cr::System::Ioctl::STORAGE_DEVICE_NUMBER*
+    def initialize(@version : UInt32, @size : UInt32, @number_of_devices : UInt32, @devices : Win32cr::System::Ioctl::STORAGE_DEVICE_NUMBER*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DEVICE_NUMBER_EX,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    device_type : UInt32,
-    device_number : UInt32,
-    device_guid : LibC::GUID,
-    partition_number : UInt32
+  struct STORAGE_DEVICE_NUMBER_EX
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property device_type : UInt32
+    property device_number : UInt32
+    property device_guid : LibC::GUID
+    property partition_number : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @device_type : UInt32, @device_number : UInt32, @device_guid : LibC::GUID, @partition_number : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_BUS_RESET_REQUEST,
-    path_id : UInt8
+  struct STORAGE_BUS_RESET_REQUEST
+    property path_id : UInt8
+    def initialize(@path_id : UInt8)
+    end
+  end
 
   @[Extern]
-  record STORAGE_BREAK_RESERVATION_REQUEST,
-    length : UInt32,
-    _unused : UInt8,
-    path_id : UInt8,
-    target_id : UInt8,
-    lun : UInt8
+  struct STORAGE_BREAK_RESERVATION_REQUEST
+    property length : UInt32
+    property _unused : UInt8
+    property path_id : UInt8
+    property target_id : UInt8
+    property lun : UInt8
+    def initialize(@length : UInt32, @_unused : UInt8, @path_id : UInt8, @target_id : UInt8, @lun : UInt8)
+    end
+  end
 
   @[Extern]
-  record PREVENT_MEDIA_REMOVAL,
-    prevent_media_removal : Win32cr::Foundation::BOOLEAN
+  struct PREVENT_MEDIA_REMOVAL
+    property prevent_media_removal : Win32cr::Foundation::BOOLEAN
+    def initialize(@prevent_media_removal : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record CLASS_MEDIA_CHANGE_CONTEXT,
-    media_change_count : UInt32,
-    new_state : UInt32
+  struct CLASS_MEDIA_CHANGE_CONTEXT
+    property media_change_count : UInt32
+    property new_state : UInt32
+    def initialize(@media_change_count : UInt32, @new_state : UInt32)
+    end
+  end
 
   @[Extern]
-  record TAPE_STATISTICS,
-    version : UInt32,
-    flags : UInt32,
-    recovered_writes : Win32cr::Foundation::LARGE_INTEGER,
-    unrecovered_writes : Win32cr::Foundation::LARGE_INTEGER,
-    recovered_reads : Win32cr::Foundation::LARGE_INTEGER,
-    unrecovered_reads : Win32cr::Foundation::LARGE_INTEGER,
-    compression_ratio_reads : UInt8,
-    compression_ratio_writes : UInt8
+  struct TAPE_STATISTICS
+    property version : UInt32
+    property flags : UInt32
+    property recovered_writes : Win32cr::Foundation::LARGE_INTEGER
+    property unrecovered_writes : Win32cr::Foundation::LARGE_INTEGER
+    property recovered_reads : Win32cr::Foundation::LARGE_INTEGER
+    property unrecovered_reads : Win32cr::Foundation::LARGE_INTEGER
+    property compression_ratio_reads : UInt8
+    property compression_ratio_writes : UInt8
+    def initialize(@version : UInt32, @flags : UInt32, @recovered_writes : Win32cr::Foundation::LARGE_INTEGER, @unrecovered_writes : Win32cr::Foundation::LARGE_INTEGER, @recovered_reads : Win32cr::Foundation::LARGE_INTEGER, @unrecovered_reads : Win32cr::Foundation::LARGE_INTEGER, @compression_ratio_reads : UInt8, @compression_ratio_writes : UInt8)
+    end
+  end
 
   @[Extern]
-  record TAPE_GET_STATISTICS,
-    operation : UInt32
+  struct TAPE_GET_STATISTICS
+    property operation : UInt32
+    def initialize(@operation : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEVICE_MEDIA_INFO,
-    device_specific : DeviceSpecific_e__Union_ do
+  struct DEVICE_MEDIA_INFO
+    property device_specific : DeviceSpecific_e__Union_
 
     # Nested Type DeviceSpecific_e__Union_
     @[Extern(union: true)]
-    record DeviceSpecific_e__Union_,
-      disk_info : DiskInfo_e__Struct_,
-      removable_disk_info : RemovableDiskInfo_e__Struct_,
-      tape_info : TapeInfo_e__Struct_ do
+    struct DeviceSpecific_e__Union_
+    property disk_info : DiskInfo_e__Struct_
+    property removable_disk_info : RemovableDiskInfo_e__Struct_
+    property tape_info : TapeInfo_e__Struct_
 
       # Nested Type TapeInfo_e__Struct_
       @[Extern]
-      record TapeInfo_e__Struct_,
-        media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE,
-        media_characteristics : UInt32,
-        current_block_size : UInt32,
-        bus_type : Win32cr::Storage::FileSystem::STORAGE_BUS_TYPE,
-        bus_specific_data : BusSpecificData_e__Union_ do
+      struct TapeInfo_e__Struct_
+    property media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE
+    property media_characteristics : UInt32
+    property current_block_size : UInt32
+    property bus_type : Win32cr::Storage::FileSystem::STORAGE_BUS_TYPE
+    property bus_specific_data : BusSpecificData_e__Union_
 
         # Nested Type BusSpecificData_e__Union_
         @[Extern(union: true)]
-        record BusSpecificData_e__Union_,
-          scsi_information : ScsiInformation_e__Struct_ do
+        struct BusSpecificData_e__Union_
+    property scsi_information : ScsiInformation_e__Struct_
 
           # Nested Type ScsiInformation_e__Struct_
           @[Extern]
-          record ScsiInformation_e__Struct_,
-            medium_type : UInt8,
-            density_code : UInt8
+          struct ScsiInformation_e__Struct_
+    property medium_type : UInt8
+    property density_code : UInt8
+    def initialize(@medium_type : UInt8, @density_code : UInt8)
+    end
+          end
 
+    def initialize(@scsi_information : ScsiInformation_e__Struct_)
+    end
         end
 
+    def initialize(@media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE, @media_characteristics : UInt32, @current_block_size : UInt32, @bus_type : Win32cr::Storage::FileSystem::STORAGE_BUS_TYPE, @bus_specific_data : BusSpecificData_e__Union_)
+    end
       end
 
 
       # Nested Type DiskInfo_e__Struct_
       @[Extern]
-      record DiskInfo_e__Struct_,
-        cylinders : Win32cr::Foundation::LARGE_INTEGER,
-        media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE,
-        tracks_per_cylinder : UInt32,
-        sectors_per_track : UInt32,
-        bytes_per_sector : UInt32,
-        number_media_sides : UInt32,
-        media_characteristics : UInt32
+      struct DiskInfo_e__Struct_
+    property cylinders : Win32cr::Foundation::LARGE_INTEGER
+    property media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE
+    property tracks_per_cylinder : UInt32
+    property sectors_per_track : UInt32
+    property bytes_per_sector : UInt32
+    property number_media_sides : UInt32
+    property media_characteristics : UInt32
+    def initialize(@cylinders : Win32cr::Foundation::LARGE_INTEGER, @media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE, @tracks_per_cylinder : UInt32, @sectors_per_track : UInt32, @bytes_per_sector : UInt32, @number_media_sides : UInt32, @media_characteristics : UInt32)
+    end
+      end
 
 
       # Nested Type RemovableDiskInfo_e__Struct_
       @[Extern]
-      record RemovableDiskInfo_e__Struct_,
-        cylinders : Win32cr::Foundation::LARGE_INTEGER,
-        media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE,
-        tracks_per_cylinder : UInt32,
-        sectors_per_track : UInt32,
-        bytes_per_sector : UInt32,
-        number_media_sides : UInt32,
-        media_characteristics : UInt32
+      struct RemovableDiskInfo_e__Struct_
+    property cylinders : Win32cr::Foundation::LARGE_INTEGER
+    property media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE
+    property tracks_per_cylinder : UInt32
+    property sectors_per_track : UInt32
+    property bytes_per_sector : UInt32
+    property number_media_sides : UInt32
+    property media_characteristics : UInt32
+    def initialize(@cylinders : Win32cr::Foundation::LARGE_INTEGER, @media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE, @tracks_per_cylinder : UInt32, @sectors_per_track : UInt32, @bytes_per_sector : UInt32, @number_media_sides : UInt32, @media_characteristics : UInt32)
+    end
+      end
 
+    def initialize(@disk_info : DiskInfo_e__Struct_, @removable_disk_info : RemovableDiskInfo_e__Struct_, @tape_info : TapeInfo_e__Struct_)
+    end
     end
 
+    def initialize(@device_specific : DeviceSpecific_e__Union_)
+    end
   end
 
   @[Extern]
-  record GET_MEDIA_TYPES,
-    device_type : UInt32,
-    media_info_count : UInt32,
-    media_info : Win32cr::System::Ioctl::DEVICE_MEDIA_INFO*
+  struct GET_MEDIA_TYPES
+    property device_type : UInt32
+    property media_info_count : UInt32
+    property media_info : Win32cr::System::Ioctl::DEVICE_MEDIA_INFO*
+    def initialize(@device_type : UInt32, @media_info_count : UInt32, @media_info : Win32cr::System::Ioctl::DEVICE_MEDIA_INFO*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_PREDICT_FAILURE,
-    predict_failure : UInt32,
-    vendor_specific : UInt8[512]
+  struct STORAGE_PREDICT_FAILURE
+    property predict_failure : UInt32
+    property vendor_specific : UInt8[512]
+    def initialize(@predict_failure : UInt32, @vendor_specific : UInt8[512])
+    end
+  end
 
   @[Extern]
-  record STORAGE_FAILURE_PREDICTION_CONFIG,
-    version : UInt32,
-    size : UInt32,
-    set : Win32cr::Foundation::BOOLEAN,
-    enabled : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt16
+  struct STORAGE_FAILURE_PREDICTION_CONFIG
+    property version : UInt32
+    property size : UInt32
+    property set : Win32cr::Foundation::BOOLEAN
+    property enabled : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt16
+    def initialize(@version : UInt32, @size : UInt32, @set : Win32cr::Foundation::BOOLEAN, @enabled : Win32cr::Foundation::BOOLEAN, @reserved : UInt16)
+    end
+  end
 
   @[Extern]
-  record STORAGE_PROPERTY_QUERY,
-    property_id : Win32cr::System::Ioctl::STORAGE_PROPERTY_ID,
-    query_type : Win32cr::System::Ioctl::STORAGE_QUERY_TYPE,
-    additional_parameters : UInt8*
+  struct STORAGE_PROPERTY_QUERY
+    property property_id : Win32cr::System::Ioctl::STORAGE_PROPERTY_ID
+    property query_type : Win32cr::System::Ioctl::STORAGE_QUERY_TYPE
+    property additional_parameters : UInt8*
+    def initialize(@property_id : Win32cr::System::Ioctl::STORAGE_PROPERTY_ID, @query_type : Win32cr::System::Ioctl::STORAGE_QUERY_TYPE, @additional_parameters : UInt8*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_PROPERTY_SET,
-    property_id : Win32cr::System::Ioctl::STORAGE_PROPERTY_ID,
-    set_type : Win32cr::System::Ioctl::STORAGE_SET_TYPE,
-    additional_parameters : UInt8*
+  struct STORAGE_PROPERTY_SET
+    property property_id : Win32cr::System::Ioctl::STORAGE_PROPERTY_ID
+    property set_type : Win32cr::System::Ioctl::STORAGE_SET_TYPE
+    property additional_parameters : UInt8*
+    def initialize(@property_id : Win32cr::System::Ioctl::STORAGE_PROPERTY_ID, @set_type : Win32cr::System::Ioctl::STORAGE_SET_TYPE, @additional_parameters : UInt8*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DESCRIPTOR_HEADER,
-    version : UInt32,
-    size : UInt32
+  struct STORAGE_DESCRIPTOR_HEADER
+    property version : UInt32
+    property size : UInt32
+    def initialize(@version : UInt32, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DEVICE_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    device_type : UInt8,
-    device_type_modifier : UInt8,
-    removable_media : Win32cr::Foundation::BOOLEAN,
-    command_queueing : Win32cr::Foundation::BOOLEAN,
-    vendor_id_offset : UInt32,
-    product_id_offset : UInt32,
-    product_revision_offset : UInt32,
-    serial_number_offset : UInt32,
-    bus_type : Win32cr::Storage::FileSystem::STORAGE_BUS_TYPE,
-    raw_properties_length : UInt32,
-    raw_device_properties : UInt8*
+  struct STORAGE_DEVICE_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property device_type : UInt8
+    property device_type_modifier : UInt8
+    property removable_media : Win32cr::Foundation::BOOLEAN
+    property command_queueing : Win32cr::Foundation::BOOLEAN
+    property vendor_id_offset : UInt32
+    property product_id_offset : UInt32
+    property product_revision_offset : UInt32
+    property serial_number_offset : UInt32
+    property bus_type : Win32cr::Storage::FileSystem::STORAGE_BUS_TYPE
+    property raw_properties_length : UInt32
+    property raw_device_properties : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @device_type : UInt8, @device_type_modifier : UInt8, @removable_media : Win32cr::Foundation::BOOLEAN, @command_queueing : Win32cr::Foundation::BOOLEAN, @vendor_id_offset : UInt32, @product_id_offset : UInt32, @product_revision_offset : UInt32, @serial_number_offset : UInt32, @bus_type : Win32cr::Storage::FileSystem::STORAGE_BUS_TYPE, @raw_properties_length : UInt32, @raw_device_properties : UInt8*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_ADAPTER_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    maximum_transfer_length : UInt32,
-    maximum_physical_pages : UInt32,
-    alignment_mask : UInt32,
-    adapter_uses_pio : Win32cr::Foundation::BOOLEAN,
-    adapter_scans_down : Win32cr::Foundation::BOOLEAN,
-    command_queueing : Win32cr::Foundation::BOOLEAN,
-    accelerated_transfer : Win32cr::Foundation::BOOLEAN,
-    bus_type : UInt8,
-    bus_major_version : UInt16,
-    bus_minor_version : UInt16,
-    srb_type : UInt8,
-    address_type : UInt8
+  struct STORAGE_ADAPTER_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property maximum_transfer_length : UInt32
+    property maximum_physical_pages : UInt32
+    property alignment_mask : UInt32
+    property adapter_uses_pio : Win32cr::Foundation::BOOLEAN
+    property adapter_scans_down : Win32cr::Foundation::BOOLEAN
+    property command_queueing : Win32cr::Foundation::BOOLEAN
+    property accelerated_transfer : Win32cr::Foundation::BOOLEAN
+    property bus_type : UInt8
+    property bus_major_version : UInt16
+    property bus_minor_version : UInt16
+    property srb_type : UInt8
+    property address_type : UInt8
+    def initialize(@version : UInt32, @size : UInt32, @maximum_transfer_length : UInt32, @maximum_physical_pages : UInt32, @alignment_mask : UInt32, @adapter_uses_pio : Win32cr::Foundation::BOOLEAN, @adapter_scans_down : Win32cr::Foundation::BOOLEAN, @command_queueing : Win32cr::Foundation::BOOLEAN, @accelerated_transfer : Win32cr::Foundation::BOOLEAN, @bus_type : UInt8, @bus_major_version : UInt16, @bus_minor_version : UInt16, @srb_type : UInt8, @address_type : UInt8)
+    end
+  end
 
   @[Extern]
-  record STORAGE_ACCESS_ALIGNMENT_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    bytes_per_cache_line : UInt32,
-    bytes_offset_for_cache_alignment : UInt32,
-    bytes_per_logical_sector : UInt32,
-    bytes_per_physical_sector : UInt32,
-    bytes_offset_for_sector_alignment : UInt32
+  struct STORAGE_ACCESS_ALIGNMENT_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property bytes_per_cache_line : UInt32
+    property bytes_offset_for_cache_alignment : UInt32
+    property bytes_per_logical_sector : UInt32
+    property bytes_per_physical_sector : UInt32
+    property bytes_offset_for_sector_alignment : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @bytes_per_cache_line : UInt32, @bytes_offset_for_cache_alignment : UInt32, @bytes_per_logical_sector : UInt32, @bytes_per_physical_sector : UInt32, @bytes_offset_for_sector_alignment : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_MEDIUM_PRODUCT_TYPE_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    medium_product_type : UInt32
+  struct STORAGE_MEDIUM_PRODUCT_TYPE_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property medium_product_type : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @medium_product_type : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_MINIPORT_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    portdriver : Win32cr::System::Ioctl::STORAGE_PORT_CODE_SET,
-    lun_reset_supported : Win32cr::Foundation::BOOLEAN,
-    target_reset_supported : Win32cr::Foundation::BOOLEAN,
-    io_timeout_value : UInt16,
-    extra_io_info_supported : Win32cr::Foundation::BOOLEAN,
-    flags : Flags_e__Union_,
-    reserved0 : UInt8[2],
-    reserved1 : UInt32 do
+  struct STORAGE_MINIPORT_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property portdriver : Win32cr::System::Ioctl::STORAGE_PORT_CODE_SET
+    property lun_reset_supported : Win32cr::Foundation::BOOLEAN
+    property target_reset_supported : Win32cr::Foundation::BOOLEAN
+    property io_timeout_value : UInt16
+    property extra_io_info_supported : Win32cr::Foundation::BOOLEAN
+    property flags : Flags_e__Union_
+    property reserved0 : UInt8[2]
+    property reserved1 : UInt32
 
     # Nested Type Flags_e__Union_
     @[Extern(union: true)]
-    record Flags_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      as_byte : UInt8 do
+    struct Flags_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property as_byte : UInt8
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt8
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_byte : UInt8)
+    end
     end
 
+    def initialize(@version : UInt32, @size : UInt32, @portdriver : Win32cr::System::Ioctl::STORAGE_PORT_CODE_SET, @lun_reset_supported : Win32cr::Foundation::BOOLEAN, @target_reset_supported : Win32cr::Foundation::BOOLEAN, @io_timeout_value : UInt16, @extra_io_info_supported : Win32cr::Foundation::BOOLEAN, @flags : Flags_e__Union_, @reserved0 : UInt8[2], @reserved1 : UInt32)
+    end
   end
 
   @[Extern]
-  record STORAGE_IDENTIFIER,
-    code_set : Win32cr::System::Ioctl::STORAGE_IDENTIFIER_CODE_SET,
-    type__ : Win32cr::System::Ioctl::STORAGE_IDENTIFIER_TYPE,
-    identifier_size : UInt16,
-    next_offset : UInt16,
-    association : Win32cr::System::Ioctl::STORAGE_ASSOCIATION_TYPE,
-    identifier : UInt8*
-
-  @[Extern]
-  record STORAGE_DEVICE_ID_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    number_of_identifiers : UInt32,
-    identifiers : UInt8*
-
-  @[Extern]
-  record DEVICE_SEEK_PENALTY_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    incurs_seek_penalty : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DEVICE_WRITE_AGGREGATION_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    benefits_from_write_aggregation : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DEVICE_TRIM_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    trim_enabled : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DEVICE_LB_PROVISIONING_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    _bitfield : UInt8,
-    reserved1 : UInt8[7],
-    optimal_unmap_granularity : UInt64,
-    unmap_granularity_alignment : UInt64,
-    max_unmap_lba_count : UInt32,
-    max_unmap_block_descriptor_count : UInt32
-
-  @[Extern]
-  record STORAGE_LB_PROVISIONING_MAP_RESOURCES,
-    size : UInt32,
-    version : UInt32,
-    _bitfield1 : UInt8,
-    reserved1 : UInt8[3],
-    _bitfield2 : UInt8,
-    reserved3 : UInt8[3],
-    available_mapping_resources : UInt64,
-    used_mapping_resources : UInt64
-
-  @[Extern]
-  record DEVICE_POWER_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    device_attention_supported : Win32cr::Foundation::BOOLEAN,
-    asynchronous_notification_supported : Win32cr::Foundation::BOOLEAN,
-    idle_power_management_enabled : Win32cr::Foundation::BOOLEAN,
-    d3_cold_enabled : Win32cr::Foundation::BOOLEAN,
-    d3_cold_supported : Win32cr::Foundation::BOOLEAN,
-    no_verify_during_idle_power : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8[2],
-    idle_timeout_in_ms : UInt32
-
-  @[Extern]
-  record DEVICE_COPY_OFFLOAD_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    maximum_token_lifetime : UInt32,
-    default_token_lifetime : UInt32,
-    maximum_transfer_size : UInt64,
-    optimal_transfer_count : UInt64,
-    maximum_data_descriptors : UInt32,
-    maximum_transfer_length_per_descriptor : UInt32,
-    optimal_transfer_length_per_descriptor : UInt32,
-    optimal_transfer_length_granularity : UInt16,
-    reserved : UInt8[2]
-
-  @[Extern]
-  record STORAGE_DEVICE_RESILIENCY_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    name_offset : UInt32,
-    number_of_logical_copies : UInt32,
-    number_of_physical_copies : UInt32,
-    physical_disk_redundancy : UInt32,
-    number_of_columns : UInt32,
-    interleave : UInt32
-
-  @[Extern]
-  record STORAGE_RPMB_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    size_in_bytes : UInt32,
-    max_reliable_write_size_in_bytes : UInt32,
-    frame_format : Win32cr::System::Ioctl::STORAGE_RPMB_FRAME_TYPE
-
-  @[Extern]
-  record STORAGE_CRYPTO_CAPABILITY,
-    version : UInt32,
-    size : UInt32,
-    crypto_capability_index : UInt32,
-    algorithm_id : Win32cr::System::Ioctl::STORAGE_CRYPTO_ALGORITHM_ID,
-    key_size : Win32cr::System::Ioctl::STORAGE_CRYPTO_KEY_SIZE,
-    data_unit_size_bitmask : UInt32
-
-  @[Extern]
-  record STORAGE_CRYPTO_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    num_keys_supported : UInt32,
-    num_crypto_capabilities : UInt32,
-    crypto_capabilities : Win32cr::System::Ioctl::STORAGE_CRYPTO_CAPABILITY*
-
-  @[Extern]
-  record STORAGE_TIER,
-    id : LibC::GUID,
-    name : UInt16[256],
-    description : UInt16[256],
-    flags : UInt64,
-    provisioned_capacity : UInt64,
-    media_type : Win32cr::System::Ioctl::STORAGE_TIER_MEDIA_TYPE,
-    class__ : Win32cr::System::Ioctl::STORAGE_TIER_CLASS
-
-  @[Extern]
-  record STORAGE_DEVICE_TIERING_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    total_number_of_tiers : UInt32,
-    number_of_tiers_returned : UInt32,
-    tiers : Win32cr::System::Ioctl::STORAGE_TIER*
-
-  @[Extern]
-  record STORAGE_DEVICE_FAULT_DOMAIN_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    number_of_fault_domains : UInt32,
-    fault_domain_ids : LibC::GUID*
-
-  @[Extern(union: true)]
-  record STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE,
-    anonymous : Anonymous_e__Struct_,
-    as_ulong : UInt32 do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt32
-
+  struct STORAGE_IDENTIFIER
+    property code_set : Win32cr::System::Ioctl::STORAGE_IDENTIFIER_CODE_SET
+    property type__ : Win32cr::System::Ioctl::STORAGE_IDENTIFIER_TYPE
+    property identifier_size : UInt16
+    property next_offset : UInt16
+    property association : Win32cr::System::Ioctl::STORAGE_ASSOCIATION_TYPE
+    property identifier : UInt8*
+    def initialize(@code_set : Win32cr::System::Ioctl::STORAGE_IDENTIFIER_CODE_SET, @type__ : Win32cr::System::Ioctl::STORAGE_IDENTIFIER_TYPE, @identifier_size : UInt16, @next_offset : UInt16, @association : Win32cr::System::Ioctl::STORAGE_ASSOCIATION_TYPE, @identifier : UInt8*)
+    end
   end
 
   @[Extern]
-  record STORAGE_PROTOCOL_SPECIFIC_DATA,
-    protocol_type : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE,
-    data_type : UInt32,
-    protocol_data_request_value : UInt32,
-    protocol_data_request_sub_value : UInt32,
-    protocol_data_offset : UInt32,
-    protocol_data_length : UInt32,
-    fixed_protocol_return_data : UInt32,
-    protocol_data_request_sub_value2 : UInt32,
-    protocol_data_request_sub_value3 : UInt32,
-    protocol_data_request_sub_value4 : UInt32
+  struct STORAGE_DEVICE_ID_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property number_of_identifiers : UInt32
+    property identifiers : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @number_of_identifiers : UInt32, @identifiers : UInt8*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_PROTOCOL_SPECIFIC_DATA_EXT,
-    protocol_type : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE,
-    data_type : UInt32,
-    protocol_data_value : UInt32,
-    protocol_data_sub_value : UInt32,
-    protocol_data_offset : UInt32,
-    protocol_data_length : UInt32,
-    fixed_protocol_return_data : UInt32,
-    protocol_data_sub_value2 : UInt32,
-    protocol_data_sub_value3 : UInt32,
-    protocol_data_sub_value4 : UInt32,
-    protocol_data_sub_value5 : UInt32,
-    reserved : UInt32[5]
+  struct DEVICE_SEEK_PENALTY_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property incurs_seek_penalty : Win32cr::Foundation::BOOLEAN
+    def initialize(@version : UInt32, @size : UInt32, @incurs_seek_penalty : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record STORAGE_PROTOCOL_DATA_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    protocol_specific_data : Win32cr::System::Ioctl::STORAGE_PROTOCOL_SPECIFIC_DATA
+  struct DEVICE_WRITE_AGGREGATION_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property benefits_from_write_aggregation : Win32cr::Foundation::BOOLEAN
+    def initialize(@version : UInt32, @size : UInt32, @benefits_from_write_aggregation : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT,
-    version : UInt32,
-    size : UInt32,
-    protocol_specific_data : Win32cr::System::Ioctl::STORAGE_PROTOCOL_SPECIFIC_DATA_EXT
+  struct DEVICE_TRIM_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property trim_enabled : Win32cr::Foundation::BOOLEAN
+    def initialize(@version : UInt32, @size : UInt32, @trim_enabled : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record STORAGE_TEMPERATURE_INFO,
-    index : UInt16,
-    temperature : Int16,
-    over_threshold : Int16,
-    under_threshold : Int16,
-    over_threshold_changable : Win32cr::Foundation::BOOLEAN,
-    under_threshold_changable : Win32cr::Foundation::BOOLEAN,
-    event_generated : Win32cr::Foundation::BOOLEAN,
-    reserved0 : UInt8,
-    reserved1 : UInt32
+  struct DEVICE_LB_PROVISIONING_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property _bitfield : UInt8
+    property reserved1 : UInt8[7]
+    property optimal_unmap_granularity : UInt64
+    property unmap_granularity_alignment : UInt64
+    property max_unmap_lba_count : UInt32
+    property max_unmap_block_descriptor_count : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @_bitfield : UInt8, @reserved1 : UInt8[7], @optimal_unmap_granularity : UInt64, @unmap_granularity_alignment : UInt64, @max_unmap_lba_count : UInt32, @max_unmap_block_descriptor_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_TEMPERATURE_DATA_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    critical_temperature : Int16,
-    warning_temperature : Int16,
-    info_count : UInt16,
-    reserved0 : UInt8[2],
-    reserved1 : UInt32[2],
-    temperature_info : Win32cr::System::Ioctl::STORAGE_TEMPERATURE_INFO*
+  struct STORAGE_LB_PROVISIONING_MAP_RESOURCES
+    property size : UInt32
+    property version : UInt32
+    property _bitfield1 : UInt8
+    property reserved1 : UInt8[3]
+    property _bitfield2 : UInt8
+    property reserved3 : UInt8[3]
+    property available_mapping_resources : UInt64
+    property used_mapping_resources : UInt64
+    def initialize(@size : UInt32, @version : UInt32, @_bitfield1 : UInt8, @reserved1 : UInt8[3], @_bitfield2 : UInt8, @reserved3 : UInt8[3], @available_mapping_resources : UInt64, @used_mapping_resources : UInt64)
+    end
+  end
 
   @[Extern]
-  record STORAGE_TEMPERATURE_THRESHOLD,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt16,
-    index : UInt16,
-    threshold : Int16,
-    over_threshold : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8
+  struct DEVICE_POWER_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property device_attention_supported : Win32cr::Foundation::BOOLEAN
+    property asynchronous_notification_supported : Win32cr::Foundation::BOOLEAN
+    property idle_power_management_enabled : Win32cr::Foundation::BOOLEAN
+    property d3_cold_enabled : Win32cr::Foundation::BOOLEAN
+    property d3_cold_supported : Win32cr::Foundation::BOOLEAN
+    property no_verify_during_idle_power : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8[2]
+    property idle_timeout_in_ms : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @device_attention_supported : Win32cr::Foundation::BOOLEAN, @asynchronous_notification_supported : Win32cr::Foundation::BOOLEAN, @idle_power_management_enabled : Win32cr::Foundation::BOOLEAN, @d3_cold_enabled : Win32cr::Foundation::BOOLEAN, @d3_cold_supported : Win32cr::Foundation::BOOLEAN, @no_verify_during_idle_power : Win32cr::Foundation::BOOLEAN, @reserved : UInt8[2], @idle_timeout_in_ms : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DEVICE_COPY_OFFLOAD_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property maximum_token_lifetime : UInt32
+    property default_token_lifetime : UInt32
+    property maximum_transfer_size : UInt64
+    property optimal_transfer_count : UInt64
+    property maximum_data_descriptors : UInt32
+    property maximum_transfer_length_per_descriptor : UInt32
+    property optimal_transfer_length_per_descriptor : UInt32
+    property optimal_transfer_length_granularity : UInt16
+    property reserved : UInt8[2]
+    def initialize(@version : UInt32, @size : UInt32, @maximum_token_lifetime : UInt32, @default_token_lifetime : UInt32, @maximum_transfer_size : UInt64, @optimal_transfer_count : UInt64, @maximum_data_descriptors : UInt32, @maximum_transfer_length_per_descriptor : UInt32, @optimal_transfer_length_per_descriptor : UInt32, @optimal_transfer_length_granularity : UInt16, @reserved : UInt8[2])
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_DEVICE_RESILIENCY_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property name_offset : UInt32
+    property number_of_logical_copies : UInt32
+    property number_of_physical_copies : UInt32
+    property physical_disk_redundancy : UInt32
+    property number_of_columns : UInt32
+    property interleave : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @name_offset : UInt32, @number_of_logical_copies : UInt32, @number_of_physical_copies : UInt32, @physical_disk_redundancy : UInt32, @number_of_columns : UInt32, @interleave : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_RPMB_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property size_in_bytes : UInt32
+    property max_reliable_write_size_in_bytes : UInt32
+    property frame_format : Win32cr::System::Ioctl::STORAGE_RPMB_FRAME_TYPE
+    def initialize(@version : UInt32, @size : UInt32, @size_in_bytes : UInt32, @max_reliable_write_size_in_bytes : UInt32, @frame_format : Win32cr::System::Ioctl::STORAGE_RPMB_FRAME_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_CRYPTO_CAPABILITY
+    property version : UInt32
+    property size : UInt32
+    property crypto_capability_index : UInt32
+    property algorithm_id : Win32cr::System::Ioctl::STORAGE_CRYPTO_ALGORITHM_ID
+    property key_size : Win32cr::System::Ioctl::STORAGE_CRYPTO_KEY_SIZE
+    property data_unit_size_bitmask : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @crypto_capability_index : UInt32, @algorithm_id : Win32cr::System::Ioctl::STORAGE_CRYPTO_ALGORITHM_ID, @key_size : Win32cr::System::Ioctl::STORAGE_CRYPTO_KEY_SIZE, @data_unit_size_bitmask : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_CRYPTO_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property num_keys_supported : UInt32
+    property num_crypto_capabilities : UInt32
+    property crypto_capabilities : Win32cr::System::Ioctl::STORAGE_CRYPTO_CAPABILITY*
+    def initialize(@version : UInt32, @size : UInt32, @num_keys_supported : UInt32, @num_crypto_capabilities : UInt32, @crypto_capabilities : Win32cr::System::Ioctl::STORAGE_CRYPTO_CAPABILITY*)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_TIER
+    property id : LibC::GUID
+    property name : UInt16[256]
+    property description : UInt16[256]
+    property flags : UInt64
+    property provisioned_capacity : UInt64
+    property media_type : Win32cr::System::Ioctl::STORAGE_TIER_MEDIA_TYPE
+    property class__ : Win32cr::System::Ioctl::STORAGE_TIER_CLASS
+    def initialize(@id : LibC::GUID, @name : UInt16[256], @description : UInt16[256], @flags : UInt64, @provisioned_capacity : UInt64, @media_type : Win32cr::System::Ioctl::STORAGE_TIER_MEDIA_TYPE, @class__ : Win32cr::System::Ioctl::STORAGE_TIER_CLASS)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_DEVICE_TIERING_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property total_number_of_tiers : UInt32
+    property number_of_tiers_returned : UInt32
+    property tiers : Win32cr::System::Ioctl::STORAGE_TIER*
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @total_number_of_tiers : UInt32, @number_of_tiers_returned : UInt32, @tiers : Win32cr::System::Ioctl::STORAGE_TIER*)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_DEVICE_FAULT_DOMAIN_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property number_of_fault_domains : UInt32
+    property fault_domain_ids : LibC::GUID*
+    def initialize(@version : UInt32, @size : UInt32, @number_of_fault_domains : UInt32, @fault_domain_ids : LibC::GUID*)
+    end
+  end
 
   @[Extern(union: true)]
-  record STORAGE_SPEC_VERSION,
-    anonymous : Anonymous_e__Struct_,
-    as_ulong : UInt32 do
+  struct STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      minor_version : MinorVersion_e__Union_,
-      major_version : UInt16 do
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_PROTOCOL_SPECIFIC_DATA
+    property protocol_type : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE
+    property data_type : UInt32
+    property protocol_data_request_value : UInt32
+    property protocol_data_request_sub_value : UInt32
+    property protocol_data_offset : UInt32
+    property protocol_data_length : UInt32
+    property fixed_protocol_return_data : UInt32
+    property protocol_data_request_sub_value2 : UInt32
+    property protocol_data_request_sub_value3 : UInt32
+    property protocol_data_request_sub_value4 : UInt32
+    def initialize(@protocol_type : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE, @data_type : UInt32, @protocol_data_request_value : UInt32, @protocol_data_request_sub_value : UInt32, @protocol_data_offset : UInt32, @protocol_data_length : UInt32, @fixed_protocol_return_data : UInt32, @protocol_data_request_sub_value2 : UInt32, @protocol_data_request_sub_value3 : UInt32, @protocol_data_request_sub_value4 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_PROTOCOL_SPECIFIC_DATA_EXT
+    property protocol_type : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE
+    property data_type : UInt32
+    property protocol_data_value : UInt32
+    property protocol_data_sub_value : UInt32
+    property protocol_data_offset : UInt32
+    property protocol_data_length : UInt32
+    property fixed_protocol_return_data : UInt32
+    property protocol_data_sub_value2 : UInt32
+    property protocol_data_sub_value3 : UInt32
+    property protocol_data_sub_value4 : UInt32
+    property protocol_data_sub_value5 : UInt32
+    property reserved : UInt32[5]
+    def initialize(@protocol_type : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE, @data_type : UInt32, @protocol_data_value : UInt32, @protocol_data_sub_value : UInt32, @protocol_data_offset : UInt32, @protocol_data_length : UInt32, @fixed_protocol_return_data : UInt32, @protocol_data_sub_value2 : UInt32, @protocol_data_sub_value3 : UInt32, @protocol_data_sub_value4 : UInt32, @protocol_data_sub_value5 : UInt32, @reserved : UInt32[5])
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_PROTOCOL_DATA_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property protocol_specific_data : Win32cr::System::Ioctl::STORAGE_PROTOCOL_SPECIFIC_DATA
+    def initialize(@version : UInt32, @size : UInt32, @protocol_specific_data : Win32cr::System::Ioctl::STORAGE_PROTOCOL_SPECIFIC_DATA)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT
+    property version : UInt32
+    property size : UInt32
+    property protocol_specific_data : Win32cr::System::Ioctl::STORAGE_PROTOCOL_SPECIFIC_DATA_EXT
+    def initialize(@version : UInt32, @size : UInt32, @protocol_specific_data : Win32cr::System::Ioctl::STORAGE_PROTOCOL_SPECIFIC_DATA_EXT)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_TEMPERATURE_INFO
+    property index : UInt16
+    property temperature : Int16
+    property over_threshold : Int16
+    property under_threshold : Int16
+    property over_threshold_changable : Win32cr::Foundation::BOOLEAN
+    property under_threshold_changable : Win32cr::Foundation::BOOLEAN
+    property event_generated : Win32cr::Foundation::BOOLEAN
+    property reserved0 : UInt8
+    property reserved1 : UInt32
+    def initialize(@index : UInt16, @temperature : Int16, @over_threshold : Int16, @under_threshold : Int16, @over_threshold_changable : Win32cr::Foundation::BOOLEAN, @under_threshold_changable : Win32cr::Foundation::BOOLEAN, @event_generated : Win32cr::Foundation::BOOLEAN, @reserved0 : UInt8, @reserved1 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_TEMPERATURE_DATA_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property critical_temperature : Int16
+    property warning_temperature : Int16
+    property info_count : UInt16
+    property reserved0 : UInt8[2]
+    property reserved1 : UInt32[2]
+    property temperature_info : Win32cr::System::Ioctl::STORAGE_TEMPERATURE_INFO*
+    def initialize(@version : UInt32, @size : UInt32, @critical_temperature : Int16, @warning_temperature : Int16, @info_count : UInt16, @reserved0 : UInt8[2], @reserved1 : UInt32[2], @temperature_info : Win32cr::System::Ioctl::STORAGE_TEMPERATURE_INFO*)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_TEMPERATURE_THRESHOLD
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt16
+    property index : UInt16
+    property threshold : Int16
+    property over_threshold : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt16, @index : UInt16, @threshold : Int16, @over_threshold : Win32cr::Foundation::BOOLEAN, @reserved : UInt8)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct STORAGE_SPEC_VERSION
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property minor_version : MinorVersion_e__Union_
+    property major_version : UInt16
 
       # Nested Type MinorVersion_e__Union_
       @[Extern(union: true)]
-      record MinorVersion_e__Union_,
-        anonymous : Anonymous_e__Struct_,
-        as_ushort : UInt16 do
+      struct MinorVersion_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property as_ushort : UInt16
 
         # Nested Type Anonymous_e__Struct_
         @[Extern]
-        record Anonymous_e__Struct_,
-          sub_minor : UInt8,
-          minor : UInt8
+        struct Anonymous_e__Struct_
+    property sub_minor : UInt8
+    property minor : UInt8
+    def initialize(@sub_minor : UInt8, @minor : UInt8)
+    end
+        end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ushort : UInt16)
+    end
       end
 
+    def initialize(@minor_version : MinorVersion_e__Union_, @major_version : UInt16)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
   end
 
   @[Extern]
-  record STORAGE_PHYSICAL_DEVICE_DATA,
-    device_id : UInt32,
-    role : UInt32,
-    health_status : Win32cr::System::Ioctl::STORAGE_COMPONENT_HEALTH_STATUS,
-    command_protocol : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE,
-    spec_version : Win32cr::System::Ioctl::STORAGE_SPEC_VERSION,
-    form_factor : Win32cr::System::Ioctl::STORAGE_DEVICE_FORM_FACTOR,
-    vendor : UInt8[8],
-    model : UInt8[40],
-    firmware_revision : UInt8[16],
-    capacity : UInt64,
-    physical_location : UInt8[32],
-    reserved : UInt32[2]
+  struct STORAGE_PHYSICAL_DEVICE_DATA
+    property device_id : UInt32
+    property role : UInt32
+    property health_status : Win32cr::System::Ioctl::STORAGE_COMPONENT_HEALTH_STATUS
+    property command_protocol : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE
+    property spec_version : Win32cr::System::Ioctl::STORAGE_SPEC_VERSION
+    property form_factor : Win32cr::System::Ioctl::STORAGE_DEVICE_FORM_FACTOR
+    property vendor : UInt8[8]
+    property model : UInt8[40]
+    property firmware_revision : UInt8[16]
+    property capacity : UInt64
+    property physical_location : UInt8[32]
+    property reserved : UInt32[2]
+    def initialize(@device_id : UInt32, @role : UInt32, @health_status : Win32cr::System::Ioctl::STORAGE_COMPONENT_HEALTH_STATUS, @command_protocol : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE, @spec_version : Win32cr::System::Ioctl::STORAGE_SPEC_VERSION, @form_factor : Win32cr::System::Ioctl::STORAGE_DEVICE_FORM_FACTOR, @vendor : UInt8[8], @model : UInt8[40], @firmware_revision : UInt8[16], @capacity : UInt64, @physical_location : UInt8[32], @reserved : UInt32[2])
+    end
+  end
 
   @[Extern]
-  record STORAGE_PHYSICAL_ADAPTER_DATA,
-    adapter_id : UInt32,
-    health_status : Win32cr::System::Ioctl::STORAGE_COMPONENT_HEALTH_STATUS,
-    command_protocol : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE,
-    spec_version : Win32cr::System::Ioctl::STORAGE_SPEC_VERSION,
-    vendor : UInt8[8],
-    model : UInt8[40],
-    firmware_revision : UInt8[16],
-    physical_location : UInt8[32],
-    expander_connected : Win32cr::Foundation::BOOLEAN,
-    reserved0 : UInt8[3],
-    reserved1 : UInt32[3]
+  struct STORAGE_PHYSICAL_ADAPTER_DATA
+    property adapter_id : UInt32
+    property health_status : Win32cr::System::Ioctl::STORAGE_COMPONENT_HEALTH_STATUS
+    property command_protocol : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE
+    property spec_version : Win32cr::System::Ioctl::STORAGE_SPEC_VERSION
+    property vendor : UInt8[8]
+    property model : UInt8[40]
+    property firmware_revision : UInt8[16]
+    property physical_location : UInt8[32]
+    property expander_connected : Win32cr::Foundation::BOOLEAN
+    property reserved0 : UInt8[3]
+    property reserved1 : UInt32[3]
+    def initialize(@adapter_id : UInt32, @health_status : Win32cr::System::Ioctl::STORAGE_COMPONENT_HEALTH_STATUS, @command_protocol : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE, @spec_version : Win32cr::System::Ioctl::STORAGE_SPEC_VERSION, @vendor : UInt8[8], @model : UInt8[40], @firmware_revision : UInt8[16], @physical_location : UInt8[32], @expander_connected : Win32cr::Foundation::BOOLEAN, @reserved0 : UInt8[3], @reserved1 : UInt32[3])
+    end
+  end
 
   @[Extern]
-  record STORAGE_PHYSICAL_NODE_DATA,
-    node_id : UInt32,
-    adapter_count : UInt32,
-    adapter_data_length : UInt32,
-    adapter_data_offset : UInt32,
-    device_count : UInt32,
-    device_data_length : UInt32,
-    device_data_offset : UInt32,
-    reserved : UInt32[3]
+  struct STORAGE_PHYSICAL_NODE_DATA
+    property node_id : UInt32
+    property adapter_count : UInt32
+    property adapter_data_length : UInt32
+    property adapter_data_offset : UInt32
+    property device_count : UInt32
+    property device_data_length : UInt32
+    property device_data_offset : UInt32
+    property reserved : UInt32[3]
+    def initialize(@node_id : UInt32, @adapter_count : UInt32, @adapter_data_length : UInt32, @adapter_data_offset : UInt32, @device_count : UInt32, @device_data_length : UInt32, @device_data_offset : UInt32, @reserved : UInt32[3])
+    end
+  end
 
   @[Extern]
-  record STORAGE_PHYSICAL_TOPOLOGY_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    node_count : UInt32,
-    reserved : UInt32,
-    node : Win32cr::System::Ioctl::STORAGE_PHYSICAL_NODE_DATA*
+  struct STORAGE_PHYSICAL_TOPOLOGY_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property node_count : UInt32
+    property reserved : UInt32
+    property node : Win32cr::System::Ioctl::STORAGE_PHYSICAL_NODE_DATA*
+    def initialize(@version : UInt32, @size : UInt32, @node_count : UInt32, @reserved : UInt32, @node : Win32cr::System::Ioctl::STORAGE_PHYSICAL_NODE_DATA*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DEVICE_IO_CAPABILITY_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    lun_max_io_count : UInt32,
-    adapter_max_io_count : UInt32
+  struct STORAGE_DEVICE_IO_CAPABILITY_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property lun_max_io_count : UInt32
+    property adapter_max_io_count : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @lun_max_io_count : UInt32, @adapter_max_io_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DEVICE_ATTRIBUTES_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    attributes : UInt64
+  struct STORAGE_DEVICE_ATTRIBUTES_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property attributes : UInt64
+    def initialize(@version : UInt32, @size : UInt32, @attributes : UInt64)
+    end
+  end
 
   @[Extern]
-  record STORAGE_OPERATIONAL_REASON,
-    version : UInt32,
-    size : UInt32,
-    reason : Win32cr::System::Ioctl::STORAGE_OPERATIONAL_STATUS_REASON,
-    raw_bytes : RawBytes_e__Union_ do
+  struct STORAGE_OPERATIONAL_REASON
+    property version : UInt32
+    property size : UInt32
+    property reason : Win32cr::System::Ioctl::STORAGE_OPERATIONAL_STATUS_REASON
+    property raw_bytes : RawBytes_e__Union_
 
     # Nested Type RawBytes_e__Union_
     @[Extern(union: true)]
-    record RawBytes_e__Union_,
-      scsi_sense_key : ScsiSenseKey_e__Struct_,
-      nvdimm_n : NVDIMM_N_e__Struct_,
-      as_ulong : UInt32 do
+    struct RawBytes_e__Union_
+    property scsi_sense_key : ScsiSenseKey_e__Struct_
+    property nvdimm_n : NVDIMM_N_e__Struct_
+    property as_ulong : UInt32
 
       # Nested Type ScsiSenseKey_e__Struct_
       @[Extern]
-      record ScsiSenseKey_e__Struct_,
-        sense_key : UInt8,
-        asc : UInt8,
-        ascq : UInt8,
-        reserved : UInt8
+      struct ScsiSenseKey_e__Struct_
+    property sense_key : UInt8
+    property asc : UInt8
+    property ascq : UInt8
+    property reserved : UInt8
+    def initialize(@sense_key : UInt8, @asc : UInt8, @ascq : UInt8, @reserved : UInt8)
+    end
+      end
 
 
       # Nested Type NVDIMM_N_e__Struct_
       @[Extern]
-      record NVDIMM_N_e__Struct_,
-        critical_health : UInt8,
-        module_health : UInt8[2],
-        error_threshold_status : UInt8
+      struct NVDIMM_N_e__Struct_
+    property critical_health : UInt8
+    property module_health : UInt8[2]
+    property error_threshold_status : UInt8
+    def initialize(@critical_health : UInt8, @module_health : UInt8[2], @error_threshold_status : UInt8)
+    end
+      end
 
+    def initialize(@scsi_sense_key : ScsiSenseKey_e__Struct_, @nvdimm_n : NVDIMM_N_e__Struct_, @as_ulong : UInt32)
+    end
     end
 
+    def initialize(@version : UInt32, @size : UInt32, @reason : Win32cr::System::Ioctl::STORAGE_OPERATIONAL_STATUS_REASON, @raw_bytes : RawBytes_e__Union_)
+    end
   end
 
   @[Extern]
-  record STORAGE_DEVICE_MANAGEMENT_STATUS,
-    version : UInt32,
-    size : UInt32,
-    health : Win32cr::System::Ioctl::STORAGE_DISK_HEALTH_STATUS,
-    number_of_operational_status : UInt32,
-    number_of_additional_reasons : UInt32,
-    operational_status : Win32cr::System::Ioctl::STORAGE_DISK_OPERATIONAL_STATUS[16],
-    additional_reasons : Win32cr::System::Ioctl::STORAGE_OPERATIONAL_REASON*
+  struct STORAGE_DEVICE_MANAGEMENT_STATUS
+    property version : UInt32
+    property size : UInt32
+    property health : Win32cr::System::Ioctl::STORAGE_DISK_HEALTH_STATUS
+    property number_of_operational_status : UInt32
+    property number_of_additional_reasons : UInt32
+    property operational_status : Win32cr::System::Ioctl::STORAGE_DISK_OPERATIONAL_STATUS[16]
+    property additional_reasons : Win32cr::System::Ioctl::STORAGE_OPERATIONAL_REASON*
+    def initialize(@version : UInt32, @size : UInt32, @health : Win32cr::System::Ioctl::STORAGE_DISK_HEALTH_STATUS, @number_of_operational_status : UInt32, @number_of_additional_reasons : UInt32, @operational_status : Win32cr::System::Ioctl::STORAGE_DISK_OPERATIONAL_STATUS[16], @additional_reasons : Win32cr::System::Ioctl::STORAGE_OPERATIONAL_REASON*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_ADAPTER_SERIAL_NUMBER,
-    version : UInt32,
-    size : UInt32,
-    serial_number : UInt16[128]
+  struct STORAGE_ADAPTER_SERIAL_NUMBER
+    property version : UInt32
+    property size : UInt32
+    property serial_number : UInt16[128]
+    def initialize(@version : UInt32, @size : UInt32, @serial_number : UInt16[128])
+    end
+  end
 
   @[Extern]
-  record STORAGE_ZONE_GROUP,
-    zone_count : UInt32,
-    zone_type : Win32cr::System::Ioctl::STORAGE_ZONE_TYPES,
-    zone_size : UInt64
+  struct STORAGE_ZONE_GROUP
+    property zone_count : UInt32
+    property zone_type : Win32cr::System::Ioctl::STORAGE_ZONE_TYPES
+    property zone_size : UInt64
+    def initialize(@zone_count : UInt32, @zone_type : Win32cr::System::Ioctl::STORAGE_ZONE_TYPES, @zone_size : UInt64)
+    end
+  end
 
   @[Extern]
-  record STORAGE_ZONED_DEVICE_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    device_type : Win32cr::System::Ioctl::STORAGE_ZONED_DEVICE_TYPES,
-    zone_count : UInt32,
-    zone_attributes : ZoneAttributes_e__Union_,
-    zone_group_count : UInt32,
-    zone_group : Win32cr::System::Ioctl::STORAGE_ZONE_GROUP* do
+  struct STORAGE_ZONED_DEVICE_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property device_type : Win32cr::System::Ioctl::STORAGE_ZONED_DEVICE_TYPES
+    property zone_count : UInt32
+    property zone_attributes : ZoneAttributes_e__Union_
+    property zone_group_count : UInt32
+    property zone_group : Win32cr::System::Ioctl::STORAGE_ZONE_GROUP*
 
     # Nested Type ZoneAttributes_e__Union_
     @[Extern(union: true)]
-    record ZoneAttributes_e__Union_,
-      sequential_required_zone : SequentialRequiredZone_e__Struct_,
-      sequential_preferred_zone : SequentialPreferredZone_e__Struct_ do
+    struct ZoneAttributes_e__Union_
+    property sequential_required_zone : SequentialRequiredZone_e__Struct_
+    property sequential_preferred_zone : SequentialPreferredZone_e__Struct_
 
       # Nested Type SequentialRequiredZone_e__Struct_
       @[Extern]
-      record SequentialRequiredZone_e__Struct_,
-        max_open_zone_count : UInt32,
-        unrestricted_read : Win32cr::Foundation::BOOLEAN,
-        reserved : UInt8[3]
+      struct SequentialRequiredZone_e__Struct_
+    property max_open_zone_count : UInt32
+    property unrestricted_read : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8[3]
+    def initialize(@max_open_zone_count : UInt32, @unrestricted_read : Win32cr::Foundation::BOOLEAN, @reserved : UInt8[3])
+    end
+      end
 
 
       # Nested Type SequentialPreferredZone_e__Struct_
       @[Extern]
-      record SequentialPreferredZone_e__Struct_,
-        optimal_open_zone_count : UInt32,
-        reserved : UInt32
+      struct SequentialPreferredZone_e__Struct_
+    property optimal_open_zone_count : UInt32
+    property reserved : UInt32
+    def initialize(@optimal_open_zone_count : UInt32, @reserved : UInt32)
+    end
+      end
 
+    def initialize(@sequential_required_zone : SequentialRequiredZone_e__Struct_, @sequential_preferred_zone : SequentialPreferredZone_e__Struct_)
+    end
     end
 
+    def initialize(@version : UInt32, @size : UInt32, @device_type : Win32cr::System::Ioctl::STORAGE_ZONED_DEVICE_TYPES, @zone_count : UInt32, @zone_attributes : ZoneAttributes_e__Union_, @zone_group_count : UInt32, @zone_group : Win32cr::System::Ioctl::STORAGE_ZONE_GROUP*)
+    end
   end
 
   @[Extern]
-  record DEVICE_LOCATION,
-    socket : UInt32,
-    slot : UInt32,
-    adapter : UInt32,
-    port : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct DEVICE_LOCATION
+    property socket : UInt32
+    property slot : UInt32
+    property adapter : UInt32
+    property port : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      anonymous2 : Anonymous2_e__Struct_ do
+    struct Anonymous_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        channel : UInt32,
-        device : UInt32
+      struct Anonymous1_e__Struct_
+    property channel : UInt32
+    property device : UInt32
+    def initialize(@channel : UInt32, @device : UInt32)
+    end
+      end
 
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        target : UInt32,
-        lun : UInt32
+      struct Anonymous2_e__Struct_
+    property target : UInt32
+    property lun : UInt32
+    def initialize(@target : UInt32, @lun : UInt32)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_)
+    end
     end
 
+    def initialize(@socket : UInt32, @slot : UInt32, @adapter : UInt32, @port : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record STORAGE_DEVICE_LOCATION_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    location : Win32cr::System::Ioctl::DEVICE_LOCATION,
-    string_offset : UInt32
+  struct STORAGE_DEVICE_LOCATION_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property location : Win32cr::System::Ioctl::DEVICE_LOCATION
+    property string_offset : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @location : Win32cr::System::Ioctl::DEVICE_LOCATION, @string_offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DEVICE_NUMA_PROPERTY,
-    version : UInt32,
-    size : UInt32,
-    numa_node : UInt32
+  struct STORAGE_DEVICE_NUMA_PROPERTY
+    property version : UInt32
+    property size : UInt32
+    property numa_node : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @numa_node : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DEVICE_UNSAFE_SHUTDOWN_COUNT,
-    version : UInt32,
-    size : UInt32,
-    unsafe_shutdown_count : UInt32
+  struct STORAGE_DEVICE_UNSAFE_SHUTDOWN_COUNT
+    property version : UInt32
+    property size : UInt32
+    property unsafe_shutdown_count : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @unsafe_shutdown_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_HW_ENDURANCE_INFO,
-    valid_fields : UInt32,
-    group_id : UInt32,
-    flags : Flags_e__Struct_,
-    life_percentage : UInt32,
-    bytes_read_count : UInt8[16],
-    byte_write_count : UInt8[16] do
+  struct STORAGE_HW_ENDURANCE_INFO
+    property valid_fields : UInt32
+    property group_id : UInt32
+    property flags : Flags_e__Struct_
+    property life_percentage : UInt32
+    property bytes_read_count : UInt8[16]
+    property byte_write_count : UInt8[16]
 
     # Nested Type Flags_e__Struct_
     @[Extern]
-    record Flags_e__Struct_,
-      _bitfield : UInt32
+    struct Flags_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@valid_fields : UInt32, @group_id : UInt32, @flags : Flags_e__Struct_, @life_percentage : UInt32, @bytes_read_count : UInt8[16], @byte_write_count : UInt8[16])
+    end
   end
 
   @[Extern]
-  record STORAGE_HW_ENDURANCE_DATA_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    endurance_info : Win32cr::System::Ioctl::STORAGE_HW_ENDURANCE_INFO
+  struct STORAGE_HW_ENDURANCE_DATA_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property endurance_info : Win32cr::System::Ioctl::STORAGE_HW_ENDURANCE_INFO
+    def initialize(@version : UInt32, @size : UInt32, @endurance_info : Win32cr::System::Ioctl::STORAGE_HW_ENDURANCE_INFO)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DEVICE_LED_STATE_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    state : UInt64
+  struct STORAGE_DEVICE_LED_STATE_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property state : UInt64
+    def initialize(@version : UInt32, @size : UInt32, @state : UInt64)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DEVICE_SELF_ENCRYPTION_PROPERTY,
-    version : UInt32,
-    size : UInt32,
-    supports_self_encryption : Win32cr::Foundation::BOOLEAN
+  struct STORAGE_DEVICE_SELF_ENCRYPTION_PROPERTY
+    property version : UInt32
+    property size : UInt32
+    property supports_self_encryption : Win32cr::Foundation::BOOLEAN
+    def initialize(@version : UInt32, @size : UInt32, @supports_self_encryption : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record STORAGE_FRU_ID_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    identifier_size : UInt32,
-    identifier : UInt8*
+  struct STORAGE_FRU_ID_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property identifier_size : UInt32
+    property identifier : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @identifier_size : UInt32, @identifier : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DATA_SET_RANGE,
-    starting_offset : Int64,
-    length_in_bytes : UInt64
+  struct DEVICE_DATA_SET_RANGE
+    property starting_offset : Int64
+    property length_in_bytes : UInt64
+    def initialize(@starting_offset : Int64, @length_in_bytes : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEVICE_MANAGE_DATA_SET_ATTRIBUTES,
-    size : UInt32,
-    action : UInt32,
-    flags : UInt32,
-    parameter_block_offset : UInt32,
-    parameter_block_length : UInt32,
-    data_set_ranges_offset : UInt32,
-    data_set_ranges_length : UInt32
+  struct DEVICE_MANAGE_DATA_SET_ATTRIBUTES
+    property size : UInt32
+    property action : UInt32
+    property flags : UInt32
+    property parameter_block_offset : UInt32
+    property parameter_block_length : UInt32
+    property data_set_ranges_offset : UInt32
+    property data_set_ranges_length : UInt32
+    def initialize(@size : UInt32, @action : UInt32, @flags : UInt32, @parameter_block_offset : UInt32, @parameter_block_length : UInt32, @data_set_ranges_offset : UInt32, @data_set_ranges_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEVICE_MANAGE_DATA_SET_ATTRIBUTES_OUTPUT,
-    size : UInt32,
-    action : UInt32,
-    flags : UInt32,
-    operation_status : UInt32,
-    extended_error : UInt32,
-    target_detailed_error : UInt32,
-    reserved_status : UInt32,
-    output_block_offset : UInt32,
-    output_block_length : UInt32
+  struct DEVICE_MANAGE_DATA_SET_ATTRIBUTES_OUTPUT
+    property size : UInt32
+    property action : UInt32
+    property flags : UInt32
+    property operation_status : UInt32
+    property extended_error : UInt32
+    property target_detailed_error : UInt32
+    property reserved_status : UInt32
+    property output_block_offset : UInt32
+    property output_block_length : UInt32
+    def initialize(@size : UInt32, @action : UInt32, @flags : UInt32, @operation_status : UInt32, @extended_error : UInt32, @target_detailed_error : UInt32, @reserved_status : UInt32, @output_block_offset : UInt32, @output_block_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DSM_DEFINITION,
-    action : UInt32,
-    single_range : Win32cr::Foundation::BOOLEAN,
-    parameter_block_alignment : UInt32,
-    parameter_block_length : UInt32,
-    has_output : Win32cr::Foundation::BOOLEAN,
-    output_block_alignment : UInt32,
-    output_block_length : UInt32
+  struct DEVICE_DSM_DEFINITION
+    property action : UInt32
+    property single_range : Win32cr::Foundation::BOOLEAN
+    property parameter_block_alignment : UInt32
+    property parameter_block_length : UInt32
+    property has_output : Win32cr::Foundation::BOOLEAN
+    property output_block_alignment : UInt32
+    property output_block_length : UInt32
+    def initialize(@action : UInt32, @single_range : Win32cr::Foundation::BOOLEAN, @parameter_block_alignment : UInt32, @parameter_block_length : UInt32, @has_output : Win32cr::Foundation::BOOLEAN, @output_block_alignment : UInt32, @output_block_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DSM_NOTIFICATION_PARAMETERS,
-    size : UInt32,
-    flags : UInt32,
-    num_file_type_i_ds : UInt32,
-    file_type_id : LibC::GUID*
+  struct DEVICE_DSM_NOTIFICATION_PARAMETERS
+    property size : UInt32
+    property flags : UInt32
+    property num_file_type_i_ds : UInt32
+    property file_type_id : LibC::GUID*
+    def initialize(@size : UInt32, @flags : UInt32, @num_file_type_i_ds : UInt32, @file_type_id : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_OFFLOAD_TOKEN,
-    token_type : UInt8[4],
-    reserved : UInt8[2],
-    token_id_length : UInt8[2],
-    anonymous : Anonymous_e__Union_ do
+  struct STORAGE_OFFLOAD_TOKEN
+    property token_type : UInt8[4]
+    property reserved : UInt8[2]
+    property token_id_length : UInt8[2]
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      storage_offload_zero_data_token : StorageOffloadZeroDataToken_e__Struct_,
-      token : UInt8[504] do
+    struct Anonymous_e__Union_
+    property storage_offload_zero_data_token : StorageOffloadZeroDataToken_e__Struct_
+    property token : UInt8[504]
 
       # Nested Type StorageOffloadZeroDataToken_e__Struct_
       @[Extern]
-      record StorageOffloadZeroDataToken_e__Struct_,
-        reserved2 : UInt8[504]
+      struct StorageOffloadZeroDataToken_e__Struct_
+    property reserved2 : UInt8[504]
+    def initialize(@reserved2 : UInt8[504])
+    end
+      end
 
+    def initialize(@storage_offload_zero_data_token : StorageOffloadZeroDataToken_e__Struct_, @token : UInt8[504])
+    end
     end
 
+    def initialize(@token_type : UInt8[4], @reserved : UInt8[2], @token_id_length : UInt8[2], @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record DEVICE_DSM_OFFLOAD_READ_PARAMETERS,
-    flags : UInt32,
-    time_to_live : UInt32,
-    reserved : UInt32[2]
+  struct DEVICE_DSM_OFFLOAD_READ_PARAMETERS
+    property flags : UInt32
+    property time_to_live : UInt32
+    property reserved : UInt32[2]
+    def initialize(@flags : UInt32, @time_to_live : UInt32, @reserved : UInt32[2])
+    end
+  end
 
   @[Extern]
-  record STORAGE_OFFLOAD_READ_OUTPUT,
-    offload_read_flags : UInt32,
-    reserved : UInt32,
-    length_protected : UInt64,
-    token_length : UInt32,
-    token : Win32cr::System::Ioctl::STORAGE_OFFLOAD_TOKEN
+  struct STORAGE_OFFLOAD_READ_OUTPUT
+    property offload_read_flags : UInt32
+    property reserved : UInt32
+    property length_protected : UInt64
+    property token_length : UInt32
+    property token : Win32cr::System::Ioctl::STORAGE_OFFLOAD_TOKEN
+    def initialize(@offload_read_flags : UInt32, @reserved : UInt32, @length_protected : UInt64, @token_length : UInt32, @token : Win32cr::System::Ioctl::STORAGE_OFFLOAD_TOKEN)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DSM_OFFLOAD_WRITE_PARAMETERS,
-    flags : UInt32,
-    reserved : UInt32,
-    token_offset : UInt64,
-    token : Win32cr::System::Ioctl::STORAGE_OFFLOAD_TOKEN
+  struct DEVICE_DSM_OFFLOAD_WRITE_PARAMETERS
+    property flags : UInt32
+    property reserved : UInt32
+    property token_offset : UInt64
+    property token : Win32cr::System::Ioctl::STORAGE_OFFLOAD_TOKEN
+    def initialize(@flags : UInt32, @reserved : UInt32, @token_offset : UInt64, @token : Win32cr::System::Ioctl::STORAGE_OFFLOAD_TOKEN)
+    end
+  end
 
   @[Extern]
-  record STORAGE_OFFLOAD_WRITE_OUTPUT,
-    offload_write_flags : UInt32,
-    reserved : UInt32,
-    length_copied : UInt64
+  struct STORAGE_OFFLOAD_WRITE_OUTPUT
+    property offload_write_flags : UInt32
+    property reserved : UInt32
+    property length_copied : UInt64
+    def initialize(@offload_write_flags : UInt32, @reserved : UInt32, @length_copied : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DATA_SET_LBP_STATE_PARAMETERS,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    output_version : UInt32
+  struct DEVICE_DATA_SET_LBP_STATE_PARAMETERS
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property output_version : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @output_version : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DATA_SET_LB_PROVISIONING_STATE,
-    size : UInt32,
-    version : UInt32,
-    slab_size_in_bytes : UInt64,
-    slab_offset_delta_in_bytes : UInt32,
-    slab_allocation_bit_map_bit_count : UInt32,
-    slab_allocation_bit_map_length : UInt32,
-    slab_allocation_bit_map : UInt32*
+  struct DEVICE_DATA_SET_LB_PROVISIONING_STATE
+    property size : UInt32
+    property version : UInt32
+    property slab_size_in_bytes : UInt64
+    property slab_offset_delta_in_bytes : UInt32
+    property slab_allocation_bit_map_bit_count : UInt32
+    property slab_allocation_bit_map_length : UInt32
+    property slab_allocation_bit_map : UInt32*
+    def initialize(@size : UInt32, @version : UInt32, @slab_size_in_bytes : UInt64, @slab_offset_delta_in_bytes : UInt32, @slab_allocation_bit_map_bit_count : UInt32, @slab_allocation_bit_map_length : UInt32, @slab_allocation_bit_map : UInt32*)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DATA_SET_LB_PROVISIONING_STATE_V2,
-    size : UInt32,
-    version : UInt32,
-    slab_size_in_bytes : UInt64,
-    slab_offset_delta_in_bytes : UInt64,
-    slab_allocation_bit_map_bit_count : UInt32,
-    slab_allocation_bit_map_length : UInt32,
-    slab_allocation_bit_map : UInt32*
+  struct DEVICE_DATA_SET_LB_PROVISIONING_STATE_V2
+    property size : UInt32
+    property version : UInt32
+    property slab_size_in_bytes : UInt64
+    property slab_offset_delta_in_bytes : UInt64
+    property slab_allocation_bit_map_bit_count : UInt32
+    property slab_allocation_bit_map_length : UInt32
+    property slab_allocation_bit_map : UInt32*
+    def initialize(@size : UInt32, @version : UInt32, @slab_size_in_bytes : UInt64, @slab_offset_delta_in_bytes : UInt64, @slab_allocation_bit_map_bit_count : UInt32, @slab_allocation_bit_map_length : UInt32, @slab_allocation_bit_map : UInt32*)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DATA_SET_REPAIR_PARAMETERS,
-    number_of_repair_copies : UInt32,
-    source_copy : UInt32,
-    repair_copies : UInt32*
+  struct DEVICE_DATA_SET_REPAIR_PARAMETERS
+    property number_of_repair_copies : UInt32
+    property source_copy : UInt32
+    property repair_copies : UInt32*
+    def initialize(@number_of_repair_copies : UInt32, @source_copy : UInt32, @repair_copies : UInt32*)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DATA_SET_REPAIR_OUTPUT,
-    parity_extent : Win32cr::System::Ioctl::DEVICE_DATA_SET_RANGE
+  struct DEVICE_DATA_SET_REPAIR_OUTPUT
+    property parity_extent : Win32cr::System::Ioctl::DEVICE_DATA_SET_RANGE
+    def initialize(@parity_extent : Win32cr::System::Ioctl::DEVICE_DATA_SET_RANGE)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DATA_SET_SCRUB_OUTPUT,
-    bytes_processed : UInt64,
-    bytes_repaired : UInt64,
-    bytes_failed : UInt64
+  struct DEVICE_DATA_SET_SCRUB_OUTPUT
+    property bytes_processed : UInt64
+    property bytes_repaired : UInt64
+    property bytes_failed : UInt64
+    def initialize(@bytes_processed : UInt64, @bytes_repaired : UInt64, @bytes_failed : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DATA_SET_SCRUB_EX_OUTPUT,
-    bytes_processed : UInt64,
-    bytes_repaired : UInt64,
-    bytes_failed : UInt64,
-    parity_extent : Win32cr::System::Ioctl::DEVICE_DATA_SET_RANGE,
-    bytes_scrubbed : UInt64
+  struct DEVICE_DATA_SET_SCRUB_EX_OUTPUT
+    property bytes_processed : UInt64
+    property bytes_repaired : UInt64
+    property bytes_failed : UInt64
+    property parity_extent : Win32cr::System::Ioctl::DEVICE_DATA_SET_RANGE
+    property bytes_scrubbed : UInt64
+    def initialize(@bytes_processed : UInt64, @bytes_repaired : UInt64, @bytes_failed : UInt64, @parity_extent : Win32cr::System::Ioctl::DEVICE_DATA_SET_RANGE, @bytes_scrubbed : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DSM_TIERING_QUERY_INPUT,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    number_of_tier_ids : UInt32,
-    tier_ids : LibC::GUID*
+  struct DEVICE_DSM_TIERING_QUERY_INPUT
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property number_of_tier_ids : UInt32
+    property tier_ids : LibC::GUID*
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @number_of_tier_ids : UInt32, @tier_ids : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_TIER_REGION,
-    tier_id : LibC::GUID,
-    offset : UInt64,
-    length : UInt64
+  struct STORAGE_TIER_REGION
+    property tier_id : LibC::GUID
+    property offset : UInt64
+    property length : UInt64
+    def initialize(@tier_id : LibC::GUID, @offset : UInt64, @length : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DSM_TIERING_QUERY_OUTPUT,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    reserved : UInt32,
-    alignment : UInt64,
-    total_number_of_regions : UInt32,
-    number_of_regions_returned : UInt32,
-    regions : Win32cr::System::Ioctl::STORAGE_TIER_REGION*
+  struct DEVICE_DSM_TIERING_QUERY_OUTPUT
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property reserved : UInt32
+    property alignment : UInt64
+    property total_number_of_regions : UInt32
+    property number_of_regions_returned : UInt32
+    property regions : Win32cr::System::Ioctl::STORAGE_TIER_REGION*
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @reserved : UInt32, @alignment : UInt64, @total_number_of_regions : UInt32, @number_of_regions_returned : UInt32, @regions : Win32cr::System::Ioctl::STORAGE_TIER_REGION*)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DSM_NVCACHE_CHANGE_PRIORITY_PARAMETERS,
-    size : UInt32,
-    target_priority : UInt8,
-    reserved : UInt8[3]
+  struct DEVICE_DSM_NVCACHE_CHANGE_PRIORITY_PARAMETERS
+    property size : UInt32
+    property target_priority : UInt8
+    property reserved : UInt8[3]
+    def initialize(@size : UInt32, @target_priority : UInt8, @reserved : UInt8[3])
+    end
+  end
 
   @[Extern]
-  record DEVICE_DATA_SET_TOPOLOGY_ID_QUERY_OUTPUT,
-    topology_range_bytes : UInt64,
-    topology_id : UInt8[16]
+  struct DEVICE_DATA_SET_TOPOLOGY_ID_QUERY_OUTPUT
+    property topology_range_bytes : UInt64
+    property topology_id : UInt8[16]
+    def initialize(@topology_range_bytes : UInt64, @topology_id : UInt8[16])
+    end
+  end
 
   @[Extern]
-  record DEVICE_STORAGE_ADDRESS_RANGE,
-    start_address : Int64,
-    length_in_bytes : UInt64
+  struct DEVICE_STORAGE_ADDRESS_RANGE
+    property start_address : Int64
+    property length_in_bytes : UInt64
+    def initialize(@start_address : Int64, @length_in_bytes : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DSM_PHYSICAL_ADDRESSES_OUTPUT,
-    version : UInt32,
-    flags : UInt32,
-    total_number_of_ranges : UInt32,
-    number_of_ranges_returned : UInt32,
-    ranges : Win32cr::System::Ioctl::DEVICE_STORAGE_ADDRESS_RANGE*
+  struct DEVICE_DSM_PHYSICAL_ADDRESSES_OUTPUT
+    property version : UInt32
+    property flags : UInt32
+    property total_number_of_ranges : UInt32
+    property number_of_ranges_returned : UInt32
+    property ranges : Win32cr::System::Ioctl::DEVICE_STORAGE_ADDRESS_RANGE*
+    def initialize(@version : UInt32, @flags : UInt32, @total_number_of_ranges : UInt32, @number_of_ranges_returned : UInt32, @ranges : Win32cr::System::Ioctl::DEVICE_STORAGE_ADDRESS_RANGE*)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DSM_REPORT_ZONES_PARAMETERS,
-    size : UInt32,
-    report_option : UInt8,
-    partial : UInt8,
-    reserved : UInt8[2]
+  struct DEVICE_DSM_REPORT_ZONES_PARAMETERS
+    property size : UInt32
+    property report_option : UInt8
+    property partial : UInt8
+    property reserved : UInt8[2]
+    def initialize(@size : UInt32, @report_option : UInt8, @partial : UInt8, @reserved : UInt8[2])
+    end
+  end
 
   @[Extern]
-  record STORAGE_ZONE_DESCRIPTOR,
-    size : UInt32,
-    zone_type : Win32cr::System::Ioctl::STORAGE_ZONE_TYPES,
-    zone_condition : Win32cr::System::Ioctl::STORAGE_ZONE_CONDITION,
-    reset_write_pointer_recommend : Win32cr::Foundation::BOOLEAN,
-    reserved0 : UInt8[3],
-    zone_size : UInt64,
-    write_pointer_offset : UInt64
+  struct STORAGE_ZONE_DESCRIPTOR
+    property size : UInt32
+    property zone_type : Win32cr::System::Ioctl::STORAGE_ZONE_TYPES
+    property zone_condition : Win32cr::System::Ioctl::STORAGE_ZONE_CONDITION
+    property reset_write_pointer_recommend : Win32cr::Foundation::BOOLEAN
+    property reserved0 : UInt8[3]
+    property zone_size : UInt64
+    property write_pointer_offset : UInt64
+    def initialize(@size : UInt32, @zone_type : Win32cr::System::Ioctl::STORAGE_ZONE_TYPES, @zone_condition : Win32cr::System::Ioctl::STORAGE_ZONE_CONDITION, @reset_write_pointer_recommend : Win32cr::Foundation::BOOLEAN, @reserved0 : UInt8[3], @zone_size : UInt64, @write_pointer_offset : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DSM_REPORT_ZONES_DATA,
-    size : UInt32,
-    zone_count : UInt32,
-    attributes : Win32cr::System::Ioctl::STORAGE_ZONES_ATTRIBUTES,
-    reserved0 : UInt32,
-    zone_descriptors : Win32cr::System::Ioctl::STORAGE_ZONE_DESCRIPTOR*
+  struct DEVICE_DSM_REPORT_ZONES_DATA
+    property size : UInt32
+    property zone_count : UInt32
+    property attributes : Win32cr::System::Ioctl::STORAGE_ZONES_ATTRIBUTES
+    property reserved0 : UInt32
+    property zone_descriptors : Win32cr::System::Ioctl::STORAGE_ZONE_DESCRIPTOR*
+    def initialize(@size : UInt32, @zone_count : UInt32, @attributes : Win32cr::System::Ioctl::STORAGE_ZONES_ATTRIBUTES, @reserved0 : UInt32, @zone_descriptors : Win32cr::System::Ioctl::STORAGE_ZONE_DESCRIPTOR*)
+    end
+  end
 
   @[Extern]
-  record DEVICE_STORAGE_RANGE_ATTRIBUTES,
-    length_in_bytes : UInt64,
-    anonymous : Anonymous_e__Union_,
-    reserved : UInt32 do
+  struct DEVICE_STORAGE_RANGE_ATTRIBUTES
+    property length_in_bytes : UInt64
+    property anonymous : Anonymous_e__Union_
+    property reserved : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      all_flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property all_flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@all_flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@length_in_bytes : UInt64, @anonymous : Anonymous_e__Union_, @reserved : UInt32)
+    end
   end
 
   @[Extern]
-  record DEVICE_DSM_RANGE_ERROR_INFO,
-    version : UInt32,
-    flags : UInt32,
-    total_number_of_ranges : UInt32,
-    number_of_ranges_returned : UInt32,
-    ranges : Win32cr::System::Ioctl::DEVICE_STORAGE_RANGE_ATTRIBUTES*
+  struct DEVICE_DSM_RANGE_ERROR_INFO
+    property version : UInt32
+    property flags : UInt32
+    property total_number_of_ranges : UInt32
+    property number_of_ranges_returned : UInt32
+    property ranges : Win32cr::System::Ioctl::DEVICE_STORAGE_RANGE_ATTRIBUTES*
+    def initialize(@version : UInt32, @flags : UInt32, @total_number_of_ranges : UInt32, @number_of_ranges_returned : UInt32, @ranges : Win32cr::System::Ioctl::DEVICE_STORAGE_RANGE_ATTRIBUTES*)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DSM_LOST_QUERY_PARAMETERS,
-    version : UInt32,
-    granularity : UInt64
+  struct DEVICE_DSM_LOST_QUERY_PARAMETERS
+    property version : UInt32
+    property granularity : UInt64
+    def initialize(@version : UInt32, @granularity : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DSM_LOST_QUERY_OUTPUT,
-    version : UInt32,
-    size : UInt32,
-    alignment : UInt64,
-    number_of_bits : UInt32,
-    bit_map : UInt32*
+  struct DEVICE_DSM_LOST_QUERY_OUTPUT
+    property version : UInt32
+    property size : UInt32
+    property alignment : UInt64
+    property number_of_bits : UInt32
+    property bit_map : UInt32*
+    def initialize(@version : UInt32, @size : UInt32, @alignment : UInt64, @number_of_bits : UInt32, @bit_map : UInt32*)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DSM_FREE_SPACE_OUTPUT,
-    version : UInt32,
-    free_space : UInt64
+  struct DEVICE_DSM_FREE_SPACE_OUTPUT
+    property version : UInt32
+    property free_space : UInt64
+    def initialize(@version : UInt32, @free_space : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEVICE_DSM_CONVERSION_OUTPUT,
-    version : UInt32,
-    source : LibC::GUID
+  struct DEVICE_DSM_CONVERSION_OUTPUT
+    property version : UInt32
+    property source : LibC::GUID
+    def initialize(@version : UInt32, @source : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record STORAGE_GET_BC_PROPERTIES_OUTPUT,
-    maximum_requests_per_period : UInt32,
-    minimum_period : UInt32,
-    maximum_request_size : UInt64,
-    estimated_time_per_request : UInt32,
-    num_out_standing_requests : UInt32,
-    request_size : UInt64
+  struct STORAGE_GET_BC_PROPERTIES_OUTPUT
+    property maximum_requests_per_period : UInt32
+    property minimum_period : UInt32
+    property maximum_request_size : UInt64
+    property estimated_time_per_request : UInt32
+    property num_out_standing_requests : UInt32
+    property request_size : UInt64
+    def initialize(@maximum_requests_per_period : UInt32, @minimum_period : UInt32, @maximum_request_size : UInt64, @estimated_time_per_request : UInt32, @num_out_standing_requests : UInt32, @request_size : UInt64)
+    end
+  end
 
   @[Extern]
-  record STORAGE_ALLOCATE_BC_STREAM_INPUT,
-    version : UInt32,
-    requests_per_period : UInt32,
-    period : UInt32,
-    retry_failures : Win32cr::Foundation::BOOLEAN,
-    discardable : Win32cr::Foundation::BOOLEAN,
-    reserved1 : Win32cr::Foundation::BOOLEAN[2],
-    access_type : UInt32,
-    access_mode : UInt32
+  struct STORAGE_ALLOCATE_BC_STREAM_INPUT
+    property version : UInt32
+    property requests_per_period : UInt32
+    property period : UInt32
+    property retry_failures : Win32cr::Foundation::BOOLEAN
+    property discardable : Win32cr::Foundation::BOOLEAN
+    property reserved1 : Win32cr::Foundation::BOOLEAN[2]
+    property access_type : UInt32
+    property access_mode : UInt32
+    def initialize(@version : UInt32, @requests_per_period : UInt32, @period : UInt32, @retry_failures : Win32cr::Foundation::BOOLEAN, @discardable : Win32cr::Foundation::BOOLEAN, @reserved1 : Win32cr::Foundation::BOOLEAN[2], @access_type : UInt32, @access_mode : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_ALLOCATE_BC_STREAM_OUTPUT,
-    request_size : UInt64,
-    num_out_standing_requests : UInt32
+  struct STORAGE_ALLOCATE_BC_STREAM_OUTPUT
+    property request_size : UInt64
+    property num_out_standing_requests : UInt32
+    def initialize(@request_size : UInt64, @num_out_standing_requests : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_PRIORITY_HINT_SUPPORT,
-    support_flags : UInt32
+  struct STORAGE_PRIORITY_HINT_SUPPORT
+    property support_flags : UInt32
+    def initialize(@support_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DIAGNOSTIC_REQUEST,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    target_type : Win32cr::System::Ioctl::STORAGE_DIAGNOSTIC_TARGET_TYPE,
-    level : Win32cr::System::Ioctl::STORAGE_DIAGNOSTIC_LEVEL
+  struct STORAGE_DIAGNOSTIC_REQUEST
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property target_type : Win32cr::System::Ioctl::STORAGE_DIAGNOSTIC_TARGET_TYPE
+    property level : Win32cr::System::Ioctl::STORAGE_DIAGNOSTIC_LEVEL
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @target_type : Win32cr::System::Ioctl::STORAGE_DIAGNOSTIC_TARGET_TYPE, @level : Win32cr::System::Ioctl::STORAGE_DIAGNOSTIC_LEVEL)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DIAGNOSTIC_DATA,
-    version : UInt32,
-    size : UInt32,
-    provider_id : LibC::GUID,
-    buffer_size : UInt32,
-    reserved : UInt32,
-    diagnostic_data_buffer : UInt8*
+  struct STORAGE_DIAGNOSTIC_DATA
+    property version : UInt32
+    property size : UInt32
+    property provider_id : LibC::GUID
+    property buffer_size : UInt32
+    property reserved : UInt32
+    property diagnostic_data_buffer : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @provider_id : LibC::GUID, @buffer_size : UInt32, @reserved : UInt32, @diagnostic_data_buffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record PHYSICAL_ELEMENT_STATUS_REQUEST,
-    version : UInt32,
-    size : UInt32,
-    starting_element : UInt32,
-    filter : UInt8,
-    report_type : UInt8,
-    reserved : UInt8[2]
+  struct PHYSICAL_ELEMENT_STATUS_REQUEST
+    property version : UInt32
+    property size : UInt32
+    property starting_element : UInt32
+    property filter : UInt8
+    property report_type : UInt8
+    property reserved : UInt8[2]
+    def initialize(@version : UInt32, @size : UInt32, @starting_element : UInt32, @filter : UInt8, @report_type : UInt8, @reserved : UInt8[2])
+    end
+  end
 
   @[Extern]
-  record PHYSICAL_ELEMENT_STATUS_DESCRIPTOR,
-    version : UInt32,
-    size : UInt32,
-    element_identifier : UInt32,
-    physical_element_type : UInt8,
-    physical_element_health : UInt8,
-    reserved1 : UInt8[2],
-    associated_capacity : UInt64,
-    reserved2 : UInt32[4]
+  struct PHYSICAL_ELEMENT_STATUS_DESCRIPTOR
+    property version : UInt32
+    property size : UInt32
+    property element_identifier : UInt32
+    property physical_element_type : UInt8
+    property physical_element_health : UInt8
+    property reserved1 : UInt8[2]
+    property associated_capacity : UInt64
+    property reserved2 : UInt32[4]
+    def initialize(@version : UInt32, @size : UInt32, @element_identifier : UInt32, @physical_element_type : UInt8, @physical_element_health : UInt8, @reserved1 : UInt8[2], @associated_capacity : UInt64, @reserved2 : UInt32[4])
+    end
+  end
 
   @[Extern]
-  record PHYSICAL_ELEMENT_STATUS,
-    version : UInt32,
-    size : UInt32,
-    descriptor_count : UInt32,
-    returned_descriptor_count : UInt32,
-    element_identifier_being_depoped : UInt32,
-    reserved : UInt32,
-    descriptors : Win32cr::System::Ioctl::PHYSICAL_ELEMENT_STATUS_DESCRIPTOR*
+  struct PHYSICAL_ELEMENT_STATUS
+    property version : UInt32
+    property size : UInt32
+    property descriptor_count : UInt32
+    property returned_descriptor_count : UInt32
+    property element_identifier_being_depoped : UInt32
+    property reserved : UInt32
+    property descriptors : Win32cr::System::Ioctl::PHYSICAL_ELEMENT_STATUS_DESCRIPTOR*
+    def initialize(@version : UInt32, @size : UInt32, @descriptor_count : UInt32, @returned_descriptor_count : UInt32, @element_identifier_being_depoped : UInt32, @reserved : UInt32, @descriptors : Win32cr::System::Ioctl::PHYSICAL_ELEMENT_STATUS_DESCRIPTOR*)
+    end
+  end
 
   @[Extern]
-  record REMOVE_ELEMENT_AND_TRUNCATE_REQUEST,
-    version : UInt32,
-    size : UInt32,
-    request_capacity : UInt64,
-    element_identifier : UInt32,
-    reserved : UInt32
+  struct REMOVE_ELEMENT_AND_TRUNCATE_REQUEST
+    property version : UInt32
+    property size : UInt32
+    property request_capacity : UInt64
+    property element_identifier : UInt32
+    property reserved : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @request_capacity : UInt64, @element_identifier : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record GET_DEVICE_INTERNAL_STATUS_DATA_REQUEST,
-    version : UInt32,
-    size : UInt32,
-    request_data_type : Win32cr::System::Ioctl::DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE,
-    request_data_set : Win32cr::System::Ioctl::DEVICE_INTERNAL_STATUS_DATA_SET
+  struct GET_DEVICE_INTERNAL_STATUS_DATA_REQUEST
+    property version : UInt32
+    property size : UInt32
+    property request_data_type : Win32cr::System::Ioctl::DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE
+    property request_data_set : Win32cr::System::Ioctl::DEVICE_INTERNAL_STATUS_DATA_SET
+    def initialize(@version : UInt32, @size : UInt32, @request_data_type : Win32cr::System::Ioctl::DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE, @request_data_set : Win32cr::System::Ioctl::DEVICE_INTERNAL_STATUS_DATA_SET)
+    end
+  end
 
   @[Extern]
-  record DEVICE_INTERNAL_STATUS_DATA,
-    version : UInt32,
-    size : UInt32,
-    t10_vendor_id : UInt64,
-    data_set1_length : UInt32,
-    data_set2_length : UInt32,
-    data_set3_length : UInt32,
-    data_set4_length : UInt32,
-    status_data_version : UInt8,
-    reserved : UInt8[3],
-    reason_identifier : UInt8[128],
-    status_data_length : UInt32,
-    status_data : UInt8*
+  struct DEVICE_INTERNAL_STATUS_DATA
+    property version : UInt32
+    property size : UInt32
+    property t10_vendor_id : UInt64
+    property data_set1_length : UInt32
+    property data_set2_length : UInt32
+    property data_set3_length : UInt32
+    property data_set4_length : UInt32
+    property status_data_version : UInt8
+    property reserved : UInt8[3]
+    property reason_identifier : UInt8[128]
+    property status_data_length : UInt32
+    property status_data : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @t10_vendor_id : UInt64, @data_set1_length : UInt32, @data_set2_length : UInt32, @data_set3_length : UInt32, @data_set4_length : UInt32, @status_data_version : UInt8, @reserved : UInt8[3], @reason_identifier : UInt8[128], @status_data_length : UInt32, @status_data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_REINITIALIZE_MEDIA,
-    version : UInt32,
-    size : UInt32,
-    timeout_in_seconds : UInt32,
-    sanitize_option : SanitizeOption_e__Struct_ do
+  struct STORAGE_REINITIALIZE_MEDIA
+    property version : UInt32
+    property size : UInt32
+    property timeout_in_seconds : UInt32
+    property sanitize_option : SanitizeOption_e__Struct_
 
     # Nested Type SanitizeOption_e__Struct_
     @[Extern]
-    record SanitizeOption_e__Struct_,
-      _bitfield : UInt32
+    struct SanitizeOption_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@version : UInt32, @size : UInt32, @timeout_in_seconds : UInt32, @sanitize_option : SanitizeOption_e__Struct_)
+    end
   end
 
   @[Extern]
-  record STORAGE_MEDIA_SERIAL_NUMBER_DATA,
-    reserved : UInt16,
-    serial_number_length : UInt16,
-    serial_number : UInt8*
+  struct STORAGE_MEDIA_SERIAL_NUMBER_DATA
+    property reserved : UInt16
+    property serial_number_length : UInt16
+    property serial_number : UInt8*
+    def initialize(@reserved : UInt16, @serial_number_length : UInt16, @serial_number : UInt8*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_READ_CAPACITY,
-    version : UInt32,
-    size : UInt32,
-    block_length : UInt32,
-    number_of_blocks : Win32cr::Foundation::LARGE_INTEGER,
-    disk_length : Win32cr::Foundation::LARGE_INTEGER
+  struct STORAGE_READ_CAPACITY
+    property version : UInt32
+    property size : UInt32
+    property block_length : UInt32
+    property number_of_blocks : Win32cr::Foundation::LARGE_INTEGER
+    property disk_length : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@version : UInt32, @size : UInt32, @block_length : UInt32, @number_of_blocks : Win32cr::Foundation::LARGE_INTEGER, @disk_length : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record STORAGE_WRITE_CACHE_PROPERTY,
-    version : UInt32,
-    size : UInt32,
-    write_cache_type : Win32cr::System::Ioctl::WRITE_CACHE_TYPE,
-    write_cache_enabled : Win32cr::System::Ioctl::WRITE_CACHE_ENABLE,
-    write_cache_changeable : Win32cr::System::Ioctl::WRITE_CACHE_CHANGE,
-    write_through_supported : Win32cr::System::Ioctl::WRITE_THROUGH,
-    flush_cache_supported : Win32cr::Foundation::BOOLEAN,
-    user_defined_power_protection : Win32cr::Foundation::BOOLEAN,
-    nv_cache_enabled : Win32cr::Foundation::BOOLEAN
+  struct STORAGE_WRITE_CACHE_PROPERTY
+    property version : UInt32
+    property size : UInt32
+    property write_cache_type : Win32cr::System::Ioctl::WRITE_CACHE_TYPE
+    property write_cache_enabled : Win32cr::System::Ioctl::WRITE_CACHE_ENABLE
+    property write_cache_changeable : Win32cr::System::Ioctl::WRITE_CACHE_CHANGE
+    property write_through_supported : Win32cr::System::Ioctl::WRITE_THROUGH
+    property flush_cache_supported : Win32cr::Foundation::BOOLEAN
+    property user_defined_power_protection : Win32cr::Foundation::BOOLEAN
+    property nv_cache_enabled : Win32cr::Foundation::BOOLEAN
+    def initialize(@version : UInt32, @size : UInt32, @write_cache_type : Win32cr::System::Ioctl::WRITE_CACHE_TYPE, @write_cache_enabled : Win32cr::System::Ioctl::WRITE_CACHE_ENABLE, @write_cache_changeable : Win32cr::System::Ioctl::WRITE_CACHE_CHANGE, @write_through_supported : Win32cr::System::Ioctl::WRITE_THROUGH, @flush_cache_supported : Win32cr::Foundation::BOOLEAN, @user_defined_power_protection : Win32cr::Foundation::BOOLEAN, @nv_cache_enabled : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record PERSISTENT_RESERVE_COMMAND,
-    version : UInt32,
-    size : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct PERSISTENT_RESERVE_COMMAND
+    property version : UInt32
+    property size : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pr_in : PR_IN_e__Struct_,
-      pr_out : PR_OUT_e__Struct_ do
+    struct Anonymous_e__Union_
+    property pr_in : PR_IN_e__Struct_
+    property pr_out : PR_OUT_e__Struct_
 
       # Nested Type PR_IN_e__Struct_
       @[Extern]
-      record PR_IN_e__Struct_,
-        _bitfield : UInt8,
-        allocation_length : UInt16
+      struct PR_IN_e__Struct_
+    property _bitfield : UInt8
+    property allocation_length : UInt16
+    def initialize(@_bitfield : UInt8, @allocation_length : UInt16)
+    end
+      end
 
 
       # Nested Type PR_OUT_e__Struct_
       @[Extern]
-      record PR_OUT_e__Struct_,
-        _bitfield1 : UInt8,
-        _bitfield2 : UInt8,
-        parameter_list : UInt8*
+      struct PR_OUT_e__Struct_
+    property _bitfield1 : UInt8
+    property _bitfield2 : UInt8
+    property parameter_list : UInt8*
+    def initialize(@_bitfield1 : UInt8, @_bitfield2 : UInt8, @parameter_list : UInt8*)
+    end
+      end
 
+    def initialize(@pr_in : PR_IN_e__Struct_, @pr_out : PR_OUT_e__Struct_)
+    end
     end
 
+    def initialize(@version : UInt32, @size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record DEVICEDUMP_SUBSECTION_POINTER,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwOffset : UInt32
+  struct DEVICEDUMP_SUBSECTION_POINTER
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwOffset : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEVICEDUMP_STRUCTURE_VERSION,
-    dwSignature : UInt32,
-    dwVersion : UInt32,
-    dwSize : UInt32
+  struct DEVICEDUMP_STRUCTURE_VERSION
+    property dwSignature : UInt32
+    property dwVersion : UInt32
+    property dwSize : UInt32
+    def initialize(@dwSignature : UInt32, @dwVersion : UInt32, @dwSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEVICEDUMP_SECTION_HEADER,
-    guidDeviceDataId : LibC::GUID,
-    sOrganizationID : UInt8[16],
-    dwFirmwareRevision : UInt32,
-    sModelNumber : UInt8[32],
-    szDeviceManufacturingID : UInt8[32],
-    dwFlags : UInt32,
-    bRestrictedPrivateDataVersion : UInt32,
-    dwFirmwareIssueId : UInt32,
-    szIssueDescriptionString : UInt8[132]
+  struct DEVICEDUMP_SECTION_HEADER
+    property guidDeviceDataId : LibC::GUID
+    property sOrganizationID : UInt8[16]
+    property dwFirmwareRevision : UInt32
+    property sModelNumber : UInt8[32]
+    property szDeviceManufacturingID : UInt8[32]
+    property dwFlags : UInt32
+    property bRestrictedPrivateDataVersion : UInt32
+    property dwFirmwareIssueId : UInt32
+    property szIssueDescriptionString : UInt8[132]
+    def initialize(@guidDeviceDataId : LibC::GUID, @sOrganizationID : UInt8[16], @dwFirmwareRevision : UInt32, @sModelNumber : UInt8[32], @szDeviceManufacturingID : UInt8[32], @dwFlags : UInt32, @bRestrictedPrivateDataVersion : UInt32, @dwFirmwareIssueId : UInt32, @szIssueDescriptionString : UInt8[132])
+    end
+  end
 
   @[Extern]
-  record GP_LOG_PAGE_DESCRIPTOR,
-    log_address : UInt16,
-    log_sectors : UInt16
+  struct GP_LOG_PAGE_DESCRIPTOR
+    property log_address : UInt16
+    property log_sectors : UInt16
+    def initialize(@log_address : UInt16, @log_sectors : UInt16)
+    end
+  end
 
   @[Extern]
-  record DEVICEDUMP_PUBLIC_SUBSECTION,
-    dwFlags : UInt32,
-    gp_log_table : Win32cr::System::Ioctl::GP_LOG_PAGE_DESCRIPTOR[16],
-    szDescription : Win32cr::Foundation::CHAR[16],
-    bData : UInt8*
+  struct DEVICEDUMP_PUBLIC_SUBSECTION
+    property dwFlags : UInt32
+    property gp_log_table : Win32cr::System::Ioctl::GP_LOG_PAGE_DESCRIPTOR[16]
+    property szDescription : Win32cr::Foundation::CHAR[16]
+    property bData : UInt8*
+    def initialize(@dwFlags : UInt32, @gp_log_table : Win32cr::System::Ioctl::GP_LOG_PAGE_DESCRIPTOR[16], @szDescription : Win32cr::Foundation::CHAR[16], @bData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DEVICEDUMP_RESTRICTED_SUBSECTION,
-    bData : UInt8*
+  struct DEVICEDUMP_RESTRICTED_SUBSECTION
+    property bData : UInt8*
+    def initialize(@bData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DEVICEDUMP_PRIVATE_SUBSECTION,
-    dwFlags : UInt32,
-    gp_log_id : Win32cr::System::Ioctl::GP_LOG_PAGE_DESCRIPTOR,
-    bData : UInt8*
+  struct DEVICEDUMP_PRIVATE_SUBSECTION
+    property dwFlags : UInt32
+    property gp_log_id : Win32cr::System::Ioctl::GP_LOG_PAGE_DESCRIPTOR
+    property bData : UInt8*
+    def initialize(@dwFlags : UInt32, @gp_log_id : Win32cr::System::Ioctl::GP_LOG_PAGE_DESCRIPTOR, @bData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DEVICEDUMP_STORAGEDEVICE_DATA,
-    descriptor : Win32cr::System::Ioctl::DEVICEDUMP_STRUCTURE_VERSION,
-    section_header : Win32cr::System::Ioctl::DEVICEDUMP_SECTION_HEADER,
-    dwBufferSize : UInt32,
-    dwReasonForCollection : UInt32,
-    public_data : Win32cr::System::Ioctl::DEVICEDUMP_SUBSECTION_POINTER,
-    restricted_data : Win32cr::System::Ioctl::DEVICEDUMP_SUBSECTION_POINTER,
-    private_data : Win32cr::System::Ioctl::DEVICEDUMP_SUBSECTION_POINTER
+  struct DEVICEDUMP_STORAGEDEVICE_DATA
+    property descriptor : Win32cr::System::Ioctl::DEVICEDUMP_STRUCTURE_VERSION
+    property section_header : Win32cr::System::Ioctl::DEVICEDUMP_SECTION_HEADER
+    property dwBufferSize : UInt32
+    property dwReasonForCollection : UInt32
+    property public_data : Win32cr::System::Ioctl::DEVICEDUMP_SUBSECTION_POINTER
+    property restricted_data : Win32cr::System::Ioctl::DEVICEDUMP_SUBSECTION_POINTER
+    property private_data : Win32cr::System::Ioctl::DEVICEDUMP_SUBSECTION_POINTER
+    def initialize(@descriptor : Win32cr::System::Ioctl::DEVICEDUMP_STRUCTURE_VERSION, @section_header : Win32cr::System::Ioctl::DEVICEDUMP_SECTION_HEADER, @dwBufferSize : UInt32, @dwReasonForCollection : UInt32, @public_data : Win32cr::System::Ioctl::DEVICEDUMP_SUBSECTION_POINTER, @restricted_data : Win32cr::System::Ioctl::DEVICEDUMP_SUBSECTION_POINTER, @private_data : Win32cr::System::Ioctl::DEVICEDUMP_SUBSECTION_POINTER)
+    end
+  end
 
   @[Extern]
-  record DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD,
-    cdb : UInt8[16],
-    command : UInt8[16],
-    start_time : UInt64,
-    end_time : UInt64,
-    operation_status : UInt32,
-    operation_error : UInt32,
-    stack_specific : StackSpecific_e__Union_ do
+  struct DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD
+    property cdb : UInt8[16]
+    property command : UInt8[16]
+    property start_time : UInt64
+    property end_time : UInt64
+    property operation_status : UInt32
+    property operation_error : UInt32
+    property stack_specific : StackSpecific_e__Union_
 
     # Nested Type StackSpecific_e__Union_
     @[Extern(union: true)]
-    record StackSpecific_e__Union_,
-      external_stack : ExternalStack_e__Struct_,
-      ata_port : AtaPort_e__Struct_,
-      stor_port : StorPort_e__Struct_ do
+    struct StackSpecific_e__Union_
+    property external_stack : ExternalStack_e__Struct_
+    property ata_port : AtaPort_e__Struct_
+    property stor_port : StorPort_e__Struct_
 
       # Nested Type StorPort_e__Struct_
       @[Extern]
-      record StorPort_e__Struct_,
-        srb_tag : UInt32
+      struct StorPort_e__Struct_
+    property srb_tag : UInt32
+    def initialize(@srb_tag : UInt32)
+    end
+      end
 
 
       # Nested Type ExternalStack_e__Struct_
       @[Extern]
-      record ExternalStack_e__Struct_,
-        dwReserved : UInt32
+      struct ExternalStack_e__Struct_
+    property dwReserved : UInt32
+    def initialize(@dwReserved : UInt32)
+    end
+      end
 
 
       # Nested Type AtaPort_e__Struct_
       @[Extern]
-      record AtaPort_e__Struct_,
-        dwAtaPortSpecific : UInt32
+      struct AtaPort_e__Struct_
+    property dwAtaPortSpecific : UInt32
+    def initialize(@dwAtaPortSpecific : UInt32)
+    end
+      end
 
+    def initialize(@external_stack : ExternalStack_e__Struct_, @ata_port : AtaPort_e__Struct_, @stor_port : StorPort_e__Struct_)
+    end
     end
 
+    def initialize(@cdb : UInt8[16], @command : UInt8[16], @start_time : UInt64, @end_time : UInt64, @operation_status : UInt32, @operation_error : UInt32, @stack_specific : StackSpecific_e__Union_)
+    end
   end
 
   @[Extern]
-  record DEVICEDUMP_STORAGESTACK_PUBLIC_DUMP,
-    descriptor : Win32cr::System::Ioctl::DEVICEDUMP_STRUCTURE_VERSION,
-    dwReasonForCollection : UInt32,
-    cDriverName : UInt8[16],
-    uiNumRecords : UInt32,
-    record_array : Win32cr::System::Ioctl::DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD*
+  struct DEVICEDUMP_STORAGESTACK_PUBLIC_DUMP
+    property descriptor : Win32cr::System::Ioctl::DEVICEDUMP_STRUCTURE_VERSION
+    property dwReasonForCollection : UInt32
+    property cDriverName : UInt8[16]
+    property uiNumRecords : UInt32
+    property record_array : Win32cr::System::Ioctl::DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD*
+    def initialize(@descriptor : Win32cr::System::Ioctl::DEVICEDUMP_STRUCTURE_VERSION, @dwReasonForCollection : UInt32, @cDriverName : UInt8[16], @uiNumRecords : UInt32, @record_array : Win32cr::System::Ioctl::DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_IDLE_POWER,
-    version : UInt32,
-    size : UInt32,
-    _bitfield : UInt32,
-    d3_idle_timeout : UInt32
+  struct STORAGE_IDLE_POWER
+    property version : UInt32
+    property size : UInt32
+    property _bitfield : UInt32
+    property d3_idle_timeout : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @_bitfield : UInt32, @d3_idle_timeout : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_IDLE_POWERUP_REASON,
-    version : UInt32,
-    size : UInt32,
-    powerup_reason : Win32cr::System::Ioctl::STORAGE_POWERUP_REASON_TYPE
+  struct STORAGE_IDLE_POWERUP_REASON
+    property version : UInt32
+    property size : UInt32
+    property powerup_reason : Win32cr::System::Ioctl::STORAGE_POWERUP_REASON_TYPE
+    def initialize(@version : UInt32, @size : UInt32, @powerup_reason : Win32cr::System::Ioctl::STORAGE_POWERUP_REASON_TYPE)
+    end
+  end
 
   @[Extern]
-  record STORAGE_DEVICE_POWER_CAP,
-    version : UInt32,
-    size : UInt32,
-    units : Win32cr::System::Ioctl::STORAGE_DEVICE_POWER_CAP_UNITS,
-    max_power : UInt64
+  struct STORAGE_DEVICE_POWER_CAP
+    property version : UInt32
+    property size : UInt32
+    property units : Win32cr::System::Ioctl::STORAGE_DEVICE_POWER_CAP_UNITS
+    property max_power : UInt64
+    def initialize(@version : UInt32, @size : UInt32, @units : Win32cr::System::Ioctl::STORAGE_DEVICE_POWER_CAP_UNITS, @max_power : UInt64)
+    end
+  end
 
   @[Extern]
-  record STORAGE_RPMB_DATA_FRAME,
-    stuff : UInt8[196],
-    key_or_mac : UInt8[32],
-    data : UInt8[256],
-    nonce : UInt8[16],
-    write_counter : UInt8[4],
-    address : UInt8[2],
-    block_count : UInt8[2],
-    operation_result : UInt8[2],
-    request_or_response_type : UInt8[2]
+  struct STORAGE_RPMB_DATA_FRAME
+    property stuff : UInt8[196]
+    property key_or_mac : UInt8[32]
+    property data : UInt8[256]
+    property nonce : UInt8[16]
+    property write_counter : UInt8[4]
+    property address : UInt8[2]
+    property block_count : UInt8[2]
+    property operation_result : UInt8[2]
+    property request_or_response_type : UInt8[2]
+    def initialize(@stuff : UInt8[196], @key_or_mac : UInt8[32], @data : UInt8[256], @nonce : UInt8[16], @write_counter : UInt8[4], @address : UInt8[2], @block_count : UInt8[2], @operation_result : UInt8[2], @request_or_response_type : UInt8[2])
+    end
+  end
 
   @[Extern]
-  record STORAGE_EVENT_NOTIFICATION,
-    version : UInt32,
-    size : UInt32,
-    events : UInt64
+  struct STORAGE_EVENT_NOTIFICATION
+    property version : UInt32
+    property size : UInt32
+    property events : UInt64
+    def initialize(@version : UInt32, @size : UInt32, @events : UInt64)
+    end
+  end
 
   @[Extern]
-  record STORAGE_COUNTER,
-    type__ : Win32cr::System::Ioctl::STORAGE_COUNTER_TYPE,
-    value : Value_e__Union_ do
+  struct STORAGE_COUNTER
+    property type__ : Win32cr::System::Ioctl::STORAGE_COUNTER_TYPE
+    property value : Value_e__Union_
 
     # Nested Type Value_e__Union_
     @[Extern(union: true)]
-    record Value_e__Union_,
-      manufacture_date : ManufactureDate_e__Struct_,
-      as_ulonglong : UInt64 do
+    struct Value_e__Union_
+    property manufacture_date : ManufactureDate_e__Struct_
+    property as_ulonglong : UInt64
 
       # Nested Type ManufactureDate_e__Struct_
       @[Extern]
-      record ManufactureDate_e__Struct_,
-        week : UInt32,
-        year : UInt32
+      struct ManufactureDate_e__Struct_
+    property week : UInt32
+    property year : UInt32
+    def initialize(@week : UInt32, @year : UInt32)
+    end
+      end
 
+    def initialize(@manufacture_date : ManufactureDate_e__Struct_, @as_ulonglong : UInt64)
+    end
     end
 
+    def initialize(@type__ : Win32cr::System::Ioctl::STORAGE_COUNTER_TYPE, @value : Value_e__Union_)
+    end
   end
 
   @[Extern]
-  record STORAGE_COUNTERS,
-    version : UInt32,
-    size : UInt32,
-    number_of_counters : UInt32,
-    counters : Win32cr::System::Ioctl::STORAGE_COUNTER*
+  struct STORAGE_COUNTERS
+    property version : UInt32
+    property size : UInt32
+    property number_of_counters : UInt32
+    property counters : Win32cr::System::Ioctl::STORAGE_COUNTER*
+    def initialize(@version : UInt32, @size : UInt32, @number_of_counters : UInt32, @counters : Win32cr::System::Ioctl::STORAGE_COUNTER*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_HW_FIRMWARE_INFO_QUERY,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    reserved : UInt32
+  struct STORAGE_HW_FIRMWARE_INFO_QUERY
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property reserved : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record STORAGE_HW_FIRMWARE_SLOT_INFO,
-    version : UInt32,
-    size : UInt32,
-    slot_number : UInt8,
-    _bitfield : UInt8,
-    reserved1 : UInt8[6],
-    revision : UInt8[16]
+  struct STORAGE_HW_FIRMWARE_SLOT_INFO
+    property version : UInt32
+    property size : UInt32
+    property slot_number : UInt8
+    property _bitfield : UInt8
+    property reserved1 : UInt8[6]
+    property revision : UInt8[16]
+    def initialize(@version : UInt32, @size : UInt32, @slot_number : UInt8, @_bitfield : UInt8, @reserved1 : UInt8[6], @revision : UInt8[16])
+    end
+  end
 
   @[Extern]
-  record STORAGE_HW_FIRMWARE_INFO,
-    version : UInt32,
-    size : UInt32,
-    _bitfield : UInt8,
-    slot_count : UInt8,
-    active_slot : UInt8,
-    pending_activate_slot : UInt8,
-    firmware_shared : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8[3],
-    image_payload_alignment : UInt32,
-    image_payload_max_size : UInt32,
-    slot : Win32cr::System::Ioctl::STORAGE_HW_FIRMWARE_SLOT_INFO*
+  struct STORAGE_HW_FIRMWARE_INFO
+    property version : UInt32
+    property size : UInt32
+    property _bitfield : UInt8
+    property slot_count : UInt8
+    property active_slot : UInt8
+    property pending_activate_slot : UInt8
+    property firmware_shared : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8[3]
+    property image_payload_alignment : UInt32
+    property image_payload_max_size : UInt32
+    property slot : Win32cr::System::Ioctl::STORAGE_HW_FIRMWARE_SLOT_INFO*
+    def initialize(@version : UInt32, @size : UInt32, @_bitfield : UInt8, @slot_count : UInt8, @active_slot : UInt8, @pending_activate_slot : UInt8, @firmware_shared : Win32cr::Foundation::BOOLEAN, @reserved : UInt8[3], @image_payload_alignment : UInt32, @image_payload_max_size : UInt32, @slot : Win32cr::System::Ioctl::STORAGE_HW_FIRMWARE_SLOT_INFO*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_HW_FIRMWARE_DOWNLOAD,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    slot : UInt8,
-    reserved : UInt8[3],
-    offset : UInt64,
-    buffer_size : UInt64,
-    image_buffer : UInt8*
+  struct STORAGE_HW_FIRMWARE_DOWNLOAD
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property slot : UInt8
+    property reserved : UInt8[3]
+    property offset : UInt64
+    property buffer_size : UInt64
+    property image_buffer : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @slot : UInt8, @reserved : UInt8[3], @offset : UInt64, @buffer_size : UInt64, @image_buffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_HW_FIRMWARE_DOWNLOAD_V2,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    slot : UInt8,
-    reserved : UInt8[3],
-    offset : UInt64,
-    buffer_size : UInt64,
-    image_size : UInt32,
-    reserved2 : UInt32,
-    image_buffer : UInt8*
+  struct STORAGE_HW_FIRMWARE_DOWNLOAD_V2
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property slot : UInt8
+    property reserved : UInt8[3]
+    property offset : UInt64
+    property buffer_size : UInt64
+    property image_size : UInt32
+    property reserved2 : UInt32
+    property image_buffer : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @slot : UInt8, @reserved : UInt8[3], @offset : UInt64, @buffer_size : UInt64, @image_size : UInt32, @reserved2 : UInt32, @image_buffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_HW_FIRMWARE_ACTIVATE,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    slot : UInt8,
-    reserved0 : UInt8[3]
+  struct STORAGE_HW_FIRMWARE_ACTIVATE
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property slot : UInt8
+    property reserved0 : UInt8[3]
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @slot : UInt8, @reserved0 : UInt8[3])
+    end
+  end
 
   @[Extern]
-  record STORAGE_PROTOCOL_COMMAND,
-    version : UInt32,
-    length : UInt32,
-    protocol_type : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE,
-    flags : UInt32,
-    return_status : UInt32,
-    error_code : UInt32,
-    command_length : UInt32,
-    error_info_length : UInt32,
-    data_to_device_transfer_length : UInt32,
-    data_from_device_transfer_length : UInt32,
-    time_out_value : UInt32,
-    error_info_offset : UInt32,
-    data_to_device_buffer_offset : UInt32,
-    data_from_device_buffer_offset : UInt32,
-    command_specific : UInt32,
-    reserved0 : UInt32,
-    fixed_protocol_return_data : UInt32,
-    reserved1 : UInt32[3],
-    command : UInt8*
+  struct STORAGE_PROTOCOL_COMMAND
+    property version : UInt32
+    property length : UInt32
+    property protocol_type : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE
+    property flags : UInt32
+    property return_status : UInt32
+    property error_code : UInt32
+    property command_length : UInt32
+    property error_info_length : UInt32
+    property data_to_device_transfer_length : UInt32
+    property data_from_device_transfer_length : UInt32
+    property time_out_value : UInt32
+    property error_info_offset : UInt32
+    property data_to_device_buffer_offset : UInt32
+    property data_from_device_buffer_offset : UInt32
+    property command_specific : UInt32
+    property reserved0 : UInt32
+    property fixed_protocol_return_data : UInt32
+    property reserved1 : UInt32[3]
+    property command : UInt8*
+    def initialize(@version : UInt32, @length : UInt32, @protocol_type : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE, @flags : UInt32, @return_status : UInt32, @error_code : UInt32, @command_length : UInt32, @error_info_length : UInt32, @data_to_device_transfer_length : UInt32, @data_from_device_transfer_length : UInt32, @time_out_value : UInt32, @error_info_offset : UInt32, @data_to_device_buffer_offset : UInt32, @data_from_device_buffer_offset : UInt32, @command_specific : UInt32, @reserved0 : UInt32, @fixed_protocol_return_data : UInt32, @reserved1 : UInt32[3], @command : UInt8*)
+    end
+  end
 
   @[Extern]
-  record STORAGE_ATTRIBUTE_MGMT,
-    version : UInt32,
-    size : UInt32,
-    action : Win32cr::System::Ioctl::STORAGE_ATTRIBUTE_MGMT_ACTION,
-    attribute : UInt32
+  struct STORAGE_ATTRIBUTE_MGMT
+    property version : UInt32
+    property size : UInt32
+    property action : Win32cr::System::Ioctl::STORAGE_ATTRIBUTE_MGMT_ACTION
+    property attribute : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @action : Win32cr::System::Ioctl::STORAGE_ATTRIBUTE_MGMT_ACTION, @attribute : UInt32)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_HEALTH_NOTIFICATION_DATA,
-    device_guid : LibC::GUID
+  struct SCM_PD_HEALTH_NOTIFICATION_DATA
+    property device_guid : LibC::GUID
+    def initialize(@device_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record SCM_LOGICAL_DEVICE_INSTANCE,
-    version : UInt32,
-    size : UInt32,
-    device_guid : LibC::GUID,
-    symbolic_link : UInt16[256]
+  struct SCM_LOGICAL_DEVICE_INSTANCE
+    property version : UInt32
+    property size : UInt32
+    property device_guid : LibC::GUID
+    property symbolic_link : UInt16[256]
+    def initialize(@version : UInt32, @size : UInt32, @device_guid : LibC::GUID, @symbolic_link : UInt16[256])
+    end
+  end
 
   @[Extern]
-  record SCM_LOGICAL_DEVICES,
-    version : UInt32,
-    size : UInt32,
-    device_count : UInt32,
-    devices : Win32cr::System::Ioctl::SCM_LOGICAL_DEVICE_INSTANCE*
+  struct SCM_LOGICAL_DEVICES
+    property version : UInt32
+    property size : UInt32
+    property device_count : UInt32
+    property devices : Win32cr::System::Ioctl::SCM_LOGICAL_DEVICE_INSTANCE*
+    def initialize(@version : UInt32, @size : UInt32, @device_count : UInt32, @devices : Win32cr::System::Ioctl::SCM_LOGICAL_DEVICE_INSTANCE*)
+    end
+  end
 
   @[Extern]
-  record SCM_PHYSICAL_DEVICE_INSTANCE,
-    version : UInt32,
-    size : UInt32,
-    nfit_handle : UInt32,
-    symbolic_link : UInt16[256]
+  struct SCM_PHYSICAL_DEVICE_INSTANCE
+    property version : UInt32
+    property size : UInt32
+    property nfit_handle : UInt32
+    property symbolic_link : UInt16[256]
+    def initialize(@version : UInt32, @size : UInt32, @nfit_handle : UInt32, @symbolic_link : UInt16[256])
+    end
+  end
 
   @[Extern]
-  record SCM_PHYSICAL_DEVICES,
-    version : UInt32,
-    size : UInt32,
-    device_count : UInt32,
-    devices : Win32cr::System::Ioctl::SCM_PHYSICAL_DEVICE_INSTANCE*
+  struct SCM_PHYSICAL_DEVICES
+    property version : UInt32
+    property size : UInt32
+    property device_count : UInt32
+    property devices : Win32cr::System::Ioctl::SCM_PHYSICAL_DEVICE_INSTANCE*
+    def initialize(@version : UInt32, @size : UInt32, @device_count : UInt32, @devices : Win32cr::System::Ioctl::SCM_PHYSICAL_DEVICE_INSTANCE*)
+    end
+  end
 
   @[Extern]
-  record SCM_REGION,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    nfit_handle : UInt32,
-    logical_device_guid : LibC::GUID,
-    address_range_type : LibC::GUID,
-    associated_id : UInt32,
-    length : UInt64,
-    starting_dpa : UInt64,
-    base_spa : UInt64,
-    spa_offset : UInt64,
-    region_offset : UInt64
+  struct SCM_REGION
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property nfit_handle : UInt32
+    property logical_device_guid : LibC::GUID
+    property address_range_type : LibC::GUID
+    property associated_id : UInt32
+    property length : UInt64
+    property starting_dpa : UInt64
+    property base_spa : UInt64
+    property spa_offset : UInt64
+    property region_offset : UInt64
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @nfit_handle : UInt32, @logical_device_guid : LibC::GUID, @address_range_type : LibC::GUID, @associated_id : UInt32, @length : UInt64, @starting_dpa : UInt64, @base_spa : UInt64, @spa_offset : UInt64, @region_offset : UInt64)
+    end
+  end
 
   @[Extern]
-  record SCM_REGIONS,
-    version : UInt32,
-    size : UInt32,
-    region_count : UInt32,
-    regions : Win32cr::System::Ioctl::SCM_REGION*
+  struct SCM_REGIONS
+    property version : UInt32
+    property size : UInt32
+    property region_count : UInt32
+    property regions : Win32cr::System::Ioctl::SCM_REGION*
+    def initialize(@version : UInt32, @size : UInt32, @region_count : UInt32, @regions : Win32cr::System::Ioctl::SCM_REGION*)
+    end
+  end
 
   @[Extern]
-  record SCM_BUS_PROPERTY_QUERY,
-    version : UInt32,
-    size : UInt32,
-    property_id : Win32cr::System::Ioctl::SCM_BUS_PROPERTY_ID,
-    query_type : Win32cr::System::Ioctl::SCM_BUS_QUERY_TYPE,
-    additional_parameters : UInt8*
+  struct SCM_BUS_PROPERTY_QUERY
+    property version : UInt32
+    property size : UInt32
+    property property_id : Win32cr::System::Ioctl::SCM_BUS_PROPERTY_ID
+    property query_type : Win32cr::System::Ioctl::SCM_BUS_QUERY_TYPE
+    property additional_parameters : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @property_id : Win32cr::System::Ioctl::SCM_BUS_PROPERTY_ID, @query_type : Win32cr::System::Ioctl::SCM_BUS_QUERY_TYPE, @additional_parameters : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SCM_BUS_RUNTIME_FW_ACTIVATION_INFO,
-    version : UInt32,
-    size : UInt32,
-    runtime_fw_activation_supported : Win32cr::Foundation::BOOLEAN,
-    firmware_activation_state : Win32cr::System::Ioctl::SCM_BUS_FIRMWARE_ACTIVATION_STATE,
-    firmware_activation_capability : FirmwareActivationCapability_e__Struct_,
-    estimated_firmware_activation_time_in_u_secs : UInt64,
-    estimated_processor_access_quiesce_time_in_u_secs : UInt64,
-    estimated_io_access_quiesce_time_in_u_secs : UInt64,
-    platform_supported_max_io_access_quiesce_time_in_u_secs : UInt64 do
+  struct SCM_BUS_RUNTIME_FW_ACTIVATION_INFO
+    property version : UInt32
+    property size : UInt32
+    property runtime_fw_activation_supported : Win32cr::Foundation::BOOLEAN
+    property firmware_activation_state : Win32cr::System::Ioctl::SCM_BUS_FIRMWARE_ACTIVATION_STATE
+    property firmware_activation_capability : FirmwareActivationCapability_e__Struct_
+    property estimated_firmware_activation_time_in_u_secs : UInt64
+    property estimated_processor_access_quiesce_time_in_u_secs : UInt64
+    property estimated_io_access_quiesce_time_in_u_secs : UInt64
+    property platform_supported_max_io_access_quiesce_time_in_u_secs : UInt64
 
     # Nested Type FirmwareActivationCapability_e__Struct_
     @[Extern]
-    record FirmwareActivationCapability_e__Struct_,
-      _bitfield : UInt32
+    struct FirmwareActivationCapability_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@version : UInt32, @size : UInt32, @runtime_fw_activation_supported : Win32cr::Foundation::BOOLEAN, @firmware_activation_state : Win32cr::System::Ioctl::SCM_BUS_FIRMWARE_ACTIVATION_STATE, @firmware_activation_capability : FirmwareActivationCapability_e__Struct_, @estimated_firmware_activation_time_in_u_secs : UInt64, @estimated_processor_access_quiesce_time_in_u_secs : UInt64, @estimated_io_access_quiesce_time_in_u_secs : UInt64, @platform_supported_max_io_access_quiesce_time_in_u_secs : UInt64)
+    end
   end
 
   @[Extern]
-  record SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO,
-    device_guid : LibC::GUID,
-    device_number : UInt32,
-    flags : Flags_e__Struct_,
-    device_size : UInt64 do
+  struct SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO
+    property device_guid : LibC::GUID
+    property device_number : UInt32
+    property flags : Flags_e__Struct_
+    property device_size : UInt64
 
     # Nested Type Flags_e__Struct_
     @[Extern]
-    record Flags_e__Struct_,
-      _bitfield : UInt32
+    struct Flags_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@device_guid : LibC::GUID, @device_number : UInt32, @flags : Flags_e__Struct_, @device_size : UInt64)
+    end
   end
 
   @[Extern]
-  record SCM_BUS_DEDICATED_MEMORY_DEVICES_INFO,
-    version : UInt32,
-    size : UInt32,
-    device_count : UInt32,
-    devices : Win32cr::System::Ioctl::SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO*
+  struct SCM_BUS_DEDICATED_MEMORY_DEVICES_INFO
+    property version : UInt32
+    property size : UInt32
+    property device_count : UInt32
+    property devices : Win32cr::System::Ioctl::SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO*
+    def initialize(@version : UInt32, @size : UInt32, @device_count : UInt32, @devices : Win32cr::System::Ioctl::SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO*)
+    end
+  end
 
   @[Extern]
-  record SCM_BUS_PROPERTY_SET,
-    version : UInt32,
-    size : UInt32,
-    property_id : Win32cr::System::Ioctl::SCM_BUS_PROPERTY_ID,
-    set_type : Win32cr::System::Ioctl::SCM_BUS_SET_TYPE,
-    additional_parameters : UInt8*
+  struct SCM_BUS_PROPERTY_SET
+    property version : UInt32
+    property size : UInt32
+    property property_id : Win32cr::System::Ioctl::SCM_BUS_PROPERTY_ID
+    property set_type : Win32cr::System::Ioctl::SCM_BUS_SET_TYPE
+    property additional_parameters : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @property_id : Win32cr::System::Ioctl::SCM_BUS_PROPERTY_ID, @set_type : Win32cr::System::Ioctl::SCM_BUS_SET_TYPE, @additional_parameters : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SCM_BUS_DEDICATED_MEMORY_STATE,
-    activate_state : Win32cr::Foundation::BOOLEAN
+  struct SCM_BUS_DEDICATED_MEMORY_STATE
+    property activate_state : Win32cr::Foundation::BOOLEAN
+    def initialize(@activate_state : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record SCM_INTERLEAVED_PD_INFO,
-    device_handle : UInt32,
-    device_guid : LibC::GUID
+  struct SCM_INTERLEAVED_PD_INFO
+    property device_handle : UInt32
+    property device_guid : LibC::GUID
+    def initialize(@device_handle : UInt32, @device_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record SCM_LD_INTERLEAVE_SET_INFO,
-    version : UInt32,
-    size : UInt32,
-    interleave_set_size : UInt32,
-    interleave_set : Win32cr::System::Ioctl::SCM_INTERLEAVED_PD_INFO*
+  struct SCM_LD_INTERLEAVE_SET_INFO
+    property version : UInt32
+    property size : UInt32
+    property interleave_set_size : UInt32
+    property interleave_set : Win32cr::System::Ioctl::SCM_INTERLEAVED_PD_INFO*
+    def initialize(@version : UInt32, @size : UInt32, @interleave_set_size : UInt32, @interleave_set : Win32cr::System::Ioctl::SCM_INTERLEAVED_PD_INFO*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_PROPERTY_QUERY,
-    version : UInt32,
-    size : UInt32,
-    property_id : Win32cr::System::Ioctl::SCM_PD_PROPERTY_ID,
-    query_type : Win32cr::System::Ioctl::SCM_PD_QUERY_TYPE,
-    additional_parameters : UInt8*
+  struct SCM_PD_PROPERTY_QUERY
+    property version : UInt32
+    property size : UInt32
+    property property_id : Win32cr::System::Ioctl::SCM_PD_PROPERTY_ID
+    property query_type : Win32cr::System::Ioctl::SCM_PD_QUERY_TYPE
+    property additional_parameters : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @property_id : Win32cr::System::Ioctl::SCM_PD_PROPERTY_ID, @query_type : Win32cr::System::Ioctl::SCM_PD_QUERY_TYPE, @additional_parameters : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_PROPERTY_SET,
-    version : UInt32,
-    size : UInt32,
-    property_id : Win32cr::System::Ioctl::SCM_PD_PROPERTY_ID,
-    set_type : Win32cr::System::Ioctl::SCM_PD_SET_TYPE,
-    additional_parameters : UInt8*
+  struct SCM_PD_PROPERTY_SET
+    property version : UInt32
+    property size : UInt32
+    property property_id : Win32cr::System::Ioctl::SCM_PD_PROPERTY_ID
+    property set_type : Win32cr::System::Ioctl::SCM_PD_SET_TYPE
+    property additional_parameters : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @property_id : Win32cr::System::Ioctl::SCM_PD_PROPERTY_ID, @set_type : Win32cr::System::Ioctl::SCM_PD_SET_TYPE, @additional_parameters : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_RUNTIME_FW_ACTIVATION_ARM_STATE,
-    arm_state : Win32cr::Foundation::BOOLEAN
+  struct SCM_PD_RUNTIME_FW_ACTIVATION_ARM_STATE
+    property arm_state : Win32cr::Foundation::BOOLEAN
+    def initialize(@arm_state : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_DESCRIPTOR_HEADER,
-    version : UInt32,
-    size : UInt32
+  struct SCM_PD_DESCRIPTOR_HEADER
+    property version : UInt32
+    property size : UInt32
+    def initialize(@version : UInt32, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_DEVICE_HANDLE,
-    version : UInt32,
-    size : UInt32,
-    device_guid : LibC::GUID,
-    device_handle : UInt32
+  struct SCM_PD_DEVICE_HANDLE
+    property version : UInt32
+    property size : UInt32
+    property device_guid : LibC::GUID
+    property device_handle : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @device_guid : LibC::GUID, @device_handle : UInt32)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_DEVICE_INFO,
-    version : UInt32,
-    size : UInt32,
-    device_guid : LibC::GUID,
-    unsafe_shutdown_count : UInt32,
-    persistent_memory_size_in_bytes : UInt64,
-    volatile_memory_size_in_bytes : UInt64,
-    total_memory_size_in_bytes : UInt64,
-    slot_number : UInt32,
-    device_handle : UInt32,
-    physical_id : UInt16,
-    number_of_format_interface_codes : UInt8,
-    format_interface_codes : UInt16[8],
-    vendor_id : UInt32,
-    product_id : UInt32,
-    subsystem_device_id : UInt32,
-    subsystem_vendor_id : UInt32,
-    manufacturing_location : UInt8,
-    manufacturing_week : UInt8,
-    manufacturing_year : UInt8,
-    serial_number4_byte : UInt32,
-    serial_number_length_in_chars : UInt32,
-    serial_number : Win32cr::Foundation::CHAR*
+  struct SCM_PD_DEVICE_INFO
+    property version : UInt32
+    property size : UInt32
+    property device_guid : LibC::GUID
+    property unsafe_shutdown_count : UInt32
+    property persistent_memory_size_in_bytes : UInt64
+    property volatile_memory_size_in_bytes : UInt64
+    property total_memory_size_in_bytes : UInt64
+    property slot_number : UInt32
+    property device_handle : UInt32
+    property physical_id : UInt16
+    property number_of_format_interface_codes : UInt8
+    property format_interface_codes : UInt16[8]
+    property vendor_id : UInt32
+    property product_id : UInt32
+    property subsystem_device_id : UInt32
+    property subsystem_vendor_id : UInt32
+    property manufacturing_location : UInt8
+    property manufacturing_week : UInt8
+    property manufacturing_year : UInt8
+    property serial_number4_byte : UInt32
+    property serial_number_length_in_chars : UInt32
+    property serial_number : Win32cr::Foundation::CHAR*
+    def initialize(@version : UInt32, @size : UInt32, @device_guid : LibC::GUID, @unsafe_shutdown_count : UInt32, @persistent_memory_size_in_bytes : UInt64, @volatile_memory_size_in_bytes : UInt64, @total_memory_size_in_bytes : UInt64, @slot_number : UInt32, @device_handle : UInt32, @physical_id : UInt16, @number_of_format_interface_codes : UInt8, @format_interface_codes : UInt16[8], @vendor_id : UInt32, @product_id : UInt32, @subsystem_device_id : UInt32, @subsystem_vendor_id : UInt32, @manufacturing_location : UInt8, @manufacturing_week : UInt8, @manufacturing_year : UInt8, @serial_number4_byte : UInt32, @serial_number_length_in_chars : UInt32, @serial_number : Win32cr::Foundation::CHAR*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_DEVICE_SPECIFIC_PROPERTY,
-    name : UInt16[128],
-    value : Int64
+  struct SCM_PD_DEVICE_SPECIFIC_PROPERTY
+    property name : UInt16[128]
+    property value : Int64
+    def initialize(@name : UInt16[128], @value : Int64)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_DEVICE_SPECIFIC_INFO,
-    version : UInt32,
-    size : UInt32,
-    number_of_properties : UInt32,
-    device_specific_properties : Win32cr::System::Ioctl::SCM_PD_DEVICE_SPECIFIC_PROPERTY*
+  struct SCM_PD_DEVICE_SPECIFIC_INFO
+    property version : UInt32
+    property size : UInt32
+    property number_of_properties : UInt32
+    property device_specific_properties : Win32cr::System::Ioctl::SCM_PD_DEVICE_SPECIFIC_PROPERTY*
+    def initialize(@version : UInt32, @size : UInt32, @number_of_properties : UInt32, @device_specific_properties : Win32cr::System::Ioctl::SCM_PD_DEVICE_SPECIFIC_PROPERTY*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_FIRMWARE_SLOT_INFO,
-    version : UInt32,
-    size : UInt32,
-    slot_number : UInt8,
-    _bitfield : UInt8,
-    reserved1 : UInt8[6],
-    revision : UInt8[32]
+  struct SCM_PD_FIRMWARE_SLOT_INFO
+    property version : UInt32
+    property size : UInt32
+    property slot_number : UInt8
+    property _bitfield : UInt8
+    property reserved1 : UInt8[6]
+    property revision : UInt8[32]
+    def initialize(@version : UInt32, @size : UInt32, @slot_number : UInt8, @_bitfield : UInt8, @reserved1 : UInt8[6], @revision : UInt8[32])
+    end
+  end
 
   @[Extern]
-  record SCM_PD_FIRMWARE_INFO,
-    version : UInt32,
-    size : UInt32,
-    active_slot : UInt8,
-    next_active_slot : UInt8,
-    slot_count : UInt8,
-    slots : Win32cr::System::Ioctl::SCM_PD_FIRMWARE_SLOT_INFO*
+  struct SCM_PD_FIRMWARE_INFO
+    property version : UInt32
+    property size : UInt32
+    property active_slot : UInt8
+    property next_active_slot : UInt8
+    property slot_count : UInt8
+    property slots : Win32cr::System::Ioctl::SCM_PD_FIRMWARE_SLOT_INFO*
+    def initialize(@version : UInt32, @size : UInt32, @active_slot : UInt8, @next_active_slot : UInt8, @slot_count : UInt8, @slots : Win32cr::System::Ioctl::SCM_PD_FIRMWARE_SLOT_INFO*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_MANAGEMENT_STATUS,
-    version : UInt32,
-    size : UInt32,
-    health : Win32cr::System::Ioctl::SCM_PD_HEALTH_STATUS,
-    number_of_operational_status : UInt32,
-    number_of_additional_reasons : UInt32,
-    operational_status : Win32cr::System::Ioctl::SCM_PD_OPERATIONAL_STATUS[16],
-    additional_reasons : Win32cr::System::Ioctl::SCM_PD_OPERATIONAL_STATUS_REASON*
+  struct SCM_PD_MANAGEMENT_STATUS
+    property version : UInt32
+    property size : UInt32
+    property health : Win32cr::System::Ioctl::SCM_PD_HEALTH_STATUS
+    property number_of_operational_status : UInt32
+    property number_of_additional_reasons : UInt32
+    property operational_status : Win32cr::System::Ioctl::SCM_PD_OPERATIONAL_STATUS[16]
+    property additional_reasons : Win32cr::System::Ioctl::SCM_PD_OPERATIONAL_STATUS_REASON*
+    def initialize(@version : UInt32, @size : UInt32, @health : Win32cr::System::Ioctl::SCM_PD_HEALTH_STATUS, @number_of_operational_status : UInt32, @number_of_additional_reasons : UInt32, @operational_status : Win32cr::System::Ioctl::SCM_PD_OPERATIONAL_STATUS[16], @additional_reasons : Win32cr::System::Ioctl::SCM_PD_OPERATIONAL_STATUS_REASON*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_LOCATION_STRING,
-    version : UInt32,
-    size : UInt32,
-    location : UInt16*
+  struct SCM_PD_LOCATION_STRING
+    property version : UInt32
+    property size : UInt32
+    property location : UInt16*
+    def initialize(@version : UInt32, @size : UInt32, @location : UInt16*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_FRU_ID_STRING,
-    version : UInt32,
-    size : UInt32,
-    identifier_size : UInt32,
-    identifier : UInt8*
+  struct SCM_PD_FRU_ID_STRING
+    property version : UInt32
+    property size : UInt32
+    property identifier_size : UInt32
+    property identifier : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @identifier_size : UInt32, @identifier : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_FIRMWARE_DOWNLOAD,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    slot : UInt8,
-    reserved : UInt8[3],
-    offset : UInt64,
-    firmware_image_size_in_bytes : UInt32,
-    firmware_image : UInt8*
+  struct SCM_PD_FIRMWARE_DOWNLOAD
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property slot : UInt8
+    property reserved : UInt8[3]
+    property offset : UInt64
+    property firmware_image_size_in_bytes : UInt32
+    property firmware_image : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @slot : UInt8, @reserved : UInt8[3], @offset : UInt64, @firmware_image_size_in_bytes : UInt32, @firmware_image : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_FIRMWARE_ACTIVATE,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    slot : UInt8
+  struct SCM_PD_FIRMWARE_ACTIVATE
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property slot : UInt8
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @slot : UInt8)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_RUNTIME_FW_ACTIVATION_INFO,
-    version : UInt32,
-    size : UInt32,
-    last_firmware_activation_status : Win32cr::System::Ioctl::SCM_PD_LAST_FW_ACTIVATION_STATUS,
-    firmware_activation_state : Win32cr::System::Ioctl::SCM_PD_FIRMWARE_ACTIVATION_STATE
+  struct SCM_PD_RUNTIME_FW_ACTIVATION_INFO
+    property version : UInt32
+    property size : UInt32
+    property last_firmware_activation_status : Win32cr::System::Ioctl::SCM_PD_LAST_FW_ACTIVATION_STATUS
+    property firmware_activation_state : Win32cr::System::Ioctl::SCM_PD_FIRMWARE_ACTIVATION_STATE
+    def initialize(@version : UInt32, @size : UInt32, @last_firmware_activation_status : Win32cr::System::Ioctl::SCM_PD_LAST_FW_ACTIVATION_STATUS, @firmware_activation_state : Win32cr::System::Ioctl::SCM_PD_FIRMWARE_ACTIVATION_STATE)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_PASSTHROUGH_INPUT,
-    version : UInt32,
-    size : UInt32,
-    protocol_guid : LibC::GUID,
-    data_size : UInt32,
-    data : UInt8*
+  struct SCM_PD_PASSTHROUGH_INPUT
+    property version : UInt32
+    property size : UInt32
+    property protocol_guid : LibC::GUID
+    property data_size : UInt32
+    property data : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @protocol_guid : LibC::GUID, @data_size : UInt32, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_PASSTHROUGH_OUTPUT,
-    version : UInt32,
-    size : UInt32,
-    protocol_guid : LibC::GUID,
-    data_size : UInt32,
-    data : UInt8*
+  struct SCM_PD_PASSTHROUGH_OUTPUT
+    property version : UInt32
+    property size : UInt32
+    property protocol_guid : LibC::GUID
+    property data_size : UInt32
+    property data : UInt8*
+    def initialize(@version : UInt32, @size : UInt32, @protocol_guid : LibC::GUID, @data_size : UInt32, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_PASSTHROUGH_INVDIMM_INPUT,
-    opcode : UInt32,
-    opcode_parameters_length : UInt32,
-    opcode_parameters : UInt8*
+  struct SCM_PD_PASSTHROUGH_INVDIMM_INPUT
+    property opcode : UInt32
+    property opcode_parameters_length : UInt32
+    property opcode_parameters : UInt8*
+    def initialize(@opcode : UInt32, @opcode_parameters_length : UInt32, @opcode_parameters : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_PASSTHROUGH_INVDIMM_OUTPUT,
-    general_status : UInt16,
-    extended_status : UInt16,
-    output_data_length : UInt32,
-    output_data : UInt8*
+  struct SCM_PD_PASSTHROUGH_INVDIMM_OUTPUT
+    property general_status : UInt16
+    property extended_status : UInt16
+    property output_data_length : UInt32
+    property output_data : UInt8*
+    def initialize(@general_status : UInt16, @extended_status : UInt16, @output_data_length : UInt32, @output_data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SCM_PD_REINITIALIZE_MEDIA_INPUT,
-    version : UInt32,
-    size : UInt32,
-    options : Options_e__Struct_ do
+  struct SCM_PD_REINITIALIZE_MEDIA_INPUT
+    property version : UInt32
+    property size : UInt32
+    property options : Options_e__Struct_
 
     # Nested Type Options_e__Struct_
     @[Extern]
-    record Options_e__Struct_,
-      _bitfield : UInt32
+    struct Options_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@version : UInt32, @size : UInt32, @options : Options_e__Struct_)
+    end
   end
 
   @[Extern]
-  record SCM_PD_REINITIALIZE_MEDIA_OUTPUT,
-    version : UInt32,
-    size : UInt32,
-    status : Win32cr::System::Ioctl::SCM_PD_MEDIA_REINITIALIZATION_STATUS
-
-  @[Extern]
-  record FORMAT_PARAMETERS,
-    media_type : Win32cr::System::Ioctl::MEDIA_TYPE,
-    start_cylinder_number : UInt32,
-    end_cylinder_number : UInt32,
-    start_head_number : UInt32,
-    end_head_number : UInt32
-
-  @[Extern]
-  record FORMAT_EX_PARAMETERS,
-    media_type : Win32cr::System::Ioctl::MEDIA_TYPE,
-    start_cylinder_number : UInt32,
-    end_cylinder_number : UInt32,
-    start_head_number : UInt32,
-    end_head_number : UInt32,
-    format_gap_length : UInt16,
-    sectors_per_track : UInt16,
-    sector_number : UInt16*
-
-  @[Extern]
-  record DISK_GEOMETRY,
-    cylinders : Win32cr::Foundation::LARGE_INTEGER,
-    media_type : Win32cr::System::Ioctl::MEDIA_TYPE,
-    tracks_per_cylinder : UInt32,
-    sectors_per_track : UInt32,
-    bytes_per_sector : UInt32
-
-  @[Extern]
-  record PARTITION_INFORMATION,
-    starting_offset : Win32cr::Foundation::LARGE_INTEGER,
-    partition_length : Win32cr::Foundation::LARGE_INTEGER,
-    hidden_sectors : UInt32,
-    partition_number : UInt32,
-    partition_type : UInt8,
-    boot_indicator : Win32cr::Foundation::BOOLEAN,
-    recognized_partition : Win32cr::Foundation::BOOLEAN,
-    rewrite_partition : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record SET_PARTITION_INFORMATION,
-    partition_type : UInt8
-
-  @[Extern]
-  record DRIVE_LAYOUT_INFORMATION,
-    partition_count : UInt32,
-    signature : UInt32,
-    partition_entry : Win32cr::System::Ioctl::PARTITION_INFORMATION*
-
-  @[Extern]
-  record VERIFY_INFORMATION,
-    starting_offset : Win32cr::Foundation::LARGE_INTEGER,
-    length : UInt32
-
-  @[Extern]
-  record REASSIGN_BLOCKS,
-    reserved : UInt16,
-    count : UInt16,
-    block_number : UInt32*
-
-  @[Extern]
-  record REASSIGN_BLOCKS_EX,
-    reserved : UInt16,
-    count : UInt16,
-    block_number : Win32cr::Foundation::LARGE_INTEGER*
-
-  @[Extern]
-  record PARTITION_INFORMATION_GPT,
-    partition_type : LibC::GUID,
-    partition_id : LibC::GUID,
-    attributes : Win32cr::System::Ioctl::GPT_ATTRIBUTES,
-    name : UInt16[36]
-
-  @[Extern]
-  record PARTITION_INFORMATION_MBR,
-    partition_type : UInt8,
-    boot_indicator : Win32cr::Foundation::BOOLEAN,
-    recognized_partition : Win32cr::Foundation::BOOLEAN,
-    hidden_sectors : UInt32,
-    partition_id : LibC::GUID
-
-  @[Extern]
-  record SET_PARTITION_INFORMATION_EX,
-    partition_style : Win32cr::System::Ioctl::PARTITION_STYLE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      mbr : Win32cr::System::Ioctl::SET_PARTITION_INFORMATION,
-      gpt : Win32cr::System::Ioctl::PARTITION_INFORMATION_GPT
-
+  struct SCM_PD_REINITIALIZE_MEDIA_OUTPUT
+    property version : UInt32
+    property size : UInt32
+    property status : Win32cr::System::Ioctl::SCM_PD_MEDIA_REINITIALIZATION_STATUS
+    def initialize(@version : UInt32, @size : UInt32, @status : Win32cr::System::Ioctl::SCM_PD_MEDIA_REINITIALIZATION_STATUS)
+    end
   end
 
   @[Extern]
-  record CREATE_DISK_GPT,
-    disk_id : LibC::GUID,
-    max_partition_count : UInt32
-
-  @[Extern]
-  record CREATE_DISK_MBR,
-    signature : UInt32
-
-  @[Extern]
-  record CREATE_DISK,
-    partition_style : Win32cr::System::Ioctl::PARTITION_STYLE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      mbr : Win32cr::System::Ioctl::CREATE_DISK_MBR,
-      gpt : Win32cr::System::Ioctl::CREATE_DISK_GPT
-
+  struct FORMAT_PARAMETERS
+    property media_type : Win32cr::System::Ioctl::MEDIA_TYPE
+    property start_cylinder_number : UInt32
+    property end_cylinder_number : UInt32
+    property start_head_number : UInt32
+    property end_head_number : UInt32
+    def initialize(@media_type : Win32cr::System::Ioctl::MEDIA_TYPE, @start_cylinder_number : UInt32, @end_cylinder_number : UInt32, @start_head_number : UInt32, @end_head_number : UInt32)
+    end
   end
 
   @[Extern]
-  record GET_LENGTH_INFORMATION,
-    length : Win32cr::Foundation::LARGE_INTEGER
-
-  @[Extern]
-  record PARTITION_INFORMATION_EX,
-    partition_style : Win32cr::System::Ioctl::PARTITION_STYLE,
-    starting_offset : Win32cr::Foundation::LARGE_INTEGER,
-    partition_length : Win32cr::Foundation::LARGE_INTEGER,
-    partition_number : UInt32,
-    rewrite_partition : Win32cr::Foundation::BOOLEAN,
-    is_service_partition : Win32cr::Foundation::BOOLEAN,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      mbr : Win32cr::System::Ioctl::PARTITION_INFORMATION_MBR,
-      gpt : Win32cr::System::Ioctl::PARTITION_INFORMATION_GPT
-
+  struct FORMAT_EX_PARAMETERS
+    property media_type : Win32cr::System::Ioctl::MEDIA_TYPE
+    property start_cylinder_number : UInt32
+    property end_cylinder_number : UInt32
+    property start_head_number : UInt32
+    property end_head_number : UInt32
+    property format_gap_length : UInt16
+    property sectors_per_track : UInt16
+    property sector_number : UInt16*
+    def initialize(@media_type : Win32cr::System::Ioctl::MEDIA_TYPE, @start_cylinder_number : UInt32, @end_cylinder_number : UInt32, @start_head_number : UInt32, @end_head_number : UInt32, @format_gap_length : UInt16, @sectors_per_track : UInt16, @sector_number : UInt16*)
+    end
   end
 
   @[Extern]
-  record DRIVE_LAYOUT_INFORMATION_GPT,
-    disk_id : LibC::GUID,
-    starting_usable_offset : Win32cr::Foundation::LARGE_INTEGER,
-    usable_length : Win32cr::Foundation::LARGE_INTEGER,
-    max_partition_count : UInt32
-
-  @[Extern]
-  record DRIVE_LAYOUT_INFORMATION_MBR,
-    signature : UInt32,
-    check_sum : UInt32
-
-  @[Extern]
-  record DRIVE_LAYOUT_INFORMATION_EX,
-    partition_style : UInt32,
-    partition_count : UInt32,
-    anonymous : Anonymous_e__Union_,
-    partition_entry : Win32cr::System::Ioctl::PARTITION_INFORMATION_EX* do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      mbr : Win32cr::System::Ioctl::DRIVE_LAYOUT_INFORMATION_MBR,
-      gpt : Win32cr::System::Ioctl::DRIVE_LAYOUT_INFORMATION_GPT
-
+  struct DISK_GEOMETRY
+    property cylinders : Win32cr::Foundation::LARGE_INTEGER
+    property media_type : Win32cr::System::Ioctl::MEDIA_TYPE
+    property tracks_per_cylinder : UInt32
+    property sectors_per_track : UInt32
+    property bytes_per_sector : UInt32
+    def initialize(@cylinders : Win32cr::Foundation::LARGE_INTEGER, @media_type : Win32cr::System::Ioctl::MEDIA_TYPE, @tracks_per_cylinder : UInt32, @sectors_per_track : UInt32, @bytes_per_sector : UInt32)
+    end
   end
 
   @[Extern]
-  record DISK_INT13_INFO,
-    drive_select : UInt16,
-    max_cylinders : UInt32,
-    sectors_per_track : UInt16,
-    max_heads : UInt16,
-    number_drives : UInt16
+  struct PARTITION_INFORMATION
+    property starting_offset : Win32cr::Foundation::LARGE_INTEGER
+    property partition_length : Win32cr::Foundation::LARGE_INTEGER
+    property hidden_sectors : UInt32
+    property partition_number : UInt32
+    property partition_type : UInt8
+    property boot_indicator : Win32cr::Foundation::BOOLEAN
+    property recognized_partition : Win32cr::Foundation::BOOLEAN
+    property rewrite_partition : Win32cr::Foundation::BOOLEAN
+    def initialize(@starting_offset : Win32cr::Foundation::LARGE_INTEGER, @partition_length : Win32cr::Foundation::LARGE_INTEGER, @hidden_sectors : UInt32, @partition_number : UInt32, @partition_type : UInt8, @boot_indicator : Win32cr::Foundation::BOOLEAN, @recognized_partition : Win32cr::Foundation::BOOLEAN, @rewrite_partition : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record DISK_EX_INT13_INFO,
-    ex_buffer_size : UInt16,
-    ex_flags : UInt16,
-    ex_cylinders : UInt32,
-    ex_heads : UInt32,
-    ex_sectors_per_track : UInt32,
-    ex_sectors_per_drive : UInt64,
-    ex_sector_size : UInt16,
-    ex_reserved : UInt16
+  struct SET_PARTITION_INFORMATION
+    property partition_type : UInt8
+    def initialize(@partition_type : UInt8)
+    end
+  end
 
   @[Extern]
-  record DISK_DETECTION_INFO,
-    size_of_detect_info : UInt32,
-    detection_type : Win32cr::System::Ioctl::DETECTION_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct DRIVE_LAYOUT_INFORMATION
+    property partition_count : UInt32
+    property signature : UInt32
+    property partition_entry : Win32cr::System::Ioctl::PARTITION_INFORMATION*
+    def initialize(@partition_count : UInt32, @signature : UInt32, @partition_entry : Win32cr::System::Ioctl::PARTITION_INFORMATION*)
+    end
+  end
+
+  @[Extern]
+  struct VERIFY_INFORMATION
+    property starting_offset : Win32cr::Foundation::LARGE_INTEGER
+    property length : UInt32
+    def initialize(@starting_offset : Win32cr::Foundation::LARGE_INTEGER, @length : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct REASSIGN_BLOCKS
+    property reserved : UInt16
+    property count : UInt16
+    property block_number : UInt32*
+    def initialize(@reserved : UInt16, @count : UInt16, @block_number : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct REASSIGN_BLOCKS_EX
+    property reserved : UInt16
+    property count : UInt16
+    property block_number : Win32cr::Foundation::LARGE_INTEGER*
+    def initialize(@reserved : UInt16, @count : UInt16, @block_number : Win32cr::Foundation::LARGE_INTEGER*)
+    end
+  end
+
+  @[Extern]
+  struct PARTITION_INFORMATION_GPT
+    property partition_type : LibC::GUID
+    property partition_id : LibC::GUID
+    property attributes : Win32cr::System::Ioctl::GPT_ATTRIBUTES
+    property name : UInt16[36]
+    def initialize(@partition_type : LibC::GUID, @partition_id : LibC::GUID, @attributes : Win32cr::System::Ioctl::GPT_ATTRIBUTES, @name : UInt16[36])
+    end
+  end
+
+  @[Extern]
+  struct PARTITION_INFORMATION_MBR
+    property partition_type : UInt8
+    property boot_indicator : Win32cr::Foundation::BOOLEAN
+    property recognized_partition : Win32cr::Foundation::BOOLEAN
+    property hidden_sectors : UInt32
+    property partition_id : LibC::GUID
+    def initialize(@partition_type : UInt8, @boot_indicator : Win32cr::Foundation::BOOLEAN, @recognized_partition : Win32cr::Foundation::BOOLEAN, @hidden_sectors : UInt32, @partition_id : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct SET_PARTITION_INFORMATION_EX
+    property partition_style : Win32cr::System::Ioctl::PARTITION_STYLE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property mbr : Win32cr::System::Ioctl::SET_PARTITION_INFORMATION
+    property gpt : Win32cr::System::Ioctl::PARTITION_INFORMATION_GPT
+    def initialize(@mbr : Win32cr::System::Ioctl::SET_PARTITION_INFORMATION, @gpt : Win32cr::System::Ioctl::PARTITION_INFORMATION_GPT)
+    end
+    end
+
+    def initialize(@partition_style : Win32cr::System::Ioctl::PARTITION_STYLE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct CREATE_DISK_GPT
+    property disk_id : LibC::GUID
+    property max_partition_count : UInt32
+    def initialize(@disk_id : LibC::GUID, @max_partition_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CREATE_DISK_MBR
+    property signature : UInt32
+    def initialize(@signature : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CREATE_DISK
+    property partition_style : Win32cr::System::Ioctl::PARTITION_STYLE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property mbr : Win32cr::System::Ioctl::CREATE_DISK_MBR
+    property gpt : Win32cr::System::Ioctl::CREATE_DISK_GPT
+    def initialize(@mbr : Win32cr::System::Ioctl::CREATE_DISK_MBR, @gpt : Win32cr::System::Ioctl::CREATE_DISK_GPT)
+    end
+    end
+
+    def initialize(@partition_style : Win32cr::System::Ioctl::PARTITION_STYLE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct GET_LENGTH_INFORMATION
+    property length : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@length : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
+
+  @[Extern]
+  struct PARTITION_INFORMATION_EX
+    property partition_style : Win32cr::System::Ioctl::PARTITION_STYLE
+    property starting_offset : Win32cr::Foundation::LARGE_INTEGER
+    property partition_length : Win32cr::Foundation::LARGE_INTEGER
+    property partition_number : UInt32
+    property rewrite_partition : Win32cr::Foundation::BOOLEAN
+    property is_service_partition : Win32cr::Foundation::BOOLEAN
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property mbr : Win32cr::System::Ioctl::PARTITION_INFORMATION_MBR
+    property gpt : Win32cr::System::Ioctl::PARTITION_INFORMATION_GPT
+    def initialize(@mbr : Win32cr::System::Ioctl::PARTITION_INFORMATION_MBR, @gpt : Win32cr::System::Ioctl::PARTITION_INFORMATION_GPT)
+    end
+    end
+
+    def initialize(@partition_style : Win32cr::System::Ioctl::PARTITION_STYLE, @starting_offset : Win32cr::Foundation::LARGE_INTEGER, @partition_length : Win32cr::Foundation::LARGE_INTEGER, @partition_number : UInt32, @rewrite_partition : Win32cr::Foundation::BOOLEAN, @is_service_partition : Win32cr::Foundation::BOOLEAN, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct DRIVE_LAYOUT_INFORMATION_GPT
+    property disk_id : LibC::GUID
+    property starting_usable_offset : Win32cr::Foundation::LARGE_INTEGER
+    property usable_length : Win32cr::Foundation::LARGE_INTEGER
+    property max_partition_count : UInt32
+    def initialize(@disk_id : LibC::GUID, @starting_usable_offset : Win32cr::Foundation::LARGE_INTEGER, @usable_length : Win32cr::Foundation::LARGE_INTEGER, @max_partition_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DRIVE_LAYOUT_INFORMATION_MBR
+    property signature : UInt32
+    property check_sum : UInt32
+    def initialize(@signature : UInt32, @check_sum : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DRIVE_LAYOUT_INFORMATION_EX
+    property partition_style : UInt32
+    property partition_count : UInt32
+    property anonymous : Anonymous_e__Union_
+    property partition_entry : Win32cr::System::Ioctl::PARTITION_INFORMATION_EX*
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property mbr : Win32cr::System::Ioctl::DRIVE_LAYOUT_INFORMATION_MBR
+    property gpt : Win32cr::System::Ioctl::DRIVE_LAYOUT_INFORMATION_GPT
+    def initialize(@mbr : Win32cr::System::Ioctl::DRIVE_LAYOUT_INFORMATION_MBR, @gpt : Win32cr::System::Ioctl::DRIVE_LAYOUT_INFORMATION_GPT)
+    end
+    end
+
+    def initialize(@partition_style : UInt32, @partition_count : UInt32, @anonymous : Anonymous_e__Union_, @partition_entry : Win32cr::System::Ioctl::PARTITION_INFORMATION_EX*)
+    end
+  end
+
+  @[Extern]
+  struct DISK_INT13_INFO
+    property drive_select : UInt16
+    property max_cylinders : UInt32
+    property sectors_per_track : UInt16
+    property max_heads : UInt16
+    property number_drives : UInt16
+    def initialize(@drive_select : UInt16, @max_cylinders : UInt32, @sectors_per_track : UInt16, @max_heads : UInt16, @number_drives : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DISK_EX_INT13_INFO
+    property ex_buffer_size : UInt16
+    property ex_flags : UInt16
+    property ex_cylinders : UInt32
+    property ex_heads : UInt32
+    property ex_sectors_per_track : UInt32
+    property ex_sectors_per_drive : UInt64
+    property ex_sector_size : UInt16
+    property ex_reserved : UInt16
+    def initialize(@ex_buffer_size : UInt16, @ex_flags : UInt16, @ex_cylinders : UInt32, @ex_heads : UInt32, @ex_sectors_per_track : UInt32, @ex_sectors_per_drive : UInt64, @ex_sector_size : UInt16, @ex_reserved : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DISK_DETECTION_INFO
+    property size_of_detect_info : UInt32
+    property detection_type : Win32cr::System::Ioctl::DETECTION_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        int13 : Win32cr::System::Ioctl::DISK_INT13_INFO,
-        ex_int13 : Win32cr::System::Ioctl::DISK_EX_INT13_INFO
+      struct Anonymous_e__Struct_
+    property int13 : Win32cr::System::Ioctl::DISK_INT13_INFO
+    property ex_int13 : Win32cr::System::Ioctl::DISK_EX_INT13_INFO
+    def initialize(@int13 : Win32cr::System::Ioctl::DISK_INT13_INFO, @ex_int13 : Win32cr::System::Ioctl::DISK_EX_INT13_INFO)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@size_of_detect_info : UInt32, @detection_type : Win32cr::System::Ioctl::DETECTION_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record DISK_PARTITION_INFO,
-    size_of_partition_info : UInt32,
-    partition_style : Win32cr::System::Ioctl::PARTITION_STYLE,
-    anonymous : Anonymous_e__Union_ do
+  struct DISK_PARTITION_INFO
+    property size_of_partition_info : UInt32
+    property partition_style : Win32cr::System::Ioctl::PARTITION_STYLE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      mbr : Mbr_e__Struct_,
-      gpt : Gpt_e__Struct_ do
+    struct Anonymous_e__Union_
+    property mbr : Mbr_e__Struct_
+    property gpt : Gpt_e__Struct_
 
       # Nested Type Gpt_e__Struct_
       @[Extern]
-      record Gpt_e__Struct_,
-        disk_id : LibC::GUID
+      struct Gpt_e__Struct_
+    property disk_id : LibC::GUID
+    def initialize(@disk_id : LibC::GUID)
+    end
+      end
 
 
       # Nested Type Mbr_e__Struct_
       @[Extern]
-      record Mbr_e__Struct_,
-        signature : UInt32,
-        check_sum : UInt32
+      struct Mbr_e__Struct_
+    property signature : UInt32
+    property check_sum : UInt32
+    def initialize(@signature : UInt32, @check_sum : UInt32)
+    end
+      end
 
+    def initialize(@mbr : Mbr_e__Struct_, @gpt : Gpt_e__Struct_)
+    end
     end
 
+    def initialize(@size_of_partition_info : UInt32, @partition_style : Win32cr::System::Ioctl::PARTITION_STYLE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record DISK_GEOMETRY_EX,
-    geometry : Win32cr::System::Ioctl::DISK_GEOMETRY,
-    disk_size : Win32cr::Foundation::LARGE_INTEGER,
-    data : UInt8*
+  struct DISK_GEOMETRY_EX
+    property geometry : Win32cr::System::Ioctl::DISK_GEOMETRY
+    property disk_size : Win32cr::Foundation::LARGE_INTEGER
+    property data : UInt8*
+    def initialize(@geometry : Win32cr::System::Ioctl::DISK_GEOMETRY, @disk_size : Win32cr::Foundation::LARGE_INTEGER, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DISK_CONTROLLER_NUMBER,
-    controller_number : UInt32,
-    disk_number : UInt32
+  struct DISK_CONTROLLER_NUMBER
+    property controller_number : UInt32
+    property disk_number : UInt32
+    def initialize(@controller_number : UInt32, @disk_number : UInt32)
+    end
+  end
 
   @[Extern]
-  record DISK_CACHE_INFORMATION,
-    parameters_savable : Win32cr::Foundation::BOOLEAN,
-    read_cache_enabled : Win32cr::Foundation::BOOLEAN,
-    write_cache_enabled : Win32cr::Foundation::BOOLEAN,
-    read_retention_priority : Win32cr::System::Ioctl::DISK_CACHE_RETENTION_PRIORITY,
-    write_retention_priority : Win32cr::System::Ioctl::DISK_CACHE_RETENTION_PRIORITY,
-    disable_prefetch_transfer_length : UInt16,
-    prefetch_scalar : Win32cr::Foundation::BOOLEAN,
-    anonymous : Anonymous_e__Union_ do
+  struct DISK_CACHE_INFORMATION
+    property parameters_savable : Win32cr::Foundation::BOOLEAN
+    property read_cache_enabled : Win32cr::Foundation::BOOLEAN
+    property write_cache_enabled : Win32cr::Foundation::BOOLEAN
+    property read_retention_priority : Win32cr::System::Ioctl::DISK_CACHE_RETENTION_PRIORITY
+    property write_retention_priority : Win32cr::System::Ioctl::DISK_CACHE_RETENTION_PRIORITY
+    property disable_prefetch_transfer_length : UInt16
+    property prefetch_scalar : Win32cr::Foundation::BOOLEAN
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      scalar_prefetch : ScalarPrefetch_e__Struct_,
-      block_prefetch : BlockPrefetch_e__Struct_ do
+    struct Anonymous_e__Union_
+    property scalar_prefetch : ScalarPrefetch_e__Struct_
+    property block_prefetch : BlockPrefetch_e__Struct_
 
       # Nested Type BlockPrefetch_e__Struct_
       @[Extern]
-      record BlockPrefetch_e__Struct_,
-        minimum : UInt16,
-        maximum : UInt16
+      struct BlockPrefetch_e__Struct_
+    property minimum : UInt16
+    property maximum : UInt16
+    def initialize(@minimum : UInt16, @maximum : UInt16)
+    end
+      end
 
 
       # Nested Type ScalarPrefetch_e__Struct_
       @[Extern]
-      record ScalarPrefetch_e__Struct_,
-        minimum : UInt16,
-        maximum : UInt16,
-        maximum_blocks : UInt16
+      struct ScalarPrefetch_e__Struct_
+    property minimum : UInt16
+    property maximum : UInt16
+    property maximum_blocks : UInt16
+    def initialize(@minimum : UInt16, @maximum : UInt16, @maximum_blocks : UInt16)
+    end
+      end
 
+    def initialize(@scalar_prefetch : ScalarPrefetch_e__Struct_, @block_prefetch : BlockPrefetch_e__Struct_)
+    end
     end
 
+    def initialize(@parameters_savable : Win32cr::Foundation::BOOLEAN, @read_cache_enabled : Win32cr::Foundation::BOOLEAN, @write_cache_enabled : Win32cr::Foundation::BOOLEAN, @read_retention_priority : Win32cr::System::Ioctl::DISK_CACHE_RETENTION_PRIORITY, @write_retention_priority : Win32cr::System::Ioctl::DISK_CACHE_RETENTION_PRIORITY, @disable_prefetch_transfer_length : UInt16, @prefetch_scalar : Win32cr::Foundation::BOOLEAN, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record DISK_GROW_PARTITION,
-    partition_number : UInt32,
-    bytes_to_grow : Win32cr::Foundation::LARGE_INTEGER
+  struct DISK_GROW_PARTITION
+    property partition_number : UInt32
+    property bytes_to_grow : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@partition_number : UInt32, @bytes_to_grow : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record HISTOGRAM_BUCKET,
-    reads : UInt32,
-    writes : UInt32
+  struct HISTOGRAM_BUCKET
+    property reads : UInt32
+    property writes : UInt32
+    def initialize(@reads : UInt32, @writes : UInt32)
+    end
+  end
 
   @[Extern]
-  record DISK_HISTOGRAM,
-    disk_size : Win32cr::Foundation::LARGE_INTEGER,
-    start : Win32cr::Foundation::LARGE_INTEGER,
-    end__ : Win32cr::Foundation::LARGE_INTEGER,
-    average : Win32cr::Foundation::LARGE_INTEGER,
-    average_read : Win32cr::Foundation::LARGE_INTEGER,
-    average_write : Win32cr::Foundation::LARGE_INTEGER,
-    granularity : UInt32,
-    size : UInt32,
-    read_count : UInt32,
-    write_count : UInt32,
-    histogram : Win32cr::System::Ioctl::HISTOGRAM_BUCKET*
+  struct DISK_HISTOGRAM
+    property disk_size : Win32cr::Foundation::LARGE_INTEGER
+    property start : Win32cr::Foundation::LARGE_INTEGER
+    property end__ : Win32cr::Foundation::LARGE_INTEGER
+    property average : Win32cr::Foundation::LARGE_INTEGER
+    property average_read : Win32cr::Foundation::LARGE_INTEGER
+    property average_write : Win32cr::Foundation::LARGE_INTEGER
+    property granularity : UInt32
+    property size : UInt32
+    property read_count : UInt32
+    property write_count : UInt32
+    property histogram : Win32cr::System::Ioctl::HISTOGRAM_BUCKET*
+    def initialize(@disk_size : Win32cr::Foundation::LARGE_INTEGER, @start : Win32cr::Foundation::LARGE_INTEGER, @end__ : Win32cr::Foundation::LARGE_INTEGER, @average : Win32cr::Foundation::LARGE_INTEGER, @average_read : Win32cr::Foundation::LARGE_INTEGER, @average_write : Win32cr::Foundation::LARGE_INTEGER, @granularity : UInt32, @size : UInt32, @read_count : UInt32, @write_count : UInt32, @histogram : Win32cr::System::Ioctl::HISTOGRAM_BUCKET*)
+    end
+  end
 
   @[Extern]
-  record DISK_PERFORMANCE,
-    bytes_read : Win32cr::Foundation::LARGE_INTEGER,
-    bytes_written : Win32cr::Foundation::LARGE_INTEGER,
-    read_time : Win32cr::Foundation::LARGE_INTEGER,
-    write_time : Win32cr::Foundation::LARGE_INTEGER,
-    idle_time : Win32cr::Foundation::LARGE_INTEGER,
-    read_count : UInt32,
-    write_count : UInt32,
-    queue_depth : UInt32,
-    split_count : UInt32,
-    query_time : Win32cr::Foundation::LARGE_INTEGER,
-    storage_device_number : UInt32,
-    storage_manager_name : UInt16[8]
+  struct DISK_PERFORMANCE
+    property bytes_read : Win32cr::Foundation::LARGE_INTEGER
+    property bytes_written : Win32cr::Foundation::LARGE_INTEGER
+    property read_time : Win32cr::Foundation::LARGE_INTEGER
+    property write_time : Win32cr::Foundation::LARGE_INTEGER
+    property idle_time : Win32cr::Foundation::LARGE_INTEGER
+    property read_count : UInt32
+    property write_count : UInt32
+    property queue_depth : UInt32
+    property split_count : UInt32
+    property query_time : Win32cr::Foundation::LARGE_INTEGER
+    property storage_device_number : UInt32
+    property storage_manager_name : UInt16[8]
+    def initialize(@bytes_read : Win32cr::Foundation::LARGE_INTEGER, @bytes_written : Win32cr::Foundation::LARGE_INTEGER, @read_time : Win32cr::Foundation::LARGE_INTEGER, @write_time : Win32cr::Foundation::LARGE_INTEGER, @idle_time : Win32cr::Foundation::LARGE_INTEGER, @read_count : UInt32, @write_count : UInt32, @queue_depth : UInt32, @split_count : UInt32, @query_time : Win32cr::Foundation::LARGE_INTEGER, @storage_device_number : UInt32, @storage_manager_name : UInt16[8])
+    end
+  end
 
   @[Extern]
-  record DISK_RECORD,
-    byte_offset : Win32cr::Foundation::LARGE_INTEGER,
-    start_time : Win32cr::Foundation::LARGE_INTEGER,
-    end_time : Win32cr::Foundation::LARGE_INTEGER,
-    virtual_address : Void*,
-    number_of_bytes : UInt32,
-    device_number : UInt8,
-    read_request : Win32cr::Foundation::BOOLEAN
+  struct DISK_RECORD
+    property byte_offset : Win32cr::Foundation::LARGE_INTEGER
+    property start_time : Win32cr::Foundation::LARGE_INTEGER
+    property end_time : Win32cr::Foundation::LARGE_INTEGER
+    property virtual_address : Void*
+    property number_of_bytes : UInt32
+    property device_number : UInt8
+    property read_request : Win32cr::Foundation::BOOLEAN
+    def initialize(@byte_offset : Win32cr::Foundation::LARGE_INTEGER, @start_time : Win32cr::Foundation::LARGE_INTEGER, @end_time : Win32cr::Foundation::LARGE_INTEGER, @virtual_address : Void*, @number_of_bytes : UInt32, @device_number : UInt8, @read_request : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record DISK_LOGGING,
-    function : UInt8,
-    buffer_address : Void*,
-    buffer_size : UInt32
+  struct DISK_LOGGING
+    property function : UInt8
+    property buffer_address : Void*
+    property buffer_size : UInt32
+    def initialize(@function : UInt8, @buffer_address : Void*, @buffer_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record BIN_RANGE,
-    start_value : Win32cr::Foundation::LARGE_INTEGER,
-    length : Win32cr::Foundation::LARGE_INTEGER
+  struct BIN_RANGE
+    property start_value : Win32cr::Foundation::LARGE_INTEGER
+    property length : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@start_value : Win32cr::Foundation::LARGE_INTEGER, @length : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record PERF_BIN,
-    number_of_bins : UInt32,
-    type_of_bin : UInt32,
-    bins_ranges : Win32cr::System::Ioctl::BIN_RANGE*
+  struct PERF_BIN
+    property number_of_bins : UInt32
+    property type_of_bin : UInt32
+    property bins_ranges : Win32cr::System::Ioctl::BIN_RANGE*
+    def initialize(@number_of_bins : UInt32, @type_of_bin : UInt32, @bins_ranges : Win32cr::System::Ioctl::BIN_RANGE*)
+    end
+  end
 
   @[Extern]
-  record BIN_COUNT,
-    bin_range : Win32cr::System::Ioctl::BIN_RANGE,
-    bin_count : UInt32
+  struct BIN_COUNT
+    property bin_range : Win32cr::System::Ioctl::BIN_RANGE
+    property bin_count : UInt32
+    def initialize(@bin_range : Win32cr::System::Ioctl::BIN_RANGE, @bin_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record BIN_RESULTS,
-    number_of_bins : UInt32,
-    bin_counts : Win32cr::System::Ioctl::BIN_COUNT*
+  struct BIN_RESULTS
+    property number_of_bins : UInt32
+    property bin_counts : Win32cr::System::Ioctl::BIN_COUNT*
+    def initialize(@number_of_bins : UInt32, @bin_counts : Win32cr::System::Ioctl::BIN_COUNT*)
+    end
+  end
 
   @[Extern]
-  record GETVERSIONINPARAMS,
-    bVersion : UInt8,
-    bRevision : UInt8,
-    bReserved : UInt8,
-    bIDEDeviceMap : UInt8,
-    fCapabilities : UInt32,
-    dwReserved : UInt32[4]
+  struct GETVERSIONINPARAMS
+    property bVersion : UInt8
+    property bRevision : UInt8
+    property bReserved : UInt8
+    property bIDEDeviceMap : UInt8
+    property fCapabilities : UInt32
+    property dwReserved : UInt32[4]
+    def initialize(@bVersion : UInt8, @bRevision : UInt8, @bReserved : UInt8, @bIDEDeviceMap : UInt8, @fCapabilities : UInt32, @dwReserved : UInt32[4])
+    end
+  end
 
   @[Extern]
-  record IDEREGS,
-    bFeaturesReg : UInt8,
-    bSectorCountReg : UInt8,
-    bSectorNumberReg : UInt8,
-    bCylLowReg : UInt8,
-    bCylHighReg : UInt8,
-    bDriveHeadReg : UInt8,
-    bCommandReg : UInt8,
-    bReserved : UInt8
+  struct IDEREGS
+    property bFeaturesReg : UInt8
+    property bSectorCountReg : UInt8
+    property bSectorNumberReg : UInt8
+    property bCylLowReg : UInt8
+    property bCylHighReg : UInt8
+    property bDriveHeadReg : UInt8
+    property bCommandReg : UInt8
+    property bReserved : UInt8
+    def initialize(@bFeaturesReg : UInt8, @bSectorCountReg : UInt8, @bSectorNumberReg : UInt8, @bCylLowReg : UInt8, @bCylHighReg : UInt8, @bDriveHeadReg : UInt8, @bCommandReg : UInt8, @bReserved : UInt8)
+    end
+  end
 
   @[Extern]
-  record SENDCMDINPARAMS,
-    cBufferSize : UInt32,
-    irDriveRegs : Win32cr::System::Ioctl::IDEREGS,
-    bDriveNumber : UInt8,
-    bReserved : UInt8[3],
-    dwReserved : UInt32[4],
-    bBuffer : UInt8*
+  struct SENDCMDINPARAMS
+    property cBufferSize : UInt32
+    property irDriveRegs : Win32cr::System::Ioctl::IDEREGS
+    property bDriveNumber : UInt8
+    property bReserved : UInt8[3]
+    property dwReserved : UInt32[4]
+    property bBuffer : UInt8*
+    def initialize(@cBufferSize : UInt32, @irDriveRegs : Win32cr::System::Ioctl::IDEREGS, @bDriveNumber : UInt8, @bReserved : UInt8[3], @dwReserved : UInt32[4], @bBuffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DRIVERSTATUS,
-    bDriverError : UInt8,
-    bIDEError : UInt8,
-    bReserved : UInt8[2],
-    dwReserved : UInt32[2]
+  struct DRIVERSTATUS
+    property bDriverError : UInt8
+    property bIDEError : UInt8
+    property bReserved : UInt8[2]
+    property dwReserved : UInt32[2]
+    def initialize(@bDriverError : UInt8, @bIDEError : UInt8, @bReserved : UInt8[2], @dwReserved : UInt32[2])
+    end
+  end
 
   @[Extern]
-  record SENDCMDOUTPARAMS,
-    cBufferSize : UInt32,
-    driver_status : Win32cr::System::Ioctl::DRIVERSTATUS,
-    bBuffer : UInt8*
+  struct SENDCMDOUTPARAMS
+    property cBufferSize : UInt32
+    property driver_status : Win32cr::System::Ioctl::DRIVERSTATUS
+    property bBuffer : UInt8*
+    def initialize(@cBufferSize : UInt32, @driver_status : Win32cr::System::Ioctl::DRIVERSTATUS, @bBuffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record GET_DISK_ATTRIBUTES,
-    version : UInt32,
-    reserved1 : UInt32,
-    attributes : UInt64
+  struct GET_DISK_ATTRIBUTES
+    property version : UInt32
+    property reserved1 : UInt32
+    property attributes : UInt64
+    def initialize(@version : UInt32, @reserved1 : UInt32, @attributes : UInt64)
+    end
+  end
 
   @[Extern]
-  record SET_DISK_ATTRIBUTES,
-    version : UInt32,
-    persist : Win32cr::Foundation::BOOLEAN,
-    reserved1 : UInt8[3],
-    attributes : UInt64,
-    attributes_mask : UInt64,
-    reserved2 : UInt32[4]
+  struct SET_DISK_ATTRIBUTES
+    property version : UInt32
+    property persist : Win32cr::Foundation::BOOLEAN
+    property reserved1 : UInt8[3]
+    property attributes : UInt64
+    property attributes_mask : UInt64
+    property reserved2 : UInt32[4]
+    def initialize(@version : UInt32, @persist : Win32cr::Foundation::BOOLEAN, @reserved1 : UInt8[3], @attributes : UInt64, @attributes_mask : UInt64, @reserved2 : UInt32[4])
+    end
+  end
 
   @[Extern]
-  record CHANGER_ELEMENT,
-    element_type : Win32cr::System::Ioctl::ELEMENT_TYPE,
-    element_address : UInt32
+  struct CHANGER_ELEMENT
+    property element_type : Win32cr::System::Ioctl::ELEMENT_TYPE
+    property element_address : UInt32
+    def initialize(@element_type : Win32cr::System::Ioctl::ELEMENT_TYPE, @element_address : UInt32)
+    end
+  end
 
   @[Extern]
-  record CHANGER_ELEMENT_LIST,
-    element : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    number_of_elements : UInt32
+  struct CHANGER_ELEMENT_LIST
+    property element : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property number_of_elements : UInt32
+    def initialize(@element : Win32cr::System::Ioctl::CHANGER_ELEMENT, @number_of_elements : UInt32)
+    end
+  end
 
   @[Extern]
-  record GET_CHANGER_PARAMETERS,
-    size : UInt32,
-    number_transport_elements : UInt16,
-    number_storage_elements : UInt16,
-    number_cleaner_slots : UInt16,
-    number_ie_elements : UInt16,
-    number_data_transfer_elements : UInt16,
-    number_of_doors : UInt16,
-    first_slot_number : UInt16,
-    first_drive_number : UInt16,
-    first_transport_number : UInt16,
-    first_ie_port_number : UInt16,
-    first_cleaner_slot_address : UInt16,
-    magazine_size : UInt16,
-    drive_clean_timeout : UInt32,
-    features0 : Win32cr::System::Ioctl::CHANGER_FEATURES,
-    features1 : Win32cr::System::Ioctl::GET_CHANGER_PARAMETERS_FEATURES1,
-    move_from_transport : UInt8,
-    move_from_slot : UInt8,
-    move_from_ie_port : UInt8,
-    move_from_drive : UInt8,
-    exchange_from_transport : UInt8,
-    exchange_from_slot : UInt8,
-    exchange_from_ie_port : UInt8,
-    exchange_from_drive : UInt8,
-    lock_unlock_capabilities : UInt8,
-    position_capabilities : UInt8,
-    reserved1 : UInt8[2],
-    reserved2 : UInt32[2]
+  struct GET_CHANGER_PARAMETERS
+    property size : UInt32
+    property number_transport_elements : UInt16
+    property number_storage_elements : UInt16
+    property number_cleaner_slots : UInt16
+    property number_ie_elements : UInt16
+    property number_data_transfer_elements : UInt16
+    property number_of_doors : UInt16
+    property first_slot_number : UInt16
+    property first_drive_number : UInt16
+    property first_transport_number : UInt16
+    property first_ie_port_number : UInt16
+    property first_cleaner_slot_address : UInt16
+    property magazine_size : UInt16
+    property drive_clean_timeout : UInt32
+    property features0 : Win32cr::System::Ioctl::CHANGER_FEATURES
+    property features1 : Win32cr::System::Ioctl::GET_CHANGER_PARAMETERS_FEATURES1
+    property move_from_transport : UInt8
+    property move_from_slot : UInt8
+    property move_from_ie_port : UInt8
+    property move_from_drive : UInt8
+    property exchange_from_transport : UInt8
+    property exchange_from_slot : UInt8
+    property exchange_from_ie_port : UInt8
+    property exchange_from_drive : UInt8
+    property lock_unlock_capabilities : UInt8
+    property position_capabilities : UInt8
+    property reserved1 : UInt8[2]
+    property reserved2 : UInt32[2]
+    def initialize(@size : UInt32, @number_transport_elements : UInt16, @number_storage_elements : UInt16, @number_cleaner_slots : UInt16, @number_ie_elements : UInt16, @number_data_transfer_elements : UInt16, @number_of_doors : UInt16, @first_slot_number : UInt16, @first_drive_number : UInt16, @first_transport_number : UInt16, @first_ie_port_number : UInt16, @first_cleaner_slot_address : UInt16, @magazine_size : UInt16, @drive_clean_timeout : UInt32, @features0 : Win32cr::System::Ioctl::CHANGER_FEATURES, @features1 : Win32cr::System::Ioctl::GET_CHANGER_PARAMETERS_FEATURES1, @move_from_transport : UInt8, @move_from_slot : UInt8, @move_from_ie_port : UInt8, @move_from_drive : UInt8, @exchange_from_transport : UInt8, @exchange_from_slot : UInt8, @exchange_from_ie_port : UInt8, @exchange_from_drive : UInt8, @lock_unlock_capabilities : UInt8, @position_capabilities : UInt8, @reserved1 : UInt8[2], @reserved2 : UInt32[2])
+    end
+  end
 
   @[Extern]
-  record CHANGER_PRODUCT_DATA,
-    vendor_id : UInt8[8],
-    product_id : UInt8[16],
-    revision : UInt8[4],
-    serial_number : UInt8[32],
-    device_type : UInt8
+  struct CHANGER_PRODUCT_DATA
+    property vendor_id : UInt8[8]
+    property product_id : UInt8[16]
+    property revision : UInt8[4]
+    property serial_number : UInt8[32]
+    property device_type : UInt8
+    def initialize(@vendor_id : UInt8[8], @product_id : UInt8[16], @revision : UInt8[4], @serial_number : UInt8[32], @device_type : UInt8)
+    end
+  end
 
   @[Extern]
-  record CHANGER_SET_ACCESS,
-    element : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    control : UInt32
+  struct CHANGER_SET_ACCESS
+    property element : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property control : UInt32
+    def initialize(@element : Win32cr::System::Ioctl::CHANGER_ELEMENT, @control : UInt32)
+    end
+  end
 
   @[Extern]
-  record CHANGER_READ_ELEMENT_STATUS,
-    element_list : Win32cr::System::Ioctl::CHANGER_ELEMENT_LIST,
-    volume_tag_info : Win32cr::Foundation::BOOLEAN
+  struct CHANGER_READ_ELEMENT_STATUS
+    property element_list : Win32cr::System::Ioctl::CHANGER_ELEMENT_LIST
+    property volume_tag_info : Win32cr::Foundation::BOOLEAN
+    def initialize(@element_list : Win32cr::System::Ioctl::CHANGER_ELEMENT_LIST, @volume_tag_info : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record CHANGER_ELEMENT_STATUS,
-    element : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    src_element_address : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    flags : Win32cr::System::Ioctl::CHANGER_ELEMENT_STATUS_FLAGS,
-    exception_code : UInt32,
-    target_id : UInt8,
-    lun : UInt8,
-    reserved : UInt16,
-    primary_volume_id : UInt8[36],
-    alternate_volume_id : UInt8[36]
+  struct CHANGER_ELEMENT_STATUS
+    property element : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property src_element_address : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property flags : Win32cr::System::Ioctl::CHANGER_ELEMENT_STATUS_FLAGS
+    property exception_code : UInt32
+    property target_id : UInt8
+    property lun : UInt8
+    property reserved : UInt16
+    property primary_volume_id : UInt8[36]
+    property alternate_volume_id : UInt8[36]
+    def initialize(@element : Win32cr::System::Ioctl::CHANGER_ELEMENT, @src_element_address : Win32cr::System::Ioctl::CHANGER_ELEMENT, @flags : Win32cr::System::Ioctl::CHANGER_ELEMENT_STATUS_FLAGS, @exception_code : UInt32, @target_id : UInt8, @lun : UInt8, @reserved : UInt16, @primary_volume_id : UInt8[36], @alternate_volume_id : UInt8[36])
+    end
+  end
 
   @[Extern]
-  record CHANGER_ELEMENT_STATUS_EX,
-    element : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    src_element_address : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    flags : Win32cr::System::Ioctl::CHANGER_ELEMENT_STATUS_FLAGS,
-    exception_code : UInt32,
-    target_id : UInt8,
-    lun : UInt8,
-    reserved : UInt16,
-    primary_volume_id : UInt8[36],
-    alternate_volume_id : UInt8[36],
-    vendor_identification : UInt8[8],
-    product_identification : UInt8[16],
-    serial_number : UInt8[32]
+  struct CHANGER_ELEMENT_STATUS_EX
+    property element : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property src_element_address : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property flags : Win32cr::System::Ioctl::CHANGER_ELEMENT_STATUS_FLAGS
+    property exception_code : UInt32
+    property target_id : UInt8
+    property lun : UInt8
+    property reserved : UInt16
+    property primary_volume_id : UInt8[36]
+    property alternate_volume_id : UInt8[36]
+    property vendor_identification : UInt8[8]
+    property product_identification : UInt8[16]
+    property serial_number : UInt8[32]
+    def initialize(@element : Win32cr::System::Ioctl::CHANGER_ELEMENT, @src_element_address : Win32cr::System::Ioctl::CHANGER_ELEMENT, @flags : Win32cr::System::Ioctl::CHANGER_ELEMENT_STATUS_FLAGS, @exception_code : UInt32, @target_id : UInt8, @lun : UInt8, @reserved : UInt16, @primary_volume_id : UInt8[36], @alternate_volume_id : UInt8[36], @vendor_identification : UInt8[8], @product_identification : UInt8[16], @serial_number : UInt8[32])
+    end
+  end
 
   @[Extern]
-  record CHANGER_INITIALIZE_ELEMENT_STATUS,
-    element_list : Win32cr::System::Ioctl::CHANGER_ELEMENT_LIST,
-    bar_code_scan : Win32cr::Foundation::BOOLEAN
+  struct CHANGER_INITIALIZE_ELEMENT_STATUS
+    property element_list : Win32cr::System::Ioctl::CHANGER_ELEMENT_LIST
+    property bar_code_scan : Win32cr::Foundation::BOOLEAN
+    def initialize(@element_list : Win32cr::System::Ioctl::CHANGER_ELEMENT_LIST, @bar_code_scan : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record CHANGER_SET_POSITION,
-    transport : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    destination : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    flip : Win32cr::Foundation::BOOLEAN
+  struct CHANGER_SET_POSITION
+    property transport : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property destination : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property flip : Win32cr::Foundation::BOOLEAN
+    def initialize(@transport : Win32cr::System::Ioctl::CHANGER_ELEMENT, @destination : Win32cr::System::Ioctl::CHANGER_ELEMENT, @flip : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record CHANGER_EXCHANGE_MEDIUM,
-    transport : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    source : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    destination1 : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    destination2 : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    flip1 : Win32cr::Foundation::BOOLEAN,
-    flip2 : Win32cr::Foundation::BOOLEAN
+  struct CHANGER_EXCHANGE_MEDIUM
+    property transport : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property source : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property destination1 : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property destination2 : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property flip1 : Win32cr::Foundation::BOOLEAN
+    property flip2 : Win32cr::Foundation::BOOLEAN
+    def initialize(@transport : Win32cr::System::Ioctl::CHANGER_ELEMENT, @source : Win32cr::System::Ioctl::CHANGER_ELEMENT, @destination1 : Win32cr::System::Ioctl::CHANGER_ELEMENT, @destination2 : Win32cr::System::Ioctl::CHANGER_ELEMENT, @flip1 : Win32cr::Foundation::BOOLEAN, @flip2 : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record CHANGER_MOVE_MEDIUM,
-    transport : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    source : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    destination : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    flip : Win32cr::Foundation::BOOLEAN
+  struct CHANGER_MOVE_MEDIUM
+    property transport : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property source : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property destination : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property flip : Win32cr::Foundation::BOOLEAN
+    def initialize(@transport : Win32cr::System::Ioctl::CHANGER_ELEMENT, @source : Win32cr::System::Ioctl::CHANGER_ELEMENT, @destination : Win32cr::System::Ioctl::CHANGER_ELEMENT, @flip : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record CHANGER_SEND_VOLUME_TAG_INFORMATION,
-    starting_element : Win32cr::System::Ioctl::CHANGER_ELEMENT,
-    action_code : UInt32,
-    volume_id_template : UInt8[40]
+  struct CHANGER_SEND_VOLUME_TAG_INFORMATION
+    property starting_element : Win32cr::System::Ioctl::CHANGER_ELEMENT
+    property action_code : UInt32
+    property volume_id_template : UInt8[40]
+    def initialize(@starting_element : Win32cr::System::Ioctl::CHANGER_ELEMENT, @action_code : UInt32, @volume_id_template : UInt8[40])
+    end
+  end
 
   @[Extern]
-  record READ_ELEMENT_ADDRESS_INFO,
-    number_of_elements : UInt32,
-    element_status : Win32cr::System::Ioctl::CHANGER_ELEMENT_STATUS*
+  struct READ_ELEMENT_ADDRESS_INFO
+    property number_of_elements : UInt32
+    property element_status : Win32cr::System::Ioctl::CHANGER_ELEMENT_STATUS*
+    def initialize(@number_of_elements : UInt32, @element_status : Win32cr::System::Ioctl::CHANGER_ELEMENT_STATUS*)
+    end
+  end
 
   @[Extern]
-  record PATHNAME_BUFFER,
-    path_name_length : UInt32,
-    name : UInt16*
+  struct PATHNAME_BUFFER
+    property path_name_length : UInt32
+    property name : UInt16*
+    def initialize(@path_name_length : UInt32, @name : UInt16*)
+    end
+  end
 
   @[Extern]
-  record FSCTL_QUERY_FAT_BPB_BUFFER,
-    first0x24_bytes_of_boot_sector : UInt8[36]
+  struct FSCTL_QUERY_FAT_BPB_BUFFER
+    property first0x24_bytes_of_boot_sector : UInt8[36]
+    def initialize(@first0x24_bytes_of_boot_sector : UInt8[36])
+    end
+  end
 
   @[Extern]
-  record NTFS_VOLUME_DATA_BUFFER,
-    volume_serial_number : Win32cr::Foundation::LARGE_INTEGER,
-    number_sectors : Win32cr::Foundation::LARGE_INTEGER,
-    total_clusters : Win32cr::Foundation::LARGE_INTEGER,
-    free_clusters : Win32cr::Foundation::LARGE_INTEGER,
-    total_reserved : Win32cr::Foundation::LARGE_INTEGER,
-    bytes_per_sector : UInt32,
-    bytes_per_cluster : UInt32,
-    bytes_per_file_record_segment : UInt32,
-    clusters_per_file_record_segment : UInt32,
-    mft_valid_data_length : Win32cr::Foundation::LARGE_INTEGER,
-    mft_start_lcn : Win32cr::Foundation::LARGE_INTEGER,
-    mft2_start_lcn : Win32cr::Foundation::LARGE_INTEGER,
-    mft_zone_start : Win32cr::Foundation::LARGE_INTEGER,
-    mft_zone_end : Win32cr::Foundation::LARGE_INTEGER
+  struct NTFS_VOLUME_DATA_BUFFER
+    property volume_serial_number : Win32cr::Foundation::LARGE_INTEGER
+    property number_sectors : Win32cr::Foundation::LARGE_INTEGER
+    property total_clusters : Win32cr::Foundation::LARGE_INTEGER
+    property free_clusters : Win32cr::Foundation::LARGE_INTEGER
+    property total_reserved : Win32cr::Foundation::LARGE_INTEGER
+    property bytes_per_sector : UInt32
+    property bytes_per_cluster : UInt32
+    property bytes_per_file_record_segment : UInt32
+    property clusters_per_file_record_segment : UInt32
+    property mft_valid_data_length : Win32cr::Foundation::LARGE_INTEGER
+    property mft_start_lcn : Win32cr::Foundation::LARGE_INTEGER
+    property mft2_start_lcn : Win32cr::Foundation::LARGE_INTEGER
+    property mft_zone_start : Win32cr::Foundation::LARGE_INTEGER
+    property mft_zone_end : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@volume_serial_number : Win32cr::Foundation::LARGE_INTEGER, @number_sectors : Win32cr::Foundation::LARGE_INTEGER, @total_clusters : Win32cr::Foundation::LARGE_INTEGER, @free_clusters : Win32cr::Foundation::LARGE_INTEGER, @total_reserved : Win32cr::Foundation::LARGE_INTEGER, @bytes_per_sector : UInt32, @bytes_per_cluster : UInt32, @bytes_per_file_record_segment : UInt32, @clusters_per_file_record_segment : UInt32, @mft_valid_data_length : Win32cr::Foundation::LARGE_INTEGER, @mft_start_lcn : Win32cr::Foundation::LARGE_INTEGER, @mft2_start_lcn : Win32cr::Foundation::LARGE_INTEGER, @mft_zone_start : Win32cr::Foundation::LARGE_INTEGER, @mft_zone_end : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record NTFS_EXTENDED_VOLUME_DATA,
-    byte_count : UInt32,
-    major_version : UInt16,
-    minor_version : UInt16,
-    bytes_per_physical_sector : UInt32,
-    lfs_major_version : UInt16,
-    lfs_minor_version : UInt16,
-    max_device_trim_extent_count : UInt32,
-    max_device_trim_byte_count : UInt32,
-    max_volume_trim_extent_count : UInt32,
-    max_volume_trim_byte_count : UInt32
+  struct NTFS_EXTENDED_VOLUME_DATA
+    property byte_count : UInt32
+    property major_version : UInt16
+    property minor_version : UInt16
+    property bytes_per_physical_sector : UInt32
+    property lfs_major_version : UInt16
+    property lfs_minor_version : UInt16
+    property max_device_trim_extent_count : UInt32
+    property max_device_trim_byte_count : UInt32
+    property max_volume_trim_extent_count : UInt32
+    property max_volume_trim_byte_count : UInt32
+    def initialize(@byte_count : UInt32, @major_version : UInt16, @minor_version : UInt16, @bytes_per_physical_sector : UInt32, @lfs_major_version : UInt16, @lfs_minor_version : UInt16, @max_device_trim_extent_count : UInt32, @max_device_trim_byte_count : UInt32, @max_volume_trim_extent_count : UInt32, @max_volume_trim_byte_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record REFS_VOLUME_DATA_BUFFER,
-    byte_count : UInt32,
-    major_version : UInt32,
-    minor_version : UInt32,
-    bytes_per_physical_sector : UInt32,
-    volume_serial_number : Win32cr::Foundation::LARGE_INTEGER,
-    number_sectors : Win32cr::Foundation::LARGE_INTEGER,
-    total_clusters : Win32cr::Foundation::LARGE_INTEGER,
-    free_clusters : Win32cr::Foundation::LARGE_INTEGER,
-    total_reserved : Win32cr::Foundation::LARGE_INTEGER,
-    bytes_per_sector : UInt32,
-    bytes_per_cluster : UInt32,
-    maximum_size_of_resident_file : Win32cr::Foundation::LARGE_INTEGER,
-    fast_tier_data_fill_ratio : UInt16,
-    slow_tier_data_fill_ratio : UInt16,
-    destages_fast_tier_to_slow_tier_rate : UInt32,
-    reserved : Win32cr::Foundation::LARGE_INTEGER[9]
+  struct REFS_VOLUME_DATA_BUFFER
+    property byte_count : UInt32
+    property major_version : UInt32
+    property minor_version : UInt32
+    property bytes_per_physical_sector : UInt32
+    property volume_serial_number : Win32cr::Foundation::LARGE_INTEGER
+    property number_sectors : Win32cr::Foundation::LARGE_INTEGER
+    property total_clusters : Win32cr::Foundation::LARGE_INTEGER
+    property free_clusters : Win32cr::Foundation::LARGE_INTEGER
+    property total_reserved : Win32cr::Foundation::LARGE_INTEGER
+    property bytes_per_sector : UInt32
+    property bytes_per_cluster : UInt32
+    property maximum_size_of_resident_file : Win32cr::Foundation::LARGE_INTEGER
+    property fast_tier_data_fill_ratio : UInt16
+    property slow_tier_data_fill_ratio : UInt16
+    property destages_fast_tier_to_slow_tier_rate : UInt32
+    property reserved : Win32cr::Foundation::LARGE_INTEGER[9]
+    def initialize(@byte_count : UInt32, @major_version : UInt32, @minor_version : UInt32, @bytes_per_physical_sector : UInt32, @volume_serial_number : Win32cr::Foundation::LARGE_INTEGER, @number_sectors : Win32cr::Foundation::LARGE_INTEGER, @total_clusters : Win32cr::Foundation::LARGE_INTEGER, @free_clusters : Win32cr::Foundation::LARGE_INTEGER, @total_reserved : Win32cr::Foundation::LARGE_INTEGER, @bytes_per_sector : UInt32, @bytes_per_cluster : UInt32, @maximum_size_of_resident_file : Win32cr::Foundation::LARGE_INTEGER, @fast_tier_data_fill_ratio : UInt16, @slow_tier_data_fill_ratio : UInt16, @destages_fast_tier_to_slow_tier_rate : UInt32, @reserved : Win32cr::Foundation::LARGE_INTEGER[9])
+    end
+  end
 
   @[Extern]
-  record STARTING_LCN_INPUT_BUFFER,
-    starting_lcn : Win32cr::Foundation::LARGE_INTEGER
+  struct STARTING_LCN_INPUT_BUFFER
+    property starting_lcn : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@starting_lcn : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record STARTING_LCN_INPUT_BUFFER_EX,
-    starting_lcn : Win32cr::Foundation::LARGE_INTEGER,
-    flags : UInt32
+  struct STARTING_LCN_INPUT_BUFFER_EX
+    property starting_lcn : Win32cr::Foundation::LARGE_INTEGER
+    property flags : UInt32
+    def initialize(@starting_lcn : Win32cr::Foundation::LARGE_INTEGER, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record VOLUME_BITMAP_BUFFER,
-    starting_lcn : Win32cr::Foundation::LARGE_INTEGER,
-    bitmap_size : Win32cr::Foundation::LARGE_INTEGER,
-    buffer : UInt8*
+  struct VOLUME_BITMAP_BUFFER
+    property starting_lcn : Win32cr::Foundation::LARGE_INTEGER
+    property bitmap_size : Win32cr::Foundation::LARGE_INTEGER
+    property buffer : UInt8*
+    def initialize(@starting_lcn : Win32cr::Foundation::LARGE_INTEGER, @bitmap_size : Win32cr::Foundation::LARGE_INTEGER, @buffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record STARTING_VCN_INPUT_BUFFER,
-    starting_vcn : Win32cr::Foundation::LARGE_INTEGER
+  struct STARTING_VCN_INPUT_BUFFER
+    property starting_vcn : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@starting_vcn : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record RETRIEVAL_POINTERS_BUFFER,
-    extent_count : UInt32,
-    starting_vcn : Win32cr::Foundation::LARGE_INTEGER,
-    extents : Anonymous_e__Struct_* do
+  struct RETRIEVAL_POINTERS_BUFFER
+    property extent_count : UInt32
+    property starting_vcn : Win32cr::Foundation::LARGE_INTEGER
+    property extents : Anonymous_e__Struct_*
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      next_vcn : Win32cr::Foundation::LARGE_INTEGER,
-      lcn : Win32cr::Foundation::LARGE_INTEGER
+    struct Anonymous_e__Struct_
+    property next_vcn : Win32cr::Foundation::LARGE_INTEGER
+    property lcn : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@next_vcn : Win32cr::Foundation::LARGE_INTEGER, @lcn : Win32cr::Foundation::LARGE_INTEGER)
+    end
+    end
 
+    def initialize(@extent_count : UInt32, @starting_vcn : Win32cr::Foundation::LARGE_INTEGER, @extents : Anonymous_e__Struct_*)
+    end
   end
 
   @[Extern]
-  record RETRIEVAL_POINTERS_AND_REFCOUNT_BUFFER,
-    extent_count : UInt32,
-    starting_vcn : Win32cr::Foundation::LARGE_INTEGER,
-    extents : Anonymous_e__Struct_* do
+  struct RETRIEVAL_POINTERS_AND_REFCOUNT_BUFFER
+    property extent_count : UInt32
+    property starting_vcn : Win32cr::Foundation::LARGE_INTEGER
+    property extents : Anonymous_e__Struct_*
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      next_vcn : Win32cr::Foundation::LARGE_INTEGER,
-      lcn : Win32cr::Foundation::LARGE_INTEGER,
-      reference_count : UInt32
+    struct Anonymous_e__Struct_
+    property next_vcn : Win32cr::Foundation::LARGE_INTEGER
+    property lcn : Win32cr::Foundation::LARGE_INTEGER
+    property reference_count : UInt32
+    def initialize(@next_vcn : Win32cr::Foundation::LARGE_INTEGER, @lcn : Win32cr::Foundation::LARGE_INTEGER, @reference_count : UInt32)
+    end
+    end
 
+    def initialize(@extent_count : UInt32, @starting_vcn : Win32cr::Foundation::LARGE_INTEGER, @extents : Anonymous_e__Struct_*)
+    end
   end
 
   @[Extern]
-  record RETRIEVAL_POINTER_COUNT,
-    extent_count : UInt32
+  struct RETRIEVAL_POINTER_COUNT
+    property extent_count : UInt32
+    def initialize(@extent_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record NTFS_FILE_RECORD_INPUT_BUFFER,
-    file_reference_number : Win32cr::Foundation::LARGE_INTEGER
+  struct NTFS_FILE_RECORD_INPUT_BUFFER
+    property file_reference_number : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@file_reference_number : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record NTFS_FILE_RECORD_OUTPUT_BUFFER,
-    file_reference_number : Win32cr::Foundation::LARGE_INTEGER,
-    file_record_length : UInt32,
-    file_record_buffer : UInt8*
+  struct NTFS_FILE_RECORD_OUTPUT_BUFFER
+    property file_reference_number : Win32cr::Foundation::LARGE_INTEGER
+    property file_record_length : UInt32
+    property file_record_buffer : UInt8*
+    def initialize(@file_reference_number : Win32cr::Foundation::LARGE_INTEGER, @file_record_length : UInt32, @file_record_buffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record MOVE_FILE_DATA,
-    file_handle : Win32cr::Foundation::HANDLE,
-    starting_vcn : Win32cr::Foundation::LARGE_INTEGER,
-    starting_lcn : Win32cr::Foundation::LARGE_INTEGER,
-    cluster_count : UInt32
+  struct MOVE_FILE_DATA
+    property file_handle : Win32cr::Foundation::HANDLE
+    property starting_vcn : Win32cr::Foundation::LARGE_INTEGER
+    property starting_lcn : Win32cr::Foundation::LARGE_INTEGER
+    property cluster_count : UInt32
+    def initialize(@file_handle : Win32cr::Foundation::HANDLE, @starting_vcn : Win32cr::Foundation::LARGE_INTEGER, @starting_lcn : Win32cr::Foundation::LARGE_INTEGER, @cluster_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record MOVE_FILE_RECORD_DATA,
-    file_handle : Win32cr::Foundation::HANDLE,
-    source_file_record : Win32cr::Foundation::LARGE_INTEGER,
-    target_file_record : Win32cr::Foundation::LARGE_INTEGER
+  struct MOVE_FILE_RECORD_DATA
+    property file_handle : Win32cr::Foundation::HANDLE
+    property source_file_record : Win32cr::Foundation::LARGE_INTEGER
+    property target_file_record : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@file_handle : Win32cr::Foundation::HANDLE, @source_file_record : Win32cr::Foundation::LARGE_INTEGER, @target_file_record : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record MOVE_FILE_DATA32,
-    file_handle : UInt32,
-    starting_vcn : Win32cr::Foundation::LARGE_INTEGER,
-    starting_lcn : Win32cr::Foundation::LARGE_INTEGER,
-    cluster_count : UInt32
+  struct MOVE_FILE_DATA32
+    property file_handle : UInt32
+    property starting_vcn : Win32cr::Foundation::LARGE_INTEGER
+    property starting_lcn : Win32cr::Foundation::LARGE_INTEGER
+    property cluster_count : UInt32
+    def initialize(@file_handle : UInt32, @starting_vcn : Win32cr::Foundation::LARGE_INTEGER, @starting_lcn : Win32cr::Foundation::LARGE_INTEGER, @cluster_count : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record FIND_BY_SID_DATA,
-    restart : UInt32,
-    sid : Win32cr::Security::SID
+  struct FIND_BY_SID_DATA
+    property restart : UInt32
+    property sid : Win32cr::Security::SID
+    def initialize(@restart : UInt32, @sid : Win32cr::Security::SID)
+    end
+  end
 
   @[Extern]
-  record FIND_BY_SID_OUTPUT,
-    next_entry_offset : UInt32,
-    file_index : UInt32,
-    file_name_length : UInt32,
-    file_name : UInt16*
+  struct FIND_BY_SID_OUTPUT
+    property next_entry_offset : UInt32
+    property file_index : UInt32
+    property file_name_length : UInt32
+    property file_name : UInt16*
+    def initialize(@next_entry_offset : UInt32, @file_index : UInt32, @file_name_length : UInt32, @file_name : UInt16*)
+    end
+  end
 
   @[Extern]
-  record MFT_ENUM_DATA_V0,
-    start_file_reference_number : UInt64,
-    low_usn : Int64,
-    high_usn : Int64
+  struct MFT_ENUM_DATA_V0
+    property start_file_reference_number : UInt64
+    property low_usn : Int64
+    property high_usn : Int64
+    def initialize(@start_file_reference_number : UInt64, @low_usn : Int64, @high_usn : Int64)
+    end
+  end
 
   @[Extern]
-  record MFT_ENUM_DATA_V1,
-    start_file_reference_number : UInt64,
-    low_usn : Int64,
-    high_usn : Int64,
-    min_major_version : UInt16,
-    max_major_version : UInt16
+  struct MFT_ENUM_DATA_V1
+    property start_file_reference_number : UInt64
+    property low_usn : Int64
+    property high_usn : Int64
+    property min_major_version : UInt16
+    property max_major_version : UInt16
+    def initialize(@start_file_reference_number : UInt64, @low_usn : Int64, @high_usn : Int64, @min_major_version : UInt16, @max_major_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record CREATE_USN_JOURNAL_DATA,
-    maximum_size : UInt64,
-    allocation_delta : UInt64
+  struct CREATE_USN_JOURNAL_DATA
+    property maximum_size : UInt64
+    property allocation_delta : UInt64
+    def initialize(@maximum_size : UInt64, @allocation_delta : UInt64)
+    end
+  end
 
   @[Extern]
-  record READ_FILE_USN_DATA,
-    min_major_version : UInt16,
-    max_major_version : UInt16
+  struct READ_FILE_USN_DATA
+    property min_major_version : UInt16
+    property max_major_version : UInt16
+    def initialize(@min_major_version : UInt16, @max_major_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record READ_USN_JOURNAL_DATA_V0,
-    start_usn : Int64,
-    reason_mask : UInt32,
-    return_only_on_close : UInt32,
-    timeout : UInt64,
-    bytes_to_wait_for : UInt64,
-    usn_journal_id : UInt64
+  struct READ_USN_JOURNAL_DATA_V0
+    property start_usn : Int64
+    property reason_mask : UInt32
+    property return_only_on_close : UInt32
+    property timeout : UInt64
+    property bytes_to_wait_for : UInt64
+    property usn_journal_id : UInt64
+    def initialize(@start_usn : Int64, @reason_mask : UInt32, @return_only_on_close : UInt32, @timeout : UInt64, @bytes_to_wait_for : UInt64, @usn_journal_id : UInt64)
+    end
+  end
 
   @[Extern]
-  record READ_USN_JOURNAL_DATA_V1,
-    start_usn : Int64,
-    reason_mask : UInt32,
-    return_only_on_close : UInt32,
-    timeout : UInt64,
-    bytes_to_wait_for : UInt64,
-    usn_journal_id : UInt64,
-    min_major_version : UInt16,
-    max_major_version : UInt16
+  struct READ_USN_JOURNAL_DATA_V1
+    property start_usn : Int64
+    property reason_mask : UInt32
+    property return_only_on_close : UInt32
+    property timeout : UInt64
+    property bytes_to_wait_for : UInt64
+    property usn_journal_id : UInt64
+    property min_major_version : UInt16
+    property max_major_version : UInt16
+    def initialize(@start_usn : Int64, @reason_mask : UInt32, @return_only_on_close : UInt32, @timeout : UInt64, @bytes_to_wait_for : UInt64, @usn_journal_id : UInt64, @min_major_version : UInt16, @max_major_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record USN_TRACK_MODIFIED_RANGES,
-    flags : UInt32,
-    unused : UInt32,
-    chunk_size : UInt64,
-    file_size_threshold : Int64
+  struct USN_TRACK_MODIFIED_RANGES
+    property flags : UInt32
+    property unused : UInt32
+    property chunk_size : UInt64
+    property file_size_threshold : Int64
+    def initialize(@flags : UInt32, @unused : UInt32, @chunk_size : UInt64, @file_size_threshold : Int64)
+    end
+  end
 
   @[Extern]
-  record USN_RANGE_TRACK_OUTPUT,
-    usn : Int64
+  struct USN_RANGE_TRACK_OUTPUT
+    property usn : Int64
+    def initialize(@usn : Int64)
+    end
+  end
 
   @[Extern]
-  record USN_RECORD_V2,
-    record_length : UInt32,
-    major_version : UInt16,
-    minor_version : UInt16,
-    file_reference_number : UInt64,
-    parent_file_reference_number : UInt64,
-    usn : Int64,
-    time_stamp : Win32cr::Foundation::LARGE_INTEGER,
-    reason : UInt32,
-    source_info : UInt32,
-    security_id : UInt32,
-    file_attributes : UInt32,
-    file_name_length : UInt16,
-    file_name_offset : UInt16,
-    file_name : UInt16*
+  struct USN_RECORD_V2
+    property record_length : UInt32
+    property major_version : UInt16
+    property minor_version : UInt16
+    property file_reference_number : UInt64
+    property parent_file_reference_number : UInt64
+    property usn : Int64
+    property time_stamp : Win32cr::Foundation::LARGE_INTEGER
+    property reason : UInt32
+    property source_info : UInt32
+    property security_id : UInt32
+    property file_attributes : UInt32
+    property file_name_length : UInt16
+    property file_name_offset : UInt16
+    property file_name : UInt16*
+    def initialize(@record_length : UInt32, @major_version : UInt16, @minor_version : UInt16, @file_reference_number : UInt64, @parent_file_reference_number : UInt64, @usn : Int64, @time_stamp : Win32cr::Foundation::LARGE_INTEGER, @reason : UInt32, @source_info : UInt32, @security_id : UInt32, @file_attributes : UInt32, @file_name_length : UInt16, @file_name_offset : UInt16, @file_name : UInt16*)
+    end
+  end
 
   @[Extern]
-  record USN_RECORD_V3,
-    record_length : UInt32,
-    major_version : UInt16,
-    minor_version : UInt16,
-    file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128,
-    parent_file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128,
-    usn : Int64,
-    time_stamp : Win32cr::Foundation::LARGE_INTEGER,
-    reason : UInt32,
-    source_info : UInt32,
-    security_id : UInt32,
-    file_attributes : UInt32,
-    file_name_length : UInt16,
-    file_name_offset : UInt16,
-    file_name : UInt16*
+  struct USN_RECORD_V3
+    property record_length : UInt32
+    property major_version : UInt16
+    property minor_version : UInt16
+    property file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128
+    property parent_file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128
+    property usn : Int64
+    property time_stamp : Win32cr::Foundation::LARGE_INTEGER
+    property reason : UInt32
+    property source_info : UInt32
+    property security_id : UInt32
+    property file_attributes : UInt32
+    property file_name_length : UInt16
+    property file_name_offset : UInt16
+    property file_name : UInt16*
+    def initialize(@record_length : UInt32, @major_version : UInt16, @minor_version : UInt16, @file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128, @parent_file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128, @usn : Int64, @time_stamp : Win32cr::Foundation::LARGE_INTEGER, @reason : UInt32, @source_info : UInt32, @security_id : UInt32, @file_attributes : UInt32, @file_name_length : UInt16, @file_name_offset : UInt16, @file_name : UInt16*)
+    end
+  end
 
   @[Extern]
-  record USN_RECORD_COMMON_HEADER,
-    record_length : UInt32,
-    major_version : UInt16,
-    minor_version : UInt16
+  struct USN_RECORD_COMMON_HEADER
+    property record_length : UInt32
+    property major_version : UInt16
+    property minor_version : UInt16
+    def initialize(@record_length : UInt32, @major_version : UInt16, @minor_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record USN_RECORD_EXTENT,
-    offset : Int64,
-    length : Int64
+  struct USN_RECORD_EXTENT
+    property offset : Int64
+    property length : Int64
+    def initialize(@offset : Int64, @length : Int64)
+    end
+  end
 
   @[Extern]
-  record USN_RECORD_V4,
-    header : Win32cr::System::Ioctl::USN_RECORD_COMMON_HEADER,
-    file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128,
-    parent_file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128,
-    usn : Int64,
-    reason : UInt32,
-    source_info : Win32cr::System::Ioctl::USN_SOURCE_INFO_ID,
-    remaining_extents : UInt32,
-    number_of_extents : UInt16,
-    extent_size : UInt16,
-    extents : Win32cr::System::Ioctl::USN_RECORD_EXTENT*
+  struct USN_RECORD_V4
+    property header : Win32cr::System::Ioctl::USN_RECORD_COMMON_HEADER
+    property file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128
+    property parent_file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128
+    property usn : Int64
+    property reason : UInt32
+    property source_info : Win32cr::System::Ioctl::USN_SOURCE_INFO_ID
+    property remaining_extents : UInt32
+    property number_of_extents : UInt16
+    property extent_size : UInt16
+    property extents : Win32cr::System::Ioctl::USN_RECORD_EXTENT*
+    def initialize(@header : Win32cr::System::Ioctl::USN_RECORD_COMMON_HEADER, @file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128, @parent_file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128, @usn : Int64, @reason : UInt32, @source_info : Win32cr::System::Ioctl::USN_SOURCE_INFO_ID, @remaining_extents : UInt32, @number_of_extents : UInt16, @extent_size : UInt16, @extents : Win32cr::System::Ioctl::USN_RECORD_EXTENT*)
+    end
+  end
 
   @[Extern(union: true)]
-  record USN_RECORD_UNION,
-    header : Win32cr::System::Ioctl::USN_RECORD_COMMON_HEADER,
-    v2 : Win32cr::System::Ioctl::USN_RECORD_V2,
-    v3 : Win32cr::System::Ioctl::USN_RECORD_V3,
-    v4 : Win32cr::System::Ioctl::USN_RECORD_V4
+  struct USN_RECORD_UNION
+    property header : Win32cr::System::Ioctl::USN_RECORD_COMMON_HEADER
+    property v2 : Win32cr::System::Ioctl::USN_RECORD_V2
+    property v3 : Win32cr::System::Ioctl::USN_RECORD_V3
+    property v4 : Win32cr::System::Ioctl::USN_RECORD_V4
+    def initialize(@header : Win32cr::System::Ioctl::USN_RECORD_COMMON_HEADER, @v2 : Win32cr::System::Ioctl::USN_RECORD_V2, @v3 : Win32cr::System::Ioctl::USN_RECORD_V3, @v4 : Win32cr::System::Ioctl::USN_RECORD_V4)
+    end
+  end
 
   @[Extern]
-  record USN_JOURNAL_DATA_V0,
-    usn_journal_id : UInt64,
-    first_usn : Int64,
-    next_usn : Int64,
-    lowest_valid_usn : Int64,
-    max_usn : Int64,
-    maximum_size : UInt64,
-    allocation_delta : UInt64
+  struct USN_JOURNAL_DATA_V0
+    property usn_journal_id : UInt64
+    property first_usn : Int64
+    property next_usn : Int64
+    property lowest_valid_usn : Int64
+    property max_usn : Int64
+    property maximum_size : UInt64
+    property allocation_delta : UInt64
+    def initialize(@usn_journal_id : UInt64, @first_usn : Int64, @next_usn : Int64, @lowest_valid_usn : Int64, @max_usn : Int64, @maximum_size : UInt64, @allocation_delta : UInt64)
+    end
+  end
 
   @[Extern]
-  record USN_JOURNAL_DATA_V1,
-    usn_journal_id : UInt64,
-    first_usn : Int64,
-    next_usn : Int64,
-    lowest_valid_usn : Int64,
-    max_usn : Int64,
-    maximum_size : UInt64,
-    allocation_delta : UInt64,
-    min_supported_major_version : UInt16,
-    max_supported_major_version : UInt16
+  struct USN_JOURNAL_DATA_V1
+    property usn_journal_id : UInt64
+    property first_usn : Int64
+    property next_usn : Int64
+    property lowest_valid_usn : Int64
+    property max_usn : Int64
+    property maximum_size : UInt64
+    property allocation_delta : UInt64
+    property min_supported_major_version : UInt16
+    property max_supported_major_version : UInt16
+    def initialize(@usn_journal_id : UInt64, @first_usn : Int64, @next_usn : Int64, @lowest_valid_usn : Int64, @max_usn : Int64, @maximum_size : UInt64, @allocation_delta : UInt64, @min_supported_major_version : UInt16, @max_supported_major_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record USN_JOURNAL_DATA_V2,
-    usn_journal_id : UInt64,
-    first_usn : Int64,
-    next_usn : Int64,
-    lowest_valid_usn : Int64,
-    max_usn : Int64,
-    maximum_size : UInt64,
-    allocation_delta : UInt64,
-    min_supported_major_version : UInt16,
-    max_supported_major_version : UInt16,
-    flags : UInt32,
-    range_track_chunk_size : UInt64,
-    range_track_file_size_threshold : Int64
+  struct USN_JOURNAL_DATA_V2
+    property usn_journal_id : UInt64
+    property first_usn : Int64
+    property next_usn : Int64
+    property lowest_valid_usn : Int64
+    property max_usn : Int64
+    property maximum_size : UInt64
+    property allocation_delta : UInt64
+    property min_supported_major_version : UInt16
+    property max_supported_major_version : UInt16
+    property flags : UInt32
+    property range_track_chunk_size : UInt64
+    property range_track_file_size_threshold : Int64
+    def initialize(@usn_journal_id : UInt64, @first_usn : Int64, @next_usn : Int64, @lowest_valid_usn : Int64, @max_usn : Int64, @maximum_size : UInt64, @allocation_delta : UInt64, @min_supported_major_version : UInt16, @max_supported_major_version : UInt16, @flags : UInt32, @range_track_chunk_size : UInt64, @range_track_file_size_threshold : Int64)
+    end
+  end
 
   @[Extern]
-  record DELETE_USN_JOURNAL_DATA,
-    usn_journal_id : UInt64,
-    delete_flags : Win32cr::System::Ioctl::USN_DELETE_FLAGS
+  struct DELETE_USN_JOURNAL_DATA
+    property usn_journal_id : UInt64
+    property delete_flags : Win32cr::System::Ioctl::USN_DELETE_FLAGS
+    def initialize(@usn_journal_id : UInt64, @delete_flags : Win32cr::System::Ioctl::USN_DELETE_FLAGS)
+    end
+  end
 
   @[Extern]
-  record MARK_HANDLE_INFO,
-    anonymous : Anonymous_e__Union_,
-    volume_handle : Win32cr::Foundation::HANDLE,
-    handle_info : UInt32 do
+  struct MARK_HANDLE_INFO
+    property anonymous : Anonymous_e__Union_
+    property volume_handle : Win32cr::Foundation::HANDLE
+    property handle_info : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      usn_source_info : UInt32,
-      copy_number : UInt32
+    struct Anonymous_e__Union_
+    property usn_source_info : UInt32
+    property copy_number : UInt32
+    def initialize(@usn_source_info : UInt32, @copy_number : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @volume_handle : Win32cr::Foundation::HANDLE, @handle_info : UInt32)
+    end
   end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record MARK_HANDLE_INFO32,
-    anonymous : Anonymous_e__Union_,
-    volume_handle : UInt32,
-    handle_info : UInt32 do
+  struct MARK_HANDLE_INFO32
+    property anonymous : Anonymous_e__Union_
+    property volume_handle : UInt32
+    property handle_info : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      usn_source_info : UInt32,
-      copy_number : UInt32
+    struct Anonymous_e__Union_
+    property usn_source_info : UInt32
+    property copy_number : UInt32
+    def initialize(@usn_source_info : UInt32, @copy_number : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @volume_handle : UInt32, @handle_info : UInt32)
+    end
   end
   {% end %}
 
   @[Extern]
-  record BULK_SECURITY_TEST_DATA,
-    desired_access : UInt32,
-    security_ids : UInt32*
+  struct BULK_SECURITY_TEST_DATA
+    property desired_access : UInt32
+    property security_ids : UInt32*
+    def initialize(@desired_access : UInt32, @security_ids : UInt32*)
+    end
+  end
 
   @[Extern]
-  record FILE_PREFETCH,
-    type__ : UInt32,
-    count : UInt32,
-    prefetch : UInt64*
+  struct FILE_PREFETCH
+    property type__ : UInt32
+    property count : UInt32
+    property prefetch : UInt64*
+    def initialize(@type__ : UInt32, @count : UInt32, @prefetch : UInt64*)
+    end
+  end
 
   @[Extern]
-  record FILE_PREFETCH_EX,
-    type__ : UInt32,
-    count : UInt32,
-    context : Void*,
-    prefetch : UInt64*
+  struct FILE_PREFETCH_EX
+    property type__ : UInt32
+    property count : UInt32
+    property context : Void*
+    property prefetch : UInt64*
+    def initialize(@type__ : UInt32, @count : UInt32, @context : Void*, @prefetch : UInt64*)
+    end
+  end
 
   @[Extern]
-  record FILESYSTEM_STATISTICS,
-    file_system_type : Win32cr::System::Ioctl::FILESYSTEM_STATISTICS_TYPE,
-    version : UInt16,
-    size_of_complete_structure : UInt32,
-    user_file_reads : UInt32,
-    user_file_read_bytes : UInt32,
-    user_disk_reads : UInt32,
-    user_file_writes : UInt32,
-    user_file_write_bytes : UInt32,
-    user_disk_writes : UInt32,
-    meta_data_reads : UInt32,
-    meta_data_read_bytes : UInt32,
-    meta_data_disk_reads : UInt32,
-    meta_data_writes : UInt32,
-    meta_data_write_bytes : UInt32,
-    meta_data_disk_writes : UInt32
+  struct FILESYSTEM_STATISTICS
+    property file_system_type : Win32cr::System::Ioctl::FILESYSTEM_STATISTICS_TYPE
+    property version : UInt16
+    property size_of_complete_structure : UInt32
+    property user_file_reads : UInt32
+    property user_file_read_bytes : UInt32
+    property user_disk_reads : UInt32
+    property user_file_writes : UInt32
+    property user_file_write_bytes : UInt32
+    property user_disk_writes : UInt32
+    property meta_data_reads : UInt32
+    property meta_data_read_bytes : UInt32
+    property meta_data_disk_reads : UInt32
+    property meta_data_writes : UInt32
+    property meta_data_write_bytes : UInt32
+    property meta_data_disk_writes : UInt32
+    def initialize(@file_system_type : Win32cr::System::Ioctl::FILESYSTEM_STATISTICS_TYPE, @version : UInt16, @size_of_complete_structure : UInt32, @user_file_reads : UInt32, @user_file_read_bytes : UInt32, @user_disk_reads : UInt32, @user_file_writes : UInt32, @user_file_write_bytes : UInt32, @user_disk_writes : UInt32, @meta_data_reads : UInt32, @meta_data_read_bytes : UInt32, @meta_data_disk_reads : UInt32, @meta_data_writes : UInt32, @meta_data_write_bytes : UInt32, @meta_data_disk_writes : UInt32)
+    end
+  end
 
   @[Extern]
-  record FAT_STATISTICS,
-    create_hits : UInt32,
-    successful_creates : UInt32,
-    failed_creates : UInt32,
-    non_cached_reads : UInt32,
-    non_cached_read_bytes : UInt32,
-    non_cached_writes : UInt32,
-    non_cached_write_bytes : UInt32,
-    non_cached_disk_reads : UInt32,
-    non_cached_disk_writes : UInt32
+  struct FAT_STATISTICS
+    property create_hits : UInt32
+    property successful_creates : UInt32
+    property failed_creates : UInt32
+    property non_cached_reads : UInt32
+    property non_cached_read_bytes : UInt32
+    property non_cached_writes : UInt32
+    property non_cached_write_bytes : UInt32
+    property non_cached_disk_reads : UInt32
+    property non_cached_disk_writes : UInt32
+    def initialize(@create_hits : UInt32, @successful_creates : UInt32, @failed_creates : UInt32, @non_cached_reads : UInt32, @non_cached_read_bytes : UInt32, @non_cached_writes : UInt32, @non_cached_write_bytes : UInt32, @non_cached_disk_reads : UInt32, @non_cached_disk_writes : UInt32)
+    end
+  end
 
   @[Extern]
-  record EXFAT_STATISTICS,
-    create_hits : UInt32,
-    successful_creates : UInt32,
-    failed_creates : UInt32,
-    non_cached_reads : UInt32,
-    non_cached_read_bytes : UInt32,
-    non_cached_writes : UInt32,
-    non_cached_write_bytes : UInt32,
-    non_cached_disk_reads : UInt32,
-    non_cached_disk_writes : UInt32
+  struct EXFAT_STATISTICS
+    property create_hits : UInt32
+    property successful_creates : UInt32
+    property failed_creates : UInt32
+    property non_cached_reads : UInt32
+    property non_cached_read_bytes : UInt32
+    property non_cached_writes : UInt32
+    property non_cached_write_bytes : UInt32
+    property non_cached_disk_reads : UInt32
+    property non_cached_disk_writes : UInt32
+    def initialize(@create_hits : UInt32, @successful_creates : UInt32, @failed_creates : UInt32, @non_cached_reads : UInt32, @non_cached_read_bytes : UInt32, @non_cached_writes : UInt32, @non_cached_write_bytes : UInt32, @non_cached_disk_reads : UInt32, @non_cached_disk_writes : UInt32)
+    end
+  end
 
   @[Extern]
-  record NTFS_STATISTICS,
-    log_file_full_exceptions : UInt32,
-    other_exceptions : UInt32,
-    mft_reads : UInt32,
-    mft_read_bytes : UInt32,
-    mft_writes : UInt32,
-    mft_write_bytes : UInt32,
-    mft_writes_user_level : MftWritesUserLevel_e__Struct_,
-    mft_writes_flush_for_log_file_full : UInt16,
-    mft_writes_lazy_writer : UInt16,
-    mft_writes_user_request : UInt16,
-    mft2_writes : UInt32,
-    mft2_write_bytes : UInt32,
-    mft2_writes_user_level : Mft2WritesUserLevel_e__Struct_,
-    mft2_writes_flush_for_log_file_full : UInt16,
-    mft2_writes_lazy_writer : UInt16,
-    mft2_writes_user_request : UInt16,
-    root_index_reads : UInt32,
-    root_index_read_bytes : UInt32,
-    root_index_writes : UInt32,
-    root_index_write_bytes : UInt32,
-    bitmap_reads : UInt32,
-    bitmap_read_bytes : UInt32,
-    bitmap_writes : UInt32,
-    bitmap_write_bytes : UInt32,
-    bitmap_writes_flush_for_log_file_full : UInt16,
-    bitmap_writes_lazy_writer : UInt16,
-    bitmap_writes_user_request : UInt16,
-    bitmap_writes_user_level : BitmapWritesUserLevel_e__Struct_,
-    mft_bitmap_reads : UInt32,
-    mft_bitmap_read_bytes : UInt32,
-    mft_bitmap_writes : UInt32,
-    mft_bitmap_write_bytes : UInt32,
-    mft_bitmap_writes_flush_for_log_file_full : UInt16,
-    mft_bitmap_writes_lazy_writer : UInt16,
-    mft_bitmap_writes_user_request : UInt16,
-    mft_bitmap_writes_user_level : MftBitmapWritesUserLevel_e__Struct_,
-    user_index_reads : UInt32,
-    user_index_read_bytes : UInt32,
-    user_index_writes : UInt32,
-    user_index_write_bytes : UInt32,
-    log_file_reads : UInt32,
-    log_file_read_bytes : UInt32,
-    log_file_writes : UInt32,
-    log_file_write_bytes : UInt32,
-    allocate : Allocate_e__Struct_,
-    disk_resources_exhausted : UInt32 do
+  struct NTFS_STATISTICS
+    property log_file_full_exceptions : UInt32
+    property other_exceptions : UInt32
+    property mft_reads : UInt32
+    property mft_read_bytes : UInt32
+    property mft_writes : UInt32
+    property mft_write_bytes : UInt32
+    property mft_writes_user_level : MftWritesUserLevel_e__Struct_
+    property mft_writes_flush_for_log_file_full : UInt16
+    property mft_writes_lazy_writer : UInt16
+    property mft_writes_user_request : UInt16
+    property mft2_writes : UInt32
+    property mft2_write_bytes : UInt32
+    property mft2_writes_user_level : Mft2WritesUserLevel_e__Struct_
+    property mft2_writes_flush_for_log_file_full : UInt16
+    property mft2_writes_lazy_writer : UInt16
+    property mft2_writes_user_request : UInt16
+    property root_index_reads : UInt32
+    property root_index_read_bytes : UInt32
+    property root_index_writes : UInt32
+    property root_index_write_bytes : UInt32
+    property bitmap_reads : UInt32
+    property bitmap_read_bytes : UInt32
+    property bitmap_writes : UInt32
+    property bitmap_write_bytes : UInt32
+    property bitmap_writes_flush_for_log_file_full : UInt16
+    property bitmap_writes_lazy_writer : UInt16
+    property bitmap_writes_user_request : UInt16
+    property bitmap_writes_user_level : BitmapWritesUserLevel_e__Struct_
+    property mft_bitmap_reads : UInt32
+    property mft_bitmap_read_bytes : UInt32
+    property mft_bitmap_writes : UInt32
+    property mft_bitmap_write_bytes : UInt32
+    property mft_bitmap_writes_flush_for_log_file_full : UInt16
+    property mft_bitmap_writes_lazy_writer : UInt16
+    property mft_bitmap_writes_user_request : UInt16
+    property mft_bitmap_writes_user_level : MftBitmapWritesUserLevel_e__Struct_
+    property user_index_reads : UInt32
+    property user_index_read_bytes : UInt32
+    property user_index_writes : UInt32
+    property user_index_write_bytes : UInt32
+    property log_file_reads : UInt32
+    property log_file_read_bytes : UInt32
+    property log_file_writes : UInt32
+    property log_file_write_bytes : UInt32
+    property allocate : Allocate_e__Struct_
+    property disk_resources_exhausted : UInt32
 
     # Nested Type Allocate_e__Struct_
     @[Extern]
-    record Allocate_e__Struct_,
-      calls : UInt32,
-      clusters : UInt32,
-      hints : UInt32,
-      runs_returned : UInt32,
-      hints_honored : UInt32,
-      hints_clusters : UInt32,
-      cache : UInt32,
-      cache_clusters : UInt32,
-      cache_miss : UInt32,
-      cache_miss_clusters : UInt32
+    struct Allocate_e__Struct_
+    property calls : UInt32
+    property clusters : UInt32
+    property hints : UInt32
+    property runs_returned : UInt32
+    property hints_honored : UInt32
+    property hints_clusters : UInt32
+    property cache : UInt32
+    property cache_clusters : UInt32
+    property cache_miss : UInt32
+    property cache_miss_clusters : UInt32
+    def initialize(@calls : UInt32, @clusters : UInt32, @hints : UInt32, @runs_returned : UInt32, @hints_honored : UInt32, @hints_clusters : UInt32, @cache : UInt32, @cache_clusters : UInt32, @cache_miss : UInt32, @cache_miss_clusters : UInt32)
+    end
+    end
 
 
     # Nested Type BitmapWritesUserLevel_e__Struct_
     @[Extern]
-    record BitmapWritesUserLevel_e__Struct_,
-      write : UInt16,
-      create : UInt16,
-      set_info : UInt16
+    struct BitmapWritesUserLevel_e__Struct_
+    property write : UInt16
+    property create : UInt16
+    property set_info : UInt16
+    def initialize(@write : UInt16, @create : UInt16, @set_info : UInt16)
+    end
+    end
 
 
     # Nested Type MftWritesUserLevel_e__Struct_
     @[Extern]
-    record MftWritesUserLevel_e__Struct_,
-      write : UInt16,
-      create : UInt16,
-      set_info : UInt16,
-      flush : UInt16
+    struct MftWritesUserLevel_e__Struct_
+    property write : UInt16
+    property create : UInt16
+    property set_info : UInt16
+    property flush : UInt16
+    def initialize(@write : UInt16, @create : UInt16, @set_info : UInt16, @flush : UInt16)
+    end
+    end
 
 
     # Nested Type MftBitmapWritesUserLevel_e__Struct_
     @[Extern]
-    record MftBitmapWritesUserLevel_e__Struct_,
-      write : UInt16,
-      create : UInt16,
-      set_info : UInt16,
-      flush : UInt16
+    struct MftBitmapWritesUserLevel_e__Struct_
+    property write : UInt16
+    property create : UInt16
+    property set_info : UInt16
+    property flush : UInt16
+    def initialize(@write : UInt16, @create : UInt16, @set_info : UInt16, @flush : UInt16)
+    end
+    end
 
 
     # Nested Type Mft2WritesUserLevel_e__Struct_
     @[Extern]
-    record Mft2WritesUserLevel_e__Struct_,
-      write : UInt16,
-      create : UInt16,
-      set_info : UInt16,
-      flush : UInt16
+    struct Mft2WritesUserLevel_e__Struct_
+    property write : UInt16
+    property create : UInt16
+    property set_info : UInt16
+    property flush : UInt16
+    def initialize(@write : UInt16, @create : UInt16, @set_info : UInt16, @flush : UInt16)
+    end
+    end
 
+    def initialize(@log_file_full_exceptions : UInt32, @other_exceptions : UInt32, @mft_reads : UInt32, @mft_read_bytes : UInt32, @mft_writes : UInt32, @mft_write_bytes : UInt32, @mft_writes_user_level : MftWritesUserLevel_e__Struct_, @mft_writes_flush_for_log_file_full : UInt16, @mft_writes_lazy_writer : UInt16, @mft_writes_user_request : UInt16, @mft2_writes : UInt32, @mft2_write_bytes : UInt32, @mft2_writes_user_level : Mft2WritesUserLevel_e__Struct_, @mft2_writes_flush_for_log_file_full : UInt16, @mft2_writes_lazy_writer : UInt16, @mft2_writes_user_request : UInt16, @root_index_reads : UInt32, @root_index_read_bytes : UInt32, @root_index_writes : UInt32, @root_index_write_bytes : UInt32, @bitmap_reads : UInt32, @bitmap_read_bytes : UInt32, @bitmap_writes : UInt32, @bitmap_write_bytes : UInt32, @bitmap_writes_flush_for_log_file_full : UInt16, @bitmap_writes_lazy_writer : UInt16, @bitmap_writes_user_request : UInt16, @bitmap_writes_user_level : BitmapWritesUserLevel_e__Struct_, @mft_bitmap_reads : UInt32, @mft_bitmap_read_bytes : UInt32, @mft_bitmap_writes : UInt32, @mft_bitmap_write_bytes : UInt32, @mft_bitmap_writes_flush_for_log_file_full : UInt16, @mft_bitmap_writes_lazy_writer : UInt16, @mft_bitmap_writes_user_request : UInt16, @mft_bitmap_writes_user_level : MftBitmapWritesUserLevel_e__Struct_, @user_index_reads : UInt32, @user_index_read_bytes : UInt32, @user_index_writes : UInt32, @user_index_write_bytes : UInt32, @log_file_reads : UInt32, @log_file_read_bytes : UInt32, @log_file_writes : UInt32, @log_file_write_bytes : UInt32, @allocate : Allocate_e__Struct_, @disk_resources_exhausted : UInt32)
+    end
   end
 
   @[Extern]
-  record FILESYSTEM_STATISTICS_EX,
-    file_system_type : Win32cr::System::Ioctl::FILESYSTEM_STATISTICS_TYPE,
-    version : UInt16,
-    size_of_complete_structure : UInt32,
-    user_file_reads : UInt64,
-    user_file_read_bytes : UInt64,
-    user_disk_reads : UInt64,
-    user_file_writes : UInt64,
-    user_file_write_bytes : UInt64,
-    user_disk_writes : UInt64,
-    meta_data_reads : UInt64,
-    meta_data_read_bytes : UInt64,
-    meta_data_disk_reads : UInt64,
-    meta_data_writes : UInt64,
-    meta_data_write_bytes : UInt64,
-    meta_data_disk_writes : UInt64
+  struct FILESYSTEM_STATISTICS_EX
+    property file_system_type : Win32cr::System::Ioctl::FILESYSTEM_STATISTICS_TYPE
+    property version : UInt16
+    property size_of_complete_structure : UInt32
+    property user_file_reads : UInt64
+    property user_file_read_bytes : UInt64
+    property user_disk_reads : UInt64
+    property user_file_writes : UInt64
+    property user_file_write_bytes : UInt64
+    property user_disk_writes : UInt64
+    property meta_data_reads : UInt64
+    property meta_data_read_bytes : UInt64
+    property meta_data_disk_reads : UInt64
+    property meta_data_writes : UInt64
+    property meta_data_write_bytes : UInt64
+    property meta_data_disk_writes : UInt64
+    def initialize(@file_system_type : Win32cr::System::Ioctl::FILESYSTEM_STATISTICS_TYPE, @version : UInt16, @size_of_complete_structure : UInt32, @user_file_reads : UInt64, @user_file_read_bytes : UInt64, @user_disk_reads : UInt64, @user_file_writes : UInt64, @user_file_write_bytes : UInt64, @user_disk_writes : UInt64, @meta_data_reads : UInt64, @meta_data_read_bytes : UInt64, @meta_data_disk_reads : UInt64, @meta_data_writes : UInt64, @meta_data_write_bytes : UInt64, @meta_data_disk_writes : UInt64)
+    end
+  end
 
   @[Extern]
-  record NTFS_STATISTICS_EX,
-    log_file_full_exceptions : UInt32,
-    other_exceptions : UInt32,
-    mft_reads : UInt64,
-    mft_read_bytes : UInt64,
-    mft_writes : UInt64,
-    mft_write_bytes : UInt64,
-    mft_writes_user_level : MftWritesUserLevel_e__Struct_,
-    mft_writes_flush_for_log_file_full : UInt32,
-    mft_writes_lazy_writer : UInt32,
-    mft_writes_user_request : UInt32,
-    mft2_writes : UInt64,
-    mft2_write_bytes : UInt64,
-    mft2_writes_user_level : Mft2WritesUserLevel_e__Struct_,
-    mft2_writes_flush_for_log_file_full : UInt32,
-    mft2_writes_lazy_writer : UInt32,
-    mft2_writes_user_request : UInt32,
-    root_index_reads : UInt64,
-    root_index_read_bytes : UInt64,
-    root_index_writes : UInt64,
-    root_index_write_bytes : UInt64,
-    bitmap_reads : UInt64,
-    bitmap_read_bytes : UInt64,
-    bitmap_writes : UInt64,
-    bitmap_write_bytes : UInt64,
-    bitmap_writes_flush_for_log_file_full : UInt32,
-    bitmap_writes_lazy_writer : UInt32,
-    bitmap_writes_user_request : UInt32,
-    bitmap_writes_user_level : BitmapWritesUserLevel_e__Struct_,
-    mft_bitmap_reads : UInt64,
-    mft_bitmap_read_bytes : UInt64,
-    mft_bitmap_writes : UInt64,
-    mft_bitmap_write_bytes : UInt64,
-    mft_bitmap_writes_flush_for_log_file_full : UInt32,
-    mft_bitmap_writes_lazy_writer : UInt32,
-    mft_bitmap_writes_user_request : UInt32,
-    mft_bitmap_writes_user_level : MftBitmapWritesUserLevel_e__Struct_,
-    user_index_reads : UInt64,
-    user_index_read_bytes : UInt64,
-    user_index_writes : UInt64,
-    user_index_write_bytes : UInt64,
-    log_file_reads : UInt64,
-    log_file_read_bytes : UInt64,
-    log_file_writes : UInt64,
-    log_file_write_bytes : UInt64,
-    allocate : Allocate_e__Struct_,
-    disk_resources_exhausted : UInt32,
-    volume_trim_count : UInt64,
-    volume_trim_time : UInt64,
-    volume_trim_byte_count : UInt64,
-    file_level_trim_count : UInt64,
-    file_level_trim_time : UInt64,
-    file_level_trim_byte_count : UInt64,
-    volume_trim_skipped_count : UInt64,
-    volume_trim_skipped_byte_count : UInt64,
-    ntfs_fill_stat_info_from_mft_record_called_count : UInt64,
-    ntfs_fill_stat_info_from_mft_record_bailed_because_of_attribute_list_count : UInt64,
-    ntfs_fill_stat_info_from_mft_record_bailed_because_of_non_res_reparse_point_count : UInt64 do
+  struct NTFS_STATISTICS_EX
+    property log_file_full_exceptions : UInt32
+    property other_exceptions : UInt32
+    property mft_reads : UInt64
+    property mft_read_bytes : UInt64
+    property mft_writes : UInt64
+    property mft_write_bytes : UInt64
+    property mft_writes_user_level : MftWritesUserLevel_e__Struct_
+    property mft_writes_flush_for_log_file_full : UInt32
+    property mft_writes_lazy_writer : UInt32
+    property mft_writes_user_request : UInt32
+    property mft2_writes : UInt64
+    property mft2_write_bytes : UInt64
+    property mft2_writes_user_level : Mft2WritesUserLevel_e__Struct_
+    property mft2_writes_flush_for_log_file_full : UInt32
+    property mft2_writes_lazy_writer : UInt32
+    property mft2_writes_user_request : UInt32
+    property root_index_reads : UInt64
+    property root_index_read_bytes : UInt64
+    property root_index_writes : UInt64
+    property root_index_write_bytes : UInt64
+    property bitmap_reads : UInt64
+    property bitmap_read_bytes : UInt64
+    property bitmap_writes : UInt64
+    property bitmap_write_bytes : UInt64
+    property bitmap_writes_flush_for_log_file_full : UInt32
+    property bitmap_writes_lazy_writer : UInt32
+    property bitmap_writes_user_request : UInt32
+    property bitmap_writes_user_level : BitmapWritesUserLevel_e__Struct_
+    property mft_bitmap_reads : UInt64
+    property mft_bitmap_read_bytes : UInt64
+    property mft_bitmap_writes : UInt64
+    property mft_bitmap_write_bytes : UInt64
+    property mft_bitmap_writes_flush_for_log_file_full : UInt32
+    property mft_bitmap_writes_lazy_writer : UInt32
+    property mft_bitmap_writes_user_request : UInt32
+    property mft_bitmap_writes_user_level : MftBitmapWritesUserLevel_e__Struct_
+    property user_index_reads : UInt64
+    property user_index_read_bytes : UInt64
+    property user_index_writes : UInt64
+    property user_index_write_bytes : UInt64
+    property log_file_reads : UInt64
+    property log_file_read_bytes : UInt64
+    property log_file_writes : UInt64
+    property log_file_write_bytes : UInt64
+    property allocate : Allocate_e__Struct_
+    property disk_resources_exhausted : UInt32
+    property volume_trim_count : UInt64
+    property volume_trim_time : UInt64
+    property volume_trim_byte_count : UInt64
+    property file_level_trim_count : UInt64
+    property file_level_trim_time : UInt64
+    property file_level_trim_byte_count : UInt64
+    property volume_trim_skipped_count : UInt64
+    property volume_trim_skipped_byte_count : UInt64
+    property ntfs_fill_stat_info_from_mft_record_called_count : UInt64
+    property ntfs_fill_stat_info_from_mft_record_bailed_because_of_attribute_list_count : UInt64
+    property ntfs_fill_stat_info_from_mft_record_bailed_because_of_non_res_reparse_point_count : UInt64
 
     # Nested Type MftBitmapWritesUserLevel_e__Struct_
     @[Extern]
-    record MftBitmapWritesUserLevel_e__Struct_,
-      write : UInt32,
-      create : UInt32,
-      set_info : UInt32,
-      flush : UInt32
+    struct MftBitmapWritesUserLevel_e__Struct_
+    property write : UInt32
+    property create : UInt32
+    property set_info : UInt32
+    property flush : UInt32
+    def initialize(@write : UInt32, @create : UInt32, @set_info : UInt32, @flush : UInt32)
+    end
+    end
 
 
     # Nested Type Mft2WritesUserLevel_e__Struct_
     @[Extern]
-    record Mft2WritesUserLevel_e__Struct_,
-      write : UInt32,
-      create : UInt32,
-      set_info : UInt32,
-      flush : UInt32
+    struct Mft2WritesUserLevel_e__Struct_
+    property write : UInt32
+    property create : UInt32
+    property set_info : UInt32
+    property flush : UInt32
+    def initialize(@write : UInt32, @create : UInt32, @set_info : UInt32, @flush : UInt32)
+    end
+    end
 
 
     # Nested Type BitmapWritesUserLevel_e__Struct_
     @[Extern]
-    record BitmapWritesUserLevel_e__Struct_,
-      write : UInt32,
-      create : UInt32,
-      set_info : UInt32,
-      flush : UInt32
+    struct BitmapWritesUserLevel_e__Struct_
+    property write : UInt32
+    property create : UInt32
+    property set_info : UInt32
+    property flush : UInt32
+    def initialize(@write : UInt32, @create : UInt32, @set_info : UInt32, @flush : UInt32)
+    end
+    end
 
 
     # Nested Type MftWritesUserLevel_e__Struct_
     @[Extern]
-    record MftWritesUserLevel_e__Struct_,
-      write : UInt32,
-      create : UInt32,
-      set_info : UInt32,
-      flush : UInt32
+    struct MftWritesUserLevel_e__Struct_
+    property write : UInt32
+    property create : UInt32
+    property set_info : UInt32
+    property flush : UInt32
+    def initialize(@write : UInt32, @create : UInt32, @set_info : UInt32, @flush : UInt32)
+    end
+    end
 
 
     # Nested Type Allocate_e__Struct_
     @[Extern]
-    record Allocate_e__Struct_,
-      calls : UInt32,
-      runs_returned : UInt32,
-      hints : UInt32,
-      hints_honored : UInt32,
-      cache : UInt32,
-      cache_miss : UInt32,
-      clusters : UInt64,
-      hints_clusters : UInt64,
-      cache_clusters : UInt64,
-      cache_miss_clusters : UInt64
+    struct Allocate_e__Struct_
+    property calls : UInt32
+    property runs_returned : UInt32
+    property hints : UInt32
+    property hints_honored : UInt32
+    property cache : UInt32
+    property cache_miss : UInt32
+    property clusters : UInt64
+    property hints_clusters : UInt64
+    property cache_clusters : UInt64
+    property cache_miss_clusters : UInt64
+    def initialize(@calls : UInt32, @runs_returned : UInt32, @hints : UInt32, @hints_honored : UInt32, @cache : UInt32, @cache_miss : UInt32, @clusters : UInt64, @hints_clusters : UInt64, @cache_clusters : UInt64, @cache_miss_clusters : UInt64)
+    end
+    end
 
+    def initialize(@log_file_full_exceptions : UInt32, @other_exceptions : UInt32, @mft_reads : UInt64, @mft_read_bytes : UInt64, @mft_writes : UInt64, @mft_write_bytes : UInt64, @mft_writes_user_level : MftWritesUserLevel_e__Struct_, @mft_writes_flush_for_log_file_full : UInt32, @mft_writes_lazy_writer : UInt32, @mft_writes_user_request : UInt32, @mft2_writes : UInt64, @mft2_write_bytes : UInt64, @mft2_writes_user_level : Mft2WritesUserLevel_e__Struct_, @mft2_writes_flush_for_log_file_full : UInt32, @mft2_writes_lazy_writer : UInt32, @mft2_writes_user_request : UInt32, @root_index_reads : UInt64, @root_index_read_bytes : UInt64, @root_index_writes : UInt64, @root_index_write_bytes : UInt64, @bitmap_reads : UInt64, @bitmap_read_bytes : UInt64, @bitmap_writes : UInt64, @bitmap_write_bytes : UInt64, @bitmap_writes_flush_for_log_file_full : UInt32, @bitmap_writes_lazy_writer : UInt32, @bitmap_writes_user_request : UInt32, @bitmap_writes_user_level : BitmapWritesUserLevel_e__Struct_, @mft_bitmap_reads : UInt64, @mft_bitmap_read_bytes : UInt64, @mft_bitmap_writes : UInt64, @mft_bitmap_write_bytes : UInt64, @mft_bitmap_writes_flush_for_log_file_full : UInt32, @mft_bitmap_writes_lazy_writer : UInt32, @mft_bitmap_writes_user_request : UInt32, @mft_bitmap_writes_user_level : MftBitmapWritesUserLevel_e__Struct_, @user_index_reads : UInt64, @user_index_read_bytes : UInt64, @user_index_writes : UInt64, @user_index_write_bytes : UInt64, @log_file_reads : UInt64, @log_file_read_bytes : UInt64, @log_file_writes : UInt64, @log_file_write_bytes : UInt64, @allocate : Allocate_e__Struct_, @disk_resources_exhausted : UInt32, @volume_trim_count : UInt64, @volume_trim_time : UInt64, @volume_trim_byte_count : UInt64, @file_level_trim_count : UInt64, @file_level_trim_time : UInt64, @file_level_trim_byte_count : UInt64, @volume_trim_skipped_count : UInt64, @volume_trim_skipped_byte_count : UInt64, @ntfs_fill_stat_info_from_mft_record_called_count : UInt64, @ntfs_fill_stat_info_from_mft_record_bailed_because_of_attribute_list_count : UInt64, @ntfs_fill_stat_info_from_mft_record_bailed_because_of_non_res_reparse_point_count : UInt64)
+    end
   end
 
   @[Extern]
-  record FILE_OBJECTID_BUFFER,
-    object_id : UInt8[16],
-    anonymous : Anonymous_e__Union_ do
+  struct FILE_OBJECTID_BUFFER
+    property object_id : UInt8[16]
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      extended_info : UInt8[48] do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property extended_info : UInt8[48]
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        birth_volume_id : UInt8[16],
-        birth_object_id : UInt8[16],
-        domain_id : UInt8[16]
+      struct Anonymous_e__Struct_
+    property birth_volume_id : UInt8[16]
+    property birth_object_id : UInt8[16]
+    property domain_id : UInt8[16]
+    def initialize(@birth_volume_id : UInt8[16], @birth_object_id : UInt8[16], @domain_id : UInt8[16])
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @extended_info : UInt8[48])
+    end
     end
 
+    def initialize(@object_id : UInt8[16], @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record FILE_SET_SPARSE_BUFFER,
-    set_sparse : Win32cr::Foundation::BOOLEAN
+  struct FILE_SET_SPARSE_BUFFER
+    property set_sparse : Win32cr::Foundation::BOOLEAN
+    def initialize(@set_sparse : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record FILE_ZERO_DATA_INFORMATION,
-    file_offset : Win32cr::Foundation::LARGE_INTEGER,
-    beyond_final_zero : Win32cr::Foundation::LARGE_INTEGER
+  struct FILE_ZERO_DATA_INFORMATION
+    property file_offset : Win32cr::Foundation::LARGE_INTEGER
+    property beyond_final_zero : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@file_offset : Win32cr::Foundation::LARGE_INTEGER, @beyond_final_zero : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record FILE_ZERO_DATA_INFORMATION_EX,
-    file_offset : Win32cr::Foundation::LARGE_INTEGER,
-    beyond_final_zero : Win32cr::Foundation::LARGE_INTEGER,
-    flags : UInt32
+  struct FILE_ZERO_DATA_INFORMATION_EX
+    property file_offset : Win32cr::Foundation::LARGE_INTEGER
+    property beyond_final_zero : Win32cr::Foundation::LARGE_INTEGER
+    property flags : UInt32
+    def initialize(@file_offset : Win32cr::Foundation::LARGE_INTEGER, @beyond_final_zero : Win32cr::Foundation::LARGE_INTEGER, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record FILE_ALLOCATED_RANGE_BUFFER,
-    file_offset : Win32cr::Foundation::LARGE_INTEGER,
-    length : Win32cr::Foundation::LARGE_INTEGER
+  struct FILE_ALLOCATED_RANGE_BUFFER
+    property file_offset : Win32cr::Foundation::LARGE_INTEGER
+    property length : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@file_offset : Win32cr::Foundation::LARGE_INTEGER, @length : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record ENCRYPTION_BUFFER,
-    encryption_operation : UInt32,
-    private__ : UInt8*
+  struct ENCRYPTION_BUFFER
+    property encryption_operation : UInt32
+    property private__ : UInt8*
+    def initialize(@encryption_operation : UInt32, @private__ : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DECRYPTION_STATUS_BUFFER,
-    no_encrypted_streams : Win32cr::Foundation::BOOLEAN
+  struct DECRYPTION_STATUS_BUFFER
+    property no_encrypted_streams : Win32cr::Foundation::BOOLEAN
+    def initialize(@no_encrypted_streams : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record REQUEST_RAW_ENCRYPTED_DATA,
-    file_offset : Int64,
-    length : UInt32
+  struct REQUEST_RAW_ENCRYPTED_DATA
+    property file_offset : Int64
+    property length : UInt32
+    def initialize(@file_offset : Int64, @length : UInt32)
+    end
+  end
 
   @[Extern]
-  record ENCRYPTED_DATA_INFO,
-    starting_file_offset : UInt64,
-    output_buffer_offset : UInt32,
-    bytes_within_file_size : UInt32,
-    bytes_within_valid_data_length : UInt32,
-    compression_format : UInt16,
-    data_unit_shift : UInt8,
-    chunk_shift : UInt8,
-    cluster_shift : UInt8,
-    encryption_format : UInt8,
-    number_of_data_blocks : UInt16,
-    data_block_size : UInt32*
+  struct ENCRYPTED_DATA_INFO
+    property starting_file_offset : UInt64
+    property output_buffer_offset : UInt32
+    property bytes_within_file_size : UInt32
+    property bytes_within_valid_data_length : UInt32
+    property compression_format : UInt16
+    property data_unit_shift : UInt8
+    property chunk_shift : UInt8
+    property cluster_shift : UInt8
+    property encryption_format : UInt8
+    property number_of_data_blocks : UInt16
+    property data_block_size : UInt32*
+    def initialize(@starting_file_offset : UInt64, @output_buffer_offset : UInt32, @bytes_within_file_size : UInt32, @bytes_within_valid_data_length : UInt32, @compression_format : UInt16, @data_unit_shift : UInt8, @chunk_shift : UInt8, @cluster_shift : UInt8, @encryption_format : UInt8, @number_of_data_blocks : UInt16, @data_block_size : UInt32*)
+    end
+  end
 
   @[Extern]
-  record EXTENDED_ENCRYPTED_DATA_INFO,
-    extended_code : UInt32,
-    length : UInt32,
-    flags : UInt32,
-    reserved : UInt32
+  struct EXTENDED_ENCRYPTED_DATA_INFO
+    property extended_code : UInt32
+    property length : UInt32
+    property flags : UInt32
+    property reserved : UInt32
+    def initialize(@extended_code : UInt32, @length : UInt32, @flags : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record PLEX_READ_DATA_REQUEST,
-    byte_offset : Win32cr::Foundation::LARGE_INTEGER,
-    byte_length : UInt32,
-    plex_number : UInt32
+  struct PLEX_READ_DATA_REQUEST
+    property byte_offset : Win32cr::Foundation::LARGE_INTEGER
+    property byte_length : UInt32
+    property plex_number : UInt32
+    def initialize(@byte_offset : Win32cr::Foundation::LARGE_INTEGER, @byte_length : UInt32, @plex_number : UInt32)
+    end
+  end
 
   @[Extern]
-  record SI_COPYFILE,
-    source_file_name_length : UInt32,
-    destination_file_name_length : UInt32,
-    flags : UInt32,
-    file_name_buffer : UInt16*
+  struct SI_COPYFILE
+    property source_file_name_length : UInt32
+    property destination_file_name_length : UInt32
+    property flags : UInt32
+    property file_name_buffer : UInt16*
+    def initialize(@source_file_name_length : UInt32, @destination_file_name_length : UInt32, @flags : UInt32, @file_name_buffer : UInt16*)
+    end
+  end
 
   @[Extern]
-  record FILE_MAKE_COMPATIBLE_BUFFER,
-    close_disc : Win32cr::Foundation::BOOLEAN
+  struct FILE_MAKE_COMPATIBLE_BUFFER
+    property close_disc : Win32cr::Foundation::BOOLEAN
+    def initialize(@close_disc : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record FILE_SET_DEFECT_MGMT_BUFFER,
-    disable : Win32cr::Foundation::BOOLEAN
+  struct FILE_SET_DEFECT_MGMT_BUFFER
+    property disable : Win32cr::Foundation::BOOLEAN
+    def initialize(@disable : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record FILE_QUERY_SPARING_BUFFER,
-    sparing_unit_bytes : UInt32,
-    software_sparing : Win32cr::Foundation::BOOLEAN,
-    total_spare_blocks : UInt32,
-    free_spare_blocks : UInt32
+  struct FILE_QUERY_SPARING_BUFFER
+    property sparing_unit_bytes : UInt32
+    property software_sparing : Win32cr::Foundation::BOOLEAN
+    property total_spare_blocks : UInt32
+    property free_spare_blocks : UInt32
+    def initialize(@sparing_unit_bytes : UInt32, @software_sparing : Win32cr::Foundation::BOOLEAN, @total_spare_blocks : UInt32, @free_spare_blocks : UInt32)
+    end
+  end
 
   @[Extern]
-  record FILE_QUERY_ON_DISK_VOL_INFO_BUFFER,
-    directory_count : Win32cr::Foundation::LARGE_INTEGER,
-    file_count : Win32cr::Foundation::LARGE_INTEGER,
-    fs_format_maj_version : UInt16,
-    fs_format_min_version : UInt16,
-    fs_format_name : UInt16[12],
-    format_time : Win32cr::Foundation::LARGE_INTEGER,
-    last_update_time : Win32cr::Foundation::LARGE_INTEGER,
-    copyright_info : UInt16[34],
-    abstract_info : UInt16[34],
-    formatting_implementation_info : UInt16[34],
-    last_modifying_implementation_info : UInt16[34]
+  struct FILE_QUERY_ON_DISK_VOL_INFO_BUFFER
+    property directory_count : Win32cr::Foundation::LARGE_INTEGER
+    property file_count : Win32cr::Foundation::LARGE_INTEGER
+    property fs_format_maj_version : UInt16
+    property fs_format_min_version : UInt16
+    property fs_format_name : UInt16[12]
+    property format_time : Win32cr::Foundation::LARGE_INTEGER
+    property last_update_time : Win32cr::Foundation::LARGE_INTEGER
+    property copyright_info : UInt16[34]
+    property abstract_info : UInt16[34]
+    property formatting_implementation_info : UInt16[34]
+    property last_modifying_implementation_info : UInt16[34]
+    def initialize(@directory_count : Win32cr::Foundation::LARGE_INTEGER, @file_count : Win32cr::Foundation::LARGE_INTEGER, @fs_format_maj_version : UInt16, @fs_format_min_version : UInt16, @fs_format_name : UInt16[12], @format_time : Win32cr::Foundation::LARGE_INTEGER, @last_update_time : Win32cr::Foundation::LARGE_INTEGER, @copyright_info : UInt16[34], @abstract_info : UInt16[34], @formatting_implementation_info : UInt16[34], @last_modifying_implementation_info : UInt16[34])
+    end
+  end
 
   @[Extern]
-  record FILE_INITIATE_REPAIR_OUTPUT_BUFFER,
-    hint1 : UInt64,
-    hint2 : UInt64,
-    clsn : UInt64,
-    status : UInt32
+  struct FILE_INITIATE_REPAIR_OUTPUT_BUFFER
+    property hint1 : UInt64
+    property hint2 : UInt64
+    property clsn : UInt64
+    property status : UInt32
+    def initialize(@hint1 : UInt64, @hint2 : UInt64, @clsn : UInt64, @status : UInt32)
+    end
+  end
 
   @[Extern]
-  record SHRINK_VOLUME_INFORMATION,
-    shrink_request_type : Win32cr::System::Ioctl::SHRINK_VOLUME_REQUEST_TYPES,
-    flags : UInt64,
-    new_number_of_sectors : Int64
+  struct SHRINK_VOLUME_INFORMATION
+    property shrink_request_type : Win32cr::System::Ioctl::SHRINK_VOLUME_REQUEST_TYPES
+    property flags : UInt64
+    property new_number_of_sectors : Int64
+    def initialize(@shrink_request_type : Win32cr::System::Ioctl::SHRINK_VOLUME_REQUEST_TYPES, @flags : UInt64, @new_number_of_sectors : Int64)
+    end
+  end
 
   @[Extern]
-  record TXFS_MODIFY_RM,
-    flags : Win32cr::System::Ioctl::TXFS_RMF_LAGS,
-    log_container_count_max : UInt32,
-    log_container_count_min : UInt32,
-    log_container_count : UInt32,
-    log_growth_increment : UInt32,
-    log_auto_shrink_percentage : UInt32,
-    reserved : UInt64,
-    logging_mode : UInt16
+  struct TXFS_MODIFY_RM
+    property flags : Win32cr::System::Ioctl::TXFS_RMF_LAGS
+    property log_container_count_max : UInt32
+    property log_container_count_min : UInt32
+    property log_container_count : UInt32
+    property log_growth_increment : UInt32
+    property log_auto_shrink_percentage : UInt32
+    property reserved : UInt64
+    property logging_mode : UInt16
+    def initialize(@flags : Win32cr::System::Ioctl::TXFS_RMF_LAGS, @log_container_count_max : UInt32, @log_container_count_min : UInt32, @log_container_count : UInt32, @log_growth_increment : UInt32, @log_auto_shrink_percentage : UInt32, @reserved : UInt64, @logging_mode : UInt16)
+    end
+  end
 
   @[Extern]
-  record TXFS_QUERY_RM_INFORMATION,
-    bytes_required : UInt32,
-    tail_lsn : UInt64,
-    current_lsn : UInt64,
-    archive_tail_lsn : UInt64,
-    log_container_size : UInt64,
-    highest_virtual_clock : Win32cr::Foundation::LARGE_INTEGER,
-    log_container_count : UInt32,
-    log_container_count_max : UInt32,
-    log_container_count_min : UInt32,
-    log_growth_increment : UInt32,
-    log_auto_shrink_percentage : UInt32,
-    flags : Win32cr::System::Ioctl::TXFS_RMF_LAGS,
-    logging_mode : UInt16,
-    reserved : UInt16,
-    rm_state : UInt32,
-    log_capacity : UInt64,
-    log_free : UInt64,
-    tops_size : UInt64,
-    tops_used : UInt64,
-    transaction_count : UInt64,
-    one_pc_count : UInt64,
-    two_pc_count : UInt64,
-    number_log_file_full : UInt64,
-    oldest_transaction_age : UInt64,
-    rm_name : LibC::GUID,
-    tm_log_path_offset : UInt32
+  struct TXFS_QUERY_RM_INFORMATION
+    property bytes_required : UInt32
+    property tail_lsn : UInt64
+    property current_lsn : UInt64
+    property archive_tail_lsn : UInt64
+    property log_container_size : UInt64
+    property highest_virtual_clock : Win32cr::Foundation::LARGE_INTEGER
+    property log_container_count : UInt32
+    property log_container_count_max : UInt32
+    property log_container_count_min : UInt32
+    property log_growth_increment : UInt32
+    property log_auto_shrink_percentage : UInt32
+    property flags : Win32cr::System::Ioctl::TXFS_RMF_LAGS
+    property logging_mode : UInt16
+    property reserved : UInt16
+    property rm_state : UInt32
+    property log_capacity : UInt64
+    property log_free : UInt64
+    property tops_size : UInt64
+    property tops_used : UInt64
+    property transaction_count : UInt64
+    property one_pc_count : UInt64
+    property two_pc_count : UInt64
+    property number_log_file_full : UInt64
+    property oldest_transaction_age : UInt64
+    property rm_name : LibC::GUID
+    property tm_log_path_offset : UInt32
+    def initialize(@bytes_required : UInt32, @tail_lsn : UInt64, @current_lsn : UInt64, @archive_tail_lsn : UInt64, @log_container_size : UInt64, @highest_virtual_clock : Win32cr::Foundation::LARGE_INTEGER, @log_container_count : UInt32, @log_container_count_max : UInt32, @log_container_count_min : UInt32, @log_growth_increment : UInt32, @log_auto_shrink_percentage : UInt32, @flags : Win32cr::System::Ioctl::TXFS_RMF_LAGS, @logging_mode : UInt16, @reserved : UInt16, @rm_state : UInt32, @log_capacity : UInt64, @log_free : UInt64, @tops_size : UInt64, @tops_used : UInt64, @transaction_count : UInt64, @one_pc_count : UInt64, @two_pc_count : UInt64, @number_log_file_full : UInt64, @oldest_transaction_age : UInt64, @rm_name : LibC::GUID, @tm_log_path_offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record TXFS_ROLLFORWARD_REDO_INFORMATION,
-    last_virtual_clock : Win32cr::Foundation::LARGE_INTEGER,
-    last_redo_lsn : UInt64,
-    highest_recovery_lsn : UInt64,
-    flags : UInt32
+  struct TXFS_ROLLFORWARD_REDO_INFORMATION
+    property last_virtual_clock : Win32cr::Foundation::LARGE_INTEGER
+    property last_redo_lsn : UInt64
+    property highest_recovery_lsn : UInt64
+    property flags : UInt32
+    def initialize(@last_virtual_clock : Win32cr::Foundation::LARGE_INTEGER, @last_redo_lsn : UInt64, @highest_recovery_lsn : UInt64, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record TXFS_START_RM_INFORMATION,
-    flags : UInt32,
-    log_container_size : UInt64,
-    log_container_count_min : UInt32,
-    log_container_count_max : UInt32,
-    log_growth_increment : UInt32,
-    log_auto_shrink_percentage : UInt32,
-    tm_log_path_offset : UInt32,
-    tm_log_path_length : UInt16,
-    logging_mode : UInt16,
-    log_path_length : UInt16,
-    reserved : UInt16,
-    log_path : UInt16*
+  struct TXFS_START_RM_INFORMATION
+    property flags : UInt32
+    property log_container_size : UInt64
+    property log_container_count_min : UInt32
+    property log_container_count_max : UInt32
+    property log_growth_increment : UInt32
+    property log_auto_shrink_percentage : UInt32
+    property tm_log_path_offset : UInt32
+    property tm_log_path_length : UInt16
+    property logging_mode : UInt16
+    property log_path_length : UInt16
+    property reserved : UInt16
+    property log_path : UInt16*
+    def initialize(@flags : UInt32, @log_container_size : UInt64, @log_container_count_min : UInt32, @log_container_count_max : UInt32, @log_growth_increment : UInt32, @log_auto_shrink_percentage : UInt32, @tm_log_path_offset : UInt32, @tm_log_path_length : UInt16, @logging_mode : UInt16, @log_path_length : UInt16, @reserved : UInt16, @log_path : UInt16*)
+    end
+  end
 
   @[Extern]
-  record TXFS_GET_METADATA_INFO_OUT,
-    txf_file_id : TxfFileId_e__Struct_,
-    locking_transaction : LibC::GUID,
-    last_lsn : UInt64,
-    transaction_state : UInt32 do
+  struct TXFS_GET_METADATA_INFO_OUT
+    property txf_file_id : TxfFileId_e__Struct_
+    property locking_transaction : LibC::GUID
+    property last_lsn : UInt64
+    property transaction_state : UInt32
 
     # Nested Type TxfFileId_e__Struct_
     @[Extern]
-    record TxfFileId_e__Struct_,
-      low_part : Int64,
-      high_part : Int64
+    struct TxfFileId_e__Struct_
+    property low_part : Int64
+    property high_part : Int64
+    def initialize(@low_part : Int64, @high_part : Int64)
+    end
+    end
 
+    def initialize(@txf_file_id : TxfFileId_e__Struct_, @locking_transaction : LibC::GUID, @last_lsn : UInt64, @transaction_state : UInt32)
+    end
   end
 
   @[Extern]
-  record TXFS_LIST_TRANSACTION_LOCKED_FILES_ENTRY,
-    offset : UInt64,
-    name_flags : UInt32,
-    file_id : Int64,
-    reserved1 : UInt32,
-    reserved2 : UInt32,
-    reserved3 : Int64,
-    file_name : UInt16*
+  struct TXFS_LIST_TRANSACTION_LOCKED_FILES_ENTRY
+    property offset : UInt64
+    property name_flags : UInt32
+    property file_id : Int64
+    property reserved1 : UInt32
+    property reserved2 : UInt32
+    property reserved3 : Int64
+    property file_name : UInt16*
+    def initialize(@offset : UInt64, @name_flags : UInt32, @file_id : Int64, @reserved1 : UInt32, @reserved2 : UInt32, @reserved3 : Int64, @file_name : UInt16*)
+    end
+  end
 
   @[Extern]
-  record TXFS_LIST_TRANSACTION_LOCKED_FILES,
-    ktm_transaction : LibC::GUID,
-    number_of_files : UInt64,
-    buffer_size_required : UInt64,
-    offset : UInt64
+  struct TXFS_LIST_TRANSACTION_LOCKED_FILES
+    property ktm_transaction : LibC::GUID
+    property number_of_files : UInt64
+    property buffer_size_required : UInt64
+    property offset : UInt64
+    def initialize(@ktm_transaction : LibC::GUID, @number_of_files : UInt64, @buffer_size_required : UInt64, @offset : UInt64)
+    end
+  end
 
   @[Extern]
-  record TXFS_LIST_TRANSACTIONS_ENTRY,
-    transaction_id : LibC::GUID,
-    transaction_state : UInt32,
-    reserved1 : UInt32,
-    reserved2 : UInt32,
-    reserved3 : Int64
+  struct TXFS_LIST_TRANSACTIONS_ENTRY
+    property transaction_id : LibC::GUID
+    property transaction_state : UInt32
+    property reserved1 : UInt32
+    property reserved2 : UInt32
+    property reserved3 : Int64
+    def initialize(@transaction_id : LibC::GUID, @transaction_state : UInt32, @reserved1 : UInt32, @reserved2 : UInt32, @reserved3 : Int64)
+    end
+  end
 
   @[Extern]
-  record TXFS_LIST_TRANSACTIONS,
-    number_of_transactions : UInt64,
-    buffer_size_required : UInt64
+  struct TXFS_LIST_TRANSACTIONS
+    property number_of_transactions : UInt64
+    property buffer_size_required : UInt64
+    def initialize(@number_of_transactions : UInt64, @buffer_size_required : UInt64)
+    end
+  end
 
   @[Extern]
-  record TXFS_READ_BACKUP_INFORMATION_OUT,
-    anonymous : Anonymous_e__Union_ do
+  struct TXFS_READ_BACKUP_INFORMATION_OUT
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      buffer_length : UInt32,
-      buffer : UInt8*
+    struct Anonymous_e__Union_
+    property buffer_length : UInt32
+    property buffer : UInt8*
+    def initialize(@buffer_length : UInt32, @buffer : UInt8*)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record TXFS_WRITE_BACKUP_INFORMATION,
-    buffer : UInt8*
+  struct TXFS_WRITE_BACKUP_INFORMATION
+    property buffer : UInt8*
+    def initialize(@buffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record TXFS_GET_TRANSACTED_VERSION,
-    this_base_version : UInt32,
-    latest_version : UInt32,
-    this_mini_version : UInt16,
-    first_mini_version : UInt16,
-    latest_mini_version : UInt16
+  struct TXFS_GET_TRANSACTED_VERSION
+    property this_base_version : UInt32
+    property latest_version : UInt32
+    property this_mini_version : UInt16
+    property first_mini_version : UInt16
+    property latest_mini_version : UInt16
+    def initialize(@this_base_version : UInt32, @latest_version : UInt32, @this_mini_version : UInt16, @first_mini_version : UInt16, @latest_mini_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record TXFS_SAVEPOINT_INFORMATION,
-    ktm_transaction : Win32cr::Foundation::HANDLE,
-    action_code : UInt32,
-    savepoint_id : UInt32
+  struct TXFS_SAVEPOINT_INFORMATION
+    property ktm_transaction : Win32cr::Foundation::HANDLE
+    property action_code : UInt32
+    property savepoint_id : UInt32
+    def initialize(@ktm_transaction : Win32cr::Foundation::HANDLE, @action_code : UInt32, @savepoint_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record TXFS_CREATE_MINIVERSION_INFO,
-    structure_version : UInt16,
-    structure_length : UInt16,
-    base_version : UInt32,
-    mini_version : UInt16
+  struct TXFS_CREATE_MINIVERSION_INFO
+    property structure_version : UInt16
+    property structure_length : UInt16
+    property base_version : UInt32
+    property mini_version : UInt16
+    def initialize(@structure_version : UInt16, @structure_length : UInt16, @base_version : UInt32, @mini_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record TXFS_TRANSACTION_ACTIVE_INFO,
-    transactions_active_at_snapshot : Win32cr::Foundation::BOOLEAN
+  struct TXFS_TRANSACTION_ACTIVE_INFO
+    property transactions_active_at_snapshot : Win32cr::Foundation::BOOLEAN
+    def initialize(@transactions_active_at_snapshot : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record BOOT_AREA_INFO,
-    boot_sector_count : UInt32,
-    boot_sectors : Anonymous_e__Struct_[2] do
+  struct BOOT_AREA_INFO
+    property boot_sector_count : UInt32
+    property boot_sectors : Anonymous_e__Struct_[2]
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      offset : Win32cr::Foundation::LARGE_INTEGER
+    struct Anonymous_e__Struct_
+    property offset : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@offset : Win32cr::Foundation::LARGE_INTEGER)
+    end
+    end
 
+    def initialize(@boot_sector_count : UInt32, @boot_sectors : Anonymous_e__Struct_[2])
+    end
   end
 
   @[Extern]
-  record RETRIEVAL_POINTER_BASE,
-    file_area_offset : Win32cr::Foundation::LARGE_INTEGER
-
-  @[Extern]
-  record FILE_FS_PERSISTENT_VOLUME_INFORMATION,
-    volume_flags : UInt32,
-    flag_mask : UInt32,
-    version : UInt32,
-    reserved : UInt32
-
-  @[Extern]
-  record FILE_SYSTEM_RECOGNITION_INFORMATION,
-    file_system : Win32cr::Foundation::CHAR[9]
-
-  @[Extern]
-  record REQUEST_OPLOCK_INPUT_BUFFER,
-    structure_version : UInt16,
-    structure_length : UInt16,
-    requested_oplock_level : UInt32,
-    flags : UInt32
-
-  @[Extern]
-  record REQUEST_OPLOCK_OUTPUT_BUFFER,
-    structure_version : UInt16,
-    structure_length : UInt16,
-    original_oplock_level : UInt32,
-    new_oplock_level : UInt32,
-    flags : UInt32,
-    access_mode : UInt32,
-    share_mode : UInt16
-
-  @[Extern]
-  record STORAGE_QUERY_DEPENDENT_VOLUME_REQUEST,
-    request_level : UInt32,
-    request_flags : UInt32
-
-  @[Extern]
-  record STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY,
-    entry_length : UInt32,
-    dependency_type_flags : UInt32,
-    provider_specific_flags : UInt32,
-    virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
-
-  @[Extern]
-  record STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY,
-    entry_length : UInt32,
-    dependency_type_flags : UInt32,
-    provider_specific_flags : UInt32,
-    virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE,
-    ancestor_level : UInt32,
-    host_volume_name_offset : UInt32,
-    host_volume_name_size : UInt32,
-    dependent_volume_name_offset : UInt32,
-    dependent_volume_name_size : UInt32,
-    relative_path_offset : UInt32,
-    relative_path_size : UInt32,
-    dependent_device_name_offset : UInt32,
-    dependent_device_name_size : UInt32
-
-  @[Extern]
-  record STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE,
-    response_level : UInt32,
-    number_entries : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      lev1_depends : Win32cr::System::Ioctl::STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY*,
-      lev2_depends : Win32cr::System::Ioctl::STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY*
-
+  struct RETRIEVAL_POINTER_BASE
+    property file_area_offset : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@file_area_offset : Win32cr::Foundation::LARGE_INTEGER)
+    end
   end
 
   @[Extern]
-  record SD_CHANGE_MACHINE_SID_INPUT,
-    current_machine_sid_offset : UInt16,
-    current_machine_sid_length : UInt16,
-    new_machine_sid_offset : UInt16,
-    new_machine_sid_length : UInt16
-
-  @[Extern]
-  record SD_CHANGE_MACHINE_SID_OUTPUT,
-    num_sd_changed_success : UInt64,
-    num_sd_changed_fail : UInt64,
-    num_sd_unused : UInt64,
-    num_sd_total : UInt64,
-    num_mft_sd_changed_success : UInt64,
-    num_mft_sd_changed_fail : UInt64,
-    num_mft_sd_total : UInt64
-
-  @[Extern]
-  record SD_QUERY_STATS_INPUT,
-    reserved : UInt32
-
-  @[Extern]
-  record SD_QUERY_STATS_OUTPUT,
-    sds_stream_size : UInt64,
-    sds_allocation_size : UInt64,
-    sii_stream_size : UInt64,
-    sii_allocation_size : UInt64,
-    sdh_stream_size : UInt64,
-    sdh_allocation_size : UInt64,
-    num_sd_total : UInt64,
-    num_sd_unused : UInt64
-
-  @[Extern]
-  record SD_ENUM_SDS_INPUT,
-    starting_offset : UInt64,
-    max_sd_entries_to_return : UInt64
-
-  @[Extern]
-  record SD_ENUM_SDS_ENTRY,
-    hash : UInt32,
-    security_id : UInt32,
-    offset : UInt64,
-    length : UInt32,
-    descriptor : UInt8*
-
-  @[Extern]
-  record SD_ENUM_SDS_OUTPUT,
-    next_offset : UInt64,
-    num_sd_entries_returned : UInt64,
-    num_sd_bytes_returned : UInt64,
-    sd_entry : Win32cr::System::Ioctl::SD_ENUM_SDS_ENTRY*
-
-  @[Extern]
-  record SD_GLOBAL_CHANGE_INPUT,
-    flags : UInt32,
-    change_type : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      sd_change : Win32cr::System::Ioctl::SD_CHANGE_MACHINE_SID_INPUT,
-      sd_query_stats : Win32cr::System::Ioctl::SD_QUERY_STATS_INPUT,
-      sd_enum_sds : Win32cr::System::Ioctl::SD_ENUM_SDS_INPUT
-
+  struct FILE_FS_PERSISTENT_VOLUME_INFORMATION
+    property volume_flags : UInt32
+    property flag_mask : UInt32
+    property version : UInt32
+    property reserved : UInt32
+    def initialize(@volume_flags : UInt32, @flag_mask : UInt32, @version : UInt32, @reserved : UInt32)
+    end
   end
 
   @[Extern]
-  record SD_GLOBAL_CHANGE_OUTPUT,
-    flags : UInt32,
-    change_type : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      sd_change : Win32cr::System::Ioctl::SD_CHANGE_MACHINE_SID_OUTPUT,
-      sd_query_stats : Win32cr::System::Ioctl::SD_QUERY_STATS_OUTPUT,
-      sd_enum_sds : Win32cr::System::Ioctl::SD_ENUM_SDS_OUTPUT
-
+  struct FILE_SYSTEM_RECOGNITION_INFORMATION
+    property file_system : Win32cr::Foundation::CHAR[9]
+    def initialize(@file_system : Win32cr::Foundation::CHAR[9])
+    end
   end
 
   @[Extern]
-  record LOOKUP_STREAM_FROM_CLUSTER_INPUT,
-    flags : UInt32,
-    number_of_clusters : UInt32,
-    cluster : Win32cr::Foundation::LARGE_INTEGER*
+  struct REQUEST_OPLOCK_INPUT_BUFFER
+    property structure_version : UInt16
+    property structure_length : UInt16
+    property requested_oplock_level : UInt32
+    property flags : UInt32
+    def initialize(@structure_version : UInt16, @structure_length : UInt16, @requested_oplock_level : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record LOOKUP_STREAM_FROM_CLUSTER_OUTPUT,
-    offset : UInt32,
-    number_of_matches : UInt32,
-    buffer_size_required : UInt32
+  struct REQUEST_OPLOCK_OUTPUT_BUFFER
+    property structure_version : UInt16
+    property structure_length : UInt16
+    property original_oplock_level : UInt32
+    property new_oplock_level : UInt32
+    property flags : UInt32
+    property access_mode : UInt32
+    property share_mode : UInt16
+    def initialize(@structure_version : UInt16, @structure_length : UInt16, @original_oplock_level : UInt32, @new_oplock_level : UInt32, @flags : UInt32, @access_mode : UInt32, @share_mode : UInt16)
+    end
+  end
 
   @[Extern]
-  record LOOKUP_STREAM_FROM_CLUSTER_ENTRY,
-    offset_to_next : UInt32,
-    flags : UInt32,
-    reserved : Win32cr::Foundation::LARGE_INTEGER,
-    cluster : Win32cr::Foundation::LARGE_INTEGER,
-    file_name : UInt16*
+  struct STORAGE_QUERY_DEPENDENT_VOLUME_REQUEST
+    property request_level : UInt32
+    property request_flags : UInt32
+    def initialize(@request_level : UInt32, @request_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record FILE_TYPE_NOTIFICATION_INPUT,
-    flags : UInt32,
-    num_file_type_i_ds : UInt32,
-    file_type_id : LibC::GUID*
+  struct STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY
+    property entry_length : UInt32
+    property dependency_type_flags : UInt32
+    property provider_specific_flags : UInt32
+    property virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    def initialize(@entry_length : UInt32, @dependency_type_flags : UInt32, @provider_specific_flags : UInt32, @virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE)
+    end
+  end
 
   @[Extern]
-  record CSV_MGMT_LOCK,
-    flags : UInt32
+  struct STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY
+    property entry_length : UInt32
+    property dependency_type_flags : UInt32
+    property provider_specific_flags : UInt32
+    property virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property ancestor_level : UInt32
+    property host_volume_name_offset : UInt32
+    property host_volume_name_size : UInt32
+    property dependent_volume_name_offset : UInt32
+    property dependent_volume_name_size : UInt32
+    property relative_path_offset : UInt32
+    property relative_path_size : UInt32
+    property dependent_device_name_offset : UInt32
+    property dependent_device_name_size : UInt32
+    def initialize(@entry_length : UInt32, @dependency_type_flags : UInt32, @provider_specific_flags : UInt32, @virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @ancestor_level : UInt32, @host_volume_name_offset : UInt32, @host_volume_name_size : UInt32, @dependent_volume_name_offset : UInt32, @dependent_volume_name_size : UInt32, @relative_path_offset : UInt32, @relative_path_size : UInt32, @dependent_device_name_offset : UInt32, @dependent_device_name_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record CSV_NAMESPACE_INFO,
-    version : UInt32,
-    device_number : UInt32,
-    starting_offset : Win32cr::Foundation::LARGE_INTEGER,
-    sector_size : UInt32
-
-  @[Extern]
-  record CSV_CONTROL_PARAM,
-    operation : Win32cr::System::Ioctl::CSV_CONTROL_OP,
-    unused : Int64
-
-  @[Extern]
-  record CSV_QUERY_REDIRECT_STATE,
-    mds_node_id : UInt32,
-    ds_node_id : UInt32,
-    file_redirected : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record CSV_QUERY_FILE_REVISION,
-    file_id : Int64,
-    file_revision : Int64[3]
-
-  @[Extern]
-  record CSV_QUERY_FILE_REVISION_FILE_ID_128,
-    file_id : Win32cr::Storage::FileSystem::FILE_ID_128,
-    file_revision : Int64[3]
-
-  @[Extern]
-  record CSV_QUERY_MDS_PATH,
-    mds_node_id : UInt32,
-    ds_node_id : UInt32,
-    path_length : UInt32,
-    path : UInt16*
-
-  @[Extern]
-  record CSV_QUERY_VOLUME_REDIRECT_STATE,
-    mds_node_id : UInt32,
-    ds_node_id : UInt32,
-    is_disk_connected : Win32cr::Foundation::BOOLEAN,
-    cluster_enable_direct_io : Win32cr::Foundation::BOOLEAN,
-    disk_connectivity : Win32cr::System::Ioctl::CSVFS_DISK_CONNECTIVITY
-
-  @[Extern]
-  record CSV_QUERY_MDS_PATH_V2,
-    version : Int64,
-    required_size : UInt32,
-    mds_node_id : UInt32,
-    ds_node_id : UInt32,
-    flags : UInt32,
-    disk_connectivity : Win32cr::System::Ioctl::CSVFS_DISK_CONNECTIVITY,
-    volume_id : LibC::GUID,
-    ip_address_offset : UInt32,
-    ip_address_length : UInt32,
-    path_offset : UInt32,
-    path_length : UInt32
-
-  @[Extern]
-  record CSV_SET_VOLUME_ID,
-    volume_id : LibC::GUID
-
-  @[Extern]
-  record CSV_QUERY_VOLUME_ID,
-    volume_id : LibC::GUID
-
-  @[Extern]
-  record CSV_QUERY_VETO_FILE_DIRECT_IO_OUTPUT,
-    vetoed_from_altitude_integral : UInt64,
-    vetoed_from_altitude_decimal : UInt64,
-    reason : UInt16[256]
-
-  @[Extern]
-  record CSV_IS_OWNED_BY_CSVFS,
-    owned_by_csvfs : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record FILE_LEVEL_TRIM_RANGE,
-    offset : UInt64,
-    length : UInt64
-
-  @[Extern]
-  record FILE_LEVEL_TRIM,
-    key : UInt32,
-    num_ranges : UInt32,
-    ranges : Win32cr::System::Ioctl::FILE_LEVEL_TRIM_RANGE*
-
-  @[Extern]
-  record FILE_LEVEL_TRIM_OUTPUT,
-    num_ranges_processed : UInt32
-
-  @[Extern]
-  record CLUSTER_RANGE,
-    starting_cluster : Win32cr::Foundation::LARGE_INTEGER,
-    cluster_count : Win32cr::Foundation::LARGE_INTEGER
-
-  @[Extern]
-  record FILE_REFERENCE_RANGE,
-    starting_file_reference_number : UInt64,
-    ending_file_reference_number : UInt64
-
-  @[Extern]
-  record QUERY_FILE_LAYOUT_INPUT,
-    anonymous : Anonymous_e__Union_,
-    flags : UInt32,
-    filter_type : Win32cr::System::Ioctl::QUERY_FILE_LAYOUT_FILTER_TYPE,
-    reserved : UInt32,
-    filter : Filter_e__Union_ do
+  struct STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE
+    property response_level : UInt32
+    property number_entries : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      filter_entry_count : UInt32,
-      number_of_pairs : UInt32
+    struct Anonymous_e__Union_
+    property lev1_depends : Win32cr::System::Ioctl::STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY*
+    property lev2_depends : Win32cr::System::Ioctl::STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY*
+    def initialize(@lev1_depends : Win32cr::System::Ioctl::STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY*, @lev2_depends : Win32cr::System::Ioctl::STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY*)
+    end
+    end
+
+    def initialize(@response_level : UInt32, @number_entries : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct SD_CHANGE_MACHINE_SID_INPUT
+    property current_machine_sid_offset : UInt16
+    property current_machine_sid_length : UInt16
+    property new_machine_sid_offset : UInt16
+    property new_machine_sid_length : UInt16
+    def initialize(@current_machine_sid_offset : UInt16, @current_machine_sid_length : UInt16, @new_machine_sid_offset : UInt16, @new_machine_sid_length : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct SD_CHANGE_MACHINE_SID_OUTPUT
+    property num_sd_changed_success : UInt64
+    property num_sd_changed_fail : UInt64
+    property num_sd_unused : UInt64
+    property num_sd_total : UInt64
+    property num_mft_sd_changed_success : UInt64
+    property num_mft_sd_changed_fail : UInt64
+    property num_mft_sd_total : UInt64
+    def initialize(@num_sd_changed_success : UInt64, @num_sd_changed_fail : UInt64, @num_sd_unused : UInt64, @num_sd_total : UInt64, @num_mft_sd_changed_success : UInt64, @num_mft_sd_changed_fail : UInt64, @num_mft_sd_total : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct SD_QUERY_STATS_INPUT
+    property reserved : UInt32
+    def initialize(@reserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SD_QUERY_STATS_OUTPUT
+    property sds_stream_size : UInt64
+    property sds_allocation_size : UInt64
+    property sii_stream_size : UInt64
+    property sii_allocation_size : UInt64
+    property sdh_stream_size : UInt64
+    property sdh_allocation_size : UInt64
+    property num_sd_total : UInt64
+    property num_sd_unused : UInt64
+    def initialize(@sds_stream_size : UInt64, @sds_allocation_size : UInt64, @sii_stream_size : UInt64, @sii_allocation_size : UInt64, @sdh_stream_size : UInt64, @sdh_allocation_size : UInt64, @num_sd_total : UInt64, @num_sd_unused : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct SD_ENUM_SDS_INPUT
+    property starting_offset : UInt64
+    property max_sd_entries_to_return : UInt64
+    def initialize(@starting_offset : UInt64, @max_sd_entries_to_return : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct SD_ENUM_SDS_ENTRY
+    property hash : UInt32
+    property security_id : UInt32
+    property offset : UInt64
+    property length : UInt32
+    property descriptor : UInt8*
+    def initialize(@hash : UInt32, @security_id : UInt32, @offset : UInt64, @length : UInt32, @descriptor : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct SD_ENUM_SDS_OUTPUT
+    property next_offset : UInt64
+    property num_sd_entries_returned : UInt64
+    property num_sd_bytes_returned : UInt64
+    property sd_entry : Win32cr::System::Ioctl::SD_ENUM_SDS_ENTRY*
+    def initialize(@next_offset : UInt64, @num_sd_entries_returned : UInt64, @num_sd_bytes_returned : UInt64, @sd_entry : Win32cr::System::Ioctl::SD_ENUM_SDS_ENTRY*)
+    end
+  end
+
+  @[Extern]
+  struct SD_GLOBAL_CHANGE_INPUT
+    property flags : UInt32
+    property change_type : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property sd_change : Win32cr::System::Ioctl::SD_CHANGE_MACHINE_SID_INPUT
+    property sd_query_stats : Win32cr::System::Ioctl::SD_QUERY_STATS_INPUT
+    property sd_enum_sds : Win32cr::System::Ioctl::SD_ENUM_SDS_INPUT
+    def initialize(@sd_change : Win32cr::System::Ioctl::SD_CHANGE_MACHINE_SID_INPUT, @sd_query_stats : Win32cr::System::Ioctl::SD_QUERY_STATS_INPUT, @sd_enum_sds : Win32cr::System::Ioctl::SD_ENUM_SDS_INPUT)
+    end
+    end
+
+    def initialize(@flags : UInt32, @change_type : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct SD_GLOBAL_CHANGE_OUTPUT
+    property flags : UInt32
+    property change_type : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property sd_change : Win32cr::System::Ioctl::SD_CHANGE_MACHINE_SID_OUTPUT
+    property sd_query_stats : Win32cr::System::Ioctl::SD_QUERY_STATS_OUTPUT
+    property sd_enum_sds : Win32cr::System::Ioctl::SD_ENUM_SDS_OUTPUT
+    def initialize(@sd_change : Win32cr::System::Ioctl::SD_CHANGE_MACHINE_SID_OUTPUT, @sd_query_stats : Win32cr::System::Ioctl::SD_QUERY_STATS_OUTPUT, @sd_enum_sds : Win32cr::System::Ioctl::SD_ENUM_SDS_OUTPUT)
+    end
+    end
+
+    def initialize(@flags : UInt32, @change_type : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct LOOKUP_STREAM_FROM_CLUSTER_INPUT
+    property flags : UInt32
+    property number_of_clusters : UInt32
+    property cluster : Win32cr::Foundation::LARGE_INTEGER*
+    def initialize(@flags : UInt32, @number_of_clusters : UInt32, @cluster : Win32cr::Foundation::LARGE_INTEGER*)
+    end
+  end
+
+  @[Extern]
+  struct LOOKUP_STREAM_FROM_CLUSTER_OUTPUT
+    property offset : UInt32
+    property number_of_matches : UInt32
+    property buffer_size_required : UInt32
+    def initialize(@offset : UInt32, @number_of_matches : UInt32, @buffer_size_required : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct LOOKUP_STREAM_FROM_CLUSTER_ENTRY
+    property offset_to_next : UInt32
+    property flags : UInt32
+    property reserved : Win32cr::Foundation::LARGE_INTEGER
+    property cluster : Win32cr::Foundation::LARGE_INTEGER
+    property file_name : UInt16*
+    def initialize(@offset_to_next : UInt32, @flags : UInt32, @reserved : Win32cr::Foundation::LARGE_INTEGER, @cluster : Win32cr::Foundation::LARGE_INTEGER, @file_name : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct FILE_TYPE_NOTIFICATION_INPUT
+    property flags : UInt32
+    property num_file_type_i_ds : UInt32
+    property file_type_id : LibC::GUID*
+    def initialize(@flags : UInt32, @num_file_type_i_ds : UInt32, @file_type_id : LibC::GUID*)
+    end
+  end
+
+  @[Extern]
+  struct CSV_MGMT_LOCK
+    property flags : UInt32
+    def initialize(@flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CSV_NAMESPACE_INFO
+    property version : UInt32
+    property device_number : UInt32
+    property starting_offset : Win32cr::Foundation::LARGE_INTEGER
+    property sector_size : UInt32
+    def initialize(@version : UInt32, @device_number : UInt32, @starting_offset : Win32cr::Foundation::LARGE_INTEGER, @sector_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CSV_CONTROL_PARAM
+    property operation : Win32cr::System::Ioctl::CSV_CONTROL_OP
+    property unused : Int64
+    def initialize(@operation : Win32cr::System::Ioctl::CSV_CONTROL_OP, @unused : Int64)
+    end
+  end
+
+  @[Extern]
+  struct CSV_QUERY_REDIRECT_STATE
+    property mds_node_id : UInt32
+    property ds_node_id : UInt32
+    property file_redirected : Win32cr::Foundation::BOOLEAN
+    def initialize(@mds_node_id : UInt32, @ds_node_id : UInt32, @file_redirected : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct CSV_QUERY_FILE_REVISION
+    property file_id : Int64
+    property file_revision : Int64[3]
+    def initialize(@file_id : Int64, @file_revision : Int64[3])
+    end
+  end
+
+  @[Extern]
+  struct CSV_QUERY_FILE_REVISION_FILE_ID_128
+    property file_id : Win32cr::Storage::FileSystem::FILE_ID_128
+    property file_revision : Int64[3]
+    def initialize(@file_id : Win32cr::Storage::FileSystem::FILE_ID_128, @file_revision : Int64[3])
+    end
+  end
+
+  @[Extern]
+  struct CSV_QUERY_MDS_PATH
+    property mds_node_id : UInt32
+    property ds_node_id : UInt32
+    property path_length : UInt32
+    property path : UInt16*
+    def initialize(@mds_node_id : UInt32, @ds_node_id : UInt32, @path_length : UInt32, @path : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct CSV_QUERY_VOLUME_REDIRECT_STATE
+    property mds_node_id : UInt32
+    property ds_node_id : UInt32
+    property is_disk_connected : Win32cr::Foundation::BOOLEAN
+    property cluster_enable_direct_io : Win32cr::Foundation::BOOLEAN
+    property disk_connectivity : Win32cr::System::Ioctl::CSVFS_DISK_CONNECTIVITY
+    def initialize(@mds_node_id : UInt32, @ds_node_id : UInt32, @is_disk_connected : Win32cr::Foundation::BOOLEAN, @cluster_enable_direct_io : Win32cr::Foundation::BOOLEAN, @disk_connectivity : Win32cr::System::Ioctl::CSVFS_DISK_CONNECTIVITY)
+    end
+  end
+
+  @[Extern]
+  struct CSV_QUERY_MDS_PATH_V2
+    property version : Int64
+    property required_size : UInt32
+    property mds_node_id : UInt32
+    property ds_node_id : UInt32
+    property flags : UInt32
+    property disk_connectivity : Win32cr::System::Ioctl::CSVFS_DISK_CONNECTIVITY
+    property volume_id : LibC::GUID
+    property ip_address_offset : UInt32
+    property ip_address_length : UInt32
+    property path_offset : UInt32
+    property path_length : UInt32
+    def initialize(@version : Int64, @required_size : UInt32, @mds_node_id : UInt32, @ds_node_id : UInt32, @flags : UInt32, @disk_connectivity : Win32cr::System::Ioctl::CSVFS_DISK_CONNECTIVITY, @volume_id : LibC::GUID, @ip_address_offset : UInt32, @ip_address_length : UInt32, @path_offset : UInt32, @path_length : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CSV_SET_VOLUME_ID
+    property volume_id : LibC::GUID
+    def initialize(@volume_id : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct CSV_QUERY_VOLUME_ID
+    property volume_id : LibC::GUID
+    def initialize(@volume_id : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct CSV_QUERY_VETO_FILE_DIRECT_IO_OUTPUT
+    property vetoed_from_altitude_integral : UInt64
+    property vetoed_from_altitude_decimal : UInt64
+    property reason : UInt16[256]
+    def initialize(@vetoed_from_altitude_integral : UInt64, @vetoed_from_altitude_decimal : UInt64, @reason : UInt16[256])
+    end
+  end
+
+  @[Extern]
+  struct CSV_IS_OWNED_BY_CSVFS
+    property owned_by_csvfs : Win32cr::Foundation::BOOLEAN
+    def initialize(@owned_by_csvfs : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct FILE_LEVEL_TRIM_RANGE
+    property offset : UInt64
+    property length : UInt64
+    def initialize(@offset : UInt64, @length : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct FILE_LEVEL_TRIM
+    property key : UInt32
+    property num_ranges : UInt32
+    property ranges : Win32cr::System::Ioctl::FILE_LEVEL_TRIM_RANGE*
+    def initialize(@key : UInt32, @num_ranges : UInt32, @ranges : Win32cr::System::Ioctl::FILE_LEVEL_TRIM_RANGE*)
+    end
+  end
+
+  @[Extern]
+  struct FILE_LEVEL_TRIM_OUTPUT
+    property num_ranges_processed : UInt32
+    def initialize(@num_ranges_processed : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLUSTER_RANGE
+    property starting_cluster : Win32cr::Foundation::LARGE_INTEGER
+    property cluster_count : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@starting_cluster : Win32cr::Foundation::LARGE_INTEGER, @cluster_count : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
+
+  @[Extern]
+  struct FILE_REFERENCE_RANGE
+    property starting_file_reference_number : UInt64
+    property ending_file_reference_number : UInt64
+    def initialize(@starting_file_reference_number : UInt64, @ending_file_reference_number : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct QUERY_FILE_LAYOUT_INPUT
+    property anonymous : Anonymous_e__Union_
+    property flags : UInt32
+    property filter_type : Win32cr::System::Ioctl::QUERY_FILE_LAYOUT_FILTER_TYPE
+    property reserved : UInt32
+    property filter : Filter_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property filter_entry_count : UInt32
+    property number_of_pairs : UInt32
+    def initialize(@filter_entry_count : UInt32, @number_of_pairs : UInt32)
+    end
+    end
 
 
     # Nested Type Filter_e__Union_
     @[Extern(union: true)]
-    record Filter_e__Union_,
-      cluster_ranges : Win32cr::System::Ioctl::CLUSTER_RANGE*,
-      file_reference_ranges : Win32cr::System::Ioctl::FILE_REFERENCE_RANGE*,
-      storage_reserve_ids : Win32cr::System::Ioctl::STORAGE_RESERVE_ID*
+    struct Filter_e__Union_
+    property cluster_ranges : Win32cr::System::Ioctl::CLUSTER_RANGE*
+    property file_reference_ranges : Win32cr::System::Ioctl::FILE_REFERENCE_RANGE*
+    property storage_reserve_ids : Win32cr::System::Ioctl::STORAGE_RESERVE_ID*
+    def initialize(@cluster_ranges : Win32cr::System::Ioctl::CLUSTER_RANGE*, @file_reference_ranges : Win32cr::System::Ioctl::FILE_REFERENCE_RANGE*, @storage_reserve_ids : Win32cr::System::Ioctl::STORAGE_RESERVE_ID*)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @flags : UInt32, @filter_type : Win32cr::System::Ioctl::QUERY_FILE_LAYOUT_FILTER_TYPE, @reserved : UInt32, @filter : Filter_e__Union_)
+    end
   end
 
   @[Extern]
-  record QUERY_FILE_LAYOUT_OUTPUT,
-    file_entry_count : UInt32,
-    first_file_offset : UInt32,
-    flags : UInt32,
-    reserved : UInt32
+  struct QUERY_FILE_LAYOUT_OUTPUT
+    property file_entry_count : UInt32
+    property first_file_offset : UInt32
+    property flags : UInt32
+    property reserved : UInt32
+    def initialize(@file_entry_count : UInt32, @first_file_offset : UInt32, @flags : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record FILE_LAYOUT_ENTRY,
-    version : UInt32,
-    next_file_offset : UInt32,
-    flags : UInt32,
-    file_attributes : UInt32,
-    file_reference_number : UInt64,
-    first_name_offset : UInt32,
-    first_stream_offset : UInt32,
-    extra_info_offset : UInt32,
-    extra_info_length : UInt32
+  struct FILE_LAYOUT_ENTRY
+    property version : UInt32
+    property next_file_offset : UInt32
+    property flags : UInt32
+    property file_attributes : UInt32
+    property file_reference_number : UInt64
+    property first_name_offset : UInt32
+    property first_stream_offset : UInt32
+    property extra_info_offset : UInt32
+    property extra_info_length : UInt32
+    def initialize(@version : UInt32, @next_file_offset : UInt32, @flags : UInt32, @file_attributes : UInt32, @file_reference_number : UInt64, @first_name_offset : UInt32, @first_stream_offset : UInt32, @extra_info_offset : UInt32, @extra_info_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record FILE_LAYOUT_NAME_ENTRY,
-    next_name_offset : UInt32,
-    flags : UInt32,
-    parent_file_reference_number : UInt64,
-    file_name_length : UInt32,
-    reserved : UInt32,
-    file_name : UInt16*
+  struct FILE_LAYOUT_NAME_ENTRY
+    property next_name_offset : UInt32
+    property flags : UInt32
+    property parent_file_reference_number : UInt64
+    property file_name_length : UInt32
+    property reserved : UInt32
+    property file_name : UInt16*
+    def initialize(@next_name_offset : UInt32, @flags : UInt32, @parent_file_reference_number : UInt64, @file_name_length : UInt32, @reserved : UInt32, @file_name : UInt16*)
+    end
+  end
 
   @[Extern]
-  record FILE_LAYOUT_INFO_ENTRY,
-    basic_information : BasicInformation_e__Struct_,
-    owner_id : UInt32,
-    security_id : UInt32,
-    usn : Int64,
-    storage_reserve_id : Win32cr::System::Ioctl::STORAGE_RESERVE_ID do
+  struct FILE_LAYOUT_INFO_ENTRY
+    property basic_information : BasicInformation_e__Struct_
+    property owner_id : UInt32
+    property security_id : UInt32
+    property usn : Int64
+    property storage_reserve_id : Win32cr::System::Ioctl::STORAGE_RESERVE_ID
 
     # Nested Type BasicInformation_e__Struct_
     @[Extern]
-    record BasicInformation_e__Struct_,
-      creation_time : Win32cr::Foundation::LARGE_INTEGER,
-      last_access_time : Win32cr::Foundation::LARGE_INTEGER,
-      last_write_time : Win32cr::Foundation::LARGE_INTEGER,
-      change_time : Win32cr::Foundation::LARGE_INTEGER,
-      file_attributes : UInt32
+    struct BasicInformation_e__Struct_
+    property creation_time : Win32cr::Foundation::LARGE_INTEGER
+    property last_access_time : Win32cr::Foundation::LARGE_INTEGER
+    property last_write_time : Win32cr::Foundation::LARGE_INTEGER
+    property change_time : Win32cr::Foundation::LARGE_INTEGER
+    property file_attributes : UInt32
+    def initialize(@creation_time : Win32cr::Foundation::LARGE_INTEGER, @last_access_time : Win32cr::Foundation::LARGE_INTEGER, @last_write_time : Win32cr::Foundation::LARGE_INTEGER, @change_time : Win32cr::Foundation::LARGE_INTEGER, @file_attributes : UInt32)
+    end
+    end
 
+    def initialize(@basic_information : BasicInformation_e__Struct_, @owner_id : UInt32, @security_id : UInt32, @usn : Int64, @storage_reserve_id : Win32cr::System::Ioctl::STORAGE_RESERVE_ID)
+    end
   end
 
   @[Extern]
-  record STREAM_LAYOUT_ENTRY,
-    version : UInt32,
-    next_stream_offset : UInt32,
-    flags : UInt32,
-    extent_information_offset : UInt32,
-    allocation_size : Win32cr::Foundation::LARGE_INTEGER,
-    end_of_file : Win32cr::Foundation::LARGE_INTEGER,
-    stream_information_offset : UInt32,
-    attribute_type_code : UInt32,
-    attribute_flags : UInt32,
-    stream_identifier_length : UInt32,
-    stream_identifier : UInt16*
+  struct STREAM_LAYOUT_ENTRY
+    property version : UInt32
+    property next_stream_offset : UInt32
+    property flags : UInt32
+    property extent_information_offset : UInt32
+    property allocation_size : Win32cr::Foundation::LARGE_INTEGER
+    property end_of_file : Win32cr::Foundation::LARGE_INTEGER
+    property stream_information_offset : UInt32
+    property attribute_type_code : UInt32
+    property attribute_flags : UInt32
+    property stream_identifier_length : UInt32
+    property stream_identifier : UInt16*
+    def initialize(@version : UInt32, @next_stream_offset : UInt32, @flags : UInt32, @extent_information_offset : UInt32, @allocation_size : Win32cr::Foundation::LARGE_INTEGER, @end_of_file : Win32cr::Foundation::LARGE_INTEGER, @stream_information_offset : UInt32, @attribute_type_code : UInt32, @attribute_flags : UInt32, @stream_identifier_length : UInt32, @stream_identifier : UInt16*)
+    end
+  end
 
   @[Extern]
-  record STREAM_EXTENT_ENTRY,
-    flags : UInt32,
-    extent_information : ExtentInformation_e__Union_ do
+  struct STREAM_EXTENT_ENTRY
+    property flags : UInt32
+    property extent_information : ExtentInformation_e__Union_
 
     # Nested Type ExtentInformation_e__Union_
     @[Extern(union: true)]
-    record ExtentInformation_e__Union_,
-      retrieval_pointers : Win32cr::System::Ioctl::RETRIEVAL_POINTERS_BUFFER
+    struct ExtentInformation_e__Union_
+    property retrieval_pointers : Win32cr::System::Ioctl::RETRIEVAL_POINTERS_BUFFER
+    def initialize(@retrieval_pointers : Win32cr::System::Ioctl::RETRIEVAL_POINTERS_BUFFER)
+    end
+    end
 
+    def initialize(@flags : UInt32, @extent_information : ExtentInformation_e__Union_)
+    end
   end
 
   @[Extern]
-  record FSCTL_GET_INTEGRITY_INFORMATION_BUFFER,
-    checksum_algorithm : UInt16,
-    reserved : UInt16,
-    flags : UInt32,
-    checksum_chunk_size_in_bytes : UInt32,
-    cluster_size_in_bytes : UInt32
+  struct FSCTL_GET_INTEGRITY_INFORMATION_BUFFER
+    property checksum_algorithm : UInt16
+    property reserved : UInt16
+    property flags : UInt32
+    property checksum_chunk_size_in_bytes : UInt32
+    property cluster_size_in_bytes : UInt32
+    def initialize(@checksum_algorithm : UInt16, @reserved : UInt16, @flags : UInt32, @checksum_chunk_size_in_bytes : UInt32, @cluster_size_in_bytes : UInt32)
+    end
+  end
 
   @[Extern]
-  record FSCTL_SET_INTEGRITY_INFORMATION_BUFFER,
-    checksum_algorithm : UInt16,
-    reserved : UInt16,
-    flags : UInt32
+  struct FSCTL_SET_INTEGRITY_INFORMATION_BUFFER
+    property checksum_algorithm : UInt16
+    property reserved : UInt16
+    property flags : UInt32
+    def initialize(@checksum_algorithm : UInt16, @reserved : UInt16, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record FSCTL_SET_INTEGRITY_INFORMATION_BUFFER_EX,
-    enable_integrity : UInt8,
-    keep_integrity_state_unchanged : UInt8,
-    reserved : UInt16,
-    flags : UInt32,
-    version : UInt8,
-    reserved2 : UInt8[7]
+  struct FSCTL_SET_INTEGRITY_INFORMATION_BUFFER_EX
+    property enable_integrity : UInt8
+    property keep_integrity_state_unchanged : UInt8
+    property reserved : UInt16
+    property flags : UInt32
+    property version : UInt8
+    property reserved2 : UInt8[7]
+    def initialize(@enable_integrity : UInt8, @keep_integrity_state_unchanged : UInt8, @reserved : UInt16, @flags : UInt32, @version : UInt8, @reserved2 : UInt8[7])
+    end
+  end
 
   @[Extern]
-  record FSCTL_OFFLOAD_READ_INPUT,
-    size : UInt32,
-    flags : UInt32,
-    token_time_to_live : UInt32,
-    reserved : UInt32,
-    file_offset : UInt64,
-    copy_length : UInt64
+  struct FSCTL_OFFLOAD_READ_INPUT
+    property size : UInt32
+    property flags : UInt32
+    property token_time_to_live : UInt32
+    property reserved : UInt32
+    property file_offset : UInt64
+    property copy_length : UInt64
+    def initialize(@size : UInt32, @flags : UInt32, @token_time_to_live : UInt32, @reserved : UInt32, @file_offset : UInt64, @copy_length : UInt64)
+    end
+  end
 
   @[Extern]
-  record FSCTL_OFFLOAD_READ_OUTPUT,
-    size : UInt32,
-    flags : UInt32,
-    transfer_length : UInt64,
-    token : UInt8[512]
+  struct FSCTL_OFFLOAD_READ_OUTPUT
+    property size : UInt32
+    property flags : UInt32
+    property transfer_length : UInt64
+    property token : UInt8[512]
+    def initialize(@size : UInt32, @flags : UInt32, @transfer_length : UInt64, @token : UInt8[512])
+    end
+  end
 
   @[Extern]
-  record FSCTL_OFFLOAD_WRITE_INPUT,
-    size : UInt32,
-    flags : UInt32,
-    file_offset : UInt64,
-    copy_length : UInt64,
-    transfer_offset : UInt64,
-    token : UInt8[512]
+  struct FSCTL_OFFLOAD_WRITE_INPUT
+    property size : UInt32
+    property flags : UInt32
+    property file_offset : UInt64
+    property copy_length : UInt64
+    property transfer_offset : UInt64
+    property token : UInt8[512]
+    def initialize(@size : UInt32, @flags : UInt32, @file_offset : UInt64, @copy_length : UInt64, @transfer_offset : UInt64, @token : UInt8[512])
+    end
+  end
 
   @[Extern]
-  record FSCTL_OFFLOAD_WRITE_OUTPUT,
-    size : UInt32,
-    flags : UInt32,
-    length_written : UInt64
+  struct FSCTL_OFFLOAD_WRITE_OUTPUT
+    property size : UInt32
+    property flags : UInt32
+    property length_written : UInt64
+    def initialize(@size : UInt32, @flags : UInt32, @length_written : UInt64)
+    end
+  end
 
   @[Extern]
-  record SET_PURGE_FAILURE_MODE_INPUT,
-    flags : UInt32
+  struct SET_PURGE_FAILURE_MODE_INPUT
+    property flags : UInt32
+    def initialize(@flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record REPAIR_COPIES_INPUT,
-    size : UInt32,
-    flags : UInt32,
-    file_offset : Win32cr::Foundation::LARGE_INTEGER,
-    length : UInt32,
-    source_copy : UInt32,
-    number_of_repair_copies : UInt32,
-    repair_copies : UInt32*
+  struct REPAIR_COPIES_INPUT
+    property size : UInt32
+    property flags : UInt32
+    property file_offset : Win32cr::Foundation::LARGE_INTEGER
+    property length : UInt32
+    property source_copy : UInt32
+    property number_of_repair_copies : UInt32
+    property repair_copies : UInt32*
+    def initialize(@size : UInt32, @flags : UInt32, @file_offset : Win32cr::Foundation::LARGE_INTEGER, @length : UInt32, @source_copy : UInt32, @number_of_repair_copies : UInt32, @repair_copies : UInt32*)
+    end
+  end
 
   @[Extern]
-  record REPAIR_COPIES_OUTPUT,
-    size : UInt32,
-    status : UInt32,
-    resume_file_offset : Win32cr::Foundation::LARGE_INTEGER
+  struct REPAIR_COPIES_OUTPUT
+    property size : UInt32
+    property status : UInt32
+    property resume_file_offset : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@size : UInt32, @status : UInt32, @resume_file_offset : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record FILE_REGION_INFO,
-    file_offset : Int64,
-    length : Int64,
-    usage : UInt32,
-    reserved : UInt32
+  struct FILE_REGION_INFO
+    property file_offset : Int64
+    property length : Int64
+    property usage : UInt32
+    property reserved : UInt32
+    def initialize(@file_offset : Int64, @length : Int64, @usage : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record FILE_REGION_OUTPUT,
-    flags : UInt32,
-    total_region_entry_count : UInt32,
-    region_entry_count : UInt32,
-    reserved : UInt32,
-    region : Win32cr::System::Ioctl::FILE_REGION_INFO*
+  struct FILE_REGION_OUTPUT
+    property flags : UInt32
+    property total_region_entry_count : UInt32
+    property region_entry_count : UInt32
+    property reserved : UInt32
+    property region : Win32cr::System::Ioctl::FILE_REGION_INFO*
+    def initialize(@flags : UInt32, @total_region_entry_count : UInt32, @region_entry_count : UInt32, @reserved : UInt32, @region : Win32cr::System::Ioctl::FILE_REGION_INFO*)
+    end
+  end
 
   @[Extern]
-  record FILE_REGION_INPUT,
-    file_offset : Int64,
-    length : Int64,
-    desired_usage : UInt32
+  struct FILE_REGION_INPUT
+    property file_offset : Int64
+    property length : Int64
+    property desired_usage : UInt32
+    def initialize(@file_offset : Int64, @length : Int64, @desired_usage : UInt32)
+    end
+  end
 
   @[Extern]
-  record WRITE_USN_REASON_INPUT,
-    flags : UInt32,
-    usn_reason_to_write : UInt32
+  struct WRITE_USN_REASON_INPUT
+    property flags : UInt32
+    property usn_reason_to_write : UInt32
+    def initialize(@flags : UInt32, @usn_reason_to_write : UInt32)
+    end
+  end
 
   @[Extern]
-  record FILE_STORAGE_TIER,
-    id : LibC::GUID,
-    name : UInt16[256],
-    description : UInt16[256],
-    flags : Win32cr::System::Ioctl::FILE_STORAGE_TIER_FLAGS,
-    provisioned_capacity : UInt64,
-    media_type : Win32cr::System::Ioctl::FILE_STORAGE_TIER_MEDIA_TYPE,
-    class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS
+  struct FILE_STORAGE_TIER
+    property id : LibC::GUID
+    property name : UInt16[256]
+    property description : UInt16[256]
+    property flags : Win32cr::System::Ioctl::FILE_STORAGE_TIER_FLAGS
+    property provisioned_capacity : UInt64
+    property media_type : Win32cr::System::Ioctl::FILE_STORAGE_TIER_MEDIA_TYPE
+    property class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS
+    def initialize(@id : LibC::GUID, @name : UInt16[256], @description : UInt16[256], @flags : Win32cr::System::Ioctl::FILE_STORAGE_TIER_FLAGS, @provisioned_capacity : UInt64, @media_type : Win32cr::System::Ioctl::FILE_STORAGE_TIER_MEDIA_TYPE, @class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS)
+    end
+  end
 
   @[Extern]
-  record FSCTL_QUERY_STORAGE_CLASSES_OUTPUT,
-    version : UInt32,
-    size : UInt32,
-    flags : Win32cr::System::Ioctl::FILE_STORAGE_TIER_FLAGS,
-    total_number_of_tiers : UInt32,
-    number_of_tiers_returned : UInt32,
-    tiers : Win32cr::System::Ioctl::FILE_STORAGE_TIER*
+  struct FSCTL_QUERY_STORAGE_CLASSES_OUTPUT
+    property version : UInt32
+    property size : UInt32
+    property flags : Win32cr::System::Ioctl::FILE_STORAGE_TIER_FLAGS
+    property total_number_of_tiers : UInt32
+    property number_of_tiers_returned : UInt32
+    property tiers : Win32cr::System::Ioctl::FILE_STORAGE_TIER*
+    def initialize(@version : UInt32, @size : UInt32, @flags : Win32cr::System::Ioctl::FILE_STORAGE_TIER_FLAGS, @total_number_of_tiers : UInt32, @number_of_tiers_returned : UInt32, @tiers : Win32cr::System::Ioctl::FILE_STORAGE_TIER*)
+    end
+  end
 
   @[Extern]
-  record STREAM_INFORMATION_ENTRY,
-    version : UInt32,
-    flags : UInt32,
-    stream_information : StreamInformation_ do
+  struct STREAM_INFORMATION_ENTRY
+    property version : UInt32
+    property flags : UInt32
+    property stream_information : StreamInformation_
 
     # Nested Type StreamInformation_
     @[Extern(union: true)]
-    record StreamInformation_,
-      desired_storage_class : DesiredStorageClass_,
-      data_stream : DataStream_,
-      reparse : Reparse_,
-      ea : Ea_ do
+    struct StreamInformation_
+    property desired_storage_class : DesiredStorageClass_
+    property data_stream : DataStream_
+    property reparse : Reparse_
+    property ea : Ea_
 
       # Nested Type Reparse_
       @[Extern]
-      record Reparse_,
-        length : UInt16,
-        flags : UInt16,
-        reparse_data_size : UInt32,
-        reparse_data_offset : UInt32
+      struct Reparse_
+    property length : UInt16
+    property flags : UInt16
+    property reparse_data_size : UInt32
+    property reparse_data_offset : UInt32
+    def initialize(@length : UInt16, @flags : UInt16, @reparse_data_size : UInt32, @reparse_data_offset : UInt32)
+    end
+      end
 
 
       # Nested Type DesiredStorageClass_
       @[Extern]
-      record DesiredStorageClass_,
-        class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS,
-        flags : UInt32
+      struct DesiredStorageClass_
+    property class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS
+    property flags : UInt32
+    def initialize(@class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS, @flags : UInt32)
+    end
+      end
 
 
       # Nested Type Ea_
       @[Extern]
-      record Ea_,
-        length : UInt16,
-        flags : UInt16,
-        ea_size : UInt32,
-        ea_information_offset : UInt32
+      struct Ea_
+    property length : UInt16
+    property flags : UInt16
+    property ea_size : UInt32
+    property ea_information_offset : UInt32
+    def initialize(@length : UInt16, @flags : UInt16, @ea_size : UInt32, @ea_information_offset : UInt32)
+    end
+      end
 
 
       # Nested Type DataStream_
       @[Extern]
-      record DataStream_,
-        length : UInt16,
-        flags : UInt16,
-        reserved : UInt32,
-        vdl : UInt64
+      struct DataStream_
+    property length : UInt16
+    property flags : UInt16
+    property reserved : UInt32
+    property vdl : UInt64
+    def initialize(@length : UInt16, @flags : UInt16, @reserved : UInt32, @vdl : UInt64)
+    end
+      end
 
+    def initialize(@desired_storage_class : DesiredStorageClass_, @data_stream : DataStream_, @reparse : Reparse_, @ea : Ea_)
+    end
     end
 
+    def initialize(@version : UInt32, @flags : UInt32, @stream_information : StreamInformation_)
+    end
   end
 
   @[Extern]
-  record FSCTL_QUERY_REGION_INFO_INPUT,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    number_of_tier_ids : UInt32,
-    tier_ids : LibC::GUID*
+  struct FSCTL_QUERY_REGION_INFO_INPUT
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property number_of_tier_ids : UInt32
+    property tier_ids : LibC::GUID*
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @number_of_tier_ids : UInt32, @tier_ids : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record FILE_STORAGE_TIER_REGION,
-    tier_id : LibC::GUID,
-    offset : UInt64,
-    length : UInt64
+  struct FILE_STORAGE_TIER_REGION
+    property tier_id : LibC::GUID
+    property offset : UInt64
+    property length : UInt64
+    def initialize(@tier_id : LibC::GUID, @offset : UInt64, @length : UInt64)
+    end
+  end
 
   @[Extern]
-  record FSCTL_QUERY_REGION_INFO_OUTPUT,
-    version : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    reserved : UInt32,
-    alignment : UInt64,
-    total_number_of_regions : UInt32,
-    number_of_regions_returned : UInt32,
-    regions : Win32cr::System::Ioctl::FILE_STORAGE_TIER_REGION*
+  struct FSCTL_QUERY_REGION_INFO_OUTPUT
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property reserved : UInt32
+    property alignment : UInt64
+    property total_number_of_regions : UInt32
+    property number_of_regions_returned : UInt32
+    property regions : Win32cr::System::Ioctl::FILE_STORAGE_TIER_REGION*
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @reserved : UInt32, @alignment : UInt64, @total_number_of_regions : UInt32, @number_of_regions_returned : UInt32, @regions : Win32cr::System::Ioctl::FILE_STORAGE_TIER_REGION*)
+    end
+  end
 
   @[Extern]
-  record FILE_DESIRED_STORAGE_CLASS_INFORMATION,
-    class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS,
-    flags : UInt32
+  struct FILE_DESIRED_STORAGE_CLASS_INFORMATION
+    property class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS
+    property flags : UInt32
+    def initialize(@class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DUPLICATE_EXTENTS_DATA,
-    file_handle : Win32cr::Foundation::HANDLE,
-    source_file_offset : Win32cr::Foundation::LARGE_INTEGER,
-    target_file_offset : Win32cr::Foundation::LARGE_INTEGER,
-    byte_count : Win32cr::Foundation::LARGE_INTEGER
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record DUPLICATE_EXTENTS_DATA32,
-    file_handle : UInt32,
-    source_file_offset : Win32cr::Foundation::LARGE_INTEGER,
-    target_file_offset : Win32cr::Foundation::LARGE_INTEGER,
-    byte_count : Win32cr::Foundation::LARGE_INTEGER
-  {% end %}
-
-  @[Extern]
-  record DUPLICATE_EXTENTS_DATA_EX,
-    size : LibC::UIntPtrT,
-    file_handle : Win32cr::Foundation::HANDLE,
-    source_file_offset : Win32cr::Foundation::LARGE_INTEGER,
-    target_file_offset : Win32cr::Foundation::LARGE_INTEGER,
-    byte_count : Win32cr::Foundation::LARGE_INTEGER,
-    flags : UInt32
+  struct DUPLICATE_EXTENTS_DATA
+    property file_handle : Win32cr::Foundation::HANDLE
+    property source_file_offset : Win32cr::Foundation::LARGE_INTEGER
+    property target_file_offset : Win32cr::Foundation::LARGE_INTEGER
+    property byte_count : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@file_handle : Win32cr::Foundation::HANDLE, @source_file_offset : Win32cr::Foundation::LARGE_INTEGER, @target_file_offset : Win32cr::Foundation::LARGE_INTEGER, @byte_count : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record DUPLICATE_EXTENTS_DATA_EX32,
-    size : UInt32,
-    file_handle : UInt32,
-    source_file_offset : Win32cr::Foundation::LARGE_INTEGER,
-    target_file_offset : Win32cr::Foundation::LARGE_INTEGER,
-    byte_count : Win32cr::Foundation::LARGE_INTEGER,
-    flags : UInt32
+  struct DUPLICATE_EXTENTS_DATA32
+    property file_handle : UInt32
+    property source_file_offset : Win32cr::Foundation::LARGE_INTEGER
+    property target_file_offset : Win32cr::Foundation::LARGE_INTEGER
+    property byte_count : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@file_handle : UInt32, @source_file_offset : Win32cr::Foundation::LARGE_INTEGER, @target_file_offset : Win32cr::Foundation::LARGE_INTEGER, @byte_count : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record ASYNC_DUPLICATE_EXTENTS_STATUS,
-    version : UInt32,
-    state : Win32cr::System::Ioctl::DUPLICATE_EXTENTS_STATE,
-    source_file_offset : UInt64,
-    target_file_offset : UInt64,
-    byte_count : UInt64,
-    bytes_duplicated : UInt64
+  struct DUPLICATE_EXTENTS_DATA_EX
+    property size : LibC::UIntPtrT
+    property file_handle : Win32cr::Foundation::HANDLE
+    property source_file_offset : Win32cr::Foundation::LARGE_INTEGER
+    property target_file_offset : Win32cr::Foundation::LARGE_INTEGER
+    property byte_count : Win32cr::Foundation::LARGE_INTEGER
+    property flags : UInt32
+    def initialize(@size : LibC::UIntPtrT, @file_handle : Win32cr::Foundation::HANDLE, @source_file_offset : Win32cr::Foundation::LARGE_INTEGER, @target_file_offset : Win32cr::Foundation::LARGE_INTEGER, @byte_count : Win32cr::Foundation::LARGE_INTEGER, @flags : UInt32)
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct DUPLICATE_EXTENTS_DATA_EX32
+    property size : UInt32
+    property file_handle : UInt32
+    property source_file_offset : Win32cr::Foundation::LARGE_INTEGER
+    property target_file_offset : Win32cr::Foundation::LARGE_INTEGER
+    property byte_count : Win32cr::Foundation::LARGE_INTEGER
+    property flags : UInt32
+    def initialize(@size : UInt32, @file_handle : UInt32, @source_file_offset : Win32cr::Foundation::LARGE_INTEGER, @target_file_offset : Win32cr::Foundation::LARGE_INTEGER, @byte_count : Win32cr::Foundation::LARGE_INTEGER, @flags : UInt32)
+    end
+  end
+  {% end %}
 
   @[Extern]
-  record REFS_SMR_VOLUME_INFO_OUTPUT,
-    version : UInt32,
-    flags : UInt32,
-    size_of_randomly_writable_tier : Win32cr::Foundation::LARGE_INTEGER,
-    free_space_in_randomly_writable_tier : Win32cr::Foundation::LARGE_INTEGER,
-    sizeof_smr_tier : Win32cr::Foundation::LARGE_INTEGER,
-    free_space_in_smr_tier : Win32cr::Foundation::LARGE_INTEGER,
-    usable_free_space_in_smr_tier : Win32cr::Foundation::LARGE_INTEGER,
-    volume_gc_state : Win32cr::System::Ioctl::REFS_SMR_VOLUME_GC_STATE,
-    volume_gc_last_status : UInt32,
-    current_gc_band_fill_percentage : UInt32,
-    unused : UInt64[6]
+  struct ASYNC_DUPLICATE_EXTENTS_STATUS
+    property version : UInt32
+    property state : Win32cr::System::Ioctl::DUPLICATE_EXTENTS_STATE
+    property source_file_offset : UInt64
+    property target_file_offset : UInt64
+    property byte_count : UInt64
+    property bytes_duplicated : UInt64
+    def initialize(@version : UInt32, @state : Win32cr::System::Ioctl::DUPLICATE_EXTENTS_STATE, @source_file_offset : UInt64, @target_file_offset : UInt64, @byte_count : UInt64, @bytes_duplicated : UInt64)
+    end
+  end
 
   @[Extern]
-  record REFS_SMR_VOLUME_GC_PARAMETERS,
-    version : UInt32,
-    flags : UInt32,
-    action : Win32cr::System::Ioctl::REFS_SMR_VOLUME_GC_ACTION,
-    method : Win32cr::System::Ioctl::REFS_SMR_VOLUME_GC_METHOD,
-    io_granularity : UInt32,
-    compression_format : UInt32,
-    unused : UInt64[8]
+  struct REFS_SMR_VOLUME_INFO_OUTPUT
+    property version : UInt32
+    property flags : UInt32
+    property size_of_randomly_writable_tier : Win32cr::Foundation::LARGE_INTEGER
+    property free_space_in_randomly_writable_tier : Win32cr::Foundation::LARGE_INTEGER
+    property sizeof_smr_tier : Win32cr::Foundation::LARGE_INTEGER
+    property free_space_in_smr_tier : Win32cr::Foundation::LARGE_INTEGER
+    property usable_free_space_in_smr_tier : Win32cr::Foundation::LARGE_INTEGER
+    property volume_gc_state : Win32cr::System::Ioctl::REFS_SMR_VOLUME_GC_STATE
+    property volume_gc_last_status : UInt32
+    property current_gc_band_fill_percentage : UInt32
+    property unused : UInt64[6]
+    def initialize(@version : UInt32, @flags : UInt32, @size_of_randomly_writable_tier : Win32cr::Foundation::LARGE_INTEGER, @free_space_in_randomly_writable_tier : Win32cr::Foundation::LARGE_INTEGER, @sizeof_smr_tier : Win32cr::Foundation::LARGE_INTEGER, @free_space_in_smr_tier : Win32cr::Foundation::LARGE_INTEGER, @usable_free_space_in_smr_tier : Win32cr::Foundation::LARGE_INTEGER, @volume_gc_state : Win32cr::System::Ioctl::REFS_SMR_VOLUME_GC_STATE, @volume_gc_last_status : UInt32, @current_gc_band_fill_percentage : UInt32, @unused : UInt64[6])
+    end
+  end
 
   @[Extern]
-  record STREAMS_QUERY_PARAMETERS_OUTPUT_BUFFER,
-    optimal_write_size : UInt32,
-    stream_granularity_size : UInt32,
-    stream_id_min : UInt32,
-    stream_id_max : UInt32
+  struct REFS_SMR_VOLUME_GC_PARAMETERS
+    property version : UInt32
+    property flags : UInt32
+    property action : Win32cr::System::Ioctl::REFS_SMR_VOLUME_GC_ACTION
+    property method : Win32cr::System::Ioctl::REFS_SMR_VOLUME_GC_METHOD
+    property io_granularity : UInt32
+    property compression_format : UInt32
+    property unused : UInt64[8]
+    def initialize(@version : UInt32, @flags : UInt32, @action : Win32cr::System::Ioctl::REFS_SMR_VOLUME_GC_ACTION, @method : Win32cr::System::Ioctl::REFS_SMR_VOLUME_GC_METHOD, @io_granularity : UInt32, @compression_format : UInt32, @unused : UInt64[8])
+    end
+  end
 
   @[Extern]
-  record STREAMS_ASSOCIATE_ID_INPUT_BUFFER,
-    flags : UInt32,
-    stream_id : UInt32
+  struct STREAMS_QUERY_PARAMETERS_OUTPUT_BUFFER
+    property optimal_write_size : UInt32
+    property stream_granularity_size : UInt32
+    property stream_id_min : UInt32
+    property stream_id_max : UInt32
+    def initialize(@optimal_write_size : UInt32, @stream_granularity_size : UInt32, @stream_id_min : UInt32, @stream_id_max : UInt32)
+    end
+  end
 
   @[Extern]
-  record STREAMS_QUERY_ID_OUTPUT_BUFFER,
-    stream_id : UInt32
+  struct STREAMS_ASSOCIATE_ID_INPUT_BUFFER
+    property flags : UInt32
+    property stream_id : UInt32
+    def initialize(@flags : UInt32, @stream_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record QUERY_BAD_RANGES_INPUT_RANGE,
-    start_offset : UInt64,
-    length_in_bytes : UInt64
+  struct STREAMS_QUERY_ID_OUTPUT_BUFFER
+    property stream_id : UInt32
+    def initialize(@stream_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record QUERY_BAD_RANGES_INPUT,
-    flags : UInt32,
-    num_ranges : UInt32,
-    ranges : Win32cr::System::Ioctl::QUERY_BAD_RANGES_INPUT_RANGE*
+  struct QUERY_BAD_RANGES_INPUT_RANGE
+    property start_offset : UInt64
+    property length_in_bytes : UInt64
+    def initialize(@start_offset : UInt64, @length_in_bytes : UInt64)
+    end
+  end
 
   @[Extern]
-  record QUERY_BAD_RANGES_OUTPUT_RANGE,
-    flags : UInt32,
-    reserved : UInt32,
-    start_offset : UInt64,
-    length_in_bytes : UInt64
+  struct QUERY_BAD_RANGES_INPUT
+    property flags : UInt32
+    property num_ranges : UInt32
+    property ranges : Win32cr::System::Ioctl::QUERY_BAD_RANGES_INPUT_RANGE*
+    def initialize(@flags : UInt32, @num_ranges : UInt32, @ranges : Win32cr::System::Ioctl::QUERY_BAD_RANGES_INPUT_RANGE*)
+    end
+  end
 
   @[Extern]
-  record QUERY_BAD_RANGES_OUTPUT,
-    flags : UInt32,
-    num_bad_ranges : UInt32,
-    next_offset_to_look_up : UInt64,
-    bad_ranges : Win32cr::System::Ioctl::QUERY_BAD_RANGES_OUTPUT_RANGE*
+  struct QUERY_BAD_RANGES_OUTPUT_RANGE
+    property flags : UInt32
+    property reserved : UInt32
+    property start_offset : UInt64
+    property length_in_bytes : UInt64
+    def initialize(@flags : UInt32, @reserved : UInt32, @start_offset : UInt64, @length_in_bytes : UInt64)
+    end
+  end
 
   @[Extern]
-  record SET_DAX_ALLOC_ALIGNMENT_HINT_INPUT,
-    flags : UInt32,
-    alignment_shift : UInt32,
-    file_offset_to_align : UInt64,
-    fallback_alignment_shift : UInt32
+  struct QUERY_BAD_RANGES_OUTPUT
+    property flags : UInt32
+    property num_bad_ranges : UInt32
+    property next_offset_to_look_up : UInt64
+    property bad_ranges : Win32cr::System::Ioctl::QUERY_BAD_RANGES_OUTPUT_RANGE*
+    def initialize(@flags : UInt32, @num_bad_ranges : UInt32, @next_offset_to_look_up : UInt64, @bad_ranges : Win32cr::System::Ioctl::QUERY_BAD_RANGES_OUTPUT_RANGE*)
+    end
+  end
 
   @[Extern]
-  record VIRTUAL_STORAGE_SET_BEHAVIOR_INPUT,
-    size : UInt32,
-    behavior_code : Win32cr::System::Ioctl::VIRTUAL_STORAGE_BEHAVIOR_CODE
+  struct SET_DAX_ALLOC_ALIGNMENT_HINT_INPUT
+    property flags : UInt32
+    property alignment_shift : UInt32
+    property file_offset_to_align : UInt64
+    property fallback_alignment_shift : UInt32
+    def initialize(@flags : UInt32, @alignment_shift : UInt32, @file_offset_to_align : UInt64, @fallback_alignment_shift : UInt32)
+    end
+  end
 
   @[Extern]
-  record ENCRYPTION_KEY_CTRL_INPUT,
-    header_size : UInt32,
-    structure_size : UInt32,
-    key_offset : UInt16,
-    key_size : UInt16,
-    dpl_lock : UInt32,
-    dpl_user_id : UInt64,
-    dpl_credential_id : UInt64
+  struct VIRTUAL_STORAGE_SET_BEHAVIOR_INPUT
+    property size : UInt32
+    property behavior_code : Win32cr::System::Ioctl::VIRTUAL_STORAGE_BEHAVIOR_CODE
+    def initialize(@size : UInt32, @behavior_code : Win32cr::System::Ioctl::VIRTUAL_STORAGE_BEHAVIOR_CODE)
+    end
+  end
 
   @[Extern]
-  record WOF_EXTERNAL_INFO,
-    version : UInt32,
-    provider : UInt32
+  struct ENCRYPTION_KEY_CTRL_INPUT
+    property header_size : UInt32
+    property structure_size : UInt32
+    property key_offset : UInt16
+    property key_size : UInt16
+    property dpl_lock : UInt32
+    property dpl_user_id : UInt64
+    property dpl_credential_id : UInt64
+    def initialize(@header_size : UInt32, @structure_size : UInt32, @key_offset : UInt16, @key_size : UInt16, @dpl_lock : UInt32, @dpl_user_id : UInt64, @dpl_credential_id : UInt64)
+    end
+  end
 
   @[Extern]
-  record WOF_EXTERNAL_FILE_ID,
-    file_id : Win32cr::Storage::FileSystem::FILE_ID_128
+  struct WOF_EXTERNAL_INFO
+    property version : UInt32
+    property provider : UInt32
+    def initialize(@version : UInt32, @provider : UInt32)
+    end
+  end
 
   @[Extern]
-  record WOF_VERSION_INFO,
-    wof_version : UInt32
+  struct WOF_EXTERNAL_FILE_ID
+    property file_id : Win32cr::Storage::FileSystem::FILE_ID_128
+    def initialize(@file_id : Win32cr::Storage::FileSystem::FILE_ID_128)
+    end
+  end
 
   @[Extern]
-  record WIM_PROVIDER_EXTERNAL_INFO,
-    version : UInt32,
-    flags : UInt32,
-    data_source_id : Win32cr::Foundation::LARGE_INTEGER,
-    resource_hash : UInt8[20]
+  struct WOF_VERSION_INFO
+    property wof_version : UInt32
+    def initialize(@wof_version : UInt32)
+    end
+  end
 
   @[Extern]
-  record WIM_PROVIDER_ADD_OVERLAY_INPUT,
-    wim_type : UInt32,
-    wim_index : UInt32,
-    wim_file_name_offset : UInt32,
-    wim_file_name_length : UInt32
+  struct WIM_PROVIDER_EXTERNAL_INFO
+    property version : UInt32
+    property flags : UInt32
+    property data_source_id : Win32cr::Foundation::LARGE_INTEGER
+    property resource_hash : UInt8[20]
+    def initialize(@version : UInt32, @flags : UInt32, @data_source_id : Win32cr::Foundation::LARGE_INTEGER, @resource_hash : UInt8[20])
+    end
+  end
 
   @[Extern]
-  record WIM_PROVIDER_UPDATE_OVERLAY_INPUT,
-    data_source_id : Win32cr::Foundation::LARGE_INTEGER,
-    wim_file_name_offset : UInt32,
-    wim_file_name_length : UInt32
+  struct WIM_PROVIDER_ADD_OVERLAY_INPUT
+    property wim_type : UInt32
+    property wim_index : UInt32
+    property wim_file_name_offset : UInt32
+    property wim_file_name_length : UInt32
+    def initialize(@wim_type : UInt32, @wim_index : UInt32, @wim_file_name_offset : UInt32, @wim_file_name_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record WIM_PROVIDER_REMOVE_OVERLAY_INPUT,
-    data_source_id : Win32cr::Foundation::LARGE_INTEGER
+  struct WIM_PROVIDER_UPDATE_OVERLAY_INPUT
+    property data_source_id : Win32cr::Foundation::LARGE_INTEGER
+    property wim_file_name_offset : UInt32
+    property wim_file_name_length : UInt32
+    def initialize(@data_source_id : Win32cr::Foundation::LARGE_INTEGER, @wim_file_name_offset : UInt32, @wim_file_name_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record WIM_PROVIDER_SUSPEND_OVERLAY_INPUT,
-    data_source_id : Win32cr::Foundation::LARGE_INTEGER
+  struct WIM_PROVIDER_REMOVE_OVERLAY_INPUT
+    property data_source_id : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@data_source_id : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record WIM_PROVIDER_OVERLAY_ENTRY,
-    next_entry_offset : UInt32,
-    data_source_id : Win32cr::Foundation::LARGE_INTEGER,
-    wim_guid : LibC::GUID,
-    wim_file_name_offset : UInt32,
-    wim_type : UInt32,
-    wim_index : UInt32,
-    flags : UInt32
+  struct WIM_PROVIDER_SUSPEND_OVERLAY_INPUT
+    property data_source_id : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@data_source_id : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record FILE_PROVIDER_EXTERNAL_INFO_V0,
-    version : UInt32,
-    algorithm : UInt32
+  struct WIM_PROVIDER_OVERLAY_ENTRY
+    property next_entry_offset : UInt32
+    property data_source_id : Win32cr::Foundation::LARGE_INTEGER
+    property wim_guid : LibC::GUID
+    property wim_file_name_offset : UInt32
+    property wim_type : UInt32
+    property wim_index : UInt32
+    property flags : UInt32
+    def initialize(@next_entry_offset : UInt32, @data_source_id : Win32cr::Foundation::LARGE_INTEGER, @wim_guid : LibC::GUID, @wim_file_name_offset : UInt32, @wim_type : UInt32, @wim_index : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record FILE_PROVIDER_EXTERNAL_INFO_V1,
-    version : UInt32,
-    algorithm : UInt32,
-    flags : UInt32
+  struct FILE_PROVIDER_EXTERNAL_INFO_V0
+    property version : UInt32
+    property algorithm : UInt32
+    def initialize(@version : UInt32, @algorithm : UInt32)
+    end
+  end
 
   @[Extern]
-  record CONTAINER_VOLUME_STATE,
-    flags : UInt32
+  struct FILE_PROVIDER_EXTERNAL_INFO_V1
+    property version : UInt32
+    property algorithm : UInt32
+    property flags : UInt32
+    def initialize(@version : UInt32, @algorithm : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record CONTAINER_ROOT_INFO_INPUT,
-    flags : UInt32
+  struct CONTAINER_VOLUME_STATE
+    property flags : UInt32
+    def initialize(@flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record CONTAINER_ROOT_INFO_OUTPUT,
-    container_root_id_length : UInt16,
-    container_root_id : UInt8*
+  struct CONTAINER_ROOT_INFO_INPUT
+    property flags : UInt32
+    def initialize(@flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record VIRTUALIZATION_INSTANCE_INFO_INPUT,
-    number_of_worker_threads : UInt32,
-    flags : UInt32
+  struct CONTAINER_ROOT_INFO_OUTPUT
+    property container_root_id_length : UInt16
+    property container_root_id : UInt8*
+    def initialize(@container_root_id_length : UInt16, @container_root_id : UInt8*)
+    end
+  end
 
   @[Extern]
-  record VIRTUALIZATION_INSTANCE_INFO_INPUT_EX,
-    header_size : UInt16,
-    flags : UInt32,
-    notification_info_size : UInt32,
-    notification_info_offset : UInt16,
-    provider_major_version : UInt16
+  struct VIRTUALIZATION_INSTANCE_INFO_INPUT
+    property number_of_worker_threads : UInt32
+    property flags : UInt32
+    def initialize(@number_of_worker_threads : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record VIRTUALIZATION_INSTANCE_INFO_OUTPUT,
-    virtualization_instance_id : LibC::GUID
+  struct VIRTUALIZATION_INSTANCE_INFO_INPUT_EX
+    property header_size : UInt16
+    property flags : UInt32
+    property notification_info_size : UInt32
+    property notification_info_offset : UInt16
+    property provider_major_version : UInt16
+    def initialize(@header_size : UInt16, @flags : UInt32, @notification_info_size : UInt32, @notification_info_offset : UInt16, @provider_major_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record GET_FILTER_FILE_IDENTIFIER_INPUT,
-    altitude_length : UInt16,
-    altitude : UInt16*
+  struct VIRTUALIZATION_INSTANCE_INFO_OUTPUT
+    property virtualization_instance_id : LibC::GUID
+    def initialize(@virtualization_instance_id : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record GET_FILTER_FILE_IDENTIFIER_OUTPUT,
-    filter_file_identifier_length : UInt16,
-    filter_file_identifier : UInt8*
+  struct GET_FILTER_FILE_IDENTIFIER_INPUT
+    property altitude_length : UInt16
+    property altitude : UInt16*
+    def initialize(@altitude_length : UInt16, @altitude : UInt16*)
+    end
+  end
 
   @[Extern]
-  record FS_BPIO_INPUT,
-    operation : Win32cr::System::Ioctl::FS_BPIO_OPERATIONS,
-    in_flags : Win32cr::System::Ioctl::FS_BPIO_INFLAGS,
-    reserved1 : UInt64,
-    reserved2 : UInt64
+  struct GET_FILTER_FILE_IDENTIFIER_OUTPUT
+    property filter_file_identifier_length : UInt16
+    property filter_file_identifier : UInt8*
+    def initialize(@filter_file_identifier_length : UInt16, @filter_file_identifier : UInt8*)
+    end
+  end
 
   @[Extern]
-  record FS_BPIO_RESULTS,
-    op_status : UInt32,
-    failing_driver_name_len : UInt16,
-    failing_driver_name : UInt16[32],
-    failure_reason_len : UInt16,
-    failure_reason : UInt16[128]
+  struct FS_BPIO_INPUT
+    property operation : Win32cr::System::Ioctl::FS_BPIO_OPERATIONS
+    property in_flags : Win32cr::System::Ioctl::FS_BPIO_INFLAGS
+    property reserved1 : UInt64
+    property reserved2 : UInt64
+    def initialize(@operation : Win32cr::System::Ioctl::FS_BPIO_OPERATIONS, @in_flags : Win32cr::System::Ioctl::FS_BPIO_INFLAGS, @reserved1 : UInt64, @reserved2 : UInt64)
+    end
+  end
 
   @[Extern]
-  record FS_BPIO_INFO,
-    active_bypass_io_count : UInt32,
-    storage_driver_name_len : UInt16,
-    storage_driver_name : UInt16[32]
+  struct FS_BPIO_RESULTS
+    property op_status : UInt32
+    property failing_driver_name_len : UInt16
+    property failing_driver_name : UInt16[32]
+    property failure_reason_len : UInt16
+    property failure_reason : UInt16[128]
+    def initialize(@op_status : UInt32, @failing_driver_name_len : UInt16, @failing_driver_name : UInt16[32], @failure_reason_len : UInt16, @failure_reason : UInt16[128])
+    end
+  end
 
   @[Extern]
-  record FS_BPIO_OUTPUT,
-    operation : Win32cr::System::Ioctl::FS_BPIO_OPERATIONS,
-    out_flags : Win32cr::System::Ioctl::FS_BPIO_OUTFLAGS,
-    reserved1 : UInt64,
-    reserved2 : UInt64,
-    anonymous : Anonymous_e__Union_ do
+  struct FS_BPIO_INFO
+    property active_bypass_io_count : UInt32
+    property storage_driver_name_len : UInt16
+    property storage_driver_name : UInt16[32]
+    def initialize(@active_bypass_io_count : UInt32, @storage_driver_name_len : UInt16, @storage_driver_name : UInt16[32])
+    end
+  end
+
+  @[Extern]
+  struct FS_BPIO_OUTPUT
+    property operation : Win32cr::System::Ioctl::FS_BPIO_OPERATIONS
+    property out_flags : Win32cr::System::Ioctl::FS_BPIO_OUTFLAGS
+    property reserved1 : UInt64
+    property reserved2 : UInt64
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      enable : Win32cr::System::Ioctl::FS_BPIO_RESULTS,
-      query : Win32cr::System::Ioctl::FS_BPIO_RESULTS,
-      volume_stack_resume : Win32cr::System::Ioctl::FS_BPIO_RESULTS,
-      stream_resume : Win32cr::System::Ioctl::FS_BPIO_RESULTS,
-      get_info : Win32cr::System::Ioctl::FS_BPIO_INFO
+    struct Anonymous_e__Union_
+    property enable : Win32cr::System::Ioctl::FS_BPIO_RESULTS
+    property query : Win32cr::System::Ioctl::FS_BPIO_RESULTS
+    property volume_stack_resume : Win32cr::System::Ioctl::FS_BPIO_RESULTS
+    property stream_resume : Win32cr::System::Ioctl::FS_BPIO_RESULTS
+    property get_info : Win32cr::System::Ioctl::FS_BPIO_INFO
+    def initialize(@enable : Win32cr::System::Ioctl::FS_BPIO_RESULTS, @query : Win32cr::System::Ioctl::FS_BPIO_RESULTS, @volume_stack_resume : Win32cr::System::Ioctl::FS_BPIO_RESULTS, @stream_resume : Win32cr::System::Ioctl::FS_BPIO_RESULTS, @get_info : Win32cr::System::Ioctl::FS_BPIO_INFO)
+    end
+    end
 
+    def initialize(@operation : Win32cr::System::Ioctl::FS_BPIO_OPERATIONS, @out_flags : Win32cr::System::Ioctl::FS_BPIO_OUTFLAGS, @reserved1 : UInt64, @reserved2 : UInt64, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record SMB_SHARE_FLUSH_AND_PURGE_INPUT,
-    version : UInt16
+  struct SMB_SHARE_FLUSH_AND_PURGE_INPUT
+    property version : UInt16
+    def initialize(@version : UInt16)
+    end
+  end
 
   @[Extern]
-  record SMB_SHARE_FLUSH_AND_PURGE_OUTPUT,
-    cEntriesPurged : UInt32
+  struct SMB_SHARE_FLUSH_AND_PURGE_OUTPUT
+    property cEntriesPurged : UInt32
+    def initialize(@cEntriesPurged : UInt32)
+    end
+  end
 
   @[Extern]
-  record DISK_EXTENT,
-    disk_number : UInt32,
-    starting_offset : Win32cr::Foundation::LARGE_INTEGER,
-    extent_length : Win32cr::Foundation::LARGE_INTEGER
+  struct DISK_EXTENT
+    property disk_number : UInt32
+    property starting_offset : Win32cr::Foundation::LARGE_INTEGER
+    property extent_length : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@disk_number : UInt32, @starting_offset : Win32cr::Foundation::LARGE_INTEGER, @extent_length : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record VOLUME_DISK_EXTENTS,
-    number_of_disk_extents : UInt32,
-    extents : Win32cr::System::Ioctl::DISK_EXTENT*
+  struct VOLUME_DISK_EXTENTS
+    property number_of_disk_extents : UInt32
+    property extents : Win32cr::System::Ioctl::DISK_EXTENT*
+    def initialize(@number_of_disk_extents : UInt32, @extents : Win32cr::System::Ioctl::DISK_EXTENT*)
+    end
+  end
 
   @[Extern]
-  record VOLUME_GET_GPT_ATTRIBUTES_INFORMATION,
-    gpt_attributes : UInt64
+  struct VOLUME_GET_GPT_ATTRIBUTES_INFORMATION
+    property gpt_attributes : UInt64
+    def initialize(@gpt_attributes : UInt64)
+    end
+  end
 
   @[Extern]
-  record IO_IRP_EXT_TRACK_OFFSET_HEADER,
-    validation : UInt16,
-    flags : UInt16,
-    tracked_offset_callback : Win32cr::System::Ioctl::PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK
+  struct IO_IRP_EXT_TRACK_OFFSET_HEADER
+    property validation : UInt16
+    property flags : UInt16
+    property tracked_offset_callback : Win32cr::System::Ioctl::PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK
+    def initialize(@validation : UInt16, @flags : UInt16, @tracked_offset_callback : Win32cr::System::Ioctl::PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK)
+    end
+  end
 
 end

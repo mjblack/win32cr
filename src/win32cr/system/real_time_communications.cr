@@ -544,10 +544,13 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record TRANSPORT_SETTING,
-    setting_id : Win32cr::Networking::WinSock::TRANSPORT_SETTING_ID,
-    length : UInt32*,
-    value : UInt8*
+  struct TRANSPORT_SETTING
+    property setting_id : Win32cr::Networking::WinSock::TRANSPORT_SETTING_ID
+    property length : UInt32*
+    property value : UInt8*
+    def initialize(@setting_id : Win32cr::Networking::WinSock::TRANSPORT_SETTING_ID, @length : UInt32*, @value : UInt8*)
+    end
+  end
 
   @[Extern]
   record IRTCClientVtbl,
@@ -599,7 +602,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("07829e45-9a34-408e-a011-bddf13487cd1")]
   record IRTCClient, lpVtbl : IRTCClientVtbl* do
     GUID = LibC::GUID.new(0x7829e45_u32, 0x9a34_u16, 0x408e_u16, StaticArray[0xa0_u8, 0x11_u8, 0xbd_u8, 0xdf_u8, 0x13_u8, 0x48_u8, 0x7c_u8, 0xd1_u8])
     def query_interface(this : IRTCClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -803,7 +805,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("0c91d71d-1064-42da-bfa5-572beb8eea84")]
   record IRTCClient2, lpVtbl : IRTCClient2Vtbl* do
     GUID = LibC::GUID.new(0xc91d71d_u32, 0x1064_u16, 0x42da_u16, StaticArray[0xbf_u8, 0xa5_u8, 0x57_u8, 0x2b_u8, 0xeb_u8, 0x8e_u8, 0xea_u8, 0x84_u8])
     def query_interface(this : IRTCClient2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1009,7 +1010,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("11c3cbcc-0744-42d1-968a-51aa1bb274c6")]
   record IRTCClientPresence, lpVtbl : IRTCClientPresenceVtbl* do
     GUID = LibC::GUID.new(0x11c3cbcc_u32, 0x744_u16, 0x42d1_u16, StaticArray[0x96_u8, 0x8a_u8, 0x51_u8, 0xaa_u8, 0x1b_u8, 0xb2_u8, 0x74_u8, 0xc6_u8])
     def query_interface(this : IRTCClientPresence*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1119,7 +1119,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("ad1809e8-62f7-4783-909a-29c9d2cb1d34")]
   record IRTCClientPresence2, lpVtbl : IRTCClientPresence2Vtbl* do
     GUID = LibC::GUID.new(0xad1809e8_u32, 0x62f7_u16, 0x4783_u16, StaticArray[0x90_u8, 0x9a_u8, 0x29_u8, 0xc9_u8, 0xd2_u8, 0xcb_u8, 0x1d_u8, 0x34_u8])
     def query_interface(this : IRTCClientPresence2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1248,7 +1247,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("b9f5cf06-65b9-4a80-a0e6-73cae3ef3822")]
   record IRTCClientProvisioning, lpVtbl : IRTCClientProvisioningVtbl* do
     GUID = LibC::GUID.new(0xb9f5cf06_u32, 0x65b9_u16, 0x4a80_u16, StaticArray[0xa0_u8, 0xe6_u8, 0x73_u8, 0xca_u8, 0xe3_u8, 0xef_u8, 0x38_u8, 0x22_u8])
     def query_interface(this : IRTCClientProvisioning*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1300,7 +1298,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("a70909b5-f40e-4587-bb75-e6bc0845023e")]
   record IRTCClientProvisioning2, lpVtbl : IRTCClientProvisioning2Vtbl* do
     GUID = LibC::GUID.new(0xa70909b5_u32, 0xf40e_u16, 0x4587_u16, StaticArray[0xbb_u8, 0x75_u8, 0xe6_u8, 0xbc_u8, 0x8_u8, 0x45_u8, 0x2_u8, 0x3e_u8])
     def query_interface(this : IRTCClientProvisioning2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1365,7 +1362,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("d07eca9e-4062-4dd4-9e7d-722a49ba7303")]
   record IRTCProfile, lpVtbl : IRTCProfileVtbl* do
     GUID = LibC::GUID.new(0xd07eca9e_u32, 0x4062_u16, 0x4dd4_u16, StaticArray[0x9e_u8, 0x7d_u8, 0x72_u8, 0x2a_u8, 0x49_u8, 0xba_u8, 0x73_u8, 0x3_u8])
     def query_interface(this : IRTCProfile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1464,7 +1460,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("4b81f84e-bdc7-4184-9154-3cb2dd7917fb")]
   record IRTCProfile2, lpVtbl : IRTCProfile2Vtbl* do
     GUID = LibC::GUID.new(0x4b81f84e_u32, 0xbdc7_u16, 0x4184_u16, StaticArray[0x91_u8, 0x54_u8, 0x3c_u8, 0xb2_u8, 0xdd_u8, 0x79_u8, 0x17_u8, 0xfb_u8])
     def query_interface(this : IRTCProfile2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1573,7 +1568,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("387c8086-99be-42fb-9973-7c0fc0ca9fa8")]
   record IRTCSession, lpVtbl : IRTCSessionVtbl* do
     GUID = LibC::GUID.new(0x387c8086_u32, 0x99be_u16, 0x42fb_u16, StaticArray[0x99_u8, 0x73_u8, 0x7c_u8, 0xf_u8, 0xc0_u8, 0xca_u8, 0x9f_u8, 0xa8_u8])
     def query_interface(this : IRTCSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1682,7 +1676,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("17d7cdfc-b007-484c-99d2-86a8a820991d")]
   record IRTCSession2, lpVtbl : IRTCSession2Vtbl* do
     GUID = LibC::GUID.new(0x17d7cdfc_u32, 0xb007_u16, 0x484c_u16, StaticArray[0x99_u8, 0xd2_u8, 0x86_u8, 0xa8_u8, 0xa8_u8, 0x20_u8, 0x99_u8, 0x1d_u8])
     def query_interface(this : IRTCSession2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1792,7 +1785,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("e9a50d94-190b-4f82-9530-3b8ebf60758a")]
   record IRTCSessionCallControl, lpVtbl : IRTCSessionCallControlVtbl* do
     GUID = LibC::GUID.new(0xe9a50d94_u32, 0x190b_u16, 0x4f82_u16, StaticArray[0x95_u8, 0x30_u8, 0x3b_u8, 0x8e_u8, 0xbf_u8, 0x60_u8, 0x75_u8, 0x8a_u8])
     def query_interface(this : IRTCSessionCallControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1847,7 +1839,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("ae86add5-26b1-4414-af1d-b94cd938d739")]
   record IRTCParticipant, lpVtbl : IRTCParticipantVtbl* do
     GUID = LibC::GUID.new(0xae86add5_u32, 0x26b1_u16, 0x4414_u16, StaticArray[0xaf_u8, 0x1d_u8, 0xb9_u8, 0x4c_u8, 0xd9_u8, 0x38_u8, 0xd7_u8, 0x39_u8])
     def query_interface(this : IRTCParticipant*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1893,7 +1884,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("79960a6b-0cb1-4dc8-a805-7318e99902e8")]
   record IRTCRoamingEvent, lpVtbl : IRTCRoamingEventVtbl* do
     GUID = LibC::GUID.new(0x79960a6b_u32, 0xcb1_u16, 0x4dc8_u16, StaticArray[0xa8_u8, 0x5_u8, 0x73_u8, 0x18_u8, 0xe9_u8, 0x99_u8, 0x2_u8, 0xe8_u8])
     def query_interface(this : IRTCRoamingEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1947,7 +1937,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("d6d5ab3b-770e-43e8-800a-79b062395fca")]
   record IRTCProfileEvent, lpVtbl : IRTCProfileEventVtbl* do
     GUID = LibC::GUID.new(0xd6d5ab3b_u32, 0x770e_u16, 0x43e8_u16, StaticArray[0x80_u8, 0xa_u8, 0x79_u8, 0xb0_u8, 0x62_u8, 0x39_u8, 0x5f_u8, 0xca_u8])
     def query_interface(this : IRTCProfileEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1999,7 +1988,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("62e56edc-03fa-4121-94fb-23493fd0ae64")]
   record IRTCProfileEvent2, lpVtbl : IRTCProfileEvent2Vtbl* do
     GUID = LibC::GUID.new(0x62e56edc_u32, 0x3fa_u16, 0x4121_u16, StaticArray[0x94_u8, 0xfb_u8, 0x23_u8, 0x49_u8, 0x3f_u8, 0xd0_u8, 0xae_u8, 0x64_u8])
     def query_interface(this : IRTCProfileEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2052,7 +2040,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("2b493b7a-3cba-4170-9c8b-76a9dacdd644")]
   record IRTCClientEvent, lpVtbl : IRTCClientEventVtbl* do
     GUID = LibC::GUID.new(0x2b493b7a_u32, 0x3cba_u16, 0x4170_u16, StaticArray[0x9c_u8, 0x8b_u8, 0x76_u8, 0xa9_u8, 0xda_u8, 0xcd_u8, 0xd6_u8, 0x44_u8])
     def query_interface(this : IRTCClientEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2101,7 +2088,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("62d0991b-50ab-4f02-b948-ca94f26f8f95")]
   record IRTCRegistrationStateChangeEvent, lpVtbl : IRTCRegistrationStateChangeEventVtbl* do
     GUID = LibC::GUID.new(0x62d0991b_u32, 0x50ab_u16, 0x4f02_u16, StaticArray[0xb9_u8, 0x48_u8, 0xca_u8, 0x94_u8, 0xf2_u8, 0x6f_u8, 0x8f_u8, 0x95_u8])
     def query_interface(this : IRTCRegistrationStateChangeEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2156,7 +2142,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("b5bad703-5952-48b3-9321-7f4500521506")]
   record IRTCSessionStateChangeEvent, lpVtbl : IRTCSessionStateChangeEventVtbl* do
     GUID = LibC::GUID.new(0xb5bad703_u32, 0x5952_u16, 0x48b3_u16, StaticArray[0x93_u8, 0x21_u8, 0x7f_u8, 0x45_u8, 0x0_u8, 0x52_u8, 0x15_u8, 0x6_u8])
     def query_interface(this : IRTCSessionStateChangeEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2215,7 +2200,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("4f933171-6f95-4880-80d9-2ec8d495d261")]
   record IRTCSessionStateChangeEvent2, lpVtbl : IRTCSessionStateChangeEvent2Vtbl* do
     GUID = LibC::GUID.new(0x4f933171_u32, 0x6f95_u16, 0x4880_u16, StaticArray[0x80_u8, 0xd9_u8, 0x2e_u8, 0xc8_u8, 0xd4_u8, 0x95_u8, 0xd2_u8, 0x61_u8])
     def query_interface(this : IRTCSessionStateChangeEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2282,7 +2266,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("a6bff4c0-f7c8-4d3c-9a41-3550f78a95b0")]
   record IRTCSessionOperationCompleteEvent, lpVtbl : IRTCSessionOperationCompleteEventVtbl* do
     GUID = LibC::GUID.new(0xa6bff4c0_u32, 0xf7c8_u16, 0x4d3c_u16, StaticArray[0x9a_u8, 0x41_u8, 0x35_u8, 0x50_u8, 0xf7_u8, 0x8a_u8, 0x95_u8, 0xb0_u8])
     def query_interface(this : IRTCSessionOperationCompleteEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2339,7 +2322,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("f6fc2a9b-d5bc-4241-b436-1b8460c13832")]
   record IRTCSessionOperationCompleteEvent2, lpVtbl : IRTCSessionOperationCompleteEvent2Vtbl* do
     GUID = LibC::GUID.new(0xf6fc2a9b_u32, 0xd5bc_u16, 0x4241_u16, StaticArray[0xb4_u8, 0x36_u8, 0x1b_u8, 0x84_u8, 0x60_u8, 0xc1_u8, 0x38_u8, 0x32_u8])
     def query_interface(this : IRTCSessionOperationCompleteEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2399,7 +2381,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("09bcb597-f0fa-48f9-b420-468cea7fde04")]
   record IRTCParticipantStateChangeEvent, lpVtbl : IRTCParticipantStateChangeEventVtbl* do
     GUID = LibC::GUID.new(0x9bcb597_u32, 0xf0fa_u16, 0x48f9_u16, StaticArray[0xb4_u8, 0x20_u8, 0x46_u8, 0x8c_u8, 0xea_u8, 0x7f_u8, 0xde_u8, 0x4_u8])
     def query_interface(this : IRTCParticipantStateChangeEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2450,7 +2431,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("099944fb-bcda-453e-8c41-e13da2adf7f3")]
   record IRTCMediaEvent, lpVtbl : IRTCMediaEventVtbl* do
     GUID = LibC::GUID.new(0x99944fb_u32, 0xbcda_u16, 0x453e_u16, StaticArray[0x8c_u8, 0x41_u8, 0xe1_u8, 0x3d_u8, 0xa2_u8, 0xad_u8, 0xf7_u8, 0xf3_u8])
     def query_interface(this : IRTCMediaEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2502,7 +2482,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("4c23bf51-390c-4992-a41d-41eec05b2a4b")]
   record IRTCIntensityEvent, lpVtbl : IRTCIntensityEventVtbl* do
     GUID = LibC::GUID.new(0x4c23bf51_u32, 0x390c_u16, 0x4992_u16, StaticArray[0xa4_u8, 0x1d_u8, 0x41_u8, 0xee_u8, 0xc0_u8, 0x5b_u8, 0x2a_u8, 0x4b_u8])
     def query_interface(this : IRTCIntensityEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2559,7 +2538,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("d3609541-1b29-4de5-a4ad-5aebaf319512")]
   record IRTCMessagingEvent, lpVtbl : IRTCMessagingEventVtbl* do
     GUID = LibC::GUID.new(0xd3609541_u32, 0x1b29_u16, 0x4de5_u16, StaticArray[0xa4_u8, 0xad_u8, 0x5a_u8, 0xeb_u8, 0xaf_u8, 0x31_u8, 0x95_u8, 0x12_u8])
     def query_interface(this : IRTCMessagingEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2617,7 +2595,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("f36d755d-17e6-404e-954f-0fc07574c78d")]
   record IRTCBuddyEvent, lpVtbl : IRTCBuddyEventVtbl* do
     GUID = LibC::GUID.new(0xf36d755d_u32, 0x17e6_u16, 0x404e_u16, StaticArray[0x95_u8, 0x4f_u8, 0xf_u8, 0xc0_u8, 0x75_u8, 0x74_u8, 0xc7_u8, 0x8d_u8])
     def query_interface(this : IRTCBuddyEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2663,7 +2640,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("484a7f1e-73f0-4990-bfc2-60bc3978a720")]
   record IRTCBuddyEvent2, lpVtbl : IRTCBuddyEvent2Vtbl* do
     GUID = LibC::GUID.new(0x484a7f1e_u32, 0x73f0_u16, 0x4990_u16, StaticArray[0xbf_u8, 0xc2_u8, 0x60_u8, 0xbc_u8, 0x39_u8, 0x78_u8, 0xa7_u8, 0x20_u8])
     def query_interface(this : IRTCBuddyEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2715,7 +2691,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("f30d7261-587a-424f-822c-312788f43548")]
   record IRTCWatcherEvent, lpVtbl : IRTCWatcherEventVtbl* do
     GUID = LibC::GUID.new(0xf30d7261_u32, 0x587a_u16, 0x424f_u16, StaticArray[0x82_u8, 0x2c_u8, 0x31_u8, 0x27_u8, 0x88_u8, 0xf4_u8, 0x35_u8, 0x48_u8])
     def query_interface(this : IRTCWatcherEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2760,7 +2735,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("e52891e8-188c-49af-b005-98ed13f83f9c")]
   record IRTCWatcherEvent2, lpVtbl : IRTCWatcherEvent2Vtbl* do
     GUID = LibC::GUID.new(0xe52891e8_u32, 0x188c_u16, 0x49af_u16, StaticArray[0xb0_u8, 0x5_u8, 0x98_u8, 0xed_u8, 0x13_u8, 0xf8_u8, 0x3f_u8, 0x9c_u8])
     def query_interface(this : IRTCWatcherEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2812,7 +2786,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("3a79e1d1-b736-4414-96f8-bbc7f08863e4")]
   record IRTCBuddyGroupEvent, lpVtbl : IRTCBuddyGroupEventVtbl* do
     GUID = LibC::GUID.new(0x3a79e1d1_u32, 0xb736_u16, 0x4414_u16, StaticArray[0x96_u8, 0xf8_u8, 0xbb_u8, 0xc7_u8, 0xf0_u8, 0x88_u8, 0x63_u8, 0xe4_u8])
     def query_interface(this : IRTCBuddyGroupEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2867,7 +2840,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("4e1d68ae-1912-4f49-b2c3-594fadfd425f")]
   record IRTCInfoEvent, lpVtbl : IRTCInfoEventVtbl* do
     GUID = LibC::GUID.new(0x4e1d68ae_u32, 0x1912_u16, 0x4f49_u16, StaticArray[0xb2_u8, 0xc3_u8, 0x59_u8, 0x4f_u8, 0xad_u8, 0xfd_u8, 0x42_u8, 0x5f_u8])
     def query_interface(this : IRTCInfoEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2925,7 +2897,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("52572d15-148c-4d97-a36c-2da55c289d63")]
   record IRTCMediaRequestEvent, lpVtbl : IRTCMediaRequestEventVtbl* do
     GUID = LibC::GUID.new(0x52572d15_u32, 0x148c_u16, 0x4d97_u16, StaticArray[0xa3_u8, 0x6c_u8, 0x2d_u8, 0xa5_u8, 0x5c_u8, 0x28_u8, 0x9d_u8, 0x63_u8])
     def query_interface(this : IRTCMediaRequestEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2990,7 +2961,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("11558d84-204c-43e7-99b0-2034e9417f7d")]
   record IRTCReInviteEvent, lpVtbl : IRTCReInviteEventVtbl* do
     GUID = LibC::GUID.new(0x11558d84_u32, 0x204c_u16, 0x43e7_u16, StaticArray[0x99_u8, 0xb0_u8, 0x20_u8, 0x34_u8, 0xe9_u8, 0x41_u8, 0x7f_u8, 0x7d_u8])
     def query_interface(this : IRTCReInviteEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3048,7 +3018,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("f777f570-a820-49d5-86bd-e099493f1518")]
   record IRTCPresencePropertyEvent, lpVtbl : IRTCPresencePropertyEventVtbl* do
     GUID = LibC::GUID.new(0xf777f570_u32, 0xa820_u16, 0x49d5_u16, StaticArray[0x86_u8, 0xbd_u8, 0xe0_u8, 0x99_u8, 0x49_u8, 0x3f_u8, 0x15_u8, 0x18_u8])
     def query_interface(this : IRTCPresencePropertyEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3102,7 +3071,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("38f0e78c-8b87-4c04-a82d-aedd83c909bb")]
   record IRTCPresenceDataEvent, lpVtbl : IRTCPresenceDataEventVtbl* do
     GUID = LibC::GUID.new(0x38f0e78c_u32, 0x8b87_u16, 0x4c04_u16, StaticArray[0xa8_u8, 0x2d_u8, 0xae_u8, 0xdd_u8, 0x83_u8, 0xc9_u8, 0x9_u8, 0xbb_u8])
     def query_interface(this : IRTCPresenceDataEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3153,7 +3121,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("78673f32-4a0f-462c-89aa-ee7706707678")]
   record IRTCPresenceStatusEvent, lpVtbl : IRTCPresenceStatusEventVtbl* do
     GUID = LibC::GUID.new(0x78673f32_u32, 0x4a0f_u16, 0x462c_u16, StaticArray[0x89_u8, 0xaa_u8, 0xee_u8, 0x77_u8, 0x6_u8, 0x70_u8, 0x76_u8, 0x78_u8])
     def query_interface(this : IRTCPresenceStatusEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3204,7 +3171,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("ec7c8096-b918-4044-94f1-e4fba0361d5c")]
   record IRTCCollection, lpVtbl : IRTCCollectionVtbl* do
     GUID = LibC::GUID.new(0xec7c8096_u32, 0xb918_u16, 0x4044_u16, StaticArray[0x94_u8, 0xf1_u8, 0xe4_u8, 0xfb_u8, 0xa0_u8, 0x36_u8, 0x1d_u8, 0x5c_u8])
     def query_interface(this : IRTCCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3252,7 +3218,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("fcd56f29-4a4f-41b2-ba5c-f5bccc060bf6")]
   record IRTCEnumParticipants, lpVtbl : IRTCEnumParticipantsVtbl* do
     GUID = LibC::GUID.new(0xfcd56f29_u32, 0x4a4f_u16, 0x41b2_u16, StaticArray[0xba_u8, 0x5c_u8, 0xf5_u8, 0xbc_u8, 0xcc_u8, 0x6_u8, 0xb_u8, 0xf6_u8])
     def query_interface(this : IRTCEnumParticipants*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3291,7 +3256,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("29b7c41c-ed82-4bca-84ad-39d5101b58e3")]
   record IRTCEnumProfiles, lpVtbl : IRTCEnumProfilesVtbl* do
     GUID = LibC::GUID.new(0x29b7c41c_u32, 0xed82_u16, 0x4bca_u16, StaticArray[0x84_u8, 0xad_u8, 0x39_u8, 0xd5_u8, 0x10_u8, 0x1b_u8, 0x58_u8, 0xe3_u8])
     def query_interface(this : IRTCEnumProfiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3330,7 +3294,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("f7296917-5569-4b3b-b3af-98d1144b2b87")]
   record IRTCEnumBuddies, lpVtbl : IRTCEnumBuddiesVtbl* do
     GUID = LibC::GUID.new(0xf7296917_u32, 0x5569_u16, 0x4b3b_u16, StaticArray[0xb3_u8, 0xaf_u8, 0x98_u8, 0xd1_u8, 0x14_u8, 0x4b_u8, 0x2b_u8, 0x87_u8])
     def query_interface(this : IRTCEnumBuddies*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3369,7 +3332,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("a87d55d7-db74-4ed1-9ca4-77a0e41b413e")]
   record IRTCEnumWatchers, lpVtbl : IRTCEnumWatchersVtbl* do
     GUID = LibC::GUID.new(0xa87d55d7_u32, 0xdb74_u16, 0x4ed1_u16, StaticArray[0x9c_u8, 0xa4_u8, 0x77_u8, 0xa0_u8, 0xe4_u8, 0x1b_u8, 0x41_u8, 0x3e_u8])
     def query_interface(this : IRTCEnumWatchers*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3408,7 +3370,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("742378d6-a141-4415-8f27-35d99076cf5d")]
   record IRTCEnumGroups, lpVtbl : IRTCEnumGroupsVtbl* do
     GUID = LibC::GUID.new(0x742378d6_u32, 0xa141_u16, 0x4415_u16, StaticArray[0x8f_u8, 0x27_u8, 0x35_u8, 0xd9_u8, 0x90_u8, 0x76_u8, 0xcf_u8, 0x5d_u8])
     def query_interface(this : IRTCEnumGroups*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3451,7 +3412,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("8b22f92c-cd90-42db-a733-212205c3e3df")]
   record IRTCPresenceContact, lpVtbl : IRTCPresenceContactVtbl* do
     GUID = LibC::GUID.new(0x8b22f92c_u32, 0xcd90_u16, 0x42db_u16, StaticArray[0xa7_u8, 0x33_u8, 0x21_u8, 0x22_u8, 0x5_u8, 0xc3_u8, 0xe3_u8, 0xdf_u8])
     def query_interface(this : IRTCPresenceContact*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3508,7 +3468,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("fcb136c8-7b90-4e0c-befe-56edf0ba6f1c")]
   record IRTCBuddy, lpVtbl : IRTCBuddyVtbl* do
     GUID = LibC::GUID.new(0xfcb136c8_u32, 0x7b90_u16, 0x4e0c_u16, StaticArray[0xbe_u8, 0xfe_u8, 0x56_u8, 0xed_u8, 0xf0_u8, 0xba_u8, 0x6f_u8, 0x1c_u8])
     def query_interface(this : IRTCBuddy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3579,7 +3538,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("102f9588-23e7-40e3-954d-cd7a1d5c0361")]
   record IRTCBuddy2, lpVtbl : IRTCBuddy2Vtbl* do
     GUID = LibC::GUID.new(0x102f9588_u32, 0x23e7_u16, 0x40e3_u16, StaticArray[0x95_u8, 0x4d_u8, 0xcd_u8, 0x7a_u8, 0x1d_u8, 0x5c_u8, 0x3_u8, 0x61_u8])
     def query_interface(this : IRTCBuddy2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3666,7 +3624,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("c7cedad8-346b-4d1b-ac02-a2088df9be4f")]
   record IRTCWatcher, lpVtbl : IRTCWatcherVtbl* do
     GUID = LibC::GUID.new(0xc7cedad8_u32, 0x346b_u16, 0x4d1b_u16, StaticArray[0xac_u8, 0x2_u8, 0xa2_u8, 0x8_u8, 0x8d_u8, 0xf9_u8, 0xbe_u8, 0x4f_u8])
     def query_interface(this : IRTCWatcher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3731,7 +3688,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("d4d9967f-d011-4b1d-91e3-aba78f96393d")]
   record IRTCWatcher2, lpVtbl : IRTCWatcher2Vtbl* do
     GUID = LibC::GUID.new(0xd4d9967f_u32, 0xd011_u16, 0x4b1d_u16, StaticArray[0x91_u8, 0xe3_u8, 0xab_u8, 0xa7_u8, 0x8f_u8, 0x96_u8, 0x39_u8, 0x3d_u8])
     def query_interface(this : IRTCWatcher2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3799,7 +3755,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("60361e68-9164-4389-a4c6-d0b3925bda5e")]
   record IRTCBuddyGroup, lpVtbl : IRTCBuddyGroupVtbl* do
     GUID = LibC::GUID.new(0x60361e68_u32, 0x9164_u16, 0x4389_u16, StaticArray[0xa4_u8, 0xc6_u8, 0xd0_u8, 0xb3_u8, 0x92_u8, 0x5b_u8, 0xda_u8, 0x5e_u8])
     def query_interface(this : IRTCBuddyGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3850,7 +3805,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("13fa24c7-5748-4b21-91f5-7397609ce747")]
   record IRTCEventNotification, lpVtbl : IRTCEventNotificationVtbl* do
     GUID = LibC::GUID.new(0x13fa24c7_u32, 0x5748_u16, 0x4b21_u16, StaticArray[0x91_u8, 0xf5_u8, 0x73_u8, 0x97_u8, 0x60_u8, 0x9c_u8, 0xe7_u8, 0x47_u8])
     def query_interface(this : IRTCEventNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3879,7 +3833,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("da77c14b-6208-43ca-8ddf-5b60a0a69fac")]
   record IRTCPortManager, lpVtbl : IRTCPortManagerVtbl* do
     GUID = LibC::GUID.new(0xda77c14b_u32, 0x6208_u16, 0x43ca_u16, StaticArray[0x8d_u8, 0xdf_u8, 0x5b_u8, 0x60_u8, 0xa0_u8, 0xa6_u8, 0x9f_u8, 0xac_u8])
     def query_interface(this : IRTCPortManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3912,7 +3865,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("a072f1d6-0286-4e1f-85f2-17a2948456ec")]
   record IRTCSessionPortManagement, lpVtbl : IRTCSessionPortManagementVtbl* do
     GUID = LibC::GUID.new(0xa072f1d6_u32, 0x286_u16, 0x4e1f_u16, StaticArray[0x85_u8, 0xf2_u8, 0x17_u8, 0xa2_u8, 0x94_u8, 0x84_u8, 0x56_u8, 0xec_u8])
     def query_interface(this : IRTCSessionPortManagement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3941,7 +3893,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("d5df3f03-4bde-4417-aefe-71177bdaea66")]
   record IRTCClientPortManagement, lpVtbl : IRTCClientPortManagementVtbl* do
     GUID = LibC::GUID.new(0xd5df3f03_u32, 0x4bde_u16, 0x4417_u16, StaticArray[0xae_u8, 0xfe_u8, 0x71_u8, 0x17_u8, 0x7b_u8, 0xda_u8, 0xea_u8, 0x66_u8])
     def query_interface(this : IRTCClientPortManagement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3975,7 +3926,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("b619882b-860c-4db4-be1b-693b6505bbe5")]
   record IRTCUserSearch, lpVtbl : IRTCUserSearchVtbl* do
     GUID = LibC::GUID.new(0xb619882b_u32, 0x860c_u16, 0x4db4_u16, StaticArray[0xbe_u8, 0x1b_u8, 0x69_u8, 0x3b_u8, 0x65_u8, 0x5_u8, 0xbb_u8, 0xe5_u8])
     def query_interface(this : IRTCUserSearch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4011,7 +3961,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("288300f5-d23a-4365-9a73-9985c98c2881")]
   record IRTCUserSearchQuery, lpVtbl : IRTCUserSearchQueryVtbl* do
     GUID = LibC::GUID.new(0x288300f5_u32, 0xd23a_u16, 0x4365_u16, StaticArray[0x9a_u8, 0x73_u8, 0x99_u8, 0x85_u8, 0xc9_u8, 0x8c_u8, 0x28_u8, 0x81_u8])
     def query_interface(this : IRTCUserSearchQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4056,7 +4005,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("851278b2-9592-480f-8db5-2de86b26b54d")]
   record IRTCUserSearchResult, lpVtbl : IRTCUserSearchResultVtbl* do
     GUID = LibC::GUID.new(0x851278b2_u32, 0x9592_u16, 0x480f_u16, StaticArray[0x8d_u8, 0xb5_u8, 0x2d_u8, 0xe8_u8, 0x6b_u8, 0x26_u8, 0xb5_u8, 0x4d_u8])
     def query_interface(this : IRTCUserSearchResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4086,7 +4034,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("83d4d877-aa5d-4a5b-8d0e-002a8067e0e8")]
   record IRTCEnumUserSearchResults, lpVtbl : IRTCEnumUserSearchResultsVtbl* do
     GUID = LibC::GUID.new(0x83d4d877_u32, 0xaa5d_u16, 0x4a5b_u16, StaticArray[0x8d_u8, 0xe_u8, 0x0_u8, 0x2a_u8, 0x80_u8, 0x67_u8, 0xe0_u8, 0xe8_u8])
     def query_interface(this : IRTCEnumUserSearchResults*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4132,7 +4079,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("d8c8c3cd-7fac-4088-81c5-c24cbc0938e3")]
   record IRTCUserSearchResultsEvent, lpVtbl : IRTCUserSearchResultsEventVtbl* do
     GUID = LibC::GUID.new(0xd8c8c3cd_u32, 0x7fac_u16, 0x4088_u16, StaticArray[0x81_u8, 0xc5_u8, 0xc2_u8, 0x4c_u8, 0xbc_u8, 0x9_u8, 0x38_u8, 0xe3_u8])
     def query_interface(this : IRTCUserSearchResultsEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4196,7 +4142,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("3d8fc2cd-5d76-44ab-bb68-2a80353b34a2")]
   record IRTCSessionReferStatusEvent, lpVtbl : IRTCSessionReferStatusEventVtbl* do
     GUID = LibC::GUID.new(0x3d8fc2cd_u32, 0x5d76_u16, 0x44ab_u16, StaticArray[0xbb_u8, 0x68_u8, 0x2a_u8, 0x80_u8, 0x35_u8, 0x3b_u8, 0x34_u8, 0xa2_u8])
     def query_interface(this : IRTCSessionReferStatusEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4254,7 +4199,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("176a6828-4fcc-4f28-a862-04597a6cf1c4")]
   record IRTCSessionReferredEvent, lpVtbl : IRTCSessionReferredEventVtbl* do
     GUID = LibC::GUID.new(0x176a6828_u32, 0x4fcc_u16, 0x4f28_u16, StaticArray[0xa8_u8, 0x62_u8, 0x4_u8, 0x59_u8, 0x7a_u8, 0x6c_u8, 0xf1_u8, 0xc4_u8])
     def query_interface(this : IRTCSessionReferredEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4311,7 +4255,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("ba7f518e-d336-4070-93a6-865395c843f9")]
   record IRTCSessionDescriptionManager, lpVtbl : IRTCSessionDescriptionManagerVtbl* do
     GUID = LibC::GUID.new(0xba7f518e_u32, 0xd336_u16, 0x4070_u16, StaticArray[0x93_u8, 0xa6_u8, 0x86_u8, 0x53_u8, 0x95_u8, 0xc8_u8, 0x43_u8, 0xf9_u8])
     def query_interface(this : IRTCSessionDescriptionManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4341,7 +4284,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("708c2ab7-8bf8-42f8-8c7d-635197ad5539")]
   record IRTCEnumPresenceDevices, lpVtbl : IRTCEnumPresenceDevicesVtbl* do
     GUID = LibC::GUID.new(0x708c2ab7_u32, 0x8bf8_u16, 0x42f8_u16, StaticArray[0x8c_u8, 0x7d_u8, 0x63_u8, 0x51_u8, 0x97_u8, 0xad_u8, 0x55_u8, 0x39_u8])
     def query_interface(this : IRTCEnumPresenceDevices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4380,7 +4322,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("bc6a90dd-ad9a-48da-9b0c-2515e38521ad")]
   record IRTCPresenceDevice, lpVtbl : IRTCPresenceDeviceVtbl* do
     GUID = LibC::GUID.new(0xbc6a90dd_u32, 0xad9a_u16, 0x48da_u16, StaticArray[0x9b_u8, 0xc_u8, 0x25_u8, 0x15_u8, 0xe3_u8, 0x85_u8, 0x21_u8, 0xad_u8])
     def query_interface(this : IRTCPresenceDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4419,7 +4360,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("176ddfbe-fec0-4d55-bc87-84cff1ef7f91")]
   record IRTCDispatchEventNotification, lpVtbl : IRTCDispatchEventNotificationVtbl* do
     GUID = LibC::GUID.new(0x176ddfbe_u32, 0xfec0_u16, 0x4d55_u16, StaticArray[0xbc_u8, 0x87_u8, 0x84_u8, 0xcf_u8, 0xf1_u8, 0xef_u8, 0x7f_u8, 0x91_u8])
     def query_interface(this : IRTCDispatchEventNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4456,7 +4396,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("5123e076-29e3-4bfd-84fe-0192d411e3e8")]
   record ITransportSettingsInternal, lpVtbl : ITransportSettingsInternalVtbl* do
     GUID = LibC::GUID.new(0x5123e076_u32, 0x29e3_u16, 0x4bfd_u16, StaticArray[0x84_u8, 0xfe_u8, 0x1_u8, 0x92_u8, 0xd4_u8, 0x11_u8, 0xe3_u8, 0xe8_u8])
     def query_interface(this : ITransportSettingsInternal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4487,7 +4426,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("5e7abb2c-f2c1-4a61-bd35-deb7a08ab0f1")]
   record INetworkTransportSettings, lpVtbl : INetworkTransportSettingsVtbl* do
     GUID = LibC::GUID.new(0x5e7abb2c_u32, 0xf2c1_u16, 0x4a61_u16, StaticArray[0xbd_u8, 0x35_u8, 0xde_u8, 0xb7_u8, 0xa0_u8, 0x8a_u8, 0xb0_u8, 0xf1_u8])
     def query_interface(this : INetworkTransportSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4518,7 +4456,6 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  #@[Com("79eb1402-0ab8-49c0-9e14-a1ae4ba93058")]
   record INotificationTransportSync, lpVtbl : INotificationTransportSyncVtbl* do
     GUID = LibC::GUID.new(0x79eb1402_u32, 0xab8_u16, 0x49c0_u16, StaticArray[0x9e_u8, 0x14_u8, 0xa1_u8, 0xae_u8, 0x4b_u8, 0xa9_u8, 0x30_u8, 0x58_u8])
     def query_interface(this : INotificationTransportSync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

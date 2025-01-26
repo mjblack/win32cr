@@ -1,11 +1,11 @@
 require "./../foundation.cr"
 
 module Win32cr::System::ApplicationVerifier
-  alias AVRF_RESOURCE_ENUMERATE_CALLBACK = Proc(Void*, Void*, UInt32*, UInt32)*
+  alias AVRF_RESOURCE_ENUMERATE_CALLBACK = Proc(Void*, Void*, UInt32*, UInt32)
 
-  alias AVRF_HEAPALLOCATION_ENUMERATE_CALLBACK = Proc(Win32cr::System::ApplicationVerifier::AVRF_HEAP_ALLOCATION*, Void*, UInt32*, UInt32)*
+  alias AVRF_HEAPALLOCATION_ENUMERATE_CALLBACK = Proc(Win32cr::System::ApplicationVerifier::AVRF_HEAP_ALLOCATION*, Void*, UInt32*, UInt32)
 
-  alias AVRF_HANDLEOPERATION_ENUMERATE_CALLBACK = Proc(Win32cr::System::ApplicationVerifier::AVRF_HANDLE_OPERATION*, Void*, UInt32*, UInt32)*
+  alias AVRF_HANDLEOPERATION_ENUMERATE_CALLBACK = Proc(Win32cr::System::ApplicationVerifier::AVRF_HANDLE_OPERATION*, Void*, UInt32*, UInt32)
 
   AVRF_MAX_TRACES = 32_u32
 
@@ -41,31 +41,40 @@ module Win32cr::System::ApplicationVerifier
   end
 
   @[Extern]
-  record AVRF_BACKTRACE_INFORMATION,
-    depth : UInt32,
-    index : UInt32,
-    return_addresses : UInt64[32]
+  struct AVRF_BACKTRACE_INFORMATION
+    property depth : UInt32
+    property index : UInt32
+    property return_addresses : UInt64[32]
+    def initialize(@depth : UInt32, @index : UInt32, @return_addresses : UInt64[32])
+    end
+  end
 
   @[Extern]
-  record AVRF_HEAP_ALLOCATION,
-    heap_handle : UInt64,
-    user_allocation : UInt64,
-    user_allocation_size : UInt64,
-    allocation : UInt64,
-    allocation_size : UInt64,
-    user_allocation_state : UInt32,
-    heap_state : UInt32,
-    heap_context : UInt64,
-    back_trace_information : Win32cr::System::ApplicationVerifier::AVRF_BACKTRACE_INFORMATION*
+  struct AVRF_HEAP_ALLOCATION
+    property heap_handle : UInt64
+    property user_allocation : UInt64
+    property user_allocation_size : UInt64
+    property allocation : UInt64
+    property allocation_size : UInt64
+    property user_allocation_state : UInt32
+    property heap_state : UInt32
+    property heap_context : UInt64
+    property back_trace_information : Win32cr::System::ApplicationVerifier::AVRF_BACKTRACE_INFORMATION*
+    def initialize(@heap_handle : UInt64, @user_allocation : UInt64, @user_allocation_size : UInt64, @allocation : UInt64, @allocation_size : UInt64, @user_allocation_state : UInt32, @heap_state : UInt32, @heap_context : UInt64, @back_trace_information : Win32cr::System::ApplicationVerifier::AVRF_BACKTRACE_INFORMATION*)
+    end
+  end
 
   @[Extern]
-  record AVRF_HANDLE_OPERATION,
-    handle : UInt64,
-    process_id : UInt32,
-    thread_id : UInt32,
-    operation_type : UInt32,
-    spare0 : UInt32,
-    back_trace_information : Win32cr::System::ApplicationVerifier::AVRF_BACKTRACE_INFORMATION
+  struct AVRF_HANDLE_OPERATION
+    property handle : UInt64
+    property process_id : UInt32
+    property thread_id : UInt32
+    property operation_type : UInt32
+    property spare0 : UInt32
+    property back_trace_information : Win32cr::System::ApplicationVerifier::AVRF_BACKTRACE_INFORMATION
+    def initialize(@handle : UInt64, @process_id : UInt32, @thread_id : UInt32, @operation_type : UInt32, @spare0 : UInt32, @back_trace_information : Win32cr::System::ApplicationVerifier::AVRF_BACKTRACE_INFORMATION)
+    end
+  end
 
   @[Link("verifier")]
   lib C

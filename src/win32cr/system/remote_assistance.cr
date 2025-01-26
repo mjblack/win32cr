@@ -41,7 +41,6 @@ module Win32cr::System::RemoteAssistance
 
 
   @[Extern]
-  #@[Com("9ba4b1dd-8b0c-48b7-9e7c-2f25857c8df5")]
   record IRendezvousSession, lpVtbl : IRendezvousSessionVtbl* do
     GUID = LibC::GUID.new(0x9ba4b1dd_u32, 0x8b0c_u16, 0x48b7_u16, StaticArray[0x9e_u8, 0x7c_u8, 0x2f_u8, 0x25_u8, 0x85_u8, 0x7c_u8, 0x8d_u8, 0xf5_u8])
     def query_interface(this : IRendezvousSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -83,7 +82,6 @@ module Win32cr::System::RemoteAssistance
 
 
   @[Extern]
-  #@[Com("3fa19cf8-64c4-4f53-ae60-635b3806eca6")]
   record DRendezvousSessionEvents, lpVtbl : DRendezvousSessionEventsVtbl* do
     GUID = LibC::GUID.new(0x3fa19cf8_u32, 0x64c4_u16, 0x4f53_u16, StaticArray[0xae_u8, 0x60_u8, 0x63_u8, 0x5b_u8, 0x38_u8, 0x6_u8, 0xec_u8, 0xa6_u8])
     def query_interface(this : DRendezvousSessionEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -119,7 +117,6 @@ module Win32cr::System::RemoteAssistance
 
 
   @[Extern]
-  #@[Com("4f4d070b-a275-49fb-b10d-8ec26387b50d")]
   record IRendezvousApplication, lpVtbl : IRendezvousApplicationVtbl* do
     GUID = LibC::GUID.new(0x4f4d070b_u32, 0xa275_u16, 0x49fb_u16, StaticArray[0xb1_u8, 0xd_u8, 0x8e_u8, 0xc2_u8, 0x63_u8, 0x87_u8, 0xb5_u8, 0xd_u8])
     def query_interface(this : IRendezvousApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

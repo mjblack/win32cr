@@ -1,9 +1,9 @@
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::WebDav
-  alias PFNDAVAUTHCALLBACK_FREECRED = Proc(Void*, UInt32)*
+  alias PFNDAVAUTHCALLBACK_FREECRED = Proc(Void*, UInt32)
 
-  alias PFNDAVAUTHCALLBACK = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::NetworkManagement::WebDav::DAV_CALLBACK_CRED*, Win32cr::NetworkManagement::WebDav::AUTHNEXTSTEP*, Win32cr::NetworkManagement::WebDav::PFNDAVAUTHCALLBACK_FREECRED*, UInt32)*
+  alias PFNDAVAUTHCALLBACK = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::NetworkManagement::WebDav::DAV_CALLBACK_CRED*, Win32cr::NetworkManagement::WebDav::AUTHNEXTSTEP*, Win32cr::NetworkManagement::WebDav::PFNDAVAUTHCALLBACK_FREECRED*, UInt32)
 
   DAV_AUTHN_SCHEME_BASIC = 1_u32
   DAV_AUTHN_SCHEME_NTLM = 2_u32
@@ -20,24 +20,33 @@ module Win32cr::NetworkManagement::WebDav
   end
 
   @[Extern]
-  record DAV_CALLBACK_AUTH_BLOB,
-    pBuffer : Void*,
-    ulSize : UInt32,
-    ulType : UInt32
+  struct DAV_CALLBACK_AUTH_BLOB
+    property pBuffer : Void*
+    property ulSize : UInt32
+    property ulType : UInt32
+    def initialize(@pBuffer : Void*, @ulSize : UInt32, @ulType : UInt32)
+    end
+  end
 
   @[Extern]
-  record DAV_CALLBACK_AUTH_UNP,
-    pszUserName : Win32cr::Foundation::PWSTR,
-    ulUserNameLength : UInt32,
-    pszPassword : Win32cr::Foundation::PWSTR,
-    ulPasswordLength : UInt32
+  struct DAV_CALLBACK_AUTH_UNP
+    property pszUserName : Win32cr::Foundation::PWSTR
+    property ulUserNameLength : UInt32
+    property pszPassword : Win32cr::Foundation::PWSTR
+    property ulPasswordLength : UInt32
+    def initialize(@pszUserName : Win32cr::Foundation::PWSTR, @ulUserNameLength : UInt32, @pszPassword : Win32cr::Foundation::PWSTR, @ulPasswordLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record DAV_CALLBACK_CRED,
-    auth_blob : Win32cr::NetworkManagement::WebDav::DAV_CALLBACK_AUTH_BLOB,
-    unp_blob : Win32cr::NetworkManagement::WebDav::DAV_CALLBACK_AUTH_UNP,
-    bAuthBlobValid : Win32cr::Foundation::BOOL,
-    bSave : Win32cr::Foundation::BOOL
+  struct DAV_CALLBACK_CRED
+    property auth_blob : Win32cr::NetworkManagement::WebDav::DAV_CALLBACK_AUTH_BLOB
+    property unp_blob : Win32cr::NetworkManagement::WebDav::DAV_CALLBACK_AUTH_UNP
+    property bAuthBlobValid : Win32cr::Foundation::BOOL
+    property bSave : Win32cr::Foundation::BOOL
+    def initialize(@auth_blob : Win32cr::NetworkManagement::WebDav::DAV_CALLBACK_AUTH_BLOB, @unp_blob : Win32cr::NetworkManagement::WebDav::DAV_CALLBACK_AUTH_UNP, @bAuthBlobValid : Win32cr::Foundation::BOOL, @bSave : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Link("netapi32")]
   @[Link("davclnt")]

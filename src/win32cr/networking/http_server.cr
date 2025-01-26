@@ -419,689 +419,974 @@ module Win32cr::Networking::HttpServer
   end
 
   @[Extern]
-  record HTTP_PROPERTY_FLAGS,
-    _bitfield : UInt32
+  struct HTTP_PROPERTY_FLAGS
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_STATE_INFO,
-    flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS,
-    state : Win32cr::Networking::HttpServer::HTTP_ENABLED_STATE
+  struct HTTP_STATE_INFO
+    property flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS
+    property state : Win32cr::Networking::HttpServer::HTTP_ENABLED_STATE
+    def initialize(@flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS, @state : Win32cr::Networking::HttpServer::HTTP_ENABLED_STATE)
+    end
+  end
 
   @[Extern]
-  record HTTP_QOS_SETTING_INFO,
-    qos_type : Win32cr::Networking::HttpServer::HTTP_QOS_SETTING_TYPE,
-    qos_setting : Void*
+  struct HTTP_QOS_SETTING_INFO
+    property qos_type : Win32cr::Networking::HttpServer::HTTP_QOS_SETTING_TYPE
+    property qos_setting : Void*
+    def initialize(@qos_type : Win32cr::Networking::HttpServer::HTTP_QOS_SETTING_TYPE, @qos_setting : Void*)
+    end
+  end
 
   @[Extern]
-  record HTTP_CONNECTION_LIMIT_INFO,
-    flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS,
-    max_connections : UInt32
+  struct HTTP_CONNECTION_LIMIT_INFO
+    property flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS
+    property max_connections : UInt32
+    def initialize(@flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS, @max_connections : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_BANDWIDTH_LIMIT_INFO,
-    flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS,
-    max_bandwidth : UInt32
+  struct HTTP_BANDWIDTH_LIMIT_INFO
+    property flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS
+    property max_bandwidth : UInt32
+    def initialize(@flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS, @max_bandwidth : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_FLOWRATE_INFO,
-    flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS,
-    max_bandwidth : UInt32,
-    max_peak_bandwidth : UInt32,
-    burst_size : UInt32
+  struct HTTP_FLOWRATE_INFO
+    property flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS
+    property max_bandwidth : UInt32
+    property max_peak_bandwidth : UInt32
+    property burst_size : UInt32
+    def initialize(@flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS, @max_bandwidth : UInt32, @max_peak_bandwidth : UInt32, @burst_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_TIMEOUT_SET,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_TIMEOUT_KEY,
-    param_desc : UInt16
+  struct HTTP_SERVICE_CONFIG_TIMEOUT_SET
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_TIMEOUT_KEY
+    property param_desc : UInt16
+    def initialize(@key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_TIMEOUT_KEY, @param_desc : UInt16)
+    end
+  end
 
   @[Extern]
-  record HTTP_TIMEOUT_LIMIT_INFO,
-    flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS,
-    entity_body : UInt16,
-    drain_entity_body : UInt16,
-    request_queue : UInt16,
-    idle_connection : UInt16,
-    header_wait : UInt16,
-    min_send_rate : UInt32
+  struct HTTP_TIMEOUT_LIMIT_INFO
+    property flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS
+    property entity_body : UInt16
+    property drain_entity_body : UInt16
+    property request_queue : UInt16
+    property idle_connection : UInt16
+    property header_wait : UInt16
+    property min_send_rate : UInt32
+    def initialize(@flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS, @entity_body : UInt16, @drain_entity_body : UInt16, @request_queue : UInt16, @idle_connection : UInt16, @header_wait : UInt16, @min_send_rate : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SETTING_SET,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SETTING_KEY,
-    param_desc : UInt32
+  struct HTTP_SERVICE_CONFIG_SETTING_SET
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SETTING_KEY
+    property param_desc : UInt32
+    def initialize(@key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SETTING_KEY, @param_desc : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_LISTEN_ENDPOINT_INFO,
-    flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS,
-    enable_sharing : Win32cr::Foundation::BOOLEAN
+  struct HTTP_LISTEN_ENDPOINT_INFO
+    property flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS
+    property enable_sharing : Win32cr::Foundation::BOOLEAN
+    def initialize(@flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS, @enable_sharing : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS,
-    domain_name_length : UInt16,
-    domain_name : Win32cr::Foundation::PWSTR,
-    realm_length : UInt16,
-    realm : Win32cr::Foundation::PWSTR
+  struct HTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS
+    property domain_name_length : UInt16
+    property domain_name : Win32cr::Foundation::PWSTR
+    property realm_length : UInt16
+    property realm : Win32cr::Foundation::PWSTR
+    def initialize(@domain_name_length : UInt16, @domain_name : Win32cr::Foundation::PWSTR, @realm_length : UInt16, @realm : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVER_AUTHENTICATION_BASIC_PARAMS,
-    realm_length : UInt16,
-    realm : Win32cr::Foundation::PWSTR
+  struct HTTP_SERVER_AUTHENTICATION_BASIC_PARAMS
+    property realm_length : UInt16
+    property realm : Win32cr::Foundation::PWSTR
+    def initialize(@realm_length : UInt16, @realm : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVER_AUTHENTICATION_INFO,
-    flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS,
-    auth_schemes : UInt32,
-    receive_mutual_auth : Win32cr::Foundation::BOOLEAN,
-    receive_context_handle : Win32cr::Foundation::BOOLEAN,
-    disable_ntlm_credential_caching : Win32cr::Foundation::BOOLEAN,
-    ex_flags : UInt8,
-    digest_params : Win32cr::Networking::HttpServer::HTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS,
-    basic_params : Win32cr::Networking::HttpServer::HTTP_SERVER_AUTHENTICATION_BASIC_PARAMS
+  struct HTTP_SERVER_AUTHENTICATION_INFO
+    property flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS
+    property auth_schemes : UInt32
+    property receive_mutual_auth : Win32cr::Foundation::BOOLEAN
+    property receive_context_handle : Win32cr::Foundation::BOOLEAN
+    property disable_ntlm_credential_caching : Win32cr::Foundation::BOOLEAN
+    property ex_flags : UInt8
+    property digest_params : Win32cr::Networking::HttpServer::HTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS
+    property basic_params : Win32cr::Networking::HttpServer::HTTP_SERVER_AUTHENTICATION_BASIC_PARAMS
+    def initialize(@flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS, @auth_schemes : UInt32, @receive_mutual_auth : Win32cr::Foundation::BOOLEAN, @receive_context_handle : Win32cr::Foundation::BOOLEAN, @disable_ntlm_credential_caching : Win32cr::Foundation::BOOLEAN, @ex_flags : UInt8, @digest_params : Win32cr::Networking::HttpServer::HTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS, @basic_params : Win32cr::Networking::HttpServer::HTTP_SERVER_AUTHENTICATION_BASIC_PARAMS)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_BINDING_BASE,
-    type__ : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_TYPE
+  struct HTTP_SERVICE_BINDING_BASE
+    property type__ : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_TYPE
+    def initialize(@type__ : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_TYPE)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_BINDING_A,
-    base : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_BASE,
-    buffer : Win32cr::Foundation::PSTR,
-    buffer_size : UInt32
+  struct HTTP_SERVICE_BINDING_A
+    property base : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_BASE
+    property buffer : Win32cr::Foundation::PSTR
+    property buffer_size : UInt32
+    def initialize(@base : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_BASE, @buffer : Win32cr::Foundation::PSTR, @buffer_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_BINDING_W,
-    base : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_BASE,
-    buffer : Win32cr::Foundation::PWSTR,
-    buffer_size : UInt32
+  struct HTTP_SERVICE_BINDING_W
+    property base : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_BASE
+    property buffer : Win32cr::Foundation::PWSTR
+    property buffer_size : UInt32
+    def initialize(@base : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_BASE, @buffer : Win32cr::Foundation::PWSTR, @buffer_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_CHANNEL_BIND_INFO,
-    hardening : Win32cr::Networking::HttpServer::HTTP_AUTHENTICATION_HARDENING_LEVELS,
-    flags : UInt32,
-    service_names : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_BASE**,
-    number_of_service_names : UInt32
+  struct HTTP_CHANNEL_BIND_INFO
+    property hardening : Win32cr::Networking::HttpServer::HTTP_AUTHENTICATION_HARDENING_LEVELS
+    property flags : UInt32
+    property service_names : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_BASE**
+    property number_of_service_names : UInt32
+    def initialize(@hardening : Win32cr::Networking::HttpServer::HTTP_AUTHENTICATION_HARDENING_LEVELS, @flags : UInt32, @service_names : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_BASE**, @number_of_service_names : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_REQUEST_CHANNEL_BIND_STATUS,
-    service_name : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_BASE*,
-    channel_token : UInt8*,
-    channel_token_size : UInt32,
-    flags : UInt32
+  struct HTTP_REQUEST_CHANNEL_BIND_STATUS
+    property service_name : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_BASE*
+    property channel_token : UInt8*
+    property channel_token_size : UInt32
+    property flags : UInt32
+    def initialize(@service_name : Win32cr::Networking::HttpServer::HTTP_SERVICE_BINDING_BASE*, @channel_token : UInt8*, @channel_token_size : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_REQUEST_TOKEN_BINDING_INFO,
-    token_binding : UInt8*,
-    token_binding_size : UInt32,
-    ekm : UInt8*,
-    ekm_size : UInt32,
-    key_type : UInt8
+  struct HTTP_REQUEST_TOKEN_BINDING_INFO
+    property token_binding : UInt8*
+    property token_binding_size : UInt32
+    property ekm : UInt8*
+    property ekm_size : UInt32
+    property key_type : UInt8
+    def initialize(@token_binding : UInt8*, @token_binding_size : UInt32, @ekm : UInt8*, @ekm_size : UInt32, @key_type : UInt8)
+    end
+  end
 
   @[Extern]
-  record HTTP_LOGGING_INFO,
-    flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS,
-    logging_flags : UInt32,
-    software_name : Win32cr::Foundation::PWSTR,
-    software_name_length : UInt16,
-    directory_name_length : UInt16,
-    directory_name : Win32cr::Foundation::PWSTR,
-    format : Win32cr::Networking::HttpServer::HTTP_LOGGING_TYPE,
-    fields : UInt32,
-    pExtFields : Void*,
-    num_of_ext_fields : UInt16,
-    max_record_size : UInt16,
-    rollover_type : Win32cr::Networking::HttpServer::HTTP_LOGGING_ROLLOVER_TYPE,
-    rollover_size : UInt32,
-    pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+  struct HTTP_LOGGING_INFO
+    property flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS
+    property logging_flags : UInt32
+    property software_name : Win32cr::Foundation::PWSTR
+    property software_name_length : UInt16
+    property directory_name_length : UInt16
+    property directory_name : Win32cr::Foundation::PWSTR
+    property format : Win32cr::Networking::HttpServer::HTTP_LOGGING_TYPE
+    property fields : UInt32
+    property pExtFields : Void*
+    property num_of_ext_fields : UInt16
+    property max_record_size : UInt16
+    property rollover_type : Win32cr::Networking::HttpServer::HTTP_LOGGING_ROLLOVER_TYPE
+    property rollover_size : UInt32
+    property pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+    def initialize(@flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS, @logging_flags : UInt32, @software_name : Win32cr::Foundation::PWSTR, @software_name_length : UInt16, @directory_name_length : UInt16, @directory_name : Win32cr::Foundation::PWSTR, @format : Win32cr::Networking::HttpServer::HTTP_LOGGING_TYPE, @fields : UInt32, @pExtFields : Void*, @num_of_ext_fields : UInt16, @max_record_size : UInt16, @rollover_type : Win32cr::Networking::HttpServer::HTTP_LOGGING_ROLLOVER_TYPE, @rollover_size : UInt32, @pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR)
+    end
+  end
 
   @[Extern]
-  record HTTP_BINDING_INFO,
-    flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS,
-    request_queue_handle : Win32cr::Foundation::HANDLE
+  struct HTTP_BINDING_INFO
+    property flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS
+    property request_queue_handle : Win32cr::Foundation::HANDLE
+    def initialize(@flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS, @request_queue_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record HTTP_PROTECTION_LEVEL_INFO,
-    flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS,
-    level : Win32cr::Networking::HttpServer::HTTP_PROTECTION_LEVEL_TYPE
+  struct HTTP_PROTECTION_LEVEL_INFO
+    property flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS
+    property level : Win32cr::Networking::HttpServer::HTTP_PROTECTION_LEVEL_TYPE
+    def initialize(@flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS, @level : Win32cr::Networking::HttpServer::HTTP_PROTECTION_LEVEL_TYPE)
+    end
+  end
 
   @[Extern]
-  record HTTP_BYTE_RANGE,
-    starting_offset : Win32cr::Foundation::ULARGE_INTEGER,
-    length : Win32cr::Foundation::ULARGE_INTEGER
+  struct HTTP_BYTE_RANGE
+    property starting_offset : Win32cr::Foundation::ULARGE_INTEGER
+    property length : Win32cr::Foundation::ULARGE_INTEGER
+    def initialize(@starting_offset : Win32cr::Foundation::ULARGE_INTEGER, @length : Win32cr::Foundation::ULARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record HTTP_VERSION,
-    major_version : UInt16,
-    minor_version : UInt16
+  struct HTTP_VERSION
+    property major_version : UInt16
+    property minor_version : UInt16
+    def initialize(@major_version : UInt16, @minor_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record HTTP_KNOWN_HEADER,
-    raw_value_length : UInt16,
-    pRawValue : Win32cr::Foundation::PSTR
+  struct HTTP_KNOWN_HEADER
+    property raw_value_length : UInt16
+    property pRawValue : Win32cr::Foundation::PSTR
+    def initialize(@raw_value_length : UInt16, @pRawValue : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record HTTP_UNKNOWN_HEADER,
-    name_length : UInt16,
-    raw_value_length : UInt16,
-    pName : Win32cr::Foundation::PSTR,
-    pRawValue : Win32cr::Foundation::PSTR
+  struct HTTP_UNKNOWN_HEADER
+    property name_length : UInt16
+    property raw_value_length : UInt16
+    property pName : Win32cr::Foundation::PSTR
+    property pRawValue : Win32cr::Foundation::PSTR
+    def initialize(@name_length : UInt16, @raw_value_length : UInt16, @pName : Win32cr::Foundation::PSTR, @pRawValue : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record HTTP_LOG_DATA,
-    type__ : Win32cr::Networking::HttpServer::HTTP_LOG_DATA_TYPE
+  struct HTTP_LOG_DATA
+    property type__ : Win32cr::Networking::HttpServer::HTTP_LOG_DATA_TYPE
+    def initialize(@type__ : Win32cr::Networking::HttpServer::HTTP_LOG_DATA_TYPE)
+    end
+  end
 
   @[Extern]
-  record HTTP_LOG_FIELDS_DATA,
-    base : Win32cr::Networking::HttpServer::HTTP_LOG_DATA,
-    user_name_length : UInt16,
-    uri_stem_length : UInt16,
-    client_ip_length : UInt16,
-    server_name_length : UInt16,
-    service_name_length : UInt16,
-    server_ip_length : UInt16,
-    method_length : UInt16,
-    uri_query_length : UInt16,
-    host_length : UInt16,
-    user_agent_length : UInt16,
-    cookie_length : UInt16,
-    referrer_length : UInt16,
-    user_name : Win32cr::Foundation::PWSTR,
-    uri_stem : Win32cr::Foundation::PWSTR,
-    client_ip : Win32cr::Foundation::PSTR,
-    server_name : Win32cr::Foundation::PSTR,
-    service_name : Win32cr::Foundation::PSTR,
-    server_ip : Win32cr::Foundation::PSTR,
-    method : Win32cr::Foundation::PSTR,
-    uri_query : Win32cr::Foundation::PSTR,
-    host : Win32cr::Foundation::PSTR,
-    user_agent : Win32cr::Foundation::PSTR,
-    cookie : Win32cr::Foundation::PSTR,
-    referrer : Win32cr::Foundation::PSTR,
-    server_port : UInt16,
-    protocol_status : UInt16,
-    win32_status : UInt32,
-    method_num : Win32cr::Networking::HttpServer::HTTP_VERB,
-    sub_status : UInt16
+  struct HTTP_LOG_FIELDS_DATA
+    property base : Win32cr::Networking::HttpServer::HTTP_LOG_DATA
+    property user_name_length : UInt16
+    property uri_stem_length : UInt16
+    property client_ip_length : UInt16
+    property server_name_length : UInt16
+    property service_name_length : UInt16
+    property server_ip_length : UInt16
+    property method_length : UInt16
+    property uri_query_length : UInt16
+    property host_length : UInt16
+    property user_agent_length : UInt16
+    property cookie_length : UInt16
+    property referrer_length : UInt16
+    property user_name : Win32cr::Foundation::PWSTR
+    property uri_stem : Win32cr::Foundation::PWSTR
+    property client_ip : Win32cr::Foundation::PSTR
+    property server_name : Win32cr::Foundation::PSTR
+    property service_name : Win32cr::Foundation::PSTR
+    property server_ip : Win32cr::Foundation::PSTR
+    property method : Win32cr::Foundation::PSTR
+    property uri_query : Win32cr::Foundation::PSTR
+    property host : Win32cr::Foundation::PSTR
+    property user_agent : Win32cr::Foundation::PSTR
+    property cookie : Win32cr::Foundation::PSTR
+    property referrer : Win32cr::Foundation::PSTR
+    property server_port : UInt16
+    property protocol_status : UInt16
+    property win32_status : UInt32
+    property method_num : Win32cr::Networking::HttpServer::HTTP_VERB
+    property sub_status : UInt16
+    def initialize(@base : Win32cr::Networking::HttpServer::HTTP_LOG_DATA, @user_name_length : UInt16, @uri_stem_length : UInt16, @client_ip_length : UInt16, @server_name_length : UInt16, @service_name_length : UInt16, @server_ip_length : UInt16, @method_length : UInt16, @uri_query_length : UInt16, @host_length : UInt16, @user_agent_length : UInt16, @cookie_length : UInt16, @referrer_length : UInt16, @user_name : Win32cr::Foundation::PWSTR, @uri_stem : Win32cr::Foundation::PWSTR, @client_ip : Win32cr::Foundation::PSTR, @server_name : Win32cr::Foundation::PSTR, @service_name : Win32cr::Foundation::PSTR, @server_ip : Win32cr::Foundation::PSTR, @method : Win32cr::Foundation::PSTR, @uri_query : Win32cr::Foundation::PSTR, @host : Win32cr::Foundation::PSTR, @user_agent : Win32cr::Foundation::PSTR, @cookie : Win32cr::Foundation::PSTR, @referrer : Win32cr::Foundation::PSTR, @server_port : UInt16, @protocol_status : UInt16, @win32_status : UInt32, @method_num : Win32cr::Networking::HttpServer::HTTP_VERB, @sub_status : UInt16)
+    end
+  end
 
   @[Extern]
-  record HTTP_DATA_CHUNK,
-    data_chunk_type : Win32cr::Networking::HttpServer::HTTP_DATA_CHUNK_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct HTTP_DATA_CHUNK
+    property data_chunk_type : Win32cr::Networking::HttpServer::HTTP_DATA_CHUNK_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      from_memory : FromMemory_e__Struct_,
-      from_file_handle : FromFileHandle_e__Struct_,
-      from_fragment_cache : FromFragmentCache_e__Struct_,
-      from_fragment_cache_ex : FromFragmentCacheEx_e__Struct_,
-      trailers : Trailers_e__Struct_ do
+    struct Anonymous_e__Union_
+    property from_memory : FromMemory_e__Struct_
+    property from_file_handle : FromFileHandle_e__Struct_
+    property from_fragment_cache : FromFragmentCache_e__Struct_
+    property from_fragment_cache_ex : FromFragmentCacheEx_e__Struct_
+    property trailers : Trailers_e__Struct_
 
       # Nested Type FromFragmentCacheEx_e__Struct_
       @[Extern]
-      record FromFragmentCacheEx_e__Struct_,
-        byte_range : Win32cr::Networking::HttpServer::HTTP_BYTE_RANGE,
-        pFragmentName : Win32cr::Foundation::PWSTR
+      struct FromFragmentCacheEx_e__Struct_
+    property byte_range : Win32cr::Networking::HttpServer::HTTP_BYTE_RANGE
+    property pFragmentName : Win32cr::Foundation::PWSTR
+    def initialize(@byte_range : Win32cr::Networking::HttpServer::HTTP_BYTE_RANGE, @pFragmentName : Win32cr::Foundation::PWSTR)
+    end
+      end
 
 
       # Nested Type FromFileHandle_e__Struct_
       @[Extern]
-      record FromFileHandle_e__Struct_,
-        byte_range : Win32cr::Networking::HttpServer::HTTP_BYTE_RANGE,
-        file_handle : Win32cr::Foundation::HANDLE
+      struct FromFileHandle_e__Struct_
+    property byte_range : Win32cr::Networking::HttpServer::HTTP_BYTE_RANGE
+    property file_handle : Win32cr::Foundation::HANDLE
+    def initialize(@byte_range : Win32cr::Networking::HttpServer::HTTP_BYTE_RANGE, @file_handle : Win32cr::Foundation::HANDLE)
+    end
+      end
 
 
       # Nested Type FromFragmentCache_e__Struct_
       @[Extern]
-      record FromFragmentCache_e__Struct_,
-        fragment_name_length : UInt16,
-        pFragmentName : Win32cr::Foundation::PWSTR
+      struct FromFragmentCache_e__Struct_
+    property fragment_name_length : UInt16
+    property pFragmentName : Win32cr::Foundation::PWSTR
+    def initialize(@fragment_name_length : UInt16, @pFragmentName : Win32cr::Foundation::PWSTR)
+    end
+      end
 
 
       # Nested Type FromMemory_e__Struct_
       @[Extern]
-      record FromMemory_e__Struct_,
-        pBuffer : Void*,
-        buffer_length : UInt32
+      struct FromMemory_e__Struct_
+    property pBuffer : Void*
+    property buffer_length : UInt32
+    def initialize(@pBuffer : Void*, @buffer_length : UInt32)
+    end
+      end
 
 
       # Nested Type Trailers_e__Struct_
       @[Extern]
-      record Trailers_e__Struct_,
-        trailer_count : UInt16,
-        pTrailers : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*
+      struct Trailers_e__Struct_
+    property trailer_count : UInt16
+    property pTrailers : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*
+    def initialize(@trailer_count : UInt16, @pTrailers : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*)
+    end
+      end
 
+    def initialize(@from_memory : FromMemory_e__Struct_, @from_file_handle : FromFileHandle_e__Struct_, @from_fragment_cache : FromFragmentCache_e__Struct_, @from_fragment_cache_ex : FromFragmentCacheEx_e__Struct_, @trailers : Trailers_e__Struct_)
+    end
     end
 
+    def initialize(@data_chunk_type : Win32cr::Networking::HttpServer::HTTP_DATA_CHUNK_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record HTTP_REQUEST_HEADERS,
-    unknown_header_count : UInt16,
-    pUnknownHeaders : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*,
-    trailer_count : UInt16,
-    pTrailers : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*,
-    known_headers : Win32cr::Networking::HttpServer::HTTP_KNOWN_HEADER[41]
+  struct HTTP_REQUEST_HEADERS
+    property unknown_header_count : UInt16
+    property pUnknownHeaders : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*
+    property trailer_count : UInt16
+    property pTrailers : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*
+    property known_headers : Win32cr::Networking::HttpServer::HTTP_KNOWN_HEADER[41]
+    def initialize(@unknown_header_count : UInt16, @pUnknownHeaders : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*, @trailer_count : UInt16, @pTrailers : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*, @known_headers : Win32cr::Networking::HttpServer::HTTP_KNOWN_HEADER[41])
+    end
+  end
 
   @[Extern]
-  record HTTP_RESPONSE_HEADERS,
-    unknown_header_count : UInt16,
-    pUnknownHeaders : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*,
-    trailer_count : UInt16,
-    pTrailers : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*,
-    known_headers : Win32cr::Networking::HttpServer::HTTP_KNOWN_HEADER[30]
+  struct HTTP_RESPONSE_HEADERS
+    property unknown_header_count : UInt16
+    property pUnknownHeaders : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*
+    property trailer_count : UInt16
+    property pTrailers : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*
+    property known_headers : Win32cr::Networking::HttpServer::HTTP_KNOWN_HEADER[30]
+    def initialize(@unknown_header_count : UInt16, @pUnknownHeaders : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*, @trailer_count : UInt16, @pTrailers : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*, @known_headers : Win32cr::Networking::HttpServer::HTTP_KNOWN_HEADER[30])
+    end
+  end
 
   @[Extern]
-  record HTTP_DELEGATE_REQUEST_PROPERTY_INFO,
-    property_id : Win32cr::Networking::HttpServer::HTTP_DELEGATE_REQUEST_PROPERTY_ID,
-    property_info_length : UInt32,
-    property_info : Void*
+  struct HTTP_DELEGATE_REQUEST_PROPERTY_INFO
+    property property_id : Win32cr::Networking::HttpServer::HTTP_DELEGATE_REQUEST_PROPERTY_ID
+    property property_info_length : UInt32
+    property property_info : Void*
+    def initialize(@property_id : Win32cr::Networking::HttpServer::HTTP_DELEGATE_REQUEST_PROPERTY_ID, @property_info_length : UInt32, @property_info : Void*)
+    end
+  end
 
   @[Extern]
-  record HTTP_CREATE_REQUEST_QUEUE_PROPERTY_INFO,
-    property_id : Win32cr::Networking::HttpServer::HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID,
-    property_info_length : UInt32,
-    property_info : Void*
+  struct HTTP_CREATE_REQUEST_QUEUE_PROPERTY_INFO
+    property property_id : Win32cr::Networking::HttpServer::HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID
+    property property_info_length : UInt32
+    property property_info : Void*
+    def initialize(@property_id : Win32cr::Networking::HttpServer::HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID, @property_info_length : UInt32, @property_info : Void*)
+    end
+  end
 
   @[Extern]
-  record HTTP_TRANSPORT_ADDRESS,
-    pRemoteAddress : Win32cr::Networking::WinSock::SOCKADDR*,
-    pLocalAddress : Win32cr::Networking::WinSock::SOCKADDR*
+  struct HTTP_TRANSPORT_ADDRESS
+    property pRemoteAddress : Win32cr::Networking::WinSock::SOCKADDR*
+    property pLocalAddress : Win32cr::Networking::WinSock::SOCKADDR*
+    def initialize(@pRemoteAddress : Win32cr::Networking::WinSock::SOCKADDR*, @pLocalAddress : Win32cr::Networking::WinSock::SOCKADDR*)
+    end
+  end
 
   @[Extern]
-  record HTTP_COOKED_URL,
-    full_url_length : UInt16,
-    host_length : UInt16,
-    abs_path_length : UInt16,
-    query_string_length : UInt16,
-    pFullUrl : Win32cr::Foundation::PWSTR,
-    pHost : Win32cr::Foundation::PWSTR,
-    pAbsPath : Win32cr::Foundation::PWSTR,
-    pQueryString : Win32cr::Foundation::PWSTR
+  struct HTTP_COOKED_URL
+    property full_url_length : UInt16
+    property host_length : UInt16
+    property abs_path_length : UInt16
+    property query_string_length : UInt16
+    property pFullUrl : Win32cr::Foundation::PWSTR
+    property pHost : Win32cr::Foundation::PWSTR
+    property pAbsPath : Win32cr::Foundation::PWSTR
+    property pQueryString : Win32cr::Foundation::PWSTR
+    def initialize(@full_url_length : UInt16, @host_length : UInt16, @abs_path_length : UInt16, @query_string_length : UInt16, @pFullUrl : Win32cr::Foundation::PWSTR, @pHost : Win32cr::Foundation::PWSTR, @pAbsPath : Win32cr::Foundation::PWSTR, @pQueryString : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record HTTP_SSL_CLIENT_CERT_INFO,
-    cert_flags : UInt32,
-    cert_encoded_size : UInt32,
-    pCertEncoded : UInt8*,
-    token : Win32cr::Foundation::HANDLE,
-    cert_denied_by_mapper : Win32cr::Foundation::BOOLEAN
+  struct HTTP_SSL_CLIENT_CERT_INFO
+    property cert_flags : UInt32
+    property cert_encoded_size : UInt32
+    property pCertEncoded : UInt8*
+    property token : Win32cr::Foundation::HANDLE
+    property cert_denied_by_mapper : Win32cr::Foundation::BOOLEAN
+    def initialize(@cert_flags : UInt32, @cert_encoded_size : UInt32, @pCertEncoded : UInt8*, @token : Win32cr::Foundation::HANDLE, @cert_denied_by_mapper : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record HTTP_SSL_INFO,
-    server_cert_key_size : UInt16,
-    connection_key_size : UInt16,
-    server_cert_issuer_size : UInt32,
-    server_cert_subject_size : UInt32,
-    pServerCertIssuer : Win32cr::Foundation::PSTR,
-    pServerCertSubject : Win32cr::Foundation::PSTR,
-    pClientCertInfo : Win32cr::Networking::HttpServer::HTTP_SSL_CLIENT_CERT_INFO*,
-    ssl_client_cert_negotiated : UInt32
+  struct HTTP_SSL_INFO
+    property server_cert_key_size : UInt16
+    property connection_key_size : UInt16
+    property server_cert_issuer_size : UInt32
+    property server_cert_subject_size : UInt32
+    property pServerCertIssuer : Win32cr::Foundation::PSTR
+    property pServerCertSubject : Win32cr::Foundation::PSTR
+    property pClientCertInfo : Win32cr::Networking::HttpServer::HTTP_SSL_CLIENT_CERT_INFO*
+    property ssl_client_cert_negotiated : UInt32
+    def initialize(@server_cert_key_size : UInt16, @connection_key_size : UInt16, @server_cert_issuer_size : UInt32, @server_cert_subject_size : UInt32, @pServerCertIssuer : Win32cr::Foundation::PSTR, @pServerCertSubject : Win32cr::Foundation::PSTR, @pClientCertInfo : Win32cr::Networking::HttpServer::HTTP_SSL_CLIENT_CERT_INFO*, @ssl_client_cert_negotiated : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_SSL_PROTOCOL_INFO,
-    protocol : UInt32,
-    cipher_type : UInt32,
-    cipher_strength : UInt32,
-    hash_type : UInt32,
-    hash_strength : UInt32,
-    key_exchange_type : UInt32,
-    key_exchange_strength : UInt32
+  struct HTTP_SSL_PROTOCOL_INFO
+    property protocol : UInt32
+    property cipher_type : UInt32
+    property cipher_strength : UInt32
+    property hash_type : UInt32
+    property hash_strength : UInt32
+    property key_exchange_type : UInt32
+    property key_exchange_strength : UInt32
+    def initialize(@protocol : UInt32, @cipher_type : UInt32, @cipher_strength : UInt32, @hash_type : UInt32, @hash_strength : UInt32, @key_exchange_type : UInt32, @key_exchange_strength : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_REQUEST_SIZING_INFO,
-    flags : UInt64,
-    request_index : UInt32,
-    request_sizing_count : UInt32,
-    request_sizing : UInt64[5]
+  struct HTTP_REQUEST_SIZING_INFO
+    property flags : UInt64
+    property request_index : UInt32
+    property request_sizing_count : UInt32
+    property request_sizing : UInt64[5]
+    def initialize(@flags : UInt64, @request_index : UInt32, @request_sizing_count : UInt32, @request_sizing : UInt64[5])
+    end
+  end
 
   @[Extern]
-  record HTTP_REQUEST_TIMING_INFO,
-    request_timing_count : UInt32,
-    request_timing : UInt64[30]
+  struct HTTP_REQUEST_TIMING_INFO
+    property request_timing_count : UInt32
+    property request_timing : UInt64[30]
+    def initialize(@request_timing_count : UInt32, @request_timing : UInt64[30])
+    end
+  end
 
   @[Extern]
-  record HTTP_REQUEST_INFO,
-    info_type : Win32cr::Networking::HttpServer::HTTP_REQUEST_INFO_TYPE,
-    info_length : UInt32,
-    pInfo : Void*
+  struct HTTP_REQUEST_INFO
+    property info_type : Win32cr::Networking::HttpServer::HTTP_REQUEST_INFO_TYPE
+    property info_length : UInt32
+    property pInfo : Void*
+    def initialize(@info_type : Win32cr::Networking::HttpServer::HTTP_REQUEST_INFO_TYPE, @info_length : UInt32, @pInfo : Void*)
+    end
+  end
 
   @[Extern]
-  record HTTP_REQUEST_AUTH_INFO,
-    auth_status : Win32cr::Networking::HttpServer::HTTP_AUTH_STATUS,
-    sec_status : Win32cr::Foundation::HRESULT,
-    flags : UInt32,
-    auth_type : Win32cr::Networking::HttpServer::HTTP_REQUEST_AUTH_TYPE,
-    access_token : Win32cr::Foundation::HANDLE,
-    context_attributes : UInt32,
-    packed_context_length : UInt32,
-    packed_context_type : UInt32,
-    packed_context : Void*,
-    mutual_auth_data_length : UInt32,
-    pMutualAuthData : Win32cr::Foundation::PSTR,
-    package_name_length : UInt16,
-    pPackageName : Win32cr::Foundation::PWSTR
+  struct HTTP_REQUEST_AUTH_INFO
+    property auth_status : Win32cr::Networking::HttpServer::HTTP_AUTH_STATUS
+    property sec_status : Win32cr::Foundation::HRESULT
+    property flags : UInt32
+    property auth_type : Win32cr::Networking::HttpServer::HTTP_REQUEST_AUTH_TYPE
+    property access_token : Win32cr::Foundation::HANDLE
+    property context_attributes : UInt32
+    property packed_context_length : UInt32
+    property packed_context_type : UInt32
+    property packed_context : Void*
+    property mutual_auth_data_length : UInt32
+    property pMutualAuthData : Win32cr::Foundation::PSTR
+    property package_name_length : UInt16
+    property pPackageName : Win32cr::Foundation::PWSTR
+    def initialize(@auth_status : Win32cr::Networking::HttpServer::HTTP_AUTH_STATUS, @sec_status : Win32cr::Foundation::HRESULT, @flags : UInt32, @auth_type : Win32cr::Networking::HttpServer::HTTP_REQUEST_AUTH_TYPE, @access_token : Win32cr::Foundation::HANDLE, @context_attributes : UInt32, @packed_context_length : UInt32, @packed_context_type : UInt32, @packed_context : Void*, @mutual_auth_data_length : UInt32, @pMutualAuthData : Win32cr::Foundation::PSTR, @package_name_length : UInt16, @pPackageName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record HTTP_REQUEST_V1,
-    flags : UInt32,
-    connection_id : UInt64,
-    request_id : UInt64,
-    url_context : UInt64,
-    version : Win32cr::Networking::HttpServer::HTTP_VERSION,
-    verb : Win32cr::Networking::HttpServer::HTTP_VERB,
-    unknown_verb_length : UInt16,
-    raw_url_length : UInt16,
-    pUnknownVerb : Win32cr::Foundation::PSTR,
-    pRawUrl : Win32cr::Foundation::PSTR,
-    cooked_url : Win32cr::Networking::HttpServer::HTTP_COOKED_URL,
-    address : Win32cr::Networking::HttpServer::HTTP_TRANSPORT_ADDRESS,
-    headers : Win32cr::Networking::HttpServer::HTTP_REQUEST_HEADERS,
-    bytes_received : UInt64,
-    entity_chunk_count : UInt16,
-    pEntityChunks : Win32cr::Networking::HttpServer::HTTP_DATA_CHUNK*,
-    raw_connection_id : UInt64,
-    pSslInfo : Win32cr::Networking::HttpServer::HTTP_SSL_INFO*
+  struct HTTP_REQUEST_V1
+    property flags : UInt32
+    property connection_id : UInt64
+    property request_id : UInt64
+    property url_context : UInt64
+    property version : Win32cr::Networking::HttpServer::HTTP_VERSION
+    property verb : Win32cr::Networking::HttpServer::HTTP_VERB
+    property unknown_verb_length : UInt16
+    property raw_url_length : UInt16
+    property pUnknownVerb : Win32cr::Foundation::PSTR
+    property pRawUrl : Win32cr::Foundation::PSTR
+    property cooked_url : Win32cr::Networking::HttpServer::HTTP_COOKED_URL
+    property address : Win32cr::Networking::HttpServer::HTTP_TRANSPORT_ADDRESS
+    property headers : Win32cr::Networking::HttpServer::HTTP_REQUEST_HEADERS
+    property bytes_received : UInt64
+    property entity_chunk_count : UInt16
+    property pEntityChunks : Win32cr::Networking::HttpServer::HTTP_DATA_CHUNK*
+    property raw_connection_id : UInt64
+    property pSslInfo : Win32cr::Networking::HttpServer::HTTP_SSL_INFO*
+    def initialize(@flags : UInt32, @connection_id : UInt64, @request_id : UInt64, @url_context : UInt64, @version : Win32cr::Networking::HttpServer::HTTP_VERSION, @verb : Win32cr::Networking::HttpServer::HTTP_VERB, @unknown_verb_length : UInt16, @raw_url_length : UInt16, @pUnknownVerb : Win32cr::Foundation::PSTR, @pRawUrl : Win32cr::Foundation::PSTR, @cooked_url : Win32cr::Networking::HttpServer::HTTP_COOKED_URL, @address : Win32cr::Networking::HttpServer::HTTP_TRANSPORT_ADDRESS, @headers : Win32cr::Networking::HttpServer::HTTP_REQUEST_HEADERS, @bytes_received : UInt64, @entity_chunk_count : UInt16, @pEntityChunks : Win32cr::Networking::HttpServer::HTTP_DATA_CHUNK*, @raw_connection_id : UInt64, @pSslInfo : Win32cr::Networking::HttpServer::HTTP_SSL_INFO*)
+    end
+  end
 
   @[Extern]
-  record HTTP_REQUEST_V2,
-    __anonymous_base_http_l1861_c35 : Win32cr::Networking::HttpServer::HTTP_REQUEST_V1,
-    request_info_count : UInt16,
-    pRequestInfo : Win32cr::Networking::HttpServer::HTTP_REQUEST_INFO*
+  struct HTTP_REQUEST_V2
+    property __anonymous_base_http_l1861_c35 : Win32cr::Networking::HttpServer::HTTP_REQUEST_V1
+    property request_info_count : UInt16
+    property pRequestInfo : Win32cr::Networking::HttpServer::HTTP_REQUEST_INFO*
+    def initialize(@__anonymous_base_http_l1861_c35 : Win32cr::Networking::HttpServer::HTTP_REQUEST_V1, @request_info_count : UInt16, @pRequestInfo : Win32cr::Networking::HttpServer::HTTP_REQUEST_INFO*)
+    end
+  end
 
   @[Extern]
-  record HTTP_RESPONSE_V1,
-    flags : UInt32,
-    version : Win32cr::Networking::HttpServer::HTTP_VERSION,
-    status_code : UInt16,
-    reason_length : UInt16,
-    pReason : Win32cr::Foundation::PSTR,
-    headers : Win32cr::Networking::HttpServer::HTTP_RESPONSE_HEADERS,
-    entity_chunk_count : UInt16,
-    pEntityChunks : Win32cr::Networking::HttpServer::HTTP_DATA_CHUNK*
+  struct HTTP_RESPONSE_V1
+    property flags : UInt32
+    property version : Win32cr::Networking::HttpServer::HTTP_VERSION
+    property status_code : UInt16
+    property reason_length : UInt16
+    property pReason : Win32cr::Foundation::PSTR
+    property headers : Win32cr::Networking::HttpServer::HTTP_RESPONSE_HEADERS
+    property entity_chunk_count : UInt16
+    property pEntityChunks : Win32cr::Networking::HttpServer::HTTP_DATA_CHUNK*
+    def initialize(@flags : UInt32, @version : Win32cr::Networking::HttpServer::HTTP_VERSION, @status_code : UInt16, @reason_length : UInt16, @pReason : Win32cr::Foundation::PSTR, @headers : Win32cr::Networking::HttpServer::HTTP_RESPONSE_HEADERS, @entity_chunk_count : UInt16, @pEntityChunks : Win32cr::Networking::HttpServer::HTTP_DATA_CHUNK*)
+    end
+  end
 
   @[Extern]
-  record HTTP_RESPONSE_INFO,
-    type__ : Win32cr::Networking::HttpServer::HTTP_RESPONSE_INFO_TYPE,
-    length : UInt32,
-    pInfo : Void*
+  struct HTTP_RESPONSE_INFO
+    property type__ : Win32cr::Networking::HttpServer::HTTP_RESPONSE_INFO_TYPE
+    property length : UInt32
+    property pInfo : Void*
+    def initialize(@type__ : Win32cr::Networking::HttpServer::HTTP_RESPONSE_INFO_TYPE, @length : UInt32, @pInfo : Void*)
+    end
+  end
 
   @[Extern]
-  record HTTP_MULTIPLE_KNOWN_HEADERS,
-    header_id : Win32cr::Networking::HttpServer::HTTP_HEADER_ID,
-    flags : UInt32,
-    known_header_count : UInt16,
-    known_headers : Win32cr::Networking::HttpServer::HTTP_KNOWN_HEADER*
+  struct HTTP_MULTIPLE_KNOWN_HEADERS
+    property header_id : Win32cr::Networking::HttpServer::HTTP_HEADER_ID
+    property flags : UInt32
+    property known_header_count : UInt16
+    property known_headers : Win32cr::Networking::HttpServer::HTTP_KNOWN_HEADER*
+    def initialize(@header_id : Win32cr::Networking::HttpServer::HTTP_HEADER_ID, @flags : UInt32, @known_header_count : UInt16, @known_headers : Win32cr::Networking::HttpServer::HTTP_KNOWN_HEADER*)
+    end
+  end
 
   @[Extern]
-  record HTTP_RESPONSE_V2,
-    __anonymous_base_http_l2050_c36 : Win32cr::Networking::HttpServer::HTTP_RESPONSE_V1,
-    response_info_count : UInt16,
-    pResponseInfo : Win32cr::Networking::HttpServer::HTTP_RESPONSE_INFO*
+  struct HTTP_RESPONSE_V2
+    property __anonymous_base_http_l2050_c36 : Win32cr::Networking::HttpServer::HTTP_RESPONSE_V1
+    property response_info_count : UInt16
+    property pResponseInfo : Win32cr::Networking::HttpServer::HTTP_RESPONSE_INFO*
+    def initialize(@__anonymous_base_http_l2050_c36 : Win32cr::Networking::HttpServer::HTTP_RESPONSE_V1, @response_info_count : UInt16, @pResponseInfo : Win32cr::Networking::HttpServer::HTTP_RESPONSE_INFO*)
+    end
+  end
 
   @[Extern]
-  record HTTPAPI_VERSION,
-    http_api_major_version : UInt16,
-    http_api_minor_version : UInt16
+  struct HTTPAPI_VERSION
+    property http_api_major_version : UInt16
+    property http_api_minor_version : UInt16
+    def initialize(@http_api_major_version : UInt16, @http_api_minor_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record HTTP_CACHE_POLICY,
-    policy : Win32cr::Networking::HttpServer::HTTP_CACHE_POLICY_TYPE,
-    seconds_to_live : UInt32
+  struct HTTP_CACHE_POLICY
+    property policy : Win32cr::Networking::HttpServer::HTTP_CACHE_POLICY_TYPE
+    property seconds_to_live : UInt32
+    def initialize(@policy : Win32cr::Networking::HttpServer::HTTP_CACHE_POLICY_TYPE, @seconds_to_live : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_KEY,
-    pIpPort : Win32cr::Networking::WinSock::SOCKADDR*
+  struct HTTP_SERVICE_CONFIG_SSL_KEY
+    property pIpPort : Win32cr::Networking::WinSock::SOCKADDR*
+    def initialize(@pIpPort : Win32cr::Networking::WinSock::SOCKADDR*)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_KEY_EX,
-    ip_port : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+  struct HTTP_SERVICE_CONFIG_SSL_KEY_EX
+    property ip_port : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    def initialize(@ip_port : Win32cr::Networking::WinSock::SOCKADDR_STORAGE)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_SNI_KEY,
-    ip_port : Win32cr::Networking::WinSock::SOCKADDR_STORAGE,
-    host : Win32cr::Foundation::PWSTR
+  struct HTTP_SERVICE_CONFIG_SSL_SNI_KEY
+    property ip_port : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    property host : Win32cr::Foundation::PWSTR
+    def initialize(@ip_port : Win32cr::Networking::WinSock::SOCKADDR_STORAGE, @host : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_CCS_KEY,
-    local_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+  struct HTTP_SERVICE_CONFIG_SSL_CCS_KEY
+    property local_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    def initialize(@local_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_PARAM,
-    ssl_hash_length : UInt32,
-    pSslHash : Void*,
-    app_id : LibC::GUID,
-    pSslCertStoreName : Win32cr::Foundation::PWSTR,
-    default_cert_check_mode : UInt32,
-    default_revocation_freshness_time : UInt32,
-    default_revocation_url_retrieval_timeout : UInt32,
-    pDefaultSslCtlIdentifier : Win32cr::Foundation::PWSTR,
-    pDefaultSslCtlStoreName : Win32cr::Foundation::PWSTR,
-    default_flags : UInt32
+  struct HTTP_SERVICE_CONFIG_SSL_PARAM
+    property ssl_hash_length : UInt32
+    property pSslHash : Void*
+    property app_id : LibC::GUID
+    property pSslCertStoreName : Win32cr::Foundation::PWSTR
+    property default_cert_check_mode : UInt32
+    property default_revocation_freshness_time : UInt32
+    property default_revocation_url_retrieval_timeout : UInt32
+    property pDefaultSslCtlIdentifier : Win32cr::Foundation::PWSTR
+    property pDefaultSslCtlStoreName : Win32cr::Foundation::PWSTR
+    property default_flags : UInt32
+    def initialize(@ssl_hash_length : UInt32, @pSslHash : Void*, @app_id : LibC::GUID, @pSslCertStoreName : Win32cr::Foundation::PWSTR, @default_cert_check_mode : UInt32, @default_revocation_freshness_time : UInt32, @default_revocation_url_retrieval_timeout : UInt32, @pDefaultSslCtlIdentifier : Win32cr::Foundation::PWSTR, @pDefaultSslCtlStoreName : Win32cr::Foundation::PWSTR, @default_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP2_WINDOW_SIZE_PARAM,
-    http2_receive_window_size : UInt32
+  struct HTTP2_WINDOW_SIZE_PARAM
+    property http2_receive_window_size : UInt32
+    def initialize(@http2_receive_window_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP2_SETTINGS_LIMITS_PARAM,
-    http2_max_settings_per_frame : UInt32,
-    http2_max_settings_per_minute : UInt32
+  struct HTTP2_SETTINGS_LIMITS_PARAM
+    property http2_max_settings_per_frame : UInt32
+    property http2_max_settings_per_minute : UInt32
+    def initialize(@http2_max_settings_per_frame : UInt32, @http2_max_settings_per_minute : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_PERFORMANCE_PARAM,
-    type__ : Win32cr::Networking::HttpServer::HTTP_PERFORMANCE_PARAM_TYPE,
-    buffer_size : UInt32,
-    buffer : Void*
+  struct HTTP_PERFORMANCE_PARAM
+    property type__ : Win32cr::Networking::HttpServer::HTTP_PERFORMANCE_PARAM_TYPE
+    property buffer_size : UInt32
+    property buffer : Void*
+    def initialize(@type__ : Win32cr::Networking::HttpServer::HTTP_PERFORMANCE_PARAM_TYPE, @buffer_size : UInt32, @buffer : Void*)
+    end
+  end
 
   @[Extern]
-  record HTTP_TLS_RESTRICTIONS_PARAM,
-    restriction_count : UInt32,
-    tls_restrictions : Void*
+  struct HTTP_TLS_RESTRICTIONS_PARAM
+    property restriction_count : UInt32
+    property tls_restrictions : Void*
+    def initialize(@restriction_count : UInt32, @tls_restrictions : Void*)
+    end
+  end
 
   @[Extern]
-  record HTTP_ERROR_HEADERS_PARAM,
-    status_code : UInt16,
-    header_count : UInt16,
-    headers : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*
+  struct HTTP_ERROR_HEADERS_PARAM
+    property status_code : UInt16
+    property header_count : UInt16
+    property headers : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*
+    def initialize(@status_code : UInt16, @header_count : UInt16, @headers : Win32cr::Networking::HttpServer::HTTP_UNKNOWN_HEADER*)
+    end
+  end
 
   @[Extern]
-  record HTTP_TLS_SESSION_TICKET_KEYS_PARAM,
-    session_ticket_key_count : UInt32,
-    session_ticket_keys : Void*
+  struct HTTP_TLS_SESSION_TICKET_KEYS_PARAM
+    property session_ticket_key_count : UInt32
+    property session_ticket_keys : Void*
+    def initialize(@session_ticket_key_count : UInt32, @session_ticket_keys : Void*)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_PARAM_EX,
-    param_type : Win32cr::Networking::HttpServer::HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE,
-    flags : UInt64,
-    anonymous : Anonymous_e__Union_ do
+  struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX
+    property param_type : Win32cr::Networking::HttpServer::HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE
+    property flags : UInt64
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      http2_window_size_param : Win32cr::Networking::HttpServer::HTTP2_WINDOW_SIZE_PARAM,
-      http2_settings_limits_param : Win32cr::Networking::HttpServer::HTTP2_SETTINGS_LIMITS_PARAM,
-      http_performance_param : Win32cr::Networking::HttpServer::HTTP_PERFORMANCE_PARAM,
-      http_tls_restrictions_param : Win32cr::Networking::HttpServer::HTTP_TLS_RESTRICTIONS_PARAM,
-      http_error_headers_param : Win32cr::Networking::HttpServer::HTTP_ERROR_HEADERS_PARAM,
-      http_tls_session_ticket_keys_param : Win32cr::Networking::HttpServer::HTTP_TLS_SESSION_TICKET_KEYS_PARAM
+    struct Anonymous_e__Union_
+    property http2_window_size_param : Win32cr::Networking::HttpServer::HTTP2_WINDOW_SIZE_PARAM
+    property http2_settings_limits_param : Win32cr::Networking::HttpServer::HTTP2_SETTINGS_LIMITS_PARAM
+    property http_performance_param : Win32cr::Networking::HttpServer::HTTP_PERFORMANCE_PARAM
+    property http_tls_restrictions_param : Win32cr::Networking::HttpServer::HTTP_TLS_RESTRICTIONS_PARAM
+    property http_error_headers_param : Win32cr::Networking::HttpServer::HTTP_ERROR_HEADERS_PARAM
+    property http_tls_session_ticket_keys_param : Win32cr::Networking::HttpServer::HTTP_TLS_SESSION_TICKET_KEYS_PARAM
+    def initialize(@http2_window_size_param : Win32cr::Networking::HttpServer::HTTP2_WINDOW_SIZE_PARAM, @http2_settings_limits_param : Win32cr::Networking::HttpServer::HTTP2_SETTINGS_LIMITS_PARAM, @http_performance_param : Win32cr::Networking::HttpServer::HTTP_PERFORMANCE_PARAM, @http_tls_restrictions_param : Win32cr::Networking::HttpServer::HTTP_TLS_RESTRICTIONS_PARAM, @http_error_headers_param : Win32cr::Networking::HttpServer::HTTP_ERROR_HEADERS_PARAM, @http_tls_session_ticket_keys_param : Win32cr::Networking::HttpServer::HTTP_TLS_SESSION_TICKET_KEYS_PARAM)
+    end
+    end
 
+    def initialize(@param_type : Win32cr::Networking::HttpServer::HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE, @flags : UInt64, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_SET,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_KEY,
-    param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM
+  struct HTTP_SERVICE_CONFIG_SSL_SET
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_KEY
+    property param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM
+    def initialize(@key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_KEY, @param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_SNI_SET,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_SNI_KEY,
-    param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM
+  struct HTTP_SERVICE_CONFIG_SSL_SNI_SET
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_SNI_KEY
+    property param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM
+    def initialize(@key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_SNI_KEY, @param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_CCS_SET,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_CCS_KEY,
-    param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM
+  struct HTTP_SERVICE_CONFIG_SSL_CCS_SET
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_CCS_KEY
+    property param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM
+    def initialize(@key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_CCS_KEY, @param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_SET_EX,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_KEY_EX,
-    param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM_EX
+  struct HTTP_SERVICE_CONFIG_SSL_SET_EX
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_KEY_EX
+    property param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM_EX
+    def initialize(@key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_KEY_EX, @param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM_EX)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_SNI_SET_EX,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_SNI_KEY,
-    param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM_EX
+  struct HTTP_SERVICE_CONFIG_SSL_SNI_SET_EX
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_SNI_KEY
+    property param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM_EX
+    def initialize(@key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_SNI_KEY, @param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM_EX)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_CCS_SET_EX,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_CCS_KEY,
-    param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM_EX
+  struct HTTP_SERVICE_CONFIG_SSL_CCS_SET_EX
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_CCS_KEY
+    property param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM_EX
+    def initialize(@key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_CCS_KEY, @param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_PARAM_EX)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_QUERY,
-    query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_KEY,
-    dwToken : UInt32
+  struct HTTP_SERVICE_CONFIG_SSL_QUERY
+    property query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_KEY
+    property dwToken : UInt32
+    def initialize(@query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE, @key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_KEY, @dwToken : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_SNI_QUERY,
-    query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_SNI_KEY,
-    dwToken : UInt32
+  struct HTTP_SERVICE_CONFIG_SSL_SNI_QUERY
+    property query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_SNI_KEY
+    property dwToken : UInt32
+    def initialize(@query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE, @key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_SNI_KEY, @dwToken : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_CCS_QUERY,
-    query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_CCS_KEY,
-    dwToken : UInt32
+  struct HTTP_SERVICE_CONFIG_SSL_CCS_QUERY
+    property query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_CCS_KEY
+    property dwToken : UInt32
+    def initialize(@query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE, @key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_CCS_KEY, @dwToken : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_QUERY_EX,
-    query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_KEY_EX,
-    dwToken : UInt32,
-    param_type : Win32cr::Networking::HttpServer::HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE
+  struct HTTP_SERVICE_CONFIG_SSL_QUERY_EX
+    property query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_KEY_EX
+    property dwToken : UInt32
+    property param_type : Win32cr::Networking::HttpServer::HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE
+    def initialize(@query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE, @key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_KEY_EX, @dwToken : UInt32, @param_type : Win32cr::Networking::HttpServer::HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_SNI_QUERY_EX,
-    query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_SNI_KEY,
-    dwToken : UInt32,
-    param_type : Win32cr::Networking::HttpServer::HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE
+  struct HTTP_SERVICE_CONFIG_SSL_SNI_QUERY_EX
+    property query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_SNI_KEY
+    property dwToken : UInt32
+    property param_type : Win32cr::Networking::HttpServer::HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE
+    def initialize(@query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE, @key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_SNI_KEY, @dwToken : UInt32, @param_type : Win32cr::Networking::HttpServer::HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_SSL_CCS_QUERY_EX,
-    query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_CCS_KEY,
-    dwToken : UInt32,
-    param_type : Win32cr::Networking::HttpServer::HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE
+  struct HTTP_SERVICE_CONFIG_SSL_CCS_QUERY_EX
+    property query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_CCS_KEY
+    property dwToken : UInt32
+    property param_type : Win32cr::Networking::HttpServer::HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE
+    def initialize(@query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE, @key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_SSL_CCS_KEY, @dwToken : UInt32, @param_type : Win32cr::Networking::HttpServer::HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_IP_LISTEN_PARAM,
-    addr_length : UInt16,
-    pAddress : Win32cr::Networking::WinSock::SOCKADDR*
+  struct HTTP_SERVICE_CONFIG_IP_LISTEN_PARAM
+    property addr_length : UInt16
+    property pAddress : Win32cr::Networking::WinSock::SOCKADDR*
+    def initialize(@addr_length : UInt16, @pAddress : Win32cr::Networking::WinSock::SOCKADDR*)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_IP_LISTEN_QUERY,
-    addr_count : UInt32,
-    addr_list : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*
+  struct HTTP_SERVICE_CONFIG_IP_LISTEN_QUERY
+    property addr_count : UInt32
+    property addr_list : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*
+    def initialize(@addr_count : UInt32, @addr_list : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_URLACL_KEY,
-    pUrlPrefix : Win32cr::Foundation::PWSTR
+  struct HTTP_SERVICE_CONFIG_URLACL_KEY
+    property pUrlPrefix : Win32cr::Foundation::PWSTR
+    def initialize(@pUrlPrefix : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_URLACL_PARAM,
-    pStringSecurityDescriptor : Win32cr::Foundation::PWSTR
+  struct HTTP_SERVICE_CONFIG_URLACL_PARAM
+    property pStringSecurityDescriptor : Win32cr::Foundation::PWSTR
+    def initialize(@pStringSecurityDescriptor : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_URLACL_SET,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_URLACL_KEY,
-    param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_URLACL_PARAM
+  struct HTTP_SERVICE_CONFIG_URLACL_SET
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_URLACL_KEY
+    property param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_URLACL_PARAM
+    def initialize(@key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_URLACL_KEY, @param_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_URLACL_PARAM)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_URLACL_QUERY,
-    query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_URLACL_KEY,
-    dwToken : UInt32
+  struct HTTP_SERVICE_CONFIG_URLACL_QUERY
+    property query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_URLACL_KEY
+    property dwToken : UInt32
+    def initialize(@query_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_QUERY_TYPE, @key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_URLACL_KEY, @dwToken : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_SERVICE_CONFIG_CACHE_SET,
-    key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_CACHE_KEY,
-    param_desc : UInt32
+  struct HTTP_SERVICE_CONFIG_CACHE_SET
+    property key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_CACHE_KEY
+    property param_desc : UInt32
+    def initialize(@key_desc : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_CACHE_KEY, @param_desc : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_QUERY_REQUEST_QUALIFIER_TCP,
-    freshness : UInt64
+  struct HTTP_QUERY_REQUEST_QUALIFIER_TCP
+    property freshness : UInt64
+    def initialize(@freshness : UInt64)
+    end
+  end
 
   @[Extern]
-  record HTTP_QUERY_REQUEST_QUALIFIER_QUIC,
-    freshness : UInt64
+  struct HTTP_QUERY_REQUEST_QUALIFIER_QUIC
+    property freshness : UInt64
+    def initialize(@freshness : UInt64)
+    end
+  end
 
   @[Extern]
-  record HTTP_REQUEST_PROPERTY_SNI,
-    hostname : UInt16[256],
-    flags : UInt32
+  struct HTTP_REQUEST_PROPERTY_SNI
+    property hostname : UInt16[256]
+    property flags : UInt32
+    def initialize(@hostname : UInt16[256], @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_REQUEST_PROPERTY_STREAM_ERROR,
-    error_code : UInt32
+  struct HTTP_REQUEST_PROPERTY_STREAM_ERROR
+    property error_code : UInt32
+    def initialize(@error_code : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_WSK_API_TIMINGS,
-    connect_count : UInt64,
-    connect_sum : UInt64,
-    disconnect_count : UInt64,
-    disconnect_sum : UInt64,
-    send_count : UInt64,
-    send_sum : UInt64,
-    receive_count : UInt64,
-    receive_sum : UInt64,
-    release_count : UInt64,
-    release_sum : UInt64,
-    control_socket_count : UInt64,
-    control_socket_sum : UInt64
+  struct HTTP_WSK_API_TIMINGS
+    property connect_count : UInt64
+    property connect_sum : UInt64
+    property disconnect_count : UInt64
+    property disconnect_sum : UInt64
+    property send_count : UInt64
+    property send_sum : UInt64
+    property receive_count : UInt64
+    property receive_sum : UInt64
+    property release_count : UInt64
+    property release_sum : UInt64
+    property control_socket_count : UInt64
+    property control_socket_sum : UInt64
+    def initialize(@connect_count : UInt64, @connect_sum : UInt64, @disconnect_count : UInt64, @disconnect_sum : UInt64, @send_count : UInt64, @send_sum : UInt64, @receive_count : UInt64, @receive_sum : UInt64, @release_count : UInt64, @release_sum : UInt64, @control_socket_count : UInt64, @control_socket_sum : UInt64)
+    end
+  end
 
   @[Extern]
-  record HTTP_QUIC_STREAM_API_TIMINGS,
-    open_count : UInt64,
-    open_sum : UInt64,
-    close_count : UInt64,
-    close_sum : UInt64,
-    start_count : UInt64,
-    start_sum : UInt64,
-    shutdown_count : UInt64,
-    shutdown_sum : UInt64,
-    send_count : UInt64,
-    send_sum : UInt64,
-    receive_set_enabled_count : UInt64,
-    receive_set_enabled_sum : UInt64,
-    get_param_count : UInt64,
-    get_param_sum : UInt64,
-    set_param_count : UInt64,
-    set_param_sum : UInt64,
-    set_callback_handler_count : UInt64,
-    set_callback_handler_sum : UInt64
+  struct HTTP_QUIC_STREAM_API_TIMINGS
+    property open_count : UInt64
+    property open_sum : UInt64
+    property close_count : UInt64
+    property close_sum : UInt64
+    property start_count : UInt64
+    property start_sum : UInt64
+    property shutdown_count : UInt64
+    property shutdown_sum : UInt64
+    property send_count : UInt64
+    property send_sum : UInt64
+    property receive_set_enabled_count : UInt64
+    property receive_set_enabled_sum : UInt64
+    property get_param_count : UInt64
+    property get_param_sum : UInt64
+    property set_param_count : UInt64
+    property set_param_sum : UInt64
+    property set_callback_handler_count : UInt64
+    property set_callback_handler_sum : UInt64
+    def initialize(@open_count : UInt64, @open_sum : UInt64, @close_count : UInt64, @close_sum : UInt64, @start_count : UInt64, @start_sum : UInt64, @shutdown_count : UInt64, @shutdown_sum : UInt64, @send_count : UInt64, @send_sum : UInt64, @receive_set_enabled_count : UInt64, @receive_set_enabled_sum : UInt64, @get_param_count : UInt64, @get_param_sum : UInt64, @set_param_count : UInt64, @set_param_sum : UInt64, @set_callback_handler_count : UInt64, @set_callback_handler_sum : UInt64)
+    end
+  end
 
   @[Extern]
-  record HTTP_QUIC_CONNECTION_API_TIMINGS,
-    open_time : UInt64,
-    close_time : UInt64,
-    start_time : UInt64,
-    shutdown_time : UInt64,
-    sec_config_create_time : UInt64,
-    sec_config_delete_time : UInt64,
-    get_param_count : UInt64,
-    get_param_sum : UInt64,
-    set_param_count : UInt64,
-    set_param_sum : UInt64,
-    set_callback_handler_count : UInt64,
-    set_callback_handler_sum : UInt64,
-    control_stream_timings : Win32cr::Networking::HttpServer::HTTP_QUIC_STREAM_API_TIMINGS
+  struct HTTP_QUIC_CONNECTION_API_TIMINGS
+    property open_time : UInt64
+    property close_time : UInt64
+    property start_time : UInt64
+    property shutdown_time : UInt64
+    property sec_config_create_time : UInt64
+    property sec_config_delete_time : UInt64
+    property get_param_count : UInt64
+    property get_param_sum : UInt64
+    property set_param_count : UInt64
+    property set_param_sum : UInt64
+    property set_callback_handler_count : UInt64
+    property set_callback_handler_sum : UInt64
+    property control_stream_timings : Win32cr::Networking::HttpServer::HTTP_QUIC_STREAM_API_TIMINGS
+    def initialize(@open_time : UInt64, @close_time : UInt64, @start_time : UInt64, @shutdown_time : UInt64, @sec_config_create_time : UInt64, @sec_config_delete_time : UInt64, @get_param_count : UInt64, @get_param_sum : UInt64, @set_param_count : UInt64, @set_param_sum : UInt64, @set_callback_handler_count : UInt64, @set_callback_handler_sum : UInt64, @control_stream_timings : Win32cr::Networking::HttpServer::HTTP_QUIC_STREAM_API_TIMINGS)
+    end
+  end
 
   @[Extern]
-  record HTTP_QUIC_API_TIMINGS,
-    connection_timings : Win32cr::Networking::HttpServer::HTTP_QUIC_CONNECTION_API_TIMINGS,
-    stream_timings : Win32cr::Networking::HttpServer::HTTP_QUIC_STREAM_API_TIMINGS
+  struct HTTP_QUIC_API_TIMINGS
+    property connection_timings : Win32cr::Networking::HttpServer::HTTP_QUIC_CONNECTION_API_TIMINGS
+    property stream_timings : Win32cr::Networking::HttpServer::HTTP_QUIC_STREAM_API_TIMINGS
+    def initialize(@connection_timings : Win32cr::Networking::HttpServer::HTTP_QUIC_CONNECTION_API_TIMINGS, @stream_timings : Win32cr::Networking::HttpServer::HTTP_QUIC_STREAM_API_TIMINGS)
+    end
+  end
 
   @[Link("httpapi")]
   lib C

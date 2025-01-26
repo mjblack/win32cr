@@ -19,7 +19,6 @@ module Win32cr::System::WinRT::Media
 
 
   @[Extern]
-  #@[Com("20be1e2e-930f-4746-9335-3c332f255093")]
   record IAudioFrameNative, lpVtbl : IAudioFrameNativeVtbl* do
     GUID = LibC::GUID.new(0x20be1e2e_u32, 0x930f_u16, 0x4746_u16, StaticArray[0x93_u8, 0x35_u8, 0x3c_u8, 0x33_u8, 0x2f_u8, 0x25_u8, 0x50_u8, 0x93_u8])
     def query_interface(this : IAudioFrameNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -59,7 +58,6 @@ module Win32cr::System::WinRT::Media
 
 
   @[Extern]
-  #@[Com("26ba702b-314a-4620-aaf6-7a51aa58fa18")]
   record IVideoFrameNative, lpVtbl : IVideoFrameNativeVtbl* do
     GUID = LibC::GUID.new(0x26ba702b_u32, 0x314a_u16, 0x4620_u16, StaticArray[0xaa_u8, 0xf6_u8, 0x7a_u8, 0x51_u8, 0xaa_u8, 0x58_u8, 0xfa_u8, 0x18_u8])
     def query_interface(this : IVideoFrameNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -101,7 +99,6 @@ module Win32cr::System::WinRT::Media
 
 
   @[Extern]
-  #@[Com("7bd67cf8-bf7d-43e6-af8d-b170ee0c0110")]
   record IAudioFrameNativeFactory, lpVtbl : IAudioFrameNativeFactoryVtbl* do
     GUID = LibC::GUID.new(0x7bd67cf8_u32, 0xbf7d_u16, 0x43e6_u16, StaticArray[0xaf_u8, 0x8d_u8, 0xb1_u8, 0x70_u8, 0xee_u8, 0xc_u8, 0x1_u8, 0x10_u8])
     def query_interface(this : IAudioFrameNativeFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -140,7 +137,6 @@ module Win32cr::System::WinRT::Media
 
 
   @[Extern]
-  #@[Com("69e3693e-8e1e-4e63-ac4c-7fdc21d9731d")]
   record IVideoFrameNativeFactory, lpVtbl : IVideoFrameNativeFactoryVtbl* do
     GUID = LibC::GUID.new(0x69e3693e_u32, 0x8e1e_u16, 0x4e63_u16, StaticArray[0xac_u8, 0x4c_u8, 0x7f_u8, 0xdc_u8, 0x21_u8, 0xd9_u8, 0x73_u8, 0x1d_u8])
     def query_interface(this : IVideoFrameNativeFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

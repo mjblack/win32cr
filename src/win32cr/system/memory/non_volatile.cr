@@ -3,9 +3,12 @@ module Win32cr::System::Memory::NonVolatile
 
 
   @[Extern]
-  record NV_MEMORY_RANGE,
-    base_address : Void*,
-    length : LibC::UIntPtrT
+  struct NV_MEMORY_RANGE
+    property base_address : Void*
+    property length : LibC::UIntPtrT
+    def initialize(@base_address : Void*, @length : LibC::UIntPtrT)
+    end
+  end
 
   @[Link("ntdll")]
   lib C

@@ -236,21 +236,30 @@ module Win32cr::Devices::Properties
   end
 
   @[Extern]
-  record DEVPROPKEY,
-    fmtid : LibC::GUID,
-    pid : UInt32
+  struct DEVPROPKEY
+    property fmtid : LibC::GUID
+    property pid : UInt32
+    def initialize(@fmtid : LibC::GUID, @pid : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEVPROPCOMPKEY,
-    key : Win32cr::Devices::Properties::DEVPROPKEY,
-    store : Win32cr::Devices::Properties::DEVPROPSTORE,
-    locale_name : Win32cr::Foundation::PWSTR
+  struct DEVPROPCOMPKEY
+    property key : Win32cr::Devices::Properties::DEVPROPKEY
+    property store : Win32cr::Devices::Properties::DEVPROPSTORE
+    property locale_name : Win32cr::Foundation::PWSTR
+    def initialize(@key : Win32cr::Devices::Properties::DEVPROPKEY, @store : Win32cr::Devices::Properties::DEVPROPSTORE, @locale_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DEVPROPERTY,
-    comp_key : Win32cr::Devices::Properties::DEVPROPCOMPKEY,
-    type__ : UInt32,
-    buffer_size : UInt32,
-    buffer : Void*
+  struct DEVPROPERTY
+    property comp_key : Win32cr::Devices::Properties::DEVPROPCOMPKEY
+    property type__ : UInt32
+    property buffer_size : UInt32
+    property buffer : Void*
+    def initialize(@comp_key : Win32cr::Devices::Properties::DEVPROPCOMPKEY, @type__ : UInt32, @buffer_size : UInt32, @buffer : Void*)
+    end
+  end
 
 end

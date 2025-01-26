@@ -4,11 +4,11 @@ require "./../direct3_d11.cr"
 require "./../direct3_d10.cr"
 
 module Win32cr::Graphics::Direct3D::Fxc
-  alias Pd3dcompile = Proc(Void*, LibC::UIntPtrT, Win32cr::Foundation::PSTR, Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, UInt32, Void**, Void**, Win32cr::Foundation::HRESULT)*
+  alias Pd3dcompile = Proc(Void*, LibC::UIntPtrT, Win32cr::Foundation::PSTR, Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, UInt32, Void**, Void**, Win32cr::Foundation::HRESULT)
 
-  alias Pd3dpreprocess = Proc(Void*, LibC::UIntPtrT, Win32cr::Foundation::PSTR, Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, Void*, Void**, Void**, Win32cr::Foundation::HRESULT)*
+  alias Pd3dpreprocess = Proc(Void*, LibC::UIntPtrT, Win32cr::Foundation::PSTR, Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, Void*, Void**, Void**, Win32cr::Foundation::HRESULT)
 
-  alias Pd3ddisassemble = Proc(Void*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::PSTR, Void**, Win32cr::Foundation::HRESULT)*
+  alias Pd3ddisassemble = Proc(Void*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::PSTR, Void**, Win32cr::Foundation::HRESULT)
 
   D3DCOMPILER_DLL_W = "d3dcompiler_47.dll"
   D3DCOMPILER_DLL_A = "d3dcompiler_47.dll"
@@ -86,9 +86,12 @@ module Win32cr::Graphics::Direct3D::Fxc
   end
 
   @[Extern]
-  record D3D_SHADER_DATA,
-    pBytecode : Void*,
-    bytecode_length : LibC::UIntPtrT
+  struct D3D_SHADER_DATA
+    property pBytecode : Void*
+    property bytecode_length : LibC::UIntPtrT
+    def initialize(@pBytecode : Void*, @bytecode_length : LibC::UIntPtrT)
+    end
+  end
 
   @[Link("d3dcompiler_47")]
   lib C

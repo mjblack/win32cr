@@ -998,563 +998,751 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record VDS_STORAGE_IDENTIFIER,
-    m_CodeSet : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_IDENTIFIER_CODE_SET,
-    m_Type : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_IDENTIFIER_TYPE,
-    m_cbIdentifier : UInt32,
-    m_rgbIdentifier : UInt8*
-
-  @[Extern]
-  record VDS_STORAGE_DEVICE_ID_DESCRIPTOR,
-    m_version : UInt32,
-    m_cIdentifiers : UInt32,
-    m_rgIdentifiers : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_IDENTIFIER*
-
-  @[Extern]
-  record VDS_INTERCONNECT,
-    m_addressType : Win32cr::Storage::VirtualDiskService::VDS_INTERCONNECT_ADDRESS_TYPE,
-    m_cbPort : UInt32,
-    m_pbPort : UInt8*,
-    m_cbAddress : UInt32,
-    m_pbAddress : UInt8*
-
-  @[Extern]
-  record VDS_LUN_INFORMATION,
-    m_version : UInt32,
-    m_DeviceType : UInt8,
-    m_DeviceTypeModifier : UInt8,
-    m_bCommandQueueing : Win32cr::Foundation::BOOL,
-    m_BusType : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE,
-    m_szVendorId : UInt8*,
-    m_szProductId : UInt8*,
-    m_szProductRevision : UInt8*,
-    m_szSerialNumber : UInt8*,
-    m_diskSignature : LibC::GUID,
-    m_deviceIdDescriptor : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_DEVICE_ID_DESCRIPTOR,
-    m_cInterconnects : UInt32,
-    m_rgInterconnects : Win32cr::Storage::VirtualDiskService::VDS_INTERCONNECT*
-
-  @[Extern]
-  record VDS_PACK_NOTIFICATION,
-    ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_PACK,
-    packId : LibC::GUID
-
-  @[Extern]
-  record VDS_DISK_NOTIFICATION,
-    ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_DISK,
-    diskId : LibC::GUID
-
-  @[Extern]
-  record VDS_VOLUME_NOTIFICATION,
-    ulEvent : UInt32,
-    volumeId : LibC::GUID,
-    plexId : LibC::GUID,
-    ulPercentCompleted : UInt32
-
-  @[Extern]
-  record VDS_PARTITION_NOTIFICATION,
-    ulEvent : UInt32,
-    diskId : LibC::GUID,
-    ullOffset : UInt64
-
-  @[Extern]
-  record VDS_SERVICE_NOTIFICATION,
-    ulEvent : UInt32,
-    action : Win32cr::Storage::VirtualDiskService::VDS_RECOVER_ACTION
-
-  @[Extern]
-  record VDS_DRIVE_LETTER_NOTIFICATION,
-    ulEvent : UInt32,
-    wcLetter : UInt16,
-    volumeId : LibC::GUID
-
-  @[Extern]
-  record VDS_FILE_SYSTEM_NOTIFICATION,
-    ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_FILE_SYSTEM,
-    volumeId : LibC::GUID,
-    dwPercentCompleted : UInt32
-
-  @[Extern]
-  record VDS_MOUNT_POINT_NOTIFICATION,
-    ulEvent : UInt32,
-    volumeId : LibC::GUID
-
-  @[Extern]
-  record VDS_SUB_SYSTEM_NOTIFICATION,
-    ulEvent : UInt32,
-    subSystemId : LibC::GUID
-
-  @[Extern]
-  record VDS_CONTROLLER_NOTIFICATION,
-    ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_CONTROLLER,
-    controllerId : LibC::GUID
-
-  @[Extern]
-  record VDS_DRIVE_NOTIFICATION,
-    ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_DRIVE,
-    driveId : LibC::GUID
-
-  @[Extern]
-  record VDS_LUN_NOTIFICATION,
-    ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_LUN,
-    lun_id : LibC::GUID
-
-  @[Extern]
-  record VDS_PORT_NOTIFICATION,
-    ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_PORT,
-    portId : LibC::GUID
-
-  @[Extern]
-  record VDS_PORTAL_NOTIFICATION,
-    ulEvent : UInt32,
-    portalId : LibC::GUID
-
-  @[Extern]
-  record VDS_TARGET_NOTIFICATION,
-    ulEvent : UInt32,
-    targetId : LibC::GUID
-
-  @[Extern]
-  record VDS_PORTAL_GROUP_NOTIFICATION,
-    ulEvent : UInt32,
-    portalGroupId : LibC::GUID
-
-  @[Extern]
-  record VDS_NOTIFICATION,
-    objectType : Win32cr::Storage::VirtualDiskService::VDS_NOTIFICATION_TARGET_TYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pack : Win32cr::Storage::VirtualDiskService::VDS_PACK_NOTIFICATION,
-      disk : Win32cr::Storage::VirtualDiskService::VDS_DISK_NOTIFICATION,
-      volume : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_NOTIFICATION,
-      partition : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_NOTIFICATION,
-      letter : Win32cr::Storage::VirtualDiskService::VDS_DRIVE_LETTER_NOTIFICATION,
-      file_system : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_NOTIFICATION,
-      mount_point : Win32cr::Storage::VirtualDiskService::VDS_MOUNT_POINT_NOTIFICATION,
-      sub_system : Win32cr::Storage::VirtualDiskService::VDS_SUB_SYSTEM_NOTIFICATION,
-      controller : Win32cr::Storage::VirtualDiskService::VDS_CONTROLLER_NOTIFICATION,
-      drive : Win32cr::Storage::VirtualDiskService::VDS_DRIVE_NOTIFICATION,
-      lun : Win32cr::Storage::VirtualDiskService::VDS_LUN_NOTIFICATION,
-      port : Win32cr::Storage::VirtualDiskService::VDS_PORT_NOTIFICATION,
-      portal : Win32cr::Storage::VirtualDiskService::VDS_PORTAL_NOTIFICATION,
-      target : Win32cr::Storage::VirtualDiskService::VDS_TARGET_NOTIFICATION,
-      portal_group : Win32cr::Storage::VirtualDiskService::VDS_PORTAL_GROUP_NOTIFICATION,
-      service : Win32cr::Storage::VirtualDiskService::VDS_SERVICE_NOTIFICATION
-
+  struct VDS_STORAGE_IDENTIFIER
+    property m_CodeSet : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_IDENTIFIER_CODE_SET
+    property m_Type : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_IDENTIFIER_TYPE
+    property m_cbIdentifier : UInt32
+    property m_rgbIdentifier : UInt8*
+    def initialize(@m_CodeSet : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_IDENTIFIER_CODE_SET, @m_Type : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_IDENTIFIER_TYPE, @m_cbIdentifier : UInt32, @m_rgbIdentifier : UInt8*)
+    end
   end
 
   @[Extern]
-  record VDS_ASYNC_OUTPUT,
-    type__ : Win32cr::Storage::VirtualDiskService::VDS_ASYNC_OUTPUT_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct VDS_STORAGE_DEVICE_ID_DESCRIPTOR
+    property m_version : UInt32
+    property m_cIdentifiers : UInt32
+    property m_rgIdentifiers : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_IDENTIFIER*
+    def initialize(@m_version : UInt32, @m_cIdentifiers : UInt32, @m_rgIdentifiers : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_IDENTIFIER*)
+    end
+  end
+
+  @[Extern]
+  struct VDS_INTERCONNECT
+    property m_addressType : Win32cr::Storage::VirtualDiskService::VDS_INTERCONNECT_ADDRESS_TYPE
+    property m_cbPort : UInt32
+    property m_pbPort : UInt8*
+    property m_cbAddress : UInt32
+    property m_pbAddress : UInt8*
+    def initialize(@m_addressType : Win32cr::Storage::VirtualDiskService::VDS_INTERCONNECT_ADDRESS_TYPE, @m_cbPort : UInt32, @m_pbPort : UInt8*, @m_cbAddress : UInt32, @m_pbAddress : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct VDS_LUN_INFORMATION
+    property m_version : UInt32
+    property m_DeviceType : UInt8
+    property m_DeviceTypeModifier : UInt8
+    property m_bCommandQueueing : Win32cr::Foundation::BOOL
+    property m_BusType : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE
+    property m_szVendorId : UInt8*
+    property m_szProductId : UInt8*
+    property m_szProductRevision : UInt8*
+    property m_szSerialNumber : UInt8*
+    property m_diskSignature : LibC::GUID
+    property m_deviceIdDescriptor : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_DEVICE_ID_DESCRIPTOR
+    property m_cInterconnects : UInt32
+    property m_rgInterconnects : Win32cr::Storage::VirtualDiskService::VDS_INTERCONNECT*
+    def initialize(@m_version : UInt32, @m_DeviceType : UInt8, @m_DeviceTypeModifier : UInt8, @m_bCommandQueueing : Win32cr::Foundation::BOOL, @m_BusType : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE, @m_szVendorId : UInt8*, @m_szProductId : UInt8*, @m_szProductRevision : UInt8*, @m_szSerialNumber : UInt8*, @m_diskSignature : LibC::GUID, @m_deviceIdDescriptor : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_DEVICE_ID_DESCRIPTOR, @m_cInterconnects : UInt32, @m_rgInterconnects : Win32cr::Storage::VirtualDiskService::VDS_INTERCONNECT*)
+    end
+  end
+
+  @[Extern]
+  struct VDS_PACK_NOTIFICATION
+    property ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_PACK
+    property packId : LibC::GUID
+    def initialize(@ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_PACK, @packId : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct VDS_DISK_NOTIFICATION
+    property ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_DISK
+    property diskId : LibC::GUID
+    def initialize(@ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_DISK, @diskId : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct VDS_VOLUME_NOTIFICATION
+    property ulEvent : UInt32
+    property volumeId : LibC::GUID
+    property plexId : LibC::GUID
+    property ulPercentCompleted : UInt32
+    def initialize(@ulEvent : UInt32, @volumeId : LibC::GUID, @plexId : LibC::GUID, @ulPercentCompleted : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VDS_PARTITION_NOTIFICATION
+    property ulEvent : UInt32
+    property diskId : LibC::GUID
+    property ullOffset : UInt64
+    def initialize(@ulEvent : UInt32, @diskId : LibC::GUID, @ullOffset : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct VDS_SERVICE_NOTIFICATION
+    property ulEvent : UInt32
+    property action : Win32cr::Storage::VirtualDiskService::VDS_RECOVER_ACTION
+    def initialize(@ulEvent : UInt32, @action : Win32cr::Storage::VirtualDiskService::VDS_RECOVER_ACTION)
+    end
+  end
+
+  @[Extern]
+  struct VDS_DRIVE_LETTER_NOTIFICATION
+    property ulEvent : UInt32
+    property wcLetter : UInt16
+    property volumeId : LibC::GUID
+    def initialize(@ulEvent : UInt32, @wcLetter : UInt16, @volumeId : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct VDS_FILE_SYSTEM_NOTIFICATION
+    property ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_FILE_SYSTEM
+    property volumeId : LibC::GUID
+    property dwPercentCompleted : UInt32
+    def initialize(@ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_FILE_SYSTEM, @volumeId : LibC::GUID, @dwPercentCompleted : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VDS_MOUNT_POINT_NOTIFICATION
+    property ulEvent : UInt32
+    property volumeId : LibC::GUID
+    def initialize(@ulEvent : UInt32, @volumeId : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct VDS_SUB_SYSTEM_NOTIFICATION
+    property ulEvent : UInt32
+    property subSystemId : LibC::GUID
+    def initialize(@ulEvent : UInt32, @subSystemId : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct VDS_CONTROLLER_NOTIFICATION
+    property ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_CONTROLLER
+    property controllerId : LibC::GUID
+    def initialize(@ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_CONTROLLER, @controllerId : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct VDS_DRIVE_NOTIFICATION
+    property ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_DRIVE
+    property driveId : LibC::GUID
+    def initialize(@ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_DRIVE, @driveId : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct VDS_LUN_NOTIFICATION
+    property ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_LUN
+    property lun_id : LibC::GUID
+    def initialize(@ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_LUN, @lun_id : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct VDS_PORT_NOTIFICATION
+    property ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_PORT
+    property portId : LibC::GUID
+    def initialize(@ulEvent : Win32cr::Storage::VirtualDiskService::VDS_NF_PORT, @portId : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct VDS_PORTAL_NOTIFICATION
+    property ulEvent : UInt32
+    property portalId : LibC::GUID
+    def initialize(@ulEvent : UInt32, @portalId : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct VDS_TARGET_NOTIFICATION
+    property ulEvent : UInt32
+    property targetId : LibC::GUID
+    def initialize(@ulEvent : UInt32, @targetId : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct VDS_PORTAL_GROUP_NOTIFICATION
+    property ulEvent : UInt32
+    property portalGroupId : LibC::GUID
+    def initialize(@ulEvent : UInt32, @portalGroupId : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct VDS_NOTIFICATION
+    property objectType : Win32cr::Storage::VirtualDiskService::VDS_NOTIFICATION_TARGET_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      cp : Cp_,
-      cv : Cv_,
-      bvp : Bvp_,
-      sv : Sv_,
-      cl : Cl_,
-      ct : Ct_,
-      cpg : Cpg_,
-      cvd : Cvd_ do
+    struct Anonymous_e__Union_
+    property pack : Win32cr::Storage::VirtualDiskService::VDS_PACK_NOTIFICATION
+    property disk : Win32cr::Storage::VirtualDiskService::VDS_DISK_NOTIFICATION
+    property volume : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_NOTIFICATION
+    property partition : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_NOTIFICATION
+    property letter : Win32cr::Storage::VirtualDiskService::VDS_DRIVE_LETTER_NOTIFICATION
+    property file_system : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_NOTIFICATION
+    property mount_point : Win32cr::Storage::VirtualDiskService::VDS_MOUNT_POINT_NOTIFICATION
+    property sub_system : Win32cr::Storage::VirtualDiskService::VDS_SUB_SYSTEM_NOTIFICATION
+    property controller : Win32cr::Storage::VirtualDiskService::VDS_CONTROLLER_NOTIFICATION
+    property drive : Win32cr::Storage::VirtualDiskService::VDS_DRIVE_NOTIFICATION
+    property lun : Win32cr::Storage::VirtualDiskService::VDS_LUN_NOTIFICATION
+    property port : Win32cr::Storage::VirtualDiskService::VDS_PORT_NOTIFICATION
+    property portal : Win32cr::Storage::VirtualDiskService::VDS_PORTAL_NOTIFICATION
+    property target : Win32cr::Storage::VirtualDiskService::VDS_TARGET_NOTIFICATION
+    property portal_group : Win32cr::Storage::VirtualDiskService::VDS_PORTAL_GROUP_NOTIFICATION
+    property service : Win32cr::Storage::VirtualDiskService::VDS_SERVICE_NOTIFICATION
+    def initialize(@pack : Win32cr::Storage::VirtualDiskService::VDS_PACK_NOTIFICATION, @disk : Win32cr::Storage::VirtualDiskService::VDS_DISK_NOTIFICATION, @volume : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_NOTIFICATION, @partition : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_NOTIFICATION, @letter : Win32cr::Storage::VirtualDiskService::VDS_DRIVE_LETTER_NOTIFICATION, @file_system : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_NOTIFICATION, @mount_point : Win32cr::Storage::VirtualDiskService::VDS_MOUNT_POINT_NOTIFICATION, @sub_system : Win32cr::Storage::VirtualDiskService::VDS_SUB_SYSTEM_NOTIFICATION, @controller : Win32cr::Storage::VirtualDiskService::VDS_CONTROLLER_NOTIFICATION, @drive : Win32cr::Storage::VirtualDiskService::VDS_DRIVE_NOTIFICATION, @lun : Win32cr::Storage::VirtualDiskService::VDS_LUN_NOTIFICATION, @port : Win32cr::Storage::VirtualDiskService::VDS_PORT_NOTIFICATION, @portal : Win32cr::Storage::VirtualDiskService::VDS_PORTAL_NOTIFICATION, @target : Win32cr::Storage::VirtualDiskService::VDS_TARGET_NOTIFICATION, @portal_group : Win32cr::Storage::VirtualDiskService::VDS_PORTAL_GROUP_NOTIFICATION, @service : Win32cr::Storage::VirtualDiskService::VDS_SERVICE_NOTIFICATION)
+    end
+    end
+
+    def initialize(@objectType : Win32cr::Storage::VirtualDiskService::VDS_NOTIFICATION_TARGET_TYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct VDS_ASYNC_OUTPUT
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_ASYNC_OUTPUT_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property cp : Cp_
+    property cv : Cv_
+    property bvp : Bvp_
+    property sv : Sv_
+    property cl : Cl_
+    property ct : Ct_
+    property cpg : Cpg_
+    property cvd : Cvd_
 
       # Nested Type Cpg_
       @[Extern]
-      record Cpg_,
-        pPortalGroupUnk : Void*
+      struct Cpg_
+    property pPortalGroupUnk : Void*
+    def initialize(@pPortalGroupUnk : Void*)
+    end
+      end
 
 
       # Nested Type Cl_
       @[Extern]
-      record Cl_,
-        pLunUnk : Void*
+      struct Cl_
+    property pLunUnk : Void*
+    def initialize(@pLunUnk : Void*)
+    end
+      end
 
 
       # Nested Type Bvp_
       @[Extern]
-      record Bvp_,
-        pVolumeUnk : Void*
+      struct Bvp_
+    property pVolumeUnk : Void*
+    def initialize(@pVolumeUnk : Void*)
+    end
+      end
 
 
       # Nested Type Cp_
       @[Extern]
-      record Cp_,
-        ullOffset : UInt64,
-        volumeId : LibC::GUID
+      struct Cp_
+    property ullOffset : UInt64
+    property volumeId : LibC::GUID
+    def initialize(@ullOffset : UInt64, @volumeId : LibC::GUID)
+    end
+      end
 
 
       # Nested Type Cvd_
       @[Extern]
-      record Cvd_,
-        pVDiskUnk : Void*
+      struct Cvd_
+    property pVDiskUnk : Void*
+    def initialize(@pVDiskUnk : Void*)
+    end
+      end
 
 
       # Nested Type Sv_
       @[Extern]
-      record Sv_,
-        ullReclaimedBytes : UInt64
+      struct Sv_
+    property ullReclaimedBytes : UInt64
+    def initialize(@ullReclaimedBytes : UInt64)
+    end
+      end
 
 
       # Nested Type Ct_
       @[Extern]
-      record Ct_,
-        pTargetUnk : Void*
+      struct Ct_
+    property pTargetUnk : Void*
+    def initialize(@pTargetUnk : Void*)
+    end
+      end
 
 
       # Nested Type Cv_
       @[Extern]
-      record Cv_,
-        pVolumeUnk : Void*
+      struct Cv_
+    property pVolumeUnk : Void*
+    def initialize(@pVolumeUnk : Void*)
+    end
+      end
 
+    def initialize(@cp : Cp_, @cv : Cv_, @bvp : Bvp_, @sv : Sv_, @cl : Cl_, @ct : Ct_, @cpg : Cpg_, @cvd : Cvd_)
+    end
     end
 
+    def initialize(@type__ : Win32cr::Storage::VirtualDiskService::VDS_ASYNC_OUTPUT_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record VDS_PATH_ID,
-    ullSourceId : UInt64,
-    ullPathId : UInt64
+  struct VDS_PATH_ID
+    property ullSourceId : UInt64
+    property ullPathId : UInt64
+    def initialize(@ullSourceId : UInt64, @ullPathId : UInt64)
+    end
+  end
 
   @[Extern]
-  record VDS_WWN,
-    rguchWwn : UInt8[8]
+  struct VDS_WWN
+    property rguchWwn : UInt8[8]
+    def initialize(@rguchWwn : UInt8[8])
+    end
+  end
 
   @[Extern]
-  record VDS_IPADDRESS,
-    type__ : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS_TYPE,
-    ipv4Address : UInt32,
-    ipv6Address : UInt8[16],
-    ulIpv6FlowInfo : UInt32,
-    ulIpv6ScopeId : UInt32,
-    wszTextAddress : UInt16[257],
-    ulPort : UInt32
+  struct VDS_IPADDRESS
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS_TYPE
+    property ipv4Address : UInt32
+    property ipv6Address : UInt8[16]
+    property ulIpv6FlowInfo : UInt32
+    property ulIpv6ScopeId : UInt32
+    property wszTextAddress : UInt16[257]
+    property ulPort : UInt32
+    def initialize(@type__ : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS_TYPE, @ipv4Address : UInt32, @ipv6Address : UInt8[16], @ulIpv6FlowInfo : UInt32, @ulIpv6ScopeId : UInt32, @wszTextAddress : UInt16[257], @ulPort : UInt32)
+    end
+  end
 
   @[Extern]
-  record VDS_ISCSI_IPSEC_KEY,
-    pKey : UInt8*,
-    ulKeySize : UInt32
+  struct VDS_ISCSI_IPSEC_KEY
+    property pKey : UInt8*
+    property ulKeySize : UInt32
+    def initialize(@pKey : UInt8*, @ulKeySize : UInt32)
+    end
+  end
 
   @[Extern]
-  record VDS_ISCSI_SHARED_SECRET,
-    pSharedSecret : UInt8*,
-    ulSharedSecretSize : UInt32
+  struct VDS_ISCSI_SHARED_SECRET
+    property pSharedSecret : UInt8*
+    property ulSharedSecretSize : UInt32
+    def initialize(@pSharedSecret : UInt8*, @ulSharedSecretSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record VDS_HBAPORT_PROP,
-    id : LibC::GUID,
-    wwnNode : Win32cr::Storage::VirtualDiskService::VDS_WWN,
-    wwnPort : Win32cr::Storage::VirtualDiskService::VDS_WWN,
-    type__ : Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_TYPE,
-    status : Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_STATUS,
-    ulPortSpeed : UInt32,
-    ulSupportedPortSpeed : UInt32
+  struct VDS_HBAPORT_PROP
+    property id : LibC::GUID
+    property wwnNode : Win32cr::Storage::VirtualDiskService::VDS_WWN
+    property wwnPort : Win32cr::Storage::VirtualDiskService::VDS_WWN
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_TYPE
+    property status : Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_STATUS
+    property ulPortSpeed : UInt32
+    property ulSupportedPortSpeed : UInt32
+    def initialize(@id : LibC::GUID, @wwnNode : Win32cr::Storage::VirtualDiskService::VDS_WWN, @wwnPort : Win32cr::Storage::VirtualDiskService::VDS_WWN, @type__ : Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_TYPE, @status : Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_STATUS, @ulPortSpeed : UInt32, @ulSupportedPortSpeed : UInt32)
+    end
+  end
 
   @[Extern]
-  record VDS_ISCSI_INITIATOR_ADAPTER_PROP,
-    id : LibC::GUID,
-    pwszName : Win32cr::Foundation::PWSTR
+  struct VDS_ISCSI_INITIATOR_ADAPTER_PROP
+    property id : LibC::GUID
+    property pwszName : Win32cr::Foundation::PWSTR
+    def initialize(@id : LibC::GUID, @pwszName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record VDS_ISCSI_INITIATOR_PORTAL_PROP,
-    id : LibC::GUID,
-    address : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS,
-    ulPortIndex : UInt32
+  struct VDS_ISCSI_INITIATOR_PORTAL_PROP
+    property id : LibC::GUID
+    property address : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS
+    property ulPortIndex : UInt32
+    def initialize(@id : LibC::GUID, @address : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS, @ulPortIndex : UInt32)
+    end
+  end
 
   @[Extern]
-  record VDS_PROVIDER_PROP,
-    id : LibC::GUID,
-    pwszName : Win32cr::Foundation::PWSTR,
-    guidVersionId : LibC::GUID,
-    pwszVersion : Win32cr::Foundation::PWSTR,
-    type__ : Win32cr::Storage::VirtualDiskService::VDS_PROVIDER_TYPE,
-    ulFlags : UInt32,
-    ulStripeSizeFlags : UInt32,
-    sRebuildPriority : Int16
+  struct VDS_PROVIDER_PROP
+    property id : LibC::GUID
+    property pwszName : Win32cr::Foundation::PWSTR
+    property guidVersionId : LibC::GUID
+    property pwszVersion : Win32cr::Foundation::PWSTR
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_PROVIDER_TYPE
+    property ulFlags : UInt32
+    property ulStripeSizeFlags : UInt32
+    property sRebuildPriority : Int16
+    def initialize(@id : LibC::GUID, @pwszName : Win32cr::Foundation::PWSTR, @guidVersionId : LibC::GUID, @pwszVersion : Win32cr::Foundation::PWSTR, @type__ : Win32cr::Storage::VirtualDiskService::VDS_PROVIDER_TYPE, @ulFlags : UInt32, @ulStripeSizeFlags : UInt32, @sRebuildPriority : Int16)
+    end
+  end
 
   @[Extern]
-  record VDS_PATH_INFO,
-    pathId : Win32cr::Storage::VirtualDiskService::VDS_PATH_ID,
-    type__ : Win32cr::Storage::VirtualDiskService::VDS_HWPROVIDER_TYPE,
-    status : Win32cr::Storage::VirtualDiskService::VDS_PATH_STATUS,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    anonymous3 : Anonymous3_e__Union_ do
+  struct VDS_PATH_INFO
+    property pathId : Win32cr::Storage::VirtualDiskService::VDS_PATH_ID
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_HWPROVIDER_TYPE
+    property status : Win32cr::Storage::VirtualDiskService::VDS_PATH_STATUS
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property anonymous3 : Anonymous3_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      hbaPortId : LibC::GUID,
-      initiatorAdapterId : LibC::GUID
+    struct Anonymous2_e__Union_
+    property hbaPortId : LibC::GUID
+    property initiatorAdapterId : LibC::GUID
+    def initialize(@hbaPortId : LibC::GUID, @initiatorAdapterId : LibC::GUID)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      controllerPortId : LibC::GUID,
-      targetPortalId : LibC::GUID
+    struct Anonymous1_e__Union_
+    property controllerPortId : LibC::GUID
+    property targetPortalId : LibC::GUID
+    def initialize(@controllerPortId : LibC::GUID, @targetPortalId : LibC::GUID)
+    end
+    end
 
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      pHbaPortProp : Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_PROP*,
-      pInitiatorPortalIpAddr : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS*
+    struct Anonymous3_e__Union_
+    property pHbaPortProp : Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_PROP*
+    property pInitiatorPortalIpAddr : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS*
+    def initialize(@pHbaPortProp : Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_PROP*, @pInitiatorPortalIpAddr : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS*)
+    end
+    end
 
+    def initialize(@pathId : Win32cr::Storage::VirtualDiskService::VDS_PATH_ID, @type__ : Win32cr::Storage::VirtualDiskService::VDS_HWPROVIDER_TYPE, @status : Win32cr::Storage::VirtualDiskService::VDS_PATH_STATUS, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_)
+    end
   end
 
   @[Extern]
-  record VDS_PATH_POLICY,
-    pathId : Win32cr::Storage::VirtualDiskService::VDS_PATH_ID,
-    bPrimaryPath : Win32cr::Foundation::BOOL,
-    ulWeight : UInt32
+  struct VDS_PATH_POLICY
+    property pathId : Win32cr::Storage::VirtualDiskService::VDS_PATH_ID
+    property bPrimaryPath : Win32cr::Foundation::BOOL
+    property ulWeight : UInt32
+    def initialize(@pathId : Win32cr::Storage::VirtualDiskService::VDS_PATH_ID, @bPrimaryPath : Win32cr::Foundation::BOOL, @ulWeight : UInt32)
+    end
+  end
 
   @[Extern]
-  record VDS_HINTS,
-    ullHintMask : UInt64,
-    ullExpectedMaximumSize : UInt64,
-    ulOptimalReadSize : UInt32,
-    ulOptimalReadAlignment : UInt32,
-    ulOptimalWriteSize : UInt32,
-    ulOptimalWriteAlignment : UInt32,
-    ulMaximumDriveCount : UInt32,
-    ulStripeSize : UInt32,
-    bFastCrashRecoveryRequired : Win32cr::Foundation::BOOL,
-    bMostlyReads : Win32cr::Foundation::BOOL,
-    bOptimizeForSequentialReads : Win32cr::Foundation::BOOL,
-    bOptimizeForSequentialWrites : Win32cr::Foundation::BOOL,
-    bRemapEnabled : Win32cr::Foundation::BOOL,
-    bReadBackVerifyEnabled : Win32cr::Foundation::BOOL,
-    bWriteThroughCachingEnabled : Win32cr::Foundation::BOOL,
-    bHardwareChecksumEnabled : Win32cr::Foundation::BOOL,
-    bIsYankable : Win32cr::Foundation::BOOL,
-    sRebuildPriority : Int16
+  struct VDS_HINTS
+    property ullHintMask : UInt64
+    property ullExpectedMaximumSize : UInt64
+    property ulOptimalReadSize : UInt32
+    property ulOptimalReadAlignment : UInt32
+    property ulOptimalWriteSize : UInt32
+    property ulOptimalWriteAlignment : UInt32
+    property ulMaximumDriveCount : UInt32
+    property ulStripeSize : UInt32
+    property bFastCrashRecoveryRequired : Win32cr::Foundation::BOOL
+    property bMostlyReads : Win32cr::Foundation::BOOL
+    property bOptimizeForSequentialReads : Win32cr::Foundation::BOOL
+    property bOptimizeForSequentialWrites : Win32cr::Foundation::BOOL
+    property bRemapEnabled : Win32cr::Foundation::BOOL
+    property bReadBackVerifyEnabled : Win32cr::Foundation::BOOL
+    property bWriteThroughCachingEnabled : Win32cr::Foundation::BOOL
+    property bHardwareChecksumEnabled : Win32cr::Foundation::BOOL
+    property bIsYankable : Win32cr::Foundation::BOOL
+    property sRebuildPriority : Int16
+    def initialize(@ullHintMask : UInt64, @ullExpectedMaximumSize : UInt64, @ulOptimalReadSize : UInt32, @ulOptimalReadAlignment : UInt32, @ulOptimalWriteSize : UInt32, @ulOptimalWriteAlignment : UInt32, @ulMaximumDriveCount : UInt32, @ulStripeSize : UInt32, @bFastCrashRecoveryRequired : Win32cr::Foundation::BOOL, @bMostlyReads : Win32cr::Foundation::BOOL, @bOptimizeForSequentialReads : Win32cr::Foundation::BOOL, @bOptimizeForSequentialWrites : Win32cr::Foundation::BOOL, @bRemapEnabled : Win32cr::Foundation::BOOL, @bReadBackVerifyEnabled : Win32cr::Foundation::BOOL, @bWriteThroughCachingEnabled : Win32cr::Foundation::BOOL, @bHardwareChecksumEnabled : Win32cr::Foundation::BOOL, @bIsYankable : Win32cr::Foundation::BOOL, @sRebuildPriority : Int16)
+    end
+  end
 
   @[Extern]
-  record VDS_HINTS2,
-    ullHintMask : UInt64,
-    ullExpectedMaximumSize : UInt64,
-    ulOptimalReadSize : UInt32,
-    ulOptimalReadAlignment : UInt32,
-    ulOptimalWriteSize : UInt32,
-    ulOptimalWriteAlignment : UInt32,
-    ulMaximumDriveCount : UInt32,
-    ulStripeSize : UInt32,
-    ulReserved1 : UInt32,
-    ulReserved2 : UInt32,
-    ulReserved3 : UInt32,
-    bFastCrashRecoveryRequired : Win32cr::Foundation::BOOL,
-    bMostlyReads : Win32cr::Foundation::BOOL,
-    bOptimizeForSequentialReads : Win32cr::Foundation::BOOL,
-    bOptimizeForSequentialWrites : Win32cr::Foundation::BOOL,
-    bRemapEnabled : Win32cr::Foundation::BOOL,
-    bReadBackVerifyEnabled : Win32cr::Foundation::BOOL,
-    bWriteThroughCachingEnabled : Win32cr::Foundation::BOOL,
-    bHardwareChecksumEnabled : Win32cr::Foundation::BOOL,
-    bIsYankable : Win32cr::Foundation::BOOL,
-    bAllocateHotSpare : Win32cr::Foundation::BOOL,
-    bUseMirroredCache : Win32cr::Foundation::BOOL,
-    bReadCachingEnabled : Win32cr::Foundation::BOOL,
-    bWriteCachingEnabled : Win32cr::Foundation::BOOL,
-    bMediaScanEnabled : Win32cr::Foundation::BOOL,
-    bConsistencyCheckEnabled : Win32cr::Foundation::BOOL,
-    bus_type : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE,
-    bReserved1 : Win32cr::Foundation::BOOL,
-    bReserved2 : Win32cr::Foundation::BOOL,
-    bReserved3 : Win32cr::Foundation::BOOL,
-    sRebuildPriority : Int16
+  struct VDS_HINTS2
+    property ullHintMask : UInt64
+    property ullExpectedMaximumSize : UInt64
+    property ulOptimalReadSize : UInt32
+    property ulOptimalReadAlignment : UInt32
+    property ulOptimalWriteSize : UInt32
+    property ulOptimalWriteAlignment : UInt32
+    property ulMaximumDriveCount : UInt32
+    property ulStripeSize : UInt32
+    property ulReserved1 : UInt32
+    property ulReserved2 : UInt32
+    property ulReserved3 : UInt32
+    property bFastCrashRecoveryRequired : Win32cr::Foundation::BOOL
+    property bMostlyReads : Win32cr::Foundation::BOOL
+    property bOptimizeForSequentialReads : Win32cr::Foundation::BOOL
+    property bOptimizeForSequentialWrites : Win32cr::Foundation::BOOL
+    property bRemapEnabled : Win32cr::Foundation::BOOL
+    property bReadBackVerifyEnabled : Win32cr::Foundation::BOOL
+    property bWriteThroughCachingEnabled : Win32cr::Foundation::BOOL
+    property bHardwareChecksumEnabled : Win32cr::Foundation::BOOL
+    property bIsYankable : Win32cr::Foundation::BOOL
+    property bAllocateHotSpare : Win32cr::Foundation::BOOL
+    property bUseMirroredCache : Win32cr::Foundation::BOOL
+    property bReadCachingEnabled : Win32cr::Foundation::BOOL
+    property bWriteCachingEnabled : Win32cr::Foundation::BOOL
+    property bMediaScanEnabled : Win32cr::Foundation::BOOL
+    property bConsistencyCheckEnabled : Win32cr::Foundation::BOOL
+    property bus_type : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE
+    property bReserved1 : Win32cr::Foundation::BOOL
+    property bReserved2 : Win32cr::Foundation::BOOL
+    property bReserved3 : Win32cr::Foundation::BOOL
+    property sRebuildPriority : Int16
+    def initialize(@ullHintMask : UInt64, @ullExpectedMaximumSize : UInt64, @ulOptimalReadSize : UInt32, @ulOptimalReadAlignment : UInt32, @ulOptimalWriteSize : UInt32, @ulOptimalWriteAlignment : UInt32, @ulMaximumDriveCount : UInt32, @ulStripeSize : UInt32, @ulReserved1 : UInt32, @ulReserved2 : UInt32, @ulReserved3 : UInt32, @bFastCrashRecoveryRequired : Win32cr::Foundation::BOOL, @bMostlyReads : Win32cr::Foundation::BOOL, @bOptimizeForSequentialReads : Win32cr::Foundation::BOOL, @bOptimizeForSequentialWrites : Win32cr::Foundation::BOOL, @bRemapEnabled : Win32cr::Foundation::BOOL, @bReadBackVerifyEnabled : Win32cr::Foundation::BOOL, @bWriteThroughCachingEnabled : Win32cr::Foundation::BOOL, @bHardwareChecksumEnabled : Win32cr::Foundation::BOOL, @bIsYankable : Win32cr::Foundation::BOOL, @bAllocateHotSpare : Win32cr::Foundation::BOOL, @bUseMirroredCache : Win32cr::Foundation::BOOL, @bReadCachingEnabled : Win32cr::Foundation::BOOL, @bWriteCachingEnabled : Win32cr::Foundation::BOOL, @bMediaScanEnabled : Win32cr::Foundation::BOOL, @bConsistencyCheckEnabled : Win32cr::Foundation::BOOL, @bus_type : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE, @bReserved1 : Win32cr::Foundation::BOOL, @bReserved2 : Win32cr::Foundation::BOOL, @bReserved3 : Win32cr::Foundation::BOOL, @sRebuildPriority : Int16)
+    end
+  end
 
   @[Extern]
-  record VDS_SUB_SYSTEM_PROP,
-    id : LibC::GUID,
-    pwszFriendlyName : Win32cr::Foundation::PWSTR,
-    pwszIdentification : Win32cr::Foundation::PWSTR,
-    ulFlags : UInt32,
-    ulStripeSizeFlags : UInt32,
-    status : Win32cr::Storage::VirtualDiskService::VDS_SUB_SYSTEM_STATUS,
-    health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH,
-    sNumberOfInternalBuses : Int16,
-    sMaxNumberOfSlotsEachBus : Int16,
-    sMaxNumberOfControllers : Int16,
-    sRebuildPriority : Int16
+  struct VDS_SUB_SYSTEM_PROP
+    property id : LibC::GUID
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property pwszIdentification : Win32cr::Foundation::PWSTR
+    property ulFlags : UInt32
+    property ulStripeSizeFlags : UInt32
+    property status : Win32cr::Storage::VirtualDiskService::VDS_SUB_SYSTEM_STATUS
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property sNumberOfInternalBuses : Int16
+    property sMaxNumberOfSlotsEachBus : Int16
+    property sMaxNumberOfControllers : Int16
+    property sRebuildPriority : Int16
+    def initialize(@id : LibC::GUID, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @pwszIdentification : Win32cr::Foundation::PWSTR, @ulFlags : UInt32, @ulStripeSizeFlags : UInt32, @status : Win32cr::Storage::VirtualDiskService::VDS_SUB_SYSTEM_STATUS, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @sNumberOfInternalBuses : Int16, @sMaxNumberOfSlotsEachBus : Int16, @sMaxNumberOfControllers : Int16, @sRebuildPriority : Int16)
+    end
+  end
 
   @[Extern]
-  record VDS_SUB_SYSTEM_PROP2,
-    id : LibC::GUID,
-    pwszFriendlyName : Win32cr::Foundation::PWSTR,
-    pwszIdentification : Win32cr::Foundation::PWSTR,
-    ulFlags : UInt32,
-    ulStripeSizeFlags : UInt32,
-    ulSupportedRaidTypeFlags : UInt32,
-    status : Win32cr::Storage::VirtualDiskService::VDS_SUB_SYSTEM_STATUS,
-    health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH,
-    sNumberOfInternalBuses : Int16,
-    sMaxNumberOfSlotsEachBus : Int16,
-    sMaxNumberOfControllers : Int16,
-    sRebuildPriority : Int16,
-    ulNumberOfEnclosures : UInt32
+  struct VDS_SUB_SYSTEM_PROP2
+    property id : LibC::GUID
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property pwszIdentification : Win32cr::Foundation::PWSTR
+    property ulFlags : UInt32
+    property ulStripeSizeFlags : UInt32
+    property ulSupportedRaidTypeFlags : UInt32
+    property status : Win32cr::Storage::VirtualDiskService::VDS_SUB_SYSTEM_STATUS
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property sNumberOfInternalBuses : Int16
+    property sMaxNumberOfSlotsEachBus : Int16
+    property sMaxNumberOfControllers : Int16
+    property sRebuildPriority : Int16
+    property ulNumberOfEnclosures : UInt32
+    def initialize(@id : LibC::GUID, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @pwszIdentification : Win32cr::Foundation::PWSTR, @ulFlags : UInt32, @ulStripeSizeFlags : UInt32, @ulSupportedRaidTypeFlags : UInt32, @status : Win32cr::Storage::VirtualDiskService::VDS_SUB_SYSTEM_STATUS, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @sNumberOfInternalBuses : Int16, @sMaxNumberOfSlotsEachBus : Int16, @sMaxNumberOfControllers : Int16, @sRebuildPriority : Int16, @ulNumberOfEnclosures : UInt32)
+    end
+  end
 
   @[Extern]
-  record VDS_CONTROLLER_PROP,
-    id : LibC::GUID,
-    pwszFriendlyName : Win32cr::Foundation::PWSTR,
-    pwszIdentification : Win32cr::Foundation::PWSTR,
-    status : Win32cr::Storage::VirtualDiskService::VDS_CONTROLLER_STATUS,
-    health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH,
-    sNumberOfPorts : Int16
+  struct VDS_CONTROLLER_PROP
+    property id : LibC::GUID
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property pwszIdentification : Win32cr::Foundation::PWSTR
+    property status : Win32cr::Storage::VirtualDiskService::VDS_CONTROLLER_STATUS
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property sNumberOfPorts : Int16
+    def initialize(@id : LibC::GUID, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @pwszIdentification : Win32cr::Foundation::PWSTR, @status : Win32cr::Storage::VirtualDiskService::VDS_CONTROLLER_STATUS, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @sNumberOfPorts : Int16)
+    end
+  end
 
   @[Extern]
-  record VDS_DRIVE_PROP,
-    id : LibC::GUID,
-    ullSize : UInt64,
-    pwszFriendlyName : Win32cr::Foundation::PWSTR,
-    pwszIdentification : Win32cr::Foundation::PWSTR,
-    ulFlags : UInt32,
-    status : Win32cr::Storage::VirtualDiskService::VDS_DRIVE_STATUS,
-    health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH,
-    sInternalBusNumber : Int16,
-    sSlotNumber : Int16
+  struct VDS_DRIVE_PROP
+    property id : LibC::GUID
+    property ullSize : UInt64
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property pwszIdentification : Win32cr::Foundation::PWSTR
+    property ulFlags : UInt32
+    property status : Win32cr::Storage::VirtualDiskService::VDS_DRIVE_STATUS
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property sInternalBusNumber : Int16
+    property sSlotNumber : Int16
+    def initialize(@id : LibC::GUID, @ullSize : UInt64, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @pwszIdentification : Win32cr::Foundation::PWSTR, @ulFlags : UInt32, @status : Win32cr::Storage::VirtualDiskService::VDS_DRIVE_STATUS, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @sInternalBusNumber : Int16, @sSlotNumber : Int16)
+    end
+  end
 
   @[Extern]
-  record VDS_DRIVE_PROP2,
-    id : LibC::GUID,
-    ullSize : UInt64,
-    pwszFriendlyName : Win32cr::Foundation::PWSTR,
-    pwszIdentification : Win32cr::Foundation::PWSTR,
-    ulFlags : UInt32,
-    status : Win32cr::Storage::VirtualDiskService::VDS_DRIVE_STATUS,
-    health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH,
-    sInternalBusNumber : Int16,
-    sSlotNumber : Int16,
-    ulEnclosureNumber : UInt32,
-    busType : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE,
-    ulSpindleSpeed : UInt32
+  struct VDS_DRIVE_PROP2
+    property id : LibC::GUID
+    property ullSize : UInt64
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property pwszIdentification : Win32cr::Foundation::PWSTR
+    property ulFlags : UInt32
+    property status : Win32cr::Storage::VirtualDiskService::VDS_DRIVE_STATUS
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property sInternalBusNumber : Int16
+    property sSlotNumber : Int16
+    property ulEnclosureNumber : UInt32
+    property busType : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE
+    property ulSpindleSpeed : UInt32
+    def initialize(@id : LibC::GUID, @ullSize : UInt64, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @pwszIdentification : Win32cr::Foundation::PWSTR, @ulFlags : UInt32, @status : Win32cr::Storage::VirtualDiskService::VDS_DRIVE_STATUS, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @sInternalBusNumber : Int16, @sSlotNumber : Int16, @ulEnclosureNumber : UInt32, @busType : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE, @ulSpindleSpeed : UInt32)
+    end
+  end
 
   @[Extern]
-  record VDS_DRIVE_EXTENT,
-    id : LibC::GUID,
-    lun_id : LibC::GUID,
-    ullSize : UInt64,
-    bUsed : Win32cr::Foundation::BOOL
+  struct VDS_DRIVE_EXTENT
+    property id : LibC::GUID
+    property lun_id : LibC::GUID
+    property ullSize : UInt64
+    property bUsed : Win32cr::Foundation::BOOL
+    def initialize(@id : LibC::GUID, @lun_id : LibC::GUID, @ullSize : UInt64, @bUsed : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record VDS_LUN_PROP,
-    id : LibC::GUID,
-    ullSize : UInt64,
-    pwszFriendlyName : Win32cr::Foundation::PWSTR,
-    pwszIdentification : Win32cr::Foundation::PWSTR,
-    pwszUnmaskingList : Win32cr::Foundation::PWSTR,
-    ulFlags : UInt32,
-    type__ : Win32cr::Storage::VirtualDiskService::VDS_LUN_TYPE,
-    status : Win32cr::Storage::VirtualDiskService::VDS_LUN_STATUS,
-    health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH,
-    transition_state : Win32cr::Storage::VirtualDiskService::VDS_TRANSITION_STATE,
-    sRebuildPriority : Int16
+  struct VDS_LUN_PROP
+    property id : LibC::GUID
+    property ullSize : UInt64
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property pwszIdentification : Win32cr::Foundation::PWSTR
+    property pwszUnmaskingList : Win32cr::Foundation::PWSTR
+    property ulFlags : UInt32
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_LUN_TYPE
+    property status : Win32cr::Storage::VirtualDiskService::VDS_LUN_STATUS
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property transition_state : Win32cr::Storage::VirtualDiskService::VDS_TRANSITION_STATE
+    property sRebuildPriority : Int16
+    def initialize(@id : LibC::GUID, @ullSize : UInt64, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @pwszIdentification : Win32cr::Foundation::PWSTR, @pwszUnmaskingList : Win32cr::Foundation::PWSTR, @ulFlags : UInt32, @type__ : Win32cr::Storage::VirtualDiskService::VDS_LUN_TYPE, @status : Win32cr::Storage::VirtualDiskService::VDS_LUN_STATUS, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @transition_state : Win32cr::Storage::VirtualDiskService::VDS_TRANSITION_STATE, @sRebuildPriority : Int16)
+    end
+  end
 
   @[Extern]
-  record VDS_LUN_PLEX_PROP,
-    id : LibC::GUID,
-    ullSize : UInt64,
-    type__ : Win32cr::Storage::VirtualDiskService::VDS_LUN_PLEX_TYPE,
-    status : Win32cr::Storage::VirtualDiskService::VDS_LUN_PLEX_STATUS,
-    health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH,
-    transition_state : Win32cr::Storage::VirtualDiskService::VDS_TRANSITION_STATE,
-    ulFlags : UInt32,
-    ulStripeSize : UInt32,
-    sRebuildPriority : Int16
+  struct VDS_LUN_PLEX_PROP
+    property id : LibC::GUID
+    property ullSize : UInt64
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_LUN_PLEX_TYPE
+    property status : Win32cr::Storage::VirtualDiskService::VDS_LUN_PLEX_STATUS
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property transition_state : Win32cr::Storage::VirtualDiskService::VDS_TRANSITION_STATE
+    property ulFlags : UInt32
+    property ulStripeSize : UInt32
+    property sRebuildPriority : Int16
+    def initialize(@id : LibC::GUID, @ullSize : UInt64, @type__ : Win32cr::Storage::VirtualDiskService::VDS_LUN_PLEX_TYPE, @status : Win32cr::Storage::VirtualDiskService::VDS_LUN_PLEX_STATUS, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @transition_state : Win32cr::Storage::VirtualDiskService::VDS_TRANSITION_STATE, @ulFlags : UInt32, @ulStripeSize : UInt32, @sRebuildPriority : Int16)
+    end
+  end
 
   @[Extern]
-  record VDS_PORT_PROP,
-    id : LibC::GUID,
-    pwszFriendlyName : Win32cr::Foundation::PWSTR,
-    pwszIdentification : Win32cr::Foundation::PWSTR,
-    status : Win32cr::Storage::VirtualDiskService::VDS_PORT_STATUS
+  struct VDS_PORT_PROP
+    property id : LibC::GUID
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property pwszIdentification : Win32cr::Foundation::PWSTR
+    property status : Win32cr::Storage::VirtualDiskService::VDS_PORT_STATUS
+    def initialize(@id : LibC::GUID, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @pwszIdentification : Win32cr::Foundation::PWSTR, @status : Win32cr::Storage::VirtualDiskService::VDS_PORT_STATUS)
+    end
+  end
 
   @[Extern]
-  record VDS_ISCSI_PORTAL_PROP,
-    id : LibC::GUID,
-    address : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS,
-    status : Win32cr::Storage::VirtualDiskService::VDS_ISCSI_PORTAL_STATUS
+  struct VDS_ISCSI_PORTAL_PROP
+    property id : LibC::GUID
+    property address : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS
+    property status : Win32cr::Storage::VirtualDiskService::VDS_ISCSI_PORTAL_STATUS
+    def initialize(@id : LibC::GUID, @address : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS, @status : Win32cr::Storage::VirtualDiskService::VDS_ISCSI_PORTAL_STATUS)
+    end
+  end
 
   @[Extern]
-  record VDS_ISCSI_TARGET_PROP,
-    id : LibC::GUID,
-    pwszIscsiName : Win32cr::Foundation::PWSTR,
-    pwszFriendlyName : Win32cr::Foundation::PWSTR,
-    bChapEnabled : Win32cr::Foundation::BOOL
+  struct VDS_ISCSI_TARGET_PROP
+    property id : LibC::GUID
+    property pwszIscsiName : Win32cr::Foundation::PWSTR
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property bChapEnabled : Win32cr::Foundation::BOOL
+    def initialize(@id : LibC::GUID, @pwszIscsiName : Win32cr::Foundation::PWSTR, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @bChapEnabled : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record VDS_ISCSI_PORTALGROUP_PROP,
-    id : LibC::GUID,
-    tag : UInt16
+  struct VDS_ISCSI_PORTALGROUP_PROP
+    property id : LibC::GUID
+    property tag : UInt16
+    def initialize(@id : LibC::GUID, @tag : UInt16)
+    end
+  end
 
   @[Extern]
-  record VDS_POOL_CUSTOM_ATTRIBUTES,
-    pwszName : Win32cr::Foundation::PWSTR,
-    pwszValue : Win32cr::Foundation::PWSTR
+  struct VDS_POOL_CUSTOM_ATTRIBUTES
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pwszValue : Win32cr::Foundation::PWSTR
+    def initialize(@pwszName : Win32cr::Foundation::PWSTR, @pwszValue : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record VDS_POOL_ATTRIBUTES,
-    ullAttributeMask : UInt64,
-    raidType : Win32cr::Storage::VirtualDiskService::VDS_RAID_TYPE,
-    busType : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE,
-    pwszIntendedUsage : Win32cr::Foundation::PWSTR,
-    bSpinDown : Win32cr::Foundation::BOOL,
-    bIsThinProvisioned : Win32cr::Foundation::BOOL,
-    ullProvisionedSpace : UInt64,
-    bNoSinglePointOfFailure : Win32cr::Foundation::BOOL,
-    ulDataRedundancyMax : UInt32,
-    ulDataRedundancyMin : UInt32,
-    ulDataRedundancyDefault : UInt32,
-    ulPackageRedundancyMax : UInt32,
-    ulPackageRedundancyMin : UInt32,
-    ulPackageRedundancyDefault : UInt32,
-    ulStripeSize : UInt32,
-    ulStripeSizeMax : UInt32,
-    ulStripeSizeMin : UInt32,
-    ulDefaultStripeSize : UInt32,
-    ulNumberOfColumns : UInt32,
-    ulNumberOfColumnsMax : UInt32,
-    ulNumberOfColumnsMin : UInt32,
-    ulDefaultNumberofColumns : UInt32,
-    ulDataAvailabilityHint : UInt32,
-    ulAccessRandomnessHint : UInt32,
-    ulAccessDirectionHint : UInt32,
-    ulAccessSizeHint : UInt32,
-    ulAccessLatencyHint : UInt32,
-    ulAccessBandwidthWeightHint : UInt32,
-    ulStorageCostHint : UInt32,
-    ulStorageEfficiencyHint : UInt32,
-    ulNumOfCustomAttributes : UInt32,
-    pPoolCustomAttributes : Win32cr::Storage::VirtualDiskService::VDS_POOL_CUSTOM_ATTRIBUTES*,
-    bReserved1 : Win32cr::Foundation::BOOL,
-    bReserved2 : Win32cr::Foundation::BOOL,
-    ulReserved1 : UInt32,
-    ulReserved2 : UInt32,
-    ullReserved1 : UInt64,
-    ullReserved2 : UInt64
+  struct VDS_POOL_ATTRIBUTES
+    property ullAttributeMask : UInt64
+    property raidType : Win32cr::Storage::VirtualDiskService::VDS_RAID_TYPE
+    property busType : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE
+    property pwszIntendedUsage : Win32cr::Foundation::PWSTR
+    property bSpinDown : Win32cr::Foundation::BOOL
+    property bIsThinProvisioned : Win32cr::Foundation::BOOL
+    property ullProvisionedSpace : UInt64
+    property bNoSinglePointOfFailure : Win32cr::Foundation::BOOL
+    property ulDataRedundancyMax : UInt32
+    property ulDataRedundancyMin : UInt32
+    property ulDataRedundancyDefault : UInt32
+    property ulPackageRedundancyMax : UInt32
+    property ulPackageRedundancyMin : UInt32
+    property ulPackageRedundancyDefault : UInt32
+    property ulStripeSize : UInt32
+    property ulStripeSizeMax : UInt32
+    property ulStripeSizeMin : UInt32
+    property ulDefaultStripeSize : UInt32
+    property ulNumberOfColumns : UInt32
+    property ulNumberOfColumnsMax : UInt32
+    property ulNumberOfColumnsMin : UInt32
+    property ulDefaultNumberofColumns : UInt32
+    property ulDataAvailabilityHint : UInt32
+    property ulAccessRandomnessHint : UInt32
+    property ulAccessDirectionHint : UInt32
+    property ulAccessSizeHint : UInt32
+    property ulAccessLatencyHint : UInt32
+    property ulAccessBandwidthWeightHint : UInt32
+    property ulStorageCostHint : UInt32
+    property ulStorageEfficiencyHint : UInt32
+    property ulNumOfCustomAttributes : UInt32
+    property pPoolCustomAttributes : Win32cr::Storage::VirtualDiskService::VDS_POOL_CUSTOM_ATTRIBUTES*
+    property bReserved1 : Win32cr::Foundation::BOOL
+    property bReserved2 : Win32cr::Foundation::BOOL
+    property ulReserved1 : UInt32
+    property ulReserved2 : UInt32
+    property ullReserved1 : UInt64
+    property ullReserved2 : UInt64
+    def initialize(@ullAttributeMask : UInt64, @raidType : Win32cr::Storage::VirtualDiskService::VDS_RAID_TYPE, @busType : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE, @pwszIntendedUsage : Win32cr::Foundation::PWSTR, @bSpinDown : Win32cr::Foundation::BOOL, @bIsThinProvisioned : Win32cr::Foundation::BOOL, @ullProvisionedSpace : UInt64, @bNoSinglePointOfFailure : Win32cr::Foundation::BOOL, @ulDataRedundancyMax : UInt32, @ulDataRedundancyMin : UInt32, @ulDataRedundancyDefault : UInt32, @ulPackageRedundancyMax : UInt32, @ulPackageRedundancyMin : UInt32, @ulPackageRedundancyDefault : UInt32, @ulStripeSize : UInt32, @ulStripeSizeMax : UInt32, @ulStripeSizeMin : UInt32, @ulDefaultStripeSize : UInt32, @ulNumberOfColumns : UInt32, @ulNumberOfColumnsMax : UInt32, @ulNumberOfColumnsMin : UInt32, @ulDefaultNumberofColumns : UInt32, @ulDataAvailabilityHint : UInt32, @ulAccessRandomnessHint : UInt32, @ulAccessDirectionHint : UInt32, @ulAccessSizeHint : UInt32, @ulAccessLatencyHint : UInt32, @ulAccessBandwidthWeightHint : UInt32, @ulStorageCostHint : UInt32, @ulStorageEfficiencyHint : UInt32, @ulNumOfCustomAttributes : UInt32, @pPoolCustomAttributes : Win32cr::Storage::VirtualDiskService::VDS_POOL_CUSTOM_ATTRIBUTES*, @bReserved1 : Win32cr::Foundation::BOOL, @bReserved2 : Win32cr::Foundation::BOOL, @ulReserved1 : UInt32, @ulReserved2 : UInt32, @ullReserved1 : UInt64, @ullReserved2 : UInt64)
+    end
+  end
 
   @[Extern]
-  record VDS_STORAGE_POOL_PROP,
-    id : LibC::GUID,
-    status : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_POOL_STATUS,
-    health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH,
-    type__ : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_POOL_TYPE,
-    pwszName : Win32cr::Foundation::PWSTR,
-    pwszDescription : Win32cr::Foundation::PWSTR,
-    ullTotalConsumedSpace : UInt64,
-    ullTotalManagedSpace : UInt64,
-    ullRemainingFreeSpace : UInt64
+  struct VDS_STORAGE_POOL_PROP
+    property id : LibC::GUID
+    property status : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_POOL_STATUS
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_POOL_TYPE
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pwszDescription : Win32cr::Foundation::PWSTR
+    property ullTotalConsumedSpace : UInt64
+    property ullTotalManagedSpace : UInt64
+    property ullRemainingFreeSpace : UInt64
+    def initialize(@id : LibC::GUID, @status : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_POOL_STATUS, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @type__ : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_POOL_TYPE, @pwszName : Win32cr::Foundation::PWSTR, @pwszDescription : Win32cr::Foundation::PWSTR, @ullTotalConsumedSpace : UInt64, @ullTotalManagedSpace : UInt64, @ullRemainingFreeSpace : UInt64)
+    end
+  end
 
   @[Extern]
-  record VDS_STORAGE_POOL_DRIVE_EXTENT,
-    id : LibC::GUID,
-    ullSize : UInt64,
-    bUsed : Win32cr::Foundation::BOOL
+  struct VDS_STORAGE_POOL_DRIVE_EXTENT
+    property id : LibC::GUID
+    property ullSize : UInt64
+    property bUsed : Win32cr::Foundation::BOOL
+    def initialize(@id : LibC::GUID, @ullSize : UInt64, @bUsed : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
   record IEnumVdsObjectVtbl,
@@ -1568,7 +1756,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("118610b7-8d94-4030-b5b8-500889788e4e")]
   record IEnumVdsObject, lpVtbl : IEnumVdsObjectVtbl* do
     GUID = LibC::GUID.new(0x118610b7_u32, 0x8d94_u16, 0x4030_u16, StaticArray[0xb5_u8, 0xb8_u8, 0x50_u8, 0x8_u8, 0x89_u8, 0x78_u8, 0x8e_u8, 0x4e_u8])
     def query_interface(this : IEnumVdsObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1606,7 +1793,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("d5d23b6d-5a55-4492-9889-397a3c2d2dbc")]
   record IVdsAsync, lpVtbl : IVdsAsyncVtbl* do
     GUID = LibC::GUID.new(0xd5d23b6d_u32, 0x5a55_u16, 0x4492_u16, StaticArray[0x98_u8, 0x89_u8, 0x39_u8, 0x7a_u8, 0x3c_u8, 0x2d_u8, 0x2d_u8, 0xbc_u8])
     def query_interface(this : IVdsAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1639,7 +1825,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("8326cd1d-cf59-4936-b786-5efc08798e25")]
   record IVdsAdviseSink, lpVtbl : IVdsAdviseSinkVtbl* do
     GUID = LibC::GUID.new(0x8326cd1d_u32, 0xcf59_u16, 0x4936_u16, StaticArray[0xb7_u8, 0x86_u8, 0x5e_u8, 0xfc_u8, 0x8_u8, 0x79_u8, 0x8e_u8, 0x25_u8])
     def query_interface(this : IVdsAdviseSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1666,7 +1851,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("10c5e575-7984-4e81-a56b-431f5f92ae42")]
   record IVdsProvider, lpVtbl : IVdsProviderVtbl* do
     GUID = LibC::GUID.new(0x10c5e575_u32, 0x7984_u16, 0x4e81_u16, StaticArray[0xa5_u8, 0x6b_u8, 0x43_u8, 0x1f_u8, 0x5f_u8, 0x92_u8, 0xae_u8, 0x42_u8])
     def query_interface(this : IVdsProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1693,7 +1877,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("1732be13-e8f9-4a03-bfbc-5f616aa66ce1")]
   record IVdsProviderSupport, lpVtbl : IVdsProviderSupportVtbl* do
     GUID = LibC::GUID.new(0x1732be13_u32, 0xe8f9_u16, 0x4a03_u16, StaticArray[0xbf_u8, 0xbc_u8, 0x5f_u8, 0x61_u8, 0x6a_u8, 0xa6_u8, 0x6c_u8, 0xe1_u8])
     def query_interface(this : IVdsProviderSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1722,7 +1905,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("11f3cd41-b7e8-48ff-9472-9dff018aa292")]
   record IVdsProviderPrivate, lpVtbl : IVdsProviderPrivateVtbl* do
     GUID = LibC::GUID.new(0x11f3cd41_u32, 0xb7e8_u16, 0x48ff_u16, StaticArray[0x94_u8, 0x72_u8, 0x9d_u8, 0xff_u8, 0x1_u8, 0x8a_u8, 0xa2_u8, 0x92_u8])
     def query_interface(this : IVdsProviderPrivate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1757,7 +1939,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("d99bdaae-b13a-4178-9fdb-e27f16b4603e")]
   record IVdsHwProvider, lpVtbl : IVdsHwProviderVtbl* do
     GUID = LibC::GUID.new(0xd99bdaae_u32, 0xb13a_u16, 0x4178_u16, StaticArray[0x9f_u8, 0xdb_u8, 0xe2_u8, 0x7f_u8, 0x16_u8, 0xb4_u8, 0x60_u8, 0x3e_u8])
     def query_interface(this : IVdsHwProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1790,7 +1971,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("3e0f5166-542d-4fc6-947a-012174240b7e")]
   record IVdsHwProviderType, lpVtbl : IVdsHwProviderTypeVtbl* do
     GUID = LibC::GUID.new(0x3e0f5166_u32, 0x542d_u16, 0x4fc6_u16, StaticArray[0x94_u8, 0x7a_u8, 0x1_u8, 0x21_u8, 0x74_u8, 0x24_u8, 0xb_u8, 0x7e_u8])
     def query_interface(this : IVdsHwProviderType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1817,7 +1997,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("8190236f-c4d0-4e81-8011-d69512fcc984")]
   record IVdsHwProviderType2, lpVtbl : IVdsHwProviderType2Vtbl* do
     GUID = LibC::GUID.new(0x8190236f_u32, 0xc4d0_u16, 0x4e81_u16, StaticArray[0x80_u8, 0x11_u8, 0xd6_u8, 0x95_u8, 0x12_u8, 0xfc_u8, 0xc9_u8, 0x84_u8])
     def query_interface(this : IVdsHwProviderType2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1846,7 +2025,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("d5b5937a-f188-4c79-b86c-11c920ad11b8")]
   record IVdsHwProviderStoragePools, lpVtbl : IVdsHwProviderStoragePoolsVtbl* do
     GUID = LibC::GUID.new(0xd5b5937a_u32, 0xf188_u16, 0x4c79_u16, StaticArray[0xb8_u8, 0x6c_u8, 0x11_u8, 0xc9_u8, 0x20_u8, 0xad_u8, 0x11_u8, 0xb8_u8])
     def query_interface(this : IVdsHwProviderStoragePools*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1890,7 +2068,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("6fcee2d3-6d90-4f91-80e2-a5c7caaca9d8")]
   record IVdsSubSystem, lpVtbl : IVdsSubSystemVtbl* do
     GUID = LibC::GUID.new(0x6fcee2d3_u32, 0x6d90_u16, 0x4f91_u16, StaticArray[0x80_u8, 0xe2_u8, 0xa5_u8, 0xc7_u8, 0xca_u8, 0xac_u8, 0xa9_u8, 0xd8_u8])
     def query_interface(this : IVdsSubSystem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1953,7 +2130,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("be666735-7800-4a77-9d9c-40f85b87e292")]
   record IVdsSubSystem2, lpVtbl : IVdsSubSystem2Vtbl* do
     GUID = LibC::GUID.new(0xbe666735_u32, 0x7800_u16, 0x4a77_u16, StaticArray[0x9d_u8, 0x9c_u8, 0x40_u8, 0xf8_u8, 0x5b_u8, 0x87_u8, 0xe2_u8, 0x92_u8])
     def query_interface(this : IVdsSubSystem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1989,7 +2165,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("0d70faa3-9cd4-4900-aa20-6981b6aafc75")]
   record IVdsSubSystemNaming, lpVtbl : IVdsSubSystemNamingVtbl* do
     GUID = LibC::GUID.new(0xd70faa3_u32, 0x9cd4_u16, 0x4900_u16, StaticArray[0xaa_u8, 0x20_u8, 0x69_u8, 0x81_u8, 0xb6_u8, 0xaa_u8, 0xfc_u8, 0x75_u8])
     def query_interface(this : IVdsSubSystemNaming*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2019,7 +2194,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("0027346f-40d0-4b45-8cec-5906dc0380c8")]
   record IVdsSubSystemIscsi, lpVtbl : IVdsSubSystemIscsiVtbl* do
     GUID = LibC::GUID.new(0x27346f_u32, 0x40d0_u16, 0x4b45_u16, StaticArray[0x8c_u8, 0xec_u8, 0x59_u8, 0x6_u8, 0xdc_u8, 0x3_u8, 0x80_u8, 0xc8_u8])
     def query_interface(this : IVdsSubSystemIscsi*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2055,7 +2229,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("9e6fa560-c141-477b-83ba-0b6c38f7febf")]
   record IVdsSubSystemInterconnect, lpVtbl : IVdsSubSystemInterconnectVtbl* do
     GUID = LibC::GUID.new(0x9e6fa560_u32, 0xc141_u16, 0x477b_u16, StaticArray[0x83_u8, 0xba_u8, 0xb_u8, 0x6c_u8, 0x38_u8, 0xf7_u8, 0xfe_u8, 0xbf_u8])
     def query_interface(this : IVdsSubSystemInterconnect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2086,7 +2259,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("18691d0d-4e7f-43e8-92e4-cf44beeed11c")]
   record IVdsControllerPort, lpVtbl : IVdsControllerPortVtbl* do
     GUID = LibC::GUID.new(0x18691d0d_u32, 0x4e7f_u16, 0x43e8_u16, StaticArray[0x92_u8, 0xe4_u8, 0xcf_u8, 0x44_u8, 0xbe_u8, 0xee_u8, 0xd1_u8, 0x1c_u8])
     def query_interface(this : IVdsControllerPort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2132,7 +2304,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("cb53d96e-dffb-474a-a078-790d1e2bc082")]
   record IVdsController, lpVtbl : IVdsControllerVtbl* do
     GUID = LibC::GUID.new(0xcb53d96e_u32, 0xdffb_u16, 0x474a_u16, StaticArray[0xa0_u8, 0x78_u8, 0x79_u8, 0xd_u8, 0x1e_u8, 0x2b_u8, 0xc0_u8, 0x82_u8])
     def query_interface(this : IVdsController*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2180,7 +2351,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("ca5d735f-6bae-42c0-b30e-f2666045ce71")]
   record IVdsControllerControllerPort, lpVtbl : IVdsControllerControllerPortVtbl* do
     GUID = LibC::GUID.new(0xca5d735f_u32, 0x6bae_u16, 0x42c0_u16, StaticArray[0xb3_u8, 0xe_u8, 0xf2_u8, 0x66_u8, 0x60_u8, 0x45_u8, 0xce_u8, 0x71_u8])
     def query_interface(this : IVdsControllerControllerPort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2212,7 +2382,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("ff24efa4-aade-4b6b-898b-eaa6a20887c7")]
   record IVdsDrive, lpVtbl : IVdsDriveVtbl* do
     GUID = LibC::GUID.new(0xff24efa4_u32, 0xaade_u16, 0x4b6b_u16, StaticArray[0x89_u8, 0x8b_u8, 0xea_u8, 0xa6_u8, 0xa2_u8, 0x8_u8, 0x87_u8, 0xc7_u8])
     def query_interface(this : IVdsDrive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2254,7 +2423,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("60b5a730-addf-4436-8ca7-5769e2d1ffa4")]
   record IVdsDrive2, lpVtbl : IVdsDrive2Vtbl* do
     GUID = LibC::GUID.new(0x60b5a730_u32, 0xaddf_u16, 0x4436_u16, StaticArray[0x8c_u8, 0xa7_u8, 0x57_u8, 0x69_u8, 0xe2_u8, 0xd1_u8, 0xff_u8, 0xa4_u8])
     def query_interface(this : IVdsDrive2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2297,7 +2465,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("3540a9c7-e60f-4111-a840-8bba6c2c83d8")]
   record IVdsLun, lpVtbl : IVdsLunVtbl* do
     GUID = LibC::GUID.new(0x3540a9c7_u32, 0xe60f_u16, 0x4111_u16, StaticArray[0xa8_u8, 0x40_u8, 0x8b_u8, 0xba_u8, 0x6c_u8, 0x2c_u8, 0x83_u8, 0xd8_u8])
     def query_interface(this : IVdsLun*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2373,7 +2540,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("e5b3a735-9efb-499a-8071-4394d9ee6fcb")]
   record IVdsLun2, lpVtbl : IVdsLun2Vtbl* do
     GUID = LibC::GUID.new(0xe5b3a735_u32, 0x9efb_u16, 0x499a_u16, StaticArray[0x80_u8, 0x71_u8, 0x43_u8, 0x94_u8, 0xd9_u8, 0xee_u8, 0x6f_u8, 0xcb_u8])
     def query_interface(this : IVdsLun2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2403,7 +2569,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("907504cb-6b4e-4d88-a34d-17ba661fbb06")]
   record IVdsLunNaming, lpVtbl : IVdsLunNamingVtbl* do
     GUID = LibC::GUID.new(0x907504cb_u32, 0x6b4e_u16, 0x4d88_u16, StaticArray[0xa3_u8, 0x4d_u8, 0x17_u8, 0xba_u8, 0x66_u8, 0x1f_u8, 0xbb_u8, 0x6_u8])
     def query_interface(this : IVdsLunNaming*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2430,7 +2595,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("d3f95e46-54b3-41f9-b678-0f1871443a08")]
   record IVdsLunNumber, lpVtbl : IVdsLunNumberVtbl* do
     GUID = LibC::GUID.new(0xd3f95e46_u32, 0x54b3_u16, 0x41f9_u16, StaticArray[0xb6_u8, 0x78_u8, 0xf_u8, 0x18_u8, 0x71_u8, 0x44_u8, 0x3a_u8, 0x8_u8])
     def query_interface(this : IVdsLunNumber*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2458,7 +2622,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("451fe266-da6d-406a-bb60-82e534f85aeb")]
   record IVdsLunControllerPorts, lpVtbl : IVdsLunControllerPortsVtbl* do
     GUID = LibC::GUID.new(0x451fe266_u32, 0xda6d_u16, 0x406a_u16, StaticArray[0xbb_u8, 0x60_u8, 0x82_u8, 0xe5_u8, 0x34_u8, 0xf8_u8, 0x5a_u8, 0xeb_u8])
     def query_interface(this : IVdsLunControllerPorts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2491,7 +2654,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("7c5fbae3-333a-48a1-a982-33c15788cde3")]
   record IVdsLunMpio, lpVtbl : IVdsLunMpioVtbl* do
     GUID = LibC::GUID.new(0x7c5fbae3_u32, 0x333a_u16, 0x48a1_u16, StaticArray[0xa9_u8, 0x82_u8, 0x33_u8, 0xc1_u8, 0x57_u8, 0x88_u8, 0xcd_u8, 0xe3_u8])
     def query_interface(this : IVdsLunMpio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2528,7 +2690,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("0d7c1e64-b59b-45ae-b86a-2c2cc6a42067")]
   record IVdsLunIscsi, lpVtbl : IVdsLunIscsiVtbl* do
     GUID = LibC::GUID.new(0xd7c1e64_u32, 0xb59b_u16, 0x45ae_u16, StaticArray[0xb8_u8, 0x6a_u8, 0x2c_u8, 0x2c_u8, 0xc6_u8, 0xa4_u8, 0x20_u8, 0x67_u8])
     def query_interface(this : IVdsLunIscsi*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2562,7 +2723,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("0ee1a790-5d2e-4abb-8c99-c481e8be2138")]
   record IVdsLunPlex, lpVtbl : IVdsLunPlexVtbl* do
     GUID = LibC::GUID.new(0xee1a790_u32, 0x5d2e_u16, 0x4abb_u16, StaticArray[0x8c_u8, 0x99_u8, 0xc4_u8, 0x81_u8, 0xe8_u8, 0xbe_u8, 0x21_u8, 0x38_u8])
     def query_interface(this : IVdsLunPlex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2607,7 +2767,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("7fa1499d-ec85-4a8a-a47b-ff69201fcd34")]
   record IVdsIscsiPortal, lpVtbl : IVdsIscsiPortalVtbl* do
     GUID = LibC::GUID.new(0x7fa1499d_u32, 0xec85_u16, 0x4a8a_u16, StaticArray[0xa4_u8, 0x7b_u8, 0xff_u8, 0x69_u8, 0x20_u8, 0x1f_u8, 0xcd_u8, 0x34_u8])
     def query_interface(this : IVdsIscsiPortal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2661,7 +2820,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("aa8f5055-83e5-4bcc-aa73-19851a36a849")]
   record IVdsIscsiTarget, lpVtbl : IVdsIscsiTargetVtbl* do
     GUID = LibC::GUID.new(0xaa8f5055_u32, 0x83e5_u16, 0x4bcc_u16, StaticArray[0xaa_u8, 0x73_u8, 0x19_u8, 0x85_u8, 0x1a_u8, 0x36_u8, 0xa8_u8, 0x49_u8])
     def query_interface(this : IVdsIscsiTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2720,7 +2878,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("fef5f89d-a3dd-4b36-bf28-e7dde045c593")]
   record IVdsIscsiPortalGroup, lpVtbl : IVdsIscsiPortalGroupVtbl* do
     GUID = LibC::GUID.new(0xfef5f89d_u32, 0xa3dd_u16, 0x4b36_u16, StaticArray[0xbf_u8, 0x28_u8, 0xe7_u8, 0xdd_u8, 0xe0_u8, 0x45_u8, 0xc5_u8, 0x93_u8])
     def query_interface(this : IVdsIscsiPortalGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2767,7 +2924,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("932ca8cf-0eb3-4ba8-9620-22665d7f8450")]
   record IVdsStoragePool, lpVtbl : IVdsStoragePoolVtbl* do
     GUID = LibC::GUID.new(0x932ca8cf_u32, 0xeb3_u16, 0x4ba8_u16, StaticArray[0x96_u8, 0x20_u8, 0x22_u8, 0x66_u8, 0x5d_u8, 0x7f_u8, 0x84_u8, 0x50_u8])
     def query_interface(this : IVdsStoragePool*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2811,7 +2967,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("daebeef3-8523-47ed-a2b9-05cecce2a1ae")]
   record IVdsMaintenance, lpVtbl : IVdsMaintenanceVtbl* do
     GUID = LibC::GUID.new(0xdaebeef3_u32, 0x8523_u16, 0x47ed_u16, StaticArray[0xa2_u8, 0xb9_u8, 0x5_u8, 0xce_u8, 0xcc_u8, 0xe2_u8, 0xa1_u8, 0xae_u8])
     def query_interface(this : IVdsMaintenance*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2844,7 +2999,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("98f17bf3-9f33-4f12-8714-8b4075092c2e")]
   record IVdsHwProviderPrivate, lpVtbl : IVdsHwProviderPrivateVtbl* do
     GUID = LibC::GUID.new(0x98f17bf3_u32, 0x9f33_u16, 0x4f12_u16, StaticArray[0x87_u8, 0x14_u8, 0x8b_u8, 0x40_u8, 0x75_u8, 0x9_u8, 0x2c_u8, 0x2e_u8])
     def query_interface(this : IVdsHwProviderPrivate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2871,7 +3025,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("310a7715-ac2b-4c6f-9827-3d742f351676")]
   record IVdsHwProviderPrivateMpio, lpVtbl : IVdsHwProviderPrivateMpioVtbl* do
     GUID = LibC::GUID.new(0x310a7715_u32, 0xac2b_u16, 0x4c6f_u16, StaticArray[0x98_u8, 0x27_u8, 0x3d_u8, 0x74_u8, 0x2f_u8, 0x35_u8, 0x16_u8, 0x76_u8])
     def query_interface(this : IVdsHwProviderPrivateMpio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2899,7 +3052,6 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  #@[Com("d188e97d-85aa-4d33-abc6-26299a10ffc1")]
   record IVdsAdmin, lpVtbl : IVdsAdminVtbl* do
     GUID = LibC::GUID.new(0xd188e97d_u32, 0x85aa_u16, 0x4d33_u16, StaticArray[0xab_u8, 0xc6_u8, 0x26_u8, 0x29_u8, 0x9a_u8, 0x10_u8, 0xff_u8, 0xc1_u8])
     def query_interface(this : IVdsAdmin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

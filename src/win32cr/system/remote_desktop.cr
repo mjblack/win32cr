@@ -9,19 +9,19 @@ require "./../security.cr"
 
 module Win32cr::System::RemoteDesktop
   alias HwtsVirtualChannelHandle = LibC::IntPtrT
-  alias PCHANNEL_INIT_EVENT_FN = Proc(Void*, UInt32, Void*, UInt32, Void)*
+  alias PCHANNEL_INIT_EVENT_FN = Proc(Void*, UInt32, Void*, UInt32, Void)
 
-  alias PCHANNEL_OPEN_EVENT_FN = Proc(UInt32, UInt32, Void*, UInt32, UInt32, UInt32, Void)*
+  alias PCHANNEL_OPEN_EVENT_FN = Proc(UInt32, UInt32, Void*, UInt32, UInt32, UInt32, Void)
 
-  alias PVIRTUALCHANNELINIT = Proc(Void**, Win32cr::System::RemoteDesktop::CHANNEL_DEF*, Int32, UInt32, Win32cr::System::RemoteDesktop::PCHANNEL_INIT_EVENT_FN, UInt32)*
+  alias PVIRTUALCHANNELINIT = Proc(Void**, Win32cr::System::RemoteDesktop::CHANNEL_DEF*, Int32, UInt32, Win32cr::System::RemoteDesktop::PCHANNEL_INIT_EVENT_FN, UInt32)
 
-  alias PVIRTUALCHANNELOPEN = Proc(Void*, UInt32*, Win32cr::Foundation::PSTR, Win32cr::System::RemoteDesktop::PCHANNEL_OPEN_EVENT_FN, UInt32)*
+  alias PVIRTUALCHANNELOPEN = Proc(Void*, UInt32*, Win32cr::Foundation::PSTR, Win32cr::System::RemoteDesktop::PCHANNEL_OPEN_EVENT_FN, UInt32)
 
-  alias PVIRTUALCHANNELCLOSE = Proc(UInt32, UInt32)*
+  alias PVIRTUALCHANNELCLOSE = Proc(UInt32, UInt32)
 
-  alias PVIRTUALCHANNELWRITE = Proc(UInt32, Void*, UInt32, Void*, UInt32)*
+  alias PVIRTUALCHANNELWRITE = Proc(UInt32, Void*, UInt32, Void*, UInt32)
 
-  alias PVIRTUALCHANNELENTRY = Proc(Win32cr::System::RemoteDesktop::CHANNEL_ENTRY_POINTS*, Win32cr::Foundation::BOOL)*
+  alias PVIRTUALCHANNELENTRY = Proc(Win32cr::System::RemoteDesktop::CHANNEL_ENTRY_POINTS*, Win32cr::Foundation::BOOL)
 
   WTS_DOMAIN_LENGTH = 255_u32
   WTS_USERNAME_LENGTH = 255_u32
@@ -667,1015 +667,1302 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record AE_CURRENT_POSITION,
-    u64DevicePosition : UInt64,
-    u64StreamPosition : UInt64,
-    u64PaddingFrames : UInt64,
-    hnsQPCPosition : Int64,
-    f32FramesPerSecond : Float32,
-    flag : Win32cr::System::RemoteDesktop::AE_POSITION_FLAGS
+  struct AE_CURRENT_POSITION
+    property u64DevicePosition : UInt64
+    property u64StreamPosition : UInt64
+    property u64PaddingFrames : UInt64
+    property hnsQPCPosition : Int64
+    property f32FramesPerSecond : Float32
+    property flag : Win32cr::System::RemoteDesktop::AE_POSITION_FLAGS
+    def initialize(@u64DevicePosition : UInt64, @u64StreamPosition : UInt64, @u64PaddingFrames : UInt64, @hnsQPCPosition : Int64, @f32FramesPerSecond : Float32, @flag : Win32cr::System::RemoteDesktop::AE_POSITION_FLAGS)
+    end
+  end
 
   @[Extern]
-  record AAAccountingData,
-    userName : Win32cr::Foundation::BSTR,
-    clientName : Win32cr::Foundation::BSTR,
-    authType : Win32cr::System::RemoteDesktop::AAAuthSchemes,
-    resourceName : Win32cr::Foundation::BSTR,
-    portNumber : Int32,
-    protocolName : Win32cr::Foundation::BSTR,
-    numberOfBytesReceived : Int32,
-    numberOfBytesTransfered : Int32,
-    reasonForDisconnect : Win32cr::Foundation::BSTR,
-    mainSessionId : LibC::GUID,
-    subSessionId : Int32
+  struct AAAccountingData
+    property userName : Win32cr::Foundation::BSTR
+    property clientName : Win32cr::Foundation::BSTR
+    property authType : Win32cr::System::RemoteDesktop::AAAuthSchemes
+    property resourceName : Win32cr::Foundation::BSTR
+    property portNumber : Int32
+    property protocolName : Win32cr::Foundation::BSTR
+    property numberOfBytesReceived : Int32
+    property numberOfBytesTransfered : Int32
+    property reasonForDisconnect : Win32cr::Foundation::BSTR
+    property mainSessionId : LibC::GUID
+    property subSessionId : Int32
+    def initialize(@userName : Win32cr::Foundation::BSTR, @clientName : Win32cr::Foundation::BSTR, @authType : Win32cr::System::RemoteDesktop::AAAuthSchemes, @resourceName : Win32cr::Foundation::BSTR, @portNumber : Int32, @protocolName : Win32cr::Foundation::BSTR, @numberOfBytesReceived : Int32, @numberOfBytesTransfered : Int32, @reasonForDisconnect : Win32cr::Foundation::BSTR, @mainSessionId : LibC::GUID, @subSessionId : Int32)
+    end
+  end
 
   @[Extern]
-  record WTS_SERVER_INFOW,
-    pServerName : Win32cr::Foundation::PWSTR
+  struct WTS_SERVER_INFOW
+    property pServerName : Win32cr::Foundation::PWSTR
+    def initialize(@pServerName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WTS_SERVER_INFOA,
-    pServerName : Win32cr::Foundation::PSTR
+  struct WTS_SERVER_INFOA
+    property pServerName : Win32cr::Foundation::PSTR
+    def initialize(@pServerName : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record WTS_SESSION_INFOW,
-    session_id : UInt32,
-    pWinStationName : Win32cr::Foundation::PWSTR,
-    state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS
+  struct WTS_SESSION_INFOW
+    property session_id : UInt32
+    property pWinStationName : Win32cr::Foundation::PWSTR
+    property state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS
+    def initialize(@session_id : UInt32, @pWinStationName : Win32cr::Foundation::PWSTR, @state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS)
+    end
+  end
 
   @[Extern]
-  record WTS_SESSION_INFOA,
-    session_id : UInt32,
-    pWinStationName : Win32cr::Foundation::PSTR,
-    state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS
+  struct WTS_SESSION_INFOA
+    property session_id : UInt32
+    property pWinStationName : Win32cr::Foundation::PSTR
+    property state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS
+    def initialize(@session_id : UInt32, @pWinStationName : Win32cr::Foundation::PSTR, @state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS)
+    end
+  end
 
   @[Extern]
-  record WTS_SESSION_INFO_1W,
-    exec_env_id : UInt32,
-    state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS,
-    session_id : UInt32,
-    pSessionName : Win32cr::Foundation::PWSTR,
-    pHostName : Win32cr::Foundation::PWSTR,
-    pUserName : Win32cr::Foundation::PWSTR,
-    pDomainName : Win32cr::Foundation::PWSTR,
-    pFarmName : Win32cr::Foundation::PWSTR
+  struct WTS_SESSION_INFO_1W
+    property exec_env_id : UInt32
+    property state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS
+    property session_id : UInt32
+    property pSessionName : Win32cr::Foundation::PWSTR
+    property pHostName : Win32cr::Foundation::PWSTR
+    property pUserName : Win32cr::Foundation::PWSTR
+    property pDomainName : Win32cr::Foundation::PWSTR
+    property pFarmName : Win32cr::Foundation::PWSTR
+    def initialize(@exec_env_id : UInt32, @state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_id : UInt32, @pSessionName : Win32cr::Foundation::PWSTR, @pHostName : Win32cr::Foundation::PWSTR, @pUserName : Win32cr::Foundation::PWSTR, @pDomainName : Win32cr::Foundation::PWSTR, @pFarmName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WTS_SESSION_INFO_1A,
-    exec_env_id : UInt32,
-    state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS,
-    session_id : UInt32,
-    pSessionName : Win32cr::Foundation::PSTR,
-    pHostName : Win32cr::Foundation::PSTR,
-    pUserName : Win32cr::Foundation::PSTR,
-    pDomainName : Win32cr::Foundation::PSTR,
-    pFarmName : Win32cr::Foundation::PSTR
+  struct WTS_SESSION_INFO_1A
+    property exec_env_id : UInt32
+    property state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS
+    property session_id : UInt32
+    property pSessionName : Win32cr::Foundation::PSTR
+    property pHostName : Win32cr::Foundation::PSTR
+    property pUserName : Win32cr::Foundation::PSTR
+    property pDomainName : Win32cr::Foundation::PSTR
+    property pFarmName : Win32cr::Foundation::PSTR
+    def initialize(@exec_env_id : UInt32, @state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_id : UInt32, @pSessionName : Win32cr::Foundation::PSTR, @pHostName : Win32cr::Foundation::PSTR, @pUserName : Win32cr::Foundation::PSTR, @pDomainName : Win32cr::Foundation::PSTR, @pFarmName : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record WTS_PROCESS_INFOW,
-    session_id : UInt32,
-    process_id : UInt32,
-    pProcessName : Win32cr::Foundation::PWSTR,
-    pUserSid : Win32cr::Foundation::PSID
+  struct WTS_PROCESS_INFOW
+    property session_id : UInt32
+    property process_id : UInt32
+    property pProcessName : Win32cr::Foundation::PWSTR
+    property pUserSid : Win32cr::Foundation::PSID
+    def initialize(@session_id : UInt32, @process_id : UInt32, @pProcessName : Win32cr::Foundation::PWSTR, @pUserSid : Win32cr::Foundation::PSID)
+    end
+  end
 
   @[Extern]
-  record WTS_PROCESS_INFOA,
-    session_id : UInt32,
-    process_id : UInt32,
-    pProcessName : Win32cr::Foundation::PSTR,
-    pUserSid : Win32cr::Foundation::PSID
+  struct WTS_PROCESS_INFOA
+    property session_id : UInt32
+    property process_id : UInt32
+    property pProcessName : Win32cr::Foundation::PSTR
+    property pUserSid : Win32cr::Foundation::PSID
+    def initialize(@session_id : UInt32, @process_id : UInt32, @pProcessName : Win32cr::Foundation::PSTR, @pUserSid : Win32cr::Foundation::PSID)
+    end
+  end
 
   @[Extern]
-  record WTSCONFIGINFOW,
-    version : UInt32,
-    fConnectClientDrivesAtLogon : UInt32,
-    fConnectPrinterAtLogon : UInt32,
-    fDisablePrinterRedirection : UInt32,
-    fDisableDefaultMainClientPrinter : UInt32,
-    shadow_settings : UInt32,
-    logon_user_name : UInt16[21],
-    logon_domain : UInt16[18],
-    work_directory : UInt16[261],
-    initial_program : UInt16[261],
-    application_name : UInt16[261]
+  struct WTSCONFIGINFOW
+    property version : UInt32
+    property fConnectClientDrivesAtLogon : UInt32
+    property fConnectPrinterAtLogon : UInt32
+    property fDisablePrinterRedirection : UInt32
+    property fDisableDefaultMainClientPrinter : UInt32
+    property shadow_settings : UInt32
+    property logon_user_name : UInt16[21]
+    property logon_domain : UInt16[18]
+    property work_directory : UInt16[261]
+    property initial_program : UInt16[261]
+    property application_name : UInt16[261]
+    def initialize(@version : UInt32, @fConnectClientDrivesAtLogon : UInt32, @fConnectPrinterAtLogon : UInt32, @fDisablePrinterRedirection : UInt32, @fDisableDefaultMainClientPrinter : UInt32, @shadow_settings : UInt32, @logon_user_name : UInt16[21], @logon_domain : UInt16[18], @work_directory : UInt16[261], @initial_program : UInt16[261], @application_name : UInt16[261])
+    end
+  end
 
   @[Extern]
-  record WTSCONFIGINFOA,
-    version : UInt32,
-    fConnectClientDrivesAtLogon : UInt32,
-    fConnectPrinterAtLogon : UInt32,
-    fDisablePrinterRedirection : UInt32,
-    fDisableDefaultMainClientPrinter : UInt32,
-    shadow_settings : UInt32,
-    logon_user_name : Win32cr::Foundation::CHAR[21],
-    logon_domain : Win32cr::Foundation::CHAR[18],
-    work_directory : Win32cr::Foundation::CHAR[261],
-    initial_program : Win32cr::Foundation::CHAR[261],
-    application_name : Win32cr::Foundation::CHAR[261]
+  struct WTSCONFIGINFOA
+    property version : UInt32
+    property fConnectClientDrivesAtLogon : UInt32
+    property fConnectPrinterAtLogon : UInt32
+    property fDisablePrinterRedirection : UInt32
+    property fDisableDefaultMainClientPrinter : UInt32
+    property shadow_settings : UInt32
+    property logon_user_name : Win32cr::Foundation::CHAR[21]
+    property logon_domain : Win32cr::Foundation::CHAR[18]
+    property work_directory : Win32cr::Foundation::CHAR[261]
+    property initial_program : Win32cr::Foundation::CHAR[261]
+    property application_name : Win32cr::Foundation::CHAR[261]
+    def initialize(@version : UInt32, @fConnectClientDrivesAtLogon : UInt32, @fConnectPrinterAtLogon : UInt32, @fDisablePrinterRedirection : UInt32, @fDisableDefaultMainClientPrinter : UInt32, @shadow_settings : UInt32, @logon_user_name : Win32cr::Foundation::CHAR[21], @logon_domain : Win32cr::Foundation::CHAR[18], @work_directory : Win32cr::Foundation::CHAR[261], @initial_program : Win32cr::Foundation::CHAR[261], @application_name : Win32cr::Foundation::CHAR[261])
+    end
+  end
 
   @[Extern]
-  record WTSINFOW,
-    state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS,
-    session_id : UInt32,
-    incoming_bytes : UInt32,
-    outgoing_bytes : UInt32,
-    incoming_frames : UInt32,
-    outgoing_frames : UInt32,
-    incoming_compressed_bytes : UInt32,
-    outgoing_compressed_bytes : UInt32,
-    win_station_name : UInt16[32],
-    domain : UInt16[17],
-    user_name : UInt16[21],
-    connect_time : Win32cr::Foundation::LARGE_INTEGER,
-    disconnect_time : Win32cr::Foundation::LARGE_INTEGER,
-    last_input_time : Win32cr::Foundation::LARGE_INTEGER,
-    logon_time : Win32cr::Foundation::LARGE_INTEGER,
-    current_time : Win32cr::Foundation::LARGE_INTEGER
+  struct WTSINFOW
+    property state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS
+    property session_id : UInt32
+    property incoming_bytes : UInt32
+    property outgoing_bytes : UInt32
+    property incoming_frames : UInt32
+    property outgoing_frames : UInt32
+    property incoming_compressed_bytes : UInt32
+    property outgoing_compressed_bytes : UInt32
+    property win_station_name : UInt16[32]
+    property domain : UInt16[17]
+    property user_name : UInt16[21]
+    property connect_time : Win32cr::Foundation::LARGE_INTEGER
+    property disconnect_time : Win32cr::Foundation::LARGE_INTEGER
+    property last_input_time : Win32cr::Foundation::LARGE_INTEGER
+    property logon_time : Win32cr::Foundation::LARGE_INTEGER
+    property current_time : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_id : UInt32, @incoming_bytes : UInt32, @outgoing_bytes : UInt32, @incoming_frames : UInt32, @outgoing_frames : UInt32, @incoming_compressed_bytes : UInt32, @outgoing_compressed_bytes : UInt32, @win_station_name : UInt16[32], @domain : UInt16[17], @user_name : UInt16[21], @connect_time : Win32cr::Foundation::LARGE_INTEGER, @disconnect_time : Win32cr::Foundation::LARGE_INTEGER, @last_input_time : Win32cr::Foundation::LARGE_INTEGER, @logon_time : Win32cr::Foundation::LARGE_INTEGER, @current_time : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record WTSINFOA,
-    state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS,
-    session_id : UInt32,
-    incoming_bytes : UInt32,
-    outgoing_bytes : UInt32,
-    incoming_frames : UInt32,
-    outgoing_frames : UInt32,
-    incoming_compressed_bytes : UInt32,
-    outgoing_compressed_by : UInt32,
-    win_station_name : Win32cr::Foundation::CHAR[32],
-    domain : Win32cr::Foundation::CHAR[17],
-    user_name : Win32cr::Foundation::CHAR[21],
-    connect_time : Win32cr::Foundation::LARGE_INTEGER,
-    disconnect_time : Win32cr::Foundation::LARGE_INTEGER,
-    last_input_time : Win32cr::Foundation::LARGE_INTEGER,
-    logon_time : Win32cr::Foundation::LARGE_INTEGER,
-    current_time : Win32cr::Foundation::LARGE_INTEGER
+  struct WTSINFOA
+    property state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS
+    property session_id : UInt32
+    property incoming_bytes : UInt32
+    property outgoing_bytes : UInt32
+    property incoming_frames : UInt32
+    property outgoing_frames : UInt32
+    property incoming_compressed_bytes : UInt32
+    property outgoing_compressed_by : UInt32
+    property win_station_name : Win32cr::Foundation::CHAR[32]
+    property domain : Win32cr::Foundation::CHAR[17]
+    property user_name : Win32cr::Foundation::CHAR[21]
+    property connect_time : Win32cr::Foundation::LARGE_INTEGER
+    property disconnect_time : Win32cr::Foundation::LARGE_INTEGER
+    property last_input_time : Win32cr::Foundation::LARGE_INTEGER
+    property logon_time : Win32cr::Foundation::LARGE_INTEGER
+    property current_time : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_id : UInt32, @incoming_bytes : UInt32, @outgoing_bytes : UInt32, @incoming_frames : UInt32, @outgoing_frames : UInt32, @incoming_compressed_bytes : UInt32, @outgoing_compressed_by : UInt32, @win_station_name : Win32cr::Foundation::CHAR[32], @domain : Win32cr::Foundation::CHAR[17], @user_name : Win32cr::Foundation::CHAR[21], @connect_time : Win32cr::Foundation::LARGE_INTEGER, @disconnect_time : Win32cr::Foundation::LARGE_INTEGER, @last_input_time : Win32cr::Foundation::LARGE_INTEGER, @logon_time : Win32cr::Foundation::LARGE_INTEGER, @current_time : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record WTSINFOEX_LEVEL1_W,
-    session_id : UInt32,
-    session_state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS,
-    session_flags : Int32,
-    win_station_name : UInt16[33],
-    user_name : UInt16[21],
-    domain_name : UInt16[18],
-    logon_time : Win32cr::Foundation::LARGE_INTEGER,
-    connect_time : Win32cr::Foundation::LARGE_INTEGER,
-    disconnect_time : Win32cr::Foundation::LARGE_INTEGER,
-    last_input_time : Win32cr::Foundation::LARGE_INTEGER,
-    current_time : Win32cr::Foundation::LARGE_INTEGER,
-    incoming_bytes : UInt32,
-    outgoing_bytes : UInt32,
-    incoming_frames : UInt32,
-    outgoing_frames : UInt32,
-    incoming_compressed_bytes : UInt32,
-    outgoing_compressed_bytes : UInt32
+  struct WTSINFOEX_LEVEL1_W
+    property session_id : UInt32
+    property session_state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS
+    property session_flags : Int32
+    property win_station_name : UInt16[33]
+    property user_name : UInt16[21]
+    property domain_name : UInt16[18]
+    property logon_time : Win32cr::Foundation::LARGE_INTEGER
+    property connect_time : Win32cr::Foundation::LARGE_INTEGER
+    property disconnect_time : Win32cr::Foundation::LARGE_INTEGER
+    property last_input_time : Win32cr::Foundation::LARGE_INTEGER
+    property current_time : Win32cr::Foundation::LARGE_INTEGER
+    property incoming_bytes : UInt32
+    property outgoing_bytes : UInt32
+    property incoming_frames : UInt32
+    property outgoing_frames : UInt32
+    property incoming_compressed_bytes : UInt32
+    property outgoing_compressed_bytes : UInt32
+    def initialize(@session_id : UInt32, @session_state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_flags : Int32, @win_station_name : UInt16[33], @user_name : UInt16[21], @domain_name : UInt16[18], @logon_time : Win32cr::Foundation::LARGE_INTEGER, @connect_time : Win32cr::Foundation::LARGE_INTEGER, @disconnect_time : Win32cr::Foundation::LARGE_INTEGER, @last_input_time : Win32cr::Foundation::LARGE_INTEGER, @current_time : Win32cr::Foundation::LARGE_INTEGER, @incoming_bytes : UInt32, @outgoing_bytes : UInt32, @incoming_frames : UInt32, @outgoing_frames : UInt32, @incoming_compressed_bytes : UInt32, @outgoing_compressed_bytes : UInt32)
+    end
+  end
 
   @[Extern]
-  record WTSINFOEX_LEVEL1_A,
-    session_id : UInt32,
-    session_state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS,
-    session_flags : Int32,
-    win_station_name : Win32cr::Foundation::CHAR[33],
-    user_name : Win32cr::Foundation::CHAR[21],
-    domain_name : Win32cr::Foundation::CHAR[18],
-    logon_time : Win32cr::Foundation::LARGE_INTEGER,
-    connect_time : Win32cr::Foundation::LARGE_INTEGER,
-    disconnect_time : Win32cr::Foundation::LARGE_INTEGER,
-    last_input_time : Win32cr::Foundation::LARGE_INTEGER,
-    current_time : Win32cr::Foundation::LARGE_INTEGER,
-    incoming_bytes : UInt32,
-    outgoing_bytes : UInt32,
-    incoming_frames : UInt32,
-    outgoing_frames : UInt32,
-    incoming_compressed_bytes : UInt32,
-    outgoing_compressed_bytes : UInt32
+  struct WTSINFOEX_LEVEL1_A
+    property session_id : UInt32
+    property session_state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS
+    property session_flags : Int32
+    property win_station_name : Win32cr::Foundation::CHAR[33]
+    property user_name : Win32cr::Foundation::CHAR[21]
+    property domain_name : Win32cr::Foundation::CHAR[18]
+    property logon_time : Win32cr::Foundation::LARGE_INTEGER
+    property connect_time : Win32cr::Foundation::LARGE_INTEGER
+    property disconnect_time : Win32cr::Foundation::LARGE_INTEGER
+    property last_input_time : Win32cr::Foundation::LARGE_INTEGER
+    property current_time : Win32cr::Foundation::LARGE_INTEGER
+    property incoming_bytes : UInt32
+    property outgoing_bytes : UInt32
+    property incoming_frames : UInt32
+    property outgoing_frames : UInt32
+    property incoming_compressed_bytes : UInt32
+    property outgoing_compressed_bytes : UInt32
+    def initialize(@session_id : UInt32, @session_state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_flags : Int32, @win_station_name : Win32cr::Foundation::CHAR[33], @user_name : Win32cr::Foundation::CHAR[21], @domain_name : Win32cr::Foundation::CHAR[18], @logon_time : Win32cr::Foundation::LARGE_INTEGER, @connect_time : Win32cr::Foundation::LARGE_INTEGER, @disconnect_time : Win32cr::Foundation::LARGE_INTEGER, @last_input_time : Win32cr::Foundation::LARGE_INTEGER, @current_time : Win32cr::Foundation::LARGE_INTEGER, @incoming_bytes : UInt32, @outgoing_bytes : UInt32, @incoming_frames : UInt32, @outgoing_frames : UInt32, @incoming_compressed_bytes : UInt32, @outgoing_compressed_bytes : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record WTSINFOEX_LEVEL_W,
-    wts_info_ex_level1 : Win32cr::System::RemoteDesktop::WTSINFOEX_LEVEL1_W
+  struct WTSINFOEX_LEVEL_W
+    property wts_info_ex_level1 : Win32cr::System::RemoteDesktop::WTSINFOEX_LEVEL1_W
+    def initialize(@wts_info_ex_level1 : Win32cr::System::RemoteDesktop::WTSINFOEX_LEVEL1_W)
+    end
+  end
 
   @[Extern(union: true)]
-  record WTSINFOEX_LEVEL_A,
-    wts_info_ex_level1 : Win32cr::System::RemoteDesktop::WTSINFOEX_LEVEL1_A
+  struct WTSINFOEX_LEVEL_A
+    property wts_info_ex_level1 : Win32cr::System::RemoteDesktop::WTSINFOEX_LEVEL1_A
+    def initialize(@wts_info_ex_level1 : Win32cr::System::RemoteDesktop::WTSINFOEX_LEVEL1_A)
+    end
+  end
 
   @[Extern]
-  record WTSINFOEXW,
-    level : UInt32,
-    data : Win32cr::System::RemoteDesktop::WTSINFOEX_LEVEL_W
+  struct WTSINFOEXW
+    property level : UInt32
+    property data : Win32cr::System::RemoteDesktop::WTSINFOEX_LEVEL_W
+    def initialize(@level : UInt32, @data : Win32cr::System::RemoteDesktop::WTSINFOEX_LEVEL_W)
+    end
+  end
 
   @[Extern]
-  record WTSINFOEXA,
-    level : UInt32,
-    data : Win32cr::System::RemoteDesktop::WTSINFOEX_LEVEL_A
+  struct WTSINFOEXA
+    property level : UInt32
+    property data : Win32cr::System::RemoteDesktop::WTSINFOEX_LEVEL_A
+    def initialize(@level : UInt32, @data : Win32cr::System::RemoteDesktop::WTSINFOEX_LEVEL_A)
+    end
+  end
 
   @[Extern]
-  record WTSCLIENTW,
-    client_name : UInt16[21],
-    domain : UInt16[18],
-    user_name : UInt16[21],
-    work_directory : UInt16[261],
-    initial_program : UInt16[261],
-    encryption_level : UInt8,
-    client_address_family : UInt32,
-    client_address : UInt16[31],
-    h_res : UInt16,
-    v_res : UInt16,
-    color_depth : UInt16,
-    client_directory : UInt16[261],
-    client_build_number : UInt32,
-    client_hardware_id : UInt32,
-    client_product_id : UInt16,
-    out_buf_count_host : UInt16,
-    out_buf_count_client : UInt16,
-    out_buf_length : UInt16,
-    device_id : UInt16[261]
+  struct WTSCLIENTW
+    property client_name : UInt16[21]
+    property domain : UInt16[18]
+    property user_name : UInt16[21]
+    property work_directory : UInt16[261]
+    property initial_program : UInt16[261]
+    property encryption_level : UInt8
+    property client_address_family : UInt32
+    property client_address : UInt16[31]
+    property h_res : UInt16
+    property v_res : UInt16
+    property color_depth : UInt16
+    property client_directory : UInt16[261]
+    property client_build_number : UInt32
+    property client_hardware_id : UInt32
+    property client_product_id : UInt16
+    property out_buf_count_host : UInt16
+    property out_buf_count_client : UInt16
+    property out_buf_length : UInt16
+    property device_id : UInt16[261]
+    def initialize(@client_name : UInt16[21], @domain : UInt16[18], @user_name : UInt16[21], @work_directory : UInt16[261], @initial_program : UInt16[261], @encryption_level : UInt8, @client_address_family : UInt32, @client_address : UInt16[31], @h_res : UInt16, @v_res : UInt16, @color_depth : UInt16, @client_directory : UInt16[261], @client_build_number : UInt32, @client_hardware_id : UInt32, @client_product_id : UInt16, @out_buf_count_host : UInt16, @out_buf_count_client : UInt16, @out_buf_length : UInt16, @device_id : UInt16[261])
+    end
+  end
 
   @[Extern]
-  record WTSCLIENTA,
-    client_name : Win32cr::Foundation::CHAR[21],
-    domain : Win32cr::Foundation::CHAR[18],
-    user_name : Win32cr::Foundation::CHAR[21],
-    work_directory : Win32cr::Foundation::CHAR[261],
-    initial_program : Win32cr::Foundation::CHAR[261],
-    encryption_level : UInt8,
-    client_address_family : UInt32,
-    client_address : UInt16[31],
-    h_res : UInt16,
-    v_res : UInt16,
-    color_depth : UInt16,
-    client_directory : Win32cr::Foundation::CHAR[261],
-    client_build_number : UInt32,
-    client_hardware_id : UInt32,
-    client_product_id : UInt16,
-    out_buf_count_host : UInt16,
-    out_buf_count_client : UInt16,
-    out_buf_length : UInt16,
-    device_id : Win32cr::Foundation::CHAR[261]
+  struct WTSCLIENTA
+    property client_name : Win32cr::Foundation::CHAR[21]
+    property domain : Win32cr::Foundation::CHAR[18]
+    property user_name : Win32cr::Foundation::CHAR[21]
+    property work_directory : Win32cr::Foundation::CHAR[261]
+    property initial_program : Win32cr::Foundation::CHAR[261]
+    property encryption_level : UInt8
+    property client_address_family : UInt32
+    property client_address : UInt16[31]
+    property h_res : UInt16
+    property v_res : UInt16
+    property color_depth : UInt16
+    property client_directory : Win32cr::Foundation::CHAR[261]
+    property client_build_number : UInt32
+    property client_hardware_id : UInt32
+    property client_product_id : UInt16
+    property out_buf_count_host : UInt16
+    property out_buf_count_client : UInt16
+    property out_buf_length : UInt16
+    property device_id : Win32cr::Foundation::CHAR[261]
+    def initialize(@client_name : Win32cr::Foundation::CHAR[21], @domain : Win32cr::Foundation::CHAR[18], @user_name : Win32cr::Foundation::CHAR[21], @work_directory : Win32cr::Foundation::CHAR[261], @initial_program : Win32cr::Foundation::CHAR[261], @encryption_level : UInt8, @client_address_family : UInt32, @client_address : UInt16[31], @h_res : UInt16, @v_res : UInt16, @color_depth : UInt16, @client_directory : Win32cr::Foundation::CHAR[261], @client_build_number : UInt32, @client_hardware_id : UInt32, @client_product_id : UInt16, @out_buf_count_host : UInt16, @out_buf_count_client : UInt16, @out_buf_length : UInt16, @device_id : Win32cr::Foundation::CHAR[261])
+    end
+  end
 
   @[Extern]
-  record WTS_PRODUCT_INFOA_,
-    company_name : Win32cr::Foundation::CHAR[256],
-    product_id : Win32cr::Foundation::CHAR[4]
+  struct WTS_PRODUCT_INFOA_
+    property company_name : Win32cr::Foundation::CHAR[256]
+    property product_id : Win32cr::Foundation::CHAR[4]
+    def initialize(@company_name : Win32cr::Foundation::CHAR[256], @product_id : Win32cr::Foundation::CHAR[4])
+    end
+  end
 
   @[Extern]
-  record WTS_PRODUCT_INFOW_,
-    company_name : UInt16[256],
-    product_id : UInt16[4]
+  struct WTS_PRODUCT_INFOW_
+    property company_name : UInt16[256]
+    property product_id : UInt16[4]
+    def initialize(@company_name : UInt16[256], @product_id : UInt16[4])
+    end
+  end
 
   @[Extern]
-  record WTS_VALIDATION_INFORMATIONA,
-    product_info : Win32cr::System::RemoteDesktop::WTS_PRODUCT_INFOA_,
-    license : UInt8[16384],
-    license_length : UInt32,
-    hardware_id : UInt8[20],
-    hardware_id_length : UInt32
+  struct WTS_VALIDATION_INFORMATIONA
+    property product_info : Win32cr::System::RemoteDesktop::WTS_PRODUCT_INFOA_
+    property license : UInt8[16384]
+    property license_length : UInt32
+    property hardware_id : UInt8[20]
+    property hardware_id_length : UInt32
+    def initialize(@product_info : Win32cr::System::RemoteDesktop::WTS_PRODUCT_INFOA_, @license : UInt8[16384], @license_length : UInt32, @hardware_id : UInt8[20], @hardware_id_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record WTS_VALIDATION_INFORMATIONW,
-    product_info : Win32cr::System::RemoteDesktop::WTS_PRODUCT_INFOW_,
-    license : UInt8[16384],
-    license_length : UInt32,
-    hardware_id : UInt8[20],
-    hardware_id_length : UInt32
+  struct WTS_VALIDATION_INFORMATIONW
+    property product_info : Win32cr::System::RemoteDesktop::WTS_PRODUCT_INFOW_
+    property license : UInt8[16384]
+    property license_length : UInt32
+    property hardware_id : UInt8[20]
+    property hardware_id_length : UInt32
+    def initialize(@product_info : Win32cr::System::RemoteDesktop::WTS_PRODUCT_INFOW_, @license : UInt8[16384], @license_length : UInt32, @hardware_id : UInt8[20], @hardware_id_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record WTS_CLIENT_ADDRESS,
-    address_family : UInt32,
-    address : UInt8[20]
+  struct WTS_CLIENT_ADDRESS
+    property address_family : UInt32
+    property address : UInt8[20]
+    def initialize(@address_family : UInt32, @address : UInt8[20])
+    end
+  end
 
   @[Extern]
-  record WTS_CLIENT_DISPLAY,
-    horizontal_resolution : UInt32,
-    vertical_resolution : UInt32,
-    color_depth : UInt32
+  struct WTS_CLIENT_DISPLAY
+    property horizontal_resolution : UInt32
+    property vertical_resolution : UInt32
+    property color_depth : UInt32
+    def initialize(@horizontal_resolution : UInt32, @vertical_resolution : UInt32, @color_depth : UInt32)
+    end
+  end
 
   @[Extern]
-  record WTSUSERCONFIGA,
-    source : UInt32,
-    inherit_initial_program : UInt32,
-    allow_logon_terminal_server : UInt32,
-    timeout_settings_connections : UInt32,
-    timeout_settings_disconnections : UInt32,
-    timeout_settings_idle : UInt32,
-    device_client_drives : UInt32,
-    device_client_printers : UInt32,
-    client_default_printer : UInt32,
-    broken_timeout_settings : UInt32,
-    reconnect_settings : UInt32,
-    shadowing_settings : UInt32,
-    terminal_server_remote_home_dir : UInt32,
-    initial_program : Win32cr::Foundation::CHAR[261],
-    work_directory : Win32cr::Foundation::CHAR[261],
-    terminal_server_profile_path : Win32cr::Foundation::CHAR[261],
-    terminal_server_home_dir : Win32cr::Foundation::CHAR[261],
-    terminal_server_home_dir_drive : Win32cr::Foundation::CHAR[4]
+  struct WTSUSERCONFIGA
+    property source : UInt32
+    property inherit_initial_program : UInt32
+    property allow_logon_terminal_server : UInt32
+    property timeout_settings_connections : UInt32
+    property timeout_settings_disconnections : UInt32
+    property timeout_settings_idle : UInt32
+    property device_client_drives : UInt32
+    property device_client_printers : UInt32
+    property client_default_printer : UInt32
+    property broken_timeout_settings : UInt32
+    property reconnect_settings : UInt32
+    property shadowing_settings : UInt32
+    property terminal_server_remote_home_dir : UInt32
+    property initial_program : Win32cr::Foundation::CHAR[261]
+    property work_directory : Win32cr::Foundation::CHAR[261]
+    property terminal_server_profile_path : Win32cr::Foundation::CHAR[261]
+    property terminal_server_home_dir : Win32cr::Foundation::CHAR[261]
+    property terminal_server_home_dir_drive : Win32cr::Foundation::CHAR[4]
+    def initialize(@source : UInt32, @inherit_initial_program : UInt32, @allow_logon_terminal_server : UInt32, @timeout_settings_connections : UInt32, @timeout_settings_disconnections : UInt32, @timeout_settings_idle : UInt32, @device_client_drives : UInt32, @device_client_printers : UInt32, @client_default_printer : UInt32, @broken_timeout_settings : UInt32, @reconnect_settings : UInt32, @shadowing_settings : UInt32, @terminal_server_remote_home_dir : UInt32, @initial_program : Win32cr::Foundation::CHAR[261], @work_directory : Win32cr::Foundation::CHAR[261], @terminal_server_profile_path : Win32cr::Foundation::CHAR[261], @terminal_server_home_dir : Win32cr::Foundation::CHAR[261], @terminal_server_home_dir_drive : Win32cr::Foundation::CHAR[4])
+    end
+  end
 
   @[Extern]
-  record WTSUSERCONFIGW,
-    source : UInt32,
-    inherit_initial_program : UInt32,
-    allow_logon_terminal_server : UInt32,
-    timeout_settings_connections : UInt32,
-    timeout_settings_disconnections : UInt32,
-    timeout_settings_idle : UInt32,
-    device_client_drives : UInt32,
-    device_client_printers : UInt32,
-    client_default_printer : UInt32,
-    broken_timeout_settings : UInt32,
-    reconnect_settings : UInt32,
-    shadowing_settings : UInt32,
-    terminal_server_remote_home_dir : UInt32,
-    initial_program : UInt16[261],
-    work_directory : UInt16[261],
-    terminal_server_profile_path : UInt16[261],
-    terminal_server_home_dir : UInt16[261],
-    terminal_server_home_dir_drive : UInt16[4]
+  struct WTSUSERCONFIGW
+    property source : UInt32
+    property inherit_initial_program : UInt32
+    property allow_logon_terminal_server : UInt32
+    property timeout_settings_connections : UInt32
+    property timeout_settings_disconnections : UInt32
+    property timeout_settings_idle : UInt32
+    property device_client_drives : UInt32
+    property device_client_printers : UInt32
+    property client_default_printer : UInt32
+    property broken_timeout_settings : UInt32
+    property reconnect_settings : UInt32
+    property shadowing_settings : UInt32
+    property terminal_server_remote_home_dir : UInt32
+    property initial_program : UInt16[261]
+    property work_directory : UInt16[261]
+    property terminal_server_profile_path : UInt16[261]
+    property terminal_server_home_dir : UInt16[261]
+    property terminal_server_home_dir_drive : UInt16[4]
+    def initialize(@source : UInt32, @inherit_initial_program : UInt32, @allow_logon_terminal_server : UInt32, @timeout_settings_connections : UInt32, @timeout_settings_disconnections : UInt32, @timeout_settings_idle : UInt32, @device_client_drives : UInt32, @device_client_printers : UInt32, @client_default_printer : UInt32, @broken_timeout_settings : UInt32, @reconnect_settings : UInt32, @shadowing_settings : UInt32, @terminal_server_remote_home_dir : UInt32, @initial_program : UInt16[261], @work_directory : UInt16[261], @terminal_server_profile_path : UInt16[261], @terminal_server_home_dir : UInt16[261], @terminal_server_home_dir_drive : UInt16[4])
+    end
+  end
 
   @[Extern]
-  record WTS_SESSION_ADDRESS,
-    address_family : UInt32,
-    address : UInt8[20]
+  struct WTS_SESSION_ADDRESS
+    property address_family : UInt32
+    property address : UInt8[20]
+    def initialize(@address_family : UInt32, @address : UInt8[20])
+    end
+  end
 
   @[Extern]
-  record WTS_PROCESS_INFO_EXW,
-    session_id : UInt32,
-    process_id : UInt32,
-    pProcessName : Win32cr::Foundation::PWSTR,
-    pUserSid : Win32cr::Foundation::PSID,
-    number_of_threads : UInt32,
-    handle_count : UInt32,
-    pagefile_usage : UInt32,
-    peak_pagefile_usage : UInt32,
-    working_set_size : UInt32,
-    peak_working_set_size : UInt32,
-    user_time : Win32cr::Foundation::LARGE_INTEGER,
-    kernel_time : Win32cr::Foundation::LARGE_INTEGER
+  struct WTS_PROCESS_INFO_EXW
+    property session_id : UInt32
+    property process_id : UInt32
+    property pProcessName : Win32cr::Foundation::PWSTR
+    property pUserSid : Win32cr::Foundation::PSID
+    property number_of_threads : UInt32
+    property handle_count : UInt32
+    property pagefile_usage : UInt32
+    property peak_pagefile_usage : UInt32
+    property working_set_size : UInt32
+    property peak_working_set_size : UInt32
+    property user_time : Win32cr::Foundation::LARGE_INTEGER
+    property kernel_time : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@session_id : UInt32, @process_id : UInt32, @pProcessName : Win32cr::Foundation::PWSTR, @pUserSid : Win32cr::Foundation::PSID, @number_of_threads : UInt32, @handle_count : UInt32, @pagefile_usage : UInt32, @peak_pagefile_usage : UInt32, @working_set_size : UInt32, @peak_working_set_size : UInt32, @user_time : Win32cr::Foundation::LARGE_INTEGER, @kernel_time : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record WTS_PROCESS_INFO_EXA,
-    session_id : UInt32,
-    process_id : UInt32,
-    pProcessName : Win32cr::Foundation::PSTR,
-    pUserSid : Win32cr::Foundation::PSID,
-    number_of_threads : UInt32,
-    handle_count : UInt32,
-    pagefile_usage : UInt32,
-    peak_pagefile_usage : UInt32,
-    working_set_size : UInt32,
-    peak_working_set_size : UInt32,
-    user_time : Win32cr::Foundation::LARGE_INTEGER,
-    kernel_time : Win32cr::Foundation::LARGE_INTEGER
+  struct WTS_PROCESS_INFO_EXA
+    property session_id : UInt32
+    property process_id : UInt32
+    property pProcessName : Win32cr::Foundation::PSTR
+    property pUserSid : Win32cr::Foundation::PSID
+    property number_of_threads : UInt32
+    property handle_count : UInt32
+    property pagefile_usage : UInt32
+    property peak_pagefile_usage : UInt32
+    property working_set_size : UInt32
+    property peak_working_set_size : UInt32
+    property user_time : Win32cr::Foundation::LARGE_INTEGER
+    property kernel_time : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@session_id : UInt32, @process_id : UInt32, @pProcessName : Win32cr::Foundation::PSTR, @pUserSid : Win32cr::Foundation::PSID, @number_of_threads : UInt32, @handle_count : UInt32, @pagefile_usage : UInt32, @peak_pagefile_usage : UInt32, @working_set_size : UInt32, @peak_working_set_size : UInt32, @user_time : Win32cr::Foundation::LARGE_INTEGER, @kernel_time : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record WTSLISTENERCONFIGW,
-    version : UInt32,
-    fEnableListener : UInt32,
-    max_connection_count : UInt32,
-    fPromptForPassword : UInt32,
-    fInheritColorDepth : UInt32,
-    color_depth : UInt32,
-    fInheritBrokenTimeoutSettings : UInt32,
-    broken_timeout_settings : UInt32,
-    fDisablePrinterRedirection : UInt32,
-    fDisableDriveRedirection : UInt32,
-    fDisableComPortRedirection : UInt32,
-    fDisableLPTPortRedirection : UInt32,
-    fDisableClipboardRedirection : UInt32,
-    fDisableAudioRedirection : UInt32,
-    fDisablePNPRedirection : UInt32,
-    fDisableDefaultMainClientPrinter : UInt32,
-    lan_adapter : UInt32,
-    port_number : UInt32,
-    fInheritShadowSettings : UInt32,
-    shadow_settings : UInt32,
-    timeout_settings_connection : UInt32,
-    timeout_settings_disconnection : UInt32,
-    timeout_settings_idle : UInt32,
-    security_layer : UInt32,
-    min_encryption_level : UInt32,
-    user_authentication : UInt32,
-    comment : UInt16[61],
-    logon_user_name : UInt16[21],
-    logon_domain : UInt16[18],
-    work_directory : UInt16[261],
-    initial_program : UInt16[261]
+  struct WTSLISTENERCONFIGW
+    property version : UInt32
+    property fEnableListener : UInt32
+    property max_connection_count : UInt32
+    property fPromptForPassword : UInt32
+    property fInheritColorDepth : UInt32
+    property color_depth : UInt32
+    property fInheritBrokenTimeoutSettings : UInt32
+    property broken_timeout_settings : UInt32
+    property fDisablePrinterRedirection : UInt32
+    property fDisableDriveRedirection : UInt32
+    property fDisableComPortRedirection : UInt32
+    property fDisableLPTPortRedirection : UInt32
+    property fDisableClipboardRedirection : UInt32
+    property fDisableAudioRedirection : UInt32
+    property fDisablePNPRedirection : UInt32
+    property fDisableDefaultMainClientPrinter : UInt32
+    property lan_adapter : UInt32
+    property port_number : UInt32
+    property fInheritShadowSettings : UInt32
+    property shadow_settings : UInt32
+    property timeout_settings_connection : UInt32
+    property timeout_settings_disconnection : UInt32
+    property timeout_settings_idle : UInt32
+    property security_layer : UInt32
+    property min_encryption_level : UInt32
+    property user_authentication : UInt32
+    property comment : UInt16[61]
+    property logon_user_name : UInt16[21]
+    property logon_domain : UInt16[18]
+    property work_directory : UInt16[261]
+    property initial_program : UInt16[261]
+    def initialize(@version : UInt32, @fEnableListener : UInt32, @max_connection_count : UInt32, @fPromptForPassword : UInt32, @fInheritColorDepth : UInt32, @color_depth : UInt32, @fInheritBrokenTimeoutSettings : UInt32, @broken_timeout_settings : UInt32, @fDisablePrinterRedirection : UInt32, @fDisableDriveRedirection : UInt32, @fDisableComPortRedirection : UInt32, @fDisableLPTPortRedirection : UInt32, @fDisableClipboardRedirection : UInt32, @fDisableAudioRedirection : UInt32, @fDisablePNPRedirection : UInt32, @fDisableDefaultMainClientPrinter : UInt32, @lan_adapter : UInt32, @port_number : UInt32, @fInheritShadowSettings : UInt32, @shadow_settings : UInt32, @timeout_settings_connection : UInt32, @timeout_settings_disconnection : UInt32, @timeout_settings_idle : UInt32, @security_layer : UInt32, @min_encryption_level : UInt32, @user_authentication : UInt32, @comment : UInt16[61], @logon_user_name : UInt16[21], @logon_domain : UInt16[18], @work_directory : UInt16[261], @initial_program : UInt16[261])
+    end
+  end
 
   @[Extern]
-  record WTSLISTENERCONFIGA,
-    version : UInt32,
-    fEnableListener : UInt32,
-    max_connection_count : UInt32,
-    fPromptForPassword : UInt32,
-    fInheritColorDepth : UInt32,
-    color_depth : UInt32,
-    fInheritBrokenTimeoutSettings : UInt32,
-    broken_timeout_settings : UInt32,
-    fDisablePrinterRedirection : UInt32,
-    fDisableDriveRedirection : UInt32,
-    fDisableComPortRedirection : UInt32,
-    fDisableLPTPortRedirection : UInt32,
-    fDisableClipboardRedirection : UInt32,
-    fDisableAudioRedirection : UInt32,
-    fDisablePNPRedirection : UInt32,
-    fDisableDefaultMainClientPrinter : UInt32,
-    lan_adapter : UInt32,
-    port_number : UInt32,
-    fInheritShadowSettings : UInt32,
-    shadow_settings : UInt32,
-    timeout_settings_connection : UInt32,
-    timeout_settings_disconnection : UInt32,
-    timeout_settings_idle : UInt32,
-    security_layer : UInt32,
-    min_encryption_level : UInt32,
-    user_authentication : UInt32,
-    comment : Win32cr::Foundation::CHAR[61],
-    logon_user_name : Win32cr::Foundation::CHAR[21],
-    logon_domain : Win32cr::Foundation::CHAR[18],
-    work_directory : Win32cr::Foundation::CHAR[261],
-    initial_program : Win32cr::Foundation::CHAR[261]
+  struct WTSLISTENERCONFIGA
+    property version : UInt32
+    property fEnableListener : UInt32
+    property max_connection_count : UInt32
+    property fPromptForPassword : UInt32
+    property fInheritColorDepth : UInt32
+    property color_depth : UInt32
+    property fInheritBrokenTimeoutSettings : UInt32
+    property broken_timeout_settings : UInt32
+    property fDisablePrinterRedirection : UInt32
+    property fDisableDriveRedirection : UInt32
+    property fDisableComPortRedirection : UInt32
+    property fDisableLPTPortRedirection : UInt32
+    property fDisableClipboardRedirection : UInt32
+    property fDisableAudioRedirection : UInt32
+    property fDisablePNPRedirection : UInt32
+    property fDisableDefaultMainClientPrinter : UInt32
+    property lan_adapter : UInt32
+    property port_number : UInt32
+    property fInheritShadowSettings : UInt32
+    property shadow_settings : UInt32
+    property timeout_settings_connection : UInt32
+    property timeout_settings_disconnection : UInt32
+    property timeout_settings_idle : UInt32
+    property security_layer : UInt32
+    property min_encryption_level : UInt32
+    property user_authentication : UInt32
+    property comment : Win32cr::Foundation::CHAR[61]
+    property logon_user_name : Win32cr::Foundation::CHAR[21]
+    property logon_domain : Win32cr::Foundation::CHAR[18]
+    property work_directory : Win32cr::Foundation::CHAR[261]
+    property initial_program : Win32cr::Foundation::CHAR[261]
+    def initialize(@version : UInt32, @fEnableListener : UInt32, @max_connection_count : UInt32, @fPromptForPassword : UInt32, @fInheritColorDepth : UInt32, @color_depth : UInt32, @fInheritBrokenTimeoutSettings : UInt32, @broken_timeout_settings : UInt32, @fDisablePrinterRedirection : UInt32, @fDisableDriveRedirection : UInt32, @fDisableComPortRedirection : UInt32, @fDisableLPTPortRedirection : UInt32, @fDisableClipboardRedirection : UInt32, @fDisableAudioRedirection : UInt32, @fDisablePNPRedirection : UInt32, @fDisableDefaultMainClientPrinter : UInt32, @lan_adapter : UInt32, @port_number : UInt32, @fInheritShadowSettings : UInt32, @shadow_settings : UInt32, @timeout_settings_connection : UInt32, @timeout_settings_disconnection : UInt32, @timeout_settings_idle : UInt32, @security_layer : UInt32, @min_encryption_level : UInt32, @user_authentication : UInt32, @comment : Win32cr::Foundation::CHAR[61], @logon_user_name : Win32cr::Foundation::CHAR[21], @logon_domain : Win32cr::Foundation::CHAR[18], @work_directory : Win32cr::Foundation::CHAR[261], @initial_program : Win32cr::Foundation::CHAR[261])
+    end
+  end
 
   @[Extern]
-  record WTSSBX_IP_ADDRESS,
-    address_family : Win32cr::System::RemoteDesktop::WTSSBX_ADDRESS_FAMILY,
-    address : UInt8[16],
-    port_number : UInt16,
-    dwScope : UInt32
+  struct WTSSBX_IP_ADDRESS
+    property address_family : Win32cr::System::RemoteDesktop::WTSSBX_ADDRESS_FAMILY
+    property address : UInt8[16]
+    property port_number : UInt16
+    property dwScope : UInt32
+    def initialize(@address_family : Win32cr::System::RemoteDesktop::WTSSBX_ADDRESS_FAMILY, @address : UInt8[16], @port_number : UInt16, @dwScope : UInt32)
+    end
+  end
 
   @[Extern]
-  record WTSSBX_MACHINE_CONNECT_INFO,
-    wczMachineFQDN : UInt16[257],
-    wczMachineNetBiosName : UInt16[17],
-    dwNumOfIPAddr : UInt32,
-    i_paddr : Win32cr::System::RemoteDesktop::WTSSBX_IP_ADDRESS[12]
+  struct WTSSBX_MACHINE_CONNECT_INFO
+    property wczMachineFQDN : UInt16[257]
+    property wczMachineNetBiosName : UInt16[17]
+    property dwNumOfIPAddr : UInt32
+    property i_paddr : Win32cr::System::RemoteDesktop::WTSSBX_IP_ADDRESS[12]
+    def initialize(@wczMachineFQDN : UInt16[257], @wczMachineNetBiosName : UInt16[17], @dwNumOfIPAddr : UInt32, @i_paddr : Win32cr::System::RemoteDesktop::WTSSBX_IP_ADDRESS[12])
+    end
+  end
 
   @[Extern]
-  record WTSSBX_MACHINE_INFO,
-    client_connect_info : Win32cr::System::RemoteDesktop::WTSSBX_MACHINE_CONNECT_INFO,
-    wczFarmName : UInt16[257],
-    internal_ip_address : Win32cr::System::RemoteDesktop::WTSSBX_IP_ADDRESS,
-    dwMaxSessionsLimit : UInt32,
-    server_weight : UInt32,
-    single_session_mode : Win32cr::System::RemoteDesktop::WTSSBX_MACHINE_SESSION_MODE,
-    in_drain : Win32cr::System::RemoteDesktop::WTSSBX_MACHINE_DRAIN,
-    machine_state : Win32cr::System::RemoteDesktop::WTSSBX_MACHINE_STATE
+  struct WTSSBX_MACHINE_INFO
+    property client_connect_info : Win32cr::System::RemoteDesktop::WTSSBX_MACHINE_CONNECT_INFO
+    property wczFarmName : UInt16[257]
+    property internal_ip_address : Win32cr::System::RemoteDesktop::WTSSBX_IP_ADDRESS
+    property dwMaxSessionsLimit : UInt32
+    property server_weight : UInt32
+    property single_session_mode : Win32cr::System::RemoteDesktop::WTSSBX_MACHINE_SESSION_MODE
+    property in_drain : Win32cr::System::RemoteDesktop::WTSSBX_MACHINE_DRAIN
+    property machine_state : Win32cr::System::RemoteDesktop::WTSSBX_MACHINE_STATE
+    def initialize(@client_connect_info : Win32cr::System::RemoteDesktop::WTSSBX_MACHINE_CONNECT_INFO, @wczFarmName : UInt16[257], @internal_ip_address : Win32cr::System::RemoteDesktop::WTSSBX_IP_ADDRESS, @dwMaxSessionsLimit : UInt32, @server_weight : UInt32, @single_session_mode : Win32cr::System::RemoteDesktop::WTSSBX_MACHINE_SESSION_MODE, @in_drain : Win32cr::System::RemoteDesktop::WTSSBX_MACHINE_DRAIN, @machine_state : Win32cr::System::RemoteDesktop::WTSSBX_MACHINE_STATE)
+    end
+  end
 
   @[Extern]
-  record WTSSBX_SESSION_INFO,
-    wszUserName : UInt16[105],
-    wszDomainName : UInt16[257],
-    application_type : UInt16[257],
-    dwSessionId : UInt32,
-    create_time : Win32cr::Foundation::FILETIME,
-    disconnect_time : Win32cr::Foundation::FILETIME,
-    session_state : Win32cr::System::RemoteDesktop::WTSSBX_SESSION_STATE
+  struct WTSSBX_SESSION_INFO
+    property wszUserName : UInt16[105]
+    property wszDomainName : UInt16[257]
+    property application_type : UInt16[257]
+    property dwSessionId : UInt32
+    property create_time : Win32cr::Foundation::FILETIME
+    property disconnect_time : Win32cr::Foundation::FILETIME
+    property session_state : Win32cr::System::RemoteDesktop::WTSSBX_SESSION_STATE
+    def initialize(@wszUserName : UInt16[105], @wszDomainName : UInt16[257], @application_type : UInt16[257], @dwSessionId : UInt32, @create_time : Win32cr::Foundation::FILETIME, @disconnect_time : Win32cr::Foundation::FILETIME, @session_state : Win32cr::System::RemoteDesktop::WTSSBX_SESSION_STATE)
+    end
+  end
 
   @[Extern]
-  record CHANNEL_DEF,
-    name : Win32cr::Foundation::CHAR[8],
-    options : UInt32
+  struct CHANNEL_DEF
+    property name : Win32cr::Foundation::CHAR[8]
+    property options : UInt32
+    def initialize(@name : Win32cr::Foundation::CHAR[8], @options : UInt32)
+    end
+  end
 
   @[Extern]
-  record CHANNEL_PDU_HEADER,
-    length : UInt32,
-    flags : UInt32
+  struct CHANNEL_PDU_HEADER
+    property length : UInt32
+    property flags : UInt32
+    def initialize(@length : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record CHANNEL_ENTRY_POINTS,
-    cbSize : UInt32,
-    protocolVersion : UInt32,
-    pVirtualChannelInit : Win32cr::System::RemoteDesktop::PVIRTUALCHANNELINIT,
-    pVirtualChannelOpen : Win32cr::System::RemoteDesktop::PVIRTUALCHANNELOPEN,
-    pVirtualChannelClose : Win32cr::System::RemoteDesktop::PVIRTUALCHANNELCLOSE,
-    pVirtualChannelWrite : Win32cr::System::RemoteDesktop::PVIRTUALCHANNELWRITE
+  struct CHANNEL_ENTRY_POINTS
+    property cbSize : UInt32
+    property protocolVersion : UInt32
+    property pVirtualChannelInit : Win32cr::System::RemoteDesktop::PVIRTUALCHANNELINIT
+    property pVirtualChannelOpen : Win32cr::System::RemoteDesktop::PVIRTUALCHANNELOPEN
+    property pVirtualChannelClose : Win32cr::System::RemoteDesktop::PVIRTUALCHANNELCLOSE
+    property pVirtualChannelWrite : Win32cr::System::RemoteDesktop::PVIRTUALCHANNELWRITE
+    def initialize(@cbSize : UInt32, @protocolVersion : UInt32, @pVirtualChannelInit : Win32cr::System::RemoteDesktop::PVIRTUALCHANNELINIT, @pVirtualChannelOpen : Win32cr::System::RemoteDesktop::PVIRTUALCHANNELOPEN, @pVirtualChannelClose : Win32cr::System::RemoteDesktop::PVIRTUALCHANNELCLOSE, @pVirtualChannelWrite : Win32cr::System::RemoteDesktop::PVIRTUALCHANNELWRITE)
+    end
+  end
 
   @[Extern]
-  record CLIENT_DISPLAY,
-    horizontal_resolution : UInt32,
-    vertical_resolution : UInt32,
-    color_depth : UInt32
+  struct CLIENT_DISPLAY
+    property horizontal_resolution : UInt32
+    property vertical_resolution : UInt32
+    property color_depth : UInt32
+    def initialize(@horizontal_resolution : UInt32, @vertical_resolution : UInt32, @color_depth : UInt32)
+    end
+  end
 
   @[Extern]
-  record TSSD_ConnectionPoint,
-    server_address_b : UInt8[16],
-    address_type : Win32cr::System::RemoteDesktop::TSSD_AddrV46Type,
-    port_number : UInt16,
-    address_scope : UInt32
+  struct TSSD_ConnectionPoint
+    property server_address_b : UInt8[16]
+    property address_type : Win32cr::System::RemoteDesktop::TSSD_AddrV46Type
+    property port_number : UInt16
+    property address_scope : UInt32
+    def initialize(@server_address_b : UInt8[16], @address_type : Win32cr::System::RemoteDesktop::TSSD_AddrV46Type, @port_number : UInt16, @address_scope : UInt32)
+    end
+  end
 
   @[Extern]
-  record VM_NOTIFY_ENTRY,
-    vm_name : UInt16[128],
-    vm_host : UInt16[128]
+  struct VM_NOTIFY_ENTRY
+    property vm_name : UInt16[128]
+    property vm_host : UInt16[128]
+    def initialize(@vm_name : UInt16[128], @vm_host : UInt16[128])
+    end
+  end
 
   @[Extern]
-  record VM_PATCH_INFO,
-    dwNumEntries : UInt32,
-    pVmNames : Win32cr::Foundation::PWSTR*
+  struct VM_PATCH_INFO
+    property dwNumEntries : UInt32
+    property pVmNames : Win32cr::Foundation::PWSTR*
+    def initialize(@dwNumEntries : UInt32, @pVmNames : Win32cr::Foundation::PWSTR*)
+    end
+  end
 
   @[Extern]
-  record VM_NOTIFY_INFO,
-    dwNumEntries : UInt32,
-    ppVmEntries : Win32cr::System::RemoteDesktop::VM_NOTIFY_ENTRY**
+  struct VM_NOTIFY_INFO
+    property dwNumEntries : UInt32
+    property ppVmEntries : Win32cr::System::RemoteDesktop::VM_NOTIFY_ENTRY**
+    def initialize(@dwNumEntries : UInt32, @ppVmEntries : Win32cr::System::RemoteDesktop::VM_NOTIFY_ENTRY**)
+    end
+  end
 
   @[Extern]
-  record Pluginresource,
-    alias__ : UInt16[256],
-    name : UInt16[256],
-    resourceFileContents : Win32cr::Foundation::PWSTR,
-    fileExtension : UInt16[256],
-    resourcePluginType : UInt16[256],
-    isDiscoverable : UInt8,
-    resourceType : Int32,
-    pceIconSize : UInt32,
-    iconContents : UInt8*,
-    pcePluginBlobSize : UInt32,
-    blobContents : UInt8*
+  struct Pluginresource
+    property alias__ : UInt16[256]
+    property name : UInt16[256]
+    property resourceFileContents : Win32cr::Foundation::PWSTR
+    property fileExtension : UInt16[256]
+    property resourcePluginType : UInt16[256]
+    property isDiscoverable : UInt8
+    property resourceType : Int32
+    property pceIconSize : UInt32
+    property iconContents : UInt8*
+    property pcePluginBlobSize : UInt32
+    property blobContents : UInt8*
+    def initialize(@alias__ : UInt16[256], @name : UInt16[256], @resourceFileContents : Win32cr::Foundation::PWSTR, @fileExtension : UInt16[256], @resourcePluginType : UInt16[256], @isDiscoverable : UInt8, @resourceType : Int32, @pceIconSize : UInt32, @iconContents : UInt8*, @pcePluginBlobSize : UInt32, @blobContents : UInt8*)
+    end
+  end
 
   @[Extern]
-  record Pluginresource2fileassociation,
-    extName : UInt16[256],
-    primaryHandler : UInt8,
-    pceIconSize : UInt32,
-    iconContents : UInt8*
+  struct Pluginresource2fileassociation
+    property extName : UInt16[256]
+    property primaryHandler : UInt8
+    property pceIconSize : UInt32
+    property iconContents : UInt8*
+    def initialize(@extName : UInt16[256], @primaryHandler : UInt8, @pceIconSize : UInt32, @iconContents : UInt8*)
+    end
+  end
 
   @[Extern]
-  record Pluginresource2,
-    resourceV1 : Win32cr::System::RemoteDesktop::Pluginresource,
-    pceFileAssocListSize : UInt32,
-    fileAssocList : Win32cr::System::RemoteDesktop::Pluginresource2fileassociation*,
-    securityDescriptor : Win32cr::Foundation::PWSTR,
-    pceFolderListSize : UInt32,
-    folderList : UInt16**
+  struct Pluginresource2
+    property resourceV1 : Win32cr::System::RemoteDesktop::Pluginresource
+    property pceFileAssocListSize : UInt32
+    property fileAssocList : Win32cr::System::RemoteDesktop::Pluginresource2fileassociation*
+    property securityDescriptor : Win32cr::Foundation::PWSTR
+    property pceFolderListSize : UInt32
+    property folderList : UInt16**
+    def initialize(@resourceV1 : Win32cr::System::RemoteDesktop::Pluginresource, @pceFileAssocListSize : UInt32, @fileAssocList : Win32cr::System::RemoteDesktop::Pluginresource2fileassociation*, @securityDescriptor : Win32cr::Foundation::PWSTR, @pceFolderListSize : UInt32, @folderList : UInt16**)
+    end
+  end
 
   @[Extern]
-  record BITMAP_RENDERER_STATISTICS,
-    dwFramesDelivered : UInt32,
-    dwFramesDropped : UInt32
+  struct BITMAP_RENDERER_STATISTICS
+    property dwFramesDelivered : UInt32
+    property dwFramesDropped : UInt32
+    def initialize(@dwFramesDelivered : UInt32, @dwFramesDropped : UInt32)
+    end
+  end
 
   @[Extern]
-  record RFX_GFX_RECT,
-    left : Int32,
-    top : Int32,
-    right : Int32,
-    bottom : Int32
+  struct RFX_GFX_RECT
+    property left : Int32
+    property top : Int32
+    property right : Int32
+    property bottom : Int32
+    def initialize(@left : Int32, @top : Int32, @right : Int32, @bottom : Int32)
+    end
+  end
 
   @[Extern]
-  record RFX_GFX_MSG_HEADER,
-    uMSGType : UInt16,
-    cbSize : UInt16
+  struct RFX_GFX_MSG_HEADER
+    property uMSGType : UInt16
+    property cbSize : UInt16
+    def initialize(@uMSGType : UInt16, @cbSize : UInt16)
+    end
+  end
 
   @[Extern]
-  record RFX_GFX_MONITOR_INFO,
-    left : Int32,
-    top : Int32,
-    right : Int32,
-    bottom : Int32,
-    physicalWidth : UInt32,
-    physicalHeight : UInt32,
-    orientation : UInt32,
-    primary : Win32cr::Foundation::BOOL
+  struct RFX_GFX_MONITOR_INFO
+    property left : Int32
+    property top : Int32
+    property right : Int32
+    property bottom : Int32
+    property physicalWidth : UInt32
+    property physicalHeight : UInt32
+    property orientation : UInt32
+    property primary : Win32cr::Foundation::BOOL
+    def initialize(@left : Int32, @top : Int32, @right : Int32, @bottom : Int32, @physicalWidth : UInt32, @physicalHeight : UInt32, @orientation : UInt32, @primary : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record RFX_GFX_MSG_CLIENT_DESKTOP_INFO_REQUEST,
-    channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER
+  struct RFX_GFX_MSG_CLIENT_DESKTOP_INFO_REQUEST
+    property channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER
+    def initialize(@channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER)
+    end
+  end
 
   @[Extern]
-  record RFX_GFX_MSG_CLIENT_DESKTOP_INFO_RESPONSE,
-    channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER,
-    reserved : UInt32,
-    monitorCount : UInt32,
-    monitor_data : Win32cr::System::RemoteDesktop::RFX_GFX_MONITOR_INFO[16],
-    clientUniqueId : UInt16[32]
+  struct RFX_GFX_MSG_CLIENT_DESKTOP_INFO_RESPONSE
+    property channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER
+    property reserved : UInt32
+    property monitorCount : UInt32
+    property monitor_data : Win32cr::System::RemoteDesktop::RFX_GFX_MONITOR_INFO[16]
+    property clientUniqueId : UInt16[32]
+    def initialize(@channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER, @reserved : UInt32, @monitorCount : UInt32, @monitor_data : Win32cr::System::RemoteDesktop::RFX_GFX_MONITOR_INFO[16], @clientUniqueId : UInt16[32])
+    end
+  end
 
   @[Extern]
-  record RFX_GFX_MSG_DESKTOP_CONFIG_CHANGE_NOTIFY,
-    channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER,
-    ulWidth : UInt32,
-    ulHeight : UInt32,
-    ulBpp : UInt32,
-    reserved : UInt32
+  struct RFX_GFX_MSG_DESKTOP_CONFIG_CHANGE_NOTIFY
+    property channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER
+    property ulWidth : UInt32
+    property ulHeight : UInt32
+    property ulBpp : UInt32
+    property reserved : UInt32
+    def initialize(@channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER, @ulWidth : UInt32, @ulHeight : UInt32, @ulBpp : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record RFX_GFX_MSG_DESKTOP_CONFIG_CHANGE_CONFIRM,
-    channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER
+  struct RFX_GFX_MSG_DESKTOP_CONFIG_CHANGE_CONFIRM
+    property channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER
+    def initialize(@channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER)
+    end
+  end
 
   @[Extern]
-  record RFX_GFX_MSG_DESKTOP_INPUT_RESET,
-    channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER,
-    ulWidth : UInt32,
-    ulHeight : UInt32
+  struct RFX_GFX_MSG_DESKTOP_INPUT_RESET
+    property channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER
+    property ulWidth : UInt32
+    property ulHeight : UInt32
+    def initialize(@channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER, @ulWidth : UInt32, @ulHeight : UInt32)
+    end
+  end
 
   @[Extern]
-  record RFX_GFX_MSG_DISCONNECT_NOTIFY,
-    channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER,
-    disconnect_reason : UInt32
+  struct RFX_GFX_MSG_DISCONNECT_NOTIFY
+    property channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER
+    property disconnect_reason : UInt32
+    def initialize(@channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER, @disconnect_reason : UInt32)
+    end
+  end
 
   @[Extern]
-  record RFX_GFX_MSG_DESKTOP_RESEND_REQUEST,
-    channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER,
-    redraw_rect : Win32cr::System::RemoteDesktop::RFX_GFX_RECT
+  struct RFX_GFX_MSG_DESKTOP_RESEND_REQUEST
+    property channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER
+    property redraw_rect : Win32cr::System::RemoteDesktop::RFX_GFX_RECT
+    def initialize(@channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER, @redraw_rect : Win32cr::System::RemoteDesktop::RFX_GFX_RECT)
+    end
+  end
 
   @[Extern]
-  record RFX_GFX_MSG_RDP_DATA,
-    channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER,
-    rdpData : UInt8*
+  struct RFX_GFX_MSG_RDP_DATA
+    property channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER
+    property rdpData : UInt8*
+    def initialize(@channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER, @rdpData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record WTS_SOCKADDR,
-    sin_family : UInt16,
-    u : U_e__union_ do
+  struct WTS_SOCKADDR
+    property sin_family : UInt16
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      ipv4 : Ipv4_e__struct_,
-      ipv6 : Ipv6_e__struct_ do
+    struct U_e__union_
+    property ipv4 : Ipv4_e__struct_
+    property ipv6 : Ipv6_e__struct_
 
       # Nested Type Ipv6_e__struct_
       @[Extern]
-      record Ipv6_e__struct_,
-        sin6_port : UInt16,
-        sin6_flowinfo : UInt32,
-        sin6_addr : UInt16[8],
-        sin6_scope_id : UInt32
+      struct Ipv6_e__struct_
+    property sin6_port : UInt16
+    property sin6_flowinfo : UInt32
+    property sin6_addr : UInt16[8]
+    property sin6_scope_id : UInt32
+    def initialize(@sin6_port : UInt16, @sin6_flowinfo : UInt32, @sin6_addr : UInt16[8], @sin6_scope_id : UInt32)
+    end
+      end
 
 
       # Nested Type Ipv4_e__struct_
       @[Extern]
-      record Ipv4_e__struct_,
-        sin_port : UInt16,
-        in_addr : UInt32,
-        sin_zero : UInt8[8]
+      struct Ipv4_e__struct_
+    property sin_port : UInt16
+    property in_addr : UInt32
+    property sin_zero : UInt8[8]
+    def initialize(@sin_port : UInt16, @in_addr : UInt32, @sin_zero : UInt8[8])
+    end
+      end
 
+    def initialize(@ipv4 : Ipv4_e__struct_, @ipv6 : Ipv6_e__struct_)
+    end
     end
 
+    def initialize(@sin_family : UInt16, @u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record WTS_SMALL_RECT,
-    left : Int16,
-    top : Int16,
-    right : Int16,
-    bottom : Int16
+  struct WTS_SMALL_RECT
+    property left : Int16
+    property top : Int16
+    property right : Int16
+    property bottom : Int16
+    def initialize(@left : Int16, @top : Int16, @right : Int16, @bottom : Int16)
+    end
+  end
 
   @[Extern]
-  record WTS_SERVICE_STATE,
-    rcm_service_state : Win32cr::System::RemoteDesktop::WTS_RCM_SERVICE_STATE,
-    rcm_drain_state : Win32cr::System::RemoteDesktop::WTS_RCM_DRAIN_STATE
+  struct WTS_SERVICE_STATE
+    property rcm_service_state : Win32cr::System::RemoteDesktop::WTS_RCM_SERVICE_STATE
+    property rcm_drain_state : Win32cr::System::RemoteDesktop::WTS_RCM_DRAIN_STATE
+    def initialize(@rcm_service_state : Win32cr::System::RemoteDesktop::WTS_RCM_SERVICE_STATE, @rcm_drain_state : Win32cr::System::RemoteDesktop::WTS_RCM_DRAIN_STATE)
+    end
+  end
 
   @[Extern]
-  record WTS_SESSION_ID,
-    session_unique_guid : LibC::GUID,
-    session_id : UInt32
+  struct WTS_SESSION_ID
+    property session_unique_guid : LibC::GUID
+    property session_id : UInt32
+    def initialize(@session_unique_guid : LibC::GUID, @session_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record WTS_USER_CREDENTIAL,
-    user_name : UInt16[256],
-    password : UInt16[256],
-    domain : UInt16[256]
+  struct WTS_USER_CREDENTIAL
+    property user_name : UInt16[256]
+    property password : UInt16[256]
+    property domain : UInt16[256]
+    def initialize(@user_name : UInt16[256], @password : UInt16[256], @domain : UInt16[256])
+    end
+  end
 
   @[Extern]
-  record WTS_SYSTEMTIME,
-    wYear : UInt16,
-    wMonth : UInt16,
-    wDayOfWeek : UInt16,
-    wDay : UInt16,
-    wHour : UInt16,
-    wMinute : UInt16,
-    wSecond : UInt16,
-    wMilliseconds : UInt16
+  struct WTS_SYSTEMTIME
+    property wYear : UInt16
+    property wMonth : UInt16
+    property wDayOfWeek : UInt16
+    property wDay : UInt16
+    property wHour : UInt16
+    property wMinute : UInt16
+    property wSecond : UInt16
+    property wMilliseconds : UInt16
+    def initialize(@wYear : UInt16, @wMonth : UInt16, @wDayOfWeek : UInt16, @wDay : UInt16, @wHour : UInt16, @wMinute : UInt16, @wSecond : UInt16, @wMilliseconds : UInt16)
+    end
+  end
 
   @[Extern]
-  record WTS_TIME_ZONE_INFORMATION,
-    bias : Int32,
-    standard_name : UInt16[32],
-    standard_date : Win32cr::System::RemoteDesktop::WTS_SYSTEMTIME,
-    standard_bias : Int32,
-    daylight_name : UInt16[32],
-    daylight_date : Win32cr::System::RemoteDesktop::WTS_SYSTEMTIME,
-    daylight_bias : Int32
+  struct WTS_TIME_ZONE_INFORMATION
+    property bias : Int32
+    property standard_name : UInt16[32]
+    property standard_date : Win32cr::System::RemoteDesktop::WTS_SYSTEMTIME
+    property standard_bias : Int32
+    property daylight_name : UInt16[32]
+    property daylight_date : Win32cr::System::RemoteDesktop::WTS_SYSTEMTIME
+    property daylight_bias : Int32
+    def initialize(@bias : Int32, @standard_name : UInt16[32], @standard_date : Win32cr::System::RemoteDesktop::WTS_SYSTEMTIME, @standard_bias : Int32, @daylight_name : UInt16[32], @daylight_date : Win32cr::System::RemoteDesktop::WTS_SYSTEMTIME, @daylight_bias : Int32)
+    end
+  end
 
   @[Extern]
-  record WRDS_DYNAMIC_TIME_ZONE_INFORMATION,
-    bias : Int32,
-    standard_name : UInt16[32],
-    standard_date : Win32cr::System::RemoteDesktop::WTS_SYSTEMTIME,
-    standard_bias : Int32,
-    daylight_name : UInt16[32],
-    daylight_date : Win32cr::System::RemoteDesktop::WTS_SYSTEMTIME,
-    daylight_bias : Int32,
-    time_zone_key_name : UInt16[128],
-    dynamic_daylight_time_disabled : UInt16
+  struct WRDS_DYNAMIC_TIME_ZONE_INFORMATION
+    property bias : Int32
+    property standard_name : UInt16[32]
+    property standard_date : Win32cr::System::RemoteDesktop::WTS_SYSTEMTIME
+    property standard_bias : Int32
+    property daylight_name : UInt16[32]
+    property daylight_date : Win32cr::System::RemoteDesktop::WTS_SYSTEMTIME
+    property daylight_bias : Int32
+    property time_zone_key_name : UInt16[128]
+    property dynamic_daylight_time_disabled : UInt16
+    def initialize(@bias : Int32, @standard_name : UInt16[32], @standard_date : Win32cr::System::RemoteDesktop::WTS_SYSTEMTIME, @standard_bias : Int32, @daylight_name : UInt16[32], @daylight_date : Win32cr::System::RemoteDesktop::WTS_SYSTEMTIME, @daylight_bias : Int32, @time_zone_key_name : UInt16[128], @dynamic_daylight_time_disabled : UInt16)
+    end
+  end
 
   @[Extern]
-  record WTS_CLIENT_DATA,
-    fDisableCtrlAltDel : Win32cr::Foundation::BOOLEAN,
-    fDoubleClickDetect : Win32cr::Foundation::BOOLEAN,
-    fEnableWindowsKey : Win32cr::Foundation::BOOLEAN,
-    fHideTitleBar : Win32cr::Foundation::BOOLEAN,
-    fInheritAutoLogon : Win32cr::Foundation::BOOL,
-    fPromptForPassword : Win32cr::Foundation::BOOLEAN,
-    fUsingSavedCreds : Win32cr::Foundation::BOOLEAN,
-    domain : UInt16[256],
-    user_name : UInt16[256],
-    password : UInt16[256],
-    fPasswordIsScPin : Win32cr::Foundation::BOOLEAN,
-    fInheritInitialProgram : Win32cr::Foundation::BOOL,
-    work_directory : UInt16[257],
-    initial_program : UInt16[257],
-    fMaximizeShell : Win32cr::Foundation::BOOLEAN,
-    encryption_level : UInt8,
-    performance_flags : UInt32,
-    protocol_name : UInt16[9],
-    protocol_type : UInt16,
-    fInheritColorDepth : Win32cr::Foundation::BOOL,
-    h_res : UInt16,
-    v_res : UInt16,
-    color_depth : UInt16,
-    display_driver_name : UInt16[9],
-    display_device_name : UInt16[20],
-    fMouse : Win32cr::Foundation::BOOLEAN,
-    keyboard_layout : UInt32,
-    keyboard_type : UInt32,
-    keyboard_sub_type : UInt32,
-    keyboard_function_key : UInt32,
-    imeFileName : UInt16[33],
-    active_input_locale : UInt32,
-    fNoAudioPlayback : Win32cr::Foundation::BOOLEAN,
-    fRemoteConsoleAudio : Win32cr::Foundation::BOOLEAN,
-    audio_driver_name : UInt16[9],
-    client_time_zone : Win32cr::System::RemoteDesktop::WTS_TIME_ZONE_INFORMATION,
-    client_name : UInt16[21],
-    serial_number : UInt32,
-    client_address_family : UInt32,
-    client_address : UInt16[31],
-    client_sock_address : Win32cr::System::RemoteDesktop::WTS_SOCKADDR,
-    client_directory : UInt16[257],
-    client_build_number : UInt32,
-    client_product_id : UInt16,
-    out_buf_count_host : UInt16,
-    out_buf_count_client : UInt16,
-    out_buf_length : UInt16,
-    client_session_id : UInt32,
-    client_dig_product_id : UInt16[33],
-    fDisableCpm : Win32cr::Foundation::BOOLEAN,
-    fDisableCdm : Win32cr::Foundation::BOOLEAN,
-    fDisableCcm : Win32cr::Foundation::BOOLEAN,
-    fDisableLPT : Win32cr::Foundation::BOOLEAN,
-    fDisableClip : Win32cr::Foundation::BOOLEAN,
-    fDisablePNP : Win32cr::Foundation::BOOLEAN
+  struct WTS_CLIENT_DATA
+    property fDisableCtrlAltDel : Win32cr::Foundation::BOOLEAN
+    property fDoubleClickDetect : Win32cr::Foundation::BOOLEAN
+    property fEnableWindowsKey : Win32cr::Foundation::BOOLEAN
+    property fHideTitleBar : Win32cr::Foundation::BOOLEAN
+    property fInheritAutoLogon : Win32cr::Foundation::BOOL
+    property fPromptForPassword : Win32cr::Foundation::BOOLEAN
+    property fUsingSavedCreds : Win32cr::Foundation::BOOLEAN
+    property domain : UInt16[256]
+    property user_name : UInt16[256]
+    property password : UInt16[256]
+    property fPasswordIsScPin : Win32cr::Foundation::BOOLEAN
+    property fInheritInitialProgram : Win32cr::Foundation::BOOL
+    property work_directory : UInt16[257]
+    property initial_program : UInt16[257]
+    property fMaximizeShell : Win32cr::Foundation::BOOLEAN
+    property encryption_level : UInt8
+    property performance_flags : UInt32
+    property protocol_name : UInt16[9]
+    property protocol_type : UInt16
+    property fInheritColorDepth : Win32cr::Foundation::BOOL
+    property h_res : UInt16
+    property v_res : UInt16
+    property color_depth : UInt16
+    property display_driver_name : UInt16[9]
+    property display_device_name : UInt16[20]
+    property fMouse : Win32cr::Foundation::BOOLEAN
+    property keyboard_layout : UInt32
+    property keyboard_type : UInt32
+    property keyboard_sub_type : UInt32
+    property keyboard_function_key : UInt32
+    property imeFileName : UInt16[33]
+    property active_input_locale : UInt32
+    property fNoAudioPlayback : Win32cr::Foundation::BOOLEAN
+    property fRemoteConsoleAudio : Win32cr::Foundation::BOOLEAN
+    property audio_driver_name : UInt16[9]
+    property client_time_zone : Win32cr::System::RemoteDesktop::WTS_TIME_ZONE_INFORMATION
+    property client_name : UInt16[21]
+    property serial_number : UInt32
+    property client_address_family : UInt32
+    property client_address : UInt16[31]
+    property client_sock_address : Win32cr::System::RemoteDesktop::WTS_SOCKADDR
+    property client_directory : UInt16[257]
+    property client_build_number : UInt32
+    property client_product_id : UInt16
+    property out_buf_count_host : UInt16
+    property out_buf_count_client : UInt16
+    property out_buf_length : UInt16
+    property client_session_id : UInt32
+    property client_dig_product_id : UInt16[33]
+    property fDisableCpm : Win32cr::Foundation::BOOLEAN
+    property fDisableCdm : Win32cr::Foundation::BOOLEAN
+    property fDisableCcm : Win32cr::Foundation::BOOLEAN
+    property fDisableLPT : Win32cr::Foundation::BOOLEAN
+    property fDisableClip : Win32cr::Foundation::BOOLEAN
+    property fDisablePNP : Win32cr::Foundation::BOOLEAN
+    def initialize(@fDisableCtrlAltDel : Win32cr::Foundation::BOOLEAN, @fDoubleClickDetect : Win32cr::Foundation::BOOLEAN, @fEnableWindowsKey : Win32cr::Foundation::BOOLEAN, @fHideTitleBar : Win32cr::Foundation::BOOLEAN, @fInheritAutoLogon : Win32cr::Foundation::BOOL, @fPromptForPassword : Win32cr::Foundation::BOOLEAN, @fUsingSavedCreds : Win32cr::Foundation::BOOLEAN, @domain : UInt16[256], @user_name : UInt16[256], @password : UInt16[256], @fPasswordIsScPin : Win32cr::Foundation::BOOLEAN, @fInheritInitialProgram : Win32cr::Foundation::BOOL, @work_directory : UInt16[257], @initial_program : UInt16[257], @fMaximizeShell : Win32cr::Foundation::BOOLEAN, @encryption_level : UInt8, @performance_flags : UInt32, @protocol_name : UInt16[9], @protocol_type : UInt16, @fInheritColorDepth : Win32cr::Foundation::BOOL, @h_res : UInt16, @v_res : UInt16, @color_depth : UInt16, @display_driver_name : UInt16[9], @display_device_name : UInt16[20], @fMouse : Win32cr::Foundation::BOOLEAN, @keyboard_layout : UInt32, @keyboard_type : UInt32, @keyboard_sub_type : UInt32, @keyboard_function_key : UInt32, @imeFileName : UInt16[33], @active_input_locale : UInt32, @fNoAudioPlayback : Win32cr::Foundation::BOOLEAN, @fRemoteConsoleAudio : Win32cr::Foundation::BOOLEAN, @audio_driver_name : UInt16[9], @client_time_zone : Win32cr::System::RemoteDesktop::WTS_TIME_ZONE_INFORMATION, @client_name : UInt16[21], @serial_number : UInt32, @client_address_family : UInt32, @client_address : UInt16[31], @client_sock_address : Win32cr::System::RemoteDesktop::WTS_SOCKADDR, @client_directory : UInt16[257], @client_build_number : UInt32, @client_product_id : UInt16, @out_buf_count_host : UInt16, @out_buf_count_client : UInt16, @out_buf_length : UInt16, @client_session_id : UInt32, @client_dig_product_id : UInt16[33], @fDisableCpm : Win32cr::Foundation::BOOLEAN, @fDisableCdm : Win32cr::Foundation::BOOLEAN, @fDisableCcm : Win32cr::Foundation::BOOLEAN, @fDisableLPT : Win32cr::Foundation::BOOLEAN, @fDisableClip : Win32cr::Foundation::BOOLEAN, @fDisablePNP : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record WTS_USER_DATA,
-    work_directory : UInt16[257],
-    initial_program : UInt16[257],
-    user_time_zone : Win32cr::System::RemoteDesktop::WTS_TIME_ZONE_INFORMATION
+  struct WTS_USER_DATA
+    property work_directory : UInt16[257]
+    property initial_program : UInt16[257]
+    property user_time_zone : Win32cr::System::RemoteDesktop::WTS_TIME_ZONE_INFORMATION
+    def initialize(@work_directory : UInt16[257], @initial_program : UInt16[257], @user_time_zone : Win32cr::System::RemoteDesktop::WTS_TIME_ZONE_INFORMATION)
+    end
+  end
 
   @[Extern]
-  record WTS_POLICY_DATA,
-    fDisableEncryption : Win32cr::Foundation::BOOLEAN,
-    fDisableAutoReconnect : Win32cr::Foundation::BOOLEAN,
-    color_depth : UInt32,
-    min_encryption_level : UInt8,
-    fDisableCpm : Win32cr::Foundation::BOOLEAN,
-    fDisableCdm : Win32cr::Foundation::BOOLEAN,
-    fDisableCcm : Win32cr::Foundation::BOOLEAN,
-    fDisableLPT : Win32cr::Foundation::BOOLEAN,
-    fDisableClip : Win32cr::Foundation::BOOLEAN,
-    fDisablePNPRedir : Win32cr::Foundation::BOOLEAN
+  struct WTS_POLICY_DATA
+    property fDisableEncryption : Win32cr::Foundation::BOOLEAN
+    property fDisableAutoReconnect : Win32cr::Foundation::BOOLEAN
+    property color_depth : UInt32
+    property min_encryption_level : UInt8
+    property fDisableCpm : Win32cr::Foundation::BOOLEAN
+    property fDisableCdm : Win32cr::Foundation::BOOLEAN
+    property fDisableCcm : Win32cr::Foundation::BOOLEAN
+    property fDisableLPT : Win32cr::Foundation::BOOLEAN
+    property fDisableClip : Win32cr::Foundation::BOOLEAN
+    property fDisablePNPRedir : Win32cr::Foundation::BOOLEAN
+    def initialize(@fDisableEncryption : Win32cr::Foundation::BOOLEAN, @fDisableAutoReconnect : Win32cr::Foundation::BOOLEAN, @color_depth : UInt32, @min_encryption_level : UInt8, @fDisableCpm : Win32cr::Foundation::BOOLEAN, @fDisableCdm : Win32cr::Foundation::BOOLEAN, @fDisableCcm : Win32cr::Foundation::BOOLEAN, @fDisableLPT : Win32cr::Foundation::BOOLEAN, @fDisableClip : Win32cr::Foundation::BOOLEAN, @fDisablePNPRedir : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record WTS_PROTOCOL_CACHE,
-    cache_reads : UInt32,
-    cache_hits : UInt32
+  struct WTS_PROTOCOL_CACHE
+    property cache_reads : UInt32
+    property cache_hits : UInt32
+    def initialize(@cache_reads : UInt32, @cache_hits : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record WTS_CACHE_STATS_UN,
-    protocol_cache : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_CACHE[4],
-    t_share_cache_stats : UInt32,
-    reserved : UInt32[20]
+  struct WTS_CACHE_STATS_UN
+    property protocol_cache : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_CACHE[4]
+    property t_share_cache_stats : UInt32
+    property reserved : UInt32[20]
+    def initialize(@protocol_cache : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_CACHE[4], @t_share_cache_stats : UInt32, @reserved : UInt32[20])
+    end
+  end
 
   @[Extern]
-  record WTS_CACHE_STATS,
-    specific : UInt32,
-    data : Win32cr::System::RemoteDesktop::WTS_CACHE_STATS_UN,
-    protocol_type : UInt16,
-    length : UInt16
+  struct WTS_CACHE_STATS
+    property specific : UInt32
+    property data : Win32cr::System::RemoteDesktop::WTS_CACHE_STATS_UN
+    property protocol_type : UInt16
+    property length : UInt16
+    def initialize(@specific : UInt32, @data : Win32cr::System::RemoteDesktop::WTS_CACHE_STATS_UN, @protocol_type : UInt16, @length : UInt16)
+    end
+  end
 
   @[Extern]
-  record WTS_PROTOCOL_COUNTERS,
-    wd_bytes : UInt32,
-    wd_frames : UInt32,
-    wait_for_out_buf : UInt32,
-    frames : UInt32,
-    bytes : UInt32,
-    compressed_bytes : UInt32,
-    compress_flushes : UInt32,
-    errors : UInt32,
-    timeouts : UInt32,
-    async_framing_error : UInt32,
-    async_overrun_error : UInt32,
-    async_overflow_error : UInt32,
-    async_parity_error : UInt32,
-    td_errors : UInt32,
-    protocol_type : UInt16,
-    length : UInt16,
-    specific : UInt16,
-    reserved : UInt32[100]
+  struct WTS_PROTOCOL_COUNTERS
+    property wd_bytes : UInt32
+    property wd_frames : UInt32
+    property wait_for_out_buf : UInt32
+    property frames : UInt32
+    property bytes : UInt32
+    property compressed_bytes : UInt32
+    property compress_flushes : UInt32
+    property errors : UInt32
+    property timeouts : UInt32
+    property async_framing_error : UInt32
+    property async_overrun_error : UInt32
+    property async_overflow_error : UInt32
+    property async_parity_error : UInt32
+    property td_errors : UInt32
+    property protocol_type : UInt16
+    property length : UInt16
+    property specific : UInt16
+    property reserved : UInt32[100]
+    def initialize(@wd_bytes : UInt32, @wd_frames : UInt32, @wait_for_out_buf : UInt32, @frames : UInt32, @bytes : UInt32, @compressed_bytes : UInt32, @compress_flushes : UInt32, @errors : UInt32, @timeouts : UInt32, @async_framing_error : UInt32, @async_overrun_error : UInt32, @async_overflow_error : UInt32, @async_parity_error : UInt32, @td_errors : UInt32, @protocol_type : UInt16, @length : UInt16, @specific : UInt16, @reserved : UInt32[100])
+    end
+  end
 
   @[Extern]
-  record WTS_PROTOCOL_STATUS,
-    output : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_COUNTERS,
-    input : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_COUNTERS,
-    cache : Win32cr::System::RemoteDesktop::WTS_CACHE_STATS,
-    async_signal : UInt32,
-    async_signal_mask : UInt32,
-    counters : Win32cr::Foundation::LARGE_INTEGER[100]
+  struct WTS_PROTOCOL_STATUS
+    property output : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_COUNTERS
+    property input : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_COUNTERS
+    property cache : Win32cr::System::RemoteDesktop::WTS_CACHE_STATS
+    property async_signal : UInt32
+    property async_signal_mask : UInt32
+    property counters : Win32cr::Foundation::LARGE_INTEGER[100]
+    def initialize(@output : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_COUNTERS, @input : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_COUNTERS, @cache : Win32cr::System::RemoteDesktop::WTS_CACHE_STATS, @async_signal : UInt32, @async_signal_mask : UInt32, @counters : Win32cr::Foundation::LARGE_INTEGER[100])
+    end
+  end
 
   @[Extern]
-  record WTS_DISPLAY_IOCTL,
-    pDisplayIOCtlData : UInt8[256],
-    cbDisplayIOCtlData : UInt32
+  struct WTS_DISPLAY_IOCTL
+    property pDisplayIOCtlData : UInt8[256]
+    property cbDisplayIOCtlData : UInt32
+    def initialize(@pDisplayIOCtlData : UInt8[256], @cbDisplayIOCtlData : UInt32)
+    end
+  end
 
   @[Extern]
-  record WTS_PROPERTY_VALUE,
-    type__ : UInt16,
-    u : U_e__union_ do
+  struct WTS_PROPERTY_VALUE
+    property type__ : UInt16
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      ulVal : UInt32,
-      strVal : Strval_e__struct_,
-      bVal : Bval_e__struct_,
-      guidVal : LibC::GUID do
+    struct U_e__union_
+    property ulVal : UInt32
+    property strVal : Strval_e__struct_
+    property bVal : Bval_e__struct_
+    property guidVal : LibC::GUID
 
       # Nested Type Bval_e__struct_
       @[Extern]
-      record Bval_e__struct_,
-        size : UInt32,
-        pbVal : Win32cr::Foundation::PSTR
+      struct Bval_e__struct_
+    property size : UInt32
+    property pbVal : Win32cr::Foundation::PSTR
+    def initialize(@size : UInt32, @pbVal : Win32cr::Foundation::PSTR)
+    end
+      end
 
 
       # Nested Type Strval_e__struct_
       @[Extern]
-      record Strval_e__struct_,
-        size : UInt32,
-        pstrVal : Win32cr::Foundation::PWSTR
+      struct Strval_e__struct_
+    property size : UInt32
+    property pstrVal : Win32cr::Foundation::PWSTR
+    def initialize(@size : UInt32, @pstrVal : Win32cr::Foundation::PWSTR)
+    end
+      end
 
+    def initialize(@ulVal : UInt32, @strVal : Strval_e__struct_, @bVal : Bval_e__struct_, @guidVal : LibC::GUID)
+    end
     end
 
+    def initialize(@type__ : UInt16, @u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record WTS_LICENSE_CAPABILITIES,
-    key_exchange_alg : UInt32,
-    protocol_ver : UInt32,
-    fAuthenticateServer : Win32cr::Foundation::BOOL,
-    cert_type : Win32cr::System::RemoteDesktop::WTS_CERT_TYPE,
-    cbClientName : UInt32,
-    rgbClientName : UInt8[42]
+  struct WTS_LICENSE_CAPABILITIES
+    property key_exchange_alg : UInt32
+    property protocol_ver : UInt32
+    property fAuthenticateServer : Win32cr::Foundation::BOOL
+    property cert_type : Win32cr::System::RemoteDesktop::WTS_CERT_TYPE
+    property cbClientName : UInt32
+    property rgbClientName : UInt8[42]
+    def initialize(@key_exchange_alg : UInt32, @protocol_ver : UInt32, @fAuthenticateServer : Win32cr::Foundation::BOOL, @cert_type : Win32cr::System::RemoteDesktop::WTS_CERT_TYPE, @cbClientName : UInt32, @rgbClientName : UInt8[42])
+    end
+  end
 
   @[Extern]
-  record WRDS_LISTENER_SETTINGS_1,
-    max_protocol_listener_connection_count : UInt32,
-    security_descriptor_size : UInt32,
-    pSecurityDescriptor : UInt8*
+  struct WRDS_LISTENER_SETTINGS_1
+    property max_protocol_listener_connection_count : UInt32
+    property security_descriptor_size : UInt32
+    property pSecurityDescriptor : UInt8*
+    def initialize(@max_protocol_listener_connection_count : UInt32, @security_descriptor_size : UInt32, @pSecurityDescriptor : UInt8*)
+    end
+  end
 
   @[Extern(union: true)]
-  record WRDS_LISTENER_SETTING,
-    w_rds_listener_settings1 : Win32cr::System::RemoteDesktop::WRDS_LISTENER_SETTINGS_1
+  struct WRDS_LISTENER_SETTING
+    property w_rds_listener_settings1 : Win32cr::System::RemoteDesktop::WRDS_LISTENER_SETTINGS_1
+    def initialize(@w_rds_listener_settings1 : Win32cr::System::RemoteDesktop::WRDS_LISTENER_SETTINGS_1)
+    end
+  end
 
   @[Extern]
-  record WRDS_LISTENER_SETTINGS,
-    w_rds_listener_setting_level : Win32cr::System::RemoteDesktop::WRDS_LISTENER_SETTING_LEVEL,
-    w_rds_listener_setting : Win32cr::System::RemoteDesktop::WRDS_LISTENER_SETTING
+  struct WRDS_LISTENER_SETTINGS
+    property w_rds_listener_setting_level : Win32cr::System::RemoteDesktop::WRDS_LISTENER_SETTING_LEVEL
+    property w_rds_listener_setting : Win32cr::System::RemoteDesktop::WRDS_LISTENER_SETTING
+    def initialize(@w_rds_listener_setting_level : Win32cr::System::RemoteDesktop::WRDS_LISTENER_SETTING_LEVEL, @w_rds_listener_setting : Win32cr::System::RemoteDesktop::WRDS_LISTENER_SETTING)
+    end
+  end
 
   @[Extern]
-  record WRDS_CONNECTION_SETTINGS_1,
-    fInheritInitialProgram : Win32cr::Foundation::BOOLEAN,
-    fInheritColorDepth : Win32cr::Foundation::BOOLEAN,
-    fHideTitleBar : Win32cr::Foundation::BOOLEAN,
-    fInheritAutoLogon : Win32cr::Foundation::BOOLEAN,
-    fMaximizeShell : Win32cr::Foundation::BOOLEAN,
-    fDisablePNP : Win32cr::Foundation::BOOLEAN,
-    fPasswordIsScPin : Win32cr::Foundation::BOOLEAN,
-    fPromptForPassword : Win32cr::Foundation::BOOLEAN,
-    fDisableCpm : Win32cr::Foundation::BOOLEAN,
-    fDisableCdm : Win32cr::Foundation::BOOLEAN,
-    fDisableCcm : Win32cr::Foundation::BOOLEAN,
-    fDisableLPT : Win32cr::Foundation::BOOLEAN,
-    fDisableClip : Win32cr::Foundation::BOOLEAN,
-    fResetBroken : Win32cr::Foundation::BOOLEAN,
-    fDisableEncryption : Win32cr::Foundation::BOOLEAN,
-    fDisableAutoReconnect : Win32cr::Foundation::BOOLEAN,
-    fDisableCtrlAltDel : Win32cr::Foundation::BOOLEAN,
-    fDoubleClickDetect : Win32cr::Foundation::BOOLEAN,
-    fEnableWindowsKey : Win32cr::Foundation::BOOLEAN,
-    fUsingSavedCreds : Win32cr::Foundation::BOOLEAN,
-    fMouse : Win32cr::Foundation::BOOLEAN,
-    fNoAudioPlayback : Win32cr::Foundation::BOOLEAN,
-    fRemoteConsoleAudio : Win32cr::Foundation::BOOLEAN,
-    encryption_level : UInt8,
-    color_depth : UInt16,
-    protocol_type : UInt16,
-    h_res : UInt16,
-    v_res : UInt16,
-    client_product_id : UInt16,
-    out_buf_count_host : UInt16,
-    out_buf_count_client : UInt16,
-    out_buf_length : UInt16,
-    keyboard_layout : UInt32,
-    max_connection_time : UInt32,
-    max_disconnection_time : UInt32,
-    max_idle_time : UInt32,
-    performance_flags : UInt32,
-    keyboard_type : UInt32,
-    keyboard_sub_type : UInt32,
-    keyboard_function_key : UInt32,
-    active_input_locale : UInt32,
-    serial_number : UInt32,
-    client_address_family : UInt32,
-    client_build_number : UInt32,
-    client_session_id : UInt32,
-    work_directory : UInt16[257],
-    initial_program : UInt16[257],
-    user_name : UInt16[256],
-    domain : UInt16[256],
-    password : UInt16[256],
-    protocol_name : UInt16[9],
-    display_driver_name : UInt16[9],
-    display_device_name : UInt16[20],
-    imeFileName : UInt16[33],
-    audio_driver_name : UInt16[9],
-    client_name : UInt16[21],
-    client_address : UInt16[31],
-    client_directory : UInt16[257],
-    client_dig_product_id : UInt16[33],
-    client_sock_address : Win32cr::System::RemoteDesktop::WTS_SOCKADDR,
-    client_time_zone : Win32cr::System::RemoteDesktop::WTS_TIME_ZONE_INFORMATION,
-    w_rds_listener_settings : Win32cr::System::RemoteDesktop::WRDS_LISTENER_SETTINGS,
-    event_log_activity_id : LibC::GUID,
-    context_size : UInt32,
-    context_data : UInt8*
+  struct WRDS_CONNECTION_SETTINGS_1
+    property fInheritInitialProgram : Win32cr::Foundation::BOOLEAN
+    property fInheritColorDepth : Win32cr::Foundation::BOOLEAN
+    property fHideTitleBar : Win32cr::Foundation::BOOLEAN
+    property fInheritAutoLogon : Win32cr::Foundation::BOOLEAN
+    property fMaximizeShell : Win32cr::Foundation::BOOLEAN
+    property fDisablePNP : Win32cr::Foundation::BOOLEAN
+    property fPasswordIsScPin : Win32cr::Foundation::BOOLEAN
+    property fPromptForPassword : Win32cr::Foundation::BOOLEAN
+    property fDisableCpm : Win32cr::Foundation::BOOLEAN
+    property fDisableCdm : Win32cr::Foundation::BOOLEAN
+    property fDisableCcm : Win32cr::Foundation::BOOLEAN
+    property fDisableLPT : Win32cr::Foundation::BOOLEAN
+    property fDisableClip : Win32cr::Foundation::BOOLEAN
+    property fResetBroken : Win32cr::Foundation::BOOLEAN
+    property fDisableEncryption : Win32cr::Foundation::BOOLEAN
+    property fDisableAutoReconnect : Win32cr::Foundation::BOOLEAN
+    property fDisableCtrlAltDel : Win32cr::Foundation::BOOLEAN
+    property fDoubleClickDetect : Win32cr::Foundation::BOOLEAN
+    property fEnableWindowsKey : Win32cr::Foundation::BOOLEAN
+    property fUsingSavedCreds : Win32cr::Foundation::BOOLEAN
+    property fMouse : Win32cr::Foundation::BOOLEAN
+    property fNoAudioPlayback : Win32cr::Foundation::BOOLEAN
+    property fRemoteConsoleAudio : Win32cr::Foundation::BOOLEAN
+    property encryption_level : UInt8
+    property color_depth : UInt16
+    property protocol_type : UInt16
+    property h_res : UInt16
+    property v_res : UInt16
+    property client_product_id : UInt16
+    property out_buf_count_host : UInt16
+    property out_buf_count_client : UInt16
+    property out_buf_length : UInt16
+    property keyboard_layout : UInt32
+    property max_connection_time : UInt32
+    property max_disconnection_time : UInt32
+    property max_idle_time : UInt32
+    property performance_flags : UInt32
+    property keyboard_type : UInt32
+    property keyboard_sub_type : UInt32
+    property keyboard_function_key : UInt32
+    property active_input_locale : UInt32
+    property serial_number : UInt32
+    property client_address_family : UInt32
+    property client_build_number : UInt32
+    property client_session_id : UInt32
+    property work_directory : UInt16[257]
+    property initial_program : UInt16[257]
+    property user_name : UInt16[256]
+    property domain : UInt16[256]
+    property password : UInt16[256]
+    property protocol_name : UInt16[9]
+    property display_driver_name : UInt16[9]
+    property display_device_name : UInt16[20]
+    property imeFileName : UInt16[33]
+    property audio_driver_name : UInt16[9]
+    property client_name : UInt16[21]
+    property client_address : UInt16[31]
+    property client_directory : UInt16[257]
+    property client_dig_product_id : UInt16[33]
+    property client_sock_address : Win32cr::System::RemoteDesktop::WTS_SOCKADDR
+    property client_time_zone : Win32cr::System::RemoteDesktop::WTS_TIME_ZONE_INFORMATION
+    property w_rds_listener_settings : Win32cr::System::RemoteDesktop::WRDS_LISTENER_SETTINGS
+    property event_log_activity_id : LibC::GUID
+    property context_size : UInt32
+    property context_data : UInt8*
+    def initialize(@fInheritInitialProgram : Win32cr::Foundation::BOOLEAN, @fInheritColorDepth : Win32cr::Foundation::BOOLEAN, @fHideTitleBar : Win32cr::Foundation::BOOLEAN, @fInheritAutoLogon : Win32cr::Foundation::BOOLEAN, @fMaximizeShell : Win32cr::Foundation::BOOLEAN, @fDisablePNP : Win32cr::Foundation::BOOLEAN, @fPasswordIsScPin : Win32cr::Foundation::BOOLEAN, @fPromptForPassword : Win32cr::Foundation::BOOLEAN, @fDisableCpm : Win32cr::Foundation::BOOLEAN, @fDisableCdm : Win32cr::Foundation::BOOLEAN, @fDisableCcm : Win32cr::Foundation::BOOLEAN, @fDisableLPT : Win32cr::Foundation::BOOLEAN, @fDisableClip : Win32cr::Foundation::BOOLEAN, @fResetBroken : Win32cr::Foundation::BOOLEAN, @fDisableEncryption : Win32cr::Foundation::BOOLEAN, @fDisableAutoReconnect : Win32cr::Foundation::BOOLEAN, @fDisableCtrlAltDel : Win32cr::Foundation::BOOLEAN, @fDoubleClickDetect : Win32cr::Foundation::BOOLEAN, @fEnableWindowsKey : Win32cr::Foundation::BOOLEAN, @fUsingSavedCreds : Win32cr::Foundation::BOOLEAN, @fMouse : Win32cr::Foundation::BOOLEAN, @fNoAudioPlayback : Win32cr::Foundation::BOOLEAN, @fRemoteConsoleAudio : Win32cr::Foundation::BOOLEAN, @encryption_level : UInt8, @color_depth : UInt16, @protocol_type : UInt16, @h_res : UInt16, @v_res : UInt16, @client_product_id : UInt16, @out_buf_count_host : UInt16, @out_buf_count_client : UInt16, @out_buf_length : UInt16, @keyboard_layout : UInt32, @max_connection_time : UInt32, @max_disconnection_time : UInt32, @max_idle_time : UInt32, @performance_flags : UInt32, @keyboard_type : UInt32, @keyboard_sub_type : UInt32, @keyboard_function_key : UInt32, @active_input_locale : UInt32, @serial_number : UInt32, @client_address_family : UInt32, @client_build_number : UInt32, @client_session_id : UInt32, @work_directory : UInt16[257], @initial_program : UInt16[257], @user_name : UInt16[256], @domain : UInt16[256], @password : UInt16[256], @protocol_name : UInt16[9], @display_driver_name : UInt16[9], @display_device_name : UInt16[20], @imeFileName : UInt16[33], @audio_driver_name : UInt16[9], @client_name : UInt16[21], @client_address : UInt16[31], @client_directory : UInt16[257], @client_dig_product_id : UInt16[33], @client_sock_address : Win32cr::System::RemoteDesktop::WTS_SOCKADDR, @client_time_zone : Win32cr::System::RemoteDesktop::WTS_TIME_ZONE_INFORMATION, @w_rds_listener_settings : Win32cr::System::RemoteDesktop::WRDS_LISTENER_SETTINGS, @event_log_activity_id : LibC::GUID, @context_size : UInt32, @context_data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record WRDS_SETTINGS_1,
-    w_rds_disable_clip_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_disable_clip_value : UInt32,
-    w_rds_disable_lpt_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_disable_lpt_value : UInt32,
-    w_rds_disable_ccm_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_disable_ccm_value : UInt32,
-    w_rds_disable_cdm_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_disable_cdm_value : UInt32,
-    w_rds_disable_cpm_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_disable_cpm_value : UInt32,
-    w_rds_disable_pnp_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_disable_pnp_value : UInt32,
-    w_rds_encryption_level_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_encryption_value : UInt32,
-    w_rds_color_depth_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_color_depth_value : UInt32,
-    w_rds_disable_auto_reconnecet_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_disable_auto_reconnecet_value : UInt32,
-    w_rds_disable_encryption_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_disable_encryption_value : UInt32,
-    w_rds_reset_broken_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_reset_broken_value : UInt32,
-    w_rds_max_idle_time_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_max_idle_time_value : UInt32,
-    w_rds_max_disconnect_time_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_max_disconnect_time_value : UInt32,
-    w_rds_max_connect_time_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_max_connect_time_value : UInt32,
-    w_rds_keep_alive_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS,
-    w_rds_keep_alive_start_value : Win32cr::Foundation::BOOLEAN,
-    w_rds_keep_alive_interval_value : UInt32
+  struct WRDS_SETTINGS_1
+    property w_rds_disable_clip_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_disable_clip_value : UInt32
+    property w_rds_disable_lpt_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_disable_lpt_value : UInt32
+    property w_rds_disable_ccm_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_disable_ccm_value : UInt32
+    property w_rds_disable_cdm_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_disable_cdm_value : UInt32
+    property w_rds_disable_cpm_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_disable_cpm_value : UInt32
+    property w_rds_disable_pnp_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_disable_pnp_value : UInt32
+    property w_rds_encryption_level_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_encryption_value : UInt32
+    property w_rds_color_depth_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_color_depth_value : UInt32
+    property w_rds_disable_auto_reconnecet_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_disable_auto_reconnecet_value : UInt32
+    property w_rds_disable_encryption_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_disable_encryption_value : UInt32
+    property w_rds_reset_broken_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_reset_broken_value : UInt32
+    property w_rds_max_idle_time_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_max_idle_time_value : UInt32
+    property w_rds_max_disconnect_time_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_max_disconnect_time_value : UInt32
+    property w_rds_max_connect_time_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_max_connect_time_value : UInt32
+    property w_rds_keep_alive_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS
+    property w_rds_keep_alive_start_value : Win32cr::Foundation::BOOLEAN
+    property w_rds_keep_alive_interval_value : UInt32
+    def initialize(@w_rds_disable_clip_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_disable_clip_value : UInt32, @w_rds_disable_lpt_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_disable_lpt_value : UInt32, @w_rds_disable_ccm_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_disable_ccm_value : UInt32, @w_rds_disable_cdm_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_disable_cdm_value : UInt32, @w_rds_disable_cpm_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_disable_cpm_value : UInt32, @w_rds_disable_pnp_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_disable_pnp_value : UInt32, @w_rds_encryption_level_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_encryption_value : UInt32, @w_rds_color_depth_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_color_depth_value : UInt32, @w_rds_disable_auto_reconnecet_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_disable_auto_reconnecet_value : UInt32, @w_rds_disable_encryption_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_disable_encryption_value : UInt32, @w_rds_reset_broken_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_reset_broken_value : UInt32, @w_rds_max_idle_time_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_max_idle_time_value : UInt32, @w_rds_max_disconnect_time_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_max_disconnect_time_value : UInt32, @w_rds_max_connect_time_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_max_connect_time_value : UInt32, @w_rds_keep_alive_status : Win32cr::System::RemoteDesktop::WRDS_SETTING_STATUS, @w_rds_keep_alive_start_value : Win32cr::Foundation::BOOLEAN, @w_rds_keep_alive_interval_value : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record WRDS_CONNECTION_SETTING,
-    w_rds_connection_settings1 : Win32cr::System::RemoteDesktop::WRDS_CONNECTION_SETTINGS_1
+  struct WRDS_CONNECTION_SETTING
+    property w_rds_connection_settings1 : Win32cr::System::RemoteDesktop::WRDS_CONNECTION_SETTINGS_1
+    def initialize(@w_rds_connection_settings1 : Win32cr::System::RemoteDesktop::WRDS_CONNECTION_SETTINGS_1)
+    end
+  end
 
   @[Extern]
-  record WRDS_CONNECTION_SETTINGS,
-    w_rds_connection_setting_level : Win32cr::System::RemoteDesktop::WRDS_CONNECTION_SETTING_LEVEL,
-    w_rds_connection_setting : Win32cr::System::RemoteDesktop::WRDS_CONNECTION_SETTING
+  struct WRDS_CONNECTION_SETTINGS
+    property w_rds_connection_setting_level : Win32cr::System::RemoteDesktop::WRDS_CONNECTION_SETTING_LEVEL
+    property w_rds_connection_setting : Win32cr::System::RemoteDesktop::WRDS_CONNECTION_SETTING
+    def initialize(@w_rds_connection_setting_level : Win32cr::System::RemoteDesktop::WRDS_CONNECTION_SETTING_LEVEL, @w_rds_connection_setting : Win32cr::System::RemoteDesktop::WRDS_CONNECTION_SETTING)
+    end
+  end
 
   @[Extern(union: true)]
-  record WRDS_SETTING,
-    w_rds_settings1 : Win32cr::System::RemoteDesktop::WRDS_SETTINGS_1
+  struct WRDS_SETTING
+    property w_rds_settings1 : Win32cr::System::RemoteDesktop::WRDS_SETTINGS_1
+    def initialize(@w_rds_settings1 : Win32cr::System::RemoteDesktop::WRDS_SETTINGS_1)
+    end
+  end
 
   @[Extern]
-  record WRDS_SETTINGS,
-    w_rds_setting_type : Win32cr::System::RemoteDesktop::WRDS_SETTING_TYPE,
-    w_rds_setting_level : Win32cr::System::RemoteDesktop::WRDS_SETTING_LEVEL,
-    w_rds_setting : Win32cr::System::RemoteDesktop::WRDS_SETTING
+  struct WRDS_SETTINGS
+    property w_rds_setting_type : Win32cr::System::RemoteDesktop::WRDS_SETTING_TYPE
+    property w_rds_setting_level : Win32cr::System::RemoteDesktop::WRDS_SETTING_LEVEL
+    property w_rds_setting : Win32cr::System::RemoteDesktop::WRDS_SETTING
+    def initialize(@w_rds_setting_type : Win32cr::System::RemoteDesktop::WRDS_SETTING_TYPE, @w_rds_setting_level : Win32cr::System::RemoteDesktop::WRDS_SETTING_LEVEL, @w_rds_setting : Win32cr::System::RemoteDesktop::WRDS_SETTING)
+    end
+  end
 
   @[Extern]
-  record WTSSESSION_NOTIFICATION,
-    cbSize : UInt32,
-    dwSessionId : UInt32
+  struct WTSSESSION_NOTIFICATION
+    property cbSize : UInt32
+    property dwSessionId : UInt32
+    def initialize(@cbSize : UInt32, @dwSessionId : UInt32)
+    end
+  end
 
   @[Extern]
   record IAudioEndpointVtbl,
@@ -1690,7 +1977,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("30a99515-1527-4451-af9f-00c5f0234daf")]
   record IAudioEndpoint, lpVtbl : IAudioEndpointVtbl* do
     GUID = LibC::GUID.new(0x30a99515_u32, 0x1527_u16, 0x4451_u16, StaticArray[0xaf_u8, 0x9f_u8, 0x0_u8, 0xc5_u8, 0xf0_u8, 0x23_u8, 0x4d_u8, 0xaf_u8])
     def query_interface(this : IAudioEndpoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1732,7 +2018,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("dfd2005f-a6e5-4d39-a265-939ada9fbb4d")]
   record IAudioEndpointRT, lpVtbl : IAudioEndpointRTVtbl* do
     GUID = LibC::GUID.new(0xdfd2005f_u32, 0xa6e5_u16, 0x4d39_u16, StaticArray[0xa2_u8, 0x65_u8, 0x93_u8, 0x9a_u8, 0xda_u8, 0x9f_u8, 0xbb_u8, 0x4d_u8])
     def query_interface(this : IAudioEndpointRT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1770,7 +2055,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("8026ab61-92b2-43c1-a1df-5c37ebd08d82")]
   record IAudioInputEndpointRT, lpVtbl : IAudioInputEndpointRTVtbl* do
     GUID = LibC::GUID.new(0x8026ab61_u32, 0x92b2_u16, 0x43c1_u16, StaticArray[0xa1_u8, 0xdf_u8, 0x5c_u8, 0x37_u8, 0xeb_u8, 0xd0_u8, 0x8d_u8, 0x82_u8])
     def query_interface(this : IAudioInputEndpointRT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1805,7 +2089,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("8fa906e4-c31c-4e31-932e-19a66385e9aa")]
   record IAudioOutputEndpointRT, lpVtbl : IAudioOutputEndpointRTVtbl* do
     GUID = LibC::GUID.new(0x8fa906e4_u32, 0xc31c_u16, 0x4e31_u16, StaticArray[0x93_u8, 0x2e_u8, 0x19_u8, 0xa6_u8, 0x63_u8, 0x85_u8, 0xe9_u8, 0xaa_u8])
     def query_interface(this : IAudioOutputEndpointRT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1841,7 +2124,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("d4952f5a-a0b2-4cc4-8b82-9358488dd8ac")]
   record IAudioDeviceEndpoint, lpVtbl : IAudioDeviceEndpointVtbl* do
     GUID = LibC::GUID.new(0xd4952f5a_u32, 0xa0b2_u16, 0x4cc4_u16, StaticArray[0x8b_u8, 0x82_u8, 0x93_u8, 0x58_u8, 0x48_u8, 0x8d_u8, 0xd8_u8, 0xac_u8])
     def query_interface(this : IAudioDeviceEndpoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1879,7 +2161,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("c684b72a-6df4-4774-bdf9-76b77509b653")]
   record IAudioEndpointControl, lpVtbl : IAudioEndpointControlVtbl* do
     GUID = LibC::GUID.new(0xc684b72a_u32, 0x6df4_u16, 0x4774_u16, StaticArray[0xbd_u8, 0xf9_u8, 0x76_u8, 0xb7_u8, 0x75_u8, 0x9_u8, 0xb6_u8, 0x53_u8])
     def query_interface(this : IAudioEndpointControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1945,7 +2226,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("c4930e79-2989-4462-8a60-2fcf2f2955ef")]
   record IADsTSUserEx, lpVtbl : IADsTSUserExVtbl* do
     GUID = LibC::GUID.new(0xc4930e79_u32, 0x2989_u16, 0x4462_u16, StaticArray[0x8a_u8, 0x60_u8, 0x2f_u8, 0xcf_u8, 0x2f_u8, 0x29_u8, 0x55_u8, 0xef_u8])
     def query_interface(this : IADsTSUserEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2071,7 +2351,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("c27ece33-7781-4318-98ef-1cf2da7b7005")]
   record ITSGAuthorizeConnectionSink, lpVtbl : ITSGAuthorizeConnectionSinkVtbl* do
     GUID = LibC::GUID.new(0xc27ece33_u32, 0x7781_u16, 0x4318_u16, StaticArray[0x98_u8, 0xef_u8, 0x1c_u8, 0xf2_u8, 0xda_u8, 0x7b_u8, 0x70_u8, 0x5_u8])
     def query_interface(this : ITSGAuthorizeConnectionSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2098,7 +2377,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("feddfcd4-fa12-4435-ae55-7ad1a9779af7")]
   record ITSGAuthorizeResourceSink, lpVtbl : ITSGAuthorizeResourceSinkVtbl* do
     GUID = LibC::GUID.new(0xfeddfcd4_u32, 0xfa12_u16, 0x4435_u16, StaticArray[0xae_u8, 0x55_u8, 0x7a_u8, 0xd1_u8, 0xa9_u8, 0x77_u8, 0x9a_u8, 0xf7_u8])
     def query_interface(this : ITSGAuthorizeResourceSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2128,7 +2406,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("8bc24f08-6223-42f4-a5b4-8e37cd135bbd")]
   record ITSGPolicyEngine, lpVtbl : ITSGPolicyEngineVtbl* do
     GUID = LibC::GUID.new(0x8bc24f08_u32, 0x6223_u16, 0x42f4_u16, StaticArray[0xa5_u8, 0xb4_u8, 0x8e_u8, 0x37_u8, 0xcd_u8, 0x13_u8, 0x5b_u8, 0xbd_u8])
     def query_interface(this : ITSGPolicyEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2164,7 +2441,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("4ce2a0c9-e874-4f1a-86f4-06bbb9115338")]
   record ITSGAccountingEngine, lpVtbl : ITSGAccountingEngineVtbl* do
     GUID = LibC::GUID.new(0x4ce2a0c9_u32, 0xe874_u16, 0x4f1a_u16, StaticArray[0x86_u8, 0xf4_u8, 0x6_u8, 0xbb_u8, 0xb9_u8, 0x11_u8, 0x53_u8, 0x38_u8])
     def query_interface(this : ITSGAccountingEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2194,7 +2470,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("2c3e2e73-a782-47f9-8dfb-77ee1ed27a03")]
   record ITSGAuthenticateUserSink, lpVtbl : ITSGAuthenticateUserSinkVtbl* do
     GUID = LibC::GUID.new(0x2c3e2e73_u32, 0xa782_u16, 0x47f9_u16, StaticArray[0x8d_u8, 0xfb_u8, 0x77_u8, 0xee_u8, 0x1e_u8, 0xd2_u8, 0x7a_u8, 0x3_u8])
     def query_interface(this : ITSGAuthenticateUserSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2231,7 +2506,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("9ee3e5bf-04ab-4691-998c-d7f622321a56")]
   record ITSGAuthenticationEngine, lpVtbl : ITSGAuthenticationEngineVtbl* do
     GUID = LibC::GUID.new(0x9ee3e5bf_u32, 0x4ab_u16, 0x4691_u16, StaticArray[0x99_u8, 0x8c_u8, 0xd7_u8, 0xf6_u8, 0x22_u8, 0x32_u8, 0x1a_u8, 0x56_u8])
     def query_interface(this : ITSGAuthenticationEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2266,7 +2540,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("dc44be78-b18d-4399-b210-641bf67a002c")]
   record IWTSSBPlugin, lpVtbl : IWTSSBPluginVtbl* do
     GUID = LibC::GUID.new(0xdc44be78_u32, 0xb18d_u16, 0x4399_u16, StaticArray[0xb2_u8, 0x10_u8, 0x64_u8, 0x1b_u8, 0xf6_u8, 0x7a_u8, 0x0_u8, 0x2c_u8])
     def query_interface(this : IWTSSBPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2310,7 +2583,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("12b952f4-41ca-4f21-a829-a6d07d9a16e5")]
   record IWorkspaceClientExt, lpVtbl : IWorkspaceClientExtVtbl* do
     GUID = LibC::GUID.new(0x12b952f4_u32, 0x41ca_u16, 0x4f21_u16, StaticArray[0xa8_u8, 0x29_u8, 0xa6_u8, 0xd0_u8, 0x7d_u8, 0x9a_u8, 0x16_u8, 0xe5_u8])
     def query_interface(this : IWorkspaceClientExt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2345,7 +2617,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("b922bbb8-4c55-4fea-8496-beb0b44285e5")]
   record IWorkspace, lpVtbl : IWorkspaceVtbl* do
     GUID = LibC::GUID.new(0xb922bbb8_u32, 0x4c55_u16, 0x4fea_u16, StaticArray[0x84_u8, 0x96_u8, 0xbe_u8, 0xb0_u8, 0xb4_u8, 0x42_u8, 0x85_u8, 0xe5_u8])
     def query_interface(this : IWorkspace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2381,7 +2652,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("96d8d7cf-783e-4286-834c-ebc0e95f783c")]
   record IWorkspace2, lpVtbl : IWorkspace2Vtbl* do
     GUID = LibC::GUID.new(0x96d8d7cf_u32, 0x783e_u16, 0x4286_u16, StaticArray[0x83_u8, 0x4c_u8, 0xeb_u8, 0xc0_u8, 0xe9_u8, 0x5f_u8, 0x78_u8, 0x3c_u8])
     def query_interface(this : IWorkspace2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2422,7 +2692,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("1becbe4a-d654-423b-afeb-be8d532c13c6")]
   record IWorkspace3, lpVtbl : IWorkspace3Vtbl* do
     GUID = LibC::GUID.new(0x1becbe4a_u32, 0xd654_u16, 0x423b_u16, StaticArray[0xaf_u8, 0xeb_u8, 0xbe_u8, 0x8d_u8, 0x53_u8, 0x2c_u8, 0x13_u8, 0xc6_u8])
     def query_interface(this : IWorkspace3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2465,7 +2734,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("b922bbb8-4c55-4fea-8496-beb0b44285e6")]
   record IWorkspaceRegistration, lpVtbl : IWorkspaceRegistrationVtbl* do
     GUID = LibC::GUID.new(0xb922bbb8_u32, 0x4c55_u16, 0x4fea_u16, StaticArray[0x84_u8, 0x96_u8, 0xbe_u8, 0xb0_u8, 0xb4_u8, 0x42_u8, 0x85_u8, 0xe6_u8])
     def query_interface(this : IWorkspaceRegistration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2498,7 +2766,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("cf59f654-39bb-44d8-94d0-4635728957e9")]
   record IWorkspaceRegistration2, lpVtbl : IWorkspaceRegistration2Vtbl* do
     GUID = LibC::GUID.new(0xcf59f654_u32, 0x39bb_u16, 0x44d8_u16, StaticArray[0x94_u8, 0xd0_u8, 0x46_u8, 0x35_u8, 0x72_u8, 0x89_u8, 0x57_u8, 0xe9_u8])
     def query_interface(this : IWorkspaceRegistration2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2544,7 +2811,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("efea49a2-dda5-429d-8f42-b23b92c4c347")]
   record IWorkspaceScriptable, lpVtbl : IWorkspaceScriptableVtbl* do
     GUID = LibC::GUID.new(0xefea49a2_u32, 0xdda5_u16, 0x429d_u16, StaticArray[0x8f_u8, 0x42_u8, 0xb2_u8, 0x3b_u8, 0x92_u8, 0xc4_u8, 0xc3_u8, 0x47_u8])
     def query_interface(this : IWorkspaceScriptable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2613,7 +2879,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("efea49a2-dda5-429d-8f42-b33ba2c4c348")]
   record IWorkspaceScriptable2, lpVtbl : IWorkspaceScriptable2Vtbl* do
     GUID = LibC::GUID.new(0xefea49a2_u32, 0xdda5_u16, 0x429d_u16, StaticArray[0x8f_u8, 0x42_u8, 0xb3_u8, 0x3b_u8, 0xa2_u8, 0xc4_u8, 0xc3_u8, 0x48_u8])
     def query_interface(this : IWorkspaceScriptable2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2689,7 +2954,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("531e6512-2cbf-4bd2-80a5-d90a71636a9a")]
   record IWorkspaceScriptable3, lpVtbl : IWorkspaceScriptable3Vtbl* do
     GUID = LibC::GUID.new(0x531e6512_u32, 0x2cbf_u16, 0x4bd2_u16, StaticArray[0x80_u8, 0xa5_u8, 0xd9_u8, 0xa_u8, 0x71_u8, 0x63_u8, 0x6a_u8, 0x9a_u8])
     def query_interface(this : IWorkspaceScriptable3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2757,7 +3021,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("a7c06739-500f-4e8c-99a8-2bd6955899eb")]
   record IWorkspaceReportMessage, lpVtbl : IWorkspaceReportMessageVtbl* do
     GUID = LibC::GUID.new(0xa7c06739_u32, 0x500f_u16, 0x4e8c_u16, StaticArray[0x99_u8, 0xa8_u8, 0x2b_u8, 0xd6_u8, 0x95_u8, 0x58_u8, 0x99_u8, 0xeb_u8])
     def query_interface(this : IWorkspaceReportMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2793,7 +3056,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("b922bbb8-4c55-4fea-8496-beb0b44285e9")]
   record ITSWkspEvents_, lpVtbl : ITSWkspEvents_Vtbl* do
     GUID = LibC::GUID.new(0xb922bbb8_u32, 0x4c55_u16, 0x4fea_u16, StaticArray[0x84_u8, 0x96_u8, 0xbe_u8, 0xb0_u8, 0xb4_u8, 0x42_u8, 0x85_u8, 0xe9_u8])
     def query_interface(this : ITSWkspEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2830,7 +3092,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("48cd7406-caab-465f-a5d6-baa863b9ea4f")]
   record ITsSbPlugin, lpVtbl : ITsSbPluginVtbl* do
     GUID = LibC::GUID.new(0x48cd7406_u32, 0xcaab_u16, 0x465f_u16, StaticArray[0xa5_u8, 0xd6_u8, 0xba_u8, 0xa8_u8, 0x63_u8, 0xb9_u8, 0xea_u8, 0x4f_u8])
     def query_interface(this : ITsSbPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2861,7 +3122,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("ea8db42c-98ed-4535-a88b-2a164f35490f")]
   record ITsSbResourcePlugin, lpVtbl : ITsSbResourcePluginVtbl* do
     GUID = LibC::GUID.new(0xea8db42c_u32, 0x98ed_u16, 0x4535_u16, StaticArray[0xa8_u8, 0x8b_u8, 0x2a_u8, 0x16_u8, 0x4f_u8, 0x35_u8, 0x49_u8, 0xf_u8])
     def query_interface(this : ITsSbResourcePlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2892,7 +3152,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("86cb68ae-86e0-4f57-8a64-bb7406bc5550")]
   record ITsSbServiceNotification, lpVtbl : ITsSbServiceNotificationVtbl* do
     GUID = LibC::GUID.new(0x86cb68ae_u32, 0x86e0_u16, 0x4f57_u16, StaticArray[0x8a_u8, 0x64_u8, 0xbb_u8, 0x74_u8, 0x6_u8, 0xbc_u8, 0x55_u8, 0x50_u8])
     def query_interface(this : ITsSbServiceNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2924,7 +3183,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("24329274-9eb7-11dc-ae98-f2b456d89593")]
   record ITsSbLoadBalancing, lpVtbl : ITsSbLoadBalancingVtbl* do
     GUID = LibC::GUID.new(0x24329274_u32, 0x9eb7_u16, 0x11dc_u16, StaticArray[0xae_u8, 0x98_u8, 0xf2_u8, 0xb4_u8, 0x56_u8, 0xd8_u8, 0x95_u8, 0x93_u8])
     def query_interface(this : ITsSbLoadBalancing*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2959,7 +3217,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("daadee5f-6d32-480e-9e36-ddab2329f06d")]
   record ITsSbPlacement, lpVtbl : ITsSbPlacementVtbl* do
     GUID = LibC::GUID.new(0xdaadee5f_u32, 0x6d32_u16, 0x480e_u16, StaticArray[0x9e_u8, 0x36_u8, 0xdd_u8, 0xab_u8, 0x23_u8, 0x29_u8, 0xf0_u8, 0x6d_u8])
     def query_interface(this : ITsSbPlacement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2994,7 +3251,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("64fc1172-9eb7-11dc-8b00-3aba56d89593")]
   record ITsSbOrchestration, lpVtbl : ITsSbOrchestrationVtbl* do
     GUID = LibC::GUID.new(0x64fc1172_u32, 0x9eb7_u16, 0x11dc_u16, StaticArray[0x8b_u8, 0x0_u8, 0x3a_u8, 0xba_u8, 0x56_u8, 0xd8_u8, 0x95_u8, 0x93_u8])
     def query_interface(this : ITsSbOrchestration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3030,7 +3286,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("8c87f7f7-bf51-4a5c-87bf-8e94fb6e2256")]
   record ITsSbEnvironment, lpVtbl : ITsSbEnvironmentVtbl* do
     GUID = LibC::GUID.new(0x8c87f7f7_u32, 0xbf51_u16, 0x4a5c_u16, StaticArray[0x87_u8, 0xbf_u8, 0x8e_u8, 0x94_u8, 0xfb_u8, 0x6e_u8, 0x22_u8, 0x56_u8])
     def query_interface(this : ITsSbEnvironment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3066,7 +3321,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("24fdb7ac-fea6-11dc-9672-9a8956d89593")]
   record ITsSbLoadBalanceResult, lpVtbl : ITsSbLoadBalanceResultVtbl* do
     GUID = LibC::GUID.new(0x24fdb7ac_u32, 0xfea6_u16, 0x11dc_u16, StaticArray[0x96_u8, 0x72_u8, 0x9a_u8, 0x89_u8, 0x56_u8, 0xd8_u8, 0x95_u8, 0x93_u8])
     def query_interface(this : ITsSbLoadBalanceResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3111,7 +3365,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("16616ecc-272d-411d-b324-126893033856")]
   record ITsSbTarget, lpVtbl : ITsSbTargetVtbl* do
     GUID = LibC::GUID.new(0x16616ecc_u32, 0x272d_u16, 0x411d_u16, StaticArray[0xb3_u8, 0x24_u8, 0x12_u8, 0x68_u8, 0x93_u8, 0x3_u8, 0x38_u8, 0x56_u8])
     def query_interface(this : ITsSbTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3208,7 +3461,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("d453aac7-b1d8-4c5e-ba34-9afb4c8c5510")]
   record ITsSbSession, lpVtbl : ITsSbSessionVtbl* do
     GUID = LibC::GUID.new(0xd453aac7_u32, 0xb1d8_u16, 0x4c5e_u16, StaticArray[0xba_u8, 0x34_u8, 0x9a_u8, 0xfb_u8, 0x4c_u8, 0x8c_u8, 0x55_u8, 0x10_u8])
     def query_interface(this : ITsSbSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3285,7 +3537,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("65d3e85a-c39b-11dc-b92d-3cd255d89593")]
   record ITsSbResourceNotification, lpVtbl : ITsSbResourceNotificationVtbl* do
     GUID = LibC::GUID.new(0x65d3e85a_u32, 0xc39b_u16, 0x11dc_u16, StaticArray[0xb9_u8, 0x2d_u8, 0x3c_u8, 0xd2_u8, 0x55_u8, 0xd8_u8, 0x95_u8, 0x93_u8])
     def query_interface(this : ITsSbResourceNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3320,7 +3571,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("a8a47fde-ca91-44d2-b897-3aa28a43b2b7")]
   record ITsSbResourceNotificationEx, lpVtbl : ITsSbResourceNotificationExVtbl* do
     GUID = LibC::GUID.new(0xa8a47fde_u32, 0xca91_u16, 0x44d2_u16, StaticArray[0xb8_u8, 0x97_u8, 0x3a_u8, 0xa2_u8, 0x8a_u8, 0x43_u8, 0xb2_u8, 0xb7_u8])
     def query_interface(this : ITsSbResourceNotificationEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3361,7 +3611,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("523d1083-89be-48dd-99ea-04e82ffa7265")]
   record ITsSbTaskInfo, lpVtbl : ITsSbTaskInfoVtbl* do
     GUID = LibC::GUID.new(0x523d1083_u32, 0x89be_u16, 0x48dd_u16, StaticArray[0x99_u8, 0xea_u8, 0x4_u8, 0xe8_u8, 0x2f_u8, 0xfa_u8, 0x72_u8, 0x65_u8])
     def query_interface(this : ITsSbTaskInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3415,7 +3664,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("fa22ef0f-8705-41be-93bc-44bdbcf1c9c4")]
   record ITsSbTaskPlugin, lpVtbl : ITsSbTaskPluginVtbl* do
     GUID = LibC::GUID.new(0xfa22ef0f_u32, 0x8705_u16, 0x41be_u16, StaticArray[0x93_u8, 0xbc_u8, 0x44_u8, 0xbd_u8, 0xbc_u8, 0xf1_u8, 0xc9_u8, 0xc4_u8])
     def query_interface(this : ITsSbTaskPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3452,7 +3700,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("5c025171-bb1e-4baf-a212-6d5e9774b33b")]
   record ITsSbPropertySet, lpVtbl : ITsSbPropertySetVtbl* do
     GUID = LibC::GUID.new(0x5c025171_u32, 0xbb1e_u16, 0x4baf_u16, StaticArray[0xa2_u8, 0x12_u8, 0x6d_u8, 0x5e_u8, 0x97_u8, 0x74_u8, 0xb3_u8, 0x3b_u8])
     def query_interface(this : ITsSbPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3483,7 +3730,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("95006e34-7eff-4b6c-bb40-49a4fda7cea6")]
   record ITsSbPluginPropertySet, lpVtbl : ITsSbPluginPropertySetVtbl* do
     GUID = LibC::GUID.new(0x95006e34_u32, 0x7eff_u16, 0x4b6c_u16, StaticArray[0xbb_u8, 0x40_u8, 0x49_u8, 0xa4_u8, 0xfd_u8, 0xa7_u8, 0xce_u8, 0xa6_u8])
     def query_interface(this : ITsSbPluginPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3514,7 +3760,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("e51995b0-46d6-11dd-aa21-cedc55d89593")]
   record ITsSbClientConnectionPropertySet, lpVtbl : ITsSbClientConnectionPropertySetVtbl* do
     GUID = LibC::GUID.new(0xe51995b0_u32, 0x46d6_u16, 0x11dd_u16, StaticArray[0xaa_u8, 0x21_u8, 0xce_u8, 0xdc_u8, 0x55_u8, 0xd8_u8, 0x95_u8, 0x93_u8])
     def query_interface(this : ITsSbClientConnectionPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3545,7 +3790,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("f7bda5d6-994c-4e11-a079-2763b61830ac")]
   record ITsSbTargetPropertySet, lpVtbl : ITsSbTargetPropertySetVtbl* do
     GUID = LibC::GUID.new(0xf7bda5d6_u32, 0x994c_u16, 0x4e11_u16, StaticArray[0xa0_u8, 0x79_u8, 0x27_u8, 0x63_u8, 0xb6_u8, 0x18_u8, 0x30_u8, 0xac_u8])
     def query_interface(this : ITsSbTargetPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3576,7 +3820,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("d0d1bf7e-7acf-11dd-a243-e51156d89593")]
   record ITsSbEnvironmentPropertySet, lpVtbl : ITsSbEnvironmentPropertySetVtbl* do
     GUID = LibC::GUID.new(0xd0d1bf7e_u32, 0x7acf_u16, 0x11dd_u16, StaticArray[0xa2_u8, 0x43_u8, 0xe5_u8, 0x11_u8, 0x56_u8, 0xd8_u8, 0x95_u8, 0x93_u8])
     def query_interface(this : ITsSbEnvironmentPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3607,7 +3850,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("808a6537-1282-4989-9e09-f43938b71722")]
   record ITsSbBaseNotifySink, lpVtbl : ITsSbBaseNotifySinkVtbl* do
     GUID = LibC::GUID.new(0x808a6537_u32, 0x1282_u16, 0x4989_u16, StaticArray[0x9e_u8, 0x9_u8, 0xf4_u8, 0x39_u8, 0x38_u8, 0xb7_u8, 0x17_u8, 0x22_u8])
     def query_interface(this : ITsSbBaseNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3640,7 +3882,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("44dfe30b-c3be-40f5-bf82-7a95bb795adf")]
   record ITsSbPluginNotifySink, lpVtbl : ITsSbPluginNotifySinkVtbl* do
     GUID = LibC::GUID.new(0x44dfe30b_u32, 0xc3be_u16, 0x40f5_u16, StaticArray[0xbf_u8, 0x82_u8, 0x7a_u8, 0x95_u8, 0xbb_u8, 0x79_u8, 0x5a_u8, 0xdf_u8])
     def query_interface(this : ITsSbPluginNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3678,7 +3919,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("5f8a8297-3244-4e6a-958a-27c822c1e141")]
   record ITsSbLoadBalancingNotifySink, lpVtbl : ITsSbLoadBalancingNotifySinkVtbl* do
     GUID = LibC::GUID.new(0x5f8a8297_u32, 0x3244_u16, 0x4e6a_u16, StaticArray[0x95_u8, 0x8a_u8, 0x27_u8, 0xc8_u8, 0x22_u8, 0xc1_u8, 0xe1_u8, 0x41_u8])
     def query_interface(this : ITsSbLoadBalancingNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3713,7 +3953,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("68a0c487-2b4f-46c2-94a1-6ce685183634")]
   record ITsSbPlacementNotifySink, lpVtbl : ITsSbPlacementNotifySinkVtbl* do
     GUID = LibC::GUID.new(0x68a0c487_u32, 0x2b4f_u16, 0x46c2_u16, StaticArray[0x94_u8, 0xa1_u8, 0x6c_u8, 0xe6_u8, 0x85_u8, 0x18_u8, 0x36_u8, 0x34_u8])
     def query_interface(this : ITsSbPlacementNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3748,7 +3987,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("36c37d61-926b-442f-bca5-118c6d50dcf2")]
   record ITsSbOrchestrationNotifySink, lpVtbl : ITsSbOrchestrationNotifySinkVtbl* do
     GUID = LibC::GUID.new(0x36c37d61_u32, 0x926b_u16, 0x442f_u16, StaticArray[0xbc_u8, 0xa5_u8, 0x11_u8, 0x8c_u8, 0x6d_u8, 0x50_u8, 0xdc_u8, 0xf2_u8])
     def query_interface(this : ITsSbOrchestrationNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3786,7 +4024,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("6aaf899e-c2ec-45ee-aa37-45e60895261a")]
   record ITsSbTaskPluginNotifySink, lpVtbl : ITsSbTaskPluginNotifySinkVtbl* do
     GUID = LibC::GUID.new(0x6aaf899e_u32, 0xc2ec_u16, 0x45ee_u16, StaticArray[0xaa_u8, 0x37_u8, 0x45_u8, 0xe6_u8, 0x8_u8, 0x95_u8, 0x26_u8, 0x1a_u8])
     def query_interface(this : ITsSbTaskPluginNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3842,7 +4079,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("18857499-ad61-4b1b-b7df-cbcd41fb8338")]
   record ITsSbClientConnection, lpVtbl : ITsSbClientConnectionVtbl* do
     GUID = LibC::GUID.new(0x18857499_u32, 0xad61_u16, 0x4b1b_u16, StaticArray[0xb7_u8, 0xdf_u8, 0xcb_u8, 0xcd_u8, 0x41_u8, 0xfb_u8, 0x83_u8, 0x38_u8])
     def query_interface(this : ITsSbClientConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3922,7 +4158,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("87a4098f-6d7b-44dd-bc17-8ce44e370d52")]
   record ITsSbProvider, lpVtbl : ITsSbProviderVtbl* do
     GUID = LibC::GUID.new(0x87a4098f_u32, 0x6d7b_u16, 0x44dd_u16, StaticArray[0xbc_u8, 0x17_u8, 0x8c_u8, 0xe4_u8, 0x4e_u8, 0x37_u8, 0xd_u8, 0x52_u8])
     def query_interface(this : ITsSbProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4009,7 +4244,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("5c38f65f-bcf1-4036-a6bf-9e3cccae0b63")]
   record ITsSbResourcePluginStore, lpVtbl : ITsSbResourcePluginStoreVtbl* do
     GUID = LibC::GUID.new(0x5c38f65f_u32, 0xbcf1_u16, 0x4036_u16, StaticArray[0xa6_u8, 0xbf_u8, 0x9e_u8, 0x3c_u8, 0xcc_u8, 0xae_u8, 0xb_u8, 0x63_u8])
     def query_interface(this : ITsSbResourcePluginStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4119,7 +4353,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("85b44b0f-ed78-413f-9702-fa6d3b5ee755")]
   record ITsSbFilterPluginStore, lpVtbl : ITsSbFilterPluginStoreVtbl* do
     GUID = LibC::GUID.new(0x85b44b0f_u32, 0xed78_u16, 0x413f_u16, StaticArray[0x97_u8, 0x2_u8, 0xfa_u8, 0x6d_u8, 0x3b_u8, 0x5e_u8, 0xe7_u8, 0x55_u8])
     def query_interface(this : ITsSbFilterPluginStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4158,7 +4391,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("9ab60f7b-bd72-4d9f-8a3a-a0ea5574e635")]
   record ITsSbGlobalStore, lpVtbl : ITsSbGlobalStoreVtbl* do
     GUID = LibC::GUID.new(0x9ab60f7b_u32, 0xbd72_u16, 0x4d9f_u16, StaticArray[0x8a_u8, 0x3a_u8, 0xa0_u8, 0xea_u8, 0x55_u8, 0x74_u8, 0xe6_u8, 0x35_u8])
     def query_interface(this : ITsSbGlobalStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4208,7 +4440,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("aca87a8e-818b-4581-a032-49c3dfb9c701")]
   record ITsSbProvisioningPluginNotifySink, lpVtbl : ITsSbProvisioningPluginNotifySinkVtbl* do
     GUID = LibC::GUID.new(0xaca87a8e_u32, 0x818b_u16, 0x4581_u16, StaticArray[0xa0_u8, 0x32_u8, 0x49_u8, 0xc3_u8, 0xdf_u8, 0xb9_u8, 0xc7_u8, 0x1_u8])
     def query_interface(this : ITsSbProvisioningPluginNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4255,7 +4486,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("2f6f0dbb-9e4f-462b-9c3f-fccc3dcb6232")]
   record ITsSbProvisioning, lpVtbl : ITsSbProvisioningVtbl* do
     GUID = LibC::GUID.new(0x2f6f0dbb_u32, 0x9e4f_u16, 0x462b_u16, StaticArray[0x9c_u8, 0x3f_u8, 0xfc_u8, 0xcc_u8, 0x3d_u8, 0xcb_u8, 0x62_u8, 0x32_u8])
     def query_interface(this : ITsSbProvisioning*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4298,7 +4528,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("4c4c8c4f-300b-46ad-9164-8468a7e7568c")]
   record ITsSbGenericNotifySink, lpVtbl : ITsSbGenericNotifySinkVtbl* do
     GUID = LibC::GUID.new(0x4c4c8c4f_u32, 0x300b_u16, 0x46ad_u16, StaticArray[0x91_u8, 0x64_u8, 0x84_u8, 0x68_u8, 0xa7_u8, 0xe7_u8, 0x56_u8, 0x8c_u8])
     def query_interface(this : ITsSbGenericNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4333,7 +4562,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("70c04b05-f347-412b-822f-36c99c54ca45")]
   record ItsPubPlugin, lpVtbl : ItsPubPluginVtbl* do
     GUID = LibC::GUID.new(0x70c04b05_u32, 0xf347_u16, 0x412b_u16, StaticArray[0x82_u8, 0x2f_u8, 0x36_u8, 0xc9_u8, 0x9c_u8, 0x54_u8, 0xca_u8, 0x45_u8])
     def query_interface(this : ItsPubPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4384,7 +4612,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("fa4ce418-aad7-4ec6-bad1-0a321ba465d5")]
   record ItsPubPlugin2, lpVtbl : ItsPubPlugin2Vtbl* do
     GUID = LibC::GUID.new(0xfa4ce418_u32, 0xaad7_u16, 0x4ec6_u16, StaticArray[0xba_u8, 0xd1_u8, 0xa_u8, 0x32_u8, 0x1b_u8, 0xa4_u8, 0x65_u8, 0xd5_u8])
     def query_interface(this : ItsPubPlugin2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4446,7 +4673,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("1d428c79-6e2e-4351-a361-c0401a03a0ba")]
   record IWorkspaceResTypeRegistry, lpVtbl : IWorkspaceResTypeRegistryVtbl* do
     GUID = LibC::GUID.new(0x1d428c79_u32, 0x6e2e_u16, 0x4351_u16, StaticArray[0xa3_u8, 0x61_u8, 0xc0_u8, 0x40_u8, 0x1a_u8, 0x3_u8, 0xa0_u8, 0xba_u8])
     def query_interface(this : IWorkspaceResTypeRegistry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4500,7 +4726,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("a1230201-1439-4e62-a414-190d0ac3d40e")]
   record IWTSPlugin, lpVtbl : IWTSPluginVtbl* do
     GUID = LibC::GUID.new(0xa1230201_u32, 0x1439_u16, 0x4e62_u16, StaticArray[0xa4_u8, 0x14_u8, 0x19_u8, 0xd_u8, 0xa_u8, 0xc3_u8, 0xd4_u8, 0xe_u8])
     def query_interface(this : IWTSPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4536,7 +4761,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("a1230206-9a39-4d58-8674-cdb4dff4e73b")]
   record IWTSListener, lpVtbl : IWTSListenerVtbl* do
     GUID = LibC::GUID.new(0xa1230206_u32, 0x9a39_u16, 0x4d58_u16, StaticArray[0x86_u8, 0x74_u8, 0xcd_u8, 0xb4_u8, 0xdf_u8, 0xf4_u8, 0xe7_u8, 0x3b_u8])
     def query_interface(this : IWTSListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4563,7 +4787,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("a1230203-d6a7-11d8-b9fd-000bdbd1f198")]
   record IWTSListenerCallback, lpVtbl : IWTSListenerCallbackVtbl* do
     GUID = LibC::GUID.new(0xa1230203_u32, 0xd6a7_u16, 0x11d8_u16, StaticArray[0xb9_u8, 0xfd_u8, 0x0_u8, 0xb_u8, 0xdb_u8, 0xd1_u8, 0xf1_u8, 0x98_u8])
     def query_interface(this : IWTSListenerCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4591,7 +4814,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("a1230204-d6a7-11d8-b9fd-000bdbd1f198")]
   record IWTSVirtualChannelCallback, lpVtbl : IWTSVirtualChannelCallbackVtbl* do
     GUID = LibC::GUID.new(0xa1230204_u32, 0xd6a7_u16, 0x11d8_u16, StaticArray[0xb9_u8, 0xfd_u8, 0x0_u8, 0xb_u8, 0xdb_u8, 0xd1_u8, 0xf1_u8, 0x98_u8])
     def query_interface(this : IWTSVirtualChannelCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4621,7 +4843,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("a1230205-d6a7-11d8-b9fd-000bdbd1f198")]
   record IWTSVirtualChannelManager, lpVtbl : IWTSVirtualChannelManagerVtbl* do
     GUID = LibC::GUID.new(0xa1230205_u32, 0xd6a7_u16, 0x11d8_u16, StaticArray[0xb9_u8, 0xfd_u8, 0x0_u8, 0xb_u8, 0xdb_u8, 0xd1_u8, 0xf1_u8, 0x98_u8])
     def query_interface(this : IWTSVirtualChannelManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4649,7 +4870,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("a1230207-d6a7-11d8-b9fd-000bdbd1f198")]
   record IWTSVirtualChannel, lpVtbl : IWTSVirtualChannelVtbl* do
     GUID = LibC::GUID.new(0xa1230207_u32, 0xd6a7_u16, 0x11d8_u16, StaticArray[0xb9_u8, 0xfd_u8, 0x0_u8, 0xb_u8, 0xdb_u8, 0xd1_u8, 0xf1_u8, 0x98_u8])
     def query_interface(this : IWTSVirtualChannel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4679,7 +4899,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("d3e07363-087c-476c-86a7-dbb15f46ddb4")]
   record IWTSPluginServiceProvider, lpVtbl : IWTSPluginServiceProviderVtbl* do
     GUID = LibC::GUID.new(0xd3e07363_u32, 0x87c_u16, 0x476c_u16, StaticArray[0x86_u8, 0xa7_u8, 0xdb_u8, 0xb1_u8, 0x5f_u8, 0x46_u8, 0xdd_u8, 0xb4_u8])
     def query_interface(this : IWTSPluginServiceProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4708,7 +4927,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("5b7acc97-f3c9-46f7-8c5b-fa685d3441b1")]
   record IWTSBitmapRenderer, lpVtbl : IWTSBitmapRendererVtbl* do
     GUID = LibC::GUID.new(0x5b7acc97_u32, 0xf3c9_u16, 0x46f7_u16, StaticArray[0x8c_u8, 0x5b_u8, 0xfa_u8, 0x68_u8, 0x5d_u8, 0x34_u8, 0x41_u8, 0xb1_u8])
     def query_interface(this : IWTSBitmapRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4741,7 +4959,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("d782928e-fe4e-4e77-ae90-9cd0b3e3b353")]
   record IWTSBitmapRendererCallback, lpVtbl : IWTSBitmapRendererCallbackVtbl* do
     GUID = LibC::GUID.new(0xd782928e_u32, 0xfe4e_u16, 0x4e77_u16, StaticArray[0xae_u8, 0x90_u8, 0x9c_u8, 0xd0_u8, 0xb3_u8, 0xe3_u8, 0xb3_u8, 0x53_u8])
     def query_interface(this : IWTSBitmapRendererCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4768,7 +4985,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("ea326091-05fe-40c1-b49c-3d2ef4626a0e")]
   record IWTSBitmapRenderService, lpVtbl : IWTSBitmapRenderServiceVtbl* do
     GUID = LibC::GUID.new(0xea326091_u32, 0x5fe_u16, 0x40c1_u16, StaticArray[0xb4_u8, 0x9c_u8, 0x3d_u8, 0x2e_u8, 0xf4_u8, 0x62_u8, 0x6a_u8, 0xe_u8])
     def query_interface(this : IWTSBitmapRenderService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4799,7 +5015,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("67f2368c-d674-4fae-66a5-d20628a640d2")]
   record IWRdsGraphicsChannelEvents, lpVtbl : IWRdsGraphicsChannelEventsVtbl* do
     GUID = LibC::GUID.new(0x67f2368c_u32, 0xd674_u16, 0x4fae_u16, StaticArray[0x66_u8, 0xa5_u8, 0xd2_u8, 0x6_u8, 0x28_u8, 0xa6_u8, 0x40_u8, 0xd2_u8])
     def query_interface(this : IWRdsGraphicsChannelEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4840,7 +5055,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("684b7a0b-edff-43ad-d5a2-4a8d5388f401")]
   record IWRdsGraphicsChannel, lpVtbl : IWRdsGraphicsChannelVtbl* do
     GUID = LibC::GUID.new(0x684b7a0b_u32, 0xedff_u16, 0x43ad_u16, StaticArray[0xd5_u8, 0xa2_u8, 0x4a_u8, 0x8d_u8, 0x53_u8, 0x88_u8, 0xf4_u8, 0x1_u8])
     def query_interface(this : IWRdsGraphicsChannel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4873,7 +5087,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("0fd57159-e83e-476a-a8b9-4a7976e71e18")]
   record IWRdsGraphicsChannelManager, lpVtbl : IWRdsGraphicsChannelManagerVtbl* do
     GUID = LibC::GUID.new(0xfd57159_u32, 0xe83e_u16, 0x476a_u16, StaticArray[0xa8_u8, 0xb9_u8, 0x4a_u8, 0x79_u8, 0x76_u8, 0xe7_u8, 0x1e_u8, 0x18_u8])
     def query_interface(this : IWRdsGraphicsChannelManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4904,7 +5117,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("f9eaf6cc-ed79-4f01-821d-1f881b9f66cc")]
   record IWTSProtocolManager, lpVtbl : IWTSProtocolManagerVtbl* do
     GUID = LibC::GUID.new(0xf9eaf6cc_u32, 0xed79_u16, 0x4f01_u16, StaticArray[0x82_u8, 0x1d_u8, 0x1f_u8, 0x88_u8, 0x1b_u8, 0x9f_u8, 0x66_u8, 0xcc_u8])
     def query_interface(this : IWTSProtocolManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4944,7 +5156,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("23083765-45f0-4394-8f69-32b2bc0ef4ca")]
   record IWTSProtocolListener, lpVtbl : IWTSProtocolListenerVtbl* do
     GUID = LibC::GUID.new(0x23083765_u32, 0x45f0_u16, 0x4394_u16, StaticArray[0x8f_u8, 0x69_u8, 0x32_u8, 0xb2_u8, 0xbc_u8, 0xe_u8, 0xf4_u8, 0xca_u8])
     def query_interface(this : IWTSProtocolListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4974,7 +5185,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("23083765-1a2d-4de2-97de-4a35f260f0b3")]
   record IWTSProtocolListenerCallback, lpVtbl : IWTSProtocolListenerCallbackVtbl* do
     GUID = LibC::GUID.new(0x23083765_u32, 0x1a2d_u16, 0x4de2_u16, StaticArray[0x97_u8, 0xde_u8, 0x4a_u8, 0x35_u8, 0xf2_u8, 0x60_u8, 0xf0_u8, 0xb3_u8])
     def query_interface(this : IWTSProtocolListenerCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5023,7 +5233,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("23083765-9095-4648-98bf-ef81c914032d")]
   record IWTSProtocolConnection, lpVtbl : IWTSProtocolConnectionVtbl* do
     GUID = LibC::GUID.new(0x23083765_u32, 0x9095_u16, 0x4648_u16, StaticArray[0x98_u8, 0xbf_u8, 0xef_u8, 0x81_u8, 0xc9_u8, 0x14_u8, 0x3_u8, 0x2d_u8])
     def query_interface(this : IWTSProtocolConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5120,7 +5329,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("23083765-75eb-41fe-b4fb-e086242afa0f")]
   record IWTSProtocolConnectionCallback, lpVtbl : IWTSProtocolConnectionCallbackVtbl* do
     GUID = LibC::GUID.new(0x23083765_u32, 0x75eb_u16, 0x41fe_u16, StaticArray[0xb4_u8, 0xfb_u8, 0xe0_u8, 0x86_u8, 0x24_u8, 0x2a_u8, 0xfa_u8, 0xf_u8])
     def query_interface(this : IWTSProtocolConnectionCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5161,7 +5369,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("ee3b0c14-37fb-456b-bab3-6d6cd51e13bf")]
   record IWTSProtocolShadowConnection, lpVtbl : IWTSProtocolShadowConnectionVtbl* do
     GUID = LibC::GUID.new(0xee3b0c14_u32, 0x37fb_u16, 0x456b_u16, StaticArray[0xba_u8, 0xb3_u8, 0x6d_u8, 0x6c_u8, 0xd5_u8, 0x1e_u8, 0x13_u8, 0xbf_u8])
     def query_interface(this : IWTSProtocolShadowConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5195,7 +5402,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("503a2504-aae5-4ab1-93e0-6d1c4bc6f71a")]
   record IWTSProtocolShadowCallback, lpVtbl : IWTSProtocolShadowCallbackVtbl* do
     GUID = LibC::GUID.new(0x503a2504_u32, 0xaae5_u16, 0x4ab1_u16, StaticArray[0x93_u8, 0xe0_u8, 0x6d_u8, 0x1c_u8, 0x4b_u8, 0xc6_u8, 0xf7_u8, 0x1a_u8])
     def query_interface(this : IWTSProtocolShadowCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5228,7 +5434,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("23083765-178c-4079-8e4a-fea6496a4d70")]
   record IWTSProtocolLicenseConnection, lpVtbl : IWTSProtocolLicenseConnectionVtbl* do
     GUID = LibC::GUID.new(0x23083765_u32, 0x178c_u16, 0x4079_u16, StaticArray[0x8e_u8, 0x4a_u8, 0xfe_u8, 0xa6_u8, 0x49_u8, 0x6a_u8, 0x4d_u8, 0x70_u8])
     def query_interface(this : IWTSProtocolLicenseConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5267,7 +5472,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("fd9b61a7-2916-4627-8dee-4328711ad6cb")]
   record IWTSProtocolLogonErrorRedirector, lpVtbl : IWTSProtocolLogonErrorRedirectorVtbl* do
     GUID = LibC::GUID.new(0xfd9b61a7_u32, 0x2916_u16, 0x4627_u16, StaticArray[0x8d_u8, 0xee_u8, 0x43_u8, 0x28_u8, 0x71_u8, 0x1a_u8, 0xd6_u8, 0xcb_u8])
     def query_interface(this : IWTSProtocolLogonErrorRedirector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5304,7 +5508,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("654a5a6a-2550-47eb-b6f7-ebd637475265")]
   record IWRdsProtocolSettings, lpVtbl : IWRdsProtocolSettingsVtbl* do
     GUID = LibC::GUID.new(0x654a5a6a_u32, 0x2550_u16, 0x47eb_u16, StaticArray[0xb6_u8, 0xf7_u8, 0xeb_u8, 0xd6_u8, 0x37_u8, 0x47_u8, 0x52_u8, 0x65_u8])
     def query_interface(this : IWRdsProtocolSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5341,7 +5544,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("dc796967-3abb-40cd-a446-105276b58950")]
   record IWRdsProtocolManager, lpVtbl : IWRdsProtocolManagerVtbl* do
     GUID = LibC::GUID.new(0xdc796967_u32, 0x3abb_u16, 0x40cd_u16, StaticArray[0xa4_u8, 0x46_u8, 0x10_u8, 0x52_u8, 0x76_u8, 0xb5_u8, 0x89_u8, 0x50_u8])
     def query_interface(this : IWRdsProtocolManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5391,7 +5593,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("fcbc131b-c686-451d-a773-e279e230f540")]
   record IWRdsProtocolListener, lpVtbl : IWRdsProtocolListenerVtbl* do
     GUID = LibC::GUID.new(0xfcbc131b_u32, 0xc686_u16, 0x451d_u16, StaticArray[0xa7_u8, 0x73_u8, 0xe2_u8, 0x79_u8, 0xe2_u8, 0x30_u8, 0xf5_u8, 0x40_u8])
     def query_interface(this : IWRdsProtocolListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5424,7 +5625,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("3ab27e5b-4449-4dc1-b74a-91621d4fe984")]
   record IWRdsProtocolListenerCallback, lpVtbl : IWRdsProtocolListenerCallbackVtbl* do
     GUID = LibC::GUID.new(0x3ab27e5b_u32, 0x4449_u16, 0x4dc1_u16, StaticArray[0xb7_u8, 0x4a_u8, 0x91_u8, 0x62_u8, 0x1d_u8, 0x4f_u8, 0xe9_u8, 0x84_u8])
     def query_interface(this : IWRdsProtocolListenerCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5474,7 +5674,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("324ed94f-fdaf-4ff6-81a8-42abe755830b")]
   record IWRdsProtocolConnection, lpVtbl : IWRdsProtocolConnectionVtbl* do
     GUID = LibC::GUID.new(0x324ed94f_u32, 0xfdaf_u16, 0x4ff6_u16, StaticArray[0x81_u8, 0xa8_u8, 0x42_u8, 0xab_u8, 0xe7_u8, 0x55_u8, 0x83_u8, 0xb_u8])
     def query_interface(this : IWRdsProtocolConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5574,7 +5773,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("f1d70332-d070-4ef1-a088-78313536c2d6")]
   record IWRdsProtocolConnectionCallback, lpVtbl : IWRdsProtocolConnectionCallbackVtbl* do
     GUID = LibC::GUID.new(0xf1d70332_u32, 0xd070_u16, 0x4ef1_u16, StaticArray[0xa0_u8, 0x88_u8, 0x78_u8, 0x31_u8, 0x35_u8, 0x36_u8, 0xc2_u8, 0xd6_u8])
     def query_interface(this : IWRdsProtocolConnectionCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5615,7 +5813,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("9ae85ce6-cade-4548-8feb-99016597f60a")]
   record IWRdsProtocolShadowConnection, lpVtbl : IWRdsProtocolShadowConnectionVtbl* do
     GUID = LibC::GUID.new(0x9ae85ce6_u32, 0xcade_u16, 0x4548_u16, StaticArray[0x8f_u8, 0xeb_u8, 0x99_u8, 0x1_u8, 0x65_u8, 0x97_u8, 0xf6_u8, 0xa_u8])
     def query_interface(this : IWRdsProtocolShadowConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5649,7 +5846,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("e0667ce0-0372-40d6-adb2-a0f3322674d6")]
   record IWRdsProtocolShadowCallback, lpVtbl : IWRdsProtocolShadowCallbackVtbl* do
     GUID = LibC::GUID.new(0xe0667ce0_u32, 0x372_u16, 0x40d6_u16, StaticArray[0xad_u8, 0xb2_u8, 0xa0_u8, 0xf3_u8, 0x32_u8, 0x26_u8, 0x74_u8, 0xd6_u8])
     def query_interface(this : IWRdsProtocolShadowCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5682,7 +5878,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("1d6a145f-d095-4424-957a-407fae822d84")]
   record IWRdsProtocolLicenseConnection, lpVtbl : IWRdsProtocolLicenseConnectionVtbl* do
     GUID = LibC::GUID.new(0x1d6a145f_u32, 0xd095_u16, 0x4424_u16, StaticArray[0x95_u8, 0x7a_u8, 0x40_u8, 0x7f_u8, 0xae_u8, 0x82_u8, 0x2d_u8, 0x84_u8])
     def query_interface(this : IWRdsProtocolLicenseConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5721,7 +5916,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("519fe83b-142a-4120-a3d5-a405d315281a")]
   record IWRdsProtocolLogonErrorRedirector, lpVtbl : IWRdsProtocolLogonErrorRedirectorVtbl* do
     GUID = LibC::GUID.new(0x519fe83b_u32, 0x142a_u16, 0x4120_u16, StaticArray[0xa3_u8, 0xd5_u8, 0xa4_u8, 0x5_u8, 0xd3_u8, 0x15_u8, 0x28_u8, 0x1a_u8])
     def query_interface(this : IWRdsProtocolLogonErrorRedirector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5760,7 +5954,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("1382df4d-a289-43d1-a184-144726f9af90")]
   record IWRdsWddmIddProps, lpVtbl : IWRdsWddmIddPropsVtbl* do
     GUID = LibC::GUID.new(0x1382df4d_u32, 0xa289_u16, 0x43d1_u16, StaticArray[0xa1_u8, 0x84_u8, 0x14_u8, 0x47_u8, 0x26_u8, 0xf9_u8, 0xaf_u8, 0x90_u8])
     def query_interface(this : IWRdsWddmIddProps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5797,7 +5990,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("83fcf5d3-f6f4-ea94-9cd2-32f280e1e510")]
   record IWRdsProtocolConnectionSettings, lpVtbl : IWRdsProtocolConnectionSettingsVtbl* do
     GUID = LibC::GUID.new(0x83fcf5d3_u32, 0xf6f4_u16, 0xea94_u16, StaticArray[0x9c_u8, 0xd2_u8, 0x32_u8, 0xf2_u8, 0x80_u8, 0xe1_u8, 0xe5_u8, 0x10_u8])
     def query_interface(this : IWRdsProtocolConnectionSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5827,7 +6019,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("5718ae9b-47f2-499f-b634-d8175bd51131")]
   record IWRdsEnhancedFastReconnectArbitrator, lpVtbl : IWRdsEnhancedFastReconnectArbitratorVtbl* do
     GUID = LibC::GUID.new(0x5718ae9b_u32, 0x47f2_u16, 0x499f_u16, StaticArray[0xb6_u8, 0x34_u8, 0xd8_u8, 0x17_u8, 0x5b_u8, 0xd5_u8, 0x11_u8, 0x31_u8])
     def query_interface(this : IWRdsEnhancedFastReconnectArbitrator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5861,7 +6052,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("48a0f2a7-2713-431f-bbac-6f4558e7d64d")]
   record IRemoteDesktopClientSettings, lpVtbl : IRemoteDesktopClientSettingsVtbl* do
     GUID = LibC::GUID.new(0x48a0f2a7_u32, 0x2713_u16, 0x431f_u16, StaticArray[0xbb_u8, 0xac_u8, 0x6f_u8, 0x45_u8, 0x58_u8, 0xe7_u8, 0xd6_u8, 0x4d_u8])
     def query_interface(this : IRemoteDesktopClientSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5916,7 +6106,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("7d54bc4e-1028-45d4-8b0a-b9b6bffba176")]
   record IRemoteDesktopClientActions, lpVtbl : IRemoteDesktopClientActionsVtbl* do
     GUID = LibC::GUID.new(0x7d54bc4e_u32, 0x1028_u16, 0x45d4_u16, StaticArray[0x8b_u8, 0xa_u8, 0xb9_u8, 0xb6_u8, 0xbf_u8, 0xfb_u8, 0xa1_u8, 0x76_u8])
     def query_interface(this : IRemoteDesktopClientActions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5973,7 +6162,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("260ec22d-8cbc-44b5-9e88-2a37f6c93ae9")]
   record IRemoteDesktopClientTouchPointer, lpVtbl : IRemoteDesktopClientTouchPointerVtbl* do
     GUID = LibC::GUID.new(0x260ec22d_u32, 0x8cbc_u16, 0x44b5_u16, StaticArray[0x9e_u8, 0x88_u8, 0x2a_u8, 0x37_u8, 0xf6_u8, 0xc9_u8, 0x3a_u8, 0xe9_u8])
     def query_interface(this : IRemoteDesktopClientTouchPointer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6040,7 +6228,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("57d25668-625a-4905-be4e-304caa13f89c")]
   record IRemoteDesktopClient, lpVtbl : IRemoteDesktopClientVtbl* do
     GUID = LibC::GUID.new(0x57d25668_u32, 0x625a_u16, 0x4905_u16, StaticArray[0xbe_u8, 0x4e_u8, 0x30_u8, 0x4c_u8, 0xaa_u8, 0x13_u8, 0xf8_u8, 0x9c_u8])
     def query_interface(this : IRemoteDesktopClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6106,7 +6293,6 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  #@[Com("eeaa3d5f-ec63-4d27-af38-e86b1d7292cb")]
   record IRemoteSystemAdditionalInfoProvider, lpVtbl : IRemoteSystemAdditionalInfoProviderVtbl* do
     GUID = LibC::GUID.new(0xeeaa3d5f_u32, 0xec63_u16, 0x4d27_u16, StaticArray[0xaf_u8, 0x38_u8, 0xe8_u8, 0x6b_u8, 0x1d_u8, 0x72_u8, 0x92_u8, 0xcb_u8])
     def query_interface(this : IRemoteSystemAdditionalInfoProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

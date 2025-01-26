@@ -9,25 +9,25 @@ require "./../storage/file_system.cr"
 
 module Win32cr::Networking::WinInet
   alias HTTP_PUSH_WAIT_HANDLE = LibC::IntPtrT
-  alias LPINTERNET_STATUS_CALLBACK = Proc(Void*, LibC::UIntPtrT, UInt32, Void*, UInt32, Void)*
+  alias LPINTERNET_STATUS_CALLBACK = Proc(Void*, LibC::UIntPtrT, UInt32, Void*, UInt32, Void)
 
-  alias GOPHER_ATTRIBUTE_ENUMERATOR = Proc(Win32cr::Networking::WinInet::GOPHER_ATTRIBUTE_TYPE*, UInt32, Win32cr::Foundation::BOOL)*
+  alias GOPHER_ATTRIBUTE_ENUMERATOR = Proc(Win32cr::Networking::WinInet::GOPHER_ATTRIBUTE_TYPE*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFN_AUTH_NOTIFY = Proc(LibC::UIntPtrT, UInt32, Void*, UInt32)*
+  alias PFN_AUTH_NOTIFY = Proc(LibC::UIntPtrT, UInt32, Void*, UInt32)
 
-  alias Pfninternetinitializeautoproxydll = Proc(UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Networking::WinInet::AutoProxyHelperFunctions*, Win32cr::Networking::WinInet::AUTO_PROXY_SCRIPT_BUFFER*, Win32cr::Foundation::BOOL)*
+  alias Pfninternetinitializeautoproxydll = Proc(UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Networking::WinInet::AutoProxyHelperFunctions*, Win32cr::Networking::WinInet::AUTO_PROXY_SCRIPT_BUFFER*, Win32cr::Foundation::BOOL)
 
-  alias Pfninternetdeinitializeautoproxydll = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::BOOL)*
+  alias Pfninternetdeinitializeautoproxydll = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::BOOL)
 
-  alias Pfninternetgetproxyinfo = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR*, UInt32*, Win32cr::Foundation::BOOL)*
+  alias Pfninternetgetproxyinfo = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFN_DIAL_HANDLER = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PSTR, UInt32, UInt32*, UInt32)*
+  alias PFN_DIAL_HANDLER = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PSTR, UInt32, UInt32*, UInt32)
 
-  alias CACHE_OPERATOR = Proc(Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOA*, UInt32*, Void*, Win32cr::Foundation::BOOL)*
+  alias CACHE_OPERATOR = Proc(Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOA*, UInt32*, Void*, Win32cr::Foundation::BOOL)
 
-  alias HTTP_POLICY_EXTENSION_INIT = Proc(Win32cr::Networking::WinInet::HTTP_POLICY_EXTENSION_VERSION, Win32cr::Networking::WinInet::HTTP_POLICY_EXTENSION_TYPE, Void*, UInt32, UInt32)*
+  alias HTTP_POLICY_EXTENSION_INIT = Proc(Win32cr::Networking::WinInet::HTTP_POLICY_EXTENSION_VERSION, Win32cr::Networking::WinInet::HTTP_POLICY_EXTENSION_TYPE, Void*, UInt32, UInt32)
 
-  alias HTTP_POLICY_EXTENSION_SHUTDOWN = Proc(Win32cr::Networking::WinInet::HTTP_POLICY_EXTENSION_TYPE, UInt32)*
+  alias HTTP_POLICY_EXTENSION_SHUTDOWN = Proc(Win32cr::Networking::WinInet::HTTP_POLICY_EXTENSION_TYPE, UInt32)
 
   DIALPROP_USERNAME = "UserName"
   DIALPROP_PASSWORD = "Password"
@@ -1172,686 +1172,936 @@ module Win32cr::Networking::WinInet
   end
 
   @[Extern]
-  record INTERNET_ASYNC_RESULT,
-    dwResult : LibC::UIntPtrT,
-    dwError : UInt32
-
-  @[Extern]
-  record INTERNET_DIAGNOSTIC_SOCKET_INFO,
-    socket : LibC::UIntPtrT,
-    source_port : UInt32,
-    dest_port : UInt32,
-    flags : UInt32
-
-  @[Extern]
-  record INTERNET_PROXY_INFO,
-    dwAccessType : Win32cr::Networking::WinInet::INTERNET_ACCESS_TYPE,
-    lpszProxy : Int8*,
-    lpszProxyBypass : Int8*
-
-  @[Extern]
-  record INTERNET_PER_CONN_OPTIONA,
-    dwOption : Win32cr::Networking::WinInet::INTERNET_PER_CONN,
-    value : Value_e__Union_ do
-
-    # Nested Type Value_e__Union_
-    @[Extern(union: true)]
-    record Value_e__Union_,
-      dwValue : UInt32,
-      pszValue : Win32cr::Foundation::PSTR,
-      ftValue : Win32cr::Foundation::FILETIME
-
+  struct INTERNET_ASYNC_RESULT
+    property dwResult : LibC::UIntPtrT
+    property dwError : UInt32
+    def initialize(@dwResult : LibC::UIntPtrT, @dwError : UInt32)
+    end
   end
 
   @[Extern]
-  record INTERNET_PER_CONN_OPTIONW,
-    dwOption : Win32cr::Networking::WinInet::INTERNET_PER_CONN,
-    value : Value_e__Union_ do
-
-    # Nested Type Value_e__Union_
-    @[Extern(union: true)]
-    record Value_e__Union_,
-      dwValue : UInt32,
-      pszValue : Win32cr::Foundation::PWSTR,
-      ftValue : Win32cr::Foundation::FILETIME
-
+  struct INTERNET_DIAGNOSTIC_SOCKET_INFO
+    property socket : LibC::UIntPtrT
+    property source_port : UInt32
+    property dest_port : UInt32
+    property flags : UInt32
+    def initialize(@socket : LibC::UIntPtrT, @source_port : UInt32, @dest_port : UInt32, @flags : UInt32)
+    end
   end
 
   @[Extern]
-  record INTERNET_PER_CONN_OPTION_LISTA,
-    dwSize : UInt32,
-    pszConnection : Win32cr::Foundation::PSTR,
-    dwOptionCount : UInt32,
-    dwOptionError : UInt32,
-    pOptions : Win32cr::Networking::WinInet::INTERNET_PER_CONN_OPTIONA*
+  struct INTERNET_PROXY_INFO
+    property dwAccessType : Win32cr::Networking::WinInet::INTERNET_ACCESS_TYPE
+    property lpszProxy : Int8*
+    property lpszProxyBypass : Int8*
+    def initialize(@dwAccessType : Win32cr::Networking::WinInet::INTERNET_ACCESS_TYPE, @lpszProxy : Int8*, @lpszProxyBypass : Int8*)
+    end
+  end
 
   @[Extern]
-  record INTERNET_PER_CONN_OPTION_LISTW,
-    dwSize : UInt32,
-    pszConnection : Win32cr::Foundation::PWSTR,
-    dwOptionCount : UInt32,
-    dwOptionError : UInt32,
-    pOptions : Win32cr::Networking::WinInet::INTERNET_PER_CONN_OPTIONW*
+  struct INTERNET_PER_CONN_OPTIONA
+    property dwOption : Win32cr::Networking::WinInet::INTERNET_PER_CONN
+    property value : Value_e__Union_
+
+    # Nested Type Value_e__Union_
+    @[Extern(union: true)]
+    struct Value_e__Union_
+    property dwValue : UInt32
+    property pszValue : Win32cr::Foundation::PSTR
+    property ftValue : Win32cr::Foundation::FILETIME
+    def initialize(@dwValue : UInt32, @pszValue : Win32cr::Foundation::PSTR, @ftValue : Win32cr::Foundation::FILETIME)
+    end
+    end
+
+    def initialize(@dwOption : Win32cr::Networking::WinInet::INTERNET_PER_CONN, @value : Value_e__Union_)
+    end
+  end
 
   @[Extern]
-  record INTERNET_VERSION_INFO,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32
+  struct INTERNET_PER_CONN_OPTIONW
+    property dwOption : Win32cr::Networking::WinInet::INTERNET_PER_CONN
+    property value : Value_e__Union_
+
+    # Nested Type Value_e__Union_
+    @[Extern(union: true)]
+    struct Value_e__Union_
+    property dwValue : UInt32
+    property pszValue : Win32cr::Foundation::PWSTR
+    property ftValue : Win32cr::Foundation::FILETIME
+    def initialize(@dwValue : UInt32, @pszValue : Win32cr::Foundation::PWSTR, @ftValue : Win32cr::Foundation::FILETIME)
+    end
+    end
+
+    def initialize(@dwOption : Win32cr::Networking::WinInet::INTERNET_PER_CONN, @value : Value_e__Union_)
+    end
+  end
 
   @[Extern]
-  record INTERNET_CONNECTED_INFO,
-    dwConnectedState : Win32cr::Networking::WinInet::INTERNET_STATE,
-    dwFlags : UInt32
+  struct INTERNET_PER_CONN_OPTION_LISTA
+    property dwSize : UInt32
+    property pszConnection : Win32cr::Foundation::PSTR
+    property dwOptionCount : UInt32
+    property dwOptionError : UInt32
+    property pOptions : Win32cr::Networking::WinInet::INTERNET_PER_CONN_OPTIONA*
+    def initialize(@dwSize : UInt32, @pszConnection : Win32cr::Foundation::PSTR, @dwOptionCount : UInt32, @dwOptionError : UInt32, @pOptions : Win32cr::Networking::WinInet::INTERNET_PER_CONN_OPTIONA*)
+    end
+  end
 
   @[Extern]
-  record URL_COMPONENTSA,
-    dwStructSize : UInt32,
-    lpszScheme : Win32cr::Foundation::PSTR,
-    dwSchemeLength : UInt32,
-    nScheme : Win32cr::Networking::WinInet::INTERNET_SCHEME,
-    lpszHostName : Win32cr::Foundation::PSTR,
-    dwHostNameLength : UInt32,
-    nPort : UInt16,
-    lpszUserName : Win32cr::Foundation::PSTR,
-    dwUserNameLength : UInt32,
-    lpszPassword : Win32cr::Foundation::PSTR,
-    dwPasswordLength : UInt32,
-    lpszUrlPath : Win32cr::Foundation::PSTR,
-    dwUrlPathLength : UInt32,
-    lpszExtraInfo : Win32cr::Foundation::PSTR,
-    dwExtraInfoLength : UInt32
+  struct INTERNET_PER_CONN_OPTION_LISTW
+    property dwSize : UInt32
+    property pszConnection : Win32cr::Foundation::PWSTR
+    property dwOptionCount : UInt32
+    property dwOptionError : UInt32
+    property pOptions : Win32cr::Networking::WinInet::INTERNET_PER_CONN_OPTIONW*
+    def initialize(@dwSize : UInt32, @pszConnection : Win32cr::Foundation::PWSTR, @dwOptionCount : UInt32, @dwOptionError : UInt32, @pOptions : Win32cr::Networking::WinInet::INTERNET_PER_CONN_OPTIONW*)
+    end
+  end
 
   @[Extern]
-  record URL_COMPONENTSW,
-    dwStructSize : UInt32,
-    lpszScheme : Win32cr::Foundation::PWSTR,
-    dwSchemeLength : UInt32,
-    nScheme : Win32cr::Networking::WinInet::INTERNET_SCHEME,
-    lpszHostName : Win32cr::Foundation::PWSTR,
-    dwHostNameLength : UInt32,
-    nPort : UInt16,
-    lpszUserName : Win32cr::Foundation::PWSTR,
-    dwUserNameLength : UInt32,
-    lpszPassword : Win32cr::Foundation::PWSTR,
-    dwPasswordLength : UInt32,
-    lpszUrlPath : Win32cr::Foundation::PWSTR,
-    dwUrlPathLength : UInt32,
-    lpszExtraInfo : Win32cr::Foundation::PWSTR,
-    dwExtraInfoLength : UInt32
+  struct INTERNET_VERSION_INFO
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    def initialize(@dwMajorVersion : UInt32, @dwMinorVersion : UInt32)
+    end
+  end
 
   @[Extern]
-  record INTERNET_CERTIFICATE_INFO,
-    ftExpiry : Win32cr::Foundation::FILETIME,
-    ftStart : Win32cr::Foundation::FILETIME,
-    lpszSubjectInfo : Int8*,
-    lpszIssuerInfo : Int8*,
-    lpszProtocolName : Int8*,
-    lpszSignatureAlgName : Int8*,
-    lpszEncryptionAlgName : Int8*,
-    dwKeySize : UInt32
+  struct INTERNET_CONNECTED_INFO
+    property dwConnectedState : Win32cr::Networking::WinInet::INTERNET_STATE
+    property dwFlags : UInt32
+    def initialize(@dwConnectedState : Win32cr::Networking::WinInet::INTERNET_STATE, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record INTERNET_BUFFERSA,
-    dwStructSize : UInt32,
-    next__ : Win32cr::Networking::WinInet::INTERNET_BUFFERSA*,
-    lpcszHeader : Win32cr::Foundation::PSTR,
-    dwHeadersLength : UInt32,
-    dwHeadersTotal : UInt32,
-    lpvBuffer : Void*,
-    dwBufferLength : UInt32,
-    dwBufferTotal : UInt32,
-    dwOffsetLow : UInt32,
-    dwOffsetHigh : UInt32
+  struct URL_COMPONENTSA
+    property dwStructSize : UInt32
+    property lpszScheme : Win32cr::Foundation::PSTR
+    property dwSchemeLength : UInt32
+    property nScheme : Win32cr::Networking::WinInet::INTERNET_SCHEME
+    property lpszHostName : Win32cr::Foundation::PSTR
+    property dwHostNameLength : UInt32
+    property nPort : UInt16
+    property lpszUserName : Win32cr::Foundation::PSTR
+    property dwUserNameLength : UInt32
+    property lpszPassword : Win32cr::Foundation::PSTR
+    property dwPasswordLength : UInt32
+    property lpszUrlPath : Win32cr::Foundation::PSTR
+    property dwUrlPathLength : UInt32
+    property lpszExtraInfo : Win32cr::Foundation::PSTR
+    property dwExtraInfoLength : UInt32
+    def initialize(@dwStructSize : UInt32, @lpszScheme : Win32cr::Foundation::PSTR, @dwSchemeLength : UInt32, @nScheme : Win32cr::Networking::WinInet::INTERNET_SCHEME, @lpszHostName : Win32cr::Foundation::PSTR, @dwHostNameLength : UInt32, @nPort : UInt16, @lpszUserName : Win32cr::Foundation::PSTR, @dwUserNameLength : UInt32, @lpszPassword : Win32cr::Foundation::PSTR, @dwPasswordLength : UInt32, @lpszUrlPath : Win32cr::Foundation::PSTR, @dwUrlPathLength : UInt32, @lpszExtraInfo : Win32cr::Foundation::PSTR, @dwExtraInfoLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record INTERNET_BUFFERSW,
-    dwStructSize : UInt32,
-    next__ : Win32cr::Networking::WinInet::INTERNET_BUFFERSW*,
-    lpcszHeader : Win32cr::Foundation::PWSTR,
-    dwHeadersLength : UInt32,
-    dwHeadersTotal : UInt32,
-    lpvBuffer : Void*,
-    dwBufferLength : UInt32,
-    dwBufferTotal : UInt32,
-    dwOffsetLow : UInt32,
-    dwOffsetHigh : UInt32
+  struct URL_COMPONENTSW
+    property dwStructSize : UInt32
+    property lpszScheme : Win32cr::Foundation::PWSTR
+    property dwSchemeLength : UInt32
+    property nScheme : Win32cr::Networking::WinInet::INTERNET_SCHEME
+    property lpszHostName : Win32cr::Foundation::PWSTR
+    property dwHostNameLength : UInt32
+    property nPort : UInt16
+    property lpszUserName : Win32cr::Foundation::PWSTR
+    property dwUserNameLength : UInt32
+    property lpszPassword : Win32cr::Foundation::PWSTR
+    property dwPasswordLength : UInt32
+    property lpszUrlPath : Win32cr::Foundation::PWSTR
+    property dwUrlPathLength : UInt32
+    property lpszExtraInfo : Win32cr::Foundation::PWSTR
+    property dwExtraInfoLength : UInt32
+    def initialize(@dwStructSize : UInt32, @lpszScheme : Win32cr::Foundation::PWSTR, @dwSchemeLength : UInt32, @nScheme : Win32cr::Networking::WinInet::INTERNET_SCHEME, @lpszHostName : Win32cr::Foundation::PWSTR, @dwHostNameLength : UInt32, @nPort : UInt16, @lpszUserName : Win32cr::Foundation::PWSTR, @dwUserNameLength : UInt32, @lpszPassword : Win32cr::Foundation::PWSTR, @dwPasswordLength : UInt32, @lpszUrlPath : Win32cr::Foundation::PWSTR, @dwUrlPathLength : UInt32, @lpszExtraInfo : Win32cr::Foundation::PWSTR, @dwExtraInfoLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record IncomingCookieState,
-    cSession : Int32,
-    cPersistent : Int32,
-    cAccepted : Int32,
-    cLeashed : Int32,
-    cDowngraded : Int32,
-    cBlocked : Int32,
-    pszLocation : Win32cr::Foundation::PSTR
+  struct INTERNET_CERTIFICATE_INFO
+    property ftExpiry : Win32cr::Foundation::FILETIME
+    property ftStart : Win32cr::Foundation::FILETIME
+    property lpszSubjectInfo : Int8*
+    property lpszIssuerInfo : Int8*
+    property lpszProtocolName : Int8*
+    property lpszSignatureAlgName : Int8*
+    property lpszEncryptionAlgName : Int8*
+    property dwKeySize : UInt32
+    def initialize(@ftExpiry : Win32cr::Foundation::FILETIME, @ftStart : Win32cr::Foundation::FILETIME, @lpszSubjectInfo : Int8*, @lpszIssuerInfo : Int8*, @lpszProtocolName : Int8*, @lpszSignatureAlgName : Int8*, @lpszEncryptionAlgName : Int8*, @dwKeySize : UInt32)
+    end
+  end
 
   @[Extern]
-  record OutgoingCookieState,
-    cSent : Int32,
-    cSuppressed : Int32,
-    pszLocation : Win32cr::Foundation::PSTR
+  struct INTERNET_BUFFERSA
+    property dwStructSize : UInt32
+    property next__ : Win32cr::Networking::WinInet::INTERNET_BUFFERSA*
+    property lpcszHeader : Win32cr::Foundation::PSTR
+    property dwHeadersLength : UInt32
+    property dwHeadersTotal : UInt32
+    property lpvBuffer : Void*
+    property dwBufferLength : UInt32
+    property dwBufferTotal : UInt32
+    property dwOffsetLow : UInt32
+    property dwOffsetHigh : UInt32
+    def initialize(@dwStructSize : UInt32, @next__ : Win32cr::Networking::WinInet::INTERNET_BUFFERSA*, @lpcszHeader : Win32cr::Foundation::PSTR, @dwHeadersLength : UInt32, @dwHeadersTotal : UInt32, @lpvBuffer : Void*, @dwBufferLength : UInt32, @dwBufferTotal : UInt32, @dwOffsetLow : UInt32, @dwOffsetHigh : UInt32)
+    end
+  end
 
   @[Extern]
-  record InternetCookieHistory,
-    fAccepted : Win32cr::Foundation::BOOL,
-    fLeashed : Win32cr::Foundation::BOOL,
-    fDowngraded : Win32cr::Foundation::BOOL,
-    fRejected : Win32cr::Foundation::BOOL
+  struct INTERNET_BUFFERSW
+    property dwStructSize : UInt32
+    property next__ : Win32cr::Networking::WinInet::INTERNET_BUFFERSW*
+    property lpcszHeader : Win32cr::Foundation::PWSTR
+    property dwHeadersLength : UInt32
+    property dwHeadersTotal : UInt32
+    property lpvBuffer : Void*
+    property dwBufferLength : UInt32
+    property dwBufferTotal : UInt32
+    property dwOffsetLow : UInt32
+    property dwOffsetHigh : UInt32
+    def initialize(@dwStructSize : UInt32, @next__ : Win32cr::Networking::WinInet::INTERNET_BUFFERSW*, @lpcszHeader : Win32cr::Foundation::PWSTR, @dwHeadersLength : UInt32, @dwHeadersTotal : UInt32, @lpvBuffer : Void*, @dwBufferLength : UInt32, @dwBufferTotal : UInt32, @dwOffsetLow : UInt32, @dwOffsetHigh : UInt32)
+    end
+  end
 
   @[Extern]
-  record CookieDecision,
-    dwCookieState : UInt32,
-    fAllowSession : Win32cr::Foundation::BOOL
+  struct IncomingCookieState
+    property cSession : Int32
+    property cPersistent : Int32
+    property cAccepted : Int32
+    property cLeashed : Int32
+    property cDowngraded : Int32
+    property cBlocked : Int32
+    property pszLocation : Win32cr::Foundation::PSTR
+    def initialize(@cSession : Int32, @cPersistent : Int32, @cAccepted : Int32, @cLeashed : Int32, @cDowngraded : Int32, @cBlocked : Int32, @pszLocation : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record GOPHER_FIND_DATAA,
-    display_string : Win32cr::Foundation::CHAR[129],
-    gopher_type : Win32cr::Networking::WinInet::GOPHER_TYPE,
-    size_low : UInt32,
-    size_high : UInt32,
-    last_modification_time : Win32cr::Foundation::FILETIME,
-    locator : Win32cr::Foundation::CHAR[654]
+  struct OutgoingCookieState
+    property cSent : Int32
+    property cSuppressed : Int32
+    property pszLocation : Win32cr::Foundation::PSTR
+    def initialize(@cSent : Int32, @cSuppressed : Int32, @pszLocation : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record GOPHER_FIND_DATAW,
-    display_string : UInt16[129],
-    gopher_type : Win32cr::Networking::WinInet::GOPHER_TYPE,
-    size_low : UInt32,
-    size_high : UInt32,
-    last_modification_time : Win32cr::Foundation::FILETIME,
-    locator : UInt16[654]
+  struct InternetCookieHistory
+    property fAccepted : Win32cr::Foundation::BOOL
+    property fLeashed : Win32cr::Foundation::BOOL
+    property fDowngraded : Win32cr::Foundation::BOOL
+    property fRejected : Win32cr::Foundation::BOOL
+    def initialize(@fAccepted : Win32cr::Foundation::BOOL, @fLeashed : Win32cr::Foundation::BOOL, @fDowngraded : Win32cr::Foundation::BOOL, @fRejected : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record GOPHER_ADMIN_ATTRIBUTE_TYPE,
-    comment : Int8*,
-    email_address : Int8*
+  struct CookieDecision
+    property dwCookieState : UInt32
+    property fAllowSession : Win32cr::Foundation::BOOL
+    def initialize(@dwCookieState : UInt32, @fAllowSession : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record GOPHER_MOD_DATE_ATTRIBUTE_TYPE,
-    date_and_time : Win32cr::Foundation::FILETIME
+  struct GOPHER_FIND_DATAA
+    property display_string : Win32cr::Foundation::CHAR[129]
+    property gopher_type : Win32cr::Networking::WinInet::GOPHER_TYPE
+    property size_low : UInt32
+    property size_high : UInt32
+    property last_modification_time : Win32cr::Foundation::FILETIME
+    property locator : Win32cr::Foundation::CHAR[654]
+    def initialize(@display_string : Win32cr::Foundation::CHAR[129], @gopher_type : Win32cr::Networking::WinInet::GOPHER_TYPE, @size_low : UInt32, @size_high : UInt32, @last_modification_time : Win32cr::Foundation::FILETIME, @locator : Win32cr::Foundation::CHAR[654])
+    end
+  end
 
   @[Extern]
-  record GOPHER_TTL_ATTRIBUTE_TYPE,
-    ttl : UInt32
+  struct GOPHER_FIND_DATAW
+    property display_string : UInt16[129]
+    property gopher_type : Win32cr::Networking::WinInet::GOPHER_TYPE
+    property size_low : UInt32
+    property size_high : UInt32
+    property last_modification_time : Win32cr::Foundation::FILETIME
+    property locator : UInt16[654]
+    def initialize(@display_string : UInt16[129], @gopher_type : Win32cr::Networking::WinInet::GOPHER_TYPE, @size_low : UInt32, @size_high : UInt32, @last_modification_time : Win32cr::Foundation::FILETIME, @locator : UInt16[654])
+    end
+  end
 
   @[Extern]
-  record GOPHER_SCORE_ATTRIBUTE_TYPE,
-    score : Int32
+  struct GOPHER_ADMIN_ATTRIBUTE_TYPE
+    property comment : Int8*
+    property email_address : Int8*
+    def initialize(@comment : Int8*, @email_address : Int8*)
+    end
+  end
 
   @[Extern]
-  record GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE,
-    lower_bound : Int32,
-    upper_bound : Int32
+  struct GOPHER_MOD_DATE_ATTRIBUTE_TYPE
+    property date_and_time : Win32cr::Foundation::FILETIME
+    def initialize(@date_and_time : Win32cr::Foundation::FILETIME)
+    end
+  end
 
   @[Extern]
-  record GOPHER_SITE_ATTRIBUTE_TYPE,
-    site : Int8*
+  struct GOPHER_TTL_ATTRIBUTE_TYPE
+    property ttl : UInt32
+    def initialize(@ttl : UInt32)
+    end
+  end
 
   @[Extern]
-  record GOPHER_ORGANIZATION_ATTRIBUTE_TYPE,
-    organization : Int8*
+  struct GOPHER_SCORE_ATTRIBUTE_TYPE
+    property score : Int32
+    def initialize(@score : Int32)
+    end
+  end
 
   @[Extern]
-  record GOPHER_LOCATION_ATTRIBUTE_TYPE,
-    location : Int8*
+  struct GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE
+    property lower_bound : Int32
+    property upper_bound : Int32
+    def initialize(@lower_bound : Int32, @upper_bound : Int32)
+    end
+  end
 
   @[Extern]
-  record GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE,
-    degrees_north : Int32,
-    minutes_north : Int32,
-    seconds_north : Int32,
-    degrees_east : Int32,
-    minutes_east : Int32,
-    seconds_east : Int32
+  struct GOPHER_SITE_ATTRIBUTE_TYPE
+    property site : Int8*
+    def initialize(@site : Int8*)
+    end
+  end
 
   @[Extern]
-  record GOPHER_TIMEZONE_ATTRIBUTE_TYPE,
-    zone : Int32
+  struct GOPHER_ORGANIZATION_ATTRIBUTE_TYPE
+    property organization : Int8*
+    def initialize(@organization : Int8*)
+    end
+  end
 
   @[Extern]
-  record GOPHER_PROVIDER_ATTRIBUTE_TYPE,
-    provider : Int8*
+  struct GOPHER_LOCATION_ATTRIBUTE_TYPE
+    property location : Int8*
+    def initialize(@location : Int8*)
+    end
+  end
 
   @[Extern]
-  record GOPHER_VERSION_ATTRIBUTE_TYPE,
-    version : Int8*
+  struct GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE
+    property degrees_north : Int32
+    property minutes_north : Int32
+    property seconds_north : Int32
+    property degrees_east : Int32
+    property minutes_east : Int32
+    property seconds_east : Int32
+    def initialize(@degrees_north : Int32, @minutes_north : Int32, @seconds_north : Int32, @degrees_east : Int32, @minutes_east : Int32, @seconds_east : Int32)
+    end
+  end
 
   @[Extern]
-  record GOPHER_ABSTRACT_ATTRIBUTE_TYPE,
-    short_abstract : Int8*,
-    abstract_file : Int8*
+  struct GOPHER_TIMEZONE_ATTRIBUTE_TYPE
+    property zone : Int32
+    def initialize(@zone : Int32)
+    end
+  end
 
   @[Extern]
-  record GOPHER_VIEW_ATTRIBUTE_TYPE,
-    content_type : Int8*,
-    language : Int8*,
-    size : UInt32
+  struct GOPHER_PROVIDER_ATTRIBUTE_TYPE
+    property provider : Int8*
+    def initialize(@provider : Int8*)
+    end
+  end
 
   @[Extern]
-  record GOPHER_VERONICA_ATTRIBUTE_TYPE,
-    tree_walk : Win32cr::Foundation::BOOL
+  struct GOPHER_VERSION_ATTRIBUTE_TYPE
+    property version : Int8*
+    def initialize(@version : Int8*)
+    end
+  end
 
   @[Extern]
-  record GOPHER_ASK_ATTRIBUTE_TYPE,
-    question_type : Int8*,
-    question_text : Int8*
+  struct GOPHER_ABSTRACT_ATTRIBUTE_TYPE
+    property short_abstract : Int8*
+    property abstract_file : Int8*
+    def initialize(@short_abstract : Int8*, @abstract_file : Int8*)
+    end
+  end
 
   @[Extern]
-  record GOPHER_UNKNOWN_ATTRIBUTE_TYPE,
-    text : Int8*
+  struct GOPHER_VIEW_ATTRIBUTE_TYPE
+    property content_type : Int8*
+    property language : Int8*
+    property size : UInt32
+    def initialize(@content_type : Int8*, @language : Int8*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record GOPHER_ATTRIBUTE_TYPE,
-    category_id : UInt32,
-    attribute_id : UInt32,
-    attribute_type : AttributeType_e__Union_ do
+  struct GOPHER_VERONICA_ATTRIBUTE_TYPE
+    property tree_walk : Win32cr::Foundation::BOOL
+    def initialize(@tree_walk : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct GOPHER_ASK_ATTRIBUTE_TYPE
+    property question_type : Int8*
+    property question_text : Int8*
+    def initialize(@question_type : Int8*, @question_text : Int8*)
+    end
+  end
+
+  @[Extern]
+  struct GOPHER_UNKNOWN_ATTRIBUTE_TYPE
+    property text : Int8*
+    def initialize(@text : Int8*)
+    end
+  end
+
+  @[Extern]
+  struct GOPHER_ATTRIBUTE_TYPE
+    property category_id : UInt32
+    property attribute_id : UInt32
+    property attribute_type : AttributeType_e__Union_
 
     # Nested Type AttributeType_e__Union_
     @[Extern(union: true)]
-    record AttributeType_e__Union_,
-      admin : Win32cr::Networking::WinInet::GOPHER_ADMIN_ATTRIBUTE_TYPE,
-      mod_date : Win32cr::Networking::WinInet::GOPHER_MOD_DATE_ATTRIBUTE_TYPE,
-      ttl : Win32cr::Networking::WinInet::GOPHER_TTL_ATTRIBUTE_TYPE,
-      score : Win32cr::Networking::WinInet::GOPHER_SCORE_ATTRIBUTE_TYPE,
-      score_range : Win32cr::Networking::WinInet::GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE,
-      site : Win32cr::Networking::WinInet::GOPHER_SITE_ATTRIBUTE_TYPE,
-      organization : Win32cr::Networking::WinInet::GOPHER_ORGANIZATION_ATTRIBUTE_TYPE,
-      location : Win32cr::Networking::WinInet::GOPHER_LOCATION_ATTRIBUTE_TYPE,
-      geographical_location : Win32cr::Networking::WinInet::GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE,
-      time_zone : Win32cr::Networking::WinInet::GOPHER_TIMEZONE_ATTRIBUTE_TYPE,
-      provider : Win32cr::Networking::WinInet::GOPHER_PROVIDER_ATTRIBUTE_TYPE,
-      version : Win32cr::Networking::WinInet::GOPHER_VERSION_ATTRIBUTE_TYPE,
-      abstract__ : Win32cr::Networking::WinInet::GOPHER_ABSTRACT_ATTRIBUTE_TYPE,
-      view : Win32cr::Networking::WinInet::GOPHER_VIEW_ATTRIBUTE_TYPE,
-      veronica : Win32cr::Networking::WinInet::GOPHER_VERONICA_ATTRIBUTE_TYPE,
-      ask : Win32cr::Networking::WinInet::GOPHER_ASK_ATTRIBUTE_TYPE,
-      unknown : Win32cr::Networking::WinInet::GOPHER_UNKNOWN_ATTRIBUTE_TYPE
+    struct AttributeType_e__Union_
+    property admin : Win32cr::Networking::WinInet::GOPHER_ADMIN_ATTRIBUTE_TYPE
+    property mod_date : Win32cr::Networking::WinInet::GOPHER_MOD_DATE_ATTRIBUTE_TYPE
+    property ttl : Win32cr::Networking::WinInet::GOPHER_TTL_ATTRIBUTE_TYPE
+    property score : Win32cr::Networking::WinInet::GOPHER_SCORE_ATTRIBUTE_TYPE
+    property score_range : Win32cr::Networking::WinInet::GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE
+    property site : Win32cr::Networking::WinInet::GOPHER_SITE_ATTRIBUTE_TYPE
+    property organization : Win32cr::Networking::WinInet::GOPHER_ORGANIZATION_ATTRIBUTE_TYPE
+    property location : Win32cr::Networking::WinInet::GOPHER_LOCATION_ATTRIBUTE_TYPE
+    property geographical_location : Win32cr::Networking::WinInet::GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE
+    property time_zone : Win32cr::Networking::WinInet::GOPHER_TIMEZONE_ATTRIBUTE_TYPE
+    property provider : Win32cr::Networking::WinInet::GOPHER_PROVIDER_ATTRIBUTE_TYPE
+    property version : Win32cr::Networking::WinInet::GOPHER_VERSION_ATTRIBUTE_TYPE
+    property abstract__ : Win32cr::Networking::WinInet::GOPHER_ABSTRACT_ATTRIBUTE_TYPE
+    property view : Win32cr::Networking::WinInet::GOPHER_VIEW_ATTRIBUTE_TYPE
+    property veronica : Win32cr::Networking::WinInet::GOPHER_VERONICA_ATTRIBUTE_TYPE
+    property ask : Win32cr::Networking::WinInet::GOPHER_ASK_ATTRIBUTE_TYPE
+    property unknown : Win32cr::Networking::WinInet::GOPHER_UNKNOWN_ATTRIBUTE_TYPE
+    def initialize(@admin : Win32cr::Networking::WinInet::GOPHER_ADMIN_ATTRIBUTE_TYPE, @mod_date : Win32cr::Networking::WinInet::GOPHER_MOD_DATE_ATTRIBUTE_TYPE, @ttl : Win32cr::Networking::WinInet::GOPHER_TTL_ATTRIBUTE_TYPE, @score : Win32cr::Networking::WinInet::GOPHER_SCORE_ATTRIBUTE_TYPE, @score_range : Win32cr::Networking::WinInet::GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE, @site : Win32cr::Networking::WinInet::GOPHER_SITE_ATTRIBUTE_TYPE, @organization : Win32cr::Networking::WinInet::GOPHER_ORGANIZATION_ATTRIBUTE_TYPE, @location : Win32cr::Networking::WinInet::GOPHER_LOCATION_ATTRIBUTE_TYPE, @geographical_location : Win32cr::Networking::WinInet::GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE, @time_zone : Win32cr::Networking::WinInet::GOPHER_TIMEZONE_ATTRIBUTE_TYPE, @provider : Win32cr::Networking::WinInet::GOPHER_PROVIDER_ATTRIBUTE_TYPE, @version : Win32cr::Networking::WinInet::GOPHER_VERSION_ATTRIBUTE_TYPE, @abstract__ : Win32cr::Networking::WinInet::GOPHER_ABSTRACT_ATTRIBUTE_TYPE, @view : Win32cr::Networking::WinInet::GOPHER_VIEW_ATTRIBUTE_TYPE, @veronica : Win32cr::Networking::WinInet::GOPHER_VERONICA_ATTRIBUTE_TYPE, @ask : Win32cr::Networking::WinInet::GOPHER_ASK_ATTRIBUTE_TYPE, @unknown : Win32cr::Networking::WinInet::GOPHER_UNKNOWN_ATTRIBUTE_TYPE)
+    end
+    end
 
+    def initialize(@category_id : UInt32, @attribute_id : UInt32, @attribute_type : AttributeType_e__Union_)
+    end
   end
 
   @[Extern]
-  record INTERNET_COOKIE2,
-    pwszName : Win32cr::Foundation::PWSTR,
-    pwszValue : Win32cr::Foundation::PWSTR,
-    pwszDomain : Win32cr::Foundation::PWSTR,
-    pwszPath : Win32cr::Foundation::PWSTR,
-    dwFlags : UInt32,
-    ftExpires : Win32cr::Foundation::FILETIME,
-    fExpiresSet : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record INTERNET_AUTH_NOTIFY_DATA,
-    cbStruct : UInt32,
-    dwOptions : UInt32,
-    pfnNotify : Win32cr::Networking::WinInet::PFN_AUTH_NOTIFY,
-    dwContext : LibC::UIntPtrT
-
-  @[Extern]
-  record INTERNET_CACHE_ENTRY_INFOA,
-    dwStructSize : UInt32,
-    lpszSourceUrlName : Win32cr::Foundation::PSTR,
-    lpszLocalFileName : Win32cr::Foundation::PSTR,
-    cache_entry_type : UInt32,
-    dwUseCount : UInt32,
-    dwHitRate : UInt32,
-    dwSizeLow : UInt32,
-    dwSizeHigh : UInt32,
-    last_modified_time : Win32cr::Foundation::FILETIME,
-    expire_time : Win32cr::Foundation::FILETIME,
-    last_access_time : Win32cr::Foundation::FILETIME,
-    last_sync_time : Win32cr::Foundation::FILETIME,
-    lpHeaderInfo : Win32cr::Foundation::PSTR,
-    dwHeaderInfoSize : UInt32,
-    lpszFileExtension : Win32cr::Foundation::PSTR,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwReserved : UInt32,
-      dwExemptDelta : UInt32
-
+  struct INTERNET_COOKIE2
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pwszValue : Win32cr::Foundation::PWSTR
+    property pwszDomain : Win32cr::Foundation::PWSTR
+    property pwszPath : Win32cr::Foundation::PWSTR
+    property dwFlags : UInt32
+    property ftExpires : Win32cr::Foundation::FILETIME
+    property fExpiresSet : Win32cr::Foundation::BOOL
+    def initialize(@pwszName : Win32cr::Foundation::PWSTR, @pwszValue : Win32cr::Foundation::PWSTR, @pwszDomain : Win32cr::Foundation::PWSTR, @pwszPath : Win32cr::Foundation::PWSTR, @dwFlags : UInt32, @ftExpires : Win32cr::Foundation::FILETIME, @fExpiresSet : Win32cr::Foundation::BOOL)
+    end
   end
 
   @[Extern]
-  record INTERNET_CACHE_ENTRY_INFOW,
-    dwStructSize : UInt32,
-    lpszSourceUrlName : Win32cr::Foundation::PWSTR,
-    lpszLocalFileName : Win32cr::Foundation::PWSTR,
-    cache_entry_type : UInt32,
-    dwUseCount : UInt32,
-    dwHitRate : UInt32,
-    dwSizeLow : UInt32,
-    dwSizeHigh : UInt32,
-    last_modified_time : Win32cr::Foundation::FILETIME,
-    expire_time : Win32cr::Foundation::FILETIME,
-    last_access_time : Win32cr::Foundation::FILETIME,
-    last_sync_time : Win32cr::Foundation::FILETIME,
-    lpHeaderInfo : Win32cr::Foundation::PWSTR,
-    dwHeaderInfoSize : UInt32,
-    lpszFileExtension : Win32cr::Foundation::PWSTR,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwReserved : UInt32,
-      dwExemptDelta : UInt32
-
+  struct INTERNET_AUTH_NOTIFY_DATA
+    property cbStruct : UInt32
+    property dwOptions : UInt32
+    property pfnNotify : Win32cr::Networking::WinInet::PFN_AUTH_NOTIFY
+    property dwContext : LibC::UIntPtrT
+    def initialize(@cbStruct : UInt32, @dwOptions : UInt32, @pfnNotify : Win32cr::Networking::WinInet::PFN_AUTH_NOTIFY, @dwContext : LibC::UIntPtrT)
+    end
   end
 
   @[Extern]
-  record INTERNET_CACHE_TIMESTAMPS,
-    ftExpires : Win32cr::Foundation::FILETIME,
-    ftLastModified : Win32cr::Foundation::FILETIME
-
-  @[Extern]
-  record INTERNET_CACHE_GROUP_INFOA,
-    dwGroupSize : UInt32,
-    dwGroupFlags : UInt32,
-    dwGroupType : UInt32,
-    dwDiskUsage : UInt32,
-    dwDiskQuota : UInt32,
-    dwOwnerStorage : UInt32[4],
-    szGroupName : Win32cr::Foundation::CHAR[120]
-
-  @[Extern]
-  record INTERNET_CACHE_GROUP_INFOW,
-    dwGroupSize : UInt32,
-    dwGroupFlags : UInt32,
-    dwGroupType : UInt32,
-    dwDiskUsage : UInt32,
-    dwDiskQuota : UInt32,
-    dwOwnerStorage : UInt32[4],
-    szGroupName : UInt16[120]
-
-  @[Extern]
-  record AutoProxyHelperVtbl,
-    is_resolvable : LibC::IntPtrT,
-    get_ip_address : LibC::IntPtrT,
-    resolve_host_name : LibC::IntPtrT,
-    is_in_net : LibC::IntPtrT,
-    is_resolvable_ex : LibC::IntPtrT,
-    get_ip_address_ex : LibC::IntPtrT,
-    resolve_host_name_ex : LibC::IntPtrT,
-    is_in_net_ex : LibC::IntPtrT,
-    sort_ip_list : LibC::IntPtrT
-
-  @[Extern]
-  record AUTO_PROXY_SCRIPT_BUFFER,
-    dwStructSize : UInt32,
-    lpszScriptBuffer : Win32cr::Foundation::PSTR,
-    dwScriptBufferSize : UInt32
-
-  @[Extern]
-  record AutoProxyHelperFunctions,
-    lpVtbl : Win32cr::Networking::WinInet::AutoProxyHelperVtbl*
-
-  @[Extern]
-  record INTERNET_PREFETCH_STATUS,
-    dwStatus : UInt32,
-    dwSize : UInt32
-
-  @[Extern]
-  record INTERNET_SECURITY_INFO,
-    dwSize : UInt32,
-    pCertificate : Win32cr::Security::Cryptography::CERT_CONTEXT*,
-    pcCertChain : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*,
-    connectionInfo : Win32cr::Security::Authentication::Identity::SecPkgContext_ConnectionInfo,
-    cipherInfo : Win32cr::Security::Authentication::Identity::SecPkgContext_CipherInfo,
-    pcUnverifiedCertChain : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*,
-    channelBindingToken : Win32cr::Security::Authentication::Identity::SecPkgContext_Bindings
-
-  @[Extern]
-  record INTERNET_SECURITY_CONNECTION_INFO,
-    dwSize : UInt32,
-    fSecure : Win32cr::Foundation::BOOL,
-    connectionInfo : Win32cr::Security::Authentication::Identity::SecPkgContext_ConnectionInfo,
-    cipherInfo : Win32cr::Security::Authentication::Identity::SecPkgContext_CipherInfo
-
-  @[Extern]
-  record INTERNET_DOWNLOAD_MODE_HANDLE,
-    pcwszFileName : Win32cr::Foundation::PWSTR,
-    phFile : Win32cr::Foundation::HANDLE*
-
-  @[Extern]
-  record HTTP_REQUEST_TIMES,
-    cTimes : UInt32,
-    rgTimes : UInt64[32]
-
-  @[Extern]
-  record INTERNET_SERVER_CONNECTION_STATE,
-    lpcwszHostName : Win32cr::Foundation::PWSTR,
-    fProxy : Win32cr::Foundation::BOOL,
-    dwCounter : UInt32,
-    dwConnectionLimit : UInt32,
-    dwAvailableCreates : UInt32,
-    dwAvailableKeepAlives : UInt32,
-    dwActiveConnections : UInt32,
-    dwWaiters : UInt32
-
-  @[Extern]
-  record INTERNET_END_BROWSER_SESSION_DATA,
-    lpBuffer : Void*,
-    dwBufferLength : UInt32
-
-  @[Extern]
-  record INTERNET_CALLBACK_COOKIE,
-    pcwszName : Win32cr::Foundation::PWSTR,
-    pcwszValue : Win32cr::Foundation::PWSTR,
-    pcwszDomain : Win32cr::Foundation::PWSTR,
-    pcwszPath : Win32cr::Foundation::PWSTR,
-    ftExpires : Win32cr::Foundation::FILETIME,
-    dwFlags : UInt32
-
-  @[Extern]
-  record INTERNET_CREDENTIALS,
-    lpcwszHostName : Win32cr::Foundation::PWSTR,
-    dwPort : UInt32,
-    dwScheme : UInt32,
-    lpcwszUrl : Win32cr::Foundation::PWSTR,
-    lpcwszRealm : Win32cr::Foundation::PWSTR,
-    fAuthIdentity : Win32cr::Foundation::BOOL,
-    anonymous : Anonymous_e__Union_ do
+  struct INTERNET_CACHE_ENTRY_INFOA
+    property dwStructSize : UInt32
+    property lpszSourceUrlName : Win32cr::Foundation::PSTR
+    property lpszLocalFileName : Win32cr::Foundation::PSTR
+    property cache_entry_type : UInt32
+    property dwUseCount : UInt32
+    property dwHitRate : UInt32
+    property dwSizeLow : UInt32
+    property dwSizeHigh : UInt32
+    property last_modified_time : Win32cr::Foundation::FILETIME
+    property expire_time : Win32cr::Foundation::FILETIME
+    property last_access_time : Win32cr::Foundation::FILETIME
+    property last_sync_time : Win32cr::Foundation::FILETIME
+    property lpHeaderInfo : Win32cr::Foundation::PSTR
+    property dwHeaderInfoSize : UInt32
+    property lpszFileExtension : Win32cr::Foundation::PSTR
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      pAuthIdentityOpaque : Void* do
+    struct Anonymous_e__Union_
+    property dwReserved : UInt32
+    property dwExemptDelta : UInt32
+    def initialize(@dwReserved : UInt32, @dwExemptDelta : UInt32)
+    end
+    end
+
+    def initialize(@dwStructSize : UInt32, @lpszSourceUrlName : Win32cr::Foundation::PSTR, @lpszLocalFileName : Win32cr::Foundation::PSTR, @cache_entry_type : UInt32, @dwUseCount : UInt32, @dwHitRate : UInt32, @dwSizeLow : UInt32, @dwSizeHigh : UInt32, @last_modified_time : Win32cr::Foundation::FILETIME, @expire_time : Win32cr::Foundation::FILETIME, @last_access_time : Win32cr::Foundation::FILETIME, @last_sync_time : Win32cr::Foundation::FILETIME, @lpHeaderInfo : Win32cr::Foundation::PSTR, @dwHeaderInfoSize : UInt32, @lpszFileExtension : Win32cr::Foundation::PSTR, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct INTERNET_CACHE_ENTRY_INFOW
+    property dwStructSize : UInt32
+    property lpszSourceUrlName : Win32cr::Foundation::PWSTR
+    property lpszLocalFileName : Win32cr::Foundation::PWSTR
+    property cache_entry_type : UInt32
+    property dwUseCount : UInt32
+    property dwHitRate : UInt32
+    property dwSizeLow : UInt32
+    property dwSizeHigh : UInt32
+    property last_modified_time : Win32cr::Foundation::FILETIME
+    property expire_time : Win32cr::Foundation::FILETIME
+    property last_access_time : Win32cr::Foundation::FILETIME
+    property last_sync_time : Win32cr::Foundation::FILETIME
+    property lpHeaderInfo : Win32cr::Foundation::PWSTR
+    property dwHeaderInfoSize : UInt32
+    property lpszFileExtension : Win32cr::Foundation::PWSTR
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dwReserved : UInt32
+    property dwExemptDelta : UInt32
+    def initialize(@dwReserved : UInt32, @dwExemptDelta : UInt32)
+    end
+    end
+
+    def initialize(@dwStructSize : UInt32, @lpszSourceUrlName : Win32cr::Foundation::PWSTR, @lpszLocalFileName : Win32cr::Foundation::PWSTR, @cache_entry_type : UInt32, @dwUseCount : UInt32, @dwHitRate : UInt32, @dwSizeLow : UInt32, @dwSizeHigh : UInt32, @last_modified_time : Win32cr::Foundation::FILETIME, @expire_time : Win32cr::Foundation::FILETIME, @last_access_time : Win32cr::Foundation::FILETIME, @last_sync_time : Win32cr::Foundation::FILETIME, @lpHeaderInfo : Win32cr::Foundation::PWSTR, @dwHeaderInfoSize : UInt32, @lpszFileExtension : Win32cr::Foundation::PWSTR, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct INTERNET_CACHE_TIMESTAMPS
+    property ftExpires : Win32cr::Foundation::FILETIME
+    property ftLastModified : Win32cr::Foundation::FILETIME
+    def initialize(@ftExpires : Win32cr::Foundation::FILETIME, @ftLastModified : Win32cr::Foundation::FILETIME)
+    end
+  end
+
+  @[Extern]
+  struct INTERNET_CACHE_GROUP_INFOA
+    property dwGroupSize : UInt32
+    property dwGroupFlags : UInt32
+    property dwGroupType : UInt32
+    property dwDiskUsage : UInt32
+    property dwDiskQuota : UInt32
+    property dwOwnerStorage : UInt32[4]
+    property szGroupName : Win32cr::Foundation::CHAR[120]
+    def initialize(@dwGroupSize : UInt32, @dwGroupFlags : UInt32, @dwGroupType : UInt32, @dwDiskUsage : UInt32, @dwDiskQuota : UInt32, @dwOwnerStorage : UInt32[4], @szGroupName : Win32cr::Foundation::CHAR[120])
+    end
+  end
+
+  @[Extern]
+  struct INTERNET_CACHE_GROUP_INFOW
+    property dwGroupSize : UInt32
+    property dwGroupFlags : UInt32
+    property dwGroupType : UInt32
+    property dwDiskUsage : UInt32
+    property dwDiskQuota : UInt32
+    property dwOwnerStorage : UInt32[4]
+    property szGroupName : UInt16[120]
+    def initialize(@dwGroupSize : UInt32, @dwGroupFlags : UInt32, @dwGroupType : UInt32, @dwDiskUsage : UInt32, @dwDiskQuota : UInt32, @dwOwnerStorage : UInt32[4], @szGroupName : UInt16[120])
+    end
+  end
+
+  @[Extern]
+  struct AutoProxyHelperVtbl
+    property is_resolvable : LibC::IntPtrT
+    property get_ip_address : LibC::IntPtrT
+    property resolve_host_name : LibC::IntPtrT
+    property is_in_net : LibC::IntPtrT
+    property is_resolvable_ex : LibC::IntPtrT
+    property get_ip_address_ex : LibC::IntPtrT
+    property resolve_host_name_ex : LibC::IntPtrT
+    property is_in_net_ex : LibC::IntPtrT
+    property sort_ip_list : LibC::IntPtrT
+    def initialize(@is_resolvable : LibC::IntPtrT, @get_ip_address : LibC::IntPtrT, @resolve_host_name : LibC::IntPtrT, @is_in_net : LibC::IntPtrT, @is_resolvable_ex : LibC::IntPtrT, @get_ip_address_ex : LibC::IntPtrT, @resolve_host_name_ex : LibC::IntPtrT, @is_in_net_ex : LibC::IntPtrT, @sort_ip_list : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct AUTO_PROXY_SCRIPT_BUFFER
+    property dwStructSize : UInt32
+    property lpszScriptBuffer : Win32cr::Foundation::PSTR
+    property dwScriptBufferSize : UInt32
+    def initialize(@dwStructSize : UInt32, @lpszScriptBuffer : Win32cr::Foundation::PSTR, @dwScriptBufferSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AutoProxyHelperFunctions
+    property lpVtbl : Win32cr::Networking::WinInet::AutoProxyHelperVtbl*
+    def initialize(@lpVtbl : Win32cr::Networking::WinInet::AutoProxyHelperVtbl*)
+    end
+  end
+
+  @[Extern]
+  struct INTERNET_PREFETCH_STATUS
+    property dwStatus : UInt32
+    property dwSize : UInt32
+    def initialize(@dwStatus : UInt32, @dwSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct INTERNET_SECURITY_INFO
+    property dwSize : UInt32
+    property pCertificate : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    property pcCertChain : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
+    property connectionInfo : Win32cr::Security::Authentication::Identity::SecPkgContext_ConnectionInfo
+    property cipherInfo : Win32cr::Security::Authentication::Identity::SecPkgContext_CipherInfo
+    property pcUnverifiedCertChain : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
+    property channelBindingToken : Win32cr::Security::Authentication::Identity::SecPkgContext_Bindings
+    def initialize(@dwSize : UInt32, @pCertificate : Win32cr::Security::Cryptography::CERT_CONTEXT*, @pcCertChain : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, @connectionInfo : Win32cr::Security::Authentication::Identity::SecPkgContext_ConnectionInfo, @cipherInfo : Win32cr::Security::Authentication::Identity::SecPkgContext_CipherInfo, @pcUnverifiedCertChain : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, @channelBindingToken : Win32cr::Security::Authentication::Identity::SecPkgContext_Bindings)
+    end
+  end
+
+  @[Extern]
+  struct INTERNET_SECURITY_CONNECTION_INFO
+    property dwSize : UInt32
+    property fSecure : Win32cr::Foundation::BOOL
+    property connectionInfo : Win32cr::Security::Authentication::Identity::SecPkgContext_ConnectionInfo
+    property cipherInfo : Win32cr::Security::Authentication::Identity::SecPkgContext_CipherInfo
+    def initialize(@dwSize : UInt32, @fSecure : Win32cr::Foundation::BOOL, @connectionInfo : Win32cr::Security::Authentication::Identity::SecPkgContext_ConnectionInfo, @cipherInfo : Win32cr::Security::Authentication::Identity::SecPkgContext_CipherInfo)
+    end
+  end
+
+  @[Extern]
+  struct INTERNET_DOWNLOAD_MODE_HANDLE
+    property pcwszFileName : Win32cr::Foundation::PWSTR
+    property phFile : Win32cr::Foundation::HANDLE*
+    def initialize(@pcwszFileName : Win32cr::Foundation::PWSTR, @phFile : Win32cr::Foundation::HANDLE*)
+    end
+  end
+
+  @[Extern]
+  struct HTTP_REQUEST_TIMES
+    property cTimes : UInt32
+    property rgTimes : UInt64[32]
+    def initialize(@cTimes : UInt32, @rgTimes : UInt64[32])
+    end
+  end
+
+  @[Extern]
+  struct INTERNET_SERVER_CONNECTION_STATE
+    property lpcwszHostName : Win32cr::Foundation::PWSTR
+    property fProxy : Win32cr::Foundation::BOOL
+    property dwCounter : UInt32
+    property dwConnectionLimit : UInt32
+    property dwAvailableCreates : UInt32
+    property dwAvailableKeepAlives : UInt32
+    property dwActiveConnections : UInt32
+    property dwWaiters : UInt32
+    def initialize(@lpcwszHostName : Win32cr::Foundation::PWSTR, @fProxy : Win32cr::Foundation::BOOL, @dwCounter : UInt32, @dwConnectionLimit : UInt32, @dwAvailableCreates : UInt32, @dwAvailableKeepAlives : UInt32, @dwActiveConnections : UInt32, @dwWaiters : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct INTERNET_END_BROWSER_SESSION_DATA
+    property lpBuffer : Void*
+    property dwBufferLength : UInt32
+    def initialize(@lpBuffer : Void*, @dwBufferLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct INTERNET_CALLBACK_COOKIE
+    property pcwszName : Win32cr::Foundation::PWSTR
+    property pcwszValue : Win32cr::Foundation::PWSTR
+    property pcwszDomain : Win32cr::Foundation::PWSTR
+    property pcwszPath : Win32cr::Foundation::PWSTR
+    property ftExpires : Win32cr::Foundation::FILETIME
+    property dwFlags : UInt32
+    def initialize(@pcwszName : Win32cr::Foundation::PWSTR, @pcwszValue : Win32cr::Foundation::PWSTR, @pcwszDomain : Win32cr::Foundation::PWSTR, @pcwszPath : Win32cr::Foundation::PWSTR, @ftExpires : Win32cr::Foundation::FILETIME, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct INTERNET_CREDENTIALS
+    property lpcwszHostName : Win32cr::Foundation::PWSTR
+    property dwPort : UInt32
+    property dwScheme : UInt32
+    property lpcwszUrl : Win32cr::Foundation::PWSTR
+    property lpcwszRealm : Win32cr::Foundation::PWSTR
+    property fAuthIdentity : Win32cr::Foundation::BOOL
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property pAuthIdentityOpaque : Void*
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        lpcwszUserName : Win32cr::Foundation::PWSTR,
-        lpcwszPassword : Win32cr::Foundation::PWSTR
+      struct Anonymous_e__Struct_
+    property lpcwszUserName : Win32cr::Foundation::PWSTR
+    property lpcwszPassword : Win32cr::Foundation::PWSTR
+    def initialize(@lpcwszUserName : Win32cr::Foundation::PWSTR, @lpcwszPassword : Win32cr::Foundation::PWSTR)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @pAuthIdentityOpaque : Void*)
+    end
     end
 
+    def initialize(@lpcwszHostName : Win32cr::Foundation::PWSTR, @dwPort : UInt32, @dwScheme : UInt32, @lpcwszUrl : Win32cr::Foundation::PWSTR, @lpcwszRealm : Win32cr::Foundation::PWSTR, @fAuthIdentity : Win32cr::Foundation::BOOL, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record HTTP_PUSH_TRANSPORT_SETTING,
-    transport_setting_id : LibC::GUID,
-    broker_event_id : LibC::GUID
+  struct HTTP_PUSH_TRANSPORT_SETTING
+    property transport_setting_id : LibC::GUID
+    property broker_event_id : LibC::GUID
+    def initialize(@transport_setting_id : LibC::GUID, @broker_event_id : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record HTTP_PUSH_NOTIFICATION_STATUS,
-    channel_status_valid : Win32cr::Foundation::BOOL,
-    channel_status : UInt32
+  struct HTTP_PUSH_NOTIFICATION_STATUS
+    property channel_status_valid : Win32cr::Foundation::BOOL
+    property channel_status : UInt32
+    def initialize(@channel_status_valid : Win32cr::Foundation::BOOL, @channel_status : UInt32)
+    end
+  end
 
   @[Extern]
-  record INTERNET_COOKIE,
-    cbSize : UInt32,
-    pszName : Win32cr::Foundation::PSTR,
-    pszData : Win32cr::Foundation::PSTR,
-    pszDomain : Win32cr::Foundation::PSTR,
-    pszPath : Win32cr::Foundation::PSTR,
-    pftExpires : Win32cr::Foundation::FILETIME*,
-    dwFlags : UInt32,
-    pszUrl : Win32cr::Foundation::PSTR,
-    pszP3PPolicy : Win32cr::Foundation::PSTR
+  struct INTERNET_COOKIE
+    property cbSize : UInt32
+    property pszName : Win32cr::Foundation::PSTR
+    property pszData : Win32cr::Foundation::PSTR
+    property pszDomain : Win32cr::Foundation::PSTR
+    property pszPath : Win32cr::Foundation::PSTR
+    property pftExpires : Win32cr::Foundation::FILETIME*
+    property dwFlags : UInt32
+    property pszUrl : Win32cr::Foundation::PSTR
+    property pszP3PPolicy : Win32cr::Foundation::PSTR
+    def initialize(@cbSize : UInt32, @pszName : Win32cr::Foundation::PSTR, @pszData : Win32cr::Foundation::PSTR, @pszDomain : Win32cr::Foundation::PSTR, @pszPath : Win32cr::Foundation::PSTR, @pftExpires : Win32cr::Foundation::FILETIME*, @dwFlags : UInt32, @pszUrl : Win32cr::Foundation::PSTR, @pszP3PPolicy : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record COOKIE_DLG_INFO,
-    pszServer : Win32cr::Foundation::PWSTR,
-    pic : Win32cr::Networking::WinInet::INTERNET_COOKIE*,
-    dwStopWarning : UInt32,
-    cx : Int32,
-    cy : Int32,
-    pszHeader : Win32cr::Foundation::PWSTR,
-    dwOperation : UInt32
+  struct COOKIE_DLG_INFO
+    property pszServer : Win32cr::Foundation::PWSTR
+    property pic : Win32cr::Networking::WinInet::INTERNET_COOKIE*
+    property dwStopWarning : UInt32
+    property cx : Int32
+    property cy : Int32
+    property pszHeader : Win32cr::Foundation::PWSTR
+    property dwOperation : UInt32
+    def initialize(@pszServer : Win32cr::Foundation::PWSTR, @pic : Win32cr::Networking::WinInet::INTERNET_COOKIE*, @dwStopWarning : UInt32, @cx : Int32, @cy : Int32, @pszHeader : Win32cr::Foundation::PWSTR, @dwOperation : UInt32)
+    end
+  end
 
   @[Extern]
-  record INTERNET_CACHE_CONFIG_PATH_ENTRYA,
-    cache_path : Win32cr::Foundation::CHAR[260],
-    dwCacheSize : UInt32
+  struct INTERNET_CACHE_CONFIG_PATH_ENTRYA
+    property cache_path : Win32cr::Foundation::CHAR[260]
+    property dwCacheSize : UInt32
+    def initialize(@cache_path : Win32cr::Foundation::CHAR[260], @dwCacheSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record INTERNET_CACHE_CONFIG_PATH_ENTRYW,
-    cache_path : UInt16[260],
-    dwCacheSize : UInt32
+  struct INTERNET_CACHE_CONFIG_PATH_ENTRYW
+    property cache_path : UInt16[260]
+    property dwCacheSize : UInt32
+    def initialize(@cache_path : UInt16[260], @dwCacheSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record INTERNET_CACHE_CONFIG_INFOA,
-    dwStructSize : UInt32,
-    dwContainer : UInt32,
-    dwQuota : UInt32,
-    dwReserved4 : UInt32,
-    fPerUser : Win32cr::Foundation::BOOL,
-    dwSyncMode : UInt32,
-    dwNumCachePaths : UInt32,
-    anonymous : Anonymous_e__Union_,
-    dwNormalUsage : UInt32,
-    dwExemptUsage : UInt32 do
+  struct INTERNET_CACHE_CONFIG_INFOA
+    property dwStructSize : UInt32
+    property dwContainer : UInt32
+    property dwQuota : UInt32
+    property dwReserved4 : UInt32
+    property fPerUser : Win32cr::Foundation::BOOL
+    property dwSyncMode : UInt32
+    property dwNumCachePaths : UInt32
+    property anonymous : Anonymous_e__Union_
+    property dwNormalUsage : UInt32
+    property dwExemptUsage : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      cache_paths : Win32cr::Networking::WinInet::INTERNET_CACHE_CONFIG_PATH_ENTRYA* do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property cache_paths : Win32cr::Networking::WinInet::INTERNET_CACHE_CONFIG_PATH_ENTRYA*
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        cache_path : Win32cr::Foundation::CHAR[260],
-        dwCacheSize : UInt32
+      struct Anonymous_e__Struct_
+    property cache_path : Win32cr::Foundation::CHAR[260]
+    property dwCacheSize : UInt32
+    def initialize(@cache_path : Win32cr::Foundation::CHAR[260], @dwCacheSize : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @cache_paths : Win32cr::Networking::WinInet::INTERNET_CACHE_CONFIG_PATH_ENTRYA*)
+    end
     end
 
+    def initialize(@dwStructSize : UInt32, @dwContainer : UInt32, @dwQuota : UInt32, @dwReserved4 : UInt32, @fPerUser : Win32cr::Foundation::BOOL, @dwSyncMode : UInt32, @dwNumCachePaths : UInt32, @anonymous : Anonymous_e__Union_, @dwNormalUsage : UInt32, @dwExemptUsage : UInt32)
+    end
   end
 
   @[Extern]
-  record INTERNET_CACHE_CONFIG_INFOW,
-    dwStructSize : UInt32,
-    dwContainer : UInt32,
-    dwQuota : UInt32,
-    dwReserved4 : UInt32,
-    fPerUser : Win32cr::Foundation::BOOL,
-    dwSyncMode : UInt32,
-    dwNumCachePaths : UInt32,
-    anonymous : Anonymous_e__Union_,
-    dwNormalUsage : UInt32,
-    dwExemptUsage : UInt32 do
+  struct INTERNET_CACHE_CONFIG_INFOW
+    property dwStructSize : UInt32
+    property dwContainer : UInt32
+    property dwQuota : UInt32
+    property dwReserved4 : UInt32
+    property fPerUser : Win32cr::Foundation::BOOL
+    property dwSyncMode : UInt32
+    property dwNumCachePaths : UInt32
+    property anonymous : Anonymous_e__Union_
+    property dwNormalUsage : UInt32
+    property dwExemptUsage : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      cache_paths : Win32cr::Networking::WinInet::INTERNET_CACHE_CONFIG_PATH_ENTRYW* do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property cache_paths : Win32cr::Networking::WinInet::INTERNET_CACHE_CONFIG_PATH_ENTRYW*
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        cache_path : UInt16[260],
-        dwCacheSize : UInt32
+      struct Anonymous_e__Struct_
+    property cache_path : UInt16[260]
+    property dwCacheSize : UInt32
+    def initialize(@cache_path : UInt16[260], @dwCacheSize : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @cache_paths : Win32cr::Networking::WinInet::INTERNET_CACHE_CONFIG_PATH_ENTRYW*)
+    end
     end
 
+    def initialize(@dwStructSize : UInt32, @dwContainer : UInt32, @dwQuota : UInt32, @dwReserved4 : UInt32, @fPerUser : Win32cr::Foundation::BOOL, @dwSyncMode : UInt32, @dwNumCachePaths : UInt32, @anonymous : Anonymous_e__Union_, @dwNormalUsage : UInt32, @dwExemptUsage : UInt32)
+    end
   end
 
   @[Extern]
-  record INTERNET_CACHE_CONTAINER_INFOA,
-    dwCacheVersion : UInt32,
-    lpszName : Win32cr::Foundation::PSTR,
-    lpszCachePrefix : Win32cr::Foundation::PSTR,
-    lpszVolumeLabel : Win32cr::Foundation::PSTR,
-    lpszVolumeTitle : Win32cr::Foundation::PSTR
+  struct INTERNET_CACHE_CONTAINER_INFOA
+    property dwCacheVersion : UInt32
+    property lpszName : Win32cr::Foundation::PSTR
+    property lpszCachePrefix : Win32cr::Foundation::PSTR
+    property lpszVolumeLabel : Win32cr::Foundation::PSTR
+    property lpszVolumeTitle : Win32cr::Foundation::PSTR
+    def initialize(@dwCacheVersion : UInt32, @lpszName : Win32cr::Foundation::PSTR, @lpszCachePrefix : Win32cr::Foundation::PSTR, @lpszVolumeLabel : Win32cr::Foundation::PSTR, @lpszVolumeTitle : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record INTERNET_CACHE_CONTAINER_INFOW,
-    dwCacheVersion : UInt32,
-    lpszName : Win32cr::Foundation::PWSTR,
-    lpszCachePrefix : Win32cr::Foundation::PWSTR,
-    lpszVolumeLabel : Win32cr::Foundation::PWSTR,
-    lpszVolumeTitle : Win32cr::Foundation::PWSTR
+  struct INTERNET_CACHE_CONTAINER_INFOW
+    property dwCacheVersion : UInt32
+    property lpszName : Win32cr::Foundation::PWSTR
+    property lpszCachePrefix : Win32cr::Foundation::PWSTR
+    property lpszVolumeLabel : Win32cr::Foundation::PWSTR
+    property lpszVolumeTitle : Win32cr::Foundation::PWSTR
+    def initialize(@dwCacheVersion : UInt32, @lpszName : Win32cr::Foundation::PWSTR, @lpszCachePrefix : Win32cr::Foundation::PWSTR, @lpszVolumeLabel : Win32cr::Foundation::PWSTR, @lpszVolumeTitle : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record APP_CACHE_DOWNLOAD_ENTRY,
-    pwszUrl : Win32cr::Foundation::PWSTR,
-    dwEntryType : UInt32
+  struct APP_CACHE_DOWNLOAD_ENTRY
+    property pwszUrl : Win32cr::Foundation::PWSTR
+    property dwEntryType : UInt32
+    def initialize(@pwszUrl : Win32cr::Foundation::PWSTR, @dwEntryType : UInt32)
+    end
+  end
 
   @[Extern]
-  record APP_CACHE_DOWNLOAD_LIST,
-    dwEntryCount : UInt32,
-    pEntries : Win32cr::Networking::WinInet::APP_CACHE_DOWNLOAD_ENTRY*
+  struct APP_CACHE_DOWNLOAD_LIST
+    property dwEntryCount : UInt32
+    property pEntries : Win32cr::Networking::WinInet::APP_CACHE_DOWNLOAD_ENTRY*
+    def initialize(@dwEntryCount : UInt32, @pEntries : Win32cr::Networking::WinInet::APP_CACHE_DOWNLOAD_ENTRY*)
+    end
+  end
 
   @[Extern]
-  record APP_CACHE_GROUP_INFO,
-    pwszManifestUrl : Win32cr::Foundation::PWSTR,
-    ftLastAccessTime : Win32cr::Foundation::FILETIME,
-    ullSize : UInt64
+  struct APP_CACHE_GROUP_INFO
+    property pwszManifestUrl : Win32cr::Foundation::PWSTR
+    property ftLastAccessTime : Win32cr::Foundation::FILETIME
+    property ullSize : UInt64
+    def initialize(@pwszManifestUrl : Win32cr::Foundation::PWSTR, @ftLastAccessTime : Win32cr::Foundation::FILETIME, @ullSize : UInt64)
+    end
+  end
 
   @[Extern]
-  record APP_CACHE_GROUP_LIST,
-    dwAppCacheGroupCount : UInt32,
-    pAppCacheGroups : Win32cr::Networking::WinInet::APP_CACHE_GROUP_INFO*
+  struct APP_CACHE_GROUP_LIST
+    property dwAppCacheGroupCount : UInt32
+    property pAppCacheGroups : Win32cr::Networking::WinInet::APP_CACHE_GROUP_INFO*
+    def initialize(@dwAppCacheGroupCount : UInt32, @pAppCacheGroups : Win32cr::Networking::WinInet::APP_CACHE_GROUP_INFO*)
+    end
+  end
 
   @[Extern]
-  record URLCACHE_ENTRY_INFO,
-    pwszSourceUrlName : Win32cr::Foundation::PWSTR,
-    pwszLocalFileName : Win32cr::Foundation::PWSTR,
-    dwCacheEntryType : UInt32,
-    dwUseCount : UInt32,
-    dwHitRate : UInt32,
-    dwSizeLow : UInt32,
-    dwSizeHigh : UInt32,
-    ftLastModifiedTime : Win32cr::Foundation::FILETIME,
-    ftExpireTime : Win32cr::Foundation::FILETIME,
-    ftLastAccessTime : Win32cr::Foundation::FILETIME,
-    ftLastSyncTime : Win32cr::Foundation::FILETIME,
-    pbHeaderInfo : UInt8*,
-    cbHeaderInfoSize : UInt32,
-    pbExtraData : UInt8*,
-    cbExtraDataSize : UInt32
+  struct URLCACHE_ENTRY_INFO
+    property pwszSourceUrlName : Win32cr::Foundation::PWSTR
+    property pwszLocalFileName : Win32cr::Foundation::PWSTR
+    property dwCacheEntryType : UInt32
+    property dwUseCount : UInt32
+    property dwHitRate : UInt32
+    property dwSizeLow : UInt32
+    property dwSizeHigh : UInt32
+    property ftLastModifiedTime : Win32cr::Foundation::FILETIME
+    property ftExpireTime : Win32cr::Foundation::FILETIME
+    property ftLastAccessTime : Win32cr::Foundation::FILETIME
+    property ftLastSyncTime : Win32cr::Foundation::FILETIME
+    property pbHeaderInfo : UInt8*
+    property cbHeaderInfoSize : UInt32
+    property pbExtraData : UInt8*
+    property cbExtraDataSize : UInt32
+    def initialize(@pwszSourceUrlName : Win32cr::Foundation::PWSTR, @pwszLocalFileName : Win32cr::Foundation::PWSTR, @dwCacheEntryType : UInt32, @dwUseCount : UInt32, @dwHitRate : UInt32, @dwSizeLow : UInt32, @dwSizeHigh : UInt32, @ftLastModifiedTime : Win32cr::Foundation::FILETIME, @ftExpireTime : Win32cr::Foundation::FILETIME, @ftLastAccessTime : Win32cr::Foundation::FILETIME, @ftLastSyncTime : Win32cr::Foundation::FILETIME, @pbHeaderInfo : UInt8*, @cbHeaderInfoSize : UInt32, @pbExtraData : UInt8*, @cbExtraDataSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record WININET_PROXY_INFO,
-    fProxy : Win32cr::Foundation::BOOL,
-    fBypass : Win32cr::Foundation::BOOL,
-    proxy_scheme : Win32cr::Networking::WinInet::INTERNET_SCHEME,
-    pwszProxy : Win32cr::Foundation::PWSTR,
-    proxy_port : UInt16
+  struct WININET_PROXY_INFO
+    property fProxy : Win32cr::Foundation::BOOL
+    property fBypass : Win32cr::Foundation::BOOL
+    property proxy_scheme : Win32cr::Networking::WinInet::INTERNET_SCHEME
+    property pwszProxy : Win32cr::Foundation::PWSTR
+    property proxy_port : UInt16
+    def initialize(@fProxy : Win32cr::Foundation::BOOL, @fBypass : Win32cr::Foundation::BOOL, @proxy_scheme : Win32cr::Networking::WinInet::INTERNET_SCHEME, @pwszProxy : Win32cr::Foundation::PWSTR, @proxy_port : UInt16)
+    end
+  end
 
   @[Extern]
-  record WININET_PROXY_INFO_LIST,
-    dwProxyInfoCount : UInt32,
-    pProxyInfo : Win32cr::Networking::WinInet::WININET_PROXY_INFO*
+  struct WININET_PROXY_INFO_LIST
+    property dwProxyInfoCount : UInt32
+    property pProxyInfo : Win32cr::Networking::WinInet::WININET_PROXY_INFO*
+    def initialize(@dwProxyInfoCount : UInt32, @pProxyInfo : Win32cr::Networking::WinInet::WININET_PROXY_INFO*)
+    end
+  end
 
   @[Extern]
-  record HTTP_WEB_SOCKET_ASYNC_RESULT,
-    async_result : Win32cr::Networking::WinInet::INTERNET_ASYNC_RESULT,
-    operation : Win32cr::Networking::WinInet::HTTP_WEB_SOCKET_OPERATION,
-    buffer_type : Win32cr::Networking::WinInet::HTTP_WEB_SOCKET_BUFFER_TYPE,
-    dwBytesTransferred : UInt32
+  struct HTTP_WEB_SOCKET_ASYNC_RESULT
+    property async_result : Win32cr::Networking::WinInet::INTERNET_ASYNC_RESULT
+    property operation : Win32cr::Networking::WinInet::HTTP_WEB_SOCKET_OPERATION
+    property buffer_type : Win32cr::Networking::WinInet::HTTP_WEB_SOCKET_BUFFER_TYPE
+    property dwBytesTransferred : UInt32
+    def initialize(@async_result : Win32cr::Networking::WinInet::INTERNET_ASYNC_RESULT, @operation : Win32cr::Networking::WinInet::HTTP_WEB_SOCKET_OPERATION, @buffer_type : Win32cr::Networking::WinInet::HTTP_WEB_SOCKET_BUFFER_TYPE, @dwBytesTransferred : UInt32)
+    end
+  end
 
   @[Extern]
-  record ProofOfPossessionCookieInfo,
-    name : Win32cr::Foundation::PWSTR,
-    data : Win32cr::Foundation::PWSTR,
-    flags : UInt32,
-    p3pHeader : Win32cr::Foundation::PWSTR
+  struct ProofOfPossessionCookieInfo
+    property name : Win32cr::Foundation::PWSTR
+    property data : Win32cr::Foundation::PWSTR
+    property flags : UInt32
+    property p3pHeader : Win32cr::Foundation::PWSTR
+    def initialize(@name : Win32cr::Foundation::PWSTR, @data : Win32cr::Foundation::PWSTR, @flags : UInt32, @p3pHeader : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
   record IDialEventSinkVtbl,
@@ -1862,7 +2112,6 @@ module Win32cr::Networking::WinInet
 
 
   @[Extern]
-  #@[Com("2d86f4ff-6e2d-4488-b2e9-6934afd41bea")]
   record IDialEventSink, lpVtbl : IDialEventSinkVtbl* do
     GUID = LibC::GUID.new(0x2d86f4ff_u32, 0x6e2d_u16, 0x4488_u16, StaticArray[0xb2_u8, 0xe9_u8, 0x69_u8, 0x34_u8, 0xaf_u8, 0xd4_u8, 0x1b_u8, 0xea_u8])
     def query_interface(this : IDialEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1895,7 +2144,6 @@ module Win32cr::Networking::WinInet
 
 
   @[Extern]
-  #@[Com("39fd782b-7905-40d5-9148-3c9b190423d5")]
   record IDialEngine, lpVtbl : IDialEngineVtbl* do
     GUID = LibC::GUID.new(0x39fd782b_u32, 0x7905_u16, 0x40d5_u16, StaticArray[0x91_u8, 0x48_u8, 0x3c_u8, 0x9b_u8, 0x19_u8, 0x4_u8, 0x23_u8, 0xd5_u8])
     def query_interface(this : IDialEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1941,7 +2189,6 @@ module Win32cr::Networking::WinInet
 
 
   @[Extern]
-  #@[Com("8aecafa9-4306-43cc-8c5a-765f2979cc16")]
   record IDialBranding, lpVtbl : IDialBrandingVtbl* do
     GUID = LibC::GUID.new(0x8aecafa9_u32, 0x4306_u16, 0x43cc_u16, StaticArray[0x8c_u8, 0x5a_u8, 0x76_u8, 0x5f_u8, 0x29_u8, 0x79_u8, 0xcc_u8, 0x16_u8])
     def query_interface(this : IDialBranding*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1971,7 +2218,6 @@ module Win32cr::Networking::WinInet
 
 
   @[Extern]
-  #@[Com("cdaece56-4edf-43df-b113-88e4556fa1bb")]
   record IProofOfPossessionCookieInfoManager, lpVtbl : IProofOfPossessionCookieInfoManagerVtbl* do
     GUID = LibC::GUID.new(0xcdaece56_u32, 0x4edf_u16, 0x43df_u16, StaticArray[0xb1_u8, 0x13_u8, 0x88_u8, 0xe4_u8, 0x55_u8, 0x6f_u8, 0xa1_u8, 0xbb_u8])
     def query_interface(this : IProofOfPossessionCookieInfoManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1998,7 +2244,6 @@ module Win32cr::Networking::WinInet
 
 
   @[Extern]
-  #@[Com("15e41407-b42f-4ae7-9966-34a087b2d713")]
   record IProofOfPossessionCookieInfoManager2, lpVtbl : IProofOfPossessionCookieInfoManager2Vtbl* do
     GUID = LibC::GUID.new(0x15e41407_u32, 0xb42f_u16, 0x4ae7_u16, StaticArray[0x99_u8, 0x66_u8, 0x34_u8, 0xa0_u8, 0x87_u8, 0xb2_u8, 0xd7_u8, 0x13_u8])
     def query_interface(this : IProofOfPossessionCookieInfoManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

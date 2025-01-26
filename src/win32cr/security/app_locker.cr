@@ -87,77 +87,98 @@ module Win32cr::Security::AppLocker
   end
 
   @[Extern]
-  record SAFER_CODE_PROPERTIES_V1,
-    cbSize : UInt32,
-    dwCheckFlags : UInt32,
-    image_path : Win32cr::Foundation::PWSTR,
-    hImageFileHandle : Win32cr::Foundation::HANDLE,
-    url_zone_id : UInt32,
-    image_hash : UInt8[64],
-    dwImageHashSize : UInt32,
-    image_size : Win32cr::Foundation::LARGE_INTEGER,
-    hash_algorithm : UInt32,
-    pByteBlock : UInt8*,
-    hWndParent : Win32cr::Foundation::HWND,
-    dwWVTUIChoice : UInt32
+  struct SAFER_CODE_PROPERTIES_V1
+    property cbSize : UInt32
+    property dwCheckFlags : UInt32
+    property image_path : Win32cr::Foundation::PWSTR
+    property hImageFileHandle : Win32cr::Foundation::HANDLE
+    property url_zone_id : UInt32
+    property image_hash : UInt8[64]
+    property dwImageHashSize : UInt32
+    property image_size : Win32cr::Foundation::LARGE_INTEGER
+    property hash_algorithm : UInt32
+    property pByteBlock : UInt8*
+    property hWndParent : Win32cr::Foundation::HWND
+    property dwWVTUIChoice : UInt32
+    def initialize(@cbSize : UInt32, @dwCheckFlags : UInt32, @image_path : Win32cr::Foundation::PWSTR, @hImageFileHandle : Win32cr::Foundation::HANDLE, @url_zone_id : UInt32, @image_hash : UInt8[64], @dwImageHashSize : UInt32, @image_size : Win32cr::Foundation::LARGE_INTEGER, @hash_algorithm : UInt32, @pByteBlock : UInt8*, @hWndParent : Win32cr::Foundation::HWND, @dwWVTUIChoice : UInt32)
+    end
+  end
 
   @[Extern]
-  record SAFER_CODE_PROPERTIES_V2,
-    cbSize : UInt32,
-    dwCheckFlags : UInt32,
-    image_path : Win32cr::Foundation::PWSTR,
-    hImageFileHandle : Win32cr::Foundation::HANDLE,
-    url_zone_id : UInt32,
-    image_hash : UInt8[64],
-    dwImageHashSize : UInt32,
-    image_size : Win32cr::Foundation::LARGE_INTEGER,
-    hash_algorithm : UInt32,
-    pByteBlock : UInt8*,
-    hWndParent : Win32cr::Foundation::HWND,
-    dwWVTUIChoice : UInt32,
-    package_moniker : Win32cr::Foundation::PWSTR,
-    package_publisher : Win32cr::Foundation::PWSTR,
-    package_name : Win32cr::Foundation::PWSTR,
-    package_version : UInt64,
-    package_is_framework : Win32cr::Foundation::BOOL
+  struct SAFER_CODE_PROPERTIES_V2
+    property cbSize : UInt32
+    property dwCheckFlags : UInt32
+    property image_path : Win32cr::Foundation::PWSTR
+    property hImageFileHandle : Win32cr::Foundation::HANDLE
+    property url_zone_id : UInt32
+    property image_hash : UInt8[64]
+    property dwImageHashSize : UInt32
+    property image_size : Win32cr::Foundation::LARGE_INTEGER
+    property hash_algorithm : UInt32
+    property pByteBlock : UInt8*
+    property hWndParent : Win32cr::Foundation::HWND
+    property dwWVTUIChoice : UInt32
+    property package_moniker : Win32cr::Foundation::PWSTR
+    property package_publisher : Win32cr::Foundation::PWSTR
+    property package_name : Win32cr::Foundation::PWSTR
+    property package_version : UInt64
+    property package_is_framework : Win32cr::Foundation::BOOL
+    def initialize(@cbSize : UInt32, @dwCheckFlags : UInt32, @image_path : Win32cr::Foundation::PWSTR, @hImageFileHandle : Win32cr::Foundation::HANDLE, @url_zone_id : UInt32, @image_hash : UInt8[64], @dwImageHashSize : UInt32, @image_size : Win32cr::Foundation::LARGE_INTEGER, @hash_algorithm : UInt32, @pByteBlock : UInt8*, @hWndParent : Win32cr::Foundation::HWND, @dwWVTUIChoice : UInt32, @package_moniker : Win32cr::Foundation::PWSTR, @package_publisher : Win32cr::Foundation::PWSTR, @package_name : Win32cr::Foundation::PWSTR, @package_version : UInt64, @package_is_framework : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record SAFER_IDENTIFICATION_HEADER,
-    dwIdentificationType : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_TYPES,
-    cbStructSize : UInt32,
-    identification_guid : LibC::GUID,
-    lastModified : Win32cr::Foundation::FILETIME
+  struct SAFER_IDENTIFICATION_HEADER
+    property dwIdentificationType : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_TYPES
+    property cbStructSize : UInt32
+    property identification_guid : LibC::GUID
+    property lastModified : Win32cr::Foundation::FILETIME
+    def initialize(@dwIdentificationType : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_TYPES, @cbStructSize : UInt32, @identification_guid : LibC::GUID, @lastModified : Win32cr::Foundation::FILETIME)
+    end
+  end
 
   @[Extern]
-  record SAFER_PATHNAME_IDENTIFICATION,
-    header : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_HEADER,
-    description : UInt16[256],
-    image_name : Win32cr::Foundation::PWSTR,
-    dwSaferFlags : UInt32
+  struct SAFER_PATHNAME_IDENTIFICATION
+    property header : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_HEADER
+    property description : UInt16[256]
+    property image_name : Win32cr::Foundation::PWSTR
+    property dwSaferFlags : UInt32
+    def initialize(@header : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_HEADER, @description : UInt16[256], @image_name : Win32cr::Foundation::PWSTR, @dwSaferFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record SAFER_HASH_IDENTIFICATION,
-    header : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_HEADER,
-    description : UInt16[256],
-    friendly_name : UInt16[256],
-    hash_size : UInt32,
-    image_hash : UInt8[64],
-    hash_algorithm : UInt32,
-    image_size : Win32cr::Foundation::LARGE_INTEGER,
-    dwSaferFlags : UInt32
+  struct SAFER_HASH_IDENTIFICATION
+    property header : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_HEADER
+    property description : UInt16[256]
+    property friendly_name : UInt16[256]
+    property hash_size : UInt32
+    property image_hash : UInt8[64]
+    property hash_algorithm : UInt32
+    property image_size : Win32cr::Foundation::LARGE_INTEGER
+    property dwSaferFlags : UInt32
+    def initialize(@header : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_HEADER, @description : UInt16[256], @friendly_name : UInt16[256], @hash_size : UInt32, @image_hash : UInt8[64], @hash_algorithm : UInt32, @image_size : Win32cr::Foundation::LARGE_INTEGER, @dwSaferFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record SAFER_HASH_IDENTIFICATION2,
-    hashIdentification : Win32cr::Security::AppLocker::SAFER_HASH_IDENTIFICATION,
-    hash_size : UInt32,
-    image_hash : UInt8[64],
-    hash_algorithm : UInt32
+  struct SAFER_HASH_IDENTIFICATION2
+    property hashIdentification : Win32cr::Security::AppLocker::SAFER_HASH_IDENTIFICATION
+    property hash_size : UInt32
+    property image_hash : UInt8[64]
+    property hash_algorithm : UInt32
+    def initialize(@hashIdentification : Win32cr::Security::AppLocker::SAFER_HASH_IDENTIFICATION, @hash_size : UInt32, @image_hash : UInt8[64], @hash_algorithm : UInt32)
+    end
+  end
 
   @[Extern]
-  record SAFER_URLZONE_IDENTIFICATION,
-    header : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_HEADER,
-    url_zone_id : UInt32,
-    dwSaferFlags : UInt32
+  struct SAFER_URLZONE_IDENTIFICATION
+    property header : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_HEADER
+    property url_zone_id : UInt32
+    property dwSaferFlags : UInt32
+    def initialize(@header : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_HEADER, @url_zone_id : UInt32, @dwSaferFlags : UInt32)
+    end
+  end
 
   @[Link("advapi32")]
   lib C

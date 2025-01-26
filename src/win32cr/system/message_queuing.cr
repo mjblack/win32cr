@@ -610,7 +610,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("d7d6e072-dccd-11d0-aa4b-0060970debae")]
   record IMSMQQuery, lpVtbl : IMSMQQueryVtbl* do
     GUID = LibC::GUID.new(0xd7d6e072_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -682,7 +681,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("d7d6e07b-dccd-11d0-aa4b-0060970debae")]
   record IMSMQQueueInfo, lpVtbl : IMSMQQueueInfoVtbl* do
     GUID = LibC::GUID.new(0xd7d6e07b_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQQueueInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -845,7 +843,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("fd174a80-89cf-11d2-b0f2-00e02c074f6b")]
   record IMSMQQueueInfo2, lpVtbl : IMSMQQueueInfo2Vtbl* do
     GUID = LibC::GUID.new(0xfd174a80_u32, 0x89cf_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0xf2_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1025,7 +1022,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b1d-2168-11d3-898c-00e02c074f6b")]
   record IMSMQQueueInfo3, lpVtbl : IMSMQQueueInfo3Vtbl* do
     GUID = LibC::GUID.new(0xeba96b1d_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfo3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1220,7 +1216,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b21-2168-11d3-898c-00e02c074f6b")]
   record IMSMQQueueInfo4, lpVtbl : IMSMQQueueInfo4Vtbl* do
     GUID = LibC::GUID.new(0xeba96b21_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfo4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1389,7 +1384,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("d7d6e076-dccd-11d0-aa4b-0060970debae")]
   record IMSMQQueue, lpVtbl : IMSMQQueueVtbl* do
     GUID = LibC::GUID.new(0xd7d6e076_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1486,7 +1480,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("ef0574e0-06d8-11d3-b100-00e02c074f6b")]
   record IMSMQQueue2, lpVtbl : IMSMQQueue2Vtbl* do
     GUID = LibC::GUID.new(0xef0574e0_u32, 0x6d8_u16, 0x11d3_u16, StaticArray[0xb1_u8, 0x0_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueue2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1614,7 +1607,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b1b-2168-11d3-898c-00e02c074f6b")]
   record IMSMQQueue3, lpVtbl : IMSMQQueue3Vtbl* do
     GUID = LibC::GUID.new(0xeba96b1b_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueue3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1782,7 +1774,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b20-2168-11d3-898c-00e02c074f6b")]
   record IMSMQQueue4, lpVtbl : IMSMQQueue4Vtbl* do
     GUID = LibC::GUID.new(0xeba96b20_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueue4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1969,7 +1960,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("d7d6e074-dccd-11d0-aa4b-0060970debae")]
   record IMSMQMessage, lpVtbl : IMSMQMessageVtbl* do
     GUID = LibC::GUID.new(0xd7d6e074_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2157,7 +2147,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("d7d6e07d-dccd-11d0-aa4b-0060970debae")]
   record IMSMQQueueInfos, lpVtbl : IMSMQQueueInfosVtbl* do
     GUID = LibC::GUID.new(0xd7d6e07d_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQQueueInfos*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2205,7 +2194,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b0f-2168-11d3-898c-00e02c074f6b")]
   record IMSMQQueueInfos2, lpVtbl : IMSMQQueueInfos2Vtbl* do
     GUID = LibC::GUID.new(0xeba96b0f_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfos2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2256,7 +2244,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b1e-2168-11d3-898c-00e02c074f6b")]
   record IMSMQQueueInfos3, lpVtbl : IMSMQQueueInfos3Vtbl* do
     GUID = LibC::GUID.new(0xeba96b1e_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfos3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2307,7 +2294,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b22-2168-11d3-898c-00e02c074f6b")]
   record IMSMQQueueInfos4, lpVtbl : IMSMQQueueInfos4Vtbl* do
     GUID = LibC::GUID.new(0xeba96b22_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfos4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2355,7 +2341,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("d7d6e077-dccd-11d0-aa4b-0060970debae")]
   record IMSMQEvent, lpVtbl : IMSMQEventVtbl* do
     GUID = LibC::GUID.new(0xd7d6e077_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2395,7 +2380,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b12-2168-11d3-898c-00e02c074f6b")]
   record IMSMQEvent2, lpVtbl : IMSMQEvent2Vtbl* do
     GUID = LibC::GUID.new(0xeba96b12_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2438,7 +2422,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b1c-2168-11d3-898c-00e02c074f6b")]
   record IMSMQEvent3, lpVtbl : IMSMQEvent3Vtbl* do
     GUID = LibC::GUID.new(0xeba96b1c_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQEvent3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2483,7 +2466,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("d7d6e07f-dccd-11d0-aa4b-0060970debae")]
   record IMSMQTransaction, lpVtbl : IMSMQTransactionVtbl* do
     GUID = LibC::GUID.new(0xd7d6e07f_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQTransaction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2532,7 +2514,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("d7d6e081-dccd-11d0-aa4b-0060970debae")]
   record IMSMQCoordinatedTransactionDispenser, lpVtbl : IMSMQCoordinatedTransactionDispenserVtbl* do
     GUID = LibC::GUID.new(0xd7d6e081_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQCoordinatedTransactionDispenser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2575,7 +2556,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("d7d6e083-dccd-11d0-aa4b-0060970debae")]
   record IMSMQTransactionDispenser, lpVtbl : IMSMQTransactionDispenserVtbl* do
     GUID = LibC::GUID.new(0xd7d6e083_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQTransactionDispenser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2619,7 +2599,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b0e-2168-11d3-898c-00e02c074f6b")]
   record IMSMQQuery2, lpVtbl : IMSMQQuery2Vtbl* do
     GUID = LibC::GUID.new(0xeba96b0e_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQuery2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2667,7 +2646,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b19-2168-11d3-898c-00e02c074f6b")]
   record IMSMQQuery3, lpVtbl : IMSMQQuery3Vtbl* do
     GUID = LibC::GUID.new(0xeba96b19_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQuery3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2718,7 +2696,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b24-2168-11d3-898c-00e02c074f6b")]
   record IMSMQQuery4, lpVtbl : IMSMQQuery4Vtbl* do
     GUID = LibC::GUID.new(0xeba96b24_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQuery4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2841,7 +2818,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("d9933be0-a567-11d2-b0f3-00e02c074f6b")]
   record IMSMQMessage2, lpVtbl : IMSMQMessage2Vtbl* do
     GUID = LibC::GUID.new(0xd9933be0_u32, 0xa567_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0xf3_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQMessage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3196,7 +3172,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b1a-2168-11d3-898c-00e02c074f6b")]
   record IMSMQMessage3, lpVtbl : IMSMQMessage3Vtbl* do
     GUID = LibC::GUID.new(0xeba96b1a_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQMessage3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3599,7 +3574,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b23-2168-11d3-898c-00e02c074f6b")]
   record IMSMQMessage4, lpVtbl : IMSMQMessage4Vtbl* do
     GUID = LibC::GUID.new(0xeba96b23_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQMessage4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3914,7 +3888,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("d7ab3341-c9d3-11d1-bb47-0080c7c5a2c0")]
   record IMSMQPrivateEvent, lpVtbl : IMSMQPrivateEventVtbl* do
     GUID = LibC::GUID.new(0xd7ab3341_u32, 0xc9d3_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x47_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xc5_u8, 0xa2_u8, 0xc0_u8])
     def query_interface(this : IMSMQPrivateEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3962,7 +3935,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("d7d6e078-dccd-11d0-aa4b-0060970debae")]
   record DMSMQEventEvents_, lpVtbl : DMSMQEventEvents_Vtbl* do
     GUID = LibC::GUID.new(0xd7d6e078_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : DMSMQEventEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4006,7 +3978,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("2ce0c5b0-6e67-11d2-b0e6-00e02c074f6b")]
   record IMSMQTransaction2, lpVtbl : IMSMQTransaction2Vtbl* do
     GUID = LibC::GUID.new(0x2ce0c5b0_u32, 0x6e67_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0xe6_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQTransaction2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4066,7 +4037,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b13-2168-11d3-898c-00e02c074f6b")]
   record IMSMQTransaction3, lpVtbl : IMSMQTransaction3Vtbl* do
     GUID = LibC::GUID.new(0xeba96b13_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQTransaction3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4125,7 +4095,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b10-2168-11d3-898c-00e02c074f6b")]
   record IMSMQCoordinatedTransactionDispenser2, lpVtbl : IMSMQCoordinatedTransactionDispenser2Vtbl* do
     GUID = LibC::GUID.new(0xeba96b10_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQCoordinatedTransactionDispenser2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4172,7 +4141,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b14-2168-11d3-898c-00e02c074f6b")]
   record IMSMQCoordinatedTransactionDispenser3, lpVtbl : IMSMQCoordinatedTransactionDispenser3Vtbl* do
     GUID = LibC::GUID.new(0xeba96b14_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQCoordinatedTransactionDispenser3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4219,7 +4187,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b11-2168-11d3-898c-00e02c074f6b")]
   record IMSMQTransactionDispenser2, lpVtbl : IMSMQTransactionDispenser2Vtbl* do
     GUID = LibC::GUID.new(0xeba96b11_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQTransactionDispenser2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4266,7 +4233,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b15-2168-11d3-898c-00e02c074f6b")]
   record IMSMQTransactionDispenser3, lpVtbl : IMSMQTransactionDispenser3Vtbl* do
     GUID = LibC::GUID.new(0xeba96b15_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQTransactionDispenser3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4312,7 +4278,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("d7d6e085-dccd-11d0-aa4b-0060970debae")]
   record IMSMQApplication, lpVtbl : IMSMQApplicationVtbl* do
     GUID = LibC::GUID.new(0xd7d6e085_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4362,7 +4327,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("12a30900-7300-11d2-b0e6-00e02c074f6b")]
   record IMSMQApplication2, lpVtbl : IMSMQApplication2Vtbl* do
     GUID = LibC::GUID.new(0x12a30900_u32, 0x7300_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0xe6_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQApplication2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4443,7 +4407,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b1f-2168-11d3-898c-00e02c074f6b")]
   record IMSMQApplication3, lpVtbl : IMSMQApplication3Vtbl* do
     GUID = LibC::GUID.new(0xeba96b1f_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQApplication3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4550,7 +4513,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b16-2168-11d3-898c-00e02c074f6b")]
   record IMSMQDestination, lpVtbl : IMSMQDestinationVtbl* do
     GUID = LibC::GUID.new(0xeba96b16_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQDestination*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4633,7 +4595,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("eba96b17-2168-11d3-898c-00e02c074f6b")]
   record IMSMQPrivateDestination, lpVtbl : IMSMQPrivateDestinationVtbl* do
     GUID = LibC::GUID.new(0xeba96b17_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQPrivateDestination*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4681,7 +4642,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("0188ac2f-ecb3-4173-9779-635ca2039c72")]
   record IMSMQCollection, lpVtbl : IMSMQCollectionVtbl* do
     GUID = LibC::GUID.new(0x188ac2f_u32, 0xecb3_u16, 0x4173_u16, StaticArray[0x97_u8, 0x79_u8, 0x63_u8, 0x5c_u8, 0xa2_u8, 0x3_u8, 0x9c_u8, 0x72_u8])
     def query_interface(this : IMSMQCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4738,7 +4698,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("be5f0241-e489-4957-8cc4-a452fcf3e23e")]
   record IMSMQManagement, lpVtbl : IMSMQManagementVtbl* do
     GUID = LibC::GUID.new(0xbe5f0241_u32, 0xe489_u16, 0x4957_u16, StaticArray[0x8c_u8, 0xc4_u8, 0xa4_u8, 0x52_u8, 0xfc_u8, 0xf3_u8, 0xe2_u8, 0x3e_u8])
     def query_interface(this : IMSMQManagement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4819,7 +4778,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("64c478fb-f9b0-4695-8a7f-439ac94326d3")]
   record IMSMQOutgoingQueueManagement, lpVtbl : IMSMQOutgoingQueueManagementVtbl* do
     GUID = LibC::GUID.new(0x64c478fb_u32, 0xf9b0_u16, 0x4695_u16, StaticArray[0x8a_u8, 0x7f_u8, 0x43_u8, 0x9a_u8, 0xc9_u8, 0x43_u8, 0x26_u8, 0xd3_u8])
     def query_interface(this : IMSMQOutgoingQueueManagement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4915,7 +4873,6 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  #@[Com("7fbe7759-5760-444d-b8a5-5e7ab9a84cce")]
   record IMSMQQueueManagement, lpVtbl : IMSMQQueueManagementVtbl* do
     GUID = LibC::GUID.new(0x7fbe7759_u32, 0x5760_u16, 0x444d_u16, StaticArray[0xb8_u8, 0xa5_u8, 0x5e_u8, 0x7a_u8, 0xb9_u8, 0xa8_u8, 0x4c_u8, 0xce_u8])
     def query_interface(this : IMSMQQueueManagement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

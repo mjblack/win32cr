@@ -5,7 +5,7 @@ require "./../system/com/structured_storage.cr"
 require "./../system/address_book.cr"
 
 module Win32cr::Storage::Imapi
-  alias MSGCALLRELEASE = Proc(UInt32, Void*, Void)*
+  alias MSGCALLRELEASE = Proc(UInt32, Void*, Void)
 
   IMAPI_SECTOR_SIZE = 2048_u32
   IMAPI2_DEFAULT_COMMAND_TIMEOUT = 10_u32
@@ -745,21 +745,34 @@ module Win32cr::Storage::Imapi
   end
 
   @[Extern]
-  record MSGSESS_
-  @[Extern]
-  record SPropAttrArray,
-    cValues : UInt32,
-    aPropAttr : UInt32*
+  struct MSGSESS_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record IMMP_MPV_STORE_DRIVER_HANDLE,
-    guidSignature : LibC::GUID
+  struct SPropAttrArray
+    property cValues : UInt32
+    property aPropAttr : UInt32*
+    def initialize(@cValues : UInt32, @aPropAttr : UInt32*)
+    end
+  end
 
   @[Extern]
-  record IMMPID_GUIDLIST_ITEM,
-    pguid : LibC::GUID*,
-    dwStart : UInt32,
-    dwLast : UInt32
+  struct IMMP_MPV_STORE_DRIVER_HANDLE
+    property guidSignature : LibC::GUID
+    def initialize(@guidSignature : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct IMMPID_GUIDLIST_ITEM
+    property pguid : LibC::GUID*
+    property dwStart : UInt32
+    property dwLast : UInt32
+    def initialize(@pguid : LibC::GUID*, @dwStart : UInt32, @dwLast : UInt32)
+    end
+  end
 
   @[Extern]
   record IDiscMaster2Vtbl,
@@ -777,7 +790,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354130-7f64-5b0f-8f00-5d77afbe261e")]
   record IDiscMaster2, lpVtbl : IDiscMaster2Vtbl* do
     GUID = LibC::GUID.new(0x27354130_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IDiscMaster2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -830,7 +842,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354131-7f64-5b0f-8f00-5d77afbe261e")]
   record DDiscMaster2Events, lpVtbl : DDiscMaster2EventsVtbl* do
     GUID = LibC::GUID.new(0x27354131_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : DDiscMaster2Events*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -889,7 +900,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354132-7f64-5b0f-8f00-5d77afbe261e")]
   record IDiscRecorder2Ex, lpVtbl : IDiscRecorder2ExVtbl* do
     GUID = LibC::GUID.new(0x27354132_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IDiscRecorder2Ex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -991,7 +1001,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354133-7f64-5b0f-8f00-5d77afbe261e")]
   record IDiscRecorder2, lpVtbl : IDiscRecorder2Vtbl* do
     GUID = LibC::GUID.new(0x27354133_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IDiscRecorder2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1106,7 +1115,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354135-7f64-5b0f-8f00-5d77afbe261e")]
   record IWriteEngine2, lpVtbl : IWriteEngine2Vtbl* do
     GUID = LibC::GUID.new(0x27354135_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IWriteEngine2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1191,7 +1199,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354136-7f64-5b0f-8f00-5d77afbe261e")]
   record IWriteEngine2EventArgs, lpVtbl : IWriteEngine2EventArgsVtbl* do
     GUID = LibC::GUID.new(0x27354136_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IWriteEngine2EventArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1252,7 +1259,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354137-7f64-5b0f-8f00-5d77afbe261e")]
   record DWriteEngine2Events, lpVtbl : DWriteEngine2EventsVtbl* do
     GUID = LibC::GUID.new(0x27354137_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : DWriteEngine2Events*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1299,7 +1305,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354152-8f64-5b0f-8f00-5d77afbe261e")]
   record IDiscFormat2, lpVtbl : IDiscFormat2Vtbl* do
     GUID = LibC::GUID.new(0x27354152_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IDiscFormat2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1366,7 +1371,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354156-8f64-5b0f-8f00-5d77afbe261e")]
   record IDiscFormat2Erase, lpVtbl : IDiscFormat2EraseVtbl* do
     GUID = LibC::GUID.new(0x27354156_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IDiscFormat2Erase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1445,7 +1449,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2735413a-7f64-5b0f-8f00-5d77afbe261e")]
   record DDiscFormat2EraseEvents, lpVtbl : DDiscFormat2EraseEventsVtbl* do
     GUID = LibC::GUID.new(0x2735413a_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : DDiscFormat2EraseEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1524,7 +1527,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354153-9f64-5b0f-8f00-5d77afbe261e")]
   record IDiscFormat2Data, lpVtbl : IDiscFormat2DataVtbl* do
     GUID = LibC::GUID.new(0x27354153_u32, 0x9f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IDiscFormat2Data*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1675,7 +1677,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2735413c-7f64-5b0f-8f00-5d77afbe261e")]
   record DDiscFormat2DataEvents, lpVtbl : DDiscFormat2DataEventsVtbl* do
     GUID = LibC::GUID.new(0x2735413c_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : DDiscFormat2DataEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1728,7 +1729,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2735413d-7f64-5b0f-8f00-5d77afbe261e")]
   record IDiscFormat2DataEventArgs, lpVtbl : IDiscFormat2DataEventArgsVtbl* do
     GUID = LibC::GUID.new(0x2735413d_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IDiscFormat2DataEventArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1830,7 +1830,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354154-8f64-5b0f-8f00-5d77afbe261e")]
   record IDiscFormat2TrackAtOnce, lpVtbl : IDiscFormat2TrackAtOnceVtbl* do
     GUID = LibC::GUID.new(0x27354154_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IDiscFormat2TrackAtOnce*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1960,7 +1959,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2735413f-7f64-5b0f-8f00-5d77afbe261e")]
   record DDiscFormat2TrackAtOnceEvents, lpVtbl : DDiscFormat2TrackAtOnceEventsVtbl* do
     GUID = LibC::GUID.new(0x2735413f_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : DDiscFormat2TrackAtOnceEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2013,7 +2011,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354140-7f64-5b0f-8f00-5d77afbe261e")]
   record IDiscFormat2TrackAtOnceEventArgs, lpVtbl : IDiscFormat2TrackAtOnceEventArgsVtbl* do
     GUID = LibC::GUID.new(0x27354140_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IDiscFormat2TrackAtOnceEventArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2114,7 +2111,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354155-8f64-5b0f-8f00-5d77afbe261e")]
   record IDiscFormat2RawCD, lpVtbl : IDiscFormat2RawCDVtbl* do
     GUID = LibC::GUID.new(0x27354155_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IDiscFormat2RawCD*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2241,7 +2237,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354142-7f64-5b0f-8f00-5d77afbe261e")]
   record DDiscFormat2RawCDEvents, lpVtbl : DDiscFormat2RawCDEventsVtbl* do
     GUID = LibC::GUID.new(0x27354142_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : DDiscFormat2RawCDEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2293,7 +2288,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354143-7f64-5b0f-8f00-5d77afbe261e")]
   record IDiscFormat2RawCDEventArgs, lpVtbl : IDiscFormat2RawCDEventArgsVtbl* do
     GUID = LibC::GUID.new(0x27354143_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IDiscFormat2RawCDEventArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2360,7 +2354,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("d2ffd834-958b-426d-8470-2a13879c6a91")]
   record IBurnVerification, lpVtbl : IBurnVerificationVtbl* do
     GUID = LibC::GUID.new(0xd2ffd834_u32, 0x958b_u16, 0x426d_u16, StaticArray[0x84_u8, 0x70_u8, 0x2a_u8, 0x13_u8, 0x87_u8, 0x9c_u8, 0x6a_u8, 0x91_u8])
     def query_interface(this : IBurnVerification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2396,7 +2389,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354144-7f64-5b0f-8f00-5d77afbe261e")]
   record IWriteSpeedDescriptor, lpVtbl : IWriteSpeedDescriptorVtbl* do
     GUID = LibC::GUID.new(0x27354144_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IWriteSpeedDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2448,7 +2440,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354150-7f64-5b0f-8f00-5d77afbe261e")]
   record IMultisession, lpVtbl : IMultisessionVtbl* do
     GUID = LibC::GUID.new(0x27354150_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IMultisession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2508,7 +2499,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354151-7f64-5b0f-8f00-5d77afbe261e")]
   record IMultisessionSequential, lpVtbl : IMultisessionSequentialVtbl* do
     GUID = LibC::GUID.new(0x27354151_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IMultisessionSequential*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2584,7 +2574,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("b507ca22-2204-11dd-966a-001aa01bbc58")]
   record IMultisessionSequential2, lpVtbl : IMultisessionSequential2Vtbl* do
     GUID = LibC::GUID.new(0xb507ca22_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
     def query_interface(this : IMultisessionSequential2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2660,7 +2649,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("b507ca23-2204-11dd-966a-001aa01bbc58")]
   record IMultisessionRandomWrite, lpVtbl : IMultisessionRandomWriteVtbl* do
     GUID = LibC::GUID.new(0xb507ca23_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
     def query_interface(this : IMultisessionRandomWrite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2731,7 +2719,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354145-7f64-5b0f-8f00-5d77afbe261e")]
   record IStreamPseudoRandomBased, lpVtbl : IStreamPseudoRandomBasedVtbl* do
     GUID = LibC::GUID.new(0x27354145_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IStreamPseudoRandomBased*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2814,7 +2801,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354146-7f64-5b0f-8f00-5d77afbe261e")]
   record IStreamConcatenate, lpVtbl : IStreamConcatenateVtbl* do
     GUID = LibC::GUID.new(0x27354146_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IStreamConcatenate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2894,7 +2880,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("27354147-7f64-5b0f-8f00-5d77afbe261e")]
   record IStreamInterleave, lpVtbl : IStreamInterleaveVtbl* do
     GUID = LibC::GUID.new(0x27354147_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
     def query_interface(this : IStreamInterleave*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2976,7 +2961,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("25983550-9d65-49ce-b335-40630d901227")]
   record IRawCDImageCreator, lpVtbl : IRawCDImageCreatorVtbl* do
     GUID = LibC::GUID.new(0x25983550_u32, 0x9d65_u16, 0x49ce_u16, StaticArray[0xb3_u8, 0x35_u8, 0x40_u8, 0x63_u8, 0xd_u8, 0x90_u8, 0x12_u8, 0x27_u8])
     def query_interface(this : IRawCDImageCreator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3085,7 +3069,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("25983551-9d65-49ce-b335-40630d901227")]
   record IRawCDImageTrackInfo, lpVtbl : IRawCDImageTrackInfoVtbl* do
     GUID = LibC::GUID.new(0x25983551_u32, 0x9d65_u16, 0x49ce_u16, StaticArray[0xb3_u8, 0x35_u8, 0x40_u8, 0x63_u8, 0xd_u8, 0x90_u8, 0x12_u8, 0x27_u8])
     def query_interface(this : IRawCDImageTrackInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3165,7 +3148,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("b507ca25-2204-11dd-966a-001aa01bbc58")]
   record IBlockRange, lpVtbl : IBlockRangeVtbl* do
     GUID = LibC::GUID.new(0xb507ca25_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
     def query_interface(this : IBlockRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3211,7 +3193,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("b507ca26-2204-11dd-966a-001aa01bbc58")]
   record IBlockRangeList, lpVtbl : IBlockRangeListVtbl* do
     GUID = LibC::GUID.new(0xb507ca26_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
     def query_interface(this : IBlockRangeList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3262,7 +3243,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2c941fd4-975b-59be-a960-9a2a262853a5")]
   record IBootOptions, lpVtbl : IBootOptionsVtbl* do
     GUID = LibC::GUID.new(0x2c941fd4_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
     def query_interface(this : IBootOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3332,7 +3312,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2c941fd5-975b-59be-a960-9a2a262853a5")]
   record IProgressItem, lpVtbl : IProgressItemVtbl* do
     GUID = LibC::GUID.new(0x2c941fd5_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
     def query_interface(this : IProgressItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3383,7 +3362,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2c941fd6-975b-59be-a960-9a2a262853a5")]
   record IEnumProgressItems, lpVtbl : IEnumProgressItemsVtbl* do
     GUID = LibC::GUID.new(0x2c941fd6_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
     def query_interface(this : IEnumProgressItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3428,7 +3406,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2c941fd7-975b-59be-a960-9a2a262853a5")]
   record IProgressItems, lpVtbl : IProgressItemsVtbl* do
     GUID = LibC::GUID.new(0x2c941fd7_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
     def query_interface(this : IProgressItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3490,7 +3467,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2c941fd8-975b-59be-a960-9a2a262853a5")]
   record IFileSystemImageResult, lpVtbl : IFileSystemImageResultVtbl* do
     GUID = LibC::GUID.new(0x2c941fd8_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
     def query_interface(this : IFileSystemImageResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3550,7 +3526,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("b507ca29-2204-11dd-966a-001aa01bbc58")]
   record IFileSystemImageResult2, lpVtbl : IFileSystemImageResult2Vtbl* do
     GUID = LibC::GUID.new(0xb507ca29_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
     def query_interface(this : IFileSystemImageResult2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3619,7 +3594,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2c941fd9-975b-59be-a960-9a2a262853a5")]
   record IFsiItem, lpVtbl : IFsiItemVtbl* do
     GUID = LibC::GUID.new(0x2c941fd9_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
     def query_interface(this : IFsiItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3694,7 +3668,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2c941fda-975b-59be-a960-9a2a262853a5")]
   record IEnumFsiItems, lpVtbl : IEnumFsiItemsVtbl* do
     GUID = LibC::GUID.new(0x2c941fda_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
     def query_interface(this : IEnumFsiItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3750,7 +3723,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2c941fdb-975b-59be-a960-9a2a262853a5")]
   record IFsiFileItem, lpVtbl : IFsiFileItemVtbl* do
     GUID = LibC::GUID.new(0x2c941fdb_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
     def query_interface(this : IFsiFileItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3863,7 +3835,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("199d0c19-11e1-40eb-8ec2-c8c822a07792")]
   record IFsiFileItem2, lpVtbl : IFsiFileItem2Vtbl* do
     GUID = LibC::GUID.new(0x199d0c19_u32, 0x11e1_u16, 0x40eb_u16, StaticArray[0x8e_u8, 0xc2_u8, 0xc8_u8, 0xc8_u8, 0x22_u8, 0xa0_u8, 0x77_u8, 0x92_u8])
     def query_interface(this : IFsiFileItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3975,7 +3946,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("ed79ba56-5294-4250-8d46-f9aecee23459")]
   record IFsiNamedStreams, lpVtbl : IFsiNamedStreamsVtbl* do
     GUID = LibC::GUID.new(0xed79ba56_u32, 0x5294_u16, 0x4250_u16, StaticArray[0x8d_u8, 0x46_u8, 0xf9_u8, 0xae_u8, 0xce_u8, 0xe2_u8, 0x34_u8, 0x59_u8])
     def query_interface(this : IFsiNamedStreams*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4048,7 +4018,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2c941fdc-975b-59be-a960-9a2a262853a5")]
   record IFsiDirectoryItem, lpVtbl : IFsiDirectoryItemVtbl* do
     GUID = LibC::GUID.new(0x2c941fdc_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
     def query_interface(this : IFsiDirectoryItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4176,7 +4145,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("f7fb4b9b-6d96-4d7b-9115-201b144811ef")]
   record IFsiDirectoryItem2, lpVtbl : IFsiDirectoryItem2Vtbl* do
     GUID = LibC::GUID.new(0xf7fb4b9b_u32, 0x6d96_u16, 0x4d7b_u16, StaticArray[0x91_u8, 0x15_u8, 0x20_u8, 0x1b_u8, 0x14_u8, 0x48_u8, 0x11_u8, 0xef_u8])
     def query_interface(this : IFsiDirectoryItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4334,7 +4302,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2c941fe1-975b-59be-a960-9a2a262853a5")]
   record IFileSystemImage, lpVtbl : IFileSystemImageVtbl* do
     GUID = LibC::GUID.new(0x2c941fe1_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
     def query_interface(this : IFileSystemImage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4575,7 +4542,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("d7644b2c-1537-4767-b62f-f1387b02ddfd")]
   record IFileSystemImage2, lpVtbl : IFileSystemImage2Vtbl* do
     GUID = LibC::GUID.new(0xd7644b2c_u32, 0x1537_u16, 0x4767_u16, StaticArray[0xb6_u8, 0x2f_u8, 0xf1_u8, 0x38_u8, 0x7b_u8, 0x2_u8, 0xdd_u8, 0xfd_u8])
     def query_interface(this : IFileSystemImage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4825,7 +4791,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("7cff842c-7e97-4807-8304-910dd8f7c051")]
   record IFileSystemImage3, lpVtbl : IFileSystemImage3Vtbl* do
     GUID = LibC::GUID.new(0x7cff842c_u32, 0x7e97_u16, 0x4807_u16, StaticArray[0x83_u8, 0x4_u8, 0x91_u8, 0xd_u8, 0xd8_u8, 0xf7_u8, 0xc0_u8, 0x51_u8])
     def query_interface(this : IFileSystemImage3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5030,7 +4995,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("2c941fdf-975b-59be-a960-9a2a262853a5")]
   record DFileSystemImageEvents, lpVtbl : DFileSystemImageEventsVtbl* do
     GUID = LibC::GUID.new(0x2c941fdf_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
     def query_interface(this : DFileSystemImageEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5073,7 +5037,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("d25c30f9-4087-4366-9e24-e55be286424b")]
   record DFileSystemImageImportEvents, lpVtbl : DFileSystemImageImportEventsVtbl* do
     GUID = LibC::GUID.new(0xd25c30f9_u32, 0x4087_u16, 0x4366_u16, StaticArray[0x9e_u8, 0x24_u8, 0xe5_u8, 0x5b_u8, 0xe2_u8, 0x86_u8, 0x42_u8, 0x4b_u8])
     def query_interface(this : DFileSystemImageImportEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5120,7 +5083,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("6ca38be5-fbbb-4800-95a1-a438865eb0d4")]
   record IIsoImageManager, lpVtbl : IIsoImageManagerVtbl* do
     GUID = LibC::GUID.new(0x6ca38be5_u32, 0xfbbb_u16, 0x4800_u16, StaticArray[0x95_u8, 0xa1_u8, 0xa4_u8, 0x38_u8, 0x86_u8, 0x5e_u8, 0xb0_u8, 0xd4_u8])
     def query_interface(this : IIsoImageManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5185,7 +5147,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("85ac9776-ca88-4cf2-894e-09598c078a41")]
   record IDiscRecorder, lpVtbl : IDiscRecorderVtbl* do
     GUID = LibC::GUID.new(0x85ac9776_u32, 0xca88_u16, 0x4cf2_u16, StaticArray[0x89_u8, 0x4e_u8, 0x9_u8, 0x59_u8, 0x8c_u8, 0x7_u8, 0x8a_u8, 0x41_u8])
     def query_interface(this : IDiscRecorder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5257,7 +5218,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("9b1921e1-54ac-11d3-9144-00104ba11c5e")]
   record IEnumDiscRecorders, lpVtbl : IEnumDiscRecordersVtbl* do
     GUID = LibC::GUID.new(0x9b1921e1_u32, 0x54ac_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
     def query_interface(this : IEnumDiscRecorders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5296,7 +5256,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("ddf445e1-54ba-11d3-9144-00104ba11c5e")]
   record IEnumDiscMasterFormats, lpVtbl : IEnumDiscMasterFormatsVtbl* do
     GUID = LibC::GUID.new(0xddf445e1_u32, 0x54ba_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
     def query_interface(this : IEnumDiscMasterFormats*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5339,7 +5298,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("e3bc42cd-4e5c-11d3-9144-00104ba11c5e")]
   record IRedbookDiscMaster, lpVtbl : IRedbookDiscMasterVtbl* do
     GUID = LibC::GUID.new(0xe3bc42cd_u32, 0x4e5c_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
     def query_interface(this : IRedbookDiscMaster*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5392,7 +5350,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("e3bc42ce-4e5c-11d3-9144-00104ba11c5e")]
   record IJolietDiscMaster, lpVtbl : IJolietDiscMasterVtbl* do
     GUID = LibC::GUID.new(0xe3bc42ce_u32, 0x4e5c_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
     def query_interface(this : IJolietDiscMaster*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5442,7 +5399,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("ec9e51c1-4e5d-11d3-9144-00104ba11c5e")]
   record IDiscMasterProgressEvents, lpVtbl : IDiscMasterProgressEventsVtbl* do
     GUID = LibC::GUID.new(0xec9e51c1_u32, 0x4e5d_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
     def query_interface(this : IDiscMasterProgressEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5504,7 +5460,6 @@ module Win32cr::Storage::Imapi
 
 
   @[Extern]
-  #@[Com("520cca62-51a5-11d3-9144-00104ba11c5e")]
   record IDiscMaster, lpVtbl : IDiscMasterVtbl* do
     GUID = LibC::GUID.new(0x520cca62_u32, 0x51a5_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
     def query_interface(this : IDiscMaster*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -32,7 +32,6 @@ module Win32cr::System::WinRT::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2fc57384-a068-44d7-a331-30982fcf7177")]
   record IGraphicsEffectD2D1Interop, lpVtbl : IGraphicsEffectD2D1InteropVtbl* do
     GUID = LibC::GUID.new(0x2fc57384_u32, 0xa068_u16, 0x44d7_u16, StaticArray[0xa3_u8, 0x31_u8, 0x30_u8, 0x98_u8, 0x2f_u8, 0xcf_u8, 0x71_u8, 0x77_u8])
     def query_interface(this : IGraphicsEffectD2D1Interop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -75,7 +74,6 @@ module Win32cr::System::WinRT::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("0657af73-53fd-47cf-84ff-c8492d2a80a3")]
   record IGeometrySource2DInterop, lpVtbl : IGeometrySource2DInteropVtbl* do
     GUID = LibC::GUID.new(0x657af73_u32, 0x53fd_u16, 0x47cf_u16, StaticArray[0x84_u8, 0xff_u8, 0xc8_u8, 0x49_u8, 0x2d_u8, 0x2a_u8, 0x80_u8, 0xa3_u8])
     def query_interface(this : IGeometrySource2DInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

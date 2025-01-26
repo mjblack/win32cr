@@ -14,26 +14,32 @@ module Win32cr::System::Time
 
 
   @[Extern]
-  record TIME_ZONE_INFORMATION,
-    bias : Int32,
-    standard_name : UInt16[32],
-    standard_date : Win32cr::Foundation::SYSTEMTIME,
-    standard_bias : Int32,
-    daylight_name : UInt16[32],
-    daylight_date : Win32cr::Foundation::SYSTEMTIME,
-    daylight_bias : Int32
+  struct TIME_ZONE_INFORMATION
+    property bias : Int32
+    property standard_name : UInt16[32]
+    property standard_date : Win32cr::Foundation::SYSTEMTIME
+    property standard_bias : Int32
+    property daylight_name : UInt16[32]
+    property daylight_date : Win32cr::Foundation::SYSTEMTIME
+    property daylight_bias : Int32
+    def initialize(@bias : Int32, @standard_name : UInt16[32], @standard_date : Win32cr::Foundation::SYSTEMTIME, @standard_bias : Int32, @daylight_name : UInt16[32], @daylight_date : Win32cr::Foundation::SYSTEMTIME, @daylight_bias : Int32)
+    end
+  end
 
   @[Extern]
-  record DYNAMIC_TIME_ZONE_INFORMATION,
-    bias : Int32,
-    standard_name : UInt16[32],
-    standard_date : Win32cr::Foundation::SYSTEMTIME,
-    standard_bias : Int32,
-    daylight_name : UInt16[32],
-    daylight_date : Win32cr::Foundation::SYSTEMTIME,
-    daylight_bias : Int32,
-    time_zone_key_name : UInt16[128],
-    dynamic_daylight_time_disabled : Win32cr::Foundation::BOOLEAN
+  struct DYNAMIC_TIME_ZONE_INFORMATION
+    property bias : Int32
+    property standard_name : UInt16[32]
+    property standard_date : Win32cr::Foundation::SYSTEMTIME
+    property standard_bias : Int32
+    property daylight_name : UInt16[32]
+    property daylight_date : Win32cr::Foundation::SYSTEMTIME
+    property daylight_bias : Int32
+    property time_zone_key_name : UInt16[128]
+    property dynamic_daylight_time_disabled : Win32cr::Foundation::BOOLEAN
+    def initialize(@bias : Int32, @standard_name : UInt16[32], @standard_date : Win32cr::Foundation::SYSTEMTIME, @standard_bias : Int32, @daylight_name : UInt16[32], @daylight_date : Win32cr::Foundation::SYSTEMTIME, @daylight_bias : Int32, @time_zone_key_name : UInt16[128], @dynamic_daylight_time_disabled : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Link("kernel32")]
   @[Link("advapi32")]

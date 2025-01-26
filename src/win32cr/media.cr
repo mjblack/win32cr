@@ -4,9 +4,9 @@ require "./foundation.cr"
 
 module Win32cr::Media
   alias HTASK = LibC::IntPtrT
-  alias LPDRVCALLBACK = Proc(Win32cr::Media::Multimedia::HDRVR, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)*
+  alias LPDRVCALLBACK = Proc(Win32cr::Media::Multimedia::HDRVR, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
-  alias LPTIMECALLBACK = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)*
+  alias LPTIMECALLBACK = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
   TIMERR_NOERROR = 0_u32
   TIMERR_NOCANDO = 97_u32
@@ -118,66 +118,87 @@ module Win32cr::Media
   end
 
   @[Extern]
-  record MMTIME,
-    wType : UInt32,
-    u : U_e__union_ do
+  struct MMTIME
+    property wType : UInt32
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      ms : UInt32,
-      sample : UInt32,
-      cb : UInt32,
-      ticks : UInt32,
-      smpte : Smpte_e__struct_,
-      midi : Midi_e__struct_ do
+    struct U_e__union_
+    property ms : UInt32
+    property sample : UInt32
+    property cb : UInt32
+    property ticks : UInt32
+    property smpte : Smpte_e__struct_
+    property midi : Midi_e__struct_
 
       # Nested Type Smpte_e__struct_
       @[Extern]
-      record Smpte_e__struct_,
-        hour : UInt8,
-        min : UInt8,
-        sec : UInt8,
-        frame : UInt8,
-        fps : UInt8,
-        dummy : UInt8,
-        pad : UInt8[2]
+      struct Smpte_e__struct_
+    property hour : UInt8
+    property min : UInt8
+    property sec : UInt8
+    property frame : UInt8
+    property fps : UInt8
+    property dummy : UInt8
+    property pad : UInt8[2]
+    def initialize(@hour : UInt8, @min : UInt8, @sec : UInt8, @frame : UInt8, @fps : UInt8, @dummy : UInt8, @pad : UInt8[2])
+    end
+      end
 
 
       # Nested Type Midi_e__struct_
       @[Extern]
-      record Midi_e__struct_,
-        songptrpos : UInt32
+      struct Midi_e__struct_
+    property songptrpos : UInt32
+    def initialize(@songptrpos : UInt32)
+    end
+      end
 
+    def initialize(@ms : UInt32, @sample : UInt32, @cb : UInt32, @ticks : UInt32, @smpte : Smpte_e__struct_, @midi : Midi_e__struct_)
+    end
     end
 
+    def initialize(@wType : UInt32, @u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record TIMECAPS,
-    wPeriodMin : UInt32,
-    wPeriodMax : UInt32
+  struct TIMECAPS
+    property wPeriodMin : UInt32
+    property wPeriodMax : UInt32
+    def initialize(@wPeriodMin : UInt32, @wPeriodMax : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record TIMECODE,
-    anonymous : Anonymous_e__Struct_,
-    qw : UInt64 do
+  struct TIMECODE
+    property anonymous : Anonymous_e__Struct_
+    property qw : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      wFrameRate : UInt16,
-      wFrameFract : UInt16,
-      dwFrames : UInt32
+    struct Anonymous_e__Struct_
+    property wFrameRate : UInt16
+    property wFrameFract : UInt16
+    property dwFrames : UInt32
+    def initialize(@wFrameRate : UInt16, @wFrameFract : UInt16, @dwFrames : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @qw : UInt64)
+    end
   end
 
   @[Extern]
-  record TIMECODE_SAMPLE,
-    qwTick : Int64,
-    timecode : Win32cr::Media::TIMECODE,
-    dwUser : UInt32,
-    dwFlags : Win32cr::Media::TIMECODE_SAMPLE_FLAGS
+  struct TIMECODE_SAMPLE
+    property qwTick : Int64
+    property timecode : Win32cr::Media::TIMECODE
+    property dwUser : UInt32
+    property dwFlags : Win32cr::Media::TIMECODE_SAMPLE_FLAGS
+    def initialize(@qwTick : Int64, @timecode : Win32cr::Media::TIMECODE, @dwUser : UInt32, @dwFlags : Win32cr::Media::TIMECODE_SAMPLE_FLAGS)
+    end
+  end
 
   @[Extern]
   record IReferenceClockVtbl,
@@ -191,7 +212,6 @@ module Win32cr::Media
 
 
   @[Extern]
-  #@[Com("56a86897-0ad4-11ce-b03a-0020af0ba770")]
   record IReferenceClock, lpVtbl : IReferenceClockVtbl* do
     GUID = LibC::GUID.new(0x56a86897_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IReferenceClock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -228,7 +248,6 @@ module Win32cr::Media
 
 
   @[Extern]
-  #@[Com("ebec459c-2eca-4d42-a8af-30df557614b8")]
   record IReferenceClockTimerControl, lpVtbl : IReferenceClockTimerControlVtbl* do
     GUID = LibC::GUID.new(0xebec459c_u32, 0x2eca_u16, 0x4d42_u16, StaticArray[0xa8_u8, 0xaf_u8, 0x30_u8, 0xdf_u8, 0x55_u8, 0x76_u8, 0x14_u8, 0xb8_u8])
     def query_interface(this : IReferenceClockTimerControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -261,7 +280,6 @@ module Win32cr::Media
 
 
   @[Extern]
-  #@[Com("36b73885-c2c8-11cf-8b46-00805f6cef60")]
   record IReferenceClock2, lpVtbl : IReferenceClock2Vtbl* do
     GUID = LibC::GUID.new(0x36b73885_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
     def query_interface(this : IReferenceClock2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

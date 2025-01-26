@@ -51,47 +51,65 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record DCOMPOSITION_FRAME_STATISTICS,
-    lastFrameTime : Win32cr::Foundation::LARGE_INTEGER,
-    currentCompositionRate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    currentTime : Win32cr::Foundation::LARGE_INTEGER,
-    timeFrequency : Win32cr::Foundation::LARGE_INTEGER,
-    nextEstimatedFrameTime : Win32cr::Foundation::LARGE_INTEGER
+  struct DCOMPOSITION_FRAME_STATISTICS
+    property lastFrameTime : Win32cr::Foundation::LARGE_INTEGER
+    property currentCompositionRate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property currentTime : Win32cr::Foundation::LARGE_INTEGER
+    property timeFrequency : Win32cr::Foundation::LARGE_INTEGER
+    property nextEstimatedFrameTime : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@lastFrameTime : Win32cr::Foundation::LARGE_INTEGER, @currentCompositionRate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @currentTime : Win32cr::Foundation::LARGE_INTEGER, @timeFrequency : Win32cr::Foundation::LARGE_INTEGER, @nextEstimatedFrameTime : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record COMPOSITION_FRAME_STATS,
-    startTime : UInt64,
-    targetTime : UInt64,
-    framePeriod : UInt64
+  struct COMPOSITION_FRAME_STATS
+    property startTime : UInt64
+    property targetTime : UInt64
+    property framePeriod : UInt64
+    def initialize(@startTime : UInt64, @targetTime : UInt64, @framePeriod : UInt64)
+    end
+  end
 
   @[Extern]
-  record COMPOSITION_TARGET_ID,
-    displayAdapterLuid : Win32cr::Foundation::LUID,
-    renderAdapterLuid : Win32cr::Foundation::LUID,
-    vidPnSourceId : UInt32,
-    vidPnTargetId : UInt32,
-    uniqueId : UInt32
+  struct COMPOSITION_TARGET_ID
+    property displayAdapterLuid : Win32cr::Foundation::LUID
+    property renderAdapterLuid : Win32cr::Foundation::LUID
+    property vidPnSourceId : UInt32
+    property vidPnTargetId : UInt32
+    property uniqueId : UInt32
+    def initialize(@displayAdapterLuid : Win32cr::Foundation::LUID, @renderAdapterLuid : Win32cr::Foundation::LUID, @vidPnSourceId : UInt32, @vidPnTargetId : UInt32, @uniqueId : UInt32)
+    end
+  end
 
   @[Extern]
-  record COMPOSITION_STATS,
-    presentCount : UInt32,
-    refreshCount : UInt32,
-    virtualRefreshCount : UInt32,
-    time : UInt64
+  struct COMPOSITION_STATS
+    property presentCount : UInt32
+    property refreshCount : UInt32
+    property virtualRefreshCount : UInt32
+    property time : UInt64
+    def initialize(@presentCount : UInt32, @refreshCount : UInt32, @virtualRefreshCount : UInt32, @time : UInt64)
+    end
+  end
 
   @[Extern]
-  record COMPOSITION_TARGET_STATS,
-    outstandingPresents : UInt32,
-    presentTime : UInt64,
-    vblankDuration : UInt64,
-    presentedStats : Win32cr::Graphics::DirectComposition::COMPOSITION_STATS,
-    completedStats : Win32cr::Graphics::DirectComposition::COMPOSITION_STATS
+  struct COMPOSITION_TARGET_STATS
+    property outstandingPresents : UInt32
+    property presentTime : UInt64
+    property vblankDuration : UInt64
+    property presentedStats : Win32cr::Graphics::DirectComposition::COMPOSITION_STATS
+    property completedStats : Win32cr::Graphics::DirectComposition::COMPOSITION_STATS
+    def initialize(@outstandingPresents : UInt32, @presentTime : UInt64, @vblankDuration : UInt64, @presentedStats : Win32cr::Graphics::DirectComposition::COMPOSITION_STATS, @completedStats : Win32cr::Graphics::DirectComposition::COMPOSITION_STATS)
+    end
+  end
 
   @[Extern]
-  record DCompositionInkTrailPoint,
-    x : Float32,
-    y : Float32,
-    radius : Float32
+  struct DCompositionInkTrailPoint
+    property x : Float32
+    property y : Float32
+    property radius : Float32
+    def initialize(@x : Float32, @y : Float32, @radius : Float32)
+    end
+  end
 
   @[Extern]
   record IDCompositionAnimationVtbl,
@@ -107,7 +125,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("cbfd91d9-51b2-45e4-b3de-d19ccfb863c5")]
   record IDCompositionAnimation, lpVtbl : IDCompositionAnimationVtbl* do
     GUID = LibC::GUID.new(0xcbfd91d9_u32, 0x51b2_u16, 0x45e4_u16, StaticArray[0xb3_u8, 0xde_u8, 0xd1_u8, 0x9c_u8, 0xcf_u8, 0xb8_u8, 0x63_u8, 0xc5_u8])
     def query_interface(this : IDCompositionAnimation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -172,7 +189,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("c37ea93a-e7aa-450d-b16f-9746cb0407f3")]
   record IDCompositionDevice, lpVtbl : IDCompositionDeviceVtbl* do
     GUID = LibC::GUID.new(0xc37ea93a_u32, 0xe7aa_u16, 0x450d_u16, StaticArray[0xb1_u8, 0x6f_u8, 0x97_u8, 0x46_u8, 0xcb_u8, 0x4_u8, 0x7_u8, 0xf3_u8])
     def query_interface(this : IDCompositionDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -268,7 +284,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("eacdd04c-117e-4e17-88f4-d1b12b0e3d89")]
   record IDCompositionTarget, lpVtbl : IDCompositionTargetVtbl* do
     GUID = LibC::GUID.new(0xeacdd04c_u32, 0x117e_u16, 0x4e17_u16, StaticArray[0x88_u8, 0xf4_u8, 0xd1_u8, 0xb1_u8, 0x2b_u8, 0xe_u8, 0x3d_u8, 0x89_u8])
     def query_interface(this : IDCompositionTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -311,7 +326,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("4d93059d-097b-4651-9a60-f0f25116e2f3")]
   record IDCompositionVisual, lpVtbl : IDCompositionVisualVtbl* do
     GUID = LibC::GUID.new(0x4d93059d_u32, 0x97b_u16, 0x4651_u16, StaticArray[0x9a_u8, 0x60_u8, 0xf0_u8, 0xf2_u8, 0x51_u8, 0x16_u8, 0xe2_u8, 0xf3_u8])
     def query_interface(this : IDCompositionVisual*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -385,7 +399,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("ec81b08f-bfcb-4e8d-b193-a915587999e8")]
   record IDCompositionEffect, lpVtbl : IDCompositionEffectVtbl* do
     GUID = LibC::GUID.new(0xec81b08f_u32, 0xbfcb_u16, 0x4e8d_u16, StaticArray[0xb1_u8, 0x93_u8, 0xa9_u8, 0x15_u8, 0x58_u8, 0x79_u8, 0x99_u8, 0xe8_u8])
     def query_interface(this : IDCompositionEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -408,7 +421,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("71185722-246b-41f2-aad1-0443f7f4bfc2")]
   record IDCompositionTransform3D, lpVtbl : IDCompositionTransform3DVtbl* do
     GUID = LibC::GUID.new(0x71185722_u32, 0x246b_u16, 0x41f2_u16, StaticArray[0xaa_u8, 0xd1_u8, 0x4_u8, 0x43_u8, 0xf7_u8, 0xf4_u8, 0xbf_u8, 0xc2_u8])
     def query_interface(this : IDCompositionTransform3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -431,7 +443,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("fd55faa7-37e0-4c20-95d2-9be45bc33f55")]
   record IDCompositionTransform, lpVtbl : IDCompositionTransformVtbl* do
     GUID = LibC::GUID.new(0xfd55faa7_u32, 0x37e0_u16, 0x4c20_u16, StaticArray[0x95_u8, 0xd2_u8, 0x9b_u8, 0xe4_u8, 0x5b_u8, 0xc3_u8, 0x3f_u8, 0x55_u8])
     def query_interface(this : IDCompositionTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -458,7 +469,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("06791122-c6f0-417d-8323-269e987f5954")]
   record IDCompositionTranslateTransform, lpVtbl : IDCompositionTranslateTransformVtbl* do
     GUID = LibC::GUID.new(0x6791122_u32, 0xc6f0_u16, 0x417d_u16, StaticArray[0x83_u8, 0x23_u8, 0x26_u8, 0x9e_u8, 0x98_u8, 0x7f_u8, 0x59_u8, 0x54_u8])
     def query_interface(this : IDCompositionTranslateTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -501,7 +511,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("71fde914-40ef-45ef-bd51-68b037c339f9")]
   record IDCompositionScaleTransform, lpVtbl : IDCompositionScaleTransformVtbl* do
     GUID = LibC::GUID.new(0x71fde914_u32, 0x40ef_u16, 0x45ef_u16, StaticArray[0xbd_u8, 0x51_u8, 0x68_u8, 0xb0_u8, 0x37_u8, 0xc3_u8, 0x39_u8, 0xf9_u8])
     def query_interface(this : IDCompositionScaleTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -554,7 +563,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("641ed83c-ae96-46c5-90dc-32774cc5c6d5")]
   record IDCompositionRotateTransform, lpVtbl : IDCompositionRotateTransformVtbl* do
     GUID = LibC::GUID.new(0x641ed83c_u32, 0xae96_u16, 0x46c5_u16, StaticArray[0x90_u8, 0xdc_u8, 0x32_u8, 0x77_u8, 0x4c_u8, 0xc5_u8, 0xc6_u8, 0xd5_u8])
     def query_interface(this : IDCompositionRotateTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -603,7 +611,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("e57aa735-dcdb-4c72-9c61-0591f58889ee")]
   record IDCompositionSkewTransform, lpVtbl : IDCompositionSkewTransformVtbl* do
     GUID = LibC::GUID.new(0xe57aa735_u32, 0xdcdb_u16, 0x4c72_u16, StaticArray[0x9c_u8, 0x61_u8, 0x5_u8, 0x91_u8, 0xf5_u8, 0x88_u8, 0x89_u8, 0xee_u8])
     def query_interface(this : IDCompositionSkewTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -653,7 +660,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("16cdff07-c503-419c-83f2-0965c7af1fa6")]
   record IDCompositionMatrixTransform, lpVtbl : IDCompositionMatrixTransformVtbl* do
     GUID = LibC::GUID.new(0x16cdff07_u32, 0xc503_u16, 0x419c_u16, StaticArray[0x83_u8, 0xf2_u8, 0x9_u8, 0x65_u8, 0xc7_u8, 0xaf_u8, 0x1f_u8, 0xa6_u8])
     def query_interface(this : IDCompositionMatrixTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -688,7 +694,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("a7929a74-e6b2-4bd6-8b95-4040119ca34d")]
   record IDCompositionEffectGroup, lpVtbl : IDCompositionEffectGroupVtbl* do
     GUID = LibC::GUID.new(0xa7929a74_u32, 0xe6b2_u16, 0x4bd6_u16, StaticArray[0x8b_u8, 0x95_u8, 0x40_u8, 0x40_u8, 0x11_u8, 0x9c_u8, 0xa3_u8, 0x4d_u8])
     def query_interface(this : IDCompositionEffectGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -726,7 +731,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("91636d4b-9ba1-4532-aaf7-e3344994d788")]
   record IDCompositionTranslateTransform3D, lpVtbl : IDCompositionTranslateTransform3DVtbl* do
     GUID = LibC::GUID.new(0x91636d4b_u32, 0x9ba1_u16, 0x4532_u16, StaticArray[0xaa_u8, 0xf7_u8, 0xe3_u8, 0x34_u8, 0x49_u8, 0x94_u8, 0xd7_u8, 0x88_u8])
     def query_interface(this : IDCompositionTranslateTransform3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -779,7 +783,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("2a9e9ead-364b-4b15-a7c4-a1997f78b389")]
   record IDCompositionScaleTransform3D, lpVtbl : IDCompositionScaleTransform3DVtbl* do
     GUID = LibC::GUID.new(0x2a9e9ead_u32, 0x364b_u16, 0x4b15_u16, StaticArray[0xa7_u8, 0xc4_u8, 0xa1_u8, 0x99_u8, 0x7f_u8, 0x78_u8, 0xb3_u8, 0x89_u8])
     def query_interface(this : IDCompositionScaleTransform3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -852,7 +855,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("d8f5b23f-d429-4a91-b55a-d2f45fd75b18")]
   record IDCompositionRotateTransform3D, lpVtbl : IDCompositionRotateTransform3DVtbl* do
     GUID = LibC::GUID.new(0xd8f5b23f_u32, 0xd429_u16, 0x4a91_u16, StaticArray[0xb5_u8, 0x5a_u8, 0xd2_u8, 0xf4_u8, 0x5f_u8, 0xd7_u8, 0x5b_u8, 0x18_u8])
     def query_interface(this : IDCompositionRotateTransform3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -920,7 +922,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("4b3363f0-643b-41b7-b6e0-ccf22d34467c")]
   record IDCompositionMatrixTransform3D, lpVtbl : IDCompositionMatrixTransform3DVtbl* do
     GUID = LibC::GUID.new(0x4b3363f0_u32, 0x643b_u16, 0x41b7_u16, StaticArray[0xb6_u8, 0xe0_u8, 0xcc_u8, 0xf2_u8, 0x2d_u8, 0x34_u8, 0x46_u8, 0x7c_u8])
     def query_interface(this : IDCompositionMatrixTransform3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -952,7 +953,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("64ac3703-9d3f-45ec-a109-7cac0e7a13a7")]
   record IDCompositionClip, lpVtbl : IDCompositionClipVtbl* do
     GUID = LibC::GUID.new(0x64ac3703_u32, 0x9d3f_u16, 0x45ec_u16, StaticArray[0xa1_u8, 0x9_u8, 0x7c_u8, 0xac_u8, 0xe_u8, 0x7a_u8, 0x13_u8, 0xa7_u8])
     def query_interface(this : IDCompositionClip*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -999,7 +999,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("9842ad7d-d9cf-4908-aed7-48b51da5e7c2")]
   record IDCompositionRectangleClip, lpVtbl : IDCompositionRectangleClipVtbl* do
     GUID = LibC::GUID.new(0x9842ad7d_u32, 0xd9cf_u16, 0x4908_u16, StaticArray[0xae_u8, 0xd7_u8, 0x48_u8, 0xb5_u8, 0x1d_u8, 0xa5_u8, 0xe7_u8, 0xc2_u8])
     def query_interface(this : IDCompositionRectangleClip*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1099,7 +1098,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("bb8a4953-2c99-4f5a-96f5-4819027fa3ac")]
   record IDCompositionSurface, lpVtbl : IDCompositionSurfaceVtbl* do
     GUID = LibC::GUID.new(0xbb8a4953_u32, 0x2c99_u16, 0x4f5a_u16, StaticArray[0x96_u8, 0xf5_u8, 0x48_u8, 0x19_u8, 0x2_u8, 0x7f_u8, 0xa3_u8, 0xac_u8])
     def query_interface(this : IDCompositionSurface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1144,7 +1142,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("ae471c51-5f53-4a24-8d3e-d0c39c30b3f0")]
   record IDCompositionVirtualSurface, lpVtbl : IDCompositionVirtualSurfaceVtbl* do
     GUID = LibC::GUID.new(0xae471c51_u32, 0x5f53_u16, 0x4a24_u16, StaticArray[0x8d_u8, 0x3e_u8, 0xd0_u8, 0xc3_u8, 0x9c_u8, 0x30_u8, 0xb3_u8, 0xf0_u8])
     def query_interface(this : IDCompositionVirtualSurface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1209,7 +1206,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("75f6468d-1b8e-447c-9bc6-75fea80b5b25")]
   record IDCompositionDevice2, lpVtbl : IDCompositionDevice2Vtbl* do
     GUID = LibC::GUID.new(0x75f6468d_u32, 0x1b8e_u16, 0x447c_u16, StaticArray[0x9b_u8, 0xc6_u8, 0x75_u8, 0xfe_u8, 0xa8_u8, 0xb_u8, 0x5b_u8, 0x25_u8])
     def query_interface(this : IDCompositionDevice2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1319,7 +1315,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("5f4633fe-1e08-4cb8-8c75-ce24333f5602")]
   record IDCompositionDesktopDevice, lpVtbl : IDCompositionDesktopDeviceVtbl* do
     GUID = LibC::GUID.new(0x5f4633fe_u32, 0x1e08_u16, 0x4cb8_u16, StaticArray[0x8c_u8, 0x75_u8, 0xce_u8, 0x24_u8, 0x33_u8, 0x3f_u8, 0x56_u8, 0x2_u8])
     def query_interface(this : IDCompositionDesktopDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1416,7 +1411,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("a1a3c64a-224f-4a81-9773-4f03a89d3c6c")]
   record IDCompositionDeviceDebug, lpVtbl : IDCompositionDeviceDebugVtbl* do
     GUID = LibC::GUID.new(0xa1a3c64a_u32, 0x224f_u16, 0x4a81_u16, StaticArray[0x97_u8, 0x73_u8, 0x4f_u8, 0x3_u8, 0xa8_u8, 0x9d_u8, 0x3c_u8, 0x6c_u8])
     def query_interface(this : IDCompositionDeviceDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1447,7 +1441,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("e334bc12-3937-4e02-85eb-fcf4eb30d2c8")]
   record IDCompositionSurfaceFactory, lpVtbl : IDCompositionSurfaceFactoryVtbl* do
     GUID = LibC::GUID.new(0xe334bc12_u32, 0x3937_u16, 0x4e02_u16, StaticArray[0x85_u8, 0xeb_u8, 0xfc_u8, 0xf4_u8, 0xeb_u8, 0x30_u8, 0xd2_u8, 0xc8_u8])
     def query_interface(this : IDCompositionSurfaceFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1495,7 +1488,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("e8de1639-4331-4b26-bc5f-6a321d347a85")]
   record IDCompositionVisual2, lpVtbl : IDCompositionVisual2Vtbl* do
     GUID = LibC::GUID.new(0xe8de1639_u32, 0x4331_u16, 0x4b26_u16, StaticArray[0xbc_u8, 0x5f_u8, 0x6a_u8, 0x32_u8, 0x1d_u8, 0x34_u8, 0x7a_u8, 0x85_u8])
     def query_interface(this : IDCompositionVisual2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1598,7 +1590,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("fed2b808-5eb4-43a0-aea3-35f65280f91b")]
   record IDCompositionVisualDebug, lpVtbl : IDCompositionVisualDebugVtbl* do
     GUID = LibC::GUID.new(0xfed2b808_u32, 0x5eb4_u16, 0x43a0_u16, StaticArray[0xae_u8, 0xa3_u8, 0x35_u8, 0xf6_u8, 0x52_u8, 0x80_u8, 0xf9_u8, 0x1b_u8])
     def query_interface(this : IDCompositionVisualDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1721,7 +1712,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("2775f462-b6c1-4015-b0be-b3e7d6a4976d")]
   record IDCompositionVisual3, lpVtbl : IDCompositionVisual3Vtbl* do
     GUID = LibC::GUID.new(0x2775f462_u32, 0xb6c1_u16, 0x4015_u16, StaticArray[0xb0_u8, 0xbe_u8, 0xb3_u8, 0xe7_u8, 0xd6_u8, 0xa4_u8, 0x97_u8, 0x6d_u8])
     def query_interface(this : IDCompositionVisual3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1871,7 +1861,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("0987cb06-f916-48bf-8d35-ce7641781bd9")]
   record IDCompositionDevice3, lpVtbl : IDCompositionDevice3Vtbl* do
     GUID = LibC::GUID.new(0x987cb06_u32, 0xf916_u16, 0x48bf_u16, StaticArray[0x8d_u8, 0x35_u8, 0xce_u8, 0x76_u8, 0x41_u8, 0x78_u8, 0x1b_u8, 0xd9_u8])
     def query_interface(this : IDCompositionDevice3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1997,7 +1986,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("30c421d5-8cb2-4e9f-b133-37be270d4ac2")]
   record IDCompositionFilterEffect, lpVtbl : IDCompositionFilterEffectVtbl* do
     GUID = LibC::GUID.new(0x30c421d5_u32, 0x8cb2_u16, 0x4e9f_u16, StaticArray[0xb1_u8, 0x33_u8, 0x37_u8, 0xbe_u8, 0x27_u8, 0xd_u8, 0x4a_u8, 0xc2_u8])
     def query_interface(this : IDCompositionFilterEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2027,7 +2015,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("45d4d0b7-1bd4-454e-8894-2bfa68443033")]
   record IDCompositionGaussianBlurEffect, lpVtbl : IDCompositionGaussianBlurEffectVtbl* do
     GUID = LibC::GUID.new(0x45d4d0b7_u32, 0x1bd4_u16, 0x454e_u16, StaticArray[0x88_u8, 0x94_u8, 0x2b_u8, 0xfa_u8, 0x68_u8, 0x44_u8, 0x30_u8, 0x33_u8])
     def query_interface(this : IDCompositionGaussianBlurEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2073,7 +2060,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("6027496e-cb3a-49ab-934f-d798da4f7da6")]
   record IDCompositionBrightnessEffect, lpVtbl : IDCompositionBrightnessEffectVtbl* do
     GUID = LibC::GUID.new(0x6027496e_u32, 0xcb3a_u16, 0x49ab_u16, StaticArray[0x93_u8, 0x4f_u8, 0xd7_u8, 0x98_u8, 0xda_u8, 0x4f_u8, 0x7d_u8, 0xa6_u8])
     def query_interface(this : IDCompositionBrightnessEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2135,7 +2121,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("c1170a22-3ce2-4966-90d4-55408bfc84c4")]
   record IDCompositionColorMatrixEffect, lpVtbl : IDCompositionColorMatrixEffectVtbl* do
     GUID = LibC::GUID.new(0xc1170a22_u32, 0x3ce2_u16, 0x4966_u16, StaticArray[0x90_u8, 0xd4_u8, 0x55_u8, 0x40_u8, 0x8b_u8, 0xfc_u8, 0x84_u8, 0xc4_u8])
     def query_interface(this : IDCompositionColorMatrixEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2188,7 +2173,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("4ad18ac0-cfd2-4c2f-bb62-96e54fdb6879")]
   record IDCompositionShadowEffect, lpVtbl : IDCompositionShadowEffectVtbl* do
     GUID = LibC::GUID.new(0x4ad18ac0_u32, 0xcfd2_u16, 0x4c2f_u16, StaticArray[0xbb_u8, 0x62_u8, 0x96_u8, 0xe5_u8, 0x4f_u8, 0xdb_u8, 0x68_u8, 0x79_u8])
     def query_interface(this : IDCompositionShadowEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2250,7 +2234,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("6db9f920-0770-4781-b0c6-381912f9d167")]
   record IDCompositionHueRotationEffect, lpVtbl : IDCompositionHueRotationEffectVtbl* do
     GUID = LibC::GUID.new(0x6db9f920_u32, 0x770_u16, 0x4781_u16, StaticArray[0xb0_u8, 0xc6_u8, 0x38_u8, 0x19_u8, 0x12_u8, 0xf9_u8, 0xd1_u8, 0x67_u8])
     def query_interface(this : IDCompositionHueRotationEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2285,7 +2268,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("a08debda-3258-4fa4-9f16-9174d3fe93b1")]
   record IDCompositionSaturationEffect, lpVtbl : IDCompositionSaturationEffectVtbl* do
     GUID = LibC::GUID.new(0xa08debda_u32, 0x3258_u16, 0x4fa4_u16, StaticArray[0x9f_u8, 0x16_u8, 0x91_u8, 0x74_u8, 0xd3_u8, 0xfe_u8, 0x93_u8, 0xb1_u8])
     def query_interface(this : IDCompositionSaturationEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2325,7 +2307,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("a6a55bda-c09c-49f3-9193-a41922c89715")]
   record IDCompositionTurbulenceEffect, lpVtbl : IDCompositionTurbulenceEffectVtbl* do
     GUID = LibC::GUID.new(0xa6a55bda_u32, 0xc09c_u16, 0x49f3_u16, StaticArray[0x91_u8, 0x93_u8, 0xa4_u8, 0x19_u8, 0x22_u8, 0xc8_u8, 0x97_u8, 0x15_u8])
     def query_interface(this : IDCompositionTurbulenceEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2394,7 +2375,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("4305ee5b-c4a0-4c88-9385-67124e017683")]
   record IDCompositionLinearTransferEffect, lpVtbl : IDCompositionLinearTransferEffectVtbl* do
     GUID = LibC::GUID.new(0x4305ee5b_u32, 0xc4a0_u16, 0x4c88_u16, StaticArray[0x93_u8, 0x85_u8, 0x67_u8, 0x12_u8, 0x4e_u8, 0x1_u8, 0x76_u8, 0x83_u8])
     def query_interface(this : IDCompositionLinearTransferEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2501,7 +2481,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("9b7e82e2-69c5-4eb4-a5f5-a7033f5132cd")]
   record IDCompositionTableTransferEffect, lpVtbl : IDCompositionTableTransferEffectVtbl* do
     GUID = LibC::GUID.new(0x9b7e82e2_u32, 0x69c5_u16, 0x4eb4_u16, StaticArray[0xa5_u8, 0xf5_u8, 0xa7_u8, 0x3_u8, 0x3f_u8, 0x51_u8, 0x32_u8, 0xcd_u8])
     def query_interface(this : IDCompositionTableTransferEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2580,7 +2559,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("576616c0-a231-494d-a38d-00fd5ec4db46")]
   record IDCompositionCompositeEffect, lpVtbl : IDCompositionCompositeEffectVtbl* do
     GUID = LibC::GUID.new(0x576616c0_u32, 0xa231_u16, 0x494d_u16, StaticArray[0xa3_u8, 0x8d_u8, 0x0_u8, 0xfd_u8, 0x5e_u8, 0xc4_u8, 0xdb_u8, 0x46_u8])
     def query_interface(this : IDCompositionCompositeEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2611,7 +2589,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("33ecdc0a-578a-4a11-9c14-0cb90517f9c5")]
   record IDCompositionBlendEffect, lpVtbl : IDCompositionBlendEffectVtbl* do
     GUID = LibC::GUID.new(0x33ecdc0a_u32, 0x578a_u16, 0x4a11_u16, StaticArray[0x9c_u8, 0x14_u8, 0xc_u8, 0xb9_u8, 0x5_u8, 0x17_u8, 0xf9_u8, 0xc5_u8])
     def query_interface(this : IDCompositionBlendEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2651,7 +2628,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("3b67dfa8-e3dd-4e61-b640-46c2f3d739dc")]
   record IDCompositionArithmeticCompositeEffect, lpVtbl : IDCompositionArithmeticCompositeEffectVtbl* do
     GUID = LibC::GUID.new(0x3b67dfa8_u32, 0xe3dd_u16, 0x4e61_u16, StaticArray[0xb6_u8, 0x40_u8, 0x46_u8, 0xc2_u8, 0xf3_u8, 0xd7_u8, 0x39_u8, 0xdc_u8])
     def query_interface(this : IDCompositionArithmeticCompositeEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2715,7 +2691,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("0b74b9e8-cdd6-492f-bbbc-5ed32157026d")]
   record IDCompositionAffineTransform2DEffect, lpVtbl : IDCompositionAffineTransform2DEffectVtbl* do
     GUID = LibC::GUID.new(0xb74b9e8_u32, 0xcdd6_u16, 0x492f_u16, StaticArray[0xbb_u8, 0xbc_u8, 0x5e_u8, 0xd3_u8, 0x21_u8, 0x57_u8, 0x2_u8, 0x6d_u8])
     def query_interface(this : IDCompositionAffineTransform2DEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2766,7 +2741,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("c2448e9b-547d-4057-8cf5-8144ede1c2da")]
   record IDCompositionDelegatedInkTrail, lpVtbl : IDCompositionDelegatedInkTrailVtbl* do
     GUID = LibC::GUID.new(0xc2448e9b_u32, 0x547d_u16, 0x4057_u16, StaticArray[0x8c_u8, 0xf5_u8, 0x81_u8, 0x44_u8, 0xed_u8, 0xe1_u8, 0xc2_u8, 0xda_u8])
     def query_interface(this : IDCompositionDelegatedInkTrail*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2803,7 +2777,6 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  #@[Com("df0c7cec-cdeb-4d4a-b91c-721bf22f4e6c")]
   record IDCompositionInkTrailDevice, lpVtbl : IDCompositionInkTrailDeviceVtbl* do
     GUID = LibC::GUID.new(0xdf0c7cec_u32, 0xcdeb_u16, 0x4d4a_u16, StaticArray[0xb9_u8, 0x1c_u8, 0x72_u8, 0x1b_u8, 0xf2_u8, 0x2f_u8, 0x4e_u8, 0x6c_u8])
     def query_interface(this : IDCompositionInkTrailDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

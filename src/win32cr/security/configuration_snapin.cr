@@ -2,17 +2,17 @@ require "./../foundation.cr"
 require "./../system/com.cr"
 
 module Win32cr::Security::ConfigurationSnapin
-  alias PFSCE_QUERY_INFO = Proc(Void*, Win32cr::Security::ConfigurationSnapin::SCESVC_INFO_TYPE, Int8*, Win32cr::Foundation::BOOL, Void**, UInt32*, UInt32)*
+  alias PFSCE_QUERY_INFO = Proc(Void*, Win32cr::Security::ConfigurationSnapin::SCESVC_INFO_TYPE, Int8*, Win32cr::Foundation::BOOL, Void**, UInt32*, UInt32)
 
-  alias PFSCE_SET_INFO = Proc(Void*, Win32cr::Security::ConfigurationSnapin::SCESVC_INFO_TYPE, Int8*, Win32cr::Foundation::BOOL, Void*, UInt32)*
+  alias PFSCE_SET_INFO = Proc(Void*, Win32cr::Security::ConfigurationSnapin::SCESVC_INFO_TYPE, Int8*, Win32cr::Foundation::BOOL, Void*, UInt32)
 
-  alias PFSCE_FREE_INFO = Proc(Void*, UInt32)*
+  alias PFSCE_FREE_INFO = Proc(Void*, UInt32)
 
-  alias PFSCE_LOG_INFO = Proc(Win32cr::Security::ConfigurationSnapin::SCE_LOG_ERR_LEVEL, UInt32, Int8*, UInt32)*
+  alias PFSCE_LOG_INFO = Proc(Win32cr::Security::ConfigurationSnapin::SCE_LOG_ERR_LEVEL, UInt32, Int8*, UInt32)
 
-  alias PF_ConfigAnalyzeService = Proc(Win32cr::Security::ConfigurationSnapin::SCESVC_CALLBACK_INFO*, UInt32)*
+  alias PF_ConfigAnalyzeService = Proc(Win32cr::Security::ConfigurationSnapin::SCESVC_CALLBACK_INFO*, UInt32)
 
-  alias PF_UpdateService = Proc(Win32cr::Security::ConfigurationSnapin::SCESVC_CALLBACK_INFO*, Win32cr::Security::ConfigurationSnapin::SCESVC_CONFIGURATION_INFO*, UInt32)*
+  alias PF_UpdateService = Proc(Win32cr::Security::ConfigurationSnapin::SCESVC_CALLBACK_INFO*, Win32cr::Security::ConfigurationSnapin::SCESVC_CONFIGURATION_INFO*, UInt32)
 
   Cnodetypescetemplateservices = "24a7f717-1f0c-11d1-affb-00c04fb984f9"
   Cnodetypesceanalysisservices = "678050c7-1ff8-11d1-affb-00c04fb984f9"
@@ -62,34 +62,49 @@ module Win32cr::Security::ConfigurationSnapin
   end
 
   @[Extern]
-  record SCESVC_CONFIGURATION_LINE,
-    key : Int8*,
-    value : Int8*,
-    value_len : UInt32
+  struct SCESVC_CONFIGURATION_LINE
+    property key : Int8*
+    property value : Int8*
+    property value_len : UInt32
+    def initialize(@key : Int8*, @value : Int8*, @value_len : UInt32)
+    end
+  end
 
   @[Extern]
-  record SCESVC_CONFIGURATION_INFO,
-    count : UInt32,
-    lines : Win32cr::Security::ConfigurationSnapin::SCESVC_CONFIGURATION_LINE*
+  struct SCESVC_CONFIGURATION_INFO
+    property count : UInt32
+    property lines : Win32cr::Security::ConfigurationSnapin::SCESVC_CONFIGURATION_LINE*
+    def initialize(@count : UInt32, @lines : Win32cr::Security::ConfigurationSnapin::SCESVC_CONFIGURATION_LINE*)
+    end
+  end
 
   @[Extern]
-  record SCESVC_ANALYSIS_LINE,
-    key : Int8*,
-    value : UInt8*,
-    value_len : UInt32
+  struct SCESVC_ANALYSIS_LINE
+    property key : Int8*
+    property value : UInt8*
+    property value_len : UInt32
+    def initialize(@key : Int8*, @value : UInt8*, @value_len : UInt32)
+    end
+  end
 
   @[Extern]
-  record SCESVC_ANALYSIS_INFO,
-    count : UInt32,
-    lines : Win32cr::Security::ConfigurationSnapin::SCESVC_ANALYSIS_LINE*
+  struct SCESVC_ANALYSIS_INFO
+    property count : UInt32
+    property lines : Win32cr::Security::ConfigurationSnapin::SCESVC_ANALYSIS_LINE*
+    def initialize(@count : UInt32, @lines : Win32cr::Security::ConfigurationSnapin::SCESVC_ANALYSIS_LINE*)
+    end
+  end
 
   @[Extern]
-  record SCESVC_CALLBACK_INFO,
-    sceHandle : Void*,
-    pfQueryInfo : Win32cr::Security::ConfigurationSnapin::PFSCE_QUERY_INFO,
-    pfSetInfo : Win32cr::Security::ConfigurationSnapin::PFSCE_SET_INFO,
-    pfFreeInfo : Win32cr::Security::ConfigurationSnapin::PFSCE_FREE_INFO,
-    pfLogInfo : Win32cr::Security::ConfigurationSnapin::PFSCE_LOG_INFO
+  struct SCESVC_CALLBACK_INFO
+    property sceHandle : Void*
+    property pfQueryInfo : Win32cr::Security::ConfigurationSnapin::PFSCE_QUERY_INFO
+    property pfSetInfo : Win32cr::Security::ConfigurationSnapin::PFSCE_SET_INFO
+    property pfFreeInfo : Win32cr::Security::ConfigurationSnapin::PFSCE_FREE_INFO
+    property pfLogInfo : Win32cr::Security::ConfigurationSnapin::PFSCE_LOG_INFO
+    def initialize(@sceHandle : Void*, @pfQueryInfo : Win32cr::Security::ConfigurationSnapin::PFSCE_QUERY_INFO, @pfSetInfo : Win32cr::Security::ConfigurationSnapin::PFSCE_SET_INFO, @pfFreeInfo : Win32cr::Security::ConfigurationSnapin::PFSCE_FREE_INFO, @pfLogInfo : Win32cr::Security::ConfigurationSnapin::PFSCE_LOG_INFO)
+    end
+  end
 
   @[Extern]
   record ISceSvcAttachmentPersistInfoVtbl,
@@ -102,7 +117,6 @@ module Win32cr::Security::ConfigurationSnapin
 
 
   @[Extern]
-  #@[Com("6d90e0d0-200d-11d1-affb-00c04fb984f9")]
   record ISceSvcAttachmentPersistInfo, lpVtbl : ISceSvcAttachmentPersistInfoVtbl* do
     GUID = LibC::GUID.new(0x6d90e0d0_u32, 0x200d_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xfb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x84_u8, 0xf9_u8])
     def query_interface(this : ISceSvcAttachmentPersistInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -138,7 +152,6 @@ module Win32cr::Security::ConfigurationSnapin
 
 
   @[Extern]
-  #@[Com("17c35fde-200d-11d1-affb-00c04fb984f9")]
   record ISceSvcAttachmentData, lpVtbl : ISceSvcAttachmentDataVtbl* do
     GUID = LibC::GUID.new(0x17c35fde_u32, 0x200d_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xfb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x84_u8, 0xf9_u8])
     def query_interface(this : ISceSvcAttachmentData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

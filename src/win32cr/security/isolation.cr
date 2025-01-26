@@ -9,9 +9,12 @@ module Win32cr::Security::Isolation
 
 
   @[Extern]
-  record IsolatedAppLauncherTelemetryParameters,
-    enable_for_launch : Win32cr::Foundation::BOOL,
-    correlation_guid : LibC::GUID
+  struct IsolatedAppLauncherTelemetryParameters
+    property enable_for_launch : Win32cr::Foundation::BOOL
+    property correlation_guid : LibC::GUID
+    def initialize(@enable_for_launch : Win32cr::Foundation::BOOL, @correlation_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
   record IIsolatedAppLauncherVtbl,
@@ -22,7 +25,6 @@ module Win32cr::Security::Isolation
 
 
   @[Extern]
-  #@[Com("f686878f-7b42-4cc4-96fb-f4f3b6e3d24d")]
   record IIsolatedAppLauncher, lpVtbl : IIsolatedAppLauncherVtbl* do
     GUID = LibC::GUID.new(0xf686878f_u32, 0x7b42_u16, 0x4cc4_u16, StaticArray[0x96_u8, 0xfb_u8, 0xf4_u8, 0xf3_u8, 0xb6_u8, 0xe3_u8, 0xd2_u8, 0x4d_u8])
     def query_interface(this : IIsolatedAppLauncher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -41,8 +43,6 @@ module Win32cr::Security::Isolation
   end
 
   @[Link("kernel32")]
-  @[Link("api-ms-win-security-isolatedcontainer-l1-1-1")]
-  @[Link("api-ms-win-security-isolatedcontainer-l1-1-0")]
   @[Link("isolatedwindowsenvironmentutils")]
   @[Link("userenv")]
   lib C

@@ -94,222 +94,299 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record WINML_TENSOR_BINDING_DESC,
-    data_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE,
-    num_dimensions : UInt32,
-    pShape : Int64*,
-    data_size : UInt32,
-    pData : Void*
-
-  @[Extern]
-  record WINML_SEQUENCE_BINDING_DESC,
-    element_count : UInt32,
-    element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pStrings : Win32cr::Foundation::PWSTR*,
-      pInts : Int64*,
-      pFloats : Float32*,
-      pDoubles : Float64*
-
+  struct WINML_TENSOR_BINDING_DESC
+    property data_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
+    property num_dimensions : UInt32
+    property pShape : Int64*
+    property data_size : UInt32
+    property pData : Void*
+    def initialize(@data_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE, @num_dimensions : UInt32, @pShape : Int64*, @data_size : UInt32, @pData : Void*)
+    end
   end
 
   @[Extern]
-  record WINML_MAP_BINDING_DESC,
-    element_count : UInt32,
-    key_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE,
-    anonymous1 : Anonymous1_e__Union_,
-    fields : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct WINML_SEQUENCE_BINDING_DESC
+    property element_count : UInt32
+    property element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pStrings : Win32cr::Foundation::PWSTR*
+    property pInts : Int64*
+    property pFloats : Float32*
+    property pDoubles : Float64*
+    def initialize(@pStrings : Win32cr::Foundation::PWSTR*, @pInts : Int64*, @pFloats : Float32*, @pDoubles : Float64*)
+    end
+    end
+
+    def initialize(@element_count : UInt32, @element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct WINML_MAP_BINDING_DESC
+    property element_count : UInt32
+    property key_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
+    property anonymous1 : Anonymous1_e__Union_
+    property fields : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      pStringFields : Win32cr::Foundation::PWSTR*,
-      pIntFields : Int64*,
-      pFloatFields : Float32*,
-      pDoubleFields : Float64*
+    struct Anonymous2_e__Union_
+    property pStringFields : Win32cr::Foundation::PWSTR*
+    property pIntFields : Int64*
+    property pFloatFields : Float32*
+    property pDoubleFields : Float64*
+    def initialize(@pStringFields : Win32cr::Foundation::PWSTR*, @pIntFields : Int64*, @pFloatFields : Float32*, @pDoubleFields : Float64*)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      pStringKeys : Win32cr::Foundation::PWSTR*,
-      pIntKeys : Int64*
+    struct Anonymous1_e__Union_
+    property pStringKeys : Win32cr::Foundation::PWSTR*
+    property pIntKeys : Int64*
+    def initialize(@pStringKeys : Win32cr::Foundation::PWSTR*, @pIntKeys : Int64*)
+    end
+    end
 
+    def initialize(@element_count : UInt32, @key_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE, @anonymous1 : Anonymous1_e__Union_, @fields : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record WINML_IMAGE_BINDING_DESC,
-    element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE,
-    num_dimensions : UInt32,
-    pShape : Int64*,
-    data_size : UInt32,
-    pData : Void*
+  struct WINML_IMAGE_BINDING_DESC
+    property element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
+    property num_dimensions : UInt32
+    property pShape : Int64*
+    property data_size : UInt32
+    property pData : Void*
+    def initialize(@element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE, @num_dimensions : UInt32, @pShape : Int64*, @data_size : UInt32, @pData : Void*)
+    end
+  end
 
   @[Extern]
-  record WINML_RESOURCE_BINDING_DESC,
-    element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE,
-    num_dimensions : UInt32,
-    pShape : Int64*,
-    pResource : Void*
+  struct WINML_RESOURCE_BINDING_DESC
+    property element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
+    property num_dimensions : UInt32
+    property pShape : Int64*
+    property pResource : Void*
+    def initialize(@element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE, @num_dimensions : UInt32, @pShape : Int64*, @pResource : Void*)
+    end
+  end
 
   @[Extern]
-  record WINML_BINDING_DESC,
-    name : Win32cr::Foundation::PWSTR,
-    bind_type : Win32cr::AI::MachineLearning::WinML::WINML_BINDING_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct WINML_BINDING_DESC
+    property name : Win32cr::Foundation::PWSTR
+    property bind_type : Win32cr::AI::MachineLearning::WinML::WINML_BINDING_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      tensor : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_BINDING_DESC,
-      sequence : Win32cr::AI::MachineLearning::WinML::WINML_SEQUENCE_BINDING_DESC,
-      map : Win32cr::AI::MachineLearning::WinML::WINML_MAP_BINDING_DESC,
-      image : Win32cr::AI::MachineLearning::WinML::WINML_IMAGE_BINDING_DESC,
-      resource : Win32cr::AI::MachineLearning::WinML::WINML_RESOURCE_BINDING_DESC
+    struct Anonymous_e__Union_
+    property tensor : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_BINDING_DESC
+    property sequence : Win32cr::AI::MachineLearning::WinML::WINML_SEQUENCE_BINDING_DESC
+    property map : Win32cr::AI::MachineLearning::WinML::WINML_MAP_BINDING_DESC
+    property image : Win32cr::AI::MachineLearning::WinML::WINML_IMAGE_BINDING_DESC
+    property resource : Win32cr::AI::MachineLearning::WinML::WINML_RESOURCE_BINDING_DESC
+    def initialize(@tensor : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_BINDING_DESC, @sequence : Win32cr::AI::MachineLearning::WinML::WINML_SEQUENCE_BINDING_DESC, @map : Win32cr::AI::MachineLearning::WinML::WINML_MAP_BINDING_DESC, @image : Win32cr::AI::MachineLearning::WinML::WINML_IMAGE_BINDING_DESC, @resource : Win32cr::AI::MachineLearning::WinML::WINML_RESOURCE_BINDING_DESC)
+    end
+    end
 
+    def initialize(@name : Win32cr::Foundation::PWSTR, @bind_type : Win32cr::AI::MachineLearning::WinML::WINML_BINDING_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record WINML_TENSOR_VARIABLE_DESC,
-    element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE,
-    num_dimensions : UInt32,
-    pShape : Int64*
+  struct WINML_TENSOR_VARIABLE_DESC
+    property element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
+    property num_dimensions : UInt32
+    property pShape : Int64*
+    def initialize(@element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE, @num_dimensions : UInt32, @pShape : Int64*)
+    end
+  end
 
   @[Extern]
-  record WINML_SEQUENCE_VARIABLE_DESC,
-    element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
+  struct WINML_SEQUENCE_VARIABLE_DESC
+    property element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
+    def initialize(@element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE)
+    end
+  end
 
   @[Extern]
-  record WINML_MAP_VARIABLE_DESC,
-    key_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE,
-    fields : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
+  struct WINML_MAP_VARIABLE_DESC
+    property key_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
+    property fields : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
+    def initialize(@key_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE, @fields : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE)
+    end
+  end
 
   @[Extern]
-  record WINML_IMAGE_VARIABLE_DESC,
-    element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE,
-    num_dimensions : UInt32,
-    pShape : Int64*
+  struct WINML_IMAGE_VARIABLE_DESC
+    property element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
+    property num_dimensions : UInt32
+    property pShape : Int64*
+    def initialize(@element_type : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE, @num_dimensions : UInt32, @pShape : Int64*)
+    end
+  end
 
   @[Extern]
-  record WINML_VARIABLE_DESC,
-    name : Win32cr::Foundation::PWSTR,
-    description : Win32cr::Foundation::PWSTR,
-    feature_type : Win32cr::AI::MachineLearning::WinML::WINML_FEATURE_TYPE,
-    required : Win32cr::Foundation::BOOL,
-    anonymous : Anonymous_e__Union_ do
+  struct WINML_VARIABLE_DESC
+    property name : Win32cr::Foundation::PWSTR
+    property description : Win32cr::Foundation::PWSTR
+    property feature_type : Win32cr::AI::MachineLearning::WinML::WINML_FEATURE_TYPE
+    property required : Win32cr::Foundation::BOOL
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      tensor : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_VARIABLE_DESC,
-      sequence : Win32cr::AI::MachineLearning::WinML::WINML_SEQUENCE_VARIABLE_DESC,
-      map : Win32cr::AI::MachineLearning::WinML::WINML_MAP_VARIABLE_DESC,
-      image : Win32cr::AI::MachineLearning::WinML::WINML_IMAGE_VARIABLE_DESC
+    struct Anonymous_e__Union_
+    property tensor : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_VARIABLE_DESC
+    property sequence : Win32cr::AI::MachineLearning::WinML::WINML_SEQUENCE_VARIABLE_DESC
+    property map : Win32cr::AI::MachineLearning::WinML::WINML_MAP_VARIABLE_DESC
+    property image : Win32cr::AI::MachineLearning::WinML::WINML_IMAGE_VARIABLE_DESC
+    def initialize(@tensor : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_VARIABLE_DESC, @sequence : Win32cr::AI::MachineLearning::WinML::WINML_SEQUENCE_VARIABLE_DESC, @map : Win32cr::AI::MachineLearning::WinML::WINML_MAP_VARIABLE_DESC, @image : Win32cr::AI::MachineLearning::WinML::WINML_IMAGE_VARIABLE_DESC)
+    end
+    end
 
+    def initialize(@name : Win32cr::Foundation::PWSTR, @description : Win32cr::Foundation::PWSTR, @feature_type : Win32cr::AI::MachineLearning::WinML::WINML_FEATURE_TYPE, @required : Win32cr::Foundation::BOOL, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record WINML_MODEL_DESC,
-    author : Win32cr::Foundation::PWSTR,
-    name : Win32cr::Foundation::PWSTR,
-    domain : Win32cr::Foundation::PWSTR,
-    description : Win32cr::Foundation::PWSTR,
-    version : LibC::UIntPtrT
+  struct WINML_MODEL_DESC
+    property author : Win32cr::Foundation::PWSTR
+    property name : Win32cr::Foundation::PWSTR
+    property domain : Win32cr::Foundation::PWSTR
+    property description : Win32cr::Foundation::PWSTR
+    property version : LibC::UIntPtrT
+    def initialize(@author : Win32cr::Foundation::PWSTR, @name : Win32cr::Foundation::PWSTR, @domain : Win32cr::Foundation::PWSTR, @description : Win32cr::Foundation::PWSTR, @version : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record MLOperatorEdgeDescription,
-    edgeType : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeType,
-    anonymous : Anonymous_e__Union_ do
+  struct MLOperatorEdgeDescription
+    property edgeType : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeType
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      reserved : UInt64,
-      tensorDataType : Win32cr::AI::MachineLearning::WinML::MLOperatorTensorDataType
+    struct Anonymous_e__Union_
+    property reserved : UInt64
+    property tensorDataType : Win32cr::AI::MachineLearning::WinML::MLOperatorTensorDataType
+    def initialize(@reserved : UInt64, @tensorDataType : Win32cr::AI::MachineLearning::WinML::MLOperatorTensorDataType)
+    end
+    end
 
+    def initialize(@edgeType : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeType, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record MLOperatorSchemaEdgeDescription,
-    options : Win32cr::AI::MachineLearning::WinML::MLOperatorParameterOptions,
-    typeFormat : Win32cr::AI::MachineLearning::WinML::MLOperatorSchemaEdgeTypeFormat,
-    anonymous : Anonymous_e__Union_ do
+  struct MLOperatorSchemaEdgeDescription
+    property options : Win32cr::AI::MachineLearning::WinML::MLOperatorParameterOptions
+    property typeFormat : Win32cr::AI::MachineLearning::WinML::MLOperatorSchemaEdgeTypeFormat
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      reserved : Void*,
-      typeLabel : Win32cr::Foundation::PSTR,
-      edgeDescription : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeDescription
+    struct Anonymous_e__Union_
+    property reserved : Void*
+    property typeLabel : Win32cr::Foundation::PSTR
+    property edgeDescription : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeDescription
+    def initialize(@reserved : Void*, @typeLabel : Win32cr::Foundation::PSTR, @edgeDescription : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeDescription)
+    end
+    end
 
+    def initialize(@options : Win32cr::AI::MachineLearning::WinML::MLOperatorParameterOptions, @typeFormat : Win32cr::AI::MachineLearning::WinML::MLOperatorSchemaEdgeTypeFormat, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record MLOperatorEdgeTypeConstraint,
-    typeLabel : Win32cr::Foundation::PSTR,
-    allowedTypes : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeDescription*,
-    allowedTypeCount : UInt32
+  struct MLOperatorEdgeTypeConstraint
+    property typeLabel : Win32cr::Foundation::PSTR
+    property allowedTypes : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeDescription*
+    property allowedTypeCount : UInt32
+    def initialize(@typeLabel : Win32cr::Foundation::PSTR, @allowedTypes : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeDescription*, @allowedTypeCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record MLOperatorAttribute,
-    name : Win32cr::Foundation::PSTR,
-    type__ : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType,
-    required : Bool
+  struct MLOperatorAttribute
+    property name : Win32cr::Foundation::PSTR
+    property type__ : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType
+    property required : Bool
+    def initialize(@name : Win32cr::Foundation::PSTR, @type__ : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType, @required : Bool)
+    end
+  end
 
   @[Extern]
-  record MLOperatorAttributeNameValue,
-    name : Win32cr::Foundation::PSTR,
-    type__ : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType,
-    valueCount : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct MLOperatorAttributeNameValue
+    property name : Win32cr::Foundation::PSTR
+    property type__ : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType
+    property valueCount : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      reserved : Void*,
-      ints : Int64*,
-      strings : Int8**,
-      floats : Float32*
+    struct Anonymous_e__Union_
+    property reserved : Void*
+    property ints : Int64*
+    property strings : Int8**
+    property floats : Float32*
+    def initialize(@reserved : Void*, @ints : Int64*, @strings : Int8**, @floats : Float32*)
+    end
+    end
 
+    def initialize(@name : Win32cr::Foundation::PSTR, @type__ : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType, @valueCount : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record MLOperatorSchemaDescription,
-    name : Win32cr::Foundation::PSTR,
-    operatorSetVersionAtLastChange : Int32,
-    inputs : Win32cr::AI::MachineLearning::WinML::MLOperatorSchemaEdgeDescription*,
-    inputCount : UInt32,
-    outputs : Win32cr::AI::MachineLearning::WinML::MLOperatorSchemaEdgeDescription*,
-    outputCount : UInt32,
-    typeConstraints : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeTypeConstraint*,
-    typeConstraintCount : UInt32,
-    attributes : Win32cr::AI::MachineLearning::WinML::MLOperatorAttribute*,
-    attributeCount : UInt32,
-    defaultAttributes : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeNameValue*,
-    defaultAttributeCount : UInt32
+  struct MLOperatorSchemaDescription
+    property name : Win32cr::Foundation::PSTR
+    property operatorSetVersionAtLastChange : Int32
+    property inputs : Win32cr::AI::MachineLearning::WinML::MLOperatorSchemaEdgeDescription*
+    property inputCount : UInt32
+    property outputs : Win32cr::AI::MachineLearning::WinML::MLOperatorSchemaEdgeDescription*
+    property outputCount : UInt32
+    property typeConstraints : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeTypeConstraint*
+    property typeConstraintCount : UInt32
+    property attributes : Win32cr::AI::MachineLearning::WinML::MLOperatorAttribute*
+    property attributeCount : UInt32
+    property defaultAttributes : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeNameValue*
+    property defaultAttributeCount : UInt32
+    def initialize(@name : Win32cr::Foundation::PSTR, @operatorSetVersionAtLastChange : Int32, @inputs : Win32cr::AI::MachineLearning::WinML::MLOperatorSchemaEdgeDescription*, @inputCount : UInt32, @outputs : Win32cr::AI::MachineLearning::WinML::MLOperatorSchemaEdgeDescription*, @outputCount : UInt32, @typeConstraints : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeTypeConstraint*, @typeConstraintCount : UInt32, @attributes : Win32cr::AI::MachineLearning::WinML::MLOperatorAttribute*, @attributeCount : UInt32, @defaultAttributes : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeNameValue*, @defaultAttributeCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record MLOperatorSetId,
-    domain : Win32cr::Foundation::PSTR,
-    version : Int32
+  struct MLOperatorSetId
+    property domain : Win32cr::Foundation::PSTR
+    property version : Int32
+    def initialize(@domain : Win32cr::Foundation::PSTR, @version : Int32)
+    end
+  end
 
   @[Extern]
-  record MLOperatorKernelDescription,
-    domain : Win32cr::Foundation::PSTR,
-    name : Win32cr::Foundation::PSTR,
-    minimumOperatorSetVersion : Int32,
-    executionType : Win32cr::AI::MachineLearning::WinML::MLOperatorExecutionType,
-    typeConstraints : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeTypeConstraint*,
-    typeConstraintCount : UInt32,
-    defaultAttributes : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeNameValue*,
-    defaultAttributeCount : UInt32,
-    options : Win32cr::AI::MachineLearning::WinML::MLOperatorKernelOptions,
-    executionOptions : UInt32
+  struct MLOperatorKernelDescription
+    property domain : Win32cr::Foundation::PSTR
+    property name : Win32cr::Foundation::PSTR
+    property minimumOperatorSetVersion : Int32
+    property executionType : Win32cr::AI::MachineLearning::WinML::MLOperatorExecutionType
+    property typeConstraints : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeTypeConstraint*
+    property typeConstraintCount : UInt32
+    property defaultAttributes : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeNameValue*
+    property defaultAttributeCount : UInt32
+    property options : Win32cr::AI::MachineLearning::WinML::MLOperatorKernelOptions
+    property executionOptions : UInt32
+    def initialize(@domain : Win32cr::Foundation::PSTR, @name : Win32cr::Foundation::PSTR, @minimumOperatorSetVersion : Int32, @executionType : Win32cr::AI::MachineLearning::WinML::MLOperatorExecutionType, @typeConstraints : Win32cr::AI::MachineLearning::WinML::MLOperatorEdgeTypeConstraint*, @typeConstraintCount : UInt32, @defaultAttributes : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeNameValue*, @defaultAttributeCount : UInt32, @options : Win32cr::AI::MachineLearning::WinML::MLOperatorKernelOptions, @executionOptions : UInt32)
+    end
+  end
 
   @[Extern]
   record IWinMLModelVtbl,
@@ -323,7 +400,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("e2eeb6a9-f31f-4055-a521-e30b5b33664a")]
   record IWinMLModel, lpVtbl : IWinMLModelVtbl* do
     GUID = LibC::GUID.new(0xe2eeb6a9_u32, 0xf31f_u16, 0x4055_u16, StaticArray[0xa5_u8, 0x21_u8, 0xe3_u8, 0xb_u8, 0x5b_u8, 0x33_u8, 0x66_u8, 0x4a_u8])
     def query_interface(this : IWinMLModel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -361,7 +437,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("95848f9e-583d-4054-af12-916387cd8426")]
   record IWinMLEvaluationContext, lpVtbl : IWinMLEvaluationContextVtbl* do
     GUID = LibC::GUID.new(0x95848f9e_u32, 0x583d_u16, 0x4054_u16, StaticArray[0xaf_u8, 0x12_u8, 0x91_u8, 0x63_u8, 0x87_u8, 0xcd_u8, 0x84_u8, 0x26_u8])
     def query_interface(this : IWinMLEvaluationContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -396,7 +471,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("a0425329-40ae-48d9-bce3-829ef7b8a41a")]
   record IWinMLRuntime, lpVtbl : IWinMLRuntimeVtbl* do
     GUID = LibC::GUID.new(0xa0425329_u32, 0x40ae_u16, 0x48d9_u16, StaticArray[0xbc_u8, 0xe3_u8, 0x82_u8, 0x9e_u8, 0xf7_u8, 0xb8_u8, 0xa4_u8, 0x1a_u8])
     def query_interface(this : IWinMLRuntime*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -429,7 +503,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("a807b84d-4ae5-4bc0-a76a-941aa246bd41")]
   record IWinMLRuntimeFactory, lpVtbl : IWinMLRuntimeFactoryVtbl* do
     GUID = LibC::GUID.new(0xa807b84d_u32, 0x4ae5_u16, 0x4bc0_u16, StaticArray[0xa7_u8, 0x6a_u8, 0x94_u8, 0x1a_u8, 0xa2_u8, 0x46_u8, 0xbd_u8, 0x41_u8])
     def query_interface(this : IWinMLRuntimeFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -459,7 +532,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("4b1b1759-ec40-466c-aab4-beb5347fd24c")]
   record IMLOperatorAttributes, lpVtbl : IMLOperatorAttributesVtbl* do
     GUID = LibC::GUID.new(0x4b1b1759_u32, 0xec40_u16, 0x466c_u16, StaticArray[0xaa_u8, 0xb4_u8, 0xbe_u8, 0xb5_u8, 0x34_u8, 0x7f_u8, 0xd2_u8, 0x4c_u8])
     def query_interface(this : IMLOperatorAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -499,7 +571,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("f20e8cbe-3b28-4248-be95-f96fbc6e4643")]
   record IMLOperatorTensorShapeDescription, lpVtbl : IMLOperatorTensorShapeDescriptionVtbl* do
     GUID = LibC::GUID.new(0xf20e8cbe_u32, 0x3b28_u16, 0x4248_u16, StaticArray[0xbe_u8, 0x95_u8, 0xf9_u8, 0x6f_u8, 0xbc_u8, 0x6e_u8, 0x46_u8, 0x43_u8])
     def query_interface(this : IMLOperatorTensorShapeDescription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -550,7 +621,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("5459b53d-a0fc-4665-addd-70171ef7e631")]
   record IMLOperatorKernelCreationContext, lpVtbl : IMLOperatorKernelCreationContextVtbl* do
     GUID = LibC::GUID.new(0x5459b53d_u32, 0xa0fc_u16, 0x4665_u16, StaticArray[0xad_u8, 0xdd_u8, 0x70_u8, 0x17_u8, 0x1e_u8, 0xf7_u8, 0xe6_u8, 0x31_u8])
     def query_interface(this : IMLOperatorKernelCreationContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -619,7 +689,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("7fe41f41-f430-440e-aece-54416dc8b9db")]
   record IMLOperatorTensor, lpVtbl : IMLOperatorTensorVtbl* do
     GUID = LibC::GUID.new(0x7fe41f41_u32, 0xf430_u16, 0x440e_u16, StaticArray[0xae_u8, 0xce_u8, 0x54_u8, 0x41_u8, 0x6d_u8, 0xc8_u8, 0xb9_u8, 0xdb_u8])
     def query_interface(this : IMLOperatorTensor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -668,7 +737,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("82536a28-f022-4769-9d3f-8b278f84c0c3")]
   record IMLOperatorKernelContext, lpVtbl : IMLOperatorKernelContextVtbl* do
     GUID = LibC::GUID.new(0x82536a28_u32, 0xf022_u16, 0x4769_u16, StaticArray[0x9d_u8, 0x3f_u8, 0x8b_u8, 0x27_u8, 0x8f_u8, 0x84_u8, 0xc0_u8, 0xc3_u8])
     def query_interface(this : IMLOperatorKernelContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -707,7 +775,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("11c4b4a0-b467-4eaa-a1a6-b961d8d0ed79")]
   record IMLOperatorKernel, lpVtbl : IMLOperatorKernelVtbl* do
     GUID = LibC::GUID.new(0x11c4b4a0_u32, 0xb467_u16, 0x4eaa_u16, StaticArray[0xa1_u8, 0xa6_u8, 0xb9_u8, 0x61_u8, 0xd8_u8, 0xd0_u8, 0xed_u8, 0x79_u8])
     def query_interface(this : IMLOperatorKernel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -745,7 +812,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("105b6b29-5408-4a68-9959-09b5955a3492")]
   record IMLOperatorShapeInferenceContext, lpVtbl : IMLOperatorShapeInferenceContextVtbl* do
     GUID = LibC::GUID.new(0x105b6b29_u32, 0x5408_u16, 0x4a68_u16, StaticArray[0x99_u8, 0x59_u8, 0x9_u8, 0xb5_u8, 0x95_u8, 0x5a_u8, 0x34_u8, 0x92_u8])
     def query_interface(this : IMLOperatorShapeInferenceContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -814,7 +880,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("ec893bb1-f938-427b-8488-c8dcf775f138")]
   record IMLOperatorTypeInferenceContext, lpVtbl : IMLOperatorTypeInferenceContextVtbl* do
     GUID = LibC::GUID.new(0xec893bb1_u32, 0xf938_u16, 0x427b_u16, StaticArray[0x84_u8, 0x88_u8, 0xc8_u8, 0xdc_u8, 0xf7_u8, 0x75_u8, 0xf1_u8, 0x38_u8])
     def query_interface(this : IMLOperatorTypeInferenceContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -868,7 +933,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("781aeb48-9bcb-4797-bf77-8bf455217beb")]
   record IMLOperatorTypeInferrer, lpVtbl : IMLOperatorTypeInferrerVtbl* do
     GUID = LibC::GUID.new(0x781aeb48_u32, 0x9bcb_u16, 0x4797_u16, StaticArray[0xbf_u8, 0x77_u8, 0x8b_u8, 0xf4_u8, 0x55_u8, 0x21_u8, 0x7b_u8, 0xeb_u8])
     def query_interface(this : IMLOperatorTypeInferrer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -895,7 +959,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("540be5be-a6c9-40ee-83f6-d2b8b40a7798")]
   record IMLOperatorShapeInferrer, lpVtbl : IMLOperatorShapeInferrerVtbl* do
     GUID = LibC::GUID.new(0x540be5be_u32, 0xa6c9_u16, 0x40ee_u16, StaticArray[0x83_u8, 0xf6_u8, 0xd2_u8, 0xb8_u8, 0xb4_u8, 0xa_u8, 0x77_u8, 0x98_u8])
     def query_interface(this : IMLOperatorShapeInferrer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -922,7 +985,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("ef15ad6f-0dc9-4908-ab35-a575a30dfbf8")]
   record IMLOperatorKernelFactory, lpVtbl : IMLOperatorKernelFactoryVtbl* do
     GUID = LibC::GUID.new(0xef15ad6f_u32, 0xdc9_u16, 0x4908_u16, StaticArray[0xab_u8, 0x35_u8, 0xa5_u8, 0x75_u8, 0xa3_u8, 0xd_u8, 0xfb_u8, 0xf8_u8])
     def query_interface(this : IMLOperatorKernelFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -950,7 +1012,6 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  #@[Com("2af9dd2d-b516-4672-9ab5-530c208493ad")]
   record IMLOperatorRegistry, lpVtbl : IMLOperatorRegistryVtbl* do
     GUID = LibC::GUID.new(0x2af9dd2d_u32, 0xb516_u16, 0x4672_u16, StaticArray[0x9a_u8, 0xb5_u8, 0x53_u8, 0xc_u8, 0x20_u8, 0x84_u8, 0x93_u8, 0xad_u8])
     def query_interface(this : IMLOperatorRegistry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

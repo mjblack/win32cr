@@ -20,39 +20,39 @@ module Win32cr::Media::Audio
   alias HACMDRIVER = LibC::IntPtrT
   alias HACMSTREAM = LibC::IntPtrT
   alias HACMOBJ = LibC::IntPtrT
-  alias LPWAVECALLBACK = Proc(Win32cr::Media::Multimedia::HDRVR, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)*
+  alias LPWAVECALLBACK = Proc(Win32cr::Media::Multimedia::HDRVR, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
-  alias LPMIDICALLBACK = Proc(Win32cr::Media::Multimedia::HDRVR, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)*
+  alias LPMIDICALLBACK = Proc(Win32cr::Media::Multimedia::HDRVR, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
-  alias PAudioStateMonitorCallback = Proc(Void*, Void*, Void)*
+  alias PAudioStateMonitorCallback = Proc(Void*, Void*, Void)
 
-  alias ACMDRIVERENUMCB = Proc(Win32cr::Media::Audio::HACMDRIVERID, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+  alias ACMDRIVERENUMCB = Proc(Win32cr::Media::Audio::HACMDRIVERID, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)
 
-  alias LPACMDRIVERPROC = Proc(LibC::UIntPtrT, Win32cr::Media::Audio::HACMDRIVERID, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT)*
+  alias LPACMDRIVERPROC = Proc(LibC::UIntPtrT, Win32cr::Media::Audio::HACMDRIVERID, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT)
 
-  alias ACMFORMATTAGENUMCBA = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFORMATTAGDETAILSA*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+  alias ACMFORMATTAGENUMCBA = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFORMATTAGDETAILSA*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)
 
-  alias ACMFORMATTAGENUMCBW = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFORMATTAGDETAILSW*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+  alias ACMFORMATTAGENUMCBW = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFORMATTAGDETAILSW*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)
 
-  alias ACMFORMATENUMCBA = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFORMATDETAILSA*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+  alias ACMFORMATENUMCBA = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFORMATDETAILSA*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)
 
-  alias ACMFORMATENUMCBW = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::Tacmformatdetailsw*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+  alias ACMFORMATENUMCBW = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::Tacmformatdetailsw*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)
 
-  alias ACMFORMATCHOOSEHOOKPROCA = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)*
+  alias ACMFORMATCHOOSEHOOKPROCA = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)
 
-  alias ACMFORMATCHOOSEHOOKPROCW = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)*
+  alias ACMFORMATCHOOSEHOOKPROCW = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)
 
-  alias ACMFILTERTAGENUMCBA = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFILTERTAGDETAILSA*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+  alias ACMFILTERTAGENUMCBA = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFILTERTAGDETAILSA*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)
 
-  alias ACMFILTERTAGENUMCBW = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFILTERTAGDETAILSW*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+  alias ACMFILTERTAGENUMCBW = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFILTERTAGDETAILSW*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)
 
-  alias ACMFILTERENUMCBA = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFILTERDETAILSA*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+  alias ACMFILTERENUMCBA = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFILTERDETAILSA*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)
 
-  alias ACMFILTERENUMCBW = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFILTERDETAILSW*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+  alias ACMFILTERENUMCBW = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFILTERDETAILSW*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)
 
-  alias ACMFILTERCHOOSEHOOKPROCA = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)*
+  alias ACMFILTERCHOOSEHOOKPROCA = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)
 
-  alias ACMFILTERCHOOSEHOOKPROCW = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)*
+  alias ACMFILTERCHOOSEHOOKPROCW = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)
 
   MIXERCONTROL_CONTROLTYPE_CUSTOM = 0_u32
   MIXERCONTROL_CONTROLTYPE_BOOLEANMETER = 268500992_u32
@@ -767,1095 +767,1408 @@ module Win32cr::Media::Audio
   end
 
   @[Extern]
-  record AUDIO_VOLUME_NOTIFICATION_DATA,
-    guidEventContext : LibC::GUID,
-    bMuted : Win32cr::Foundation::BOOL,
-    fMasterVolume : Float32,
-    nChannels : UInt32,
-    afChannelVolumes : Float32*
+  struct AUDIO_VOLUME_NOTIFICATION_DATA
+    property guidEventContext : LibC::GUID
+    property bMuted : Win32cr::Foundation::BOOL
+    property fMasterVolume : Float32
+    property nChannels : UInt32
+    property afChannelVolumes : Float32*
+    def initialize(@guidEventContext : LibC::GUID, @bMuted : Win32cr::Foundation::BOOL, @fMasterVolume : Float32, @nChannels : UInt32, @afChannelVolumes : Float32*)
+    end
+  end
 
   @[Extern]
-  record WAVEFORMATEXTENSIBLE,
-    format : Win32cr::Media::Audio::WAVEFORMATEX,
-    samples : Samples_e__Union_,
-    dwChannelMask : UInt32,
-    sub_format : LibC::GUID do
+  struct WAVEFORMATEXTENSIBLE
+    property format : Win32cr::Media::Audio::WAVEFORMATEX
+    property samples : Samples_e__Union_
+    property dwChannelMask : UInt32
+    property sub_format : LibC::GUID
 
     # Nested Type Samples_e__Union_
     @[Extern(union: true)]
-    record Samples_e__Union_,
-      wValidBitsPerSample : UInt16,
-      wSamplesPerBlock : UInt16,
-      wReserved : UInt16
+    struct Samples_e__Union_
+    property wValidBitsPerSample : UInt16
+    property wSamplesPerBlock : UInt16
+    property wReserved : UInt16
+    def initialize(@wValidBitsPerSample : UInt16, @wSamplesPerBlock : UInt16, @wReserved : UInt16)
+    end
+    end
 
+    def initialize(@format : Win32cr::Media::Audio::WAVEFORMATEX, @samples : Samples_e__Union_, @dwChannelMask : UInt32, @sub_format : LibC::GUID)
+    end
   end
 
   @[Extern]
-  record WAVEFILTER,
-    cbStruct : UInt32,
-    dwFilterTag : UInt32,
-    fdwFilter : UInt32,
-    dwReserved : UInt32[5]
+  struct WAVEFILTER
+    property cbStruct : UInt32
+    property dwFilterTag : UInt32
+    property fdwFilter : UInt32
+    property dwReserved : UInt32[5]
+    def initialize(@cbStruct : UInt32, @dwFilterTag : UInt32, @fdwFilter : UInt32, @dwReserved : UInt32[5])
+    end
+  end
 
   @[Extern]
-  record VOLUMEWAVEFILTER,
-    wfltr : Win32cr::Media::Audio::WAVEFILTER,
-    dwVolume : UInt32
+  struct VOLUMEWAVEFILTER
+    property wfltr : Win32cr::Media::Audio::WAVEFILTER
+    property dwVolume : UInt32
+    def initialize(@wfltr : Win32cr::Media::Audio::WAVEFILTER, @dwVolume : UInt32)
+    end
+  end
 
   @[Extern]
-  record ECHOWAVEFILTER,
-    wfltr : Win32cr::Media::Audio::WAVEFILTER,
-    dwVolume : UInt32,
-    dwDelay : UInt32
+  struct ECHOWAVEFILTER
+    property wfltr : Win32cr::Media::Audio::WAVEFILTER
+    property dwVolume : UInt32
+    property dwDelay : UInt32
+    def initialize(@wfltr : Win32cr::Media::Audio::WAVEFILTER, @dwVolume : UInt32, @dwDelay : UInt32)
+    end
+  end
 
   @[Extern]
-  record WAVEHDR,
-    lpData : Win32cr::Foundation::PSTR,
-    dwBufferLength : UInt32,
-    dwBytesRecorded : UInt32,
-    dwUser : LibC::UIntPtrT,
-    dwFlags : UInt32,
-    dwLoops : UInt32,
-    lpNext : Win32cr::Media::Audio::WAVEHDR*,
-    reserved : LibC::UIntPtrT
+  struct WAVEHDR
+    property lpData : Win32cr::Foundation::PSTR
+    property dwBufferLength : UInt32
+    property dwBytesRecorded : UInt32
+    property dwUser : LibC::UIntPtrT
+    property dwFlags : UInt32
+    property dwLoops : UInt32
+    property lpNext : Win32cr::Media::Audio::WAVEHDR*
+    property reserved : LibC::UIntPtrT
+    def initialize(@lpData : Win32cr::Foundation::PSTR, @dwBufferLength : UInt32, @dwBytesRecorded : UInt32, @dwUser : LibC::UIntPtrT, @dwFlags : UInt32, @dwLoops : UInt32, @lpNext : Win32cr::Media::Audio::WAVEHDR*, @reserved : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record WAVEOUTCAPSA,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : Win32cr::Foundation::CHAR[32],
-    dwFormats : UInt32,
-    wChannels : UInt16,
-    wReserved1 : UInt16,
-    dwSupport : UInt32
+  struct WAVEOUTCAPSA
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property dwFormats : UInt32
+    property wChannels : UInt16
+    property wReserved1 : UInt16
+    property dwSupport : UInt32
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : Win32cr::Foundation::CHAR[32], @dwFormats : UInt32, @wChannels : UInt16, @wReserved1 : UInt16, @dwSupport : UInt32)
+    end
+  end
 
   @[Extern]
-  record WAVEOUTCAPSW,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : UInt16[32],
-    dwFormats : UInt32,
-    wChannels : UInt16,
-    wReserved1 : UInt16,
-    dwSupport : UInt32
+  struct WAVEOUTCAPSW
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : UInt16[32]
+    property dwFormats : UInt32
+    property wChannels : UInt16
+    property wReserved1 : UInt16
+    property dwSupport : UInt32
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : UInt16[32], @dwFormats : UInt32, @wChannels : UInt16, @wReserved1 : UInt16, @dwSupport : UInt32)
+    end
+  end
 
   @[Extern]
-  record WAVEOUTCAPS2A,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : Win32cr::Foundation::CHAR[32],
-    dwFormats : UInt32,
-    wChannels : UInt16,
-    wReserved1 : UInt16,
-    dwSupport : UInt32,
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
+  struct WAVEOUTCAPS2A
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property dwFormats : UInt32
+    property wChannels : UInt16
+    property wReserved1 : UInt16
+    property dwSupport : UInt32
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : Win32cr::Foundation::CHAR[32], @dwFormats : UInt32, @wChannels : UInt16, @wReserved1 : UInt16, @dwSupport : UInt32, @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record WAVEOUTCAPS2W,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : UInt16[32],
-    dwFormats : UInt32,
-    wChannels : UInt16,
-    wReserved1 : UInt16,
-    dwSupport : UInt32,
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
+  struct WAVEOUTCAPS2W
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : UInt16[32]
+    property dwFormats : UInt32
+    property wChannels : UInt16
+    property wReserved1 : UInt16
+    property dwSupport : UInt32
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : UInt16[32], @dwFormats : UInt32, @wChannels : UInt16, @wReserved1 : UInt16, @dwSupport : UInt32, @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record WAVEINCAPSA,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : Win32cr::Foundation::CHAR[32],
-    dwFormats : UInt32,
-    wChannels : UInt16,
-    wReserved1 : UInt16
+  struct WAVEINCAPSA
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property dwFormats : UInt32
+    property wChannels : UInt16
+    property wReserved1 : UInt16
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : Win32cr::Foundation::CHAR[32], @dwFormats : UInt32, @wChannels : UInt16, @wReserved1 : UInt16)
+    end
+  end
 
   @[Extern]
-  record WAVEINCAPSW,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : UInt16[32],
-    dwFormats : UInt32,
-    wChannels : UInt16,
-    wReserved1 : UInt16
+  struct WAVEINCAPSW
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : UInt16[32]
+    property dwFormats : UInt32
+    property wChannels : UInt16
+    property wReserved1 : UInt16
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : UInt16[32], @dwFormats : UInt32, @wChannels : UInt16, @wReserved1 : UInt16)
+    end
+  end
 
   @[Extern]
-  record WAVEINCAPS2A,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : Win32cr::Foundation::CHAR[32],
-    dwFormats : UInt32,
-    wChannels : UInt16,
-    wReserved1 : UInt16,
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
+  struct WAVEINCAPS2A
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property dwFormats : UInt32
+    property wChannels : UInt16
+    property wReserved1 : UInt16
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : Win32cr::Foundation::CHAR[32], @dwFormats : UInt32, @wChannels : UInt16, @wReserved1 : UInt16, @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record WAVEINCAPS2W,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : UInt16[32],
-    dwFormats : UInt32,
-    wChannels : UInt16,
-    wReserved1 : UInt16,
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
+  struct WAVEINCAPS2W
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : UInt16[32]
+    property dwFormats : UInt32
+    property wChannels : UInt16
+    property wReserved1 : UInt16
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : UInt16[32], @dwFormats : UInt32, @wChannels : UInt16, @wReserved1 : UInt16, @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record WAVEFORMAT,
-    wFormatTag : UInt16,
-    nChannels : UInt16,
-    nSamplesPerSec : UInt32,
-    nAvgBytesPerSec : UInt32,
-    nBlockAlign : UInt16
+  struct WAVEFORMAT
+    property wFormatTag : UInt16
+    property nChannels : UInt16
+    property nSamplesPerSec : UInt32
+    property nAvgBytesPerSec : UInt32
+    property nBlockAlign : UInt16
+    def initialize(@wFormatTag : UInt16, @nChannels : UInt16, @nSamplesPerSec : UInt32, @nAvgBytesPerSec : UInt32, @nBlockAlign : UInt16)
+    end
+  end
 
   @[Extern]
-  record PCMWAVEFORMAT,
-    wf : Win32cr::Media::Audio::WAVEFORMAT,
-    wBitsPerSample : UInt16
+  struct PCMWAVEFORMAT
+    property wf : Win32cr::Media::Audio::WAVEFORMAT
+    property wBitsPerSample : UInt16
+    def initialize(@wf : Win32cr::Media::Audio::WAVEFORMAT, @wBitsPerSample : UInt16)
+    end
+  end
 
   @[Extern]
-  record WAVEFORMATEX,
-    wFormatTag : UInt16,
-    nChannels : UInt16,
-    nSamplesPerSec : UInt32,
-    nAvgBytesPerSec : UInt32,
-    nBlockAlign : UInt16,
-    wBitsPerSample : UInt16,
-    cbSize : UInt16
+  struct WAVEFORMATEX
+    property wFormatTag : UInt16
+    property nChannels : UInt16
+    property nSamplesPerSec : UInt32
+    property nAvgBytesPerSec : UInt32
+    property nBlockAlign : UInt16
+    property wBitsPerSample : UInt16
+    property cbSize : UInt16
+    def initialize(@wFormatTag : UInt16, @nChannels : UInt16, @nSamplesPerSec : UInt32, @nAvgBytesPerSec : UInt32, @nBlockAlign : UInt16, @wBitsPerSample : UInt16, @cbSize : UInt16)
+    end
+  end
 
   @[Extern]
-  record MIDIOUTCAPSA,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : Win32cr::Foundation::CHAR[32],
-    wTechnology : UInt16,
-    wVoices : UInt16,
-    wNotes : UInt16,
-    wChannelMask : UInt16,
-    dwSupport : UInt32
+  struct MIDIOUTCAPSA
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property wTechnology : UInt16
+    property wVoices : UInt16
+    property wNotes : UInt16
+    property wChannelMask : UInt16
+    property dwSupport : UInt32
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : Win32cr::Foundation::CHAR[32], @wTechnology : UInt16, @wVoices : UInt16, @wNotes : UInt16, @wChannelMask : UInt16, @dwSupport : UInt32)
+    end
+  end
 
   @[Extern]
-  record MIDIOUTCAPSW,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : UInt16[32],
-    wTechnology : UInt16,
-    wVoices : UInt16,
-    wNotes : UInt16,
-    wChannelMask : UInt16,
-    dwSupport : UInt32
+  struct MIDIOUTCAPSW
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : UInt16[32]
+    property wTechnology : UInt16
+    property wVoices : UInt16
+    property wNotes : UInt16
+    property wChannelMask : UInt16
+    property dwSupport : UInt32
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : UInt16[32], @wTechnology : UInt16, @wVoices : UInt16, @wNotes : UInt16, @wChannelMask : UInt16, @dwSupport : UInt32)
+    end
+  end
 
   @[Extern]
-  record MIDIOUTCAPS2A,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : Win32cr::Foundation::CHAR[32],
-    wTechnology : UInt16,
-    wVoices : UInt16,
-    wNotes : UInt16,
-    wChannelMask : UInt16,
-    dwSupport : UInt32,
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
+  struct MIDIOUTCAPS2A
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property wTechnology : UInt16
+    property wVoices : UInt16
+    property wNotes : UInt16
+    property wChannelMask : UInt16
+    property dwSupport : UInt32
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : Win32cr::Foundation::CHAR[32], @wTechnology : UInt16, @wVoices : UInt16, @wNotes : UInt16, @wChannelMask : UInt16, @dwSupport : UInt32, @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record MIDIOUTCAPS2W,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : UInt16[32],
-    wTechnology : UInt16,
-    wVoices : UInt16,
-    wNotes : UInt16,
-    wChannelMask : UInt16,
-    dwSupport : UInt32,
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
+  struct MIDIOUTCAPS2W
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : UInt16[32]
+    property wTechnology : UInt16
+    property wVoices : UInt16
+    property wNotes : UInt16
+    property wChannelMask : UInt16
+    property dwSupport : UInt32
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : UInt16[32], @wTechnology : UInt16, @wVoices : UInt16, @wNotes : UInt16, @wChannelMask : UInt16, @dwSupport : UInt32, @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record MIDIINCAPSA,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : Win32cr::Foundation::CHAR[32],
-    dwSupport : UInt32
+  struct MIDIINCAPSA
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property dwSupport : UInt32
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : Win32cr::Foundation::CHAR[32], @dwSupport : UInt32)
+    end
+  end
 
   @[Extern]
-  record MIDIINCAPSW,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : UInt16[32],
-    dwSupport : UInt32
+  struct MIDIINCAPSW
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : UInt16[32]
+    property dwSupport : UInt32
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : UInt16[32], @dwSupport : UInt32)
+    end
+  end
 
   @[Extern]
-  record MIDIINCAPS2A,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : Win32cr::Foundation::CHAR[32],
-    dwSupport : UInt32,
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
+  struct MIDIINCAPS2A
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property dwSupport : UInt32
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : Win32cr::Foundation::CHAR[32], @dwSupport : UInt32, @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record MIDIINCAPS2W,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : UInt16[32],
-    dwSupport : UInt32,
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
+  struct MIDIINCAPS2W
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : UInt16[32]
+    property dwSupport : UInt32
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : UInt16[32], @dwSupport : UInt32, @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record MIDIHDR,
-    lpData : Win32cr::Foundation::PSTR,
-    dwBufferLength : UInt32,
-    dwBytesRecorded : UInt32,
-    dwUser : LibC::UIntPtrT,
-    dwFlags : UInt32,
-    lpNext : Win32cr::Media::Audio::MIDIHDR*,
-    reserved : LibC::UIntPtrT,
-    dwOffset : UInt32,
-    dwReserved : LibC::UIntPtrT[8]
+  struct MIDIHDR
+    property lpData : Win32cr::Foundation::PSTR
+    property dwBufferLength : UInt32
+    property dwBytesRecorded : UInt32
+    property dwUser : LibC::UIntPtrT
+    property dwFlags : UInt32
+    property lpNext : Win32cr::Media::Audio::MIDIHDR*
+    property reserved : LibC::UIntPtrT
+    property dwOffset : UInt32
+    property dwReserved : LibC::UIntPtrT[8]
+    def initialize(@lpData : Win32cr::Foundation::PSTR, @dwBufferLength : UInt32, @dwBytesRecorded : UInt32, @dwUser : LibC::UIntPtrT, @dwFlags : UInt32, @lpNext : Win32cr::Media::Audio::MIDIHDR*, @reserved : LibC::UIntPtrT, @dwOffset : UInt32, @dwReserved : LibC::UIntPtrT[8])
+    end
+  end
 
   @[Extern]
-  record MIDIEVENT,
-    dwDeltaTime : UInt32,
-    dwStreamID : UInt32,
-    dwEvent : UInt32,
-    dwParms : UInt32*
+  struct MIDIEVENT
+    property dwDeltaTime : UInt32
+    property dwStreamID : UInt32
+    property dwEvent : UInt32
+    property dwParms : UInt32*
+    def initialize(@dwDeltaTime : UInt32, @dwStreamID : UInt32, @dwEvent : UInt32, @dwParms : UInt32*)
+    end
+  end
 
   @[Extern]
-  record MIDISTRMBUFFVER,
-    dwVersion : UInt32,
-    dwMid : UInt32,
-    dwOEMVersion : UInt32
+  struct MIDISTRMBUFFVER
+    property dwVersion : UInt32
+    property dwMid : UInt32
+    property dwOEMVersion : UInt32
+    def initialize(@dwVersion : UInt32, @dwMid : UInt32, @dwOEMVersion : UInt32)
+    end
+  end
 
   @[Extern]
-  record MIDIPROPTIMEDIV,
-    cbStruct : UInt32,
-    dwTimeDiv : UInt32
+  struct MIDIPROPTIMEDIV
+    property cbStruct : UInt32
+    property dwTimeDiv : UInt32
+    def initialize(@cbStruct : UInt32, @dwTimeDiv : UInt32)
+    end
+  end
 
   @[Extern]
-  record MIDIPROPTEMPO,
-    cbStruct : UInt32,
-    dwTempo : UInt32
+  struct MIDIPROPTEMPO
+    property cbStruct : UInt32
+    property dwTempo : UInt32
+    def initialize(@cbStruct : UInt32, @dwTempo : UInt32)
+    end
+  end
 
   @[Extern]
-  record AUXCAPSA,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : Win32cr::Foundation::CHAR[32],
-    wTechnology : UInt16,
-    wReserved1 : UInt16,
-    dwSupport : UInt32
+  struct AUXCAPSA
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property wTechnology : UInt16
+    property wReserved1 : UInt16
+    property dwSupport : UInt32
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : Win32cr::Foundation::CHAR[32], @wTechnology : UInt16, @wReserved1 : UInt16, @dwSupport : UInt32)
+    end
+  end
 
   @[Extern]
-  record AUXCAPSW,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : UInt16[32],
-    wTechnology : UInt16,
-    wReserved1 : UInt16,
-    dwSupport : UInt32
+  struct AUXCAPSW
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : UInt16[32]
+    property wTechnology : UInt16
+    property wReserved1 : UInt16
+    property dwSupport : UInt32
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : UInt16[32], @wTechnology : UInt16, @wReserved1 : UInt16, @dwSupport : UInt32)
+    end
+  end
 
   @[Extern]
-  record AUXCAPS2A,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : Win32cr::Foundation::CHAR[32],
-    wTechnology : UInt16,
-    wReserved1 : UInt16,
-    dwSupport : UInt32,
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
+  struct AUXCAPS2A
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property wTechnology : UInt16
+    property wReserved1 : UInt16
+    property dwSupport : UInt32
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : Win32cr::Foundation::CHAR[32], @wTechnology : UInt16, @wReserved1 : UInt16, @dwSupport : UInt32, @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record AUXCAPS2W,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : UInt16[32],
-    wTechnology : UInt16,
-    wReserved1 : UInt16,
-    dwSupport : UInt32,
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
+  struct AUXCAPS2W
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : UInt16[32]
+    property wTechnology : UInt16
+    property wReserved1 : UInt16
+    property dwSupport : UInt32
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : UInt16[32], @wTechnology : UInt16, @wReserved1 : UInt16, @dwSupport : UInt32, @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record MIXERCAPSA,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : Win32cr::Foundation::CHAR[32],
-    fdwSupport : UInt32,
-    cDestinations : UInt32
+  struct MIXERCAPSA
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property fdwSupport : UInt32
+    property cDestinations : UInt32
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : Win32cr::Foundation::CHAR[32], @fdwSupport : UInt32, @cDestinations : UInt32)
+    end
+  end
 
   @[Extern]
-  record MIXERCAPSW,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : UInt16[32],
-    fdwSupport : UInt32,
-    cDestinations : UInt32
+  struct MIXERCAPSW
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : UInt16[32]
+    property fdwSupport : UInt32
+    property cDestinations : UInt32
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : UInt16[32], @fdwSupport : UInt32, @cDestinations : UInt32)
+    end
+  end
 
   @[Extern]
-  record MIXERCAPS2A,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : Win32cr::Foundation::CHAR[32],
-    fdwSupport : UInt32,
-    cDestinations : UInt32,
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
+  struct MIXERCAPS2A
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property fdwSupport : UInt32
+    property cDestinations : UInt32
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : Win32cr::Foundation::CHAR[32], @fdwSupport : UInt32, @cDestinations : UInt32, @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record MIXERCAPS2W,
-    wMid : UInt16,
-    wPid : UInt16,
-    vDriverVersion : UInt32,
-    szPname : UInt16[32],
-    fdwSupport : UInt32,
-    cDestinations : UInt32,
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
+  struct MIXERCAPS2W
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : UInt16[32]
+    property fdwSupport : UInt32
+    property cDestinations : UInt32
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : UInt16[32], @fdwSupport : UInt32, @cDestinations : UInt32, @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record MIXERLINEA,
-    cbStruct : UInt32,
-    dwDestination : UInt32,
-    dwSource : UInt32,
-    dwLineID : UInt32,
-    fdwLine : UInt32,
-    dwUser : LibC::UIntPtrT,
-    dwComponentType : Win32cr::Media::Audio::MIXERLINE_COMPONENTTYPE,
-    cChannels : UInt32,
-    cConnections : UInt32,
-    cControls : UInt32,
-    szShortName : Win32cr::Foundation::CHAR[16],
-    szName : Win32cr::Foundation::CHAR[64],
-    target : Target_e__Struct_ do
+  struct MIXERLINEA
+    property cbStruct : UInt32
+    property dwDestination : UInt32
+    property dwSource : UInt32
+    property dwLineID : UInt32
+    property fdwLine : UInt32
+    property dwUser : LibC::UIntPtrT
+    property dwComponentType : Win32cr::Media::Audio::MIXERLINE_COMPONENTTYPE
+    property cChannels : UInt32
+    property cConnections : UInt32
+    property cControls : UInt32
+    property szShortName : Win32cr::Foundation::CHAR[16]
+    property szName : Win32cr::Foundation::CHAR[64]
+    property target : Target_e__Struct_
 
     # Nested Type Target_e__Struct_
     @[Extern]
-    record Target_e__Struct_,
-      dwType : UInt32,
-      dwDeviceID : UInt32,
-      wMid : UInt16,
-      wPid : UInt16,
-      vDriverVersion : UInt32,
-      szPname : Win32cr::Foundation::CHAR[32]
+    struct Target_e__Struct_
+    property dwType : UInt32
+    property dwDeviceID : UInt32
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : Win32cr::Foundation::CHAR[32]
+    def initialize(@dwType : UInt32, @dwDeviceID : UInt32, @wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : Win32cr::Foundation::CHAR[32])
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @dwDestination : UInt32, @dwSource : UInt32, @dwLineID : UInt32, @fdwLine : UInt32, @dwUser : LibC::UIntPtrT, @dwComponentType : Win32cr::Media::Audio::MIXERLINE_COMPONENTTYPE, @cChannels : UInt32, @cConnections : UInt32, @cControls : UInt32, @szShortName : Win32cr::Foundation::CHAR[16], @szName : Win32cr::Foundation::CHAR[64], @target : Target_e__Struct_)
+    end
   end
 
   @[Extern]
-  record MIXERLINEW,
-    cbStruct : UInt32,
-    dwDestination : UInt32,
-    dwSource : UInt32,
-    dwLineID : UInt32,
-    fdwLine : UInt32,
-    dwUser : LibC::UIntPtrT,
-    dwComponentType : Win32cr::Media::Audio::MIXERLINE_COMPONENTTYPE,
-    cChannels : UInt32,
-    cConnections : UInt32,
-    cControls : UInt32,
-    szShortName : UInt16[16],
-    szName : UInt16[64],
-    target : Target_e__Struct_ do
+  struct MIXERLINEW
+    property cbStruct : UInt32
+    property dwDestination : UInt32
+    property dwSource : UInt32
+    property dwLineID : UInt32
+    property fdwLine : UInt32
+    property dwUser : LibC::UIntPtrT
+    property dwComponentType : Win32cr::Media::Audio::MIXERLINE_COMPONENTTYPE
+    property cChannels : UInt32
+    property cConnections : UInt32
+    property cControls : UInt32
+    property szShortName : UInt16[16]
+    property szName : UInt16[64]
+    property target : Target_e__Struct_
 
     # Nested Type Target_e__Struct_
     @[Extern]
-    record Target_e__Struct_,
-      dwType : UInt32,
-      dwDeviceID : UInt32,
-      wMid : UInt16,
-      wPid : UInt16,
-      vDriverVersion : UInt32,
-      szPname : UInt16[32]
+    struct Target_e__Struct_
+    property dwType : UInt32
+    property dwDeviceID : UInt32
+    property wMid : UInt16
+    property wPid : UInt16
+    property vDriverVersion : UInt32
+    property szPname : UInt16[32]
+    def initialize(@dwType : UInt32, @dwDeviceID : UInt32, @wMid : UInt16, @wPid : UInt16, @vDriverVersion : UInt32, @szPname : UInt16[32])
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @dwDestination : UInt32, @dwSource : UInt32, @dwLineID : UInt32, @fdwLine : UInt32, @dwUser : LibC::UIntPtrT, @dwComponentType : Win32cr::Media::Audio::MIXERLINE_COMPONENTTYPE, @cChannels : UInt32, @cConnections : UInt32, @cControls : UInt32, @szShortName : UInt16[16], @szName : UInt16[64], @target : Target_e__Struct_)
+    end
   end
 
   @[Extern]
-  record MIXERCONTROLA,
-    cbStruct : UInt32,
-    dwControlID : UInt32,
-    dwControlType : UInt32,
-    fdwControl : UInt32,
-    cMultipleItems : UInt32,
-    szShortName : Win32cr::Foundation::CHAR[16],
-    szName : Win32cr::Foundation::CHAR[64],
-    bounds : Bounds_e__Union_,
-    metrics : Metrics_e__Union_ do
+  struct MIXERCONTROLA
+    property cbStruct : UInt32
+    property dwControlID : UInt32
+    property dwControlType : UInt32
+    property fdwControl : UInt32
+    property cMultipleItems : UInt32
+    property szShortName : Win32cr::Foundation::CHAR[16]
+    property szName : Win32cr::Foundation::CHAR[64]
+    property bounds : Bounds_e__Union_
+    property metrics : Metrics_e__Union_
 
     # Nested Type Bounds_e__Union_
     @[Extern(union: true)]
-    record Bounds_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      anonymous2 : Anonymous2_e__Struct_,
-      dwReserved : UInt32[6] do
+    struct Bounds_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
+    property dwReserved : UInt32[6]
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        dwMinimum : UInt32,
-        dwMaximum : UInt32
+      struct Anonymous2_e__Struct_
+    property dwMinimum : UInt32
+    property dwMaximum : UInt32
+    def initialize(@dwMinimum : UInt32, @dwMaximum : UInt32)
+    end
+      end
 
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        lMinimum : Int32,
-        lMaximum : Int32
+      struct Anonymous1_e__Struct_
+    property lMinimum : Int32
+    property lMaximum : Int32
+    def initialize(@lMinimum : Int32, @lMaximum : Int32)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_, @dwReserved : UInt32[6])
+    end
     end
 
 
     # Nested Type Metrics_e__Union_
     @[Extern(union: true)]
-    record Metrics_e__Union_,
-      cSteps : UInt32,
-      cbCustomData : UInt32,
-      dwReserved : UInt32[6]
+    struct Metrics_e__Union_
+    property cSteps : UInt32
+    property cbCustomData : UInt32
+    property dwReserved : UInt32[6]
+    def initialize(@cSteps : UInt32, @cbCustomData : UInt32, @dwReserved : UInt32[6])
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @dwControlID : UInt32, @dwControlType : UInt32, @fdwControl : UInt32, @cMultipleItems : UInt32, @szShortName : Win32cr::Foundation::CHAR[16], @szName : Win32cr::Foundation::CHAR[64], @bounds : Bounds_e__Union_, @metrics : Metrics_e__Union_)
+    end
   end
 
   @[Extern]
-  record MIXERCONTROLW,
-    cbStruct : UInt32,
-    dwControlID : UInt32,
-    dwControlType : UInt32,
-    fdwControl : UInt32,
-    cMultipleItems : UInt32,
-    szShortName : UInt16[16],
-    szName : UInt16[64],
-    bounds : Bounds_e__Union_,
-    metrics : Metrics_e__Union_ do
+  struct MIXERCONTROLW
+    property cbStruct : UInt32
+    property dwControlID : UInt32
+    property dwControlType : UInt32
+    property fdwControl : UInt32
+    property cMultipleItems : UInt32
+    property szShortName : UInt16[16]
+    property szName : UInt16[64]
+    property bounds : Bounds_e__Union_
+    property metrics : Metrics_e__Union_
 
     # Nested Type Bounds_e__Union_
     @[Extern(union: true)]
-    record Bounds_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      anonymous2 : Anonymous2_e__Struct_,
-      dwReserved : UInt32[6] do
+    struct Bounds_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
+    property dwReserved : UInt32[6]
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        lMinimum : Int32,
-        lMaximum : Int32
+      struct Anonymous1_e__Struct_
+    property lMinimum : Int32
+    property lMaximum : Int32
+    def initialize(@lMinimum : Int32, @lMaximum : Int32)
+    end
+      end
 
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        dwMinimum : UInt32,
-        dwMaximum : UInt32
+      struct Anonymous2_e__Struct_
+    property dwMinimum : UInt32
+    property dwMaximum : UInt32
+    def initialize(@dwMinimum : UInt32, @dwMaximum : UInt32)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_, @dwReserved : UInt32[6])
+    end
     end
 
 
     # Nested Type Metrics_e__Union_
     @[Extern(union: true)]
-    record Metrics_e__Union_,
-      cSteps : UInt32,
-      cbCustomData : UInt32,
-      dwReserved : UInt32[6]
+    struct Metrics_e__Union_
+    property cSteps : UInt32
+    property cbCustomData : UInt32
+    property dwReserved : UInt32[6]
+    def initialize(@cSteps : UInt32, @cbCustomData : UInt32, @dwReserved : UInt32[6])
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @dwControlID : UInt32, @dwControlType : UInt32, @fdwControl : UInt32, @cMultipleItems : UInt32, @szShortName : UInt16[16], @szName : UInt16[64], @bounds : Bounds_e__Union_, @metrics : Metrics_e__Union_)
+    end
   end
 
   @[Extern]
-  record MIXERLINECONTROLSA,
-    cbStruct : UInt32,
-    dwLineID : UInt32,
-    anonymous : Anonymous_e__Union_,
-    cControls : UInt32,
-    cbmxctrl : UInt32,
-    pamxctrl : Win32cr::Media::Audio::MIXERCONTROLA* do
+  struct MIXERLINECONTROLSA
+    property cbStruct : UInt32
+    property dwLineID : UInt32
+    property anonymous : Anonymous_e__Union_
+    property cControls : UInt32
+    property cbmxctrl : UInt32
+    property pamxctrl : Win32cr::Media::Audio::MIXERCONTROLA*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwControlID : UInt32,
-      dwControlType : UInt32
+    struct Anonymous_e__Union_
+    property dwControlID : UInt32
+    property dwControlType : UInt32
+    def initialize(@dwControlID : UInt32, @dwControlType : UInt32)
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @dwLineID : UInt32, @anonymous : Anonymous_e__Union_, @cControls : UInt32, @cbmxctrl : UInt32, @pamxctrl : Win32cr::Media::Audio::MIXERCONTROLA*)
+    end
   end
 
   @[Extern]
-  record MIXERLINECONTROLSW,
-    cbStruct : UInt32,
-    dwLineID : UInt32,
-    anonymous : Anonymous_e__Union_,
-    cControls : UInt32,
-    cbmxctrl : UInt32,
-    pamxctrl : Win32cr::Media::Audio::MIXERCONTROLW* do
+  struct MIXERLINECONTROLSW
+    property cbStruct : UInt32
+    property dwLineID : UInt32
+    property anonymous : Anonymous_e__Union_
+    property cControls : UInt32
+    property cbmxctrl : UInt32
+    property pamxctrl : Win32cr::Media::Audio::MIXERCONTROLW*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwControlID : UInt32,
-      dwControlType : UInt32
+    struct Anonymous_e__Union_
+    property dwControlID : UInt32
+    property dwControlType : UInt32
+    def initialize(@dwControlID : UInt32, @dwControlType : UInt32)
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @dwLineID : UInt32, @anonymous : Anonymous_e__Union_, @cControls : UInt32, @cbmxctrl : UInt32, @pamxctrl : Win32cr::Media::Audio::MIXERCONTROLW*)
+    end
   end
 
   @[Extern]
-  record MIXERCONTROLDETAILS,
-    cbStruct : UInt32,
-    dwControlID : UInt32,
-    cChannels : UInt32,
-    anonymous : Anonymous_e__Union_,
-    cbDetails : UInt32,
-    paDetails : Void* do
+  struct MIXERCONTROLDETAILS
+    property cbStruct : UInt32
+    property dwControlID : UInt32
+    property cChannels : UInt32
+    property anonymous : Anonymous_e__Union_
+    property cbDetails : UInt32
+    property paDetails : Void*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      hwndOwner : Win32cr::Foundation::HWND,
-      cMultipleItems : UInt32
+    struct Anonymous_e__Union_
+    property hwndOwner : Win32cr::Foundation::HWND
+    property cMultipleItems : UInt32
+    def initialize(@hwndOwner : Win32cr::Foundation::HWND, @cMultipleItems : UInt32)
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @dwControlID : UInt32, @cChannels : UInt32, @anonymous : Anonymous_e__Union_, @cbDetails : UInt32, @paDetails : Void*)
+    end
   end
 
   @[Extern]
-  record MIXERCONTROLDETAILS_LISTTEXTA,
-    dwParam1 : UInt32,
-    dwParam2 : UInt32,
-    szName : Win32cr::Foundation::CHAR[64]
+  struct MIXERCONTROLDETAILS_LISTTEXTA
+    property dwParam1 : UInt32
+    property dwParam2 : UInt32
+    property szName : Win32cr::Foundation::CHAR[64]
+    def initialize(@dwParam1 : UInt32, @dwParam2 : UInt32, @szName : Win32cr::Foundation::CHAR[64])
+    end
+  end
 
   @[Extern]
-  record MIXERCONTROLDETAILS_LISTTEXTW,
-    dwParam1 : UInt32,
-    dwParam2 : UInt32,
-    szName : UInt16[64]
+  struct MIXERCONTROLDETAILS_LISTTEXTW
+    property dwParam1 : UInt32
+    property dwParam2 : UInt32
+    property szName : UInt16[64]
+    def initialize(@dwParam1 : UInt32, @dwParam2 : UInt32, @szName : UInt16[64])
+    end
+  end
 
   @[Extern]
-  record MIXERCONTROLDETAILS_BOOLEAN,
-    fValue : Int32
+  struct MIXERCONTROLDETAILS_BOOLEAN
+    property fValue : Int32
+    def initialize(@fValue : Int32)
+    end
+  end
 
   @[Extern]
-  record MIXERCONTROLDETAILS_SIGNED,
-    lValue : Int32
+  struct MIXERCONTROLDETAILS_SIGNED
+    property lValue : Int32
+    def initialize(@lValue : Int32)
+    end
+  end
 
   @[Extern]
-  record MIXERCONTROLDETAILS_UNSIGNED,
-    dwValue : UInt32
+  struct MIXERCONTROLDETAILS_UNSIGNED
+    property dwValue : UInt32
+    def initialize(@dwValue : UInt32)
+    end
+  end
 
   @[Extern]
-  record AudioClientProperties,
-    cbSize : UInt32,
-    bIsOffload : Win32cr::Foundation::BOOL,
-    eCategory : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
-    options : Win32cr::Media::Audio::AUDCLNT_STREAMOPTIONS
+  struct AudioClientProperties
+    property cbSize : UInt32
+    property bIsOffload : Win32cr::Foundation::BOOL
+    property eCategory : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY
+    property options : Win32cr::Media::Audio::AUDCLNT_STREAMOPTIONS
+    def initialize(@cbSize : UInt32, @bIsOffload : Win32cr::Foundation::BOOL, @eCategory : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, @options : Win32cr::Media::Audio::AUDCLNT_STREAMOPTIONS)
+    end
+  end
 
   @[Extern]
-  record AudioClient3ActivationParams,
-    tracingContextId : LibC::GUID
+  struct AudioClient3ActivationParams
+    property tracingContextId : LibC::GUID
+    def initialize(@tracingContextId : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record AUDIO_EFFECT,
-    id : LibC::GUID,
-    canSetState : Win32cr::Foundation::BOOL,
-    state : Win32cr::Media::Audio::AUDIO_EFFECT_STATE
+  struct AUDIO_EFFECT
+    property id : LibC::GUID
+    property canSetState : Win32cr::Foundation::BOOL
+    property state : Win32cr::Media::Audio::AUDIO_EFFECT_STATE
+    def initialize(@id : LibC::GUID, @canSetState : Win32cr::Foundation::BOOL, @state : Win32cr::Media::Audio::AUDIO_EFFECT_STATE)
+    end
+  end
 
   @[Extern]
-  record AMBISONICS_PARAMS,
-    u32Size : UInt32,
-    u32Version : UInt32,
-    u32Type : Win32cr::Media::Audio::AMBISONICS_TYPE,
-    u32ChannelOrdering : Win32cr::Media::Audio::AMBISONICS_CHANNEL_ORDERING,
-    u32Normalization : Win32cr::Media::Audio::AMBISONICS_NORMALIZATION,
-    u32Order : UInt32,
-    u32NumChannels : UInt32,
-    pu32ChannelMap : UInt32*
+  struct AMBISONICS_PARAMS
+    property u32Size : UInt32
+    property u32Version : UInt32
+    property u32Type : Win32cr::Media::Audio::AMBISONICS_TYPE
+    property u32ChannelOrdering : Win32cr::Media::Audio::AMBISONICS_CHANNEL_ORDERING
+    property u32Normalization : Win32cr::Media::Audio::AMBISONICS_NORMALIZATION
+    property u32Order : UInt32
+    property u32NumChannels : UInt32
+    property pu32ChannelMap : UInt32*
+    def initialize(@u32Size : UInt32, @u32Version : UInt32, @u32Type : Win32cr::Media::Audio::AMBISONICS_TYPE, @u32ChannelOrdering : Win32cr::Media::Audio::AMBISONICS_CHANNEL_ORDERING, @u32Normalization : Win32cr::Media::Audio::AMBISONICS_NORMALIZATION, @u32Order : UInt32, @u32NumChannels : UInt32, @pu32ChannelMap : UInt32*)
+    end
+  end
 
   @[Extern]
-  record SpatialAudioObjectRenderStreamActivationParams,
-    object_format : Win32cr::Media::Audio::WAVEFORMATEX*,
-    static_object_type_mask : Win32cr::Media::Audio::AudioObjectType,
-    min_dynamic_object_count : UInt32,
-    max_dynamic_object_count : UInt32,
-    category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
-    event_handle : Win32cr::Foundation::HANDLE,
-    notify_object : Void*
+  struct SpatialAudioObjectRenderStreamActivationParams
+    property object_format : Win32cr::Media::Audio::WAVEFORMATEX*
+    property static_object_type_mask : Win32cr::Media::Audio::AudioObjectType
+    property min_dynamic_object_count : UInt32
+    property max_dynamic_object_count : UInt32
+    property category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY
+    property event_handle : Win32cr::Foundation::HANDLE
+    property notify_object : Void*
+    def initialize(@object_format : Win32cr::Media::Audio::WAVEFORMATEX*, @static_object_type_mask : Win32cr::Media::Audio::AudioObjectType, @min_dynamic_object_count : UInt32, @max_dynamic_object_count : UInt32, @category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, @event_handle : Win32cr::Foundation::HANDLE, @notify_object : Void*)
+    end
+  end
 
   @[Extern]
-  record SpatialAudioObjectRenderStreamActivationParams2,
-    object_format : Win32cr::Media::Audio::WAVEFORMATEX*,
-    static_object_type_mask : Win32cr::Media::Audio::AudioObjectType,
-    min_dynamic_object_count : UInt32,
-    max_dynamic_object_count : UInt32,
-    category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
-    event_handle : Win32cr::Foundation::HANDLE,
-    notify_object : Void*,
-    options : Win32cr::Media::Audio::SPATIAL_AUDIO_STREAM_OPTIONS
+  struct SpatialAudioObjectRenderStreamActivationParams2
+    property object_format : Win32cr::Media::Audio::WAVEFORMATEX*
+    property static_object_type_mask : Win32cr::Media::Audio::AudioObjectType
+    property min_dynamic_object_count : UInt32
+    property max_dynamic_object_count : UInt32
+    property category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY
+    property event_handle : Win32cr::Foundation::HANDLE
+    property notify_object : Void*
+    property options : Win32cr::Media::Audio::SPATIAL_AUDIO_STREAM_OPTIONS
+    def initialize(@object_format : Win32cr::Media::Audio::WAVEFORMATEX*, @static_object_type_mask : Win32cr::Media::Audio::AudioObjectType, @min_dynamic_object_count : UInt32, @max_dynamic_object_count : UInt32, @category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, @event_handle : Win32cr::Foundation::HANDLE, @notify_object : Void*, @options : Win32cr::Media::Audio::SPATIAL_AUDIO_STREAM_OPTIONS)
+    end
+  end
 
   @[Extern]
-  record SpatialAudioClientActivationParams,
-    tracingContextId : LibC::GUID,
-    appId : LibC::GUID,
-    majorVersion : Int32,
-    minorVersion1 : Int32,
-    minorVersion2 : Int32,
-    minorVersion3 : Int32
+  struct SpatialAudioClientActivationParams
+    property tracingContextId : LibC::GUID
+    property appId : LibC::GUID
+    property majorVersion : Int32
+    property minorVersion1 : Int32
+    property minorVersion2 : Int32
+    property minorVersion3 : Int32
+    def initialize(@tracingContextId : LibC::GUID, @appId : LibC::GUID, @majorVersion : Int32, @minorVersion1 : Int32, @minorVersion2 : Int32, @minorVersion3 : Int32)
+    end
+  end
 
   @[Extern]
-  record SpatialAudioHrtfDirectivity,
-    type__ : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityType,
-    scaling : Float32
+  struct SpatialAudioHrtfDirectivity
+    property type__ : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityType
+    property scaling : Float32
+    def initialize(@type__ : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityType, @scaling : Float32)
+    end
+  end
 
   @[Extern]
-  record SpatialAudioHrtfDirectivityCardioid,
-    directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivity,
-    order : Float32
+  struct SpatialAudioHrtfDirectivityCardioid
+    property directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivity
+    property order : Float32
+    def initialize(@directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivity, @order : Float32)
+    end
+  end
 
   @[Extern]
-  record SpatialAudioHrtfDirectivityCone,
-    directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivity,
-    inner_angle : Float32,
-    outer_angle : Float32
+  struct SpatialAudioHrtfDirectivityCone
+    property directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivity
+    property inner_angle : Float32
+    property outer_angle : Float32
+    def initialize(@directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivity, @inner_angle : Float32, @outer_angle : Float32)
+    end
+  end
 
   @[Extern(union: true)]
-  record SpatialAudioHrtfDirectivityUnion,
-    cone : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityCone,
-    cardiod : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityCardioid,
-    omni : Win32cr::Media::Audio::SpatialAudioHrtfDirectivity
-
-  @[Extern]
-  record SpatialAudioHrtfDistanceDecay,
-    type__ : Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecayType,
-    max_gain : Float32,
-    min_gain : Float32,
-    unity_gain_distance : Float32,
-    cutoff_distance : Float32
-
-  @[Extern]
-  record SpatialAudioHrtfActivationParams,
-    object_format : Win32cr::Media::Audio::WAVEFORMATEX*,
-    static_object_type_mask : Win32cr::Media::Audio::AudioObjectType,
-    min_dynamic_object_count : UInt32,
-    max_dynamic_object_count : UInt32,
-    category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
-    event_handle : Win32cr::Foundation::HANDLE,
-    notify_object : Void*,
-    distance_decay : Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecay*,
-    directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityUnion*,
-    environment : Win32cr::Media::Audio::SpatialAudioHrtfEnvironmentType*,
-    orientation : Float32*
-
-  @[Extern]
-  record SpatialAudioHrtfActivationParams2,
-    object_format : Win32cr::Media::Audio::WAVEFORMATEX*,
-    static_object_type_mask : Win32cr::Media::Audio::AudioObjectType,
-    min_dynamic_object_count : UInt32,
-    max_dynamic_object_count : UInt32,
-    category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
-    event_handle : Win32cr::Foundation::HANDLE,
-    notify_object : Void*,
-    distance_decay : Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecay*,
-    directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityUnion*,
-    environment : Win32cr::Media::Audio::SpatialAudioHrtfEnvironmentType*,
-    orientation : Float32*,
-    options : Win32cr::Media::Audio::SPATIAL_AUDIO_STREAM_OPTIONS
-
-  @[Extern]
-  record DIRECTX_AUDIO_ACTIVATION_PARAMS,
-    cbDirectXAudioActivationParams : UInt32,
-    guidAudioSession : LibC::GUID,
-    dwAudioStreamFlags : UInt32
-
-  @[Extern]
-  record AudioExtensionParams,
-    add_page_param : Win32cr::Foundation::LPARAM,
-    pEndpoint : Void*,
-    pPnpInterface : Void*,
-    pPnpDevnode : Void*
-
-  @[Extern]
-  record SpatialAudioMetadataItemsInfo,
-    frame_count : UInt16,
-    item_count : UInt16,
-    max_item_count : UInt16,
-    max_value_buffer_length : UInt32
-
-  @[Extern]
-  record SpatialAudioObjectRenderStreamForMetadataActivationParams,
-    object_format : Win32cr::Media::Audio::WAVEFORMATEX*,
-    static_object_type_mask : Win32cr::Media::Audio::AudioObjectType,
-    min_dynamic_object_count : UInt32,
-    max_dynamic_object_count : UInt32,
-    category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
-    event_handle : Win32cr::Foundation::HANDLE,
-    metadata_format_id : LibC::GUID,
-    max_metadata_item_count : UInt16,
-    metadata_activation_params : Win32cr::System::Com::StructuredStorage::PROPVARIANT*,
-    notify_object : Void*
-
-  @[Extern]
-  record SpatialAudioObjectRenderStreamForMetadataActivationParams2,
-    object_format : Win32cr::Media::Audio::WAVEFORMATEX*,
-    static_object_type_mask : Win32cr::Media::Audio::AudioObjectType,
-    min_dynamic_object_count : UInt32,
-    max_dynamic_object_count : UInt32,
-    category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
-    event_handle : Win32cr::Foundation::HANDLE,
-    metadata_format_id : LibC::GUID,
-    max_metadata_item_count : UInt32,
-    metadata_activation_params : Win32cr::System::Com::StructuredStorage::PROPVARIANT*,
-    notify_object : Void*,
-    options : Win32cr::Media::Audio::SPATIAL_AUDIO_STREAM_OPTIONS
-
-  @[Extern]
-  record AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS,
-    target_process_id : UInt32,
-    process_loopback_mode : Win32cr::Media::Audio::PROCESS_LOOPBACK_MODE
-
-  @[Extern]
-  record AUDIOCLIENT_ACTIVATION_PARAMS,
-    activation_type : Win32cr::Media::Audio::AUDIOCLIENT_ACTIVATION_TYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      process_loopback_params : Win32cr::Media::Audio::AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS
-
+  struct SpatialAudioHrtfDirectivityUnion
+    property cone : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityCone
+    property cardiod : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityCardioid
+    property omni : Win32cr::Media::Audio::SpatialAudioHrtfDirectivity
+    def initialize(@cone : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityCone, @cardiod : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityCardioid, @omni : Win32cr::Media::Audio::SpatialAudioHrtfDirectivity)
+    end
   end
 
   @[Extern]
-  record ACMDRIVERDETAILSA,
-    cbStruct : UInt32,
-    fccType : UInt32,
-    fccComp : UInt32,
-    wMid : UInt16,
-    wPid : UInt16,
-    vdwACM : UInt32,
-    vdwDriver : UInt32,
-    fdwSupport : UInt32,
-    cFormatTags : UInt32,
-    cFilterTags : UInt32,
-    hicon : Win32cr::UI::WindowsAndMessaging::HICON,
-    szShortName : Win32cr::Foundation::CHAR[32],
-    szLongName : Win32cr::Foundation::CHAR[128],
-    szCopyright : Win32cr::Foundation::CHAR[80],
-    szLicensing : Win32cr::Foundation::CHAR[128],
-    szFeatures : Win32cr::Foundation::CHAR[512]
+  struct SpatialAudioHrtfDistanceDecay
+    property type__ : Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecayType
+    property max_gain : Float32
+    property min_gain : Float32
+    property unity_gain_distance : Float32
+    property cutoff_distance : Float32
+    def initialize(@type__ : Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecayType, @max_gain : Float32, @min_gain : Float32, @unity_gain_distance : Float32, @cutoff_distance : Float32)
+    end
+  end
 
   @[Extern]
-  record ACMDRIVERDETAILSW,
-    cbStruct : UInt32,
-    fccType : UInt32,
-    fccComp : UInt32,
-    wMid : UInt16,
-    wPid : UInt16,
-    vdwACM : UInt32,
-    vdwDriver : UInt32,
-    fdwSupport : UInt32,
-    cFormatTags : UInt32,
-    cFilterTags : UInt32,
-    hicon : Win32cr::UI::WindowsAndMessaging::HICON,
-    szShortName : UInt16[32],
-    szLongName : UInt16[128],
-    szCopyright : UInt16[80],
-    szLicensing : UInt16[128],
-    szFeatures : UInt16[512]
+  struct SpatialAudioHrtfActivationParams
+    property object_format : Win32cr::Media::Audio::WAVEFORMATEX*
+    property static_object_type_mask : Win32cr::Media::Audio::AudioObjectType
+    property min_dynamic_object_count : UInt32
+    property max_dynamic_object_count : UInt32
+    property category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY
+    property event_handle : Win32cr::Foundation::HANDLE
+    property notify_object : Void*
+    property distance_decay : Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecay*
+    property directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityUnion*
+    property environment : Win32cr::Media::Audio::SpatialAudioHrtfEnvironmentType*
+    property orientation : Float32*
+    def initialize(@object_format : Win32cr::Media::Audio::WAVEFORMATEX*, @static_object_type_mask : Win32cr::Media::Audio::AudioObjectType, @min_dynamic_object_count : UInt32, @max_dynamic_object_count : UInt32, @category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, @event_handle : Win32cr::Foundation::HANDLE, @notify_object : Void*, @distance_decay : Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecay*, @directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityUnion*, @environment : Win32cr::Media::Audio::SpatialAudioHrtfEnvironmentType*, @orientation : Float32*)
+    end
+  end
 
   @[Extern]
-  record ACMFORMATTAGDETAILSA,
-    cbStruct : UInt32,
-    dwFormatTagIndex : UInt32,
-    dwFormatTag : UInt32,
-    cbFormatSize : UInt32,
-    fdwSupport : UInt32,
-    cStandardFormats : UInt32,
-    szFormatTag : Win32cr::Foundation::CHAR[48]
+  struct SpatialAudioHrtfActivationParams2
+    property object_format : Win32cr::Media::Audio::WAVEFORMATEX*
+    property static_object_type_mask : Win32cr::Media::Audio::AudioObjectType
+    property min_dynamic_object_count : UInt32
+    property max_dynamic_object_count : UInt32
+    property category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY
+    property event_handle : Win32cr::Foundation::HANDLE
+    property notify_object : Void*
+    property distance_decay : Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecay*
+    property directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityUnion*
+    property environment : Win32cr::Media::Audio::SpatialAudioHrtfEnvironmentType*
+    property orientation : Float32*
+    property options : Win32cr::Media::Audio::SPATIAL_AUDIO_STREAM_OPTIONS
+    def initialize(@object_format : Win32cr::Media::Audio::WAVEFORMATEX*, @static_object_type_mask : Win32cr::Media::Audio::AudioObjectType, @min_dynamic_object_count : UInt32, @max_dynamic_object_count : UInt32, @category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, @event_handle : Win32cr::Foundation::HANDLE, @notify_object : Void*, @distance_decay : Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecay*, @directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityUnion*, @environment : Win32cr::Media::Audio::SpatialAudioHrtfEnvironmentType*, @orientation : Float32*, @options : Win32cr::Media::Audio::SPATIAL_AUDIO_STREAM_OPTIONS)
+    end
+  end
 
   @[Extern]
-  record ACMFORMATTAGDETAILSW,
-    cbStruct : UInt32,
-    dwFormatTagIndex : UInt32,
-    dwFormatTag : UInt32,
-    cbFormatSize : UInt32,
-    fdwSupport : UInt32,
-    cStandardFormats : UInt32,
-    szFormatTag : UInt16[48]
+  struct DIRECTX_AUDIO_ACTIVATION_PARAMS
+    property cbDirectXAudioActivationParams : UInt32
+    property guidAudioSession : LibC::GUID
+    property dwAudioStreamFlags : UInt32
+    def initialize(@cbDirectXAudioActivationParams : UInt32, @guidAudioSession : LibC::GUID, @dwAudioStreamFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record ACMFORMATDETAILSA,
-    cbStruct : UInt32,
-    dwFormatIndex : UInt32,
-    dwFormatTag : UInt32,
-    fdwSupport : UInt32,
-    pwfx : Win32cr::Media::Audio::WAVEFORMATEX*,
-    cbwfx : UInt32,
-    szFormat : Win32cr::Foundation::CHAR[128]
+  struct AudioExtensionParams
+    property add_page_param : Win32cr::Foundation::LPARAM
+    property pEndpoint : Void*
+    property pPnpInterface : Void*
+    property pPnpDevnode : Void*
+    def initialize(@add_page_param : Win32cr::Foundation::LPARAM, @pEndpoint : Void*, @pPnpInterface : Void*, @pPnpDevnode : Void*)
+    end
+  end
 
   @[Extern]
-  record Tacmformatdetailsw,
-    cbStruct : UInt32,
-    dwFormatIndex : UInt32,
-    dwFormatTag : UInt32,
-    fdwSupport : UInt32,
-    pwfx : Win32cr::Media::Audio::WAVEFORMATEX*,
-    cbwfx : UInt32,
-    szFormat : UInt16[128]
+  struct SpatialAudioMetadataItemsInfo
+    property frame_count : UInt16
+    property item_count : UInt16
+    property max_item_count : UInt16
+    property max_value_buffer_length : UInt32
+    def initialize(@frame_count : UInt16, @item_count : UInt16, @max_item_count : UInt16, @max_value_buffer_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record ACMFORMATCHOOSEA,
-    cbStruct : UInt32,
-    fdwStyle : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    pwfx : Win32cr::Media::Audio::WAVEFORMATEX*,
-    cbwfx : UInt32,
-    pszTitle : Win32cr::Foundation::PSTR,
-    szFormatTag : Win32cr::Foundation::CHAR[48],
-    szFormat : Win32cr::Foundation::CHAR[128],
-    pszName : Win32cr::Foundation::PSTR,
-    cchName : UInt32,
-    fdwEnum : UInt32,
-    pwfxEnum : Win32cr::Media::Audio::WAVEFORMATEX*,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    pszTemplateName : Win32cr::Foundation::PSTR,
-    lCustData : Win32cr::Foundation::LPARAM,
-    pfnHook : Win32cr::Media::Audio::ACMFORMATCHOOSEHOOKPROCA
+  struct SpatialAudioObjectRenderStreamForMetadataActivationParams
+    property object_format : Win32cr::Media::Audio::WAVEFORMATEX*
+    property static_object_type_mask : Win32cr::Media::Audio::AudioObjectType
+    property min_dynamic_object_count : UInt32
+    property max_dynamic_object_count : UInt32
+    property category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY
+    property event_handle : Win32cr::Foundation::HANDLE
+    property metadata_format_id : LibC::GUID
+    property max_metadata_item_count : UInt16
+    property metadata_activation_params : Win32cr::System::Com::StructuredStorage::PROPVARIANT*
+    property notify_object : Void*
+    def initialize(@object_format : Win32cr::Media::Audio::WAVEFORMATEX*, @static_object_type_mask : Win32cr::Media::Audio::AudioObjectType, @min_dynamic_object_count : UInt32, @max_dynamic_object_count : UInt32, @category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, @event_handle : Win32cr::Foundation::HANDLE, @metadata_format_id : LibC::GUID, @max_metadata_item_count : UInt16, @metadata_activation_params : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, @notify_object : Void*)
+    end
+  end
 
   @[Extern]
-  record ACMFORMATCHOOSEW,
-    cbStruct : UInt32,
-    fdwStyle : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    pwfx : Win32cr::Media::Audio::WAVEFORMATEX*,
-    cbwfx : UInt32,
-    pszTitle : Win32cr::Foundation::PWSTR,
-    szFormatTag : UInt16[48],
-    szFormat : UInt16[128],
-    pszName : Win32cr::Foundation::PWSTR,
-    cchName : UInt32,
-    fdwEnum : UInt32,
-    pwfxEnum : Win32cr::Media::Audio::WAVEFORMATEX*,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    pszTemplateName : Win32cr::Foundation::PWSTR,
-    lCustData : Win32cr::Foundation::LPARAM,
-    pfnHook : Win32cr::Media::Audio::ACMFORMATCHOOSEHOOKPROCW
+  struct SpatialAudioObjectRenderStreamForMetadataActivationParams2
+    property object_format : Win32cr::Media::Audio::WAVEFORMATEX*
+    property static_object_type_mask : Win32cr::Media::Audio::AudioObjectType
+    property min_dynamic_object_count : UInt32
+    property max_dynamic_object_count : UInt32
+    property category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY
+    property event_handle : Win32cr::Foundation::HANDLE
+    property metadata_format_id : LibC::GUID
+    property max_metadata_item_count : UInt32
+    property metadata_activation_params : Win32cr::System::Com::StructuredStorage::PROPVARIANT*
+    property notify_object : Void*
+    property options : Win32cr::Media::Audio::SPATIAL_AUDIO_STREAM_OPTIONS
+    def initialize(@object_format : Win32cr::Media::Audio::WAVEFORMATEX*, @static_object_type_mask : Win32cr::Media::Audio::AudioObjectType, @min_dynamic_object_count : UInt32, @max_dynamic_object_count : UInt32, @category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, @event_handle : Win32cr::Foundation::HANDLE, @metadata_format_id : LibC::GUID, @max_metadata_item_count : UInt32, @metadata_activation_params : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, @notify_object : Void*, @options : Win32cr::Media::Audio::SPATIAL_AUDIO_STREAM_OPTIONS)
+    end
+  end
 
   @[Extern]
-  record ACMFILTERTAGDETAILSA,
-    cbStruct : UInt32,
-    dwFilterTagIndex : UInt32,
-    dwFilterTag : UInt32,
-    cbFilterSize : UInt32,
-    fdwSupport : UInt32,
-    cStandardFilters : UInt32,
-    szFilterTag : Win32cr::Foundation::CHAR[48]
+  struct AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS
+    property target_process_id : UInt32
+    property process_loopback_mode : Win32cr::Media::Audio::PROCESS_LOOPBACK_MODE
+    def initialize(@target_process_id : UInt32, @process_loopback_mode : Win32cr::Media::Audio::PROCESS_LOOPBACK_MODE)
+    end
+  end
 
   @[Extern]
-  record ACMFILTERTAGDETAILSW,
-    cbStruct : UInt32,
-    dwFilterTagIndex : UInt32,
-    dwFilterTag : UInt32,
-    cbFilterSize : UInt32,
-    fdwSupport : UInt32,
-    cStandardFilters : UInt32,
-    szFilterTag : UInt16[48]
+  struct AUDIOCLIENT_ACTIVATION_PARAMS
+    property activation_type : Win32cr::Media::Audio::AUDIOCLIENT_ACTIVATION_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property process_loopback_params : Win32cr::Media::Audio::AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS
+    def initialize(@process_loopback_params : Win32cr::Media::Audio::AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS)
+    end
+    end
+
+    def initialize(@activation_type : Win32cr::Media::Audio::AUDIOCLIENT_ACTIVATION_TYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record ACMFILTERDETAILSA,
-    cbStruct : UInt32,
-    dwFilterIndex : UInt32,
-    dwFilterTag : UInt32,
-    fdwSupport : UInt32,
-    pwfltr : Win32cr::Media::Audio::WAVEFILTER*,
-    cbwfltr : UInt32,
-    szFilter : Win32cr::Foundation::CHAR[128]
+  struct ACMDRIVERDETAILSA
+    property cbStruct : UInt32
+    property fccType : UInt32
+    property fccComp : UInt32
+    property wMid : UInt16
+    property wPid : UInt16
+    property vdwACM : UInt32
+    property vdwDriver : UInt32
+    property fdwSupport : UInt32
+    property cFormatTags : UInt32
+    property cFilterTags : UInt32
+    property hicon : Win32cr::UI::WindowsAndMessaging::HICON
+    property szShortName : Win32cr::Foundation::CHAR[32]
+    property szLongName : Win32cr::Foundation::CHAR[128]
+    property szCopyright : Win32cr::Foundation::CHAR[80]
+    property szLicensing : Win32cr::Foundation::CHAR[128]
+    property szFeatures : Win32cr::Foundation::CHAR[512]
+    def initialize(@cbStruct : UInt32, @fccType : UInt32, @fccComp : UInt32, @wMid : UInt16, @wPid : UInt16, @vdwACM : UInt32, @vdwDriver : UInt32, @fdwSupport : UInt32, @cFormatTags : UInt32, @cFilterTags : UInt32, @hicon : Win32cr::UI::WindowsAndMessaging::HICON, @szShortName : Win32cr::Foundation::CHAR[32], @szLongName : Win32cr::Foundation::CHAR[128], @szCopyright : Win32cr::Foundation::CHAR[80], @szLicensing : Win32cr::Foundation::CHAR[128], @szFeatures : Win32cr::Foundation::CHAR[512])
+    end
+  end
 
   @[Extern]
-  record ACMFILTERDETAILSW,
-    cbStruct : UInt32,
-    dwFilterIndex : UInt32,
-    dwFilterTag : UInt32,
-    fdwSupport : UInt32,
-    pwfltr : Win32cr::Media::Audio::WAVEFILTER*,
-    cbwfltr : UInt32,
-    szFilter : UInt16[128]
+  struct ACMDRIVERDETAILSW
+    property cbStruct : UInt32
+    property fccType : UInt32
+    property fccComp : UInt32
+    property wMid : UInt16
+    property wPid : UInt16
+    property vdwACM : UInt32
+    property vdwDriver : UInt32
+    property fdwSupport : UInt32
+    property cFormatTags : UInt32
+    property cFilterTags : UInt32
+    property hicon : Win32cr::UI::WindowsAndMessaging::HICON
+    property szShortName : UInt16[32]
+    property szLongName : UInt16[128]
+    property szCopyright : UInt16[80]
+    property szLicensing : UInt16[128]
+    property szFeatures : UInt16[512]
+    def initialize(@cbStruct : UInt32, @fccType : UInt32, @fccComp : UInt32, @wMid : UInt16, @wPid : UInt16, @vdwACM : UInt32, @vdwDriver : UInt32, @fdwSupport : UInt32, @cFormatTags : UInt32, @cFilterTags : UInt32, @hicon : Win32cr::UI::WindowsAndMessaging::HICON, @szShortName : UInt16[32], @szLongName : UInt16[128], @szCopyright : UInt16[80], @szLicensing : UInt16[128], @szFeatures : UInt16[512])
+    end
+  end
 
   @[Extern]
-  record ACMFILTERCHOOSEA,
-    cbStruct : UInt32,
-    fdwStyle : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    pwfltr : Win32cr::Media::Audio::WAVEFILTER*,
-    cbwfltr : UInt32,
-    pszTitle : Win32cr::Foundation::PSTR,
-    szFilterTag : Win32cr::Foundation::CHAR[48],
-    szFilter : Win32cr::Foundation::CHAR[128],
-    pszName : Win32cr::Foundation::PSTR,
-    cchName : UInt32,
-    fdwEnum : UInt32,
-    pwfltrEnum : Win32cr::Media::Audio::WAVEFILTER*,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    pszTemplateName : Win32cr::Foundation::PSTR,
-    lCustData : Win32cr::Foundation::LPARAM,
-    pfnHook : Win32cr::Media::Audio::ACMFILTERCHOOSEHOOKPROCA
+  struct ACMFORMATTAGDETAILSA
+    property cbStruct : UInt32
+    property dwFormatTagIndex : UInt32
+    property dwFormatTag : UInt32
+    property cbFormatSize : UInt32
+    property fdwSupport : UInt32
+    property cStandardFormats : UInt32
+    property szFormatTag : Win32cr::Foundation::CHAR[48]
+    def initialize(@cbStruct : UInt32, @dwFormatTagIndex : UInt32, @dwFormatTag : UInt32, @cbFormatSize : UInt32, @fdwSupport : UInt32, @cStandardFormats : UInt32, @szFormatTag : Win32cr::Foundation::CHAR[48])
+    end
+  end
 
   @[Extern]
-  record ACMFILTERCHOOSEW,
-    cbStruct : UInt32,
-    fdwStyle : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    pwfltr : Win32cr::Media::Audio::WAVEFILTER*,
-    cbwfltr : UInt32,
-    pszTitle : Win32cr::Foundation::PWSTR,
-    szFilterTag : UInt16[48],
-    szFilter : UInt16[128],
-    pszName : Win32cr::Foundation::PWSTR,
-    cchName : UInt32,
-    fdwEnum : UInt32,
-    pwfltrEnum : Win32cr::Media::Audio::WAVEFILTER*,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    pszTemplateName : Win32cr::Foundation::PWSTR,
-    lCustData : Win32cr::Foundation::LPARAM,
-    pfnHook : Win32cr::Media::Audio::ACMFILTERCHOOSEHOOKPROCW
+  struct ACMFORMATTAGDETAILSW
+    property cbStruct : UInt32
+    property dwFormatTagIndex : UInt32
+    property dwFormatTag : UInt32
+    property cbFormatSize : UInt32
+    property fdwSupport : UInt32
+    property cStandardFormats : UInt32
+    property szFormatTag : UInt16[48]
+    def initialize(@cbStruct : UInt32, @dwFormatTagIndex : UInt32, @dwFormatTag : UInt32, @cbFormatSize : UInt32, @fdwSupport : UInt32, @cStandardFormats : UInt32, @szFormatTag : UInt16[48])
+    end
+  end
+
+  @[Extern]
+  struct ACMFORMATDETAILSA
+    property cbStruct : UInt32
+    property dwFormatIndex : UInt32
+    property dwFormatTag : UInt32
+    property fdwSupport : UInt32
+    property pwfx : Win32cr::Media::Audio::WAVEFORMATEX*
+    property cbwfx : UInt32
+    property szFormat : Win32cr::Foundation::CHAR[128]
+    def initialize(@cbStruct : UInt32, @dwFormatIndex : UInt32, @dwFormatTag : UInt32, @fdwSupport : UInt32, @pwfx : Win32cr::Media::Audio::WAVEFORMATEX*, @cbwfx : UInt32, @szFormat : Win32cr::Foundation::CHAR[128])
+    end
+  end
+
+  @[Extern]
+  struct Tacmformatdetailsw
+    property cbStruct : UInt32
+    property dwFormatIndex : UInt32
+    property dwFormatTag : UInt32
+    property fdwSupport : UInt32
+    property pwfx : Win32cr::Media::Audio::WAVEFORMATEX*
+    property cbwfx : UInt32
+    property szFormat : UInt16[128]
+    def initialize(@cbStruct : UInt32, @dwFormatIndex : UInt32, @dwFormatTag : UInt32, @fdwSupport : UInt32, @pwfx : Win32cr::Media::Audio::WAVEFORMATEX*, @cbwfx : UInt32, @szFormat : UInt16[128])
+    end
+  end
+
+  @[Extern]
+  struct ACMFORMATCHOOSEA
+    property cbStruct : UInt32
+    property fdwStyle : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property pwfx : Win32cr::Media::Audio::WAVEFORMATEX*
+    property cbwfx : UInt32
+    property pszTitle : Win32cr::Foundation::PSTR
+    property szFormatTag : Win32cr::Foundation::CHAR[48]
+    property szFormat : Win32cr::Foundation::CHAR[128]
+    property pszName : Win32cr::Foundation::PSTR
+    property cchName : UInt32
+    property fdwEnum : UInt32
+    property pwfxEnum : Win32cr::Media::Audio::WAVEFORMATEX*
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property pszTemplateName : Win32cr::Foundation::PSTR
+    property lCustData : Win32cr::Foundation::LPARAM
+    property pfnHook : Win32cr::Media::Audio::ACMFORMATCHOOSEHOOKPROCA
+    def initialize(@cbStruct : UInt32, @fdwStyle : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @pwfx : Win32cr::Media::Audio::WAVEFORMATEX*, @cbwfx : UInt32, @pszTitle : Win32cr::Foundation::PSTR, @szFormatTag : Win32cr::Foundation::CHAR[48], @szFormat : Win32cr::Foundation::CHAR[128], @pszName : Win32cr::Foundation::PSTR, @cchName : UInt32, @fdwEnum : UInt32, @pwfxEnum : Win32cr::Media::Audio::WAVEFORMATEX*, @hInstance : Win32cr::Foundation::HINSTANCE, @pszTemplateName : Win32cr::Foundation::PSTR, @lCustData : Win32cr::Foundation::LPARAM, @pfnHook : Win32cr::Media::Audio::ACMFORMATCHOOSEHOOKPROCA)
+    end
+  end
+
+  @[Extern]
+  struct ACMFORMATCHOOSEW
+    property cbStruct : UInt32
+    property fdwStyle : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property pwfx : Win32cr::Media::Audio::WAVEFORMATEX*
+    property cbwfx : UInt32
+    property pszTitle : Win32cr::Foundation::PWSTR
+    property szFormatTag : UInt16[48]
+    property szFormat : UInt16[128]
+    property pszName : Win32cr::Foundation::PWSTR
+    property cchName : UInt32
+    property fdwEnum : UInt32
+    property pwfxEnum : Win32cr::Media::Audio::WAVEFORMATEX*
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property pszTemplateName : Win32cr::Foundation::PWSTR
+    property lCustData : Win32cr::Foundation::LPARAM
+    property pfnHook : Win32cr::Media::Audio::ACMFORMATCHOOSEHOOKPROCW
+    def initialize(@cbStruct : UInt32, @fdwStyle : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @pwfx : Win32cr::Media::Audio::WAVEFORMATEX*, @cbwfx : UInt32, @pszTitle : Win32cr::Foundation::PWSTR, @szFormatTag : UInt16[48], @szFormat : UInt16[128], @pszName : Win32cr::Foundation::PWSTR, @cchName : UInt32, @fdwEnum : UInt32, @pwfxEnum : Win32cr::Media::Audio::WAVEFORMATEX*, @hInstance : Win32cr::Foundation::HINSTANCE, @pszTemplateName : Win32cr::Foundation::PWSTR, @lCustData : Win32cr::Foundation::LPARAM, @pfnHook : Win32cr::Media::Audio::ACMFORMATCHOOSEHOOKPROCW)
+    end
+  end
+
+  @[Extern]
+  struct ACMFILTERTAGDETAILSA
+    property cbStruct : UInt32
+    property dwFilterTagIndex : UInt32
+    property dwFilterTag : UInt32
+    property cbFilterSize : UInt32
+    property fdwSupport : UInt32
+    property cStandardFilters : UInt32
+    property szFilterTag : Win32cr::Foundation::CHAR[48]
+    def initialize(@cbStruct : UInt32, @dwFilterTagIndex : UInt32, @dwFilterTag : UInt32, @cbFilterSize : UInt32, @fdwSupport : UInt32, @cStandardFilters : UInt32, @szFilterTag : Win32cr::Foundation::CHAR[48])
+    end
+  end
+
+  @[Extern]
+  struct ACMFILTERTAGDETAILSW
+    property cbStruct : UInt32
+    property dwFilterTagIndex : UInt32
+    property dwFilterTag : UInt32
+    property cbFilterSize : UInt32
+    property fdwSupport : UInt32
+    property cStandardFilters : UInt32
+    property szFilterTag : UInt16[48]
+    def initialize(@cbStruct : UInt32, @dwFilterTagIndex : UInt32, @dwFilterTag : UInt32, @cbFilterSize : UInt32, @fdwSupport : UInt32, @cStandardFilters : UInt32, @szFilterTag : UInt16[48])
+    end
+  end
+
+  @[Extern]
+  struct ACMFILTERDETAILSA
+    property cbStruct : UInt32
+    property dwFilterIndex : UInt32
+    property dwFilterTag : UInt32
+    property fdwSupport : UInt32
+    property pwfltr : Win32cr::Media::Audio::WAVEFILTER*
+    property cbwfltr : UInt32
+    property szFilter : Win32cr::Foundation::CHAR[128]
+    def initialize(@cbStruct : UInt32, @dwFilterIndex : UInt32, @dwFilterTag : UInt32, @fdwSupport : UInt32, @pwfltr : Win32cr::Media::Audio::WAVEFILTER*, @cbwfltr : UInt32, @szFilter : Win32cr::Foundation::CHAR[128])
+    end
+  end
+
+  @[Extern]
+  struct ACMFILTERDETAILSW
+    property cbStruct : UInt32
+    property dwFilterIndex : UInt32
+    property dwFilterTag : UInt32
+    property fdwSupport : UInt32
+    property pwfltr : Win32cr::Media::Audio::WAVEFILTER*
+    property cbwfltr : UInt32
+    property szFilter : UInt16[128]
+    def initialize(@cbStruct : UInt32, @dwFilterIndex : UInt32, @dwFilterTag : UInt32, @fdwSupport : UInt32, @pwfltr : Win32cr::Media::Audio::WAVEFILTER*, @cbwfltr : UInt32, @szFilter : UInt16[128])
+    end
+  end
+
+  @[Extern]
+  struct ACMFILTERCHOOSEA
+    property cbStruct : UInt32
+    property fdwStyle : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property pwfltr : Win32cr::Media::Audio::WAVEFILTER*
+    property cbwfltr : UInt32
+    property pszTitle : Win32cr::Foundation::PSTR
+    property szFilterTag : Win32cr::Foundation::CHAR[48]
+    property szFilter : Win32cr::Foundation::CHAR[128]
+    property pszName : Win32cr::Foundation::PSTR
+    property cchName : UInt32
+    property fdwEnum : UInt32
+    property pwfltrEnum : Win32cr::Media::Audio::WAVEFILTER*
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property pszTemplateName : Win32cr::Foundation::PSTR
+    property lCustData : Win32cr::Foundation::LPARAM
+    property pfnHook : Win32cr::Media::Audio::ACMFILTERCHOOSEHOOKPROCA
+    def initialize(@cbStruct : UInt32, @fdwStyle : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @pwfltr : Win32cr::Media::Audio::WAVEFILTER*, @cbwfltr : UInt32, @pszTitle : Win32cr::Foundation::PSTR, @szFilterTag : Win32cr::Foundation::CHAR[48], @szFilter : Win32cr::Foundation::CHAR[128], @pszName : Win32cr::Foundation::PSTR, @cchName : UInt32, @fdwEnum : UInt32, @pwfltrEnum : Win32cr::Media::Audio::WAVEFILTER*, @hInstance : Win32cr::Foundation::HINSTANCE, @pszTemplateName : Win32cr::Foundation::PSTR, @lCustData : Win32cr::Foundation::LPARAM, @pfnHook : Win32cr::Media::Audio::ACMFILTERCHOOSEHOOKPROCA)
+    end
+  end
+
+  @[Extern]
+  struct ACMFILTERCHOOSEW
+    property cbStruct : UInt32
+    property fdwStyle : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property pwfltr : Win32cr::Media::Audio::WAVEFILTER*
+    property cbwfltr : UInt32
+    property pszTitle : Win32cr::Foundation::PWSTR
+    property szFilterTag : UInt16[48]
+    property szFilter : UInt16[128]
+    property pszName : Win32cr::Foundation::PWSTR
+    property cchName : UInt32
+    property fdwEnum : UInt32
+    property pwfltrEnum : Win32cr::Media::Audio::WAVEFILTER*
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property pszTemplateName : Win32cr::Foundation::PWSTR
+    property lCustData : Win32cr::Foundation::LPARAM
+    property pfnHook : Win32cr::Media::Audio::ACMFILTERCHOOSEHOOKPROCW
+    def initialize(@cbStruct : UInt32, @fdwStyle : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @pwfltr : Win32cr::Media::Audio::WAVEFILTER*, @cbwfltr : UInt32, @pszTitle : Win32cr::Foundation::PWSTR, @szFilterTag : UInt16[48], @szFilter : UInt16[128], @pszName : Win32cr::Foundation::PWSTR, @cchName : UInt32, @fdwEnum : UInt32, @pwfltrEnum : Win32cr::Media::Audio::WAVEFILTER*, @hInstance : Win32cr::Foundation::HINSTANCE, @pszTemplateName : Win32cr::Foundation::PWSTR, @lCustData : Win32cr::Foundation::LPARAM, @pfnHook : Win32cr::Media::Audio::ACMFILTERCHOOSEHOOKPROCW)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record ACMSTREAMHEADER,
-    cbStruct : UInt32,
-    fdwStatus : UInt32,
-    dwUser : LibC::UIntPtrT,
-    pbSrc : UInt8*,
-    cbSrcLength : UInt32,
-    cbSrcLengthUsed : UInt32,
-    dwSrcUser : LibC::UIntPtrT,
-    pbDst : UInt8*,
-    cbDstLength : UInt32,
-    cbDstLengthUsed : UInt32,
-    dwDstUser : LibC::UIntPtrT,
-    dwReservedDriver : UInt32[15]
+  struct ACMSTREAMHEADER
+    property cbStruct : UInt32
+    property fdwStatus : UInt32
+    property dwUser : LibC::UIntPtrT
+    property pbSrc : UInt8*
+    property cbSrcLength : UInt32
+    property cbSrcLengthUsed : UInt32
+    property dwSrcUser : LibC::UIntPtrT
+    property pbDst : UInt8*
+    property cbDstLength : UInt32
+    property cbDstLengthUsed : UInt32
+    property dwDstUser : LibC::UIntPtrT
+    property dwReservedDriver : UInt32[15]
+    def initialize(@cbStruct : UInt32, @fdwStatus : UInt32, @dwUser : LibC::UIntPtrT, @pbSrc : UInt8*, @cbSrcLength : UInt32, @cbSrcLengthUsed : UInt32, @dwSrcUser : LibC::UIntPtrT, @pbDst : UInt8*, @cbDstLength : UInt32, @cbDstLengthUsed : UInt32, @dwDstUser : LibC::UIntPtrT, @dwReservedDriver : UInt32[15])
+    end
+  end
   {% end %}
 
   @[Extern]
-  record Tacmdrvopendesca,
-    cbStruct : UInt32,
-    fccType : UInt32,
-    fccComp : UInt32,
-    dwVersion : UInt32,
-    dwFlags : UInt32,
-    dwError : UInt32,
-    pszSectionName : Win32cr::Foundation::PSTR,
-    pszAliasName : Win32cr::Foundation::PSTR,
-    dnDevNode : UInt32
+  struct Tacmdrvopendesca
+    property cbStruct : UInt32
+    property fccType : UInt32
+    property fccComp : UInt32
+    property dwVersion : UInt32
+    property dwFlags : UInt32
+    property dwError : UInt32
+    property pszSectionName : Win32cr::Foundation::PSTR
+    property pszAliasName : Win32cr::Foundation::PSTR
+    property dnDevNode : UInt32
+    def initialize(@cbStruct : UInt32, @fccType : UInt32, @fccComp : UInt32, @dwVersion : UInt32, @dwFlags : UInt32, @dwError : UInt32, @pszSectionName : Win32cr::Foundation::PSTR, @pszAliasName : Win32cr::Foundation::PSTR, @dnDevNode : UInt32)
+    end
+  end
 
   @[Extern]
-  record Tacmdrvopendescw,
-    cbStruct : UInt32,
-    fccType : UInt32,
-    fccComp : UInt32,
-    dwVersion : UInt32,
-    dwFlags : UInt32,
-    dwError : UInt32,
-    pszSectionName : Win32cr::Foundation::PWSTR,
-    pszAliasName : Win32cr::Foundation::PWSTR,
-    dnDevNode : UInt32
+  struct Tacmdrvopendescw
+    property cbStruct : UInt32
+    property fccType : UInt32
+    property fccComp : UInt32
+    property dwVersion : UInt32
+    property dwFlags : UInt32
+    property dwError : UInt32
+    property pszSectionName : Win32cr::Foundation::PWSTR
+    property pszAliasName : Win32cr::Foundation::PWSTR
+    property dnDevNode : UInt32
+    def initialize(@cbStruct : UInt32, @fccType : UInt32, @fccComp : UInt32, @dwVersion : UInt32, @dwFlags : UInt32, @dwError : UInt32, @pszSectionName : Win32cr::Foundation::PWSTR, @pszAliasName : Win32cr::Foundation::PWSTR, @dnDevNode : UInt32)
+    end
+  end
 
   @[Extern]
-  record ACMDRVSTREAMINSTANCE,
-    cbStruct : UInt32,
-    pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*,
-    pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*,
-    pwfltr : Win32cr::Media::Audio::WAVEFILTER*,
-    dwCallback : LibC::UIntPtrT,
-    dwInstance : LibC::UIntPtrT,
-    fdwOpen : UInt32,
-    fdwDriver : UInt32,
-    dwDriver : LibC::UIntPtrT,
-    has : Win32cr::Media::Audio::HACMSTREAM
+  struct ACMDRVSTREAMINSTANCE
+    property cbStruct : UInt32
+    property pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*
+    property pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*
+    property pwfltr : Win32cr::Media::Audio::WAVEFILTER*
+    property dwCallback : LibC::UIntPtrT
+    property dwInstance : LibC::UIntPtrT
+    property fdwOpen : UInt32
+    property fdwDriver : UInt32
+    property dwDriver : LibC::UIntPtrT
+    property has : Win32cr::Media::Audio::HACMSTREAM
+    def initialize(@cbStruct : UInt32, @pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*, @pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*, @pwfltr : Win32cr::Media::Audio::WAVEFILTER*, @dwCallback : LibC::UIntPtrT, @dwInstance : LibC::UIntPtrT, @fdwOpen : UInt32, @fdwDriver : UInt32, @dwDriver : LibC::UIntPtrT, @has : Win32cr::Media::Audio::HACMSTREAM)
+    end
+  end
 
   @[Extern]
-  record ACMDRVSTREAMHEADER,
-    cbStruct : UInt32,
-    fdwStatus : UInt32,
-    dwUser : LibC::UIntPtrT,
-    pbSrc : UInt8*,
-    cbSrcLength : UInt32,
-    cbSrcLengthUsed : UInt32,
-    dwSrcUser : LibC::UIntPtrT,
-    pbDst : UInt8*,
-    cbDstLength : UInt32,
-    cbDstLengthUsed : UInt32,
-    dwDstUser : LibC::UIntPtrT,
-    fdwConvert : UInt32,
-    padshNext : Win32cr::Media::Audio::ACMDRVSTREAMHEADER*,
-    fdwDriver : UInt32,
-    dwDriver : LibC::UIntPtrT,
-    fdwPrepared : UInt32,
-    dwPrepared : LibC::UIntPtrT,
-    pbPreparedSrc : UInt8*,
-    cbPreparedSrcLength : UInt32,
-    pbPreparedDst : UInt8*,
-    cbPreparedDstLength : UInt32
+  struct ACMDRVSTREAMHEADER
+    property cbStruct : UInt32
+    property fdwStatus : UInt32
+    property dwUser : LibC::UIntPtrT
+    property pbSrc : UInt8*
+    property cbSrcLength : UInt32
+    property cbSrcLengthUsed : UInt32
+    property dwSrcUser : LibC::UIntPtrT
+    property pbDst : UInt8*
+    property cbDstLength : UInt32
+    property cbDstLengthUsed : UInt32
+    property dwDstUser : LibC::UIntPtrT
+    property fdwConvert : UInt32
+    property padshNext : Win32cr::Media::Audio::ACMDRVSTREAMHEADER*
+    property fdwDriver : UInt32
+    property dwDriver : LibC::UIntPtrT
+    property fdwPrepared : UInt32
+    property dwPrepared : LibC::UIntPtrT
+    property pbPreparedSrc : UInt8*
+    property cbPreparedSrcLength : UInt32
+    property pbPreparedDst : UInt8*
+    property cbPreparedDstLength : UInt32
+    def initialize(@cbStruct : UInt32, @fdwStatus : UInt32, @dwUser : LibC::UIntPtrT, @pbSrc : UInt8*, @cbSrcLength : UInt32, @cbSrcLengthUsed : UInt32, @dwSrcUser : LibC::UIntPtrT, @pbDst : UInt8*, @cbDstLength : UInt32, @cbDstLengthUsed : UInt32, @dwDstUser : LibC::UIntPtrT, @fdwConvert : UInt32, @padshNext : Win32cr::Media::Audio::ACMDRVSTREAMHEADER*, @fdwDriver : UInt32, @dwDriver : LibC::UIntPtrT, @fdwPrepared : UInt32, @dwPrepared : LibC::UIntPtrT, @pbPreparedSrc : UInt8*, @cbPreparedSrcLength : UInt32, @pbPreparedDst : UInt8*, @cbPreparedDstLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record ACMDRVSTREAMSIZE,
-    cbStruct : UInt32,
-    fdwSize : UInt32,
-    cbSrcLength : UInt32,
-    cbDstLength : UInt32
+  struct ACMDRVSTREAMSIZE
+    property cbStruct : UInt32
+    property fdwSize : UInt32
+    property cbSrcLength : UInt32
+    property cbDstLength : UInt32
+    def initialize(@cbStruct : UInt32, @fdwSize : UInt32, @cbSrcLength : UInt32, @cbDstLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record ACMDRVFORMATSUGGEST,
-    cbStruct : UInt32,
-    fdwSuggest : UInt32,
-    pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*,
-    cbwfxSrc : UInt32,
-    pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*,
-    cbwfxDst : UInt32
+  struct ACMDRVFORMATSUGGEST
+    property cbStruct : UInt32
+    property fdwSuggest : UInt32
+    property pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*
+    property cbwfxSrc : UInt32
+    property pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*
+    property cbwfxDst : UInt32
+    def initialize(@cbStruct : UInt32, @fdwSuggest : UInt32, @pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*, @cbwfxSrc : UInt32, @pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*, @cbwfxDst : UInt32)
+    end
+  end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record ACMSTREAMHEADER,
-    cbStruct : UInt32,
-    fdwStatus : UInt32,
-    dwUser : LibC::UIntPtrT,
-    pbSrc : UInt8*,
-    cbSrcLength : UInt32,
-    cbSrcLengthUsed : UInt32,
-    dwSrcUser : LibC::UIntPtrT,
-    pbDst : UInt8*,
-    cbDstLength : UInt32,
-    cbDstLengthUsed : UInt32,
-    dwDstUser : LibC::UIntPtrT,
-    dwReservedDriver : UInt32[10]
+  struct ACMSTREAMHEADER
+    property cbStruct : UInt32
+    property fdwStatus : UInt32
+    property dwUser : LibC::UIntPtrT
+    property pbSrc : UInt8*
+    property cbSrcLength : UInt32
+    property cbSrcLengthUsed : UInt32
+    property dwSrcUser : LibC::UIntPtrT
+    property pbDst : UInt8*
+    property cbDstLength : UInt32
+    property cbDstLengthUsed : UInt32
+    property dwDstUser : LibC::UIntPtrT
+    property dwReservedDriver : UInt32[10]
+    def initialize(@cbStruct : UInt32, @fdwStatus : UInt32, @dwUser : LibC::UIntPtrT, @pbSrc : UInt8*, @cbSrcLength : UInt32, @cbSrcLengthUsed : UInt32, @dwSrcUser : LibC::UIntPtrT, @pbDst : UInt8*, @cbDstLength : UInt32, @cbDstLengthUsed : UInt32, @dwDstUser : LibC::UIntPtrT, @dwReservedDriver : UInt32[10])
+    end
+  end
   {% end %}
 
   @[Extern]
@@ -1869,7 +2182,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("00000016-0000-0000-c000-000000000046")]
   record IMessageFilter, lpVtbl : IMessageFilterVtbl* do
     GUID = LibC::GUID.new(0x16_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IMessageFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1913,7 +2225,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("1cb9ad4c-dbfa-4c32-b178-c2f568a703b2")]
   record IAudioClient, lpVtbl : IAudioClientVtbl* do
     GUID = LibC::GUID.new(0x1cb9ad4c_u32, 0xdbfa_u16, 0x4c32_u16, StaticArray[0xb1_u8, 0x78_u8, 0xc2_u8, 0xf5_u8, 0x68_u8, 0xa7_u8, 0x3_u8, 0xb2_u8])
     def query_interface(this : IAudioClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1987,7 +2298,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("726778cd-f60a-4eda-82de-e47610cd78aa")]
   record IAudioClient2, lpVtbl : IAudioClient2Vtbl* do
     GUID = LibC::GUID.new(0x726778cd_u32, 0xf60a_u16, 0x4eda_u16, StaticArray[0x82_u8, 0xde_u8, 0xe4_u8, 0x76_u8, 0x10_u8, 0xcd_u8, 0x78_u8, 0xaa_u8])
     def query_interface(this : IAudioClient2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2073,7 +2383,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("7ed4ee07-8e67-4cd4-8c1a-2b7a5987ad42")]
   record IAudioClient3, lpVtbl : IAudioClient3Vtbl* do
     GUID = LibC::GUID.new(0x7ed4ee07_u32, 0x8e67_u16, 0x4cd4_u16, StaticArray[0x8c_u8, 0x1a_u8, 0x2b_u8, 0x7a_u8, 0x59_u8, 0x87_u8, 0xad_u8, 0x42_u8])
     def query_interface(this : IAudioClient3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2152,7 +2461,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("f294acfc-3146-4483-a7bf-addca7c260e2")]
   record IAudioRenderClient, lpVtbl : IAudioRenderClientVtbl* do
     GUID = LibC::GUID.new(0xf294acfc_u32, 0x3146_u16, 0x4483_u16, StaticArray[0xa7_u8, 0xbf_u8, 0xad_u8, 0xdc_u8, 0xa7_u8, 0xc2_u8, 0x60_u8, 0xe2_u8])
     def query_interface(this : IAudioRenderClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2184,7 +2492,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("c8adbd64-e71e-48a0-a4de-185c395cd317")]
   record IAudioCaptureClient, lpVtbl : IAudioCaptureClientVtbl* do
     GUID = LibC::GUID.new(0xc8adbd64_u32, 0xe71e_u16, 0x48a0_u16, StaticArray[0xa4_u8, 0xde_u8, 0x18_u8, 0x5c_u8, 0x39_u8, 0x5c_u8, 0xd3_u8, 0x17_u8])
     def query_interface(this : IAudioCaptureClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2219,7 +2526,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("cd63314f-3fba-4a1b-812c-ef96358728e7")]
   record IAudioClock, lpVtbl : IAudioClockVtbl* do
     GUID = LibC::GUID.new(0xcd63314f_u32, 0x3fba_u16, 0x4a1b_u16, StaticArray[0x81_u8, 0x2c_u8, 0xef_u8, 0x96_u8, 0x35_u8, 0x87_u8, 0x28_u8, 0xe7_u8])
     def query_interface(this : IAudioClock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2252,7 +2558,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("6f49ff73-6727-49ac-a008-d98cf5e70048")]
   record IAudioClock2, lpVtbl : IAudioClock2Vtbl* do
     GUID = LibC::GUID.new(0x6f49ff73_u32, 0x6727_u16, 0x49ac_u16, StaticArray[0xa0_u8, 0x8_u8, 0xd9_u8, 0x8c_u8, 0xf5_u8, 0xe7_u8, 0x0_u8, 0x48_u8])
     def query_interface(this : IAudioClock2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2279,7 +2584,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("f6e4c0a0-46d9-4fb8-be21-57a3ef2b626c")]
   record IAudioClockAdjustment, lpVtbl : IAudioClockAdjustmentVtbl* do
     GUID = LibC::GUID.new(0xf6e4c0a0_u32, 0x46d9_u16, 0x4fb8_u16, StaticArray[0xbe_u8, 0x21_u8, 0x57_u8, 0xa3_u8, 0xef_u8, 0x2b_u8, 0x62_u8, 0x6c_u8])
     def query_interface(this : IAudioClockAdjustment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2309,7 +2613,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("87ce5498-68d6-44e5-9215-6da47ef883d8")]
   record ISimpleAudioVolume, lpVtbl : ISimpleAudioVolumeVtbl* do
     GUID = LibC::GUID.new(0x87ce5498_u32, 0x68d6_u16, 0x44e5_u16, StaticArray[0x92_u8, 0x15_u8, 0x6d_u8, 0xa4_u8, 0x7e_u8, 0xf8_u8, 0x83_u8, 0xd8_u8])
     def query_interface(this : ISimpleAudioVolume*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2345,7 +2648,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("c789d381-a28c-4168-b28f-d3a837924dc3")]
   record IAudioClientDuckingControl, lpVtbl : IAudioClientDuckingControlVtbl* do
     GUID = LibC::GUID.new(0xc789d381_u32, 0xa28c_u16, 0x4168_u16, StaticArray[0xb2_u8, 0x8f_u8, 0xd3_u8, 0xa8_u8, 0x37_u8, 0x92_u8, 0x4d_u8, 0xc3_u8])
     def query_interface(this : IAudioClientDuckingControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2372,7 +2674,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("a5ded44f-3c5d-4b2b-bd1e-5dc1ee20bbf6")]
   record IAudioEffectsChangedNotificationClient, lpVtbl : IAudioEffectsChangedNotificationClientVtbl* do
     GUID = LibC::GUID.new(0xa5ded44f_u32, 0x3c5d_u16, 0x4b2b_u16, StaticArray[0xbd_u8, 0x1e_u8, 0x5d_u8, 0xc1_u8, 0xee_u8, 0x20_u8, 0xbb_u8, 0xf6_u8])
     def query_interface(this : IAudioEffectsChangedNotificationClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2402,7 +2703,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("4460b3ae-4b44-4527-8676-7548a8acd260")]
   record IAudioEffectsManager, lpVtbl : IAudioEffectsManagerVtbl* do
     GUID = LibC::GUID.new(0x4460b3ae_u32, 0x4b44_u16, 0x4527_u16, StaticArray[0x86_u8, 0x76_u8, 0x75_u8, 0x48_u8, 0xa8_u8, 0xac_u8, 0xd2_u8, 0x60_u8])
     def query_interface(this : IAudioEffectsManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2442,7 +2742,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("93014887-242d-4068-8a15-cf5e93b90fe3")]
   record IAudioStreamVolume, lpVtbl : IAudioStreamVolumeVtbl* do
     GUID = LibC::GUID.new(0x93014887_u32, 0x242d_u16, 0x4068_u16, StaticArray[0x8a_u8, 0x15_u8, 0xcf_u8, 0x5e_u8, 0x93_u8, 0xb9_u8, 0xf_u8, 0xe3_u8])
     def query_interface(this : IAudioStreamVolume*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2484,7 +2783,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("28724c91-df35-4856-9f76-d6a26413f3df")]
   record IAudioAmbisonicsControl, lpVtbl : IAudioAmbisonicsControlVtbl* do
     GUID = LibC::GUID.new(0x28724c91_u32, 0xdf35_u16, 0x4856_u16, StaticArray[0x9f_u8, 0x76_u8, 0xd6_u8, 0xa2_u8, 0x64_u8, 0x13_u8, 0xf3_u8, 0xdf_u8])
     def query_interface(this : IAudioAmbisonicsControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2524,7 +2822,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("1c158861-b533-4b30-b1cf-e853e51c59b8")]
   record IChannelAudioVolume, lpVtbl : IChannelAudioVolumeVtbl* do
     GUID = LibC::GUID.new(0x1c158861_u32, 0xb533_u16, 0x4b30_u16, StaticArray[0xb1_u8, 0xcf_u8, 0xe8_u8, 0x53_u8, 0xe5_u8, 0x1c_u8, 0x59_u8, 0xb8_u8])
     def query_interface(this : IChannelAudioVolume*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2564,7 +2861,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("dcdaa858-895a-4a22-a5eb-67bda506096d")]
   record IAudioFormatEnumerator, lpVtbl : IAudioFormatEnumeratorVtbl* do
     GUID = LibC::GUID.new(0xdcdaa858_u32, 0x895a_u16, 0x4a22_u16, StaticArray[0xa5_u8, 0xeb_u8, 0x67_u8, 0xbd_u8, 0xa5_u8, 0x6_u8, 0x9_u8, 0x6d_u8])
     def query_interface(this : IAudioFormatEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2597,7 +2893,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("cce0b8f2-8d4d-4efb-a8cf-3d6ecf1c30e0")]
   record ISpatialAudioObjectBase, lpVtbl : ISpatialAudioObjectBaseVtbl* do
     GUID = LibC::GUID.new(0xcce0b8f2_u32, 0x8d4d_u16, 0x4efb_u16, StaticArray[0xa8_u8, 0xcf_u8, 0x3d_u8, 0x6e_u8, 0xcf_u8, 0x1c_u8, 0x30_u8, 0xe0_u8])
     def query_interface(this : ISpatialAudioObjectBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2638,7 +2933,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("dde28967-521b-46e5-8f00-bd6f2bc8ab1d")]
   record ISpatialAudioObject, lpVtbl : ISpatialAudioObjectVtbl* do
     GUID = LibC::GUID.new(0xdde28967_u32, 0x521b_u16, 0x46e5_u16, StaticArray[0x8f_u8, 0x0_u8, 0xbd_u8, 0x6f_u8, 0x2b_u8, 0xc8_u8, 0xab_u8, 0x1d_u8])
     def query_interface(this : ISpatialAudioObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2686,7 +2980,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("feaaf403-c1d8-450d-aa05-e0ccee7502a8")]
   record ISpatialAudioObjectRenderStreamBase, lpVtbl : ISpatialAudioObjectRenderStreamBaseVtbl* do
     GUID = LibC::GUID.new(0xfeaaf403_u32, 0xc1d8_u16, 0x450d_u16, StaticArray[0xaa_u8, 0x5_u8, 0xe0_u8, 0xcc_u8, 0xee_u8, 0x75_u8, 0x2_u8, 0xa8_u8])
     def query_interface(this : ISpatialAudioObjectRenderStreamBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2738,7 +3031,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("bab5f473-b423-477b-85f5-b5a332a04153")]
   record ISpatialAudioObjectRenderStream, lpVtbl : ISpatialAudioObjectRenderStreamVtbl* do
     GUID = LibC::GUID.new(0xbab5f473_u32, 0xb423_u16, 0x477b_u16, StaticArray[0x85_u8, 0xf5_u8, 0xb5_u8, 0xa3_u8, 0x32_u8, 0xa0_u8, 0x41_u8, 0x53_u8])
     def query_interface(this : ISpatialAudioObjectRenderStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2786,7 +3078,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("dddf83e6-68d7-4c70-883f-a1836afb4a50")]
   record ISpatialAudioObjectRenderStreamNotify, lpVtbl : ISpatialAudioObjectRenderStreamNotifyVtbl* do
     GUID = LibC::GUID.new(0xdddf83e6_u32, 0x68d7_u16, 0x4c70_u16, StaticArray[0x88_u8, 0x3f_u8, 0xa1_u8, 0x83_u8, 0x6a_u8, 0xfb_u8, 0x4a_u8, 0x50_u8])
     def query_interface(this : ISpatialAudioObjectRenderStreamNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2820,7 +3111,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("bbf8e066-aaaa-49be-9a4d-fd2a858ea27f")]
   record ISpatialAudioClient, lpVtbl : ISpatialAudioClientVtbl* do
     GUID = LibC::GUID.new(0xbbf8e066_u32, 0xaaaa_u16, 0x49be_u16, StaticArray[0x9a_u8, 0x4d_u8, 0xfd_u8, 0x2a_u8, 0x85_u8, 0x8e_u8, 0xa2_u8, 0x7f_u8])
     def query_interface(this : ISpatialAudioClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2877,7 +3167,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("caabe452-a66a-4bee-a93e-e320463f6a53")]
   record ISpatialAudioClient2, lpVtbl : ISpatialAudioClient2Vtbl* do
     GUID = LibC::GUID.new(0xcaabe452_u32, 0xa66a_u16, 0x4bee_u16, StaticArray[0xa9_u8, 0x3e_u8, 0xe3_u8, 0x20_u8, 0x46_u8, 0x3f_u8, 0x6a_u8, 0x53_u8])
     def query_interface(this : ISpatialAudioClient2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2940,7 +3229,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("d7436ade-1978-4e14-aba0-555bd8eb83b4")]
   record ISpatialAudioObjectForHrtf, lpVtbl : ISpatialAudioObjectForHrtfVtbl* do
     GUID = LibC::GUID.new(0xd7436ade_u32, 0x1978_u16, 0x4e14_u16, StaticArray[0xab_u8, 0xa0_u8, 0x55_u8, 0x5b_u8, 0xd8_u8, 0xeb_u8, 0x83_u8, 0xb4_u8])
     def query_interface(this : ISpatialAudioObjectForHrtf*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3001,7 +3289,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("e08deef9-5363-406e-9fdc-080ee247bbe0")]
   record ISpatialAudioObjectRenderStreamForHrtf, lpVtbl : ISpatialAudioObjectRenderStreamForHrtfVtbl* do
     GUID = LibC::GUID.new(0xe08deef9_u32, 0x5363_u16, 0x406e_u16, StaticArray[0x9f_u8, 0xdc_u8, 0x8_u8, 0xe_u8, 0xe2_u8, 0x47_u8, 0xbb_u8, 0xe0_u8])
     def query_interface(this : ISpatialAudioObjectRenderStreamForHrtf*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3053,7 +3340,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("7991eec9-7e89-4d85-8390-6c703cec60c0")]
   record IMMNotificationClient, lpVtbl : IMMNotificationClientVtbl* do
     GUID = LibC::GUID.new(0x7991eec9_u32, 0x7e89_u16, 0x4d85_u16, StaticArray[0x83_u8, 0x90_u8, 0x6c_u8, 0x70_u8, 0x3c_u8, 0xec_u8, 0x60_u8, 0xc0_u8])
     def query_interface(this : IMMNotificationClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3095,7 +3381,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("d666063f-1587-4e43-81f1-b948e807363f")]
   record IMMDevice, lpVtbl : IMMDeviceVtbl* do
     GUID = LibC::GUID.new(0xd666063f_u32, 0x1587_u16, 0x4e43_u16, StaticArray[0x81_u8, 0xf1_u8, 0xb9_u8, 0x48_u8, 0xe8_u8, 0x7_u8, 0x36_u8, 0x3f_u8])
     def query_interface(this : IMMDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3132,7 +3417,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("0bd7a1be-7a1a-44db-8397-cc5392387b5e")]
   record IMMDeviceCollection, lpVtbl : IMMDeviceCollectionVtbl* do
     GUID = LibC::GUID.new(0xbd7a1be_u32, 0x7a1a_u16, 0x44db_u16, StaticArray[0x83_u8, 0x97_u8, 0xcc_u8, 0x53_u8, 0x92_u8, 0x38_u8, 0x7b_u8, 0x5e_u8])
     def query_interface(this : IMMDeviceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3162,7 +3446,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("1be09788-6894-4089-8586-9a2a6c265ac5")]
   record IMMEndpoint, lpVtbl : IMMEndpointVtbl* do
     GUID = LibC::GUID.new(0x1be09788_u32, 0x6894_u16, 0x4089_u16, StaticArray[0x85_u8, 0x86_u8, 0x9a_u8, 0x2a_u8, 0x6c_u8, 0x26_u8, 0x5a_u8, 0xc5_u8])
     def query_interface(this : IMMEndpoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3193,7 +3476,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("a95664d2-9614-4f35-a746-de8db63617e6")]
   record IMMDeviceEnumerator, lpVtbl : IMMDeviceEnumeratorVtbl* do
     GUID = LibC::GUID.new(0xa95664d2_u32, 0x9614_u16, 0x4f35_u16, StaticArray[0xa7_u8, 0x46_u8, 0xde_u8, 0x8d_u8, 0xb6_u8, 0x36_u8, 0x17_u8, 0xe6_u8])
     def query_interface(this : IMMDeviceEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3232,7 +3514,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("3b0d0ea4-d0a9-4b0e-935b-09516746fac0")]
   record IMMDeviceActivator, lpVtbl : IMMDeviceActivatorVtbl* do
     GUID = LibC::GUID.new(0x3b0d0ea4_u32, 0xd0a9_u16, 0x4b0e_u16, StaticArray[0x93_u8, 0x5b_u8, 0x9_u8, 0x51_u8, 0x67_u8, 0x46_u8, 0xfa_u8, 0xc0_u8])
     def query_interface(this : IMMDeviceActivator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3259,7 +3540,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("41d949ab-9862-444a-80f6-c261334da5eb")]
   record IActivateAudioInterfaceCompletionHandler, lpVtbl : IActivateAudioInterfaceCompletionHandlerVtbl* do
     GUID = LibC::GUID.new(0x41d949ab_u32, 0x9862_u16, 0x444a_u16, StaticArray[0x80_u8, 0xf6_u8, 0xc2_u8, 0x61_u8, 0x33_u8, 0x4d_u8, 0xa5_u8, 0xeb_u8])
     def query_interface(this : IActivateAudioInterfaceCompletionHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3286,7 +3566,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("72a22d78-cde4-431d-b8cc-843a71199b6d")]
   record IActivateAudioInterfaceAsyncOperation, lpVtbl : IActivateAudioInterfaceAsyncOperationVtbl* do
     GUID = LibC::GUID.new(0x72a22d78_u32, 0xcde4_u16, 0x431d_u16, StaticArray[0xb8_u8, 0xcc_u8, 0x84_u8, 0x3a_u8, 0x71_u8, 0x19_u8, 0x9b_u8, 0x6d_u8])
     def query_interface(this : IActivateAudioInterfaceAsyncOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3313,7 +3592,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("20049d40-56d5-400e-a2ef-385599feed49")]
   record IAudioSystemEffectsPropertyChangeNotificationClient, lpVtbl : IAudioSystemEffectsPropertyChangeNotificationClientVtbl* do
     GUID = LibC::GUID.new(0x20049d40_u32, 0x56d5_u16, 0x400e_u16, StaticArray[0xa2_u8, 0xef_u8, 0x38_u8, 0x55_u8, 0x99_u8, 0xfe_u8, 0xed_u8, 0x49_u8])
     def query_interface(this : IAudioSystemEffectsPropertyChangeNotificationClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3346,7 +3624,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("302ae7f9-d7e0-43e4-971b-1f8293613d2a")]
   record IAudioSystemEffectsPropertyStore, lpVtbl : IAudioSystemEffectsPropertyStoreVtbl* do
     GUID = LibC::GUID.new(0x302ae7f9_u32, 0xd7e0_u16, 0x43e4_u16, StaticArray[0x97_u8, 0x1b_u8, 0x1f_u8, 0x82_u8, 0x93_u8, 0x61_u8, 0x3d_u8, 0x2a_u8])
     def query_interface(this : IAudioSystemEffectsPropertyStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3396,7 +3673,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("c2f8e001-f205-4bc9-99bc-c13b1e048ccb")]
   record IPerChannelDbLevel, lpVtbl : IPerChannelDbLevelVtbl* do
     GUID = LibC::GUID.new(0xc2f8e001_u32, 0xf205_u16, 0x4bc9_u16, StaticArray[0x99_u8, 0xbc_u8, 0xc1_u8, 0x3b_u8, 0x1e_u8, 0x4_u8, 0x8c_u8, 0xcb_u8])
     def query_interface(this : IPerChannelDbLevel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3443,7 +3719,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("7fb7b48f-531d-44a2-bcb3-5ad5a134b3dc")]
   record IAudioVolumeLevel, lpVtbl : IAudioVolumeLevelVtbl* do
     GUID = LibC::GUID.new(0x7fb7b48f_u32, 0x531d_u16, 0x44a2_u16, StaticArray[0xbc_u8, 0xb3_u8, 0x5a_u8, 0xd5_u8, 0xa1_u8, 0x34_u8, 0xb3_u8, 0xdc_u8])
     def query_interface(this : IAudioVolumeLevel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3486,7 +3761,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("bb11c46f-ec28-493c-b88a-5db88062ce98")]
   record IAudioChannelConfig, lpVtbl : IAudioChannelConfigVtbl* do
     GUID = LibC::GUID.new(0xbb11c46f_u32, 0xec28_u16, 0x493c_u16, StaticArray[0xb8_u8, 0x8a_u8, 0x5d_u8, 0xb8_u8, 0x80_u8, 0x62_u8, 0xce_u8, 0x98_u8])
     def query_interface(this : IAudioChannelConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3517,7 +3791,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("7d8b1437-dd53-4350-9c1b-1ee2890bd938")]
   record IAudioLoudness, lpVtbl : IAudioLoudnessVtbl* do
     GUID = LibC::GUID.new(0x7d8b1437_u32, 0xdd53_u16, 0x4350_u16, StaticArray[0x9c_u8, 0x1b_u8, 0x1e_u8, 0xe2_u8, 0x89_u8, 0xb_u8, 0xd9_u8, 0x38_u8])
     def query_interface(this : IAudioLoudness*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3548,7 +3821,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("4f03dc02-5e6e-4653-8f72-a030c123d598")]
   record IAudioInputSelector, lpVtbl : IAudioInputSelectorVtbl* do
     GUID = LibC::GUID.new(0x4f03dc02_u32, 0x5e6e_u16, 0x4653_u16, StaticArray[0x8f_u8, 0x72_u8, 0xa0_u8, 0x30_u8, 0xc1_u8, 0x23_u8, 0xd5_u8, 0x98_u8])
     def query_interface(this : IAudioInputSelector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3579,7 +3851,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("bb515f69-94a7-429e-8b9c-271b3f11a3ab")]
   record IAudioOutputSelector, lpVtbl : IAudioOutputSelectorVtbl* do
     GUID = LibC::GUID.new(0xbb515f69_u32, 0x94a7_u16, 0x429e_u16, StaticArray[0x8b_u8, 0x9c_u8, 0x27_u8, 0x1b_u8, 0x3f_u8, 0x11_u8, 0xa3_u8, 0xab_u8])
     def query_interface(this : IAudioOutputSelector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3610,7 +3881,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("df45aeea-b74a-4b6b-afad-2366b6aa012e")]
   record IAudioMute, lpVtbl : IAudioMuteVtbl* do
     GUID = LibC::GUID.new(0xdf45aeea_u32, 0xb74a_u16, 0x4b6b_u16, StaticArray[0xaf_u8, 0xad_u8, 0x23_u8, 0x66_u8, 0xb6_u8, 0xaa_u8, 0x1_u8, 0x2e_u8])
     def query_interface(this : IAudioMute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3645,7 +3915,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("a2b1a1d9-4db3-425d-a2b2-bd335cb3e2e5")]
   record IAudioBass, lpVtbl : IAudioBassVtbl* do
     GUID = LibC::GUID.new(0xa2b1a1d9_u32, 0x4db3_u16, 0x425d_u16, StaticArray[0xa2_u8, 0xb2_u8, 0xbd_u8, 0x33_u8, 0x5c_u8, 0xb3_u8, 0xe2_u8, 0xe5_u8])
     def query_interface(this : IAudioBass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3692,7 +3961,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("5e54b6d7-b44b-40d9-9a9e-e691d9ce6edf")]
   record IAudioMidrange, lpVtbl : IAudioMidrangeVtbl* do
     GUID = LibC::GUID.new(0x5e54b6d7_u32, 0xb44b_u16, 0x40d9_u16, StaticArray[0x9a_u8, 0x9e_u8, 0xe6_u8, 0x91_u8, 0xd9_u8, 0xce_u8, 0x6e_u8, 0xdf_u8])
     def query_interface(this : IAudioMidrange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3739,7 +4007,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("0a717812-694e-4907-b74b-bafa5cfdca7b")]
   record IAudioTreble, lpVtbl : IAudioTrebleVtbl* do
     GUID = LibC::GUID.new(0xa717812_u32, 0x694e_u16, 0x4907_u16, StaticArray[0xb7_u8, 0x4b_u8, 0xba_u8, 0xfa_u8, 0x5c_u8, 0xfd_u8, 0xca_u8, 0x7b_u8])
     def query_interface(this : IAudioTreble*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3782,7 +4049,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("85401fd4-6de4-4b9d-9869-2d6753a82f3c")]
   record IAudioAutoGainControl, lpVtbl : IAudioAutoGainControlVtbl* do
     GUID = LibC::GUID.new(0x85401fd4_u32, 0x6de4_u16, 0x4b9d_u16, StaticArray[0x98_u8, 0x69_u8, 0x2d_u8, 0x67_u8, 0x53_u8, 0xa8_u8, 0x2f_u8, 0x3c_u8])
     def query_interface(this : IAudioAutoGainControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3813,7 +4079,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("dd79923c-0599-45e0-b8b6-c8df7db6e796")]
   record IAudioPeakMeter, lpVtbl : IAudioPeakMeterVtbl* do
     GUID = LibC::GUID.new(0xdd79923c_u32, 0x599_u16, 0x45e0_u16, StaticArray[0xb8_u8, 0xb6_u8, 0xc8_u8, 0xdf_u8, 0x7d_u8, 0xb6_u8, 0xe7_u8, 0x96_u8])
     def query_interface(this : IAudioPeakMeter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3846,7 +4111,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("3b22bcbf-2586-4af0-8583-205d391b807c")]
   record IDeviceSpecificProperty, lpVtbl : IDeviceSpecificPropertyVtbl* do
     GUID = LibC::GUID.new(0x3b22bcbf_u32, 0x2586_u16, 0x4af0_u16, StaticArray[0x85_u8, 0x83_u8, 0x20_u8, 0x5d_u8, 0x39_u8, 0x1b_u8, 0x80_u8, 0x7c_u8])
     def query_interface(this : IDeviceSpecificProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3883,7 +4147,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("6daa848c-5eb0-45cc-aea5-998a2cda1ffb")]
   record IPartsList, lpVtbl : IPartsListVtbl* do
     GUID = LibC::GUID.new(0x6daa848c_u32, 0x5eb0_u16, 0x45cc_u16, StaticArray[0xae_u8, 0xa5_u8, 0x99_u8, 0x8a_u8, 0x2c_u8, 0xda_u8, 0x1f_u8, 0xfb_u8])
     def query_interface(this : IPartsList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3925,7 +4188,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("ae2de0e4-5bca-4f2d-aa46-5d13f8fdb3a9")]
   record IPart, lpVtbl : IPartVtbl* do
     GUID = LibC::GUID.new(0xae2de0e4_u32, 0x5bca_u16, 0x4f2d_u16, StaticArray[0xaa_u8, 0x46_u8, 0x5d_u8, 0x13_u8, 0xf8_u8, 0xfd_u8, 0xb3_u8, 0xa9_u8])
     def query_interface(this : IPart*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3995,7 +4257,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("9c2c4058-23f5-41de-877a-df3af236a09e")]
   record IConnector, lpVtbl : IConnectorVtbl* do
     GUID = LibC::GUID.new(0x9c2c4058_u32, 0x23f5_u16, 0x41de_u16, StaticArray[0x87_u8, 0x7a_u8, 0xdf_u8, 0x3a_u8, 0xf2_u8, 0x36_u8, 0xa0_u8, 0x9e_u8])
     def query_interface(this : IConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4042,7 +4303,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("82149a85-dba6-4487-86bb-ea8f7fefcc71")]
   record ISubunit, lpVtbl : ISubunitVtbl* do
     GUID = LibC::GUID.new(0x82149a85_u32, 0xdba6_u16, 0x4487_u16, StaticArray[0x86_u8, 0xbb_u8, 0xea_u8, 0x8f_u8, 0x7f_u8, 0xef_u8, 0xcc_u8, 0x71_u8])
     def query_interface(this : ISubunit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4067,7 +4327,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("45d37c3f-5140-444a-ae24-400789f3cbf3")]
   record IControlInterface, lpVtbl : IControlInterfaceVtbl* do
     GUID = LibC::GUID.new(0x45d37c3f_u32, 0x5140_u16, 0x444a_u16, StaticArray[0xae_u8, 0x24_u8, 0x40_u8, 0x7_u8, 0x89_u8, 0xf3_u8, 0xcb_u8, 0xf3_u8])
     def query_interface(this : IControlInterface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4097,7 +4356,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("a09513ed-c709-4d21-bd7b-5f34c47f3947")]
   record IControlChangeNotify, lpVtbl : IControlChangeNotifyVtbl* do
     GUID = LibC::GUID.new(0xa09513ed_u32, 0xc709_u16, 0x4d21_u16, StaticArray[0xbd_u8, 0x7b_u8, 0x5f_u8, 0x34_u8, 0xc4_u8, 0x7f_u8, 0x39_u8, 0x47_u8])
     def query_interface(this : IControlChangeNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4130,7 +4388,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("2a07407e-6497-4a18-9787-32f79bd0d98f")]
   record IDeviceTopology, lpVtbl : IDeviceTopologyVtbl* do
     GUID = LibC::GUID.new(0x2a07407e_u32, 0x6497_u16, 0x4a18_u16, StaticArray[0x97_u8, 0x87_u8, 0x32_u8, 0xf7_u8, 0x9b_u8, 0xd0_u8, 0xd9_u8, 0x8f_u8])
     def query_interface(this : IDeviceTopology*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4181,7 +4438,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("24918acc-64b3-37c1-8ca9-74a66e9957a8")]
   record IAudioSessionEvents, lpVtbl : IAudioSessionEventsVtbl* do
     GUID = LibC::GUID.new(0x24918acc_u32, 0x64b3_u16, 0x37c1_u16, StaticArray[0x8c_u8, 0xa9_u8, 0x74_u8, 0xa6_u8, 0x6e_u8, 0x99_u8, 0x57_u8, 0xa8_u8])
     def query_interface(this : IAudioSessionEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4234,7 +4490,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("f4b1a599-7266-4319-a8ca-e70acb11e8cd")]
   record IAudioSessionControl, lpVtbl : IAudioSessionControlVtbl* do
     GUID = LibC::GUID.new(0xf4b1a599_u32, 0x7266_u16, 0x4319_u16, StaticArray[0xa8_u8, 0xca_u8, 0xe7_u8, 0xa_u8, 0xcb_u8, 0x11_u8, 0xe8_u8, 0xcd_u8])
     def query_interface(this : IAudioSessionControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4298,7 +4553,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("bfb7ff88-7239-4fc9-8fa2-07c950be9c6d")]
   record IAudioSessionControl2, lpVtbl : IAudioSessionControl2Vtbl* do
     GUID = LibC::GUID.new(0xbfb7ff88_u32, 0x7239_u16, 0x4fc9_u16, StaticArray[0x8f_u8, 0xa2_u8, 0x7_u8, 0xc9_u8, 0x50_u8, 0xbe_u8, 0x9c_u8, 0x6d_u8])
     def query_interface(this : IAudioSessionControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4365,7 +4619,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("bfa971f1-4d5e-40bb-935e-967039bfbee4")]
   record IAudioSessionManager, lpVtbl : IAudioSessionManagerVtbl* do
     GUID = LibC::GUID.new(0xbfa971f1_u32, 0x4d5e_u16, 0x40bb_u16, StaticArray[0x93_u8, 0x5e_u8, 0x96_u8, 0x70_u8, 0x39_u8, 0xbf_u8, 0xbe_u8, 0xe4_u8])
     def query_interface(this : IAudioSessionManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4396,7 +4649,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("c3b284d4-6d39-4359-b3cf-b56ddb3bb39c")]
   record IAudioVolumeDuckNotification, lpVtbl : IAudioVolumeDuckNotificationVtbl* do
     GUID = LibC::GUID.new(0xc3b284d4_u32, 0x6d39_u16, 0x4359_u16, StaticArray[0xb3_u8, 0xcf_u8, 0xb5_u8, 0x6d_u8, 0xdb_u8, 0x3b_u8, 0xb3_u8, 0x9c_u8])
     def query_interface(this : IAudioVolumeDuckNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4426,7 +4678,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("641dd20b-4d41-49cc-aba3-174b9477bb08")]
   record IAudioSessionNotification, lpVtbl : IAudioSessionNotificationVtbl* do
     GUID = LibC::GUID.new(0x641dd20b_u32, 0x4d41_u16, 0x49cc_u16, StaticArray[0xab_u8, 0xa3_u8, 0x17_u8, 0x4b_u8, 0x94_u8, 0x77_u8, 0xbb_u8, 0x8_u8])
     def query_interface(this : IAudioSessionNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4454,7 +4705,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("e2f5bb11-0570-40ca-acdd-3aa01277dee8")]
   record IAudioSessionEnumerator, lpVtbl : IAudioSessionEnumeratorVtbl* do
     GUID = LibC::GUID.new(0xe2f5bb11_u32, 0x570_u16, 0x40ca_u16, StaticArray[0xac_u8, 0xdd_u8, 0x3a_u8, 0xa0_u8, 0x12_u8, 0x77_u8, 0xde_u8, 0xe8_u8])
     def query_interface(this : IAudioSessionEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4490,7 +4740,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("77aa99a0-1bd6-484f-8bc7-2c654c9a9b6f")]
   record IAudioSessionManager2, lpVtbl : IAudioSessionManager2Vtbl* do
     GUID = LibC::GUID.new(0x77aa99a0_u32, 0x1bd6_u16, 0x484f_u16, StaticArray[0x8b_u8, 0xc7_u8, 0x2c_u8, 0x65_u8, 0x4c_u8, 0x9a_u8, 0x9b_u8, 0x6f_u8])
     def query_interface(this : IAudioSessionManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4539,7 +4788,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("bcd7c78f-3098-4f22-b547-a2f25a381269")]
   record ISpatialAudioMetadataItems, lpVtbl : ISpatialAudioMetadataItemsVtbl* do
     GUID = LibC::GUID.new(0xbcd7c78f_u32, 0x3098_u16, 0x4f22_u16, StaticArray[0xb5_u8, 0x47_u8, 0xa2_u8, 0xf2_u8, 0x5a_u8, 0x38_u8, 0x12_u8, 0x69_u8])
     def query_interface(this : ISpatialAudioMetadataItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4581,7 +4829,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("1b17ca01-2955-444d-a430-537dc589a844")]
   record ISpatialAudioMetadataWriter, lpVtbl : ISpatialAudioMetadataWriterVtbl* do
     GUID = LibC::GUID.new(0x1b17ca01_u32, 0x2955_u16, 0x444d_u16, StaticArray[0xa4_u8, 0x30_u8, 0x53_u8, 0x7d_u8, 0xc5_u8, 0x89_u8, 0xa8_u8, 0x44_u8])
     def query_interface(this : ISpatialAudioMetadataWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4620,7 +4867,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("b78e86a2-31d9-4c32-94d2-7df40fc7ebec")]
   record ISpatialAudioMetadataReader, lpVtbl : ISpatialAudioMetadataReaderVtbl* do
     GUID = LibC::GUID.new(0xb78e86a2_u32, 0x31d9_u16, 0x4c32_u16, StaticArray[0x94_u8, 0xd2_u8, 0x7d_u8, 0xf4_u8, 0xf_u8, 0xc7_u8, 0xeb_u8, 0xec_u8])
     def query_interface(this : ISpatialAudioMetadataReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4658,7 +4904,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("d224b233-e251-4fd0-9ca2-d5ecf9a68404")]
   record ISpatialAudioMetadataCopier, lpVtbl : ISpatialAudioMetadataCopierVtbl* do
     GUID = LibC::GUID.new(0xd224b233_u32, 0xe251_u16, 0x4fd0_u16, StaticArray[0x9c_u8, 0xa2_u8, 0xd5_u8, 0xec_u8, 0xf9_u8, 0xa6_u8, 0x84_u8, 0x4_u8])
     def query_interface(this : ISpatialAudioMetadataCopier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4693,7 +4938,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("42640a16-e1bd-42d9-9ff6-031ab71a2dba")]
   record ISpatialAudioMetadataItemsBuffer, lpVtbl : ISpatialAudioMetadataItemsBufferVtbl* do
     GUID = LibC::GUID.new(0x42640a16_u32, 0xe1bd_u16, 0x42d9_u16, StaticArray[0x9f_u8, 0xf6_u8, 0x3_u8, 0x1a_u8, 0xb7_u8, 0x1a_u8, 0x2d_u8, 0xba_u8])
     def query_interface(this : ISpatialAudioMetadataItemsBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4730,7 +4974,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("777d4a3b-f6ff-4a26-85dc-68d7cdeda1d4")]
   record ISpatialAudioMetadataClient, lpVtbl : ISpatialAudioMetadataClientVtbl* do
     GUID = LibC::GUID.new(0x777d4a3b_u32, 0xf6ff_u16, 0x4a26_u16, StaticArray[0x85_u8, 0xdc_u8, 0x68_u8, 0xd7_u8, 0xcd_u8, 0xed_u8, 0xa1_u8, 0xd4_u8])
     def query_interface(this : ISpatialAudioMetadataClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4773,7 +5016,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("0df2c94b-f5f9-472d-af6b-c46e0ac9cd05")]
   record ISpatialAudioObjectForMetadataCommands, lpVtbl : ISpatialAudioObjectForMetadataCommandsVtbl* do
     GUID = LibC::GUID.new(0xdf2c94b_u32, 0xf5f9_u16, 0x472d_u16, StaticArray[0xaf_u8, 0x6b_u8, 0xc4_u8, 0x6e_u8, 0xa_u8, 0xc9_u8, 0xcd_u8, 0x5_u8])
     def query_interface(this : ISpatialAudioObjectForMetadataCommands*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4816,7 +5058,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("ddea49ff-3bc0-4377-8aad-9fbcfd808566")]
   record ISpatialAudioObjectForMetadataItems, lpVtbl : ISpatialAudioObjectForMetadataItemsVtbl* do
     GUID = LibC::GUID.new(0xddea49ff_u32, 0x3bc0_u16, 0x4377_u16, StaticArray[0x8a_u8, 0xad_u8, 0x9f_u8, 0xbc_u8, 0xfd_u8, 0x80_u8, 0x85_u8, 0x66_u8])
     def query_interface(this : ISpatialAudioObjectForMetadataItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4863,7 +5104,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("bbc9c907-48d5-4a2e-a0c7-f7f0d67c1fb1")]
   record ISpatialAudioObjectRenderStreamForMetadata, lpVtbl : ISpatialAudioObjectRenderStreamForMetadataVtbl* do
     GUID = LibC::GUID.new(0xbbc9c907_u32, 0x48d5_u16, 0x4a2e_u16, StaticArray[0xa0_u8, 0xc7_u8, 0xf7_u8, 0xf0_u8, 0xd6_u8, 0x7c_u8, 0x1f_u8, 0xb1_u8])
     def query_interface(this : ISpatialAudioObjectRenderStreamForMetadata*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4916,7 +5156,6 @@ module Win32cr::Media::Audio
 
 
   @[Extern]
-  #@[Com("63bd8738-e30d-4c77-bf5c-834e87c657e2")]
   record IAudioStateMonitor, lpVtbl : IAudioStateMonitorVtbl* do
     GUID = LibC::GUID.new(0x63bd8738_u32, 0xe30d_u16, 0x4c77_u16, StaticArray[0xbf_u8, 0x5c_u8, 0x83_u8, 0x4e_u8, 0x87_u8, 0xc6_u8, 0x57_u8, 0xe2_u8])
     def query_interface(this : IAudioStateMonitor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

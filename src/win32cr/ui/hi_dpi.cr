@@ -48,7 +48,6 @@ module Win32cr::UI::HiDpi
 
   @[Link("uxtheme")]
   @[Link("user32")]
-  @[Link("api-ms-win-shcore-scaling-l1-1-1")]
   lib C
     fun OpenThemeDataForDpi(hwnd : Win32cr::Foundation::HWND, pszClassList : Win32cr::Foundation::PWSTR, dpi : UInt32) : LibC::IntPtrT
 

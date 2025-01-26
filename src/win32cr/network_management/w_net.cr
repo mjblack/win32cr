@@ -2,67 +2,67 @@ require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::WNet
   alias NetEnumHandle = LibC::IntPtrT
-  alias PF_NPAddConnection = Proc(Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)*
+  alias PF_NPAddConnection = Proc(Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PF_NPAddConnection3 = Proc(Win32cr::Foundation::HWND, Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32)*
+  alias PF_NPAddConnection3 = Proc(Win32cr::Foundation::HWND, Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32)
 
-  alias PF_NPAddConnection4 = Proc(Win32cr::Foundation::HWND, Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Void*, UInt32, UInt32, UInt8*, UInt32, UInt32)*
+  alias PF_NPAddConnection4 = Proc(Win32cr::Foundation::HWND, Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Void*, UInt32, UInt32, UInt8*, UInt32, UInt32)
 
-  alias PF_NPCancelConnection = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, UInt32)*
+  alias PF_NPCancelConnection = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, UInt32)
 
-  alias PF_NPCancelConnection2 = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, UInt32, UInt32)*
+  alias PF_NPCancelConnection2 = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, UInt32, UInt32)
 
-  alias PF_NPGetConnection = Proc(Win32cr::Foundation::PWSTR, UInt16*, UInt32*, UInt32)*
+  alias PF_NPGetConnection = Proc(Win32cr::Foundation::PWSTR, UInt16*, UInt32*, UInt32)
 
-  alias PF_NPGetConnection3 = Proc(Win32cr::Foundation::PWSTR, UInt32, Void*, UInt32*, UInt32)*
+  alias PF_NPGetConnection3 = Proc(Win32cr::Foundation::PWSTR, UInt32, Void*, UInt32*, UInt32)
 
-  alias PF_NPGetUniversalName = Proc(Win32cr::Foundation::PWSTR, UInt32, Void*, UInt32*, UInt32)*
+  alias PF_NPGetUniversalName = Proc(Win32cr::Foundation::PWSTR, UInt32, Void*, UInt32*, UInt32)
 
-  alias PF_NPGetConnectionPerformance = Proc(Win32cr::Foundation::PWSTR, Win32cr::NetworkManagement::WNet::NETCONNECTINFOSTRUCT*, UInt32)*
+  alias PF_NPGetConnectionPerformance = Proc(Win32cr::Foundation::PWSTR, Win32cr::NetworkManagement::WNet::NETCONNECTINFOSTRUCT*, UInt32)
 
-  alias PF_NPOpenEnum = Proc(UInt32, UInt32, UInt32, Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Win32cr::Foundation::HANDLE*, UInt32)*
+  alias PF_NPOpenEnum = Proc(UInt32, UInt32, UInt32, Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Win32cr::Foundation::HANDLE*, UInt32)
 
-  alias PF_NPEnumResource = Proc(Win32cr::Foundation::HANDLE, UInt32*, Void*, UInt32*, UInt32)*
+  alias PF_NPEnumResource = Proc(Win32cr::Foundation::HANDLE, UInt32*, Void*, UInt32*, UInt32)
 
-  alias PF_NPCloseEnum = Proc(Win32cr::Foundation::HANDLE, UInt32)*
+  alias PF_NPCloseEnum = Proc(Win32cr::Foundation::HANDLE, UInt32)
 
-  alias PF_NPGetCaps = Proc(UInt32, UInt32)*
+  alias PF_NPGetCaps = Proc(UInt32, UInt32)
 
-  alias PF_NPGetUser = Proc(Win32cr::Foundation::PWSTR, UInt16*, UInt32*, UInt32)*
+  alias PF_NPGetUser = Proc(Win32cr::Foundation::PWSTR, UInt16*, UInt32*, UInt32)
 
-  alias PF_NPGetPersistentUseOptionsForConnection = Proc(Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt8*, UInt32*, UInt32)*
+  alias PF_NPGetPersistentUseOptionsForConnection = Proc(Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt8*, UInt32*, UInt32)
 
-  alias PF_NPDeviceMode = Proc(Win32cr::Foundation::HWND, UInt32)*
+  alias PF_NPDeviceMode = Proc(Win32cr::Foundation::HWND, UInt32)
 
-  alias PF_NPSearchDialog = Proc(Win32cr::Foundation::HWND, Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Void*, UInt32, UInt32*, UInt32)*
+  alias PF_NPSearchDialog = Proc(Win32cr::Foundation::HWND, Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Void*, UInt32, UInt32*, UInt32)
 
-  alias PF_NPGetResourceParent = Proc(Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Void*, UInt32*, UInt32)*
+  alias PF_NPGetResourceParent = Proc(Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Void*, UInt32*, UInt32)
 
-  alias PF_NPGetResourceInformation = Proc(Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Void*, UInt32*, Win32cr::Foundation::PWSTR*, UInt32)*
+  alias PF_NPGetResourceInformation = Proc(Win32cr::NetworkManagement::WNet::NETRESOURCEW*, Void*, UInt32*, Win32cr::Foundation::PWSTR*, UInt32)
 
-  alias PF_NPFormatNetworkName = Proc(Win32cr::Foundation::PWSTR, UInt16*, UInt32*, UInt32, UInt32, UInt32)*
+  alias PF_NPFormatNetworkName = Proc(Win32cr::Foundation::PWSTR, UInt16*, UInt32*, UInt32, UInt32, UInt32)
 
-  alias PF_NPGetPropertyText = Proc(UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt16*, UInt32, UInt32, UInt32)*
+  alias PF_NPGetPropertyText = Proc(UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt16*, UInt32, UInt32, UInt32)
 
-  alias PF_NPPropertyDialog = Proc(Win32cr::Foundation::HWND, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32)*
+  alias PF_NPPropertyDialog = Proc(Win32cr::Foundation::HWND, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32)
 
-  alias PF_NPGetDirectoryType = Proc(Win32cr::Foundation::PWSTR, Int32*, Win32cr::Foundation::BOOL, UInt32)*
+  alias PF_NPGetDirectoryType = Proc(Win32cr::Foundation::PWSTR, Int32*, Win32cr::Foundation::BOOL, UInt32)
 
-  alias PF_NPDirectoryNotify = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, UInt32, UInt32)*
+  alias PF_NPDirectoryNotify = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, UInt32, UInt32)
 
-  alias PF_NPLogonNotify = Proc(Win32cr::Foundation::LUID*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::PWSTR*, UInt32)*
+  alias PF_NPLogonNotify = Proc(Win32cr::Foundation::LUID*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::PWSTR*, UInt32)
 
-  alias PF_NPPasswordChangeNotify = Proc(Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::PWSTR, Void*, UInt32, UInt32)*
+  alias PF_NPPasswordChangeNotify = Proc(Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::PWSTR, Void*, UInt32, UInt32)
 
-  alias PF_AddConnectNotify = Proc(Win32cr::NetworkManagement::WNet::NOTIFYINFO*, Win32cr::NetworkManagement::WNet::NOTIFYADD*, UInt32)*
+  alias PF_AddConnectNotify = Proc(Win32cr::NetworkManagement::WNet::NOTIFYINFO*, Win32cr::NetworkManagement::WNet::NOTIFYADD*, UInt32)
 
-  alias PF_CancelConnectNotify = Proc(Win32cr::NetworkManagement::WNet::NOTIFYINFO*, Win32cr::NetworkManagement::WNet::NOTIFYCANCEL*, UInt32)*
+  alias PF_CancelConnectNotify = Proc(Win32cr::NetworkManagement::WNet::NOTIFYINFO*, Win32cr::NetworkManagement::WNet::NOTIFYCANCEL*, UInt32)
 
-  alias PF_NPFMXGetPermCaps = Proc(Win32cr::Foundation::PWSTR, UInt32)*
+  alias PF_NPFMXGetPermCaps = Proc(Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PF_NPFMXEditPerm = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::HWND, UInt32, UInt32)*
+  alias PF_NPFMXEditPerm = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::HWND, UInt32, UInt32)
 
-  alias PF_NPFMXGetPermHelp = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, Void*, UInt32*, UInt32*, UInt32)*
+  alias PF_NPFMXGetPermHelp = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, Void*, UInt32*, UInt32*, UInt32)
 
   WNGETCON_CONNECTED = 0_u32
   WNGETCON_DISCONNECTED = 1_u32
@@ -225,116 +225,161 @@ module Win32cr::NetworkManagement::WNet
   end
 
   @[Extern]
-  record NETRESOURCEA,
-    dwScope : Win32cr::NetworkManagement::WNet::NET_RESOURCE_SCOPE,
-    dwType : Win32cr::NetworkManagement::WNet::NET_RESOURCE_TYPE,
-    dwDisplayType : UInt32,
-    dwUsage : UInt32,
-    lpLocalName : Win32cr::Foundation::PSTR,
-    lpRemoteName : Win32cr::Foundation::PSTR,
-    lpComment : Win32cr::Foundation::PSTR,
-    lpProvider : Win32cr::Foundation::PSTR
+  struct NETRESOURCEA
+    property dwScope : Win32cr::NetworkManagement::WNet::NET_RESOURCE_SCOPE
+    property dwType : Win32cr::NetworkManagement::WNet::NET_RESOURCE_TYPE
+    property dwDisplayType : UInt32
+    property dwUsage : UInt32
+    property lpLocalName : Win32cr::Foundation::PSTR
+    property lpRemoteName : Win32cr::Foundation::PSTR
+    property lpComment : Win32cr::Foundation::PSTR
+    property lpProvider : Win32cr::Foundation::PSTR
+    def initialize(@dwScope : Win32cr::NetworkManagement::WNet::NET_RESOURCE_SCOPE, @dwType : Win32cr::NetworkManagement::WNet::NET_RESOURCE_TYPE, @dwDisplayType : UInt32, @dwUsage : UInt32, @lpLocalName : Win32cr::Foundation::PSTR, @lpRemoteName : Win32cr::Foundation::PSTR, @lpComment : Win32cr::Foundation::PSTR, @lpProvider : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record NETRESOURCEW,
-    dwScope : Win32cr::NetworkManagement::WNet::NET_RESOURCE_SCOPE,
-    dwType : Win32cr::NetworkManagement::WNet::NET_RESOURCE_TYPE,
-    dwDisplayType : UInt32,
-    dwUsage : UInt32,
-    lpLocalName : Win32cr::Foundation::PWSTR,
-    lpRemoteName : Win32cr::Foundation::PWSTR,
-    lpComment : Win32cr::Foundation::PWSTR,
-    lpProvider : Win32cr::Foundation::PWSTR
+  struct NETRESOURCEW
+    property dwScope : Win32cr::NetworkManagement::WNet::NET_RESOURCE_SCOPE
+    property dwType : Win32cr::NetworkManagement::WNet::NET_RESOURCE_TYPE
+    property dwDisplayType : UInt32
+    property dwUsage : UInt32
+    property lpLocalName : Win32cr::Foundation::PWSTR
+    property lpRemoteName : Win32cr::Foundation::PWSTR
+    property lpComment : Win32cr::Foundation::PWSTR
+    property lpProvider : Win32cr::Foundation::PWSTR
+    def initialize(@dwScope : Win32cr::NetworkManagement::WNet::NET_RESOURCE_SCOPE, @dwType : Win32cr::NetworkManagement::WNet::NET_RESOURCE_TYPE, @dwDisplayType : UInt32, @dwUsage : UInt32, @lpLocalName : Win32cr::Foundation::PWSTR, @lpRemoteName : Win32cr::Foundation::PWSTR, @lpComment : Win32cr::Foundation::PWSTR, @lpProvider : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record CONNECTDLGSTRUCTA,
-    cbStructure : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    lpConnRes : Win32cr::NetworkManagement::WNet::NETRESOURCEA*,
-    dwFlags : Win32cr::NetworkManagement::WNet::CONNECTDLGSTRUCT_FLAGS,
-    dwDevNum : UInt32
+  struct CONNECTDLGSTRUCTA
+    property cbStructure : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property lpConnRes : Win32cr::NetworkManagement::WNet::NETRESOURCEA*
+    property dwFlags : Win32cr::NetworkManagement::WNet::CONNECTDLGSTRUCT_FLAGS
+    property dwDevNum : UInt32
+    def initialize(@cbStructure : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @lpConnRes : Win32cr::NetworkManagement::WNet::NETRESOURCEA*, @dwFlags : Win32cr::NetworkManagement::WNet::CONNECTDLGSTRUCT_FLAGS, @dwDevNum : UInt32)
+    end
+  end
 
   @[Extern]
-  record CONNECTDLGSTRUCTW,
-    cbStructure : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    lpConnRes : Win32cr::NetworkManagement::WNet::NETRESOURCEW*,
-    dwFlags : Win32cr::NetworkManagement::WNet::CONNECTDLGSTRUCT_FLAGS,
-    dwDevNum : UInt32
+  struct CONNECTDLGSTRUCTW
+    property cbStructure : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property lpConnRes : Win32cr::NetworkManagement::WNet::NETRESOURCEW*
+    property dwFlags : Win32cr::NetworkManagement::WNet::CONNECTDLGSTRUCT_FLAGS
+    property dwDevNum : UInt32
+    def initialize(@cbStructure : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @lpConnRes : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, @dwFlags : Win32cr::NetworkManagement::WNet::CONNECTDLGSTRUCT_FLAGS, @dwDevNum : UInt32)
+    end
+  end
 
   @[Extern]
-  record DISCDLGSTRUCTA,
-    cbStructure : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    lpLocalName : Win32cr::Foundation::PSTR,
-    lpRemoteName : Win32cr::Foundation::PSTR,
-    dwFlags : Win32cr::NetworkManagement::WNet::DISCDLGSTRUCT_FLAGS
+  struct DISCDLGSTRUCTA
+    property cbStructure : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property lpLocalName : Win32cr::Foundation::PSTR
+    property lpRemoteName : Win32cr::Foundation::PSTR
+    property dwFlags : Win32cr::NetworkManagement::WNet::DISCDLGSTRUCT_FLAGS
+    def initialize(@cbStructure : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @lpLocalName : Win32cr::Foundation::PSTR, @lpRemoteName : Win32cr::Foundation::PSTR, @dwFlags : Win32cr::NetworkManagement::WNet::DISCDLGSTRUCT_FLAGS)
+    end
+  end
 
   @[Extern]
-  record DISCDLGSTRUCTW,
-    cbStructure : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    lpLocalName : Win32cr::Foundation::PWSTR,
-    lpRemoteName : Win32cr::Foundation::PWSTR,
-    dwFlags : Win32cr::NetworkManagement::WNet::DISCDLGSTRUCT_FLAGS
+  struct DISCDLGSTRUCTW
+    property cbStructure : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property lpLocalName : Win32cr::Foundation::PWSTR
+    property lpRemoteName : Win32cr::Foundation::PWSTR
+    property dwFlags : Win32cr::NetworkManagement::WNet::DISCDLGSTRUCT_FLAGS
+    def initialize(@cbStructure : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @lpLocalName : Win32cr::Foundation::PWSTR, @lpRemoteName : Win32cr::Foundation::PWSTR, @dwFlags : Win32cr::NetworkManagement::WNet::DISCDLGSTRUCT_FLAGS)
+    end
+  end
 
   @[Extern]
-  record UNIVERSAL_NAME_INFOA,
-    lpUniversalName : Win32cr::Foundation::PSTR
+  struct UNIVERSAL_NAME_INFOA
+    property lpUniversalName : Win32cr::Foundation::PSTR
+    def initialize(@lpUniversalName : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record UNIVERSAL_NAME_INFOW,
-    lpUniversalName : Win32cr::Foundation::PWSTR
+  struct UNIVERSAL_NAME_INFOW
+    property lpUniversalName : Win32cr::Foundation::PWSTR
+    def initialize(@lpUniversalName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record REMOTE_NAME_INFOA,
-    lpUniversalName : Win32cr::Foundation::PSTR,
-    lpConnectionName : Win32cr::Foundation::PSTR,
-    lpRemainingPath : Win32cr::Foundation::PSTR
+  struct REMOTE_NAME_INFOA
+    property lpUniversalName : Win32cr::Foundation::PSTR
+    property lpConnectionName : Win32cr::Foundation::PSTR
+    property lpRemainingPath : Win32cr::Foundation::PSTR
+    def initialize(@lpUniversalName : Win32cr::Foundation::PSTR, @lpConnectionName : Win32cr::Foundation::PSTR, @lpRemainingPath : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record REMOTE_NAME_INFOW,
-    lpUniversalName : Win32cr::Foundation::PWSTR,
-    lpConnectionName : Win32cr::Foundation::PWSTR,
-    lpRemainingPath : Win32cr::Foundation::PWSTR
+  struct REMOTE_NAME_INFOW
+    property lpUniversalName : Win32cr::Foundation::PWSTR
+    property lpConnectionName : Win32cr::Foundation::PWSTR
+    property lpRemainingPath : Win32cr::Foundation::PWSTR
+    def initialize(@lpUniversalName : Win32cr::Foundation::PWSTR, @lpConnectionName : Win32cr::Foundation::PWSTR, @lpRemainingPath : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record NETINFOSTRUCT,
-    cbStructure : UInt32,
-    dwProviderVersion : UInt32,
-    dwStatus : Win32cr::Foundation::WIN32_ERROR,
-    dwCharacteristics : Win32cr::NetworkManagement::WNet::NETINFOSTRUCT_CHARACTERISTICS,
-    dwHandle : LibC::UIntPtrT,
-    wNetType : UInt16,
-    dwPrinters : UInt32,
-    dwDrives : UInt32
+  struct NETINFOSTRUCT
+    property cbStructure : UInt32
+    property dwProviderVersion : UInt32
+    property dwStatus : Win32cr::Foundation::WIN32_ERROR
+    property dwCharacteristics : Win32cr::NetworkManagement::WNet::NETINFOSTRUCT_CHARACTERISTICS
+    property dwHandle : LibC::UIntPtrT
+    property wNetType : UInt16
+    property dwPrinters : UInt32
+    property dwDrives : UInt32
+    def initialize(@cbStructure : UInt32, @dwProviderVersion : UInt32, @dwStatus : Win32cr::Foundation::WIN32_ERROR, @dwCharacteristics : Win32cr::NetworkManagement::WNet::NETINFOSTRUCT_CHARACTERISTICS, @dwHandle : LibC::UIntPtrT, @wNetType : UInt16, @dwPrinters : UInt32, @dwDrives : UInt32)
+    end
+  end
 
   @[Extern]
-  record NETCONNECTINFOSTRUCT,
-    cbStructure : UInt32,
-    dwFlags : UInt32,
-    dwSpeed : UInt32,
-    dwDelay : UInt32,
-    dwOptDataSize : UInt32
+  struct NETCONNECTINFOSTRUCT
+    property cbStructure : UInt32
+    property dwFlags : UInt32
+    property dwSpeed : UInt32
+    property dwDelay : UInt32
+    property dwOptDataSize : UInt32
+    def initialize(@cbStructure : UInt32, @dwFlags : UInt32, @dwSpeed : UInt32, @dwDelay : UInt32, @dwOptDataSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record NOTIFYINFO,
-    dwNotifyStatus : UInt32,
-    dwOperationStatus : UInt32,
-    lpContext : Void*
+  struct NOTIFYINFO
+    property dwNotifyStatus : UInt32
+    property dwOperationStatus : UInt32
+    property lpContext : Void*
+    def initialize(@dwNotifyStatus : UInt32, @dwOperationStatus : UInt32, @lpContext : Void*)
+    end
+  end
 
   @[Extern]
-  record NOTIFYADD,
-    hwndOwner : Win32cr::Foundation::HWND,
-    net_resource : Win32cr::NetworkManagement::WNet::NETRESOURCEA,
-    dwAddFlags : Win32cr::NetworkManagement::WNet::NET_USE_CONNECT_FLAGS
+  struct NOTIFYADD
+    property hwndOwner : Win32cr::Foundation::HWND
+    property net_resource : Win32cr::NetworkManagement::WNet::NETRESOURCEA
+    property dwAddFlags : Win32cr::NetworkManagement::WNet::NET_USE_CONNECT_FLAGS
+    def initialize(@hwndOwner : Win32cr::Foundation::HWND, @net_resource : Win32cr::NetworkManagement::WNet::NETRESOURCEA, @dwAddFlags : Win32cr::NetworkManagement::WNet::NET_USE_CONNECT_FLAGS)
+    end
+  end
 
   @[Extern]
-  record NOTIFYCANCEL,
-    lpName : Win32cr::Foundation::PWSTR,
-    lpProvider : Win32cr::Foundation::PWSTR,
-    dwFlags : UInt32,
-    fForce : Win32cr::Foundation::BOOL
+  struct NOTIFYCANCEL
+    property lpName : Win32cr::Foundation::PWSTR
+    property lpProvider : Win32cr::Foundation::PWSTR
+    property dwFlags : UInt32
+    property fForce : Win32cr::Foundation::BOOL
+    def initialize(@lpName : Win32cr::Foundation::PWSTR, @lpProvider : Win32cr::Foundation::PWSTR, @dwFlags : UInt32, @fForce : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Link("mpr")]
   @[Link("davclnt")]

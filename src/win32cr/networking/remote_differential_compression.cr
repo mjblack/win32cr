@@ -94,56 +94,86 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record RdcNeed,
-    m_BlockType : Win32cr::Networking::RemoteDifferentialCompression::RdcNeedType,
-    m_FileOffset : UInt64,
-    m_BlockLength : UInt64
+  struct RdcNeed
+    property m_BlockType : Win32cr::Networking::RemoteDifferentialCompression::RdcNeedType
+    property m_FileOffset : UInt64
+    property m_BlockLength : UInt64
+    def initialize(@m_BlockType : Win32cr::Networking::RemoteDifferentialCompression::RdcNeedType, @m_FileOffset : UInt64, @m_BlockLength : UInt64)
+    end
+  end
 
   @[Extern]
-  record RdcBufferPointer,
-    m_Size : UInt32,
-    m_Used : UInt32,
-    m_Data : UInt8*
+  struct RdcBufferPointer
+    property m_Size : UInt32
+    property m_Used : UInt32
+    property m_Data : UInt8*
+    def initialize(@m_Size : UInt32, @m_Used : UInt32, @m_Data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record RdcNeedPointer,
-    m_Size : UInt32,
-    m_Used : UInt32,
-    m_Data : Win32cr::Networking::RemoteDifferentialCompression::RdcNeed*
+  struct RdcNeedPointer
+    property m_Size : UInt32
+    property m_Used : UInt32
+    property m_Data : Win32cr::Networking::RemoteDifferentialCompression::RdcNeed*
+    def initialize(@m_Size : UInt32, @m_Used : UInt32, @m_Data : Win32cr::Networking::RemoteDifferentialCompression::RdcNeed*)
+    end
+  end
 
   @[Extern]
-  record RdcSignature,
-    m_Signature : UInt8[16],
-    m_BlockLength : UInt16
+  struct RdcSignature
+    property m_Signature : UInt8[16]
+    property m_BlockLength : UInt16
+    def initialize(@m_Signature : UInt8[16], @m_BlockLength : UInt16)
+    end
+  end
 
   @[Extern]
-  record RdcSignaturePointer,
-    m_Size : UInt32,
-    m_Used : UInt32,
-    m_Data : Win32cr::Networking::RemoteDifferentialCompression::RdcSignature*
+  struct RdcSignaturePointer
+    property m_Size : UInt32
+    property m_Used : UInt32
+    property m_Data : Win32cr::Networking::RemoteDifferentialCompression::RdcSignature*
+    def initialize(@m_Size : UInt32, @m_Used : UInt32, @m_Data : Win32cr::Networking::RemoteDifferentialCompression::RdcSignature*)
+    end
+  end
 
   @[Extern]
-  record SimilarityMappedViewInfo,
-    m_Data : UInt8*,
-    m_Length : UInt32
+  struct SimilarityMappedViewInfo
+    property m_Data : UInt8*
+    property m_Length : UInt32
+    def initialize(@m_Data : UInt8*, @m_Length : UInt32)
+    end
+  end
 
   @[Extern]
-  record SimilarityData,
-    m_Data : UInt8[16]
+  struct SimilarityData
+    property m_Data : UInt8[16]
+    def initialize(@m_Data : UInt8[16])
+    end
+  end
 
   @[Extern]
-  record FindSimilarFileIndexResults,
-    m_FileIndex : UInt32,
-    m_MatchCount : UInt32
+  struct FindSimilarFileIndexResults
+    property m_FileIndex : UInt32
+    property m_MatchCount : UInt32
+    def initialize(@m_FileIndex : UInt32, @m_MatchCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record SimilarityDumpData,
-    m_FileIndex : UInt32,
-    m_Data : Win32cr::Networking::RemoteDifferentialCompression::SimilarityData
+  struct SimilarityDumpData
+    property m_FileIndex : UInt32
+    property m_Data : Win32cr::Networking::RemoteDifferentialCompression::SimilarityData
+    def initialize(@m_FileIndex : UInt32, @m_Data : Win32cr::Networking::RemoteDifferentialCompression::SimilarityData)
+    end
+  end
 
   @[Extern]
-  record SimilarityFileId,
-    m_FileId : UInt8[32]
+  struct SimilarityFileId
+    property m_FileId : UInt8[32]
+    def initialize(@m_FileId : UInt8[32])
+    end
+  end
 
   @[Extern]
   record IRdcGeneratorParametersVtbl,
@@ -157,7 +187,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a71-9dbc-11da-9e3f-0011114ae311")]
   record IRdcGeneratorParameters, lpVtbl : IRdcGeneratorParametersVtbl* do
     GUID = LibC::GUID.new(0x96236a71_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcGeneratorParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -196,7 +225,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a72-9dbc-11da-9e3f-0011114ae311")]
   record IRdcGeneratorFilterMaxParameters, lpVtbl : IRdcGeneratorFilterMaxParametersVtbl* do
     GUID = LibC::GUID.new(0x96236a72_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcGeneratorFilterMaxParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -233,7 +261,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a73-9dbc-11da-9e3f-0011114ae311")]
   record IRdcGenerator, lpVtbl : IRdcGeneratorVtbl* do
     GUID = LibC::GUID.new(0x96236a73_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcGenerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -265,7 +292,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a74-9dbc-11da-9e3f-0011114ae311")]
   record IRdcFileReader, lpVtbl : IRdcFileReaderVtbl* do
     GUID = LibC::GUID.new(0x96236a74_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcFileReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -303,7 +329,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a75-9dbc-11da-9e3f-0011114ae311")]
   record IRdcFileWriter, lpVtbl : IRdcFileWriterVtbl* do
     GUID = LibC::GUID.new(0x96236a75_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcFileWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -346,7 +371,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a76-9dbc-11da-9e3f-0011114ae311")]
   record IRdcSignatureReader, lpVtbl : IRdcSignatureReaderVtbl* do
     GUID = LibC::GUID.new(0x96236a76_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcSignatureReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -376,7 +400,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a77-9dbc-11da-9e3f-0011114ae311")]
   record IRdcComparator, lpVtbl : IRdcComparatorVtbl* do
     GUID = LibC::GUID.new(0x96236a77_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcComparator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -409,7 +432,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a78-9dbc-11da-9e3f-0011114ae311")]
   record IRdcLibrary, lpVtbl : IRdcLibraryVtbl* do
     GUID = LibC::GUID.new(0x96236a78_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcLibrary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -454,7 +476,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a7a-9dbc-11da-9e3f-0011114ae311")]
   record ISimilarityReportProgress, lpVtbl : ISimilarityReportProgressVtbl* do
     GUID = LibC::GUID.new(0x96236a7a_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarityReportProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -481,7 +502,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a7b-9dbc-11da-9e3f-0011114ae311")]
   record ISimilarityTableDumpState, lpVtbl : ISimilarityTableDumpStateVtbl* do
     GUID = LibC::GUID.new(0x96236a7b_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarityTableDumpState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -511,7 +531,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a7c-9dbc-11da-9e3f-0011114ae311")]
   record ISimilarityTraitsMappedView, lpVtbl : ISimilarityTraitsMappedViewVtbl* do
     GUID = LibC::GUID.new(0x96236a7c_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarityTraitsMappedView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -553,7 +572,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a7d-9dbc-11da-9e3f-0011114ae311")]
   record ISimilarityTraitsMapping, lpVtbl : ISimilarityTraitsMappingVtbl* do
     GUID = LibC::GUID.new(0x96236a7d_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarityTraitsMapping*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -604,7 +622,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a7e-9dbc-11da-9e3f-0011114ae311")]
   record ISimilarityTraitsTable, lpVtbl : ISimilarityTraitsTableVtbl* do
     GUID = LibC::GUID.new(0x96236a7e_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarityTraitsTable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -655,7 +672,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a7f-9dbc-11da-9e3f-0011114ae311")]
   record ISimilarityFileIdTable, lpVtbl : ISimilarityFileIdTableVtbl* do
     GUID = LibC::GUID.new(0x96236a7f_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarityFileIdTable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -701,7 +717,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a80-9dbc-11da-9e3f-0011114ae311")]
   record IRdcSimilarityGenerator, lpVtbl : IRdcSimilarityGeneratorVtbl* do
     GUID = LibC::GUID.new(0x96236a80_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcSimilarityGenerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -732,7 +747,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a81-9dbc-11da-9e3f-0011114ae311")]
   record IFindSimilarResults, lpVtbl : IFindSimilarResultsVtbl* do
     GUID = LibC::GUID.new(0x96236a81_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IFindSimilarResults*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -768,7 +782,6 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  #@[Com("96236a83-9dbc-11da-9e3f-0011114ae311")]
   record ISimilarity, lpVtbl : ISimilarityVtbl* do
     GUID = LibC::GUID.new(0x96236a83_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

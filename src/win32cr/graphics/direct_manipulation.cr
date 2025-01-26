@@ -147,7 +147,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("fbf5d3b4-70c7-4163-9322-5a6f660d6fbc")]
   record IDirectManipulationManager, lpVtbl : IDirectManipulationManagerVtbl* do
     GUID = LibC::GUID.new(0xfbf5d3b4_u32, 0x70c7_u16, 0x4163_u16, StaticArray[0x93_u8, 0x22_u8, 0x5a_u8, 0x6f_u8, 0x66_u8, 0xd_u8, 0x6f_u8, 0xbc_u8])
     def query_interface(this : IDirectManipulationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -199,7 +198,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("fa1005e9-3d16-484c-bfc9-62b61e56ec4e")]
   record IDirectManipulationManager2, lpVtbl : IDirectManipulationManager2Vtbl* do
     GUID = LibC::GUID.new(0xfa1005e9_u32, 0x3d16_u16, 0x484c_u16, StaticArray[0xbf_u8, 0xc9_u8, 0x62_u8, 0xb6_u8, 0x1e_u8, 0x56_u8, 0xec_u8, 0x4e_u8])
     def query_interface(this : IDirectManipulationManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -255,7 +253,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("2cb6b33d-ffe8-488c-b750-fbdfe88dca8c")]
   record IDirectManipulationManager3, lpVtbl : IDirectManipulationManager3Vtbl* do
     GUID = LibC::GUID.new(0x2cb6b33d_u32, 0xffe8_u16, 0x488c_u16, StaticArray[0xb7_u8, 0x50_u8, 0xfb_u8, 0xdf_u8, 0xe8_u8, 0x8d_u8, 0xca_u8, 0x8c_u8])
     def query_interface(this : IDirectManipulationManager3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -333,7 +330,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("28b85a3d-60a0-48bd-9ba1-5ce8d9ea3a6d")]
   record IDirectManipulationViewport, lpVtbl : IDirectManipulationViewportVtbl* do
     GUID = LibC::GUID.new(0x28b85a3d_u32, 0x60a0_u16, 0x48bd_u16, StaticArray[0x9b_u8, 0xa1_u8, 0x5c_u8, 0xe8_u8, 0xd9_u8, 0xea_u8, 0x3a_u8, 0x6d_u8])
     def query_interface(this : IDirectManipulationViewport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -471,7 +467,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("923ccaac-61e1-4385-b726-017af189882a")]
   record IDirectManipulationViewport2, lpVtbl : IDirectManipulationViewport2Vtbl* do
     GUID = LibC::GUID.new(0x923ccaac_u32, 0x61e1_u16, 0x4385_u16, StaticArray[0xb7_u8, 0x26_u8, 0x1_u8, 0x7a_u8, 0xf1_u8, 0x89_u8, 0x88_u8, 0x2a_u8])
     def query_interface(this : IDirectManipulationViewport2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -590,7 +585,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("952121da-d69f-45f9-b0f9-f23944321a6d")]
   record IDirectManipulationViewportEventHandler, lpVtbl : IDirectManipulationViewportEventHandlerVtbl* do
     GUID = LibC::GUID.new(0x952121da_u32, 0xd69f_u16, 0x45f9_u16, StaticArray[0xb0_u8, 0xf9_u8, 0xf2_u8, 0x39_u8, 0x44_u8, 0x32_u8, 0x1a_u8, 0x6d_u8])
     def query_interface(this : IDirectManipulationViewportEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -630,7 +624,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("b89962cb-3d89-442b-bb58-5098fa0f9f16")]
   record IDirectManipulationContent, lpVtbl : IDirectManipulationContentVtbl* do
     GUID = LibC::GUID.new(0xb89962cb_u32, 0x3d89_u16, 0x442b_u16, StaticArray[0xbb_u8, 0x58_u8, 0x50_u8, 0x98_u8, 0xfa_u8, 0xf_u8, 0x9f_u8, 0x16_u8])
     def query_interface(this : IDirectManipulationContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -686,7 +679,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("c12851e4-1698-4625-b9b1-7ca3ec18630b")]
   record IDirectManipulationPrimaryContent, lpVtbl : IDirectManipulationPrimaryContentVtbl* do
     GUID = LibC::GUID.new(0xc12851e4_u32, 0x1698_u16, 0x4625_u16, StaticArray[0xb9_u8, 0xb1_u8, 0x7c_u8, 0xa3_u8, 0xec_u8, 0x18_u8, 0x63_u8, 0xb_u8])
     def query_interface(this : IDirectManipulationPrimaryContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -737,7 +729,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("1fa11b10-701b-41ae-b5f2-49e36bd595aa")]
   record IDirectManipulationDragDropEventHandler, lpVtbl : IDirectManipulationDragDropEventHandlerVtbl* do
     GUID = LibC::GUID.new(0x1fa11b10_u32, 0x701b_u16, 0x41ae_u16, StaticArray[0xb5_u8, 0xf2_u8, 0x49_u8, 0xe3_u8, 0x6b_u8, 0xd5_u8, 0x95_u8, 0xaa_u8])
     def query_interface(this : IDirectManipulationDragDropEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -765,7 +756,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("814b5af5-c2c8-4270-a9b7-a198ce8d02fa")]
   record IDirectManipulationDragDropBehavior, lpVtbl : IDirectManipulationDragDropBehaviorVtbl* do
     GUID = LibC::GUID.new(0x814b5af5_u32, 0xc2c8_u16, 0x4270_u16, StaticArray[0xa9_u8, 0xb7_u8, 0xa1_u8, 0x98_u8, 0xce_u8, 0x8d_u8, 0x2_u8, 0xfa_u8])
     def query_interface(this : IDirectManipulationDragDropBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -795,7 +785,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("e43f45b8-42b4-403e-b1f2-273b8f510830")]
   record IDirectManipulationInteractionEventHandler, lpVtbl : IDirectManipulationInteractionEventHandlerVtbl* do
     GUID = LibC::GUID.new(0xe43f45b8_u32, 0x42b4_u16, 0x403e_u16, StaticArray[0xb1_u8, 0xf2_u8, 0x27_u8, 0x3b_u8, 0x8f_u8, 0x51_u8, 0x8_u8, 0x30_u8])
     def query_interface(this : IDirectManipulationInteractionEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -822,7 +811,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("fb759dba-6f4c-4c01-874e-19c8a05907f9")]
   record IDirectManipulationFrameInfoProvider, lpVtbl : IDirectManipulationFrameInfoProviderVtbl* do
     GUID = LibC::GUID.new(0xfb759dba_u32, 0x6f4c_u16, 0x4c01_u16, StaticArray[0x87_u8, 0x4e_u8, 0x19_u8, 0xc8_u8, 0xa0_u8, 0x59_u8, 0x7_u8, 0xf9_u8])
     def query_interface(this : IDirectManipulationFrameInfoProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -852,7 +840,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("537a0825-0387-4efa-b62f-71eb1f085a7e")]
   record IDirectManipulationCompositor, lpVtbl : IDirectManipulationCompositorVtbl* do
     GUID = LibC::GUID.new(0x537a0825_u32, 0x387_u16, 0x4efa_u16, StaticArray[0xb6_u8, 0x2f_u8, 0x71_u8, 0xeb_u8, 0x1f_u8, 0x8_u8, 0x5a_u8, 0x7e_u8])
     def query_interface(this : IDirectManipulationCompositor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -892,7 +879,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("d38c7822-f1cb-43cb-b4b9-ac0c767a412e")]
   record IDirectManipulationCompositor2, lpVtbl : IDirectManipulationCompositor2Vtbl* do
     GUID = LibC::GUID.new(0xd38c7822_u32, 0xf1cb_u16, 0x43cb_u16, StaticArray[0xb4_u8, 0xb9_u8, 0xac_u8, 0xc_u8, 0x76_u8, 0x7a_u8, 0x41_u8, 0x2e_u8])
     def query_interface(this : IDirectManipulationCompositor2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -931,7 +917,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("790b6337-64f8-4ff5-a269-b32bc2af27a7")]
   record IDirectManipulationUpdateHandler, lpVtbl : IDirectManipulationUpdateHandlerVtbl* do
     GUID = LibC::GUID.new(0x790b6337_u32, 0x64f8_u16, 0x4ff5_u16, StaticArray[0xa2_u8, 0x69_u8, 0xb3_u8, 0x2b_u8, 0xc2_u8, 0xaf_u8, 0x27_u8, 0xa7_u8])
     def query_interface(this : IDirectManipulationUpdateHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -960,7 +945,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("b0ae62fd-be34-46e7-9caa-d361facbb9cc")]
   record IDirectManipulationUpdateManager, lpVtbl : IDirectManipulationUpdateManagerVtbl* do
     GUID = LibC::GUID.new(0xb0ae62fd_u32, 0xbe34_u16, 0x46e7_u16, StaticArray[0x9c_u8, 0xaa_u8, 0xd3_u8, 0x61_u8, 0xfa_u8, 0xcb_u8, 0xb9_u8, 0xcc_u8])
     def query_interface(this : IDirectManipulationUpdateManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -993,7 +977,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("6d5954d4-2003-4356-9b31-d051c9ff0af7")]
   record IDirectManipulationAutoScrollBehavior, lpVtbl : IDirectManipulationAutoScrollBehaviorVtbl* do
     GUID = LibC::GUID.new(0x6d5954d4_u32, 0x2003_u16, 0x4356_u16, StaticArray[0x9b_u8, 0x31_u8, 0xd0_u8, 0x51_u8, 0xc9_u8, 0xff_u8, 0xa_u8, 0xf7_u8])
     def query_interface(this : IDirectManipulationAutoScrollBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1022,7 +1005,6 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  #@[Com("652d5c71-fe60-4a98-be70-e5f21291e7f1")]
   record IDirectManipulationDeferContactService, lpVtbl : IDirectManipulationDeferContactServiceVtbl* do
     GUID = LibC::GUID.new(0x652d5c71_u32, 0xfe60_u16, 0x4a98_u16, StaticArray[0xbe_u8, 0x70_u8, 0xe5_u8, 0xf2_u8, 0x12_u8, 0x91_u8, 0xe7_u8, 0xf1_u8])
     def query_interface(this : IDirectManipulationDeferContactService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
