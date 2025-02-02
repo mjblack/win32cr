@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::Devices::Bluetooth
+  extend self
   alias HANDLE_SDP_TYPE = UInt64
   alias PFN_DEVICE_CALLBACK = Proc(Void*, Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, Win32cr::Foundation::BOOL)
 
@@ -1492,101 +1493,336 @@ module Win32cr::Devices::Bluetooth
     end
   end
 
+  def bluetoothFindFirstRadio(pbtfrp : Win32cr::Devices::Bluetooth::BLUETOOTH_FIND_RADIO_PARAMS*, phRadio : Win32cr::Foundation::HANDLE*) : LibC::IntPtrT
+    C.BluetoothFindFirstRadio(pbtfrp, phRadio)
+  end
+
+  def bluetoothFindNextRadio(hFind : LibC::IntPtrT, phRadio : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    C.BluetoothFindNextRadio(hFind, phRadio)
+  end
+
+  def bluetoothFindRadioClose(hFind : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    C.BluetoothFindRadioClose(hFind)
+  end
+
+  def bluetoothGetRadioInfo(hRadio : Win32cr::Foundation::HANDLE, pRadioInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_RADIO_INFO*) : UInt32
+    C.BluetoothGetRadioInfo(hRadio, pRadioInfo)
+  end
+
+  def bluetoothFindFirstDevice(pbtsp : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_SEARCH_PARAMS*, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : LibC::IntPtrT
+    C.BluetoothFindFirstDevice(pbtsp, pbtdi)
+  end
+
+  def bluetoothFindNextDevice(hFind : LibC::IntPtrT, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Foundation::BOOL
+    C.BluetoothFindNextDevice(hFind, pbtdi)
+  end
+
+  def bluetoothFindDeviceClose(hFind : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    C.BluetoothFindDeviceClose(hFind)
+  end
+
+  def bluetoothGetDeviceInfo(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : UInt32
+    C.BluetoothGetDeviceInfo(hRadio, pbtdi)
+  end
+
+  def bluetoothUpdateDeviceRecord(pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : UInt32
+    C.BluetoothUpdateDeviceRecord(pbtdi)
+  end
+
+  def bluetoothRemoveDevice(pAddress : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS*) : UInt32
+    C.BluetoothRemoveDevice(pAddress)
+  end
+
+  def bluetoothSelectDevices(pbtsdp : Win32cr::Devices::Bluetooth::BLUETOOTH_SELECT_DEVICE_PARAMS*) : Win32cr::Foundation::BOOL
+    C.BluetoothSelectDevices(pbtsdp)
+  end
+
+  def bluetoothSelectDevicesFree(pbtsdp : Win32cr::Devices::Bluetooth::BLUETOOTH_SELECT_DEVICE_PARAMS*) : Win32cr::Foundation::BOOL
+    C.BluetoothSelectDevicesFree(pbtsdp)
+  end
+
+  def bluetoothDisplayDeviceProperties(hwndParent : Win32cr::Foundation::HWND, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Foundation::BOOL
+    C.BluetoothDisplayDeviceProperties(hwndParent, pbtdi)
+  end
+
+  def bluetoothAuthenticateDevice(hwndParent : Win32cr::Foundation::HWND, hRadio : Win32cr::Foundation::HANDLE, pbtbi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pszPasskey : UInt16*, ulPasskeyLength : UInt32) : UInt32
+    C.BluetoothAuthenticateDevice(hwndParent, hRadio, pbtbi, pszPasskey, ulPasskeyLength)
+  end
+
+  def bluetoothAuthenticateDeviceEx(hwndParentIn : Win32cr::Foundation::HWND, hRadioIn : Win32cr::Foundation::HANDLE, pbtdiInout : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pbtOobData : Win32cr::Devices::Bluetooth::BLUETOOTH_OOB_DATA_INFO*, authenticationRequirement : Win32cr::Devices::Bluetooth::AUTHENTICATION_REQUIREMENTS) : UInt32
+    C.BluetoothAuthenticateDeviceEx(hwndParentIn, hRadioIn, pbtdiInout, pbtOobData, authenticationRequirement)
+  end
+
+  def bluetoothAuthenticateMultipleDevices(hwndParent : Win32cr::Foundation::HWND, hRadio : Win32cr::Foundation::HANDLE, cDevices : UInt32, rgbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : UInt32
+    C.BluetoothAuthenticateMultipleDevices(hwndParent, hRadio, cDevices, rgbtdi)
+  end
+
+  def bluetoothSetServiceState(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pGuidService : LibC::GUID*, dwServiceFlags : UInt32) : UInt32
+    C.BluetoothSetServiceState(hRadio, pbtdi, pGuidService, dwServiceFlags)
+  end
+
+  def bluetoothEnumerateInstalledServices(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pcServiceInout : UInt32*, pGuidServices : LibC::GUID*) : UInt32
+    C.BluetoothEnumerateInstalledServices(hRadio, pbtdi, pcServiceInout, pGuidServices)
+  end
+
+  def bluetoothEnableDiscovery(hRadio : Win32cr::Foundation::HANDLE, fEnabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.BluetoothEnableDiscovery(hRadio, fEnabled)
+  end
+
+  def bluetoothIsDiscoverable(hRadio : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.BluetoothIsDiscoverable(hRadio)
+  end
+
+  def bluetoothEnableIncomingConnections(hRadio : Win32cr::Foundation::HANDLE, fEnabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.BluetoothEnableIncomingConnections(hRadio, fEnabled)
+  end
+
+  def bluetoothIsConnectable(hRadio : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.BluetoothIsConnectable(hRadio)
+  end
+
+  def bluetoothRegisterForAuthentication(pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, phRegHandle : LibC::IntPtrT*, pfnCallback : Win32cr::Devices::Bluetooth::PFN_AUTHENTICATION_CALLBACK, pvParam : Void*) : UInt32
+    C.BluetoothRegisterForAuthentication(pbtdi, phRegHandle, pfnCallback, pvParam)
+  end
+
+  def bluetoothRegisterForAuthenticationEx(pbtdiIn : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, phRegHandleOut : LibC::IntPtrT*, pfnCallbackIn : Win32cr::Devices::Bluetooth::PFN_AUTHENTICATION_CALLBACK_EX, pvParam : Void*) : UInt32
+    C.BluetoothRegisterForAuthenticationEx(pbtdiIn, phRegHandleOut, pfnCallbackIn, pvParam)
+  end
+
+  def bluetoothUnregisterAuthentication(hRegHandle : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    C.BluetoothUnregisterAuthentication(hRegHandle)
+  end
+
+  def bluetoothSendAuthenticationResponse(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pszPasskey : Win32cr::Foundation::PWSTR) : UInt32
+    C.BluetoothSendAuthenticationResponse(hRadio, pbtdi, pszPasskey)
+  end
+
+  def bluetoothSendAuthenticationResponseEx(hRadioIn : Win32cr::Foundation::HANDLE, pauthResponse : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATE_RESPONSE*) : UInt32
+    C.BluetoothSendAuthenticationResponseEx(hRadioIn, pauthResponse)
+  end
+
+  def bluetoothSdpGetElementData(pSdpStream : UInt8*, cbSdpStreamLength : UInt32, pData : Win32cr::Devices::Bluetooth::SDP_ELEMENT_DATA*) : UInt32
+    C.BluetoothSdpGetElementData(pSdpStream, cbSdpStreamLength, pData)
+  end
+
+  def bluetoothSdpGetContainerElementData(pContainerStream : UInt8*, cbContainerLength : UInt32, pElement : LibC::IntPtrT*, pData : Win32cr::Devices::Bluetooth::SDP_ELEMENT_DATA*) : UInt32
+    C.BluetoothSdpGetContainerElementData(pContainerStream, cbContainerLength, pElement, pData)
+  end
+
+  def bluetoothSdpGetAttributeValue(pRecordStream : UInt8*, cbRecordLength : UInt32, usAttributeId : UInt16, pAttributeData : Win32cr::Devices::Bluetooth::SDP_ELEMENT_DATA*) : UInt32
+    C.BluetoothSdpGetAttributeValue(pRecordStream, cbRecordLength, usAttributeId, pAttributeData)
+  end
+
+  def bluetoothSdpGetString(pRecordStream : UInt8*, cbRecordLength : UInt32, pStringData : Win32cr::Devices::Bluetooth::SDP_STRING_TYPE_DATA*, usStringOffset : UInt16, pszString : UInt16*, pcchStringLength : UInt32*) : UInt32
+    C.BluetoothSdpGetString(pRecordStream, cbRecordLength, pStringData, usStringOffset, pszString, pcchStringLength)
+  end
+
+  def bluetoothSdpEnumAttributes(pSDPStream : UInt8*, cbStreamSize : UInt32, pfnCallback : Win32cr::Devices::Bluetooth::PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK, pvParam : Void*) : Win32cr::Foundation::BOOL
+    C.BluetoothSdpEnumAttributes(pSDPStream, cbStreamSize, pfnCallback, pvParam)
+  end
+
+  def bluetoothSetLocalServiceInfo(hRadioIn : Win32cr::Foundation::HANDLE, pClassGuid : LibC::GUID*, ulInstance : UInt32, pServiceInfoIn : Win32cr::Devices::Bluetooth::BLUETOOTH_LOCAL_SERVICE_INFO*) : UInt32
+    C.BluetoothSetLocalServiceInfo(hRadioIn, pClassGuid, ulInstance, pServiceInfoIn)
+  end
+
+  def bluetoothIsVersionAvailable(major_version : UInt8, minor_version : UInt8) : Win32cr::Foundation::BOOL
+    C.BluetoothIsVersionAvailable(major_version, minor_version)
+  end
+
+  def bluetoothGATTGetServices(hDevice : Win32cr::Foundation::HANDLE, services_buffer_count : UInt16, services_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, services_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BluetoothGATTGetServices(hDevice, services_buffer_count, services_buffer, services_buffer_actual, flags)
+  end
+
+  def bluetoothGATTGetIncludedServices(hDevice : Win32cr::Foundation::HANDLE, parent_service : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, included_services_buffer_count : UInt16, included_services_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, included_services_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BluetoothGATTGetIncludedServices(hDevice, parent_service, included_services_buffer_count, included_services_buffer, included_services_buffer_actual, flags)
+  end
+
+  def bluetoothGATTGetCharacteristics(hDevice : Win32cr::Foundation::HANDLE, service : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, characteristics_buffer_count : UInt16, characteristics_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, characteristics_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BluetoothGATTGetCharacteristics(hDevice, service, characteristics_buffer_count, characteristics_buffer, characteristics_buffer_actual, flags)
+  end
+
+  def bluetoothGATTGetDescriptors(hDevice : Win32cr::Foundation::HANDLE, characteristic : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, descriptors_buffer_count : UInt16, descriptors_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR*, descriptors_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BluetoothGATTGetDescriptors(hDevice, characteristic, descriptors_buffer_count, descriptors_buffer, descriptors_buffer_actual, flags)
+  end
+
+  def bluetoothGATTGetCharacteristicValue(hDevice : Win32cr::Foundation::HANDLE, characteristic : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, characteristic_value_data_size : UInt32, characteristic_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC_VALUE*, characteristic_value_size_required : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BluetoothGATTGetCharacteristicValue(hDevice, characteristic, characteristic_value_data_size, characteristic_value, characteristic_value_size_required, flags)
+  end
+
+  def bluetoothGATTGetDescriptorValue(hDevice : Win32cr::Foundation::HANDLE, descriptor : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR*, descriptor_value_data_size : UInt32, descriptor_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_VALUE*, descriptor_value_size_required : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BluetoothGATTGetDescriptorValue(hDevice, descriptor, descriptor_value_data_size, descriptor_value, descriptor_value_size_required, flags)
+  end
+
+  def bluetoothGATTBeginReliableWrite(hDevice : Win32cr::Foundation::HANDLE, reliable_write_context : UInt64*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BluetoothGATTBeginReliableWrite(hDevice, reliable_write_context, flags)
+  end
+
+  def bluetoothGATTSetCharacteristicValue(hDevice : Win32cr::Foundation::HANDLE, characteristic : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, characteristic_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC_VALUE*, reliable_write_context : UInt64, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BluetoothGATTSetCharacteristicValue(hDevice, characteristic, characteristic_value, reliable_write_context, flags)
+  end
+
+  def bluetoothGATTEndReliableWrite(hDevice : Win32cr::Foundation::HANDLE, reliable_write_context : UInt64, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BluetoothGATTEndReliableWrite(hDevice, reliable_write_context, flags)
+  end
+
+  def bluetoothGATTAbortReliableWrite(hDevice : Win32cr::Foundation::HANDLE, reliable_write_context : UInt64, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BluetoothGATTAbortReliableWrite(hDevice, reliable_write_context, flags)
+  end
+
+  def bluetoothGATTSetDescriptorValue(hDevice : Win32cr::Foundation::HANDLE, descriptor : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR*, descriptor_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_VALUE*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BluetoothGATTSetDescriptorValue(hDevice, descriptor, descriptor_value, flags)
+  end
+
+  def bluetoothGATTRegisterEvent(hService : Win32cr::Foundation::HANDLE, event_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_EVENT_TYPE, event_parameter_in : Void*, callback : Win32cr::Devices::Bluetooth::PFNBLUETOOTH_GATT_EVENT_CALLBACK, callback_context : Void*, pEventHandle : LibC::IntPtrT*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BluetoothGATTRegisterEvent(hService, event_type, event_parameter_in, callback, callback_context, pEventHandle, flags)
+  end
+
+  def bluetoothGATTUnregisterEvent(event_handle : LibC::IntPtrT, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BluetoothGATTUnregisterEvent(event_handle, flags)
+  end
+
   @[Link("bluetoothapis")]
   @[Link("bthprops.cpl")]
   lib C
+    # :nodoc:
     fun BluetoothFindFirstRadio(pbtfrp : Win32cr::Devices::Bluetooth::BLUETOOTH_FIND_RADIO_PARAMS*, phRadio : Win32cr::Foundation::HANDLE*) : LibC::IntPtrT
 
+    # :nodoc:
     fun BluetoothFindNextRadio(hFind : LibC::IntPtrT, phRadio : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothFindRadioClose(hFind : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothGetRadioInfo(hRadio : Win32cr::Foundation::HANDLE, pRadioInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_RADIO_INFO*) : UInt32
 
+    # :nodoc:
     fun BluetoothFindFirstDevice(pbtsp : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_SEARCH_PARAMS*, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : LibC::IntPtrT
 
+    # :nodoc:
     fun BluetoothFindNextDevice(hFind : LibC::IntPtrT, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothFindDeviceClose(hFind : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothGetDeviceInfo(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : UInt32
 
+    # :nodoc:
     fun BluetoothUpdateDeviceRecord(pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : UInt32
 
+    # :nodoc:
     fun BluetoothRemoveDevice(pAddress : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS*) : UInt32
 
+    # :nodoc:
     fun BluetoothSelectDevices(pbtsdp : Win32cr::Devices::Bluetooth::BLUETOOTH_SELECT_DEVICE_PARAMS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothSelectDevicesFree(pbtsdp : Win32cr::Devices::Bluetooth::BLUETOOTH_SELECT_DEVICE_PARAMS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothDisplayDeviceProperties(hwndParent : Win32cr::Foundation::HWND, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothAuthenticateDevice(hwndParent : Win32cr::Foundation::HWND, hRadio : Win32cr::Foundation::HANDLE, pbtbi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pszPasskey : UInt16*, ulPasskeyLength : UInt32) : UInt32
 
+    # :nodoc:
     fun BluetoothAuthenticateDeviceEx(hwndParentIn : Win32cr::Foundation::HWND, hRadioIn : Win32cr::Foundation::HANDLE, pbtdiInout : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pbtOobData : Win32cr::Devices::Bluetooth::BLUETOOTH_OOB_DATA_INFO*, authenticationRequirement : Win32cr::Devices::Bluetooth::AUTHENTICATION_REQUIREMENTS) : UInt32
 
+    # :nodoc:
     fun BluetoothAuthenticateMultipleDevices(hwndParent : Win32cr::Foundation::HWND, hRadio : Win32cr::Foundation::HANDLE, cDevices : UInt32, rgbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : UInt32
 
+    # :nodoc:
     fun BluetoothSetServiceState(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pGuidService : LibC::GUID*, dwServiceFlags : UInt32) : UInt32
 
+    # :nodoc:
     fun BluetoothEnumerateInstalledServices(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pcServiceInout : UInt32*, pGuidServices : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun BluetoothEnableDiscovery(hRadio : Win32cr::Foundation::HANDLE, fEnabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothIsDiscoverable(hRadio : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothEnableIncomingConnections(hRadio : Win32cr::Foundation::HANDLE, fEnabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothIsConnectable(hRadio : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothRegisterForAuthentication(pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, phRegHandle : LibC::IntPtrT*, pfnCallback : Win32cr::Devices::Bluetooth::PFN_AUTHENTICATION_CALLBACK, pvParam : Void*) : UInt32
 
+    # :nodoc:
     fun BluetoothRegisterForAuthenticationEx(pbtdiIn : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, phRegHandleOut : LibC::IntPtrT*, pfnCallbackIn : Win32cr::Devices::Bluetooth::PFN_AUTHENTICATION_CALLBACK_EX, pvParam : Void*) : UInt32
 
+    # :nodoc:
     fun BluetoothUnregisterAuthentication(hRegHandle : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothSendAuthenticationResponse(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pszPasskey : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun BluetoothSendAuthenticationResponseEx(hRadioIn : Win32cr::Foundation::HANDLE, pauthResponse : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATE_RESPONSE*) : UInt32
 
+    # :nodoc:
     fun BluetoothSdpGetElementData(pSdpStream : UInt8*, cbSdpStreamLength : UInt32, pData : Win32cr::Devices::Bluetooth::SDP_ELEMENT_DATA*) : UInt32
 
+    # :nodoc:
     fun BluetoothSdpGetContainerElementData(pContainerStream : UInt8*, cbContainerLength : UInt32, pElement : LibC::IntPtrT*, pData : Win32cr::Devices::Bluetooth::SDP_ELEMENT_DATA*) : UInt32
 
+    # :nodoc:
     fun BluetoothSdpGetAttributeValue(pRecordStream : UInt8*, cbRecordLength : UInt32, usAttributeId : UInt16, pAttributeData : Win32cr::Devices::Bluetooth::SDP_ELEMENT_DATA*) : UInt32
 
+    # :nodoc:
     fun BluetoothSdpGetString(pRecordStream : UInt8*, cbRecordLength : UInt32, pStringData : Win32cr::Devices::Bluetooth::SDP_STRING_TYPE_DATA*, usStringOffset : UInt16, pszString : UInt16*, pcchStringLength : UInt32*) : UInt32
 
+    # :nodoc:
     fun BluetoothSdpEnumAttributes(pSDPStream : UInt8*, cbStreamSize : UInt32, pfnCallback : Win32cr::Devices::Bluetooth::PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK, pvParam : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothSetLocalServiceInfo(hRadioIn : Win32cr::Foundation::HANDLE, pClassGuid : LibC::GUID*, ulInstance : UInt32, pServiceInfoIn : Win32cr::Devices::Bluetooth::BLUETOOTH_LOCAL_SERVICE_INFO*) : UInt32
 
+    # :nodoc:
     fun BluetoothIsVersionAvailable(major_version : UInt8, minor_version : UInt8) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BluetoothGATTGetServices(hDevice : Win32cr::Foundation::HANDLE, services_buffer_count : UInt16, services_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, services_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BluetoothGATTGetIncludedServices(hDevice : Win32cr::Foundation::HANDLE, parent_service : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, included_services_buffer_count : UInt16, included_services_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, included_services_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BluetoothGATTGetCharacteristics(hDevice : Win32cr::Foundation::HANDLE, service : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, characteristics_buffer_count : UInt16, characteristics_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, characteristics_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BluetoothGATTGetDescriptors(hDevice : Win32cr::Foundation::HANDLE, characteristic : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, descriptors_buffer_count : UInt16, descriptors_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR*, descriptors_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BluetoothGATTGetCharacteristicValue(hDevice : Win32cr::Foundation::HANDLE, characteristic : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, characteristic_value_data_size : UInt32, characteristic_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC_VALUE*, characteristic_value_size_required : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BluetoothGATTGetDescriptorValue(hDevice : Win32cr::Foundation::HANDLE, descriptor : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR*, descriptor_value_data_size : UInt32, descriptor_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_VALUE*, descriptor_value_size_required : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BluetoothGATTBeginReliableWrite(hDevice : Win32cr::Foundation::HANDLE, reliable_write_context : UInt64*, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BluetoothGATTSetCharacteristicValue(hDevice : Win32cr::Foundation::HANDLE, characteristic : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, characteristic_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC_VALUE*, reliable_write_context : UInt64, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BluetoothGATTEndReliableWrite(hDevice : Win32cr::Foundation::HANDLE, reliable_write_context : UInt64, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BluetoothGATTAbortReliableWrite(hDevice : Win32cr::Foundation::HANDLE, reliable_write_context : UInt64, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BluetoothGATTSetDescriptorValue(hDevice : Win32cr::Foundation::HANDLE, descriptor : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR*, descriptor_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_VALUE*, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BluetoothGATTRegisterEvent(hService : Win32cr::Foundation::HANDLE, event_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_EVENT_TYPE, event_parameter_in : Void*, callback : Win32cr::Devices::Bluetooth::PFNBLUETOOTH_GATT_EVENT_CALLBACK, callback_context : Void*, pEventHandle : LibC::IntPtrT*, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BluetoothGATTUnregisterEvent(event_handle : LibC::IntPtrT, flags : UInt32) : Win32cr::Foundation::HRESULT
 
   end

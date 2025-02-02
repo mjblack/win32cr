@@ -3,6 +3,7 @@ require "./gdi.cr"
 require "./../ui/controls.cr"
 
 module Win32cr::Graphics::Dwm
+  extend self
   DWM_BB_ENABLE = 1_u32
   DWM_BB_BLURREGION = 2_u32
   DWM_BB_TRANSITIONONMAXIMIZED = 4_u32
@@ -217,68 +218,223 @@ module Win32cr::Graphics::Dwm
     end
   end
 
+  def dwmDefWindowProc(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::BOOL
+    C.DwmDefWindowProc(hWnd, msg, wParam, lParam, plResult)
+  end
+
+  def dwmEnableBlurBehindWindow(hWnd : Win32cr::Foundation::HWND, pBlurBehind : Win32cr::Graphics::Dwm::DWM_BLURBEHIND*) : Win32cr::Foundation::HRESULT
+    C.DwmEnableBlurBehindWindow(hWnd, pBlurBehind)
+  end
+
+  def dwmEnableComposition(uCompositionAction : UInt32) : Win32cr::Foundation::HRESULT
+    C.DwmEnableComposition(uCompositionAction)
+  end
+
+  def dwmEnableMMCSS(fEnableMMCSS : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.DwmEnableMMCSS(fEnableMMCSS)
+  end
+
+  def dwmExtendFrameIntoClientArea(hWnd : Win32cr::Foundation::HWND, pMarInset : Win32cr::UI::Controls::MARGINS*) : Win32cr::Foundation::HRESULT
+    C.DwmExtendFrameIntoClientArea(hWnd, pMarInset)
+  end
+
+  def dwmGetColorizationColor(pcrColorization : UInt32*, pfOpaqueBlend : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.DwmGetColorizationColor(pcrColorization, pfOpaqueBlend)
+  end
+
+  def dwmGetCompositionTimingInfo(hwnd : Win32cr::Foundation::HWND, pTimingInfo : Win32cr::Graphics::Dwm::DWM_TIMING_INFO*) : Win32cr::Foundation::HRESULT
+    C.DwmGetCompositionTimingInfo(hwnd, pTimingInfo)
+  end
+
+  def dwmGetWindowAttribute(hwnd : Win32cr::Foundation::HWND, dwAttribute : Win32cr::Graphics::Dwm::DWMWINDOWATTRIBUTE, pvAttribute : Void*, cbAttribute : UInt32) : Win32cr::Foundation::HRESULT
+    C.DwmGetWindowAttribute(hwnd, dwAttribute, pvAttribute, cbAttribute)
+  end
+
+  def dwmIsCompositionEnabled(pfEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.DwmIsCompositionEnabled(pfEnabled)
+  end
+
+  def dwmModifyPreviousDxFrameDuration(hwnd : Win32cr::Foundation::HWND, cRefreshes : Int32, fRelative : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.DwmModifyPreviousDxFrameDuration(hwnd, cRefreshes, fRelative)
+  end
+
+  def dwmQueryThumbnailSourceSize(hThumbnail : LibC::IntPtrT, pSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::HRESULT
+    C.DwmQueryThumbnailSourceSize(hThumbnail, pSize)
+  end
+
+  def dwmRegisterThumbnail(hwndDestination : Win32cr::Foundation::HWND, hwndSource : Win32cr::Foundation::HWND, phThumbnailId : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
+    C.DwmRegisterThumbnail(hwndDestination, hwndSource, phThumbnailId)
+  end
+
+  def dwmSetDxFrameDuration(hwnd : Win32cr::Foundation::HWND, cRefreshes : Int32) : Win32cr::Foundation::HRESULT
+    C.DwmSetDxFrameDuration(hwnd, cRefreshes)
+  end
+
+  def dwmSetPresentParameters(hwnd : Win32cr::Foundation::HWND, pPresentParams : Win32cr::Graphics::Dwm::DWM_PRESENT_PARAMETERS*) : Win32cr::Foundation::HRESULT
+    C.DwmSetPresentParameters(hwnd, pPresentParams)
+  end
+
+  def dwmSetWindowAttribute(hwnd : Win32cr::Foundation::HWND, dwAttribute : Win32cr::Graphics::Dwm::DWMWINDOWATTRIBUTE, pvAttribute : Void*, cbAttribute : UInt32) : Win32cr::Foundation::HRESULT
+    C.DwmSetWindowAttribute(hwnd, dwAttribute, pvAttribute, cbAttribute)
+  end
+
+  def dwmUnregisterThumbnail(hThumbnailId : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
+    C.DwmUnregisterThumbnail(hThumbnailId)
+  end
+
+  def dwmUpdateThumbnailProperties(hThumbnailId : LibC::IntPtrT, ptnProperties : Win32cr::Graphics::Dwm::DWM_THUMBNAIL_PROPERTIES*) : Win32cr::Foundation::HRESULT
+    C.DwmUpdateThumbnailProperties(hThumbnailId, ptnProperties)
+  end
+
+  def dwmSetIconicThumbnail(hwnd : Win32cr::Foundation::HWND, hbmp : Win32cr::Graphics::Gdi::HBITMAP, dwSITFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.DwmSetIconicThumbnail(hwnd, hbmp, dwSITFlags)
+  end
+
+  def dwmSetIconicLivePreviewBitmap(hwnd : Win32cr::Foundation::HWND, hbmp : Win32cr::Graphics::Gdi::HBITMAP, pptClient : Win32cr::Foundation::POINT*, dwSITFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.DwmSetIconicLivePreviewBitmap(hwnd, hbmp, pptClient, dwSITFlags)
+  end
+
+  def dwmInvalidateIconicBitmaps(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
+    C.DwmInvalidateIconicBitmaps(hwnd)
+  end
+
+  def dwmAttachMilContent(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
+    C.DwmAttachMilContent(hwnd)
+  end
+
+  def dwmDetachMilContent(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
+    C.DwmDetachMilContent(hwnd)
+  end
+
+  def dwmFlush : Win32cr::Foundation::HRESULT
+    C.DwmFlush
+  end
+
+  def dwmGetGraphicsStreamTransformHint(uIndex : UInt32, pTransform : Win32cr::Graphics::Dwm::MilMatrix3x2D*) : Win32cr::Foundation::HRESULT
+    C.DwmGetGraphicsStreamTransformHint(uIndex, pTransform)
+  end
+
+  def dwmGetGraphicsStreamClient(uIndex : UInt32, pClientUuid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.DwmGetGraphicsStreamClient(uIndex, pClientUuid)
+  end
+
+  def dwmGetTransportAttributes(pfIsRemoting : Win32cr::Foundation::BOOL*, pfIsConnected : Win32cr::Foundation::BOOL*, pDwGeneration : UInt32*) : Win32cr::Foundation::HRESULT
+    C.DwmGetTransportAttributes(pfIsRemoting, pfIsConnected, pDwGeneration)
+  end
+
+  def dwmTransitionOwnedWindow(hwnd : Win32cr::Foundation::HWND, target : Win32cr::Graphics::Dwm::DWMTRANSITION_OWNEDWINDOW_TARGET) : Win32cr::Foundation::HRESULT
+    C.DwmTransitionOwnedWindow(hwnd, target)
+  end
+
+  def dwmRenderGesture(gt : Win32cr::Graphics::Dwm::GESTURE_TYPE, cContacts : UInt32, pdwPointerID : UInt32*, pPoints : Win32cr::Foundation::POINT*) : Win32cr::Foundation::HRESULT
+    C.DwmRenderGesture(gt, cContacts, pdwPointerID, pPoints)
+  end
+
+  def dwmTetherContact(dwPointerID : UInt32, fEnable : Win32cr::Foundation::BOOL, ptTether : Win32cr::Foundation::POINT) : Win32cr::Foundation::HRESULT
+    C.DwmTetherContact(dwPointerID, fEnable, ptTether)
+  end
+
+  def dwmShowContact(dwPointerID : UInt32, eShowContact : Win32cr::Graphics::Dwm::DWM_SHOWCONTACT) : Win32cr::Foundation::HRESULT
+    C.DwmShowContact(dwPointerID, eShowContact)
+  end
+
+  def dwmGetUnmetTabRequirements(appWindow : Win32cr::Foundation::HWND, value : Win32cr::Graphics::Dwm::DWM_TAB_WINDOW_REQUIREMENTS*) : Win32cr::Foundation::HRESULT
+    C.DwmGetUnmetTabRequirements(appWindow, value)
+  end
+
   @[Link("dwmapi")]
   lib C
+    # :nodoc:
     fun DwmDefWindowProc(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DwmEnableBlurBehindWindow(hWnd : Win32cr::Foundation::HWND, pBlurBehind : Win32cr::Graphics::Dwm::DWM_BLURBEHIND*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmEnableComposition(uCompositionAction : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmEnableMMCSS(fEnableMMCSS : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmExtendFrameIntoClientArea(hWnd : Win32cr::Foundation::HWND, pMarInset : Win32cr::UI::Controls::MARGINS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmGetColorizationColor(pcrColorization : UInt32*, pfOpaqueBlend : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmGetCompositionTimingInfo(hwnd : Win32cr::Foundation::HWND, pTimingInfo : Win32cr::Graphics::Dwm::DWM_TIMING_INFO*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmGetWindowAttribute(hwnd : Win32cr::Foundation::HWND, dwAttribute : Win32cr::Graphics::Dwm::DWMWINDOWATTRIBUTE, pvAttribute : Void*, cbAttribute : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmIsCompositionEnabled(pfEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmModifyPreviousDxFrameDuration(hwnd : Win32cr::Foundation::HWND, cRefreshes : Int32, fRelative : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmQueryThumbnailSourceSize(hThumbnail : LibC::IntPtrT, pSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmRegisterThumbnail(hwndDestination : Win32cr::Foundation::HWND, hwndSource : Win32cr::Foundation::HWND, phThumbnailId : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmSetDxFrameDuration(hwnd : Win32cr::Foundation::HWND, cRefreshes : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmSetPresentParameters(hwnd : Win32cr::Foundation::HWND, pPresentParams : Win32cr::Graphics::Dwm::DWM_PRESENT_PARAMETERS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmSetWindowAttribute(hwnd : Win32cr::Foundation::HWND, dwAttribute : Win32cr::Graphics::Dwm::DWMWINDOWATTRIBUTE, pvAttribute : Void*, cbAttribute : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmUnregisterThumbnail(hThumbnailId : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmUpdateThumbnailProperties(hThumbnailId : LibC::IntPtrT, ptnProperties : Win32cr::Graphics::Dwm::DWM_THUMBNAIL_PROPERTIES*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmSetIconicThumbnail(hwnd : Win32cr::Foundation::HWND, hbmp : Win32cr::Graphics::Gdi::HBITMAP, dwSITFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmSetIconicLivePreviewBitmap(hwnd : Win32cr::Foundation::HWND, hbmp : Win32cr::Graphics::Gdi::HBITMAP, pptClient : Win32cr::Foundation::POINT*, dwSITFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmInvalidateIconicBitmaps(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmAttachMilContent(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmDetachMilContent(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmFlush : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmGetGraphicsStreamTransformHint(uIndex : UInt32, pTransform : Win32cr::Graphics::Dwm::MilMatrix3x2D*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmGetGraphicsStreamClient(uIndex : UInt32, pClientUuid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmGetTransportAttributes(pfIsRemoting : Win32cr::Foundation::BOOL*, pfIsConnected : Win32cr::Foundation::BOOL*, pDwGeneration : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmTransitionOwnedWindow(hwnd : Win32cr::Foundation::HWND, target : Win32cr::Graphics::Dwm::DWMTRANSITION_OWNEDWINDOW_TARGET) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmRenderGesture(gt : Win32cr::Graphics::Dwm::GESTURE_TYPE, cContacts : UInt32, pdwPointerID : UInt32*, pPoints : Win32cr::Foundation::POINT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmTetherContact(dwPointerID : UInt32, fEnable : Win32cr::Foundation::BOOL, ptTether : Win32cr::Foundation::POINT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmShowContact(dwPointerID : UInt32, eShowContact : Win32cr::Graphics::Dwm::DWM_SHOWCONTACT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DwmGetUnmetTabRequirements(appWindow : Win32cr::Foundation::HWND, value : Win32cr::Graphics::Dwm::DWM_TAB_WINDOW_REQUIREMENTS*) : Win32cr::Foundation::HRESULT
 
   end

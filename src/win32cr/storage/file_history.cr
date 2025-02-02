@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./../system/windows_programming.cr"
 
 module Win32cr::Storage::FileHistory
+  extend self
   FHCFG_E_CORRUPT_CONFIG_FILE = -2147220736_i32
   FHCFG_E_CONFIG_FILE_NOT_FOUND = -2147220735_i32
   FHCFG_E_CONFIG_ALREADY_EXISTS = -2147220734_i32
@@ -284,20 +285,55 @@ module Win32cr::Storage::FileHistory
 
   end
 
+  def fhServiceOpenPipe(start_service_if_stopped : Win32cr::Foundation::BOOL, pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE*) : Win32cr::Foundation::HRESULT
+    C.FhServiceOpenPipe(start_service_if_stopped, pipe)
+  end
+
+  def fhServiceClosePipe(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE) : Win32cr::Foundation::HRESULT
+    C.FhServiceClosePipe(pipe)
+  end
+
+  def fhServiceStartBackup(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE, low_priority_io : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.FhServiceStartBackup(pipe, low_priority_io)
+  end
+
+  def fhServiceStopBackup(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE, stop_tracking : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.FhServiceStopBackup(pipe, stop_tracking)
+  end
+
+  def fhServiceReloadConfiguration(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE) : Win32cr::Foundation::HRESULT
+    C.FhServiceReloadConfiguration(pipe)
+  end
+
+  def fhServiceBlockBackup(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE) : Win32cr::Foundation::HRESULT
+    C.FhServiceBlockBackup(pipe)
+  end
+
+  def fhServiceUnblockBackup(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE) : Win32cr::Foundation::HRESULT
+    C.FhServiceUnblockBackup(pipe)
+  end
+
   @[Link("fhsvcctl")]
   lib C
+    # :nodoc:
     fun FhServiceOpenPipe(start_service_if_stopped : Win32cr::Foundation::BOOL, pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FhServiceClosePipe(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FhServiceStartBackup(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE, low_priority_io : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FhServiceStopBackup(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE, stop_tracking : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FhServiceReloadConfiguration(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FhServiceBlockBackup(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FhServiceUnblockBackup(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE) : Win32cr::Foundation::HRESULT
 
   end

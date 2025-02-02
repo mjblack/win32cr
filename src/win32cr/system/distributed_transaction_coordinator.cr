@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./com.cr"
 
 module Win32cr::System::DistributedTransactionCoordinator
+  extend self
   alias DTC_GET_TRANSACTION_MANAGER = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::GUID*, UInt32, UInt16, Void*, Void**, Win32cr::Foundation::HRESULT)
 
   alias DTC_GET_TRANSACTION_MANAGER_EX_A = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::GUID*, UInt32, Void*, Void**, Win32cr::Foundation::HRESULT)
@@ -2749,14 +2750,34 @@ module Win32cr::System::DistributedTransactionCoordinator
 
   end
 
+  def dtcGetTransactionManager(i_pszHost : Win32cr::Foundation::PSTR, i_pszTmName : Win32cr::Foundation::PSTR, i_riid : LibC::GUID*, i_dwReserved1 : UInt32, i_wcbReserved2 : UInt16, i_pvReserved2 : Void*, o_ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    C.DtcGetTransactionManager(i_pszHost, i_pszTmName, i_riid, i_dwReserved1, i_wcbReserved2, i_pvReserved2, o_ppvObject)
+  end
+
+  def dtcGetTransactionManagerC(i_pszHost : Win32cr::Foundation::PSTR, i_pszTmName : Win32cr::Foundation::PSTR, i_riid : LibC::GUID*, i_dwReserved1 : UInt32, i_wcbReserved2 : UInt16, i_pvReserved2 : Void*, o_ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    C.DtcGetTransactionManagerC(i_pszHost, i_pszTmName, i_riid, i_dwReserved1, i_wcbReserved2, i_pvReserved2, o_ppvObject)
+  end
+
+  def dtcGetTransactionManagerExA(i_pszHost : Win32cr::Foundation::PSTR, i_pszTmName : Win32cr::Foundation::PSTR, i_riid : LibC::GUID*, i_grfOptions : UInt32, i_pvConfigParams : Void*, o_ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    C.DtcGetTransactionManagerExA(i_pszHost, i_pszTmName, i_riid, i_grfOptions, i_pvConfigParams, o_ppvObject)
+  end
+
+  def dtcGetTransactionManagerExW(i_pwszHost : Win32cr::Foundation::PWSTR, i_pwszTmName : Win32cr::Foundation::PWSTR, i_riid : LibC::GUID*, i_grfOptions : UInt32, i_pvConfigParams : Void*, o_ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    C.DtcGetTransactionManagerExW(i_pwszHost, i_pwszTmName, i_riid, i_grfOptions, i_pvConfigParams, o_ppvObject)
+  end
+
   @[Link("xolehlp")]
   lib C
+    # :nodoc:
     fun DtcGetTransactionManager(i_pszHost : Win32cr::Foundation::PSTR, i_pszTmName : Win32cr::Foundation::PSTR, i_riid : LibC::GUID*, i_dwReserved1 : UInt32, i_wcbReserved2 : UInt16, i_pvReserved2 : Void*, o_ppvObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DtcGetTransactionManagerC(i_pszHost : Win32cr::Foundation::PSTR, i_pszTmName : Win32cr::Foundation::PSTR, i_riid : LibC::GUID*, i_dwReserved1 : UInt32, i_wcbReserved2 : UInt16, i_pvReserved2 : Void*, o_ppvObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DtcGetTransactionManagerExA(i_pszHost : Win32cr::Foundation::PSTR, i_pszTmName : Win32cr::Foundation::PSTR, i_riid : LibC::GUID*, i_grfOptions : UInt32, i_pvConfigParams : Void*, o_ppvObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DtcGetTransactionManagerExW(i_pwszHost : Win32cr::Foundation::PWSTR, i_pwszTmName : Win32cr::Foundation::PWSTR, i_riid : LibC::GUID*, i_grfOptions : UInt32, i_pvConfigParams : Void*, o_ppvObject : Void**) : Win32cr::Foundation::HRESULT
 
   end

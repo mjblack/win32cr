@@ -3,6 +3,7 @@ require "./../../foundation.cr"
 require "./../../ui/shell.cr"
 
 module Win32cr::System::WinRT::Shell
+  extend self
 
   enum CreateProcessMethod
     CpCreateProcess = 0_i32

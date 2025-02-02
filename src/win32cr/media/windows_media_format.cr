@@ -3,6 +3,7 @@ require "./../system/com.cr"
 require "./../graphics/gdi.cr"
 
 module Win32cr::Media::WindowsMediaFormat
+  extend self
   WMT_VIDEOIMAGE_SAMPLE_INPUT_FRAME = 1_u32
   WMT_VIDEOIMAGE_SAMPLE_OUTPUT_FRAME = 2_u32
   WMT_VIDEOIMAGE_SAMPLE_USES_CURRENT_INPUT_FRAME = 4_u32
@@ -7386,28 +7387,83 @@ module Win32cr::Media::WindowsMediaFormat
 
   end
 
+  def wMIsContentProtected(pwszFileName : Win32cr::Foundation::PWSTR, pfIsProtected : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.WMIsContentProtected(pwszFileName, pfIsProtected)
+  end
+
+  def wMCreateWriter(pUnkCert : Void*, ppWriter : Void**) : Win32cr::Foundation::HRESULT
+    C.WMCreateWriter(pUnkCert, ppWriter)
+  end
+
+  def wMCreateReader(pUnkCert : Void*, dwRights : UInt32, ppReader : Void**) : Win32cr::Foundation::HRESULT
+    C.WMCreateReader(pUnkCert, dwRights, ppReader)
+  end
+
+  def wMCreateSyncReader(pUnkCert : Void*, dwRights : UInt32, ppSyncReader : Void**) : Win32cr::Foundation::HRESULT
+    C.WMCreateSyncReader(pUnkCert, dwRights, ppSyncReader)
+  end
+
+  def wMCreateEditor(ppEditor : Void**) : Win32cr::Foundation::HRESULT
+    C.WMCreateEditor(ppEditor)
+  end
+
+  def wMCreateIndexer(ppIndexer : Void**) : Win32cr::Foundation::HRESULT
+    C.WMCreateIndexer(ppIndexer)
+  end
+
+  def wMCreateBackupRestorer(pCallback : Void*, ppBackup : Void**) : Win32cr::Foundation::HRESULT
+    C.WMCreateBackupRestorer(pCallback, ppBackup)
+  end
+
+  def wMCreateProfileManager(ppProfileManager : Void**) : Win32cr::Foundation::HRESULT
+    C.WMCreateProfileManager(ppProfileManager)
+  end
+
+  def wMCreateWriterFileSink(ppSink : Void**) : Win32cr::Foundation::HRESULT
+    C.WMCreateWriterFileSink(ppSink)
+  end
+
+  def wMCreateWriterNetworkSink(ppSink : Void**) : Win32cr::Foundation::HRESULT
+    C.WMCreateWriterNetworkSink(ppSink)
+  end
+
+  def wMCreateWriterPushSink(ppSink : Void**) : Win32cr::Foundation::HRESULT
+    C.WMCreateWriterPushSink(ppSink)
+  end
+
   @[Link("wmvcore")]
   lib C
+    # :nodoc:
     fun WMIsContentProtected(pwszFileName : Win32cr::Foundation::PWSTR, pfIsProtected : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WMCreateWriter(pUnkCert : Void*, ppWriter : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WMCreateReader(pUnkCert : Void*, dwRights : UInt32, ppReader : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WMCreateSyncReader(pUnkCert : Void*, dwRights : UInt32, ppSyncReader : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WMCreateEditor(ppEditor : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WMCreateIndexer(ppIndexer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WMCreateBackupRestorer(pCallback : Void*, ppBackup : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WMCreateProfileManager(ppProfileManager : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WMCreateWriterFileSink(ppSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WMCreateWriterNetworkSink(ppSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WMCreateWriterPushSink(ppSink : Void**) : Win32cr::Foundation::HRESULT
 
   end

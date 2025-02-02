@@ -2,6 +2,7 @@ require "./../../system/com.cr"
 require "./../../foundation.cr"
 
 module Win32cr::UI::Input::Ink
+  extend self
 
   CLSID_InkDesktopHost = LibC::GUID.new(0x62584a6_u32, 0xf830_u16, 0x4bdc_u16, StaticArray[0xa4_u8, 0xd2_u8, 0xa_u8, 0x10_u8, 0xab_u8, 0x6_u8, 0x2b_u8, 0x1d_u8])
 

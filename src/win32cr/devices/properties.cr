@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::Devices::Properties
+  extend self
   DEVPKEY_DeviceInterface_Autoplay_Silent = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x434dd28f_u32, 0x9e75_u16, 0x450a_u16, StaticArray[0x9a_u8, 0xb9_u8, 0xff_u8, 0x61_u8, 0xe6_u8, 0x18_u8, 0xba_u8, 0xd0_u8]), 2_u32)
   DEVPKEY_NAME = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb725f130_u32, 0x47ef_u16, 0x101a_u16, StaticArray[0xa5_u8, 0xf1_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0xeb_u8, 0xac_u8]), 10_u32)
   DEVPKEY_Device_DeviceDesc = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 2_u32)

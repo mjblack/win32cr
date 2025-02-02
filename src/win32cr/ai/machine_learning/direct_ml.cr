@@ -3,6 +3,7 @@ require "./../../graphics/direct3_d12.cr"
 require "./../../system/com.cr"
 
 module Win32cr::AI::MachineLearning::DirectML
+  extend self
   DML_TARGET_VERSION = 16384_u32
   DML_TENSOR_DIMENSION_COUNT_MAX = 5_u32
   DML_TENSOR_DIMENSION_COUNT_MAX1 = 8_u32
@@ -2685,10 +2686,20 @@ module Win32cr::AI::MachineLearning::DirectML
 
   end
 
+  def dMLCreateDevice(d3d12Device : Void*, flags : Win32cr::AI::MachineLearning::DirectML::DML_CREATE_DEVICE_FLAGS, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.DMLCreateDevice(d3d12Device, flags, riid, ppv)
+  end
+
+  def dMLCreateDevice1(d3d12Device : Void*, flags : Win32cr::AI::MachineLearning::DirectML::DML_CREATE_DEVICE_FLAGS, minimumFeatureLevel : Win32cr::AI::MachineLearning::DirectML::DML_FEATURE_LEVEL, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.DMLCreateDevice1(d3d12Device, flags, minimumFeatureLevel, riid, ppv)
+  end
+
   @[Link("directml")]
   lib C
+    # :nodoc:
     fun DMLCreateDevice(d3d12Device : Void*, flags : Win32cr::AI::MachineLearning::DirectML::DML_CREATE_DEVICE_FLAGS, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DMLCreateDevice1(d3d12Device : Void*, flags : Win32cr::AI::MachineLearning::DirectML::DML_CREATE_DEVICE_FLAGS, minimumFeatureLevel : Win32cr::AI::MachineLearning::DirectML::DML_FEATURE_LEVEL, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
   end

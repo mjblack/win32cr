@@ -3,6 +3,7 @@ require "./../system/com.cr"
 require "./../system/ole.cr"
 
 module Win32cr::Networking::NetworkListManager
+  extend self
   NA_DomainAuthenticationFailed = "NA_DomainAuthenticationFailed"
   NA_NetworkClass = "NA_NetworkClass"
   NA_NameSetByPolicy = "NA_NameSetByPolicy"

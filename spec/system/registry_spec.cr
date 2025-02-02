@@ -8,16 +8,16 @@ module Win32::System
     describe "Getting a registry key" do
       bios_name = {{ `C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command "& {(Get-ItemProperty -Path HKLM:\\HARDWARE\\DESCRIPTION\\System -Name Identifier).Identifier}"`.chomp.stringify }}
       dwSize = 0_u32
-      hr = Win32cr::System::Registry::C.RegGetValueW(Win32cr::System::Registry::HKEY_LOCAL_MACHINE,
-        "HARDWARE\\DESCRIPTION\\System".to_utf16,
-        "Identifier".to_utf16,
-        Win32cr::System::Registry::RRF_RT::RRF_RT_ANY,
-        nil,
-        nil,
+      hr = SysReg.regGetValueW(SysReg::HKEY_LOCAL_MACHINE.to_i64,
+        pwstr("HARDWARE\\DESCRIPTION\\System"),
+        pwstr("Identifier"),
+        SysReg::RRF_RT::RRF_RT_ANY,
+        Pointer(UInt32).null,
+        Pointer(Void).null,
         pointerof(dwSize))
 
       it "hr for RegGetValueW to get size should be zero" do
-        hr.should eq(Win32cr::Foundation::WIN32_ERROR::NO_ERROR)
+        hr.should eq(Fd::WIN32_ERROR::NO_ERROR)
       end
 
       it "dwSize to get size should be greater than zero" do
@@ -26,16 +26,16 @@ module Win32::System
 
       pValue = LibC.HeapAlloc(LibC.GetProcessHeap, 0, dwSize)
 
-      hr = Win32cr::System::Registry::C.RegGetValueW(Win32cr::System::Registry::HKEY_LOCAL_MACHINE,
-        "HARDWARE\\DESCRIPTION\\System".to_utf16,
-        "Identifier".to_utf16,
-        Win32cr::System::Registry::RRF_RT::RRF_RT_ANY,
-        nil,
+      hr = SysReg.regGetValueW(SysReg::HKEY_LOCAL_MACHINE.to_i64,
+        pwstr("HARDWARE\\DESCRIPTION\\System"),
+        pwstr("Identifier"),
+        SysReg::RRF_RT::RRF_RT_ANY,
+        Pointer(UInt32).null,
         pValue,
         pointerof(dwSize))
 
       it "hr for RegGetValueW to get value should be zero" do
-        hr.should eq(Win32cr::Foundation::WIN32_ERROR::NO_ERROR)
+        hr.should eq(Fd::WIN32_ERROR::NO_ERROR)
       end
 
       it "dwSize to get value should be greater than zero" do

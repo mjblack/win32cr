@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./../system/rpc.cr"
 
 module Win32cr::NetworkManagement::WindowsFilteringPlatform
+  extend self
   alias FWPM_PROVIDER_CHANGE_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CHANGE0*, Void)
 
   alias FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0 = Proc(Void*, Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_CHANGE0*, Void)
@@ -4260,378 +4261,1308 @@ module Win32cr::NetworkManagement::WindowsFilteringPlatform
     end
   end
 
+  def fwpmFreeMemory0(p : Void**) : Void
+    C.FwpmFreeMemory0(p)
+  end
+
+  def fwpmEngineOpen0(serverName : Win32cr::Foundation::PWSTR, authnService : UInt32, authIdentity : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*, session : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SESSION0*, engineHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmEngineOpen0(serverName, authnService, authIdentity, session, engineHandle)
+  end
+
+  def fwpmEngineClose0(engineHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmEngineClose0(engineHandle)
+  end
+
+  def fwpmEngineGetOption0(engineHandle : Win32cr::Foundation::HANDLE, option : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_ENGINE_OPTION, value : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0**) : UInt32
+    C.FwpmEngineGetOption0(engineHandle, option, value)
+  end
+
+  def fwpmEngineSetOption0(engineHandle : Win32cr::Foundation::HANDLE, option : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_ENGINE_OPTION, newValue : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0*) : UInt32
+    C.FwpmEngineSetOption0(engineHandle, option, newValue)
+  end
+
+  def fwpmEngineGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.FwpmEngineGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def fwpmEngineSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.FwpmEngineSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
+  def fwpmSessionCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SESSION_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmSessionCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+  end
+
+  def fwpmSessionEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SESSION0***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmSessionEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmSessionDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmSessionDestroyEnumHandle0(engineHandle, enumHandle)
+  end
+
+  def fwpmTransactionBegin0(engineHandle : Win32cr::Foundation::HANDLE, flags : UInt32) : UInt32
+    C.FwpmTransactionBegin0(engineHandle, flags)
+  end
+
+  def fwpmTransactionCommit0(engineHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmTransactionCommit0(engineHandle)
+  end
+
+  def fwpmTransactionAbort0(engineHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmTransactionAbort0(engineHandle)
+  end
+
+  def fwpmProviderAdd0(engineHandle : Win32cr::Foundation::HANDLE, provider : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER0*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    C.FwpmProviderAdd0(engineHandle, provider, sd)
+  end
+
+  def fwpmProviderDeleteByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*) : UInt32
+    C.FwpmProviderDeleteByKey0(engineHandle, key)
+  end
+
+  def fwpmProviderGetByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, provider : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER0**) : UInt32
+    C.FwpmProviderGetByKey0(engineHandle, key, provider)
+  end
+
+  def fwpmProviderCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmProviderCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+  end
+
+  def fwpmProviderEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER0***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmProviderEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmProviderDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmProviderDestroyEnumHandle0(engineHandle, enumHandle)
+  end
+
+  def fwpmProviderGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.FwpmProviderGetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def fwpmProviderSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.FwpmProviderSetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
+  def fwpmProviderSubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CHANGE_CALLBACK0, context : Void*, changeHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmProviderSubscribeChanges0(engineHandle, subscription, callback, context, changeHandle)
+  end
+
+  def fwpmProviderUnsubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, changeHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmProviderUnsubscribeChanges0(engineHandle, changeHandle)
+  end
+
+  def fwpmProviderSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
+    C.FwpmProviderSubscriptionsGet0(engineHandle, entries, numEntries)
+  end
+
+  def fwpmProviderContextAdd0(engineHandle : Win32cr::Foundation::HANDLE, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT0*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR, id : UInt64*) : UInt32
+    C.FwpmProviderContextAdd0(engineHandle, providerContext, sd, id)
+  end
+
+  def fwpmProviderContextAdd1(engineHandle : Win32cr::Foundation::HANDLE, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT1*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR, id : UInt64*) : UInt32
+    C.FwpmProviderContextAdd1(engineHandle, providerContext, sd, id)
+  end
+
+  def fwpmProviderContextAdd2(engineHandle : Win32cr::Foundation::HANDLE, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT2*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR, id : UInt64*) : UInt32
+    C.FwpmProviderContextAdd2(engineHandle, providerContext, sd, id)
+  end
+
+  def fwpmProviderContextAdd3(engineHandle : Win32cr::Foundation::HANDLE, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT3_*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR, id : UInt64*) : UInt32
+    C.FwpmProviderContextAdd3(engineHandle, providerContext, sd, id)
+  end
+
+  def fwpmProviderContextDeleteById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64) : UInt32
+    C.FwpmProviderContextDeleteById0(engineHandle, id)
+  end
+
+  def fwpmProviderContextDeleteByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*) : UInt32
+    C.FwpmProviderContextDeleteByKey0(engineHandle, key)
+  end
+
+  def fwpmProviderContextGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT0**) : UInt32
+    C.FwpmProviderContextGetById0(engineHandle, id, providerContext)
+  end
+
+  def fwpmProviderContextGetById1(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT1**) : UInt32
+    C.FwpmProviderContextGetById1(engineHandle, id, providerContext)
+  end
+
+  def fwpmProviderContextGetById2(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT2**) : UInt32
+    C.FwpmProviderContextGetById2(engineHandle, id, providerContext)
+  end
+
+  def fwpmProviderContextGetById3(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT3_**) : UInt32
+    C.FwpmProviderContextGetById3(engineHandle, id, providerContext)
+  end
+
+  def fwpmProviderContextGetByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT0**) : UInt32
+    C.FwpmProviderContextGetByKey0(engineHandle, key, providerContext)
+  end
+
+  def fwpmProviderContextGetByKey1(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT1**) : UInt32
+    C.FwpmProviderContextGetByKey1(engineHandle, key, providerContext)
+  end
+
+  def fwpmProviderContextGetByKey2(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT2**) : UInt32
+    C.FwpmProviderContextGetByKey2(engineHandle, key, providerContext)
+  end
+
+  def fwpmProviderContextGetByKey3(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT3_**) : UInt32
+    C.FwpmProviderContextGetByKey3(engineHandle, key, providerContext)
+  end
+
+  def fwpmProviderContextCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmProviderContextCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+  end
+
+  def fwpmProviderContextEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT0***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmProviderContextEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmProviderContextEnum1(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT1***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmProviderContextEnum1(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmProviderContextEnum2(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT2***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmProviderContextEnum2(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmProviderContextEnum3(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT3_***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmProviderContextEnum3(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmProviderContextDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmProviderContextDestroyEnumHandle0(engineHandle, enumHandle)
+  end
+
+  def fwpmProviderContextGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.FwpmProviderContextGetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def fwpmProviderContextSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.FwpmProviderContextSetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
+  def fwpmProviderContextSubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0, context : Void*, changeHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmProviderContextSubscribeChanges0(engineHandle, subscription, callback, context, changeHandle)
+  end
+
+  def fwpmProviderContextUnsubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, changeHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmProviderContextUnsubscribeChanges0(engineHandle, changeHandle)
+  end
+
+  def fwpmProviderContextSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
+    C.FwpmProviderContextSubscriptionsGet0(engineHandle, entries, numEntries)
+  end
+
+  def fwpmSubLayerAdd0(engineHandle : Win32cr::Foundation::HANDLE, subLayer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER0*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    C.FwpmSubLayerAdd0(engineHandle, subLayer, sd)
+  end
+
+  def fwpmSubLayerDeleteByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*) : UInt32
+    C.FwpmSubLayerDeleteByKey0(engineHandle, key)
+  end
+
+  def fwpmSubLayerGetByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, subLayer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER0**) : UInt32
+    C.FwpmSubLayerGetByKey0(engineHandle, key, subLayer)
+  end
+
+  def fwpmSubLayerCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmSubLayerCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+  end
+
+  def fwpmSubLayerEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER0***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmSubLayerEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmSubLayerDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmSubLayerDestroyEnumHandle0(engineHandle, enumHandle)
+  end
+
+  def fwpmSubLayerGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.FwpmSubLayerGetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def fwpmSubLayerSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.FwpmSubLayerSetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
+  def fwpmSubLayerSubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER_CHANGE_CALLBACK0, context : Void*, changeHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmSubLayerSubscribeChanges0(engineHandle, subscription, callback, context, changeHandle)
+  end
+
+  def fwpmSubLayerUnsubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, changeHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmSubLayerUnsubscribeChanges0(engineHandle, changeHandle)
+  end
+
+  def fwpmSubLayerSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
+    C.FwpmSubLayerSubscriptionsGet0(engineHandle, entries, numEntries)
+  end
+
+  def fwpmLayerGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt16, layer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_LAYER0**) : UInt32
+    C.FwpmLayerGetById0(engineHandle, id, layer)
+  end
+
+  def fwpmLayerGetByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, layer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_LAYER0**) : UInt32
+    C.FwpmLayerGetByKey0(engineHandle, key, layer)
+  end
+
+  def fwpmLayerCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_LAYER_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmLayerCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+  end
+
+  def fwpmLayerEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_LAYER0***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmLayerEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmLayerDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmLayerDestroyEnumHandle0(engineHandle, enumHandle)
+  end
+
+  def fwpmLayerGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.FwpmLayerGetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def fwpmLayerSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.FwpmLayerSetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
+  def fwpmCalloutAdd0(engineHandle : Win32cr::Foundation::HANDLE, callout : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT0*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR, id : UInt32*) : UInt32
+    C.FwpmCalloutAdd0(engineHandle, callout, sd, id)
+  end
+
+  def fwpmCalloutDeleteById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt32) : UInt32
+    C.FwpmCalloutDeleteById0(engineHandle, id)
+  end
+
+  def fwpmCalloutDeleteByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*) : UInt32
+    C.FwpmCalloutDeleteByKey0(engineHandle, key)
+  end
+
+  def fwpmCalloutGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt32, callout : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT0**) : UInt32
+    C.FwpmCalloutGetById0(engineHandle, id, callout)
+  end
+
+  def fwpmCalloutGetByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, callout : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT0**) : UInt32
+    C.FwpmCalloutGetByKey0(engineHandle, key, callout)
+  end
+
+  def fwpmCalloutCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmCalloutCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+  end
+
+  def fwpmCalloutEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT0***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmCalloutEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmCalloutDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmCalloutDestroyEnumHandle0(engineHandle, enumHandle)
+  end
+
+  def fwpmCalloutGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.FwpmCalloutGetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def fwpmCalloutSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.FwpmCalloutSetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
+  def fwpmCalloutSubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT_CHANGE_CALLBACK0, context : Void*, changeHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmCalloutSubscribeChanges0(engineHandle, subscription, callback, context, changeHandle)
+  end
+
+  def fwpmCalloutUnsubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, changeHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmCalloutUnsubscribeChanges0(engineHandle, changeHandle)
+  end
+
+  def fwpmCalloutSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
+    C.FwpmCalloutSubscriptionsGet0(engineHandle, entries, numEntries)
+  end
+
+  def fwpmFilterAdd0(engineHandle : Win32cr::Foundation::HANDLE, filter : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR, id : UInt64*) : UInt32
+    C.FwpmFilterAdd0(engineHandle, filter, sd, id)
+  end
+
+  def fwpmFilterDeleteById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64) : UInt32
+    C.FwpmFilterDeleteById0(engineHandle, id)
+  end
+
+  def fwpmFilterDeleteByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*) : UInt32
+    C.FwpmFilterDeleteByKey0(engineHandle, key)
+  end
+
+  def fwpmFilterGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, filter : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0**) : UInt32
+    C.FwpmFilterGetById0(engineHandle, id, filter)
+  end
+
+  def fwpmFilterGetByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, filter : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0**) : UInt32
+    C.FwpmFilterGetByKey0(engineHandle, key, filter)
+  end
+
+  def fwpmFilterCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmFilterCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+  end
+
+  def fwpmFilterEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmFilterEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmFilterDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmFilterDestroyEnumHandle0(engineHandle, enumHandle)
+  end
+
+  def fwpmFilterGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.FwpmFilterGetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def fwpmFilterSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.FwpmFilterSetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
+  def fwpmFilterSubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CHANGE_CALLBACK0, context : Void*, changeHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmFilterSubscribeChanges0(engineHandle, subscription, callback, context, changeHandle)
+  end
+
+  def fwpmFilterUnsubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, changeHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmFilterUnsubscribeChanges0(engineHandle, changeHandle)
+  end
+
+  def fwpmFilterSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
+    C.FwpmFilterSubscriptionsGet0(engineHandle, entries, numEntries)
+  end
+
+  def fwpmGetAppIdFromFileName0(fileName : Win32cr::Foundation::PWSTR, appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB**) : UInt32
+    C.FwpmGetAppIdFromFileName0(fileName, appId)
+  end
+
+  def fwpmIPsecTunnelAdd0(engineHandle : Win32cr::Foundation::HANDLE, flags : UInt32, mainModePolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT0*, tunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT0*, numFilterConditions : UInt32, filterConditions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    C.FwpmIPsecTunnelAdd0(engineHandle, flags, mainModePolicy, tunnelPolicy, numFilterConditions, filterConditions, sd)
+  end
+
+  def fwpmIPsecTunnelAdd1(engineHandle : Win32cr::Foundation::HANDLE, flags : UInt32, mainModePolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT1*, tunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT1*, numFilterConditions : UInt32, filterConditions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*, keyModKey : LibC::GUID*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    C.FwpmIPsecTunnelAdd1(engineHandle, flags, mainModePolicy, tunnelPolicy, numFilterConditions, filterConditions, keyModKey, sd)
+  end
+
+  def fwpmIPsecTunnelAdd2(engineHandle : Win32cr::Foundation::HANDLE, flags : UInt32, mainModePolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT2*, tunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT2*, numFilterConditions : UInt32, filterConditions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*, keyModKey : LibC::GUID*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    C.FwpmIPsecTunnelAdd2(engineHandle, flags, mainModePolicy, tunnelPolicy, numFilterConditions, filterConditions, keyModKey, sd)
+  end
+
+  def fwpmIPsecTunnelAdd3(engineHandle : Win32cr::Foundation::HANDLE, flags : UInt32, mainModePolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT3_*, tunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT3_*, numFilterConditions : UInt32, filterConditions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*, keyModKey : LibC::GUID*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    C.FwpmIPsecTunnelAdd3(engineHandle, flags, mainModePolicy, tunnelPolicy, numFilterConditions, filterConditions, keyModKey, sd)
+  end
+
+  def fwpmIPsecTunnelDeleteByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*) : UInt32
+    C.FwpmIPsecTunnelDeleteByKey0(engineHandle, key)
+  end
+
+  def iPsecGetStatistics0(engineHandle : Win32cr::Foundation::HANDLE, ipsecStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_STATISTICS0*) : UInt32
+    C.IPsecGetStatistics0(engineHandle, ipsecStatistics)
+  end
+
+  def iPsecGetStatistics1(engineHandle : Win32cr::Foundation::HANDLE, ipsecStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_STATISTICS1*) : UInt32
+    C.IPsecGetStatistics1(engineHandle, ipsecStatistics)
+  end
+
+  def iPsecSaContextCreate0(engineHandle : Win32cr::Foundation::HANDLE, outboundTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC0*, inboundFilterId : UInt64*, id : UInt64*) : UInt32
+    C.IPsecSaContextCreate0(engineHandle, outboundTraffic, inboundFilterId, id)
+  end
+
+  def iPsecSaContextCreate1(engineHandle : Win32cr::Foundation::HANDLE, outboundTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC1*, virtualIfTunnelInfo : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_VIRTUAL_IF_TUNNEL_INFO0*, inboundFilterId : UInt64*, id : UInt64*) : UInt32
+    C.IPsecSaContextCreate1(engineHandle, outboundTraffic, virtualIfTunnelInfo, inboundFilterId, id)
+  end
+
+  def iPsecSaContextDeleteById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64) : UInt32
+    C.IPsecSaContextDeleteById0(engineHandle, id)
+  end
+
+  def iPsecSaContextGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, saContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT0**) : UInt32
+    C.IPsecSaContextGetById0(engineHandle, id, saContext)
+  end
+
+  def iPsecSaContextGetById1(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, saContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT1**) : UInt32
+    C.IPsecSaContextGetById1(engineHandle, id, saContext)
+  end
+
+  def iPsecSaContextGetSpi0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, getSpi : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_GETSPI0*, inboundSpi : UInt32*) : UInt32
+    C.IPsecSaContextGetSpi0(engineHandle, id, getSpi, inboundSpi)
+  end
+
+  def iPsecSaContextGetSpi1(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, getSpi : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_GETSPI1*, inboundSpi : UInt32*) : UInt32
+    C.IPsecSaContextGetSpi1(engineHandle, id, getSpi, inboundSpi)
+  end
+
+  def iPsecSaContextSetSpi0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, getSpi : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_GETSPI1*, inboundSpi : UInt32) : UInt32
+    C.IPsecSaContextSetSpi0(engineHandle, id, getSpi, inboundSpi)
+  end
+
+  def iPsecSaContextAddInbound0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, inboundBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE0*) : UInt32
+    C.IPsecSaContextAddInbound0(engineHandle, id, inboundBundle)
+  end
+
+  def iPsecSaContextAddOutbound0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, outboundBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE0*) : UInt32
+    C.IPsecSaContextAddOutbound0(engineHandle, id, outboundBundle)
+  end
+
+  def iPsecSaContextAddInbound1(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, inboundBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE1*) : UInt32
+    C.IPsecSaContextAddInbound1(engineHandle, id, inboundBundle)
+  end
+
+  def iPsecSaContextAddOutbound1(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, outboundBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE1*) : UInt32
+    C.IPsecSaContextAddOutbound1(engineHandle, id, outboundBundle)
+  end
+
+  def iPsecSaContextExpire0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64) : UInt32
+    C.IPsecSaContextExpire0(engineHandle, id)
+  end
+
+  def iPsecSaContextUpdate0(engineHandle : Win32cr::Foundation::HANDLE, flags : UInt64, newValues : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT1*) : UInt32
+    C.IPsecSaContextUpdate0(engineHandle, flags, newValues)
+  end
+
+  def iPsecSaContextCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.IPsecSaContextCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+  end
+
+  def iPsecSaContextEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT0***, numEntriesReturned : UInt32*) : UInt32
+    C.IPsecSaContextEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def iPsecSaContextEnum1(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT1***, numEntriesReturned : UInt32*) : UInt32
+    C.IPsecSaContextEnum1(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def iPsecSaContextDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.IPsecSaContextDestroyEnumHandle0(engineHandle, enumHandle)
+  end
+
+  def iPsecSaContextSubscribe0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_CALLBACK0, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.IPsecSaContextSubscribe0(engineHandle, subscription, callback, context, eventsHandle)
+  end
+
+  def iPsecSaContextUnsubscribe0(engineHandle : Win32cr::Foundation::HANDLE, eventsHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.IPsecSaContextUnsubscribe0(engineHandle, eventsHandle)
+  end
+
+  def iPsecSaContextSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
+    C.IPsecSaContextSubscriptionsGet0(engineHandle, entries, numEntries)
+  end
+
+  def iPsecSaCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.IPsecSaCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+  end
+
+  def iPsecSaEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS0***, numEntriesReturned : UInt32*) : UInt32
+    C.IPsecSaEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def iPsecSaEnum1(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1***, numEntriesReturned : UInt32*) : UInt32
+    C.IPsecSaEnum1(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def iPsecSaDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.IPsecSaDestroyEnumHandle0(engineHandle, enumHandle)
+  end
+
+  def iPsecSaDbGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.IPsecSaDbGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def iPsecSaDbSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.IPsecSaDbSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
+  def iPsecDospGetStatistics0(engineHandle : Win32cr::Foundation::HANDLE, idpStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_STATISTICS0*) : UInt32
+    C.IPsecDospGetStatistics0(engineHandle, idpStatistics)
+  end
+
+  def iPsecDospStateCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_STATE_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.IPsecDospStateCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+  end
+
+  def iPsecDospStateEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_STATE0***, numEntries : UInt32*) : UInt32
+    C.IPsecDospStateEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntries)
+  end
+
+  def iPsecDospStateDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.IPsecDospStateDestroyEnumHandle0(engineHandle, enumHandle)
+  end
+
+  def iPsecDospGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.IPsecDospGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def iPsecDospSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.IPsecDospSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
+  def iPsecKeyManagerAddAndRegister0(engineHandle : Win32cr::Foundation::HANDLE, keyManager : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER0*, keyManagerCallbacks : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER_CALLBACKS0*, keyMgmtHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.IPsecKeyManagerAddAndRegister0(engineHandle, keyManager, keyManagerCallbacks, keyMgmtHandle)
+  end
+
+  def iPsecKeyManagerUnregisterAndDelete0(engineHandle : Win32cr::Foundation::HANDLE, keyMgmtHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.IPsecKeyManagerUnregisterAndDelete0(engineHandle, keyMgmtHandle)
+  end
+
+  def iPsecKeyManagersGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER0***, numEntries : UInt32*) : UInt32
+    C.IPsecKeyManagersGet0(engineHandle, entries, numEntries)
+  end
+
+  def iPsecKeyManagerGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, reserved : Void*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.IPsecKeyManagerGetSecurityInfoByKey0(engineHandle, reserved, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def iPsecKeyManagerSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, reserved : Void*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.IPsecKeyManagerSetSecurityInfoByKey0(engineHandle, reserved, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
+  def ikeextGetStatistics0(engineHandle : Win32cr::Foundation::HANDLE, ikeextStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_STATISTICS0*) : UInt32
+    C.IkeextGetStatistics0(engineHandle, ikeextStatistics)
+  end
+
+  def ikeextGetStatistics1(engineHandle : Win32cr::Foundation::HANDLE, ikeextStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_STATISTICS1*) : UInt32
+    C.IkeextGetStatistics1(engineHandle, ikeextStatistics)
+  end
+
+  def ikeextSaDeleteById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64) : UInt32
+    C.IkeextSaDeleteById0(engineHandle, id)
+  end
+
+  def ikeextSaGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, sa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_DETAILS0**) : UInt32
+    C.IkeextSaGetById0(engineHandle, id, sa)
+  end
+
+  def ikeextSaGetById1(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, saLookupContext : LibC::GUID*, sa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_DETAILS1**) : UInt32
+    C.IkeextSaGetById1(engineHandle, id, saLookupContext, sa)
+  end
+
+  def ikeextSaGetById2(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, saLookupContext : LibC::GUID*, sa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_DETAILS2**) : UInt32
+    C.IkeextSaGetById2(engineHandle, id, saLookupContext, sa)
+  end
+
+  def ikeextSaCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.IkeextSaCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+  end
+
+  def ikeextSaEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_DETAILS0***, numEntriesReturned : UInt32*) : UInt32
+    C.IkeextSaEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def ikeextSaEnum1(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_DETAILS1***, numEntriesReturned : UInt32*) : UInt32
+    C.IkeextSaEnum1(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def ikeextSaEnum2(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_DETAILS2***, numEntriesReturned : UInt32*) : UInt32
+    C.IkeextSaEnum2(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def ikeextSaDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.IkeextSaDestroyEnumHandle0(engineHandle, enumHandle)
+  end
+
+  def ikeextSaDbGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.IkeextSaDbGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def ikeextSaDbSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.IkeextSaDbSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
+  def fwpmNetEventCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmNetEventCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+  end
+
+  def fwpmNetEventEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT0***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmNetEventEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmNetEventEnum1(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT1***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmNetEventEnum1(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmNetEventEnum2(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT2***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmNetEventEnum2(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmNetEventEnum3(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT3***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmNetEventEnum3(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmNetEventEnum4(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT4_***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmNetEventEnum4(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmNetEventEnum5(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT5_***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmNetEventEnum5(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmNetEventDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmNetEventDestroyEnumHandle0(engineHandle, enumHandle)
+  end
+
+  def fwpmNetEventsGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.FwpmNetEventsGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def fwpmNetEventsSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.FwpmNetEventsSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
+  def fwpmNetEventSubscribe0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CALLBACK0, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmNetEventSubscribe0(engineHandle, subscription, callback, context, eventsHandle)
+  end
+
+  def fwpmNetEventUnsubscribe0(engineHandle : Win32cr::Foundation::HANDLE, eventsHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmNetEventUnsubscribe0(engineHandle, eventsHandle)
+  end
+
+  def fwpmNetEventSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
+    C.FwpmNetEventSubscriptionsGet0(engineHandle, entries, numEntries)
+  end
+
+  def fwpmNetEventSubscribe1(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CALLBACK1, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmNetEventSubscribe1(engineHandle, subscription, callback, context, eventsHandle)
+  end
+
+  def fwpmNetEventSubscribe2(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CALLBACK2, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmNetEventSubscribe2(engineHandle, subscription, callback, context, eventsHandle)
+  end
+
+  def fwpmNetEventSubscribe3(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CALLBACK3, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmNetEventSubscribe3(engineHandle, subscription, callback, context, eventsHandle)
+  end
+
+  def fwpmNetEventSubscribe4(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CALLBACK4, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmNetEventSubscribe4(engineHandle, subscription, callback, context, eventsHandle)
+  end
+
+  def fwpmDynamicKeywordSubscribe0(flags : UInt32, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DYNAMIC_KEYWORD_CALLBACK0, context : Void*, subscriptionHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmDynamicKeywordSubscribe0(flags, callback, context, subscriptionHandle)
+  end
+
+  def fwpmDynamicKeywordUnsubscribe0(subscriptionHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmDynamicKeywordUnsubscribe0(subscriptionHandle)
+  end
+
+  def fwpmSystemPortsGet0(engineHandle : Win32cr::Foundation::HANDLE, sysPorts : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SYSTEM_PORTS0**) : UInt32
+    C.FwpmSystemPortsGet0(engineHandle, sysPorts)
+  end
+
+  def fwpmSystemPortsSubscribe0(engineHandle : Win32cr::Foundation::HANDLE, reserved : Void*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SYSTEM_PORTS_CALLBACK0, context : Void*, sysPortsHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmSystemPortsSubscribe0(engineHandle, reserved, callback, context, sysPortsHandle)
+  end
+
+  def fwpmSystemPortsUnsubscribe0(engineHandle : Win32cr::Foundation::HANDLE, sysPortsHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmSystemPortsUnsubscribe0(engineHandle, sysPortsHandle)
+  end
+
+  def fwpmConnectionGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, connection : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION0**) : UInt32
+    C.FwpmConnectionGetById0(engineHandle, id, connection)
+  end
+
+  def fwpmConnectionEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION0***, numEntriesReturned : UInt32*) : UInt32
+    C.FwpmConnectionEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+  end
+
+  def fwpmConnectionCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmConnectionCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+  end
+
+  def fwpmConnectionDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmConnectionDestroyEnumHandle0(engineHandle, enumHandle)
+  end
+
+  def fwpmConnectionGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.FwpmConnectionGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def fwpmConnectionSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.FwpmConnectionSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
+  def fwpmConnectionSubscribe0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION_CALLBACK0, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmConnectionSubscribe0(engineHandle, subscription, callback, context, eventsHandle)
+  end
+
+  def fwpmConnectionUnsubscribe0(engineHandle : Win32cr::Foundation::HANDLE, eventsHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmConnectionUnsubscribe0(engineHandle, eventsHandle)
+  end
+
+  def fwpmvSwitchEventSubscribe0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_VSWITCH_EVENT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_VSWITCH_EVENT_CALLBACK0, context : Void*, subscriptionHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.FwpmvSwitchEventSubscribe0(engineHandle, subscription, callback, context, subscriptionHandle)
+  end
+
+  def fwpmvSwitchEventUnsubscribe0(engineHandle : Win32cr::Foundation::HANDLE, subscriptionHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.FwpmvSwitchEventUnsubscribe0(engineHandle, subscriptionHandle)
+  end
+
+  def fwpmvSwitchEventsGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.FwpmvSwitchEventsGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+  end
+
+  def fwpmvSwitchEventsSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
+    C.FwpmvSwitchEventsSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+  end
+
   @[Link("fwpuclnt")]
   lib C
+    # :nodoc:
     fun FwpmFreeMemory0(p : Void**) : Void
 
+    # :nodoc:
     fun FwpmEngineOpen0(serverName : Win32cr::Foundation::PWSTR, authnService : UInt32, authIdentity : Win32cr::System::Rpc::SEC_WINNT_AUTH_IDENTITY_W*, session : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SESSION0*, engineHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmEngineClose0(engineHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmEngineGetOption0(engineHandle : Win32cr::Foundation::HANDLE, option : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_ENGINE_OPTION, value : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0**) : UInt32
 
+    # :nodoc:
     fun FwpmEngineSetOption0(engineHandle : Win32cr::Foundation::HANDLE, option : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_ENGINE_OPTION, newValue : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_VALUE0*) : UInt32
 
+    # :nodoc:
     fun FwpmEngineGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun FwpmEngineSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun FwpmSessionCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SESSION_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmSessionEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SESSION0***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmSessionDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmTransactionBegin0(engineHandle : Win32cr::Foundation::HANDLE, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun FwpmTransactionCommit0(engineHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmTransactionAbort0(engineHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmProviderAdd0(engineHandle : Win32cr::Foundation::HANDLE, provider : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER0*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
 
+    # :nodoc:
     fun FwpmProviderDeleteByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderGetByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, provider : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER0**) : UInt32
 
+    # :nodoc:
     fun FwpmProviderCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER0***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmProviderGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderSubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CHANGE_CALLBACK0, context : Void*, changeHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderUnsubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, changeHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmProviderSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextAdd0(engineHandle : Win32cr::Foundation::HANDLE, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT0*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR, id : UInt64*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextAdd1(engineHandle : Win32cr::Foundation::HANDLE, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT1*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR, id : UInt64*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextAdd2(engineHandle : Win32cr::Foundation::HANDLE, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT2*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR, id : UInt64*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextAdd3(engineHandle : Win32cr::Foundation::HANDLE, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT3_*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR, id : UInt64*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextDeleteById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextDeleteByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT0**) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextGetById1(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT1**) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextGetById2(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT2**) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextGetById3(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT3_**) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextGetByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT0**) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextGetByKey1(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT1**) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextGetByKey2(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT2**) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextGetByKey3(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, providerContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT3_**) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT0***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextEnum1(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT1***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextEnum2(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT2***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextEnum3(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT3_***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextSubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0, context : Void*, changeHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextUnsubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, changeHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmProviderContextSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmSubLayerAdd0(engineHandle : Win32cr::Foundation::HANDLE, subLayer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER0*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
 
+    # :nodoc:
     fun FwpmSubLayerDeleteByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun FwpmSubLayerGetByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, subLayer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER0**) : UInt32
 
+    # :nodoc:
     fun FwpmSubLayerCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmSubLayerEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER0***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmSubLayerDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmSubLayerGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun FwpmSubLayerSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun FwpmSubLayerSubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER_CHANGE_CALLBACK0, context : Void*, changeHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmSubLayerUnsubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, changeHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmSubLayerSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SUBLAYER_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmLayerGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt16, layer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_LAYER0**) : UInt32
 
+    # :nodoc:
     fun FwpmLayerGetByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, layer : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_LAYER0**) : UInt32
 
+    # :nodoc:
     fun FwpmLayerCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_LAYER_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmLayerEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_LAYER0***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmLayerDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmLayerGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun FwpmLayerSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun FwpmCalloutAdd0(engineHandle : Win32cr::Foundation::HANDLE, callout : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT0*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR, id : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmCalloutDeleteById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt32) : UInt32
 
+    # :nodoc:
     fun FwpmCalloutDeleteByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun FwpmCalloutGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt32, callout : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT0**) : UInt32
 
+    # :nodoc:
     fun FwpmCalloutGetByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, callout : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT0**) : UInt32
 
+    # :nodoc:
     fun FwpmCalloutCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmCalloutEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT0***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmCalloutDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmCalloutGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun FwpmCalloutSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun FwpmCalloutSubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT_CHANGE_CALLBACK0, context : Void*, changeHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmCalloutUnsubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, changeHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmCalloutSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CALLOUT_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmFilterAdd0(engineHandle : Win32cr::Foundation::HANDLE, filter : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR, id : UInt64*) : UInt32
 
+    # :nodoc:
     fun FwpmFilterDeleteById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64) : UInt32
 
+    # :nodoc:
     fun FwpmFilterDeleteByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun FwpmFilterGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, filter : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0**) : UInt32
 
+    # :nodoc:
     fun FwpmFilterGetByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, filter : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0**) : UInt32
 
+    # :nodoc:
     fun FwpmFilterCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmFilterEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER0***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmFilterDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmFilterGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun FwpmFilterSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun FwpmFilterSubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CHANGE_CALLBACK0, context : Void*, changeHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmFilterUnsubscribeChanges0(engineHandle : Win32cr::Foundation::HANDLE, changeHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmFilterSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmGetAppIdFromFileName0(fileName : Win32cr::Foundation::PWSTR, appId : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWP_BYTE_BLOB**) : UInt32
 
+    # :nodoc:
     fun FwpmIPsecTunnelAdd0(engineHandle : Win32cr::Foundation::HANDLE, flags : UInt32, mainModePolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT0*, tunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT0*, numFilterConditions : UInt32, filterConditions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
 
+    # :nodoc:
     fun FwpmIPsecTunnelAdd1(engineHandle : Win32cr::Foundation::HANDLE, flags : UInt32, mainModePolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT1*, tunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT1*, numFilterConditions : UInt32, filterConditions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*, keyModKey : LibC::GUID*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
 
+    # :nodoc:
     fun FwpmIPsecTunnelAdd2(engineHandle : Win32cr::Foundation::HANDLE, flags : UInt32, mainModePolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT2*, tunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT2*, numFilterConditions : UInt32, filterConditions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*, keyModKey : LibC::GUID*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
 
+    # :nodoc:
     fun FwpmIPsecTunnelAdd3(engineHandle : Win32cr::Foundation::HANDLE, flags : UInt32, mainModePolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT3_*, tunnelPolicy : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_PROVIDER_CONTEXT3_*, numFilterConditions : UInt32, filterConditions : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_FILTER_CONDITION0*, keyModKey : LibC::GUID*, sd : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
 
+    # :nodoc:
     fun FwpmIPsecTunnelDeleteByKey0(engineHandle : Win32cr::Foundation::HANDLE, key : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun IPsecGetStatistics0(engineHandle : Win32cr::Foundation::HANDLE, ipsecStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_STATISTICS0*) : UInt32
 
+    # :nodoc:
     fun IPsecGetStatistics1(engineHandle : Win32cr::Foundation::HANDLE, ipsecStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_STATISTICS1*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextCreate0(engineHandle : Win32cr::Foundation::HANDLE, outboundTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC0*, inboundFilterId : UInt64*, id : UInt64*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextCreate1(engineHandle : Win32cr::Foundation::HANDLE, outboundTraffic : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_TRAFFIC1*, virtualIfTunnelInfo : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_VIRTUAL_IF_TUNNEL_INFO0*, inboundFilterId : UInt64*, id : UInt64*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextDeleteById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, saContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT0**) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextGetById1(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, saContext : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT1**) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextGetSpi0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, getSpi : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_GETSPI0*, inboundSpi : UInt32*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextGetSpi1(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, getSpi : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_GETSPI1*, inboundSpi : UInt32*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextSetSpi0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, getSpi : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_GETSPI1*, inboundSpi : UInt32) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextAddInbound0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, inboundBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE0*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextAddOutbound0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, outboundBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE0*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextAddInbound1(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, inboundBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE1*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextAddOutbound1(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, outboundBundle : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_BUNDLE1*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextExpire0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextUpdate0(engineHandle : Win32cr::Foundation::HANDLE, flags : UInt64, newValues : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT1*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT0***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextEnum1(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT1***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextSubscribe0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_CALLBACK0, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextUnsubscribe0(engineHandle : Win32cr::Foundation::HANDLE, eventsHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun IPsecSaContextSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_CONTEXT_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
 
+    # :nodoc:
     fun IPsecSaCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun IPsecSaEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS0***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun IPsecSaEnum1(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_SA_DETAILS1***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun IPsecSaDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun IPsecSaDbGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun IPsecSaDbSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun IPsecDospGetStatistics0(engineHandle : Win32cr::Foundation::HANDLE, idpStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_STATISTICS0*) : UInt32
 
+    # :nodoc:
     fun IPsecDospStateCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_STATE_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun IPsecDospStateEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_DOSP_STATE0***, numEntries : UInt32*) : UInt32
 
+    # :nodoc:
     fun IPsecDospStateDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun IPsecDospGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun IPsecDospSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun IPsecKeyManagerAddAndRegister0(engineHandle : Win32cr::Foundation::HANDLE, keyManager : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER0*, keyManagerCallbacks : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER_CALLBACKS0*, keyMgmtHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun IPsecKeyManagerUnregisterAndDelete0(engineHandle : Win32cr::Foundation::HANDLE, keyMgmtHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun IPsecKeyManagersGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IPSEC_KEY_MANAGER0***, numEntries : UInt32*) : UInt32
 
+    # :nodoc:
     fun IPsecKeyManagerGetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, reserved : Void*, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun IPsecKeyManagerSetSecurityInfoByKey0(engineHandle : Win32cr::Foundation::HANDLE, reserved : Void*, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun IkeextGetStatistics0(engineHandle : Win32cr::Foundation::HANDLE, ikeextStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_STATISTICS0*) : UInt32
 
+    # :nodoc:
     fun IkeextGetStatistics1(engineHandle : Win32cr::Foundation::HANDLE, ikeextStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_STATISTICS1*) : UInt32
 
+    # :nodoc:
     fun IkeextSaDeleteById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64) : UInt32
 
+    # :nodoc:
     fun IkeextSaGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, sa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_DETAILS0**) : UInt32
 
+    # :nodoc:
     fun IkeextSaGetById1(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, saLookupContext : LibC::GUID*, sa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_DETAILS1**) : UInt32
 
+    # :nodoc:
     fun IkeextSaGetById2(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, saLookupContext : LibC::GUID*, sa : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_DETAILS2**) : UInt32
 
+    # :nodoc:
     fun IkeextSaCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun IkeextSaEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_DETAILS0***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun IkeextSaEnum1(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_DETAILS1***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun IkeextSaEnum2(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::IKEEXT_SA_DETAILS2***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun IkeextSaDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun IkeextSaDbGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun IkeextSaDbSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT0***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventEnum1(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT1***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventEnum2(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT2***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventEnum3(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT3***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventEnum4(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT4_***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventEnum5(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT5_***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventsGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventsSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventSubscribe0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CALLBACK0, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventUnsubscribe0(engineHandle : Win32cr::Foundation::HANDLE, eventsHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventSubscriptionsGet0(engineHandle : Win32cr::Foundation::HANDLE, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_SUBSCRIPTION0***, numEntries : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventSubscribe1(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CALLBACK1, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventSubscribe2(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CALLBACK2, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventSubscribe3(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CALLBACK3, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmNetEventSubscribe4(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_NET_EVENT_CALLBACK4, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmDynamicKeywordSubscribe0(flags : UInt32, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_DYNAMIC_KEYWORD_CALLBACK0, context : Void*, subscriptionHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmDynamicKeywordUnsubscribe0(subscriptionHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmSystemPortsGet0(engineHandle : Win32cr::Foundation::HANDLE, sysPorts : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SYSTEM_PORTS0**) : UInt32
 
+    # :nodoc:
     fun FwpmSystemPortsSubscribe0(engineHandle : Win32cr::Foundation::HANDLE, reserved : Void*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_SYSTEM_PORTS_CALLBACK0, context : Void*, sysPortsHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmSystemPortsUnsubscribe0(engineHandle : Win32cr::Foundation::HANDLE, sysPortsHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmConnectionGetById0(engineHandle : Win32cr::Foundation::HANDLE, id : UInt64, connection : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION0**) : UInt32
 
+    # :nodoc:
     fun FwpmConnectionEnum0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE, numEntriesRequested : UInt32, entries : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION0***, numEntriesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun FwpmConnectionCreateEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumTemplate : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION_ENUM_TEMPLATE0*, enumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmConnectionDestroyEnumHandle0(engineHandle : Win32cr::Foundation::HANDLE, enumHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmConnectionGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun FwpmConnectionSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun FwpmConnectionSubscribe0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_CONNECTION_CALLBACK0, context : Void*, eventsHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmConnectionUnsubscribe0(engineHandle : Win32cr::Foundation::HANDLE, eventsHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmvSwitchEventSubscribe0(engineHandle : Win32cr::Foundation::HANDLE, subscription : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_VSWITCH_EVENT_SUBSCRIPTION0*, callback : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_VSWITCH_EVENT_CALLBACK0, context : Void*, subscriptionHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun FwpmvSwitchEventUnsubscribe0(engineHandle : Win32cr::Foundation::HANDLE, subscriptionHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FwpmvSwitchEventsGetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Foundation::PSID*, sidGroup : Win32cr::Foundation::PSID*, dacl : Win32cr::Security::ACL**, sacl : Win32cr::Security::ACL**, securityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun FwpmvSwitchEventsSetSecurityInfo0(engineHandle : Win32cr::Foundation::HANDLE, securityInfo : UInt32, sidOwner : Win32cr::Security::SID*, sidGroup : Win32cr::Security::SID*, dacl : Win32cr::Security::ACL*, sacl : Win32cr::Security::ACL*) : UInt32
 
   end

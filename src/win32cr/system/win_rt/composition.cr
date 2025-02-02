@@ -4,6 +4,7 @@ require "./../../ui/input/pointer.cr"
 require "./../win_rt.cr"
 
 module Win32cr::System::WinRT::Composition
+  extend self
 
 
   @[Extern]

@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::Storage::ProjectedFileSystem
+  extend self
   alias PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT = LibC::IntPtrT
   alias PRJ_DIR_ENTRY_BUFFER_HANDLE = LibC::IntPtrT
   alias PRJ_START_DIRECTORY_ENUMERATION_CB = Proc(Win32cr::Storage::ProjectedFileSystem::PRJ_CALLBACK_DATA*, LibC::GUID*, Win32cr::Foundation::HRESULT)
@@ -319,44 +320,139 @@ module Win32cr::Storage::ProjectedFileSystem
     end
   end
 
+  def prjStartVirtualizing(virtualizationRootPath : Win32cr::Foundation::PWSTR, callbacks : Win32cr::Storage::ProjectedFileSystem::PRJ_CALLBACKS*, instanceContext : Void*, options : Win32cr::Storage::ProjectedFileSystem::PRJ_STARTVIRTUALIZING_OPTIONS*, namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT*) : Win32cr::Foundation::HRESULT
+    C.PrjStartVirtualizing(virtualizationRootPath, callbacks, instanceContext, options, namespaceVirtualizationContext)
+  end
+
+  def prjStopVirtualizing(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT) : Void
+    C.PrjStopVirtualizing(namespaceVirtualizationContext)
+  end
+
+  def prjClearNegativePathCache(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, totalEntryNumber : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PrjClearNegativePathCache(namespaceVirtualizationContext, totalEntryNumber)
+  end
+
+  def prjGetVirtualizationInstanceInfo(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, virtualizationInstanceInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_VIRTUALIZATION_INSTANCE_INFO*) : Win32cr::Foundation::HRESULT
+    C.PrjGetVirtualizationInstanceInfo(namespaceVirtualizationContext, virtualizationInstanceInfo)
+  end
+
+  def prjMarkDirectoryAsPlaceholder(rootPathName : Win32cr::Foundation::PWSTR, targetPathName : Win32cr::Foundation::PWSTR, versionInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_PLACEHOLDER_VERSION_INFO*, virtualizationInstanceID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.PrjMarkDirectoryAsPlaceholder(rootPathName, targetPathName, versionInfo, virtualizationInstanceID)
+  end
+
+  def prjWritePlaceholderInfo(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName : Win32cr::Foundation::PWSTR, placeholderInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_PLACEHOLDER_INFO*, placeholderInfoSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.PrjWritePlaceholderInfo(namespaceVirtualizationContext, destinationFileName, placeholderInfo, placeholderInfoSize)
+  end
+
+  def prjWritePlaceholderInfo2(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName : Win32cr::Foundation::PWSTR, placeholderInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_PLACEHOLDER_INFO*, placeholderInfoSize : UInt32, extended_info : Win32cr::Storage::ProjectedFileSystem::PRJ_EXTENDED_INFO*) : Win32cr::Foundation::HRESULT
+    C.PrjWritePlaceholderInfo2(namespaceVirtualizationContext, destinationFileName, placeholderInfo, placeholderInfoSize, extended_info)
+  end
+
+  def prjUpdateFileIfNeeded(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName : Win32cr::Foundation::PWSTR, placeholderInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_PLACEHOLDER_INFO*, placeholderInfoSize : UInt32, updateFlags : Win32cr::Storage::ProjectedFileSystem::PRJ_UPDATE_TYPES, failureReason : Win32cr::Storage::ProjectedFileSystem::PRJ_UPDATE_FAILURE_CAUSES*) : Win32cr::Foundation::HRESULT
+    C.PrjUpdateFileIfNeeded(namespaceVirtualizationContext, destinationFileName, placeholderInfo, placeholderInfoSize, updateFlags, failureReason)
+  end
+
+  def prjDeleteFile(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName : Win32cr::Foundation::PWSTR, updateFlags : Win32cr::Storage::ProjectedFileSystem::PRJ_UPDATE_TYPES, failureReason : Win32cr::Storage::ProjectedFileSystem::PRJ_UPDATE_FAILURE_CAUSES*) : Win32cr::Foundation::HRESULT
+    C.PrjDeleteFile(namespaceVirtualizationContext, destinationFileName, updateFlags, failureReason)
+  end
+
+  def prjWriteFileData(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, dataStreamId : LibC::GUID*, buffer : Void*, byteOffset : UInt64, length : UInt32) : Win32cr::Foundation::HRESULT
+    C.PrjWriteFileData(namespaceVirtualizationContext, dataStreamId, buffer, byteOffset, length)
+  end
+
+  def prjGetOnDiskFileState(destinationFileName : Win32cr::Foundation::PWSTR, fileState : Win32cr::Storage::ProjectedFileSystem::PRJ_FILE_STATE*) : Win32cr::Foundation::HRESULT
+    C.PrjGetOnDiskFileState(destinationFileName, fileState)
+  end
+
+  def prjAllocateAlignedBuffer(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, size : LibC::UIntPtrT) : Void*
+    C.PrjAllocateAlignedBuffer(namespaceVirtualizationContext, size)
+  end
+
+  def prjFreeAlignedBuffer(buffer : Void*) : Void
+    C.PrjFreeAlignedBuffer(buffer)
+  end
+
+  def prjCompleteCommand(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, commandId : Int32, completionResult : Win32cr::Foundation::HRESULT, extendedParameters : Win32cr::Storage::ProjectedFileSystem::PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS*) : Win32cr::Foundation::HRESULT
+    C.PrjCompleteCommand(namespaceVirtualizationContext, commandId, completionResult, extendedParameters)
+  end
+
+  def prjFillDirEntryBuffer(fileName : Win32cr::Foundation::PWSTR, fileBasicInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_FILE_BASIC_INFO*, dirEntryBufferHandle : Win32cr::Storage::ProjectedFileSystem::PRJ_DIR_ENTRY_BUFFER_HANDLE) : Win32cr::Foundation::HRESULT
+    C.PrjFillDirEntryBuffer(fileName, fileBasicInfo, dirEntryBufferHandle)
+  end
+
+  def prjFillDirEntryBuffer2(dirEntryBufferHandle : Win32cr::Storage::ProjectedFileSystem::PRJ_DIR_ENTRY_BUFFER_HANDLE, fileName : Win32cr::Foundation::PWSTR, fileBasicInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_FILE_BASIC_INFO*, extendedInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_EXTENDED_INFO*) : Win32cr::Foundation::HRESULT
+    C.PrjFillDirEntryBuffer2(dirEntryBufferHandle, fileName, fileBasicInfo, extendedInfo)
+  end
+
+  def prjFileNameMatch(fileNameToCheck : Win32cr::Foundation::PWSTR, pattern : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOLEAN
+    C.PrjFileNameMatch(fileNameToCheck, pattern)
+  end
+
+  def prjFileNameCompare(fileName1 : Win32cr::Foundation::PWSTR, fileName2 : Win32cr::Foundation::PWSTR) : Int32
+    C.PrjFileNameCompare(fileName1, fileName2)
+  end
+
+  def prjDoesNameContainWildCards(fileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOLEAN
+    C.PrjDoesNameContainWildCards(fileName)
+  end
+
   @[Link("projectedfslib")]
   lib C
+    # :nodoc:
     fun PrjStartVirtualizing(virtualizationRootPath : Win32cr::Foundation::PWSTR, callbacks : Win32cr::Storage::ProjectedFileSystem::PRJ_CALLBACKS*, instanceContext : Void*, options : Win32cr::Storage::ProjectedFileSystem::PRJ_STARTVIRTUALIZING_OPTIONS*, namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrjStopVirtualizing(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT) : Void
 
+    # :nodoc:
     fun PrjClearNegativePathCache(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, totalEntryNumber : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrjGetVirtualizationInstanceInfo(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, virtualizationInstanceInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_VIRTUALIZATION_INSTANCE_INFO*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrjMarkDirectoryAsPlaceholder(rootPathName : Win32cr::Foundation::PWSTR, targetPathName : Win32cr::Foundation::PWSTR, versionInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_PLACEHOLDER_VERSION_INFO*, virtualizationInstanceID : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrjWritePlaceholderInfo(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName : Win32cr::Foundation::PWSTR, placeholderInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_PLACEHOLDER_INFO*, placeholderInfoSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrjWritePlaceholderInfo2(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName : Win32cr::Foundation::PWSTR, placeholderInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_PLACEHOLDER_INFO*, placeholderInfoSize : UInt32, extended_info : Win32cr::Storage::ProjectedFileSystem::PRJ_EXTENDED_INFO*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrjUpdateFileIfNeeded(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName : Win32cr::Foundation::PWSTR, placeholderInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_PLACEHOLDER_INFO*, placeholderInfoSize : UInt32, updateFlags : Win32cr::Storage::ProjectedFileSystem::PRJ_UPDATE_TYPES, failureReason : Win32cr::Storage::ProjectedFileSystem::PRJ_UPDATE_FAILURE_CAUSES*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrjDeleteFile(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName : Win32cr::Foundation::PWSTR, updateFlags : Win32cr::Storage::ProjectedFileSystem::PRJ_UPDATE_TYPES, failureReason : Win32cr::Storage::ProjectedFileSystem::PRJ_UPDATE_FAILURE_CAUSES*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrjWriteFileData(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, dataStreamId : LibC::GUID*, buffer : Void*, byteOffset : UInt64, length : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrjGetOnDiskFileState(destinationFileName : Win32cr::Foundation::PWSTR, fileState : Win32cr::Storage::ProjectedFileSystem::PRJ_FILE_STATE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrjAllocateAlignedBuffer(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, size : LibC::UIntPtrT) : Void*
 
+    # :nodoc:
     fun PrjFreeAlignedBuffer(buffer : Void*) : Void
 
+    # :nodoc:
     fun PrjCompleteCommand(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, commandId : Int32, completionResult : Win32cr::Foundation::HRESULT, extendedParameters : Win32cr::Storage::ProjectedFileSystem::PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrjFillDirEntryBuffer(fileName : Win32cr::Foundation::PWSTR, fileBasicInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_FILE_BASIC_INFO*, dirEntryBufferHandle : Win32cr::Storage::ProjectedFileSystem::PRJ_DIR_ENTRY_BUFFER_HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrjFillDirEntryBuffer2(dirEntryBufferHandle : Win32cr::Storage::ProjectedFileSystem::PRJ_DIR_ENTRY_BUFFER_HANDLE, fileName : Win32cr::Foundation::PWSTR, fileBasicInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_FILE_BASIC_INFO*, extendedInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_EXTENDED_INFO*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrjFileNameMatch(fileNameToCheck : Win32cr::Foundation::PWSTR, pattern : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun PrjFileNameCompare(fileName1 : Win32cr::Foundation::PWSTR, fileName2 : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun PrjDoesNameContainWildCards(fileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOLEAN
 
   end

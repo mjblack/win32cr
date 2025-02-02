@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::System::Restore
+  extend self
   MIN_EVENT = 100_u32
   BEGIN_NESTED_SYSTEM_CHANGE_NORP = 104_u32
   MAX_EVENT = 104_u32
@@ -76,10 +77,20 @@ module Win32cr::System::Restore
     end
   end
 
+  def sRSetRestorePointA(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOA*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
+    C.SRSetRestorePointA(pRestorePtSpec, pSMgrStatus)
+  end
+
+  def sRSetRestorePointW(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOW*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
+    C.SRSetRestorePointW(pRestorePtSpec, pSMgrStatus)
+  end
+
   @[Link("sfc")]
   lib C
+    # :nodoc:
     fun SRSetRestorePointA(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOA*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SRSetRestorePointW(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOW*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
 
   end

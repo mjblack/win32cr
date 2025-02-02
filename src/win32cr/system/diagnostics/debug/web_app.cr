@@ -4,6 +4,7 @@ require "./../../../web/ms_html.cr"
 require "./../debug.cr"
 
 module Win32cr::System::Diagnostics::Debug::WebApp
+  extend self
   alias RegisterAuthoringClientFunctionType = Proc(Void*, Void*, Win32cr::Foundation::HRESULT)
 
   alias UnregisterAuthoringClientFunctionType = Proc(Void*, Win32cr::Foundation::HRESULT)

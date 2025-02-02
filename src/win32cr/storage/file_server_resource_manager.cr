@@ -2,6 +2,7 @@ require "./../system/com.cr"
 require "./../foundation.cr"
 
 module Win32cr::Storage::FileServerResourceManager
+  extend self
   FSRM_DISPID_FEATURE_MASK = 251658240_u32
   FSRM_DISPID_INTERFACE_A_MASK = 15728640_u32
   FSRM_DISPID_INTERFACE_B_MASK = 983040_u32

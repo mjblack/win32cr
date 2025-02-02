@@ -5,6 +5,7 @@ require "./kernel.cr"
 require "./../security.cr"
 
 module Win32cr::System::Threading
+  extend self
   alias TimerQueueHandle = LibC::IntPtrT
   alias PTP_POOL = LibC::IntPtrT
   alias NamespaceHandle = LibC::IntPtrT
@@ -874,6 +875,1198 @@ module Win32cr::System::Threading
     end
   end
 
+  def getProcessWorkingSetSize(hProcess : Win32cr::Foundation::HANDLE, lpMinimumWorkingSetSize : LibC::UIntPtrT*, lpMaximumWorkingSetSize : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    C.GetProcessWorkingSetSize(hProcess, lpMinimumWorkingSetSize, lpMaximumWorkingSetSize)
+  end
+
+  def setProcessWorkingSetSize(hProcess : Win32cr::Foundation::HANDLE, dwMinimumWorkingSetSize : LibC::UIntPtrT, dwMaximumWorkingSetSize : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.SetProcessWorkingSetSize(hProcess, dwMinimumWorkingSetSize, dwMaximumWorkingSetSize)
+  end
+
+  def flsAlloc(lpCallback : Win32cr::System::Threading::PFLS_CALLBACK_FUNCTION) : UInt32
+    C.FlsAlloc(lpCallback)
+  end
+
+  def flsGetValue(dwFlsIndex : UInt32) : Void*
+    C.FlsGetValue(dwFlsIndex)
+  end
+
+  def flsSetValue(dwFlsIndex : UInt32, lpFlsData : Void*) : Win32cr::Foundation::BOOL
+    C.FlsSetValue(dwFlsIndex, lpFlsData)
+  end
+
+  def flsFree(dwFlsIndex : UInt32) : Win32cr::Foundation::BOOL
+    C.FlsFree(dwFlsIndex)
+  end
+
+  def isThreadAFiber : Win32cr::Foundation::BOOL
+    C.IsThreadAFiber
+  end
+
+  def initializeSRWLock(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
+    C.InitializeSRWLock(srw_lock)
+  end
+
+  def releaseSRWLockExclusive(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
+    C.ReleaseSRWLockExclusive(srw_lock)
+  end
+
+  def releaseSRWLockShared(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
+    C.ReleaseSRWLockShared(srw_lock)
+  end
+
+  def acquireSRWLockExclusive(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
+    C.AcquireSRWLockExclusive(srw_lock)
+  end
+
+  def acquireSRWLockShared(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
+    C.AcquireSRWLockShared(srw_lock)
+  end
+
+  def tryAcquireSRWLockExclusive(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Win32cr::Foundation::BOOLEAN
+    C.TryAcquireSRWLockExclusive(srw_lock)
+  end
+
+  def tryAcquireSRWLockShared(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Win32cr::Foundation::BOOLEAN
+    C.TryAcquireSRWLockShared(srw_lock)
+  end
+
+  def initializeCriticalSection(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Void
+    C.InitializeCriticalSection(lpCriticalSection)
+  end
+
+  #def enterCriticalSection(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Void
+    #C.EnterCriticalSection(lpCriticalSection)
+  #end
+
+  #def leaveCriticalSection(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Void
+    #C.LeaveCriticalSection(lpCriticalSection)
+  #end
+
+  #def initializeCriticalSectionAndSpinCount(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*, dwSpinCount : UInt32) : Win32cr::Foundation::BOOL
+    #C.InitializeCriticalSectionAndSpinCount(lpCriticalSection, dwSpinCount)
+  #end
+
+  def initializeCriticalSectionEx(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*, dwSpinCount : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.InitializeCriticalSectionEx(lpCriticalSection, dwSpinCount, flags)
+  end
+
+  def setCriticalSectionSpinCount(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*, dwSpinCount : UInt32) : UInt32
+    C.SetCriticalSectionSpinCount(lpCriticalSection, dwSpinCount)
+  end
+
+  #def tryEnterCriticalSection(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Win32cr::Foundation::BOOL
+    #C.TryEnterCriticalSection(lpCriticalSection)
+  #end
+
+  #def deleteCriticalSection(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Void
+    #C.DeleteCriticalSection(lpCriticalSection)
+  #end
+
+  def initOnceInitialize(init_once : Win32cr::System::Threading::RTL_RUN_ONCE*) : Void
+    C.InitOnceInitialize(init_once)
+  end
+
+  def initOnceExecuteOnce(init_once : Win32cr::System::Threading::RTL_RUN_ONCE*, init_fn : Win32cr::System::Threading::PINIT_ONCE_FN, parameter : Void*, context : Void**) : Win32cr::Foundation::BOOL
+    C.InitOnceExecuteOnce(init_once, init_fn, parameter, context)
+  end
+
+  def initOnceBeginInitialize(lpInitOnce : Win32cr::System::Threading::RTL_RUN_ONCE*, dwFlags : UInt32, fPending : Win32cr::Foundation::BOOL*, lpContext : Void**) : Win32cr::Foundation::BOOL
+    C.InitOnceBeginInitialize(lpInitOnce, dwFlags, fPending, lpContext)
+  end
+
+  def initOnceComplete(lpInitOnce : Win32cr::System::Threading::RTL_RUN_ONCE*, dwFlags : UInt32, lpContext : Void*) : Win32cr::Foundation::BOOL
+    C.InitOnceComplete(lpInitOnce, dwFlags, lpContext)
+  end
+
+  #def initializeConditionVariable(condition_variable : Win32cr::System::Threading::RTL_CONDITION_VARIABLE*) : Void
+    #C.InitializeConditionVariable(condition_variable)
+  #end
+
+  #def wakeConditionVariable(condition_variable : Win32cr::System::Threading::RTL_CONDITION_VARIABLE*) : Void
+    #C.WakeConditionVariable(condition_variable)
+  #end
+
+  #def wakeAllConditionVariable(condition_variable : Win32cr::System::Threading::RTL_CONDITION_VARIABLE*) : Void
+    #C.WakeAllConditionVariable(condition_variable)
+  #end
+
+  #def sleepConditionVariableCS(condition_variable : Win32cr::System::Threading::RTL_CONDITION_VARIABLE*, critical_section : Win32cr::System::Threading::RTL_CRITICAL_SECTION*, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
+    #C.SleepConditionVariableCS(condition_variable, critical_section, dwMilliseconds)
+  #end
+
+  def sleepConditionVariableSRW(condition_variable : Win32cr::System::Threading::RTL_CONDITION_VARIABLE*, srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*, dwMilliseconds : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SleepConditionVariableSRW(condition_variable, srw_lock, dwMilliseconds, flags)
+  end
+
+  def setEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.SetEvent(hEvent)
+  end
+
+  def resetEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.ResetEvent(hEvent)
+  end
+
+  def releaseSemaphore(hSemaphore : Win32cr::Foundation::HANDLE, lReleaseCount : Int32, lpPreviousCount : Int32*) : Win32cr::Foundation::BOOL
+    C.ReleaseSemaphore(hSemaphore, lReleaseCount, lpPreviousCount)
+  end
+
+  def releaseMutex(hMutex : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.ReleaseMutex(hMutex)
+  end
+
+  #def waitForSingleObject(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32) : UInt32
+    #C.WaitForSingleObject(hHandle, dwMilliseconds)
+  #end
+
+  def sleepEx(dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
+    C.SleepEx(dwMilliseconds, bAlertable)
+  end
+
+  def waitForSingleObjectEx(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
+    C.WaitForSingleObjectEx(hHandle, dwMilliseconds, bAlertable)
+  end
+
+  def waitForMultipleObjectsEx(nCount : UInt32, lpHandles : Win32cr::Foundation::HANDLE*, bWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
+    C.WaitForMultipleObjectsEx(nCount, lpHandles, bWaitAll, dwMilliseconds, bAlertable)
+  end
+
+  def createMutexA(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInitialOwner : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    C.CreateMutexA(lpMutexAttributes, bInitialOwner, lpName)
+  end
+
+  def createMutexW(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInitialOwner : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.CreateMutexW(lpMutexAttributes, bInitialOwner, lpName)
+  end
+
+  def openMutexW(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.OpenMutexW(dwDesiredAccess, bInheritHandle, lpName)
+  end
+
+  def createEventA(lpEventAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bManualReset : Win32cr::Foundation::BOOL, bInitialState : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    C.CreateEventA(lpEventAttributes, bManualReset, bInitialState, lpName)
+  end
+
+  def createEventW(lpEventAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bManualReset : Win32cr::Foundation::BOOL, bInitialState : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.CreateEventW(lpEventAttributes, bManualReset, bInitialState, lpName)
+  end
+
+  def openEventA(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    C.OpenEventA(dwDesiredAccess, bInheritHandle, lpName)
+  end
+
+  def openEventW(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.OpenEventW(dwDesiredAccess, bInheritHandle, lpName)
+  end
+
+  def openSemaphoreW(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.OpenSemaphoreW(dwDesiredAccess, bInheritHandle, lpName)
+  end
+
+  def openWaitableTimerW(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpTimerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.OpenWaitableTimerW(dwDesiredAccess, bInheritHandle, lpTimerName)
+  end
+
+  def setWaitableTimerEx(hTimer : Win32cr::Foundation::HANDLE, lpDueTime : Win32cr::Foundation::LARGE_INTEGER*, lPeriod : Int32, pfnCompletionRoutine : Win32cr::System::Threading::PTIMERAPCROUTINE, lpArgToCompletionRoutine : Void*, wake_context : Win32cr::System::Threading::REASON_CONTEXT*, tolerable_delay : UInt32) : Win32cr::Foundation::BOOL
+    C.SetWaitableTimerEx(hTimer, lpDueTime, lPeriod, pfnCompletionRoutine, lpArgToCompletionRoutine, wake_context, tolerable_delay)
+  end
+
+  #def setWaitableTimer(hTimer : Win32cr::Foundation::HANDLE, lpDueTime : Win32cr::Foundation::LARGE_INTEGER*, lPeriod : Int32, pfnCompletionRoutine : Win32cr::System::Threading::PTIMERAPCROUTINE, lpArgToCompletionRoutine : Void*, fResume : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    #C.SetWaitableTimer(hTimer, lpDueTime, lPeriod, pfnCompletionRoutine, lpArgToCompletionRoutine, fResume)
+  #end
+
+  #def cancelWaitableTimer(hTimer : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    #C.CancelWaitableTimer(hTimer)
+  #end
+
+  def createMutexExA(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    C.CreateMutexExA(lpMutexAttributes, lpName, dwFlags, dwDesiredAccess)
+  end
+
+  def createMutexExW(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    C.CreateMutexExW(lpMutexAttributes, lpName, dwFlags, dwDesiredAccess)
+  end
+
+  def createEventExA(lpEventAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PSTR, dwFlags : Win32cr::System::Threading::CREATE_EVENT, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    C.CreateEventExA(lpEventAttributes, lpName, dwFlags, dwDesiredAccess)
+  end
+
+  def createEventExW(lpEventAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::Threading::CREATE_EVENT, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    C.CreateEventExW(lpEventAttributes, lpName, dwFlags, dwDesiredAccess)
+  end
+
+  def createSemaphoreExW(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    C.CreateSemaphoreExW(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName, dwFlags, dwDesiredAccess)
+  end
+
+  #def createWaitableTimerExW(lpTimerAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpTimerName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    #C.CreateWaitableTimerExW(lpTimerAttributes, lpTimerName, dwFlags, dwDesiredAccess)
+  #end
+
+  def enterSynchronizationBarrier(lpBarrier : Win32cr::System::Threading::RTL_BARRIER*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.EnterSynchronizationBarrier(lpBarrier, dwFlags)
+  end
+
+  def initializeSynchronizationBarrier(lpBarrier : Win32cr::System::Threading::RTL_BARRIER*, lTotalThreads : Int32, lSpinCount : Int32) : Win32cr::Foundation::BOOL
+    C.InitializeSynchronizationBarrier(lpBarrier, lTotalThreads, lSpinCount)
+  end
+
+  def deleteSynchronizationBarrier(lpBarrier : Win32cr::System::Threading::RTL_BARRIER*) : Win32cr::Foundation::BOOL
+    C.DeleteSynchronizationBarrier(lpBarrier)
+  end
+
+  #def sleep(dwMilliseconds : UInt32) : Void
+    #C.Sleep(dwMilliseconds)
+  #end
+
+  def waitOnAddress(address : Void*, compare_address : Void*, address_size : LibC::UIntPtrT, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
+    C.WaitOnAddress(address, compare_address, address_size, dwMilliseconds)
+  end
+
+  def wakeByAddressSingle(address : Void*) : Void
+    C.WakeByAddressSingle(address)
+  end
+
+  def wakeByAddressAll(address : Void*) : Void
+    C.WakeByAddressAll(address)
+  end
+
+  def waitForMultipleObjects(nCount : UInt32, lpHandles : Win32cr::Foundation::HANDLE*, bWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32) : UInt32
+    C.WaitForMultipleObjects(nCount, lpHandles, bWaitAll, dwMilliseconds)
+  end
+
+  def createSemaphoreW(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.CreateSemaphoreW(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName)
+  end
+
+  def createWaitableTimerW(lpTimerAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bManualReset : Win32cr::Foundation::BOOL, lpTimerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.CreateWaitableTimerW(lpTimerAttributes, bManualReset, lpTimerName)
+  end
+
+  def initializeSListHead(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Void
+    C.InitializeSListHead(list_head)
+  end
+
+  def interlockedPopEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    C.InterlockedPopEntrySList(list_head)
+  end
+
+  def interlockedPushEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list_entry : Win32cr::System::Kernel::SLIST_ENTRY*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    C.InterlockedPushEntrySList(list_head, list_entry)
+  end
+
+  def interlockedPushListSListEx(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list : Win32cr::System::Kernel::SLIST_ENTRY*, list_end : Win32cr::System::Kernel::SLIST_ENTRY*, count : UInt32) : Win32cr::System::Kernel::SLIST_ENTRY*
+    C.InterlockedPushListSListEx(list_head, list, list_end, count)
+  end
+
+  def interlockedFlushSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    C.InterlockedFlushSList(list_head)
+  end
+
+  def queryDepthSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : UInt16
+    C.QueryDepthSList(list_head)
+  end
+
+  #def queueUserAPC(pfnAPC : Win32cr::Foundation::PAPCFUNC, hThread : Win32cr::Foundation::HANDLE, dwData : LibC::UIntPtrT) : UInt32
+    #C.QueueUserAPC(pfnAPC, hThread, dwData)
+  #end
+
+  def queueUserAPC2(apc_routine : Win32cr::Foundation::PAPCFUNC, thread : Win32cr::Foundation::HANDLE, data : LibC::UIntPtrT, flags : Win32cr::System::Threading::QUEUE_USER_APC_FLAGS) : Win32cr::Foundation::BOOL
+    C.QueueUserAPC2(apc_routine, thread, data, flags)
+  end
+
+  #def getProcessTimes(hProcess : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpExitTime : Win32cr::Foundation::FILETIME*, lpKernelTime : Win32cr::Foundation::FILETIME*, lpUserTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    #C.GetProcessTimes(hProcess, lpCreationTime, lpExitTime, lpKernelTime, lpUserTime)
+  #end
+
+  #def getCurrentProcess : Win32cr::Foundation::HANDLE
+    #C.GetCurrentProcess
+  #end
+
+  #def getCurrentProcessId : UInt32
+    #C.GetCurrentProcessId
+  #end
+
+  #def exitProcess(uExitCode : UInt32) : Void
+    #C.ExitProcess(uExitCode)
+  #end
+
+  #def terminateProcess(hProcess : Win32cr::Foundation::HANDLE, uExitCode : UInt32) : Win32cr::Foundation::BOOL
+    #C.TerminateProcess(hProcess, uExitCode)
+  #end
+
+  #def getExitCodeProcess(hProcess : Win32cr::Foundation::HANDLE, lpExitCode : UInt32*) : Win32cr::Foundation::BOOL
+    #C.GetExitCodeProcess(hProcess, lpExitCode)
+  #end
+
+  #def switchToThread : Win32cr::Foundation::BOOL
+    #C.SwitchToThread
+  #end
+
+  def createThread(lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, lpParameter : Void*, dwCreationFlags : Win32cr::System::Threading::THREAD_CREATION_FLAGS, lpThreadId : UInt32*) : Win32cr::Foundation::HANDLE
+    C.CreateThread(lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpThreadId)
+  end
+
+  def createRemoteThread(hProcess : Win32cr::Foundation::HANDLE, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, lpParameter : Void*, dwCreationFlags : UInt32, lpThreadId : UInt32*) : Win32cr::Foundation::HANDLE
+    C.CreateRemoteThread(hProcess, lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpThreadId)
+  end
+
+  #def getCurrentThread : Win32cr::Foundation::HANDLE
+    #C.GetCurrentThread
+  #end
+
+  #def getCurrentThreadId : UInt32
+    #C.GetCurrentThreadId
+  #end
+
+  def openThread(dwDesiredAccess : Win32cr::System::Threading::THREAD_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, dwThreadId : UInt32) : Win32cr::Foundation::HANDLE
+    C.OpenThread(dwDesiredAccess, bInheritHandle, dwThreadId)
+  end
+
+  def setThreadPriority(hThread : Win32cr::Foundation::HANDLE, nPriority : Win32cr::System::Threading::THREAD_PRIORITY) : Win32cr::Foundation::BOOL
+    C.SetThreadPriority(hThread, nPriority)
+  end
+
+  def setThreadPriorityBoost(hThread : Win32cr::Foundation::HANDLE, bDisablePriorityBoost : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SetThreadPriorityBoost(hThread, bDisablePriorityBoost)
+  end
+
+  def getThreadPriorityBoost(hThread : Win32cr::Foundation::HANDLE, pDisablePriorityBoost : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.GetThreadPriorityBoost(hThread, pDisablePriorityBoost)
+  end
+
+  def getThreadPriority(hThread : Win32cr::Foundation::HANDLE) : Int32
+    C.GetThreadPriority(hThread)
+  end
+
+  def exitThread(dwExitCode : UInt32) : Void
+    C.ExitThread(dwExitCode)
+  end
+
+  def terminateThread(hThread : Win32cr::Foundation::HANDLE, dwExitCode : UInt32) : Win32cr::Foundation::BOOL
+    C.TerminateThread(hThread, dwExitCode)
+  end
+
+  def getExitCodeThread(hThread : Win32cr::Foundation::HANDLE, lpExitCode : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetExitCodeThread(hThread, lpExitCode)
+  end
+
+  #def suspendThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
+    #C.SuspendThread(hThread)
+  #end
+
+  #def resumeThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
+    #C.ResumeThread(hThread)
+  #end
+
+  #def tlsAlloc : UInt32
+    #C.TlsAlloc
+  #end
+
+  #def tlsGetValue(dwTlsIndex : UInt32) : Void*
+    #C.TlsGetValue(dwTlsIndex)
+  #end
+
+  #def tlsSetValue(dwTlsIndex : UInt32, lpTlsValue : Void*) : Win32cr::Foundation::BOOL
+    #C.TlsSetValue(dwTlsIndex, lpTlsValue)
+  #end
+
+  def tlsFree(dwTlsIndex : UInt32) : Win32cr::Foundation::BOOL
+    C.TlsFree(dwTlsIndex)
+  end
+
+  def createProcessA(lpApplicationName : Win32cr::Foundation::PSTR, lpCommandLine : Win32cr::Foundation::PSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : Win32cr::System::Threading::PROCESS_CREATION_FLAGS, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOA*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.CreateProcessA(lpApplicationName, lpCommandLine, lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation)
+  end
+
+  #def createProcessW(lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : Win32cr::System::Threading::PROCESS_CREATION_FLAGS, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
+    #C.CreateProcessW(lpApplicationName, lpCommandLine, lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation)
+  #end
+
+  def setProcessShutdownParameters(dwLevel : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetProcessShutdownParameters(dwLevel, dwFlags)
+  end
+
+  def getProcessVersion(process_id : UInt32) : UInt32
+    C.GetProcessVersion(process_id)
+  end
+
+  def getStartupInfoW(lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*) : Void
+    C.GetStartupInfoW(lpStartupInfo)
+  end
+
+  def createProcessAsUserW(hToken : Win32cr::Foundation::HANDLE, lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : UInt32, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.CreateProcessAsUserW(hToken, lpApplicationName, lpCommandLine, lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation)
+  end
+
+  def setThreadToken(thread : Win32cr::Foundation::HANDLE*, token : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.SetThreadToken(thread, token)
+  end
+
+  def openProcessToken(process_handle : Win32cr::Foundation::HANDLE, desired_access : Win32cr::Security::TOKEN_ACCESS_MASK, token_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    C.OpenProcessToken(process_handle, desired_access, token_handle)
+  end
+
+  def openThreadToken(thread_handle : Win32cr::Foundation::HANDLE, desired_access : Win32cr::Security::TOKEN_ACCESS_MASK, open_as_self : Win32cr::Foundation::BOOL, token_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    C.OpenThreadToken(thread_handle, desired_access, open_as_self, token_handle)
+  end
+
+  def setPriorityClass(hProcess : Win32cr::Foundation::HANDLE, dwPriorityClass : Win32cr::System::Threading::PROCESS_CREATION_FLAGS) : Win32cr::Foundation::BOOL
+    C.SetPriorityClass(hProcess, dwPriorityClass)
+  end
+
+  def getPriorityClass(hProcess : Win32cr::Foundation::HANDLE) : UInt32
+    C.GetPriorityClass(hProcess)
+  end
+
+  #def setThreadStackGuarantee(stack_size_in_bytes : UInt32*) : Win32cr::Foundation::BOOL
+    #C.SetThreadStackGuarantee(stack_size_in_bytes)
+  #end
+
+  def getProcessId(process : Win32cr::Foundation::HANDLE) : UInt32
+    C.GetProcessId(process)
+  end
+
+  def getThreadId(thread : Win32cr::Foundation::HANDLE) : UInt32
+    C.GetThreadId(thread)
+  end
+
+  def flushProcessWriteBuffers : Void
+    C.FlushProcessWriteBuffers
+  end
+
+  def getProcessIdOfThread(thread : Win32cr::Foundation::HANDLE) : UInt32
+    C.GetProcessIdOfThread(thread)
+  end
+
+  def initializeProcThreadAttributeList(lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST, dwAttributeCount : UInt32, dwFlags : UInt32, lpSize : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    C.InitializeProcThreadAttributeList(lpAttributeList, dwAttributeCount, dwFlags, lpSize)
+  end
+
+  def deleteProcThreadAttributeList(lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST) : Void
+    C.DeleteProcThreadAttributeList(lpAttributeList)
+  end
+
+  def updateProcThreadAttribute(lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST, dwFlags : UInt32, attribute : LibC::UIntPtrT, lpValue : Void*, cbSize : LibC::UIntPtrT, lpPreviousValue : Void*, lpReturnSize : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    C.UpdateProcThreadAttribute(lpAttributeList, dwFlags, attribute, lpValue, cbSize, lpPreviousValue, lpReturnSize)
+  end
+
+  def setProcessDynamicEHContinuationTargets(process : Win32cr::Foundation::HANDLE, number_of_targets : UInt16, targets : Win32cr::System::Threading::PROCESS_DYNAMIC_EH_CONTINUATION_TARGET*) : Win32cr::Foundation::BOOL
+    C.SetProcessDynamicEHContinuationTargets(process, number_of_targets, targets)
+  end
+
+  def setProcessDynamicEnforcedCetCompatibleRanges(process : Win32cr::Foundation::HANDLE, number_of_ranges : UInt16, ranges : Win32cr::System::Threading::PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE*) : Win32cr::Foundation::BOOL
+    C.SetProcessDynamicEnforcedCetCompatibleRanges(process, number_of_ranges, ranges)
+  end
+
+  def setProcessAffinityUpdateMode(hProcess : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Threading::PROCESS_AFFINITY_AUTO_UPDATE_FLAGS) : Win32cr::Foundation::BOOL
+    C.SetProcessAffinityUpdateMode(hProcess, dwFlags)
+  end
+
+  def queryProcessAffinityUpdateMode(hProcess : Win32cr::Foundation::HANDLE, lpdwFlags : Win32cr::System::Threading::PROCESS_AFFINITY_AUTO_UPDATE_FLAGS*) : Win32cr::Foundation::BOOL
+    C.QueryProcessAffinityUpdateMode(hProcess, lpdwFlags)
+  end
+
+  def createRemoteThreadEx(hProcess : Win32cr::Foundation::HANDLE, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, lpParameter : Void*, dwCreationFlags : UInt32, lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST, lpThreadId : UInt32*) : Win32cr::Foundation::HANDLE
+    C.CreateRemoteThreadEx(hProcess, lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpAttributeList, lpThreadId)
+  end
+
+  #def getCurrentThreadStackLimits(low_limit : LibC::UIntPtrT*, high_limit : LibC::UIntPtrT*) : Void
+    #C.GetCurrentThreadStackLimits(low_limit, high_limit)
+  #end
+
+  def getProcessMitigationPolicy(hProcess : Win32cr::Foundation::HANDLE, mitigation_policy : Win32cr::System::Threading::PROCESS_MITIGATION_POLICY, lpBuffer : Void*, dwLength : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.GetProcessMitigationPolicy(hProcess, mitigation_policy, lpBuffer, dwLength)
+  end
+
+  def setProcessMitigationPolicy(mitigation_policy : Win32cr::System::Threading::PROCESS_MITIGATION_POLICY, lpBuffer : Void*, dwLength : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.SetProcessMitigationPolicy(mitigation_policy, lpBuffer, dwLength)
+  end
+
+  def getThreadTimes(hThread : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpExitTime : Win32cr::Foundation::FILETIME*, lpKernelTime : Win32cr::Foundation::FILETIME*, lpUserTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    C.GetThreadTimes(hThread, lpCreationTime, lpExitTime, lpKernelTime, lpUserTime)
+  end
+
+  #def openProcess(dwDesiredAccess : Win32cr::System::Threading::PROCESS_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, dwProcessId : UInt32) : Win32cr::Foundation::HANDLE
+    #C.OpenProcess(dwDesiredAccess, bInheritHandle, dwProcessId)
+  #end
+
+  def isProcessorFeaturePresent(processor_feature : Win32cr::System::Threading::PROCESSOR_FEATURE_ID) : Win32cr::Foundation::BOOL
+    C.IsProcessorFeaturePresent(processor_feature)
+  end
+
+  def getProcessHandleCount(hProcess : Win32cr::Foundation::HANDLE, pdwHandleCount : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetProcessHandleCount(hProcess, pdwHandleCount)
+  end
+
+  def getCurrentProcessorNumber : UInt32
+    C.GetCurrentProcessorNumber
+  end
+
+  def setThreadIdealProcessorEx(hThread : Win32cr::Foundation::HANDLE, lpIdealProcessor : Win32cr::System::Kernel::PROCESSOR_NUMBER*, lpPreviousIdealProcessor : Win32cr::System::Kernel::PROCESSOR_NUMBER*) : Win32cr::Foundation::BOOL
+    C.SetThreadIdealProcessorEx(hThread, lpIdealProcessor, lpPreviousIdealProcessor)
+  end
+
+  def getThreadIdealProcessorEx(hThread : Win32cr::Foundation::HANDLE, lpIdealProcessor : Win32cr::System::Kernel::PROCESSOR_NUMBER*) : Win32cr::Foundation::BOOL
+    C.GetThreadIdealProcessorEx(hThread, lpIdealProcessor)
+  end
+
+  def getCurrentProcessorNumberEx(proc_number : Win32cr::System::Kernel::PROCESSOR_NUMBER*) : Void
+    C.GetCurrentProcessorNumberEx(proc_number)
+  end
+
+  def getProcessPriorityBoost(hProcess : Win32cr::Foundation::HANDLE, pDisablePriorityBoost : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.GetProcessPriorityBoost(hProcess, pDisablePriorityBoost)
+  end
+
+  def setProcessPriorityBoost(hProcess : Win32cr::Foundation::HANDLE, bDisablePriorityBoost : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SetProcessPriorityBoost(hProcess, bDisablePriorityBoost)
+  end
+
+  def getThreadIOPendingFlag(hThread : Win32cr::Foundation::HANDLE, lpIOIsPending : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.GetThreadIOPendingFlag(hThread, lpIOIsPending)
+  end
+
+  def getSystemTimes(lpIdleTime : Win32cr::Foundation::FILETIME*, lpKernelTime : Win32cr::Foundation::FILETIME*, lpUserTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    C.GetSystemTimes(lpIdleTime, lpKernelTime, lpUserTime)
+  end
+
+  def getThreadInformation(hThread : Win32cr::Foundation::HANDLE, thread_information_class : Win32cr::System::Threading::THREAD_INFORMATION_CLASS, thread_information : Void*, thread_information_size : UInt32) : Win32cr::Foundation::BOOL
+    C.GetThreadInformation(hThread, thread_information_class, thread_information, thread_information_size)
+  end
+
+  def setThreadInformation(hThread : Win32cr::Foundation::HANDLE, thread_information_class : Win32cr::System::Threading::THREAD_INFORMATION_CLASS, thread_information : Void*, thread_information_size : UInt32) : Win32cr::Foundation::BOOL
+    C.SetThreadInformation(hThread, thread_information_class, thread_information, thread_information_size)
+  end
+
+  def isProcessCritical(hProcess : Win32cr::Foundation::HANDLE, critical : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.IsProcessCritical(hProcess, critical)
+  end
+
+  def setProtectedPolicy(policy_guid : LibC::GUID*, policy_value : LibC::UIntPtrT, old_policy_value : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    C.SetProtectedPolicy(policy_guid, policy_value, old_policy_value)
+  end
+
+  def queryProtectedPolicy(policy_guid : LibC::GUID*, policy_value : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    C.QueryProtectedPolicy(policy_guid, policy_value)
+  end
+
+  def setThreadIdealProcessor(hThread : Win32cr::Foundation::HANDLE, dwIdealProcessor : UInt32) : UInt32
+    C.SetThreadIdealProcessor(hThread, dwIdealProcessor)
+  end
+
+  def setProcessInformation(hProcess : Win32cr::Foundation::HANDLE, process_information_class : Win32cr::System::Threading::PROCESS_INFORMATION_CLASS, process_information : Void*, process_information_size : UInt32) : Win32cr::Foundation::BOOL
+    C.SetProcessInformation(hProcess, process_information_class, process_information, process_information_size)
+  end
+
+  def getProcessInformation(hProcess : Win32cr::Foundation::HANDLE, process_information_class : Win32cr::System::Threading::PROCESS_INFORMATION_CLASS, process_information : Void*, process_information_size : UInt32) : Win32cr::Foundation::BOOL
+    C.GetProcessInformation(hProcess, process_information_class, process_information, process_information_size)
+  end
+
+  def getProcessDefaultCpuSets(process : Win32cr::Foundation::HANDLE, cpu_set_ids : UInt32*, cpu_set_id_count : UInt32, required_id_count : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetProcessDefaultCpuSets(process, cpu_set_ids, cpu_set_id_count, required_id_count)
+  end
+
+  def setProcessDefaultCpuSets(process : Win32cr::Foundation::HANDLE, cpu_set_ids : UInt32*, cpu_set_id_count : UInt32) : Win32cr::Foundation::BOOL
+    C.SetProcessDefaultCpuSets(process, cpu_set_ids, cpu_set_id_count)
+  end
+
+  def getThreadSelectedCpuSets(thread : Win32cr::Foundation::HANDLE, cpu_set_ids : UInt32*, cpu_set_id_count : UInt32, required_id_count : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetThreadSelectedCpuSets(thread, cpu_set_ids, cpu_set_id_count, required_id_count)
+  end
+
+  def setThreadSelectedCpuSets(thread : Win32cr::Foundation::HANDLE, cpu_set_ids : UInt32*, cpu_set_id_count : UInt32) : Win32cr::Foundation::BOOL
+    C.SetThreadSelectedCpuSets(thread, cpu_set_ids, cpu_set_id_count)
+  end
+
+  def createProcessAsUserA(hToken : Win32cr::Foundation::HANDLE, lpApplicationName : Win32cr::Foundation::PSTR, lpCommandLine : Win32cr::Foundation::PSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : UInt32, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOA*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.CreateProcessAsUserA(hToken, lpApplicationName, lpCommandLine, lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation)
+  end
+
+  def getProcessShutdownParameters(lpdwLevel : UInt32*, lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetProcessShutdownParameters(lpdwLevel, lpdwFlags)
+  end
+
+  def getProcessDefaultCpuSetMasks(process : Win32cr::Foundation::HANDLE, cpu_set_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, cpu_set_mask_count : UInt16, required_mask_count : UInt16*) : Win32cr::Foundation::BOOL
+    C.GetProcessDefaultCpuSetMasks(process, cpu_set_masks, cpu_set_mask_count, required_mask_count)
+  end
+
+  def setProcessDefaultCpuSetMasks(process : Win32cr::Foundation::HANDLE, cpu_set_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, cpu_set_mask_count : UInt16) : Win32cr::Foundation::BOOL
+    C.SetProcessDefaultCpuSetMasks(process, cpu_set_masks, cpu_set_mask_count)
+  end
+
+  def getThreadSelectedCpuSetMasks(thread : Win32cr::Foundation::HANDLE, cpu_set_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, cpu_set_mask_count : UInt16, required_mask_count : UInt16*) : Win32cr::Foundation::BOOL
+    C.GetThreadSelectedCpuSetMasks(thread, cpu_set_masks, cpu_set_mask_count, required_mask_count)
+  end
+
+  def setThreadSelectedCpuSetMasks(thread : Win32cr::Foundation::HANDLE, cpu_set_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, cpu_set_mask_count : UInt16) : Win32cr::Foundation::BOOL
+    C.SetThreadSelectedCpuSetMasks(thread, cpu_set_masks, cpu_set_mask_count)
+  end
+
+  def getMachineTypeAttributes(machine : UInt16, machine_type_attributes : Win32cr::System::Threading::MACHINE_ATTRIBUTES*) : Win32cr::Foundation::HRESULT
+    C.GetMachineTypeAttributes(machine, machine_type_attributes)
+  end
+
+  #def setThreadDescription(hThread : Win32cr::Foundation::HANDLE, lpThreadDescription : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    #C.SetThreadDescription(hThread, lpThreadDescription)
+  #end
+
+  def getThreadDescription(hThread : Win32cr::Foundation::HANDLE, ppszThreadDescription : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.GetThreadDescription(hThread, ppszThreadDescription)
+  end
+
+  def queueUserWorkItem(function : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, context : Void*, flags : Win32cr::System::Threading::WORKER_THREAD_FLAGS) : Win32cr::Foundation::BOOL
+    C.QueueUserWorkItem(function, context, flags)
+  end
+
+  def unregisterWaitEx(wait_handle : Win32cr::Foundation::HANDLE, completion_event : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.UnregisterWaitEx(wait_handle, completion_event)
+  end
+
+  def createTimerQueue : Win32cr::Foundation::HANDLE
+    C.CreateTimerQueue
+  end
+
+  def createTimerQueueTimer(phNewTimer : Win32cr::Foundation::HANDLE*, timer_queue : Win32cr::Foundation::HANDLE, callback : Win32cr::System::Threading::WAITORTIMERCALLBACK, parameter : Void*, due_time : UInt32, period : UInt32, flags : Win32cr::System::Threading::WORKER_THREAD_FLAGS) : Win32cr::Foundation::BOOL
+    C.CreateTimerQueueTimer(phNewTimer, timer_queue, callback, parameter, due_time, period, flags)
+  end
+
+  def changeTimerQueueTimer(timer_queue : Win32cr::Foundation::HANDLE, timer : Win32cr::Foundation::HANDLE, due_time : UInt32, period : UInt32) : Win32cr::Foundation::BOOL
+    C.ChangeTimerQueueTimer(timer_queue, timer, due_time, period)
+  end
+
+  def deleteTimerQueueTimer(timer_queue : Win32cr::Foundation::HANDLE, timer : Win32cr::Foundation::HANDLE, completion_event : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.DeleteTimerQueueTimer(timer_queue, timer, completion_event)
+  end
+
+  def deleteTimerQueue(timer_queue : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.DeleteTimerQueue(timer_queue)
+  end
+
+  def deleteTimerQueueEx(timer_queue : Win32cr::Foundation::HANDLE, completion_event : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.DeleteTimerQueueEx(timer_queue, completion_event)
+  end
+
+  def createThreadpool(reserved : Void*) : Win32cr::System::Threading::PTP_POOL
+    C.CreateThreadpool(reserved)
+  end
+
+  def setThreadpoolThreadMaximum(ptpp : Win32cr::System::Threading::PTP_POOL, cthrdMost : UInt32) : Void
+    C.SetThreadpoolThreadMaximum(ptpp, cthrdMost)
+  end
+
+  def setThreadpoolThreadMinimum(ptpp : Win32cr::System::Threading::PTP_POOL, cthrdMic : UInt32) : Win32cr::Foundation::BOOL
+    C.SetThreadpoolThreadMinimum(ptpp, cthrdMic)
+  end
+
+  def setThreadpoolStackInformation(ptpp : Win32cr::System::Threading::PTP_POOL, ptpsi : Win32cr::System::Threading::TP_POOL_STACK_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.SetThreadpoolStackInformation(ptpp, ptpsi)
+  end
+
+  def queryThreadpoolStackInformation(ptpp : Win32cr::System::Threading::PTP_POOL, ptpsi : Win32cr::System::Threading::TP_POOL_STACK_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.QueryThreadpoolStackInformation(ptpp, ptpsi)
+  end
+
+  def closeThreadpool(ptpp : Win32cr::System::Threading::PTP_POOL) : Void
+    C.CloseThreadpool(ptpp)
+  end
+
+  def createThreadpoolCleanupGroup : LibC::IntPtrT
+    C.CreateThreadpoolCleanupGroup
+  end
+
+  def closeThreadpoolCleanupGroupMembers(ptpcg : LibC::IntPtrT, fCancelPendingCallbacks : Win32cr::Foundation::BOOL, pvCleanupContext : Void*) : Void
+    C.CloseThreadpoolCleanupGroupMembers(ptpcg, fCancelPendingCallbacks, pvCleanupContext)
+  end
+
+  def closeThreadpoolCleanupGroup(ptpcg : LibC::IntPtrT) : Void
+    C.CloseThreadpoolCleanupGroup(ptpcg)
+  end
+
+  def setEventWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, evt : Win32cr::Foundation::HANDLE) : Void
+    C.SetEventWhenCallbackReturns(pci, evt)
+  end
+
+  def releaseSemaphoreWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, sem : Win32cr::Foundation::HANDLE, crel : UInt32) : Void
+    C.ReleaseSemaphoreWhenCallbackReturns(pci, sem, crel)
+  end
+
+  def releaseMutexWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, mut : Win32cr::Foundation::HANDLE) : Void
+    C.ReleaseMutexWhenCallbackReturns(pci, mut)
+  end
+
+  def leaveCriticalSectionWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, pcs : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Void
+    C.LeaveCriticalSectionWhenCallbackReturns(pci, pcs)
+  end
+
+  def freeLibraryWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, mod : Win32cr::Foundation::HINSTANCE) : Void
+    C.FreeLibraryWhenCallbackReturns(pci, mod)
+  end
+
+  def callbackMayRunLong(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*) : Win32cr::Foundation::BOOL
+    C.CallbackMayRunLong(pci)
+  end
+
+  def disassociateCurrentThreadFromCallback(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*) : Void
+    C.DisassociateCurrentThreadFromCallback(pci)
+  end
+
+  def trySubmitThreadpoolCallback(pfns : Win32cr::System::Threading::PTP_SIMPLE_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::Foundation::BOOL
+    C.TrySubmitThreadpoolCallback(pfns, pv, pcbe)
+  end
+
+  def createThreadpoolWork(pfnwk : Win32cr::System::Threading::PTP_WORK_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::System::Threading::TP_WORK*
+    C.CreateThreadpoolWork(pfnwk, pv, pcbe)
+  end
+
+  def submitThreadpoolWork(pwk : Win32cr::System::Threading::TP_WORK*) : Void
+    C.SubmitThreadpoolWork(pwk)
+  end
+
+  def waitForThreadpoolWorkCallbacks(pwk : Win32cr::System::Threading::TP_WORK*, fCancelPendingCallbacks : Win32cr::Foundation::BOOL) : Void
+    C.WaitForThreadpoolWorkCallbacks(pwk, fCancelPendingCallbacks)
+  end
+
+  def closeThreadpoolWork(pwk : Win32cr::System::Threading::TP_WORK*) : Void
+    C.CloseThreadpoolWork(pwk)
+  end
+
+  def createThreadpoolTimer(pfnti : Win32cr::System::Threading::PTP_TIMER_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::System::Threading::TP_TIMER*
+    C.CreateThreadpoolTimer(pfnti, pv, pcbe)
+  end
+
+  def setThreadpoolTimer(pti : Win32cr::System::Threading::TP_TIMER*, pftDueTime : Win32cr::Foundation::FILETIME*, msPeriod : UInt32, msWindowLength : UInt32) : Void
+    C.SetThreadpoolTimer(pti, pftDueTime, msPeriod, msWindowLength)
+  end
+
+  def isThreadpoolTimerSet(pti : Win32cr::System::Threading::TP_TIMER*) : Win32cr::Foundation::BOOL
+    C.IsThreadpoolTimerSet(pti)
+  end
+
+  def waitForThreadpoolTimerCallbacks(pti : Win32cr::System::Threading::TP_TIMER*, fCancelPendingCallbacks : Win32cr::Foundation::BOOL) : Void
+    C.WaitForThreadpoolTimerCallbacks(pti, fCancelPendingCallbacks)
+  end
+
+  def closeThreadpoolTimer(pti : Win32cr::System::Threading::TP_TIMER*) : Void
+    C.CloseThreadpoolTimer(pti)
+  end
+
+  def createThreadpoolWait(pfnwa : Win32cr::System::Threading::PTP_WAIT_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::System::Threading::TP_WAIT*
+    C.CreateThreadpoolWait(pfnwa, pv, pcbe)
+  end
+
+  def setThreadpoolWait(pwa : Win32cr::System::Threading::TP_WAIT*, h : Win32cr::Foundation::HANDLE, pftTimeout : Win32cr::Foundation::FILETIME*) : Void
+    C.SetThreadpoolWait(pwa, h, pftTimeout)
+  end
+
+  def waitForThreadpoolWaitCallbacks(pwa : Win32cr::System::Threading::TP_WAIT*, fCancelPendingCallbacks : Win32cr::Foundation::BOOL) : Void
+    C.WaitForThreadpoolWaitCallbacks(pwa, fCancelPendingCallbacks)
+  end
+
+  def closeThreadpoolWait(pwa : Win32cr::System::Threading::TP_WAIT*) : Void
+    C.CloseThreadpoolWait(pwa)
+  end
+
+  def createThreadpoolIo(fl : Win32cr::Foundation::HANDLE, pfnio : Win32cr::System::Threading::PTP_WIN32_IO_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::System::Threading::TP_IO*
+    C.CreateThreadpoolIo(fl, pfnio, pv, pcbe)
+  end
+
+  def startThreadpoolIo(pio : Win32cr::System::Threading::TP_IO*) : Void
+    C.StartThreadpoolIo(pio)
+  end
+
+  def cancelThreadpoolIo(pio : Win32cr::System::Threading::TP_IO*) : Void
+    C.CancelThreadpoolIo(pio)
+  end
+
+  def waitForThreadpoolIoCallbacks(pio : Win32cr::System::Threading::TP_IO*, fCancelPendingCallbacks : Win32cr::Foundation::BOOL) : Void
+    C.WaitForThreadpoolIoCallbacks(pio, fCancelPendingCallbacks)
+  end
+
+  def closeThreadpoolIo(pio : Win32cr::System::Threading::TP_IO*) : Void
+    C.CloseThreadpoolIo(pio)
+  end
+
+  def setThreadpoolTimerEx(pti : Win32cr::System::Threading::TP_TIMER*, pftDueTime : Win32cr::Foundation::FILETIME*, msPeriod : UInt32, msWindowLength : UInt32) : Win32cr::Foundation::BOOL
+    C.SetThreadpoolTimerEx(pti, pftDueTime, msPeriod, msWindowLength)
+  end
+
+  def setThreadpoolWaitEx(pwa : Win32cr::System::Threading::TP_WAIT*, h : Win32cr::Foundation::HANDLE, pftTimeout : Win32cr::Foundation::FILETIME*, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetThreadpoolWaitEx(pwa, h, pftTimeout, reserved)
+  end
+
+  def isWow64Process(hProcess : Win32cr::Foundation::HANDLE, wow64_process : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.IsWow64Process(hProcess, wow64_process)
+  end
+
+  def wow64SetThreadDefaultGuestMachine(machine : UInt16) : UInt16
+    C.Wow64SetThreadDefaultGuestMachine(machine)
+  end
+
+  def isWow64Process2(hProcess : Win32cr::Foundation::HANDLE, pProcessMachine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE*, pNativeMachine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE*) : Win32cr::Foundation::BOOL
+    C.IsWow64Process2(hProcess, pProcessMachine, pNativeMachine)
+  end
+
+  def wow64SuspendThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
+    C.Wow64SuspendThread(hThread)
+  end
+
+  def createPrivateNamespaceW(lpPrivateNamespaceAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpBoundaryDescriptor : Void*, lpAliasPrefix : Win32cr::Foundation::PWSTR) : Win32cr::System::Threading::NamespaceHandle
+    C.CreatePrivateNamespaceW(lpPrivateNamespaceAttributes, lpBoundaryDescriptor, lpAliasPrefix)
+  end
+
+  def openPrivateNamespaceW(lpBoundaryDescriptor : Void*, lpAliasPrefix : Win32cr::Foundation::PWSTR) : Win32cr::System::Threading::NamespaceHandle
+    C.OpenPrivateNamespaceW(lpBoundaryDescriptor, lpAliasPrefix)
+  end
+
+  def closePrivateNamespace(handle : Win32cr::System::Threading::NamespaceHandle, flags : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.ClosePrivateNamespace(handle, flags)
+  end
+
+  def createBoundaryDescriptorW(name : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::System::Threading::BoundaryDescriptorHandle
+    C.CreateBoundaryDescriptorW(name, flags)
+  end
+
+  def addSIDToBoundaryDescriptor(boundary_descriptor : Win32cr::Foundation::HANDLE*, required_sid : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    C.AddSIDToBoundaryDescriptor(boundary_descriptor, required_sid)
+  end
+
+  def deleteBoundaryDescriptor(boundary_descriptor : Win32cr::System::Threading::BoundaryDescriptorHandle) : Void
+    C.DeleteBoundaryDescriptor(boundary_descriptor)
+  end
+
+  def getNumaHighestNodeNumber(highest_node_number : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetNumaHighestNodeNumber(highest_node_number)
+  end
+
+  def getNumaNodeProcessorMaskEx(node : UInt16, processor_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY*) : Win32cr::Foundation::BOOL
+    C.GetNumaNodeProcessorMaskEx(node, processor_mask)
+  end
+
+  def getNumaNodeProcessorMask2(node_number : UInt16, processor_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, processor_mask_count : UInt16, required_mask_count : UInt16*) : Win32cr::Foundation::BOOL
+    C.GetNumaNodeProcessorMask2(node_number, processor_masks, processor_mask_count, required_mask_count)
+  end
+
+  def getNumaProximityNodeEx(proximity_id : UInt32, node_number : UInt16*) : Win32cr::Foundation::BOOL
+    C.GetNumaProximityNodeEx(proximity_id, node_number)
+  end
+
+  def getProcessGroupAffinity(hProcess : Win32cr::Foundation::HANDLE, group_count : UInt16*, group_array : UInt16*) : Win32cr::Foundation::BOOL
+    C.GetProcessGroupAffinity(hProcess, group_count, group_array)
+  end
+
+  def getThreadGroupAffinity(hThread : Win32cr::Foundation::HANDLE, group_affinity : Win32cr::System::SystemInformation::GROUP_AFFINITY*) : Win32cr::Foundation::BOOL
+    C.GetThreadGroupAffinity(hThread, group_affinity)
+  end
+
+  def setThreadGroupAffinity(hThread : Win32cr::Foundation::HANDLE, group_affinity : Win32cr::System::SystemInformation::GROUP_AFFINITY*, previous_group_affinity : Win32cr::System::SystemInformation::GROUP_AFFINITY*) : Win32cr::Foundation::BOOL
+    C.SetThreadGroupAffinity(hThread, group_affinity, previous_group_affinity)
+  end
+
+  def avSetMmThreadCharacteristicsA(task_name : Win32cr::Foundation::PSTR, task_index : UInt32*) : Win32cr::Foundation::HANDLE
+    C.AvSetMmThreadCharacteristicsA(task_name, task_index)
+  end
+
+  def avSetMmThreadCharacteristicsW(task_name : Win32cr::Foundation::PWSTR, task_index : UInt32*) : Win32cr::Foundation::HANDLE
+    C.AvSetMmThreadCharacteristicsW(task_name, task_index)
+  end
+
+  def avSetMmMaxThreadCharacteristicsA(first_task : Win32cr::Foundation::PSTR, second_task : Win32cr::Foundation::PSTR, task_index : UInt32*) : Win32cr::Foundation::HANDLE
+    C.AvSetMmMaxThreadCharacteristicsA(first_task, second_task, task_index)
+  end
+
+  def avSetMmMaxThreadCharacteristicsW(first_task : Win32cr::Foundation::PWSTR, second_task : Win32cr::Foundation::PWSTR, task_index : UInt32*) : Win32cr::Foundation::HANDLE
+    C.AvSetMmMaxThreadCharacteristicsW(first_task, second_task, task_index)
+  end
+
+  def avRevertMmThreadCharacteristics(avrt_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.AvRevertMmThreadCharacteristics(avrt_handle)
+  end
+
+  def avSetMmThreadPriority(avrt_handle : Win32cr::Foundation::HANDLE, priority : Win32cr::System::Threading::AVRT_PRIORITY) : Win32cr::Foundation::BOOL
+    C.AvSetMmThreadPriority(avrt_handle, priority)
+  end
+
+  def avRtCreateThreadOrderingGroup(context : Win32cr::Foundation::HANDLE*, period : Win32cr::Foundation::LARGE_INTEGER*, thread_ordering_guid : LibC::GUID*, timeout : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.AvRtCreateThreadOrderingGroup(context, period, thread_ordering_guid, timeout)
+  end
+
+  def avRtCreateThreadOrderingGroupExA(context : Win32cr::Foundation::HANDLE*, period : Win32cr::Foundation::LARGE_INTEGER*, thread_ordering_guid : LibC::GUID*, timeout : Win32cr::Foundation::LARGE_INTEGER*, task_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.AvRtCreateThreadOrderingGroupExA(context, period, thread_ordering_guid, timeout, task_name)
+  end
+
+  def avRtCreateThreadOrderingGroupExW(context : Win32cr::Foundation::HANDLE*, period : Win32cr::Foundation::LARGE_INTEGER*, thread_ordering_guid : LibC::GUID*, timeout : Win32cr::Foundation::LARGE_INTEGER*, task_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.AvRtCreateThreadOrderingGroupExW(context, period, thread_ordering_guid, timeout, task_name)
+  end
+
+  def avRtJoinThreadOrderingGroup(context : Win32cr::Foundation::HANDLE*, thread_ordering_guid : LibC::GUID*, before : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.AvRtJoinThreadOrderingGroup(context, thread_ordering_guid, before)
+  end
+
+  def avRtWaitOnThreadOrderingGroup(context : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.AvRtWaitOnThreadOrderingGroup(context)
+  end
+
+  def avRtLeaveThreadOrderingGroup(context : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.AvRtLeaveThreadOrderingGroup(context)
+  end
+
+  def avRtDeleteThreadOrderingGroup(context : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.AvRtDeleteThreadOrderingGroup(context)
+  end
+
+  def avQuerySystemResponsiveness(avrt_handle : Win32cr::Foundation::HANDLE, system_responsiveness_value : UInt32*) : Win32cr::Foundation::BOOL
+    C.AvQuerySystemResponsiveness(avrt_handle, system_responsiveness_value)
+  end
+
+  def attachThreadInput(idAttach : UInt32, idAttachTo : UInt32, fAttach : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.AttachThreadInput(idAttach, idAttachTo, fAttach)
+  end
+
+  def waitForInputIdle(hProcess : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32) : UInt32
+    C.WaitForInputIdle(hProcess, dwMilliseconds)
+  end
+
+  def getGuiResources(hProcess : Win32cr::Foundation::HANDLE, uiFlags : Win32cr::System::Threading::GET_GUI_RESOURCES_FLAGS) : UInt32
+    C.GetGuiResources(hProcess, uiFlags)
+  end
+
+  def isImmersiveProcess(hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.IsImmersiveProcess(hProcess)
+  end
+
+  def setProcessRestrictionExemption(fEnableExemption : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SetProcessRestrictionExemption(fEnableExemption)
+  end
+
+  def getProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, lpProcessAffinityMask : LibC::UIntPtrT*, lpSystemAffinityMask : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    C.GetProcessAffinityMask(hProcess, lpProcessAffinityMask, lpSystemAffinityMask)
+  end
+
+  def setProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, dwProcessAffinityMask : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.SetProcessAffinityMask(hProcess, dwProcessAffinityMask)
+  end
+
+  def getProcessIoCounters(hProcess : Win32cr::Foundation::HANDLE, lpIoCounters : Win32cr::System::Threading::IO_COUNTERS*) : Win32cr::Foundation::BOOL
+    C.GetProcessIoCounters(hProcess, lpIoCounters)
+  end
+
+  def switchToFiber(lpFiber : Void*) : Void
+    C.SwitchToFiber(lpFiber)
+  end
+
+  def deleteFiber(lpFiber : Void*) : Void
+    C.DeleteFiber(lpFiber)
+  end
+
+  def convertFiberToThread : Win32cr::Foundation::BOOL
+    C.ConvertFiberToThread
+  end
+
+  def createFiberEx(dwStackCommitSize : LibC::UIntPtrT, dwStackReserveSize : LibC::UIntPtrT, dwFlags : UInt32, lpStartAddress : Win32cr::System::Threading::LPFIBER_START_ROUTINE, lpParameter : Void*) : Void*
+    C.CreateFiberEx(dwStackCommitSize, dwStackReserveSize, dwFlags, lpStartAddress, lpParameter)
+  end
+
+  def convertThreadToFiberEx(lpParameter : Void*, dwFlags : UInt32) : Void*
+    C.ConvertThreadToFiberEx(lpParameter, dwFlags)
+  end
+
+  def createFiber(dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPFIBER_START_ROUTINE, lpParameter : Void*) : Void*
+    C.CreateFiber(dwStackSize, lpStartAddress, lpParameter)
+  end
+
+  def convertThreadToFiber(lpParameter : Void*) : Void*
+    C.ConvertThreadToFiber(lpParameter)
+  end
+
+  def createUmsCompletionList(ums_completion_list : Void**) : Win32cr::Foundation::BOOL
+    C.CreateUmsCompletionList(ums_completion_list)
+  end
+
+  def dequeueUmsCompletionListItems(ums_completion_list : Void*, wait_time_out : UInt32, ums_thread_list : Void**) : Win32cr::Foundation::BOOL
+    C.DequeueUmsCompletionListItems(ums_completion_list, wait_time_out, ums_thread_list)
+  end
+
+  def getUmsCompletionListEvent(ums_completion_list : Void*, ums_completion_event : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    C.GetUmsCompletionListEvent(ums_completion_list, ums_completion_event)
+  end
+
+  def executeUmsThread(ums_thread : Void*) : Win32cr::Foundation::BOOL
+    C.ExecuteUmsThread(ums_thread)
+  end
+
+  def umsThreadYield(scheduler_param : Void*) : Win32cr::Foundation::BOOL
+    C.UmsThreadYield(scheduler_param)
+  end
+
+  def deleteUmsCompletionList(ums_completion_list : Void*) : Win32cr::Foundation::BOOL
+    C.DeleteUmsCompletionList(ums_completion_list)
+  end
+
+  def getCurrentUmsThread : Void*
+    C.GetCurrentUmsThread
+  end
+
+  def getNextUmsListItem(ums_context : Void*) : Void*
+    C.GetNextUmsListItem(ums_context)
+  end
+
+  def queryUmsThreadInformation(ums_thread : Void*, ums_thread_info_class : Win32cr::System::Threading::RTL_UMS_THREAD_INFO_CLASS, ums_thread_information : Void*, ums_thread_information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::BOOL
+    C.QueryUmsThreadInformation(ums_thread, ums_thread_info_class, ums_thread_information, ums_thread_information_length, return_length)
+  end
+
+  def setUmsThreadInformation(ums_thread : Void*, ums_thread_info_class : Win32cr::System::Threading::RTL_UMS_THREAD_INFO_CLASS, ums_thread_information : Void*, ums_thread_information_length : UInt32) : Win32cr::Foundation::BOOL
+    C.SetUmsThreadInformation(ums_thread, ums_thread_info_class, ums_thread_information, ums_thread_information_length)
+  end
+
+  def deleteUmsThreadContext(ums_thread : Void*) : Win32cr::Foundation::BOOL
+    C.DeleteUmsThreadContext(ums_thread)
+  end
+
+  def createUmsThreadContext(lpUmsThread : Void**) : Win32cr::Foundation::BOOL
+    C.CreateUmsThreadContext(lpUmsThread)
+  end
+
+  def enterUmsSchedulingMode(scheduler_startup_info : Win32cr::System::Threading::UMS_SCHEDULER_STARTUP_INFO*) : Win32cr::Foundation::BOOL
+    C.EnterUmsSchedulingMode(scheduler_startup_info)
+  end
+
+  def getUmsSystemThreadInformation(thread_handle : Win32cr::Foundation::HANDLE, system_thread_info : Win32cr::System::Threading::UMS_SYSTEM_THREAD_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.GetUmsSystemThreadInformation(thread_handle, system_thread_info)
+  end
+
+  def setThreadAffinityMask(hThread : Win32cr::Foundation::HANDLE, dwThreadAffinityMask : LibC::UIntPtrT) : LibC::UIntPtrT
+    C.SetThreadAffinityMask(hThread, dwThreadAffinityMask)
+  end
+
+  def setProcessDEPPolicy(dwFlags : Win32cr::System::Threading::PROCESS_DEP_FLAGS) : Win32cr::Foundation::BOOL
+    C.SetProcessDEPPolicy(dwFlags)
+  end
+
+  def getProcessDEPPolicy(hProcess : Win32cr::Foundation::HANDLE, lpFlags : UInt32*, lpPermanent : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.GetProcessDEPPolicy(hProcess, lpFlags, lpPermanent)
+  end
+
+  def pulseEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.PulseEvent(hEvent)
+  end
+
+  def winExec(lpCmdLine : Win32cr::Foundation::PSTR, uCmdShow : UInt32) : UInt32
+    C.WinExec(lpCmdLine, uCmdShow)
+  end
+
+  def createSemaphoreA(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    C.CreateSemaphoreA(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName)
+  end
+
+  def createSemaphoreExA(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    C.CreateSemaphoreExA(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName, dwFlags, dwDesiredAccess)
+  end
+
+  def queryFullProcessImageNameA(hProcess : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Threading::PROCESS_NAME_FORMAT, lpExeName : UInt8*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    C.QueryFullProcessImageNameA(hProcess, dwFlags, lpExeName, lpdwSize)
+  end
+
+  def queryFullProcessImageNameW(hProcess : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Threading::PROCESS_NAME_FORMAT, lpExeName : UInt16*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    C.QueryFullProcessImageNameW(hProcess, dwFlags, lpExeName, lpdwSize)
+  end
+
+  def getStartupInfoA(lpStartupInfo : Win32cr::System::Threading::STARTUPINFOA*) : Void
+    C.GetStartupInfoA(lpStartupInfo)
+  end
+
+  def createProcessWithLogonW(lpUsername : Win32cr::Foundation::PWSTR, lpDomain : Win32cr::Foundation::PWSTR, lpPassword : Win32cr::Foundation::PWSTR, dwLogonFlags : Win32cr::System::Threading::CREATE_PROCESS_LOGON_FLAGS, lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, dwCreationFlags : UInt32, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.CreateProcessWithLogonW(lpUsername, lpDomain, lpPassword, dwLogonFlags, lpApplicationName, lpCommandLine, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation)
+  end
+
+  def createProcessWithTokenW(hToken : Win32cr::Foundation::HANDLE, dwLogonFlags : Win32cr::System::Threading::CREATE_PROCESS_LOGON_FLAGS, lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, dwCreationFlags : UInt32, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.CreateProcessWithTokenW(hToken, dwLogonFlags, lpApplicationName, lpCommandLine, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation)
+  end
+
+  def registerWaitForSingleObject(phNewWaitObject : Win32cr::Foundation::HANDLE*, hObject : Win32cr::Foundation::HANDLE, callback : Win32cr::System::Threading::WAITORTIMERCALLBACK, context : Void*, dwMilliseconds : UInt32, dwFlags : Win32cr::System::Threading::WORKER_THREAD_FLAGS) : Win32cr::Foundation::BOOL
+    C.RegisterWaitForSingleObject(phNewWaitObject, hObject, callback, context, dwMilliseconds, dwFlags)
+  end
+
+  def unregisterWait(wait_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.UnregisterWait(wait_handle)
+  end
+
+  def setTimerQueueTimer(timer_queue : Win32cr::Foundation::HANDLE, callback : Win32cr::System::Threading::WAITORTIMERCALLBACK, parameter : Void*, due_time : UInt32, period : UInt32, prefer_io : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HANDLE
+    C.SetTimerQueueTimer(timer_queue, callback, parameter, due_time, period, prefer_io)
+  end
+
+  def createPrivateNamespaceA(lpPrivateNamespaceAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpBoundaryDescriptor : Void*, lpAliasPrefix : Win32cr::Foundation::PSTR) : Win32cr::System::Threading::NamespaceHandle
+    C.CreatePrivateNamespaceA(lpPrivateNamespaceAttributes, lpBoundaryDescriptor, lpAliasPrefix)
+  end
+
+  def openPrivateNamespaceA(lpBoundaryDescriptor : Void*, lpAliasPrefix : Win32cr::Foundation::PSTR) : Win32cr::System::Threading::NamespaceHandle
+    C.OpenPrivateNamespaceA(lpBoundaryDescriptor, lpAliasPrefix)
+  end
+
+  def createBoundaryDescriptorA(name : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::System::Threading::BoundaryDescriptorHandle
+    C.CreateBoundaryDescriptorA(name, flags)
+  end
+
+  def addIntegrityLabelToBoundaryDescriptor(boundary_descriptor : Win32cr::Foundation::HANDLE*, integrity_label : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    C.AddIntegrityLabelToBoundaryDescriptor(boundary_descriptor, integrity_label)
+  end
+
+  def getActiveProcessorGroupCount : UInt16
+    C.GetActiveProcessorGroupCount
+  end
+
+  def getMaximumProcessorGroupCount : UInt16
+    C.GetMaximumProcessorGroupCount
+  end
+
+  def getActiveProcessorCount(group_number : UInt16) : UInt32
+    C.GetActiveProcessorCount(group_number)
+  end
+
+  def getMaximumProcessorCount(group_number : UInt16) : UInt32
+    C.GetMaximumProcessorCount(group_number)
+  end
+
+  def getNumaProcessorNode(processor : UInt8, node_number : UInt8*) : Win32cr::Foundation::BOOL
+    C.GetNumaProcessorNode(processor, node_number)
+  end
+
+  def getNumaNodeNumberFromHandle(hFile : Win32cr::Foundation::HANDLE, node_number : UInt16*) : Win32cr::Foundation::BOOL
+    C.GetNumaNodeNumberFromHandle(hFile, node_number)
+  end
+
+  def getNumaProcessorNodeEx(processor : Win32cr::System::Kernel::PROCESSOR_NUMBER*, node_number : UInt16*) : Win32cr::Foundation::BOOL
+    C.GetNumaProcessorNodeEx(processor, node_number)
+  end
+
+  def getNumaNodeProcessorMask(node : UInt8, processor_mask : UInt64*) : Win32cr::Foundation::BOOL
+    C.GetNumaNodeProcessorMask(node, processor_mask)
+  end
+
+  def getNumaAvailableMemoryNode(node : UInt8, available_bytes : UInt64*) : Win32cr::Foundation::BOOL
+    C.GetNumaAvailableMemoryNode(node, available_bytes)
+  end
+
+  def getNumaAvailableMemoryNodeEx(node : UInt16, available_bytes : UInt64*) : Win32cr::Foundation::BOOL
+    C.GetNumaAvailableMemoryNodeEx(node, available_bytes)
+  end
+
+  def getNumaProximityNode(proximity_id : UInt32, node_number : UInt8*) : Win32cr::Foundation::BOOL
+    C.GetNumaProximityNode(proximity_id, node_number)
+  end
+
+  def ntQueryInformationProcess(process_handle : Win32cr::Foundation::HANDLE, process_information_class : Win32cr::System::Threading::PROCESSINFOCLASS, process_information : Void*, process_information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::NTSTATUS
+    C.NtQueryInformationProcess(process_handle, process_information_class, process_information, process_information_length, return_length)
+  end
+
+  def ntQueryInformationThread(thread_handle : Win32cr::Foundation::HANDLE, thread_information_class : Win32cr::System::Threading::THREADINFOCLASS, thread_information : Void*, thread_information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::NTSTATUS
+    C.NtQueryInformationThread(thread_handle, thread_information_class, thread_information, thread_information_length, return_length)
+  end
+
+  def ntSetInformationThread(thread_handle : Win32cr::Foundation::HANDLE, thread_information_class : Win32cr::System::Threading::THREADINFOCLASS, thread_information : Void*, thread_information_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.NtSetInformationThread(thread_handle, thread_information_class, thread_information, thread_information_length)
+  end
+
   @[Link("kernel32")]
   @[Link("vertdll")]
   @[Link("advapi32")]
@@ -881,634 +2074,932 @@ module Win32cr::System::Threading
   @[Link("user32")]
   @[Link("ntdll")]
   lib C
+    # :nodoc:
     fun GetProcessWorkingSetSize(hProcess : Win32cr::Foundation::HANDLE, lpMinimumWorkingSetSize : LibC::UIntPtrT*, lpMaximumWorkingSetSize : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProcessWorkingSetSize(hProcess : Win32cr::Foundation::HANDLE, dwMinimumWorkingSetSize : LibC::UIntPtrT, dwMaximumWorkingSetSize : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlsAlloc(lpCallback : Win32cr::System::Threading::PFLS_CALLBACK_FUNCTION) : UInt32
 
+    # :nodoc:
     fun FlsGetValue(dwFlsIndex : UInt32) : Void*
 
+    # :nodoc:
     fun FlsSetValue(dwFlsIndex : UInt32, lpFlsData : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlsFree(dwFlsIndex : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsThreadAFiber : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InitializeSRWLock(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
 
+    # :nodoc:
     fun ReleaseSRWLockExclusive(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
 
+    # :nodoc:
     fun ReleaseSRWLockShared(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
 
+    # :nodoc:
     fun AcquireSRWLockExclusive(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
 
+    # :nodoc:
     fun AcquireSRWLockShared(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
 
+    # :nodoc:
     fun TryAcquireSRWLockExclusive(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun TryAcquireSRWLockShared(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun InitializeCriticalSection(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Void
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun EnterCriticalSection(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Void
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun LeaveCriticalSection(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Void
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun InitializeCriticalSectionAndSpinCount(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*, dwSpinCount : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InitializeCriticalSectionEx(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*, dwSpinCount : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetCriticalSectionSpinCount(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*, dwSpinCount : UInt32) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun TryEnterCriticalSection(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun DeleteCriticalSection(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Void
 
+    # :nodoc:
     fun InitOnceInitialize(init_once : Win32cr::System::Threading::RTL_RUN_ONCE*) : Void
 
+    # :nodoc:
     fun InitOnceExecuteOnce(init_once : Win32cr::System::Threading::RTL_RUN_ONCE*, init_fn : Win32cr::System::Threading::PINIT_ONCE_FN, parameter : Void*, context : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InitOnceBeginInitialize(lpInitOnce : Win32cr::System::Threading::RTL_RUN_ONCE*, dwFlags : UInt32, fPending : Win32cr::Foundation::BOOL*, lpContext : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InitOnceComplete(lpInitOnce : Win32cr::System::Threading::RTL_RUN_ONCE*, dwFlags : UInt32, lpContext : Void*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun InitializeConditionVariable(condition_variable : Win32cr::System::Threading::RTL_CONDITION_VARIABLE*) : Void
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WakeConditionVariable(condition_variable : Win32cr::System::Threading::RTL_CONDITION_VARIABLE*) : Void
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WakeAllConditionVariable(condition_variable : Win32cr::System::Threading::RTL_CONDITION_VARIABLE*) : Void
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SleepConditionVariableCS(condition_variable : Win32cr::System::Threading::RTL_CONDITION_VARIABLE*, critical_section : Win32cr::System::Threading::RTL_CRITICAL_SECTION*, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SleepConditionVariableSRW(condition_variable : Win32cr::System::Threading::RTL_CONDITION_VARIABLE*, srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*, dwMilliseconds : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ResetEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReleaseSemaphore(hSemaphore : Win32cr::Foundation::HANDLE, lReleaseCount : Int32, lpPreviousCount : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReleaseMutex(hMutex : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WaitForSingleObject(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32) : UInt32
 
+    # :nodoc:
     fun SleepEx(dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun WaitForSingleObjectEx(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun WaitForMultipleObjectsEx(nCount : UInt32, lpHandles : Win32cr::Foundation::HANDLE*, bWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun CreateMutexA(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInitialOwner : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateMutexW(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInitialOwner : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun OpenMutexW(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateEventA(lpEventAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bManualReset : Win32cr::Foundation::BOOL, bInitialState : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateEventW(lpEventAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bManualReset : Win32cr::Foundation::BOOL, bInitialState : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun OpenEventA(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun OpenEventW(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun OpenSemaphoreW(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun OpenWaitableTimerW(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpTimerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun SetWaitableTimerEx(hTimer : Win32cr::Foundation::HANDLE, lpDueTime : Win32cr::Foundation::LARGE_INTEGER*, lPeriod : Int32, pfnCompletionRoutine : Win32cr::System::Threading::PTIMERAPCROUTINE, lpArgToCompletionRoutine : Void*, wake_context : Win32cr::System::Threading::REASON_CONTEXT*, tolerable_delay : UInt32) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SetWaitableTimer(hTimer : Win32cr::Foundation::HANDLE, lpDueTime : Win32cr::Foundation::LARGE_INTEGER*, lPeriod : Int32, pfnCompletionRoutine : Win32cr::System::Threading::PTIMERAPCROUTINE, lpArgToCompletionRoutine : Void*, fResume : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun CancelWaitableTimer(hTimer : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateMutexExA(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateMutexExW(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateEventExA(lpEventAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PSTR, dwFlags : Win32cr::System::Threading::CREATE_EVENT, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateEventExW(lpEventAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::Threading::CREATE_EVENT, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateSemaphoreExW(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun CreateWaitableTimerExW(lpTimerAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpTimerName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun EnterSynchronizationBarrier(lpBarrier : Win32cr::System::Threading::RTL_BARRIER*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InitializeSynchronizationBarrier(lpBarrier : Win32cr::System::Threading::RTL_BARRIER*, lTotalThreads : Int32, lSpinCount : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteSynchronizationBarrier(lpBarrier : Win32cr::System::Threading::RTL_BARRIER*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun Sleep(dwMilliseconds : UInt32) : Void
 
+    # :nodoc:
     fun WaitOnAddress(address : Void*, compare_address : Void*, address_size : LibC::UIntPtrT, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WakeByAddressSingle(address : Void*) : Void
 
+    # :nodoc:
     fun WakeByAddressAll(address : Void*) : Void
 
+    # :nodoc:
     fun WaitForMultipleObjects(nCount : UInt32, lpHandles : Win32cr::Foundation::HANDLE*, bWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32) : UInt32
 
+    # :nodoc:
     fun CreateSemaphoreW(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateWaitableTimerW(lpTimerAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bManualReset : Win32cr::Foundation::BOOL, lpTimerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun InitializeSListHead(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Void
 
+    # :nodoc:
     fun InterlockedPopEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
 
+    # :nodoc:
     fun InterlockedPushEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list_entry : Win32cr::System::Kernel::SLIST_ENTRY*) : Win32cr::System::Kernel::SLIST_ENTRY*
 
+    # :nodoc:
     fun InterlockedPushListSListEx(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list : Win32cr::System::Kernel::SLIST_ENTRY*, list_end : Win32cr::System::Kernel::SLIST_ENTRY*, count : UInt32) : Win32cr::System::Kernel::SLIST_ENTRY*
 
+    # :nodoc:
     fun InterlockedFlushSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
 
+    # :nodoc:
     fun QueryDepthSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : UInt16
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun QueueUserAPC(pfnAPC : Win32cr::Foundation::PAPCFUNC, hThread : Win32cr::Foundation::HANDLE, dwData : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun QueueUserAPC2(apc_routine : Win32cr::Foundation::PAPCFUNC, thread : Win32cr::Foundation::HANDLE, data : LibC::UIntPtrT, flags : Win32cr::System::Threading::QUEUE_USER_APC_FLAGS) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetProcessTimes(hProcess : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpExitTime : Win32cr::Foundation::FILETIME*, lpKernelTime : Win32cr::Foundation::FILETIME*, lpUserTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetCurrentProcess : Win32cr::Foundation::HANDLE
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetCurrentProcessId : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun ExitProcess(uExitCode : UInt32) : Void
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun TerminateProcess(hProcess : Win32cr::Foundation::HANDLE, uExitCode : UInt32) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetExitCodeProcess(hProcess : Win32cr::Foundation::HANDLE, lpExitCode : UInt32*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SwitchToThread : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateThread(lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, lpParameter : Void*, dwCreationFlags : Win32cr::System::Threading::THREAD_CREATION_FLAGS, lpThreadId : UInt32*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateRemoteThread(hProcess : Win32cr::Foundation::HANDLE, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, lpParameter : Void*, dwCreationFlags : UInt32, lpThreadId : UInt32*) : Win32cr::Foundation::HANDLE
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetCurrentThread : Win32cr::Foundation::HANDLE
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetCurrentThreadId : UInt32
 
+    # :nodoc:
     fun OpenThread(dwDesiredAccess : Win32cr::System::Threading::THREAD_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, dwThreadId : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun SetThreadPriority(hThread : Win32cr::Foundation::HANDLE, nPriority : Win32cr::System::Threading::THREAD_PRIORITY) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetThreadPriorityBoost(hThread : Win32cr::Foundation::HANDLE, bDisablePriorityBoost : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThreadPriorityBoost(hThread : Win32cr::Foundation::HANDLE, pDisablePriorityBoost : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThreadPriority(hThread : Win32cr::Foundation::HANDLE) : Int32
 
+    # :nodoc:
     fun ExitThread(dwExitCode : UInt32) : Void
 
+    # :nodoc:
     fun TerminateThread(hThread : Win32cr::Foundation::HANDLE, dwExitCode : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetExitCodeThread(hThread : Win32cr::Foundation::HANDLE, lpExitCode : UInt32*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SuspendThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun ResumeThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun TlsAlloc : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun TlsGetValue(dwTlsIndex : UInt32) : Void*
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun TlsSetValue(dwTlsIndex : UInt32, lpTlsValue : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TlsFree(dwTlsIndex : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateProcessA(lpApplicationName : Win32cr::Foundation::PSTR, lpCommandLine : Win32cr::Foundation::PSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : Win32cr::System::Threading::PROCESS_CREATION_FLAGS, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOA*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun CreateProcessW(lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : Win32cr::System::Threading::PROCESS_CREATION_FLAGS, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProcessShutdownParameters(dwLevel : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetProcessVersion(process_id : UInt32) : UInt32
 
+    # :nodoc:
     fun GetStartupInfoW(lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*) : Void
 
+    # :nodoc:
     fun CreateProcessAsUserW(hToken : Win32cr::Foundation::HANDLE, lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : UInt32, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetThreadToken(thread : Win32cr::Foundation::HANDLE*, token : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OpenProcessToken(process_handle : Win32cr::Foundation::HANDLE, desired_access : Win32cr::Security::TOKEN_ACCESS_MASK, token_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OpenThreadToken(thread_handle : Win32cr::Foundation::HANDLE, desired_access : Win32cr::Security::TOKEN_ACCESS_MASK, open_as_self : Win32cr::Foundation::BOOL, token_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetPriorityClass(hProcess : Win32cr::Foundation::HANDLE, dwPriorityClass : Win32cr::System::Threading::PROCESS_CREATION_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPriorityClass(hProcess : Win32cr::Foundation::HANDLE) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SetThreadStackGuarantee(stack_size_in_bytes : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetProcessId(process : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun GetThreadId(thread : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun FlushProcessWriteBuffers : Void
 
+    # :nodoc:
     fun GetProcessIdOfThread(thread : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun InitializeProcThreadAttributeList(lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST, dwAttributeCount : UInt32, dwFlags : UInt32, lpSize : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteProcThreadAttributeList(lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST) : Void
 
+    # :nodoc:
     fun UpdateProcThreadAttribute(lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST, dwFlags : UInt32, attribute : LibC::UIntPtrT, lpValue : Void*, cbSize : LibC::UIntPtrT, lpPreviousValue : Void*, lpReturnSize : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProcessDynamicEHContinuationTargets(process : Win32cr::Foundation::HANDLE, number_of_targets : UInt16, targets : Win32cr::System::Threading::PROCESS_DYNAMIC_EH_CONTINUATION_TARGET*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProcessDynamicEnforcedCetCompatibleRanges(process : Win32cr::Foundation::HANDLE, number_of_ranges : UInt16, ranges : Win32cr::System::Threading::PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProcessAffinityUpdateMode(hProcess : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Threading::PROCESS_AFFINITY_AUTO_UPDATE_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryProcessAffinityUpdateMode(hProcess : Win32cr::Foundation::HANDLE, lpdwFlags : Win32cr::System::Threading::PROCESS_AFFINITY_AUTO_UPDATE_FLAGS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateRemoteThreadEx(hProcess : Win32cr::Foundation::HANDLE, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, lpParameter : Void*, dwCreationFlags : UInt32, lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST, lpThreadId : UInt32*) : Win32cr::Foundation::HANDLE
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetCurrentThreadStackLimits(low_limit : LibC::UIntPtrT*, high_limit : LibC::UIntPtrT*) : Void
 
+    # :nodoc:
     fun GetProcessMitigationPolicy(hProcess : Win32cr::Foundation::HANDLE, mitigation_policy : Win32cr::System::Threading::PROCESS_MITIGATION_POLICY, lpBuffer : Void*, dwLength : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProcessMitigationPolicy(mitigation_policy : Win32cr::System::Threading::PROCESS_MITIGATION_POLICY, lpBuffer : Void*, dwLength : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThreadTimes(hThread : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpExitTime : Win32cr::Foundation::FILETIME*, lpKernelTime : Win32cr::Foundation::FILETIME*, lpUserTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun OpenProcess(dwDesiredAccess : Win32cr::System::Threading::PROCESS_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, dwProcessId : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun IsProcessorFeaturePresent(processor_feature : Win32cr::System::Threading::PROCESSOR_FEATURE_ID) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetProcessHandleCount(hProcess : Win32cr::Foundation::HANDLE, pdwHandleCount : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCurrentProcessorNumber : UInt32
 
+    # :nodoc:
     fun SetThreadIdealProcessorEx(hThread : Win32cr::Foundation::HANDLE, lpIdealProcessor : Win32cr::System::Kernel::PROCESSOR_NUMBER*, lpPreviousIdealProcessor : Win32cr::System::Kernel::PROCESSOR_NUMBER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThreadIdealProcessorEx(hThread : Win32cr::Foundation::HANDLE, lpIdealProcessor : Win32cr::System::Kernel::PROCESSOR_NUMBER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCurrentProcessorNumberEx(proc_number : Win32cr::System::Kernel::PROCESSOR_NUMBER*) : Void
 
+    # :nodoc:
     fun GetProcessPriorityBoost(hProcess : Win32cr::Foundation::HANDLE, pDisablePriorityBoost : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProcessPriorityBoost(hProcess : Win32cr::Foundation::HANDLE, bDisablePriorityBoost : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThreadIOPendingFlag(hThread : Win32cr::Foundation::HANDLE, lpIOIsPending : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetSystemTimes(lpIdleTime : Win32cr::Foundation::FILETIME*, lpKernelTime : Win32cr::Foundation::FILETIME*, lpUserTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThreadInformation(hThread : Win32cr::Foundation::HANDLE, thread_information_class : Win32cr::System::Threading::THREAD_INFORMATION_CLASS, thread_information : Void*, thread_information_size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetThreadInformation(hThread : Win32cr::Foundation::HANDLE, thread_information_class : Win32cr::System::Threading::THREAD_INFORMATION_CLASS, thread_information : Void*, thread_information_size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsProcessCritical(hProcess : Win32cr::Foundation::HANDLE, critical : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProtectedPolicy(policy_guid : LibC::GUID*, policy_value : LibC::UIntPtrT, old_policy_value : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryProtectedPolicy(policy_guid : LibC::GUID*, policy_value : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetThreadIdealProcessor(hThread : Win32cr::Foundation::HANDLE, dwIdealProcessor : UInt32) : UInt32
 
+    # :nodoc:
     fun SetProcessInformation(hProcess : Win32cr::Foundation::HANDLE, process_information_class : Win32cr::System::Threading::PROCESS_INFORMATION_CLASS, process_information : Void*, process_information_size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetProcessInformation(hProcess : Win32cr::Foundation::HANDLE, process_information_class : Win32cr::System::Threading::PROCESS_INFORMATION_CLASS, process_information : Void*, process_information_size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetProcessDefaultCpuSets(process : Win32cr::Foundation::HANDLE, cpu_set_ids : UInt32*, cpu_set_id_count : UInt32, required_id_count : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProcessDefaultCpuSets(process : Win32cr::Foundation::HANDLE, cpu_set_ids : UInt32*, cpu_set_id_count : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThreadSelectedCpuSets(thread : Win32cr::Foundation::HANDLE, cpu_set_ids : UInt32*, cpu_set_id_count : UInt32, required_id_count : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetThreadSelectedCpuSets(thread : Win32cr::Foundation::HANDLE, cpu_set_ids : UInt32*, cpu_set_id_count : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateProcessAsUserA(hToken : Win32cr::Foundation::HANDLE, lpApplicationName : Win32cr::Foundation::PSTR, lpCommandLine : Win32cr::Foundation::PSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : UInt32, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOA*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetProcessShutdownParameters(lpdwLevel : UInt32*, lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetProcessDefaultCpuSetMasks(process : Win32cr::Foundation::HANDLE, cpu_set_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, cpu_set_mask_count : UInt16, required_mask_count : UInt16*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProcessDefaultCpuSetMasks(process : Win32cr::Foundation::HANDLE, cpu_set_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, cpu_set_mask_count : UInt16) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThreadSelectedCpuSetMasks(thread : Win32cr::Foundation::HANDLE, cpu_set_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, cpu_set_mask_count : UInt16, required_mask_count : UInt16*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetThreadSelectedCpuSetMasks(thread : Win32cr::Foundation::HANDLE, cpu_set_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, cpu_set_mask_count : UInt16) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetMachineTypeAttributes(machine : UInt16, machine_type_attributes : Win32cr::System::Threading::MACHINE_ATTRIBUTES*) : Win32cr::Foundation::HRESULT
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SetThreadDescription(hThread : Win32cr::Foundation::HANDLE, lpThreadDescription : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThreadDescription(hThread : Win32cr::Foundation::HANDLE, ppszThreadDescription : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun QueueUserWorkItem(function : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, context : Void*, flags : Win32cr::System::Threading::WORKER_THREAD_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnregisterWaitEx(wait_handle : Win32cr::Foundation::HANDLE, completion_event : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateTimerQueue : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateTimerQueueTimer(phNewTimer : Win32cr::Foundation::HANDLE*, timer_queue : Win32cr::Foundation::HANDLE, callback : Win32cr::System::Threading::WAITORTIMERCALLBACK, parameter : Void*, due_time : UInt32, period : UInt32, flags : Win32cr::System::Threading::WORKER_THREAD_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ChangeTimerQueueTimer(timer_queue : Win32cr::Foundation::HANDLE, timer : Win32cr::Foundation::HANDLE, due_time : UInt32, period : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteTimerQueueTimer(timer_queue : Win32cr::Foundation::HANDLE, timer : Win32cr::Foundation::HANDLE, completion_event : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteTimerQueue(timer_queue : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteTimerQueueEx(timer_queue : Win32cr::Foundation::HANDLE, completion_event : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateThreadpool(reserved : Void*) : Win32cr::System::Threading::PTP_POOL
 
+    # :nodoc:
     fun SetThreadpoolThreadMaximum(ptpp : Win32cr::System::Threading::PTP_POOL, cthrdMost : UInt32) : Void
 
+    # :nodoc:
     fun SetThreadpoolThreadMinimum(ptpp : Win32cr::System::Threading::PTP_POOL, cthrdMic : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetThreadpoolStackInformation(ptpp : Win32cr::System::Threading::PTP_POOL, ptpsi : Win32cr::System::Threading::TP_POOL_STACK_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryThreadpoolStackInformation(ptpp : Win32cr::System::Threading::PTP_POOL, ptpsi : Win32cr::System::Threading::TP_POOL_STACK_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CloseThreadpool(ptpp : Win32cr::System::Threading::PTP_POOL) : Void
 
+    # :nodoc:
     fun CreateThreadpoolCleanupGroup : LibC::IntPtrT
 
+    # :nodoc:
     fun CloseThreadpoolCleanupGroupMembers(ptpcg : LibC::IntPtrT, fCancelPendingCallbacks : Win32cr::Foundation::BOOL, pvCleanupContext : Void*) : Void
 
+    # :nodoc:
     fun CloseThreadpoolCleanupGroup(ptpcg : LibC::IntPtrT) : Void
 
+    # :nodoc:
     fun SetEventWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, evt : Win32cr::Foundation::HANDLE) : Void
 
+    # :nodoc:
     fun ReleaseSemaphoreWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, sem : Win32cr::Foundation::HANDLE, crel : UInt32) : Void
 
+    # :nodoc:
     fun ReleaseMutexWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, mut : Win32cr::Foundation::HANDLE) : Void
 
+    # :nodoc:
     fun LeaveCriticalSectionWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, pcs : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Void
 
+    # :nodoc:
     fun FreeLibraryWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, mod : Win32cr::Foundation::HINSTANCE) : Void
 
+    # :nodoc:
     fun CallbackMayRunLong(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DisassociateCurrentThreadFromCallback(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*) : Void
 
+    # :nodoc:
     fun TrySubmitThreadpoolCallback(pfns : Win32cr::System::Threading::PTP_SIMPLE_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateThreadpoolWork(pfnwk : Win32cr::System::Threading::PTP_WORK_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::System::Threading::TP_WORK*
 
+    # :nodoc:
     fun SubmitThreadpoolWork(pwk : Win32cr::System::Threading::TP_WORK*) : Void
 
+    # :nodoc:
     fun WaitForThreadpoolWorkCallbacks(pwk : Win32cr::System::Threading::TP_WORK*, fCancelPendingCallbacks : Win32cr::Foundation::BOOL) : Void
 
+    # :nodoc:
     fun CloseThreadpoolWork(pwk : Win32cr::System::Threading::TP_WORK*) : Void
 
+    # :nodoc:
     fun CreateThreadpoolTimer(pfnti : Win32cr::System::Threading::PTP_TIMER_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::System::Threading::TP_TIMER*
 
+    # :nodoc:
     fun SetThreadpoolTimer(pti : Win32cr::System::Threading::TP_TIMER*, pftDueTime : Win32cr::Foundation::FILETIME*, msPeriod : UInt32, msWindowLength : UInt32) : Void
 
+    # :nodoc:
     fun IsThreadpoolTimerSet(pti : Win32cr::System::Threading::TP_TIMER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WaitForThreadpoolTimerCallbacks(pti : Win32cr::System::Threading::TP_TIMER*, fCancelPendingCallbacks : Win32cr::Foundation::BOOL) : Void
 
+    # :nodoc:
     fun CloseThreadpoolTimer(pti : Win32cr::System::Threading::TP_TIMER*) : Void
 
+    # :nodoc:
     fun CreateThreadpoolWait(pfnwa : Win32cr::System::Threading::PTP_WAIT_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::System::Threading::TP_WAIT*
 
+    # :nodoc:
     fun SetThreadpoolWait(pwa : Win32cr::System::Threading::TP_WAIT*, h : Win32cr::Foundation::HANDLE, pftTimeout : Win32cr::Foundation::FILETIME*) : Void
 
+    # :nodoc:
     fun WaitForThreadpoolWaitCallbacks(pwa : Win32cr::System::Threading::TP_WAIT*, fCancelPendingCallbacks : Win32cr::Foundation::BOOL) : Void
 
+    # :nodoc:
     fun CloseThreadpoolWait(pwa : Win32cr::System::Threading::TP_WAIT*) : Void
 
+    # :nodoc:
     fun CreateThreadpoolIo(fl : Win32cr::Foundation::HANDLE, pfnio : Win32cr::System::Threading::PTP_WIN32_IO_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::System::Threading::TP_IO*
 
+    # :nodoc:
     fun StartThreadpoolIo(pio : Win32cr::System::Threading::TP_IO*) : Void
 
+    # :nodoc:
     fun CancelThreadpoolIo(pio : Win32cr::System::Threading::TP_IO*) : Void
 
+    # :nodoc:
     fun WaitForThreadpoolIoCallbacks(pio : Win32cr::System::Threading::TP_IO*, fCancelPendingCallbacks : Win32cr::Foundation::BOOL) : Void
 
+    # :nodoc:
     fun CloseThreadpoolIo(pio : Win32cr::System::Threading::TP_IO*) : Void
 
+    # :nodoc:
     fun SetThreadpoolTimerEx(pti : Win32cr::System::Threading::TP_TIMER*, pftDueTime : Win32cr::Foundation::FILETIME*, msPeriod : UInt32, msWindowLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetThreadpoolWaitEx(pwa : Win32cr::System::Threading::TP_WAIT*, h : Win32cr::Foundation::HANDLE, pftTimeout : Win32cr::Foundation::FILETIME*, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsWow64Process(hProcess : Win32cr::Foundation::HANDLE, wow64_process : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun Wow64SetThreadDefaultGuestMachine(machine : UInt16) : UInt16
 
+    # :nodoc:
     fun IsWow64Process2(hProcess : Win32cr::Foundation::HANDLE, pProcessMachine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE*, pNativeMachine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun Wow64SuspendThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun CreatePrivateNamespaceW(lpPrivateNamespaceAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpBoundaryDescriptor : Void*, lpAliasPrefix : Win32cr::Foundation::PWSTR) : Win32cr::System::Threading::NamespaceHandle
 
+    # :nodoc:
     fun OpenPrivateNamespaceW(lpBoundaryDescriptor : Void*, lpAliasPrefix : Win32cr::Foundation::PWSTR) : Win32cr::System::Threading::NamespaceHandle
 
+    # :nodoc:
     fun ClosePrivateNamespace(handle : Win32cr::System::Threading::NamespaceHandle, flags : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun CreateBoundaryDescriptorW(name : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::System::Threading::BoundaryDescriptorHandle
 
+    # :nodoc:
     fun AddSIDToBoundaryDescriptor(boundary_descriptor : Win32cr::Foundation::HANDLE*, required_sid : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteBoundaryDescriptor(boundary_descriptor : Win32cr::System::Threading::BoundaryDescriptorHandle) : Void
 
+    # :nodoc:
     fun GetNumaHighestNodeNumber(highest_node_number : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetNumaNodeProcessorMaskEx(node : UInt16, processor_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetNumaNodeProcessorMask2(node_number : UInt16, processor_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, processor_mask_count : UInt16, required_mask_count : UInt16*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetNumaProximityNodeEx(proximity_id : UInt32, node_number : UInt16*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetProcessGroupAffinity(hProcess : Win32cr::Foundation::HANDLE, group_count : UInt16*, group_array : UInt16*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThreadGroupAffinity(hThread : Win32cr::Foundation::HANDLE, group_affinity : Win32cr::System::SystemInformation::GROUP_AFFINITY*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetThreadGroupAffinity(hThread : Win32cr::Foundation::HANDLE, group_affinity : Win32cr::System::SystemInformation::GROUP_AFFINITY*, previous_group_affinity : Win32cr::System::SystemInformation::GROUP_AFFINITY*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AvSetMmThreadCharacteristicsA(task_name : Win32cr::Foundation::PSTR, task_index : UInt32*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun AvSetMmThreadCharacteristicsW(task_name : Win32cr::Foundation::PWSTR, task_index : UInt32*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun AvSetMmMaxThreadCharacteristicsA(first_task : Win32cr::Foundation::PSTR, second_task : Win32cr::Foundation::PSTR, task_index : UInt32*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun AvSetMmMaxThreadCharacteristicsW(first_task : Win32cr::Foundation::PWSTR, second_task : Win32cr::Foundation::PWSTR, task_index : UInt32*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun AvRevertMmThreadCharacteristics(avrt_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AvSetMmThreadPriority(avrt_handle : Win32cr::Foundation::HANDLE, priority : Win32cr::System::Threading::AVRT_PRIORITY) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AvRtCreateThreadOrderingGroup(context : Win32cr::Foundation::HANDLE*, period : Win32cr::Foundation::LARGE_INTEGER*, thread_ordering_guid : LibC::GUID*, timeout : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AvRtCreateThreadOrderingGroupExA(context : Win32cr::Foundation::HANDLE*, period : Win32cr::Foundation::LARGE_INTEGER*, thread_ordering_guid : LibC::GUID*, timeout : Win32cr::Foundation::LARGE_INTEGER*, task_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AvRtCreateThreadOrderingGroupExW(context : Win32cr::Foundation::HANDLE*, period : Win32cr::Foundation::LARGE_INTEGER*, thread_ordering_guid : LibC::GUID*, timeout : Win32cr::Foundation::LARGE_INTEGER*, task_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AvRtJoinThreadOrderingGroup(context : Win32cr::Foundation::HANDLE*, thread_ordering_guid : LibC::GUID*, before : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AvRtWaitOnThreadOrderingGroup(context : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AvRtLeaveThreadOrderingGroup(context : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AvRtDeleteThreadOrderingGroup(context : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AvQuerySystemResponsiveness(avrt_handle : Win32cr::Foundation::HANDLE, system_responsiveness_value : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AttachThreadInput(idAttach : UInt32, idAttachTo : UInt32, fAttach : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WaitForInputIdle(hProcess : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32) : UInt32
 
+    # :nodoc:
     fun GetGuiResources(hProcess : Win32cr::Foundation::HANDLE, uiFlags : Win32cr::System::Threading::GET_GUI_RESOURCES_FLAGS) : UInt32
 
+    # :nodoc:
     fun IsImmersiveProcess(hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProcessRestrictionExemption(fEnableExemption : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, lpProcessAffinityMask : LibC::UIntPtrT*, lpSystemAffinityMask : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, dwProcessAffinityMask : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetProcessIoCounters(hProcess : Win32cr::Foundation::HANDLE, lpIoCounters : Win32cr::System::Threading::IO_COUNTERS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SwitchToFiber(lpFiber : Void*) : Void
 
+    # :nodoc:
     fun DeleteFiber(lpFiber : Void*) : Void
 
+    # :nodoc:
     fun ConvertFiberToThread : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateFiberEx(dwStackCommitSize : LibC::UIntPtrT, dwStackReserveSize : LibC::UIntPtrT, dwFlags : UInt32, lpStartAddress : Win32cr::System::Threading::LPFIBER_START_ROUTINE, lpParameter : Void*) : Void*
 
+    # :nodoc:
     fun ConvertThreadToFiberEx(lpParameter : Void*, dwFlags : UInt32) : Void*
 
+    # :nodoc:
     fun CreateFiber(dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPFIBER_START_ROUTINE, lpParameter : Void*) : Void*
 
+    # :nodoc:
     fun ConvertThreadToFiber(lpParameter : Void*) : Void*
 
+    # :nodoc:
     fun CreateUmsCompletionList(ums_completion_list : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DequeueUmsCompletionListItems(ums_completion_list : Void*, wait_time_out : UInt32, ums_thread_list : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetUmsCompletionListEvent(ums_completion_list : Void*, ums_completion_event : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ExecuteUmsThread(ums_thread : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UmsThreadYield(scheduler_param : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteUmsCompletionList(ums_completion_list : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCurrentUmsThread : Void*
 
+    # :nodoc:
     fun GetNextUmsListItem(ums_context : Void*) : Void*
 
+    # :nodoc:
     fun QueryUmsThreadInformation(ums_thread : Void*, ums_thread_info_class : Win32cr::System::Threading::RTL_UMS_THREAD_INFO_CLASS, ums_thread_information : Void*, ums_thread_information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetUmsThreadInformation(ums_thread : Void*, ums_thread_info_class : Win32cr::System::Threading::RTL_UMS_THREAD_INFO_CLASS, ums_thread_information : Void*, ums_thread_information_length : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteUmsThreadContext(ums_thread : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateUmsThreadContext(lpUmsThread : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnterUmsSchedulingMode(scheduler_startup_info : Win32cr::System::Threading::UMS_SCHEDULER_STARTUP_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetUmsSystemThreadInformation(thread_handle : Win32cr::Foundation::HANDLE, system_thread_info : Win32cr::System::Threading::UMS_SYSTEM_THREAD_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetThreadAffinityMask(hThread : Win32cr::Foundation::HANDLE, dwThreadAffinityMask : LibC::UIntPtrT) : LibC::UIntPtrT
 
+    # :nodoc:
     fun SetProcessDEPPolicy(dwFlags : Win32cr::System::Threading::PROCESS_DEP_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetProcessDEPPolicy(hProcess : Win32cr::Foundation::HANDLE, lpFlags : UInt32*, lpPermanent : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PulseEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinExec(lpCmdLine : Win32cr::Foundation::PSTR, uCmdShow : UInt32) : UInt32
 
+    # :nodoc:
     fun CreateSemaphoreA(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateSemaphoreExA(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun QueryFullProcessImageNameA(hProcess : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Threading::PROCESS_NAME_FORMAT, lpExeName : UInt8*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryFullProcessImageNameW(hProcess : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Threading::PROCESS_NAME_FORMAT, lpExeName : UInt16*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetStartupInfoA(lpStartupInfo : Win32cr::System::Threading::STARTUPINFOA*) : Void
 
+    # :nodoc:
     fun CreateProcessWithLogonW(lpUsername : Win32cr::Foundation::PWSTR, lpDomain : Win32cr::Foundation::PWSTR, lpPassword : Win32cr::Foundation::PWSTR, dwLogonFlags : Win32cr::System::Threading::CREATE_PROCESS_LOGON_FLAGS, lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, dwCreationFlags : UInt32, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateProcessWithTokenW(hToken : Win32cr::Foundation::HANDLE, dwLogonFlags : Win32cr::System::Threading::CREATE_PROCESS_LOGON_FLAGS, lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, dwCreationFlags : UInt32, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterWaitForSingleObject(phNewWaitObject : Win32cr::Foundation::HANDLE*, hObject : Win32cr::Foundation::HANDLE, callback : Win32cr::System::Threading::WAITORTIMERCALLBACK, context : Void*, dwMilliseconds : UInt32, dwFlags : Win32cr::System::Threading::WORKER_THREAD_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnregisterWait(wait_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetTimerQueueTimer(timer_queue : Win32cr::Foundation::HANDLE, callback : Win32cr::System::Threading::WAITORTIMERCALLBACK, parameter : Void*, due_time : UInt32, period : UInt32, prefer_io : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreatePrivateNamespaceA(lpPrivateNamespaceAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpBoundaryDescriptor : Void*, lpAliasPrefix : Win32cr::Foundation::PSTR) : Win32cr::System::Threading::NamespaceHandle
 
+    # :nodoc:
     fun OpenPrivateNamespaceA(lpBoundaryDescriptor : Void*, lpAliasPrefix : Win32cr::Foundation::PSTR) : Win32cr::System::Threading::NamespaceHandle
 
+    # :nodoc:
     fun CreateBoundaryDescriptorA(name : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::System::Threading::BoundaryDescriptorHandle
 
+    # :nodoc:
     fun AddIntegrityLabelToBoundaryDescriptor(boundary_descriptor : Win32cr::Foundation::HANDLE*, integrity_label : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetActiveProcessorGroupCount : UInt16
 
+    # :nodoc:
     fun GetMaximumProcessorGroupCount : UInt16
 
+    # :nodoc:
     fun GetActiveProcessorCount(group_number : UInt16) : UInt32
 
+    # :nodoc:
     fun GetMaximumProcessorCount(group_number : UInt16) : UInt32
 
+    # :nodoc:
     fun GetNumaProcessorNode(processor : UInt8, node_number : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetNumaNodeNumberFromHandle(hFile : Win32cr::Foundation::HANDLE, node_number : UInt16*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetNumaProcessorNodeEx(processor : Win32cr::System::Kernel::PROCESSOR_NUMBER*, node_number : UInt16*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetNumaNodeProcessorMask(node : UInt8, processor_mask : UInt64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetNumaAvailableMemoryNode(node : UInt8, available_bytes : UInt64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetNumaAvailableMemoryNodeEx(node : UInt16, available_bytes : UInt64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetNumaProximityNode(proximity_id : UInt32, node_number : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun NtQueryInformationProcess(process_handle : Win32cr::Foundation::HANDLE, process_information_class : Win32cr::System::Threading::PROCESSINFOCLASS, process_information : Void*, process_information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun NtQueryInformationThread(thread_handle : Win32cr::Foundation::HANDLE, thread_information_class : Win32cr::System::Threading::THREADINFOCLASS, thread_information : Void*, thread_information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun NtSetInformationThread(thread_handle : Win32cr::Foundation::HANDLE, thread_information_class : Win32cr::System::Threading::THREADINFOCLASS, thread_information : Void*, thread_information_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
   end

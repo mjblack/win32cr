@@ -6,6 +6,7 @@ require "./../windows_and_messaging.cr"
 require "./../text_services.cr"
 
 module Win32cr::UI::Input::Ime
+  extend self
   alias IMCENUMPROC = Proc(Win32cr::Globalization::HIMC, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
   alias REGISTERWORDENUMPROCA = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Void*, Int32)
@@ -2783,170 +2784,580 @@ module Win32cr::UI::Input::Ime
 
   end
 
+  def immInstallIMEA(lpszIMEFileName : Win32cr::Foundation::PSTR, lpszLayoutText : Win32cr::Foundation::PSTR) : Win32cr::UI::TextServices::HKL
+    C.ImmInstallIMEA(lpszIMEFileName, lpszLayoutText)
+  end
+
+  def immInstallIMEW(lpszIMEFileName : Win32cr::Foundation::PWSTR, lpszLayoutText : Win32cr::Foundation::PWSTR) : Win32cr::UI::TextServices::HKL
+    C.ImmInstallIMEW(lpszIMEFileName, lpszLayoutText)
+  end
+
+  def immGetDefaultIMEWnd(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    C.ImmGetDefaultIMEWnd(param0)
+  end
+
+  def immGetDescriptionA(param0 : Win32cr::UI::TextServices::HKL, lpszDescription : UInt8*, uBufLen : UInt32) : UInt32
+    C.ImmGetDescriptionA(param0, lpszDescription, uBufLen)
+  end
+
+  def immGetDescriptionW(param0 : Win32cr::UI::TextServices::HKL, lpszDescription : UInt16*, uBufLen : UInt32) : UInt32
+    C.ImmGetDescriptionW(param0, lpszDescription, uBufLen)
+  end
+
+  def immGetIMEFileNameA(param0 : Win32cr::UI::TextServices::HKL, lpszFileName : UInt8*, uBufLen : UInt32) : UInt32
+    C.ImmGetIMEFileNameA(param0, lpszFileName, uBufLen)
+  end
+
+  def immGetIMEFileNameW(param0 : Win32cr::UI::TextServices::HKL, lpszFileName : UInt16*, uBufLen : UInt32) : UInt32
+    C.ImmGetIMEFileNameW(param0, lpszFileName, uBufLen)
+  end
+
+  def immGetProperty(param0 : Win32cr::UI::TextServices::HKL, param1 : UInt32) : UInt32
+    C.ImmGetProperty(param0, param1)
+  end
+
+  def immIsIME(param0 : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::BOOL
+    C.ImmIsIME(param0)
+  end
+
+  def immSimulateHotKey(param0 : Win32cr::Foundation::HWND, param1 : UInt32) : Win32cr::Foundation::BOOL
+    C.ImmSimulateHotKey(param0, param1)
+  end
+
+  def immCreateContext : Win32cr::Globalization::HIMC
+    C.ImmCreateContext
+  end
+
+  def immDestroyContext(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    C.ImmDestroyContext(param0)
+  end
+
+  def immGetContext(param0 : Win32cr::Foundation::HWND) : Win32cr::Globalization::HIMC
+    C.ImmGetContext(param0)
+  end
+
+  def immReleaseContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    C.ImmReleaseContext(param0, param1)
+  end
+
+  def immAssociateContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC) : Win32cr::Globalization::HIMC
+    C.ImmAssociateContext(param0, param1)
+  end
+
+  def immAssociateContextEx(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC, param2 : UInt32) : Win32cr::Foundation::BOOL
+    C.ImmAssociateContextEx(param0, param1, param2)
+  end
+
+  def immGetCompositionStringA(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpBuf : Void*, dwBufLen : UInt32) : Int32
+    C.ImmGetCompositionStringA(param0, param1, lpBuf, dwBufLen)
+  end
+
+  def immGetCompositionStringW(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpBuf : Void*, dwBufLen : UInt32) : Int32
+    C.ImmGetCompositionStringW(param0, param1, lpBuf, dwBufLen)
+  end
+
+  def immSetCompositionStringA(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
+    C.ImmSetCompositionStringA(param0, dwIndex, lpComp, dwCompLen, lpRead, dwReadLen)
+  end
+
+  def immSetCompositionStringW(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
+    C.ImmSetCompositionStringW(param0, dwIndex, lpComp, dwCompLen, lpRead, dwReadLen)
+  end
+
+  def immGetCandidateListCountA(param0 : Win32cr::Globalization::HIMC, lpdwListCount : UInt32*) : UInt32
+    C.ImmGetCandidateListCountA(param0, lpdwListCount)
+  end
+
+  def immGetCandidateListCountW(param0 : Win32cr::Globalization::HIMC, lpdwListCount : UInt32*) : UInt32
+    C.ImmGetCandidateListCountW(param0, lpdwListCount)
+  end
+
+  def immGetCandidateListA(param0 : Win32cr::Globalization::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
+    C.ImmGetCandidateListA(param0, deIndex, lpCandList, dwBufLen)
+  end
+
+  def immGetCandidateListW(param0 : Win32cr::Globalization::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
+    C.ImmGetCandidateListW(param0, deIndex, lpCandList, dwBufLen)
+  end
+
+  def immGetGuideLineA(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PSTR, dwBufLen : UInt32) : UInt32
+    C.ImmGetGuideLineA(param0, dwIndex, lpBuf, dwBufLen)
+  end
+
+  def immGetGuideLineW(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PWSTR, dwBufLen : UInt32) : UInt32
+    C.ImmGetGuideLineW(param0, dwIndex, lpBuf, dwBufLen)
+  end
+
+  def immGetConversionStatus(param0 : Win32cr::Globalization::HIMC, lpfdwConversion : UInt32*, lpfdwSentence : UInt32*) : Win32cr::Foundation::BOOL
+    C.ImmGetConversionStatus(param0, lpfdwConversion, lpfdwSentence)
+  end
+
+  def immSetConversionStatus(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32) : Win32cr::Foundation::BOOL
+    C.ImmSetConversionStatus(param0, param1, param2)
+  end
+
+  def immGetOpenStatus(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    C.ImmGetOpenStatus(param0)
+  end
+
+  def immSetOpenStatus(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.ImmSetOpenStatus(param0, param1)
+  end
+
+  def immGetCompositionFontA(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
+    C.ImmGetCompositionFontA(param0, lplf)
+  end
+
+  def immGetCompositionFontW(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
+    C.ImmGetCompositionFontW(param0, lplf)
+  end
+
+  def immSetCompositionFontA(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
+    C.ImmSetCompositionFontA(param0, lplf)
+  end
+
+  def immSetCompositionFontW(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
+    C.ImmSetCompositionFontW(param0, lplf)
+  end
+
+  def immConfigureIMEA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
+    C.ImmConfigureIMEA(param0, param1, param2, param3)
+  end
+
+  def immConfigureIMEW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
+    C.ImmConfigureIMEW(param0, param1, param2, param3)
+  end
+
+  def immEscapeA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::LRESULT
+    C.ImmEscapeA(param0, param1, param2, param3)
+  end
+
+  def immEscapeW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::LRESULT
+    C.ImmEscapeW(param0, param1, param2, param3)
+  end
+
+  def immGetConversionListA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, lpSrc : Win32cr::Foundation::PSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
+    C.ImmGetConversionListA(param0, param1, lpSrc, lpDst, dwBufLen, uFlag)
+  end
+
+  def immGetConversionListW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, lpSrc : Win32cr::Foundation::PWSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
+    C.ImmGetConversionListW(param0, param1, lpSrc, lpDst, dwBufLen, uFlag)
+  end
+
+  def immNotifyIME(param0 : Win32cr::Globalization::HIMC, dwAction : Win32cr::UI::Input::Ime::NOTIFY_IME_ACTION, dwIndex : Win32cr::UI::Input::Ime::NOTIFY_IME_INDEX, dwValue : UInt32) : Win32cr::Foundation::BOOL
+    C.ImmNotifyIME(param0, dwAction, dwIndex, dwValue)
+  end
+
+  def immGetStatusWindowPos(param0 : Win32cr::Globalization::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.ImmGetStatusWindowPos(param0, lpptPos)
+  end
+
+  def immSetStatusWindowPos(param0 : Win32cr::Globalization::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.ImmSetStatusWindowPos(param0, lpptPos)
+  end
+
+  def immGetCompositionWindow(param0 : Win32cr::Globalization::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
+    C.ImmGetCompositionWindow(param0, lpCompForm)
+  end
+
+  def immSetCompositionWindow(param0 : Win32cr::Globalization::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
+    C.ImmSetCompositionWindow(param0, lpCompForm)
+  end
+
+  def immGetCandidateWindow(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
+    C.ImmGetCandidateWindow(param0, param1, lpCandidate)
+  end
+
+  def immSetCandidateWindow(param0 : Win32cr::Globalization::HIMC, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
+    C.ImmSetCandidateWindow(param0, lpCandidate)
+  end
+
+  def immIsUIMessageA(param0 : Win32cr::Foundation::HWND, param1 : UInt32, param2 : Win32cr::Foundation::WPARAM, param3 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.ImmIsUIMessageA(param0, param1, param2, param3)
+  end
+
+  def immIsUIMessageW(param0 : Win32cr::Foundation::HWND, param1 : UInt32, param2 : Win32cr::Foundation::WPARAM, param3 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.ImmIsUIMessageW(param0, param1, param2, param3)
+  end
+
+  def immGetVirtualKey(param0 : Win32cr::Foundation::HWND) : UInt32
+    C.ImmGetVirtualKey(param0)
+  end
+
+  def immRegisterWordA(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.ImmRegisterWordA(param0, lpszReading, param2, lpszRegister)
+  end
+
+  def immRegisterWordW(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.ImmRegisterWordW(param0, lpszReading, param2, lpszRegister)
+  end
+
+  def immUnregisterWordA(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.ImmUnregisterWordA(param0, lpszReading, param2, lpszUnregister)
+  end
+
+  def immUnregisterWordW(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.ImmUnregisterWordW(param0, lpszReading, param2, lpszUnregister)
+  end
+
+  def immGetRegisterWordStyleA(param0 : Win32cr::UI::TextServices::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFA*) : UInt32
+    C.ImmGetRegisterWordStyleA(param0, nItem, lpStyleBuf)
+  end
+
+  def immGetRegisterWordStyleW(param0 : Win32cr::UI::TextServices::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFW*) : UInt32
+    C.ImmGetRegisterWordStyleW(param0, nItem, lpStyleBuf)
+  end
+
+  def immEnumRegisterWordA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCA, lpszReading : Win32cr::Foundation::PSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PSTR, param5 : Void*) : UInt32
+    C.ImmEnumRegisterWordA(param0, param1, lpszReading, param3, lpszRegister, param5)
+  end
+
+  def immEnumRegisterWordW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCW, lpszReading : Win32cr::Foundation::PWSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR, param5 : Void*) : UInt32
+    C.ImmEnumRegisterWordW(param0, param1, lpszReading, param3, lpszRegister, param5)
+  end
+
+  def immDisableIME(param0 : UInt32) : Win32cr::Foundation::BOOL
+    C.ImmDisableIME(param0)
+  end
+
+  def immEnumInputContext(idThread : UInt32, lpfn : Win32cr::UI::Input::Ime::IMCENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.ImmEnumInputContext(idThread, lpfn, lParam)
+  end
+
+  def immGetImeMenuItemsA(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, dwSize : UInt32) : UInt32
+    C.ImmGetImeMenuItemsA(param0, param1, param2, lpImeParentMenu, lpImeMenu, dwSize)
+  end
+
+  def immGetImeMenuItemsW(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, dwSize : UInt32) : UInt32
+    C.ImmGetImeMenuItemsW(param0, param1, param2, lpImeParentMenu, lpImeMenu, dwSize)
+  end
+
+  def immDisableTextFrameService(idThread : UInt32) : Win32cr::Foundation::BOOL
+    C.ImmDisableTextFrameService(idThread)
+  end
+
+  def immDisableLegacyIME : Win32cr::Foundation::BOOL
+    C.ImmDisableLegacyIME
+  end
+
+  def immGetHotKey(param0 : UInt32, lpuModifiers : UInt32*, lpuVKey : UInt32*, phKL : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    C.ImmGetHotKey(param0, lpuModifiers, lpuVKey, phKL)
+  end
+
+  def immSetHotKey(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::BOOL
+    C.ImmSetHotKey(param0, param1, param2, param3)
+  end
+
+  def immGenerateMessage(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    C.ImmGenerateMessage(param0)
+  end
+
+  def immRequestMessageA(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.ImmRequestMessageA(param0, param1, param2)
+  end
+
+  def immRequestMessageW(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.ImmRequestMessageW(param0, param1, param2)
+  end
+
+  def immCreateSoftKeyboard(param0 : UInt32, param1 : Win32cr::Foundation::HWND, param2 : Int32, param3 : Int32) : Win32cr::Foundation::HWND
+    C.ImmCreateSoftKeyboard(param0, param1, param2, param3)
+  end
+
+  def immDestroySoftKeyboard(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.ImmDestroySoftKeyboard(param0)
+  end
+
+  def immShowSoftKeyboard(param0 : Win32cr::Foundation::HWND, param1 : Int32) : Win32cr::Foundation::BOOL
+    C.ImmShowSoftKeyboard(param0, param1)
+  end
+
+  def immLockIMC(param0 : Win32cr::Globalization::HIMC) : Win32cr::UI::Input::Ime::INPUTCONTEXT*
+    C.ImmLockIMC(param0)
+  end
+
+  def immUnlockIMC(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    C.ImmUnlockIMC(param0)
+  end
+
+  def immGetIMCLockCount(param0 : Win32cr::Globalization::HIMC) : UInt32
+    C.ImmGetIMCLockCount(param0)
+  end
+
+  def immCreateIMCC(param0 : UInt32) : Win32cr::Globalization::HIMCC
+    C.ImmCreateIMCC(param0)
+  end
+
+  def immDestroyIMCC(param0 : Win32cr::Globalization::HIMCC) : Win32cr::Globalization::HIMCC
+    C.ImmDestroyIMCC(param0)
+  end
+
+  def immLockIMCC(param0 : Win32cr::Globalization::HIMCC) : Void*
+    C.ImmLockIMCC(param0)
+  end
+
+  def immUnlockIMCC(param0 : Win32cr::Globalization::HIMCC) : Win32cr::Foundation::BOOL
+    C.ImmUnlockIMCC(param0)
+  end
+
+  def immGetIMCCLockCount(param0 : Win32cr::Globalization::HIMCC) : UInt32
+    C.ImmGetIMCCLockCount(param0)
+  end
+
+  def immReSizeIMCC(param0 : Win32cr::Globalization::HIMCC, param1 : UInt32) : Win32cr::Globalization::HIMCC
+    C.ImmReSizeIMCC(param0, param1)
+  end
+
+  def immGetIMCCSize(param0 : Win32cr::Globalization::HIMCC) : UInt32
+    C.ImmGetIMCCSize(param0)
+  end
+
   @[Link("imm32")]
   lib C
+    # :nodoc:
     fun ImmInstallIMEA(lpszIMEFileName : Win32cr::Foundation::PSTR, lpszLayoutText : Win32cr::Foundation::PSTR) : Win32cr::UI::TextServices::HKL
 
+    # :nodoc:
     fun ImmInstallIMEW(lpszIMEFileName : Win32cr::Foundation::PWSTR, lpszLayoutText : Win32cr::Foundation::PWSTR) : Win32cr::UI::TextServices::HKL
 
+    # :nodoc:
     fun ImmGetDefaultIMEWnd(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun ImmGetDescriptionA(param0 : Win32cr::UI::TextServices::HKL, lpszDescription : UInt8*, uBufLen : UInt32) : UInt32
 
+    # :nodoc:
     fun ImmGetDescriptionW(param0 : Win32cr::UI::TextServices::HKL, lpszDescription : UInt16*, uBufLen : UInt32) : UInt32
 
+    # :nodoc:
     fun ImmGetIMEFileNameA(param0 : Win32cr::UI::TextServices::HKL, lpszFileName : UInt8*, uBufLen : UInt32) : UInt32
 
+    # :nodoc:
     fun ImmGetIMEFileNameW(param0 : Win32cr::UI::TextServices::HKL, lpszFileName : UInt16*, uBufLen : UInt32) : UInt32
 
+    # :nodoc:
     fun ImmGetProperty(param0 : Win32cr::UI::TextServices::HKL, param1 : UInt32) : UInt32
 
+    # :nodoc:
     fun ImmIsIME(param0 : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmSimulateHotKey(param0 : Win32cr::Foundation::HWND, param1 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmCreateContext : Win32cr::Globalization::HIMC
 
+    # :nodoc:
     fun ImmDestroyContext(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetContext(param0 : Win32cr::Foundation::HWND) : Win32cr::Globalization::HIMC
 
+    # :nodoc:
     fun ImmReleaseContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmAssociateContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC) : Win32cr::Globalization::HIMC
 
+    # :nodoc:
     fun ImmAssociateContextEx(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC, param2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetCompositionStringA(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpBuf : Void*, dwBufLen : UInt32) : Int32
 
+    # :nodoc:
     fun ImmGetCompositionStringW(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpBuf : Void*, dwBufLen : UInt32) : Int32
 
+    # :nodoc:
     fun ImmSetCompositionStringA(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmSetCompositionStringW(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetCandidateListCountA(param0 : Win32cr::Globalization::HIMC, lpdwListCount : UInt32*) : UInt32
 
+    # :nodoc:
     fun ImmGetCandidateListCountW(param0 : Win32cr::Globalization::HIMC, lpdwListCount : UInt32*) : UInt32
 
+    # :nodoc:
     fun ImmGetCandidateListA(param0 : Win32cr::Globalization::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
 
+    # :nodoc:
     fun ImmGetCandidateListW(param0 : Win32cr::Globalization::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
 
+    # :nodoc:
     fun ImmGetGuideLineA(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PSTR, dwBufLen : UInt32) : UInt32
 
+    # :nodoc:
     fun ImmGetGuideLineW(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PWSTR, dwBufLen : UInt32) : UInt32
 
+    # :nodoc:
     fun ImmGetConversionStatus(param0 : Win32cr::Globalization::HIMC, lpfdwConversion : UInt32*, lpfdwSentence : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmSetConversionStatus(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetOpenStatus(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmSetOpenStatus(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetCompositionFontA(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetCompositionFontW(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmSetCompositionFontA(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmSetCompositionFontW(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmConfigureIMEA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmConfigureIMEW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmEscapeA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun ImmEscapeW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun ImmGetConversionListA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, lpSrc : Win32cr::Foundation::PSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
 
+    # :nodoc:
     fun ImmGetConversionListW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, lpSrc : Win32cr::Foundation::PWSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
 
+    # :nodoc:
     fun ImmNotifyIME(param0 : Win32cr::Globalization::HIMC, dwAction : Win32cr::UI::Input::Ime::NOTIFY_IME_ACTION, dwIndex : Win32cr::UI::Input::Ime::NOTIFY_IME_INDEX, dwValue : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetStatusWindowPos(param0 : Win32cr::Globalization::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmSetStatusWindowPos(param0 : Win32cr::Globalization::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetCompositionWindow(param0 : Win32cr::Globalization::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmSetCompositionWindow(param0 : Win32cr::Globalization::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetCandidateWindow(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmSetCandidateWindow(param0 : Win32cr::Globalization::HIMC, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmIsUIMessageA(param0 : Win32cr::Foundation::HWND, param1 : UInt32, param2 : Win32cr::Foundation::WPARAM, param3 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmIsUIMessageW(param0 : Win32cr::Foundation::HWND, param1 : UInt32, param2 : Win32cr::Foundation::WPARAM, param3 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetVirtualKey(param0 : Win32cr::Foundation::HWND) : UInt32
 
+    # :nodoc:
     fun ImmRegisterWordA(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmRegisterWordW(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmUnregisterWordA(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmUnregisterWordW(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetRegisterWordStyleA(param0 : Win32cr::UI::TextServices::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFA*) : UInt32
 
+    # :nodoc:
     fun ImmGetRegisterWordStyleW(param0 : Win32cr::UI::TextServices::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFW*) : UInt32
 
+    # :nodoc:
     fun ImmEnumRegisterWordA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCA, lpszReading : Win32cr::Foundation::PSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PSTR, param5 : Void*) : UInt32
 
+    # :nodoc:
     fun ImmEnumRegisterWordW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCW, lpszReading : Win32cr::Foundation::PWSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR, param5 : Void*) : UInt32
 
+    # :nodoc:
     fun ImmDisableIME(param0 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmEnumInputContext(idThread : UInt32, lpfn : Win32cr::UI::Input::Ime::IMCENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetImeMenuItemsA(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, dwSize : UInt32) : UInt32
 
+    # :nodoc:
     fun ImmGetImeMenuItemsW(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, dwSize : UInt32) : UInt32
 
+    # :nodoc:
     fun ImmDisableTextFrameService(idThread : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmDisableLegacyIME : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetHotKey(param0 : UInt32, lpuModifiers : UInt32*, lpuVKey : UInt32*, phKL : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmSetHotKey(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGenerateMessage(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmRequestMessageA(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun ImmRequestMessageW(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun ImmCreateSoftKeyboard(param0 : UInt32, param1 : Win32cr::Foundation::HWND, param2 : Int32, param3 : Int32) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun ImmDestroySoftKeyboard(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmShowSoftKeyboard(param0 : Win32cr::Foundation::HWND, param1 : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmLockIMC(param0 : Win32cr::Globalization::HIMC) : Win32cr::UI::Input::Ime::INPUTCONTEXT*
 
+    # :nodoc:
     fun ImmUnlockIMC(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetIMCLockCount(param0 : Win32cr::Globalization::HIMC) : UInt32
 
+    # :nodoc:
     fun ImmCreateIMCC(param0 : UInt32) : Win32cr::Globalization::HIMCC
 
+    # :nodoc:
     fun ImmDestroyIMCC(param0 : Win32cr::Globalization::HIMCC) : Win32cr::Globalization::HIMCC
 
+    # :nodoc:
     fun ImmLockIMCC(param0 : Win32cr::Globalization::HIMCC) : Void*
 
+    # :nodoc:
     fun ImmUnlockIMCC(param0 : Win32cr::Globalization::HIMCC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImmGetIMCCLockCount(param0 : Win32cr::Globalization::HIMCC) : UInt32
 
+    # :nodoc:
     fun ImmReSizeIMCC(param0 : Win32cr::Globalization::HIMCC, param1 : UInt32) : Win32cr::Globalization::HIMCC
 
+    # :nodoc:
     fun ImmGetIMCCSize(param0 : Win32cr::Globalization::HIMCC) : UInt32
 
   end

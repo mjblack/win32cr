@@ -3,6 +3,7 @@ require "./registry.cr"
 require "./com.cr"
 
 module Win32cr::System::DeploymentServices
+  extend self
   alias PFN_WdsCliTraceFunction = Proc(Win32cr::Foundation::PWSTR, Int8*, Void)
 
   alias PFN_WdsCliCallback = Proc(Win32cr::System::DeploymentServices::PFN_WDS_CLI_CALLBACK_MESSAGE_ID, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Void*, Void)
@@ -2551,198 +2552,668 @@ module Win32cr::System::DeploymentServices
 
   end
 
+  def wdsCliClose(handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.WdsCliClose(handle)
+  end
+
+  def wdsCliRegisterTrace(pfn : Win32cr::System::DeploymentServices::PFN_WdsCliTraceFunction) : Win32cr::Foundation::HRESULT
+    C.WdsCliRegisterTrace(pfn)
+  end
+
+  def wdsCliFreeStringArray(ppwszArray : Win32cr::Foundation::PWSTR*, ulCount : UInt32) : Win32cr::Foundation::HRESULT
+    C.WdsCliFreeStringArray(ppwszArray, ulCount)
+  end
+
+  def wdsCliFindFirstImage(hSession : Win32cr::Foundation::HANDLE, phFindHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.WdsCliFindFirstImage(hSession, phFindHandle)
+  end
+
+  def wdsCliFindNextImage(handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.WdsCliFindNextImage(handle)
+  end
+
+  def wdsCliGetEnumerationFlags(handle : Win32cr::Foundation::HANDLE, pdwFlags : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetEnumerationFlags(handle, pdwFlags)
+  end
+
+  def wdsCliGetImageHandleFromFindHandle(find_handle : Win32cr::Foundation::HANDLE, phImageHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageHandleFromFindHandle(find_handle, phImageHandle)
+  end
+
+  def wdsCliGetImageHandleFromTransferHandle(hTransfer : Win32cr::Foundation::HANDLE, phImageHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageHandleFromTransferHandle(hTransfer, phImageHandle)
+  end
+
+  def wdsCliCreateSession(pwszServer : Win32cr::Foundation::PWSTR, pCred : Win32cr::System::DeploymentServices::WDS_CLI_CRED*, phSession : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.WdsCliCreateSession(pwszServer, pCred, phSession)
+  end
+
+  def wdsCliAuthorizeSession(hSession : Win32cr::Foundation::HANDLE, pCred : Win32cr::System::DeploymentServices::WDS_CLI_CRED*) : Win32cr::Foundation::HRESULT
+    C.WdsCliAuthorizeSession(hSession, pCred)
+  end
+
+  def wdsCliInitializeLog(hSession : Win32cr::Foundation::HANDLE, ulClientArchitecture : Win32cr::System::DeploymentServices::CPU_ARCHITECTURE, pwszClientId : Win32cr::Foundation::PWSTR, pwszClientAddress : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.WdsCliInitializeLog(hSession, ulClientArchitecture, pwszClientId, pwszClientAddress)
+  end
+
+  def wdsCliLog(hSession : Win32cr::Foundation::HANDLE, ulLogLevel : UInt32, ulMessageCode : UInt32) : Win32cr::Foundation::HRESULT
+    C.WdsCliLog(hSession, ulLogLevel, ulMessageCode)
+  end
+
+  def wdsCliGetImageName(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageName(hIfh, ppwszValue)
+  end
+
+  def wdsCliGetImageDescription(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageDescription(hIfh, ppwszValue)
+  end
+
+  def wdsCliGetImageType(hIfh : Win32cr::Foundation::HANDLE, pImageType : Win32cr::System::DeploymentServices::WDS_CLI_IMAGE_TYPE*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageType(hIfh, pImageType)
+  end
+
+  def wdsCliGetImageFiles(hIfh : Win32cr::Foundation::HANDLE, pppwszFiles : Win32cr::Foundation::PWSTR**, pdwCount : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageFiles(hIfh, pppwszFiles, pdwCount)
+  end
+
+  def wdsCliGetImageLanguage(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageLanguage(hIfh, ppwszValue)
+  end
+
+  def wdsCliGetImageLanguages(hIfh : Win32cr::Foundation::HANDLE, pppszValues : Int8***, pdwNumValues : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageLanguages(hIfh, pppszValues, pdwNumValues)
+  end
+
+  def wdsCliGetImageVersion(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageVersion(hIfh, ppwszValue)
+  end
+
+  def wdsCliGetImagePath(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImagePath(hIfh, ppwszValue)
+  end
+
+  def wdsCliGetImageIndex(hIfh : Win32cr::Foundation::HANDLE, pdwValue : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageIndex(hIfh, pdwValue)
+  end
+
+  def wdsCliGetImageArchitecture(hIfh : Win32cr::Foundation::HANDLE, pdwValue : Win32cr::System::DeploymentServices::CPU_ARCHITECTURE*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageArchitecture(hIfh, pdwValue)
+  end
+
+  def wdsCliGetImageLastModifiedTime(hIfh : Win32cr::Foundation::HANDLE, ppSysTimeValue : Win32cr::Foundation::SYSTEMTIME**) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageLastModifiedTime(hIfh, ppSysTimeValue)
+  end
+
+  def wdsCliGetImageSize(hIfh : Win32cr::Foundation::HANDLE, pullValue : UInt64*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageSize(hIfh, pullValue)
+  end
+
+  def wdsCliGetImageHalName(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageHalName(hIfh, ppwszValue)
+  end
+
+  def wdsCliGetImageGroup(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageGroup(hIfh, ppwszValue)
+  end
+
+  def wdsCliGetImageNamespace(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageNamespace(hIfh, ppwszValue)
+  end
+
+  def wdsCliGetImageParameter(hIfh : Win32cr::Foundation::HANDLE, param_type : Win32cr::System::DeploymentServices::WDS_CLI_IMAGE_PARAM_TYPE, pResponse : Void*, uResponseLen : UInt32) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetImageParameter(hIfh, param_type, pResponse, uResponseLen)
+  end
+
+  def wdsCliGetTransferSize(hIfh : Win32cr::Foundation::HANDLE, pullValue : UInt64*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetTransferSize(hIfh, pullValue)
+  end
+
+  def wdsCliSetTransferBufferSize(ulSizeInBytes : UInt32) : Void
+    C.WdsCliSetTransferBufferSize(ulSizeInBytes)
+  end
+
+  def wdsCliTransferImage(hImage : Win32cr::Foundation::HANDLE, pwszLocalPath : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwReserved : UInt32, pfnWdsCliCallback : Win32cr::System::DeploymentServices::PFN_WdsCliCallback, pvUserData : Void*, phTransfer : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.WdsCliTransferImage(hImage, pwszLocalPath, dwFlags, dwReserved, pfnWdsCliCallback, pvUserData, phTransfer)
+  end
+
+  def wdsCliTransferFile(pwszServer : Win32cr::Foundation::PWSTR, pwszNamespace : Win32cr::Foundation::PWSTR, pwszRemoteFilePath : Win32cr::Foundation::PWSTR, pwszLocalFilePath : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwReserved : UInt32, pfnWdsCliCallback : Win32cr::System::DeploymentServices::PFN_WdsCliCallback, pvUserData : Void*, phTransfer : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.WdsCliTransferFile(pwszServer, pwszNamespace, pwszRemoteFilePath, pwszLocalFilePath, dwFlags, dwReserved, pfnWdsCliCallback, pvUserData, phTransfer)
+  end
+
+  def wdsCliCancelTransfer(hTransfer : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.WdsCliCancelTransfer(hTransfer)
+  end
+
+  def wdsCliWaitForTransfer(hTransfer : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.WdsCliWaitForTransfer(hTransfer)
+  end
+
+  def wdsCliObtainDriverPackages(hImage : Win32cr::Foundation::HANDLE, ppwszServerName : Win32cr::Foundation::PWSTR*, pppwszDriverPackages : Win32cr::Foundation::PWSTR**, pulCount : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WdsCliObtainDriverPackages(hImage, ppwszServerName, pppwszDriverPackages, pulCount)
+  end
+
+  def wdsCliObtainDriverPackagesEx(hSession : Win32cr::Foundation::HANDLE, pwszMachineInfo : Win32cr::Foundation::PWSTR, ppwszServerName : Win32cr::Foundation::PWSTR*, pppwszDriverPackages : Win32cr::Foundation::PWSTR**, pulCount : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WdsCliObtainDriverPackagesEx(hSession, pwszMachineInfo, ppwszServerName, pppwszDriverPackages, pulCount)
+  end
+
+  def wdsCliGetDriverQueryXml(pwszWinDirPath : Win32cr::Foundation::PWSTR, ppwszDriverQuery : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.WdsCliGetDriverQueryXml(pwszWinDirPath, ppwszDriverQuery)
+  end
+
+  def pxeProviderRegister(pszProviderName : Win32cr::Foundation::PWSTR, pszModulePath : Win32cr::Foundation::PWSTR, index : UInt32, bIsCritical : Win32cr::Foundation::BOOL, phProviderKey : Win32cr::System::Registry::HKEY*) : UInt32
+    C.PxeProviderRegister(pszProviderName, pszModulePath, index, bIsCritical, phProviderKey)
+  end
+
+  def pxeProviderUnRegister(pszProviderName : Win32cr::Foundation::PWSTR) : UInt32
+    C.PxeProviderUnRegister(pszProviderName)
+  end
+
+  def pxeProviderQueryIndex(pszProviderName : Win32cr::Foundation::PWSTR, puIndex : UInt32*) : UInt32
+    C.PxeProviderQueryIndex(pszProviderName, puIndex)
+  end
+
+  def pxeProviderEnumFirst(phEnum : Win32cr::Foundation::HANDLE*) : UInt32
+    C.PxeProviderEnumFirst(phEnum)
+  end
+
+  def pxeProviderEnumNext(hEnum : Win32cr::Foundation::HANDLE, ppProvider : Win32cr::System::DeploymentServices::PXE_PROVIDER**) : UInt32
+    C.PxeProviderEnumNext(hEnum, ppProvider)
+  end
+
+  def pxeProviderEnumClose(hEnum : Win32cr::Foundation::HANDLE) : UInt32
+    C.PxeProviderEnumClose(hEnum)
+  end
+
+  def pxeProviderFreeInfo(pProvider : Win32cr::System::DeploymentServices::PXE_PROVIDER*) : UInt32
+    C.PxeProviderFreeInfo(pProvider)
+  end
+
+  def pxeRegisterCallback(hProvider : Win32cr::Foundation::HANDLE, callback_type : UInt32, pCallbackFunction : Void*, pContext : Void*) : UInt32
+    C.PxeRegisterCallback(hProvider, callback_type, pCallbackFunction, pContext)
+  end
+
+  def pxeSendReply(hClientRequest : Win32cr::Foundation::HANDLE, pPacket : Void*, uPacketLen : UInt32, pAddress : Win32cr::System::DeploymentServices::PXE_ADDRESS*) : UInt32
+    C.PxeSendReply(hClientRequest, pPacket, uPacketLen, pAddress)
+  end
+
+  def pxeAsyncRecvDone(hClientRequest : Win32cr::Foundation::HANDLE, action : UInt32) : UInt32
+    C.PxeAsyncRecvDone(hClientRequest, action)
+  end
+
+  def pxeTrace(hProvider : Win32cr::Foundation::HANDLE, severity : UInt32, pszFormat : Win32cr::Foundation::PWSTR) : UInt32
+    C.PxeTrace(hProvider, severity, pszFormat)
+  end
+
+  def pxeTraceV(hProvider : Win32cr::Foundation::HANDLE, severity : UInt32, pszFormat : Win32cr::Foundation::PWSTR, params : Int8*) : UInt32
+    C.PxeTraceV(hProvider, severity, pszFormat, params)
+  end
+
+  def pxePacketAllocate(hProvider : Win32cr::Foundation::HANDLE, hClientRequest : Win32cr::Foundation::HANDLE, uSize : UInt32) : Void*
+    C.PxePacketAllocate(hProvider, hClientRequest, uSize)
+  end
+
+  def pxePacketFree(hProvider : Win32cr::Foundation::HANDLE, hClientRequest : Win32cr::Foundation::HANDLE, pPacket : Void*) : UInt32
+    C.PxePacketFree(hProvider, hClientRequest, pPacket)
+  end
+
+  def pxeProviderSetAttribute(hProvider : Win32cr::Foundation::HANDLE, attribute : UInt32, pParameterBuffer : Void*, uParamLen : UInt32) : UInt32
+    C.PxeProviderSetAttribute(hProvider, attribute, pParameterBuffer, uParamLen)
+  end
+
+  def pxeDhcpInitialize(pRecvPacket : Void*, uRecvPacketLen : UInt32, pReplyPacket : Void*, uMaxReplyPacketLen : UInt32, puReplyPacketLen : UInt32*) : UInt32
+    C.PxeDhcpInitialize(pRecvPacket, uRecvPacketLen, pReplyPacket, uMaxReplyPacketLen, puReplyPacketLen)
+  end
+
+  def pxeDhcpv6Initialize(pRequest : Void*, cbRequest : UInt32, pReply : Void*, cbReply : UInt32, pcbReplyUsed : UInt32*) : UInt32
+    C.PxeDhcpv6Initialize(pRequest, cbRequest, pReply, cbReply, pcbReplyUsed)
+  end
+
+  def pxeDhcpAppendOption(pReplyPacket : Void*, uMaxReplyPacketLen : UInt32, puReplyPacketLen : UInt32*, bOption : UInt8, bOptionLen : UInt8, pValue : Void*) : UInt32
+    C.PxeDhcpAppendOption(pReplyPacket, uMaxReplyPacketLen, puReplyPacketLen, bOption, bOptionLen, pValue)
+  end
+
+  def pxeDhcpv6AppendOption(pReply : Void*, cbReply : UInt32, pcbReplyUsed : UInt32*, wOptionType : UInt16, cbOption : UInt16, pOption : Void*) : UInt32
+    C.PxeDhcpv6AppendOption(pReply, cbReply, pcbReplyUsed, wOptionType, cbOption, pOption)
+  end
+
+  def pxeDhcpAppendOptionRaw(pReplyPacket : Void*, uMaxReplyPacketLen : UInt32, puReplyPacketLen : UInt32*, uBufferLen : UInt16, pBuffer : Void*) : UInt32
+    C.PxeDhcpAppendOptionRaw(pReplyPacket, uMaxReplyPacketLen, puReplyPacketLen, uBufferLen, pBuffer)
+  end
+
+  def pxeDhcpv6AppendOptionRaw(pReply : Void*, cbReply : UInt32, pcbReplyUsed : UInt32*, cbBuffer : UInt16, pBuffer : Void*) : UInt32
+    C.PxeDhcpv6AppendOptionRaw(pReply, cbReply, pcbReplyUsed, cbBuffer, pBuffer)
+  end
+
+  def pxeDhcpIsValid(pPacket : Void*, uPacketLen : UInt32, bRequestPacket : Win32cr::Foundation::BOOL, pbPxeOptionPresent : Win32cr::Foundation::BOOL*) : UInt32
+    C.PxeDhcpIsValid(pPacket, uPacketLen, bRequestPacket, pbPxeOptionPresent)
+  end
+
+  def pxeDhcpv6IsValid(pPacket : Void*, uPacketLen : UInt32, bRequestPacket : Win32cr::Foundation::BOOL, pbPxeOptionPresent : Win32cr::Foundation::BOOL*) : UInt32
+    C.PxeDhcpv6IsValid(pPacket, uPacketLen, bRequestPacket, pbPxeOptionPresent)
+  end
+
+  def pxeDhcpGetOptionValue(pPacket : Void*, uPacketLen : UInt32, uInstance : UInt32, bOption : UInt8, pbOptionLen : UInt8*, ppOptionValue : Void**) : UInt32
+    C.PxeDhcpGetOptionValue(pPacket, uPacketLen, uInstance, bOption, pbOptionLen, ppOptionValue)
+  end
+
+  def pxeDhcpv6GetOptionValue(pPacket : Void*, uPacketLen : UInt32, uInstance : UInt32, wOption : UInt16, pwOptionLen : UInt16*, ppOptionValue : Void**) : UInt32
+    C.PxeDhcpv6GetOptionValue(pPacket, uPacketLen, uInstance, wOption, pwOptionLen, ppOptionValue)
+  end
+
+  def pxeDhcpGetVendorOptionValue(pPacket : Void*, uPacketLen : UInt32, bOption : UInt8, uInstance : UInt32, pbOptionLen : UInt8*, ppOptionValue : Void**) : UInt32
+    C.PxeDhcpGetVendorOptionValue(pPacket, uPacketLen, bOption, uInstance, pbOptionLen, ppOptionValue)
+  end
+
+  def pxeDhcpv6GetVendorOptionValue(pPacket : Void*, uPacketLen : UInt32, dwEnterpriseNumber : UInt32, wOption : UInt16, uInstance : UInt32, pwOptionLen : UInt16*, ppOptionValue : Void**) : UInt32
+    C.PxeDhcpv6GetVendorOptionValue(pPacket, uPacketLen, dwEnterpriseNumber, wOption, uInstance, pwOptionLen, ppOptionValue)
+  end
+
+  def pxeDhcpv6ParseRelayForw(pRelayForwPacket : Void*, uRelayForwPacketLen : UInt32, pRelayMessages : Win32cr::System::DeploymentServices::PXE_DHCPV6_NESTED_RELAY_MESSAGE*, nRelayMessages : UInt32, pnRelayMessages : UInt32*, ppInnerPacket : UInt8**, pcbInnerPacket : UInt32*) : UInt32
+    C.PxeDhcpv6ParseRelayForw(pRelayForwPacket, uRelayForwPacketLen, pRelayMessages, nRelayMessages, pnRelayMessages, ppInnerPacket, pcbInnerPacket)
+  end
+
+  def pxeDhcpv6CreateRelayRepl(pRelayMessages : Win32cr::System::DeploymentServices::PXE_DHCPV6_NESTED_RELAY_MESSAGE*, nRelayMessages : UInt32, pInnerPacket : UInt8*, cbInnerPacket : UInt32, pReplyBuffer : Void*, cbReplyBuffer : UInt32, pcbReplyBuffer : UInt32*) : UInt32
+    C.PxeDhcpv6CreateRelayRepl(pRelayMessages, nRelayMessages, pInnerPacket, cbInnerPacket, pReplyBuffer, cbReplyBuffer, pcbReplyBuffer)
+  end
+
+  def pxeGetServerInfo(uInfoType : UInt32, pBuffer : Void*, uBufferLen : UInt32) : UInt32
+    C.PxeGetServerInfo(uInfoType, pBuffer, uBufferLen)
+  end
+
+  def pxeGetServerInfoEx(uInfoType : UInt32, pBuffer : Void*, uBufferLen : UInt32, puBufferUsed : UInt32*) : UInt32
+    C.PxeGetServerInfoEx(uInfoType, pBuffer, uBufferLen, puBufferUsed)
+  end
+
+  def wdsTransportServerRegisterCallback(hProvider : Win32cr::Foundation::HANDLE, callback_id : Win32cr::System::DeploymentServices::TRANSPORTPROVIDER_CALLBACK_ID, pfnCallback : Void*) : Win32cr::Foundation::HRESULT
+    C.WdsTransportServerRegisterCallback(hProvider, callback_id, pfnCallback)
+  end
+
+  def wdsTransportServerCompleteRead(hProvider : Win32cr::Foundation::HANDLE, ulBytesRead : UInt32, pvUserData : Void*, hReadResult : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+    C.WdsTransportServerCompleteRead(hProvider, ulBytesRead, pvUserData, hReadResult)
+  end
+
+  def wdsTransportServerTrace(hProvider : Win32cr::Foundation::HANDLE, severity : UInt32, pwszFormat : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.WdsTransportServerTrace(hProvider, severity, pwszFormat)
+  end
+
+  def wdsTransportServerTraceV(hProvider : Win32cr::Foundation::HANDLE, severity : UInt32, pwszFormat : Win32cr::Foundation::PWSTR, params : Int8*) : Win32cr::Foundation::HRESULT
+    C.WdsTransportServerTraceV(hProvider, severity, pwszFormat, params)
+  end
+
+  def wdsTransportServerAllocateBuffer(hProvider : Win32cr::Foundation::HANDLE, ulBufferSize : UInt32) : Void*
+    C.WdsTransportServerAllocateBuffer(hProvider, ulBufferSize)
+  end
+
+  def wdsTransportServerFreeBuffer(hProvider : Win32cr::Foundation::HANDLE, pvBuffer : Void*) : Win32cr::Foundation::HRESULT
+    C.WdsTransportServerFreeBuffer(hProvider, pvBuffer)
+  end
+
+  def wdsTransportClientInitialize : UInt32
+    C.WdsTransportClientInitialize
+  end
+
+  def wdsTransportClientInitializeSession(pSessionRequest : Win32cr::System::DeploymentServices::WDS_TRANSPORTCLIENT_REQUEST*, pCallerData : Void*, hSessionKey : Win32cr::Foundation::HANDLE*) : UInt32
+    C.WdsTransportClientInitializeSession(pSessionRequest, pCallerData, hSessionKey)
+  end
+
+  def wdsTransportClientRegisterCallback(hSessionKey : Win32cr::Foundation::HANDLE, callback_id : Win32cr::System::DeploymentServices::TRANSPORTCLIENT_CALLBACK_ID, pfnCallback : Void*) : UInt32
+    C.WdsTransportClientRegisterCallback(hSessionKey, callback_id, pfnCallback)
+  end
+
+  def wdsTransportClientStartSession(hSessionKey : Win32cr::Foundation::HANDLE) : UInt32
+    C.WdsTransportClientStartSession(hSessionKey)
+  end
+
+  def wdsTransportClientCompleteReceive(hSessionKey : Win32cr::Foundation::HANDLE, ulSize : UInt32, pullOffset : Win32cr::Foundation::ULARGE_INTEGER*) : UInt32
+    C.WdsTransportClientCompleteReceive(hSessionKey, ulSize, pullOffset)
+  end
+
+  def wdsTransportClientCancelSession(hSessionKey : Win32cr::Foundation::HANDLE) : UInt32
+    C.WdsTransportClientCancelSession(hSessionKey)
+  end
+
+  def wdsTransportClientCancelSessionEx(hSessionKey : Win32cr::Foundation::HANDLE, dwErrorCode : UInt32) : UInt32
+    C.WdsTransportClientCancelSessionEx(hSessionKey, dwErrorCode)
+  end
+
+  def wdsTransportClientWaitForCompletion(hSessionKey : Win32cr::Foundation::HANDLE, uTimeout : UInt32) : UInt32
+    C.WdsTransportClientWaitForCompletion(hSessionKey, uTimeout)
+  end
+
+  def wdsTransportClientQueryStatus(hSessionKey : Win32cr::Foundation::HANDLE, puStatus : UInt32*, puErrorCode : UInt32*) : UInt32
+    C.WdsTransportClientQueryStatus(hSessionKey, puStatus, puErrorCode)
+  end
+
+  def wdsTransportClientCloseSession(hSessionKey : Win32cr::Foundation::HANDLE) : UInt32
+    C.WdsTransportClientCloseSession(hSessionKey)
+  end
+
+  def wdsTransportClientAddRefBuffer(pvBuffer : Void*) : UInt32
+    C.WdsTransportClientAddRefBuffer(pvBuffer)
+  end
+
+  def wdsTransportClientReleaseBuffer(pvBuffer : Void*) : UInt32
+    C.WdsTransportClientReleaseBuffer(pvBuffer)
+  end
+
+  def wdsTransportClientShutdown : UInt32
+    C.WdsTransportClientShutdown
+  end
+
+  def wdsBpParseInitialize(pPacket : Void*, uPacketLen : UInt32, pbPacketType : UInt8*, phHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.WdsBpParseInitialize(pPacket, uPacketLen, pbPacketType, phHandle)
+  end
+
+  def wdsBpParseInitializev6(pPacket : Void*, uPacketLen : UInt32, pbPacketType : UInt8*, phHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.WdsBpParseInitializev6(pPacket, uPacketLen, pbPacketType, phHandle)
+  end
+
+  def wdsBpInitialize(bPacketType : UInt8, phHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.WdsBpInitialize(bPacketType, phHandle)
+  end
+
+  def wdsBpCloseHandle(hHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.WdsBpCloseHandle(hHandle)
+  end
+
+  def wdsBpQueryOption(hHandle : Win32cr::Foundation::HANDLE, uOption : UInt32, uValueLen : UInt32, pValue : Void*, puBytes : UInt32*) : UInt32
+    C.WdsBpQueryOption(hHandle, uOption, uValueLen, pValue, puBytes)
+  end
+
+  def wdsBpAddOption(hHandle : Win32cr::Foundation::HANDLE, uOption : UInt32, uValueLen : UInt32, pValue : Void*) : UInt32
+    C.WdsBpAddOption(hHandle, uOption, uValueLen, pValue)
+  end
+
+  def wdsBpGetOptionBuffer(hHandle : Win32cr::Foundation::HANDLE, uBufferLen : UInt32, pBuffer : Void*, puBytes : UInt32*) : UInt32
+    C.WdsBpGetOptionBuffer(hHandle, uBufferLen, pBuffer, puBytes)
+  end
+
   @[Link("wdsclientapi")]
   @[Link("wdspxe")]
   @[Link("wdsmc")]
   @[Link("wdstptc")]
   @[Link("wdsbp")]
   lib C
+    # :nodoc:
     fun WdsCliClose(handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliRegisterTrace(pfn : Win32cr::System::DeploymentServices::PFN_WdsCliTraceFunction) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliFreeStringArray(ppwszArray : Win32cr::Foundation::PWSTR*, ulCount : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliFindFirstImage(hSession : Win32cr::Foundation::HANDLE, phFindHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliFindNextImage(handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetEnumerationFlags(handle : Win32cr::Foundation::HANDLE, pdwFlags : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageHandleFromFindHandle(find_handle : Win32cr::Foundation::HANDLE, phImageHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageHandleFromTransferHandle(hTransfer : Win32cr::Foundation::HANDLE, phImageHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliCreateSession(pwszServer : Win32cr::Foundation::PWSTR, pCred : Win32cr::System::DeploymentServices::WDS_CLI_CRED*, phSession : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliAuthorizeSession(hSession : Win32cr::Foundation::HANDLE, pCred : Win32cr::System::DeploymentServices::WDS_CLI_CRED*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliInitializeLog(hSession : Win32cr::Foundation::HANDLE, ulClientArchitecture : Win32cr::System::DeploymentServices::CPU_ARCHITECTURE, pwszClientId : Win32cr::Foundation::PWSTR, pwszClientAddress : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliLog(hSession : Win32cr::Foundation::HANDLE, ulLogLevel : UInt32, ulMessageCode : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageName(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageDescription(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageType(hIfh : Win32cr::Foundation::HANDLE, pImageType : Win32cr::System::DeploymentServices::WDS_CLI_IMAGE_TYPE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageFiles(hIfh : Win32cr::Foundation::HANDLE, pppwszFiles : Win32cr::Foundation::PWSTR**, pdwCount : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageLanguage(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageLanguages(hIfh : Win32cr::Foundation::HANDLE, pppszValues : Int8***, pdwNumValues : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageVersion(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImagePath(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageIndex(hIfh : Win32cr::Foundation::HANDLE, pdwValue : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageArchitecture(hIfh : Win32cr::Foundation::HANDLE, pdwValue : Win32cr::System::DeploymentServices::CPU_ARCHITECTURE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageLastModifiedTime(hIfh : Win32cr::Foundation::HANDLE, ppSysTimeValue : Win32cr::Foundation::SYSTEMTIME**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageSize(hIfh : Win32cr::Foundation::HANDLE, pullValue : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageHalName(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageGroup(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageNamespace(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetImageParameter(hIfh : Win32cr::Foundation::HANDLE, param_type : Win32cr::System::DeploymentServices::WDS_CLI_IMAGE_PARAM_TYPE, pResponse : Void*, uResponseLen : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetTransferSize(hIfh : Win32cr::Foundation::HANDLE, pullValue : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliSetTransferBufferSize(ulSizeInBytes : UInt32) : Void
 
+    # :nodoc:
     fun WdsCliTransferImage(hImage : Win32cr::Foundation::HANDLE, pwszLocalPath : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwReserved : UInt32, pfnWdsCliCallback : Win32cr::System::DeploymentServices::PFN_WdsCliCallback, pvUserData : Void*, phTransfer : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliTransferFile(pwszServer : Win32cr::Foundation::PWSTR, pwszNamespace : Win32cr::Foundation::PWSTR, pwszRemoteFilePath : Win32cr::Foundation::PWSTR, pwszLocalFilePath : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwReserved : UInt32, pfnWdsCliCallback : Win32cr::System::DeploymentServices::PFN_WdsCliCallback, pvUserData : Void*, phTransfer : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliCancelTransfer(hTransfer : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliWaitForTransfer(hTransfer : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliObtainDriverPackages(hImage : Win32cr::Foundation::HANDLE, ppwszServerName : Win32cr::Foundation::PWSTR*, pppwszDriverPackages : Win32cr::Foundation::PWSTR**, pulCount : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliObtainDriverPackagesEx(hSession : Win32cr::Foundation::HANDLE, pwszMachineInfo : Win32cr::Foundation::PWSTR, ppwszServerName : Win32cr::Foundation::PWSTR*, pppwszDriverPackages : Win32cr::Foundation::PWSTR**, pulCount : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsCliGetDriverQueryXml(pwszWinDirPath : Win32cr::Foundation::PWSTR, ppwszDriverQuery : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PxeProviderRegister(pszProviderName : Win32cr::Foundation::PWSTR, pszModulePath : Win32cr::Foundation::PWSTR, index : UInt32, bIsCritical : Win32cr::Foundation::BOOL, phProviderKey : Win32cr::System::Registry::HKEY*) : UInt32
 
+    # :nodoc:
     fun PxeProviderUnRegister(pszProviderName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun PxeProviderQueryIndex(pszProviderName : Win32cr::Foundation::PWSTR, puIndex : UInt32*) : UInt32
 
+    # :nodoc:
     fun PxeProviderEnumFirst(phEnum : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun PxeProviderEnumNext(hEnum : Win32cr::Foundation::HANDLE, ppProvider : Win32cr::System::DeploymentServices::PXE_PROVIDER**) : UInt32
 
+    # :nodoc:
     fun PxeProviderEnumClose(hEnum : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun PxeProviderFreeInfo(pProvider : Win32cr::System::DeploymentServices::PXE_PROVIDER*) : UInt32
 
+    # :nodoc:
     fun PxeRegisterCallback(hProvider : Win32cr::Foundation::HANDLE, callback_type : UInt32, pCallbackFunction : Void*, pContext : Void*) : UInt32
 
+    # :nodoc:
     fun PxeSendReply(hClientRequest : Win32cr::Foundation::HANDLE, pPacket : Void*, uPacketLen : UInt32, pAddress : Win32cr::System::DeploymentServices::PXE_ADDRESS*) : UInt32
 
+    # :nodoc:
     fun PxeAsyncRecvDone(hClientRequest : Win32cr::Foundation::HANDLE, action : UInt32) : UInt32
 
+    # :nodoc:
     fun PxeTrace(hProvider : Win32cr::Foundation::HANDLE, severity : UInt32, pszFormat : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun PxeTraceV(hProvider : Win32cr::Foundation::HANDLE, severity : UInt32, pszFormat : Win32cr::Foundation::PWSTR, params : Int8*) : UInt32
 
+    # :nodoc:
     fun PxePacketAllocate(hProvider : Win32cr::Foundation::HANDLE, hClientRequest : Win32cr::Foundation::HANDLE, uSize : UInt32) : Void*
 
+    # :nodoc:
     fun PxePacketFree(hProvider : Win32cr::Foundation::HANDLE, hClientRequest : Win32cr::Foundation::HANDLE, pPacket : Void*) : UInt32
 
+    # :nodoc:
     fun PxeProviderSetAttribute(hProvider : Win32cr::Foundation::HANDLE, attribute : UInt32, pParameterBuffer : Void*, uParamLen : UInt32) : UInt32
 
+    # :nodoc:
     fun PxeDhcpInitialize(pRecvPacket : Void*, uRecvPacketLen : UInt32, pReplyPacket : Void*, uMaxReplyPacketLen : UInt32, puReplyPacketLen : UInt32*) : UInt32
 
+    # :nodoc:
     fun PxeDhcpv6Initialize(pRequest : Void*, cbRequest : UInt32, pReply : Void*, cbReply : UInt32, pcbReplyUsed : UInt32*) : UInt32
 
+    # :nodoc:
     fun PxeDhcpAppendOption(pReplyPacket : Void*, uMaxReplyPacketLen : UInt32, puReplyPacketLen : UInt32*, bOption : UInt8, bOptionLen : UInt8, pValue : Void*) : UInt32
 
+    # :nodoc:
     fun PxeDhcpv6AppendOption(pReply : Void*, cbReply : UInt32, pcbReplyUsed : UInt32*, wOptionType : UInt16, cbOption : UInt16, pOption : Void*) : UInt32
 
+    # :nodoc:
     fun PxeDhcpAppendOptionRaw(pReplyPacket : Void*, uMaxReplyPacketLen : UInt32, puReplyPacketLen : UInt32*, uBufferLen : UInt16, pBuffer : Void*) : UInt32
 
+    # :nodoc:
     fun PxeDhcpv6AppendOptionRaw(pReply : Void*, cbReply : UInt32, pcbReplyUsed : UInt32*, cbBuffer : UInt16, pBuffer : Void*) : UInt32
 
+    # :nodoc:
     fun PxeDhcpIsValid(pPacket : Void*, uPacketLen : UInt32, bRequestPacket : Win32cr::Foundation::BOOL, pbPxeOptionPresent : Win32cr::Foundation::BOOL*) : UInt32
 
+    # :nodoc:
     fun PxeDhcpv6IsValid(pPacket : Void*, uPacketLen : UInt32, bRequestPacket : Win32cr::Foundation::BOOL, pbPxeOptionPresent : Win32cr::Foundation::BOOL*) : UInt32
 
+    # :nodoc:
     fun PxeDhcpGetOptionValue(pPacket : Void*, uPacketLen : UInt32, uInstance : UInt32, bOption : UInt8, pbOptionLen : UInt8*, ppOptionValue : Void**) : UInt32
 
+    # :nodoc:
     fun PxeDhcpv6GetOptionValue(pPacket : Void*, uPacketLen : UInt32, uInstance : UInt32, wOption : UInt16, pwOptionLen : UInt16*, ppOptionValue : Void**) : UInt32
 
+    # :nodoc:
     fun PxeDhcpGetVendorOptionValue(pPacket : Void*, uPacketLen : UInt32, bOption : UInt8, uInstance : UInt32, pbOptionLen : UInt8*, ppOptionValue : Void**) : UInt32
 
+    # :nodoc:
     fun PxeDhcpv6GetVendorOptionValue(pPacket : Void*, uPacketLen : UInt32, dwEnterpriseNumber : UInt32, wOption : UInt16, uInstance : UInt32, pwOptionLen : UInt16*, ppOptionValue : Void**) : UInt32
 
+    # :nodoc:
     fun PxeDhcpv6ParseRelayForw(pRelayForwPacket : Void*, uRelayForwPacketLen : UInt32, pRelayMessages : Win32cr::System::DeploymentServices::PXE_DHCPV6_NESTED_RELAY_MESSAGE*, nRelayMessages : UInt32, pnRelayMessages : UInt32*, ppInnerPacket : UInt8**, pcbInnerPacket : UInt32*) : UInt32
 
+    # :nodoc:
     fun PxeDhcpv6CreateRelayRepl(pRelayMessages : Win32cr::System::DeploymentServices::PXE_DHCPV6_NESTED_RELAY_MESSAGE*, nRelayMessages : UInt32, pInnerPacket : UInt8*, cbInnerPacket : UInt32, pReplyBuffer : Void*, cbReplyBuffer : UInt32, pcbReplyBuffer : UInt32*) : UInt32
 
+    # :nodoc:
     fun PxeGetServerInfo(uInfoType : UInt32, pBuffer : Void*, uBufferLen : UInt32) : UInt32
 
+    # :nodoc:
     fun PxeGetServerInfoEx(uInfoType : UInt32, pBuffer : Void*, uBufferLen : UInt32, puBufferUsed : UInt32*) : UInt32
 
+    # :nodoc:
     fun WdsTransportServerRegisterCallback(hProvider : Win32cr::Foundation::HANDLE, callback_id : Win32cr::System::DeploymentServices::TRANSPORTPROVIDER_CALLBACK_ID, pfnCallback : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsTransportServerCompleteRead(hProvider : Win32cr::Foundation::HANDLE, ulBytesRead : UInt32, pvUserData : Void*, hReadResult : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsTransportServerTrace(hProvider : Win32cr::Foundation::HANDLE, severity : UInt32, pwszFormat : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsTransportServerTraceV(hProvider : Win32cr::Foundation::HANDLE, severity : UInt32, pwszFormat : Win32cr::Foundation::PWSTR, params : Int8*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsTransportServerAllocateBuffer(hProvider : Win32cr::Foundation::HANDLE, ulBufferSize : UInt32) : Void*
 
+    # :nodoc:
     fun WdsTransportServerFreeBuffer(hProvider : Win32cr::Foundation::HANDLE, pvBuffer : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WdsTransportClientInitialize : UInt32
 
+    # :nodoc:
     fun WdsTransportClientInitializeSession(pSessionRequest : Win32cr::System::DeploymentServices::WDS_TRANSPORTCLIENT_REQUEST*, pCallerData : Void*, hSessionKey : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun WdsTransportClientRegisterCallback(hSessionKey : Win32cr::Foundation::HANDLE, callback_id : Win32cr::System::DeploymentServices::TRANSPORTCLIENT_CALLBACK_ID, pfnCallback : Void*) : UInt32
 
+    # :nodoc:
     fun WdsTransportClientStartSession(hSessionKey : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun WdsTransportClientCompleteReceive(hSessionKey : Win32cr::Foundation::HANDLE, ulSize : UInt32, pullOffset : Win32cr::Foundation::ULARGE_INTEGER*) : UInt32
 
+    # :nodoc:
     fun WdsTransportClientCancelSession(hSessionKey : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun WdsTransportClientCancelSessionEx(hSessionKey : Win32cr::Foundation::HANDLE, dwErrorCode : UInt32) : UInt32
 
+    # :nodoc:
     fun WdsTransportClientWaitForCompletion(hSessionKey : Win32cr::Foundation::HANDLE, uTimeout : UInt32) : UInt32
 
+    # :nodoc:
     fun WdsTransportClientQueryStatus(hSessionKey : Win32cr::Foundation::HANDLE, puStatus : UInt32*, puErrorCode : UInt32*) : UInt32
 
+    # :nodoc:
     fun WdsTransportClientCloseSession(hSessionKey : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun WdsTransportClientAddRefBuffer(pvBuffer : Void*) : UInt32
 
+    # :nodoc:
     fun WdsTransportClientReleaseBuffer(pvBuffer : Void*) : UInt32
 
+    # :nodoc:
     fun WdsTransportClientShutdown : UInt32
 
+    # :nodoc:
     fun WdsBpParseInitialize(pPacket : Void*, uPacketLen : UInt32, pbPacketType : UInt8*, phHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun WdsBpParseInitializev6(pPacket : Void*, uPacketLen : UInt32, pbPacketType : UInt8*, phHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun WdsBpInitialize(bPacketType : UInt8, phHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun WdsBpCloseHandle(hHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun WdsBpQueryOption(hHandle : Win32cr::Foundation::HANDLE, uOption : UInt32, uValueLen : UInt32, pValue : Void*, puBytes : UInt32*) : UInt32
 
+    # :nodoc:
     fun WdsBpAddOption(hHandle : Win32cr::Foundation::HANDLE, uOption : UInt32, uValueLen : UInt32, pValue : Void*) : UInt32
 
+    # :nodoc:
     fun WdsBpGetOptionBuffer(hHandle : Win32cr::Foundation::HANDLE, uBufferLen : UInt32, pBuffer : Void*, puBytes : UInt32*) : UInt32
 
   end

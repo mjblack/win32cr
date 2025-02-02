@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::WindowsConnectionManager
+  extend self
   alias ONDEMAND_NOTIFICATION_CALLBACK = Proc(Void*, Void)
 
   WCM_API_VERSION_1_0 = 1_u32
@@ -137,27 +138,77 @@ module Win32cr::NetworkManagement::WindowsConnectionManager
     end
   end
 
+  def wcmQueryProperty(pInterface : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, property : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_PROPERTY, pReserved : Void*, pdwDataSize : UInt32*, ppData : UInt8**) : UInt32
+    C.WcmQueryProperty(pInterface, strProfileName, property, pReserved, pdwDataSize, ppData)
+  end
+
+  def wcmSetProperty(pInterface : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, property : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_PROPERTY, pReserved : Void*, dwDataSize : UInt32, pbData : UInt8*) : UInt32
+    C.WcmSetProperty(pInterface, strProfileName, property, pReserved, dwDataSize, pbData)
+  end
+
+  def wcmGetProfileList(pReserved : Void*, ppProfileList : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_PROFILE_INFO_LIST**) : UInt32
+    C.WcmGetProfileList(pReserved, ppProfileList)
+  end
+
+  def wcmSetProfileList(pProfileList : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_PROFILE_INFO_LIST*, dwPosition : UInt32, fIgnoreUnknownProfiles : Win32cr::Foundation::BOOL, pReserved : Void*) : UInt32
+    C.WcmSetProfileList(pProfileList, dwPosition, fIgnoreUnknownProfiles, pReserved)
+  end
+
+  def wcmFreeMemory(pMemory : Void*) : Void
+    C.WcmFreeMemory(pMemory)
+  end
+
+  def onDemandGetRoutingHint(destinationHostName : Win32cr::Foundation::PWSTR, interfaceIndex : UInt32*) : Win32cr::Foundation::HRESULT
+    C.OnDemandGetRoutingHint(destinationHostName, interfaceIndex)
+  end
+
+  def onDemandRegisterNotification(callback : Win32cr::NetworkManagement::WindowsConnectionManager::ONDEMAND_NOTIFICATION_CALLBACK, callbackContext : Void*, registrationHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.OnDemandRegisterNotification(callback, callbackContext, registrationHandle)
+  end
+
+  def onDemandUnRegisterNotification(registrationHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.OnDemandUnRegisterNotification(registrationHandle)
+  end
+
+  def getInterfaceContextTableForHostName(host_name : Win32cr::Foundation::PWSTR, proxy_name : Win32cr::Foundation::PWSTR, flags : UInt32, connection_profile_filter_raw_data : UInt8*, connection_profile_filter_raw_data_size : UInt32, interface_context_table : Win32cr::NetworkManagement::WindowsConnectionManager::NET_INTERFACE_CONTEXT_TABLE**) : Win32cr::Foundation::HRESULT
+    C.GetInterfaceContextTableForHostName(host_name, proxy_name, flags, connection_profile_filter_raw_data, connection_profile_filter_raw_data_size, interface_context_table)
+  end
+
+  def freeInterfaceContextTable(interface_context_table : Win32cr::NetworkManagement::WindowsConnectionManager::NET_INTERFACE_CONTEXT_TABLE*) : Void
+    C.FreeInterfaceContextTable(interface_context_table)
+  end
+
   @[Link("wcmapi")]
   @[Link("ondemandconnroutehelper")]
   lib C
+    # :nodoc:
     fun WcmQueryProperty(pInterface : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, property : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_PROPERTY, pReserved : Void*, pdwDataSize : UInt32*, ppData : UInt8**) : UInt32
 
+    # :nodoc:
     fun WcmSetProperty(pInterface : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, property : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_PROPERTY, pReserved : Void*, dwDataSize : UInt32, pbData : UInt8*) : UInt32
 
+    # :nodoc:
     fun WcmGetProfileList(pReserved : Void*, ppProfileList : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_PROFILE_INFO_LIST**) : UInt32
 
+    # :nodoc:
     fun WcmSetProfileList(pProfileList : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_PROFILE_INFO_LIST*, dwPosition : UInt32, fIgnoreUnknownProfiles : Win32cr::Foundation::BOOL, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WcmFreeMemory(pMemory : Void*) : Void
 
+    # :nodoc:
     fun OnDemandGetRoutingHint(destinationHostName : Win32cr::Foundation::PWSTR, interfaceIndex : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OnDemandRegisterNotification(callback : Win32cr::NetworkManagement::WindowsConnectionManager::ONDEMAND_NOTIFICATION_CALLBACK, callbackContext : Void*, registrationHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OnDemandUnRegisterNotification(registrationHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetInterfaceContextTableForHostName(host_name : Win32cr::Foundation::PWSTR, proxy_name : Win32cr::Foundation::PWSTR, flags : UInt32, connection_profile_filter_raw_data : UInt8*, connection_profile_filter_raw_data_size : UInt32, interface_context_table : Win32cr::NetworkManagement::WindowsConnectionManager::NET_INTERFACE_CONTEXT_TABLE**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FreeInterfaceContextTable(interface_context_table : Win32cr::NetworkManagement::WindowsConnectionManager::NET_INTERFACE_CONTEXT_TABLE*) : Void
 
   end

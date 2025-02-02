@@ -2,6 +2,7 @@ require "./../../foundation.cr"
 require "./../../system/com.cr"
 
 module Win32cr::Graphics::Direct3D::Dxc
+  extend self
   alias DxcCreateInstanceProc = Proc(LibC::GUID*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
 
   alias DxcCreateInstance2Proc = Proc(Void*, LibC::GUID*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
@@ -1153,10 +1154,20 @@ module Win32cr::Graphics::Direct3D::Dxc
 
   end
 
+  def dxcCreateInstance(rclsid : LibC::GUID*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.DxcCreateInstance(rclsid, riid, ppv)
+  end
+
+  def dxcCreateInstance2(pMalloc : Void*, rclsid : LibC::GUID*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.DxcCreateInstance2(pMalloc, rclsid, riid, ppv)
+  end
+
   @[Link("dxcompiler")]
   lib C
+    # :nodoc:
     fun DxcCreateInstance(rclsid : LibC::GUID*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DxcCreateInstance2(pMalloc : Void*, rclsid : LibC::GUID*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
   end

@@ -4,6 +4,7 @@ require "./../ui/shell/properties_system.cr"
 require "./com/marshal.cr"
 
 module Win32cr::System::WinRT
+  extend self
   alias HSTRING = LibC::IntPtrT
   alias HSTRING_BUFFER = LibC::IntPtrT
   alias ROPARAMIIDHANDLE = LibC::IntPtrT
@@ -1514,149 +1515,499 @@ module Win32cr::System::WinRT
 
   end
 
+  def coDecodeProxy(dwClientPid : UInt32, ui64ProxyAddress : UInt64, pServerInformation : Win32cr::System::WinRT::ServerInformation*) : Win32cr::Foundation::HRESULT
+    C.CoDecodeProxy(dwClientPid, ui64ProxyAddress, pServerInformation)
+  end
+
+  def roGetAgileReference(options : Win32cr::System::WinRT::AgileReferenceOptions, riid : LibC::GUID*, pUnk : Void*, ppAgileReference : Void**) : Win32cr::Foundation::HRESULT
+    C.RoGetAgileReference(options, riid, pUnk, ppAgileReference)
+  end
+
+  def hSTRINGUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::WinRT::HSTRING*) : UInt32
+    C.HSTRING_UserSize(param0, param1, param2)
+  end
+
+  def hSTRINGUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::WinRT::HSTRING*) : UInt8*
+    C.HSTRING_UserMarshal(param0, param1, param2)
+  end
+
+  def hSTRINGUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::WinRT::HSTRING*) : UInt8*
+    C.HSTRING_UserUnmarshal(param0, param1, param2)
+  end
+
+  def hSTRINGUserFree(param0 : UInt32*, param1 : Win32cr::System::WinRT::HSTRING*) : Void
+    C.HSTRING_UserFree(param0, param1)
+  end
+
+  def hSTRINGUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::WinRT::HSTRING*) : UInt32
+    C.HSTRING_UserSize64(param0, param1, param2)
+  end
+
+  def hSTRINGUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::WinRT::HSTRING*) : UInt8*
+    C.HSTRING_UserMarshal64(param0, param1, param2)
+  end
+
+  def hSTRINGUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::WinRT::HSTRING*) : UInt8*
+    C.HSTRING_UserUnmarshal64(param0, param1, param2)
+  end
+
+  def hSTRINGUserFree64(param0 : UInt32*, param1 : Win32cr::System::WinRT::HSTRING*) : Void
+    C.HSTRING_UserFree64(param0, param1)
+  end
+
+  def windowsCreateString(sourceString : UInt16*, length : UInt32, string : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    C.WindowsCreateString(sourceString, length, string)
+  end
+
+  def windowsCreateStringReference(sourceString : Win32cr::Foundation::PWSTR, length : UInt32, hstringHeader : Win32cr::System::WinRT::HSTRING_HEADER*, string : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    C.WindowsCreateStringReference(sourceString, length, hstringHeader, string)
+  end
+
+  def windowsDeleteString(string : Win32cr::System::WinRT::HSTRING) : Win32cr::Foundation::HRESULT
+    C.WindowsDeleteString(string)
+  end
+
+  def windowsDuplicateString(string : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    C.WindowsDuplicateString(string, newString)
+  end
+
+  def windowsGetStringLen(string : Win32cr::System::WinRT::HSTRING) : UInt32
+    C.WindowsGetStringLen(string)
+  end
+
+  def windowsGetStringRawBuffer(string : Win32cr::System::WinRT::HSTRING, length : UInt32*) : Win32cr::Foundation::PWSTR
+    C.WindowsGetStringRawBuffer(string, length)
+  end
+
+  def windowsIsStringEmpty(string : Win32cr::System::WinRT::HSTRING) : Win32cr::Foundation::BOOL
+    C.WindowsIsStringEmpty(string)
+  end
+
+  def windowsStringHasEmbeddedNull(string : Win32cr::System::WinRT::HSTRING, hasEmbedNull : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.WindowsStringHasEmbeddedNull(string, hasEmbedNull)
+  end
+
+  def windowsCompareStringOrdinal(string1 : Win32cr::System::WinRT::HSTRING, string2 : Win32cr::System::WinRT::HSTRING, result : Int32*) : Win32cr::Foundation::HRESULT
+    C.WindowsCompareStringOrdinal(string1, string2, result)
+  end
+
+  def windowsSubstring(string : Win32cr::System::WinRT::HSTRING, startIndex : UInt32, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    C.WindowsSubstring(string, startIndex, newString)
+  end
+
+  def windowsSubstringWithSpecifiedLength(string : Win32cr::System::WinRT::HSTRING, startIndex : UInt32, length : UInt32, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    C.WindowsSubstringWithSpecifiedLength(string, startIndex, length, newString)
+  end
+
+  def windowsConcatString(string1 : Win32cr::System::WinRT::HSTRING, string2 : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    C.WindowsConcatString(string1, string2, newString)
+  end
+
+  def windowsReplaceString(string : Win32cr::System::WinRT::HSTRING, stringReplaced : Win32cr::System::WinRT::HSTRING, stringReplaceWith : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    C.WindowsReplaceString(string, stringReplaced, stringReplaceWith, newString)
+  end
+
+  def windowsTrimStringStart(string : Win32cr::System::WinRT::HSTRING, trimString : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    C.WindowsTrimStringStart(string, trimString, newString)
+  end
+
+  def windowsTrimStringEnd(string : Win32cr::System::WinRT::HSTRING, trimString : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    C.WindowsTrimStringEnd(string, trimString, newString)
+  end
+
+  def windowsPreallocateStringBuffer(length : UInt32, charBuffer : UInt16**, bufferHandle : Win32cr::System::WinRT::HSTRING_BUFFER*) : Win32cr::Foundation::HRESULT
+    C.WindowsPreallocateStringBuffer(length, charBuffer, bufferHandle)
+  end
+
+  def windowsPromoteStringBuffer(bufferHandle : Win32cr::System::WinRT::HSTRING_BUFFER, string : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    C.WindowsPromoteStringBuffer(bufferHandle, string)
+  end
+
+  def windowsDeleteStringBuffer(bufferHandle : Win32cr::System::WinRT::HSTRING_BUFFER) : Win32cr::Foundation::HRESULT
+    C.WindowsDeleteStringBuffer(bufferHandle)
+  end
+
+  def windowsInspectString(targetHString : LibC::UIntPtrT, machine : UInt16, callback : Win32cr::System::WinRT::PINSPECT_HSTRING_CALLBACK, context : Void*, length : UInt32*, targetStringAddress : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    C.WindowsInspectString(targetHString, machine, callback, context, length, targetStringAddress)
+  end
+
+  def windowsInspectString2(targetHString : UInt64, machine : UInt16, callback : Win32cr::System::WinRT::PINSPECT_HSTRING_CALLBACK2, context : Void*, length : UInt32*, targetStringAddress : UInt64*) : Win32cr::Foundation::HRESULT
+    C.WindowsInspectString2(targetHString, machine, callback, context, length, targetStringAddress)
+  end
+
+  def createDispatcherQueueController(options : Win32cr::System::WinRT::DispatcherQueueOptions, dispatcherQueueController : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateDispatcherQueueController(options, dispatcherQueueController)
+  end
+
+  def roInitialize(initType : Win32cr::System::WinRT::RO_INIT_TYPE) : Win32cr::Foundation::HRESULT
+    C.RoInitialize(initType)
+  end
+
+  def roUninitialize : Void
+    C.RoUninitialize
+  end
+
+  def roActivateInstance(activatableClassId : Win32cr::System::WinRT::HSTRING, instance : Void**) : Win32cr::Foundation::HRESULT
+    C.RoActivateInstance(activatableClassId, instance)
+  end
+
+  def roRegisterActivationFactories(activatableClassIds : Win32cr::System::WinRT::HSTRING*, activationFactoryCallbacks : LibC::IntPtrT*, count : UInt32, cookie : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
+    C.RoRegisterActivationFactories(activatableClassIds, activationFactoryCallbacks, count, cookie)
+  end
+
+  def roRevokeActivationFactories(cookie : LibC::IntPtrT) : Void
+    C.RoRevokeActivationFactories(cookie)
+  end
+
+  def roGetActivationFactory(activatableClassId : Win32cr::System::WinRT::HSTRING, iid : LibC::GUID*, factory : Void**) : Win32cr::Foundation::HRESULT
+    C.RoGetActivationFactory(activatableClassId, iid, factory)
+  end
+
+  def roRegisterForApartmentShutdown(callbackObject : Void*, apartmentIdentifier : UInt64*, regCookie : Win32cr::System::WinRT::APARTMENT_SHUTDOWN_REGISTRATION_COOKIE*) : Win32cr::Foundation::HRESULT
+    C.RoRegisterForApartmentShutdown(callbackObject, apartmentIdentifier, regCookie)
+  end
+
+  def roUnregisterForApartmentShutdown(regCookie : Win32cr::System::WinRT::APARTMENT_SHUTDOWN_REGISTRATION_COOKIE) : Win32cr::Foundation::HRESULT
+    C.RoUnregisterForApartmentShutdown(regCookie)
+  end
+
+  def roGetApartmentIdentifier(apartmentIdentifier : UInt64*) : Win32cr::Foundation::HRESULT
+    C.RoGetApartmentIdentifier(apartmentIdentifier)
+  end
+
+  def roGetBufferMarshaler(bufferMarshaler : Void**) : Win32cr::Foundation::HRESULT
+    C.RoGetBufferMarshaler(bufferMarshaler)
+  end
+
+  def roGetErrorReportingFlags(pflags : UInt32*) : Win32cr::Foundation::HRESULT
+    C.RoGetErrorReportingFlags(pflags)
+  end
+
+  def roSetErrorReportingFlags(flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.RoSetErrorReportingFlags(flags)
+  end
+
+  def roResolveRestrictedErrorInfoReference(reference : Win32cr::Foundation::PWSTR, ppRestrictedErrorInfo : Void**) : Win32cr::Foundation::HRESULT
+    C.RoResolveRestrictedErrorInfoReference(reference, ppRestrictedErrorInfo)
+  end
+
+  def setRestrictedErrorInfo(pRestrictedErrorInfo : Void*) : Win32cr::Foundation::HRESULT
+    C.SetRestrictedErrorInfo(pRestrictedErrorInfo)
+  end
+
+  def getRestrictedErrorInfo(ppRestrictedErrorInfo : Void**) : Win32cr::Foundation::HRESULT
+    C.GetRestrictedErrorInfo(ppRestrictedErrorInfo)
+  end
+
+  def roOriginateErrorW(error : Win32cr::Foundation::HRESULT, cchMax : UInt32, message : UInt16*) : Win32cr::Foundation::BOOL
+    C.RoOriginateErrorW(error, cchMax, message)
+  end
+
+  def roOriginateError(error : Win32cr::Foundation::HRESULT, message : Win32cr::System::WinRT::HSTRING) : Win32cr::Foundation::BOOL
+    C.RoOriginateError(error, message)
+  end
+
+  def roTransformErrorW(oldError : Win32cr::Foundation::HRESULT, newError : Win32cr::Foundation::HRESULT, cchMax : UInt32, message : UInt16*) : Win32cr::Foundation::BOOL
+    C.RoTransformErrorW(oldError, newError, cchMax, message)
+  end
+
+  def roTransformError(oldError : Win32cr::Foundation::HRESULT, newError : Win32cr::Foundation::HRESULT, message : Win32cr::System::WinRT::HSTRING) : Win32cr::Foundation::BOOL
+    C.RoTransformError(oldError, newError, message)
+  end
+
+  def roCaptureErrorContext(hr : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+    C.RoCaptureErrorContext(hr)
+  end
+
+  def roFailFastWithErrorContext(hrError : Win32cr::Foundation::HRESULT) : Void
+    C.RoFailFastWithErrorContext(hrError)
+  end
+
+  def roOriginateLanguageException(error : Win32cr::Foundation::HRESULT, message : Win32cr::System::WinRT::HSTRING, languageException : Void*) : Win32cr::Foundation::BOOL
+    C.RoOriginateLanguageException(error, message, languageException)
+  end
+
+  def roClearError : Void
+    C.RoClearError
+  end
+
+  def roReportUnhandledError(pRestrictedErrorInfo : Void*) : Win32cr::Foundation::HRESULT
+    C.RoReportUnhandledError(pRestrictedErrorInfo)
+  end
+
+  def roInspectThreadErrorInfo(targetTebAddress : LibC::UIntPtrT, machine : UInt16, readMemoryCallback : Win32cr::System::WinRT::PINSPECT_MEMORY_CALLBACK, context : Void*, targetErrorInfoAddress : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    C.RoInspectThreadErrorInfo(targetTebAddress, machine, readMemoryCallback, context, targetErrorInfoAddress)
+  end
+
+  def roInspectCapturedStackBackTrace(targetErrorInfoAddress : LibC::UIntPtrT, machine : UInt16, readMemoryCallback : Win32cr::System::WinRT::PINSPECT_MEMORY_CALLBACK, context : Void*, frameCount : UInt32*, targetBackTraceAddress : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    C.RoInspectCapturedStackBackTrace(targetErrorInfoAddress, machine, readMemoryCallback, context, frameCount, targetBackTraceAddress)
+  end
+
+  def roGetMatchingRestrictedErrorInfo(hrIn : Win32cr::Foundation::HRESULT, ppRestrictedErrorInfo : Void**) : Win32cr::Foundation::HRESULT
+    C.RoGetMatchingRestrictedErrorInfo(hrIn, ppRestrictedErrorInfo)
+  end
+
+  def roReportFailedDelegate(punkDelegate : Void*, pRestrictedErrorInfo : Void*) : Win32cr::Foundation::HRESULT
+    C.RoReportFailedDelegate(punkDelegate, pRestrictedErrorInfo)
+  end
+
+  def isErrorPropagationEnabled : Win32cr::Foundation::BOOL
+    C.IsErrorPropagationEnabled
+  end
+
+  def metaDataGetDispenser(rclsid : LibC::GUID*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.MetaDataGetDispenser(rclsid, riid, ppv)
+  end
+
+  def roGetParameterizedTypeInstanceIID(nameElementCount : UInt32, nameElements : Win32cr::Foundation::PWSTR*, metaDataLocator : Void*, iid : LibC::GUID*, pExtra : Win32cr::System::WinRT::ROPARAMIIDHANDLE*) : Win32cr::Foundation::HRESULT
+    C.RoGetParameterizedTypeInstanceIID(nameElementCount, nameElements, metaDataLocator, iid, pExtra)
+  end
+
+  def roFreeParameterizedTypeExtra(extra : Win32cr::System::WinRT::ROPARAMIIDHANDLE) : Void
+    C.RoFreeParameterizedTypeExtra(extra)
+  end
+
+  def roParameterizedTypeExtraGetTypeSignature(extra : Win32cr::System::WinRT::ROPARAMIIDHANDLE) : Win32cr::Foundation::PSTR
+    C.RoParameterizedTypeExtraGetTypeSignature(extra)
+  end
+
+  def roGetServerActivatableClasses(serverName : Win32cr::System::WinRT::HSTRING, activatableClassIds : Win32cr::System::WinRT::HSTRING**, count : UInt32*) : Win32cr::Foundation::HRESULT
+    C.RoGetServerActivatableClasses(serverName, activatableClassIds, count)
+  end
+
+  def createRandomAccessStreamOnFile(filePath : Win32cr::Foundation::PWSTR, accessMode : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateRandomAccessStreamOnFile(filePath, accessMode, riid, ppv)
+  end
+
+  def createRandomAccessStreamOverStream(stream : Void*, options : Win32cr::System::WinRT::BSOS_OPTIONS, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateRandomAccessStreamOverStream(stream, options, riid, ppv)
+  end
+
+  def createStreamOverRandomAccessStream(randomAccessStream : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateStreamOverRandomAccessStream(randomAccessStream, riid, ppv)
+  end
+
+  def createControlInput(riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateControlInput(riid, ppv)
+  end
+
+  def createControlInputEx(pCoreWindow : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateControlInputEx(pCoreWindow, riid, ppv)
+  end
+
   @[Link("ole32")]
   @[Link("coremessaging")]
   @[Link("rometadata")]
   @[Link("windows.ui")]
   lib C
+    # :nodoc:
     fun CoDecodeProxy(dwClientPid : UInt32, ui64ProxyAddress : UInt64, pServerInformation : Win32cr::System::WinRT::ServerInformation*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoGetAgileReference(options : Win32cr::System::WinRT::AgileReferenceOptions, riid : LibC::GUID*, pUnk : Void*, ppAgileReference : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HSTRING_UserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::WinRT::HSTRING*) : UInt32
 
+    # :nodoc:
     fun HSTRING_UserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::WinRT::HSTRING*) : UInt8*
 
+    # :nodoc:
     fun HSTRING_UserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::WinRT::HSTRING*) : UInt8*
 
+    # :nodoc:
     fun HSTRING_UserFree(param0 : UInt32*, param1 : Win32cr::System::WinRT::HSTRING*) : Void
 
+    # :nodoc:
     fun HSTRING_UserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::WinRT::HSTRING*) : UInt32
 
+    # :nodoc:
     fun HSTRING_UserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::WinRT::HSTRING*) : UInt8*
 
+    # :nodoc:
     fun HSTRING_UserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::WinRT::HSTRING*) : UInt8*
 
+    # :nodoc:
     fun HSTRING_UserFree64(param0 : UInt32*, param1 : Win32cr::System::WinRT::HSTRING*) : Void
 
+    # :nodoc:
     fun WindowsCreateString(sourceString : UInt16*, length : UInt32, string : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsCreateStringReference(sourceString : Win32cr::Foundation::PWSTR, length : UInt32, hstringHeader : Win32cr::System::WinRT::HSTRING_HEADER*, string : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsDeleteString(string : Win32cr::System::WinRT::HSTRING) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsDuplicateString(string : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsGetStringLen(string : Win32cr::System::WinRT::HSTRING) : UInt32
 
+    # :nodoc:
     fun WindowsGetStringRawBuffer(string : Win32cr::System::WinRT::HSTRING, length : UInt32*) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun WindowsIsStringEmpty(string : Win32cr::System::WinRT::HSTRING) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WindowsStringHasEmbeddedNull(string : Win32cr::System::WinRT::HSTRING, hasEmbedNull : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsCompareStringOrdinal(string1 : Win32cr::System::WinRT::HSTRING, string2 : Win32cr::System::WinRT::HSTRING, result : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsSubstring(string : Win32cr::System::WinRT::HSTRING, startIndex : UInt32, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsSubstringWithSpecifiedLength(string : Win32cr::System::WinRT::HSTRING, startIndex : UInt32, length : UInt32, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsConcatString(string1 : Win32cr::System::WinRT::HSTRING, string2 : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsReplaceString(string : Win32cr::System::WinRT::HSTRING, stringReplaced : Win32cr::System::WinRT::HSTRING, stringReplaceWith : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsTrimStringStart(string : Win32cr::System::WinRT::HSTRING, trimString : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsTrimStringEnd(string : Win32cr::System::WinRT::HSTRING, trimString : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsPreallocateStringBuffer(length : UInt32, charBuffer : UInt16**, bufferHandle : Win32cr::System::WinRT::HSTRING_BUFFER*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsPromoteStringBuffer(bufferHandle : Win32cr::System::WinRT::HSTRING_BUFFER, string : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsDeleteStringBuffer(bufferHandle : Win32cr::System::WinRT::HSTRING_BUFFER) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsInspectString(targetHString : LibC::UIntPtrT, machine : UInt16, callback : Win32cr::System::WinRT::PINSPECT_HSTRING_CALLBACK, context : Void*, length : UInt32*, targetStringAddress : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowsInspectString2(targetHString : UInt64, machine : UInt16, callback : Win32cr::System::WinRT::PINSPECT_HSTRING_CALLBACK2, context : Void*, length : UInt32*, targetStringAddress : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateDispatcherQueueController(options : Win32cr::System::WinRT::DispatcherQueueOptions, dispatcherQueueController : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoInitialize(initType : Win32cr::System::WinRT::RO_INIT_TYPE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoUninitialize : Void
 
+    # :nodoc:
     fun RoActivateInstance(activatableClassId : Win32cr::System::WinRT::HSTRING, instance : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoRegisterActivationFactories(activatableClassIds : Win32cr::System::WinRT::HSTRING*, activationFactoryCallbacks : LibC::IntPtrT*, count : UInt32, cookie : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoRevokeActivationFactories(cookie : LibC::IntPtrT) : Void
 
+    # :nodoc:
     fun RoGetActivationFactory(activatableClassId : Win32cr::System::WinRT::HSTRING, iid : LibC::GUID*, factory : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoRegisterForApartmentShutdown(callbackObject : Void*, apartmentIdentifier : UInt64*, regCookie : Win32cr::System::WinRT::APARTMENT_SHUTDOWN_REGISTRATION_COOKIE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoUnregisterForApartmentShutdown(regCookie : Win32cr::System::WinRT::APARTMENT_SHUTDOWN_REGISTRATION_COOKIE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoGetApartmentIdentifier(apartmentIdentifier : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoGetBufferMarshaler(bufferMarshaler : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoGetErrorReportingFlags(pflags : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoSetErrorReportingFlags(flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoResolveRestrictedErrorInfoReference(reference : Win32cr::Foundation::PWSTR, ppRestrictedErrorInfo : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetRestrictedErrorInfo(pRestrictedErrorInfo : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetRestrictedErrorInfo(ppRestrictedErrorInfo : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoOriginateErrorW(error : Win32cr::Foundation::HRESULT, cchMax : UInt32, message : UInt16*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RoOriginateError(error : Win32cr::Foundation::HRESULT, message : Win32cr::System::WinRT::HSTRING) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RoTransformErrorW(oldError : Win32cr::Foundation::HRESULT, newError : Win32cr::Foundation::HRESULT, cchMax : UInt32, message : UInt16*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RoTransformError(oldError : Win32cr::Foundation::HRESULT, newError : Win32cr::Foundation::HRESULT, message : Win32cr::System::WinRT::HSTRING) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RoCaptureErrorContext(hr : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoFailFastWithErrorContext(hrError : Win32cr::Foundation::HRESULT) : Void
 
+    # :nodoc:
     fun RoOriginateLanguageException(error : Win32cr::Foundation::HRESULT, message : Win32cr::System::WinRT::HSTRING, languageException : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RoClearError : Void
 
+    # :nodoc:
     fun RoReportUnhandledError(pRestrictedErrorInfo : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoInspectThreadErrorInfo(targetTebAddress : LibC::UIntPtrT, machine : UInt16, readMemoryCallback : Win32cr::System::WinRT::PINSPECT_MEMORY_CALLBACK, context : Void*, targetErrorInfoAddress : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoInspectCapturedStackBackTrace(targetErrorInfoAddress : LibC::UIntPtrT, machine : UInt16, readMemoryCallback : Win32cr::System::WinRT::PINSPECT_MEMORY_CALLBACK, context : Void*, frameCount : UInt32*, targetBackTraceAddress : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoGetMatchingRestrictedErrorInfo(hrIn : Win32cr::Foundation::HRESULT, ppRestrictedErrorInfo : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoReportFailedDelegate(punkDelegate : Void*, pRestrictedErrorInfo : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IsErrorPropagationEnabled : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MetaDataGetDispenser(rclsid : LibC::GUID*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoGetParameterizedTypeInstanceIID(nameElementCount : UInt32, nameElements : Win32cr::Foundation::PWSTR*, metaDataLocator : Void*, iid : LibC::GUID*, pExtra : Win32cr::System::WinRT::ROPARAMIIDHANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RoFreeParameterizedTypeExtra(extra : Win32cr::System::WinRT::ROPARAMIIDHANDLE) : Void
 
+    # :nodoc:
     fun RoParameterizedTypeExtraGetTypeSignature(extra : Win32cr::System::WinRT::ROPARAMIIDHANDLE) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun RoGetServerActivatableClasses(serverName : Win32cr::System::WinRT::HSTRING, activatableClassIds : Win32cr::System::WinRT::HSTRING**, count : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateRandomAccessStreamOnFile(filePath : Win32cr::Foundation::PWSTR, accessMode : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateRandomAccessStreamOverStream(stream : Void*, options : Win32cr::System::WinRT::BSOS_OPTIONS, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateStreamOverRandomAccessStream(randomAccessStream : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateControlInput(riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateControlInputEx(pCoreWindow : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
   end

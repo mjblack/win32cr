@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./../system/com.cr"
 
 module Win32cr::Storage::VirtualDiskService
+  extend self
   VDS_NF_VOLUME_ARRIVE = 4_u32
   VDS_NF_VOLUME_DEPART = 5_u32
   VDS_NF_VOLUME_MODIFY = 6_u32

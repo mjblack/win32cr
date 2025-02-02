@@ -4,6 +4,7 @@ require "./../security/cryptography.cr"
 require "./ip_helper.cr"
 
 module Win32cr::NetworkManagement::Rras
+  extend self
   alias HRASCONN = LibC::IntPtrT
   alias RASDIALFUNC = Proc(UInt32, Win32cr::NetworkManagement::Rras::RASCONNSTATE, UInt32, Void)
 
@@ -3124,563 +3125,1948 @@ module Win32cr::NetworkManagement::Rras
     end
   end
 
+  def rasDialA(param0 : Win32cr::NetworkManagement::Rras::RASDIALEXTENSIONS*, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, param3 : UInt32, param4 : Void*, param5 : Win32cr::NetworkManagement::Rras::HRASCONN*) : UInt32
+    C.RasDialA(param0, param1, param2, param3, param4, param5)
+  end
+
+  def rasDialW(param0 : Win32cr::NetworkManagement::Rras::RASDIALEXTENSIONS*, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSW*, param3 : UInt32, param4 : Void*, param5 : Win32cr::NetworkManagement::Rras::HRASCONN*) : UInt32
+    C.RasDialW(param0, param1, param2, param3, param4, param5)
+  end
+
+  def rasEnumConnectionsA(param0 : Win32cr::NetworkManagement::Rras::RASCONNA*, param1 : UInt32*, param2 : UInt32*) : UInt32
+    C.RasEnumConnectionsA(param0, param1, param2)
+  end
+
+  def rasEnumConnectionsW(param0 : Win32cr::NetworkManagement::Rras::RASCONNW*, param1 : UInt32*, param2 : UInt32*) : UInt32
+    C.RasEnumConnectionsW(param0, param1, param2)
+  end
+
+  def rasEnumEntriesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYNAMEA*, param3 : UInt32*, param4 : UInt32*) : UInt32
+    C.RasEnumEntriesA(param0, param1, param2, param3, param4)
+  end
+
+  def rasEnumEntriesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYNAMEW*, param3 : UInt32*, param4 : UInt32*) : UInt32
+    C.RasEnumEntriesW(param0, param1, param2, param3, param4)
+  end
+
+  def rasGetConnectStatusA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::NetworkManagement::Rras::RASCONNSTATUSA*) : UInt32
+    C.RasGetConnectStatusA(param0, param1)
+  end
+
+  def rasGetConnectStatusW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::NetworkManagement::Rras::RASCONNSTATUSW*) : UInt32
+    C.RasGetConnectStatusW(param0, param1)
+  end
+
+  def rasGetErrorStringA(resource_id : UInt32, lpszString : UInt8*, in_buf_size : UInt32) : UInt32
+    C.RasGetErrorStringA(resource_id, lpszString, in_buf_size)
+  end
+
+  def rasGetErrorStringW(resource_id : UInt32, lpszString : UInt16*, in_buf_size : UInt32) : UInt32
+    C.RasGetErrorStringW(resource_id, lpszString, in_buf_size)
+  end
+
+  def rasHangUpA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN) : UInt32
+    C.RasHangUpA(param0)
+  end
+
+  def rasHangUpW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN) : UInt32
+    C.RasHangUpW(param0)
+  end
+
+  def rasGetProjectionInfoA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::NetworkManagement::Rras::RASPROJECTION, param2 : Void*, param3 : UInt32*) : UInt32
+    C.RasGetProjectionInfoA(param0, param1, param2, param3)
+  end
+
+  def rasGetProjectionInfoW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::NetworkManagement::Rras::RASPROJECTION, param2 : Void*, param3 : UInt32*) : UInt32
+    C.RasGetProjectionInfoW(param0, param1, param2, param3)
+  end
+
+  def rasCreatePhonebookEntryA(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::PSTR) : UInt32
+    C.RasCreatePhonebookEntryA(param0, param1)
+  end
+
+  def rasCreatePhonebookEntryW(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::PWSTR) : UInt32
+    C.RasCreatePhonebookEntryW(param0, param1)
+  end
+
+  def rasEditPhonebookEntryA(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::Foundation::PSTR) : UInt32
+    C.RasEditPhonebookEntryA(param0, param1, param2)
+  end
+
+  def rasEditPhonebookEntryW(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::Foundation::PWSTR) : UInt32
+    C.RasEditPhonebookEntryW(param0, param1, param2)
+  end
+
+  def rasSetEntryDialParamsA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, param2 : Win32cr::Foundation::BOOL) : UInt32
+    C.RasSetEntryDialParamsA(param0, param1, param2)
+  end
+
+  def rasSetEntryDialParamsW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSW*, param2 : Win32cr::Foundation::BOOL) : UInt32
+    C.RasSetEntryDialParamsW(param0, param1, param2)
+  end
+
+  def rasGetEntryDialParamsA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, param2 : Int32*) : UInt32
+    C.RasGetEntryDialParamsA(param0, param1, param2)
+  end
+
+  def rasGetEntryDialParamsW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSW*, param2 : Int32*) : UInt32
+    C.RasGetEntryDialParamsW(param0, param1, param2)
+  end
+
+  def rasEnumDevicesA(param0 : Win32cr::NetworkManagement::Rras::RASDEVINFOA*, param1 : UInt32*, param2 : UInt32*) : UInt32
+    C.RasEnumDevicesA(param0, param1, param2)
+  end
+
+  def rasEnumDevicesW(param0 : Win32cr::NetworkManagement::Rras::RASDEVINFOW*, param1 : UInt32*, param2 : UInt32*) : UInt32
+    C.RasEnumDevicesW(param0, param1, param2)
+  end
+
+  def rasGetCountryInfoA(param0 : Win32cr::NetworkManagement::Rras::RASCTRYINFO*, param1 : UInt32*) : UInt32
+    C.RasGetCountryInfoA(param0, param1)
+  end
+
+  def rasGetCountryInfoW(param0 : Win32cr::NetworkManagement::Rras::RASCTRYINFO*, param1 : UInt32*) : UInt32
+    C.RasGetCountryInfoW(param0, param1)
+  end
+
+  def rasGetEntryPropertiesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYA*, param3 : UInt32*, param4 : UInt8*, param5 : UInt32*) : UInt32
+    C.RasGetEntryPropertiesA(param0, param1, param2, param3, param4, param5)
+  end
+
+  def rasGetEntryPropertiesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYW*, param3 : UInt32*, param4 : UInt8*, param5 : UInt32*) : UInt32
+    C.RasGetEntryPropertiesW(param0, param1, param2, param3, param4, param5)
+  end
+
+  def rasSetEntryPropertiesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYA*, param3 : UInt32, param4 : UInt8*, param5 : UInt32) : UInt32
+    C.RasSetEntryPropertiesA(param0, param1, param2, param3, param4, param5)
+  end
+
+  def rasSetEntryPropertiesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYW*, param3 : UInt32, param4 : UInt8*, param5 : UInt32) : UInt32
+    C.RasSetEntryPropertiesW(param0, param1, param2, param3, param4, param5)
+  end
+
+  def rasRenameEntryA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::Foundation::PSTR) : UInt32
+    C.RasRenameEntryA(param0, param1, param2)
+  end
+
+  def rasRenameEntryW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::Foundation::PWSTR) : UInt32
+    C.RasRenameEntryW(param0, param1, param2)
+  end
+
+  def rasDeleteEntryA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR) : UInt32
+    C.RasDeleteEntryA(param0, param1)
+  end
+
+  def rasDeleteEntryW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR) : UInt32
+    C.RasDeleteEntryW(param0, param1)
+  end
+
+  def rasValidateEntryNameA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR) : UInt32
+    C.RasValidateEntryNameA(param0, param1)
+  end
+
+  def rasValidateEntryNameW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR) : UInt32
+    C.RasValidateEntryNameW(param0, param1)
+  end
+
+  def rasConnectionNotificationA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::Foundation::HANDLE, param2 : UInt32) : UInt32
+    C.RasConnectionNotificationA(param0, param1, param2)
+  end
+
+  def rasConnectionNotificationW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::Foundation::HANDLE, param2 : UInt32) : UInt32
+    C.RasConnectionNotificationW(param0, param1, param2)
+  end
+
+  def rasGetSubEntryHandleA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::HRASCONN*) : UInt32
+    C.RasGetSubEntryHandleA(param0, param1, param2)
+  end
+
+  def rasGetSubEntryHandleW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::HRASCONN*) : UInt32
+    C.RasGetSubEntryHandleW(param0, param1, param2)
+  end
+
+  def rasGetCredentialsA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASCREDENTIALSA*) : UInt32
+    C.RasGetCredentialsA(param0, param1, param2)
+  end
+
+  def rasGetCredentialsW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASCREDENTIALSW*) : UInt32
+    C.RasGetCredentialsW(param0, param1, param2)
+  end
+
+  def rasSetCredentialsA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASCREDENTIALSA*, param3 : Win32cr::Foundation::BOOL) : UInt32
+    C.RasSetCredentialsA(param0, param1, param2, param3)
+  end
+
+  def rasSetCredentialsW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASCREDENTIALSW*, param3 : Win32cr::Foundation::BOOL) : UInt32
+    C.RasSetCredentialsW(param0, param1, param2, param3)
+  end
+
+  def rasGetSubEntryPropertiesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : UInt32, param3 : Win32cr::NetworkManagement::Rras::RASSUBENTRYA*, param4 : UInt32*, param5 : UInt8*, param6 : UInt32*) : UInt32
+    C.RasGetSubEntryPropertiesA(param0, param1, param2, param3, param4, param5, param6)
+  end
+
+  def rasGetSubEntryPropertiesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : UInt32, param3 : Win32cr::NetworkManagement::Rras::RASSUBENTRYW*, param4 : UInt32*, param5 : UInt8*, param6 : UInt32*) : UInt32
+    C.RasGetSubEntryPropertiesW(param0, param1, param2, param3, param4, param5, param6)
+  end
+
+  def rasSetSubEntryPropertiesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : UInt32, param3 : Win32cr::NetworkManagement::Rras::RASSUBENTRYA*, param4 : UInt32, param5 : UInt8*, param6 : UInt32) : UInt32
+    C.RasSetSubEntryPropertiesA(param0, param1, param2, param3, param4, param5, param6)
+  end
+
+  def rasSetSubEntryPropertiesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : UInt32, param3 : Win32cr::NetworkManagement::Rras::RASSUBENTRYW*, param4 : UInt32, param5 : UInt8*, param6 : UInt32) : UInt32
+    C.RasSetSubEntryPropertiesW(param0, param1, param2, param3, param4, param5, param6)
+  end
+
+  def rasGetAutodialAddressA(param0 : Win32cr::Foundation::PSTR, param1 : UInt32*, param2 : Win32cr::NetworkManagement::Rras::RASAUTODIALENTRYA*, param3 : UInt32*, param4 : UInt32*) : UInt32
+    C.RasGetAutodialAddressA(param0, param1, param2, param3, param4)
+  end
+
+  def rasGetAutodialAddressW(param0 : Win32cr::Foundation::PWSTR, param1 : UInt32*, param2 : Win32cr::NetworkManagement::Rras::RASAUTODIALENTRYW*, param3 : UInt32*, param4 : UInt32*) : UInt32
+    C.RasGetAutodialAddressW(param0, param1, param2, param3, param4)
+  end
+
+  def rasSetAutodialAddressA(param0 : Win32cr::Foundation::PSTR, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::RASAUTODIALENTRYA*, param3 : UInt32, param4 : UInt32) : UInt32
+    C.RasSetAutodialAddressA(param0, param1, param2, param3, param4)
+  end
+
+  def rasSetAutodialAddressW(param0 : Win32cr::Foundation::PWSTR, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::RASAUTODIALENTRYW*, param3 : UInt32, param4 : UInt32) : UInt32
+    C.RasSetAutodialAddressW(param0, param1, param2, param3, param4)
+  end
+
+  def rasEnumAutodialAddressesA(lppRasAutodialAddresses : Win32cr::Foundation::PSTR*, lpdwcbRasAutodialAddresses : UInt32*, lpdwcRasAutodialAddresses : UInt32*) : UInt32
+    C.RasEnumAutodialAddressesA(lppRasAutodialAddresses, lpdwcbRasAutodialAddresses, lpdwcRasAutodialAddresses)
+  end
+
+  def rasEnumAutodialAddressesW(lppRasAutodialAddresses : Win32cr::Foundation::PWSTR*, lpdwcbRasAutodialAddresses : UInt32*, lpdwcRasAutodialAddresses : UInt32*) : UInt32
+    C.RasEnumAutodialAddressesW(lppRasAutodialAddresses, lpdwcbRasAutodialAddresses, lpdwcRasAutodialAddresses)
+  end
+
+  def rasGetAutodialEnableA(param0 : UInt32, param1 : Int32*) : UInt32
+    C.RasGetAutodialEnableA(param0, param1)
+  end
+
+  def rasGetAutodialEnableW(param0 : UInt32, param1 : Int32*) : UInt32
+    C.RasGetAutodialEnableW(param0, param1)
+  end
+
+  def rasSetAutodialEnableA(param0 : UInt32, param1 : Win32cr::Foundation::BOOL) : UInt32
+    C.RasSetAutodialEnableA(param0, param1)
+  end
+
+  def rasSetAutodialEnableW(param0 : UInt32, param1 : Win32cr::Foundation::BOOL) : UInt32
+    C.RasSetAutodialEnableW(param0, param1)
+  end
+
+  def rasGetAutodialParamA(param0 : UInt32, param1 : Void*, param2 : UInt32*) : UInt32
+    C.RasGetAutodialParamA(param0, param1, param2)
+  end
+
+  def rasGetAutodialParamW(param0 : UInt32, param1 : Void*, param2 : UInt32*) : UInt32
+    C.RasGetAutodialParamW(param0, param1, param2)
+  end
+
+  def rasSetAutodialParamA(param0 : UInt32, param1 : Void*, param2 : UInt32) : UInt32
+    C.RasSetAutodialParamA(param0, param1, param2)
+  end
+
+  def rasSetAutodialParamW(param0 : UInt32, param1 : Void*, param2 : UInt32) : UInt32
+    C.RasSetAutodialParamW(param0, param1, param2)
+  end
+
+  def rasGetPCscf(lpszPCscf : Win32cr::Foundation::PWSTR) : UInt32
+    C.RasGetPCscf(lpszPCscf)
+  end
+
+  def rasInvokeEapUI(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::RASDIALEXTENSIONS*, param3 : Win32cr::Foundation::HWND) : UInt32
+    C.RasInvokeEapUI(param0, param1, param2, param3)
+  end
+
+  def rasGetLinkStatistics(hRasConn : Win32cr::NetworkManagement::Rras::HRASCONN, dwSubEntry : UInt32, lpStatistics : Win32cr::NetworkManagement::Rras::RAS_STATS*) : UInt32
+    C.RasGetLinkStatistics(hRasConn, dwSubEntry, lpStatistics)
+  end
+
+  def rasGetConnectionStatistics(hRasConn : Win32cr::NetworkManagement::Rras::HRASCONN, lpStatistics : Win32cr::NetworkManagement::Rras::RAS_STATS*) : UInt32
+    C.RasGetConnectionStatistics(hRasConn, lpStatistics)
+  end
+
+  def rasClearLinkStatistics(hRasConn : Win32cr::NetworkManagement::Rras::HRASCONN, dwSubEntry : UInt32) : UInt32
+    C.RasClearLinkStatistics(hRasConn, dwSubEntry)
+  end
+
+  def rasClearConnectionStatistics(hRasConn : Win32cr::NetworkManagement::Rras::HRASCONN) : UInt32
+    C.RasClearConnectionStatistics(hRasConn)
+  end
+
+  def rasGetEapUserDataA(hToken : Win32cr::Foundation::HANDLE, pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, pbEapData : UInt8*, pdwSizeofEapData : UInt32*) : UInt32
+    C.RasGetEapUserDataA(hToken, pszPhonebook, pszEntry, pbEapData, pdwSizeofEapData)
+  end
+
+  def rasGetEapUserDataW(hToken : Win32cr::Foundation::HANDLE, pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, pbEapData : UInt8*, pdwSizeofEapData : UInt32*) : UInt32
+    C.RasGetEapUserDataW(hToken, pszPhonebook, pszEntry, pbEapData, pdwSizeofEapData)
+  end
+
+  def rasSetEapUserDataA(hToken : Win32cr::Foundation::HANDLE, pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, pbEapData : UInt8*, dwSizeofEapData : UInt32) : UInt32
+    C.RasSetEapUserDataA(hToken, pszPhonebook, pszEntry, pbEapData, dwSizeofEapData)
+  end
+
+  def rasSetEapUserDataW(hToken : Win32cr::Foundation::HANDLE, pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, pbEapData : UInt8*, dwSizeofEapData : UInt32) : UInt32
+    C.RasSetEapUserDataW(hToken, pszPhonebook, pszEntry, pbEapData, dwSizeofEapData)
+  end
+
+  def rasGetCustomAuthDataA(pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, pbCustomAuthData : UInt8*, pdwSizeofCustomAuthData : UInt32*) : UInt32
+    C.RasGetCustomAuthDataA(pszPhonebook, pszEntry, pbCustomAuthData, pdwSizeofCustomAuthData)
+  end
+
+  def rasGetCustomAuthDataW(pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, pbCustomAuthData : UInt8*, pdwSizeofCustomAuthData : UInt32*) : UInt32
+    C.RasGetCustomAuthDataW(pszPhonebook, pszEntry, pbCustomAuthData, pdwSizeofCustomAuthData)
+  end
+
+  def rasSetCustomAuthDataA(pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, pbCustomAuthData : UInt8*, dwSizeofCustomAuthData : UInt32) : UInt32
+    C.RasSetCustomAuthDataA(pszPhonebook, pszEntry, pbCustomAuthData, dwSizeofCustomAuthData)
+  end
+
+  def rasSetCustomAuthDataW(pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, pbCustomAuthData : UInt8*, dwSizeofCustomAuthData : UInt32) : UInt32
+    C.RasSetCustomAuthDataW(pszPhonebook, pszEntry, pbCustomAuthData, dwSizeofCustomAuthData)
+  end
+
+  def rasGetEapUserIdentityW(pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, dwFlags : UInt32, hwnd : Win32cr::Foundation::HWND, ppRasEapUserIdentity : Win32cr::NetworkManagement::Rras::RASEAPUSERIDENTITYW**) : UInt32
+    C.RasGetEapUserIdentityW(pszPhonebook, pszEntry, dwFlags, hwnd, ppRasEapUserIdentity)
+  end
+
+  def rasGetEapUserIdentityA(pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, dwFlags : UInt32, hwnd : Win32cr::Foundation::HWND, ppRasEapUserIdentity : Win32cr::NetworkManagement::Rras::RASEAPUSERIDENTITYA**) : UInt32
+    C.RasGetEapUserIdentityA(pszPhonebook, pszEntry, dwFlags, hwnd, ppRasEapUserIdentity)
+  end
+
+  def rasFreeEapUserIdentityW(pRasEapUserIdentity : Win32cr::NetworkManagement::Rras::RASEAPUSERIDENTITYW*) : Void
+    C.RasFreeEapUserIdentityW(pRasEapUserIdentity)
+  end
+
+  def rasFreeEapUserIdentityA(pRasEapUserIdentity : Win32cr::NetworkManagement::Rras::RASEAPUSERIDENTITYA*) : Void
+    C.RasFreeEapUserIdentityA(pRasEapUserIdentity)
+  end
+
+  def rasDeleteSubEntryA(pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, dwSubentryId : UInt32) : UInt32
+    C.RasDeleteSubEntryA(pszPhonebook, pszEntry, dwSubentryId)
+  end
+
+  def rasDeleteSubEntryW(pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, dwSubEntryId : UInt32) : UInt32
+    C.RasDeleteSubEntryW(pszPhonebook, pszEntry, dwSubEntryId)
+  end
+
+  def rasUpdateConnection(hrasconn : Win32cr::NetworkManagement::Rras::HRASCONN, lprasupdateconn : Win32cr::NetworkManagement::Rras::RASUPDATECONN*) : UInt32
+    C.RasUpdateConnection(hrasconn, lprasupdateconn)
+  end
+
+  def rasGetProjectionInfoEx(hrasconn : Win32cr::NetworkManagement::Rras::HRASCONN, pRasProjection : Win32cr::NetworkManagement::Rras::RAS_PROJECTION_INFO*, lpdwSize : UInt32*) : UInt32
+    C.RasGetProjectionInfoEx(hrasconn, pRasProjection, lpdwSize)
+  end
+
+  def rasPhonebookDlgA(lpszPhonebook : Win32cr::Foundation::PSTR, lpszEntry : Win32cr::Foundation::PSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASPBDLGA*) : Win32cr::Foundation::BOOL
+    C.RasPhonebookDlgA(lpszPhonebook, lpszEntry, lpInfo)
+  end
+
+  def rasPhonebookDlgW(lpszPhonebook : Win32cr::Foundation::PWSTR, lpszEntry : Win32cr::Foundation::PWSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASPBDLGW*) : Win32cr::Foundation::BOOL
+    C.RasPhonebookDlgW(lpszPhonebook, lpszEntry, lpInfo)
+  end
+
+  def rasEntryDlgA(lpszPhonebook : Win32cr::Foundation::PSTR, lpszEntry : Win32cr::Foundation::PSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASENTRYDLGA*) : Win32cr::Foundation::BOOL
+    C.RasEntryDlgA(lpszPhonebook, lpszEntry, lpInfo)
+  end
+
+  def rasEntryDlgW(lpszPhonebook : Win32cr::Foundation::PWSTR, lpszEntry : Win32cr::Foundation::PWSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASENTRYDLGW*) : Win32cr::Foundation::BOOL
+    C.RasEntryDlgW(lpszPhonebook, lpszEntry, lpInfo)
+  end
+
+  def rasDialDlgA(lpszPhonebook : Win32cr::Foundation::PSTR, lpszEntry : Win32cr::Foundation::PSTR, lpszPhoneNumber : Win32cr::Foundation::PSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASDIALDLG*) : Win32cr::Foundation::BOOL
+    C.RasDialDlgA(lpszPhonebook, lpszEntry, lpszPhoneNumber, lpInfo)
+  end
+
+  def rasDialDlgW(lpszPhonebook : Win32cr::Foundation::PWSTR, lpszEntry : Win32cr::Foundation::PWSTR, lpszPhoneNumber : Win32cr::Foundation::PWSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASDIALDLG*) : Win32cr::Foundation::BOOL
+    C.RasDialDlgW(lpszPhonebook, lpszEntry, lpszPhoneNumber, lpInfo)
+  end
+
+  def mprAdminConnectionEnumEx(hRasServer : LibC::IntPtrT, pObjectHeader : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER*, dwPreferedMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, ppRasConn : Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX**, lpdwResumeHandle : UInt32*) : UInt32
+    C.MprAdminConnectionEnumEx(hRasServer, pObjectHeader, dwPreferedMaxLen, lpdwEntriesRead, lpdwTotalEntries, ppRasConn, lpdwResumeHandle)
+  end
+
+  def mprAdminConnectionGetInfoEx(hRasServer : LibC::IntPtrT, hRasConnection : Win32cr::Foundation::HANDLE, pRasConnection : Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX*) : UInt32
+    C.MprAdminConnectionGetInfoEx(hRasServer, hRasConnection, pRasConnection)
+  end
+
+  def mprAdminServerGetInfoEx(hMprServer : LibC::IntPtrT, pServerInfo : Win32cr::NetworkManagement::Rras::MPR_SERVER_EX1*) : UInt32
+    C.MprAdminServerGetInfoEx(hMprServer, pServerInfo)
+  end
+
+  def mprAdminServerSetInfoEx(hMprServer : LibC::IntPtrT, pServerInfo : Win32cr::NetworkManagement::Rras::MPR_SERVER_SET_CONFIG_EX1*) : UInt32
+    C.MprAdminServerSetInfoEx(hMprServer, pServerInfo)
+  end
+
+  def mprConfigServerGetInfoEx(hMprConfig : Win32cr::Foundation::HANDLE, pServerInfo : Win32cr::NetworkManagement::Rras::MPR_SERVER_EX1*) : UInt32
+    C.MprConfigServerGetInfoEx(hMprConfig, pServerInfo)
+  end
+
+  def mprConfigServerSetInfoEx(hMprConfig : Win32cr::Foundation::HANDLE, pSetServerConfig : Win32cr::NetworkManagement::Rras::MPR_SERVER_SET_CONFIG_EX1*) : UInt32
+    C.MprConfigServerSetInfoEx(hMprConfig, pSetServerConfig)
+  end
+
+  def mprAdminUpdateConnection(hRasServer : LibC::IntPtrT, hRasConnection : Win32cr::Foundation::HANDLE, pRasUpdateConnection : Win32cr::NetworkManagement::Rras::RAS_UPDATE_CONNECTION*) : UInt32
+    C.MprAdminUpdateConnection(hRasServer, hRasConnection, pRasUpdateConnection)
+  end
+
+  def mprAdminIsServiceInitialized(lpwsServerName : Win32cr::Foundation::PWSTR, fIsServiceInitialized : Win32cr::Foundation::BOOL*) : UInt32
+    C.MprAdminIsServiceInitialized(lpwsServerName, fIsServiceInitialized)
+  end
+
+  def mprAdminInterfaceSetCustomInfoEx(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, pCustomInfo : Win32cr::NetworkManagement::Rras::MPR_IF_CUSTOMINFOEX2*) : UInt32
+    C.MprAdminInterfaceSetCustomInfoEx(hMprServer, hInterface, pCustomInfo)
+  end
+
+  def mprAdminInterfaceGetCustomInfoEx(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, pCustomInfo : Win32cr::NetworkManagement::Rras::MPR_IF_CUSTOMINFOEX2*) : UInt32
+    C.MprAdminInterfaceGetCustomInfoEx(hMprServer, hInterface, pCustomInfo)
+  end
+
+  def mprConfigInterfaceGetCustomInfoEx(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, pCustomInfo : Win32cr::NetworkManagement::Rras::MPR_IF_CUSTOMINFOEX2*) : UInt32
+    C.MprConfigInterfaceGetCustomInfoEx(hMprConfig, hRouterInterface, pCustomInfo)
+  end
+
+  def mprConfigInterfaceSetCustomInfoEx(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, pCustomInfo : Win32cr::NetworkManagement::Rras::MPR_IF_CUSTOMINFOEX2*) : UInt32
+    C.MprConfigInterfaceSetCustomInfoEx(hMprConfig, hRouterInterface, pCustomInfo)
+  end
+
+  def mprAdminConnectionEnum(hRasServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
+    C.MprAdminConnectionEnum(hRasServer, dwLevel, lplpbBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+  end
+
+  def mprAdminPortEnum(hRasServer : LibC::IntPtrT, dwLevel : UInt32, hRasConnection : Win32cr::Foundation::HANDLE, lplpbBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
+    C.MprAdminPortEnum(hRasServer, dwLevel, hRasConnection, lplpbBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+  end
+
+  def mprAdminConnectionGetInfo(hRasServer : LibC::IntPtrT, dwLevel : UInt32, hRasConnection : Win32cr::Foundation::HANDLE, lplpbBuffer : UInt8**) : UInt32
+    C.MprAdminConnectionGetInfo(hRasServer, dwLevel, hRasConnection, lplpbBuffer)
+  end
+
+  def mprAdminPortGetInfo(hRasServer : LibC::IntPtrT, dwLevel : UInt32, hPort : Win32cr::Foundation::HANDLE, lplpbBuffer : UInt8**) : UInt32
+    C.MprAdminPortGetInfo(hRasServer, dwLevel, hPort, lplpbBuffer)
+  end
+
+  def mprAdminConnectionClearStats(hRasServer : LibC::IntPtrT, hRasConnection : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprAdminConnectionClearStats(hRasServer, hRasConnection)
+  end
+
+  def mprAdminPortClearStats(hRasServer : LibC::IntPtrT, hPort : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprAdminPortClearStats(hRasServer, hPort)
+  end
+
+  def mprAdminPortReset(hRasServer : LibC::IntPtrT, hPort : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprAdminPortReset(hRasServer, hPort)
+  end
+
+  def mprAdminPortDisconnect(hRasServer : LibC::IntPtrT, hPort : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprAdminPortDisconnect(hRasServer, hPort)
+  end
+
+  def mprAdminConnectionRemoveQuarantine(hRasServer : Win32cr::Foundation::HANDLE, hRasConnection : Win32cr::Foundation::HANDLE, fIsIpAddress : Win32cr::Foundation::BOOL) : UInt32
+    C.MprAdminConnectionRemoveQuarantine(hRasServer, hRasConnection, fIsIpAddress)
+  end
+
+  def mprAdminUserGetInfo(lpszServer : Win32cr::Foundation::PWSTR, lpszUser : Win32cr::Foundation::PWSTR, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    C.MprAdminUserGetInfo(lpszServer, lpszUser, dwLevel, lpbBuffer)
+  end
+
+  def mprAdminUserSetInfo(lpszServer : Win32cr::Foundation::PWSTR, lpszUser : Win32cr::Foundation::PWSTR, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    C.MprAdminUserSetInfo(lpszServer, lpszUser, dwLevel, lpbBuffer)
+  end
+
+  def mprAdminSendUserMessage(hMprServer : LibC::IntPtrT, hConnection : Win32cr::Foundation::HANDLE, lpwszMessage : Win32cr::Foundation::PWSTR) : UInt32
+    C.MprAdminSendUserMessage(hMprServer, hConnection, lpwszMessage)
+  end
+
+  def mprAdminGetPDCServer(lpszDomain : Win32cr::Foundation::PWSTR, lpszServer : Win32cr::Foundation::PWSTR, lpszPDCServer : Win32cr::Foundation::PWSTR) : UInt32
+    C.MprAdminGetPDCServer(lpszDomain, lpszServer, lpszPDCServer)
+  end
+
+  def mprAdminIsServiceRunning(lpwsServerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.MprAdminIsServiceRunning(lpwsServerName)
+  end
+
+  def mprAdminServerConnect(lpwsServerName : Win32cr::Foundation::PWSTR, phMprServer : LibC::IntPtrT*) : UInt32
+    C.MprAdminServerConnect(lpwsServerName, phMprServer)
+  end
+
+  def mprAdminServerDisconnect(hMprServer : LibC::IntPtrT) : Void
+    C.MprAdminServerDisconnect(hMprServer)
+  end
+
+  def mprAdminServerGetCredentials(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
+    C.MprAdminServerGetCredentials(hMprServer, dwLevel, lplpbBuffer)
+  end
+
+  def mprAdminServerSetCredentials(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    C.MprAdminServerSetCredentials(hMprServer, dwLevel, lpbBuffer)
+  end
+
+  def mprAdminBufferFree(pBuffer : Void*) : UInt32
+    C.MprAdminBufferFree(pBuffer)
+  end
+
+  def mprAdminGetErrorString(dwError : UInt32, lplpwsErrorString : Win32cr::Foundation::PWSTR*) : UInt32
+    C.MprAdminGetErrorString(dwError, lplpwsErrorString)
+  end
+
+  def mprAdminServerGetInfo(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
+    C.MprAdminServerGetInfo(hMprServer, dwLevel, lplpbBuffer)
+  end
+
+  def mprAdminServerSetInfo(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    C.MprAdminServerSetInfo(hMprServer, dwLevel, lpbBuffer)
+  end
+
+  def mprAdminEstablishDomainRasServer(pszDomain : Win32cr::Foundation::PWSTR, pszMachine : Win32cr::Foundation::PWSTR, bEnable : Win32cr::Foundation::BOOL) : UInt32
+    C.MprAdminEstablishDomainRasServer(pszDomain, pszMachine, bEnable)
+  end
+
+  def mprAdminIsDomainRasServer(pszDomain : Win32cr::Foundation::PWSTR, pszMachine : Win32cr::Foundation::PWSTR, pbIsRasServer : Win32cr::Foundation::BOOL*) : UInt32
+    C.MprAdminIsDomainRasServer(pszDomain, pszMachine, pbIsRasServer)
+  end
+
+  def mprAdminTransportCreate(hMprServer : LibC::IntPtrT, dwTransportId : UInt32, lpwsTransportName : Win32cr::Foundation::PWSTR, pGlobalInfo : UInt8*, dwGlobalInfoSize : UInt32, pClientInterfaceInfo : UInt8*, dwClientInterfaceInfoSize : UInt32, lpwsDLLPath : Win32cr::Foundation::PWSTR) : UInt32
+    C.MprAdminTransportCreate(hMprServer, dwTransportId, lpwsTransportName, pGlobalInfo, dwGlobalInfoSize, pClientInterfaceInfo, dwClientInterfaceInfoSize, lpwsDLLPath)
+  end
+
+  def mprAdminTransportSetInfo(hMprServer : LibC::IntPtrT, dwTransportId : UInt32, pGlobalInfo : UInt8*, dwGlobalInfoSize : UInt32, pClientInterfaceInfo : UInt8*, dwClientInterfaceInfoSize : UInt32) : UInt32
+    C.MprAdminTransportSetInfo(hMprServer, dwTransportId, pGlobalInfo, dwGlobalInfoSize, pClientInterfaceInfo, dwClientInterfaceInfoSize)
+  end
+
+  def mprAdminTransportGetInfo(hMprServer : LibC::IntPtrT, dwTransportId : UInt32, ppGlobalInfo : UInt8**, lpdwGlobalInfoSize : UInt32*, ppClientInterfaceInfo : UInt8**, lpdwClientInterfaceInfoSize : UInt32*) : UInt32
+    C.MprAdminTransportGetInfo(hMprServer, dwTransportId, ppGlobalInfo, lpdwGlobalInfoSize, ppClientInterfaceInfo, lpdwClientInterfaceInfoSize)
+  end
+
+  def mprAdminDeviceEnum(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**, lpdwTotalEntries : UInt32*) : UInt32
+    C.MprAdminDeviceEnum(hMprServer, dwLevel, lplpbBuffer, lpdwTotalEntries)
+  end
+
+  def mprAdminInterfaceGetHandle(hMprServer : LibC::IntPtrT, lpwsInterfaceName : Win32cr::Foundation::PWSTR, phInterface : Win32cr::Foundation::HANDLE*, fIncludeClientInterfaces : Win32cr::Foundation::BOOL) : UInt32
+    C.MprAdminInterfaceGetHandle(hMprServer, lpwsInterfaceName, phInterface, fIncludeClientInterfaces)
+  end
+
+  def mprAdminInterfaceCreate(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lpbBuffer : UInt8*, phInterface : Win32cr::Foundation::HANDLE*) : UInt32
+    C.MprAdminInterfaceCreate(hMprServer, dwLevel, lpbBuffer, phInterface)
+  end
+
+  def mprAdminInterfaceGetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
+    C.MprAdminInterfaceGetInfo(hMprServer, hInterface, dwLevel, lplpbBuffer)
+  end
+
+  def mprAdminInterfaceSetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    C.MprAdminInterfaceSetInfo(hMprServer, hInterface, dwLevel, lpbBuffer)
+  end
+
+  def mprAdminInterfaceDelete(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprAdminInterfaceDelete(hMprServer, hInterface)
+  end
+
+  def mprAdminInterfaceDeviceGetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwIndex : UInt32, dwLevel : UInt32, lplpBuffer : UInt8**) : UInt32
+    C.MprAdminInterfaceDeviceGetInfo(hMprServer, hInterface, dwIndex, dwLevel, lplpBuffer)
+  end
+
+  def mprAdminInterfaceDeviceSetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwIndex : UInt32, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    C.MprAdminInterfaceDeviceSetInfo(hMprServer, hInterface, dwIndex, dwLevel, lpbBuffer)
+  end
+
+  def mprAdminInterfaceTransportRemove(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32) : UInt32
+    C.MprAdminInterfaceTransportRemove(hMprServer, hInterface, dwTransportId)
+  end
+
+  def mprAdminInterfaceTransportAdd(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, pInterfaceInfo : UInt8*, dwInterfaceInfoSize : UInt32) : UInt32
+    C.MprAdminInterfaceTransportAdd(hMprServer, hInterface, dwTransportId, pInterfaceInfo, dwInterfaceInfoSize)
+  end
+
+  def mprAdminInterfaceTransportGetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, ppInterfaceInfo : UInt8**, lpdwInterfaceInfoSize : UInt32*) : UInt32
+    C.MprAdminInterfaceTransportGetInfo(hMprServer, hInterface, dwTransportId, ppInterfaceInfo, lpdwInterfaceInfoSize)
+  end
+
+  def mprAdminInterfaceTransportSetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, pInterfaceInfo : UInt8*, dwInterfaceInfoSize : UInt32) : UInt32
+    C.MprAdminInterfaceTransportSetInfo(hMprServer, hInterface, dwTransportId, pInterfaceInfo, dwInterfaceInfoSize)
+  end
+
+  def mprAdminInterfaceEnum(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
+    C.MprAdminInterfaceEnum(hMprServer, dwLevel, lplpbBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+  end
+
+  def mprAdminInterfaceSetCredentials(lpwsServer : Win32cr::Foundation::PWSTR, lpwsInterfaceName : Win32cr::Foundation::PWSTR, lpwsUserName : Win32cr::Foundation::PWSTR, lpwsDomainName : Win32cr::Foundation::PWSTR, lpwsPassword : Win32cr::Foundation::PWSTR) : UInt32
+    C.MprAdminInterfaceSetCredentials(lpwsServer, lpwsInterfaceName, lpwsUserName, lpwsDomainName, lpwsPassword)
+  end
+
+  def mprAdminInterfaceGetCredentials(lpwsServer : Win32cr::Foundation::PWSTR, lpwsInterfaceName : Win32cr::Foundation::PWSTR, lpwsUserName : Win32cr::Foundation::PWSTR, lpwsPassword : Win32cr::Foundation::PWSTR, lpwsDomainName : Win32cr::Foundation::PWSTR) : UInt32
+    C.MprAdminInterfaceGetCredentials(lpwsServer, lpwsInterfaceName, lpwsUserName, lpwsPassword, lpwsDomainName)
+  end
+
+  def mprAdminInterfaceSetCredentialsEx(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    C.MprAdminInterfaceSetCredentialsEx(hMprServer, hInterface, dwLevel, lpbBuffer)
+  end
+
+  def mprAdminInterfaceGetCredentialsEx(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
+    C.MprAdminInterfaceGetCredentialsEx(hMprServer, hInterface, dwLevel, lplpbBuffer)
+  end
+
+  def mprAdminInterfaceConnect(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, hEvent : Win32cr::Foundation::HANDLE, fSynchronous : Win32cr::Foundation::BOOL) : UInt32
+    C.MprAdminInterfaceConnect(hMprServer, hInterface, hEvent, fSynchronous)
+  end
+
+  def mprAdminInterfaceDisconnect(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprAdminInterfaceDisconnect(hMprServer, hInterface)
+  end
+
+  def mprAdminInterfaceUpdateRoutes(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwProtocolId : UInt32, hEvent : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprAdminInterfaceUpdateRoutes(hMprServer, hInterface, dwProtocolId, hEvent)
+  end
+
+  def mprAdminInterfaceQueryUpdateResult(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwProtocolId : UInt32, lpdwUpdateResult : UInt32*) : UInt32
+    C.MprAdminInterfaceQueryUpdateResult(hMprServer, hInterface, dwProtocolId, lpdwUpdateResult)
+  end
+
+  def mprAdminInterfaceUpdatePhonebookInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprAdminInterfaceUpdatePhonebookInfo(hMprServer, hInterface)
+  end
+
+  def mprAdminRegisterConnectionNotification(hMprServer : LibC::IntPtrT, hEventNotification : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprAdminRegisterConnectionNotification(hMprServer, hEventNotification)
+  end
+
+  def mprAdminDeregisterConnectionNotification(hMprServer : LibC::IntPtrT, hEventNotification : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprAdminDeregisterConnectionNotification(hMprServer, hEventNotification)
+  end
+
+  def mprAdminMIBServerConnect(lpwsServerName : Win32cr::Foundation::PWSTR, phMibServer : LibC::IntPtrT*) : UInt32
+    C.MprAdminMIBServerConnect(lpwsServerName, phMibServer)
+  end
+
+  def mprAdminMIBServerDisconnect(hMibServer : LibC::IntPtrT) : Void
+    C.MprAdminMIBServerDisconnect(hMibServer)
+  end
+
+  def mprAdminMIBEntryCreate(hMibServer : LibC::IntPtrT, dwPid : UInt32, dwRoutingPid : UInt32, lpEntry : Void*, dwEntrySize : UInt32) : UInt32
+    C.MprAdminMIBEntryCreate(hMibServer, dwPid, dwRoutingPid, lpEntry, dwEntrySize)
+  end
+
+  def mprAdminMIBEntryDelete(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpEntry : Void*, dwEntrySize : UInt32) : UInt32
+    C.MprAdminMIBEntryDelete(hMibServer, dwProtocolId, dwRoutingPid, lpEntry, dwEntrySize)
+  end
+
+  def mprAdminMIBEntrySet(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpEntry : Void*, dwEntrySize : UInt32) : UInt32
+    C.MprAdminMIBEntrySet(hMibServer, dwProtocolId, dwRoutingPid, lpEntry, dwEntrySize)
+  end
+
+  def mprAdminMIBEntryGet(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpInEntry : Void*, dwInEntrySize : UInt32, lplpOutEntry : Void**, lpOutEntrySize : UInt32*) : UInt32
+    C.MprAdminMIBEntryGet(hMibServer, dwProtocolId, dwRoutingPid, lpInEntry, dwInEntrySize, lplpOutEntry, lpOutEntrySize)
+  end
+
+  def mprAdminMIBEntryGetFirst(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpInEntry : Void*, dwInEntrySize : UInt32, lplpOutEntry : Void**, lpOutEntrySize : UInt32*) : UInt32
+    C.MprAdminMIBEntryGetFirst(hMibServer, dwProtocolId, dwRoutingPid, lpInEntry, dwInEntrySize, lplpOutEntry, lpOutEntrySize)
+  end
+
+  def mprAdminMIBEntryGetNext(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpInEntry : Void*, dwInEntrySize : UInt32, lplpOutEntry : Void**, lpOutEntrySize : UInt32*) : UInt32
+    C.MprAdminMIBEntryGetNext(hMibServer, dwProtocolId, dwRoutingPid, lpInEntry, dwInEntrySize, lplpOutEntry, lpOutEntrySize)
+  end
+
+  def mprAdminMIBBufferFree(pBuffer : Void*) : UInt32
+    C.MprAdminMIBBufferFree(pBuffer)
+  end
+
+  def mprConfigServerInstall(dwLevel : UInt32, pBuffer : Void*) : UInt32
+    C.MprConfigServerInstall(dwLevel, pBuffer)
+  end
+
+  def mprConfigServerConnect(lpwsServerName : Win32cr::Foundation::PWSTR, phMprConfig : Win32cr::Foundation::HANDLE*) : UInt32
+    C.MprConfigServerConnect(lpwsServerName, phMprConfig)
+  end
+
+  def mprConfigServerDisconnect(hMprConfig : Win32cr::Foundation::HANDLE) : Void
+    C.MprConfigServerDisconnect(hMprConfig)
+  end
+
+  def mprConfigServerRefresh(hMprConfig : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprConfigServerRefresh(hMprConfig)
+  end
+
+  def mprConfigBufferFree(pBuffer : Void*) : UInt32
+    C.MprConfigBufferFree(pBuffer)
+  end
+
+  def mprConfigServerGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
+    C.MprConfigServerGetInfo(hMprConfig, dwLevel, lplpbBuffer)
+  end
+
+  def mprConfigServerSetInfo(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    C.MprConfigServerSetInfo(hMprServer, dwLevel, lpbBuffer)
+  end
+
+  def mprConfigServerBackup(hMprConfig : Win32cr::Foundation::HANDLE, lpwsPath : Win32cr::Foundation::PWSTR) : UInt32
+    C.MprConfigServerBackup(hMprConfig, lpwsPath)
+  end
+
+  def mprConfigServerRestore(hMprConfig : Win32cr::Foundation::HANDLE, lpwsPath : Win32cr::Foundation::PWSTR) : UInt32
+    C.MprConfigServerRestore(hMprConfig, lpwsPath)
+  end
+
+  def mprConfigTransportCreate(hMprConfig : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, lpwsTransportName : Win32cr::Foundation::PWSTR, pGlobalInfo : UInt8*, dwGlobalInfoSize : UInt32, pClientInterfaceInfo : UInt8*, dwClientInterfaceInfoSize : UInt32, lpwsDLLPath : Win32cr::Foundation::PWSTR, phRouterTransport : Win32cr::Foundation::HANDLE*) : UInt32
+    C.MprConfigTransportCreate(hMprConfig, dwTransportId, lpwsTransportName, pGlobalInfo, dwGlobalInfoSize, pClientInterfaceInfo, dwClientInterfaceInfoSize, lpwsDLLPath, phRouterTransport)
+  end
+
+  def mprConfigTransportDelete(hMprConfig : Win32cr::Foundation::HANDLE, hRouterTransport : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprConfigTransportDelete(hMprConfig, hRouterTransport)
+  end
+
+  def mprConfigTransportGetHandle(hMprConfig : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, phRouterTransport : Win32cr::Foundation::HANDLE*) : UInt32
+    C.MprConfigTransportGetHandle(hMprConfig, dwTransportId, phRouterTransport)
+  end
+
+  def mprConfigTransportSetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterTransport : Win32cr::Foundation::HANDLE, pGlobalInfo : UInt8*, dwGlobalInfoSize : UInt32, pClientInterfaceInfo : UInt8*, dwClientInterfaceInfoSize : UInt32, lpwsDLLPath : Win32cr::Foundation::PWSTR) : UInt32
+    C.MprConfigTransportSetInfo(hMprConfig, hRouterTransport, pGlobalInfo, dwGlobalInfoSize, pClientInterfaceInfo, dwClientInterfaceInfoSize, lpwsDLLPath)
+  end
+
+  def mprConfigTransportGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterTransport : Win32cr::Foundation::HANDLE, ppGlobalInfo : UInt8**, lpdwGlobalInfoSize : UInt32*, ppClientInterfaceInfo : UInt8**, lpdwClientInterfaceInfoSize : UInt32*, lplpwsDLLPath : Win32cr::Foundation::PWSTR*) : UInt32
+    C.MprConfigTransportGetInfo(hMprConfig, hRouterTransport, ppGlobalInfo, lpdwGlobalInfoSize, ppClientInterfaceInfo, lpdwClientInterfaceInfoSize, lplpwsDLLPath)
+  end
+
+  def mprConfigTransportEnum(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
+    C.MprConfigTransportEnum(hMprConfig, dwLevel, lplpBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+  end
+
+  def mprConfigInterfaceCreate(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lpbBuffer : UInt8*, phRouterInterface : Win32cr::Foundation::HANDLE*) : UInt32
+    C.MprConfigInterfaceCreate(hMprConfig, dwLevel, lpbBuffer, phRouterInterface)
+  end
+
+  def mprConfigInterfaceDelete(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprConfigInterfaceDelete(hMprConfig, hRouterInterface)
+  end
+
+  def mprConfigInterfaceGetHandle(hMprConfig : Win32cr::Foundation::HANDLE, lpwsInterfaceName : Win32cr::Foundation::PWSTR, phRouterInterface : Win32cr::Foundation::HANDLE*) : UInt32
+    C.MprConfigInterfaceGetHandle(hMprConfig, lpwsInterfaceName, phRouterInterface)
+  end
+
+  def mprConfigInterfaceGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpBuffer : UInt8**, lpdwBufferSize : UInt32*) : UInt32
+    C.MprConfigInterfaceGetInfo(hMprConfig, hRouterInterface, dwLevel, lplpBuffer, lpdwBufferSize)
+  end
+
+  def mprConfigInterfaceSetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    C.MprConfigInterfaceSetInfo(hMprConfig, hRouterInterface, dwLevel, lpbBuffer)
+  end
+
+  def mprConfigInterfaceEnum(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
+    C.MprConfigInterfaceEnum(hMprConfig, dwLevel, lplpBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+  end
+
+  def mprConfigInterfaceTransportAdd(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, lpwsTransportName : Win32cr::Foundation::PWSTR, pInterfaceInfo : UInt8*, dwInterfaceInfoSize : UInt32, phRouterIfTransport : Win32cr::Foundation::HANDLE*) : UInt32
+    C.MprConfigInterfaceTransportAdd(hMprConfig, hRouterInterface, dwTransportId, lpwsTransportName, pInterfaceInfo, dwInterfaceInfoSize, phRouterIfTransport)
+  end
+
+  def mprConfigInterfaceTransportRemove(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, hRouterIfTransport : Win32cr::Foundation::HANDLE) : UInt32
+    C.MprConfigInterfaceTransportRemove(hMprConfig, hRouterInterface, hRouterIfTransport)
+  end
+
+  def mprConfigInterfaceTransportGetHandle(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, phRouterIfTransport : Win32cr::Foundation::HANDLE*) : UInt32
+    C.MprConfigInterfaceTransportGetHandle(hMprConfig, hRouterInterface, dwTransportId, phRouterIfTransport)
+  end
+
+  def mprConfigInterfaceTransportGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, hRouterIfTransport : Win32cr::Foundation::HANDLE, ppInterfaceInfo : UInt8**, lpdwInterfaceInfoSize : UInt32*) : UInt32
+    C.MprConfigInterfaceTransportGetInfo(hMprConfig, hRouterInterface, hRouterIfTransport, ppInterfaceInfo, lpdwInterfaceInfoSize)
+  end
+
+  def mprConfigInterfaceTransportSetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, hRouterIfTransport : Win32cr::Foundation::HANDLE, pInterfaceInfo : UInt8*, dwInterfaceInfoSize : UInt32) : UInt32
+    C.MprConfigInterfaceTransportSetInfo(hMprConfig, hRouterInterface, hRouterIfTransport, pInterfaceInfo, dwInterfaceInfoSize)
+  end
+
+  def mprConfigInterfaceTransportEnum(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
+    C.MprConfigInterfaceTransportEnum(hMprConfig, hRouterInterface, dwLevel, lplpBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+  end
+
+  def mprConfigGetFriendlyName(hMprConfig : Win32cr::Foundation::HANDLE, pszGuidName : Win32cr::Foundation::PWSTR, pszBuffer : Win32cr::Foundation::PWSTR, dwBufferSize : UInt32) : UInt32
+    C.MprConfigGetFriendlyName(hMprConfig, pszGuidName, pszBuffer, dwBufferSize)
+  end
+
+  def mprConfigGetGuidName(hMprConfig : Win32cr::Foundation::HANDLE, pszFriendlyName : Win32cr::Foundation::PWSTR, pszBuffer : Win32cr::Foundation::PWSTR, dwBufferSize : UInt32) : UInt32
+    C.MprConfigGetGuidName(hMprConfig, pszFriendlyName, pszBuffer, dwBufferSize)
+  end
+
+  def mprConfigFilterGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, dwTransportId : UInt32, lpBuffer : UInt8*) : UInt32
+    C.MprConfigFilterGetInfo(hMprConfig, dwLevel, dwTransportId, lpBuffer)
+  end
+
+  def mprConfigFilterSetInfo(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, dwTransportId : UInt32, lpBuffer : UInt8*) : UInt32
+    C.MprConfigFilterSetInfo(hMprConfig, dwLevel, dwTransportId, lpBuffer)
+  end
+
+  def mprInfoCreate(dwVersion : UInt32, lplpNewHeader : Void**) : UInt32
+    C.MprInfoCreate(dwVersion, lplpNewHeader)
+  end
+
+  def mprInfoDelete(lpHeader : Void*) : UInt32
+    C.MprInfoDelete(lpHeader)
+  end
+
+  def mprInfoRemoveAll(lpHeader : Void*, lplpNewHeader : Void**) : UInt32
+    C.MprInfoRemoveAll(lpHeader, lplpNewHeader)
+  end
+
+  def mprInfoDuplicate(lpHeader : Void*, lplpNewHeader : Void**) : UInt32
+    C.MprInfoDuplicate(lpHeader, lplpNewHeader)
+  end
+
+  def mprInfoBlockAdd(lpHeader : Void*, dwInfoType : UInt32, dwItemSize : UInt32, dwItemCount : UInt32, lpItemData : UInt8*, lplpNewHeader : Void**) : UInt32
+    C.MprInfoBlockAdd(lpHeader, dwInfoType, dwItemSize, dwItemCount, lpItemData, lplpNewHeader)
+  end
+
+  def mprInfoBlockRemove(lpHeader : Void*, dwInfoType : UInt32, lplpNewHeader : Void**) : UInt32
+    C.MprInfoBlockRemove(lpHeader, dwInfoType, lplpNewHeader)
+  end
+
+  def mprInfoBlockSet(lpHeader : Void*, dwInfoType : UInt32, dwItemSize : UInt32, dwItemCount : UInt32, lpItemData : UInt8*, lplpNewHeader : Void**) : UInt32
+    C.MprInfoBlockSet(lpHeader, dwInfoType, dwItemSize, dwItemCount, lpItemData, lplpNewHeader)
+  end
+
+  def mprInfoBlockFind(lpHeader : Void*, dwInfoType : UInt32, lpdwItemSize : UInt32*, lpdwItemCount : UInt32*, lplpItemData : UInt8**) : UInt32
+    C.MprInfoBlockFind(lpHeader, dwInfoType, lpdwItemSize, lpdwItemCount, lplpItemData)
+  end
+
+  def mprInfoBlockQuerySize(lpHeader : Void*) : UInt32
+    C.MprInfoBlockQuerySize(lpHeader)
+  end
+
+  def mgmRegisterMProtocol(prpiInfo : Win32cr::NetworkManagement::Rras::ROUTING_PROTOCOL_CONFIG*, dwProtocolId : UInt32, dwComponentId : UInt32, phProtocol : Win32cr::Foundation::HANDLE*) : UInt32
+    C.MgmRegisterMProtocol(prpiInfo, dwProtocolId, dwComponentId, phProtocol)
+  end
+
+  def mgmDeRegisterMProtocol(hProtocol : Win32cr::Foundation::HANDLE) : UInt32
+    C.MgmDeRegisterMProtocol(hProtocol)
+  end
+
+  def mgmTakeInterfaceOwnership(hProtocol : Win32cr::Foundation::HANDLE, dwIfIndex : UInt32, dwIfNextHopAddr : UInt32) : UInt32
+    C.MgmTakeInterfaceOwnership(hProtocol, dwIfIndex, dwIfNextHopAddr)
+  end
+
+  def mgmReleaseInterfaceOwnership(hProtocol : Win32cr::Foundation::HANDLE, dwIfIndex : UInt32, dwIfNextHopAddr : UInt32) : UInt32
+    C.MgmReleaseInterfaceOwnership(hProtocol, dwIfIndex, dwIfNextHopAddr)
+  end
+
+  def mgmGetProtocolOnInterface(dwIfIndex : UInt32, dwIfNextHopAddr : UInt32, pdwIfProtocolId : UInt32*, pdwIfComponentId : UInt32*) : UInt32
+    C.MgmGetProtocolOnInterface(dwIfIndex, dwIfNextHopAddr, pdwIfProtocolId, pdwIfComponentId)
+  end
+
+  def mgmAddGroupMembershipEntry(hProtocol : Win32cr::Foundation::HANDLE, dwSourceAddr : UInt32, dwSourceMask : UInt32, dwGroupAddr : UInt32, dwGroupMask : UInt32, dwIfIndex : UInt32, dwIfNextHopIPAddr : UInt32, dwFlags : UInt32) : UInt32
+    C.MgmAddGroupMembershipEntry(hProtocol, dwSourceAddr, dwSourceMask, dwGroupAddr, dwGroupMask, dwIfIndex, dwIfNextHopIPAddr, dwFlags)
+  end
+
+  def mgmDeleteGroupMembershipEntry(hProtocol : Win32cr::Foundation::HANDLE, dwSourceAddr : UInt32, dwSourceMask : UInt32, dwGroupAddr : UInt32, dwGroupMask : UInt32, dwIfIndex : UInt32, dwIfNextHopIPAddr : UInt32, dwFlags : UInt32) : UInt32
+    C.MgmDeleteGroupMembershipEntry(hProtocol, dwSourceAddr, dwSourceMask, dwGroupAddr, dwGroupMask, dwIfIndex, dwIfNextHopIPAddr, dwFlags)
+  end
+
+  def mgmGetMfe(pimm : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*, pdwBufferSize : UInt32*, pbBuffer : UInt8*) : UInt32
+    C.MgmGetMfe(pimm, pdwBufferSize, pbBuffer)
+  end
+
+  def mgmGetFirstMfe(pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*) : UInt32
+    C.MgmGetFirstMfe(pdwBufferSize, pbBuffer, pdwNumEntries)
+  end
+
+  def mgmGetNextMfe(pimmStart : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*, pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*) : UInt32
+    C.MgmGetNextMfe(pimmStart, pdwBufferSize, pbBuffer, pdwNumEntries)
+  end
+
+  def mgmGetMfeStats(pimm : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*, pdwBufferSize : UInt32*, pbBuffer : UInt8*, dwFlags : UInt32) : UInt32
+    C.MgmGetMfeStats(pimm, pdwBufferSize, pbBuffer, dwFlags)
+  end
+
+  def mgmGetFirstMfeStats(pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*, dwFlags : UInt32) : UInt32
+    C.MgmGetFirstMfeStats(pdwBufferSize, pbBuffer, pdwNumEntries, dwFlags)
+  end
+
+  def mgmGetNextMfeStats(pimmStart : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*, pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*, dwFlags : UInt32) : UInt32
+    C.MgmGetNextMfeStats(pimmStart, pdwBufferSize, pbBuffer, pdwNumEntries, dwFlags)
+  end
+
+  def mgmGroupEnumerationStart(hProtocol : Win32cr::Foundation::HANDLE, metEnumType : Win32cr::NetworkManagement::Rras::MGM_ENUM_TYPES, phEnumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.MgmGroupEnumerationStart(hProtocol, metEnumType, phEnumHandle)
+  end
+
+  def mgmGroupEnumerationGetNext(hEnum : Win32cr::Foundation::HANDLE, pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*) : UInt32
+    C.MgmGroupEnumerationGetNext(hEnum, pdwBufferSize, pbBuffer, pdwNumEntries)
+  end
+
+  def mgmGroupEnumerationEnd(hEnum : Win32cr::Foundation::HANDLE) : UInt32
+    C.MgmGroupEnumerationEnd(hEnum)
+  end
+
+  def rtmConvertNetAddressToIpv6AddressAndLength(pNetAddress : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, pAddress : Win32cr::Networking::WinSock::IN6_ADDR*, pLength : UInt32*, dwAddressSize : UInt32) : UInt32
+    C.RtmConvertNetAddressToIpv6AddressAndLength(pNetAddress, pAddress, pLength, dwAddressSize)
+  end
+
+  def rtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, address : Win32cr::Networking::WinSock::IN6_ADDR, dwLength : UInt32, dwAddressSize : UInt32) : UInt32
+    C.RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress, address, dwLength, dwAddressSize)
+  end
+
+  def rtmRegisterEntity(rtm_entity_info : Win32cr::NetworkManagement::Rras::RTM_ENTITY_INFO*, export_methods : Win32cr::NetworkManagement::Rras::RTM_ENTITY_EXPORT_METHODS*, event_callback : Win32cr::NetworkManagement::Rras::RTM_EVENT_CALLBACK, reserve_opaque_pointer : Win32cr::Foundation::BOOL, rtm_reg_profile : Win32cr::NetworkManagement::Rras::RTM_REGN_PROFILE*, rtm_reg_handle : LibC::IntPtrT*) : UInt32
+    C.RtmRegisterEntity(rtm_entity_info, export_methods, event_callback, reserve_opaque_pointer, rtm_reg_profile, rtm_reg_handle)
+  end
+
+  def rtmDeregisterEntity(rtm_reg_handle : LibC::IntPtrT) : UInt32
+    C.RtmDeregisterEntity(rtm_reg_handle)
+  end
+
+  def rtmGetRegisteredEntities(rtm_reg_handle : LibC::IntPtrT, num_entities : UInt32*, entity_handles : LibC::IntPtrT*, entity_infos : Win32cr::NetworkManagement::Rras::RTM_ENTITY_INFO*) : UInt32
+    C.RtmGetRegisteredEntities(rtm_reg_handle, num_entities, entity_handles, entity_infos)
+  end
+
+  def rtmReleaseEntities(rtm_reg_handle : LibC::IntPtrT, num_entities : UInt32, entity_handles : LibC::IntPtrT*) : UInt32
+    C.RtmReleaseEntities(rtm_reg_handle, num_entities, entity_handles)
+  end
+
+  def rtmLockDestination(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, exclusive : Win32cr::Foundation::BOOL, lock_dest : Win32cr::Foundation::BOOL) : UInt32
+    C.RtmLockDestination(rtm_reg_handle, dest_handle, exclusive, lock_dest)
+  end
+
+  def rtmGetOpaqueInformationPointer(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, opaque_info_pointer : Void**) : UInt32
+    C.RtmGetOpaqueInformationPointer(rtm_reg_handle, dest_handle, opaque_info_pointer)
+  end
+
+  def rtmGetEntityMethods(rtm_reg_handle : LibC::IntPtrT, entity_handle : LibC::IntPtrT, num_methods : UInt32*, expt_methods : Win32cr::NetworkManagement::Rras::RTM_ENTITY_EXPORT_METHOD*) : UInt32
+    C.RtmGetEntityMethods(rtm_reg_handle, entity_handle, num_methods, expt_methods)
+  end
+
+  def rtmInvokeMethod(rtm_reg_handle : LibC::IntPtrT, entity_handle : LibC::IntPtrT, input : Win32cr::NetworkManagement::Rras::RTM_ENTITY_METHOD_INPUT*, output_size : UInt32*, output : Win32cr::NetworkManagement::Rras::RTM_ENTITY_METHOD_OUTPUT*) : UInt32
+    C.RtmInvokeMethod(rtm_reg_handle, entity_handle, input, output_size, output)
+  end
+
+  def rtmBlockMethods(rtm_reg_handle : LibC::IntPtrT, target_handle : Win32cr::Foundation::HANDLE, target_type : UInt8, blocking_flag : UInt32) : UInt32
+    C.RtmBlockMethods(rtm_reg_handle, target_handle, target_type, blocking_flag)
+  end
+
+  def rtmGetEntityInfo(rtm_reg_handle : LibC::IntPtrT, entity_handle : LibC::IntPtrT, entity_info : Win32cr::NetworkManagement::Rras::RTM_ENTITY_INFO*) : UInt32
+    C.RtmGetEntityInfo(rtm_reg_handle, entity_handle, entity_info)
+  end
+
+  def rtmGetDestInfo(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, protocol_id : UInt32, target_views : UInt32, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    C.RtmGetDestInfo(rtm_reg_handle, dest_handle, protocol_id, target_views, dest_info)
+  end
+
+  def rtmGetRouteInfo(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, route_info : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*) : UInt32
+    C.RtmGetRouteInfo(rtm_reg_handle, route_handle, route_info, dest_address)
+  end
+
+  def rtmGetNextHopInfo(rtm_reg_handle : LibC::IntPtrT, next_hop_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*) : UInt32
+    C.RtmGetNextHopInfo(rtm_reg_handle, next_hop_handle, next_hop_info)
+  end
+
+  def rtmReleaseEntityInfo(rtm_reg_handle : LibC::IntPtrT, entity_info : Win32cr::NetworkManagement::Rras::RTM_ENTITY_INFO*) : UInt32
+    C.RtmReleaseEntityInfo(rtm_reg_handle, entity_info)
+  end
+
+  def rtmReleaseDestInfo(rtm_reg_handle : LibC::IntPtrT, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    C.RtmReleaseDestInfo(rtm_reg_handle, dest_info)
+  end
+
+  def rtmReleaseRouteInfo(rtm_reg_handle : LibC::IntPtrT, route_info : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*) : UInt32
+    C.RtmReleaseRouteInfo(rtm_reg_handle, route_info)
+  end
+
+  def rtmReleaseNextHopInfo(rtm_reg_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*) : UInt32
+    C.RtmReleaseNextHopInfo(rtm_reg_handle, next_hop_info)
+  end
+
+  def rtmAddRouteToDest(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT*, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, route_info : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*, time_to_live : UInt32, route_list_handle : LibC::IntPtrT, notify_type : UInt32, notify_handle : LibC::IntPtrT, change_flags : UInt32*) : UInt32
+    C.RtmAddRouteToDest(rtm_reg_handle, route_handle, dest_address, route_info, time_to_live, route_list_handle, notify_type, notify_handle, change_flags)
+  end
+
+  def rtmDeleteRouteToDest(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, change_flags : UInt32*) : UInt32
+    C.RtmDeleteRouteToDest(rtm_reg_handle, route_handle, change_flags)
+  end
+
+  def rtmHoldDestination(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, target_views : UInt32, hold_time : UInt32) : UInt32
+    C.RtmHoldDestination(rtm_reg_handle, dest_handle, target_views, hold_time)
+  end
+
+  def rtmGetRoutePointer(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, route_pointer : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO**) : UInt32
+    C.RtmGetRoutePointer(rtm_reg_handle, route_handle, route_pointer)
+  end
+
+  def rtmLockRoute(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, exclusive : Win32cr::Foundation::BOOL, lock_route : Win32cr::Foundation::BOOL, route_pointer : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO**) : UInt32
+    C.RtmLockRoute(rtm_reg_handle, route_handle, exclusive, lock_route, route_pointer)
+  end
+
+  def rtmUpdateAndUnlockRoute(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, time_to_live : UInt32, route_list_handle : LibC::IntPtrT, notify_type : UInt32, notify_handle : LibC::IntPtrT, change_flags : UInt32*) : UInt32
+    C.RtmUpdateAndUnlockRoute(rtm_reg_handle, route_handle, time_to_live, route_list_handle, notify_type, notify_handle, change_flags)
+  end
+
+  def rtmGetExactMatchDestination(rtm_reg_handle : LibC::IntPtrT, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, protocol_id : UInt32, target_views : UInt32, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    C.RtmGetExactMatchDestination(rtm_reg_handle, dest_address, protocol_id, target_views, dest_info)
+  end
+
+  def rtmGetMostSpecificDestination(rtm_reg_handle : LibC::IntPtrT, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, protocol_id : UInt32, target_views : UInt32, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    C.RtmGetMostSpecificDestination(rtm_reg_handle, dest_address, protocol_id, target_views, dest_info)
+  end
+
+  def rtmGetLessSpecificDestination(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, protocol_id : UInt32, target_views : UInt32, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    C.RtmGetLessSpecificDestination(rtm_reg_handle, dest_handle, protocol_id, target_views, dest_info)
+  end
+
+  def rtmGetExactMatchRoute(rtm_reg_handle : LibC::IntPtrT, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, matching_flags : UInt32, route_info : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*, interface_index : UInt32, target_views : UInt32, route_handle : LibC::IntPtrT*) : UInt32
+    C.RtmGetExactMatchRoute(rtm_reg_handle, dest_address, matching_flags, route_info, interface_index, target_views, route_handle)
+  end
+
+  def rtmIsBestRoute(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, best_in_views : UInt32*) : UInt32
+    C.RtmIsBestRoute(rtm_reg_handle, route_handle, best_in_views)
+  end
+
+  def rtmAddNextHop(rtm_reg_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*, next_hop_handle : LibC::IntPtrT*, change_flags : UInt32*) : UInt32
+    C.RtmAddNextHop(rtm_reg_handle, next_hop_info, next_hop_handle, change_flags)
+  end
+
+  def rtmFindNextHop(rtm_reg_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*, next_hop_handle : LibC::IntPtrT*, next_hop_pointer : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO**) : UInt32
+    C.RtmFindNextHop(rtm_reg_handle, next_hop_info, next_hop_handle, next_hop_pointer)
+  end
+
+  def rtmDeleteNextHop(rtm_reg_handle : LibC::IntPtrT, next_hop_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*) : UInt32
+    C.RtmDeleteNextHop(rtm_reg_handle, next_hop_handle, next_hop_info)
+  end
+
+  def rtmGetNextHopPointer(rtm_reg_handle : LibC::IntPtrT, next_hop_handle : LibC::IntPtrT, next_hop_pointer : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO**) : UInt32
+    C.RtmGetNextHopPointer(rtm_reg_handle, next_hop_handle, next_hop_pointer)
+  end
+
+  def rtmLockNextHop(rtm_reg_handle : LibC::IntPtrT, next_hop_handle : LibC::IntPtrT, exclusive : Win32cr::Foundation::BOOL, lock_next_hop : Win32cr::Foundation::BOOL, next_hop_pointer : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO**) : UInt32
+    C.RtmLockNextHop(rtm_reg_handle, next_hop_handle, exclusive, lock_next_hop, next_hop_pointer)
+  end
+
+  def rtmCreateDestEnum(rtm_reg_handle : LibC::IntPtrT, target_views : UInt32, enum_flags : UInt32, net_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, protocol_id : UInt32, rtm_enum_handle : LibC::IntPtrT*) : UInt32
+    C.RtmCreateDestEnum(rtm_reg_handle, target_views, enum_flags, net_address, protocol_id, rtm_enum_handle)
+  end
+
+  def rtmGetEnumDests(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT, num_dests : UInt32*, dest_infos : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    C.RtmGetEnumDests(rtm_reg_handle, enum_handle, num_dests, dest_infos)
+  end
+
+  def rtmReleaseDests(rtm_reg_handle : LibC::IntPtrT, num_dests : UInt32, dest_infos : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    C.RtmReleaseDests(rtm_reg_handle, num_dests, dest_infos)
+  end
+
+  def rtmCreateRouteEnum(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, target_views : UInt32, enum_flags : UInt32, start_dest : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, matching_flags : UInt32, criteria_route : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*, criteria_interface : UInt32, rtm_enum_handle : LibC::IntPtrT*) : UInt32
+    C.RtmCreateRouteEnum(rtm_reg_handle, dest_handle, target_views, enum_flags, start_dest, matching_flags, criteria_route, criteria_interface, rtm_enum_handle)
+  end
+
+  def rtmGetEnumRoutes(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT, num_routes : UInt32*, route_handles : LibC::IntPtrT*) : UInt32
+    C.RtmGetEnumRoutes(rtm_reg_handle, enum_handle, num_routes, route_handles)
+  end
+
+  def rtmReleaseRoutes(rtm_reg_handle : LibC::IntPtrT, num_routes : UInt32, route_handles : LibC::IntPtrT*) : UInt32
+    C.RtmReleaseRoutes(rtm_reg_handle, num_routes, route_handles)
+  end
+
+  def rtmCreateNextHopEnum(rtm_reg_handle : LibC::IntPtrT, enum_flags : UInt32, net_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, rtm_enum_handle : LibC::IntPtrT*) : UInt32
+    C.RtmCreateNextHopEnum(rtm_reg_handle, enum_flags, net_address, rtm_enum_handle)
+  end
+
+  def rtmGetEnumNextHops(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT, num_next_hops : UInt32*, next_hop_handles : LibC::IntPtrT*) : UInt32
+    C.RtmGetEnumNextHops(rtm_reg_handle, enum_handle, num_next_hops, next_hop_handles)
+  end
+
+  def rtmReleaseNextHops(rtm_reg_handle : LibC::IntPtrT, num_next_hops : UInt32, next_hop_handles : LibC::IntPtrT*) : UInt32
+    C.RtmReleaseNextHops(rtm_reg_handle, num_next_hops, next_hop_handles)
+  end
+
+  def rtmDeleteEnumHandle(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT) : UInt32
+    C.RtmDeleteEnumHandle(rtm_reg_handle, enum_handle)
+  end
+
+  def rtmRegisterForChangeNotification(rtm_reg_handle : LibC::IntPtrT, target_views : UInt32, notify_flags : UInt32, notify_context : Void*, notify_handle : LibC::IntPtrT*) : UInt32
+    C.RtmRegisterForChangeNotification(rtm_reg_handle, target_views, notify_flags, notify_context, notify_handle)
+  end
+
+  def rtmGetChangedDests(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, num_dests : UInt32*, changed_dests : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    C.RtmGetChangedDests(rtm_reg_handle, notify_handle, num_dests, changed_dests)
+  end
+
+  def rtmReleaseChangedDests(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, num_dests : UInt32, changed_dests : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    C.RtmReleaseChangedDests(rtm_reg_handle, notify_handle, num_dests, changed_dests)
+  end
+
+  def rtmIgnoreChangedDests(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, num_dests : UInt32, changed_dests : LibC::IntPtrT*) : UInt32
+    C.RtmIgnoreChangedDests(rtm_reg_handle, notify_handle, num_dests, changed_dests)
+  end
+
+  def rtmGetChangeStatus(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, change_status : Win32cr::Foundation::BOOL*) : UInt32
+    C.RtmGetChangeStatus(rtm_reg_handle, notify_handle, dest_handle, change_status)
+  end
+
+  def rtmMarkDestForChangeNotification(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, mark_dest : Win32cr::Foundation::BOOL) : UInt32
+    C.RtmMarkDestForChangeNotification(rtm_reg_handle, notify_handle, dest_handle, mark_dest)
+  end
+
+  def rtmIsMarkedForChangeNotification(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, dest_marked : Win32cr::Foundation::BOOL*) : UInt32
+    C.RtmIsMarkedForChangeNotification(rtm_reg_handle, notify_handle, dest_handle, dest_marked)
+  end
+
+  def rtmDeregisterFromChangeNotification(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT) : UInt32
+    C.RtmDeregisterFromChangeNotification(rtm_reg_handle, notify_handle)
+  end
+
+  def rtmCreateRouteList(rtm_reg_handle : LibC::IntPtrT, route_list_handle : LibC::IntPtrT*) : UInt32
+    C.RtmCreateRouteList(rtm_reg_handle, route_list_handle)
+  end
+
+  def rtmInsertInRouteList(rtm_reg_handle : LibC::IntPtrT, route_list_handle : LibC::IntPtrT, num_routes : UInt32, route_handles : LibC::IntPtrT*) : UInt32
+    C.RtmInsertInRouteList(rtm_reg_handle, route_list_handle, num_routes, route_handles)
+  end
+
+  def rtmCreateRouteListEnum(rtm_reg_handle : LibC::IntPtrT, route_list_handle : LibC::IntPtrT, rtm_enum_handle : LibC::IntPtrT*) : UInt32
+    C.RtmCreateRouteListEnum(rtm_reg_handle, route_list_handle, rtm_enum_handle)
+  end
+
+  def rtmGetListEnumRoutes(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT, num_routes : UInt32*, route_handles : LibC::IntPtrT*) : UInt32
+    C.RtmGetListEnumRoutes(rtm_reg_handle, enum_handle, num_routes, route_handles)
+  end
+
+  def rtmDeleteRouteList(rtm_reg_handle : LibC::IntPtrT, route_list_handle : LibC::IntPtrT) : UInt32
+    C.RtmDeleteRouteList(rtm_reg_handle, route_list_handle)
+  end
+
+  def rtmReferenceHandles(rtm_reg_handle : LibC::IntPtrT, num_handles : UInt32, rtm_handles : Win32cr::Foundation::HANDLE*) : UInt32
+    C.RtmReferenceHandles(rtm_reg_handle, num_handles, rtm_handles)
+  end
+
   @[Link("rasapi32")]
   @[Link("rasdlg")]
   @[Link("mprapi")]
   @[Link("rtm")]
   lib C
+    # :nodoc:
     fun RasDialA(param0 : Win32cr::NetworkManagement::Rras::RASDIALEXTENSIONS*, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, param3 : UInt32, param4 : Void*, param5 : Win32cr::NetworkManagement::Rras::HRASCONN*) : UInt32
 
+    # :nodoc:
     fun RasDialW(param0 : Win32cr::NetworkManagement::Rras::RASDIALEXTENSIONS*, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSW*, param3 : UInt32, param4 : Void*, param5 : Win32cr::NetworkManagement::Rras::HRASCONN*) : UInt32
 
+    # :nodoc:
     fun RasEnumConnectionsA(param0 : Win32cr::NetworkManagement::Rras::RASCONNA*, param1 : UInt32*, param2 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasEnumConnectionsW(param0 : Win32cr::NetworkManagement::Rras::RASCONNW*, param1 : UInt32*, param2 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasEnumEntriesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYNAMEA*, param3 : UInt32*, param4 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasEnumEntriesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYNAMEW*, param3 : UInt32*, param4 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasGetConnectStatusA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::NetworkManagement::Rras::RASCONNSTATUSA*) : UInt32
 
+    # :nodoc:
     fun RasGetConnectStatusW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::NetworkManagement::Rras::RASCONNSTATUSW*) : UInt32
 
+    # :nodoc:
     fun RasGetErrorStringA(resource_id : UInt32, lpszString : UInt8*, in_buf_size : UInt32) : UInt32
 
+    # :nodoc:
     fun RasGetErrorStringW(resource_id : UInt32, lpszString : UInt16*, in_buf_size : UInt32) : UInt32
 
+    # :nodoc:
     fun RasHangUpA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN) : UInt32
 
+    # :nodoc:
     fun RasHangUpW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN) : UInt32
 
+    # :nodoc:
     fun RasGetProjectionInfoA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::NetworkManagement::Rras::RASPROJECTION, param2 : Void*, param3 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasGetProjectionInfoW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::NetworkManagement::Rras::RASPROJECTION, param2 : Void*, param3 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasCreatePhonebookEntryA(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun RasCreatePhonebookEntryW(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RasEditPhonebookEntryA(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun RasEditPhonebookEntryW(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RasSetEntryDialParamsA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, param2 : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun RasSetEntryDialParamsW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSW*, param2 : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun RasGetEntryDialParamsA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, param2 : Int32*) : UInt32
 
+    # :nodoc:
     fun RasGetEntryDialParamsW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSW*, param2 : Int32*) : UInt32
 
+    # :nodoc:
     fun RasEnumDevicesA(param0 : Win32cr::NetworkManagement::Rras::RASDEVINFOA*, param1 : UInt32*, param2 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasEnumDevicesW(param0 : Win32cr::NetworkManagement::Rras::RASDEVINFOW*, param1 : UInt32*, param2 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasGetCountryInfoA(param0 : Win32cr::NetworkManagement::Rras::RASCTRYINFO*, param1 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasGetCountryInfoW(param0 : Win32cr::NetworkManagement::Rras::RASCTRYINFO*, param1 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasGetEntryPropertiesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYA*, param3 : UInt32*, param4 : UInt8*, param5 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasGetEntryPropertiesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYW*, param3 : UInt32*, param4 : UInt8*, param5 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasSetEntryPropertiesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYA*, param3 : UInt32, param4 : UInt8*, param5 : UInt32) : UInt32
 
+    # :nodoc:
     fun RasSetEntryPropertiesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYW*, param3 : UInt32, param4 : UInt8*, param5 : UInt32) : UInt32
 
+    # :nodoc:
     fun RasRenameEntryA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun RasRenameEntryW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RasDeleteEntryA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun RasDeleteEntryW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RasValidateEntryNameA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun RasValidateEntryNameW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RasConnectionNotificationA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::Foundation::HANDLE, param2 : UInt32) : UInt32
 
+    # :nodoc:
     fun RasConnectionNotificationW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::Foundation::HANDLE, param2 : UInt32) : UInt32
 
+    # :nodoc:
     fun RasGetSubEntryHandleA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::HRASCONN*) : UInt32
 
+    # :nodoc:
     fun RasGetSubEntryHandleW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::HRASCONN*) : UInt32
 
+    # :nodoc:
     fun RasGetCredentialsA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASCREDENTIALSA*) : UInt32
 
+    # :nodoc:
     fun RasGetCredentialsW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASCREDENTIALSW*) : UInt32
 
+    # :nodoc:
     fun RasSetCredentialsA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASCREDENTIALSA*, param3 : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun RasSetCredentialsW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASCREDENTIALSW*, param3 : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun RasGetSubEntryPropertiesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : UInt32, param3 : Win32cr::NetworkManagement::Rras::RASSUBENTRYA*, param4 : UInt32*, param5 : UInt8*, param6 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasGetSubEntryPropertiesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : UInt32, param3 : Win32cr::NetworkManagement::Rras::RASSUBENTRYW*, param4 : UInt32*, param5 : UInt8*, param6 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasSetSubEntryPropertiesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : UInt32, param3 : Win32cr::NetworkManagement::Rras::RASSUBENTRYA*, param4 : UInt32, param5 : UInt8*, param6 : UInt32) : UInt32
 
+    # :nodoc:
     fun RasSetSubEntryPropertiesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : UInt32, param3 : Win32cr::NetworkManagement::Rras::RASSUBENTRYW*, param4 : UInt32, param5 : UInt8*, param6 : UInt32) : UInt32
 
+    # :nodoc:
     fun RasGetAutodialAddressA(param0 : Win32cr::Foundation::PSTR, param1 : UInt32*, param2 : Win32cr::NetworkManagement::Rras::RASAUTODIALENTRYA*, param3 : UInt32*, param4 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasGetAutodialAddressW(param0 : Win32cr::Foundation::PWSTR, param1 : UInt32*, param2 : Win32cr::NetworkManagement::Rras::RASAUTODIALENTRYW*, param3 : UInt32*, param4 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasSetAutodialAddressA(param0 : Win32cr::Foundation::PSTR, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::RASAUTODIALENTRYA*, param3 : UInt32, param4 : UInt32) : UInt32
 
+    # :nodoc:
     fun RasSetAutodialAddressW(param0 : Win32cr::Foundation::PWSTR, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::RASAUTODIALENTRYW*, param3 : UInt32, param4 : UInt32) : UInt32
 
+    # :nodoc:
     fun RasEnumAutodialAddressesA(lppRasAutodialAddresses : Win32cr::Foundation::PSTR*, lpdwcbRasAutodialAddresses : UInt32*, lpdwcRasAutodialAddresses : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasEnumAutodialAddressesW(lppRasAutodialAddresses : Win32cr::Foundation::PWSTR*, lpdwcbRasAutodialAddresses : UInt32*, lpdwcRasAutodialAddresses : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasGetAutodialEnableA(param0 : UInt32, param1 : Int32*) : UInt32
 
+    # :nodoc:
     fun RasGetAutodialEnableW(param0 : UInt32, param1 : Int32*) : UInt32
 
+    # :nodoc:
     fun RasSetAutodialEnableA(param0 : UInt32, param1 : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun RasSetAutodialEnableW(param0 : UInt32, param1 : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun RasGetAutodialParamA(param0 : UInt32, param1 : Void*, param2 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasGetAutodialParamW(param0 : UInt32, param1 : Void*, param2 : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasSetAutodialParamA(param0 : UInt32, param1 : Void*, param2 : UInt32) : UInt32
 
+    # :nodoc:
     fun RasSetAutodialParamW(param0 : UInt32, param1 : Void*, param2 : UInt32) : UInt32
 
+    # :nodoc:
     fun RasGetPCscf(lpszPCscf : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RasInvokeEapUI(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::RASDIALEXTENSIONS*, param3 : Win32cr::Foundation::HWND) : UInt32
 
+    # :nodoc:
     fun RasGetLinkStatistics(hRasConn : Win32cr::NetworkManagement::Rras::HRASCONN, dwSubEntry : UInt32, lpStatistics : Win32cr::NetworkManagement::Rras::RAS_STATS*) : UInt32
 
+    # :nodoc:
     fun RasGetConnectionStatistics(hRasConn : Win32cr::NetworkManagement::Rras::HRASCONN, lpStatistics : Win32cr::NetworkManagement::Rras::RAS_STATS*) : UInt32
 
+    # :nodoc:
     fun RasClearLinkStatistics(hRasConn : Win32cr::NetworkManagement::Rras::HRASCONN, dwSubEntry : UInt32) : UInt32
 
+    # :nodoc:
     fun RasClearConnectionStatistics(hRasConn : Win32cr::NetworkManagement::Rras::HRASCONN) : UInt32
 
+    # :nodoc:
     fun RasGetEapUserDataA(hToken : Win32cr::Foundation::HANDLE, pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, pbEapData : UInt8*, pdwSizeofEapData : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasGetEapUserDataW(hToken : Win32cr::Foundation::HANDLE, pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, pbEapData : UInt8*, pdwSizeofEapData : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasSetEapUserDataA(hToken : Win32cr::Foundation::HANDLE, pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, pbEapData : UInt8*, dwSizeofEapData : UInt32) : UInt32
 
+    # :nodoc:
     fun RasSetEapUserDataW(hToken : Win32cr::Foundation::HANDLE, pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, pbEapData : UInt8*, dwSizeofEapData : UInt32) : UInt32
 
+    # :nodoc:
     fun RasGetCustomAuthDataA(pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, pbCustomAuthData : UInt8*, pdwSizeofCustomAuthData : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasGetCustomAuthDataW(pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, pbCustomAuthData : UInt8*, pdwSizeofCustomAuthData : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasSetCustomAuthDataA(pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, pbCustomAuthData : UInt8*, dwSizeofCustomAuthData : UInt32) : UInt32
 
+    # :nodoc:
     fun RasSetCustomAuthDataW(pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, pbCustomAuthData : UInt8*, dwSizeofCustomAuthData : UInt32) : UInt32
 
+    # :nodoc:
     fun RasGetEapUserIdentityW(pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, dwFlags : UInt32, hwnd : Win32cr::Foundation::HWND, ppRasEapUserIdentity : Win32cr::NetworkManagement::Rras::RASEAPUSERIDENTITYW**) : UInt32
 
+    # :nodoc:
     fun RasGetEapUserIdentityA(pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, dwFlags : UInt32, hwnd : Win32cr::Foundation::HWND, ppRasEapUserIdentity : Win32cr::NetworkManagement::Rras::RASEAPUSERIDENTITYA**) : UInt32
 
+    # :nodoc:
     fun RasFreeEapUserIdentityW(pRasEapUserIdentity : Win32cr::NetworkManagement::Rras::RASEAPUSERIDENTITYW*) : Void
 
+    # :nodoc:
     fun RasFreeEapUserIdentityA(pRasEapUserIdentity : Win32cr::NetworkManagement::Rras::RASEAPUSERIDENTITYA*) : Void
 
+    # :nodoc:
     fun RasDeleteSubEntryA(pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, dwSubentryId : UInt32) : UInt32
 
+    # :nodoc:
     fun RasDeleteSubEntryW(pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, dwSubEntryId : UInt32) : UInt32
 
+    # :nodoc:
     fun RasUpdateConnection(hrasconn : Win32cr::NetworkManagement::Rras::HRASCONN, lprasupdateconn : Win32cr::NetworkManagement::Rras::RASUPDATECONN*) : UInt32
 
+    # :nodoc:
     fun RasGetProjectionInfoEx(hrasconn : Win32cr::NetworkManagement::Rras::HRASCONN, pRasProjection : Win32cr::NetworkManagement::Rras::RAS_PROJECTION_INFO*, lpdwSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun RasPhonebookDlgA(lpszPhonebook : Win32cr::Foundation::PSTR, lpszEntry : Win32cr::Foundation::PSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASPBDLGA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RasPhonebookDlgW(lpszPhonebook : Win32cr::Foundation::PWSTR, lpszEntry : Win32cr::Foundation::PWSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASPBDLGW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RasEntryDlgA(lpszPhonebook : Win32cr::Foundation::PSTR, lpszEntry : Win32cr::Foundation::PSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASENTRYDLGA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RasEntryDlgW(lpszPhonebook : Win32cr::Foundation::PWSTR, lpszEntry : Win32cr::Foundation::PWSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASENTRYDLGW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RasDialDlgA(lpszPhonebook : Win32cr::Foundation::PSTR, lpszEntry : Win32cr::Foundation::PSTR, lpszPhoneNumber : Win32cr::Foundation::PSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASDIALDLG*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RasDialDlgW(lpszPhonebook : Win32cr::Foundation::PWSTR, lpszEntry : Win32cr::Foundation::PWSTR, lpszPhoneNumber : Win32cr::Foundation::PWSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASDIALDLG*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MprAdminConnectionEnumEx(hRasServer : LibC::IntPtrT, pObjectHeader : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER*, dwPreferedMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, ppRasConn : Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX**, lpdwResumeHandle : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprAdminConnectionGetInfoEx(hRasServer : LibC::IntPtrT, hRasConnection : Win32cr::Foundation::HANDLE, pRasConnection : Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX*) : UInt32
 
+    # :nodoc:
     fun MprAdminServerGetInfoEx(hMprServer : LibC::IntPtrT, pServerInfo : Win32cr::NetworkManagement::Rras::MPR_SERVER_EX1*) : UInt32
 
+    # :nodoc:
     fun MprAdminServerSetInfoEx(hMprServer : LibC::IntPtrT, pServerInfo : Win32cr::NetworkManagement::Rras::MPR_SERVER_SET_CONFIG_EX1*) : UInt32
 
+    # :nodoc:
     fun MprConfigServerGetInfoEx(hMprConfig : Win32cr::Foundation::HANDLE, pServerInfo : Win32cr::NetworkManagement::Rras::MPR_SERVER_EX1*) : UInt32
 
+    # :nodoc:
     fun MprConfigServerSetInfoEx(hMprConfig : Win32cr::Foundation::HANDLE, pSetServerConfig : Win32cr::NetworkManagement::Rras::MPR_SERVER_SET_CONFIG_EX1*) : UInt32
 
+    # :nodoc:
     fun MprAdminUpdateConnection(hRasServer : LibC::IntPtrT, hRasConnection : Win32cr::Foundation::HANDLE, pRasUpdateConnection : Win32cr::NetworkManagement::Rras::RAS_UPDATE_CONNECTION*) : UInt32
 
+    # :nodoc:
     fun MprAdminIsServiceInitialized(lpwsServerName : Win32cr::Foundation::PWSTR, fIsServiceInitialized : Win32cr::Foundation::BOOL*) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceSetCustomInfoEx(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, pCustomInfo : Win32cr::NetworkManagement::Rras::MPR_IF_CUSTOMINFOEX2*) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceGetCustomInfoEx(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, pCustomInfo : Win32cr::NetworkManagement::Rras::MPR_IF_CUSTOMINFOEX2*) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceGetCustomInfoEx(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, pCustomInfo : Win32cr::NetworkManagement::Rras::MPR_IF_CUSTOMINFOEX2*) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceSetCustomInfoEx(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, pCustomInfo : Win32cr::NetworkManagement::Rras::MPR_IF_CUSTOMINFOEX2*) : UInt32
 
+    # :nodoc:
     fun MprAdminConnectionEnum(hRasServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprAdminPortEnum(hRasServer : LibC::IntPtrT, dwLevel : UInt32, hRasConnection : Win32cr::Foundation::HANDLE, lplpbBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprAdminConnectionGetInfo(hRasServer : LibC::IntPtrT, dwLevel : UInt32, hRasConnection : Win32cr::Foundation::HANDLE, lplpbBuffer : UInt8**) : UInt32
 
+    # :nodoc:
     fun MprAdminPortGetInfo(hRasServer : LibC::IntPtrT, dwLevel : UInt32, hPort : Win32cr::Foundation::HANDLE, lplpbBuffer : UInt8**) : UInt32
 
+    # :nodoc:
     fun MprAdminConnectionClearStats(hRasServer : LibC::IntPtrT, hRasConnection : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprAdminPortClearStats(hRasServer : LibC::IntPtrT, hPort : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprAdminPortReset(hRasServer : LibC::IntPtrT, hPort : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprAdminPortDisconnect(hRasServer : LibC::IntPtrT, hPort : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprAdminConnectionRemoveQuarantine(hRasServer : Win32cr::Foundation::HANDLE, hRasConnection : Win32cr::Foundation::HANDLE, fIsIpAddress : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun MprAdminUserGetInfo(lpszServer : Win32cr::Foundation::PWSTR, lpszUser : Win32cr::Foundation::PWSTR, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun MprAdminUserSetInfo(lpszServer : Win32cr::Foundation::PWSTR, lpszUser : Win32cr::Foundation::PWSTR, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun MprAdminSendUserMessage(hMprServer : LibC::IntPtrT, hConnection : Win32cr::Foundation::HANDLE, lpwszMessage : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun MprAdminGetPDCServer(lpszDomain : Win32cr::Foundation::PWSTR, lpszServer : Win32cr::Foundation::PWSTR, lpszPDCServer : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun MprAdminIsServiceRunning(lpwsServerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MprAdminServerConnect(lpwsServerName : Win32cr::Foundation::PWSTR, phMprServer : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun MprAdminServerDisconnect(hMprServer : LibC::IntPtrT) : Void
 
+    # :nodoc:
     fun MprAdminServerGetCredentials(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
 
+    # :nodoc:
     fun MprAdminServerSetCredentials(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun MprAdminBufferFree(pBuffer : Void*) : UInt32
 
+    # :nodoc:
     fun MprAdminGetErrorString(dwError : UInt32, lplpwsErrorString : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun MprAdminServerGetInfo(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
 
+    # :nodoc:
     fun MprAdminServerSetInfo(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun MprAdminEstablishDomainRasServer(pszDomain : Win32cr::Foundation::PWSTR, pszMachine : Win32cr::Foundation::PWSTR, bEnable : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun MprAdminIsDomainRasServer(pszDomain : Win32cr::Foundation::PWSTR, pszMachine : Win32cr::Foundation::PWSTR, pbIsRasServer : Win32cr::Foundation::BOOL*) : UInt32
 
+    # :nodoc:
     fun MprAdminTransportCreate(hMprServer : LibC::IntPtrT, dwTransportId : UInt32, lpwsTransportName : Win32cr::Foundation::PWSTR, pGlobalInfo : UInt8*, dwGlobalInfoSize : UInt32, pClientInterfaceInfo : UInt8*, dwClientInterfaceInfoSize : UInt32, lpwsDLLPath : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun MprAdminTransportSetInfo(hMprServer : LibC::IntPtrT, dwTransportId : UInt32, pGlobalInfo : UInt8*, dwGlobalInfoSize : UInt32, pClientInterfaceInfo : UInt8*, dwClientInterfaceInfoSize : UInt32) : UInt32
 
+    # :nodoc:
     fun MprAdminTransportGetInfo(hMprServer : LibC::IntPtrT, dwTransportId : UInt32, ppGlobalInfo : UInt8**, lpdwGlobalInfoSize : UInt32*, ppClientInterfaceInfo : UInt8**, lpdwClientInterfaceInfoSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprAdminDeviceEnum(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**, lpdwTotalEntries : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceGetHandle(hMprServer : LibC::IntPtrT, lpwsInterfaceName : Win32cr::Foundation::PWSTR, phInterface : Win32cr::Foundation::HANDLE*, fIncludeClientInterfaces : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceCreate(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lpbBuffer : UInt8*, phInterface : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceGetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceSetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceDelete(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceDeviceGetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwIndex : UInt32, dwLevel : UInt32, lplpBuffer : UInt8**) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceDeviceSetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwIndex : UInt32, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceTransportRemove(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceTransportAdd(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, pInterfaceInfo : UInt8*, dwInterfaceInfoSize : UInt32) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceTransportGetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, ppInterfaceInfo : UInt8**, lpdwInterfaceInfoSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceTransportSetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, pInterfaceInfo : UInt8*, dwInterfaceInfoSize : UInt32) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceEnum(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceSetCredentials(lpwsServer : Win32cr::Foundation::PWSTR, lpwsInterfaceName : Win32cr::Foundation::PWSTR, lpwsUserName : Win32cr::Foundation::PWSTR, lpwsDomainName : Win32cr::Foundation::PWSTR, lpwsPassword : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceGetCredentials(lpwsServer : Win32cr::Foundation::PWSTR, lpwsInterfaceName : Win32cr::Foundation::PWSTR, lpwsUserName : Win32cr::Foundation::PWSTR, lpwsPassword : Win32cr::Foundation::PWSTR, lpwsDomainName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceSetCredentialsEx(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceGetCredentialsEx(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceConnect(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, hEvent : Win32cr::Foundation::HANDLE, fSynchronous : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceDisconnect(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceUpdateRoutes(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwProtocolId : UInt32, hEvent : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceQueryUpdateResult(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwProtocolId : UInt32, lpdwUpdateResult : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprAdminInterfaceUpdatePhonebookInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprAdminRegisterConnectionNotification(hMprServer : LibC::IntPtrT, hEventNotification : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprAdminDeregisterConnectionNotification(hMprServer : LibC::IntPtrT, hEventNotification : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprAdminMIBServerConnect(lpwsServerName : Win32cr::Foundation::PWSTR, phMibServer : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun MprAdminMIBServerDisconnect(hMibServer : LibC::IntPtrT) : Void
 
+    # :nodoc:
     fun MprAdminMIBEntryCreate(hMibServer : LibC::IntPtrT, dwPid : UInt32, dwRoutingPid : UInt32, lpEntry : Void*, dwEntrySize : UInt32) : UInt32
 
+    # :nodoc:
     fun MprAdminMIBEntryDelete(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpEntry : Void*, dwEntrySize : UInt32) : UInt32
 
+    # :nodoc:
     fun MprAdminMIBEntrySet(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpEntry : Void*, dwEntrySize : UInt32) : UInt32
 
+    # :nodoc:
     fun MprAdminMIBEntryGet(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpInEntry : Void*, dwInEntrySize : UInt32, lplpOutEntry : Void**, lpOutEntrySize : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprAdminMIBEntryGetFirst(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpInEntry : Void*, dwInEntrySize : UInt32, lplpOutEntry : Void**, lpOutEntrySize : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprAdminMIBEntryGetNext(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpInEntry : Void*, dwInEntrySize : UInt32, lplpOutEntry : Void**, lpOutEntrySize : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprAdminMIBBufferFree(pBuffer : Void*) : UInt32
 
+    # :nodoc:
     fun MprConfigServerInstall(dwLevel : UInt32, pBuffer : Void*) : UInt32
 
+    # :nodoc:
     fun MprConfigServerConnect(lpwsServerName : Win32cr::Foundation::PWSTR, phMprConfig : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun MprConfigServerDisconnect(hMprConfig : Win32cr::Foundation::HANDLE) : Void
 
+    # :nodoc:
     fun MprConfigServerRefresh(hMprConfig : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprConfigBufferFree(pBuffer : Void*) : UInt32
 
+    # :nodoc:
     fun MprConfigServerGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
 
+    # :nodoc:
     fun MprConfigServerSetInfo(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun MprConfigServerBackup(hMprConfig : Win32cr::Foundation::HANDLE, lpwsPath : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun MprConfigServerRestore(hMprConfig : Win32cr::Foundation::HANDLE, lpwsPath : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun MprConfigTransportCreate(hMprConfig : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, lpwsTransportName : Win32cr::Foundation::PWSTR, pGlobalInfo : UInt8*, dwGlobalInfoSize : UInt32, pClientInterfaceInfo : UInt8*, dwClientInterfaceInfoSize : UInt32, lpwsDLLPath : Win32cr::Foundation::PWSTR, phRouterTransport : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun MprConfigTransportDelete(hMprConfig : Win32cr::Foundation::HANDLE, hRouterTransport : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprConfigTransportGetHandle(hMprConfig : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, phRouterTransport : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun MprConfigTransportSetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterTransport : Win32cr::Foundation::HANDLE, pGlobalInfo : UInt8*, dwGlobalInfoSize : UInt32, pClientInterfaceInfo : UInt8*, dwClientInterfaceInfoSize : UInt32, lpwsDLLPath : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun MprConfigTransportGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterTransport : Win32cr::Foundation::HANDLE, ppGlobalInfo : UInt8**, lpdwGlobalInfoSize : UInt32*, ppClientInterfaceInfo : UInt8**, lpdwClientInterfaceInfoSize : UInt32*, lplpwsDLLPath : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun MprConfigTransportEnum(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceCreate(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lpbBuffer : UInt8*, phRouterInterface : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceDelete(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceGetHandle(hMprConfig : Win32cr::Foundation::HANDLE, lpwsInterfaceName : Win32cr::Foundation::PWSTR, phRouterInterface : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpBuffer : UInt8**, lpdwBufferSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceSetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceEnum(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceTransportAdd(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, lpwsTransportName : Win32cr::Foundation::PWSTR, pInterfaceInfo : UInt8*, dwInterfaceInfoSize : UInt32, phRouterIfTransport : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceTransportRemove(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, hRouterIfTransport : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceTransportGetHandle(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, phRouterIfTransport : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceTransportGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, hRouterIfTransport : Win32cr::Foundation::HANDLE, ppInterfaceInfo : UInt8**, lpdwInterfaceInfoSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceTransportSetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, hRouterIfTransport : Win32cr::Foundation::HANDLE, pInterfaceInfo : UInt8*, dwInterfaceInfoSize : UInt32) : UInt32
 
+    # :nodoc:
     fun MprConfigInterfaceTransportEnum(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
 
+    # :nodoc:
     fun MprConfigGetFriendlyName(hMprConfig : Win32cr::Foundation::HANDLE, pszGuidName : Win32cr::Foundation::PWSTR, pszBuffer : Win32cr::Foundation::PWSTR, dwBufferSize : UInt32) : UInt32
 
+    # :nodoc:
     fun MprConfigGetGuidName(hMprConfig : Win32cr::Foundation::HANDLE, pszFriendlyName : Win32cr::Foundation::PWSTR, pszBuffer : Win32cr::Foundation::PWSTR, dwBufferSize : UInt32) : UInt32
 
+    # :nodoc:
     fun MprConfigFilterGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, dwTransportId : UInt32, lpBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun MprConfigFilterSetInfo(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, dwTransportId : UInt32, lpBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun MprInfoCreate(dwVersion : UInt32, lplpNewHeader : Void**) : UInt32
 
+    # :nodoc:
     fun MprInfoDelete(lpHeader : Void*) : UInt32
 
+    # :nodoc:
     fun MprInfoRemoveAll(lpHeader : Void*, lplpNewHeader : Void**) : UInt32
 
+    # :nodoc:
     fun MprInfoDuplicate(lpHeader : Void*, lplpNewHeader : Void**) : UInt32
 
+    # :nodoc:
     fun MprInfoBlockAdd(lpHeader : Void*, dwInfoType : UInt32, dwItemSize : UInt32, dwItemCount : UInt32, lpItemData : UInt8*, lplpNewHeader : Void**) : UInt32
 
+    # :nodoc:
     fun MprInfoBlockRemove(lpHeader : Void*, dwInfoType : UInt32, lplpNewHeader : Void**) : UInt32
 
+    # :nodoc:
     fun MprInfoBlockSet(lpHeader : Void*, dwInfoType : UInt32, dwItemSize : UInt32, dwItemCount : UInt32, lpItemData : UInt8*, lplpNewHeader : Void**) : UInt32
 
+    # :nodoc:
     fun MprInfoBlockFind(lpHeader : Void*, dwInfoType : UInt32, lpdwItemSize : UInt32*, lpdwItemCount : UInt32*, lplpItemData : UInt8**) : UInt32
 
+    # :nodoc:
     fun MprInfoBlockQuerySize(lpHeader : Void*) : UInt32
 
+    # :nodoc:
     fun MgmRegisterMProtocol(prpiInfo : Win32cr::NetworkManagement::Rras::ROUTING_PROTOCOL_CONFIG*, dwProtocolId : UInt32, dwComponentId : UInt32, phProtocol : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun MgmDeRegisterMProtocol(hProtocol : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun MgmTakeInterfaceOwnership(hProtocol : Win32cr::Foundation::HANDLE, dwIfIndex : UInt32, dwIfNextHopAddr : UInt32) : UInt32
 
+    # :nodoc:
     fun MgmReleaseInterfaceOwnership(hProtocol : Win32cr::Foundation::HANDLE, dwIfIndex : UInt32, dwIfNextHopAddr : UInt32) : UInt32
 
+    # :nodoc:
     fun MgmGetProtocolOnInterface(dwIfIndex : UInt32, dwIfNextHopAddr : UInt32, pdwIfProtocolId : UInt32*, pdwIfComponentId : UInt32*) : UInt32
 
+    # :nodoc:
     fun MgmAddGroupMembershipEntry(hProtocol : Win32cr::Foundation::HANDLE, dwSourceAddr : UInt32, dwSourceMask : UInt32, dwGroupAddr : UInt32, dwGroupMask : UInt32, dwIfIndex : UInt32, dwIfNextHopIPAddr : UInt32, dwFlags : UInt32) : UInt32
 
+    # :nodoc:
     fun MgmDeleteGroupMembershipEntry(hProtocol : Win32cr::Foundation::HANDLE, dwSourceAddr : UInt32, dwSourceMask : UInt32, dwGroupAddr : UInt32, dwGroupMask : UInt32, dwIfIndex : UInt32, dwIfNextHopIPAddr : UInt32, dwFlags : UInt32) : UInt32
 
+    # :nodoc:
     fun MgmGetMfe(pimm : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*, pdwBufferSize : UInt32*, pbBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun MgmGetFirstMfe(pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*) : UInt32
 
+    # :nodoc:
     fun MgmGetNextMfe(pimmStart : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*, pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*) : UInt32
 
+    # :nodoc:
     fun MgmGetMfeStats(pimm : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*, pdwBufferSize : UInt32*, pbBuffer : UInt8*, dwFlags : UInt32) : UInt32
 
+    # :nodoc:
     fun MgmGetFirstMfeStats(pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*, dwFlags : UInt32) : UInt32
 
+    # :nodoc:
     fun MgmGetNextMfeStats(pimmStart : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*, pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*, dwFlags : UInt32) : UInt32
 
+    # :nodoc:
     fun MgmGroupEnumerationStart(hProtocol : Win32cr::Foundation::HANDLE, metEnumType : Win32cr::NetworkManagement::Rras::MGM_ENUM_TYPES, phEnumHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun MgmGroupEnumerationGetNext(hEnum : Win32cr::Foundation::HANDLE, pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*) : UInt32
 
+    # :nodoc:
     fun MgmGroupEnumerationEnd(hEnum : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun RtmConvertNetAddressToIpv6AddressAndLength(pNetAddress : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, pAddress : Win32cr::Networking::WinSock::IN6_ADDR*, pLength : UInt32*, dwAddressSize : UInt32) : UInt32
 
+    # :nodoc:
     fun RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, address : Win32cr::Networking::WinSock::IN6_ADDR, dwLength : UInt32, dwAddressSize : UInt32) : UInt32
 
+    # :nodoc:
     fun RtmRegisterEntity(rtm_entity_info : Win32cr::NetworkManagement::Rras::RTM_ENTITY_INFO*, export_methods : Win32cr::NetworkManagement::Rras::RTM_ENTITY_EXPORT_METHODS*, event_callback : Win32cr::NetworkManagement::Rras::RTM_EVENT_CALLBACK, reserve_opaque_pointer : Win32cr::Foundation::BOOL, rtm_reg_profile : Win32cr::NetworkManagement::Rras::RTM_REGN_PROFILE*, rtm_reg_handle : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmDeregisterEntity(rtm_reg_handle : LibC::IntPtrT) : UInt32
 
+    # :nodoc:
     fun RtmGetRegisteredEntities(rtm_reg_handle : LibC::IntPtrT, num_entities : UInt32*, entity_handles : LibC::IntPtrT*, entity_infos : Win32cr::NetworkManagement::Rras::RTM_ENTITY_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmReleaseEntities(rtm_reg_handle : LibC::IntPtrT, num_entities : UInt32, entity_handles : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmLockDestination(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, exclusive : Win32cr::Foundation::BOOL, lock_dest : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun RtmGetOpaqueInformationPointer(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, opaque_info_pointer : Void**) : UInt32
 
+    # :nodoc:
     fun RtmGetEntityMethods(rtm_reg_handle : LibC::IntPtrT, entity_handle : LibC::IntPtrT, num_methods : UInt32*, expt_methods : Win32cr::NetworkManagement::Rras::RTM_ENTITY_EXPORT_METHOD*) : UInt32
 
+    # :nodoc:
     fun RtmInvokeMethod(rtm_reg_handle : LibC::IntPtrT, entity_handle : LibC::IntPtrT, input : Win32cr::NetworkManagement::Rras::RTM_ENTITY_METHOD_INPUT*, output_size : UInt32*, output : Win32cr::NetworkManagement::Rras::RTM_ENTITY_METHOD_OUTPUT*) : UInt32
 
+    # :nodoc:
     fun RtmBlockMethods(rtm_reg_handle : LibC::IntPtrT, target_handle : Win32cr::Foundation::HANDLE, target_type : UInt8, blocking_flag : UInt32) : UInt32
 
+    # :nodoc:
     fun RtmGetEntityInfo(rtm_reg_handle : LibC::IntPtrT, entity_handle : LibC::IntPtrT, entity_info : Win32cr::NetworkManagement::Rras::RTM_ENTITY_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmGetDestInfo(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, protocol_id : UInt32, target_views : UInt32, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmGetRouteInfo(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, route_info : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*) : UInt32
 
+    # :nodoc:
     fun RtmGetNextHopInfo(rtm_reg_handle : LibC::IntPtrT, next_hop_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmReleaseEntityInfo(rtm_reg_handle : LibC::IntPtrT, entity_info : Win32cr::NetworkManagement::Rras::RTM_ENTITY_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmReleaseDestInfo(rtm_reg_handle : LibC::IntPtrT, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmReleaseRouteInfo(rtm_reg_handle : LibC::IntPtrT, route_info : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmReleaseNextHopInfo(rtm_reg_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmAddRouteToDest(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT*, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, route_info : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*, time_to_live : UInt32, route_list_handle : LibC::IntPtrT, notify_type : UInt32, notify_handle : LibC::IntPtrT, change_flags : UInt32*) : UInt32
 
+    # :nodoc:
     fun RtmDeleteRouteToDest(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, change_flags : UInt32*) : UInt32
 
+    # :nodoc:
     fun RtmHoldDestination(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, target_views : UInt32, hold_time : UInt32) : UInt32
 
+    # :nodoc:
     fun RtmGetRoutePointer(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, route_pointer : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO**) : UInt32
 
+    # :nodoc:
     fun RtmLockRoute(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, exclusive : Win32cr::Foundation::BOOL, lock_route : Win32cr::Foundation::BOOL, route_pointer : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO**) : UInt32
 
+    # :nodoc:
     fun RtmUpdateAndUnlockRoute(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, time_to_live : UInt32, route_list_handle : LibC::IntPtrT, notify_type : UInt32, notify_handle : LibC::IntPtrT, change_flags : UInt32*) : UInt32
 
+    # :nodoc:
     fun RtmGetExactMatchDestination(rtm_reg_handle : LibC::IntPtrT, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, protocol_id : UInt32, target_views : UInt32, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmGetMostSpecificDestination(rtm_reg_handle : LibC::IntPtrT, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, protocol_id : UInt32, target_views : UInt32, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmGetLessSpecificDestination(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, protocol_id : UInt32, target_views : UInt32, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmGetExactMatchRoute(rtm_reg_handle : LibC::IntPtrT, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, matching_flags : UInt32, route_info : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*, interface_index : UInt32, target_views : UInt32, route_handle : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmIsBestRoute(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, best_in_views : UInt32*) : UInt32
 
+    # :nodoc:
     fun RtmAddNextHop(rtm_reg_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*, next_hop_handle : LibC::IntPtrT*, change_flags : UInt32*) : UInt32
 
+    # :nodoc:
     fun RtmFindNextHop(rtm_reg_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*, next_hop_handle : LibC::IntPtrT*, next_hop_pointer : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO**) : UInt32
 
+    # :nodoc:
     fun RtmDeleteNextHop(rtm_reg_handle : LibC::IntPtrT, next_hop_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmGetNextHopPointer(rtm_reg_handle : LibC::IntPtrT, next_hop_handle : LibC::IntPtrT, next_hop_pointer : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO**) : UInt32
 
+    # :nodoc:
     fun RtmLockNextHop(rtm_reg_handle : LibC::IntPtrT, next_hop_handle : LibC::IntPtrT, exclusive : Win32cr::Foundation::BOOL, lock_next_hop : Win32cr::Foundation::BOOL, next_hop_pointer : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO**) : UInt32
 
+    # :nodoc:
     fun RtmCreateDestEnum(rtm_reg_handle : LibC::IntPtrT, target_views : UInt32, enum_flags : UInt32, net_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, protocol_id : UInt32, rtm_enum_handle : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmGetEnumDests(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT, num_dests : UInt32*, dest_infos : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmReleaseDests(rtm_reg_handle : LibC::IntPtrT, num_dests : UInt32, dest_infos : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmCreateRouteEnum(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, target_views : UInt32, enum_flags : UInt32, start_dest : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, matching_flags : UInt32, criteria_route : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*, criteria_interface : UInt32, rtm_enum_handle : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmGetEnumRoutes(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT, num_routes : UInt32*, route_handles : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmReleaseRoutes(rtm_reg_handle : LibC::IntPtrT, num_routes : UInt32, route_handles : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmCreateNextHopEnum(rtm_reg_handle : LibC::IntPtrT, enum_flags : UInt32, net_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, rtm_enum_handle : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmGetEnumNextHops(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT, num_next_hops : UInt32*, next_hop_handles : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmReleaseNextHops(rtm_reg_handle : LibC::IntPtrT, num_next_hops : UInt32, next_hop_handles : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmDeleteEnumHandle(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT) : UInt32
 
+    # :nodoc:
     fun RtmRegisterForChangeNotification(rtm_reg_handle : LibC::IntPtrT, target_views : UInt32, notify_flags : UInt32, notify_context : Void*, notify_handle : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmGetChangedDests(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, num_dests : UInt32*, changed_dests : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmReleaseChangedDests(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, num_dests : UInt32, changed_dests : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
 
+    # :nodoc:
     fun RtmIgnoreChangedDests(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, num_dests : UInt32, changed_dests : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmGetChangeStatus(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, change_status : Win32cr::Foundation::BOOL*) : UInt32
 
+    # :nodoc:
     fun RtmMarkDestForChangeNotification(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, mark_dest : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun RtmIsMarkedForChangeNotification(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, dest_marked : Win32cr::Foundation::BOOL*) : UInt32
 
+    # :nodoc:
     fun RtmDeregisterFromChangeNotification(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT) : UInt32
 
+    # :nodoc:
     fun RtmCreateRouteList(rtm_reg_handle : LibC::IntPtrT, route_list_handle : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmInsertInRouteList(rtm_reg_handle : LibC::IntPtrT, route_list_handle : LibC::IntPtrT, num_routes : UInt32, route_handles : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmCreateRouteListEnum(rtm_reg_handle : LibC::IntPtrT, route_list_handle : LibC::IntPtrT, rtm_enum_handle : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmGetListEnumRoutes(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT, num_routes : UInt32*, route_handles : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun RtmDeleteRouteList(rtm_reg_handle : LibC::IntPtrT, route_list_handle : LibC::IntPtrT) : UInt32
 
+    # :nodoc:
     fun RtmReferenceHandles(rtm_reg_handle : LibC::IntPtrT, num_handles : UInt32, rtm_handles : Win32cr::Foundation::HANDLE*) : UInt32
 
   end

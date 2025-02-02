@@ -3,6 +3,7 @@ require "./cryptography.cr"
 require "./cryptography/sip.cr"
 
 module Win32cr::Security::WinTrust
+  extend self
   alias PFN_CPD_MEM_ALLOC = Proc(UInt32, Void*)
 
   alias PFN_CPD_MEM_FREE = Proc(Void*, Void)
@@ -913,42 +914,132 @@ module Win32cr::Security::WinTrust
     end
   end
 
+  def winVerifyTrust(hwnd : Win32cr::Foundation::HWND, pgActionID : LibC::GUID*, pWVTData : Void*) : Int32
+    C.WinVerifyTrust(hwnd, pgActionID, pWVTData)
+  end
+
+  def winVerifyTrustEx(hwnd : Win32cr::Foundation::HWND, pgActionID : LibC::GUID*, pWinTrustData : Win32cr::Security::WinTrust::WINTRUST_DATA*) : Int32
+    C.WinVerifyTrustEx(hwnd, pgActionID, pWinTrustData)
+  end
+
+  def wintrustGetRegPolicyFlags(pdwPolicyFlags : Win32cr::Security::WinTrust::WINTRUST_POLICY_FLAGS*) : Void
+    C.WintrustGetRegPolicyFlags(pdwPolicyFlags)
+  end
+
+  def wintrustSetRegPolicyFlags(dwPolicyFlags : Win32cr::Security::WinTrust::WINTRUST_POLICY_FLAGS) : Win32cr::Foundation::BOOL
+    C.WintrustSetRegPolicyFlags(dwPolicyFlags)
+  end
+
+  def wintrustAddActionID(pgActionID : LibC::GUID*, fdwFlags : UInt32, psProvInfo : Win32cr::Security::WinTrust::CRYPT_REGISTER_ACTIONID*) : Win32cr::Foundation::BOOL
+    C.WintrustAddActionID(pgActionID, fdwFlags, psProvInfo)
+  end
+
+  def wintrustRemoveActionID(pgActionID : LibC::GUID*) : Win32cr::Foundation::BOOL
+    C.WintrustRemoveActionID(pgActionID)
+  end
+
+  def wintrustLoadFunctionPointers(pgActionID : LibC::GUID*, pPfns : Win32cr::Security::WinTrust::CRYPT_PROVIDER_FUNCTIONS*) : Win32cr::Foundation::BOOL
+    C.WintrustLoadFunctionPointers(pgActionID, pPfns)
+  end
+
+  def wintrustAddDefaultForUsage(pszUsageOID : Win32cr::Foundation::PSTR, psDefUsage : Win32cr::Security::WinTrust::CRYPT_PROVIDER_REGDEFUSAGE*) : Win32cr::Foundation::BOOL
+    C.WintrustAddDefaultForUsage(pszUsageOID, psDefUsage)
+  end
+
+  def wintrustGetDefaultForUsage(dwAction : Win32cr::Security::WinTrust::WINTRUST_GET_DEFAULT_FOR_USAGE_ACTION, pszUsageOID : Win32cr::Foundation::PSTR, psUsage : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DEFUSAGE*) : Win32cr::Foundation::BOOL
+    C.WintrustGetDefaultForUsage(dwAction, pszUsageOID, psUsage)
+  end
+
+  def wTHelperGetProvSignerFromChain(pProvData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, idxSigner : UInt32, fCounterSigner : Win32cr::Foundation::BOOL, idxCounterSigner : UInt32) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*
+    C.WTHelperGetProvSignerFromChain(pProvData, idxSigner, fCounterSigner, idxCounterSigner)
+  end
+
+  def wTHelperGetProvCertFromChain(pSgnr : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*, idxCert : UInt32) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_CERT*
+    C.WTHelperGetProvCertFromChain(pSgnr, idxCert)
+  end
+
+  def wTHelperProvDataFromStateData(hStateData : Win32cr::Foundation::HANDLE) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*
+    C.WTHelperProvDataFromStateData(hStateData)
+  end
+
+  def wTHelperGetProvPrivateDataFromChain(pProvData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, pgProviderID : LibC::GUID*) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_PRIVDATA*
+    C.WTHelperGetProvPrivateDataFromChain(pProvData, pgProviderID)
+  end
+
+  def wTHelperCertIsSelfSigned(dwEncoding : UInt32, pCert : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
+    C.WTHelperCertIsSelfSigned(dwEncoding, pCert)
+  end
+
+  def wTHelperCertCheckValidSignature(pProvData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*) : Win32cr::Foundation::HRESULT
+    C.WTHelperCertCheckValidSignature(pProvData)
+  end
+
+  def openPersonalTrustDBDialogEx(hwndParent : Win32cr::Foundation::HWND, dwFlags : UInt32, pvReserved : Void**) : Win32cr::Foundation::BOOL
+    C.OpenPersonalTrustDBDialogEx(hwndParent, dwFlags, pvReserved)
+  end
+
+  def openPersonalTrustDBDialog(hwndParent : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.OpenPersonalTrustDBDialog(hwndParent)
+  end
+
+  def wintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes : Win32cr::Foundation::BOOL) : Void
+    C.WintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes)
+  end
+
   @[Link("wintrust")]
   lib C
+    # :nodoc:
     fun WinVerifyTrust(hwnd : Win32cr::Foundation::HWND, pgActionID : LibC::GUID*, pWVTData : Void*) : Int32
 
+    # :nodoc:
     fun WinVerifyTrustEx(hwnd : Win32cr::Foundation::HWND, pgActionID : LibC::GUID*, pWinTrustData : Win32cr::Security::WinTrust::WINTRUST_DATA*) : Int32
 
+    # :nodoc:
     fun WintrustGetRegPolicyFlags(pdwPolicyFlags : Win32cr::Security::WinTrust::WINTRUST_POLICY_FLAGS*) : Void
 
+    # :nodoc:
     fun WintrustSetRegPolicyFlags(dwPolicyFlags : Win32cr::Security::WinTrust::WINTRUST_POLICY_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WintrustAddActionID(pgActionID : LibC::GUID*, fdwFlags : UInt32, psProvInfo : Win32cr::Security::WinTrust::CRYPT_REGISTER_ACTIONID*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WintrustRemoveActionID(pgActionID : LibC::GUID*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WintrustLoadFunctionPointers(pgActionID : LibC::GUID*, pPfns : Win32cr::Security::WinTrust::CRYPT_PROVIDER_FUNCTIONS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WintrustAddDefaultForUsage(pszUsageOID : Win32cr::Foundation::PSTR, psDefUsage : Win32cr::Security::WinTrust::CRYPT_PROVIDER_REGDEFUSAGE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WintrustGetDefaultForUsage(dwAction : Win32cr::Security::WinTrust::WINTRUST_GET_DEFAULT_FOR_USAGE_ACTION, pszUsageOID : Win32cr::Foundation::PSTR, psUsage : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DEFUSAGE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTHelperGetProvSignerFromChain(pProvData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, idxSigner : UInt32, fCounterSigner : Win32cr::Foundation::BOOL, idxCounterSigner : UInt32) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*
 
+    # :nodoc:
     fun WTHelperGetProvCertFromChain(pSgnr : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*, idxCert : UInt32) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_CERT*
 
+    # :nodoc:
     fun WTHelperProvDataFromStateData(hStateData : Win32cr::Foundation::HANDLE) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*
 
+    # :nodoc:
     fun WTHelperGetProvPrivateDataFromChain(pProvData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, pgProviderID : LibC::GUID*) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_PRIVDATA*
 
+    # :nodoc:
     fun WTHelperCertIsSelfSigned(dwEncoding : UInt32, pCert : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTHelperCertCheckValidSignature(pProvData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OpenPersonalTrustDBDialogEx(hwndParent : Win32cr::Foundation::HWND, dwFlags : UInt32, pvReserved : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OpenPersonalTrustDBDialog(hwndParent : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes : Win32cr::Foundation::BOOL) : Void
 
   end

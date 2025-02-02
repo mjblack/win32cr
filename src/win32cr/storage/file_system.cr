@@ -5,6 +5,7 @@ require "./../system/io.cr"
 require "./../system/windows_programming.cr"
 
 module Win32cr::Storage::FileSystem
+  extend self
   alias FindFileHandle = LibC::IntPtrT
   alias FindFileNameHandle = LibC::IntPtrT
   alias FindStreamHandle = LibC::IntPtrT
@@ -4141,6 +4142,1650 @@ module Win32cr::Storage::FileSystem
 
   end
 
+  def searchPathW(lpPath : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR, lpExtension : Win32cr::Foundation::PWSTR, nBufferLength : UInt32, lpBuffer : UInt16*, lpFilePart : Win32cr::Foundation::PWSTR*) : UInt32
+    C.SearchPathW(lpPath, lpFileName, lpExtension, nBufferLength, lpBuffer, lpFilePart)
+  end
+
+  def searchPathA(lpPath : Win32cr::Foundation::PSTR, lpFileName : Win32cr::Foundation::PSTR, lpExtension : Win32cr::Foundation::PSTR, nBufferLength : UInt32, lpBuffer : UInt8*, lpFilePart : Win32cr::Foundation::PSTR*) : UInt32
+    C.SearchPathA(lpPath, lpFileName, lpExtension, nBufferLength, lpBuffer, lpFilePart)
+  end
+
+  def compareFileTime(lpFileTime1 : Win32cr::Foundation::FILETIME*, lpFileTime2 : Win32cr::Foundation::FILETIME*) : Int32
+    C.CompareFileTime(lpFileTime1, lpFileTime2)
+  end
+
+  def createDirectoryA(lpPathName : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+    C.CreateDirectoryA(lpPathName, lpSecurityAttributes)
+  end
+
+  #def createDirectoryW(lpPathName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+    #C.CreateDirectoryW(lpPathName, lpSecurityAttributes)
+  #end
+
+  def createFileA(lpFileName : Win32cr::Foundation::PSTR, dwDesiredAccess : Win32cr::Storage::FileSystem::FILE_ACCESS_FLAGS, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
+    C.CreateFileA(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile)
+  end
+
+  #def createFileW(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : Win32cr::Storage::FileSystem::FILE_ACCESS_FLAGS, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
+    #C.CreateFileW(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile)
+  #end
+
+  def defineDosDeviceW(dwFlags : Win32cr::Storage::FileSystem::DEFINE_DOS_DEVICE_FLAGS, lpDeviceName : Win32cr::Foundation::PWSTR, lpTargetPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.DefineDosDeviceW(dwFlags, lpDeviceName, lpTargetPath)
+  end
+
+  def deleteFileA(lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.DeleteFileA(lpFileName)
+  end
+
+  #def deleteFileW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    #C.DeleteFileW(lpFileName)
+  #end
+
+  def deleteVolumeMountPointW(lpszVolumeMountPoint : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.DeleteVolumeMountPointW(lpszVolumeMountPoint)
+  end
+
+  def fileTimeToLocalFileTime(lpFileTime : Win32cr::Foundation::FILETIME*, lpLocalFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    C.FileTimeToLocalFileTime(lpFileTime, lpLocalFileTime)
+  end
+
+  #def findClose(hFindFile : Win32cr::Storage::FileSystem::FindFileHandle) : Win32cr::Foundation::BOOL
+    #C.FindClose(hFindFile)
+  #end
+
+  def findCloseChangeNotification(hChangeHandle : Win32cr::Storage::FileSystem::FindChangeNotificationHandle) : Win32cr::Foundation::BOOL
+    C.FindCloseChangeNotification(hChangeHandle)
+  end
+
+  def findFirstChangeNotificationA(lpPathName : Win32cr::Foundation::PSTR, bWatchSubtree : Win32cr::Foundation::BOOL, dwNotifyFilter : Win32cr::Storage::FileSystem::FILE_NOTIFY_CHANGE) : Win32cr::Storage::FileSystem::FindChangeNotificationHandle
+    C.FindFirstChangeNotificationA(lpPathName, bWatchSubtree, dwNotifyFilter)
+  end
+
+  def findFirstChangeNotificationW(lpPathName : Win32cr::Foundation::PWSTR, bWatchSubtree : Win32cr::Foundation::BOOL, dwNotifyFilter : Win32cr::Storage::FileSystem::FILE_NOTIFY_CHANGE) : Win32cr::Storage::FileSystem::FindChangeNotificationHandle
+    C.FindFirstChangeNotificationW(lpPathName, bWatchSubtree, dwNotifyFilter)
+  end
+
+  def findFirstFileA(lpFileName : Win32cr::Foundation::PSTR, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAA*) : Win32cr::Storage::FileSystem::FindFileHandle
+    C.FindFirstFileA(lpFileName, lpFindFileData)
+  end
+
+  #def findFirstFileW(lpFileName : Win32cr::Foundation::PWSTR, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAW*) : Win32cr::Storage::FileSystem::FindFileHandle
+    #C.FindFirstFileW(lpFileName, lpFindFileData)
+  #end
+
+  def findFirstFileExA(lpFileName : Win32cr::Foundation::PSTR, fInfoLevelId : Win32cr::Storage::FileSystem::FINDEX_INFO_LEVELS, lpFindFileData : Void*, fSearchOp : Win32cr::Storage::FileSystem::FINDEX_SEARCH_OPS, lpSearchFilter : Void*, dwAdditionalFlags : Win32cr::Storage::FileSystem::FIND_FIRST_EX_FLAGS) : Win32cr::Storage::FileSystem::FindFileHandle
+    C.FindFirstFileExA(lpFileName, fInfoLevelId, lpFindFileData, fSearchOp, lpSearchFilter, dwAdditionalFlags)
+  end
+
+  def findFirstFileExW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::FINDEX_INFO_LEVELS, lpFindFileData : Void*, fSearchOp : Win32cr::Storage::FileSystem::FINDEX_SEARCH_OPS, lpSearchFilter : Void*, dwAdditionalFlags : Win32cr::Storage::FileSystem::FIND_FIRST_EX_FLAGS) : Win32cr::Storage::FileSystem::FindFileHandle
+    C.FindFirstFileExW(lpFileName, fInfoLevelId, lpFindFileData, fSearchOp, lpSearchFilter, dwAdditionalFlags)
+  end
+
+  def findFirstVolumeW(lpszVolumeName : UInt16*, cchBufferLength : UInt32) : Win32cr::Storage::FileSystem::FindVolumeHandle
+    C.FindFirstVolumeW(lpszVolumeName, cchBufferLength)
+  end
+
+  def findNextChangeNotification(hChangeHandle : Win32cr::Storage::FileSystem::FindChangeNotificationHandle) : Win32cr::Foundation::BOOL
+    C.FindNextChangeNotification(hChangeHandle)
+  end
+
+  def findNextFileA(hFindFile : Win32cr::Storage::FileSystem::FindFileHandle, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAA*) : Win32cr::Foundation::BOOL
+    C.FindNextFileA(hFindFile, lpFindFileData)
+  end
+
+  #def findNextFileW(hFindFile : Win32cr::Storage::FileSystem::FindFileHandle, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAW*) : Win32cr::Foundation::BOOL
+    #C.FindNextFileW(hFindFile, lpFindFileData)
+  #end
+
+  def findNextVolumeW(hFindVolume : Win32cr::Storage::FileSystem::FindVolumeHandle, lpszVolumeName : UInt16*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    C.FindNextVolumeW(hFindVolume, lpszVolumeName, cchBufferLength)
+  end
+
+  def findVolumeClose(hFindVolume : Win32cr::Storage::FileSystem::FindVolumeHandle) : Win32cr::Foundation::BOOL
+    C.FindVolumeClose(hFindVolume)
+  end
+
+  #def flushFileBuffers(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    #C.FlushFileBuffers(hFile)
+  #end
+
+  def getDiskFreeSpaceA(lpRootPathName : Win32cr::Foundation::PSTR, lpSectorsPerCluster : UInt32*, lpBytesPerSector : UInt32*, lpNumberOfFreeClusters : UInt32*, lpTotalNumberOfClusters : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetDiskFreeSpaceA(lpRootPathName, lpSectorsPerCluster, lpBytesPerSector, lpNumberOfFreeClusters, lpTotalNumberOfClusters)
+  end
+
+  def getDiskFreeSpaceW(lpRootPathName : Win32cr::Foundation::PWSTR, lpSectorsPerCluster : UInt32*, lpBytesPerSector : UInt32*, lpNumberOfFreeClusters : UInt32*, lpTotalNumberOfClusters : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetDiskFreeSpaceW(lpRootPathName, lpSectorsPerCluster, lpBytesPerSector, lpNumberOfFreeClusters, lpTotalNumberOfClusters)
+  end
+
+  def getDiskFreeSpaceExA(lpDirectoryName : Win32cr::Foundation::PSTR, lpFreeBytesAvailableToCaller : Win32cr::Foundation::ULARGE_INTEGER*, lpTotalNumberOfBytes : Win32cr::Foundation::ULARGE_INTEGER*, lpTotalNumberOfFreeBytes : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.GetDiskFreeSpaceExA(lpDirectoryName, lpFreeBytesAvailableToCaller, lpTotalNumberOfBytes, lpTotalNumberOfFreeBytes)
+  end
+
+  def getDiskFreeSpaceExW(lpDirectoryName : Win32cr::Foundation::PWSTR, lpFreeBytesAvailableToCaller : Win32cr::Foundation::ULARGE_INTEGER*, lpTotalNumberOfBytes : Win32cr::Foundation::ULARGE_INTEGER*, lpTotalNumberOfFreeBytes : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.GetDiskFreeSpaceExW(lpDirectoryName, lpFreeBytesAvailableToCaller, lpTotalNumberOfBytes, lpTotalNumberOfFreeBytes)
+  end
+
+  def getDiskSpaceInformationA(rootPath : Win32cr::Foundation::PSTR, diskSpaceInfo : Win32cr::Storage::FileSystem::DISK_SPACE_INFORMATION*) : Win32cr::Foundation::HRESULT
+    C.GetDiskSpaceInformationA(rootPath, diskSpaceInfo)
+  end
+
+  def getDiskSpaceInformationW(rootPath : Win32cr::Foundation::PWSTR, diskSpaceInfo : Win32cr::Storage::FileSystem::DISK_SPACE_INFORMATION*) : Win32cr::Foundation::HRESULT
+    C.GetDiskSpaceInformationW(rootPath, diskSpaceInfo)
+  end
+
+  def getDriveTypeA(lpRootPathName : Win32cr::Foundation::PSTR) : UInt32
+    C.GetDriveTypeA(lpRootPathName)
+  end
+
+  def getDriveTypeW(lpRootPathName : Win32cr::Foundation::PWSTR) : UInt32
+    C.GetDriveTypeW(lpRootPathName)
+  end
+
+  def getFileAttributesA(lpFileName : Win32cr::Foundation::PSTR) : UInt32
+    C.GetFileAttributesA(lpFileName)
+  end
+
+  #def getFileAttributesW(lpFileName : Win32cr::Foundation::PWSTR) : UInt32
+    #C.GetFileAttributesW(lpFileName)
+  #end
+
+  def getFileAttributesExA(lpFileName : Win32cr::Foundation::PSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*) : Win32cr::Foundation::BOOL
+    C.GetFileAttributesExA(lpFileName, fInfoLevelId, lpFileInformation)
+  end
+
+  #def getFileAttributesExW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*) : Win32cr::Foundation::BOOL
+    #C.GetFileAttributesExW(lpFileName, fInfoLevelId, lpFileInformation)
+  #end
+
+  #def getFileInformationByHandle(hFile : Win32cr::Foundation::HANDLE, lpFileInformation : Win32cr::Storage::FileSystem::BY_HANDLE_FILE_INFORMATION*) : Win32cr::Foundation::BOOL
+    #C.GetFileInformationByHandle(hFile, lpFileInformation)
+  #end
+
+  def getFileSize(hFile : Win32cr::Foundation::HANDLE, lpFileSizeHigh : UInt32*) : UInt32
+    C.GetFileSize(hFile, lpFileSizeHigh)
+  end
+
+  def getFileSizeEx(hFile : Win32cr::Foundation::HANDLE, lpFileSize : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.GetFileSizeEx(hFile, lpFileSize)
+  end
+
+  #def getFileType(hFile : Win32cr::Foundation::HANDLE) : UInt32
+    #C.GetFileType(hFile)
+  #end
+
+  def getFinalPathNameByHandleA(hFile : Win32cr::Foundation::HANDLE, lpszFilePath : UInt8*, cchFilePath : UInt32, dwFlags : Win32cr::Storage::FileSystem::FILE_NAME) : UInt32
+    C.GetFinalPathNameByHandleA(hFile, lpszFilePath, cchFilePath, dwFlags)
+  end
+
+  def getFinalPathNameByHandleW(hFile : Win32cr::Foundation::HANDLE, lpszFilePath : UInt16*, cchFilePath : UInt32, dwFlags : Win32cr::Storage::FileSystem::FILE_NAME) : UInt32
+    C.GetFinalPathNameByHandleW(hFile, lpszFilePath, cchFilePath, dwFlags)
+  end
+
+  def getFileTime(hFile : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpLastAccessTime : Win32cr::Foundation::FILETIME*, lpLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    C.GetFileTime(hFile, lpCreationTime, lpLastAccessTime, lpLastWriteTime)
+  end
+
+  #def getFullPathNameW(lpFileName : Win32cr::Foundation::PWSTR, nBufferLength : UInt32, lpBuffer : UInt16*, lpFilePart : Win32cr::Foundation::PWSTR*) : UInt32
+    #C.GetFullPathNameW(lpFileName, nBufferLength, lpBuffer, lpFilePart)
+  #end
+
+  def getFullPathNameA(lpFileName : Win32cr::Foundation::PSTR, nBufferLength : UInt32, lpBuffer : UInt8*, lpFilePart : Win32cr::Foundation::PSTR*) : UInt32
+    C.GetFullPathNameA(lpFileName, nBufferLength, lpBuffer, lpFilePart)
+  end
+
+  def getLogicalDrives : UInt32
+    C.GetLogicalDrives
+  end
+
+  def getLogicalDriveStringsW(nBufferLength : UInt32, lpBuffer : UInt16*) : UInt32
+    C.GetLogicalDriveStringsW(nBufferLength, lpBuffer)
+  end
+
+  def getLongPathNameA(lpszShortPath : Win32cr::Foundation::PSTR, lpszLongPath : UInt8*, cchBuffer : UInt32) : UInt32
+    C.GetLongPathNameA(lpszShortPath, lpszLongPath, cchBuffer)
+  end
+
+  def getLongPathNameW(lpszShortPath : Win32cr::Foundation::PWSTR, lpszLongPath : UInt16*, cchBuffer : UInt32) : UInt32
+    C.GetLongPathNameW(lpszShortPath, lpszLongPath, cchBuffer)
+  end
+
+  def areShortNamesEnabled(handle : Win32cr::Foundation::HANDLE, enabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.AreShortNamesEnabled(handle, enabled)
+  end
+
+  def getShortPathNameW(lpszLongPath : Win32cr::Foundation::PWSTR, lpszShortPath : UInt16*, cchBuffer : UInt32) : UInt32
+    C.GetShortPathNameW(lpszLongPath, lpszShortPath, cchBuffer)
+  end
+
+  def getTempFileNameW(lpPathName : Win32cr::Foundation::PWSTR, lpPrefixString : Win32cr::Foundation::PWSTR, uUnique : UInt32, lpTempFileName : UInt16*) : UInt32
+    C.GetTempFileNameW(lpPathName, lpPrefixString, uUnique, lpTempFileName)
+  end
+
+  def getVolumeInformationByHandleW(hFile : Win32cr::Foundation::HANDLE, lpVolumeNameBuffer : UInt16*, nVolumeNameSize : UInt32, lpVolumeSerialNumber : UInt32*, lpMaximumComponentLength : UInt32*, lpFileSystemFlags : UInt32*, lpFileSystemNameBuffer : UInt16*, nFileSystemNameSize : UInt32) : Win32cr::Foundation::BOOL
+    C.GetVolumeInformationByHandleW(hFile, lpVolumeNameBuffer, nVolumeNameSize, lpVolumeSerialNumber, lpMaximumComponentLength, lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize)
+  end
+
+  def getVolumeInformationW(lpRootPathName : Win32cr::Foundation::PWSTR, lpVolumeNameBuffer : UInt16*, nVolumeNameSize : UInt32, lpVolumeSerialNumber : UInt32*, lpMaximumComponentLength : UInt32*, lpFileSystemFlags : UInt32*, lpFileSystemNameBuffer : UInt16*, nFileSystemNameSize : UInt32) : Win32cr::Foundation::BOOL
+    C.GetVolumeInformationW(lpRootPathName, lpVolumeNameBuffer, nVolumeNameSize, lpVolumeSerialNumber, lpMaximumComponentLength, lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize)
+  end
+
+  def getVolumePathNameW(lpszFileName : Win32cr::Foundation::PWSTR, lpszVolumePathName : UInt16*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    C.GetVolumePathNameW(lpszFileName, lpszVolumePathName, cchBufferLength)
+  end
+
+  def localFileTimeToFileTime(lpLocalFileTime : Win32cr::Foundation::FILETIME*, lpFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    C.LocalFileTimeToFileTime(lpLocalFileTime, lpFileTime)
+  end
+
+  def lockFile(hFile : Win32cr::Foundation::HANDLE, dwFileOffsetLow : UInt32, dwFileOffsetHigh : UInt32, nNumberOfBytesToLockLow : UInt32, nNumberOfBytesToLockHigh : UInt32) : Win32cr::Foundation::BOOL
+    C.LockFile(hFile, dwFileOffsetLow, dwFileOffsetHigh, nNumberOfBytesToLockLow, nNumberOfBytesToLockHigh)
+  end
+
+  #def lockFileEx(hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::Storage::FileSystem::LOCK_FILE_FLAGS, dwReserved : UInt32, nNumberOfBytesToLockLow : UInt32, nNumberOfBytesToLockHigh : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    #C.LockFileEx(hFile, dwFlags, dwReserved, nNumberOfBytesToLockLow, nNumberOfBytesToLockHigh, lpOverlapped)
+  #end
+
+  def queryDosDeviceW(lpDeviceName : Win32cr::Foundation::PWSTR, lpTargetPath : UInt16*, ucchMax : UInt32) : UInt32
+    C.QueryDosDeviceW(lpDeviceName, lpTargetPath, ucchMax)
+  end
+
+  #def readFile(hFile : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfBytesToRead : UInt32, lpNumberOfBytesRead : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    #C.ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped)
+  #end
+
+  def readFileEx(hFile : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfBytesToRead : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::System::IO::LPOVERLAPPED_COMPLETION_ROUTINE) : Win32cr::Foundation::BOOL
+    C.ReadFileEx(hFile, lpBuffer, nNumberOfBytesToRead, lpOverlapped, lpCompletionRoutine)
+  end
+
+  def readFileScatter(hFile : Win32cr::Foundation::HANDLE, aSegmentArray : Win32cr::Storage::FileSystem::FILE_SEGMENT_ELEMENT*, nNumberOfBytesToRead : UInt32, lpReserved : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.ReadFileScatter(hFile, aSegmentArray, nNumberOfBytesToRead, lpReserved, lpOverlapped)
+  end
+
+  def removeDirectoryA(lpPathName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.RemoveDirectoryA(lpPathName)
+  end
+
+  #def removeDirectoryW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    #C.RemoveDirectoryW(lpPathName)
+  #end
+
+  #def setEndOfFile(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    #C.SetEndOfFile(hFile)
+  #end
+
+  def setFileAttributesA(lpFileName : Win32cr::Foundation::PSTR, dwFileAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::BOOL
+    C.SetFileAttributesA(lpFileName, dwFileAttributes)
+  end
+
+  #def setFileAttributesW(lpFileName : Win32cr::Foundation::PWSTR, dwFileAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::BOOL
+    #C.SetFileAttributesW(lpFileName, dwFileAttributes)
+  #end
+
+  #def setFileInformationByHandle(hFile : Win32cr::Foundation::HANDLE, file_information_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_HANDLE_CLASS, lpFileInformation : Void*, dwBufferSize : UInt32) : Win32cr::Foundation::BOOL
+    #C.SetFileInformationByHandle(hFile, file_information_class, lpFileInformation, dwBufferSize)
+  #end
+
+  def setFilePointer(hFile : Win32cr::Foundation::HANDLE, lDistanceToMove : Int32, lpDistanceToMoveHigh : Int32*, dwMoveMethod : Win32cr::Storage::FileSystem::SET_FILE_POINTER_MOVE_METHOD) : UInt32
+    C.SetFilePointer(hFile, lDistanceToMove, lpDistanceToMoveHigh, dwMoveMethod)
+  end
+
+  #def setFilePointerEx(hFile : Win32cr::Foundation::HANDLE, liDistanceToMove : Win32cr::Foundation::LARGE_INTEGER, lpNewFilePointer : Win32cr::Foundation::LARGE_INTEGER*, dwMoveMethod : Win32cr::Storage::FileSystem::SET_FILE_POINTER_MOVE_METHOD) : Win32cr::Foundation::BOOL
+    #C.SetFilePointerEx(hFile, liDistanceToMove, lpNewFilePointer, dwMoveMethod)
+  #end
+
+  #def setFileTime(hFile : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpLastAccessTime : Win32cr::Foundation::FILETIME*, lpLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    #C.SetFileTime(hFile, lpCreationTime, lpLastAccessTime, lpLastWriteTime)
+  #end
+
+  def setFileValidData(hFile : Win32cr::Foundation::HANDLE, valid_data_length : Int64) : Win32cr::Foundation::BOOL
+    C.SetFileValidData(hFile, valid_data_length)
+  end
+
+  def unlockFile(hFile : Win32cr::Foundation::HANDLE, dwFileOffsetLow : UInt32, dwFileOffsetHigh : UInt32, nNumberOfBytesToUnlockLow : UInt32, nNumberOfBytesToUnlockHigh : UInt32) : Win32cr::Foundation::BOOL
+    C.UnlockFile(hFile, dwFileOffsetLow, dwFileOffsetHigh, nNumberOfBytesToUnlockLow, nNumberOfBytesToUnlockHigh)
+  end
+
+  #def unlockFileEx(hFile : Win32cr::Foundation::HANDLE, dwReserved : UInt32, nNumberOfBytesToUnlockLow : UInt32, nNumberOfBytesToUnlockHigh : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    #C.UnlockFileEx(hFile, dwReserved, nNumberOfBytesToUnlockLow, nNumberOfBytesToUnlockHigh, lpOverlapped)
+  #end
+
+  #def writeFile(hFile : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfBytesToWrite : UInt32, lpNumberOfBytesWritten : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    #C.WriteFile(hFile, lpBuffer, nNumberOfBytesToWrite, lpNumberOfBytesWritten, lpOverlapped)
+  #end
+
+  def writeFileEx(hFile : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfBytesToWrite : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::System::IO::LPOVERLAPPED_COMPLETION_ROUTINE) : Win32cr::Foundation::BOOL
+    C.WriteFileEx(hFile, lpBuffer, nNumberOfBytesToWrite, lpOverlapped, lpCompletionRoutine)
+  end
+
+  def writeFileGather(hFile : Win32cr::Foundation::HANDLE, aSegmentArray : Win32cr::Storage::FileSystem::FILE_SEGMENT_ELEMENT*, nNumberOfBytesToWrite : UInt32, lpReserved : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.WriteFileGather(hFile, aSegmentArray, nNumberOfBytesToWrite, lpReserved, lpOverlapped)
+  end
+
+  #def getTempPathW(nBufferLength : UInt32, lpBuffer : UInt16*) : UInt32
+    #C.GetTempPathW(nBufferLength, lpBuffer)
+  #end
+
+  def getVolumeNameForVolumeMountPointW(lpszVolumeMountPoint : Win32cr::Foundation::PWSTR, lpszVolumeName : UInt16*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    C.GetVolumeNameForVolumeMountPointW(lpszVolumeMountPoint, lpszVolumeName, cchBufferLength)
+  end
+
+  def getVolumePathNamesForVolumeNameW(lpszVolumeName : Win32cr::Foundation::PWSTR, lpszVolumePathNames : UInt16*, cchBufferLength : UInt32, lpcchReturnLength : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetVolumePathNamesForVolumeNameW(lpszVolumeName, lpszVolumePathNames, cchBufferLength, lpcchReturnLength)
+  end
+
+  def createFile2(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : Win32cr::Storage::FileSystem::FILE_ACCESS_FLAGS, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, pCreateExParams : Win32cr::Storage::FileSystem::CREATEFILE2_EXTENDED_PARAMETERS*) : Win32cr::Foundation::HANDLE
+    C.CreateFile2(lpFileName, dwDesiredAccess, dwShareMode, dwCreationDisposition, pCreateExParams)
+  end
+
+  def setFileIoOverlappedRange(file_handle : Win32cr::Foundation::HANDLE, overlapped_range_start : UInt8*, length : UInt32) : Win32cr::Foundation::BOOL
+    C.SetFileIoOverlappedRange(file_handle, overlapped_range_start, length)
+  end
+
+  def getCompressedFileSizeA(lpFileName : Win32cr::Foundation::PSTR, lpFileSizeHigh : UInt32*) : UInt32
+    C.GetCompressedFileSizeA(lpFileName, lpFileSizeHigh)
+  end
+
+  def getCompressedFileSizeW(lpFileName : Win32cr::Foundation::PWSTR, lpFileSizeHigh : UInt32*) : UInt32
+    C.GetCompressedFileSizeW(lpFileName, lpFileSizeHigh)
+  end
+
+  def findFirstStreamW(lpFileName : Win32cr::Foundation::PWSTR, info_level : Win32cr::Storage::FileSystem::STREAM_INFO_LEVELS, lpFindStreamData : Void*, dwFlags : UInt32) : Win32cr::Storage::FileSystem::FindStreamHandle
+    C.FindFirstStreamW(lpFileName, info_level, lpFindStreamData, dwFlags)
+  end
+
+  def findNextStreamW(hFindStream : Win32cr::Storage::FileSystem::FindStreamHandle, lpFindStreamData : Void*) : Win32cr::Foundation::BOOL
+    C.FindNextStreamW(hFindStream, lpFindStreamData)
+  end
+
+  def areFileApisANSI : Win32cr::Foundation::BOOL
+    C.AreFileApisANSI
+  end
+
+  def getTempPathA(nBufferLength : UInt32, lpBuffer : UInt8*) : UInt32
+    C.GetTempPathA(nBufferLength, lpBuffer)
+  end
+
+  def findFirstFileNameW(lpFileName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, string_length : UInt32*, link_name : UInt16*) : Win32cr::Storage::FileSystem::FindFileNameHandle
+    C.FindFirstFileNameW(lpFileName, dwFlags, string_length, link_name)
+  end
+
+  def findNextFileNameW(hFindStream : Win32cr::Storage::FileSystem::FindFileNameHandle, string_length : UInt32*, link_name : UInt16*) : Win32cr::Foundation::BOOL
+    C.FindNextFileNameW(hFindStream, string_length, link_name)
+  end
+
+  def getVolumeInformationA(lpRootPathName : Win32cr::Foundation::PSTR, lpVolumeNameBuffer : UInt8*, nVolumeNameSize : UInt32, lpVolumeSerialNumber : UInt32*, lpMaximumComponentLength : UInt32*, lpFileSystemFlags : UInt32*, lpFileSystemNameBuffer : UInt8*, nFileSystemNameSize : UInt32) : Win32cr::Foundation::BOOL
+    C.GetVolumeInformationA(lpRootPathName, lpVolumeNameBuffer, nVolumeNameSize, lpVolumeSerialNumber, lpMaximumComponentLength, lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize)
+  end
+
+  def getTempFileNameA(lpPathName : Win32cr::Foundation::PSTR, lpPrefixString : Win32cr::Foundation::PSTR, uUnique : UInt32, lpTempFileName : UInt8*) : UInt32
+    C.GetTempFileNameA(lpPathName, lpPrefixString, uUnique, lpTempFileName)
+  end
+
+  def setFileApisToOEM : Void
+    C.SetFileApisToOEM
+  end
+
+  def setFileApisToANSI : Void
+    C.SetFileApisToANSI
+  end
+
+  def getTempPath2W(buffer_length : UInt32, buffer : UInt16*) : UInt32
+    C.GetTempPath2W(buffer_length, buffer)
+  end
+
+  def getTempPath2A(buffer_length : UInt32, buffer : UInt8*) : UInt32
+    C.GetTempPath2A(buffer_length, buffer)
+  end
+
+  def copyFileFromAppW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, bFailIfExists : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.CopyFileFromAppW(lpExistingFileName, lpNewFileName, bFailIfExists)
+  end
+
+  def createDirectoryFromAppW(lpPathName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+    C.CreateDirectoryFromAppW(lpPathName, lpSecurityAttributes)
+  end
+
+  def createFileFromAppW(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, dwShareMode : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : UInt32, dwFlagsAndAttributes : UInt32, hTemplateFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
+    C.CreateFileFromAppW(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile)
+  end
+
+  def createFile2FromAppW(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, dwShareMode : UInt32, dwCreationDisposition : UInt32, pCreateExParams : Win32cr::Storage::FileSystem::CREATEFILE2_EXTENDED_PARAMETERS*) : Win32cr::Foundation::HANDLE
+    C.CreateFile2FromAppW(lpFileName, dwDesiredAccess, dwShareMode, dwCreationDisposition, pCreateExParams)
+  end
+
+  def deleteFileFromAppW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.DeleteFileFromAppW(lpFileName)
+  end
+
+  def findFirstFileExFromAppW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::FINDEX_INFO_LEVELS, lpFindFileData : Void*, fSearchOp : Win32cr::Storage::FileSystem::FINDEX_SEARCH_OPS, lpSearchFilter : Void*, dwAdditionalFlags : UInt32) : Win32cr::Foundation::HANDLE
+    C.FindFirstFileExFromAppW(lpFileName, fInfoLevelId, lpFindFileData, fSearchOp, lpSearchFilter, dwAdditionalFlags)
+  end
+
+  def getFileAttributesExFromAppW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*) : Win32cr::Foundation::BOOL
+    C.GetFileAttributesExFromAppW(lpFileName, fInfoLevelId, lpFileInformation)
+  end
+
+  def moveFileFromAppW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.MoveFileFromAppW(lpExistingFileName, lpNewFileName)
+  end
+
+  def removeDirectoryFromAppW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.RemoveDirectoryFromAppW(lpPathName)
+  end
+
+  def replaceFileFromAppW(lpReplacedFileName : Win32cr::Foundation::PWSTR, lpReplacementFileName : Win32cr::Foundation::PWSTR, lpBackupFileName : Win32cr::Foundation::PWSTR, dwReplaceFlags : UInt32, lpExclude : Void*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    C.ReplaceFileFromAppW(lpReplacedFileName, lpReplacementFileName, lpBackupFileName, dwReplaceFlags, lpExclude, lpReserved)
+  end
+
+  def setFileAttributesFromAppW(lpFileName : Win32cr::Foundation::PWSTR, dwFileAttributes : UInt32) : Win32cr::Foundation::BOOL
+    C.SetFileAttributesFromAppW(lpFileName, dwFileAttributes)
+  end
+
+  def verFindFileA(uFlags : Win32cr::Storage::FileSystem::VER_FIND_FILE_FLAGS, szFileName : Win32cr::Foundation::PSTR, szWinDir : Win32cr::Foundation::PSTR, szAppDir : Win32cr::Foundation::PSTR, szCurDir : UInt8*, puCurDirLen : UInt32*, szDestDir : UInt8*, puDestDirLen : UInt32*) : Win32cr::Storage::FileSystem::VER_FIND_FILE_STATUS
+    C.VerFindFileA(uFlags, szFileName, szWinDir, szAppDir, szCurDir, puCurDirLen, szDestDir, puDestDirLen)
+  end
+
+  def verFindFileW(uFlags : Win32cr::Storage::FileSystem::VER_FIND_FILE_FLAGS, szFileName : Win32cr::Foundation::PWSTR, szWinDir : Win32cr::Foundation::PWSTR, szAppDir : Win32cr::Foundation::PWSTR, szCurDir : UInt16*, puCurDirLen : UInt32*, szDestDir : UInt16*, puDestDirLen : UInt32*) : Win32cr::Storage::FileSystem::VER_FIND_FILE_STATUS
+    C.VerFindFileW(uFlags, szFileName, szWinDir, szAppDir, szCurDir, puCurDirLen, szDestDir, puDestDirLen)
+  end
+
+  def verInstallFileA(uFlags : Win32cr::Storage::FileSystem::VER_INSTALL_FILE_FLAGS, szSrcFileName : Win32cr::Foundation::PSTR, szDestFileName : Win32cr::Foundation::PSTR, szSrcDir : Win32cr::Foundation::PSTR, szDestDir : Win32cr::Foundation::PSTR, szCurDir : Win32cr::Foundation::PSTR, szTmpFile : UInt8*, puTmpFileLen : UInt32*) : Win32cr::Storage::FileSystem::VER_INSTALL_FILE_STATUS
+    C.VerInstallFileA(uFlags, szSrcFileName, szDestFileName, szSrcDir, szDestDir, szCurDir, szTmpFile, puTmpFileLen)
+  end
+
+  def verInstallFileW(uFlags : Win32cr::Storage::FileSystem::VER_INSTALL_FILE_FLAGS, szSrcFileName : Win32cr::Foundation::PWSTR, szDestFileName : Win32cr::Foundation::PWSTR, szSrcDir : Win32cr::Foundation::PWSTR, szDestDir : Win32cr::Foundation::PWSTR, szCurDir : Win32cr::Foundation::PWSTR, szTmpFile : UInt16*, puTmpFileLen : UInt32*) : Win32cr::Storage::FileSystem::VER_INSTALL_FILE_STATUS
+    C.VerInstallFileW(uFlags, szSrcFileName, szDestFileName, szSrcDir, szDestDir, szCurDir, szTmpFile, puTmpFileLen)
+  end
+
+  def getFileVersionInfoSizeA(lptstrFilename : Win32cr::Foundation::PSTR, lpdwHandle : UInt32*) : UInt32
+    C.GetFileVersionInfoSizeA(lptstrFilename, lpdwHandle)
+  end
+
+  def getFileVersionInfoSizeW(lptstrFilename : Win32cr::Foundation::PWSTR, lpdwHandle : UInt32*) : UInt32
+    C.GetFileVersionInfoSizeW(lptstrFilename, lpdwHandle)
+  end
+
+  def getFileVersionInfoA(lptstrFilename : Win32cr::Foundation::PSTR, dwHandle : UInt32, dwLen : UInt32, lpData : Void*) : Win32cr::Foundation::BOOL
+    C.GetFileVersionInfoA(lptstrFilename, dwHandle, dwLen, lpData)
+  end
+
+  def getFileVersionInfoW(lptstrFilename : Win32cr::Foundation::PWSTR, dwHandle : UInt32, dwLen : UInt32, lpData : Void*) : Win32cr::Foundation::BOOL
+    C.GetFileVersionInfoW(lptstrFilename, dwHandle, dwLen, lpData)
+  end
+
+  def getFileVersionInfoSizeExA(dwFlags : Win32cr::Storage::FileSystem::GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename : Win32cr::Foundation::PSTR, lpdwHandle : UInt32*) : UInt32
+    C.GetFileVersionInfoSizeExA(dwFlags, lpwstrFilename, lpdwHandle)
+  end
+
+  def getFileVersionInfoSizeExW(dwFlags : Win32cr::Storage::FileSystem::GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename : Win32cr::Foundation::PWSTR, lpdwHandle : UInt32*) : UInt32
+    C.GetFileVersionInfoSizeExW(dwFlags, lpwstrFilename, lpdwHandle)
+  end
+
+  def getFileVersionInfoExA(dwFlags : Win32cr::Storage::FileSystem::GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename : Win32cr::Foundation::PSTR, dwHandle : UInt32, dwLen : UInt32, lpData : Void*) : Win32cr::Foundation::BOOL
+    C.GetFileVersionInfoExA(dwFlags, lpwstrFilename, dwHandle, dwLen, lpData)
+  end
+
+  def getFileVersionInfoExW(dwFlags : Win32cr::Storage::FileSystem::GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename : Win32cr::Foundation::PWSTR, dwHandle : UInt32, dwLen : UInt32, lpData : Void*) : Win32cr::Foundation::BOOL
+    C.GetFileVersionInfoExW(dwFlags, lpwstrFilename, dwHandle, dwLen, lpData)
+  end
+
+  def verLanguageNameA(wLang : UInt32, szLang : UInt8*, cchLang : UInt32) : UInt32
+    C.VerLanguageNameA(wLang, szLang, cchLang)
+  end
+
+  def verLanguageNameW(wLang : UInt32, szLang : UInt16*, cchLang : UInt32) : UInt32
+    C.VerLanguageNameW(wLang, szLang, cchLang)
+  end
+
+  def verQueryValueA(pBlock : Void*, lpSubBlock : Win32cr::Foundation::PSTR, lplpBuffer : Void**, puLen : UInt32*) : Win32cr::Foundation::BOOL
+    C.VerQueryValueA(pBlock, lpSubBlock, lplpBuffer, puLen)
+  end
+
+  def verQueryValueW(pBlock : Void*, lpSubBlock : Win32cr::Foundation::PWSTR, lplpBuffer : Void**, puLen : UInt32*) : Win32cr::Foundation::BOOL
+    C.VerQueryValueW(pBlock, lpSubBlock, lplpBuffer, puLen)
+  end
+
+  def lsnEqual(plsn1 : Win32cr::Storage::FileSystem::CLS_LSN*, plsn2 : Win32cr::Storage::FileSystem::CLS_LSN*) : Win32cr::Foundation::BOOLEAN
+    C.LsnEqual(plsn1, plsn2)
+  end
+
+  def lsnLess(plsn1 : Win32cr::Storage::FileSystem::CLS_LSN*, plsn2 : Win32cr::Storage::FileSystem::CLS_LSN*) : Win32cr::Foundation::BOOLEAN
+    C.LsnLess(plsn1, plsn2)
+  end
+
+  def lsnGreater(plsn1 : Win32cr::Storage::FileSystem::CLS_LSN*, plsn2 : Win32cr::Storage::FileSystem::CLS_LSN*) : Win32cr::Foundation::BOOLEAN
+    C.LsnGreater(plsn1, plsn2)
+  end
+
+  def lsnNull(plsn : Win32cr::Storage::FileSystem::CLS_LSN*) : Win32cr::Foundation::BOOLEAN
+    C.LsnNull(plsn)
+  end
+
+  def lsnContainer(plsn : Win32cr::Storage::FileSystem::CLS_LSN*) : UInt32
+    C.LsnContainer(plsn)
+  end
+
+  def lsnCreate(cidContainer : UInt32, offBlock : UInt32, cRecord : UInt32) : Win32cr::Storage::FileSystem::CLS_LSN
+    C.LsnCreate(cidContainer, offBlock, cRecord)
+  end
+
+  def lsnBlockOffset(plsn : Win32cr::Storage::FileSystem::CLS_LSN*) : UInt32
+    C.LsnBlockOffset(plsn)
+  end
+
+  def lsnRecordSequence(plsn : Win32cr::Storage::FileSystem::CLS_LSN*) : UInt32
+    C.LsnRecordSequence(plsn)
+  end
+
+  def lsnInvalid(plsn : Win32cr::Storage::FileSystem::CLS_LSN*) : Win32cr::Foundation::BOOLEAN
+    C.LsnInvalid(plsn)
+  end
+
+  def lsnIncrement(plsn : Win32cr::Storage::FileSystem::CLS_LSN*) : Win32cr::Storage::FileSystem::CLS_LSN
+    C.LsnIncrement(plsn)
+  end
+
+  def createLogFile(pszLogFileName : Win32cr::Foundation::PWSTR, fDesiredAccess : Win32cr::Storage::FileSystem::FILE_ACCESS_FLAGS, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, psaLogFile : Win32cr::Security::SECURITY_ATTRIBUTES*, fCreateDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, fFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::HANDLE
+    C.CreateLogFile(pszLogFileName, fDesiredAccess, dwShareMode, psaLogFile, fCreateDisposition, fFlagsAndAttributes)
+  end
+
+  def deleteLogByHandle(hLog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.DeleteLogByHandle(hLog)
+  end
+
+  def deleteLogFile(pszLogFileName : Win32cr::Foundation::PWSTR, pvReserved : Void*) : Win32cr::Foundation::BOOL
+    C.DeleteLogFile(pszLogFileName, pvReserved)
+  end
+
+  def addLogContainer(hLog : Win32cr::Foundation::HANDLE, pcbContainer : UInt64*, pwszContainerPath : Win32cr::Foundation::PWSTR, pReserved : Void*) : Win32cr::Foundation::BOOL
+    C.AddLogContainer(hLog, pcbContainer, pwszContainerPath, pReserved)
+  end
+
+  def addLogContainerSet(hLog : Win32cr::Foundation::HANDLE, cContainer : UInt16, pcbContainer : UInt64*, rgwszContainerPath : Win32cr::Foundation::PWSTR*, pReserved : Void*) : Win32cr::Foundation::BOOL
+    C.AddLogContainerSet(hLog, cContainer, pcbContainer, rgwszContainerPath, pReserved)
+  end
+
+  def removeLogContainer(hLog : Win32cr::Foundation::HANDLE, pwszContainerPath : Win32cr::Foundation::PWSTR, fForce : Win32cr::Foundation::BOOL, pReserved : Void*) : Win32cr::Foundation::BOOL
+    C.RemoveLogContainer(hLog, pwszContainerPath, fForce, pReserved)
+  end
+
+  def removeLogContainerSet(hLog : Win32cr::Foundation::HANDLE, cContainer : UInt16, rgwszContainerPath : Win32cr::Foundation::PWSTR*, fForce : Win32cr::Foundation::BOOL, pReserved : Void*) : Win32cr::Foundation::BOOL
+    C.RemoveLogContainerSet(hLog, cContainer, rgwszContainerPath, fForce, pReserved)
+  end
+
+  def setLogArchiveTail(hLog : Win32cr::Foundation::HANDLE, plsnArchiveTail : Win32cr::Storage::FileSystem::CLS_LSN*, pReserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetLogArchiveTail(hLog, plsnArchiveTail, pReserved)
+  end
+
+  def setEndOfLog(hLog : Win32cr::Foundation::HANDLE, plsnEnd : Win32cr::Storage::FileSystem::CLS_LSN*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.SetEndOfLog(hLog, plsnEnd, lpOverlapped)
+  end
+
+  def truncateLog(pvMarshal : Void*, plsnEnd : Win32cr::Storage::FileSystem::CLS_LSN*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.TruncateLog(pvMarshal, plsnEnd, lpOverlapped)
+  end
+
+  def createLogContainerScanContext(hLog : Win32cr::Foundation::HANDLE, cFromContainer : UInt32, cContainers : UInt32, eScanMode : UInt8, pcxScan : Win32cr::Storage::FileSystem::CLS_SCAN_CONTEXT*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.CreateLogContainerScanContext(hLog, cFromContainer, cContainers, eScanMode, pcxScan, pOverlapped)
+  end
+
+  def scanLogContainers(pcxScan : Win32cr::Storage::FileSystem::CLS_SCAN_CONTEXT*, eScanMode : UInt8, pReserved : Void*) : Win32cr::Foundation::BOOL
+    C.ScanLogContainers(pcxScan, eScanMode, pReserved)
+  end
+
+  def alignReservedLog(pvMarshal : Void*, cReservedRecords : UInt32, rgcbReservation : Int64*, pcbAlignReservation : Int64*) : Win32cr::Foundation::BOOL
+    C.AlignReservedLog(pvMarshal, cReservedRecords, rgcbReservation, pcbAlignReservation)
+  end
+
+  def allocReservedLog(pvMarshal : Void*, cReservedRecords : UInt32, pcbAdjustment : Int64*) : Win32cr::Foundation::BOOL
+    C.AllocReservedLog(pvMarshal, cReservedRecords, pcbAdjustment)
+  end
+
+  def freeReservedLog(pvMarshal : Void*, cReservedRecords : UInt32, pcbAdjustment : Int64*) : Win32cr::Foundation::BOOL
+    C.FreeReservedLog(pvMarshal, cReservedRecords, pcbAdjustment)
+  end
+
+  def getLogFileInformation(hLog : Win32cr::Foundation::HANDLE, pinfoBuffer : Win32cr::Storage::FileSystem::CLS_INFORMATION*, cbBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetLogFileInformation(hLog, pinfoBuffer, cbBuffer)
+  end
+
+  def setLogArchiveMode(hLog : Win32cr::Foundation::HANDLE, eMode : Win32cr::Storage::FileSystem::CLFS_LOG_ARCHIVE_MODE) : Win32cr::Foundation::BOOL
+    C.SetLogArchiveMode(hLog, eMode)
+  end
+
+  def readLogRestartArea(pvMarshal : Void*, ppvRestartBuffer : Void**, pcbRestartBuffer : UInt32*, plsn : Win32cr::Storage::FileSystem::CLS_LSN*, ppvContext : Void**, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.ReadLogRestartArea(pvMarshal, ppvRestartBuffer, pcbRestartBuffer, plsn, ppvContext, pOverlapped)
+  end
+
+  def readPreviousLogRestartArea(pvReadContext : Void*, ppvRestartBuffer : Void**, pcbRestartBuffer : UInt32*, plsnRestart : Win32cr::Storage::FileSystem::CLS_LSN*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.ReadPreviousLogRestartArea(pvReadContext, ppvRestartBuffer, pcbRestartBuffer, plsnRestart, pOverlapped)
+  end
+
+  def writeLogRestartArea(pvMarshal : Void*, pvRestartBuffer : Void*, cbRestartBuffer : UInt32, plsnBase : Win32cr::Storage::FileSystem::CLS_LSN*, fFlags : Win32cr::Storage::FileSystem::CLFS_FLAG, pcbWritten : UInt32*, plsnNext : Win32cr::Storage::FileSystem::CLS_LSN*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.WriteLogRestartArea(pvMarshal, pvRestartBuffer, cbRestartBuffer, plsnBase, fFlags, pcbWritten, plsnNext, pOverlapped)
+  end
+
+  def getLogReservationInfo(pvMarshal : Void*, pcbRecordNumber : UInt32*, pcbUserReservation : Int64*, pcbCommitReservation : Int64*) : Win32cr::Foundation::BOOL
+    C.GetLogReservationInfo(pvMarshal, pcbRecordNumber, pcbUserReservation, pcbCommitReservation)
+  end
+
+  def advanceLogBase(pvMarshal : Void*, plsnBase : Win32cr::Storage::FileSystem::CLS_LSN*, fFlags : UInt32, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.AdvanceLogBase(pvMarshal, plsnBase, fFlags, pOverlapped)
+  end
+
+  def closeAndResetLogFile(hLog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.CloseAndResetLogFile(hLog)
+  end
+
+  def createLogMarshallingArea(hLog : Win32cr::Foundation::HANDLE, pfnAllocBuffer : Win32cr::Storage::FileSystem::CLFS_BLOCK_ALLOCATION, pfnFreeBuffer : Win32cr::Storage::FileSystem::CLFS_BLOCK_DEALLOCATION, pvBlockAllocContext : Void*, cbMarshallingBuffer : UInt32, cMaxWriteBuffers : UInt32, cMaxReadBuffers : UInt32, ppvMarshal : Void**) : Win32cr::Foundation::BOOL
+    C.CreateLogMarshallingArea(hLog, pfnAllocBuffer, pfnFreeBuffer, pvBlockAllocContext, cbMarshallingBuffer, cMaxWriteBuffers, cMaxReadBuffers, ppvMarshal)
+  end
+
+  def deleteLogMarshallingArea(pvMarshal : Void*) : Win32cr::Foundation::BOOL
+    C.DeleteLogMarshallingArea(pvMarshal)
+  end
+
+  def reserveAndAppendLog(pvMarshal : Void*, rgWriteEntries : Win32cr::Storage::FileSystem::CLS_WRITE_ENTRY*, cWriteEntries : UInt32, plsnUndoNext : Win32cr::Storage::FileSystem::CLS_LSN*, plsnPrevious : Win32cr::Storage::FileSystem::CLS_LSN*, cReserveRecords : UInt32, rgcbReservation : Int64*, fFlags : Win32cr::Storage::FileSystem::CLFS_FLAG, plsn : Win32cr::Storage::FileSystem::CLS_LSN*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.ReserveAndAppendLog(pvMarshal, rgWriteEntries, cWriteEntries, plsnUndoNext, plsnPrevious, cReserveRecords, rgcbReservation, fFlags, plsn, pOverlapped)
+  end
+
+  def reserveAndAppendLogAligned(pvMarshal : Void*, rgWriteEntries : Win32cr::Storage::FileSystem::CLS_WRITE_ENTRY*, cWriteEntries : UInt32, cbEntryAlignment : UInt32, plsnUndoNext : Win32cr::Storage::FileSystem::CLS_LSN*, plsnPrevious : Win32cr::Storage::FileSystem::CLS_LSN*, cReserveRecords : UInt32, rgcbReservation : Int64*, fFlags : Win32cr::Storage::FileSystem::CLFS_FLAG, plsn : Win32cr::Storage::FileSystem::CLS_LSN*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.ReserveAndAppendLogAligned(pvMarshal, rgWriteEntries, cWriteEntries, cbEntryAlignment, plsnUndoNext, plsnPrevious, cReserveRecords, rgcbReservation, fFlags, plsn, pOverlapped)
+  end
+
+  def flushLogBuffers(pvMarshal : Void*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.FlushLogBuffers(pvMarshal, pOverlapped)
+  end
+
+  def flushLogToLsn(pvMarshalContext : Void*, plsnFlush : Win32cr::Storage::FileSystem::CLS_LSN*, plsnLastFlushed : Win32cr::Storage::FileSystem::CLS_LSN*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.FlushLogToLsn(pvMarshalContext, plsnFlush, plsnLastFlushed, pOverlapped)
+  end
+
+  def readLogRecord(pvMarshal : Void*, plsnFirst : Win32cr::Storage::FileSystem::CLS_LSN*, eContextMode : Win32cr::Storage::FileSystem::CLFS_CONTEXT_MODE, ppvReadBuffer : Void**, pcbReadBuffer : UInt32*, peRecordType : UInt8*, plsnUndoNext : Win32cr::Storage::FileSystem::CLS_LSN*, plsnPrevious : Win32cr::Storage::FileSystem::CLS_LSN*, ppvReadContext : Void**, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.ReadLogRecord(pvMarshal, plsnFirst, eContextMode, ppvReadBuffer, pcbReadBuffer, peRecordType, plsnUndoNext, plsnPrevious, ppvReadContext, pOverlapped)
+  end
+
+  def readNextLogRecord(pvReadContext : Void*, ppvBuffer : Void**, pcbBuffer : UInt32*, peRecordType : UInt8*, plsnUser : Win32cr::Storage::FileSystem::CLS_LSN*, plsnUndoNext : Win32cr::Storage::FileSystem::CLS_LSN*, plsnPrevious : Win32cr::Storage::FileSystem::CLS_LSN*, plsnRecord : Win32cr::Storage::FileSystem::CLS_LSN*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.ReadNextLogRecord(pvReadContext, ppvBuffer, pcbBuffer, peRecordType, plsnUser, plsnUndoNext, plsnPrevious, plsnRecord, pOverlapped)
+  end
+
+  def terminateReadLog(pvCursorContext : Void*) : Win32cr::Foundation::BOOL
+    C.TerminateReadLog(pvCursorContext)
+  end
+
+  def prepareLogArchive(hLog : Win32cr::Foundation::HANDLE, pszBaseLogFileName : UInt16*, cLen : UInt32, plsnLow : Win32cr::Storage::FileSystem::CLS_LSN*, plsnHigh : Win32cr::Storage::FileSystem::CLS_LSN*, pcActualLength : UInt32*, poffBaseLogFileData : UInt64*, pcbBaseLogFileLength : UInt64*, plsnBase : Win32cr::Storage::FileSystem::CLS_LSN*, plsnLast : Win32cr::Storage::FileSystem::CLS_LSN*, plsnCurrentArchiveTail : Win32cr::Storage::FileSystem::CLS_LSN*, ppvArchiveContext : Void**) : Win32cr::Foundation::BOOL
+    C.PrepareLogArchive(hLog, pszBaseLogFileName, cLen, plsnLow, plsnHigh, pcActualLength, poffBaseLogFileData, pcbBaseLogFileLength, plsnBase, plsnLast, plsnCurrentArchiveTail, ppvArchiveContext)
+  end
+
+  def readLogArchiveMetadata(pvArchiveContext : Void*, cbOffset : UInt32, cbBytesToRead : UInt32, pbReadBuffer : UInt8*, pcbBytesRead : UInt32*) : Win32cr::Foundation::BOOL
+    C.ReadLogArchiveMetadata(pvArchiveContext, cbOffset, cbBytesToRead, pbReadBuffer, pcbBytesRead)
+  end
+
+  def getNextLogArchiveExtent(pvArchiveContext : Void*, rgadExtent : Win32cr::Storage::FileSystem::CLS_ARCHIVE_DESCRIPTOR*, cDescriptors : UInt32, pcDescriptorsReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetNextLogArchiveExtent(pvArchiveContext, rgadExtent, cDescriptors, pcDescriptorsReturned)
+  end
+
+  def terminateLogArchive(pvArchiveContext : Void*) : Win32cr::Foundation::BOOL
+    C.TerminateLogArchive(pvArchiveContext)
+  end
+
+  def validateLog(pszLogFileName : Win32cr::Foundation::PWSTR, psaLogFile : Win32cr::Security::SECURITY_ATTRIBUTES*, pinfoBuffer : Win32cr::Storage::FileSystem::CLS_INFORMATION*, pcbBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    C.ValidateLog(pszLogFileName, psaLogFile, pinfoBuffer, pcbBuffer)
+  end
+
+  def getLogContainerName(hLog : Win32cr::Foundation::HANDLE, cidLogicalContainer : UInt32, pwstrContainerName : Win32cr::Foundation::PWSTR, cLenContainerName : UInt32, pcActualLenContainerName : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetLogContainerName(hLog, cidLogicalContainer, pwstrContainerName, cLenContainerName, pcActualLenContainerName)
+  end
+
+  def getLogIoStatistics(hLog : Win32cr::Foundation::HANDLE, pvStatsBuffer : Void*, cbStatsBuffer : UInt32, eStatsClass : Win32cr::Storage::FileSystem::CLFS_IOSTATS_CLASS, pcbStatsWritten : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetLogIoStatistics(hLog, pvStatsBuffer, cbStatsBuffer, eStatsClass, pcbStatsWritten)
+  end
+
+  def registerManageableLogClient(hLog : Win32cr::Foundation::HANDLE, pCallbacks : Win32cr::Storage::FileSystem::LOG_MANAGEMENT_CALLBACKS*) : Win32cr::Foundation::BOOL
+    C.RegisterManageableLogClient(hLog, pCallbacks)
+  end
+
+  def deregisterManageableLogClient(hLog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.DeregisterManageableLogClient(hLog)
+  end
+
+  def readLogNotification(hLog : Win32cr::Foundation::HANDLE, pNotification : Win32cr::Storage::FileSystem::CLFS_MGMT_NOTIFICATION*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.ReadLogNotification(hLog, pNotification, lpOverlapped)
+  end
+
+  def installLogPolicy(hLog : Win32cr::Foundation::HANDLE, pPolicy : Win32cr::Storage::FileSystem::CLFS_MGMT_POLICY*) : Win32cr::Foundation::BOOL
+    C.InstallLogPolicy(hLog, pPolicy)
+  end
+
+  def removeLogPolicy(hLog : Win32cr::Foundation::HANDLE, ePolicyType : Win32cr::Storage::FileSystem::CLFS_MGMT_POLICY_TYPE) : Win32cr::Foundation::BOOL
+    C.RemoveLogPolicy(hLog, ePolicyType)
+  end
+
+  def queryLogPolicy(hLog : Win32cr::Foundation::HANDLE, ePolicyType : Win32cr::Storage::FileSystem::CLFS_MGMT_POLICY_TYPE, pPolicyBuffer : Win32cr::Storage::FileSystem::CLFS_MGMT_POLICY*, pcbPolicyBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    C.QueryLogPolicy(hLog, ePolicyType, pPolicyBuffer, pcbPolicyBuffer)
+  end
+
+  def setLogFileSizeWithPolicy(hLog : Win32cr::Foundation::HANDLE, pDesiredSize : UInt64*, pResultingSize : UInt64*) : Win32cr::Foundation::BOOL
+    C.SetLogFileSizeWithPolicy(hLog, pDesiredSize, pResultingSize)
+  end
+
+  def handleLogFull(hLog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.HandleLogFull(hLog)
+  end
+
+  def logTailAdvanceFailure(hLog : Win32cr::Foundation::HANDLE, dwReason : UInt32) : Win32cr::Foundation::BOOL
+    C.LogTailAdvanceFailure(hLog, dwReason)
+  end
+
+  def registerForLogWriteNotification(hLog : Win32cr::Foundation::HANDLE, cbThreshold : UInt32, fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.RegisterForLogWriteNotification(hLog, cbThreshold, fEnable)
+  end
+
+  def queryUsersOnEncryptedFile(lpFileName : Win32cr::Foundation::PWSTR, pUsers : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_HASH_LIST**) : UInt32
+    C.QueryUsersOnEncryptedFile(lpFileName, pUsers)
+  end
+
+  def queryRecoveryAgentsOnEncryptedFile(lpFileName : Win32cr::Foundation::PWSTR, pRecoveryAgents : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_HASH_LIST**) : UInt32
+    C.QueryRecoveryAgentsOnEncryptedFile(lpFileName, pRecoveryAgents)
+  end
+
+  def removeUsersFromEncryptedFile(lpFileName : Win32cr::Foundation::PWSTR, pHashes : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_HASH_LIST*) : UInt32
+    C.RemoveUsersFromEncryptedFile(lpFileName, pHashes)
+  end
+
+  def addUsersToEncryptedFile(lpFileName : Win32cr::Foundation::PWSTR, pEncryptionCertificates : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_LIST*) : UInt32
+    C.AddUsersToEncryptedFile(lpFileName, pEncryptionCertificates)
+  end
+
+  def setUserFileEncryptionKey(pEncryptionCertificate : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE*) : UInt32
+    C.SetUserFileEncryptionKey(pEncryptionCertificate)
+  end
+
+  def setUserFileEncryptionKeyEx(pEncryptionCertificate : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE*, dwCapabilities : UInt32, dwFlags : UInt32, pvReserved : Void*) : UInt32
+    C.SetUserFileEncryptionKeyEx(pEncryptionCertificate, dwCapabilities, dwFlags, pvReserved)
+  end
+
+  def freeEncryptionCertificateHashList(pUsers : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_HASH_LIST*) : Void
+    C.FreeEncryptionCertificateHashList(pUsers)
+  end
+
+  def encryptionDisable(dir_path : Win32cr::Foundation::PWSTR, disable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.EncryptionDisable(dir_path, disable)
+  end
+
+  def duplicateEncryptionInfoFile(src_file_name : Win32cr::Foundation::PWSTR, dst_file_name : Win32cr::Foundation::PWSTR, dwCreationDistribution : UInt32, dwAttributes : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : UInt32
+    C.DuplicateEncryptionInfoFile(src_file_name, dst_file_name, dwCreationDistribution, dwAttributes, lpSecurityAttributes)
+  end
+
+  def getEncryptedFileMetadata(lpFileName : Win32cr::Foundation::PWSTR, pcbMetadata : UInt32*, ppbMetadata : UInt8**) : UInt32
+    C.GetEncryptedFileMetadata(lpFileName, pcbMetadata, ppbMetadata)
+  end
+
+  def setEncryptedFileMetadata(lpFileName : Win32cr::Foundation::PWSTR, pbOldMetadata : UInt8*, pbNewMetadata : UInt8*, pOwnerHash : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_HASH*, dwOperation : UInt32, pCertificatesAdded : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_HASH_LIST*) : UInt32
+    C.SetEncryptedFileMetadata(lpFileName, pbOldMetadata, pbNewMetadata, pOwnerHash, dwOperation, pCertificatesAdded)
+  end
+
+  def freeEncryptedFileMetadata(pbMetadata : UInt8*) : Void
+    C.FreeEncryptedFileMetadata(pbMetadata)
+  end
+
+  def lZStart : Int32
+    C.LZStart
+  end
+
+  def lZDone : Void
+    C.LZDone
+  end
+
+  def copyLZFile(hfSource : Int32, hfDest : Int32) : Int32
+    C.CopyLZFile(hfSource, hfDest)
+  end
+
+  def lZCopy(hfSource : Int32, hfDest : Int32) : Int32
+    C.LZCopy(hfSource, hfDest)
+  end
+
+  def lZInit(hfSource : Int32) : Int32
+    C.LZInit(hfSource)
+  end
+
+  def getExpandedNameA(lpszSource : Win32cr::Foundation::PSTR, lpszBuffer : UInt8*) : Int32
+    C.GetExpandedNameA(lpszSource, lpszBuffer)
+  end
+
+  def getExpandedNameW(lpszSource : Win32cr::Foundation::PWSTR, lpszBuffer : UInt16*) : Int32
+    C.GetExpandedNameW(lpszSource, lpszBuffer)
+  end
+
+  def lZOpenFileA(lpFileName : Win32cr::Foundation::PSTR, lpReOpenBuf : Win32cr::Storage::FileSystem::OFSTRUCT*, wStyle : Win32cr::Storage::FileSystem::LZOPENFILE_STYLE) : Int32
+    C.LZOpenFileA(lpFileName, lpReOpenBuf, wStyle)
+  end
+
+  def lZOpenFileW(lpFileName : Win32cr::Foundation::PWSTR, lpReOpenBuf : Win32cr::Storage::FileSystem::OFSTRUCT*, wStyle : Win32cr::Storage::FileSystem::LZOPENFILE_STYLE) : Int32
+    C.LZOpenFileW(lpFileName, lpReOpenBuf, wStyle)
+  end
+
+  def lZSeek(hFile : Int32, lOffset : Int32, iOrigin : Int32) : Int32
+    C.LZSeek(hFile, lOffset, iOrigin)
+  end
+
+  def lZRead(hFile : Int32, lpBuffer : Win32cr::Foundation::PSTR, cbRead : Int32) : Int32
+    C.LZRead(hFile, lpBuffer, cbRead)
+  end
+
+  def lZClose(hFile : Int32) : Void
+    C.LZClose(hFile)
+  end
+
+  def wofShouldCompressBinaries(volume : Win32cr::Foundation::PWSTR, algorithm : UInt32*) : Win32cr::Foundation::BOOL
+    C.WofShouldCompressBinaries(volume, algorithm)
+  end
+
+  def wofGetDriverVersion(file_or_volume_handle : Win32cr::Foundation::HANDLE, provider : UInt32, wof_version : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WofGetDriverVersion(file_or_volume_handle, provider, wof_version)
+  end
+
+  def wofSetFileDataLocation(file_handle : Win32cr::Foundation::HANDLE, provider : UInt32, external_file_info : Void*, length : UInt32) : Win32cr::Foundation::HRESULT
+    C.WofSetFileDataLocation(file_handle, provider, external_file_info, length)
+  end
+
+  def wofIsExternalFile(file_path : Win32cr::Foundation::PWSTR, is_external_file : Win32cr::Foundation::BOOL*, provider : UInt32*, external_file_info : Void*, buffer_length : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WofIsExternalFile(file_path, is_external_file, provider, external_file_info, buffer_length)
+  end
+
+  def wofEnumEntries(volume_name : Win32cr::Foundation::PWSTR, provider : UInt32, enum_proc : Win32cr::Storage::FileSystem::WofEnumEntryProc, user_data : Void*) : Win32cr::Foundation::HRESULT
+    C.WofEnumEntries(volume_name, provider, enum_proc, user_data)
+  end
+
+  def wofWimAddEntry(volume_name : Win32cr::Foundation::PWSTR, wim_path : Win32cr::Foundation::PWSTR, wim_type : UInt32, wim_index : UInt32, data_source_id : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    C.WofWimAddEntry(volume_name, wim_path, wim_type, wim_index, data_source_id)
+  end
+
+  def wofWimEnumFiles(volume_name : Win32cr::Foundation::PWSTR, data_source_id : Win32cr::Foundation::LARGE_INTEGER, enum_proc : Win32cr::Storage::FileSystem::WofEnumFilesProc, user_data : Void*) : Win32cr::Foundation::HRESULT
+    C.WofWimEnumFiles(volume_name, data_source_id, enum_proc, user_data)
+  end
+
+  def wofWimSuspendEntry(volume_name : Win32cr::Foundation::PWSTR, data_source_id : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::HRESULT
+    C.WofWimSuspendEntry(volume_name, data_source_id)
+  end
+
+  def wofWimRemoveEntry(volume_name : Win32cr::Foundation::PWSTR, data_source_id : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::HRESULT
+    C.WofWimRemoveEntry(volume_name, data_source_id)
+  end
+
+  def wofWimUpdateEntry(volume_name : Win32cr::Foundation::PWSTR, data_source_id : Win32cr::Foundation::LARGE_INTEGER, new_wim_path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.WofWimUpdateEntry(volume_name, data_source_id, new_wim_path)
+  end
+
+  def wofFileEnumFiles(volume_name : Win32cr::Foundation::PWSTR, algorithm : UInt32, enum_proc : Win32cr::Storage::FileSystem::WofEnumFilesProc, user_data : Void*) : Win32cr::Foundation::HRESULT
+    C.WofFileEnumFiles(volume_name, algorithm, enum_proc, user_data)
+  end
+
+  def txfLogCreateFileReadContext(log_path : Win32cr::Foundation::PWSTR, beginning_lsn : Win32cr::Storage::FileSystem::CLS_LSN, ending_lsn : Win32cr::Storage::FileSystem::CLS_LSN, txf_file_id : Win32cr::Storage::FileSystem::TXF_ID*, txf_log_context : Void**) : Win32cr::Foundation::BOOL
+    C.TxfLogCreateFileReadContext(log_path, beginning_lsn, ending_lsn, txf_file_id, txf_log_context)
+  end
+
+  def txfLogCreateRangeReadContext(log_path : Win32cr::Foundation::PWSTR, beginning_lsn : Win32cr::Storage::FileSystem::CLS_LSN, ending_lsn : Win32cr::Storage::FileSystem::CLS_LSN, beginning_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*, ending_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*, record_type_mask : UInt32, txf_log_context : Void**) : Win32cr::Foundation::BOOL
+    C.TxfLogCreateRangeReadContext(log_path, beginning_lsn, ending_lsn, beginning_virtual_clock, ending_virtual_clock, record_type_mask, txf_log_context)
+  end
+
+  def txfLogDestroyReadContext(txf_log_context : Void*) : Win32cr::Foundation::BOOL
+    C.TxfLogDestroyReadContext(txf_log_context)
+  end
+
+  def txfLogReadRecords(txf_log_context : Void*, buffer_length : UInt32, buffer : Void*, bytes_used : UInt32*, record_count : UInt32*) : Win32cr::Foundation::BOOL
+    C.TxfLogReadRecords(txf_log_context, buffer_length, buffer, bytes_used, record_count)
+  end
+
+  def txfReadMetadataInfo(file_handle : Win32cr::Foundation::HANDLE, txf_file_id : Win32cr::Storage::FileSystem::TXF_ID*, last_lsn : Win32cr::Storage::FileSystem::CLS_LSN*, transaction_state : UInt32*, locking_transaction : LibC::GUID*) : Win32cr::Foundation::BOOL
+    C.TxfReadMetadataInfo(file_handle, txf_file_id, last_lsn, transaction_state, locking_transaction)
+  end
+
+  def txfLogRecordGetFileName(record_buffer : Void*, record_buffer_length_in_bytes : UInt32, name_buffer : Win32cr::Foundation::PWSTR, name_buffer_length_in_bytes : UInt32*, txf_id : Win32cr::Storage::FileSystem::TXF_ID*) : Win32cr::Foundation::BOOL
+    C.TxfLogRecordGetFileName(record_buffer, record_buffer_length_in_bytes, name_buffer, name_buffer_length_in_bytes, txf_id)
+  end
+
+  def txfLogRecordGetGenericType(record_buffer : Void*, record_buffer_length_in_bytes : UInt32, generic_type : UInt32*, virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.TxfLogRecordGetGenericType(record_buffer, record_buffer_length_in_bytes, generic_type, virtual_clock)
+  end
+
+  def txfSetThreadMiniVersionForCreate(mini_version : UInt16) : Void
+    C.TxfSetThreadMiniVersionForCreate(mini_version)
+  end
+
+  def txfGetThreadMiniVersionForCreate(mini_version : UInt16*) : Void
+    C.TxfGetThreadMiniVersionForCreate(mini_version)
+  end
+
+  def createTransaction(lpTransactionAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, uow : LibC::GUID*, create_options : UInt32, isolation_level : UInt32, isolation_flags : UInt32, timeout : UInt32, description : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.CreateTransaction(lpTransactionAttributes, uow, create_options, isolation_level, isolation_flags, timeout, description)
+  end
+
+  def openTransaction(dwDesiredAccess : UInt32, transaction_id : LibC::GUID*) : Win32cr::Foundation::HANDLE
+    C.OpenTransaction(dwDesiredAccess, transaction_id)
+  end
+
+  def commitTransaction(transaction_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.CommitTransaction(transaction_handle)
+  end
+
+  def commitTransactionAsync(transaction_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.CommitTransactionAsync(transaction_handle)
+  end
+
+  def rollbackTransaction(transaction_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.RollbackTransaction(transaction_handle)
+  end
+
+  def rollbackTransactionAsync(transaction_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.RollbackTransactionAsync(transaction_handle)
+  end
+
+  def getTransactionId(transaction_handle : Win32cr::Foundation::HANDLE, transaction_id : LibC::GUID*) : Win32cr::Foundation::BOOL
+    C.GetTransactionId(transaction_handle, transaction_id)
+  end
+
+  def getTransactionInformation(transaction_handle : Win32cr::Foundation::HANDLE, outcome : UInt32*, isolation_level : UInt32*, isolation_flags : UInt32*, timeout : UInt32*, buffer_length : UInt32, description : UInt16*) : Win32cr::Foundation::BOOL
+    C.GetTransactionInformation(transaction_handle, outcome, isolation_level, isolation_flags, timeout, buffer_length, description)
+  end
+
+  def setTransactionInformation(transaction_handle : Win32cr::Foundation::HANDLE, isolation_level : UInt32, isolation_flags : UInt32, timeout : UInt32, description : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetTransactionInformation(transaction_handle, isolation_level, isolation_flags, timeout, description)
+  end
+
+  def createTransactionManager(lpTransactionAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, log_file_name : Win32cr::Foundation::PWSTR, create_options : UInt32, commit_strength : UInt32) : Win32cr::Foundation::HANDLE
+    C.CreateTransactionManager(lpTransactionAttributes, log_file_name, create_options, commit_strength)
+  end
+
+  def openTransactionManager(log_file_name : Win32cr::Foundation::PWSTR, desired_access : UInt32, open_options : UInt32) : Win32cr::Foundation::HANDLE
+    C.OpenTransactionManager(log_file_name, desired_access, open_options)
+  end
+
+  def openTransactionManagerById(transaction_manager_id : LibC::GUID*, desired_access : UInt32, open_options : UInt32) : Win32cr::Foundation::HANDLE
+    C.OpenTransactionManagerById(transaction_manager_id, desired_access, open_options)
+  end
+
+  def renameTransactionManager(log_file_name : Win32cr::Foundation::PWSTR, existing_transaction_manager_guid : LibC::GUID*) : Win32cr::Foundation::BOOL
+    C.RenameTransactionManager(log_file_name, existing_transaction_manager_guid)
+  end
+
+  def rollforwardTransactionManager(transaction_manager_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.RollforwardTransactionManager(transaction_manager_handle, tm_virtual_clock)
+  end
+
+  def recoverTransactionManager(transaction_manager_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.RecoverTransactionManager(transaction_manager_handle)
+  end
+
+  def getCurrentClockTransactionManager(transaction_manager_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.GetCurrentClockTransactionManager(transaction_manager_handle, tm_virtual_clock)
+  end
+
+  def getTransactionManagerId(transaction_manager_handle : Win32cr::Foundation::HANDLE, transaction_manager_id : LibC::GUID*) : Win32cr::Foundation::BOOL
+    C.GetTransactionManagerId(transaction_manager_handle, transaction_manager_id)
+  end
+
+  def createResourceManager(lpResourceManagerAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, resource_manager_id : LibC::GUID*, create_options : UInt32, tm_handle : Win32cr::Foundation::HANDLE, description : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.CreateResourceManager(lpResourceManagerAttributes, resource_manager_id, create_options, tm_handle, description)
+  end
+
+  def openResourceManager(dwDesiredAccess : UInt32, tm_handle : Win32cr::Foundation::HANDLE, resource_manager_id : LibC::GUID*) : Win32cr::Foundation::HANDLE
+    C.OpenResourceManager(dwDesiredAccess, tm_handle, resource_manager_id)
+  end
+
+  def recoverResourceManager(resource_manager_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.RecoverResourceManager(resource_manager_handle)
+  end
+
+  def getNotificationResourceManager(resource_manager_handle : Win32cr::Foundation::HANDLE, transaction_notification : Win32cr::Storage::FileSystem::TRANSACTION_NOTIFICATION*, notification_length : UInt32, dwMilliseconds : UInt32, return_length : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetNotificationResourceManager(resource_manager_handle, transaction_notification, notification_length, dwMilliseconds, return_length)
+  end
+
+  def getNotificationResourceManagerAsync(resource_manager_handle : Win32cr::Foundation::HANDLE, transaction_notification : Win32cr::Storage::FileSystem::TRANSACTION_NOTIFICATION*, transaction_notification_length : UInt32, return_length : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.GetNotificationResourceManagerAsync(resource_manager_handle, transaction_notification, transaction_notification_length, return_length, lpOverlapped)
+  end
+
+  def setResourceManagerCompletionPort(resource_manager_handle : Win32cr::Foundation::HANDLE, io_completion_port_handle : Win32cr::Foundation::HANDLE, completion_key : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.SetResourceManagerCompletionPort(resource_manager_handle, io_completion_port_handle, completion_key)
+  end
+
+  def createEnlistment(lpEnlistmentAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, resource_manager_handle : Win32cr::Foundation::HANDLE, transaction_handle : Win32cr::Foundation::HANDLE, notification_mask : UInt32, create_options : UInt32, enlistment_key : Void*) : Win32cr::Foundation::HANDLE
+    C.CreateEnlistment(lpEnlistmentAttributes, resource_manager_handle, transaction_handle, notification_mask, create_options, enlistment_key)
+  end
+
+  def openEnlistment(dwDesiredAccess : UInt32, resource_manager_handle : Win32cr::Foundation::HANDLE, enlistment_id : LibC::GUID*) : Win32cr::Foundation::HANDLE
+    C.OpenEnlistment(dwDesiredAccess, resource_manager_handle, enlistment_id)
+  end
+
+  def recoverEnlistment(enlistment_handle : Win32cr::Foundation::HANDLE, enlistment_key : Void*) : Win32cr::Foundation::BOOL
+    C.RecoverEnlistment(enlistment_handle, enlistment_key)
+  end
+
+  def getEnlistmentRecoveryInformation(enlistment_handle : Win32cr::Foundation::HANDLE, buffer_size : UInt32, buffer : Void*, buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetEnlistmentRecoveryInformation(enlistment_handle, buffer_size, buffer, buffer_used)
+  end
+
+  def getEnlistmentId(enlistment_handle : Win32cr::Foundation::HANDLE, enlistment_id : LibC::GUID*) : Win32cr::Foundation::BOOL
+    C.GetEnlistmentId(enlistment_handle, enlistment_id)
+  end
+
+  def setEnlistmentRecoveryInformation(enlistment_handle : Win32cr::Foundation::HANDLE, buffer_size : UInt32, buffer : Void*) : Win32cr::Foundation::BOOL
+    C.SetEnlistmentRecoveryInformation(enlistment_handle, buffer_size, buffer)
+  end
+
+  def prepareEnlistment(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.PrepareEnlistment(enlistment_handle, tm_virtual_clock)
+  end
+
+  def prePrepareEnlistment(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.PrePrepareEnlistment(enlistment_handle, tm_virtual_clock)
+  end
+
+  def commitEnlistment(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.CommitEnlistment(enlistment_handle, tm_virtual_clock)
+  end
+
+  def rollbackEnlistment(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.RollbackEnlistment(enlistment_handle, tm_virtual_clock)
+  end
+
+  def prePrepareComplete(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.PrePrepareComplete(enlistment_handle, tm_virtual_clock)
+  end
+
+  def prepareComplete(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.PrepareComplete(enlistment_handle, tm_virtual_clock)
+  end
+
+  def readOnlyEnlistment(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.ReadOnlyEnlistment(enlistment_handle, tm_virtual_clock)
+  end
+
+  def commitComplete(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.CommitComplete(enlistment_handle, tm_virtual_clock)
+  end
+
+  def rollbackComplete(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.RollbackComplete(enlistment_handle, tm_virtual_clock)
+  end
+
+  def singlePhaseReject(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.SinglePhaseReject(enlistment_handle, tm_virtual_clock)
+  end
+
+  def netShareAdd(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    C.NetShareAdd(servername, level, buf, parm_err)
+  end
+
+  def netShareEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
+    C.NetShareEnum(servername, level, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+  end
+
+  def netShareEnumSticky(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
+    C.NetShareEnumSticky(servername, level, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+  end
+
+  def netShareGetInfo(servername : Win32cr::Foundation::PWSTR, netname : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    C.NetShareGetInfo(servername, netname, level, bufptr)
+  end
+
+  def netShareSetInfo(servername : Win32cr::Foundation::PWSTR, netname : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    C.NetShareSetInfo(servername, netname, level, buf, parm_err)
+  end
+
+  def netShareDel(servername : Win32cr::Foundation::PWSTR, netname : Win32cr::Foundation::PWSTR, reserved : UInt32) : UInt32
+    C.NetShareDel(servername, netname, reserved)
+  end
+
+  def netShareDelSticky(servername : Win32cr::Foundation::PWSTR, netname : Win32cr::Foundation::PWSTR, reserved : UInt32) : UInt32
+    C.NetShareDelSticky(servername, netname, reserved)
+  end
+
+  def netShareCheck(servername : Win32cr::Foundation::PWSTR, device : Win32cr::Foundation::PWSTR, type__ : UInt32*) : UInt32
+    C.NetShareCheck(servername, device, type__)
+  end
+
+  def netShareDelEx(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*) : UInt32
+    C.NetShareDelEx(servername, level, buf)
+  end
+
+  def netServerAliasAdd(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*) : UInt32
+    C.NetServerAliasAdd(servername, level, buf)
+  end
+
+  def netServerAliasDel(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*) : UInt32
+    C.NetServerAliasDel(servername, level, buf)
+  end
+
+  def netServerAliasEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resumehandle : UInt32*) : UInt32
+    C.NetServerAliasEnum(servername, level, bufptr, prefmaxlen, entriesread, totalentries, resumehandle)
+  end
+
+  def netSessionEnum(servername : Win32cr::Foundation::PWSTR, unc_client_name : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
+    C.NetSessionEnum(servername, unc_client_name, username, level, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+  end
+
+  def netSessionDel(servername : Win32cr::Foundation::PWSTR, unc_client_name : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR) : UInt32
+    C.NetSessionDel(servername, unc_client_name, username)
+  end
+
+  def netSessionGetInfo(servername : Win32cr::Foundation::PWSTR, unc_client_name : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    C.NetSessionGetInfo(servername, unc_client_name, username, level, bufptr)
+  end
+
+  def netConnectionEnum(servername : Win32cr::Foundation::PWSTR, qualifier : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
+    C.NetConnectionEnum(servername, qualifier, level, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+  end
+
+  def netFileClose(servername : Win32cr::Foundation::PWSTR, fileid : UInt32) : UInt32
+    C.NetFileClose(servername, fileid)
+  end
+
+  def netFileEnum(servername : Win32cr::Foundation::PWSTR, basepath : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : LibC::UIntPtrT*) : UInt32
+    C.NetFileEnum(servername, basepath, username, level, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+  end
+
+  def netFileGetInfo(servername : Win32cr::Foundation::PWSTR, fileid : UInt32, level : UInt32, bufptr : UInt8**) : UInt32
+    C.NetFileGetInfo(servername, fileid, level, bufptr)
+  end
+
+  def netStatisticsGet(server_name : Int8*, service : Int8*, level : UInt32, options : UInt32, buffer : UInt8**) : UInt32
+    C.NetStatisticsGet(server_name, service, level, options, buffer)
+  end
+
+  def queryIoRingCapabilities(capabilities : Win32cr::Storage::FileSystem::IORING_CAPABILITIES*) : Win32cr::Foundation::HRESULT
+    C.QueryIoRingCapabilities(capabilities)
+  end
+
+  def isIoRingOpSupported(ioRing : Win32cr::Storage::FileSystem::HIORING__*, op : Win32cr::Storage::FileSystem::IORING_OP_CODE) : Win32cr::Foundation::BOOL
+    C.IsIoRingOpSupported(ioRing, op)
+  end
+
+  def createIoRing(ioringVersion : Win32cr::Storage::FileSystem::IORING_VERSION, flags : Win32cr::Storage::FileSystem::IORING_CREATE_FLAGS, submissionQueueSize : UInt32, completionQueueSize : UInt32, h : Win32cr::Storage::FileSystem::HIORING__**) : Win32cr::Foundation::HRESULT
+    C.CreateIoRing(ioringVersion, flags, submissionQueueSize, completionQueueSize, h)
+  end
+
+  def getIoRingInfo(ioRing : Win32cr::Storage::FileSystem::HIORING__*, info : Win32cr::Storage::FileSystem::IORING_INFO*) : Win32cr::Foundation::HRESULT
+    C.GetIoRingInfo(ioRing, info)
+  end
+
+  def submitIoRing(ioRing : Win32cr::Storage::FileSystem::HIORING__*, waitOperations : UInt32, milliseconds : UInt32, submittedEntries : UInt32*) : Win32cr::Foundation::HRESULT
+    C.SubmitIoRing(ioRing, waitOperations, milliseconds, submittedEntries)
+  end
+
+  def closeIoRing(ioRing : Win32cr::Storage::FileSystem::HIORING__*) : Win32cr::Foundation::HRESULT
+    C.CloseIoRing(ioRing)
+  end
+
+  def popIoRingCompletion(ioRing : Win32cr::Storage::FileSystem::HIORING__*, cqe : Win32cr::Storage::FileSystem::IORING_CQE*) : Win32cr::Foundation::HRESULT
+    C.PopIoRingCompletion(ioRing, cqe)
+  end
+
+  def setIoRingCompletionEvent(ioRing : Win32cr::Storage::FileSystem::HIORING__*, hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.SetIoRingCompletionEvent(ioRing, hEvent)
+  end
+
+  def buildIoRingCancelRequest(ioRing : Win32cr::Storage::FileSystem::HIORING__*, file : Win32cr::Storage::FileSystem::IORING_HANDLE_REF, opToCancel : LibC::UIntPtrT, userData : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+    C.BuildIoRingCancelRequest(ioRing, file, opToCancel, userData)
+  end
+
+  def buildIoRingReadFile(ioRing : Win32cr::Storage::FileSystem::HIORING__*, fileRef : Win32cr::Storage::FileSystem::IORING_HANDLE_REF, dataRef : Win32cr::Storage::FileSystem::IORING_BUFFER_REF, numberOfBytesToRead : UInt32, fileOffset : UInt64, userData : LibC::UIntPtrT, flags : Win32cr::Storage::FileSystem::IORING_SQE_FLAGS) : Win32cr::Foundation::HRESULT
+    C.BuildIoRingReadFile(ioRing, fileRef, dataRef, numberOfBytesToRead, fileOffset, userData, flags)
+  end
+
+  def buildIoRingRegisterFileHandles(ioRing : Win32cr::Storage::FileSystem::HIORING__*, count : UInt32, handles : Win32cr::Foundation::HANDLE*, userData : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+    C.BuildIoRingRegisterFileHandles(ioRing, count, handles, userData)
+  end
+
+  def buildIoRingRegisterBuffers(ioRing : Win32cr::Storage::FileSystem::HIORING__*, count : UInt32, buffers : Win32cr::Storage::FileSystem::IORING_BUFFER_INFO*, userData : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+    C.BuildIoRingRegisterBuffers(ioRing, count, buffers, userData)
+  end
+
+  def wow64EnableWow64FsRedirection(wow64_fs_enable_redirection : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::BOOLEAN
+    C.Wow64EnableWow64FsRedirection(wow64_fs_enable_redirection)
+  end
+
+  def wow64DisableWow64FsRedirection(old_value : Void**) : Win32cr::Foundation::BOOL
+    C.Wow64DisableWow64FsRedirection(old_value)
+  end
+
+  def wow64RevertWow64FsRedirection(ol_value : Void*) : Win32cr::Foundation::BOOL
+    C.Wow64RevertWow64FsRedirection(ol_value)
+  end
+
+  def getBinaryTypeA(lpApplicationName : Win32cr::Foundation::PSTR, lpBinaryType : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetBinaryTypeA(lpApplicationName, lpBinaryType)
+  end
+
+  #def getBinaryTypeW(lpApplicationName : Win32cr::Foundation::PWSTR, lpBinaryType : UInt32*) : Win32cr::Foundation::BOOL
+    #C.GetBinaryTypeW(lpApplicationName, lpBinaryType)
+  #end
+
+  def getShortPathNameA(lpszLongPath : Win32cr::Foundation::PSTR, lpszShortPath : UInt8*, cchBuffer : UInt32) : UInt32
+    C.GetShortPathNameA(lpszLongPath, lpszShortPath, cchBuffer)
+  end
+
+  def getLongPathNameTransactedA(lpszShortPath : Win32cr::Foundation::PSTR, lpszLongPath : UInt8*, cchBuffer : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : UInt32
+    C.GetLongPathNameTransactedA(lpszShortPath, lpszLongPath, cchBuffer, hTransaction)
+  end
+
+  def getLongPathNameTransactedW(lpszShortPath : Win32cr::Foundation::PWSTR, lpszLongPath : UInt16*, cchBuffer : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : UInt32
+    C.GetLongPathNameTransactedW(lpszShortPath, lpszLongPath, cchBuffer, hTransaction)
+  end
+
+  #def setFileCompletionNotificationModes(file_handle : Win32cr::Foundation::HANDLE, flags : UInt8) : Win32cr::Foundation::BOOL
+    #C.SetFileCompletionNotificationModes(file_handle, flags)
+  #end
+
+  def setFileShortNameA(hFile : Win32cr::Foundation::HANDLE, lpShortName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetFileShortNameA(hFile, lpShortName)
+  end
+
+  def setFileShortNameW(hFile : Win32cr::Foundation::HANDLE, lpShortName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetFileShortNameW(hFile, lpShortName)
+  end
+
+  def setTapePosition(hDevice : Win32cr::Foundation::HANDLE, dwPositionMethod : Win32cr::Storage::FileSystem::TAPE_POSITION_METHOD, dwPartition : UInt32, dwOffsetLow : UInt32, dwOffsetHigh : UInt32, bImmediate : Win32cr::Foundation::BOOL) : UInt32
+    C.SetTapePosition(hDevice, dwPositionMethod, dwPartition, dwOffsetLow, dwOffsetHigh, bImmediate)
+  end
+
+  def getTapePosition(hDevice : Win32cr::Foundation::HANDLE, dwPositionType : Win32cr::Storage::FileSystem::TAPE_POSITION_TYPE, lpdwPartition : UInt32*, lpdwOffsetLow : UInt32*, lpdwOffsetHigh : UInt32*) : UInt32
+    C.GetTapePosition(hDevice, dwPositionType, lpdwPartition, lpdwOffsetLow, lpdwOffsetHigh)
+  end
+
+  def prepareTape(hDevice : Win32cr::Foundation::HANDLE, dwOperation : Win32cr::Storage::FileSystem::PREPARE_TAPE_OPERATION, bImmediate : Win32cr::Foundation::BOOL) : UInt32
+    C.PrepareTape(hDevice, dwOperation, bImmediate)
+  end
+
+  def eraseTape(hDevice : Win32cr::Foundation::HANDLE, dwEraseType : Win32cr::Storage::FileSystem::ERASE_TAPE_TYPE, bImmediate : Win32cr::Foundation::BOOL) : UInt32
+    C.EraseTape(hDevice, dwEraseType, bImmediate)
+  end
+
+  def createTapePartition(hDevice : Win32cr::Foundation::HANDLE, dwPartitionMethod : Win32cr::Storage::FileSystem::CREATE_TAPE_PARTITION_METHOD, dwCount : UInt32, dwSize : UInt32) : UInt32
+    C.CreateTapePartition(hDevice, dwPartitionMethod, dwCount, dwSize)
+  end
+
+  def writeTapemark(hDevice : Win32cr::Foundation::HANDLE, dwTapemarkType : Win32cr::Storage::FileSystem::TAPEMARK_TYPE, dwTapemarkCount : UInt32, bImmediate : Win32cr::Foundation::BOOL) : UInt32
+    C.WriteTapemark(hDevice, dwTapemarkType, dwTapemarkCount, bImmediate)
+  end
+
+  def getTapeStatus(hDevice : Win32cr::Foundation::HANDLE) : UInt32
+    C.GetTapeStatus(hDevice)
+  end
+
+  def getTapeParameters(hDevice : Win32cr::Foundation::HANDLE, dwOperation : Win32cr::Storage::FileSystem::GET_TAPE_DRIVE_PARAMETERS_OPERATION, lpdwSize : UInt32*, lpTapeInformation : Void*) : UInt32
+    C.GetTapeParameters(hDevice, dwOperation, lpdwSize, lpTapeInformation)
+  end
+
+  def setTapeParameters(hDevice : Win32cr::Foundation::HANDLE, dwOperation : Win32cr::Storage::FileSystem::TAPE_INFORMATION_TYPE, lpTapeInformation : Void*) : UInt32
+    C.SetTapeParameters(hDevice, dwOperation, lpTapeInformation)
+  end
+
+  def encryptFileA(lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.EncryptFileA(lpFileName)
+  end
+
+  def encryptFileW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.EncryptFileW(lpFileName)
+  end
+
+  def decryptFileA(lpFileName : Win32cr::Foundation::PSTR, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    C.DecryptFileA(lpFileName, dwReserved)
+  end
+
+  def decryptFileW(lpFileName : Win32cr::Foundation::PWSTR, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    C.DecryptFileW(lpFileName, dwReserved)
+  end
+
+  def fileEncryptionStatusA(lpFileName : Win32cr::Foundation::PSTR, lpStatus : UInt32*) : Win32cr::Foundation::BOOL
+    C.FileEncryptionStatusA(lpFileName, lpStatus)
+  end
+
+  def fileEncryptionStatusW(lpFileName : Win32cr::Foundation::PWSTR, lpStatus : UInt32*) : Win32cr::Foundation::BOOL
+    C.FileEncryptionStatusW(lpFileName, lpStatus)
+  end
+
+  def openEncryptedFileRawA(lpFileName : Win32cr::Foundation::PSTR, ulFlags : UInt32, pvContext : Void**) : UInt32
+    C.OpenEncryptedFileRawA(lpFileName, ulFlags, pvContext)
+  end
+
+  def openEncryptedFileRawW(lpFileName : Win32cr::Foundation::PWSTR, ulFlags : UInt32, pvContext : Void**) : UInt32
+    C.OpenEncryptedFileRawW(lpFileName, ulFlags, pvContext)
+  end
+
+  def readEncryptedFileRaw(pfExportCallback : Win32cr::Storage::FileSystem::PFE_EXPORT_FUNC, pvCallbackContext : Void*, pvContext : Void*) : UInt32
+    C.ReadEncryptedFileRaw(pfExportCallback, pvCallbackContext, pvContext)
+  end
+
+  def writeEncryptedFileRaw(pfImportCallback : Win32cr::Storage::FileSystem::PFE_IMPORT_FUNC, pvCallbackContext : Void*, pvContext : Void*) : UInt32
+    C.WriteEncryptedFileRaw(pfImportCallback, pvCallbackContext, pvContext)
+  end
+
+  def closeEncryptedFileRaw(pvContext : Void*) : Void
+    C.CloseEncryptedFileRaw(pvContext)
+  end
+
+  def openFile(lpFileName : Win32cr::Foundation::PSTR, lpReOpenBuff : Win32cr::Storage::FileSystem::OFSTRUCT*, uStyle : Win32cr::Storage::FileSystem::LZOPENFILE_STYLE) : Int32
+    C.OpenFile(lpFileName, lpReOpenBuff, uStyle)
+  end
+
+  def backupRead(hFile : Win32cr::Foundation::HANDLE, lpBuffer : UInt8*, nNumberOfBytesToRead : UInt32, lpNumberOfBytesRead : UInt32*, bAbort : Win32cr::Foundation::BOOL, bProcessSecurity : Win32cr::Foundation::BOOL, lpContext : Void**) : Win32cr::Foundation::BOOL
+    C.BackupRead(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, bAbort, bProcessSecurity, lpContext)
+  end
+
+  def backupSeek(hFile : Win32cr::Foundation::HANDLE, dwLowBytesToSeek : UInt32, dwHighBytesToSeek : UInt32, lpdwLowByteSeeked : UInt32*, lpdwHighByteSeeked : UInt32*, lpContext : Void**) : Win32cr::Foundation::BOOL
+    C.BackupSeek(hFile, dwLowBytesToSeek, dwHighBytesToSeek, lpdwLowByteSeeked, lpdwHighByteSeeked, lpContext)
+  end
+
+  def backupWrite(hFile : Win32cr::Foundation::HANDLE, lpBuffer : UInt8*, nNumberOfBytesToWrite : UInt32, lpNumberOfBytesWritten : UInt32*, bAbort : Win32cr::Foundation::BOOL, bProcessSecurity : Win32cr::Foundation::BOOL, lpContext : Void**) : Win32cr::Foundation::BOOL
+    C.BackupWrite(hFile, lpBuffer, nNumberOfBytesToWrite, lpNumberOfBytesWritten, bAbort, bProcessSecurity, lpContext)
+  end
+
+  def getLogicalDriveStringsA(nBufferLength : UInt32, lpBuffer : UInt8*) : UInt32
+    C.GetLogicalDriveStringsA(nBufferLength, lpBuffer)
+  end
+
+  def setSearchPathMode(flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetSearchPathMode(flags)
+  end
+
+  def createDirectoryExA(lpTemplateDirectory : Win32cr::Foundation::PSTR, lpNewDirectory : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+    C.CreateDirectoryExA(lpTemplateDirectory, lpNewDirectory, lpSecurityAttributes)
+  end
+
+  def createDirectoryExW(lpTemplateDirectory : Win32cr::Foundation::PWSTR, lpNewDirectory : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+    C.CreateDirectoryExW(lpTemplateDirectory, lpNewDirectory, lpSecurityAttributes)
+  end
+
+  def createDirectoryTransactedA(lpTemplateDirectory : Win32cr::Foundation::PSTR, lpNewDirectory : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.CreateDirectoryTransactedA(lpTemplateDirectory, lpNewDirectory, lpSecurityAttributes, hTransaction)
+  end
+
+  def createDirectoryTransactedW(lpTemplateDirectory : Win32cr::Foundation::PWSTR, lpNewDirectory : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.CreateDirectoryTransactedW(lpTemplateDirectory, lpNewDirectory, lpSecurityAttributes, hTransaction)
+  end
+
+  def removeDirectoryTransactedA(lpPathName : Win32cr::Foundation::PSTR, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.RemoveDirectoryTransactedA(lpPathName, hTransaction)
+  end
+
+  def removeDirectoryTransactedW(lpPathName : Win32cr::Foundation::PWSTR, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.RemoveDirectoryTransactedW(lpPathName, hTransaction)
+  end
+
+  def getFullPathNameTransactedA(lpFileName : Win32cr::Foundation::PSTR, nBufferLength : UInt32, lpBuffer : UInt8*, lpFilePart : Win32cr::Foundation::PSTR*, hTransaction : Win32cr::Foundation::HANDLE) : UInt32
+    C.GetFullPathNameTransactedA(lpFileName, nBufferLength, lpBuffer, lpFilePart, hTransaction)
+  end
+
+  def getFullPathNameTransactedW(lpFileName : Win32cr::Foundation::PWSTR, nBufferLength : UInt32, lpBuffer : UInt16*, lpFilePart : Win32cr::Foundation::PWSTR*, hTransaction : Win32cr::Foundation::HANDLE) : UInt32
+    C.GetFullPathNameTransactedW(lpFileName, nBufferLength, lpBuffer, lpFilePart, hTransaction)
+  end
+
+  def defineDosDeviceA(dwFlags : Win32cr::Storage::FileSystem::DEFINE_DOS_DEVICE_FLAGS, lpDeviceName : Win32cr::Foundation::PSTR, lpTargetPath : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.DefineDosDeviceA(dwFlags, lpDeviceName, lpTargetPath)
+  end
+
+  def queryDosDeviceA(lpDeviceName : Win32cr::Foundation::PSTR, lpTargetPath : UInt8*, ucchMax : UInt32) : UInt32
+    C.QueryDosDeviceA(lpDeviceName, lpTargetPath, ucchMax)
+  end
+
+  def createFileTransactedA(lpFileName : Win32cr::Foundation::PSTR, dwDesiredAccess : UInt32, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE, hTransaction : Win32cr::Foundation::HANDLE, pusMiniVersion : Win32cr::Storage::FileSystem::TXFS_MINIVERSION*, lpExtendedParameter : Void*) : Win32cr::Foundation::HANDLE
+    C.CreateFileTransactedA(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile, hTransaction, pusMiniVersion, lpExtendedParameter)
+  end
+
+  def createFileTransactedW(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE, hTransaction : Win32cr::Foundation::HANDLE, pusMiniVersion : Win32cr::Storage::FileSystem::TXFS_MINIVERSION*, lpExtendedParameter : Void*) : Win32cr::Foundation::HANDLE
+    C.CreateFileTransactedW(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile, hTransaction, pusMiniVersion, lpExtendedParameter)
+  end
+
+  def reOpenFile(hOriginalFile : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::Storage::FileSystem::FILE_ACCESS_FLAGS, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::HANDLE
+    C.ReOpenFile(hOriginalFile, dwDesiredAccess, dwShareMode, dwFlagsAndAttributes)
+  end
+
+  def setFileAttributesTransactedA(lpFileName : Win32cr::Foundation::PSTR, dwFileAttributes : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.SetFileAttributesTransactedA(lpFileName, dwFileAttributes, hTransaction)
+  end
+
+  def setFileAttributesTransactedW(lpFileName : Win32cr::Foundation::PWSTR, dwFileAttributes : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.SetFileAttributesTransactedW(lpFileName, dwFileAttributes, hTransaction)
+  end
+
+  def getFileAttributesTransactedA(lpFileName : Win32cr::Foundation::PSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.GetFileAttributesTransactedA(lpFileName, fInfoLevelId, lpFileInformation, hTransaction)
+  end
+
+  def getFileAttributesTransactedW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.GetFileAttributesTransactedW(lpFileName, fInfoLevelId, lpFileInformation, hTransaction)
+  end
+
+  def getCompressedFileSizeTransactedA(lpFileName : Win32cr::Foundation::PSTR, lpFileSizeHigh : UInt32*, hTransaction : Win32cr::Foundation::HANDLE) : UInt32
+    C.GetCompressedFileSizeTransactedA(lpFileName, lpFileSizeHigh, hTransaction)
+  end
+
+  def getCompressedFileSizeTransactedW(lpFileName : Win32cr::Foundation::PWSTR, lpFileSizeHigh : UInt32*, hTransaction : Win32cr::Foundation::HANDLE) : UInt32
+    C.GetCompressedFileSizeTransactedW(lpFileName, lpFileSizeHigh, hTransaction)
+  end
+
+  def deleteFileTransactedA(lpFileName : Win32cr::Foundation::PSTR, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.DeleteFileTransactedA(lpFileName, hTransaction)
+  end
+
+  def deleteFileTransactedW(lpFileName : Win32cr::Foundation::PWSTR, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.DeleteFileTransactedW(lpFileName, hTransaction)
+  end
+
+  def checkNameLegalDOS8Dot3A(lpName : Win32cr::Foundation::PSTR, lpOemName : UInt8*, oem_name_size : UInt32, pbNameContainsSpaces : Win32cr::Foundation::BOOL*, pbNameLegal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.CheckNameLegalDOS8Dot3A(lpName, lpOemName, oem_name_size, pbNameContainsSpaces, pbNameLegal)
+  end
+
+  def checkNameLegalDOS8Dot3W(lpName : Win32cr::Foundation::PWSTR, lpOemName : UInt8*, oem_name_size : UInt32, pbNameContainsSpaces : Win32cr::Foundation::BOOL*, pbNameLegal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.CheckNameLegalDOS8Dot3W(lpName, lpOemName, oem_name_size, pbNameContainsSpaces, pbNameLegal)
+  end
+
+  def findFirstFileTransactedA(lpFileName : Win32cr::Foundation::PSTR, fInfoLevelId : Win32cr::Storage::FileSystem::FINDEX_INFO_LEVELS, lpFindFileData : Void*, fSearchOp : Win32cr::Storage::FileSystem::FINDEX_SEARCH_OPS, lpSearchFilter : Void*, dwAdditionalFlags : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Storage::FileSystem::FindFileHandle
+    C.FindFirstFileTransactedA(lpFileName, fInfoLevelId, lpFindFileData, fSearchOp, lpSearchFilter, dwAdditionalFlags, hTransaction)
+  end
+
+  def findFirstFileTransactedW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::FINDEX_INFO_LEVELS, lpFindFileData : Void*, fSearchOp : Win32cr::Storage::FileSystem::FINDEX_SEARCH_OPS, lpSearchFilter : Void*, dwAdditionalFlags : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Storage::FileSystem::FindFileHandle
+    C.FindFirstFileTransactedW(lpFileName, fInfoLevelId, lpFindFileData, fSearchOp, lpSearchFilter, dwAdditionalFlags, hTransaction)
+  end
+
+  def copyFileA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, bFailIfExists : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.CopyFileA(lpExistingFileName, lpNewFileName, bFailIfExists)
+  end
+
+  def copyFileW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, bFailIfExists : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.CopyFileW(lpExistingFileName, lpNewFileName, bFailIfExists)
+  end
+
+  def copyFileExA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, pbCancel : Int32*, dwCopyFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.CopyFileExA(lpExistingFileName, lpNewFileName, lpProgressRoutine, lpData, pbCancel, dwCopyFlags)
+  end
+
+  def copyFileExW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, pbCancel : Int32*, dwCopyFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.CopyFileExW(lpExistingFileName, lpNewFileName, lpProgressRoutine, lpData, pbCancel, dwCopyFlags)
+  end
+
+  def copyFileTransactedA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, pbCancel : Int32*, dwCopyFlags : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.CopyFileTransactedA(lpExistingFileName, lpNewFileName, lpProgressRoutine, lpData, pbCancel, dwCopyFlags, hTransaction)
+  end
+
+  def copyFileTransactedW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, pbCancel : Int32*, dwCopyFlags : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.CopyFileTransactedW(lpExistingFileName, lpNewFileName, lpProgressRoutine, lpData, pbCancel, dwCopyFlags, hTransaction)
+  end
+
+  def copyFile2(pwszExistingFileName : Win32cr::Foundation::PWSTR, pwszNewFileName : Win32cr::Foundation::PWSTR, pExtendedParameters : Win32cr::Storage::FileSystem::COPYFILE2_EXTENDED_PARAMETERS*) : Win32cr::Foundation::HRESULT
+    C.CopyFile2(pwszExistingFileName, pwszNewFileName, pExtendedParameters)
+  end
+
+  def moveFileA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.MoveFileA(lpExistingFileName, lpNewFileName)
+  end
+
+  def moveFileW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.MoveFileW(lpExistingFileName, lpNewFileName)
+  end
+
+  def moveFileExA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS) : Win32cr::Foundation::BOOL
+    C.MoveFileExA(lpExistingFileName, lpNewFileName, dwFlags)
+  end
+
+  #def moveFileExW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS) : Win32cr::Foundation::BOOL
+    #C.MoveFileExW(lpExistingFileName, lpNewFileName, dwFlags)
+  #end
+
+  def moveFileWithProgressA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS) : Win32cr::Foundation::BOOL
+    C.MoveFileWithProgressA(lpExistingFileName, lpNewFileName, lpProgressRoutine, lpData, dwFlags)
+  end
+
+  def moveFileWithProgressW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS) : Win32cr::Foundation::BOOL
+    C.MoveFileWithProgressW(lpExistingFileName, lpNewFileName, lpProgressRoutine, lpData, dwFlags)
+  end
+
+  def moveFileTransactedA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.MoveFileTransactedA(lpExistingFileName, lpNewFileName, lpProgressRoutine, lpData, dwFlags, hTransaction)
+  end
+
+  def moveFileTransactedW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.MoveFileTransactedW(lpExistingFileName, lpNewFileName, lpProgressRoutine, lpData, dwFlags, hTransaction)
+  end
+
+  def replaceFileA(lpReplacedFileName : Win32cr::Foundation::PSTR, lpReplacementFileName : Win32cr::Foundation::PSTR, lpBackupFileName : Win32cr::Foundation::PSTR, dwReplaceFlags : Win32cr::Storage::FileSystem::REPLACE_FILE_FLAGS, lpExclude : Void*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    C.ReplaceFileA(lpReplacedFileName, lpReplacementFileName, lpBackupFileName, dwReplaceFlags, lpExclude, lpReserved)
+  end
+
+  def replaceFileW(lpReplacedFileName : Win32cr::Foundation::PWSTR, lpReplacementFileName : Win32cr::Foundation::PWSTR, lpBackupFileName : Win32cr::Foundation::PWSTR, dwReplaceFlags : Win32cr::Storage::FileSystem::REPLACE_FILE_FLAGS, lpExclude : Void*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    C.ReplaceFileW(lpReplacedFileName, lpReplacementFileName, lpBackupFileName, dwReplaceFlags, lpExclude, lpReserved)
+  end
+
+  def createHardLinkA(lpFileName : Win32cr::Foundation::PSTR, lpExistingFileName : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+    C.CreateHardLinkA(lpFileName, lpExistingFileName, lpSecurityAttributes)
+  end
+
+  #def createHardLinkW(lpFileName : Win32cr::Foundation::PWSTR, lpExistingFileName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+    #C.CreateHardLinkW(lpFileName, lpExistingFileName, lpSecurityAttributes)
+  #end
+
+  def createHardLinkTransactedA(lpFileName : Win32cr::Foundation::PSTR, lpExistingFileName : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.CreateHardLinkTransactedA(lpFileName, lpExistingFileName, lpSecurityAttributes, hTransaction)
+  end
+
+  def createHardLinkTransactedW(lpFileName : Win32cr::Foundation::PWSTR, lpExistingFileName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.CreateHardLinkTransactedW(lpFileName, lpExistingFileName, lpSecurityAttributes, hTransaction)
+  end
+
+  def findFirstStreamTransactedW(lpFileName : Win32cr::Foundation::PWSTR, info_level : Win32cr::Storage::FileSystem::STREAM_INFO_LEVELS, lpFindStreamData : Void*, dwFlags : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Storage::FileSystem::FindStreamHandle
+    C.FindFirstStreamTransactedW(lpFileName, info_level, lpFindStreamData, dwFlags, hTransaction)
+  end
+
+  def findFirstFileNameTransactedW(lpFileName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, string_length : UInt32*, link_name : UInt16*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Storage::FileSystem::FindFileNameHandle
+    C.FindFirstFileNameTransactedW(lpFileName, dwFlags, string_length, link_name, hTransaction)
+  end
+
+  def setVolumeLabelA(lpRootPathName : Win32cr::Foundation::PSTR, lpVolumeName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetVolumeLabelA(lpRootPathName, lpVolumeName)
+  end
+
+  def setVolumeLabelW(lpRootPathName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetVolumeLabelW(lpRootPathName, lpVolumeName)
+  end
+
+  def setFileBandwidthReservation(hFile : Win32cr::Foundation::HANDLE, nPeriodMilliseconds : UInt32, nBytesPerPeriod : UInt32, bDiscardable : Win32cr::Foundation::BOOL, lpTransferSize : UInt32*, lpNumOutstandingRequests : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetFileBandwidthReservation(hFile, nPeriodMilliseconds, nBytesPerPeriod, bDiscardable, lpTransferSize, lpNumOutstandingRequests)
+  end
+
+  def getFileBandwidthReservation(hFile : Win32cr::Foundation::HANDLE, lpPeriodMilliseconds : UInt32*, lpBytesPerPeriod : UInt32*, pDiscardable : Int32*, lpTransferSize : UInt32*, lpNumOutstandingRequests : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetFileBandwidthReservation(hFile, lpPeriodMilliseconds, lpBytesPerPeriod, pDiscardable, lpTransferSize, lpNumOutstandingRequests)
+  end
+
+  def readDirectoryChangesW(hDirectory : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nBufferLength : UInt32, bWatchSubtree : Win32cr::Foundation::BOOL, dwNotifyFilter : Win32cr::Storage::FileSystem::FILE_NOTIFY_CHANGE, lpBytesReturned : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::System::IO::LPOVERLAPPED_COMPLETION_ROUTINE) : Win32cr::Foundation::BOOL
+    C.ReadDirectoryChangesW(hDirectory, lpBuffer, nBufferLength, bWatchSubtree, dwNotifyFilter, lpBytesReturned, lpOverlapped, lpCompletionRoutine)
+  end
+
+  def readDirectoryChangesExW(hDirectory : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nBufferLength : UInt32, bWatchSubtree : Win32cr::Foundation::BOOL, dwNotifyFilter : Win32cr::Storage::FileSystem::FILE_NOTIFY_CHANGE, lpBytesReturned : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::System::IO::LPOVERLAPPED_COMPLETION_ROUTINE, read_directory_notify_information_class : Win32cr::Storage::FileSystem::READ_DIRECTORY_NOTIFY_INFORMATION_CLASS) : Win32cr::Foundation::BOOL
+    C.ReadDirectoryChangesExW(hDirectory, lpBuffer, nBufferLength, bWatchSubtree, dwNotifyFilter, lpBytesReturned, lpOverlapped, lpCompletionRoutine, read_directory_notify_information_class)
+  end
+
+  def findFirstVolumeA(lpszVolumeName : UInt8*, cchBufferLength : UInt32) : Win32cr::Storage::FileSystem::FindVolumeHandle
+    C.FindFirstVolumeA(lpszVolumeName, cchBufferLength)
+  end
+
+  def findNextVolumeA(hFindVolume : Win32cr::Storage::FileSystem::FindVolumeHandle, lpszVolumeName : UInt8*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    C.FindNextVolumeA(hFindVolume, lpszVolumeName, cchBufferLength)
+  end
+
+  def findFirstVolumeMountPointA(lpszRootPathName : Win32cr::Foundation::PSTR, lpszVolumeMountPoint : UInt8*, cchBufferLength : UInt32) : Win32cr::Storage::FileSystem::FindVolumeMointPointHandle
+    C.FindFirstVolumeMountPointA(lpszRootPathName, lpszVolumeMountPoint, cchBufferLength)
+  end
+
+  def findFirstVolumeMountPointW(lpszRootPathName : Win32cr::Foundation::PWSTR, lpszVolumeMountPoint : UInt16*, cchBufferLength : UInt32) : Win32cr::Storage::FileSystem::FindVolumeMointPointHandle
+    C.FindFirstVolumeMountPointW(lpszRootPathName, lpszVolumeMountPoint, cchBufferLength)
+  end
+
+  def findNextVolumeMountPointA(hFindVolumeMountPoint : Win32cr::Storage::FileSystem::FindVolumeMointPointHandle, lpszVolumeMountPoint : UInt8*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    C.FindNextVolumeMountPointA(hFindVolumeMountPoint, lpszVolumeMountPoint, cchBufferLength)
+  end
+
+  def findNextVolumeMountPointW(hFindVolumeMountPoint : Win32cr::Storage::FileSystem::FindVolumeMointPointHandle, lpszVolumeMountPoint : UInt16*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    C.FindNextVolumeMountPointW(hFindVolumeMountPoint, lpszVolumeMountPoint, cchBufferLength)
+  end
+
+  def findVolumeMountPointClose(hFindVolumeMountPoint : Win32cr::Storage::FileSystem::FindVolumeMointPointHandle) : Win32cr::Foundation::BOOL
+    C.FindVolumeMountPointClose(hFindVolumeMountPoint)
+  end
+
+  def setVolumeMountPointA(lpszVolumeMountPoint : Win32cr::Foundation::PSTR, lpszVolumeName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetVolumeMountPointA(lpszVolumeMountPoint, lpszVolumeName)
+  end
+
+  def setVolumeMountPointW(lpszVolumeMountPoint : Win32cr::Foundation::PWSTR, lpszVolumeName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetVolumeMountPointW(lpszVolumeMountPoint, lpszVolumeName)
+  end
+
+  def deleteVolumeMountPointA(lpszVolumeMountPoint : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.DeleteVolumeMountPointA(lpszVolumeMountPoint)
+  end
+
+  def getVolumeNameForVolumeMountPointA(lpszVolumeMountPoint : Win32cr::Foundation::PSTR, lpszVolumeName : UInt8*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    C.GetVolumeNameForVolumeMountPointA(lpszVolumeMountPoint, lpszVolumeName, cchBufferLength)
+  end
+
+  def getVolumePathNameA(lpszFileName : Win32cr::Foundation::PSTR, lpszVolumePathName : UInt8*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    C.GetVolumePathNameA(lpszFileName, lpszVolumePathName, cchBufferLength)
+  end
+
+  def getVolumePathNamesForVolumeNameA(lpszVolumeName : Win32cr::Foundation::PSTR, lpszVolumePathNames : UInt8*, cchBufferLength : UInt32, lpcchReturnLength : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetVolumePathNamesForVolumeNameA(lpszVolumeName, lpszVolumePathNames, cchBufferLength, lpcchReturnLength)
+  end
+
+  #def getFileInformationByHandleEx(hFile : Win32cr::Foundation::HANDLE, file_information_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_HANDLE_CLASS, lpFileInformation : Void*, dwBufferSize : UInt32) : Win32cr::Foundation::BOOL
+    #C.GetFileInformationByHandleEx(hFile, file_information_class, lpFileInformation, dwBufferSize)
+  #end
+
+  def openFileById(hVolumeHint : Win32cr::Foundation::HANDLE, lpFileId : Win32cr::Storage::FileSystem::FILE_ID_DESCRIPTOR*, dwDesiredAccess : Win32cr::Storage::FileSystem::FILE_ACCESS_FLAGS, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::HANDLE
+    C.OpenFileById(hVolumeHint, lpFileId, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwFlagsAndAttributes)
+  end
+
+  def createSymbolicLinkA(lpSymlinkFileName : Win32cr::Foundation::PSTR, lpTargetFileName : Win32cr::Foundation::PSTR, dwFlags : Win32cr::Storage::FileSystem::SYMBOLIC_LINK_FLAGS) : Win32cr::Foundation::BOOLEAN
+    C.CreateSymbolicLinkA(lpSymlinkFileName, lpTargetFileName, dwFlags)
+  end
+
+  #def createSymbolicLinkW(lpSymlinkFileName : Win32cr::Foundation::PWSTR, lpTargetFileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Storage::FileSystem::SYMBOLIC_LINK_FLAGS) : Win32cr::Foundation::BOOLEAN
+    #C.CreateSymbolicLinkW(lpSymlinkFileName, lpTargetFileName, dwFlags)
+  #end
+
+  def createSymbolicLinkTransactedA(lpSymlinkFileName : Win32cr::Foundation::PSTR, lpTargetFileName : Win32cr::Foundation::PSTR, dwFlags : Win32cr::Storage::FileSystem::SYMBOLIC_LINK_FLAGS, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOLEAN
+    C.CreateSymbolicLinkTransactedA(lpSymlinkFileName, lpTargetFileName, dwFlags, hTransaction)
+  end
+
+  def createSymbolicLinkTransactedW(lpSymlinkFileName : Win32cr::Foundation::PWSTR, lpTargetFileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Storage::FileSystem::SYMBOLIC_LINK_FLAGS, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOLEAN
+    C.CreateSymbolicLinkTransactedW(lpSymlinkFileName, lpTargetFileName, dwFlags, hTransaction)
+  end
+
+  def ntCreateFile(file_handle : Win32cr::Foundation::HANDLE*, desired_access : UInt32, object_attributes : Win32cr::System::WindowsProgramming::OBJECT_ATTRIBUTES*, io_status_block : Win32cr::System::WindowsProgramming::IO_STATUS_BLOCK*, allocation_size : Win32cr::Foundation::LARGE_INTEGER*, file_attributes : UInt32, share_access : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, create_disposition : Win32cr::Storage::FileSystem::NT_CREATE_FILE_DISPOSITION, create_options : UInt32, ea_buffer : Void*, ea_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.NtCreateFile(file_handle, desired_access, object_attributes, io_status_block, allocation_size, file_attributes, share_access, create_disposition, create_options, ea_buffer, ea_length)
+  end
+
   @[Link("kernel32")]
   @[Link("version")]
   @[Link("clfsw32")]
@@ -4151,855 +5796,1266 @@ module Win32cr::Storage::FileSystem
   @[Link("netapi32")]
   @[Link("ntdll")]
   lib C
+    # :nodoc:
     fun SearchPathW(lpPath : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR, lpExtension : Win32cr::Foundation::PWSTR, nBufferLength : UInt32, lpBuffer : UInt16*, lpFilePart : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun SearchPathA(lpPath : Win32cr::Foundation::PSTR, lpFileName : Win32cr::Foundation::PSTR, lpExtension : Win32cr::Foundation::PSTR, nBufferLength : UInt32, lpBuffer : UInt8*, lpFilePart : Win32cr::Foundation::PSTR*) : UInt32
 
+    # :nodoc:
     fun CompareFileTime(lpFileTime1 : Win32cr::Foundation::FILETIME*, lpFileTime2 : Win32cr::Foundation::FILETIME*) : Int32
 
+    # :nodoc:
     fun CreateDirectoryA(lpPathName : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun CreateDirectoryW(lpPathName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateFileA(lpFileName : Win32cr::Foundation::PSTR, dwDesiredAccess : Win32cr::Storage::FileSystem::FILE_ACCESS_FLAGS, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun CreateFileW(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : Win32cr::Storage::FileSystem::FILE_ACCESS_FLAGS, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun DefineDosDeviceW(dwFlags : Win32cr::Storage::FileSystem::DEFINE_DOS_DEVICE_FLAGS, lpDeviceName : Win32cr::Foundation::PWSTR, lpTargetPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteFileA(lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun DeleteFileW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteVolumeMountPointW(lpszVolumeMountPoint : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FileTimeToLocalFileTime(lpFileTime : Win32cr::Foundation::FILETIME*, lpLocalFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun FindClose(hFindFile : Win32cr::Storage::FileSystem::FindFileHandle) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindCloseChangeNotification(hChangeHandle : Win32cr::Storage::FileSystem::FindChangeNotificationHandle) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindFirstChangeNotificationA(lpPathName : Win32cr::Foundation::PSTR, bWatchSubtree : Win32cr::Foundation::BOOL, dwNotifyFilter : Win32cr::Storage::FileSystem::FILE_NOTIFY_CHANGE) : Win32cr::Storage::FileSystem::FindChangeNotificationHandle
 
+    # :nodoc:
     fun FindFirstChangeNotificationW(lpPathName : Win32cr::Foundation::PWSTR, bWatchSubtree : Win32cr::Foundation::BOOL, dwNotifyFilter : Win32cr::Storage::FileSystem::FILE_NOTIFY_CHANGE) : Win32cr::Storage::FileSystem::FindChangeNotificationHandle
 
+    # :nodoc:
     fun FindFirstFileA(lpFileName : Win32cr::Foundation::PSTR, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAA*) : Win32cr::Storage::FileSystem::FindFileHandle
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun FindFirstFileW(lpFileName : Win32cr::Foundation::PWSTR, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAW*) : Win32cr::Storage::FileSystem::FindFileHandle
 
+    # :nodoc:
     fun FindFirstFileExA(lpFileName : Win32cr::Foundation::PSTR, fInfoLevelId : Win32cr::Storage::FileSystem::FINDEX_INFO_LEVELS, lpFindFileData : Void*, fSearchOp : Win32cr::Storage::FileSystem::FINDEX_SEARCH_OPS, lpSearchFilter : Void*, dwAdditionalFlags : Win32cr::Storage::FileSystem::FIND_FIRST_EX_FLAGS) : Win32cr::Storage::FileSystem::FindFileHandle
 
+    # :nodoc:
     fun FindFirstFileExW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::FINDEX_INFO_LEVELS, lpFindFileData : Void*, fSearchOp : Win32cr::Storage::FileSystem::FINDEX_SEARCH_OPS, lpSearchFilter : Void*, dwAdditionalFlags : Win32cr::Storage::FileSystem::FIND_FIRST_EX_FLAGS) : Win32cr::Storage::FileSystem::FindFileHandle
 
+    # :nodoc:
     fun FindFirstVolumeW(lpszVolumeName : UInt16*, cchBufferLength : UInt32) : Win32cr::Storage::FileSystem::FindVolumeHandle
 
+    # :nodoc:
     fun FindNextChangeNotification(hChangeHandle : Win32cr::Storage::FileSystem::FindChangeNotificationHandle) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindNextFileA(hFindFile : Win32cr::Storage::FileSystem::FindFileHandle, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAA*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun FindNextFileW(hFindFile : Win32cr::Storage::FileSystem::FindFileHandle, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindNextVolumeW(hFindVolume : Win32cr::Storage::FileSystem::FindVolumeHandle, lpszVolumeName : UInt16*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindVolumeClose(hFindVolume : Win32cr::Storage::FileSystem::FindVolumeHandle) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun FlushFileBuffers(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDiskFreeSpaceA(lpRootPathName : Win32cr::Foundation::PSTR, lpSectorsPerCluster : UInt32*, lpBytesPerSector : UInt32*, lpNumberOfFreeClusters : UInt32*, lpTotalNumberOfClusters : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDiskFreeSpaceW(lpRootPathName : Win32cr::Foundation::PWSTR, lpSectorsPerCluster : UInt32*, lpBytesPerSector : UInt32*, lpNumberOfFreeClusters : UInt32*, lpTotalNumberOfClusters : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDiskFreeSpaceExA(lpDirectoryName : Win32cr::Foundation::PSTR, lpFreeBytesAvailableToCaller : Win32cr::Foundation::ULARGE_INTEGER*, lpTotalNumberOfBytes : Win32cr::Foundation::ULARGE_INTEGER*, lpTotalNumberOfFreeBytes : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDiskFreeSpaceExW(lpDirectoryName : Win32cr::Foundation::PWSTR, lpFreeBytesAvailableToCaller : Win32cr::Foundation::ULARGE_INTEGER*, lpTotalNumberOfBytes : Win32cr::Foundation::ULARGE_INTEGER*, lpTotalNumberOfFreeBytes : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDiskSpaceInformationA(rootPath : Win32cr::Foundation::PSTR, diskSpaceInfo : Win32cr::Storage::FileSystem::DISK_SPACE_INFORMATION*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetDiskSpaceInformationW(rootPath : Win32cr::Foundation::PWSTR, diskSpaceInfo : Win32cr::Storage::FileSystem::DISK_SPACE_INFORMATION*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetDriveTypeA(lpRootPathName : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun GetDriveTypeW(lpRootPathName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun GetFileAttributesA(lpFileName : Win32cr::Foundation::PSTR) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetFileAttributesW(lpFileName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun GetFileAttributesExA(lpFileName : Win32cr::Foundation::PSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetFileAttributesExW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetFileInformationByHandle(hFile : Win32cr::Foundation::HANDLE, lpFileInformation : Win32cr::Storage::FileSystem::BY_HANDLE_FILE_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetFileSize(hFile : Win32cr::Foundation::HANDLE, lpFileSizeHigh : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetFileSizeEx(hFile : Win32cr::Foundation::HANDLE, lpFileSize : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetFileType(hFile : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun GetFinalPathNameByHandleA(hFile : Win32cr::Foundation::HANDLE, lpszFilePath : UInt8*, cchFilePath : UInt32, dwFlags : Win32cr::Storage::FileSystem::FILE_NAME) : UInt32
 
+    # :nodoc:
     fun GetFinalPathNameByHandleW(hFile : Win32cr::Foundation::HANDLE, lpszFilePath : UInt16*, cchFilePath : UInt32, dwFlags : Win32cr::Storage::FileSystem::FILE_NAME) : UInt32
 
+    # :nodoc:
     fun GetFileTime(hFile : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpLastAccessTime : Win32cr::Foundation::FILETIME*, lpLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetFullPathNameW(lpFileName : Win32cr::Foundation::PWSTR, nBufferLength : UInt32, lpBuffer : UInt16*, lpFilePart : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun GetFullPathNameA(lpFileName : Win32cr::Foundation::PSTR, nBufferLength : UInt32, lpBuffer : UInt8*, lpFilePart : Win32cr::Foundation::PSTR*) : UInt32
 
+    # :nodoc:
     fun GetLogicalDrives : UInt32
 
+    # :nodoc:
     fun GetLogicalDriveStringsW(nBufferLength : UInt32, lpBuffer : UInt16*) : UInt32
 
+    # :nodoc:
     fun GetLongPathNameA(lpszShortPath : Win32cr::Foundation::PSTR, lpszLongPath : UInt8*, cchBuffer : UInt32) : UInt32
 
+    # :nodoc:
     fun GetLongPathNameW(lpszShortPath : Win32cr::Foundation::PWSTR, lpszLongPath : UInt16*, cchBuffer : UInt32) : UInt32
 
+    # :nodoc:
     fun AreShortNamesEnabled(handle : Win32cr::Foundation::HANDLE, enabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetShortPathNameW(lpszLongPath : Win32cr::Foundation::PWSTR, lpszShortPath : UInt16*, cchBuffer : UInt32) : UInt32
 
+    # :nodoc:
     fun GetTempFileNameW(lpPathName : Win32cr::Foundation::PWSTR, lpPrefixString : Win32cr::Foundation::PWSTR, uUnique : UInt32, lpTempFileName : UInt16*) : UInt32
 
+    # :nodoc:
     fun GetVolumeInformationByHandleW(hFile : Win32cr::Foundation::HANDLE, lpVolumeNameBuffer : UInt16*, nVolumeNameSize : UInt32, lpVolumeSerialNumber : UInt32*, lpMaximumComponentLength : UInt32*, lpFileSystemFlags : UInt32*, lpFileSystemNameBuffer : UInt16*, nFileSystemNameSize : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetVolumeInformationW(lpRootPathName : Win32cr::Foundation::PWSTR, lpVolumeNameBuffer : UInt16*, nVolumeNameSize : UInt32, lpVolumeSerialNumber : UInt32*, lpMaximumComponentLength : UInt32*, lpFileSystemFlags : UInt32*, lpFileSystemNameBuffer : UInt16*, nFileSystemNameSize : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetVolumePathNameW(lpszFileName : Win32cr::Foundation::PWSTR, lpszVolumePathName : UInt16*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LocalFileTimeToFileTime(lpLocalFileTime : Win32cr::Foundation::FILETIME*, lpFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LockFile(hFile : Win32cr::Foundation::HANDLE, dwFileOffsetLow : UInt32, dwFileOffsetHigh : UInt32, nNumberOfBytesToLockLow : UInt32, nNumberOfBytesToLockHigh : UInt32) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun LockFileEx(hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::Storage::FileSystem::LOCK_FILE_FLAGS, dwReserved : UInt32, nNumberOfBytesToLockLow : UInt32, nNumberOfBytesToLockHigh : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryDosDeviceW(lpDeviceName : Win32cr::Foundation::PWSTR, lpTargetPath : UInt16*, ucchMax : UInt32) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun ReadFile(hFile : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfBytesToRead : UInt32, lpNumberOfBytesRead : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReadFileEx(hFile : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfBytesToRead : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::System::IO::LPOVERLAPPED_COMPLETION_ROUTINE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReadFileScatter(hFile : Win32cr::Foundation::HANDLE, aSegmentArray : Win32cr::Storage::FileSystem::FILE_SEGMENT_ELEMENT*, nNumberOfBytesToRead : UInt32, lpReserved : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RemoveDirectoryA(lpPathName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun RemoveDirectoryW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SetEndOfFile(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetFileAttributesA(lpFileName : Win32cr::Foundation::PSTR, dwFileAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SetFileAttributesW(lpFileName : Win32cr::Foundation::PWSTR, dwFileAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SetFileInformationByHandle(hFile : Win32cr::Foundation::HANDLE, file_information_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_HANDLE_CLASS, lpFileInformation : Void*, dwBufferSize : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetFilePointer(hFile : Win32cr::Foundation::HANDLE, lDistanceToMove : Int32, lpDistanceToMoveHigh : Int32*, dwMoveMethod : Win32cr::Storage::FileSystem::SET_FILE_POINTER_MOVE_METHOD) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SetFilePointerEx(hFile : Win32cr::Foundation::HANDLE, liDistanceToMove : Win32cr::Foundation::LARGE_INTEGER, lpNewFilePointer : Win32cr::Foundation::LARGE_INTEGER*, dwMoveMethod : Win32cr::Storage::FileSystem::SET_FILE_POINTER_MOVE_METHOD) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SetFileTime(hFile : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpLastAccessTime : Win32cr::Foundation::FILETIME*, lpLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetFileValidData(hFile : Win32cr::Foundation::HANDLE, valid_data_length : Int64) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnlockFile(hFile : Win32cr::Foundation::HANDLE, dwFileOffsetLow : UInt32, dwFileOffsetHigh : UInt32, nNumberOfBytesToUnlockLow : UInt32, nNumberOfBytesToUnlockHigh : UInt32) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun UnlockFileEx(hFile : Win32cr::Foundation::HANDLE, dwReserved : UInt32, nNumberOfBytesToUnlockLow : UInt32, nNumberOfBytesToUnlockHigh : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WriteFile(hFile : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfBytesToWrite : UInt32, lpNumberOfBytesWritten : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WriteFileEx(hFile : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfBytesToWrite : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::System::IO::LPOVERLAPPED_COMPLETION_ROUTINE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WriteFileGather(hFile : Win32cr::Foundation::HANDLE, aSegmentArray : Win32cr::Storage::FileSystem::FILE_SEGMENT_ELEMENT*, nNumberOfBytesToWrite : UInt32, lpReserved : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetTempPathW(nBufferLength : UInt32, lpBuffer : UInt16*) : UInt32
 
+    # :nodoc:
     fun GetVolumeNameForVolumeMountPointW(lpszVolumeMountPoint : Win32cr::Foundation::PWSTR, lpszVolumeName : UInt16*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetVolumePathNamesForVolumeNameW(lpszVolumeName : Win32cr::Foundation::PWSTR, lpszVolumePathNames : UInt16*, cchBufferLength : UInt32, lpcchReturnLength : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateFile2(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : Win32cr::Storage::FileSystem::FILE_ACCESS_FLAGS, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, pCreateExParams : Win32cr::Storage::FileSystem::CREATEFILE2_EXTENDED_PARAMETERS*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun SetFileIoOverlappedRange(file_handle : Win32cr::Foundation::HANDLE, overlapped_range_start : UInt8*, length : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCompressedFileSizeA(lpFileName : Win32cr::Foundation::PSTR, lpFileSizeHigh : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetCompressedFileSizeW(lpFileName : Win32cr::Foundation::PWSTR, lpFileSizeHigh : UInt32*) : UInt32
 
+    # :nodoc:
     fun FindFirstStreamW(lpFileName : Win32cr::Foundation::PWSTR, info_level : Win32cr::Storage::FileSystem::STREAM_INFO_LEVELS, lpFindStreamData : Void*, dwFlags : UInt32) : Win32cr::Storage::FileSystem::FindStreamHandle
 
+    # :nodoc:
     fun FindNextStreamW(hFindStream : Win32cr::Storage::FileSystem::FindStreamHandle, lpFindStreamData : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AreFileApisANSI : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTempPathA(nBufferLength : UInt32, lpBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun FindFirstFileNameW(lpFileName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, string_length : UInt32*, link_name : UInt16*) : Win32cr::Storage::FileSystem::FindFileNameHandle
 
+    # :nodoc:
     fun FindNextFileNameW(hFindStream : Win32cr::Storage::FileSystem::FindFileNameHandle, string_length : UInt32*, link_name : UInt16*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetVolumeInformationA(lpRootPathName : Win32cr::Foundation::PSTR, lpVolumeNameBuffer : UInt8*, nVolumeNameSize : UInt32, lpVolumeSerialNumber : UInt32*, lpMaximumComponentLength : UInt32*, lpFileSystemFlags : UInt32*, lpFileSystemNameBuffer : UInt8*, nFileSystemNameSize : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTempFileNameA(lpPathName : Win32cr::Foundation::PSTR, lpPrefixString : Win32cr::Foundation::PSTR, uUnique : UInt32, lpTempFileName : UInt8*) : UInt32
 
+    # :nodoc:
     fun SetFileApisToOEM : Void
 
+    # :nodoc:
     fun SetFileApisToANSI : Void
 
+    # :nodoc:
     fun GetTempPath2W(buffer_length : UInt32, buffer : UInt16*) : UInt32
 
+    # :nodoc:
     fun GetTempPath2A(buffer_length : UInt32, buffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun CopyFileFromAppW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, bFailIfExists : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateDirectoryFromAppW(lpPathName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateFileFromAppW(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, dwShareMode : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : UInt32, dwFlagsAndAttributes : UInt32, hTemplateFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateFile2FromAppW(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, dwShareMode : UInt32, dwCreationDisposition : UInt32, pCreateExParams : Win32cr::Storage::FileSystem::CREATEFILE2_EXTENDED_PARAMETERS*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun DeleteFileFromAppW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindFirstFileExFromAppW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::FINDEX_INFO_LEVELS, lpFindFileData : Void*, fSearchOp : Win32cr::Storage::FileSystem::FINDEX_SEARCH_OPS, lpSearchFilter : Void*, dwAdditionalFlags : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun GetFileAttributesExFromAppW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MoveFileFromAppW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RemoveDirectoryFromAppW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReplaceFileFromAppW(lpReplacedFileName : Win32cr::Foundation::PWSTR, lpReplacementFileName : Win32cr::Foundation::PWSTR, lpBackupFileName : Win32cr::Foundation::PWSTR, dwReplaceFlags : UInt32, lpExclude : Void*, lpReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetFileAttributesFromAppW(lpFileName : Win32cr::Foundation::PWSTR, dwFileAttributes : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun VerFindFileA(uFlags : Win32cr::Storage::FileSystem::VER_FIND_FILE_FLAGS, szFileName : Win32cr::Foundation::PSTR, szWinDir : Win32cr::Foundation::PSTR, szAppDir : Win32cr::Foundation::PSTR, szCurDir : UInt8*, puCurDirLen : UInt32*, szDestDir : UInt8*, puDestDirLen : UInt32*) : Win32cr::Storage::FileSystem::VER_FIND_FILE_STATUS
 
+    # :nodoc:
     fun VerFindFileW(uFlags : Win32cr::Storage::FileSystem::VER_FIND_FILE_FLAGS, szFileName : Win32cr::Foundation::PWSTR, szWinDir : Win32cr::Foundation::PWSTR, szAppDir : Win32cr::Foundation::PWSTR, szCurDir : UInt16*, puCurDirLen : UInt32*, szDestDir : UInt16*, puDestDirLen : UInt32*) : Win32cr::Storage::FileSystem::VER_FIND_FILE_STATUS
 
+    # :nodoc:
     fun VerInstallFileA(uFlags : Win32cr::Storage::FileSystem::VER_INSTALL_FILE_FLAGS, szSrcFileName : Win32cr::Foundation::PSTR, szDestFileName : Win32cr::Foundation::PSTR, szSrcDir : Win32cr::Foundation::PSTR, szDestDir : Win32cr::Foundation::PSTR, szCurDir : Win32cr::Foundation::PSTR, szTmpFile : UInt8*, puTmpFileLen : UInt32*) : Win32cr::Storage::FileSystem::VER_INSTALL_FILE_STATUS
 
+    # :nodoc:
     fun VerInstallFileW(uFlags : Win32cr::Storage::FileSystem::VER_INSTALL_FILE_FLAGS, szSrcFileName : Win32cr::Foundation::PWSTR, szDestFileName : Win32cr::Foundation::PWSTR, szSrcDir : Win32cr::Foundation::PWSTR, szDestDir : Win32cr::Foundation::PWSTR, szCurDir : Win32cr::Foundation::PWSTR, szTmpFile : UInt16*, puTmpFileLen : UInt32*) : Win32cr::Storage::FileSystem::VER_INSTALL_FILE_STATUS
 
+    # :nodoc:
     fun GetFileVersionInfoSizeA(lptstrFilename : Win32cr::Foundation::PSTR, lpdwHandle : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetFileVersionInfoSizeW(lptstrFilename : Win32cr::Foundation::PWSTR, lpdwHandle : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetFileVersionInfoA(lptstrFilename : Win32cr::Foundation::PSTR, dwHandle : UInt32, dwLen : UInt32, lpData : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetFileVersionInfoW(lptstrFilename : Win32cr::Foundation::PWSTR, dwHandle : UInt32, dwLen : UInt32, lpData : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetFileVersionInfoSizeExA(dwFlags : Win32cr::Storage::FileSystem::GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename : Win32cr::Foundation::PSTR, lpdwHandle : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetFileVersionInfoSizeExW(dwFlags : Win32cr::Storage::FileSystem::GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename : Win32cr::Foundation::PWSTR, lpdwHandle : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetFileVersionInfoExA(dwFlags : Win32cr::Storage::FileSystem::GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename : Win32cr::Foundation::PSTR, dwHandle : UInt32, dwLen : UInt32, lpData : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetFileVersionInfoExW(dwFlags : Win32cr::Storage::FileSystem::GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename : Win32cr::Foundation::PWSTR, dwHandle : UInt32, dwLen : UInt32, lpData : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun VerLanguageNameA(wLang : UInt32, szLang : UInt8*, cchLang : UInt32) : UInt32
 
+    # :nodoc:
     fun VerLanguageNameW(wLang : UInt32, szLang : UInt16*, cchLang : UInt32) : UInt32
 
+    # :nodoc:
     fun VerQueryValueA(pBlock : Void*, lpSubBlock : Win32cr::Foundation::PSTR, lplpBuffer : Void**, puLen : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun VerQueryValueW(pBlock : Void*, lpSubBlock : Win32cr::Foundation::PWSTR, lplpBuffer : Void**, puLen : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LsnEqual(plsn1 : Win32cr::Storage::FileSystem::CLS_LSN*, plsn2 : Win32cr::Storage::FileSystem::CLS_LSN*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun LsnLess(plsn1 : Win32cr::Storage::FileSystem::CLS_LSN*, plsn2 : Win32cr::Storage::FileSystem::CLS_LSN*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun LsnGreater(plsn1 : Win32cr::Storage::FileSystem::CLS_LSN*, plsn2 : Win32cr::Storage::FileSystem::CLS_LSN*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun LsnNull(plsn : Win32cr::Storage::FileSystem::CLS_LSN*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun LsnContainer(plsn : Win32cr::Storage::FileSystem::CLS_LSN*) : UInt32
 
+    # :nodoc:
     fun LsnCreate(cidContainer : UInt32, offBlock : UInt32, cRecord : UInt32) : Win32cr::Storage::FileSystem::CLS_LSN
 
+    # :nodoc:
     fun LsnBlockOffset(plsn : Win32cr::Storage::FileSystem::CLS_LSN*) : UInt32
 
+    # :nodoc:
     fun LsnRecordSequence(plsn : Win32cr::Storage::FileSystem::CLS_LSN*) : UInt32
 
+    # :nodoc:
     fun LsnInvalid(plsn : Win32cr::Storage::FileSystem::CLS_LSN*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun LsnIncrement(plsn : Win32cr::Storage::FileSystem::CLS_LSN*) : Win32cr::Storage::FileSystem::CLS_LSN
 
+    # :nodoc:
     fun CreateLogFile(pszLogFileName : Win32cr::Foundation::PWSTR, fDesiredAccess : Win32cr::Storage::FileSystem::FILE_ACCESS_FLAGS, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, psaLogFile : Win32cr::Security::SECURITY_ATTRIBUTES*, fCreateDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, fFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun DeleteLogByHandle(hLog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteLogFile(pszLogFileName : Win32cr::Foundation::PWSTR, pvReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddLogContainer(hLog : Win32cr::Foundation::HANDLE, pcbContainer : UInt64*, pwszContainerPath : Win32cr::Foundation::PWSTR, pReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddLogContainerSet(hLog : Win32cr::Foundation::HANDLE, cContainer : UInt16, pcbContainer : UInt64*, rgwszContainerPath : Win32cr::Foundation::PWSTR*, pReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RemoveLogContainer(hLog : Win32cr::Foundation::HANDLE, pwszContainerPath : Win32cr::Foundation::PWSTR, fForce : Win32cr::Foundation::BOOL, pReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RemoveLogContainerSet(hLog : Win32cr::Foundation::HANDLE, cContainer : UInt16, rgwszContainerPath : Win32cr::Foundation::PWSTR*, fForce : Win32cr::Foundation::BOOL, pReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetLogArchiveTail(hLog : Win32cr::Foundation::HANDLE, plsnArchiveTail : Win32cr::Storage::FileSystem::CLS_LSN*, pReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetEndOfLog(hLog : Win32cr::Foundation::HANDLE, plsnEnd : Win32cr::Storage::FileSystem::CLS_LSN*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TruncateLog(pvMarshal : Void*, plsnEnd : Win32cr::Storage::FileSystem::CLS_LSN*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateLogContainerScanContext(hLog : Win32cr::Foundation::HANDLE, cFromContainer : UInt32, cContainers : UInt32, eScanMode : UInt8, pcxScan : Win32cr::Storage::FileSystem::CLS_SCAN_CONTEXT*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ScanLogContainers(pcxScan : Win32cr::Storage::FileSystem::CLS_SCAN_CONTEXT*, eScanMode : UInt8, pReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AlignReservedLog(pvMarshal : Void*, cReservedRecords : UInt32, rgcbReservation : Int64*, pcbAlignReservation : Int64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AllocReservedLog(pvMarshal : Void*, cReservedRecords : UInt32, pcbAdjustment : Int64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FreeReservedLog(pvMarshal : Void*, cReservedRecords : UInt32, pcbAdjustment : Int64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetLogFileInformation(hLog : Win32cr::Foundation::HANDLE, pinfoBuffer : Win32cr::Storage::FileSystem::CLS_INFORMATION*, cbBuffer : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetLogArchiveMode(hLog : Win32cr::Foundation::HANDLE, eMode : Win32cr::Storage::FileSystem::CLFS_LOG_ARCHIVE_MODE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReadLogRestartArea(pvMarshal : Void*, ppvRestartBuffer : Void**, pcbRestartBuffer : UInt32*, plsn : Win32cr::Storage::FileSystem::CLS_LSN*, ppvContext : Void**, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReadPreviousLogRestartArea(pvReadContext : Void*, ppvRestartBuffer : Void**, pcbRestartBuffer : UInt32*, plsnRestart : Win32cr::Storage::FileSystem::CLS_LSN*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WriteLogRestartArea(pvMarshal : Void*, pvRestartBuffer : Void*, cbRestartBuffer : UInt32, plsnBase : Win32cr::Storage::FileSystem::CLS_LSN*, fFlags : Win32cr::Storage::FileSystem::CLFS_FLAG, pcbWritten : UInt32*, plsnNext : Win32cr::Storage::FileSystem::CLS_LSN*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetLogReservationInfo(pvMarshal : Void*, pcbRecordNumber : UInt32*, pcbUserReservation : Int64*, pcbCommitReservation : Int64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AdvanceLogBase(pvMarshal : Void*, plsnBase : Win32cr::Storage::FileSystem::CLS_LSN*, fFlags : UInt32, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CloseAndResetLogFile(hLog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateLogMarshallingArea(hLog : Win32cr::Foundation::HANDLE, pfnAllocBuffer : Win32cr::Storage::FileSystem::CLFS_BLOCK_ALLOCATION, pfnFreeBuffer : Win32cr::Storage::FileSystem::CLFS_BLOCK_DEALLOCATION, pvBlockAllocContext : Void*, cbMarshallingBuffer : UInt32, cMaxWriteBuffers : UInt32, cMaxReadBuffers : UInt32, ppvMarshal : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteLogMarshallingArea(pvMarshal : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReserveAndAppendLog(pvMarshal : Void*, rgWriteEntries : Win32cr::Storage::FileSystem::CLS_WRITE_ENTRY*, cWriteEntries : UInt32, plsnUndoNext : Win32cr::Storage::FileSystem::CLS_LSN*, plsnPrevious : Win32cr::Storage::FileSystem::CLS_LSN*, cReserveRecords : UInt32, rgcbReservation : Int64*, fFlags : Win32cr::Storage::FileSystem::CLFS_FLAG, plsn : Win32cr::Storage::FileSystem::CLS_LSN*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReserveAndAppendLogAligned(pvMarshal : Void*, rgWriteEntries : Win32cr::Storage::FileSystem::CLS_WRITE_ENTRY*, cWriteEntries : UInt32, cbEntryAlignment : UInt32, plsnUndoNext : Win32cr::Storage::FileSystem::CLS_LSN*, plsnPrevious : Win32cr::Storage::FileSystem::CLS_LSN*, cReserveRecords : UInt32, rgcbReservation : Int64*, fFlags : Win32cr::Storage::FileSystem::CLFS_FLAG, plsn : Win32cr::Storage::FileSystem::CLS_LSN*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlushLogBuffers(pvMarshal : Void*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlushLogToLsn(pvMarshalContext : Void*, plsnFlush : Win32cr::Storage::FileSystem::CLS_LSN*, plsnLastFlushed : Win32cr::Storage::FileSystem::CLS_LSN*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReadLogRecord(pvMarshal : Void*, plsnFirst : Win32cr::Storage::FileSystem::CLS_LSN*, eContextMode : Win32cr::Storage::FileSystem::CLFS_CONTEXT_MODE, ppvReadBuffer : Void**, pcbReadBuffer : UInt32*, peRecordType : UInt8*, plsnUndoNext : Win32cr::Storage::FileSystem::CLS_LSN*, plsnPrevious : Win32cr::Storage::FileSystem::CLS_LSN*, ppvReadContext : Void**, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReadNextLogRecord(pvReadContext : Void*, ppvBuffer : Void**, pcbBuffer : UInt32*, peRecordType : UInt8*, plsnUser : Win32cr::Storage::FileSystem::CLS_LSN*, plsnUndoNext : Win32cr::Storage::FileSystem::CLS_LSN*, plsnPrevious : Win32cr::Storage::FileSystem::CLS_LSN*, plsnRecord : Win32cr::Storage::FileSystem::CLS_LSN*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TerminateReadLog(pvCursorContext : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PrepareLogArchive(hLog : Win32cr::Foundation::HANDLE, pszBaseLogFileName : UInt16*, cLen : UInt32, plsnLow : Win32cr::Storage::FileSystem::CLS_LSN*, plsnHigh : Win32cr::Storage::FileSystem::CLS_LSN*, pcActualLength : UInt32*, poffBaseLogFileData : UInt64*, pcbBaseLogFileLength : UInt64*, plsnBase : Win32cr::Storage::FileSystem::CLS_LSN*, plsnLast : Win32cr::Storage::FileSystem::CLS_LSN*, plsnCurrentArchiveTail : Win32cr::Storage::FileSystem::CLS_LSN*, ppvArchiveContext : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReadLogArchiveMetadata(pvArchiveContext : Void*, cbOffset : UInt32, cbBytesToRead : UInt32, pbReadBuffer : UInt8*, pcbBytesRead : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetNextLogArchiveExtent(pvArchiveContext : Void*, rgadExtent : Win32cr::Storage::FileSystem::CLS_ARCHIVE_DESCRIPTOR*, cDescriptors : UInt32, pcDescriptorsReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TerminateLogArchive(pvArchiveContext : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ValidateLog(pszLogFileName : Win32cr::Foundation::PWSTR, psaLogFile : Win32cr::Security::SECURITY_ATTRIBUTES*, pinfoBuffer : Win32cr::Storage::FileSystem::CLS_INFORMATION*, pcbBuffer : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetLogContainerName(hLog : Win32cr::Foundation::HANDLE, cidLogicalContainer : UInt32, pwstrContainerName : Win32cr::Foundation::PWSTR, cLenContainerName : UInt32, pcActualLenContainerName : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetLogIoStatistics(hLog : Win32cr::Foundation::HANDLE, pvStatsBuffer : Void*, cbStatsBuffer : UInt32, eStatsClass : Win32cr::Storage::FileSystem::CLFS_IOSTATS_CLASS, pcbStatsWritten : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterManageableLogClient(hLog : Win32cr::Foundation::HANDLE, pCallbacks : Win32cr::Storage::FileSystem::LOG_MANAGEMENT_CALLBACKS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeregisterManageableLogClient(hLog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReadLogNotification(hLog : Win32cr::Foundation::HANDLE, pNotification : Win32cr::Storage::FileSystem::CLFS_MGMT_NOTIFICATION*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InstallLogPolicy(hLog : Win32cr::Foundation::HANDLE, pPolicy : Win32cr::Storage::FileSystem::CLFS_MGMT_POLICY*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RemoveLogPolicy(hLog : Win32cr::Foundation::HANDLE, ePolicyType : Win32cr::Storage::FileSystem::CLFS_MGMT_POLICY_TYPE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryLogPolicy(hLog : Win32cr::Foundation::HANDLE, ePolicyType : Win32cr::Storage::FileSystem::CLFS_MGMT_POLICY_TYPE, pPolicyBuffer : Win32cr::Storage::FileSystem::CLFS_MGMT_POLICY*, pcbPolicyBuffer : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetLogFileSizeWithPolicy(hLog : Win32cr::Foundation::HANDLE, pDesiredSize : UInt64*, pResultingSize : UInt64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun HandleLogFull(hLog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LogTailAdvanceFailure(hLog : Win32cr::Foundation::HANDLE, dwReason : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterForLogWriteNotification(hLog : Win32cr::Foundation::HANDLE, cbThreshold : UInt32, fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryUsersOnEncryptedFile(lpFileName : Win32cr::Foundation::PWSTR, pUsers : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_HASH_LIST**) : UInt32
 
+    # :nodoc:
     fun QueryRecoveryAgentsOnEncryptedFile(lpFileName : Win32cr::Foundation::PWSTR, pRecoveryAgents : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_HASH_LIST**) : UInt32
 
+    # :nodoc:
     fun RemoveUsersFromEncryptedFile(lpFileName : Win32cr::Foundation::PWSTR, pHashes : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_HASH_LIST*) : UInt32
 
+    # :nodoc:
     fun AddUsersToEncryptedFile(lpFileName : Win32cr::Foundation::PWSTR, pEncryptionCertificates : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_LIST*) : UInt32
 
+    # :nodoc:
     fun SetUserFileEncryptionKey(pEncryptionCertificate : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE*) : UInt32
 
+    # :nodoc:
     fun SetUserFileEncryptionKeyEx(pEncryptionCertificate : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE*, dwCapabilities : UInt32, dwFlags : UInt32, pvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun FreeEncryptionCertificateHashList(pUsers : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_HASH_LIST*) : Void
 
+    # :nodoc:
     fun EncryptionDisable(dir_path : Win32cr::Foundation::PWSTR, disable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DuplicateEncryptionInfoFile(src_file_name : Win32cr::Foundation::PWSTR, dst_file_name : Win32cr::Foundation::PWSTR, dwCreationDistribution : UInt32, dwAttributes : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : UInt32
 
+    # :nodoc:
     fun GetEncryptedFileMetadata(lpFileName : Win32cr::Foundation::PWSTR, pcbMetadata : UInt32*, ppbMetadata : UInt8**) : UInt32
 
+    # :nodoc:
     fun SetEncryptedFileMetadata(lpFileName : Win32cr::Foundation::PWSTR, pbOldMetadata : UInt8*, pbNewMetadata : UInt8*, pOwnerHash : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_HASH*, dwOperation : UInt32, pCertificatesAdded : Win32cr::Storage::FileSystem::ENCRYPTION_CERTIFICATE_HASH_LIST*) : UInt32
 
+    # :nodoc:
     fun FreeEncryptedFileMetadata(pbMetadata : UInt8*) : Void
 
+    # :nodoc:
     fun LZStart : Int32
 
+    # :nodoc:
     fun LZDone : Void
 
+    # :nodoc:
     fun CopyLZFile(hfSource : Int32, hfDest : Int32) : Int32
 
+    # :nodoc:
     fun LZCopy(hfSource : Int32, hfDest : Int32) : Int32
 
+    # :nodoc:
     fun LZInit(hfSource : Int32) : Int32
 
+    # :nodoc:
     fun GetExpandedNameA(lpszSource : Win32cr::Foundation::PSTR, lpszBuffer : UInt8*) : Int32
 
+    # :nodoc:
     fun GetExpandedNameW(lpszSource : Win32cr::Foundation::PWSTR, lpszBuffer : UInt16*) : Int32
 
+    # :nodoc:
     fun LZOpenFileA(lpFileName : Win32cr::Foundation::PSTR, lpReOpenBuf : Win32cr::Storage::FileSystem::OFSTRUCT*, wStyle : Win32cr::Storage::FileSystem::LZOPENFILE_STYLE) : Int32
 
+    # :nodoc:
     fun LZOpenFileW(lpFileName : Win32cr::Foundation::PWSTR, lpReOpenBuf : Win32cr::Storage::FileSystem::OFSTRUCT*, wStyle : Win32cr::Storage::FileSystem::LZOPENFILE_STYLE) : Int32
 
+    # :nodoc:
     fun LZSeek(hFile : Int32, lOffset : Int32, iOrigin : Int32) : Int32
 
+    # :nodoc:
     fun LZRead(hFile : Int32, lpBuffer : Win32cr::Foundation::PSTR, cbRead : Int32) : Int32
 
+    # :nodoc:
     fun LZClose(hFile : Int32) : Void
 
+    # :nodoc:
     fun WofShouldCompressBinaries(volume : Win32cr::Foundation::PWSTR, algorithm : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WofGetDriverVersion(file_or_volume_handle : Win32cr::Foundation::HANDLE, provider : UInt32, wof_version : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WofSetFileDataLocation(file_handle : Win32cr::Foundation::HANDLE, provider : UInt32, external_file_info : Void*, length : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WofIsExternalFile(file_path : Win32cr::Foundation::PWSTR, is_external_file : Win32cr::Foundation::BOOL*, provider : UInt32*, external_file_info : Void*, buffer_length : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WofEnumEntries(volume_name : Win32cr::Foundation::PWSTR, provider : UInt32, enum_proc : Win32cr::Storage::FileSystem::WofEnumEntryProc, user_data : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WofWimAddEntry(volume_name : Win32cr::Foundation::PWSTR, wim_path : Win32cr::Foundation::PWSTR, wim_type : UInt32, wim_index : UInt32, data_source_id : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WofWimEnumFiles(volume_name : Win32cr::Foundation::PWSTR, data_source_id : Win32cr::Foundation::LARGE_INTEGER, enum_proc : Win32cr::Storage::FileSystem::WofEnumFilesProc, user_data : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WofWimSuspendEntry(volume_name : Win32cr::Foundation::PWSTR, data_source_id : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WofWimRemoveEntry(volume_name : Win32cr::Foundation::PWSTR, data_source_id : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WofWimUpdateEntry(volume_name : Win32cr::Foundation::PWSTR, data_source_id : Win32cr::Foundation::LARGE_INTEGER, new_wim_path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WofFileEnumFiles(volume_name : Win32cr::Foundation::PWSTR, algorithm : UInt32, enum_proc : Win32cr::Storage::FileSystem::WofEnumFilesProc, user_data : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TxfLogCreateFileReadContext(log_path : Win32cr::Foundation::PWSTR, beginning_lsn : Win32cr::Storage::FileSystem::CLS_LSN, ending_lsn : Win32cr::Storage::FileSystem::CLS_LSN, txf_file_id : Win32cr::Storage::FileSystem::TXF_ID*, txf_log_context : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TxfLogCreateRangeReadContext(log_path : Win32cr::Foundation::PWSTR, beginning_lsn : Win32cr::Storage::FileSystem::CLS_LSN, ending_lsn : Win32cr::Storage::FileSystem::CLS_LSN, beginning_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*, ending_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*, record_type_mask : UInt32, txf_log_context : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TxfLogDestroyReadContext(txf_log_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TxfLogReadRecords(txf_log_context : Void*, buffer_length : UInt32, buffer : Void*, bytes_used : UInt32*, record_count : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TxfReadMetadataInfo(file_handle : Win32cr::Foundation::HANDLE, txf_file_id : Win32cr::Storage::FileSystem::TXF_ID*, last_lsn : Win32cr::Storage::FileSystem::CLS_LSN*, transaction_state : UInt32*, locking_transaction : LibC::GUID*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TxfLogRecordGetFileName(record_buffer : Void*, record_buffer_length_in_bytes : UInt32, name_buffer : Win32cr::Foundation::PWSTR, name_buffer_length_in_bytes : UInt32*, txf_id : Win32cr::Storage::FileSystem::TXF_ID*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TxfLogRecordGetGenericType(record_buffer : Void*, record_buffer_length_in_bytes : UInt32, generic_type : UInt32*, virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TxfSetThreadMiniVersionForCreate(mini_version : UInt16) : Void
 
+    # :nodoc:
     fun TxfGetThreadMiniVersionForCreate(mini_version : UInt16*) : Void
 
+    # :nodoc:
     fun CreateTransaction(lpTransactionAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, uow : LibC::GUID*, create_options : UInt32, isolation_level : UInt32, isolation_flags : UInt32, timeout : UInt32, description : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun OpenTransaction(dwDesiredAccess : UInt32, transaction_id : LibC::GUID*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CommitTransaction(transaction_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CommitTransactionAsync(transaction_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RollbackTransaction(transaction_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RollbackTransactionAsync(transaction_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTransactionId(transaction_handle : Win32cr::Foundation::HANDLE, transaction_id : LibC::GUID*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTransactionInformation(transaction_handle : Win32cr::Foundation::HANDLE, outcome : UInt32*, isolation_level : UInt32*, isolation_flags : UInt32*, timeout : UInt32*, buffer_length : UInt32, description : UInt16*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetTransactionInformation(transaction_handle : Win32cr::Foundation::HANDLE, isolation_level : UInt32, isolation_flags : UInt32, timeout : UInt32, description : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateTransactionManager(lpTransactionAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, log_file_name : Win32cr::Foundation::PWSTR, create_options : UInt32, commit_strength : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun OpenTransactionManager(log_file_name : Win32cr::Foundation::PWSTR, desired_access : UInt32, open_options : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun OpenTransactionManagerById(transaction_manager_id : LibC::GUID*, desired_access : UInt32, open_options : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun RenameTransactionManager(log_file_name : Win32cr::Foundation::PWSTR, existing_transaction_manager_guid : LibC::GUID*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RollforwardTransactionManager(transaction_manager_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RecoverTransactionManager(transaction_manager_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCurrentClockTransactionManager(transaction_manager_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTransactionManagerId(transaction_manager_handle : Win32cr::Foundation::HANDLE, transaction_manager_id : LibC::GUID*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateResourceManager(lpResourceManagerAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, resource_manager_id : LibC::GUID*, create_options : UInt32, tm_handle : Win32cr::Foundation::HANDLE, description : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun OpenResourceManager(dwDesiredAccess : UInt32, tm_handle : Win32cr::Foundation::HANDLE, resource_manager_id : LibC::GUID*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun RecoverResourceManager(resource_manager_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetNotificationResourceManager(resource_manager_handle : Win32cr::Foundation::HANDLE, transaction_notification : Win32cr::Storage::FileSystem::TRANSACTION_NOTIFICATION*, notification_length : UInt32, dwMilliseconds : UInt32, return_length : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetNotificationResourceManagerAsync(resource_manager_handle : Win32cr::Foundation::HANDLE, transaction_notification : Win32cr::Storage::FileSystem::TRANSACTION_NOTIFICATION*, transaction_notification_length : UInt32, return_length : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetResourceManagerCompletionPort(resource_manager_handle : Win32cr::Foundation::HANDLE, io_completion_port_handle : Win32cr::Foundation::HANDLE, completion_key : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateEnlistment(lpEnlistmentAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, resource_manager_handle : Win32cr::Foundation::HANDLE, transaction_handle : Win32cr::Foundation::HANDLE, notification_mask : UInt32, create_options : UInt32, enlistment_key : Void*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun OpenEnlistment(dwDesiredAccess : UInt32, resource_manager_handle : Win32cr::Foundation::HANDLE, enlistment_id : LibC::GUID*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun RecoverEnlistment(enlistment_handle : Win32cr::Foundation::HANDLE, enlistment_key : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetEnlistmentRecoveryInformation(enlistment_handle : Win32cr::Foundation::HANDLE, buffer_size : UInt32, buffer : Void*, buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetEnlistmentId(enlistment_handle : Win32cr::Foundation::HANDLE, enlistment_id : LibC::GUID*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetEnlistmentRecoveryInformation(enlistment_handle : Win32cr::Foundation::HANDLE, buffer_size : UInt32, buffer : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PrepareEnlistment(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PrePrepareEnlistment(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CommitEnlistment(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RollbackEnlistment(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PrePrepareComplete(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PrepareComplete(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReadOnlyEnlistment(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CommitComplete(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RollbackComplete(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SinglePhaseReject(enlistment_handle : Win32cr::Foundation::HANDLE, tm_virtual_clock : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun NetShareAdd(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
 
+    # :nodoc:
     fun NetShareEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
 
+    # :nodoc:
     fun NetShareEnumSticky(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
 
+    # :nodoc:
     fun NetShareGetInfo(servername : Win32cr::Foundation::PWSTR, netname : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
 
+    # :nodoc:
     fun NetShareSetInfo(servername : Win32cr::Foundation::PWSTR, netname : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
 
+    # :nodoc:
     fun NetShareDel(servername : Win32cr::Foundation::PWSTR, netname : Win32cr::Foundation::PWSTR, reserved : UInt32) : UInt32
 
+    # :nodoc:
     fun NetShareDelSticky(servername : Win32cr::Foundation::PWSTR, netname : Win32cr::Foundation::PWSTR, reserved : UInt32) : UInt32
 
+    # :nodoc:
     fun NetShareCheck(servername : Win32cr::Foundation::PWSTR, device : Win32cr::Foundation::PWSTR, type__ : UInt32*) : UInt32
 
+    # :nodoc:
     fun NetShareDelEx(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*) : UInt32
 
+    # :nodoc:
     fun NetServerAliasAdd(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*) : UInt32
 
+    # :nodoc:
     fun NetServerAliasDel(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*) : UInt32
 
+    # :nodoc:
     fun NetServerAliasEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resumehandle : UInt32*) : UInt32
 
+    # :nodoc:
     fun NetSessionEnum(servername : Win32cr::Foundation::PWSTR, unc_client_name : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
 
+    # :nodoc:
     fun NetSessionDel(servername : Win32cr::Foundation::PWSTR, unc_client_name : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun NetSessionGetInfo(servername : Win32cr::Foundation::PWSTR, unc_client_name : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
 
+    # :nodoc:
     fun NetConnectionEnum(servername : Win32cr::Foundation::PWSTR, qualifier : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
 
+    # :nodoc:
     fun NetFileClose(servername : Win32cr::Foundation::PWSTR, fileid : UInt32) : UInt32
 
+    # :nodoc:
     fun NetFileEnum(servername : Win32cr::Foundation::PWSTR, basepath : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : LibC::UIntPtrT*) : UInt32
 
+    # :nodoc:
     fun NetFileGetInfo(servername : Win32cr::Foundation::PWSTR, fileid : UInt32, level : UInt32, bufptr : UInt8**) : UInt32
 
+    # :nodoc:
     fun NetStatisticsGet(server_name : Int8*, service : Int8*, level : UInt32, options : UInt32, buffer : UInt8**) : UInt32
 
+    # :nodoc:
     fun QueryIoRingCapabilities(capabilities : Win32cr::Storage::FileSystem::IORING_CAPABILITIES*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IsIoRingOpSupported(ioRing : Win32cr::Storage::FileSystem::HIORING__*, op : Win32cr::Storage::FileSystem::IORING_OP_CODE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateIoRing(ioringVersion : Win32cr::Storage::FileSystem::IORING_VERSION, flags : Win32cr::Storage::FileSystem::IORING_CREATE_FLAGS, submissionQueueSize : UInt32, completionQueueSize : UInt32, h : Win32cr::Storage::FileSystem::HIORING__**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetIoRingInfo(ioRing : Win32cr::Storage::FileSystem::HIORING__*, info : Win32cr::Storage::FileSystem::IORING_INFO*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SubmitIoRing(ioRing : Win32cr::Storage::FileSystem::HIORING__*, waitOperations : UInt32, milliseconds : UInt32, submittedEntries : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CloseIoRing(ioRing : Win32cr::Storage::FileSystem::HIORING__*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PopIoRingCompletion(ioRing : Win32cr::Storage::FileSystem::HIORING__*, cqe : Win32cr::Storage::FileSystem::IORING_CQE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetIoRingCompletionEvent(ioRing : Win32cr::Storage::FileSystem::HIORING__*, hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BuildIoRingCancelRequest(ioRing : Win32cr::Storage::FileSystem::HIORING__*, file : Win32cr::Storage::FileSystem::IORING_HANDLE_REF, opToCancel : LibC::UIntPtrT, userData : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BuildIoRingReadFile(ioRing : Win32cr::Storage::FileSystem::HIORING__*, fileRef : Win32cr::Storage::FileSystem::IORING_HANDLE_REF, dataRef : Win32cr::Storage::FileSystem::IORING_BUFFER_REF, numberOfBytesToRead : UInt32, fileOffset : UInt64, userData : LibC::UIntPtrT, flags : Win32cr::Storage::FileSystem::IORING_SQE_FLAGS) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BuildIoRingRegisterFileHandles(ioRing : Win32cr::Storage::FileSystem::HIORING__*, count : UInt32, handles : Win32cr::Foundation::HANDLE*, userData : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BuildIoRingRegisterBuffers(ioRing : Win32cr::Storage::FileSystem::HIORING__*, count : UInt32, buffers : Win32cr::Storage::FileSystem::IORING_BUFFER_INFO*, userData : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun Wow64EnableWow64FsRedirection(wow64_fs_enable_redirection : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun Wow64DisableWow64FsRedirection(old_value : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun Wow64RevertWow64FsRedirection(ol_value : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetBinaryTypeA(lpApplicationName : Win32cr::Foundation::PSTR, lpBinaryType : UInt32*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetBinaryTypeW(lpApplicationName : Win32cr::Foundation::PWSTR, lpBinaryType : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetShortPathNameA(lpszLongPath : Win32cr::Foundation::PSTR, lpszShortPath : UInt8*, cchBuffer : UInt32) : UInt32
 
+    # :nodoc:
     fun GetLongPathNameTransactedA(lpszShortPath : Win32cr::Foundation::PSTR, lpszLongPath : UInt8*, cchBuffer : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun GetLongPathNameTransactedW(lpszShortPath : Win32cr::Foundation::PWSTR, lpszLongPath : UInt16*, cchBuffer : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SetFileCompletionNotificationModes(file_handle : Win32cr::Foundation::HANDLE, flags : UInt8) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetFileShortNameA(hFile : Win32cr::Foundation::HANDLE, lpShortName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetFileShortNameW(hFile : Win32cr::Foundation::HANDLE, lpShortName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetTapePosition(hDevice : Win32cr::Foundation::HANDLE, dwPositionMethod : Win32cr::Storage::FileSystem::TAPE_POSITION_METHOD, dwPartition : UInt32, dwOffsetLow : UInt32, dwOffsetHigh : UInt32, bImmediate : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun GetTapePosition(hDevice : Win32cr::Foundation::HANDLE, dwPositionType : Win32cr::Storage::FileSystem::TAPE_POSITION_TYPE, lpdwPartition : UInt32*, lpdwOffsetLow : UInt32*, lpdwOffsetHigh : UInt32*) : UInt32
 
+    # :nodoc:
     fun PrepareTape(hDevice : Win32cr::Foundation::HANDLE, dwOperation : Win32cr::Storage::FileSystem::PREPARE_TAPE_OPERATION, bImmediate : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun EraseTape(hDevice : Win32cr::Foundation::HANDLE, dwEraseType : Win32cr::Storage::FileSystem::ERASE_TAPE_TYPE, bImmediate : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun CreateTapePartition(hDevice : Win32cr::Foundation::HANDLE, dwPartitionMethod : Win32cr::Storage::FileSystem::CREATE_TAPE_PARTITION_METHOD, dwCount : UInt32, dwSize : UInt32) : UInt32
 
+    # :nodoc:
     fun WriteTapemark(hDevice : Win32cr::Foundation::HANDLE, dwTapemarkType : Win32cr::Storage::FileSystem::TAPEMARK_TYPE, dwTapemarkCount : UInt32, bImmediate : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun GetTapeStatus(hDevice : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun GetTapeParameters(hDevice : Win32cr::Foundation::HANDLE, dwOperation : Win32cr::Storage::FileSystem::GET_TAPE_DRIVE_PARAMETERS_OPERATION, lpdwSize : UInt32*, lpTapeInformation : Void*) : UInt32
 
+    # :nodoc:
     fun SetTapeParameters(hDevice : Win32cr::Foundation::HANDLE, dwOperation : Win32cr::Storage::FileSystem::TAPE_INFORMATION_TYPE, lpTapeInformation : Void*) : UInt32
 
+    # :nodoc:
     fun EncryptFileA(lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EncryptFileW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DecryptFileA(lpFileName : Win32cr::Foundation::PSTR, dwReserved : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DecryptFileW(lpFileName : Win32cr::Foundation::PWSTR, dwReserved : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FileEncryptionStatusA(lpFileName : Win32cr::Foundation::PSTR, lpStatus : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FileEncryptionStatusW(lpFileName : Win32cr::Foundation::PWSTR, lpStatus : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OpenEncryptedFileRawA(lpFileName : Win32cr::Foundation::PSTR, ulFlags : UInt32, pvContext : Void**) : UInt32
 
+    # :nodoc:
     fun OpenEncryptedFileRawW(lpFileName : Win32cr::Foundation::PWSTR, ulFlags : UInt32, pvContext : Void**) : UInt32
 
+    # :nodoc:
     fun ReadEncryptedFileRaw(pfExportCallback : Win32cr::Storage::FileSystem::PFE_EXPORT_FUNC, pvCallbackContext : Void*, pvContext : Void*) : UInt32
 
+    # :nodoc:
     fun WriteEncryptedFileRaw(pfImportCallback : Win32cr::Storage::FileSystem::PFE_IMPORT_FUNC, pvCallbackContext : Void*, pvContext : Void*) : UInt32
 
+    # :nodoc:
     fun CloseEncryptedFileRaw(pvContext : Void*) : Void
 
+    # :nodoc:
     fun OpenFile(lpFileName : Win32cr::Foundation::PSTR, lpReOpenBuff : Win32cr::Storage::FileSystem::OFSTRUCT*, uStyle : Win32cr::Storage::FileSystem::LZOPENFILE_STYLE) : Int32
 
+    # :nodoc:
     fun BackupRead(hFile : Win32cr::Foundation::HANDLE, lpBuffer : UInt8*, nNumberOfBytesToRead : UInt32, lpNumberOfBytesRead : UInt32*, bAbort : Win32cr::Foundation::BOOL, bProcessSecurity : Win32cr::Foundation::BOOL, lpContext : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BackupSeek(hFile : Win32cr::Foundation::HANDLE, dwLowBytesToSeek : UInt32, dwHighBytesToSeek : UInt32, lpdwLowByteSeeked : UInt32*, lpdwHighByteSeeked : UInt32*, lpContext : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BackupWrite(hFile : Win32cr::Foundation::HANDLE, lpBuffer : UInt8*, nNumberOfBytesToWrite : UInt32, lpNumberOfBytesWritten : UInt32*, bAbort : Win32cr::Foundation::BOOL, bProcessSecurity : Win32cr::Foundation::BOOL, lpContext : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetLogicalDriveStringsA(nBufferLength : UInt32, lpBuffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun SetSearchPathMode(flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateDirectoryExA(lpTemplateDirectory : Win32cr::Foundation::PSTR, lpNewDirectory : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateDirectoryExW(lpTemplateDirectory : Win32cr::Foundation::PWSTR, lpNewDirectory : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateDirectoryTransactedA(lpTemplateDirectory : Win32cr::Foundation::PSTR, lpNewDirectory : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateDirectoryTransactedW(lpTemplateDirectory : Win32cr::Foundation::PWSTR, lpNewDirectory : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RemoveDirectoryTransactedA(lpPathName : Win32cr::Foundation::PSTR, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RemoveDirectoryTransactedW(lpPathName : Win32cr::Foundation::PWSTR, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetFullPathNameTransactedA(lpFileName : Win32cr::Foundation::PSTR, nBufferLength : UInt32, lpBuffer : UInt8*, lpFilePart : Win32cr::Foundation::PSTR*, hTransaction : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun GetFullPathNameTransactedW(lpFileName : Win32cr::Foundation::PWSTR, nBufferLength : UInt32, lpBuffer : UInt16*, lpFilePart : Win32cr::Foundation::PWSTR*, hTransaction : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun DefineDosDeviceA(dwFlags : Win32cr::Storage::FileSystem::DEFINE_DOS_DEVICE_FLAGS, lpDeviceName : Win32cr::Foundation::PSTR, lpTargetPath : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryDosDeviceA(lpDeviceName : Win32cr::Foundation::PSTR, lpTargetPath : UInt8*, ucchMax : UInt32) : UInt32
 
+    # :nodoc:
     fun CreateFileTransactedA(lpFileName : Win32cr::Foundation::PSTR, dwDesiredAccess : UInt32, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE, hTransaction : Win32cr::Foundation::HANDLE, pusMiniVersion : Win32cr::Storage::FileSystem::TXFS_MINIVERSION*, lpExtendedParameter : Void*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateFileTransactedW(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE, hTransaction : Win32cr::Foundation::HANDLE, pusMiniVersion : Win32cr::Storage::FileSystem::TXFS_MINIVERSION*, lpExtendedParameter : Void*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun ReOpenFile(hOriginalFile : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::Storage::FileSystem::FILE_ACCESS_FLAGS, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun SetFileAttributesTransactedA(lpFileName : Win32cr::Foundation::PSTR, dwFileAttributes : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetFileAttributesTransactedW(lpFileName : Win32cr::Foundation::PWSTR, dwFileAttributes : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetFileAttributesTransactedA(lpFileName : Win32cr::Foundation::PSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetFileAttributesTransactedW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCompressedFileSizeTransactedA(lpFileName : Win32cr::Foundation::PSTR, lpFileSizeHigh : UInt32*, hTransaction : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun GetCompressedFileSizeTransactedW(lpFileName : Win32cr::Foundation::PWSTR, lpFileSizeHigh : UInt32*, hTransaction : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun DeleteFileTransactedA(lpFileName : Win32cr::Foundation::PSTR, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteFileTransactedW(lpFileName : Win32cr::Foundation::PWSTR, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CheckNameLegalDOS8Dot3A(lpName : Win32cr::Foundation::PSTR, lpOemName : UInt8*, oem_name_size : UInt32, pbNameContainsSpaces : Win32cr::Foundation::BOOL*, pbNameLegal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CheckNameLegalDOS8Dot3W(lpName : Win32cr::Foundation::PWSTR, lpOemName : UInt8*, oem_name_size : UInt32, pbNameContainsSpaces : Win32cr::Foundation::BOOL*, pbNameLegal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindFirstFileTransactedA(lpFileName : Win32cr::Foundation::PSTR, fInfoLevelId : Win32cr::Storage::FileSystem::FINDEX_INFO_LEVELS, lpFindFileData : Void*, fSearchOp : Win32cr::Storage::FileSystem::FINDEX_SEARCH_OPS, lpSearchFilter : Void*, dwAdditionalFlags : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Storage::FileSystem::FindFileHandle
 
+    # :nodoc:
     fun FindFirstFileTransactedW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::FINDEX_INFO_LEVELS, lpFindFileData : Void*, fSearchOp : Win32cr::Storage::FileSystem::FINDEX_SEARCH_OPS, lpSearchFilter : Void*, dwAdditionalFlags : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Storage::FileSystem::FindFileHandle
 
+    # :nodoc:
     fun CopyFileA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, bFailIfExists : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CopyFileW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, bFailIfExists : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CopyFileExA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, pbCancel : Int32*, dwCopyFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CopyFileExW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, pbCancel : Int32*, dwCopyFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CopyFileTransactedA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, pbCancel : Int32*, dwCopyFlags : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CopyFileTransactedW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, pbCancel : Int32*, dwCopyFlags : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CopyFile2(pwszExistingFileName : Win32cr::Foundation::PWSTR, pwszNewFileName : Win32cr::Foundation::PWSTR, pExtendedParameters : Win32cr::Storage::FileSystem::COPYFILE2_EXTENDED_PARAMETERS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MoveFileA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MoveFileW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MoveFileExA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun MoveFileExW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MoveFileWithProgressA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MoveFileWithProgressW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MoveFileTransactedA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MoveFileTransactedW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReplaceFileA(lpReplacedFileName : Win32cr::Foundation::PSTR, lpReplacementFileName : Win32cr::Foundation::PSTR, lpBackupFileName : Win32cr::Foundation::PSTR, dwReplaceFlags : Win32cr::Storage::FileSystem::REPLACE_FILE_FLAGS, lpExclude : Void*, lpReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReplaceFileW(lpReplacedFileName : Win32cr::Foundation::PWSTR, lpReplacementFileName : Win32cr::Foundation::PWSTR, lpBackupFileName : Win32cr::Foundation::PWSTR, dwReplaceFlags : Win32cr::Storage::FileSystem::REPLACE_FILE_FLAGS, lpExclude : Void*, lpReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateHardLinkA(lpFileName : Win32cr::Foundation::PSTR, lpExistingFileName : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun CreateHardLinkW(lpFileName : Win32cr::Foundation::PWSTR, lpExistingFileName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateHardLinkTransactedA(lpFileName : Win32cr::Foundation::PSTR, lpExistingFileName : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateHardLinkTransactedW(lpFileName : Win32cr::Foundation::PWSTR, lpExistingFileName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindFirstStreamTransactedW(lpFileName : Win32cr::Foundation::PWSTR, info_level : Win32cr::Storage::FileSystem::STREAM_INFO_LEVELS, lpFindStreamData : Void*, dwFlags : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Storage::FileSystem::FindStreamHandle
 
+    # :nodoc:
     fun FindFirstFileNameTransactedW(lpFileName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, string_length : UInt32*, link_name : UInt16*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Storage::FileSystem::FindFileNameHandle
 
+    # :nodoc:
     fun SetVolumeLabelA(lpRootPathName : Win32cr::Foundation::PSTR, lpVolumeName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetVolumeLabelW(lpRootPathName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetFileBandwidthReservation(hFile : Win32cr::Foundation::HANDLE, nPeriodMilliseconds : UInt32, nBytesPerPeriod : UInt32, bDiscardable : Win32cr::Foundation::BOOL, lpTransferSize : UInt32*, lpNumOutstandingRequests : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetFileBandwidthReservation(hFile : Win32cr::Foundation::HANDLE, lpPeriodMilliseconds : UInt32*, lpBytesPerPeriod : UInt32*, pDiscardable : Int32*, lpTransferSize : UInt32*, lpNumOutstandingRequests : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReadDirectoryChangesW(hDirectory : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nBufferLength : UInt32, bWatchSubtree : Win32cr::Foundation::BOOL, dwNotifyFilter : Win32cr::Storage::FileSystem::FILE_NOTIFY_CHANGE, lpBytesReturned : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::System::IO::LPOVERLAPPED_COMPLETION_ROUTINE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReadDirectoryChangesExW(hDirectory : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nBufferLength : UInt32, bWatchSubtree : Win32cr::Foundation::BOOL, dwNotifyFilter : Win32cr::Storage::FileSystem::FILE_NOTIFY_CHANGE, lpBytesReturned : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::System::IO::LPOVERLAPPED_COMPLETION_ROUTINE, read_directory_notify_information_class : Win32cr::Storage::FileSystem::READ_DIRECTORY_NOTIFY_INFORMATION_CLASS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindFirstVolumeA(lpszVolumeName : UInt8*, cchBufferLength : UInt32) : Win32cr::Storage::FileSystem::FindVolumeHandle
 
+    # :nodoc:
     fun FindNextVolumeA(hFindVolume : Win32cr::Storage::FileSystem::FindVolumeHandle, lpszVolumeName : UInt8*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindFirstVolumeMountPointA(lpszRootPathName : Win32cr::Foundation::PSTR, lpszVolumeMountPoint : UInt8*, cchBufferLength : UInt32) : Win32cr::Storage::FileSystem::FindVolumeMointPointHandle
 
+    # :nodoc:
     fun FindFirstVolumeMountPointW(lpszRootPathName : Win32cr::Foundation::PWSTR, lpszVolumeMountPoint : UInt16*, cchBufferLength : UInt32) : Win32cr::Storage::FileSystem::FindVolumeMointPointHandle
 
+    # :nodoc:
     fun FindNextVolumeMountPointA(hFindVolumeMountPoint : Win32cr::Storage::FileSystem::FindVolumeMointPointHandle, lpszVolumeMountPoint : UInt8*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindNextVolumeMountPointW(hFindVolumeMountPoint : Win32cr::Storage::FileSystem::FindVolumeMointPointHandle, lpszVolumeMountPoint : UInt16*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindVolumeMountPointClose(hFindVolumeMountPoint : Win32cr::Storage::FileSystem::FindVolumeMointPointHandle) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetVolumeMountPointA(lpszVolumeMountPoint : Win32cr::Foundation::PSTR, lpszVolumeName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetVolumeMountPointW(lpszVolumeMountPoint : Win32cr::Foundation::PWSTR, lpszVolumeName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteVolumeMountPointA(lpszVolumeMountPoint : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetVolumeNameForVolumeMountPointA(lpszVolumeMountPoint : Win32cr::Foundation::PSTR, lpszVolumeName : UInt8*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetVolumePathNameA(lpszFileName : Win32cr::Foundation::PSTR, lpszVolumePathName : UInt8*, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetVolumePathNamesForVolumeNameA(lpszVolumeName : Win32cr::Foundation::PSTR, lpszVolumePathNames : UInt8*, cchBufferLength : UInt32, lpcchReturnLength : UInt32*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetFileInformationByHandleEx(hFile : Win32cr::Foundation::HANDLE, file_information_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_HANDLE_CLASS, lpFileInformation : Void*, dwBufferSize : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OpenFileById(hVolumeHint : Win32cr::Foundation::HANDLE, lpFileId : Win32cr::Storage::FileSystem::FILE_ID_DESCRIPTOR*, dwDesiredAccess : Win32cr::Storage::FileSystem::FILE_ACCESS_FLAGS, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateSymbolicLinkA(lpSymlinkFileName : Win32cr::Foundation::PSTR, lpTargetFileName : Win32cr::Foundation::PSTR, dwFlags : Win32cr::Storage::FileSystem::SYMBOLIC_LINK_FLAGS) : Win32cr::Foundation::BOOLEAN
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun CreateSymbolicLinkW(lpSymlinkFileName : Win32cr::Foundation::PWSTR, lpTargetFileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Storage::FileSystem::SYMBOLIC_LINK_FLAGS) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun CreateSymbolicLinkTransactedA(lpSymlinkFileName : Win32cr::Foundation::PSTR, lpTargetFileName : Win32cr::Foundation::PSTR, dwFlags : Win32cr::Storage::FileSystem::SYMBOLIC_LINK_FLAGS, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun CreateSymbolicLinkTransactedW(lpSymlinkFileName : Win32cr::Foundation::PWSTR, lpTargetFileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Storage::FileSystem::SYMBOLIC_LINK_FLAGS, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun NtCreateFile(file_handle : Win32cr::Foundation::HANDLE*, desired_access : UInt32, object_attributes : Win32cr::System::WindowsProgramming::OBJECT_ATTRIBUTES*, io_status_block : Win32cr::System::WindowsProgramming::IO_STATUS_BLOCK*, allocation_size : Win32cr::Foundation::LARGE_INTEGER*, file_attributes : UInt32, share_access : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, create_disposition : Win32cr::Storage::FileSystem::NT_CREATE_FILE_DISPOSITION, create_options : UInt32, ea_buffer : Void*, ea_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
   end

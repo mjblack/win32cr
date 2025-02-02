@@ -4,6 +4,7 @@ require "./../system/com.cr"
 require "./../system/threading.cr"
 
 module Win32cr::Security::Authorization
+  extend self
   alias AUTHZ_ACCESS_CHECK_RESULTS_HANDLE = LibC::IntPtrT
   alias AUTHZ_CLIENT_CONTEXT_HANDLE = LibC::IntPtrT
   alias AUTHZ_RESOURCE_MANAGER_HANDLE = LibC::IntPtrT
@@ -5493,189 +5494,639 @@ module Win32cr::Security::Authorization
 
   end
 
+  def authzAccessCheck(flags : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_FLAGS, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, optional_security_descriptor_array : Win32cr::Security::PSECURITY_DESCRIPTOR*, optional_security_descriptor_count : UInt32, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*, phAccessCheckResults : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    C.AuthzAccessCheck(flags, hAuthzClientContext, pRequest, hAuditEvent, pSecurityDescriptor, optional_security_descriptor_array, optional_security_descriptor_count, pReply, phAccessCheckResults)
+  end
+
+  def authzCachedAccessCheck(flags : UInt32, hAccessCheckResults : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_RESULTS_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*) : Win32cr::Foundation::BOOL
+    C.AuthzCachedAccessCheck(flags, hAccessCheckResults, pRequest, hAuditEvent, pReply)
+  end
+
+  def authzOpenObjectAudit(flags : UInt32, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, optional_security_descriptor_array : Win32cr::Security::PSECURITY_DESCRIPTOR*, optional_security_descriptor_count : UInt32, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*) : Win32cr::Foundation::BOOL
+    C.AuthzOpenObjectAudit(flags, hAuthzClientContext, pRequest, hAuditEvent, pSecurityDescriptor, optional_security_descriptor_array, optional_security_descriptor_count, pReply)
+  end
+
+  def authzFreeHandle(hAccessCheckResults : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_RESULTS_HANDLE) : Win32cr::Foundation::BOOL
+    C.AuthzFreeHandle(hAccessCheckResults)
+  end
+
+  def authzInitializeResourceManager(flags : UInt32, pfnDynamicAccessCheck : Win32cr::Security::Authorization::PFN_AUTHZ_DYNAMIC_ACCESS_CHECK, pfnComputeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS, pfnFreeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_FREE_DYNAMIC_GROUPS, szResourceManagerName : Win32cr::Foundation::PWSTR, phAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE*) : Win32cr::Foundation::BOOL
+    C.AuthzInitializeResourceManager(flags, pfnDynamicAccessCheck, pfnComputeDynamicGroups, pfnFreeDynamicGroups, szResourceManagerName, phAuthzResourceManager)
+  end
+
+  def authzInitializeResourceManagerEx(flags : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_FLAGS, pAuthzInitInfo : Win32cr::Security::Authorization::AUTHZ_INIT_INFO*, phAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE*) : Win32cr::Foundation::BOOL
+    C.AuthzInitializeResourceManagerEx(flags, pAuthzInitInfo, phAuthzResourceManager)
+  end
+
+  def authzInitializeRemoteResourceManager(pRpcInitInfo : Win32cr::Security::Authorization::AUTHZ_RPC_INIT_INFO_CLIENT*, phAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE*) : Win32cr::Foundation::BOOL
+    C.AuthzInitializeRemoteResourceManager(pRpcInitInfo, phAuthzResourceManager)
+  end
+
+  def authzFreeResourceManager(hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE) : Win32cr::Foundation::BOOL
+    C.AuthzFreeResourceManager(hAuthzResourceManager)
+  end
+
+  def authzInitializeContextFromToken(flags : UInt32, token_handle : Win32cr::Foundation::HANDLE, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    C.AuthzInitializeContextFromToken(flags, token_handle, hAuthzResourceManager, pExpirationTime, identifier, dynamic_group_args, phAuthzClientContext)
+  end
+
+  def authzInitializeContextFromSid(flags : UInt32, user_sid : Win32cr::Foundation::PSID, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    C.AuthzInitializeContextFromSid(flags, user_sid, hAuthzResourceManager, pExpirationTime, identifier, dynamic_group_args, phAuthzClientContext)
+  end
+
+  def authzInitializeContextFromAuthzContext(flags : UInt32, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phNewAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    C.AuthzInitializeContextFromAuthzContext(flags, hAuthzClientContext, pExpirationTime, identifier, dynamic_group_args, phNewAuthzClientContext)
+  end
+
+  def authzInitializeCompoundContext(user_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, device_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, phCompoundContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    C.AuthzInitializeCompoundContext(user_context, device_context, phCompoundContext)
+  end
+
+  def authzAddSidsToContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, sids : Win32cr::Security::SID_AND_ATTRIBUTES*, sid_count : UInt32, restricted_sids : Win32cr::Security::SID_AND_ATTRIBUTES*, restricted_sid_count : UInt32, phNewAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    C.AuthzAddSidsToContext(hAuthzClientContext, sids, sid_count, restricted_sids, restricted_sid_count, phNewAuthzClientContext)
+  end
+
+  def authzModifySecurityAttributes(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pOperations : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, pAttributes : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.AuthzModifySecurityAttributes(hAuthzClientContext, pOperations, pAttributes)
+  end
+
+  def authzModifyClaims(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, claim_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, pClaimOperations : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, pClaims : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.AuthzModifyClaims(hAuthzClientContext, claim_class, pClaimOperations, pClaims)
+  end
+
+  def authzModifySids(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, sid_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, pSidOperations : Win32cr::Security::Authorization::AUTHZ_SID_OPERATION*, pSids : Win32cr::Security::TOKEN_GROUPS*) : Win32cr::Foundation::BOOL
+    C.AuthzModifySids(hAuthzClientContext, sid_class, pSidOperations, pSids)
+  end
+
+  def authzSetAppContainerInformation(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pAppContainerSid : Win32cr::Foundation::PSID, capability_count : UInt32, pCapabilitySids : Win32cr::Security::SID_AND_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+    C.AuthzSetAppContainerInformation(hAuthzClientContext, pAppContainerSid, capability_count, pCapabilitySids)
+  end
+
+  def authzGetInformationFromContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, info_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, buffer_size : UInt32, pSizeRequired : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
+    C.AuthzGetInformationFromContext(hAuthzClientContext, info_class, buffer_size, pSizeRequired, buffer)
+  end
+
+  def authzFreeContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE) : Win32cr::Foundation::BOOL
+    C.AuthzFreeContext(hAuthzClientContext)
+  end
+
+  def authzInitializeObjectAccessAuditEvent(flags : Win32cr::Security::Authorization::AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, phAuditEvent : LibC::IntPtrT*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
+    C.AuthzInitializeObjectAccessAuditEvent(flags, hAuditEventType, szOperationType, szObjectType, szObjectName, szAdditionalInfo, phAuditEvent, dwAdditionalParameterCount)
+  end
+
+  def authzInitializeObjectAccessAuditEvent2(flags : UInt32, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, szAdditionalInfo2 : Win32cr::Foundation::PWSTR, phAuditEvent : LibC::IntPtrT*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
+    C.AuthzInitializeObjectAccessAuditEvent2(flags, hAuditEventType, szOperationType, szObjectType, szObjectName, szAdditionalInfo, szAdditionalInfo2, phAuditEvent, dwAdditionalParameterCount)
+  end
+
+  def authzFreeAuditEvent(hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE) : Win32cr::Foundation::BOOL
+    C.AuthzFreeAuditEvent(hAuditEvent)
+  end
+
+  def authzEvaluateSacl(authz_client_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, sacl : Win32cr::Security::ACL*, granted_access : UInt32, access_granted : Win32cr::Foundation::BOOL, pbGenerateAudit : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.AuthzEvaluateSacl(authz_client_context, pRequest, sacl, granted_access, access_granted, pbGenerateAudit)
+  end
+
+  def authzInstallSecurityEventSource(dwFlags : UInt32, pRegistration : Win32cr::Security::Authorization::AUTHZ_SOURCE_SCHEMA_REGISTRATION*) : Win32cr::Foundation::BOOL
+    C.AuthzInstallSecurityEventSource(dwFlags, pRegistration)
+  end
+
+  def authzUninstallSecurityEventSource(dwFlags : UInt32, szEventSourceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.AuthzUninstallSecurityEventSource(dwFlags, szEventSourceName)
+  end
+
+  def authzEnumerateSecurityEventSources(dwFlags : UInt32, buffer : Win32cr::Security::Authorization::AUTHZ_SOURCE_SCHEMA_REGISTRATION*, pdwCount : UInt32*, pdwLength : UInt32*) : Win32cr::Foundation::BOOL
+    C.AuthzEnumerateSecurityEventSources(dwFlags, buffer, pdwCount, pdwLength)
+  end
+
+  def authzRegisterSecurityEventSource(dwFlags : UInt32, szEventSourceName : Win32cr::Foundation::PWSTR, phEventProvider : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    C.AuthzRegisterSecurityEventSource(dwFlags, szEventSourceName, phEventProvider)
+  end
+
+  def authzUnregisterSecurityEventSource(dwFlags : UInt32, phEventProvider : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    C.AuthzUnregisterSecurityEventSource(dwFlags, phEventProvider)
+  end
+
+  def authzReportSecurityEvent(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Foundation::PSID, dwCount : UInt32) : Win32cr::Foundation::BOOL
+    C.AuthzReportSecurityEvent(dwFlags, hEventProvider, dwAuditId, pUserSid, dwCount)
+  end
+
+  def authzReportSecurityEventFromParams(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Foundation::PSID, pParams : Win32cr::Security::Authorization::AUDIT_PARAMS*) : Win32cr::Foundation::BOOL
+    C.AuthzReportSecurityEventFromParams(dwFlags, hEventProvider, dwAuditId, pUserSid, pParams)
+  end
+
+  def authzRegisterCapChangeNotification(phCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__**, pfnCapChangeCallback : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, pCallbackContext : Void*) : Win32cr::Foundation::BOOL
+    C.AuthzRegisterCapChangeNotification(phCapChangeSubscription, pfnCapChangeCallback, pCallbackContext)
+  end
+
+  def authzUnregisterCapChangeNotification(hCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__*) : Win32cr::Foundation::BOOL
+    C.AuthzUnregisterCapChangeNotification(hCapChangeSubscription)
+  end
+
+  def authzFreeCentralAccessPolicyCache : Win32cr::Foundation::BOOL
+    C.AuthzFreeCentralAccessPolicyCache
+  end
+
+  def setEntriesInAclA(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : UInt32
+    C.SetEntriesInAclA(cCountOfExplicitEntries, pListOfExplicitEntries, old_acl, new_acl)
+  end
+
+  def setEntriesInAclW(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : UInt32
+    C.SetEntriesInAclW(cCountOfExplicitEntries, pListOfExplicitEntries, old_acl, new_acl)
+  end
+
+  def getExplicitEntriesFromAclA(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**) : UInt32
+    C.GetExplicitEntriesFromAclA(pacl, pcCountOfExplicitEntries, pListOfExplicitEntries)
+  end
+
+  def getExplicitEntriesFromAclW(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**) : UInt32
+    C.GetExplicitEntriesFromAclW(pacl, pcCountOfExplicitEntries, pListOfExplicitEntries)
+  end
+
+  def getEffectiveRightsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pAccessRights : UInt32*) : UInt32
+    C.GetEffectiveRightsFromAclA(pacl, pTrustee, pAccessRights)
+  end
+
+  def getEffectiveRightsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pAccessRights : UInt32*) : UInt32
+    C.GetEffectiveRightsFromAclW(pacl, pTrustee, pAccessRights)
+  end
+
+  def getAuditedPermissionsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : UInt32
+    C.GetAuditedPermissionsFromAclA(pacl, pTrustee, pSuccessfulAuditedRights, pFailedAuditRights)
+  end
+
+  def getAuditedPermissionsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : UInt32
+    C.GetAuditedPermissionsFromAclW(pacl, pTrustee, pSuccessfulAuditedRights, pFailedAuditRights)
+  end
+
+  def getNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetNamedSecurityInfoA(pObjectName, object_type, security_info, ppsidOwner, ppsidGroup, ppDacl, ppSacl, ppSecurityDescriptor)
+  end
+
+  def getNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetNamedSecurityInfoW(pObjectName, object_type, security_info, ppsidOwner, ppsidGroup, ppDacl, ppSacl, ppSecurityDescriptor)
+  end
+
+  def getSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetSecurityInfo(handle, object_type, security_info, ppsidOwner, ppsidGroup, ppDacl, ppSacl, ppSecurityDescriptor)
+  end
+
+  def setNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
+    C.SetNamedSecurityInfoA(pObjectName, object_type, security_info, psidOwner, psidGroup, pDacl, pSacl)
+  end
+
+  def setNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
+    C.SetNamedSecurityInfoW(pObjectName, object_type, security_info, psidOwner, psidGroup, pDacl, pSacl)
+  end
+
+  def setSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
+    C.SetSecurityInfo(handle, object_type, security_info, psidOwner, psidGroup, pDacl, pSacl)
+  end
+
+  def getInheritanceSourceA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMA*) : UInt32
+    C.GetInheritanceSourceA(pObjectName, object_type, security_info, container, pObjectClassGuids, guid_count, pAcl, pfnArray, pGenericMapping, pInheritArray)
+  end
+
+  def getInheritanceSourceW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*) : UInt32
+    C.GetInheritanceSourceW(pObjectName, object_type, security_info, container, pObjectClassGuids, guid_count, pAcl, pfnArray, pGenericMapping, pInheritArray)
+  end
+
+  def freeInheritedFromArray(pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*, ace_cnt : UInt16, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*) : UInt32
+    C.FreeInheritedFromArray(pInheritArray, ace_cnt, pfnArray)
+  end
+
+  def treeResetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+    C.TreeResetNamedSecurityInfoA(pObjectName, object_type, security_info, pOwner, pGroup, pDacl, pSacl, keep_explicit, fnProgress, progress_invoke_setting, args)
+  end
+
+  def treeResetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+    C.TreeResetNamedSecurityInfoW(pObjectName, object_type, security_info, pOwner, pGroup, pDacl, pSacl, keep_explicit, fnProgress, progress_invoke_setting, args)
+  end
+
+  def treeSetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+    C.TreeSetNamedSecurityInfoA(pObjectName, object_type, security_info, pOwner, pGroup, pDacl, pSacl, dwAction, fnProgress, progress_invoke_setting, args)
+  end
+
+  def treeSetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+    C.TreeSetNamedSecurityInfoW(pObjectName, object_type, security_info, pOwner, pGroup, pDacl, pSacl, dwAction, fnProgress, progress_invoke_setting, args)
+  end
+
+  def buildSecurityDescriptorA(pOwner : Win32cr::Security::Authorization::TRUSTEE_A*, pGroup : Win32cr::Security::Authorization::TRUSTEE_A*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.BuildSecurityDescriptorA(pOwner, pGroup, cCountOfAccessEntries, pListOfAccessEntries, cCountOfAuditEntries, pListOfAuditEntries, pOldSD, pSizeNewSD, pNewSD)
+  end
+
+  def buildSecurityDescriptorW(pOwner : Win32cr::Security::Authorization::TRUSTEE_W*, pGroup : Win32cr::Security::Authorization::TRUSTEE_W*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    C.BuildSecurityDescriptorW(pOwner, pGroup, cCountOfAccessEntries, pListOfAccessEntries, cCountOfAuditEntries, pListOfAuditEntries, pOldSD, pSizeNewSD, pNewSD)
+  end
+
+  def lookupSecurityDescriptorPartsA(ppOwner : Win32cr::Security::Authorization::TRUSTEE_A**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_A**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    C.LookupSecurityDescriptorPartsA(ppOwner, ppGroup, pcCountOfAccessEntries, ppListOfAccessEntries, pcCountOfAuditEntries, ppListOfAuditEntries, pSD)
+  end
+
+  def lookupSecurityDescriptorPartsW(ppOwner : Win32cr::Security::Authorization::TRUSTEE_W**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_W**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    C.LookupSecurityDescriptorPartsW(ppOwner, ppGroup, pcCountOfAccessEntries, ppListOfAccessEntries, pcCountOfAuditEntries, ppListOfAuditEntries, pSD)
+  end
+
+  def buildExplicitAccessWithNameA(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pTrusteeName : Win32cr::Foundation::PSTR, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : Win32cr::Security::ACE_FLAGS) : Void
+    C.BuildExplicitAccessWithNameA(pExplicitAccess, pTrusteeName, access_permissions, access_mode, inheritance)
+  end
+
+  def buildExplicitAccessWithNameW(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pTrusteeName : Win32cr::Foundation::PWSTR, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : Win32cr::Security::ACE_FLAGS) : Void
+    C.BuildExplicitAccessWithNameW(pExplicitAccess, pTrusteeName, access_permissions, access_mode, inheritance)
+  end
+
+  def buildImpersonateExplicitAccessWithNameA(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pTrusteeName : Win32cr::Foundation::PSTR, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : UInt32) : Void
+    C.BuildImpersonateExplicitAccessWithNameA(pExplicitAccess, pTrusteeName, pTrustee, access_permissions, access_mode, inheritance)
+  end
+
+  def buildImpersonateExplicitAccessWithNameW(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pTrusteeName : Win32cr::Foundation::PWSTR, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : UInt32) : Void
+    C.BuildImpersonateExplicitAccessWithNameW(pExplicitAccess, pTrusteeName, pTrustee, access_permissions, access_mode, inheritance)
+  end
+
+  def buildTrusteeWithNameA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pName : Win32cr::Foundation::PSTR) : Void
+    C.BuildTrusteeWithNameA(pTrustee, pName)
+  end
+
+  def buildTrusteeWithNameW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pName : Win32cr::Foundation::PWSTR) : Void
+    C.BuildTrusteeWithNameW(pTrustee, pName)
+  end
+
+  def buildImpersonateTrusteeA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pImpersonateTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Void
+    C.BuildImpersonateTrusteeA(pTrustee, pImpersonateTrustee)
+  end
+
+  def buildImpersonateTrusteeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pImpersonateTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Void
+    C.BuildImpersonateTrusteeW(pTrustee, pImpersonateTrustee)
+  end
+
+  def buildTrusteeWithSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSid : Win32cr::Foundation::PSID) : Void
+    C.BuildTrusteeWithSidA(pTrustee, pSid)
+  end
+
+  def buildTrusteeWithSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSid : Win32cr::Foundation::PSID) : Void
+    C.BuildTrusteeWithSidW(pTrustee, pSid)
+  end
+
+  def buildTrusteeWithObjectsAndSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Foundation::PSID) : Void
+    C.BuildTrusteeWithObjectsAndSidA(pTrustee, pObjSid, pObjectGuid, pInheritedObjectGuid, pSid)
+  end
+
+  def buildTrusteeWithObjectsAndSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Foundation::PSID) : Void
+    C.BuildTrusteeWithObjectsAndSidW(pTrustee, pObjSid, pObjectGuid, pInheritedObjectGuid, pSid)
+  end
+
+  def buildTrusteeWithObjectsAndNameA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pObjName : Win32cr::Security::Authorization::OBJECTS_AND_NAME_A*, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, object_type_name : Win32cr::Foundation::PSTR, inherited_object_type_name : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR) : Void
+    C.BuildTrusteeWithObjectsAndNameA(pTrustee, pObjName, object_type, object_type_name, inherited_object_type_name, name)
+  end
+
+  def buildTrusteeWithObjectsAndNameW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pObjName : Win32cr::Security::Authorization::OBJECTS_AND_NAME_W*, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, object_type_name : Win32cr::Foundation::PWSTR, inherited_object_type_name : Win32cr::Foundation::PWSTR, name : Win32cr::Foundation::PWSTR) : Void
+    C.BuildTrusteeWithObjectsAndNameW(pTrustee, pObjName, object_type, object_type_name, inherited_object_type_name, name)
+  end
+
+  def getTrusteeNameA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Foundation::PSTR
+    C.GetTrusteeNameA(pTrustee)
+  end
+
+  def getTrusteeNameW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Foundation::PWSTR
+    C.GetTrusteeNameW(pTrustee)
+  end
+
+  def getTrusteeTypeA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::TRUSTEE_TYPE
+    C.GetTrusteeTypeA(pTrustee)
+  end
+
+  def getTrusteeTypeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::TRUSTEE_TYPE
+    C.GetTrusteeTypeW(pTrustee)
+  end
+
+  def getTrusteeFormA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::TRUSTEE_FORM
+    C.GetTrusteeFormA(pTrustee)
+  end
+
+  def getTrusteeFormW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::TRUSTEE_FORM
+    C.GetTrusteeFormW(pTrustee)
+  end
+
+  def getMultipleTrusteeOperationA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION
+    C.GetMultipleTrusteeOperationA(pTrustee)
+  end
+
+  def getMultipleTrusteeOperationW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION
+    C.GetMultipleTrusteeOperationW(pTrustee)
+  end
+
+  def getMultipleTrusteeA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::TRUSTEE_A*
+    C.GetMultipleTrusteeA(pTrustee)
+  end
+
+  def getMultipleTrusteeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::TRUSTEE_W*
+    C.GetMultipleTrusteeW(pTrustee)
+  end
+
+  def convertSidToStringSidA(sid : Win32cr::Foundation::PSID, string_sid : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    C.ConvertSidToStringSidA(sid, string_sid)
+  end
+
+  #def convertSidToStringSidW(sid : Win32cr::Foundation::PSID, string_sid : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    #C.ConvertSidToStringSidW(sid, string_sid)
+  #end
+
+  def convertStringSidToSidA(string_sid : Win32cr::Foundation::PSTR, sid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::BOOL
+    C.ConvertStringSidToSidA(string_sid, sid)
+  end
+
+  #def convertStringSidToSidW(string_sid : Win32cr::Foundation::PWSTR, sid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::BOOL
+    #C.ConvertStringSidToSidW(string_sid, sid)
+  #end
+
+  def convertStringSecurityDescriptorToSecurityDescriptorA(string_security_descriptor : Win32cr::Foundation::PSTR, string_sd_revision : UInt32, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, security_descriptor_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.ConvertStringSecurityDescriptorToSecurityDescriptorA(string_security_descriptor, string_sd_revision, security_descriptor, security_descriptor_size)
+  end
+
+  def convertStringSecurityDescriptorToSecurityDescriptorW(string_security_descriptor : Win32cr::Foundation::PWSTR, string_sd_revision : UInt32, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, security_descriptor_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.ConvertStringSecurityDescriptorToSecurityDescriptorW(string_security_descriptor, string_sd_revision, security_descriptor, security_descriptor_size)
+  end
+
+  def convertSecurityDescriptorToStringSecurityDescriptorA(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : UInt32, string_security_descriptor : Win32cr::Foundation::PSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
+    C.ConvertSecurityDescriptorToStringSecurityDescriptorA(security_descriptor, requested_string_sd_revision, security_information, string_security_descriptor, string_security_descriptor_len)
+  end
+
+  def convertSecurityDescriptorToStringSecurityDescriptorW(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : UInt32, string_security_descriptor : Win32cr::Foundation::PWSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
+    C.ConvertSecurityDescriptorToStringSecurityDescriptorW(security_descriptor, requested_string_sd_revision, security_information, string_security_descriptor, string_security_descriptor_len)
+  end
+
   @[Link("authz")]
   @[Link("advapi32")]
   lib C
+    # :nodoc:
     fun AuthzAccessCheck(flags : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_FLAGS, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, optional_security_descriptor_array : Win32cr::Security::PSECURITY_DESCRIPTOR*, optional_security_descriptor_count : UInt32, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*, phAccessCheckResults : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzCachedAccessCheck(flags : UInt32, hAccessCheckResults : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_RESULTS_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzOpenObjectAudit(flags : UInt32, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, optional_security_descriptor_array : Win32cr::Security::PSECURITY_DESCRIPTOR*, optional_security_descriptor_count : UInt32, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzFreeHandle(hAccessCheckResults : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_RESULTS_HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzInitializeResourceManager(flags : UInt32, pfnDynamicAccessCheck : Win32cr::Security::Authorization::PFN_AUTHZ_DYNAMIC_ACCESS_CHECK, pfnComputeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS, pfnFreeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_FREE_DYNAMIC_GROUPS, szResourceManagerName : Win32cr::Foundation::PWSTR, phAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzInitializeResourceManagerEx(flags : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_FLAGS, pAuthzInitInfo : Win32cr::Security::Authorization::AUTHZ_INIT_INFO*, phAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzInitializeRemoteResourceManager(pRpcInitInfo : Win32cr::Security::Authorization::AUTHZ_RPC_INIT_INFO_CLIENT*, phAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzFreeResourceManager(hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzInitializeContextFromToken(flags : UInt32, token_handle : Win32cr::Foundation::HANDLE, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzInitializeContextFromSid(flags : UInt32, user_sid : Win32cr::Foundation::PSID, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzInitializeContextFromAuthzContext(flags : UInt32, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phNewAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzInitializeCompoundContext(user_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, device_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, phCompoundContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzAddSidsToContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, sids : Win32cr::Security::SID_AND_ATTRIBUTES*, sid_count : UInt32, restricted_sids : Win32cr::Security::SID_AND_ATTRIBUTES*, restricted_sid_count : UInt32, phNewAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzModifySecurityAttributes(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pOperations : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, pAttributes : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzModifyClaims(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, claim_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, pClaimOperations : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, pClaims : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzModifySids(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, sid_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, pSidOperations : Win32cr::Security::Authorization::AUTHZ_SID_OPERATION*, pSids : Win32cr::Security::TOKEN_GROUPS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzSetAppContainerInformation(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pAppContainerSid : Win32cr::Foundation::PSID, capability_count : UInt32, pCapabilitySids : Win32cr::Security::SID_AND_ATTRIBUTES*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzGetInformationFromContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, info_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, buffer_size : UInt32, pSizeRequired : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzFreeContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzInitializeObjectAccessAuditEvent(flags : Win32cr::Security::Authorization::AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, phAuditEvent : LibC::IntPtrT*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzInitializeObjectAccessAuditEvent2(flags : UInt32, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, szAdditionalInfo2 : Win32cr::Foundation::PWSTR, phAuditEvent : LibC::IntPtrT*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzFreeAuditEvent(hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzEvaluateSacl(authz_client_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, sacl : Win32cr::Security::ACL*, granted_access : UInt32, access_granted : Win32cr::Foundation::BOOL, pbGenerateAudit : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzInstallSecurityEventSource(dwFlags : UInt32, pRegistration : Win32cr::Security::Authorization::AUTHZ_SOURCE_SCHEMA_REGISTRATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzUninstallSecurityEventSource(dwFlags : UInt32, szEventSourceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzEnumerateSecurityEventSources(dwFlags : UInt32, buffer : Win32cr::Security::Authorization::AUTHZ_SOURCE_SCHEMA_REGISTRATION*, pdwCount : UInt32*, pdwLength : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzRegisterSecurityEventSource(dwFlags : UInt32, szEventSourceName : Win32cr::Foundation::PWSTR, phEventProvider : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzUnregisterSecurityEventSource(dwFlags : UInt32, phEventProvider : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzReportSecurityEvent(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Foundation::PSID, dwCount : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzReportSecurityEventFromParams(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Foundation::PSID, pParams : Win32cr::Security::Authorization::AUDIT_PARAMS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzRegisterCapChangeNotification(phCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__**, pfnCapChangeCallback : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, pCallbackContext : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzUnregisterCapChangeNotification(hCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AuthzFreeCentralAccessPolicyCache : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetEntriesInAclA(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : UInt32
 
+    # :nodoc:
     fun SetEntriesInAclW(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : UInt32
 
+    # :nodoc:
     fun GetExplicitEntriesFromAclA(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**) : UInt32
 
+    # :nodoc:
     fun GetExplicitEntriesFromAclW(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**) : UInt32
 
+    # :nodoc:
     fun GetEffectiveRightsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pAccessRights : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetEffectiveRightsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pAccessRights : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetAuditedPermissionsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetAuditedPermissionsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun SetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun SetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun SetSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
 
+    # :nodoc:
     fun GetInheritanceSourceA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMA*) : UInt32
 
+    # :nodoc:
     fun GetInheritanceSourceW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*) : UInt32
 
+    # :nodoc:
     fun FreeInheritedFromArray(pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*, ace_cnt : UInt16, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*) : UInt32
 
+    # :nodoc:
     fun TreeResetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
 
+    # :nodoc:
     fun TreeResetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
 
+    # :nodoc:
     fun TreeSetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
 
+    # :nodoc:
     fun TreeSetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
 
+    # :nodoc:
     fun BuildSecurityDescriptorA(pOwner : Win32cr::Security::Authorization::TRUSTEE_A*, pGroup : Win32cr::Security::Authorization::TRUSTEE_A*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun BuildSecurityDescriptorW(pOwner : Win32cr::Security::Authorization::TRUSTEE_W*, pGroup : Win32cr::Security::Authorization::TRUSTEE_W*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
 
+    # :nodoc:
     fun LookupSecurityDescriptorPartsA(ppOwner : Win32cr::Security::Authorization::TRUSTEE_A**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_A**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
 
+    # :nodoc:
     fun LookupSecurityDescriptorPartsW(ppOwner : Win32cr::Security::Authorization::TRUSTEE_W**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_W**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
 
+    # :nodoc:
     fun BuildExplicitAccessWithNameA(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pTrusteeName : Win32cr::Foundation::PSTR, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : Win32cr::Security::ACE_FLAGS) : Void
 
+    # :nodoc:
     fun BuildExplicitAccessWithNameW(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pTrusteeName : Win32cr::Foundation::PWSTR, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : Win32cr::Security::ACE_FLAGS) : Void
 
+    # :nodoc:
     fun BuildImpersonateExplicitAccessWithNameA(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pTrusteeName : Win32cr::Foundation::PSTR, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : UInt32) : Void
 
+    # :nodoc:
     fun BuildImpersonateExplicitAccessWithNameW(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pTrusteeName : Win32cr::Foundation::PWSTR, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : UInt32) : Void
 
+    # :nodoc:
     fun BuildTrusteeWithNameA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pName : Win32cr::Foundation::PSTR) : Void
 
+    # :nodoc:
     fun BuildTrusteeWithNameW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pName : Win32cr::Foundation::PWSTR) : Void
 
+    # :nodoc:
     fun BuildImpersonateTrusteeA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pImpersonateTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Void
 
+    # :nodoc:
     fun BuildImpersonateTrusteeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pImpersonateTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Void
 
+    # :nodoc:
     fun BuildTrusteeWithSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSid : Win32cr::Foundation::PSID) : Void
 
+    # :nodoc:
     fun BuildTrusteeWithSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSid : Win32cr::Foundation::PSID) : Void
 
+    # :nodoc:
     fun BuildTrusteeWithObjectsAndSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Foundation::PSID) : Void
 
+    # :nodoc:
     fun BuildTrusteeWithObjectsAndSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Foundation::PSID) : Void
 
+    # :nodoc:
     fun BuildTrusteeWithObjectsAndNameA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pObjName : Win32cr::Security::Authorization::OBJECTS_AND_NAME_A*, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, object_type_name : Win32cr::Foundation::PSTR, inherited_object_type_name : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR) : Void
 
+    # :nodoc:
     fun BuildTrusteeWithObjectsAndNameW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pObjName : Win32cr::Security::Authorization::OBJECTS_AND_NAME_W*, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, object_type_name : Win32cr::Foundation::PWSTR, inherited_object_type_name : Win32cr::Foundation::PWSTR, name : Win32cr::Foundation::PWSTR) : Void
 
+    # :nodoc:
     fun GetTrusteeNameA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun GetTrusteeNameW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun GetTrusteeTypeA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::TRUSTEE_TYPE
 
+    # :nodoc:
     fun GetTrusteeTypeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::TRUSTEE_TYPE
 
+    # :nodoc:
     fun GetTrusteeFormA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::TRUSTEE_FORM
 
+    # :nodoc:
     fun GetTrusteeFormW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::TRUSTEE_FORM
 
+    # :nodoc:
     fun GetMultipleTrusteeOperationA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION
 
+    # :nodoc:
     fun GetMultipleTrusteeOperationW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION
 
+    # :nodoc:
     fun GetMultipleTrusteeA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::TRUSTEE_A*
 
+    # :nodoc:
     fun GetMultipleTrusteeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::TRUSTEE_W*
 
+    # :nodoc:
     fun ConvertSidToStringSidA(sid : Win32cr::Foundation::PSID, string_sid : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun ConvertSidToStringSidW(sid : Win32cr::Foundation::PSID, string_sid : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ConvertStringSidToSidA(string_sid : Win32cr::Foundation::PSTR, sid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun ConvertStringSidToSidW(string_sid : Win32cr::Foundation::PWSTR, sid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ConvertStringSecurityDescriptorToSecurityDescriptorA(string_security_descriptor : Win32cr::Foundation::PSTR, string_sd_revision : UInt32, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, security_descriptor_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ConvertStringSecurityDescriptorToSecurityDescriptorW(string_security_descriptor : Win32cr::Foundation::PWSTR, string_sd_revision : UInt32, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, security_descriptor_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ConvertSecurityDescriptorToStringSecurityDescriptorA(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : UInt32, string_security_descriptor : Win32cr::Foundation::PSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ConvertSecurityDescriptorToStringSecurityDescriptorW(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : UInt32, string_security_descriptor : Win32cr::Foundation::PWSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
 
   end

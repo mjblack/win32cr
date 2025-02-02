@@ -5,6 +5,7 @@ require "./../ui/windows_and_messaging.cr"
 require "./../graphics/gdi.cr"
 
 module Win32cr::Devices::ImageAcquisition
+  extend self
   alias DeviceDialogFunction = Proc(Win32cr::Devices::ImageAcquisition::DEVICEDIALOGDATA*, Win32cr::Foundation::HRESULT)
 
   WIA_DIP_DEV_ID = 2_u32

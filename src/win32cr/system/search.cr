@@ -9,6 +9,7 @@ require "./../security/authorization.cr"
 require "./../ui/shell/common.cr"
 
 module Win32cr::System::Search
+  extend self
   alias PFNFILLTEXTBUFFER = Proc(Win32cr::System::Search::TEXT_SOURCE*, Win32cr::Foundation::HRESULT)
 
   alias SQL_ASYNC_NOTIFICATION_CALLBACK = Proc(Void*, Win32cr::Foundation::BOOL, Int16)
@@ -13010,550 +13011,1725 @@ module Win32cr::System::Search
 
   end
 
+  def sQLAllocConnect(environment_handle : Void*, connection_handle : Void**) : Int16
+    C.SQLAllocConnect(environment_handle, connection_handle)
+  end
+
+  def sQLAllocEnv(environment_handle : Void**) : Int16
+    C.SQLAllocEnv(environment_handle)
+  end
+
+  def sQLAllocHandle(handle_type : Int16, input_handle : Void*, output_handle : Void**) : Int16
+    C.SQLAllocHandle(handle_type, input_handle, output_handle)
+  end
+
+  def sQLAllocStmt(connection_handle : Void*, statement_handle : Void**) : Int16
+    C.SQLAllocStmt(connection_handle, statement_handle)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLBindCol(statement_handle : Void*, column_number : UInt16, target_type : Int16, target_value : Void*, buffer_length : Int64, str_len_or_ind : Int64*) : Int16
+    C.SQLBindCol(statement_handle, column_number, target_type, target_value, buffer_length, str_len_or_ind)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLBindParam(statement_handle : Void*, parameter_number : UInt16, value_type : Int16, parameter_type : Int16, length_precision : UInt64, parameter_scale : Int16, parameter_value : Void*, str_len_or_ind : Int64*) : Int16
+    C.SQLBindParam(statement_handle, parameter_number, value_type, parameter_type, length_precision, parameter_scale, parameter_value, str_len_or_ind)
+  end
+{% end %}
+
+  def sQLCancel(statement_handle : Void*) : Int16
+    C.SQLCancel(statement_handle)
+  end
+
+  def sQLCancelHandle(handle_type : Int16, input_handle : Void*) : Int16
+    C.SQLCancelHandle(handle_type, input_handle)
+  end
+
+  def sQLCloseCursor(statement_handle : Void*) : Int16
+    C.SQLCloseCursor(statement_handle)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLColAttribute(statement_handle : Void*, column_number : UInt16, field_identifier : UInt16, character_attribute : Void*, buffer_length : Int16, string_length : Int16*, numeric_attribute : Int64*) : Int16
+    C.SQLColAttribute(statement_handle, column_number, field_identifier, character_attribute, buffer_length, string_length, numeric_attribute)
+  end
+{% end %}
+
+  def sQLColumns(statement_handle : Void*, catalog_name : UInt8*, name_length1 : Int16, schema_name : UInt8*, name_length2 : Int16, table_name : UInt8*, name_length3 : Int16, column_name : UInt8*, name_length4 : Int16) : Int16
+    C.SQLColumns(statement_handle, catalog_name, name_length1, schema_name, name_length2, table_name, name_length3, column_name, name_length4)
+  end
+
+  def sQLCompleteAsync(handle_type : Int16, handle : Void*, async_ret_code_ptr : Int16*) : Int16
+    C.SQLCompleteAsync(handle_type, handle, async_ret_code_ptr)
+  end
+
+  def sQLConnect(connection_handle : Void*, server_name : UInt8*, name_length1 : Int16, user_name : UInt8*, name_length2 : Int16, authentication : UInt8*, name_length3 : Int16) : Int16
+    C.SQLConnect(connection_handle, server_name, name_length1, user_name, name_length2, authentication, name_length3)
+  end
+
+  def sQLCopyDesc(source_desc_handle : Void*, target_desc_handle : Void*) : Int16
+    C.SQLCopyDesc(source_desc_handle, target_desc_handle)
+  end
+
+  def sQLDataSources(environment_handle : Void*, direction : UInt16, server_name : UInt8*, buffer_length1 : Int16, name_length1_ptr : Int16*, description : UInt8*, buffer_length2 : Int16, name_length2_ptr : Int16*) : Int16
+    C.SQLDataSources(environment_handle, direction, server_name, buffer_length1, name_length1_ptr, description, buffer_length2, name_length2_ptr)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLDescribeCol(statement_handle : Void*, column_number : UInt16, column_name : UInt8*, buffer_length : Int16, name_length : Int16*, data_type : Int16*, column_size : UInt64*, decimal_digits : Int16*, nullable : Int16*) : Int16
+    C.SQLDescribeCol(statement_handle, column_number, column_name, buffer_length, name_length, data_type, column_size, decimal_digits, nullable)
+  end
+{% end %}
+
+  def sQLDisconnect(connection_handle : Void*) : Int16
+    C.SQLDisconnect(connection_handle)
+  end
+
+  def sQLEndTran(handle_type : Int16, handle : Void*, completion_type : Int16) : Int16
+    C.SQLEndTran(handle_type, handle, completion_type)
+  end
+
+  def sQLError(environment_handle : Void*, connection_handle : Void*, statement_handle : Void*, sqlstate : UInt8*, native_error : Int32*, message_text : UInt8*, buffer_length : Int16, text_length : Int16*) : Int16
+    C.SQLError(environment_handle, connection_handle, statement_handle, sqlstate, native_error, message_text, buffer_length, text_length)
+  end
+
+  def sQLExecDirect(statement_handle : Void*, statement_text : UInt8*, text_length : Int32) : Int16
+    C.SQLExecDirect(statement_handle, statement_text, text_length)
+  end
+
+  def sQLExecute(statement_handle : Void*) : Int16
+    C.SQLExecute(statement_handle)
+  end
+
+  def sQLFetch(statement_handle : Void*) : Int16
+    C.SQLFetch(statement_handle)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLFetchScroll(statement_handle : Void*, fetch_orientation : Int16, fetch_offset : Int64) : Int16
+    C.SQLFetchScroll(statement_handle, fetch_orientation, fetch_offset)
+  end
+{% end %}
+
+  def sQLFreeConnect(connection_handle : Void*) : Int16
+    C.SQLFreeConnect(connection_handle)
+  end
+
+  def sQLFreeEnv(environment_handle : Void*) : Int16
+    C.SQLFreeEnv(environment_handle)
+  end
+
+  def sQLFreeHandle(handle_type : Int16, handle : Void*) : Int16
+    C.SQLFreeHandle(handle_type, handle)
+  end
+
+  def sQLFreeStmt(statement_handle : Void*, option : UInt16) : Int16
+    C.SQLFreeStmt(statement_handle, option)
+  end
+
+  def sQLGetConnectAttr(connection_handle : Void*, attribute : Int32, value : Void*, buffer_length : Int32, string_length_ptr : Int32*) : Int16
+    C.SQLGetConnectAttr(connection_handle, attribute, value, buffer_length, string_length_ptr)
+  end
+
+  def sQLGetConnectOption(connection_handle : Void*, option : UInt16, value : Void*) : Int16
+    C.SQLGetConnectOption(connection_handle, option, value)
+  end
+
+  def sQLGetCursorName(statement_handle : Void*, cursor_name : UInt8*, buffer_length : Int16, name_length_ptr : Int16*) : Int16
+    C.SQLGetCursorName(statement_handle, cursor_name, buffer_length, name_length_ptr)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLGetData(statement_handle : Void*, column_number : UInt16, target_type : Int16, target_value : Void*, buffer_length : Int64, str_len_or_ind_ptr : Int64*) : Int16
+    C.SQLGetData(statement_handle, column_number, target_type, target_value, buffer_length, str_len_or_ind_ptr)
+  end
+{% end %}
+
+  def sQLGetDescField(descriptor_handle : Void*, rec_number : Int16, field_identifier : Int16, value : Void*, buffer_length : Int32, string_length : Int32*) : Int16
+    C.SQLGetDescField(descriptor_handle, rec_number, field_identifier, value, buffer_length, string_length)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLGetDescRec(descriptor_handle : Void*, rec_number : Int16, name : UInt8*, buffer_length : Int16, string_length_ptr : Int16*, type_ptr : Int16*, sub_type_ptr : Int16*, length_ptr : Int64*, precision_ptr : Int16*, scale_ptr : Int16*, nullable_ptr : Int16*) : Int16
+    C.SQLGetDescRec(descriptor_handle, rec_number, name, buffer_length, string_length_ptr, type_ptr, sub_type_ptr, length_ptr, precision_ptr, scale_ptr, nullable_ptr)
+  end
+{% end %}
+
+  def sQLGetDiagField(handle_type : Int16, handle : Void*, rec_number : Int16, diag_identifier : Int16, diag_info : Void*, buffer_length : Int16, string_length : Int16*) : Int16
+    C.SQLGetDiagField(handle_type, handle, rec_number, diag_identifier, diag_info, buffer_length, string_length)
+  end
+
+  def sQLGetDiagRec(handle_type : Int16, handle : Void*, rec_number : Int16, sqlstate : UInt8*, native_error : Int32*, message_text : UInt8*, buffer_length : Int16, text_length : Int16*) : Int16
+    C.SQLGetDiagRec(handle_type, handle, rec_number, sqlstate, native_error, message_text, buffer_length, text_length)
+  end
+
+  def sQLGetEnvAttr(environment_handle : Void*, attribute : Int32, value : Void*, buffer_length : Int32, string_length : Int32*) : Int16
+    C.SQLGetEnvAttr(environment_handle, attribute, value, buffer_length, string_length)
+  end
+
+  def sQLGetFunctions(connection_handle : Void*, function_id : UInt16, supported : UInt16*) : Int16
+    C.SQLGetFunctions(connection_handle, function_id, supported)
+  end
+
+  def sQLGetInfo(connection_handle : Void*, info_type : UInt16, info_value : Void*, buffer_length : Int16, string_length_ptr : Int16*) : Int16
+    C.SQLGetInfo(connection_handle, info_type, info_value, buffer_length, string_length_ptr)
+  end
+
+  def sQLGetStmtAttr(statement_handle : Void*, attribute : Int32, value : Void*, buffer_length : Int32, string_length : Int32*) : Int16
+    C.SQLGetStmtAttr(statement_handle, attribute, value, buffer_length, string_length)
+  end
+
+  def sQLGetStmtOption(statement_handle : Void*, option : UInt16, value : Void*) : Int16
+    C.SQLGetStmtOption(statement_handle, option, value)
+  end
+
+  def sQLGetTypeInfo(statement_handle : Void*, data_type : Int16) : Int16
+    C.SQLGetTypeInfo(statement_handle, data_type)
+  end
+
+  def sQLNumResultCols(statement_handle : Void*, column_count : Int16*) : Int16
+    C.SQLNumResultCols(statement_handle, column_count)
+  end
+
+  def sQLParamData(statement_handle : Void*, value : Void**) : Int16
+    C.SQLParamData(statement_handle, value)
+  end
+
+  def sQLPrepare(statement_handle : Void*, statement_text : UInt8*, text_length : Int32) : Int16
+    C.SQLPrepare(statement_handle, statement_text, text_length)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLPutData(statement_handle : Void*, data : Void*, str_len_or_ind : Int64) : Int16
+    C.SQLPutData(statement_handle, data, str_len_or_ind)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLRowCount(statement_handle : Void*, row_count : Int64*) : Int16
+    C.SQLRowCount(statement_handle, row_count)
+  end
+{% end %}
+
+  def sQLSetConnectAttr(connection_handle : Void*, attribute : Int32, value : Void*, string_length : Int32) : Int16
+    C.SQLSetConnectAttr(connection_handle, attribute, value, string_length)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLSetConnectOption(connection_handle : Void*, option : UInt16, value : UInt64) : Int16
+    C.SQLSetConnectOption(connection_handle, option, value)
+  end
+{% end %}
+
+  def sQLSetCursorName(statement_handle : Void*, cursor_name : UInt8*, name_length : Int16) : Int16
+    C.SQLSetCursorName(statement_handle, cursor_name, name_length)
+  end
+
+  def sQLSetDescField(descriptor_handle : Void*, rec_number : Int16, field_identifier : Int16, value : Void*, buffer_length : Int32) : Int16
+    C.SQLSetDescField(descriptor_handle, rec_number, field_identifier, value, buffer_length)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLSetDescRec(descriptor_handle : Void*, rec_number : Int16, type__ : Int16, sub_type : Int16, length : Int64, precision : Int16, scale : Int16, data : Void*, string_length : Int64*, indicator : Int64*) : Int16
+    C.SQLSetDescRec(descriptor_handle, rec_number, type__, sub_type, length, precision, scale, data, string_length, indicator)
+  end
+{% end %}
+
+  def sQLSetEnvAttr(environment_handle : Void*, attribute : Int32, value : Void*, string_length : Int32) : Int16
+    C.SQLSetEnvAttr(environment_handle, attribute, value, string_length)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLSetParam(statement_handle : Void*, parameter_number : UInt16, value_type : Int16, parameter_type : Int16, length_precision : UInt64, parameter_scale : Int16, parameter_value : Void*, str_len_or_ind : Int64*) : Int16
+    C.SQLSetParam(statement_handle, parameter_number, value_type, parameter_type, length_precision, parameter_scale, parameter_value, str_len_or_ind)
+  end
+{% end %}
+
+  def sQLSetStmtAttr(statement_handle : Void*, attribute : Int32, value : Void*, string_length : Int32) : Int16
+    C.SQLSetStmtAttr(statement_handle, attribute, value, string_length)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLSetStmtOption(statement_handle : Void*, option : UInt16, value : UInt64) : Int16
+    C.SQLSetStmtOption(statement_handle, option, value)
+  end
+{% end %}
+
+  def sQLSpecialColumns(statement_handle : Void*, identifier_type : UInt16, catalog_name : UInt8*, name_length1 : Int16, schema_name : UInt8*, name_length2 : Int16, table_name : UInt8*, name_length3 : Int16, scope : UInt16, nullable : UInt16) : Int16
+    C.SQLSpecialColumns(statement_handle, identifier_type, catalog_name, name_length1, schema_name, name_length2, table_name, name_length3, scope, nullable)
+  end
+
+  def sQLStatistics(statement_handle : Void*, catalog_name : UInt8*, name_length1 : Int16, schema_name : UInt8*, name_length2 : Int16, table_name : UInt8*, name_length3 : Int16, unique : UInt16, reserved : UInt16) : Int16
+    C.SQLStatistics(statement_handle, catalog_name, name_length1, schema_name, name_length2, table_name, name_length3, unique, reserved)
+  end
+
+  def sQLTables(statement_handle : Void*, catalog_name : UInt8*, name_length1 : Int16, schema_name : UInt8*, name_length2 : Int16, table_name : UInt8*, name_length3 : Int16, table_type : UInt8*, name_length4 : Int16) : Int16
+    C.SQLTables(statement_handle, catalog_name, name_length1, schema_name, name_length2, table_name, name_length3, table_type, name_length4)
+  end
+
+  def sQLTransact(environment_handle : Void*, connection_handle : Void*, completion_type : UInt16) : Int16
+    C.SQLTransact(environment_handle, connection_handle, completion_type)
+  end
+
+  def bcpBatch(param0 : Void*) : Int32
+    C.bcp_batch(param0)
+  end
+
+  def bcpBind(param0 : Void*, param1 : UInt8*, param2 : Int32, param3 : Int32, param4 : UInt8*, param5 : Int32, param6 : Int32, param7 : Int32) : Int16
+    C.bcp_bind(param0, param1, param2, param3, param4, param5, param6, param7)
+  end
+
+  def bcpColfmt(param0 : Void*, param1 : Int32, param2 : UInt8, param3 : Int32, param4 : Int32, param5 : UInt8*, param6 : Int32, param7 : Int32) : Int16
+    C.bcp_colfmt(param0, param1, param2, param3, param4, param5, param6, param7)
+  end
+
+  def bcpCollen(param0 : Void*, param1 : Int32, param2 : Int32) : Int16
+    C.bcp_collen(param0, param1, param2)
+  end
+
+  def bcpColptr(param0 : Void*, param1 : UInt8*, param2 : Int32) : Int16
+    C.bcp_colptr(param0, param1, param2)
+  end
+
+  def bcpColumns(param0 : Void*, param1 : Int32) : Int16
+    C.bcp_columns(param0, param1)
+  end
+
+  def bcpControl(param0 : Void*, param1 : Int32, param2 : Void*) : Int16
+    C.bcp_control(param0, param1, param2)
+  end
+
+  def bcpDone(param0 : Void*) : Int32
+    C.bcp_done(param0)
+  end
+
+  def bcpExec(param0 : Void*, param1 : Int32*) : Int16
+    C.bcp_exec(param0, param1)
+  end
+
+  def bcpGetcolfmt(param0 : Void*, param1 : Int32, param2 : Int32, param3 : Void*, param4 : Int32, param5 : Int32*) : Int16
+    C.bcp_getcolfmt(param0, param1, param2, param3, param4, param5)
+  end
+
+  def bcpInitA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::Foundation::PSTR, param3 : Win32cr::Foundation::PSTR, param4 : Int32) : Int16
+    C.bcp_initA(param0, param1, param2, param3, param4)
+  end
+
+  def bcpInitW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::Foundation::PWSTR, param3 : Win32cr::Foundation::PWSTR, param4 : Int32) : Int16
+    C.bcp_initW(param0, param1, param2, param3, param4)
+  end
+
+  def bcpMoretext(param0 : Void*, param1 : Int32, param2 : UInt8*) : Int16
+    C.bcp_moretext(param0, param1, param2)
+  end
+
+  def bcpReadfmtA(param0 : Void*, param1 : Win32cr::Foundation::PSTR) : Int16
+    C.bcp_readfmtA(param0, param1)
+  end
+
+  def bcpReadfmtW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR) : Int16
+    C.bcp_readfmtW(param0, param1)
+  end
+
+  def bcpSendrow(param0 : Void*) : Int16
+    C.bcp_sendrow(param0)
+  end
+
+  def bcpSetcolfmt(param0 : Void*, param1 : Int32, param2 : Int32, param3 : Void*, param4 : Int32) : Int16
+    C.bcp_setcolfmt(param0, param1, param2, param3, param4)
+  end
+
+  def bcpWritefmtA(param0 : Void*, param1 : Win32cr::Foundation::PSTR) : Int16
+    C.bcp_writefmtA(param0, param1)
+  end
+
+  def bcpWritefmtW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR) : Int16
+    C.bcp_writefmtW(param0, param1)
+  end
+
+  def dbprtypeA(param0 : Int32) : Win32cr::Foundation::PSTR
+    C.dbprtypeA(param0)
+  end
+
+  def dbprtypeW(param0 : Int32) : Win32cr::Foundation::PWSTR
+    C.dbprtypeW(param0)
+  end
+
+  def sQLLinkedServers(param0 : Void*) : Int16
+    C.SQLLinkedServers(param0)
+  end
+
+  def sQLLinkedCatalogsA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : Int16) : Int16
+    C.SQLLinkedCatalogsA(param0, param1, param2)
+  end
+
+  def sQLLinkedCatalogsW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : Int16) : Int16
+    C.SQLLinkedCatalogsW(param0, param1, param2)
+  end
+
+  def sQLInitEnumServers(pwchServerName : Win32cr::Foundation::PWSTR, pwchInstanceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.SQLInitEnumServers(pwchServerName, pwchInstanceName)
+  end
+
+  def sQLGetNextEnumeration(hEnumHandle : Win32cr::Foundation::HANDLE, prgEnumData : UInt8*, piEnumLength : Int32*) : Int16
+    C.SQLGetNextEnumeration(hEnumHandle, prgEnumData, piEnumLength)
+  end
+
+  def sQLCloseEnumServers(hEnumHandle : Win32cr::Foundation::HANDLE) : Int16
+    C.SQLCloseEnumServers(hEnumHandle)
+  end
+
+  def sQLDriverConnect(hdbc : Void*, hwnd : LibC::IntPtrT, szConnStrIn : UInt8*, cchConnStrIn : Int16, szConnStrOut : UInt8*, cchConnStrOutMax : Int16, pcchConnStrOut : Int16*, fDriverCompletion : UInt16) : Int16
+    C.SQLDriverConnect(hdbc, hwnd, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut, fDriverCompletion)
+  end
+
+  def sQLBrowseConnect(hdbc : Void*, szConnStrIn : UInt8*, cchConnStrIn : Int16, szConnStrOut : UInt8*, cchConnStrOutMax : Int16, pcchConnStrOut : Int16*) : Int16
+    C.SQLBrowseConnect(hdbc, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut)
+  end
+
+  def sQLBulkOperations(statement_handle : Void*, operation : Int16) : Int16
+    C.SQLBulkOperations(statement_handle, operation)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLColAttributes(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int64*) : Int16
+    C.SQLColAttributes(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+  end
+{% end %}
+
+  def sQLColumnPrivileges(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szTableName : UInt8*, cchTableName : Int16, szColumnName : UInt8*, cchColumnName : Int16) : Int16
+    C.SQLColumnPrivileges(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szColumnName, cchColumnName)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLDescribeParam(hstmt : Void*, ipar : UInt16, pfSqlType : Int16*, pcbParamDef : UInt64*, pibScale : Int16*, pfNullable : Int16*) : Int16
+    C.SQLDescribeParam(hstmt, ipar, pfSqlType, pcbParamDef, pibScale, pfNullable)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLExtendedFetch(hstmt : Void*, fFetchType : UInt16, irow : Int64, pcrow : UInt64*, rgfRowStatus : UInt16*) : Int16
+    C.SQLExtendedFetch(hstmt, fFetchType, irow, pcrow, rgfRowStatus)
+  end
+{% end %}
+
+  def sQLForeignKeys(hstmt : Void*, szPkCatalogName : UInt8*, cchPkCatalogName : Int16, szPkSchemaName : UInt8*, cchPkSchemaName : Int16, szPkTableName : UInt8*, cchPkTableName : Int16, szFkCatalogName : UInt8*, cchFkCatalogName : Int16, szFkSchemaName : UInt8*, cchFkSchemaName : Int16, szFkTableName : UInt8*, cchFkTableName : Int16) : Int16
+    C.SQLForeignKeys(hstmt, szPkCatalogName, cchPkCatalogName, szPkSchemaName, cchPkSchemaName, szPkTableName, cchPkTableName, szFkCatalogName, cchFkCatalogName, szFkSchemaName, cchFkSchemaName, szFkTableName, cchFkTableName)
+  end
+
+  def sQLMoreResults(hstmt : Void*) : Int16
+    C.SQLMoreResults(hstmt)
+  end
+
+  def sQLNativeSql(hdbc : Void*, szSqlStrIn : UInt8*, cchSqlStrIn : Int32, szSqlStr : UInt8*, cchSqlStrMax : Int32, pcbSqlStr : Int32*) : Int16
+    C.SQLNativeSql(hdbc, szSqlStrIn, cchSqlStrIn, szSqlStr, cchSqlStrMax, pcbSqlStr)
+  end
+
+  def sQLNumParams(hstmt : Void*, pcpar : Int16*) : Int16
+    C.SQLNumParams(hstmt, pcpar)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLParamOptions(hstmt : Void*, crow : UInt64, pirow : UInt64*) : Int16
+    C.SQLParamOptions(hstmt, crow, pirow)
+  end
+{% end %}
+
+  def sQLPrimaryKeys(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szTableName : UInt8*, cchTableName : Int16) : Int16
+    C.SQLPrimaryKeys(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+  end
+
+  def sQLProcedureColumns(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szProcName : UInt8*, cchProcName : Int16, szColumnName : UInt8*, cchColumnName : Int16) : Int16
+    C.SQLProcedureColumns(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName, szColumnName, cchColumnName)
+  end
+
+  def sQLProcedures(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szProcName : UInt8*, cchProcName : Int16) : Int16
+    C.SQLProcedures(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLSetPos(hstmt : Void*, irow : UInt64, fOption : UInt16, fLock : UInt16) : Int16
+    C.SQLSetPos(hstmt, irow, fOption, fLock)
+  end
+{% end %}
+
+  def sQLTablePrivileges(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szTableName : UInt8*, cchTableName : Int16) : Int16
+    C.SQLTablePrivileges(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+  end
+
+  def sQLDrivers(henv : Void*, fDirection : UInt16, szDriverDesc : UInt8*, cchDriverDescMax : Int16, pcchDriverDesc : Int16*, szDriverAttributes : UInt8*, cchDrvrAttrMax : Int16, pcchDrvrAttr : Int16*) : Int16
+    C.SQLDrivers(henv, fDirection, szDriverDesc, cchDriverDescMax, pcchDriverDesc, szDriverAttributes, cchDrvrAttrMax, pcchDrvrAttr)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLBindParameter(hstmt : Void*, ipar : UInt16, fParamType : Int16, fCType : Int16, fSqlType : Int16, cbColDef : UInt64, ibScale : Int16, rgbValue : Void*, cbValueMax : Int64, pcbValue : Int64*) : Int16
+    C.SQLBindParameter(hstmt, ipar, fParamType, fCType, fSqlType, cbColDef, ibScale, rgbValue, cbValueMax, pcbValue)
+  end
+{% end %}
+
+  def sQLAllocHandleStd(fHandleType : Int16, hInput : Void*, phOutput : Void**) : Int16
+    C.SQLAllocHandleStd(fHandleType, hInput, phOutput)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLSetScrollOptions(hstmt : Void*, fConcurrency : UInt16, crowKeyset : Int64, crowRowset : UInt16) : Int16
+    C.SQLSetScrollOptions(hstmt, fConcurrency, crowKeyset, crowRowset)
+  end
+{% end %}
+
+  def oDBCSetTryWaitValue(dwValue : UInt32) : Win32cr::Foundation::BOOL
+    C.ODBCSetTryWaitValue(dwValue)
+  end
+
+  def oDBCGetTryWaitValue : UInt32
+    C.ODBCGetTryWaitValue
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLColAttributeW(hstmt : Void*, iCol : UInt16, iField : UInt16, pCharAttr : Void*, cbDescMax : Int16, pcbCharAttr : Int16*, pNumAttr : Int64*) : Int16
+    C.SQLColAttributeW(hstmt, iCol, iField, pCharAttr, cbDescMax, pcbCharAttr, pNumAttr)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLColAttributesW(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int64*) : Int16
+    C.SQLColAttributesW(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+  end
+{% end %}
+
+  def sQLConnectW(hdbc : Void*, szDSN : UInt16*, cchDSN : Int16, szUID : UInt16*, cchUID : Int16, szAuthStr : UInt16*, cchAuthStr : Int16) : Int16
+    C.SQLConnectW(hdbc, szDSN, cchDSN, szUID, cchUID, szAuthStr, cchAuthStr)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLDescribeColW(hstmt : Void*, icol : UInt16, szColName : UInt16*, cchColNameMax : Int16, pcchColName : Int16*, pfSqlType : Int16*, pcbColDef : UInt64*, pibScale : Int16*, pfNullable : Int16*) : Int16
+    C.SQLDescribeColW(hstmt, icol, szColName, cchColNameMax, pcchColName, pfSqlType, pcbColDef, pibScale, pfNullable)
+  end
+{% end %}
+
+  def sQLErrorW(henv : Void*, hdbc : Void*, hstmt : Void*, wszSqlState : UInt16*, pfNativeError : Int32*, wszErrorMsg : UInt16*, cchErrorMsgMax : Int16, pcchErrorMsg : Int16*) : Int16
+    C.SQLErrorW(henv, hdbc, hstmt, wszSqlState, pfNativeError, wszErrorMsg, cchErrorMsgMax, pcchErrorMsg)
+  end
+
+  def sQLExecDirectW(hstmt : Void*, szSqlStr : UInt16*, text_length : Int32) : Int16
+    C.SQLExecDirectW(hstmt, szSqlStr, text_length)
+  end
+
+  def sQLGetConnectAttrW(hdbc : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
+    C.SQLGetConnectAttrW(hdbc, fAttribute, rgbValue, cbValueMax, pcbValue)
+  end
+
+  def sQLGetCursorNameW(hstmt : Void*, szCursor : UInt16*, cchCursorMax : Int16, pcchCursor : Int16*) : Int16
+    C.SQLGetCursorNameW(hstmt, szCursor, cchCursorMax, pcchCursor)
+  end
+
+  def sQLSetDescFieldW(descriptor_handle : Void*, rec_number : Int16, field_identifier : Int16, value : Void*, buffer_length : Int32) : Int16
+    C.SQLSetDescFieldW(descriptor_handle, rec_number, field_identifier, value, buffer_length)
+  end
+
+  def sQLGetDescFieldW(hdesc : Void*, iRecord : Int16, iField : Int16, rgbValue : Void*, cbBufferLength : Int32, string_length : Int32*) : Int16
+    C.SQLGetDescFieldW(hdesc, iRecord, iField, rgbValue, cbBufferLength, string_length)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLGetDescRecW(hdesc : Void*, iRecord : Int16, szName : UInt16*, cchNameMax : Int16, pcchName : Int16*, pfType : Int16*, pfSubType : Int16*, pLength : Int64*, pPrecision : Int16*, pScale : Int16*, pNullable : Int16*) : Int16
+    C.SQLGetDescRecW(hdesc, iRecord, szName, cchNameMax, pcchName, pfType, pfSubType, pLength, pPrecision, pScale, pNullable)
+  end
+{% end %}
+
+  def sQLGetDiagFieldW(fHandleType : Int16, handle : Void*, iRecord : Int16, fDiagField : Int16, rgbDiagInfo : Void*, cbBufferLength : Int16, pcbStringLength : Int16*) : Int16
+    C.SQLGetDiagFieldW(fHandleType, handle, iRecord, fDiagField, rgbDiagInfo, cbBufferLength, pcbStringLength)
+  end
+
+  def sQLGetDiagRecW(fHandleType : Int16, handle : Void*, iRecord : Int16, szSqlState : UInt16*, pfNativeError : Int32*, szErrorMsg : UInt16*, cchErrorMsgMax : Int16, pcchErrorMsg : Int16*) : Int16
+    C.SQLGetDiagRecW(fHandleType, handle, iRecord, szSqlState, pfNativeError, szErrorMsg, cchErrorMsgMax, pcchErrorMsg)
+  end
+
+  def sQLPrepareW(hstmt : Void*, szSqlStr : UInt16*, cchSqlStr : Int32) : Int16
+    C.SQLPrepareW(hstmt, szSqlStr, cchSqlStr)
+  end
+
+  def sQLSetConnectAttrW(hdbc : Void*, fAttribute : Int32, rgbValue : Void*, cbValue : Int32) : Int16
+    C.SQLSetConnectAttrW(hdbc, fAttribute, rgbValue, cbValue)
+  end
+
+  def sQLSetCursorNameW(hstmt : Void*, szCursor : UInt16*, cchCursor : Int16) : Int16
+    C.SQLSetCursorNameW(hstmt, szCursor, cchCursor)
+  end
+
+  def sQLColumnsW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, szColumnName : UInt16*, cchColumnName : Int16) : Int16
+    C.SQLColumnsW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szColumnName, cchColumnName)
+  end
+
+  def sQLGetConnectOptionW(hdbc : Void*, fOption : UInt16, pvParam : Void*) : Int16
+    C.SQLGetConnectOptionW(hdbc, fOption, pvParam)
+  end
+
+  def sQLGetInfoW(hdbc : Void*, fInfoType : UInt16, rgbInfoValue : Void*, cbInfoValueMax : Int16, pcbInfoValue : Int16*) : Int16
+    C.SQLGetInfoW(hdbc, fInfoType, rgbInfoValue, cbInfoValueMax, pcbInfoValue)
+  end
+
+  def sQLGetTypeInfoW(statement_handle : Void*, data_type : Int16) : Int16
+    C.SQLGetTypeInfoW(statement_handle, data_type)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLSetConnectOptionW(hdbc : Void*, fOption : UInt16, vParam : UInt64) : Int16
+    C.SQLSetConnectOptionW(hdbc, fOption, vParam)
+  end
+{% end %}
+
+  def sQLSpecialColumnsW(hstmt : Void*, fColType : UInt16, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, fScope : UInt16, fNullable : UInt16) : Int16
+    C.SQLSpecialColumnsW(hstmt, fColType, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, fScope, fNullable)
+  end
+
+  def sQLStatisticsW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, fUnique : UInt16, fAccuracy : UInt16) : Int16
+    C.SQLStatisticsW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, fUnique, fAccuracy)
+  end
+
+  def sQLTablesW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, szTableType : UInt16*, cchTableType : Int16) : Int16
+    C.SQLTablesW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szTableType, cchTableType)
+  end
+
+  def sQLDataSourcesW(henv : Void*, fDirection : UInt16, szDSN : UInt16*, cchDSNMax : Int16, pcchDSN : Int16*, wszDescription : UInt16*, cchDescriptionMax : Int16, pcchDescription : Int16*) : Int16
+    C.SQLDataSourcesW(henv, fDirection, szDSN, cchDSNMax, pcchDSN, wszDescription, cchDescriptionMax, pcchDescription)
+  end
+
+  def sQLDriverConnectW(hdbc : Void*, hwnd : LibC::IntPtrT, szConnStrIn : UInt16*, cchConnStrIn : Int16, szConnStrOut : UInt16*, cchConnStrOutMax : Int16, pcchConnStrOut : Int16*, fDriverCompletion : UInt16) : Int16
+    C.SQLDriverConnectW(hdbc, hwnd, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut, fDriverCompletion)
+  end
+
+  def sQLBrowseConnectW(hdbc : Void*, szConnStrIn : UInt16*, cchConnStrIn : Int16, szConnStrOut : UInt16*, cchConnStrOutMax : Int16, pcchConnStrOut : Int16*) : Int16
+    C.SQLBrowseConnectW(hdbc, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut)
+  end
+
+  def sQLColumnPrivilegesW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, szColumnName : UInt16*, cchColumnName : Int16) : Int16
+    C.SQLColumnPrivilegesW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szColumnName, cchColumnName)
+  end
+
+  def sQLGetStmtAttrW(hstmt : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
+    C.SQLGetStmtAttrW(hstmt, fAttribute, rgbValue, cbValueMax, pcbValue)
+  end
+
+  def sQLSetStmtAttrW(hstmt : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32) : Int16
+    C.SQLSetStmtAttrW(hstmt, fAttribute, rgbValue, cbValueMax)
+  end
+
+  def sQLForeignKeysW(hstmt : Void*, szPkCatalogName : UInt16*, cchPkCatalogName : Int16, szPkSchemaName : UInt16*, cchPkSchemaName : Int16, szPkTableName : UInt16*, cchPkTableName : Int16, szFkCatalogName : UInt16*, cchFkCatalogName : Int16, szFkSchemaName : UInt16*, cchFkSchemaName : Int16, szFkTableName : UInt16*, cchFkTableName : Int16) : Int16
+    C.SQLForeignKeysW(hstmt, szPkCatalogName, cchPkCatalogName, szPkSchemaName, cchPkSchemaName, szPkTableName, cchPkTableName, szFkCatalogName, cchFkCatalogName, szFkSchemaName, cchFkSchemaName, szFkTableName, cchFkTableName)
+  end
+
+  def sQLNativeSqlW(hdbc : Void*, szSqlStrIn : UInt16*, cchSqlStrIn : Int32, szSqlStr : UInt16*, cchSqlStrMax : Int32, pcchSqlStr : Int32*) : Int16
+    C.SQLNativeSqlW(hdbc, szSqlStrIn, cchSqlStrIn, szSqlStr, cchSqlStrMax, pcchSqlStr)
+  end
+
+  def sQLPrimaryKeysW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16) : Int16
+    C.SQLPrimaryKeysW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+  end
+
+  def sQLProcedureColumnsW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szProcName : UInt16*, cchProcName : Int16, szColumnName : UInt16*, cchColumnName : Int16) : Int16
+    C.SQLProcedureColumnsW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName, szColumnName, cchColumnName)
+  end
+
+  def sQLProceduresW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szProcName : UInt16*, cchProcName : Int16) : Int16
+    C.SQLProceduresW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName)
+  end
+
+  def sQLTablePrivilegesW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16) : Int16
+    C.SQLTablePrivilegesW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+  end
+
+  def sQLDriversW(henv : Void*, fDirection : UInt16, szDriverDesc : UInt16*, cchDriverDescMax : Int16, pcchDriverDesc : Int16*, szDriverAttributes : UInt16*, cchDrvrAttrMax : Int16, pcchDrvrAttr : Int16*) : Int16
+    C.SQLDriversW(henv, fDirection, szDriverDesc, cchDriverDescMax, pcchDriverDesc, szDriverAttributes, cchDrvrAttrMax, pcchDrvrAttr)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLColAttributeA(hstmt : Void*, iCol : Int16, iField : Int16, pCharAttr : Void*, cbCharAttrMax : Int16, pcbCharAttr : Int16*, pNumAttr : Int64*) : Int16
+    C.SQLColAttributeA(hstmt, iCol, iField, pCharAttr, cbCharAttrMax, pcbCharAttr, pNumAttr)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLColAttributesA(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int64*) : Int16
+    C.SQLColAttributesA(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+  end
+{% end %}
+
+  def sQLConnectA(hdbc : Void*, szDSN : UInt8*, cbDSN : Int16, szUID : UInt8*, cbUID : Int16, szAuthStr : UInt8*, cbAuthStr : Int16) : Int16
+    C.SQLConnectA(hdbc, szDSN, cbDSN, szUID, cbUID, szAuthStr, cbAuthStr)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLDescribeColA(hstmt : Void*, icol : UInt16, szColName : UInt8*, cbColNameMax : Int16, pcbColName : Int16*, pfSqlType : Int16*, pcbColDef : UInt64*, pibScale : Int16*, pfNullable : Int16*) : Int16
+    C.SQLDescribeColA(hstmt, icol, szColName, cbColNameMax, pcbColName, pfSqlType, pcbColDef, pibScale, pfNullable)
+  end
+{% end %}
+
+  def sQLErrorA(henv : Void*, hdbc : Void*, hstmt : Void*, szSqlState : UInt8*, pfNativeError : Int32*, szErrorMsg : UInt8*, cbErrorMsgMax : Int16, pcbErrorMsg : Int16*) : Int16
+    C.SQLErrorA(henv, hdbc, hstmt, szSqlState, pfNativeError, szErrorMsg, cbErrorMsgMax, pcbErrorMsg)
+  end
+
+  def sQLExecDirectA(hstmt : Void*, szSqlStr : UInt8*, cbSqlStr : Int32) : Int16
+    C.SQLExecDirectA(hstmt, szSqlStr, cbSqlStr)
+  end
+
+  def sQLGetConnectAttrA(hdbc : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
+    C.SQLGetConnectAttrA(hdbc, fAttribute, rgbValue, cbValueMax, pcbValue)
+  end
+
+  def sQLGetCursorNameA(hstmt : Void*, szCursor : UInt8*, cbCursorMax : Int16, pcbCursor : Int16*) : Int16
+    C.SQLGetCursorNameA(hstmt, szCursor, cbCursorMax, pcbCursor)
+  end
+
+  def sQLGetDescFieldA(hdesc : Void*, iRecord : Int16, iField : Int16, rgbValue : Void*, cbBufferLength : Int32, string_length : Int32*) : Int16
+    C.SQLGetDescFieldA(hdesc, iRecord, iField, rgbValue, cbBufferLength, string_length)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLGetDescRecA(hdesc : Void*, iRecord : Int16, szName : UInt8*, cbNameMax : Int16, pcbName : Int16*, pfType : Int16*, pfSubType : Int16*, pLength : Int64*, pPrecision : Int16*, pScale : Int16*, pNullable : Int16*) : Int16
+    C.SQLGetDescRecA(hdesc, iRecord, szName, cbNameMax, pcbName, pfType, pfSubType, pLength, pPrecision, pScale, pNullable)
+  end
+{% end %}
+
+  def sQLGetDiagFieldA(fHandleType : Int16, handle : Void*, iRecord : Int16, fDiagField : Int16, rgbDiagInfo : Void*, cbDiagInfoMax : Int16, pcbDiagInfo : Int16*) : Int16
+    C.SQLGetDiagFieldA(fHandleType, handle, iRecord, fDiagField, rgbDiagInfo, cbDiagInfoMax, pcbDiagInfo)
+  end
+
+  def sQLGetDiagRecA(fHandleType : Int16, handle : Void*, iRecord : Int16, szSqlState : UInt8*, pfNativeError : Int32*, szErrorMsg : UInt8*, cbErrorMsgMax : Int16, pcbErrorMsg : Int16*) : Int16
+    C.SQLGetDiagRecA(fHandleType, handle, iRecord, szSqlState, pfNativeError, szErrorMsg, cbErrorMsgMax, pcbErrorMsg)
+  end
+
+  def sQLGetStmtAttrA(hstmt : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
+    C.SQLGetStmtAttrA(hstmt, fAttribute, rgbValue, cbValueMax, pcbValue)
+  end
+
+  def sQLGetTypeInfoA(statement_handle : Void*, data_type : Int16) : Int16
+    C.SQLGetTypeInfoA(statement_handle, data_type)
+  end
+
+  def sQLPrepareA(hstmt : Void*, szSqlStr : UInt8*, cbSqlStr : Int32) : Int16
+    C.SQLPrepareA(hstmt, szSqlStr, cbSqlStr)
+  end
+
+  def sQLSetConnectAttrA(hdbc : Void*, fAttribute : Int32, rgbValue : Void*, cbValue : Int32) : Int16
+    C.SQLSetConnectAttrA(hdbc, fAttribute, rgbValue, cbValue)
+  end
+
+  def sQLSetCursorNameA(hstmt : Void*, szCursor : UInt8*, cbCursor : Int16) : Int16
+    C.SQLSetCursorNameA(hstmt, szCursor, cbCursor)
+  end
+
+  def sQLColumnsA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, szColumnName : UInt8*, cbColumnName : Int16) : Int16
+    C.SQLColumnsA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, szColumnName, cbColumnName)
+  end
+
+  def sQLGetConnectOptionA(hdbc : Void*, fOption : UInt16, pvParam : Void*) : Int16
+    C.SQLGetConnectOptionA(hdbc, fOption, pvParam)
+  end
+
+  def sQLGetInfoA(hdbc : Void*, fInfoType : UInt16, rgbInfoValue : Void*, cbInfoValueMax : Int16, pcbInfoValue : Int16*) : Int16
+    C.SQLGetInfoA(hdbc, fInfoType, rgbInfoValue, cbInfoValueMax, pcbInfoValue)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def sQLSetConnectOptionA(hdbc : Void*, fOption : UInt16, vParam : UInt64) : Int16
+    C.SQLSetConnectOptionA(hdbc, fOption, vParam)
+  end
+{% end %}
+
+  def sQLSpecialColumnsA(hstmt : Void*, fColType : UInt16, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, fScope : UInt16, fNullable : UInt16) : Int16
+    C.SQLSpecialColumnsA(hstmt, fColType, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, fScope, fNullable)
+  end
+
+  def sQLStatisticsA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, fUnique : UInt16, fAccuracy : UInt16) : Int16
+    C.SQLStatisticsA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, fUnique, fAccuracy)
+  end
+
+  def sQLTablesA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, szTableType : UInt8*, cbTableType : Int16) : Int16
+    C.SQLTablesA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, szTableType, cbTableType)
+  end
+
+  def sQLDataSourcesA(henv : Void*, fDirection : UInt16, szDSN : UInt8*, cbDSNMax : Int16, pcbDSN : Int16*, szDescription : UInt8*, cbDescriptionMax : Int16, pcbDescription : Int16*) : Int16
+    C.SQLDataSourcesA(henv, fDirection, szDSN, cbDSNMax, pcbDSN, szDescription, cbDescriptionMax, pcbDescription)
+  end
+
+  def sQLDriverConnectA(hdbc : Void*, hwnd : LibC::IntPtrT, szConnStrIn : UInt8*, cbConnStrIn : Int16, szConnStrOut : UInt8*, cbConnStrOutMax : Int16, pcbConnStrOut : Int16*, fDriverCompletion : UInt16) : Int16
+    C.SQLDriverConnectA(hdbc, hwnd, szConnStrIn, cbConnStrIn, szConnStrOut, cbConnStrOutMax, pcbConnStrOut, fDriverCompletion)
+  end
+
+  def sQLBrowseConnectA(hdbc : Void*, szConnStrIn : UInt8*, cbConnStrIn : Int16, szConnStrOut : UInt8*, cbConnStrOutMax : Int16, pcbConnStrOut : Int16*) : Int16
+    C.SQLBrowseConnectA(hdbc, szConnStrIn, cbConnStrIn, szConnStrOut, cbConnStrOutMax, pcbConnStrOut)
+  end
+
+  def sQLColumnPrivilegesA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, szColumnName : UInt8*, cbColumnName : Int16) : Int16
+    C.SQLColumnPrivilegesA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, szColumnName, cbColumnName)
+  end
+
+  def sQLForeignKeysA(hstmt : Void*, szPkCatalogName : UInt8*, cbPkCatalogName : Int16, szPkSchemaName : UInt8*, cbPkSchemaName : Int16, szPkTableName : UInt8*, cbPkTableName : Int16, szFkCatalogName : UInt8*, cbFkCatalogName : Int16, szFkSchemaName : UInt8*, cbFkSchemaName : Int16, szFkTableName : UInt8*, cbFkTableName : Int16) : Int16
+    C.SQLForeignKeysA(hstmt, szPkCatalogName, cbPkCatalogName, szPkSchemaName, cbPkSchemaName, szPkTableName, cbPkTableName, szFkCatalogName, cbFkCatalogName, szFkSchemaName, cbFkSchemaName, szFkTableName, cbFkTableName)
+  end
+
+  def sQLNativeSqlA(hdbc : Void*, szSqlStrIn : UInt8*, cbSqlStrIn : Int32, szSqlStr : UInt8*, cbSqlStrMax : Int32, pcbSqlStr : Int32*) : Int16
+    C.SQLNativeSqlA(hdbc, szSqlStrIn, cbSqlStrIn, szSqlStr, cbSqlStrMax, pcbSqlStr)
+  end
+
+  def sQLPrimaryKeysA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16) : Int16
+    C.SQLPrimaryKeysA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName)
+  end
+
+  def sQLProcedureColumnsA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szProcName : UInt8*, cbProcName : Int16, szColumnName : UInt8*, cbColumnName : Int16) : Int16
+    C.SQLProcedureColumnsA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szProcName, cbProcName, szColumnName, cbColumnName)
+  end
+
+  def sQLProceduresA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szProcName : UInt8*, cbProcName : Int16) : Int16
+    C.SQLProceduresA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szProcName, cbProcName)
+  end
+
+  def sQLTablePrivilegesA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16) : Int16
+    C.SQLTablePrivilegesA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName)
+  end
+
+  def sQLDriversA(henv : Void*, fDirection : UInt16, szDriverDesc : UInt8*, cbDriverDescMax : Int16, pcbDriverDesc : Int16*, szDriverAttributes : UInt8*, cbDrvrAttrMax : Int16, pcbDrvrAttr : Int16*) : Int16
+    C.SQLDriversA(henv, fDirection, szDriverDesc, cbDriverDescMax, pcbDriverDesc, szDriverAttributes, cbDrvrAttrMax, pcbDrvrAttr)
+  end
+
+{% if flag?(:i386) %}
+  def sQLBindCol(statement_handle : Void*, column_number : UInt16, target_type : Int16, target_value : Void*, buffer_length : Int32, str_len_or_ind : Int32*) : Int16
+    C.SQLBindCol(statement_handle, column_number, target_type, target_value, buffer_length, str_len_or_ind)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLBindParam(statement_handle : Void*, parameter_number : UInt16, value_type : Int16, parameter_type : Int16, length_precision : UInt32, parameter_scale : Int16, parameter_value : Void*, str_len_or_ind : Int32*) : Int16
+    C.SQLBindParam(statement_handle, parameter_number, value_type, parameter_type, length_precision, parameter_scale, parameter_value, str_len_or_ind)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLColAttribute(statement_handle : Void*, column_number : UInt16, field_identifier : UInt16, character_attribute : Void*, buffer_length : Int16, string_length : Int16*, numeric_attribute : Void*) : Int16
+    C.SQLColAttribute(statement_handle, column_number, field_identifier, character_attribute, buffer_length, string_length, numeric_attribute)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLDescribeCol(statement_handle : Void*, column_number : UInt16, column_name : UInt8*, buffer_length : Int16, name_length : Int16*, data_type : Int16*, column_size : UInt32*, decimal_digits : Int16*, nullable : Int16*) : Int16
+    C.SQLDescribeCol(statement_handle, column_number, column_name, buffer_length, name_length, data_type, column_size, decimal_digits, nullable)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLFetchScroll(statement_handle : Void*, fetch_orientation : Int16, fetch_offset : Int32) : Int16
+    C.SQLFetchScroll(statement_handle, fetch_orientation, fetch_offset)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLGetData(statement_handle : Void*, column_number : UInt16, target_type : Int16, target_value : Void*, buffer_length : Int32, str_len_or_ind_ptr : Int32*) : Int16
+    C.SQLGetData(statement_handle, column_number, target_type, target_value, buffer_length, str_len_or_ind_ptr)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLGetDescRec(descriptor_handle : Void*, rec_number : Int16, name : UInt8*, buffer_length : Int16, string_length_ptr : Int16*, type_ptr : Int16*, sub_type_ptr : Int16*, length_ptr : Int32*, precision_ptr : Int16*, scale_ptr : Int16*, nullable_ptr : Int16*) : Int16
+    C.SQLGetDescRec(descriptor_handle, rec_number, name, buffer_length, string_length_ptr, type_ptr, sub_type_ptr, length_ptr, precision_ptr, scale_ptr, nullable_ptr)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLPutData(statement_handle : Void*, data : Void*, str_len_or_ind : Int32) : Int16
+    C.SQLPutData(statement_handle, data, str_len_or_ind)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLRowCount(statement_handle : Void*, row_count : Int32*) : Int16
+    C.SQLRowCount(statement_handle, row_count)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLSetConnectOption(connection_handle : Void*, option : UInt16, value : UInt32) : Int16
+    C.SQLSetConnectOption(connection_handle, option, value)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLSetDescRec(descriptor_handle : Void*, rec_number : Int16, type__ : Int16, sub_type : Int16, length : Int32, precision : Int16, scale : Int16, data : Void*, string_length : Int32*, indicator : Int32*) : Int16
+    C.SQLSetDescRec(descriptor_handle, rec_number, type__, sub_type, length, precision, scale, data, string_length, indicator)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLSetParam(statement_handle : Void*, parameter_number : UInt16, value_type : Int16, parameter_type : Int16, length_precision : UInt32, parameter_scale : Int16, parameter_value : Void*, str_len_or_ind : Int32*) : Int16
+    C.SQLSetParam(statement_handle, parameter_number, value_type, parameter_type, length_precision, parameter_scale, parameter_value, str_len_or_ind)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLSetStmtOption(statement_handle : Void*, option : UInt16, value : UInt32) : Int16
+    C.SQLSetStmtOption(statement_handle, option, value)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLColAttributes(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int32*) : Int16
+    C.SQLColAttributes(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLDescribeParam(hstmt : Void*, ipar : UInt16, pfSqlType : Int16*, pcbParamDef : UInt32*, pibScale : Int16*, pfNullable : Int16*) : Int16
+    C.SQLDescribeParam(hstmt, ipar, pfSqlType, pcbParamDef, pibScale, pfNullable)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLExtendedFetch(hstmt : Void*, fFetchType : UInt16, irow : Int32, pcrow : UInt32*, rgfRowStatus : UInt16*) : Int16
+    C.SQLExtendedFetch(hstmt, fFetchType, irow, pcrow, rgfRowStatus)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLParamOptions(hstmt : Void*, crow : UInt32, pirow : UInt32*) : Int16
+    C.SQLParamOptions(hstmt, crow, pirow)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLSetPos(hstmt : Void*, irow : UInt16, fOption : UInt16, fLock : UInt16) : Int16
+    C.SQLSetPos(hstmt, irow, fOption, fLock)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLBindParameter(hstmt : Void*, ipar : UInt16, fParamType : Int16, fCType : Int16, fSqlType : Int16, cbColDef : UInt32, ibScale : Int16, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
+    C.SQLBindParameter(hstmt, ipar, fParamType, fCType, fSqlType, cbColDef, ibScale, rgbValue, cbValueMax, pcbValue)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLSetScrollOptions(hstmt : Void*, fConcurrency : UInt16, crowKeyset : Int32, crowRowset : UInt16) : Int16
+    C.SQLSetScrollOptions(hstmt, fConcurrency, crowKeyset, crowRowset)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLColAttributeW(hstmt : Void*, iCol : UInt16, iField : UInt16, pCharAttr : Void*, cbDescMax : Int16, pcbCharAttr : Int16*, pNumAttr : Void*) : Int16
+    C.SQLColAttributeW(hstmt, iCol, iField, pCharAttr, cbDescMax, pcbCharAttr, pNumAttr)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLColAttributesW(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int32*) : Int16
+    C.SQLColAttributesW(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLDescribeColW(hstmt : Void*, icol : UInt16, szColName : UInt16*, cchColNameMax : Int16, pcchColName : Int16*, pfSqlType : Int16*, pcbColDef : UInt32*, pibScale : Int16*, pfNullable : Int16*) : Int16
+    C.SQLDescribeColW(hstmt, icol, szColName, cchColNameMax, pcchColName, pfSqlType, pcbColDef, pibScale, pfNullable)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLGetDescRecW(hdesc : Void*, iRecord : Int16, szName : UInt16*, cchNameMax : Int16, pcchName : Int16*, pfType : Int16*, pfSubType : Int16*, pLength : Int32*, pPrecision : Int16*, pScale : Int16*, pNullable : Int16*) : Int16
+    C.SQLGetDescRecW(hdesc, iRecord, szName, cchNameMax, pcchName, pfType, pfSubType, pLength, pPrecision, pScale, pNullable)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLSetConnectOptionW(hdbc : Void*, fOption : UInt16, vParam : UInt32) : Int16
+    C.SQLSetConnectOptionW(hdbc, fOption, vParam)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLColAttributeA(hstmt : Void*, iCol : Int16, iField : Int16, pCharAttr : Void*, cbCharAttrMax : Int16, pcbCharAttr : Int16*, pNumAttr : Void*) : Int16
+    C.SQLColAttributeA(hstmt, iCol, iField, pCharAttr, cbCharAttrMax, pcbCharAttr, pNumAttr)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLColAttributesA(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int32*) : Int16
+    C.SQLColAttributesA(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLDescribeColA(hstmt : Void*, icol : UInt16, szColName : UInt8*, cbColNameMax : Int16, pcbColName : Int16*, pfSqlType : Int16*, pcbColDef : UInt32*, pibScale : Int16*, pfNullable : Int16*) : Int16
+    C.SQLDescribeColA(hstmt, icol, szColName, cbColNameMax, pcbColName, pfSqlType, pcbColDef, pibScale, pfNullable)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLGetDescRecA(hdesc : Void*, iRecord : Int16, szName : UInt8*, cbNameMax : Int16, pcbName : Int16*, pfType : Int16*, pfSubType : Int16*, pLength : Int32*, pPrecision : Int16*, pScale : Int16*, pNullable : Int16*) : Int16
+    C.SQLGetDescRecA(hdesc, iRecord, szName, cbNameMax, pcbName, pfType, pfSubType, pLength, pPrecision, pScale, pNullable)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def sQLSetConnectOptionA(hdbc : Void*, fOption : UInt16, vParam : UInt32) : Int16
+    C.SQLSetConnectOptionA(hdbc, fOption, vParam)
+  end
+{% end %}
+
   @[Link("odbc32")]
   @[Link("odbcbcp")]
   lib C
+    # :nodoc:
     fun SQLAllocConnect(environment_handle : Void*, connection_handle : Void**) : Int16
 
+    # :nodoc:
     fun SQLAllocEnv(environment_handle : Void**) : Int16
 
+    # :nodoc:
     fun SQLAllocHandle(handle_type : Int16, input_handle : Void*, output_handle : Void**) : Int16
 
+    # :nodoc:
     fun SQLAllocStmt(connection_handle : Void*, statement_handle : Void**) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLBindCol(statement_handle : Void*, column_number : UInt16, target_type : Int16, target_value : Void*, buffer_length : Int64, str_len_or_ind : Int64*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLBindParam(statement_handle : Void*, parameter_number : UInt16, value_type : Int16, parameter_type : Int16, length_precision : UInt64, parameter_scale : Int16, parameter_value : Void*, str_len_or_ind : Int64*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLCancel(statement_handle : Void*) : Int16
 
+    # :nodoc:
     fun SQLCancelHandle(handle_type : Int16, input_handle : Void*) : Int16
 
+    # :nodoc:
     fun SQLCloseCursor(statement_handle : Void*) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLColAttribute(statement_handle : Void*, column_number : UInt16, field_identifier : UInt16, character_attribute : Void*, buffer_length : Int16, string_length : Int16*, numeric_attribute : Int64*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLColumns(statement_handle : Void*, catalog_name : UInt8*, name_length1 : Int16, schema_name : UInt8*, name_length2 : Int16, table_name : UInt8*, name_length3 : Int16, column_name : UInt8*, name_length4 : Int16) : Int16
 
+    # :nodoc:
     fun SQLCompleteAsync(handle_type : Int16, handle : Void*, async_ret_code_ptr : Int16*) : Int16
 
+    # :nodoc:
     fun SQLConnect(connection_handle : Void*, server_name : UInt8*, name_length1 : Int16, user_name : UInt8*, name_length2 : Int16, authentication : UInt8*, name_length3 : Int16) : Int16
 
+    # :nodoc:
     fun SQLCopyDesc(source_desc_handle : Void*, target_desc_handle : Void*) : Int16
 
+    # :nodoc:
     fun SQLDataSources(environment_handle : Void*, direction : UInt16, server_name : UInt8*, buffer_length1 : Int16, name_length1_ptr : Int16*, description : UInt8*, buffer_length2 : Int16, name_length2_ptr : Int16*) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLDescribeCol(statement_handle : Void*, column_number : UInt16, column_name : UInt8*, buffer_length : Int16, name_length : Int16*, data_type : Int16*, column_size : UInt64*, decimal_digits : Int16*, nullable : Int16*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLDisconnect(connection_handle : Void*) : Int16
 
+    # :nodoc:
     fun SQLEndTran(handle_type : Int16, handle : Void*, completion_type : Int16) : Int16
 
+    # :nodoc:
     fun SQLError(environment_handle : Void*, connection_handle : Void*, statement_handle : Void*, sqlstate : UInt8*, native_error : Int32*, message_text : UInt8*, buffer_length : Int16, text_length : Int16*) : Int16
 
+    # :nodoc:
     fun SQLExecDirect(statement_handle : Void*, statement_text : UInt8*, text_length : Int32) : Int16
 
+    # :nodoc:
     fun SQLExecute(statement_handle : Void*) : Int16
 
+    # :nodoc:
     fun SQLFetch(statement_handle : Void*) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLFetchScroll(statement_handle : Void*, fetch_orientation : Int16, fetch_offset : Int64) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLFreeConnect(connection_handle : Void*) : Int16
 
+    # :nodoc:
     fun SQLFreeEnv(environment_handle : Void*) : Int16
 
+    # :nodoc:
     fun SQLFreeHandle(handle_type : Int16, handle : Void*) : Int16
 
+    # :nodoc:
     fun SQLFreeStmt(statement_handle : Void*, option : UInt16) : Int16
 
+    # :nodoc:
     fun SQLGetConnectAttr(connection_handle : Void*, attribute : Int32, value : Void*, buffer_length : Int32, string_length_ptr : Int32*) : Int16
 
+    # :nodoc:
     fun SQLGetConnectOption(connection_handle : Void*, option : UInt16, value : Void*) : Int16
 
+    # :nodoc:
     fun SQLGetCursorName(statement_handle : Void*, cursor_name : UInt8*, buffer_length : Int16, name_length_ptr : Int16*) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLGetData(statement_handle : Void*, column_number : UInt16, target_type : Int16, target_value : Void*, buffer_length : Int64, str_len_or_ind_ptr : Int64*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLGetDescField(descriptor_handle : Void*, rec_number : Int16, field_identifier : Int16, value : Void*, buffer_length : Int32, string_length : Int32*) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLGetDescRec(descriptor_handle : Void*, rec_number : Int16, name : UInt8*, buffer_length : Int16, string_length_ptr : Int16*, type_ptr : Int16*, sub_type_ptr : Int16*, length_ptr : Int64*, precision_ptr : Int16*, scale_ptr : Int16*, nullable_ptr : Int16*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLGetDiagField(handle_type : Int16, handle : Void*, rec_number : Int16, diag_identifier : Int16, diag_info : Void*, buffer_length : Int16, string_length : Int16*) : Int16
 
+    # :nodoc:
     fun SQLGetDiagRec(handle_type : Int16, handle : Void*, rec_number : Int16, sqlstate : UInt8*, native_error : Int32*, message_text : UInt8*, buffer_length : Int16, text_length : Int16*) : Int16
 
+    # :nodoc:
     fun SQLGetEnvAttr(environment_handle : Void*, attribute : Int32, value : Void*, buffer_length : Int32, string_length : Int32*) : Int16
 
+    # :nodoc:
     fun SQLGetFunctions(connection_handle : Void*, function_id : UInt16, supported : UInt16*) : Int16
 
+    # :nodoc:
     fun SQLGetInfo(connection_handle : Void*, info_type : UInt16, info_value : Void*, buffer_length : Int16, string_length_ptr : Int16*) : Int16
 
+    # :nodoc:
     fun SQLGetStmtAttr(statement_handle : Void*, attribute : Int32, value : Void*, buffer_length : Int32, string_length : Int32*) : Int16
 
+    # :nodoc:
     fun SQLGetStmtOption(statement_handle : Void*, option : UInt16, value : Void*) : Int16
 
+    # :nodoc:
     fun SQLGetTypeInfo(statement_handle : Void*, data_type : Int16) : Int16
 
+    # :nodoc:
     fun SQLNumResultCols(statement_handle : Void*, column_count : Int16*) : Int16
 
+    # :nodoc:
     fun SQLParamData(statement_handle : Void*, value : Void**) : Int16
 
+    # :nodoc:
     fun SQLPrepare(statement_handle : Void*, statement_text : UInt8*, text_length : Int32) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLPutData(statement_handle : Void*, data : Void*, str_len_or_ind : Int64) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLRowCount(statement_handle : Void*, row_count : Int64*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLSetConnectAttr(connection_handle : Void*, attribute : Int32, value : Void*, string_length : Int32) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLSetConnectOption(connection_handle : Void*, option : UInt16, value : UInt64) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLSetCursorName(statement_handle : Void*, cursor_name : UInt8*, name_length : Int16) : Int16
 
+    # :nodoc:
     fun SQLSetDescField(descriptor_handle : Void*, rec_number : Int16, field_identifier : Int16, value : Void*, buffer_length : Int32) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLSetDescRec(descriptor_handle : Void*, rec_number : Int16, type__ : Int16, sub_type : Int16, length : Int64, precision : Int16, scale : Int16, data : Void*, string_length : Int64*, indicator : Int64*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLSetEnvAttr(environment_handle : Void*, attribute : Int32, value : Void*, string_length : Int32) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLSetParam(statement_handle : Void*, parameter_number : UInt16, value_type : Int16, parameter_type : Int16, length_precision : UInt64, parameter_scale : Int16, parameter_value : Void*, str_len_or_ind : Int64*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLSetStmtAttr(statement_handle : Void*, attribute : Int32, value : Void*, string_length : Int32) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLSetStmtOption(statement_handle : Void*, option : UInt16, value : UInt64) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLSpecialColumns(statement_handle : Void*, identifier_type : UInt16, catalog_name : UInt8*, name_length1 : Int16, schema_name : UInt8*, name_length2 : Int16, table_name : UInt8*, name_length3 : Int16, scope : UInt16, nullable : UInt16) : Int16
 
+    # :nodoc:
     fun SQLStatistics(statement_handle : Void*, catalog_name : UInt8*, name_length1 : Int16, schema_name : UInt8*, name_length2 : Int16, table_name : UInt8*, name_length3 : Int16, unique : UInt16, reserved : UInt16) : Int16
 
+    # :nodoc:
     fun SQLTables(statement_handle : Void*, catalog_name : UInt8*, name_length1 : Int16, schema_name : UInt8*, name_length2 : Int16, table_name : UInt8*, name_length3 : Int16, table_type : UInt8*, name_length4 : Int16) : Int16
 
+    # :nodoc:
     fun SQLTransact(environment_handle : Void*, connection_handle : Void*, completion_type : UInt16) : Int16
 
+    # :nodoc:
     fun bcp_batch(param0 : Void*) : Int32
 
+    # :nodoc:
     fun bcp_bind(param0 : Void*, param1 : UInt8*, param2 : Int32, param3 : Int32, param4 : UInt8*, param5 : Int32, param6 : Int32, param7 : Int32) : Int16
 
+    # :nodoc:
     fun bcp_colfmt(param0 : Void*, param1 : Int32, param2 : UInt8, param3 : Int32, param4 : Int32, param5 : UInt8*, param6 : Int32, param7 : Int32) : Int16
 
+    # :nodoc:
     fun bcp_collen(param0 : Void*, param1 : Int32, param2 : Int32) : Int16
 
+    # :nodoc:
     fun bcp_colptr(param0 : Void*, param1 : UInt8*, param2 : Int32) : Int16
 
+    # :nodoc:
     fun bcp_columns(param0 : Void*, param1 : Int32) : Int16
 
+    # :nodoc:
     fun bcp_control(param0 : Void*, param1 : Int32, param2 : Void*) : Int16
 
+    # :nodoc:
     fun bcp_done(param0 : Void*) : Int32
 
+    # :nodoc:
     fun bcp_exec(param0 : Void*, param1 : Int32*) : Int16
 
+    # :nodoc:
     fun bcp_getcolfmt(param0 : Void*, param1 : Int32, param2 : Int32, param3 : Void*, param4 : Int32, param5 : Int32*) : Int16
 
+    # :nodoc:
     fun bcp_initA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::Foundation::PSTR, param3 : Win32cr::Foundation::PSTR, param4 : Int32) : Int16
 
+    # :nodoc:
     fun bcp_initW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::Foundation::PWSTR, param3 : Win32cr::Foundation::PWSTR, param4 : Int32) : Int16
 
+    # :nodoc:
     fun bcp_moretext(param0 : Void*, param1 : Int32, param2 : UInt8*) : Int16
 
+    # :nodoc:
     fun bcp_readfmtA(param0 : Void*, param1 : Win32cr::Foundation::PSTR) : Int16
 
+    # :nodoc:
     fun bcp_readfmtW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR) : Int16
 
+    # :nodoc:
     fun bcp_sendrow(param0 : Void*) : Int16
 
+    # :nodoc:
     fun bcp_setcolfmt(param0 : Void*, param1 : Int32, param2 : Int32, param3 : Void*, param4 : Int32) : Int16
 
+    # :nodoc:
     fun bcp_writefmtA(param0 : Void*, param1 : Win32cr::Foundation::PSTR) : Int16
 
+    # :nodoc:
     fun bcp_writefmtW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR) : Int16
 
+    # :nodoc:
     fun dbprtypeA(param0 : Int32) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun dbprtypeW(param0 : Int32) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun SQLLinkedServers(param0 : Void*) : Int16
 
+    # :nodoc:
     fun SQLLinkedCatalogsA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : Int16) : Int16
 
+    # :nodoc:
     fun SQLLinkedCatalogsW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : Int16) : Int16
 
+    # :nodoc:
     fun SQLInitEnumServers(pwchServerName : Win32cr::Foundation::PWSTR, pwchInstanceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun SQLGetNextEnumeration(hEnumHandle : Win32cr::Foundation::HANDLE, prgEnumData : UInt8*, piEnumLength : Int32*) : Int16
 
+    # :nodoc:
     fun SQLCloseEnumServers(hEnumHandle : Win32cr::Foundation::HANDLE) : Int16
 
+    # :nodoc:
     fun SQLDriverConnect(hdbc : Void*, hwnd : LibC::IntPtrT, szConnStrIn : UInt8*, cchConnStrIn : Int16, szConnStrOut : UInt8*, cchConnStrOutMax : Int16, pcchConnStrOut : Int16*, fDriverCompletion : UInt16) : Int16
 
+    # :nodoc:
     fun SQLBrowseConnect(hdbc : Void*, szConnStrIn : UInt8*, cchConnStrIn : Int16, szConnStrOut : UInt8*, cchConnStrOutMax : Int16, pcchConnStrOut : Int16*) : Int16
 
+    # :nodoc:
     fun SQLBulkOperations(statement_handle : Void*, operation : Int16) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLColAttributes(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int64*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLColumnPrivileges(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szTableName : UInt8*, cchTableName : Int16, szColumnName : UInt8*, cchColumnName : Int16) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLDescribeParam(hstmt : Void*, ipar : UInt16, pfSqlType : Int16*, pcbParamDef : UInt64*, pibScale : Int16*, pfNullable : Int16*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLExtendedFetch(hstmt : Void*, fFetchType : UInt16, irow : Int64, pcrow : UInt64*, rgfRowStatus : UInt16*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLForeignKeys(hstmt : Void*, szPkCatalogName : UInt8*, cchPkCatalogName : Int16, szPkSchemaName : UInt8*, cchPkSchemaName : Int16, szPkTableName : UInt8*, cchPkTableName : Int16, szFkCatalogName : UInt8*, cchFkCatalogName : Int16, szFkSchemaName : UInt8*, cchFkSchemaName : Int16, szFkTableName : UInt8*, cchFkTableName : Int16) : Int16
 
+    # :nodoc:
     fun SQLMoreResults(hstmt : Void*) : Int16
 
+    # :nodoc:
     fun SQLNativeSql(hdbc : Void*, szSqlStrIn : UInt8*, cchSqlStrIn : Int32, szSqlStr : UInt8*, cchSqlStrMax : Int32, pcbSqlStr : Int32*) : Int16
 
+    # :nodoc:
     fun SQLNumParams(hstmt : Void*, pcpar : Int16*) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLParamOptions(hstmt : Void*, crow : UInt64, pirow : UInt64*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLPrimaryKeys(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szTableName : UInt8*, cchTableName : Int16) : Int16
 
+    # :nodoc:
     fun SQLProcedureColumns(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szProcName : UInt8*, cchProcName : Int16, szColumnName : UInt8*, cchColumnName : Int16) : Int16
 
+    # :nodoc:
     fun SQLProcedures(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szProcName : UInt8*, cchProcName : Int16) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLSetPos(hstmt : Void*, irow : UInt64, fOption : UInt16, fLock : UInt16) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLTablePrivileges(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szTableName : UInt8*, cchTableName : Int16) : Int16
 
+    # :nodoc:
     fun SQLDrivers(henv : Void*, fDirection : UInt16, szDriverDesc : UInt8*, cchDriverDescMax : Int16, pcchDriverDesc : Int16*, szDriverAttributes : UInt8*, cchDrvrAttrMax : Int16, pcchDrvrAttr : Int16*) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLBindParameter(hstmt : Void*, ipar : UInt16, fParamType : Int16, fCType : Int16, fSqlType : Int16, cbColDef : UInt64, ibScale : Int16, rgbValue : Void*, cbValueMax : Int64, pcbValue : Int64*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLAllocHandleStd(fHandleType : Int16, hInput : Void*, phOutput : Void**) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLSetScrollOptions(hstmt : Void*, fConcurrency : UInt16, crowKeyset : Int64, crowRowset : UInt16) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun ODBCSetTryWaitValue(dwValue : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ODBCGetTryWaitValue : UInt32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLColAttributeW(hstmt : Void*, iCol : UInt16, iField : UInt16, pCharAttr : Void*, cbDescMax : Int16, pcbCharAttr : Int16*, pNumAttr : Int64*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLColAttributesW(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int64*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLConnectW(hdbc : Void*, szDSN : UInt16*, cchDSN : Int16, szUID : UInt16*, cchUID : Int16, szAuthStr : UInt16*, cchAuthStr : Int16) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLDescribeColW(hstmt : Void*, icol : UInt16, szColName : UInt16*, cchColNameMax : Int16, pcchColName : Int16*, pfSqlType : Int16*, pcbColDef : UInt64*, pibScale : Int16*, pfNullable : Int16*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLErrorW(henv : Void*, hdbc : Void*, hstmt : Void*, wszSqlState : UInt16*, pfNativeError : Int32*, wszErrorMsg : UInt16*, cchErrorMsgMax : Int16, pcchErrorMsg : Int16*) : Int16
 
+    # :nodoc:
     fun SQLExecDirectW(hstmt : Void*, szSqlStr : UInt16*, text_length : Int32) : Int16
 
+    # :nodoc:
     fun SQLGetConnectAttrW(hdbc : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
 
+    # :nodoc:
     fun SQLGetCursorNameW(hstmt : Void*, szCursor : UInt16*, cchCursorMax : Int16, pcchCursor : Int16*) : Int16
 
+    # :nodoc:
     fun SQLSetDescFieldW(descriptor_handle : Void*, rec_number : Int16, field_identifier : Int16, value : Void*, buffer_length : Int32) : Int16
 
+    # :nodoc:
     fun SQLGetDescFieldW(hdesc : Void*, iRecord : Int16, iField : Int16, rgbValue : Void*, cbBufferLength : Int32, string_length : Int32*) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLGetDescRecW(hdesc : Void*, iRecord : Int16, szName : UInt16*, cchNameMax : Int16, pcchName : Int16*, pfType : Int16*, pfSubType : Int16*, pLength : Int64*, pPrecision : Int16*, pScale : Int16*, pNullable : Int16*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLGetDiagFieldW(fHandleType : Int16, handle : Void*, iRecord : Int16, fDiagField : Int16, rgbDiagInfo : Void*, cbBufferLength : Int16, pcbStringLength : Int16*) : Int16
 
+    # :nodoc:
     fun SQLGetDiagRecW(fHandleType : Int16, handle : Void*, iRecord : Int16, szSqlState : UInt16*, pfNativeError : Int32*, szErrorMsg : UInt16*, cchErrorMsgMax : Int16, pcchErrorMsg : Int16*) : Int16
 
+    # :nodoc:
     fun SQLPrepareW(hstmt : Void*, szSqlStr : UInt16*, cchSqlStr : Int32) : Int16
 
+    # :nodoc:
     fun SQLSetConnectAttrW(hdbc : Void*, fAttribute : Int32, rgbValue : Void*, cbValue : Int32) : Int16
 
+    # :nodoc:
     fun SQLSetCursorNameW(hstmt : Void*, szCursor : UInt16*, cchCursor : Int16) : Int16
 
+    # :nodoc:
     fun SQLColumnsW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, szColumnName : UInt16*, cchColumnName : Int16) : Int16
 
+    # :nodoc:
     fun SQLGetConnectOptionW(hdbc : Void*, fOption : UInt16, pvParam : Void*) : Int16
 
+    # :nodoc:
     fun SQLGetInfoW(hdbc : Void*, fInfoType : UInt16, rgbInfoValue : Void*, cbInfoValueMax : Int16, pcbInfoValue : Int16*) : Int16
 
+    # :nodoc:
     fun SQLGetTypeInfoW(statement_handle : Void*, data_type : Int16) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLSetConnectOptionW(hdbc : Void*, fOption : UInt16, vParam : UInt64) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLSpecialColumnsW(hstmt : Void*, fColType : UInt16, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, fScope : UInt16, fNullable : UInt16) : Int16
 
+    # :nodoc:
     fun SQLStatisticsW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, fUnique : UInt16, fAccuracy : UInt16) : Int16
 
+    # :nodoc:
     fun SQLTablesW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, szTableType : UInt16*, cchTableType : Int16) : Int16
 
+    # :nodoc:
     fun SQLDataSourcesW(henv : Void*, fDirection : UInt16, szDSN : UInt16*, cchDSNMax : Int16, pcchDSN : Int16*, wszDescription : UInt16*, cchDescriptionMax : Int16, pcchDescription : Int16*) : Int16
 
+    # :nodoc:
     fun SQLDriverConnectW(hdbc : Void*, hwnd : LibC::IntPtrT, szConnStrIn : UInt16*, cchConnStrIn : Int16, szConnStrOut : UInt16*, cchConnStrOutMax : Int16, pcchConnStrOut : Int16*, fDriverCompletion : UInt16) : Int16
 
+    # :nodoc:
     fun SQLBrowseConnectW(hdbc : Void*, szConnStrIn : UInt16*, cchConnStrIn : Int16, szConnStrOut : UInt16*, cchConnStrOutMax : Int16, pcchConnStrOut : Int16*) : Int16
 
+    # :nodoc:
     fun SQLColumnPrivilegesW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, szColumnName : UInt16*, cchColumnName : Int16) : Int16
 
+    # :nodoc:
     fun SQLGetStmtAttrW(hstmt : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
 
+    # :nodoc:
     fun SQLSetStmtAttrW(hstmt : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32) : Int16
 
+    # :nodoc:
     fun SQLForeignKeysW(hstmt : Void*, szPkCatalogName : UInt16*, cchPkCatalogName : Int16, szPkSchemaName : UInt16*, cchPkSchemaName : Int16, szPkTableName : UInt16*, cchPkTableName : Int16, szFkCatalogName : UInt16*, cchFkCatalogName : Int16, szFkSchemaName : UInt16*, cchFkSchemaName : Int16, szFkTableName : UInt16*, cchFkTableName : Int16) : Int16
 
+    # :nodoc:
     fun SQLNativeSqlW(hdbc : Void*, szSqlStrIn : UInt16*, cchSqlStrIn : Int32, szSqlStr : UInt16*, cchSqlStrMax : Int32, pcchSqlStr : Int32*) : Int16
 
+    # :nodoc:
     fun SQLPrimaryKeysW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16) : Int16
 
+    # :nodoc:
     fun SQLProcedureColumnsW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szProcName : UInt16*, cchProcName : Int16, szColumnName : UInt16*, cchColumnName : Int16) : Int16
 
+    # :nodoc:
     fun SQLProceduresW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szProcName : UInt16*, cchProcName : Int16) : Int16
 
+    # :nodoc:
     fun SQLTablePrivilegesW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16) : Int16
 
+    # :nodoc:
     fun SQLDriversW(henv : Void*, fDirection : UInt16, szDriverDesc : UInt16*, cchDriverDescMax : Int16, pcchDriverDesc : Int16*, szDriverAttributes : UInt16*, cchDrvrAttrMax : Int16, pcchDrvrAttr : Int16*) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLColAttributeA(hstmt : Void*, iCol : Int16, iField : Int16, pCharAttr : Void*, cbCharAttrMax : Int16, pcbCharAttr : Int16*, pNumAttr : Int64*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLColAttributesA(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int64*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLConnectA(hdbc : Void*, szDSN : UInt8*, cbDSN : Int16, szUID : UInt8*, cbUID : Int16, szAuthStr : UInt8*, cbAuthStr : Int16) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLDescribeColA(hstmt : Void*, icol : UInt16, szColName : UInt8*, cbColNameMax : Int16, pcbColName : Int16*, pfSqlType : Int16*, pcbColDef : UInt64*, pibScale : Int16*, pfNullable : Int16*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLErrorA(henv : Void*, hdbc : Void*, hstmt : Void*, szSqlState : UInt8*, pfNativeError : Int32*, szErrorMsg : UInt8*, cbErrorMsgMax : Int16, pcbErrorMsg : Int16*) : Int16
 
+    # :nodoc:
     fun SQLExecDirectA(hstmt : Void*, szSqlStr : UInt8*, cbSqlStr : Int32) : Int16
 
+    # :nodoc:
     fun SQLGetConnectAttrA(hdbc : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
 
+    # :nodoc:
     fun SQLGetCursorNameA(hstmt : Void*, szCursor : UInt8*, cbCursorMax : Int16, pcbCursor : Int16*) : Int16
 
+    # :nodoc:
     fun SQLGetDescFieldA(hdesc : Void*, iRecord : Int16, iField : Int16, rgbValue : Void*, cbBufferLength : Int32, string_length : Int32*) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLGetDescRecA(hdesc : Void*, iRecord : Int16, szName : UInt8*, cbNameMax : Int16, pcbName : Int16*, pfType : Int16*, pfSubType : Int16*, pLength : Int64*, pPrecision : Int16*, pScale : Int16*, pNullable : Int16*) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLGetDiagFieldA(fHandleType : Int16, handle : Void*, iRecord : Int16, fDiagField : Int16, rgbDiagInfo : Void*, cbDiagInfoMax : Int16, pcbDiagInfo : Int16*) : Int16
 
+    # :nodoc:
     fun SQLGetDiagRecA(fHandleType : Int16, handle : Void*, iRecord : Int16, szSqlState : UInt8*, pfNativeError : Int32*, szErrorMsg : UInt8*, cbErrorMsgMax : Int16, pcbErrorMsg : Int16*) : Int16
 
+    # :nodoc:
     fun SQLGetStmtAttrA(hstmt : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
 
+    # :nodoc:
     fun SQLGetTypeInfoA(statement_handle : Void*, data_type : Int16) : Int16
 
+    # :nodoc:
     fun SQLPrepareA(hstmt : Void*, szSqlStr : UInt8*, cbSqlStr : Int32) : Int16
 
+    # :nodoc:
     fun SQLSetConnectAttrA(hdbc : Void*, fAttribute : Int32, rgbValue : Void*, cbValue : Int32) : Int16
 
+    # :nodoc:
     fun SQLSetCursorNameA(hstmt : Void*, szCursor : UInt8*, cbCursor : Int16) : Int16
 
+    # :nodoc:
     fun SQLColumnsA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, szColumnName : UInt8*, cbColumnName : Int16) : Int16
 
+    # :nodoc:
     fun SQLGetConnectOptionA(hdbc : Void*, fOption : UInt16, pvParam : Void*) : Int16
 
+    # :nodoc:
     fun SQLGetInfoA(hdbc : Void*, fInfoType : UInt16, rgbInfoValue : Void*, cbInfoValueMax : Int16, pcbInfoValue : Int16*) : Int16
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SQLSetConnectOptionA(hdbc : Void*, fOption : UInt16, vParam : UInt64) : Int16
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SQLSpecialColumnsA(hstmt : Void*, fColType : UInt16, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, fScope : UInt16, fNullable : UInt16) : Int16
 
+    # :nodoc:
     fun SQLStatisticsA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, fUnique : UInt16, fAccuracy : UInt16) : Int16
 
+    # :nodoc:
     fun SQLTablesA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, szTableType : UInt8*, cbTableType : Int16) : Int16
 
+    # :nodoc:
     fun SQLDataSourcesA(henv : Void*, fDirection : UInt16, szDSN : UInt8*, cbDSNMax : Int16, pcbDSN : Int16*, szDescription : UInt8*, cbDescriptionMax : Int16, pcbDescription : Int16*) : Int16
 
+    # :nodoc:
     fun SQLDriverConnectA(hdbc : Void*, hwnd : LibC::IntPtrT, szConnStrIn : UInt8*, cbConnStrIn : Int16, szConnStrOut : UInt8*, cbConnStrOutMax : Int16, pcbConnStrOut : Int16*, fDriverCompletion : UInt16) : Int16
 
+    # :nodoc:
     fun SQLBrowseConnectA(hdbc : Void*, szConnStrIn : UInt8*, cbConnStrIn : Int16, szConnStrOut : UInt8*, cbConnStrOutMax : Int16, pcbConnStrOut : Int16*) : Int16
 
+    # :nodoc:
     fun SQLColumnPrivilegesA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, szColumnName : UInt8*, cbColumnName : Int16) : Int16
 
+    # :nodoc:
     fun SQLForeignKeysA(hstmt : Void*, szPkCatalogName : UInt8*, cbPkCatalogName : Int16, szPkSchemaName : UInt8*, cbPkSchemaName : Int16, szPkTableName : UInt8*, cbPkTableName : Int16, szFkCatalogName : UInt8*, cbFkCatalogName : Int16, szFkSchemaName : UInt8*, cbFkSchemaName : Int16, szFkTableName : UInt8*, cbFkTableName : Int16) : Int16
 
+    # :nodoc:
     fun SQLNativeSqlA(hdbc : Void*, szSqlStrIn : UInt8*, cbSqlStrIn : Int32, szSqlStr : UInt8*, cbSqlStrMax : Int32, pcbSqlStr : Int32*) : Int16
 
+    # :nodoc:
     fun SQLPrimaryKeysA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16) : Int16
 
+    # :nodoc:
     fun SQLProcedureColumnsA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szProcName : UInt8*, cbProcName : Int16, szColumnName : UInt8*, cbColumnName : Int16) : Int16
 
+    # :nodoc:
     fun SQLProceduresA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szProcName : UInt8*, cbProcName : Int16) : Int16
 
+    # :nodoc:
     fun SQLTablePrivilegesA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16) : Int16
 
+    # :nodoc:
     fun SQLDriversA(henv : Void*, fDirection : UInt16, szDriverDesc : UInt8*, cbDriverDescMax : Int16, pcbDriverDesc : Int16*, szDriverAttributes : UInt8*, cbDrvrAttrMax : Int16, pcbDrvrAttr : Int16*) : Int16
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLBindCol(statement_handle : Void*, column_number : UInt16, target_type : Int16, target_value : Void*, buffer_length : Int32, str_len_or_ind : Int32*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLBindParam(statement_handle : Void*, parameter_number : UInt16, value_type : Int16, parameter_type : Int16, length_precision : UInt32, parameter_scale : Int16, parameter_value : Void*, str_len_or_ind : Int32*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLColAttribute(statement_handle : Void*, column_number : UInt16, field_identifier : UInt16, character_attribute : Void*, buffer_length : Int16, string_length : Int16*, numeric_attribute : Void*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLDescribeCol(statement_handle : Void*, column_number : UInt16, column_name : UInt8*, buffer_length : Int16, name_length : Int16*, data_type : Int16*, column_size : UInt32*, decimal_digits : Int16*, nullable : Int16*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLFetchScroll(statement_handle : Void*, fetch_orientation : Int16, fetch_offset : Int32) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLGetData(statement_handle : Void*, column_number : UInt16, target_type : Int16, target_value : Void*, buffer_length : Int32, str_len_or_ind_ptr : Int32*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLGetDescRec(descriptor_handle : Void*, rec_number : Int16, name : UInt8*, buffer_length : Int16, string_length_ptr : Int16*, type_ptr : Int16*, sub_type_ptr : Int16*, length_ptr : Int32*, precision_ptr : Int16*, scale_ptr : Int16*, nullable_ptr : Int16*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLPutData(statement_handle : Void*, data : Void*, str_len_or_ind : Int32) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLRowCount(statement_handle : Void*, row_count : Int32*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLSetConnectOption(connection_handle : Void*, option : UInt16, value : UInt32) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLSetDescRec(descriptor_handle : Void*, rec_number : Int16, type__ : Int16, sub_type : Int16, length : Int32, precision : Int16, scale : Int16, data : Void*, string_length : Int32*, indicator : Int32*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLSetParam(statement_handle : Void*, parameter_number : UInt16, value_type : Int16, parameter_type : Int16, length_precision : UInt32, parameter_scale : Int16, parameter_value : Void*, str_len_or_ind : Int32*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLSetStmtOption(statement_handle : Void*, option : UInt16, value : UInt32) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLColAttributes(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int32*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLDescribeParam(hstmt : Void*, ipar : UInt16, pfSqlType : Int16*, pcbParamDef : UInt32*, pibScale : Int16*, pfNullable : Int16*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLExtendedFetch(hstmt : Void*, fFetchType : UInt16, irow : Int32, pcrow : UInt32*, rgfRowStatus : UInt16*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLParamOptions(hstmt : Void*, crow : UInt32, pirow : UInt32*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLSetPos(hstmt : Void*, irow : UInt16, fOption : UInt16, fLock : UInt16) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLBindParameter(hstmt : Void*, ipar : UInt16, fParamType : Int16, fCType : Int16, fSqlType : Int16, cbColDef : UInt32, ibScale : Int16, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLSetScrollOptions(hstmt : Void*, fConcurrency : UInt16, crowKeyset : Int32, crowRowset : UInt16) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLColAttributeW(hstmt : Void*, iCol : UInt16, iField : UInt16, pCharAttr : Void*, cbDescMax : Int16, pcbCharAttr : Int16*, pNumAttr : Void*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLColAttributesW(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int32*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLDescribeColW(hstmt : Void*, icol : UInt16, szColName : UInt16*, cchColNameMax : Int16, pcchColName : Int16*, pfSqlType : Int16*, pcbColDef : UInt32*, pibScale : Int16*, pfNullable : Int16*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLGetDescRecW(hdesc : Void*, iRecord : Int16, szName : UInt16*, cchNameMax : Int16, pcchName : Int16*, pfType : Int16*, pfSubType : Int16*, pLength : Int32*, pPrecision : Int16*, pScale : Int16*, pNullable : Int16*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLSetConnectOptionW(hdbc : Void*, fOption : UInt16, vParam : UInt32) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLColAttributeA(hstmt : Void*, iCol : Int16, iField : Int16, pCharAttr : Void*, cbCharAttrMax : Int16, pcbCharAttr : Int16*, pNumAttr : Void*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLColAttributesA(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int32*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLDescribeColA(hstmt : Void*, icol : UInt16, szColName : UInt8*, cbColNameMax : Int16, pcbColName : Int16*, pfSqlType : Int16*, pcbColDef : UInt32*, pibScale : Int16*, pfNullable : Int16*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLGetDescRecA(hdesc : Void*, iRecord : Int16, szName : UInt8*, cbNameMax : Int16, pcbName : Int16*, pfType : Int16*, pfSubType : Int16*, pLength : Int32*, pPrecision : Int16*, pScale : Int16*, pNullable : Int16*) : Int16
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SQLSetConnectOptionA(hdbc : Void*, fOption : UInt16, vParam : UInt32) : Int16
-  {% end %}
+    {% end %}
 
   end
 end

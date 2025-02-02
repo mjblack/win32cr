@@ -2,6 +2,7 @@ require "./com.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::SettingsManagementInfrastructure
+  extend self
   WCM_SETTINGS_ID_NAME = "name"
   WCM_SETTINGS_ID_VERSION = "version"
   WCM_SETTINGS_ID_LANGUAGE = "language"

@@ -6,6 +6,7 @@ require "./../system/io.cr"
 require "./../system/registry.cr"
 
 module Win32cr::Devices::Fax
+  extend self
   alias PFAXCONNECTFAXSERVERA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::BOOL)
 
   alias PFAXCONNECTFAXSERVERW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::BOOL)
@@ -6868,126 +6869,421 @@ module Win32cr::Devices::Fax
 
   end
 
+  def faxConnectFaxServerA(machine_name : Win32cr::Foundation::PSTR, fax_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    C.FaxConnectFaxServerA(machine_name, fax_handle)
+  end
+
+  def faxConnectFaxServerW(machine_name : Win32cr::Foundation::PWSTR, fax_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    C.FaxConnectFaxServerW(machine_name, fax_handle)
+  end
+
+  def faxClose(fax_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.FaxClose(fax_handle)
+  end
+
+  def faxOpenPort(fax_handle : Win32cr::Foundation::HANDLE, device_id : UInt32, flags : UInt32, fax_port_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    C.FaxOpenPort(fax_handle, device_id, flags, fax_port_handle)
+  end
+
+  def faxCompleteJobParamsA(job_params : Win32cr::Devices::Fax::FAX_JOB_PARAMA**, coverpage_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA**) : Win32cr::Foundation::BOOL
+    C.FaxCompleteJobParamsA(job_params, coverpage_info)
+  end
+
+  def faxCompleteJobParamsW(job_params : Win32cr::Devices::Fax::FAX_JOB_PARAMW**, coverpage_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW**) : Win32cr::Foundation::BOOL
+    C.FaxCompleteJobParamsW(job_params, coverpage_info)
+  end
+
+  def faxSendDocumentA(fax_handle : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PSTR, job_params : Win32cr::Devices::Fax::FAX_JOB_PARAMA*, coverpage_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA*, fax_job_id : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxSendDocumentA(fax_handle, file_name, job_params, coverpage_info, fax_job_id)
+  end
+
+  def faxSendDocumentW(fax_handle : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PWSTR, job_params : Win32cr::Devices::Fax::FAX_JOB_PARAMW*, coverpage_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW*, fax_job_id : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxSendDocumentW(fax_handle, file_name, job_params, coverpage_info, fax_job_id)
+  end
+
+  def faxSendDocumentForBroadcastA(fax_handle : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PSTR, fax_job_id : UInt32*, fax_recipient_callback : Win32cr::Devices::Fax::PFAX_RECIPIENT_CALLBACKA, context : Void*) : Win32cr::Foundation::BOOL
+    C.FaxSendDocumentForBroadcastA(fax_handle, file_name, fax_job_id, fax_recipient_callback, context)
+  end
+
+  def faxSendDocumentForBroadcastW(fax_handle : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PWSTR, fax_job_id : UInt32*, fax_recipient_callback : Win32cr::Devices::Fax::PFAX_RECIPIENT_CALLBACKW, context : Void*) : Win32cr::Foundation::BOOL
+    C.FaxSendDocumentForBroadcastW(fax_handle, file_name, fax_job_id, fax_recipient_callback, context)
+  end
+
+  def faxEnumJobsA(fax_handle : Win32cr::Foundation::HANDLE, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYA**, jobs_returned : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxEnumJobsA(fax_handle, job_entry, jobs_returned)
+  end
+
+  def faxEnumJobsW(fax_handle : Win32cr::Foundation::HANDLE, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYW**, jobs_returned : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxEnumJobsW(fax_handle, job_entry, jobs_returned)
+  end
+
+  def faxGetJobA(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYA**) : Win32cr::Foundation::BOOL
+    C.FaxGetJobA(fax_handle, job_id, job_entry)
+  end
+
+  def faxGetJobW(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYW**) : Win32cr::Foundation::BOOL
+    C.FaxGetJobW(fax_handle, job_id, job_entry)
+  end
+
+  def faxSetJobA(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, command : UInt32, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYA*) : Win32cr::Foundation::BOOL
+    C.FaxSetJobA(fax_handle, job_id, command, job_entry)
+  end
+
+  def faxSetJobW(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, command : UInt32, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYW*) : Win32cr::Foundation::BOOL
+    C.FaxSetJobW(fax_handle, job_id, command, job_entry)
+  end
+
+  def faxGetPageData(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, buffer : UInt8**, buffer_size : UInt32*, image_width : UInt32*, image_height : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxGetPageData(fax_handle, job_id, buffer, buffer_size, image_width, image_height)
+  end
+
+  def faxGetDeviceStatusA(fax_port_handle : Win32cr::Foundation::HANDLE, device_status : Win32cr::Devices::Fax::FAX_DEVICE_STATUSA**) : Win32cr::Foundation::BOOL
+    C.FaxGetDeviceStatusA(fax_port_handle, device_status)
+  end
+
+  def faxGetDeviceStatusW(fax_port_handle : Win32cr::Foundation::HANDLE, device_status : Win32cr::Devices::Fax::FAX_DEVICE_STATUSW**) : Win32cr::Foundation::BOOL
+    C.FaxGetDeviceStatusW(fax_port_handle, device_status)
+  end
+
+  def faxAbort(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32) : Win32cr::Foundation::BOOL
+    C.FaxAbort(fax_handle, job_id)
+  end
+
+  def faxGetConfigurationA(fax_handle : Win32cr::Foundation::HANDLE, fax_config : Win32cr::Devices::Fax::FAX_CONFIGURATIONA**) : Win32cr::Foundation::BOOL
+    C.FaxGetConfigurationA(fax_handle, fax_config)
+  end
+
+  def faxGetConfigurationW(fax_handle : Win32cr::Foundation::HANDLE, fax_config : Win32cr::Devices::Fax::FAX_CONFIGURATIONW**) : Win32cr::Foundation::BOOL
+    C.FaxGetConfigurationW(fax_handle, fax_config)
+  end
+
+  def faxSetConfigurationA(fax_handle : Win32cr::Foundation::HANDLE, fax_config : Win32cr::Devices::Fax::FAX_CONFIGURATIONA*) : Win32cr::Foundation::BOOL
+    C.FaxSetConfigurationA(fax_handle, fax_config)
+  end
+
+  def faxSetConfigurationW(fax_handle : Win32cr::Foundation::HANDLE, fax_config : Win32cr::Devices::Fax::FAX_CONFIGURATIONW*) : Win32cr::Foundation::BOOL
+    C.FaxSetConfigurationW(fax_handle, fax_config)
+  end
+
+  def faxGetLoggingCategoriesA(fax_handle : Win32cr::Foundation::HANDLE, categories : Win32cr::Devices::Fax::FAX_LOG_CATEGORYA**, number_categories : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxGetLoggingCategoriesA(fax_handle, categories, number_categories)
+  end
+
+  def faxGetLoggingCategoriesW(fax_handle : Win32cr::Foundation::HANDLE, categories : Win32cr::Devices::Fax::FAX_LOG_CATEGORYW**, number_categories : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxGetLoggingCategoriesW(fax_handle, categories, number_categories)
+  end
+
+  def faxSetLoggingCategoriesA(fax_handle : Win32cr::Foundation::HANDLE, categories : Win32cr::Devices::Fax::FAX_LOG_CATEGORYA*, number_categories : UInt32) : Win32cr::Foundation::BOOL
+    C.FaxSetLoggingCategoriesA(fax_handle, categories, number_categories)
+  end
+
+  def faxSetLoggingCategoriesW(fax_handle : Win32cr::Foundation::HANDLE, categories : Win32cr::Devices::Fax::FAX_LOG_CATEGORYW*, number_categories : UInt32) : Win32cr::Foundation::BOOL
+    C.FaxSetLoggingCategoriesW(fax_handle, categories, number_categories)
+  end
+
+  def faxEnumPortsA(fax_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOA**, ports_returned : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxEnumPortsA(fax_handle, port_info, ports_returned)
+  end
+
+  def faxEnumPortsW(fax_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOW**, ports_returned : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxEnumPortsW(fax_handle, port_info, ports_returned)
+  end
+
+  def faxGetPortA(fax_port_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOA**) : Win32cr::Foundation::BOOL
+    C.FaxGetPortA(fax_port_handle, port_info)
+  end
+
+  def faxGetPortW(fax_port_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOW**) : Win32cr::Foundation::BOOL
+    C.FaxGetPortW(fax_port_handle, port_info)
+  end
+
+  def faxSetPortA(fax_port_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOA*) : Win32cr::Foundation::BOOL
+    C.FaxSetPortA(fax_port_handle, port_info)
+  end
+
+  def faxSetPortW(fax_port_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOW*) : Win32cr::Foundation::BOOL
+    C.FaxSetPortW(fax_port_handle, port_info)
+  end
+
+  def faxEnumRoutingMethodsA(fax_port_handle : Win32cr::Foundation::HANDLE, routing_method : Win32cr::Devices::Fax::FAX_ROUTING_METHODA**, methods_returned : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxEnumRoutingMethodsA(fax_port_handle, routing_method, methods_returned)
+  end
+
+  def faxEnumRoutingMethodsW(fax_port_handle : Win32cr::Foundation::HANDLE, routing_method : Win32cr::Devices::Fax::FAX_ROUTING_METHODW**, methods_returned : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxEnumRoutingMethodsW(fax_port_handle, routing_method, methods_returned)
+  end
+
+  def faxEnableRoutingMethodA(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PSTR, enabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.FaxEnableRoutingMethodA(fax_port_handle, routing_guid, enabled)
+  end
+
+  def faxEnableRoutingMethodW(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PWSTR, enabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.FaxEnableRoutingMethodW(fax_port_handle, routing_guid, enabled)
+  end
+
+  def faxEnumGlobalRoutingInfoA(fax_handle : Win32cr::Foundation::HANDLE, routing_info : Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOA**, methods_returned : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxEnumGlobalRoutingInfoA(fax_handle, routing_info, methods_returned)
+  end
+
+  def faxEnumGlobalRoutingInfoW(fax_handle : Win32cr::Foundation::HANDLE, routing_info : Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOW**, methods_returned : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxEnumGlobalRoutingInfoW(fax_handle, routing_info, methods_returned)
+  end
+
+  def faxSetGlobalRoutingInfoA(fax_handle : Win32cr::Foundation::HANDLE, routing_info : Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOA*) : Win32cr::Foundation::BOOL
+    C.FaxSetGlobalRoutingInfoA(fax_handle, routing_info)
+  end
+
+  def faxSetGlobalRoutingInfoW(fax_handle : Win32cr::Foundation::HANDLE, routing_info : Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOW*) : Win32cr::Foundation::BOOL
+    C.FaxSetGlobalRoutingInfoW(fax_handle, routing_info)
+  end
+
+  def faxGetRoutingInfoA(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PSTR, routing_info_buffer : UInt8**, routing_info_buffer_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxGetRoutingInfoA(fax_port_handle, routing_guid, routing_info_buffer, routing_info_buffer_size)
+  end
+
+  def faxGetRoutingInfoW(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PWSTR, routing_info_buffer : UInt8**, routing_info_buffer_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.FaxGetRoutingInfoW(fax_port_handle, routing_guid, routing_info_buffer, routing_info_buffer_size)
+  end
+
+  def faxSetRoutingInfoA(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PSTR, routing_info_buffer : UInt8*, routing_info_buffer_size : UInt32) : Win32cr::Foundation::BOOL
+    C.FaxSetRoutingInfoA(fax_port_handle, routing_guid, routing_info_buffer, routing_info_buffer_size)
+  end
+
+  def faxSetRoutingInfoW(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PWSTR, routing_info_buffer : UInt8*, routing_info_buffer_size : UInt32) : Win32cr::Foundation::BOOL
+    C.FaxSetRoutingInfoW(fax_port_handle, routing_guid, routing_info_buffer, routing_info_buffer_size)
+  end
+
+  def faxInitializeEventQueue(fax_handle : Win32cr::Foundation::HANDLE, completion_port : Win32cr::Foundation::HANDLE, completion_key : LibC::UIntPtrT, hWnd : Win32cr::Foundation::HWND, message_start : UInt32) : Win32cr::Foundation::BOOL
+    C.FaxInitializeEventQueue(fax_handle, completion_port, completion_key, hWnd, message_start)
+  end
+
+  def faxFreeBuffer(buffer : Void*) : Void
+    C.FaxFreeBuffer(buffer)
+  end
+
+  def faxStartPrintJobA(printer_name : Win32cr::Foundation::PSTR, print_info : Win32cr::Devices::Fax::FAX_PRINT_INFOA*, fax_job_id : UInt32*, fax_context_info : Win32cr::Devices::Fax::FAX_CONTEXT_INFOA*) : Win32cr::Foundation::BOOL
+    C.FaxStartPrintJobA(printer_name, print_info, fax_job_id, fax_context_info)
+  end
+
+  def faxStartPrintJobW(printer_name : Win32cr::Foundation::PWSTR, print_info : Win32cr::Devices::Fax::FAX_PRINT_INFOW*, fax_job_id : UInt32*, fax_context_info : Win32cr::Devices::Fax::FAX_CONTEXT_INFOW*) : Win32cr::Foundation::BOOL
+    C.FaxStartPrintJobW(printer_name, print_info, fax_job_id, fax_context_info)
+  end
+
+  def faxPrintCoverPageA(fax_context_info : Win32cr::Devices::Fax::FAX_CONTEXT_INFOA*, cover_page_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA*) : Win32cr::Foundation::BOOL
+    C.FaxPrintCoverPageA(fax_context_info, cover_page_info)
+  end
+
+  def faxPrintCoverPageW(fax_context_info : Win32cr::Devices::Fax::FAX_CONTEXT_INFOW*, cover_page_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW*) : Win32cr::Foundation::BOOL
+    C.FaxPrintCoverPageW(fax_context_info, cover_page_info)
+  end
+
+  def faxRegisterServiceProviderW(device_provider : Win32cr::Foundation::PWSTR, friendly_name : Win32cr::Foundation::PWSTR, image_name : Win32cr::Foundation::PWSTR, tsp_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.FaxRegisterServiceProviderW(device_provider, friendly_name, image_name, tsp_name)
+  end
+
+  def faxUnregisterServiceProviderW(device_provider : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.FaxUnregisterServiceProviderW(device_provider)
+  end
+
+  def faxRegisterRoutingExtensionW(fax_handle : Win32cr::Foundation::HANDLE, extension_name : Win32cr::Foundation::PWSTR, friendly_name : Win32cr::Foundation::PWSTR, image_name : Win32cr::Foundation::PWSTR, call_back : Win32cr::Devices::Fax::PFAX_ROUTING_INSTALLATION_CALLBACKW, context : Void*) : Win32cr::Foundation::BOOL
+    C.FaxRegisterRoutingExtensionW(fax_handle, extension_name, friendly_name, image_name, call_back, context)
+  end
+
+  def faxAccessCheck(fax_handle : Win32cr::Foundation::HANDLE, access_mask : UInt32) : Win32cr::Foundation::BOOL
+    C.FaxAccessCheck(fax_handle, access_mask)
+  end
+
+  def canSendToFaxRecipient : Win32cr::Foundation::BOOL
+    C.CanSendToFaxRecipient
+  end
+
+  def sendToFaxRecipient(sndMode : Win32cr::Devices::Fax::SendToMode, lpFileName : Win32cr::Foundation::PWSTR) : UInt32
+    C.SendToFaxRecipient(sndMode, lpFileName)
+  end
+
+  def stiCreateInstanceW(hinst : Win32cr::Foundation::HINSTANCE, dwVer : UInt32, ppSti : Void**, punkOuter : Void*) : Win32cr::Foundation::HRESULT
+    C.StiCreateInstanceW(hinst, dwVer, ppSti, punkOuter)
+  end
+
   @[Link("winfax")]
   @[Link("fxsutility")]
   @[Link("sti")]
   lib C
+    # :nodoc:
     fun FaxConnectFaxServerA(machine_name : Win32cr::Foundation::PSTR, fax_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxConnectFaxServerW(machine_name : Win32cr::Foundation::PWSTR, fax_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxClose(fax_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxOpenPort(fax_handle : Win32cr::Foundation::HANDLE, device_id : UInt32, flags : UInt32, fax_port_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxCompleteJobParamsA(job_params : Win32cr::Devices::Fax::FAX_JOB_PARAMA**, coverpage_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxCompleteJobParamsW(job_params : Win32cr::Devices::Fax::FAX_JOB_PARAMW**, coverpage_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSendDocumentA(fax_handle : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PSTR, job_params : Win32cr::Devices::Fax::FAX_JOB_PARAMA*, coverpage_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA*, fax_job_id : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSendDocumentW(fax_handle : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PWSTR, job_params : Win32cr::Devices::Fax::FAX_JOB_PARAMW*, coverpage_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW*, fax_job_id : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSendDocumentForBroadcastA(fax_handle : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PSTR, fax_job_id : UInt32*, fax_recipient_callback : Win32cr::Devices::Fax::PFAX_RECIPIENT_CALLBACKA, context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSendDocumentForBroadcastW(fax_handle : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PWSTR, fax_job_id : UInt32*, fax_recipient_callback : Win32cr::Devices::Fax::PFAX_RECIPIENT_CALLBACKW, context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxEnumJobsA(fax_handle : Win32cr::Foundation::HANDLE, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYA**, jobs_returned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxEnumJobsW(fax_handle : Win32cr::Foundation::HANDLE, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYW**, jobs_returned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxGetJobA(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYA**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxGetJobW(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYW**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSetJobA(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, command : UInt32, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSetJobW(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, command : UInt32, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxGetPageData(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, buffer : UInt8**, buffer_size : UInt32*, image_width : UInt32*, image_height : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxGetDeviceStatusA(fax_port_handle : Win32cr::Foundation::HANDLE, device_status : Win32cr::Devices::Fax::FAX_DEVICE_STATUSA**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxGetDeviceStatusW(fax_port_handle : Win32cr::Foundation::HANDLE, device_status : Win32cr::Devices::Fax::FAX_DEVICE_STATUSW**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxAbort(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxGetConfigurationA(fax_handle : Win32cr::Foundation::HANDLE, fax_config : Win32cr::Devices::Fax::FAX_CONFIGURATIONA**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxGetConfigurationW(fax_handle : Win32cr::Foundation::HANDLE, fax_config : Win32cr::Devices::Fax::FAX_CONFIGURATIONW**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSetConfigurationA(fax_handle : Win32cr::Foundation::HANDLE, fax_config : Win32cr::Devices::Fax::FAX_CONFIGURATIONA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSetConfigurationW(fax_handle : Win32cr::Foundation::HANDLE, fax_config : Win32cr::Devices::Fax::FAX_CONFIGURATIONW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxGetLoggingCategoriesA(fax_handle : Win32cr::Foundation::HANDLE, categories : Win32cr::Devices::Fax::FAX_LOG_CATEGORYA**, number_categories : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxGetLoggingCategoriesW(fax_handle : Win32cr::Foundation::HANDLE, categories : Win32cr::Devices::Fax::FAX_LOG_CATEGORYW**, number_categories : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSetLoggingCategoriesA(fax_handle : Win32cr::Foundation::HANDLE, categories : Win32cr::Devices::Fax::FAX_LOG_CATEGORYA*, number_categories : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSetLoggingCategoriesW(fax_handle : Win32cr::Foundation::HANDLE, categories : Win32cr::Devices::Fax::FAX_LOG_CATEGORYW*, number_categories : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxEnumPortsA(fax_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOA**, ports_returned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxEnumPortsW(fax_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOW**, ports_returned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxGetPortA(fax_port_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOA**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxGetPortW(fax_port_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOW**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSetPortA(fax_port_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSetPortW(fax_port_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxEnumRoutingMethodsA(fax_port_handle : Win32cr::Foundation::HANDLE, routing_method : Win32cr::Devices::Fax::FAX_ROUTING_METHODA**, methods_returned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxEnumRoutingMethodsW(fax_port_handle : Win32cr::Foundation::HANDLE, routing_method : Win32cr::Devices::Fax::FAX_ROUTING_METHODW**, methods_returned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxEnableRoutingMethodA(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PSTR, enabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxEnableRoutingMethodW(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PWSTR, enabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxEnumGlobalRoutingInfoA(fax_handle : Win32cr::Foundation::HANDLE, routing_info : Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOA**, methods_returned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxEnumGlobalRoutingInfoW(fax_handle : Win32cr::Foundation::HANDLE, routing_info : Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOW**, methods_returned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSetGlobalRoutingInfoA(fax_handle : Win32cr::Foundation::HANDLE, routing_info : Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSetGlobalRoutingInfoW(fax_handle : Win32cr::Foundation::HANDLE, routing_info : Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxGetRoutingInfoA(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PSTR, routing_info_buffer : UInt8**, routing_info_buffer_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxGetRoutingInfoW(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PWSTR, routing_info_buffer : UInt8**, routing_info_buffer_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSetRoutingInfoA(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PSTR, routing_info_buffer : UInt8*, routing_info_buffer_size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxSetRoutingInfoW(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PWSTR, routing_info_buffer : UInt8*, routing_info_buffer_size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxInitializeEventQueue(fax_handle : Win32cr::Foundation::HANDLE, completion_port : Win32cr::Foundation::HANDLE, completion_key : LibC::UIntPtrT, hWnd : Win32cr::Foundation::HWND, message_start : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxFreeBuffer(buffer : Void*) : Void
 
+    # :nodoc:
     fun FaxStartPrintJobA(printer_name : Win32cr::Foundation::PSTR, print_info : Win32cr::Devices::Fax::FAX_PRINT_INFOA*, fax_job_id : UInt32*, fax_context_info : Win32cr::Devices::Fax::FAX_CONTEXT_INFOA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxStartPrintJobW(printer_name : Win32cr::Foundation::PWSTR, print_info : Win32cr::Devices::Fax::FAX_PRINT_INFOW*, fax_job_id : UInt32*, fax_context_info : Win32cr::Devices::Fax::FAX_CONTEXT_INFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxPrintCoverPageA(fax_context_info : Win32cr::Devices::Fax::FAX_CONTEXT_INFOA*, cover_page_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxPrintCoverPageW(fax_context_info : Win32cr::Devices::Fax::FAX_CONTEXT_INFOW*, cover_page_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxRegisterServiceProviderW(device_provider : Win32cr::Foundation::PWSTR, friendly_name : Win32cr::Foundation::PWSTR, image_name : Win32cr::Foundation::PWSTR, tsp_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxUnregisterServiceProviderW(device_provider : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxRegisterRoutingExtensionW(fax_handle : Win32cr::Foundation::HANDLE, extension_name : Win32cr::Foundation::PWSTR, friendly_name : Win32cr::Foundation::PWSTR, image_name : Win32cr::Foundation::PWSTR, call_back : Win32cr::Devices::Fax::PFAX_ROUTING_INSTALLATION_CALLBACKW, context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FaxAccessCheck(fax_handle : Win32cr::Foundation::HANDLE, access_mask : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CanSendToFaxRecipient : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SendToFaxRecipient(sndMode : Win32cr::Devices::Fax::SendToMode, lpFileName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun StiCreateInstanceW(hinst : Win32cr::Foundation::HINSTANCE, dwVer : UInt32, ppSti : Void**, punkOuter : Void*) : Win32cr::Foundation::HRESULT
 
   end

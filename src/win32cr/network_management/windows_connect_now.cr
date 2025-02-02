@@ -2,6 +2,7 @@ require "./../system/com.cr"
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::WindowsConnectNow
+  extend self
   WCN_E_PEER_NOT_FOUND = -2147206143_i32
   WCN_E_AUTHENTICATION_FAILED = -2147206142_i32
   WCN_E_CONNECTION_REJECTED = -2147206141_i32

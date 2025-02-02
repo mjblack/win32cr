@@ -4,6 +4,7 @@ require "./../../../graphics/imaging.cr"
 require "./../../../media/media_foundation.cr"
 
 module Win32cr::System::WinRT::Graphics::Imaging
+  extend self
   CLSID_SoftwareBitmapNativeFactory = "84e65691-8602-4a84-be46-708be9cd4b74"
 
 

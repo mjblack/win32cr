@@ -2,6 +2,7 @@ require "./../com.cr"
 require "./../../foundation.cr"
 
 module Win32cr::System::WinRT::Storage
+  extend self
 
   @[Flags]
   enum HANDLE_OPTIONS : UInt32

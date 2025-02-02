@@ -4,6 +4,7 @@ require "./../direct_show.cr"
 require "./../../data/xml/ms_xml.cr"
 
 module Win32cr::Media::DirectShow::Xml
+  extend self
   CLSID_XMLGraphBuilder = "1bb05961-5fbf-11d2-a521-44df07c10000"
 
 

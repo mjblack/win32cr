@@ -11,6 +11,7 @@ require "./../ole.cr"
 require "./../../security/win_trust.cr"
 
 module Win32cr::System::Diagnostics::Debug
+  extend self
   {% if flag?(:arm) %}
   alias PGET_RUNTIME_FUNCTION_CALLBACK = Proc(UInt64, Void*, Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*)
   {% end %}
@@ -29056,6 +29057,1424 @@ module Win32cr::System::Diagnostics::Debug
 
   end
 
+{% if flag?(:arm) %}
+  def rtlAddFunctionTable(function_table : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*, entry_count : UInt32, base_address : LibC::UIntPtrT) : Win32cr::Foundation::BOOLEAN
+    C.RtlAddFunctionTable(function_table, entry_count, base_address)
+  end
+{% end %}
+
+{% if flag?(:arm) %}
+  def rtlDeleteFunctionTable(function_table : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*) : Win32cr::Foundation::BOOLEAN
+    C.RtlDeleteFunctionTable(function_table)
+  end
+{% end %}
+
+{% if flag?(:arm) %}
+  def rtlAddGrowableFunctionTable(dynamic_table : Void**, function_table : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*, entry_count : UInt32, maximum_entry_count : UInt32, range_base : LibC::UIntPtrT, range_end : LibC::UIntPtrT) : UInt32
+    C.RtlAddGrowableFunctionTable(dynamic_table, function_table, entry_count, maximum_entry_count, range_base, range_end)
+  end
+{% end %}
+
+{% if flag?(:arm) %}
+  def rtlLookupFunctionEntry(control_pc : LibC::UIntPtrT, image_base : LibC::UIntPtrT*, history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*) : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*
+    C.RtlLookupFunctionEntry(control_pc, image_base, history_table)
+  end
+{% end %}
+
+{% if flag?(:arm) %}
+  def rtlVirtualUnwind(handler_type : Win32cr::System::Diagnostics::Debug::RTL_VIRTUAL_UNWIND_HANDLER_TYPE, image_base : LibC::UIntPtrT, control_pc : LibC::UIntPtrT, function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, handler_data : Void**, establisher_frame : LibC::UIntPtrT*, context_pointers : Win32cr::System::Diagnostics::Debug::KNONVOLATILE_CONTEXT_POINTERS_ARM64*) : Win32cr::System::Kernel::EXCEPTION_ROUTINE
+    C.RtlVirtualUnwind(handler_type, image_base, control_pc, function_entry, context_record, handler_data, establisher_frame, context_pointers)
+  end
+{% end %}
+
+  def debugConnect(remote_options : Win32cr::Foundation::PSTR, interface_id : LibC::GUID*, interface : Void**) : Win32cr::Foundation::HRESULT
+    C.DebugConnect(remote_options, interface_id, interface)
+  end
+
+  def debugConnectWide(remote_options : Win32cr::Foundation::PWSTR, interface_id : LibC::GUID*, interface : Void**) : Win32cr::Foundation::HRESULT
+    C.DebugConnectWide(remote_options, interface_id, interface)
+  end
+
+  def debugCreate(interface_id : LibC::GUID*, interface : Void**) : Win32cr::Foundation::HRESULT
+    C.DebugCreate(interface_id, interface)
+  end
+
+  def debugCreateEx(interface_id : LibC::GUID*, dbg_eng_options : UInt32, interface : Void**) : Win32cr::Foundation::HRESULT
+    C.DebugCreateEx(interface_id, dbg_eng_options, interface)
+  end
+
+  def createDataModelManager(debugHost : Void*, manager : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateDataModelManager(debugHost, manager)
+  end
+
+  def readProcessMemory(hProcess : Win32cr::Foundation::HANDLE, lpBaseAddress : Void*, lpBuffer : Void*, nSize : LibC::UIntPtrT, lpNumberOfBytesRead : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    C.ReadProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesRead)
+  end
+
+  def writeProcessMemory(hProcess : Win32cr::Foundation::HANDLE, lpBaseAddress : Void*, lpBuffer : Void*, nSize : LibC::UIntPtrT, lpNumberOfBytesWritten : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    C.WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesWritten)
+  end
+
+  #def getThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
+    #C.GetThreadContext(hThread, lpContext)
+  #end
+
+  def setThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
+    C.SetThreadContext(hThread, lpContext)
+  end
+
+  def flushInstructionCache(hProcess : Win32cr::Foundation::HANDLE, lpBaseAddress : Void*, dwSize : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.FlushInstructionCache(hProcess, lpBaseAddress, dwSize)
+  end
+
+  def wow64GetThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::WOW64_CONTEXT*) : Win32cr::Foundation::BOOL
+    C.Wow64GetThreadContext(hThread, lpContext)
+  end
+
+  def wow64SetThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::WOW64_CONTEXT*) : Win32cr::Foundation::BOOL
+    C.Wow64SetThreadContext(hThread, lpContext)
+  end
+
+  def rtlCaptureStackBackTrace(frames_to_skip : UInt32, frames_to_capture : UInt32, back_trace : Void**, back_trace_hash : UInt32*) : UInt16
+    C.RtlCaptureStackBackTrace(frames_to_skip, frames_to_capture, back_trace, back_trace_hash)
+  end
+
+  #def rtlCaptureContext(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
+    #C.RtlCaptureContext(context_record)
+  #end
+
+{% if flag?(:x86_64) %}
+  def rtlCaptureContext2(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
+    C.RtlCaptureContext2(context_record)
+  end
+{% end %}
+
+  def rtlUnwind(target_frame : Void*, target_ip : Void*, exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, return_value : Void*) : Void
+    C.RtlUnwind(target_frame, target_ip, exception_record, return_value)
+  end
+
+{% if flag?(:x86_64) %}
+  def rtlAddFunctionTable(function_table : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, entry_count : UInt32, base_address : UInt64) : Win32cr::Foundation::BOOLEAN
+    C.RtlAddFunctionTable(function_table, entry_count, base_address)
+  end
+{% end %}
+
+{% if flag?(:x86_64) %}
+  def rtlDeleteFunctionTable(function_table : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*) : Win32cr::Foundation::BOOLEAN
+    C.RtlDeleteFunctionTable(function_table)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def rtlInstallFunctionTableCallback(table_identifier : UInt64, base_address : UInt64, length : UInt32, callback : Win32cr::System::Diagnostics::Debug::PGET_RUNTIME_FUNCTION_CALLBACK, context : Void*, out_of_process_callback_dll : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOLEAN
+    C.RtlInstallFunctionTableCallback(table_identifier, base_address, length, callback, context, out_of_process_callback_dll)
+  end
+{% end %}
+
+{% if flag?(:x86_64) %}
+  def rtlAddGrowableFunctionTable(dynamic_table : Void**, function_table : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, entry_count : UInt32, maximum_entry_count : UInt32, range_base : LibC::UIntPtrT, range_end : LibC::UIntPtrT) : UInt32
+    C.RtlAddGrowableFunctionTable(dynamic_table, function_table, entry_count, maximum_entry_count, range_base, range_end)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def rtlGrowFunctionTable(dynamic_table : Void*, new_entry_count : UInt32) : Void
+    C.RtlGrowFunctionTable(dynamic_table, new_entry_count)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def rtlDeleteGrowableFunctionTable(dynamic_table : Void*) : Void
+    C.RtlDeleteGrowableFunctionTable(dynamic_table)
+  end
+{% end %}
+
+{% if flag?(:x86_64) %}
+  def rtlLookupFunctionEntry(control_pc : UInt64, image_base : UInt64*, history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*) : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*
+    C.RtlLookupFunctionEntry(control_pc, image_base, history_table)
+  end
+{% end %}
+
+  def rtlRestoreContext(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*) : Void
+    C.RtlRestoreContext(context_record, exception_record)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def rtlUnwindEx(target_frame : Void*, target_ip : Void*, exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, return_value : Void*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*) : Void
+    C.RtlUnwindEx(target_frame, target_ip, exception_record, return_value, context_record, history_table)
+  end
+{% end %}
+
+{% if flag?(:x86_64) %}
+  def rtlVirtualUnwind(handler_type : Win32cr::System::Diagnostics::Debug::RTL_VIRTUAL_UNWIND_HANDLER_TYPE, image_base : UInt64, control_pc : UInt64, function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, handler_data : Void**, establisher_frame : UInt64*, context_pointers : Win32cr::System::Diagnostics::Debug::KNONVOLATILE_CONTEXT_POINTERS*) : Win32cr::System::Kernel::EXCEPTION_ROUTINE
+    C.RtlVirtualUnwind(handler_type, image_base, control_pc, function_entry, context_record, handler_data, establisher_frame, context_pointers)
+  end
+{% end %}
+
+  def rtlRaiseException(exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*) : Void
+    C.RtlRaiseException(exception_record)
+  end
+
+  def rtlPcToFileHeader(pc_value : Void*, base_of_image : Void**) : Void*
+    C.RtlPcToFileHeader(pc_value, base_of_image)
+  end
+
+  def isDebuggerPresent : Win32cr::Foundation::BOOL
+    C.IsDebuggerPresent
+  end
+
+  def debugBreak : Void
+    C.DebugBreak
+  end
+
+  def outputDebugStringA(lpOutputString : Win32cr::Foundation::PSTR) : Void
+    C.OutputDebugStringA(lpOutputString)
+  end
+
+  def outputDebugStringW(lpOutputString : Win32cr::Foundation::PWSTR) : Void
+    C.OutputDebugStringW(lpOutputString)
+  end
+
+  def continueDebugEvent(dwProcessId : UInt32, dwThreadId : UInt32, dwContinueStatus : UInt32) : Win32cr::Foundation::BOOL
+    C.ContinueDebugEvent(dwProcessId, dwThreadId, dwContinueStatus)
+  end
+
+  def waitForDebugEvent(lpDebugEvent : Win32cr::System::Diagnostics::Debug::DEBUG_EVENT*, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
+    C.WaitForDebugEvent(lpDebugEvent, dwMilliseconds)
+  end
+
+  def debugActiveProcess(dwProcessId : UInt32) : Win32cr::Foundation::BOOL
+    C.DebugActiveProcess(dwProcessId)
+  end
+
+  def debugActiveProcessStop(dwProcessId : UInt32) : Win32cr::Foundation::BOOL
+    C.DebugActiveProcessStop(dwProcessId)
+  end
+
+  def checkRemoteDebuggerPresent(hProcess : Win32cr::Foundation::HANDLE, pbDebuggerPresent : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.CheckRemoteDebuggerPresent(hProcess, pbDebuggerPresent)
+  end
+
+  def waitForDebugEventEx(lpDebugEvent : Win32cr::System::Diagnostics::Debug::DEBUG_EVENT*, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
+    C.WaitForDebugEventEx(lpDebugEvent, dwMilliseconds)
+  end
+
+  def encodePointer(ptr : Void*) : Void*
+    C.EncodePointer(ptr)
+  end
+
+  def decodePointer(ptr : Void*) : Void*
+    C.DecodePointer(ptr)
+  end
+
+  def encodeSystemPointer(ptr : Void*) : Void*
+    C.EncodeSystemPointer(ptr)
+  end
+
+  def decodeSystemPointer(ptr : Void*) : Void*
+    C.DecodeSystemPointer(ptr)
+  end
+
+  def encodeRemotePointer(process_handle : Win32cr::Foundation::HANDLE, ptr : Void*, encoded_ptr : Void**) : Win32cr::Foundation::HRESULT
+    C.EncodeRemotePointer(process_handle, ptr, encoded_ptr)
+  end
+
+  def decodeRemotePointer(process_handle : Win32cr::Foundation::HANDLE, ptr : Void*, decoded_ptr : Void**) : Win32cr::Foundation::HRESULT
+    C.DecodeRemotePointer(process_handle, ptr, decoded_ptr)
+  end
+
+  def beep(dwFreq : UInt32, dwDuration : UInt32) : Win32cr::Foundation::BOOL
+    C.Beep(dwFreq, dwDuration)
+  end
+
+  def raiseException(dwExceptionCode : UInt32, dwExceptionFlags : UInt32, nNumberOfArguments : UInt32, lpArguments : LibC::UIntPtrT*) : Void
+    C.RaiseException(dwExceptionCode, dwExceptionFlags, nNumberOfArguments, lpArguments)
+  end
+
+  def unhandledExceptionFilter(exception_info : Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*) : Int32
+    C.UnhandledExceptionFilter(exception_info)
+  end
+
+  def setUnhandledExceptionFilter(lpTopLevelExceptionFilter : Win32cr::System::Diagnostics::Debug::LPTOP_LEVEL_EXCEPTION_FILTER) : Win32cr::System::Diagnostics::Debug::LPTOP_LEVEL_EXCEPTION_FILTER
+    C.SetUnhandledExceptionFilter(lpTopLevelExceptionFilter)
+  end
+
+  def getErrorMode : UInt32
+    C.GetErrorMode
+  end
+
+  def setErrorMode(uMode : Win32cr::System::Diagnostics::Debug::THREAD_ERROR_MODE) : UInt32
+    C.SetErrorMode(uMode)
+  end
+
+  #def addVectoredExceptionHandler(first : UInt32, handler : Win32cr::System::Diagnostics::Debug::PVECTORED_EXCEPTION_HANDLER) : Void*
+    #C.AddVectoredExceptionHandler(first, handler)
+  #end
+
+  def removeVectoredExceptionHandler(handle : Void*) : UInt32
+    C.RemoveVectoredExceptionHandler(handle)
+  end
+
+  def addVectoredContinueHandler(first : UInt32, handler : Win32cr::System::Diagnostics::Debug::PVECTORED_EXCEPTION_HANDLER) : Void*
+    C.AddVectoredContinueHandler(first, handler)
+  end
+
+  def removeVectoredContinueHandler(handle : Void*) : UInt32
+    C.RemoveVectoredContinueHandler(handle)
+  end
+
+  def raiseFailFastException(pExceptionRecord : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, pContextRecord : Win32cr::System::Diagnostics::Debug::CONTEXT*, dwFlags : UInt32) : Void
+    C.RaiseFailFastException(pExceptionRecord, pContextRecord, dwFlags)
+  end
+
+  def fatalAppExitA(uAction : UInt32, lpMessageText : Win32cr::Foundation::PSTR) : Void
+    C.FatalAppExitA(uAction, lpMessageText)
+  end
+
+  def fatalAppExitW(uAction : UInt32, lpMessageText : Win32cr::Foundation::PWSTR) : Void
+    C.FatalAppExitW(uAction, lpMessageText)
+  end
+
+  def getThreadErrorMode : UInt32
+    C.GetThreadErrorMode
+  end
+
+  def setThreadErrorMode(dwNewMode : Win32cr::System::Diagnostics::Debug::THREAD_ERROR_MODE, lpOldMode : Win32cr::System::Diagnostics::Debug::THREAD_ERROR_MODE*) : Win32cr::Foundation::BOOL
+    C.SetThreadErrorMode(dwNewMode, lpOldMode)
+  end
+
+  def terminateProcessOnMemoryExhaustion(failed_allocation_size : LibC::UIntPtrT) : Void
+    C.TerminateProcessOnMemoryExhaustion(failed_allocation_size)
+  end
+
+  def openThreadWaitChainSession(flags : Win32cr::System::Diagnostics::Debug::OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS, callback : Win32cr::System::Diagnostics::Debug::PWAITCHAINCALLBACK) : Void*
+    C.OpenThreadWaitChainSession(flags, callback)
+  end
+
+  def closeThreadWaitChainSession(wct_handle : Void*) : Void
+    C.CloseThreadWaitChainSession(wct_handle)
+  end
+
+  def getThreadWaitChain(wct_handle : Void*, context : LibC::UIntPtrT, flags : Win32cr::System::Diagnostics::Debug::WAIT_CHAIN_THREAD_OPTIONS, thread_id : UInt32, node_count : UInt32*, node_info_array : Win32cr::System::Diagnostics::Debug::WAITCHAIN_NODE_INFO*, is_cycle : Int32*) : Win32cr::Foundation::BOOL
+    C.GetThreadWaitChain(wct_handle, context, flags, thread_id, node_count, node_info_array, is_cycle)
+  end
+
+  def registerWaitChainCOMCallback(call_state_callback : Win32cr::System::Diagnostics::Debug::PCOGETCALLSTATE, activation_state_callback : Win32cr::System::Diagnostics::Debug::PCOGETACTIVATIONSTATE) : Void
+    C.RegisterWaitChainCOMCallback(call_state_callback, activation_state_callback)
+  end
+
+  def miniDumpWriteDump(hProcess : Win32cr::Foundation::HANDLE, process_id : UInt32, hFile : Win32cr::Foundation::HANDLE, dump_type : Win32cr::System::Diagnostics::Debug::MINIDUMP_TYPE, exception_param : Win32cr::System::Diagnostics::Debug::MINIDUMP_EXCEPTION_INFORMATION*, user_stream_param : Win32cr::System::Diagnostics::Debug::MINIDUMP_USER_STREAM_INFORMATION*, callback_param : Win32cr::System::Diagnostics::Debug::MINIDUMP_CALLBACK_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.MiniDumpWriteDump(hProcess, process_id, hFile, dump_type, exception_param, user_stream_param, callback_param)
+  end
+
+  def miniDumpReadDumpStream(base_of_dump : Void*, stream_number : UInt32, dir : Win32cr::System::Diagnostics::Debug::MINIDUMP_DIRECTORY**, stream_pointer : Void**, stream_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.MiniDumpReadDumpStream(base_of_dump, stream_number, dir, stream_pointer, stream_size)
+  end
+
+  def bindImage(image_name : Win32cr::Foundation::PSTR, dll_path : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.BindImage(image_name, dll_path, symbol_path)
+  end
+
+  def bindImageEx(flags : UInt32, image_name : Win32cr::Foundation::PSTR, dll_path : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, status_routine : Win32cr::System::Diagnostics::Debug::PIMAGEHLP_STATUS_ROUTINE) : Win32cr::Foundation::BOOL
+    C.BindImageEx(flags, image_name, dll_path, symbol_path, status_routine)
+  end
+
+  def reBaseImage(current_image_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, fReBase : Win32cr::Foundation::BOOL, fRebaseSysfileOk : Win32cr::Foundation::BOOL, fGoingDown : Win32cr::Foundation::BOOL, check_image_size : UInt32, old_image_size : UInt32*, old_image_base : LibC::UIntPtrT*, new_image_size : UInt32*, new_image_base : LibC::UIntPtrT*, time_stamp : UInt32) : Win32cr::Foundation::BOOL
+    C.ReBaseImage(current_image_name, symbol_path, fReBase, fRebaseSysfileOk, fGoingDown, check_image_size, old_image_size, old_image_base, new_image_size, new_image_base, time_stamp)
+  end
+
+  def reBaseImage64(current_image_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, fReBase : Win32cr::Foundation::BOOL, fRebaseSysfileOk : Win32cr::Foundation::BOOL, fGoingDown : Win32cr::Foundation::BOOL, check_image_size : UInt32, old_image_size : UInt32*, old_image_base : UInt64*, new_image_size : UInt32*, new_image_base : UInt64*, time_stamp : UInt32) : Win32cr::Foundation::BOOL
+    C.ReBaseImage64(current_image_name, symbol_path, fReBase, fRebaseSysfileOk, fGoingDown, check_image_size, old_image_size, old_image_base, new_image_size, new_image_base, time_stamp)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def checkSumMappedFile(base_address : Void*, file_length : UInt32, header_sum : UInt32*, check_sum : UInt32*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*
+    C.CheckSumMappedFile(base_address, file_length, header_sum, check_sum)
+  end
+{% end %}
+
+  def mapFileAndCheckSumA(filename : Win32cr::Foundation::PSTR, header_sum : UInt32*, check_sum : UInt32*) : UInt32
+    C.MapFileAndCheckSumA(filename, header_sum, check_sum)
+  end
+
+  def mapFileAndCheckSumW(filename : Win32cr::Foundation::PWSTR, header_sum : UInt32*, check_sum : UInt32*) : UInt32
+    C.MapFileAndCheckSumW(filename, header_sum, check_sum)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def getImageConfigInformation(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, image_config_information : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_DIRECTORY64*) : Win32cr::Foundation::BOOL
+    C.GetImageConfigInformation(loaded_image, image_config_information)
+  end
+{% end %}
+
+  def getImageUnusedHeaderBytes(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, size_unused_header_bytes : UInt32*) : UInt32
+    C.GetImageUnusedHeaderBytes(loaded_image, size_unused_header_bytes)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def setImageConfigInformation(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, image_config_information : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_DIRECTORY64*) : Win32cr::Foundation::BOOL
+    C.SetImageConfigInformation(loaded_image, image_config_information)
+  end
+{% end %}
+
+  def imageGetDigestStream(file_handle : Win32cr::Foundation::HANDLE, digest_level : UInt32, digest_function : Win32cr::System::Diagnostics::Debug::DIGEST_FUNCTION, digest_handle : Void*) : Win32cr::Foundation::BOOL
+    C.ImageGetDigestStream(file_handle, digest_level, digest_function, digest_handle)
+  end
+
+  def imageAddCertificate(file_handle : Win32cr::Foundation::HANDLE, certificate : Win32cr::Security::WinTrust::WIN_CERTIFICATE*, index : UInt32*) : Win32cr::Foundation::BOOL
+    C.ImageAddCertificate(file_handle, certificate, index)
+  end
+
+  def imageRemoveCertificate(file_handle : Win32cr::Foundation::HANDLE, index : UInt32) : Win32cr::Foundation::BOOL
+    C.ImageRemoveCertificate(file_handle, index)
+  end
+
+  def imageEnumerateCertificates(file_handle : Win32cr::Foundation::HANDLE, type_filter : UInt16, certificate_count : UInt32*, indices : UInt32*, index_count : UInt32) : Win32cr::Foundation::BOOL
+    C.ImageEnumerateCertificates(file_handle, type_filter, certificate_count, indices, index_count)
+  end
+
+  def imageGetCertificateData(file_handle : Win32cr::Foundation::HANDLE, certificate_index : UInt32, certificate : Win32cr::Security::WinTrust::WIN_CERTIFICATE*, required_length : UInt32*) : Win32cr::Foundation::BOOL
+    C.ImageGetCertificateData(file_handle, certificate_index, certificate, required_length)
+  end
+
+  def imageGetCertificateHeader(file_handle : Win32cr::Foundation::HANDLE, certificate_index : UInt32, certificateheader : Win32cr::Security::WinTrust::WIN_CERTIFICATE*) : Win32cr::Foundation::BOOL
+    C.ImageGetCertificateHeader(file_handle, certificate_index, certificateheader)
+  end
+
+  def imageLoad(dll_name : Win32cr::Foundation::PSTR, dll_path : Win32cr::Foundation::PSTR) : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*
+    C.ImageLoad(dll_name, dll_path)
+  end
+
+  def imageUnload(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*) : Win32cr::Foundation::BOOL
+    C.ImageUnload(loaded_image)
+  end
+
+  def mapAndLoad(image_name : Win32cr::Foundation::PSTR, dll_path : Win32cr::Foundation::PSTR, loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, dot_dll : Win32cr::Foundation::BOOL, read_only : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.MapAndLoad(image_name, dll_path, loaded_image, dot_dll, read_only)
+  end
+
+  def unMapAndLoad(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*) : Win32cr::Foundation::BOOL
+    C.UnMapAndLoad(loaded_image)
+  end
+
+  def touchFileTimes(file_handle : Win32cr::Foundation::HANDLE, pSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+    C.TouchFileTimes(file_handle, pSystemTime)
+  end
+
+  def updateDebugInfoFile(image_file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR, nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*) : Win32cr::Foundation::BOOL
+    C.UpdateDebugInfoFile(image_file_name, symbol_path, debug_file_path, nt_headers)
+  end
+
+  def updateDebugInfoFileEx(image_file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR, nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*, old_check_sum : UInt32) : Win32cr::Foundation::BOOL
+    C.UpdateDebugInfoFileEx(image_file_name, symbol_path, debug_file_path, nt_headers, old_check_sum)
+  end
+
+  def symFindDebugInfoFile(hProcess : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_DEBUG_FILE_CALLBACK, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    C.SymFindDebugInfoFile(hProcess, file_name, debug_file_path, callback, caller_data)
+  end
+
+  def symFindDebugInfoFileW(hProcess : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PWSTR, debug_file_path : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_DEBUG_FILE_CALLBACKW, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    C.SymFindDebugInfoFileW(hProcess, file_name, debug_file_path, callback, caller_data)
+  end
+
+  def findDebugInfoFile(file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    C.FindDebugInfoFile(file_name, symbol_path, debug_file_path)
+  end
+
+  def findDebugInfoFileEx(file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_DEBUG_FILE_CALLBACK, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    C.FindDebugInfoFileEx(file_name, symbol_path, debug_file_path, callback, caller_data)
+  end
+
+  def findDebugInfoFileExW(file_name : Win32cr::Foundation::PWSTR, symbol_path : Win32cr::Foundation::PWSTR, debug_file_path : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_DEBUG_FILE_CALLBACKW, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    C.FindDebugInfoFileExW(file_name, symbol_path, debug_file_path, callback, caller_data)
+  end
+
+  def symFindFileInPath(hprocess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, id : Void*, two : UInt32, three : UInt32, flags : Win32cr::System::Diagnostics::Debug::SYM_FIND_ID_OPTION, found_file : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFINDFILEINPATHCALLBACK, context : Void*) : Win32cr::Foundation::BOOL
+    C.SymFindFileInPath(hprocess, search_path_a, file_name, id, two, three, flags, found_file, callback, context)
+  end
+
+  def symFindFileInPathW(hprocess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PWSTR, file_name : Win32cr::Foundation::PWSTR, id : Void*, two : UInt32, three : UInt32, flags : Win32cr::System::Diagnostics::Debug::SYM_FIND_ID_OPTION, found_file : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFINDFILEINPATHCALLBACKW, context : Void*) : Win32cr::Foundation::BOOL
+    C.SymFindFileInPathW(hprocess, search_path_a, file_name, id, two, three, flags, found_file, callback, context)
+  end
+
+  def symFindExecutableImage(hProcess : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PSTR, image_file_path : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_EXE_FILE_CALLBACK, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    C.SymFindExecutableImage(hProcess, file_name, image_file_path, callback, caller_data)
+  end
+
+  def symFindExecutableImageW(hProcess : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PWSTR, image_file_path : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_EXE_FILE_CALLBACKW, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    C.SymFindExecutableImageW(hProcess, file_name, image_file_path, callback, caller_data)
+  end
+
+  def findExecutableImage(file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, image_file_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    C.FindExecutableImage(file_name, symbol_path, image_file_path)
+  end
+
+  def findExecutableImageEx(file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, image_file_path : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_EXE_FILE_CALLBACK, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    C.FindExecutableImageEx(file_name, symbol_path, image_file_path, callback, caller_data)
+  end
+
+  def findExecutableImageExW(file_name : Win32cr::Foundation::PWSTR, symbol_path : Win32cr::Foundation::PWSTR, image_file_path : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_EXE_FILE_CALLBACKW, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    C.FindExecutableImageExW(file_name, symbol_path, image_file_path, callback, caller_data)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def imageNtHeader(base : Void*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*
+    C.ImageNtHeader(base)
+  end
+{% end %}
+
+  def imageDirectoryEntryToDataEx(base : Void*, mapped_as_image : Win32cr::Foundation::BOOLEAN, directory_entry : Win32cr::System::Diagnostics::Debug::IMAGE_DIRECTORY_ENTRY, size : UInt32*, found_header : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER**) : Void*
+    C.ImageDirectoryEntryToDataEx(base, mapped_as_image, directory_entry, size, found_header)
+  end
+
+  def imageDirectoryEntryToData(base : Void*, mapped_as_image : Win32cr::Foundation::BOOLEAN, directory_entry : Win32cr::System::Diagnostics::Debug::IMAGE_DIRECTORY_ENTRY, size : UInt32*) : Void*
+    C.ImageDirectoryEntryToData(base, mapped_as_image, directory_entry, size)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def imageRvaToSection(nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*, base : Void*, rva : UInt32) : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*
+    C.ImageRvaToSection(nt_headers, base, rva)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def imageRvaToVa(nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*, base : Void*, rva : UInt32, last_rva_section : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER**) : Void*
+    C.ImageRvaToVa(nt_headers, base, rva, last_rva_section)
+  end
+{% end %}
+
+  def searchTreeForFile(root_path : Win32cr::Foundation::PSTR, input_path_name : Win32cr::Foundation::PSTR, output_path_buffer : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SearchTreeForFile(root_path, input_path_name, output_path_buffer)
+  end
+
+  def searchTreeForFileW(root_path : Win32cr::Foundation::PWSTR, input_path_name : Win32cr::Foundation::PWSTR, output_path_buffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SearchTreeForFileW(root_path, input_path_name, output_path_buffer)
+  end
+
+  def enumDirTree(hProcess : Win32cr::Foundation::HANDLE, root_path : Win32cr::Foundation::PSTR, input_path_name : Win32cr::Foundation::PSTR, output_path_buffer : Win32cr::Foundation::PSTR, cb : Win32cr::System::Diagnostics::Debug::PENUMDIRTREE_CALLBACK, data : Void*) : Win32cr::Foundation::BOOL
+    C.EnumDirTree(hProcess, root_path, input_path_name, output_path_buffer, cb, data)
+  end
+
+  def enumDirTreeW(hProcess : Win32cr::Foundation::HANDLE, root_path : Win32cr::Foundation::PWSTR, input_path_name : Win32cr::Foundation::PWSTR, output_path_buffer : Win32cr::Foundation::PWSTR, cb : Win32cr::System::Diagnostics::Debug::PENUMDIRTREE_CALLBACKW, data : Void*) : Win32cr::Foundation::BOOL
+    C.EnumDirTreeW(hProcess, root_path, input_path_name, output_path_buffer, cb, data)
+  end
+
+  def makeSureDirectoryPathExists(dir_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.MakeSureDirectoryPathExists(dir_path)
+  end
+
+  def unDecorateSymbolName(name : Win32cr::Foundation::PSTR, outputString : UInt8*, maxStringLength : UInt32, flags : UInt32) : UInt32
+    C.UnDecorateSymbolName(name, outputString, maxStringLength, flags)
+  end
+
+  def unDecorateSymbolNameW(name : Win32cr::Foundation::PWSTR, outputString : UInt16*, maxStringLength : UInt32, flags : UInt32) : UInt32
+    C.UnDecorateSymbolNameW(name, outputString, maxStringLength, flags)
+  end
+
+  #def stackWalk64(machine_type : UInt32, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::STACKFRAME64*, context_record : Void*, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE64, function_table_access_routine : Win32cr::System::Diagnostics::Debug::PFUNCTION_TABLE_ACCESS_ROUTINE64, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE64, translate_address : Win32cr::System::Diagnostics::Debug::PTRANSLATE_ADDRESS_ROUTINE64) : Win32cr::Foundation::BOOL
+    #C.StackWalk64(machine_type, hProcess, hThread, stack_frame, context_record, read_memory_routine, function_table_access_routine, get_module_base_routine, translate_address)
+  #end
+
+  def stackWalkEx(machine_type : UInt32, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::STACKFRAME_EX*, context_record : Void*, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE64, function_table_access_routine : Win32cr::System::Diagnostics::Debug::PFUNCTION_TABLE_ACCESS_ROUTINE64, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE64, translate_address : Win32cr::System::Diagnostics::Debug::PTRANSLATE_ADDRESS_ROUTINE64, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.StackWalkEx(machine_type, hProcess, hThread, stack_frame, context_record, read_memory_routine, function_table_access_routine, get_module_base_routine, translate_address, flags)
+  end
+
+  def imagehlpApiVersion : Win32cr::System::Diagnostics::Debug::API_VERSION*
+    C.ImagehlpApiVersion
+  end
+
+  def imagehlpApiVersionEx(app_version : Win32cr::System::Diagnostics::Debug::API_VERSION*) : Win32cr::System::Diagnostics::Debug::API_VERSION*
+    C.ImagehlpApiVersionEx(app_version)
+  end
+
+  def getTimestampForLoadedLibrary(module__ : Win32cr::Foundation::HINSTANCE) : UInt32
+    C.GetTimestampForLoadedLibrary(module__)
+  end
+
+  def symSetParentWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.SymSetParentWindow(hwnd)
+  end
+
+  def symSetHomeDirectory(hProcess : Win32cr::Foundation::HANDLE, dir : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    C.SymSetHomeDirectory(hProcess, dir)
+  end
+
+  def symSetHomeDirectoryW(hProcess : Win32cr::Foundation::HANDLE, dir : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.SymSetHomeDirectoryW(hProcess, dir)
+  end
+
+  def symGetHomeDirectory(type__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_HD_TYPE, dir : UInt8*, size : LibC::UIntPtrT) : Win32cr::Foundation::PSTR
+    C.SymGetHomeDirectory(type__, dir, size)
+  end
+
+  def symGetHomeDirectoryW(type__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_HD_TYPE, dir : UInt16*, size : LibC::UIntPtrT) : Win32cr::Foundation::PWSTR
+    C.SymGetHomeDirectoryW(type__, dir, size)
+  end
+
+  def symGetOmaps(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, omap_to : Win32cr::System::Diagnostics::Debug::OMAP**, cOmapTo : UInt64*, omap_from : Win32cr::System::Diagnostics::Debug::OMAP**, cOmapFrom : UInt64*) : Win32cr::Foundation::BOOL
+    C.SymGetOmaps(hProcess, base_of_dll, omap_to, cOmapTo, omap_from, cOmapFrom)
+  end
+
+  #def symSetOptions(sym_options : UInt32) : UInt32
+    #C.SymSetOptions(sym_options)
+  #end
+
+  #def symGetOptions : UInt32
+    #C.SymGetOptions
+  #end
+
+  #def symCleanup(hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    #C.SymCleanup(hProcess)
+  #end
+
+  def symGetExtendedOption(option : Win32cr::System::Diagnostics::Debug::IMAGEHLP_EXTENDED_OPTIONS) : Win32cr::Foundation::BOOL
+    C.SymGetExtendedOption(option)
+  end
+
+  def symSetExtendedOption(option : Win32cr::System::Diagnostics::Debug::IMAGEHLP_EXTENDED_OPTIONS, value : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SymSetExtendedOption(option, value)
+  end
+
+  def symMatchString(string : Win32cr::Foundation::PSTR, expression : Win32cr::Foundation::PSTR, fCase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SymMatchString(string, expression, fCase)
+  end
+
+  def symMatchStringA(string : Win32cr::Foundation::PSTR, expression : Win32cr::Foundation::PSTR, fCase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SymMatchStringA(string, expression, fCase)
+  end
+
+  def symMatchStringW(string : Win32cr::Foundation::PWSTR, expression : Win32cr::Foundation::PWSTR, fCase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SymMatchStringW(string, expression, fCase)
+  end
+
+  def symEnumSourceFiles(hProcess : Win32cr::Foundation::HANDLE, mod_base : UInt64, mask : Win32cr::Foundation::PSTR, cbSrcFiles : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSOURCEFILES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumSourceFiles(hProcess, mod_base, mask, cbSrcFiles, user_context)
+  end
+
+  def symEnumSourceFilesW(hProcess : Win32cr::Foundation::HANDLE, mod_base : UInt64, mask : Win32cr::Foundation::PWSTR, cbSrcFiles : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSOURCEFILES_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumSourceFilesW(hProcess, mod_base, mask, cbSrcFiles, user_context)
+  end
+
+  def symEnumerateModules64(hProcess : Win32cr::Foundation::HANDLE, enum_modules_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMMODULES_CALLBACK64, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumerateModules64(hProcess, enum_modules_callback, user_context)
+  end
+
+  def symEnumerateModulesW64(hProcess : Win32cr::Foundation::HANDLE, enum_modules_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMMODULES_CALLBACKW64, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumerateModulesW64(hProcess, enum_modules_callback, user_context)
+  end
+
+  def enumerateLoadedModulesEx(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACK64, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.EnumerateLoadedModulesEx(hProcess, enum_loaded_modules_callback, user_context)
+  end
+
+  def enumerateLoadedModulesExW(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACKW64, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.EnumerateLoadedModulesExW(hProcess, enum_loaded_modules_callback, user_context)
+  end
+
+  def enumerateLoadedModules64(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACK64, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.EnumerateLoadedModules64(hProcess, enum_loaded_modules_callback, user_context)
+  end
+
+  def enumerateLoadedModulesW64(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACKW64, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.EnumerateLoadedModulesW64(hProcess, enum_loaded_modules_callback, user_context)
+  end
+
+  def symFunctionTableAccess64(hProcess : Win32cr::Foundation::HANDLE, addr_base : UInt64) : Void*
+    C.SymFunctionTableAccess64(hProcess, addr_base)
+  end
+
+  def symFunctionTableAccess64AccessRoutines(hProcess : Win32cr::Foundation::HANDLE, addr_base : UInt64, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE64, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE64) : Void*
+    C.SymFunctionTableAccess64AccessRoutines(hProcess, addr_base, read_memory_routine, get_module_base_routine)
+  end
+
+  def symGetUnwindInfo(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, buffer : Void*, size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SymGetUnwindInfo(hProcess, address, buffer, size)
+  end
+
+  def symGetModuleInfo64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULE64*) : Win32cr::Foundation::BOOL
+    C.SymGetModuleInfo64(hProcess, qwAddr, module_info)
+  end
+
+  #def symGetModuleInfoW64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULEW64*) : Win32cr::Foundation::BOOL
+    #C.SymGetModuleInfoW64(hProcess, qwAddr, module_info)
+  #end
+
+  #def symGetModuleBase64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64) : UInt64
+    #C.SymGetModuleBase64(hProcess, qwAddr)
+  #end
+
+  def symEnumLines(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, obj : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, enum_lines_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMLINES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumLines(hProcess, base, obj, file, enum_lines_callback, user_context)
+  end
+
+  def symEnumLinesW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, obj : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, enum_lines_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMLINES_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumLinesW(hProcess, base, obj, file, enum_lines_callback, user_context)
+  end
+
+  def symGetLineFromAddr64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, pdwDisplacement : UInt32*, line64 : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
+    C.SymGetLineFromAddr64(hProcess, qwAddr, pdwDisplacement, line64)
+  end
+
+  #def symGetLineFromAddrW64(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt64, pdwDisplacement : UInt32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
+    #C.SymGetLineFromAddrW64(hProcess, dwAddr, pdwDisplacement, line)
+  #end
+
+  def symGetLineFromInlineContext(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, inline_context : UInt32, qwModuleBaseAddress : UInt64, pdwDisplacement : UInt32*, line64 : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
+    C.SymGetLineFromInlineContext(hProcess, qwAddr, inline_context, qwModuleBaseAddress, pdwDisplacement, line64)
+  end
+
+  def symGetLineFromInlineContextW(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt64, inline_context : UInt32, qwModuleBaseAddress : UInt64, pdwDisplacement : UInt32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
+    C.SymGetLineFromInlineContextW(hProcess, dwAddr, inline_context, qwModuleBaseAddress, pdwDisplacement, line)
+  end
+
+  def symEnumSourceLines(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, obj : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, line : UInt32, flags : UInt32, enum_lines_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMLINES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumSourceLines(hProcess, base, obj, file, line, flags, enum_lines_callback, user_context)
+  end
+
+  def symEnumSourceLinesW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, obj : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, line : UInt32, flags : UInt32, enum_lines_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMLINES_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumSourceLinesW(hProcess, base, obj, file, line, flags, enum_lines_callback, user_context)
+  end
+
+  def symAddrIncludeInlineTrace(hProcess : Win32cr::Foundation::HANDLE, address : UInt64) : UInt32
+    C.SymAddrIncludeInlineTrace(hProcess, address)
+  end
+
+  def symCompareInlineTrace(hProcess : Win32cr::Foundation::HANDLE, address1 : UInt64, inline_context1 : UInt32, ret_address1 : UInt64, address2 : UInt64, ret_address2 : UInt64) : UInt32
+    C.SymCompareInlineTrace(hProcess, address1, inline_context1, ret_address1, address2, ret_address2)
+  end
+
+  def symQueryInlineTrace(hProcess : Win32cr::Foundation::HANDLE, start_address : UInt64, start_context : UInt32, start_ret_address : UInt64, cur_address : UInt64, cur_context : UInt32*, cur_frame_index : UInt32*) : Win32cr::Foundation::BOOL
+    C.SymQueryInlineTrace(hProcess, start_address, start_context, start_ret_address, cur_address, cur_context, cur_frame_index)
+  end
+
+  def symGetLineFromName64(hProcess : Win32cr::Foundation::HANDLE, module_name : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, dwLineNumber : UInt32, plDisplacement : Int32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
+    C.SymGetLineFromName64(hProcess, module_name, file_name, dwLineNumber, plDisplacement, line)
+  end
+
+  def symGetLineFromNameW64(hProcess : Win32cr::Foundation::HANDLE, module_name : Win32cr::Foundation::PWSTR, file_name : Win32cr::Foundation::PWSTR, dwLineNumber : UInt32, plDisplacement : Int32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
+    C.SymGetLineFromNameW64(hProcess, module_name, file_name, dwLineNumber, plDisplacement, line)
+  end
+
+  def symGetLineNext64(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
+    C.SymGetLineNext64(hProcess, line)
+  end
+
+  def symGetLineNextW64(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
+    C.SymGetLineNextW64(hProcess, line)
+  end
+
+  def symGetLinePrev64(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
+    C.SymGetLinePrev64(hProcess, line)
+  end
+
+  def symGetLinePrevW64(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
+    C.SymGetLinePrevW64(hProcess, line)
+  end
+
+  def symGetFileLineOffsets64(hProcess : Win32cr::Foundation::HANDLE, module_name : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, buffer : UInt64*, buffer_lines : UInt32) : UInt32
+    C.SymGetFileLineOffsets64(hProcess, module_name, file_name, buffer, buffer_lines)
+  end
+
+  def symMatchFileName(file_name : Win32cr::Foundation::PSTR, match : Win32cr::Foundation::PSTR, file_name_stop : Win32cr::Foundation::PSTR*, match_stop : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    C.SymMatchFileName(file_name, match, file_name_stop, match_stop)
+  end
+
+  def symMatchFileNameW(file_name : Win32cr::Foundation::PWSTR, match : Win32cr::Foundation::PWSTR, file_name_stop : Win32cr::Foundation::PWSTR*, match_stop : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    C.SymMatchFileNameW(file_name, match, file_name_stop, match_stop)
+  end
+
+  def symGetSourceFile(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, params : Win32cr::Foundation::PSTR, file_spec : Win32cr::Foundation::PSTR, file_path : UInt8*, size : UInt32) : Win32cr::Foundation::BOOL
+    C.SymGetSourceFile(hProcess, base, params, file_spec, file_path, size)
+  end
+
+  def symGetSourceFileW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, params : Win32cr::Foundation::PWSTR, file_spec : Win32cr::Foundation::PWSTR, file_path : UInt16*, size : UInt32) : Win32cr::Foundation::BOOL
+    C.SymGetSourceFileW(hProcess, base, params, file_spec, file_path, size)
+  end
+
+  def symGetSourceFileToken(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PSTR, token : Void**, size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SymGetSourceFileToken(hProcess, base, file_spec, token, size)
+  end
+
+  def symGetSourceFileTokenByTokenName(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PSTR, token_name : Win32cr::Foundation::PSTR, token_parameters : Win32cr::Foundation::PSTR, token : Void**, size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SymGetSourceFileTokenByTokenName(hProcess, base, file_spec, token_name, token_parameters, token, size)
+  end
+
+  def symGetSourceFileChecksumW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PWSTR, pCheckSumType : UInt32*, pChecksum : UInt8*, checksumSize : UInt32, pActualBytesWritten : UInt32*) : Win32cr::Foundation::BOOL
+    C.SymGetSourceFileChecksumW(hProcess, base, file_spec, pCheckSumType, pChecksum, checksumSize, pActualBytesWritten)
+  end
+
+  def symGetSourceFileChecksum(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PSTR, pCheckSumType : UInt32*, pChecksum : UInt8*, checksumSize : UInt32, pActualBytesWritten : UInt32*) : Win32cr::Foundation::BOOL
+    C.SymGetSourceFileChecksum(hProcess, base, file_spec, pCheckSumType, pChecksum, checksumSize, pActualBytesWritten)
+  end
+
+  def symGetSourceFileTokenW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PWSTR, token : Void**, size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SymGetSourceFileTokenW(hProcess, base, file_spec, token, size)
+  end
+
+  def symGetSourceFileTokenByTokenNameW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PWSTR, token_name : Win32cr::Foundation::PWSTR, token_parameters : Win32cr::Foundation::PWSTR, token : Void**, size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SymGetSourceFileTokenByTokenNameW(hProcess, base, file_spec, token_name, token_parameters, token, size)
+  end
+
+  def symGetSourceFileFromToken(hProcess : Win32cr::Foundation::HANDLE, token : Void*, params : Win32cr::Foundation::PSTR, file_path : UInt8*, size : UInt32) : Win32cr::Foundation::BOOL
+    C.SymGetSourceFileFromToken(hProcess, token, params, file_path, size)
+  end
+
+  def symGetSourceFileFromTokenByTokenName(hProcess : Win32cr::Foundation::HANDLE, token : Void*, token_name : Win32cr::Foundation::PSTR, params : Win32cr::Foundation::PSTR, file_path : UInt8*, size : UInt32) : Win32cr::Foundation::BOOL
+    C.SymGetSourceFileFromTokenByTokenName(hProcess, token, token_name, params, file_path, size)
+  end
+
+  def symGetSourceFileFromTokenW(hProcess : Win32cr::Foundation::HANDLE, token : Void*, params : Win32cr::Foundation::PWSTR, file_path : UInt16*, size : UInt32) : Win32cr::Foundation::BOOL
+    C.SymGetSourceFileFromTokenW(hProcess, token, params, file_path, size)
+  end
+
+  def symGetSourceFileFromTokenByTokenNameW(hProcess : Win32cr::Foundation::HANDLE, token : Void*, token_name : Win32cr::Foundation::PWSTR, params : Win32cr::Foundation::PWSTR, file_path : UInt16*, size : UInt32) : Win32cr::Foundation::BOOL
+    C.SymGetSourceFileFromTokenByTokenNameW(hProcess, token, token_name, params, file_path, size)
+  end
+
+  def symGetSourceVarFromToken(hProcess : Win32cr::Foundation::HANDLE, token : Void*, params : Win32cr::Foundation::PSTR, var_name : Win32cr::Foundation::PSTR, value : UInt8*, size : UInt32) : Win32cr::Foundation::BOOL
+    C.SymGetSourceVarFromToken(hProcess, token, params, var_name, value, size)
+  end
+
+  def symGetSourceVarFromTokenW(hProcess : Win32cr::Foundation::HANDLE, token : Void*, params : Win32cr::Foundation::PWSTR, var_name : Win32cr::Foundation::PWSTR, value : UInt16*, size : UInt32) : Win32cr::Foundation::BOOL
+    C.SymGetSourceVarFromTokenW(hProcess, token, params, var_name, value, size)
+  end
+
+  def symEnumSourceFileTokens(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, callback : Win32cr::System::Diagnostics::Debug::PENUMSOURCEFILETOKENSCALLBACK) : Win32cr::Foundation::BOOL
+    C.SymEnumSourceFileTokens(hProcess, base, callback)
+  end
+
+  def symInitialize(hProcess : Win32cr::Foundation::HANDLE, user_search_path : Win32cr::Foundation::PSTR, fInvadeProcess : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SymInitialize(hProcess, user_search_path, fInvadeProcess)
+  end
+
+  #def symInitializeW(hProcess : Win32cr::Foundation::HANDLE, user_search_path : Win32cr::Foundation::PWSTR, fInvadeProcess : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    #C.SymInitializeW(hProcess, user_search_path, fInvadeProcess)
+  #end
+
+  def symGetSearchPath(hProcess : Win32cr::Foundation::HANDLE, search_path_a : UInt8*, search_path_length : UInt32) : Win32cr::Foundation::BOOL
+    C.SymGetSearchPath(hProcess, search_path_a, search_path_length)
+  end
+
+  def symGetSearchPathW(hProcess : Win32cr::Foundation::HANDLE, search_path_a : UInt16*, search_path_length : UInt32) : Win32cr::Foundation::BOOL
+    C.SymGetSearchPathW(hProcess, search_path_a, search_path_length)
+  end
+
+  def symSetSearchPath(hProcess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SymSetSearchPath(hProcess, search_path_a)
+  end
+
+  def symSetSearchPathW(hProcess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SymSetSearchPathW(hProcess, search_path_a)
+  end
+
+  def symLoadModuleEx(hProcess : Win32cr::Foundation::HANDLE, hFile : Win32cr::Foundation::HANDLE, image_name : Win32cr::Foundation::PSTR, module_name : Win32cr::Foundation::PSTR, base_of_dll : UInt64, dll_size : UInt32, data : Win32cr::System::Diagnostics::Debug::MODLOAD_DATA*, flags : Win32cr::System::Diagnostics::Debug::SYM_LOAD_FLAGS) : UInt64
+    C.SymLoadModuleEx(hProcess, hFile, image_name, module_name, base_of_dll, dll_size, data, flags)
+  end
+
+  def symLoadModuleExW(hProcess : Win32cr::Foundation::HANDLE, hFile : Win32cr::Foundation::HANDLE, image_name : Win32cr::Foundation::PWSTR, module_name : Win32cr::Foundation::PWSTR, base_of_dll : UInt64, dll_size : UInt32, data : Win32cr::System::Diagnostics::Debug::MODLOAD_DATA*, flags : Win32cr::System::Diagnostics::Debug::SYM_LOAD_FLAGS) : UInt64
+    C.SymLoadModuleExW(hProcess, hFile, image_name, module_name, base_of_dll, dll_size, data, flags)
+  end
+
+  def symUnloadModule64(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64) : Win32cr::Foundation::BOOL
+    C.SymUnloadModule64(hProcess, base_of_dll)
+  end
+
+  def symUnDName64(sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*, un_dec_name : UInt8*, un_dec_name_length : UInt32) : Win32cr::Foundation::BOOL
+    C.SymUnDName64(sym, un_dec_name, un_dec_name_length)
+  end
+
+  def symRegisterCallback64(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_REGISTERED_CALLBACK64, user_context : UInt64) : Win32cr::Foundation::BOOL
+    C.SymRegisterCallback64(hProcess, callback_function, user_context)
+  end
+
+  def symRegisterCallbackW64(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_REGISTERED_CALLBACK64, user_context : UInt64) : Win32cr::Foundation::BOOL
+    C.SymRegisterCallbackW64(hProcess, callback_function, user_context)
+  end
+
+  def symRegisterFunctionEntryCallback64(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_FUNCENTRY_CALLBACK64, user_context : UInt64) : Win32cr::Foundation::BOOL
+    C.SymRegisterFunctionEntryCallback64(hProcess, callback_function, user_context)
+  end
+
+  def symSetContext(hProcess : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::IMAGEHLP_STACK_FRAME*, context : Void*) : Win32cr::Foundation::BOOL
+    C.SymSetContext(hProcess, stack_frame, context)
+  end
+
+  def symSetScopeFromAddr(hProcess : Win32cr::Foundation::HANDLE, address : UInt64) : Win32cr::Foundation::BOOL
+    C.SymSetScopeFromAddr(hProcess, address)
+  end
+
+  def symSetScopeFromInlineContext(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, inline_context : UInt32) : Win32cr::Foundation::BOOL
+    C.SymSetScopeFromInlineContext(hProcess, address, inline_context)
+  end
+
+  def symSetScopeFromIndex(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32) : Win32cr::Foundation::BOOL
+    C.SymSetScopeFromIndex(hProcess, base_of_dll, index)
+  end
+
+  def symEnumProcesses(enum_processes_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMPROCESSES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumProcesses(enum_processes_callback, user_context)
+  end
+
+  def symFromAddr(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    C.SymFromAddr(hProcess, address, displacement, symbol)
+  end
+
+  #def symFromAddrW(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    #C.SymFromAddrW(hProcess, address, displacement, symbol)
+  #end
+
+  def symFromInlineContext(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, inline_context : UInt32, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    C.SymFromInlineContext(hProcess, address, inline_context, displacement, symbol)
+  end
+
+  def symFromInlineContextW(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, inline_context : UInt32, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    C.SymFromInlineContextW(hProcess, address, inline_context, displacement, symbol)
+  end
+
+  def symFromToken(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, token : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    C.SymFromToken(hProcess, base, token, symbol)
+  end
+
+  def symFromTokenW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, token : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    C.SymFromTokenW(hProcess, base, token, symbol)
+  end
+
+  def symNext(hProcess : Win32cr::Foundation::HANDLE, si : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    C.SymNext(hProcess, si)
+  end
+
+  def symNextW(hProcess : Win32cr::Foundation::HANDLE, siw : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    C.SymNextW(hProcess, siw)
+  end
+
+  def symPrev(hProcess : Win32cr::Foundation::HANDLE, si : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    C.SymPrev(hProcess, si)
+  end
+
+  def symPrevW(hProcess : Win32cr::Foundation::HANDLE, siw : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    C.SymPrevW(hProcess, siw)
+  end
+
+  def symFromName(hProcess : Win32cr::Foundation::HANDLE, name : Win32cr::Foundation::PSTR, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    C.SymFromName(hProcess, name, symbol)
+  end
+
+  def symFromNameW(hProcess : Win32cr::Foundation::HANDLE, name : Win32cr::Foundation::PWSTR, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    C.SymFromNameW(hProcess, name, symbol)
+  end
+
+  def symEnumSymbols(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumSymbols(hProcess, base_of_dll, mask, enum_symbols_callback, user_context)
+  end
+
+  def symEnumSymbolsEx(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*, options : UInt32) : Win32cr::Foundation::BOOL
+    C.SymEnumSymbolsEx(hProcess, base_of_dll, mask, enum_symbols_callback, user_context, options)
+  end
+
+  def symEnumSymbolsW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PWSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumSymbolsW(hProcess, base_of_dll, mask, enum_symbols_callback, user_context)
+  end
+
+  def symEnumSymbolsExW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PWSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*, options : UInt32) : Win32cr::Foundation::BOOL
+    C.SymEnumSymbolsExW(hProcess, base_of_dll, mask, enum_symbols_callback, user_context, options)
+  end
+
+  def symEnumSymbolsForAddr(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumSymbolsForAddr(hProcess, address, enum_symbols_callback, user_context)
+  end
+
+  def symEnumSymbolsForAddrW(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumSymbolsForAddrW(hProcess, address, enum_symbols_callback, user_context)
+  end
+
+  def symSearch(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, sym_tag : UInt32, mask : Win32cr::Foundation::PSTR, address : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*, options : UInt32) : Win32cr::Foundation::BOOL
+    C.SymSearch(hProcess, base_of_dll, index, sym_tag, mask, address, enum_symbols_callback, user_context, options)
+  end
+
+  def symSearchW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, sym_tag : UInt32, mask : Win32cr::Foundation::PWSTR, address : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*, options : UInt32) : Win32cr::Foundation::BOOL
+    C.SymSearchW(hProcess, base_of_dll, index, sym_tag, mask, address, enum_symbols_callback, user_context, options)
+  end
+
+  def symGetScope(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    C.SymGetScope(hProcess, base_of_dll, index, symbol)
+  end
+
+  def symGetScopeW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    C.SymGetScopeW(hProcess, base_of_dll, index, symbol)
+  end
+
+  def symFromIndex(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    C.SymFromIndex(hProcess, base_of_dll, index, symbol)
+  end
+
+  def symFromIndexW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    C.SymFromIndexW(hProcess, base_of_dll, index, symbol)
+  end
+
+  def symGetTypeInfo(hProcess : Win32cr::Foundation::HANDLE, mod_base : UInt64, type_id : UInt32, get_type : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL_TYPE_INFO, pInfo : Void*) : Win32cr::Foundation::BOOL
+    C.SymGetTypeInfo(hProcess, mod_base, type_id, get_type, pInfo)
+  end
+
+  def symGetTypeInfoEx(hProcess : Win32cr::Foundation::HANDLE, mod_base : UInt64, params : Win32cr::System::Diagnostics::Debug::IMAGEHLP_GET_TYPE_INFO_PARAMS*) : Win32cr::Foundation::BOOL
+    C.SymGetTypeInfoEx(hProcess, mod_base, params)
+  end
+
+  def symEnumTypes(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumTypes(hProcess, base_of_dll, enum_symbols_callback, user_context)
+  end
+
+  def symEnumTypesW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumTypesW(hProcess, base_of_dll, enum_symbols_callback, user_context)
+  end
+
+  def symEnumTypesByName(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumTypesByName(hProcess, base_of_dll, mask, enum_symbols_callback, user_context)
+  end
+
+  def symEnumTypesByNameW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PWSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumTypesByNameW(hProcess, base_of_dll, mask, enum_symbols_callback, user_context)
+  end
+
+  def symGetTypeFromName(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PSTR, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    C.SymGetTypeFromName(hProcess, base_of_dll, name, symbol)
+  end
+
+  def symGetTypeFromNameW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PWSTR, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    C.SymGetTypeFromNameW(hProcess, base_of_dll, name, symbol)
+  end
+
+  def symAddSymbol(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PSTR, address : UInt64, size : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SymAddSymbol(hProcess, base_of_dll, name, address, size, flags)
+  end
+
+  def symAddSymbolW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PWSTR, address : UInt64, size : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SymAddSymbolW(hProcess, base_of_dll, name, address, size, flags)
+  end
+
+  def symDeleteSymbol(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PSTR, address : UInt64, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SymDeleteSymbol(hProcess, base_of_dll, name, address, flags)
+  end
+
+  def symDeleteSymbolW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PWSTR, address : UInt64, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SymDeleteSymbolW(hProcess, base_of_dll, name, address, flags)
+  end
+
+  def symRefreshModuleList(hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.SymRefreshModuleList(hProcess)
+  end
+
+  def symAddSourceStream(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, stream_file : Win32cr::Foundation::PSTR, buffer : UInt8*, size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.SymAddSourceStream(hProcess, base, stream_file, buffer, size)
+  end
+
+  def symAddSourceStreamA(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, stream_file : Win32cr::Foundation::PSTR, buffer : UInt8*, size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.SymAddSourceStreamA(hProcess, base, stream_file, buffer, size)
+  end
+
+  def symAddSourceStreamW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PWSTR, buffer : UInt8*, size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.SymAddSourceStreamW(hProcess, base, file_spec, buffer, size)
+  end
+
+  def symSrvIsStoreW(hProcess : Win32cr::Foundation::HANDLE, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SymSrvIsStoreW(hProcess, path)
+  end
+
+  def symSrvIsStore(hProcess : Win32cr::Foundation::HANDLE, path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SymSrvIsStore(hProcess, path)
+  end
+
+  def symSrvDeltaName(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PSTR, type__ : Win32cr::Foundation::PSTR, file1 : Win32cr::Foundation::PSTR, file2 : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    C.SymSrvDeltaName(hProcess, sym_path, type__, file1, file2)
+  end
+
+  def symSrvDeltaNameW(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PWSTR, type__ : Win32cr::Foundation::PWSTR, file1 : Win32cr::Foundation::PWSTR, file2 : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.SymSrvDeltaNameW(hProcess, sym_path, type__, file1, file2)
+  end
+
+  def symSrvGetSupplement(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PSTR, node : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    C.SymSrvGetSupplement(hProcess, sym_path, node, file)
+  end
+
+  def symSrvGetSupplementW(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PWSTR, node : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.SymSrvGetSupplementW(hProcess, sym_path, node, file)
+  end
+
+  def symSrvGetFileIndexes(file : Win32cr::Foundation::PSTR, id : LibC::GUID*, val1 : UInt32*, val2 : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SymSrvGetFileIndexes(file, id, val1, val2, flags)
+  end
+
+  def symSrvGetFileIndexesW(file : Win32cr::Foundation::PWSTR, id : LibC::GUID*, val1 : UInt32*, val2 : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SymSrvGetFileIndexesW(file, id, val1, val2, flags)
+  end
+
+  def symSrvGetFileIndexStringW(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, index : UInt16*, size : LibC::UIntPtrT, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SymSrvGetFileIndexStringW(hProcess, srv_path, file, index, size, flags)
+  end
+
+  def symSrvGetFileIndexString(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, index : UInt8*, size : LibC::UIntPtrT, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SymSrvGetFileIndexString(hProcess, srv_path, file, index, size, flags)
+  end
+
+  def symSrvGetFileIndexInfo(file : Win32cr::Foundation::PSTR, info : Win32cr::System::Diagnostics::Debug::SYMSRV_INDEX_INFO*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SymSrvGetFileIndexInfo(file, info, flags)
+  end
+
+  def symSrvGetFileIndexInfoW(file : Win32cr::Foundation::PWSTR, info : Win32cr::System::Diagnostics::Debug::SYMSRV_INDEX_INFOW*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SymSrvGetFileIndexInfoW(file, info, flags)
+  end
+
+  def symSrvStoreSupplement(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PSTR, node : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::Foundation::PSTR
+    C.SymSrvStoreSupplement(hProcess, srv_path, node, file, flags)
+  end
+
+  def symSrvStoreSupplementW(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PWSTR, node : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::PWSTR
+    C.SymSrvStoreSupplementW(hProcess, sym_path, node, file, flags)
+  end
+
+  def symSrvStoreFile(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, flags : Win32cr::System::Diagnostics::Debug::SYM_SRV_STORE_FILE_FLAGS) : Win32cr::Foundation::PSTR
+    C.SymSrvStoreFile(hProcess, srv_path, file, flags)
+  end
+
+  def symSrvStoreFileW(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, flags : Win32cr::System::Diagnostics::Debug::SYM_SRV_STORE_FILE_FLAGS) : Win32cr::Foundation::PWSTR
+    C.SymSrvStoreFileW(hProcess, srv_path, file, flags)
+  end
+
+  def symGetSymbolFile(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PSTR, image_file : Win32cr::Foundation::PSTR, type__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SF_TYPE, symbol_file : UInt8*, cSymbolFile : LibC::UIntPtrT, dbg_file : UInt8*, cDbgFile : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.SymGetSymbolFile(hProcess, sym_path, image_file, type__, symbol_file, cSymbolFile, dbg_file, cDbgFile)
+  end
+
+  def symGetSymbolFileW(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PWSTR, image_file : Win32cr::Foundation::PWSTR, type__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SF_TYPE, symbol_file : UInt16*, cSymbolFile : LibC::UIntPtrT, dbg_file : UInt16*, cDbgFile : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.SymGetSymbolFileW(hProcess, sym_path, image_file, type__, symbol_file, cSymbolFile, dbg_file, cDbgFile)
+  end
+
+  def dbgHelpCreateUserDump(file_name : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PDBGHELP_CREATE_USER_DUMP_CALLBACK, user_data : Void*) : Win32cr::Foundation::BOOL
+    C.DbgHelpCreateUserDump(file_name, callback, user_data)
+  end
+
+  def dbgHelpCreateUserDumpW(file_name : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PDBGHELP_CREATE_USER_DUMP_CALLBACK, user_data : Void*) : Win32cr::Foundation::BOOL
+    C.DbgHelpCreateUserDumpW(file_name, callback, user_data)
+  end
+
+  def symGetSymFromAddr64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, pdwDisplacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*) : Win32cr::Foundation::BOOL
+    C.SymGetSymFromAddr64(hProcess, qwAddr, pdwDisplacement, symbol)
+  end
+
+  def symGetSymFromName64(hProcess : Win32cr::Foundation::HANDLE, name : Win32cr::Foundation::PSTR, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*) : Win32cr::Foundation::BOOL
+    C.SymGetSymFromName64(hProcess, name, symbol)
+  end
+
+  def findFileInPath(hprocess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, id : Void*, two : UInt32, three : UInt32, flags : UInt32, file_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.FindFileInPath(hprocess, search_path_a, file_name, id, two, three, flags, file_path)
+  end
+
+  def findFileInSearchPath(hprocess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, one : UInt32, two : UInt32, three : UInt32, file_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.FindFileInSearchPath(hprocess, search_path_a, file_name, one, two, three, file_path)
+  end
+
+  def symEnumSym(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumSym(hProcess, base_of_dll, enum_symbols_callback, user_context)
+  end
+
+  def symEnumerateSymbols64(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSYMBOLS_CALLBACK64, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumerateSymbols64(hProcess, base_of_dll, enum_symbols_callback, user_context)
+  end
+
+  def symEnumerateSymbolsW64(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSYMBOLS_CALLBACK64W, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumerateSymbolsW64(hProcess, base_of_dll, enum_symbols_callback, user_context)
+  end
+
+  def symLoadModule64(hProcess : Win32cr::Foundation::HANDLE, hFile : Win32cr::Foundation::HANDLE, image_name : Win32cr::Foundation::PSTR, module_name : Win32cr::Foundation::PSTR, base_of_dll : UInt64, size_of_dll : UInt32) : UInt64
+    C.SymLoadModule64(hProcess, hFile, image_name, module_name, base_of_dll, size_of_dll)
+  end
+
+  def symGetSymNext64(hProcess : Win32cr::Foundation::HANDLE, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*) : Win32cr::Foundation::BOOL
+    C.SymGetSymNext64(hProcess, symbol)
+  end
+
+  def symGetSymPrev64(hProcess : Win32cr::Foundation::HANDLE, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*) : Win32cr::Foundation::BOOL
+    C.SymGetSymPrev64(hProcess, symbol)
+  end
+
+  def setCheckUserInterruptShared(lpStartAddress : Win32cr::System::Diagnostics::Debug::LPCALL_BACK_USER_INTERRUPT_ROUTINE) : Void
+    C.SetCheckUserInterruptShared(lpStartAddress)
+  end
+
+  def getSymLoadError : UInt32
+    C.GetSymLoadError
+  end
+
+  def setSymLoadError(error : UInt32) : Void
+    C.SetSymLoadError(error)
+  end
+
+  def reportSymbolLoadSummary(hProcess : Win32cr::Foundation::HANDLE, pLoadModule : Win32cr::Foundation::PWSTR, pSymbolData : Win32cr::System::Diagnostics::Debug::DBGHELP_DATA_REPORT_STRUCT*) : Win32cr::Foundation::BOOL
+    C.ReportSymbolLoadSummary(hProcess, pLoadModule, pSymbolData)
+  end
+
+  def removeInvalidModuleList(hProcess : Win32cr::Foundation::HANDLE) : Void
+    C.RemoveInvalidModuleList(hProcess)
+  end
+
+  def rangeMapCreate : Void*
+    C.RangeMapCreate
+  end
+
+  def rangeMapFree(rmap_handle : Void*) : Void
+    C.RangeMapFree(rmap_handle)
+  end
+
+  def rangeMapAddPeImageSections(rmap_handle : Void*, image_name : Win32cr::Foundation::PWSTR, mapped_image : Void*, mapping_bytes : UInt32, image_base : UInt64, user_tag : UInt64, mapping_flags : UInt32) : Win32cr::Foundation::BOOL
+    C.RangeMapAddPeImageSections(rmap_handle, image_name, mapped_image, mapping_bytes, image_base, user_tag, mapping_flags)
+  end
+
+  def rangeMapRemove(rmap_handle : Void*, user_tag : UInt64) : Win32cr::Foundation::BOOL
+    C.RangeMapRemove(rmap_handle, user_tag)
+  end
+
+  def rangeMapRead(rmap_handle : Void*, offset : UInt64, buffer : Void*, request_bytes : UInt32, flags : UInt32, done_bytes : UInt32*) : Win32cr::Foundation::BOOL
+    C.RangeMapRead(rmap_handle, offset, buffer, request_bytes, flags, done_bytes)
+  end
+
+  def rangeMapWrite(rmap_handle : Void*, offset : UInt64, buffer : Void*, request_bytes : UInt32, flags : UInt32, done_bytes : UInt32*) : Win32cr::Foundation::BOOL
+    C.RangeMapWrite(rmap_handle, offset, buffer, request_bytes, flags, done_bytes)
+  end
+
+  def messageBeep(uType : UInt32) : Win32cr::Foundation::BOOL
+    C.MessageBeep(uType)
+  end
+
+  def fatalExit(exit_code : Int32) : Void
+    C.FatalExit(exit_code)
+  end
+
+  def getThreadSelectorEntry(hThread : Win32cr::Foundation::HANDLE, dwSelector : UInt32, lpSelectorEntry : Win32cr::System::Diagnostics::Debug::LDT_ENTRY*) : Win32cr::Foundation::BOOL
+    C.GetThreadSelectorEntry(hThread, dwSelector, lpSelectorEntry)
+  end
+
+  def wow64GetThreadSelectorEntry(hThread : Win32cr::Foundation::HANDLE, dwSelector : UInt32, lpSelectorEntry : Win32cr::System::Diagnostics::Debug::WOW64_LDT_ENTRY*) : Win32cr::Foundation::BOOL
+    C.Wow64GetThreadSelectorEntry(hThread, dwSelector, lpSelectorEntry)
+  end
+
+  def debugSetProcessKillOnExit(kill_on_exit : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.DebugSetProcessKillOnExit(kill_on_exit)
+  end
+
+  def debugBreakProcess(process : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.DebugBreakProcess(process)
+  end
+
+  #def formatMessageA(dwFlags : Win32cr::System::Diagnostics::Debug::FORMAT_MESSAGE_OPTIONS, lpSource : Void*, dwMessageId : UInt32, dwLanguageId : UInt32, lpBuffer : Win32cr::Foundation::PSTR, nSize : UInt32, arguments : Int8**) : UInt32
+    #C.FormatMessageA(dwFlags, lpSource, dwMessageId, dwLanguageId, lpBuffer, nSize, arguments)
+  #end
+
+  #def formatMessageW(dwFlags : Win32cr::System::Diagnostics::Debug::FORMAT_MESSAGE_OPTIONS, lpSource : Void*, dwMessageId : UInt32, dwLanguageId : UInt32, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32, arguments : Int8**) : UInt32
+    #C.FormatMessageW(dwFlags, lpSource, dwMessageId, dwLanguageId, lpBuffer, nSize, arguments)
+  #end
+
+  def copyContext(destination : Win32cr::System::Diagnostics::Debug::CONTEXT*, context_flags : UInt32, source : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
+    C.CopyContext(destination, context_flags, source)
+  end
+
+  def initializeContext(buffer : Void*, context_flags : UInt32, context : Win32cr::System::Diagnostics::Debug::CONTEXT**, context_length : UInt32*) : Win32cr::Foundation::BOOL
+    C.InitializeContext(buffer, context_flags, context, context_length)
+  end
+
+  def initializeContext2(buffer : Void*, context_flags : UInt32, context : Win32cr::System::Diagnostics::Debug::CONTEXT**, context_length : UInt32*, x_state_compaction_mask : UInt64) : Win32cr::Foundation::BOOL
+    C.InitializeContext2(buffer, context_flags, context, context_length, x_state_compaction_mask)
+  end
+
+{% if flag?(:i386) || flag?(:x86_64) %}
+  def getEnabledXStateFeatures : UInt64
+    C.GetEnabledXStateFeatures
+  end
+{% end %}
+
+{% if flag?(:i386) || flag?(:x86_64) %}
+  def getXStateFeaturesMask(context : Win32cr::System::Diagnostics::Debug::CONTEXT*, feature_mask : UInt64*) : Win32cr::Foundation::BOOL
+    C.GetXStateFeaturesMask(context, feature_mask)
+  end
+{% end %}
+
+{% if flag?(:i386) || flag?(:x86_64) %}
+  def locateXStateFeature(context : Win32cr::System::Diagnostics::Debug::CONTEXT*, feature_id : UInt32, length : UInt32*) : Void*
+    C.LocateXStateFeature(context, feature_id, length)
+  end
+{% end %}
+
+{% if flag?(:i386) || flag?(:x86_64) %}
+  def setXStateFeaturesMask(context : Win32cr::System::Diagnostics::Debug::CONTEXT*, feature_mask : UInt64) : Win32cr::Foundation::BOOL
+    C.SetXStateFeaturesMask(context, feature_mask)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def checkSumMappedFile(base_address : Void*, file_length : UInt32, header_sum : UInt32*, check_sum : UInt32*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*
+    C.CheckSumMappedFile(base_address, file_length, header_sum, check_sum)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def getImageConfigInformation(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, image_config_information : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_DIRECTORY32*) : Win32cr::Foundation::BOOL
+    C.GetImageConfigInformation(loaded_image, image_config_information)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def setImageConfigInformation(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, image_config_information : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_DIRECTORY32*) : Win32cr::Foundation::BOOL
+    C.SetImageConfigInformation(loaded_image, image_config_information)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def imageNtHeader(base : Void*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*
+    C.ImageNtHeader(base)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def imageRvaToSection(nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*, base : Void*, rva : UInt32) : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*
+    C.ImageRvaToSection(nt_headers, base, rva)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def imageRvaToVa(nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*, base : Void*, rva : UInt32, last_rva_section : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER**) : Void*
+    C.ImageRvaToVa(nt_headers, base, rva, last_rva_section)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def stackWalk(machine_type : UInt32, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::STACKFRAME*, context_record : Void*, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE, function_table_access_routine : Win32cr::System::Diagnostics::Debug::PFUNCTION_TABLE_ACCESS_ROUTINE, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE, translate_address : Win32cr::System::Diagnostics::Debug::PTRANSLATE_ADDRESS_ROUTINE) : Win32cr::Foundation::BOOL
+    C.StackWalk(machine_type, hProcess, hThread, stack_frame, context_record, read_memory_routine, function_table_access_routine, get_module_base_routine, translate_address)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symEnumerateModules(hProcess : Win32cr::Foundation::HANDLE, enum_modules_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMMODULES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumerateModules(hProcess, enum_modules_callback, user_context)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def enumerateLoadedModules(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.EnumerateLoadedModules(hProcess, enum_loaded_modules_callback, user_context)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symFunctionTableAccess(hProcess : Win32cr::Foundation::HANDLE, addr_base : UInt32) : Void*
+    C.SymFunctionTableAccess(hProcess, addr_base)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symGetModuleInfo(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULE*) : Win32cr::Foundation::BOOL
+    C.SymGetModuleInfo(hProcess, dwAddr, module_info)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symGetModuleInfoW(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULEW*) : Win32cr::Foundation::BOOL
+    C.SymGetModuleInfoW(hProcess, dwAddr, module_info)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symGetModuleBase(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32) : UInt32
+    C.SymGetModuleBase(hProcess, dwAddr)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symGetLineFromAddr(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, pdwDisplacement : UInt32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE*) : Win32cr::Foundation::BOOL
+    C.SymGetLineFromAddr(hProcess, dwAddr, pdwDisplacement, line)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symGetLineFromName(hProcess : Win32cr::Foundation::HANDLE, module_name : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, dwLineNumber : UInt32, plDisplacement : Int32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE*) : Win32cr::Foundation::BOOL
+    C.SymGetLineFromName(hProcess, module_name, file_name, dwLineNumber, plDisplacement, line)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symGetLineNext(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE*) : Win32cr::Foundation::BOOL
+    C.SymGetLineNext(hProcess, line)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symGetLinePrev(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE*) : Win32cr::Foundation::BOOL
+    C.SymGetLinePrev(hProcess, line)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symUnloadModule(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt32) : Win32cr::Foundation::BOOL
+    C.SymUnloadModule(hProcess, base_of_dll)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symUnDName(sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*, un_dec_name : UInt8*, un_dec_name_length : UInt32) : Win32cr::Foundation::BOOL
+    C.SymUnDName(sym, un_dec_name, un_dec_name_length)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symRegisterCallback(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_REGISTERED_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymRegisterCallback(hProcess, callback_function, user_context)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symRegisterFunctionEntryCallback(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_FUNCENTRY_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymRegisterFunctionEntryCallback(hProcess, callback_function, user_context)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symGetSymFromAddr(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, pdwDisplacement : UInt32*, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*) : Win32cr::Foundation::BOOL
+    C.SymGetSymFromAddr(hProcess, dwAddr, pdwDisplacement, symbol)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symGetSymFromName(hProcess : Win32cr::Foundation::HANDLE, name : Win32cr::Foundation::PSTR, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*) : Win32cr::Foundation::BOOL
+    C.SymGetSymFromName(hProcess, name, symbol)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symEnumerateSymbols(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt32, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumerateSymbols(hProcess, base_of_dll, enum_symbols_callback, user_context)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symEnumerateSymbolsW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt32, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    C.SymEnumerateSymbolsW(hProcess, base_of_dll, enum_symbols_callback, user_context)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symLoadModule(hProcess : Win32cr::Foundation::HANDLE, hFile : Win32cr::Foundation::HANDLE, image_name : Win32cr::Foundation::PSTR, module_name : Win32cr::Foundation::PSTR, base_of_dll : UInt32, size_of_dll : UInt32) : UInt32
+    C.SymLoadModule(hProcess, hFile, image_name, module_name, base_of_dll, size_of_dll)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symGetSymNext(hProcess : Win32cr::Foundation::HANDLE, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*) : Win32cr::Foundation::BOOL
+    C.SymGetSymNext(hProcess, symbol)
+  end
+{% end %}
+
+{% if flag?(:i386) %}
+  def symGetSymPrev(hProcess : Win32cr::Foundation::HANDLE, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*) : Win32cr::Foundation::BOOL
+    C.SymGetSymPrev(hProcess, symbol)
+  end
+{% end %}
+
   @[Link("kernel32")]
   @[Link("ntdll")]
   @[Link("dbgeng")]
@@ -29066,780 +30485,1108 @@ module Win32cr::System::Diagnostics::Debug
   @[Link("user32")]
   lib C
     {% if flag?(:arm) %}
+    # :nodoc:
     fun RtlAddFunctionTable(function_table : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*, entry_count : UInt32, base_address : LibC::UIntPtrT) : Win32cr::Foundation::BOOLEAN
-  {% end %}
+    {% end %}
 
     {% if flag?(:arm) %}
+    # :nodoc:
     fun RtlDeleteFunctionTable(function_table : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*) : Win32cr::Foundation::BOOLEAN
-  {% end %}
+    {% end %}
 
     {% if flag?(:arm) %}
+    # :nodoc:
     fun RtlAddGrowableFunctionTable(dynamic_table : Void**, function_table : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*, entry_count : UInt32, maximum_entry_count : UInt32, range_base : LibC::UIntPtrT, range_end : LibC::UIntPtrT) : UInt32
-  {% end %}
+    {% end %}
 
     {% if flag?(:arm) %}
+    # :nodoc:
     fun RtlLookupFunctionEntry(control_pc : LibC::UIntPtrT, image_base : LibC::UIntPtrT*, history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*) : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*
-  {% end %}
+    {% end %}
 
     {% if flag?(:arm) %}
+    # :nodoc:
     fun RtlVirtualUnwind(handler_type : Win32cr::System::Diagnostics::Debug::RTL_VIRTUAL_UNWIND_HANDLER_TYPE, image_base : LibC::UIntPtrT, control_pc : LibC::UIntPtrT, function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, handler_data : Void**, establisher_frame : LibC::UIntPtrT*, context_pointers : Win32cr::System::Diagnostics::Debug::KNONVOLATILE_CONTEXT_POINTERS_ARM64*) : Win32cr::System::Kernel::EXCEPTION_ROUTINE
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun DebugConnect(remote_options : Win32cr::Foundation::PSTR, interface_id : LibC::GUID*, interface : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DebugConnectWide(remote_options : Win32cr::Foundation::PWSTR, interface_id : LibC::GUID*, interface : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DebugCreate(interface_id : LibC::GUID*, interface : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DebugCreateEx(interface_id : LibC::GUID*, dbg_eng_options : UInt32, interface : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateDataModelManager(debugHost : Void*, manager : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ReadProcessMemory(hProcess : Win32cr::Foundation::HANDLE, lpBaseAddress : Void*, lpBuffer : Void*, nSize : LibC::UIntPtrT, lpNumberOfBytesRead : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WriteProcessMemory(hProcess : Win32cr::Foundation::HANDLE, lpBaseAddress : Void*, lpBuffer : Void*, nSize : LibC::UIntPtrT, lpNumberOfBytesWritten : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlushInstructionCache(hProcess : Win32cr::Foundation::HANDLE, lpBaseAddress : Void*, dwSize : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun Wow64GetThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::WOW64_CONTEXT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun Wow64SetThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::WOW64_CONTEXT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RtlCaptureStackBackTrace(frames_to_skip : UInt32, frames_to_capture : UInt32, back_trace : Void**, back_trace_hash : UInt32*) : UInt16
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun RtlCaptureContext(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
 
     {% if flag?(:x86_64) %}
+    # :nodoc:
     fun RtlCaptureContext2(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun RtlUnwind(target_frame : Void*, target_ip : Void*, exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, return_value : Void*) : Void
 
     {% if flag?(:x86_64) %}
+    # :nodoc:
     fun RtlAddFunctionTable(function_table : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, entry_count : UInt32, base_address : UInt64) : Win32cr::Foundation::BOOLEAN
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) %}
+    # :nodoc:
     fun RtlDeleteFunctionTable(function_table : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*) : Win32cr::Foundation::BOOLEAN
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun RtlInstallFunctionTableCallback(table_identifier : UInt64, base_address : UInt64, length : UInt32, callback : Win32cr::System::Diagnostics::Debug::PGET_RUNTIME_FUNCTION_CALLBACK, context : Void*, out_of_process_callback_dll : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOLEAN
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) %}
+    # :nodoc:
     fun RtlAddGrowableFunctionTable(dynamic_table : Void**, function_table : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, entry_count : UInt32, maximum_entry_count : UInt32, range_base : LibC::UIntPtrT, range_end : LibC::UIntPtrT) : UInt32
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun RtlGrowFunctionTable(dynamic_table : Void*, new_entry_count : UInt32) : Void
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun RtlDeleteGrowableFunctionTable(dynamic_table : Void*) : Void
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) %}
+    # :nodoc:
     fun RtlLookupFunctionEntry(control_pc : UInt64, image_base : UInt64*, history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*) : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun RtlRestoreContext(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*) : Void
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun RtlUnwindEx(target_frame : Void*, target_ip : Void*, exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, return_value : Void*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*) : Void
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) %}
+    # :nodoc:
     fun RtlVirtualUnwind(handler_type : Win32cr::System::Diagnostics::Debug::RTL_VIRTUAL_UNWIND_HANDLER_TYPE, image_base : UInt64, control_pc : UInt64, function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, handler_data : Void**, establisher_frame : UInt64*, context_pointers : Win32cr::System::Diagnostics::Debug::KNONVOLATILE_CONTEXT_POINTERS*) : Win32cr::System::Kernel::EXCEPTION_ROUTINE
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun RtlRaiseException(exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*) : Void
 
+    # :nodoc:
     fun RtlPcToFileHeader(pc_value : Void*, base_of_image : Void**) : Void*
 
+    # :nodoc:
     fun IsDebuggerPresent : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DebugBreak : Void
 
+    # :nodoc:
     fun OutputDebugStringA(lpOutputString : Win32cr::Foundation::PSTR) : Void
 
+    # :nodoc:
     fun OutputDebugStringW(lpOutputString : Win32cr::Foundation::PWSTR) : Void
 
+    # :nodoc:
     fun ContinueDebugEvent(dwProcessId : UInt32, dwThreadId : UInt32, dwContinueStatus : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WaitForDebugEvent(lpDebugEvent : Win32cr::System::Diagnostics::Debug::DEBUG_EVENT*, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DebugActiveProcess(dwProcessId : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DebugActiveProcessStop(dwProcessId : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CheckRemoteDebuggerPresent(hProcess : Win32cr::Foundation::HANDLE, pbDebuggerPresent : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WaitForDebugEventEx(lpDebugEvent : Win32cr::System::Diagnostics::Debug::DEBUG_EVENT*, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EncodePointer(ptr : Void*) : Void*
 
+    # :nodoc:
     fun DecodePointer(ptr : Void*) : Void*
 
+    # :nodoc:
     fun EncodeSystemPointer(ptr : Void*) : Void*
 
+    # :nodoc:
     fun DecodeSystemPointer(ptr : Void*) : Void*
 
+    # :nodoc:
     fun EncodeRemotePointer(process_handle : Win32cr::Foundation::HANDLE, ptr : Void*, encoded_ptr : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DecodeRemotePointer(process_handle : Win32cr::Foundation::HANDLE, ptr : Void*, decoded_ptr : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun Beep(dwFreq : UInt32, dwDuration : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RaiseException(dwExceptionCode : UInt32, dwExceptionFlags : UInt32, nNumberOfArguments : UInt32, lpArguments : LibC::UIntPtrT*) : Void
 
+    # :nodoc:
     fun UnhandledExceptionFilter(exception_info : Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*) : Int32
 
+    # :nodoc:
     fun SetUnhandledExceptionFilter(lpTopLevelExceptionFilter : Win32cr::System::Diagnostics::Debug::LPTOP_LEVEL_EXCEPTION_FILTER) : Win32cr::System::Diagnostics::Debug::LPTOP_LEVEL_EXCEPTION_FILTER
 
+    # :nodoc:
     fun GetErrorMode : UInt32
 
+    # :nodoc:
     fun SetErrorMode(uMode : Win32cr::System::Diagnostics::Debug::THREAD_ERROR_MODE) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun AddVectoredExceptionHandler(first : UInt32, handler : Win32cr::System::Diagnostics::Debug::PVECTORED_EXCEPTION_HANDLER) : Void*
 
+    # :nodoc:
     fun RemoveVectoredExceptionHandler(handle : Void*) : UInt32
 
+    # :nodoc:
     fun AddVectoredContinueHandler(first : UInt32, handler : Win32cr::System::Diagnostics::Debug::PVECTORED_EXCEPTION_HANDLER) : Void*
 
+    # :nodoc:
     fun RemoveVectoredContinueHandler(handle : Void*) : UInt32
 
+    # :nodoc:
     fun RaiseFailFastException(pExceptionRecord : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, pContextRecord : Win32cr::System::Diagnostics::Debug::CONTEXT*, dwFlags : UInt32) : Void
 
+    # :nodoc:
     fun FatalAppExitA(uAction : UInt32, lpMessageText : Win32cr::Foundation::PSTR) : Void
 
+    # :nodoc:
     fun FatalAppExitW(uAction : UInt32, lpMessageText : Win32cr::Foundation::PWSTR) : Void
 
+    # :nodoc:
     fun GetThreadErrorMode : UInt32
 
+    # :nodoc:
     fun SetThreadErrorMode(dwNewMode : Win32cr::System::Diagnostics::Debug::THREAD_ERROR_MODE, lpOldMode : Win32cr::System::Diagnostics::Debug::THREAD_ERROR_MODE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TerminateProcessOnMemoryExhaustion(failed_allocation_size : LibC::UIntPtrT) : Void
 
+    # :nodoc:
     fun OpenThreadWaitChainSession(flags : Win32cr::System::Diagnostics::Debug::OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS, callback : Win32cr::System::Diagnostics::Debug::PWAITCHAINCALLBACK) : Void*
 
+    # :nodoc:
     fun CloseThreadWaitChainSession(wct_handle : Void*) : Void
 
+    # :nodoc:
     fun GetThreadWaitChain(wct_handle : Void*, context : LibC::UIntPtrT, flags : Win32cr::System::Diagnostics::Debug::WAIT_CHAIN_THREAD_OPTIONS, thread_id : UInt32, node_count : UInt32*, node_info_array : Win32cr::System::Diagnostics::Debug::WAITCHAIN_NODE_INFO*, is_cycle : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterWaitChainCOMCallback(call_state_callback : Win32cr::System::Diagnostics::Debug::PCOGETCALLSTATE, activation_state_callback : Win32cr::System::Diagnostics::Debug::PCOGETACTIVATIONSTATE) : Void
 
+    # :nodoc:
     fun MiniDumpWriteDump(hProcess : Win32cr::Foundation::HANDLE, process_id : UInt32, hFile : Win32cr::Foundation::HANDLE, dump_type : Win32cr::System::Diagnostics::Debug::MINIDUMP_TYPE, exception_param : Win32cr::System::Diagnostics::Debug::MINIDUMP_EXCEPTION_INFORMATION*, user_stream_param : Win32cr::System::Diagnostics::Debug::MINIDUMP_USER_STREAM_INFORMATION*, callback_param : Win32cr::System::Diagnostics::Debug::MINIDUMP_CALLBACK_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MiniDumpReadDumpStream(base_of_dump : Void*, stream_number : UInt32, dir : Win32cr::System::Diagnostics::Debug::MINIDUMP_DIRECTORY**, stream_pointer : Void**, stream_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BindImage(image_name : Win32cr::Foundation::PSTR, dll_path : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BindImageEx(flags : UInt32, image_name : Win32cr::Foundation::PSTR, dll_path : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, status_routine : Win32cr::System::Diagnostics::Debug::PIMAGEHLP_STATUS_ROUTINE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReBaseImage(current_image_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, fReBase : Win32cr::Foundation::BOOL, fRebaseSysfileOk : Win32cr::Foundation::BOOL, fGoingDown : Win32cr::Foundation::BOOL, check_image_size : UInt32, old_image_size : UInt32*, old_image_base : LibC::UIntPtrT*, new_image_size : UInt32*, new_image_base : LibC::UIntPtrT*, time_stamp : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReBaseImage64(current_image_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, fReBase : Win32cr::Foundation::BOOL, fRebaseSysfileOk : Win32cr::Foundation::BOOL, fGoingDown : Win32cr::Foundation::BOOL, check_image_size : UInt32, old_image_size : UInt32*, old_image_base : UInt64*, new_image_size : UInt32*, new_image_base : UInt64*, time_stamp : UInt32) : Win32cr::Foundation::BOOL
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun CheckSumMappedFile(base_address : Void*, file_length : UInt32, header_sum : UInt32*, check_sum : UInt32*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun MapFileAndCheckSumA(filename : Win32cr::Foundation::PSTR, header_sum : UInt32*, check_sum : UInt32*) : UInt32
 
+    # :nodoc:
     fun MapFileAndCheckSumW(filename : Win32cr::Foundation::PWSTR, header_sum : UInt32*, check_sum : UInt32*) : UInt32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun GetImageConfigInformation(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, image_config_information : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_DIRECTORY64*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun GetImageUnusedHeaderBytes(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, size_unused_header_bytes : UInt32*) : UInt32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SetImageConfigInformation(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, image_config_information : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_DIRECTORY64*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun ImageGetDigestStream(file_handle : Win32cr::Foundation::HANDLE, digest_level : UInt32, digest_function : Win32cr::System::Diagnostics::Debug::DIGEST_FUNCTION, digest_handle : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageAddCertificate(file_handle : Win32cr::Foundation::HANDLE, certificate : Win32cr::Security::WinTrust::WIN_CERTIFICATE*, index : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageRemoveCertificate(file_handle : Win32cr::Foundation::HANDLE, index : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageEnumerateCertificates(file_handle : Win32cr::Foundation::HANDLE, type_filter : UInt16, certificate_count : UInt32*, indices : UInt32*, index_count : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageGetCertificateData(file_handle : Win32cr::Foundation::HANDLE, certificate_index : UInt32, certificate : Win32cr::Security::WinTrust::WIN_CERTIFICATE*, required_length : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageGetCertificateHeader(file_handle : Win32cr::Foundation::HANDLE, certificate_index : UInt32, certificateheader : Win32cr::Security::WinTrust::WIN_CERTIFICATE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageLoad(dll_name : Win32cr::Foundation::PSTR, dll_path : Win32cr::Foundation::PSTR) : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*
 
+    # :nodoc:
     fun ImageUnload(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MapAndLoad(image_name : Win32cr::Foundation::PSTR, dll_path : Win32cr::Foundation::PSTR, loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, dot_dll : Win32cr::Foundation::BOOL, read_only : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnMapAndLoad(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TouchFileTimes(file_handle : Win32cr::Foundation::HANDLE, pSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UpdateDebugInfoFile(image_file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR, nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UpdateDebugInfoFileEx(image_file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR, nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*, old_check_sum : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymFindDebugInfoFile(hProcess : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_DEBUG_FILE_CALLBACK, caller_data : Void*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun SymFindDebugInfoFileW(hProcess : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PWSTR, debug_file_path : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_DEBUG_FILE_CALLBACKW, caller_data : Void*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun FindDebugInfoFile(file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun FindDebugInfoFileEx(file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_DEBUG_FILE_CALLBACK, caller_data : Void*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun FindDebugInfoFileExW(file_name : Win32cr::Foundation::PWSTR, symbol_path : Win32cr::Foundation::PWSTR, debug_file_path : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_DEBUG_FILE_CALLBACKW, caller_data : Void*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun SymFindFileInPath(hprocess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, id : Void*, two : UInt32, three : UInt32, flags : Win32cr::System::Diagnostics::Debug::SYM_FIND_ID_OPTION, found_file : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFINDFILEINPATHCALLBACK, context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymFindFileInPathW(hprocess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PWSTR, file_name : Win32cr::Foundation::PWSTR, id : Void*, two : UInt32, three : UInt32, flags : Win32cr::System::Diagnostics::Debug::SYM_FIND_ID_OPTION, found_file : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFINDFILEINPATHCALLBACKW, context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymFindExecutableImage(hProcess : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PSTR, image_file_path : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_EXE_FILE_CALLBACK, caller_data : Void*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun SymFindExecutableImageW(hProcess : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PWSTR, image_file_path : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_EXE_FILE_CALLBACKW, caller_data : Void*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun FindExecutableImage(file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, image_file_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun FindExecutableImageEx(file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, image_file_path : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_EXE_FILE_CALLBACK, caller_data : Void*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun FindExecutableImageExW(file_name : Win32cr::Foundation::PWSTR, symbol_path : Win32cr::Foundation::PWSTR, image_file_path : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_EXE_FILE_CALLBACKW, caller_data : Void*) : Win32cr::Foundation::HANDLE
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun ImageNtHeader(base : Void*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun ImageDirectoryEntryToDataEx(base : Void*, mapped_as_image : Win32cr::Foundation::BOOLEAN, directory_entry : Win32cr::System::Diagnostics::Debug::IMAGE_DIRECTORY_ENTRY, size : UInt32*, found_header : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER**) : Void*
 
+    # :nodoc:
     fun ImageDirectoryEntryToData(base : Void*, mapped_as_image : Win32cr::Foundation::BOOLEAN, directory_entry : Win32cr::System::Diagnostics::Debug::IMAGE_DIRECTORY_ENTRY, size : UInt32*) : Void*
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun ImageRvaToSection(nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*, base : Void*, rva : UInt32) : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun ImageRvaToVa(nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*, base : Void*, rva : UInt32, last_rva_section : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER**) : Void*
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun SearchTreeForFile(root_path : Win32cr::Foundation::PSTR, input_path_name : Win32cr::Foundation::PSTR, output_path_buffer : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SearchTreeForFileW(root_path : Win32cr::Foundation::PWSTR, input_path_name : Win32cr::Foundation::PWSTR, output_path_buffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumDirTree(hProcess : Win32cr::Foundation::HANDLE, root_path : Win32cr::Foundation::PSTR, input_path_name : Win32cr::Foundation::PSTR, output_path_buffer : Win32cr::Foundation::PSTR, cb : Win32cr::System::Diagnostics::Debug::PENUMDIRTREE_CALLBACK, data : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumDirTreeW(hProcess : Win32cr::Foundation::HANDLE, root_path : Win32cr::Foundation::PWSTR, input_path_name : Win32cr::Foundation::PWSTR, output_path_buffer : Win32cr::Foundation::PWSTR, cb : Win32cr::System::Diagnostics::Debug::PENUMDIRTREE_CALLBACKW, data : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MakeSureDirectoryPathExists(dir_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnDecorateSymbolName(name : Win32cr::Foundation::PSTR, outputString : UInt8*, maxStringLength : UInt32, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun UnDecorateSymbolNameW(name : Win32cr::Foundation::PWSTR, outputString : UInt16*, maxStringLength : UInt32, flags : UInt32) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun StackWalk64(machine_type : UInt32, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::STACKFRAME64*, context_record : Void*, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE64, function_table_access_routine : Win32cr::System::Diagnostics::Debug::PFUNCTION_TABLE_ACCESS_ROUTINE64, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE64, translate_address : Win32cr::System::Diagnostics::Debug::PTRANSLATE_ADDRESS_ROUTINE64) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun StackWalkEx(machine_type : UInt32, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::STACKFRAME_EX*, context_record : Void*, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE64, function_table_access_routine : Win32cr::System::Diagnostics::Debug::PFUNCTION_TABLE_ACCESS_ROUTINE64, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE64, translate_address : Win32cr::System::Diagnostics::Debug::PTRANSLATE_ADDRESS_ROUTINE64, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImagehlpApiVersion : Win32cr::System::Diagnostics::Debug::API_VERSION*
 
+    # :nodoc:
     fun ImagehlpApiVersionEx(app_version : Win32cr::System::Diagnostics::Debug::API_VERSION*) : Win32cr::System::Diagnostics::Debug::API_VERSION*
 
+    # :nodoc:
     fun GetTimestampForLoadedLibrary(module__ : Win32cr::Foundation::HINSTANCE) : UInt32
 
+    # :nodoc:
     fun SymSetParentWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSetHomeDirectory(hProcess : Win32cr::Foundation::HANDLE, dir : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun SymSetHomeDirectoryW(hProcess : Win32cr::Foundation::HANDLE, dir : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun SymGetHomeDirectory(type__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_HD_TYPE, dir : UInt8*, size : LibC::UIntPtrT) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun SymGetHomeDirectoryW(type__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_HD_TYPE, dir : UInt16*, size : LibC::UIntPtrT) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun SymGetOmaps(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, omap_to : Win32cr::System::Diagnostics::Debug::OMAP**, cOmapTo : UInt64*, omap_from : Win32cr::System::Diagnostics::Debug::OMAP**, cOmapFrom : UInt64*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SymSetOptions(sym_options : UInt32) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SymGetOptions : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SymCleanup(hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetExtendedOption(option : Win32cr::System::Diagnostics::Debug::IMAGEHLP_EXTENDED_OPTIONS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSetExtendedOption(option : Win32cr::System::Diagnostics::Debug::IMAGEHLP_EXTENDED_OPTIONS, value : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymMatchString(string : Win32cr::Foundation::PSTR, expression : Win32cr::Foundation::PSTR, fCase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymMatchStringA(string : Win32cr::Foundation::PSTR, expression : Win32cr::Foundation::PSTR, fCase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymMatchStringW(string : Win32cr::Foundation::PWSTR, expression : Win32cr::Foundation::PWSTR, fCase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumSourceFiles(hProcess : Win32cr::Foundation::HANDLE, mod_base : UInt64, mask : Win32cr::Foundation::PSTR, cbSrcFiles : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSOURCEFILES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumSourceFilesW(hProcess : Win32cr::Foundation::HANDLE, mod_base : UInt64, mask : Win32cr::Foundation::PWSTR, cbSrcFiles : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSOURCEFILES_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumerateModules64(hProcess : Win32cr::Foundation::HANDLE, enum_modules_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMMODULES_CALLBACK64, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumerateModulesW64(hProcess : Win32cr::Foundation::HANDLE, enum_modules_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMMODULES_CALLBACKW64, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumerateLoadedModulesEx(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACK64, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumerateLoadedModulesExW(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACKW64, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumerateLoadedModules64(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACK64, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumerateLoadedModulesW64(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACKW64, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymFunctionTableAccess64(hProcess : Win32cr::Foundation::HANDLE, addr_base : UInt64) : Void*
 
+    # :nodoc:
     fun SymFunctionTableAccess64AccessRoutines(hProcess : Win32cr::Foundation::HANDLE, addr_base : UInt64, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE64, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE64) : Void*
 
+    # :nodoc:
     fun SymGetUnwindInfo(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, buffer : Void*, size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetModuleInfo64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULE64*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SymGetModuleInfoW64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULEW64*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SymGetModuleBase64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64) : UInt64
 
+    # :nodoc:
     fun SymEnumLines(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, obj : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, enum_lines_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMLINES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumLinesW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, obj : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, enum_lines_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMLINES_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetLineFromAddr64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, pdwDisplacement : UInt32*, line64 : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SymGetLineFromAddrW64(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt64, pdwDisplacement : UInt32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetLineFromInlineContext(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, inline_context : UInt32, qwModuleBaseAddress : UInt64, pdwDisplacement : UInt32*, line64 : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetLineFromInlineContextW(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt64, inline_context : UInt32, qwModuleBaseAddress : UInt64, pdwDisplacement : UInt32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumSourceLines(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, obj : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, line : UInt32, flags : UInt32, enum_lines_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMLINES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumSourceLinesW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, obj : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, line : UInt32, flags : UInt32, enum_lines_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMLINES_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymAddrIncludeInlineTrace(hProcess : Win32cr::Foundation::HANDLE, address : UInt64) : UInt32
 
+    # :nodoc:
     fun SymCompareInlineTrace(hProcess : Win32cr::Foundation::HANDLE, address1 : UInt64, inline_context1 : UInt32, ret_address1 : UInt64, address2 : UInt64, ret_address2 : UInt64) : UInt32
 
+    # :nodoc:
     fun SymQueryInlineTrace(hProcess : Win32cr::Foundation::HANDLE, start_address : UInt64, start_context : UInt32, start_ret_address : UInt64, cur_address : UInt64, cur_context : UInt32*, cur_frame_index : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetLineFromName64(hProcess : Win32cr::Foundation::HANDLE, module_name : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, dwLineNumber : UInt32, plDisplacement : Int32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetLineFromNameW64(hProcess : Win32cr::Foundation::HANDLE, module_name : Win32cr::Foundation::PWSTR, file_name : Win32cr::Foundation::PWSTR, dwLineNumber : UInt32, plDisplacement : Int32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetLineNext64(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetLineNextW64(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetLinePrev64(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetLinePrevW64(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetFileLineOffsets64(hProcess : Win32cr::Foundation::HANDLE, module_name : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, buffer : UInt64*, buffer_lines : UInt32) : UInt32
 
+    # :nodoc:
     fun SymMatchFileName(file_name : Win32cr::Foundation::PSTR, match : Win32cr::Foundation::PSTR, file_name_stop : Win32cr::Foundation::PSTR*, match_stop : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymMatchFileNameW(file_name : Win32cr::Foundation::PWSTR, match : Win32cr::Foundation::PWSTR, file_name_stop : Win32cr::Foundation::PWSTR*, match_stop : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceFile(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, params : Win32cr::Foundation::PSTR, file_spec : Win32cr::Foundation::PSTR, file_path : UInt8*, size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceFileW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, params : Win32cr::Foundation::PWSTR, file_spec : Win32cr::Foundation::PWSTR, file_path : UInt16*, size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceFileToken(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PSTR, token : Void**, size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceFileTokenByTokenName(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PSTR, token_name : Win32cr::Foundation::PSTR, token_parameters : Win32cr::Foundation::PSTR, token : Void**, size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceFileChecksumW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PWSTR, pCheckSumType : UInt32*, pChecksum : UInt8*, checksumSize : UInt32, pActualBytesWritten : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceFileChecksum(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PSTR, pCheckSumType : UInt32*, pChecksum : UInt8*, checksumSize : UInt32, pActualBytesWritten : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceFileTokenW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PWSTR, token : Void**, size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceFileTokenByTokenNameW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PWSTR, token_name : Win32cr::Foundation::PWSTR, token_parameters : Win32cr::Foundation::PWSTR, token : Void**, size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceFileFromToken(hProcess : Win32cr::Foundation::HANDLE, token : Void*, params : Win32cr::Foundation::PSTR, file_path : UInt8*, size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceFileFromTokenByTokenName(hProcess : Win32cr::Foundation::HANDLE, token : Void*, token_name : Win32cr::Foundation::PSTR, params : Win32cr::Foundation::PSTR, file_path : UInt8*, size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceFileFromTokenW(hProcess : Win32cr::Foundation::HANDLE, token : Void*, params : Win32cr::Foundation::PWSTR, file_path : UInt16*, size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceFileFromTokenByTokenNameW(hProcess : Win32cr::Foundation::HANDLE, token : Void*, token_name : Win32cr::Foundation::PWSTR, params : Win32cr::Foundation::PWSTR, file_path : UInt16*, size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceVarFromToken(hProcess : Win32cr::Foundation::HANDLE, token : Void*, params : Win32cr::Foundation::PSTR, var_name : Win32cr::Foundation::PSTR, value : UInt8*, size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSourceVarFromTokenW(hProcess : Win32cr::Foundation::HANDLE, token : Void*, params : Win32cr::Foundation::PWSTR, var_name : Win32cr::Foundation::PWSTR, value : UInt16*, size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumSourceFileTokens(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, callback : Win32cr::System::Diagnostics::Debug::PENUMSOURCEFILETOKENSCALLBACK) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymInitialize(hProcess : Win32cr::Foundation::HANDLE, user_search_path : Win32cr::Foundation::PSTR, fInvadeProcess : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SymInitializeW(hProcess : Win32cr::Foundation::HANDLE, user_search_path : Win32cr::Foundation::PWSTR, fInvadeProcess : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSearchPath(hProcess : Win32cr::Foundation::HANDLE, search_path_a : UInt8*, search_path_length : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSearchPathW(hProcess : Win32cr::Foundation::HANDLE, search_path_a : UInt16*, search_path_length : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSetSearchPath(hProcess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSetSearchPathW(hProcess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymLoadModuleEx(hProcess : Win32cr::Foundation::HANDLE, hFile : Win32cr::Foundation::HANDLE, image_name : Win32cr::Foundation::PSTR, module_name : Win32cr::Foundation::PSTR, base_of_dll : UInt64, dll_size : UInt32, data : Win32cr::System::Diagnostics::Debug::MODLOAD_DATA*, flags : Win32cr::System::Diagnostics::Debug::SYM_LOAD_FLAGS) : UInt64
 
+    # :nodoc:
     fun SymLoadModuleExW(hProcess : Win32cr::Foundation::HANDLE, hFile : Win32cr::Foundation::HANDLE, image_name : Win32cr::Foundation::PWSTR, module_name : Win32cr::Foundation::PWSTR, base_of_dll : UInt64, dll_size : UInt32, data : Win32cr::System::Diagnostics::Debug::MODLOAD_DATA*, flags : Win32cr::System::Diagnostics::Debug::SYM_LOAD_FLAGS) : UInt64
 
+    # :nodoc:
     fun SymUnloadModule64(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymUnDName64(sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*, un_dec_name : UInt8*, un_dec_name_length : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymRegisterCallback64(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_REGISTERED_CALLBACK64, user_context : UInt64) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymRegisterCallbackW64(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_REGISTERED_CALLBACK64, user_context : UInt64) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymRegisterFunctionEntryCallback64(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_FUNCENTRY_CALLBACK64, user_context : UInt64) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSetContext(hProcess : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::IMAGEHLP_STACK_FRAME*, context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSetScopeFromAddr(hProcess : Win32cr::Foundation::HANDLE, address : UInt64) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSetScopeFromInlineContext(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, inline_context : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSetScopeFromIndex(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumProcesses(enum_processes_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMPROCESSES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymFromAddr(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SymFromAddrW(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymFromInlineContext(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, inline_context : UInt32, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymFromInlineContextW(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, inline_context : UInt32, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymFromToken(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, token : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymFromTokenW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, token : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymNext(hProcess : Win32cr::Foundation::HANDLE, si : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymNextW(hProcess : Win32cr::Foundation::HANDLE, siw : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymPrev(hProcess : Win32cr::Foundation::HANDLE, si : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymPrevW(hProcess : Win32cr::Foundation::HANDLE, siw : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymFromName(hProcess : Win32cr::Foundation::HANDLE, name : Win32cr::Foundation::PSTR, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymFromNameW(hProcess : Win32cr::Foundation::HANDLE, name : Win32cr::Foundation::PWSTR, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumSymbols(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumSymbolsEx(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*, options : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumSymbolsW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PWSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumSymbolsExW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PWSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*, options : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumSymbolsForAddr(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumSymbolsForAddrW(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSearch(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, sym_tag : UInt32, mask : Win32cr::Foundation::PSTR, address : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*, options : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSearchW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, sym_tag : UInt32, mask : Win32cr::Foundation::PWSTR, address : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*, options : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetScope(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetScopeW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymFromIndex(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymFromIndexW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetTypeInfo(hProcess : Win32cr::Foundation::HANDLE, mod_base : UInt64, type_id : UInt32, get_type : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL_TYPE_INFO, pInfo : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetTypeInfoEx(hProcess : Win32cr::Foundation::HANDLE, mod_base : UInt64, params : Win32cr::System::Diagnostics::Debug::IMAGEHLP_GET_TYPE_INFO_PARAMS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumTypes(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumTypesW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumTypesByName(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumTypesByNameW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PWSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetTypeFromName(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PSTR, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetTypeFromNameW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PWSTR, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymAddSymbol(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PSTR, address : UInt64, size : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymAddSymbolW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PWSTR, address : UInt64, size : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymDeleteSymbol(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PSTR, address : UInt64, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymDeleteSymbolW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PWSTR, address : UInt64, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymRefreshModuleList(hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymAddSourceStream(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, stream_file : Win32cr::Foundation::PSTR, buffer : UInt8*, size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymAddSourceStreamA(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, stream_file : Win32cr::Foundation::PSTR, buffer : UInt8*, size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymAddSourceStreamW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PWSTR, buffer : UInt8*, size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSrvIsStoreW(hProcess : Win32cr::Foundation::HANDLE, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSrvIsStore(hProcess : Win32cr::Foundation::HANDLE, path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSrvDeltaName(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PSTR, type__ : Win32cr::Foundation::PSTR, file1 : Win32cr::Foundation::PSTR, file2 : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun SymSrvDeltaNameW(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PWSTR, type__ : Win32cr::Foundation::PWSTR, file1 : Win32cr::Foundation::PWSTR, file2 : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun SymSrvGetSupplement(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PSTR, node : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun SymSrvGetSupplementW(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PWSTR, node : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun SymSrvGetFileIndexes(file : Win32cr::Foundation::PSTR, id : LibC::GUID*, val1 : UInt32*, val2 : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSrvGetFileIndexesW(file : Win32cr::Foundation::PWSTR, id : LibC::GUID*, val1 : UInt32*, val2 : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSrvGetFileIndexStringW(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, index : UInt16*, size : LibC::UIntPtrT, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSrvGetFileIndexString(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, index : UInt8*, size : LibC::UIntPtrT, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSrvGetFileIndexInfo(file : Win32cr::Foundation::PSTR, info : Win32cr::System::Diagnostics::Debug::SYMSRV_INDEX_INFO*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSrvGetFileIndexInfoW(file : Win32cr::Foundation::PWSTR, info : Win32cr::System::Diagnostics::Debug::SYMSRV_INDEX_INFOW*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymSrvStoreSupplement(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PSTR, node : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun SymSrvStoreSupplementW(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PWSTR, node : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun SymSrvStoreFile(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, flags : Win32cr::System::Diagnostics::Debug::SYM_SRV_STORE_FILE_FLAGS) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun SymSrvStoreFileW(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, flags : Win32cr::System::Diagnostics::Debug::SYM_SRV_STORE_FILE_FLAGS) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun SymGetSymbolFile(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PSTR, image_file : Win32cr::Foundation::PSTR, type__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SF_TYPE, symbol_file : UInt8*, cSymbolFile : LibC::UIntPtrT, dbg_file : UInt8*, cDbgFile : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSymbolFileW(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PWSTR, image_file : Win32cr::Foundation::PWSTR, type__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SF_TYPE, symbol_file : UInt16*, cSymbolFile : LibC::UIntPtrT, dbg_file : UInt16*, cDbgFile : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DbgHelpCreateUserDump(file_name : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PDBGHELP_CREATE_USER_DUMP_CALLBACK, user_data : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DbgHelpCreateUserDumpW(file_name : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PDBGHELP_CREATE_USER_DUMP_CALLBACK, user_data : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSymFromAddr64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, pdwDisplacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSymFromName64(hProcess : Win32cr::Foundation::HANDLE, name : Win32cr::Foundation::PSTR, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindFileInPath(hprocess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, id : Void*, two : UInt32, three : UInt32, flags : UInt32, file_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindFileInSearchPath(hprocess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, one : UInt32, two : UInt32, three : UInt32, file_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumSym(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumerateSymbols64(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSYMBOLS_CALLBACK64, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymEnumerateSymbolsW64(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSYMBOLS_CALLBACK64W, user_context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymLoadModule64(hProcess : Win32cr::Foundation::HANDLE, hFile : Win32cr::Foundation::HANDLE, image_name : Win32cr::Foundation::PSTR, module_name : Win32cr::Foundation::PSTR, base_of_dll : UInt64, size_of_dll : UInt32) : UInt64
 
+    # :nodoc:
     fun SymGetSymNext64(hProcess : Win32cr::Foundation::HANDLE, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SymGetSymPrev64(hProcess : Win32cr::Foundation::HANDLE, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetCheckUserInterruptShared(lpStartAddress : Win32cr::System::Diagnostics::Debug::LPCALL_BACK_USER_INTERRUPT_ROUTINE) : Void
 
+    # :nodoc:
     fun GetSymLoadError : UInt32
 
+    # :nodoc:
     fun SetSymLoadError(error : UInt32) : Void
 
+    # :nodoc:
     fun ReportSymbolLoadSummary(hProcess : Win32cr::Foundation::HANDLE, pLoadModule : Win32cr::Foundation::PWSTR, pSymbolData : Win32cr::System::Diagnostics::Debug::DBGHELP_DATA_REPORT_STRUCT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RemoveInvalidModuleList(hProcess : Win32cr::Foundation::HANDLE) : Void
 
+    # :nodoc:
     fun RangeMapCreate : Void*
 
+    # :nodoc:
     fun RangeMapFree(rmap_handle : Void*) : Void
 
+    # :nodoc:
     fun RangeMapAddPeImageSections(rmap_handle : Void*, image_name : Win32cr::Foundation::PWSTR, mapped_image : Void*, mapping_bytes : UInt32, image_base : UInt64, user_tag : UInt64, mapping_flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RangeMapRemove(rmap_handle : Void*, user_tag : UInt64) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RangeMapRead(rmap_handle : Void*, offset : UInt64, buffer : Void*, request_bytes : UInt32, flags : UInt32, done_bytes : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RangeMapWrite(rmap_handle : Void*, offset : UInt64, buffer : Void*, request_bytes : UInt32, flags : UInt32, done_bytes : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MessageBeep(uType : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FatalExit(exit_code : Int32) : Void
 
+    # :nodoc:
     fun GetThreadSelectorEntry(hThread : Win32cr::Foundation::HANDLE, dwSelector : UInt32, lpSelectorEntry : Win32cr::System::Diagnostics::Debug::LDT_ENTRY*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun Wow64GetThreadSelectorEntry(hThread : Win32cr::Foundation::HANDLE, dwSelector : UInt32, lpSelectorEntry : Win32cr::System::Diagnostics::Debug::WOW64_LDT_ENTRY*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DebugSetProcessKillOnExit(kill_on_exit : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DebugBreakProcess(process : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun FormatMessageA(dwFlags : Win32cr::System::Diagnostics::Debug::FORMAT_MESSAGE_OPTIONS, lpSource : Void*, dwMessageId : UInt32, dwLanguageId : UInt32, lpBuffer : Win32cr::Foundation::PSTR, nSize : UInt32, arguments : Int8**) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun FormatMessageW(dwFlags : Win32cr::System::Diagnostics::Debug::FORMAT_MESSAGE_OPTIONS, lpSource : Void*, dwMessageId : UInt32, dwLanguageId : UInt32, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32, arguments : Int8**) : UInt32
 
+    # :nodoc:
     fun CopyContext(destination : Win32cr::System::Diagnostics::Debug::CONTEXT*, context_flags : UInt32, source : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InitializeContext(buffer : Void*, context_flags : UInt32, context : Win32cr::System::Diagnostics::Debug::CONTEXT**, context_length : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InitializeContext2(buffer : Void*, context_flags : UInt32, context : Win32cr::System::Diagnostics::Debug::CONTEXT**, context_length : UInt32*, x_state_compaction_mask : UInt64) : Win32cr::Foundation::BOOL
 
     {% if flag?(:i386) || flag?(:x86_64) %}
+    # :nodoc:
     fun GetEnabledXStateFeatures : UInt64
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) || flag?(:x86_64) %}
+    # :nodoc:
     fun GetXStateFeaturesMask(context : Win32cr::System::Diagnostics::Debug::CONTEXT*, feature_mask : UInt64*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) || flag?(:x86_64) %}
+    # :nodoc:
     fun LocateXStateFeature(context : Win32cr::System::Diagnostics::Debug::CONTEXT*, feature_id : UInt32, length : UInt32*) : Void*
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) || flag?(:x86_64) %}
+    # :nodoc:
     fun SetXStateFeaturesMask(context : Win32cr::System::Diagnostics::Debug::CONTEXT*, feature_mask : UInt64) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun CheckSumMappedFile(base_address : Void*, file_length : UInt32, header_sum : UInt32*, check_sum : UInt32*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun GetImageConfigInformation(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, image_config_information : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_DIRECTORY32*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SetImageConfigInformation(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, image_config_information : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_DIRECTORY32*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun ImageNtHeader(base : Void*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun ImageRvaToSection(nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*, base : Void*, rva : UInt32) : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun ImageRvaToVa(nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*, base : Void*, rva : UInt32, last_rva_section : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER**) : Void*
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun StackWalk(machine_type : UInt32, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::STACKFRAME*, context_record : Void*, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE, function_table_access_routine : Win32cr::System::Diagnostics::Debug::PFUNCTION_TABLE_ACCESS_ROUTINE, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE, translate_address : Win32cr::System::Diagnostics::Debug::PTRANSLATE_ADDRESS_ROUTINE) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymEnumerateModules(hProcess : Win32cr::Foundation::HANDLE, enum_modules_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMMODULES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun EnumerateLoadedModules(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymFunctionTableAccess(hProcess : Win32cr::Foundation::HANDLE, addr_base : UInt32) : Void*
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymGetModuleInfo(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULE*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymGetModuleInfoW(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULEW*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymGetModuleBase(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32) : UInt32
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymGetLineFromAddr(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, pdwDisplacement : UInt32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymGetLineFromName(hProcess : Win32cr::Foundation::HANDLE, module_name : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, dwLineNumber : UInt32, plDisplacement : Int32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymGetLineNext(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymGetLinePrev(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymUnloadModule(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt32) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymUnDName(sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*, un_dec_name : UInt8*, un_dec_name_length : UInt32) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymRegisterCallback(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_REGISTERED_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymRegisterFunctionEntryCallback(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_FUNCENTRY_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymGetSymFromAddr(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, pdwDisplacement : UInt32*, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymGetSymFromName(hProcess : Win32cr::Foundation::HANDLE, name : Win32cr::Foundation::PSTR, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymEnumerateSymbols(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt32, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymEnumerateSymbolsW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt32, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymLoadModule(hProcess : Win32cr::Foundation::HANDLE, hFile : Win32cr::Foundation::HANDLE, image_name : Win32cr::Foundation::PSTR, module_name : Win32cr::Foundation::PSTR, base_of_dll : UInt32, size_of_dll : UInt32) : UInt32
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymGetSymNext(hProcess : Win32cr::Foundation::HANDLE, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
     {% if flag?(:i386) %}
+    # :nodoc:
     fun SymGetSymPrev(hProcess : Win32cr::Foundation::HANDLE, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*) : Win32cr::Foundation::BOOL
-  {% end %}
+    {% end %}
 
   end
 end

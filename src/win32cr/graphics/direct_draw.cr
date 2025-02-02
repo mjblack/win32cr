@@ -3,6 +3,7 @@ require "./gdi.cr"
 require "./../system/com.cr"
 
 module Win32cr::Graphics::DirectDraw
+  extend self
   alias LPDDENUMCALLBACKA = Proc(LibC::GUID*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)
 
   alias LPDDENUMCALLBACKW = Proc(LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)
@@ -7382,20 +7383,55 @@ module Win32cr::Graphics::DirectDraw
 
   end
 
+  def directDrawEnumerateW(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKW, lpContext : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectDrawEnumerateW(lpCallback, lpContext)
+  end
+
+  def directDrawEnumerateA(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKA, lpContext : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectDrawEnumerateA(lpCallback, lpContext)
+  end
+
+  def directDrawEnumerateExW(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKEXW, lpContext : Void*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.DirectDrawEnumerateExW(lpCallback, lpContext, dwFlags)
+  end
+
+  def directDrawEnumerateExA(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKEXA, lpContext : Void*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.DirectDrawEnumerateExA(lpCallback, lpContext, dwFlags)
+  end
+
+  def directDrawCreate(lpGUID : LibC::GUID*, lplpDD : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectDrawCreate(lpGUID, lplpDD, pUnkOuter)
+  end
+
+  def directDrawCreateEx(lpGuid : LibC::GUID*, lplpDD : Void**, iid : LibC::GUID*, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectDrawCreateEx(lpGuid, lplpDD, iid, pUnkOuter)
+  end
+
+  def directDrawCreateClipper(dwFlags : UInt32, lplpDDClipper : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectDrawCreateClipper(dwFlags, lplpDDClipper, pUnkOuter)
+  end
+
   @[Link("ddraw")]
   lib C
+    # :nodoc:
     fun DirectDrawEnumerateW(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKW, lpContext : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectDrawEnumerateA(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKA, lpContext : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectDrawEnumerateExW(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKEXW, lpContext : Void*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectDrawEnumerateExA(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKEXA, lpContext : Void*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectDrawCreate(lpGUID : LibC::GUID*, lplpDD : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectDrawCreateEx(lpGuid : LibC::GUID*, lplpDD : Void**, iid : LibC::GUID*, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectDrawCreateClipper(dwFlags : UInt32, lplpDDClipper : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
 
   end

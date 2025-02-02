@@ -3,6 +3,7 @@ require "./../../foundation.cr"
 require "./../../data/xml/ms_xml.cr"
 
 module Win32cr::System::Com::Urlmon
+  extend self
   MKSYS_URLMONIKER = 6_u32
   URL_MK_LEGACY = 0_u32
   URL_MK_UNIFORM = 1_u32
@@ -2698,152 +2699,517 @@ module Win32cr::System::Com::Urlmon
 
   end
 
+  def createURLMoniker(pMkCtx : Void*, szURL : Win32cr::Foundation::PWSTR, ppmk : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateURLMoniker(pMkCtx, szURL, ppmk)
+  end
+
+  def createURLMonikerEx(pMkCtx : Void*, szURL : Win32cr::Foundation::PWSTR, ppmk : Void**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.CreateURLMonikerEx(pMkCtx, szURL, ppmk, dwFlags)
+  end
+
+  def getClassURL(szURL : Win32cr::Foundation::PWSTR, pClsID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.GetClassURL(szURL, pClsID)
+  end
+
+  def createAsyncBindCtx(reserved : UInt32, pBSCb : Void*, pEFetc : Void*, ppBC : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateAsyncBindCtx(reserved, pBSCb, pEFetc, ppBC)
+  end
+
+  def createURLMonikerEx2(pMkCtx : Void*, pUri : Void*, ppmk : Void**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.CreateURLMonikerEx2(pMkCtx, pUri, ppmk, dwFlags)
+  end
+
+  def createAsyncBindCtxEx(pbc : Void*, dwOptions : UInt32, pBSCb : Void*, pEnum : Void*, ppBC : Void**, reserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.CreateAsyncBindCtxEx(pbc, dwOptions, pBSCb, pEnum, ppBC, reserved)
+  end
+
+  def mkParseDisplayNameEx(pbc : Void*, szDisplayName : Win32cr::Foundation::PWSTR, pchEaten : UInt32*, ppmk : Void**) : Win32cr::Foundation::HRESULT
+    C.MkParseDisplayNameEx(pbc, szDisplayName, pchEaten, ppmk)
+  end
+
+  def registerBindStatusCallback(pBC : Void*, pBSCb : Void*, ppBSCBPrev : Void**, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.RegisterBindStatusCallback(pBC, pBSCb, ppBSCBPrev, dwReserved)
+  end
+
+  def revokeBindStatusCallback(pBC : Void*, pBSCb : Void*) : Win32cr::Foundation::HRESULT
+    C.RevokeBindStatusCallback(pBC, pBSCb)
+  end
+
+  def getClassFileOrMime(pBC : Void*, szFilename : Win32cr::Foundation::PWSTR, pBuffer : Void*, cbSize : UInt32, szMime : Win32cr::Foundation::PWSTR, dwReserved : UInt32, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.GetClassFileOrMime(pBC, szFilename, pBuffer, cbSize, szMime, dwReserved, pclsid)
+  end
+
+  def isValidURL(pBC : Void*, szURL : Win32cr::Foundation::PWSTR, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.IsValidURL(pBC, szURL, dwReserved)
+  end
+
+  def coGetClassObjectFromURL(rCLASSID : LibC::GUID*, szCODE : Win32cr::Foundation::PWSTR, dwFileVersionMS : UInt32, dwFileVersionLS : UInt32, szTYPE : Win32cr::Foundation::PWSTR, pBindCtx : Void*, dwClsContext : Win32cr::System::Com::CLSCTX, pvReserved : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CoGetClassObjectFromURL(rCLASSID, szCODE, dwFileVersionMS, dwFileVersionLS, szTYPE, pBindCtx, dwClsContext, pvReserved, riid, ppv)
+  end
+
+  def iEInstallScope(pdwScope : UInt32*) : Win32cr::Foundation::HRESULT
+    C.IEInstallScope(pdwScope)
+  end
+
+  def faultInIEFeature(hWnd : Win32cr::Foundation::HWND, pClassSpec : Win32cr::System::Com::Uclsspec*, pQuery : Win32cr::System::Com::QUERYCONTEXT*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.FaultInIEFeature(hWnd, pClassSpec, pQuery, dwFlags)
+  end
+
+  def getComponentIDFromCLSSPEC(pClassspec : Win32cr::System::Com::Uclsspec*, ppszComponentID : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::HRESULT
+    C.GetComponentIDFromCLSSPEC(pClassspec, ppszComponentID)
+  end
+
+  def isAsyncMoniker(pmk : Void*) : Win32cr::Foundation::HRESULT
+    C.IsAsyncMoniker(pmk)
+  end
+
+  def registerMediaTypes(ctypes : UInt32, rgszTypes : Win32cr::Foundation::PSTR*, rgcfTypes : UInt16*) : Win32cr::Foundation::HRESULT
+    C.RegisterMediaTypes(ctypes, rgszTypes, rgcfTypes)
+  end
+
+  def findMediaType(rgszTypes : Win32cr::Foundation::PSTR, rgcfTypes : UInt16*) : Win32cr::Foundation::HRESULT
+    C.FindMediaType(rgszTypes, rgcfTypes)
+  end
+
+  def createFormatEnumerator(cfmtetc : UInt32, rgfmtetc : Win32cr::System::Com::FORMATETC*, ppenumfmtetc : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateFormatEnumerator(cfmtetc, rgfmtetc, ppenumfmtetc)
+  end
+
+  def registerFormatEnumerator(pBC : Void*, pEFetc : Void*, reserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.RegisterFormatEnumerator(pBC, pEFetc, reserved)
+  end
+
+  def revokeFormatEnumerator(pBC : Void*, pEFetc : Void*) : Win32cr::Foundation::HRESULT
+    C.RevokeFormatEnumerator(pBC, pEFetc)
+  end
+
+  def registerMediaTypeClass(pBC : Void*, ctypes : UInt32, rgszTypes : Win32cr::Foundation::PSTR*, rgclsID : LibC::GUID*, reserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.RegisterMediaTypeClass(pBC, ctypes, rgszTypes, rgclsID, reserved)
+  end
+
+  def findMediaTypeClass(pBC : Void*, szType : Win32cr::Foundation::PSTR, pclsID : LibC::GUID*, reserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.FindMediaTypeClass(pBC, szType, pclsID, reserved)
+  end
+
+  def urlMkSetSessionOption(dwOption : UInt32, pBuffer : Void*, dwBufferLength : UInt32, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.UrlMkSetSessionOption(dwOption, pBuffer, dwBufferLength, dwReserved)
+  end
+
+  def urlMkGetSessionOption(dwOption : UInt32, pBuffer : Void*, dwBufferLength : UInt32, pdwBufferLengthOut : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.UrlMkGetSessionOption(dwOption, pBuffer, dwBufferLength, pdwBufferLengthOut, dwReserved)
+  end
+
+  def findMimeFromData(pBC : Void*, pwzUrl : Win32cr::Foundation::PWSTR, pBuffer : Void*, cbSize : UInt32, pwzMimeProposed : Win32cr::Foundation::PWSTR, dwMimeFlags : UInt32, ppwzMimeOut : Win32cr::Foundation::PWSTR*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.FindMimeFromData(pBC, pwzUrl, pBuffer, cbSize, pwzMimeProposed, dwMimeFlags, ppwzMimeOut, dwReserved)
+  end
+
+  def obtainUserAgentString(dwOption : UInt32, pszUAOut : UInt8*, cbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.ObtainUserAgentString(dwOption, pszUAOut, cbSize)
+  end
+
+  def compareSecurityIds(pbSecurityId1 : UInt8*, dwLen1 : UInt32, pbSecurityId2 : UInt8*, dwLen2 : UInt32, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.CompareSecurityIds(pbSecurityId1, dwLen1, pbSecurityId2, dwLen2, dwReserved)
+  end
+
+  def compatFlagsFromClsid(pclsid : LibC::GUID*, pdwCompatFlags : UInt32*, pdwMiscStatusFlags : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CompatFlagsFromClsid(pclsid, pdwCompatFlags, pdwMiscStatusFlags)
+  end
+
+  def setAccessForIEAppContainer(hObject : Win32cr::Foundation::HANDLE, ieObjectType : Win32cr::System::Com::Urlmon::IEObjectType, dwAccessMask : UInt32) : Win32cr::Foundation::HRESULT
+    C.SetAccessForIEAppContainer(hObject, ieObjectType, dwAccessMask)
+  end
+
+  def hlinkSimpleNavigateToString(szTarget : Win32cr::Foundation::PWSTR, szLocation : Win32cr::Foundation::PWSTR, szTargetFrameName : Win32cr::Foundation::PWSTR, pUnk : Void*, pbc : Void*, param5 : Void*, grfHLNF : UInt32, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.HlinkSimpleNavigateToString(szTarget, szLocation, szTargetFrameName, pUnk, pbc, param5, grfHLNF, dwReserved)
+  end
+
+  def hlinkSimpleNavigateToMoniker(pmkTarget : Void*, szLocation : Win32cr::Foundation::PWSTR, szTargetFrameName : Win32cr::Foundation::PWSTR, pUnk : Void*, pbc : Void*, param5 : Void*, grfHLNF : UInt32, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.HlinkSimpleNavigateToMoniker(pmkTarget, szLocation, szTargetFrameName, pUnk, pbc, param5, grfHLNF, dwReserved)
+  end
+
+  def uRLOpenStreamA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::HRESULT
+    C.URLOpenStreamA(param0, param1, param2, param3)
+  end
+
+  def uRLOpenStreamW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::HRESULT
+    C.URLOpenStreamW(param0, param1, param2, param3)
+  end
+
+  def uRLOpenPullStreamA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::HRESULT
+    C.URLOpenPullStreamA(param0, param1, param2, param3)
+  end
+
+  def uRLOpenPullStreamW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::HRESULT
+    C.URLOpenPullStreamW(param0, param1, param2, param3)
+  end
+
+  def uRLDownloadToFileA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::Foundation::PSTR, param3 : UInt32, param4 : Void*) : Win32cr::Foundation::HRESULT
+    C.URLDownloadToFileA(param0, param1, param2, param3, param4)
+  end
+
+  def uRLDownloadToFileW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::Foundation::PWSTR, param3 : UInt32, param4 : Void*) : Win32cr::Foundation::HRESULT
+    C.URLDownloadToFileW(param0, param1, param2, param3, param4)
+  end
+
+  def uRLDownloadToCacheFileA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : UInt8*, cchFileName : UInt32, param4 : UInt32, param5 : Void*) : Win32cr::Foundation::HRESULT
+    C.URLDownloadToCacheFileA(param0, param1, param2, cchFileName, param4, param5)
+  end
+
+  def uRLDownloadToCacheFileW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : UInt16*, cchFileName : UInt32, param4 : UInt32, param5 : Void*) : Win32cr::Foundation::HRESULT
+    C.URLDownloadToCacheFileW(param0, param1, param2, cchFileName, param4, param5)
+  end
+
+  def uRLOpenBlockingStreamA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : Void**, param3 : UInt32, param4 : Void*) : Win32cr::Foundation::HRESULT
+    C.URLOpenBlockingStreamA(param0, param1, param2, param3, param4)
+  end
+
+  def uRLOpenBlockingStreamW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : Void**, param3 : UInt32, param4 : Void*) : Win32cr::Foundation::HRESULT
+    C.URLOpenBlockingStreamW(param0, param1, param2, param3, param4)
+  end
+
+  def hlinkGoBack(pUnk : Void*) : Win32cr::Foundation::HRESULT
+    C.HlinkGoBack(pUnk)
+  end
+
+  def hlinkGoForward(pUnk : Void*) : Win32cr::Foundation::HRESULT
+    C.HlinkGoForward(pUnk)
+  end
+
+  def hlinkNavigateString(pUnk : Void*, szTarget : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.HlinkNavigateString(pUnk, szTarget)
+  end
+
+  def hlinkNavigateMoniker(pUnk : Void*, pmkTarget : Void*) : Win32cr::Foundation::HRESULT
+    C.HlinkNavigateMoniker(pUnk, pmkTarget)
+  end
+
+  def coInternetParseUrl(pwzUrl : Win32cr::Foundation::PWSTR, parse_action : Win32cr::System::Com::Urlmon::PARSEACTION, dwFlags : UInt32, pszResult : UInt16*, cchResult : UInt32, pcchResult : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoInternetParseUrl(pwzUrl, parse_action, dwFlags, pszResult, cchResult, pcchResult, dwReserved)
+  end
+
+  def coInternetParseIUri(pIUri : Void*, parse_action : Win32cr::System::Com::Urlmon::PARSEACTION, dwFlags : UInt32, pwzResult : UInt16*, cchResult : UInt32, pcchResult : UInt32*, dwReserved : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+    C.CoInternetParseIUri(pIUri, parse_action, dwFlags, pwzResult, cchResult, pcchResult, dwReserved)
+  end
+
+  def coInternetCombineUrl(pwzBaseUrl : Win32cr::Foundation::PWSTR, pwzRelativeUrl : Win32cr::Foundation::PWSTR, dwCombineFlags : UInt32, pszResult : UInt16*, cchResult : UInt32, pcchResult : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoInternetCombineUrl(pwzBaseUrl, pwzRelativeUrl, dwCombineFlags, pszResult, cchResult, pcchResult, dwReserved)
+  end
+
+  def coInternetCombineUrlEx(pBaseUri : Void*, pwzRelativeUrl : Win32cr::Foundation::PWSTR, dwCombineFlags : UInt32, ppCombinedUri : Void**, dwReserved : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+    C.CoInternetCombineUrlEx(pBaseUri, pwzRelativeUrl, dwCombineFlags, ppCombinedUri, dwReserved)
+  end
+
+  def coInternetCombineIUri(pBaseUri : Void*, pRelativeUri : Void*, dwCombineFlags : UInt32, ppCombinedUri : Void**, dwReserved : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+    C.CoInternetCombineIUri(pBaseUri, pRelativeUri, dwCombineFlags, ppCombinedUri, dwReserved)
+  end
+
+  def coInternetCompareUrl(pwzUrl1 : Win32cr::Foundation::PWSTR, pwzUrl2 : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoInternetCompareUrl(pwzUrl1, pwzUrl2, dwFlags)
+  end
+
+  def coInternetGetProtocolFlags(pwzUrl : Win32cr::Foundation::PWSTR, pdwFlags : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoInternetGetProtocolFlags(pwzUrl, pdwFlags, dwReserved)
+  end
+
+  def coInternetQueryInfo(pwzUrl : Win32cr::Foundation::PWSTR, query_options : Win32cr::System::Com::Urlmon::QUERYOPTION, dwQueryFlags : UInt32, pvBuffer : Void*, cbBuffer : UInt32, pcbBuffer : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoInternetQueryInfo(pwzUrl, query_options, dwQueryFlags, pvBuffer, cbBuffer, pcbBuffer, dwReserved)
+  end
+
+  def coInternetGetSession(dwSessionMode : UInt32, ppIInternetSession : Void**, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoInternetGetSession(dwSessionMode, ppIInternetSession, dwReserved)
+  end
+
+  def coInternetGetSecurityUrl(pwszUrl : Win32cr::Foundation::PWSTR, ppwszSecUrl : Win32cr::Foundation::PWSTR*, psuAction : Win32cr::System::Com::Urlmon::PSUACTION, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoInternetGetSecurityUrl(pwszUrl, ppwszSecUrl, psuAction, dwReserved)
+  end
+
+  def coInternetGetSecurityUrlEx(pUri : Void*, ppSecUri : Void**, psuAction : Win32cr::System::Com::Urlmon::PSUACTION, dwReserved : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+    C.CoInternetGetSecurityUrlEx(pUri, ppSecUri, psuAction, dwReserved)
+  end
+
+  def coInternetSetFeatureEnabled(feature_entry : Win32cr::System::Com::Urlmon::INTERNETFEATURELIST, dwFlags : UInt32, fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.CoInternetSetFeatureEnabled(feature_entry, dwFlags, fEnable)
+  end
+
+  def coInternetIsFeatureEnabled(feature_entry : Win32cr::System::Com::Urlmon::INTERNETFEATURELIST, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoInternetIsFeatureEnabled(feature_entry, dwFlags)
+  end
+
+  def coInternetIsFeatureEnabledForUrl(feature_entry : Win32cr::System::Com::Urlmon::INTERNETFEATURELIST, dwFlags : UInt32, szURL : Win32cr::Foundation::PWSTR, pSecMgr : Void*) : Win32cr::Foundation::HRESULT
+    C.CoInternetIsFeatureEnabledForUrl(feature_entry, dwFlags, szURL, pSecMgr)
+  end
+
+  def coInternetIsFeatureEnabledForIUri(feature_entry : Win32cr::System::Com::Urlmon::INTERNETFEATURELIST, dwFlags : UInt32, pIUri : Void*, pSecMgr : Void*) : Win32cr::Foundation::HRESULT
+    C.CoInternetIsFeatureEnabledForIUri(feature_entry, dwFlags, pIUri, pSecMgr)
+  end
+
+  def coInternetIsFeatureZoneElevationEnabled(szFromURL : Win32cr::Foundation::PWSTR, szToURL : Win32cr::Foundation::PWSTR, pSecMgr : Void*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoInternetIsFeatureZoneElevationEnabled(szFromURL, szToURL, pSecMgr, dwFlags)
+  end
+
+  def copyStgMedium(pcstgmedSrc : Win32cr::System::Com::STGMEDIUM*, pstgmedDest : Win32cr::System::Com::STGMEDIUM*) : Win32cr::Foundation::HRESULT
+    C.CopyStgMedium(pcstgmedSrc, pstgmedDest)
+  end
+
+  def copyBindInfo(pcbiSrc : Win32cr::System::Com::BINDINFO*, pbiDest : Win32cr::System::Com::BINDINFO*) : Win32cr::Foundation::HRESULT
+    C.CopyBindInfo(pcbiSrc, pbiDest)
+  end
+
+  def releaseBindInfo(pbindinfo : Win32cr::System::Com::BINDINFO*) : Void
+    C.ReleaseBindInfo(pbindinfo)
+  end
+
+  def iEGetUserPrivateNamespaceName : Win32cr::Foundation::PWSTR
+    C.IEGetUserPrivateNamespaceName
+  end
+
+  def coInternetCreateSecurityManager(pSP : Void*, ppSM : Void**, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoInternetCreateSecurityManager(pSP, ppSM, dwReserved)
+  end
+
+  def coInternetCreateZoneManager(pSP : Void*, ppZM : Void**, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoInternetCreateZoneManager(pSP, ppZM, dwReserved)
+  end
+
+  def getSoftwareUpdateInfo(szDistUnit : Win32cr::Foundation::PWSTR, psdi : Win32cr::System::Com::Urlmon::SOFTDISTINFO*) : Win32cr::Foundation::HRESULT
+    C.GetSoftwareUpdateInfo(szDistUnit, psdi)
+  end
+
+  def setSoftwareUpdateAdvertisementState(szDistUnit : Win32cr::Foundation::PWSTR, dwAdState : UInt32, dwAdvertisedVersionMS : UInt32, dwAdvertisedVersionLS : UInt32) : Win32cr::Foundation::HRESULT
+    C.SetSoftwareUpdateAdvertisementState(szDistUnit, dwAdState, dwAdvertisedVersionMS, dwAdvertisedVersionLS)
+  end
+
+  def isLoggingEnabledA(pszUrl : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.IsLoggingEnabledA(pszUrl)
+  end
+
+  def isLoggingEnabledW(pwszUrl : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.IsLoggingEnabledW(pwszUrl)
+  end
+
+  def writeHitLogging(lpLogginginfo : Win32cr::System::Com::Urlmon::HIT_LOGGING_INFO*) : Win32cr::Foundation::BOOL
+    C.WriteHitLogging(lpLogginginfo)
+  end
+
   @[Link("urlmon")]
   lib C
+    # :nodoc:
     fun CreateURLMoniker(pMkCtx : Void*, szURL : Win32cr::Foundation::PWSTR, ppmk : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateURLMonikerEx(pMkCtx : Void*, szURL : Win32cr::Foundation::PWSTR, ppmk : Void**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetClassURL(szURL : Win32cr::Foundation::PWSTR, pClsID : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateAsyncBindCtx(reserved : UInt32, pBSCb : Void*, pEFetc : Void*, ppBC : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateURLMonikerEx2(pMkCtx : Void*, pUri : Void*, ppmk : Void**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateAsyncBindCtxEx(pbc : Void*, dwOptions : UInt32, pBSCb : Void*, pEnum : Void*, ppBC : Void**, reserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MkParseDisplayNameEx(pbc : Void*, szDisplayName : Win32cr::Foundation::PWSTR, pchEaten : UInt32*, ppmk : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RegisterBindStatusCallback(pBC : Void*, pBSCb : Void*, ppBSCBPrev : Void**, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RevokeBindStatusCallback(pBC : Void*, pBSCb : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetClassFileOrMime(pBC : Void*, szFilename : Win32cr::Foundation::PWSTR, pBuffer : Void*, cbSize : UInt32, szMime : Win32cr::Foundation::PWSTR, dwReserved : UInt32, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IsValidURL(pBC : Void*, szURL : Win32cr::Foundation::PWSTR, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetClassObjectFromURL(rCLASSID : LibC::GUID*, szCODE : Win32cr::Foundation::PWSTR, dwFileVersionMS : UInt32, dwFileVersionLS : UInt32, szTYPE : Win32cr::Foundation::PWSTR, pBindCtx : Void*, dwClsContext : Win32cr::System::Com::CLSCTX, pvReserved : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IEInstallScope(pdwScope : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FaultInIEFeature(hWnd : Win32cr::Foundation::HWND, pClassSpec : Win32cr::System::Com::Uclsspec*, pQuery : Win32cr::System::Com::QUERYCONTEXT*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetComponentIDFromCLSSPEC(pClassspec : Win32cr::System::Com::Uclsspec*, ppszComponentID : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IsAsyncMoniker(pmk : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RegisterMediaTypes(ctypes : UInt32, rgszTypes : Win32cr::Foundation::PSTR*, rgcfTypes : UInt16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FindMediaType(rgszTypes : Win32cr::Foundation::PSTR, rgcfTypes : UInt16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateFormatEnumerator(cfmtetc : UInt32, rgfmtetc : Win32cr::System::Com::FORMATETC*, ppenumfmtetc : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RegisterFormatEnumerator(pBC : Void*, pEFetc : Void*, reserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RevokeFormatEnumerator(pBC : Void*, pEFetc : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RegisterMediaTypeClass(pBC : Void*, ctypes : UInt32, rgszTypes : Win32cr::Foundation::PSTR*, rgclsID : LibC::GUID*, reserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FindMediaTypeClass(pBC : Void*, szType : Win32cr::Foundation::PSTR, pclsID : LibC::GUID*, reserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UrlMkSetSessionOption(dwOption : UInt32, pBuffer : Void*, dwBufferLength : UInt32, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UrlMkGetSessionOption(dwOption : UInt32, pBuffer : Void*, dwBufferLength : UInt32, pdwBufferLengthOut : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FindMimeFromData(pBC : Void*, pwzUrl : Win32cr::Foundation::PWSTR, pBuffer : Void*, cbSize : UInt32, pwzMimeProposed : Win32cr::Foundation::PWSTR, dwMimeFlags : UInt32, ppwzMimeOut : Win32cr::Foundation::PWSTR*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ObtainUserAgentString(dwOption : UInt32, pszUAOut : UInt8*, cbSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CompareSecurityIds(pbSecurityId1 : UInt8*, dwLen1 : UInt32, pbSecurityId2 : UInt8*, dwLen2 : UInt32, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CompatFlagsFromClsid(pclsid : LibC::GUID*, pdwCompatFlags : UInt32*, pdwMiscStatusFlags : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetAccessForIEAppContainer(hObject : Win32cr::Foundation::HANDLE, ieObjectType : Win32cr::System::Com::Urlmon::IEObjectType, dwAccessMask : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HlinkSimpleNavigateToString(szTarget : Win32cr::Foundation::PWSTR, szLocation : Win32cr::Foundation::PWSTR, szTargetFrameName : Win32cr::Foundation::PWSTR, pUnk : Void*, pbc : Void*, param5 : Void*, grfHLNF : UInt32, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HlinkSimpleNavigateToMoniker(pmkTarget : Void*, szLocation : Win32cr::Foundation::PWSTR, szTargetFrameName : Win32cr::Foundation::PWSTR, pUnk : Void*, pbc : Void*, param5 : Void*, grfHLNF : UInt32, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun URLOpenStreamA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun URLOpenStreamW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun URLOpenPullStreamA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun URLOpenPullStreamW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun URLDownloadToFileA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::Foundation::PSTR, param3 : UInt32, param4 : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun URLDownloadToFileW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::Foundation::PWSTR, param3 : UInt32, param4 : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun URLDownloadToCacheFileA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : UInt8*, cchFileName : UInt32, param4 : UInt32, param5 : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun URLDownloadToCacheFileW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : UInt16*, cchFileName : UInt32, param4 : UInt32, param5 : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun URLOpenBlockingStreamA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : Void**, param3 : UInt32, param4 : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun URLOpenBlockingStreamW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : Void**, param3 : UInt32, param4 : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HlinkGoBack(pUnk : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HlinkGoForward(pUnk : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HlinkNavigateString(pUnk : Void*, szTarget : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HlinkNavigateMoniker(pUnk : Void*, pmkTarget : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetParseUrl(pwzUrl : Win32cr::Foundation::PWSTR, parse_action : Win32cr::System::Com::Urlmon::PARSEACTION, dwFlags : UInt32, pszResult : UInt16*, cchResult : UInt32, pcchResult : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetParseIUri(pIUri : Void*, parse_action : Win32cr::System::Com::Urlmon::PARSEACTION, dwFlags : UInt32, pwzResult : UInt16*, cchResult : UInt32, pcchResult : UInt32*, dwReserved : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetCombineUrl(pwzBaseUrl : Win32cr::Foundation::PWSTR, pwzRelativeUrl : Win32cr::Foundation::PWSTR, dwCombineFlags : UInt32, pszResult : UInt16*, cchResult : UInt32, pcchResult : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetCombineUrlEx(pBaseUri : Void*, pwzRelativeUrl : Win32cr::Foundation::PWSTR, dwCombineFlags : UInt32, ppCombinedUri : Void**, dwReserved : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetCombineIUri(pBaseUri : Void*, pRelativeUri : Void*, dwCombineFlags : UInt32, ppCombinedUri : Void**, dwReserved : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetCompareUrl(pwzUrl1 : Win32cr::Foundation::PWSTR, pwzUrl2 : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetGetProtocolFlags(pwzUrl : Win32cr::Foundation::PWSTR, pdwFlags : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetQueryInfo(pwzUrl : Win32cr::Foundation::PWSTR, query_options : Win32cr::System::Com::Urlmon::QUERYOPTION, dwQueryFlags : UInt32, pvBuffer : Void*, cbBuffer : UInt32, pcbBuffer : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetGetSession(dwSessionMode : UInt32, ppIInternetSession : Void**, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetGetSecurityUrl(pwszUrl : Win32cr::Foundation::PWSTR, ppwszSecUrl : Win32cr::Foundation::PWSTR*, psuAction : Win32cr::System::Com::Urlmon::PSUACTION, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetGetSecurityUrlEx(pUri : Void*, ppSecUri : Void**, psuAction : Win32cr::System::Com::Urlmon::PSUACTION, dwReserved : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetSetFeatureEnabled(feature_entry : Win32cr::System::Com::Urlmon::INTERNETFEATURELIST, dwFlags : UInt32, fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetIsFeatureEnabled(feature_entry : Win32cr::System::Com::Urlmon::INTERNETFEATURELIST, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetIsFeatureEnabledForUrl(feature_entry : Win32cr::System::Com::Urlmon::INTERNETFEATURELIST, dwFlags : UInt32, szURL : Win32cr::Foundation::PWSTR, pSecMgr : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetIsFeatureEnabledForIUri(feature_entry : Win32cr::System::Com::Urlmon::INTERNETFEATURELIST, dwFlags : UInt32, pIUri : Void*, pSecMgr : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetIsFeatureZoneElevationEnabled(szFromURL : Win32cr::Foundation::PWSTR, szToURL : Win32cr::Foundation::PWSTR, pSecMgr : Void*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CopyStgMedium(pcstgmedSrc : Win32cr::System::Com::STGMEDIUM*, pstgmedDest : Win32cr::System::Com::STGMEDIUM*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CopyBindInfo(pcbiSrc : Win32cr::System::Com::BINDINFO*, pbiDest : Win32cr::System::Com::BINDINFO*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ReleaseBindInfo(pbindinfo : Win32cr::System::Com::BINDINFO*) : Void
 
+    # :nodoc:
     fun IEGetUserPrivateNamespaceName : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun CoInternetCreateSecurityManager(pSP : Void*, ppSM : Void**, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInternetCreateZoneManager(pSP : Void*, ppZM : Void**, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetSoftwareUpdateInfo(szDistUnit : Win32cr::Foundation::PWSTR, psdi : Win32cr::System::Com::Urlmon::SOFTDISTINFO*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetSoftwareUpdateAdvertisementState(szDistUnit : Win32cr::Foundation::PWSTR, dwAdState : UInt32, dwAdvertisedVersionMS : UInt32, dwAdvertisedVersionLS : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IsLoggingEnabledA(pszUrl : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsLoggingEnabledW(pwszUrl : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WriteHitLogging(lpLogginginfo : Win32cr::System::Com::Urlmon::HIT_LOGGING_INFO*) : Win32cr::Foundation::BOOL
 
   end

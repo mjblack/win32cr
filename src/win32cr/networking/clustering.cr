@@ -7,6 +7,7 @@ require "./../graphics/gdi.cr"
 require "./../ui/windows_and_messaging.cr"
 
 module Win32cr::Networking::Clustering
+  extend self
   alias PCLUSAPI_GET_NODE_CLUSTER_STATE = Proc(Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
   alias PCLUSAPI_OPEN_CLUSTER = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HCLUSTER_*)
@@ -7443,710 +7444,2465 @@ module Win32cr::Networking::Clustering
 
   end
 
+  def getNodeClusterState(lpszNodeName : Win32cr::Foundation::PWSTR, pdwClusterState : UInt32*) : UInt32
+    C.GetNodeClusterState(lpszNodeName, pdwClusterState)
+  end
+
+  def openCluster(lpszClusterName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HCLUSTER_*
+    C.OpenCluster(lpszClusterName)
+  end
+
+  def openClusterEx(lpszClusterName : Win32cr::Foundation::PWSTR, desired_access : UInt32, granted_access : UInt32*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    C.OpenClusterEx(lpszClusterName, desired_access, granted_access)
+  end
+
+  def closeCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*) : Win32cr::Foundation::BOOL
+    C.CloseCluster(hCluster)
+  end
+
+  def setClusterName(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNewClusterName : Win32cr::Foundation::PWSTR) : UInt32
+    C.SetClusterName(hCluster, lpszNewClusterName)
+  end
+
+  def getClusterInformation(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszClusterName : UInt16*, lpcchClusterName : UInt32*, lpClusterInfo : Win32cr::Networking::Clustering::CLUSTERVERSIONINFO*) : UInt32
+    C.GetClusterInformation(hCluster, lpszClusterName, lpcchClusterName, lpClusterInfo)
+  end
+
+  def getClusterQuorumResource(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceName : UInt16*, lpcchResourceName : UInt32*, lpszDeviceName : UInt16*, lpcchDeviceName : UInt32*, lpdwMaxQuorumLogSize : UInt32*) : UInt32
+    C.GetClusterQuorumResource(hCluster, lpszResourceName, lpcchResourceName, lpszDeviceName, lpcchDeviceName, lpdwMaxQuorumLogSize)
+  end
+
+  def setClusterQuorumResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszDeviceName : Win32cr::Foundation::PWSTR, dwMaxQuoLogSize : UInt32) : UInt32
+    C.SetClusterQuorumResource(hResource, lpszDeviceName, dwMaxQuoLogSize)
+  end
+
+  def backupClusterDatabase(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszPathName : Win32cr::Foundation::PWSTR) : UInt32
+    C.BackupClusterDatabase(hCluster, lpszPathName)
+  end
+
+  def restoreClusterDatabase(lpszPathName : Win32cr::Foundation::PWSTR, bForce : Win32cr::Foundation::BOOL, lpszQuorumDriveLetter : Win32cr::Foundation::PWSTR) : UInt32
+    C.RestoreClusterDatabase(lpszPathName, bForce, lpszQuorumDriveLetter)
+  end
+
+  def setClusterNetworkPriorityOrder(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, network_count : UInt32, network_list : Win32cr::Networking::Clustering::HNETWORK_**) : UInt32
+    C.SetClusterNetworkPriorityOrder(hCluster, network_count, network_list)
+  end
+
+  def setClusterServiceAccountPassword(lpszClusterName : Win32cr::Foundation::PWSTR, lpszNewPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32, lpReturnStatusBuffer : Win32cr::Networking::Clustering::CLUSTER_SET_PASSWORD_STATUS*, lpcbReturnStatusBufferSize : UInt32*) : UInt32
+    C.SetClusterServiceAccountPassword(lpszClusterName, lpszNewPassword, dwFlags, lpReturnStatusBuffer, lpcbReturnStatusBufferSize)
+  end
+
+  def clusterControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    C.ClusterControl(hCluster, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+  end
+
+  def clusterUpgradeFunctionalLevel(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, perform : Win32cr::Foundation::BOOL, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_UPGRADE_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
+    C.ClusterUpgradeFunctionalLevel(hCluster, perform, pfnProgressCallback, pvCallbackArg)
+  end
+
+  def createClusterNotifyPortV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, filters : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, dwFilterCount : UInt32, dwNotifyKey : LibC::UIntPtrT) : Win32cr::Networking::Clustering::HCHANGE_*
+    C.CreateClusterNotifyPortV2(hChange, hCluster, filters, dwFilterCount, dwNotifyKey)
+  end
+
+  def registerClusterNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, filter : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE, hObject : Win32cr::Foundation::HANDLE, dwNotifyKey : LibC::UIntPtrT) : UInt32
+    C.RegisterClusterNotifyV2(hChange, filter, hObject, dwNotifyKey)
+  end
+
+  def getNotifyEventHandle(hChange : Win32cr::Networking::Clustering::HCHANGE_*, lphTargetEvent : Win32cr::Foundation::HANDLE*) : UInt32
+    C.GetNotifyEventHandle(hChange, lphTargetEvent)
+  end
+
+  def getClusterNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, lpdwNotifyKey : LibC::UIntPtrT*, pFilterAndType : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, buffer : UInt8*, lpbBufferSize : UInt32*, lpszObjectId : UInt16*, lpcchObjectId : UInt32*, lpszParentId : UInt16*, lpcchParentId : UInt32*, lpszName : UInt16*, lpcchName : UInt32*, lpszType : UInt16*, lpcchType : UInt32*, dwMilliseconds : UInt32) : UInt32
+    C.GetClusterNotifyV2(hChange, lpdwNotifyKey, pFilterAndType, buffer, lpbBufferSize, lpszObjectId, lpcchObjectId, lpszParentId, lpcchParentId, lpszName, lpcchName, lpszType, lpcchType, dwMilliseconds)
+  end
+
+  def createClusterNotifyPort(hChange : Win32cr::Networking::Clustering::HCHANGE_*, hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, dwFilter : UInt32, dwNotifyKey : LibC::UIntPtrT) : Win32cr::Networking::Clustering::HCHANGE_*
+    C.CreateClusterNotifyPort(hChange, hCluster, dwFilter, dwNotifyKey)
+  end
+
+  def registerClusterNotify(hChange : Win32cr::Networking::Clustering::HCHANGE_*, dwFilterType : UInt32, hObject : Win32cr::Foundation::HANDLE, dwNotifyKey : LibC::UIntPtrT) : UInt32
+    C.RegisterClusterNotify(hChange, dwFilterType, hObject, dwNotifyKey)
+  end
+
+  def getClusterNotify(hChange : Win32cr::Networking::Clustering::HCHANGE_*, lpdwNotifyKey : LibC::UIntPtrT*, lpdwFilterType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*, dwMilliseconds : UInt32) : UInt32
+    C.GetClusterNotify(hChange, lpdwNotifyKey, lpdwFilterType, lpszName, lpcchName, dwMilliseconds)
+  end
+
+  def closeClusterNotifyPort(hChange : Win32cr::Networking::Clustering::HCHANGE_*) : Win32cr::Foundation::BOOL
+    C.CloseClusterNotifyPort(hChange)
+  end
+
+  def clusterOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, dwType : UInt32) : Win32cr::Networking::Clustering::HCLUSENUM_*
+    C.ClusterOpenEnum(hCluster, dwType)
+  end
+
+  def clusterGetEnumCount(hEnum : Win32cr::Networking::Clustering::HCLUSENUM_*) : UInt32
+    C.ClusterGetEnumCount(hEnum)
+  end
+
+  def clusterEnum(hEnum : Win32cr::Networking::Clustering::HCLUSENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    C.ClusterEnum(hEnum, dwIndex, lpdwType, lpszName, lpcchName)
+  end
+
+  def clusterCloseEnum(hEnum : Win32cr::Networking::Clustering::HCLUSENUM_*) : UInt32
+    C.ClusterCloseEnum(hEnum)
+  end
+
+  def clusterOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, dwType : UInt32, pOptions : Void*) : Win32cr::Networking::Clustering::HCLUSENUMEX_*
+    C.ClusterOpenEnumEx(hCluster, dwType, pOptions)
+  end
+
+  def clusterGetEnumCountEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX_*) : UInt32
+    C.ClusterGetEnumCountEx(hClusterEnum)
+  end
+
+  def clusterEnumEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+    C.ClusterEnumEx(hClusterEnum, dwIndex, pItem, cbItem)
+  end
+
+  def clusterCloseEnumEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX_*) : UInt32
+    C.ClusterCloseEnumEx(hClusterEnum)
+  end
+
+  def createClusterGroupSet(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, groupSetName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUPSET_*
+    C.CreateClusterGroupSet(hCluster, groupSetName)
+  end
+
+  def openClusterGroupSet(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupSetName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUPSET_*
+    C.OpenClusterGroupSet(hCluster, lpszGroupSetName)
+  end
+
+  def closeClusterGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : Win32cr::Foundation::BOOL
+    C.CloseClusterGroupSet(hGroupSet)
+  end
+
+  def deleteClusterGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+    C.DeleteClusterGroupSet(hGroupSet)
+  end
+
+  def clusterAddGroupToGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    C.ClusterAddGroupToGroupSet(hGroupSet, hGroup)
+  end
+
+  def clusterAddGroupToGroupSetWithDomains(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*, faultDomain : UInt32, updateDomain : UInt32) : UInt32
+    C.ClusterAddGroupToGroupSetWithDomains(hGroupSet, hGroup, faultDomain, updateDomain)
+  end
+
+  def clusterRemoveGroupFromGroupSet(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    C.ClusterRemoveGroupFromGroupSet(hGroup)
+  end
+
+  def clusterGroupSetControl(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    C.ClusterGroupSetControl(hGroupSet, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+  end
+
+  def addClusterGroupDependency(hDependentGroup : Win32cr::Networking::Clustering::HGROUP_*, hProviderGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    C.AddClusterGroupDependency(hDependentGroup, hProviderGroup)
+  end
+
+  def setGroupDependencyExpression(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszDependencyExpression : Win32cr::Foundation::PWSTR) : UInt32
+    C.SetGroupDependencyExpression(hGroup, lpszDependencyExpression)
+  end
+
+  def removeClusterGroupDependency(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDependsOn : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    C.RemoveClusterGroupDependency(hGroup, hDependsOn)
+  end
+
+  def addClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+    C.AddClusterGroupSetDependency(hDependentGroupSet, hProviderGroupSet)
+  end
+
+  def setClusterGroupSetDependencyExpression(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, lpszDependencyExprssion : Win32cr::Foundation::PWSTR) : UInt32
+    C.SetClusterGroupSetDependencyExpression(hGroupSet, lpszDependencyExprssion)
+  end
+
+  def removeClusterGroupSetDependency(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+    C.RemoveClusterGroupSetDependency(hGroupSet, hDependsOn)
+  end
+
+  def addClusterGroupToGroupSetDependency(hDependentGroup : Win32cr::Networking::Clustering::HGROUP_*, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+    C.AddClusterGroupToGroupSetDependency(hDependentGroup, hProviderGroupSet)
+  end
+
+  def removeClusterGroupToGroupSetDependency(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+    C.RemoveClusterGroupToGroupSetDependency(hGroup, hDependsOn)
+  end
+
+  def clusterGroupSetOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*) : Win32cr::Networking::Clustering::HGROUPSETENUM_*
+    C.ClusterGroupSetOpenEnum(hCluster)
+  end
+
+  def clusterGroupSetGetEnumCount(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM_*) : UInt32
+    C.ClusterGroupSetGetEnumCount(hGroupSetEnum)
+  end
+
+  def clusterGroupSetEnum(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM_*, dwIndex : UInt32, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    C.ClusterGroupSetEnum(hGroupSetEnum, dwIndex, lpszName, lpcchName)
+  end
+
+  def clusterGroupSetCloseEnum(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM_*) : UInt32
+    C.ClusterGroupSetCloseEnum(hGroupSetEnum)
+  end
+
+  def addCrossClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, lpRemoteClusterName : Win32cr::Foundation::PWSTR, lpRemoteGroupSetName : Win32cr::Foundation::PWSTR) : UInt32
+    C.AddCrossClusterGroupSetDependency(hDependentGroupSet, lpRemoteClusterName, lpRemoteGroupSetName)
+  end
+
+  def removeCrossClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, lpRemoteClusterName : Win32cr::Foundation::PWSTR, lpRemoteGroupSetName : Win32cr::Foundation::PWSTR) : UInt32
+    C.RemoveCrossClusterGroupSetDependency(hDependentGroupSet, lpRemoteClusterName, lpRemoteGroupSetName)
+  end
+
+  def createClusterAvailabilitySet(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpAvailabilitySetName : Win32cr::Foundation::PWSTR, pAvailabilitySetConfig : Win32cr::Networking::Clustering::CLUSTER_AVAILABILITY_SET_CONFIG*) : Win32cr::Networking::Clustering::HGROUPSET_*
+    C.CreateClusterAvailabilitySet(hCluster, lpAvailabilitySetName, pAvailabilitySetConfig)
+  end
+
+  def clusterNodeReplacement(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeNameCurrent : Win32cr::Foundation::PWSTR, lpszNodeNameNew : Win32cr::Foundation::PWSTR) : UInt32
+    C.ClusterNodeReplacement(hCluster, lpszNodeNameCurrent, lpszNodeNameNew)
+  end
+
+  def clusterCreateAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR, ruleType : Win32cr::Networking::Clustering::CLUS_AFFINITY_RULE_TYPE) : UInt32
+    C.ClusterCreateAffinityRule(hCluster, ruleName, ruleType)
+  end
+
+  def clusterRemoveAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR) : UInt32
+    C.ClusterRemoveAffinityRule(hCluster, ruleName)
+  end
+
+  def clusterAddGroupToAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    C.ClusterAddGroupToAffinityRule(hCluster, ruleName, hGroup)
+  end
+
+  def clusterRemoveGroupFromAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    C.ClusterRemoveGroupFromAffinityRule(hCluster, ruleName, hGroup)
+  end
+
+  def clusterAffinityRuleControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, affinityRuleName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    C.ClusterAffinityRuleControl(hCluster, affinityRuleName, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+  end
+
+  def openClusterNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNODE_*
+    C.OpenClusterNode(hCluster, lpszNodeName)
+  end
+
+  def openClusterNodeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNODE_*
+    C.OpenClusterNodeEx(hCluster, lpszNodeName, dwDesiredAccess, lpdwGrantedAccess)
+  end
+
+  def openClusterNodeById(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, nodeId : UInt32) : Win32cr::Networking::Clustering::HNODE_*
+    C.OpenClusterNodeById(hCluster, nodeId)
+  end
+
+  def closeClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : Win32cr::Foundation::BOOL
+    C.CloseClusterNode(hNode)
+  end
+
+  def getClusterNodeState(hNode : Win32cr::Networking::Clustering::HNODE_*) : Win32cr::Networking::Clustering::CLUSTER_NODE_STATE
+    C.GetClusterNodeState(hNode)
+  end
+
+  def getClusterNodeId(hNode : Win32cr::Networking::Clustering::HNODE_*, lpszNodeId : UInt16*, lpcchName : UInt32*) : UInt32
+    C.GetClusterNodeId(hNode, lpszNodeId, lpcchName)
+  end
+
+  def getClusterFromNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    C.GetClusterFromNode(hNode)
+  end
+
+  def pauseClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    C.PauseClusterNode(hNode)
+  end
+
+  def resumeClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    C.ResumeClusterNode(hNode)
+  end
+
+  def evictClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    C.EvictClusterNode(hNode)
+  end
+
+  def clusterNetInterfaceOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, lpszNetworkName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETINTERFACEENUM_*
+    C.ClusterNetInterfaceOpenEnum(hCluster, lpszNodeName, lpszNetworkName)
+  end
+
+  def clusterNetInterfaceEnum(hNetInterfaceEnum : Win32cr::Networking::Clustering::HNETINTERFACEENUM_*, dwIndex : UInt32, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    C.ClusterNetInterfaceEnum(hNetInterfaceEnum, dwIndex, lpszName, lpcchName)
+  end
+
+  def clusterNetInterfaceCloseEnum(hNetInterfaceEnum : Win32cr::Networking::Clustering::HNETINTERFACEENUM_*) : UInt32
+    C.ClusterNetInterfaceCloseEnum(hNetInterfaceEnum)
+  end
+
+  def clusterNodeOpenEnum(hNode : Win32cr::Networking::Clustering::HNODE_*, dwType : UInt32) : Win32cr::Networking::Clustering::HNODEENUM_*
+    C.ClusterNodeOpenEnum(hNode, dwType)
+  end
+
+  def clusterNodeOpenEnumEx(hNode : Win32cr::Networking::Clustering::HNODE_*, dwType : UInt32, pOptions : Void*) : Win32cr::Networking::Clustering::HNODEENUMEX_*
+    C.ClusterNodeOpenEnumEx(hNode, dwType, pOptions)
+  end
+
+  def clusterNodeGetEnumCountEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX_*) : UInt32
+    C.ClusterNodeGetEnumCountEx(hNodeEnum)
+  end
+
+  def clusterNodeEnumEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+    C.ClusterNodeEnumEx(hNodeEnum, dwIndex, pItem, cbItem)
+  end
+
+  def clusterNodeCloseEnumEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX_*) : UInt32
+    C.ClusterNodeCloseEnumEx(hNodeEnum)
+  end
+
+  def clusterNodeGetEnumCount(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM_*) : UInt32
+    C.ClusterNodeGetEnumCount(hNodeEnum)
+  end
+
+  def clusterNodeCloseEnum(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM_*) : UInt32
+    C.ClusterNodeCloseEnum(hNodeEnum)
+  end
+
+  def clusterNodeEnum(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    C.ClusterNodeEnum(hNodeEnum, dwIndex, lpdwType, lpszName, lpcchName)
+  end
+
+  def evictClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE_*, dwTimeOut : UInt32, phrCleanupStatus : Win32cr::Foundation::HRESULT*) : UInt32
+    C.EvictClusterNodeEx(hNode, dwTimeOut, phrCleanupStatus)
+  end
+
+  def getClusterResourceTypeKey(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszTypeName : Win32cr::Foundation::PWSTR, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    C.GetClusterResourceTypeKey(hCluster, lpszTypeName, samDesired)
+  end
+
+  def createClusterGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUP_*
+    C.CreateClusterGroup(hCluster, lpszGroupName)
+  end
+
+  def openClusterGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUP_*
+    C.OpenClusterGroup(hCluster, lpszGroupName)
+  end
+
+  def openClusterGroupEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HGROUP_*
+    C.OpenClusterGroupEx(hCluster, lpszGroupName, dwDesiredAccess, lpdwGrantedAccess)
+  end
+
+  def pauseClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE_*, bDrainNode : Win32cr::Foundation::BOOL, dwPauseFlags : UInt32, hNodeDrainTarget : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    C.PauseClusterNodeEx(hNode, bDrainNode, dwPauseFlags, hNodeDrainTarget)
+  end
+
+  def resumeClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE_*, eResumeFailbackType : Win32cr::Networking::Clustering::CLUSTER_NODE_RESUME_FAILBACK_TYPE, dwResumeFlagsReserved : UInt32) : UInt32
+    C.ResumeClusterNodeEx(hNode, eResumeFailbackType, dwResumeFlagsReserved)
+  end
+
+  def createClusterGroupEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR, pGroupInfo : Win32cr::Networking::Clustering::CLUSTER_CREATE_GROUP_INFO*) : Win32cr::Networking::Clustering::HGROUP_*
+    C.CreateClusterGroupEx(hCluster, lpszGroupName, pGroupInfo)
+  end
+
+  def clusterGroupOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszProperties : Win32cr::Foundation::PWSTR, cbProperties : UInt32, lpszRoProperties : Win32cr::Foundation::PWSTR, cbRoProperties : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HGROUPENUMEX_*
+    C.ClusterGroupOpenEnumEx(hCluster, lpszProperties, cbProperties, lpszRoProperties, cbRoProperties, dwFlags)
+  end
+
+  def clusterGroupGetEnumCountEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX_*) : UInt32
+    C.ClusterGroupGetEnumCountEx(hGroupEnumEx)
+  end
+
+  def clusterGroupEnumEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_GROUP_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+    C.ClusterGroupEnumEx(hGroupEnumEx, dwIndex, pItem, cbItem)
+  end
+
+  def clusterGroupCloseEnumEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX_*) : UInt32
+    C.ClusterGroupCloseEnumEx(hGroupEnumEx)
+  end
+
+  def clusterResourceOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszProperties : Win32cr::Foundation::PWSTR, cbProperties : UInt32, lpszRoProperties : Win32cr::Foundation::PWSTR, cbRoProperties : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HRESENUMEX_*
+    C.ClusterResourceOpenEnumEx(hCluster, lpszProperties, cbProperties, lpszRoProperties, cbRoProperties, dwFlags)
+  end
+
+  def clusterResourceGetEnumCountEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX_*) : UInt32
+    C.ClusterResourceGetEnumCountEx(hResourceEnumEx)
+  end
+
+  def clusterResourceEnumEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+    C.ClusterResourceEnumEx(hResourceEnumEx, dwIndex, pItem, cbItem)
+  end
+
+  def clusterResourceCloseEnumEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX_*) : UInt32
+    C.ClusterResourceCloseEnumEx(hResourceEnumEx)
+  end
+
+  def onlineClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    C.OnlineClusterGroupEx(hGroup, hDestinationNode, dwOnlineFlags, lpInBuffer, cbInBufferSize)
+  end
+
+  def offlineClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP_*, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    C.OfflineClusterGroupEx(hGroup, dwOfflineFlags, lpInBuffer, cbInBufferSize)
+  end
+
+  def onlineClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    C.OnlineClusterResourceEx(hResource, dwOnlineFlags, lpInBuffer, cbInBufferSize)
+  end
+
+  def offlineClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    C.OfflineClusterResourceEx(hResource, dwOfflineFlags, lpInBuffer, cbInBufferSize)
+  end
+
+  def moveClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*, dwMoveFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    C.MoveClusterGroupEx(hGroup, hDestinationNode, dwMoveFlags, lpInBuffer, cbInBufferSize)
+  end
+
+  def cancelClusterGroupOperation(hGroup : Win32cr::Networking::Clustering::HGROUP_*, dwCancelFlags_RESERVED : UInt32) : UInt32
+    C.CancelClusterGroupOperation(hGroup, dwCancelFlags_RESERVED)
+  end
+
+  def restartClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwFlags : UInt32) : UInt32
+    C.RestartClusterResource(hResource, dwFlags)
+  end
+
+  def closeClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : Win32cr::Foundation::BOOL
+    C.CloseClusterGroup(hGroup)
+  end
+
+  def getClusterFromGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    C.GetClusterFromGroup(hGroup)
+  end
+
+  def getClusterGroupState(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszNodeName : UInt16*, lpcchNodeName : UInt32*) : Win32cr::Networking::Clustering::CLUSTER_GROUP_STATE
+    C.GetClusterGroupState(hGroup, lpszNodeName, lpcchNodeName)
+  end
+
+  def setClusterGroupName(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszGroupName : Win32cr::Foundation::PWSTR) : UInt32
+    C.SetClusterGroupName(hGroup, lpszGroupName)
+  end
+
+  def setClusterGroupNodeList(hGroup : Win32cr::Networking::Clustering::HGROUP_*, node_count : UInt32, node_list : Win32cr::Networking::Clustering::HNODE_**) : UInt32
+    C.SetClusterGroupNodeList(hGroup, node_count, node_list)
+  end
+
+  def onlineClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    C.OnlineClusterGroup(hGroup, hDestinationNode)
+  end
+
+  def moveClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    C.MoveClusterGroup(hGroup, hDestinationNode)
+  end
+
+  def offlineClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    C.OfflineClusterGroup(hGroup)
+  end
+
+  def deleteClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    C.DeleteClusterGroup(hGroup)
+  end
+
+  def destroyClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    C.DestroyClusterGroup(hGroup)
+  end
+
+  def clusterGroupOpenEnum(hGroup : Win32cr::Networking::Clustering::HGROUP_*, dwType : UInt32) : Win32cr::Networking::Clustering::HGROUPENUM_*
+    C.ClusterGroupOpenEnum(hGroup, dwType)
+  end
+
+  def clusterGroupGetEnumCount(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM_*) : UInt32
+    C.ClusterGroupGetEnumCount(hGroupEnum)
+  end
+
+  def clusterGroupEnum(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszResourceName : UInt16*, lpcchName : UInt32*) : UInt32
+    C.ClusterGroupEnum(hGroupEnum, dwIndex, lpdwType, lpszResourceName, lpcchName)
+  end
+
+  def clusterGroupCloseEnum(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM_*) : UInt32
+    C.ClusterGroupCloseEnum(hGroupEnum)
+  end
+
+  def createClusterResource(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+    C.CreateClusterResource(hGroup, lpszResourceName, lpszResourceType, dwFlags)
+  end
+
+  def openClusterResource(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE_*
+    C.OpenClusterResource(hCluster, lpszResourceName)
+  end
+
+  def openClusterResourceEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HRESOURCE_*
+    C.OpenClusterResourceEx(hCluster, lpszResourceName, dwDesiredAccess, lpdwGrantedAccess)
+  end
+
+  def closeClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+    C.CloseClusterResource(hResource)
+  end
+
+  def getClusterFromResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    C.GetClusterFromResource(hResource)
+  end
+
+  def deleteClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    C.DeleteClusterResource(hResource)
+  end
+
+  def getClusterResourceState(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszNodeName : UInt16*, lpcchNodeName : UInt32*, lpszGroupName : UInt16*, lpcchGroupName : UInt32*) : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE
+    C.GetClusterResourceState(hResource, lpszNodeName, lpcchNodeName, lpszGroupName, lpcchGroupName)
+  end
+
+  def setClusterResourceName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResourceName : Win32cr::Foundation::PWSTR) : UInt32
+    C.SetClusterResourceName(hResource, lpszResourceName)
+  end
+
+  def failClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    C.FailClusterResource(hResource)
+  end
+
+  def onlineClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    C.OnlineClusterResource(hResource)
+  end
+
+  def offlineClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    C.OfflineClusterResource(hResource)
+  end
+
+  def changeClusterResourceGroup(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    C.ChangeClusterResourceGroup(hResource, hGroup)
+  end
+
+  def changeClusterResourceGroupEx(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*, flags : UInt64) : UInt32
+    C.ChangeClusterResourceGroupEx(hResource, hGroup, flags)
+  end
+
+  def addClusterResourceNode(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    C.AddClusterResourceNode(hResource, hNode)
+  end
+
+  def removeClusterResourceNode(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    C.RemoveClusterResourceNode(hResource, hNode)
+  end
+
+  def addClusterResourceDependency(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    C.AddClusterResourceDependency(hResource, hDependsOn)
+  end
+
+  def removeClusterResourceDependency(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    C.RemoveClusterResourceDependency(hResource, hDependsOn)
+  end
+
+  def setClusterResourceDependencyExpression(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszDependencyExpression : Win32cr::Foundation::PWSTR) : UInt32
+    C.SetClusterResourceDependencyExpression(hResource, lpszDependencyExpression)
+  end
+
+  def getClusterResourceDependencyExpression(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszDependencyExpression : UInt16*, lpcchDependencyExpression : UInt32*) : UInt32
+    C.GetClusterResourceDependencyExpression(hResource, lpszDependencyExpression, lpcchDependencyExpression)
+  end
+
+  def addResourceToClusterSharedVolumes(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    C.AddResourceToClusterSharedVolumes(hResource)
+  end
+
+  def removeResourceFromClusterSharedVolumes(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    C.RemoveResourceFromClusterSharedVolumes(hResource)
+  end
+
+  def isFileOnClusterSharedVolume(lpszPathName : Win32cr::Foundation::PWSTR, pbFileIsOnSharedVolume : Win32cr::Foundation::BOOL*) : UInt32
+    C.IsFileOnClusterSharedVolume(lpszPathName, pbFileIsOnSharedVolume)
+  end
+
+  def clusterSharedVolumeSetSnapshotState(guidSnapshotSet : LibC::GUID, lpszVolumeName : Win32cr::Foundation::PWSTR, state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE) : UInt32
+    C.ClusterSharedVolumeSetSnapshotState(guidSnapshotSet, lpszVolumeName, state)
+  end
+
+  def canResourceBeDependent(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hResourceDependent : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+    C.CanResourceBeDependent(hResource, hResourceDependent)
+  end
+
+  def clusterResourceControl(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    C.ClusterResourceControl(hResource, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+  end
+
+  def clusterResourceControlAsUser(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    C.ClusterResourceControlAsUser(hResource, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+  end
+
+  def clusterResourceTypeControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    C.ClusterResourceTypeControl(hCluster, lpszResourceTypeName, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+  end
+
+  def clusterResourceTypeControlAsUser(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    C.ClusterResourceTypeControlAsUser(hCluster, lpszResourceTypeName, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+  end
+
+  def clusterGroupControl(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    C.ClusterGroupControl(hGroup, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+  end
+
+  def clusterNodeControl(hNode : Win32cr::Networking::Clustering::HNODE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    C.ClusterNodeControl(hNode, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+  end
+
+  def getClusterResourceNetworkName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpBuffer : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetClusterResourceNetworkName(hResource, lpBuffer, nSize)
+  end
+
+  def clusterResourceOpenEnum(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwType : UInt32) : Win32cr::Networking::Clustering::HRESENUM_*
+    C.ClusterResourceOpenEnum(hResource, dwType)
+  end
+
+  def clusterResourceGetEnumCount(hResEnum : Win32cr::Networking::Clustering::HRESENUM_*) : UInt32
+    C.ClusterResourceGetEnumCount(hResEnum)
+  end
+
+  def clusterResourceEnum(hResEnum : Win32cr::Networking::Clustering::HRESENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    C.ClusterResourceEnum(hResEnum, dwIndex, lpdwType, lpszName, lpcchName)
+  end
+
+  def clusterResourceCloseEnum(hResEnum : Win32cr::Networking::Clustering::HRESENUM_*) : UInt32
+    C.ClusterResourceCloseEnum(hResEnum)
+  end
+
+  def createClusterResourceType(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, lpszDisplayName : Win32cr::Foundation::PWSTR, lpszResourceTypeDll : Win32cr::Foundation::PWSTR, dwLooksAlivePollInterval : UInt32, dwIsAlivePollInterval : UInt32) : UInt32
+    C.CreateClusterResourceType(hCluster, lpszResourceTypeName, lpszDisplayName, lpszResourceTypeDll, dwLooksAlivePollInterval, dwIsAlivePollInterval)
+  end
+
+  def deleteClusterResourceType(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR) : UInt32
+    C.DeleteClusterResourceType(hCluster, lpszResourceTypeName)
+  end
+
+  def clusterResourceTypeOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, dwType : UInt32) : Win32cr::Networking::Clustering::HRESTYPEENUM_*
+    C.ClusterResourceTypeOpenEnum(hCluster, lpszResourceTypeName, dwType)
+  end
+
+  def clusterResourceTypeGetEnumCount(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM_*) : UInt32
+    C.ClusterResourceTypeGetEnumCount(hResTypeEnum)
+  end
+
+  def clusterResourceTypeEnum(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    C.ClusterResourceTypeEnum(hResTypeEnum, dwIndex, lpdwType, lpszName, lpcchName)
+  end
+
+  def clusterResourceTypeCloseEnum(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM_*) : UInt32
+    C.ClusterResourceTypeCloseEnum(hResTypeEnum)
+  end
+
+  def openClusterNetwork(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNetworkName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETWORK_*
+    C.OpenClusterNetwork(hCluster, lpszNetworkName)
+  end
+
+  def openClusterNetworkEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNetworkName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNETWORK_*
+    C.OpenClusterNetworkEx(hCluster, lpszNetworkName, dwDesiredAccess, lpdwGrantedAccess)
+  end
+
+  def closeClusterNetwork(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*) : Win32cr::Foundation::BOOL
+    C.CloseClusterNetwork(hNetwork)
+  end
+
+  def getClusterFromNetwork(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    C.GetClusterFromNetwork(hNetwork)
+  end
+
+  def clusterNetworkOpenEnum(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, dwType : UInt32) : Win32cr::Networking::Clustering::HNETWORKENUM_*
+    C.ClusterNetworkOpenEnum(hNetwork, dwType)
+  end
+
+  def clusterNetworkGetEnumCount(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM_*) : UInt32
+    C.ClusterNetworkGetEnumCount(hNetworkEnum)
+  end
+
+  def clusterNetworkEnum(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    C.ClusterNetworkEnum(hNetworkEnum, dwIndex, lpdwType, lpszName, lpcchName)
+  end
+
+  def clusterNetworkCloseEnum(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM_*) : UInt32
+    C.ClusterNetworkCloseEnum(hNetworkEnum)
+  end
+
+  def getClusterNetworkState(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*) : Win32cr::Networking::Clustering::CLUSTER_NETWORK_STATE
+    C.GetClusterNetworkState(hNetwork)
+  end
+
+  def setClusterNetworkName(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, lpszName : Win32cr::Foundation::PWSTR) : UInt32
+    C.SetClusterNetworkName(hNetwork, lpszName)
+  end
+
+  def getClusterNetworkId(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, lpszNetworkId : UInt16*, lpcchName : UInt32*) : UInt32
+    C.GetClusterNetworkId(hNetwork, lpszNetworkId, lpcchName)
+  end
+
+  def clusterNetworkControl(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    C.ClusterNetworkControl(hNetwork, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+  end
+
+  def openClusterNetInterface(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszInterfaceName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETINTERFACE_*
+    C.OpenClusterNetInterface(hCluster, lpszInterfaceName)
+  end
+
+  def openClusterNetInterfaceEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszInterfaceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNETINTERFACE_*
+    C.OpenClusterNetInterfaceEx(hCluster, lpszInterfaceName, dwDesiredAccess, lpdwGrantedAccess)
+  end
+
+  def getClusterNetInterface(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, lpszNetworkName : Win32cr::Foundation::PWSTR, lpszInterfaceName : UInt16*, lpcchInterfaceName : UInt32*) : UInt32
+    C.GetClusterNetInterface(hCluster, lpszNodeName, lpszNetworkName, lpszInterfaceName, lpcchInterfaceName)
+  end
+
+  def closeClusterNetInterface(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*) : Win32cr::Foundation::BOOL
+    C.CloseClusterNetInterface(hNetInterface)
+  end
+
+  def getClusterFromNetInterface(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    C.GetClusterFromNetInterface(hNetInterface)
+  end
+
+  def getClusterNetInterfaceState(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*) : Win32cr::Networking::Clustering::CLUSTER_NETINTERFACE_STATE
+    C.GetClusterNetInterfaceState(hNetInterface)
+  end
+
+  def clusterNetInterfaceControl(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    C.ClusterNetInterfaceControl(hNetInterface, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+  end
+
+  def getClusterKey(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    C.GetClusterKey(hCluster, samDesired)
+  end
+
+  def getClusterGroupKey(hGroup : Win32cr::Networking::Clustering::HGROUP_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    C.GetClusterGroupKey(hGroup, samDesired)
+  end
+
+  def getClusterResourceKey(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    C.GetClusterResourceKey(hResource, samDesired)
+  end
+
+  def getClusterNodeKey(hNode : Win32cr::Networking::Clustering::HNODE_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    C.GetClusterNodeKey(hNode, samDesired)
+  end
+
+  def getClusterNetworkKey(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    C.GetClusterNetworkKey(hNetwork, samDesired)
+  end
+
+  def getClusterNetInterfaceKey(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    C.GetClusterNetInterfaceKey(hNetInterface, samDesired)
+  end
+
+  def clusterRegCreateKey(hKey : Win32cr::System::Registry::HKEY, lpszSubKey : Win32cr::Foundation::PWSTR, dwOptions : UInt32, samDesired : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : UInt32*) : Int32
+    C.ClusterRegCreateKey(hKey, lpszSubKey, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition)
+  end
+
+  def clusterRegOpenKey(hKey : Win32cr::System::Registry::HKEY, lpszSubKey : Win32cr::Foundation::PWSTR, samDesired : UInt32, phkResult : Win32cr::System::Registry::HKEY*) : Int32
+    C.ClusterRegOpenKey(hKey, lpszSubKey, samDesired, phkResult)
+  end
+
+  def clusterRegDeleteKey(hKey : Win32cr::System::Registry::HKEY, lpszSubKey : Win32cr::Foundation::PWSTR) : Int32
+    C.ClusterRegDeleteKey(hKey, lpszSubKey)
+  end
+
+  def clusterRegCloseKey(hKey : Win32cr::System::Registry::HKEY) : Int32
+    C.ClusterRegCloseKey(hKey)
+  end
+
+  def clusterRegEnumKey(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpszName : UInt16*, lpcchName : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Int32
+    C.ClusterRegEnumKey(hKey, dwIndex, lpszName, lpcchName, lpftLastWriteTime)
+  end
+
+  def clusterRegSetValue(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR, dwType : UInt32, lpData : UInt8*, cbData : UInt32) : UInt32
+    C.ClusterRegSetValue(hKey, lpszValueName, dwType, lpData, cbData)
+  end
+
+  def clusterRegDeleteValue(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR) : UInt32
+    C.ClusterRegDeleteValue(hKey, lpszValueName)
+  end
+
+  def clusterRegQueryValue(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR, lpdwValueType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : Int32
+    C.ClusterRegQueryValue(hKey, lpszValueName, lpdwValueType, lpData, lpcbData)
+  end
+
+  def clusterRegEnumValue(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpszValueName : UInt16*, lpcchValueName : UInt32*, lpdwType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : UInt32
+    C.ClusterRegEnumValue(hKey, dwIndex, lpszValueName, lpcchValueName, lpdwType, lpData, lpcbData)
+  end
+
+  def clusterRegQueryInfoKey(hKey : Win32cr::System::Registry::HKEY, lpcSubKeys : UInt32*, lpcchMaxSubKeyLen : UInt32*, lpcValues : UInt32*, lpcchMaxValueNameLen : UInt32*, lpcbMaxValueLen : UInt32*, lpcbSecurityDescriptor : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Int32
+    C.ClusterRegQueryInfoKey(hKey, lpcSubKeys, lpcchMaxSubKeyLen, lpcValues, lpcchMaxValueNameLen, lpcbMaxValueLen, lpcbSecurityDescriptor, lpftLastWriteTime)
+  end
+
+  def clusterRegGetKeySecurity(hKey : Win32cr::System::Registry::HKEY, requested_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor : UInt32*) : Int32
+    C.ClusterRegGetKeySecurity(hKey, requested_information, pSecurityDescriptor, lpcbSecurityDescriptor)
+  end
+
+  def clusterRegSetKeySecurity(hKey : Win32cr::System::Registry::HKEY, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Int32
+    C.ClusterRegSetKeySecurity(hKey, security_information, pSecurityDescriptor)
+  end
+
+  def clusterRegSyncDatabase(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, flags : UInt32) : Int32
+    C.ClusterRegSyncDatabase(hCluster, flags)
+  end
+
+  def clusterRegCreateBatch(hKey : Win32cr::System::Registry::HKEY, pHREGBATCH : Win32cr::Networking::Clustering::HREGBATCH_**) : Int32
+    C.ClusterRegCreateBatch(hKey, pHREGBATCH)
+  end
+
+  def clusterRegBatchAddCommand(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH_*, dwCommand : Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND, wzName : Win32cr::Foundation::PWSTR, dwOptions : UInt32, lpData : Void*, cbData : UInt32) : Int32
+    C.ClusterRegBatchAddCommand(hRegBatch, dwCommand, wzName, dwOptions, lpData, cbData)
+  end
+
+  def clusterRegCloseBatch(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH_*, bCommit : Win32cr::Foundation::BOOL, failedCommandNumber : Int32*) : Int32
+    C.ClusterRegCloseBatch(hRegBatch, bCommit, failedCommandNumber)
+  end
+
+  def clusterRegCloseBatchEx(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH_*, flags : UInt32, failedCommandNumber : Int32*) : Int32
+    C.ClusterRegCloseBatchEx(hRegBatch, flags, failedCommandNumber)
+  end
+
+  def clusterRegBatchReadCommand(hBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*, pBatchCommand : Win32cr::Networking::Clustering::CLUSTER_BATCH_COMMAND*) : Int32
+    C.ClusterRegBatchReadCommand(hBatchNotification, pBatchCommand)
+  end
+
+  def clusterRegBatchCloseNotification(hBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*) : Int32
+    C.ClusterRegBatchCloseNotification(hBatchNotification)
+  end
+
+  def clusterRegCreateBatchNotifyPort(hKey : Win32cr::System::Registry::HKEY, phBatchNotifyPort : Win32cr::Networking::Clustering::HREGBATCHPORT_**) : Int32
+    C.ClusterRegCreateBatchNotifyPort(hKey, phBatchNotifyPort)
+  end
+
+  def clusterRegCloseBatchNotifyPort(hBatchNotifyPort : Win32cr::Networking::Clustering::HREGBATCHPORT_*) : Int32
+    C.ClusterRegCloseBatchNotifyPort(hBatchNotifyPort)
+  end
+
+  def clusterRegGetBatchNotification(hBatchNotify : Win32cr::Networking::Clustering::HREGBATCHPORT_*, phBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_**) : Int32
+    C.ClusterRegGetBatchNotification(hBatchNotify, phBatchNotification)
+  end
+
+  def clusterRegCreateReadBatch(hKey : Win32cr::System::Registry::HKEY, phRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_**) : Int32
+    C.ClusterRegCreateReadBatch(hKey, phRegReadBatch)
+  end
+
+  def clusterRegReadBatchAddCommand(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_*, wzSubkeyName : Win32cr::Foundation::PWSTR, wzValueName : Win32cr::Foundation::PWSTR) : Int32
+    C.ClusterRegReadBatchAddCommand(hRegReadBatch, wzSubkeyName, wzValueName)
+  end
+
+  def clusterRegCloseReadBatch(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_*, phRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**) : Int32
+    C.ClusterRegCloseReadBatch(hRegReadBatch, phRegReadBatchReply)
+  end
+
+  def clusterRegCloseReadBatchEx(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_*, flags : UInt32, phRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**) : Int32
+    C.ClusterRegCloseReadBatchEx(hRegReadBatch, flags, phRegReadBatchReply)
+  end
+
+  def clusterRegReadBatchReplyNextCommand(hRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*, pBatchCommand : Win32cr::Networking::Clustering::CLUSTER_READ_BATCH_COMMAND*) : Int32
+    C.ClusterRegReadBatchReplyNextCommand(hRegReadBatchReply, pBatchCommand)
+  end
+
+  def clusterRegCloseReadBatchReply(hRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*) : Int32
+    C.ClusterRegCloseReadBatchReply(hRegReadBatchReply)
+  end
+
+  def clusterSetAccountAccess(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, szAccountSID : Win32cr::Foundation::PWSTR, dwAccess : UInt32, dwControlType : UInt32) : UInt32
+    C.ClusterSetAccountAccess(hCluster, szAccountSID, dwAccess, dwControlType)
+  end
+
+  def createCluster(pConfig : Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    C.CreateCluster(pConfig, pfnProgressCallback, pvCallbackArg)
+  end
+
+  def createClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pConfig : Win32cr::Networking::Clustering::CREATE_CLUSTER_NAME_ACCOUNT*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
+    C.CreateClusterNameAccount(hCluster, pConfig, pfnProgressCallback, pvCallbackArg)
+  end
+
+  def removeClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, bDeleteComputerObjects : Win32cr::Foundation::BOOL) : UInt32
+    C.RemoveClusterNameAccount(hCluster, bDeleteComputerObjects)
+  end
+
+  def determineCNOResTypeFromNodelist(cNodes : UInt32, ppszNodeNames : Win32cr::Foundation::PWSTR*, pCNOResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE*) : UInt32
+    C.DetermineCNOResTypeFromNodelist(cNodes, ppszNodeNames, pCNOResType)
+  end
+
+  def determineCNOResTypeFromCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pCNOResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE*) : UInt32
+    C.DetermineCNOResTypeFromCluster(hCluster, pCNOResType)
+  end
+
+  def determineClusterCloudTypeFromNodelist(cNodes : UInt32, ppszNodeNames : Win32cr::Foundation::PWSTR*, pCloudType : Win32cr::Networking::Clustering::CLUSTER_CLOUD_TYPE*) : UInt32
+    C.DetermineClusterCloudTypeFromNodelist(cNodes, ppszNodeNames, pCloudType)
+  end
+
+  def determineClusterCloudTypeFromCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pCloudType : Win32cr::Networking::Clustering::CLUSTER_CLOUD_TYPE*) : UInt32
+    C.DetermineClusterCloudTypeFromCluster(hCluster, pCloudType)
+  end
+
+  def getNodeCloudTypeDW(ppszNodeName : Win32cr::Foundation::PWSTR, node_cloud_type : UInt32*) : UInt32
+    C.GetNodeCloudTypeDW(ppszNodeName, node_cloud_type)
+  end
+
+  def registerClusterResourceTypeNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, flags : Int64, resTypeName : Win32cr::Foundation::PWSTR, dwNotifyKey : LibC::UIntPtrT) : UInt32
+    C.RegisterClusterResourceTypeNotifyV2(hChange, hCluster, flags, resTypeName, dwNotifyKey)
+  end
+
+  def addClusterNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HNODE_*
+    C.AddClusterNode(hCluster, lpszNodeName, pfnProgressCallback, pvCallbackArg)
+  end
+
+  def addClusterStorageNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*, lpszClusterStorageNodeDescription : Win32cr::Foundation::PWSTR, lpszClusterStorageNodeLocation : Win32cr::Foundation::PWSTR) : UInt32
+    C.AddClusterStorageNode(hCluster, lpszNodeName, pfnProgressCallback, pvCallbackArg, lpszClusterStorageNodeDescription, lpszClusterStorageNodeLocation)
+  end
+
+  def addClusterNodeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HNODE_*
+    C.AddClusterNodeEx(hCluster, lpszNodeName, dwFlags, pfnProgressCallback, pvCallbackArg)
+  end
+
+  def removeClusterStorageNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszClusterStorageEnclosureName : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, dwFlags : UInt32) : UInt32
+    C.RemoveClusterStorageNode(hCluster, lpszClusterStorageEnclosureName, dwTimeout, dwFlags)
+  end
+
+  def destroyCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*, fdeleteVirtualComputerObjects : Win32cr::Foundation::BOOL) : UInt32
+    C.DestroyCluster(hCluster, pfnProgressCallback, pvCallbackArg, fdeleteVirtualComputerObjects)
+  end
+
+  def initializeClusterHealthFault(clusterHealthFault : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*) : UInt32
+    C.InitializeClusterHealthFault(clusterHealthFault)
+  end
+
+  def initializeClusterHealthFaultArray(clusterHealthFaultArray : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT_ARRAY*) : UInt32
+    C.InitializeClusterHealthFaultArray(clusterHealthFaultArray)
+  end
+
+  def freeClusterHealthFault(clusterHealthFault : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*) : UInt32
+    C.FreeClusterHealthFault(clusterHealthFault)
+  end
+
+  def freeClusterHealthFaultArray(clusterHealthFaultArray : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT_ARRAY*) : UInt32
+    C.FreeClusterHealthFaultArray(clusterHealthFaultArray)
+  end
+
+  def clusGetClusterHealthFaults(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, objects : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT_ARRAY*, flags : UInt32) : UInt32
+    C.ClusGetClusterHealthFaults(hCluster, objects, flags)
+  end
+
+  def clusRemoveClusterHealthFault(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, id : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+    C.ClusRemoveClusterHealthFault(hCluster, id, flags)
+  end
+
+  def clusAddClusterHealthFault(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, failure : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*, param2 : UInt32) : UInt32
+    C.ClusAddClusterHealthFault(hCluster, failure, param2)
+  end
+
+  def resUtilStartResourceService(pszServiceName : Win32cr::Foundation::PWSTR, phServiceHandle : LibC::IntPtrT*) : UInt32
+    C.ResUtilStartResourceService(pszServiceName, phServiceHandle)
+  end
+
+  def resUtilVerifyResourceService(pszServiceName : Win32cr::Foundation::PWSTR) : UInt32
+    C.ResUtilVerifyResourceService(pszServiceName)
+  end
+
+  def resUtilStopResourceService(pszServiceName : Win32cr::Foundation::PWSTR) : UInt32
+    C.ResUtilStopResourceService(pszServiceName)
+  end
+
+  def resUtilVerifyService(hServiceHandle : Win32cr::Security::SC_HANDLE) : UInt32
+    C.ResUtilVerifyService(hServiceHandle)
+  end
+
+  def resUtilStopService(hServiceHandle : Win32cr::Security::SC_HANDLE) : UInt32
+    C.ResUtilStopService(hServiceHandle)
+  end
+
+  def resUtilCreateDirectoryTree(pszPath : Win32cr::Foundation::PWSTR) : UInt32
+    C.ResUtilCreateDirectoryTree(pszPath)
+  end
+
+  def resUtilIsPathValid(pszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.ResUtilIsPathValid(pszPath)
+  end
+
+  def resUtilEnumProperties(pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pszOutProperties : Win32cr::Foundation::PWSTR, cbOutPropertiesSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    C.ResUtilEnumProperties(pPropertyTable, pszOutProperties, cbOutPropertiesSize, pcbBytesReturned, pcbRequired)
+  end
+
+  def resUtilEnumPrivateProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszOutProperties : Win32cr::Foundation::PWSTR, cbOutPropertiesSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    C.ResUtilEnumPrivateProperties(hkeyClusterKey, pszOutProperties, cbOutPropertiesSize, pcbBytesReturned, pcbRequired)
+  end
+
+  def resUtilGetProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyList : Void*, cbOutPropertyListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    C.ResUtilGetProperties(hkeyClusterKey, pPropertyTable, pOutPropertyList, cbOutPropertyListSize, pcbBytesReturned, pcbRequired)
+  end
+
+  def resUtilGetAllProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyList : Void*, cbOutPropertyListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    C.ResUtilGetAllProperties(hkeyClusterKey, pPropertyTable, pOutPropertyList, cbOutPropertyListSize, pcbBytesReturned, pcbRequired)
+  end
+
+  def resUtilGetPrivateProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pOutPropertyList : Void*, cbOutPropertyListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    C.ResUtilGetPrivateProperties(hkeyClusterKey, pOutPropertyList, cbOutPropertyListSize, pcbBytesReturned, pcbRequired)
+  end
+
+  def resUtilGetPropertySize(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTableItem : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pcbOutPropertyListSize : UInt32*, pnPropertyCount : UInt32*) : UInt32
+    C.ResUtilGetPropertySize(hkeyClusterKey, pPropertyTableItem, pcbOutPropertyListSize, pnPropertyCount)
+  end
+
+  def resUtilGetProperty(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTableItem : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyItem : Void**, pcbOutPropertyItemSize : UInt32*) : UInt32
+    C.ResUtilGetProperty(hkeyClusterKey, pPropertyTableItem, pOutPropertyItem, pcbOutPropertyItemSize)
+  end
+
+  def resUtilVerifyPropertyTable(pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, bAllowUnknownProperties : Win32cr::Foundation::BOOL, pInPropertyList : Void*, cbInPropertyListSize : UInt32, pOutParams : UInt8*) : UInt32
+    C.ResUtilVerifyPropertyTable(pPropertyTable, reserved, bAllowUnknownProperties, pInPropertyList, cbInPropertyListSize, pOutParams)
+  end
+
+  def resUtilSetPropertyTable(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, bAllowUnknownProperties : Win32cr::Foundation::BOOL, pInPropertyList : Void*, cbInPropertyListSize : UInt32, pOutParams : UInt8*) : UInt32
+    C.ResUtilSetPropertyTable(hkeyClusterKey, pPropertyTable, reserved, bAllowUnknownProperties, pInPropertyList, cbInPropertyListSize, pOutParams)
+  end
+
+  def resUtilSetPropertyTableEx(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, bAllowUnknownProperties : Win32cr::Foundation::BOOL, pInPropertyList : Void*, cbInPropertyListSize : UInt32, bForceWrite : Win32cr::Foundation::BOOL, pOutParams : UInt8*) : UInt32
+    C.ResUtilSetPropertyTableEx(hkeyClusterKey, pPropertyTable, reserved, bAllowUnknownProperties, pInPropertyList, cbInPropertyListSize, bForceWrite, pOutParams)
+  end
+
+  def resUtilSetPropertyParameterBlock(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, pInParams : UInt8*, pInPropertyList : Void*, cbInPropertyListSize : UInt32, pOutParams : UInt8*) : UInt32
+    C.ResUtilSetPropertyParameterBlock(hkeyClusterKey, pPropertyTable, reserved, pInParams, pInPropertyList, cbInPropertyListSize, pOutParams)
+  end
+
+  def resUtilSetPropertyParameterBlockEx(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, pInParams : UInt8*, pInPropertyList : Void*, cbInPropertyListSize : UInt32, bForceWrite : Win32cr::Foundation::BOOL, pOutParams : UInt8*) : UInt32
+    C.ResUtilSetPropertyParameterBlockEx(hkeyClusterKey, pPropertyTable, reserved, pInParams, pInPropertyList, cbInPropertyListSize, bForceWrite, pOutParams)
+  end
+
+  def resUtilSetUnknownProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pInPropertyList : Void*, cbInPropertyListSize : UInt32) : UInt32
+    C.ResUtilSetUnknownProperties(hkeyClusterKey, pPropertyTable, pInPropertyList, cbInPropertyListSize)
+  end
+
+  def resUtilGetPropertiesToParameterBlock(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutParams : UInt8*, bCheckForRequiredProperties : Win32cr::Foundation::BOOL, pszNameOfPropInError : Win32cr::Foundation::PWSTR*) : UInt32
+    C.ResUtilGetPropertiesToParameterBlock(hkeyClusterKey, pPropertyTable, pOutParams, bCheckForRequiredProperties, pszNameOfPropInError)
+  end
+
+  def resUtilPropertyListFromParameterBlock(pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyList : Void*, pcbOutPropertyListSize : UInt32*, pInParams : UInt8*, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    C.ResUtilPropertyListFromParameterBlock(pPropertyTable, pOutPropertyList, pcbOutPropertyListSize, pInParams, pcbBytesReturned, pcbRequired)
+  end
+
+  def resUtilDupParameterBlock(pOutParams : UInt8*, pInParams : UInt8*, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*) : UInt32
+    C.ResUtilDupParameterBlock(pOutParams, pInParams, pPropertyTable)
+  end
+
+  def resUtilFreeParameterBlock(pOutParams : UInt8*, pInParams : UInt8*, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*) : Void
+    C.ResUtilFreeParameterBlock(pOutParams, pInParams, pPropertyTable)
+  end
+
+  def resUtilAddUnknownProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyList : Void*, pcbOutPropertyListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    C.ResUtilAddUnknownProperties(hkeyClusterKey, pPropertyTable, pOutPropertyList, pcbOutPropertyListSize, pcbBytesReturned, pcbRequired)
+  end
+
+  def resUtilSetPrivatePropertyList(hkeyClusterKey : Win32cr::System::Registry::HKEY, pInPropertyList : Void*, cbInPropertyListSize : UInt32) : UInt32
+    C.ResUtilSetPrivatePropertyList(hkeyClusterKey, pInPropertyList, cbInPropertyListSize)
+  end
+
+  def resUtilVerifyPrivatePropertyList(pInPropertyList : Void*, cbInPropertyListSize : UInt32) : UInt32
+    C.ResUtilVerifyPrivatePropertyList(pInPropertyList, cbInPropertyListSize)
+  end
+
+  def resUtilDupString(pszInString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.ResUtilDupString(pszInString)
+  end
+
+  def resUtilGetBinaryValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, ppbOutValue : UInt8**, pcbOutValueSize : UInt32*) : UInt32
+    C.ResUtilGetBinaryValue(hkeyClusterKey, pszValueName, ppbOutValue, pcbOutValueSize)
+  end
+
+  def resUtilGetSzValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.ResUtilGetSzValue(hkeyClusterKey, pszValueName)
+  end
+
+  def resUtilGetDwordValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pdwOutValue : UInt32*, dwDefaultValue : UInt32) : UInt32
+    C.ResUtilGetDwordValue(hkeyClusterKey, pszValueName, pdwOutValue, dwDefaultValue)
+  end
+
+  def resUtilGetQwordValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pqwOutValue : UInt64*, qwDefaultValue : UInt64) : UInt32
+    C.ResUtilGetQwordValue(hkeyClusterKey, pszValueName, pqwOutValue, qwDefaultValue)
+  end
+
+  def resUtilSetBinaryValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pbNewValue : UInt8*, cbNewValueSize : UInt32, ppbOutValue : UInt8**, pcbOutValueSize : UInt32*) : UInt32
+    C.ResUtilSetBinaryValue(hkeyClusterKey, pszValueName, pbNewValue, cbNewValueSize, ppbOutValue, pcbOutValueSize)
+  end
+
+  def resUtilSetSzValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pszNewValue : Win32cr::Foundation::PWSTR, ppszOutString : Win32cr::Foundation::PWSTR*) : UInt32
+    C.ResUtilSetSzValue(hkeyClusterKey, pszValueName, pszNewValue, ppszOutString)
+  end
+
+  def resUtilSetExpandSzValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pszNewValue : Win32cr::Foundation::PWSTR, ppszOutString : Win32cr::Foundation::PWSTR*) : UInt32
+    C.ResUtilSetExpandSzValue(hkeyClusterKey, pszValueName, pszNewValue, ppszOutString)
+  end
+
+  def resUtilSetMultiSzValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pszNewValue : Win32cr::Foundation::PWSTR, cbNewValueSize : UInt32, ppszOutValue : Win32cr::Foundation::PWSTR*, pcbOutValueSize : UInt32*) : UInt32
+    C.ResUtilSetMultiSzValue(hkeyClusterKey, pszValueName, pszNewValue, cbNewValueSize, ppszOutValue, pcbOutValueSize)
+  end
+
+  def resUtilSetDwordValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, dwNewValue : UInt32, pdwOutValue : UInt32*) : UInt32
+    C.ResUtilSetDwordValue(hkeyClusterKey, pszValueName, dwNewValue, pdwOutValue)
+  end
+
+  def resUtilSetQwordValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, qwNewValue : UInt64, pqwOutValue : UInt64*) : UInt32
+    C.ResUtilSetQwordValue(hkeyClusterKey, pszValueName, qwNewValue, pqwOutValue)
+  end
+
+  def resUtilSetValueEx(hkeyClusterKey : Win32cr::System::Registry::HKEY, valueName : Win32cr::Foundation::PWSTR, valueType : UInt32, valueData : UInt8*, valueSize : UInt32, flags : UInt32) : UInt32
+    C.ResUtilSetValueEx(hkeyClusterKey, valueName, valueType, valueData, valueSize, flags)
+  end
+
+  def resUtilGetBinaryProperty(ppbOutValue : UInt8**, pcbOutValueSize : UInt32*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_BINARY*, pbOldValue : UInt8*, cbOldValueSize : UInt32, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
+    C.ResUtilGetBinaryProperty(ppbOutValue, pcbOutValueSize, pValueStruct, pbOldValue, cbOldValueSize, ppPropertyList, pcbPropertyListSize)
+  end
+
+  def resUtilGetSzProperty(ppszOutValue : Win32cr::Foundation::PWSTR*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_SZ*, pszOldValue : Win32cr::Foundation::PWSTR, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
+    C.ResUtilGetSzProperty(ppszOutValue, pValueStruct, pszOldValue, ppPropertyList, pcbPropertyListSize)
+  end
+
+  def resUtilGetMultiSzProperty(ppszOutValue : Win32cr::Foundation::PWSTR*, pcbOutValueSize : UInt32*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_SZ*, pszOldValue : Win32cr::Foundation::PWSTR, cbOldValueSize : UInt32, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
+    C.ResUtilGetMultiSzProperty(ppszOutValue, pcbOutValueSize, pValueStruct, pszOldValue, cbOldValueSize, ppPropertyList, pcbPropertyListSize)
+  end
+
+  def resUtilGetDwordProperty(pdwOutValue : UInt32*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_DWORD*, dwOldValue : UInt32, dwMinimum : UInt32, dwMaximum : UInt32, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
+    C.ResUtilGetDwordProperty(pdwOutValue, pValueStruct, dwOldValue, dwMinimum, dwMaximum, ppPropertyList, pcbPropertyListSize)
+  end
+
+  def resUtilGetLongProperty(plOutValue : Int32*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_LONG*, lOldValue : Int32, lMinimum : Int32, lMaximum : Int32, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
+    C.ResUtilGetLongProperty(plOutValue, pValueStruct, lOldValue, lMinimum, lMaximum, ppPropertyList, pcbPropertyListSize)
+  end
+
+  def resUtilGetFileTimeProperty(pftOutValue : Win32cr::Foundation::FILETIME*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_FILETIME*, ftOldValue : Win32cr::Foundation::FILETIME, ftMinimum : Win32cr::Foundation::FILETIME, ftMaximum : Win32cr::Foundation::FILETIME, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
+    C.ResUtilGetFileTimeProperty(pftOutValue, pValueStruct, ftOldValue, ftMinimum, ftMaximum, ppPropertyList, pcbPropertyListSize)
+  end
+
+  def resUtilGetEnvironmentWithNetName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Void*
+    C.ResUtilGetEnvironmentWithNetName(hResource)
+  end
+
+  def resUtilFreeEnvironment(lpEnvironment : Void*) : UInt32
+    C.ResUtilFreeEnvironment(lpEnvironment)
+  end
+
+  def resUtilExpandEnvironmentStrings(pszSrc : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.ResUtilExpandEnvironmentStrings(pszSrc)
+  end
+
+  def resUtilSetResourceServiceEnvironment(pszServiceName : Win32cr::Foundation::PWSTR, hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+    C.ResUtilSetResourceServiceEnvironment(pszServiceName, hResource, pfnLogEvent, hResourceHandle)
+  end
+
+  def resUtilRemoveResourceServiceEnvironment(pszServiceName : Win32cr::Foundation::PWSTR, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+    C.ResUtilRemoveResourceServiceEnvironment(pszServiceName, pfnLogEvent, hResourceHandle)
+  end
+
+  def resUtilSetResourceServiceStartParameters(pszServiceName : Win32cr::Foundation::PWSTR, schSCMHandle : Win32cr::Security::SC_HANDLE, phService : LibC::IntPtrT*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+    C.ResUtilSetResourceServiceStartParameters(pszServiceName, schSCMHandle, phService, pfnLogEvent, hResourceHandle)
+  end
+
+  def resUtilFindSzProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pszPropertyValue : Win32cr::Foundation::PWSTR*) : UInt32
+    C.ResUtilFindSzProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pszPropertyValue)
+  end
+
+  def resUtilFindExpandSzProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pszPropertyValue : Win32cr::Foundation::PWSTR*) : UInt32
+    C.ResUtilFindExpandSzProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pszPropertyValue)
+  end
+
+  def resUtilFindExpandedSzProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pszPropertyValue : Win32cr::Foundation::PWSTR*) : UInt32
+    C.ResUtilFindExpandedSzProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pszPropertyValue)
+  end
+
+  def resUtilFindDwordProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pdwPropertyValue : UInt32*) : UInt32
+    C.ResUtilFindDwordProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pdwPropertyValue)
+  end
+
+  def resUtilFindBinaryProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pbPropertyValue : UInt8**, pcbPropertyValueSize : UInt32*) : UInt32
+    C.ResUtilFindBinaryProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pbPropertyValue, pcbPropertyValueSize)
+  end
+
+  def resUtilFindMultiSzProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pszPropertyValue : Win32cr::Foundation::PWSTR*, pcbPropertyValueSize : UInt32*) : UInt32
+    C.ResUtilFindMultiSzProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pszPropertyValue, pcbPropertyValueSize)
+  end
+
+  def resUtilFindLongProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, plPropertyValue : Int32*) : UInt32
+    C.ResUtilFindLongProperty(pPropertyList, cbPropertyListSize, pszPropertyName, plPropertyValue)
+  end
+
+  def resUtilFindULargeIntegerProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, plPropertyValue : UInt64*) : UInt32
+    C.ResUtilFindULargeIntegerProperty(pPropertyList, cbPropertyListSize, pszPropertyName, plPropertyValue)
+  end
+
+  def resUtilFindFileTimeProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pftPropertyValue : Win32cr::Foundation::FILETIME*) : UInt32
+    C.ResUtilFindFileTimeProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pftPropertyValue)
+  end
+
+  def clusWorkerCreate(lpWorker : Win32cr::Networking::Clustering::CLUS_WORKER*, lpStartAddress : Win32cr::Networking::Clustering::PWORKER_START_ROUTINE, lpParameter : Void*) : UInt32
+    C.ClusWorkerCreate(lpWorker, lpStartAddress, lpParameter)
+  end
+
+  def clusWorkerCheckTerminate(lpWorker : Win32cr::Networking::Clustering::CLUS_WORKER*) : Win32cr::Foundation::BOOL
+    C.ClusWorkerCheckTerminate(lpWorker)
+  end
+
+  def clusWorkerTerminate(lpWorker : Win32cr::Networking::Clustering::CLUS_WORKER*) : Void
+    C.ClusWorkerTerminate(lpWorker)
+  end
+
+  def clusWorkerTerminateEx(clus_worker : Win32cr::Networking::Clustering::CLUS_WORKER*, timeout_in_milliseconds : UInt32, wait_only : Win32cr::Foundation::BOOL) : UInt32
+    C.ClusWorkerTerminateEx(clus_worker, timeout_in_milliseconds, wait_only)
+  end
+
+  def clusWorkersTerminate(clus_workers : Win32cr::Networking::Clustering::CLUS_WORKER**, clus_workers_count : LibC::UIntPtrT, timeout_in_milliseconds : UInt32, wait_only : Win32cr::Foundation::BOOL) : UInt32
+    C.ClusWorkersTerminate(clus_workers, clus_workers_count, timeout_in_milliseconds, wait_only)
+  end
+
+  def resUtilResourcesEqual(hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+    C.ResUtilResourcesEqual(hSelf, hResource)
+  end
+
+  def resUtilResourceTypesEqual(lpszResourceTypeName : Win32cr::Foundation::PWSTR, hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+    C.ResUtilResourceTypesEqual(lpszResourceTypeName, hResource)
+  end
+
+  def resUtilIsResourceClassEqual(prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+    C.ResUtilIsResourceClassEqual(prci, hResource)
+  end
+
+  def resUtilEnumResources(hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK, pParameter : Void*) : UInt32
+    C.ResUtilEnumResources(hSelf, lpszResTypeName, pResCallBack, pParameter)
+  end
+
+  def resUtilEnumResourcesEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*) : UInt32
+    C.ResUtilEnumResourcesEx(hCluster, hSelf, lpszResTypeName, pResCallBack, pParameter)
+  end
+
+  def resUtilGetResourceDependency(hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE_*
+    C.ResUtilGetResourceDependency(hSelf, lpszResourceType)
+  end
+
+  def resUtilGetResourceDependencyByName(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, bRecurse : Win32cr::Foundation::BOOL) : Win32cr::Networking::Clustering::HRESOURCE_*
+    C.ResUtilGetResourceDependencyByName(hCluster, hSelf, lpszResourceType, bRecurse)
+  end
+
+  def resUtilGetResourceDependencyByClass(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, bRecurse : Win32cr::Foundation::BOOL) : Win32cr::Networking::Clustering::HRESOURCE_*
+    C.ResUtilGetResourceDependencyByClass(hCluster, hSelf, prci, bRecurse)
+  end
+
+  def resUtilGetResourceNameDependency(lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE_*
+    C.ResUtilGetResourceNameDependency(lpszResourceName, lpszResourceType)
+  end
+
+  def resUtilGetResourceDependentIPAddressProps(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pszAddress : UInt16*, pcchAddress : UInt32*, pszSubnetMask : UInt16*, pcchSubnetMask : UInt32*, pszNetwork : UInt16*, pcchNetwork : UInt32*) : UInt32
+    C.ResUtilGetResourceDependentIPAddressProps(hResource, pszAddress, pcchAddress, pszSubnetMask, pcchSubnetMask, pszNetwork, pcchNetwork)
+  end
+
+  def resUtilFindDependentDiskResourceDriveLetter(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pszDriveLetter : UInt16*, pcchDriveLetter : UInt32*) : UInt32
+    C.ResUtilFindDependentDiskResourceDriveLetter(hCluster, hResource, pszDriveLetter, pcchDriveLetter)
+  end
+
+  def resUtilTerminateServiceProcessFromResDll(dwServicePid : UInt32, bOffline : Win32cr::Foundation::BOOL, pdwResourceState : UInt32*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+    C.ResUtilTerminateServiceProcessFromResDll(dwServicePid, bOffline, pdwResourceState, pfnLogEvent, hResourceHandle)
+  end
+
+  def resUtilGetPropertyFormats(pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyFormatList : Void*, cbPropertyFormatListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    C.ResUtilGetPropertyFormats(pPropertyTable, pOutPropertyFormatList, cbPropertyFormatListSize, pcbBytesReturned, pcbRequired)
+  end
+
+  def resUtilGetCoreClusterResources(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, phClusterNameResource : Win32cr::Networking::Clustering::HRESOURCE_**, phClusterIPAddressResource : Win32cr::Networking::Clustering::HRESOURCE_**, phClusterQuorumResource : Win32cr::Networking::Clustering::HRESOURCE_**) : UInt32
+    C.ResUtilGetCoreClusterResources(hCluster, phClusterNameResource, phClusterIPAddressResource, phClusterQuorumResource)
+  end
+
+  def resUtilGetResourceName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pszResourceName : UInt16*, pcchResourceNameInOut : UInt32*) : UInt32
+    C.ResUtilGetResourceName(hResource, pszResourceName, pcchResourceNameInOut)
+  end
+
+  def resUtilGetClusterRoleState(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, eClusterRole : Win32cr::Networking::Clustering::CLUSTER_ROLE) : Win32cr::Networking::Clustering::CLUSTER_ROLE_STATE
+    C.ResUtilGetClusterRoleState(hCluster, eClusterRole)
+  end
+
+  def clusterIsPathOnSharedVolume(lpszPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.ClusterIsPathOnSharedVolume(lpszPathName)
+  end
+
+  def clusterGetVolumePathName(lpszFileName : Win32cr::Foundation::PWSTR, lpszVolumePathName : Win32cr::Foundation::PWSTR, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    C.ClusterGetVolumePathName(lpszFileName, lpszVolumePathName, cchBufferLength)
+  end
+
+  def clusterGetVolumeNameForVolumeMountPoint(lpszVolumeMountPoint : Win32cr::Foundation::PWSTR, lpszVolumeName : Win32cr::Foundation::PWSTR, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    C.ClusterGetVolumeNameForVolumeMountPoint(lpszVolumeMountPoint, lpszVolumeName, cchBufferLength)
+  end
+
+  def clusterPrepareSharedVolumeForBackup(lpszFileName : Win32cr::Foundation::PWSTR, lpszVolumePathName : Win32cr::Foundation::PWSTR, lpcchVolumePathName : UInt32*, lpszVolumeName : Win32cr::Foundation::PWSTR, lpcchVolumeName : UInt32*) : UInt32
+    C.ClusterPrepareSharedVolumeForBackup(lpszFileName, lpszVolumePathName, lpcchVolumePathName, lpszVolumeName, lpcchVolumeName)
+  end
+
+  def clusterClearBackupStateForSharedVolume(lpszVolumePathName : Win32cr::Foundation::PWSTR) : UInt32
+    C.ClusterClearBackupStateForSharedVolume(lpszVolumePathName)
+  end
+
+  def resUtilSetResourceServiceStartParametersEx(pszServiceName : Win32cr::Foundation::PWSTR, schSCMHandle : Win32cr::Security::SC_HANDLE, phService : LibC::IntPtrT*, dwDesiredAccess : UInt32, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+    C.ResUtilSetResourceServiceStartParametersEx(pszServiceName, schSCMHandle, phService, dwDesiredAccess, pfnLogEvent, hResourceHandle)
+  end
+
+  def resUtilEnumResourcesEx2(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*, dwDesiredAccess : UInt32) : UInt32
+    C.ResUtilEnumResourcesEx2(hCluster, hSelf, lpszResTypeName, pResCallBack, pParameter, dwDesiredAccess)
+  end
+
+  def resUtilGetResourceDependencyEx(hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+    C.ResUtilGetResourceDependencyEx(hSelf, lpszResourceType, dwDesiredAccess)
+  end
+
+  def resUtilGetResourceDependencyByNameEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, bRecurse : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+    C.ResUtilGetResourceDependencyByNameEx(hCluster, hSelf, lpszResourceType, bRecurse, dwDesiredAccess)
+  end
+
+  def resUtilGetResourceDependencyByClassEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, bRecurse : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+    C.ResUtilGetResourceDependencyByClassEx(hCluster, hSelf, prci, bRecurse, dwDesiredAccess)
+  end
+
+  def resUtilGetResourceNameDependencyEx(lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+    C.ResUtilGetResourceNameDependencyEx(lpszResourceName, lpszResourceType, dwDesiredAccess)
+  end
+
+  def resUtilGetCoreClusterResourcesEx(hClusterIn : Win32cr::Networking::Clustering::HCLUSTER_*, phClusterNameResourceOut : Win32cr::Networking::Clustering::HRESOURCE_**, phClusterQuorumResourceOut : Win32cr::Networking::Clustering::HRESOURCE_**, dwDesiredAccess : UInt32) : UInt32
+    C.ResUtilGetCoreClusterResourcesEx(hClusterIn, phClusterNameResourceOut, phClusterQuorumResourceOut, dwDesiredAccess)
+  end
+
+  def openClusterCryptProvider(lpszResource : Win32cr::Foundation::PWSTR, lpszProvider : Int8*, dwType : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*
+    C.OpenClusterCryptProvider(lpszResource, lpszProvider, dwType, dwFlags)
+  end
+
+  def openClusterCryptProviderEx(lpszResource : Win32cr::Foundation::PWSTR, lpszKeyname : Win32cr::Foundation::PWSTR, lpszProvider : Int8*, dwType : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*
+    C.OpenClusterCryptProviderEx(lpszResource, lpszKeyname, lpszProvider, dwType, dwFlags)
+  end
+
+  def closeClusterCryptProvider(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*) : UInt32
+    C.CloseClusterCryptProvider(hClusCryptProvider)
+  end
+
+  def clusterEncrypt(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, pData : UInt8*, cbData : UInt32, ppData : UInt8**, pcbData : UInt32*) : UInt32
+    C.ClusterEncrypt(hClusCryptProvider, pData, cbData, ppData, pcbData)
+  end
+
+  def clusterDecrypt(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, pCryptInput : UInt8*, cbCryptInput : UInt32, ppCryptOutput : UInt8**, pcbCryptOutput : UInt32*) : UInt32
+    C.ClusterDecrypt(hClusCryptProvider, pCryptInput, cbCryptInput, ppCryptOutput, pcbCryptOutput)
+  end
+
+  def freeClusterCrypt(pCryptInfo : Void*) : UInt32
+    C.FreeClusterCrypt(pCryptInfo)
+  end
+
+  def resUtilVerifyShutdownSafe(flags : UInt32, reason : UInt32, pResult : UInt32*) : UInt32
+    C.ResUtilVerifyShutdownSafe(flags, reason, pResult)
+  end
+
+  def resUtilPaxosComparer(left : Win32cr::Networking::Clustering::PaxosTagCStruct*, right : Win32cr::Networking::Clustering::PaxosTagCStruct*) : Win32cr::Foundation::BOOL
+    C.ResUtilPaxosComparer(left, right)
+  end
+
+  def resUtilLeftPaxosIsLessThanRight(left : Win32cr::Networking::Clustering::PaxosTagCStruct*, right : Win32cr::Networking::Clustering::PaxosTagCStruct*) : Win32cr::Foundation::BOOL
+    C.ResUtilLeftPaxosIsLessThanRight(left, right)
+  end
+
+  def resUtilsDeleteKeyTree(key : Win32cr::System::Registry::HKEY, keyName : Win32cr::Foundation::PWSTR, treatNoKeyAsError : Win32cr::Foundation::BOOL) : UInt32
+    C.ResUtilsDeleteKeyTree(key, keyName, treatNoKeyAsError)
+  end
+
+  def resUtilGroupsEqual(hSelf : Win32cr::Networking::Clustering::HGROUP_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*, pEqual : Win32cr::Foundation::BOOL*) : UInt32
+    C.ResUtilGroupsEqual(hSelf, hGroup, pEqual)
+  end
+
+  def resUtilEnumGroups(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HGROUP_*, pResCallBack : Win32cr::Networking::Clustering::LPGROUP_CALLBACK_EX, pParameter : Void*) : UInt32
+    C.ResUtilEnumGroups(hCluster, hSelf, pResCallBack, pParameter)
+  end
+
+  def resUtilEnumGroupsEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HGROUP_*, groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE, pResCallBack : Win32cr::Networking::Clustering::LPGROUP_CALLBACK_EX, pParameter : Void*) : UInt32
+    C.ResUtilEnumGroupsEx(hCluster, hSelf, groupType, pResCallBack, pParameter)
+  end
+
+  def resUtilDupGroup(group : Win32cr::Networking::Clustering::HGROUP_*, copy : Win32cr::Networking::Clustering::HGROUP_**) : UInt32
+    C.ResUtilDupGroup(group, copy)
+  end
+
+  def resUtilGetClusterGroupType(hGroup : Win32cr::Networking::Clustering::HGROUP_*, groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE*) : UInt32
+    C.ResUtilGetClusterGroupType(hGroup, groupType)
+  end
+
+  def resUtilGetCoreGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*) : Win32cr::Networking::Clustering::HGROUP_*
+    C.ResUtilGetCoreGroup(hCluster)
+  end
+
+  def resUtilResourceDepEnum(hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, enumType : UInt32, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*) : UInt32
+    C.ResUtilResourceDepEnum(hSelf, enumType, pResCallBack, pParameter)
+  end
+
+  def resUtilDupResource(group : Win32cr::Networking::Clustering::HRESOURCE_*, copy : Win32cr::Networking::Clustering::HRESOURCE_**) : UInt32
+    C.ResUtilDupResource(group, copy)
+  end
+
+  def resUtilGetClusterId(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, guid : LibC::GUID*) : UInt32
+    C.ResUtilGetClusterId(hCluster, guid)
+  end
+
+  def resUtilNodeEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pNodeCallBack : Win32cr::Networking::Clustering::LPNODE_CALLBACK, pParameter : Void*) : UInt32
+    C.ResUtilNodeEnum(hCluster, pNodeCallBack, pParameter)
+  end
+
+  def registerAppInstance(process_handle : Win32cr::Foundation::HANDLE, app_instance_id : LibC::GUID*, children_inherit_app_instance : Win32cr::Foundation::BOOL) : UInt32
+    C.RegisterAppInstance(process_handle, app_instance_id, children_inherit_app_instance)
+  end
+
+  def registerAppInstanceVersion(app_instance_id : LibC::GUID*, instance_version_high : UInt64, instance_version_low : UInt64) : UInt32
+    C.RegisterAppInstanceVersion(app_instance_id, instance_version_high, instance_version_low)
+  end
+
+  def queryAppInstanceVersion(app_instance_id : LibC::GUID*, instance_version_high : UInt64*, instance_version_low : UInt64*, version_status : Win32cr::Foundation::NTSTATUS*) : UInt32
+    C.QueryAppInstanceVersion(app_instance_id, instance_version_high, instance_version_low, version_status)
+  end
+
+  def resetAllAppInstanceVersions : UInt32
+    C.ResetAllAppInstanceVersions
+  end
+
+  def setAppInstanceCsvFlags(process_handle : Win32cr::Foundation::HANDLE, mask : UInt32, flags : UInt32) : UInt32
+    C.SetAppInstanceCsvFlags(process_handle, mask, flags)
+  end
+
   @[Link("clusapi")]
   @[Link("resutils")]
   @[Link("ntlanman")]
   lib C
+    # :nodoc:
     fun GetNodeClusterState(lpszNodeName : Win32cr::Foundation::PWSTR, pdwClusterState : UInt32*) : UInt32
 
+    # :nodoc:
     fun OpenCluster(lpszClusterName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HCLUSTER_*
 
+    # :nodoc:
     fun OpenClusterEx(lpszClusterName : Win32cr::Foundation::PWSTR, desired_access : UInt32, granted_access : UInt32*) : Win32cr::Networking::Clustering::HCLUSTER_*
 
+    # :nodoc:
     fun CloseCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetClusterName(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNewClusterName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun GetClusterInformation(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszClusterName : UInt16*, lpcchClusterName : UInt32*, lpClusterInfo : Win32cr::Networking::Clustering::CLUSTERVERSIONINFO*) : UInt32
 
+    # :nodoc:
     fun GetClusterQuorumResource(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceName : UInt16*, lpcchResourceName : UInt32*, lpszDeviceName : UInt16*, lpcchDeviceName : UInt32*, lpdwMaxQuorumLogSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun SetClusterQuorumResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszDeviceName : Win32cr::Foundation::PWSTR, dwMaxQuoLogSize : UInt32) : UInt32
 
+    # :nodoc:
     fun BackupClusterDatabase(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszPathName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RestoreClusterDatabase(lpszPathName : Win32cr::Foundation::PWSTR, bForce : Win32cr::Foundation::BOOL, lpszQuorumDriveLetter : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun SetClusterNetworkPriorityOrder(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, network_count : UInt32, network_list : Win32cr::Networking::Clustering::HNETWORK_**) : UInt32
 
+    # :nodoc:
     fun SetClusterServiceAccountPassword(lpszClusterName : Win32cr::Foundation::PWSTR, lpszNewPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32, lpReturnStatusBuffer : Win32cr::Networking::Clustering::CLUSTER_SET_PASSWORD_STATUS*, lpcbReturnStatusBufferSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterUpgradeFunctionalLevel(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, perform : Win32cr::Foundation::BOOL, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_UPGRADE_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
 
+    # :nodoc:
     fun CreateClusterNotifyPortV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, filters : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, dwFilterCount : UInt32, dwNotifyKey : LibC::UIntPtrT) : Win32cr::Networking::Clustering::HCHANGE_*
 
+    # :nodoc:
     fun RegisterClusterNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, filter : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE, hObject : Win32cr::Foundation::HANDLE, dwNotifyKey : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun GetNotifyEventHandle(hChange : Win32cr::Networking::Clustering::HCHANGE_*, lphTargetEvent : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun GetClusterNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, lpdwNotifyKey : LibC::UIntPtrT*, pFilterAndType : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, buffer : UInt8*, lpbBufferSize : UInt32*, lpszObjectId : UInt16*, lpcchObjectId : UInt32*, lpszParentId : UInt16*, lpcchParentId : UInt32*, lpszName : UInt16*, lpcchName : UInt32*, lpszType : UInt16*, lpcchType : UInt32*, dwMilliseconds : UInt32) : UInt32
 
+    # :nodoc:
     fun CreateClusterNotifyPort(hChange : Win32cr::Networking::Clustering::HCHANGE_*, hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, dwFilter : UInt32, dwNotifyKey : LibC::UIntPtrT) : Win32cr::Networking::Clustering::HCHANGE_*
 
+    # :nodoc:
     fun RegisterClusterNotify(hChange : Win32cr::Networking::Clustering::HCHANGE_*, dwFilterType : UInt32, hObject : Win32cr::Foundation::HANDLE, dwNotifyKey : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun GetClusterNotify(hChange : Win32cr::Networking::Clustering::HCHANGE_*, lpdwNotifyKey : LibC::UIntPtrT*, lpdwFilterType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*, dwMilliseconds : UInt32) : UInt32
 
+    # :nodoc:
     fun CloseClusterNotifyPort(hChange : Win32cr::Networking::Clustering::HCHANGE_*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ClusterOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, dwType : UInt32) : Win32cr::Networking::Clustering::HCLUSENUM_*
 
+    # :nodoc:
     fun ClusterGetEnumCount(hEnum : Win32cr::Networking::Clustering::HCLUSENUM_*) : UInt32
 
+    # :nodoc:
     fun ClusterEnum(hEnum : Win32cr::Networking::Clustering::HCLUSENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterCloseEnum(hEnum : Win32cr::Networking::Clustering::HCLUSENUM_*) : UInt32
 
+    # :nodoc:
     fun ClusterOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, dwType : UInt32, pOptions : Void*) : Win32cr::Networking::Clustering::HCLUSENUMEX_*
 
+    # :nodoc:
     fun ClusterGetEnumCountEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX_*) : UInt32
 
+    # :nodoc:
     fun ClusterEnumEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, cbItem : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterCloseEnumEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX_*) : UInt32
 
+    # :nodoc:
     fun CreateClusterGroupSet(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, groupSetName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUPSET_*
 
+    # :nodoc:
     fun OpenClusterGroupSet(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupSetName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUPSET_*
 
+    # :nodoc:
     fun CloseClusterGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteClusterGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
 
+    # :nodoc:
     fun ClusterAddGroupToGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
 
+    # :nodoc:
     fun ClusterAddGroupToGroupSetWithDomains(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*, faultDomain : UInt32, updateDomain : UInt32) : UInt32
 
+    # :nodoc:
     fun ClusterRemoveGroupFromGroupSet(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
 
+    # :nodoc:
     fun ClusterGroupSetControl(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun AddClusterGroupDependency(hDependentGroup : Win32cr::Networking::Clustering::HGROUP_*, hProviderGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
 
+    # :nodoc:
     fun SetGroupDependencyExpression(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszDependencyExpression : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RemoveClusterGroupDependency(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDependsOn : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
 
+    # :nodoc:
     fun AddClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
 
+    # :nodoc:
     fun SetClusterGroupSetDependencyExpression(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, lpszDependencyExprssion : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RemoveClusterGroupSetDependency(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
 
+    # :nodoc:
     fun AddClusterGroupToGroupSetDependency(hDependentGroup : Win32cr::Networking::Clustering::HGROUP_*, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
 
+    # :nodoc:
     fun RemoveClusterGroupToGroupSetDependency(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
 
+    # :nodoc:
     fun ClusterGroupSetOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*) : Win32cr::Networking::Clustering::HGROUPSETENUM_*
 
+    # :nodoc:
     fun ClusterGroupSetGetEnumCount(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM_*) : UInt32
 
+    # :nodoc:
     fun ClusterGroupSetEnum(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM_*, dwIndex : UInt32, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterGroupSetCloseEnum(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM_*) : UInt32
 
+    # :nodoc:
     fun AddCrossClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, lpRemoteClusterName : Win32cr::Foundation::PWSTR, lpRemoteGroupSetName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RemoveCrossClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, lpRemoteClusterName : Win32cr::Foundation::PWSTR, lpRemoteGroupSetName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun CreateClusterAvailabilitySet(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpAvailabilitySetName : Win32cr::Foundation::PWSTR, pAvailabilitySetConfig : Win32cr::Networking::Clustering::CLUSTER_AVAILABILITY_SET_CONFIG*) : Win32cr::Networking::Clustering::HGROUPSET_*
 
+    # :nodoc:
     fun ClusterNodeReplacement(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeNameCurrent : Win32cr::Foundation::PWSTR, lpszNodeNameNew : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ClusterCreateAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR, ruleType : Win32cr::Networking::Clustering::CLUS_AFFINITY_RULE_TYPE) : UInt32
 
+    # :nodoc:
     fun ClusterRemoveAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ClusterAddGroupToAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
 
+    # :nodoc:
     fun ClusterRemoveGroupFromAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
 
+    # :nodoc:
     fun ClusterAffinityRuleControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, affinityRuleName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun OpenClusterNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNODE_*
 
+    # :nodoc:
     fun OpenClusterNodeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNODE_*
 
+    # :nodoc:
     fun OpenClusterNodeById(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, nodeId : UInt32) : Win32cr::Networking::Clustering::HNODE_*
 
+    # :nodoc:
     fun CloseClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetClusterNodeState(hNode : Win32cr::Networking::Clustering::HNODE_*) : Win32cr::Networking::Clustering::CLUSTER_NODE_STATE
 
+    # :nodoc:
     fun GetClusterNodeId(hNode : Win32cr::Networking::Clustering::HNODE_*, lpszNodeId : UInt16*, lpcchName : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetClusterFromNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : Win32cr::Networking::Clustering::HCLUSTER_*
 
+    # :nodoc:
     fun PauseClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
 
+    # :nodoc:
     fun ResumeClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
 
+    # :nodoc:
     fun EvictClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
 
+    # :nodoc:
     fun ClusterNetInterfaceOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, lpszNetworkName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETINTERFACEENUM_*
 
+    # :nodoc:
     fun ClusterNetInterfaceEnum(hNetInterfaceEnum : Win32cr::Networking::Clustering::HNETINTERFACEENUM_*, dwIndex : UInt32, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterNetInterfaceCloseEnum(hNetInterfaceEnum : Win32cr::Networking::Clustering::HNETINTERFACEENUM_*) : UInt32
 
+    # :nodoc:
     fun ClusterNodeOpenEnum(hNode : Win32cr::Networking::Clustering::HNODE_*, dwType : UInt32) : Win32cr::Networking::Clustering::HNODEENUM_*
 
+    # :nodoc:
     fun ClusterNodeOpenEnumEx(hNode : Win32cr::Networking::Clustering::HNODE_*, dwType : UInt32, pOptions : Void*) : Win32cr::Networking::Clustering::HNODEENUMEX_*
 
+    # :nodoc:
     fun ClusterNodeGetEnumCountEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX_*) : UInt32
 
+    # :nodoc:
     fun ClusterNodeEnumEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, cbItem : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterNodeCloseEnumEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX_*) : UInt32
 
+    # :nodoc:
     fun ClusterNodeGetEnumCount(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM_*) : UInt32
 
+    # :nodoc:
     fun ClusterNodeCloseEnum(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM_*) : UInt32
 
+    # :nodoc:
     fun ClusterNodeEnum(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
 
+    # :nodoc:
     fun EvictClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE_*, dwTimeOut : UInt32, phrCleanupStatus : Win32cr::Foundation::HRESULT*) : UInt32
 
+    # :nodoc:
     fun GetClusterResourceTypeKey(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszTypeName : Win32cr::Foundation::PWSTR, samDesired : UInt32) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun CreateClusterGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUP_*
 
+    # :nodoc:
     fun OpenClusterGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUP_*
 
+    # :nodoc:
     fun OpenClusterGroupEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HGROUP_*
 
+    # :nodoc:
     fun PauseClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE_*, bDrainNode : Win32cr::Foundation::BOOL, dwPauseFlags : UInt32, hNodeDrainTarget : Win32cr::Networking::Clustering::HNODE_*) : UInt32
 
+    # :nodoc:
     fun ResumeClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE_*, eResumeFailbackType : Win32cr::Networking::Clustering::CLUSTER_NODE_RESUME_FAILBACK_TYPE, dwResumeFlagsReserved : UInt32) : UInt32
 
+    # :nodoc:
     fun CreateClusterGroupEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR, pGroupInfo : Win32cr::Networking::Clustering::CLUSTER_CREATE_GROUP_INFO*) : Win32cr::Networking::Clustering::HGROUP_*
 
+    # :nodoc:
     fun ClusterGroupOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszProperties : Win32cr::Foundation::PWSTR, cbProperties : UInt32, lpszRoProperties : Win32cr::Foundation::PWSTR, cbRoProperties : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HGROUPENUMEX_*
 
+    # :nodoc:
     fun ClusterGroupGetEnumCountEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX_*) : UInt32
 
+    # :nodoc:
     fun ClusterGroupEnumEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_GROUP_ENUM_ITEM*, cbItem : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterGroupCloseEnumEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX_*) : UInt32
 
+    # :nodoc:
     fun ClusterResourceOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszProperties : Win32cr::Foundation::PWSTR, cbProperties : UInt32, lpszRoProperties : Win32cr::Foundation::PWSTR, cbRoProperties : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HRESENUMEX_*
 
+    # :nodoc:
     fun ClusterResourceGetEnumCountEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX_*) : UInt32
 
+    # :nodoc:
     fun ClusterResourceEnumEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_ENUM_ITEM*, cbItem : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterResourceCloseEnumEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX_*) : UInt32
 
+    # :nodoc:
     fun OnlineClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
 
+    # :nodoc:
     fun OfflineClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP_*, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
 
+    # :nodoc:
     fun OnlineClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
 
+    # :nodoc:
     fun OfflineClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
 
+    # :nodoc:
     fun MoveClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*, dwMoveFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
 
+    # :nodoc:
     fun CancelClusterGroupOperation(hGroup : Win32cr::Networking::Clustering::HGROUP_*, dwCancelFlags_RESERVED : UInt32) : UInt32
 
+    # :nodoc:
     fun RestartClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwFlags : UInt32) : UInt32
 
+    # :nodoc:
     fun CloseClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetClusterFromGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : Win32cr::Networking::Clustering::HCLUSTER_*
 
+    # :nodoc:
     fun GetClusterGroupState(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszNodeName : UInt16*, lpcchNodeName : UInt32*) : Win32cr::Networking::Clustering::CLUSTER_GROUP_STATE
 
+    # :nodoc:
     fun SetClusterGroupName(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszGroupName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun SetClusterGroupNodeList(hGroup : Win32cr::Networking::Clustering::HGROUP_*, node_count : UInt32, node_list : Win32cr::Networking::Clustering::HNODE_**) : UInt32
 
+    # :nodoc:
     fun OnlineClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
 
+    # :nodoc:
     fun MoveClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
 
+    # :nodoc:
     fun OfflineClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
 
+    # :nodoc:
     fun DeleteClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
 
+    # :nodoc:
     fun DestroyClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
 
+    # :nodoc:
     fun ClusterGroupOpenEnum(hGroup : Win32cr::Networking::Clustering::HGROUP_*, dwType : UInt32) : Win32cr::Networking::Clustering::HGROUPENUM_*
 
+    # :nodoc:
     fun ClusterGroupGetEnumCount(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM_*) : UInt32
 
+    # :nodoc:
     fun ClusterGroupEnum(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszResourceName : UInt16*, lpcchName : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterGroupCloseEnum(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM_*) : UInt32
 
+    # :nodoc:
     fun CreateClusterResource(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
 
+    # :nodoc:
     fun OpenClusterResource(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE_*
 
+    # :nodoc:
     fun OpenClusterResourceEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HRESOURCE_*
 
+    # :nodoc:
     fun CloseClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetClusterFromResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Networking::Clustering::HCLUSTER_*
 
+    # :nodoc:
     fun DeleteClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
 
+    # :nodoc:
     fun GetClusterResourceState(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszNodeName : UInt16*, lpcchNodeName : UInt32*, lpszGroupName : UInt16*, lpcchGroupName : UInt32*) : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE
 
+    # :nodoc:
     fun SetClusterResourceName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResourceName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun FailClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
 
+    # :nodoc:
     fun OnlineClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
 
+    # :nodoc:
     fun OfflineClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
 
+    # :nodoc:
     fun ChangeClusterResourceGroup(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
 
+    # :nodoc:
     fun ChangeClusterResourceGroupEx(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*, flags : UInt64) : UInt32
 
+    # :nodoc:
     fun AddClusterResourceNode(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
 
+    # :nodoc:
     fun RemoveClusterResourceNode(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
 
+    # :nodoc:
     fun AddClusterResourceDependency(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
 
+    # :nodoc:
     fun RemoveClusterResourceDependency(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
 
+    # :nodoc:
     fun SetClusterResourceDependencyExpression(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszDependencyExpression : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun GetClusterResourceDependencyExpression(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszDependencyExpression : UInt16*, lpcchDependencyExpression : UInt32*) : UInt32
 
+    # :nodoc:
     fun AddResourceToClusterSharedVolumes(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
 
+    # :nodoc:
     fun RemoveResourceFromClusterSharedVolumes(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
 
+    # :nodoc:
     fun IsFileOnClusterSharedVolume(lpszPathName : Win32cr::Foundation::PWSTR, pbFileIsOnSharedVolume : Win32cr::Foundation::BOOL*) : UInt32
 
+    # :nodoc:
     fun ClusterSharedVolumeSetSnapshotState(guidSnapshotSet : LibC::GUID, lpszVolumeName : Win32cr::Foundation::PWSTR, state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE) : UInt32
 
+    # :nodoc:
     fun CanResourceBeDependent(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hResourceDependent : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ClusterResourceControl(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterResourceControlAsUser(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterResourceTypeControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterResourceTypeControlAsUser(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterGroupControl(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterNodeControl(hNode : Win32cr::Networking::Clustering::HNODE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetClusterResourceNetworkName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpBuffer : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ClusterResourceOpenEnum(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwType : UInt32) : Win32cr::Networking::Clustering::HRESENUM_*
 
+    # :nodoc:
     fun ClusterResourceGetEnumCount(hResEnum : Win32cr::Networking::Clustering::HRESENUM_*) : UInt32
 
+    # :nodoc:
     fun ClusterResourceEnum(hResEnum : Win32cr::Networking::Clustering::HRESENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterResourceCloseEnum(hResEnum : Win32cr::Networking::Clustering::HRESENUM_*) : UInt32
 
+    # :nodoc:
     fun CreateClusterResourceType(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, lpszDisplayName : Win32cr::Foundation::PWSTR, lpszResourceTypeDll : Win32cr::Foundation::PWSTR, dwLooksAlivePollInterval : UInt32, dwIsAlivePollInterval : UInt32) : UInt32
 
+    # :nodoc:
     fun DeleteClusterResourceType(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ClusterResourceTypeOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, dwType : UInt32) : Win32cr::Networking::Clustering::HRESTYPEENUM_*
 
+    # :nodoc:
     fun ClusterResourceTypeGetEnumCount(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM_*) : UInt32
 
+    # :nodoc:
     fun ClusterResourceTypeEnum(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterResourceTypeCloseEnum(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM_*) : UInt32
 
+    # :nodoc:
     fun OpenClusterNetwork(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNetworkName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETWORK_*
 
+    # :nodoc:
     fun OpenClusterNetworkEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNetworkName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNETWORK_*
 
+    # :nodoc:
     fun CloseClusterNetwork(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetClusterFromNetwork(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*) : Win32cr::Networking::Clustering::HCLUSTER_*
 
+    # :nodoc:
     fun ClusterNetworkOpenEnum(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, dwType : UInt32) : Win32cr::Networking::Clustering::HNETWORKENUM_*
 
+    # :nodoc:
     fun ClusterNetworkGetEnumCount(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM_*) : UInt32
 
+    # :nodoc:
     fun ClusterNetworkEnum(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterNetworkCloseEnum(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM_*) : UInt32
 
+    # :nodoc:
     fun GetClusterNetworkState(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*) : Win32cr::Networking::Clustering::CLUSTER_NETWORK_STATE
 
+    # :nodoc:
     fun SetClusterNetworkName(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, lpszName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun GetClusterNetworkId(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, lpszNetworkId : UInt16*, lpcchName : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterNetworkControl(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun OpenClusterNetInterface(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszInterfaceName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETINTERFACE_*
 
+    # :nodoc:
     fun OpenClusterNetInterfaceEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszInterfaceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNETINTERFACE_*
 
+    # :nodoc:
     fun GetClusterNetInterface(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, lpszNetworkName : Win32cr::Foundation::PWSTR, lpszInterfaceName : UInt16*, lpcchInterfaceName : UInt32*) : UInt32
 
+    # :nodoc:
     fun CloseClusterNetInterface(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetClusterFromNetInterface(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*) : Win32cr::Networking::Clustering::HCLUSTER_*
 
+    # :nodoc:
     fun GetClusterNetInterfaceState(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*) : Win32cr::Networking::Clustering::CLUSTER_NETINTERFACE_STATE
 
+    # :nodoc:
     fun ClusterNetInterfaceControl(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetClusterKey(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun GetClusterGroupKey(hGroup : Win32cr::Networking::Clustering::HGROUP_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun GetClusterResourceKey(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun GetClusterNodeKey(hNode : Win32cr::Networking::Clustering::HNODE_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun GetClusterNetworkKey(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun GetClusterNetInterfaceKey(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun ClusterRegCreateKey(hKey : Win32cr::System::Registry::HKEY, lpszSubKey : Win32cr::Foundation::PWSTR, dwOptions : UInt32, samDesired : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : UInt32*) : Int32
 
+    # :nodoc:
     fun ClusterRegOpenKey(hKey : Win32cr::System::Registry::HKEY, lpszSubKey : Win32cr::Foundation::PWSTR, samDesired : UInt32, phkResult : Win32cr::System::Registry::HKEY*) : Int32
 
+    # :nodoc:
     fun ClusterRegDeleteKey(hKey : Win32cr::System::Registry::HKEY, lpszSubKey : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun ClusterRegCloseKey(hKey : Win32cr::System::Registry::HKEY) : Int32
 
+    # :nodoc:
     fun ClusterRegEnumKey(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpszName : UInt16*, lpcchName : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Int32
 
+    # :nodoc:
     fun ClusterRegSetValue(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR, dwType : UInt32, lpData : UInt8*, cbData : UInt32) : UInt32
 
+    # :nodoc:
     fun ClusterRegDeleteValue(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ClusterRegQueryValue(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR, lpdwValueType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : Int32
 
+    # :nodoc:
     fun ClusterRegEnumValue(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpszValueName : UInt16*, lpcchValueName : UInt32*, lpdwType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterRegQueryInfoKey(hKey : Win32cr::System::Registry::HKEY, lpcSubKeys : UInt32*, lpcchMaxSubKeyLen : UInt32*, lpcValues : UInt32*, lpcchMaxValueNameLen : UInt32*, lpcbMaxValueLen : UInt32*, lpcbSecurityDescriptor : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Int32
 
+    # :nodoc:
     fun ClusterRegGetKeySecurity(hKey : Win32cr::System::Registry::HKEY, requested_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor : UInt32*) : Int32
 
+    # :nodoc:
     fun ClusterRegSetKeySecurity(hKey : Win32cr::System::Registry::HKEY, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Int32
 
+    # :nodoc:
     fun ClusterRegSyncDatabase(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, flags : UInt32) : Int32
 
+    # :nodoc:
     fun ClusterRegCreateBatch(hKey : Win32cr::System::Registry::HKEY, pHREGBATCH : Win32cr::Networking::Clustering::HREGBATCH_**) : Int32
 
+    # :nodoc:
     fun ClusterRegBatchAddCommand(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH_*, dwCommand : Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND, wzName : Win32cr::Foundation::PWSTR, dwOptions : UInt32, lpData : Void*, cbData : UInt32) : Int32
 
+    # :nodoc:
     fun ClusterRegCloseBatch(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH_*, bCommit : Win32cr::Foundation::BOOL, failedCommandNumber : Int32*) : Int32
 
+    # :nodoc:
     fun ClusterRegCloseBatchEx(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH_*, flags : UInt32, failedCommandNumber : Int32*) : Int32
 
+    # :nodoc:
     fun ClusterRegBatchReadCommand(hBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*, pBatchCommand : Win32cr::Networking::Clustering::CLUSTER_BATCH_COMMAND*) : Int32
 
+    # :nodoc:
     fun ClusterRegBatchCloseNotification(hBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*) : Int32
 
+    # :nodoc:
     fun ClusterRegCreateBatchNotifyPort(hKey : Win32cr::System::Registry::HKEY, phBatchNotifyPort : Win32cr::Networking::Clustering::HREGBATCHPORT_**) : Int32
 
+    # :nodoc:
     fun ClusterRegCloseBatchNotifyPort(hBatchNotifyPort : Win32cr::Networking::Clustering::HREGBATCHPORT_*) : Int32
 
+    # :nodoc:
     fun ClusterRegGetBatchNotification(hBatchNotify : Win32cr::Networking::Clustering::HREGBATCHPORT_*, phBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_**) : Int32
 
+    # :nodoc:
     fun ClusterRegCreateReadBatch(hKey : Win32cr::System::Registry::HKEY, phRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_**) : Int32
 
+    # :nodoc:
     fun ClusterRegReadBatchAddCommand(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_*, wzSubkeyName : Win32cr::Foundation::PWSTR, wzValueName : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun ClusterRegCloseReadBatch(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_*, phRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**) : Int32
 
+    # :nodoc:
     fun ClusterRegCloseReadBatchEx(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_*, flags : UInt32, phRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**) : Int32
 
+    # :nodoc:
     fun ClusterRegReadBatchReplyNextCommand(hRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*, pBatchCommand : Win32cr::Networking::Clustering::CLUSTER_READ_BATCH_COMMAND*) : Int32
 
+    # :nodoc:
     fun ClusterRegCloseReadBatchReply(hRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*) : Int32
 
+    # :nodoc:
     fun ClusterSetAccountAccess(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, szAccountSID : Win32cr::Foundation::PWSTR, dwAccess : UInt32, dwControlType : UInt32) : UInt32
 
+    # :nodoc:
     fun CreateCluster(pConfig : Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HCLUSTER_*
 
+    # :nodoc:
     fun CreateClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pConfig : Win32cr::Networking::Clustering::CREATE_CLUSTER_NAME_ACCOUNT*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
 
+    # :nodoc:
     fun RemoveClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, bDeleteComputerObjects : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun DetermineCNOResTypeFromNodelist(cNodes : UInt32, ppszNodeNames : Win32cr::Foundation::PWSTR*, pCNOResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE*) : UInt32
 
+    # :nodoc:
     fun DetermineCNOResTypeFromCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pCNOResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE*) : UInt32
 
+    # :nodoc:
     fun DetermineClusterCloudTypeFromNodelist(cNodes : UInt32, ppszNodeNames : Win32cr::Foundation::PWSTR*, pCloudType : Win32cr::Networking::Clustering::CLUSTER_CLOUD_TYPE*) : UInt32
 
+    # :nodoc:
     fun DetermineClusterCloudTypeFromCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pCloudType : Win32cr::Networking::Clustering::CLUSTER_CLOUD_TYPE*) : UInt32
 
+    # :nodoc:
     fun GetNodeCloudTypeDW(ppszNodeName : Win32cr::Foundation::PWSTR, node_cloud_type : UInt32*) : UInt32
 
+    # :nodoc:
     fun RegisterClusterResourceTypeNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, flags : Int64, resTypeName : Win32cr::Foundation::PWSTR, dwNotifyKey : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun AddClusterNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HNODE_*
 
+    # :nodoc:
     fun AddClusterStorageNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*, lpszClusterStorageNodeDescription : Win32cr::Foundation::PWSTR, lpszClusterStorageNodeLocation : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun AddClusterNodeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HNODE_*
 
+    # :nodoc:
     fun RemoveClusterStorageNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszClusterStorageEnclosureName : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, dwFlags : UInt32) : UInt32
 
+    # :nodoc:
     fun DestroyCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*, fdeleteVirtualComputerObjects : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun InitializeClusterHealthFault(clusterHealthFault : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*) : UInt32
 
+    # :nodoc:
     fun InitializeClusterHealthFaultArray(clusterHealthFaultArray : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT_ARRAY*) : UInt32
 
+    # :nodoc:
     fun FreeClusterHealthFault(clusterHealthFault : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*) : UInt32
 
+    # :nodoc:
     fun FreeClusterHealthFaultArray(clusterHealthFaultArray : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT_ARRAY*) : UInt32
 
+    # :nodoc:
     fun ClusGetClusterHealthFaults(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, objects : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT_ARRAY*, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun ClusRemoveClusterHealthFault(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, id : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun ClusAddClusterHealthFault(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, failure : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*, param2 : UInt32) : UInt32
 
+    # :nodoc:
     fun ResUtilStartResourceService(pszServiceName : Win32cr::Foundation::PWSTR, phServiceHandle : LibC::IntPtrT*) : UInt32
 
+    # :nodoc:
     fun ResUtilVerifyResourceService(pszServiceName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ResUtilStopResourceService(pszServiceName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ResUtilVerifyService(hServiceHandle : Win32cr::Security::SC_HANDLE) : UInt32
 
+    # :nodoc:
     fun ResUtilStopService(hServiceHandle : Win32cr::Security::SC_HANDLE) : UInt32
 
+    # :nodoc:
     fun ResUtilCreateDirectoryTree(pszPath : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ResUtilIsPathValid(pszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ResUtilEnumProperties(pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pszOutProperties : Win32cr::Foundation::PWSTR, cbOutPropertiesSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilEnumPrivateProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszOutProperties : Win32cr::Foundation::PWSTR, cbOutPropertiesSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyList : Void*, cbOutPropertyListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetAllProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyList : Void*, cbOutPropertyListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetPrivateProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pOutPropertyList : Void*, cbOutPropertyListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetPropertySize(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTableItem : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pcbOutPropertyListSize : UInt32*, pnPropertyCount : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetProperty(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTableItem : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyItem : Void**, pcbOutPropertyItemSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilVerifyPropertyTable(pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, bAllowUnknownProperties : Win32cr::Foundation::BOOL, pInPropertyList : Void*, cbInPropertyListSize : UInt32, pOutParams : UInt8*) : UInt32
 
+    # :nodoc:
     fun ResUtilSetPropertyTable(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, bAllowUnknownProperties : Win32cr::Foundation::BOOL, pInPropertyList : Void*, cbInPropertyListSize : UInt32, pOutParams : UInt8*) : UInt32
 
+    # :nodoc:
     fun ResUtilSetPropertyTableEx(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, bAllowUnknownProperties : Win32cr::Foundation::BOOL, pInPropertyList : Void*, cbInPropertyListSize : UInt32, bForceWrite : Win32cr::Foundation::BOOL, pOutParams : UInt8*) : UInt32
 
+    # :nodoc:
     fun ResUtilSetPropertyParameterBlock(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, pInParams : UInt8*, pInPropertyList : Void*, cbInPropertyListSize : UInt32, pOutParams : UInt8*) : UInt32
 
+    # :nodoc:
     fun ResUtilSetPropertyParameterBlockEx(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, pInParams : UInt8*, pInPropertyList : Void*, cbInPropertyListSize : UInt32, bForceWrite : Win32cr::Foundation::BOOL, pOutParams : UInt8*) : UInt32
 
+    # :nodoc:
     fun ResUtilSetUnknownProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pInPropertyList : Void*, cbInPropertyListSize : UInt32) : UInt32
 
+    # :nodoc:
     fun ResUtilGetPropertiesToParameterBlock(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutParams : UInt8*, bCheckForRequiredProperties : Win32cr::Foundation::BOOL, pszNameOfPropInError : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun ResUtilPropertyListFromParameterBlock(pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyList : Void*, pcbOutPropertyListSize : UInt32*, pInParams : UInt8*, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilDupParameterBlock(pOutParams : UInt8*, pInParams : UInt8*, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*) : UInt32
 
+    # :nodoc:
     fun ResUtilFreeParameterBlock(pOutParams : UInt8*, pInParams : UInt8*, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*) : Void
 
+    # :nodoc:
     fun ResUtilAddUnknownProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyList : Void*, pcbOutPropertyListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilSetPrivatePropertyList(hkeyClusterKey : Win32cr::System::Registry::HKEY, pInPropertyList : Void*, cbInPropertyListSize : UInt32) : UInt32
 
+    # :nodoc:
     fun ResUtilVerifyPrivatePropertyList(pInPropertyList : Void*, cbInPropertyListSize : UInt32) : UInt32
 
+    # :nodoc:
     fun ResUtilDupString(pszInString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun ResUtilGetBinaryValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, ppbOutValue : UInt8**, pcbOutValueSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetSzValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun ResUtilGetDwordValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pdwOutValue : UInt32*, dwDefaultValue : UInt32) : UInt32
 
+    # :nodoc:
     fun ResUtilGetQwordValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pqwOutValue : UInt64*, qwDefaultValue : UInt64) : UInt32
 
+    # :nodoc:
     fun ResUtilSetBinaryValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pbNewValue : UInt8*, cbNewValueSize : UInt32, ppbOutValue : UInt8**, pcbOutValueSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilSetSzValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pszNewValue : Win32cr::Foundation::PWSTR, ppszOutString : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun ResUtilSetExpandSzValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pszNewValue : Win32cr::Foundation::PWSTR, ppszOutString : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun ResUtilSetMultiSzValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pszNewValue : Win32cr::Foundation::PWSTR, cbNewValueSize : UInt32, ppszOutValue : Win32cr::Foundation::PWSTR*, pcbOutValueSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilSetDwordValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, dwNewValue : UInt32, pdwOutValue : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilSetQwordValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, qwNewValue : UInt64, pqwOutValue : UInt64*) : UInt32
 
+    # :nodoc:
     fun ResUtilSetValueEx(hkeyClusterKey : Win32cr::System::Registry::HKEY, valueName : Win32cr::Foundation::PWSTR, valueType : UInt32, valueData : UInt8*, valueSize : UInt32, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun ResUtilGetBinaryProperty(ppbOutValue : UInt8**, pcbOutValueSize : UInt32*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_BINARY*, pbOldValue : UInt8*, cbOldValueSize : UInt32, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetSzProperty(ppszOutValue : Win32cr::Foundation::PWSTR*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_SZ*, pszOldValue : Win32cr::Foundation::PWSTR, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetMultiSzProperty(ppszOutValue : Win32cr::Foundation::PWSTR*, pcbOutValueSize : UInt32*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_SZ*, pszOldValue : Win32cr::Foundation::PWSTR, cbOldValueSize : UInt32, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetDwordProperty(pdwOutValue : UInt32*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_DWORD*, dwOldValue : UInt32, dwMinimum : UInt32, dwMaximum : UInt32, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetLongProperty(plOutValue : Int32*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_LONG*, lOldValue : Int32, lMinimum : Int32, lMaximum : Int32, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetFileTimeProperty(pftOutValue : Win32cr::Foundation::FILETIME*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_FILETIME*, ftOldValue : Win32cr::Foundation::FILETIME, ftMinimum : Win32cr::Foundation::FILETIME, ftMaximum : Win32cr::Foundation::FILETIME, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetEnvironmentWithNetName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Void*
 
+    # :nodoc:
     fun ResUtilFreeEnvironment(lpEnvironment : Void*) : UInt32
 
+    # :nodoc:
     fun ResUtilExpandEnvironmentStrings(pszSrc : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun ResUtilSetResourceServiceEnvironment(pszServiceName : Win32cr::Foundation::PWSTR, hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
 
+    # :nodoc:
     fun ResUtilRemoveResourceServiceEnvironment(pszServiceName : Win32cr::Foundation::PWSTR, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
 
+    # :nodoc:
     fun ResUtilSetResourceServiceStartParameters(pszServiceName : Win32cr::Foundation::PWSTR, schSCMHandle : Win32cr::Security::SC_HANDLE, phService : LibC::IntPtrT*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
 
+    # :nodoc:
     fun ResUtilFindSzProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pszPropertyValue : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun ResUtilFindExpandSzProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pszPropertyValue : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun ResUtilFindExpandedSzProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pszPropertyValue : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun ResUtilFindDwordProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pdwPropertyValue : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilFindBinaryProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pbPropertyValue : UInt8**, pcbPropertyValueSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilFindMultiSzProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pszPropertyValue : Win32cr::Foundation::PWSTR*, pcbPropertyValueSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilFindLongProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, plPropertyValue : Int32*) : UInt32
 
+    # :nodoc:
     fun ResUtilFindULargeIntegerProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, plPropertyValue : UInt64*) : UInt32
 
+    # :nodoc:
     fun ResUtilFindFileTimeProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pftPropertyValue : Win32cr::Foundation::FILETIME*) : UInt32
 
+    # :nodoc:
     fun ClusWorkerCreate(lpWorker : Win32cr::Networking::Clustering::CLUS_WORKER*, lpStartAddress : Win32cr::Networking::Clustering::PWORKER_START_ROUTINE, lpParameter : Void*) : UInt32
 
+    # :nodoc:
     fun ClusWorkerCheckTerminate(lpWorker : Win32cr::Networking::Clustering::CLUS_WORKER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ClusWorkerTerminate(lpWorker : Win32cr::Networking::Clustering::CLUS_WORKER*) : Void
 
+    # :nodoc:
     fun ClusWorkerTerminateEx(clus_worker : Win32cr::Networking::Clustering::CLUS_WORKER*, timeout_in_milliseconds : UInt32, wait_only : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun ClusWorkersTerminate(clus_workers : Win32cr::Networking::Clustering::CLUS_WORKER**, clus_workers_count : LibC::UIntPtrT, timeout_in_milliseconds : UInt32, wait_only : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun ResUtilResourcesEqual(hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ResUtilResourceTypesEqual(lpszResourceTypeName : Win32cr::Foundation::PWSTR, hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ResUtilIsResourceClassEqual(prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ResUtilEnumResources(hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK, pParameter : Void*) : UInt32
 
+    # :nodoc:
     fun ResUtilEnumResourcesEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetResourceDependency(hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE_*
 
+    # :nodoc:
     fun ResUtilGetResourceDependencyByName(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, bRecurse : Win32cr::Foundation::BOOL) : Win32cr::Networking::Clustering::HRESOURCE_*
 
+    # :nodoc:
     fun ResUtilGetResourceDependencyByClass(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, bRecurse : Win32cr::Foundation::BOOL) : Win32cr::Networking::Clustering::HRESOURCE_*
 
+    # :nodoc:
     fun ResUtilGetResourceNameDependency(lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE_*
 
+    # :nodoc:
     fun ResUtilGetResourceDependentIPAddressProps(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pszAddress : UInt16*, pcchAddress : UInt32*, pszSubnetMask : UInt16*, pcchSubnetMask : UInt32*, pszNetwork : UInt16*, pcchNetwork : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilFindDependentDiskResourceDriveLetter(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pszDriveLetter : UInt16*, pcchDriveLetter : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilTerminateServiceProcessFromResDll(dwServicePid : UInt32, bOffline : Win32cr::Foundation::BOOL, pdwResourceState : UInt32*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
 
+    # :nodoc:
     fun ResUtilGetPropertyFormats(pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyFormatList : Void*, cbPropertyFormatListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetCoreClusterResources(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, phClusterNameResource : Win32cr::Networking::Clustering::HRESOURCE_**, phClusterIPAddressResource : Win32cr::Networking::Clustering::HRESOURCE_**, phClusterQuorumResource : Win32cr::Networking::Clustering::HRESOURCE_**) : UInt32
 
+    # :nodoc:
     fun ResUtilGetResourceName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pszResourceName : UInt16*, pcchResourceNameInOut : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetClusterRoleState(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, eClusterRole : Win32cr::Networking::Clustering::CLUSTER_ROLE) : Win32cr::Networking::Clustering::CLUSTER_ROLE_STATE
 
+    # :nodoc:
     fun ClusterIsPathOnSharedVolume(lpszPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ClusterGetVolumePathName(lpszFileName : Win32cr::Foundation::PWSTR, lpszVolumePathName : Win32cr::Foundation::PWSTR, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ClusterGetVolumeNameForVolumeMountPoint(lpszVolumeMountPoint : Win32cr::Foundation::PWSTR, lpszVolumeName : Win32cr::Foundation::PWSTR, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ClusterPrepareSharedVolumeForBackup(lpszFileName : Win32cr::Foundation::PWSTR, lpszVolumePathName : Win32cr::Foundation::PWSTR, lpcchVolumePathName : UInt32*, lpszVolumeName : Win32cr::Foundation::PWSTR, lpcchVolumeName : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterClearBackupStateForSharedVolume(lpszVolumePathName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ResUtilSetResourceServiceStartParametersEx(pszServiceName : Win32cr::Foundation::PWSTR, schSCMHandle : Win32cr::Security::SC_HANDLE, phService : LibC::IntPtrT*, dwDesiredAccess : UInt32, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
 
+    # :nodoc:
     fun ResUtilEnumResourcesEx2(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*, dwDesiredAccess : UInt32) : UInt32
 
+    # :nodoc:
     fun ResUtilGetResourceDependencyEx(hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
 
+    # :nodoc:
     fun ResUtilGetResourceDependencyByNameEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, bRecurse : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
 
+    # :nodoc:
     fun ResUtilGetResourceDependencyByClassEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, bRecurse : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
 
+    # :nodoc:
     fun ResUtilGetResourceNameDependencyEx(lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
 
+    # :nodoc:
     fun ResUtilGetCoreClusterResourcesEx(hClusterIn : Win32cr::Networking::Clustering::HCLUSTER_*, phClusterNameResourceOut : Win32cr::Networking::Clustering::HRESOURCE_**, phClusterQuorumResourceOut : Win32cr::Networking::Clustering::HRESOURCE_**, dwDesiredAccess : UInt32) : UInt32
 
+    # :nodoc:
     fun OpenClusterCryptProvider(lpszResource : Win32cr::Foundation::PWSTR, lpszProvider : Int8*, dwType : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*
 
+    # :nodoc:
     fun OpenClusterCryptProviderEx(lpszResource : Win32cr::Foundation::PWSTR, lpszKeyname : Win32cr::Foundation::PWSTR, lpszProvider : Int8*, dwType : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*
 
+    # :nodoc:
     fun CloseClusterCryptProvider(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*) : UInt32
 
+    # :nodoc:
     fun ClusterEncrypt(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, pData : UInt8*, cbData : UInt32, ppData : UInt8**, pcbData : UInt32*) : UInt32
 
+    # :nodoc:
     fun ClusterDecrypt(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, pCryptInput : UInt8*, cbCryptInput : UInt32, ppCryptOutput : UInt8**, pcbCryptOutput : UInt32*) : UInt32
 
+    # :nodoc:
     fun FreeClusterCrypt(pCryptInfo : Void*) : UInt32
 
+    # :nodoc:
     fun ResUtilVerifyShutdownSafe(flags : UInt32, reason : UInt32, pResult : UInt32*) : UInt32
 
+    # :nodoc:
     fun ResUtilPaxosComparer(left : Win32cr::Networking::Clustering::PaxosTagCStruct*, right : Win32cr::Networking::Clustering::PaxosTagCStruct*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ResUtilLeftPaxosIsLessThanRight(left : Win32cr::Networking::Clustering::PaxosTagCStruct*, right : Win32cr::Networking::Clustering::PaxosTagCStruct*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ResUtilsDeleteKeyTree(key : Win32cr::System::Registry::HKEY, keyName : Win32cr::Foundation::PWSTR, treatNoKeyAsError : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun ResUtilGroupsEqual(hSelf : Win32cr::Networking::Clustering::HGROUP_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*, pEqual : Win32cr::Foundation::BOOL*) : UInt32
 
+    # :nodoc:
     fun ResUtilEnumGroups(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HGROUP_*, pResCallBack : Win32cr::Networking::Clustering::LPGROUP_CALLBACK_EX, pParameter : Void*) : UInt32
 
+    # :nodoc:
     fun ResUtilEnumGroupsEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HGROUP_*, groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE, pResCallBack : Win32cr::Networking::Clustering::LPGROUP_CALLBACK_EX, pParameter : Void*) : UInt32
 
+    # :nodoc:
     fun ResUtilDupGroup(group : Win32cr::Networking::Clustering::HGROUP_*, copy : Win32cr::Networking::Clustering::HGROUP_**) : UInt32
 
+    # :nodoc:
     fun ResUtilGetClusterGroupType(hGroup : Win32cr::Networking::Clustering::HGROUP_*, groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE*) : UInt32
 
+    # :nodoc:
     fun ResUtilGetCoreGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*) : Win32cr::Networking::Clustering::HGROUP_*
 
+    # :nodoc:
     fun ResUtilResourceDepEnum(hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, enumType : UInt32, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*) : UInt32
 
+    # :nodoc:
     fun ResUtilDupResource(group : Win32cr::Networking::Clustering::HRESOURCE_*, copy : Win32cr::Networking::Clustering::HRESOURCE_**) : UInt32
 
+    # :nodoc:
     fun ResUtilGetClusterId(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, guid : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun ResUtilNodeEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pNodeCallBack : Win32cr::Networking::Clustering::LPNODE_CALLBACK, pParameter : Void*) : UInt32
 
+    # :nodoc:
     fun RegisterAppInstance(process_handle : Win32cr::Foundation::HANDLE, app_instance_id : LibC::GUID*, children_inherit_app_instance : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun RegisterAppInstanceVersion(app_instance_id : LibC::GUID*, instance_version_high : UInt64, instance_version_low : UInt64) : UInt32
 
+    # :nodoc:
     fun QueryAppInstanceVersion(app_instance_id : LibC::GUID*, instance_version_high : UInt64*, instance_version_low : UInt64*, version_status : Win32cr::Foundation::NTSTATUS*) : UInt32
 
+    # :nodoc:
     fun ResetAllAppInstanceVersions : UInt32
 
+    # :nodoc:
     fun SetAppInstanceCsvFlags(process_handle : Win32cr::Foundation::HANDLE, mask : UInt32, flags : UInt32) : UInt32
 
   end

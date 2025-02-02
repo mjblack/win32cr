@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::System::Shutdown
+  extend self
   MAX_REASON_NAME_LEN = 64_u32
   MAX_REASON_DESC_LEN = 256_u32
   MAX_REASON_BUGID_LEN = 32_u32
@@ -98,35 +99,105 @@ module Win32cr::System::Shutdown
     EWX_SHUTDOWN = 1_u32
   end
 
+  def initiateSystemShutdownA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.InitiateSystemShutdownA(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown)
+  end
+
+  def initiateSystemShutdownW(lpMachineName : Win32cr::Foundation::PWSTR, lpMessage : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.InitiateSystemShutdownW(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown)
+  end
+
+  def abortSystemShutdownA(lpMachineName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.AbortSystemShutdownA(lpMachineName)
+  end
+
+  def abortSystemShutdownW(lpMachineName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.AbortSystemShutdownW(lpMachineName)
+  end
+
+  def initiateSystemShutdownExA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : Win32cr::Foundation::BOOL
+    C.InitiateSystemShutdownExA(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown, dwReason)
+  end
+
+  def initiateSystemShutdownExW(lpMachineName : Win32cr::Foundation::PWSTR, lpMessage : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : Win32cr::Foundation::BOOL
+    C.InitiateSystemShutdownExW(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown, dwReason)
+  end
+
+  def initiateShutdownA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwGracePeriod : UInt32, dwShutdownFlags : Win32cr::System::Shutdown::SHUTDOWN_FLAGS, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : UInt32
+    C.InitiateShutdownA(lpMachineName, lpMessage, dwGracePeriod, dwShutdownFlags, dwReason)
+  end
+
+  def initiateShutdownW(lpMachineName : Win32cr::Foundation::PWSTR, lpMessage : Win32cr::Foundation::PWSTR, dwGracePeriod : UInt32, dwShutdownFlags : Win32cr::System::Shutdown::SHUTDOWN_FLAGS, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : UInt32
+    C.InitiateShutdownW(lpMachineName, lpMessage, dwGracePeriod, dwShutdownFlags, dwReason)
+  end
+
+  def checkForHiberboot(pHiberboot : Win32cr::Foundation::BOOLEAN*, bClearFlag : Win32cr::Foundation::BOOLEAN) : UInt32
+    C.CheckForHiberboot(pHiberboot, bClearFlag)
+  end
+
+  def exitWindowsEx(uFlags : Win32cr::System::Shutdown::EXIT_WINDOWS_FLAGS, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : Win32cr::Foundation::BOOL
+    C.ExitWindowsEx(uFlags, dwReason)
+  end
+
+  def lockWorkStation : Win32cr::Foundation::BOOL
+    C.LockWorkStation
+  end
+
+  def shutdownBlockReasonCreate(hWnd : Win32cr::Foundation::HWND, pwszReason : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.ShutdownBlockReasonCreate(hWnd, pwszReason)
+  end
+
+  def shutdownBlockReasonQuery(hWnd : Win32cr::Foundation::HWND, pwszBuff : UInt16*, pcchBuff : UInt32*) : Win32cr::Foundation::BOOL
+    C.ShutdownBlockReasonQuery(hWnd, pwszBuff, pcchBuff)
+  end
+
+  def shutdownBlockReasonDestroy(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.ShutdownBlockReasonDestroy(hWnd)
+  end
+
   @[Link("advapi32")]
   @[Link("user32")]
   lib C
+    # :nodoc:
     fun InitiateSystemShutdownA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InitiateSystemShutdownW(lpMachineName : Win32cr::Foundation::PWSTR, lpMessage : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AbortSystemShutdownA(lpMachineName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AbortSystemShutdownW(lpMachineName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InitiateSystemShutdownExA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InitiateSystemShutdownExW(lpMachineName : Win32cr::Foundation::PWSTR, lpMessage : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InitiateShutdownA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwGracePeriod : UInt32, dwShutdownFlags : Win32cr::System::Shutdown::SHUTDOWN_FLAGS, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : UInt32
 
+    # :nodoc:
     fun InitiateShutdownW(lpMachineName : Win32cr::Foundation::PWSTR, lpMessage : Win32cr::Foundation::PWSTR, dwGracePeriod : UInt32, dwShutdownFlags : Win32cr::System::Shutdown::SHUTDOWN_FLAGS, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : UInt32
 
+    # :nodoc:
     fun CheckForHiberboot(pHiberboot : Win32cr::Foundation::BOOLEAN*, bClearFlag : Win32cr::Foundation::BOOLEAN) : UInt32
 
+    # :nodoc:
     fun ExitWindowsEx(uFlags : Win32cr::System::Shutdown::EXIT_WINDOWS_FLAGS, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LockWorkStation : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ShutdownBlockReasonCreate(hWnd : Win32cr::Foundation::HWND, pwszReason : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ShutdownBlockReasonQuery(hWnd : Win32cr::Foundation::HWND, pwszBuff : UInt16*, pcchBuff : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ShutdownBlockReasonDestroy(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
   end

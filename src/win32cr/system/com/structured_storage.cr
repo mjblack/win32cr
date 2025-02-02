@@ -3,6 +3,7 @@ require "./../../foundation.cr"
 require "./../../security.cr"
 
 module Win32cr::System::Com::StructuredStorage
+  extend self
   PROPSETFLAG_DEFAULT = 0_u32
   PROPSETFLAG_NONSIMPLE = 1_u32
   PROPSETFLAG_ANSI = 2_u32
@@ -1159,98 +1160,323 @@ module Win32cr::System::Com::StructuredStorage
 
   end
 
+  def coGetInstanceFromFile(pServerInfo : Win32cr::System::Com::COSERVERINFO*, pClsid : LibC::GUID*, punkOuter : Void*, dwClsCtx : Win32cr::System::Com::CLSCTX, grfMode : UInt32, pwszName : Win32cr::Foundation::PWSTR, dwCount : UInt32, pResults : Win32cr::System::Com::MULTI_QI*) : Win32cr::Foundation::HRESULT
+    C.CoGetInstanceFromFile(pServerInfo, pClsid, punkOuter, dwClsCtx, grfMode, pwszName, dwCount, pResults)
+  end
+
+  def coGetInstanceFromIStorage(pServerInfo : Win32cr::System::Com::COSERVERINFO*, pClsid : LibC::GUID*, punkOuter : Void*, dwClsCtx : Win32cr::System::Com::CLSCTX, pstg : Void*, dwCount : UInt32, pResults : Win32cr::System::Com::MULTI_QI*) : Win32cr::Foundation::HRESULT
+    C.CoGetInstanceFromIStorage(pServerInfo, pClsid, punkOuter, dwClsCtx, pstg, dwCount, pResults)
+  end
+
+  def stgOpenAsyncDocfileOnIFillLockBytes(pflb : Void*, grfMode : UInt32, asyncFlags : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
+    C.StgOpenAsyncDocfileOnIFillLockBytes(pflb, grfMode, asyncFlags, ppstgOpen)
+  end
+
+  def stgGetIFillLockBytesOnILockBytes(pilb : Void*, ppflb : Void**) : Win32cr::Foundation::HRESULT
+    C.StgGetIFillLockBytesOnILockBytes(pilb, ppflb)
+  end
+
+  def stgGetIFillLockBytesOnFile(pwcsName : Win32cr::Foundation::PWSTR, ppflb : Void**) : Win32cr::Foundation::HRESULT
+    C.StgGetIFillLockBytesOnFile(pwcsName, ppflb)
+  end
+
+  def stgOpenLayoutDocfile(pwcsDfName : Win32cr::Foundation::PWSTR, grfMode : UInt32, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
+    C.StgOpenLayoutDocfile(pwcsDfName, grfMode, reserved, ppstgOpen)
+  end
+
+  def createStreamOnHGlobal(hGlobal : LibC::IntPtrT, fDeleteOnRelease : Win32cr::Foundation::BOOL, ppstm : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateStreamOnHGlobal(hGlobal, fDeleteOnRelease, ppstm)
+  end
+
+  def getHGlobalFromStream(pstm : Void*, phglobal : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
+    C.GetHGlobalFromStream(pstm, phglobal)
+  end
+
+  def coGetInterfaceAndReleaseStream(pStm : Void*, iid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CoGetInterfaceAndReleaseStream(pStm, iid, ppv)
+  end
+
+  def propVariantCopy(pvarDest : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarSrc : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.PropVariantCopy(pvarDest, pvarSrc)
+  end
+
+  def propVariantClear(pvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.PropVariantClear(pvar)
+  end
+
+  def freePropVariantArray(cVariants : UInt32, rgvars : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.FreePropVariantArray(cVariants, rgvars)
+  end
+
+  def stgCreateDocfile(pwcsName : Win32cr::Foundation::PWSTR, grfMode : Win32cr::System::Com::StructuredStorage::STGM, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
+    C.StgCreateDocfile(pwcsName, grfMode, reserved, ppstgOpen)
+  end
+
+  def stgCreateDocfileOnILockBytes(plkbyt : Void*, grfMode : Win32cr::System::Com::StructuredStorage::STGM, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
+    C.StgCreateDocfileOnILockBytes(plkbyt, grfMode, reserved, ppstgOpen)
+  end
+
+  def stgOpenStorage(pwcsName : Win32cr::Foundation::PWSTR, pstgPriority : Void*, grfMode : Win32cr::System::Com::StructuredStorage::STGM, snbExclude : UInt16**, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
+    C.StgOpenStorage(pwcsName, pstgPriority, grfMode, snbExclude, reserved, ppstgOpen)
+  end
+
+  def stgOpenStorageOnILockBytes(plkbyt : Void*, pstgPriority : Void*, grfMode : UInt32, snbExclude : UInt16**, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
+    C.StgOpenStorageOnILockBytes(plkbyt, pstgPriority, grfMode, snbExclude, reserved, ppstgOpen)
+  end
+
+  def stgIsStorageFile(pwcsName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.StgIsStorageFile(pwcsName)
+  end
+
+  def stgIsStorageILockBytes(plkbyt : Void*) : Win32cr::Foundation::HRESULT
+    C.StgIsStorageILockBytes(plkbyt)
+  end
+
+  def stgSetTimes(lpszName : Win32cr::Foundation::PWSTR, pctime : Win32cr::Foundation::FILETIME*, patime : Win32cr::Foundation::FILETIME*, pmtime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
+    C.StgSetTimes(lpszName, pctime, patime, pmtime)
+  end
+
+  def stgCreateStorageEx(pwcsName : Win32cr::Foundation::PWSTR, grfMode : Win32cr::System::Com::StructuredStorage::STGM, stgfmt : Win32cr::System::Com::StructuredStorage::STGFMT, grfAttrs : UInt32, pStgOptions : Win32cr::System::Com::StructuredStorage::STGOPTIONS*, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, riid : LibC::GUID*, ppObjectOpen : Void**) : Win32cr::Foundation::HRESULT
+    C.StgCreateStorageEx(pwcsName, grfMode, stgfmt, grfAttrs, pStgOptions, pSecurityDescriptor, riid, ppObjectOpen)
+  end
+
+  def stgOpenStorageEx(pwcsName : Win32cr::Foundation::PWSTR, grfMode : Win32cr::System::Com::StructuredStorage::STGM, stgfmt : Win32cr::System::Com::StructuredStorage::STGFMT, grfAttrs : UInt32, pStgOptions : Win32cr::System::Com::StructuredStorage::STGOPTIONS*, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, riid : LibC::GUID*, ppObjectOpen : Void**) : Win32cr::Foundation::HRESULT
+    C.StgOpenStorageEx(pwcsName, grfMode, stgfmt, grfAttrs, pStgOptions, pSecurityDescriptor, riid, ppObjectOpen)
+  end
+
+  def stgCreatePropStg(pUnk : Void*, fmtid : LibC::GUID*, pclsid : LibC::GUID*, grfFlags : UInt32, dwReserved : UInt32, ppPropStg : Void**) : Win32cr::Foundation::HRESULT
+    C.StgCreatePropStg(pUnk, fmtid, pclsid, grfFlags, dwReserved, ppPropStg)
+  end
+
+  def stgOpenPropStg(pUnk : Void*, fmtid : LibC::GUID*, grfFlags : UInt32, dwReserved : UInt32, ppPropStg : Void**) : Win32cr::Foundation::HRESULT
+    C.StgOpenPropStg(pUnk, fmtid, grfFlags, dwReserved, ppPropStg)
+  end
+
+  def stgCreatePropSetStg(pStorage : Void*, dwReserved : UInt32, ppPropSetStg : Void**) : Win32cr::Foundation::HRESULT
+    C.StgCreatePropSetStg(pStorage, dwReserved, ppPropSetStg)
+  end
+
+  def fmtIdToPropStgName(pfmtid : LibC::GUID*, oszName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.FmtIdToPropStgName(pfmtid, oszName)
+  end
+
+  def propStgNameToFmtId(oszName : Win32cr::Foundation::PWSTR, pfmtid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.PropStgNameToFmtId(oszName, pfmtid)
+  end
+
+  def readClassStg(pStg : Void*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.ReadClassStg(pStg, pclsid)
+  end
+
+  def writeClassStg(pStg : Void*, rclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.WriteClassStg(pStg, rclsid)
+  end
+
+  def readClassStm(pStm : Void*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.ReadClassStm(pStm, pclsid)
+  end
+
+  def writeClassStm(pStm : Void*, rclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.WriteClassStm(pStm, rclsid)
+  end
+
+  def getHGlobalFromILockBytes(plkbyt : Void*, phglobal : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
+    C.GetHGlobalFromILockBytes(plkbyt, phglobal)
+  end
+
+  def createILockBytesOnHGlobal(hGlobal : LibC::IntPtrT, fDeleteOnRelease : Win32cr::Foundation::BOOL, pplkbyt : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateILockBytesOnHGlobal(hGlobal, fDeleteOnRelease, pplkbyt)
+  end
+
+  def getConvertStg(pStg : Void*) : Win32cr::Foundation::HRESULT
+    C.GetConvertStg(pStg)
+  end
+
+  def stgConvertVariantToProperty(pvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, code_page : UInt16, pprop : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*, pcb : UInt32*, pid : UInt32, fReserved : Win32cr::Foundation::BOOLEAN, pcIndirect : UInt32*) : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*
+    C.StgConvertVariantToProperty(pvar, code_page, pprop, pcb, pid, fReserved, pcIndirect)
+  end
+
+  def stgConvertPropertyToVariant(pprop : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*, code_page : UInt16, pvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pma : Win32cr::System::Com::StructuredStorage::PMemoryAllocator*) : Win32cr::Foundation::BOOLEAN
+    C.StgConvertPropertyToVariant(pprop, code_page, pvar, pma)
+  end
+
+  def stgPropertyLengthAsVariant(pProp : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*, cbProp : UInt32, code_page : UInt16, bReserved : UInt8) : UInt32
+    C.StgPropertyLengthAsVariant(pProp, cbProp, code_page, bReserved)
+  end
+
+  def writeFmtUserTypeStg(pstg : Void*, cf : UInt16, lpszUserType : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.WriteFmtUserTypeStg(pstg, cf, lpszUserType)
+  end
+
+  def readFmtUserTypeStg(pstg : Void*, pcf : UInt16*, lplpszUserType : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.ReadFmtUserTypeStg(pstg, pcf, lplpszUserType)
+  end
+
+  def oleConvertOLESTREAMToIStorage(lpolestream : Win32cr::System::Com::StructuredStorage::OLESTREAM*, pstg : Void*, ptd : Win32cr::System::Com::DVTARGETDEVICE*) : Win32cr::Foundation::HRESULT
+    C.OleConvertOLESTREAMToIStorage(lpolestream, pstg, ptd)
+  end
+
+  def oleConvertIStorageToOLESTREAM(pstg : Void*, lpolestream : Win32cr::System::Com::StructuredStorage::OLESTREAM*) : Win32cr::Foundation::HRESULT
+    C.OleConvertIStorageToOLESTREAM(pstg, lpolestream)
+  end
+
+  def setConvertStg(pStg : Void*, fConvert : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.SetConvertStg(pStg, fConvert)
+  end
+
+  def oleConvertIStorageToOLESTREAMEx(pstg : Void*, cfFormat : UInt16, lWidth : Int32, lHeight : Int32, dwSize : UInt32, pmedium : Win32cr::System::Com::STGMEDIUM*, polestm : Win32cr::System::Com::StructuredStorage::OLESTREAM*) : Win32cr::Foundation::HRESULT
+    C.OleConvertIStorageToOLESTREAMEx(pstg, cfFormat, lWidth, lHeight, dwSize, pmedium, polestm)
+  end
+
+  def oleConvertOLESTREAMToIStorageEx(polestm : Win32cr::System::Com::StructuredStorage::OLESTREAM*, pstg : Void*, pcfFormat : UInt16*, plwWidth : Int32*, plHeight : Int32*, pdwSize : UInt32*, pmedium : Win32cr::System::Com::STGMEDIUM*) : Win32cr::Foundation::HRESULT
+    C.OleConvertOLESTREAMToIStorageEx(polestm, pstg, pcfFormat, plwWidth, plHeight, pdwSize, pmedium)
+  end
+
+  def stgSerializePropVariant(ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ppProp : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE**, pcb : UInt32*) : Win32cr::Foundation::HRESULT
+    C.StgSerializePropVariant(ppropvar, ppProp, pcb)
+  end
+
+  def stgDeserializePropVariant(pprop : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*, cbMax : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.StgDeserializePropVariant(pprop, cbMax, ppropvar)
+  end
+
   @[Link("ole32")]
   @[Link("dflayout")]
   @[Link("propsys")]
   lib C
+    # :nodoc:
     fun CoGetInstanceFromFile(pServerInfo : Win32cr::System::Com::COSERVERINFO*, pClsid : LibC::GUID*, punkOuter : Void*, dwClsCtx : Win32cr::System::Com::CLSCTX, grfMode : UInt32, pwszName : Win32cr::Foundation::PWSTR, dwCount : UInt32, pResults : Win32cr::System::Com::MULTI_QI*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetInstanceFromIStorage(pServerInfo : Win32cr::System::Com::COSERVERINFO*, pClsid : LibC::GUID*, punkOuter : Void*, dwClsCtx : Win32cr::System::Com::CLSCTX, pstg : Void*, dwCount : UInt32, pResults : Win32cr::System::Com::MULTI_QI*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgOpenAsyncDocfileOnIFillLockBytes(pflb : Void*, grfMode : UInt32, asyncFlags : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgGetIFillLockBytesOnILockBytes(pilb : Void*, ppflb : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgGetIFillLockBytesOnFile(pwcsName : Win32cr::Foundation::PWSTR, ppflb : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgOpenLayoutDocfile(pwcsDfName : Win32cr::Foundation::PWSTR, grfMode : UInt32, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateStreamOnHGlobal(hGlobal : LibC::IntPtrT, fDeleteOnRelease : Win32cr::Foundation::BOOL, ppstm : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetHGlobalFromStream(pstm : Void*, phglobal : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetInterfaceAndReleaseStream(pStm : Void*, iid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantCopy(pvarDest : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarSrc : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantClear(pvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FreePropVariantArray(cVariants : UInt32, rgvars : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgCreateDocfile(pwcsName : Win32cr::Foundation::PWSTR, grfMode : Win32cr::System::Com::StructuredStorage::STGM, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgCreateDocfileOnILockBytes(plkbyt : Void*, grfMode : Win32cr::System::Com::StructuredStorage::STGM, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgOpenStorage(pwcsName : Win32cr::Foundation::PWSTR, pstgPriority : Void*, grfMode : Win32cr::System::Com::StructuredStorage::STGM, snbExclude : UInt16**, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgOpenStorageOnILockBytes(plkbyt : Void*, pstgPriority : Void*, grfMode : UInt32, snbExclude : UInt16**, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgIsStorageFile(pwcsName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgIsStorageILockBytes(plkbyt : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgSetTimes(lpszName : Win32cr::Foundation::PWSTR, pctime : Win32cr::Foundation::FILETIME*, patime : Win32cr::Foundation::FILETIME*, pmtime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgCreateStorageEx(pwcsName : Win32cr::Foundation::PWSTR, grfMode : Win32cr::System::Com::StructuredStorage::STGM, stgfmt : Win32cr::System::Com::StructuredStorage::STGFMT, grfAttrs : UInt32, pStgOptions : Win32cr::System::Com::StructuredStorage::STGOPTIONS*, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, riid : LibC::GUID*, ppObjectOpen : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgOpenStorageEx(pwcsName : Win32cr::Foundation::PWSTR, grfMode : Win32cr::System::Com::StructuredStorage::STGM, stgfmt : Win32cr::System::Com::StructuredStorage::STGFMT, grfAttrs : UInt32, pStgOptions : Win32cr::System::Com::StructuredStorage::STGOPTIONS*, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, riid : LibC::GUID*, ppObjectOpen : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgCreatePropStg(pUnk : Void*, fmtid : LibC::GUID*, pclsid : LibC::GUID*, grfFlags : UInt32, dwReserved : UInt32, ppPropStg : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgOpenPropStg(pUnk : Void*, fmtid : LibC::GUID*, grfFlags : UInt32, dwReserved : UInt32, ppPropStg : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgCreatePropSetStg(pStorage : Void*, dwReserved : UInt32, ppPropSetStg : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FmtIdToPropStgName(pfmtid : LibC::GUID*, oszName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropStgNameToFmtId(oszName : Win32cr::Foundation::PWSTR, pfmtid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ReadClassStg(pStg : Void*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WriteClassStg(pStg : Void*, rclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ReadClassStm(pStm : Void*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WriteClassStm(pStm : Void*, rclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetHGlobalFromILockBytes(plkbyt : Void*, phglobal : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateILockBytesOnHGlobal(hGlobal : LibC::IntPtrT, fDeleteOnRelease : Win32cr::Foundation::BOOL, pplkbyt : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetConvertStg(pStg : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgConvertVariantToProperty(pvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, code_page : UInt16, pprop : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*, pcb : UInt32*, pid : UInt32, fReserved : Win32cr::Foundation::BOOLEAN, pcIndirect : UInt32*) : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*
 
+    # :nodoc:
     fun StgConvertPropertyToVariant(pprop : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*, code_page : UInt16, pvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pma : Win32cr::System::Com::StructuredStorage::PMemoryAllocator*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun StgPropertyLengthAsVariant(pProp : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*, cbProp : UInt32, code_page : UInt16, bReserved : UInt8) : UInt32
 
+    # :nodoc:
     fun WriteFmtUserTypeStg(pstg : Void*, cf : UInt16, lpszUserType : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ReadFmtUserTypeStg(pstg : Void*, pcf : UInt16*, lplpszUserType : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OleConvertOLESTREAMToIStorage(lpolestream : Win32cr::System::Com::StructuredStorage::OLESTREAM*, pstg : Void*, ptd : Win32cr::System::Com::DVTARGETDEVICE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OleConvertIStorageToOLESTREAM(pstg : Void*, lpolestream : Win32cr::System::Com::StructuredStorage::OLESTREAM*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetConvertStg(pStg : Void*, fConvert : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OleConvertIStorageToOLESTREAMEx(pstg : Void*, cfFormat : UInt16, lWidth : Int32, lHeight : Int32, dwSize : UInt32, pmedium : Win32cr::System::Com::STGMEDIUM*, polestm : Win32cr::System::Com::StructuredStorage::OLESTREAM*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OleConvertOLESTREAMToIStorageEx(polestm : Win32cr::System::Com::StructuredStorage::OLESTREAM*, pstg : Void*, pcfFormat : UInt16*, plwWidth : Int32*, plHeight : Int32*, pdwSize : UInt32*, pmedium : Win32cr::System::Com::STGMEDIUM*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgSerializePropVariant(ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ppProp : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE**, pcb : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StgDeserializePropVariant(pprop : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*, cbMax : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
   end

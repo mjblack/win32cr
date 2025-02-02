@@ -5,6 +5,7 @@ require "./../system/com/structured_storage.cr"
 require "./properties.cr"
 
 module Win32cr::Devices::PortableDevices
+  extend self
   DEVPKEY_MTPBTH_IsConnected = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xea1237fa_u32, 0x589d_u16, 0x4472_u16, StaticArray[0x84_u8, 0xe4_u8, 0xa_u8, 0xbe_u8, 0x36_u8, 0xfd_u8, 0x62_u8, 0xef_u8]), 2_u32)
   GUID_DEVINTERFACE_WPD = "6ac27878-a6fa-4155-ba85-f98f491d4f33"
   GUID_DEVINTERFACE_WPD_PRIVATE = "ba0c718f-4ded-49b7-bdd3-fabe28661211"
@@ -3095,8 +3096,13 @@ module Win32cr::Devices::PortableDevices
 
   end
 
+  def dMProcessConfigXMLFiltered(pszXmlIn : Win32cr::Foundation::PWSTR, rgszAllowedCspNodes : Win32cr::Foundation::PWSTR*, dwNumAllowedCspNodes : UInt32, pbstrXmlOut : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    C.DMProcessConfigXMLFiltered(pszXmlIn, rgszAllowedCspNodes, dwNumAllowedCspNodes, pbstrXmlOut)
+  end
+
   @[Link("dmprocessxmlfiltered")]
   lib C
+    # :nodoc:
     fun DMProcessConfigXMLFiltered(pszXmlIn : Win32cr::Foundation::PWSTR, rgszAllowedCspNodes : Win32cr::Foundation::PWSTR*, dwNumAllowedCspNodes : UInt32, pbstrXmlOut : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
 
   end

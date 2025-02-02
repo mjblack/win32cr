@@ -3,6 +3,7 @@ require "./../security.cr"
 require "./../system/io.cr"
 
 module Win32cr::Storage::Vhd
+  extend self
   VIRTUAL_STORAGE_TYPE_VENDOR_UNKNOWN = "00000000-0000-0000-0000-000000000000"
   VIRTUAL_STORAGE_TYPE_VENDOR_MICROSOFT = "ec984aec-a0f9-47e9-901f-71415a66345b"
   VIRTUAL_STORAGE_TYPE_DEVICE_UNKNOWN = 0_u32
@@ -971,64 +972,209 @@ module Win32cr::Storage::Vhd
     end
   end
 
+  def openVirtualDisk(virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, path : Win32cr::Foundation::PWSTR, virtual_disk_access_mask : Win32cr::Storage::Vhd::VIRTUAL_DISK_ACCESS_MASK, flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_PARAMETERS*, handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+    C.OpenVirtualDisk(virtual_storage_type, path, virtual_disk_access_mask, flags, parameters, handle)
+  end
+
+  def createVirtualDisk(virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, path : Win32cr::Foundation::PWSTR, virtual_disk_access_mask : Win32cr::Storage::Vhd::VIRTUAL_DISK_ACCESS_MASK, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, flags : Win32cr::Storage::Vhd::CREATE_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32, parameters : Win32cr::Storage::Vhd::CREATE_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*, handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+    C.CreateVirtualDisk(virtual_storage_type, path, virtual_disk_access_mask, security_descriptor, flags, provider_specific_flags, parameters, overlapped, handle)
+  end
+
+  def attachVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, flags : Win32cr::Storage::Vhd::ATTACH_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32, parameters : Win32cr::Storage::Vhd::ATTACH_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    C.AttachVirtualDisk(virtual_disk_handle, security_descriptor, flags, provider_specific_flags, parameters, overlapped)
+  end
+
+  def detachVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::DETACH_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    C.DetachVirtualDisk(virtual_disk_handle, flags, provider_specific_flags)
+  end
+
+  def getVirtualDiskPhysicalPath(virtual_disk_handle : Win32cr::Foundation::HANDLE, disk_path_size_in_bytes : UInt32*, disk_path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.GetVirtualDiskPhysicalPath(virtual_disk_handle, disk_path_size_in_bytes, disk_path)
+  end
+
+  def getAllAttachedVirtualDiskPhysicalPaths(paths_buffer_size_in_bytes : UInt32*, paths_buffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.GetAllAttachedVirtualDiskPhysicalPaths(paths_buffer_size_in_bytes, paths_buffer)
+  end
+
+  def getStorageDependencyInformation(object_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::GET_STORAGE_DEPENDENCY_FLAG, storage_dependency_info_size : UInt32, storage_dependency_info : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO*, size_used : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetStorageDependencyInformation(object_handle, flags, storage_dependency_info_size, storage_dependency_info, size_used)
+  end
+
+  def getVirtualDiskInformation(virtual_disk_handle : Win32cr::Foundation::HANDLE, virtual_disk_info_size : UInt32*, virtual_disk_info : Win32cr::Storage::Vhd::GET_VIRTUAL_DISK_INFO*, size_used : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetVirtualDiskInformation(virtual_disk_handle, virtual_disk_info_size, virtual_disk_info, size_used)
+  end
+
+  def setVirtualDiskInformation(virtual_disk_handle : Win32cr::Foundation::HANDLE, virtual_disk_info : Win32cr::Storage::Vhd::SET_VIRTUAL_DISK_INFO*) : Win32cr::Foundation::WIN32_ERROR
+    C.SetVirtualDiskInformation(virtual_disk_handle, virtual_disk_info)
+  end
+
+  def enumerateVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, number_of_items : UInt32*, items : LibC::GUID*) : Win32cr::Foundation::WIN32_ERROR
+    C.EnumerateVirtualDiskMetadata(virtual_disk_handle, number_of_items, items)
+  end
+
+  def getVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, item : LibC::GUID*, meta_data_size : UInt32*, meta_data : Void*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetVirtualDiskMetadata(virtual_disk_handle, item, meta_data_size, meta_data)
+  end
+
+  def setVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, item : LibC::GUID*, meta_data_size : UInt32, meta_data : Void*) : Win32cr::Foundation::WIN32_ERROR
+    C.SetVirtualDiskMetadata(virtual_disk_handle, item, meta_data_size, meta_data)
+  end
+
+  def deleteVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, item : LibC::GUID*) : Win32cr::Foundation::WIN32_ERROR
+    C.DeleteVirtualDiskMetadata(virtual_disk_handle, item)
+  end
+
+  def getVirtualDiskOperationProgress(virtual_disk_handle : Win32cr::Foundation::HANDLE, overlapped : Win32cr::System::IO::OVERLAPPED*, progress : Win32cr::Storage::Vhd::VIRTUAL_DISK_PROGRESS*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetVirtualDiskOperationProgress(virtual_disk_handle, overlapped, progress)
+  end
+
+  def compactVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::COMPACT_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::COMPACT_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    C.CompactVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+  end
+
+  def mergeVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::MERGE_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::MERGE_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    C.MergeVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+  end
+
+  def expandVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::EXPAND_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::EXPAND_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    C.ExpandVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+  end
+
+  def resizeVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::RESIZE_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::RESIZE_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    C.ResizeVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+  end
+
+  def mirrorVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::MIRROR_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::MIRROR_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    C.MirrorVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+  end
+
+  def breakMirrorVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::WIN32_ERROR
+    C.BreakMirrorVirtualDisk(virtual_disk_handle)
+  end
+
+  def addVirtualDiskParent(virtual_disk_handle : Win32cr::Foundation::HANDLE, parent_path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.AddVirtualDiskParent(virtual_disk_handle, parent_path)
+  end
+
+  def queryChangesVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, change_tracking_id : Win32cr::Foundation::PWSTR, byte_offset : UInt64, byte_length : UInt64, flags : Win32cr::Storage::Vhd::QUERY_CHANGES_VIRTUAL_DISK_FLAG, ranges : Win32cr::Storage::Vhd::QUERY_CHANGES_VIRTUAL_DISK_RANGE*, range_count : UInt32*, processed_length : UInt64*) : Win32cr::Foundation::WIN32_ERROR
+    C.QueryChangesVirtualDisk(virtual_disk_handle, change_tracking_id, byte_offset, byte_length, flags, ranges, range_count, processed_length)
+  end
+
+  def takeSnapshotVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::TAKE_SNAPSHOT_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::TAKE_SNAPSHOT_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
+    C.TakeSnapshotVhdSet(virtual_disk_handle, parameters, flags)
+  end
+
+  def deleteSnapshotVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::DELETE_SNAPSHOT_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::DELETE_SNAPSHOT_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
+    C.DeleteSnapshotVhdSet(virtual_disk_handle, parameters, flags)
+  end
+
+  def modifyVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::MODIFY_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::MODIFY_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
+    C.ModifyVhdSet(virtual_disk_handle, parameters, flags)
+  end
+
+  def applySnapshotVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::APPLY_SNAPSHOT_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::APPLY_SNAPSHOT_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
+    C.ApplySnapshotVhdSet(virtual_disk_handle, parameters, flags)
+  end
+
+  def rawSCSIVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_PARAMETERS*, flags : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_FLAG, response : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_RESPONSE*) : Win32cr::Foundation::WIN32_ERROR
+    C.RawSCSIVirtualDisk(virtual_disk_handle, parameters, flags, response)
+  end
+
+  def forkVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::FORK_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::FORK_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    C.ForkVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+  end
+
+  def completeForkVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::WIN32_ERROR
+    C.CompleteForkVirtualDisk(virtual_disk_handle)
+  end
+
   @[Link("virtdisk")]
   lib C
+    # :nodoc:
     fun OpenVirtualDisk(virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, path : Win32cr::Foundation::PWSTR, virtual_disk_access_mask : Win32cr::Storage::Vhd::VIRTUAL_DISK_ACCESS_MASK, flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_PARAMETERS*, handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun CreateVirtualDisk(virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, path : Win32cr::Foundation::PWSTR, virtual_disk_access_mask : Win32cr::Storage::Vhd::VIRTUAL_DISK_ACCESS_MASK, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, flags : Win32cr::Storage::Vhd::CREATE_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32, parameters : Win32cr::Storage::Vhd::CREATE_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*, handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun AttachVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, flags : Win32cr::Storage::Vhd::ATTACH_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32, parameters : Win32cr::Storage::Vhd::ATTACH_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun DetachVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::DETACH_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetVirtualDiskPhysicalPath(virtual_disk_handle : Win32cr::Foundation::HANDLE, disk_path_size_in_bytes : UInt32*, disk_path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetAllAttachedVirtualDiskPhysicalPaths(paths_buffer_size_in_bytes : UInt32*, paths_buffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetStorageDependencyInformation(object_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::GET_STORAGE_DEPENDENCY_FLAG, storage_dependency_info_size : UInt32, storage_dependency_info : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO*, size_used : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetVirtualDiskInformation(virtual_disk_handle : Win32cr::Foundation::HANDLE, virtual_disk_info_size : UInt32*, virtual_disk_info : Win32cr::Storage::Vhd::GET_VIRTUAL_DISK_INFO*, size_used : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun SetVirtualDiskInformation(virtual_disk_handle : Win32cr::Foundation::HANDLE, virtual_disk_info : Win32cr::Storage::Vhd::SET_VIRTUAL_DISK_INFO*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun EnumerateVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, number_of_items : UInt32*, items : LibC::GUID*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, item : LibC::GUID*, meta_data_size : UInt32*, meta_data : Void*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun SetVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, item : LibC::GUID*, meta_data_size : UInt32, meta_data : Void*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun DeleteVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, item : LibC::GUID*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetVirtualDiskOperationProgress(virtual_disk_handle : Win32cr::Foundation::HANDLE, overlapped : Win32cr::System::IO::OVERLAPPED*, progress : Win32cr::Storage::Vhd::VIRTUAL_DISK_PROGRESS*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun CompactVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::COMPACT_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::COMPACT_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun MergeVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::MERGE_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::MERGE_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun ExpandVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::EXPAND_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::EXPAND_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun ResizeVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::RESIZE_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::RESIZE_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun MirrorVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::MIRROR_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::MIRROR_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun BreakMirrorVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun AddVirtualDiskParent(virtual_disk_handle : Win32cr::Foundation::HANDLE, parent_path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun QueryChangesVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, change_tracking_id : Win32cr::Foundation::PWSTR, byte_offset : UInt64, byte_length : UInt64, flags : Win32cr::Storage::Vhd::QUERY_CHANGES_VIRTUAL_DISK_FLAG, ranges : Win32cr::Storage::Vhd::QUERY_CHANGES_VIRTUAL_DISK_RANGE*, range_count : UInt32*, processed_length : UInt64*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun TakeSnapshotVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::TAKE_SNAPSHOT_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::TAKE_SNAPSHOT_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun DeleteSnapshotVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::DELETE_SNAPSHOT_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::DELETE_SNAPSHOT_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun ModifyVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::MODIFY_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::MODIFY_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun ApplySnapshotVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::APPLY_SNAPSHOT_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::APPLY_SNAPSHOT_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RawSCSIVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_PARAMETERS*, flags : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_FLAG, response : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_RESPONSE*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun ForkVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::FORK_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::FORK_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun CompleteForkVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::WIN32_ERROR
 
   end

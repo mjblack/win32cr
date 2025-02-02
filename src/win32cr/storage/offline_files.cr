@@ -2,6 +2,7 @@ require "./../system/com.cr"
 require "./../foundation.cr"
 
 module Win32cr::Storage::OfflineFiles
+  extend self
   OFFLINEFILES_SYNC_STATE_LOCAL_KNOWN = 1_u32
   OFFLINEFILES_SYNC_STATE_REMOTE_KNOWN = 2_u32
   OFFLINEFILES_CHANGES_NONE = 0_u32
@@ -2194,14 +2195,34 @@ module Win32cr::Storage::OfflineFiles
 
   end
 
+  def offlineFilesEnable(bEnable : Win32cr::Foundation::BOOL, pbRebootRequired : Win32cr::Foundation::BOOL*) : UInt32
+    C.OfflineFilesEnable(bEnable, pbRebootRequired)
+  end
+
+  def offlineFilesStart : UInt32
+    C.OfflineFilesStart
+  end
+
+  def offlineFilesQueryStatus(pbActive : Win32cr::Foundation::BOOL*, pbEnabled : Win32cr::Foundation::BOOL*) : UInt32
+    C.OfflineFilesQueryStatus(pbActive, pbEnabled)
+  end
+
+  def offlineFilesQueryStatusEx(pbActive : Win32cr::Foundation::BOOL*, pbEnabled : Win32cr::Foundation::BOOL*, pbAvailable : Win32cr::Foundation::BOOL*) : UInt32
+    C.OfflineFilesQueryStatusEx(pbActive, pbEnabled, pbAvailable)
+  end
+
   @[Link("cscapi")]
   lib C
+    # :nodoc:
     fun OfflineFilesEnable(bEnable : Win32cr::Foundation::BOOL, pbRebootRequired : Win32cr::Foundation::BOOL*) : UInt32
 
+    # :nodoc:
     fun OfflineFilesStart : UInt32
 
+    # :nodoc:
     fun OfflineFilesQueryStatus(pbActive : Win32cr::Foundation::BOOL*, pbEnabled : Win32cr::Foundation::BOOL*) : UInt32
 
+    # :nodoc:
     fun OfflineFilesQueryStatusEx(pbActive : Win32cr::Foundation::BOOL*, pbEnabled : Win32cr::Foundation::BOOL*, pbAvailable : Win32cr::Foundation::BOOL*) : UInt32
 
   end

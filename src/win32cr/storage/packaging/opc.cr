@@ -4,6 +4,7 @@ require "./../../security/cryptography.cr"
 require "./../../security.cr"
 
 module Win32cr::Storage::Packaging::Opc
+  extend self
   OPC_E_NONCONFORMING_URI = -2142175231_i32
   OPC_E_RELATIVE_URI_REQUIRED = -2142175230_i32
   OPC_E_RELATIONSHIP_URI_REQUIRED = -2142175229_i32

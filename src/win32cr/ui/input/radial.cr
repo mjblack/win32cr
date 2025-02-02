@@ -2,6 +2,7 @@ require "./../../system/win_rt.cr"
 require "./../../foundation.cr"
 
 module Win32cr::UI::Input::Radial
+  extend self
 
 
   @[Extern]

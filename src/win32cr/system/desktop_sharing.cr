@@ -2,6 +2,7 @@ require "./com.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::DesktopSharing
+  extend self
   DISPID_RDPSRAPI_METHOD_OPEN = 100_u32
   DISPID_RDPSRAPI_METHOD_CLOSE = 101_u32
   DISPID_RDPSRAPI_METHOD_SETSHAREDRECT = 102_u32

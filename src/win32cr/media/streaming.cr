@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::Media::Streaming
+  extend self
 
   enum MF_TRANSFER_VIDEO_FRAME_FLAGS
     MF_TRANSFER_VIDEO_FRAME_DEFAULT = 0_i32

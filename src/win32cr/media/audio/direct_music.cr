@@ -7,6 +7,7 @@ require "./../../system/io.cr"
 require "./../multimedia.cr"
 
 module Win32cr::Media::Audio::DirectMusic
+  extend self
   alias LPFNDIRECTSOUNDDEVICEENUMERATECALLBACK1 = Proc(Win32cr::Media::Audio::DirectMusic::DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_1_DATA*, Void*, Win32cr::Foundation::BOOL)
 
   alias LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKA = Proc(Win32cr::Media::Audio::DirectMusic::DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_A_DATA*, Void*, Win32cr::Foundation::BOOL)

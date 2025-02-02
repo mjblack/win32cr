@@ -8,6 +8,7 @@ require "./../security.cr"
 require "./../ui/shell.cr"
 
 module Win32cr::System::GroupPolicy
+  extend self
   alias CriticalPolicySectionHandle = LibC::IntPtrT
   alias PFNSTATUSMESSAGECALLBACK = Proc(Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR, UInt32)
 
@@ -4176,72 +4177,232 @@ module Win32cr::System::GroupPolicy
 
   end
 
+  def refreshPolicy(bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.RefreshPolicy(bMachine)
+  end
+
+  def refreshPolicyEx(bMachine : Win32cr::Foundation::BOOL, dwOptions : UInt32) : Win32cr::Foundation::BOOL
+    C.RefreshPolicyEx(bMachine, dwOptions)
+  end
+
+  def enterCriticalPolicySection(bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HANDLE
+    C.EnterCriticalPolicySection(bMachine)
+  end
+
+  def leaveCriticalPolicySection(hSection : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.LeaveCriticalPolicySection(hSection)
+  end
+
+  def registerGPNotification(hEvent : Win32cr::Foundation::HANDLE, bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.RegisterGPNotification(hEvent, bMachine)
+  end
+
+  def unregisterGPNotification(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.UnregisterGPNotification(hEvent)
+  end
+
+  def getGPOListA(hToken : Win32cr::Foundation::HANDLE, lpName : Win32cr::Foundation::PSTR, lpHostName : Win32cr::Foundation::PSTR, lpComputerName : Win32cr::Foundation::PSTR, dwFlags : UInt32, pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA**) : Win32cr::Foundation::BOOL
+    C.GetGPOListA(hToken, lpName, lpHostName, lpComputerName, dwFlags, pGPOList)
+  end
+
+  def getGPOListW(hToken : Win32cr::Foundation::HANDLE, lpName : Win32cr::Foundation::PWSTR, lpHostName : Win32cr::Foundation::PWSTR, lpComputerName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW**) : Win32cr::Foundation::BOOL
+    C.GetGPOListW(hToken, lpName, lpHostName, lpComputerName, dwFlags, pGPOList)
+  end
+
+  def freeGPOListA(pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*) : Win32cr::Foundation::BOOL
+    C.FreeGPOListA(pGPOList)
+  end
+
+  def freeGPOListW(pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW*) : Win32cr::Foundation::BOOL
+    C.FreeGPOListW(pGPOList)
+  end
+
+  def getAppliedGPOListA(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PSTR, pSidUser : Win32cr::Foundation::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA**) : UInt32
+    C.GetAppliedGPOListA(dwFlags, pMachineName, pSidUser, pGuidExtension, ppGPOList)
+  end
+
+  def getAppliedGPOListW(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PWSTR, pSidUser : Win32cr::Foundation::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW**) : UInt32
+    C.GetAppliedGPOListW(dwFlags, pMachineName, pSidUser, pGuidExtension, ppGPOList)
+  end
+
+  def processGroupPolicyCompleted(extensionId : LibC::GUID*, pAsyncHandle : LibC::UIntPtrT, dwStatus : UInt32) : UInt32
+    C.ProcessGroupPolicyCompleted(extensionId, pAsyncHandle, dwStatus)
+  end
+
+  def processGroupPolicyCompletedEx(extensionId : LibC::GUID*, pAsyncHandle : LibC::UIntPtrT, dwStatus : UInt32, rsop_status : Win32cr::Foundation::HRESULT) : UInt32
+    C.ProcessGroupPolicyCompletedEx(extensionId, pAsyncHandle, dwStatus, rsop_status)
+  end
+
+  def rsopAccessCheckByType(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pPrincipalSelfSid : Win32cr::Foundation::PSID, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pObjectTypeList : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pPrivilegeSet : Win32cr::Security::PRIVILEGE_SET*, pdwPrivilegeSetLength : UInt32*, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Int32*) : Win32cr::Foundation::HRESULT
+    C.RsopAccessCheckByType(pSecurityDescriptor, pPrincipalSelfSid, pRsopToken, dwDesiredAccessMask, pObjectTypeList, object_type_list_length, pGenericMapping, pPrivilegeSet, pdwPrivilegeSetLength, pdwGrantedAccessMask, pbAccessStatus)
+  end
+
+  def rsopFileAccessCheck(pszFileName : Win32cr::Foundation::PWSTR, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Int32*) : Win32cr::Foundation::HRESULT
+    C.RsopFileAccessCheck(pszFileName, pRsopToken, dwDesiredAccessMask, pdwGrantedAccessMask, pbAccessStatus)
+  end
+
+  def rsopSetPolicySettingStatus(dwFlags : UInt32, pServices : Void*, pSettingInstance : Void*, nInfo : UInt32, pStatus : Win32cr::System::GroupPolicy::POLICYSETTINGSTATUSINFO*) : Win32cr::Foundation::HRESULT
+    C.RsopSetPolicySettingStatus(dwFlags, pServices, pSettingInstance, nInfo, pStatus)
+  end
+
+  def rsopResetPolicySettingStatus(dwFlags : UInt32, pServices : Void*, pSettingInstance : Void*) : Win32cr::Foundation::HRESULT
+    C.RsopResetPolicySettingStatus(dwFlags, pServices, pSettingInstance)
+  end
+
+  def generateGPNotification(bMachine : Win32cr::Foundation::BOOL, lpwszMgmtProduct : Win32cr::Foundation::PWSTR, dwMgmtProductOptions : UInt32) : UInt32
+    C.GenerateGPNotification(bMachine, lpwszMgmtProduct, dwMgmtProductOptions)
+  end
+
+  def installApplication(pInstallInfo : Win32cr::System::GroupPolicy::INSTALLDATA*) : UInt32
+    C.InstallApplication(pInstallInfo)
+  end
+
+  def uninstallApplication(product_code : Win32cr::Foundation::PWSTR, dwStatus : UInt32) : UInt32
+    C.UninstallApplication(product_code, dwStatus)
+  end
+
+  def commandLineFromMsiDescriptor(descriptor : Win32cr::Foundation::PWSTR, command_line : UInt16*, command_line_length : UInt32*) : UInt32
+    C.CommandLineFromMsiDescriptor(descriptor, command_line, command_line_length)
+  end
+
+  def getManagedApplications(pCategory : LibC::GUID*, dwQueryFlags : UInt32, dwInfoLevel : UInt32, pdwApps : UInt32*, prgManagedApps : Win32cr::System::GroupPolicy::MANAGEDAPPLICATION**) : UInt32
+    C.GetManagedApplications(pCategory, dwQueryFlags, dwInfoLevel, pdwApps, prgManagedApps)
+  end
+
+  def getLocalManagedApplications(bUserApps : Win32cr::Foundation::BOOL, pdwApps : UInt32*, prgLocalApps : Win32cr::System::GroupPolicy::LOCALMANAGEDAPPLICATION**) : UInt32
+    C.GetLocalManagedApplications(bUserApps, pdwApps, prgLocalApps)
+  end
+
+  def getLocalManagedApplicationData(product_code : Win32cr::Foundation::PWSTR, display_name : Win32cr::Foundation::PWSTR*, support_url : Win32cr::Foundation::PWSTR*) : Void
+    C.GetLocalManagedApplicationData(product_code, display_name, support_url)
+  end
+
+  def getManagedApplicationCategories(dwReserved : UInt32, pAppCategory : Win32cr::UI::Shell::APPCATEGORYINFOLIST*) : UInt32
+    C.GetManagedApplicationCategories(dwReserved, pAppCategory)
+  end
+
+  def createGPOLink(lpGPO : Win32cr::Foundation::PWSTR, lpContainer : Win32cr::Foundation::PWSTR, fHighPriority : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.CreateGPOLink(lpGPO, lpContainer, fHighPriority)
+  end
+
+  def deleteGPOLink(lpGPO : Win32cr::Foundation::PWSTR, lpContainer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.DeleteGPOLink(lpGPO, lpContainer)
+  end
+
+  def deleteAllGPOLinks(lpContainer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.DeleteAllGPOLinks(lpContainer)
+  end
+
+  def browseForGPO(lpBrowseInfo : Win32cr::System::GroupPolicy::GPOBROWSEINFO*) : Win32cr::Foundation::HRESULT
+    C.BrowseForGPO(lpBrowseInfo)
+  end
+
+  def importRSoPData(lpNameSpace : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.ImportRSoPData(lpNameSpace, lpFileName)
+  end
+
+  def exportRSoPData(lpNameSpace : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.ExportRSoPData(lpNameSpace, lpFileName)
+  end
+
   @[Link("userenv")]
   @[Link("advapi32")]
   @[Link("gpedit")]
   lib C
+    # :nodoc:
     fun RefreshPolicy(bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RefreshPolicyEx(bMachine : Win32cr::Foundation::BOOL, dwOptions : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnterCriticalPolicySection(bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun LeaveCriticalPolicySection(hSection : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterGPNotification(hEvent : Win32cr::Foundation::HANDLE, bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnregisterGPNotification(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetGPOListA(hToken : Win32cr::Foundation::HANDLE, lpName : Win32cr::Foundation::PSTR, lpHostName : Win32cr::Foundation::PSTR, lpComputerName : Win32cr::Foundation::PSTR, dwFlags : UInt32, pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetGPOListW(hToken : Win32cr::Foundation::HANDLE, lpName : Win32cr::Foundation::PWSTR, lpHostName : Win32cr::Foundation::PWSTR, lpComputerName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FreeGPOListA(pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FreeGPOListW(pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetAppliedGPOListA(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PSTR, pSidUser : Win32cr::Foundation::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA**) : UInt32
 
+    # :nodoc:
     fun GetAppliedGPOListW(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PWSTR, pSidUser : Win32cr::Foundation::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW**) : UInt32
 
+    # :nodoc:
     fun ProcessGroupPolicyCompleted(extensionId : LibC::GUID*, pAsyncHandle : LibC::UIntPtrT, dwStatus : UInt32) : UInt32
 
+    # :nodoc:
     fun ProcessGroupPolicyCompletedEx(extensionId : LibC::GUID*, pAsyncHandle : LibC::UIntPtrT, dwStatus : UInt32, rsop_status : Win32cr::Foundation::HRESULT) : UInt32
 
+    # :nodoc:
     fun RsopAccessCheckByType(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pPrincipalSelfSid : Win32cr::Foundation::PSID, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pObjectTypeList : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pPrivilegeSet : Win32cr::Security::PRIVILEGE_SET*, pdwPrivilegeSetLength : UInt32*, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RsopFileAccessCheck(pszFileName : Win32cr::Foundation::PWSTR, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RsopSetPolicySettingStatus(dwFlags : UInt32, pServices : Void*, pSettingInstance : Void*, nInfo : UInt32, pStatus : Win32cr::System::GroupPolicy::POLICYSETTINGSTATUSINFO*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RsopResetPolicySettingStatus(dwFlags : UInt32, pServices : Void*, pSettingInstance : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GenerateGPNotification(bMachine : Win32cr::Foundation::BOOL, lpwszMgmtProduct : Win32cr::Foundation::PWSTR, dwMgmtProductOptions : UInt32) : UInt32
 
+    # :nodoc:
     fun InstallApplication(pInstallInfo : Win32cr::System::GroupPolicy::INSTALLDATA*) : UInt32
 
+    # :nodoc:
     fun UninstallApplication(product_code : Win32cr::Foundation::PWSTR, dwStatus : UInt32) : UInt32
 
+    # :nodoc:
     fun CommandLineFromMsiDescriptor(descriptor : Win32cr::Foundation::PWSTR, command_line : UInt16*, command_line_length : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetManagedApplications(pCategory : LibC::GUID*, dwQueryFlags : UInt32, dwInfoLevel : UInt32, pdwApps : UInt32*, prgManagedApps : Win32cr::System::GroupPolicy::MANAGEDAPPLICATION**) : UInt32
 
+    # :nodoc:
     fun GetLocalManagedApplications(bUserApps : Win32cr::Foundation::BOOL, pdwApps : UInt32*, prgLocalApps : Win32cr::System::GroupPolicy::LOCALMANAGEDAPPLICATION**) : UInt32
 
+    # :nodoc:
     fun GetLocalManagedApplicationData(product_code : Win32cr::Foundation::PWSTR, display_name : Win32cr::Foundation::PWSTR*, support_url : Win32cr::Foundation::PWSTR*) : Void
 
+    # :nodoc:
     fun GetManagedApplicationCategories(dwReserved : UInt32, pAppCategory : Win32cr::UI::Shell::APPCATEGORYINFOLIST*) : UInt32
 
+    # :nodoc:
     fun CreateGPOLink(lpGPO : Win32cr::Foundation::PWSTR, lpContainer : Win32cr::Foundation::PWSTR, fHighPriority : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DeleteGPOLink(lpGPO : Win32cr::Foundation::PWSTR, lpContainer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DeleteAllGPOLinks(lpContainer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BrowseForGPO(lpBrowseInfo : Win32cr::System::GroupPolicy::GPOBROWSEINFO*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ImportRSoPData(lpNameSpace : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ExportRSoPData(lpNameSpace : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
   end

@@ -2,6 +2,7 @@ require "./properties.cr"
 require "./../foundation.cr"
 
 module Win32cr::Devices::DeviceQuery
+  extend self
   alias PDEV_QUERY_RESULT_CALLBACK = Proc(Win32cr::Devices::DeviceQuery::HDEVQUERY__*, Void*, Win32cr::Devices::DeviceQuery::DEV_QUERY_RESULT_ACTION_DATA*, Void)
 
 
@@ -137,33 +138,103 @@ module Win32cr::Devices::DeviceQuery
     end
   end
 
+  def devCreateObjectQuery(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, pCallback : Win32cr::Devices::DeviceQuery::PDEV_QUERY_RESULT_CALLBACK, pContext : Void*, phDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__**) : Win32cr::Foundation::HRESULT
+    C.DevCreateObjectQuery(object_type, query_flags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, pCallback, pContext, phDevQuery)
+  end
+
+  def devCreateObjectQueryEx(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, cExtendedParameterCount : UInt32, pExtendedParameters : Win32cr::Devices::DeviceQuery::DEV_QUERY_PARAMETER*, pCallback : Win32cr::Devices::DeviceQuery::PDEV_QUERY_RESULT_CALLBACK, pContext : Void*, phDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__**) : Win32cr::Foundation::HRESULT
+    C.DevCreateObjectQueryEx(object_type, query_flags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, cExtendedParameterCount, pExtendedParameters, pCallback, pContext, phDevQuery)
+  end
+
+  def devCreateObjectQueryFromId(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, pszObjectId : Win32cr::Foundation::PWSTR, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, pCallback : Win32cr::Devices::DeviceQuery::PDEV_QUERY_RESULT_CALLBACK, pContext : Void*, phDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__**) : Win32cr::Foundation::HRESULT
+    C.DevCreateObjectQueryFromId(object_type, pszObjectId, query_flags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, pCallback, pContext, phDevQuery)
+  end
+
+  def devCreateObjectQueryFromIdEx(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, pszObjectId : Win32cr::Foundation::PWSTR, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, cExtendedParameterCount : UInt32, pExtendedParameters : Win32cr::Devices::DeviceQuery::DEV_QUERY_PARAMETER*, pCallback : Win32cr::Devices::DeviceQuery::PDEV_QUERY_RESULT_CALLBACK, pContext : Void*, phDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__**) : Win32cr::Foundation::HRESULT
+    C.DevCreateObjectQueryFromIdEx(object_type, pszObjectId, query_flags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, cExtendedParameterCount, pExtendedParameters, pCallback, pContext, phDevQuery)
+  end
+
+  def devCreateObjectQueryFromIds(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, pszzObjectIds : Win32cr::Foundation::PWSTR, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, pCallback : Win32cr::Devices::DeviceQuery::PDEV_QUERY_RESULT_CALLBACK, pContext : Void*, phDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__**) : Win32cr::Foundation::HRESULT
+    C.DevCreateObjectQueryFromIds(object_type, pszzObjectIds, query_flags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, pCallback, pContext, phDevQuery)
+  end
+
+  def devCreateObjectQueryFromIdsEx(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, pszzObjectIds : Win32cr::Foundation::PWSTR, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, cExtendedParameterCount : UInt32, pExtendedParameters : Win32cr::Devices::DeviceQuery::DEV_QUERY_PARAMETER*, pCallback : Win32cr::Devices::DeviceQuery::PDEV_QUERY_RESULT_CALLBACK, pContext : Void*, phDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__**) : Win32cr::Foundation::HRESULT
+    C.DevCreateObjectQueryFromIdsEx(object_type, pszzObjectIds, query_flags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, cExtendedParameterCount, pExtendedParameters, pCallback, pContext, phDevQuery)
+  end
+
+  def devCloseObjectQuery(hDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__*) : Void
+    C.DevCloseObjectQuery(hDevQuery)
+  end
+
+  def devGetObjects(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, pcObjectCount : UInt32*, ppObjects : Win32cr::Devices::DeviceQuery::DEV_OBJECT**) : Win32cr::Foundation::HRESULT
+    C.DevGetObjects(object_type, query_flags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, pcObjectCount, ppObjects)
+  end
+
+  def devGetObjectsEx(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, cExtendedParameterCount : UInt32, pExtendedParameters : Win32cr::Devices::DeviceQuery::DEV_QUERY_PARAMETER*, pcObjectCount : UInt32*, ppObjects : Win32cr::Devices::DeviceQuery::DEV_OBJECT**) : Win32cr::Foundation::HRESULT
+    C.DevGetObjectsEx(object_type, query_flags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, cExtendedParameterCount, pExtendedParameters, pcObjectCount, ppObjects)
+  end
+
+  def devFreeObjects(cObjectCount : UInt32, pObjects : Win32cr::Devices::DeviceQuery::DEV_OBJECT*) : Void
+    C.DevFreeObjects(cObjectCount, pObjects)
+  end
+
+  def devGetObjectProperties(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, pszObjectId : Win32cr::Foundation::PWSTR, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, pcPropertyCount : UInt32*, ppProperties : Win32cr::Devices::Properties::DEVPROPERTY**) : Win32cr::Foundation::HRESULT
+    C.DevGetObjectProperties(object_type, pszObjectId, query_flags, cRequestedProperties, pRequestedProperties, pcPropertyCount, ppProperties)
+  end
+
+  def devGetObjectPropertiesEx(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, pszObjectId : Win32cr::Foundation::PWSTR, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cExtendedParameterCount : UInt32, pExtendedParameters : Win32cr::Devices::DeviceQuery::DEV_QUERY_PARAMETER*, pcPropertyCount : UInt32*, ppProperties : Win32cr::Devices::Properties::DEVPROPERTY**) : Win32cr::Foundation::HRESULT
+    C.DevGetObjectPropertiesEx(object_type, pszObjectId, query_flags, cRequestedProperties, pRequestedProperties, cExtendedParameterCount, pExtendedParameters, pcPropertyCount, ppProperties)
+  end
+
+  def devFreeObjectProperties(cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*) : Void
+    C.DevFreeObjectProperties(cPropertyCount, pProperties)
+  end
+
+  def devFindProperty(pKey : Win32cr::Devices::Properties::DEVPROPKEY*, store : Win32cr::Devices::Properties::DEVPROPSTORE, pszLocaleName : Win32cr::Foundation::PWSTR, cProperties : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*) : Win32cr::Devices::Properties::DEVPROPERTY*
+    C.DevFindProperty(pKey, store, pszLocaleName, cProperties, pProperties)
+  end
+
   lib C
+    # :nodoc:
     fun DevCreateObjectQuery(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, pCallback : Win32cr::Devices::DeviceQuery::PDEV_QUERY_RESULT_CALLBACK, pContext : Void*, phDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DevCreateObjectQueryEx(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, cExtendedParameterCount : UInt32, pExtendedParameters : Win32cr::Devices::DeviceQuery::DEV_QUERY_PARAMETER*, pCallback : Win32cr::Devices::DeviceQuery::PDEV_QUERY_RESULT_CALLBACK, pContext : Void*, phDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DevCreateObjectQueryFromId(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, pszObjectId : Win32cr::Foundation::PWSTR, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, pCallback : Win32cr::Devices::DeviceQuery::PDEV_QUERY_RESULT_CALLBACK, pContext : Void*, phDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DevCreateObjectQueryFromIdEx(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, pszObjectId : Win32cr::Foundation::PWSTR, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, cExtendedParameterCount : UInt32, pExtendedParameters : Win32cr::Devices::DeviceQuery::DEV_QUERY_PARAMETER*, pCallback : Win32cr::Devices::DeviceQuery::PDEV_QUERY_RESULT_CALLBACK, pContext : Void*, phDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DevCreateObjectQueryFromIds(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, pszzObjectIds : Win32cr::Foundation::PWSTR, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, pCallback : Win32cr::Devices::DeviceQuery::PDEV_QUERY_RESULT_CALLBACK, pContext : Void*, phDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DevCreateObjectQueryFromIdsEx(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, pszzObjectIds : Win32cr::Foundation::PWSTR, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, cExtendedParameterCount : UInt32, pExtendedParameters : Win32cr::Devices::DeviceQuery::DEV_QUERY_PARAMETER*, pCallback : Win32cr::Devices::DeviceQuery::PDEV_QUERY_RESULT_CALLBACK, pContext : Void*, phDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DevCloseObjectQuery(hDevQuery : Win32cr::Devices::DeviceQuery::HDEVQUERY__*) : Void
 
+    # :nodoc:
     fun DevGetObjects(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, pcObjectCount : UInt32*, ppObjects : Win32cr::Devices::DeviceQuery::DEV_OBJECT**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DevGetObjectsEx(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cFilterExpressionCount : UInt32, pFilter : Win32cr::Devices::DeviceQuery::DEVPROP_FILTER_EXPRESSION*, cExtendedParameterCount : UInt32, pExtendedParameters : Win32cr::Devices::DeviceQuery::DEV_QUERY_PARAMETER*, pcObjectCount : UInt32*, ppObjects : Win32cr::Devices::DeviceQuery::DEV_OBJECT**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DevFreeObjects(cObjectCount : UInt32, pObjects : Win32cr::Devices::DeviceQuery::DEV_OBJECT*) : Void
 
+    # :nodoc:
     fun DevGetObjectProperties(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, pszObjectId : Win32cr::Foundation::PWSTR, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, pcPropertyCount : UInt32*, ppProperties : Win32cr::Devices::Properties::DEVPROPERTY**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DevGetObjectPropertiesEx(object_type : Win32cr::Devices::DeviceQuery::DEV_OBJECT_TYPE, pszObjectId : Win32cr::Foundation::PWSTR, query_flags : UInt32, cRequestedProperties : UInt32, pRequestedProperties : Win32cr::Devices::Properties::DEVPROPCOMPKEY*, cExtendedParameterCount : UInt32, pExtendedParameters : Win32cr::Devices::DeviceQuery::DEV_QUERY_PARAMETER*, pcPropertyCount : UInt32*, ppProperties : Win32cr::Devices::Properties::DEVPROPERTY**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DevFreeObjectProperties(cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*) : Void
 
+    # :nodoc:
     fun DevFindProperty(pKey : Win32cr::Devices::Properties::DEVPROPKEY*, store : Win32cr::Devices::Properties::DEVPROPSTORE, pszLocaleName : Win32cr::Foundation::PWSTR, cProperties : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*) : Win32cr::Devices::Properties::DEVPROPERTY*
 
   end

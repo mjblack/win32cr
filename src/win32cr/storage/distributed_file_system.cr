@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./../security.cr"
 
 module Win32cr::Storage::DistributedFileSystem
+  extend self
   FSCTL_DFS_BASE = 6_u32
   DFS_VOLUME_STATES = 15_u32
   DFS_VOLUME_STATE_OK = 1_u32
@@ -387,50 +388,160 @@ module Win32cr::Storage::DistributedFileSystem
     end
   end
 
+  def netDfsAdd(dfs_entry_path : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, share_name : Win32cr::Foundation::PWSTR, comment : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+    C.NetDfsAdd(dfs_entry_path, server_name, share_name, comment, flags)
+  end
+
+  def netDfsAddStdRoot(server_name : Win32cr::Foundation::PWSTR, root_share : Win32cr::Foundation::PWSTR, comment : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+    C.NetDfsAddStdRoot(server_name, root_share, comment, flags)
+  end
+
+  def netDfsRemoveStdRoot(server_name : Win32cr::Foundation::PWSTR, root_share : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+    C.NetDfsRemoveStdRoot(server_name, root_share, flags)
+  end
+
+  def netDfsAddFtRoot(server_name : Win32cr::Foundation::PWSTR, root_share : Win32cr::Foundation::PWSTR, ft_dfs_name : Win32cr::Foundation::PWSTR, comment : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+    C.NetDfsAddFtRoot(server_name, root_share, ft_dfs_name, comment, flags)
+  end
+
+  def netDfsRemoveFtRoot(server_name : Win32cr::Foundation::PWSTR, root_share : Win32cr::Foundation::PWSTR, ft_dfs_name : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+    C.NetDfsRemoveFtRoot(server_name, root_share, ft_dfs_name, flags)
+  end
+
+  def netDfsRemoveFtRootForced(domain_name : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, root_share : Win32cr::Foundation::PWSTR, ft_dfs_name : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+    C.NetDfsRemoveFtRootForced(domain_name, server_name, root_share, ft_dfs_name, flags)
+  end
+
+  def netDfsRemove(dfs_entry_path : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, share_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.NetDfsRemove(dfs_entry_path, server_name, share_name)
+  end
+
+  def netDfsEnum(dfs_name : Win32cr::Foundation::PWSTR, level : UInt32, pref_max_len : UInt32, buffer : UInt8**, entries_read : UInt32*, resume_handle : UInt32*) : UInt32
+    C.NetDfsEnum(dfs_name, level, pref_max_len, buffer, entries_read, resume_handle)
+  end
+
+  def netDfsGetInfo(dfs_entry_path : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, share_name : Win32cr::Foundation::PWSTR, level : UInt32, buffer : UInt8**) : UInt32
+    C.NetDfsGetInfo(dfs_entry_path, server_name, share_name, level, buffer)
+  end
+
+  def netDfsSetInfo(dfs_entry_path : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, share_name : Win32cr::Foundation::PWSTR, level : UInt32, buffer : UInt8*) : UInt32
+    C.NetDfsSetInfo(dfs_entry_path, server_name, share_name, level, buffer)
+  end
+
+  def netDfsGetClientInfo(dfs_entry_path : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, share_name : Win32cr::Foundation::PWSTR, level : UInt32, buffer : UInt8**) : UInt32
+    C.NetDfsGetClientInfo(dfs_entry_path, server_name, share_name, level, buffer)
+  end
+
+  def netDfsSetClientInfo(dfs_entry_path : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, share_name : Win32cr::Foundation::PWSTR, level : UInt32, buffer : UInt8*) : UInt32
+    C.NetDfsSetClientInfo(dfs_entry_path, server_name, share_name, level, buffer)
+  end
+
+  def netDfsMove(old_dfs_entry_path : Win32cr::Foundation::PWSTR, new_dfs_entry_path : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+    C.NetDfsMove(old_dfs_entry_path, new_dfs_entry_path, flags)
+  end
+
+  def netDfsAddRootTarget(pDfsPath : Win32cr::Foundation::PWSTR, pTargetPath : Win32cr::Foundation::PWSTR, major_version : UInt32, pComment : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+    C.NetDfsAddRootTarget(pDfsPath, pTargetPath, major_version, pComment, flags)
+  end
+
+  def netDfsRemoveRootTarget(pDfsPath : Win32cr::Foundation::PWSTR, pTargetPath : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+    C.NetDfsRemoveRootTarget(pDfsPath, pTargetPath, flags)
+  end
+
+  def netDfsGetSecurity(dfs_entry_path : Win32cr::Foundation::PWSTR, security_information : UInt32, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, lpcbSecurityDescriptor : UInt32*) : UInt32
+    C.NetDfsGetSecurity(dfs_entry_path, security_information, ppSecurityDescriptor, lpcbSecurityDescriptor)
+  end
+
+  def netDfsSetSecurity(dfs_entry_path : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    C.NetDfsSetSecurity(dfs_entry_path, security_information, pSecurityDescriptor)
+  end
+
+  def netDfsGetStdContainerSecurity(machine_name : Win32cr::Foundation::PWSTR, security_information : UInt32, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, lpcbSecurityDescriptor : UInt32*) : UInt32
+    C.NetDfsGetStdContainerSecurity(machine_name, security_information, ppSecurityDescriptor, lpcbSecurityDescriptor)
+  end
+
+  def netDfsSetStdContainerSecurity(machine_name : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    C.NetDfsSetStdContainerSecurity(machine_name, security_information, pSecurityDescriptor)
+  end
+
+  def netDfsGetFtContainerSecurity(domain_name : Win32cr::Foundation::PWSTR, security_information : UInt32, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, lpcbSecurityDescriptor : UInt32*) : UInt32
+    C.NetDfsGetFtContainerSecurity(domain_name, security_information, ppSecurityDescriptor, lpcbSecurityDescriptor)
+  end
+
+  def netDfsSetFtContainerSecurity(domain_name : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    C.NetDfsSetFtContainerSecurity(domain_name, security_information, pSecurityDescriptor)
+  end
+
+  def netDfsGetSupportedNamespaceVersion(origin : Win32cr::Storage::DistributedFileSystem::DFS_NAMESPACE_VERSION_ORIGIN, pName : Win32cr::Foundation::PWSTR, ppVersionInfo : Win32cr::Storage::DistributedFileSystem::DFS_SUPPORTED_NAMESPACE_VERSION_INFO**) : UInt32
+    C.NetDfsGetSupportedNamespaceVersion(origin, pName, ppVersionInfo)
+  end
+
   @[Link("netapi32")]
   lib C
+    # :nodoc:
     fun NetDfsAdd(dfs_entry_path : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, share_name : Win32cr::Foundation::PWSTR, comment : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun NetDfsAddStdRoot(server_name : Win32cr::Foundation::PWSTR, root_share : Win32cr::Foundation::PWSTR, comment : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun NetDfsRemoveStdRoot(server_name : Win32cr::Foundation::PWSTR, root_share : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun NetDfsAddFtRoot(server_name : Win32cr::Foundation::PWSTR, root_share : Win32cr::Foundation::PWSTR, ft_dfs_name : Win32cr::Foundation::PWSTR, comment : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun NetDfsRemoveFtRoot(server_name : Win32cr::Foundation::PWSTR, root_share : Win32cr::Foundation::PWSTR, ft_dfs_name : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun NetDfsRemoveFtRootForced(domain_name : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, root_share : Win32cr::Foundation::PWSTR, ft_dfs_name : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun NetDfsRemove(dfs_entry_path : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, share_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun NetDfsEnum(dfs_name : Win32cr::Foundation::PWSTR, level : UInt32, pref_max_len : UInt32, buffer : UInt8**, entries_read : UInt32*, resume_handle : UInt32*) : UInt32
 
+    # :nodoc:
     fun NetDfsGetInfo(dfs_entry_path : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, share_name : Win32cr::Foundation::PWSTR, level : UInt32, buffer : UInt8**) : UInt32
 
+    # :nodoc:
     fun NetDfsSetInfo(dfs_entry_path : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, share_name : Win32cr::Foundation::PWSTR, level : UInt32, buffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun NetDfsGetClientInfo(dfs_entry_path : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, share_name : Win32cr::Foundation::PWSTR, level : UInt32, buffer : UInt8**) : UInt32
 
+    # :nodoc:
     fun NetDfsSetClientInfo(dfs_entry_path : Win32cr::Foundation::PWSTR, server_name : Win32cr::Foundation::PWSTR, share_name : Win32cr::Foundation::PWSTR, level : UInt32, buffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun NetDfsMove(old_dfs_entry_path : Win32cr::Foundation::PWSTR, new_dfs_entry_path : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun NetDfsAddRootTarget(pDfsPath : Win32cr::Foundation::PWSTR, pTargetPath : Win32cr::Foundation::PWSTR, major_version : UInt32, pComment : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun NetDfsRemoveRootTarget(pDfsPath : Win32cr::Foundation::PWSTR, pTargetPath : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun NetDfsGetSecurity(dfs_entry_path : Win32cr::Foundation::PWSTR, security_information : UInt32, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, lpcbSecurityDescriptor : UInt32*) : UInt32
 
+    # :nodoc:
     fun NetDfsSetSecurity(dfs_entry_path : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
 
+    # :nodoc:
     fun NetDfsGetStdContainerSecurity(machine_name : Win32cr::Foundation::PWSTR, security_information : UInt32, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, lpcbSecurityDescriptor : UInt32*) : UInt32
 
+    # :nodoc:
     fun NetDfsSetStdContainerSecurity(machine_name : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
 
+    # :nodoc:
     fun NetDfsGetFtContainerSecurity(domain_name : Win32cr::Foundation::PWSTR, security_information : UInt32, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, lpcbSecurityDescriptor : UInt32*) : UInt32
 
+    # :nodoc:
     fun NetDfsSetFtContainerSecurity(domain_name : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
 
+    # :nodoc:
     fun NetDfsGetSupportedNamespaceVersion(origin : Win32cr::Storage::DistributedFileSystem::DFS_NAMESPACE_VERSION_ORIGIN, pName : Win32cr::Foundation::PWSTR, ppVersionInfo : Win32cr::Storage::DistributedFileSystem::DFS_SUPPORTED_NAMESPACE_VERSION_INFO**) : UInt32
 
   end

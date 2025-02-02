@@ -4,6 +4,7 @@ require "./../system/com.cr"
 require "./../networking/win_sock.cr"
 
 module Win32cr::Devices::WebServicesOnDevices
+  extend self
   alias WSD_STUB_FUNCTION = Proc(Void*, Void*, Win32cr::Devices::WebServicesOnDevices::WSD_EVENT*, Win32cr::Foundation::HRESULT)
 
   alias PWSD_SOAP_MESSAGE_HANDLER = Proc(Void*, Win32cr::Devices::WebServicesOnDevices::WSD_EVENT*, Win32cr::Foundation::HRESULT)
@@ -2227,70 +2228,230 @@ module Win32cr::Devices::WebServicesOnDevices
 
   end
 
+  def wSDCreateUdpMessageParameters(ppTxParams : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateUdpMessageParameters(ppTxParams)
+  end
+
+  def wSDCreateUdpAddress(ppAddress : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateUdpAddress(ppAddress)
+  end
+
+  def wSDCreateHttpMessageParameters(ppTxParams : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateHttpMessageParameters(ppTxParams)
+  end
+
+  def wSDCreateHttpAddress(ppAddress : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateHttpAddress(ppAddress)
+  end
+
+  def wSDCreateOutboundAttachment(ppAttachment : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateOutboundAttachment(ppAttachment)
+  end
+
+  def wSDXMLGetNameFromBuiltinNamespace(pszNamespace : Win32cr::Foundation::PWSTR, pszName : Win32cr::Foundation::PWSTR, ppName : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME**) : Win32cr::Foundation::HRESULT
+    C.WSDXMLGetNameFromBuiltinNamespace(pszNamespace, pszName, ppName)
+  end
+
+  def wSDXMLCreateContext(ppContext : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDXMLCreateContext(ppContext)
+  end
+
+  def wSDCreateDiscoveryProvider(pContext : Void*, ppProvider : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateDiscoveryProvider(pContext, ppProvider)
+  end
+
+  def wSDCreateDiscoveryProvider2(pContext : Void*, pConfigParams : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM*, dwConfigParamCount : UInt32, ppProvider : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateDiscoveryProvider2(pContext, pConfigParams, dwConfigParamCount, ppProvider)
+  end
+
+  def wSDCreateDiscoveryPublisher(pContext : Void*, ppPublisher : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateDiscoveryPublisher(pContext, ppPublisher)
+  end
+
+  def wSDCreateDiscoveryPublisher2(pContext : Void*, pConfigParams : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM*, dwConfigParamCount : UInt32, ppPublisher : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateDiscoveryPublisher2(pContext, pConfigParams, dwConfigParamCount, ppPublisher)
+  end
+
+  def wSDCreateDeviceProxy(pszDeviceId : Win32cr::Foundation::PWSTR, pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, ppDeviceProxy : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateDeviceProxy(pszDeviceId, pszLocalId, pContext, ppDeviceProxy)
+  end
+
+  def wSDCreateDeviceProxyAdvanced(pszDeviceId : Win32cr::Foundation::PWSTR, pDeviceAddress : Void*, pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, ppDeviceProxy : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateDeviceProxyAdvanced(pszDeviceId, pDeviceAddress, pszLocalId, pContext, ppDeviceProxy)
+  end
+
+  def wSDCreateDeviceProxy2(pszDeviceId : Win32cr::Foundation::PWSTR, pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, pConfigParams : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM*, dwConfigParamCount : UInt32, ppDeviceProxy : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateDeviceProxy2(pszDeviceId, pszLocalId, pContext, pConfigParams, dwConfigParamCount, ppDeviceProxy)
+  end
+
+  def wSDCreateDeviceHost(pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, ppDeviceHost : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateDeviceHost(pszLocalId, pContext, ppDeviceHost)
+  end
+
+  def wSDCreateDeviceHostAdvanced(pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, ppHostAddresses : Void**, dwHostAddressCount : UInt32, ppDeviceHost : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateDeviceHostAdvanced(pszLocalId, pContext, ppHostAddresses, dwHostAddressCount, ppDeviceHost)
+  end
+
+  def wSDCreateDeviceHost2(pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, pConfigParams : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM*, dwConfigParamCount : UInt32, ppDeviceHost : Void**) : Win32cr::Foundation::HRESULT
+    C.WSDCreateDeviceHost2(pszLocalId, pContext, pConfigParams, dwConfigParamCount, ppDeviceHost)
+  end
+
+  def wSDSetConfigurationOption(dwOption : UInt32, pVoid : Void*, cbInBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    C.WSDSetConfigurationOption(dwOption, pVoid, cbInBuffer)
+  end
+
+  def wSDGetConfigurationOption(dwOption : UInt32, pVoid : Void*, cbOutBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    C.WSDGetConfigurationOption(dwOption, pVoid, cbOutBuffer)
+  end
+
+  def wSDAllocateLinkedMemory(pParent : Void*, cbSize : LibC::UIntPtrT) : Void*
+    C.WSDAllocateLinkedMemory(pParent, cbSize)
+  end
+
+  def wSDFreeLinkedMemory(pVoid : Void*) : Void
+    C.WSDFreeLinkedMemory(pVoid)
+  end
+
+  def wSDAttachLinkedMemory(pParent : Void*, pChild : Void*) : Void
+    C.WSDAttachLinkedMemory(pParent, pChild)
+  end
+
+  def wSDDetachLinkedMemory(pVoid : Void*) : Void
+    C.WSDDetachLinkedMemory(pVoid)
+  end
+
+  def wSDXMLBuildAnyForSingleElement(pElementName : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, pszText : Win32cr::Foundation::PWSTR, ppAny : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT**) : Win32cr::Foundation::HRESULT
+    C.WSDXMLBuildAnyForSingleElement(pElementName, pszText, ppAny)
+  end
+
+  def wSDXMLGetValueFromAny(pszNamespace : Win32cr::Foundation::PWSTR, pszName : Win32cr::Foundation::PWSTR, pAny : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*, ppszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.WSDXMLGetValueFromAny(pszNamespace, pszName, pAny, ppszValue)
+  end
+
+  def wSDXMLAddSibling(pFirst : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*, pSecond : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*) : Win32cr::Foundation::HRESULT
+    C.WSDXMLAddSibling(pFirst, pSecond)
+  end
+
+  def wSDXMLAddChild(pParent : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*, pChild : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*) : Win32cr::Foundation::HRESULT
+    C.WSDXMLAddChild(pParent, pChild)
+  end
+
+  def wSDXMLCleanupElement(pAny : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*) : Win32cr::Foundation::HRESULT
+    C.WSDXMLCleanupElement(pAny)
+  end
+
+  def wSDGenerateFault(pszCode : Win32cr::Foundation::PWSTR, pszSubCode : Win32cr::Foundation::PWSTR, pszReason : Win32cr::Foundation::PWSTR, pszDetail : Win32cr::Foundation::PWSTR, pContext : Void*, ppFault : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT**) : Win32cr::Foundation::HRESULT
+    C.WSDGenerateFault(pszCode, pszSubCode, pszReason, pszDetail, pContext, ppFault)
+  end
+
+  def wSDGenerateFaultEx(pCode : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, pSubCode : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, pReasons : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*, pszDetail : Win32cr::Foundation::PWSTR, ppFault : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT**) : Win32cr::Foundation::HRESULT
+    C.WSDGenerateFaultEx(pCode, pSubCode, pReasons, pszDetail, ppFault)
+  end
+
+  def wSDUriEncode(source : UInt16*, cchSource : UInt32, destOut : Win32cr::Foundation::PWSTR*, cchDestOut : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WSDUriEncode(source, cchSource, destOut, cchDestOut)
+  end
+
+  def wSDUriDecode(source : UInt16*, cchSource : UInt32, destOut : Win32cr::Foundation::PWSTR*, cchDestOut : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WSDUriDecode(source, cchSource, destOut, cchDestOut)
+  end
+
   @[Link("wsdapi")]
   lib C
+    # :nodoc:
     fun WSDCreateUdpMessageParameters(ppTxParams : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateUdpAddress(ppAddress : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateHttpMessageParameters(ppTxParams : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateHttpAddress(ppAddress : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateOutboundAttachment(ppAttachment : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDXMLGetNameFromBuiltinNamespace(pszNamespace : Win32cr::Foundation::PWSTR, pszName : Win32cr::Foundation::PWSTR, ppName : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDXMLCreateContext(ppContext : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateDiscoveryProvider(pContext : Void*, ppProvider : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateDiscoveryProvider2(pContext : Void*, pConfigParams : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM*, dwConfigParamCount : UInt32, ppProvider : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateDiscoveryPublisher(pContext : Void*, ppPublisher : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateDiscoveryPublisher2(pContext : Void*, pConfigParams : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM*, dwConfigParamCount : UInt32, ppPublisher : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateDeviceProxy(pszDeviceId : Win32cr::Foundation::PWSTR, pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, ppDeviceProxy : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateDeviceProxyAdvanced(pszDeviceId : Win32cr::Foundation::PWSTR, pDeviceAddress : Void*, pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, ppDeviceProxy : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateDeviceProxy2(pszDeviceId : Win32cr::Foundation::PWSTR, pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, pConfigParams : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM*, dwConfigParamCount : UInt32, ppDeviceProxy : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateDeviceHost(pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, ppDeviceHost : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateDeviceHostAdvanced(pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, ppHostAddresses : Void**, dwHostAddressCount : UInt32, ppDeviceHost : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDCreateDeviceHost2(pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, pConfigParams : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM*, dwConfigParamCount : UInt32, ppDeviceHost : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDSetConfigurationOption(dwOption : UInt32, pVoid : Void*, cbInBuffer : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDGetConfigurationOption(dwOption : UInt32, pVoid : Void*, cbOutBuffer : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDAllocateLinkedMemory(pParent : Void*, cbSize : LibC::UIntPtrT) : Void*
 
+    # :nodoc:
     fun WSDFreeLinkedMemory(pVoid : Void*) : Void
 
+    # :nodoc:
     fun WSDAttachLinkedMemory(pParent : Void*, pChild : Void*) : Void
 
+    # :nodoc:
     fun WSDDetachLinkedMemory(pVoid : Void*) : Void
 
+    # :nodoc:
     fun WSDXMLBuildAnyForSingleElement(pElementName : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, pszText : Win32cr::Foundation::PWSTR, ppAny : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDXMLGetValueFromAny(pszNamespace : Win32cr::Foundation::PWSTR, pszName : Win32cr::Foundation::PWSTR, pAny : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*, ppszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDXMLAddSibling(pFirst : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*, pSecond : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDXMLAddChild(pParent : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*, pChild : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDXMLCleanupElement(pAny : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDGenerateFault(pszCode : Win32cr::Foundation::PWSTR, pszSubCode : Win32cr::Foundation::PWSTR, pszReason : Win32cr::Foundation::PWSTR, pszDetail : Win32cr::Foundation::PWSTR, pContext : Void*, ppFault : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDGenerateFaultEx(pCode : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, pSubCode : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, pReasons : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*, pszDetail : Win32cr::Foundation::PWSTR, ppFault : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDUriEncode(source : UInt16*, cchSource : UInt32, destOut : Win32cr::Foundation::PWSTR*, cchDestOut : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSDUriDecode(source : UInt16*, cchSource : UInt32, destOut : Win32cr::Foundation::PWSTR*, cchDestOut : UInt32*) : Win32cr::Foundation::HRESULT
 
   end

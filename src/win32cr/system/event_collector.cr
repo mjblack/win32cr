@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::System::EventCollector
+  extend self
   EC_VARIANT_TYPE_MASK = 127_u32
   EC_VARIANT_TYPE_ARRAY = 128_u32
   EC_READ_ACCESS = 1_u32
@@ -120,36 +121,111 @@ module Win32cr::System::EventCollector
     end
   end
 
+  def ecOpenSubscriptionEnum(flags : UInt32) : LibC::IntPtrT
+    C.EcOpenSubscriptionEnum(flags)
+  end
+
+  def ecEnumNextSubscription(subscription_enum : LibC::IntPtrT, subscription_name_buffer_size : UInt32, subscription_name_buffer : UInt16*, subscription_name_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    C.EcEnumNextSubscription(subscription_enum, subscription_name_buffer_size, subscription_name_buffer, subscription_name_buffer_used)
+  end
+
+  def ecOpenSubscription(subscription_name : Win32cr::Foundation::PWSTR, access_mask : UInt32, flags : UInt32) : LibC::IntPtrT
+    C.EcOpenSubscription(subscription_name, access_mask, flags)
+  end
+
+  def ecSetSubscriptionProperty(subscription : LibC::IntPtrT, property_id : Win32cr::System::EventCollector::EC_SUBSCRIPTION_PROPERTY_ID, flags : UInt32, property_value : Win32cr::System::EventCollector::EC_VARIANT*) : Win32cr::Foundation::BOOL
+    C.EcSetSubscriptionProperty(subscription, property_id, flags, property_value)
+  end
+
+  def ecGetSubscriptionProperty(subscription : LibC::IntPtrT, property_id : Win32cr::System::EventCollector::EC_SUBSCRIPTION_PROPERTY_ID, flags : UInt32, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventCollector::EC_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    C.EcGetSubscriptionProperty(subscription, property_id, flags, property_value_buffer_size, property_value_buffer, property_value_buffer_used)
+  end
+
+  def ecSaveSubscription(subscription : LibC::IntPtrT, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.EcSaveSubscription(subscription, flags)
+  end
+
+  def ecDeleteSubscription(subscription_name : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.EcDeleteSubscription(subscription_name, flags)
+  end
+
+  def ecGetObjectArraySize(object_array : LibC::IntPtrT, object_array_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.EcGetObjectArraySize(object_array, object_array_size)
+  end
+
+  def ecSetObjectArrayProperty(object_array : LibC::IntPtrT, property_id : Win32cr::System::EventCollector::EC_SUBSCRIPTION_PROPERTY_ID, array_index : UInt32, flags : UInt32, property_value : Win32cr::System::EventCollector::EC_VARIANT*) : Win32cr::Foundation::BOOL
+    C.EcSetObjectArrayProperty(object_array, property_id, array_index, flags, property_value)
+  end
+
+  def ecGetObjectArrayProperty(object_array : LibC::IntPtrT, property_id : Win32cr::System::EventCollector::EC_SUBSCRIPTION_PROPERTY_ID, array_index : UInt32, flags : UInt32, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventCollector::EC_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    C.EcGetObjectArrayProperty(object_array, property_id, array_index, flags, property_value_buffer_size, property_value_buffer, property_value_buffer_used)
+  end
+
+  def ecInsertObjectArrayElement(object_array : LibC::IntPtrT, array_index : UInt32) : Win32cr::Foundation::BOOL
+    C.EcInsertObjectArrayElement(object_array, array_index)
+  end
+
+  def ecRemoveObjectArrayElement(object_array : LibC::IntPtrT, array_index : UInt32) : Win32cr::Foundation::BOOL
+    C.EcRemoveObjectArrayElement(object_array, array_index)
+  end
+
+  def ecGetSubscriptionRunTimeStatus(subscription_name : Win32cr::Foundation::PWSTR, status_info_id : Win32cr::System::EventCollector::EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID, event_source_name : Win32cr::Foundation::PWSTR, flags : UInt32, status_value_buffer_size : UInt32, status_value_buffer : Win32cr::System::EventCollector::EC_VARIANT*, status_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    C.EcGetSubscriptionRunTimeStatus(subscription_name, status_info_id, event_source_name, flags, status_value_buffer_size, status_value_buffer, status_value_buffer_used)
+  end
+
+  def ecRetrySubscription(subscription_name : Win32cr::Foundation::PWSTR, event_source_name : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.EcRetrySubscription(subscription_name, event_source_name, flags)
+  end
+
+  def ecClose(object : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    C.EcClose(object)
+  end
+
   @[Link("wecapi")]
   lib C
+    # :nodoc:
     fun EcOpenSubscriptionEnum(flags : UInt32) : LibC::IntPtrT
 
+    # :nodoc:
     fun EcEnumNextSubscription(subscription_enum : LibC::IntPtrT, subscription_name_buffer_size : UInt32, subscription_name_buffer : UInt16*, subscription_name_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EcOpenSubscription(subscription_name : Win32cr::Foundation::PWSTR, access_mask : UInt32, flags : UInt32) : LibC::IntPtrT
 
+    # :nodoc:
     fun EcSetSubscriptionProperty(subscription : LibC::IntPtrT, property_id : Win32cr::System::EventCollector::EC_SUBSCRIPTION_PROPERTY_ID, flags : UInt32, property_value : Win32cr::System::EventCollector::EC_VARIANT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EcGetSubscriptionProperty(subscription : LibC::IntPtrT, property_id : Win32cr::System::EventCollector::EC_SUBSCRIPTION_PROPERTY_ID, flags : UInt32, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventCollector::EC_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EcSaveSubscription(subscription : LibC::IntPtrT, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EcDeleteSubscription(subscription_name : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EcGetObjectArraySize(object_array : LibC::IntPtrT, object_array_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EcSetObjectArrayProperty(object_array : LibC::IntPtrT, property_id : Win32cr::System::EventCollector::EC_SUBSCRIPTION_PROPERTY_ID, array_index : UInt32, flags : UInt32, property_value : Win32cr::System::EventCollector::EC_VARIANT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EcGetObjectArrayProperty(object_array : LibC::IntPtrT, property_id : Win32cr::System::EventCollector::EC_SUBSCRIPTION_PROPERTY_ID, array_index : UInt32, flags : UInt32, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventCollector::EC_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EcInsertObjectArrayElement(object_array : LibC::IntPtrT, array_index : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EcRemoveObjectArrayElement(object_array : LibC::IntPtrT, array_index : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EcGetSubscriptionRunTimeStatus(subscription_name : Win32cr::Foundation::PWSTR, status_info_id : Win32cr::System::EventCollector::EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID, event_source_name : Win32cr::Foundation::PWSTR, flags : UInt32, status_value_buffer_size : UInt32, status_value_buffer : Win32cr::System::EventCollector::EC_VARIANT*, status_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EcRetrySubscription(subscription_name : Win32cr::Foundation::PWSTR, event_source_name : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EcClose(object : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
   end

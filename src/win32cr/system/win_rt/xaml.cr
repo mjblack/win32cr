@@ -4,6 +4,7 @@ require "./../../graphics/dxgi.cr"
 require "./../../ui/windows_and_messaging.cr"
 
 module Win32cr::System::WinRT::Xaml
+  extend self
   E_SURFACE_CONTENTS_LOST = 2150301728_u32
 
   enum XAML_REFERENCETRACKER_DISCONNECT

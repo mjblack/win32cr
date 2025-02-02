@@ -3,6 +3,7 @@ require "./../graphics/gdi.cr"
 require "./../ui/windows_and_messaging.cr"
 
 module Win32cr::Security::Credentials
+  extend self
   alias LPOCNCONNPROCA = Proc(LibC::UIntPtrT, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, LibC::UIntPtrT)
 
   alias LPOCNCONNPROCW = Proc(LibC::UIntPtrT, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, LibC::UIntPtrT)
@@ -768,264 +769,899 @@ module Win32cr::Security::Credentials
     end
   end
 
+  def keyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType : Win32cr::Security::Credentials::KeyCredentialManagerOperationType, isReady : Win32cr::Foundation::BOOL*, keyCredentialManagerOperationErrorStates : Win32cr::Security::Credentials::KeyCredentialManagerOperationErrorStates*) : Win32cr::Foundation::HRESULT
+    C.KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType, isReady, keyCredentialManagerOperationErrorStates)
+  end
+
+  def keyCredentialManagerShowUIOperation(hWndOwner : Win32cr::Foundation::HWND, keyCredentialManagerOperationType : Win32cr::Security::Credentials::KeyCredentialManagerOperationType) : Win32cr::Foundation::HRESULT
+    C.KeyCredentialManagerShowUIOperation(hWndOwner, keyCredentialManagerOperationType)
+  end
+
+  def keyCredentialManagerGetInformation(keyCredentialManagerInfo : Win32cr::Security::Credentials::KeyCredentialManagerInfo**) : Win32cr::Foundation::HRESULT
+    C.KeyCredentialManagerGetInformation(keyCredentialManagerInfo)
+  end
+
+  def keyCredentialManagerFreeInformation(keyCredentialManagerInfo : Win32cr::Security::Credentials::KeyCredentialManagerInfo*) : Void
+    C.KeyCredentialManagerFreeInformation(keyCredentialManagerInfo)
+  end
+
+  def credWriteW(credential : Win32cr::Security::Credentials::CREDENTIALW*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.CredWriteW(credential, flags)
+  end
+
+  def credWriteA(credential : Win32cr::Security::Credentials::CREDENTIALA*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.CredWriteA(credential, flags)
+  end
+
+  def credReadW(target_name : Win32cr::Foundation::PWSTR, type__ : UInt32, flags : UInt32, credential : Win32cr::Security::Credentials::CREDENTIALW**) : Win32cr::Foundation::BOOL
+    C.CredReadW(target_name, type__, flags, credential)
+  end
+
+  def credReadA(target_name : Win32cr::Foundation::PSTR, type__ : UInt32, flags : UInt32, credential : Win32cr::Security::Credentials::CREDENTIALA**) : Win32cr::Foundation::BOOL
+    C.CredReadA(target_name, type__, flags, credential)
+  end
+
+  def credEnumerateW(filter : Win32cr::Foundation::PWSTR, flags : Win32cr::Security::Credentials::CRED_ENUMERATE_FLAGS, count : UInt32*, credential : Win32cr::Security::Credentials::CREDENTIALW***) : Win32cr::Foundation::BOOL
+    C.CredEnumerateW(filter, flags, count, credential)
+  end
+
+  def credEnumerateA(filter : Win32cr::Foundation::PSTR, flags : Win32cr::Security::Credentials::CRED_ENUMERATE_FLAGS, count : UInt32*, credential : Win32cr::Security::Credentials::CREDENTIALA***) : Win32cr::Foundation::BOOL
+    C.CredEnumerateA(filter, flags, count, credential)
+  end
+
+  def credWriteDomainCredentialsW(target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONW*, credential : Win32cr::Security::Credentials::CREDENTIALW*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.CredWriteDomainCredentialsW(target_info, credential, flags)
+  end
+
+  def credWriteDomainCredentialsA(target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONA*, credential : Win32cr::Security::Credentials::CREDENTIALA*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.CredWriteDomainCredentialsA(target_info, credential, flags)
+  end
+
+  def credReadDomainCredentialsW(target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONW*, flags : UInt32, count : UInt32*, credential : Win32cr::Security::Credentials::CREDENTIALW***) : Win32cr::Foundation::BOOL
+    C.CredReadDomainCredentialsW(target_info, flags, count, credential)
+  end
+
+  def credReadDomainCredentialsA(target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONA*, flags : UInt32, count : UInt32*, credential : Win32cr::Security::Credentials::CREDENTIALA***) : Win32cr::Foundation::BOOL
+    C.CredReadDomainCredentialsA(target_info, flags, count, credential)
+  end
+
+  def credDeleteW(target_name : Win32cr::Foundation::PWSTR, type__ : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.CredDeleteW(target_name, type__, flags)
+  end
+
+  def credDeleteA(target_name : Win32cr::Foundation::PSTR, type__ : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.CredDeleteA(target_name, type__, flags)
+  end
+
+  def credRenameW(old_target_name : Win32cr::Foundation::PWSTR, new_target_name : Win32cr::Foundation::PWSTR, type__ : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.CredRenameW(old_target_name, new_target_name, type__, flags)
+  end
+
+  def credRenameA(old_target_name : Win32cr::Foundation::PSTR, new_target_name : Win32cr::Foundation::PSTR, type__ : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.CredRenameA(old_target_name, new_target_name, type__, flags)
+  end
+
+  def credGetTargetInfoW(target_name : Win32cr::Foundation::PWSTR, flags : UInt32, target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONW**) : Win32cr::Foundation::BOOL
+    C.CredGetTargetInfoW(target_name, flags, target_info)
+  end
+
+  def credGetTargetInfoA(target_name : Win32cr::Foundation::PSTR, flags : UInt32, target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONA**) : Win32cr::Foundation::BOOL
+    C.CredGetTargetInfoA(target_name, flags, target_info)
+  end
+
+  def credMarshalCredentialW(cred_type : Win32cr::Security::Credentials::CRED_MARSHAL_TYPE, credential : Void*, marshaled_credential : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    C.CredMarshalCredentialW(cred_type, credential, marshaled_credential)
+  end
+
+  def credMarshalCredentialA(cred_type : Win32cr::Security::Credentials::CRED_MARSHAL_TYPE, credential : Void*, marshaled_credential : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    C.CredMarshalCredentialA(cred_type, credential, marshaled_credential)
+  end
+
+  def credUnmarshalCredentialW(marshaled_credential : Win32cr::Foundation::PWSTR, cred_type : Win32cr::Security::Credentials::CRED_MARSHAL_TYPE*, credential : Void**) : Win32cr::Foundation::BOOL
+    C.CredUnmarshalCredentialW(marshaled_credential, cred_type, credential)
+  end
+
+  def credUnmarshalCredentialA(marshaled_credential : Win32cr::Foundation::PSTR, cred_type : Win32cr::Security::Credentials::CRED_MARSHAL_TYPE*, credential : Void**) : Win32cr::Foundation::BOOL
+    C.CredUnmarshalCredentialA(marshaled_credential, cred_type, credential)
+  end
+
+  def credIsMarshaledCredentialW(marshaled_credential : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.CredIsMarshaledCredentialW(marshaled_credential)
+  end
+
+  def credIsMarshaledCredentialA(marshaled_credential : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.CredIsMarshaledCredentialA(marshaled_credential)
+  end
+
+  def credUnPackAuthenticationBufferW(dwFlags : Win32cr::Security::Credentials::CRED_PACK_FLAGS, pAuthBuffer : Void*, cbAuthBuffer : UInt32, pszUserName : UInt16*, pcchMaxUserName : UInt32*, pszDomainName : UInt16*, pcchMaxDomainName : UInt32*, pszPassword : UInt16*, pcchMaxPassword : UInt32*) : Win32cr::Foundation::BOOL
+    C.CredUnPackAuthenticationBufferW(dwFlags, pAuthBuffer, cbAuthBuffer, pszUserName, pcchMaxUserName, pszDomainName, pcchMaxDomainName, pszPassword, pcchMaxPassword)
+  end
+
+  def credUnPackAuthenticationBufferA(dwFlags : Win32cr::Security::Credentials::CRED_PACK_FLAGS, pAuthBuffer : Void*, cbAuthBuffer : UInt32, pszUserName : UInt8*, pcchlMaxUserName : UInt32*, pszDomainName : UInt8*, pcchMaxDomainName : UInt32*, pszPassword : UInt8*, pcchMaxPassword : UInt32*) : Win32cr::Foundation::BOOL
+    C.CredUnPackAuthenticationBufferA(dwFlags, pAuthBuffer, cbAuthBuffer, pszUserName, pcchlMaxUserName, pszDomainName, pcchMaxDomainName, pszPassword, pcchMaxPassword)
+  end
+
+  def credPackAuthenticationBufferW(dwFlags : Win32cr::Security::Credentials::CRED_PACK_FLAGS, pszUserName : Win32cr::Foundation::PWSTR, pszPassword : Win32cr::Foundation::PWSTR, pPackedCredentials : UInt8*, pcbPackedCredentials : UInt32*) : Win32cr::Foundation::BOOL
+    C.CredPackAuthenticationBufferW(dwFlags, pszUserName, pszPassword, pPackedCredentials, pcbPackedCredentials)
+  end
+
+  def credPackAuthenticationBufferA(dwFlags : Win32cr::Security::Credentials::CRED_PACK_FLAGS, pszUserName : Win32cr::Foundation::PSTR, pszPassword : Win32cr::Foundation::PSTR, pPackedCredentials : UInt8*, pcbPackedCredentials : UInt32*) : Win32cr::Foundation::BOOL
+    C.CredPackAuthenticationBufferA(dwFlags, pszUserName, pszPassword, pPackedCredentials, pcbPackedCredentials)
+  end
+
+  def credProtectW(fAsSelf : Win32cr::Foundation::BOOL, pszCredentials : UInt16*, cchCredentials : UInt32, pszProtectedCredentials : UInt16*, pcchMaxChars : UInt32*, protection_type : Win32cr::Security::Credentials::CRED_PROTECTION_TYPE*) : Win32cr::Foundation::BOOL
+    C.CredProtectW(fAsSelf, pszCredentials, cchCredentials, pszProtectedCredentials, pcchMaxChars, protection_type)
+  end
+
+  def credProtectA(fAsSelf : Win32cr::Foundation::BOOL, pszCredentials : UInt8*, cchCredentials : UInt32, pszProtectedCredentials : UInt8*, pcchMaxChars : UInt32*, protection_type : Win32cr::Security::Credentials::CRED_PROTECTION_TYPE*) : Win32cr::Foundation::BOOL
+    C.CredProtectA(fAsSelf, pszCredentials, cchCredentials, pszProtectedCredentials, pcchMaxChars, protection_type)
+  end
+
+  def credUnprotectW(fAsSelf : Win32cr::Foundation::BOOL, pszProtectedCredentials : UInt16*, cchProtectedCredentials : UInt32, pszCredentials : UInt16*, pcchMaxChars : UInt32*) : Win32cr::Foundation::BOOL
+    C.CredUnprotectW(fAsSelf, pszProtectedCredentials, cchProtectedCredentials, pszCredentials, pcchMaxChars)
+  end
+
+  def credUnprotectA(fAsSelf : Win32cr::Foundation::BOOL, pszProtectedCredentials : UInt8*, cchProtectedCredentials : UInt32, pszCredentials : UInt8*, pcchMaxChars : UInt32*) : Win32cr::Foundation::BOOL
+    C.CredUnprotectA(fAsSelf, pszProtectedCredentials, cchProtectedCredentials, pszCredentials, pcchMaxChars)
+  end
+
+  def credIsProtectedW(pszProtectedCredentials : Win32cr::Foundation::PWSTR, pProtectionType : Win32cr::Security::Credentials::CRED_PROTECTION_TYPE*) : Win32cr::Foundation::BOOL
+    C.CredIsProtectedW(pszProtectedCredentials, pProtectionType)
+  end
+
+  def credIsProtectedA(pszProtectedCredentials : Win32cr::Foundation::PSTR, pProtectionType : Win32cr::Security::Credentials::CRED_PROTECTION_TYPE*) : Win32cr::Foundation::BOOL
+    C.CredIsProtectedA(pszProtectedCredentials, pProtectionType)
+  end
+
+  def credFindBestCredentialW(target_name : Win32cr::Foundation::PWSTR, type__ : UInt32, flags : UInt32, credential : Win32cr::Security::Credentials::CREDENTIALW**) : Win32cr::Foundation::BOOL
+    C.CredFindBestCredentialW(target_name, type__, flags, credential)
+  end
+
+  def credFindBestCredentialA(target_name : Win32cr::Foundation::PSTR, type__ : UInt32, flags : UInt32, credential : Win32cr::Security::Credentials::CREDENTIALA**) : Win32cr::Foundation::BOOL
+    C.CredFindBestCredentialA(target_name, type__, flags, credential)
+  end
+
+  def credGetSessionTypes(maximum_persist_count : UInt32, maximum_persist : UInt32*) : Win32cr::Foundation::BOOL
+    C.CredGetSessionTypes(maximum_persist_count, maximum_persist)
+  end
+
+  def credFree(buffer : Void*) : Void
+    C.CredFree(buffer)
+  end
+
+  def credUIPromptForCredentialsW(pUiInfo : Win32cr::Security::Credentials::CREDUI_INFOW*, pszTargetName : Win32cr::Foundation::PWSTR, pContext : Win32cr::Security::Credentials::SecHandle*, dwAuthError : UInt32, pszUserName : UInt16*, ulUserNameBufferSize : UInt32, pszPassword : UInt16*, ulPasswordBufferSize : UInt32, save : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUI_FLAGS) : UInt32
+    C.CredUIPromptForCredentialsW(pUiInfo, pszTargetName, pContext, dwAuthError, pszUserName, ulUserNameBufferSize, pszPassword, ulPasswordBufferSize, save, dwFlags)
+  end
+
+  def credUIPromptForCredentialsA(pUiInfo : Win32cr::Security::Credentials::CREDUI_INFOA*, pszTargetName : Win32cr::Foundation::PSTR, pContext : Win32cr::Security::Credentials::SecHandle*, dwAuthError : UInt32, pszUserName : UInt8*, ulUserNameBufferSize : UInt32, pszPassword : UInt8*, ulPasswordBufferSize : UInt32, save : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUI_FLAGS) : UInt32
+    C.CredUIPromptForCredentialsA(pUiInfo, pszTargetName, pContext, dwAuthError, pszUserName, ulUserNameBufferSize, pszPassword, ulPasswordBufferSize, save, dwFlags)
+  end
+
+  def credUIPromptForWindowsCredentialsW(pUiInfo : Win32cr::Security::Credentials::CREDUI_INFOW*, dwAuthError : UInt32, pulAuthPackage : UInt32*, pvInAuthBuffer : Void*, ulInAuthBufferSize : UInt32, ppvOutAuthBuffer : Void**, pulOutAuthBufferSize : UInt32*, pfSave : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUIWIN_FLAGS) : UInt32
+    C.CredUIPromptForWindowsCredentialsW(pUiInfo, dwAuthError, pulAuthPackage, pvInAuthBuffer, ulInAuthBufferSize, ppvOutAuthBuffer, pulOutAuthBufferSize, pfSave, dwFlags)
+  end
+
+  def credUIPromptForWindowsCredentialsA(pUiInfo : Win32cr::Security::Credentials::CREDUI_INFOA*, dwAuthError : UInt32, pulAuthPackage : UInt32*, pvInAuthBuffer : Void*, ulInAuthBufferSize : UInt32, ppvOutAuthBuffer : Void**, pulOutAuthBufferSize : UInt32*, pfSave : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUIWIN_FLAGS) : UInt32
+    C.CredUIPromptForWindowsCredentialsA(pUiInfo, dwAuthError, pulAuthPackage, pvInAuthBuffer, ulInAuthBufferSize, ppvOutAuthBuffer, pulOutAuthBufferSize, pfSave, dwFlags)
+  end
+
+  def credUIParseUserNameW(user_name : Win32cr::Foundation::PWSTR, user : UInt16*, userBufferSize : UInt32, domain : UInt16*, domainBufferSize : UInt32) : UInt32
+    C.CredUIParseUserNameW(user_name, user, userBufferSize, domain, domainBufferSize)
+  end
+
+  def credUIParseUserNameA(userName : Win32cr::Foundation::PSTR, user : UInt8*, userBufferSize : UInt32, domain : UInt8*, domainBufferSize : UInt32) : UInt32
+    C.CredUIParseUserNameA(userName, user, userBufferSize, domain, domainBufferSize)
+  end
+
+  def credUICmdLinePromptForCredentialsW(pszTargetName : Win32cr::Foundation::PWSTR, pContext : Win32cr::Security::Credentials::SecHandle*, dwAuthError : UInt32, user_name : UInt16*, ulUserBufferSize : UInt32, pszPassword : UInt16*, ulPasswordBufferSize : UInt32, pfSave : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUI_FLAGS) : UInt32
+    C.CredUICmdLinePromptForCredentialsW(pszTargetName, pContext, dwAuthError, user_name, ulUserBufferSize, pszPassword, ulPasswordBufferSize, pfSave, dwFlags)
+  end
+
+  def credUICmdLinePromptForCredentialsA(pszTargetName : Win32cr::Foundation::PSTR, pContext : Win32cr::Security::Credentials::SecHandle*, dwAuthError : UInt32, user_name : UInt8*, ulUserBufferSize : UInt32, pszPassword : UInt8*, ulPasswordBufferSize : UInt32, pfSave : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUI_FLAGS) : UInt32
+    C.CredUICmdLinePromptForCredentialsA(pszTargetName, pContext, dwAuthError, user_name, ulUserBufferSize, pszPassword, ulPasswordBufferSize, pfSave, dwFlags)
+  end
+
+  def credUIConfirmCredentialsW(pszTargetName : Win32cr::Foundation::PWSTR, bConfirm : Win32cr::Foundation::BOOL) : UInt32
+    C.CredUIConfirmCredentialsW(pszTargetName, bConfirm)
+  end
+
+  def credUIConfirmCredentialsA(pszTargetName : Win32cr::Foundation::PSTR, bConfirm : Win32cr::Foundation::BOOL) : UInt32
+    C.CredUIConfirmCredentialsA(pszTargetName, bConfirm)
+  end
+
+  def credUIStoreSSOCredW(pszRealm : Win32cr::Foundation::PWSTR, pszUsername : Win32cr::Foundation::PWSTR, pszPassword : Win32cr::Foundation::PWSTR, bPersist : Win32cr::Foundation::BOOL) : UInt32
+    C.CredUIStoreSSOCredW(pszRealm, pszUsername, pszPassword, bPersist)
+  end
+
+  def credUIReadSSOCredW(pszRealm : Win32cr::Foundation::PWSTR, ppszUsername : Win32cr::Foundation::PWSTR*) : UInt32
+    C.CredUIReadSSOCredW(pszRealm, ppszUsername)
+  end
+
+  def sCardEstablishContext(dwScope : Win32cr::Security::Credentials::SCARD_SCOPE, pvReserved1 : Void*, pvReserved2 : Void*, phContext : LibC::UIntPtrT*) : Int32
+    C.SCardEstablishContext(dwScope, pvReserved1, pvReserved2, phContext)
+  end
+
+  def sCardReleaseContext(hContext : LibC::UIntPtrT) : Int32
+    C.SCardReleaseContext(hContext)
+  end
+
+  def sCardIsValidContext(hContext : LibC::UIntPtrT) : Int32
+    C.SCardIsValidContext(hContext)
+  end
+
+  def sCardListReaderGroupsA(hContext : LibC::UIntPtrT, mszGroups : UInt8*, pcchGroups : UInt32*) : Int32
+    C.SCardListReaderGroupsA(hContext, mszGroups, pcchGroups)
+  end
+
+  def sCardListReaderGroupsW(hContext : LibC::UIntPtrT, mszGroups : UInt16*, pcchGroups : UInt32*) : Int32
+    C.SCardListReaderGroupsW(hContext, mszGroups, pcchGroups)
+  end
+
+  def sCardListReadersA(hContext : LibC::UIntPtrT, mszGroups : Win32cr::Foundation::PSTR, mszReaders : Win32cr::Foundation::PSTR, pcchReaders : UInt32*) : Int32
+    C.SCardListReadersA(hContext, mszGroups, mszReaders, pcchReaders)
+  end
+
+  def sCardListReadersW(hContext : LibC::UIntPtrT, mszGroups : Win32cr::Foundation::PWSTR, mszReaders : Win32cr::Foundation::PWSTR, pcchReaders : UInt32*) : Int32
+    C.SCardListReadersW(hContext, mszGroups, mszReaders, pcchReaders)
+  end
+
+  def sCardListCardsA(hContext : LibC::UIntPtrT, pbAtr : UInt8*, rgquidInterfaces : LibC::GUID*, cguidInterfaceCount : UInt32, mszCards : Win32cr::Foundation::PSTR, pcchCards : UInt32*) : Int32
+    C.SCardListCardsA(hContext, pbAtr, rgquidInterfaces, cguidInterfaceCount, mszCards, pcchCards)
+  end
+
+  def sCardListCardsW(hContext : LibC::UIntPtrT, pbAtr : UInt8*, rgquidInterfaces : LibC::GUID*, cguidInterfaceCount : UInt32, mszCards : Win32cr::Foundation::PWSTR, pcchCards : UInt32*) : Int32
+    C.SCardListCardsW(hContext, pbAtr, rgquidInterfaces, cguidInterfaceCount, mszCards, pcchCards)
+  end
+
+  def sCardListInterfacesA(hContext : LibC::UIntPtrT, szCard : Win32cr::Foundation::PSTR, pguidInterfaces : LibC::GUID*, pcguidInterfaces : UInt32*) : Int32
+    C.SCardListInterfacesA(hContext, szCard, pguidInterfaces, pcguidInterfaces)
+  end
+
+  def sCardListInterfacesW(hContext : LibC::UIntPtrT, szCard : Win32cr::Foundation::PWSTR, pguidInterfaces : LibC::GUID*, pcguidInterfaces : UInt32*) : Int32
+    C.SCardListInterfacesW(hContext, szCard, pguidInterfaces, pcguidInterfaces)
+  end
+
+  def sCardGetProviderIdA(hContext : LibC::UIntPtrT, szCard : Win32cr::Foundation::PSTR, pguidProviderId : LibC::GUID*) : Int32
+    C.SCardGetProviderIdA(hContext, szCard, pguidProviderId)
+  end
+
+  def sCardGetProviderIdW(hContext : LibC::UIntPtrT, szCard : Win32cr::Foundation::PWSTR, pguidProviderId : LibC::GUID*) : Int32
+    C.SCardGetProviderIdW(hContext, szCard, pguidProviderId)
+  end
+
+  def sCardGetCardTypeProviderNameA(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PSTR, dwProviderId : UInt32, szProvider : UInt8*, pcchProvider : UInt32*) : Int32
+    C.SCardGetCardTypeProviderNameA(hContext, szCardName, dwProviderId, szProvider, pcchProvider)
+  end
+
+  def sCardGetCardTypeProviderNameW(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PWSTR, dwProviderId : UInt32, szProvider : UInt16*, pcchProvider : UInt32*) : Int32
+    C.SCardGetCardTypeProviderNameW(hContext, szCardName, dwProviderId, szProvider, pcchProvider)
+  end
+
+  def sCardIntroduceReaderGroupA(hContext : LibC::UIntPtrT, szGroupName : Win32cr::Foundation::PSTR) : Int32
+    C.SCardIntroduceReaderGroupA(hContext, szGroupName)
+  end
+
+  def sCardIntroduceReaderGroupW(hContext : LibC::UIntPtrT, szGroupName : Win32cr::Foundation::PWSTR) : Int32
+    C.SCardIntroduceReaderGroupW(hContext, szGroupName)
+  end
+
+  def sCardForgetReaderGroupA(hContext : LibC::UIntPtrT, szGroupName : Win32cr::Foundation::PSTR) : Int32
+    C.SCardForgetReaderGroupA(hContext, szGroupName)
+  end
+
+  def sCardForgetReaderGroupW(hContext : LibC::UIntPtrT, szGroupName : Win32cr::Foundation::PWSTR) : Int32
+    C.SCardForgetReaderGroupW(hContext, szGroupName)
+  end
+
+  def sCardIntroduceReaderA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, szDeviceName : Win32cr::Foundation::PSTR) : Int32
+    C.SCardIntroduceReaderA(hContext, szReaderName, szDeviceName)
+  end
+
+  def sCardIntroduceReaderW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, szDeviceName : Win32cr::Foundation::PWSTR) : Int32
+    C.SCardIntroduceReaderW(hContext, szReaderName, szDeviceName)
+  end
+
+  def sCardForgetReaderA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR) : Int32
+    C.SCardForgetReaderA(hContext, szReaderName)
+  end
+
+  def sCardForgetReaderW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR) : Int32
+    C.SCardForgetReaderW(hContext, szReaderName)
+  end
+
+  def sCardAddReaderToGroupA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, szGroupName : Win32cr::Foundation::PSTR) : Int32
+    C.SCardAddReaderToGroupA(hContext, szReaderName, szGroupName)
+  end
+
+  def sCardAddReaderToGroupW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, szGroupName : Win32cr::Foundation::PWSTR) : Int32
+    C.SCardAddReaderToGroupW(hContext, szReaderName, szGroupName)
+  end
+
+  def sCardRemoveReaderFromGroupA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, szGroupName : Win32cr::Foundation::PSTR) : Int32
+    C.SCardRemoveReaderFromGroupA(hContext, szReaderName, szGroupName)
+  end
+
+  def sCardRemoveReaderFromGroupW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, szGroupName : Win32cr::Foundation::PWSTR) : Int32
+    C.SCardRemoveReaderFromGroupW(hContext, szReaderName, szGroupName)
+  end
+
+  def sCardIntroduceCardTypeA(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PSTR, pguidPrimaryProvider : LibC::GUID*, rgguidInterfaces : LibC::GUID*, dwInterfaceCount : UInt32, pbAtr : UInt8*, pbAtrMask : UInt8*, cbAtrLen : UInt32) : Int32
+    C.SCardIntroduceCardTypeA(hContext, szCardName, pguidPrimaryProvider, rgguidInterfaces, dwInterfaceCount, pbAtr, pbAtrMask, cbAtrLen)
+  end
+
+  def sCardIntroduceCardTypeW(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PWSTR, pguidPrimaryProvider : LibC::GUID*, rgguidInterfaces : LibC::GUID*, dwInterfaceCount : UInt32, pbAtr : UInt8*, pbAtrMask : UInt8*, cbAtrLen : UInt32) : Int32
+    C.SCardIntroduceCardTypeW(hContext, szCardName, pguidPrimaryProvider, rgguidInterfaces, dwInterfaceCount, pbAtr, pbAtrMask, cbAtrLen)
+  end
+
+  def sCardSetCardTypeProviderNameA(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PSTR, dwProviderId : UInt32, szProvider : Win32cr::Foundation::PSTR) : Int32
+    C.SCardSetCardTypeProviderNameA(hContext, szCardName, dwProviderId, szProvider)
+  end
+
+  def sCardSetCardTypeProviderNameW(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PWSTR, dwProviderId : UInt32, szProvider : Win32cr::Foundation::PWSTR) : Int32
+    C.SCardSetCardTypeProviderNameW(hContext, szCardName, dwProviderId, szProvider)
+  end
+
+  def sCardForgetCardTypeA(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PSTR) : Int32
+    C.SCardForgetCardTypeA(hContext, szCardName)
+  end
+
+  def sCardForgetCardTypeW(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PWSTR) : Int32
+    C.SCardForgetCardTypeW(hContext, szCardName)
+  end
+
+  def sCardFreeMemory(hContext : LibC::UIntPtrT, pvMem : Void*) : Int32
+    C.SCardFreeMemory(hContext, pvMem)
+  end
+
+  def sCardAccessStartedEvent : Win32cr::Foundation::HANDLE
+    C.SCardAccessStartedEvent
+  end
+
+  def sCardReleaseStartedEvent : Void
+    C.SCardReleaseStartedEvent
+  end
+
+  def sCardLocateCardsA(hContext : LibC::UIntPtrT, mszCards : Win32cr::Foundation::PSTR, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEA*, cReaders : UInt32) : Int32
+    C.SCardLocateCardsA(hContext, mszCards, rgReaderStates, cReaders)
+  end
+
+  def sCardLocateCardsW(hContext : LibC::UIntPtrT, mszCards : Win32cr::Foundation::PWSTR, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEW*, cReaders : UInt32) : Int32
+    C.SCardLocateCardsW(hContext, mszCards, rgReaderStates, cReaders)
+  end
+
+  def sCardLocateCardsByATRA(hContext : LibC::UIntPtrT, rgAtrMasks : Win32cr::Security::Credentials::SCARD_ATRMASK*, cAtrs : UInt32, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEA*, cReaders : UInt32) : Int32
+    C.SCardLocateCardsByATRA(hContext, rgAtrMasks, cAtrs, rgReaderStates, cReaders)
+  end
+
+  def sCardLocateCardsByATRW(hContext : LibC::UIntPtrT, rgAtrMasks : Win32cr::Security::Credentials::SCARD_ATRMASK*, cAtrs : UInt32, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEW*, cReaders : UInt32) : Int32
+    C.SCardLocateCardsByATRW(hContext, rgAtrMasks, cAtrs, rgReaderStates, cReaders)
+  end
+
+  def sCardGetStatusChangeA(hContext : LibC::UIntPtrT, dwTimeout : UInt32, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEA*, cReaders : UInt32) : Int32
+    C.SCardGetStatusChangeA(hContext, dwTimeout, rgReaderStates, cReaders)
+  end
+
+  def sCardGetStatusChangeW(hContext : LibC::UIntPtrT, dwTimeout : UInt32, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEW*, cReaders : UInt32) : Int32
+    C.SCardGetStatusChangeW(hContext, dwTimeout, rgReaderStates, cReaders)
+  end
+
+  def sCardCancel(hContext : LibC::UIntPtrT) : Int32
+    C.SCardCancel(hContext)
+  end
+
+  def sCardConnectA(hContext : LibC::UIntPtrT, szReader : Win32cr::Foundation::PSTR, dwShareMode : UInt32, dwPreferredProtocols : UInt32, phCard : LibC::UIntPtrT*, pdwActiveProtocol : UInt32*) : Int32
+    C.SCardConnectA(hContext, szReader, dwShareMode, dwPreferredProtocols, phCard, pdwActiveProtocol)
+  end
+
+  def sCardConnectW(hContext : LibC::UIntPtrT, szReader : Win32cr::Foundation::PWSTR, dwShareMode : UInt32, dwPreferredProtocols : UInt32, phCard : LibC::UIntPtrT*, pdwActiveProtocol : UInt32*) : Int32
+    C.SCardConnectW(hContext, szReader, dwShareMode, dwPreferredProtocols, phCard, pdwActiveProtocol)
+  end
+
+  def sCardReconnect(hCard : LibC::UIntPtrT, dwShareMode : UInt32, dwPreferredProtocols : UInt32, dwInitialization : UInt32, pdwActiveProtocol : UInt32*) : Int32
+    C.SCardReconnect(hCard, dwShareMode, dwPreferredProtocols, dwInitialization, pdwActiveProtocol)
+  end
+
+  def sCardDisconnect(hCard : LibC::UIntPtrT, dwDisposition : UInt32) : Int32
+    C.SCardDisconnect(hCard, dwDisposition)
+  end
+
+  def sCardBeginTransaction(hCard : LibC::UIntPtrT) : Int32
+    C.SCardBeginTransaction(hCard)
+  end
+
+  def sCardEndTransaction(hCard : LibC::UIntPtrT, dwDisposition : UInt32) : Int32
+    C.SCardEndTransaction(hCard, dwDisposition)
+  end
+
+  def sCardState(hCard : LibC::UIntPtrT, pdwState : UInt32*, pdwProtocol : UInt32*, pbAtr : UInt8*, pcbAtrLen : UInt32*) : Int32
+    C.SCardState(hCard, pdwState, pdwProtocol, pbAtr, pcbAtrLen)
+  end
+
+  def sCardStatusA(hCard : LibC::UIntPtrT, mszReaderNames : Win32cr::Foundation::PSTR, pcchReaderLen : UInt32*, pdwState : UInt32*, pdwProtocol : UInt32*, pbAtr : UInt8*, pcbAtrLen : UInt32*) : Int32
+    C.SCardStatusA(hCard, mszReaderNames, pcchReaderLen, pdwState, pdwProtocol, pbAtr, pcbAtrLen)
+  end
+
+  def sCardStatusW(hCard : LibC::UIntPtrT, mszReaderNames : Win32cr::Foundation::PWSTR, pcchReaderLen : UInt32*, pdwState : UInt32*, pdwProtocol : UInt32*, pbAtr : UInt8*, pcbAtrLen : UInt32*) : Int32
+    C.SCardStatusW(hCard, mszReaderNames, pcchReaderLen, pdwState, pdwProtocol, pbAtr, pcbAtrLen)
+  end
+
+  def sCardTransmit(hCard : LibC::UIntPtrT, pioSendPci : Win32cr::Security::Credentials::SCARD_IO_REQUEST*, pbSendBuffer : UInt8*, cbSendLength : UInt32, pioRecvPci : Win32cr::Security::Credentials::SCARD_IO_REQUEST*, pbRecvBuffer : UInt8*, pcbRecvLength : UInt32*) : Int32
+    C.SCardTransmit(hCard, pioSendPci, pbSendBuffer, cbSendLength, pioRecvPci, pbRecvBuffer, pcbRecvLength)
+  end
+
+  def sCardGetTransmitCount(hCard : LibC::UIntPtrT, pcTransmitCount : UInt32*) : Int32
+    C.SCardGetTransmitCount(hCard, pcTransmitCount)
+  end
+
+  def sCardControl(hCard : LibC::UIntPtrT, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : Int32
+    C.SCardControl(hCard, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+  end
+
+  def sCardGetAttrib(hCard : LibC::UIntPtrT, dwAttrId : UInt32, pbAttr : UInt8*, pcbAttrLen : UInt32*) : Int32
+    C.SCardGetAttrib(hCard, dwAttrId, pbAttr, pcbAttrLen)
+  end
+
+  def sCardSetAttrib(hCard : LibC::UIntPtrT, dwAttrId : UInt32, pbAttr : UInt8*, cbAttrLen : UInt32) : Int32
+    C.SCardSetAttrib(hCard, dwAttrId, pbAttr, cbAttrLen)
+  end
+
+  def sCardUIDlgSelectCardA(param0 : Win32cr::Security::Credentials::OPENCARDNAME_EXA*) : Int32
+    C.SCardUIDlgSelectCardA(param0)
+  end
+
+  def sCardUIDlgSelectCardW(param0 : Win32cr::Security::Credentials::OPENCARDNAME_EXW*) : Int32
+    C.SCardUIDlgSelectCardW(param0)
+  end
+
+  def getOpenCardNameA(param0 : Win32cr::Security::Credentials::OPENCARDNAMEA*) : Int32
+    C.GetOpenCardNameA(param0)
+  end
+
+  def getOpenCardNameW(param0 : Win32cr::Security::Credentials::OPENCARDNAMEW*) : Int32
+    C.GetOpenCardNameW(param0)
+  end
+
+  def sCardDlgExtendedError : Int32
+    C.SCardDlgExtendedError
+  end
+
+  def sCardReadCacheA(hContext : LibC::UIntPtrT, card_identifier : LibC::GUID*, freshness_counter : UInt32, lookup_name : Win32cr::Foundation::PSTR, data : UInt8*, data_len : UInt32*) : Int32
+    C.SCardReadCacheA(hContext, card_identifier, freshness_counter, lookup_name, data, data_len)
+  end
+
+  def sCardReadCacheW(hContext : LibC::UIntPtrT, card_identifier : LibC::GUID*, freshness_counter : UInt32, lookup_name : Win32cr::Foundation::PWSTR, data : UInt8*, data_len : UInt32*) : Int32
+    C.SCardReadCacheW(hContext, card_identifier, freshness_counter, lookup_name, data, data_len)
+  end
+
+  def sCardWriteCacheA(hContext : LibC::UIntPtrT, card_identifier : LibC::GUID*, freshness_counter : UInt32, lookup_name : Win32cr::Foundation::PSTR, data : UInt8*, data_len : UInt32) : Int32
+    C.SCardWriteCacheA(hContext, card_identifier, freshness_counter, lookup_name, data, data_len)
+  end
+
+  def sCardWriteCacheW(hContext : LibC::UIntPtrT, card_identifier : LibC::GUID*, freshness_counter : UInt32, lookup_name : Win32cr::Foundation::PWSTR, data : UInt8*, data_len : UInt32) : Int32
+    C.SCardWriteCacheW(hContext, card_identifier, freshness_counter, lookup_name, data, data_len)
+  end
+
+  def sCardGetReaderIconA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, pbIcon : UInt8*, pcbIcon : UInt32*) : Int32
+    C.SCardGetReaderIconA(hContext, szReaderName, pbIcon, pcbIcon)
+  end
+
+  def sCardGetReaderIconW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, pbIcon : UInt8*, pcbIcon : UInt32*) : Int32
+    C.SCardGetReaderIconW(hContext, szReaderName, pbIcon, pcbIcon)
+  end
+
+  def sCardGetDeviceTypeIdA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, pdwDeviceTypeId : UInt32*) : Int32
+    C.SCardGetDeviceTypeIdA(hContext, szReaderName, pdwDeviceTypeId)
+  end
+
+  def sCardGetDeviceTypeIdW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, pdwDeviceTypeId : UInt32*) : Int32
+    C.SCardGetDeviceTypeIdW(hContext, szReaderName, pdwDeviceTypeId)
+  end
+
+  def sCardGetReaderDeviceInstanceIdA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, szDeviceInstanceId : Win32cr::Foundation::PSTR, pcchDeviceInstanceId : UInt32*) : Int32
+    C.SCardGetReaderDeviceInstanceIdA(hContext, szReaderName, szDeviceInstanceId, pcchDeviceInstanceId)
+  end
+
+  def sCardGetReaderDeviceInstanceIdW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, szDeviceInstanceId : Win32cr::Foundation::PWSTR, pcchDeviceInstanceId : UInt32*) : Int32
+    C.SCardGetReaderDeviceInstanceIdW(hContext, szReaderName, szDeviceInstanceId, pcchDeviceInstanceId)
+  end
+
+  def sCardListReadersWithDeviceInstanceIdA(hContext : LibC::UIntPtrT, szDeviceInstanceId : Win32cr::Foundation::PSTR, mszReaders : Win32cr::Foundation::PSTR, pcchReaders : UInt32*) : Int32
+    C.SCardListReadersWithDeviceInstanceIdA(hContext, szDeviceInstanceId, mszReaders, pcchReaders)
+  end
+
+  def sCardListReadersWithDeviceInstanceIdW(hContext : LibC::UIntPtrT, szDeviceInstanceId : Win32cr::Foundation::PWSTR, mszReaders : Win32cr::Foundation::PWSTR, pcchReaders : UInt32*) : Int32
+    C.SCardListReadersWithDeviceInstanceIdW(hContext, szDeviceInstanceId, mszReaders, pcchReaders)
+  end
+
+  def sCardAudit(hContext : LibC::UIntPtrT, dwEvent : UInt32) : Int32
+    C.SCardAudit(hContext, dwEvent)
+  end
+
   @[Link("keycredmgr")]
   @[Link("advapi32")]
   @[Link("credui")]
   @[Link("winscard")]
   @[Link("scarddlg")]
   lib C
+    # :nodoc:
     fun KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType : Win32cr::Security::Credentials::KeyCredentialManagerOperationType, isReady : Win32cr::Foundation::BOOL*, keyCredentialManagerOperationErrorStates : Win32cr::Security::Credentials::KeyCredentialManagerOperationErrorStates*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun KeyCredentialManagerShowUIOperation(hWndOwner : Win32cr::Foundation::HWND, keyCredentialManagerOperationType : Win32cr::Security::Credentials::KeyCredentialManagerOperationType) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun KeyCredentialManagerGetInformation(keyCredentialManagerInfo : Win32cr::Security::Credentials::KeyCredentialManagerInfo**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun KeyCredentialManagerFreeInformation(keyCredentialManagerInfo : Win32cr::Security::Credentials::KeyCredentialManagerInfo*) : Void
 
+    # :nodoc:
     fun CredWriteW(credential : Win32cr::Security::Credentials::CREDENTIALW*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredWriteA(credential : Win32cr::Security::Credentials::CREDENTIALA*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredReadW(target_name : Win32cr::Foundation::PWSTR, type__ : UInt32, flags : UInt32, credential : Win32cr::Security::Credentials::CREDENTIALW**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredReadA(target_name : Win32cr::Foundation::PSTR, type__ : UInt32, flags : UInt32, credential : Win32cr::Security::Credentials::CREDENTIALA**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredEnumerateW(filter : Win32cr::Foundation::PWSTR, flags : Win32cr::Security::Credentials::CRED_ENUMERATE_FLAGS, count : UInt32*, credential : Win32cr::Security::Credentials::CREDENTIALW***) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredEnumerateA(filter : Win32cr::Foundation::PSTR, flags : Win32cr::Security::Credentials::CRED_ENUMERATE_FLAGS, count : UInt32*, credential : Win32cr::Security::Credentials::CREDENTIALA***) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredWriteDomainCredentialsW(target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONW*, credential : Win32cr::Security::Credentials::CREDENTIALW*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredWriteDomainCredentialsA(target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONA*, credential : Win32cr::Security::Credentials::CREDENTIALA*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredReadDomainCredentialsW(target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONW*, flags : UInt32, count : UInt32*, credential : Win32cr::Security::Credentials::CREDENTIALW***) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredReadDomainCredentialsA(target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONA*, flags : UInt32, count : UInt32*, credential : Win32cr::Security::Credentials::CREDENTIALA***) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredDeleteW(target_name : Win32cr::Foundation::PWSTR, type__ : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredDeleteA(target_name : Win32cr::Foundation::PSTR, type__ : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredRenameW(old_target_name : Win32cr::Foundation::PWSTR, new_target_name : Win32cr::Foundation::PWSTR, type__ : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredRenameA(old_target_name : Win32cr::Foundation::PSTR, new_target_name : Win32cr::Foundation::PSTR, type__ : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredGetTargetInfoW(target_name : Win32cr::Foundation::PWSTR, flags : UInt32, target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONW**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredGetTargetInfoA(target_name : Win32cr::Foundation::PSTR, flags : UInt32, target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONA**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredMarshalCredentialW(cred_type : Win32cr::Security::Credentials::CRED_MARSHAL_TYPE, credential : Void*, marshaled_credential : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredMarshalCredentialA(cred_type : Win32cr::Security::Credentials::CRED_MARSHAL_TYPE, credential : Void*, marshaled_credential : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredUnmarshalCredentialW(marshaled_credential : Win32cr::Foundation::PWSTR, cred_type : Win32cr::Security::Credentials::CRED_MARSHAL_TYPE*, credential : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredUnmarshalCredentialA(marshaled_credential : Win32cr::Foundation::PSTR, cred_type : Win32cr::Security::Credentials::CRED_MARSHAL_TYPE*, credential : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredIsMarshaledCredentialW(marshaled_credential : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredIsMarshaledCredentialA(marshaled_credential : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredUnPackAuthenticationBufferW(dwFlags : Win32cr::Security::Credentials::CRED_PACK_FLAGS, pAuthBuffer : Void*, cbAuthBuffer : UInt32, pszUserName : UInt16*, pcchMaxUserName : UInt32*, pszDomainName : UInt16*, pcchMaxDomainName : UInt32*, pszPassword : UInt16*, pcchMaxPassword : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredUnPackAuthenticationBufferA(dwFlags : Win32cr::Security::Credentials::CRED_PACK_FLAGS, pAuthBuffer : Void*, cbAuthBuffer : UInt32, pszUserName : UInt8*, pcchlMaxUserName : UInt32*, pszDomainName : UInt8*, pcchMaxDomainName : UInt32*, pszPassword : UInt8*, pcchMaxPassword : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredPackAuthenticationBufferW(dwFlags : Win32cr::Security::Credentials::CRED_PACK_FLAGS, pszUserName : Win32cr::Foundation::PWSTR, pszPassword : Win32cr::Foundation::PWSTR, pPackedCredentials : UInt8*, pcbPackedCredentials : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredPackAuthenticationBufferA(dwFlags : Win32cr::Security::Credentials::CRED_PACK_FLAGS, pszUserName : Win32cr::Foundation::PSTR, pszPassword : Win32cr::Foundation::PSTR, pPackedCredentials : UInt8*, pcbPackedCredentials : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredProtectW(fAsSelf : Win32cr::Foundation::BOOL, pszCredentials : UInt16*, cchCredentials : UInt32, pszProtectedCredentials : UInt16*, pcchMaxChars : UInt32*, protection_type : Win32cr::Security::Credentials::CRED_PROTECTION_TYPE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredProtectA(fAsSelf : Win32cr::Foundation::BOOL, pszCredentials : UInt8*, cchCredentials : UInt32, pszProtectedCredentials : UInt8*, pcchMaxChars : UInt32*, protection_type : Win32cr::Security::Credentials::CRED_PROTECTION_TYPE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredUnprotectW(fAsSelf : Win32cr::Foundation::BOOL, pszProtectedCredentials : UInt16*, cchProtectedCredentials : UInt32, pszCredentials : UInt16*, pcchMaxChars : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredUnprotectA(fAsSelf : Win32cr::Foundation::BOOL, pszProtectedCredentials : UInt8*, cchProtectedCredentials : UInt32, pszCredentials : UInt8*, pcchMaxChars : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredIsProtectedW(pszProtectedCredentials : Win32cr::Foundation::PWSTR, pProtectionType : Win32cr::Security::Credentials::CRED_PROTECTION_TYPE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredIsProtectedA(pszProtectedCredentials : Win32cr::Foundation::PSTR, pProtectionType : Win32cr::Security::Credentials::CRED_PROTECTION_TYPE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredFindBestCredentialW(target_name : Win32cr::Foundation::PWSTR, type__ : UInt32, flags : UInt32, credential : Win32cr::Security::Credentials::CREDENTIALW**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredFindBestCredentialA(target_name : Win32cr::Foundation::PSTR, type__ : UInt32, flags : UInt32, credential : Win32cr::Security::Credentials::CREDENTIALA**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredGetSessionTypes(maximum_persist_count : UInt32, maximum_persist : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CredFree(buffer : Void*) : Void
 
+    # :nodoc:
     fun CredUIPromptForCredentialsW(pUiInfo : Win32cr::Security::Credentials::CREDUI_INFOW*, pszTargetName : Win32cr::Foundation::PWSTR, pContext : Win32cr::Security::Credentials::SecHandle*, dwAuthError : UInt32, pszUserName : UInt16*, ulUserNameBufferSize : UInt32, pszPassword : UInt16*, ulPasswordBufferSize : UInt32, save : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUI_FLAGS) : UInt32
 
+    # :nodoc:
     fun CredUIPromptForCredentialsA(pUiInfo : Win32cr::Security::Credentials::CREDUI_INFOA*, pszTargetName : Win32cr::Foundation::PSTR, pContext : Win32cr::Security::Credentials::SecHandle*, dwAuthError : UInt32, pszUserName : UInt8*, ulUserNameBufferSize : UInt32, pszPassword : UInt8*, ulPasswordBufferSize : UInt32, save : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUI_FLAGS) : UInt32
 
+    # :nodoc:
     fun CredUIPromptForWindowsCredentialsW(pUiInfo : Win32cr::Security::Credentials::CREDUI_INFOW*, dwAuthError : UInt32, pulAuthPackage : UInt32*, pvInAuthBuffer : Void*, ulInAuthBufferSize : UInt32, ppvOutAuthBuffer : Void**, pulOutAuthBufferSize : UInt32*, pfSave : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUIWIN_FLAGS) : UInt32
 
+    # :nodoc:
     fun CredUIPromptForWindowsCredentialsA(pUiInfo : Win32cr::Security::Credentials::CREDUI_INFOA*, dwAuthError : UInt32, pulAuthPackage : UInt32*, pvInAuthBuffer : Void*, ulInAuthBufferSize : UInt32, ppvOutAuthBuffer : Void**, pulOutAuthBufferSize : UInt32*, pfSave : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUIWIN_FLAGS) : UInt32
 
+    # :nodoc:
     fun CredUIParseUserNameW(user_name : Win32cr::Foundation::PWSTR, user : UInt16*, userBufferSize : UInt32, domain : UInt16*, domainBufferSize : UInt32) : UInt32
 
+    # :nodoc:
     fun CredUIParseUserNameA(userName : Win32cr::Foundation::PSTR, user : UInt8*, userBufferSize : UInt32, domain : UInt8*, domainBufferSize : UInt32) : UInt32
 
+    # :nodoc:
     fun CredUICmdLinePromptForCredentialsW(pszTargetName : Win32cr::Foundation::PWSTR, pContext : Win32cr::Security::Credentials::SecHandle*, dwAuthError : UInt32, user_name : UInt16*, ulUserBufferSize : UInt32, pszPassword : UInt16*, ulPasswordBufferSize : UInt32, pfSave : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUI_FLAGS) : UInt32
 
+    # :nodoc:
     fun CredUICmdLinePromptForCredentialsA(pszTargetName : Win32cr::Foundation::PSTR, pContext : Win32cr::Security::Credentials::SecHandle*, dwAuthError : UInt32, user_name : UInt8*, ulUserBufferSize : UInt32, pszPassword : UInt8*, ulPasswordBufferSize : UInt32, pfSave : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUI_FLAGS) : UInt32
 
+    # :nodoc:
     fun CredUIConfirmCredentialsW(pszTargetName : Win32cr::Foundation::PWSTR, bConfirm : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun CredUIConfirmCredentialsA(pszTargetName : Win32cr::Foundation::PSTR, bConfirm : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun CredUIStoreSSOCredW(pszRealm : Win32cr::Foundation::PWSTR, pszUsername : Win32cr::Foundation::PWSTR, pszPassword : Win32cr::Foundation::PWSTR, bPersist : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun CredUIReadSSOCredW(pszRealm : Win32cr::Foundation::PWSTR, ppszUsername : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun SCardEstablishContext(dwScope : Win32cr::Security::Credentials::SCARD_SCOPE, pvReserved1 : Void*, pvReserved2 : Void*, phContext : LibC::UIntPtrT*) : Int32
 
+    # :nodoc:
     fun SCardReleaseContext(hContext : LibC::UIntPtrT) : Int32
 
+    # :nodoc:
     fun SCardIsValidContext(hContext : LibC::UIntPtrT) : Int32
 
+    # :nodoc:
     fun SCardListReaderGroupsA(hContext : LibC::UIntPtrT, mszGroups : UInt8*, pcchGroups : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardListReaderGroupsW(hContext : LibC::UIntPtrT, mszGroups : UInt16*, pcchGroups : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardListReadersA(hContext : LibC::UIntPtrT, mszGroups : Win32cr::Foundation::PSTR, mszReaders : Win32cr::Foundation::PSTR, pcchReaders : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardListReadersW(hContext : LibC::UIntPtrT, mszGroups : Win32cr::Foundation::PWSTR, mszReaders : Win32cr::Foundation::PWSTR, pcchReaders : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardListCardsA(hContext : LibC::UIntPtrT, pbAtr : UInt8*, rgquidInterfaces : LibC::GUID*, cguidInterfaceCount : UInt32, mszCards : Win32cr::Foundation::PSTR, pcchCards : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardListCardsW(hContext : LibC::UIntPtrT, pbAtr : UInt8*, rgquidInterfaces : LibC::GUID*, cguidInterfaceCount : UInt32, mszCards : Win32cr::Foundation::PWSTR, pcchCards : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardListInterfacesA(hContext : LibC::UIntPtrT, szCard : Win32cr::Foundation::PSTR, pguidInterfaces : LibC::GUID*, pcguidInterfaces : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardListInterfacesW(hContext : LibC::UIntPtrT, szCard : Win32cr::Foundation::PWSTR, pguidInterfaces : LibC::GUID*, pcguidInterfaces : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardGetProviderIdA(hContext : LibC::UIntPtrT, szCard : Win32cr::Foundation::PSTR, pguidProviderId : LibC::GUID*) : Int32
 
+    # :nodoc:
     fun SCardGetProviderIdW(hContext : LibC::UIntPtrT, szCard : Win32cr::Foundation::PWSTR, pguidProviderId : LibC::GUID*) : Int32
 
+    # :nodoc:
     fun SCardGetCardTypeProviderNameA(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PSTR, dwProviderId : UInt32, szProvider : UInt8*, pcchProvider : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardGetCardTypeProviderNameW(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PWSTR, dwProviderId : UInt32, szProvider : UInt16*, pcchProvider : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardIntroduceReaderGroupA(hContext : LibC::UIntPtrT, szGroupName : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun SCardIntroduceReaderGroupW(hContext : LibC::UIntPtrT, szGroupName : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun SCardForgetReaderGroupA(hContext : LibC::UIntPtrT, szGroupName : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun SCardForgetReaderGroupW(hContext : LibC::UIntPtrT, szGroupName : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun SCardIntroduceReaderA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, szDeviceName : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun SCardIntroduceReaderW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, szDeviceName : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun SCardForgetReaderA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun SCardForgetReaderW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun SCardAddReaderToGroupA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, szGroupName : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun SCardAddReaderToGroupW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, szGroupName : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun SCardRemoveReaderFromGroupA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, szGroupName : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun SCardRemoveReaderFromGroupW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, szGroupName : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun SCardIntroduceCardTypeA(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PSTR, pguidPrimaryProvider : LibC::GUID*, rgguidInterfaces : LibC::GUID*, dwInterfaceCount : UInt32, pbAtr : UInt8*, pbAtrMask : UInt8*, cbAtrLen : UInt32) : Int32
 
+    # :nodoc:
     fun SCardIntroduceCardTypeW(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PWSTR, pguidPrimaryProvider : LibC::GUID*, rgguidInterfaces : LibC::GUID*, dwInterfaceCount : UInt32, pbAtr : UInt8*, pbAtrMask : UInt8*, cbAtrLen : UInt32) : Int32
 
+    # :nodoc:
     fun SCardSetCardTypeProviderNameA(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PSTR, dwProviderId : UInt32, szProvider : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun SCardSetCardTypeProviderNameW(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PWSTR, dwProviderId : UInt32, szProvider : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun SCardForgetCardTypeA(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun SCardForgetCardTypeW(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun SCardFreeMemory(hContext : LibC::UIntPtrT, pvMem : Void*) : Int32
 
+    # :nodoc:
     fun SCardAccessStartedEvent : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun SCardReleaseStartedEvent : Void
 
+    # :nodoc:
     fun SCardLocateCardsA(hContext : LibC::UIntPtrT, mszCards : Win32cr::Foundation::PSTR, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEA*, cReaders : UInt32) : Int32
 
+    # :nodoc:
     fun SCardLocateCardsW(hContext : LibC::UIntPtrT, mszCards : Win32cr::Foundation::PWSTR, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEW*, cReaders : UInt32) : Int32
 
+    # :nodoc:
     fun SCardLocateCardsByATRA(hContext : LibC::UIntPtrT, rgAtrMasks : Win32cr::Security::Credentials::SCARD_ATRMASK*, cAtrs : UInt32, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEA*, cReaders : UInt32) : Int32
 
+    # :nodoc:
     fun SCardLocateCardsByATRW(hContext : LibC::UIntPtrT, rgAtrMasks : Win32cr::Security::Credentials::SCARD_ATRMASK*, cAtrs : UInt32, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEW*, cReaders : UInt32) : Int32
 
+    # :nodoc:
     fun SCardGetStatusChangeA(hContext : LibC::UIntPtrT, dwTimeout : UInt32, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEA*, cReaders : UInt32) : Int32
 
+    # :nodoc:
     fun SCardGetStatusChangeW(hContext : LibC::UIntPtrT, dwTimeout : UInt32, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEW*, cReaders : UInt32) : Int32
 
+    # :nodoc:
     fun SCardCancel(hContext : LibC::UIntPtrT) : Int32
 
+    # :nodoc:
     fun SCardConnectA(hContext : LibC::UIntPtrT, szReader : Win32cr::Foundation::PSTR, dwShareMode : UInt32, dwPreferredProtocols : UInt32, phCard : LibC::UIntPtrT*, pdwActiveProtocol : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardConnectW(hContext : LibC::UIntPtrT, szReader : Win32cr::Foundation::PWSTR, dwShareMode : UInt32, dwPreferredProtocols : UInt32, phCard : LibC::UIntPtrT*, pdwActiveProtocol : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardReconnect(hCard : LibC::UIntPtrT, dwShareMode : UInt32, dwPreferredProtocols : UInt32, dwInitialization : UInt32, pdwActiveProtocol : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardDisconnect(hCard : LibC::UIntPtrT, dwDisposition : UInt32) : Int32
 
+    # :nodoc:
     fun SCardBeginTransaction(hCard : LibC::UIntPtrT) : Int32
 
+    # :nodoc:
     fun SCardEndTransaction(hCard : LibC::UIntPtrT, dwDisposition : UInt32) : Int32
 
+    # :nodoc:
     fun SCardState(hCard : LibC::UIntPtrT, pdwState : UInt32*, pdwProtocol : UInt32*, pbAtr : UInt8*, pcbAtrLen : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardStatusA(hCard : LibC::UIntPtrT, mszReaderNames : Win32cr::Foundation::PSTR, pcchReaderLen : UInt32*, pdwState : UInt32*, pdwProtocol : UInt32*, pbAtr : UInt8*, pcbAtrLen : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardStatusW(hCard : LibC::UIntPtrT, mszReaderNames : Win32cr::Foundation::PWSTR, pcchReaderLen : UInt32*, pdwState : UInt32*, pdwProtocol : UInt32*, pbAtr : UInt8*, pcbAtrLen : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardTransmit(hCard : LibC::UIntPtrT, pioSendPci : Win32cr::Security::Credentials::SCARD_IO_REQUEST*, pbSendBuffer : UInt8*, cbSendLength : UInt32, pioRecvPci : Win32cr::Security::Credentials::SCARD_IO_REQUEST*, pbRecvBuffer : UInt8*, pcbRecvLength : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardGetTransmitCount(hCard : LibC::UIntPtrT, pcTransmitCount : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardControl(hCard : LibC::UIntPtrT, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardGetAttrib(hCard : LibC::UIntPtrT, dwAttrId : UInt32, pbAttr : UInt8*, pcbAttrLen : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardSetAttrib(hCard : LibC::UIntPtrT, dwAttrId : UInt32, pbAttr : UInt8*, cbAttrLen : UInt32) : Int32
 
+    # :nodoc:
     fun SCardUIDlgSelectCardA(param0 : Win32cr::Security::Credentials::OPENCARDNAME_EXA*) : Int32
 
+    # :nodoc:
     fun SCardUIDlgSelectCardW(param0 : Win32cr::Security::Credentials::OPENCARDNAME_EXW*) : Int32
 
+    # :nodoc:
     fun GetOpenCardNameA(param0 : Win32cr::Security::Credentials::OPENCARDNAMEA*) : Int32
 
+    # :nodoc:
     fun GetOpenCardNameW(param0 : Win32cr::Security::Credentials::OPENCARDNAMEW*) : Int32
 
+    # :nodoc:
     fun SCardDlgExtendedError : Int32
 
+    # :nodoc:
     fun SCardReadCacheA(hContext : LibC::UIntPtrT, card_identifier : LibC::GUID*, freshness_counter : UInt32, lookup_name : Win32cr::Foundation::PSTR, data : UInt8*, data_len : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardReadCacheW(hContext : LibC::UIntPtrT, card_identifier : LibC::GUID*, freshness_counter : UInt32, lookup_name : Win32cr::Foundation::PWSTR, data : UInt8*, data_len : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardWriteCacheA(hContext : LibC::UIntPtrT, card_identifier : LibC::GUID*, freshness_counter : UInt32, lookup_name : Win32cr::Foundation::PSTR, data : UInt8*, data_len : UInt32) : Int32
 
+    # :nodoc:
     fun SCardWriteCacheW(hContext : LibC::UIntPtrT, card_identifier : LibC::GUID*, freshness_counter : UInt32, lookup_name : Win32cr::Foundation::PWSTR, data : UInt8*, data_len : UInt32) : Int32
 
+    # :nodoc:
     fun SCardGetReaderIconA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, pbIcon : UInt8*, pcbIcon : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardGetReaderIconW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, pbIcon : UInt8*, pcbIcon : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardGetDeviceTypeIdA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, pdwDeviceTypeId : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardGetDeviceTypeIdW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, pdwDeviceTypeId : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardGetReaderDeviceInstanceIdA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, szDeviceInstanceId : Win32cr::Foundation::PSTR, pcchDeviceInstanceId : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardGetReaderDeviceInstanceIdW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, szDeviceInstanceId : Win32cr::Foundation::PWSTR, pcchDeviceInstanceId : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardListReadersWithDeviceInstanceIdA(hContext : LibC::UIntPtrT, szDeviceInstanceId : Win32cr::Foundation::PSTR, mszReaders : Win32cr::Foundation::PSTR, pcchReaders : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardListReadersWithDeviceInstanceIdW(hContext : LibC::UIntPtrT, szDeviceInstanceId : Win32cr::Foundation::PWSTR, mszReaders : Win32cr::Foundation::PWSTR, pcchReaders : UInt32*) : Int32
 
+    # :nodoc:
     fun SCardAudit(hContext : LibC::UIntPtrT, dwEvent : UInt32) : Int32
 
   end

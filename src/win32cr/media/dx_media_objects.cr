@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./../system/com.cr"
 
 module Win32cr::Media::DxMediaObjects
+  extend self
   DMO_E_INVALIDSTREAMINDEX = -2147220991_i32
   DMO_E_INVALIDTYPE = -2147220990_i32
   DMO_E_TYPE_NOT_SET = -2147220989_i32
@@ -389,28 +390,83 @@ module Win32cr::Media::DxMediaObjects
 
   end
 
+  def dMORegister(szName : Win32cr::Foundation::PWSTR, clsidDMO : LibC::GUID*, guidCategory : LibC::GUID*, dwFlags : UInt32, cInTypes : UInt32, pInTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, cOutTypes : UInt32, pOutTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*) : Win32cr::Foundation::HRESULT
+    C.DMORegister(szName, clsidDMO, guidCategory, dwFlags, cInTypes, pInTypes, cOutTypes, pOutTypes)
+  end
+
+  def dMOUnregister(clsidDMO : LibC::GUID*, guidCategory : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.DMOUnregister(clsidDMO, guidCategory)
+  end
+
+  def dMOEnum(guidCategory : LibC::GUID*, dwFlags : UInt32, cInTypes : UInt32, pInTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, cOutTypes : UInt32, pOutTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+    C.DMOEnum(guidCategory, dwFlags, cInTypes, pInTypes, cOutTypes, pOutTypes, ppEnum)
+  end
+
+  def dMOGetTypes(clsidDMO : LibC::GUID*, ulInputTypesRequested : UInt32, pulInputTypesSupplied : UInt32*, pInputTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, ulOutputTypesRequested : UInt32, pulOutputTypesSupplied : UInt32*, pOutputTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*) : Win32cr::Foundation::HRESULT
+    C.DMOGetTypes(clsidDMO, ulInputTypesRequested, pulInputTypesSupplied, pInputTypes, ulOutputTypesRequested, pulOutputTypesSupplied, pOutputTypes)
+  end
+
+  def dMOGetName(clsidDMO : LibC::GUID*, szName : UInt16*) : Win32cr::Foundation::HRESULT
+    C.DMOGetName(clsidDMO, szName)
+  end
+
+  def moInitMediaType(pmt : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*, cbFormat : UInt32) : Win32cr::Foundation::HRESULT
+    C.MoInitMediaType(pmt, cbFormat)
+  end
+
+  def moFreeMediaType(pmt : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
+    C.MoFreeMediaType(pmt)
+  end
+
+  def moCopyMediaType(pmtDest : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*, pmtSrc : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
+    C.MoCopyMediaType(pmtDest, pmtSrc)
+  end
+
+  def moCreateMediaType(ppmt : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE**, cbFormat : UInt32) : Win32cr::Foundation::HRESULT
+    C.MoCreateMediaType(ppmt, cbFormat)
+  end
+
+  def moDeleteMediaType(pmt : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
+    C.MoDeleteMediaType(pmt)
+  end
+
+  def moDuplicateMediaType(ppmtDest : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE**, pmtSrc : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
+    C.MoDuplicateMediaType(ppmtDest, pmtSrc)
+  end
+
   @[Link("msdmo")]
   lib C
+    # :nodoc:
     fun DMORegister(szName : Win32cr::Foundation::PWSTR, clsidDMO : LibC::GUID*, guidCategory : LibC::GUID*, dwFlags : UInt32, cInTypes : UInt32, pInTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, cOutTypes : UInt32, pOutTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DMOUnregister(clsidDMO : LibC::GUID*, guidCategory : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DMOEnum(guidCategory : LibC::GUID*, dwFlags : UInt32, cInTypes : UInt32, pInTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, cOutTypes : UInt32, pOutTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DMOGetTypes(clsidDMO : LibC::GUID*, ulInputTypesRequested : UInt32, pulInputTypesSupplied : UInt32*, pInputTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, ulOutputTypesRequested : UInt32, pulOutputTypesSupplied : UInt32*, pOutputTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DMOGetName(clsidDMO : LibC::GUID*, szName : UInt16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MoInitMediaType(pmt : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*, cbFormat : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MoFreeMediaType(pmt : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MoCopyMediaType(pmtDest : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*, pmtSrc : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MoCreateMediaType(ppmt : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE**, cbFormat : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MoDeleteMediaType(pmt : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MoDuplicateMediaType(ppmtDest : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE**, pmtSrc : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
 
   end

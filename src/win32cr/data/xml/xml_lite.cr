@@ -2,6 +2,7 @@ require "./../../system/com.cr"
 require "./../../foundation.cr"
 
 module Win32cr::Data::Xml::XmlLite
+  extend self
   IID_IXmlReader_ = "7279fc81-709d-4095-b63d-69fe4b0d9030"
   IID_IXmlWriter_ = "7279fc88-709d-4095-b63d-69fe4b0d9030"
   IID_IXmlResolver_ = "7279fc82-709d-4095-b63d-69fe4b0d9030"
@@ -564,18 +565,48 @@ module Win32cr::Data::Xml::XmlLite
 
   end
 
+  def createXmlReader(riid : LibC::GUID*, ppvObject : Void**, pMalloc : Void*) : Win32cr::Foundation::HRESULT
+    C.CreateXmlReader(riid, ppvObject, pMalloc)
+  end
+
+  def createXmlReaderInputWithEncodingCodePage(pInputStream : Void*, pMalloc : Void*, nEncodingCodePage : UInt32, fEncodingHint : Win32cr::Foundation::BOOL, pwszBaseUri : Win32cr::Foundation::PWSTR, ppInput : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateXmlReaderInputWithEncodingCodePage(pInputStream, pMalloc, nEncodingCodePage, fEncodingHint, pwszBaseUri, ppInput)
+  end
+
+  def createXmlReaderInputWithEncodingName(pInputStream : Void*, pMalloc : Void*, pwszEncodingName : Win32cr::Foundation::PWSTR, fEncodingHint : Win32cr::Foundation::BOOL, pwszBaseUri : Win32cr::Foundation::PWSTR, ppInput : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateXmlReaderInputWithEncodingName(pInputStream, pMalloc, pwszEncodingName, fEncodingHint, pwszBaseUri, ppInput)
+  end
+
+  def createXmlWriter(riid : LibC::GUID*, ppvObject : Void**, pMalloc : Void*) : Win32cr::Foundation::HRESULT
+    C.CreateXmlWriter(riid, ppvObject, pMalloc)
+  end
+
+  def createXmlWriterOutputWithEncodingCodePage(pOutputStream : Void*, pMalloc : Void*, nEncodingCodePage : UInt32, ppOutput : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateXmlWriterOutputWithEncodingCodePage(pOutputStream, pMalloc, nEncodingCodePage, ppOutput)
+  end
+
+  def createXmlWriterOutputWithEncodingName(pOutputStream : Void*, pMalloc : Void*, pwszEncodingName : Win32cr::Foundation::PWSTR, ppOutput : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateXmlWriterOutputWithEncodingName(pOutputStream, pMalloc, pwszEncodingName, ppOutput)
+  end
+
   @[Link("xmllite")]
   lib C
+    # :nodoc:
     fun CreateXmlReader(riid : LibC::GUID*, ppvObject : Void**, pMalloc : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateXmlReaderInputWithEncodingCodePage(pInputStream : Void*, pMalloc : Void*, nEncodingCodePage : UInt32, fEncodingHint : Win32cr::Foundation::BOOL, pwszBaseUri : Win32cr::Foundation::PWSTR, ppInput : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateXmlReaderInputWithEncodingName(pInputStream : Void*, pMalloc : Void*, pwszEncodingName : Win32cr::Foundation::PWSTR, fEncodingHint : Win32cr::Foundation::BOOL, pwszBaseUri : Win32cr::Foundation::PWSTR, ppInput : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateXmlWriter(riid : LibC::GUID*, ppvObject : Void**, pMalloc : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateXmlWriterOutputWithEncodingCodePage(pOutputStream : Void*, pMalloc : Void*, nEncodingCodePage : UInt32, ppOutput : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateXmlWriterOutputWithEncodingName(pOutputStream : Void*, pMalloc : Void*, pwszEncodingName : Win32cr::Foundation::PWSTR, ppOutput : Void**) : Win32cr::Foundation::HRESULT
 
   end

@@ -4,6 +4,7 @@ require "./../security/authentication/identity.cr"
 require "./../system/win_rt.cr"
 
 module Win32cr::Networking::WindowsWebServices
+  extend self
   alias WS_READ_CALLBACK = Proc(Void*, Void*, UInt32, UInt32*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
   alias WS_WRITE_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_BYTES*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
@@ -4022,413 +4023,1428 @@ alias WS_SECURITY_ALGORITHM_PROPERTY_ID = LibC::Int
 
   end
 
+  def wsStartReaderCanonicalization(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, writeCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_CALLBACK, writeCallbackState : Void*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_CANONICALIZATION_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsStartReaderCanonicalization(reader, writeCallback, writeCallbackState, properties, propertyCount, error)
+  end
+
+  def wsEndReaderCanonicalization(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsEndReaderCanonicalization(reader, error)
+  end
+
+  def wsStartWriterCanonicalization(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, writeCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_CALLBACK, writeCallbackState : Void*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_CANONICALIZATION_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsStartWriterCanonicalization(writer, writeCallback, writeCallbackState, properties, propertyCount, error)
+  end
+
+  def wsEndWriterCanonicalization(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsEndWriterCanonicalization(writer, error)
+  end
+
+  def wsCreateXmlBuffer(heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER_PROPERTY*, propertyCount : UInt32, buffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateXmlBuffer(heap, properties, propertyCount, buffer, error)
+  end
+
+  def wsRemoveNode(nodePosition : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_POSITION*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsRemoveNode(nodePosition, error)
+  end
+
+  def wsCreateReader(properties : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY*, propertyCount : UInt32, reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateReader(properties, propertyCount, reader, error)
+  end
+
+  def wsSetInput(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING*, input : Win32cr::Networking::WindowsWebServices::WS_XML_READER_INPUT*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSetInput(reader, encoding, input, properties, propertyCount, error)
+  end
+
+  def wsSetInputToBuffer(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, buffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSetInputToBuffer(reader, buffer, properties, propertyCount, error)
+  end
+
+  def wsFreeReader(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*) : Void
+    C.WsFreeReader(reader)
+  end
+
+  def wsGetReaderProperty(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, id : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetReaderProperty(reader, id, value, valueSize, error)
+  end
+
+  def wsGetReaderNode(xmlReader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, node : Win32cr::Networking::WindowsWebServices::WS_XML_NODE**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetReaderNode(xmlReader, node, error)
+  end
+
+  def wsFillReader(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, minSize : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsFillReader(reader, minSize, asyncContext, error)
+  end
+
+  def wsReadStartElement(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadStartElement(reader, error)
+  end
+
+  def wsReadToStartElement(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, found : Win32cr::Foundation::BOOL*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadToStartElement(reader, localName, ns, found, error)
+  end
+
+  def wsReadStartAttribute(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, attributeIndex : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadStartAttribute(reader, attributeIndex, error)
+  end
+
+  def wsReadEndAttribute(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadEndAttribute(reader, error)
+  end
+
+  def wsReadNode(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadNode(reader, error)
+  end
+
+  def wsSkipNode(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSkipNode(reader, error)
+  end
+
+  def wsReadEndElement(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadEndElement(reader, error)
+  end
+
+  def wsFindAttribute(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, required : Win32cr::Foundation::BOOL, attributeIndex : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsFindAttribute(reader, localName, ns, required, attributeIndex, error)
+  end
+
+  def wsReadValue(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, valueType : Win32cr::Networking::WindowsWebServices::WS_VALUE_TYPE, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadValue(reader, valueType, value, valueSize, error)
+  end
+
+  def wsReadChars(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, chars : UInt16*, maxCharCount : UInt32, actualCharCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadChars(reader, chars, maxCharCount, actualCharCount, error)
+  end
+
+  def wsReadCharsUtf8(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, bytes : UInt8*, maxByteCount : UInt32, actualByteCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadCharsUtf8(reader, bytes, maxByteCount, actualByteCount, error)
+  end
+
+  def wsReadBytes(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, bytes : Void*, maxByteCount : UInt32, actualByteCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadBytes(reader, bytes, maxByteCount, actualByteCount, error)
+  end
+
+  def wsReadArray(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, valueType : Win32cr::Networking::WindowsWebServices::WS_VALUE_TYPE, array : Void*, arraySize : UInt32, itemOffset : UInt32, itemCount : UInt32, actualItemCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadArray(reader, localName, ns, valueType, array, arraySize, itemOffset, itemCount, actualItemCount, error)
+  end
+
+  def wsGetReaderPosition(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, nodePosition : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_POSITION*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetReaderPosition(reader, nodePosition, error)
+  end
+
+  def wsSetReaderPosition(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, nodePosition : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_POSITION*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSetReaderPosition(reader, nodePosition, error)
+  end
+
+  def wsMoveReader(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, moveTo : Win32cr::Networking::WindowsWebServices::WS_MOVE_TO, found : Win32cr::Foundation::BOOL*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsMoveReader(reader, moveTo, found, error)
+  end
+
+  def wsCreateWriter(properties : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY*, propertyCount : UInt32, writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateWriter(properties, propertyCount, writer, error)
+  end
+
+  def wsFreeWriter(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*) : Void
+    C.WsFreeWriter(writer)
+  end
+
+  def wsSetOutput(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING*, output : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_OUTPUT*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSetOutput(writer, encoding, output, properties, propertyCount, error)
+  end
+
+  def wsSetOutputToBuffer(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, buffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSetOutputToBuffer(writer, buffer, properties, propertyCount, error)
+  end
+
+  def wsGetWriterProperty(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, id : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetWriterProperty(writer, id, value, valueSize, error)
+  end
+
+  def wsFlushWriter(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, minSize : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsFlushWriter(writer, minSize, asyncContext, error)
+  end
+
+  def wsWriteStartElement(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteStartElement(writer, prefix, localName, ns, error)
+  end
+
+  def wsWriteEndStartElement(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteEndStartElement(writer, error)
+  end
+
+  def wsWriteXmlnsAttribute(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, singleQuote : Win32cr::Foundation::BOOL, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteXmlnsAttribute(writer, prefix, ns, singleQuote, error)
+  end
+
+  def wsWriteStartAttribute(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, singleQuote : Win32cr::Foundation::BOOL, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteStartAttribute(writer, prefix, localName, ns, singleQuote, error)
+  end
+
+  def wsWriteEndAttribute(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteEndAttribute(writer, error)
+  end
+
+  def wsWriteValue(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, valueType : Win32cr::Networking::WindowsWebServices::WS_VALUE_TYPE, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteValue(writer, valueType, value, valueSize, error)
+  end
+
+  def wsWriteXmlBuffer(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, xmlBuffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteXmlBuffer(writer, xmlBuffer, error)
+  end
+
+  def wsReadXmlBuffer(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, xmlBuffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadXmlBuffer(reader, heap, xmlBuffer, error)
+  end
+
+  def wsWriteXmlBufferToBytes(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, xmlBuffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY*, propertyCount : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, bytes : Void**, byteCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteXmlBufferToBytes(writer, xmlBuffer, encoding, properties, propertyCount, heap, bytes, byteCount, error)
+  end
+
+  def wsReadXmlBufferFromBytes(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY*, propertyCount : UInt32, bytes : Void*, byteCount : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, xmlBuffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadXmlBufferFromBytes(reader, encoding, properties, propertyCount, bytes, byteCount, heap, xmlBuffer, error)
+  end
+
+  def wsWriteArray(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, valueType : Win32cr::Networking::WindowsWebServices::WS_VALUE_TYPE, array : Void*, arraySize : UInt32, itemOffset : UInt32, itemCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteArray(writer, localName, ns, valueType, array, arraySize, itemOffset, itemCount, error)
+  end
+
+  def wsWriteQualifiedName(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteQualifiedName(writer, prefix, localName, ns, error)
+  end
+
+  def wsWriteChars(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, chars : UInt16*, charCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteChars(writer, chars, charCount, error)
+  end
+
+  def wsWriteCharsUtf8(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, bytes : UInt8*, byteCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteCharsUtf8(writer, bytes, byteCount, error)
+  end
+
+  def wsWriteBytes(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, bytes : Void*, byteCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteBytes(writer, bytes, byteCount, error)
+  end
+
+  def wsPushBytes(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, callback : Win32cr::Networking::WindowsWebServices::WS_PUSH_BYTES_CALLBACK, callbackState : Void*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsPushBytes(writer, callback, callbackState, error)
+  end
+
+  def wsPullBytes(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, callback : Win32cr::Networking::WindowsWebServices::WS_PULL_BYTES_CALLBACK, callbackState : Void*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsPullBytes(writer, callback, callbackState, error)
+  end
+
+  def wsWriteEndElement(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteEndElement(writer, error)
+  end
+
+  def wsWriteText(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteText(writer, text, error)
+  end
+
+  def wsWriteStartCData(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteStartCData(writer, error)
+  end
+
+  def wsWriteEndCData(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteEndCData(writer, error)
+  end
+
+  def wsWriteNode(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, node : Win32cr::Networking::WindowsWebServices::WS_XML_NODE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteNode(writer, node, error)
+  end
+
+  def wsGetPrefixFromNamespace(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, required : Win32cr::Foundation::BOOL, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetPrefixFromNamespace(writer, ns, required, prefix, error)
+  end
+
+  def wsGetWriterPosition(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, nodePosition : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_POSITION*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetWriterPosition(writer, nodePosition, error)
+  end
+
+  def wsSetWriterPosition(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, nodePosition : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_POSITION*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSetWriterPosition(writer, nodePosition, error)
+  end
+
+  def wsMoveWriter(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, moveTo : Win32cr::Networking::WindowsWebServices::WS_MOVE_TO, found : Win32cr::Foundation::BOOL*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsMoveWriter(writer, moveTo, found, error)
+  end
+
+  def wsTrimXmlWhitespace(chars : UInt16*, charCount : UInt32, trimmedChars : UInt16**, trimmedCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsTrimXmlWhitespace(chars, charCount, trimmedChars, trimmedCount, error)
+  end
+
+  def wsVerifyXmlNCName(ncNameChars : UInt16*, ncNameCharCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsVerifyXmlNCName(ncNameChars, ncNameCharCount, error)
+  end
+
+  def wsXmlStringEquals(string1 : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, string2 : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsXmlStringEquals(string1, string2, error)
+  end
+
+  def wsGetNamespaceFromPrefix(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, required : Win32cr::Foundation::BOOL, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetNamespaceFromPrefix(reader, prefix, required, ns, error)
+  end
+
+  def wsReadQualifiedName(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadQualifiedName(reader, heap, prefix, localName, ns, error)
+  end
+
+  def wsGetXmlAttribute(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, valueChars : UInt16**, valueCharCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetXmlAttribute(reader, localName, heap, valueChars, valueCharCount, error)
+  end
+
+  def wsCopyNode(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCopyNode(writer, reader, error)
+  end
+
+  def wsAsyncExecute(asyncState : Win32cr::Networking::WindowsWebServices::WS_ASYNC_STATE*, operation : Win32cr::Networking::WindowsWebServices::WS_ASYNC_FUNCTION, callbackModel : Win32cr::Networking::WindowsWebServices::WS_CALLBACK_MODEL, callbackState : Void*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsAsyncExecute(asyncState, operation, callbackModel, callbackState, asyncContext, error)
+  end
+
+  def wsCreateChannel(channelType : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, channelBinding : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_BINDING, properties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY*, propertyCount : UInt32, securityDescription : Win32cr::Networking::WindowsWebServices::WS_SECURITY_DESCRIPTION*, channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateChannel(channelType, channelBinding, properties, propertyCount, securityDescription, channel, error)
+  end
+
+  def wsOpenChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, endpointAddress : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsOpenChannel(channel, endpointAddress, asyncContext, error)
+  end
+
+  def wsSendMessage(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, messageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, bodyValue : Void*, bodyValueSize : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSendMessage(channel, message, messageDescription, writeOption, bodyValue, bodyValueSize, asyncContext, error)
+  end
+
+  def wsReceiveMessage(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, messageDescriptions : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION**, messageDescriptionCount : UInt32, receiveOption : Win32cr::Networking::WindowsWebServices::WS_RECEIVE_OPTION, readBodyOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, index : UInt32*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReceiveMessage(channel, message, messageDescriptions, messageDescriptionCount, receiveOption, readBodyOption, heap, value, valueSize, index, asyncContext, error)
+  end
+
+  def wsRequestReply(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, requestMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, requestMessageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, requestBodyValue : Void*, requestBodyValueSize : UInt32, replyMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, replyMessageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsRequestReply(channel, requestMessage, requestMessageDescription, writeOption, requestBodyValue, requestBodyValueSize, replyMessage, replyMessageDescription, readOption, heap, value, valueSize, asyncContext, error)
+  end
+
+  def wsSendReplyMessage(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, replyMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, replyMessageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, replyBodyValue : Void*, replyBodyValueSize : UInt32, requestMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSendReplyMessage(channel, replyMessage, replyMessageDescription, writeOption, replyBodyValue, replyBodyValueSize, requestMessage, asyncContext, error)
+  end
+
+  def wsSendFaultMessageForError(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, replyMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, faultError : Win32cr::Networking::WindowsWebServices::WS_ERROR*, faultErrorCode : Win32cr::Foundation::HRESULT, faultDisclosure : Win32cr::Networking::WindowsWebServices::WS_FAULT_DISCLOSURE, requestMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSendFaultMessageForError(channel, replyMessage, faultError, faultErrorCode, faultDisclosure, requestMessage, asyncContext, error)
+  end
+
+  def wsGetChannelProperty(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, id : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetChannelProperty(channel, id, value, valueSize, error)
+  end
+
+  def wsSetChannelProperty(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, id : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSetChannelProperty(channel, id, value, valueSize, error)
+  end
+
+  def wsWriteMessageStart(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteMessageStart(channel, message, asyncContext, error)
+  end
+
+  def wsWriteMessageEnd(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteMessageEnd(channel, message, asyncContext, error)
+  end
+
+  def wsReadMessageStart(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadMessageStart(channel, message, asyncContext, error)
+  end
+
+  def wsReadMessageEnd(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadMessageEnd(channel, message, asyncContext, error)
+  end
+
+  def wsCloseChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCloseChannel(channel, asyncContext, error)
+  end
+
+  def wsAbortChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsAbortChannel(channel, error)
+  end
+
+  def wsFreeChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*) : Void
+    C.WsFreeChannel(channel)
+  end
+
+  def wsResetChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsResetChannel(channel, error)
+  end
+
+  def wsAbandonMessage(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsAbandonMessage(channel, message, error)
+  end
+
+  def wsShutdownSessionChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsShutdownSessionChannel(channel, asyncContext, error)
+  end
+
+  def wsGetOperationContextProperty(context : Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, id : Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetOperationContextProperty(context, id, value, valueSize, error)
+  end
+
+  def wsGetDictionary(encoding : Win32cr::Networking::WindowsWebServices::WS_ENCODING, dictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetDictionary(encoding, dictionary, error)
+  end
+
+  def wsReadEndpointAddressExtension(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, endpointAddress : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*, extensionType : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS_EXTENSION_TYPE, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadEndpointAddressExtension(reader, endpointAddress, extensionType, readOption, heap, value, valueSize, error)
+  end
+
+  def wsCreateError(properties : Win32cr::Networking::WindowsWebServices::WS_ERROR_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR**) : Win32cr::Foundation::HRESULT
+    C.WsCreateError(properties, propertyCount, error)
+  end
+
+  def wsAddErrorString(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, string : Win32cr::Networking::WindowsWebServices::WS_STRING*) : Win32cr::Foundation::HRESULT
+    C.WsAddErrorString(error, string)
+  end
+
+  def wsGetErrorString(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, index : UInt32, string : Win32cr::Networking::WindowsWebServices::WS_STRING*) : Win32cr::Foundation::HRESULT
+    C.WsGetErrorString(error, index, string)
+  end
+
+  def wsCopyError(source : Win32cr::Networking::WindowsWebServices::WS_ERROR*, destination : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCopyError(source, destination)
+  end
+
+  def wsGetErrorProperty(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, id : Win32cr::Networking::WindowsWebServices::WS_ERROR_PROPERTY_ID, buffer : Void*, bufferSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.WsGetErrorProperty(error, id, buffer, bufferSize)
+  end
+
+  def wsSetErrorProperty(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, id : Win32cr::Networking::WindowsWebServices::WS_ERROR_PROPERTY_ID, value : Void*, valueSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.WsSetErrorProperty(error, id, value, valueSize)
+  end
+
+  def wsResetError(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsResetError(error)
+  end
+
+  def wsFreeError(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Void
+    C.WsFreeError(error)
+  end
+
+  def wsGetFaultErrorProperty(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, id : Win32cr::Networking::WindowsWebServices::WS_FAULT_ERROR_PROPERTY_ID, buffer : Void*, bufferSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.WsGetFaultErrorProperty(error, id, buffer, bufferSize)
+  end
+
+  def wsSetFaultErrorProperty(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, id : Win32cr::Networking::WindowsWebServices::WS_FAULT_ERROR_PROPERTY_ID, value : Void*, valueSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.WsSetFaultErrorProperty(error, id, value, valueSize)
+  end
+
+  def wsCreateFaultFromError(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, faultErrorCode : Win32cr::Foundation::HRESULT, faultDisclosure : Win32cr::Networking::WindowsWebServices::WS_FAULT_DISCLOSURE, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, fault : Win32cr::Networking::WindowsWebServices::WS_FAULT*) : Win32cr::Foundation::HRESULT
+    C.WsCreateFaultFromError(error, faultErrorCode, faultDisclosure, heap, fault)
+  end
+
+  def wsSetFaultErrorDetail(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, faultDetailDescription : Win32cr::Networking::WindowsWebServices::WS_FAULT_DETAIL_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.WsSetFaultErrorDetail(error, faultDetailDescription, writeOption, value, valueSize)
+  end
+
+  def wsGetFaultErrorDetail(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, faultDetailDescription : Win32cr::Networking::WindowsWebServices::WS_FAULT_DETAIL_DESCRIPTION*, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.WsGetFaultErrorDetail(error, faultDetailDescription, readOption, heap, value, valueSize)
+  end
+
+  def wsCreateHeap(maxSize : LibC::UIntPtrT, trimSize : LibC::UIntPtrT, properties : Win32cr::Networking::WindowsWebServices::WS_HEAP_PROPERTY*, propertyCount : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateHeap(maxSize, trimSize, properties, propertyCount, heap, error)
+  end
+
+  def wsAlloc(heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, size : LibC::UIntPtrT, ptr : Void**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsAlloc(heap, size, ptr, error)
+  end
+
+  def wsGetHeapProperty(heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, id : Win32cr::Networking::WindowsWebServices::WS_HEAP_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetHeapProperty(heap, id, value, valueSize, error)
+  end
+
+  def wsResetHeap(heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsResetHeap(heap, error)
+  end
+
+  def wsFreeHeap(heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*) : Void
+    C.WsFreeHeap(heap)
+  end
+
+  def wsCreateListener(channelType : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, channelBinding : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_BINDING, properties : Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY*, propertyCount : UInt32, securityDescription : Win32cr::Networking::WindowsWebServices::WS_SECURITY_DESCRIPTION*, listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateListener(channelType, channelBinding, properties, propertyCount, securityDescription, listener, error)
+  end
+
+  def wsOpenListener(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, url : Win32cr::Networking::WindowsWebServices::WS_STRING*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsOpenListener(listener, url, asyncContext, error)
+  end
+
+  def wsAcceptChannel(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsAcceptChannel(listener, channel, asyncContext, error)
+  end
+
+  def wsCloseListener(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCloseListener(listener, asyncContext, error)
+  end
+
+  def wsAbortListener(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsAbortListener(listener, error)
+  end
+
+  def wsResetListener(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsResetListener(listener, error)
+  end
+
+  def wsFreeListener(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*) : Void
+    C.WsFreeListener(listener)
+  end
+
+  def wsGetListenerProperty(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, id : Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetListenerProperty(listener, id, value, valueSize, error)
+  end
+
+  def wsSetListenerProperty(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, id : Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSetListenerProperty(listener, id, value, valueSize, error)
+  end
+
+  def wsCreateChannelForListener(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, properties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY*, propertyCount : UInt32, channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateChannelForListener(listener, properties, propertyCount, channel, error)
+  end
+
+  def wsCreateMessage(envelopeVersion : Win32cr::Networking::WindowsWebServices::WS_ENVELOPE_VERSION, addressingVersion : Win32cr::Networking::WindowsWebServices::WS_ADDRESSING_VERSION, properties : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY*, propertyCount : UInt32, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateMessage(envelopeVersion, addressingVersion, properties, propertyCount, message, error)
+  end
+
+  def wsCreateMessageForChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, properties : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY*, propertyCount : UInt32, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateMessageForChannel(channel, properties, propertyCount, message, error)
+  end
+
+  def wsInitializeMessage(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, initialization : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_INITIALIZATION, sourceMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsInitializeMessage(message, initialization, sourceMessage, error)
+  end
+
+  def wsResetMessage(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsResetMessage(message, error)
+  end
+
+  def wsFreeMessage(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*) : Void
+    C.WsFreeMessage(message)
+  end
+
+  def wsGetHeaderAttributes(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, headerAttributes : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetHeaderAttributes(message, reader, headerAttributes, error)
+  end
+
+  def wsGetHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerType : Win32cr::Networking::WindowsWebServices::WS_HEADER_TYPE, valueType : Win32cr::Networking::WindowsWebServices::WS_TYPE, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetHeader(message, headerType, valueType, readOption, heap, value, valueSize, error)
+  end
+
+  def wsGetCustomHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, customHeaderDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*, repeatingOption : Win32cr::Networking::WindowsWebServices::WS_REPEATING_HEADER_OPTION, headerIndex : UInt32, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, headerAttributes : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetCustomHeader(message, customHeaderDescription, repeatingOption, headerIndex, readOption, heap, value, valueSize, headerAttributes, error)
+  end
+
+  def wsRemoveHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerType : Win32cr::Networking::WindowsWebServices::WS_HEADER_TYPE, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsRemoveHeader(message, headerType, error)
+  end
+
+  def wsSetHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerType : Win32cr::Networking::WindowsWebServices::WS_HEADER_TYPE, valueType : Win32cr::Networking::WindowsWebServices::WS_TYPE, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSetHeader(message, headerType, valueType, writeOption, value, valueSize, error)
+  end
+
+  def wsRemoveCustomHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, headerNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsRemoveCustomHeader(message, headerName, headerNs, error)
+  end
+
+  def wsAddCustomHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, headerAttributes : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsAddCustomHeader(message, headerDescription, writeOption, value, valueSize, headerAttributes, error)
+  end
+
+  def wsAddMappedHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, valueType : Win32cr::Networking::WindowsWebServices::WS_TYPE, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsAddMappedHeader(message, headerName, valueType, writeOption, value, valueSize, error)
+  end
+
+  def wsRemoveMappedHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsRemoveMappedHeader(message, headerName, error)
+  end
+
+  def wsGetMappedHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, repeatingOption : Win32cr::Networking::WindowsWebServices::WS_REPEATING_HEADER_OPTION, headerIndex : UInt32, valueType : Win32cr::Networking::WindowsWebServices::WS_TYPE, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetMappedHeader(message, headerName, repeatingOption, headerIndex, valueType, readOption, heap, value, valueSize, error)
+  end
+
+  def wsWriteBody(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, bodyDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteBody(message, bodyDescription, writeOption, value, valueSize, error)
+  end
+
+  def wsReadBody(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, bodyDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadBody(message, bodyDescription, readOption, heap, value, valueSize, error)
+  end
+
+  def wsWriteEnvelopeStart(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, doneCallback : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DONE_CALLBACK, doneCallbackState : Void*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteEnvelopeStart(message, writer, doneCallback, doneCallbackState, error)
+  end
+
+  def wsWriteEnvelopeEnd(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteEnvelopeEnd(message, error)
+  end
+
+  def wsReadEnvelopeStart(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, doneCallback : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DONE_CALLBACK, doneCallbackState : Void*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadEnvelopeStart(message, reader, doneCallback, doneCallbackState, error)
+  end
+
+  def wsReadEnvelopeEnd(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadEnvelopeEnd(message, error)
+  end
+
+  def wsGetMessageProperty(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, id : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetMessageProperty(message, id, value, valueSize, error)
+  end
+
+  def wsSetMessageProperty(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, id : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsSetMessageProperty(message, id, value, valueSize, error)
+  end
+
+  def wsAddressMessage(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, address : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsAddressMessage(message, address, error)
+  end
+
+  def wsCheckMustUnderstandHeaders(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCheckMustUnderstandHeaders(message, error)
+  end
+
+  def wsMarkHeaderAsUnderstood(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerPosition : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_POSITION*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsMarkHeaderAsUnderstood(message, headerPosition, error)
+  end
+
+  def wsFillBody(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, minSize : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsFillBody(message, minSize, asyncContext, error)
+  end
+
+  def wsFlushBody(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, minSize : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsFlushBody(message, minSize, asyncContext, error)
+  end
+
+  def wsRequestSecurityToken(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, properties : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY*, propertyCount : UInt32, token : Win32cr::Networking::WindowsWebServices::WS_SECURITY_TOKEN**, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsRequestSecurityToken(channel, properties, propertyCount, token, asyncContext, error)
+  end
+
+  def wsGetSecurityTokenProperty(securityToken : Win32cr::Networking::WindowsWebServices::WS_SECURITY_TOKEN*, id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_TOKEN_PROPERTY_ID, value : Void*, valueSize : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetSecurityTokenProperty(securityToken, id, value, valueSize, heap, error)
+  end
+
+  def wsCreateXmlSecurityToken(tokenXml : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, tokenKey : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_SECURITY_TOKEN_PROPERTY*, propertyCount : UInt32, token : Win32cr::Networking::WindowsWebServices::WS_SECURITY_TOKEN**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateXmlSecurityToken(tokenXml, tokenKey, properties, propertyCount, token, error)
+  end
+
+  def wsFreeSecurityToken(token : Win32cr::Networking::WindowsWebServices::WS_SECURITY_TOKEN*) : Void
+    C.WsFreeSecurityToken(token)
+  end
+
+  def wsRevokeSecurityContext(securityContext : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsRevokeSecurityContext(securityContext, error)
+  end
+
+  def wsGetSecurityContextProperty(securityContext : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT*, id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetSecurityContextProperty(securityContext, id, value, valueSize, error)
+  end
+
+  def wsReadElement(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, elementDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadElement(reader, elementDescription, readOption, heap, value, valueSize, error)
+  end
+
+  def wsReadAttribute(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, attributeDescription : Win32cr::Networking::WindowsWebServices::WS_ATTRIBUTE_DESCRIPTION*, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadAttribute(reader, attributeDescription, readOption, heap, value, valueSize, error)
+  end
+
+  def wsReadType(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, typeMapping : Win32cr::Networking::WindowsWebServices::WS_TYPE_MAPPING, type__ : Win32cr::Networking::WindowsWebServices::WS_TYPE, typeDescription : Void*, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadType(reader, typeMapping, type__, typeDescription, readOption, heap, value, valueSize, error)
+  end
+
+  def wsWriteElement(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, elementDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteElement(writer, elementDescription, writeOption, value, valueSize, error)
+  end
+
+  def wsWriteAttribute(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, attributeDescription : Win32cr::Networking::WindowsWebServices::WS_ATTRIBUTE_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteAttribute(writer, attributeDescription, writeOption, value, valueSize, error)
+  end
+
+  def wsWriteType(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, typeMapping : Win32cr::Networking::WindowsWebServices::WS_TYPE_MAPPING, type__ : Win32cr::Networking::WindowsWebServices::WS_TYPE, typeDescription : Void*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsWriteType(writer, typeMapping, type__, typeDescription, writeOption, value, valueSize, error)
+  end
+
+  def wsRegisterOperationForCancel(context : Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, cancelCallback : Win32cr::Networking::WindowsWebServices::WS_OPERATION_CANCEL_CALLBACK, freestateCallback : Win32cr::Networking::WindowsWebServices::WS_OPERATION_FREE_STATE_CALLBACK, userState : Void*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsRegisterOperationForCancel(context, cancelCallback, freestateCallback, userState, error)
+  end
+
+  def wsGetServiceHostProperty(serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST*, id : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetServiceHostProperty(serviceHost, id, value, valueSize, error)
+  end
+
+  def wsCreateServiceHost(endpoints : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ENDPOINT**, endpointCount : UInt16, serviceProperties : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROPERTY*, servicePropertyCount : UInt32, serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateServiceHost(endpoints, endpointCount, serviceProperties, servicePropertyCount, serviceHost, error)
+  end
+
+  def wsOpenServiceHost(serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsOpenServiceHost(serviceHost, asyncContext, error)
+  end
+
+  def wsCloseServiceHost(serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCloseServiceHost(serviceHost, asyncContext, error)
+  end
+
+  def wsAbortServiceHost(serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsAbortServiceHost(serviceHost, error)
+  end
+
+  def wsFreeServiceHost(serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST*) : Void
+    C.WsFreeServiceHost(serviceHost)
+  end
+
+  def wsResetServiceHost(serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsResetServiceHost(serviceHost, error)
+  end
+
+  def wsGetServiceProxyProperty(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, id : Win32cr::Networking::WindowsWebServices::WS_PROXY_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetServiceProxyProperty(serviceProxy, id, value, valueSize, error)
+  end
+
+  def wsCreateServiceProxy(channelType : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, channelBinding : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_BINDING, securityDescription : Win32cr::Networking::WindowsWebServices::WS_SECURITY_DESCRIPTION*, properties : Win32cr::Networking::WindowsWebServices::WS_PROXY_PROPERTY*, propertyCount : UInt32, channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY*, channelPropertyCount : UInt32, serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateServiceProxy(channelType, channelBinding, securityDescription, properties, propertyCount, channelProperties, channelPropertyCount, serviceProxy, error)
+  end
+
+  def wsOpenServiceProxy(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, address : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsOpenServiceProxy(serviceProxy, address, asyncContext, error)
+  end
+
+  def wsCloseServiceProxy(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCloseServiceProxy(serviceProxy, asyncContext, error)
+  end
+
+  def wsAbortServiceProxy(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsAbortServiceProxy(serviceProxy, error)
+  end
+
+  def wsFreeServiceProxy(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*) : Void
+    C.WsFreeServiceProxy(serviceProxy)
+  end
+
+  def wsResetServiceProxy(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsResetServiceProxy(serviceProxy, error)
+  end
+
+  def wsAbandonCall(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, callId : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsAbandonCall(serviceProxy, callId, error)
+  end
+
+  def wsCall(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, operation : Win32cr::Networking::WindowsWebServices::WS_OPERATION_DESCRIPTION*, arguments : Void**, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, callProperties : Win32cr::Networking::WindowsWebServices::WS_CALL_PROPERTY*, callPropertyCount : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCall(serviceProxy, operation, arguments, heap, callProperties, callPropertyCount, asyncContext, error)
+  end
+
+  def wsDecodeUrl(url : Win32cr::Networking::WindowsWebServices::WS_STRING*, flags : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, outUrl : Win32cr::Networking::WindowsWebServices::WS_URL**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsDecodeUrl(url, flags, heap, outUrl, error)
+  end
+
+  def wsEncodeUrl(url : Win32cr::Networking::WindowsWebServices::WS_URL*, flags : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, outUrl : Win32cr::Networking::WindowsWebServices::WS_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsEncodeUrl(url, flags, heap, outUrl, error)
+  end
+
+  def wsCombineUrl(baseUrl : Win32cr::Networking::WindowsWebServices::WS_STRING*, referenceUrl : Win32cr::Networking::WindowsWebServices::WS_STRING*, flags : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, resultUrl : Win32cr::Networking::WindowsWebServices::WS_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCombineUrl(baseUrl, referenceUrl, flags, heap, resultUrl, error)
+  end
+
+  def wsDateTimeToFileTime(dateTime : Win32cr::Networking::WindowsWebServices::WS_DATETIME*, fileTime : Win32cr::Foundation::FILETIME*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsDateTimeToFileTime(dateTime, fileTime, error)
+  end
+
+  def wsFileTimeToDateTime(fileTime : Win32cr::Foundation::FILETIME*, dateTime : Win32cr::Networking::WindowsWebServices::WS_DATETIME*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsFileTimeToDateTime(fileTime, dateTime, error)
+  end
+
+  def wsCreateMetadata(properties : Win32cr::Networking::WindowsWebServices::WS_METADATA_PROPERTY*, propertyCount : UInt32, metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateMetadata(properties, propertyCount, metadata, error)
+  end
+
+  def wsReadMetadata(metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA*, reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, url : Win32cr::Networking::WindowsWebServices::WS_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsReadMetadata(metadata, reader, url, error)
+  end
+
+  def wsFreeMetadata(metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA*) : Void
+    C.WsFreeMetadata(metadata)
+  end
+
+  def wsResetMetadata(metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsResetMetadata(metadata, error)
+  end
+
+  def wsGetMetadataProperty(metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA*, id : Win32cr::Networking::WindowsWebServices::WS_METADATA_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetMetadataProperty(metadata, id, value, valueSize, error)
+  end
+
+  def wsGetMissingMetadataDocumentAddress(metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA*, address : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetMissingMetadataDocumentAddress(metadata, address, error)
+  end
+
+  def wsGetMetadataEndpoints(metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA*, endpoints : Win32cr::Networking::WindowsWebServices::WS_METADATA_ENDPOINTS*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetMetadataEndpoints(metadata, endpoints, error)
+  end
+
+  def wsMatchPolicyAlternative(policy : Win32cr::Networking::WindowsWebServices::WS_POLICY*, alternativeIndex : UInt32, policyConstraints : Win32cr::Networking::WindowsWebServices::WS_POLICY_CONSTRAINTS*, matchRequired : Win32cr::Foundation::BOOL, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsMatchPolicyAlternative(policy, alternativeIndex, policyConstraints, matchRequired, heap, error)
+  end
+
+  def wsGetPolicyProperty(policy : Win32cr::Networking::WindowsWebServices::WS_POLICY*, id : Win32cr::Networking::WindowsWebServices::WS_POLICY_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetPolicyProperty(policy, id, value, valueSize, error)
+  end
+
+  def wsGetPolicyAlternativeCount(policy : Win32cr::Networking::WindowsWebServices::WS_POLICY*, count : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsGetPolicyAlternativeCount(policy, count, error)
+  end
+
+  def wsCreateServiceProxyFromTemplate(channelType : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, properties : Win32cr::Networking::WindowsWebServices::WS_PROXY_PROPERTY*, propertyCount : UInt32, templateType : Win32cr::Networking::WindowsWebServices::WS_BINDING_TEMPLATE_TYPE, templateValue : Void*, templateSize : UInt32, templateDescription : Void*, templateDescriptionSize : UInt32, serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateServiceProxyFromTemplate(channelType, properties, propertyCount, templateType, templateValue, templateSize, templateDescription, templateDescriptionSize, serviceProxy, error)
+  end
+
+  def wsCreateServiceEndpointFromTemplate(channelType : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, properties : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ENDPOINT_PROPERTY*, propertyCount : UInt32, addressUrl : Win32cr::Networking::WindowsWebServices::WS_STRING*, contract : Win32cr::Networking::WindowsWebServices::WS_SERVICE_CONTRACT*, authorizationCallback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_SECURITY_CALLBACK, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, templateType : Win32cr::Networking::WindowsWebServices::WS_BINDING_TEMPLATE_TYPE, templateValue : Void*, templateSize : UInt32, templateDescription : Void*, templateDescriptionSize : UInt32, serviceEndpoint : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ENDPOINT**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
+    C.WsCreateServiceEndpointFromTemplate(channelType, properties, propertyCount, addressUrl, contract, authorizationCallback, heap, templateType, templateValue, templateSize, templateDescription, templateDescriptionSize, serviceEndpoint, error)
+  end
+
+  def webAuthNGetApiVersionNumber : UInt32
+    C.WebAuthNGetApiVersionNumber
+  end
+
+  def webAuthNIsUserVerifyingPlatformAuthenticatorAvailable(pbIsUserVerifyingPlatformAuthenticatorAvailable : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable(pbIsUserVerifyingPlatformAuthenticatorAvailable)
+  end
+
+  def webAuthNAuthenticatorMakeCredential(hWnd : Win32cr::Foundation::HWND, pRpInformation : Win32cr::Networking::WindowsWebServices::WEBAUTHN_RP_ENTITY_INFORMATION*, pUserInformation : Win32cr::Networking::WindowsWebServices::WEBAUTHN_USER_ENTITY_INFORMATION*, pPubKeyCredParams : Win32cr::Networking::WindowsWebServices::WEBAUTHN_COSE_CREDENTIAL_PARAMETERS*, pWebAuthNClientData : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CLIENT_DATA*, pWebAuthNMakeCredentialOptions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS*, ppWebAuthNCredentialAttestation : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL_ATTESTATION**) : Win32cr::Foundation::HRESULT
+    C.WebAuthNAuthenticatorMakeCredential(hWnd, pRpInformation, pUserInformation, pPubKeyCredParams, pWebAuthNClientData, pWebAuthNMakeCredentialOptions, ppWebAuthNCredentialAttestation)
+  end
+
+  def webAuthNAuthenticatorGetAssertion(hWnd : Win32cr::Foundation::HWND, pwszRpId : Win32cr::Foundation::PWSTR, pWebAuthNClientData : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CLIENT_DATA*, pWebAuthNGetAssertionOptions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS*, ppWebAuthNAssertion : Win32cr::Networking::WindowsWebServices::WEBAUTHN_ASSERTION**) : Win32cr::Foundation::HRESULT
+    C.WebAuthNAuthenticatorGetAssertion(hWnd, pwszRpId, pWebAuthNClientData, pWebAuthNGetAssertionOptions, ppWebAuthNAssertion)
+  end
+
+  def webAuthNFreeCredentialAttestation(pWebAuthNCredentialAttestation : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL_ATTESTATION*) : Void
+    C.WebAuthNFreeCredentialAttestation(pWebAuthNCredentialAttestation)
+  end
+
+  def webAuthNFreeAssertion(pWebAuthNAssertion : Win32cr::Networking::WindowsWebServices::WEBAUTHN_ASSERTION*) : Void
+    C.WebAuthNFreeAssertion(pWebAuthNAssertion)
+  end
+
+  def webAuthNGetCancellationId(pCancellationId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.WebAuthNGetCancellationId(pCancellationId)
+  end
+
+  def webAuthNCancelCurrentOperation(pCancellationId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.WebAuthNCancelCurrentOperation(pCancellationId)
+  end
+
+  def webAuthNGetErrorName(hr : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::PWSTR
+    C.WebAuthNGetErrorName(hr)
+  end
+
+  def webAuthNGetW3CExceptionDOMError(hr : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+    C.WebAuthNGetW3CExceptionDOMError(hr)
+  end
+
   @[Link("webservices")]
   @[Link("webauthn")]
   lib C
+    # :nodoc:
     fun WsStartReaderCanonicalization(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, writeCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_CALLBACK, writeCallbackState : Void*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_CANONICALIZATION_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsEndReaderCanonicalization(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsStartWriterCanonicalization(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, writeCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_CALLBACK, writeCallbackState : Void*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_CANONICALIZATION_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsEndWriterCanonicalization(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateXmlBuffer(heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER_PROPERTY*, propertyCount : UInt32, buffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsRemoveNode(nodePosition : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_POSITION*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateReader(properties : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY*, propertyCount : UInt32, reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSetInput(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING*, input : Win32cr::Networking::WindowsWebServices::WS_XML_READER_INPUT*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSetInputToBuffer(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, buffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFreeReader(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*) : Void
 
+    # :nodoc:
     fun WsGetReaderProperty(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, id : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetReaderNode(xmlReader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, node : Win32cr::Networking::WindowsWebServices::WS_XML_NODE**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFillReader(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, minSize : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadStartElement(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadToStartElement(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, found : Win32cr::Foundation::BOOL*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadStartAttribute(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, attributeIndex : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadEndAttribute(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadNode(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSkipNode(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadEndElement(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFindAttribute(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, required : Win32cr::Foundation::BOOL, attributeIndex : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadValue(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, valueType : Win32cr::Networking::WindowsWebServices::WS_VALUE_TYPE, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadChars(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, chars : UInt16*, maxCharCount : UInt32, actualCharCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadCharsUtf8(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, bytes : UInt8*, maxByteCount : UInt32, actualByteCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadBytes(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, bytes : Void*, maxByteCount : UInt32, actualByteCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadArray(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, valueType : Win32cr::Networking::WindowsWebServices::WS_VALUE_TYPE, array : Void*, arraySize : UInt32, itemOffset : UInt32, itemCount : UInt32, actualItemCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetReaderPosition(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, nodePosition : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_POSITION*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSetReaderPosition(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, nodePosition : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_POSITION*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsMoveReader(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, moveTo : Win32cr::Networking::WindowsWebServices::WS_MOVE_TO, found : Win32cr::Foundation::BOOL*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateWriter(properties : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY*, propertyCount : UInt32, writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFreeWriter(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*) : Void
 
+    # :nodoc:
     fun WsSetOutput(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING*, output : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_OUTPUT*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSetOutputToBuffer(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, buffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetWriterProperty(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, id : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFlushWriter(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, minSize : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteStartElement(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteEndStartElement(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteXmlnsAttribute(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, singleQuote : Win32cr::Foundation::BOOL, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteStartAttribute(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, singleQuote : Win32cr::Foundation::BOOL, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteEndAttribute(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteValue(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, valueType : Win32cr::Networking::WindowsWebServices::WS_VALUE_TYPE, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteXmlBuffer(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, xmlBuffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadXmlBuffer(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, xmlBuffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteXmlBufferToBytes(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, xmlBuffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY*, propertyCount : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, bytes : Void**, byteCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadXmlBufferFromBytes(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY*, propertyCount : UInt32, bytes : Void*, byteCount : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, xmlBuffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteArray(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, valueType : Win32cr::Networking::WindowsWebServices::WS_VALUE_TYPE, array : Void*, arraySize : UInt32, itemOffset : UInt32, itemCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteQualifiedName(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteChars(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, chars : UInt16*, charCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteCharsUtf8(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, bytes : UInt8*, byteCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteBytes(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, bytes : Void*, byteCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsPushBytes(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, callback : Win32cr::Networking::WindowsWebServices::WS_PUSH_BYTES_CALLBACK, callbackState : Void*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsPullBytes(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, callback : Win32cr::Networking::WindowsWebServices::WS_PULL_BYTES_CALLBACK, callbackState : Void*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteEndElement(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteText(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteStartCData(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteEndCData(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteNode(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, node : Win32cr::Networking::WindowsWebServices::WS_XML_NODE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetPrefixFromNamespace(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, required : Win32cr::Foundation::BOOL, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetWriterPosition(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, nodePosition : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_POSITION*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSetWriterPosition(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, nodePosition : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_POSITION*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsMoveWriter(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, moveTo : Win32cr::Networking::WindowsWebServices::WS_MOVE_TO, found : Win32cr::Foundation::BOOL*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsTrimXmlWhitespace(chars : UInt16*, charCount : UInt32, trimmedChars : UInt16**, trimmedCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsVerifyXmlNCName(ncNameChars : UInt16*, ncNameCharCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsXmlStringEquals(string1 : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, string2 : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetNamespaceFromPrefix(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, required : Win32cr::Foundation::BOOL, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadQualifiedName(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetXmlAttribute(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, valueChars : UInt16**, valueCharCount : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCopyNode(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsAsyncExecute(asyncState : Win32cr::Networking::WindowsWebServices::WS_ASYNC_STATE*, operation : Win32cr::Networking::WindowsWebServices::WS_ASYNC_FUNCTION, callbackModel : Win32cr::Networking::WindowsWebServices::WS_CALLBACK_MODEL, callbackState : Void*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateChannel(channelType : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, channelBinding : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_BINDING, properties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY*, propertyCount : UInt32, securityDescription : Win32cr::Networking::WindowsWebServices::WS_SECURITY_DESCRIPTION*, channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsOpenChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, endpointAddress : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSendMessage(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, messageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, bodyValue : Void*, bodyValueSize : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReceiveMessage(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, messageDescriptions : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION**, messageDescriptionCount : UInt32, receiveOption : Win32cr::Networking::WindowsWebServices::WS_RECEIVE_OPTION, readBodyOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, index : UInt32*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsRequestReply(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, requestMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, requestMessageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, requestBodyValue : Void*, requestBodyValueSize : UInt32, replyMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, replyMessageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSendReplyMessage(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, replyMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, replyMessageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, replyBodyValue : Void*, replyBodyValueSize : UInt32, requestMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSendFaultMessageForError(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, replyMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, faultError : Win32cr::Networking::WindowsWebServices::WS_ERROR*, faultErrorCode : Win32cr::Foundation::HRESULT, faultDisclosure : Win32cr::Networking::WindowsWebServices::WS_FAULT_DISCLOSURE, requestMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetChannelProperty(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, id : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSetChannelProperty(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, id : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteMessageStart(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteMessageEnd(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadMessageStart(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadMessageEnd(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCloseChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsAbortChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFreeChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*) : Void
 
+    # :nodoc:
     fun WsResetChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsAbandonMessage(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsShutdownSessionChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetOperationContextProperty(context : Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, id : Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetDictionary(encoding : Win32cr::Networking::WindowsWebServices::WS_ENCODING, dictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadEndpointAddressExtension(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, endpointAddress : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*, extensionType : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS_EXTENSION_TYPE, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateError(properties : Win32cr::Networking::WindowsWebServices::WS_ERROR_PROPERTY*, propertyCount : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsAddErrorString(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, string : Win32cr::Networking::WindowsWebServices::WS_STRING*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetErrorString(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, index : UInt32, string : Win32cr::Networking::WindowsWebServices::WS_STRING*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCopyError(source : Win32cr::Networking::WindowsWebServices::WS_ERROR*, destination : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetErrorProperty(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, id : Win32cr::Networking::WindowsWebServices::WS_ERROR_PROPERTY_ID, buffer : Void*, bufferSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSetErrorProperty(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, id : Win32cr::Networking::WindowsWebServices::WS_ERROR_PROPERTY_ID, value : Void*, valueSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsResetError(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFreeError(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Void
 
+    # :nodoc:
     fun WsGetFaultErrorProperty(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, id : Win32cr::Networking::WindowsWebServices::WS_FAULT_ERROR_PROPERTY_ID, buffer : Void*, bufferSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSetFaultErrorProperty(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, id : Win32cr::Networking::WindowsWebServices::WS_FAULT_ERROR_PROPERTY_ID, value : Void*, valueSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateFaultFromError(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, faultErrorCode : Win32cr::Foundation::HRESULT, faultDisclosure : Win32cr::Networking::WindowsWebServices::WS_FAULT_DISCLOSURE, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, fault : Win32cr::Networking::WindowsWebServices::WS_FAULT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSetFaultErrorDetail(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, faultDetailDescription : Win32cr::Networking::WindowsWebServices::WS_FAULT_DETAIL_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetFaultErrorDetail(error : Win32cr::Networking::WindowsWebServices::WS_ERROR*, faultDetailDescription : Win32cr::Networking::WindowsWebServices::WS_FAULT_DETAIL_DESCRIPTION*, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateHeap(maxSize : LibC::UIntPtrT, trimSize : LibC::UIntPtrT, properties : Win32cr::Networking::WindowsWebServices::WS_HEAP_PROPERTY*, propertyCount : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsAlloc(heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, size : LibC::UIntPtrT, ptr : Void**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetHeapProperty(heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, id : Win32cr::Networking::WindowsWebServices::WS_HEAP_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsResetHeap(heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFreeHeap(heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*) : Void
 
+    # :nodoc:
     fun WsCreateListener(channelType : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, channelBinding : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_BINDING, properties : Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY*, propertyCount : UInt32, securityDescription : Win32cr::Networking::WindowsWebServices::WS_SECURITY_DESCRIPTION*, listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsOpenListener(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, url : Win32cr::Networking::WindowsWebServices::WS_STRING*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsAcceptChannel(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCloseListener(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsAbortListener(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsResetListener(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFreeListener(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*) : Void
 
+    # :nodoc:
     fun WsGetListenerProperty(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, id : Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSetListenerProperty(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, id : Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateChannelForListener(listener : Win32cr::Networking::WindowsWebServices::WS_LISTENER*, properties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY*, propertyCount : UInt32, channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateMessage(envelopeVersion : Win32cr::Networking::WindowsWebServices::WS_ENVELOPE_VERSION, addressingVersion : Win32cr::Networking::WindowsWebServices::WS_ADDRESSING_VERSION, properties : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY*, propertyCount : UInt32, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateMessageForChannel(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, properties : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY*, propertyCount : UInt32, message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsInitializeMessage(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, initialization : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_INITIALIZATION, sourceMessage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsResetMessage(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFreeMessage(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*) : Void
 
+    # :nodoc:
     fun WsGetHeaderAttributes(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, headerAttributes : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerType : Win32cr::Networking::WindowsWebServices::WS_HEADER_TYPE, valueType : Win32cr::Networking::WindowsWebServices::WS_TYPE, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetCustomHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, customHeaderDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*, repeatingOption : Win32cr::Networking::WindowsWebServices::WS_REPEATING_HEADER_OPTION, headerIndex : UInt32, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, headerAttributes : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsRemoveHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerType : Win32cr::Networking::WindowsWebServices::WS_HEADER_TYPE, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSetHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerType : Win32cr::Networking::WindowsWebServices::WS_HEADER_TYPE, valueType : Win32cr::Networking::WindowsWebServices::WS_TYPE, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsRemoveCustomHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, headerNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsAddCustomHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, headerAttributes : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsAddMappedHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, valueType : Win32cr::Networking::WindowsWebServices::WS_TYPE, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsRemoveMappedHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetMappedHeader(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, repeatingOption : Win32cr::Networking::WindowsWebServices::WS_REPEATING_HEADER_OPTION, headerIndex : UInt32, valueType : Win32cr::Networking::WindowsWebServices::WS_TYPE, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteBody(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, bodyDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadBody(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, bodyDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteEnvelopeStart(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, doneCallback : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DONE_CALLBACK, doneCallbackState : Void*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteEnvelopeEnd(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadEnvelopeStart(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, doneCallback : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DONE_CALLBACK, doneCallbackState : Void*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadEnvelopeEnd(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetMessageProperty(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, id : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsSetMessageProperty(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, id : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsAddressMessage(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, address : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCheckMustUnderstandHeaders(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsMarkHeaderAsUnderstood(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, headerPosition : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_POSITION*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFillBody(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, minSize : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFlushBody(message : Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, minSize : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsRequestSecurityToken(channel : Win32cr::Networking::WindowsWebServices::WS_CHANNEL*, properties : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY*, propertyCount : UInt32, token : Win32cr::Networking::WindowsWebServices::WS_SECURITY_TOKEN**, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetSecurityTokenProperty(securityToken : Win32cr::Networking::WindowsWebServices::WS_SECURITY_TOKEN*, id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_TOKEN_PROPERTY_ID, value : Void*, valueSize : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateXmlSecurityToken(tokenXml : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, tokenKey : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE*, properties : Win32cr::Networking::WindowsWebServices::WS_XML_SECURITY_TOKEN_PROPERTY*, propertyCount : UInt32, token : Win32cr::Networking::WindowsWebServices::WS_SECURITY_TOKEN**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFreeSecurityToken(token : Win32cr::Networking::WindowsWebServices::WS_SECURITY_TOKEN*) : Void
 
+    # :nodoc:
     fun WsRevokeSecurityContext(securityContext : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetSecurityContextProperty(securityContext : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT*, id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadElement(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, elementDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadAttribute(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, attributeDescription : Win32cr::Networking::WindowsWebServices::WS_ATTRIBUTE_DESCRIPTION*, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadType(reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, typeMapping : Win32cr::Networking::WindowsWebServices::WS_TYPE_MAPPING, type__ : Win32cr::Networking::WindowsWebServices::WS_TYPE, typeDescription : Void*, readOption : Win32cr::Networking::WindowsWebServices::WS_READ_OPTION, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteElement(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, elementDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteAttribute(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, attributeDescription : Win32cr::Networking::WindowsWebServices::WS_ATTRIBUTE_DESCRIPTION*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsWriteType(writer : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, typeMapping : Win32cr::Networking::WindowsWebServices::WS_TYPE_MAPPING, type__ : Win32cr::Networking::WindowsWebServices::WS_TYPE, typeDescription : Void*, writeOption : Win32cr::Networking::WindowsWebServices::WS_WRITE_OPTION, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsRegisterOperationForCancel(context : Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, cancelCallback : Win32cr::Networking::WindowsWebServices::WS_OPERATION_CANCEL_CALLBACK, freestateCallback : Win32cr::Networking::WindowsWebServices::WS_OPERATION_FREE_STATE_CALLBACK, userState : Void*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetServiceHostProperty(serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST*, id : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateServiceHost(endpoints : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ENDPOINT**, endpointCount : UInt16, serviceProperties : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROPERTY*, servicePropertyCount : UInt32, serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsOpenServiceHost(serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCloseServiceHost(serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsAbortServiceHost(serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFreeServiceHost(serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST*) : Void
 
+    # :nodoc:
     fun WsResetServiceHost(serviceHost : Win32cr::Networking::WindowsWebServices::WS_SERVICE_HOST*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetServiceProxyProperty(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, id : Win32cr::Networking::WindowsWebServices::WS_PROXY_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateServiceProxy(channelType : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, channelBinding : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_BINDING, securityDescription : Win32cr::Networking::WindowsWebServices::WS_SECURITY_DESCRIPTION*, properties : Win32cr::Networking::WindowsWebServices::WS_PROXY_PROPERTY*, propertyCount : UInt32, channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY*, channelPropertyCount : UInt32, serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsOpenServiceProxy(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, address : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCloseServiceProxy(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsAbortServiceProxy(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFreeServiceProxy(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*) : Void
 
+    # :nodoc:
     fun WsResetServiceProxy(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsAbandonCall(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, callId : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCall(serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY*, operation : Win32cr::Networking::WindowsWebServices::WS_OPERATION_DESCRIPTION*, arguments : Void**, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, callProperties : Win32cr::Networking::WindowsWebServices::WS_CALL_PROPERTY*, callPropertyCount : UInt32, asyncContext : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsDecodeUrl(url : Win32cr::Networking::WindowsWebServices::WS_STRING*, flags : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, outUrl : Win32cr::Networking::WindowsWebServices::WS_URL**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsEncodeUrl(url : Win32cr::Networking::WindowsWebServices::WS_URL*, flags : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, outUrl : Win32cr::Networking::WindowsWebServices::WS_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCombineUrl(baseUrl : Win32cr::Networking::WindowsWebServices::WS_STRING*, referenceUrl : Win32cr::Networking::WindowsWebServices::WS_STRING*, flags : UInt32, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, resultUrl : Win32cr::Networking::WindowsWebServices::WS_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsDateTimeToFileTime(dateTime : Win32cr::Networking::WindowsWebServices::WS_DATETIME*, fileTime : Win32cr::Foundation::FILETIME*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFileTimeToDateTime(fileTime : Win32cr::Foundation::FILETIME*, dateTime : Win32cr::Networking::WindowsWebServices::WS_DATETIME*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateMetadata(properties : Win32cr::Networking::WindowsWebServices::WS_METADATA_PROPERTY*, propertyCount : UInt32, metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsReadMetadata(metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA*, reader : Win32cr::Networking::WindowsWebServices::WS_XML_READER*, url : Win32cr::Networking::WindowsWebServices::WS_STRING*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsFreeMetadata(metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA*) : Void
 
+    # :nodoc:
     fun WsResetMetadata(metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetMetadataProperty(metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA*, id : Win32cr::Networking::WindowsWebServices::WS_METADATA_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetMissingMetadataDocumentAddress(metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA*, address : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetMetadataEndpoints(metadata : Win32cr::Networking::WindowsWebServices::WS_METADATA*, endpoints : Win32cr::Networking::WindowsWebServices::WS_METADATA_ENDPOINTS*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsMatchPolicyAlternative(policy : Win32cr::Networking::WindowsWebServices::WS_POLICY*, alternativeIndex : UInt32, policyConstraints : Win32cr::Networking::WindowsWebServices::WS_POLICY_CONSTRAINTS*, matchRequired : Win32cr::Foundation::BOOL, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetPolicyProperty(policy : Win32cr::Networking::WindowsWebServices::WS_POLICY*, id : Win32cr::Networking::WindowsWebServices::WS_POLICY_PROPERTY_ID, value : Void*, valueSize : UInt32, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsGetPolicyAlternativeCount(policy : Win32cr::Networking::WindowsWebServices::WS_POLICY*, count : UInt32*, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateServiceProxyFromTemplate(channelType : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, properties : Win32cr::Networking::WindowsWebServices::WS_PROXY_PROPERTY*, propertyCount : UInt32, templateType : Win32cr::Networking::WindowsWebServices::WS_BINDING_TEMPLATE_TYPE, templateValue : Void*, templateSize : UInt32, templateDescription : Void*, templateDescriptionSize : UInt32, serviceProxy : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROXY**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WsCreateServiceEndpointFromTemplate(channelType : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, properties : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ENDPOINT_PROPERTY*, propertyCount : UInt32, addressUrl : Win32cr::Networking::WindowsWebServices::WS_STRING*, contract : Win32cr::Networking::WindowsWebServices::WS_SERVICE_CONTRACT*, authorizationCallback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_SECURITY_CALLBACK, heap : Win32cr::Networking::WindowsWebServices::WS_HEAP*, templateType : Win32cr::Networking::WindowsWebServices::WS_BINDING_TEMPLATE_TYPE, templateValue : Void*, templateSize : UInt32, templateDescription : Void*, templateDescriptionSize : UInt32, serviceEndpoint : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ENDPOINT**, error : Win32cr::Networking::WindowsWebServices::WS_ERROR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WebAuthNGetApiVersionNumber : UInt32
 
+    # :nodoc:
     fun WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable(pbIsUserVerifyingPlatformAuthenticatorAvailable : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WebAuthNAuthenticatorMakeCredential(hWnd : Win32cr::Foundation::HWND, pRpInformation : Win32cr::Networking::WindowsWebServices::WEBAUTHN_RP_ENTITY_INFORMATION*, pUserInformation : Win32cr::Networking::WindowsWebServices::WEBAUTHN_USER_ENTITY_INFORMATION*, pPubKeyCredParams : Win32cr::Networking::WindowsWebServices::WEBAUTHN_COSE_CREDENTIAL_PARAMETERS*, pWebAuthNClientData : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CLIENT_DATA*, pWebAuthNMakeCredentialOptions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS*, ppWebAuthNCredentialAttestation : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL_ATTESTATION**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WebAuthNAuthenticatorGetAssertion(hWnd : Win32cr::Foundation::HWND, pwszRpId : Win32cr::Foundation::PWSTR, pWebAuthNClientData : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CLIENT_DATA*, pWebAuthNGetAssertionOptions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS*, ppWebAuthNAssertion : Win32cr::Networking::WindowsWebServices::WEBAUTHN_ASSERTION**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WebAuthNFreeCredentialAttestation(pWebAuthNCredentialAttestation : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL_ATTESTATION*) : Void
 
+    # :nodoc:
     fun WebAuthNFreeAssertion(pWebAuthNAssertion : Win32cr::Networking::WindowsWebServices::WEBAUTHN_ASSERTION*) : Void
 
+    # :nodoc:
     fun WebAuthNGetCancellationId(pCancellationId : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WebAuthNCancelCurrentOperation(pCancellationId : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WebAuthNGetErrorName(hr : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun WebAuthNGetW3CExceptionDOMError(hr : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
 
   end

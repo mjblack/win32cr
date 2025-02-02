@@ -3,6 +3,7 @@ require "./system/com.cr"
 require "./foundation.cr"
 
 module Win32cr::Media
+  extend self
   alias HTASK = LibC::IntPtrT
   alias LPDRVCALLBACK = Proc(Win32cr::Media::Multimedia::HDRVR, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
@@ -306,20 +307,55 @@ module Win32cr::Media
 
   end
 
+  def timeGetSystemTime(pmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
+    C.timeGetSystemTime(pmmt, cbmmt)
+  end
+
+  def timeGetTime : UInt32
+    C.timeGetTime
+  end
+
+  def timeGetDevCaps(ptc : Win32cr::Media::TIMECAPS*, cbtc : UInt32) : UInt32
+    C.timeGetDevCaps(ptc, cbtc)
+  end
+
+  def timeBeginPeriod(uPeriod : UInt32) : UInt32
+    C.timeBeginPeriod(uPeriod)
+  end
+
+  def timeEndPeriod(uPeriod : UInt32) : UInt32
+    C.timeEndPeriod(uPeriod)
+  end
+
+  def timeSetEvent(uDelay : UInt32, uResolution : UInt32, fptc : Win32cr::Media::LPTIMECALLBACK, dwUser : LibC::UIntPtrT, fuEvent : UInt32) : UInt32
+    C.timeSetEvent(uDelay, uResolution, fptc, dwUser, fuEvent)
+  end
+
+  def timeKillEvent(uTimerID : UInt32) : UInt32
+    C.timeKillEvent(uTimerID)
+  end
+
   @[Link("winmm")]
   lib C
+    # :nodoc:
     fun timeGetSystemTime(pmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
 
+    # :nodoc:
     fun timeGetTime : UInt32
 
+    # :nodoc:
     fun timeGetDevCaps(ptc : Win32cr::Media::TIMECAPS*, cbtc : UInt32) : UInt32
 
+    # :nodoc:
     fun timeBeginPeriod(uPeriod : UInt32) : UInt32
 
+    # :nodoc:
     fun timeEndPeriod(uPeriod : UInt32) : UInt32
 
+    # :nodoc:
     fun timeSetEvent(uDelay : UInt32, uResolution : UInt32, fptc : Win32cr::Media::LPTIMECALLBACK, dwUser : LibC::UIntPtrT, fuEvent : UInt32) : UInt32
 
+    # :nodoc:
     fun timeKillEvent(uTimerID : UInt32) : UInt32
 
   end

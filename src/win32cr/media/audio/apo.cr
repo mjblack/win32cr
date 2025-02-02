@@ -4,6 +4,7 @@ require "./../audio.cr"
 require "./../../ui/shell/properties_system.cr"
 
 module Win32cr::Media::Audio::Apo
+  extend self
   alias FNAPONOTIFICATIONCALLBACK = Proc(Win32cr::Media::Audio::Apo::APO_REG_PROPERTIES*, Void*, Win32cr::Foundation::HRESULT)
 
   APOERR_ALREADY_INITIALIZED = -2005073919_i32

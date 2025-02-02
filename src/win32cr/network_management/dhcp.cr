@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::Dhcp
+  extend self
   alias LPDHCP_CONTROL = Proc(UInt32, Void*, UInt32)
 
   alias LPDHCP_NEWPKT = Proc(UInt8**, UInt32*, UInt32, Void*, Void**, Int32*, UInt32)
@@ -2128,428 +2129,1478 @@ module Win32cr::NetworkManagement::Dhcp
   end
   {% end %}
 
+  def dhcpv6CApiInitialize(version : UInt32*) : Void
+    C.Dhcpv6CApiInitialize(version)
+  end
+
+  def dhcpv6CApiCleanup : Void
+    C.Dhcpv6CApiCleanup
+  end
+
+  def dhcpv6RequestParams(forceNewInform : Win32cr::Foundation::BOOL, reserved : Void*, adapterName : Win32cr::Foundation::PWSTR, classId : Win32cr::NetworkManagement::Dhcp::DHCPV6CAPI_CLASSID*, recdParams : Win32cr::NetworkManagement::Dhcp::DHCPV6CAPI_PARAMS_ARRAY, buffer : UInt8*, pSize : UInt32*) : UInt32
+    C.Dhcpv6RequestParams(forceNewInform, reserved, adapterName, classId, recdParams, buffer, pSize)
+  end
+
+  def dhcpv6RequestPrefix(adapterName : Win32cr::Foundation::PWSTR, pclassId : Win32cr::NetworkManagement::Dhcp::DHCPV6CAPI_CLASSID*, prefixleaseInfo : Win32cr::NetworkManagement::Dhcp::DHCPV6PrefixLeaseInformation*, pdwTimeToWait : UInt32*) : UInt32
+    C.Dhcpv6RequestPrefix(adapterName, pclassId, prefixleaseInfo, pdwTimeToWait)
+  end
+
+  def dhcpv6RenewPrefix(adapterName : Win32cr::Foundation::PWSTR, pclassId : Win32cr::NetworkManagement::Dhcp::DHCPV6CAPI_CLASSID*, prefixleaseInfo : Win32cr::NetworkManagement::Dhcp::DHCPV6PrefixLeaseInformation*, pdwTimeToWait : UInt32*, bValidatePrefix : UInt32) : UInt32
+    C.Dhcpv6RenewPrefix(adapterName, pclassId, prefixleaseInfo, pdwTimeToWait, bValidatePrefix)
+  end
+
+  def dhcpv6ReleasePrefix(adapterName : Win32cr::Foundation::PWSTR, classId : Win32cr::NetworkManagement::Dhcp::DHCPV6CAPI_CLASSID*, leaseInfo : Win32cr::NetworkManagement::Dhcp::DHCPV6PrefixLeaseInformation*) : UInt32
+    C.Dhcpv6ReleasePrefix(adapterName, classId, leaseInfo)
+  end
+
+  def dhcpCApiInitialize(version : UInt32*) : UInt32
+    C.DhcpCApiInitialize(version)
+  end
+
+  def dhcpCApiCleanup : Void
+    C.DhcpCApiCleanup
+  end
+
+  def dhcpRequestParams(flags : UInt32, reserved : Void*, adapter_name : Win32cr::Foundation::PWSTR, class_id : Win32cr::NetworkManagement::Dhcp::DHCPCAPI_CLASSID*, send_params : Win32cr::NetworkManagement::Dhcp::DHCPCAPI_PARAMS_ARRAY, recd_params : Win32cr::NetworkManagement::Dhcp::DHCPCAPI_PARAMS_ARRAY, buffer : UInt8*, pSize : UInt32*, request_id_str : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpRequestParams(flags, reserved, adapter_name, class_id, send_params, recd_params, buffer, pSize, request_id_str)
+  end
+
+  def dhcpUndoRequestParams(flags : UInt32, reserved : Void*, adapter_name : Win32cr::Foundation::PWSTR, request_id_str : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpUndoRequestParams(flags, reserved, adapter_name, request_id_str)
+  end
+
+  def dhcpRegisterParamChange(flags : UInt32, reserved : Void*, adapter_name : Win32cr::Foundation::PWSTR, class_id : Win32cr::NetworkManagement::Dhcp::DHCPCAPI_CLASSID*, params : Win32cr::NetworkManagement::Dhcp::DHCPCAPI_PARAMS_ARRAY, handle : Void*) : UInt32
+    C.DhcpRegisterParamChange(flags, reserved, adapter_name, class_id, params, handle)
+  end
+
+  def dhcpDeRegisterParamChange(flags : UInt32, reserved : Void*, event : Void*) : UInt32
+    C.DhcpDeRegisterParamChange(flags, reserved, event)
+  end
+
+  def dhcpRemoveDNSRegistrations : UInt32
+    C.DhcpRemoveDNSRegistrations
+  end
+
+  def dhcpGetOriginalSubnetMask(sAdapterName : Win32cr::Foundation::PWSTR, dwSubnetMask : UInt32*) : UInt32
+    C.DhcpGetOriginalSubnetMask(sAdapterName, dwSubnetMask)
+  end
+
+  def dhcpAddFilterV4(server_ip_address : Win32cr::Foundation::PWSTR, add_filter_info : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_ADD_INFO*, force_flag : Win32cr::Foundation::BOOL) : UInt32
+    C.DhcpAddFilterV4(server_ip_address, add_filter_info, force_flag)
+  end
+
+  def dhcpDeleteFilterV4(server_ip_address : Win32cr::Foundation::PWSTR, delete_filter_info : Win32cr::NetworkManagement::Dhcp::DHCP_ADDR_PATTERN*) : UInt32
+    C.DhcpDeleteFilterV4(server_ip_address, delete_filter_info)
+  end
+
+  def dhcpSetFilterV4(server_ip_address : Win32cr::Foundation::PWSTR, global_filter_info : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_GLOBAL_INFO*) : UInt32
+    C.DhcpSetFilterV4(server_ip_address, global_filter_info)
+  end
+
+  def dhcpGetFilterV4(server_ip_address : Win32cr::Foundation::PWSTR, global_filter_info : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_GLOBAL_INFO*) : UInt32
+    C.DhcpGetFilterV4(server_ip_address, global_filter_info)
+  end
+
+  def dhcpEnumFilterV4(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : Win32cr::NetworkManagement::Dhcp::DHCP_ADDR_PATTERN*, preferred_maximum : UInt32, list_type : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_LIST_TYPE, enum_filter_info : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_ENUM_INFO**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
+    C.DhcpEnumFilterV4(server_ip_address, resume_handle, preferred_maximum, list_type, enum_filter_info, elements_read, elements_total)
+  end
+
+  def dhcpCreateSubnet(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO*) : UInt32
+    C.DhcpCreateSubnet(server_ip_address, subnet_address, subnet_info)
+  end
+
+  def dhcpSetSubnetInfo(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO*) : UInt32
+    C.DhcpSetSubnetInfo(server_ip_address, subnet_address, subnet_info)
+  end
+
+  def dhcpGetSubnetInfo(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO**) : UInt32
+    C.DhcpGetSubnetInfo(server_ip_address, subnet_address, subnet_info)
+  end
+
+  def dhcpEnumSubnets(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, enum_info : Win32cr::NetworkManagement::Dhcp::DHCP_IP_ARRAY**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
+    C.DhcpEnumSubnets(server_ip_address, resume_handle, preferred_maximum, enum_info, elements_read, elements_total)
+  end
+
+  def dhcpAddSubnetElement(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, add_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA*) : UInt32
+    C.DhcpAddSubnetElement(server_ip_address, subnet_address, add_element_info)
+  end
+
+  def dhcpEnumSubnetElements(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, enum_element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE, resume_handle : UInt32*, preferred_maximum : UInt32, enum_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_INFO_ARRAY**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
+    C.DhcpEnumSubnetElements(server_ip_address, subnet_address, enum_element_type, resume_handle, preferred_maximum, enum_element_info, elements_read, elements_total)
+  end
+
+  def dhcpRemoveSubnetElement(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, remove_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA*, force_flag : Win32cr::NetworkManagement::Dhcp::DHCP_FORCE_FLAG) : UInt32
+    C.DhcpRemoveSubnetElement(server_ip_address, subnet_address, remove_element_info, force_flag)
+  end
+
+  def dhcpDeleteSubnet(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, force_flag : Win32cr::NetworkManagement::Dhcp::DHCP_FORCE_FLAG) : UInt32
+    C.DhcpDeleteSubnet(server_ip_address, subnet_address, force_flag)
+  end
+
+  def dhcpCreateOption(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*) : UInt32
+    C.DhcpCreateOption(server_ip_address, option_id, option_info)
+  end
+
+  def dhcpSetOptionInfo(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*) : UInt32
+    C.DhcpSetOptionInfo(server_ip_address, option_id, option_info)
+  end
+
+  def dhcpGetOptionInfo(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION**) : UInt32
+    C.DhcpGetOptionInfo(server_ip_address, option_id, option_info)
+  end
+
+  def dhcpEnumOptions(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_ARRAY**, options_read : UInt32*, options_total : UInt32*) : UInt32
+    C.DhcpEnumOptions(server_ip_address, resume_handle, preferred_maximum, options, options_read, options_total)
+  end
+
+  def dhcpRemoveOption(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32) : UInt32
+    C.DhcpRemoveOption(server_ip_address, option_id)
+  end
+
+  def dhcpSetOptionValue(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA*) : UInt32
+    C.DhcpSetOptionValue(server_ip_address, option_id, scope_info, option_value)
+  end
+
+  def dhcpSetOptionValues(server_ip_address : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY*) : UInt32
+    C.DhcpSetOptionValues(server_ip_address, scope_info, option_values)
+  end
+
+  def dhcpGetOptionValue(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE**) : UInt32
+    C.DhcpGetOptionValue(server_ip_address, option_id, scope_info, option_value)
+  end
+
+  def dhcpEnumOptionValues(server_ip_address : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, resume_handle : UInt32*, preferred_maximum : UInt32, option_values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY**, options_read : UInt32*, options_total : UInt32*) : UInt32
+    C.DhcpEnumOptionValues(server_ip_address, scope_info, resume_handle, preferred_maximum, option_values, options_read, options_total)
+  end
+
+  def dhcpRemoveOptionValue(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*) : UInt32
+    C.DhcpRemoveOptionValue(server_ip_address, option_id, scope_info)
+  end
+
+  def dhcpCreateClientInfoVQ(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_VQ*) : UInt32
+    C.DhcpCreateClientInfoVQ(server_ip_address, client_info)
+  end
+
+  def dhcpSetClientInfoVQ(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_VQ*) : UInt32
+    C.DhcpSetClientInfoVQ(server_ip_address, client_info)
+  end
+
+  def dhcpGetClientInfoVQ(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_VQ**) : UInt32
+    C.DhcpGetClientInfoVQ(server_ip_address, search_info, client_info)
+  end
+
+  def dhcpEnumSubnetClientsVQ(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_ARRAY_VQ**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
+    C.DhcpEnumSubnetClientsVQ(server_ip_address, subnet_address, resume_handle, preferred_maximum, client_info, clients_read, clients_total)
+  end
+
+  def dhcpEnumSubnetClientsFilterStatusInfo(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
+    C.DhcpEnumSubnetClientsFilterStatusInfo(server_ip_address, subnet_address, resume_handle, preferred_maximum, client_info, clients_read, clients_total)
+  end
+
+  def dhcpCreateClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO*) : UInt32
+    C.DhcpCreateClientInfo(server_ip_address, client_info)
+  end
+
+  def dhcpSetClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO*) : UInt32
+    C.DhcpSetClientInfo(server_ip_address, client_info)
+  end
+
+  def dhcpGetClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO**) : UInt32
+    C.DhcpGetClientInfo(server_ip_address, search_info, client_info)
+  end
+
+  def dhcpDeleteClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*) : UInt32
+    C.DhcpDeleteClientInfo(server_ip_address, client_info)
+  end
+
+  def dhcpEnumSubnetClients(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_ARRAY**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
+    C.DhcpEnumSubnetClients(server_ip_address, subnet_address, resume_handle, preferred_maximum, client_info, clients_read, clients_total)
+  end
+
+  def dhcpGetClientOptions(server_ip_address : Win32cr::Foundation::PWSTR, client_ip_address : UInt32, client_subnet_mask : UInt32, client_options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_LIST**) : UInt32
+    C.DhcpGetClientOptions(server_ip_address, client_ip_address, client_subnet_mask, client_options)
+  end
+
+  def dhcpGetMibInfo(server_ip_address : Win32cr::Foundation::PWSTR, mib_info : Win32cr::NetworkManagement::Dhcp::DHCP_MIB_INFO**) : UInt32
+    C.DhcpGetMibInfo(server_ip_address, mib_info)
+  end
+
+  def dhcpServerSetConfig(server_ip_address : Win32cr::Foundation::PWSTR, fields_to_set : UInt32, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO*) : UInt32
+    C.DhcpServerSetConfig(server_ip_address, fields_to_set, config_info)
+  end
+
+  def dhcpServerGetConfig(server_ip_address : Win32cr::Foundation::PWSTR, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO**) : UInt32
+    C.DhcpServerGetConfig(server_ip_address, config_info)
+  end
+
+  def dhcpScanDatabase(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, fix_flag : UInt32, scan_list : Win32cr::NetworkManagement::Dhcp::DHCP_SCAN_LIST**) : UInt32
+    C.DhcpScanDatabase(server_ip_address, subnet_address, fix_flag, scan_list)
+  end
+
+  def dhcpRpcFreeMemory(buffer_pointer : Void*) : Void
+    C.DhcpRpcFreeMemory(buffer_pointer)
+  end
+
+  def dhcpGetVersion(server_ip_address : Win32cr::Foundation::PWSTR, major_version : UInt32*, minor_version : UInt32*) : UInt32
+    C.DhcpGetVersion(server_ip_address, major_version, minor_version)
+  end
+
+  def dhcpAddSubnetElementV4(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, add_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V4*) : UInt32
+    C.DhcpAddSubnetElementV4(server_ip_address, subnet_address, add_element_info)
+  end
+
+  def dhcpEnumSubnetElementsV4(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, enum_element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE, resume_handle : UInt32*, preferred_maximum : UInt32, enum_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
+    C.DhcpEnumSubnetElementsV4(server_ip_address, subnet_address, enum_element_type, resume_handle, preferred_maximum, enum_element_info, elements_read, elements_total)
+  end
+
+  def dhcpRemoveSubnetElementV4(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, remove_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V4*, force_flag : Win32cr::NetworkManagement::Dhcp::DHCP_FORCE_FLAG) : UInt32
+    C.DhcpRemoveSubnetElementV4(server_ip_address, subnet_address, remove_element_info, force_flag)
+  end
+
+  def dhcpCreateClientInfoV4(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V4*) : UInt32
+    C.DhcpCreateClientInfoV4(server_ip_address, client_info)
+  end
+
+  def dhcpSetClientInfoV4(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V4*) : UInt32
+    C.DhcpSetClientInfoV4(server_ip_address, client_info)
+  end
+
+  def dhcpGetClientInfoV4(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V4**) : UInt32
+    C.DhcpGetClientInfoV4(server_ip_address, search_info, client_info)
+  end
+
+  def dhcpEnumSubnetClientsV4(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_ARRAY_V4**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
+    C.DhcpEnumSubnetClientsV4(server_ip_address, subnet_address, resume_handle, preferred_maximum, client_info, clients_read, clients_total)
+  end
+
+  def dhcpServerSetConfigV4(server_ip_address : Win32cr::Foundation::PWSTR, fields_to_set : UInt32, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_V4*) : UInt32
+    C.DhcpServerSetConfigV4(server_ip_address, fields_to_set, config_info)
+  end
+
+  def dhcpServerGetConfigV4(server_ip_address : Win32cr::Foundation::PWSTR, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_V4**) : UInt32
+    C.DhcpServerGetConfigV4(server_ip_address, config_info)
+  end
+
+  def dhcpSetSuperScopeV4(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, super_scope_name : Win32cr::Foundation::PWSTR, change_existing : Win32cr::Foundation::BOOL) : UInt32
+    C.DhcpSetSuperScopeV4(server_ip_address, subnet_address, super_scope_name, change_existing)
+  end
+
+  def dhcpDeleteSuperScopeV4(server_ip_address : Win32cr::Foundation::PWSTR, super_scope_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpDeleteSuperScopeV4(server_ip_address, super_scope_name)
+  end
+
+  def dhcpGetSuperScopeInfoV4(server_ip_address : Win32cr::Foundation::PWSTR, super_scope_table : Win32cr::NetworkManagement::Dhcp::DHCP_SUPER_SCOPE_TABLE**) : UInt32
+    C.DhcpGetSuperScopeInfoV4(server_ip_address, super_scope_table)
+  end
+
+  def dhcpEnumSubnetClientsV5(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_ARRAY_V5**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
+    C.DhcpEnumSubnetClientsV5(server_ip_address, subnet_address, resume_handle, preferred_maximum, client_info, clients_read, clients_total)
+  end
+
+  def dhcpCreateOptionV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*) : UInt32
+    C.DhcpCreateOptionV5(server_ip_address, flags, option_id, class_name, vendor_name, option_info)
+  end
+
+  def dhcpSetOptionInfoV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*) : UInt32
+    C.DhcpSetOptionInfoV5(server_ip_address, flags, option_id, class_name, vendor_name, option_info)
+  end
+
+  def dhcpGetOptionInfoV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION**) : UInt32
+    C.DhcpGetOptionInfoV5(server_ip_address, flags, option_id, class_name, vendor_name, option_info)
+  end
+
+  def dhcpEnumOptionsV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_ARRAY**, options_read : UInt32*, options_total : UInt32*) : UInt32
+    C.DhcpEnumOptionsV5(server_ip_address, flags, class_name, vendor_name, resume_handle, preferred_maximum, options, options_read, options_total)
+  end
+
+  def dhcpRemoveOptionV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpRemoveOptionV5(server_ip_address, flags, option_id, class_name, vendor_name)
+  end
+
+  def dhcpSetOptionValueV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA*) : UInt32
+    C.DhcpSetOptionValueV5(server_ip_address, flags, option_id, class_name, vendor_name, scope_info, option_value)
+  end
+
+  def dhcpSetOptionValuesV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY*) : UInt32
+    C.DhcpSetOptionValuesV5(server_ip_address, flags, class_name, vendor_name, scope_info, option_values)
+  end
+
+  def dhcpGetOptionValueV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE**) : UInt32
+    C.DhcpGetOptionValueV5(server_ip_address, flags, option_id, class_name, vendor_name, scope_info, option_value)
+  end
+
+  def dhcpGetOptionValueV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE**) : UInt32
+    C.DhcpGetOptionValueV6(server_ip_address, flags, option_id, class_name, vendor_name, scope_info, option_value)
+  end
+
+  def dhcpEnumOptionValuesV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, resume_handle : UInt32*, preferred_maximum : UInt32, option_values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY**, options_read : UInt32*, options_total : UInt32*) : UInt32
+    C.DhcpEnumOptionValuesV5(server_ip_address, flags, class_name, vendor_name, scope_info, resume_handle, preferred_maximum, option_values, options_read, options_total)
+  end
+
+  def dhcpRemoveOptionValueV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*) : UInt32
+    C.DhcpRemoveOptionValueV5(server_ip_address, flags, option_id, class_name, vendor_name, scope_info)
+  end
+
+  def dhcpCreateClass(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, class_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO*) : UInt32
+    C.DhcpCreateClass(server_ip_address, reserved_must_be_zero, class_info)
+  end
+
+  def dhcpModifyClass(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, class_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO*) : UInt32
+    C.DhcpModifyClass(server_ip_address, reserved_must_be_zero, class_info)
+  end
+
+  def dhcpDeleteClass(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, class_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpDeleteClass(server_ip_address, reserved_must_be_zero, class_name)
+  end
+
+  def dhcpGetClassInfo(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, partial_class_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO*, filled_class_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO**) : UInt32
+    C.DhcpGetClassInfo(server_ip_address, reserved_must_be_zero, partial_class_info, filled_class_info)
+  end
+
+  def dhcpEnumClasses(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, class_info_array : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO_ARRAY**, nRead : UInt32*, nTotal : UInt32*) : UInt32
+    C.DhcpEnumClasses(server_ip_address, reserved_must_be_zero, resume_handle, preferred_maximum, class_info_array, nRead, nTotal)
+  end
+
+  def dhcpGetAllOptions(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_struct : Win32cr::NetworkManagement::Dhcp::DHCP_ALL_OPTIONS**) : UInt32
+    C.DhcpGetAllOptions(server_ip_address, flags, option_struct)
+  end
+
+  def dhcpGetAllOptionsV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_struct : Win32cr::NetworkManagement::Dhcp::DHCP_ALL_OPTIONS**) : UInt32
+    C.DhcpGetAllOptionsV6(server_ip_address, flags, option_struct)
+  end
+
+  def dhcpGetAllOptionValues(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, values : Win32cr::NetworkManagement::Dhcp::DHCP_ALL_OPTION_VALUES**) : UInt32
+    C.DhcpGetAllOptionValues(server_ip_address, flags, scope_info, values)
+  end
+
+  def dhcpGetAllOptionValuesV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*, values : Win32cr::NetworkManagement::Dhcp::DHCP_ALL_OPTION_VALUES**) : UInt32
+    C.DhcpGetAllOptionValuesV6(server_ip_address, flags, scope_info, values)
+  end
+
+  def dhcpEnumServers(flags : UInt32, id_info : Void*, servers : Win32cr::NetworkManagement::Dhcp::DHCPDS_SERVERS**, callback_fn : Void*, callback_data : Void*) : UInt32
+    C.DhcpEnumServers(flags, id_info, servers, callback_fn, callback_data)
+  end
+
+  def dhcpAddServer(flags : UInt32, id_info : Void*, new_server : Win32cr::NetworkManagement::Dhcp::DHCPDS_SERVER*, callback_fn : Void*, callback_data : Void*) : UInt32
+    C.DhcpAddServer(flags, id_info, new_server, callback_fn, callback_data)
+  end
+
+  def dhcpDeleteServer(flags : UInt32, id_info : Void*, new_server : Win32cr::NetworkManagement::Dhcp::DHCPDS_SERVER*, callback_fn : Void*, callback_data : Void*) : UInt32
+    C.DhcpDeleteServer(flags, id_info, new_server, callback_fn, callback_data)
+  end
+
+  def dhcpGetServerBindingInfo(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, bind_elements_info : Win32cr::NetworkManagement::Dhcp::DHCP_BIND_ELEMENT_ARRAY**) : UInt32
+    C.DhcpGetServerBindingInfo(server_ip_address, flags, bind_elements_info)
+  end
+
+  def dhcpSetServerBindingInfo(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, bind_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_BIND_ELEMENT_ARRAY*) : UInt32
+    C.DhcpSetServerBindingInfo(server_ip_address, flags, bind_element_info)
+  end
+
+  def dhcpAddSubnetElementV5(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, add_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V5*) : UInt32
+    C.DhcpAddSubnetElementV5(server_ip_address, subnet_address, add_element_info)
+  end
+
+  def dhcpEnumSubnetElementsV5(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, enum_element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE, resume_handle : UInt32*, preferred_maximum : UInt32, enum_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
+    C.DhcpEnumSubnetElementsV5(server_ip_address, subnet_address, enum_element_type, resume_handle, preferred_maximum, enum_element_info, elements_read, elements_total)
+  end
+
+  def dhcpRemoveSubnetElementV5(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, remove_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V5*, force_flag : Win32cr::NetworkManagement::Dhcp::DHCP_FORCE_FLAG) : UInt32
+    C.DhcpRemoveSubnetElementV5(server_ip_address, subnet_address, remove_element_info, force_flag)
+  end
+
+  def dhcpV4EnumSubnetReservations(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, enum_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_RESERVATION_INFO_ARRAY**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
+    C.DhcpV4EnumSubnetReservations(server_ip_address, subnet_address, resume_handle, preferred_maximum, enum_element_info, elements_read, elements_total)
+  end
+
+  def dhcpCreateOptionV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*) : UInt32
+    C.DhcpCreateOptionV6(server_ip_address, flags, option_id, class_name, vendor_name, option_info)
+  end
+
+  def dhcpRemoveOptionV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpRemoveOptionV6(server_ip_address, flags, option_id, class_name, vendor_name)
+  end
+
+  def dhcpEnumOptionsV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_ARRAY**, options_read : UInt32*, options_total : UInt32*) : UInt32
+    C.DhcpEnumOptionsV6(server_ip_address, flags, class_name, vendor_name, resume_handle, preferred_maximum, options, options_read, options_total)
+  end
+
+  def dhcpRemoveOptionValueV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*) : UInt32
+    C.DhcpRemoveOptionValueV6(server_ip_address, flags, option_id, class_name, vendor_name, scope_info)
+  end
+
+  def dhcpGetOptionInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION**) : UInt32
+    C.DhcpGetOptionInfoV6(server_ip_address, flags, option_id, class_name, vendor_name, option_info)
+  end
+
+  def dhcpSetOptionInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*) : UInt32
+    C.DhcpSetOptionInfoV6(server_ip_address, flags, option_id, class_name, vendor_name, option_info)
+  end
+
+  def dhcpSetOptionValueV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA*) : UInt32
+    C.DhcpSetOptionValueV6(server_ip_address, flags, option_id, class_name, vendor_name, scope_info, option_value)
+  end
+
+  def dhcpGetSubnetInfoVQ(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO_VQ**) : UInt32
+    C.DhcpGetSubnetInfoVQ(server_ip_address, subnet_address, subnet_info)
+  end
+
+  def dhcpCreateSubnetVQ(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO_VQ*) : UInt32
+    C.DhcpCreateSubnetVQ(server_ip_address, subnet_address, subnet_info)
+  end
+
+  def dhcpSetSubnetInfoVQ(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO_VQ*) : UInt32
+    C.DhcpSetSubnetInfoVQ(server_ip_address, subnet_address, subnet_info)
+  end
+
+  def dhcpEnumOptionValuesV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*, resume_handle : UInt32*, preferred_maximum : UInt32, option_values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY**, options_read : UInt32*, options_total : UInt32*) : UInt32
+    C.DhcpEnumOptionValuesV6(server_ip_address, flags, class_name, vendor_name, scope_info, resume_handle, preferred_maximum, option_values, options_read, options_total)
+  end
+
+  def dhcpDsInit : UInt32
+    C.DhcpDsInit
+  end
+
+  def dhcpDsCleanup : Void
+    C.DhcpDsCleanup
+  end
+
+  def dhcpSetThreadOptions(flags : UInt32, reserved : Void*) : UInt32
+    C.DhcpSetThreadOptions(flags, reserved)
+  end
+
+  def dhcpGetThreadOptions(pFlags : UInt32*, reserved : Void*) : UInt32
+    C.DhcpGetThreadOptions(pFlags, reserved)
+  end
+
+  def dhcpServerQueryAttribute(server_ip_addr : Win32cr::Foundation::PWSTR, dwReserved : UInt32, dhcp_attrib_id : UInt32, pDhcpAttrib : Win32cr::NetworkManagement::Dhcp::DHCP_ATTRIB**) : UInt32
+    C.DhcpServerQueryAttribute(server_ip_addr, dwReserved, dhcp_attrib_id, pDhcpAttrib)
+  end
+
+  def dhcpServerQueryAttributes(server_ip_addr : Win32cr::Foundation::PWSTR, dwReserved : UInt32, dwAttribCount : UInt32, pDhcpAttribs : UInt32*, pDhcpAttribArr : Win32cr::NetworkManagement::Dhcp::DHCP_ATTRIB_ARRAY**) : UInt32
+    C.DhcpServerQueryAttributes(server_ip_addr, dwReserved, dwAttribCount, pDhcpAttribs, pDhcpAttribArr)
+  end
+
+  def dhcpServerRedoAuthorization(server_ip_addr : Win32cr::Foundation::PWSTR, dwReserved : UInt32) : UInt32
+    C.DhcpServerRedoAuthorization(server_ip_addr, dwReserved)
+  end
+
+  def dhcpAuditLogSetParams(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, audit_log_dir : Win32cr::Foundation::PWSTR, disk_check_interval : UInt32, max_log_files_size : UInt32, min_space_on_disk : UInt32) : UInt32
+    C.DhcpAuditLogSetParams(server_ip_address, flags, audit_log_dir, disk_check_interval, max_log_files_size, min_space_on_disk)
+  end
+
+  def dhcpAuditLogGetParams(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, audit_log_dir : Win32cr::Foundation::PWSTR*, disk_check_interval : UInt32*, max_log_files_size : UInt32*, min_space_on_disk : UInt32*) : UInt32
+    C.DhcpAuditLogGetParams(server_ip_address, flags, audit_log_dir, disk_check_interval, max_log_files_size, min_space_on_disk)
+  end
+
+  def dhcpServerQueryDnsRegCredentials(server_ip_address : Win32cr::Foundation::PWSTR, uname_size : UInt32, uname : UInt16*, domain_size : UInt32, domain : UInt16*) : UInt32
+    C.DhcpServerQueryDnsRegCredentials(server_ip_address, uname_size, uname, domain_size, domain)
+  end
+
+  def dhcpServerSetDnsRegCredentials(server_ip_address : Win32cr::Foundation::PWSTR, uname : Win32cr::Foundation::PWSTR, domain : Win32cr::Foundation::PWSTR, passwd : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpServerSetDnsRegCredentials(server_ip_address, uname, domain, passwd)
+  end
+
+  def dhcpServerSetDnsRegCredentialsV5(server_ip_address : Win32cr::Foundation::PWSTR, uname : Win32cr::Foundation::PWSTR, domain : Win32cr::Foundation::PWSTR, passwd : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpServerSetDnsRegCredentialsV5(server_ip_address, uname, domain, passwd)
+  end
+
+  def dhcpServerBackupDatabase(server_ip_address : Win32cr::Foundation::PWSTR, path : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpServerBackupDatabase(server_ip_address, path)
+  end
+
+  def dhcpServerRestoreDatabase(server_ip_address : Win32cr::Foundation::PWSTR, path : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpServerRestoreDatabase(server_ip_address, path)
+  end
+
+  def dhcpServerSetConfigVQ(server_ip_address : Win32cr::Foundation::PWSTR, fields_to_set : UInt32, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_VQ*) : UInt32
+    C.DhcpServerSetConfigVQ(server_ip_address, fields_to_set, config_info)
+  end
+
+  def dhcpServerGetConfigVQ(server_ip_address : Win32cr::Foundation::PWSTR, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_VQ**) : UInt32
+    C.DhcpServerGetConfigVQ(server_ip_address, config_info)
+  end
+
+  def dhcpGetServerSpecificStrings(server_ip_address : Win32cr::Foundation::PWSTR, server_specific_strings : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_SPECIFIC_STRINGS**) : UInt32
+    C.DhcpGetServerSpecificStrings(server_ip_address, server_specific_strings)
+  end
+
+  def dhcpServerAuditlogParamsFree(config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_VQ*) : Void
+    C.DhcpServerAuditlogParamsFree(config_info)
+  end
+
+  def dhcpCreateSubnetV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO_V6*) : UInt32
+    C.DhcpCreateSubnetV6(server_ip_address, subnet_address, subnet_info)
+  end
+
+  def dhcpDeleteSubnetV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, force_flag : Win32cr::NetworkManagement::Dhcp::DHCP_FORCE_FLAG) : UInt32
+    C.DhcpDeleteSubnetV6(server_ip_address, subnet_address, force_flag)
+  end
+
+  def dhcpEnumSubnetsV6(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, enum_info : Win32cr::NetworkManagement::Dhcp::DHCPV6_IP_ARRAY**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
+    C.DhcpEnumSubnetsV6(server_ip_address, resume_handle, preferred_maximum, enum_info, elements_read, elements_total)
+  end
+
+  def dhcpAddSubnetElementV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, add_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V6*) : UInt32
+    C.DhcpAddSubnetElementV6(server_ip_address, subnet_address, add_element_info)
+  end
+
+  def dhcpRemoveSubnetElementV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, remove_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V6*, force_flag : Win32cr::NetworkManagement::Dhcp::DHCP_FORCE_FLAG) : UInt32
+    C.DhcpRemoveSubnetElementV6(server_ip_address, subnet_address, remove_element_info, force_flag)
+  end
+
+  def dhcpEnumSubnetElementsV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, enum_element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE_V6, resume_handle : UInt32*, preferred_maximum : UInt32, enum_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
+    C.DhcpEnumSubnetElementsV6(server_ip_address, subnet_address, enum_element_type, resume_handle, preferred_maximum, enum_element_info, elements_read, elements_total)
+  end
+
+  def dhcpGetSubnetInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO_V6**) : UInt32
+    C.DhcpGetSubnetInfoV6(server_ip_address, subnet_address, subnet_info)
+  end
+
+  def dhcpEnumSubnetClientsV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, resume_handle : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_ARRAY_V6**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
+    C.DhcpEnumSubnetClientsV6(server_ip_address, subnet_address, resume_handle, preferred_maximum, client_info, clients_read, clients_total)
+  end
+
+  def dhcpServerGetConfigV6(server_ip_address : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_V6**) : UInt32
+    C.DhcpServerGetConfigV6(server_ip_address, scope_info, config_info)
+  end
+
+  def dhcpServerSetConfigV6(server_ip_address : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*, fields_to_set : UInt32, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_V6*) : UInt32
+    C.DhcpServerSetConfigV6(server_ip_address, scope_info, fields_to_set, config_info)
+  end
+
+  def dhcpSetSubnetInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO_V6*) : UInt32
+    C.DhcpSetSubnetInfoV6(server_ip_address, subnet_address, subnet_info)
+  end
+
+  def dhcpGetMibInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, mib_info : Win32cr::NetworkManagement::Dhcp::DHCP_MIB_INFO_V6**) : UInt32
+    C.DhcpGetMibInfoV6(server_ip_address, mib_info)
+  end
+
+  def dhcpGetServerBindingInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, bind_elements_info : Win32cr::NetworkManagement::Dhcp::DHCPV6_BIND_ELEMENT_ARRAY**) : UInt32
+    C.DhcpGetServerBindingInfoV6(server_ip_address, flags, bind_elements_info)
+  end
+
+  def dhcpSetServerBindingInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, bind_element_info : Win32cr::NetworkManagement::Dhcp::DHCPV6_BIND_ELEMENT_ARRAY*) : UInt32
+    C.DhcpSetServerBindingInfoV6(server_ip_address, flags, bind_element_info)
+  end
+
+  def dhcpSetClientInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V6*) : UInt32
+    C.DhcpSetClientInfoV6(server_ip_address, client_info)
+  end
+
+  def dhcpGetClientInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO_V6*, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V6**) : UInt32
+    C.DhcpGetClientInfoV6(server_ip_address, search_info, client_info)
+  end
+
+  def dhcpDeleteClientInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO_V6*) : UInt32
+    C.DhcpDeleteClientInfoV6(server_ip_address, client_info)
+  end
+
+  def dhcpCreateClassV6(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, class_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO_V6*) : UInt32
+    C.DhcpCreateClassV6(server_ip_address, reserved_must_be_zero, class_info)
+  end
+
+  def dhcpModifyClassV6(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, class_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO_V6*) : UInt32
+    C.DhcpModifyClassV6(server_ip_address, reserved_must_be_zero, class_info)
+  end
+
+  def dhcpDeleteClassV6(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, class_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpDeleteClassV6(server_ip_address, reserved_must_be_zero, class_name)
+  end
+
+  def dhcpEnumClassesV6(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, class_info_array : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO_ARRAY_V6**, nRead : UInt32*, nTotal : UInt32*) : UInt32
+    C.DhcpEnumClassesV6(server_ip_address, reserved_must_be_zero, resume_handle, preferred_maximum, class_info_array, nRead, nTotal)
+  end
+
+  def dhcpSetSubnetDelayOffer(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, time_delay_in_milliseconds : UInt16) : UInt32
+    C.DhcpSetSubnetDelayOffer(server_ip_address, subnet_address, time_delay_in_milliseconds)
+  end
+
+  def dhcpGetSubnetDelayOffer(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, time_delay_in_milliseconds : UInt16*) : UInt32
+    C.DhcpGetSubnetDelayOffer(server_ip_address, subnet_address, time_delay_in_milliseconds)
+  end
+
+  def dhcpGetMibInfoV5(server_ip_address : Win32cr::Foundation::PWSTR, mib_info : Win32cr::NetworkManagement::Dhcp::DHCP_MIB_INFO_V5**) : UInt32
+    C.DhcpGetMibInfoV5(server_ip_address, mib_info)
+  end
+
+  def dhcpAddSecurityGroup(pServer : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpAddSecurityGroup(pServer)
+  end
+
+  def dhcpV4GetOptionValue(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, policy_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE**) : UInt32
+    C.DhcpV4GetOptionValue(server_ip_address, flags, option_id, policy_name, vendor_name, scope_info, option_value)
+  end
+
+  def dhcpV4SetOptionValue(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, policy_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA*) : UInt32
+    C.DhcpV4SetOptionValue(server_ip_address, flags, option_id, policy_name, vendor_name, scope_info, option_value)
+  end
+
+  def dhcpV4SetOptionValues(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, policy_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY*) : UInt32
+    C.DhcpV4SetOptionValues(server_ip_address, flags, policy_name, vendor_name, scope_info, option_values)
+  end
+
+  def dhcpV4RemoveOptionValue(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, policy_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*) : UInt32
+    C.DhcpV4RemoveOptionValue(server_ip_address, flags, option_id, policy_name, vendor_name, scope_info)
+  end
+
+  def dhcpV4GetAllOptionValues(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, values : Win32cr::NetworkManagement::Dhcp::DHCP_ALL_OPTION_VALUES_PB**) : UInt32
+    C.DhcpV4GetAllOptionValues(server_ip_address, flags, scope_info, values)
+  end
+
+  def dhcpV4FailoverCreateRelationship(server_ip_address : Win32cr::Foundation::PWSTR, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP*) : UInt32
+    C.DhcpV4FailoverCreateRelationship(server_ip_address, pRelationship)
+  end
+
+  def dhcpV4FailoverSetRelationship(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP*) : UInt32
+    C.DhcpV4FailoverSetRelationship(server_ip_address, flags, pRelationship)
+  end
+
+  def dhcpV4FailoverDeleteRelationship(server_ip_address : Win32cr::Foundation::PWSTR, pRelationshipName : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpV4FailoverDeleteRelationship(server_ip_address, pRelationshipName)
+  end
+
+  def dhcpV4FailoverGetRelationship(server_ip_address : Win32cr::Foundation::PWSTR, pRelationshipName : Win32cr::Foundation::PWSTR, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP**) : UInt32
+    C.DhcpV4FailoverGetRelationship(server_ip_address, pRelationshipName, pRelationship)
+  end
+
+  def dhcpV4FailoverEnumRelationship(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP_ARRAY**, relationship_read : UInt32*, relationship_total : UInt32*) : UInt32
+    C.DhcpV4FailoverEnumRelationship(server_ip_address, resume_handle, preferred_maximum, pRelationship, relationship_read, relationship_total)
+  end
+
+  def dhcpV4FailoverAddScopeToRelationship(server_ip_address : Win32cr::Foundation::PWSTR, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP*) : UInt32
+    C.DhcpV4FailoverAddScopeToRelationship(server_ip_address, pRelationship)
+  end
+
+  def dhcpV4FailoverDeleteScopeFromRelationship(server_ip_address : Win32cr::Foundation::PWSTR, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP*) : UInt32
+    C.DhcpV4FailoverDeleteScopeFromRelationship(server_ip_address, pRelationship)
+  end
+
+  def dhcpV4FailoverGetScopeRelationship(server_ip_address : Win32cr::Foundation::PWSTR, scope_id : UInt32, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP**) : UInt32
+    C.DhcpV4FailoverGetScopeRelationship(server_ip_address, scope_id, pRelationship)
+  end
+
+  def dhcpV4FailoverGetScopeStatistics(server_ip_address : Win32cr::Foundation::PWSTR, scope_id : UInt32, pStats : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_STATISTICS**) : UInt32
+    C.DhcpV4FailoverGetScopeStatistics(server_ip_address, scope_id, pStats)
+  end
+
+  def dhcpV4FailoverGetClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*, client_info : Win32cr::NetworkManagement::Dhcp::DHCPV4_FAILOVER_CLIENT_INFO**) : UInt32
+    C.DhcpV4FailoverGetClientInfo(server_ip_address, search_info, client_info)
+  end
+
+  def dhcpV4FailoverGetSystemTime(server_ip_address : Win32cr::Foundation::PWSTR, pTime : UInt32*, pMaxAllowedDeltaTime : UInt32*) : UInt32
+    C.DhcpV4FailoverGetSystemTime(server_ip_address, pTime, pMaxAllowedDeltaTime)
+  end
+
+  def dhcpV4FailoverGetAddressStatus(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, pStatus : UInt32*) : UInt32
+    C.DhcpV4FailoverGetAddressStatus(server_ip_address, subnet_address, pStatus)
+  end
+
+  def dhcpV4FailoverTriggerAddrAllocation(server_ip_address : Win32cr::Foundation::PWSTR, pFailRelName : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpV4FailoverTriggerAddrAllocation(server_ip_address, pFailRelName)
+  end
+
+  def dhcpHlprCreateV4Policy(policy_name : Win32cr::Foundation::PWSTR, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet : UInt32, processing_order : UInt32, root_operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_LOGIC_OPER, description : Win32cr::Foundation::PWSTR, enabled : Win32cr::Foundation::BOOL, policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY**) : UInt32
+    C.DhcpHlprCreateV4Policy(policy_name, fGlobalPolicy, subnet, processing_order, root_operator, description, enabled, policy)
+  end
+
+  def dhcpHlprCreateV4PolicyEx(policy_name : Win32cr::Foundation::PWSTR, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet : UInt32, processing_order : UInt32, root_operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_LOGIC_OPER, description : Win32cr::Foundation::PWSTR, enabled : Win32cr::Foundation::BOOL, policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX**) : UInt32
+    C.DhcpHlprCreateV4PolicyEx(policy_name, fGlobalPolicy, subnet, processing_order, root_operator, description, enabled, policy)
+  end
+
+  def dhcpHlprAddV4PolicyExpr(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*, parent_expr : UInt32, operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_LOGIC_OPER, expr_index : UInt32*) : UInt32
+    C.DhcpHlprAddV4PolicyExpr(policy, parent_expr, operator, expr_index)
+  end
+
+  def dhcpHlprAddV4PolicyCondition(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*, parent_expr : UInt32, type__ : Win32cr::NetworkManagement::Dhcp::DHCP_POL_ATTR_TYPE, option_id : UInt32, sub_option_id : UInt32, vendor_name : Win32cr::Foundation::PWSTR, operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COMPARATOR, value : UInt8*, value_length : UInt32, condition_index : UInt32*) : UInt32
+    C.DhcpHlprAddV4PolicyCondition(policy, parent_expr, type__, option_id, sub_option_id, vendor_name, operator, value, value_length, condition_index)
+  end
+
+  def dhcpHlprAddV4PolicyRange(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*, range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*) : UInt32
+    C.DhcpHlprAddV4PolicyRange(policy, range)
+  end
+
+  def dhcpHlprResetV4PolicyExpr(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : UInt32
+    C.DhcpHlprResetV4PolicyExpr(policy)
+  end
+
+  def dhcpHlprModifyV4PolicyExpr(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*, operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_LOGIC_OPER) : UInt32
+    C.DhcpHlprModifyV4PolicyExpr(policy, operator)
+  end
+
+  def dhcpHlprFreeV4Policy(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : Void
+    C.DhcpHlprFreeV4Policy(policy)
+  end
+
+  def dhcpHlprFreeV4PolicyArray(policy_array : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_ARRAY*) : Void
+    C.DhcpHlprFreeV4PolicyArray(policy_array)
+  end
+
+  def dhcpHlprFreeV4PolicyEx(policy_ex : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX*) : Void
+    C.DhcpHlprFreeV4PolicyEx(policy_ex)
+  end
+
+  def dhcpHlprFreeV4PolicyExArray(policy_ex_array : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX_ARRAY*) : Void
+    C.DhcpHlprFreeV4PolicyExArray(policy_ex_array)
+  end
+
+  def dhcpHlprFreeV4DhcpProperty(property : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY*) : Void
+    C.DhcpHlprFreeV4DhcpProperty(property)
+  end
+
+  def dhcpHlprFreeV4DhcpPropertyArray(property_array : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ARRAY*) : Void
+    C.DhcpHlprFreeV4DhcpPropertyArray(property_array)
+  end
+
+  def dhcpHlprFindV4DhcpProperty(property_array : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ARRAY*, id : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ID, type__ : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_TYPE) : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY*
+    C.DhcpHlprFindV4DhcpProperty(property_array, id, type__)
+  end
+
+  def dhcpHlprIsV4PolicySingleUC(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : Win32cr::Foundation::BOOL
+    C.DhcpHlprIsV4PolicySingleUC(policy)
+  end
+
+  def dhcpV4QueryPolicyEnforcement(server_ip_address : Win32cr::Foundation::PWSTR, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet_address : UInt32, enabled : Win32cr::Foundation::BOOL*) : UInt32
+    C.DhcpV4QueryPolicyEnforcement(server_ip_address, fGlobalPolicy, subnet_address, enabled)
+  end
+
+  def dhcpV4SetPolicyEnforcement(server_ip_address : Win32cr::Foundation::PWSTR, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet_address : UInt32, enable : Win32cr::Foundation::BOOL) : UInt32
+    C.DhcpV4SetPolicyEnforcement(server_ip_address, fGlobalPolicy, subnet_address, enable)
+  end
+
+  def dhcpHlprIsV4PolicyWellFormed(pPolicy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : Win32cr::Foundation::BOOL
+    C.DhcpHlprIsV4PolicyWellFormed(pPolicy)
+  end
+
+  def dhcpHlprIsV4PolicyValid(pPolicy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : UInt32
+    C.DhcpHlprIsV4PolicyValid(pPolicy)
+  end
+
+  def dhcpV4CreatePolicy(server_ip_address : Win32cr::Foundation::PWSTR, pPolicy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : UInt32
+    C.DhcpV4CreatePolicy(server_ip_address, pPolicy)
+  end
+
+  def dhcpV4GetPolicy(server_ip_address : Win32cr::Foundation::PWSTR, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR, policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY**) : UInt32
+    C.DhcpV4GetPolicy(server_ip_address, fGlobalPolicy, subnet_address, policy_name, policy)
+  end
+
+  def dhcpV4SetPolicy(server_ip_address : Win32cr::Foundation::PWSTR, fields_modified : UInt32, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR, policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : UInt32
+    C.DhcpV4SetPolicy(server_ip_address, fields_modified, fGlobalPolicy, subnet_address, policy_name, policy)
+  end
+
+  def dhcpV4DeletePolicy(server_ip_address : Win32cr::Foundation::PWSTR, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.DhcpV4DeletePolicy(server_ip_address, fGlobalPolicy, subnet_address, policy_name)
+  end
+
+  def dhcpV4EnumPolicies(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet_address : UInt32, enum_info : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_ARRAY**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
+    C.DhcpV4EnumPolicies(server_ip_address, resume_handle, preferred_maximum, fGlobalPolicy, subnet_address, enum_info, elements_read, elements_total)
+  end
+
+  def dhcpV4AddPolicyRange(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR, range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*) : UInt32
+    C.DhcpV4AddPolicyRange(server_ip_address, subnet_address, policy_name, range)
+  end
+
+  def dhcpV4RemovePolicyRange(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR, range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*) : UInt32
+    C.DhcpV4RemovePolicyRange(server_ip_address, subnet_address, policy_name, range)
+  end
+
+  def dhcpV6SetStatelessStoreParams(server_ip_address : Win32cr::Foundation::PWSTR, fServerLevel : Win32cr::Foundation::BOOL, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, field_modified : UInt32, params : Win32cr::NetworkManagement::Dhcp::DHCPV6_STATELESS_PARAMS*) : UInt32
+    C.DhcpV6SetStatelessStoreParams(server_ip_address, fServerLevel, subnet_address, field_modified, params)
+  end
+
+  def dhcpV6GetStatelessStoreParams(server_ip_address : Win32cr::Foundation::PWSTR, fServerLevel : Win32cr::Foundation::BOOL, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, params : Win32cr::NetworkManagement::Dhcp::DHCPV6_STATELESS_PARAMS**) : UInt32
+    C.DhcpV6GetStatelessStoreParams(server_ip_address, fServerLevel, subnet_address, params)
+  end
+
+  def dhcpV6GetStatelessStatistics(server_ip_address : Win32cr::Foundation::PWSTR, stateless_stats : Win32cr::NetworkManagement::Dhcp::DHCPV6_STATELESS_STATS**) : UInt32
+    C.DhcpV6GetStatelessStatistics(server_ip_address, stateless_stats)
+  end
+
+  def dhcpV4CreateClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_PB*) : UInt32
+    C.DhcpV4CreateClientInfo(server_ip_address, client_info)
+  end
+
+  def dhcpV4EnumSubnetClients(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_PB_ARRAY**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
+    C.DhcpV4EnumSubnetClients(server_ip_address, subnet_address, resume_handle, preferred_maximum, client_info, clients_read, clients_total)
+  end
+
+  def dhcpV4GetClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_PB**) : UInt32
+    C.DhcpV4GetClientInfo(server_ip_address, search_info, client_info)
+  end
+
+  def dhcpV6CreateClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V6*) : UInt32
+    C.DhcpV6CreateClientInfo(server_ip_address, client_info)
+  end
+
+  def dhcpV4GetFreeIPAddress(server_ip_address : Win32cr::Foundation::PWSTR, scope_id : UInt32, start_ip : UInt32, end_ip : UInt32, num_free_addr_req : UInt32, ip_addr_list : Win32cr::NetworkManagement::Dhcp::DHCP_IP_ARRAY**) : UInt32
+    C.DhcpV4GetFreeIPAddress(server_ip_address, scope_id, start_ip, end_ip, num_free_addr_req, ip_addr_list)
+  end
+
+  def dhcpV6GetFreeIPAddress(server_ip_address : Win32cr::Foundation::PWSTR, scope_id : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, start_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, end_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, num_free_addr_req : UInt32, ip_addr_list : Win32cr::NetworkManagement::Dhcp::DHCPV6_IP_ARRAY**) : UInt32
+    C.DhcpV6GetFreeIPAddress(server_ip_address, scope_id, start_ip, end_ip, num_free_addr_req, ip_addr_list)
+  end
+
+  def dhcpV4CreateClientInfoEx(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_EX*) : UInt32
+    C.DhcpV4CreateClientInfoEx(server_ip_address, client_info)
+  end
+
+  def dhcpV4EnumSubnetClientsEx(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_EX_ARRAY**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
+    C.DhcpV4EnumSubnetClientsEx(server_ip_address, subnet_address, resume_handle, preferred_maximum, client_info, clients_read, clients_total)
+  end
+
+  def dhcpV4GetClientInfoEx(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_EX**) : UInt32
+    C.DhcpV4GetClientInfoEx(server_ip_address, search_info, client_info)
+  end
+
+  def dhcpV4CreatePolicyEx(server_ip_address : Win32cr::Foundation::PWSTR, policy_ex : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX*) : UInt32
+    C.DhcpV4CreatePolicyEx(server_ip_address, policy_ex)
+  end
+
+  def dhcpV4GetPolicyEx(server_ip_address : Win32cr::Foundation::PWSTR, global_policy : Win32cr::Foundation::BOOL, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR, policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX**) : UInt32
+    C.DhcpV4GetPolicyEx(server_ip_address, global_policy, subnet_address, policy_name, policy)
+  end
+
+  def dhcpV4SetPolicyEx(server_ip_address : Win32cr::Foundation::PWSTR, fields_modified : UInt32, global_policy : Win32cr::Foundation::BOOL, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR, policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX*) : UInt32
+    C.DhcpV4SetPolicyEx(server_ip_address, fields_modified, global_policy, subnet_address, policy_name, policy)
+  end
+
+  def dhcpV4EnumPoliciesEx(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, global_policy : Win32cr::Foundation::BOOL, subnet_address : UInt32, enum_info : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX_ARRAY**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
+    C.DhcpV4EnumPoliciesEx(server_ip_address, resume_handle, preferred_maximum, global_policy, subnet_address, enum_info, elements_read, elements_total)
+  end
+
   @[Link("dhcpcsvc6")]
   @[Link("dhcpcsvc")]
   @[Link("dhcpsapi")]
   lib C
+    # :nodoc:
     fun Dhcpv6CApiInitialize(version : UInt32*) : Void
 
+    # :nodoc:
     fun Dhcpv6CApiCleanup : Void
 
+    # :nodoc:
     fun Dhcpv6RequestParams(forceNewInform : Win32cr::Foundation::BOOL, reserved : Void*, adapterName : Win32cr::Foundation::PWSTR, classId : Win32cr::NetworkManagement::Dhcp::DHCPV6CAPI_CLASSID*, recdParams : Win32cr::NetworkManagement::Dhcp::DHCPV6CAPI_PARAMS_ARRAY, buffer : UInt8*, pSize : UInt32*) : UInt32
 
+    # :nodoc:
     fun Dhcpv6RequestPrefix(adapterName : Win32cr::Foundation::PWSTR, pclassId : Win32cr::NetworkManagement::Dhcp::DHCPV6CAPI_CLASSID*, prefixleaseInfo : Win32cr::NetworkManagement::Dhcp::DHCPV6PrefixLeaseInformation*, pdwTimeToWait : UInt32*) : UInt32
 
+    # :nodoc:
     fun Dhcpv6RenewPrefix(adapterName : Win32cr::Foundation::PWSTR, pclassId : Win32cr::NetworkManagement::Dhcp::DHCPV6CAPI_CLASSID*, prefixleaseInfo : Win32cr::NetworkManagement::Dhcp::DHCPV6PrefixLeaseInformation*, pdwTimeToWait : UInt32*, bValidatePrefix : UInt32) : UInt32
 
+    # :nodoc:
     fun Dhcpv6ReleasePrefix(adapterName : Win32cr::Foundation::PWSTR, classId : Win32cr::NetworkManagement::Dhcp::DHCPV6CAPI_CLASSID*, leaseInfo : Win32cr::NetworkManagement::Dhcp::DHCPV6PrefixLeaseInformation*) : UInt32
 
+    # :nodoc:
     fun DhcpCApiInitialize(version : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpCApiCleanup : Void
 
+    # :nodoc:
     fun DhcpRequestParams(flags : UInt32, reserved : Void*, adapter_name : Win32cr::Foundation::PWSTR, class_id : Win32cr::NetworkManagement::Dhcp::DHCPCAPI_CLASSID*, send_params : Win32cr::NetworkManagement::Dhcp::DHCPCAPI_PARAMS_ARRAY, recd_params : Win32cr::NetworkManagement::Dhcp::DHCPCAPI_PARAMS_ARRAY, buffer : UInt8*, pSize : UInt32*, request_id_str : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpUndoRequestParams(flags : UInt32, reserved : Void*, adapter_name : Win32cr::Foundation::PWSTR, request_id_str : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpRegisterParamChange(flags : UInt32, reserved : Void*, adapter_name : Win32cr::Foundation::PWSTR, class_id : Win32cr::NetworkManagement::Dhcp::DHCPCAPI_CLASSID*, params : Win32cr::NetworkManagement::Dhcp::DHCPCAPI_PARAMS_ARRAY, handle : Void*) : UInt32
 
+    # :nodoc:
     fun DhcpDeRegisterParamChange(flags : UInt32, reserved : Void*, event : Void*) : UInt32
 
+    # :nodoc:
     fun DhcpRemoveDNSRegistrations : UInt32
 
+    # :nodoc:
     fun DhcpGetOriginalSubnetMask(sAdapterName : Win32cr::Foundation::PWSTR, dwSubnetMask : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpAddFilterV4(server_ip_address : Win32cr::Foundation::PWSTR, add_filter_info : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_ADD_INFO*, force_flag : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun DhcpDeleteFilterV4(server_ip_address : Win32cr::Foundation::PWSTR, delete_filter_info : Win32cr::NetworkManagement::Dhcp::DHCP_ADDR_PATTERN*) : UInt32
 
+    # :nodoc:
     fun DhcpSetFilterV4(server_ip_address : Win32cr::Foundation::PWSTR, global_filter_info : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_GLOBAL_INFO*) : UInt32
 
+    # :nodoc:
     fun DhcpGetFilterV4(server_ip_address : Win32cr::Foundation::PWSTR, global_filter_info : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_GLOBAL_INFO*) : UInt32
 
+    # :nodoc:
     fun DhcpEnumFilterV4(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : Win32cr::NetworkManagement::Dhcp::DHCP_ADDR_PATTERN*, preferred_maximum : UInt32, list_type : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_LIST_TYPE, enum_filter_info : Win32cr::NetworkManagement::Dhcp::DHCP_FILTER_ENUM_INFO**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpCreateSubnet(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO*) : UInt32
 
+    # :nodoc:
     fun DhcpSetSubnetInfo(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO*) : UInt32
 
+    # :nodoc:
     fun DhcpGetSubnetInfo(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO**) : UInt32
 
+    # :nodoc:
     fun DhcpEnumSubnets(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, enum_info : Win32cr::NetworkManagement::Dhcp::DHCP_IP_ARRAY**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpAddSubnetElement(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, add_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA*) : UInt32
 
+    # :nodoc:
     fun DhcpEnumSubnetElements(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, enum_element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE, resume_handle : UInt32*, preferred_maximum : UInt32, enum_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_INFO_ARRAY**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpRemoveSubnetElement(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, remove_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA*, force_flag : Win32cr::NetworkManagement::Dhcp::DHCP_FORCE_FLAG) : UInt32
 
+    # :nodoc:
     fun DhcpDeleteSubnet(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, force_flag : Win32cr::NetworkManagement::Dhcp::DHCP_FORCE_FLAG) : UInt32
 
+    # :nodoc:
     fun DhcpCreateOption(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*) : UInt32
 
+    # :nodoc:
     fun DhcpSetOptionInfo(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*) : UInt32
 
+    # :nodoc:
     fun DhcpGetOptionInfo(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION**) : UInt32
 
+    # :nodoc:
     fun DhcpEnumOptions(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_ARRAY**, options_read : UInt32*, options_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpRemoveOption(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32) : UInt32
 
+    # :nodoc:
     fun DhcpSetOptionValue(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA*) : UInt32
 
+    # :nodoc:
     fun DhcpSetOptionValues(server_ip_address : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY*) : UInt32
 
+    # :nodoc:
     fun DhcpGetOptionValue(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE**) : UInt32
 
+    # :nodoc:
     fun DhcpEnumOptionValues(server_ip_address : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, resume_handle : UInt32*, preferred_maximum : UInt32, option_values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY**, options_read : UInt32*, options_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpRemoveOptionValue(server_ip_address : Win32cr::Foundation::PWSTR, option_id : UInt32, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*) : UInt32
 
+    # :nodoc:
     fun DhcpCreateClientInfoVQ(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_VQ*) : UInt32
 
+    # :nodoc:
     fun DhcpSetClientInfoVQ(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_VQ*) : UInt32
 
+    # :nodoc:
     fun DhcpGetClientInfoVQ(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_VQ**) : UInt32
 
+    # :nodoc:
     fun DhcpEnumSubnetClientsVQ(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_ARRAY_VQ**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpEnumSubnetClientsFilterStatusInfo(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpCreateClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO*) : UInt32
 
+    # :nodoc:
     fun DhcpSetClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO*) : UInt32
 
+    # :nodoc:
     fun DhcpGetClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO**) : UInt32
 
+    # :nodoc:
     fun DhcpDeleteClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*) : UInt32
 
+    # :nodoc:
     fun DhcpEnumSubnetClients(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_ARRAY**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpGetClientOptions(server_ip_address : Win32cr::Foundation::PWSTR, client_ip_address : UInt32, client_subnet_mask : UInt32, client_options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_LIST**) : UInt32
 
+    # :nodoc:
     fun DhcpGetMibInfo(server_ip_address : Win32cr::Foundation::PWSTR, mib_info : Win32cr::NetworkManagement::Dhcp::DHCP_MIB_INFO**) : UInt32
 
+    # :nodoc:
     fun DhcpServerSetConfig(server_ip_address : Win32cr::Foundation::PWSTR, fields_to_set : UInt32, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO*) : UInt32
 
+    # :nodoc:
     fun DhcpServerGetConfig(server_ip_address : Win32cr::Foundation::PWSTR, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO**) : UInt32
 
+    # :nodoc:
     fun DhcpScanDatabase(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, fix_flag : UInt32, scan_list : Win32cr::NetworkManagement::Dhcp::DHCP_SCAN_LIST**) : UInt32
 
+    # :nodoc:
     fun DhcpRpcFreeMemory(buffer_pointer : Void*) : Void
 
+    # :nodoc:
     fun DhcpGetVersion(server_ip_address : Win32cr::Foundation::PWSTR, major_version : UInt32*, minor_version : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpAddSubnetElementV4(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, add_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V4*) : UInt32
 
+    # :nodoc:
     fun DhcpEnumSubnetElementsV4(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, enum_element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE, resume_handle : UInt32*, preferred_maximum : UInt32, enum_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpRemoveSubnetElementV4(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, remove_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V4*, force_flag : Win32cr::NetworkManagement::Dhcp::DHCP_FORCE_FLAG) : UInt32
 
+    # :nodoc:
     fun DhcpCreateClientInfoV4(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V4*) : UInt32
 
+    # :nodoc:
     fun DhcpSetClientInfoV4(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V4*) : UInt32
 
+    # :nodoc:
     fun DhcpGetClientInfoV4(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V4**) : UInt32
 
+    # :nodoc:
     fun DhcpEnumSubnetClientsV4(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_ARRAY_V4**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpServerSetConfigV4(server_ip_address : Win32cr::Foundation::PWSTR, fields_to_set : UInt32, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_V4*) : UInt32
 
+    # :nodoc:
     fun DhcpServerGetConfigV4(server_ip_address : Win32cr::Foundation::PWSTR, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_V4**) : UInt32
 
+    # :nodoc:
     fun DhcpSetSuperScopeV4(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, super_scope_name : Win32cr::Foundation::PWSTR, change_existing : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun DhcpDeleteSuperScopeV4(server_ip_address : Win32cr::Foundation::PWSTR, super_scope_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpGetSuperScopeInfoV4(server_ip_address : Win32cr::Foundation::PWSTR, super_scope_table : Win32cr::NetworkManagement::Dhcp::DHCP_SUPER_SCOPE_TABLE**) : UInt32
 
+    # :nodoc:
     fun DhcpEnumSubnetClientsV5(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_ARRAY_V5**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpCreateOptionV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*) : UInt32
 
+    # :nodoc:
     fun DhcpSetOptionInfoV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*) : UInt32
 
+    # :nodoc:
     fun DhcpGetOptionInfoV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION**) : UInt32
 
+    # :nodoc:
     fun DhcpEnumOptionsV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_ARRAY**, options_read : UInt32*, options_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpRemoveOptionV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpSetOptionValueV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA*) : UInt32
 
+    # :nodoc:
     fun DhcpSetOptionValuesV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY*) : UInt32
 
+    # :nodoc:
     fun DhcpGetOptionValueV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE**) : UInt32
 
+    # :nodoc:
     fun DhcpGetOptionValueV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE**) : UInt32
 
+    # :nodoc:
     fun DhcpEnumOptionValuesV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, resume_handle : UInt32*, preferred_maximum : UInt32, option_values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY**, options_read : UInt32*, options_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpRemoveOptionValueV5(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*) : UInt32
 
+    # :nodoc:
     fun DhcpCreateClass(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, class_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO*) : UInt32
 
+    # :nodoc:
     fun DhcpModifyClass(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, class_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO*) : UInt32
 
+    # :nodoc:
     fun DhcpDeleteClass(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, class_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpGetClassInfo(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, partial_class_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO*, filled_class_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO**) : UInt32
 
+    # :nodoc:
     fun DhcpEnumClasses(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, class_info_array : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO_ARRAY**, nRead : UInt32*, nTotal : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpGetAllOptions(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_struct : Win32cr::NetworkManagement::Dhcp::DHCP_ALL_OPTIONS**) : UInt32
 
+    # :nodoc:
     fun DhcpGetAllOptionsV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_struct : Win32cr::NetworkManagement::Dhcp::DHCP_ALL_OPTIONS**) : UInt32
 
+    # :nodoc:
     fun DhcpGetAllOptionValues(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, values : Win32cr::NetworkManagement::Dhcp::DHCP_ALL_OPTION_VALUES**) : UInt32
 
+    # :nodoc:
     fun DhcpGetAllOptionValuesV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*, values : Win32cr::NetworkManagement::Dhcp::DHCP_ALL_OPTION_VALUES**) : UInt32
 
+    # :nodoc:
     fun DhcpEnumServers(flags : UInt32, id_info : Void*, servers : Win32cr::NetworkManagement::Dhcp::DHCPDS_SERVERS**, callback_fn : Void*, callback_data : Void*) : UInt32
 
+    # :nodoc:
     fun DhcpAddServer(flags : UInt32, id_info : Void*, new_server : Win32cr::NetworkManagement::Dhcp::DHCPDS_SERVER*, callback_fn : Void*, callback_data : Void*) : UInt32
 
+    # :nodoc:
     fun DhcpDeleteServer(flags : UInt32, id_info : Void*, new_server : Win32cr::NetworkManagement::Dhcp::DHCPDS_SERVER*, callback_fn : Void*, callback_data : Void*) : UInt32
 
+    # :nodoc:
     fun DhcpGetServerBindingInfo(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, bind_elements_info : Win32cr::NetworkManagement::Dhcp::DHCP_BIND_ELEMENT_ARRAY**) : UInt32
 
+    # :nodoc:
     fun DhcpSetServerBindingInfo(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, bind_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_BIND_ELEMENT_ARRAY*) : UInt32
 
+    # :nodoc:
     fun DhcpAddSubnetElementV5(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, add_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V5*) : UInt32
 
+    # :nodoc:
     fun DhcpEnumSubnetElementsV5(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, enum_element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE, resume_handle : UInt32*, preferred_maximum : UInt32, enum_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpRemoveSubnetElementV5(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, remove_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V5*, force_flag : Win32cr::NetworkManagement::Dhcp::DHCP_FORCE_FLAG) : UInt32
 
+    # :nodoc:
     fun DhcpV4EnumSubnetReservations(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, enum_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_RESERVATION_INFO_ARRAY**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpCreateOptionV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*) : UInt32
 
+    # :nodoc:
     fun DhcpRemoveOptionV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpEnumOptionsV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, options : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_ARRAY**, options_read : UInt32*, options_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpRemoveOptionValueV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*) : UInt32
 
+    # :nodoc:
     fun DhcpGetOptionInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION**) : UInt32
 
+    # :nodoc:
     fun DhcpSetOptionInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, option_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION*) : UInt32
 
+    # :nodoc:
     fun DhcpSetOptionValueV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA*) : UInt32
 
+    # :nodoc:
     fun DhcpGetSubnetInfoVQ(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO_VQ**) : UInt32
 
+    # :nodoc:
     fun DhcpCreateSubnetVQ(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO_VQ*) : UInt32
 
+    # :nodoc:
     fun DhcpSetSubnetInfoVQ(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO_VQ*) : UInt32
 
+    # :nodoc:
     fun DhcpEnumOptionValuesV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, class_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*, resume_handle : UInt32*, preferred_maximum : UInt32, option_values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY**, options_read : UInt32*, options_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpDsInit : UInt32
 
+    # :nodoc:
     fun DhcpDsCleanup : Void
 
+    # :nodoc:
     fun DhcpSetThreadOptions(flags : UInt32, reserved : Void*) : UInt32
 
+    # :nodoc:
     fun DhcpGetThreadOptions(pFlags : UInt32*, reserved : Void*) : UInt32
 
+    # :nodoc:
     fun DhcpServerQueryAttribute(server_ip_addr : Win32cr::Foundation::PWSTR, dwReserved : UInt32, dhcp_attrib_id : UInt32, pDhcpAttrib : Win32cr::NetworkManagement::Dhcp::DHCP_ATTRIB**) : UInt32
 
+    # :nodoc:
     fun DhcpServerQueryAttributes(server_ip_addr : Win32cr::Foundation::PWSTR, dwReserved : UInt32, dwAttribCount : UInt32, pDhcpAttribs : UInt32*, pDhcpAttribArr : Win32cr::NetworkManagement::Dhcp::DHCP_ATTRIB_ARRAY**) : UInt32
 
+    # :nodoc:
     fun DhcpServerRedoAuthorization(server_ip_addr : Win32cr::Foundation::PWSTR, dwReserved : UInt32) : UInt32
 
+    # :nodoc:
     fun DhcpAuditLogSetParams(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, audit_log_dir : Win32cr::Foundation::PWSTR, disk_check_interval : UInt32, max_log_files_size : UInt32, min_space_on_disk : UInt32) : UInt32
 
+    # :nodoc:
     fun DhcpAuditLogGetParams(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, audit_log_dir : Win32cr::Foundation::PWSTR*, disk_check_interval : UInt32*, max_log_files_size : UInt32*, min_space_on_disk : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpServerQueryDnsRegCredentials(server_ip_address : Win32cr::Foundation::PWSTR, uname_size : UInt32, uname : UInt16*, domain_size : UInt32, domain : UInt16*) : UInt32
 
+    # :nodoc:
     fun DhcpServerSetDnsRegCredentials(server_ip_address : Win32cr::Foundation::PWSTR, uname : Win32cr::Foundation::PWSTR, domain : Win32cr::Foundation::PWSTR, passwd : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpServerSetDnsRegCredentialsV5(server_ip_address : Win32cr::Foundation::PWSTR, uname : Win32cr::Foundation::PWSTR, domain : Win32cr::Foundation::PWSTR, passwd : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpServerBackupDatabase(server_ip_address : Win32cr::Foundation::PWSTR, path : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpServerRestoreDatabase(server_ip_address : Win32cr::Foundation::PWSTR, path : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpServerSetConfigVQ(server_ip_address : Win32cr::Foundation::PWSTR, fields_to_set : UInt32, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_VQ*) : UInt32
 
+    # :nodoc:
     fun DhcpServerGetConfigVQ(server_ip_address : Win32cr::Foundation::PWSTR, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_VQ**) : UInt32
 
+    # :nodoc:
     fun DhcpGetServerSpecificStrings(server_ip_address : Win32cr::Foundation::PWSTR, server_specific_strings : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_SPECIFIC_STRINGS**) : UInt32
 
+    # :nodoc:
     fun DhcpServerAuditlogParamsFree(config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_VQ*) : Void
 
+    # :nodoc:
     fun DhcpCreateSubnetV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO_V6*) : UInt32
 
+    # :nodoc:
     fun DhcpDeleteSubnetV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, force_flag : Win32cr::NetworkManagement::Dhcp::DHCP_FORCE_FLAG) : UInt32
 
+    # :nodoc:
     fun DhcpEnumSubnetsV6(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, enum_info : Win32cr::NetworkManagement::Dhcp::DHCPV6_IP_ARRAY**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpAddSubnetElementV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, add_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V6*) : UInt32
 
+    # :nodoc:
     fun DhcpRemoveSubnetElementV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, remove_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_DATA_V6*, force_flag : Win32cr::NetworkManagement::Dhcp::DHCP_FORCE_FLAG) : UInt32
 
+    # :nodoc:
     fun DhcpEnumSubnetElementsV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, enum_element_type : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_TYPE_V6, resume_handle : UInt32*, preferred_maximum : UInt32, enum_element_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpGetSubnetInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO_V6**) : UInt32
 
+    # :nodoc:
     fun DhcpEnumSubnetClientsV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, resume_handle : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_ARRAY_V6**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpServerGetConfigV6(server_ip_address : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_V6**) : UInt32
 
+    # :nodoc:
     fun DhcpServerSetConfigV6(server_ip_address : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO6*, fields_to_set : UInt32, config_info : Win32cr::NetworkManagement::Dhcp::DHCP_SERVER_CONFIG_INFO_V6*) : UInt32
 
+    # :nodoc:
     fun DhcpSetSubnetInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, subnet_info : Win32cr::NetworkManagement::Dhcp::DHCP_SUBNET_INFO_V6*) : UInt32
 
+    # :nodoc:
     fun DhcpGetMibInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, mib_info : Win32cr::NetworkManagement::Dhcp::DHCP_MIB_INFO_V6**) : UInt32
 
+    # :nodoc:
     fun DhcpGetServerBindingInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, bind_elements_info : Win32cr::NetworkManagement::Dhcp::DHCPV6_BIND_ELEMENT_ARRAY**) : UInt32
 
+    # :nodoc:
     fun DhcpSetServerBindingInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, bind_element_info : Win32cr::NetworkManagement::Dhcp::DHCPV6_BIND_ELEMENT_ARRAY*) : UInt32
 
+    # :nodoc:
     fun DhcpSetClientInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V6*) : UInt32
 
+    # :nodoc:
     fun DhcpGetClientInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO_V6*, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V6**) : UInt32
 
+    # :nodoc:
     fun DhcpDeleteClientInfoV6(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO_V6*) : UInt32
 
+    # :nodoc:
     fun DhcpCreateClassV6(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, class_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO_V6*) : UInt32
 
+    # :nodoc:
     fun DhcpModifyClassV6(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, class_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO_V6*) : UInt32
 
+    # :nodoc:
     fun DhcpDeleteClassV6(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, class_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpEnumClassesV6(server_ip_address : Win32cr::Foundation::PWSTR, reserved_must_be_zero : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, class_info_array : Win32cr::NetworkManagement::Dhcp::DHCP_CLASS_INFO_ARRAY_V6**, nRead : UInt32*, nTotal : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpSetSubnetDelayOffer(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, time_delay_in_milliseconds : UInt16) : UInt32
 
+    # :nodoc:
     fun DhcpGetSubnetDelayOffer(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, time_delay_in_milliseconds : UInt16*) : UInt32
 
+    # :nodoc:
     fun DhcpGetMibInfoV5(server_ip_address : Win32cr::Foundation::PWSTR, mib_info : Win32cr::NetworkManagement::Dhcp::DHCP_MIB_INFO_V5**) : UInt32
 
+    # :nodoc:
     fun DhcpAddSecurityGroup(pServer : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpV4GetOptionValue(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, policy_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE**) : UInt32
 
+    # :nodoc:
     fun DhcpV4SetOptionValue(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, policy_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_value : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_DATA*) : UInt32
 
+    # :nodoc:
     fun DhcpV4SetOptionValues(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, policy_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, option_values : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_VALUE_ARRAY*) : UInt32
 
+    # :nodoc:
     fun DhcpV4RemoveOptionValue(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, option_id : UInt32, policy_name : Win32cr::Foundation::PWSTR, vendor_name : Win32cr::Foundation::PWSTR, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*) : UInt32
 
+    # :nodoc:
     fun DhcpV4GetAllOptionValues(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, scope_info : Win32cr::NetworkManagement::Dhcp::DHCP_OPTION_SCOPE_INFO*, values : Win32cr::NetworkManagement::Dhcp::DHCP_ALL_OPTION_VALUES_PB**) : UInt32
 
+    # :nodoc:
     fun DhcpV4FailoverCreateRelationship(server_ip_address : Win32cr::Foundation::PWSTR, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP*) : UInt32
 
+    # :nodoc:
     fun DhcpV4FailoverSetRelationship(server_ip_address : Win32cr::Foundation::PWSTR, flags : UInt32, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP*) : UInt32
 
+    # :nodoc:
     fun DhcpV4FailoverDeleteRelationship(server_ip_address : Win32cr::Foundation::PWSTR, pRelationshipName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpV4FailoverGetRelationship(server_ip_address : Win32cr::Foundation::PWSTR, pRelationshipName : Win32cr::Foundation::PWSTR, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP**) : UInt32
 
+    # :nodoc:
     fun DhcpV4FailoverEnumRelationship(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP_ARRAY**, relationship_read : UInt32*, relationship_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpV4FailoverAddScopeToRelationship(server_ip_address : Win32cr::Foundation::PWSTR, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP*) : UInt32
 
+    # :nodoc:
     fun DhcpV4FailoverDeleteScopeFromRelationship(server_ip_address : Win32cr::Foundation::PWSTR, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP*) : UInt32
 
+    # :nodoc:
     fun DhcpV4FailoverGetScopeRelationship(server_ip_address : Win32cr::Foundation::PWSTR, scope_id : UInt32, pRelationship : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_RELATIONSHIP**) : UInt32
 
+    # :nodoc:
     fun DhcpV4FailoverGetScopeStatistics(server_ip_address : Win32cr::Foundation::PWSTR, scope_id : UInt32, pStats : Win32cr::NetworkManagement::Dhcp::DHCP_FAILOVER_STATISTICS**) : UInt32
 
+    # :nodoc:
     fun DhcpV4FailoverGetClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*, client_info : Win32cr::NetworkManagement::Dhcp::DHCPV4_FAILOVER_CLIENT_INFO**) : UInt32
 
+    # :nodoc:
     fun DhcpV4FailoverGetSystemTime(server_ip_address : Win32cr::Foundation::PWSTR, pTime : UInt32*, pMaxAllowedDeltaTime : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpV4FailoverGetAddressStatus(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, pStatus : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpV4FailoverTriggerAddrAllocation(server_ip_address : Win32cr::Foundation::PWSTR, pFailRelName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpHlprCreateV4Policy(policy_name : Win32cr::Foundation::PWSTR, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet : UInt32, processing_order : UInt32, root_operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_LOGIC_OPER, description : Win32cr::Foundation::PWSTR, enabled : Win32cr::Foundation::BOOL, policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY**) : UInt32
 
+    # :nodoc:
     fun DhcpHlprCreateV4PolicyEx(policy_name : Win32cr::Foundation::PWSTR, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet : UInt32, processing_order : UInt32, root_operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_LOGIC_OPER, description : Win32cr::Foundation::PWSTR, enabled : Win32cr::Foundation::BOOL, policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX**) : UInt32
 
+    # :nodoc:
     fun DhcpHlprAddV4PolicyExpr(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*, parent_expr : UInt32, operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_LOGIC_OPER, expr_index : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpHlprAddV4PolicyCondition(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*, parent_expr : UInt32, type__ : Win32cr::NetworkManagement::Dhcp::DHCP_POL_ATTR_TYPE, option_id : UInt32, sub_option_id : UInt32, vendor_name : Win32cr::Foundation::PWSTR, operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_COMPARATOR, value : UInt8*, value_length : UInt32, condition_index : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpHlprAddV4PolicyRange(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*, range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*) : UInt32
 
+    # :nodoc:
     fun DhcpHlprResetV4PolicyExpr(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : UInt32
 
+    # :nodoc:
     fun DhcpHlprModifyV4PolicyExpr(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*, operator : Win32cr::NetworkManagement::Dhcp::DHCP_POL_LOGIC_OPER) : UInt32
 
+    # :nodoc:
     fun DhcpHlprFreeV4Policy(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : Void
 
+    # :nodoc:
     fun DhcpHlprFreeV4PolicyArray(policy_array : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_ARRAY*) : Void
 
+    # :nodoc:
     fun DhcpHlprFreeV4PolicyEx(policy_ex : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX*) : Void
 
+    # :nodoc:
     fun DhcpHlprFreeV4PolicyExArray(policy_ex_array : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX_ARRAY*) : Void
 
+    # :nodoc:
     fun DhcpHlprFreeV4DhcpProperty(property : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY*) : Void
 
+    # :nodoc:
     fun DhcpHlprFreeV4DhcpPropertyArray(property_array : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ARRAY*) : Void
 
+    # :nodoc:
     fun DhcpHlprFindV4DhcpProperty(property_array : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ARRAY*, id : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_ID, type__ : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY_TYPE) : Win32cr::NetworkManagement::Dhcp::DHCP_PROPERTY*
 
+    # :nodoc:
     fun DhcpHlprIsV4PolicySingleUC(policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DhcpV4QueryPolicyEnforcement(server_ip_address : Win32cr::Foundation::PWSTR, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet_address : UInt32, enabled : Win32cr::Foundation::BOOL*) : UInt32
 
+    # :nodoc:
     fun DhcpV4SetPolicyEnforcement(server_ip_address : Win32cr::Foundation::PWSTR, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet_address : UInt32, enable : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun DhcpHlprIsV4PolicyWellFormed(pPolicy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DhcpHlprIsV4PolicyValid(pPolicy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : UInt32
 
+    # :nodoc:
     fun DhcpV4CreatePolicy(server_ip_address : Win32cr::Foundation::PWSTR, pPolicy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : UInt32
 
+    # :nodoc:
     fun DhcpV4GetPolicy(server_ip_address : Win32cr::Foundation::PWSTR, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR, policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY**) : UInt32
 
+    # :nodoc:
     fun DhcpV4SetPolicy(server_ip_address : Win32cr::Foundation::PWSTR, fields_modified : UInt32, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR, policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY*) : UInt32
 
+    # :nodoc:
     fun DhcpV4DeletePolicy(server_ip_address : Win32cr::Foundation::PWSTR, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DhcpV4EnumPolicies(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, fGlobalPolicy : Win32cr::Foundation::BOOL, subnet_address : UInt32, enum_info : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_ARRAY**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpV4AddPolicyRange(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR, range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*) : UInt32
 
+    # :nodoc:
     fun DhcpV4RemovePolicyRange(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR, range : Win32cr::NetworkManagement::Dhcp::DHCP_IP_RANGE*) : UInt32
 
+    # :nodoc:
     fun DhcpV6SetStatelessStoreParams(server_ip_address : Win32cr::Foundation::PWSTR, fServerLevel : Win32cr::Foundation::BOOL, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, field_modified : UInt32, params : Win32cr::NetworkManagement::Dhcp::DHCPV6_STATELESS_PARAMS*) : UInt32
 
+    # :nodoc:
     fun DhcpV6GetStatelessStoreParams(server_ip_address : Win32cr::Foundation::PWSTR, fServerLevel : Win32cr::Foundation::BOOL, subnet_address : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, params : Win32cr::NetworkManagement::Dhcp::DHCPV6_STATELESS_PARAMS**) : UInt32
 
+    # :nodoc:
     fun DhcpV6GetStatelessStatistics(server_ip_address : Win32cr::Foundation::PWSTR, stateless_stats : Win32cr::NetworkManagement::Dhcp::DHCPV6_STATELESS_STATS**) : UInt32
 
+    # :nodoc:
     fun DhcpV4CreateClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_PB*) : UInt32
 
+    # :nodoc:
     fun DhcpV4EnumSubnetClients(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_PB_ARRAY**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpV4GetClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_PB**) : UInt32
 
+    # :nodoc:
     fun DhcpV6CreateClientInfo(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_V6*) : UInt32
 
+    # :nodoc:
     fun DhcpV4GetFreeIPAddress(server_ip_address : Win32cr::Foundation::PWSTR, scope_id : UInt32, start_ip : UInt32, end_ip : UInt32, num_free_addr_req : UInt32, ip_addr_list : Win32cr::NetworkManagement::Dhcp::DHCP_IP_ARRAY**) : UInt32
 
+    # :nodoc:
     fun DhcpV6GetFreeIPAddress(server_ip_address : Win32cr::Foundation::PWSTR, scope_id : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, start_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, end_ip : Win32cr::NetworkManagement::Dhcp::DHCP_IPV6_ADDRESS, num_free_addr_req : UInt32, ip_addr_list : Win32cr::NetworkManagement::Dhcp::DHCPV6_IP_ARRAY**) : UInt32
 
+    # :nodoc:
     fun DhcpV4CreateClientInfoEx(server_ip_address : Win32cr::Foundation::PWSTR, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_EX*) : UInt32
 
+    # :nodoc:
     fun DhcpV4EnumSubnetClientsEx(server_ip_address : Win32cr::Foundation::PWSTR, subnet_address : UInt32, resume_handle : UInt32*, preferred_maximum : UInt32, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_EX_ARRAY**, clients_read : UInt32*, clients_total : UInt32*) : UInt32
 
+    # :nodoc:
     fun DhcpV4GetClientInfoEx(server_ip_address : Win32cr::Foundation::PWSTR, search_info : Win32cr::NetworkManagement::Dhcp::DHCP_SEARCH_INFO*, client_info : Win32cr::NetworkManagement::Dhcp::DHCP_CLIENT_INFO_EX**) : UInt32
 
+    # :nodoc:
     fun DhcpV4CreatePolicyEx(server_ip_address : Win32cr::Foundation::PWSTR, policy_ex : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX*) : UInt32
 
+    # :nodoc:
     fun DhcpV4GetPolicyEx(server_ip_address : Win32cr::Foundation::PWSTR, global_policy : Win32cr::Foundation::BOOL, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR, policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX**) : UInt32
 
+    # :nodoc:
     fun DhcpV4SetPolicyEx(server_ip_address : Win32cr::Foundation::PWSTR, fields_modified : UInt32, global_policy : Win32cr::Foundation::BOOL, subnet_address : UInt32, policy_name : Win32cr::Foundation::PWSTR, policy : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX*) : UInt32
 
+    # :nodoc:
     fun DhcpV4EnumPoliciesEx(server_ip_address : Win32cr::Foundation::PWSTR, resume_handle : UInt32*, preferred_maximum : UInt32, global_policy : Win32cr::Foundation::BOOL, subnet_address : UInt32, enum_info : Win32cr::NetworkManagement::Dhcp::DHCP_POLICY_EX_ARRAY**, elements_read : UInt32*, elements_total : UInt32*) : UInt32
 
   end

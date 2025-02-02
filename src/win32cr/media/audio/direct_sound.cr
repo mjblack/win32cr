@@ -4,6 +4,7 @@ require "./../../foundation.cr"
 require "./../../system/com.cr"
 
 module Win32cr::Media::Audio::DirectSound
+  extend self
   alias LPDSENUMCALLBACKA = Proc(LibC::GUID*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)
 
   alias LPDSENUMCALLBACKW = Proc(LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)
@@ -1681,26 +1682,76 @@ module Win32cr::Media::Audio::DirectSound
 
   end
 
+  def directSoundCreate(pcGuidDevice : LibC::GUID*, ppDS : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectSoundCreate(pcGuidDevice, ppDS, pUnkOuter)
+  end
+
+  def directSoundEnumerateA(pDSEnumCallback : Win32cr::Media::Audio::DirectSound::LPDSENUMCALLBACKA, pContext : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectSoundEnumerateA(pDSEnumCallback, pContext)
+  end
+
+  def directSoundEnumerateW(pDSEnumCallback : Win32cr::Media::Audio::DirectSound::LPDSENUMCALLBACKW, pContext : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectSoundEnumerateW(pDSEnumCallback, pContext)
+  end
+
+  def directSoundCaptureCreate(pcGuidDevice : LibC::GUID*, ppDSC : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectSoundCaptureCreate(pcGuidDevice, ppDSC, pUnkOuter)
+  end
+
+  def directSoundCaptureEnumerateA(pDSEnumCallback : Win32cr::Media::Audio::DirectSound::LPDSENUMCALLBACKA, pContext : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectSoundCaptureEnumerateA(pDSEnumCallback, pContext)
+  end
+
+  def directSoundCaptureEnumerateW(pDSEnumCallback : Win32cr::Media::Audio::DirectSound::LPDSENUMCALLBACKW, pContext : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectSoundCaptureEnumerateW(pDSEnumCallback, pContext)
+  end
+
+  def directSoundCreate8(pcGuidDevice : LibC::GUID*, ppDS8 : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectSoundCreate8(pcGuidDevice, ppDS8, pUnkOuter)
+  end
+
+  def directSoundCaptureCreate8(pcGuidDevice : LibC::GUID*, ppDSC8 : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectSoundCaptureCreate8(pcGuidDevice, ppDSC8, pUnkOuter)
+  end
+
+  def directSoundFullDuplexCreate(pcGuidCaptureDevice : LibC::GUID*, pcGuidRenderDevice : LibC::GUID*, pcDSCBufferDesc : Win32cr::Media::Audio::DirectSound::DSCBUFFERDESC*, pcDSBufferDesc : Win32cr::Media::Audio::DirectSound::DSBUFFERDESC*, hWnd : Win32cr::Foundation::HWND, dwLevel : UInt32, ppDSFD : Void**, ppDSCBuffer8 : Void**, ppDSBuffer8 : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectSoundFullDuplexCreate(pcGuidCaptureDevice, pcGuidRenderDevice, pcDSCBufferDesc, pcDSBufferDesc, hWnd, dwLevel, ppDSFD, ppDSCBuffer8, ppDSBuffer8, pUnkOuter)
+  end
+
+  def getDeviceID(pGuidSrc : LibC::GUID*, pGuidDest : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.GetDeviceID(pGuidSrc, pGuidDest)
+  end
+
   @[Link("dsound")]
   lib C
+    # :nodoc:
     fun DirectSoundCreate(pcGuidDevice : LibC::GUID*, ppDS : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectSoundEnumerateA(pDSEnumCallback : Win32cr::Media::Audio::DirectSound::LPDSENUMCALLBACKA, pContext : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectSoundEnumerateW(pDSEnumCallback : Win32cr::Media::Audio::DirectSound::LPDSENUMCALLBACKW, pContext : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectSoundCaptureCreate(pcGuidDevice : LibC::GUID*, ppDSC : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectSoundCaptureEnumerateA(pDSEnumCallback : Win32cr::Media::Audio::DirectSound::LPDSENUMCALLBACKA, pContext : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectSoundCaptureEnumerateW(pDSEnumCallback : Win32cr::Media::Audio::DirectSound::LPDSENUMCALLBACKW, pContext : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectSoundCreate8(pcGuidDevice : LibC::GUID*, ppDS8 : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectSoundCaptureCreate8(pcGuidDevice : LibC::GUID*, ppDSC8 : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DirectSoundFullDuplexCreate(pcGuidCaptureDevice : LibC::GUID*, pcGuidRenderDevice : LibC::GUID*, pcDSCBufferDesc : Win32cr::Media::Audio::DirectSound::DSCBUFFERDESC*, pcDSBufferDesc : Win32cr::Media::Audio::DirectSound::DSBUFFERDESC*, hWnd : Win32cr::Foundation::HWND, dwLevel : UInt32, ppDSFD : Void**, ppDSCBuffer8 : Void**, ppDSBuffer8 : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetDeviceID(pGuidSrc : LibC::GUID*, pGuidDest : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
   end

@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./../system/com.cr"
 
 module Win32cr::Networking::BackgroundIntelligentTransferService
+  extend self
   BG_NOTIFY_JOB_TRANSFERRED = 1_u32
   BG_NOTIFY_JOB_ERROR = 2_u32
   BG_NOTIFY_DISABLE = 4_u32

@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./../security.cr"
 
 module Win32cr::Security::AppLocker
+  extend self
   SAFER_SCOPEID_MACHINE = 1_u32
   SAFER_SCOPEID_USER = 2_u32
   SAFER_LEVELID_FULLYTRUSTED = 262144_u32
@@ -180,26 +181,76 @@ module Win32cr::Security::AppLocker
     end
   end
 
+  def saferGetPolicyInformation(dwScopeId : UInt32, safer_policy_info_class : Win32cr::Security::AppLocker::SAFER_POLICY_INFO_CLASS, info_buffer_size : UInt32, info_buffer : Void*, info_buffer_ret_size : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    C.SaferGetPolicyInformation(dwScopeId, safer_policy_info_class, info_buffer_size, info_buffer, info_buffer_ret_size, lpReserved)
+  end
+
+  def saferSetPolicyInformation(dwScopeId : UInt32, safer_policy_info_class : Win32cr::Security::AppLocker::SAFER_POLICY_INFO_CLASS, info_buffer_size : UInt32, info_buffer : Void*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    C.SaferSetPolicyInformation(dwScopeId, safer_policy_info_class, info_buffer_size, info_buffer, lpReserved)
+  end
+
+  def saferCreateLevel(dwScopeId : UInt32, dwLevelId : UInt32, open_flags : UInt32, pLevelHandle : Win32cr::Security::SAFER_LEVEL_HANDLE*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    C.SaferCreateLevel(dwScopeId, dwLevelId, open_flags, pLevelHandle, lpReserved)
+  end
+
+  def saferCloseLevel(hLevelHandle : Win32cr::Security::SAFER_LEVEL_HANDLE) : Win32cr::Foundation::BOOL
+    C.SaferCloseLevel(hLevelHandle)
+  end
+
+  def saferIdentifyLevel(dwNumProperties : UInt32, pCodeProperties : Win32cr::Security::AppLocker::SAFER_CODE_PROPERTIES_V2*, pLevelHandle : Win32cr::Security::SAFER_LEVEL_HANDLE*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    C.SaferIdentifyLevel(dwNumProperties, pCodeProperties, pLevelHandle, lpReserved)
+  end
+
+  def saferComputeTokenFromLevel(level_handle : Win32cr::Security::SAFER_LEVEL_HANDLE, in_access_token : Win32cr::Foundation::HANDLE, out_access_token : Win32cr::Foundation::HANDLE*, dwFlags : Win32cr::Security::AppLocker::SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    C.SaferComputeTokenFromLevel(level_handle, in_access_token, out_access_token, dwFlags, lpReserved)
+  end
+
+  def saferGetLevelInformation(level_handle : Win32cr::Security::SAFER_LEVEL_HANDLE, dwInfoType : Win32cr::Security::AppLocker::SAFER_OBJECT_INFO_CLASS, lpQueryBuffer : Void*, dwInBufferSize : UInt32, lpdwOutBufferSize : UInt32*) : Win32cr::Foundation::BOOL
+    C.SaferGetLevelInformation(level_handle, dwInfoType, lpQueryBuffer, dwInBufferSize, lpdwOutBufferSize)
+  end
+
+  def saferSetLevelInformation(level_handle : Win32cr::Security::SAFER_LEVEL_HANDLE, dwInfoType : Win32cr::Security::AppLocker::SAFER_OBJECT_INFO_CLASS, lpQueryBuffer : Void*, dwInBufferSize : UInt32) : Win32cr::Foundation::BOOL
+    C.SaferSetLevelInformation(level_handle, dwInfoType, lpQueryBuffer, dwInBufferSize)
+  end
+
+  def saferRecordEventLogEntry(hLevel : Win32cr::Security::SAFER_LEVEL_HANDLE, szTargetPath : Win32cr::Foundation::PWSTR, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    C.SaferRecordEventLogEntry(hLevel, szTargetPath, lpReserved)
+  end
+
+  def saferiIsExecutableFileType(szFullPathname : Win32cr::Foundation::PWSTR, bFromShellExecute : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::BOOL
+    C.SaferiIsExecutableFileType(szFullPathname, bFromShellExecute)
+  end
+
   @[Link("advapi32")]
   lib C
+    # :nodoc:
     fun SaferGetPolicyInformation(dwScopeId : UInt32, safer_policy_info_class : Win32cr::Security::AppLocker::SAFER_POLICY_INFO_CLASS, info_buffer_size : UInt32, info_buffer : Void*, info_buffer_ret_size : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SaferSetPolicyInformation(dwScopeId : UInt32, safer_policy_info_class : Win32cr::Security::AppLocker::SAFER_POLICY_INFO_CLASS, info_buffer_size : UInt32, info_buffer : Void*, lpReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SaferCreateLevel(dwScopeId : UInt32, dwLevelId : UInt32, open_flags : UInt32, pLevelHandle : Win32cr::Security::SAFER_LEVEL_HANDLE*, lpReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SaferCloseLevel(hLevelHandle : Win32cr::Security::SAFER_LEVEL_HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SaferIdentifyLevel(dwNumProperties : UInt32, pCodeProperties : Win32cr::Security::AppLocker::SAFER_CODE_PROPERTIES_V2*, pLevelHandle : Win32cr::Security::SAFER_LEVEL_HANDLE*, lpReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SaferComputeTokenFromLevel(level_handle : Win32cr::Security::SAFER_LEVEL_HANDLE, in_access_token : Win32cr::Foundation::HANDLE, out_access_token : Win32cr::Foundation::HANDLE*, dwFlags : Win32cr::Security::AppLocker::SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS, lpReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SaferGetLevelInformation(level_handle : Win32cr::Security::SAFER_LEVEL_HANDLE, dwInfoType : Win32cr::Security::AppLocker::SAFER_OBJECT_INFO_CLASS, lpQueryBuffer : Void*, dwInBufferSize : UInt32, lpdwOutBufferSize : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SaferSetLevelInformation(level_handle : Win32cr::Security::SAFER_LEVEL_HANDLE, dwInfoType : Win32cr::Security::AppLocker::SAFER_OBJECT_INFO_CLASS, lpQueryBuffer : Void*, dwInBufferSize : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SaferRecordEventLogEntry(hLevel : Win32cr::Security::SAFER_LEVEL_HANDLE, szTargetPath : Win32cr::Foundation::PWSTR, lpReserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SaferiIsExecutableFileType(szFullPathname : Win32cr::Foundation::PWSTR, bFromShellExecute : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::BOOL
 
   end

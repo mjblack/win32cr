@@ -5,6 +5,7 @@ require "./../graphics/gdi.cr"
 require "./../ui/windows_and_messaging.cr"
 
 module Win32cr::System::Mmc
+  extend self
   MMC_VER = 512_u32
   MMC_PROP_CHANGEAFFECTSUI = 1_u32
   MMC_PROP_MODIFIABLE = 2_u32

@@ -2,6 +2,7 @@ require "./com.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::RemoteAssistance
+  extend self
   DISPID_EVENT_ON_STATE_CHANGED = 5_u32
   DISPID_EVENT_ON_TERMINATION = 6_u32
   DISPID_EVENT_ON_CONTEXT_DATA = 7_u32

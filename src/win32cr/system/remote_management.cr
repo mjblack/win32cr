@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./com.cr"
 
 module Win32cr::System::RemoteManagement
+  extend self
   alias WSMAN_SHELL_COMPLETION_FUNCTION = Proc(Void*, UInt32, Win32cr::System::RemoteManagement::WSMAN_ERROR*, Win32cr::System::RemoteManagement::WSMAN_SHELL*, Win32cr::System::RemoteManagement::WSMAN_COMMAND*, Win32cr::System::RemoteManagement::WSMAN_OPERATION*, Win32cr::System::RemoteManagement::WSMAN_RESPONSE_DATA*, Void)
 
   alias WSMAN_PLUGIN_RELEASE_SHELL_CONTEXT = Proc(Void*, Void)
@@ -2009,72 +2010,237 @@ module Win32cr::System::RemoteManagement
 
   end
 
+  def wSManInitialize(flags : UInt32, apiHandle : Win32cr::System::RemoteManagement::WSMAN_API**) : UInt32
+    C.WSManInitialize(flags, apiHandle)
+  end
+
+  def wSManDeinitialize(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API*, flags : UInt32) : UInt32
+    C.WSManDeinitialize(apiHandle, flags)
+  end
+
+  def wSManGetErrorMessage(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API*, flags : UInt32, languageCode : Win32cr::Foundation::PWSTR, errorCode : UInt32, messageLength : UInt32, message : UInt16*, messageLengthUsed : UInt32*) : UInt32
+    C.WSManGetErrorMessage(apiHandle, flags, languageCode, errorCode, messageLength, message, messageLengthUsed)
+  end
+
+  def wSManCreateSession(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API*, connection : Win32cr::Foundation::PWSTR, flags : UInt32, serverAuthenticationCredentials : Win32cr::System::RemoteManagement::WSMAN_AUTHENTICATION_CREDENTIALS*, proxyInfo : Win32cr::System::RemoteManagement::WSMAN_PROXY_INFO*, session : Win32cr::System::RemoteManagement::WSMAN_SESSION**) : UInt32
+    C.WSManCreateSession(apiHandle, connection, flags, serverAuthenticationCredentials, proxyInfo, session)
+  end
+
+  def wSManCloseSession(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32) : UInt32
+    C.WSManCloseSession(session, flags)
+  end
+
+  def wSManSetSessionOption(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, option : Win32cr::System::RemoteManagement::WSManSessionOption, data : Win32cr::System::RemoteManagement::WSMAN_DATA*) : UInt32
+    C.WSManSetSessionOption(session, option, data)
+  end
+
+  def wSManGetSessionOptionAsDword(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, option : Win32cr::System::RemoteManagement::WSManSessionOption, value : UInt32*) : UInt32
+    C.WSManGetSessionOptionAsDword(session, option, value)
+  end
+
+  def wSManGetSessionOptionAsString(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, option : Win32cr::System::RemoteManagement::WSManSessionOption, stringLength : UInt32, string : UInt16*, stringLengthUsed : UInt32*) : UInt32
+    C.WSManGetSessionOptionAsString(session, option, stringLength, string, stringLengthUsed)
+  end
+
+  def wSManCloseOperation(operationHandle : Win32cr::System::RemoteManagement::WSMAN_OPERATION*, flags : UInt32) : UInt32
+    C.WSManCloseOperation(operationHandle, flags)
+  end
+
+  def wSManCreateShell(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, startupInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, createXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL**) : Void
+    C.WSManCreateShell(session, flags, resourceUri, startupInfo, options, createXml, async, shell)
+  end
+
+  def wSManRunShellCommand(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, commandLine : Win32cr::Foundation::PWSTR, args : Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND**) : Void
+    C.WSManRunShellCommand(shell, flags, commandLine, args, options, async, command)
+  end
+
+  def wSManSignalShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, code : Win32cr::Foundation::PWSTR, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, signalOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION**) : Void
+    C.WSManSignalShell(shell, command, flags, code, async, signalOperation)
+  end
+
+  def wSManReceiveShellOutput(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, desiredStreamSet : Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, receiveOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION**) : Void
+    C.WSManReceiveShellOutput(shell, command, flags, desiredStreamSet, async, receiveOperation)
+  end
+
+  def wSManSendShellInput(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, streamId : Win32cr::Foundation::PWSTR, streamData : Win32cr::System::RemoteManagement::WSMAN_DATA*, endOfStream : Win32cr::Foundation::BOOL, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, sendOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION**) : Void
+    C.WSManSendShellInput(shell, command, flags, streamId, streamData, endOfStream, async, sendOperation)
+  end
+
+  def wSManCloseCommand(commandHandle : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    C.WSManCloseCommand(commandHandle, flags, async)
+  end
+
+  def wSManCloseShell(shellHandle : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    C.WSManCloseShell(shellHandle, flags, async)
+  end
+
+  def wSManCreateShellEx(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, shellId : Win32cr::Foundation::PWSTR, startupInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, createXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL**) : Void
+    C.WSManCreateShellEx(session, flags, resourceUri, shellId, startupInfo, options, createXml, async, shell)
+  end
+
+  def wSManRunShellCommandEx(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, commandId : Win32cr::Foundation::PWSTR, commandLine : Win32cr::Foundation::PWSTR, args : Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND**) : Void
+    C.WSManRunShellCommandEx(shell, flags, commandId, commandLine, args, options, async, command)
+  end
+
+  def wSManDisconnectShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, disconnectInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_DISCONNECT_INFO*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    C.WSManDisconnectShell(shell, flags, disconnectInfo, async)
+  end
+
+  def wSManReconnectShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    C.WSManReconnectShell(shell, flags, async)
+  end
+
+  def wSManReconnectShellCommand(commandHandle : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    C.WSManReconnectShellCommand(commandHandle, flags, async)
+  end
+
+  def wSManConnectShell(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, shellID : Win32cr::Foundation::PWSTR, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, connectXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL**) : Void
+    C.WSManConnectShell(session, flags, resourceUri, shellID, options, connectXml, async, shell)
+  end
+
+  def wSManConnectShellCommand(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, commandID : Win32cr::Foundation::PWSTR, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, connectXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND**) : Void
+    C.WSManConnectShellCommand(shell, flags, commandID, options, connectXml, async, command)
+  end
+
+  def wSManPluginReportContext(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, flags : UInt32, context : Void*) : UInt32
+    C.WSManPluginReportContext(requestDetails, flags, context)
+  end
+
+  def wSManPluginReceiveResult(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, flags : UInt32, stream : Win32cr::Foundation::PWSTR, streamResult : Win32cr::System::RemoteManagement::WSMAN_DATA*, commandState : Win32cr::Foundation::PWSTR, exitCode : UInt32) : UInt32
+    C.WSManPluginReceiveResult(requestDetails, flags, stream, streamResult, commandState, exitCode)
+  end
+
+  def wSManPluginOperationComplete(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, flags : UInt32, errorCode : UInt32, extendedInformation : Win32cr::Foundation::PWSTR) : UInt32
+    C.WSManPluginOperationComplete(requestDetails, flags, errorCode, extendedInformation)
+  end
+
+  def wSManPluginGetOperationParameters(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, flags : UInt32, data : Win32cr::System::RemoteManagement::WSMAN_DATA*) : UInt32
+    C.WSManPluginGetOperationParameters(requestDetails, flags, data)
+  end
+
+  def wSManPluginGetConfiguration(pluginContext : Void*, flags : UInt32, data : Win32cr::System::RemoteManagement::WSMAN_DATA*) : UInt32
+    C.WSManPluginGetConfiguration(pluginContext, flags, data)
+  end
+
+  def wSManPluginReportCompletion(pluginContext : Void*, flags : UInt32) : UInt32
+    C.WSManPluginReportCompletion(pluginContext, flags)
+  end
+
+  def wSManPluginFreeRequestDetails(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*) : UInt32
+    C.WSManPluginFreeRequestDetails(requestDetails)
+  end
+
+  def wSManPluginAuthzUserComplete(senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, flags : UInt32, userAuthorizationContext : Void*, impersonationToken : Win32cr::Foundation::HANDLE, userIsAdministrator : Win32cr::Foundation::BOOL, errorCode : UInt32, extendedErrorInformation : Win32cr::Foundation::PWSTR) : UInt32
+    C.WSManPluginAuthzUserComplete(senderDetails, flags, userAuthorizationContext, impersonationToken, userIsAdministrator, errorCode, extendedErrorInformation)
+  end
+
+  def wSManPluginAuthzOperationComplete(senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, flags : UInt32, userAuthorizationContext : Void*, errorCode : UInt32, extendedErrorInformation : Win32cr::Foundation::PWSTR) : UInt32
+    C.WSManPluginAuthzOperationComplete(senderDetails, flags, userAuthorizationContext, errorCode, extendedErrorInformation)
+  end
+
+  def wSManPluginAuthzQueryQuotaComplete(senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, flags : UInt32, quota : Win32cr::System::RemoteManagement::WSMAN_AUTHZ_QUOTA*, errorCode : UInt32, extendedErrorInformation : Win32cr::Foundation::PWSTR) : UInt32
+    C.WSManPluginAuthzQueryQuotaComplete(senderDetails, flags, quota, errorCode, extendedErrorInformation)
+  end
+
   @[Link("wsmsvc")]
   lib C
+    # :nodoc:
     fun WSManInitialize(flags : UInt32, apiHandle : Win32cr::System::RemoteManagement::WSMAN_API**) : UInt32
 
+    # :nodoc:
     fun WSManDeinitialize(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API*, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun WSManGetErrorMessage(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API*, flags : UInt32, languageCode : Win32cr::Foundation::PWSTR, errorCode : UInt32, messageLength : UInt32, message : UInt16*, messageLengthUsed : UInt32*) : UInt32
 
+    # :nodoc:
     fun WSManCreateSession(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API*, connection : Win32cr::Foundation::PWSTR, flags : UInt32, serverAuthenticationCredentials : Win32cr::System::RemoteManagement::WSMAN_AUTHENTICATION_CREDENTIALS*, proxyInfo : Win32cr::System::RemoteManagement::WSMAN_PROXY_INFO*, session : Win32cr::System::RemoteManagement::WSMAN_SESSION**) : UInt32
 
+    # :nodoc:
     fun WSManCloseSession(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun WSManSetSessionOption(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, option : Win32cr::System::RemoteManagement::WSManSessionOption, data : Win32cr::System::RemoteManagement::WSMAN_DATA*) : UInt32
 
+    # :nodoc:
     fun WSManGetSessionOptionAsDword(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, option : Win32cr::System::RemoteManagement::WSManSessionOption, value : UInt32*) : UInt32
 
+    # :nodoc:
     fun WSManGetSessionOptionAsString(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, option : Win32cr::System::RemoteManagement::WSManSessionOption, stringLength : UInt32, string : UInt16*, stringLengthUsed : UInt32*) : UInt32
 
+    # :nodoc:
     fun WSManCloseOperation(operationHandle : Win32cr::System::RemoteManagement::WSMAN_OPERATION*, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun WSManCreateShell(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, startupInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, createXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL**) : Void
 
+    # :nodoc:
     fun WSManRunShellCommand(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, commandLine : Win32cr::Foundation::PWSTR, args : Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND**) : Void
 
+    # :nodoc:
     fun WSManSignalShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, code : Win32cr::Foundation::PWSTR, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, signalOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION**) : Void
 
+    # :nodoc:
     fun WSManReceiveShellOutput(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, desiredStreamSet : Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, receiveOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION**) : Void
 
+    # :nodoc:
     fun WSManSendShellInput(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, streamId : Win32cr::Foundation::PWSTR, streamData : Win32cr::System::RemoteManagement::WSMAN_DATA*, endOfStream : Win32cr::Foundation::BOOL, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, sendOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION**) : Void
 
+    # :nodoc:
     fun WSManCloseCommand(commandHandle : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
 
+    # :nodoc:
     fun WSManCloseShell(shellHandle : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
 
+    # :nodoc:
     fun WSManCreateShellEx(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, shellId : Win32cr::Foundation::PWSTR, startupInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, createXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL**) : Void
 
+    # :nodoc:
     fun WSManRunShellCommandEx(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, commandId : Win32cr::Foundation::PWSTR, commandLine : Win32cr::Foundation::PWSTR, args : Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND**) : Void
 
+    # :nodoc:
     fun WSManDisconnectShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, disconnectInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_DISCONNECT_INFO*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
 
+    # :nodoc:
     fun WSManReconnectShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
 
+    # :nodoc:
     fun WSManReconnectShellCommand(commandHandle : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
 
+    # :nodoc:
     fun WSManConnectShell(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, shellID : Win32cr::Foundation::PWSTR, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, connectXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL**) : Void
 
+    # :nodoc:
     fun WSManConnectShellCommand(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, commandID : Win32cr::Foundation::PWSTR, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, connectXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND**) : Void
 
+    # :nodoc:
     fun WSManPluginReportContext(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, flags : UInt32, context : Void*) : UInt32
 
+    # :nodoc:
     fun WSManPluginReceiveResult(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, flags : UInt32, stream : Win32cr::Foundation::PWSTR, streamResult : Win32cr::System::RemoteManagement::WSMAN_DATA*, commandState : Win32cr::Foundation::PWSTR, exitCode : UInt32) : UInt32
 
+    # :nodoc:
     fun WSManPluginOperationComplete(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, flags : UInt32, errorCode : UInt32, extendedInformation : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun WSManPluginGetOperationParameters(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, flags : UInt32, data : Win32cr::System::RemoteManagement::WSMAN_DATA*) : UInt32
 
+    # :nodoc:
     fun WSManPluginGetConfiguration(pluginContext : Void*, flags : UInt32, data : Win32cr::System::RemoteManagement::WSMAN_DATA*) : UInt32
 
+    # :nodoc:
     fun WSManPluginReportCompletion(pluginContext : Void*, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun WSManPluginFreeRequestDetails(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*) : UInt32
 
+    # :nodoc:
     fun WSManPluginAuthzUserComplete(senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, flags : UInt32, userAuthorizationContext : Void*, impersonationToken : Win32cr::Foundation::HANDLE, userIsAdministrator : Win32cr::Foundation::BOOL, errorCode : UInt32, extendedErrorInformation : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun WSManPluginAuthzOperationComplete(senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, flags : UInt32, userAuthorizationContext : Void*, errorCode : UInt32, extendedErrorInformation : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun WSManPluginAuthzQueryQuotaComplete(senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, flags : UInt32, quota : Win32cr::System::RemoteManagement::WSMAN_AUTHZ_QUOTA*, errorCode : UInt32, extendedErrorInformation : Win32cr::Foundation::PWSTR) : UInt32
 
   end

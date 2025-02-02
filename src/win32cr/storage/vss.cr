@@ -4,6 +4,7 @@ require "./../data/xml/ms_xml.cr"
 require "./virtual_disk_service.cr"
 
 module Win32cr::Storage::Vss
+  extend self
   VSS_ASSOC_NO_MAX_SPACE = -1_i32
   VSS_ASSOC_REMOVE = 0_u32
   VSS_E_BAD_STATE = -2147212543_i32
@@ -2180,8 +2181,13 @@ module Win32cr::Storage::Vss
 
   end
 
+  def createVssExpressWriterInternal(ppWriter : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateVssExpressWriterInternal(ppWriter)
+  end
+
   @[Link("vssapi")]
   lib C
+    # :nodoc:
     fun CreateVssExpressWriterInternal(ppWriter : Void**) : Win32cr::Foundation::HRESULT
 
   end

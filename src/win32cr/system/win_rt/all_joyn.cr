@@ -2,6 +2,7 @@ require "./../win_rt.cr"
 require "./../../foundation.cr"
 
 module Win32cr::System::WinRT::AllJoyn
+  extend self
 
 
   @[Extern]

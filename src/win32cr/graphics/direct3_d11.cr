@@ -6,6 +6,7 @@ require "./dxgi.cr"
 require "./../security.cr"
 
 module Win32cr::Graphics::Direct3D11
+  extend self
   alias PFN_D3D11_CREATE_DEVICE = Proc(Void*, Win32cr::Graphics::Direct3D::D3D_DRIVER_TYPE, Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, UInt32, UInt32, Void**, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, Void**, Win32cr::Foundation::HRESULT)
 
   alias PFN_D3D11_CREATE_DEVICE_AND_SWAP_CHAIN = Proc(Void*, Win32cr::Graphics::Direct3D::D3D_DRIVER_TYPE, Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, UInt32, UInt32, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, Void**, Void**, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, Void**, Win32cr::Foundation::HRESULT)
@@ -14145,32 +14146,92 @@ module Win32cr::Graphics::Direct3D11
 
   end
 
+  def d3D11CreateDevice(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D::D3D_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : Win32cr::Graphics::Direct3D11::D3D11_CREATE_DEVICE_FLAG, pFeatureLevels : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, feature_levels : UInt32, sdk_version : UInt32, ppDevice : Void**, pFeatureLevel : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, ppImmediateContext : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D11CreateDevice(pAdapter, driver_type, software, flags, pFeatureLevels, feature_levels, sdk_version, ppDevice, pFeatureLevel, ppImmediateContext)
+  end
+
+  def d3D11CreateDeviceAndSwapChain(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D::D3D_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : Win32cr::Graphics::Direct3D11::D3D11_CREATE_DEVICE_FLAG, pFeatureLevels : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, feature_levels : UInt32, sdk_version : UInt32, pSwapChainDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, ppSwapChain : Void**, ppDevice : Void**, pFeatureLevel : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, ppImmediateContext : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D11CreateDeviceAndSwapChain(pAdapter, driver_type, software, flags, pFeatureLevels, feature_levels, sdk_version, pSwapChainDesc, ppSwapChain, ppDevice, pFeatureLevel, ppImmediateContext)
+  end
+
+  def d3DDisassemble11Trace(pSrcData : Void*, src_data_size : LibC::UIntPtrT, pTrace : Void*, start_step : UInt32, num_steps : UInt32, flags : UInt32, ppDisassembly : Void**) : Win32cr::Foundation::HRESULT
+    C.D3DDisassemble11Trace(pSrcData, src_data_size, pTrace, start_step, num_steps, flags, ppDisassembly)
+  end
+
+  def d3DX11CreateScan(pDeviceContext : Void*, max_element_scan_size : UInt32, max_scan_count : UInt32, ppScan : Void**) : Win32cr::Foundation::HRESULT
+    C.D3DX11CreateScan(pDeviceContext, max_element_scan_size, max_scan_count, ppScan)
+  end
+
+  def d3DX11CreateSegmentedScan(pDeviceContext : Void*, max_element_scan_size : UInt32, ppScan : Void**) : Win32cr::Foundation::HRESULT
+    C.D3DX11CreateSegmentedScan(pDeviceContext, max_element_scan_size, ppScan)
+  end
+
+  def d3DX11CreateFFT(pDeviceContext : Void*, pDesc : Win32cr::Graphics::Direct3D11::D3DX11_FFT_DESC*, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
+    C.D3DX11CreateFFT(pDeviceContext, pDesc, flags, pBufferInfo, ppFFT)
+  end
+
+  def d3DX11CreateFFT1DReal(pDeviceContext : Void*, x : UInt32, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
+    C.D3DX11CreateFFT1DReal(pDeviceContext, x, flags, pBufferInfo, ppFFT)
+  end
+
+  def d3DX11CreateFFT1DComplex(pDeviceContext : Void*, x : UInt32, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
+    C.D3DX11CreateFFT1DComplex(pDeviceContext, x, flags, pBufferInfo, ppFFT)
+  end
+
+  def d3DX11CreateFFT2DReal(pDeviceContext : Void*, x : UInt32, y : UInt32, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
+    C.D3DX11CreateFFT2DReal(pDeviceContext, x, y, flags, pBufferInfo, ppFFT)
+  end
+
+  def d3DX11CreateFFT2DComplex(pDeviceContext : Void*, x : UInt32, y : UInt32, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
+    C.D3DX11CreateFFT2DComplex(pDeviceContext, x, y, flags, pBufferInfo, ppFFT)
+  end
+
+  def d3DX11CreateFFT3DReal(pDeviceContext : Void*, x : UInt32, y : UInt32, z : UInt32, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
+    C.D3DX11CreateFFT3DReal(pDeviceContext, x, y, z, flags, pBufferInfo, ppFFT)
+  end
+
+  def d3DX11CreateFFT3DComplex(pDeviceContext : Void*, x : UInt32, y : UInt32, z : UInt32, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
+    C.D3DX11CreateFFT3DComplex(pDeviceContext, x, y, z, flags, pBufferInfo, ppFFT)
+  end
+
   @[Link("d3d11")]
   @[Link("d3dcompiler_47")]
   @[Link("d3dcsx")]
   lib C
+    # :nodoc:
     fun D3D11CreateDevice(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D::D3D_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : Win32cr::Graphics::Direct3D11::D3D11_CREATE_DEVICE_FLAG, pFeatureLevels : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, feature_levels : UInt32, sdk_version : UInt32, ppDevice : Void**, pFeatureLevel : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, ppImmediateContext : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D11CreateDeviceAndSwapChain(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D::D3D_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : Win32cr::Graphics::Direct3D11::D3D11_CREATE_DEVICE_FLAG, pFeatureLevels : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, feature_levels : UInt32, sdk_version : UInt32, pSwapChainDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, ppSwapChain : Void**, ppDevice : Void**, pFeatureLevel : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, ppImmediateContext : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3DDisassemble11Trace(pSrcData : Void*, src_data_size : LibC::UIntPtrT, pTrace : Void*, start_step : UInt32, num_steps : UInt32, flags : UInt32, ppDisassembly : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3DX11CreateScan(pDeviceContext : Void*, max_element_scan_size : UInt32, max_scan_count : UInt32, ppScan : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3DX11CreateSegmentedScan(pDeviceContext : Void*, max_element_scan_size : UInt32, ppScan : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3DX11CreateFFT(pDeviceContext : Void*, pDesc : Win32cr::Graphics::Direct3D11::D3DX11_FFT_DESC*, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3DX11CreateFFT1DReal(pDeviceContext : Void*, x : UInt32, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3DX11CreateFFT1DComplex(pDeviceContext : Void*, x : UInt32, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3DX11CreateFFT2DReal(pDeviceContext : Void*, x : UInt32, y : UInt32, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3DX11CreateFFT2DComplex(pDeviceContext : Void*, x : UInt32, y : UInt32, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3DX11CreateFFT3DReal(pDeviceContext : Void*, x : UInt32, y : UInt32, z : UInt32, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3DX11CreateFFT3DComplex(pDeviceContext : Void*, x : UInt32, y : UInt32, z : UInt32, flags : UInt32, pBufferInfo : Win32cr::Graphics::Direct3D11::D3DX11_FFT_BUFFER_INFO*, ppFFT : Void**) : Win32cr::Foundation::HRESULT
 
   end

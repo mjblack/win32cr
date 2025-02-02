@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::Storage::OperationRecorder
+  extend self
 
   @[Flags]
   enum OPERATION_START_FLAGS : UInt32
@@ -29,10 +30,20 @@ module Win32cr::Storage::OperationRecorder
     end
   end
 
+  def operationStart(operation_start_params : Win32cr::Storage::OperationRecorder::OPERATION_START_PARAMETERS*) : Win32cr::Foundation::BOOL
+    C.OperationStart(operation_start_params)
+  end
+
+  def operationEnd(operation_end_params : Win32cr::Storage::OperationRecorder::OPERATION_END_PARAMETERS*) : Win32cr::Foundation::BOOL
+    C.OperationEnd(operation_end_params)
+  end
+
   @[Link("advapi32")]
   lib C
+    # :nodoc:
     fun OperationStart(operation_start_params : Win32cr::Storage::OperationRecorder::OPERATION_START_PARAMETERS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OperationEnd(operation_end_params : Win32cr::Storage::OperationRecorder::OPERATION_END_PARAMETERS*) : Win32cr::Foundation::BOOL
 
   end

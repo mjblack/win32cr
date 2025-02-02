@@ -6,6 +6,7 @@ require "./../system/com/structured_storage.cr"
 require "./../ui/windows_and_messaging.cr"
 
 module Win32cr::Media::PictureAcquisition
+  extend self
   PKEY_PhotoAcquire_RelativePathname = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 2_u32)
   PKEY_PhotoAcquire_FinalFilename = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 3_u32)
   PKEY_PhotoAcquire_GroupTag = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 4_u32)

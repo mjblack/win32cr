@@ -5,6 +5,7 @@ require "./../kernel_streaming.cr"
 require "./apo.cr"
 
 module Win32cr::Media::Audio::Endpoints
+  extend self
   DEVPKEY_AudioEndpointPlugin_FactoryCLSID = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x12d83bd7_u32, 0xcf12_u16, 0x46be_u16, StaticArray[0x85_u8, 0x40_u8, 0x81_u8, 0x27_u8, 0x10_u8, 0xd3_u8, 0x2_u8, 0x1c_u8]), 1_u32)
   DEVPKEY_AudioEndpointPlugin_DataFlow = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x12d83bd7_u32, 0xcf12_u16, 0x46be_u16, StaticArray[0x85_u8, 0x40_u8, 0x81_u8, 0x27_u8, 0x10_u8, 0xd3_u8, 0x2_u8, 0x1c_u8]), 2_u32)
   DEVPKEY_AudioEndpointPlugin_PnPInterface = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x12d83bd7_u32, 0xcf12_u16, 0x46be_u16, StaticArray[0x85_u8, 0x40_u8, 0x81_u8, 0x27_u8, 0x10_u8, 0xd3_u8, 0x2_u8, 0x1c_u8]), 3_u32)

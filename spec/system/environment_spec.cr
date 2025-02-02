@@ -4,10 +4,10 @@ require "../../src/win32cr/system/environment"
 module Win32::System
   describe "Win32::System::Environment" do
     var_value = "Environment"
-
+    null_ptr = Pointer(Void).null
 
     describe "Setting environment variable" do
-      result = LibC.SetEnvironmentVariableW("CrystalSpec".to_utf16, var_value.to_utf16)
+      result = LibC.SetEnvironmentVariableW(pwstr("CrystalSpec"), pwstr(var_value))
 
       it "result should be greater than zero" do
         result.should be > 0
@@ -15,9 +15,9 @@ module Win32::System
     end
 
     describe "Reading environment variable" do
-      size = LibC.GetEnvironmentVariableW("CrystalSpec".to_utf16, nil, 0)
+      size = LibC.GetEnvironmentVariableW(pwstr("CrystalSpec"), nil, 0)
       lpwch = Pointer(UInt16).malloc(size)
-      LibC.GetEnvironmentVariableW("CrystalSpec".to_utf16, lpwch, size)
+      LibC.GetEnvironmentVariableW(pwstr("CrystalSpec"), lpwch, size)
       str = String.from_utf16(lpwch).first
 
       it "string should be the previously set variable" do
@@ -26,9 +26,10 @@ module Win32::System
     end
 
     describe "Expanding variable" do
-      size = Win32cr::System::Environment::C.ExpandEnvironmentStringsW("%CrystalSpec%".to_utf16, nil, 0)
+      lpDst = Pointer(UInt16).malloc(sizeof(UInt16))
+      size = SysEnv.expandEnvironmentStringsW(pwstr("%CrystalSpec%"), lpDst, 0_u32)
       lpwch = Pointer(UInt16).malloc(size)
-      Win32cr::System::Environment::C.ExpandEnvironmentStringsW("%CrystalSpec%".to_utf16, lpwch, size)
+      SysEnv.expandEnvironmentStringsW(pwstr("%CrystalSpec%"), lpwch, size)
       str = String.from_utf16(lpwch).first
 
       it "string expanded should be the previously set variable" do

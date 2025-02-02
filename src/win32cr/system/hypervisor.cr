@@ -3,6 +3,7 @@ require "./power.cr"
 require "./host_compute_system.cr"
 
 module Win32cr::System::Hypervisor
+  extend self
   alias WHV_PARTITION_HANDLE = LibC::IntPtrT
   alias WHV_EMULATOR_IO_PORT_CALLBACK = Proc(Void*, Win32cr::System::Hypervisor::WHV_EMULATOR_IO_ACCESS_INFO*, Win32cr::Foundation::HRESULT)
 
@@ -2360,259 +2361,884 @@ module Win32cr::System::Hypervisor
     end
   end
 
+  def wHvGetCapability(capability_code : Win32cr::System::Hypervisor::WHV_CAPABILITY_CODE, capability_buffer : Void*, capability_buffer_size_in_bytes : UInt32, written_size_in_bytes : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WHvGetCapability(capability_code, capability_buffer, capability_buffer_size_in_bytes, written_size_in_bytes)
+  end
+
+  def wHvCreatePartition(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE*) : Win32cr::Foundation::HRESULT
+    C.WHvCreatePartition(partition)
+  end
+
+  def wHvSetupPartition(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    C.WHvSetupPartition(partition)
+  end
+
+  def wHvResetPartition(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    C.WHvResetPartition(partition)
+  end
+
+  def wHvDeletePartition(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    C.WHvDeletePartition(partition)
+  end
+
+  def wHvGetPartitionProperty(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, property_code : Win32cr::System::Hypervisor::WHV_PARTITION_PROPERTY_CODE, property_buffer : Void*, property_buffer_size_in_bytes : UInt32, written_size_in_bytes : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WHvGetPartitionProperty(partition, property_code, property_buffer, property_buffer_size_in_bytes, written_size_in_bytes)
+  end
+
+  def wHvSetPartitionProperty(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, property_code : Win32cr::System::Hypervisor::WHV_PARTITION_PROPERTY_CODE, property_buffer : Void*, property_buffer_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvSetPartitionProperty(partition, property_code, property_buffer, property_buffer_size_in_bytes)
+  end
+
+  def wHvSuspendPartitionTime(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    C.WHvSuspendPartitionTime(partition)
+  end
+
+  def wHvResumePartitionTime(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    C.WHvResumePartitionTime(partition)
+  end
+
+  def wHvMapGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, source_address : Void*, guest_address : UInt64, size_in_bytes : UInt64, flags : Win32cr::System::Hypervisor::WHV_MAP_GPA_RANGE_FLAGS) : Win32cr::Foundation::HRESULT
+    C.WHvMapGpaRange(partition, source_address, guest_address, size_in_bytes, flags)
+  end
+
+  def wHvMapGpaRange2(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, process : Win32cr::Foundation::HANDLE, source_address : Void*, guest_address : UInt64, size_in_bytes : UInt64, flags : Win32cr::System::Hypervisor::WHV_MAP_GPA_RANGE_FLAGS) : Win32cr::Foundation::HRESULT
+    C.WHvMapGpaRange2(partition, process, source_address, guest_address, size_in_bytes, flags)
+  end
+
+  def wHvUnmapGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, guest_address : UInt64, size_in_bytes : UInt64) : Win32cr::Foundation::HRESULT
+    C.WHvUnmapGpaRange(partition, guest_address, size_in_bytes)
+  end
+
+  def wHvTranslateGva(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, gva : UInt64, translate_flags : Win32cr::System::Hypervisor::WHV_TRANSLATE_GVA_FLAGS, translation_result : Win32cr::System::Hypervisor::WHV_TRANSLATE_GVA_RESULT*, gpa : UInt64*) : Win32cr::Foundation::HRESULT
+    C.WHvTranslateGva(partition, vp_index, gva, translate_flags, translation_result, gpa)
+  end
+
+  def wHvCreateVirtualProcessor(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvCreateVirtualProcessor(partition, vp_index, flags)
+  end
+
+  def wHvCreateVirtualProcessor2(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, properties : Win32cr::System::Hypervisor::WHV_VIRTUAL_PROCESSOR_PROPERTY*, property_count : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvCreateVirtualProcessor2(partition, vp_index, properties, property_count)
+  end
+
+  def wHvDeleteVirtualProcessor(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvDeleteVirtualProcessor(partition, vp_index)
+  end
+
+  def wHvRunVirtualProcessor(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, exit_context : Void*, exit_context_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvRunVirtualProcessor(partition, vp_index, exit_context, exit_context_size_in_bytes)
+  end
+
+  def wHvCancelRunVirtualProcessor(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvCancelRunVirtualProcessor(partition, vp_index, flags)
+  end
+
+  def wHvGetVirtualProcessorRegisters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, register_names : Win32cr::System::Hypervisor::WHV_REGISTER_NAME*, register_count : UInt32, register_values : Win32cr::System::Hypervisor::WHV_REGISTER_VALUE*) : Win32cr::Foundation::HRESULT
+    C.WHvGetVirtualProcessorRegisters(partition, vp_index, register_names, register_count, register_values)
+  end
+
+  def wHvSetVirtualProcessorRegisters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, register_names : Win32cr::System::Hypervisor::WHV_REGISTER_NAME*, register_count : UInt32, register_values : Win32cr::System::Hypervisor::WHV_REGISTER_VALUE*) : Win32cr::Foundation::HRESULT
+    C.WHvSetVirtualProcessorRegisters(partition, vp_index, register_names, register_count, register_values)
+  end
+
+  def wHvGetVirtualProcessorInterruptControllerState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state : Void*, state_size : UInt32, written_size : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WHvGetVirtualProcessorInterruptControllerState(partition, vp_index, state, state_size, written_size)
+  end
+
+  def wHvSetVirtualProcessorInterruptControllerState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state : Void*, state_size : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvSetVirtualProcessorInterruptControllerState(partition, vp_index, state, state_size)
+  end
+
+  def wHvRequestInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, interrupt : Win32cr::System::Hypervisor::WHV_INTERRUPT_CONTROL*, interrupt_control_size : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvRequestInterrupt(partition, interrupt, interrupt_control_size)
+  end
+
+  def wHvGetVirtualProcessorXsaveState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, buffer : Void*, buffer_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WHvGetVirtualProcessorXsaveState(partition, vp_index, buffer, buffer_size_in_bytes, bytes_written)
+  end
+
+  def wHvSetVirtualProcessorXsaveState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, buffer : Void*, buffer_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvSetVirtualProcessorXsaveState(partition, vp_index, buffer, buffer_size_in_bytes)
+  end
+
+  def wHvQueryGpaRangeDirtyBitmap(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, guest_address : UInt64, range_size_in_bytes : UInt64, bitmap : UInt64*, bitmap_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvQueryGpaRangeDirtyBitmap(partition, guest_address, range_size_in_bytes, bitmap, bitmap_size_in_bytes)
+  end
+
+  def wHvGetPartitionCounters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, counter_set : Win32cr::System::Hypervisor::WHV_PARTITION_COUNTER_SET, buffer : Void*, buffer_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WHvGetPartitionCounters(partition, counter_set, buffer, buffer_size_in_bytes, bytes_written)
+  end
+
+  def wHvGetVirtualProcessorCounters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, counter_set : Win32cr::System::Hypervisor::WHV_PROCESSOR_COUNTER_SET, buffer : Void*, buffer_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WHvGetVirtualProcessorCounters(partition, vp_index, counter_set, buffer, buffer_size_in_bytes, bytes_written)
+  end
+
+  def wHvGetVirtualProcessorInterruptControllerState2(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state : Void*, state_size : UInt32, written_size : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WHvGetVirtualProcessorInterruptControllerState2(partition, vp_index, state, state_size, written_size)
+  end
+
+  def wHvSetVirtualProcessorInterruptControllerState2(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state : Void*, state_size : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvSetVirtualProcessorInterruptControllerState2(partition, vp_index, state, state_size)
+  end
+
+  def wHvRegisterPartitionDoorbellEvent(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, match_data : Win32cr::System::Hypervisor::WHV_DOORBELL_MATCH_DATA*, event_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.WHvRegisterPartitionDoorbellEvent(partition, match_data, event_handle)
+  end
+
+  def wHvUnregisterPartitionDoorbellEvent(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, match_data : Win32cr::System::Hypervisor::WHV_DOORBELL_MATCH_DATA*) : Win32cr::Foundation::HRESULT
+    C.WHvUnregisterPartitionDoorbellEvent(partition, match_data)
+  end
+
+  def wHvAdviseGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, gpa_ranges : Win32cr::System::Hypervisor::WHV_MEMORY_RANGE_ENTRY*, gpa_ranges_count : UInt32, advice : Win32cr::System::Hypervisor::WHV_ADVISE_GPA_RANGE_CODE, advice_buffer : Void*, advice_buffer_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvAdviseGpaRange(partition, gpa_ranges, gpa_ranges_count, advice, advice_buffer, advice_buffer_size_in_bytes)
+  end
+
+  def wHvReadGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, guest_address : UInt64, controls : Win32cr::System::Hypervisor::WHV_ACCESS_GPA_CONTROLS, data : Void*, data_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvReadGpaRange(partition, vp_index, guest_address, controls, data, data_size_in_bytes)
+  end
+
+  def wHvWriteGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, guest_address : UInt64, controls : Win32cr::System::Hypervisor::WHV_ACCESS_GPA_CONTROLS, data : Void*, data_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvWriteGpaRange(partition, vp_index, guest_address, controls, data, data_size_in_bytes)
+  end
+
+  def wHvSignalVirtualProcessorSynicEvent(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, synic_event : Win32cr::System::Hypervisor::WHV_SYNIC_EVENT_PARAMETERS, newly_signaled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.WHvSignalVirtualProcessorSynicEvent(partition, synic_event, newly_signaled)
+  end
+
+  def wHvGetVirtualProcessorState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state_type : Win32cr::System::Hypervisor::WHV_VIRTUAL_PROCESSOR_STATE_TYPE, buffer : Void*, buffer_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WHvGetVirtualProcessorState(partition, vp_index, state_type, buffer, buffer_size_in_bytes, bytes_written)
+  end
+
+  def wHvSetVirtualProcessorState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state_type : Win32cr::System::Hypervisor::WHV_VIRTUAL_PROCESSOR_STATE_TYPE, buffer : Void*, buffer_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvSetVirtualProcessorState(partition, vp_index, state_type, buffer, buffer_size_in_bytes)
+  end
+
+  def wHvAllocateVpciResource(provider_id : LibC::GUID*, flags : Win32cr::System::Hypervisor::WHV_ALLOCATE_VPCI_RESOURCE_FLAGS, resource_descriptor : Void*, resource_descriptor_size_in_bytes : UInt32, vpci_resource : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.WHvAllocateVpciResource(provider_id, flags, resource_descriptor, resource_descriptor_size_in_bytes, vpci_resource)
+  end
+
+  def wHvCreateVpciDevice(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, vpci_resource : Win32cr::Foundation::HANDLE, flags : Win32cr::System::Hypervisor::WHV_CREATE_VPCI_DEVICE_FLAGS, notification_event_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.WHvCreateVpciDevice(partition, logical_device_id, vpci_resource, flags, notification_event_handle)
+  end
+
+  def wHvDeleteVpciDevice(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64) : Win32cr::Foundation::HRESULT
+    C.WHvDeleteVpciDevice(partition, logical_device_id)
+  end
+
+  def wHvGetVpciDeviceProperty(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, property_code : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_PROPERTY_CODE, property_buffer : Void*, property_buffer_size_in_bytes : UInt32, written_size_in_bytes : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WHvGetVpciDeviceProperty(partition, logical_device_id, property_code, property_buffer, property_buffer_size_in_bytes, written_size_in_bytes)
+  end
+
+  def wHvGetVpciDeviceNotification(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, notification : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_NOTIFICATION*, notification_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvGetVpciDeviceNotification(partition, logical_device_id, notification, notification_size_in_bytes)
+  end
+
+  def wHvMapVpciDeviceMmioRanges(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, mapping_count : UInt32*, mappings : Win32cr::System::Hypervisor::WHV_VPCI_MMIO_MAPPING**) : Win32cr::Foundation::HRESULT
+    C.WHvMapVpciDeviceMmioRanges(partition, logical_device_id, mapping_count, mappings)
+  end
+
+  def wHvUnmapVpciDeviceMmioRanges(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64) : Win32cr::Foundation::HRESULT
+    C.WHvUnmapVpciDeviceMmioRanges(partition, logical_device_id)
+  end
+
+  def wHvSetVpciDevicePowerState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, power_state : Win32cr::System::Power::DEVICE_POWER_STATE) : Win32cr::Foundation::HRESULT
+    C.WHvSetVpciDevicePowerState(partition, logical_device_id, power_state)
+  end
+
+  def wHvReadVpciDeviceRegister(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, register : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_REGISTER*, data : Void*) : Win32cr::Foundation::HRESULT
+    C.WHvReadVpciDeviceRegister(partition, logical_device_id, register, data)
+  end
+
+  def wHvWriteVpciDeviceRegister(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, register : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_REGISTER*, data : Void*) : Win32cr::Foundation::HRESULT
+    C.WHvWriteVpciDeviceRegister(partition, logical_device_id, register, data)
+  end
+
+  def wHvMapVpciDeviceInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, index : UInt32, message_count : UInt32, target : Win32cr::System::Hypervisor::WHV_VPCI_INTERRUPT_TARGET*, msi_address : UInt64*, msi_data : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WHvMapVpciDeviceInterrupt(partition, logical_device_id, index, message_count, target, msi_address, msi_data)
+  end
+
+  def wHvUnmapVpciDeviceInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, index : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvUnmapVpciDeviceInterrupt(partition, logical_device_id, index)
+  end
+
+  def wHvRetargetVpciDeviceInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, msi_address : UInt64, msi_data : UInt32, target : Win32cr::System::Hypervisor::WHV_VPCI_INTERRUPT_TARGET*) : Win32cr::Foundation::HRESULT
+    C.WHvRetargetVpciDeviceInterrupt(partition, logical_device_id, msi_address, msi_data, target)
+  end
+
+  def wHvRequestVpciDeviceInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, msi_address : UInt64, msi_data : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvRequestVpciDeviceInterrupt(partition, logical_device_id, msi_address, msi_data)
+  end
+
+  def wHvGetVpciDeviceInterruptTarget(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, index : UInt32, multi_message_number : UInt32, target : Win32cr::System::Hypervisor::WHV_VPCI_INTERRUPT_TARGET*, target_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WHvGetVpciDeviceInterruptTarget(partition, logical_device_id, index, multi_message_number, target, target_size_in_bytes, bytes_written)
+  end
+
+  def wHvCreateTrigger(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, parameters : Win32cr::System::Hypervisor::WHV_TRIGGER_PARAMETERS*, trigger_handle : Void**, event_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.WHvCreateTrigger(partition, parameters, trigger_handle, event_handle)
+  end
+
+  def wHvUpdateTriggerParameters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, parameters : Win32cr::System::Hypervisor::WHV_TRIGGER_PARAMETERS*, trigger_handle : Void*) : Win32cr::Foundation::HRESULT
+    C.WHvUpdateTriggerParameters(partition, parameters, trigger_handle)
+  end
+
+  def wHvDeleteTrigger(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, trigger_handle : Void*) : Win32cr::Foundation::HRESULT
+    C.WHvDeleteTrigger(partition, trigger_handle)
+  end
+
+  def wHvCreateNotificationPort(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, parameters : Win32cr::System::Hypervisor::WHV_NOTIFICATION_PORT_PARAMETERS*, event_handle : Win32cr::Foundation::HANDLE, port_handle : Void**) : Win32cr::Foundation::HRESULT
+    C.WHvCreateNotificationPort(partition, parameters, event_handle, port_handle)
+  end
+
+  def wHvSetNotificationPortProperty(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, port_handle : Void*, property_code : Win32cr::System::Hypervisor::WHV_NOTIFICATION_PORT_PROPERTY_CODE, property_value : UInt64) : Win32cr::Foundation::HRESULT
+    C.WHvSetNotificationPortProperty(partition, port_handle, property_code, property_value)
+  end
+
+  def wHvDeleteNotificationPort(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, port_handle : Void*) : Win32cr::Foundation::HRESULT
+    C.WHvDeleteNotificationPort(partition, port_handle)
+  end
+
+  def wHvPostVirtualProcessorSynicMessage(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, sint_index : UInt32, message : Void*, message_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    C.WHvPostVirtualProcessorSynicMessage(partition, vp_index, sint_index, message, message_size_in_bytes)
+  end
+
+  def wHvGetVirtualProcessorCpuidOutput(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, eax : UInt32, ecx : UInt32, cpuid_output : Win32cr::System::Hypervisor::WHV_CPUID_OUTPUT*) : Win32cr::Foundation::HRESULT
+    C.WHvGetVirtualProcessorCpuidOutput(partition, vp_index, eax, ecx, cpuid_output)
+  end
+
+  def wHvGetInterruptTargetVpSet(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, destination : UInt64, destination_mode : Win32cr::System::Hypervisor::WHV_INTERRUPT_DESTINATION_MODE, target_vps : UInt32*, vp_count : UInt32, target_vp_count : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WHvGetInterruptTargetVpSet(partition, destination, destination_mode, target_vps, vp_count, target_vp_count)
+  end
+
+  def wHvStartPartitionMigration(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, migration_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.WHvStartPartitionMigration(partition, migration_handle)
+  end
+
+  def wHvCancelPartitionMigration(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    C.WHvCancelPartitionMigration(partition)
+  end
+
+  def wHvCompletePartitionMigration(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    C.WHvCompletePartitionMigration(partition)
+  end
+
+  def wHvAcceptPartitionMigration(migration_handle : Win32cr::Foundation::HANDLE, partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE*) : Win32cr::Foundation::HRESULT
+    C.WHvAcceptPartitionMigration(migration_handle, partition)
+  end
+
+  def wHvEmulatorCreateEmulator(callbacks : Win32cr::System::Hypervisor::WHV_EMULATOR_CALLBACKS*, emulator : Void**) : Win32cr::Foundation::HRESULT
+    C.WHvEmulatorCreateEmulator(callbacks, emulator)
+  end
+
+  def wHvEmulatorDestroyEmulator(emulator : Void*) : Win32cr::Foundation::HRESULT
+    C.WHvEmulatorDestroyEmulator(emulator)
+  end
+
+  def wHvEmulatorTryIoEmulation(emulator : Void*, context : Void*, vp_context : Win32cr::System::Hypervisor::WHV_VP_EXIT_CONTEXT*, io_instruction_context : Win32cr::System::Hypervisor::WHV_X64_IO_PORT_ACCESS_CONTEXT*, emulator_return_status : Win32cr::System::Hypervisor::WHV_EMULATOR_STATUS*) : Win32cr::Foundation::HRESULT
+    C.WHvEmulatorTryIoEmulation(emulator, context, vp_context, io_instruction_context, emulator_return_status)
+  end
+
+  def wHvEmulatorTryMmioEmulation(emulator : Void*, context : Void*, vp_context : Win32cr::System::Hypervisor::WHV_VP_EXIT_CONTEXT*, mmio_instruction_context : Win32cr::System::Hypervisor::WHV_MEMORY_ACCESS_CONTEXT*, emulator_return_status : Win32cr::System::Hypervisor::WHV_EMULATOR_STATUS*) : Win32cr::Foundation::HRESULT
+    C.WHvEmulatorTryMmioEmulation(emulator, context, vp_context, mmio_instruction_context, emulator_return_status)
+  end
+
+  def hdvInitializeDeviceHost(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, deviceHostHandle : Void**) : Win32cr::Foundation::HRESULT
+    C.HdvInitializeDeviceHost(computeSystem, deviceHostHandle)
+  end
+
+  def hdvTeardownDeviceHost(deviceHostHandle : Void*) : Win32cr::Foundation::HRESULT
+    C.HdvTeardownDeviceHost(deviceHostHandle)
+  end
+
+  def hdvCreateDeviceInstance(deviceHostHandle : Void*, deviceType : Win32cr::System::Hypervisor::HDV_DEVICE_TYPE, deviceClassId : LibC::GUID*, deviceInstanceId : LibC::GUID*, deviceInterface : Void*, deviceContext : Void*, deviceHandle : Void**) : Win32cr::Foundation::HRESULT
+    C.HdvCreateDeviceInstance(deviceHostHandle, deviceType, deviceClassId, deviceInstanceId, deviceInterface, deviceContext, deviceHandle)
+  end
+
+  def hdvReadGuestMemory(requestor : Void*, guestPhysicalAddress : UInt64, byteCount : UInt32, buffer : UInt8*) : Win32cr::Foundation::HRESULT
+    C.HdvReadGuestMemory(requestor, guestPhysicalAddress, byteCount, buffer)
+  end
+
+  def hdvWriteGuestMemory(requestor : Void*, guestPhysicalAddress : UInt64, byteCount : UInt32, buffer : UInt8*) : Win32cr::Foundation::HRESULT
+    C.HdvWriteGuestMemory(requestor, guestPhysicalAddress, byteCount, buffer)
+  end
+
+  def hdvCreateGuestMemoryAperture(requestor : Void*, guestPhysicalAddress : UInt64, byteCount : UInt32, writeProtected : Win32cr::Foundation::BOOL, mappedAddress : Void**) : Win32cr::Foundation::HRESULT
+    C.HdvCreateGuestMemoryAperture(requestor, guestPhysicalAddress, byteCount, writeProtected, mappedAddress)
+  end
+
+  def hdvDestroyGuestMemoryAperture(requestor : Void*, mappedAddress : Void*) : Win32cr::Foundation::HRESULT
+    C.HdvDestroyGuestMemoryAperture(requestor, mappedAddress)
+  end
+
+  def hdvDeliverGuestInterrupt(requestor : Void*, msiAddress : UInt64, msiData : UInt32) : Win32cr::Foundation::HRESULT
+    C.HdvDeliverGuestInterrupt(requestor, msiAddress, msiData)
+  end
+
+  def hdvRegisterDoorbell(requestor : Void*, bar_index : Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, bar_offset : UInt64, trigger_value : UInt64, flags : UInt64, doorbell_event : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.HdvRegisterDoorbell(requestor, bar_index, bar_offset, trigger_value, flags, doorbell_event)
+  end
+
+  def hdvUnregisterDoorbell(requestor : Void*, bar_index : Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, bar_offset : UInt64, trigger_value : UInt64, flags : UInt64) : Win32cr::Foundation::HRESULT
+    C.HdvUnregisterDoorbell(requestor, bar_index, bar_offset, trigger_value, flags)
+  end
+
+  def hdvCreateSectionBackedMmioRange(requestor : Void*, barIndex : Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, offsetInPages : UInt64, lengthInPages : UInt64, mapping_flags : Win32cr::System::Hypervisor::HDV_MMIO_MAPPING_FLAGS, sectionHandle : Win32cr::Foundation::HANDLE, sectionOffsetInPages : UInt64) : Win32cr::Foundation::HRESULT
+    C.HdvCreateSectionBackedMmioRange(requestor, barIndex, offsetInPages, lengthInPages, mapping_flags, sectionHandle, sectionOffsetInPages)
+  end
+
+  def hdvDestroySectionBackedMmioRange(requestor : Void*, barIndex : Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, offsetInPages : UInt64) : Win32cr::Foundation::HRESULT
+    C.HdvDestroySectionBackedMmioRange(requestor, barIndex, offsetInPages)
+  end
+
+  def locateSavedStateFiles(vmName : Win32cr::Foundation::PWSTR, snapshotName : Win32cr::Foundation::PWSTR, binPath : Win32cr::Foundation::PWSTR*, vsvPath : Win32cr::Foundation::PWSTR*, vmrsPath : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.LocateSavedStateFiles(vmName, snapshotName, binPath, vsvPath, vmrsPath)
+  end
+
+  def loadSavedStateFile(vmrsFile : Win32cr::Foundation::PWSTR, vmSavedStateDumpHandle : Void**) : Win32cr::Foundation::HRESULT
+    C.LoadSavedStateFile(vmrsFile, vmSavedStateDumpHandle)
+  end
+
+  def applyPendingSavedStateFileReplayLog(vmrsFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.ApplyPendingSavedStateFileReplayLog(vmrsFile)
+  end
+
+  def loadSavedStateFiles(binFile : Win32cr::Foundation::PWSTR, vsvFile : Win32cr::Foundation::PWSTR, vmSavedStateDumpHandle : Void**) : Win32cr::Foundation::HRESULT
+    C.LoadSavedStateFiles(binFile, vsvFile, vmSavedStateDumpHandle)
+  end
+
+  def releaseSavedStateFiles(vmSavedStateDumpHandle : Void*) : Win32cr::Foundation::HRESULT
+    C.ReleaseSavedStateFiles(vmSavedStateDumpHandle)
+  end
+
+  def getGuestEnabledVirtualTrustLevels(vmSavedStateDumpHandle : Void*, virtualTrustLevels : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetGuestEnabledVirtualTrustLevels(vmSavedStateDumpHandle, virtualTrustLevels)
+  end
+
+  def getGuestOsInfo(vmSavedStateDumpHandle : Void*, virtualTrustLevel : UInt8, guestOsInfo : Win32cr::System::Hypervisor::GUEST_OS_INFO*) : Win32cr::Foundation::HRESULT
+    C.GetGuestOsInfo(vmSavedStateDumpHandle, virtualTrustLevel, guestOsInfo)
+  end
+
+  def getVpCount(vmSavedStateDumpHandle : Void*, vpCount : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetVpCount(vmSavedStateDumpHandle, vpCount)
+  end
+
+  def getArchitecture(vmSavedStateDumpHandle : Void*, vpId : UInt32, architecture : Win32cr::System::Hypervisor::VIRTUAL_PROCESSOR_ARCH*) : Win32cr::Foundation::HRESULT
+    C.GetArchitecture(vmSavedStateDumpHandle, vpId, architecture)
+  end
+
+  def forceArchitecture(vmSavedStateDumpHandle : Void*, vpId : UInt32, architecture : Win32cr::System::Hypervisor::VIRTUAL_PROCESSOR_ARCH) : Win32cr::Foundation::HRESULT
+    C.ForceArchitecture(vmSavedStateDumpHandle, vpId, architecture)
+  end
+
+  def getActiveVirtualTrustLevel(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualTrustLevel : UInt8*) : Win32cr::Foundation::HRESULT
+    C.GetActiveVirtualTrustLevel(vmSavedStateDumpHandle, vpId, virtualTrustLevel)
+  end
+
+  def getEnabledVirtualTrustLevels(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualTrustLevels : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetEnabledVirtualTrustLevels(vmSavedStateDumpHandle, vpId, virtualTrustLevels)
+  end
+
+  def forceActiveVirtualTrustLevel(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualTrustLevel : UInt8) : Win32cr::Foundation::HRESULT
+    C.ForceActiveVirtualTrustLevel(vmSavedStateDumpHandle, vpId, virtualTrustLevel)
+  end
+
+  def isActiveVirtualTrustLevelEnabled(vmSavedStateDumpHandle : Void*, vpId : UInt32, activeVirtualTrustLevelEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.IsActiveVirtualTrustLevelEnabled(vmSavedStateDumpHandle, vpId, activeVirtualTrustLevelEnabled)
+  end
+
+  def isNestedVirtualizationEnabled(vmSavedStateDumpHandle : Void*, enabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.IsNestedVirtualizationEnabled(vmSavedStateDumpHandle, enabled)
+  end
+
+  def getNestedVirtualizationMode(vmSavedStateDumpHandle : Void*, vpId : UInt32, enabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.GetNestedVirtualizationMode(vmSavedStateDumpHandle, vpId, enabled)
+  end
+
+  def forceNestedHostMode(vmSavedStateDumpHandle : Void*, vpId : UInt32, hostMode : Win32cr::Foundation::BOOL, oldMode : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.ForceNestedHostMode(vmSavedStateDumpHandle, vpId, hostMode, oldMode)
+  end
+
+  def inKernelSpace(vmSavedStateDumpHandle : Void*, vpId : UInt32, inKernelSpace : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.InKernelSpace(vmSavedStateDumpHandle, vpId, inKernelSpace)
+  end
+
+  def getRegisterValue(vmSavedStateDumpHandle : Void*, vpId : UInt32, registerId : UInt32, registerValue : Win32cr::System::Hypervisor::VIRTUAL_PROCESSOR_REGISTER*) : Win32cr::Foundation::HRESULT
+    C.GetRegisterValue(vmSavedStateDumpHandle, vpId, registerId, registerValue)
+  end
+
+  def getPagingMode(vmSavedStateDumpHandle : Void*, vpId : UInt32, pagingMode : Win32cr::System::Hypervisor::PAGING_MODE*) : Win32cr::Foundation::HRESULT
+    C.GetPagingMode(vmSavedStateDumpHandle, vpId, pagingMode)
+  end
+
+  def forcePagingMode(vmSavedStateDumpHandle : Void*, vpId : UInt32, pagingMode : Win32cr::System::Hypervisor::PAGING_MODE) : Win32cr::Foundation::HRESULT
+    C.ForcePagingMode(vmSavedStateDumpHandle, vpId, pagingMode)
+  end
+
+  def readGuestPhysicalAddress(vmSavedStateDumpHandle : Void*, physicalAddress : UInt64, buffer : Void*, bufferSize : UInt32, bytesRead : UInt32*) : Win32cr::Foundation::HRESULT
+    C.ReadGuestPhysicalAddress(vmSavedStateDumpHandle, physicalAddress, buffer, bufferSize, bytesRead)
+  end
+
+  def guestVirtualAddressToPhysicalAddress(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualAddress : UInt64, physicalAddress : UInt64*, unmappedRegionSize : UInt64*) : Win32cr::Foundation::HRESULT
+    C.GuestVirtualAddressToPhysicalAddress(vmSavedStateDumpHandle, vpId, virtualAddress, physicalAddress, unmappedRegionSize)
+  end
+
+  def getGuestPhysicalMemoryChunks(vmSavedStateDumpHandle : Void*, memoryChunkPageSize : UInt64*, memoryChunks : Win32cr::System::Hypervisor::GPA_MEMORY_CHUNK*, memoryChunkCount : UInt64*) : Win32cr::Foundation::HRESULT
+    C.GetGuestPhysicalMemoryChunks(vmSavedStateDumpHandle, memoryChunkPageSize, memoryChunks, memoryChunkCount)
+  end
+
+  def guestPhysicalAddressToRawSavedMemoryOffset(vmSavedStateDumpHandle : Void*, physicalAddress : UInt64, rawSavedMemoryOffset : UInt64*) : Win32cr::Foundation::HRESULT
+    C.GuestPhysicalAddressToRawSavedMemoryOffset(vmSavedStateDumpHandle, physicalAddress, rawSavedMemoryOffset)
+  end
+
+  def readGuestRawSavedMemory(vmSavedStateDumpHandle : Void*, rawSavedMemoryOffset : UInt64, buffer : Void*, bufferSize : UInt32, bytesRead : UInt32*) : Win32cr::Foundation::HRESULT
+    C.ReadGuestRawSavedMemory(vmSavedStateDumpHandle, rawSavedMemoryOffset, buffer, bufferSize, bytesRead)
+  end
+
+  def getGuestRawSavedMemorySize(vmSavedStateDumpHandle : Void*, guestRawSavedMemorySize : UInt64*) : Win32cr::Foundation::HRESULT
+    C.GetGuestRawSavedMemorySize(vmSavedStateDumpHandle, guestRawSavedMemorySize)
+  end
+
+  def setMemoryBlockCacheLimit(vmSavedStateDumpHandle : Void*, memoryBlockCacheLimit : UInt64) : Win32cr::Foundation::HRESULT
+    C.SetMemoryBlockCacheLimit(vmSavedStateDumpHandle, memoryBlockCacheLimit)
+  end
+
+  def getMemoryBlockCacheLimit(vmSavedStateDumpHandle : Void*, memoryBlockCacheLimit : UInt64*) : Win32cr::Foundation::HRESULT
+    C.GetMemoryBlockCacheLimit(vmSavedStateDumpHandle, memoryBlockCacheLimit)
+  end
+
+  def applyGuestMemoryFix(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualAddress : UInt64, fixBuffer : Void*, fixBufferSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.ApplyGuestMemoryFix(vmSavedStateDumpHandle, vpId, virtualAddress, fixBuffer, fixBufferSize)
+  end
+
+  def loadSavedStateSymbolProvider(vmSavedStateDumpHandle : Void*, userSymbols : Win32cr::Foundation::PWSTR, force : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.LoadSavedStateSymbolProvider(vmSavedStateDumpHandle, userSymbols, force)
+  end
+
+  def releaseSavedStateSymbolProvider(vmSavedStateDumpHandle : Void*) : Win32cr::Foundation::HRESULT
+    C.ReleaseSavedStateSymbolProvider(vmSavedStateDumpHandle)
+  end
+
+  def getSavedStateSymbolProviderHandle(vmSavedStateDumpHandle : Void*) : Win32cr::Foundation::HANDLE
+    C.GetSavedStateSymbolProviderHandle(vmSavedStateDumpHandle)
+  end
+
+  def setSavedStateSymbolProviderDebugInfoCallback(vmSavedStateDumpHandle : Void*, callback : Win32cr::System::Hypervisor::GUEST_SYMBOLS_PROVIDER_DEBUG_INFO_CALLBACK) : Win32cr::Foundation::HRESULT
+    C.SetSavedStateSymbolProviderDebugInfoCallback(vmSavedStateDumpHandle, callback)
+  end
+
+  def loadSavedStateModuleSymbols(vmSavedStateDumpHandle : Void*, imageName : Win32cr::Foundation::PSTR, moduleName : Win32cr::Foundation::PSTR, baseAddress : UInt64, sizeOfBase : UInt32) : Win32cr::Foundation::HRESULT
+    C.LoadSavedStateModuleSymbols(vmSavedStateDumpHandle, imageName, moduleName, baseAddress, sizeOfBase)
+  end
+
+  def loadSavedStateModuleSymbolsEx(vmSavedStateDumpHandle : Void*, imageName : Win32cr::Foundation::PSTR, imageTimestamp : UInt32, moduleName : Win32cr::Foundation::PSTR, baseAddress : UInt64, sizeOfBase : UInt32) : Win32cr::Foundation::HRESULT
+    C.LoadSavedStateModuleSymbolsEx(vmSavedStateDumpHandle, imageName, imageTimestamp, moduleName, baseAddress, sizeOfBase)
+  end
+
+  def resolveSavedStateGlobalVariableAddress(vmSavedStateDumpHandle : Void*, vpId : UInt32, globalName : Win32cr::Foundation::PSTR, virtualAddress : UInt64*, size : UInt32*) : Win32cr::Foundation::HRESULT
+    C.ResolveSavedStateGlobalVariableAddress(vmSavedStateDumpHandle, vpId, globalName, virtualAddress, size)
+  end
+
+  def readSavedStateGlobalVariable(vmSavedStateDumpHandle : Void*, vpId : UInt32, globalName : Win32cr::Foundation::PSTR, buffer : Void*, bufferSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.ReadSavedStateGlobalVariable(vmSavedStateDumpHandle, vpId, globalName, buffer, bufferSize)
+  end
+
+  def getSavedStateSymbolTypeSize(vmSavedStateDumpHandle : Void*, vpId : UInt32, typeName : Win32cr::Foundation::PSTR, size : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetSavedStateSymbolTypeSize(vmSavedStateDumpHandle, vpId, typeName, size)
+  end
+
+  def findSavedStateSymbolFieldInType(vmSavedStateDumpHandle : Void*, vpId : UInt32, typeName : Win32cr::Foundation::PSTR, fieldName : Win32cr::Foundation::PWSTR, offset : UInt32*, found : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.FindSavedStateSymbolFieldInType(vmSavedStateDumpHandle, vpId, typeName, fieldName, offset, found)
+  end
+
+  def getSavedStateSymbolFieldInfo(vmSavedStateDumpHandle : Void*, vpId : UInt32, typeName : Win32cr::Foundation::PSTR, typeFieldInfoMap : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.GetSavedStateSymbolFieldInfo(vmSavedStateDumpHandle, vpId, typeName, typeFieldInfoMap)
+  end
+
+  def scanMemoryForDosImages(vmSavedStateDumpHandle : Void*, vpId : UInt32, startAddress : UInt64, endAddress : UInt64, callbackContext : Void*, foundImageCallback : Win32cr::System::Hypervisor::FOUND_IMAGE_CALLBACK, standaloneAddress : UInt64*, standaloneAddressCount : UInt32) : Win32cr::Foundation::HRESULT
+    C.ScanMemoryForDosImages(vmSavedStateDumpHandle, vpId, startAddress, endAddress, callbackContext, foundImageCallback, standaloneAddress, standaloneAddressCount)
+  end
+
+  def callStackUnwind(vmSavedStateDumpHandle : Void*, vpId : UInt32, imageInfo : Win32cr::System::Hypervisor::MODULE_INFO*, imageInfoCount : UInt32, frameCount : UInt32, callStack : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.CallStackUnwind(vmSavedStateDumpHandle, vpId, imageInfo, imageInfoCount, frameCount, callStack)
+  end
+
   @[Link("winhvplatform")]
   @[Link("winhvemulation")]
   @[Link("vmdevicehost")]
   @[Link("vmsavedstatedumpprovider")]
   lib C
+    # :nodoc:
     fun WHvGetCapability(capability_code : Win32cr::System::Hypervisor::WHV_CAPABILITY_CODE, capability_buffer : Void*, capability_buffer_size_in_bytes : UInt32, written_size_in_bytes : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvCreatePartition(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvSetupPartition(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvResetPartition(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvDeletePartition(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvGetPartitionProperty(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, property_code : Win32cr::System::Hypervisor::WHV_PARTITION_PROPERTY_CODE, property_buffer : Void*, property_buffer_size_in_bytes : UInt32, written_size_in_bytes : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvSetPartitionProperty(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, property_code : Win32cr::System::Hypervisor::WHV_PARTITION_PROPERTY_CODE, property_buffer : Void*, property_buffer_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvSuspendPartitionTime(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvResumePartitionTime(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvMapGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, source_address : Void*, guest_address : UInt64, size_in_bytes : UInt64, flags : Win32cr::System::Hypervisor::WHV_MAP_GPA_RANGE_FLAGS) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvMapGpaRange2(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, process : Win32cr::Foundation::HANDLE, source_address : Void*, guest_address : UInt64, size_in_bytes : UInt64, flags : Win32cr::System::Hypervisor::WHV_MAP_GPA_RANGE_FLAGS) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvUnmapGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, guest_address : UInt64, size_in_bytes : UInt64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvTranslateGva(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, gva : UInt64, translate_flags : Win32cr::System::Hypervisor::WHV_TRANSLATE_GVA_FLAGS, translation_result : Win32cr::System::Hypervisor::WHV_TRANSLATE_GVA_RESULT*, gpa : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvCreateVirtualProcessor(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvCreateVirtualProcessor2(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, properties : Win32cr::System::Hypervisor::WHV_VIRTUAL_PROCESSOR_PROPERTY*, property_count : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvDeleteVirtualProcessor(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvRunVirtualProcessor(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, exit_context : Void*, exit_context_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvCancelRunVirtualProcessor(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvGetVirtualProcessorRegisters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, register_names : Win32cr::System::Hypervisor::WHV_REGISTER_NAME*, register_count : UInt32, register_values : Win32cr::System::Hypervisor::WHV_REGISTER_VALUE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvSetVirtualProcessorRegisters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, register_names : Win32cr::System::Hypervisor::WHV_REGISTER_NAME*, register_count : UInt32, register_values : Win32cr::System::Hypervisor::WHV_REGISTER_VALUE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvGetVirtualProcessorInterruptControllerState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state : Void*, state_size : UInt32, written_size : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvSetVirtualProcessorInterruptControllerState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state : Void*, state_size : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvRequestInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, interrupt : Win32cr::System::Hypervisor::WHV_INTERRUPT_CONTROL*, interrupt_control_size : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvGetVirtualProcessorXsaveState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, buffer : Void*, buffer_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvSetVirtualProcessorXsaveState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, buffer : Void*, buffer_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvQueryGpaRangeDirtyBitmap(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, guest_address : UInt64, range_size_in_bytes : UInt64, bitmap : UInt64*, bitmap_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvGetPartitionCounters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, counter_set : Win32cr::System::Hypervisor::WHV_PARTITION_COUNTER_SET, buffer : Void*, buffer_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvGetVirtualProcessorCounters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, counter_set : Win32cr::System::Hypervisor::WHV_PROCESSOR_COUNTER_SET, buffer : Void*, buffer_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvGetVirtualProcessorInterruptControllerState2(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state : Void*, state_size : UInt32, written_size : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvSetVirtualProcessorInterruptControllerState2(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state : Void*, state_size : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvRegisterPartitionDoorbellEvent(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, match_data : Win32cr::System::Hypervisor::WHV_DOORBELL_MATCH_DATA*, event_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvUnregisterPartitionDoorbellEvent(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, match_data : Win32cr::System::Hypervisor::WHV_DOORBELL_MATCH_DATA*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvAdviseGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, gpa_ranges : Win32cr::System::Hypervisor::WHV_MEMORY_RANGE_ENTRY*, gpa_ranges_count : UInt32, advice : Win32cr::System::Hypervisor::WHV_ADVISE_GPA_RANGE_CODE, advice_buffer : Void*, advice_buffer_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvReadGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, guest_address : UInt64, controls : Win32cr::System::Hypervisor::WHV_ACCESS_GPA_CONTROLS, data : Void*, data_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvWriteGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, guest_address : UInt64, controls : Win32cr::System::Hypervisor::WHV_ACCESS_GPA_CONTROLS, data : Void*, data_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvSignalVirtualProcessorSynicEvent(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, synic_event : Win32cr::System::Hypervisor::WHV_SYNIC_EVENT_PARAMETERS, newly_signaled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvGetVirtualProcessorState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state_type : Win32cr::System::Hypervisor::WHV_VIRTUAL_PROCESSOR_STATE_TYPE, buffer : Void*, buffer_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvSetVirtualProcessorState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state_type : Win32cr::System::Hypervisor::WHV_VIRTUAL_PROCESSOR_STATE_TYPE, buffer : Void*, buffer_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvAllocateVpciResource(provider_id : LibC::GUID*, flags : Win32cr::System::Hypervisor::WHV_ALLOCATE_VPCI_RESOURCE_FLAGS, resource_descriptor : Void*, resource_descriptor_size_in_bytes : UInt32, vpci_resource : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvCreateVpciDevice(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, vpci_resource : Win32cr::Foundation::HANDLE, flags : Win32cr::System::Hypervisor::WHV_CREATE_VPCI_DEVICE_FLAGS, notification_event_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvDeleteVpciDevice(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvGetVpciDeviceProperty(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, property_code : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_PROPERTY_CODE, property_buffer : Void*, property_buffer_size_in_bytes : UInt32, written_size_in_bytes : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvGetVpciDeviceNotification(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, notification : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_NOTIFICATION*, notification_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvMapVpciDeviceMmioRanges(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, mapping_count : UInt32*, mappings : Win32cr::System::Hypervisor::WHV_VPCI_MMIO_MAPPING**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvUnmapVpciDeviceMmioRanges(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvSetVpciDevicePowerState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, power_state : Win32cr::System::Power::DEVICE_POWER_STATE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvReadVpciDeviceRegister(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, register : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_REGISTER*, data : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvWriteVpciDeviceRegister(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, register : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_REGISTER*, data : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvMapVpciDeviceInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, index : UInt32, message_count : UInt32, target : Win32cr::System::Hypervisor::WHV_VPCI_INTERRUPT_TARGET*, msi_address : UInt64*, msi_data : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvUnmapVpciDeviceInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, index : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvRetargetVpciDeviceInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, msi_address : UInt64, msi_data : UInt32, target : Win32cr::System::Hypervisor::WHV_VPCI_INTERRUPT_TARGET*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvRequestVpciDeviceInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, msi_address : UInt64, msi_data : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvGetVpciDeviceInterruptTarget(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, index : UInt32, multi_message_number : UInt32, target : Win32cr::System::Hypervisor::WHV_VPCI_INTERRUPT_TARGET*, target_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvCreateTrigger(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, parameters : Win32cr::System::Hypervisor::WHV_TRIGGER_PARAMETERS*, trigger_handle : Void**, event_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvUpdateTriggerParameters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, parameters : Win32cr::System::Hypervisor::WHV_TRIGGER_PARAMETERS*, trigger_handle : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvDeleteTrigger(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, trigger_handle : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvCreateNotificationPort(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, parameters : Win32cr::System::Hypervisor::WHV_NOTIFICATION_PORT_PARAMETERS*, event_handle : Win32cr::Foundation::HANDLE, port_handle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvSetNotificationPortProperty(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, port_handle : Void*, property_code : Win32cr::System::Hypervisor::WHV_NOTIFICATION_PORT_PROPERTY_CODE, property_value : UInt64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvDeleteNotificationPort(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, port_handle : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvPostVirtualProcessorSynicMessage(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, sint_index : UInt32, message : Void*, message_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvGetVirtualProcessorCpuidOutput(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, eax : UInt32, ecx : UInt32, cpuid_output : Win32cr::System::Hypervisor::WHV_CPUID_OUTPUT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvGetInterruptTargetVpSet(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, destination : UInt64, destination_mode : Win32cr::System::Hypervisor::WHV_INTERRUPT_DESTINATION_MODE, target_vps : UInt32*, vp_count : UInt32, target_vp_count : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvStartPartitionMigration(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, migration_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvCancelPartitionMigration(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvCompletePartitionMigration(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvAcceptPartitionMigration(migration_handle : Win32cr::Foundation::HANDLE, partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvEmulatorCreateEmulator(callbacks : Win32cr::System::Hypervisor::WHV_EMULATOR_CALLBACKS*, emulator : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvEmulatorDestroyEmulator(emulator : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvEmulatorTryIoEmulation(emulator : Void*, context : Void*, vp_context : Win32cr::System::Hypervisor::WHV_VP_EXIT_CONTEXT*, io_instruction_context : Win32cr::System::Hypervisor::WHV_X64_IO_PORT_ACCESS_CONTEXT*, emulator_return_status : Win32cr::System::Hypervisor::WHV_EMULATOR_STATUS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WHvEmulatorTryMmioEmulation(emulator : Void*, context : Void*, vp_context : Win32cr::System::Hypervisor::WHV_VP_EXIT_CONTEXT*, mmio_instruction_context : Win32cr::System::Hypervisor::WHV_MEMORY_ACCESS_CONTEXT*, emulator_return_status : Win32cr::System::Hypervisor::WHV_EMULATOR_STATUS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HdvInitializeDeviceHost(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, deviceHostHandle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HdvTeardownDeviceHost(deviceHostHandle : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HdvCreateDeviceInstance(deviceHostHandle : Void*, deviceType : Win32cr::System::Hypervisor::HDV_DEVICE_TYPE, deviceClassId : LibC::GUID*, deviceInstanceId : LibC::GUID*, deviceInterface : Void*, deviceContext : Void*, deviceHandle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HdvReadGuestMemory(requestor : Void*, guestPhysicalAddress : UInt64, byteCount : UInt32, buffer : UInt8*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HdvWriteGuestMemory(requestor : Void*, guestPhysicalAddress : UInt64, byteCount : UInt32, buffer : UInt8*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HdvCreateGuestMemoryAperture(requestor : Void*, guestPhysicalAddress : UInt64, byteCount : UInt32, writeProtected : Win32cr::Foundation::BOOL, mappedAddress : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HdvDestroyGuestMemoryAperture(requestor : Void*, mappedAddress : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HdvDeliverGuestInterrupt(requestor : Void*, msiAddress : UInt64, msiData : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HdvRegisterDoorbell(requestor : Void*, bar_index : Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, bar_offset : UInt64, trigger_value : UInt64, flags : UInt64, doorbell_event : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HdvUnregisterDoorbell(requestor : Void*, bar_index : Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, bar_offset : UInt64, trigger_value : UInt64, flags : UInt64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HdvCreateSectionBackedMmioRange(requestor : Void*, barIndex : Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, offsetInPages : UInt64, lengthInPages : UInt64, mapping_flags : Win32cr::System::Hypervisor::HDV_MMIO_MAPPING_FLAGS, sectionHandle : Win32cr::Foundation::HANDLE, sectionOffsetInPages : UInt64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HdvDestroySectionBackedMmioRange(requestor : Void*, barIndex : Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, offsetInPages : UInt64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LocateSavedStateFiles(vmName : Win32cr::Foundation::PWSTR, snapshotName : Win32cr::Foundation::PWSTR, binPath : Win32cr::Foundation::PWSTR*, vsvPath : Win32cr::Foundation::PWSTR*, vmrsPath : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LoadSavedStateFile(vmrsFile : Win32cr::Foundation::PWSTR, vmSavedStateDumpHandle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ApplyPendingSavedStateFileReplayLog(vmrsFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LoadSavedStateFiles(binFile : Win32cr::Foundation::PWSTR, vsvFile : Win32cr::Foundation::PWSTR, vmSavedStateDumpHandle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ReleaseSavedStateFiles(vmSavedStateDumpHandle : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetGuestEnabledVirtualTrustLevels(vmSavedStateDumpHandle : Void*, virtualTrustLevels : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetGuestOsInfo(vmSavedStateDumpHandle : Void*, virtualTrustLevel : UInt8, guestOsInfo : Win32cr::System::Hypervisor::GUEST_OS_INFO*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetVpCount(vmSavedStateDumpHandle : Void*, vpCount : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetArchitecture(vmSavedStateDumpHandle : Void*, vpId : UInt32, architecture : Win32cr::System::Hypervisor::VIRTUAL_PROCESSOR_ARCH*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ForceArchitecture(vmSavedStateDumpHandle : Void*, vpId : UInt32, architecture : Win32cr::System::Hypervisor::VIRTUAL_PROCESSOR_ARCH) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetActiveVirtualTrustLevel(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualTrustLevel : UInt8*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetEnabledVirtualTrustLevels(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualTrustLevels : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ForceActiveVirtualTrustLevel(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualTrustLevel : UInt8) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IsActiveVirtualTrustLevelEnabled(vmSavedStateDumpHandle : Void*, vpId : UInt32, activeVirtualTrustLevelEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IsNestedVirtualizationEnabled(vmSavedStateDumpHandle : Void*, enabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetNestedVirtualizationMode(vmSavedStateDumpHandle : Void*, vpId : UInt32, enabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ForceNestedHostMode(vmSavedStateDumpHandle : Void*, vpId : UInt32, hostMode : Win32cr::Foundation::BOOL, oldMode : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InKernelSpace(vmSavedStateDumpHandle : Void*, vpId : UInt32, inKernelSpace : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetRegisterValue(vmSavedStateDumpHandle : Void*, vpId : UInt32, registerId : UInt32, registerValue : Win32cr::System::Hypervisor::VIRTUAL_PROCESSOR_REGISTER*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetPagingMode(vmSavedStateDumpHandle : Void*, vpId : UInt32, pagingMode : Win32cr::System::Hypervisor::PAGING_MODE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ForcePagingMode(vmSavedStateDumpHandle : Void*, vpId : UInt32, pagingMode : Win32cr::System::Hypervisor::PAGING_MODE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ReadGuestPhysicalAddress(vmSavedStateDumpHandle : Void*, physicalAddress : UInt64, buffer : Void*, bufferSize : UInt32, bytesRead : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GuestVirtualAddressToPhysicalAddress(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualAddress : UInt64, physicalAddress : UInt64*, unmappedRegionSize : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetGuestPhysicalMemoryChunks(vmSavedStateDumpHandle : Void*, memoryChunkPageSize : UInt64*, memoryChunks : Win32cr::System::Hypervisor::GPA_MEMORY_CHUNK*, memoryChunkCount : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GuestPhysicalAddressToRawSavedMemoryOffset(vmSavedStateDumpHandle : Void*, physicalAddress : UInt64, rawSavedMemoryOffset : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ReadGuestRawSavedMemory(vmSavedStateDumpHandle : Void*, rawSavedMemoryOffset : UInt64, buffer : Void*, bufferSize : UInt32, bytesRead : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetGuestRawSavedMemorySize(vmSavedStateDumpHandle : Void*, guestRawSavedMemorySize : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetMemoryBlockCacheLimit(vmSavedStateDumpHandle : Void*, memoryBlockCacheLimit : UInt64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetMemoryBlockCacheLimit(vmSavedStateDumpHandle : Void*, memoryBlockCacheLimit : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ApplyGuestMemoryFix(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualAddress : UInt64, fixBuffer : Void*, fixBufferSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LoadSavedStateSymbolProvider(vmSavedStateDumpHandle : Void*, userSymbols : Win32cr::Foundation::PWSTR, force : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ReleaseSavedStateSymbolProvider(vmSavedStateDumpHandle : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetSavedStateSymbolProviderHandle(vmSavedStateDumpHandle : Void*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun SetSavedStateSymbolProviderDebugInfoCallback(vmSavedStateDumpHandle : Void*, callback : Win32cr::System::Hypervisor::GUEST_SYMBOLS_PROVIDER_DEBUG_INFO_CALLBACK) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LoadSavedStateModuleSymbols(vmSavedStateDumpHandle : Void*, imageName : Win32cr::Foundation::PSTR, moduleName : Win32cr::Foundation::PSTR, baseAddress : UInt64, sizeOfBase : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LoadSavedStateModuleSymbolsEx(vmSavedStateDumpHandle : Void*, imageName : Win32cr::Foundation::PSTR, imageTimestamp : UInt32, moduleName : Win32cr::Foundation::PSTR, baseAddress : UInt64, sizeOfBase : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ResolveSavedStateGlobalVariableAddress(vmSavedStateDumpHandle : Void*, vpId : UInt32, globalName : Win32cr::Foundation::PSTR, virtualAddress : UInt64*, size : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ReadSavedStateGlobalVariable(vmSavedStateDumpHandle : Void*, vpId : UInt32, globalName : Win32cr::Foundation::PSTR, buffer : Void*, bufferSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetSavedStateSymbolTypeSize(vmSavedStateDumpHandle : Void*, vpId : UInt32, typeName : Win32cr::Foundation::PSTR, size : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FindSavedStateSymbolFieldInType(vmSavedStateDumpHandle : Void*, vpId : UInt32, typeName : Win32cr::Foundation::PSTR, fieldName : Win32cr::Foundation::PWSTR, offset : UInt32*, found : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetSavedStateSymbolFieldInfo(vmSavedStateDumpHandle : Void*, vpId : UInt32, typeName : Win32cr::Foundation::PSTR, typeFieldInfoMap : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ScanMemoryForDosImages(vmSavedStateDumpHandle : Void*, vpId : UInt32, startAddress : UInt64, endAddress : UInt64, callbackContext : Void*, foundImageCallback : Win32cr::System::Hypervisor::FOUND_IMAGE_CALLBACK, standaloneAddress : UInt64*, standaloneAddressCount : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CallStackUnwind(vmSavedStateDumpHandle : Void*, vpId : UInt32, imageInfo : Win32cr::System::Hypervisor::MODULE_INFO*, imageInfoCount : UInt32, frameCount : UInt32, callStack : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
   end

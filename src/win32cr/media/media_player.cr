@@ -6,6 +6,7 @@ require "./../graphics/gdi.cr"
 require "./../ui/windows_and_messaging.cr"
 
 module Win32cr::Media::MediaPlayer
+  extend self
   CLSID_XFeedsManager = "fe6b11c3-c72e-4061-86c6-9d163121f229"
   WMPGC_FLAGS_ALLOW_PREROLL = 1_u32
   WMPGC_FLAGS_SUPPRESS_DIALOGS = 2_u32

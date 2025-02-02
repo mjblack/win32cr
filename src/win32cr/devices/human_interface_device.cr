@@ -3,6 +3,7 @@ require "./../system/com.cr"
 require "./../system/registry.cr"
 
 module Win32cr::Devices::HumanInterfaceDevice
+  extend self
   alias LPDIENUMEFFECTSINFILECALLBACK = Proc(Win32cr::Devices::HumanInterfaceDevice::DIFILEEFFECT*, Void*, Win32cr::Foundation::BOOL)
 
   alias LPDIENUMDEVICEOBJECTSCALLBACKA = Proc(Win32cr::Devices::HumanInterfaceDevice::DIDEVICEOBJECTINSTANCEA*, Void*, Win32cr::Foundation::BOOL)
@@ -5481,102 +5482,337 @@ module Win32cr::Devices::HumanInterfaceDevice
 
   end
 
+  def directInput8Create(hinst : Win32cr::Foundation::HINSTANCE, dwVersion : UInt32, riidltf : LibC::GUID*, ppvOut : Void**, punkOuter : Void*) : Win32cr::Foundation::HRESULT
+    C.DirectInput8Create(hinst, dwVersion, riidltf, ppvOut, punkOuter)
+  end
+
+  def joyConfigChanged(dwFlags : UInt32) : UInt32
+    C.joyConfigChanged(dwFlags)
+  end
+
+  def hidPGetCaps(preparsed_data : LibC::IntPtrT, capabilities : Win32cr::Devices::HumanInterfaceDevice::HIDP_CAPS*) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetCaps(preparsed_data, capabilities)
+  end
+
+  def hidPGetLinkCollectionNodes(link_collection_nodes : Win32cr::Devices::HumanInterfaceDevice::HIDP_LINK_COLLECTION_NODE*, link_collection_nodes_length : UInt32*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetLinkCollectionNodes(link_collection_nodes, link_collection_nodes_length, preparsed_data)
+  end
+
+  def hidPGetSpecificButtonCaps(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, button_caps : Win32cr::Devices::HumanInterfaceDevice::HIDP_BUTTON_CAPS*, button_caps_length : UInt16*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetSpecificButtonCaps(report_type, usage_page, link_collection, usage, button_caps, button_caps_length, preparsed_data)
+  end
+
+  def hidPGetButtonCaps(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, button_caps : Win32cr::Devices::HumanInterfaceDevice::HIDP_BUTTON_CAPS*, button_caps_length : UInt16*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetButtonCaps(report_type, button_caps, button_caps_length, preparsed_data)
+  end
+
+  def hidPGetSpecificValueCaps(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, value_caps : Win32cr::Devices::HumanInterfaceDevice::HIDP_VALUE_CAPS*, value_caps_length : UInt16*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetSpecificValueCaps(report_type, usage_page, link_collection, usage, value_caps, value_caps_length, preparsed_data)
+  end
+
+  def hidPGetValueCaps(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, value_caps : Win32cr::Devices::HumanInterfaceDevice::HIDP_VALUE_CAPS*, value_caps_length : UInt16*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetValueCaps(report_type, value_caps, value_caps_length, preparsed_data)
+  end
+
+  def hidPGetExtendedAttributes(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, data_index : UInt16, preparsed_data : LibC::IntPtrT, attributes : Win32cr::Devices::HumanInterfaceDevice::HIDP_EXTENDED_ATTRIBUTES*, length_attributes : UInt32*) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetExtendedAttributes(report_type, data_index, preparsed_data, attributes, length_attributes)
+  end
+
+  def hidPInitializeReportForID(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, report_id : UInt8, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_InitializeReportForID(report_type, report_id, preparsed_data, report, report_length)
+  end
+
+  def hidPSetData(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, data_list : Win32cr::Devices::HumanInterfaceDevice::HIDP_DATA*, data_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_SetData(report_type, data_list, data_length, preparsed_data, report, report_length)
+  end
+
+  def hidPGetData(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, data_list : Win32cr::Devices::HumanInterfaceDevice::HIDP_DATA*, data_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetData(report_type, data_list, data_length, preparsed_data, report, report_length)
+  end
+
+  def hidPMaxDataListLength(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, preparsed_data : LibC::IntPtrT) : UInt32
+    C.HidP_MaxDataListLength(report_type, preparsed_data)
+  end
+
+  def hidPSetUsages(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage_list : UInt16*, usage_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_SetUsages(report_type, usage_page, link_collection, usage_list, usage_length, preparsed_data, report, report_length)
+  end
+
+  def hidPUnsetUsages(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage_list : UInt16*, usage_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_UnsetUsages(report_type, usage_page, link_collection, usage_list, usage_length, preparsed_data, report, report_length)
+  end
+
+  def hidPGetUsages(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage_list : UInt16*, usage_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetUsages(report_type, usage_page, link_collection, usage_list, usage_length, preparsed_data, report, report_length)
+  end
+
+  def hidPGetUsagesEx(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, link_collection : UInt16, button_list : Win32cr::Devices::HumanInterfaceDevice::USAGE_AND_PAGE*, usage_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetUsagesEx(report_type, link_collection, button_list, usage_length, preparsed_data, report, report_length)
+  end
+
+  def hidPMaxUsageListLength(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, preparsed_data : LibC::IntPtrT) : UInt32
+    C.HidP_MaxUsageListLength(report_type, usage_page, preparsed_data)
+  end
+
+  def hidPSetUsageValue(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : UInt32, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_SetUsageValue(report_type, usage_page, link_collection, usage, usage_value, preparsed_data, report, report_length)
+  end
+
+  def hidPSetScaledUsageValue(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : Int32, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_SetScaledUsageValue(report_type, usage_page, link_collection, usage, usage_value, preparsed_data, report, report_length)
+  end
+
+  def hidPSetUsageValueArray(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : Win32cr::Foundation::PSTR, usage_value_byte_length : UInt16, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_SetUsageValueArray(report_type, usage_page, link_collection, usage, usage_value, usage_value_byte_length, preparsed_data, report, report_length)
+  end
+
+  def hidPGetUsageValue(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetUsageValue(report_type, usage_page, link_collection, usage, usage_value, preparsed_data, report, report_length)
+  end
+
+  def hidPGetScaledUsageValue(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : Int32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetScaledUsageValue(report_type, usage_page, link_collection, usage, usage_value, preparsed_data, report, report_length)
+  end
+
+  def hidPGetUsageValueArray(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : Win32cr::Foundation::PSTR, usage_value_byte_length : UInt16, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetUsageValueArray(report_type, usage_page, link_collection, usage, usage_value, usage_value_byte_length, preparsed_data, report, report_length)
+  end
+
+  def hidPUsageListDifference(previous_usage_list : UInt16*, current_usage_list : UInt16*, break_usage_list : UInt16*, make_usage_list : UInt16*, usage_list_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_UsageListDifference(previous_usage_list, current_usage_list, break_usage_list, make_usage_list, usage_list_length)
+  end
+
+  def hidPGetButtonArray(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, button_data : Win32cr::Devices::HumanInterfaceDevice::HIDP_BUTTON_ARRAY_DATA*, button_data_length : UInt16*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_GetButtonArray(report_type, usage_page, link_collection, usage, button_data, button_data_length, preparsed_data, report, report_length)
+  end
+
+  def hidPSetButtonArray(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, button_data : Win32cr::Devices::HumanInterfaceDevice::HIDP_BUTTON_ARRAY_DATA*, button_data_length : UInt16, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.HidP_SetButtonArray(report_type, usage_page, link_collection, usage, button_data, button_data_length, preparsed_data, report, report_length)
+  end
+
+  def hidPTranslateUsagesToI8042ScanCodes(changed_usage_list : UInt16*, usage_list_length : UInt32, key_action : Win32cr::Devices::HumanInterfaceDevice::HIDP_KEYBOARD_DIRECTION, modifier_state : Win32cr::Devices::HumanInterfaceDevice::HIDP_KEYBOARD_MODIFIER_STATE*, insert_codes_procedure : Win32cr::Devices::HumanInterfaceDevice::PHIDP_INSERT_SCANCODES, insert_codes_context : Void*) : Win32cr::Foundation::NTSTATUS
+    C.HidP_TranslateUsagesToI8042ScanCodes(changed_usage_list, usage_list_length, key_action, modifier_state, insert_codes_procedure, insert_codes_context)
+  end
+
+  def hidDGetAttributes(hid_device_object : Win32cr::Foundation::HANDLE, attributes : Win32cr::Devices::HumanInterfaceDevice::HIDD_ATTRIBUTES*) : Win32cr::Foundation::BOOLEAN
+    C.HidD_GetAttributes(hid_device_object, attributes)
+  end
+
+  def hidDGetHidGuid(hid_guid : LibC::GUID*) : Void
+    C.HidD_GetHidGuid(hid_guid)
+  end
+
+  def hidDGetPreparsedData(hid_device_object : Win32cr::Foundation::HANDLE, preparsed_data : LibC::IntPtrT*) : Win32cr::Foundation::BOOLEAN
+    C.HidD_GetPreparsedData(hid_device_object, preparsed_data)
+  end
+
+  def hidDFreePreparsedData(preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::BOOLEAN
+    C.HidD_FreePreparsedData(preparsed_data)
+  end
+
+  def hidDFlushQueue(hid_device_object : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOLEAN
+    C.HidD_FlushQueue(hid_device_object)
+  end
+
+  def hidDGetConfiguration(hid_device_object : Win32cr::Foundation::HANDLE, configuration : Win32cr::Devices::HumanInterfaceDevice::HIDD_CONFIGURATION*, configuration_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.HidD_GetConfiguration(hid_device_object, configuration, configuration_length)
+  end
+
+  def hidDSetConfiguration(hid_device_object : Win32cr::Foundation::HANDLE, configuration : Win32cr::Devices::HumanInterfaceDevice::HIDD_CONFIGURATION*, configuration_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.HidD_SetConfiguration(hid_device_object, configuration, configuration_length)
+  end
+
+  def hidDGetFeature(hid_device_object : Win32cr::Foundation::HANDLE, report_buffer : Void*, report_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.HidD_GetFeature(hid_device_object, report_buffer, report_buffer_length)
+  end
+
+  def hidDSetFeature(hid_device_object : Win32cr::Foundation::HANDLE, report_buffer : Void*, report_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.HidD_SetFeature(hid_device_object, report_buffer, report_buffer_length)
+  end
+
+  def hidDGetInputReport(hid_device_object : Win32cr::Foundation::HANDLE, report_buffer : Void*, report_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.HidD_GetInputReport(hid_device_object, report_buffer, report_buffer_length)
+  end
+
+  def hidDSetOutputReport(hid_device_object : Win32cr::Foundation::HANDLE, report_buffer : Void*, report_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.HidD_SetOutputReport(hid_device_object, report_buffer, report_buffer_length)
+  end
+
+  def hidDGetNumInputBuffers(hid_device_object : Win32cr::Foundation::HANDLE, number_buffers : UInt32*) : Win32cr::Foundation::BOOLEAN
+    C.HidD_GetNumInputBuffers(hid_device_object, number_buffers)
+  end
+
+  def hidDSetNumInputBuffers(hid_device_object : Win32cr::Foundation::HANDLE, number_buffers : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.HidD_SetNumInputBuffers(hid_device_object, number_buffers)
+  end
+
+  def hidDGetPhysicalDescriptor(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.HidD_GetPhysicalDescriptor(hid_device_object, buffer, buffer_length)
+  end
+
+  def hidDGetManufacturerString(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.HidD_GetManufacturerString(hid_device_object, buffer, buffer_length)
+  end
+
+  def hidDGetProductString(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.HidD_GetProductString(hid_device_object, buffer, buffer_length)
+  end
+
+  def hidDGetIndexedString(hid_device_object : Win32cr::Foundation::HANDLE, string_index : UInt32, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.HidD_GetIndexedString(hid_device_object, string_index, buffer, buffer_length)
+  end
+
+  def hidDGetSerialNumberString(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.HidD_GetSerialNumberString(hid_device_object, buffer, buffer_length)
+  end
+
+  def hidDGetMsGenreDescriptor(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.HidD_GetMsGenreDescriptor(hid_device_object, buffer, buffer_length)
+  end
+
   @[Link("dinput8")]
   @[Link("winmm")]
   @[Link("hid")]
   lib C
+    # :nodoc:
     fun DirectInput8Create(hinst : Win32cr::Foundation::HINSTANCE, dwVersion : UInt32, riidltf : LibC::GUID*, ppvOut : Void**, punkOuter : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun joyConfigChanged(dwFlags : UInt32) : UInt32
 
+    # :nodoc:
     fun HidP_GetCaps(preparsed_data : LibC::IntPtrT, capabilities : Win32cr::Devices::HumanInterfaceDevice::HIDP_CAPS*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_GetLinkCollectionNodes(link_collection_nodes : Win32cr::Devices::HumanInterfaceDevice::HIDP_LINK_COLLECTION_NODE*, link_collection_nodes_length : UInt32*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_GetSpecificButtonCaps(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, button_caps : Win32cr::Devices::HumanInterfaceDevice::HIDP_BUTTON_CAPS*, button_caps_length : UInt16*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_GetButtonCaps(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, button_caps : Win32cr::Devices::HumanInterfaceDevice::HIDP_BUTTON_CAPS*, button_caps_length : UInt16*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_GetSpecificValueCaps(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, value_caps : Win32cr::Devices::HumanInterfaceDevice::HIDP_VALUE_CAPS*, value_caps_length : UInt16*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_GetValueCaps(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, value_caps : Win32cr::Devices::HumanInterfaceDevice::HIDP_VALUE_CAPS*, value_caps_length : UInt16*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_GetExtendedAttributes(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, data_index : UInt16, preparsed_data : LibC::IntPtrT, attributes : Win32cr::Devices::HumanInterfaceDevice::HIDP_EXTENDED_ATTRIBUTES*, length_attributes : UInt32*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_InitializeReportForID(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, report_id : UInt8, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_SetData(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, data_list : Win32cr::Devices::HumanInterfaceDevice::HIDP_DATA*, data_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_GetData(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, data_list : Win32cr::Devices::HumanInterfaceDevice::HIDP_DATA*, data_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_MaxDataListLength(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, preparsed_data : LibC::IntPtrT) : UInt32
 
+    # :nodoc:
     fun HidP_SetUsages(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage_list : UInt16*, usage_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_UnsetUsages(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage_list : UInt16*, usage_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_GetUsages(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage_list : UInt16*, usage_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_GetUsagesEx(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, link_collection : UInt16, button_list : Win32cr::Devices::HumanInterfaceDevice::USAGE_AND_PAGE*, usage_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_MaxUsageListLength(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, preparsed_data : LibC::IntPtrT) : UInt32
 
+    # :nodoc:
     fun HidP_SetUsageValue(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : UInt32, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_SetScaledUsageValue(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : Int32, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_SetUsageValueArray(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : Win32cr::Foundation::PSTR, usage_value_byte_length : UInt16, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_GetUsageValue(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_GetScaledUsageValue(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : Int32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_GetUsageValueArray(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : Win32cr::Foundation::PSTR, usage_value_byte_length : UInt16, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_UsageListDifference(previous_usage_list : UInt16*, current_usage_list : UInt16*, break_usage_list : UInt16*, make_usage_list : UInt16*, usage_list_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_GetButtonArray(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, button_data : Win32cr::Devices::HumanInterfaceDevice::HIDP_BUTTON_ARRAY_DATA*, button_data_length : UInt16*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_SetButtonArray(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, button_data : Win32cr::Devices::HumanInterfaceDevice::HIDP_BUTTON_ARRAY_DATA*, button_data_length : UInt16, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidP_TranslateUsagesToI8042ScanCodes(changed_usage_list : UInt16*, usage_list_length : UInt32, key_action : Win32cr::Devices::HumanInterfaceDevice::HIDP_KEYBOARD_DIRECTION, modifier_state : Win32cr::Devices::HumanInterfaceDevice::HIDP_KEYBOARD_MODIFIER_STATE*, insert_codes_procedure : Win32cr::Devices::HumanInterfaceDevice::PHIDP_INSERT_SCANCODES, insert_codes_context : Void*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun HidD_GetAttributes(hid_device_object : Win32cr::Foundation::HANDLE, attributes : Win32cr::Devices::HumanInterfaceDevice::HIDD_ATTRIBUTES*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_GetHidGuid(hid_guid : LibC::GUID*) : Void
 
+    # :nodoc:
     fun HidD_GetPreparsedData(hid_device_object : Win32cr::Foundation::HANDLE, preparsed_data : LibC::IntPtrT*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_FreePreparsedData(preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_FlushQueue(hid_device_object : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_GetConfiguration(hid_device_object : Win32cr::Foundation::HANDLE, configuration : Win32cr::Devices::HumanInterfaceDevice::HIDD_CONFIGURATION*, configuration_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_SetConfiguration(hid_device_object : Win32cr::Foundation::HANDLE, configuration : Win32cr::Devices::HumanInterfaceDevice::HIDD_CONFIGURATION*, configuration_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_GetFeature(hid_device_object : Win32cr::Foundation::HANDLE, report_buffer : Void*, report_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_SetFeature(hid_device_object : Win32cr::Foundation::HANDLE, report_buffer : Void*, report_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_GetInputReport(hid_device_object : Win32cr::Foundation::HANDLE, report_buffer : Void*, report_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_SetOutputReport(hid_device_object : Win32cr::Foundation::HANDLE, report_buffer : Void*, report_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_GetNumInputBuffers(hid_device_object : Win32cr::Foundation::HANDLE, number_buffers : UInt32*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_SetNumInputBuffers(hid_device_object : Win32cr::Foundation::HANDLE, number_buffers : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_GetPhysicalDescriptor(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_GetManufacturerString(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_GetProductString(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_GetIndexedString(hid_device_object : Win32cr::Foundation::HANDLE, string_index : UInt32, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_GetSerialNumberString(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun HidD_GetMsGenreDescriptor(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
   end

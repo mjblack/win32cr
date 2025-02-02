@@ -1,0 +1,68 @@
+[
+  {
+    "name": "CreateWindowExA",
+    "namespace": "Win32cr::UI::WindowsAndMessaging",
+    "type": "function",
+    "rule": {
+      "description": "Change dwExStyle type to UInt32",
+      "type": "param_type",
+      "index": 0,
+      "value": "UInt32"
+    }
+  },
+  {
+    "name": "CreateWindowExA",
+    "namespace": "Win32cr::UI::WindowsAndMessaging",
+    "type": "function",
+    "rule": {
+      "description": "Change dwStyle type to UInt32",
+      "type": "param_type",
+      "index": 3,
+      "value": "UInt32"
+    }
+  },
+  {
+    "name": "CreateWindowExW",
+    "namespace": "Win32cr::UI::WindowsAndMessaging",
+    "type": "function",
+    "rule": {
+      "description": "Change dwExStyle type to UInt32",
+      "type": "param_type",
+      "index": 0,
+      "value": "UInt32"
+    }
+  },
+  {
+    "name": "CreateWindowExW",
+    "namespace": "Win32cr::UI::WindowsAndMessaging",
+    "type": "function",
+    "rule": {
+      "description": "Change dwStyle type to UInt32",
+      "type": "param_type",
+      "index": 3,
+      "value": "UInt32"
+    }
+  },
+  {
+    "name": "CreateWindowA",
+    "namespace": "Win32cr::UI::WindowsAndMessaging",
+    "type": "function",
+    "rule": {
+      "description": "Change dwStyle type to UInt32",
+      "type": "param_type",
+      "index": 2,
+      "value": "UInt32"
+    }
+  },
+  {
+    "name": "CreateWindowW",
+    "namespace": "Win32cr::UI::WindowsAndMessaging",
+    "type": "function",
+    "rule": {
+      "description": "Change dwStyle type to UInt32",
+      "type": "param_type",
+      "index": 2,
+      "value": "UInt32"
+    }
+  }
+]

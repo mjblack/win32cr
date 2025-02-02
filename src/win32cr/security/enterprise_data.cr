@@ -4,6 +4,7 @@ require "./../system/com.cr"
 require "./../storage/packaging/appx.cr"
 
 module Win32cr::Security::EnterpriseData
+  extend self
 
   @[Flags]
   enum ENTERPRISE_DATA_POLICIES : UInt32
@@ -190,33 +191,98 @@ module Win32cr::Security::EnterpriseData
 
   end
 
+  def srpCreateThreadNetworkContext(enterpriseId : Win32cr::Foundation::PWSTR, threadNetworkContext : Win32cr::Security::EnterpriseData::HTHREAD_NETWORK_CONTEXT*) : Win32cr::Foundation::HRESULT
+    C.SrpCreateThreadNetworkContext(enterpriseId, threadNetworkContext)
+  end
+
+  def srpCloseThreadNetworkContext(threadNetworkContext : Win32cr::Security::EnterpriseData::HTHREAD_NETWORK_CONTEXT*) : Win32cr::Foundation::HRESULT
+    C.SrpCloseThreadNetworkContext(threadNetworkContext)
+  end
+
+  def srpSetTokenEnterpriseId(tokenHandle : Win32cr::Foundation::HANDLE, enterpriseId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.SrpSetTokenEnterpriseId(tokenHandle, enterpriseId)
+  end
+
+  def srpGetEnterpriseIds(tokenHandle : Win32cr::Foundation::HANDLE, numberOfBytes : UInt32*, enterpriseIds : Win32cr::Foundation::PWSTR*, enterpriseIdCount : UInt32*) : Win32cr::Foundation::HRESULT
+    C.SrpGetEnterpriseIds(tokenHandle, numberOfBytes, enterpriseIds, enterpriseIdCount)
+  end
+
+  def srpEnablePermissiveModeFileEncryption(enterpriseId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.SrpEnablePermissiveModeFileEncryption(enterpriseId)
+  end
+
+  def srpDisablePermissiveModeFileEncryption : Win32cr::Foundation::HRESULT
+    C.SrpDisablePermissiveModeFileEncryption
+  end
+
+  def srpGetEnterprisePolicy(tokenHandle : Win32cr::Foundation::HANDLE, policyFlags : Win32cr::Security::EnterpriseData::ENTERPRISE_DATA_POLICIES*) : Win32cr::Foundation::HRESULT
+    C.SrpGetEnterprisePolicy(tokenHandle, policyFlags)
+  end
+
+  def srpIsTokenService(token_handle : Win32cr::Foundation::HANDLE, is_token_service : UInt8*) : Win32cr::Foundation::NTSTATUS
+    C.SrpIsTokenService(token_handle, is_token_service)
+  end
+
+  def srpDoesPolicyAllowAppExecution(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, isAllowed : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.SrpDoesPolicyAllowAppExecution(packageId, isAllowed)
+  end
+
+  def srpHostingInitialize(version : Win32cr::Security::EnterpriseData::SRPHOSTING_VERSION, type__ : Win32cr::Security::EnterpriseData::SRPHOSTING_TYPE, pvData : Void*, cbData : UInt32) : Win32cr::Foundation::HRESULT
+    C.SrpHostingInitialize(version, type__, pvData, cbData)
+  end
+
+  def srpHostingTerminate(type__ : Win32cr::Security::EnterpriseData::SRPHOSTING_TYPE) : Void
+    C.SrpHostingTerminate(type__)
+  end
+
+  def protectFileToEnterpriseIdentity(fileOrFolderPath : Win32cr::Foundation::PWSTR, identity : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.ProtectFileToEnterpriseIdentity(fileOrFolderPath, identity)
+  end
+
+  def unprotectFile(fileOrFolderPath : Win32cr::Foundation::PWSTR, options : Win32cr::Security::EnterpriseData::FILE_UNPROTECT_OPTIONS*) : Win32cr::Foundation::HRESULT
+    C.UnprotectFile(fileOrFolderPath, options)
+  end
+
   @[Link("srpapi")]
   @[Link("efswrt")]
   lib C
+    # :nodoc:
     fun SrpCreateThreadNetworkContext(enterpriseId : Win32cr::Foundation::PWSTR, threadNetworkContext : Win32cr::Security::EnterpriseData::HTHREAD_NETWORK_CONTEXT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SrpCloseThreadNetworkContext(threadNetworkContext : Win32cr::Security::EnterpriseData::HTHREAD_NETWORK_CONTEXT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SrpSetTokenEnterpriseId(tokenHandle : Win32cr::Foundation::HANDLE, enterpriseId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SrpGetEnterpriseIds(tokenHandle : Win32cr::Foundation::HANDLE, numberOfBytes : UInt32*, enterpriseIds : Win32cr::Foundation::PWSTR*, enterpriseIdCount : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SrpEnablePermissiveModeFileEncryption(enterpriseId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SrpDisablePermissiveModeFileEncryption : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SrpGetEnterprisePolicy(tokenHandle : Win32cr::Foundation::HANDLE, policyFlags : Win32cr::Security::EnterpriseData::ENTERPRISE_DATA_POLICIES*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SrpIsTokenService(token_handle : Win32cr::Foundation::HANDLE, is_token_service : UInt8*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun SrpDoesPolicyAllowAppExecution(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, isAllowed : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SrpHostingInitialize(version : Win32cr::Security::EnterpriseData::SRPHOSTING_VERSION, type__ : Win32cr::Security::EnterpriseData::SRPHOSTING_TYPE, pvData : Void*, cbData : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SrpHostingTerminate(type__ : Win32cr::Security::EnterpriseData::SRPHOSTING_TYPE) : Void
 
+    # :nodoc:
     fun ProtectFileToEnterpriseIdentity(fileOrFolderPath : Win32cr::Foundation::PWSTR, identity : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UnprotectFile(fileOrFolderPath : Win32cr::Foundation::PWSTR, options : Win32cr::Security::EnterpriseData::FILE_UNPROTECT_OPTIONS*) : Win32cr::Foundation::HRESULT
 
   end

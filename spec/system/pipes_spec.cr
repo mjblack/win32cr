@@ -15,7 +15,7 @@ module Win32cr::System
       chbuf = Pointer(UInt8).malloc(MAX_BUF)
 
       describe "Create Pipes" do
-        result = Win32cr::System::Pipes::C.CreatePipe(pointerof(readSide), pointerof(writeSide), nil, 0)
+        result = SysPipe.createPipe(pointerof(readSide), pointerof(writeSide), Pointer(Win32cr::Security::SECURITY_ATTRIBUTES).null, 0_u32)
 
         it "Pipe create result should be greater than zero" do
           Log.info { result.to_s }

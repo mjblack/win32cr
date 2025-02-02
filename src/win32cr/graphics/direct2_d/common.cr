@@ -3,6 +3,7 @@ require "./../../system/com.cr"
 require "./../../foundation.cr"
 
 module Win32cr::Graphics::Direct2D::Common
+  extend self
 
   enum D2D1_ALPHA_MODE : UInt32
     D2D1_ALPHA_MODE_UNKNOWN = 0_u32

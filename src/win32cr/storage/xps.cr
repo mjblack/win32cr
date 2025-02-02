@@ -6,6 +6,7 @@ require "./../security.cr"
 require "./../security/cryptography.cr"
 
 module Win32cr::Storage::Xps
+  extend self
   alias HPTPROVIDER = LibC::IntPtrT
   alias ABORTPROC = Proc(Win32cr::Graphics::Gdi::HDC, Int32, Win32cr::Foundation::BOOL)
 
@@ -5231,32 +5232,92 @@ module Win32cr::Storage::Xps
 
   end
 
+  def deviceCapabilitiesA(pDevice : Win32cr::Foundation::PSTR, pPort : Win32cr::Foundation::PSTR, fwCapability : Win32cr::Storage::Xps::DEVICE_CAPABILITIES, pOutput : Win32cr::Foundation::PSTR, pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*) : Int32
+    C.DeviceCapabilitiesA(pDevice, pPort, fwCapability, pOutput, pDevMode)
+  end
+
+  def deviceCapabilitiesW(pDevice : Win32cr::Foundation::PWSTR, pPort : Win32cr::Foundation::PWSTR, fwCapability : Win32cr::Storage::Xps::DEVICE_CAPABILITIES, pOutput : Win32cr::Foundation::PWSTR, pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*) : Int32
+    C.DeviceCapabilitiesW(pDevice, pPort, fwCapability, pOutput, pDevMode)
+  end
+
+  def escape(hdc : Win32cr::Graphics::Gdi::HDC, iEscape : Int32, cjIn : Int32, pvIn : Win32cr::Foundation::PSTR, pvOut : Void*) : Int32
+    C.Escape(hdc, iEscape, cjIn, pvIn, pvOut)
+  end
+
+  def extEscape(hdc : Win32cr::Graphics::Gdi::HDC, iEscape : Int32, cjInput : Int32, lpInData : Win32cr::Foundation::PSTR, cjOutput : Int32, lpOutData : Win32cr::Foundation::PSTR) : Int32
+    C.ExtEscape(hdc, iEscape, cjInput, lpInData, cjOutput, lpOutData)
+  end
+
+  def startDocA(hdc : Win32cr::Graphics::Gdi::HDC, lpdi : Win32cr::Storage::Xps::DOCINFOA*) : Int32
+    C.StartDocA(hdc, lpdi)
+  end
+
+  def startDocW(hdc : Win32cr::Graphics::Gdi::HDC, lpdi : Win32cr::Storage::Xps::DOCINFOW*) : Int32
+    C.StartDocW(hdc, lpdi)
+  end
+
+  def endDoc(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.EndDoc(hdc)
+  end
+
+  def startPage(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.StartPage(hdc)
+  end
+
+  def endPage(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.EndPage(hdc)
+  end
+
+  def abortDoc(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.AbortDoc(hdc)
+  end
+
+  def setAbortProc(hdc : Win32cr::Graphics::Gdi::HDC, proc : Win32cr::Storage::Xps::ABORTPROC) : Int32
+    C.SetAbortProc(hdc, proc)
+  end
+
+  def printWindow(hwnd : Win32cr::Foundation::HWND, hdcBlt : Win32cr::Graphics::Gdi::HDC, nFlags : Win32cr::Storage::Xps::PRINT_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
+    C.PrintWindow(hwnd, hdcBlt, nFlags)
+  end
+
   @[Link("winspool.drv")]
   @[Link("gdi32")]
   @[Link("user32")]
   lib C
+    # :nodoc:
     fun DeviceCapabilitiesA(pDevice : Win32cr::Foundation::PSTR, pPort : Win32cr::Foundation::PSTR, fwCapability : Win32cr::Storage::Xps::DEVICE_CAPABILITIES, pOutput : Win32cr::Foundation::PSTR, pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*) : Int32
 
+    # :nodoc:
     fun DeviceCapabilitiesW(pDevice : Win32cr::Foundation::PWSTR, pPort : Win32cr::Foundation::PWSTR, fwCapability : Win32cr::Storage::Xps::DEVICE_CAPABILITIES, pOutput : Win32cr::Foundation::PWSTR, pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*) : Int32
 
+    # :nodoc:
     fun Escape(hdc : Win32cr::Graphics::Gdi::HDC, iEscape : Int32, cjIn : Int32, pvIn : Win32cr::Foundation::PSTR, pvOut : Void*) : Int32
 
+    # :nodoc:
     fun ExtEscape(hdc : Win32cr::Graphics::Gdi::HDC, iEscape : Int32, cjInput : Int32, lpInData : Win32cr::Foundation::PSTR, cjOutput : Int32, lpOutData : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun StartDocA(hdc : Win32cr::Graphics::Gdi::HDC, lpdi : Win32cr::Storage::Xps::DOCINFOA*) : Int32
 
+    # :nodoc:
     fun StartDocW(hdc : Win32cr::Graphics::Gdi::HDC, lpdi : Win32cr::Storage::Xps::DOCINFOW*) : Int32
 
+    # :nodoc:
     fun EndDoc(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun StartPage(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun EndPage(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun AbortDoc(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun SetAbortProc(hdc : Win32cr::Graphics::Gdi::HDC, proc : Win32cr::Storage::Xps::ABORTPROC) : Int32
 
+    # :nodoc:
     fun PrintWindow(hwnd : Win32cr::Foundation::HWND, hdcBlt : Win32cr::Graphics::Gdi::HDC, nFlags : Win32cr::Storage::Xps::PRINT_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
 
   end

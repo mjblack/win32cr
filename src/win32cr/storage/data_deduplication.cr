@@ -2,6 +2,7 @@ require "./../system/com.cr"
 require "./../foundation.cr"
 
 module Win32cr::Storage::DataDeduplication
+  extend self
   DEDUP_CHUNKLIB_MAX_CHUNKS_ENUM = 1024_u32
 
   CLSID_DedupBackupSupport = LibC::GUID.new(0x73d6b2ad_u32, 0x2984_u16, 0x4715_u16, StaticArray[0xb2_u8, 0xe3_u8, 0x92_u8, 0x4c_u8, 0x14_u8, 0x97_u8, 0x44_u8, 0xdd_u8])

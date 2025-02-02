@@ -5,6 +5,7 @@ require "./audio.cr"
 require "./../system/com/urlmon.cr"
 
 module Win32cr::Media::Speech
+  extend self
   alias SPNOTIFYCALLBACK = Proc(Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Void)
 
   SPDUI_EngineProperties = "EngineProperties"

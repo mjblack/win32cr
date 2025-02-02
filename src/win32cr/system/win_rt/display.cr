@@ -4,6 +4,7 @@ require "./../win_rt.cr"
 require "./../../security.cr"
 
 module Win32cr::System::WinRT::Display
+  extend self
 
 
   @[Extern]

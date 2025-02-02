@@ -5,6 +5,7 @@ require "./../system/ole.cr"
 require "./controls.cr"
 
 module Win32cr::UI::TabletPC
+  extend self
   alias HRECOALT = LibC::IntPtrT
   alias HRECOCONTEXT = LibC::IntPtrT
   alias HRECOGNIZER = LibC::IntPtrT
@@ -6987,60 +6988,195 @@ module Win32cr::UI::TabletPC
 
   end
 
+  def createRecognizer(pCLSID : LibC::GUID*, phrec : Win32cr::UI::TabletPC::HRECOGNIZER*) : Win32cr::Foundation::HRESULT
+    C.CreateRecognizer(pCLSID, phrec)
+  end
+
+  def destroyRecognizer(hrec : Win32cr::UI::TabletPC::HRECOGNIZER) : Win32cr::Foundation::HRESULT
+    C.DestroyRecognizer(hrec)
+  end
+
+  def getRecoAttributes(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pRecoAttrs : Win32cr::UI::TabletPC::RECO_ATTRS*) : Win32cr::Foundation::HRESULT
+    C.GetRecoAttributes(hrec, pRecoAttrs)
+  end
+
+  def createContext(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, phrc : Win32cr::UI::TabletPC::HRECOCONTEXT*) : Win32cr::Foundation::HRESULT
+    C.CreateContext(hrec, phrc)
+  end
+
+  def destroyContext(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT) : Win32cr::Foundation::HRESULT
+    C.DestroyContext(hrc)
+  end
+
+  def getResultPropertyList(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pPropertyCount : UInt32*, pPropertyGuid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.GetResultPropertyList(hrec, pPropertyCount, pPropertyGuid)
+  end
+
+  def getUnicodeRanges(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pcRanges : UInt32*, pcr : Win32cr::UI::TabletPC::CHARACTER_RANGE*) : Win32cr::Foundation::HRESULT
+    C.GetUnicodeRanges(hrec, pcRanges, pcr)
+  end
+
+  def addStroke(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pPacketDesc : Win32cr::UI::TabletPC::PACKET_DESCRIPTION*, cbPacket : UInt32, pPacket : UInt8*, pXForm : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::HRESULT
+    C.AddStroke(hrc, pPacketDesc, cbPacket, pPacket, pXForm)
+  end
+
+  def getBestResultString(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcBestResult : UInt16*) : Win32cr::Foundation::HRESULT
+    C.GetBestResultString(hrc, pcSize, pwcBestResult)
+  end
+
+  def setGuide(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pGuide : Win32cr::UI::TabletPC::RECO_GUIDE*, iIndex : UInt32) : Win32cr::Foundation::HRESULT
+    C.SetGuide(hrc, pGuide, iIndex)
+  end
+
+  def adviseInkChange(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, bNewStroke : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.AdviseInkChange(hrc, bNewStroke)
+  end
+
+  def endInkInput(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT) : Win32cr::Foundation::HRESULT
+    C.EndInkInput(hrc)
+  end
+
+  def process(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pbPartialProcessing : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.Process(hrc, pbPartialProcessing)
+  end
+
+  def setFactoid(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, cwcFactoid : UInt32, pwcFactoid : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.SetFactoid(hrc, cwcFactoid, pwcFactoid)
+  end
+
+  def setFlags(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.SetFlags(hrc, dwFlags)
+  end
+
+  def getLatticePtr(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, ppLattice : Win32cr::UI::TabletPC::RECO_LATTICE**) : Win32cr::Foundation::HRESULT
+    C.GetLatticePtr(hrc, ppLattice)
+  end
+
+  def setTextContext(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, cwcBefore : UInt32, pwcBefore : UInt16*, cwcAfter : UInt32, pwcAfter : UInt16*) : Win32cr::Foundation::HRESULT
+    C.SetTextContext(hrc, cwcBefore, pwcBefore, cwcAfter, pwcAfter)
+  end
+
+  def setEnabledUnicodeRanges(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, cRanges : UInt32, pcr : Win32cr::UI::TabletPC::CHARACTER_RANGE*) : Win32cr::Foundation::HRESULT
+    C.SetEnabledUnicodeRanges(hrc, cRanges, pcr)
+  end
+
+  def isStringSupported(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, wcString : UInt32, pwcString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.IsStringSupported(hrc, wcString, pwcString)
+  end
+
+  def setWordList(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, hwl : Win32cr::UI::TabletPC::HRECOWORDLIST) : Win32cr::Foundation::HRESULT
+    C.SetWordList(hrc, hwl)
+  end
+
+  def getRightSeparator(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcRightSeparator : UInt16*) : Win32cr::Foundation::HRESULT
+    C.GetRightSeparator(hrc, pcSize, pwcRightSeparator)
+  end
+
+  def getLeftSeparator(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcLeftSeparator : UInt16*) : Win32cr::Foundation::HRESULT
+    C.GetLeftSeparator(hrc, pcSize, pwcLeftSeparator)
+  end
+
+  def destroyWordList(hwl : Win32cr::UI::TabletPC::HRECOWORDLIST) : Win32cr::Foundation::HRESULT
+    C.DestroyWordList(hwl)
+  end
+
+  def addWordsToWordList(hwl : Win32cr::UI::TabletPC::HRECOWORDLIST, pwcWords : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.AddWordsToWordList(hwl, pwcWords)
+  end
+
+  def makeWordList(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pBuffer : Win32cr::Foundation::PWSTR, phwl : Win32cr::UI::TabletPC::HRECOWORDLIST*) : Win32cr::Foundation::HRESULT
+    C.MakeWordList(hrec, pBuffer, phwl)
+  end
+
+  def getAllRecognizers(recognizerClsids : LibC::GUID**, count : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetAllRecognizers(recognizerClsids, count)
+  end
+
+  def loadCachedAttributes(clsid : LibC::GUID, pRecoAttributes : Win32cr::UI::TabletPC::RECO_ATTRS*) : Win32cr::Foundation::HRESULT
+    C.LoadCachedAttributes(clsid, pRecoAttributes)
+  end
+
   @[Link("inkobjcore")]
   lib C
+    # :nodoc:
     fun CreateRecognizer(pCLSID : LibC::GUID*, phrec : Win32cr::UI::TabletPC::HRECOGNIZER*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DestroyRecognizer(hrec : Win32cr::UI::TabletPC::HRECOGNIZER) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetRecoAttributes(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pRecoAttrs : Win32cr::UI::TabletPC::RECO_ATTRS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateContext(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, phrc : Win32cr::UI::TabletPC::HRECOCONTEXT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DestroyContext(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetResultPropertyList(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pPropertyCount : UInt32*, pPropertyGuid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetUnicodeRanges(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pcRanges : UInt32*, pcr : Win32cr::UI::TabletPC::CHARACTER_RANGE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun AddStroke(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pPacketDesc : Win32cr::UI::TabletPC::PACKET_DESCRIPTION*, cbPacket : UInt32, pPacket : UInt8*, pXForm : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetBestResultString(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcBestResult : UInt16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetGuide(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pGuide : Win32cr::UI::TabletPC::RECO_GUIDE*, iIndex : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun AdviseInkChange(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, bNewStroke : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun EndInkInput(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun Process(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pbPartialProcessing : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetFactoid(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, cwcFactoid : UInt32, pwcFactoid : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetFlags(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetLatticePtr(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, ppLattice : Win32cr::UI::TabletPC::RECO_LATTICE**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetTextContext(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, cwcBefore : UInt32, pwcBefore : UInt16*, cwcAfter : UInt32, pwcAfter : UInt16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetEnabledUnicodeRanges(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, cRanges : UInt32, pcr : Win32cr::UI::TabletPC::CHARACTER_RANGE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IsStringSupported(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, wcString : UInt32, pwcString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetWordList(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, hwl : Win32cr::UI::TabletPC::HRECOWORDLIST) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetRightSeparator(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcRightSeparator : UInt16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetLeftSeparator(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcLeftSeparator : UInt16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DestroyWordList(hwl : Win32cr::UI::TabletPC::HRECOWORDLIST) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun AddWordsToWordList(hwl : Win32cr::UI::TabletPC::HRECOWORDLIST, pwcWords : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MakeWordList(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pBuffer : Win32cr::Foundation::PWSTR, phwl : Win32cr::UI::TabletPC::HRECOWORDLIST*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetAllRecognizers(recognizerClsids : LibC::GUID**, count : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LoadCachedAttributes(clsid : LibC::GUID, pRecoAttributes : Win32cr::UI::TabletPC::RECO_ATTRS*) : Win32cr::Foundation::HRESULT
 
   end

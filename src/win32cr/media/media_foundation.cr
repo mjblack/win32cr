@@ -12,6 +12,7 @@ require "./../system/win_rt.cr"
 require "./../devices/properties.cr"
 
 module Win32cr::Media::MediaFoundation
+  extend self
   alias PDXVAHDSW_CreateDevice = Proc(Void*, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::HRESULT)
 
   alias PDXVAHDSW_ProposeVideoPrivateFormat = Proc(Win32cr::Foundation::HANDLE, Win32cr::Graphics::Direct3D9::D3DFORMAT*, Win32cr::Foundation::HRESULT)
@@ -28036,6 +28037,974 @@ module Win32cr::Media::MediaFoundation
 
   end
 
+  def dXVAHDCreateDevice(pD3DDevice : Void*, pContentDesc : Win32cr::Media::MediaFoundation::DXVAHD_CONTENT_DESC*, usage : Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_USAGE, pPlugin : Win32cr::Media::MediaFoundation::PDXVAHDSW_Plugin, ppDevice : Void**) : Win32cr::Foundation::HRESULT
+    C.DXVAHD_CreateDevice(pD3DDevice, pContentDesc, usage, pPlugin, ppDevice)
+  end
+
+  def dXVA2CreateDirect3DDeviceManager9(pResetToken : UInt32*, ppDeviceManager : Void**) : Win32cr::Foundation::HRESULT
+    C.DXVA2CreateDirect3DDeviceManager9(pResetToken, ppDeviceManager)
+  end
+
+  def dXVA2CreateVideoService(pDD : Void*, riid : LibC::GUID*, ppService : Void**) : Win32cr::Foundation::HRESULT
+    C.DXVA2CreateVideoService(pDD, riid, ppService)
+  end
+
+  def oPMGetVideoOutputsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, vos : Win32cr::Media::MediaFoundation::OPM_VIDEO_OUTPUT_SEMANTICS, pulNumVideoOutputs : UInt32*, pppOPMVideoOutputArray : Void***) : Win32cr::Foundation::HRESULT
+    C.OPMGetVideoOutputsFromHMONITOR(hMonitor, vos, pulNumVideoOutputs, pppOPMVideoOutputArray)
+  end
+
+  def oPMGetVideoOutputForTarget(pAdapterLuid : Win32cr::Foundation::LUID*, vid_pn_target : UInt32, vos : Win32cr::Media::MediaFoundation::OPM_VIDEO_OUTPUT_SEMANTICS, ppOPMVideoOutput : Void**) : Win32cr::Foundation::HRESULT
+    C.OPMGetVideoOutputForTarget(pAdapterLuid, vid_pn_target, vos, ppOPMVideoOutput)
+  end
+
+  def oPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9 : Void*, vos : Win32cr::Media::MediaFoundation::OPM_VIDEO_OUTPUT_SEMANTICS, pulNumVideoOutputs : UInt32*, pppOPMVideoOutputArray : Void***) : Win32cr::Foundation::HRESULT
+    C.OPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9, vos, pulNumVideoOutputs, pppOPMVideoOutputArray)
+  end
+
+  def mFSerializeAttributesToStream(pAttr : Void*, dwOptions : UInt32, pStm : Void*) : Win32cr::Foundation::HRESULT
+    C.MFSerializeAttributesToStream(pAttr, dwOptions, pStm)
+  end
+
+  def mFDeserializeAttributesFromStream(pAttr : Void*, dwOptions : UInt32, pStm : Void*) : Win32cr::Foundation::HRESULT
+    C.MFDeserializeAttributesFromStream(pAttr, dwOptions, pStm)
+  end
+
+  def mFCreateTransformActivate(ppActivate : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateTransformActivate(ppActivate)
+  end
+
+  def mFCreateMediaSession(pConfiguration : Void*, ppMediaSession : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMediaSession(pConfiguration, ppMediaSession)
+  end
+
+  def mFCreatePMPMediaSession(dwCreationFlags : UInt32, pConfiguration : Void*, ppMediaSession : Void**, ppEnablerActivate : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreatePMPMediaSession(dwCreationFlags, pConfiguration, ppMediaSession, ppEnablerActivate)
+  end
+
+  def mFCreateSourceResolver(ppISourceResolver : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSourceResolver(ppISourceResolver)
+  end
+
+  def createPropertyStore(ppStore : Void**) : Win32cr::Foundation::HRESULT
+    C.CreatePropertyStore(ppStore)
+  end
+
+  def mFGetSupportedSchemes(pPropVarSchemeArray : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.MFGetSupportedSchemes(pPropVarSchemeArray)
+  end
+
+  def mFGetSupportedMimeTypes(pPropVarMimeTypeArray : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.MFGetSupportedMimeTypes(pPropVarMimeTypeArray)
+  end
+
+  def mFCreateTopology(ppTopo : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateTopology(ppTopo)
+  end
+
+  def mFCreateTopologyNode(node_type : Win32cr::Media::MediaFoundation::MF_TOPOLOGY_TYPE, ppNode : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateTopologyNode(node_type, ppNode)
+  end
+
+  def mFGetTopoNodeCurrentType(pNode : Void*, dwStreamIndex : UInt32, fOutput : Win32cr::Foundation::BOOL, ppType : Void**) : Win32cr::Foundation::HRESULT
+    C.MFGetTopoNodeCurrentType(pNode, dwStreamIndex, fOutput, ppType)
+  end
+
+  def mFGetService(punkObject : Void*, guidService : LibC::GUID*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    C.MFGetService(punkObject, guidService, riid, ppvObject)
+  end
+
+  def mFGetSystemTime : Int64
+    C.MFGetSystemTime
+  end
+
+  def mFCreatePresentationClock(ppPresentationClock : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreatePresentationClock(ppPresentationClock)
+  end
+
+  def mFCreateSystemTimeSource(ppSystemTimeSource : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSystemTimeSource(ppSystemTimeSource)
+  end
+
+  def mFCreatePresentationDescriptor(cStreamDescriptors : UInt32, apStreamDescriptors : Void**, ppPresentationDescriptor : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreatePresentationDescriptor(cStreamDescriptors, apStreamDescriptors, ppPresentationDescriptor)
+  end
+
+  def mFRequireProtectedEnvironment(pPresentationDescriptor : Void*) : Win32cr::Foundation::HRESULT
+    C.MFRequireProtectedEnvironment(pPresentationDescriptor)
+  end
+
+  def mFSerializePresentationDescriptor(pPD : Void*, pcbData : UInt32*, ppbData : UInt8**) : Win32cr::Foundation::HRESULT
+    C.MFSerializePresentationDescriptor(pPD, pcbData, ppbData)
+  end
+
+  def mFDeserializePresentationDescriptor(cbData : UInt32, pbData : UInt8*, ppPD : Void**) : Win32cr::Foundation::HRESULT
+    C.MFDeserializePresentationDescriptor(cbData, pbData, ppPD)
+  end
+
+  def mFCreateStreamDescriptor(dwStreamIdentifier : UInt32, cMediaTypes : UInt32, apMediaTypes : Void**, ppDescriptor : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateStreamDescriptor(dwStreamIdentifier, cMediaTypes, apMediaTypes, ppDescriptor)
+  end
+
+  def mFCreateSimpleTypeHandler(ppHandler : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSimpleTypeHandler(ppHandler)
+  end
+
+  def mFShutdownObject(pUnk : Void*) : Win32cr::Foundation::HRESULT
+    C.MFShutdownObject(pUnk)
+  end
+
+  def mFCreateAudioRenderer(pAudioAttributes : Void*, ppSink : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateAudioRenderer(pAudioAttributes, ppSink)
+  end
+
+  def mFCreateAudioRendererActivate(ppActivate : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateAudioRendererActivate(ppActivate)
+  end
+
+  def mFCreateVideoRendererActivate(hwndVideo : Win32cr::Foundation::HWND, ppActivate : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateVideoRendererActivate(hwndVideo, ppActivate)
+  end
+
+  def mFCreateMPEG4MediaSink(pIByteStream : Void*, pVideoMediaType : Void*, pAudioMediaType : Void*, ppIMediaSink : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMPEG4MediaSink(pIByteStream, pVideoMediaType, pAudioMediaType, ppIMediaSink)
+  end
+
+  def mFCreate3GPMediaSink(pIByteStream : Void*, pVideoMediaType : Void*, pAudioMediaType : Void*, ppIMediaSink : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreate3GPMediaSink(pIByteStream, pVideoMediaType, pAudioMediaType, ppIMediaSink)
+  end
+
+  def mFCreateMP3MediaSink(pTargetByteStream : Void*, ppMediaSink : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMP3MediaSink(pTargetByteStream, ppMediaSink)
+  end
+
+  def mFCreateAC3MediaSink(pTargetByteStream : Void*, pAudioMediaType : Void*, ppMediaSink : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateAC3MediaSink(pTargetByteStream, pAudioMediaType, ppMediaSink)
+  end
+
+  def mFCreateADTSMediaSink(pTargetByteStream : Void*, pAudioMediaType : Void*, ppMediaSink : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateADTSMediaSink(pTargetByteStream, pAudioMediaType, ppMediaSink)
+  end
+
+  def mFCreateMuxSink(guidOutputSubType : LibC::GUID, pOutputAttributes : Void*, pOutputByteStream : Void*, ppMuxSink : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMuxSink(guidOutputSubType, pOutputAttributes, pOutputByteStream, ppMuxSink)
+  end
+
+  def mFCreateFMPEG4MediaSink(pIByteStream : Void*, pVideoMediaType : Void*, pAudioMediaType : Void*, ppIMediaSink : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateFMPEG4MediaSink(pIByteStream, pVideoMediaType, pAudioMediaType, ppIMediaSink)
+  end
+
+  def mFCreateAVIMediaSink(pIByteStream : Void*, pVideoMediaType : Void*, pAudioMediaType : Void*, ppIMediaSink : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateAVIMediaSink(pIByteStream, pVideoMediaType, pAudioMediaType, ppIMediaSink)
+  end
+
+  def mFCreateWAVEMediaSink(pTargetByteStream : Void*, pAudioMediaType : Void*, ppMediaSink : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateWAVEMediaSink(pTargetByteStream, pAudioMediaType, ppMediaSink)
+  end
+
+  def mFCreateTopoLoader(ppObj : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateTopoLoader(ppObj)
+  end
+
+  def mFCreateSampleGrabberSinkActivate(pIMFMediaType : Void*, pIMFSampleGrabberSinkCallback : Void*, ppIActivate : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSampleGrabberSinkActivate(pIMFMediaType, pIMFSampleGrabberSinkCallback, ppIActivate)
+  end
+
+  def mFCreateStandardQualityManager(ppQualityManager : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateStandardQualityManager(ppQualityManager)
+  end
+
+  def mFCreateSequencerSource(pReserved : Void*, ppSequencerSource : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSequencerSource(pReserved, ppSequencerSource)
+  end
+
+  def mFCreateSequencerSegmentOffset(dwId : UInt32, hnsOffset : Int64, pvarSegmentOffset : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.MFCreateSequencerSegmentOffset(dwId, hnsOffset, pvarSegmentOffset)
+  end
+
+  def mFCreateAggregateSource(pSourceCollection : Void*, ppAggSource : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateAggregateSource(pSourceCollection, ppAggSource)
+  end
+
+  def mFCreateCredentialCache(ppCache : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateCredentialCache(ppCache)
+  end
+
+  def mFCreateProxyLocator(pszProtocol : Win32cr::Foundation::PWSTR, pProxyConfig : Void*, ppProxyLocator : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateProxyLocator(pszProtocol, pProxyConfig, ppProxyLocator)
+  end
+
+  def mFCreateNetSchemePlugin(riid : LibC::GUID*, ppvHandler : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateNetSchemePlugin(riid, ppvHandler)
+  end
+
+  def mFCreatePMPServer(dwCreationFlags : UInt32, ppPMPServer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreatePMPServer(dwCreationFlags, ppPMPServer)
+  end
+
+  def mFCreateRemoteDesktopPlugin(ppPlugin : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateRemoteDesktopPlugin(ppPlugin)
+  end
+
+  def createNamedPropertyStore(ppStore : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateNamedPropertyStore(ppStore)
+  end
+
+  def mFCreateSampleCopierMFT(ppCopierMFT : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSampleCopierMFT(ppCopierMFT)
+  end
+
+  def mFCreateTranscodeProfile(ppTranscodeProfile : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateTranscodeProfile(ppTranscodeProfile)
+  end
+
+  def mFCreateTranscodeTopology(pSrc : Void*, pwszOutputFilePath : Win32cr::Foundation::PWSTR, pProfile : Void*, ppTranscodeTopo : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateTranscodeTopology(pSrc, pwszOutputFilePath, pProfile, ppTranscodeTopo)
+  end
+
+  def mFCreateTranscodeTopologyFromByteStream(pSrc : Void*, pOutputStream : Void*, pProfile : Void*, ppTranscodeTopo : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateTranscodeTopologyFromByteStream(pSrc, pOutputStream, pProfile, ppTranscodeTopo)
+  end
+
+  def mFTranscodeGetAudioOutputAvailableTypes(guidSubType : LibC::GUID*, dwMFTFlags : UInt32, pCodecConfig : Void*, ppAvailableTypes : Void**) : Win32cr::Foundation::HRESULT
+    C.MFTranscodeGetAudioOutputAvailableTypes(guidSubType, dwMFTFlags, pCodecConfig, ppAvailableTypes)
+  end
+
+  def mFCreateTranscodeSinkActivate(ppActivate : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateTranscodeSinkActivate(ppActivate)
+  end
+
+  def mFCreateTrackedSample(ppMFSample : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateTrackedSample(ppMFSample)
+  end
+
+  def mFCreateMFByteStreamOnStream(pStream : Void*, ppByteStream : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMFByteStreamOnStream(pStream, ppByteStream)
+  end
+
+  def mFCreateStreamOnMFByteStream(pByteStream : Void*, ppStream : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateStreamOnMFByteStream(pByteStream, ppStream)
+  end
+
+  def mFCreateMFByteStreamOnStreamEx(punkStream : Void*, ppByteStream : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMFByteStreamOnStreamEx(punkStream, ppByteStream)
+  end
+
+  def mFCreateStreamOnMFByteStreamEx(pByteStream : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateStreamOnMFByteStreamEx(pByteStream, riid, ppv)
+  end
+
+  def mFCreateMediaTypeFromProperties(punkStream : Void*, ppMediaType : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMediaTypeFromProperties(punkStream, ppMediaType)
+  end
+
+  def mFCreatePropertiesFromMediaType(pMediaType : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreatePropertiesFromMediaType(pMediaType, riid, ppv)
+  end
+
+  def mFEnumDeviceSources(pAttributes : Void*, pppSourceActivate : Void***, pcSourceActivate : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFEnumDeviceSources(pAttributes, pppSourceActivate, pcSourceActivate)
+  end
+
+  def mFCreateDeviceSource(pAttributes : Void*, ppSource : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateDeviceSource(pAttributes, ppSource)
+  end
+
+  def mFCreateDeviceSourceActivate(pAttributes : Void*, ppActivate : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateDeviceSourceActivate(pAttributes, ppActivate)
+  end
+
+  def mFCreateProtectedEnvironmentAccess(ppAccess : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateProtectedEnvironmentAccess(ppAccess)
+  end
+
+  def mFLoadSignedLibrary(pszName : Win32cr::Foundation::PWSTR, ppLib : Void**) : Win32cr::Foundation::HRESULT
+    C.MFLoadSignedLibrary(pszName, ppLib)
+  end
+
+  def mFGetSystemId(ppId : Void**) : Win32cr::Foundation::HRESULT
+    C.MFGetSystemId(ppId)
+  end
+
+  def mFGetLocalId(verifier : UInt8*, size : UInt32, id : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.MFGetLocalId(verifier, size, id)
+  end
+
+  def mFCreateContentProtectionDevice(protection_system_id : LibC::GUID*, content_protection_device : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateContentProtectionDevice(protection_system_id, content_protection_device)
+  end
+
+  def mFIsContentProtectionDeviceSupported(protection_system_id : LibC::GUID*, isSupported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.MFIsContentProtectionDeviceSupported(protection_system_id, isSupported)
+  end
+
+  def mFCreateContentDecryptorContext(guidMediaProtectionSystemId : LibC::GUID*, pD3DManager : Void*, pContentProtectionDevice : Void*, ppContentDecryptorContext : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateContentDecryptorContext(guidMediaProtectionSystemId, pD3DManager, pContentProtectionDevice, ppContentDecryptorContext)
+  end
+
+  def mFCreateSensorGroup(sensor_group_symbolic_link : Win32cr::Foundation::PWSTR, ppSensorGroup : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSensorGroup(sensor_group_symbolic_link, ppSensorGroup)
+  end
+
+  def mFCreateSensorStream(stream_id : UInt32, pAttributes : Void*, pMediaTypeCollection : Void*, ppStream : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSensorStream(stream_id, pAttributes, pMediaTypeCollection, ppStream)
+  end
+
+  def mFCreateSensorProfile(profile_type : LibC::GUID*, profile_index : UInt32, constraints : Win32cr::Foundation::PWSTR, ppProfile : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSensorProfile(profile_type, profile_index, constraints, ppProfile)
+  end
+
+  def mFCreateSensorProfileCollection(ppSensorProfile : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSensorProfileCollection(ppSensorProfile)
+  end
+
+  def mFCreateSensorActivityMonitor(pCallback : Void*, ppActivityMonitor : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSensorActivityMonitor(pCallback, ppActivityMonitor)
+  end
+
+  def mFCreateExtendedCameraIntrinsics(ppExtendedCameraIntrinsics : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateExtendedCameraIntrinsics(ppExtendedCameraIntrinsics)
+  end
+
+  def mFCreateExtendedCameraIntrinsicModel(distortionModelType : Win32cr::Media::MediaFoundation::MFCameraIntrinsic_DistortionModelType, ppExtendedCameraIntrinsicModel : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateExtendedCameraIntrinsicModel(distortionModelType, ppExtendedCameraIntrinsicModel)
+  end
+
+  def mFCreateRelativePanelWatcher(videoDeviceId : Win32cr::Foundation::PWSTR, displayMonitorDeviceId : Win32cr::Foundation::PWSTR, ppRelativePanelWatcher : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateRelativePanelWatcher(videoDeviceId, displayMonitorDeviceId, ppRelativePanelWatcher)
+  end
+
+  def mFCreateCameraOcclusionStateMonitor(symbolicLink : Win32cr::Foundation::PWSTR, callback : Void*, occlusionStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateCameraOcclusionStateMonitor(symbolicLink, callback, occlusionStateMonitor)
+  end
+
+  def mFCreateASFContentInfo(ppIContentInfo : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateASFContentInfo(ppIContentInfo)
+  end
+
+  def mFCreateASFIndexer(ppIIndexer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateASFIndexer(ppIIndexer)
+  end
+
+  def mFCreateASFIndexerByteStream(pIContentByteStream : Void*, cbIndexStartOffset : UInt64, pIIndexByteStream : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateASFIndexerByteStream(pIContentByteStream, cbIndexStartOffset, pIIndexByteStream)
+  end
+
+  def mFCreateASFSplitter(ppISplitter : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateASFSplitter(ppISplitter)
+  end
+
+  def mFCreateASFProfile(ppIProfile : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateASFProfile(ppIProfile)
+  end
+
+  def mFCreateASFProfileFromPresentationDescriptor(pIPD : Void*, ppIProfile : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateASFProfileFromPresentationDescriptor(pIPD, ppIProfile)
+  end
+
+  def mFCreatePresentationDescriptorFromASFProfile(pIProfile : Void*, ppIPD : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreatePresentationDescriptorFromASFProfile(pIProfile, ppIPD)
+  end
+
+  def mFCreateASFMultiplexer(ppIMultiplexer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateASFMultiplexer(ppIMultiplexer)
+  end
+
+  def mFCreateASFStreamSelector(pIASFProfile : Void*, ppSelector : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateASFStreamSelector(pIASFProfile, ppSelector)
+  end
+
+  def mFCreateASFMediaSink(pIByteStream : Void*, ppIMediaSink : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateASFMediaSink(pIByteStream, ppIMediaSink)
+  end
+
+  def mFCreateASFMediaSinkActivate(pwszFileName : Win32cr::Foundation::PWSTR, pContentInfo : Void*, ppIActivate : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateASFMediaSinkActivate(pwszFileName, pContentInfo, ppIActivate)
+  end
+
+  def mFCreateWMVEncoderActivate(pMediaType : Void*, pEncodingConfigurationProperties : Void*, ppActivate : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateWMVEncoderActivate(pMediaType, pEncodingConfigurationProperties, ppActivate)
+  end
+
+  def mFCreateWMAEncoderActivate(pMediaType : Void*, pEncodingConfigurationProperties : Void*, ppActivate : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateWMAEncoderActivate(pMediaType, pEncodingConfigurationProperties, ppActivate)
+  end
+
+  def mFCreateASFStreamingMediaSink(pIByteStream : Void*, ppIMediaSink : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateASFStreamingMediaSink(pIByteStream, ppIMediaSink)
+  end
+
+  def mFCreateASFStreamingMediaSinkActivate(pByteStreamActivate : Void*, pContentInfo : Void*, ppIActivate : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateASFStreamingMediaSinkActivate(pByteStreamActivate, pContentInfo, ppIActivate)
+  end
+
+  def mFCreateD3D12SynchronizationObject(pDevice : Void*, riid : LibC::GUID*, ppvSyncObject : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateD3D12SynchronizationObject(pDevice, riid, ppvSyncObject)
+  end
+
+  def mFStartup(version : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFStartup(version, dwFlags)
+  end
+
+  def mFShutdown : Win32cr::Foundation::HRESULT
+    C.MFShutdown
+  end
+
+  def mFLockPlatform : Win32cr::Foundation::HRESULT
+    C.MFLockPlatform
+  end
+
+  def mFUnlockPlatform : Win32cr::Foundation::HRESULT
+    C.MFUnlockPlatform
+  end
+
+  def mFPutWorkItem(dwQueue : UInt32, pCallback : Void*, pState : Void*) : Win32cr::Foundation::HRESULT
+    C.MFPutWorkItem(dwQueue, pCallback, pState)
+  end
+
+  def mFPutWorkItem2(dwQueue : UInt32, priority : Int32, pCallback : Void*, pState : Void*) : Win32cr::Foundation::HRESULT
+    C.MFPutWorkItem2(dwQueue, priority, pCallback, pState)
+  end
+
+  def mFPutWorkItemEx(dwQueue : UInt32, pResult : Void*) : Win32cr::Foundation::HRESULT
+    C.MFPutWorkItemEx(dwQueue, pResult)
+  end
+
+  def mFPutWorkItemEx2(dwQueue : UInt32, priority : Int32, pResult : Void*) : Win32cr::Foundation::HRESULT
+    C.MFPutWorkItemEx2(dwQueue, priority, pResult)
+  end
+
+  def mFPutWaitingWorkItem(hEvent : Win32cr::Foundation::HANDLE, priority : Int32, pResult : Void*, pKey : UInt64*) : Win32cr::Foundation::HRESULT
+    C.MFPutWaitingWorkItem(hEvent, priority, pResult, pKey)
+  end
+
+  def mFAllocateSerialWorkQueue(dwWorkQueue : UInt32, pdwWorkQueue : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFAllocateSerialWorkQueue(dwWorkQueue, pdwWorkQueue)
+  end
+
+  def mFScheduleWorkItemEx(pResult : Void*, timeout : Int64, pKey : UInt64*) : Win32cr::Foundation::HRESULT
+    C.MFScheduleWorkItemEx(pResult, timeout, pKey)
+  end
+
+  def mFScheduleWorkItem(pCallback : Void*, pState : Void*, timeout : Int64, pKey : UInt64*) : Win32cr::Foundation::HRESULT
+    C.MFScheduleWorkItem(pCallback, pState, timeout, pKey)
+  end
+
+  def mFCancelWorkItem(key : UInt64) : Win32cr::Foundation::HRESULT
+    C.MFCancelWorkItem(key)
+  end
+
+  def mFGetTimerPeriodicity(periodicity : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFGetTimerPeriodicity(periodicity)
+  end
+
+  def mFAddPeriodicCallback(callback : Win32cr::Media::MediaFoundation::MFPERIODICCALLBACK, pContext : Void*, pdwKey : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFAddPeriodicCallback(callback, pContext, pdwKey)
+  end
+
+  def mFRemovePeriodicCallback(dwKey : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFRemovePeriodicCallback(dwKey)
+  end
+
+  def mFAllocateWorkQueueEx(work_queue_type : Win32cr::Media::MediaFoundation::MFASYNC_WORKQUEUE_TYPE, pdwWorkQueue : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFAllocateWorkQueueEx(work_queue_type, pdwWorkQueue)
+  end
+
+  def mFAllocateWorkQueue(pdwWorkQueue : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFAllocateWorkQueue(pdwWorkQueue)
+  end
+
+  def mFLockWorkQueue(dwWorkQueue : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFLockWorkQueue(dwWorkQueue)
+  end
+
+  def mFUnlockWorkQueue(dwWorkQueue : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFUnlockWorkQueue(dwWorkQueue)
+  end
+
+  def mFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId : UInt32, wszClass : Win32cr::Foundation::PWSTR, dwTaskId : UInt32, pDoneCallback : Void*, pDoneState : Void*) : Win32cr::Foundation::HRESULT
+    C.MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId, wszClass, dwTaskId, pDoneCallback, pDoneState)
+  end
+
+  def mFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId : UInt32, wszClass : Win32cr::Foundation::PWSTR, dwTaskId : UInt32, lPriority : Int32, pDoneCallback : Void*, pDoneState : Void*) : Win32cr::Foundation::HRESULT
+    C.MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId, wszClass, dwTaskId, lPriority, pDoneCallback, pDoneState)
+  end
+
+  def mFEndRegisterWorkQueueWithMMCSS(pResult : Void*, pdwTaskId : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFEndRegisterWorkQueueWithMMCSS(pResult, pdwTaskId)
+  end
+
+  def mFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId : UInt32, pDoneCallback : Void*, pDoneState : Void*) : Win32cr::Foundation::HRESULT
+    C.MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId, pDoneCallback, pDoneState)
+  end
+
+  def mFEndUnregisterWorkQueueWithMMCSS(pResult : Void*) : Win32cr::Foundation::HRESULT
+    C.MFEndUnregisterWorkQueueWithMMCSS(pResult)
+  end
+
+  def mFGetWorkQueueMMCSSClass(dwWorkQueueId : UInt32, pwszClass : UInt16*, pcchClass : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFGetWorkQueueMMCSSClass(dwWorkQueueId, pwszClass, pcchClass)
+  end
+
+  def mFGetWorkQueueMMCSSTaskId(dwWorkQueueId : UInt32, pdwTaskId : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFGetWorkQueueMMCSSTaskId(dwWorkQueueId, pdwTaskId)
+  end
+
+  def mFRegisterPlatformWithMMCSS(wszClass : Win32cr::Foundation::PWSTR, pdwTaskId : UInt32*, lPriority : Int32) : Win32cr::Foundation::HRESULT
+    C.MFRegisterPlatformWithMMCSS(wszClass, pdwTaskId, lPriority)
+  end
+
+  def mFUnregisterPlatformFromMMCSS : Win32cr::Foundation::HRESULT
+    C.MFUnregisterPlatformFromMMCSS
+  end
+
+  def mFLockSharedWorkQueue(wszClass : Win32cr::Foundation::PWSTR, base_priority : Int32, pdwTaskId : UInt32*, pID : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFLockSharedWorkQueue(wszClass, base_priority, pdwTaskId, pID)
+  end
+
+  def mFGetWorkQueueMMCSSPriority(dwWorkQueueId : UInt32, lPriority : Int32*) : Win32cr::Foundation::HRESULT
+    C.MFGetWorkQueueMMCSSPriority(dwWorkQueueId, lPriority)
+  end
+
+  def mFCreateAsyncResult(punkObject : Void*, pCallback : Void*, punkState : Void*, ppAsyncResult : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateAsyncResult(punkObject, pCallback, punkState, ppAsyncResult)
+  end
+
+  def mFInvokeCallback(pAsyncResult : Void*) : Win32cr::Foundation::HRESULT
+    C.MFInvokeCallback(pAsyncResult)
+  end
+
+  def mFCreateFile(access_mode : Win32cr::Media::MediaFoundation::MF_FILE_ACCESSMODE, open_mode : Win32cr::Media::MediaFoundation::MF_FILE_OPENMODE, fFlags : Win32cr::Media::MediaFoundation::MF_FILE_FLAGS, pwszFileURL : Win32cr::Foundation::PWSTR, ppIByteStream : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateFile(access_mode, open_mode, fFlags, pwszFileURL, ppIByteStream)
+  end
+
+  def mFCreateTempFile(access_mode : Win32cr::Media::MediaFoundation::MF_FILE_ACCESSMODE, open_mode : Win32cr::Media::MediaFoundation::MF_FILE_OPENMODE, fFlags : Win32cr::Media::MediaFoundation::MF_FILE_FLAGS, ppIByteStream : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateTempFile(access_mode, open_mode, fFlags, ppIByteStream)
+  end
+
+  def mFBeginCreateFile(access_mode : Win32cr::Media::MediaFoundation::MF_FILE_ACCESSMODE, open_mode : Win32cr::Media::MediaFoundation::MF_FILE_OPENMODE, fFlags : Win32cr::Media::MediaFoundation::MF_FILE_FLAGS, pwszFilePath : Win32cr::Foundation::PWSTR, pCallback : Void*, pState : Void*, ppCancelCookie : Void**) : Win32cr::Foundation::HRESULT
+    C.MFBeginCreateFile(access_mode, open_mode, fFlags, pwszFilePath, pCallback, pState, ppCancelCookie)
+  end
+
+  def mFEndCreateFile(pResult : Void*, ppFile : Void**) : Win32cr::Foundation::HRESULT
+    C.MFEndCreateFile(pResult, ppFile)
+  end
+
+  def mFCancelCreateFile(pCancelCookie : Void*) : Win32cr::Foundation::HRESULT
+    C.MFCancelCreateFile(pCancelCookie)
+  end
+
+  def mFCreateMemoryBuffer(cbMaxLength : UInt32, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMemoryBuffer(cbMaxLength, ppBuffer)
+  end
+
+  def mFCreateMediaBufferWrapper(pBuffer : Void*, cbOffset : UInt32, dwLength : UInt32, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMediaBufferWrapper(pBuffer, cbOffset, dwLength, ppBuffer)
+  end
+
+  def mFCreateLegacyMediaBufferOnMFMediaBuffer(pSample : Void*, pMFMediaBuffer : Void*, cbOffset : UInt32, ppMediaBuffer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample, pMFMediaBuffer, cbOffset, ppMediaBuffer)
+  end
+
+  def mFMapDX9FormatToDXGIFormat(dx9 : UInt32) : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    C.MFMapDX9FormatToDXGIFormat(dx9)
+  end
+
+  def mFMapDXGIFormatToDX9Format(dx11 : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT) : UInt32
+    C.MFMapDXGIFormatToDX9Format(dx11)
+  end
+
+  def mFLockDXGIDeviceManager(pResetToken : UInt32*, ppManager : Void**) : Win32cr::Foundation::HRESULT
+    C.MFLockDXGIDeviceManager(pResetToken, ppManager)
+  end
+
+  def mFUnlockDXGIDeviceManager : Win32cr::Foundation::HRESULT
+    C.MFUnlockDXGIDeviceManager
+  end
+
+  def mFCreateDXSurfaceBuffer(riid : LibC::GUID*, punkSurface : Void*, fBottomUpWhenLinear : Win32cr::Foundation::BOOL, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateDXSurfaceBuffer(riid, punkSurface, fBottomUpWhenLinear, ppBuffer)
+  end
+
+  def mFCreateWICBitmapBuffer(riid : LibC::GUID*, punkSurface : Void*, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateWICBitmapBuffer(riid, punkSurface, ppBuffer)
+  end
+
+  def mFCreateDXGISurfaceBuffer(riid : LibC::GUID*, punkSurface : Void*, uSubresourceIndex : UInt32, fBottomUpWhenLinear : Win32cr::Foundation::BOOL, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateDXGISurfaceBuffer(riid, punkSurface, uSubresourceIndex, fBottomUpWhenLinear, ppBuffer)
+  end
+
+  def mFCreateVideoSampleAllocatorEx(riid : LibC::GUID*, ppSampleAllocator : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateVideoSampleAllocatorEx(riid, ppSampleAllocator)
+  end
+
+  def mFCreateDXGIDeviceManager(resetToken : UInt32*, ppDeviceManager : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateDXGIDeviceManager(resetToken, ppDeviceManager)
+  end
+
+  def mFCreateAlignedMemoryBuffer(cbMaxLength : UInt32, cbAligment : UInt32, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateAlignedMemoryBuffer(cbMaxLength, cbAligment, ppBuffer)
+  end
+
+  def mFCreateMediaEvent(met : UInt32, guidExtendedType : LibC::GUID*, hrStatus : Win32cr::Foundation::HRESULT, pvValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ppEvent : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMediaEvent(met, guidExtendedType, hrStatus, pvValue, ppEvent)
+  end
+
+  def mFCreateEventQueue(ppMediaEventQueue : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateEventQueue(ppMediaEventQueue)
+  end
+
+  def mFCreateSample(ppIMFSample : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSample(ppIMFSample)
+  end
+
+  def mFCreateAttributes(ppMFAttributes : Void**, cInitialSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFCreateAttributes(ppMFAttributes, cInitialSize)
+  end
+
+  def mFInitAttributesFromBlob(pAttributes : Void*, pBuf : UInt8*, cbBufSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFInitAttributesFromBlob(pAttributes, pBuf, cbBufSize)
+  end
+
+  def mFGetAttributesAsBlobSize(pAttributes : Void*, pcbBufSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFGetAttributesAsBlobSize(pAttributes, pcbBufSize)
+  end
+
+  def mFGetAttributesAsBlob(pAttributes : Void*, pBuf : UInt8*, cbBufSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFGetAttributesAsBlob(pAttributes, pBuf, cbBufSize)
+  end
+
+  def mFTRegister(clsidMFT : LibC::GUID, guidCategory : LibC::GUID, pszName : Win32cr::Foundation::PWSTR, flags : UInt32, cInputTypes : UInt32, pInputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, cOutputTypes : UInt32, pOutputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pAttributes : Void*) : Win32cr::Foundation::HRESULT
+    C.MFTRegister(clsidMFT, guidCategory, pszName, flags, cInputTypes, pInputTypes, cOutputTypes, pOutputTypes, pAttributes)
+  end
+
+  def mFTUnregister(clsidMFT : LibC::GUID) : Win32cr::Foundation::HRESULT
+    C.MFTUnregister(clsidMFT)
+  end
+
+  def mFTRegisterLocal(pClassFactory : Void*, guidCategory : LibC::GUID*, pszName : Win32cr::Foundation::PWSTR, flags : UInt32, cInputTypes : UInt32, pInputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, cOutputTypes : UInt32, pOutputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*) : Win32cr::Foundation::HRESULT
+    C.MFTRegisterLocal(pClassFactory, guidCategory, pszName, flags, cInputTypes, pInputTypes, cOutputTypes, pOutputTypes)
+  end
+
+  def mFTUnregisterLocal(pClassFactory : Void*) : Win32cr::Foundation::HRESULT
+    C.MFTUnregisterLocal(pClassFactory)
+  end
+
+  def mFTRegisterLocalByCLSID(clisdMFT : LibC::GUID*, guidCategory : LibC::GUID*, pszName : Win32cr::Foundation::PWSTR, flags : UInt32, cInputTypes : UInt32, pInputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, cOutputTypes : UInt32, pOutputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*) : Win32cr::Foundation::HRESULT
+    C.MFTRegisterLocalByCLSID(clisdMFT, guidCategory, pszName, flags, cInputTypes, pInputTypes, cOutputTypes, pOutputTypes)
+  end
+
+  def mFTUnregisterLocalByCLSID(clsidMFT : LibC::GUID) : Win32cr::Foundation::HRESULT
+    C.MFTUnregisterLocalByCLSID(clsidMFT)
+  end
+
+  def mFTEnum(guidCategory : LibC::GUID, flags : UInt32, pInputType : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pOutputType : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pAttributes : Void*, ppclsidMFT : LibC::GUID**, pcMFTs : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFTEnum(guidCategory, flags, pInputType, pOutputType, pAttributes, ppclsidMFT, pcMFTs)
+  end
+
+  def mFTEnumEx(guidCategory : LibC::GUID, flags : Win32cr::Media::MediaFoundation::MFT_ENUM_FLAG, pInputType : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pOutputType : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pppMFTActivate : Void***, pnumMFTActivate : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFTEnumEx(guidCategory, flags, pInputType, pOutputType, pppMFTActivate, pnumMFTActivate)
+  end
+
+  def mFTEnum2(guidCategory : LibC::GUID, flags : Win32cr::Media::MediaFoundation::MFT_ENUM_FLAG, pInputType : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pOutputType : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pAttributes : Void*, pppMFTActivate : Void***, pnumMFTActivate : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFTEnum2(guidCategory, flags, pInputType, pOutputType, pAttributes, pppMFTActivate, pnumMFTActivate)
+  end
+
+  def mFTGetInfo(clsidMFT : LibC::GUID, pszName : Win32cr::Foundation::PWSTR*, ppInputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO**, pcInputTypes : UInt32*, ppOutputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO**, pcOutputTypes : UInt32*, ppAttributes : Void**) : Win32cr::Foundation::HRESULT
+    C.MFTGetInfo(clsidMFT, pszName, ppInputTypes, pcInputTypes, ppOutputTypes, pcOutputTypes, ppAttributes)
+  end
+
+  def mFGetPluginControl(ppPluginControl : Void**) : Win32cr::Foundation::HRESULT
+    C.MFGetPluginControl(ppPluginControl)
+  end
+
+  def mFGetMFTMerit(pMFT : Void*, cbVerifier : UInt32, verifier : UInt8*, merit : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFGetMFTMerit(pMFT, cbVerifier, verifier, merit)
+  end
+
+  def mFRegisterLocalSchemeHandler(szScheme : Win32cr::Foundation::PWSTR, pActivate : Void*) : Win32cr::Foundation::HRESULT
+    C.MFRegisterLocalSchemeHandler(szScheme, pActivate)
+  end
+
+  def mFRegisterLocalByteStreamHandler(szFileExtension : Win32cr::Foundation::PWSTR, szMimeType : Win32cr::Foundation::PWSTR, pActivate : Void*) : Win32cr::Foundation::HRESULT
+    C.MFRegisterLocalByteStreamHandler(szFileExtension, szMimeType, pActivate)
+  end
+
+  def mFCreateMFByteStreamWrapper(pStream : Void*, ppStreamWrapper : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMFByteStreamWrapper(pStream, ppStreamWrapper)
+  end
+
+  def mFCreateMediaExtensionActivate(szActivatableClassId : Win32cr::Foundation::PWSTR, pConfiguration : Void*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMediaExtensionActivate(szActivatableClassId, pConfiguration, riid, ppvObject)
+  end
+
+  def mFCreateMuxStreamAttributes(pAttributesToMux : Void*, ppMuxAttribs : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMuxStreamAttributes(pAttributesToMux, ppMuxAttribs)
+  end
+
+  def mFCreateMuxStreamMediaType(pMediaTypesToMux : Void*, ppMuxMediaType : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMuxStreamMediaType(pMediaTypesToMux, ppMuxMediaType)
+  end
+
+  def mFCreateMuxStreamSample(pSamplesToMux : Void*, ppMuxSample : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMuxStreamSample(pSamplesToMux, ppMuxSample)
+  end
+
+  def mFValidateMediaTypeSize(format_type : LibC::GUID, pBlock : UInt8*, cbSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFValidateMediaTypeSize(format_type, pBlock, cbSize)
+  end
+
+  def mFCreateMediaType(ppMFType : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMediaType(ppMFType)
+  end
+
+  def mFCreateMFVideoFormatFromMFMediaType(pMFType : Void*, ppMFVF : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT**, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFCreateMFVideoFormatFromMFMediaType(pMFType, ppMFVF, pcbSize)
+  end
+
+  def mFCreateWaveFormatExFromMFMediaType(pMFType : Void*, ppWF : Win32cr::Media::Audio::WAVEFORMATEX**, pcbSize : UInt32*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFCreateWaveFormatExFromMFMediaType(pMFType, ppWF, pcbSize, flags)
+  end
+
+  def mFInitMediaTypeFromVideoInfoHeader(pMFType : Void*, pVIH : Win32cr::Media::MediaFoundation::VIDEOINFOHEADER*, cbBufSize : UInt32, pSubtype : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.MFInitMediaTypeFromVideoInfoHeader(pMFType, pVIH, cbBufSize, pSubtype)
+  end
+
+  def mFInitMediaTypeFromVideoInfoHeader2(pMFType : Void*, pVIH2 : Win32cr::Media::MediaFoundation::VIDEOINFOHEADER2*, cbBufSize : UInt32, pSubtype : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.MFInitMediaTypeFromVideoInfoHeader2(pMFType, pVIH2, cbBufSize, pSubtype)
+  end
+
+  def mFInitMediaTypeFromMPEG1VideoInfo(pMFType : Void*, pMP1VI : Win32cr::Media::MediaFoundation::MPEG1VIDEOINFO*, cbBufSize : UInt32, pSubtype : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.MFInitMediaTypeFromMPEG1VideoInfo(pMFType, pMP1VI, cbBufSize, pSubtype)
+  end
+
+  def mFInitMediaTypeFromMPEG2VideoInfo(pMFType : Void*, pMP2VI : Win32cr::Media::MediaFoundation::MPEG2VIDEOINFO*, cbBufSize : UInt32, pSubtype : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.MFInitMediaTypeFromMPEG2VideoInfo(pMFType, pMP2VI, cbBufSize, pSubtype)
+  end
+
+  def mFCalculateBitmapImageSize(pBMIH : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, cbBufSize : UInt32, pcbImageSize : UInt32*, pbKnown : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.MFCalculateBitmapImageSize(pBMIH, cbBufSize, pcbImageSize, pbKnown)
+  end
+
+  def mFCalculateImageSize(guidSubtype : LibC::GUID*, unWidth : UInt32, unHeight : UInt32, pcbImageSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFCalculateImageSize(guidSubtype, unWidth, unHeight, pcbImageSize)
+  end
+
+  def mFFrameRateToAverageTimePerFrame(unNumerator : UInt32, unDenominator : UInt32, punAverageTimePerFrame : UInt64*) : Win32cr::Foundation::HRESULT
+    C.MFFrameRateToAverageTimePerFrame(unNumerator, unDenominator, punAverageTimePerFrame)
+  end
+
+  def mFAverageTimePerFrameToFrameRate(unAverageTimePerFrame : UInt64, punNumerator : UInt32*, punDenominator : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFAverageTimePerFrameToFrameRate(unAverageTimePerFrame, punNumerator, punDenominator)
+  end
+
+  def mFInitMediaTypeFromMFVideoFormat(pMFType : Void*, pMFVF : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*, cbBufSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFInitMediaTypeFromMFVideoFormat(pMFType, pMFVF, cbBufSize)
+  end
+
+  def mFInitMediaTypeFromWaveFormatEx(pMFType : Void*, pWaveFormat : Win32cr::Media::Audio::WAVEFORMATEX*, cbBufSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFInitMediaTypeFromWaveFormatEx(pMFType, pWaveFormat, cbBufSize)
+  end
+
+  def mFInitMediaTypeFromAMMediaType(pMFType : Void*, pAMType : Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
+    C.MFInitMediaTypeFromAMMediaType(pMFType, pAMType)
+  end
+
+  def mFInitAMMediaTypeFromMFMediaType(pMFType : Void*, guidFormatBlockType : LibC::GUID, pAMType : Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
+    C.MFInitAMMediaTypeFromMFMediaType(pMFType, guidFormatBlockType, pAMType)
+  end
+
+  def mFCreateAMMediaTypeFromMFMediaType(pMFType : Void*, guidFormatBlockType : LibC::GUID, ppAMType : Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE**) : Win32cr::Foundation::HRESULT
+    C.MFCreateAMMediaTypeFromMFMediaType(pMFType, guidFormatBlockType, ppAMType)
+  end
+
+  def mFCompareFullToPartialMediaType(pMFTypeFull : Void*, pMFTypePartial : Void*) : Win32cr::Foundation::BOOL
+    C.MFCompareFullToPartialMediaType(pMFTypeFull, pMFTypePartial)
+  end
+
+  def mFWrapMediaType(pOrig : Void*, major_type : LibC::GUID*, sub_type : LibC::GUID*, ppWrap : Void**) : Win32cr::Foundation::HRESULT
+    C.MFWrapMediaType(pOrig, major_type, sub_type, ppWrap)
+  end
+
+  def mFUnwrapMediaType(pWrap : Void*, ppOrig : Void**) : Win32cr::Foundation::HRESULT
+    C.MFUnwrapMediaType(pWrap, ppOrig)
+  end
+
+  def mFCreateVideoMediaType(pVideoFormat : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*, ppIVideoMediaType : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateVideoMediaType(pVideoFormat, ppIVideoMediaType)
+  end
+
+  def mFCreateVideoMediaTypeFromSubtype(pAMSubtype : LibC::GUID*, ppIVideoMediaType : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateVideoMediaTypeFromSubtype(pAMSubtype, ppIVideoMediaType)
+  end
+
+  def mFIsFormatYUV(format : UInt32) : Win32cr::Foundation::BOOL
+    C.MFIsFormatYUV(format)
+  end
+
+  def mFCreateVideoMediaTypeFromBitMapInfoHeader(pbmihBitMapInfoHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, dwPixelAspectRatioX : UInt32, dwPixelAspectRatioY : UInt32, interlace_mode : Win32cr::Media::MediaFoundation::MFVideoInterlaceMode, video_flags : UInt64, qwFramesPerSecondNumerator : UInt64, qwFramesPerSecondDenominator : UInt64, dwMaxBitRate : UInt32, ppIVideoMediaType : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateVideoMediaTypeFromBitMapInfoHeader(pbmihBitMapInfoHeader, dwPixelAspectRatioX, dwPixelAspectRatioY, interlace_mode, video_flags, qwFramesPerSecondNumerator, qwFramesPerSecondDenominator, dwMaxBitRate, ppIVideoMediaType)
+  end
+
+  def mFGetStrideForBitmapInfoHeader(format : UInt32, dwWidth : UInt32, pStride : Int32*) : Win32cr::Foundation::HRESULT
+    C.MFGetStrideForBitmapInfoHeader(format, dwWidth, pStride)
+  end
+
+  def mFGetPlaneSize(format : UInt32, dwWidth : UInt32, dwHeight : UInt32, pdwPlaneSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFGetPlaneSize(format, dwWidth, dwHeight, pdwPlaneSize)
+  end
+
+  def mFCreateVideoMediaTypeFromBitMapInfoHeaderEx(pbmihBitMapInfoHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, cbBitMapInfoHeader : UInt32, dwPixelAspectRatioX : UInt32, dwPixelAspectRatioY : UInt32, interlace_mode : Win32cr::Media::MediaFoundation::MFVideoInterlaceMode, video_flags : UInt64, dwFramesPerSecondNumerator : UInt32, dwFramesPerSecondDenominator : UInt32, dwMaxBitRate : UInt32, ppIVideoMediaType : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateVideoMediaTypeFromBitMapInfoHeaderEx(pbmihBitMapInfoHeader, cbBitMapInfoHeader, dwPixelAspectRatioX, dwPixelAspectRatioY, interlace_mode, video_flags, dwFramesPerSecondNumerator, dwFramesPerSecondDenominator, dwMaxBitRate, ppIVideoMediaType)
+  end
+
+  def mFCreateMediaTypeFromRepresentation(guidRepresentation : LibC::GUID, pvRepresentation : Void*, ppIMediaType : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMediaTypeFromRepresentation(guidRepresentation, pvRepresentation, ppIMediaType)
+  end
+
+  def mFCreateAudioMediaType(pAudioFormat : Win32cr::Media::Audio::WAVEFORMATEX*, ppIAudioMediaType : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateAudioMediaType(pAudioFormat, ppIAudioMediaType)
+  end
+
+  def mFGetUncompressedVideoFormat(pVideoFormat : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*) : UInt32
+    C.MFGetUncompressedVideoFormat(pVideoFormat)
+  end
+
+  def mFInitVideoFormat(pVideoFormat : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*, type__ : Win32cr::Media::MediaFoundation::MFStandardVideoFormat) : Win32cr::Foundation::HRESULT
+    C.MFInitVideoFormat(pVideoFormat, type__)
+  end
+
+  def mFInitVideoFormatRGB(pVideoFormat : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*, dwWidth : UInt32, dwHeight : UInt32, d3_dfmt : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFInitVideoFormat_RGB(pVideoFormat, dwWidth, dwHeight, d3_dfmt)
+  end
+
+  def mFConvertColorInfoToDXVA(pdwToDXVA : UInt32*, pFromFormat : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*) : Win32cr::Foundation::HRESULT
+    C.MFConvertColorInfoToDXVA(pdwToDXVA, pFromFormat)
+  end
+
+  def mFConvertColorInfoFromDXVA(pToFormat : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*, dwFromDXVA : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFConvertColorInfoFromDXVA(pToFormat, dwFromDXVA)
+  end
+
+  def mFCopyImage(pDest : UInt8*, lDestStride : Int32, pSrc : UInt8*, lSrcStride : Int32, dwWidthInBytes : UInt32, dwLines : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFCopyImage(pDest, lDestStride, pSrc, lSrcStride, dwWidthInBytes, dwLines)
+  end
+
+  def mFConvertFromFP16Array(pDest : Float32*, pSrc : UInt16*, dwCount : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFConvertFromFP16Array(pDest, pSrc, dwCount)
+  end
+
+  def mFConvertToFP16Array(pDest : UInt16*, pSrc : Float32*, dwCount : UInt32) : Win32cr::Foundation::HRESULT
+    C.MFConvertToFP16Array(pDest, pSrc, dwCount)
+  end
+
+  def mFCreate2DMediaBuffer(dwWidth : UInt32, dwHeight : UInt32, dwFourCC : UInt32, fBottomUp : Win32cr::Foundation::BOOL, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreate2DMediaBuffer(dwWidth, dwHeight, dwFourCC, fBottomUp, ppBuffer)
+  end
+
+  def mFCreateMediaBufferFromMediaType(pMediaType : Void*, llDuration : Int64, dwMinLength : UInt32, dwMinAlignment : UInt32, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateMediaBufferFromMediaType(pMediaType, llDuration, dwMinLength, dwMinAlignment, ppBuffer)
+  end
+
+  def mFCreateCollection(ppIMFCollection : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateCollection(ppIMFCollection)
+  end
+
+  def mFHeapAlloc(nSize : LibC::UIntPtrT, dwFlags : UInt32, pszFile : Win32cr::Foundation::PSTR, line : Int32, eat : Win32cr::Media::MediaFoundation::EAllocationType) : Void*
+    C.MFHeapAlloc(nSize, dwFlags, pszFile, line, eat)
+  end
+
+  def mFHeapFree(pv : Void*) : Void
+    C.MFHeapFree(pv)
+  end
+
+  def mFllMulDiv(a : Int64, b : Int64, c : Int64, d : Int64) : Int64
+    C.MFllMulDiv(a, b, c, d)
+  end
+
+  def mFGetContentProtectionSystemCLSID(guidProtectionSystemID : LibC::GUID*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.MFGetContentProtectionSystemCLSID(guidProtectionSystemID, pclsid)
+  end
+
+  def mFCombineSamples(pSample : Void*, pSampleToAdd : Void*, dwMaxMergedDurationInMS : UInt32, pMerged : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.MFCombineSamples(pSample, pSampleToAdd, dwMaxMergedDurationInMS, pMerged)
+  end
+
+  def mFSplitSample(pSample : Void*, pOutputSamples : Void**, dwOutputSampleMaxCount : UInt32, pdwOutputSampleCount : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MFSplitSample(pSample, pOutputSamples, dwOutputSampleMaxCount, pdwOutputSampleCount)
+  end
+
+  def mFCreateSourceReaderFromURL(pwszURL : Win32cr::Foundation::PWSTR, pAttributes : Void*, ppSourceReader : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSourceReaderFromURL(pwszURL, pAttributes, ppSourceReader)
+  end
+
+  def mFCreateSourceReaderFromByteStream(pByteStream : Void*, pAttributes : Void*, ppSourceReader : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSourceReaderFromByteStream(pByteStream, pAttributes, ppSourceReader)
+  end
+
+  def mFCreateSourceReaderFromMediaSource(pMediaSource : Void*, pAttributes : Void*, ppSourceReader : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSourceReaderFromMediaSource(pMediaSource, pAttributes, ppSourceReader)
+  end
+
+  def mFCreateSinkWriterFromURL(pwszOutputURL : Win32cr::Foundation::PWSTR, pByteStream : Void*, pAttributes : Void*, ppSinkWriter : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSinkWriterFromURL(pwszOutputURL, pByteStream, pAttributes, ppSinkWriter)
+  end
+
+  def mFCreateSinkWriterFromMediaSink(pMediaSink : Void*, pAttributes : Void*, ppSinkWriter : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateSinkWriterFromMediaSink(pMediaSink, pAttributes, ppSinkWriter)
+  end
+
+  def mFCreateVideoPresenter(pOwner : Void*, riidDevice : LibC::GUID*, riid : LibC::GUID*, ppVideoPresenter : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateVideoPresenter(pOwner, riidDevice, riid, ppVideoPresenter)
+  end
+
+  def mFCreateVideoMixer(pOwner : Void*, riidDevice : LibC::GUID*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateVideoMixer(pOwner, riidDevice, riid, ppv)
+  end
+
+  def mFCreateVideoMixerAndPresenter(pMixerOwner : Void*, pPresenterOwner : Void*, riidMixer : LibC::GUID*, ppvVideoMixer : Void**, riidPresenter : LibC::GUID*, ppvVideoPresenter : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateVideoMixerAndPresenter(pMixerOwner, pPresenterOwner, riidMixer, ppvVideoMixer, riidPresenter, ppvVideoPresenter)
+  end
+
+  def mFCreateVideoRenderer(riidRenderer : LibC::GUID*, ppVideoRenderer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateVideoRenderer(riidRenderer, ppVideoRenderer)
+  end
+
+  def mFCreateVideoSampleFromSurface(pUnkSurface : Void*, ppSample : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateVideoSampleFromSurface(pUnkSurface, ppSample)
+  end
+
+  def mFCreateVideoSampleAllocator(riid : LibC::GUID*, ppSampleAllocator : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateVideoSampleAllocator(riid, ppSampleAllocator)
+  end
+
+  def mFPCreateMediaPlayer(pwszURL : Win32cr::Foundation::PWSTR, fStartPlayback : Win32cr::Foundation::BOOL, creationOptions : Win32cr::Media::MediaFoundation::MFP_CREATION_OPTIONS, pCallback : Void*, hWnd : Win32cr::Foundation::HWND, ppMediaPlayer : Void**) : Win32cr::Foundation::HRESULT
+    C.MFPCreateMediaPlayer(pwszURL, fStartPlayback, creationOptions, pCallback, hWnd, ppMediaPlayer)
+  end
+
+  def mFCreateEncryptedMediaExtensionsStoreActivate(pmpHost : Void*, objectStream : Void*, classId : Win32cr::Foundation::PWSTR, activate : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost, objectStream, classId, activate)
+  end
+
+  def mFCreateVirtualCamera(type__ : Win32cr::Media::MediaFoundation::MFVirtualCameraType, lifetime : Win32cr::Media::MediaFoundation::MFVirtualCameraLifetime, access : Win32cr::Media::MediaFoundation::MFVirtualCameraAccess, friendlyName : Win32cr::Foundation::PWSTR, sourceId : Win32cr::Foundation::PWSTR, categories : LibC::GUID*, categoryCount : UInt32, virtualCamera : Void**) : Win32cr::Foundation::HRESULT
+    C.MFCreateVirtualCamera(type__, lifetime, access, friendlyName, sourceId, categories, categoryCount, virtualCamera)
+  end
+
+  def mFIsVirtualCameraTypeSupported(type__ : Win32cr::Media::MediaFoundation::MFVirtualCameraType, supported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.MFIsVirtualCameraTypeSupported(type__, supported)
+  end
+
+  def oPMXboxEnableHDCP(hdcp_type : Win32cr::Media::MediaFoundation::OPM_HDCP_TYPE) : Win32cr::Foundation::HRESULT
+    C.OPMXboxEnableHDCP(hdcp_type)
+  end
+
+  def oPMXboxGetHDCPStatus(pHDCPStatus : Win32cr::Media::MediaFoundation::OPM_HDCP_STATUS*) : Win32cr::Foundation::HRESULT
+    C.OPMXboxGetHDCPStatus(pHDCPStatus)
+  end
+
+  def oPMXboxGetHDCPStatusAndType(pHDCPStatus : Win32cr::Media::MediaFoundation::OPM_HDCP_STATUS*, pHDCPType : Win32cr::Media::MediaFoundation::OPM_HDCP_TYPE*) : Win32cr::Foundation::HRESULT
+    C.OPMXboxGetHDCPStatusAndType(pHDCPStatus, pHDCPType)
+  end
+
   @[Link("dxva2")]
   @[Link("mfplat")]
   @[Link("mf")]
@@ -28047,488 +29016,730 @@ module Win32cr::Media::MediaFoundation
   @[Link("mfplay")]
   @[Link("opmxbox")]
   lib C
+    # :nodoc:
     fun DXVAHD_CreateDevice(pD3DDevice : Void*, pContentDesc : Win32cr::Media::MediaFoundation::DXVAHD_CONTENT_DESC*, usage : Win32cr::Media::MediaFoundation::DXVAHD_DEVICE_USAGE, pPlugin : Win32cr::Media::MediaFoundation::PDXVAHDSW_Plugin, ppDevice : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DXVA2CreateDirect3DDeviceManager9(pResetToken : UInt32*, ppDeviceManager : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DXVA2CreateVideoService(pDD : Void*, riid : LibC::GUID*, ppService : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OPMGetVideoOutputsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, vos : Win32cr::Media::MediaFoundation::OPM_VIDEO_OUTPUT_SEMANTICS, pulNumVideoOutputs : UInt32*, pppOPMVideoOutputArray : Void***) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OPMGetVideoOutputForTarget(pAdapterLuid : Win32cr::Foundation::LUID*, vid_pn_target : UInt32, vos : Win32cr::Media::MediaFoundation::OPM_VIDEO_OUTPUT_SEMANTICS, ppOPMVideoOutput : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9 : Void*, vos : Win32cr::Media::MediaFoundation::OPM_VIDEO_OUTPUT_SEMANTICS, pulNumVideoOutputs : UInt32*, pppOPMVideoOutputArray : Void***) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFSerializeAttributesToStream(pAttr : Void*, dwOptions : UInt32, pStm : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFDeserializeAttributesFromStream(pAttr : Void*, dwOptions : UInt32, pStm : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateTransformActivate(ppActivate : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMediaSession(pConfiguration : Void*, ppMediaSession : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreatePMPMediaSession(dwCreationFlags : UInt32, pConfiguration : Void*, ppMediaSession : Void**, ppEnablerActivate : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSourceResolver(ppISourceResolver : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreatePropertyStore(ppStore : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetSupportedSchemes(pPropVarSchemeArray : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetSupportedMimeTypes(pPropVarMimeTypeArray : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateTopology(ppTopo : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateTopologyNode(node_type : Win32cr::Media::MediaFoundation::MF_TOPOLOGY_TYPE, ppNode : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetTopoNodeCurrentType(pNode : Void*, dwStreamIndex : UInt32, fOutput : Win32cr::Foundation::BOOL, ppType : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetService(punkObject : Void*, guidService : LibC::GUID*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetSystemTime : Int64
 
+    # :nodoc:
     fun MFCreatePresentationClock(ppPresentationClock : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSystemTimeSource(ppSystemTimeSource : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreatePresentationDescriptor(cStreamDescriptors : UInt32, apStreamDescriptors : Void**, ppPresentationDescriptor : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFRequireProtectedEnvironment(pPresentationDescriptor : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFSerializePresentationDescriptor(pPD : Void*, pcbData : UInt32*, ppbData : UInt8**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFDeserializePresentationDescriptor(cbData : UInt32, pbData : UInt8*, ppPD : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateStreamDescriptor(dwStreamIdentifier : UInt32, cMediaTypes : UInt32, apMediaTypes : Void**, ppDescriptor : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSimpleTypeHandler(ppHandler : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFShutdownObject(pUnk : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateAudioRenderer(pAudioAttributes : Void*, ppSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateAudioRendererActivate(ppActivate : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateVideoRendererActivate(hwndVideo : Win32cr::Foundation::HWND, ppActivate : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMPEG4MediaSink(pIByteStream : Void*, pVideoMediaType : Void*, pAudioMediaType : Void*, ppIMediaSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreate3GPMediaSink(pIByteStream : Void*, pVideoMediaType : Void*, pAudioMediaType : Void*, ppIMediaSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMP3MediaSink(pTargetByteStream : Void*, ppMediaSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateAC3MediaSink(pTargetByteStream : Void*, pAudioMediaType : Void*, ppMediaSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateADTSMediaSink(pTargetByteStream : Void*, pAudioMediaType : Void*, ppMediaSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMuxSink(guidOutputSubType : LibC::GUID, pOutputAttributes : Void*, pOutputByteStream : Void*, ppMuxSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateFMPEG4MediaSink(pIByteStream : Void*, pVideoMediaType : Void*, pAudioMediaType : Void*, ppIMediaSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateAVIMediaSink(pIByteStream : Void*, pVideoMediaType : Void*, pAudioMediaType : Void*, ppIMediaSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateWAVEMediaSink(pTargetByteStream : Void*, pAudioMediaType : Void*, ppMediaSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateTopoLoader(ppObj : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSampleGrabberSinkActivate(pIMFMediaType : Void*, pIMFSampleGrabberSinkCallback : Void*, ppIActivate : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateStandardQualityManager(ppQualityManager : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSequencerSource(pReserved : Void*, ppSequencerSource : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSequencerSegmentOffset(dwId : UInt32, hnsOffset : Int64, pvarSegmentOffset : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateAggregateSource(pSourceCollection : Void*, ppAggSource : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateCredentialCache(ppCache : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateProxyLocator(pszProtocol : Win32cr::Foundation::PWSTR, pProxyConfig : Void*, ppProxyLocator : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateNetSchemePlugin(riid : LibC::GUID*, ppvHandler : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreatePMPServer(dwCreationFlags : UInt32, ppPMPServer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateRemoteDesktopPlugin(ppPlugin : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateNamedPropertyStore(ppStore : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSampleCopierMFT(ppCopierMFT : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateTranscodeProfile(ppTranscodeProfile : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateTranscodeTopology(pSrc : Void*, pwszOutputFilePath : Win32cr::Foundation::PWSTR, pProfile : Void*, ppTranscodeTopo : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateTranscodeTopologyFromByteStream(pSrc : Void*, pOutputStream : Void*, pProfile : Void*, ppTranscodeTopo : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFTranscodeGetAudioOutputAvailableTypes(guidSubType : LibC::GUID*, dwMFTFlags : UInt32, pCodecConfig : Void*, ppAvailableTypes : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateTranscodeSinkActivate(ppActivate : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateTrackedSample(ppMFSample : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMFByteStreamOnStream(pStream : Void*, ppByteStream : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateStreamOnMFByteStream(pByteStream : Void*, ppStream : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMFByteStreamOnStreamEx(punkStream : Void*, ppByteStream : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateStreamOnMFByteStreamEx(pByteStream : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMediaTypeFromProperties(punkStream : Void*, ppMediaType : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreatePropertiesFromMediaType(pMediaType : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFEnumDeviceSources(pAttributes : Void*, pppSourceActivate : Void***, pcSourceActivate : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateDeviceSource(pAttributes : Void*, ppSource : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateDeviceSourceActivate(pAttributes : Void*, ppActivate : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateProtectedEnvironmentAccess(ppAccess : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFLoadSignedLibrary(pszName : Win32cr::Foundation::PWSTR, ppLib : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetSystemId(ppId : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetLocalId(verifier : UInt8*, size : UInt32, id : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateContentProtectionDevice(protection_system_id : LibC::GUID*, content_protection_device : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFIsContentProtectionDeviceSupported(protection_system_id : LibC::GUID*, isSupported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateContentDecryptorContext(guidMediaProtectionSystemId : LibC::GUID*, pD3DManager : Void*, pContentProtectionDevice : Void*, ppContentDecryptorContext : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSensorGroup(sensor_group_symbolic_link : Win32cr::Foundation::PWSTR, ppSensorGroup : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSensorStream(stream_id : UInt32, pAttributes : Void*, pMediaTypeCollection : Void*, ppStream : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSensorProfile(profile_type : LibC::GUID*, profile_index : UInt32, constraints : Win32cr::Foundation::PWSTR, ppProfile : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSensorProfileCollection(ppSensorProfile : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSensorActivityMonitor(pCallback : Void*, ppActivityMonitor : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateExtendedCameraIntrinsics(ppExtendedCameraIntrinsics : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateExtendedCameraIntrinsicModel(distortionModelType : Win32cr::Media::MediaFoundation::MFCameraIntrinsic_DistortionModelType, ppExtendedCameraIntrinsicModel : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateRelativePanelWatcher(videoDeviceId : Win32cr::Foundation::PWSTR, displayMonitorDeviceId : Win32cr::Foundation::PWSTR, ppRelativePanelWatcher : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateCameraOcclusionStateMonitor(symbolicLink : Win32cr::Foundation::PWSTR, callback : Void*, occlusionStateMonitor : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateASFContentInfo(ppIContentInfo : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateASFIndexer(ppIIndexer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateASFIndexerByteStream(pIContentByteStream : Void*, cbIndexStartOffset : UInt64, pIIndexByteStream : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateASFSplitter(ppISplitter : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateASFProfile(ppIProfile : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateASFProfileFromPresentationDescriptor(pIPD : Void*, ppIProfile : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreatePresentationDescriptorFromASFProfile(pIProfile : Void*, ppIPD : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateASFMultiplexer(ppIMultiplexer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateASFStreamSelector(pIASFProfile : Void*, ppSelector : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateASFMediaSink(pIByteStream : Void*, ppIMediaSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateASFMediaSinkActivate(pwszFileName : Win32cr::Foundation::PWSTR, pContentInfo : Void*, ppIActivate : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateWMVEncoderActivate(pMediaType : Void*, pEncodingConfigurationProperties : Void*, ppActivate : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateWMAEncoderActivate(pMediaType : Void*, pEncodingConfigurationProperties : Void*, ppActivate : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateASFStreamingMediaSink(pIByteStream : Void*, ppIMediaSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateASFStreamingMediaSinkActivate(pByteStreamActivate : Void*, pContentInfo : Void*, ppIActivate : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateD3D12SynchronizationObject(pDevice : Void*, riid : LibC::GUID*, ppvSyncObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFStartup(version : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFShutdown : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFLockPlatform : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFUnlockPlatform : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFPutWorkItem(dwQueue : UInt32, pCallback : Void*, pState : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFPutWorkItem2(dwQueue : UInt32, priority : Int32, pCallback : Void*, pState : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFPutWorkItemEx(dwQueue : UInt32, pResult : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFPutWorkItemEx2(dwQueue : UInt32, priority : Int32, pResult : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFPutWaitingWorkItem(hEvent : Win32cr::Foundation::HANDLE, priority : Int32, pResult : Void*, pKey : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFAllocateSerialWorkQueue(dwWorkQueue : UInt32, pdwWorkQueue : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFScheduleWorkItemEx(pResult : Void*, timeout : Int64, pKey : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFScheduleWorkItem(pCallback : Void*, pState : Void*, timeout : Int64, pKey : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCancelWorkItem(key : UInt64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetTimerPeriodicity(periodicity : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFAddPeriodicCallback(callback : Win32cr::Media::MediaFoundation::MFPERIODICCALLBACK, pContext : Void*, pdwKey : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFRemovePeriodicCallback(dwKey : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFAllocateWorkQueueEx(work_queue_type : Win32cr::Media::MediaFoundation::MFASYNC_WORKQUEUE_TYPE, pdwWorkQueue : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFAllocateWorkQueue(pdwWorkQueue : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFLockWorkQueue(dwWorkQueue : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFUnlockWorkQueue(dwWorkQueue : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId : UInt32, wszClass : Win32cr::Foundation::PWSTR, dwTaskId : UInt32, pDoneCallback : Void*, pDoneState : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId : UInt32, wszClass : Win32cr::Foundation::PWSTR, dwTaskId : UInt32, lPriority : Int32, pDoneCallback : Void*, pDoneState : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFEndRegisterWorkQueueWithMMCSS(pResult : Void*, pdwTaskId : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId : UInt32, pDoneCallback : Void*, pDoneState : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFEndUnregisterWorkQueueWithMMCSS(pResult : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetWorkQueueMMCSSClass(dwWorkQueueId : UInt32, pwszClass : UInt16*, pcchClass : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetWorkQueueMMCSSTaskId(dwWorkQueueId : UInt32, pdwTaskId : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFRegisterPlatformWithMMCSS(wszClass : Win32cr::Foundation::PWSTR, pdwTaskId : UInt32*, lPriority : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFUnregisterPlatformFromMMCSS : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFLockSharedWorkQueue(wszClass : Win32cr::Foundation::PWSTR, base_priority : Int32, pdwTaskId : UInt32*, pID : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetWorkQueueMMCSSPriority(dwWorkQueueId : UInt32, lPriority : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateAsyncResult(punkObject : Void*, pCallback : Void*, punkState : Void*, ppAsyncResult : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFInvokeCallback(pAsyncResult : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateFile(access_mode : Win32cr::Media::MediaFoundation::MF_FILE_ACCESSMODE, open_mode : Win32cr::Media::MediaFoundation::MF_FILE_OPENMODE, fFlags : Win32cr::Media::MediaFoundation::MF_FILE_FLAGS, pwszFileURL : Win32cr::Foundation::PWSTR, ppIByteStream : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateTempFile(access_mode : Win32cr::Media::MediaFoundation::MF_FILE_ACCESSMODE, open_mode : Win32cr::Media::MediaFoundation::MF_FILE_OPENMODE, fFlags : Win32cr::Media::MediaFoundation::MF_FILE_FLAGS, ppIByteStream : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFBeginCreateFile(access_mode : Win32cr::Media::MediaFoundation::MF_FILE_ACCESSMODE, open_mode : Win32cr::Media::MediaFoundation::MF_FILE_OPENMODE, fFlags : Win32cr::Media::MediaFoundation::MF_FILE_FLAGS, pwszFilePath : Win32cr::Foundation::PWSTR, pCallback : Void*, pState : Void*, ppCancelCookie : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFEndCreateFile(pResult : Void*, ppFile : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCancelCreateFile(pCancelCookie : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMemoryBuffer(cbMaxLength : UInt32, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMediaBufferWrapper(pBuffer : Void*, cbOffset : UInt32, dwLength : UInt32, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample : Void*, pMFMediaBuffer : Void*, cbOffset : UInt32, ppMediaBuffer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFMapDX9FormatToDXGIFormat(dx9 : UInt32) : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
 
+    # :nodoc:
     fun MFMapDXGIFormatToDX9Format(dx11 : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT) : UInt32
 
+    # :nodoc:
     fun MFLockDXGIDeviceManager(pResetToken : UInt32*, ppManager : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFUnlockDXGIDeviceManager : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateDXSurfaceBuffer(riid : LibC::GUID*, punkSurface : Void*, fBottomUpWhenLinear : Win32cr::Foundation::BOOL, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateWICBitmapBuffer(riid : LibC::GUID*, punkSurface : Void*, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateDXGISurfaceBuffer(riid : LibC::GUID*, punkSurface : Void*, uSubresourceIndex : UInt32, fBottomUpWhenLinear : Win32cr::Foundation::BOOL, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateVideoSampleAllocatorEx(riid : LibC::GUID*, ppSampleAllocator : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateDXGIDeviceManager(resetToken : UInt32*, ppDeviceManager : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateAlignedMemoryBuffer(cbMaxLength : UInt32, cbAligment : UInt32, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMediaEvent(met : UInt32, guidExtendedType : LibC::GUID*, hrStatus : Win32cr::Foundation::HRESULT, pvValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ppEvent : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateEventQueue(ppMediaEventQueue : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSample(ppIMFSample : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateAttributes(ppMFAttributes : Void**, cInitialSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFInitAttributesFromBlob(pAttributes : Void*, pBuf : UInt8*, cbBufSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetAttributesAsBlobSize(pAttributes : Void*, pcbBufSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetAttributesAsBlob(pAttributes : Void*, pBuf : UInt8*, cbBufSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFTRegister(clsidMFT : LibC::GUID, guidCategory : LibC::GUID, pszName : Win32cr::Foundation::PWSTR, flags : UInt32, cInputTypes : UInt32, pInputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, cOutputTypes : UInt32, pOutputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pAttributes : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFTUnregister(clsidMFT : LibC::GUID) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFTRegisterLocal(pClassFactory : Void*, guidCategory : LibC::GUID*, pszName : Win32cr::Foundation::PWSTR, flags : UInt32, cInputTypes : UInt32, pInputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, cOutputTypes : UInt32, pOutputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFTUnregisterLocal(pClassFactory : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFTRegisterLocalByCLSID(clisdMFT : LibC::GUID*, guidCategory : LibC::GUID*, pszName : Win32cr::Foundation::PWSTR, flags : UInt32, cInputTypes : UInt32, pInputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, cOutputTypes : UInt32, pOutputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFTUnregisterLocalByCLSID(clsidMFT : LibC::GUID) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFTEnum(guidCategory : LibC::GUID, flags : UInt32, pInputType : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pOutputType : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pAttributes : Void*, ppclsidMFT : LibC::GUID**, pcMFTs : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFTEnumEx(guidCategory : LibC::GUID, flags : Win32cr::Media::MediaFoundation::MFT_ENUM_FLAG, pInputType : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pOutputType : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pppMFTActivate : Void***, pnumMFTActivate : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFTEnum2(guidCategory : LibC::GUID, flags : Win32cr::Media::MediaFoundation::MFT_ENUM_FLAG, pInputType : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pOutputType : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO*, pAttributes : Void*, pppMFTActivate : Void***, pnumMFTActivate : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFTGetInfo(clsidMFT : LibC::GUID, pszName : Win32cr::Foundation::PWSTR*, ppInputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO**, pcInputTypes : UInt32*, ppOutputTypes : Win32cr::Media::MediaFoundation::MFT_REGISTER_TYPE_INFO**, pcOutputTypes : UInt32*, ppAttributes : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetPluginControl(ppPluginControl : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetMFTMerit(pMFT : Void*, cbVerifier : UInt32, verifier : UInt8*, merit : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFRegisterLocalSchemeHandler(szScheme : Win32cr::Foundation::PWSTR, pActivate : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFRegisterLocalByteStreamHandler(szFileExtension : Win32cr::Foundation::PWSTR, szMimeType : Win32cr::Foundation::PWSTR, pActivate : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMFByteStreamWrapper(pStream : Void*, ppStreamWrapper : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMediaExtensionActivate(szActivatableClassId : Win32cr::Foundation::PWSTR, pConfiguration : Void*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMuxStreamAttributes(pAttributesToMux : Void*, ppMuxAttribs : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMuxStreamMediaType(pMediaTypesToMux : Void*, ppMuxMediaType : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMuxStreamSample(pSamplesToMux : Void*, ppMuxSample : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFValidateMediaTypeSize(format_type : LibC::GUID, pBlock : UInt8*, cbSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMediaType(ppMFType : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMFVideoFormatFromMFMediaType(pMFType : Void*, ppMFVF : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT**, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateWaveFormatExFromMFMediaType(pMFType : Void*, ppWF : Win32cr::Media::Audio::WAVEFORMATEX**, pcbSize : UInt32*, flags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFInitMediaTypeFromVideoInfoHeader(pMFType : Void*, pVIH : Win32cr::Media::MediaFoundation::VIDEOINFOHEADER*, cbBufSize : UInt32, pSubtype : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFInitMediaTypeFromVideoInfoHeader2(pMFType : Void*, pVIH2 : Win32cr::Media::MediaFoundation::VIDEOINFOHEADER2*, cbBufSize : UInt32, pSubtype : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFInitMediaTypeFromMPEG1VideoInfo(pMFType : Void*, pMP1VI : Win32cr::Media::MediaFoundation::MPEG1VIDEOINFO*, cbBufSize : UInt32, pSubtype : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFInitMediaTypeFromMPEG2VideoInfo(pMFType : Void*, pMP2VI : Win32cr::Media::MediaFoundation::MPEG2VIDEOINFO*, cbBufSize : UInt32, pSubtype : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCalculateBitmapImageSize(pBMIH : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, cbBufSize : UInt32, pcbImageSize : UInt32*, pbKnown : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCalculateImageSize(guidSubtype : LibC::GUID*, unWidth : UInt32, unHeight : UInt32, pcbImageSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFFrameRateToAverageTimePerFrame(unNumerator : UInt32, unDenominator : UInt32, punAverageTimePerFrame : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFAverageTimePerFrameToFrameRate(unAverageTimePerFrame : UInt64, punNumerator : UInt32*, punDenominator : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFInitMediaTypeFromMFVideoFormat(pMFType : Void*, pMFVF : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*, cbBufSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFInitMediaTypeFromWaveFormatEx(pMFType : Void*, pWaveFormat : Win32cr::Media::Audio::WAVEFORMATEX*, cbBufSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFInitMediaTypeFromAMMediaType(pMFType : Void*, pAMType : Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFInitAMMediaTypeFromMFMediaType(pMFType : Void*, guidFormatBlockType : LibC::GUID, pAMType : Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateAMMediaTypeFromMFMediaType(pMFType : Void*, guidFormatBlockType : LibC::GUID, ppAMType : Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCompareFullToPartialMediaType(pMFTypeFull : Void*, pMFTypePartial : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MFWrapMediaType(pOrig : Void*, major_type : LibC::GUID*, sub_type : LibC::GUID*, ppWrap : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFUnwrapMediaType(pWrap : Void*, ppOrig : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateVideoMediaType(pVideoFormat : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*, ppIVideoMediaType : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateVideoMediaTypeFromSubtype(pAMSubtype : LibC::GUID*, ppIVideoMediaType : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFIsFormatYUV(format : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MFCreateVideoMediaTypeFromBitMapInfoHeader(pbmihBitMapInfoHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, dwPixelAspectRatioX : UInt32, dwPixelAspectRatioY : UInt32, interlace_mode : Win32cr::Media::MediaFoundation::MFVideoInterlaceMode, video_flags : UInt64, qwFramesPerSecondNumerator : UInt64, qwFramesPerSecondDenominator : UInt64, dwMaxBitRate : UInt32, ppIVideoMediaType : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetStrideForBitmapInfoHeader(format : UInt32, dwWidth : UInt32, pStride : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetPlaneSize(format : UInt32, dwWidth : UInt32, dwHeight : UInt32, pdwPlaneSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateVideoMediaTypeFromBitMapInfoHeaderEx(pbmihBitMapInfoHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, cbBitMapInfoHeader : UInt32, dwPixelAspectRatioX : UInt32, dwPixelAspectRatioY : UInt32, interlace_mode : Win32cr::Media::MediaFoundation::MFVideoInterlaceMode, video_flags : UInt64, dwFramesPerSecondNumerator : UInt32, dwFramesPerSecondDenominator : UInt32, dwMaxBitRate : UInt32, ppIVideoMediaType : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMediaTypeFromRepresentation(guidRepresentation : LibC::GUID, pvRepresentation : Void*, ppIMediaType : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateAudioMediaType(pAudioFormat : Win32cr::Media::Audio::WAVEFORMATEX*, ppIAudioMediaType : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFGetUncompressedVideoFormat(pVideoFormat : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*) : UInt32
 
+    # :nodoc:
     fun MFInitVideoFormat(pVideoFormat : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*, type__ : Win32cr::Media::MediaFoundation::MFStandardVideoFormat) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFInitVideoFormat_RGB(pVideoFormat : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*, dwWidth : UInt32, dwHeight : UInt32, d3_dfmt : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFConvertColorInfoToDXVA(pdwToDXVA : UInt32*, pFromFormat : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFConvertColorInfoFromDXVA(pToFormat : Win32cr::Media::MediaFoundation::MFVIDEOFORMAT*, dwFromDXVA : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCopyImage(pDest : UInt8*, lDestStride : Int32, pSrc : UInt8*, lSrcStride : Int32, dwWidthInBytes : UInt32, dwLines : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFConvertFromFP16Array(pDest : Float32*, pSrc : UInt16*, dwCount : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFConvertToFP16Array(pDest : UInt16*, pSrc : Float32*, dwCount : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreate2DMediaBuffer(dwWidth : UInt32, dwHeight : UInt32, dwFourCC : UInt32, fBottomUp : Win32cr::Foundation::BOOL, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateMediaBufferFromMediaType(pMediaType : Void*, llDuration : Int64, dwMinLength : UInt32, dwMinAlignment : UInt32, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateCollection(ppIMFCollection : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFHeapAlloc(nSize : LibC::UIntPtrT, dwFlags : UInt32, pszFile : Win32cr::Foundation::PSTR, line : Int32, eat : Win32cr::Media::MediaFoundation::EAllocationType) : Void*
 
+    # :nodoc:
     fun MFHeapFree(pv : Void*) : Void
 
+    # :nodoc:
     fun MFllMulDiv(a : Int64, b : Int64, c : Int64, d : Int64) : Int64
 
+    # :nodoc:
     fun MFGetContentProtectionSystemCLSID(guidProtectionSystemID : LibC::GUID*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCombineSamples(pSample : Void*, pSampleToAdd : Void*, dwMaxMergedDurationInMS : UInt32, pMerged : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFSplitSample(pSample : Void*, pOutputSamples : Void**, dwOutputSampleMaxCount : UInt32, pdwOutputSampleCount : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSourceReaderFromURL(pwszURL : Win32cr::Foundation::PWSTR, pAttributes : Void*, ppSourceReader : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSourceReaderFromByteStream(pByteStream : Void*, pAttributes : Void*, ppSourceReader : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSourceReaderFromMediaSource(pMediaSource : Void*, pAttributes : Void*, ppSourceReader : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSinkWriterFromURL(pwszOutputURL : Win32cr::Foundation::PWSTR, pByteStream : Void*, pAttributes : Void*, ppSinkWriter : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateSinkWriterFromMediaSink(pMediaSink : Void*, pAttributes : Void*, ppSinkWriter : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateVideoPresenter(pOwner : Void*, riidDevice : LibC::GUID*, riid : LibC::GUID*, ppVideoPresenter : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateVideoMixer(pOwner : Void*, riidDevice : LibC::GUID*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateVideoMixerAndPresenter(pMixerOwner : Void*, pPresenterOwner : Void*, riidMixer : LibC::GUID*, ppvVideoMixer : Void**, riidPresenter : LibC::GUID*, ppvVideoPresenter : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateVideoRenderer(riidRenderer : LibC::GUID*, ppVideoRenderer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateVideoSampleFromSurface(pUnkSurface : Void*, ppSample : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateVideoSampleAllocator(riid : LibC::GUID*, ppSampleAllocator : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFPCreateMediaPlayer(pwszURL : Win32cr::Foundation::PWSTR, fStartPlayback : Win32cr::Foundation::BOOL, creationOptions : Win32cr::Media::MediaFoundation::MFP_CREATION_OPTIONS, pCallback : Void*, hWnd : Win32cr::Foundation::HWND, ppMediaPlayer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost : Void*, objectStream : Void*, classId : Win32cr::Foundation::PWSTR, activate : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFCreateVirtualCamera(type__ : Win32cr::Media::MediaFoundation::MFVirtualCameraType, lifetime : Win32cr::Media::MediaFoundation::MFVirtualCameraLifetime, access : Win32cr::Media::MediaFoundation::MFVirtualCameraAccess, friendlyName : Win32cr::Foundation::PWSTR, sourceId : Win32cr::Foundation::PWSTR, categories : LibC::GUID*, categoryCount : UInt32, virtualCamera : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MFIsVirtualCameraTypeSupported(type__ : Win32cr::Media::MediaFoundation::MFVirtualCameraType, supported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OPMXboxEnableHDCP(hdcp_type : Win32cr::Media::MediaFoundation::OPM_HDCP_TYPE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OPMXboxGetHDCPStatus(pHDCPStatus : Win32cr::Media::MediaFoundation::OPM_HDCP_STATUS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OPMXboxGetHDCPStatusAndType(pHDCPStatus : Win32cr::Media::MediaFoundation::OPM_HDCP_STATUS*, pHDCPType : Win32cr::Media::MediaFoundation::OPM_HDCP_TYPE*) : Win32cr::Foundation::HRESULT
 
   end

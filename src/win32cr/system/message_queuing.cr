@@ -2,6 +2,7 @@ require "./com.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::MessageQueuing
+  extend self
   PRLT = 0_u32
   PRLE = 1_u32
   PRGT = 2_u32

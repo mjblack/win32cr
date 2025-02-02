@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::Storage::Cabinets
+  extend self
   alias PFNFCIALLOC = Proc(UInt32, Void*)
 
   alias PFNFCIFREE = Proc(Void*, Void)
@@ -261,26 +262,76 @@ module Win32cr::Storage::Cabinets
   end
   {% end %}
 
+  def fCICreate(perf : Win32cr::Storage::Cabinets::ERF*, pfnfcifp : Win32cr::Storage::Cabinets::PFNFCIFILEPLACED, pfna : Win32cr::Storage::Cabinets::PFNFCIALLOC, pfnf : Win32cr::Storage::Cabinets::PFNFCIFREE, pfnopen : Win32cr::Storage::Cabinets::PFNFCIOPEN, pfnread : Win32cr::Storage::Cabinets::PFNFCIREAD, pfnwrite : Win32cr::Storage::Cabinets::PFNFCIWRITE, pfnclose : Win32cr::Storage::Cabinets::PFNFCICLOSE, pfnseek : Win32cr::Storage::Cabinets::PFNFCISEEK, pfndelete : Win32cr::Storage::Cabinets::PFNFCIDELETE, pfnfcigtf : Win32cr::Storage::Cabinets::PFNFCIGETTEMPFILE, pccab : Win32cr::Storage::Cabinets::CCAB*, pv : Void*) : Void*
+    C.FCICreate(perf, pfnfcifp, pfna, pfnf, pfnopen, pfnread, pfnwrite, pfnclose, pfnseek, pfndelete, pfnfcigtf, pccab, pv)
+  end
+
+  def fCIAddFile(hfci : Void*, pszSourceFile : Win32cr::Foundation::PSTR, pszFileName : Win32cr::Foundation::PSTR, fExecute : Win32cr::Foundation::BOOL, pfnfcignc : Win32cr::Storage::Cabinets::PFNFCIGETNEXTCABINET, pfnfcis : Win32cr::Storage::Cabinets::PFNFCISTATUS, pfnfcigoi : Win32cr::Storage::Cabinets::PFNFCIGETOPENINFO, typeCompress : UInt16) : Win32cr::Foundation::BOOL
+    C.FCIAddFile(hfci, pszSourceFile, pszFileName, fExecute, pfnfcignc, pfnfcis, pfnfcigoi, typeCompress)
+  end
+
+  def fCIFlushCabinet(hfci : Void*, fGetNextCab : Win32cr::Foundation::BOOL, pfnfcignc : Win32cr::Storage::Cabinets::PFNFCIGETNEXTCABINET, pfnfcis : Win32cr::Storage::Cabinets::PFNFCISTATUS) : Win32cr::Foundation::BOOL
+    C.FCIFlushCabinet(hfci, fGetNextCab, pfnfcignc, pfnfcis)
+  end
+
+  def fCIFlushFolder(hfci : Void*, pfnfcignc : Win32cr::Storage::Cabinets::PFNFCIGETNEXTCABINET, pfnfcis : Win32cr::Storage::Cabinets::PFNFCISTATUS) : Win32cr::Foundation::BOOL
+    C.FCIFlushFolder(hfci, pfnfcignc, pfnfcis)
+  end
+
+  def fCIDestroy(hfci : Void*) : Win32cr::Foundation::BOOL
+    C.FCIDestroy(hfci)
+  end
+
+  def fDICreate(pfnalloc : Win32cr::Storage::Cabinets::PFNALLOC, pfnfree : Win32cr::Storage::Cabinets::PFNFREE, pfnopen : Win32cr::Storage::Cabinets::PFNOPEN, pfnread : Win32cr::Storage::Cabinets::PFNREAD, pfnwrite : Win32cr::Storage::Cabinets::PFNWRITE, pfnclose : Win32cr::Storage::Cabinets::PFNCLOSE, pfnseek : Win32cr::Storage::Cabinets::PFNSEEK, cpuType : Win32cr::Storage::Cabinets::FDICREATE_CPU_TYPE, perf : Win32cr::Storage::Cabinets::ERF*) : Void*
+    C.FDICreate(pfnalloc, pfnfree, pfnopen, pfnread, pfnwrite, pfnclose, pfnseek, cpuType, perf)
+  end
+
+  def fDIIsCabinet(hfdi : Void*, hf : LibC::IntPtrT, pfdici : Win32cr::Storage::Cabinets::FDICABINETINFO*) : Win32cr::Foundation::BOOL
+    C.FDIIsCabinet(hfdi, hf, pfdici)
+  end
+
+  def fDICopy(hfdi : Void*, pszCabinet : Win32cr::Foundation::PSTR, pszCabPath : Win32cr::Foundation::PSTR, flags : Int32, pfnfdin : Win32cr::Storage::Cabinets::PFNFDINOTIFY, pfnfdid : Win32cr::Storage::Cabinets::PFNFDIDECRYPT, pvUser : Void*) : Win32cr::Foundation::BOOL
+    C.FDICopy(hfdi, pszCabinet, pszCabPath, flags, pfnfdin, pfnfdid, pvUser)
+  end
+
+  def fDIDestroy(hfdi : Void*) : Win32cr::Foundation::BOOL
+    C.FDIDestroy(hfdi)
+  end
+
+  def fDITruncateCabinet(hfdi : Void*, pszCabinetName : Win32cr::Foundation::PSTR, iFolderToDelete : UInt16) : Win32cr::Foundation::BOOL
+    C.FDITruncateCabinet(hfdi, pszCabinetName, iFolderToDelete)
+  end
+
   @[Link("cabinet")]
   lib C
+    # :nodoc:
     fun FCICreate(perf : Win32cr::Storage::Cabinets::ERF*, pfnfcifp : Win32cr::Storage::Cabinets::PFNFCIFILEPLACED, pfna : Win32cr::Storage::Cabinets::PFNFCIALLOC, pfnf : Win32cr::Storage::Cabinets::PFNFCIFREE, pfnopen : Win32cr::Storage::Cabinets::PFNFCIOPEN, pfnread : Win32cr::Storage::Cabinets::PFNFCIREAD, pfnwrite : Win32cr::Storage::Cabinets::PFNFCIWRITE, pfnclose : Win32cr::Storage::Cabinets::PFNFCICLOSE, pfnseek : Win32cr::Storage::Cabinets::PFNFCISEEK, pfndelete : Win32cr::Storage::Cabinets::PFNFCIDELETE, pfnfcigtf : Win32cr::Storage::Cabinets::PFNFCIGETTEMPFILE, pccab : Win32cr::Storage::Cabinets::CCAB*, pv : Void*) : Void*
 
+    # :nodoc:
     fun FCIAddFile(hfci : Void*, pszSourceFile : Win32cr::Foundation::PSTR, pszFileName : Win32cr::Foundation::PSTR, fExecute : Win32cr::Foundation::BOOL, pfnfcignc : Win32cr::Storage::Cabinets::PFNFCIGETNEXTCABINET, pfnfcis : Win32cr::Storage::Cabinets::PFNFCISTATUS, pfnfcigoi : Win32cr::Storage::Cabinets::PFNFCIGETOPENINFO, typeCompress : UInt16) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FCIFlushCabinet(hfci : Void*, fGetNextCab : Win32cr::Foundation::BOOL, pfnfcignc : Win32cr::Storage::Cabinets::PFNFCIGETNEXTCABINET, pfnfcis : Win32cr::Storage::Cabinets::PFNFCISTATUS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FCIFlushFolder(hfci : Void*, pfnfcignc : Win32cr::Storage::Cabinets::PFNFCIGETNEXTCABINET, pfnfcis : Win32cr::Storage::Cabinets::PFNFCISTATUS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FCIDestroy(hfci : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FDICreate(pfnalloc : Win32cr::Storage::Cabinets::PFNALLOC, pfnfree : Win32cr::Storage::Cabinets::PFNFREE, pfnopen : Win32cr::Storage::Cabinets::PFNOPEN, pfnread : Win32cr::Storage::Cabinets::PFNREAD, pfnwrite : Win32cr::Storage::Cabinets::PFNWRITE, pfnclose : Win32cr::Storage::Cabinets::PFNCLOSE, pfnseek : Win32cr::Storage::Cabinets::PFNSEEK, cpuType : Win32cr::Storage::Cabinets::FDICREATE_CPU_TYPE, perf : Win32cr::Storage::Cabinets::ERF*) : Void*
 
+    # :nodoc:
     fun FDIIsCabinet(hfdi : Void*, hf : LibC::IntPtrT, pfdici : Win32cr::Storage::Cabinets::FDICABINETINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FDICopy(hfdi : Void*, pszCabinet : Win32cr::Foundation::PSTR, pszCabPath : Win32cr::Foundation::PSTR, flags : Int32, pfnfdin : Win32cr::Storage::Cabinets::PFNFDINOTIFY, pfnfdid : Win32cr::Storage::Cabinets::PFNFDIDECRYPT, pvUser : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FDIDestroy(hfdi : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FDITruncateCabinet(hfdi : Void*, pszCabinetName : Win32cr::Foundation::PSTR, iFolderToDelete : UInt16) : Win32cr::Foundation::BOOL
 
   end

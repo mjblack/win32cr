@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::System::Mapi
+  extend self
   alias LPMAPILOGON = Proc(LibC::UIntPtrT, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, UInt32, LibC::UIntPtrT*, UInt32)
 
   alias LPMAPILOGOFF = Proc(LibC::UIntPtrT, LibC::UIntPtrT, UInt32, UInt32, UInt32)
@@ -179,8 +180,13 @@ module Win32cr::System::Mapi
     end
   end
 
+  def mAPIFreeBuffer(pv : Void*) : UInt32
+    C.MAPIFreeBuffer(pv)
+  end
+
   @[Link("mapi32")]
   lib C
+    # :nodoc:
     fun MAPIFreeBuffer(pv : Void*) : UInt32
 
   end

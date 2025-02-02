@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./../media.cr"
 
 module Win32cr::Media::KernelStreaming
+  extend self
   IOCTL_KS_PROPERTY = 3080195_u32
   IOCTL_KS_ENABLE_EVENT = 3080199_u32
   IOCTL_KS_DISABLE_EVENT = 3080203_u32
@@ -7094,22 +7095,62 @@ module Win32cr::Media::KernelStreaming
 
   end
 
+  def ksCreateAllocator(connection_handle : Win32cr::Foundation::HANDLE, allocator_framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING*, allocator_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.KsCreateAllocator(connection_handle, allocator_framing, allocator_handle)
+  end
+
+  def ksCreateClock(connection_handle : Win32cr::Foundation::HANDLE, clock_create : Win32cr::Media::KernelStreaming::KSCLOCK_CREATE*, clock_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.KsCreateClock(connection_handle, clock_create, clock_handle)
+  end
+
+  def ksCreatePin(filter_handle : Win32cr::Foundation::HANDLE, connect : Win32cr::Media::KernelStreaming::KSPIN_CONNECT*, desired_access : UInt32, connection_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.KsCreatePin(filter_handle, connect, desired_access, connection_handle)
+  end
+
+  def ksCreateTopologyNode(parent_handle : Win32cr::Foundation::HANDLE, node_create : Win32cr::Media::KernelStreaming::KSNODE_CREATE*, desired_access : UInt32, node_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.KsCreateTopologyNode(parent_handle, node_create, desired_access, node_handle)
+  end
+
+  def ksCreateAllocator2(connection_handle : Win32cr::Foundation::HANDLE, allocator_framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING*, allocator_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.KsCreateAllocator2(connection_handle, allocator_framing, allocator_handle)
+  end
+
+  def ksCreateClock2(connection_handle : Win32cr::Foundation::HANDLE, clock_create : Win32cr::Media::KernelStreaming::KSCLOCK_CREATE*, clock_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.KsCreateClock2(connection_handle, clock_create, clock_handle)
+  end
+
+  def ksCreatePin2(filter_handle : Win32cr::Foundation::HANDLE, connect : Win32cr::Media::KernelStreaming::KSPIN_CONNECT*, desired_access : UInt32, connection_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.KsCreatePin2(filter_handle, connect, desired_access, connection_handle)
+  end
+
+  def ksCreateTopologyNode2(parent_handle : Win32cr::Foundation::HANDLE, node_create : Win32cr::Media::KernelStreaming::KSNODE_CREATE*, desired_access : UInt32, node_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.KsCreateTopologyNode2(parent_handle, node_create, desired_access, node_handle)
+  end
+
   @[Link("ksuser")]
   lib C
+    # :nodoc:
     fun KsCreateAllocator(connection_handle : Win32cr::Foundation::HANDLE, allocator_framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING*, allocator_handle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun KsCreateClock(connection_handle : Win32cr::Foundation::HANDLE, clock_create : Win32cr::Media::KernelStreaming::KSCLOCK_CREATE*, clock_handle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun KsCreatePin(filter_handle : Win32cr::Foundation::HANDLE, connect : Win32cr::Media::KernelStreaming::KSPIN_CONNECT*, desired_access : UInt32, connection_handle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun KsCreateTopologyNode(parent_handle : Win32cr::Foundation::HANDLE, node_create : Win32cr::Media::KernelStreaming::KSNODE_CREATE*, desired_access : UInt32, node_handle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun KsCreateAllocator2(connection_handle : Win32cr::Foundation::HANDLE, allocator_framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING*, allocator_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun KsCreateClock2(connection_handle : Win32cr::Foundation::HANDLE, clock_create : Win32cr::Media::KernelStreaming::KSCLOCK_CREATE*, clock_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun KsCreatePin2(filter_handle : Win32cr::Foundation::HANDLE, connect : Win32cr::Media::KernelStreaming::KSPIN_CONNECT*, desired_access : UInt32, connection_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun KsCreateTopologyNode2(parent_handle : Win32cr::Foundation::HANDLE, node_create : Win32cr::Media::KernelStreaming::KSNODE_CREATE*, desired_access : UInt32, node_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
   end

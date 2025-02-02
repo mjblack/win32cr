@@ -5,6 +5,7 @@ require "./../../ui/controls.cr"
 require "./../authorization.cr"
 
 module Win32cr::Security::Authorization::UI
+  extend self
   SI_EDIT_PERMS = 0_i32
   SI_EDIT_OWNER = 1_i32
   SI_CONTAINER = 4_i32
@@ -362,12 +363,27 @@ module Win32cr::Security::Authorization::UI
 
   end
 
+  def createSecurityPage(psi : Void*) : Win32cr::UI::Controls::HPROPSHEETPAGE
+    C.CreateSecurityPage(psi)
+  end
+
+  def editSecurity(hwndOwner : Win32cr::Foundation::HWND, psi : Void*) : Win32cr::Foundation::BOOL
+    C.EditSecurity(hwndOwner, psi)
+  end
+
+  def editSecurityAdvanced(hwndOwner : Win32cr::Foundation::HWND, psi : Void*, uSIPage : Win32cr::Security::Authorization::UI::SI_PAGE_TYPE) : Win32cr::Foundation::HRESULT
+    C.EditSecurityAdvanced(hwndOwner, psi, uSIPage)
+  end
+
   @[Link("aclui")]
   lib C
+    # :nodoc:
     fun CreateSecurityPage(psi : Void*) : Win32cr::UI::Controls::HPROPSHEETPAGE
 
+    # :nodoc:
     fun EditSecurity(hwndOwner : Win32cr::Foundation::HWND, psi : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EditSecurityAdvanced(hwndOwner : Win32cr::Foundation::HWND, psi : Void*, uSIPage : Win32cr::Security::Authorization::UI::SI_PAGE_TYPE) : Win32cr::Foundation::HRESULT
 
   end

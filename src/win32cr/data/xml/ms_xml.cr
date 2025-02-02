@@ -2,6 +2,7 @@ require "./../../foundation.cr"
 require "./../../system/com.cr"
 
 module Win32cr::Data::Xml::MsXml
+  extend self
   E_XML_NOTWF = -1072897501_i32
   E_XML_NODTD = -1072897500_i32
   E_XML_INVALID = -1072897499_i32

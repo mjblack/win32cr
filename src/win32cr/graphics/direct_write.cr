@@ -5,6 +5,7 @@ require "./gdi.cr"
 require "./../globalization.cr"
 
 module Win32cr::Graphics::DirectWrite
+  extend self
   DWRITE_ALPHA_MAX = 255_u32
   FACILITY_DWRITE = 2200_u32
   DWRITE_ERR_BASE = 20480_u32
@@ -9508,8 +9509,13 @@ module Win32cr::Graphics::DirectWrite
 
   end
 
+  def dWriteCreateFactory(factoryType : Win32cr::Graphics::DirectWrite::DWRITE_FACTORY_TYPE, iid : LibC::GUID*, factory : Void**) : Win32cr::Foundation::HRESULT
+    C.DWriteCreateFactory(factoryType, iid, factory)
+  end
+
   @[Link("dwrite")]
   lib C
+    # :nodoc:
     fun DWriteCreateFactory(factoryType : Win32cr::Graphics::DirectWrite::DWRITE_FACTORY_TYPE, iid : LibC::GUID*, factory : Void**) : Win32cr::Foundation::HRESULT
 
   end

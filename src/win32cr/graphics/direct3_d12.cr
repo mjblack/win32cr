@@ -5,6 +5,7 @@ require "./direct3_d.cr"
 require "./../security.cr"
 
 module Win32cr::Graphics::Direct3D12
+  extend self
   alias PFN_D3D12_SERIALIZE_ROOT_SIGNATURE = Proc(Win32cr::Graphics::Direct3D12::D3D12_ROOT_SIGNATURE_DESC*, Win32cr::Graphics::Direct3D12::D3D_ROOT_SIGNATURE_VERSION, Void**, Void**, Win32cr::Foundation::HRESULT)
 
   alias PFN_D3D12_CREATE_ROOT_SIGNATURE_DESERIALIZER = Proc(Void*, LibC::UIntPtrT, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
@@ -12561,22 +12562,62 @@ module Win32cr::Graphics::Direct3D12
 
   end
 
+  def d3D12SerializeRootSignature(pRootSignature : Win32cr::Graphics::Direct3D12::D3D12_ROOT_SIGNATURE_DESC*, version : Win32cr::Graphics::Direct3D12::D3D_ROOT_SIGNATURE_VERSION, ppBlob : Void**, ppErrorBlob : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D12SerializeRootSignature(pRootSignature, version, ppBlob, ppErrorBlob)
+  end
+
+  def d3D12CreateRootSignatureDeserializer(pSrcData : Void*, src_data_size_in_bytes : LibC::UIntPtrT, pRootSignatureDeserializerInterface : LibC::GUID*, ppRootSignatureDeserializer : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D12CreateRootSignatureDeserializer(pSrcData, src_data_size_in_bytes, pRootSignatureDeserializerInterface, ppRootSignatureDeserializer)
+  end
+
+  def d3D12SerializeVersionedRootSignature(pRootSignature : Win32cr::Graphics::Direct3D12::D3D12_VERSIONED_ROOT_SIGNATURE_DESC*, ppBlob : Void**, ppErrorBlob : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D12SerializeVersionedRootSignature(pRootSignature, ppBlob, ppErrorBlob)
+  end
+
+  def d3D12CreateVersionedRootSignatureDeserializer(pSrcData : Void*, src_data_size_in_bytes : LibC::UIntPtrT, pRootSignatureDeserializerInterface : LibC::GUID*, ppRootSignatureDeserializer : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D12CreateVersionedRootSignatureDeserializer(pSrcData, src_data_size_in_bytes, pRootSignatureDeserializerInterface, ppRootSignatureDeserializer)
+  end
+
+  def d3D12CreateDevice(pAdapter : Void*, minimum_feature_level : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL, riid : LibC::GUID*, ppDevice : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D12CreateDevice(pAdapter, minimum_feature_level, riid, ppDevice)
+  end
+
+  def d3D12GetDebugInterface(riid : LibC::GUID*, ppvDebug : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D12GetDebugInterface(riid, ppvDebug)
+  end
+
+  def d3D12EnableExperimentalFeatures(num_features : UInt32, pIIDs : LibC::GUID*, pConfigurationStructs : Void*, pConfigurationStructSizes : UInt32*) : Win32cr::Foundation::HRESULT
+    C.D3D12EnableExperimentalFeatures(num_features, pIIDs, pConfigurationStructs, pConfigurationStructSizes)
+  end
+
+  def d3D12GetInterface(rclsid : LibC::GUID*, riid : LibC::GUID*, ppvDebug : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D12GetInterface(rclsid, riid, ppvDebug)
+  end
+
   @[Link("d3d12")]
   lib C
+    # :nodoc:
     fun D3D12SerializeRootSignature(pRootSignature : Win32cr::Graphics::Direct3D12::D3D12_ROOT_SIGNATURE_DESC*, version : Win32cr::Graphics::Direct3D12::D3D_ROOT_SIGNATURE_VERSION, ppBlob : Void**, ppErrorBlob : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D12CreateRootSignatureDeserializer(pSrcData : Void*, src_data_size_in_bytes : LibC::UIntPtrT, pRootSignatureDeserializerInterface : LibC::GUID*, ppRootSignatureDeserializer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D12SerializeVersionedRootSignature(pRootSignature : Win32cr::Graphics::Direct3D12::D3D12_VERSIONED_ROOT_SIGNATURE_DESC*, ppBlob : Void**, ppErrorBlob : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D12CreateVersionedRootSignatureDeserializer(pSrcData : Void*, src_data_size_in_bytes : LibC::UIntPtrT, pRootSignatureDeserializerInterface : LibC::GUID*, ppRootSignatureDeserializer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D12CreateDevice(pAdapter : Void*, minimum_feature_level : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL, riid : LibC::GUID*, ppDevice : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D12GetDebugInterface(riid : LibC::GUID*, ppvDebug : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D12EnableExperimentalFeatures(num_features : UInt32, pIIDs : LibC::GUID*, pConfigurationStructs : Void*, pConfigurationStructSizes : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D12GetInterface(rclsid : LibC::GUID*, riid : LibC::GUID*, ppvDebug : Void**) : Win32cr::Foundation::HRESULT
 
   end

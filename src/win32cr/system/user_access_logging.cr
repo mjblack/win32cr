@@ -2,6 +2,7 @@ require "./../networking/win_sock.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::UserAccessLogging
+  extend self
 
 
   @[Extern]
@@ -15,14 +16,34 @@ module Win32cr::System::UserAccessLogging
     end
   end
 
+  def ualStart(data : Win32cr::System::UserAccessLogging::UAL_DATA_BLOB*) : Win32cr::Foundation::HRESULT
+    C.UalStart(data)
+  end
+
+  def ualStop(data : Win32cr::System::UserAccessLogging::UAL_DATA_BLOB*) : Win32cr::Foundation::HRESULT
+    C.UalStop(data)
+  end
+
+  def ualInstrument(data : Win32cr::System::UserAccessLogging::UAL_DATA_BLOB*) : Win32cr::Foundation::HRESULT
+    C.UalInstrument(data)
+  end
+
+  def ualRegisterProduct(wszProductName : Win32cr::Foundation::PWSTR, wszRoleName : Win32cr::Foundation::PWSTR, wszGuid : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.UalRegisterProduct(wszProductName, wszRoleName, wszGuid)
+  end
+
   @[Link("ualapi")]
   lib C
+    # :nodoc:
     fun UalStart(data : Win32cr::System::UserAccessLogging::UAL_DATA_BLOB*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UalStop(data : Win32cr::System::UserAccessLogging::UAL_DATA_BLOB*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UalInstrument(data : Win32cr::System::UserAccessLogging::UAL_DATA_BLOB*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UalRegisterProduct(wszProductName : Win32cr::Foundation::PWSTR, wszRoleName : Win32cr::Foundation::PWSTR, wszGuid : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
   end

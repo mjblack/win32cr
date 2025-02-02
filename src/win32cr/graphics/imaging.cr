@@ -7,6 +7,7 @@ require "./../ui/windows_and_messaging.cr"
 require "./dxgi/common.cr"
 
 module Win32cr::Graphics::Imaging
+  extend self
   alias PFNProgressNotification = Proc(Void*, UInt32, Win32cr::Graphics::Imaging::WICProgressOperation, Float64, Win32cr::Foundation::HRESULT)
 
   WINCODEC_SDK_VERSION1 = 566_u32
@@ -3900,24 +3901,69 @@ module Win32cr::Graphics::Imaging
 
   end
 
+  def wICConvertBitmapSource(dstFormat : LibC::GUID*, pISrc : Void*, ppIDst : Void**) : Win32cr::Foundation::HRESULT
+    C.WICConvertBitmapSource(dstFormat, pISrc, ppIDst)
+  end
+
+  def wICCreateBitmapFromSection(width : UInt32, height : UInt32, pixelFormat : LibC::GUID*, hSection : Win32cr::Foundation::HANDLE, stride : UInt32, offset : UInt32, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+    C.WICCreateBitmapFromSection(width, height, pixelFormat, hSection, stride, offset, ppIBitmap)
+  end
+
+  def wICCreateBitmapFromSectionEx(width : UInt32, height : UInt32, pixelFormat : LibC::GUID*, hSection : Win32cr::Foundation::HANDLE, stride : UInt32, offset : UInt32, desiredAccessLevel : Win32cr::Graphics::Imaging::WICSectionAccessLevel, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+    C.WICCreateBitmapFromSectionEx(width, height, pixelFormat, hSection, stride, offset, desiredAccessLevel, ppIBitmap)
+  end
+
+  def wICMapGuidToShortName(guid : LibC::GUID*, cchName : UInt32, wzName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WICMapGuidToShortName(guid, cchName, wzName, pcchActual)
+  end
+
+  def wICMapShortNameToGuid(wzName : Win32cr::Foundation::PWSTR, pguid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.WICMapShortNameToGuid(wzName, pguid)
+  end
+
+  def wICMapSchemaToName(guidMetadataFormat : LibC::GUID*, pwzSchema : Win32cr::Foundation::PWSTR, cchName : UInt32, wzName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+    C.WICMapSchemaToName(guidMetadataFormat, pwzSchema, cchName, wzName, pcchActual)
+  end
+
+  def wICMatchMetadataContent(guidContainerFormat : LibC::GUID*, pguidVendor : LibC::GUID*, pIStream : Void*, pguidMetadataFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.WICMatchMetadataContent(guidContainerFormat, pguidVendor, pIStream, pguidMetadataFormat)
+  end
+
+  def wICSerializeMetadataContent(guidContainerFormat : LibC::GUID*, pIWriter : Void*, dwPersistOptions : UInt32, pIStream : Void*) : Win32cr::Foundation::HRESULT
+    C.WICSerializeMetadataContent(guidContainerFormat, pIWriter, dwPersistOptions, pIStream)
+  end
+
+  def wICGetMetadataContentSize(guidContainerFormat : LibC::GUID*, pIWriter : Void*, pcbSize : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    C.WICGetMetadataContentSize(guidContainerFormat, pIWriter, pcbSize)
+  end
+
   @[Link("windowscodecs")]
   lib C
+    # :nodoc:
     fun WICConvertBitmapSource(dstFormat : LibC::GUID*, pISrc : Void*, ppIDst : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WICCreateBitmapFromSection(width : UInt32, height : UInt32, pixelFormat : LibC::GUID*, hSection : Win32cr::Foundation::HANDLE, stride : UInt32, offset : UInt32, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WICCreateBitmapFromSectionEx(width : UInt32, height : UInt32, pixelFormat : LibC::GUID*, hSection : Win32cr::Foundation::HANDLE, stride : UInt32, offset : UInt32, desiredAccessLevel : Win32cr::Graphics::Imaging::WICSectionAccessLevel, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WICMapGuidToShortName(guid : LibC::GUID*, cchName : UInt32, wzName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WICMapShortNameToGuid(wzName : Win32cr::Foundation::PWSTR, pguid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WICMapSchemaToName(guidMetadataFormat : LibC::GUID*, pwzSchema : Win32cr::Foundation::PWSTR, cchName : UInt32, wzName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WICMatchMetadataContent(guidContainerFormat : LibC::GUID*, pguidVendor : LibC::GUID*, pIStream : Void*, pguidMetadataFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WICSerializeMetadataContent(guidContainerFormat : LibC::GUID*, pIWriter : Void*, dwPersistOptions : UInt32, pIStream : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WICGetMetadataContentSize(guidContainerFormat : LibC::GUID*, pIWriter : Void*, pcbSize : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
 
   end

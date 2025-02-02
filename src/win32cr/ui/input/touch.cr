@@ -2,6 +2,7 @@ require "./../../system/com.cr"
 require "./../../foundation.cr"
 
 module Win32cr::UI::Input::Touch
+  extend self
   alias HGESTUREINFO = LibC::IntPtrT
   alias HTOUCHINPUT = LibC::IntPtrT
 
@@ -459,26 +460,76 @@ module Win32cr::UI::Input::Touch
 
   end
 
+  def getTouchInputInfo(hTouchInput : Win32cr::UI::Input::Touch::HTOUCHINPUT, cInputs : UInt32, pInputs : Win32cr::UI::Input::Touch::TOUCHINPUT*, cbSize : Int32) : Win32cr::Foundation::BOOL
+    C.GetTouchInputInfo(hTouchInput, cInputs, pInputs, cbSize)
+  end
+
+  def closeTouchInputHandle(hTouchInput : Win32cr::UI::Input::Touch::HTOUCHINPUT) : Win32cr::Foundation::BOOL
+    C.CloseTouchInputHandle(hTouchInput)
+  end
+
+  def registerTouchWindow(hwnd : Win32cr::Foundation::HWND, ulFlags : Win32cr::UI::Input::Touch::REGISTER_TOUCH_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
+    C.RegisterTouchWindow(hwnd, ulFlags)
+  end
+
+  def unregisterTouchWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.UnregisterTouchWindow(hwnd)
+  end
+
+  def isTouchWindow(hwnd : Win32cr::Foundation::HWND, pulFlags : UInt32*) : Win32cr::Foundation::BOOL
+    C.IsTouchWindow(hwnd, pulFlags)
+  end
+
+  def getGestureInfo(hGestureInfo : Win32cr::UI::Input::Touch::HGESTUREINFO, pGestureInfo : Win32cr::UI::Input::Touch::GESTUREINFO*) : Win32cr::Foundation::BOOL
+    C.GetGestureInfo(hGestureInfo, pGestureInfo)
+  end
+
+  def getGestureExtraArgs(hGestureInfo : Win32cr::UI::Input::Touch::HGESTUREINFO, cbExtraArgs : UInt32, pExtraArgs : UInt8*) : Win32cr::Foundation::BOOL
+    C.GetGestureExtraArgs(hGestureInfo, cbExtraArgs, pExtraArgs)
+  end
+
+  def closeGestureInfoHandle(hGestureInfo : Win32cr::UI::Input::Touch::HGESTUREINFO) : Win32cr::Foundation::BOOL
+    C.CloseGestureInfoHandle(hGestureInfo)
+  end
+
+  def setGestureConfig(hwnd : Win32cr::Foundation::HWND, dwReserved : UInt32, cIDs : UInt32, pGestureConfig : Win32cr::UI::Input::Touch::GESTURECONFIG*, cbSize : UInt32) : Win32cr::Foundation::BOOL
+    C.SetGestureConfig(hwnd, dwReserved, cIDs, pGestureConfig, cbSize)
+  end
+
+  def getGestureConfig(hwnd : Win32cr::Foundation::HWND, dwReserved : UInt32, dwFlags : UInt32, pcIDs : UInt32*, pGestureConfig : Win32cr::UI::Input::Touch::GESTURECONFIG*, cbSize : UInt32) : Win32cr::Foundation::BOOL
+    C.GetGestureConfig(hwnd, dwReserved, dwFlags, pcIDs, pGestureConfig, cbSize)
+  end
+
   @[Link("user32")]
   lib C
+    # :nodoc:
     fun GetTouchInputInfo(hTouchInput : Win32cr::UI::Input::Touch::HTOUCHINPUT, cInputs : UInt32, pInputs : Win32cr::UI::Input::Touch::TOUCHINPUT*, cbSize : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CloseTouchInputHandle(hTouchInput : Win32cr::UI::Input::Touch::HTOUCHINPUT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterTouchWindow(hwnd : Win32cr::Foundation::HWND, ulFlags : Win32cr::UI::Input::Touch::REGISTER_TOUCH_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnregisterTouchWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsTouchWindow(hwnd : Win32cr::Foundation::HWND, pulFlags : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetGestureInfo(hGestureInfo : Win32cr::UI::Input::Touch::HGESTUREINFO, pGestureInfo : Win32cr::UI::Input::Touch::GESTUREINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetGestureExtraArgs(hGestureInfo : Win32cr::UI::Input::Touch::HGESTUREINFO, cbExtraArgs : UInt32, pExtraArgs : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CloseGestureInfoHandle(hGestureInfo : Win32cr::UI::Input::Touch::HGESTUREINFO) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetGestureConfig(hwnd : Win32cr::Foundation::HWND, dwReserved : UInt32, cIDs : UInt32, pGestureConfig : Win32cr::UI::Input::Touch::GESTURECONFIG*, cbSize : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetGestureConfig(hwnd : Win32cr::Foundation::HWND, dwReserved : UInt32, dwFlags : UInt32, pcIDs : UInt32*, pGestureConfig : Win32cr::UI::Input::Touch::GESTURECONFIG*, cbSize : UInt32) : Win32cr::Foundation::BOOL
 
   end

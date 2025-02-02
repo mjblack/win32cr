@@ -4,6 +4,7 @@ require "./../../system/com.cr"
 require "./../properties.cr"
 
 module Win32cr::Devices::Enumeration::Pnp
+  extend self
   alias HSWDEVICE = LibC::IntPtrT
   alias SW_DEVICE_CREATE_CALLBACK = Proc(Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, Win32cr::Foundation::HRESULT, Void*, Win32cr::Foundation::PWSTR, Void)
 
@@ -1123,24 +1124,69 @@ module Win32cr::Devices::Enumeration::Pnp
 
   end
 
+  def swDeviceCreate(pszEnumeratorName : Win32cr::Foundation::PWSTR, pszParentDeviceInstance : Win32cr::Foundation::PWSTR, pCreateInfo : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_CREATE_INFO*, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*, pCallback : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_CREATE_CALLBACK, pContext : Void*, phSwDevice : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
+    C.SwDeviceCreate(pszEnumeratorName, pszParentDeviceInstance, pCreateInfo, cPropertyCount, pProperties, pCallback, pContext, phSwDevice)
+  end
+
+  def swDeviceClose(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE) : Void
+    C.SwDeviceClose(hSwDevice)
+  end
+
+  def swDeviceSetLifetime(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, lifetime : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_LIFETIME) : Win32cr::Foundation::HRESULT
+    C.SwDeviceSetLifetime(hSwDevice, lifetime)
+  end
+
+  def swDeviceGetLifetime(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, pLifetime : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_LIFETIME*) : Win32cr::Foundation::HRESULT
+    C.SwDeviceGetLifetime(hSwDevice, pLifetime)
+  end
+
+  def swDevicePropertySet(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*) : Win32cr::Foundation::HRESULT
+    C.SwDevicePropertySet(hSwDevice, cPropertyCount, pProperties)
+  end
+
+  def swDeviceInterfaceRegister(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, pInterfaceClassGuid : LibC::GUID*, pszReferenceString : Win32cr::Foundation::PWSTR, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*, fEnabled : Win32cr::Foundation::BOOL, ppszDeviceInterfaceId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.SwDeviceInterfaceRegister(hSwDevice, pInterfaceClassGuid, pszReferenceString, cPropertyCount, pProperties, fEnabled, ppszDeviceInterfaceId)
+  end
+
+  def swMemFree(pMem : Void*) : Void
+    C.SwMemFree(pMem)
+  end
+
+  def swDeviceInterfaceSetState(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, pszDeviceInterfaceId : Win32cr::Foundation::PWSTR, fEnabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.SwDeviceInterfaceSetState(hSwDevice, pszDeviceInterfaceId, fEnabled)
+  end
+
+  def swDeviceInterfacePropertySet(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, pszDeviceInterfaceId : Win32cr::Foundation::PWSTR, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*) : Win32cr::Foundation::HRESULT
+    C.SwDeviceInterfacePropertySet(hSwDevice, pszDeviceInterfaceId, cPropertyCount, pProperties)
+  end
+
   @[Link("cfgmgr32")]
   lib C
+    # :nodoc:
     fun SwDeviceCreate(pszEnumeratorName : Win32cr::Foundation::PWSTR, pszParentDeviceInstance : Win32cr::Foundation::PWSTR, pCreateInfo : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_CREATE_INFO*, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*, pCallback : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_CREATE_CALLBACK, pContext : Void*, phSwDevice : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SwDeviceClose(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE) : Void
 
+    # :nodoc:
     fun SwDeviceSetLifetime(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, lifetime : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_LIFETIME) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SwDeviceGetLifetime(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, pLifetime : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_LIFETIME*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SwDevicePropertySet(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SwDeviceInterfaceRegister(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, pInterfaceClassGuid : LibC::GUID*, pszReferenceString : Win32cr::Foundation::PWSTR, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*, fEnabled : Win32cr::Foundation::BOOL, ppszDeviceInterfaceId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SwMemFree(pMem : Void*) : Void
 
+    # :nodoc:
     fun SwDeviceInterfaceSetState(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, pszDeviceInterfaceId : Win32cr::Foundation::PWSTR, fEnabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SwDeviceInterfacePropertySet(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, pszDeviceInterfaceId : Win32cr::Foundation::PWSTR, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*) : Win32cr::Foundation::HRESULT
 
   end

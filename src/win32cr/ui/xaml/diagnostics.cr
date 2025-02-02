@@ -4,6 +4,7 @@ require "./../../graphics/dxgi/common.cr"
 require "./../../system/win_rt.cr"
 
 module Win32cr::UI::Xaml::Diagnostics
+  extend self
   E_UNKNOWNTYPE = -2144665560_i32
 
   enum VisualMutationType
@@ -544,10 +545,20 @@ module Win32cr::UI::Xaml::Diagnostics
 
   end
 
+  def initializeXamlDiagnostic(endPointName : Win32cr::Foundation::PWSTR, pid : UInt32, wszDllXamlDiagnostics : Win32cr::Foundation::PWSTR, wszTAPDllName : Win32cr::Foundation::PWSTR, tapClsid : LibC::GUID) : Win32cr::Foundation::HRESULT
+    C.InitializeXamlDiagnostic(endPointName, pid, wszDllXamlDiagnostics, wszTAPDllName, tapClsid)
+  end
+
+  def initializeXamlDiagnosticsEx(endPointName : Win32cr::Foundation::PWSTR, pid : UInt32, wszDllXamlDiagnostics : Win32cr::Foundation::PWSTR, wszTAPDllName : Win32cr::Foundation::PWSTR, tapClsid : LibC::GUID, wszInitializationData : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.InitializeXamlDiagnosticsEx(endPointName, pid, wszDllXamlDiagnostics, wszTAPDllName, tapClsid, wszInitializationData)
+  end
+
   @[Link("windows.ui.xaml")]
   lib C
+    # :nodoc:
     fun InitializeXamlDiagnostic(endPointName : Win32cr::Foundation::PWSTR, pid : UInt32, wszDllXamlDiagnostics : Win32cr::Foundation::PWSTR, wszTAPDllName : Win32cr::Foundation::PWSTR, tapClsid : LibC::GUID) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitializeXamlDiagnosticsEx(endPointName : Win32cr::Foundation::PWSTR, pid : UInt32, wszDllXamlDiagnostics : Win32cr::Foundation::PWSTR, wszTAPDllName : Win32cr::Foundation::PWSTR, tapClsid : LibC::GUID, wszInitializationData : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
   end

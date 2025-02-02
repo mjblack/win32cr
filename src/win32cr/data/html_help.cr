@@ -4,6 +4,7 @@ require "./../system/com.cr"
 require "./../system/search.cr"
 
 module Win32cr::Data::HtmlHelp
+  extend self
   alias PFNCOLHEAPFREE = Proc(Void*, Int32)
 
   HH_DISPLAY_TOPIC = 0_u32

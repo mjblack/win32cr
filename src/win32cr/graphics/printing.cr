@@ -12,6 +12,7 @@ require "./../storage/xps.cr"
 require "./dxgi.cr"
 
 module Win32cr::Graphics::Printing
+  extend self
   alias CPSUICALLBACK_ = Proc(Win32cr::Graphics::Printing::CPSUICBPARAM*, Int32)
 
   alias PFNCOMPROPSHEET = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, LibC::IntPtrT)
@@ -8975,438 +8976,1508 @@ module Win32cr::Graphics::Printing
 
   end
 
+  def commonPropertySheetUIA(hWndOwner : Win32cr::Foundation::HWND, pfnPropSheetUI : Win32cr::Graphics::Printing::PFNPROPSHEETUI, lParam : Win32cr::Foundation::LPARAM, pResult : UInt32*) : Int32
+    C.CommonPropertySheetUIA(hWndOwner, pfnPropSheetUI, lParam, pResult)
+  end
+
+  def commonPropertySheetUIW(hWndOwner : Win32cr::Foundation::HWND, pfnPropSheetUI : Win32cr::Graphics::Printing::PFNPROPSHEETUI, lParam : Win32cr::Foundation::LPARAM, pResult : UInt32*) : Int32
+    C.CommonPropertySheetUIW(hWndOwner, pfnPropSheetUI, lParam, pResult)
+  end
+
+  def getCPSUIUserData(hDlg : Win32cr::Foundation::HWND) : LibC::UIntPtrT
+    C.GetCPSUIUserData(hDlg)
+  end
+
+  def setCPSUIUserData(hDlg : Win32cr::Foundation::HWND, cpsui_user_data : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.SetCPSUIUserData(hDlg, cpsui_user_data)
+  end
+
+  def enumPrintersA(flags : UInt32, name : Win32cr::Foundation::PSTR, level : UInt32, pPrinterEnum : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumPrintersA(flags, name, level, pPrinterEnum, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def enumPrintersW(flags : UInt32, name : Win32cr::Foundation::PWSTR, level : UInt32, pPrinterEnum : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumPrintersW(flags, name, level, pPrinterEnum, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def getSpoolFileHandle(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
+    C.GetSpoolFileHandle(hPrinter)
+  end
+
+  def commitSpoolData(hPrinter : Win32cr::Foundation::HANDLE, hSpoolFile : Win32cr::Foundation::HANDLE, cbCommit : UInt32) : Win32cr::Foundation::HANDLE
+    C.CommitSpoolData(hPrinter, hSpoolFile, cbCommit)
+  end
+
+  def closeSpoolFileHandle(hPrinter : Win32cr::Foundation::HANDLE, hSpoolFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.CloseSpoolFileHandle(hPrinter, hSpoolFile)
+  end
+
+  def openPrinterA(pPrinterName : Win32cr::Foundation::PSTR, phPrinter : Win32cr::Foundation::HANDLE*, pDefault : Win32cr::Graphics::Printing::PRINTER_DEFAULTSA*) : Win32cr::Foundation::BOOL
+    C.OpenPrinterA(pPrinterName, phPrinter, pDefault)
+  end
+
+  def openPrinterW(pPrinterName : Win32cr::Foundation::PWSTR, phPrinter : Win32cr::Foundation::HANDLE*, pDefault : Win32cr::Graphics::Printing::PRINTER_DEFAULTSW*) : Win32cr::Foundation::BOOL
+    C.OpenPrinterW(pPrinterName, phPrinter, pDefault)
+  end
+
+  def resetPrinterA(hPrinter : Win32cr::Foundation::HANDLE, pDefault : Win32cr::Graphics::Printing::PRINTER_DEFAULTSA*) : Win32cr::Foundation::BOOL
+    C.ResetPrinterA(hPrinter, pDefault)
+  end
+
+  def resetPrinterW(hPrinter : Win32cr::Foundation::HANDLE, pDefault : Win32cr::Graphics::Printing::PRINTER_DEFAULTSW*) : Win32cr::Foundation::BOOL
+    C.ResetPrinterW(hPrinter, pDefault)
+  end
+
+  def setJobA(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, level : UInt32, pJob : UInt8*, command : UInt32) : Win32cr::Foundation::BOOL
+    C.SetJobA(hPrinter, job_id, level, pJob, command)
+  end
+
+  def setJobW(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, level : UInt32, pJob : UInt8*, command : UInt32) : Win32cr::Foundation::BOOL
+    C.SetJobW(hPrinter, job_id, level, pJob, command)
+  end
+
+  def getJobA(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, level : UInt32, pJob : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetJobA(hPrinter, job_id, level, pJob, cbBuf, pcbNeeded)
+  end
+
+  def getJobW(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, level : UInt32, pJob : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetJobW(hPrinter, job_id, level, pJob, cbBuf, pcbNeeded)
+  end
+
+  def enumJobsA(hPrinter : Win32cr::Foundation::HANDLE, first_job : UInt32, no_jobs : UInt32, level : UInt32, pJob : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumJobsA(hPrinter, first_job, no_jobs, level, pJob, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def enumJobsW(hPrinter : Win32cr::Foundation::HANDLE, first_job : UInt32, no_jobs : UInt32, level : UInt32, pJob : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumJobsW(hPrinter, first_job, no_jobs, level, pJob, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def addPrinterA(pName : Win32cr::Foundation::PSTR, level : UInt32, pPrinter : UInt8*) : Win32cr::Foundation::HANDLE
+    C.AddPrinterA(pName, level, pPrinter)
+  end
+
+  def addPrinterW(pName : Win32cr::Foundation::PWSTR, level : UInt32, pPrinter : UInt8*) : Win32cr::Foundation::HANDLE
+    C.AddPrinterW(pName, level, pPrinter)
+  end
+
+  def deletePrinter(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.DeletePrinter(hPrinter)
+  end
+
+  def setPrinterA(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pPrinter : UInt8*, command : UInt32) : Win32cr::Foundation::BOOL
+    C.SetPrinterA(hPrinter, level, pPrinter, command)
+  end
+
+  def setPrinterW(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pPrinter : UInt8*, command : UInt32) : Win32cr::Foundation::BOOL
+    C.SetPrinterW(hPrinter, level, pPrinter, command)
+  end
+
+  def getPrinterA(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pPrinter : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetPrinterA(hPrinter, level, pPrinter, cbBuf, pcbNeeded)
+  end
+
+  def getPrinterW(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pPrinter : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetPrinterW(hPrinter, level, pPrinter, cbBuf, pcbNeeded)
+  end
+
+  def addPrinterDriverA(pName : Win32cr::Foundation::PSTR, level : UInt32, pDriverInfo : UInt8*) : Win32cr::Foundation::BOOL
+    C.AddPrinterDriverA(pName, level, pDriverInfo)
+  end
+
+  def addPrinterDriverW(pName : Win32cr::Foundation::PWSTR, level : UInt32, pDriverInfo : UInt8*) : Win32cr::Foundation::BOOL
+    C.AddPrinterDriverW(pName, level, pDriverInfo)
+  end
+
+  def addPrinterDriverExA(pName : Win32cr::Foundation::PSTR, level : UInt32, lpbDriverInfo : UInt8*, dwFileCopyFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.AddPrinterDriverExA(pName, level, lpbDriverInfo, dwFileCopyFlags)
+  end
+
+  def addPrinterDriverExW(pName : Win32cr::Foundation::PWSTR, level : UInt32, lpbDriverInfo : UInt8*, dwFileCopyFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.AddPrinterDriverExW(pName, level, lpbDriverInfo, dwFileCopyFlags)
+  end
+
+  def enumPrinterDriversA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, level : UInt32, pDriverInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumPrinterDriversA(pName, pEnvironment, level, pDriverInfo, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def enumPrinterDriversW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, level : UInt32, pDriverInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumPrinterDriversW(pName, pEnvironment, level, pDriverInfo, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def getPrinterDriverA(hPrinter : Win32cr::Foundation::HANDLE, pEnvironment : Win32cr::Foundation::PSTR, level : UInt32, pDriverInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetPrinterDriverA(hPrinter, pEnvironment, level, pDriverInfo, cbBuf, pcbNeeded)
+  end
+
+  def getPrinterDriverW(hPrinter : Win32cr::Foundation::HANDLE, pEnvironment : Win32cr::Foundation::PWSTR, level : UInt32, pDriverInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetPrinterDriverW(hPrinter, pEnvironment, level, pDriverInfo, cbBuf, pcbNeeded)
+  end
+
+  def getPrinterDriverDirectoryA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, level : UInt32, pDriverDirectory : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetPrinterDriverDirectoryA(pName, pEnvironment, level, pDriverDirectory, cbBuf, pcbNeeded)
+  end
+
+  def getPrinterDriverDirectoryW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, level : UInt32, pDriverDirectory : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetPrinterDriverDirectoryW(pName, pEnvironment, level, pDriverDirectory, cbBuf, pcbNeeded)
+  end
+
+  def deletePrinterDriverA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, pDriverName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.DeletePrinterDriverA(pName, pEnvironment, pDriverName)
+  end
+
+  def deletePrinterDriverW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, pDriverName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.DeletePrinterDriverW(pName, pEnvironment, pDriverName)
+  end
+
+  def deletePrinterDriverExA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, pDriverName : Win32cr::Foundation::PSTR, dwDeleteFlag : UInt32, dwVersionFlag : UInt32) : Win32cr::Foundation::BOOL
+    C.DeletePrinterDriverExA(pName, pEnvironment, pDriverName, dwDeleteFlag, dwVersionFlag)
+  end
+
+  def deletePrinterDriverExW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, pDriverName : Win32cr::Foundation::PWSTR, dwDeleteFlag : UInt32, dwVersionFlag : UInt32) : Win32cr::Foundation::BOOL
+    C.DeletePrinterDriverExW(pName, pEnvironment, pDriverName, dwDeleteFlag, dwVersionFlag)
+  end
+
+  def addPrintProcessorA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, pPathName : Win32cr::Foundation::PSTR, pPrintProcessorName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.AddPrintProcessorA(pName, pEnvironment, pPathName, pPrintProcessorName)
+  end
+
+  def addPrintProcessorW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, pPathName : Win32cr::Foundation::PWSTR, pPrintProcessorName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.AddPrintProcessorW(pName, pEnvironment, pPathName, pPrintProcessorName)
+  end
+
+  def enumPrintProcessorsA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, level : UInt32, pPrintProcessorInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumPrintProcessorsA(pName, pEnvironment, level, pPrintProcessorInfo, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def enumPrintProcessorsW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, level : UInt32, pPrintProcessorInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumPrintProcessorsW(pName, pEnvironment, level, pPrintProcessorInfo, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def getPrintProcessorDirectoryA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, level : UInt32, pPrintProcessorInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetPrintProcessorDirectoryA(pName, pEnvironment, level, pPrintProcessorInfo, cbBuf, pcbNeeded)
+  end
+
+  def getPrintProcessorDirectoryW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, level : UInt32, pPrintProcessorInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetPrintProcessorDirectoryW(pName, pEnvironment, level, pPrintProcessorInfo, cbBuf, pcbNeeded)
+  end
+
+  def enumPrintProcessorDatatypesA(pName : Win32cr::Foundation::PSTR, pPrintProcessorName : Win32cr::Foundation::PSTR, level : UInt32, pDatatypes : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumPrintProcessorDatatypesA(pName, pPrintProcessorName, level, pDatatypes, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def enumPrintProcessorDatatypesW(pName : Win32cr::Foundation::PWSTR, pPrintProcessorName : Win32cr::Foundation::PWSTR, level : UInt32, pDatatypes : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumPrintProcessorDatatypesW(pName, pPrintProcessorName, level, pDatatypes, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def deletePrintProcessorA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, pPrintProcessorName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.DeletePrintProcessorA(pName, pEnvironment, pPrintProcessorName)
+  end
+
+  def deletePrintProcessorW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, pPrintProcessorName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.DeletePrintProcessorW(pName, pEnvironment, pPrintProcessorName)
+  end
+
+  def startDocPrinterA(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pDocInfo : Win32cr::Graphics::Printing::DOC_INFO_1A*) : UInt32
+    C.StartDocPrinterA(hPrinter, level, pDocInfo)
+  end
+
+  def startDocPrinterW(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pDocInfo : Win32cr::Graphics::Printing::DOC_INFO_1W*) : UInt32
+    C.StartDocPrinterW(hPrinter, level, pDocInfo)
+  end
+
+  def startPagePrinter(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.StartPagePrinter(hPrinter)
+  end
+
+  def writePrinter(hPrinter : Win32cr::Foundation::HANDLE, pBuf : Void*, cbBuf : UInt32, pcWritten : UInt32*) : Win32cr::Foundation::BOOL
+    C.WritePrinter(hPrinter, pBuf, cbBuf, pcWritten)
+  end
+
+  def flushPrinter(hPrinter : Win32cr::Foundation::HANDLE, pBuf : Void*, cbBuf : UInt32, pcWritten : UInt32*, cSleep : UInt32) : Win32cr::Foundation::BOOL
+    C.FlushPrinter(hPrinter, pBuf, cbBuf, pcWritten, cSleep)
+  end
+
+  def endPagePrinter(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.EndPagePrinter(hPrinter)
+  end
+
+  def abortPrinter(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.AbortPrinter(hPrinter)
+  end
+
+  def readPrinter(hPrinter : Win32cr::Foundation::HANDLE, pBuf : Void*, cbBuf : UInt32, pNoBytesRead : UInt32*) : Win32cr::Foundation::BOOL
+    C.ReadPrinter(hPrinter, pBuf, cbBuf, pNoBytesRead)
+  end
+
+  def endDocPrinter(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.EndDocPrinter(hPrinter)
+  end
+
+  def addJobA(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pData : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.AddJobA(hPrinter, level, pData, cbBuf, pcbNeeded)
+  end
+
+  def addJobW(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pData : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.AddJobW(hPrinter, level, pData, cbBuf, pcbNeeded)
+  end
+
+  def scheduleJob(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32) : Win32cr::Foundation::BOOL
+    C.ScheduleJob(hPrinter, job_id)
+  end
+
+  def printerProperties(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.PrinterProperties(hWnd, hPrinter)
+  end
+
+  def documentPropertiesA(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE, pDeviceName : Win32cr::Foundation::PSTR, pDevModeOutput : Win32cr::Graphics::Gdi::DEVMODEA*, pDevModeInput : Win32cr::Graphics::Gdi::DEVMODEA*, fMode : UInt32) : Int32
+    C.DocumentPropertiesA(hWnd, hPrinter, pDeviceName, pDevModeOutput, pDevModeInput, fMode)
+  end
+
+  def documentPropertiesW(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE, pDeviceName : Win32cr::Foundation::PWSTR, pDevModeOutput : Win32cr::Graphics::Gdi::DEVMODEW*, pDevModeInput : Win32cr::Graphics::Gdi::DEVMODEW*, fMode : UInt32) : Int32
+    C.DocumentPropertiesW(hWnd, hPrinter, pDeviceName, pDevModeOutput, pDevModeInput, fMode)
+  end
+
+  def advancedDocumentPropertiesA(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE, pDeviceName : Win32cr::Foundation::PSTR, pDevModeOutput : Win32cr::Graphics::Gdi::DEVMODEA*, pDevModeInput : Win32cr::Graphics::Gdi::DEVMODEA*) : Int32
+    C.AdvancedDocumentPropertiesA(hWnd, hPrinter, pDeviceName, pDevModeOutput, pDevModeInput)
+  end
+
+  def advancedDocumentPropertiesW(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE, pDeviceName : Win32cr::Foundation::PWSTR, pDevModeOutput : Win32cr::Graphics::Gdi::DEVMODEW*, pDevModeInput : Win32cr::Graphics::Gdi::DEVMODEW*) : Int32
+    C.AdvancedDocumentPropertiesW(hWnd, hPrinter, pDeviceName, pDevModeOutput, pDevModeInput)
+  end
+
+  def extDeviceMode(hWnd : Win32cr::Foundation::HWND, hInst : Win32cr::Foundation::HANDLE, pDevModeOutput : Win32cr::Graphics::Gdi::DEVMODEA*, pDeviceName : Win32cr::Foundation::PSTR, pPort : Win32cr::Foundation::PSTR, pDevModeInput : Win32cr::Graphics::Gdi::DEVMODEA*, pProfile : Win32cr::Foundation::PSTR, fMode : UInt32) : Int32
+    C.ExtDeviceMode(hWnd, hInst, pDevModeOutput, pDeviceName, pPort, pDevModeInput, pProfile, fMode)
+  end
+
+  def getPrinterDataA(hPrinter : Win32cr::Foundation::HANDLE, pValueName : Win32cr::Foundation::PSTR, pType : UInt32*, pData : UInt8*, nSize : UInt32, pcbNeeded : UInt32*) : UInt32
+    C.GetPrinterDataA(hPrinter, pValueName, pType, pData, nSize, pcbNeeded)
+  end
+
+  def getPrinterDataW(hPrinter : Win32cr::Foundation::HANDLE, pValueName : Win32cr::Foundation::PWSTR, pType : UInt32*, pData : UInt8*, nSize : UInt32, pcbNeeded : UInt32*) : UInt32
+    C.GetPrinterDataW(hPrinter, pValueName, pType, pData, nSize, pcbNeeded)
+  end
+
+  def getPrinterDataExA(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PSTR, pValueName : Win32cr::Foundation::PSTR, pType : UInt32*, pData : UInt8*, nSize : UInt32, pcbNeeded : UInt32*) : UInt32
+    C.GetPrinterDataExA(hPrinter, pKeyName, pValueName, pType, pData, nSize, pcbNeeded)
+  end
+
+  def getPrinterDataExW(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PWSTR, pValueName : Win32cr::Foundation::PWSTR, pType : UInt32*, pData : UInt8*, nSize : UInt32, pcbNeeded : UInt32*) : UInt32
+    C.GetPrinterDataExW(hPrinter, pKeyName, pValueName, pType, pData, nSize, pcbNeeded)
+  end
+
+  def enumPrinterDataA(hPrinter : Win32cr::Foundation::HANDLE, dwIndex : UInt32, pValueName : Win32cr::Foundation::PSTR, cbValueName : UInt32, pcbValueName : UInt32*, pType : UInt32*, pData : UInt8*, cbData : UInt32, pcbData : UInt32*) : UInt32
+    C.EnumPrinterDataA(hPrinter, dwIndex, pValueName, cbValueName, pcbValueName, pType, pData, cbData, pcbData)
+  end
+
+  def enumPrinterDataW(hPrinter : Win32cr::Foundation::HANDLE, dwIndex : UInt32, pValueName : Win32cr::Foundation::PWSTR, cbValueName : UInt32, pcbValueName : UInt32*, pType : UInt32*, pData : UInt8*, cbData : UInt32, pcbData : UInt32*) : UInt32
+    C.EnumPrinterDataW(hPrinter, dwIndex, pValueName, cbValueName, pcbValueName, pType, pData, cbData, pcbData)
+  end
+
+  def enumPrinterDataExA(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PSTR, pEnumValues : UInt8*, cbEnumValues : UInt32, pcbEnumValues : UInt32*, pnEnumValues : UInt32*) : UInt32
+    C.EnumPrinterDataExA(hPrinter, pKeyName, pEnumValues, cbEnumValues, pcbEnumValues, pnEnumValues)
+  end
+
+  def enumPrinterDataExW(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PWSTR, pEnumValues : UInt8*, cbEnumValues : UInt32, pcbEnumValues : UInt32*, pnEnumValues : UInt32*) : UInt32
+    C.EnumPrinterDataExW(hPrinter, pKeyName, pEnumValues, cbEnumValues, pcbEnumValues, pnEnumValues)
+  end
+
+  def enumPrinterKeyA(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PSTR, pSubkey : Win32cr::Foundation::PSTR, cbSubkey : UInt32, pcbSubkey : UInt32*) : UInt32
+    C.EnumPrinterKeyA(hPrinter, pKeyName, pSubkey, cbSubkey, pcbSubkey)
+  end
+
+  def enumPrinterKeyW(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PWSTR, pSubkey : Win32cr::Foundation::PWSTR, cbSubkey : UInt32, pcbSubkey : UInt32*) : UInt32
+    C.EnumPrinterKeyW(hPrinter, pKeyName, pSubkey, cbSubkey, pcbSubkey)
+  end
+
+  def setPrinterDataA(hPrinter : Win32cr::Foundation::HANDLE, pValueName : Win32cr::Foundation::PSTR, type__ : UInt32, pData : UInt8*, cbData : UInt32) : UInt32
+    C.SetPrinterDataA(hPrinter, pValueName, type__, pData, cbData)
+  end
+
+  def setPrinterDataW(hPrinter : Win32cr::Foundation::HANDLE, pValueName : Win32cr::Foundation::PWSTR, type__ : UInt32, pData : UInt8*, cbData : UInt32) : UInt32
+    C.SetPrinterDataW(hPrinter, pValueName, type__, pData, cbData)
+  end
+
+  def setPrinterDataExA(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PSTR, pValueName : Win32cr::Foundation::PSTR, type__ : UInt32, pData : UInt8*, cbData : UInt32) : UInt32
+    C.SetPrinterDataExA(hPrinter, pKeyName, pValueName, type__, pData, cbData)
+  end
+
+  def setPrinterDataExW(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PWSTR, pValueName : Win32cr::Foundation::PWSTR, type__ : UInt32, pData : UInt8*, cbData : UInt32) : UInt32
+    C.SetPrinterDataExW(hPrinter, pKeyName, pValueName, type__, pData, cbData)
+  end
+
+  def deletePrinterDataA(hPrinter : Win32cr::Foundation::HANDLE, pValueName : Win32cr::Foundation::PSTR) : UInt32
+    C.DeletePrinterDataA(hPrinter, pValueName)
+  end
+
+  def deletePrinterDataW(hPrinter : Win32cr::Foundation::HANDLE, pValueName : Win32cr::Foundation::PWSTR) : UInt32
+    C.DeletePrinterDataW(hPrinter, pValueName)
+  end
+
+  def deletePrinterDataExA(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PSTR, pValueName : Win32cr::Foundation::PSTR) : UInt32
+    C.DeletePrinterDataExA(hPrinter, pKeyName, pValueName)
+  end
+
+  def deletePrinterDataExW(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PWSTR, pValueName : Win32cr::Foundation::PWSTR) : UInt32
+    C.DeletePrinterDataExW(hPrinter, pKeyName, pValueName)
+  end
+
+  def deletePrinterKeyA(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PSTR) : UInt32
+    C.DeletePrinterKeyA(hPrinter, pKeyName)
+  end
+
+  def deletePrinterKeyW(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PWSTR) : UInt32
+    C.DeletePrinterKeyW(hPrinter, pKeyName)
+  end
+
+  def waitForPrinterChange(hPrinter : Win32cr::Foundation::HANDLE, flags : UInt32) : UInt32
+    C.WaitForPrinterChange(hPrinter, flags)
+  end
+
+  def findFirstPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, fdwFilter : UInt32, fdwOptions : UInt32, pPrinterNotifyOptions : Void*) : Win32cr::Foundation::HANDLE
+    C.FindFirstPrinterChangeNotification(hPrinter, fdwFilter, fdwOptions, pPrinterNotifyOptions)
+  end
+
+  def findNextPrinterChangeNotification(hChange : Win32cr::Foundation::HANDLE, pdwChange : UInt32*, pvReserved : Void*, ppPrinterNotifyInfo : Void**) : Win32cr::Foundation::BOOL
+    C.FindNextPrinterChangeNotification(hChange, pdwChange, pvReserved, ppPrinterNotifyInfo)
+  end
+
+  def freePrinterNotifyInfo(pPrinterNotifyInfo : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO*) : Win32cr::Foundation::BOOL
+    C.FreePrinterNotifyInfo(pPrinterNotifyInfo)
+  end
+
+  def findClosePrinterChangeNotification(hChange : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.FindClosePrinterChangeNotification(hChange)
+  end
+
+  def printerMessageBoxA(hPrinter : Win32cr::Foundation::HANDLE, error : UInt32, hWnd : Win32cr::Foundation::HWND, pText : Win32cr::Foundation::PSTR, pCaption : Win32cr::Foundation::PSTR, dwType : UInt32) : UInt32
+    C.PrinterMessageBoxA(hPrinter, error, hWnd, pText, pCaption, dwType)
+  end
+
+  def printerMessageBoxW(hPrinter : Win32cr::Foundation::HANDLE, error : UInt32, hWnd : Win32cr::Foundation::HWND, pText : Win32cr::Foundation::PWSTR, pCaption : Win32cr::Foundation::PWSTR, dwType : UInt32) : UInt32
+    C.PrinterMessageBoxW(hPrinter, error, hWnd, pText, pCaption, dwType)
+  end
+
+  def closePrinter(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.ClosePrinter(hPrinter)
+  end
+
+  def addFormA(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pForm : UInt8*) : Win32cr::Foundation::BOOL
+    C.AddFormA(hPrinter, level, pForm)
+  end
+
+  def addFormW(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pForm : UInt8*) : Win32cr::Foundation::BOOL
+    C.AddFormW(hPrinter, level, pForm)
+  end
+
+  def deleteFormA(hPrinter : Win32cr::Foundation::HANDLE, pFormName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.DeleteFormA(hPrinter, pFormName)
+  end
+
+  def deleteFormW(hPrinter : Win32cr::Foundation::HANDLE, pFormName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.DeleteFormW(hPrinter, pFormName)
+  end
+
+  def getFormA(hPrinter : Win32cr::Foundation::HANDLE, pFormName : Win32cr::Foundation::PSTR, level : UInt32, pForm : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetFormA(hPrinter, pFormName, level, pForm, cbBuf, pcbNeeded)
+  end
+
+  def getFormW(hPrinter : Win32cr::Foundation::HANDLE, pFormName : Win32cr::Foundation::PWSTR, level : UInt32, pForm : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetFormW(hPrinter, pFormName, level, pForm, cbBuf, pcbNeeded)
+  end
+
+  def setFormA(hPrinter : Win32cr::Foundation::HANDLE, pFormName : Win32cr::Foundation::PSTR, level : UInt32, pForm : UInt8*) : Win32cr::Foundation::BOOL
+    C.SetFormA(hPrinter, pFormName, level, pForm)
+  end
+
+  def setFormW(hPrinter : Win32cr::Foundation::HANDLE, pFormName : Win32cr::Foundation::PWSTR, level : UInt32, pForm : UInt8*) : Win32cr::Foundation::BOOL
+    C.SetFormW(hPrinter, pFormName, level, pForm)
+  end
+
+  def enumFormsA(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pForm : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumFormsA(hPrinter, level, pForm, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def enumFormsW(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pForm : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumFormsW(hPrinter, level, pForm, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def enumMonitorsA(pName : Win32cr::Foundation::PSTR, level : UInt32, pMonitor : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumMonitorsA(pName, level, pMonitor, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def enumMonitorsW(pName : Win32cr::Foundation::PWSTR, level : UInt32, pMonitor : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumMonitorsW(pName, level, pMonitor, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def addMonitorA(pName : Win32cr::Foundation::PSTR, level : UInt32, pMonitors : UInt8*) : Win32cr::Foundation::BOOL
+    C.AddMonitorA(pName, level, pMonitors)
+  end
+
+  def addMonitorW(pName : Win32cr::Foundation::PWSTR, level : UInt32, pMonitors : UInt8*) : Win32cr::Foundation::BOOL
+    C.AddMonitorW(pName, level, pMonitors)
+  end
+
+  def deleteMonitorA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, pMonitorName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.DeleteMonitorA(pName, pEnvironment, pMonitorName)
+  end
+
+  def deleteMonitorW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, pMonitorName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.DeleteMonitorW(pName, pEnvironment, pMonitorName)
+  end
+
+  def enumPortsA(pName : Win32cr::Foundation::PSTR, level : UInt32, pPort : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumPortsA(pName, level, pPort, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def enumPortsW(pName : Win32cr::Foundation::PWSTR, level : UInt32, pPort : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumPortsW(pName, level, pPort, cbBuf, pcbNeeded, pcReturned)
+  end
+
+  def addPortA(pName : Win32cr::Foundation::PSTR, hWnd : Win32cr::Foundation::HWND, pMonitorName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.AddPortA(pName, hWnd, pMonitorName)
+  end
+
+  def addPortW(pName : Win32cr::Foundation::PWSTR, hWnd : Win32cr::Foundation::HWND, pMonitorName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.AddPortW(pName, hWnd, pMonitorName)
+  end
+
+  def configurePortA(pName : Win32cr::Foundation::PSTR, hWnd : Win32cr::Foundation::HWND, pPortName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.ConfigurePortA(pName, hWnd, pPortName)
+  end
+
+  def configurePortW(pName : Win32cr::Foundation::PWSTR, hWnd : Win32cr::Foundation::HWND, pPortName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.ConfigurePortW(pName, hWnd, pPortName)
+  end
+
+  def deletePortA(pName : Win32cr::Foundation::PSTR, hWnd : Win32cr::Foundation::HWND, pPortName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.DeletePortA(pName, hWnd, pPortName)
+  end
+
+  def deletePortW(pName : Win32cr::Foundation::PWSTR, hWnd : Win32cr::Foundation::HWND, pPortName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.DeletePortW(pName, hWnd, pPortName)
+  end
+
+  def xcvDataW(hXcv : Win32cr::Foundation::HANDLE, pszDataName : Win32cr::Foundation::PWSTR, pInputData : UInt8*, cbInputData : UInt32, pOutputData : UInt8*, cbOutputData : UInt32, pcbOutputNeeded : UInt32*, pdwStatus : UInt32*) : Win32cr::Foundation::BOOL
+    C.XcvDataW(hXcv, pszDataName, pInputData, cbInputData, pOutputData, cbOutputData, pcbOutputNeeded, pdwStatus)
+  end
+
+  def getDefaultPrinterA(pszBuffer : UInt8*, pcchBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetDefaultPrinterA(pszBuffer, pcchBuffer)
+  end
+
+  def getDefaultPrinterW(pszBuffer : UInt16*, pcchBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetDefaultPrinterW(pszBuffer, pcchBuffer)
+  end
+
+  def setDefaultPrinterA(pszPrinter : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetDefaultPrinterA(pszPrinter)
+  end
+
+  def setDefaultPrinterW(pszPrinter : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetDefaultPrinterW(pszPrinter)
+  end
+
+  def setPortA(pName : Win32cr::Foundation::PSTR, pPortName : Win32cr::Foundation::PSTR, dwLevel : UInt32, pPortInfo : UInt8*) : Win32cr::Foundation::BOOL
+    C.SetPortA(pName, pPortName, dwLevel, pPortInfo)
+  end
+
+  def setPortW(pName : Win32cr::Foundation::PWSTR, pPortName : Win32cr::Foundation::PWSTR, dwLevel : UInt32, pPortInfo : UInt8*) : Win32cr::Foundation::BOOL
+    C.SetPortW(pName, pPortName, dwLevel, pPortInfo)
+  end
+
+  def addPrinterConnectionA(pName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.AddPrinterConnectionA(pName)
+  end
+
+  def addPrinterConnectionW(pName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.AddPrinterConnectionW(pName)
+  end
+
+  def deletePrinterConnectionA(pName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.DeletePrinterConnectionA(pName)
+  end
+
+  def deletePrinterConnectionW(pName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.DeletePrinterConnectionW(pName)
+  end
+
+  def connectToPrinterDlg(hwnd : Win32cr::Foundation::HWND, flags : UInt32) : Win32cr::Foundation::HANDLE
+    C.ConnectToPrinterDlg(hwnd, flags)
+  end
+
+  def addPrintProvidorA(pName : Win32cr::Foundation::PSTR, level : UInt32, pProvidorInfo : UInt8*) : Win32cr::Foundation::BOOL
+    C.AddPrintProvidorA(pName, level, pProvidorInfo)
+  end
+
+  def addPrintProvidorW(pName : Win32cr::Foundation::PWSTR, level : UInt32, pProvidorInfo : UInt8*) : Win32cr::Foundation::BOOL
+    C.AddPrintProvidorW(pName, level, pProvidorInfo)
+  end
+
+  def deletePrintProvidorA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, pPrintProvidorName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.DeletePrintProvidorA(pName, pEnvironment, pPrintProvidorName)
+  end
+
+  def deletePrintProvidorW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, pPrintProvidorName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.DeletePrintProvidorW(pName, pEnvironment, pPrintProvidorName)
+  end
+
+  def isValidDevmodeA(pDevmode : Win32cr::Graphics::Gdi::DEVMODEA*, devmode_size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.IsValidDevmodeA(pDevmode, devmode_size)
+  end
+
+  def isValidDevmodeW(pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, devmode_size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.IsValidDevmodeW(pDevmode, devmode_size)
+  end
+
+  def openPrinter2A(pPrinterName : Win32cr::Foundation::PSTR, phPrinter : Win32cr::Foundation::HANDLE*, pDefault : Win32cr::Graphics::Printing::PRINTER_DEFAULTSA*, pOptions : Win32cr::Graphics::Printing::PRINTER_OPTIONSA*) : Win32cr::Foundation::BOOL
+    C.OpenPrinter2A(pPrinterName, phPrinter, pDefault, pOptions)
+  end
+
+  def openPrinter2W(pPrinterName : Win32cr::Foundation::PWSTR, phPrinter : Win32cr::Foundation::HANDLE*, pDefault : Win32cr::Graphics::Printing::PRINTER_DEFAULTSW*, pOptions : Win32cr::Graphics::Printing::PRINTER_OPTIONSW*) : Win32cr::Foundation::BOOL
+    C.OpenPrinter2W(pPrinterName, phPrinter, pDefault, pOptions)
+  end
+
+  def addPrinterConnection2A(hWnd : Win32cr::Foundation::HWND, pszName : Win32cr::Foundation::PSTR, dwLevel : UInt32, pConnectionInfo : Void*) : Win32cr::Foundation::BOOL
+    C.AddPrinterConnection2A(hWnd, pszName, dwLevel, pConnectionInfo)
+  end
+
+  def addPrinterConnection2W(hWnd : Win32cr::Foundation::HWND, pszName : Win32cr::Foundation::PWSTR, dwLevel : UInt32, pConnectionInfo : Void*) : Win32cr::Foundation::BOOL
+    C.AddPrinterConnection2W(hWnd, pszName, dwLevel, pConnectionInfo)
+  end
+
+  def installPrinterDriverFromPackageA(pszServer : Win32cr::Foundation::PSTR, pszInfPath : Win32cr::Foundation::PSTR, pszDriverName : Win32cr::Foundation::PSTR, pszEnvironment : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.InstallPrinterDriverFromPackageA(pszServer, pszInfPath, pszDriverName, pszEnvironment, dwFlags)
+  end
+
+  def installPrinterDriverFromPackageW(pszServer : Win32cr::Foundation::PWSTR, pszInfPath : Win32cr::Foundation::PWSTR, pszDriverName : Win32cr::Foundation::PWSTR, pszEnvironment : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.InstallPrinterDriverFromPackageW(pszServer, pszInfPath, pszDriverName, pszEnvironment, dwFlags)
+  end
+
+  def uploadPrinterDriverPackageA(pszServer : Win32cr::Foundation::PSTR, pszInfPath : Win32cr::Foundation::PSTR, pszEnvironment : Win32cr::Foundation::PSTR, dwFlags : UInt32, hwnd : Win32cr::Foundation::HWND, pszDestInfPath : UInt8*, pcchDestInfPath : UInt32*) : Win32cr::Foundation::HRESULT
+    C.UploadPrinterDriverPackageA(pszServer, pszInfPath, pszEnvironment, dwFlags, hwnd, pszDestInfPath, pcchDestInfPath)
+  end
+
+  def uploadPrinterDriverPackageW(pszServer : Win32cr::Foundation::PWSTR, pszInfPath : Win32cr::Foundation::PWSTR, pszEnvironment : Win32cr::Foundation::PWSTR, dwFlags : UInt32, hwnd : Win32cr::Foundation::HWND, pszDestInfPath : UInt16*, pcchDestInfPath : UInt32*) : Win32cr::Foundation::HRESULT
+    C.UploadPrinterDriverPackageW(pszServer, pszInfPath, pszEnvironment, dwFlags, hwnd, pszDestInfPath, pcchDestInfPath)
+  end
+
+  def getCorePrinterDriversA(pszServer : Win32cr::Foundation::PSTR, pszEnvironment : Win32cr::Foundation::PSTR, pszzCoreDriverDependencies : Win32cr::Foundation::PSTR, cCorePrinterDrivers : UInt32, pCorePrinterDrivers : Win32cr::Graphics::Printing::CORE_PRINTER_DRIVERA*) : Win32cr::Foundation::HRESULT
+    C.GetCorePrinterDriversA(pszServer, pszEnvironment, pszzCoreDriverDependencies, cCorePrinterDrivers, pCorePrinterDrivers)
+  end
+
+  def getCorePrinterDriversW(pszServer : Win32cr::Foundation::PWSTR, pszEnvironment : Win32cr::Foundation::PWSTR, pszzCoreDriverDependencies : Win32cr::Foundation::PWSTR, cCorePrinterDrivers : UInt32, pCorePrinterDrivers : Win32cr::Graphics::Printing::CORE_PRINTER_DRIVERW*) : Win32cr::Foundation::HRESULT
+    C.GetCorePrinterDriversW(pszServer, pszEnvironment, pszzCoreDriverDependencies, cCorePrinterDrivers, pCorePrinterDrivers)
+  end
+
+  def corePrinterDriverInstalledA(pszServer : Win32cr::Foundation::PSTR, pszEnvironment : Win32cr::Foundation::PSTR, core_driver_guid : LibC::GUID, ftDriverDate : Win32cr::Foundation::FILETIME, dwlDriverVersion : UInt64, pbDriverInstalled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.CorePrinterDriverInstalledA(pszServer, pszEnvironment, core_driver_guid, ftDriverDate, dwlDriverVersion, pbDriverInstalled)
+  end
+
+  def corePrinterDriverInstalledW(pszServer : Win32cr::Foundation::PWSTR, pszEnvironment : Win32cr::Foundation::PWSTR, core_driver_guid : LibC::GUID, ftDriverDate : Win32cr::Foundation::FILETIME, dwlDriverVersion : UInt64, pbDriverInstalled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.CorePrinterDriverInstalledW(pszServer, pszEnvironment, core_driver_guid, ftDriverDate, dwlDriverVersion, pbDriverInstalled)
+  end
+
+  def getPrinterDriverPackagePathA(pszServer : Win32cr::Foundation::PSTR, pszEnvironment : Win32cr::Foundation::PSTR, pszLanguage : Win32cr::Foundation::PSTR, pszPackageID : Win32cr::Foundation::PSTR, pszDriverPackageCab : UInt8*, cchDriverPackageCab : UInt32, pcchRequiredSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetPrinterDriverPackagePathA(pszServer, pszEnvironment, pszLanguage, pszPackageID, pszDriverPackageCab, cchDriverPackageCab, pcchRequiredSize)
+  end
+
+  def getPrinterDriverPackagePathW(pszServer : Win32cr::Foundation::PWSTR, pszEnvironment : Win32cr::Foundation::PWSTR, pszLanguage : Win32cr::Foundation::PWSTR, pszPackageID : Win32cr::Foundation::PWSTR, pszDriverPackageCab : UInt16*, cchDriverPackageCab : UInt32, pcchRequiredSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetPrinterDriverPackagePathW(pszServer, pszEnvironment, pszLanguage, pszPackageID, pszDriverPackageCab, cchDriverPackageCab, pcchRequiredSize)
+  end
+
+  def deletePrinterDriverPackageA(pszServer : Win32cr::Foundation::PSTR, pszInfPath : Win32cr::Foundation::PSTR, pszEnvironment : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
+    C.DeletePrinterDriverPackageA(pszServer, pszInfPath, pszEnvironment)
+  end
+
+  def deletePrinterDriverPackageW(pszServer : Win32cr::Foundation::PWSTR, pszInfPath : Win32cr::Foundation::PWSTR, pszEnvironment : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.DeletePrinterDriverPackageW(pszServer, pszInfPath, pszEnvironment)
+  end
+
+  def reportJobProcessingProgress(printerHandle : Win32cr::Foundation::HANDLE, jobId : UInt32, jobOperation : Win32cr::Graphics::Printing::EPrintXPSJobOperation, jobProgress : Win32cr::Graphics::Printing::EPrintXPSJobProgress) : Win32cr::Foundation::HRESULT
+    C.ReportJobProcessingProgress(printerHandle, jobId, jobOperation, jobProgress)
+  end
+
+  def getPrinterDriver2A(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE, pEnvironment : Win32cr::Foundation::PSTR, level : UInt32, pDriverInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetPrinterDriver2A(hWnd, hPrinter, pEnvironment, level, pDriverInfo, cbBuf, pcbNeeded)
+  end
+
+  def getPrinterDriver2W(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE, pEnvironment : Win32cr::Foundation::PWSTR, level : UInt32, pDriverInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetPrinterDriver2W(hWnd, hPrinter, pEnvironment, level, pDriverInfo, cbBuf, pcbNeeded)
+  end
+
+  def getPrintExecutionData(pData : Win32cr::Graphics::Printing::PRINT_EXECUTION_DATA*) : Win32cr::Foundation::BOOL
+    C.GetPrintExecutionData(pData)
+  end
+
+  def getJobNamedPropertyValue(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, pszName : Win32cr::Foundation::PWSTR, pValue : Win32cr::Graphics::Printing::PrintPropertyValue*) : UInt32
+    C.GetJobNamedPropertyValue(hPrinter, job_id, pszName, pValue)
+  end
+
+  def freePrintPropertyValue(pValue : Win32cr::Graphics::Printing::PrintPropertyValue*) : Void
+    C.FreePrintPropertyValue(pValue)
+  end
+
+  def freePrintNamedPropertyArray(cProperties : UInt32, ppProperties : Win32cr::Graphics::Printing::PrintNamedProperty**) : Void
+    C.FreePrintNamedPropertyArray(cProperties, ppProperties)
+  end
+
+  def setJobNamedProperty(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, pProperty : Win32cr::Graphics::Printing::PrintNamedProperty*) : UInt32
+    C.SetJobNamedProperty(hPrinter, job_id, pProperty)
+  end
+
+  def deleteJobNamedProperty(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, pszName : Win32cr::Foundation::PWSTR) : UInt32
+    C.DeleteJobNamedProperty(hPrinter, job_id, pszName)
+  end
+
+  def enumJobNamedProperties(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, pcProperties : UInt32*, ppProperties : Win32cr::Graphics::Printing::PrintNamedProperty**) : UInt32
+    C.EnumJobNamedProperties(hPrinter, job_id, pcProperties, ppProperties)
+  end
+
+  def getPrintOutputInfo(hWnd : Win32cr::Foundation::HWND, pszPrinter : Win32cr::Foundation::PWSTR, phFile : Win32cr::Foundation::HANDLE*, ppszOutputFile : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.GetPrintOutputInfo(hWnd, pszPrinter, phFile, ppszOutputFile)
+  end
+
+  def devQueryPrintEx(pDQPInfo : Win32cr::Graphics::Printing::DEVQUERYPRINT_INFO*) : Win32cr::Foundation::BOOL
+    C.DevQueryPrintEx(pDQPInfo)
+  end
+
+  def registerForPrintAsyncNotifications(pszName : Win32cr::Foundation::PWSTR, pNotificationType : LibC::GUID*, eUserFilter : Win32cr::Graphics::Printing::PrintAsyncNotifyUserFilter, eConversationStyle : Win32cr::Graphics::Printing::PrintAsyncNotifyConversationStyle, pCallback : Void*, phNotify : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.RegisterForPrintAsyncNotifications(pszName, pNotificationType, eUserFilter, eConversationStyle, pCallback, phNotify)
+  end
+
+  def unRegisterForPrintAsyncNotifications(param0 : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.UnRegisterForPrintAsyncNotifications(param0)
+  end
+
+  def createPrintAsyncNotifyChannel(pszName : Win32cr::Foundation::PWSTR, pNotificationType : LibC::GUID*, eUserFilter : Win32cr::Graphics::Printing::PrintAsyncNotifyUserFilter, eConversationStyle : Win32cr::Graphics::Printing::PrintAsyncNotifyConversationStyle, pCallback : Void*, ppIAsynchNotification : Void**) : Win32cr::Foundation::HRESULT
+    C.CreatePrintAsyncNotifyChannel(pszName, pNotificationType, eUserFilter, eConversationStyle, pCallback, ppIAsynchNotification)
+  end
+
+  def gdiGetSpoolFileHandle(pwszPrinterName : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, pwszDocName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.GdiGetSpoolFileHandle(pwszPrinterName, pDevmode, pwszDocName)
+  end
+
+  def gdiDeleteSpoolFileHandle(spool_file_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.GdiDeleteSpoolFileHandle(spool_file_handle)
+  end
+
+  def gdiGetPageCount(spool_file_handle : Win32cr::Foundation::HANDLE) : UInt32
+    C.GdiGetPageCount(spool_file_handle)
+  end
+
+  def gdiGetDC(spool_file_handle : Win32cr::Foundation::HANDLE) : Win32cr::Graphics::Gdi::HDC
+    C.GdiGetDC(spool_file_handle)
+  end
+
+  def gdiGetPageHandle(spool_file_handle : Win32cr::Foundation::HANDLE, page : UInt32, pdwPageType : UInt32*) : Win32cr::Foundation::HANDLE
+    C.GdiGetPageHandle(spool_file_handle, page, pdwPageType)
+  end
+
+  def gdiStartDocEMF(spool_file_handle : Win32cr::Foundation::HANDLE, pDocInfo : Win32cr::Storage::Xps::DOCINFOW*) : Win32cr::Foundation::BOOL
+    C.GdiStartDocEMF(spool_file_handle, pDocInfo)
+  end
+
+  def gdiStartPageEMF(spool_file_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.GdiStartPageEMF(spool_file_handle)
+  end
+
+  def gdiPlayPageEMF(spool_file_handle : Win32cr::Foundation::HANDLE, hemf : Win32cr::Foundation::HANDLE, prectDocument : Win32cr::Foundation::RECT*, prectBorder : Win32cr::Foundation::RECT*, prectClip : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.GdiPlayPageEMF(spool_file_handle, hemf, prectDocument, prectBorder, prectClip)
+  end
+
+  def gdiEndPageEMF(spool_file_handle : Win32cr::Foundation::HANDLE, dwOptimization : UInt32) : Win32cr::Foundation::BOOL
+    C.GdiEndPageEMF(spool_file_handle, dwOptimization)
+  end
+
+  def gdiEndDocEMF(spool_file_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.GdiEndDocEMF(spool_file_handle)
+  end
+
+  def gdiGetDevmodeForPage(spool_file_handle : Win32cr::Foundation::HANDLE, dwPageNumber : UInt32, pCurrDM : Win32cr::Graphics::Gdi::DEVMODEW**, pLastDM : Win32cr::Graphics::Gdi::DEVMODEW**) : Win32cr::Foundation::BOOL
+    C.GdiGetDevmodeForPage(spool_file_handle, dwPageNumber, pCurrDM, pLastDM)
+  end
+
+  def gdiResetDCEMF(spool_file_handle : Win32cr::Foundation::HANDLE, pCurrDM : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Foundation::BOOL
+    C.GdiResetDCEMF(spool_file_handle, pCurrDM)
+  end
+
+  def getJobAttributes(pPrinterName : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, pAttributeInfo : Win32cr::Graphics::Printing::ATTRIBUTE_INFO_3*) : Win32cr::Foundation::BOOL
+    C.GetJobAttributes(pPrinterName, pDevmode, pAttributeInfo)
+  end
+
+  def getJobAttributesEx(pPrinterName : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, dwLevel : UInt32, pAttributeInfo : UInt8*, nSize : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.GetJobAttributesEx(pPrinterName, pDevmode, dwLevel, pAttributeInfo, nSize, dwFlags)
+  end
+
+  def createPrinterIC(hPrinter : Win32cr::Foundation::HANDLE, pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Foundation::HANDLE
+    C.CreatePrinterIC(hPrinter, pDevMode)
+  end
+
+  def playGdiScriptOnPrinterIC(hPrinterIC : Win32cr::Foundation::HANDLE, pIn : UInt8*, cIn : UInt32, pOut : UInt8*, cOut : UInt32, ul : UInt32) : Win32cr::Foundation::BOOL
+    C.PlayGdiScriptOnPrinterIC(hPrinterIC, pIn, cIn, pOut, cOut, ul)
+  end
+
+  def deletePrinterIC(hPrinterIC : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.DeletePrinterIC(hPrinterIC)
+  end
+
+  def devQueryPrint(hPrinter : Win32cr::Foundation::HANDLE, pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, pResID : UInt32*) : Win32cr::Foundation::BOOL
+    C.DevQueryPrint(hPrinter, pDevMode, pResID)
+  end
+
+  def revertToPrinterSelf : Win32cr::Foundation::HANDLE
+    C.RevertToPrinterSelf
+  end
+
+  def impersonatePrinterClient(hToken : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.ImpersonatePrinterClient(hToken)
+  end
+
+  def replyPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, fdwChangeFlags : UInt32, pdwResult : UInt32*, pPrinterNotifyInfo : Void*) : Win32cr::Foundation::BOOL
+    C.ReplyPrinterChangeNotification(hPrinter, fdwChangeFlags, pdwResult, pPrinterNotifyInfo)
+  end
+
+  def replyPrinterChangeNotificationEx(hNotify : Win32cr::Foundation::HANDLE, dwColor : UInt32, fdwFlags : UInt32, pdwResult : UInt32*, pPrinterNotifyInfo : Void*) : Win32cr::Foundation::BOOL
+    C.ReplyPrinterChangeNotificationEx(hNotify, dwColor, fdwFlags, pdwResult, pPrinterNotifyInfo)
+  end
+
+  def partialReplyPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, pDataSrc : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO_DATA*) : Win32cr::Foundation::BOOL
+    C.PartialReplyPrinterChangeNotification(hPrinter, pDataSrc)
+  end
+
+  def routerAllocPrinterNotifyInfo(cPrinterNotifyInfoData : UInt32) : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO*
+    C.RouterAllocPrinterNotifyInfo(cPrinterNotifyInfoData)
+  end
+
+  def routerFreePrinterNotifyInfo(pInfo : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO*) : Win32cr::Foundation::BOOL
+    C.RouterFreePrinterNotifyInfo(pInfo)
+  end
+
+  def routerAllocBidiResponseContainer(count : UInt32) : Win32cr::Graphics::Printing::BIDI_RESPONSE_CONTAINER*
+    C.RouterAllocBidiResponseContainer(count)
+  end
+
+  def routerAllocBidiMem(num_bytes : LibC::UIntPtrT) : Void*
+    C.RouterAllocBidiMem(num_bytes)
+  end
+
+  def routerFreeBidiResponseContainer(pData : Win32cr::Graphics::Printing::BIDI_RESPONSE_CONTAINER*) : UInt32
+    C.RouterFreeBidiResponseContainer(pData)
+  end
+
+  def routerFreeBidiMem(pMemPointer : Void*) : Void
+    C.RouterFreeBidiMem(pMemPointer)
+  end
+
+  def appendPrinterNotifyInfoData(pInfoDest : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO*, pDataSrc : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO_DATA*, fdwFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.AppendPrinterNotifyInfoData(pInfoDest, pDataSrc, fdwFlags)
+  end
+
+  def callRouterFindFirstPrinterChangeNotification(hPrinterRPC : Win32cr::Foundation::HANDLE, fdwFilterFlags : UInt32, fdwOptions : UInt32, hNotify : Win32cr::Foundation::HANDLE, pPrinterNotifyOptions : Win32cr::Graphics::Printing::PRINTER_NOTIFY_OPTIONS*) : UInt32
+    C.CallRouterFindFirstPrinterChangeNotification(hPrinterRPC, fdwFilterFlags, fdwOptions, hNotify, pPrinterNotifyOptions)
+  end
+
+  def providorFindFirstPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, fdwFlags : UInt32, fdwOptions : UInt32, hNotify : Win32cr::Foundation::HANDLE, pPrinterNotifyOptions : Void*, pvReserved1 : Void*) : Win32cr::Foundation::BOOL
+    C.ProvidorFindFirstPrinterChangeNotification(hPrinter, fdwFlags, fdwOptions, hNotify, pPrinterNotifyOptions, pvReserved1)
+  end
+
+  def providorFindClosePrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.ProvidorFindClosePrinterChangeNotification(hPrinter)
+  end
+
+  def spoolerFindFirstPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, fdwFilterFlags : UInt32, fdwOptions : UInt32, pPrinterNotifyOptions : Void*, pvReserved : Void*, pNotificationConfig : Void*, phNotify : Win32cr::Foundation::HANDLE*, phEvent : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    C.SpoolerFindFirstPrinterChangeNotification(hPrinter, fdwFilterFlags, fdwOptions, pPrinterNotifyOptions, pvReserved, pNotificationConfig, phNotify, phEvent)
+  end
+
+  def spoolerFindNextPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, pfdwChange : UInt32*, pPrinterNotifyOptions : Void*, ppPrinterNotifyInfo : Void**) : Win32cr::Foundation::BOOL
+    C.SpoolerFindNextPrinterChangeNotification(hPrinter, pfdwChange, pPrinterNotifyOptions, ppPrinterNotifyInfo)
+  end
+
+  def spoolerRefreshPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, dwColor : UInt32, pOptions : Win32cr::Graphics::Printing::PRINTER_NOTIFY_OPTIONS*, ppInfo : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO**) : Win32cr::Foundation::BOOL
+    C.SpoolerRefreshPrinterChangeNotification(hPrinter, dwColor, pOptions, ppInfo)
+  end
+
+  def spoolerFreePrinterNotifyInfo(pInfo : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO*) : Void
+    C.SpoolerFreePrinterNotifyInfo(pInfo)
+  end
+
+  def spoolerFindClosePrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.SpoolerFindClosePrinterChangeNotification(hPrinter)
+  end
+
+  def spoolerCopyFileEvent(pszPrinterName : Win32cr::Foundation::PWSTR, pszKey : Win32cr::Foundation::PWSTR, dwCopyFileEvent : UInt32) : Win32cr::Foundation::BOOL
+    C.SpoolerCopyFileEvent(pszPrinterName, pszKey, dwCopyFileEvent)
+  end
+
+  def generateCopyFilePaths(pszPrinterName : Win32cr::Foundation::PWSTR, pszDirectory : Win32cr::Foundation::PWSTR, pSplClientInfo : UInt8*, dwLevel : UInt32, pszSourceDir : UInt16*, pcchSourceDirSize : UInt32*, pszTargetDir : UInt16*, pcchTargetDirSize : UInt32*, dwFlags : UInt32) : UInt32
+    C.GenerateCopyFilePaths(pszPrinterName, pszDirectory, pSplClientInfo, dwLevel, pszSourceDir, pcchSourceDirSize, pszTargetDir, pcchTargetDirSize, dwFlags)
+  end
+
+  def splPromptUIInUsersSession(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, pUIParams : Win32cr::Graphics::Printing::SHOWUIPARAMS*, pResponse : UInt32*) : Win32cr::Foundation::BOOL
+    C.SplPromptUIInUsersSession(hPrinter, job_id, pUIParams, pResponse)
+  end
+
+  def splIsSessionZero(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, pIsSessionZero : Win32cr::Foundation::BOOL*) : UInt32
+    C.SplIsSessionZero(hPrinter, job_id, pIsSessionZero)
+  end
+
+  def addPrintDeviceObject(hPrinter : Win32cr::Foundation::HANDLE, phDeviceObject : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.AddPrintDeviceObject(hPrinter, phDeviceObject)
+  end
+
+  def updatePrintDeviceObject(hPrinter : Win32cr::Foundation::HANDLE, hDeviceObject : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.UpdatePrintDeviceObject(hPrinter, hDeviceObject)
+  end
+
+  def removePrintDeviceObject(hDeviceObject : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.RemovePrintDeviceObject(hDeviceObject)
+  end
+
   @[Link("compstui")]
   @[Link("winspool.drv")]
   @[Link("gdi32")]
   @[Link("spoolss")]
   @[Link("mscms")]
   lib C
+    # :nodoc:
     fun CommonPropertySheetUIA(hWndOwner : Win32cr::Foundation::HWND, pfnPropSheetUI : Win32cr::Graphics::Printing::PFNPROPSHEETUI, lParam : Win32cr::Foundation::LPARAM, pResult : UInt32*) : Int32
 
+    # :nodoc:
     fun CommonPropertySheetUIW(hWndOwner : Win32cr::Foundation::HWND, pfnPropSheetUI : Win32cr::Graphics::Printing::PFNPROPSHEETUI, lParam : Win32cr::Foundation::LPARAM, pResult : UInt32*) : Int32
 
+    # :nodoc:
     fun GetCPSUIUserData(hDlg : Win32cr::Foundation::HWND) : LibC::UIntPtrT
 
+    # :nodoc:
     fun SetCPSUIUserData(hDlg : Win32cr::Foundation::HWND, cpsui_user_data : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumPrintersA(flags : UInt32, name : Win32cr::Foundation::PSTR, level : UInt32, pPrinterEnum : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumPrintersW(flags : UInt32, name : Win32cr::Foundation::PWSTR, level : UInt32, pPrinterEnum : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetSpoolFileHandle(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CommitSpoolData(hPrinter : Win32cr::Foundation::HANDLE, hSpoolFile : Win32cr::Foundation::HANDLE, cbCommit : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CloseSpoolFileHandle(hPrinter : Win32cr::Foundation::HANDLE, hSpoolFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OpenPrinterA(pPrinterName : Win32cr::Foundation::PSTR, phPrinter : Win32cr::Foundation::HANDLE*, pDefault : Win32cr::Graphics::Printing::PRINTER_DEFAULTSA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OpenPrinterW(pPrinterName : Win32cr::Foundation::PWSTR, phPrinter : Win32cr::Foundation::HANDLE*, pDefault : Win32cr::Graphics::Printing::PRINTER_DEFAULTSW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ResetPrinterA(hPrinter : Win32cr::Foundation::HANDLE, pDefault : Win32cr::Graphics::Printing::PRINTER_DEFAULTSA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ResetPrinterW(hPrinter : Win32cr::Foundation::HANDLE, pDefault : Win32cr::Graphics::Printing::PRINTER_DEFAULTSW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetJobA(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, level : UInt32, pJob : UInt8*, command : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetJobW(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, level : UInt32, pJob : UInt8*, command : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetJobA(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, level : UInt32, pJob : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetJobW(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, level : UInt32, pJob : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumJobsA(hPrinter : Win32cr::Foundation::HANDLE, first_job : UInt32, no_jobs : UInt32, level : UInt32, pJob : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumJobsW(hPrinter : Win32cr::Foundation::HANDLE, first_job : UInt32, no_jobs : UInt32, level : UInt32, pJob : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPrinterA(pName : Win32cr::Foundation::PSTR, level : UInt32, pPrinter : UInt8*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun AddPrinterW(pName : Win32cr::Foundation::PWSTR, level : UInt32, pPrinter : UInt8*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun DeletePrinter(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetPrinterA(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pPrinter : UInt8*, command : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetPrinterW(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pPrinter : UInt8*, command : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPrinterA(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pPrinter : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPrinterW(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pPrinter : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPrinterDriverA(pName : Win32cr::Foundation::PSTR, level : UInt32, pDriverInfo : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPrinterDriverW(pName : Win32cr::Foundation::PWSTR, level : UInt32, pDriverInfo : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPrinterDriverExA(pName : Win32cr::Foundation::PSTR, level : UInt32, lpbDriverInfo : UInt8*, dwFileCopyFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPrinterDriverExW(pName : Win32cr::Foundation::PWSTR, level : UInt32, lpbDriverInfo : UInt8*, dwFileCopyFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumPrinterDriversA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, level : UInt32, pDriverInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumPrinterDriversW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, level : UInt32, pDriverInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPrinterDriverA(hPrinter : Win32cr::Foundation::HANDLE, pEnvironment : Win32cr::Foundation::PSTR, level : UInt32, pDriverInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPrinterDriverW(hPrinter : Win32cr::Foundation::HANDLE, pEnvironment : Win32cr::Foundation::PWSTR, level : UInt32, pDriverInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPrinterDriverDirectoryA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, level : UInt32, pDriverDirectory : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPrinterDriverDirectoryW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, level : UInt32, pDriverDirectory : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeletePrinterDriverA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, pDriverName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeletePrinterDriverW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, pDriverName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeletePrinterDriverExA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, pDriverName : Win32cr::Foundation::PSTR, dwDeleteFlag : UInt32, dwVersionFlag : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeletePrinterDriverExW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, pDriverName : Win32cr::Foundation::PWSTR, dwDeleteFlag : UInt32, dwVersionFlag : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPrintProcessorA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, pPathName : Win32cr::Foundation::PSTR, pPrintProcessorName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPrintProcessorW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, pPathName : Win32cr::Foundation::PWSTR, pPrintProcessorName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumPrintProcessorsA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, level : UInt32, pPrintProcessorInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumPrintProcessorsW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, level : UInt32, pPrintProcessorInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPrintProcessorDirectoryA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, level : UInt32, pPrintProcessorInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPrintProcessorDirectoryW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, level : UInt32, pPrintProcessorInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumPrintProcessorDatatypesA(pName : Win32cr::Foundation::PSTR, pPrintProcessorName : Win32cr::Foundation::PSTR, level : UInt32, pDatatypes : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumPrintProcessorDatatypesW(pName : Win32cr::Foundation::PWSTR, pPrintProcessorName : Win32cr::Foundation::PWSTR, level : UInt32, pDatatypes : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeletePrintProcessorA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, pPrintProcessorName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeletePrintProcessorW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, pPrintProcessorName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun StartDocPrinterA(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pDocInfo : Win32cr::Graphics::Printing::DOC_INFO_1A*) : UInt32
 
+    # :nodoc:
     fun StartDocPrinterW(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pDocInfo : Win32cr::Graphics::Printing::DOC_INFO_1W*) : UInt32
 
+    # :nodoc:
     fun StartPagePrinter(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WritePrinter(hPrinter : Win32cr::Foundation::HANDLE, pBuf : Void*, cbBuf : UInt32, pcWritten : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlushPrinter(hPrinter : Win32cr::Foundation::HANDLE, pBuf : Void*, cbBuf : UInt32, pcWritten : UInt32*, cSleep : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EndPagePrinter(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AbortPrinter(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReadPrinter(hPrinter : Win32cr::Foundation::HANDLE, pBuf : Void*, cbBuf : UInt32, pNoBytesRead : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EndDocPrinter(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddJobA(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pData : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddJobW(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pData : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ScheduleJob(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PrinterProperties(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DocumentPropertiesA(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE, pDeviceName : Win32cr::Foundation::PSTR, pDevModeOutput : Win32cr::Graphics::Gdi::DEVMODEA*, pDevModeInput : Win32cr::Graphics::Gdi::DEVMODEA*, fMode : UInt32) : Int32
 
+    # :nodoc:
     fun DocumentPropertiesW(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE, pDeviceName : Win32cr::Foundation::PWSTR, pDevModeOutput : Win32cr::Graphics::Gdi::DEVMODEW*, pDevModeInput : Win32cr::Graphics::Gdi::DEVMODEW*, fMode : UInt32) : Int32
 
+    # :nodoc:
     fun AdvancedDocumentPropertiesA(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE, pDeviceName : Win32cr::Foundation::PSTR, pDevModeOutput : Win32cr::Graphics::Gdi::DEVMODEA*, pDevModeInput : Win32cr::Graphics::Gdi::DEVMODEA*) : Int32
 
+    # :nodoc:
     fun AdvancedDocumentPropertiesW(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE, pDeviceName : Win32cr::Foundation::PWSTR, pDevModeOutput : Win32cr::Graphics::Gdi::DEVMODEW*, pDevModeInput : Win32cr::Graphics::Gdi::DEVMODEW*) : Int32
 
+    # :nodoc:
     fun ExtDeviceMode(hWnd : Win32cr::Foundation::HWND, hInst : Win32cr::Foundation::HANDLE, pDevModeOutput : Win32cr::Graphics::Gdi::DEVMODEA*, pDeviceName : Win32cr::Foundation::PSTR, pPort : Win32cr::Foundation::PSTR, pDevModeInput : Win32cr::Graphics::Gdi::DEVMODEA*, pProfile : Win32cr::Foundation::PSTR, fMode : UInt32) : Int32
 
+    # :nodoc:
     fun GetPrinterDataA(hPrinter : Win32cr::Foundation::HANDLE, pValueName : Win32cr::Foundation::PSTR, pType : UInt32*, pData : UInt8*, nSize : UInt32, pcbNeeded : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetPrinterDataW(hPrinter : Win32cr::Foundation::HANDLE, pValueName : Win32cr::Foundation::PWSTR, pType : UInt32*, pData : UInt8*, nSize : UInt32, pcbNeeded : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetPrinterDataExA(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PSTR, pValueName : Win32cr::Foundation::PSTR, pType : UInt32*, pData : UInt8*, nSize : UInt32, pcbNeeded : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetPrinterDataExW(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PWSTR, pValueName : Win32cr::Foundation::PWSTR, pType : UInt32*, pData : UInt8*, nSize : UInt32, pcbNeeded : UInt32*) : UInt32
 
+    # :nodoc:
     fun EnumPrinterDataA(hPrinter : Win32cr::Foundation::HANDLE, dwIndex : UInt32, pValueName : Win32cr::Foundation::PSTR, cbValueName : UInt32, pcbValueName : UInt32*, pType : UInt32*, pData : UInt8*, cbData : UInt32, pcbData : UInt32*) : UInt32
 
+    # :nodoc:
     fun EnumPrinterDataW(hPrinter : Win32cr::Foundation::HANDLE, dwIndex : UInt32, pValueName : Win32cr::Foundation::PWSTR, cbValueName : UInt32, pcbValueName : UInt32*, pType : UInt32*, pData : UInt8*, cbData : UInt32, pcbData : UInt32*) : UInt32
 
+    # :nodoc:
     fun EnumPrinterDataExA(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PSTR, pEnumValues : UInt8*, cbEnumValues : UInt32, pcbEnumValues : UInt32*, pnEnumValues : UInt32*) : UInt32
 
+    # :nodoc:
     fun EnumPrinterDataExW(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PWSTR, pEnumValues : UInt8*, cbEnumValues : UInt32, pcbEnumValues : UInt32*, pnEnumValues : UInt32*) : UInt32
 
+    # :nodoc:
     fun EnumPrinterKeyA(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PSTR, pSubkey : Win32cr::Foundation::PSTR, cbSubkey : UInt32, pcbSubkey : UInt32*) : UInt32
 
+    # :nodoc:
     fun EnumPrinterKeyW(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PWSTR, pSubkey : Win32cr::Foundation::PWSTR, cbSubkey : UInt32, pcbSubkey : UInt32*) : UInt32
 
+    # :nodoc:
     fun SetPrinterDataA(hPrinter : Win32cr::Foundation::HANDLE, pValueName : Win32cr::Foundation::PSTR, type__ : UInt32, pData : UInt8*, cbData : UInt32) : UInt32
 
+    # :nodoc:
     fun SetPrinterDataW(hPrinter : Win32cr::Foundation::HANDLE, pValueName : Win32cr::Foundation::PWSTR, type__ : UInt32, pData : UInt8*, cbData : UInt32) : UInt32
 
+    # :nodoc:
     fun SetPrinterDataExA(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PSTR, pValueName : Win32cr::Foundation::PSTR, type__ : UInt32, pData : UInt8*, cbData : UInt32) : UInt32
 
+    # :nodoc:
     fun SetPrinterDataExW(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PWSTR, pValueName : Win32cr::Foundation::PWSTR, type__ : UInt32, pData : UInt8*, cbData : UInt32) : UInt32
 
+    # :nodoc:
     fun DeletePrinterDataA(hPrinter : Win32cr::Foundation::HANDLE, pValueName : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun DeletePrinterDataW(hPrinter : Win32cr::Foundation::HANDLE, pValueName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DeletePrinterDataExA(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PSTR, pValueName : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun DeletePrinterDataExW(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PWSTR, pValueName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DeletePrinterKeyA(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun DeletePrinterKeyW(hPrinter : Win32cr::Foundation::HANDLE, pKeyName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun WaitForPrinterChange(hPrinter : Win32cr::Foundation::HANDLE, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun FindFirstPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, fdwFilter : UInt32, fdwOptions : UInt32, pPrinterNotifyOptions : Void*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun FindNextPrinterChangeNotification(hChange : Win32cr::Foundation::HANDLE, pdwChange : UInt32*, pvReserved : Void*, ppPrinterNotifyInfo : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FreePrinterNotifyInfo(pPrinterNotifyInfo : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindClosePrinterChangeNotification(hChange : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PrinterMessageBoxA(hPrinter : Win32cr::Foundation::HANDLE, error : UInt32, hWnd : Win32cr::Foundation::HWND, pText : Win32cr::Foundation::PSTR, pCaption : Win32cr::Foundation::PSTR, dwType : UInt32) : UInt32
 
+    # :nodoc:
     fun PrinterMessageBoxW(hPrinter : Win32cr::Foundation::HANDLE, error : UInt32, hWnd : Win32cr::Foundation::HWND, pText : Win32cr::Foundation::PWSTR, pCaption : Win32cr::Foundation::PWSTR, dwType : UInt32) : UInt32
 
+    # :nodoc:
     fun ClosePrinter(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddFormA(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pForm : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddFormW(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pForm : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteFormA(hPrinter : Win32cr::Foundation::HANDLE, pFormName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteFormW(hPrinter : Win32cr::Foundation::HANDLE, pFormName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetFormA(hPrinter : Win32cr::Foundation::HANDLE, pFormName : Win32cr::Foundation::PSTR, level : UInt32, pForm : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetFormW(hPrinter : Win32cr::Foundation::HANDLE, pFormName : Win32cr::Foundation::PWSTR, level : UInt32, pForm : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetFormA(hPrinter : Win32cr::Foundation::HANDLE, pFormName : Win32cr::Foundation::PSTR, level : UInt32, pForm : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetFormW(hPrinter : Win32cr::Foundation::HANDLE, pFormName : Win32cr::Foundation::PWSTR, level : UInt32, pForm : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumFormsA(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pForm : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumFormsW(hPrinter : Win32cr::Foundation::HANDLE, level : UInt32, pForm : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumMonitorsA(pName : Win32cr::Foundation::PSTR, level : UInt32, pMonitor : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumMonitorsW(pName : Win32cr::Foundation::PWSTR, level : UInt32, pMonitor : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddMonitorA(pName : Win32cr::Foundation::PSTR, level : UInt32, pMonitors : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddMonitorW(pName : Win32cr::Foundation::PWSTR, level : UInt32, pMonitors : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteMonitorA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, pMonitorName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteMonitorW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, pMonitorName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumPortsA(pName : Win32cr::Foundation::PSTR, level : UInt32, pPort : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumPortsW(pName : Win32cr::Foundation::PWSTR, level : UInt32, pPort : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*, pcReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPortA(pName : Win32cr::Foundation::PSTR, hWnd : Win32cr::Foundation::HWND, pMonitorName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPortW(pName : Win32cr::Foundation::PWSTR, hWnd : Win32cr::Foundation::HWND, pMonitorName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ConfigurePortA(pName : Win32cr::Foundation::PSTR, hWnd : Win32cr::Foundation::HWND, pPortName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ConfigurePortW(pName : Win32cr::Foundation::PWSTR, hWnd : Win32cr::Foundation::HWND, pPortName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeletePortA(pName : Win32cr::Foundation::PSTR, hWnd : Win32cr::Foundation::HWND, pPortName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeletePortW(pName : Win32cr::Foundation::PWSTR, hWnd : Win32cr::Foundation::HWND, pPortName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun XcvDataW(hXcv : Win32cr::Foundation::HANDLE, pszDataName : Win32cr::Foundation::PWSTR, pInputData : UInt8*, cbInputData : UInt32, pOutputData : UInt8*, cbOutputData : UInt32, pcbOutputNeeded : UInt32*, pdwStatus : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDefaultPrinterA(pszBuffer : UInt8*, pcchBuffer : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDefaultPrinterW(pszBuffer : UInt16*, pcchBuffer : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetDefaultPrinterA(pszPrinter : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetDefaultPrinterW(pszPrinter : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetPortA(pName : Win32cr::Foundation::PSTR, pPortName : Win32cr::Foundation::PSTR, dwLevel : UInt32, pPortInfo : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetPortW(pName : Win32cr::Foundation::PWSTR, pPortName : Win32cr::Foundation::PWSTR, dwLevel : UInt32, pPortInfo : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPrinterConnectionA(pName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPrinterConnectionW(pName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeletePrinterConnectionA(pName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeletePrinterConnectionW(pName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ConnectToPrinterDlg(hwnd : Win32cr::Foundation::HWND, flags : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun AddPrintProvidorA(pName : Win32cr::Foundation::PSTR, level : UInt32, pProvidorInfo : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPrintProvidorW(pName : Win32cr::Foundation::PWSTR, level : UInt32, pProvidorInfo : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeletePrintProvidorA(pName : Win32cr::Foundation::PSTR, pEnvironment : Win32cr::Foundation::PSTR, pPrintProvidorName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeletePrintProvidorW(pName : Win32cr::Foundation::PWSTR, pEnvironment : Win32cr::Foundation::PWSTR, pPrintProvidorName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsValidDevmodeA(pDevmode : Win32cr::Graphics::Gdi::DEVMODEA*, devmode_size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsValidDevmodeW(pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, devmode_size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OpenPrinter2A(pPrinterName : Win32cr::Foundation::PSTR, phPrinter : Win32cr::Foundation::HANDLE*, pDefault : Win32cr::Graphics::Printing::PRINTER_DEFAULTSA*, pOptions : Win32cr::Graphics::Printing::PRINTER_OPTIONSA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OpenPrinter2W(pPrinterName : Win32cr::Foundation::PWSTR, phPrinter : Win32cr::Foundation::HANDLE*, pDefault : Win32cr::Graphics::Printing::PRINTER_DEFAULTSW*, pOptions : Win32cr::Graphics::Printing::PRINTER_OPTIONSW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPrinterConnection2A(hWnd : Win32cr::Foundation::HWND, pszName : Win32cr::Foundation::PSTR, dwLevel : UInt32, pConnectionInfo : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddPrinterConnection2W(hWnd : Win32cr::Foundation::HWND, pszName : Win32cr::Foundation::PWSTR, dwLevel : UInt32, pConnectionInfo : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InstallPrinterDriverFromPackageA(pszServer : Win32cr::Foundation::PSTR, pszInfPath : Win32cr::Foundation::PSTR, pszDriverName : Win32cr::Foundation::PSTR, pszEnvironment : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InstallPrinterDriverFromPackageW(pszServer : Win32cr::Foundation::PWSTR, pszInfPath : Win32cr::Foundation::PWSTR, pszDriverName : Win32cr::Foundation::PWSTR, pszEnvironment : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UploadPrinterDriverPackageA(pszServer : Win32cr::Foundation::PSTR, pszInfPath : Win32cr::Foundation::PSTR, pszEnvironment : Win32cr::Foundation::PSTR, dwFlags : UInt32, hwnd : Win32cr::Foundation::HWND, pszDestInfPath : UInt8*, pcchDestInfPath : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UploadPrinterDriverPackageW(pszServer : Win32cr::Foundation::PWSTR, pszInfPath : Win32cr::Foundation::PWSTR, pszEnvironment : Win32cr::Foundation::PWSTR, dwFlags : UInt32, hwnd : Win32cr::Foundation::HWND, pszDestInfPath : UInt16*, pcchDestInfPath : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetCorePrinterDriversA(pszServer : Win32cr::Foundation::PSTR, pszEnvironment : Win32cr::Foundation::PSTR, pszzCoreDriverDependencies : Win32cr::Foundation::PSTR, cCorePrinterDrivers : UInt32, pCorePrinterDrivers : Win32cr::Graphics::Printing::CORE_PRINTER_DRIVERA*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetCorePrinterDriversW(pszServer : Win32cr::Foundation::PWSTR, pszEnvironment : Win32cr::Foundation::PWSTR, pszzCoreDriverDependencies : Win32cr::Foundation::PWSTR, cCorePrinterDrivers : UInt32, pCorePrinterDrivers : Win32cr::Graphics::Printing::CORE_PRINTER_DRIVERW*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CorePrinterDriverInstalledA(pszServer : Win32cr::Foundation::PSTR, pszEnvironment : Win32cr::Foundation::PSTR, core_driver_guid : LibC::GUID, ftDriverDate : Win32cr::Foundation::FILETIME, dwlDriverVersion : UInt64, pbDriverInstalled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CorePrinterDriverInstalledW(pszServer : Win32cr::Foundation::PWSTR, pszEnvironment : Win32cr::Foundation::PWSTR, core_driver_guid : LibC::GUID, ftDriverDate : Win32cr::Foundation::FILETIME, dwlDriverVersion : UInt64, pbDriverInstalled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetPrinterDriverPackagePathA(pszServer : Win32cr::Foundation::PSTR, pszEnvironment : Win32cr::Foundation::PSTR, pszLanguage : Win32cr::Foundation::PSTR, pszPackageID : Win32cr::Foundation::PSTR, pszDriverPackageCab : UInt8*, cchDriverPackageCab : UInt32, pcchRequiredSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetPrinterDriverPackagePathW(pszServer : Win32cr::Foundation::PWSTR, pszEnvironment : Win32cr::Foundation::PWSTR, pszLanguage : Win32cr::Foundation::PWSTR, pszPackageID : Win32cr::Foundation::PWSTR, pszDriverPackageCab : UInt16*, cchDriverPackageCab : UInt32, pcchRequiredSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DeletePrinterDriverPackageA(pszServer : Win32cr::Foundation::PSTR, pszInfPath : Win32cr::Foundation::PSTR, pszEnvironment : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DeletePrinterDriverPackageW(pszServer : Win32cr::Foundation::PWSTR, pszInfPath : Win32cr::Foundation::PWSTR, pszEnvironment : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ReportJobProcessingProgress(printerHandle : Win32cr::Foundation::HANDLE, jobId : UInt32, jobOperation : Win32cr::Graphics::Printing::EPrintXPSJobOperation, jobProgress : Win32cr::Graphics::Printing::EPrintXPSJobProgress) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetPrinterDriver2A(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE, pEnvironment : Win32cr::Foundation::PSTR, level : UInt32, pDriverInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPrinterDriver2W(hWnd : Win32cr::Foundation::HWND, hPrinter : Win32cr::Foundation::HANDLE, pEnvironment : Win32cr::Foundation::PWSTR, level : UInt32, pDriverInfo : UInt8*, cbBuf : UInt32, pcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPrintExecutionData(pData : Win32cr::Graphics::Printing::PRINT_EXECUTION_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetJobNamedPropertyValue(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, pszName : Win32cr::Foundation::PWSTR, pValue : Win32cr::Graphics::Printing::PrintPropertyValue*) : UInt32
 
+    # :nodoc:
     fun FreePrintPropertyValue(pValue : Win32cr::Graphics::Printing::PrintPropertyValue*) : Void
 
+    # :nodoc:
     fun FreePrintNamedPropertyArray(cProperties : UInt32, ppProperties : Win32cr::Graphics::Printing::PrintNamedProperty**) : Void
 
+    # :nodoc:
     fun SetJobNamedProperty(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, pProperty : Win32cr::Graphics::Printing::PrintNamedProperty*) : UInt32
 
+    # :nodoc:
     fun DeleteJobNamedProperty(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, pszName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun EnumJobNamedProperties(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, pcProperties : UInt32*, ppProperties : Win32cr::Graphics::Printing::PrintNamedProperty**) : UInt32
 
+    # :nodoc:
     fun GetPrintOutputInfo(hWnd : Win32cr::Foundation::HWND, pszPrinter : Win32cr::Foundation::PWSTR, phFile : Win32cr::Foundation::HANDLE*, ppszOutputFile : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DevQueryPrintEx(pDQPInfo : Win32cr::Graphics::Printing::DEVQUERYPRINT_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterForPrintAsyncNotifications(pszName : Win32cr::Foundation::PWSTR, pNotificationType : LibC::GUID*, eUserFilter : Win32cr::Graphics::Printing::PrintAsyncNotifyUserFilter, eConversationStyle : Win32cr::Graphics::Printing::PrintAsyncNotifyConversationStyle, pCallback : Void*, phNotify : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UnRegisterForPrintAsyncNotifications(param0 : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreatePrintAsyncNotifyChannel(pszName : Win32cr::Foundation::PWSTR, pNotificationType : LibC::GUID*, eUserFilter : Win32cr::Graphics::Printing::PrintAsyncNotifyUserFilter, eConversationStyle : Win32cr::Graphics::Printing::PrintAsyncNotifyConversationStyle, pCallback : Void*, ppIAsynchNotification : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GdiGetSpoolFileHandle(pwszPrinterName : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, pwszDocName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun GdiDeleteSpoolFileHandle(spool_file_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GdiGetPageCount(spool_file_handle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun GdiGetDC(spool_file_handle : Win32cr::Foundation::HANDLE) : Win32cr::Graphics::Gdi::HDC
 
+    # :nodoc:
     fun GdiGetPageHandle(spool_file_handle : Win32cr::Foundation::HANDLE, page : UInt32, pdwPageType : UInt32*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun GdiStartDocEMF(spool_file_handle : Win32cr::Foundation::HANDLE, pDocInfo : Win32cr::Storage::Xps::DOCINFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GdiStartPageEMF(spool_file_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GdiPlayPageEMF(spool_file_handle : Win32cr::Foundation::HANDLE, hemf : Win32cr::Foundation::HANDLE, prectDocument : Win32cr::Foundation::RECT*, prectBorder : Win32cr::Foundation::RECT*, prectClip : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GdiEndPageEMF(spool_file_handle : Win32cr::Foundation::HANDLE, dwOptimization : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GdiEndDocEMF(spool_file_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GdiGetDevmodeForPage(spool_file_handle : Win32cr::Foundation::HANDLE, dwPageNumber : UInt32, pCurrDM : Win32cr::Graphics::Gdi::DEVMODEW**, pLastDM : Win32cr::Graphics::Gdi::DEVMODEW**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GdiResetDCEMF(spool_file_handle : Win32cr::Foundation::HANDLE, pCurrDM : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetJobAttributes(pPrinterName : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, pAttributeInfo : Win32cr::Graphics::Printing::ATTRIBUTE_INFO_3*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetJobAttributesEx(pPrinterName : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, dwLevel : UInt32, pAttributeInfo : UInt8*, nSize : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreatePrinterIC(hPrinter : Win32cr::Foundation::HANDLE, pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun PlayGdiScriptOnPrinterIC(hPrinterIC : Win32cr::Foundation::HANDLE, pIn : UInt8*, cIn : UInt32, pOut : UInt8*, cOut : UInt32, ul : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeletePrinterIC(hPrinterIC : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DevQueryPrint(hPrinter : Win32cr::Foundation::HANDLE, pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, pResID : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RevertToPrinterSelf : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun ImpersonatePrinterClient(hToken : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReplyPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, fdwChangeFlags : UInt32, pdwResult : UInt32*, pPrinterNotifyInfo : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReplyPrinterChangeNotificationEx(hNotify : Win32cr::Foundation::HANDLE, dwColor : UInt32, fdwFlags : UInt32, pdwResult : UInt32*, pPrinterNotifyInfo : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PartialReplyPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, pDataSrc : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RouterAllocPrinterNotifyInfo(cPrinterNotifyInfoData : UInt32) : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO*
 
+    # :nodoc:
     fun RouterFreePrinterNotifyInfo(pInfo : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RouterAllocBidiResponseContainer(count : UInt32) : Win32cr::Graphics::Printing::BIDI_RESPONSE_CONTAINER*
 
+    # :nodoc:
     fun RouterAllocBidiMem(num_bytes : LibC::UIntPtrT) : Void*
 
+    # :nodoc:
     fun RouterFreeBidiResponseContainer(pData : Win32cr::Graphics::Printing::BIDI_RESPONSE_CONTAINER*) : UInt32
 
+    # :nodoc:
     fun RouterFreeBidiMem(pMemPointer : Void*) : Void
 
+    # :nodoc:
     fun AppendPrinterNotifyInfoData(pInfoDest : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO*, pDataSrc : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO_DATA*, fdwFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CallRouterFindFirstPrinterChangeNotification(hPrinterRPC : Win32cr::Foundation::HANDLE, fdwFilterFlags : UInt32, fdwOptions : UInt32, hNotify : Win32cr::Foundation::HANDLE, pPrinterNotifyOptions : Win32cr::Graphics::Printing::PRINTER_NOTIFY_OPTIONS*) : UInt32
 
+    # :nodoc:
     fun ProvidorFindFirstPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, fdwFlags : UInt32, fdwOptions : UInt32, hNotify : Win32cr::Foundation::HANDLE, pPrinterNotifyOptions : Void*, pvReserved1 : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ProvidorFindClosePrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SpoolerFindFirstPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, fdwFilterFlags : UInt32, fdwOptions : UInt32, pPrinterNotifyOptions : Void*, pvReserved : Void*, pNotificationConfig : Void*, phNotify : Win32cr::Foundation::HANDLE*, phEvent : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SpoolerFindNextPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, pfdwChange : UInt32*, pPrinterNotifyOptions : Void*, ppPrinterNotifyInfo : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SpoolerRefreshPrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE, dwColor : UInt32, pOptions : Win32cr::Graphics::Printing::PRINTER_NOTIFY_OPTIONS*, ppInfo : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SpoolerFreePrinterNotifyInfo(pInfo : Win32cr::Graphics::Printing::PRINTER_NOTIFY_INFO*) : Void
 
+    # :nodoc:
     fun SpoolerFindClosePrinterChangeNotification(hPrinter : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SpoolerCopyFileEvent(pszPrinterName : Win32cr::Foundation::PWSTR, pszKey : Win32cr::Foundation::PWSTR, dwCopyFileEvent : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GenerateCopyFilePaths(pszPrinterName : Win32cr::Foundation::PWSTR, pszDirectory : Win32cr::Foundation::PWSTR, pSplClientInfo : UInt8*, dwLevel : UInt32, pszSourceDir : UInt16*, pcchSourceDirSize : UInt32*, pszTargetDir : UInt16*, pcchTargetDirSize : UInt32*, dwFlags : UInt32) : UInt32
 
+    # :nodoc:
     fun SplPromptUIInUsersSession(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, pUIParams : Win32cr::Graphics::Printing::SHOWUIPARAMS*, pResponse : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SplIsSessionZero(hPrinter : Win32cr::Foundation::HANDLE, job_id : UInt32, pIsSessionZero : Win32cr::Foundation::BOOL*) : UInt32
 
+    # :nodoc:
     fun AddPrintDeviceObject(hPrinter : Win32cr::Foundation::HANDLE, phDeviceObject : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UpdatePrintDeviceObject(hPrinter : Win32cr::Foundation::HANDLE, hDeviceObject : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RemovePrintDeviceObject(hDeviceObject : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
   end

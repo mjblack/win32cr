@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./../ui/controls.cr"
 
 module Win32cr::System::TaskScheduler
+  extend self
   TASK_SUNDAY = 1_u32
   TASK_MONDAY = 2_u32
   TASK_TUESDAY = 4_u32

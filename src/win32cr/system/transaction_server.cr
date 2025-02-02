@@ -2,6 +2,7 @@ require "./com.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::TransactionServer
+  extend self
 
   CLSID_Catalog = LibC::GUID.new(0x6eb22881_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
 

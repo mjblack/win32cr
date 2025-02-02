@@ -1,5 +1,6 @@
 
 module Win32cr::Foundation
+  extend self
   alias BOOL = Int32
   alias BOOLEAN = UInt8
   alias BSTR = UInt16*
@@ -10065,52 +10066,147 @@ module Win32cr::Foundation
     end
   end
 
+  def sysAllocString(psz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BSTR
+    C.SysAllocString(psz)
+  end
+
+  def sysReAllocString(pbstr : Win32cr::Foundation::BSTR*, psz : Win32cr::Foundation::PWSTR) : Int32
+    C.SysReAllocString(pbstr, psz)
+  end
+
+  def sysAllocStringLen(strIn : UInt16*, ui : UInt32) : Win32cr::Foundation::BSTR
+    C.SysAllocStringLen(strIn, ui)
+  end
+
+  def sysReAllocStringLen(pbstr : Win32cr::Foundation::BSTR*, psz : Win32cr::Foundation::PWSTR, len : UInt32) : Int32
+    C.SysReAllocStringLen(pbstr, psz, len)
+  end
+
+  def sysAddRefString(bstrString : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    C.SysAddRefString(bstrString)
+  end
+
+  def sysReleaseString(bstrString : Win32cr::Foundation::BSTR) : Void
+    C.SysReleaseString(bstrString)
+  end
+
+  def sysFreeString(bstrString : Win32cr::Foundation::BSTR) : Void
+    C.SysFreeString(bstrString)
+  end
+
+  def sysStringLen(pbstr : Win32cr::Foundation::BSTR) : UInt32
+    C.SysStringLen(pbstr)
+  end
+
+  def sysStringByteLen(bstr : Win32cr::Foundation::BSTR) : UInt32
+    C.SysStringByteLen(bstr)
+  end
+
+  def sysAllocStringByteLen(psz : UInt8*, len : UInt32) : Win32cr::Foundation::BSTR
+    C.SysAllocStringByteLen(psz, len)
+  end
+
+  #def closeHandle(hObject : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    #C.CloseHandle(hObject)
+  #end
+
+  #def duplicateHandle(hSourceProcessHandle : Win32cr::Foundation::HANDLE, hSourceHandle : Win32cr::Foundation::HANDLE, hTargetProcessHandle : Win32cr::Foundation::HANDLE, lpTargetHandle : Win32cr::Foundation::HANDLE*, dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, dwOptions : Win32cr::Foundation::DUPLICATE_HANDLE_OPTIONS) : Win32cr::Foundation::BOOL
+    #C.DuplicateHandle(hSourceProcessHandle, hSourceHandle, hTargetProcessHandle, lpTargetHandle, dwDesiredAccess, bInheritHandle, dwOptions)
+  #end
+
+  def compareObjectHandles(hFirstObjectHandle : Win32cr::Foundation::HANDLE, hSecondObjectHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.CompareObjectHandles(hFirstObjectHandle, hSecondObjectHandle)
+  end
+
+  def getHandleInformation(hObject : Win32cr::Foundation::HANDLE, lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetHandleInformation(hObject, lpdwFlags)
+  end
+
+  def setHandleInformation(hObject : Win32cr::Foundation::HANDLE, dwMask : UInt32, dwFlags : Win32cr::Foundation::HANDLE_FLAGS) : Win32cr::Foundation::BOOL
+    C.SetHandleInformation(hObject, dwMask, dwFlags)
+  end
+
+  #def getLastError : Win32cr::Foundation::WIN32_ERROR
+    #C.GetLastError
+  #end
+
+  #def setLastError(dwErrCode : Win32cr::Foundation::WIN32_ERROR) : Void
+    #C.SetLastError(dwErrCode)
+  #end
+
+  def setLastErrorEx(dwErrCode : Win32cr::Foundation::WIN32_ERROR, dwType : UInt32) : Void
+    C.SetLastErrorEx(dwErrCode, dwType)
+  end
+
+  #def rtlNtStatusToDosError(status : Win32cr::Foundation::NTSTATUS) : UInt32
+    #C.RtlNtStatusToDosError(status)
+  #end
+
   @[Link("oleaut32")]
   @[Link("kernel32")]
   @[Link("user32")]
   @[Link("ntdll")]
   lib C
+    # :nodoc:
     fun SysAllocString(psz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BSTR
 
+    # :nodoc:
     fun SysReAllocString(pbstr : Win32cr::Foundation::BSTR*, psz : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun SysAllocStringLen(strIn : UInt16*, ui : UInt32) : Win32cr::Foundation::BSTR
 
+    # :nodoc:
     fun SysReAllocStringLen(pbstr : Win32cr::Foundation::BSTR*, psz : Win32cr::Foundation::PWSTR, len : UInt32) : Int32
 
+    # :nodoc:
     fun SysAddRefString(bstrString : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SysReleaseString(bstrString : Win32cr::Foundation::BSTR) : Void
 
+    # :nodoc:
     fun SysFreeString(bstrString : Win32cr::Foundation::BSTR) : Void
 
+    # :nodoc:
     fun SysStringLen(pbstr : Win32cr::Foundation::BSTR) : UInt32
 
+    # :nodoc:
     fun SysStringByteLen(bstr : Win32cr::Foundation::BSTR) : UInt32
 
+    # :nodoc:
     fun SysAllocStringByteLen(psz : UInt8*, len : UInt32) : Win32cr::Foundation::BSTR
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun CloseHandle(hObject : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun DuplicateHandle(hSourceProcessHandle : Win32cr::Foundation::HANDLE, hSourceHandle : Win32cr::Foundation::HANDLE, hTargetProcessHandle : Win32cr::Foundation::HANDLE, lpTargetHandle : Win32cr::Foundation::HANDLE*, dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, dwOptions : Win32cr::Foundation::DUPLICATE_HANDLE_OPTIONS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CompareObjectHandles(hFirstObjectHandle : Win32cr::Foundation::HANDLE, hSecondObjectHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetHandleInformation(hObject : Win32cr::Foundation::HANDLE, lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetHandleInformation(hObject : Win32cr::Foundation::HANDLE, dwMask : UInt32, dwFlags : Win32cr::Foundation::HANDLE_FLAGS) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetLastError : Win32cr::Foundation::WIN32_ERROR
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SetLastError(dwErrCode : Win32cr::Foundation::WIN32_ERROR) : Void
 
+    # :nodoc:
     fun SetLastErrorEx(dwErrCode : Win32cr::Foundation::WIN32_ERROR, dwType : UInt32) : Void
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun RtlNtStatusToDosError(status : Win32cr::Foundation::NTSTATUS) : UInt32
 
   end

@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./../security.cr"
 
 module Win32cr::System::Registry
+  extend self
   alias HKEY = LibC::IntPtrT
   alias PQUERYHANDLER = Proc(Void*, Win32cr::System::Registry::Val_context*, UInt32, Void*, UInt32*, UInt32, UInt32)
 
@@ -1072,177 +1073,592 @@ module Win32cr::System::Registry
     end
   end
 
+  #def regCloseKey(hKey : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
+    #C.RegCloseKey(hKey)
+  #end
+
+  def regOverridePredefKey(hKey : Win32cr::System::Registry::HKEY, hNewHKey : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
+    C.RegOverridePredefKey(hKey, hNewHKey)
+  end
+
+  def regOpenUserClassesRoot(hToken : Win32cr::Foundation::HANDLE, dwOptions : UInt32, samDesired : UInt32, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegOpenUserClassesRoot(hToken, dwOptions, samDesired, phkResult)
+  end
+
+  def regOpenCurrentUser(samDesired : UInt32, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegOpenCurrentUser(samDesired, phkResult)
+  end
+
+  def regDisablePredefinedCache : Win32cr::Foundation::WIN32_ERROR
+    C.RegDisablePredefinedCache
+  end
+
+  def regDisablePredefinedCacheEx : Win32cr::Foundation::WIN32_ERROR
+    C.RegDisablePredefinedCacheEx
+  end
+
+  def regConnectRegistryA(lpMachineName : Win32cr::Foundation::PSTR, hKey : Win32cr::System::Registry::HKEY, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegConnectRegistryA(lpMachineName, hKey, phkResult)
+  end
+
+  def regConnectRegistryW(lpMachineName : Win32cr::Foundation::PWSTR, hKey : Win32cr::System::Registry::HKEY, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegConnectRegistryW(lpMachineName, hKey, phkResult)
+  end
+
+  def regConnectRegistryExA(lpMachineName : Win32cr::Foundation::PSTR, hKey : Win32cr::System::Registry::HKEY, flags : UInt32, phkResult : Win32cr::System::Registry::HKEY*) : Int32
+    C.RegConnectRegistryExA(lpMachineName, hKey, flags, phkResult)
+  end
+
+  def regConnectRegistryExW(lpMachineName : Win32cr::Foundation::PWSTR, hKey : Win32cr::System::Registry::HKEY, flags : UInt32, phkResult : Win32cr::System::Registry::HKEY*) : Int32
+    C.RegConnectRegistryExW(lpMachineName, hKey, flags, phkResult)
+  end
+
+  def regCreateKeyA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegCreateKeyA(hKey, lpSubKey, phkResult)
+  end
+
+  def regCreateKeyW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegCreateKeyW(hKey, lpSubKey, phkResult)
+  end
+
+  def regCreateKeyExA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, reserved : UInt32, lpClass : Win32cr::Foundation::PSTR, dwOptions : Win32cr::System::Registry::REG_OPEN_CREATE_OPTIONS, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : Win32cr::System::Registry::REG_CREATE_KEY_DISPOSITION*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegCreateKeyExA(hKey, lpSubKey, reserved, lpClass, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition)
+  end
+
+  def regCreateKeyExW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, reserved : UInt32, lpClass : Win32cr::Foundation::PWSTR, dwOptions : Win32cr::System::Registry::REG_OPEN_CREATE_OPTIONS, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : Win32cr::System::Registry::REG_CREATE_KEY_DISPOSITION*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegCreateKeyExW(hKey, lpSubKey, reserved, lpClass, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition)
+  end
+
+  def regCreateKeyTransactedA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, reserved : UInt32, lpClass : Win32cr::Foundation::PSTR, dwOptions : Win32cr::System::Registry::REG_OPEN_CREATE_OPTIONS, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : Win32cr::System::Registry::REG_CREATE_KEY_DISPOSITION*, hTransaction : Win32cr::Foundation::HANDLE, pExtendedParemeter : Void*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegCreateKeyTransactedA(hKey, lpSubKey, reserved, lpClass, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition, hTransaction, pExtendedParemeter)
+  end
+
+  def regCreateKeyTransactedW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, reserved : UInt32, lpClass : Win32cr::Foundation::PWSTR, dwOptions : Win32cr::System::Registry::REG_OPEN_CREATE_OPTIONS, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : Win32cr::System::Registry::REG_CREATE_KEY_DISPOSITION*, hTransaction : Win32cr::Foundation::HANDLE, pExtendedParemeter : Void*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegCreateKeyTransactedW(hKey, lpSubKey, reserved, lpClass, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition, hTransaction, pExtendedParemeter)
+  end
+
+  def regDeleteKeyA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegDeleteKeyA(hKey, lpSubKey)
+  end
+
+  def regDeleteKeyW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegDeleteKeyW(hKey, lpSubKey)
+  end
+
+  def regDeleteKeyExA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, samDesired : UInt32, reserved : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    C.RegDeleteKeyExA(hKey, lpSubKey, samDesired, reserved)
+  end
+
+  def regDeleteKeyExW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, samDesired : UInt32, reserved : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    C.RegDeleteKeyExW(hKey, lpSubKey, samDesired, reserved)
+  end
+
+  def regDeleteKeyTransactedA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, samDesired : UInt32, reserved : UInt32, hTransaction : Win32cr::Foundation::HANDLE, pExtendedParameter : Void*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegDeleteKeyTransactedA(hKey, lpSubKey, samDesired, reserved, hTransaction, pExtendedParameter)
+  end
+
+  def regDeleteKeyTransactedW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, samDesired : UInt32, reserved : UInt32, hTransaction : Win32cr::Foundation::HANDLE, pExtendedParameter : Void*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegDeleteKeyTransactedW(hKey, lpSubKey, samDesired, reserved, hTransaction, pExtendedParameter)
+  end
+
+  def regDisableReflectionKey(hBase : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
+    C.RegDisableReflectionKey(hBase)
+  end
+
+  def regEnableReflectionKey(hBase : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
+    C.RegEnableReflectionKey(hBase)
+  end
+
+  def regQueryReflectionKey(hBase : Win32cr::System::Registry::HKEY, bIsReflectionDisabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegQueryReflectionKey(hBase, bIsReflectionDisabled)
+  end
+
+  def regDeleteValueA(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegDeleteValueA(hKey, lpValueName)
+  end
+
+  def regDeleteValueW(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegDeleteValueW(hKey, lpValueName)
+  end
+
+  def regEnumKeyA(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpName : UInt8*, cchName : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    C.RegEnumKeyA(hKey, dwIndex, lpName, cchName)
+  end
+
+  def regEnumKeyW(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpName : UInt16*, cchName : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    C.RegEnumKeyW(hKey, dwIndex, lpName, cchName)
+  end
+
+  def regEnumKeyExA(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpName : UInt8*, lpcchName : UInt32*, lpReserved : UInt32*, lpClass : UInt8*, lpcchClass : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegEnumKeyExA(hKey, dwIndex, lpName, lpcchName, lpReserved, lpClass, lpcchClass, lpftLastWriteTime)
+  end
+
+  #def regEnumKeyExW(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpName : UInt16*, lpcchName : UInt32*, lpReserved : UInt32*, lpClass : UInt16*, lpcchClass : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
+    #C.RegEnumKeyExW(hKey, dwIndex, lpName, lpcchName, lpReserved, lpClass, lpcchClass, lpftLastWriteTime)
+  #end
+
+  def regEnumValueA(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpValueName : UInt8*, lpcchValueName : UInt32*, lpReserved : UInt32*, lpType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegEnumValueA(hKey, dwIndex, lpValueName, lpcchValueName, lpReserved, lpType, lpData, lpcbData)
+  end
+
+  def regEnumValueW(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpValueName : UInt16*, lpcchValueName : UInt32*, lpReserved : UInt32*, lpType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegEnumValueW(hKey, dwIndex, lpValueName, lpcchValueName, lpReserved, lpType, lpData, lpcbData)
+  end
+
+  def regFlushKey(hKey : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
+    C.RegFlushKey(hKey)
+  end
+
+  def regGetKeySecurity(hKey : Win32cr::System::Registry::HKEY, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegGetKeySecurity(hKey, security_information, pSecurityDescriptor, lpcbSecurityDescriptor)
+  end
+
+  def regLoadKeyA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpFile : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegLoadKeyA(hKey, lpSubKey, lpFile)
+  end
+
+  def regLoadKeyW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegLoadKeyW(hKey, lpSubKey, lpFile)
+  end
+
+  def regNotifyChangeKeyValue(hKey : Win32cr::System::Registry::HKEY, bWatchSubtree : Win32cr::Foundation::BOOL, dwNotifyFilter : Win32cr::System::Registry::REG_NOTIFY_FILTER, hEvent : Win32cr::Foundation::HANDLE, fAsynchronous : Win32cr::Foundation::BOOL) : Win32cr::Foundation::WIN32_ERROR
+    C.RegNotifyChangeKeyValue(hKey, bWatchSubtree, dwNotifyFilter, hEvent, fAsynchronous)
+  end
+
+  def regOpenKeyA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegOpenKeyA(hKey, lpSubKey, phkResult)
+  end
+
+  def regOpenKeyW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegOpenKeyW(hKey, lpSubKey, phkResult)
+  end
+
+  def regOpenKeyExA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, ulOptions : UInt32, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegOpenKeyExA(hKey, lpSubKey, ulOptions, samDesired, phkResult)
+  end
+
+  #def regOpenKeyExW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, ulOptions : UInt32, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
+    #C.RegOpenKeyExW(hKey, lpSubKey, ulOptions, samDesired, phkResult)
+  #end
+
+  def regOpenKeyTransactedA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, ulOptions : UInt32, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, phkResult : Win32cr::System::Registry::HKEY*, hTransaction : Win32cr::Foundation::HANDLE, pExtendedParemeter : Void*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegOpenKeyTransactedA(hKey, lpSubKey, ulOptions, samDesired, phkResult, hTransaction, pExtendedParemeter)
+  end
+
+  def regOpenKeyTransactedW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, ulOptions : UInt32, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, phkResult : Win32cr::System::Registry::HKEY*, hTransaction : Win32cr::Foundation::HANDLE, pExtendedParemeter : Void*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegOpenKeyTransactedW(hKey, lpSubKey, ulOptions, samDesired, phkResult, hTransaction, pExtendedParemeter)
+  end
+
+  def regQueryInfoKeyA(hKey : Win32cr::System::Registry::HKEY, lpClass : UInt8*, lpcchClass : UInt32*, lpReserved : UInt32*, lpcSubKeys : UInt32*, lpcbMaxSubKeyLen : UInt32*, lpcbMaxClassLen : UInt32*, lpcValues : UInt32*, lpcbMaxValueNameLen : UInt32*, lpcbMaxValueLen : UInt32*, lpcbSecurityDescriptor : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegQueryInfoKeyA(hKey, lpClass, lpcchClass, lpReserved, lpcSubKeys, lpcbMaxSubKeyLen, lpcbMaxClassLen, lpcValues, lpcbMaxValueNameLen, lpcbMaxValueLen, lpcbSecurityDescriptor, lpftLastWriteTime)
+  end
+
+  #def regQueryInfoKeyW(hKey : Win32cr::System::Registry::HKEY, lpClass : UInt16*, lpcchClass : UInt32*, lpReserved : UInt32*, lpcSubKeys : UInt32*, lpcbMaxSubKeyLen : UInt32*, lpcbMaxClassLen : UInt32*, lpcValues : UInt32*, lpcbMaxValueNameLen : UInt32*, lpcbMaxValueLen : UInt32*, lpcbSecurityDescriptor : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
+    #C.RegQueryInfoKeyW(hKey, lpClass, lpcchClass, lpReserved, lpcSubKeys, lpcbMaxSubKeyLen, lpcbMaxClassLen, lpcValues, lpcbMaxValueNameLen, lpcbMaxValueLen, lpcbSecurityDescriptor, lpftLastWriteTime)
+  #end
+
+  def regQueryValueA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpData : Win32cr::Foundation::PSTR, lpcbData : Int32*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegQueryValueA(hKey, lpSubKey, lpData, lpcbData)
+  end
+
+  def regQueryValueW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpData : Win32cr::Foundation::PWSTR, lpcbData : Int32*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegQueryValueW(hKey, lpSubKey, lpData, lpcbData)
+  end
+
+  def regQueryMultipleValuesA(hKey : Win32cr::System::Registry::HKEY, val_list : Win32cr::System::Registry::VALENTA*, num_vals : UInt32, lpValueBuf : Win32cr::Foundation::PSTR, ldwTotsize : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegQueryMultipleValuesA(hKey, val_list, num_vals, lpValueBuf, ldwTotsize)
+  end
+
+  def regQueryMultipleValuesW(hKey : Win32cr::System::Registry::HKEY, val_list : Win32cr::System::Registry::VALENTW*, num_vals : UInt32, lpValueBuf : Win32cr::Foundation::PWSTR, ldwTotsize : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegQueryMultipleValuesW(hKey, val_list, num_vals, lpValueBuf, ldwTotsize)
+  end
+
+  def regQueryValueExA(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PSTR, lpReserved : UInt32*, lpType : Win32cr::System::Registry::REG_VALUE_TYPE*, lpData : UInt8*, lpcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegQueryValueExA(hKey, lpValueName, lpReserved, lpType, lpData, lpcbData)
+  end
+
+  #def regQueryValueExW(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PWSTR, lpReserved : UInt32*, lpType : Win32cr::System::Registry::REG_VALUE_TYPE*, lpData : UInt8*, lpcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    #C.RegQueryValueExW(hKey, lpValueName, lpReserved, lpType, lpData, lpcbData)
+  #end
+
+  def regReplaceKeyA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpNewFile : Win32cr::Foundation::PSTR, lpOldFile : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegReplaceKeyA(hKey, lpSubKey, lpNewFile, lpOldFile)
+  end
+
+  def regReplaceKeyW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpNewFile : Win32cr::Foundation::PWSTR, lpOldFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegReplaceKeyW(hKey, lpSubKey, lpNewFile, lpOldFile)
+  end
+
+  def regRestoreKeyA(hKey : Win32cr::System::Registry::HKEY, lpFile : Win32cr::Foundation::PSTR, dwFlags : Win32cr::System::Registry::REG_RESTORE_KEY_FLAGS) : Win32cr::Foundation::WIN32_ERROR
+    C.RegRestoreKeyA(hKey, lpFile, dwFlags)
+  end
+
+  def regRestoreKeyW(hKey : Win32cr::System::Registry::HKEY, lpFile : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::Registry::REG_RESTORE_KEY_FLAGS) : Win32cr::Foundation::WIN32_ERROR
+    C.RegRestoreKeyW(hKey, lpFile, dwFlags)
+  end
+
+  def regRenameKey(hKey : Win32cr::System::Registry::HKEY, lpSubKeyName : Win32cr::Foundation::PWSTR, lpNewKeyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegRenameKey(hKey, lpSubKeyName, lpNewKeyName)
+  end
+
+  def regSaveKeyA(hKey : Win32cr::System::Registry::HKEY, lpFile : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegSaveKeyA(hKey, lpFile, lpSecurityAttributes)
+  end
+
+  def regSaveKeyW(hKey : Win32cr::System::Registry::HKEY, lpFile : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegSaveKeyW(hKey, lpFile, lpSecurityAttributes)
+  end
+
+  def regSetKeySecurity(hKey : Win32cr::System::Registry::HKEY, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegSetKeySecurity(hKey, security_information, pSecurityDescriptor)
+  end
+
+  def regSetValueA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, dwType : Win32cr::System::Registry::REG_VALUE_TYPE, lpData : Win32cr::Foundation::PSTR, cbData : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    C.RegSetValueA(hKey, lpSubKey, dwType, lpData, cbData)
+  end
+
+  def regSetValueW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, dwType : Win32cr::System::Registry::REG_VALUE_TYPE, lpData : Win32cr::Foundation::PWSTR, cbData : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    C.RegSetValueW(hKey, lpSubKey, dwType, lpData, cbData)
+  end
+
+  def regSetValueExA(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PSTR, reserved : UInt32, dwType : Win32cr::System::Registry::REG_VALUE_TYPE, lpData : UInt8*, cbData : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    C.RegSetValueExA(hKey, lpValueName, reserved, dwType, lpData, cbData)
+  end
+
+  def regSetValueExW(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PWSTR, reserved : UInt32, dwType : Win32cr::System::Registry::REG_VALUE_TYPE, lpData : UInt8*, cbData : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    C.RegSetValueExW(hKey, lpValueName, reserved, dwType, lpData, cbData)
+  end
+
+  def regUnLoadKeyA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegUnLoadKeyA(hKey, lpSubKey)
+  end
+
+  def regUnLoadKeyW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegUnLoadKeyW(hKey, lpSubKey)
+  end
+
+  def regDeleteKeyValueA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpValueName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegDeleteKeyValueA(hKey, lpSubKey, lpValueName)
+  end
+
+  def regDeleteKeyValueW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpValueName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegDeleteKeyValueW(hKey, lpSubKey, lpValueName)
+  end
+
+  def regSetKeyValueA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpValueName : Win32cr::Foundation::PSTR, dwType : UInt32, lpData : Void*, cbData : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    C.RegSetKeyValueA(hKey, lpSubKey, lpValueName, dwType, lpData, cbData)
+  end
+
+  def regSetKeyValueW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpValueName : Win32cr::Foundation::PWSTR, dwType : UInt32, lpData : Void*, cbData : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    C.RegSetKeyValueW(hKey, lpSubKey, lpValueName, dwType, lpData, cbData)
+  end
+
+  def regDeleteTreeA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegDeleteTreeA(hKey, lpSubKey)
+  end
+
+  def regDeleteTreeW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegDeleteTreeW(hKey, lpSubKey)
+  end
+
+  def regCopyTreeA(hKeySrc : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, hKeyDest : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
+    C.RegCopyTreeA(hKeySrc, lpSubKey, hKeyDest)
+  end
+
+  def regGetValueA(hkey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpValue : Win32cr::Foundation::PSTR, dwFlags : Win32cr::System::Registry::RRF_RT, pdwType : UInt32*, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegGetValueA(hkey, lpSubKey, lpValue, dwFlags, pdwType, pvData, pcbData)
+  end
+
+  def regGetValueW(hkey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpValue : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::Registry::RRF_RT, pdwType : UInt32*, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.RegGetValueW(hkey, lpSubKey, lpValue, dwFlags, pdwType, pvData, pcbData)
+  end
+
+  def regCopyTreeW(hKeySrc : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, hKeyDest : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
+    C.RegCopyTreeW(hKeySrc, lpSubKey, hKeyDest)
+  end
+
+  def regLoadMUIStringA(hKey : Win32cr::System::Registry::HKEY, pszValue : Win32cr::Foundation::PSTR, pszOutBuf : Win32cr::Foundation::PSTR, cbOutBuf : UInt32, pcbData : UInt32*, flags : UInt32, pszDirectory : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegLoadMUIStringA(hKey, pszValue, pszOutBuf, cbOutBuf, pcbData, flags, pszDirectory)
+  end
+
+  def regLoadMUIStringW(hKey : Win32cr::System::Registry::HKEY, pszValue : Win32cr::Foundation::PWSTR, pszOutBuf : Win32cr::Foundation::PWSTR, cbOutBuf : UInt32, pcbData : UInt32*, flags : UInt32, pszDirectory : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.RegLoadMUIStringW(hKey, pszValue, pszOutBuf, cbOutBuf, pcbData, flags, pszDirectory)
+  end
+
+  def regLoadAppKeyA(lpFile : Win32cr::Foundation::PSTR, phkResult : Win32cr::System::Registry::HKEY*, samDesired : UInt32, dwOptions : UInt32, reserved : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    C.RegLoadAppKeyA(lpFile, phkResult, samDesired, dwOptions, reserved)
+  end
+
+  def regLoadAppKeyW(lpFile : Win32cr::Foundation::PWSTR, phkResult : Win32cr::System::Registry::HKEY*, samDesired : UInt32, dwOptions : UInt32, reserved : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    C.RegLoadAppKeyW(lpFile, phkResult, samDesired, dwOptions, reserved)
+  end
+
+  def regSaveKeyExA(hKey : Win32cr::System::Registry::HKEY, lpFile : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flags : Win32cr::System::Registry::REG_SAVE_FORMAT) : Win32cr::Foundation::WIN32_ERROR
+    C.RegSaveKeyExA(hKey, lpFile, lpSecurityAttributes, flags)
+  end
+
+  def regSaveKeyExW(hKey : Win32cr::System::Registry::HKEY, lpFile : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flags : Win32cr::System::Registry::REG_SAVE_FORMAT) : Win32cr::Foundation::WIN32_ERROR
+    C.RegSaveKeyExW(hKey, lpFile, lpSecurityAttributes, flags)
+  end
+
+  def getRegistryValueWithFallbackW(hkeyPrimary : Win32cr::System::Registry::HKEY, pwszPrimarySubKey : Win32cr::Foundation::PWSTR, hkeyFallback : Win32cr::System::Registry::HKEY, pwszFallbackSubKey : Win32cr::Foundation::PWSTR, pwszValue : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pdwType : UInt32*, pvData : Void*, cbDataIn : UInt32, pcbDataOut : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetRegistryValueWithFallbackW(hkeyPrimary, pwszPrimarySubKey, hkeyFallback, pwszFallbackSubKey, pwszValue, dwFlags, pdwType, pvData, cbDataIn, pcbDataOut)
+  end
+
   @[Link("advapi32")]
   lib C
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun RegCloseKey(hKey : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegOverridePredefKey(hKey : Win32cr::System::Registry::HKEY, hNewHKey : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegOpenUserClassesRoot(hToken : Win32cr::Foundation::HANDLE, dwOptions : UInt32, samDesired : UInt32, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegOpenCurrentUser(samDesired : UInt32, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDisablePredefinedCache : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDisablePredefinedCacheEx : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegConnectRegistryA(lpMachineName : Win32cr::Foundation::PSTR, hKey : Win32cr::System::Registry::HKEY, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegConnectRegistryW(lpMachineName : Win32cr::Foundation::PWSTR, hKey : Win32cr::System::Registry::HKEY, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegConnectRegistryExA(lpMachineName : Win32cr::Foundation::PSTR, hKey : Win32cr::System::Registry::HKEY, flags : UInt32, phkResult : Win32cr::System::Registry::HKEY*) : Int32
 
+    # :nodoc:
     fun RegConnectRegistryExW(lpMachineName : Win32cr::Foundation::PWSTR, hKey : Win32cr::System::Registry::HKEY, flags : UInt32, phkResult : Win32cr::System::Registry::HKEY*) : Int32
 
+    # :nodoc:
     fun RegCreateKeyA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegCreateKeyW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegCreateKeyExA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, reserved : UInt32, lpClass : Win32cr::Foundation::PSTR, dwOptions : Win32cr::System::Registry::REG_OPEN_CREATE_OPTIONS, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : Win32cr::System::Registry::REG_CREATE_KEY_DISPOSITION*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegCreateKeyExW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, reserved : UInt32, lpClass : Win32cr::Foundation::PWSTR, dwOptions : Win32cr::System::Registry::REG_OPEN_CREATE_OPTIONS, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : Win32cr::System::Registry::REG_CREATE_KEY_DISPOSITION*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegCreateKeyTransactedA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, reserved : UInt32, lpClass : Win32cr::Foundation::PSTR, dwOptions : Win32cr::System::Registry::REG_OPEN_CREATE_OPTIONS, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : Win32cr::System::Registry::REG_CREATE_KEY_DISPOSITION*, hTransaction : Win32cr::Foundation::HANDLE, pExtendedParemeter : Void*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegCreateKeyTransactedW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, reserved : UInt32, lpClass : Win32cr::Foundation::PWSTR, dwOptions : Win32cr::System::Registry::REG_OPEN_CREATE_OPTIONS, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : Win32cr::System::Registry::REG_CREATE_KEY_DISPOSITION*, hTransaction : Win32cr::Foundation::HANDLE, pExtendedParemeter : Void*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDeleteKeyA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDeleteKeyW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDeleteKeyExA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, samDesired : UInt32, reserved : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDeleteKeyExW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, samDesired : UInt32, reserved : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDeleteKeyTransactedA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, samDesired : UInt32, reserved : UInt32, hTransaction : Win32cr::Foundation::HANDLE, pExtendedParameter : Void*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDeleteKeyTransactedW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, samDesired : UInt32, reserved : UInt32, hTransaction : Win32cr::Foundation::HANDLE, pExtendedParameter : Void*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDisableReflectionKey(hBase : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegEnableReflectionKey(hBase : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegQueryReflectionKey(hBase : Win32cr::System::Registry::HKEY, bIsReflectionDisabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDeleteValueA(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDeleteValueW(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegEnumKeyA(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpName : UInt8*, cchName : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegEnumKeyW(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpName : UInt16*, cchName : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegEnumKeyExA(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpName : UInt8*, lpcchName : UInt32*, lpReserved : UInt32*, lpClass : UInt8*, lpcchClass : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun RegEnumKeyExW(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpName : UInt16*, lpcchName : UInt32*, lpReserved : UInt32*, lpClass : UInt16*, lpcchClass : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegEnumValueA(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpValueName : UInt8*, lpcchValueName : UInt32*, lpReserved : UInt32*, lpType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegEnumValueW(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpValueName : UInt16*, lpcchValueName : UInt32*, lpReserved : UInt32*, lpType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegFlushKey(hKey : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegGetKeySecurity(hKey : Win32cr::System::Registry::HKEY, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegLoadKeyA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpFile : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegLoadKeyW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegNotifyChangeKeyValue(hKey : Win32cr::System::Registry::HKEY, bWatchSubtree : Win32cr::Foundation::BOOL, dwNotifyFilter : Win32cr::System::Registry::REG_NOTIFY_FILTER, hEvent : Win32cr::Foundation::HANDLE, fAsynchronous : Win32cr::Foundation::BOOL) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegOpenKeyA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegOpenKeyW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegOpenKeyExA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, ulOptions : UInt32, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun RegOpenKeyExW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, ulOptions : UInt32, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegOpenKeyTransactedA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, ulOptions : UInt32, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, phkResult : Win32cr::System::Registry::HKEY*, hTransaction : Win32cr::Foundation::HANDLE, pExtendedParemeter : Void*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegOpenKeyTransactedW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, ulOptions : UInt32, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, phkResult : Win32cr::System::Registry::HKEY*, hTransaction : Win32cr::Foundation::HANDLE, pExtendedParemeter : Void*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegQueryInfoKeyA(hKey : Win32cr::System::Registry::HKEY, lpClass : UInt8*, lpcchClass : UInt32*, lpReserved : UInt32*, lpcSubKeys : UInt32*, lpcbMaxSubKeyLen : UInt32*, lpcbMaxClassLen : UInt32*, lpcValues : UInt32*, lpcbMaxValueNameLen : UInt32*, lpcbMaxValueLen : UInt32*, lpcbSecurityDescriptor : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun RegQueryInfoKeyW(hKey : Win32cr::System::Registry::HKEY, lpClass : UInt16*, lpcchClass : UInt32*, lpReserved : UInt32*, lpcSubKeys : UInt32*, lpcbMaxSubKeyLen : UInt32*, lpcbMaxClassLen : UInt32*, lpcValues : UInt32*, lpcbMaxValueNameLen : UInt32*, lpcbMaxValueLen : UInt32*, lpcbSecurityDescriptor : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegQueryValueA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpData : Win32cr::Foundation::PSTR, lpcbData : Int32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegQueryValueW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpData : Win32cr::Foundation::PWSTR, lpcbData : Int32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegQueryMultipleValuesA(hKey : Win32cr::System::Registry::HKEY, val_list : Win32cr::System::Registry::VALENTA*, num_vals : UInt32, lpValueBuf : Win32cr::Foundation::PSTR, ldwTotsize : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegQueryMultipleValuesW(hKey : Win32cr::System::Registry::HKEY, val_list : Win32cr::System::Registry::VALENTW*, num_vals : UInt32, lpValueBuf : Win32cr::Foundation::PWSTR, ldwTotsize : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegQueryValueExA(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PSTR, lpReserved : UInt32*, lpType : Win32cr::System::Registry::REG_VALUE_TYPE*, lpData : UInt8*, lpcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun RegQueryValueExW(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PWSTR, lpReserved : UInt32*, lpType : Win32cr::System::Registry::REG_VALUE_TYPE*, lpData : UInt8*, lpcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegReplaceKeyA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpNewFile : Win32cr::Foundation::PSTR, lpOldFile : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegReplaceKeyW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpNewFile : Win32cr::Foundation::PWSTR, lpOldFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegRestoreKeyA(hKey : Win32cr::System::Registry::HKEY, lpFile : Win32cr::Foundation::PSTR, dwFlags : Win32cr::System::Registry::REG_RESTORE_KEY_FLAGS) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegRestoreKeyW(hKey : Win32cr::System::Registry::HKEY, lpFile : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::Registry::REG_RESTORE_KEY_FLAGS) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegRenameKey(hKey : Win32cr::System::Registry::HKEY, lpSubKeyName : Win32cr::Foundation::PWSTR, lpNewKeyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegSaveKeyA(hKey : Win32cr::System::Registry::HKEY, lpFile : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegSaveKeyW(hKey : Win32cr::System::Registry::HKEY, lpFile : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegSetKeySecurity(hKey : Win32cr::System::Registry::HKEY, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegSetValueA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, dwType : Win32cr::System::Registry::REG_VALUE_TYPE, lpData : Win32cr::Foundation::PSTR, cbData : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegSetValueW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, dwType : Win32cr::System::Registry::REG_VALUE_TYPE, lpData : Win32cr::Foundation::PWSTR, cbData : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegSetValueExA(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PSTR, reserved : UInt32, dwType : Win32cr::System::Registry::REG_VALUE_TYPE, lpData : UInt8*, cbData : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegSetValueExW(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PWSTR, reserved : UInt32, dwType : Win32cr::System::Registry::REG_VALUE_TYPE, lpData : UInt8*, cbData : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegUnLoadKeyA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegUnLoadKeyW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDeleteKeyValueA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpValueName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDeleteKeyValueW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpValueName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegSetKeyValueA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpValueName : Win32cr::Foundation::PSTR, dwType : UInt32, lpData : Void*, cbData : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegSetKeyValueW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpValueName : Win32cr::Foundation::PWSTR, dwType : UInt32, lpData : Void*, cbData : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDeleteTreeA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegDeleteTreeW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegCopyTreeA(hKeySrc : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, hKeyDest : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegGetValueA(hkey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpValue : Win32cr::Foundation::PSTR, dwFlags : Win32cr::System::Registry::RRF_RT, pdwType : UInt32*, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegGetValueW(hkey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpValue : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::Registry::RRF_RT, pdwType : UInt32*, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegCopyTreeW(hKeySrc : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, hKeyDest : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegLoadMUIStringA(hKey : Win32cr::System::Registry::HKEY, pszValue : Win32cr::Foundation::PSTR, pszOutBuf : Win32cr::Foundation::PSTR, cbOutBuf : UInt32, pcbData : UInt32*, flags : UInt32, pszDirectory : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegLoadMUIStringW(hKey : Win32cr::System::Registry::HKEY, pszValue : Win32cr::Foundation::PWSTR, pszOutBuf : Win32cr::Foundation::PWSTR, cbOutBuf : UInt32, pcbData : UInt32*, flags : UInt32, pszDirectory : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegLoadAppKeyA(lpFile : Win32cr::Foundation::PSTR, phkResult : Win32cr::System::Registry::HKEY*, samDesired : UInt32, dwOptions : UInt32, reserved : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegLoadAppKeyW(lpFile : Win32cr::Foundation::PWSTR, phkResult : Win32cr::System::Registry::HKEY*, samDesired : UInt32, dwOptions : UInt32, reserved : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegSaveKeyExA(hKey : Win32cr::System::Registry::HKEY, lpFile : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flags : Win32cr::System::Registry::REG_SAVE_FORMAT) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun RegSaveKeyExW(hKey : Win32cr::System::Registry::HKEY, lpFile : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flags : Win32cr::System::Registry::REG_SAVE_FORMAT) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetRegistryValueWithFallbackW(hkeyPrimary : Win32cr::System::Registry::HKEY, pwszPrimarySubKey : Win32cr::Foundation::PWSTR, hkeyFallback : Win32cr::System::Registry::HKEY, pwszFallbackSubKey : Win32cr::Foundation::PWSTR, pwszValue : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pdwType : UInt32*, pvData : Void*, cbDataIn : UInt32, pcbDataOut : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
   end

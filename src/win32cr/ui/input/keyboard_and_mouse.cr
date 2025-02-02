@@ -2,6 +2,7 @@ require "./../../foundation.cr"
 require "./../text_services.cr"
 
 module Win32cr::UI::Input::KeyboardAndMouse
+  extend self
   EXTENDED_BIT = 16777216_u32
   DONTCARE_BIT = 33554432_u32
   FAKE_KEYSTROKE = 33554432_u32
@@ -798,111 +799,371 @@ module Win32cr::UI::Input::KeyboardAndMouse
     end
   end
 
+  def _TrackMouseEvent(lpEventTrack : Win32cr::UI::Input::KeyboardAndMouse::TRACKMOUSEEVENT*) : Win32cr::Foundation::BOOL
+    C._TrackMouseEvent(lpEventTrack)
+  end
+
+  def loadKeyboardLayoutA(pwszKLID : Win32cr::Foundation::PSTR, flags : Win32cr::UI::Input::KeyboardAndMouse::ACTIVATE_KEYBOARD_LAYOUT_FLAGS) : Win32cr::UI::TextServices::HKL
+    C.LoadKeyboardLayoutA(pwszKLID, flags)
+  end
+
+  def loadKeyboardLayoutW(pwszKLID : Win32cr::Foundation::PWSTR, flags : Win32cr::UI::Input::KeyboardAndMouse::ACTIVATE_KEYBOARD_LAYOUT_FLAGS) : Win32cr::UI::TextServices::HKL
+    C.LoadKeyboardLayoutW(pwszKLID, flags)
+  end
+
+  def activateKeyboardLayout(hkl : Win32cr::UI::TextServices::HKL, flags : Win32cr::UI::Input::KeyboardAndMouse::ACTIVATE_KEYBOARD_LAYOUT_FLAGS) : Win32cr::UI::TextServices::HKL
+    C.ActivateKeyboardLayout(hkl, flags)
+  end
+
+  def toUnicodeEx(wVirtKey : UInt32, wScanCode : UInt32, lpKeyState : UInt8*, pwszBuff : UInt16*, cchBuff : Int32, wFlags : UInt32, dwhkl : Win32cr::UI::TextServices::HKL) : Int32
+    C.ToUnicodeEx(wVirtKey, wScanCode, lpKeyState, pwszBuff, cchBuff, wFlags, dwhkl)
+  end
+
+  def unloadKeyboardLayout(hkl : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::BOOL
+    C.UnloadKeyboardLayout(hkl)
+  end
+
+  def getKeyboardLayoutNameA(pwszKLID : UInt8*) : Win32cr::Foundation::BOOL
+    C.GetKeyboardLayoutNameA(pwszKLID)
+  end
+
+  def getKeyboardLayoutNameW(pwszKLID : UInt16*) : Win32cr::Foundation::BOOL
+    C.GetKeyboardLayoutNameW(pwszKLID)
+  end
+
+  def getKeyboardLayoutList(nBuff : Int32, lpList : Win32cr::UI::TextServices::HKL*) : Int32
+    C.GetKeyboardLayoutList(nBuff, lpList)
+  end
+
+  def getKeyboardLayout(idThread : UInt32) : Win32cr::UI::TextServices::HKL
+    C.GetKeyboardLayout(idThread)
+  end
+
+  def getMouseMovePointsEx(cbSize : UInt32, lppt : Win32cr::UI::Input::KeyboardAndMouse::MOUSEMOVEPOINT*, lpptBuf : Win32cr::UI::Input::KeyboardAndMouse::MOUSEMOVEPOINT*, nBufPoints : Int32, resolution : Win32cr::UI::Input::KeyboardAndMouse::GET_MOUSE_MOVE_POINTS_EX_RESOLUTION) : Int32
+    C.GetMouseMovePointsEx(cbSize, lppt, lpptBuf, nBufPoints, resolution)
+  end
+
+  def trackMouseEvent(lpEventTrack : Win32cr::UI::Input::KeyboardAndMouse::TRACKMOUSEEVENT*) : Win32cr::Foundation::BOOL
+    C.TrackMouseEvent(lpEventTrack)
+  end
+
+  def registerHotKey(hWnd : Win32cr::Foundation::HWND, id : Int32, fsModifiers : Win32cr::UI::Input::KeyboardAndMouse::HOT_KEY_MODIFIERS, vk : UInt32) : Win32cr::Foundation::BOOL
+    C.RegisterHotKey(hWnd, id, fsModifiers, vk)
+  end
+
+  def unregisterHotKey(hWnd : Win32cr::Foundation::HWND, id : Int32) : Win32cr::Foundation::BOOL
+    C.UnregisterHotKey(hWnd, id)
+  end
+
+  def swapMouseButton(fSwap : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SwapMouseButton(fSwap)
+  end
+
+  def getDoubleClickTime : UInt32
+    C.GetDoubleClickTime
+  end
+
+  def setDoubleClickTime(param0 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetDoubleClickTime(param0)
+  end
+
+  def setFocus(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    C.SetFocus(hWnd)
+  end
+
+  def getActiveWindow : Win32cr::Foundation::HWND
+    C.GetActiveWindow
+  end
+
+  def getFocus : Win32cr::Foundation::HWND
+    C.GetFocus
+  end
+
+  def getKBCodePage : UInt32
+    C.GetKBCodePage
+  end
+
+  def getKeyState(nVirtKey : Int32) : Int16
+    C.GetKeyState(nVirtKey)
+  end
+
+  def getAsyncKeyState(vKey : Int32) : Int16
+    C.GetAsyncKeyState(vKey)
+  end
+
+  def getKeyboardState(lpKeyState : UInt8*) : Win32cr::Foundation::BOOL
+    C.GetKeyboardState(lpKeyState)
+  end
+
+  def setKeyboardState(lpKeyState : UInt8*) : Win32cr::Foundation::BOOL
+    C.SetKeyboardState(lpKeyState)
+  end
+
+  def getKeyNameTextA(lParam : Int32, lpString : UInt8*, cchSize : Int32) : Int32
+    C.GetKeyNameTextA(lParam, lpString, cchSize)
+  end
+
+  def getKeyNameTextW(lParam : Int32, lpString : UInt16*, cchSize : Int32) : Int32
+    C.GetKeyNameTextW(lParam, lpString, cchSize)
+  end
+
+  def getKeyboardType(nTypeFlag : Int32) : Int32
+    C.GetKeyboardType(nTypeFlag)
+  end
+
+  def toAscii(uVirtKey : UInt32, uScanCode : UInt32, lpKeyState : UInt8*, lpChar : UInt16*, uFlags : UInt32) : Int32
+    C.ToAscii(uVirtKey, uScanCode, lpKeyState, lpChar, uFlags)
+  end
+
+  def toAsciiEx(uVirtKey : UInt32, uScanCode : UInt32, lpKeyState : UInt8*, lpChar : UInt16*, uFlags : UInt32, dwhkl : Win32cr::UI::TextServices::HKL) : Int32
+    C.ToAsciiEx(uVirtKey, uScanCode, lpKeyState, lpChar, uFlags, dwhkl)
+  end
+
+  def toUnicode(wVirtKey : UInt32, wScanCode : UInt32, lpKeyState : UInt8*, pwszBuff : UInt16*, cchBuff : Int32, wFlags : UInt32) : Int32
+    C.ToUnicode(wVirtKey, wScanCode, lpKeyState, pwszBuff, cchBuff, wFlags)
+  end
+
+  def oemKeyScan(wOemChar : UInt16) : UInt32
+    C.OemKeyScan(wOemChar)
+  end
+
+  def vkKeyScanA(ch : Win32cr::Foundation::CHAR) : Int16
+    C.VkKeyScanA(ch)
+  end
+
+  def vkKeyScanW(ch : UInt16) : Int16
+    C.VkKeyScanW(ch)
+  end
+
+  def vkKeyScanExA(ch : Win32cr::Foundation::CHAR, dwhkl : Win32cr::UI::TextServices::HKL) : Int16
+    C.VkKeyScanExA(ch, dwhkl)
+  end
+
+  def vkKeyScanExW(ch : UInt16, dwhkl : Win32cr::UI::TextServices::HKL) : Int16
+    C.VkKeyScanExW(ch, dwhkl)
+  end
+
+  def keybdEvent(bVk : UInt8, bScan : UInt8, dwFlags : Win32cr::UI::Input::KeyboardAndMouse::KEYBD_EVENT_FLAGS, dwExtraInfo : LibC::UIntPtrT) : Void
+    C.keybd_event(bVk, bScan, dwFlags, dwExtraInfo)
+  end
+
+  def mouseEvent(dwFlags : Win32cr::UI::Input::KeyboardAndMouse::MOUSE_EVENT_FLAGS, dx : Int32, dy : Int32, dwData : UInt32, dwExtraInfo : LibC::UIntPtrT) : Void
+    C.mouse_event(dwFlags, dx, dy, dwData, dwExtraInfo)
+  end
+
+  def sendInput(cInputs : UInt32, pInputs : Win32cr::UI::Input::KeyboardAndMouse::INPUT*, cbSize : Int32) : UInt32
+    C.SendInput(cInputs, pInputs, cbSize)
+  end
+
+  def getLastInputInfo(plii : Win32cr::UI::Input::KeyboardAndMouse::LASTINPUTINFO*) : Win32cr::Foundation::BOOL
+    C.GetLastInputInfo(plii)
+  end
+
+  def mapVirtualKeyA(uCode : UInt32, uMapType : UInt32) : UInt32
+    C.MapVirtualKeyA(uCode, uMapType)
+  end
+
+  def mapVirtualKeyW(uCode : UInt32, uMapType : UInt32) : UInt32
+    C.MapVirtualKeyW(uCode, uMapType)
+  end
+
+  def mapVirtualKeyExA(uCode : UInt32, uMapType : UInt32, dwhkl : Win32cr::UI::TextServices::HKL) : UInt32
+    C.MapVirtualKeyExA(uCode, uMapType, dwhkl)
+  end
+
+  def mapVirtualKeyExW(uCode : UInt32, uMapType : UInt32, dwhkl : Win32cr::UI::TextServices::HKL) : UInt32
+    C.MapVirtualKeyExW(uCode, uMapType, dwhkl)
+  end
+
+  def getCapture : Win32cr::Foundation::HWND
+    C.GetCapture
+  end
+
+  def setCapture(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    C.SetCapture(hWnd)
+  end
+
+  def releaseCapture : Win32cr::Foundation::BOOL
+    C.ReleaseCapture
+  end
+
+  def enableWindow(hWnd : Win32cr::Foundation::HWND, bEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.EnableWindow(hWnd, bEnable)
+  end
+
+  def isWindowEnabled(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.IsWindowEnabled(hWnd)
+  end
+
+  def dragDetect(hwnd : Win32cr::Foundation::HWND, pt : Win32cr::Foundation::POINT) : Win32cr::Foundation::BOOL
+    C.DragDetect(hwnd, pt)
+  end
+
+  def setActiveWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    C.SetActiveWindow(hWnd)
+  end
+
+  def blockInput(fBlockIt : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.BlockInput(fBlockIt)
+  end
+
   @[Link("comctl32")]
   @[Link("user32")]
   lib C
+    # :nodoc:
     fun _TrackMouseEvent(lpEventTrack : Win32cr::UI::Input::KeyboardAndMouse::TRACKMOUSEEVENT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LoadKeyboardLayoutA(pwszKLID : Win32cr::Foundation::PSTR, flags : Win32cr::UI::Input::KeyboardAndMouse::ACTIVATE_KEYBOARD_LAYOUT_FLAGS) : Win32cr::UI::TextServices::HKL
 
+    # :nodoc:
     fun LoadKeyboardLayoutW(pwszKLID : Win32cr::Foundation::PWSTR, flags : Win32cr::UI::Input::KeyboardAndMouse::ACTIVATE_KEYBOARD_LAYOUT_FLAGS) : Win32cr::UI::TextServices::HKL
 
+    # :nodoc:
     fun ActivateKeyboardLayout(hkl : Win32cr::UI::TextServices::HKL, flags : Win32cr::UI::Input::KeyboardAndMouse::ACTIVATE_KEYBOARD_LAYOUT_FLAGS) : Win32cr::UI::TextServices::HKL
 
+    # :nodoc:
     fun ToUnicodeEx(wVirtKey : UInt32, wScanCode : UInt32, lpKeyState : UInt8*, pwszBuff : UInt16*, cchBuff : Int32, wFlags : UInt32, dwhkl : Win32cr::UI::TextServices::HKL) : Int32
 
+    # :nodoc:
     fun UnloadKeyboardLayout(hkl : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetKeyboardLayoutNameA(pwszKLID : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetKeyboardLayoutNameW(pwszKLID : UInt16*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetKeyboardLayoutList(nBuff : Int32, lpList : Win32cr::UI::TextServices::HKL*) : Int32
 
+    # :nodoc:
     fun GetKeyboardLayout(idThread : UInt32) : Win32cr::UI::TextServices::HKL
 
+    # :nodoc:
     fun GetMouseMovePointsEx(cbSize : UInt32, lppt : Win32cr::UI::Input::KeyboardAndMouse::MOUSEMOVEPOINT*, lpptBuf : Win32cr::UI::Input::KeyboardAndMouse::MOUSEMOVEPOINT*, nBufPoints : Int32, resolution : Win32cr::UI::Input::KeyboardAndMouse::GET_MOUSE_MOVE_POINTS_EX_RESOLUTION) : Int32
 
+    # :nodoc:
     fun TrackMouseEvent(lpEventTrack : Win32cr::UI::Input::KeyboardAndMouse::TRACKMOUSEEVENT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterHotKey(hWnd : Win32cr::Foundation::HWND, id : Int32, fsModifiers : Win32cr::UI::Input::KeyboardAndMouse::HOT_KEY_MODIFIERS, vk : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnregisterHotKey(hWnd : Win32cr::Foundation::HWND, id : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SwapMouseButton(fSwap : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDoubleClickTime : UInt32
 
+    # :nodoc:
     fun SetDoubleClickTime(param0 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetFocus(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun GetActiveWindow : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun GetFocus : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun GetKBCodePage : UInt32
 
+    # :nodoc:
     fun GetKeyState(nVirtKey : Int32) : Int16
 
+    # :nodoc:
     fun GetAsyncKeyState(vKey : Int32) : Int16
 
+    # :nodoc:
     fun GetKeyboardState(lpKeyState : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetKeyboardState(lpKeyState : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetKeyNameTextA(lParam : Int32, lpString : UInt8*, cchSize : Int32) : Int32
 
+    # :nodoc:
     fun GetKeyNameTextW(lParam : Int32, lpString : UInt16*, cchSize : Int32) : Int32
 
+    # :nodoc:
     fun GetKeyboardType(nTypeFlag : Int32) : Int32
 
+    # :nodoc:
     fun ToAscii(uVirtKey : UInt32, uScanCode : UInt32, lpKeyState : UInt8*, lpChar : UInt16*, uFlags : UInt32) : Int32
 
+    # :nodoc:
     fun ToAsciiEx(uVirtKey : UInt32, uScanCode : UInt32, lpKeyState : UInt8*, lpChar : UInt16*, uFlags : UInt32, dwhkl : Win32cr::UI::TextServices::HKL) : Int32
 
+    # :nodoc:
     fun ToUnicode(wVirtKey : UInt32, wScanCode : UInt32, lpKeyState : UInt8*, pwszBuff : UInt16*, cchBuff : Int32, wFlags : UInt32) : Int32
 
+    # :nodoc:
     fun OemKeyScan(wOemChar : UInt16) : UInt32
 
+    # :nodoc:
     fun VkKeyScanA(ch : Win32cr::Foundation::CHAR) : Int16
 
+    # :nodoc:
     fun VkKeyScanW(ch : UInt16) : Int16
 
+    # :nodoc:
     fun VkKeyScanExA(ch : Win32cr::Foundation::CHAR, dwhkl : Win32cr::UI::TextServices::HKL) : Int16
 
+    # :nodoc:
     fun VkKeyScanExW(ch : UInt16, dwhkl : Win32cr::UI::TextServices::HKL) : Int16
 
+    # :nodoc:
     fun keybd_event(bVk : UInt8, bScan : UInt8, dwFlags : Win32cr::UI::Input::KeyboardAndMouse::KEYBD_EVENT_FLAGS, dwExtraInfo : LibC::UIntPtrT) : Void
 
+    # :nodoc:
     fun mouse_event(dwFlags : Win32cr::UI::Input::KeyboardAndMouse::MOUSE_EVENT_FLAGS, dx : Int32, dy : Int32, dwData : UInt32, dwExtraInfo : LibC::UIntPtrT) : Void
 
+    # :nodoc:
     fun SendInput(cInputs : UInt32, pInputs : Win32cr::UI::Input::KeyboardAndMouse::INPUT*, cbSize : Int32) : UInt32
 
+    # :nodoc:
     fun GetLastInputInfo(plii : Win32cr::UI::Input::KeyboardAndMouse::LASTINPUTINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MapVirtualKeyA(uCode : UInt32, uMapType : UInt32) : UInt32
 
+    # :nodoc:
     fun MapVirtualKeyW(uCode : UInt32, uMapType : UInt32) : UInt32
 
+    # :nodoc:
     fun MapVirtualKeyExA(uCode : UInt32, uMapType : UInt32, dwhkl : Win32cr::UI::TextServices::HKL) : UInt32
 
+    # :nodoc:
     fun MapVirtualKeyExW(uCode : UInt32, uMapType : UInt32, dwhkl : Win32cr::UI::TextServices::HKL) : UInt32
 
+    # :nodoc:
     fun GetCapture : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun SetCapture(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun ReleaseCapture : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnableWindow(hWnd : Win32cr::Foundation::HWND, bEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsWindowEnabled(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DragDetect(hwnd : Win32cr::Foundation::HWND, pt : Win32cr::Foundation::POINT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetActiveWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun BlockInput(fBlockIt : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
   end

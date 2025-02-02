@@ -4,6 +4,7 @@ require "./../../../ui/shell/properties_system.cr"
 require "./../../../system/com/structured_storage.cr"
 
 module Win32cr::Security::Authentication::Identity::Provider
+  extend self
   IDENTITY_KEYWORD_ASSOCIATED = "associated"
   IDENTITY_KEYWORD_LOCAL = "local"
   IDENTITY_KEYWORD_HOMEGROUP = "homegroup"

@@ -6,6 +6,7 @@ require "./../system/com.cr"
 require "./input/pointer.cr"
 
 module Win32cr::UI::Controls
+  extend self
   alias HPROPSHEETPAGE = LibC::IntPtrT
   alias HIMAGELIST = LibC::IntPtrT
   alias HSYNTHETICPOINTERDEVICE = LibC::IntPtrT
@@ -7789,436 +7790,1506 @@ module Win32cr::UI::Controls
 
   end
 
+  def createPropertySheetPageA(constPropSheetPagePointer : Win32cr::UI::Controls::PROPSHEETPAGEA*) : Win32cr::UI::Controls::HPROPSHEETPAGE
+    C.CreatePropertySheetPageA(constPropSheetPagePointer)
+  end
+
+  def createPropertySheetPageW(constPropSheetPagePointer : Win32cr::UI::Controls::PROPSHEETPAGEW*) : Win32cr::UI::Controls::HPROPSHEETPAGE
+    C.CreatePropertySheetPageW(constPropSheetPagePointer)
+  end
+
+  def destroyPropertySheetPage(param0 : Win32cr::UI::Controls::HPROPSHEETPAGE) : Win32cr::Foundation::BOOL
+    C.DestroyPropertySheetPage(param0)
+  end
+
+  def propertySheetA(param0 : Win32cr::UI::Controls::PROPSHEETHEADERA_V2*) : LibC::IntPtrT
+    C.PropertySheetA(param0)
+  end
+
+  def propertySheetW(param0 : Win32cr::UI::Controls::PROPSHEETHEADERW_V2*) : LibC::IntPtrT
+    C.PropertySheetW(param0)
+  end
+
+  def initCommonControls : Void
+    C.InitCommonControls
+  end
+
+  def initCommonControlsEx(picce : Win32cr::UI::Controls::INITCOMMONCONTROLSEX*) : Win32cr::Foundation::BOOL
+    C.InitCommonControlsEx(picce)
+  end
+
+  def imageListCreate(cx : Int32, cy : Int32, flags : Win32cr::UI::Controls::IMAGELIST_CREATION_FLAGS, cInitial : Int32, cGrow : Int32) : Win32cr::UI::Controls::HIMAGELIST
+    C.ImageList_Create(cx, cy, flags, cInitial, cGrow)
+  end
+
+  def imageListDestroy(himl : Win32cr::UI::Controls::HIMAGELIST) : Win32cr::Foundation::BOOL
+    C.ImageList_Destroy(himl)
+  end
+
+  def imageListGetImageCount(himl : Win32cr::UI::Controls::HIMAGELIST) : Int32
+    C.ImageList_GetImageCount(himl)
+  end
+
+  def imageListSetImageCount(himl : Win32cr::UI::Controls::HIMAGELIST, uNewCount : UInt32) : Win32cr::Foundation::BOOL
+    C.ImageList_SetImageCount(himl, uNewCount)
+  end
+
+  def imageListAdd(himl : Win32cr::UI::Controls::HIMAGELIST, hbmImage : Win32cr::Graphics::Gdi::HBITMAP, hbmMask : Win32cr::Graphics::Gdi::HBITMAP) : Int32
+    C.ImageList_Add(himl, hbmImage, hbmMask)
+  end
+
+  def imageListReplaceIcon(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32, hicon : Win32cr::UI::WindowsAndMessaging::HICON) : Int32
+    C.ImageList_ReplaceIcon(himl, i, hicon)
+  end
+
+  def imageListSetBkColor(himl : Win32cr::UI::Controls::HIMAGELIST, clrBk : UInt32) : UInt32
+    C.ImageList_SetBkColor(himl, clrBk)
+  end
+
+  def imageListGetBkColor(himl : Win32cr::UI::Controls::HIMAGELIST) : UInt32
+    C.ImageList_GetBkColor(himl)
+  end
+
+  def imageListSetOverlayImage(himl : Win32cr::UI::Controls::HIMAGELIST, iImage : Int32, iOverlay : Int32) : Win32cr::Foundation::BOOL
+    C.ImageList_SetOverlayImage(himl, iImage, iOverlay)
+  end
+
+  def imageListDraw(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32, hdcDst : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, fStyle : Win32cr::UI::Controls::IMAGE_LIST_DRAW_STYLE) : Win32cr::Foundation::BOOL
+    C.ImageList_Draw(himl, i, hdcDst, x, y, fStyle)
+  end
+
+  def imageListReplace(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32, hbmImage : Win32cr::Graphics::Gdi::HBITMAP, hbmMask : Win32cr::Graphics::Gdi::HBITMAP) : Win32cr::Foundation::BOOL
+    C.ImageList_Replace(himl, i, hbmImage, hbmMask)
+  end
+
+  def imageListAddMasked(himl : Win32cr::UI::Controls::HIMAGELIST, hbmImage : Win32cr::Graphics::Gdi::HBITMAP, crMask : UInt32) : Int32
+    C.ImageList_AddMasked(himl, hbmImage, crMask)
+  end
+
+  def imageListDrawEx(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32, hdcDst : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, dx : Int32, dy : Int32, rgbBk : UInt32, rgbFg : UInt32, fStyle : Win32cr::UI::Controls::IMAGE_LIST_DRAW_STYLE) : Win32cr::Foundation::BOOL
+    C.ImageList_DrawEx(himl, i, hdcDst, x, y, dx, dy, rgbBk, rgbFg, fStyle)
+  end
+
+  def imageListDrawIndirect(pimldp : Win32cr::UI::Controls::IMAGELISTDRAWPARAMS*) : Win32cr::Foundation::BOOL
+    C.ImageList_DrawIndirect(pimldp)
+  end
+
+  def imageListRemove(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32) : Win32cr::Foundation::BOOL
+    C.ImageList_Remove(himl, i)
+  end
+
+  def imageListGetIcon(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32, flags : UInt32) : Win32cr::UI::WindowsAndMessaging::HICON
+    C.ImageList_GetIcon(himl, i, flags)
+  end
+
+  def imageListLoadImageA(hi : Win32cr::Foundation::HINSTANCE, lpbmp : Win32cr::Foundation::PSTR, cx : Int32, cGrow : Int32, crMask : UInt32, uType : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::UI::Controls::HIMAGELIST
+    C.ImageList_LoadImageA(hi, lpbmp, cx, cGrow, crMask, uType, uFlags)
+  end
+
+  def imageListLoadImageW(hi : Win32cr::Foundation::HINSTANCE, lpbmp : Win32cr::Foundation::PWSTR, cx : Int32, cGrow : Int32, crMask : UInt32, uType : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::UI::Controls::HIMAGELIST
+    C.ImageList_LoadImageW(hi, lpbmp, cx, cGrow, crMask, uType, uFlags)
+  end
+
+  def imageListCopy(himlDst : Win32cr::UI::Controls::HIMAGELIST, iDst : Int32, himlSrc : Win32cr::UI::Controls::HIMAGELIST, iSrc : Int32, uFlags : Win32cr::UI::Controls::IMAGE_LIST_COPY_FLAGS) : Win32cr::Foundation::BOOL
+    C.ImageList_Copy(himlDst, iDst, himlSrc, iSrc, uFlags)
+  end
+
+  def imageListBeginDrag(himlTrack : Win32cr::UI::Controls::HIMAGELIST, iTrack : Int32, dxHotspot : Int32, dyHotspot : Int32) : Win32cr::Foundation::BOOL
+    C.ImageList_BeginDrag(himlTrack, iTrack, dxHotspot, dyHotspot)
+  end
+
+  def imageListEndDrag : Void
+    C.ImageList_EndDrag
+  end
+
+  def imageListDragEnter(hwndLock : Win32cr::Foundation::HWND, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    C.ImageList_DragEnter(hwndLock, x, y)
+  end
+
+  def imageListDragLeave(hwndLock : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.ImageList_DragLeave(hwndLock)
+  end
+
+  def imageListDragMove(x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    C.ImageList_DragMove(x, y)
+  end
+
+  def imageListSetDragCursorImage(himlDrag : Win32cr::UI::Controls::HIMAGELIST, iDrag : Int32, dxHotspot : Int32, dyHotspot : Int32) : Win32cr::Foundation::BOOL
+    C.ImageList_SetDragCursorImage(himlDrag, iDrag, dxHotspot, dyHotspot)
+  end
+
+  def imageListDragShowNolock(fShow : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.ImageList_DragShowNolock(fShow)
+  end
+
+  def imageListGetDragImage(ppt : Win32cr::Foundation::POINT*, pptHotspot : Win32cr::Foundation::POINT*) : Win32cr::UI::Controls::HIMAGELIST
+    C.ImageList_GetDragImage(ppt, pptHotspot)
+  end
+
+  def imageListRead(pstm : Void*) : Win32cr::UI::Controls::HIMAGELIST
+    C.ImageList_Read(pstm)
+  end
+
+  def imageListWrite(himl : Win32cr::UI::Controls::HIMAGELIST, pstm : Void*) : Win32cr::Foundation::BOOL
+    C.ImageList_Write(himl, pstm)
+  end
+
+  def imageListReadEx(dwFlags : UInt32, pstm : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.ImageList_ReadEx(dwFlags, pstm, riid, ppv)
+  end
+
+  def imageListWriteEx(himl : Win32cr::UI::Controls::HIMAGELIST, dwFlags : UInt32, pstm : Void*) : Win32cr::Foundation::HRESULT
+    C.ImageList_WriteEx(himl, dwFlags, pstm)
+  end
+
+  def imageListGetIconSize(himl : Win32cr::UI::Controls::HIMAGELIST, cx : Int32*, cy : Int32*) : Win32cr::Foundation::BOOL
+    C.ImageList_GetIconSize(himl, cx, cy)
+  end
+
+  def imageListSetIconSize(himl : Win32cr::UI::Controls::HIMAGELIST, cx : Int32, cy : Int32) : Win32cr::Foundation::BOOL
+    C.ImageList_SetIconSize(himl, cx, cy)
+  end
+
+  def imageListGetImageInfo(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32, pImageInfo : Win32cr::UI::Controls::IMAGEINFO*) : Win32cr::Foundation::BOOL
+    C.ImageList_GetImageInfo(himl, i, pImageInfo)
+  end
+
+  def imageListMerge(himl1 : Win32cr::UI::Controls::HIMAGELIST, i1 : Int32, himl2 : Win32cr::UI::Controls::HIMAGELIST, i2 : Int32, dx : Int32, dy : Int32) : Win32cr::UI::Controls::HIMAGELIST
+    C.ImageList_Merge(himl1, i1, himl2, i2, dx, dy)
+  end
+
+  def imageListDuplicate(himl : Win32cr::UI::Controls::HIMAGELIST) : Win32cr::UI::Controls::HIMAGELIST
+    C.ImageList_Duplicate(himl)
+  end
+
+  def hIMAGELISTQueryInterface(himl : Win32cr::UI::Controls::HIMAGELIST, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.HIMAGELIST_QueryInterface(himl, riid, ppv)
+  end
+
+  def createToolbarEx(hwnd : Win32cr::Foundation::HWND, ws : UInt32, wID : UInt32, nBitmaps : Int32, hBMInst : Win32cr::Foundation::HINSTANCE, wBMID : LibC::UIntPtrT, lpButtons : Win32cr::UI::Controls::TBBUTTON*, iNumButtons : Int32, dxButton : Int32, dyButton : Int32, dxBitmap : Int32, dyBitmap : Int32, uStructSize : UInt32) : Win32cr::Foundation::HWND
+    C.CreateToolbarEx(hwnd, ws, wID, nBitmaps, hBMInst, wBMID, lpButtons, iNumButtons, dxButton, dyButton, dxBitmap, dyBitmap, uStructSize)
+  end
+
+  def createMappedBitmap(hInstance : Win32cr::Foundation::HINSTANCE, idBitmap : LibC::IntPtrT, wFlags : UInt32, lpColorMap : Win32cr::UI::Controls::COLORMAP*, iNumMaps : Int32) : Win32cr::Graphics::Gdi::HBITMAP
+    C.CreateMappedBitmap(hInstance, idBitmap, wFlags, lpColorMap, iNumMaps)
+  end
+
+  def drawStatusTextA(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*, pszText : Win32cr::Foundation::PSTR, uFlags : UInt32) : Void
+    C.DrawStatusTextA(hDC, lprc, pszText, uFlags)
+  end
+
+  def drawStatusTextW(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*, pszText : Win32cr::Foundation::PWSTR, uFlags : UInt32) : Void
+    C.DrawStatusTextW(hDC, lprc, pszText, uFlags)
+  end
+
+  def createStatusWindowA(style : Int32, lpszText : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND, wID : UInt32) : Win32cr::Foundation::HWND
+    C.CreateStatusWindowA(style, lpszText, hwndParent, wID)
+  end
+
+  def createStatusWindowW(style : Int32, lpszText : Win32cr::Foundation::PWSTR, hwndParent : Win32cr::Foundation::HWND, wID : UInt32) : Win32cr::Foundation::HWND
+    C.CreateStatusWindowW(style, lpszText, hwndParent, wID)
+  end
+
+  def menuHelp(uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, hMainMenu : Win32cr::UI::WindowsAndMessaging::HMENU, hInst : Win32cr::Foundation::HINSTANCE, hwndStatus : Win32cr::Foundation::HWND, lpwIDs : UInt32*) : Void
+    C.MenuHelp(uMsg, wParam, lParam, hMainMenu, hInst, hwndStatus, lpwIDs)
+  end
+
+  def showHideMenuCtl(hWnd : Win32cr::Foundation::HWND, uFlags : LibC::UIntPtrT, lpInfo : Int32*) : Win32cr::Foundation::BOOL
+    C.ShowHideMenuCtl(hWnd, uFlags, lpInfo)
+  end
+
+  def getEffectiveClientRect(hWnd : Win32cr::Foundation::HWND, lprc : Win32cr::Foundation::RECT*, lpInfo : Int32*) : Void
+    C.GetEffectiveClientRect(hWnd, lprc, lpInfo)
+  end
+
+  def makeDragList(hLB : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.MakeDragList(hLB)
+  end
+
+  def drawInsert(handParent : Win32cr::Foundation::HWND, hLB : Win32cr::Foundation::HWND, nItem : Int32) : Void
+    C.DrawInsert(handParent, hLB, nItem)
+  end
+
+  def lBItemFromPt(hLB : Win32cr::Foundation::HWND, pt : Win32cr::Foundation::POINT, bAutoScroll : Win32cr::Foundation::BOOL) : Int32
+    C.LBItemFromPt(hLB, pt, bAutoScroll)
+  end
+
+  def createUpDownControl(dwStyle : UInt32, x : Int32, y : Int32, cx : Int32, cy : Int32, hParent : Win32cr::Foundation::HWND, nID : Int32, hInst : Win32cr::Foundation::HINSTANCE, hBuddy : Win32cr::Foundation::HWND, nUpper : Int32, nLower : Int32, nPos : Int32) : Win32cr::Foundation::HWND
+    C.CreateUpDownControl(dwStyle, x, y, cx, cy, hParent, nID, hInst, hBuddy, nUpper, nLower, nPos)
+  end
+
+  def taskDialogIndirect(pTaskConfig : Win32cr::UI::Controls::TASKDIALOGCONFIG*, pnButton : Int32*, pnRadioButton : Int32*, pfVerificationFlagChecked : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.TaskDialogIndirect(pTaskConfig, pnButton, pnRadioButton, pfVerificationFlagChecked)
+  end
+
+  def taskDialog(hwndOwner : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, pszWindowTitle : Win32cr::Foundation::PWSTR, pszMainInstruction : Win32cr::Foundation::PWSTR, pszContent : Win32cr::Foundation::PWSTR, dwCommonButtons : Win32cr::UI::Controls::TASKDIALOG_COMMON_BUTTON_FLAGS, pszIcon : Win32cr::Foundation::PWSTR, pnButton : Int32*) : Win32cr::Foundation::HRESULT
+    C.TaskDialog(hwndOwner, hInstance, pszWindowTitle, pszMainInstruction, pszContent, dwCommonButtons, pszIcon, pnButton)
+  end
+
+  def initMUILanguage(uiLang : UInt16) : Void
+    C.InitMUILanguage(uiLang)
+  end
+
+  def getMUILanguage : UInt16
+    C.GetMUILanguage
+  end
+
+  def dSACreate(cbItem : Int32, cItemGrow : Int32) : Win32cr::UI::Controls::HDSA
+    C.DSA_Create(cbItem, cItemGrow)
+  end
+
+  def dSADestroy(hdsa : Win32cr::UI::Controls::HDSA) : Win32cr::Foundation::BOOL
+    C.DSA_Destroy(hdsa)
+  end
+
+  def dSADestroyCallback(hdsa : Win32cr::UI::Controls::HDSA, pfnCB : Win32cr::UI::Controls::PFNDAENUMCALLBACK, pData : Void*) : Void
+    C.DSA_DestroyCallback(hdsa, pfnCB, pData)
+  end
+
+  def dSADeleteItem(hdsa : Win32cr::UI::Controls::HDSA, i : Int32) : Win32cr::Foundation::BOOL
+    C.DSA_DeleteItem(hdsa, i)
+  end
+
+  def dSADeleteAllItems(hdsa : Win32cr::UI::Controls::HDSA) : Win32cr::Foundation::BOOL
+    C.DSA_DeleteAllItems(hdsa)
+  end
+
+  def dSAEnumCallback(hdsa : Win32cr::UI::Controls::HDSA, pfnCB : Win32cr::UI::Controls::PFNDAENUMCALLBACK, pData : Void*) : Void
+    C.DSA_EnumCallback(hdsa, pfnCB, pData)
+  end
+
+  def dSAInsertItem(hdsa : Win32cr::UI::Controls::HDSA, i : Int32, pitem : Void*) : Int32
+    C.DSA_InsertItem(hdsa, i, pitem)
+  end
+
+  def dSAGetItemPtr(hdsa : Win32cr::UI::Controls::HDSA, i : Int32) : Void*
+    C.DSA_GetItemPtr(hdsa, i)
+  end
+
+  def dSAGetItem(hdsa : Win32cr::UI::Controls::HDSA, i : Int32, pitem : Void*) : Win32cr::Foundation::BOOL
+    C.DSA_GetItem(hdsa, i, pitem)
+  end
+
+  def dSASetItem(hdsa : Win32cr::UI::Controls::HDSA, i : Int32, pitem : Void*) : Win32cr::Foundation::BOOL
+    C.DSA_SetItem(hdsa, i, pitem)
+  end
+
+  def dSAClone(hdsa : Win32cr::UI::Controls::HDSA) : Win32cr::UI::Controls::HDSA
+    C.DSA_Clone(hdsa)
+  end
+
+  def dSAGetSize(hdsa : Win32cr::UI::Controls::HDSA) : UInt64
+    C.DSA_GetSize(hdsa)
+  end
+
+  def dSASort(pdsa : Win32cr::UI::Controls::HDSA, pfnCompare : Win32cr::UI::Controls::PFNDACOMPARE, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.DSA_Sort(pdsa, pfnCompare, lParam)
+  end
+
+  def dPACreate(cItemGrow : Int32) : Win32cr::UI::Controls::HDPA
+    C.DPA_Create(cItemGrow)
+  end
+
+  def dPACreateEx(cpGrow : Int32, hheap : Win32cr::Foundation::HANDLE) : Win32cr::UI::Controls::HDPA
+    C.DPA_CreateEx(cpGrow, hheap)
+  end
+
+  def dPAClone(hdpa : Win32cr::UI::Controls::HDPA, hdpaNew : Win32cr::UI::Controls::HDPA) : Win32cr::UI::Controls::HDPA
+    C.DPA_Clone(hdpa, hdpaNew)
+  end
+
+  def dPADestroy(hdpa : Win32cr::UI::Controls::HDPA) : Win32cr::Foundation::BOOL
+    C.DPA_Destroy(hdpa)
+  end
+
+  def dPADestroyCallback(hdpa : Win32cr::UI::Controls::HDPA, pfnCB : Win32cr::UI::Controls::PFNDAENUMCALLBACK, pData : Void*) : Void
+    C.DPA_DestroyCallback(hdpa, pfnCB, pData)
+  end
+
+  def dPADeletePtr(hdpa : Win32cr::UI::Controls::HDPA, i : Int32) : Void*
+    C.DPA_DeletePtr(hdpa, i)
+  end
+
+  def dPADeleteAllPtrs(hdpa : Win32cr::UI::Controls::HDPA) : Win32cr::Foundation::BOOL
+    C.DPA_DeleteAllPtrs(hdpa)
+  end
+
+  def dPAEnumCallback(hdpa : Win32cr::UI::Controls::HDPA, pfnCB : Win32cr::UI::Controls::PFNDAENUMCALLBACK, pData : Void*) : Void
+    C.DPA_EnumCallback(hdpa, pfnCB, pData)
+  end
+
+  def dPAGrow(pdpa : Win32cr::UI::Controls::HDPA, cp : Int32) : Win32cr::Foundation::BOOL
+    C.DPA_Grow(pdpa, cp)
+  end
+
+  def dPAInsertPtr(hdpa : Win32cr::UI::Controls::HDPA, i : Int32, p : Void*) : Int32
+    C.DPA_InsertPtr(hdpa, i, p)
+  end
+
+  def dPASetPtr(hdpa : Win32cr::UI::Controls::HDPA, i : Int32, p : Void*) : Win32cr::Foundation::BOOL
+    C.DPA_SetPtr(hdpa, i, p)
+  end
+
+  def dPAGetPtr(hdpa : Win32cr::UI::Controls::HDPA, i : LibC::IntPtrT) : Void*
+    C.DPA_GetPtr(hdpa, i)
+  end
+
+  def dPAGetPtrIndex(hdpa : Win32cr::UI::Controls::HDPA, p : Void*) : Int32
+    C.DPA_GetPtrIndex(hdpa, p)
+  end
+
+  def dPAGetSize(hdpa : Win32cr::UI::Controls::HDPA) : UInt64
+    C.DPA_GetSize(hdpa)
+  end
+
+  def dPASort(hdpa : Win32cr::UI::Controls::HDPA, pfnCompare : Win32cr::UI::Controls::PFNDACOMPARE, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.DPA_Sort(hdpa, pfnCompare, lParam)
+  end
+
+  def dPALoadStream(phdpa : Win32cr::UI::Controls::HDPA*, pfn : Win32cr::UI::Controls::PFNDPASTREAM, pstream : Void*, pvInstData : Void*) : Win32cr::Foundation::HRESULT
+    C.DPA_LoadStream(phdpa, pfn, pstream, pvInstData)
+  end
+
+  def dPASaveStream(hdpa : Win32cr::UI::Controls::HDPA, pfn : Win32cr::UI::Controls::PFNDPASTREAM, pstream : Void*, pvInstData : Void*) : Win32cr::Foundation::HRESULT
+    C.DPA_SaveStream(hdpa, pfn, pstream, pvInstData)
+  end
+
+  def dPAMerge(hdpaDest : Win32cr::UI::Controls::HDPA, hdpaSrc : Win32cr::UI::Controls::HDPA, dwFlags : UInt32, pfnCompare : Win32cr::UI::Controls::PFNDACOMPARE, pfnMerge : Win32cr::UI::Controls::PFNDPAMERGE, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.DPA_Merge(hdpaDest, hdpaSrc, dwFlags, pfnCompare, pfnMerge, lParam)
+  end
+
+  def dPASearch(hdpa : Win32cr::UI::Controls::HDPA, pFind : Void*, iStart : Int32, pfnCompare : Win32cr::UI::Controls::PFNDACOMPARE, lParam : Win32cr::Foundation::LPARAM, options : UInt32) : Int32
+    C.DPA_Search(hdpa, pFind, iStart, pfnCompare, lParam, options)
+  end
+
+  def strSetPtrW(ppsz : Win32cr::Foundation::PWSTR*, psz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.Str_SetPtrW(ppsz, psz)
+  end
+
+  def flatSBEnableScrollBar(param0 : Win32cr::Foundation::HWND, param1 : Int32, param2 : UInt32) : Win32cr::Foundation::BOOL
+    C.FlatSB_EnableScrollBar(param0, param1, param2)
+  end
+
+  def flatSBShowScrollBar(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, param2 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.FlatSB_ShowScrollBar(param0, code, param2)
+  end
+
+  def flatSBGetScrollRange(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, param2 : Int32*, param3 : Int32*) : Win32cr::Foundation::BOOL
+    C.FlatSB_GetScrollRange(param0, code, param2, param3)
+  end
+
+  def flatSBGetScrollInfo(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, param2 : Win32cr::UI::WindowsAndMessaging::SCROLLINFO*) : Win32cr::Foundation::BOOL
+    C.FlatSB_GetScrollInfo(param0, code, param2)
+  end
+
+  def flatSBGetScrollPos(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS) : Int32
+    C.FlatSB_GetScrollPos(param0, code)
+  end
+
+  def flatSBGetScrollProp(param0 : Win32cr::Foundation::HWND, propIndex : Win32cr::UI::Controls::WSB_PROP, param2 : Int32*) : Win32cr::Foundation::BOOL
+    C.FlatSB_GetScrollProp(param0, propIndex, param2)
+  end
+
+  def flatSBSetScrollPos(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, pos : Int32, fRedraw : Win32cr::Foundation::BOOL) : Int32
+    C.FlatSB_SetScrollPos(param0, code, pos, fRedraw)
+  end
+
+  def flatSBSetScrollInfo(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, psi : Win32cr::UI::WindowsAndMessaging::SCROLLINFO*, fRedraw : Win32cr::Foundation::BOOL) : Int32
+    C.FlatSB_SetScrollInfo(param0, code, psi, fRedraw)
+  end
+
+  def flatSBSetScrollRange(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, min : Int32, max : Int32, fRedraw : Win32cr::Foundation::BOOL) : Int32
+    C.FlatSB_SetScrollRange(param0, code, min, max, fRedraw)
+  end
+
+  def flatSBSetScrollProp(param0 : Win32cr::Foundation::HWND, index : Win32cr::UI::Controls::WSB_PROP, newValue : LibC::IntPtrT, param3 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.FlatSB_SetScrollProp(param0, index, newValue, param3)
+  end
+
+  def initializeFlatSB(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.InitializeFlatSB(param0)
+  end
+
+  def uninitializeFlatSB(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
+    C.UninitializeFlatSB(param0)
+  end
+
+  def loadIconMetric(hinst : Win32cr::Foundation::HINSTANCE, pszName : Win32cr::Foundation::PWSTR, lims : Win32cr::UI::Controls::LI_METRIC_, phico : Win32cr::UI::WindowsAndMessaging::HICON*) : Win32cr::Foundation::HRESULT
+    C.LoadIconMetric(hinst, pszName, lims, phico)
+  end
+
+  def loadIconWithScaleDown(hinst : Win32cr::Foundation::HINSTANCE, pszName : Win32cr::Foundation::PWSTR, cx : Int32, cy : Int32, phico : Win32cr::UI::WindowsAndMessaging::HICON*) : Win32cr::Foundation::HRESULT
+    C.LoadIconWithScaleDown(hinst, pszName, cx, cy, phico)
+  end
+
+  def drawShadowText(hdc : Win32cr::Graphics::Gdi::HDC, pszText : UInt16*, cch : UInt32, prc : Win32cr::Foundation::RECT*, dwFlags : UInt32, crText : UInt32, crShadow : UInt32, ixOffset : Int32, iyOffset : Int32) : Int32
+    C.DrawShadowText(hdc, pszText, cch, prc, dwFlags, crText, crShadow, ixOffset, iyOffset)
+  end
+
+  def imageListCoCreateInstance(rclsid : LibC::GUID*, punkOuter : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.ImageList_CoCreateInstance(rclsid, punkOuter, riid, ppv)
+  end
+
+  def beginPanningFeedback(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.BeginPanningFeedback(hwnd)
+  end
+
+  def updatePanningFeedback(hwnd : Win32cr::Foundation::HWND, lTotalOverpanOffsetX : Int32, lTotalOverpanOffsetY : Int32, fInInertia : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.UpdatePanningFeedback(hwnd, lTotalOverpanOffsetX, lTotalOverpanOffsetY, fInInertia)
+  end
+
+  def endPanningFeedback(hwnd : Win32cr::Foundation::HWND, fAnimateBack : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.EndPanningFeedback(hwnd, fAnimateBack)
+  end
+
+  def getThemeAnimationProperty(hTheme : LibC::IntPtrT, iStoryboardId : Int32, iTargetId : Int32, eProperty : Win32cr::UI::Controls::TA_PROPERTY, pvProperty : Void*, cbSize : UInt32, pcbSizeOut : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetThemeAnimationProperty(hTheme, iStoryboardId, iTargetId, eProperty, pvProperty, cbSize, pcbSizeOut)
+  end
+
+  def getThemeAnimationTransform(hTheme : LibC::IntPtrT, iStoryboardId : Int32, iTargetId : Int32, dwTransformIndex : UInt32, pTransform : Win32cr::UI::Controls::TA_TRANSFORM*, cbSize : UInt32, pcbSizeOut : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetThemeAnimationTransform(hTheme, iStoryboardId, iTargetId, dwTransformIndex, pTransform, cbSize, pcbSizeOut)
+  end
+
+  def getThemeTimingFunction(hTheme : LibC::IntPtrT, iTimingFunctionId : Int32, pTimingFunction : Win32cr::UI::Controls::TA_TIMINGFUNCTION*, cbSize : UInt32, pcbSizeOut : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetThemeTimingFunction(hTheme, iTimingFunctionId, pTimingFunction, cbSize, pcbSizeOut)
+  end
+
+  def openThemeData(hwnd : Win32cr::Foundation::HWND, pszClassList : Win32cr::Foundation::PWSTR) : LibC::IntPtrT
+    C.OpenThemeData(hwnd, pszClassList)
+  end
+
+  def openThemeDataEx(hwnd : Win32cr::Foundation::HWND, pszClassList : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::UI::Controls::OPEN_THEME_DATA_FLAGS) : LibC::IntPtrT
+    C.OpenThemeDataEx(hwnd, pszClassList, dwFlags)
+  end
+
+  def closeThemeData(hTheme : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
+    C.CloseThemeData(hTheme)
+  end
+
+  def drawThemeBackground(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pRect : Win32cr::Foundation::RECT*, pClipRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+    C.DrawThemeBackground(hTheme, hdc, iPartId, iStateId, pRect, pClipRect)
+  end
+
+  def drawThemeBackgroundEx(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pRect : Win32cr::Foundation::RECT*, pOptions : Win32cr::UI::Controls::DTBGOPTS*) : Win32cr::Foundation::HRESULT
+    C.DrawThemeBackgroundEx(hTheme, hdc, iPartId, iStateId, pRect, pOptions)
+  end
+
+  def drawThemeText(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pszText : UInt16*, cchText : Int32, dwTextFlags : UInt32, dwTextFlags2 : UInt32, pRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+    C.DrawThemeText(hTheme, hdc, iPartId, iStateId, pszText, cchText, dwTextFlags, dwTextFlags2, pRect)
+  end
+
+  def getThemeBackgroundContentRect(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pBoundingRect : Win32cr::Foundation::RECT*, pContentRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+    C.GetThemeBackgroundContentRect(hTheme, hdc, iPartId, iStateId, pBoundingRect, pContentRect)
+  end
+
+  def getThemeBackgroundExtent(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pContentRect : Win32cr::Foundation::RECT*, pExtentRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+    C.GetThemeBackgroundExtent(hTheme, hdc, iPartId, iStateId, pContentRect, pExtentRect)
+  end
+
+  def getThemeBackgroundRegion(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pRect : Win32cr::Foundation::RECT*, pRegion : Win32cr::Graphics::Gdi::HRGN*) : Win32cr::Foundation::HRESULT
+    C.GetThemeBackgroundRegion(hTheme, hdc, iPartId, iStateId, pRect, pRegion)
+  end
+
+  def getThemePartSize(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, prc : Win32cr::Foundation::RECT*, eSize : Win32cr::UI::Controls::THEMESIZE, psz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::HRESULT
+    C.GetThemePartSize(hTheme, hdc, iPartId, iStateId, prc, eSize, psz)
+  end
+
+  def getThemeTextExtent(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pszText : UInt16*, cchCharCount : Int32, dwTextFlags : UInt32, pBoundingRect : Win32cr::Foundation::RECT*, pExtentRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+    C.GetThemeTextExtent(hTheme, hdc, iPartId, iStateId, pszText, cchCharCount, dwTextFlags, pBoundingRect, pExtentRect)
+  end
+
+  def getThemeTextMetrics(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, ptm : Win32cr::Graphics::Gdi::TEXTMETRICW*) : Win32cr::Foundation::HRESULT
+    C.GetThemeTextMetrics(hTheme, hdc, iPartId, iStateId, ptm)
+  end
+
+  def hitTestThemeBackground(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, dwOptions : UInt32, pRect : Win32cr::Foundation::RECT*, hrgn : Win32cr::Graphics::Gdi::HRGN, ptTest : Win32cr::Foundation::POINT, pwHitTestCode : UInt16*) : Win32cr::Foundation::HRESULT
+    C.HitTestThemeBackground(hTheme, hdc, iPartId, iStateId, dwOptions, pRect, hrgn, ptTest, pwHitTestCode)
+  end
+
+  def drawThemeEdge(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pDestRect : Win32cr::Foundation::RECT*, uEdge : UInt32, uFlags : UInt32, pContentRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+    C.DrawThemeEdge(hTheme, hdc, iPartId, iStateId, pDestRect, uEdge, uFlags, pContentRect)
+  end
+
+  def drawThemeIcon(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pRect : Win32cr::Foundation::RECT*, himl : Win32cr::UI::Controls::HIMAGELIST, iImageIndex : Int32) : Win32cr::Foundation::HRESULT
+    C.DrawThemeIcon(hTheme, hdc, iPartId, iStateId, pRect, himl, iImageIndex)
+  end
+
+  def isThemePartDefined(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32) : Win32cr::Foundation::BOOL
+    C.IsThemePartDefined(hTheme, iPartId, iStateId)
+  end
+
+  def isThemeBackgroundPartiallyTransparent(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32) : Win32cr::Foundation::BOOL
+    C.IsThemeBackgroundPartiallyTransparent(hTheme, iPartId, iStateId)
+  end
+
+  def getThemeColor(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetThemeColor(hTheme, iPartId, iStateId, iPropId, pColor)
+  end
+
+  def getThemeMetric(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, iPropId : Win32cr::UI::Controls::THEME_PROPERTY_SYMBOL_ID, piVal : Int32*) : Win32cr::Foundation::HRESULT
+    C.GetThemeMetric(hTheme, hdc, iPartId, iStateId, iPropId, piVal)
+  end
+
+  def getThemeString(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pszBuff : UInt16*, cchMaxBuffChars : Int32) : Win32cr::Foundation::HRESULT
+    C.GetThemeString(hTheme, iPartId, iStateId, iPropId, pszBuff, cchMaxBuffChars)
+  end
+
+  def getThemeBool(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Win32cr::UI::Controls::THEME_PROPERTY_SYMBOL_ID, pfVal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.GetThemeBool(hTheme, iPartId, iStateId, iPropId, pfVal)
+  end
+
+  def getThemeInt(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, piVal : Int32*) : Win32cr::Foundation::HRESULT
+    C.GetThemeInt(hTheme, iPartId, iStateId, iPropId, piVal)
+  end
+
+  def getThemeEnumValue(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, piVal : Int32*) : Win32cr::Foundation::HRESULT
+    C.GetThemeEnumValue(hTheme, iPartId, iStateId, iPropId, piVal)
+  end
+
+  def getThemePosition(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::HRESULT
+    C.GetThemePosition(hTheme, iPartId, iStateId, iPropId, pPoint)
+  end
+
+  def getThemeFont(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, iPropId : Int32, pFont : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::HRESULT
+    C.GetThemeFont(hTheme, hdc, iPartId, iStateId, iPropId, pFont)
+  end
+
+  def getThemeRect(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+    C.GetThemeRect(hTheme, iPartId, iStateId, iPropId, pRect)
+  end
+
+  def getThemeMargins(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, iPropId : Int32, prc : Win32cr::Foundation::RECT*, pMargins : Win32cr::UI::Controls::MARGINS*) : Win32cr::Foundation::HRESULT
+    C.GetThemeMargins(hTheme, hdc, iPartId, iStateId, iPropId, prc, pMargins)
+  end
+
+  def getThemeIntList(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pIntList : Win32cr::UI::Controls::INTLIST*) : Win32cr::Foundation::HRESULT
+    C.GetThemeIntList(hTheme, iPartId, iStateId, iPropId, pIntList)
+  end
+
+  def getThemePropertyOrigin(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pOrigin : Win32cr::UI::Controls::PROPERTYORIGIN*) : Win32cr::Foundation::HRESULT
+    C.GetThemePropertyOrigin(hTheme, iPartId, iStateId, iPropId, pOrigin)
+  end
+
+  def setWindowTheme(hwnd : Win32cr::Foundation::HWND, pszSubAppName : Win32cr::Foundation::PWSTR, pszSubIdList : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.SetWindowTheme(hwnd, pszSubAppName, pszSubIdList)
+  end
+
+  def getThemeFilename(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pszThemeFileName : UInt16*, cchMaxBuffChars : Int32) : Win32cr::Foundation::HRESULT
+    C.GetThemeFilename(hTheme, iPartId, iStateId, iPropId, pszThemeFileName, cchMaxBuffChars)
+  end
+
+  def getThemeSysColor(hTheme : LibC::IntPtrT, iColorId : Int32) : UInt32
+    C.GetThemeSysColor(hTheme, iColorId)
+  end
+
+  def getThemeSysColorBrush(hTheme : LibC::IntPtrT, iColorId : Win32cr::UI::Controls::THEME_PROPERTY_SYMBOL_ID) : Win32cr::Graphics::Gdi::HBRUSH
+    C.GetThemeSysColorBrush(hTheme, iColorId)
+  end
+
+  def getThemeSysBool(hTheme : LibC::IntPtrT, iBoolId : Int32) : Win32cr::Foundation::BOOL
+    C.GetThemeSysBool(hTheme, iBoolId)
+  end
+
+  def getThemeSysSize(hTheme : LibC::IntPtrT, iSizeId : Int32) : Int32
+    C.GetThemeSysSize(hTheme, iSizeId)
+  end
+
+  def getThemeSysFont(hTheme : LibC::IntPtrT, iFontId : Win32cr::UI::Controls::THEME_PROPERTY_SYMBOL_ID, plf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::HRESULT
+    C.GetThemeSysFont(hTheme, iFontId, plf)
+  end
+
+  def getThemeSysString(hTheme : LibC::IntPtrT, iStringId : Win32cr::UI::Controls::THEME_PROPERTY_SYMBOL_ID, pszStringBuff : UInt16*, cchMaxStringChars : Int32) : Win32cr::Foundation::HRESULT
+    C.GetThemeSysString(hTheme, iStringId, pszStringBuff, cchMaxStringChars)
+  end
+
+  def getThemeSysInt(hTheme : LibC::IntPtrT, iIntId : Int32, piValue : Int32*) : Win32cr::Foundation::HRESULT
+    C.GetThemeSysInt(hTheme, iIntId, piValue)
+  end
+
+  def isThemeActive : Win32cr::Foundation::BOOL
+    C.IsThemeActive
+  end
+
+  def isAppThemed : Win32cr::Foundation::BOOL
+    C.IsAppThemed
+  end
+
+  def getWindowTheme(hwnd : Win32cr::Foundation::HWND) : LibC::IntPtrT
+    C.GetWindowTheme(hwnd)
+  end
+
+  def enableThemeDialogTexture(hwnd : Win32cr::Foundation::HWND, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.EnableThemeDialogTexture(hwnd, dwFlags)
+  end
+
+  def isThemeDialogTextureEnabled(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.IsThemeDialogTextureEnabled(hwnd)
+  end
+
+  def getThemeAppProperties : UInt32
+    C.GetThemeAppProperties
+  end
+
+  def setThemeAppProperties(dwFlags : UInt32) : Void
+    C.SetThemeAppProperties(dwFlags)
+  end
+
+  def getCurrentThemeName(pszThemeFileName : UInt16*, cchMaxNameChars : Int32, pszColorBuff : UInt16*, cchMaxColorChars : Int32, pszSizeBuff : UInt16*, cchMaxSizeChars : Int32) : Win32cr::Foundation::HRESULT
+    C.GetCurrentThemeName(pszThemeFileName, cchMaxNameChars, pszColorBuff, cchMaxColorChars, pszSizeBuff, cchMaxSizeChars)
+  end
+
+  def getThemeDocumentationProperty(pszThemeName : Win32cr::Foundation::PWSTR, pszPropertyName : Win32cr::Foundation::PWSTR, pszValueBuff : UInt16*, cchMaxValChars : Int32) : Win32cr::Foundation::HRESULT
+    C.GetThemeDocumentationProperty(pszThemeName, pszPropertyName, pszValueBuff, cchMaxValChars)
+  end
+
+  def drawThemeParentBackground(hwnd : Win32cr::Foundation::HWND, hdc : Win32cr::Graphics::Gdi::HDC, prc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+    C.DrawThemeParentBackground(hwnd, hdc, prc)
+  end
+
+  def enableTheming(fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.EnableTheming(fEnable)
+  end
+
+  def drawThemeParentBackgroundEx(hwnd : Win32cr::Foundation::HWND, hdc : Win32cr::Graphics::Gdi::HDC, dwFlags : Win32cr::UI::Controls::DRAW_THEME_PARENT_BACKGROUND_FLAGS, prc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+    C.DrawThemeParentBackgroundEx(hwnd, hdc, dwFlags, prc)
+  end
+
+  def setWindowThemeAttribute(hwnd : Win32cr::Foundation::HWND, eAttribute : Win32cr::UI::Controls::WINDOWTHEMEATTRIBUTETYPE, pvAttribute : Void*, cbAttribute : UInt32) : Win32cr::Foundation::HRESULT
+    C.SetWindowThemeAttribute(hwnd, eAttribute, pvAttribute, cbAttribute)
+  end
+
+  def drawThemeTextEx(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pszText : UInt16*, cchText : Int32, dwTextFlags : UInt32, pRect : Win32cr::Foundation::RECT*, pOptions : Win32cr::UI::Controls::DTTOPTS*) : Win32cr::Foundation::HRESULT
+    C.DrawThemeTextEx(hTheme, hdc, iPartId, iStateId, pszText, cchText, dwTextFlags, pRect, pOptions)
+  end
+
+  def getThemeBitmap(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Win32cr::UI::Controls::THEME_PROPERTY_SYMBOL_ID, dwFlags : Win32cr::UI::Controls::GET_THEME_BITMAP_FLAGS, phBitmap : Win32cr::Graphics::Gdi::HBITMAP*) : Win32cr::Foundation::HRESULT
+    C.GetThemeBitmap(hTheme, iPartId, iStateId, iPropId, dwFlags, phBitmap)
+  end
+
+  def getThemeStream(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, ppvStream : Void**, pcbStream : UInt32*, hInst : Win32cr::Foundation::HINSTANCE) : Win32cr::Foundation::HRESULT
+    C.GetThemeStream(hTheme, iPartId, iStateId, iPropId, ppvStream, pcbStream, hInst)
+  end
+
+  def bufferedPaintInit : Win32cr::Foundation::HRESULT
+    C.BufferedPaintInit
+  end
+
+  def bufferedPaintUnInit : Win32cr::Foundation::HRESULT
+    C.BufferedPaintUnInit
+  end
+
+  def beginBufferedPaint(hdcTarget : Win32cr::Graphics::Gdi::HDC, prcTarget : Win32cr::Foundation::RECT*, dwFormat : Win32cr::UI::Controls::BP_BUFFERFORMAT, pPaintParams : Win32cr::UI::Controls::BP_PAINTPARAMS*, phdc : Win32cr::Graphics::Gdi::HDC*) : LibC::IntPtrT
+    C.BeginBufferedPaint(hdcTarget, prcTarget, dwFormat, pPaintParams, phdc)
+  end
+
+  def endBufferedPaint(hBufferedPaint : LibC::IntPtrT, fUpdateTarget : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.EndBufferedPaint(hBufferedPaint, fUpdateTarget)
+  end
+
+  def getBufferedPaintTargetRect(hBufferedPaint : LibC::IntPtrT, prc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+    C.GetBufferedPaintTargetRect(hBufferedPaint, prc)
+  end
+
+  def getBufferedPaintTargetDC(hBufferedPaint : LibC::IntPtrT) : Win32cr::Graphics::Gdi::HDC
+    C.GetBufferedPaintTargetDC(hBufferedPaint)
+  end
+
+  def getBufferedPaintDC(hBufferedPaint : LibC::IntPtrT) : Win32cr::Graphics::Gdi::HDC
+    C.GetBufferedPaintDC(hBufferedPaint)
+  end
+
+  def getBufferedPaintBits(hBufferedPaint : LibC::IntPtrT, ppbBuffer : Win32cr::Graphics::Gdi::RGBQUAD**, pcxRow : Int32*) : Win32cr::Foundation::HRESULT
+    C.GetBufferedPaintBits(hBufferedPaint, ppbBuffer, pcxRow)
+  end
+
+  def bufferedPaintClear(hBufferedPaint : LibC::IntPtrT, prc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+    C.BufferedPaintClear(hBufferedPaint, prc)
+  end
+
+  def bufferedPaintSetAlpha(hBufferedPaint : LibC::IntPtrT, prc : Win32cr::Foundation::RECT*, alpha : UInt8) : Win32cr::Foundation::HRESULT
+    C.BufferedPaintSetAlpha(hBufferedPaint, prc, alpha)
+  end
+
+  def bufferedPaintStopAllAnimations(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
+    C.BufferedPaintStopAllAnimations(hwnd)
+  end
+
+  def beginBufferedAnimation(hwnd : Win32cr::Foundation::HWND, hdcTarget : Win32cr::Graphics::Gdi::HDC, prcTarget : Win32cr::Foundation::RECT*, dwFormat : Win32cr::UI::Controls::BP_BUFFERFORMAT, pPaintParams : Win32cr::UI::Controls::BP_PAINTPARAMS*, pAnimationParams : Win32cr::UI::Controls::BP_ANIMATIONPARAMS*, phdcFrom : Win32cr::Graphics::Gdi::HDC*, phdcTo : Win32cr::Graphics::Gdi::HDC*) : LibC::IntPtrT
+    C.BeginBufferedAnimation(hwnd, hdcTarget, prcTarget, dwFormat, pPaintParams, pAnimationParams, phdcFrom, phdcTo)
+  end
+
+  def endBufferedAnimation(hbpAnimation : LibC::IntPtrT, fUpdateTarget : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.EndBufferedAnimation(hbpAnimation, fUpdateTarget)
+  end
+
+  def bufferedPaintRenderAnimation(hwnd : Win32cr::Foundation::HWND, hdcTarget : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    C.BufferedPaintRenderAnimation(hwnd, hdcTarget)
+  end
+
+  def isCompositionActive : Win32cr::Foundation::BOOL
+    C.IsCompositionActive
+  end
+
+  def getThemeTransitionDuration(hTheme : LibC::IntPtrT, iPartId : Int32, iStateIdFrom : Int32, iStateIdTo : Int32, iPropId : Int32, pdwDuration : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetThemeTransitionDuration(hTheme, iPartId, iStateIdFrom, iStateIdTo, iPropId, pdwDuration)
+  end
+
+  def checkDlgButton(hDlg : Win32cr::Foundation::HWND, nIDButton : Int32, uCheck : Win32cr::UI::Controls::DLG_BUTTON_CHECK_STATE) : Win32cr::Foundation::BOOL
+    C.CheckDlgButton(hDlg, nIDButton, uCheck)
+  end
+
+  def checkRadioButton(hDlg : Win32cr::Foundation::HWND, nIDFirstButton : Int32, nIDLastButton : Int32, nIDCheckButton : Int32) : Win32cr::Foundation::BOOL
+    C.CheckRadioButton(hDlg, nIDFirstButton, nIDLastButton, nIDCheckButton)
+  end
+
+  def isDlgButtonChecked(hDlg : Win32cr::Foundation::HWND, nIDButton : Int32) : UInt32
+    C.IsDlgButtonChecked(hDlg, nIDButton)
+  end
+
+  def isCharLowerW(ch : UInt16) : Win32cr::Foundation::BOOL
+    C.IsCharLowerW(ch)
+  end
+
+  def createSyntheticPointerDevice(pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE, maxCount : UInt32, mode : Win32cr::UI::Controls::POINTER_FEEDBACK_MODE) : Win32cr::UI::Controls::HSYNTHETICPOINTERDEVICE
+    C.CreateSyntheticPointerDevice(pointerType, maxCount, mode)
+  end
+
+  def destroySyntheticPointerDevice(device : Win32cr::UI::Controls::HSYNTHETICPOINTERDEVICE) : Void
+    C.DestroySyntheticPointerDevice(device)
+  end
+
+  def registerTouchHitTestingWindow(hwnd : Win32cr::Foundation::HWND, value : UInt32) : Win32cr::Foundation::BOOL
+    C.RegisterTouchHitTestingWindow(hwnd, value)
+  end
+
+  def evaluateProximityToRect(controlBoundingBox : Win32cr::Foundation::RECT*, pHitTestingInput : Win32cr::UI::Controls::TOUCH_HIT_TESTING_INPUT*, pProximityEval : Win32cr::UI::Controls::TOUCH_HIT_TESTING_PROXIMITY_EVALUATION*) : Win32cr::Foundation::BOOL
+    C.EvaluateProximityToRect(controlBoundingBox, pHitTestingInput, pProximityEval)
+  end
+
+  def evaluateProximityToPolygon(numVertices : UInt32, controlPolygon : Win32cr::Foundation::POINT*, pHitTestingInput : Win32cr::UI::Controls::TOUCH_HIT_TESTING_INPUT*, pProximityEval : Win32cr::UI::Controls::TOUCH_HIT_TESTING_PROXIMITY_EVALUATION*) : Win32cr::Foundation::BOOL
+    C.EvaluateProximityToPolygon(numVertices, controlPolygon, pHitTestingInput, pProximityEval)
+  end
+
+  def packTouchHitTestingProximityEvaluation(pHitTestingInput : Win32cr::UI::Controls::TOUCH_HIT_TESTING_INPUT*, pProximityEval : Win32cr::UI::Controls::TOUCH_HIT_TESTING_PROXIMITY_EVALUATION*) : Win32cr::Foundation::LRESULT
+    C.PackTouchHitTestingProximityEvaluation(pHitTestingInput, pProximityEval)
+  end
+
+  def getWindowFeedbackSetting(hwnd : Win32cr::Foundation::HWND, feedback : Win32cr::UI::Controls::FEEDBACK_TYPE, dwFlags : UInt32, pSize : UInt32*, config : Void*) : Win32cr::Foundation::BOOL
+    C.GetWindowFeedbackSetting(hwnd, feedback, dwFlags, pSize, config)
+  end
+
+  def setWindowFeedbackSetting(hwnd : Win32cr::Foundation::HWND, feedback : Win32cr::UI::Controls::FEEDBACK_TYPE, dwFlags : UInt32, size : UInt32, configuration : Void*) : Win32cr::Foundation::BOOL
+    C.SetWindowFeedbackSetting(hwnd, feedback, dwFlags, size, configuration)
+  end
+
+  def setScrollPos(hWnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, nPos : Int32, bRedraw : Win32cr::Foundation::BOOL) : Int32
+    C.SetScrollPos(hWnd, nBar, nPos, bRedraw)
+  end
+
+  def setScrollRange(hWnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, nMinPos : Int32, nMaxPos : Int32, bRedraw : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SetScrollRange(hWnd, nBar, nMinPos, nMaxPos, bRedraw)
+  end
+
+  def showScrollBar(hWnd : Win32cr::Foundation::HWND, wBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, bShow : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.ShowScrollBar(hWnd, wBar, bShow)
+  end
+
+  def enableScrollBar(hWnd : Win32cr::Foundation::HWND, wSBflags : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, wArrows : Win32cr::UI::Controls::ENABLE_SCROLL_BAR_ARROWS) : Win32cr::Foundation::BOOL
+    C.EnableScrollBar(hWnd, wSBflags, wArrows)
+  end
+
+  def dlgDirListA(hDlg : Win32cr::Foundation::HWND, lpPathSpec : Win32cr::Foundation::PSTR, nIDListBox : Int32, nIDStaticPath : Int32, uFileType : Win32cr::UI::Controls::DLG_DIR_LIST_FILE_TYPE) : Int32
+    C.DlgDirListA(hDlg, lpPathSpec, nIDListBox, nIDStaticPath, uFileType)
+  end
+
+  def dlgDirListW(hDlg : Win32cr::Foundation::HWND, lpPathSpec : Win32cr::Foundation::PWSTR, nIDListBox : Int32, nIDStaticPath : Int32, uFileType : Win32cr::UI::Controls::DLG_DIR_LIST_FILE_TYPE) : Int32
+    C.DlgDirListW(hDlg, lpPathSpec, nIDListBox, nIDStaticPath, uFileType)
+  end
+
+  def dlgDirSelectExA(hwndDlg : Win32cr::Foundation::HWND, lpString : UInt8*, chCount : Int32, idListBox : Int32) : Win32cr::Foundation::BOOL
+    C.DlgDirSelectExA(hwndDlg, lpString, chCount, idListBox)
+  end
+
+  def dlgDirSelectExW(hwndDlg : Win32cr::Foundation::HWND, lpString : UInt16*, chCount : Int32, idListBox : Int32) : Win32cr::Foundation::BOOL
+    C.DlgDirSelectExW(hwndDlg, lpString, chCount, idListBox)
+  end
+
+  def dlgDirListComboBoxA(hDlg : Win32cr::Foundation::HWND, lpPathSpec : Win32cr::Foundation::PSTR, nIDComboBox : Int32, nIDStaticPath : Int32, uFiletype : Win32cr::UI::Controls::DLG_DIR_LIST_FILE_TYPE) : Int32
+    C.DlgDirListComboBoxA(hDlg, lpPathSpec, nIDComboBox, nIDStaticPath, uFiletype)
+  end
+
+  def dlgDirListComboBoxW(hDlg : Win32cr::Foundation::HWND, lpPathSpec : Win32cr::Foundation::PWSTR, nIDComboBox : Int32, nIDStaticPath : Int32, uFiletype : Win32cr::UI::Controls::DLG_DIR_LIST_FILE_TYPE) : Int32
+    C.DlgDirListComboBoxW(hDlg, lpPathSpec, nIDComboBox, nIDStaticPath, uFiletype)
+  end
+
+  def dlgDirSelectComboBoxExA(hwndDlg : Win32cr::Foundation::HWND, lpString : UInt8*, cchOut : Int32, idComboBox : Int32) : Win32cr::Foundation::BOOL
+    C.DlgDirSelectComboBoxExA(hwndDlg, lpString, cchOut, idComboBox)
+  end
+
+  def dlgDirSelectComboBoxExW(hwndDlg : Win32cr::Foundation::HWND, lpString : UInt16*, cchOut : Int32, idComboBox : Int32) : Win32cr::Foundation::BOOL
+    C.DlgDirSelectComboBoxExW(hwndDlg, lpString, cchOut, idComboBox)
+  end
+
+  def setScrollInfo(hwnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, lpsi : Win32cr::UI::WindowsAndMessaging::SCROLLINFO*, redraw : Win32cr::Foundation::BOOL) : Int32
+    C.SetScrollInfo(hwnd, nBar, lpsi, redraw)
+  end
+
+  def getComboBoxInfo(hwndCombo : Win32cr::Foundation::HWND, pcbi : Win32cr::UI::Controls::COMBOBOXINFO*) : Win32cr::Foundation::BOOL
+    C.GetComboBoxInfo(hwndCombo, pcbi)
+  end
+
+  def getListBoxInfo(hwnd : Win32cr::Foundation::HWND) : UInt32
+    C.GetListBoxInfo(hwnd)
+  end
+
+  def registerPointerDeviceNotifications(window : Win32cr::Foundation::HWND, notifyRange : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.RegisterPointerDeviceNotifications(window, notifyRange)
+  end
+
   @[Link("comctl32")]
   @[Link("uxtheme")]
   @[Link("user32")]
   lib C
+    # :nodoc:
     fun CreatePropertySheetPageA(constPropSheetPagePointer : Win32cr::UI::Controls::PROPSHEETPAGEA*) : Win32cr::UI::Controls::HPROPSHEETPAGE
 
+    # :nodoc:
     fun CreatePropertySheetPageW(constPropSheetPagePointer : Win32cr::UI::Controls::PROPSHEETPAGEW*) : Win32cr::UI::Controls::HPROPSHEETPAGE
 
+    # :nodoc:
     fun DestroyPropertySheetPage(param0 : Win32cr::UI::Controls::HPROPSHEETPAGE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PropertySheetA(param0 : Win32cr::UI::Controls::PROPSHEETHEADERA_V2*) : LibC::IntPtrT
 
+    # :nodoc:
     fun PropertySheetW(param0 : Win32cr::UI::Controls::PROPSHEETHEADERW_V2*) : LibC::IntPtrT
 
+    # :nodoc:
     fun InitCommonControls : Void
 
+    # :nodoc:
     fun InitCommonControlsEx(picce : Win32cr::UI::Controls::INITCOMMONCONTROLSEX*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_Create(cx : Int32, cy : Int32, flags : Win32cr::UI::Controls::IMAGELIST_CREATION_FLAGS, cInitial : Int32, cGrow : Int32) : Win32cr::UI::Controls::HIMAGELIST
 
+    # :nodoc:
     fun ImageList_Destroy(himl : Win32cr::UI::Controls::HIMAGELIST) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_GetImageCount(himl : Win32cr::UI::Controls::HIMAGELIST) : Int32
 
+    # :nodoc:
     fun ImageList_SetImageCount(himl : Win32cr::UI::Controls::HIMAGELIST, uNewCount : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_Add(himl : Win32cr::UI::Controls::HIMAGELIST, hbmImage : Win32cr::Graphics::Gdi::HBITMAP, hbmMask : Win32cr::Graphics::Gdi::HBITMAP) : Int32
 
+    # :nodoc:
     fun ImageList_ReplaceIcon(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32, hicon : Win32cr::UI::WindowsAndMessaging::HICON) : Int32
 
+    # :nodoc:
     fun ImageList_SetBkColor(himl : Win32cr::UI::Controls::HIMAGELIST, clrBk : UInt32) : UInt32
 
+    # :nodoc:
     fun ImageList_GetBkColor(himl : Win32cr::UI::Controls::HIMAGELIST) : UInt32
 
+    # :nodoc:
     fun ImageList_SetOverlayImage(himl : Win32cr::UI::Controls::HIMAGELIST, iImage : Int32, iOverlay : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_Draw(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32, hdcDst : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, fStyle : Win32cr::UI::Controls::IMAGE_LIST_DRAW_STYLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_Replace(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32, hbmImage : Win32cr::Graphics::Gdi::HBITMAP, hbmMask : Win32cr::Graphics::Gdi::HBITMAP) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_AddMasked(himl : Win32cr::UI::Controls::HIMAGELIST, hbmImage : Win32cr::Graphics::Gdi::HBITMAP, crMask : UInt32) : Int32
 
+    # :nodoc:
     fun ImageList_DrawEx(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32, hdcDst : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, dx : Int32, dy : Int32, rgbBk : UInt32, rgbFg : UInt32, fStyle : Win32cr::UI::Controls::IMAGE_LIST_DRAW_STYLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_DrawIndirect(pimldp : Win32cr::UI::Controls::IMAGELISTDRAWPARAMS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_Remove(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_GetIcon(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32, flags : UInt32) : Win32cr::UI::WindowsAndMessaging::HICON
 
+    # :nodoc:
     fun ImageList_LoadImageA(hi : Win32cr::Foundation::HINSTANCE, lpbmp : Win32cr::Foundation::PSTR, cx : Int32, cGrow : Int32, crMask : UInt32, uType : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::UI::Controls::HIMAGELIST
 
+    # :nodoc:
     fun ImageList_LoadImageW(hi : Win32cr::Foundation::HINSTANCE, lpbmp : Win32cr::Foundation::PWSTR, cx : Int32, cGrow : Int32, crMask : UInt32, uType : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::UI::Controls::HIMAGELIST
 
+    # :nodoc:
     fun ImageList_Copy(himlDst : Win32cr::UI::Controls::HIMAGELIST, iDst : Int32, himlSrc : Win32cr::UI::Controls::HIMAGELIST, iSrc : Int32, uFlags : Win32cr::UI::Controls::IMAGE_LIST_COPY_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_BeginDrag(himlTrack : Win32cr::UI::Controls::HIMAGELIST, iTrack : Int32, dxHotspot : Int32, dyHotspot : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_EndDrag : Void
 
+    # :nodoc:
     fun ImageList_DragEnter(hwndLock : Win32cr::Foundation::HWND, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_DragLeave(hwndLock : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_DragMove(x : Int32, y : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_SetDragCursorImage(himlDrag : Win32cr::UI::Controls::HIMAGELIST, iDrag : Int32, dxHotspot : Int32, dyHotspot : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_DragShowNolock(fShow : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_GetDragImage(ppt : Win32cr::Foundation::POINT*, pptHotspot : Win32cr::Foundation::POINT*) : Win32cr::UI::Controls::HIMAGELIST
 
+    # :nodoc:
     fun ImageList_Read(pstm : Void*) : Win32cr::UI::Controls::HIMAGELIST
 
+    # :nodoc:
     fun ImageList_Write(himl : Win32cr::UI::Controls::HIMAGELIST, pstm : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_ReadEx(dwFlags : UInt32, pstm : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ImageList_WriteEx(himl : Win32cr::UI::Controls::HIMAGELIST, dwFlags : UInt32, pstm : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ImageList_GetIconSize(himl : Win32cr::UI::Controls::HIMAGELIST, cx : Int32*, cy : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_SetIconSize(himl : Win32cr::UI::Controls::HIMAGELIST, cx : Int32, cy : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_GetImageInfo(himl : Win32cr::UI::Controls::HIMAGELIST, i : Int32, pImageInfo : Win32cr::UI::Controls::IMAGEINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImageList_Merge(himl1 : Win32cr::UI::Controls::HIMAGELIST, i1 : Int32, himl2 : Win32cr::UI::Controls::HIMAGELIST, i2 : Int32, dx : Int32, dy : Int32) : Win32cr::UI::Controls::HIMAGELIST
 
+    # :nodoc:
     fun ImageList_Duplicate(himl : Win32cr::UI::Controls::HIMAGELIST) : Win32cr::UI::Controls::HIMAGELIST
 
+    # :nodoc:
     fun HIMAGELIST_QueryInterface(himl : Win32cr::UI::Controls::HIMAGELIST, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateToolbarEx(hwnd : Win32cr::Foundation::HWND, ws : UInt32, wID : UInt32, nBitmaps : Int32, hBMInst : Win32cr::Foundation::HINSTANCE, wBMID : LibC::UIntPtrT, lpButtons : Win32cr::UI::Controls::TBBUTTON*, iNumButtons : Int32, dxButton : Int32, dyButton : Int32, dxBitmap : Int32, dyBitmap : Int32, uStructSize : UInt32) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun CreateMappedBitmap(hInstance : Win32cr::Foundation::HINSTANCE, idBitmap : LibC::IntPtrT, wFlags : UInt32, lpColorMap : Win32cr::UI::Controls::COLORMAP*, iNumMaps : Int32) : Win32cr::Graphics::Gdi::HBITMAP
 
+    # :nodoc:
     fun DrawStatusTextA(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*, pszText : Win32cr::Foundation::PSTR, uFlags : UInt32) : Void
 
+    # :nodoc:
     fun DrawStatusTextW(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*, pszText : Win32cr::Foundation::PWSTR, uFlags : UInt32) : Void
 
+    # :nodoc:
     fun CreateStatusWindowA(style : Int32, lpszText : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND, wID : UInt32) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun CreateStatusWindowW(style : Int32, lpszText : Win32cr::Foundation::PWSTR, hwndParent : Win32cr::Foundation::HWND, wID : UInt32) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun MenuHelp(uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, hMainMenu : Win32cr::UI::WindowsAndMessaging::HMENU, hInst : Win32cr::Foundation::HINSTANCE, hwndStatus : Win32cr::Foundation::HWND, lpwIDs : UInt32*) : Void
 
+    # :nodoc:
     fun ShowHideMenuCtl(hWnd : Win32cr::Foundation::HWND, uFlags : LibC::UIntPtrT, lpInfo : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetEffectiveClientRect(hWnd : Win32cr::Foundation::HWND, lprc : Win32cr::Foundation::RECT*, lpInfo : Int32*) : Void
 
+    # :nodoc:
     fun MakeDragList(hLB : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DrawInsert(handParent : Win32cr::Foundation::HWND, hLB : Win32cr::Foundation::HWND, nItem : Int32) : Void
 
+    # :nodoc:
     fun LBItemFromPt(hLB : Win32cr::Foundation::HWND, pt : Win32cr::Foundation::POINT, bAutoScroll : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun CreateUpDownControl(dwStyle : UInt32, x : Int32, y : Int32, cx : Int32, cy : Int32, hParent : Win32cr::Foundation::HWND, nID : Int32, hInst : Win32cr::Foundation::HINSTANCE, hBuddy : Win32cr::Foundation::HWND, nUpper : Int32, nLower : Int32, nPos : Int32) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun TaskDialogIndirect(pTaskConfig : Win32cr::UI::Controls::TASKDIALOGCONFIG*, pnButton : Int32*, pnRadioButton : Int32*, pfVerificationFlagChecked : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TaskDialog(hwndOwner : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, pszWindowTitle : Win32cr::Foundation::PWSTR, pszMainInstruction : Win32cr::Foundation::PWSTR, pszContent : Win32cr::Foundation::PWSTR, dwCommonButtons : Win32cr::UI::Controls::TASKDIALOG_COMMON_BUTTON_FLAGS, pszIcon : Win32cr::Foundation::PWSTR, pnButton : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitMUILanguage(uiLang : UInt16) : Void
 
+    # :nodoc:
     fun GetMUILanguage : UInt16
 
+    # :nodoc:
     fun DSA_Create(cbItem : Int32, cItemGrow : Int32) : Win32cr::UI::Controls::HDSA
 
+    # :nodoc:
     fun DSA_Destroy(hdsa : Win32cr::UI::Controls::HDSA) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DSA_DestroyCallback(hdsa : Win32cr::UI::Controls::HDSA, pfnCB : Win32cr::UI::Controls::PFNDAENUMCALLBACK, pData : Void*) : Void
 
+    # :nodoc:
     fun DSA_DeleteItem(hdsa : Win32cr::UI::Controls::HDSA, i : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DSA_DeleteAllItems(hdsa : Win32cr::UI::Controls::HDSA) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DSA_EnumCallback(hdsa : Win32cr::UI::Controls::HDSA, pfnCB : Win32cr::UI::Controls::PFNDAENUMCALLBACK, pData : Void*) : Void
 
+    # :nodoc:
     fun DSA_InsertItem(hdsa : Win32cr::UI::Controls::HDSA, i : Int32, pitem : Void*) : Int32
 
+    # :nodoc:
     fun DSA_GetItemPtr(hdsa : Win32cr::UI::Controls::HDSA, i : Int32) : Void*
 
+    # :nodoc:
     fun DSA_GetItem(hdsa : Win32cr::UI::Controls::HDSA, i : Int32, pitem : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DSA_SetItem(hdsa : Win32cr::UI::Controls::HDSA, i : Int32, pitem : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DSA_Clone(hdsa : Win32cr::UI::Controls::HDSA) : Win32cr::UI::Controls::HDSA
 
+    # :nodoc:
     fun DSA_GetSize(hdsa : Win32cr::UI::Controls::HDSA) : UInt64
 
+    # :nodoc:
     fun DSA_Sort(pdsa : Win32cr::UI::Controls::HDSA, pfnCompare : Win32cr::UI::Controls::PFNDACOMPARE, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DPA_Create(cItemGrow : Int32) : Win32cr::UI::Controls::HDPA
 
+    # :nodoc:
     fun DPA_CreateEx(cpGrow : Int32, hheap : Win32cr::Foundation::HANDLE) : Win32cr::UI::Controls::HDPA
 
+    # :nodoc:
     fun DPA_Clone(hdpa : Win32cr::UI::Controls::HDPA, hdpaNew : Win32cr::UI::Controls::HDPA) : Win32cr::UI::Controls::HDPA
 
+    # :nodoc:
     fun DPA_Destroy(hdpa : Win32cr::UI::Controls::HDPA) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DPA_DestroyCallback(hdpa : Win32cr::UI::Controls::HDPA, pfnCB : Win32cr::UI::Controls::PFNDAENUMCALLBACK, pData : Void*) : Void
 
+    # :nodoc:
     fun DPA_DeletePtr(hdpa : Win32cr::UI::Controls::HDPA, i : Int32) : Void*
 
+    # :nodoc:
     fun DPA_DeleteAllPtrs(hdpa : Win32cr::UI::Controls::HDPA) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DPA_EnumCallback(hdpa : Win32cr::UI::Controls::HDPA, pfnCB : Win32cr::UI::Controls::PFNDAENUMCALLBACK, pData : Void*) : Void
 
+    # :nodoc:
     fun DPA_Grow(pdpa : Win32cr::UI::Controls::HDPA, cp : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DPA_InsertPtr(hdpa : Win32cr::UI::Controls::HDPA, i : Int32, p : Void*) : Int32
 
+    # :nodoc:
     fun DPA_SetPtr(hdpa : Win32cr::UI::Controls::HDPA, i : Int32, p : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DPA_GetPtr(hdpa : Win32cr::UI::Controls::HDPA, i : LibC::IntPtrT) : Void*
 
+    # :nodoc:
     fun DPA_GetPtrIndex(hdpa : Win32cr::UI::Controls::HDPA, p : Void*) : Int32
 
+    # :nodoc:
     fun DPA_GetSize(hdpa : Win32cr::UI::Controls::HDPA) : UInt64
 
+    # :nodoc:
     fun DPA_Sort(hdpa : Win32cr::UI::Controls::HDPA, pfnCompare : Win32cr::UI::Controls::PFNDACOMPARE, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DPA_LoadStream(phdpa : Win32cr::UI::Controls::HDPA*, pfn : Win32cr::UI::Controls::PFNDPASTREAM, pstream : Void*, pvInstData : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DPA_SaveStream(hdpa : Win32cr::UI::Controls::HDPA, pfn : Win32cr::UI::Controls::PFNDPASTREAM, pstream : Void*, pvInstData : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DPA_Merge(hdpaDest : Win32cr::UI::Controls::HDPA, hdpaSrc : Win32cr::UI::Controls::HDPA, dwFlags : UInt32, pfnCompare : Win32cr::UI::Controls::PFNDACOMPARE, pfnMerge : Win32cr::UI::Controls::PFNDPAMERGE, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DPA_Search(hdpa : Win32cr::UI::Controls::HDPA, pFind : Void*, iStart : Int32, pfnCompare : Win32cr::UI::Controls::PFNDACOMPARE, lParam : Win32cr::Foundation::LPARAM, options : UInt32) : Int32
 
+    # :nodoc:
     fun Str_SetPtrW(ppsz : Win32cr::Foundation::PWSTR*, psz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlatSB_EnableScrollBar(param0 : Win32cr::Foundation::HWND, param1 : Int32, param2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlatSB_ShowScrollBar(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, param2 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlatSB_GetScrollRange(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, param2 : Int32*, param3 : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlatSB_GetScrollInfo(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, param2 : Win32cr::UI::WindowsAndMessaging::SCROLLINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlatSB_GetScrollPos(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS) : Int32
 
+    # :nodoc:
     fun FlatSB_GetScrollProp(param0 : Win32cr::Foundation::HWND, propIndex : Win32cr::UI::Controls::WSB_PROP, param2 : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlatSB_SetScrollPos(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, pos : Int32, fRedraw : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun FlatSB_SetScrollInfo(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, psi : Win32cr::UI::WindowsAndMessaging::SCROLLINFO*, fRedraw : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun FlatSB_SetScrollRange(param0 : Win32cr::Foundation::HWND, code : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, min : Int32, max : Int32, fRedraw : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun FlatSB_SetScrollProp(param0 : Win32cr::Foundation::HWND, index : Win32cr::UI::Controls::WSB_PROP, newValue : LibC::IntPtrT, param3 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InitializeFlatSB(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UninitializeFlatSB(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LoadIconMetric(hinst : Win32cr::Foundation::HINSTANCE, pszName : Win32cr::Foundation::PWSTR, lims : Win32cr::UI::Controls::LI_METRIC_, phico : Win32cr::UI::WindowsAndMessaging::HICON*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LoadIconWithScaleDown(hinst : Win32cr::Foundation::HINSTANCE, pszName : Win32cr::Foundation::PWSTR, cx : Int32, cy : Int32, phico : Win32cr::UI::WindowsAndMessaging::HICON*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DrawShadowText(hdc : Win32cr::Graphics::Gdi::HDC, pszText : UInt16*, cch : UInt32, prc : Win32cr::Foundation::RECT*, dwFlags : UInt32, crText : UInt32, crShadow : UInt32, ixOffset : Int32, iyOffset : Int32) : Int32
 
+    # :nodoc:
     fun ImageList_CoCreateInstance(rclsid : LibC::GUID*, punkOuter : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BeginPanningFeedback(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UpdatePanningFeedback(hwnd : Win32cr::Foundation::HWND, lTotalOverpanOffsetX : Int32, lTotalOverpanOffsetY : Int32, fInInertia : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EndPanningFeedback(hwnd : Win32cr::Foundation::HWND, fAnimateBack : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThemeAnimationProperty(hTheme : LibC::IntPtrT, iStoryboardId : Int32, iTargetId : Int32, eProperty : Win32cr::UI::Controls::TA_PROPERTY, pvProperty : Void*, cbSize : UInt32, pcbSizeOut : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeAnimationTransform(hTheme : LibC::IntPtrT, iStoryboardId : Int32, iTargetId : Int32, dwTransformIndex : UInt32, pTransform : Win32cr::UI::Controls::TA_TRANSFORM*, cbSize : UInt32, pcbSizeOut : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeTimingFunction(hTheme : LibC::IntPtrT, iTimingFunctionId : Int32, pTimingFunction : Win32cr::UI::Controls::TA_TIMINGFUNCTION*, cbSize : UInt32, pcbSizeOut : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OpenThemeData(hwnd : Win32cr::Foundation::HWND, pszClassList : Win32cr::Foundation::PWSTR) : LibC::IntPtrT
 
+    # :nodoc:
     fun OpenThemeDataEx(hwnd : Win32cr::Foundation::HWND, pszClassList : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::UI::Controls::OPEN_THEME_DATA_FLAGS) : LibC::IntPtrT
 
+    # :nodoc:
     fun CloseThemeData(hTheme : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DrawThemeBackground(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pRect : Win32cr::Foundation::RECT*, pClipRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DrawThemeBackgroundEx(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pRect : Win32cr::Foundation::RECT*, pOptions : Win32cr::UI::Controls::DTBGOPTS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DrawThemeText(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pszText : UInt16*, cchText : Int32, dwTextFlags : UInt32, dwTextFlags2 : UInt32, pRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeBackgroundContentRect(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pBoundingRect : Win32cr::Foundation::RECT*, pContentRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeBackgroundExtent(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pContentRect : Win32cr::Foundation::RECT*, pExtentRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeBackgroundRegion(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pRect : Win32cr::Foundation::RECT*, pRegion : Win32cr::Graphics::Gdi::HRGN*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemePartSize(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, prc : Win32cr::Foundation::RECT*, eSize : Win32cr::UI::Controls::THEMESIZE, psz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeTextExtent(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pszText : UInt16*, cchCharCount : Int32, dwTextFlags : UInt32, pBoundingRect : Win32cr::Foundation::RECT*, pExtentRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeTextMetrics(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, ptm : Win32cr::Graphics::Gdi::TEXTMETRICW*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HitTestThemeBackground(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, dwOptions : UInt32, pRect : Win32cr::Foundation::RECT*, hrgn : Win32cr::Graphics::Gdi::HRGN, ptTest : Win32cr::Foundation::POINT, pwHitTestCode : UInt16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DrawThemeEdge(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pDestRect : Win32cr::Foundation::RECT*, uEdge : UInt32, uFlags : UInt32, pContentRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DrawThemeIcon(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pRect : Win32cr::Foundation::RECT*, himl : Win32cr::UI::Controls::HIMAGELIST, iImageIndex : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IsThemePartDefined(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsThemeBackgroundPartiallyTransparent(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThemeColor(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pColor : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeMetric(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, iPropId : Win32cr::UI::Controls::THEME_PROPERTY_SYMBOL_ID, piVal : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeString(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pszBuff : UInt16*, cchMaxBuffChars : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeBool(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Win32cr::UI::Controls::THEME_PROPERTY_SYMBOL_ID, pfVal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeInt(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, piVal : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeEnumValue(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, piVal : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemePosition(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeFont(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, iPropId : Int32, pFont : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeRect(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeMargins(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, iPropId : Int32, prc : Win32cr::Foundation::RECT*, pMargins : Win32cr::UI::Controls::MARGINS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeIntList(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pIntList : Win32cr::UI::Controls::INTLIST*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemePropertyOrigin(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pOrigin : Win32cr::UI::Controls::PROPERTYORIGIN*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetWindowTheme(hwnd : Win32cr::Foundation::HWND, pszSubAppName : Win32cr::Foundation::PWSTR, pszSubIdList : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeFilename(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, pszThemeFileName : UInt16*, cchMaxBuffChars : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeSysColor(hTheme : LibC::IntPtrT, iColorId : Int32) : UInt32
 
+    # :nodoc:
     fun GetThemeSysColorBrush(hTheme : LibC::IntPtrT, iColorId : Win32cr::UI::Controls::THEME_PROPERTY_SYMBOL_ID) : Win32cr::Graphics::Gdi::HBRUSH
 
+    # :nodoc:
     fun GetThemeSysBool(hTheme : LibC::IntPtrT, iBoolId : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThemeSysSize(hTheme : LibC::IntPtrT, iSizeId : Int32) : Int32
 
+    # :nodoc:
     fun GetThemeSysFont(hTheme : LibC::IntPtrT, iFontId : Win32cr::UI::Controls::THEME_PROPERTY_SYMBOL_ID, plf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeSysString(hTheme : LibC::IntPtrT, iStringId : Win32cr::UI::Controls::THEME_PROPERTY_SYMBOL_ID, pszStringBuff : UInt16*, cchMaxStringChars : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeSysInt(hTheme : LibC::IntPtrT, iIntId : Int32, piValue : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IsThemeActive : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsAppThemed : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetWindowTheme(hwnd : Win32cr::Foundation::HWND) : LibC::IntPtrT
 
+    # :nodoc:
     fun EnableThemeDialogTexture(hwnd : Win32cr::Foundation::HWND, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IsThemeDialogTextureEnabled(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThemeAppProperties : UInt32
 
+    # :nodoc:
     fun SetThemeAppProperties(dwFlags : UInt32) : Void
 
+    # :nodoc:
     fun GetCurrentThemeName(pszThemeFileName : UInt16*, cchMaxNameChars : Int32, pszColorBuff : UInt16*, cchMaxColorChars : Int32, pszSizeBuff : UInt16*, cchMaxSizeChars : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeDocumentationProperty(pszThemeName : Win32cr::Foundation::PWSTR, pszPropertyName : Win32cr::Foundation::PWSTR, pszValueBuff : UInt16*, cchMaxValChars : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DrawThemeParentBackground(hwnd : Win32cr::Foundation::HWND, hdc : Win32cr::Graphics::Gdi::HDC, prc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun EnableTheming(fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DrawThemeParentBackgroundEx(hwnd : Win32cr::Foundation::HWND, hdc : Win32cr::Graphics::Gdi::HDC, dwFlags : Win32cr::UI::Controls::DRAW_THEME_PARENT_BACKGROUND_FLAGS, prc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetWindowThemeAttribute(hwnd : Win32cr::Foundation::HWND, eAttribute : Win32cr::UI::Controls::WINDOWTHEMEATTRIBUTETYPE, pvAttribute : Void*, cbAttribute : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DrawThemeTextEx(hTheme : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, iPartId : Int32, iStateId : Int32, pszText : UInt16*, cchText : Int32, dwTextFlags : UInt32, pRect : Win32cr::Foundation::RECT*, pOptions : Win32cr::UI::Controls::DTTOPTS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeBitmap(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Win32cr::UI::Controls::THEME_PROPERTY_SYMBOL_ID, dwFlags : Win32cr::UI::Controls::GET_THEME_BITMAP_FLAGS, phBitmap : Win32cr::Graphics::Gdi::HBITMAP*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetThemeStream(hTheme : LibC::IntPtrT, iPartId : Int32, iStateId : Int32, iPropId : Int32, ppvStream : Void**, pcbStream : UInt32*, hInst : Win32cr::Foundation::HINSTANCE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BufferedPaintInit : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BufferedPaintUnInit : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BeginBufferedPaint(hdcTarget : Win32cr::Graphics::Gdi::HDC, prcTarget : Win32cr::Foundation::RECT*, dwFormat : Win32cr::UI::Controls::BP_BUFFERFORMAT, pPaintParams : Win32cr::UI::Controls::BP_PAINTPARAMS*, phdc : Win32cr::Graphics::Gdi::HDC*) : LibC::IntPtrT
 
+    # :nodoc:
     fun EndBufferedPaint(hBufferedPaint : LibC::IntPtrT, fUpdateTarget : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetBufferedPaintTargetRect(hBufferedPaint : LibC::IntPtrT, prc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetBufferedPaintTargetDC(hBufferedPaint : LibC::IntPtrT) : Win32cr::Graphics::Gdi::HDC
 
+    # :nodoc:
     fun GetBufferedPaintDC(hBufferedPaint : LibC::IntPtrT) : Win32cr::Graphics::Gdi::HDC
 
+    # :nodoc:
     fun GetBufferedPaintBits(hBufferedPaint : LibC::IntPtrT, ppbBuffer : Win32cr::Graphics::Gdi::RGBQUAD**, pcxRow : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BufferedPaintClear(hBufferedPaint : LibC::IntPtrT, prc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BufferedPaintSetAlpha(hBufferedPaint : LibC::IntPtrT, prc : Win32cr::Foundation::RECT*, alpha : UInt8) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BufferedPaintStopAllAnimations(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BeginBufferedAnimation(hwnd : Win32cr::Foundation::HWND, hdcTarget : Win32cr::Graphics::Gdi::HDC, prcTarget : Win32cr::Foundation::RECT*, dwFormat : Win32cr::UI::Controls::BP_BUFFERFORMAT, pPaintParams : Win32cr::UI::Controls::BP_PAINTPARAMS*, pAnimationParams : Win32cr::UI::Controls::BP_ANIMATIONPARAMS*, phdcFrom : Win32cr::Graphics::Gdi::HDC*, phdcTo : Win32cr::Graphics::Gdi::HDC*) : LibC::IntPtrT
 
+    # :nodoc:
     fun EndBufferedAnimation(hbpAnimation : LibC::IntPtrT, fUpdateTarget : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BufferedPaintRenderAnimation(hwnd : Win32cr::Foundation::HWND, hdcTarget : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsCompositionActive : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetThemeTransitionDuration(hTheme : LibC::IntPtrT, iPartId : Int32, iStateIdFrom : Int32, iStateIdTo : Int32, iPropId : Int32, pdwDuration : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CheckDlgButton(hDlg : Win32cr::Foundation::HWND, nIDButton : Int32, uCheck : Win32cr::UI::Controls::DLG_BUTTON_CHECK_STATE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CheckRadioButton(hDlg : Win32cr::Foundation::HWND, nIDFirstButton : Int32, nIDLastButton : Int32, nIDCheckButton : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsDlgButtonChecked(hDlg : Win32cr::Foundation::HWND, nIDButton : Int32) : UInt32
 
+    # :nodoc:
     fun IsCharLowerW(ch : UInt16) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateSyntheticPointerDevice(pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE, maxCount : UInt32, mode : Win32cr::UI::Controls::POINTER_FEEDBACK_MODE) : Win32cr::UI::Controls::HSYNTHETICPOINTERDEVICE
 
+    # :nodoc:
     fun DestroySyntheticPointerDevice(device : Win32cr::UI::Controls::HSYNTHETICPOINTERDEVICE) : Void
 
+    # :nodoc:
     fun RegisterTouchHitTestingWindow(hwnd : Win32cr::Foundation::HWND, value : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EvaluateProximityToRect(controlBoundingBox : Win32cr::Foundation::RECT*, pHitTestingInput : Win32cr::UI::Controls::TOUCH_HIT_TESTING_INPUT*, pProximityEval : Win32cr::UI::Controls::TOUCH_HIT_TESTING_PROXIMITY_EVALUATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EvaluateProximityToPolygon(numVertices : UInt32, controlPolygon : Win32cr::Foundation::POINT*, pHitTestingInput : Win32cr::UI::Controls::TOUCH_HIT_TESTING_INPUT*, pProximityEval : Win32cr::UI::Controls::TOUCH_HIT_TESTING_PROXIMITY_EVALUATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PackTouchHitTestingProximityEvaluation(pHitTestingInput : Win32cr::UI::Controls::TOUCH_HIT_TESTING_INPUT*, pProximityEval : Win32cr::UI::Controls::TOUCH_HIT_TESTING_PROXIMITY_EVALUATION*) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun GetWindowFeedbackSetting(hwnd : Win32cr::Foundation::HWND, feedback : Win32cr::UI::Controls::FEEDBACK_TYPE, dwFlags : UInt32, pSize : UInt32*, config : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetWindowFeedbackSetting(hwnd : Win32cr::Foundation::HWND, feedback : Win32cr::UI::Controls::FEEDBACK_TYPE, dwFlags : UInt32, size : UInt32, configuration : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetScrollPos(hWnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, nPos : Int32, bRedraw : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun SetScrollRange(hWnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, nMinPos : Int32, nMaxPos : Int32, bRedraw : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ShowScrollBar(hWnd : Win32cr::Foundation::HWND, wBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, bShow : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnableScrollBar(hWnd : Win32cr::Foundation::HWND, wSBflags : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, wArrows : Win32cr::UI::Controls::ENABLE_SCROLL_BAR_ARROWS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DlgDirListA(hDlg : Win32cr::Foundation::HWND, lpPathSpec : Win32cr::Foundation::PSTR, nIDListBox : Int32, nIDStaticPath : Int32, uFileType : Win32cr::UI::Controls::DLG_DIR_LIST_FILE_TYPE) : Int32
 
+    # :nodoc:
     fun DlgDirListW(hDlg : Win32cr::Foundation::HWND, lpPathSpec : Win32cr::Foundation::PWSTR, nIDListBox : Int32, nIDStaticPath : Int32, uFileType : Win32cr::UI::Controls::DLG_DIR_LIST_FILE_TYPE) : Int32
 
+    # :nodoc:
     fun DlgDirSelectExA(hwndDlg : Win32cr::Foundation::HWND, lpString : UInt8*, chCount : Int32, idListBox : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DlgDirSelectExW(hwndDlg : Win32cr::Foundation::HWND, lpString : UInt16*, chCount : Int32, idListBox : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DlgDirListComboBoxA(hDlg : Win32cr::Foundation::HWND, lpPathSpec : Win32cr::Foundation::PSTR, nIDComboBox : Int32, nIDStaticPath : Int32, uFiletype : Win32cr::UI::Controls::DLG_DIR_LIST_FILE_TYPE) : Int32
 
+    # :nodoc:
     fun DlgDirListComboBoxW(hDlg : Win32cr::Foundation::HWND, lpPathSpec : Win32cr::Foundation::PWSTR, nIDComboBox : Int32, nIDStaticPath : Int32, uFiletype : Win32cr::UI::Controls::DLG_DIR_LIST_FILE_TYPE) : Int32
 
+    # :nodoc:
     fun DlgDirSelectComboBoxExA(hwndDlg : Win32cr::Foundation::HWND, lpString : UInt8*, cchOut : Int32, idComboBox : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DlgDirSelectComboBoxExW(hwndDlg : Win32cr::Foundation::HWND, lpString : UInt16*, cchOut : Int32, idComboBox : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetScrollInfo(hwnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, lpsi : Win32cr::UI::WindowsAndMessaging::SCROLLINFO*, redraw : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun GetComboBoxInfo(hwndCombo : Win32cr::Foundation::HWND, pcbi : Win32cr::UI::Controls::COMBOBOXINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetListBoxInfo(hwnd : Win32cr::Foundation::HWND) : UInt32
 
+    # :nodoc:
     fun RegisterPointerDeviceNotifications(window : Win32cr::Foundation::HWND, notifyRange : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
   end

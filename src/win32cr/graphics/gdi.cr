@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::Graphics::Gdi
+  extend self
   alias HDC = LibC::IntPtrT
   alias CreatedHDC = LibC::IntPtrT
   alias HBITMAP = LibC::IntPtrT
@@ -3823,6 +3824,1582 @@ module Win32cr::Graphics::Gdi
     end
   end
 
+  def getObjectA(h : Win32cr::Graphics::Gdi::HGDIOBJ, c : Int32, pv : Void*) : Int32
+    C.GetObjectA(h, c, pv)
+  end
+
+  def addFontResourceA(param0 : Win32cr::Foundation::PSTR) : Int32
+    C.AddFontResourceA(param0)
+  end
+
+  def addFontResourceW(param0 : Win32cr::Foundation::PWSTR) : Int32
+    C.AddFontResourceW(param0)
+  end
+
+  def animatePalette(hPal : Win32cr::Graphics::Gdi::HPALETTE, iStartIndex : UInt32, cEntries : UInt32, ppe : Win32cr::Graphics::Gdi::PALETTEENTRY*) : Win32cr::Foundation::BOOL
+    C.AnimatePalette(hPal, iStartIndex, cEntries, ppe)
+  end
+
+  def arc(hdc : Win32cr::Graphics::Gdi::HDC, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, x3 : Int32, y3 : Int32, x4 : Int32, y4 : Int32) : Win32cr::Foundation::BOOL
+    C.Arc(hdc, x1, y1, x2, y2, x3, y3, x4, y4)
+  end
+
+  def bitBlt(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, cx : Int32, cy : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, x1 : Int32, y1 : Int32, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Win32cr::Foundation::BOOL
+    C.BitBlt(hdc, x, y, cx, cy, hdcSrc, x1, y1, rop)
+  end
+
+  def cancelDC(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    C.CancelDC(hdc)
+  end
+
+  def chord(hdc : Win32cr::Graphics::Gdi::HDC, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, x3 : Int32, y3 : Int32, x4 : Int32, y4 : Int32) : Win32cr::Foundation::BOOL
+    C.Chord(hdc, x1, y1, x2, y2, x3, y3, x4, y4)
+  end
+
+  def closeMetaFile(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HMETAFILE
+    C.CloseMetaFile(hdc)
+  end
+
+  def combineRgn(hrgnDst : Win32cr::Graphics::Gdi::HRGN, hrgnSrc1 : Win32cr::Graphics::Gdi::HRGN, hrgnSrc2 : Win32cr::Graphics::Gdi::HRGN, iMode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    C.CombineRgn(hrgnDst, hrgnSrc1, hrgnSrc2, iMode)
+  end
+
+  def copyMetaFileA(param0 : Win32cr::Graphics::Gdi::HMETAFILE, param1 : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HMETAFILE
+    C.CopyMetaFileA(param0, param1)
+  end
+
+  def copyMetaFileW(param0 : Win32cr::Graphics::Gdi::HMETAFILE, param1 : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HMETAFILE
+    C.CopyMetaFileW(param0, param1)
+  end
+
+  def createBitmap(nWidth : Int32, nHeight : Int32, nPlanes : UInt32, nBitCount : UInt32, lpBits : Void*) : Win32cr::Graphics::Gdi::HBITMAP
+    C.CreateBitmap(nWidth, nHeight, nPlanes, nBitCount, lpBits)
+  end
+
+  def createBitmapIndirect(pbm : Win32cr::Graphics::Gdi::BITMAP*) : Win32cr::Graphics::Gdi::HBITMAP
+    C.CreateBitmapIndirect(pbm)
+  end
+
+  def createBrushIndirect(plbrush : Win32cr::Graphics::Gdi::LOGBRUSH*) : Win32cr::Graphics::Gdi::HBRUSH
+    C.CreateBrushIndirect(plbrush)
+  end
+
+  def createCompatibleBitmap(hdc : Win32cr::Graphics::Gdi::HDC, cx : Int32, cy : Int32) : Win32cr::Graphics::Gdi::HBITMAP
+    C.CreateCompatibleBitmap(hdc, cx, cy)
+  end
+
+  def createDiscardableBitmap(hdc : Win32cr::Graphics::Gdi::HDC, cx : Int32, cy : Int32) : Win32cr::Graphics::Gdi::HBITMAP
+    C.CreateDiscardableBitmap(hdc, cx, cy)
+  end
+
+  def createCompatibleDC(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::CreatedHDC
+    C.CreateCompatibleDC(hdc)
+  end
+
+  def createDCA(pwszDriver : Win32cr::Foundation::PSTR, pwszDevice : Win32cr::Foundation::PSTR, pszPort : Win32cr::Foundation::PSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Graphics::Gdi::CreatedHDC
+    C.CreateDCA(pwszDriver, pwszDevice, pszPort, pdm)
+  end
+
+  def createDCW(pwszDriver : Win32cr::Foundation::PWSTR, pwszDevice : Win32cr::Foundation::PWSTR, pszPort : Win32cr::Foundation::PWSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Graphics::Gdi::CreatedHDC
+    C.CreateDCW(pwszDriver, pwszDevice, pszPort, pdm)
+  end
+
+  def createDIBitmap(hdc : Win32cr::Graphics::Gdi::HDC, pbmih : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, flInit : UInt32, pjBits : Void*, pbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE) : Win32cr::Graphics::Gdi::HBITMAP
+    C.CreateDIBitmap(hdc, pbmih, flInit, pjBits, pbmi, iUsage)
+  end
+
+  def createDIBPatternBrush(h : LibC::IntPtrT, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE) : Win32cr::Graphics::Gdi::HBRUSH
+    C.CreateDIBPatternBrush(h, iUsage)
+  end
+
+  def createDIBPatternBrushPt(lpPackedDIB : Void*, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE) : Win32cr::Graphics::Gdi::HBRUSH
+    C.CreateDIBPatternBrushPt(lpPackedDIB, iUsage)
+  end
+
+  def createEllipticRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32) : Win32cr::Graphics::Gdi::HRGN
+    C.CreateEllipticRgn(x1, y1, x2, y2)
+  end
+
+  def createEllipticRgnIndirect(lprect : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::HRGN
+    C.CreateEllipticRgnIndirect(lprect)
+  end
+
+  def createFontIndirectA(lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Graphics::Gdi::HFONT
+    C.CreateFontIndirectA(lplf)
+  end
+
+  def createFontIndirectW(lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Graphics::Gdi::HFONT
+    C.CreateFontIndirectW(lplf)
+  end
+
+  def createFontA(cHeight : Int32, cWidth : Int32, cEscapement : Int32, cOrientation : Int32, cWeight : Int32, bItalic : UInt32, bUnderline : UInt32, bStrikeOut : UInt32, iCharSet : UInt32, iOutPrecision : Win32cr::Graphics::Gdi::FONT_OUTPUT_PRECISION, iClipPrecision : Win32cr::Graphics::Gdi::FONT_CLIP_PRECISION, iQuality : Win32cr::Graphics::Gdi::FONT_QUALITY, iPitchAndFamily : Win32cr::Graphics::Gdi::FONT_PITCH_AND_FAMILY, pszFaceName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HFONT
+    C.CreateFontA(cHeight, cWidth, cEscapement, cOrientation, cWeight, bItalic, bUnderline, bStrikeOut, iCharSet, iOutPrecision, iClipPrecision, iQuality, iPitchAndFamily, pszFaceName)
+  end
+
+  def createFontW(cHeight : Int32, cWidth : Int32, cEscapement : Int32, cOrientation : Int32, cWeight : Int32, bItalic : UInt32, bUnderline : UInt32, bStrikeOut : UInt32, iCharSet : UInt32, iOutPrecision : Win32cr::Graphics::Gdi::FONT_OUTPUT_PRECISION, iClipPrecision : Win32cr::Graphics::Gdi::FONT_CLIP_PRECISION, iQuality : Win32cr::Graphics::Gdi::FONT_QUALITY, iPitchAndFamily : Win32cr::Graphics::Gdi::FONT_PITCH_AND_FAMILY, pszFaceName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HFONT
+    C.CreateFontW(cHeight, cWidth, cEscapement, cOrientation, cWeight, bItalic, bUnderline, bStrikeOut, iCharSet, iOutPrecision, iClipPrecision, iQuality, iPitchAndFamily, pszFaceName)
+  end
+
+  def createHatchBrush(iHatch : Win32cr::Graphics::Gdi::HATCH_BRUSH_STYLE, color : UInt32) : Win32cr::Graphics::Gdi::HBRUSH
+    C.CreateHatchBrush(iHatch, color)
+  end
+
+  def createICA(pszDriver : Win32cr::Foundation::PSTR, pszDevice : Win32cr::Foundation::PSTR, pszPort : Win32cr::Foundation::PSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Graphics::Gdi::CreatedHDC
+    C.CreateICA(pszDriver, pszDevice, pszPort, pdm)
+  end
+
+  def createICW(pszDriver : Win32cr::Foundation::PWSTR, pszDevice : Win32cr::Foundation::PWSTR, pszPort : Win32cr::Foundation::PWSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Graphics::Gdi::CreatedHDC
+    C.CreateICW(pszDriver, pszDevice, pszPort, pdm)
+  end
+
+  def createMetaFileA(pszFile : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HdcMetdataFileHandle
+    C.CreateMetaFileA(pszFile)
+  end
+
+  def createMetaFileW(pszFile : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HdcMetdataFileHandle
+    C.CreateMetaFileW(pszFile)
+  end
+
+  def createPalette(plpal : Win32cr::Graphics::Gdi::LOGPALETTE*) : Win32cr::Graphics::Gdi::HPALETTE
+    C.CreatePalette(plpal)
+  end
+
+  def createPen(iStyle : Win32cr::Graphics::Gdi::PEN_STYLE, cWidth : Int32, color : UInt32) : Win32cr::Graphics::Gdi::HPEN
+    C.CreatePen(iStyle, cWidth, color)
+  end
+
+  def createPenIndirect(plpen : Win32cr::Graphics::Gdi::LOGPEN*) : Win32cr::Graphics::Gdi::HPEN
+    C.CreatePenIndirect(plpen)
+  end
+
+  def createPolyPolygonRgn(pptl : Win32cr::Foundation::POINT*, pc : Int32*, cPoly : Int32, iMode : Win32cr::Graphics::Gdi::CREATE_POLYGON_RGN_MODE) : Win32cr::Graphics::Gdi::HRGN
+    C.CreatePolyPolygonRgn(pptl, pc, cPoly, iMode)
+  end
+
+  def createPatternBrush(hbm : Win32cr::Graphics::Gdi::HBITMAP) : Win32cr::Graphics::Gdi::HBRUSH
+    C.CreatePatternBrush(hbm)
+  end
+
+  def createRectRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32) : Win32cr::Graphics::Gdi::HRGN
+    C.CreateRectRgn(x1, y1, x2, y2)
+  end
+
+  def createRectRgnIndirect(lprect : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::HRGN
+    C.CreateRectRgnIndirect(lprect)
+  end
+
+  def createRoundRectRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, w : Int32, h : Int32) : Win32cr::Graphics::Gdi::HRGN
+    C.CreateRoundRectRgn(x1, y1, x2, y2, w, h)
+  end
+
+  def createScalableFontResourceA(fdwHidden : UInt32, lpszFont : Win32cr::Foundation::PSTR, lpszFile : Win32cr::Foundation::PSTR, lpszPath : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.CreateScalableFontResourceA(fdwHidden, lpszFont, lpszFile, lpszPath)
+  end
+
+  def createScalableFontResourceW(fdwHidden : UInt32, lpszFont : Win32cr::Foundation::PWSTR, lpszFile : Win32cr::Foundation::PWSTR, lpszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.CreateScalableFontResourceW(fdwHidden, lpszFont, lpszFile, lpszPath)
+  end
+
+  def createSolidBrush(color : UInt32) : Win32cr::Graphics::Gdi::HBRUSH
+    C.CreateSolidBrush(color)
+  end
+
+  def deleteDC(hdc : Win32cr::Graphics::Gdi::CreatedHDC) : Win32cr::Foundation::BOOL
+    C.DeleteDC(hdc)
+  end
+
+  def deleteMetaFile(hmf : Win32cr::Graphics::Gdi::HMETAFILE) : Win32cr::Foundation::BOOL
+    C.DeleteMetaFile(hmf)
+  end
+
+  def deleteObject(ho : Win32cr::Graphics::Gdi::HGDIOBJ) : Win32cr::Foundation::BOOL
+    C.DeleteObject(ho)
+  end
+
+  def drawEscape(hdc : Win32cr::Graphics::Gdi::HDC, iEscape : Int32, cjIn : Int32, lpIn : Win32cr::Foundation::PSTR) : Int32
+    C.DrawEscape(hdc, iEscape, cjIn, lpIn)
+  end
+
+  def ellipse(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Foundation::BOOL
+    C.Ellipse(hdc, left, top, right, bottom)
+  end
+
+  def enumFontFamiliesExA(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Graphics::Gdi::LOGFONTA*, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCA, lParam : Win32cr::Foundation::LPARAM, dwFlags : UInt32) : Int32
+    C.EnumFontFamiliesExA(hdc, lpLogfont, lpProc, lParam, dwFlags)
+  end
+
+  def enumFontFamiliesExW(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Graphics::Gdi::LOGFONTW*, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCW, lParam : Win32cr::Foundation::LPARAM, dwFlags : UInt32) : Int32
+    C.EnumFontFamiliesExW(hdc, lpLogfont, lpProc, lParam, dwFlags)
+  end
+
+  def enumFontFamiliesA(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCA, lParam : Win32cr::Foundation::LPARAM) : Int32
+    C.EnumFontFamiliesA(hdc, lpLogfont, lpProc, lParam)
+  end
+
+  def enumFontFamiliesW(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PWSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCW, lParam : Win32cr::Foundation::LPARAM) : Int32
+    C.EnumFontFamiliesW(hdc, lpLogfont, lpProc, lParam)
+  end
+
+  def enumFontsA(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCA, lParam : Win32cr::Foundation::LPARAM) : Int32
+    C.EnumFontsA(hdc, lpLogfont, lpProc, lParam)
+  end
+
+  def enumFontsW(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PWSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCW, lParam : Win32cr::Foundation::LPARAM) : Int32
+    C.EnumFontsW(hdc, lpLogfont, lpProc, lParam)
+  end
+
+  def enumObjects(hdc : Win32cr::Graphics::Gdi::HDC, nType : Win32cr::Graphics::Gdi::OBJ_TYPE, lpFunc : Win32cr::Graphics::Gdi::GOBJENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Int32
+    C.EnumObjects(hdc, nType, lpFunc, lParam)
+  end
+
+  def equalRgn(hrgn1 : Win32cr::Graphics::Gdi::HRGN, hrgn2 : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
+    C.EqualRgn(hrgn1, hrgn2)
+  end
+
+  def excludeClipRect(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    C.ExcludeClipRect(hdc, left, top, right, bottom)
+  end
+
+  def extCreateRegion(lpx : Win32cr::Graphics::Gdi::XFORM*, nCount : UInt32, lpData : Win32cr::Graphics::Gdi::RGNDATA*) : Win32cr::Graphics::Gdi::HRGN
+    C.ExtCreateRegion(lpx, nCount, lpData)
+  end
+
+  def extFloodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32, type__ : Win32cr::Graphics::Gdi::EXT_FLOOD_FILL_TYPE) : Win32cr::Foundation::BOOL
+    C.ExtFloodFill(hdc, x, y, color, type__)
+  end
+
+  def fillRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, hbr : Win32cr::Graphics::Gdi::HBRUSH) : Win32cr::Foundation::BOOL
+    C.FillRgn(hdc, hrgn, hbr)
+  end
+
+  def floodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : Win32cr::Foundation::BOOL
+    C.FloodFill(hdc, x, y, color)
+  end
+
+  def frameRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, hbr : Win32cr::Graphics::Gdi::HBRUSH, w : Int32, h : Int32) : Win32cr::Foundation::BOOL
+    C.FrameRgn(hdc, hrgn, hbr, w, h)
+  end
+
+  def getROP2(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.GetROP2(hdc)
+  end
+
+  def getAspectRatioFilterEx(hdc : Win32cr::Graphics::Gdi::HDC, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.GetAspectRatioFilterEx(hdc, lpsize)
+  end
+
+  def getBkColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    C.GetBkColor(hdc)
+  end
+
+  def getDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    C.GetDCBrushColor(hdc)
+  end
+
+  def getDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    C.GetDCPenColor(hdc)
+  end
+
+  def getBkMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.GetBkMode(hdc)
+  end
+
+  def getBitmapBits(hbit : Win32cr::Graphics::Gdi::HBITMAP, cb : Int32, lpvBits : Void*) : Int32
+    C.GetBitmapBits(hbit, cb, lpvBits)
+  end
+
+  def getBitmapDimensionEx(hbit : Win32cr::Graphics::Gdi::HBITMAP, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.GetBitmapDimensionEx(hbit, lpsize)
+  end
+
+  def getBoundsRect(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*, flags : UInt32) : UInt32
+    C.GetBoundsRect(hdc, lprect, flags)
+  end
+
+  def getBrushOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.GetBrushOrgEx(hdc, lppt)
+  end
+
+  def getCharWidthA(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
+    C.GetCharWidthA(hdc, iFirst, iLast, lpBuffer)
+  end
+
+  def getCharWidthW(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
+    C.GetCharWidthW(hdc, iFirst, iLast, lpBuffer)
+  end
+
+  def getCharWidth32A(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
+    C.GetCharWidth32A(hdc, iFirst, iLast, lpBuffer)
+  end
+
+  def getCharWidth32W(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
+    C.GetCharWidth32W(hdc, iFirst, iLast, lpBuffer)
+  end
+
+  def getCharWidthFloatA(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Float32*) : Win32cr::Foundation::BOOL
+    C.GetCharWidthFloatA(hdc, iFirst, iLast, lpBuffer)
+  end
+
+  def getCharWidthFloatW(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Float32*) : Win32cr::Foundation::BOOL
+    C.GetCharWidthFloatW(hdc, iFirst, iLast, lpBuffer)
+  end
+
+  def getCharABCWidthsA(hdc : Win32cr::Graphics::Gdi::HDC, wFirst : UInt32, wLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::BOOL
+    C.GetCharABCWidthsA(hdc, wFirst, wLast, lpABC)
+  end
+
+  def getCharABCWidthsW(hdc : Win32cr::Graphics::Gdi::HDC, wFirst : UInt32, wLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::BOOL
+    C.GetCharABCWidthsW(hdc, wFirst, wLast, lpABC)
+  end
+
+  def getCharABCWidthsFloatA(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABCFLOAT*) : Win32cr::Foundation::BOOL
+    C.GetCharABCWidthsFloatA(hdc, iFirst, iLast, lpABC)
+  end
+
+  def getCharABCWidthsFloatW(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABCFLOAT*) : Win32cr::Foundation::BOOL
+    C.GetCharABCWidthsFloatW(hdc, iFirst, iLast, lpABC)
+  end
+
+  def getClipBox(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    C.GetClipBox(hdc, lprect)
+  end
+
+  def getClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Int32
+    C.GetClipRgn(hdc, hrgn)
+  end
+
+  def getMetaRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Int32
+    C.GetMetaRgn(hdc, hrgn)
+  end
+
+  def getCurrentObject(hdc : Win32cr::Graphics::Gdi::HDC, type__ : Win32cr::Graphics::Gdi::OBJ_TYPE) : Win32cr::Graphics::Gdi::HGDIOBJ
+    C.GetCurrentObject(hdc, type__)
+  end
+
+  def getCurrentPositionEx(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.GetCurrentPositionEx(hdc, lppt)
+  end
+
+  def getDeviceCaps(hdc : Win32cr::Graphics::Gdi::HDC, index : Win32cr::Graphics::Gdi::GET_DEVICE_CAPS_INDEX) : Int32
+    C.GetDeviceCaps(hdc, index)
+  end
+
+  def getDIBits(hdc : Win32cr::Graphics::Gdi::HDC, hbm : Win32cr::Graphics::Gdi::HBITMAP, start : UInt32, cLines : UInt32, lpvBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, usage : Win32cr::Graphics::Gdi::DIB_USAGE) : Int32
+    C.GetDIBits(hdc, hbm, start, cLines, lpvBits, lpbmi, usage)
+  end
+
+  def getFontData(hdc : Win32cr::Graphics::Gdi::HDC, dwTable : UInt32, dwOffset : UInt32, pvBuffer : Void*, cjBuffer : UInt32) : UInt32
+    C.GetFontData(hdc, dwTable, dwOffset, pvBuffer, cjBuffer)
+  end
+
+  def getGlyphOutlineA(hdc : Win32cr::Graphics::Gdi::HDC, uChar : UInt32, fuFormat : Win32cr::Graphics::Gdi::GET_GLYPH_OUTLINE_FORMAT, lpgm : Win32cr::Graphics::Gdi::GLYPHMETRICS*, cjBuffer : UInt32, pvBuffer : Void*, lpmat2 : Win32cr::Graphics::Gdi::MAT2*) : UInt32
+    C.GetGlyphOutlineA(hdc, uChar, fuFormat, lpgm, cjBuffer, pvBuffer, lpmat2)
+  end
+
+  def getGlyphOutlineW(hdc : Win32cr::Graphics::Gdi::HDC, uChar : UInt32, fuFormat : Win32cr::Graphics::Gdi::GET_GLYPH_OUTLINE_FORMAT, lpgm : Win32cr::Graphics::Gdi::GLYPHMETRICS*, cjBuffer : UInt32, pvBuffer : Void*, lpmat2 : Win32cr::Graphics::Gdi::MAT2*) : UInt32
+    C.GetGlyphOutlineW(hdc, uChar, fuFormat, lpgm, cjBuffer, pvBuffer, lpmat2)
+  end
+
+  def getGraphicsMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.GetGraphicsMode(hdc)
+  end
+
+  def getMapMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.GetMapMode(hdc)
+  end
+
+  def getMetaFileBitsEx(hMF : Win32cr::Graphics::Gdi::HMETAFILE, cbBuffer : UInt32, lpData : Void*) : UInt32
+    C.GetMetaFileBitsEx(hMF, cbBuffer, lpData)
+  end
+
+  def getMetaFileA(lpName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HMETAFILE
+    C.GetMetaFileA(lpName)
+  end
+
+  def getMetaFileW(lpName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HMETAFILE
+    C.GetMetaFileW(lpName)
+  end
+
+  def getNearestColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+    C.GetNearestColor(hdc, color)
+  end
+
+  def getNearestPaletteIndex(h : Win32cr::Graphics::Gdi::HPALETTE, color : UInt32) : UInt32
+    C.GetNearestPaletteIndex(h, color)
+  end
+
+  def getObjectType(h : Win32cr::Graphics::Gdi::HGDIOBJ) : UInt32
+    C.GetObjectType(h)
+  end
+
+  def getOutlineTextMetricsA(hdc : Win32cr::Graphics::Gdi::HDC, cjCopy : UInt32, potm : Win32cr::Graphics::Gdi::OUTLINETEXTMETRICA*) : UInt32
+    C.GetOutlineTextMetricsA(hdc, cjCopy, potm)
+  end
+
+  def getOutlineTextMetricsW(hdc : Win32cr::Graphics::Gdi::HDC, cjCopy : UInt32, potm : Win32cr::Graphics::Gdi::OUTLINETEXTMETRICW*) : UInt32
+    C.GetOutlineTextMetricsW(hdc, cjCopy, potm)
+  end
+
+  def getPaletteEntries(hpal : Win32cr::Graphics::Gdi::HPALETTE, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
+    C.GetPaletteEntries(hpal, iStart, cEntries, pPalEntries)
+  end
+
+  def getPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : UInt32
+    C.GetPixel(hdc, x, y)
+  end
+
+  def getPolyFillMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.GetPolyFillMode(hdc)
+  end
+
+  def getRasterizerCaps(lpraststat : Win32cr::Graphics::Gdi::RASTERIZER_STATUS*, cjBytes : UInt32) : Win32cr::Foundation::BOOL
+    C.GetRasterizerCaps(lpraststat, cjBytes)
+  end
+
+  def getRandomRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, i : Int32) : Int32
+    C.GetRandomRgn(hdc, hrgn, i)
+  end
+
+  def getRegionData(hrgn : Win32cr::Graphics::Gdi::HRGN, nCount : UInt32, lpRgnData : Win32cr::Graphics::Gdi::RGNDATA*) : UInt32
+    C.GetRegionData(hrgn, nCount, lpRgnData)
+  end
+
+  def getRgnBox(hrgn : Win32cr::Graphics::Gdi::HRGN, lprc : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    C.GetRgnBox(hrgn, lprc)
+  end
+
+  def getStockObject(i : Win32cr::Graphics::Gdi::GET_STOCK_OBJECT_FLAGS) : Win32cr::Graphics::Gdi::HGDIOBJ
+    C.GetStockObject(i)
+  end
+
+  def getStretchBltMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.GetStretchBltMode(hdc)
+  end
+
+  def getSystemPaletteEntries(hdc : Win32cr::Graphics::Gdi::HDC, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
+    C.GetSystemPaletteEntries(hdc, iStart, cEntries, pPalEntries)
+  end
+
+  def getSystemPaletteUse(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    C.GetSystemPaletteUse(hdc)
+  end
+
+  def getTextCharacterExtra(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.GetTextCharacterExtra(hdc)
+  end
+
+  def getTextAlign(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    C.GetTextAlign(hdc)
+  end
+
+  def getTextColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    C.GetTextColor(hdc)
+  end
+
+  def getTextExtentPointA(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, c : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.GetTextExtentPointA(hdc, lpString, c, lpsz)
+  end
+
+  def getTextExtentPointW(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, c : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.GetTextExtentPointW(hdc, lpString, c, lpsz)
+  end
+
+  def getTextExtentPoint32A(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, c : Int32, psizl : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.GetTextExtentPoint32A(hdc, lpString, c, psizl)
+  end
+
+  def getTextExtentPoint32W(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, c : Int32, psizl : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.GetTextExtentPoint32W(hdc, lpString, c, psizl)
+  end
+
+  def getTextExtentExPointA(hdc : Win32cr::Graphics::Gdi::HDC, lpszString : UInt8*, cchString : Int32, nMaxExtent : Int32, lpnFit : Int32*, lpnDx : Int32*, lpSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.GetTextExtentExPointA(hdc, lpszString, cchString, nMaxExtent, lpnFit, lpnDx, lpSize)
+  end
+
+  def getTextExtentExPointW(hdc : Win32cr::Graphics::Gdi::HDC, lpszString : UInt16*, cchString : Int32, nMaxExtent : Int32, lpnFit : Int32*, lpnDx : Int32*, lpSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.GetTextExtentExPointW(hdc, lpszString, cchString, nMaxExtent, lpnFit, lpnDx, lpSize)
+  end
+
+  def getFontLanguageInfo(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    C.GetFontLanguageInfo(hdc)
+  end
+
+  def getCharacterPlacementA(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, nCount : Int32, nMexExtent : Int32, lpResults : Win32cr::Graphics::Gdi::GCP_RESULTSA*, dwFlags : Win32cr::Graphics::Gdi::GET_CHARACTER_PLACEMENT_FLAGS) : UInt32
+    C.GetCharacterPlacementA(hdc, lpString, nCount, nMexExtent, lpResults, dwFlags)
+  end
+
+  def getCharacterPlacementW(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, nCount : Int32, nMexExtent : Int32, lpResults : Win32cr::Graphics::Gdi::GCP_RESULTSW*, dwFlags : Win32cr::Graphics::Gdi::GET_CHARACTER_PLACEMENT_FLAGS) : UInt32
+    C.GetCharacterPlacementW(hdc, lpString, nCount, nMexExtent, lpResults, dwFlags)
+  end
+
+  def getFontUnicodeRanges(hdc : Win32cr::Graphics::Gdi::HDC, lpgs : Win32cr::Graphics::Gdi::GLYPHSET*) : UInt32
+    C.GetFontUnicodeRanges(hdc, lpgs)
+  end
+
+  def getGlyphIndicesA(hdc : Win32cr::Graphics::Gdi::HDC, lpstr : UInt8*, c : Int32, pgi : UInt16*, fl : UInt32) : UInt32
+    C.GetGlyphIndicesA(hdc, lpstr, c, pgi, fl)
+  end
+
+  def getGlyphIndicesW(hdc : Win32cr::Graphics::Gdi::HDC, lpstr : UInt16*, c : Int32, pgi : UInt16*, fl : UInt32) : UInt32
+    C.GetGlyphIndicesW(hdc, lpstr, c, pgi, fl)
+  end
+
+  def getTextExtentPointI(hdc : Win32cr::Graphics::Gdi::HDC, pgiIn : UInt16*, cgi : Int32, psize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.GetTextExtentPointI(hdc, pgiIn, cgi, psize)
+  end
+
+  def getTextExtentExPointI(hdc : Win32cr::Graphics::Gdi::HDC, lpwszString : UInt16*, cwchString : Int32, nMaxExtent : Int32, lpnFit : Int32*, lpnDx : Int32*, lpSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.GetTextExtentExPointI(hdc, lpwszString, cwchString, nMaxExtent, lpnFit, lpnDx, lpSize)
+  end
+
+  def getCharWidthI(hdc : Win32cr::Graphics::Gdi::HDC, giFirst : UInt32, cgi : UInt32, pgi : UInt16*, piWidths : Int32*) : Win32cr::Foundation::BOOL
+    C.GetCharWidthI(hdc, giFirst, cgi, pgi, piWidths)
+  end
+
+  def getCharABCWidthsI(hdc : Win32cr::Graphics::Gdi::HDC, giFirst : UInt32, cgi : UInt32, pgi : UInt16*, pabc : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::BOOL
+    C.GetCharABCWidthsI(hdc, giFirst, cgi, pgi, pabc)
+  end
+
+  def addFontResourceExA(name : Win32cr::Foundation::PSTR, fl : Win32cr::Graphics::Gdi::FONT_RESOURCE_CHARACTERISTICS, res : Void*) : Int32
+    C.AddFontResourceExA(name, fl, res)
+  end
+
+  def addFontResourceExW(name : Win32cr::Foundation::PWSTR, fl : Win32cr::Graphics::Gdi::FONT_RESOURCE_CHARACTERISTICS, res : Void*) : Int32
+    C.AddFontResourceExW(name, fl, res)
+  end
+
+  def removeFontResourceExA(name : Win32cr::Foundation::PSTR, fl : UInt32, pdv : Void*) : Win32cr::Foundation::BOOL
+    C.RemoveFontResourceExA(name, fl, pdv)
+  end
+
+  def removeFontResourceExW(name : Win32cr::Foundation::PWSTR, fl : UInt32, pdv : Void*) : Win32cr::Foundation::BOOL
+    C.RemoveFontResourceExW(name, fl, pdv)
+  end
+
+  def addFontMemResourceEx(pFileView : Void*, cjSize : UInt32, pvResrved : Void*, pNumFonts : UInt32*) : Win32cr::Foundation::HANDLE
+    C.AddFontMemResourceEx(pFileView, cjSize, pvResrved, pNumFonts)
+  end
+
+  def removeFontMemResourceEx(h : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.RemoveFontMemResourceEx(h)
+  end
+
+  def createFontIndirectExA(param0 : Win32cr::Graphics::Gdi::ENUMLOGFONTEXDVA*) : Win32cr::Graphics::Gdi::HFONT
+    C.CreateFontIndirectExA(param0)
+  end
+
+  def createFontIndirectExW(param0 : Win32cr::Graphics::Gdi::ENUMLOGFONTEXDVW*) : Win32cr::Graphics::Gdi::HFONT
+    C.CreateFontIndirectExW(param0)
+  end
+
+  def getViewportExtEx(hdc : Win32cr::Graphics::Gdi::HDC, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.GetViewportExtEx(hdc, lpsize)
+  end
+
+  def getViewportOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.GetViewportOrgEx(hdc, lppoint)
+  end
+
+  def getWindowExtEx(hdc : Win32cr::Graphics::Gdi::HDC, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.GetWindowExtEx(hdc, lpsize)
+  end
+
+  def getWindowOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.GetWindowOrgEx(hdc, lppoint)
+  end
+
+  def intersectClipRect(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    C.IntersectClipRect(hdc, left, top, right, bottom)
+  end
+
+  def invertRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
+    C.InvertRgn(hdc, hrgn)
+  end
+
+  def lineDDA(xStart : Int32, yStart : Int32, xEnd : Int32, yEnd : Int32, lpProc : Win32cr::Graphics::Gdi::LINEDDAPROC, data : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.LineDDA(xStart, yStart, xEnd, yEnd, lpProc, data)
+  end
+
+  def lineTo(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    C.LineTo(hdc, x, y)
+  end
+
+  def maskBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, width : Int32, height : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xSrc : Int32, ySrc : Int32, hbmMask : Win32cr::Graphics::Gdi::HBITMAP, xMask : Int32, yMask : Int32, rop : UInt32) : Win32cr::Foundation::BOOL
+    C.MaskBlt(hdcDest, xDest, yDest, width, height, hdcSrc, xSrc, ySrc, hbmMask, xMask, yMask, rop)
+  end
+
+  def plgBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, lpPoint : Win32cr::Foundation::POINT*, hdcSrc : Win32cr::Graphics::Gdi::HDC, xSrc : Int32, ySrc : Int32, width : Int32, height : Int32, hbmMask : Win32cr::Graphics::Gdi::HBITMAP, xMask : Int32, yMask : Int32) : Win32cr::Foundation::BOOL
+    C.PlgBlt(hdcDest, lpPoint, hdcSrc, xSrc, ySrc, width, height, hbmMask, xMask, yMask)
+  end
+
+  def offsetClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    C.OffsetClipRgn(hdc, x, y)
+  end
+
+  def offsetRgn(hrgn : Win32cr::Graphics::Gdi::HRGN, x : Int32, y : Int32) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    C.OffsetRgn(hrgn, x, y)
+  end
+
+  def patBlt(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, w : Int32, h : Int32, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Win32cr::Foundation::BOOL
+    C.PatBlt(hdc, x, y, w, h, rop)
+  end
+
+  def pie(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, xr1 : Int32, yr1 : Int32, xr2 : Int32, yr2 : Int32) : Win32cr::Foundation::BOOL
+    C.Pie(hdc, left, top, right, bottom, xr1, yr1, xr2, yr2)
+  end
+
+  def playMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HMETAFILE) : Win32cr::Foundation::BOOL
+    C.PlayMetaFile(hdc, hmf)
+  end
+
+  def paintRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
+    C.PaintRgn(hdc, hrgn)
+  end
+
+  def polyPolygon(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, asz : Int32*, csz : Int32) : Win32cr::Foundation::BOOL
+    C.PolyPolygon(hdc, apt, asz, csz)
+  end
+
+  def ptInRegion(hrgn : Win32cr::Graphics::Gdi::HRGN, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    C.PtInRegion(hrgn, x, y)
+  end
+
+  def ptVisible(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    C.PtVisible(hdc, x, y)
+  end
+
+  def rectInRegion(hrgn : Win32cr::Graphics::Gdi::HRGN, lprect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.RectInRegion(hrgn, lprect)
+  end
+
+  def rectVisible(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.RectVisible(hdc, lprect)
+  end
+
+  def rectangle(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Foundation::BOOL
+    C.Rectangle(hdc, left, top, right, bottom)
+  end
+
+  def restoreDC(hdc : Win32cr::Graphics::Gdi::HDC, nSavedDC : Int32) : Win32cr::Foundation::BOOL
+    C.RestoreDC(hdc, nSavedDC)
+  end
+
+  def resetDCA(hdc : Win32cr::Graphics::Gdi::HDC, lpdm : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Graphics::Gdi::HDC
+    C.ResetDCA(hdc, lpdm)
+  end
+
+  def resetDCW(hdc : Win32cr::Graphics::Gdi::HDC, lpdm : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Graphics::Gdi::HDC
+    C.ResetDCW(hdc, lpdm)
+  end
+
+  def realizePalette(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    C.RealizePalette(hdc)
+  end
+
+  def removeFontResourceA(lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.RemoveFontResourceA(lpFileName)
+  end
+
+  def removeFontResourceW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.RemoveFontResourceW(lpFileName)
+  end
+
+  def roundRect(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, width : Int32, height : Int32) : Win32cr::Foundation::BOOL
+    C.RoundRect(hdc, left, top, right, bottom, width, height)
+  end
+
+  def resizePalette(hpal : Win32cr::Graphics::Gdi::HPALETTE, n : UInt32) : Win32cr::Foundation::BOOL
+    C.ResizePalette(hpal, n)
+  end
+
+  def saveDC(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.SaveDC(hdc)
+  end
+
+  def selectClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    C.SelectClipRgn(hdc, hrgn)
+  end
+
+  def extSelectClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, mode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    C.ExtSelectClipRgn(hdc, hrgn, mode)
+  end
+
+  def setMetaRgn(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    C.SetMetaRgn(hdc)
+  end
+
+  def selectObject(hdc : Win32cr::Graphics::Gdi::HDC, h : Win32cr::Graphics::Gdi::HGDIOBJ) : Win32cr::Graphics::Gdi::HGDIOBJ
+    C.SelectObject(hdc, h)
+  end
+
+  def selectPalette(hdc : Win32cr::Graphics::Gdi::HDC, hPal : Win32cr::Graphics::Gdi::HPALETTE, bForceBkgd : Win32cr::Foundation::BOOL) : Win32cr::Graphics::Gdi::HPALETTE
+    C.SelectPalette(hdc, hPal, bForceBkgd)
+  end
+
+  def setBkColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+    C.SetBkColor(hdc, color)
+  end
+
+  def setDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+    C.SetDCBrushColor(hdc, color)
+  end
+
+  def setDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+    C.SetDCPenColor(hdc, color)
+  end
+
+  def setBkMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::BACKGROUND_MODE) : Int32
+    C.SetBkMode(hdc, mode)
+  end
+
+  def setBitmapBits(hbm : Win32cr::Graphics::Gdi::HBITMAP, cb : UInt32, pvBits : Void*) : Int32
+    C.SetBitmapBits(hbm, cb, pvBits)
+  end
+
+  def setBoundsRect(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*, flags : Win32cr::Graphics::Gdi::SET_BOUNDS_RECT_FLAGS) : UInt32
+    C.SetBoundsRect(hdc, lprect, flags)
+  end
+
+  def setDIBits(hdc : Win32cr::Graphics::Gdi::HDC, hbm : Win32cr::Graphics::Gdi::HBITMAP, start : UInt32, cLines : UInt32, lpBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, color_use : Win32cr::Graphics::Gdi::DIB_USAGE) : Int32
+    C.SetDIBits(hdc, hbm, start, cLines, lpBits, lpbmi, color_use)
+  end
+
+  def setDIBitsToDevice(hdc : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, w : UInt32, h : UInt32, xSrc : Int32, ySrc : Int32, start_scan : UInt32, cLines : UInt32, lpvBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, color_use : Win32cr::Graphics::Gdi::DIB_USAGE) : Int32
+    C.SetDIBitsToDevice(hdc, xDest, yDest, w, h, xSrc, ySrc, start_scan, cLines, lpvBits, lpbmi, color_use)
+  end
+
+  def setMapperFlags(hdc : Win32cr::Graphics::Gdi::HDC, flags : UInt32) : UInt32
+    C.SetMapperFlags(hdc, flags)
+  end
+
+  def setGraphicsMode(hdc : Win32cr::Graphics::Gdi::HDC, iMode : Win32cr::Graphics::Gdi::GRAPHICS_MODE) : Int32
+    C.SetGraphicsMode(hdc, iMode)
+  end
+
+  def setMapMode(hdc : Win32cr::Graphics::Gdi::HDC, iMode : Win32cr::Graphics::Gdi::HDC_MAP_MODE) : Int32
+    C.SetMapMode(hdc, iMode)
+  end
+
+  def setLayout(hdc : Win32cr::Graphics::Gdi::HDC, l : Win32cr::Graphics::Gdi::DC_LAYOUT) : UInt32
+    C.SetLayout(hdc, l)
+  end
+
+  def getLayout(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    C.GetLayout(hdc)
+  end
+
+  def setMetaFileBitsEx(cbBuffer : UInt32, lpData : UInt8*) : Win32cr::Graphics::Gdi::HMETAFILE
+    C.SetMetaFileBitsEx(cbBuffer, lpData)
+  end
+
+  def setPaletteEntries(hpal : Win32cr::Graphics::Gdi::HPALETTE, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
+    C.SetPaletteEntries(hpal, iStart, cEntries, pPalEntries)
+  end
+
+  def setPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : UInt32
+    C.SetPixel(hdc, x, y, color)
+  end
+
+  def setPixelV(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : Win32cr::Foundation::BOOL
+    C.SetPixelV(hdc, x, y, color)
+  end
+
+  def setPolyFillMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::CREATE_POLYGON_RGN_MODE) : Int32
+    C.SetPolyFillMode(hdc, mode)
+  end
+
+  def stretchBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xSrc : Int32, ySrc : Int32, wSrc : Int32, hSrc : Int32, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Win32cr::Foundation::BOOL
+    C.StretchBlt(hdcDest, xDest, yDest, wDest, hDest, hdcSrc, xSrc, ySrc, wSrc, hSrc, rop)
+  end
+
+  def setRectRgn(hrgn : Win32cr::Graphics::Gdi::HRGN, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Foundation::BOOL
+    C.SetRectRgn(hrgn, left, top, right, bottom)
+  end
+
+  def stretchDIBits(hdc : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, dest_width : Int32, dest_height : Int32, xSrc : Int32, ySrc : Int32, src_width : Int32, src_height : Int32, lpBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Int32
+    C.StretchDIBits(hdc, xDest, yDest, dest_width, dest_height, xSrc, ySrc, src_width, src_height, lpBits, lpbmi, iUsage, rop)
+  end
+
+  def setROP2(hdc : Win32cr::Graphics::Gdi::HDC, rop2 : Win32cr::Graphics::Gdi::R2_MODE) : Int32
+    C.SetROP2(hdc, rop2)
+  end
+
+  def setStretchBltMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::STRETCH_BLT_MODE) : Int32
+    C.SetStretchBltMode(hdc, mode)
+  end
+
+  def setSystemPaletteUse(hdc : Win32cr::Graphics::Gdi::HDC, use : Win32cr::Graphics::Gdi::SYSTEM_PALETTE_USE) : UInt32
+    C.SetSystemPaletteUse(hdc, use)
+  end
+
+  def setTextCharacterExtra(hdc : Win32cr::Graphics::Gdi::HDC, extra : Int32) : Int32
+    C.SetTextCharacterExtra(hdc, extra)
+  end
+
+  def setTextColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+    C.SetTextColor(hdc, color)
+  end
+
+  def setTextAlign(hdc : Win32cr::Graphics::Gdi::HDC, align : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS) : UInt32
+    C.SetTextAlign(hdc, align)
+  end
+
+  def setTextJustification(hdc : Win32cr::Graphics::Gdi::HDC, extra : Int32, count : Int32) : Win32cr::Foundation::BOOL
+    C.SetTextJustification(hdc, extra, count)
+  end
+
+  def updateColors(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    C.UpdateColors(hdc)
+  end
+
+  def alphaBlend(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, ftn : Win32cr::Graphics::Gdi::BLENDFUNCTION) : Win32cr::Foundation::BOOL
+    C.AlphaBlend(hdcDest, xoriginDest, yoriginDest, wDest, hDest, hdcSrc, xoriginSrc, yoriginSrc, wSrc, hSrc, ftn)
+  end
+
+  def transparentBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, crTransparent : UInt32) : Win32cr::Foundation::BOOL
+    C.TransparentBlt(hdcDest, xoriginDest, yoriginDest, wDest, hDest, hdcSrc, xoriginSrc, yoriginSrc, wSrc, hSrc, crTransparent)
+  end
+
+  def gradientFill(hdc : Win32cr::Graphics::Gdi::HDC, pVertex : Win32cr::Graphics::Gdi::TRIVERTEX*, nVertex : UInt32, pMesh : Void*, nMesh : UInt32, ulMode : Win32cr::Graphics::Gdi::GRADIENT_FILL) : Win32cr::Foundation::BOOL
+    C.GradientFill(hdc, pVertex, nVertex, pMesh, nMesh, ulMode)
+  end
+
+  def gdiAlphaBlend(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, ftn : Win32cr::Graphics::Gdi::BLENDFUNCTION) : Win32cr::Foundation::BOOL
+    C.GdiAlphaBlend(hdcDest, xoriginDest, yoriginDest, wDest, hDest, hdcSrc, xoriginSrc, yoriginSrc, wSrc, hSrc, ftn)
+  end
+
+  def gdiTransparentBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, crTransparent : UInt32) : Win32cr::Foundation::BOOL
+    C.GdiTransparentBlt(hdcDest, xoriginDest, yoriginDest, wDest, hDest, hdcSrc, xoriginSrc, yoriginSrc, wSrc, hSrc, crTransparent)
+  end
+
+  def gdiGradientFill(hdc : Win32cr::Graphics::Gdi::HDC, pVertex : Win32cr::Graphics::Gdi::TRIVERTEX*, nVertex : UInt32, pMesh : Void*, nCount : UInt32, ulMode : Win32cr::Graphics::Gdi::GRADIENT_FILL) : Win32cr::Foundation::BOOL
+    C.GdiGradientFill(hdc, pVertex, nVertex, pMesh, nCount, ulMode)
+  end
+
+  def playMetaFileRecord(hdc : Win32cr::Graphics::Gdi::HDC, lpHandleTable : Win32cr::Graphics::Gdi::HANDLETABLE*, lpMR : Win32cr::Graphics::Gdi::METARECORD*, noObjs : UInt32) : Win32cr::Foundation::BOOL
+    C.PlayMetaFileRecord(hdc, lpHandleTable, lpMR, noObjs)
+  end
+
+  def enumMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HMETAFILE, proc : Win32cr::Graphics::Gdi::MFENUMPROC, param3 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.EnumMetaFile(hdc, hmf, proc, param3)
+  end
+
+  def closeEnhMetaFile(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HENHMETAFILE
+    C.CloseEnhMetaFile(hdc)
+  end
+
+  def copyEnhMetaFileA(hEnh : Win32cr::Graphics::Gdi::HENHMETAFILE, lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
+    C.CopyEnhMetaFileA(hEnh, lpFileName)
+  end
+
+  def copyEnhMetaFileW(hEnh : Win32cr::Graphics::Gdi::HENHMETAFILE, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
+    C.CopyEnhMetaFileW(hEnh, lpFileName)
+  end
+
+  def createEnhMetaFileA(hdc : Win32cr::Graphics::Gdi::HDC, lpFilename : Win32cr::Foundation::PSTR, lprc : Win32cr::Foundation::RECT*, lpDesc : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HdcMetdataEnhFileHandle
+    C.CreateEnhMetaFileA(hdc, lpFilename, lprc, lpDesc)
+  end
+
+  def createEnhMetaFileW(hdc : Win32cr::Graphics::Gdi::HDC, lpFilename : Win32cr::Foundation::PWSTR, lprc : Win32cr::Foundation::RECT*, lpDesc : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HdcMetdataEnhFileHandle
+    C.CreateEnhMetaFileW(hdc, lpFilename, lprc, lpDesc)
+  end
+
+  def deleteEnhMetaFile(hmf : Win32cr::Graphics::Gdi::HENHMETAFILE) : Win32cr::Foundation::BOOL
+    C.DeleteEnhMetaFile(hmf)
+  end
+
+  def enumEnhMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HENHMETAFILE, proc : Win32cr::Graphics::Gdi::ENHMFENUMPROC, param3 : Void*, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.EnumEnhMetaFile(hdc, hmf, proc, param3, lpRect)
+  end
+
+  def getEnhMetaFileA(lpName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
+    C.GetEnhMetaFileA(lpName)
+  end
+
+  def getEnhMetaFileW(lpName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
+    C.GetEnhMetaFileW(lpName)
+  end
+
+  def getEnhMetaFileBits(hEMF : Win32cr::Graphics::Gdi::HENHMETAFILE, nSize : UInt32, lpData : UInt8*) : UInt32
+    C.GetEnhMetaFileBits(hEMF, nSize, lpData)
+  end
+
+  def getEnhMetaFileDescriptionA(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, cchBuffer : UInt32, lpDescription : UInt8*) : UInt32
+    C.GetEnhMetaFileDescriptionA(hemf, cchBuffer, lpDescription)
+  end
+
+  def getEnhMetaFileDescriptionW(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, cchBuffer : UInt32, lpDescription : UInt16*) : UInt32
+    C.GetEnhMetaFileDescriptionW(hemf, cchBuffer, lpDescription)
+  end
+
+  def getEnhMetaFileHeader(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, nSize : UInt32, lpEnhMetaHeader : Win32cr::Graphics::Gdi::ENHMETAHEADER*) : UInt32
+    C.GetEnhMetaFileHeader(hemf, nSize, lpEnhMetaHeader)
+  end
+
+  def getEnhMetaFilePaletteEntries(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, nNumEntries : UInt32, lpPaletteEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
+    C.GetEnhMetaFilePaletteEntries(hemf, nNumEntries, lpPaletteEntries)
+  end
+
+  def getWinMetaFileBits(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, cbData16 : UInt32, pData16 : UInt8*, iMapMode : Int32, hdcRef : Win32cr::Graphics::Gdi::HDC) : UInt32
+    C.GetWinMetaFileBits(hemf, cbData16, pData16, iMapMode, hdcRef)
+  end
+
+  def playEnhMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HENHMETAFILE, lprect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.PlayEnhMetaFile(hdc, hmf, lprect)
+  end
+
+  def playEnhMetaFileRecord(hdc : Win32cr::Graphics::Gdi::HDC, pht : Win32cr::Graphics::Gdi::HANDLETABLE*, pmr : Win32cr::Graphics::Gdi::ENHMETARECORD*, cht : UInt32) : Win32cr::Foundation::BOOL
+    C.PlayEnhMetaFileRecord(hdc, pht, pmr, cht)
+  end
+
+  def setEnhMetaFileBits(nSize : UInt32, pb : UInt8*) : Win32cr::Graphics::Gdi::HENHMETAFILE
+    C.SetEnhMetaFileBits(nSize, pb)
+  end
+
+  def gdiComment(hdc : Win32cr::Graphics::Gdi::HDC, nSize : UInt32, lpData : UInt8*) : Win32cr::Foundation::BOOL
+    C.GdiComment(hdc, nSize, lpData)
+  end
+
+  def getTextMetricsA(hdc : Win32cr::Graphics::Gdi::HDC, lptm : Win32cr::Graphics::Gdi::TEXTMETRICA*) : Win32cr::Foundation::BOOL
+    C.GetTextMetricsA(hdc, lptm)
+  end
+
+  def getTextMetricsW(hdc : Win32cr::Graphics::Gdi::HDC, lptm : Win32cr::Graphics::Gdi::TEXTMETRICW*) : Win32cr::Foundation::BOOL
+    C.GetTextMetricsW(hdc, lptm)
+  end
+
+  def angleArc(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, r : UInt32, start_angle : Float32, sweep_angle : Float32) : Win32cr::Foundation::BOOL
+    C.AngleArc(hdc, x, y, r, start_angle, sweep_angle)
+  end
+
+  def polyPolyline(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, asz : UInt32*, csz : UInt32) : Win32cr::Foundation::BOOL
+    C.PolyPolyline(hdc, apt, asz, csz)
+  end
+
+  def getWorldTransform(hdc : Win32cr::Graphics::Gdi::HDC, lpxf : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::BOOL
+    C.GetWorldTransform(hdc, lpxf)
+  end
+
+  def setWorldTransform(hdc : Win32cr::Graphics::Gdi::HDC, lpxf : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::BOOL
+    C.SetWorldTransform(hdc, lpxf)
+  end
+
+  def modifyWorldTransform(hdc : Win32cr::Graphics::Gdi::HDC, lpxf : Win32cr::Graphics::Gdi::XFORM*, mode : Win32cr::Graphics::Gdi::MODIFY_WORLD_TRANSFORM_MODE) : Win32cr::Foundation::BOOL
+    C.ModifyWorldTransform(hdc, lpxf, mode)
+  end
+
+  def combineTransform(lpxfOut : Win32cr::Graphics::Gdi::XFORM*, lpxf1 : Win32cr::Graphics::Gdi::XFORM*, lpxf2 : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::BOOL
+    C.CombineTransform(lpxfOut, lpxf1, lpxf2)
+  end
+
+  def createDIBSection(hdc : Win32cr::Graphics::Gdi::HDC, pbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, usage : Win32cr::Graphics::Gdi::DIB_USAGE, ppvBits : Void**, hSection : Win32cr::Foundation::HANDLE, offset : UInt32) : Win32cr::Graphics::Gdi::HBITMAP
+    C.CreateDIBSection(hdc, pbmi, usage, ppvBits, hSection, offset)
+  end
+
+  def getDIBColorTable(hdc : Win32cr::Graphics::Gdi::HDC, iStart : UInt32, cEntries : UInt32, prgbq : Win32cr::Graphics::Gdi::RGBQUAD*) : UInt32
+    C.GetDIBColorTable(hdc, iStart, cEntries, prgbq)
+  end
+
+  def setDIBColorTable(hdc : Win32cr::Graphics::Gdi::HDC, iStart : UInt32, cEntries : UInt32, prgbq : Win32cr::Graphics::Gdi::RGBQUAD*) : UInt32
+    C.SetDIBColorTable(hdc, iStart, cEntries, prgbq)
+  end
+
+  def setColorAdjustment(hdc : Win32cr::Graphics::Gdi::HDC, lpca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*) : Win32cr::Foundation::BOOL
+    C.SetColorAdjustment(hdc, lpca)
+  end
+
+  def getColorAdjustment(hdc : Win32cr::Graphics::Gdi::HDC, lpca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*) : Win32cr::Foundation::BOOL
+    C.GetColorAdjustment(hdc, lpca)
+  end
+
+  def createHalftonePalette(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HPALETTE
+    C.CreateHalftonePalette(hdc)
+  end
+
+  def abortPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    C.AbortPath(hdc)
+  end
+
+  def arcTo(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, xr1 : Int32, yr1 : Int32, xr2 : Int32, yr2 : Int32) : Win32cr::Foundation::BOOL
+    C.ArcTo(hdc, left, top, right, bottom, xr1, yr1, xr2, yr2)
+  end
+
+  def beginPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    C.BeginPath(hdc)
+  end
+
+  def closeFigure(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    C.CloseFigure(hdc)
+  end
+
+  def endPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    C.EndPath(hdc)
+  end
+
+  def fillPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    C.FillPath(hdc)
+  end
+
+  def flattenPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    C.FlattenPath(hdc)
+  end
+
+  def getPath(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, aj : UInt8*, cpt : Int32) : Int32
+    C.GetPath(hdc, apt, aj, cpt)
+  end
+
+  def pathToRegion(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HRGN
+    C.PathToRegion(hdc)
+  end
+
+  def polyDraw(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, aj : UInt8*, cpt : Int32) : Win32cr::Foundation::BOOL
+    C.PolyDraw(hdc, apt, aj, cpt)
+  end
+
+  def selectClipPath(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE) : Win32cr::Foundation::BOOL
+    C.SelectClipPath(hdc, mode)
+  end
+
+  def setArcDirection(hdc : Win32cr::Graphics::Gdi::HDC, dir : Win32cr::Graphics::Gdi::ARC_DIRECTION) : Int32
+    C.SetArcDirection(hdc, dir)
+  end
+
+  def setMiterLimit(hdc : Win32cr::Graphics::Gdi::HDC, limit : Float32, old : Float32*) : Win32cr::Foundation::BOOL
+    C.SetMiterLimit(hdc, limit, old)
+  end
+
+  def strokeAndFillPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    C.StrokeAndFillPath(hdc)
+  end
+
+  def strokePath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    C.StrokePath(hdc)
+  end
+
+  def widenPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    C.WidenPath(hdc)
+  end
+
+  def extCreatePen(iPenStyle : Win32cr::Graphics::Gdi::PEN_STYLE, cWidth : UInt32, plbrush : Win32cr::Graphics::Gdi::LOGBRUSH*, cStyle : UInt32, pstyle : UInt32*) : Win32cr::Graphics::Gdi::HPEN
+    C.ExtCreatePen(iPenStyle, cWidth, plbrush, cStyle, pstyle)
+  end
+
+  def getMiterLimit(hdc : Win32cr::Graphics::Gdi::HDC, plimit : Float32*) : Win32cr::Foundation::BOOL
+    C.GetMiterLimit(hdc, plimit)
+  end
+
+  def getArcDirection(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.GetArcDirection(hdc)
+  end
+
+  def getObjectW(h : Win32cr::Graphics::Gdi::HGDIOBJ, c : Int32, pv : Void*) : Int32
+    C.GetObjectW(h, c, pv)
+  end
+
+  def moveToEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.MoveToEx(hdc, x, y, lppt)
+  end
+
+  def textOutA(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt8*, c : Int32) : Win32cr::Foundation::BOOL
+    C.TextOutA(hdc, x, y, lpString, c)
+  end
+
+  def textOutW(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt16*, c : Int32) : Win32cr::Foundation::BOOL
+    C.TextOutW(hdc, x, y, lpString, c)
+  end
+
+  def extTextOutA(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, options : Win32cr::Graphics::Gdi::ETO_OPTIONS, lprect : Win32cr::Foundation::RECT*, lpString : UInt8*, c : UInt32, lpDx : Int32*) : Win32cr::Foundation::BOOL
+    C.ExtTextOutA(hdc, x, y, options, lprect, lpString, c, lpDx)
+  end
+
+  def extTextOutW(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, options : Win32cr::Graphics::Gdi::ETO_OPTIONS, lprect : Win32cr::Foundation::RECT*, lpString : UInt16*, c : UInt32, lpDx : Int32*) : Win32cr::Foundation::BOOL
+    C.ExtTextOutW(hdc, x, y, options, lprect, lpString, c, lpDx)
+  end
+
+  def polyTextOutA(hdc : Win32cr::Graphics::Gdi::HDC, ppt : Win32cr::Graphics::Gdi::POLYTEXTA*, nstrings : Int32) : Win32cr::Foundation::BOOL
+    C.PolyTextOutA(hdc, ppt, nstrings)
+  end
+
+  def polyTextOutW(hdc : Win32cr::Graphics::Gdi::HDC, ppt : Win32cr::Graphics::Gdi::POLYTEXTW*, nstrings : Int32) : Win32cr::Foundation::BOOL
+    C.PolyTextOutW(hdc, ppt, nstrings)
+  end
+
+  def createPolygonRgn(pptl : Win32cr::Foundation::POINT*, cPoint : Int32, iMode : Win32cr::Graphics::Gdi::CREATE_POLYGON_RGN_MODE) : Win32cr::Graphics::Gdi::HRGN
+    C.CreatePolygonRgn(pptl, cPoint, iMode)
+  end
+
+  def dPtoLP(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*, c : Int32) : Win32cr::Foundation::BOOL
+    C.DPtoLP(hdc, lppt, c)
+  end
+
+  def lPtoDP(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*, c : Int32) : Win32cr::Foundation::BOOL
+    C.LPtoDP(hdc, lppt, c)
+  end
+
+  def polygon(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : Int32) : Win32cr::Foundation::BOOL
+    C.Polygon(hdc, apt, cpt)
+  end
+
+  def polyline(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : Int32) : Win32cr::Foundation::BOOL
+    C.Polyline(hdc, apt, cpt)
+  end
+
+  def polyBezier(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : UInt32) : Win32cr::Foundation::BOOL
+    C.PolyBezier(hdc, apt, cpt)
+  end
+
+  def polyBezierTo(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : UInt32) : Win32cr::Foundation::BOOL
+    C.PolyBezierTo(hdc, apt, cpt)
+  end
+
+  def polylineTo(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : UInt32) : Win32cr::Foundation::BOOL
+    C.PolylineTo(hdc, apt, cpt)
+  end
+
+  def setViewportExtEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.SetViewportExtEx(hdc, x, y, lpsz)
+  end
+
+  def setViewportOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.SetViewportOrgEx(hdc, x, y, lppt)
+  end
+
+  def setWindowExtEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.SetWindowExtEx(hdc, x, y, lpsz)
+  end
+
+  def setWindowOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.SetWindowOrgEx(hdc, x, y, lppt)
+  end
+
+  def offsetViewportOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.OffsetViewportOrgEx(hdc, x, y, lppt)
+  end
+
+  def offsetWindowOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.OffsetWindowOrgEx(hdc, x, y, lppt)
+  end
+
+  def scaleViewportExtEx(hdc : Win32cr::Graphics::Gdi::HDC, xn : Int32, dx : Int32, yn : Int32, yd : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.ScaleViewportExtEx(hdc, xn, dx, yn, yd, lpsz)
+  end
+
+  def scaleWindowExtEx(hdc : Win32cr::Graphics::Gdi::HDC, xn : Int32, xd : Int32, yn : Int32, yd : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.ScaleWindowExtEx(hdc, xn, xd, yn, yd, lpsz)
+  end
+
+  def setBitmapDimensionEx(hbm : Win32cr::Graphics::Gdi::HBITMAP, w : Int32, h : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    C.SetBitmapDimensionEx(hbm, w, h, lpsz)
+  end
+
+  def setBrushOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.SetBrushOrgEx(hdc, x, y, lppt)
+  end
+
+  def getTextFaceA(hdc : Win32cr::Graphics::Gdi::HDC, c : Int32, lpName : UInt8*) : Int32
+    C.GetTextFaceA(hdc, c, lpName)
+  end
+
+  def getTextFaceW(hdc : Win32cr::Graphics::Gdi::HDC, c : Int32, lpName : UInt16*) : Int32
+    C.GetTextFaceW(hdc, c, lpName)
+  end
+
+  def getKerningPairsA(hdc : Win32cr::Graphics::Gdi::HDC, nPairs : UInt32, lpKernPair : Win32cr::Graphics::Gdi::KERNINGPAIR*) : UInt32
+    C.GetKerningPairsA(hdc, nPairs, lpKernPair)
+  end
+
+  def getKerningPairsW(hdc : Win32cr::Graphics::Gdi::HDC, nPairs : UInt32, lpKernPair : Win32cr::Graphics::Gdi::KERNINGPAIR*) : UInt32
+    C.GetKerningPairsW(hdc, nPairs, lpKernPair)
+  end
+
+  def getDCOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.GetDCOrgEx(hdc, lppt)
+  end
+
+  def fixBrushOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, ptl : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.FixBrushOrgEx(hdc, x, y, ptl)
+  end
+
+  def unrealizeObject(h : Win32cr::Graphics::Gdi::HGDIOBJ) : Win32cr::Foundation::BOOL
+    C.UnrealizeObject(h)
+  end
+
+  def gdiFlush : Win32cr::Foundation::BOOL
+    C.GdiFlush
+  end
+
+  def gdiSetBatchLimit(dw : UInt32) : UInt32
+    C.GdiSetBatchLimit(dw)
+  end
+
+  def gdiGetBatchLimit : UInt32
+    C.GdiGetBatchLimit
+  end
+
+  def wglSwapMultipleBuffers(param0 : UInt32, param1 : Win32cr::Graphics::Gdi::WGLSWAP*) : UInt32
+    C.wglSwapMultipleBuffers(param0, param1)
+  end
+
+  def createFontPackage(puchSrcBuffer : UInt8*, ulSrcBufferSize : UInt32, ppuchFontPackageBuffer : UInt8**, pulFontPackageBufferSize : UInt32*, pulBytesWritten : UInt32*, usFlag : UInt16, usTTCIndex : UInt16, usSubsetFormat : UInt16, usSubsetLanguage : UInt16, usSubsetPlatform : Win32cr::Graphics::Gdi::CREATE_FONT_PACKAGE_SUBSET_PLATFORM, usSubsetEncoding : Win32cr::Graphics::Gdi::CREATE_FONT_PACKAGE_SUBSET_ENCODING, pusSubsetKeepList : UInt16*, usSubsetListCount : UInt16, lpfnAllocate : Win32cr::Graphics::Gdi::CFP_ALLOCPROC, lpfnReAllocate : Win32cr::Graphics::Gdi::CFP_REALLOCPROC, lpfnFree : Win32cr::Graphics::Gdi::CFP_FREEPROC, lpvReserved : Void*) : UInt32
+    C.CreateFontPackage(puchSrcBuffer, ulSrcBufferSize, ppuchFontPackageBuffer, pulFontPackageBufferSize, pulBytesWritten, usFlag, usTTCIndex, usSubsetFormat, usSubsetLanguage, usSubsetPlatform, usSubsetEncoding, pusSubsetKeepList, usSubsetListCount, lpfnAllocate, lpfnReAllocate, lpfnFree, lpvReserved)
+  end
+
+  def mergeFontPackage(puchMergeFontBuffer : UInt8*, ulMergeFontBufferSize : UInt32, puchFontPackageBuffer : UInt8*, ulFontPackageBufferSize : UInt32, ppuchDestBuffer : UInt8**, pulDestBufferSize : UInt32*, pulBytesWritten : UInt32*, usMode : UInt16, lpfnAllocate : Win32cr::Graphics::Gdi::CFP_ALLOCPROC, lpfnReAllocate : Win32cr::Graphics::Gdi::CFP_REALLOCPROC, lpfnFree : Win32cr::Graphics::Gdi::CFP_FREEPROC, lpvReserved : Void*) : UInt32
+    C.MergeFontPackage(puchMergeFontBuffer, ulMergeFontBufferSize, puchFontPackageBuffer, ulFontPackageBufferSize, ppuchDestBuffer, pulDestBufferSize, pulBytesWritten, usMode, lpfnAllocate, lpfnReAllocate, lpfnFree, lpvReserved)
+  end
+
+  def tTEmbedFont(hDC : Win32cr::Graphics::Gdi::HDC, ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, ulCharSet : Win32cr::Graphics::Gdi::EMBED_FONT_CHARSET, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, pulStatus : UInt32*, lpfnWriteToStream : Win32cr::Graphics::Gdi::WRITEEMBEDPROC, lpvWriteStream : Void*, pusCharCodeSet : UInt16*, usCharCodeCount : UInt16, usLanguage : UInt16, pTTEmbedInfo : Win32cr::Graphics::Gdi::TTEMBEDINFO*) : Int32
+    C.TTEmbedFont(hDC, ulFlags, ulCharSet, pulPrivStatus, pulStatus, lpfnWriteToStream, lpvWriteStream, pusCharCodeSet, usCharCodeCount, usLanguage, pTTEmbedInfo)
+  end
+
+  def tTEmbedFontFromFileA(hDC : Win32cr::Graphics::Gdi::HDC, szFontFileName : Win32cr::Foundation::PSTR, usTTCIndex : UInt16, ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, ulCharSet : Win32cr::Graphics::Gdi::EMBED_FONT_CHARSET, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, pulStatus : UInt32*, lpfnWriteToStream : Win32cr::Graphics::Gdi::WRITEEMBEDPROC, lpvWriteStream : Void*, pusCharCodeSet : UInt16*, usCharCodeCount : UInt16, usLanguage : UInt16, pTTEmbedInfo : Win32cr::Graphics::Gdi::TTEMBEDINFO*) : Int32
+    C.TTEmbedFontFromFileA(hDC, szFontFileName, usTTCIndex, ulFlags, ulCharSet, pulPrivStatus, pulStatus, lpfnWriteToStream, lpvWriteStream, pusCharCodeSet, usCharCodeCount, usLanguage, pTTEmbedInfo)
+  end
+
+  def tTLoadEmbeddedFont(phFontReference : Win32cr::Foundation::HANDLE*, ulFlags : UInt32, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, ulPrivs : Win32cr::Graphics::Gdi::FONT_LICENSE_PRIVS, pulStatus : Win32cr::Graphics::Gdi::TTLOAD_EMBEDDED_FONT_STATUS*, lpfnReadFromStream : Win32cr::Graphics::Gdi::READEMBEDPROC, lpvReadStream : Void*, szWinFamilyName : Win32cr::Foundation::PWSTR, szMacFamilyName : Win32cr::Foundation::PSTR, pTTLoadInfo : Win32cr::Graphics::Gdi::TTLOADINFO*) : Int32
+    C.TTLoadEmbeddedFont(phFontReference, ulFlags, pulPrivStatus, ulPrivs, pulStatus, lpfnReadFromStream, lpvReadStream, szWinFamilyName, szMacFamilyName, pTTLoadInfo)
+  end
+
+  def tTGetEmbeddedFontInfo(ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, pulPrivStatus : UInt32*, ulPrivs : Win32cr::Graphics::Gdi::FONT_LICENSE_PRIVS, pulStatus : UInt32*, lpfnReadFromStream : Win32cr::Graphics::Gdi::READEMBEDPROC, lpvReadStream : Void*, pTTLoadInfo : Win32cr::Graphics::Gdi::TTLOADINFO*) : Int32
+    C.TTGetEmbeddedFontInfo(ulFlags, pulPrivStatus, ulPrivs, pulStatus, lpfnReadFromStream, lpvReadStream, pTTLoadInfo)
+  end
+
+  def tTDeleteEmbeddedFont(hFontReference : Win32cr::Foundation::HANDLE, ulFlags : UInt32, pulStatus : UInt32*) : Int32
+    C.TTDeleteEmbeddedFont(hFontReference, ulFlags, pulStatus)
+  end
+
+  def tTGetEmbeddingType(hDC : Win32cr::Graphics::Gdi::HDC, pulEmbedType : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*) : Int32
+    C.TTGetEmbeddingType(hDC, pulEmbedType)
+  end
+
+  def tTCharToUnicode(hDC : Win32cr::Graphics::Gdi::HDC, pucCharCodes : UInt8*, ulCharCodeSize : UInt32, pusShortCodes : UInt16*, ulShortCodeSize : UInt32, ulFlags : UInt32) : Int32
+    C.TTCharToUnicode(hDC, pucCharCodes, ulCharCodeSize, pusShortCodes, ulShortCodeSize, ulFlags)
+  end
+
+  def tTRunValidationTests(hDC : Win32cr::Graphics::Gdi::HDC, pTestParam : Win32cr::Graphics::Gdi::TTVALIDATIONTESTSPARAMS*) : Int32
+    C.TTRunValidationTests(hDC, pTestParam)
+  end
+
+  def tTIsEmbeddingEnabled(hDC : Win32cr::Graphics::Gdi::HDC, pbEnabled : Win32cr::Foundation::BOOL*) : Int32
+    C.TTIsEmbeddingEnabled(hDC, pbEnabled)
+  end
+
+  def tTIsEmbeddingEnabledForFacename(lpszFacename : Win32cr::Foundation::PSTR, pbEnabled : Win32cr::Foundation::BOOL*) : Int32
+    C.TTIsEmbeddingEnabledForFacename(lpszFacename, pbEnabled)
+  end
+
+  def tTEnableEmbeddingForFacename(lpszFacename : Win32cr::Foundation::PSTR, bEnable : Win32cr::Foundation::BOOL) : Int32
+    C.TTEnableEmbeddingForFacename(lpszFacename, bEnable)
+  end
+
+  def tTEmbedFontEx(hDC : Win32cr::Graphics::Gdi::HDC, ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, ulCharSet : Win32cr::Graphics::Gdi::EMBED_FONT_CHARSET, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, pulStatus : UInt32*, lpfnWriteToStream : Win32cr::Graphics::Gdi::WRITEEMBEDPROC, lpvWriteStream : Void*, pulCharCodeSet : UInt32*, usCharCodeCount : UInt16, usLanguage : UInt16, pTTEmbedInfo : Win32cr::Graphics::Gdi::TTEMBEDINFO*) : Int32
+    C.TTEmbedFontEx(hDC, ulFlags, ulCharSet, pulPrivStatus, pulStatus, lpfnWriteToStream, lpvWriteStream, pulCharCodeSet, usCharCodeCount, usLanguage, pTTEmbedInfo)
+  end
+
+  def tTRunValidationTestsEx(hDC : Win32cr::Graphics::Gdi::HDC, pTestParam : Win32cr::Graphics::Gdi::TTVALIDATIONTESTSPARAMSEX*) : Int32
+    C.TTRunValidationTestsEx(hDC, pTestParam)
+  end
+
+  def tTGetNewFontName(phFontReference : Win32cr::Foundation::HANDLE*, wzWinFamilyName : UInt16*, cchMaxWinName : Int32, szMacFamilyName : UInt8*, cchMaxMacName : Int32) : Int32
+    C.TTGetNewFontName(phFontReference, wzWinFamilyName, cchMaxWinName, szMacFamilyName, cchMaxMacName)
+  end
+
+  def drawEdge(hdc : Win32cr::Graphics::Gdi::HDC, qrc : Win32cr::Foundation::RECT*, edge : Win32cr::Graphics::Gdi::DRAWEDGE_FLAGS, grfFlags : Win32cr::Graphics::Gdi::DRAW_EDGE_FLAGS) : Win32cr::Foundation::BOOL
+    C.DrawEdge(hdc, qrc, edge, grfFlags)
+  end
+
+  def drawFrameControl(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Win32cr::Foundation::RECT*, param2 : Win32cr::Graphics::Gdi::DFC_TYPE, param3 : Win32cr::Graphics::Gdi::DFCS_STATE) : Win32cr::Foundation::BOOL
+    C.DrawFrameControl(param0, param1, param2, param3)
+  end
+
+  def drawCaption(hwnd : Win32cr::Foundation::HWND, hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*, flags : Win32cr::Graphics::Gdi::DRAW_CAPTION_FLAGS) : Win32cr::Foundation::BOOL
+    C.DrawCaption(hwnd, hdc, lprect, flags)
+  end
+
+  def drawAnimatedRects(hwnd : Win32cr::Foundation::HWND, idAni : Int32, lprcFrom : Win32cr::Foundation::RECT*, lprcTo : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.DrawAnimatedRects(hwnd, idAni, lprcFrom, lprcTo)
+  end
+
+  def drawTextA(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt8*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT) : Int32
+    C.DrawTextA(hdc, lpchText, cchText, lprc, format)
+  end
+
+  def drawTextW(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt16*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT) : Int32
+    C.DrawTextW(hdc, lpchText, cchText, lprc, format)
+  end
+
+  def drawTextExA(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt8*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT, lpdtp : Win32cr::Graphics::Gdi::DRAWTEXTPARAMS*) : Int32
+    C.DrawTextExA(hdc, lpchText, cchText, lprc, format, lpdtp)
+  end
+
+  def drawTextExW(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt16*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT, lpdtp : Win32cr::Graphics::Gdi::DRAWTEXTPARAMS*) : Int32
+    C.DrawTextExW(hdc, lpchText, cchText, lprc, format, lpdtp)
+  end
+
+  def grayStringA(hDC : Win32cr::Graphics::Gdi::HDC, hBrush : Win32cr::Graphics::Gdi::HBRUSH, lpOutputFunc : Win32cr::Graphics::Gdi::GRAYSTRINGPROC, lpData : Win32cr::Foundation::LPARAM, nCount : Int32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32) : Win32cr::Foundation::BOOL
+    C.GrayStringA(hDC, hBrush, lpOutputFunc, lpData, nCount, x, y, nWidth, nHeight)
+  end
+
+  def grayStringW(hDC : Win32cr::Graphics::Gdi::HDC, hBrush : Win32cr::Graphics::Gdi::HBRUSH, lpOutputFunc : Win32cr::Graphics::Gdi::GRAYSTRINGPROC, lpData : Win32cr::Foundation::LPARAM, nCount : Int32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32) : Win32cr::Foundation::BOOL
+    C.GrayStringW(hDC, hBrush, lpOutputFunc, lpData, nCount, x, y, nWidth, nHeight)
+  end
+
+  def drawStateA(hdc : Win32cr::Graphics::Gdi::HDC, hbrFore : Win32cr::Graphics::Gdi::HBRUSH, qfnCallBack : Win32cr::Graphics::Gdi::DRAWSTATEPROC, lData : Win32cr::Foundation::LPARAM, wData : Win32cr::Foundation::WPARAM, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::Graphics::Gdi::DRAWSTATE_FLAGS) : Win32cr::Foundation::BOOL
+    C.DrawStateA(hdc, hbrFore, qfnCallBack, lData, wData, x, y, cx, cy, uFlags)
+  end
+
+  def drawStateW(hdc : Win32cr::Graphics::Gdi::HDC, hbrFore : Win32cr::Graphics::Gdi::HBRUSH, qfnCallBack : Win32cr::Graphics::Gdi::DRAWSTATEPROC, lData : Win32cr::Foundation::LPARAM, wData : Win32cr::Foundation::WPARAM, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::Graphics::Gdi::DRAWSTATE_FLAGS) : Win32cr::Foundation::BOOL
+    C.DrawStateW(hdc, hbrFore, qfnCallBack, lData, wData, x, y, cx, cy, uFlags)
+  end
+
+  def tabbedTextOutA(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt8*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*, nTabOrigin : Int32) : Int32
+    C.TabbedTextOutA(hdc, x, y, lpString, chCount, nTabPositions, lpnTabStopPositions, nTabOrigin)
+  end
+
+  def tabbedTextOutW(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt16*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*, nTabOrigin : Int32) : Int32
+    C.TabbedTextOutW(hdc, x, y, lpString, chCount, nTabPositions, lpnTabStopPositions, nTabOrigin)
+  end
+
+  def getTabbedTextExtentA(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*) : UInt32
+    C.GetTabbedTextExtentA(hdc, lpString, chCount, nTabPositions, lpnTabStopPositions)
+  end
+
+  def getTabbedTextExtentW(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*) : UInt32
+    C.GetTabbedTextExtentW(hdc, lpString, chCount, nTabPositions, lpnTabStopPositions)
+  end
+
+  def updateWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.UpdateWindow(hWnd)
+  end
+
+  def paintDesktop(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    C.PaintDesktop(hdc)
+  end
+
+  def windowFromDC(hDC : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::HWND
+    C.WindowFromDC(hDC)
+  end
+
+  def getDC(hWnd : Win32cr::Foundation::HWND) : Win32cr::Graphics::Gdi::HDC
+    C.GetDC(hWnd)
+  end
+
+  def getDCEx(hWnd : Win32cr::Foundation::HWND, hrgnClip : Win32cr::Graphics::Gdi::HRGN, flags : Win32cr::Graphics::Gdi::GET_DCX_FLAGS) : Win32cr::Graphics::Gdi::HDC
+    C.GetDCEx(hWnd, hrgnClip, flags)
+  end
+
+  def getWindowDC(hWnd : Win32cr::Foundation::HWND) : Win32cr::Graphics::Gdi::HDC
+    C.GetWindowDC(hWnd)
+  end
+
+  def releaseDC(hWnd : Win32cr::Foundation::HWND, hDC : Win32cr::Graphics::Gdi::HDC) : Int32
+    C.ReleaseDC(hWnd, hDC)
+  end
+
+  def beginPaint(hWnd : Win32cr::Foundation::HWND, lpPaint : Win32cr::Graphics::Gdi::PAINTSTRUCT*) : Win32cr::Graphics::Gdi::HDC
+    C.BeginPaint(hWnd, lpPaint)
+  end
+
+  def endPaint(hWnd : Win32cr::Foundation::HWND, lpPaint : Win32cr::Graphics::Gdi::PAINTSTRUCT*) : Win32cr::Foundation::BOOL
+    C.EndPaint(hWnd, lpPaint)
+  end
+
+  def getUpdateRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*, bErase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.GetUpdateRect(hWnd, lpRect, bErase)
+  end
+
+  def getUpdateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bErase : Win32cr::Foundation::BOOL) : Int32
+    C.GetUpdateRgn(hWnd, hRgn, bErase)
+  end
+
+  def setWindowRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bRedraw : Win32cr::Foundation::BOOL) : Int32
+    C.SetWindowRgn(hWnd, hRgn, bRedraw)
+  end
+
+  def getWindowRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN) : Int32
+    C.GetWindowRgn(hWnd, hRgn)
+  end
+
+  def getWindowRgnBox(hWnd : Win32cr::Foundation::HWND, lprc : Win32cr::Foundation::RECT*) : Int32
+    C.GetWindowRgnBox(hWnd, lprc)
+  end
+
+  def excludeUpdateRgn(hDC : Win32cr::Graphics::Gdi::HDC, hWnd : Win32cr::Foundation::HWND) : Int32
+    C.ExcludeUpdateRgn(hDC, hWnd)
+  end
+
+  def invalidateRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*, bErase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.InvalidateRect(hWnd, lpRect, bErase)
+  end
+
+  def validateRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.ValidateRect(hWnd, lpRect)
+  end
+
+  def invalidateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bErase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.InvalidateRgn(hWnd, hRgn, bErase)
+  end
+
+  def validateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
+    C.ValidateRgn(hWnd, hRgn)
+  end
+
+  def redrawWindow(hWnd : Win32cr::Foundation::HWND, lprcUpdate : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, flags : Win32cr::Graphics::Gdi::REDRAW_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
+    C.RedrawWindow(hWnd, lprcUpdate, hrgnUpdate, flags)
+  end
+
+  def lockWindowUpdate(hWndLock : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.LockWindowUpdate(hWndLock)
+  end
+
+  def clientToScreen(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.ClientToScreen(hWnd, lpPoint)
+  end
+
+  def screenToClient(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.ScreenToClient(hWnd, lpPoint)
+  end
+
+  def mapWindowPoints(hWndFrom : Win32cr::Foundation::HWND, hWndTo : Win32cr::Foundation::HWND, lpPoints : Win32cr::Foundation::POINT*, cPoints : UInt32) : Int32
+    C.MapWindowPoints(hWndFrom, hWndTo, lpPoints, cPoints)
+  end
+
+  def getSysColorBrush(nIndex : Int32) : Win32cr::Graphics::Gdi::HBRUSH
+    C.GetSysColorBrush(nIndex)
+  end
+
+  def drawFocusRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.DrawFocusRect(hDC, lprc)
+  end
+
+  def fillRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*, hbr : Win32cr::Graphics::Gdi::HBRUSH) : Int32
+    C.FillRect(hDC, lprc, hbr)
+  end
+
+  def frameRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*, hbr : Win32cr::Graphics::Gdi::HBRUSH) : Int32
+    C.FrameRect(hDC, lprc, hbr)
+  end
+
+  def invertRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.InvertRect(hDC, lprc)
+  end
+
+  def setRect(lprc : Win32cr::Foundation::RECT*, xLeft : Int32, yTop : Int32, xRight : Int32, yBottom : Int32) : Win32cr::Foundation::BOOL
+    C.SetRect(lprc, xLeft, yTop, xRight, yBottom)
+  end
+
+  def setRectEmpty(lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.SetRectEmpty(lprc)
+  end
+
+  def copyRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.CopyRect(lprcDst, lprcSrc)
+  end
+
+  def inflateRect(lprc : Win32cr::Foundation::RECT*, dx : Int32, dy : Int32) : Win32cr::Foundation::BOOL
+    C.InflateRect(lprc, dx, dy)
+  end
+
+  def intersectRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc1 : Win32cr::Foundation::RECT*, lprcSrc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.IntersectRect(lprcDst, lprcSrc1, lprcSrc2)
+  end
+
+  def unionRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc1 : Win32cr::Foundation::RECT*, lprcSrc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.UnionRect(lprcDst, lprcSrc1, lprcSrc2)
+  end
+
+  def subtractRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc1 : Win32cr::Foundation::RECT*, lprcSrc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.SubtractRect(lprcDst, lprcSrc1, lprcSrc2)
+  end
+
+  def offsetRect(lprc : Win32cr::Foundation::RECT*, dx : Int32, dy : Int32) : Win32cr::Foundation::BOOL
+    C.OffsetRect(lprc, dx, dy)
+  end
+
+  def isRectEmpty(lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.IsRectEmpty(lprc)
+  end
+
+  def equalRect(lprc1 : Win32cr::Foundation::RECT*, lprc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.EqualRect(lprc1, lprc2)
+  end
+
+  def ptInRect(lprc : Win32cr::Foundation::RECT*, pt : Win32cr::Foundation::POINT) : Win32cr::Foundation::BOOL
+    C.PtInRect(lprc, pt)
+  end
+
+  def loadBitmapA(hInstance : Win32cr::Foundation::HINSTANCE, lpBitmapName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HBITMAP
+    C.LoadBitmapA(hInstance, lpBitmapName)
+  end
+
+  def loadBitmapW(hInstance : Win32cr::Foundation::HINSTANCE, lpBitmapName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HBITMAP
+    C.LoadBitmapW(hInstance, lpBitmapName)
+  end
+
+  def changeDisplaySettingsA(lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : Win32cr::Graphics::Gdi::CDS_TYPE) : Win32cr::Graphics::Gdi::DISP_CHANGE
+    C.ChangeDisplaySettingsA(lpDevMode, dwFlags)
+  end
+
+  def changeDisplaySettingsW(lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : Win32cr::Graphics::Gdi::CDS_TYPE) : Win32cr::Graphics::Gdi::DISP_CHANGE
+    C.ChangeDisplaySettingsW(lpDevMode, dwFlags)
+  end
+
+  def changeDisplaySettingsExA(lpszDeviceName : Win32cr::Foundation::PSTR, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, hwnd : Win32cr::Foundation::HWND, dwflags : Win32cr::Graphics::Gdi::CDS_TYPE, lParam : Void*) : Win32cr::Graphics::Gdi::DISP_CHANGE
+    C.ChangeDisplaySettingsExA(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam)
+  end
+
+  def changeDisplaySettingsExW(lpszDeviceName : Win32cr::Foundation::PWSTR, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, hwnd : Win32cr::Foundation::HWND, dwflags : Win32cr::Graphics::Gdi::CDS_TYPE, lParam : Void*) : Win32cr::Graphics::Gdi::DISP_CHANGE
+    C.ChangeDisplaySettingsExW(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam)
+  end
+
+  def enumDisplaySettingsA(lpszDeviceName : Win32cr::Foundation::PSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Foundation::BOOL
+    C.EnumDisplaySettingsA(lpszDeviceName, iModeNum, lpDevMode)
+  end
+
+  def enumDisplaySettingsW(lpszDeviceName : Win32cr::Foundation::PWSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Foundation::BOOL
+    C.EnumDisplaySettingsW(lpszDeviceName, iModeNum, lpDevMode)
+  end
+
+  def enumDisplaySettingsExA(lpszDeviceName : Win32cr::Foundation::PSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.EnumDisplaySettingsExA(lpszDeviceName, iModeNum, lpDevMode, dwFlags)
+  end
+
+  def enumDisplaySettingsExW(lpszDeviceName : Win32cr::Foundation::PWSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.EnumDisplaySettingsExW(lpszDeviceName, iModeNum, lpDevMode, dwFlags)
+  end
+
+  def enumDisplayDevicesA(lpDevice : Win32cr::Foundation::PSTR, iDevNum : UInt32, lpDisplayDevice : Win32cr::Graphics::Gdi::DISPLAY_DEVICEA*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.EnumDisplayDevicesA(lpDevice, iDevNum, lpDisplayDevice, dwFlags)
+  end
+
+  def enumDisplayDevicesW(lpDevice : Win32cr::Foundation::PWSTR, iDevNum : UInt32, lpDisplayDevice : Win32cr::Graphics::Gdi::DISPLAY_DEVICEW*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.EnumDisplayDevicesW(lpDevice, iDevNum, lpDisplayDevice, dwFlags)
+  end
+
+  def monitorFromPoint(pt : Win32cr::Foundation::POINT, dwFlags : Win32cr::Graphics::Gdi::MONITOR_FROM_FLAGS) : Win32cr::Graphics::Gdi::HMONITOR
+    C.MonitorFromPoint(pt, dwFlags)
+  end
+
+  def monitorFromRect(lprc : Win32cr::Foundation::RECT*, dwFlags : Win32cr::Graphics::Gdi::MONITOR_FROM_FLAGS) : Win32cr::Graphics::Gdi::HMONITOR
+    C.MonitorFromRect(lprc, dwFlags)
+  end
+
+  def monitorFromWindow(hwnd : Win32cr::Foundation::HWND, dwFlags : Win32cr::Graphics::Gdi::MONITOR_FROM_FLAGS) : Win32cr::Graphics::Gdi::HMONITOR
+    C.MonitorFromWindow(hwnd, dwFlags)
+  end
+
+  def getMonitorInfoA(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, lpmi : Win32cr::Graphics::Gdi::MONITORINFO*) : Win32cr::Foundation::BOOL
+    C.GetMonitorInfoA(hMonitor, lpmi)
+  end
+
+  def getMonitorInfoW(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, lpmi : Win32cr::Graphics::Gdi::MONITORINFO*) : Win32cr::Foundation::BOOL
+    C.GetMonitorInfoW(hMonitor, lpmi)
+  end
+
+  def enumDisplayMonitors(hdc : Win32cr::Graphics::Gdi::HDC, lprcClip : Win32cr::Foundation::RECT*, lpfnEnum : Win32cr::Graphics::Gdi::MONITORENUMPROC, dwData : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.EnumDisplayMonitors(hdc, lprcClip, lpfnEnum, dwData)
+  end
+
   @[Link("gdi32")]
   @[Link("msimg32")]
   @[Link("opengl32")]
@@ -3830,792 +5407,1186 @@ module Win32cr::Graphics::Gdi
   @[Link("t2embed")]
   @[Link("user32")]
   lib C
+    # :nodoc:
     fun GetObjectA(h : Win32cr::Graphics::Gdi::HGDIOBJ, c : Int32, pv : Void*) : Int32
 
+    # :nodoc:
     fun AddFontResourceA(param0 : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun AddFontResourceW(param0 : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun AnimatePalette(hPal : Win32cr::Graphics::Gdi::HPALETTE, iStartIndex : UInt32, cEntries : UInt32, ppe : Win32cr::Graphics::Gdi::PALETTEENTRY*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun Arc(hdc : Win32cr::Graphics::Gdi::HDC, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, x3 : Int32, y3 : Int32, x4 : Int32, y4 : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BitBlt(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, cx : Int32, cy : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, x1 : Int32, y1 : Int32, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CancelDC(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun Chord(hdc : Win32cr::Graphics::Gdi::HDC, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, x3 : Int32, y3 : Int32, x4 : Int32, y4 : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CloseMetaFile(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HMETAFILE
 
+    # :nodoc:
     fun CombineRgn(hrgnDst : Win32cr::Graphics::Gdi::HRGN, hrgnSrc1 : Win32cr::Graphics::Gdi::HRGN, hrgnSrc2 : Win32cr::Graphics::Gdi::HRGN, iMode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
 
+    # :nodoc:
     fun CopyMetaFileA(param0 : Win32cr::Graphics::Gdi::HMETAFILE, param1 : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HMETAFILE
 
+    # :nodoc:
     fun CopyMetaFileW(param0 : Win32cr::Graphics::Gdi::HMETAFILE, param1 : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HMETAFILE
 
+    # :nodoc:
     fun CreateBitmap(nWidth : Int32, nHeight : Int32, nPlanes : UInt32, nBitCount : UInt32, lpBits : Void*) : Win32cr::Graphics::Gdi::HBITMAP
 
+    # :nodoc:
     fun CreateBitmapIndirect(pbm : Win32cr::Graphics::Gdi::BITMAP*) : Win32cr::Graphics::Gdi::HBITMAP
 
+    # :nodoc:
     fun CreateBrushIndirect(plbrush : Win32cr::Graphics::Gdi::LOGBRUSH*) : Win32cr::Graphics::Gdi::HBRUSH
 
+    # :nodoc:
     fun CreateCompatibleBitmap(hdc : Win32cr::Graphics::Gdi::HDC, cx : Int32, cy : Int32) : Win32cr::Graphics::Gdi::HBITMAP
 
+    # :nodoc:
     fun CreateDiscardableBitmap(hdc : Win32cr::Graphics::Gdi::HDC, cx : Int32, cy : Int32) : Win32cr::Graphics::Gdi::HBITMAP
 
+    # :nodoc:
     fun CreateCompatibleDC(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::CreatedHDC
 
+    # :nodoc:
     fun CreateDCA(pwszDriver : Win32cr::Foundation::PSTR, pwszDevice : Win32cr::Foundation::PSTR, pszPort : Win32cr::Foundation::PSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Graphics::Gdi::CreatedHDC
 
+    # :nodoc:
     fun CreateDCW(pwszDriver : Win32cr::Foundation::PWSTR, pwszDevice : Win32cr::Foundation::PWSTR, pszPort : Win32cr::Foundation::PWSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Graphics::Gdi::CreatedHDC
 
+    # :nodoc:
     fun CreateDIBitmap(hdc : Win32cr::Graphics::Gdi::HDC, pbmih : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, flInit : UInt32, pjBits : Void*, pbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE) : Win32cr::Graphics::Gdi::HBITMAP
 
+    # :nodoc:
     fun CreateDIBPatternBrush(h : LibC::IntPtrT, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE) : Win32cr::Graphics::Gdi::HBRUSH
 
+    # :nodoc:
     fun CreateDIBPatternBrushPt(lpPackedDIB : Void*, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE) : Win32cr::Graphics::Gdi::HBRUSH
 
+    # :nodoc:
     fun CreateEllipticRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32) : Win32cr::Graphics::Gdi::HRGN
 
+    # :nodoc:
     fun CreateEllipticRgnIndirect(lprect : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::HRGN
 
+    # :nodoc:
     fun CreateFontIndirectA(lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Graphics::Gdi::HFONT
 
+    # :nodoc:
     fun CreateFontIndirectW(lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Graphics::Gdi::HFONT
 
+    # :nodoc:
     fun CreateFontA(cHeight : Int32, cWidth : Int32, cEscapement : Int32, cOrientation : Int32, cWeight : Int32, bItalic : UInt32, bUnderline : UInt32, bStrikeOut : UInt32, iCharSet : UInt32, iOutPrecision : Win32cr::Graphics::Gdi::FONT_OUTPUT_PRECISION, iClipPrecision : Win32cr::Graphics::Gdi::FONT_CLIP_PRECISION, iQuality : Win32cr::Graphics::Gdi::FONT_QUALITY, iPitchAndFamily : Win32cr::Graphics::Gdi::FONT_PITCH_AND_FAMILY, pszFaceName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HFONT
 
+    # :nodoc:
     fun CreateFontW(cHeight : Int32, cWidth : Int32, cEscapement : Int32, cOrientation : Int32, cWeight : Int32, bItalic : UInt32, bUnderline : UInt32, bStrikeOut : UInt32, iCharSet : UInt32, iOutPrecision : Win32cr::Graphics::Gdi::FONT_OUTPUT_PRECISION, iClipPrecision : Win32cr::Graphics::Gdi::FONT_CLIP_PRECISION, iQuality : Win32cr::Graphics::Gdi::FONT_QUALITY, iPitchAndFamily : Win32cr::Graphics::Gdi::FONT_PITCH_AND_FAMILY, pszFaceName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HFONT
 
+    # :nodoc:
     fun CreateHatchBrush(iHatch : Win32cr::Graphics::Gdi::HATCH_BRUSH_STYLE, color : UInt32) : Win32cr::Graphics::Gdi::HBRUSH
 
+    # :nodoc:
     fun CreateICA(pszDriver : Win32cr::Foundation::PSTR, pszDevice : Win32cr::Foundation::PSTR, pszPort : Win32cr::Foundation::PSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Graphics::Gdi::CreatedHDC
 
+    # :nodoc:
     fun CreateICW(pszDriver : Win32cr::Foundation::PWSTR, pszDevice : Win32cr::Foundation::PWSTR, pszPort : Win32cr::Foundation::PWSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Graphics::Gdi::CreatedHDC
 
+    # :nodoc:
     fun CreateMetaFileA(pszFile : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HdcMetdataFileHandle
 
+    # :nodoc:
     fun CreateMetaFileW(pszFile : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HdcMetdataFileHandle
 
+    # :nodoc:
     fun CreatePalette(plpal : Win32cr::Graphics::Gdi::LOGPALETTE*) : Win32cr::Graphics::Gdi::HPALETTE
 
+    # :nodoc:
     fun CreatePen(iStyle : Win32cr::Graphics::Gdi::PEN_STYLE, cWidth : Int32, color : UInt32) : Win32cr::Graphics::Gdi::HPEN
 
+    # :nodoc:
     fun CreatePenIndirect(plpen : Win32cr::Graphics::Gdi::LOGPEN*) : Win32cr::Graphics::Gdi::HPEN
 
+    # :nodoc:
     fun CreatePolyPolygonRgn(pptl : Win32cr::Foundation::POINT*, pc : Int32*, cPoly : Int32, iMode : Win32cr::Graphics::Gdi::CREATE_POLYGON_RGN_MODE) : Win32cr::Graphics::Gdi::HRGN
 
+    # :nodoc:
     fun CreatePatternBrush(hbm : Win32cr::Graphics::Gdi::HBITMAP) : Win32cr::Graphics::Gdi::HBRUSH
 
+    # :nodoc:
     fun CreateRectRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32) : Win32cr::Graphics::Gdi::HRGN
 
+    # :nodoc:
     fun CreateRectRgnIndirect(lprect : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::HRGN
 
+    # :nodoc:
     fun CreateRoundRectRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, w : Int32, h : Int32) : Win32cr::Graphics::Gdi::HRGN
 
+    # :nodoc:
     fun CreateScalableFontResourceA(fdwHidden : UInt32, lpszFont : Win32cr::Foundation::PSTR, lpszFile : Win32cr::Foundation::PSTR, lpszPath : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateScalableFontResourceW(fdwHidden : UInt32, lpszFont : Win32cr::Foundation::PWSTR, lpszFile : Win32cr::Foundation::PWSTR, lpszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateSolidBrush(color : UInt32) : Win32cr::Graphics::Gdi::HBRUSH
 
+    # :nodoc:
     fun DeleteDC(hdc : Win32cr::Graphics::Gdi::CreatedHDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteMetaFile(hmf : Win32cr::Graphics::Gdi::HMETAFILE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteObject(ho : Win32cr::Graphics::Gdi::HGDIOBJ) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DrawEscape(hdc : Win32cr::Graphics::Gdi::HDC, iEscape : Int32, cjIn : Int32, lpIn : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun Ellipse(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumFontFamiliesExA(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Graphics::Gdi::LOGFONTA*, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCA, lParam : Win32cr::Foundation::LPARAM, dwFlags : UInt32) : Int32
 
+    # :nodoc:
     fun EnumFontFamiliesExW(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Graphics::Gdi::LOGFONTW*, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCW, lParam : Win32cr::Foundation::LPARAM, dwFlags : UInt32) : Int32
 
+    # :nodoc:
     fun EnumFontFamiliesA(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCA, lParam : Win32cr::Foundation::LPARAM) : Int32
 
+    # :nodoc:
     fun EnumFontFamiliesW(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PWSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCW, lParam : Win32cr::Foundation::LPARAM) : Int32
 
+    # :nodoc:
     fun EnumFontsA(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCA, lParam : Win32cr::Foundation::LPARAM) : Int32
 
+    # :nodoc:
     fun EnumFontsW(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PWSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCW, lParam : Win32cr::Foundation::LPARAM) : Int32
 
+    # :nodoc:
     fun EnumObjects(hdc : Win32cr::Graphics::Gdi::HDC, nType : Win32cr::Graphics::Gdi::OBJ_TYPE, lpFunc : Win32cr::Graphics::Gdi::GOBJENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Int32
 
+    # :nodoc:
     fun EqualRgn(hrgn1 : Win32cr::Graphics::Gdi::HRGN, hrgn2 : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ExcludeClipRect(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
 
+    # :nodoc:
     fun ExtCreateRegion(lpx : Win32cr::Graphics::Gdi::XFORM*, nCount : UInt32, lpData : Win32cr::Graphics::Gdi::RGNDATA*) : Win32cr::Graphics::Gdi::HRGN
 
+    # :nodoc:
     fun ExtFloodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32, type__ : Win32cr::Graphics::Gdi::EXT_FLOOD_FILL_TYPE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FillRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, hbr : Win32cr::Graphics::Gdi::HBRUSH) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FloodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FrameRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, hbr : Win32cr::Graphics::Gdi::HBRUSH, w : Int32, h : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetROP2(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun GetAspectRatioFilterEx(hdc : Win32cr::Graphics::Gdi::HDC, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetBkColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
+    # :nodoc:
     fun GetDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
+    # :nodoc:
     fun GetDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
+    # :nodoc:
     fun GetBkMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun GetBitmapBits(hbit : Win32cr::Graphics::Gdi::HBITMAP, cb : Int32, lpvBits : Void*) : Int32
 
+    # :nodoc:
     fun GetBitmapDimensionEx(hbit : Win32cr::Graphics::Gdi::HBITMAP, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetBoundsRect(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun GetBrushOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCharWidthA(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCharWidthW(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCharWidth32A(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCharWidth32W(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCharWidthFloatA(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Float32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCharWidthFloatW(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Float32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCharABCWidthsA(hdc : Win32cr::Graphics::Gdi::HDC, wFirst : UInt32, wLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCharABCWidthsW(hdc : Win32cr::Graphics::Gdi::HDC, wFirst : UInt32, wLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCharABCWidthsFloatA(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABCFLOAT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCharABCWidthsFloatW(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABCFLOAT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetClipBox(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
 
+    # :nodoc:
     fun GetClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Int32
 
+    # :nodoc:
     fun GetMetaRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Int32
 
+    # :nodoc:
     fun GetCurrentObject(hdc : Win32cr::Graphics::Gdi::HDC, type__ : Win32cr::Graphics::Gdi::OBJ_TYPE) : Win32cr::Graphics::Gdi::HGDIOBJ
 
+    # :nodoc:
     fun GetCurrentPositionEx(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDeviceCaps(hdc : Win32cr::Graphics::Gdi::HDC, index : Win32cr::Graphics::Gdi::GET_DEVICE_CAPS_INDEX) : Int32
 
+    # :nodoc:
     fun GetDIBits(hdc : Win32cr::Graphics::Gdi::HDC, hbm : Win32cr::Graphics::Gdi::HBITMAP, start : UInt32, cLines : UInt32, lpvBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, usage : Win32cr::Graphics::Gdi::DIB_USAGE) : Int32
 
+    # :nodoc:
     fun GetFontData(hdc : Win32cr::Graphics::Gdi::HDC, dwTable : UInt32, dwOffset : UInt32, pvBuffer : Void*, cjBuffer : UInt32) : UInt32
 
+    # :nodoc:
     fun GetGlyphOutlineA(hdc : Win32cr::Graphics::Gdi::HDC, uChar : UInt32, fuFormat : Win32cr::Graphics::Gdi::GET_GLYPH_OUTLINE_FORMAT, lpgm : Win32cr::Graphics::Gdi::GLYPHMETRICS*, cjBuffer : UInt32, pvBuffer : Void*, lpmat2 : Win32cr::Graphics::Gdi::MAT2*) : UInt32
 
+    # :nodoc:
     fun GetGlyphOutlineW(hdc : Win32cr::Graphics::Gdi::HDC, uChar : UInt32, fuFormat : Win32cr::Graphics::Gdi::GET_GLYPH_OUTLINE_FORMAT, lpgm : Win32cr::Graphics::Gdi::GLYPHMETRICS*, cjBuffer : UInt32, pvBuffer : Void*, lpmat2 : Win32cr::Graphics::Gdi::MAT2*) : UInt32
 
+    # :nodoc:
     fun GetGraphicsMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun GetMapMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun GetMetaFileBitsEx(hMF : Win32cr::Graphics::Gdi::HMETAFILE, cbBuffer : UInt32, lpData : Void*) : UInt32
 
+    # :nodoc:
     fun GetMetaFileA(lpName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HMETAFILE
 
+    # :nodoc:
     fun GetMetaFileW(lpName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HMETAFILE
 
+    # :nodoc:
     fun GetNearestColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
 
+    # :nodoc:
     fun GetNearestPaletteIndex(h : Win32cr::Graphics::Gdi::HPALETTE, color : UInt32) : UInt32
 
+    # :nodoc:
     fun GetObjectType(h : Win32cr::Graphics::Gdi::HGDIOBJ) : UInt32
 
+    # :nodoc:
     fun GetOutlineTextMetricsA(hdc : Win32cr::Graphics::Gdi::HDC, cjCopy : UInt32, potm : Win32cr::Graphics::Gdi::OUTLINETEXTMETRICA*) : UInt32
 
+    # :nodoc:
     fun GetOutlineTextMetricsW(hdc : Win32cr::Graphics::Gdi::HDC, cjCopy : UInt32, potm : Win32cr::Graphics::Gdi::OUTLINETEXTMETRICW*) : UInt32
 
+    # :nodoc:
     fun GetPaletteEntries(hpal : Win32cr::Graphics::Gdi::HPALETTE, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
 
+    # :nodoc:
     fun GetPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : UInt32
 
+    # :nodoc:
     fun GetPolyFillMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun GetRasterizerCaps(lpraststat : Win32cr::Graphics::Gdi::RASTERIZER_STATUS*, cjBytes : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetRandomRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, i : Int32) : Int32
 
+    # :nodoc:
     fun GetRegionData(hrgn : Win32cr::Graphics::Gdi::HRGN, nCount : UInt32, lpRgnData : Win32cr::Graphics::Gdi::RGNDATA*) : UInt32
 
+    # :nodoc:
     fun GetRgnBox(hrgn : Win32cr::Graphics::Gdi::HRGN, lprc : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
 
+    # :nodoc:
     fun GetStockObject(i : Win32cr::Graphics::Gdi::GET_STOCK_OBJECT_FLAGS) : Win32cr::Graphics::Gdi::HGDIOBJ
 
+    # :nodoc:
     fun GetStretchBltMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun GetSystemPaletteEntries(hdc : Win32cr::Graphics::Gdi::HDC, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
 
+    # :nodoc:
     fun GetSystemPaletteUse(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
+    # :nodoc:
     fun GetTextCharacterExtra(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun GetTextAlign(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
+    # :nodoc:
     fun GetTextColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
+    # :nodoc:
     fun GetTextExtentPointA(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, c : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTextExtentPointW(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, c : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTextExtentPoint32A(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, c : Int32, psizl : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTextExtentPoint32W(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, c : Int32, psizl : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTextExtentExPointA(hdc : Win32cr::Graphics::Gdi::HDC, lpszString : UInt8*, cchString : Int32, nMaxExtent : Int32, lpnFit : Int32*, lpnDx : Int32*, lpSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTextExtentExPointW(hdc : Win32cr::Graphics::Gdi::HDC, lpszString : UInt16*, cchString : Int32, nMaxExtent : Int32, lpnFit : Int32*, lpnDx : Int32*, lpSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetFontLanguageInfo(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
+    # :nodoc:
     fun GetCharacterPlacementA(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, nCount : Int32, nMexExtent : Int32, lpResults : Win32cr::Graphics::Gdi::GCP_RESULTSA*, dwFlags : Win32cr::Graphics::Gdi::GET_CHARACTER_PLACEMENT_FLAGS) : UInt32
 
+    # :nodoc:
     fun GetCharacterPlacementW(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, nCount : Int32, nMexExtent : Int32, lpResults : Win32cr::Graphics::Gdi::GCP_RESULTSW*, dwFlags : Win32cr::Graphics::Gdi::GET_CHARACTER_PLACEMENT_FLAGS) : UInt32
 
+    # :nodoc:
     fun GetFontUnicodeRanges(hdc : Win32cr::Graphics::Gdi::HDC, lpgs : Win32cr::Graphics::Gdi::GLYPHSET*) : UInt32
 
+    # :nodoc:
     fun GetGlyphIndicesA(hdc : Win32cr::Graphics::Gdi::HDC, lpstr : UInt8*, c : Int32, pgi : UInt16*, fl : UInt32) : UInt32
 
+    # :nodoc:
     fun GetGlyphIndicesW(hdc : Win32cr::Graphics::Gdi::HDC, lpstr : UInt16*, c : Int32, pgi : UInt16*, fl : UInt32) : UInt32
 
+    # :nodoc:
     fun GetTextExtentPointI(hdc : Win32cr::Graphics::Gdi::HDC, pgiIn : UInt16*, cgi : Int32, psize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTextExtentExPointI(hdc : Win32cr::Graphics::Gdi::HDC, lpwszString : UInt16*, cwchString : Int32, nMaxExtent : Int32, lpnFit : Int32*, lpnDx : Int32*, lpSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCharWidthI(hdc : Win32cr::Graphics::Gdi::HDC, giFirst : UInt32, cgi : UInt32, pgi : UInt16*, piWidths : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCharABCWidthsI(hdc : Win32cr::Graphics::Gdi::HDC, giFirst : UInt32, cgi : UInt32, pgi : UInt16*, pabc : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddFontResourceExA(name : Win32cr::Foundation::PSTR, fl : Win32cr::Graphics::Gdi::FONT_RESOURCE_CHARACTERISTICS, res : Void*) : Int32
 
+    # :nodoc:
     fun AddFontResourceExW(name : Win32cr::Foundation::PWSTR, fl : Win32cr::Graphics::Gdi::FONT_RESOURCE_CHARACTERISTICS, res : Void*) : Int32
 
+    # :nodoc:
     fun RemoveFontResourceExA(name : Win32cr::Foundation::PSTR, fl : UInt32, pdv : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RemoveFontResourceExW(name : Win32cr::Foundation::PWSTR, fl : UInt32, pdv : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AddFontMemResourceEx(pFileView : Void*, cjSize : UInt32, pvResrved : Void*, pNumFonts : UInt32*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun RemoveFontMemResourceEx(h : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateFontIndirectExA(param0 : Win32cr::Graphics::Gdi::ENUMLOGFONTEXDVA*) : Win32cr::Graphics::Gdi::HFONT
 
+    # :nodoc:
     fun CreateFontIndirectExW(param0 : Win32cr::Graphics::Gdi::ENUMLOGFONTEXDVW*) : Win32cr::Graphics::Gdi::HFONT
 
+    # :nodoc:
     fun GetViewportExtEx(hdc : Win32cr::Graphics::Gdi::HDC, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetViewportOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetWindowExtEx(hdc : Win32cr::Graphics::Gdi::HDC, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetWindowOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IntersectClipRect(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
 
+    # :nodoc:
     fun InvertRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LineDDA(xStart : Int32, yStart : Int32, xEnd : Int32, yEnd : Int32, lpProc : Win32cr::Graphics::Gdi::LINEDDAPROC, data : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LineTo(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MaskBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, width : Int32, height : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xSrc : Int32, ySrc : Int32, hbmMask : Win32cr::Graphics::Gdi::HBITMAP, xMask : Int32, yMask : Int32, rop : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PlgBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, lpPoint : Win32cr::Foundation::POINT*, hdcSrc : Win32cr::Graphics::Gdi::HDC, xSrc : Int32, ySrc : Int32, width : Int32, height : Int32, hbmMask : Win32cr::Graphics::Gdi::HBITMAP, xMask : Int32, yMask : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OffsetClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
 
+    # :nodoc:
     fun OffsetRgn(hrgn : Win32cr::Graphics::Gdi::HRGN, x : Int32, y : Int32) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
 
+    # :nodoc:
     fun PatBlt(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, w : Int32, h : Int32, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun Pie(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, xr1 : Int32, yr1 : Int32, xr2 : Int32, yr2 : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PlayMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HMETAFILE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PaintRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PolyPolygon(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, asz : Int32*, csz : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PtInRegion(hrgn : Win32cr::Graphics::Gdi::HRGN, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PtVisible(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RectInRegion(hrgn : Win32cr::Graphics::Gdi::HRGN, lprect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RectVisible(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun Rectangle(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RestoreDC(hdc : Win32cr::Graphics::Gdi::HDC, nSavedDC : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ResetDCA(hdc : Win32cr::Graphics::Gdi::HDC, lpdm : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Graphics::Gdi::HDC
 
+    # :nodoc:
     fun ResetDCW(hdc : Win32cr::Graphics::Gdi::HDC, lpdm : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Graphics::Gdi::HDC
 
+    # :nodoc:
     fun RealizePalette(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
+    # :nodoc:
     fun RemoveFontResourceA(lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RemoveFontResourceW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RoundRect(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, width : Int32, height : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ResizePalette(hpal : Win32cr::Graphics::Gdi::HPALETTE, n : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SaveDC(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun SelectClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
 
+    # :nodoc:
     fun ExtSelectClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, mode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
 
+    # :nodoc:
     fun SetMetaRgn(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
 
+    # :nodoc:
     fun SelectObject(hdc : Win32cr::Graphics::Gdi::HDC, h : Win32cr::Graphics::Gdi::HGDIOBJ) : Win32cr::Graphics::Gdi::HGDIOBJ
 
+    # :nodoc:
     fun SelectPalette(hdc : Win32cr::Graphics::Gdi::HDC, hPal : Win32cr::Graphics::Gdi::HPALETTE, bForceBkgd : Win32cr::Foundation::BOOL) : Win32cr::Graphics::Gdi::HPALETTE
 
+    # :nodoc:
     fun SetBkColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
 
+    # :nodoc:
     fun SetDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
 
+    # :nodoc:
     fun SetDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
 
+    # :nodoc:
     fun SetBkMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::BACKGROUND_MODE) : Int32
 
+    # :nodoc:
     fun SetBitmapBits(hbm : Win32cr::Graphics::Gdi::HBITMAP, cb : UInt32, pvBits : Void*) : Int32
 
+    # :nodoc:
     fun SetBoundsRect(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*, flags : Win32cr::Graphics::Gdi::SET_BOUNDS_RECT_FLAGS) : UInt32
 
+    # :nodoc:
     fun SetDIBits(hdc : Win32cr::Graphics::Gdi::HDC, hbm : Win32cr::Graphics::Gdi::HBITMAP, start : UInt32, cLines : UInt32, lpBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, color_use : Win32cr::Graphics::Gdi::DIB_USAGE) : Int32
 
+    # :nodoc:
     fun SetDIBitsToDevice(hdc : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, w : UInt32, h : UInt32, xSrc : Int32, ySrc : Int32, start_scan : UInt32, cLines : UInt32, lpvBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, color_use : Win32cr::Graphics::Gdi::DIB_USAGE) : Int32
 
+    # :nodoc:
     fun SetMapperFlags(hdc : Win32cr::Graphics::Gdi::HDC, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun SetGraphicsMode(hdc : Win32cr::Graphics::Gdi::HDC, iMode : Win32cr::Graphics::Gdi::GRAPHICS_MODE) : Int32
 
+    # :nodoc:
     fun SetMapMode(hdc : Win32cr::Graphics::Gdi::HDC, iMode : Win32cr::Graphics::Gdi::HDC_MAP_MODE) : Int32
 
+    # :nodoc:
     fun SetLayout(hdc : Win32cr::Graphics::Gdi::HDC, l : Win32cr::Graphics::Gdi::DC_LAYOUT) : UInt32
 
+    # :nodoc:
     fun GetLayout(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
+    # :nodoc:
     fun SetMetaFileBitsEx(cbBuffer : UInt32, lpData : UInt8*) : Win32cr::Graphics::Gdi::HMETAFILE
 
+    # :nodoc:
     fun SetPaletteEntries(hpal : Win32cr::Graphics::Gdi::HPALETTE, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
 
+    # :nodoc:
     fun SetPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : UInt32
 
+    # :nodoc:
     fun SetPixelV(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetPolyFillMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::CREATE_POLYGON_RGN_MODE) : Int32
 
+    # :nodoc:
     fun StretchBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xSrc : Int32, ySrc : Int32, wSrc : Int32, hSrc : Int32, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetRectRgn(hrgn : Win32cr::Graphics::Gdi::HRGN, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun StretchDIBits(hdc : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, dest_width : Int32, dest_height : Int32, xSrc : Int32, ySrc : Int32, src_width : Int32, src_height : Int32, lpBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Int32
 
+    # :nodoc:
     fun SetROP2(hdc : Win32cr::Graphics::Gdi::HDC, rop2 : Win32cr::Graphics::Gdi::R2_MODE) : Int32
 
+    # :nodoc:
     fun SetStretchBltMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::STRETCH_BLT_MODE) : Int32
 
+    # :nodoc:
     fun SetSystemPaletteUse(hdc : Win32cr::Graphics::Gdi::HDC, use : Win32cr::Graphics::Gdi::SYSTEM_PALETTE_USE) : UInt32
 
+    # :nodoc:
     fun SetTextCharacterExtra(hdc : Win32cr::Graphics::Gdi::HDC, extra : Int32) : Int32
 
+    # :nodoc:
     fun SetTextColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
 
+    # :nodoc:
     fun SetTextAlign(hdc : Win32cr::Graphics::Gdi::HDC, align : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS) : UInt32
 
+    # :nodoc:
     fun SetTextJustification(hdc : Win32cr::Graphics::Gdi::HDC, extra : Int32, count : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UpdateColors(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AlphaBlend(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, ftn : Win32cr::Graphics::Gdi::BLENDFUNCTION) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TransparentBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, crTransparent : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GradientFill(hdc : Win32cr::Graphics::Gdi::HDC, pVertex : Win32cr::Graphics::Gdi::TRIVERTEX*, nVertex : UInt32, pMesh : Void*, nMesh : UInt32, ulMode : Win32cr::Graphics::Gdi::GRADIENT_FILL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GdiAlphaBlend(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, ftn : Win32cr::Graphics::Gdi::BLENDFUNCTION) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GdiTransparentBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, crTransparent : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GdiGradientFill(hdc : Win32cr::Graphics::Gdi::HDC, pVertex : Win32cr::Graphics::Gdi::TRIVERTEX*, nVertex : UInt32, pMesh : Void*, nCount : UInt32, ulMode : Win32cr::Graphics::Gdi::GRADIENT_FILL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PlayMetaFileRecord(hdc : Win32cr::Graphics::Gdi::HDC, lpHandleTable : Win32cr::Graphics::Gdi::HANDLETABLE*, lpMR : Win32cr::Graphics::Gdi::METARECORD*, noObjs : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HMETAFILE, proc : Win32cr::Graphics::Gdi::MFENUMPROC, param3 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CloseEnhMetaFile(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HENHMETAFILE
 
+    # :nodoc:
     fun CopyEnhMetaFileA(hEnh : Win32cr::Graphics::Gdi::HENHMETAFILE, lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
 
+    # :nodoc:
     fun CopyEnhMetaFileW(hEnh : Win32cr::Graphics::Gdi::HENHMETAFILE, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
 
+    # :nodoc:
     fun CreateEnhMetaFileA(hdc : Win32cr::Graphics::Gdi::HDC, lpFilename : Win32cr::Foundation::PSTR, lprc : Win32cr::Foundation::RECT*, lpDesc : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HdcMetdataEnhFileHandle
 
+    # :nodoc:
     fun CreateEnhMetaFileW(hdc : Win32cr::Graphics::Gdi::HDC, lpFilename : Win32cr::Foundation::PWSTR, lprc : Win32cr::Foundation::RECT*, lpDesc : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HdcMetdataEnhFileHandle
 
+    # :nodoc:
     fun DeleteEnhMetaFile(hmf : Win32cr::Graphics::Gdi::HENHMETAFILE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumEnhMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HENHMETAFILE, proc : Win32cr::Graphics::Gdi::ENHMFENUMPROC, param3 : Void*, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetEnhMetaFileA(lpName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
 
+    # :nodoc:
     fun GetEnhMetaFileW(lpName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
 
+    # :nodoc:
     fun GetEnhMetaFileBits(hEMF : Win32cr::Graphics::Gdi::HENHMETAFILE, nSize : UInt32, lpData : UInt8*) : UInt32
 
+    # :nodoc:
     fun GetEnhMetaFileDescriptionA(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, cchBuffer : UInt32, lpDescription : UInt8*) : UInt32
 
+    # :nodoc:
     fun GetEnhMetaFileDescriptionW(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, cchBuffer : UInt32, lpDescription : UInt16*) : UInt32
 
+    # :nodoc:
     fun GetEnhMetaFileHeader(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, nSize : UInt32, lpEnhMetaHeader : Win32cr::Graphics::Gdi::ENHMETAHEADER*) : UInt32
 
+    # :nodoc:
     fun GetEnhMetaFilePaletteEntries(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, nNumEntries : UInt32, lpPaletteEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
 
+    # :nodoc:
     fun GetWinMetaFileBits(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, cbData16 : UInt32, pData16 : UInt8*, iMapMode : Int32, hdcRef : Win32cr::Graphics::Gdi::HDC) : UInt32
 
+    # :nodoc:
     fun PlayEnhMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HENHMETAFILE, lprect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PlayEnhMetaFileRecord(hdc : Win32cr::Graphics::Gdi::HDC, pht : Win32cr::Graphics::Gdi::HANDLETABLE*, pmr : Win32cr::Graphics::Gdi::ENHMETARECORD*, cht : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetEnhMetaFileBits(nSize : UInt32, pb : UInt8*) : Win32cr::Graphics::Gdi::HENHMETAFILE
 
+    # :nodoc:
     fun GdiComment(hdc : Win32cr::Graphics::Gdi::HDC, nSize : UInt32, lpData : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTextMetricsA(hdc : Win32cr::Graphics::Gdi::HDC, lptm : Win32cr::Graphics::Gdi::TEXTMETRICA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTextMetricsW(hdc : Win32cr::Graphics::Gdi::HDC, lptm : Win32cr::Graphics::Gdi::TEXTMETRICW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AngleArc(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, r : UInt32, start_angle : Float32, sweep_angle : Float32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PolyPolyline(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, asz : UInt32*, csz : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetWorldTransform(hdc : Win32cr::Graphics::Gdi::HDC, lpxf : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetWorldTransform(hdc : Win32cr::Graphics::Gdi::HDC, lpxf : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ModifyWorldTransform(hdc : Win32cr::Graphics::Gdi::HDC, lpxf : Win32cr::Graphics::Gdi::XFORM*, mode : Win32cr::Graphics::Gdi::MODIFY_WORLD_TRANSFORM_MODE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CombineTransform(lpxfOut : Win32cr::Graphics::Gdi::XFORM*, lpxf1 : Win32cr::Graphics::Gdi::XFORM*, lpxf2 : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateDIBSection(hdc : Win32cr::Graphics::Gdi::HDC, pbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, usage : Win32cr::Graphics::Gdi::DIB_USAGE, ppvBits : Void**, hSection : Win32cr::Foundation::HANDLE, offset : UInt32) : Win32cr::Graphics::Gdi::HBITMAP
 
+    # :nodoc:
     fun GetDIBColorTable(hdc : Win32cr::Graphics::Gdi::HDC, iStart : UInt32, cEntries : UInt32, prgbq : Win32cr::Graphics::Gdi::RGBQUAD*) : UInt32
 
+    # :nodoc:
     fun SetDIBColorTable(hdc : Win32cr::Graphics::Gdi::HDC, iStart : UInt32, cEntries : UInt32, prgbq : Win32cr::Graphics::Gdi::RGBQUAD*) : UInt32
 
+    # :nodoc:
     fun SetColorAdjustment(hdc : Win32cr::Graphics::Gdi::HDC, lpca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetColorAdjustment(hdc : Win32cr::Graphics::Gdi::HDC, lpca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateHalftonePalette(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HPALETTE
 
+    # :nodoc:
     fun AbortPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ArcTo(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, xr1 : Int32, yr1 : Int32, xr2 : Int32, yr2 : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BeginPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CloseFigure(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EndPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FillPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlattenPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPath(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, aj : UInt8*, cpt : Int32) : Int32
 
+    # :nodoc:
     fun PathToRegion(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HRGN
 
+    # :nodoc:
     fun PolyDraw(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, aj : UInt8*, cpt : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SelectClipPath(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetArcDirection(hdc : Win32cr::Graphics::Gdi::HDC, dir : Win32cr::Graphics::Gdi::ARC_DIRECTION) : Int32
 
+    # :nodoc:
     fun SetMiterLimit(hdc : Win32cr::Graphics::Gdi::HDC, limit : Float32, old : Float32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun StrokeAndFillPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun StrokePath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WidenPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ExtCreatePen(iPenStyle : Win32cr::Graphics::Gdi::PEN_STYLE, cWidth : UInt32, plbrush : Win32cr::Graphics::Gdi::LOGBRUSH*, cStyle : UInt32, pstyle : UInt32*) : Win32cr::Graphics::Gdi::HPEN
 
+    # :nodoc:
     fun GetMiterLimit(hdc : Win32cr::Graphics::Gdi::HDC, plimit : Float32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetArcDirection(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun GetObjectW(h : Win32cr::Graphics::Gdi::HGDIOBJ, c : Int32, pv : Void*) : Int32
 
+    # :nodoc:
     fun MoveToEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TextOutA(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt8*, c : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TextOutW(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt16*, c : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ExtTextOutA(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, options : Win32cr::Graphics::Gdi::ETO_OPTIONS, lprect : Win32cr::Foundation::RECT*, lpString : UInt8*, c : UInt32, lpDx : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ExtTextOutW(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, options : Win32cr::Graphics::Gdi::ETO_OPTIONS, lprect : Win32cr::Foundation::RECT*, lpString : UInt16*, c : UInt32, lpDx : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PolyTextOutA(hdc : Win32cr::Graphics::Gdi::HDC, ppt : Win32cr::Graphics::Gdi::POLYTEXTA*, nstrings : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PolyTextOutW(hdc : Win32cr::Graphics::Gdi::HDC, ppt : Win32cr::Graphics::Gdi::POLYTEXTW*, nstrings : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreatePolygonRgn(pptl : Win32cr::Foundation::POINT*, cPoint : Int32, iMode : Win32cr::Graphics::Gdi::CREATE_POLYGON_RGN_MODE) : Win32cr::Graphics::Gdi::HRGN
 
+    # :nodoc:
     fun DPtoLP(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*, c : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LPtoDP(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*, c : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun Polygon(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun Polyline(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PolyBezier(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PolyBezierTo(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PolylineTo(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetViewportExtEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetViewportOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetWindowExtEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetWindowOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OffsetViewportOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OffsetWindowOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ScaleViewportExtEx(hdc : Win32cr::Graphics::Gdi::HDC, xn : Int32, dx : Int32, yn : Int32, yd : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ScaleWindowExtEx(hdc : Win32cr::Graphics::Gdi::HDC, xn : Int32, xd : Int32, yn : Int32, yd : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetBitmapDimensionEx(hbm : Win32cr::Graphics::Gdi::HBITMAP, w : Int32, h : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetBrushOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTextFaceA(hdc : Win32cr::Graphics::Gdi::HDC, c : Int32, lpName : UInt8*) : Int32
 
+    # :nodoc:
     fun GetTextFaceW(hdc : Win32cr::Graphics::Gdi::HDC, c : Int32, lpName : UInt16*) : Int32
 
+    # :nodoc:
     fun GetKerningPairsA(hdc : Win32cr::Graphics::Gdi::HDC, nPairs : UInt32, lpKernPair : Win32cr::Graphics::Gdi::KERNINGPAIR*) : UInt32
 
+    # :nodoc:
     fun GetKerningPairsW(hdc : Win32cr::Graphics::Gdi::HDC, nPairs : UInt32, lpKernPair : Win32cr::Graphics::Gdi::KERNINGPAIR*) : UInt32
 
+    # :nodoc:
     fun GetDCOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FixBrushOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, ptl : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnrealizeObject(h : Win32cr::Graphics::Gdi::HGDIOBJ) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GdiFlush : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GdiSetBatchLimit(dw : UInt32) : UInt32
 
+    # :nodoc:
     fun GdiGetBatchLimit : UInt32
 
+    # :nodoc:
     fun wglSwapMultipleBuffers(param0 : UInt32, param1 : Win32cr::Graphics::Gdi::WGLSWAP*) : UInt32
 
+    # :nodoc:
     fun CreateFontPackage(puchSrcBuffer : UInt8*, ulSrcBufferSize : UInt32, ppuchFontPackageBuffer : UInt8**, pulFontPackageBufferSize : UInt32*, pulBytesWritten : UInt32*, usFlag : UInt16, usTTCIndex : UInt16, usSubsetFormat : UInt16, usSubsetLanguage : UInt16, usSubsetPlatform : Win32cr::Graphics::Gdi::CREATE_FONT_PACKAGE_SUBSET_PLATFORM, usSubsetEncoding : Win32cr::Graphics::Gdi::CREATE_FONT_PACKAGE_SUBSET_ENCODING, pusSubsetKeepList : UInt16*, usSubsetListCount : UInt16, lpfnAllocate : Win32cr::Graphics::Gdi::CFP_ALLOCPROC, lpfnReAllocate : Win32cr::Graphics::Gdi::CFP_REALLOCPROC, lpfnFree : Win32cr::Graphics::Gdi::CFP_FREEPROC, lpvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun MergeFontPackage(puchMergeFontBuffer : UInt8*, ulMergeFontBufferSize : UInt32, puchFontPackageBuffer : UInt8*, ulFontPackageBufferSize : UInt32, ppuchDestBuffer : UInt8**, pulDestBufferSize : UInt32*, pulBytesWritten : UInt32*, usMode : UInt16, lpfnAllocate : Win32cr::Graphics::Gdi::CFP_ALLOCPROC, lpfnReAllocate : Win32cr::Graphics::Gdi::CFP_REALLOCPROC, lpfnFree : Win32cr::Graphics::Gdi::CFP_FREEPROC, lpvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun TTEmbedFont(hDC : Win32cr::Graphics::Gdi::HDC, ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, ulCharSet : Win32cr::Graphics::Gdi::EMBED_FONT_CHARSET, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, pulStatus : UInt32*, lpfnWriteToStream : Win32cr::Graphics::Gdi::WRITEEMBEDPROC, lpvWriteStream : Void*, pusCharCodeSet : UInt16*, usCharCodeCount : UInt16, usLanguage : UInt16, pTTEmbedInfo : Win32cr::Graphics::Gdi::TTEMBEDINFO*) : Int32
 
+    # :nodoc:
     fun TTEmbedFontFromFileA(hDC : Win32cr::Graphics::Gdi::HDC, szFontFileName : Win32cr::Foundation::PSTR, usTTCIndex : UInt16, ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, ulCharSet : Win32cr::Graphics::Gdi::EMBED_FONT_CHARSET, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, pulStatus : UInt32*, lpfnWriteToStream : Win32cr::Graphics::Gdi::WRITEEMBEDPROC, lpvWriteStream : Void*, pusCharCodeSet : UInt16*, usCharCodeCount : UInt16, usLanguage : UInt16, pTTEmbedInfo : Win32cr::Graphics::Gdi::TTEMBEDINFO*) : Int32
 
+    # :nodoc:
     fun TTLoadEmbeddedFont(phFontReference : Win32cr::Foundation::HANDLE*, ulFlags : UInt32, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, ulPrivs : Win32cr::Graphics::Gdi::FONT_LICENSE_PRIVS, pulStatus : Win32cr::Graphics::Gdi::TTLOAD_EMBEDDED_FONT_STATUS*, lpfnReadFromStream : Win32cr::Graphics::Gdi::READEMBEDPROC, lpvReadStream : Void*, szWinFamilyName : Win32cr::Foundation::PWSTR, szMacFamilyName : Win32cr::Foundation::PSTR, pTTLoadInfo : Win32cr::Graphics::Gdi::TTLOADINFO*) : Int32
 
+    # :nodoc:
     fun TTGetEmbeddedFontInfo(ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, pulPrivStatus : UInt32*, ulPrivs : Win32cr::Graphics::Gdi::FONT_LICENSE_PRIVS, pulStatus : UInt32*, lpfnReadFromStream : Win32cr::Graphics::Gdi::READEMBEDPROC, lpvReadStream : Void*, pTTLoadInfo : Win32cr::Graphics::Gdi::TTLOADINFO*) : Int32
 
+    # :nodoc:
     fun TTDeleteEmbeddedFont(hFontReference : Win32cr::Foundation::HANDLE, ulFlags : UInt32, pulStatus : UInt32*) : Int32
 
+    # :nodoc:
     fun TTGetEmbeddingType(hDC : Win32cr::Graphics::Gdi::HDC, pulEmbedType : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*) : Int32
 
+    # :nodoc:
     fun TTCharToUnicode(hDC : Win32cr::Graphics::Gdi::HDC, pucCharCodes : UInt8*, ulCharCodeSize : UInt32, pusShortCodes : UInt16*, ulShortCodeSize : UInt32, ulFlags : UInt32) : Int32
 
+    # :nodoc:
     fun TTRunValidationTests(hDC : Win32cr::Graphics::Gdi::HDC, pTestParam : Win32cr::Graphics::Gdi::TTVALIDATIONTESTSPARAMS*) : Int32
 
+    # :nodoc:
     fun TTIsEmbeddingEnabled(hDC : Win32cr::Graphics::Gdi::HDC, pbEnabled : Win32cr::Foundation::BOOL*) : Int32
 
+    # :nodoc:
     fun TTIsEmbeddingEnabledForFacename(lpszFacename : Win32cr::Foundation::PSTR, pbEnabled : Win32cr::Foundation::BOOL*) : Int32
 
+    # :nodoc:
     fun TTEnableEmbeddingForFacename(lpszFacename : Win32cr::Foundation::PSTR, bEnable : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun TTEmbedFontEx(hDC : Win32cr::Graphics::Gdi::HDC, ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, ulCharSet : Win32cr::Graphics::Gdi::EMBED_FONT_CHARSET, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, pulStatus : UInt32*, lpfnWriteToStream : Win32cr::Graphics::Gdi::WRITEEMBEDPROC, lpvWriteStream : Void*, pulCharCodeSet : UInt32*, usCharCodeCount : UInt16, usLanguage : UInt16, pTTEmbedInfo : Win32cr::Graphics::Gdi::TTEMBEDINFO*) : Int32
 
+    # :nodoc:
     fun TTRunValidationTestsEx(hDC : Win32cr::Graphics::Gdi::HDC, pTestParam : Win32cr::Graphics::Gdi::TTVALIDATIONTESTSPARAMSEX*) : Int32
 
+    # :nodoc:
     fun TTGetNewFontName(phFontReference : Win32cr::Foundation::HANDLE*, wzWinFamilyName : UInt16*, cchMaxWinName : Int32, szMacFamilyName : UInt8*, cchMaxMacName : Int32) : Int32
 
+    # :nodoc:
     fun DrawEdge(hdc : Win32cr::Graphics::Gdi::HDC, qrc : Win32cr::Foundation::RECT*, edge : Win32cr::Graphics::Gdi::DRAWEDGE_FLAGS, grfFlags : Win32cr::Graphics::Gdi::DRAW_EDGE_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DrawFrameControl(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Win32cr::Foundation::RECT*, param2 : Win32cr::Graphics::Gdi::DFC_TYPE, param3 : Win32cr::Graphics::Gdi::DFCS_STATE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DrawCaption(hwnd : Win32cr::Foundation::HWND, hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*, flags : Win32cr::Graphics::Gdi::DRAW_CAPTION_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DrawAnimatedRects(hwnd : Win32cr::Foundation::HWND, idAni : Int32, lprcFrom : Win32cr::Foundation::RECT*, lprcTo : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DrawTextA(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt8*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT) : Int32
 
+    # :nodoc:
     fun DrawTextW(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt16*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT) : Int32
 
+    # :nodoc:
     fun DrawTextExA(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt8*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT, lpdtp : Win32cr::Graphics::Gdi::DRAWTEXTPARAMS*) : Int32
 
+    # :nodoc:
     fun DrawTextExW(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt16*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT, lpdtp : Win32cr::Graphics::Gdi::DRAWTEXTPARAMS*) : Int32
 
+    # :nodoc:
     fun GrayStringA(hDC : Win32cr::Graphics::Gdi::HDC, hBrush : Win32cr::Graphics::Gdi::HBRUSH, lpOutputFunc : Win32cr::Graphics::Gdi::GRAYSTRINGPROC, lpData : Win32cr::Foundation::LPARAM, nCount : Int32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GrayStringW(hDC : Win32cr::Graphics::Gdi::HDC, hBrush : Win32cr::Graphics::Gdi::HBRUSH, lpOutputFunc : Win32cr::Graphics::Gdi::GRAYSTRINGPROC, lpData : Win32cr::Foundation::LPARAM, nCount : Int32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DrawStateA(hdc : Win32cr::Graphics::Gdi::HDC, hbrFore : Win32cr::Graphics::Gdi::HBRUSH, qfnCallBack : Win32cr::Graphics::Gdi::DRAWSTATEPROC, lData : Win32cr::Foundation::LPARAM, wData : Win32cr::Foundation::WPARAM, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::Graphics::Gdi::DRAWSTATE_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DrawStateW(hdc : Win32cr::Graphics::Gdi::HDC, hbrFore : Win32cr::Graphics::Gdi::HBRUSH, qfnCallBack : Win32cr::Graphics::Gdi::DRAWSTATEPROC, lData : Win32cr::Foundation::LPARAM, wData : Win32cr::Foundation::WPARAM, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::Graphics::Gdi::DRAWSTATE_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TabbedTextOutA(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt8*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*, nTabOrigin : Int32) : Int32
 
+    # :nodoc:
     fun TabbedTextOutW(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt16*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*, nTabOrigin : Int32) : Int32
 
+    # :nodoc:
     fun GetTabbedTextExtentA(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*) : UInt32
 
+    # :nodoc:
     fun GetTabbedTextExtentW(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*) : UInt32
 
+    # :nodoc:
     fun UpdateWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PaintDesktop(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WindowFromDC(hDC : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun GetDC(hWnd : Win32cr::Foundation::HWND) : Win32cr::Graphics::Gdi::HDC
 
+    # :nodoc:
     fun GetDCEx(hWnd : Win32cr::Foundation::HWND, hrgnClip : Win32cr::Graphics::Gdi::HRGN, flags : Win32cr::Graphics::Gdi::GET_DCX_FLAGS) : Win32cr::Graphics::Gdi::HDC
 
+    # :nodoc:
     fun GetWindowDC(hWnd : Win32cr::Foundation::HWND) : Win32cr::Graphics::Gdi::HDC
 
+    # :nodoc:
     fun ReleaseDC(hWnd : Win32cr::Foundation::HWND, hDC : Win32cr::Graphics::Gdi::HDC) : Int32
 
+    # :nodoc:
     fun BeginPaint(hWnd : Win32cr::Foundation::HWND, lpPaint : Win32cr::Graphics::Gdi::PAINTSTRUCT*) : Win32cr::Graphics::Gdi::HDC
 
+    # :nodoc:
     fun EndPaint(hWnd : Win32cr::Foundation::HWND, lpPaint : Win32cr::Graphics::Gdi::PAINTSTRUCT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetUpdateRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*, bErase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetUpdateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bErase : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun SetWindowRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bRedraw : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun GetWindowRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN) : Int32
 
+    # :nodoc:
     fun GetWindowRgnBox(hWnd : Win32cr::Foundation::HWND, lprc : Win32cr::Foundation::RECT*) : Int32
 
+    # :nodoc:
     fun ExcludeUpdateRgn(hDC : Win32cr::Graphics::Gdi::HDC, hWnd : Win32cr::Foundation::HWND) : Int32
 
+    # :nodoc:
     fun InvalidateRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*, bErase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ValidateRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InvalidateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bErase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ValidateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RedrawWindow(hWnd : Win32cr::Foundation::HWND, lprcUpdate : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, flags : Win32cr::Graphics::Gdi::REDRAW_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LockWindowUpdate(hWndLock : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ClientToScreen(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ScreenToClient(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MapWindowPoints(hWndFrom : Win32cr::Foundation::HWND, hWndTo : Win32cr::Foundation::HWND, lpPoints : Win32cr::Foundation::POINT*, cPoints : UInt32) : Int32
 
+    # :nodoc:
     fun GetSysColorBrush(nIndex : Int32) : Win32cr::Graphics::Gdi::HBRUSH
 
+    # :nodoc:
     fun DrawFocusRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FillRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*, hbr : Win32cr::Graphics::Gdi::HBRUSH) : Int32
 
+    # :nodoc:
     fun FrameRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*, hbr : Win32cr::Graphics::Gdi::HBRUSH) : Int32
 
+    # :nodoc:
     fun InvertRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetRect(lprc : Win32cr::Foundation::RECT*, xLeft : Int32, yTop : Int32, xRight : Int32, yBottom : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetRectEmpty(lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CopyRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InflateRect(lprc : Win32cr::Foundation::RECT*, dx : Int32, dy : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IntersectRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc1 : Win32cr::Foundation::RECT*, lprcSrc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnionRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc1 : Win32cr::Foundation::RECT*, lprcSrc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SubtractRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc1 : Win32cr::Foundation::RECT*, lprcSrc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OffsetRect(lprc : Win32cr::Foundation::RECT*, dx : Int32, dy : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsRectEmpty(lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EqualRect(lprc1 : Win32cr::Foundation::RECT*, lprc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PtInRect(lprc : Win32cr::Foundation::RECT*, pt : Win32cr::Foundation::POINT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LoadBitmapA(hInstance : Win32cr::Foundation::HINSTANCE, lpBitmapName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HBITMAP
 
+    # :nodoc:
     fun LoadBitmapW(hInstance : Win32cr::Foundation::HINSTANCE, lpBitmapName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HBITMAP
 
+    # :nodoc:
     fun ChangeDisplaySettingsA(lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : Win32cr::Graphics::Gdi::CDS_TYPE) : Win32cr::Graphics::Gdi::DISP_CHANGE
 
+    # :nodoc:
     fun ChangeDisplaySettingsW(lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : Win32cr::Graphics::Gdi::CDS_TYPE) : Win32cr::Graphics::Gdi::DISP_CHANGE
 
+    # :nodoc:
     fun ChangeDisplaySettingsExA(lpszDeviceName : Win32cr::Foundation::PSTR, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, hwnd : Win32cr::Foundation::HWND, dwflags : Win32cr::Graphics::Gdi::CDS_TYPE, lParam : Void*) : Win32cr::Graphics::Gdi::DISP_CHANGE
 
+    # :nodoc:
     fun ChangeDisplaySettingsExW(lpszDeviceName : Win32cr::Foundation::PWSTR, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, hwnd : Win32cr::Foundation::HWND, dwflags : Win32cr::Graphics::Gdi::CDS_TYPE, lParam : Void*) : Win32cr::Graphics::Gdi::DISP_CHANGE
 
+    # :nodoc:
     fun EnumDisplaySettingsA(lpszDeviceName : Win32cr::Foundation::PSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumDisplaySettingsW(lpszDeviceName : Win32cr::Foundation::PWSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumDisplaySettingsExA(lpszDeviceName : Win32cr::Foundation::PSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumDisplaySettingsExW(lpszDeviceName : Win32cr::Foundation::PWSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumDisplayDevicesA(lpDevice : Win32cr::Foundation::PSTR, iDevNum : UInt32, lpDisplayDevice : Win32cr::Graphics::Gdi::DISPLAY_DEVICEA*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumDisplayDevicesW(lpDevice : Win32cr::Foundation::PWSTR, iDevNum : UInt32, lpDisplayDevice : Win32cr::Graphics::Gdi::DISPLAY_DEVICEW*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MonitorFromPoint(pt : Win32cr::Foundation::POINT, dwFlags : Win32cr::Graphics::Gdi::MONITOR_FROM_FLAGS) : Win32cr::Graphics::Gdi::HMONITOR
 
+    # :nodoc:
     fun MonitorFromRect(lprc : Win32cr::Foundation::RECT*, dwFlags : Win32cr::Graphics::Gdi::MONITOR_FROM_FLAGS) : Win32cr::Graphics::Gdi::HMONITOR
 
+    # :nodoc:
     fun MonitorFromWindow(hwnd : Win32cr::Foundation::HWND, dwFlags : Win32cr::Graphics::Gdi::MONITOR_FROM_FLAGS) : Win32cr::Graphics::Gdi::HMONITOR
 
+    # :nodoc:
     fun GetMonitorInfoA(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, lpmi : Win32cr::Graphics::Gdi::MONITORINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetMonitorInfoW(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, lpmi : Win32cr::Graphics::Gdi::MONITORINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumDisplayMonitors(hdc : Win32cr::Graphics::Gdi::HDC, lprcClip : Win32cr::Foundation::RECT*, lpfnEnum : Win32cr::Graphics::Gdi::MONITORENUMPROC, dwData : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
   end

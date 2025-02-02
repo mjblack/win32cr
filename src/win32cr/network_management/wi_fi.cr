@@ -5,6 +5,7 @@ require "./../system/com.cr"
 require "./../system/remote_desktop.cr"
 
 module Win32cr::NetworkManagement::WiFi
+  extend self
   alias WLAN_NOTIFICATION_CALLBACK = Proc(Win32cr::NetworkManagement::WiFi::L2_NOTIFICATION_DATA*, Void*, Void)
 
   alias WFD_OPEN_SESSION_COMPLETE_CALLBACK = Proc(Win32cr::Foundation::HANDLE, Void*, LibC::GUID, UInt32, UInt32, Void)
@@ -5053,129 +5054,434 @@ module Win32cr::NetworkManagement::WiFi
 
   end
 
+  def wlanOpenHandle(dwClientVersion : UInt32, pReserved : Void*, pdwNegotiatedVersion : UInt32*, phClientHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.WlanOpenHandle(dwClientVersion, pReserved, pdwNegotiatedVersion, phClientHandle)
+  end
+
+  def wlanCloseHandle(hClientHandle : Win32cr::Foundation::HANDLE, pReserved : Void*) : UInt32
+    C.WlanCloseHandle(hClientHandle, pReserved)
+  end
+
+  def wlanEnumInterfaces(hClientHandle : Win32cr::Foundation::HANDLE, pReserved : Void*, ppInterfaceList : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_INFO_LIST**) : UInt32
+    C.WlanEnumInterfaces(hClientHandle, pReserved, ppInterfaceList)
+  end
+
+  def wlanSetAutoConfigParameter(hClientHandle : Win32cr::Foundation::HANDLE, op_code : Win32cr::NetworkManagement::WiFi::WLAN_AUTOCONF_OPCODE, dwDataSize : UInt32, pData : Void*, pReserved : Void*) : UInt32
+    C.WlanSetAutoConfigParameter(hClientHandle, op_code, dwDataSize, pData, pReserved)
+  end
+
+  def wlanQueryAutoConfigParameter(hClientHandle : Win32cr::Foundation::HANDLE, op_code : Win32cr::NetworkManagement::WiFi::WLAN_AUTOCONF_OPCODE, pReserved : Void*, pdwDataSize : UInt32*, ppData : Void**, pWlanOpcodeValueType : Win32cr::NetworkManagement::WiFi::WLAN_OPCODE_VALUE_TYPE*) : UInt32
+    C.WlanQueryAutoConfigParameter(hClientHandle, op_code, pReserved, pdwDataSize, ppData, pWlanOpcodeValueType)
+  end
+
+  def wlanGetInterfaceCapability(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pReserved : Void*, ppCapability : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_CAPABILITY**) : UInt32
+    C.WlanGetInterfaceCapability(hClientHandle, pInterfaceGuid, pReserved, ppCapability)
+  end
+
+  def wlanSetInterface(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, op_code : Win32cr::NetworkManagement::WiFi::WLAN_INTF_OPCODE, dwDataSize : UInt32, pData : Void*, pReserved : Void*) : UInt32
+    C.WlanSetInterface(hClientHandle, pInterfaceGuid, op_code, dwDataSize, pData, pReserved)
+  end
+
+  def wlanQueryInterface(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, op_code : Win32cr::NetworkManagement::WiFi::WLAN_INTF_OPCODE, pReserved : Void*, pdwDataSize : UInt32*, ppData : Void**, pWlanOpcodeValueType : Win32cr::NetworkManagement::WiFi::WLAN_OPCODE_VALUE_TYPE*) : UInt32
+    C.WlanQueryInterface(hClientHandle, pInterfaceGuid, op_code, pReserved, pdwDataSize, ppData, pWlanOpcodeValueType)
+  end
+
+  def wlanIhvControl(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, type__ : Win32cr::NetworkManagement::WiFi::WLAN_IHV_CONTROL_TYPE, dwInBufferSize : UInt32, pInBuffer : Void*, dwOutBufferSize : UInt32, pOutBuffer : Void*, pdwBytesReturned : UInt32*) : UInt32
+    C.WlanIhvControl(hClientHandle, pInterfaceGuid, type__, dwInBufferSize, pInBuffer, dwOutBufferSize, pOutBuffer, pdwBytesReturned)
+  end
+
+  def wlanScan(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pDot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID*, pIeData : Win32cr::NetworkManagement::WiFi::WLAN_RAW_DATA*, pReserved : Void*) : UInt32
+    C.WlanScan(hClientHandle, pInterfaceGuid, pDot11Ssid, pIeData, pReserved)
+  end
+
+  def wlanGetAvailableNetworkList(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, dwFlags : UInt32, pReserved : Void*, ppAvailableNetworkList : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK_LIST**) : UInt32
+    C.WlanGetAvailableNetworkList(hClientHandle, pInterfaceGuid, dwFlags, pReserved, ppAvailableNetworkList)
+  end
+
+  def wlanGetAvailableNetworkList2(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, dwFlags : UInt32, pReserved : Void*, ppAvailableNetworkList : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK_LIST_V2**) : UInt32
+    C.WlanGetAvailableNetworkList2(hClientHandle, pInterfaceGuid, dwFlags, pReserved, ppAvailableNetworkList)
+  end
+
+  def wlanGetNetworkBssList(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pDot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID*, dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, bSecurityEnabled : Win32cr::Foundation::BOOL, pReserved : Void*, ppWlanBssList : Win32cr::NetworkManagement::WiFi::WLAN_BSS_LIST**) : UInt32
+    C.WlanGetNetworkBssList(hClientHandle, pInterfaceGuid, pDot11Ssid, dot11BssType, bSecurityEnabled, pReserved, ppWlanBssList)
+  end
+
+  def wlanConnect(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pConnectionParameters : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_PARAMETERS*, pReserved : Void*) : UInt32
+    C.WlanConnect(hClientHandle, pInterfaceGuid, pConnectionParameters, pReserved)
+  end
+
+  def wlanConnect2(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pConnectionParameters : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_PARAMETERS_V2*, pReserved : Void*) : UInt32
+    C.WlanConnect2(hClientHandle, pInterfaceGuid, pConnectionParameters, pReserved)
+  end
+
+  def wlanDisconnect(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pReserved : Void*) : UInt32
+    C.WlanDisconnect(hClientHandle, pInterfaceGuid, pReserved)
+  end
+
+  def wlanRegisterNotification(hClientHandle : Win32cr::Foundation::HANDLE, dwNotifSource : UInt32, bIgnoreDuplicate : Win32cr::Foundation::BOOL, funcCallback : Win32cr::NetworkManagement::WiFi::WLAN_NOTIFICATION_CALLBACK, pCallbackContext : Void*, pReserved : Void*, pdwPrevNotifSource : UInt32*) : UInt32
+    C.WlanRegisterNotification(hClientHandle, dwNotifSource, bIgnoreDuplicate, funcCallback, pCallbackContext, pReserved, pdwPrevNotifSource)
+  end
+
+  def wlanGetProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, pReserved : Void*, pstrProfileXml : Win32cr::Foundation::PWSTR*, pdwFlags : UInt32*, pdwGrantedAccess : UInt32*) : UInt32
+    C.WlanGetProfile(hClientHandle, pInterfaceGuid, strProfileName, pReserved, pstrProfileXml, pdwFlags, pdwGrantedAccess)
+  end
+
+  def wlanSetProfileEapUserData(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, eapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwFlags : Win32cr::NetworkManagement::WiFi::WLAN_SET_EAPHOST_FLAGS, dwEapUserDataSize : UInt32, pbEapUserData : UInt8*, pReserved : Void*) : UInt32
+    C.WlanSetProfileEapUserData(hClientHandle, pInterfaceGuid, strProfileName, eapType, dwFlags, dwEapUserDataSize, pbEapUserData, pReserved)
+  end
+
+  def wlanSetProfileEapXmlUserData(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::NetworkManagement::WiFi::WLAN_SET_EAPHOST_FLAGS, strEapXmlUserData : Win32cr::Foundation::PWSTR, pReserved : Void*) : UInt32
+    C.WlanSetProfileEapXmlUserData(hClientHandle, pInterfaceGuid, strProfileName, dwFlags, strEapXmlUserData, pReserved)
+  end
+
+  def wlanSetProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, dwFlags : UInt32, strProfileXml : Win32cr::Foundation::PWSTR, strAllUserProfileSecurity : Win32cr::Foundation::PWSTR, bOverwrite : Win32cr::Foundation::BOOL, pReserved : Void*, pdwReasonCode : UInt32*) : UInt32
+    C.WlanSetProfile(hClientHandle, pInterfaceGuid, dwFlags, strProfileXml, strAllUserProfileSecurity, bOverwrite, pReserved, pdwReasonCode)
+  end
+
+  def wlanDeleteProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, pReserved : Void*) : UInt32
+    C.WlanDeleteProfile(hClientHandle, pInterfaceGuid, strProfileName, pReserved)
+  end
+
+  def wlanRenameProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strOldProfileName : Win32cr::Foundation::PWSTR, strNewProfileName : Win32cr::Foundation::PWSTR, pReserved : Void*) : UInt32
+    C.WlanRenameProfile(hClientHandle, pInterfaceGuid, strOldProfileName, strNewProfileName, pReserved)
+  end
+
+  def wlanGetProfileList(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pReserved : Void*, ppProfileList : Win32cr::NetworkManagement::WiFi::WLAN_PROFILE_INFO_LIST**) : UInt32
+    C.WlanGetProfileList(hClientHandle, pInterfaceGuid, pReserved, ppProfileList)
+  end
+
+  def wlanSetProfileList(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, dwItems : UInt32, strProfileNames : Win32cr::Foundation::PWSTR*, pReserved : Void*) : UInt32
+    C.WlanSetProfileList(hClientHandle, pInterfaceGuid, dwItems, strProfileNames, pReserved)
+  end
+
+  def wlanSetProfilePosition(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, dwPosition : UInt32, pReserved : Void*) : UInt32
+    C.WlanSetProfilePosition(hClientHandle, pInterfaceGuid, strProfileName, dwPosition, pReserved)
+  end
+
+  def wlanSetProfileCustomUserData(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, dwDataSize : UInt32, pData : UInt8*, pReserved : Void*) : UInt32
+    C.WlanSetProfileCustomUserData(hClientHandle, pInterfaceGuid, strProfileName, dwDataSize, pData, pReserved)
+  end
+
+  def wlanGetProfileCustomUserData(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, pReserved : Void*, pdwDataSize : UInt32*, ppData : UInt8**) : UInt32
+    C.WlanGetProfileCustomUserData(hClientHandle, pInterfaceGuid, strProfileName, pReserved, pdwDataSize, ppData)
+  end
+
+  def wlanSetFilterList(hClientHandle : Win32cr::Foundation::HANDLE, wlanFilterListType : Win32cr::NetworkManagement::WiFi::WLAN_FILTER_LIST_TYPE, pNetworkList : Win32cr::NetworkManagement::WiFi::DOT11_NETWORK_LIST*, pReserved : Void*) : UInt32
+    C.WlanSetFilterList(hClientHandle, wlanFilterListType, pNetworkList, pReserved)
+  end
+
+  def wlanGetFilterList(hClientHandle : Win32cr::Foundation::HANDLE, wlanFilterListType : Win32cr::NetworkManagement::WiFi::WLAN_FILTER_LIST_TYPE, pReserved : Void*, ppNetworkList : Win32cr::NetworkManagement::WiFi::DOT11_NETWORK_LIST**) : UInt32
+    C.WlanGetFilterList(hClientHandle, wlanFilterListType, pReserved, ppNetworkList)
+  end
+
+  def wlanSetPsdIEDataList(hClientHandle : Win32cr::Foundation::HANDLE, strFormat : Win32cr::Foundation::PWSTR, pPsdIEDataList : Win32cr::NetworkManagement::WiFi::WLAN_RAW_DATA_LIST*, pReserved : Void*) : UInt32
+    C.WlanSetPsdIEDataList(hClientHandle, strFormat, pPsdIEDataList, pReserved)
+  end
+
+  def wlanSaveTemporaryProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, strAllUserProfileSecurity : Win32cr::Foundation::PWSTR, dwFlags : UInt32, bOverWrite : Win32cr::Foundation::BOOL, pReserved : Void*) : UInt32
+    C.WlanSaveTemporaryProfile(hClientHandle, pInterfaceGuid, strProfileName, strAllUserProfileSecurity, dwFlags, bOverWrite, pReserved)
+  end
+
+  def wlanDeviceServiceCommand(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pDeviceServiceGuid : LibC::GUID*, dwOpCode : UInt32, dwInBufferSize : UInt32, pInBuffer : Void*, dwOutBufferSize : UInt32, pOutBuffer : Void*, pdwBytesReturned : UInt32*) : UInt32
+    C.WlanDeviceServiceCommand(hClientHandle, pInterfaceGuid, pDeviceServiceGuid, dwOpCode, dwInBufferSize, pInBuffer, dwOutBufferSize, pOutBuffer, pdwBytesReturned)
+  end
+
+  def wlanGetSupportedDeviceServices(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, ppDevSvcGuidList : Win32cr::NetworkManagement::WiFi::WLAN_DEVICE_SERVICE_GUID_LIST**) : UInt32
+    C.WlanGetSupportedDeviceServices(hClientHandle, pInterfaceGuid, ppDevSvcGuidList)
+  end
+
+  def wlanRegisterDeviceServiceNotification(hClientHandle : Win32cr::Foundation::HANDLE, pDevSvcGuidList : Win32cr::NetworkManagement::WiFi::WLAN_DEVICE_SERVICE_GUID_LIST*) : UInt32
+    C.WlanRegisterDeviceServiceNotification(hClientHandle, pDevSvcGuidList)
+  end
+
+  def wlanExtractPsdIEDataList(hClientHandle : Win32cr::Foundation::HANDLE, dwIeDataSize : UInt32, pRawIeData : UInt8*, strFormat : Win32cr::Foundation::PWSTR, pReserved : Void*, ppPsdIEDataList : Win32cr::NetworkManagement::WiFi::WLAN_RAW_DATA_LIST**) : UInt32
+    C.WlanExtractPsdIEDataList(hClientHandle, dwIeDataSize, pRawIeData, strFormat, pReserved, ppPsdIEDataList)
+  end
+
+  def wlanReasonCodeToString(dwReasonCode : UInt32, dwBufferSize : UInt32, pStringBuffer : UInt16*, pReserved : Void*) : UInt32
+    C.WlanReasonCodeToString(dwReasonCode, dwBufferSize, pStringBuffer, pReserved)
+  end
+
+  def wlanAllocateMemory(dwMemorySize : UInt32) : Void*
+    C.WlanAllocateMemory(dwMemorySize)
+  end
+
+  def wlanFreeMemory(pMemory : Void*) : Void
+    C.WlanFreeMemory(pMemory)
+  end
+
+  def wlanSetSecuritySettings(hClientHandle : Win32cr::Foundation::HANDLE, securable_object : Win32cr::NetworkManagement::WiFi::WLAN_SECURABLE_OBJECT, strModifiedSDDL : Win32cr::Foundation::PWSTR) : UInt32
+    C.WlanSetSecuritySettings(hClientHandle, securable_object, strModifiedSDDL)
+  end
+
+  def wlanGetSecuritySettings(hClientHandle : Win32cr::Foundation::HANDLE, securable_object : Win32cr::NetworkManagement::WiFi::WLAN_SECURABLE_OBJECT, pValueType : Win32cr::NetworkManagement::WiFi::WLAN_OPCODE_VALUE_TYPE*, pstrCurrentSDDL : Win32cr::Foundation::PWSTR*, pdwGrantedAccess : UInt32*) : UInt32
+    C.WlanGetSecuritySettings(hClientHandle, securable_object, pValueType, pstrCurrentSDDL, pdwGrantedAccess)
+  end
+
+  def wlanUIEditProfile(dwClientVersion : UInt32, wstrProfileName : Win32cr::Foundation::PWSTR, pInterfaceGuid : LibC::GUID*, hWnd : Win32cr::Foundation::HWND, wlStartPage : Win32cr::NetworkManagement::WiFi::WL_DISPLAY_PAGES, pReserved : Void*, pWlanReasonCode : UInt32*) : UInt32
+    C.WlanUIEditProfile(dwClientVersion, wstrProfileName, pInterfaceGuid, hWnd, wlStartPage, pReserved, pWlanReasonCode)
+  end
+
+  def wlanHostedNetworkStartUsing(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    C.WlanHostedNetworkStartUsing(hClientHandle, pFailReason, pvReserved)
+  end
+
+  def wlanHostedNetworkStopUsing(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    C.WlanHostedNetworkStopUsing(hClientHandle, pFailReason, pvReserved)
+  end
+
+  def wlanHostedNetworkForceStart(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    C.WlanHostedNetworkForceStart(hClientHandle, pFailReason, pvReserved)
+  end
+
+  def wlanHostedNetworkForceStop(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    C.WlanHostedNetworkForceStop(hClientHandle, pFailReason, pvReserved)
+  end
+
+  def wlanHostedNetworkQueryProperty(hClientHandle : Win32cr::Foundation::HANDLE, op_code : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_OPCODE, pdwDataSize : UInt32*, ppvData : Void**, pWlanOpcodeValueType : Win32cr::NetworkManagement::WiFi::WLAN_OPCODE_VALUE_TYPE*, pvReserved : Void*) : UInt32
+    C.WlanHostedNetworkQueryProperty(hClientHandle, op_code, pdwDataSize, ppvData, pWlanOpcodeValueType, pvReserved)
+  end
+
+  def wlanHostedNetworkSetProperty(hClientHandle : Win32cr::Foundation::HANDLE, op_code : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_OPCODE, dwDataSize : UInt32, pvData : Void*, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    C.WlanHostedNetworkSetProperty(hClientHandle, op_code, dwDataSize, pvData, pFailReason, pvReserved)
+  end
+
+  def wlanHostedNetworkInitSettings(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    C.WlanHostedNetworkInitSettings(hClientHandle, pFailReason, pvReserved)
+  end
+
+  def wlanHostedNetworkRefreshSecuritySettings(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    C.WlanHostedNetworkRefreshSecuritySettings(hClientHandle, pFailReason, pvReserved)
+  end
+
+  def wlanHostedNetworkQueryStatus(hClientHandle : Win32cr::Foundation::HANDLE, ppWlanHostedNetworkStatus : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATUS**, pvReserved : Void*) : UInt32
+    C.WlanHostedNetworkQueryStatus(hClientHandle, ppWlanHostedNetworkStatus, pvReserved)
+  end
+
+  def wlanHostedNetworkSetSecondaryKey(hClientHandle : Win32cr::Foundation::HANDLE, dwKeyLength : UInt32, pucKeyData : UInt8*, bIsPassPhrase : Win32cr::Foundation::BOOL, bPersistent : Win32cr::Foundation::BOOL, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    C.WlanHostedNetworkSetSecondaryKey(hClientHandle, dwKeyLength, pucKeyData, bIsPassPhrase, bPersistent, pFailReason, pvReserved)
+  end
+
+  def wlanHostedNetworkQuerySecondaryKey(hClientHandle : Win32cr::Foundation::HANDLE, pdwKeyLength : UInt32*, ppucKeyData : UInt8**, pbIsPassPhrase : Win32cr::Foundation::BOOL*, pbPersistent : Win32cr::Foundation::BOOL*, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    C.WlanHostedNetworkQuerySecondaryKey(hClientHandle, pdwKeyLength, ppucKeyData, pbIsPassPhrase, pbPersistent, pFailReason, pvReserved)
+  end
+
+  def wlanRegisterVirtualStationNotification(hClientHandle : Win32cr::Foundation::HANDLE, bRegister : Win32cr::Foundation::BOOL, pReserved : Void*) : UInt32
+    C.WlanRegisterVirtualStationNotification(hClientHandle, bRegister, pReserved)
+  end
+
+  def wFDOpenHandle(dwClientVersion : UInt32, pdwNegotiatedVersion : UInt32*, phClientHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.WFDOpenHandle(dwClientVersion, pdwNegotiatedVersion, phClientHandle)
+  end
+
+  def wFDCloseHandle(hClientHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.WFDCloseHandle(hClientHandle)
+  end
+
+  def wFDStartOpenSession(hClientHandle : Win32cr::Foundation::HANDLE, pDeviceAddress : UInt8**, pvContext : Void*, pfnCallback : Win32cr::NetworkManagement::WiFi::WFD_OPEN_SESSION_COMPLETE_CALLBACK, phSessionHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.WFDStartOpenSession(hClientHandle, pDeviceAddress, pvContext, pfnCallback, phSessionHandle)
+  end
+
+  def wFDCancelOpenSession(hSessionHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.WFDCancelOpenSession(hSessionHandle)
+  end
+
+  def wFDOpenLegacySession(hClientHandle : Win32cr::Foundation::HANDLE, pLegacyMacAddress : UInt8**, phSessionHandle : Win32cr::Foundation::HANDLE*, pGuidSessionInterface : LibC::GUID*) : UInt32
+    C.WFDOpenLegacySession(hClientHandle, pLegacyMacAddress, phSessionHandle, pGuidSessionInterface)
+  end
+
+  def wFDCloseSession(hSessionHandle : Win32cr::Foundation::HANDLE) : UInt32
+    C.WFDCloseSession(hSessionHandle)
+  end
+
+  def wFDUpdateDeviceVisibility(pDeviceAddress : UInt8**) : UInt32
+    C.WFDUpdateDeviceVisibility(pDeviceAddress)
+  end
+
   @[Link("wlanapi")]
   @[Link("wlanui")]
   lib C
+    # :nodoc:
     fun WlanOpenHandle(dwClientVersion : UInt32, pReserved : Void*, pdwNegotiatedVersion : UInt32*, phClientHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun WlanCloseHandle(hClientHandle : Win32cr::Foundation::HANDLE, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanEnumInterfaces(hClientHandle : Win32cr::Foundation::HANDLE, pReserved : Void*, ppInterfaceList : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_INFO_LIST**) : UInt32
 
+    # :nodoc:
     fun WlanSetAutoConfigParameter(hClientHandle : Win32cr::Foundation::HANDLE, op_code : Win32cr::NetworkManagement::WiFi::WLAN_AUTOCONF_OPCODE, dwDataSize : UInt32, pData : Void*, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanQueryAutoConfigParameter(hClientHandle : Win32cr::Foundation::HANDLE, op_code : Win32cr::NetworkManagement::WiFi::WLAN_AUTOCONF_OPCODE, pReserved : Void*, pdwDataSize : UInt32*, ppData : Void**, pWlanOpcodeValueType : Win32cr::NetworkManagement::WiFi::WLAN_OPCODE_VALUE_TYPE*) : UInt32
 
+    # :nodoc:
     fun WlanGetInterfaceCapability(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pReserved : Void*, ppCapability : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_CAPABILITY**) : UInt32
 
+    # :nodoc:
     fun WlanSetInterface(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, op_code : Win32cr::NetworkManagement::WiFi::WLAN_INTF_OPCODE, dwDataSize : UInt32, pData : Void*, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanQueryInterface(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, op_code : Win32cr::NetworkManagement::WiFi::WLAN_INTF_OPCODE, pReserved : Void*, pdwDataSize : UInt32*, ppData : Void**, pWlanOpcodeValueType : Win32cr::NetworkManagement::WiFi::WLAN_OPCODE_VALUE_TYPE*) : UInt32
 
+    # :nodoc:
     fun WlanIhvControl(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, type__ : Win32cr::NetworkManagement::WiFi::WLAN_IHV_CONTROL_TYPE, dwInBufferSize : UInt32, pInBuffer : Void*, dwOutBufferSize : UInt32, pOutBuffer : Void*, pdwBytesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun WlanScan(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pDot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID*, pIeData : Win32cr::NetworkManagement::WiFi::WLAN_RAW_DATA*, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanGetAvailableNetworkList(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, dwFlags : UInt32, pReserved : Void*, ppAvailableNetworkList : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK_LIST**) : UInt32
 
+    # :nodoc:
     fun WlanGetAvailableNetworkList2(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, dwFlags : UInt32, pReserved : Void*, ppAvailableNetworkList : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK_LIST_V2**) : UInt32
 
+    # :nodoc:
     fun WlanGetNetworkBssList(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pDot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID*, dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, bSecurityEnabled : Win32cr::Foundation::BOOL, pReserved : Void*, ppWlanBssList : Win32cr::NetworkManagement::WiFi::WLAN_BSS_LIST**) : UInt32
 
+    # :nodoc:
     fun WlanConnect(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pConnectionParameters : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_PARAMETERS*, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanConnect2(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pConnectionParameters : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_PARAMETERS_V2*, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanDisconnect(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanRegisterNotification(hClientHandle : Win32cr::Foundation::HANDLE, dwNotifSource : UInt32, bIgnoreDuplicate : Win32cr::Foundation::BOOL, funcCallback : Win32cr::NetworkManagement::WiFi::WLAN_NOTIFICATION_CALLBACK, pCallbackContext : Void*, pReserved : Void*, pdwPrevNotifSource : UInt32*) : UInt32
 
+    # :nodoc:
     fun WlanGetProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, pReserved : Void*, pstrProfileXml : Win32cr::Foundation::PWSTR*, pdwFlags : UInt32*, pdwGrantedAccess : UInt32*) : UInt32
 
+    # :nodoc:
     fun WlanSetProfileEapUserData(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, eapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwFlags : Win32cr::NetworkManagement::WiFi::WLAN_SET_EAPHOST_FLAGS, dwEapUserDataSize : UInt32, pbEapUserData : UInt8*, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanSetProfileEapXmlUserData(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::NetworkManagement::WiFi::WLAN_SET_EAPHOST_FLAGS, strEapXmlUserData : Win32cr::Foundation::PWSTR, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanSetProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, dwFlags : UInt32, strProfileXml : Win32cr::Foundation::PWSTR, strAllUserProfileSecurity : Win32cr::Foundation::PWSTR, bOverwrite : Win32cr::Foundation::BOOL, pReserved : Void*, pdwReasonCode : UInt32*) : UInt32
 
+    # :nodoc:
     fun WlanDeleteProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanRenameProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strOldProfileName : Win32cr::Foundation::PWSTR, strNewProfileName : Win32cr::Foundation::PWSTR, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanGetProfileList(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pReserved : Void*, ppProfileList : Win32cr::NetworkManagement::WiFi::WLAN_PROFILE_INFO_LIST**) : UInt32
 
+    # :nodoc:
     fun WlanSetProfileList(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, dwItems : UInt32, strProfileNames : Win32cr::Foundation::PWSTR*, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanSetProfilePosition(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, dwPosition : UInt32, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanSetProfileCustomUserData(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, dwDataSize : UInt32, pData : UInt8*, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanGetProfileCustomUserData(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, pReserved : Void*, pdwDataSize : UInt32*, ppData : UInt8**) : UInt32
 
+    # :nodoc:
     fun WlanSetFilterList(hClientHandle : Win32cr::Foundation::HANDLE, wlanFilterListType : Win32cr::NetworkManagement::WiFi::WLAN_FILTER_LIST_TYPE, pNetworkList : Win32cr::NetworkManagement::WiFi::DOT11_NETWORK_LIST*, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanGetFilterList(hClientHandle : Win32cr::Foundation::HANDLE, wlanFilterListType : Win32cr::NetworkManagement::WiFi::WLAN_FILTER_LIST_TYPE, pReserved : Void*, ppNetworkList : Win32cr::NetworkManagement::WiFi::DOT11_NETWORK_LIST**) : UInt32
 
+    # :nodoc:
     fun WlanSetPsdIEDataList(hClientHandle : Win32cr::Foundation::HANDLE, strFormat : Win32cr::Foundation::PWSTR, pPsdIEDataList : Win32cr::NetworkManagement::WiFi::WLAN_RAW_DATA_LIST*, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanSaveTemporaryProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, strAllUserProfileSecurity : Win32cr::Foundation::PWSTR, dwFlags : UInt32, bOverWrite : Win32cr::Foundation::BOOL, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanDeviceServiceCommand(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pDeviceServiceGuid : LibC::GUID*, dwOpCode : UInt32, dwInBufferSize : UInt32, pInBuffer : Void*, dwOutBufferSize : UInt32, pOutBuffer : Void*, pdwBytesReturned : UInt32*) : UInt32
 
+    # :nodoc:
     fun WlanGetSupportedDeviceServices(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, ppDevSvcGuidList : Win32cr::NetworkManagement::WiFi::WLAN_DEVICE_SERVICE_GUID_LIST**) : UInt32
 
+    # :nodoc:
     fun WlanRegisterDeviceServiceNotification(hClientHandle : Win32cr::Foundation::HANDLE, pDevSvcGuidList : Win32cr::NetworkManagement::WiFi::WLAN_DEVICE_SERVICE_GUID_LIST*) : UInt32
 
+    # :nodoc:
     fun WlanExtractPsdIEDataList(hClientHandle : Win32cr::Foundation::HANDLE, dwIeDataSize : UInt32, pRawIeData : UInt8*, strFormat : Win32cr::Foundation::PWSTR, pReserved : Void*, ppPsdIEDataList : Win32cr::NetworkManagement::WiFi::WLAN_RAW_DATA_LIST**) : UInt32
 
+    # :nodoc:
     fun WlanReasonCodeToString(dwReasonCode : UInt32, dwBufferSize : UInt32, pStringBuffer : UInt16*, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanAllocateMemory(dwMemorySize : UInt32) : Void*
 
+    # :nodoc:
     fun WlanFreeMemory(pMemory : Void*) : Void
 
+    # :nodoc:
     fun WlanSetSecuritySettings(hClientHandle : Win32cr::Foundation::HANDLE, securable_object : Win32cr::NetworkManagement::WiFi::WLAN_SECURABLE_OBJECT, strModifiedSDDL : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun WlanGetSecuritySettings(hClientHandle : Win32cr::Foundation::HANDLE, securable_object : Win32cr::NetworkManagement::WiFi::WLAN_SECURABLE_OBJECT, pValueType : Win32cr::NetworkManagement::WiFi::WLAN_OPCODE_VALUE_TYPE*, pstrCurrentSDDL : Win32cr::Foundation::PWSTR*, pdwGrantedAccess : UInt32*) : UInt32
 
+    # :nodoc:
     fun WlanUIEditProfile(dwClientVersion : UInt32, wstrProfileName : Win32cr::Foundation::PWSTR, pInterfaceGuid : LibC::GUID*, hWnd : Win32cr::Foundation::HWND, wlStartPage : Win32cr::NetworkManagement::WiFi::WL_DISPLAY_PAGES, pReserved : Void*, pWlanReasonCode : UInt32*) : UInt32
 
+    # :nodoc:
     fun WlanHostedNetworkStartUsing(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanHostedNetworkStopUsing(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanHostedNetworkForceStart(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanHostedNetworkForceStop(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanHostedNetworkQueryProperty(hClientHandle : Win32cr::Foundation::HANDLE, op_code : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_OPCODE, pdwDataSize : UInt32*, ppvData : Void**, pWlanOpcodeValueType : Win32cr::NetworkManagement::WiFi::WLAN_OPCODE_VALUE_TYPE*, pvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanHostedNetworkSetProperty(hClientHandle : Win32cr::Foundation::HANDLE, op_code : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_OPCODE, dwDataSize : UInt32, pvData : Void*, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanHostedNetworkInitSettings(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanHostedNetworkRefreshSecuritySettings(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanHostedNetworkQueryStatus(hClientHandle : Win32cr::Foundation::HANDLE, ppWlanHostedNetworkStatus : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATUS**, pvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanHostedNetworkSetSecondaryKey(hClientHandle : Win32cr::Foundation::HANDLE, dwKeyLength : UInt32, pucKeyData : UInt8*, bIsPassPhrase : Win32cr::Foundation::BOOL, bPersistent : Win32cr::Foundation::BOOL, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanHostedNetworkQuerySecondaryKey(hClientHandle : Win32cr::Foundation::HANDLE, pdwKeyLength : UInt32*, ppucKeyData : UInt8**, pbIsPassPhrase : Win32cr::Foundation::BOOL*, pbPersistent : Win32cr::Foundation::BOOL*, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WlanRegisterVirtualStationNotification(hClientHandle : Win32cr::Foundation::HANDLE, bRegister : Win32cr::Foundation::BOOL, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun WFDOpenHandle(dwClientVersion : UInt32, pdwNegotiatedVersion : UInt32*, phClientHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun WFDCloseHandle(hClientHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun WFDStartOpenSession(hClientHandle : Win32cr::Foundation::HANDLE, pDeviceAddress : UInt8**, pvContext : Void*, pfnCallback : Win32cr::NetworkManagement::WiFi::WFD_OPEN_SESSION_COMPLETE_CALLBACK, phSessionHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun WFDCancelOpenSession(hSessionHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun WFDOpenLegacySession(hClientHandle : Win32cr::Foundation::HANDLE, pLegacyMacAddress : UInt8**, phSessionHandle : Win32cr::Foundation::HANDLE*, pGuidSessionInterface : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun WFDCloseSession(hSessionHandle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun WFDUpdateDeviceVisibility(pDeviceAddress : UInt8**) : UInt32
 
   end

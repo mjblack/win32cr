@@ -4,6 +4,7 @@ require "./../system/io.cr"
 require "./../system/com.cr"
 
 module Win32cr::Networking::WinSock
+  extend self
   alias HWSAEVENT = LibC::IntPtrT
   alias SOCKET = LibC::UIntPtrT
   alias LPCONDITIONPROC = Proc(Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::QOS*, Win32cr::Networking::WinSock::QOS*, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::WSABUF*, UInt32*, LibC::UIntPtrT, Int32)
@@ -5457,491 +5458,1538 @@ module Win32cr::Networking::WinSock
   end
   {% end %}
 
+  def _WSAFDIsSet(fd : Win32cr::Networking::WinSock::SOCKET, param1 : Win32cr::Networking::WinSock::Fd_set*) : Int32
+    C.__WSAFDIsSet(fd, param1)
+  end
+
+  #def accept(s : Win32cr::Networking::WinSock::SOCKET, addr : Win32cr::Networking::WinSock::SOCKADDR*, addrlen : Int32*) : Win32cr::Networking::WinSock::SOCKET
+    #C.accept(s, addr, addrlen)
+  #end
+
+  #def bind(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32) : Int32
+    #C.bind(s, name, namelen)
+  #end
+
+  #def closesocket(s : Win32cr::Networking::WinSock::SOCKET) : Int32
+    #C.closesocket(s)
+  #end
+
+  #def connect(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32) : Int32
+    #C.connect(s, name, namelen)
+  #end
+
+  #def ioctlsocket(s : Win32cr::Networking::WinSock::SOCKET, cmd : Int32, argp : UInt32*) : Int32
+    #C.ioctlsocket(s, cmd, argp)
+  #end
+
+  #def getpeername(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32*) : Int32
+    #C.getpeername(s, name, namelen)
+  #end
+
+  #def getsockname(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32*) : Int32
+    #C.getsockname(s, name, namelen)
+  #end
+
+  #def getsockopt(s : Win32cr::Networking::WinSock::SOCKET, level : Int32, optname : Int32, optval : Win32cr::Foundation::PSTR, optlen : Int32*) : Int32
+    #C.getsockopt(s, level, optname, optval, optlen)
+  #end
+
+  def htonl(hostlong : UInt32) : UInt32
+    C.htonl(hostlong)
+  end
+
+  #def htons(hostshort : UInt16) : UInt16
+    #C.htons(hostshort)
+  #end
+
+  def inetAddr(cp : Win32cr::Foundation::PSTR) : UInt32
+    C.inet_addr(cp)
+  end
+
+  def inetNtoa(in__ : Win32cr::Networking::WinSock::IN_ADDR) : Win32cr::Foundation::PSTR
+    C.inet_ntoa(in__)
+  end
+
+  #def listen(s : Win32cr::Networking::WinSock::SOCKET, backlog : Int32) : Int32
+    #C.listen(s, backlog)
+  #end
+
+  def ntohl(netlong : UInt32) : UInt32
+    C.ntohl(netlong)
+  end
+
+  #def ntohs(netshort : UInt16) : UInt16
+    #C.ntohs(netshort)
+  #end
+
+  #def recv(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Win32cr::Networking::WinSock::SEND_RECV_FLAGS) : Int32
+    #C.recv(s, buf, len, flags)
+  #end
+
+  #def recvfrom(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Int32, from : Win32cr::Networking::WinSock::SOCKADDR*, fromlen : Int32*) : Int32
+    #C.recvfrom(s, buf, len, flags, from, fromlen)
+  #end
+
+  def select(nfds : Int32, readfds : Win32cr::Networking::WinSock::Fd_set*, writefds : Win32cr::Networking::WinSock::Fd_set*, exceptfds : Win32cr::Networking::WinSock::Fd_set*, timeout : Win32cr::Networking::WinSock::Timeval*) : Int32
+    C.select(nfds, readfds, writefds, exceptfds, timeout)
+  end
+
+  #def send(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Win32cr::Networking::WinSock::SEND_RECV_FLAGS) : Int32
+    #C.send(s, buf, len, flags)
+  #end
+
+  def sendto(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Int32, to : Win32cr::Networking::WinSock::SOCKADDR*, tolen : Int32) : Int32
+    C.sendto(s, buf, len, flags, to, tolen)
+  end
+
+  #def setsockopt(s : Win32cr::Networking::WinSock::SOCKET, level : Int32, optname : Int32, optval : Win32cr::Foundation::PSTR, optlen : Int32) : Int32
+    #C.setsockopt(s, level, optname, optval, optlen)
+  #end
+
+  #def shutdown(s : Win32cr::Networking::WinSock::SOCKET, how : Int32) : Int32
+    #C.shutdown(s, how)
+  #end
+
+  #def socket(af : Int32, type__ : Int32, protocol : Int32) : Win32cr::Networking::WinSock::SOCKET
+    #C.socket(af, type__, protocol)
+  #end
+
+  def gethostbyaddr(addr : Win32cr::Foundation::PSTR, len : Int32, type__ : Int32) : Win32cr::Networking::WinSock::Hostent*
+    C.gethostbyaddr(addr, len, type__)
+  end
+
+  def gethostbyname(name : Win32cr::Foundation::PSTR) : Win32cr::Networking::WinSock::Hostent*
+    C.gethostbyname(name)
+  end
+
+  def gethostname(name : Win32cr::Foundation::PSTR, namelen : Int32) : Int32
+    C.gethostname(name, namelen)
+  end
+
+  def getHostNameW(name : UInt16*, namelen : Int32) : Int32
+    C.GetHostNameW(name, namelen)
+  end
+
+  def getservbyport(port : Int32, proto : Win32cr::Foundation::PSTR) : Win32cr::Networking::WinSock::Servent*
+    C.getservbyport(port, proto)
+  end
+
+  def getservbyname(name : Win32cr::Foundation::PSTR, proto : Win32cr::Foundation::PSTR) : Win32cr::Networking::WinSock::Servent*
+    C.getservbyname(name, proto)
+  end
+
+  def getprotobynumber(number : Int32) : Win32cr::Networking::WinSock::Protoent*
+    C.getprotobynumber(number)
+  end
+
+  def getprotobyname(name : Win32cr::Foundation::PSTR) : Win32cr::Networking::WinSock::Protoent*
+    C.getprotobyname(name)
+  end
+
+  #def wSAStartup(wVersionRequested : UInt16, lpWSAData : Win32cr::Networking::WinSock::WSAData*) : Int32
+    #C.WSAStartup(wVersionRequested, lpWSAData)
+  #end
+
+  #def wSACleanup : Int32
+    #C.WSACleanup
+  #end
+
+  #def wSASetLastError(iError : Int32) : Void
+    #C.WSASetLastError(iError)
+  #end
+
+  #def wSAGetLastError : Win32cr::Networking::WinSock::WSA_ERROR
+    #C.WSAGetLastError
+  #end
+
+  def wSAIsBlocking : Win32cr::Foundation::BOOL
+    C.WSAIsBlocking
+  end
+
+  def wSAUnhookBlockingHook : Int32
+    C.WSAUnhookBlockingHook
+  end
+
+  def wSASetBlockingHook(lpBlockFunc : Win32cr::Foundation::FARPROC) : Win32cr::Foundation::FARPROC
+    C.WSASetBlockingHook(lpBlockFunc)
+  end
+
+  def wSACancelBlockingCall : Int32
+    C.WSACancelBlockingCall
+  end
+
+  def wSAAsyncGetServByName(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, name : Win32cr::Foundation::PSTR, proto : Win32cr::Foundation::PSTR, buf : Win32cr::Foundation::PSTR, buflen : Int32) : Win32cr::Foundation::HANDLE
+    C.WSAAsyncGetServByName(hWnd, wMsg, name, proto, buf, buflen)
+  end
+
+  def wSAAsyncGetServByPort(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, port : Int32, proto : Win32cr::Foundation::PSTR, buf : Win32cr::Foundation::PSTR, buflen : Int32) : Win32cr::Foundation::HANDLE
+    C.WSAAsyncGetServByPort(hWnd, wMsg, port, proto, buf, buflen)
+  end
+
+  def wSAAsyncGetProtoByName(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, name : Win32cr::Foundation::PSTR, buf : Win32cr::Foundation::PSTR, buflen : Int32) : Win32cr::Foundation::HANDLE
+    C.WSAAsyncGetProtoByName(hWnd, wMsg, name, buf, buflen)
+  end
+
+  def wSAAsyncGetProtoByNumber(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, number : Int32, buf : Win32cr::Foundation::PSTR, buflen : Int32) : Win32cr::Foundation::HANDLE
+    C.WSAAsyncGetProtoByNumber(hWnd, wMsg, number, buf, buflen)
+  end
+
+  def wSAAsyncGetHostByName(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, name : Win32cr::Foundation::PSTR, buf : Win32cr::Foundation::PSTR, buflen : Int32) : Win32cr::Foundation::HANDLE
+    C.WSAAsyncGetHostByName(hWnd, wMsg, name, buf, buflen)
+  end
+
+  def wSAAsyncGetHostByAddr(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, addr : Win32cr::Foundation::PSTR, len : Int32, type__ : Int32, buf : Win32cr::Foundation::PSTR, buflen : Int32) : Win32cr::Foundation::HANDLE
+    C.WSAAsyncGetHostByAddr(hWnd, wMsg, addr, len, type__, buf, buflen)
+  end
+
+  def wSACancelAsyncRequest(hAsyncTaskHandle : Win32cr::Foundation::HANDLE) : Int32
+    C.WSACancelAsyncRequest(hAsyncTaskHandle)
+  end
+
+  def wSAAsyncSelect(s : Win32cr::Networking::WinSock::SOCKET, hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, lEvent : Int32) : Int32
+    C.WSAAsyncSelect(s, hWnd, wMsg, lEvent)
+  end
+
+  #def wSAAccept(s : Win32cr::Networking::WinSock::SOCKET, addr : Win32cr::Networking::WinSock::SOCKADDR*, addrlen : Int32*, lpfnCondition : Win32cr::Networking::WinSock::LPCONDITIONPROC, dwCallbackData : LibC::UIntPtrT) : Win32cr::Networking::WinSock::SOCKET
+    #C.WSAAccept(s, addr, addrlen, lpfnCondition, dwCallbackData)
+  #end
+
+  def wSACloseEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.WSACloseEvent(hEvent)
+  end
+
+  #def wSAConnect(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32, lpCallerData : Win32cr::Networking::WinSock::WSABUF*, lpCalleeData : Win32cr::Networking::WinSock::WSABUF*, lpSQOS : Win32cr::Networking::WinSock::QOS*, lpGQOS : Win32cr::Networking::WinSock::QOS*) : Int32
+    #C.WSAConnect(s, name, namelen, lpCallerData, lpCalleeData, lpSQOS, lpGQOS)
+  #end
+
+  def wSAConnectByNameW(s : Win32cr::Networking::WinSock::SOCKET, nodename : Win32cr::Foundation::PWSTR, servicename : Win32cr::Foundation::PWSTR, local_address_length : UInt32*, local_address : Win32cr::Networking::WinSock::SOCKADDR*, remote_address_length : UInt32*, remote_address : Win32cr::Networking::WinSock::SOCKADDR*, timeout : Win32cr::Networking::WinSock::Timeval*, reserved : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.WSAConnectByNameW(s, nodename, servicename, local_address_length, local_address, remote_address_length, remote_address, timeout, reserved)
+  end
+
+  def wSAConnectByNameA(s : Win32cr::Networking::WinSock::SOCKET, nodename : Win32cr::Foundation::PSTR, servicename : Win32cr::Foundation::PSTR, local_address_length : UInt32*, local_address : Win32cr::Networking::WinSock::SOCKADDR*, remote_address_length : UInt32*, remote_address : Win32cr::Networking::WinSock::SOCKADDR*, timeout : Win32cr::Networking::WinSock::Timeval*, reserved : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.WSAConnectByNameA(s, nodename, servicename, local_address_length, local_address, remote_address_length, remote_address, timeout, reserved)
+  end
+
+  def wSAConnectByList(s : Win32cr::Networking::WinSock::SOCKET, socket_address : Win32cr::Networking::WinSock::SOCKET_ADDRESS_LIST*, local_address_length : UInt32*, local_address : Win32cr::Networking::WinSock::SOCKADDR*, remote_address_length : UInt32*, remote_address : Win32cr::Networking::WinSock::SOCKADDR*, timeout : Win32cr::Networking::WinSock::Timeval*, reserved : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.WSAConnectByList(s, socket_address, local_address_length, local_address, remote_address_length, remote_address, timeout, reserved)
+  end
+
+  #def wSACreateEvent : Win32cr::Foundation::HANDLE
+    #C.WSACreateEvent
+  #end
+
+  def wSADuplicateSocketA(s : Win32cr::Networking::WinSock::SOCKET, dwProcessId : UInt32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOA*) : Int32
+    C.WSADuplicateSocketA(s, dwProcessId, lpProtocolInfo)
+  end
+
+  def wSADuplicateSocketW(s : Win32cr::Networking::WinSock::SOCKET, dwProcessId : UInt32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*) : Int32
+    C.WSADuplicateSocketW(s, dwProcessId, lpProtocolInfo)
+  end
+
+  def wSAEnumNetworkEvents(s : Win32cr::Networking::WinSock::SOCKET, hEventObject : Win32cr::Foundation::HANDLE, lpNetworkEvents : Win32cr::Networking::WinSock::WSANETWORKEVENTS*) : Int32
+    C.WSAEnumNetworkEvents(s, hEventObject, lpNetworkEvents)
+  end
+
+  def wSAEnumProtocolsA(lpiProtocols : Int32*, lpProtocolBuffer : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOA*, lpdwBufferLength : UInt32*) : Int32
+    C.WSAEnumProtocolsA(lpiProtocols, lpProtocolBuffer, lpdwBufferLength)
+  end
+
+  def wSAEnumProtocolsW(lpiProtocols : Int32*, lpProtocolBuffer : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, lpdwBufferLength : UInt32*) : Int32
+    C.WSAEnumProtocolsW(lpiProtocols, lpProtocolBuffer, lpdwBufferLength)
+  end
+
+  #def wSAEventSelect(s : Win32cr::Networking::WinSock::SOCKET, hEventObject : Win32cr::Foundation::HANDLE, lNetworkEvents : Int32) : Int32
+    #C.WSAEventSelect(s, hEventObject, lNetworkEvents)
+  #end
+
+  #def wSAGetOverlappedResult(s : Win32cr::Networking::WinSock::SOCKET, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpcbTransfer : UInt32*, fWait : Win32cr::Foundation::BOOL, lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    #C.WSAGetOverlappedResult(s, lpOverlapped, lpcbTransfer, fWait, lpdwFlags)
+  #end
+
+  def wSAGetQOSByName(s : Win32cr::Networking::WinSock::SOCKET, lpQOSName : Win32cr::Networking::WinSock::WSABUF*, lpQOS : Win32cr::Networking::WinSock::QOS*) : Win32cr::Foundation::BOOL
+    C.WSAGetQOSByName(s, lpQOSName, lpQOS)
+  end
+
+  def wSAHtonl(s : Win32cr::Networking::WinSock::SOCKET, hostlong : UInt32, lpnetlong : UInt32*) : Int32
+    C.WSAHtonl(s, hostlong, lpnetlong)
+  end
+
+  def wSAHtons(s : Win32cr::Networking::WinSock::SOCKET, hostshort : UInt16, lpnetshort : UInt16*) : Int32
+    C.WSAHtons(s, hostshort, lpnetshort)
+  end
+
+  #def wSAIoctl(s : Win32cr::Networking::WinSock::SOCKET, dwIoControlCode : UInt32, lpvInBuffer : Void*, cbInBuffer : UInt32, lpvOutBuffer : Void*, cbOutBuffer : UInt32, lpcbBytesReturned : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    #C.WSAIoctl(s, dwIoControlCode, lpvInBuffer, cbInBuffer, lpvOutBuffer, cbOutBuffer, lpcbBytesReturned, lpOverlapped, lpCompletionRoutine)
+  #end
+
+  def wSAJoinLeaf(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32, lpCallerData : Win32cr::Networking::WinSock::WSABUF*, lpCalleeData : Win32cr::Networking::WinSock::WSABUF*, lpSQOS : Win32cr::Networking::WinSock::QOS*, lpGQOS : Win32cr::Networking::WinSock::QOS*, dwFlags : UInt32) : Win32cr::Networking::WinSock::SOCKET
+    C.WSAJoinLeaf(s, name, namelen, lpCallerData, lpCalleeData, lpSQOS, lpGQOS, dwFlags)
+  end
+
+  def wSANtohl(s : Win32cr::Networking::WinSock::SOCKET, netlong : UInt32, lphostlong : UInt32*) : Int32
+    C.WSANtohl(s, netlong, lphostlong)
+  end
+
+  def wSANtohs(s : Win32cr::Networking::WinSock::SOCKET, netshort : UInt16, lphostshort : UInt16*) : Int32
+    C.WSANtohs(s, netshort, lphostshort)
+  end
+
+  #def wSARecv(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesRecvd : UInt32*, lpFlags : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    #C.WSARecv(s, lpBuffers, dwBufferCount, lpNumberOfBytesRecvd, lpFlags, lpOverlapped, lpCompletionRoutine)
+  #end
+
+  def wSARecvDisconnect(s : Win32cr::Networking::WinSock::SOCKET, lpInboundDisconnectData : Win32cr::Networking::WinSock::WSABUF*) : Int32
+    C.WSARecvDisconnect(s, lpInboundDisconnectData)
+  end
+
+  #def wSARecvFrom(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesRecvd : UInt32*, lpFlags : UInt32*, lpFrom : Win32cr::Networking::WinSock::SOCKADDR*, lpFromlen : Int32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    #C.WSARecvFrom(s, lpBuffers, dwBufferCount, lpNumberOfBytesRecvd, lpFlags, lpFrom, lpFromlen, lpOverlapped, lpCompletionRoutine)
+  #end
+
+  #def wSAResetEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    #C.WSAResetEvent(hEvent)
+  #end
+
+  #def wSASend(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesSent : UInt32*, dwFlags : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    #C.WSASend(s, lpBuffers, dwBufferCount, lpNumberOfBytesSent, dwFlags, lpOverlapped, lpCompletionRoutine)
+  #end
+
+  def wSASendMsg(handle : Win32cr::Networking::WinSock::SOCKET, lpMsg : Win32cr::Networking::WinSock::WSAMSG*, dwFlags : UInt32, lpNumberOfBytesSent : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    C.WSASendMsg(handle, lpMsg, dwFlags, lpNumberOfBytesSent, lpOverlapped, lpCompletionRoutine)
+  end
+
+  def wSASendDisconnect(s : Win32cr::Networking::WinSock::SOCKET, lpOutboundDisconnectData : Win32cr::Networking::WinSock::WSABUF*) : Int32
+    C.WSASendDisconnect(s, lpOutboundDisconnectData)
+  end
+
+  #def wSASendTo(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesSent : UInt32*, dwFlags : UInt32, lpTo : Win32cr::Networking::WinSock::SOCKADDR*, iTolen : Int32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    #C.WSASendTo(s, lpBuffers, dwBufferCount, lpNumberOfBytesSent, dwFlags, lpTo, iTolen, lpOverlapped, lpCompletionRoutine)
+  #end
+
+  def wSASetEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.WSASetEvent(hEvent)
+  end
+
+  def wSASocketA(af : Int32, type__ : Int32, protocol : Int32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOA*, g : UInt32, dwFlags : UInt32) : Win32cr::Networking::WinSock::SOCKET
+    C.WSASocketA(af, type__, protocol, lpProtocolInfo, g, dwFlags)
+  end
+
+  #def wSASocketW(af : Int32, type__ : Int32, protocol : Int32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, g : UInt32, dwFlags : UInt32) : Win32cr::Networking::WinSock::SOCKET
+    #C.WSASocketW(af, type__, protocol, lpProtocolInfo, g, dwFlags)
+  #end
+
+  #def wSAWaitForMultipleEvents(cEvents : UInt32, lphEvents : Win32cr::Foundation::HANDLE*, fWaitAll : Win32cr::Foundation::BOOL, dwTimeout : UInt32, fAlertable : Win32cr::Foundation::BOOL) : UInt32
+    #C.WSAWaitForMultipleEvents(cEvents, lphEvents, fWaitAll, dwTimeout, fAlertable)
+  #end
+
+  def wSAAddressToStringA(lpsaAddress : Win32cr::Networking::WinSock::SOCKADDR*, dwAddressLength : UInt32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOA*, lpszAddressString : UInt8*, lpdwAddressStringLength : UInt32*) : Int32
+    C.WSAAddressToStringA(lpsaAddress, dwAddressLength, lpProtocolInfo, lpszAddressString, lpdwAddressStringLength)
+  end
+
+  def wSAAddressToStringW(lpsaAddress : Win32cr::Networking::WinSock::SOCKADDR*, dwAddressLength : UInt32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, lpszAddressString : UInt16*, lpdwAddressStringLength : UInt32*) : Int32
+    C.WSAAddressToStringW(lpsaAddress, dwAddressLength, lpProtocolInfo, lpszAddressString, lpdwAddressStringLength)
+  end
+
+  def wSAStringToAddressA(address_string : Win32cr::Foundation::PSTR, address_family : Int32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOA*, lpAddress : Win32cr::Networking::WinSock::SOCKADDR*, lpAddressLength : Int32*) : Int32
+    C.WSAStringToAddressA(address_string, address_family, lpProtocolInfo, lpAddress, lpAddressLength)
+  end
+
+  def wSAStringToAddressW(address_string : Win32cr::Foundation::PWSTR, address_family : Int32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, lpAddress : Win32cr::Networking::WinSock::SOCKADDR*, lpAddressLength : Int32*) : Int32
+    C.WSAStringToAddressW(address_string, address_family, lpProtocolInfo, lpAddress, lpAddressLength)
+  end
+
+  def wSALookupServiceBeginA(lpqsRestrictions : Win32cr::Networking::WinSock::WSAQUERYSETA*, dwControlFlags : UInt32, lphLookup : Win32cr::Foundation::HANDLE*) : Int32
+    C.WSALookupServiceBeginA(lpqsRestrictions, dwControlFlags, lphLookup)
+  end
+
+  def wSALookupServiceBeginW(lpqsRestrictions : Win32cr::Networking::WinSock::WSAQUERYSETW*, dwControlFlags : UInt32, lphLookup : Win32cr::Foundation::HANDLE*) : Int32
+    C.WSALookupServiceBeginW(lpqsRestrictions, dwControlFlags, lphLookup)
+  end
+
+  def wSALookupServiceNextA(hLookup : Win32cr::Foundation::HANDLE, dwControlFlags : UInt32, lpdwBufferLength : UInt32*, lpqsResults : Win32cr::Networking::WinSock::WSAQUERYSETA*) : Int32
+    C.WSALookupServiceNextA(hLookup, dwControlFlags, lpdwBufferLength, lpqsResults)
+  end
+
+  def wSALookupServiceNextW(hLookup : Win32cr::Foundation::HANDLE, dwControlFlags : UInt32, lpdwBufferLength : UInt32*, lpqsResults : Win32cr::Networking::WinSock::WSAQUERYSETW*) : Int32
+    C.WSALookupServiceNextW(hLookup, dwControlFlags, lpdwBufferLength, lpqsResults)
+  end
+
+  def wSANSPIoctl(hLookup : Win32cr::Foundation::HANDLE, dwControlCode : UInt32, lpvInBuffer : Void*, cbInBuffer : UInt32, lpvOutBuffer : Void*, cbOutBuffer : UInt32, lpcbBytesReturned : UInt32*, lpCompletion : Win32cr::Networking::WinSock::WSACOMPLETION*) : Int32
+    C.WSANSPIoctl(hLookup, dwControlCode, lpvInBuffer, cbInBuffer, lpvOutBuffer, cbOutBuffer, lpcbBytesReturned, lpCompletion)
+  end
+
+  def wSALookupServiceEnd(hLookup : Win32cr::Foundation::HANDLE) : Int32
+    C.WSALookupServiceEnd(hLookup)
+  end
+
+  def wSAInstallServiceClassA(lpServiceClassInfo : Win32cr::Networking::WinSock::WSASERVICECLASSINFOA*) : Int32
+    C.WSAInstallServiceClassA(lpServiceClassInfo)
+  end
+
+  def wSAInstallServiceClassW(lpServiceClassInfo : Win32cr::Networking::WinSock::WSASERVICECLASSINFOW*) : Int32
+    C.WSAInstallServiceClassW(lpServiceClassInfo)
+  end
+
+  def wSARemoveServiceClass(lpServiceClassId : LibC::GUID*) : Int32
+    C.WSARemoveServiceClass(lpServiceClassId)
+  end
+
+  def wSAGetServiceClassInfoA(lpProviderId : LibC::GUID*, lpServiceClassId : LibC::GUID*, lpdwBufSize : UInt32*, lpServiceClassInfo : Win32cr::Networking::WinSock::WSASERVICECLASSINFOA*) : Int32
+    C.WSAGetServiceClassInfoA(lpProviderId, lpServiceClassId, lpdwBufSize, lpServiceClassInfo)
+  end
+
+  def wSAGetServiceClassInfoW(lpProviderId : LibC::GUID*, lpServiceClassId : LibC::GUID*, lpdwBufSize : UInt32*, lpServiceClassInfo : Win32cr::Networking::WinSock::WSASERVICECLASSINFOW*) : Int32
+    C.WSAGetServiceClassInfoW(lpProviderId, lpServiceClassId, lpdwBufSize, lpServiceClassInfo)
+  end
+
+  def wSAEnumNameSpaceProvidersA(lpdwBufferLength : UInt32*, lpnspBuffer : Win32cr::Networking::WinSock::WSANAMESPACE_INFOA*) : Int32
+    C.WSAEnumNameSpaceProvidersA(lpdwBufferLength, lpnspBuffer)
+  end
+
+  def wSAEnumNameSpaceProvidersW(lpdwBufferLength : UInt32*, lpnspBuffer : Win32cr::Networking::WinSock::WSANAMESPACE_INFOW*) : Int32
+    C.WSAEnumNameSpaceProvidersW(lpdwBufferLength, lpnspBuffer)
+  end
+
+  def wSAEnumNameSpaceProvidersExA(lpdwBufferLength : UInt32*, lpnspBuffer : Win32cr::Networking::WinSock::WSANAMESPACE_INFOEXA*) : Int32
+    C.WSAEnumNameSpaceProvidersExA(lpdwBufferLength, lpnspBuffer)
+  end
+
+  def wSAEnumNameSpaceProvidersExW(lpdwBufferLength : UInt32*, lpnspBuffer : Win32cr::Networking::WinSock::WSANAMESPACE_INFOEXW*) : Int32
+    C.WSAEnumNameSpaceProvidersExW(lpdwBufferLength, lpnspBuffer)
+  end
+
+  def wSAGetServiceClassNameByClassIdA(lpServiceClassId : LibC::GUID*, lpszServiceClassName : Win32cr::Foundation::PSTR, lpdwBufferLength : UInt32*) : Int32
+    C.WSAGetServiceClassNameByClassIdA(lpServiceClassId, lpszServiceClassName, lpdwBufferLength)
+  end
+
+  def wSAGetServiceClassNameByClassIdW(lpServiceClassId : LibC::GUID*, lpszServiceClassName : Win32cr::Foundation::PWSTR, lpdwBufferLength : UInt32*) : Int32
+    C.WSAGetServiceClassNameByClassIdW(lpServiceClassId, lpszServiceClassName, lpdwBufferLength)
+  end
+
+  def wSASetServiceA(lpqsRegInfo : Win32cr::Networking::WinSock::WSAQUERYSETA*, essoperation : Win32cr::Networking::WinSock::WSAESETSERVICEOP, dwControlFlags : UInt32) : Int32
+    C.WSASetServiceA(lpqsRegInfo, essoperation, dwControlFlags)
+  end
+
+  def wSASetServiceW(lpqsRegInfo : Win32cr::Networking::WinSock::WSAQUERYSETW*, essoperation : Win32cr::Networking::WinSock::WSAESETSERVICEOP, dwControlFlags : UInt32) : Int32
+    C.WSASetServiceW(lpqsRegInfo, essoperation, dwControlFlags)
+  end
+
+  def wSAProviderConfigChange(lpNotificationHandle : Win32cr::Foundation::HANDLE*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    C.WSAProviderConfigChange(lpNotificationHandle, lpOverlapped, lpCompletionRoutine)
+  end
+
+  def wSAPoll(fdArray : Win32cr::Networking::WinSock::WSAPOLLFD*, fds : UInt32, timeout : Int32) : Int32
+    C.WSAPoll(fdArray, fds, timeout)
+  end
+
+  def processSocketNotifications(completionPort : Win32cr::Foundation::HANDLE, registrationCount : UInt32, registrationInfos : Win32cr::Networking::WinSock::SOCK_NOTIFY_REGISTRATION*, timeoutMs : UInt32, completionCount : UInt32, completionPortEntries : Win32cr::System::IO::OVERLAPPED_ENTRY*, receivedEntryCount : UInt32*) : UInt32
+    C.ProcessSocketNotifications(completionPort, registrationCount, registrationInfos, timeoutMs, completionCount, completionPortEntries, receivedEntryCount)
+  end
+
+  def rtlIpv4AddressToStringA(addr : Win32cr::Networking::WinSock::IN_ADDR*, s : UInt8*) : Win32cr::Foundation::PSTR
+    C.RtlIpv4AddressToStringA(addr, s)
+  end
+
+  def rtlIpv4AddressToStringExA(address : Win32cr::Networking::WinSock::IN_ADDR*, port : UInt16, address_string : UInt8*, address_string_length : UInt32*) : Int32
+    C.RtlIpv4AddressToStringExA(address, port, address_string, address_string_length)
+  end
+
+  def rtlIpv4AddressToStringW(addr : Win32cr::Networking::WinSock::IN_ADDR*, s : UInt16*) : Win32cr::Foundation::PWSTR
+    C.RtlIpv4AddressToStringW(addr, s)
+  end
+
+  def rtlIpv4AddressToStringExW(address : Win32cr::Networking::WinSock::IN_ADDR*, port : UInt16, address_string : UInt16*, address_string_length : UInt32*) : Int32
+    C.RtlIpv4AddressToStringExW(address, port, address_string, address_string_length)
+  end
+
+  def rtlIpv4StringToAddressA(s : Win32cr::Foundation::PSTR, strict : Win32cr::Foundation::BOOLEAN, terminator : Win32cr::Foundation::PSTR*, addr : Win32cr::Networking::WinSock::IN_ADDR*) : Int32
+    C.RtlIpv4StringToAddressA(s, strict, terminator, addr)
+  end
+
+  def rtlIpv4StringToAddressExA(address_string : Win32cr::Foundation::PSTR, strict : Win32cr::Foundation::BOOLEAN, address : Win32cr::Networking::WinSock::IN_ADDR*, port : UInt16*) : Int32
+    C.RtlIpv4StringToAddressExA(address_string, strict, address, port)
+  end
+
+  def rtlIpv4StringToAddressW(s : Win32cr::Foundation::PWSTR, strict : Win32cr::Foundation::BOOLEAN, terminator : Win32cr::Foundation::PWSTR*, addr : Win32cr::Networking::WinSock::IN_ADDR*) : Int32
+    C.RtlIpv4StringToAddressW(s, strict, terminator, addr)
+  end
+
+  def rtlIpv4StringToAddressExW(address_string : Win32cr::Foundation::PWSTR, strict : Win32cr::Foundation::BOOLEAN, address : Win32cr::Networking::WinSock::IN_ADDR*, port : UInt16*) : Int32
+    C.RtlIpv4StringToAddressExW(address_string, strict, address, port)
+  end
+
+  def rtlIpv6AddressToStringA(addr : Win32cr::Networking::WinSock::IN6_ADDR*, s : UInt8*) : Win32cr::Foundation::PSTR
+    C.RtlIpv6AddressToStringA(addr, s)
+  end
+
+  def rtlIpv6AddressToStringExA(address : Win32cr::Networking::WinSock::IN6_ADDR*, scope_id : UInt32, port : UInt16, address_string : UInt8*, address_string_length : UInt32*) : Int32
+    C.RtlIpv6AddressToStringExA(address, scope_id, port, address_string, address_string_length)
+  end
+
+  def rtlIpv6AddressToStringW(addr : Win32cr::Networking::WinSock::IN6_ADDR*, s : UInt16*) : Win32cr::Foundation::PWSTR
+    C.RtlIpv6AddressToStringW(addr, s)
+  end
+
+  def rtlIpv6AddressToStringExW(address : Win32cr::Networking::WinSock::IN6_ADDR*, scope_id : UInt32, port : UInt16, address_string : UInt16*, address_string_length : UInt32*) : Int32
+    C.RtlIpv6AddressToStringExW(address, scope_id, port, address_string, address_string_length)
+  end
+
+  def rtlIpv6StringToAddressA(s : Win32cr::Foundation::PSTR, terminator : Win32cr::Foundation::PSTR*, addr : Win32cr::Networking::WinSock::IN6_ADDR*) : Int32
+    C.RtlIpv6StringToAddressA(s, terminator, addr)
+  end
+
+  def rtlIpv6StringToAddressExA(address_string : Win32cr::Foundation::PSTR, address : Win32cr::Networking::WinSock::IN6_ADDR*, scope_id : UInt32*, port : UInt16*) : Int32
+    C.RtlIpv6StringToAddressExA(address_string, address, scope_id, port)
+  end
+
+  def rtlIpv6StringToAddressW(s : Win32cr::Foundation::PWSTR, terminator : Win32cr::Foundation::PWSTR*, addr : Win32cr::Networking::WinSock::IN6_ADDR*) : Int32
+    C.RtlIpv6StringToAddressW(s, terminator, addr)
+  end
+
+  def rtlIpv6StringToAddressExW(address_string : Win32cr::Foundation::PWSTR, address : Win32cr::Networking::WinSock::IN6_ADDR*, scope_id : UInt32*, port : UInt16*) : Int32
+    C.RtlIpv6StringToAddressExW(address_string, address, scope_id, port)
+  end
+
+  def rtlEthernetAddressToStringA(addr : Win32cr::Networking::WinSock::DL_EUI48*, s : UInt8*) : Win32cr::Foundation::PSTR
+    C.RtlEthernetAddressToStringA(addr, s)
+  end
+
+  def rtlEthernetAddressToStringW(addr : Win32cr::Networking::WinSock::DL_EUI48*, s : UInt16*) : Win32cr::Foundation::PWSTR
+    C.RtlEthernetAddressToStringW(addr, s)
+  end
+
+  def rtlEthernetStringToAddressA(s : Win32cr::Foundation::PSTR, terminator : Win32cr::Foundation::PSTR*, addr : Win32cr::Networking::WinSock::DL_EUI48*) : Int32
+    C.RtlEthernetStringToAddressA(s, terminator, addr)
+  end
+
+  def rtlEthernetStringToAddressW(s : Win32cr::Foundation::PWSTR, terminator : Win32cr::Foundation::PWSTR*, addr : Win32cr::Networking::WinSock::DL_EUI48*) : Int32
+    C.RtlEthernetStringToAddressW(s, terminator, addr)
+  end
+
+  def wSARecvEx(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Int32*) : Int32
+    C.WSARecvEx(s, buf, len, flags)
+  end
+
+  def transmitFile(hSocket : Win32cr::Networking::WinSock::SOCKET, hFile : Win32cr::Foundation::HANDLE, nNumberOfBytesToWrite : UInt32, nNumberOfBytesPerSend : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpTransmitBuffers : Win32cr::Networking::WinSock::TRANSMIT_FILE_BUFFERS*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    C.TransmitFile(hSocket, hFile, nNumberOfBytesToWrite, nNumberOfBytesPerSend, lpOverlapped, lpTransmitBuffers, dwReserved)
+  end
+
+  def acceptEx(sListenSocket : Win32cr::Networking::WinSock::SOCKET, sAcceptSocket : Win32cr::Networking::WinSock::SOCKET, lpOutputBuffer : Void*, dwReceiveDataLength : UInt32, dwLocalAddressLength : UInt32, dwRemoteAddressLength : UInt32, lpdwBytesReceived : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.AcceptEx(sListenSocket, sAcceptSocket, lpOutputBuffer, dwReceiveDataLength, dwLocalAddressLength, dwRemoteAddressLength, lpdwBytesReceived, lpOverlapped)
+  end
+
+  def getAcceptExSockaddrs(lpOutputBuffer : Void*, dwReceiveDataLength : UInt32, dwLocalAddressLength : UInt32, dwRemoteAddressLength : UInt32, local_sockaddr : Win32cr::Networking::WinSock::SOCKADDR**, local_sockaddr_length : Int32*, remote_sockaddr : Win32cr::Networking::WinSock::SOCKADDR**, remote_sockaddr_length : Int32*) : Void
+    C.GetAcceptExSockaddrs(lpOutputBuffer, dwReceiveDataLength, dwLocalAddressLength, dwRemoteAddressLength, local_sockaddr, local_sockaddr_length, remote_sockaddr, remote_sockaddr_length)
+  end
+
+  def wSCEnumProtocols(lpiProtocols : Int32*, lpProtocolBuffer : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, lpdwBufferLength : UInt32*, lpErrno : Int32*) : Int32
+    C.WSCEnumProtocols(lpiProtocols, lpProtocolBuffer, lpdwBufferLength, lpErrno)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCEnumProtocols32(lpiProtocols : Int32*, lpProtocolBuffer : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, lpdwBufferLength : UInt32*, lpErrno : Int32*) : Int32
+    C.WSCEnumProtocols32(lpiProtocols, lpProtocolBuffer, lpdwBufferLength, lpErrno)
+  end
+{% end %}
+
+  def wSCDeinstallProvider(lpProviderId : LibC::GUID*, lpErrno : Int32*) : Int32
+    C.WSCDeinstallProvider(lpProviderId, lpErrno)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCDeinstallProvider32(lpProviderId : LibC::GUID*, lpErrno : Int32*) : Int32
+    C.WSCDeinstallProvider32(lpProviderId, lpErrno)
+  end
+{% end %}
+
+  def wSCInstallProvider(lpProviderId : LibC::GUID*, lpszProviderDllPath : Win32cr::Foundation::PWSTR, lpProtocolInfoList : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, dwNumberOfEntries : UInt32, lpErrno : Int32*) : Int32
+    C.WSCInstallProvider(lpProviderId, lpszProviderDllPath, lpProtocolInfoList, dwNumberOfEntries, lpErrno)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCInstallProvider6432(lpProviderId : LibC::GUID*, lpszProviderDllPath : Win32cr::Foundation::PWSTR, lpProtocolInfoList : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, dwNumberOfEntries : UInt32, lpErrno : Int32*) : Int32
+    C.WSCInstallProvider64_32(lpProviderId, lpszProviderDllPath, lpProtocolInfoList, dwNumberOfEntries, lpErrno)
+  end
+{% end %}
+
+  def wSCGetProviderPath(lpProviderId : LibC::GUID*, lpszProviderDllPath : UInt16*, lpProviderDllPathLen : Int32*, lpErrno : Int32*) : Int32
+    C.WSCGetProviderPath(lpProviderId, lpszProviderDllPath, lpProviderDllPathLen, lpErrno)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCGetProviderPath32(lpProviderId : LibC::GUID*, lpszProviderDllPath : UInt16*, lpProviderDllPathLen : Int32*, lpErrno : Int32*) : Int32
+    C.WSCGetProviderPath32(lpProviderId, lpszProviderDllPath, lpProviderDllPathLen, lpErrno)
+  end
+{% end %}
+
+  def wSCUpdateProvider(lpProviderId : LibC::GUID*, lpszProviderDllPath : Win32cr::Foundation::PWSTR, lpProtocolInfoList : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, dwNumberOfEntries : UInt32, lpErrno : Int32*) : Int32
+    C.WSCUpdateProvider(lpProviderId, lpszProviderDllPath, lpProtocolInfoList, dwNumberOfEntries, lpErrno)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCUpdateProvider32(lpProviderId : LibC::GUID*, lpszProviderDllPath : Win32cr::Foundation::PWSTR, lpProtocolInfoList : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, dwNumberOfEntries : UInt32, lpErrno : Int32*) : Int32
+    C.WSCUpdateProvider32(lpProviderId, lpszProviderDllPath, lpProtocolInfoList, dwNumberOfEntries, lpErrno)
+  end
+{% end %}
+
+  def wSCSetProviderInfo(lpProviderId : LibC::GUID*, info_type : Win32cr::Networking::WinSock::WSC_PROVIDER_INFO_TYPE, info : UInt8*, info_size : LibC::UIntPtrT, flags : UInt32, lpErrno : Int32*) : Int32
+    C.WSCSetProviderInfo(lpProviderId, info_type, info, info_size, flags, lpErrno)
+  end
+
+  def wSCGetProviderInfo(lpProviderId : LibC::GUID*, info_type : Win32cr::Networking::WinSock::WSC_PROVIDER_INFO_TYPE, info : UInt8*, info_size : LibC::UIntPtrT*, flags : UInt32, lpErrno : Int32*) : Int32
+    C.WSCGetProviderInfo(lpProviderId, info_type, info, info_size, flags, lpErrno)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCSetProviderInfo32(lpProviderId : LibC::GUID*, info_type : Win32cr::Networking::WinSock::WSC_PROVIDER_INFO_TYPE, info : UInt8*, info_size : LibC::UIntPtrT, flags : UInt32, lpErrno : Int32*) : Int32
+    C.WSCSetProviderInfo32(lpProviderId, info_type, info, info_size, flags, lpErrno)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCGetProviderInfo32(lpProviderId : LibC::GUID*, info_type : Win32cr::Networking::WinSock::WSC_PROVIDER_INFO_TYPE, info : UInt8*, info_size : LibC::UIntPtrT*, flags : UInt32, lpErrno : Int32*) : Int32
+    C.WSCGetProviderInfo32(lpProviderId, info_type, info, info_size, flags, lpErrno)
+  end
+{% end %}
+
+  def wSCSetApplicationCategory(path : UInt16*, path_length : UInt32, extra : UInt16*, extra_length : UInt32, permitted_lsp_categories : UInt32, pPrevPermLspCat : UInt32*, lpErrno : Int32*) : Int32
+    C.WSCSetApplicationCategory(path, path_length, extra, extra_length, permitted_lsp_categories, pPrevPermLspCat, lpErrno)
+  end
+
+  def wSCGetApplicationCategory(path : UInt16*, path_length : UInt32, extra : UInt16*, extra_length : UInt32, pPermittedLspCategories : UInt32*, lpErrno : Int32*) : Int32
+    C.WSCGetApplicationCategory(path, path_length, extra, extra_length, pPermittedLspCategories, lpErrno)
+  end
+
+  def wPUCompleteOverlappedRequest(s : Win32cr::Networking::WinSock::SOCKET, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, dwError : UInt32, cbTransferred : UInt32, lpErrno : Int32*) : Int32
+    C.WPUCompleteOverlappedRequest(s, lpOverlapped, dwError, cbTransferred, lpErrno)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCEnumNameSpaceProviders32(lpdwBufferLength : UInt32*, lpnspBuffer : Win32cr::Networking::WinSock::WSANAMESPACE_INFOW*) : Int32
+    C.WSCEnumNameSpaceProviders32(lpdwBufferLength, lpnspBuffer)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCEnumNameSpaceProvidersEx32(lpdwBufferLength : UInt32*, lpnspBuffer : Win32cr::Networking::WinSock::WSANAMESPACE_INFOEXW*) : Int32
+    C.WSCEnumNameSpaceProvidersEx32(lpdwBufferLength, lpnspBuffer)
+  end
+{% end %}
+
+  def wSCInstallNameSpace(lpszIdentifier : Win32cr::Foundation::PWSTR, lpszPathName : Win32cr::Foundation::PWSTR, dwNameSpace : UInt32, dwVersion : UInt32, lpProviderId : LibC::GUID*) : Int32
+    C.WSCInstallNameSpace(lpszIdentifier, lpszPathName, dwNameSpace, dwVersion, lpProviderId)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCInstallNameSpace32(lpszIdentifier : Win32cr::Foundation::PWSTR, lpszPathName : Win32cr::Foundation::PWSTR, dwNameSpace : UInt32, dwVersion : UInt32, lpProviderId : LibC::GUID*) : Int32
+    C.WSCInstallNameSpace32(lpszIdentifier, lpszPathName, dwNameSpace, dwVersion, lpProviderId)
+  end
+{% end %}
+
+  def wSCUnInstallNameSpace(lpProviderId : LibC::GUID*) : Int32
+    C.WSCUnInstallNameSpace(lpProviderId)
+  end
+
+  def wSCInstallNameSpaceEx(lpszIdentifier : Win32cr::Foundation::PWSTR, lpszPathName : Win32cr::Foundation::PWSTR, dwNameSpace : UInt32, dwVersion : UInt32, lpProviderId : LibC::GUID*, lpProviderSpecific : Win32cr::System::Com::BLOB*) : Int32
+    C.WSCInstallNameSpaceEx(lpszIdentifier, lpszPathName, dwNameSpace, dwVersion, lpProviderId, lpProviderSpecific)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCInstallNameSpaceEx32(lpszIdentifier : Win32cr::Foundation::PWSTR, lpszPathName : Win32cr::Foundation::PWSTR, dwNameSpace : UInt32, dwVersion : UInt32, lpProviderId : LibC::GUID*, lpProviderSpecific : Win32cr::System::Com::BLOB*) : Int32
+    C.WSCInstallNameSpaceEx32(lpszIdentifier, lpszPathName, dwNameSpace, dwVersion, lpProviderId, lpProviderSpecific)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCUnInstallNameSpace32(lpProviderId : LibC::GUID*) : Int32
+    C.WSCUnInstallNameSpace32(lpProviderId)
+  end
+{% end %}
+
+  def wSCEnableNSProvider(lpProviderId : LibC::GUID*, fEnable : Win32cr::Foundation::BOOL) : Int32
+    C.WSCEnableNSProvider(lpProviderId, fEnable)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCEnableNSProvider32(lpProviderId : LibC::GUID*, fEnable : Win32cr::Foundation::BOOL) : Int32
+    C.WSCEnableNSProvider32(lpProviderId, fEnable)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCInstallProviderAndChains6432(lpProviderId : LibC::GUID*, lpszProviderDllPath : Win32cr::Foundation::PWSTR, lpszProviderDllPath32 : Win32cr::Foundation::PWSTR, lpszLspName : Win32cr::Foundation::PWSTR, dwServiceFlags : UInt32, lpProtocolInfoList : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, dwNumberOfEntries : UInt32, lpdwCatalogEntryId : UInt32*, lpErrno : Int32*) : Int32
+    C.WSCInstallProviderAndChains64_32(lpProviderId, lpszProviderDllPath, lpszProviderDllPath32, lpszLspName, dwServiceFlags, lpProtocolInfoList, dwNumberOfEntries, lpdwCatalogEntryId, lpErrno)
+  end
+{% end %}
+
+  def wSAAdvertiseProvider(puuidProviderId : LibC::GUID*, pNSPv2Routine : Win32cr::Networking::WinSock::NSPV2_ROUTINE*) : Int32
+    C.WSAAdvertiseProvider(puuidProviderId, pNSPv2Routine)
+  end
+
+  def wSAUnadvertiseProvider(puuidProviderId : LibC::GUID*) : Int32
+    C.WSAUnadvertiseProvider(puuidProviderId)
+  end
+
+  def wSAProviderCompleteAsyncCall(hAsyncCall : Win32cr::Foundation::HANDLE, iRetCode : Int32) : Int32
+    C.WSAProviderCompleteAsyncCall(hAsyncCall, iRetCode)
+  end
+
+  def enumProtocolsA(lpiProtocols : Int32*, lpProtocolBuffer : Void*, lpdwBufferLength : UInt32*) : Int32
+    C.EnumProtocolsA(lpiProtocols, lpProtocolBuffer, lpdwBufferLength)
+  end
+
+  def enumProtocolsW(lpiProtocols : Int32*, lpProtocolBuffer : Void*, lpdwBufferLength : UInt32*) : Int32
+    C.EnumProtocolsW(lpiProtocols, lpProtocolBuffer, lpdwBufferLength)
+  end
+
+  def getAddressByNameA(dwNameSpace : UInt32, lpServiceType : LibC::GUID*, lpServiceName : Win32cr::Foundation::PSTR, lpiProtocols : Int32*, dwResolution : UInt32, lpServiceAsyncInfo : Win32cr::Networking::WinSock::SERVICE_ASYNC_INFO*, lpCsaddrBuffer : Void*, lpdwBufferLength : UInt32*, lpAliasBuffer : UInt8*, lpdwAliasBufferLength : UInt32*) : Int32
+    C.GetAddressByNameA(dwNameSpace, lpServiceType, lpServiceName, lpiProtocols, dwResolution, lpServiceAsyncInfo, lpCsaddrBuffer, lpdwBufferLength, lpAliasBuffer, lpdwAliasBufferLength)
+  end
+
+  def getAddressByNameW(dwNameSpace : UInt32, lpServiceType : LibC::GUID*, lpServiceName : Win32cr::Foundation::PWSTR, lpiProtocols : Int32*, dwResolution : UInt32, lpServiceAsyncInfo : Win32cr::Networking::WinSock::SERVICE_ASYNC_INFO*, lpCsaddrBuffer : Void*, lpdwBufferLength : UInt32*, lpAliasBuffer : UInt16*, lpdwAliasBufferLength : UInt32*) : Int32
+    C.GetAddressByNameW(dwNameSpace, lpServiceType, lpServiceName, lpiProtocols, dwResolution, lpServiceAsyncInfo, lpCsaddrBuffer, lpdwBufferLength, lpAliasBuffer, lpdwAliasBufferLength)
+  end
+
+  def getTypeByNameA(lpServiceName : Win32cr::Foundation::PSTR, lpServiceType : LibC::GUID*) : Int32
+    C.GetTypeByNameA(lpServiceName, lpServiceType)
+  end
+
+  def getTypeByNameW(lpServiceName : Win32cr::Foundation::PWSTR, lpServiceType : LibC::GUID*) : Int32
+    C.GetTypeByNameW(lpServiceName, lpServiceType)
+  end
+
+  def getNameByTypeA(lpServiceType : LibC::GUID*, lpServiceName : Win32cr::Foundation::PSTR, dwNameLength : UInt32) : Int32
+    C.GetNameByTypeA(lpServiceType, lpServiceName, dwNameLength)
+  end
+
+  def getNameByTypeW(lpServiceType : LibC::GUID*, lpServiceName : Win32cr::Foundation::PWSTR, dwNameLength : UInt32) : Int32
+    C.GetNameByTypeW(lpServiceType, lpServiceName, dwNameLength)
+  end
+
+  def setServiceA(dwNameSpace : UInt32, dwOperation : Win32cr::Networking::WinSock::SET_SERVICE_OPERATION, dwFlags : UInt32, lpServiceInfo : Win32cr::Networking::WinSock::SERVICE_INFOA*, lpServiceAsyncInfo : Win32cr::Networking::WinSock::SERVICE_ASYNC_INFO*, lpdwStatusFlags : UInt32*) : Int32
+    C.SetServiceA(dwNameSpace, dwOperation, dwFlags, lpServiceInfo, lpServiceAsyncInfo, lpdwStatusFlags)
+  end
+
+  def setServiceW(dwNameSpace : UInt32, dwOperation : Win32cr::Networking::WinSock::SET_SERVICE_OPERATION, dwFlags : UInt32, lpServiceInfo : Win32cr::Networking::WinSock::SERVICE_INFOW*, lpServiceAsyncInfo : Win32cr::Networking::WinSock::SERVICE_ASYNC_INFO*, lpdwStatusFlags : UInt32*) : Int32
+    C.SetServiceW(dwNameSpace, dwOperation, dwFlags, lpServiceInfo, lpServiceAsyncInfo, lpdwStatusFlags)
+  end
+
+  def getServiceA(dwNameSpace : UInt32, lpGuid : LibC::GUID*, lpServiceName : Win32cr::Foundation::PSTR, dwProperties : UInt32, lpBuffer : Void*, lpdwBufferSize : UInt32*, lpServiceAsyncInfo : Win32cr::Networking::WinSock::SERVICE_ASYNC_INFO*) : Int32
+    C.GetServiceA(dwNameSpace, lpGuid, lpServiceName, dwProperties, lpBuffer, lpdwBufferSize, lpServiceAsyncInfo)
+  end
+
+  def getServiceW(dwNameSpace : UInt32, lpGuid : LibC::GUID*, lpServiceName : Win32cr::Foundation::PWSTR, dwProperties : UInt32, lpBuffer : Void*, lpdwBufferSize : UInt32*, lpServiceAsyncInfo : Win32cr::Networking::WinSock::SERVICE_ASYNC_INFO*) : Int32
+    C.GetServiceW(dwNameSpace, lpGuid, lpServiceName, dwProperties, lpBuffer, lpdwBufferSize, lpServiceAsyncInfo)
+  end
+
+  #def getaddrinfo(pNodeName : Win32cr::Foundation::PSTR, pServiceName : Win32cr::Foundation::PSTR, pHints : Win32cr::Networking::WinSock::ADDRINFOA*, ppResult : Win32cr::Networking::WinSock::ADDRINFOA**) : Int32
+    #C.getaddrinfo(pNodeName, pServiceName, pHints, ppResult)
+  #end
+
+  def getAddrInfoW(pNodeName : Win32cr::Foundation::PWSTR, pServiceName : Win32cr::Foundation::PWSTR, pHints : Win32cr::Networking::WinSock::Addrinfow*, ppResult : Win32cr::Networking::WinSock::Addrinfow**) : Int32
+    C.GetAddrInfoW(pNodeName, pServiceName, pHints, ppResult)
+  end
+
+  def getAddrInfoExA(pName : Win32cr::Foundation::PSTR, pServiceName : Win32cr::Foundation::PSTR, dwNameSpace : UInt32, lpNspId : LibC::GUID*, hints : Win32cr::Networking::WinSock::Addrinfoexa*, ppResult : Win32cr::Networking::WinSock::Addrinfoexa**, timeout : Win32cr::Networking::WinSock::Timeval*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle : Win32cr::Foundation::HANDLE*) : Int32
+    C.GetAddrInfoExA(pName, pServiceName, dwNameSpace, lpNspId, hints, ppResult, timeout, lpOverlapped, lpCompletionRoutine, lpNameHandle)
+  end
+
+  #def getAddrInfoExW(pName : Win32cr::Foundation::PWSTR, pServiceName : Win32cr::Foundation::PWSTR, dwNameSpace : UInt32, lpNspId : LibC::GUID*, hints : Win32cr::Networking::WinSock::Addrinfoexw*, ppResult : Win32cr::Networking::WinSock::Addrinfoexw**, timeout : Win32cr::Networking::WinSock::Timeval*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle : Win32cr::Foundation::HANDLE*) : Int32
+    #C.GetAddrInfoExW(pName, pServiceName, dwNameSpace, lpNspId, hints, ppResult, timeout, lpOverlapped, lpCompletionRoutine, lpHandle)
+  #end
+
+  #def getAddrInfoExCancel(lpHandle : Win32cr::Foundation::HANDLE*) : Int32
+    #C.GetAddrInfoExCancel(lpHandle)
+  #end
+
+  #def getAddrInfoExOverlappedResult(lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Int32
+    #C.GetAddrInfoExOverlappedResult(lpOverlapped)
+  #end
+
+  def setAddrInfoExA(pName : Win32cr::Foundation::PSTR, pServiceName : Win32cr::Foundation::PSTR, pAddresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, dwAddressCount : UInt32, lpBlob : Win32cr::System::Com::BLOB*, dwFlags : UInt32, dwNameSpace : UInt32, lpNspId : LibC::GUID*, timeout : Win32cr::Networking::WinSock::Timeval*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle : Win32cr::Foundation::HANDLE*) : Int32
+    C.SetAddrInfoExA(pName, pServiceName, pAddresses, dwAddressCount, lpBlob, dwFlags, dwNameSpace, lpNspId, timeout, lpOverlapped, lpCompletionRoutine, lpNameHandle)
+  end
+
+  def setAddrInfoExW(pName : Win32cr::Foundation::PWSTR, pServiceName : Win32cr::Foundation::PWSTR, pAddresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, dwAddressCount : UInt32, lpBlob : Win32cr::System::Com::BLOB*, dwFlags : UInt32, dwNameSpace : UInt32, lpNspId : LibC::GUID*, timeout : Win32cr::Networking::WinSock::Timeval*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle : Win32cr::Foundation::HANDLE*) : Int32
+    C.SetAddrInfoExW(pName, pServiceName, pAddresses, dwAddressCount, lpBlob, dwFlags, dwNameSpace, lpNspId, timeout, lpOverlapped, lpCompletionRoutine, lpNameHandle)
+  end
+
+  #def freeaddrinfo(pAddrInfo : Win32cr::Networking::WinSock::ADDRINFOA*) : Void
+    #C.freeaddrinfo(pAddrInfo)
+  #end
+
+  def freeAddrInfoW(pAddrInfo : Win32cr::Networking::WinSock::Addrinfow*) : Void
+    C.FreeAddrInfoW(pAddrInfo)
+  end
+
+  def freeAddrInfoEx(pAddrInfoEx : Win32cr::Networking::WinSock::Addrinfoexa*) : Void
+    C.FreeAddrInfoEx(pAddrInfoEx)
+  end
+
+  #def freeAddrInfoExW(pAddrInfoEx : Win32cr::Networking::WinSock::Addrinfoexw*) : Void
+    #C.FreeAddrInfoExW(pAddrInfoEx)
+  #end
+
+  def getnameinfo(pSockaddr : Win32cr::Networking::WinSock::SOCKADDR*, sockaddr_length : Int32, pNodeBuffer : UInt8*, node_buffer_size : UInt32, pServiceBuffer : UInt8*, service_buffer_size : UInt32, flags : Int32) : Int32
+    C.getnameinfo(pSockaddr, sockaddr_length, pNodeBuffer, node_buffer_size, pServiceBuffer, service_buffer_size, flags)
+  end
+
+  def getNameInfoW(pSockaddr : Win32cr::Networking::WinSock::SOCKADDR*, sockaddr_length : Int32, pNodeBuffer : UInt16*, node_buffer_size : UInt32, pServiceBuffer : UInt16*, service_buffer_size : UInt32, flags : Int32) : Int32
+    C.GetNameInfoW(pSockaddr, sockaddr_length, pNodeBuffer, node_buffer_size, pServiceBuffer, service_buffer_size, flags)
+  end
+
+  #def inetPton(family : Int32, pszAddrString : Win32cr::Foundation::PSTR, pAddrBuf : Void*) : Int32
+    #C.inet_pton(family, pszAddrString, pAddrBuf)
+  #end
+
+  def inetPtonW(family : Int32, pszAddrString : Win32cr::Foundation::PWSTR, pAddrBuf : Void*) : Int32
+    C.InetPtonW(family, pszAddrString, pAddrBuf)
+  end
+
+  #def inetNtop(family : Int32, pAddr : Void*, pStringBuf : UInt8*, string_buf_size : LibC::UIntPtrT) : Win32cr::Foundation::PSTR
+    #C.inet_ntop(family, pAddr, pStringBuf, string_buf_size)
+  #end
+
+  def inetNtopW(family : Int32, pAddr : Void*, pStringBuf : UInt16*, string_buf_size : LibC::UIntPtrT) : Win32cr::Foundation::PWSTR
+    C.InetNtopW(family, pAddr, pStringBuf, string_buf_size)
+  end
+
+  def wSASetSocketSecurity(socket : Win32cr::Networking::WinSock::SOCKET, security_settings : Win32cr::Networking::WinSock::SOCKET_SECURITY_SETTINGS*, security_settings_len : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*, completion_routine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    C.WSASetSocketSecurity(socket, security_settings, security_settings_len, overlapped, completion_routine)
+  end
+
+  def wSAQuerySocketSecurity(socket : Win32cr::Networking::WinSock::SOCKET, security_query_template : Win32cr::Networking::WinSock::SOCKET_SECURITY_QUERY_TEMPLATE*, security_query_template_len : UInt32, security_query_info : Win32cr::Networking::WinSock::SOCKET_SECURITY_QUERY_INFO*, security_query_info_len : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*, completion_routine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    C.WSAQuerySocketSecurity(socket, security_query_template, security_query_template_len, security_query_info, security_query_info_len, overlapped, completion_routine)
+  end
+
+  def wSASetSocketPeerTargetName(socket : Win32cr::Networking::WinSock::SOCKET, peer_target_name : Win32cr::Networking::WinSock::SOCKET_PEER_TARGET_NAME*, peer_target_name_len : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*, completion_routine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    C.WSASetSocketPeerTargetName(socket, peer_target_name, peer_target_name_len, overlapped, completion_routine)
+  end
+
+  def wSADeleteSocketPeerTargetName(socket : Win32cr::Networking::WinSock::SOCKET, peer_addr : Win32cr::Networking::WinSock::SOCKADDR*, peer_addr_len : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*, completion_routine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    C.WSADeleteSocketPeerTargetName(socket, peer_addr, peer_addr_len, overlapped, completion_routine)
+  end
+
+  def wSAImpersonateSocketPeer(socket : Win32cr::Networking::WinSock::SOCKET, peer_addr : Win32cr::Networking::WinSock::SOCKADDR*, peer_addr_len : UInt32) : Int32
+    C.WSAImpersonateSocketPeer(socket, peer_addr, peer_addr_len)
+  end
+
+  def wSARevertImpersonation : Int32
+    C.WSARevertImpersonation
+  end
+
+  def setSocketMediaStreamingMode(value : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.SetSocketMediaStreamingMode(value)
+  end
+
+  def wSCWriteProviderOrder(lpwdCatalogEntryId : UInt32*, dwNumberOfEntries : UInt32) : Int32
+    C.WSCWriteProviderOrder(lpwdCatalogEntryId, dwNumberOfEntries)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCWriteProviderOrder32(lpwdCatalogEntryId : UInt32*, dwNumberOfEntries : UInt32) : Int32
+    C.WSCWriteProviderOrder32(lpwdCatalogEntryId, dwNumberOfEntries)
+  end
+{% end %}
+
+  def wSCWriteNameSpaceOrder(lpProviderId : LibC::GUID*, dwNumberOfEntries : UInt32) : Int32
+    C.WSCWriteNameSpaceOrder(lpProviderId, dwNumberOfEntries)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def wSCWriteNameSpaceOrder32(lpProviderId : LibC::GUID*, dwNumberOfEntries : UInt32) : Int32
+    C.WSCWriteNameSpaceOrder32(lpProviderId, dwNumberOfEntries)
+  end
+{% end %}
+
   @[Link("ws2_32")]
   @[Link("ntdll")]
   @[Link("mswsock")]
   @[Link("fwpuclnt")]
   @[Link("windows.networking")]
   lib C
+    # :nodoc:
     fun __WSAFDIsSet(fd : Win32cr::Networking::WinSock::SOCKET, param1 : Win32cr::Networking::WinSock::Fd_set*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun accept(s : Win32cr::Networking::WinSock::SOCKET, addr : Win32cr::Networking::WinSock::SOCKADDR*, addrlen : Int32*) : Win32cr::Networking::WinSock::SOCKET
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun bind(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun closesocket(s : Win32cr::Networking::WinSock::SOCKET) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun connect(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun ioctlsocket(s : Win32cr::Networking::WinSock::SOCKET, cmd : Int32, argp : UInt32*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun getpeername(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun getsockname(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun getsockopt(s : Win32cr::Networking::WinSock::SOCKET, level : Int32, optname : Int32, optval : Win32cr::Foundation::PSTR, optlen : Int32*) : Int32
 
+    # :nodoc:
     fun htonl(hostlong : UInt32) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun htons(hostshort : UInt16) : UInt16
 
+    # :nodoc:
     fun inet_addr(cp : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun inet_ntoa(in__ : Win32cr::Networking::WinSock::IN_ADDR) : Win32cr::Foundation::PSTR
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun listen(s : Win32cr::Networking::WinSock::SOCKET, backlog : Int32) : Int32
 
+    # :nodoc:
     fun ntohl(netlong : UInt32) : UInt32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun ntohs(netshort : UInt16) : UInt16
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun recv(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Win32cr::Networking::WinSock::SEND_RECV_FLAGS) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun recvfrom(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Int32, from : Win32cr::Networking::WinSock::SOCKADDR*, fromlen : Int32*) : Int32
 
+    # :nodoc:
     fun select(nfds : Int32, readfds : Win32cr::Networking::WinSock::Fd_set*, writefds : Win32cr::Networking::WinSock::Fd_set*, exceptfds : Win32cr::Networking::WinSock::Fd_set*, timeout : Win32cr::Networking::WinSock::Timeval*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun send(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Win32cr::Networking::WinSock::SEND_RECV_FLAGS) : Int32
 
+    # :nodoc:
     fun sendto(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Int32, to : Win32cr::Networking::WinSock::SOCKADDR*, tolen : Int32) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun setsockopt(s : Win32cr::Networking::WinSock::SOCKET, level : Int32, optname : Int32, optval : Win32cr::Foundation::PSTR, optlen : Int32) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun shutdown(s : Win32cr::Networking::WinSock::SOCKET, how : Int32) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun socket(af : Int32, type__ : Int32, protocol : Int32) : Win32cr::Networking::WinSock::SOCKET
 
+    # :nodoc:
     fun gethostbyaddr(addr : Win32cr::Foundation::PSTR, len : Int32, type__ : Int32) : Win32cr::Networking::WinSock::Hostent*
 
+    # :nodoc:
     fun gethostbyname(name : Win32cr::Foundation::PSTR) : Win32cr::Networking::WinSock::Hostent*
 
+    # :nodoc:
     fun gethostname(name : Win32cr::Foundation::PSTR, namelen : Int32) : Int32
 
+    # :nodoc:
     fun GetHostNameW(name : UInt16*, namelen : Int32) : Int32
 
+    # :nodoc:
     fun getservbyport(port : Int32, proto : Win32cr::Foundation::PSTR) : Win32cr::Networking::WinSock::Servent*
 
+    # :nodoc:
     fun getservbyname(name : Win32cr::Foundation::PSTR, proto : Win32cr::Foundation::PSTR) : Win32cr::Networking::WinSock::Servent*
 
+    # :nodoc:
     fun getprotobynumber(number : Int32) : Win32cr::Networking::WinSock::Protoent*
 
+    # :nodoc:
     fun getprotobyname(name : Win32cr::Foundation::PSTR) : Win32cr::Networking::WinSock::Protoent*
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSAStartup(wVersionRequested : UInt16, lpWSAData : Win32cr::Networking::WinSock::WSAData*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSACleanup : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSASetLastError(iError : Int32) : Void
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSAGetLastError : Win32cr::Networking::WinSock::WSA_ERROR
 
+    # :nodoc:
     fun WSAIsBlocking : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WSAUnhookBlockingHook : Int32
 
+    # :nodoc:
     fun WSASetBlockingHook(lpBlockFunc : Win32cr::Foundation::FARPROC) : Win32cr::Foundation::FARPROC
 
+    # :nodoc:
     fun WSACancelBlockingCall : Int32
 
+    # :nodoc:
     fun WSAAsyncGetServByName(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, name : Win32cr::Foundation::PSTR, proto : Win32cr::Foundation::PSTR, buf : Win32cr::Foundation::PSTR, buflen : Int32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun WSAAsyncGetServByPort(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, port : Int32, proto : Win32cr::Foundation::PSTR, buf : Win32cr::Foundation::PSTR, buflen : Int32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun WSAAsyncGetProtoByName(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, name : Win32cr::Foundation::PSTR, buf : Win32cr::Foundation::PSTR, buflen : Int32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun WSAAsyncGetProtoByNumber(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, number : Int32, buf : Win32cr::Foundation::PSTR, buflen : Int32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun WSAAsyncGetHostByName(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, name : Win32cr::Foundation::PSTR, buf : Win32cr::Foundation::PSTR, buflen : Int32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun WSAAsyncGetHostByAddr(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, addr : Win32cr::Foundation::PSTR, len : Int32, type__ : Int32, buf : Win32cr::Foundation::PSTR, buflen : Int32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun WSACancelAsyncRequest(hAsyncTaskHandle : Win32cr::Foundation::HANDLE) : Int32
 
+    # :nodoc:
     fun WSAAsyncSelect(s : Win32cr::Networking::WinSock::SOCKET, hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, lEvent : Int32) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSAAccept(s : Win32cr::Networking::WinSock::SOCKET, addr : Win32cr::Networking::WinSock::SOCKADDR*, addrlen : Int32*, lpfnCondition : Win32cr::Networking::WinSock::LPCONDITIONPROC, dwCallbackData : LibC::UIntPtrT) : Win32cr::Networking::WinSock::SOCKET
 
+    # :nodoc:
     fun WSACloseEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSAConnect(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32, lpCallerData : Win32cr::Networking::WinSock::WSABUF*, lpCalleeData : Win32cr::Networking::WinSock::WSABUF*, lpSQOS : Win32cr::Networking::WinSock::QOS*, lpGQOS : Win32cr::Networking::WinSock::QOS*) : Int32
 
+    # :nodoc:
     fun WSAConnectByNameW(s : Win32cr::Networking::WinSock::SOCKET, nodename : Win32cr::Foundation::PWSTR, servicename : Win32cr::Foundation::PWSTR, local_address_length : UInt32*, local_address : Win32cr::Networking::WinSock::SOCKADDR*, remote_address_length : UInt32*, remote_address : Win32cr::Networking::WinSock::SOCKADDR*, timeout : Win32cr::Networking::WinSock::Timeval*, reserved : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WSAConnectByNameA(s : Win32cr::Networking::WinSock::SOCKET, nodename : Win32cr::Foundation::PSTR, servicename : Win32cr::Foundation::PSTR, local_address_length : UInt32*, local_address : Win32cr::Networking::WinSock::SOCKADDR*, remote_address_length : UInt32*, remote_address : Win32cr::Networking::WinSock::SOCKADDR*, timeout : Win32cr::Networking::WinSock::Timeval*, reserved : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WSAConnectByList(s : Win32cr::Networking::WinSock::SOCKET, socket_address : Win32cr::Networking::WinSock::SOCKET_ADDRESS_LIST*, local_address_length : UInt32*, local_address : Win32cr::Networking::WinSock::SOCKADDR*, remote_address_length : UInt32*, remote_address : Win32cr::Networking::WinSock::SOCKADDR*, timeout : Win32cr::Networking::WinSock::Timeval*, reserved : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSACreateEvent : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun WSADuplicateSocketA(s : Win32cr::Networking::WinSock::SOCKET, dwProcessId : UInt32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOA*) : Int32
 
+    # :nodoc:
     fun WSADuplicateSocketW(s : Win32cr::Networking::WinSock::SOCKET, dwProcessId : UInt32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*) : Int32
 
+    # :nodoc:
     fun WSAEnumNetworkEvents(s : Win32cr::Networking::WinSock::SOCKET, hEventObject : Win32cr::Foundation::HANDLE, lpNetworkEvents : Win32cr::Networking::WinSock::WSANETWORKEVENTS*) : Int32
 
+    # :nodoc:
     fun WSAEnumProtocolsA(lpiProtocols : Int32*, lpProtocolBuffer : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOA*, lpdwBufferLength : UInt32*) : Int32
 
+    # :nodoc:
     fun WSAEnumProtocolsW(lpiProtocols : Int32*, lpProtocolBuffer : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, lpdwBufferLength : UInt32*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSAEventSelect(s : Win32cr::Networking::WinSock::SOCKET, hEventObject : Win32cr::Foundation::HANDLE, lNetworkEvents : Int32) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSAGetOverlappedResult(s : Win32cr::Networking::WinSock::SOCKET, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpcbTransfer : UInt32*, fWait : Win32cr::Foundation::BOOL, lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WSAGetQOSByName(s : Win32cr::Networking::WinSock::SOCKET, lpQOSName : Win32cr::Networking::WinSock::WSABUF*, lpQOS : Win32cr::Networking::WinSock::QOS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WSAHtonl(s : Win32cr::Networking::WinSock::SOCKET, hostlong : UInt32, lpnetlong : UInt32*) : Int32
 
+    # :nodoc:
     fun WSAHtons(s : Win32cr::Networking::WinSock::SOCKET, hostshort : UInt16, lpnetshort : UInt16*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSAIoctl(s : Win32cr::Networking::WinSock::SOCKET, dwIoControlCode : UInt32, lpvInBuffer : Void*, cbInBuffer : UInt32, lpvOutBuffer : Void*, cbOutBuffer : UInt32, lpcbBytesReturned : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
+    # :nodoc:
     fun WSAJoinLeaf(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32, lpCallerData : Win32cr::Networking::WinSock::WSABUF*, lpCalleeData : Win32cr::Networking::WinSock::WSABUF*, lpSQOS : Win32cr::Networking::WinSock::QOS*, lpGQOS : Win32cr::Networking::WinSock::QOS*, dwFlags : UInt32) : Win32cr::Networking::WinSock::SOCKET
 
+    # :nodoc:
     fun WSANtohl(s : Win32cr::Networking::WinSock::SOCKET, netlong : UInt32, lphostlong : UInt32*) : Int32
 
+    # :nodoc:
     fun WSANtohs(s : Win32cr::Networking::WinSock::SOCKET, netshort : UInt16, lphostshort : UInt16*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSARecv(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesRecvd : UInt32*, lpFlags : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
+    # :nodoc:
     fun WSARecvDisconnect(s : Win32cr::Networking::WinSock::SOCKET, lpInboundDisconnectData : Win32cr::Networking::WinSock::WSABUF*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSARecvFrom(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesRecvd : UInt32*, lpFlags : UInt32*, lpFrom : Win32cr::Networking::WinSock::SOCKADDR*, lpFromlen : Int32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSAResetEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSASend(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesSent : UInt32*, dwFlags : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
+    # :nodoc:
     fun WSASendMsg(handle : Win32cr::Networking::WinSock::SOCKET, lpMsg : Win32cr::Networking::WinSock::WSAMSG*, dwFlags : UInt32, lpNumberOfBytesSent : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
+    # :nodoc:
     fun WSASendDisconnect(s : Win32cr::Networking::WinSock::SOCKET, lpOutboundDisconnectData : Win32cr::Networking::WinSock::WSABUF*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSASendTo(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesSent : UInt32*, dwFlags : UInt32, lpTo : Win32cr::Networking::WinSock::SOCKADDR*, iTolen : Int32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
+    # :nodoc:
     fun WSASetEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WSASocketA(af : Int32, type__ : Int32, protocol : Int32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOA*, g : UInt32, dwFlags : UInt32) : Win32cr::Networking::WinSock::SOCKET
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSASocketW(af : Int32, type__ : Int32, protocol : Int32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, g : UInt32, dwFlags : UInt32) : Win32cr::Networking::WinSock::SOCKET
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun WSAWaitForMultipleEvents(cEvents : UInt32, lphEvents : Win32cr::Foundation::HANDLE*, fWaitAll : Win32cr::Foundation::BOOL, dwTimeout : UInt32, fAlertable : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun WSAAddressToStringA(lpsaAddress : Win32cr::Networking::WinSock::SOCKADDR*, dwAddressLength : UInt32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOA*, lpszAddressString : UInt8*, lpdwAddressStringLength : UInt32*) : Int32
 
+    # :nodoc:
     fun WSAAddressToStringW(lpsaAddress : Win32cr::Networking::WinSock::SOCKADDR*, dwAddressLength : UInt32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, lpszAddressString : UInt16*, lpdwAddressStringLength : UInt32*) : Int32
 
+    # :nodoc:
     fun WSAStringToAddressA(address_string : Win32cr::Foundation::PSTR, address_family : Int32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOA*, lpAddress : Win32cr::Networking::WinSock::SOCKADDR*, lpAddressLength : Int32*) : Int32
 
+    # :nodoc:
     fun WSAStringToAddressW(address_string : Win32cr::Foundation::PWSTR, address_family : Int32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, lpAddress : Win32cr::Networking::WinSock::SOCKADDR*, lpAddressLength : Int32*) : Int32
 
+    # :nodoc:
     fun WSALookupServiceBeginA(lpqsRestrictions : Win32cr::Networking::WinSock::WSAQUERYSETA*, dwControlFlags : UInt32, lphLookup : Win32cr::Foundation::HANDLE*) : Int32
 
+    # :nodoc:
     fun WSALookupServiceBeginW(lpqsRestrictions : Win32cr::Networking::WinSock::WSAQUERYSETW*, dwControlFlags : UInt32, lphLookup : Win32cr::Foundation::HANDLE*) : Int32
 
+    # :nodoc:
     fun WSALookupServiceNextA(hLookup : Win32cr::Foundation::HANDLE, dwControlFlags : UInt32, lpdwBufferLength : UInt32*, lpqsResults : Win32cr::Networking::WinSock::WSAQUERYSETA*) : Int32
 
+    # :nodoc:
     fun WSALookupServiceNextW(hLookup : Win32cr::Foundation::HANDLE, dwControlFlags : UInt32, lpdwBufferLength : UInt32*, lpqsResults : Win32cr::Networking::WinSock::WSAQUERYSETW*) : Int32
 
+    # :nodoc:
     fun WSANSPIoctl(hLookup : Win32cr::Foundation::HANDLE, dwControlCode : UInt32, lpvInBuffer : Void*, cbInBuffer : UInt32, lpvOutBuffer : Void*, cbOutBuffer : UInt32, lpcbBytesReturned : UInt32*, lpCompletion : Win32cr::Networking::WinSock::WSACOMPLETION*) : Int32
 
+    # :nodoc:
     fun WSALookupServiceEnd(hLookup : Win32cr::Foundation::HANDLE) : Int32
 
+    # :nodoc:
     fun WSAInstallServiceClassA(lpServiceClassInfo : Win32cr::Networking::WinSock::WSASERVICECLASSINFOA*) : Int32
 
+    # :nodoc:
     fun WSAInstallServiceClassW(lpServiceClassInfo : Win32cr::Networking::WinSock::WSASERVICECLASSINFOW*) : Int32
 
+    # :nodoc:
     fun WSARemoveServiceClass(lpServiceClassId : LibC::GUID*) : Int32
 
+    # :nodoc:
     fun WSAGetServiceClassInfoA(lpProviderId : LibC::GUID*, lpServiceClassId : LibC::GUID*, lpdwBufSize : UInt32*, lpServiceClassInfo : Win32cr::Networking::WinSock::WSASERVICECLASSINFOA*) : Int32
 
+    # :nodoc:
     fun WSAGetServiceClassInfoW(lpProviderId : LibC::GUID*, lpServiceClassId : LibC::GUID*, lpdwBufSize : UInt32*, lpServiceClassInfo : Win32cr::Networking::WinSock::WSASERVICECLASSINFOW*) : Int32
 
+    # :nodoc:
     fun WSAEnumNameSpaceProvidersA(lpdwBufferLength : UInt32*, lpnspBuffer : Win32cr::Networking::WinSock::WSANAMESPACE_INFOA*) : Int32
 
+    # :nodoc:
     fun WSAEnumNameSpaceProvidersW(lpdwBufferLength : UInt32*, lpnspBuffer : Win32cr::Networking::WinSock::WSANAMESPACE_INFOW*) : Int32
 
+    # :nodoc:
     fun WSAEnumNameSpaceProvidersExA(lpdwBufferLength : UInt32*, lpnspBuffer : Win32cr::Networking::WinSock::WSANAMESPACE_INFOEXA*) : Int32
 
+    # :nodoc:
     fun WSAEnumNameSpaceProvidersExW(lpdwBufferLength : UInt32*, lpnspBuffer : Win32cr::Networking::WinSock::WSANAMESPACE_INFOEXW*) : Int32
 
+    # :nodoc:
     fun WSAGetServiceClassNameByClassIdA(lpServiceClassId : LibC::GUID*, lpszServiceClassName : Win32cr::Foundation::PSTR, lpdwBufferLength : UInt32*) : Int32
 
+    # :nodoc:
     fun WSAGetServiceClassNameByClassIdW(lpServiceClassId : LibC::GUID*, lpszServiceClassName : Win32cr::Foundation::PWSTR, lpdwBufferLength : UInt32*) : Int32
 
+    # :nodoc:
     fun WSASetServiceA(lpqsRegInfo : Win32cr::Networking::WinSock::WSAQUERYSETA*, essoperation : Win32cr::Networking::WinSock::WSAESETSERVICEOP, dwControlFlags : UInt32) : Int32
 
+    # :nodoc:
     fun WSASetServiceW(lpqsRegInfo : Win32cr::Networking::WinSock::WSAQUERYSETW*, essoperation : Win32cr::Networking::WinSock::WSAESETSERVICEOP, dwControlFlags : UInt32) : Int32
 
+    # :nodoc:
     fun WSAProviderConfigChange(lpNotificationHandle : Win32cr::Foundation::HANDLE*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
+    # :nodoc:
     fun WSAPoll(fdArray : Win32cr::Networking::WinSock::WSAPOLLFD*, fds : UInt32, timeout : Int32) : Int32
 
+    # :nodoc:
     fun ProcessSocketNotifications(completionPort : Win32cr::Foundation::HANDLE, registrationCount : UInt32, registrationInfos : Win32cr::Networking::WinSock::SOCK_NOTIFY_REGISTRATION*, timeoutMs : UInt32, completionCount : UInt32, completionPortEntries : Win32cr::System::IO::OVERLAPPED_ENTRY*, receivedEntryCount : UInt32*) : UInt32
 
+    # :nodoc:
     fun RtlIpv4AddressToStringA(addr : Win32cr::Networking::WinSock::IN_ADDR*, s : UInt8*) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun RtlIpv4AddressToStringExA(address : Win32cr::Networking::WinSock::IN_ADDR*, port : UInt16, address_string : UInt8*, address_string_length : UInt32*) : Int32
 
+    # :nodoc:
     fun RtlIpv4AddressToStringW(addr : Win32cr::Networking::WinSock::IN_ADDR*, s : UInt16*) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun RtlIpv4AddressToStringExW(address : Win32cr::Networking::WinSock::IN_ADDR*, port : UInt16, address_string : UInt16*, address_string_length : UInt32*) : Int32
 
+    # :nodoc:
     fun RtlIpv4StringToAddressA(s : Win32cr::Foundation::PSTR, strict : Win32cr::Foundation::BOOLEAN, terminator : Win32cr::Foundation::PSTR*, addr : Win32cr::Networking::WinSock::IN_ADDR*) : Int32
 
+    # :nodoc:
     fun RtlIpv4StringToAddressExA(address_string : Win32cr::Foundation::PSTR, strict : Win32cr::Foundation::BOOLEAN, address : Win32cr::Networking::WinSock::IN_ADDR*, port : UInt16*) : Int32
 
+    # :nodoc:
     fun RtlIpv4StringToAddressW(s : Win32cr::Foundation::PWSTR, strict : Win32cr::Foundation::BOOLEAN, terminator : Win32cr::Foundation::PWSTR*, addr : Win32cr::Networking::WinSock::IN_ADDR*) : Int32
 
+    # :nodoc:
     fun RtlIpv4StringToAddressExW(address_string : Win32cr::Foundation::PWSTR, strict : Win32cr::Foundation::BOOLEAN, address : Win32cr::Networking::WinSock::IN_ADDR*, port : UInt16*) : Int32
 
+    # :nodoc:
     fun RtlIpv6AddressToStringA(addr : Win32cr::Networking::WinSock::IN6_ADDR*, s : UInt8*) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun RtlIpv6AddressToStringExA(address : Win32cr::Networking::WinSock::IN6_ADDR*, scope_id : UInt32, port : UInt16, address_string : UInt8*, address_string_length : UInt32*) : Int32
 
+    # :nodoc:
     fun RtlIpv6AddressToStringW(addr : Win32cr::Networking::WinSock::IN6_ADDR*, s : UInt16*) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun RtlIpv6AddressToStringExW(address : Win32cr::Networking::WinSock::IN6_ADDR*, scope_id : UInt32, port : UInt16, address_string : UInt16*, address_string_length : UInt32*) : Int32
 
+    # :nodoc:
     fun RtlIpv6StringToAddressA(s : Win32cr::Foundation::PSTR, terminator : Win32cr::Foundation::PSTR*, addr : Win32cr::Networking::WinSock::IN6_ADDR*) : Int32
 
+    # :nodoc:
     fun RtlIpv6StringToAddressExA(address_string : Win32cr::Foundation::PSTR, address : Win32cr::Networking::WinSock::IN6_ADDR*, scope_id : UInt32*, port : UInt16*) : Int32
 
+    # :nodoc:
     fun RtlIpv6StringToAddressW(s : Win32cr::Foundation::PWSTR, terminator : Win32cr::Foundation::PWSTR*, addr : Win32cr::Networking::WinSock::IN6_ADDR*) : Int32
 
+    # :nodoc:
     fun RtlIpv6StringToAddressExW(address_string : Win32cr::Foundation::PWSTR, address : Win32cr::Networking::WinSock::IN6_ADDR*, scope_id : UInt32*, port : UInt16*) : Int32
 
+    # :nodoc:
     fun RtlEthernetAddressToStringA(addr : Win32cr::Networking::WinSock::DL_EUI48*, s : UInt8*) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun RtlEthernetAddressToStringW(addr : Win32cr::Networking::WinSock::DL_EUI48*, s : UInt16*) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun RtlEthernetStringToAddressA(s : Win32cr::Foundation::PSTR, terminator : Win32cr::Foundation::PSTR*, addr : Win32cr::Networking::WinSock::DL_EUI48*) : Int32
 
+    # :nodoc:
     fun RtlEthernetStringToAddressW(s : Win32cr::Foundation::PWSTR, terminator : Win32cr::Foundation::PWSTR*, addr : Win32cr::Networking::WinSock::DL_EUI48*) : Int32
 
+    # :nodoc:
     fun WSARecvEx(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Int32*) : Int32
 
+    # :nodoc:
     fun TransmitFile(hSocket : Win32cr::Networking::WinSock::SOCKET, hFile : Win32cr::Foundation::HANDLE, nNumberOfBytesToWrite : UInt32, nNumberOfBytesPerSend : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpTransmitBuffers : Win32cr::Networking::WinSock::TRANSMIT_FILE_BUFFERS*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AcceptEx(sListenSocket : Win32cr::Networking::WinSock::SOCKET, sAcceptSocket : Win32cr::Networking::WinSock::SOCKET, lpOutputBuffer : Void*, dwReceiveDataLength : UInt32, dwLocalAddressLength : UInt32, dwRemoteAddressLength : UInt32, lpdwBytesReceived : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetAcceptExSockaddrs(lpOutputBuffer : Void*, dwReceiveDataLength : UInt32, dwLocalAddressLength : UInt32, dwRemoteAddressLength : UInt32, local_sockaddr : Win32cr::Networking::WinSock::SOCKADDR**, local_sockaddr_length : Int32*, remote_sockaddr : Win32cr::Networking::WinSock::SOCKADDR**, remote_sockaddr_length : Int32*) : Void
 
+    # :nodoc:
     fun WSCEnumProtocols(lpiProtocols : Int32*, lpProtocolBuffer : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, lpdwBufferLength : UInt32*, lpErrno : Int32*) : Int32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCEnumProtocols32(lpiProtocols : Int32*, lpProtocolBuffer : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, lpdwBufferLength : UInt32*, lpErrno : Int32*) : Int32
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun WSCDeinstallProvider(lpProviderId : LibC::GUID*, lpErrno : Int32*) : Int32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCDeinstallProvider32(lpProviderId : LibC::GUID*, lpErrno : Int32*) : Int32
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun WSCInstallProvider(lpProviderId : LibC::GUID*, lpszProviderDllPath : Win32cr::Foundation::PWSTR, lpProtocolInfoList : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, dwNumberOfEntries : UInt32, lpErrno : Int32*) : Int32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCInstallProvider64_32(lpProviderId : LibC::GUID*, lpszProviderDllPath : Win32cr::Foundation::PWSTR, lpProtocolInfoList : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, dwNumberOfEntries : UInt32, lpErrno : Int32*) : Int32
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun WSCGetProviderPath(lpProviderId : LibC::GUID*, lpszProviderDllPath : UInt16*, lpProviderDllPathLen : Int32*, lpErrno : Int32*) : Int32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCGetProviderPath32(lpProviderId : LibC::GUID*, lpszProviderDllPath : UInt16*, lpProviderDllPathLen : Int32*, lpErrno : Int32*) : Int32
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun WSCUpdateProvider(lpProviderId : LibC::GUID*, lpszProviderDllPath : Win32cr::Foundation::PWSTR, lpProtocolInfoList : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, dwNumberOfEntries : UInt32, lpErrno : Int32*) : Int32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCUpdateProvider32(lpProviderId : LibC::GUID*, lpszProviderDllPath : Win32cr::Foundation::PWSTR, lpProtocolInfoList : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, dwNumberOfEntries : UInt32, lpErrno : Int32*) : Int32
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun WSCSetProviderInfo(lpProviderId : LibC::GUID*, info_type : Win32cr::Networking::WinSock::WSC_PROVIDER_INFO_TYPE, info : UInt8*, info_size : LibC::UIntPtrT, flags : UInt32, lpErrno : Int32*) : Int32
 
+    # :nodoc:
     fun WSCGetProviderInfo(lpProviderId : LibC::GUID*, info_type : Win32cr::Networking::WinSock::WSC_PROVIDER_INFO_TYPE, info : UInt8*, info_size : LibC::UIntPtrT*, flags : UInt32, lpErrno : Int32*) : Int32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCSetProviderInfo32(lpProviderId : LibC::GUID*, info_type : Win32cr::Networking::WinSock::WSC_PROVIDER_INFO_TYPE, info : UInt8*, info_size : LibC::UIntPtrT, flags : UInt32, lpErrno : Int32*) : Int32
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCGetProviderInfo32(lpProviderId : LibC::GUID*, info_type : Win32cr::Networking::WinSock::WSC_PROVIDER_INFO_TYPE, info : UInt8*, info_size : LibC::UIntPtrT*, flags : UInt32, lpErrno : Int32*) : Int32
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun WSCSetApplicationCategory(path : UInt16*, path_length : UInt32, extra : UInt16*, extra_length : UInt32, permitted_lsp_categories : UInt32, pPrevPermLspCat : UInt32*, lpErrno : Int32*) : Int32
 
+    # :nodoc:
     fun WSCGetApplicationCategory(path : UInt16*, path_length : UInt32, extra : UInt16*, extra_length : UInt32, pPermittedLspCategories : UInt32*, lpErrno : Int32*) : Int32
 
+    # :nodoc:
     fun WPUCompleteOverlappedRequest(s : Win32cr::Networking::WinSock::SOCKET, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, dwError : UInt32, cbTransferred : UInt32, lpErrno : Int32*) : Int32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCEnumNameSpaceProviders32(lpdwBufferLength : UInt32*, lpnspBuffer : Win32cr::Networking::WinSock::WSANAMESPACE_INFOW*) : Int32
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCEnumNameSpaceProvidersEx32(lpdwBufferLength : UInt32*, lpnspBuffer : Win32cr::Networking::WinSock::WSANAMESPACE_INFOEXW*) : Int32
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun WSCInstallNameSpace(lpszIdentifier : Win32cr::Foundation::PWSTR, lpszPathName : Win32cr::Foundation::PWSTR, dwNameSpace : UInt32, dwVersion : UInt32, lpProviderId : LibC::GUID*) : Int32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCInstallNameSpace32(lpszIdentifier : Win32cr::Foundation::PWSTR, lpszPathName : Win32cr::Foundation::PWSTR, dwNameSpace : UInt32, dwVersion : UInt32, lpProviderId : LibC::GUID*) : Int32
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun WSCUnInstallNameSpace(lpProviderId : LibC::GUID*) : Int32
 
+    # :nodoc:
     fun WSCInstallNameSpaceEx(lpszIdentifier : Win32cr::Foundation::PWSTR, lpszPathName : Win32cr::Foundation::PWSTR, dwNameSpace : UInt32, dwVersion : UInt32, lpProviderId : LibC::GUID*, lpProviderSpecific : Win32cr::System::Com::BLOB*) : Int32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCInstallNameSpaceEx32(lpszIdentifier : Win32cr::Foundation::PWSTR, lpszPathName : Win32cr::Foundation::PWSTR, dwNameSpace : UInt32, dwVersion : UInt32, lpProviderId : LibC::GUID*, lpProviderSpecific : Win32cr::System::Com::BLOB*) : Int32
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCUnInstallNameSpace32(lpProviderId : LibC::GUID*) : Int32
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun WSCEnableNSProvider(lpProviderId : LibC::GUID*, fEnable : Win32cr::Foundation::BOOL) : Int32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCEnableNSProvider32(lpProviderId : LibC::GUID*, fEnable : Win32cr::Foundation::BOOL) : Int32
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCInstallProviderAndChains64_32(lpProviderId : LibC::GUID*, lpszProviderDllPath : Win32cr::Foundation::PWSTR, lpszProviderDllPath32 : Win32cr::Foundation::PWSTR, lpszLspName : Win32cr::Foundation::PWSTR, dwServiceFlags : UInt32, lpProtocolInfoList : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, dwNumberOfEntries : UInt32, lpdwCatalogEntryId : UInt32*, lpErrno : Int32*) : Int32
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun WSAAdvertiseProvider(puuidProviderId : LibC::GUID*, pNSPv2Routine : Win32cr::Networking::WinSock::NSPV2_ROUTINE*) : Int32
 
+    # :nodoc:
     fun WSAUnadvertiseProvider(puuidProviderId : LibC::GUID*) : Int32
 
+    # :nodoc:
     fun WSAProviderCompleteAsyncCall(hAsyncCall : Win32cr::Foundation::HANDLE, iRetCode : Int32) : Int32
 
+    # :nodoc:
     fun EnumProtocolsA(lpiProtocols : Int32*, lpProtocolBuffer : Void*, lpdwBufferLength : UInt32*) : Int32
 
+    # :nodoc:
     fun EnumProtocolsW(lpiProtocols : Int32*, lpProtocolBuffer : Void*, lpdwBufferLength : UInt32*) : Int32
 
+    # :nodoc:
     fun GetAddressByNameA(dwNameSpace : UInt32, lpServiceType : LibC::GUID*, lpServiceName : Win32cr::Foundation::PSTR, lpiProtocols : Int32*, dwResolution : UInt32, lpServiceAsyncInfo : Win32cr::Networking::WinSock::SERVICE_ASYNC_INFO*, lpCsaddrBuffer : Void*, lpdwBufferLength : UInt32*, lpAliasBuffer : UInt8*, lpdwAliasBufferLength : UInt32*) : Int32
 
+    # :nodoc:
     fun GetAddressByNameW(dwNameSpace : UInt32, lpServiceType : LibC::GUID*, lpServiceName : Win32cr::Foundation::PWSTR, lpiProtocols : Int32*, dwResolution : UInt32, lpServiceAsyncInfo : Win32cr::Networking::WinSock::SERVICE_ASYNC_INFO*, lpCsaddrBuffer : Void*, lpdwBufferLength : UInt32*, lpAliasBuffer : UInt16*, lpdwAliasBufferLength : UInt32*) : Int32
 
+    # :nodoc:
     fun GetTypeByNameA(lpServiceName : Win32cr::Foundation::PSTR, lpServiceType : LibC::GUID*) : Int32
 
+    # :nodoc:
     fun GetTypeByNameW(lpServiceName : Win32cr::Foundation::PWSTR, lpServiceType : LibC::GUID*) : Int32
 
+    # :nodoc:
     fun GetNameByTypeA(lpServiceType : LibC::GUID*, lpServiceName : Win32cr::Foundation::PSTR, dwNameLength : UInt32) : Int32
 
+    # :nodoc:
     fun GetNameByTypeW(lpServiceType : LibC::GUID*, lpServiceName : Win32cr::Foundation::PWSTR, dwNameLength : UInt32) : Int32
 
+    # :nodoc:
     fun SetServiceA(dwNameSpace : UInt32, dwOperation : Win32cr::Networking::WinSock::SET_SERVICE_OPERATION, dwFlags : UInt32, lpServiceInfo : Win32cr::Networking::WinSock::SERVICE_INFOA*, lpServiceAsyncInfo : Win32cr::Networking::WinSock::SERVICE_ASYNC_INFO*, lpdwStatusFlags : UInt32*) : Int32
 
+    # :nodoc:
     fun SetServiceW(dwNameSpace : UInt32, dwOperation : Win32cr::Networking::WinSock::SET_SERVICE_OPERATION, dwFlags : UInt32, lpServiceInfo : Win32cr::Networking::WinSock::SERVICE_INFOW*, lpServiceAsyncInfo : Win32cr::Networking::WinSock::SERVICE_ASYNC_INFO*, lpdwStatusFlags : UInt32*) : Int32
 
+    # :nodoc:
     fun GetServiceA(dwNameSpace : UInt32, lpGuid : LibC::GUID*, lpServiceName : Win32cr::Foundation::PSTR, dwProperties : UInt32, lpBuffer : Void*, lpdwBufferSize : UInt32*, lpServiceAsyncInfo : Win32cr::Networking::WinSock::SERVICE_ASYNC_INFO*) : Int32
 
+    # :nodoc:
     fun GetServiceW(dwNameSpace : UInt32, lpGuid : LibC::GUID*, lpServiceName : Win32cr::Foundation::PWSTR, dwProperties : UInt32, lpBuffer : Void*, lpdwBufferSize : UInt32*, lpServiceAsyncInfo : Win32cr::Networking::WinSock::SERVICE_ASYNC_INFO*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun getaddrinfo(pNodeName : Win32cr::Foundation::PSTR, pServiceName : Win32cr::Foundation::PSTR, pHints : Win32cr::Networking::WinSock::ADDRINFOA*, ppResult : Win32cr::Networking::WinSock::ADDRINFOA**) : Int32
 
+    # :nodoc:
     fun GetAddrInfoW(pNodeName : Win32cr::Foundation::PWSTR, pServiceName : Win32cr::Foundation::PWSTR, pHints : Win32cr::Networking::WinSock::Addrinfow*, ppResult : Win32cr::Networking::WinSock::Addrinfow**) : Int32
 
+    # :nodoc:
     fun GetAddrInfoExA(pName : Win32cr::Foundation::PSTR, pServiceName : Win32cr::Foundation::PSTR, dwNameSpace : UInt32, lpNspId : LibC::GUID*, hints : Win32cr::Networking::WinSock::Addrinfoexa*, ppResult : Win32cr::Networking::WinSock::Addrinfoexa**, timeout : Win32cr::Networking::WinSock::Timeval*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle : Win32cr::Foundation::HANDLE*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetAddrInfoExW(pName : Win32cr::Foundation::PWSTR, pServiceName : Win32cr::Foundation::PWSTR, dwNameSpace : UInt32, lpNspId : LibC::GUID*, hints : Win32cr::Networking::WinSock::Addrinfoexw*, ppResult : Win32cr::Networking::WinSock::Addrinfoexw**, timeout : Win32cr::Networking::WinSock::Timeval*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle : Win32cr::Foundation::HANDLE*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetAddrInfoExCancel(lpHandle : Win32cr::Foundation::HANDLE*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun GetAddrInfoExOverlappedResult(lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Int32
 
+    # :nodoc:
     fun SetAddrInfoExA(pName : Win32cr::Foundation::PSTR, pServiceName : Win32cr::Foundation::PSTR, pAddresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, dwAddressCount : UInt32, lpBlob : Win32cr::System::Com::BLOB*, dwFlags : UInt32, dwNameSpace : UInt32, lpNspId : LibC::GUID*, timeout : Win32cr::Networking::WinSock::Timeval*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle : Win32cr::Foundation::HANDLE*) : Int32
 
+    # :nodoc:
     fun SetAddrInfoExW(pName : Win32cr::Foundation::PWSTR, pServiceName : Win32cr::Foundation::PWSTR, pAddresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, dwAddressCount : UInt32, lpBlob : Win32cr::System::Com::BLOB*, dwFlags : UInt32, dwNameSpace : UInt32, lpNspId : LibC::GUID*, timeout : Win32cr::Networking::WinSock::Timeval*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle : Win32cr::Foundation::HANDLE*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun freeaddrinfo(pAddrInfo : Win32cr::Networking::WinSock::ADDRINFOA*) : Void
 
+    # :nodoc:
     fun FreeAddrInfoW(pAddrInfo : Win32cr::Networking::WinSock::Addrinfow*) : Void
 
+    # :nodoc:
     fun FreeAddrInfoEx(pAddrInfoEx : Win32cr::Networking::WinSock::Addrinfoexa*) : Void
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun FreeAddrInfoExW(pAddrInfoEx : Win32cr::Networking::WinSock::Addrinfoexw*) : Void
 
+    # :nodoc:
     fun getnameinfo(pSockaddr : Win32cr::Networking::WinSock::SOCKADDR*, sockaddr_length : Int32, pNodeBuffer : UInt8*, node_buffer_size : UInt32, pServiceBuffer : UInt8*, service_buffer_size : UInt32, flags : Int32) : Int32
 
+    # :nodoc:
     fun GetNameInfoW(pSockaddr : Win32cr::Networking::WinSock::SOCKADDR*, sockaddr_length : Int32, pNodeBuffer : UInt16*, node_buffer_size : UInt32, pServiceBuffer : UInt16*, service_buffer_size : UInt32, flags : Int32) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun inet_pton(family : Int32, pszAddrString : Win32cr::Foundation::PSTR, pAddrBuf : Void*) : Int32
 
+    # :nodoc:
     fun InetPtonW(family : Int32, pszAddrString : Win32cr::Foundation::PWSTR, pAddrBuf : Void*) : Int32
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun inet_ntop(family : Int32, pAddr : Void*, pStringBuf : UInt8*, string_buf_size : LibC::UIntPtrT) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun InetNtopW(family : Int32, pAddr : Void*, pStringBuf : UInt16*, string_buf_size : LibC::UIntPtrT) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun WSASetSocketSecurity(socket : Win32cr::Networking::WinSock::SOCKET, security_settings : Win32cr::Networking::WinSock::SOCKET_SECURITY_SETTINGS*, security_settings_len : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*, completion_routine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
+    # :nodoc:
     fun WSAQuerySocketSecurity(socket : Win32cr::Networking::WinSock::SOCKET, security_query_template : Win32cr::Networking::WinSock::SOCKET_SECURITY_QUERY_TEMPLATE*, security_query_template_len : UInt32, security_query_info : Win32cr::Networking::WinSock::SOCKET_SECURITY_QUERY_INFO*, security_query_info_len : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*, completion_routine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
+    # :nodoc:
     fun WSASetSocketPeerTargetName(socket : Win32cr::Networking::WinSock::SOCKET, peer_target_name : Win32cr::Networking::WinSock::SOCKET_PEER_TARGET_NAME*, peer_target_name_len : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*, completion_routine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
+    # :nodoc:
     fun WSADeleteSocketPeerTargetName(socket : Win32cr::Networking::WinSock::SOCKET, peer_addr : Win32cr::Networking::WinSock::SOCKADDR*, peer_addr_len : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*, completion_routine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
+    # :nodoc:
     fun WSAImpersonateSocketPeer(socket : Win32cr::Networking::WinSock::SOCKET, peer_addr : Win32cr::Networking::WinSock::SOCKADDR*, peer_addr_len : UInt32) : Int32
 
+    # :nodoc:
     fun WSARevertImpersonation : Int32
 
+    # :nodoc:
     fun SetSocketMediaStreamingMode(value : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WSCWriteProviderOrder(lpwdCatalogEntryId : UInt32*, dwNumberOfEntries : UInt32) : Int32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCWriteProviderOrder32(lpwdCatalogEntryId : UInt32*, dwNumberOfEntries : UInt32) : Int32
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun WSCWriteNameSpaceOrder(lpProviderId : LibC::GUID*, dwNumberOfEntries : UInt32) : Int32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun WSCWriteNameSpaceOrder32(lpProviderId : LibC::GUID*, dwNumberOfEntries : UInt32) : Int32
-  {% end %}
+    {% end %}
 
   end
 end

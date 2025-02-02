@@ -3,6 +3,7 @@ require "./../system/com.cr"
 require "./../devices/portable_devices.cr"
 
 module Win32cr::Storage::EnhancedStorage
+  extend self
   GUID_DEVINTERFACE_ENHANCED_STORAGE_SILO = "3897f6a4-fd35-4bc8-a0b7-5dbba36adafa"
   WPD_CATEGORY_ENHANCED_STORAGE = "91248166-b832-4ad4-baa4-7ca0b6b2798c"
   ENHANCED_STORAGE_COMMAND_SILO_IS_AUTHENTICATION_SILO = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x91248166_u32, 0xb832_u16, 0x4ad4_u16, StaticArray[0xba_u8, 0xa4_u8, 0x7c_u8, 0xa0_u8, 0xb6_u8, 0xb2_u8, 0x79_u8, 0x8c_u8]), 6_u32)

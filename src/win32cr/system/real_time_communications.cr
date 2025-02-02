@@ -4,6 +4,7 @@ require "./../media/direct_show.cr"
 require "./../networking/win_sock.cr"
 
 module Win32cr::System::RealTimeCommunications
+  extend self
   RTCCS_FORCE_PROFILE = 1_u32
   RTCCS_FAIL_ON_REDIRECT = 2_u32
   RTCMT_AUDIO_SEND = 1_u32

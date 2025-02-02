@@ -28,7 +28,8 @@ For more examples, please see the [examples](https://github.com/mjblack/win32cr/
 require "win32cr"
 require "win32cr/ui/windows_and_messaging"
 
-Win32cr::UI::WindowsAndMessaging::C.MessageBoxW(nil, "Message Box Body".to_utf16, "Title".to_utf16, Win32cr::UI::WindowsAndMessaging::::MESSAGEBOX_STYLE::MB_OK)
+alias WM = Win32cr::UI::WindowsAndMessaging # Simplifies code
+WM.messageBoxW(Pointer(Void).null, pwstr("Message Box Body"), pwstr("Title"), WM::MESSAGEBOX_STYLE::MB_OK)
 ```
 
 ## Contributing

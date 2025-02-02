@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::Dns
+  extend self
   alias DnsContextHandle = LibC::IntPtrT
   alias DNS_PROXY_COMPLETION_ROUTINE = Proc(Void*, Int32, Void)
 
@@ -1603,126 +1604,426 @@ module Win32cr::NetworkManagement::Dns
   end
   {% end %}
 
+  def dnsQueryConfig(config : Win32cr::NetworkManagement::Dns::DNS_CONFIG_TYPE, flag : UInt32, pwsAdapterName : Win32cr::Foundation::PWSTR, pReserved : Void*, pBuffer : Void*, pBufLen : UInt32*) : Int32
+    C.DnsQueryConfig(config, flag, pwsAdapterName, pReserved, pBuffer, pBufLen)
+  end
+
+  def dnsRecordCopyEx(pRecord : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, char_set_in : Win32cr::NetworkManagement::Dns::DNS_CHARSET, char_set_out : Win32cr::NetworkManagement::Dns::DNS_CHARSET) : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
+    C.DnsRecordCopyEx(pRecord, char_set_in, char_set_out)
+  end
+
+  def dnsRecordSetCopyEx(pRecordSet : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, char_set_in : Win32cr::NetworkManagement::Dns::DNS_CHARSET, char_set_out : Win32cr::NetworkManagement::Dns::DNS_CHARSET) : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
+    C.DnsRecordSetCopyEx(pRecordSet, char_set_in, char_set_out)
+  end
+
+  def dnsRecordCompare(pRecord1 : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pRecord2 : Win32cr::NetworkManagement::Dns::DNS_RECORDA*) : Win32cr::Foundation::BOOL
+    C.DnsRecordCompare(pRecord1, pRecord2)
+  end
+
+  def dnsRecordSetCompare(pRR1 : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pRR2 : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, ppDiff1 : Win32cr::NetworkManagement::Dns::DNS_RECORDA**, ppDiff2 : Win32cr::NetworkManagement::Dns::DNS_RECORDA**) : Win32cr::Foundation::BOOL
+    C.DnsRecordSetCompare(pRR1, pRR2, ppDiff1, ppDiff2)
+  end
+
+  def dnsRecordSetDetach(pRecordList : Win32cr::NetworkManagement::Dns::DNS_RECORDA*) : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
+    C.DnsRecordSetDetach(pRecordList)
+  end
+
+  def dnsFree(pData : Void*, free_type : Win32cr::NetworkManagement::Dns::DNS_FREE_TYPE) : Void
+    C.DnsFree(pData, free_type)
+  end
+
+  def dnsQueryA(pszName : Win32cr::Foundation::PSTR, wType : UInt16, options : UInt32, pExtra : Void*, ppQueryResults : Win32cr::NetworkManagement::Dns::DNS_RECORDA**, pReserved : Void**) : Int32
+    C.DnsQuery_A(pszName, wType, options, pExtra, ppQueryResults, pReserved)
+  end
+
+  def dnsQueryUTF8(pszName : Win32cr::Foundation::PSTR, wType : UInt16, options : UInt32, pExtra : Void*, ppQueryResults : Win32cr::NetworkManagement::Dns::DNS_RECORDA**, pReserved : Void**) : Int32
+    C.DnsQuery_UTF8(pszName, wType, options, pExtra, ppQueryResults, pReserved)
+  end
+
+  def dnsQueryW(pszName : Win32cr::Foundation::PWSTR, wType : UInt16, options : UInt32, pExtra : Void*, ppQueryResults : Win32cr::NetworkManagement::Dns::DNS_RECORDA**, pReserved : Void**) : Int32
+    C.DnsQuery_W(pszName, wType, options, pExtra, ppQueryResults, pReserved)
+  end
+
+  def dnsQueryEx(pQueryRequest : Win32cr::NetworkManagement::Dns::DNS_QUERY_REQUEST*, pQueryResults : Win32cr::NetworkManagement::Dns::DNS_QUERY_RESULT*, pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_QUERY_CANCEL*) : Int32
+    C.DnsQueryEx(pQueryRequest, pQueryResults, pCancelHandle)
+  end
+
+  def dnsCancelQuery(pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_QUERY_CANCEL*) : Int32
+    C.DnsCancelQuery(pCancelHandle)
+  end
+
+  def dnsFreeCustomServers(pcServers : UInt32*, ppServers : Win32cr::NetworkManagement::Dns::DNS_CUSTOM_SERVER**) : Void
+    C.DnsFreeCustomServers(pcServers, ppServers)
+  end
+
+  def dnsGetApplicationSettings(pcServers : UInt32*, ppDefaultServers : Win32cr::NetworkManagement::Dns::DNS_CUSTOM_SERVER**, pSettings : Win32cr::NetworkManagement::Dns::DNS_APPLICATION_SETTINGS*) : UInt32
+    C.DnsGetApplicationSettings(pcServers, ppDefaultServers, pSettings)
+  end
+
+  def dnsSetApplicationSettings(cServers : UInt32, pServers : Win32cr::NetworkManagement::Dns::DNS_CUSTOM_SERVER*, pSettings : Win32cr::NetworkManagement::Dns::DNS_APPLICATION_SETTINGS*) : UInt32
+    C.DnsSetApplicationSettings(cServers, pServers, pSettings)
+  end
+
+  def dnsAcquireContextHandleW(credential_flags : UInt32, credentials : Void*, pContext : Win32cr::NetworkManagement::Dns::DnsContextHandle*) : Int32
+    C.DnsAcquireContextHandle_W(credential_flags, credentials, pContext)
+  end
+
+  def dnsAcquireContextHandleA(credential_flags : UInt32, credentials : Void*, pContext : Win32cr::NetworkManagement::Dns::DnsContextHandle*) : Int32
+    C.DnsAcquireContextHandle_A(credential_flags, credentials, pContext)
+  end
+
+  def dnsReleaseContextHandle(hContext : Win32cr::Foundation::HANDLE) : Void
+    C.DnsReleaseContextHandle(hContext)
+  end
+
+  def dnsModifyRecordsInSetW(pAddRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pDeleteRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hCredentials : Win32cr::Foundation::HANDLE, pExtraList : Void*, pReserved : Void*) : Int32
+    C.DnsModifyRecordsInSet_W(pAddRecords, pDeleteRecords, options, hCredentials, pExtraList, pReserved)
+  end
+
+  def dnsModifyRecordsInSetA(pAddRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pDeleteRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hCredentials : Win32cr::Foundation::HANDLE, pExtraList : Void*, pReserved : Void*) : Int32
+    C.DnsModifyRecordsInSet_A(pAddRecords, pDeleteRecords, options, hCredentials, pExtraList, pReserved)
+  end
+
+  def dnsModifyRecordsInSetUTF8(pAddRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pDeleteRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hCredentials : Win32cr::Foundation::HANDLE, pExtraList : Void*, pReserved : Void*) : Int32
+    C.DnsModifyRecordsInSet_UTF8(pAddRecords, pDeleteRecords, options, hCredentials, pExtraList, pReserved)
+  end
+
+  def dnsReplaceRecordSetW(pReplaceSet : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hContext : Win32cr::Foundation::HANDLE, pExtraInfo : Void*, pReserved : Void*) : Int32
+    C.DnsReplaceRecordSetW(pReplaceSet, options, hContext, pExtraInfo, pReserved)
+  end
+
+  def dnsReplaceRecordSetA(pReplaceSet : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hContext : Win32cr::Foundation::HANDLE, pExtraInfo : Void*, pReserved : Void*) : Int32
+    C.DnsReplaceRecordSetA(pReplaceSet, options, hContext, pExtraInfo, pReserved)
+  end
+
+  def dnsReplaceRecordSetUTF8(pReplaceSet : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hContext : Win32cr::Foundation::HANDLE, pExtraInfo : Void*, pReserved : Void*) : Int32
+    C.DnsReplaceRecordSetUTF8(pReplaceSet, options, hContext, pExtraInfo, pReserved)
+  end
+
+  def dnsValidateNameW(pszName : Win32cr::Foundation::PWSTR, format : Win32cr::NetworkManagement::Dns::DNS_NAME_FORMAT) : Int32
+    C.DnsValidateName_W(pszName, format)
+  end
+
+  def dnsValidateNameA(pszName : Win32cr::Foundation::PSTR, format : Win32cr::NetworkManagement::Dns::DNS_NAME_FORMAT) : Int32
+    C.DnsValidateName_A(pszName, format)
+  end
+
+  def dnsValidateNameUTF8(pszName : Win32cr::Foundation::PSTR, format : Win32cr::NetworkManagement::Dns::DNS_NAME_FORMAT) : Int32
+    C.DnsValidateName_UTF8(pszName, format)
+  end
+
+  def dnsNameCompareA(pName1 : Win32cr::Foundation::PSTR, pName2 : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.DnsNameCompare_A(pName1, pName2)
+  end
+
+  def dnsNameCompareW(pName1 : Win32cr::Foundation::PWSTR, pName2 : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.DnsNameCompare_W(pName1, pName2)
+  end
+
+  def dnsWriteQuestionToBufferW(pDnsBuffer : Win32cr::NetworkManagement::Dns::DNS_MESSAGE_BUFFER*, pdwBufferSize : UInt32*, pszName : Win32cr::Foundation::PWSTR, wType : UInt16, xid : UInt16, fRecursionDesired : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.DnsWriteQuestionToBuffer_W(pDnsBuffer, pdwBufferSize, pszName, wType, xid, fRecursionDesired)
+  end
+
+  def dnsWriteQuestionToBufferUTF8(pDnsBuffer : Win32cr::NetworkManagement::Dns::DNS_MESSAGE_BUFFER*, pdwBufferSize : UInt32*, pszName : Win32cr::Foundation::PSTR, wType : UInt16, xid : UInt16, fRecursionDesired : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.DnsWriteQuestionToBuffer_UTF8(pDnsBuffer, pdwBufferSize, pszName, wType, xid, fRecursionDesired)
+  end
+
+  def dnsExtractRecordsFromMessageW(pDnsBuffer : Win32cr::NetworkManagement::Dns::DNS_MESSAGE_BUFFER*, wMessageLength : UInt16, ppRecord : Win32cr::NetworkManagement::Dns::DNS_RECORDA**) : Int32
+    C.DnsExtractRecordsFromMessage_W(pDnsBuffer, wMessageLength, ppRecord)
+  end
+
+  def dnsExtractRecordsFromMessageUTF8(pDnsBuffer : Win32cr::NetworkManagement::Dns::DNS_MESSAGE_BUFFER*, wMessageLength : UInt16, ppRecord : Win32cr::NetworkManagement::Dns::DNS_RECORDA**) : Int32
+    C.DnsExtractRecordsFromMessage_UTF8(pDnsBuffer, wMessageLength, ppRecord)
+  end
+
+  def dnsGetProxyInformation(hostName : Win32cr::Foundation::PWSTR, proxyInformation : Win32cr::NetworkManagement::Dns::DNS_PROXY_INFORMATION*, defaultProxyInformation : Win32cr::NetworkManagement::Dns::DNS_PROXY_INFORMATION*, completionRoutine : Win32cr::NetworkManagement::Dns::DNS_PROXY_COMPLETION_ROUTINE, completionContext : Void*) : UInt32
+    C.DnsGetProxyInformation(hostName, proxyInformation, defaultProxyInformation, completionRoutine, completionContext)
+  end
+
+  def dnsFreeProxyName(proxyName : Win32cr::Foundation::PWSTR) : Void
+    C.DnsFreeProxyName(proxyName)
+  end
+
+  def dnsConnectionGetProxyInfoForHostUrl(pwszHostUrl : Win32cr::Foundation::PWSTR, pSelectionContext : UInt8*, dwSelectionContextLength : UInt32, dwExplicitInterfaceIndex : UInt32, pProxyInfoEx : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO_EX*) : UInt32
+    C.DnsConnectionGetProxyInfoForHostUrl(pwszHostUrl, pSelectionContext, dwSelectionContextLength, dwExplicitInterfaceIndex, pProxyInfoEx)
+  end
+
+  def dnsConnectionFreeProxyInfoEx(pProxyInfoEx : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO_EX*) : Void
+    C.DnsConnectionFreeProxyInfoEx(pProxyInfoEx)
+  end
+
+  def dnsConnectionGetProxyInfo(pwszConnectionName : Win32cr::Foundation::PWSTR, type__ : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_TYPE, pProxyInfo : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO*) : UInt32
+    C.DnsConnectionGetProxyInfo(pwszConnectionName, type__, pProxyInfo)
+  end
+
+  def dnsConnectionFreeProxyInfo(pProxyInfo : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO*) : Void
+    C.DnsConnectionFreeProxyInfo(pProxyInfo)
+  end
+
+  def dnsConnectionSetProxyInfo(pwszConnectionName : Win32cr::Foundation::PWSTR, type__ : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_TYPE, pProxyInfo : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO*) : UInt32
+    C.DnsConnectionSetProxyInfo(pwszConnectionName, type__, pProxyInfo)
+  end
+
+  def dnsConnectionDeleteProxyInfo(pwszConnectionName : Win32cr::Foundation::PWSTR, type__ : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_TYPE) : UInt32
+    C.DnsConnectionDeleteProxyInfo(pwszConnectionName, type__)
+  end
+
+  def dnsConnectionGetProxyList(pwszConnectionName : Win32cr::Foundation::PWSTR, pProxyList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_LIST*) : UInt32
+    C.DnsConnectionGetProxyList(pwszConnectionName, pProxyList)
+  end
+
+  def dnsConnectionFreeProxyList(pProxyList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_LIST*) : Void
+    C.DnsConnectionFreeProxyList(pProxyList)
+  end
+
+  def dnsConnectionGetNameList(pNameList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_NAME_LIST*) : UInt32
+    C.DnsConnectionGetNameList(pNameList)
+  end
+
+  def dnsConnectionFreeNameList(pNameList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_NAME_LIST*) : Void
+    C.DnsConnectionFreeNameList(pNameList)
+  end
+
+  def dnsConnectionUpdateIfIndexTable(pConnectionIfIndexEntries : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_IFINDEX_LIST*) : UInt32
+    C.DnsConnectionUpdateIfIndexTable(pConnectionIfIndexEntries)
+  end
+
+  def dnsConnectionSetPolicyEntries(policy_entry_tag : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_POLICY_TAG, pPolicyEntryList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_POLICY_ENTRY_LIST*) : UInt32
+    C.DnsConnectionSetPolicyEntries(policy_entry_tag, pPolicyEntryList)
+  end
+
+  def dnsConnectionDeletePolicyEntries(policy_entry_tag : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_POLICY_TAG) : UInt32
+    C.DnsConnectionDeletePolicyEntries(policy_entry_tag)
+  end
+
+  def dnsServiceConstructInstance(pServiceName : Win32cr::Foundation::PWSTR, pHostName : Win32cr::Foundation::PWSTR, pIp4 : UInt32*, pIp6 : Win32cr::NetworkManagement::Dns::IP6_ADDRESS*, wPort : UInt16, wPriority : UInt16, wWeight : UInt16, dwPropertiesCount : UInt32, keys : Win32cr::Foundation::PWSTR*, values : Win32cr::Foundation::PWSTR*) : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*
+    C.DnsServiceConstructInstance(pServiceName, pHostName, pIp4, pIp6, wPort, wPriority, wWeight, dwPropertiesCount, keys, values)
+  end
+
+  def dnsServiceCopyInstance(pOrig : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*) : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*
+    C.DnsServiceCopyInstance(pOrig)
+  end
+
+  def dnsServiceFreeInstance(pInstance : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*) : Void
+    C.DnsServiceFreeInstance(pInstance)
+  end
+
+  def dnsServiceBrowse(pRequest : Win32cr::NetworkManagement::Dns::DNS_SERVICE_BROWSE_REQUEST*, pCancel : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : Int32
+    C.DnsServiceBrowse(pRequest, pCancel)
+  end
+
+  def dnsServiceBrowseCancel(pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : Int32
+    C.DnsServiceBrowseCancel(pCancelHandle)
+  end
+
+  def dnsServiceResolve(pRequest : Win32cr::NetworkManagement::Dns::DNS_SERVICE_RESOLVE_REQUEST*, pCancel : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : Int32
+    C.DnsServiceResolve(pRequest, pCancel)
+  end
+
+  def dnsServiceResolveCancel(pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : Int32
+    C.DnsServiceResolveCancel(pCancelHandle)
+  end
+
+  def dnsServiceRegister(pRequest : Win32cr::NetworkManagement::Dns::DNS_SERVICE_REGISTER_REQUEST*, pCancel : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : UInt32
+    C.DnsServiceRegister(pRequest, pCancel)
+  end
+
+  def dnsServiceDeRegister(pRequest : Win32cr::NetworkManagement::Dns::DNS_SERVICE_REGISTER_REQUEST*, pCancel : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : UInt32
+    C.DnsServiceDeRegister(pRequest, pCancel)
+  end
+
+  def dnsServiceRegisterCancel(pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : UInt32
+    C.DnsServiceRegisterCancel(pCancelHandle)
+  end
+
+  def dnsStartMulticastQuery(pQueryRequest : Win32cr::NetworkManagement::Dns::MDNS_QUERY_REQUEST*, pHandle : Win32cr::NetworkManagement::Dns::MDNS_QUERY_HANDLE*) : Int32
+    C.DnsStartMulticastQuery(pQueryRequest, pHandle)
+  end
+
+  def dnsStopMulticastQuery(pHandle : Win32cr::NetworkManagement::Dns::MDNS_QUERY_HANDLE*) : Int32
+    C.DnsStopMulticastQuery(pHandle)
+  end
+
   @[Link("dnsapi")]
   lib C
+    # :nodoc:
     fun DnsQueryConfig(config : Win32cr::NetworkManagement::Dns::DNS_CONFIG_TYPE, flag : UInt32, pwsAdapterName : Win32cr::Foundation::PWSTR, pReserved : Void*, pBuffer : Void*, pBufLen : UInt32*) : Int32
 
+    # :nodoc:
     fun DnsRecordCopyEx(pRecord : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, char_set_in : Win32cr::NetworkManagement::Dns::DNS_CHARSET, char_set_out : Win32cr::NetworkManagement::Dns::DNS_CHARSET) : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
 
+    # :nodoc:
     fun DnsRecordSetCopyEx(pRecordSet : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, char_set_in : Win32cr::NetworkManagement::Dns::DNS_CHARSET, char_set_out : Win32cr::NetworkManagement::Dns::DNS_CHARSET) : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
 
+    # :nodoc:
     fun DnsRecordCompare(pRecord1 : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pRecord2 : Win32cr::NetworkManagement::Dns::DNS_RECORDA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DnsRecordSetCompare(pRR1 : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pRR2 : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, ppDiff1 : Win32cr::NetworkManagement::Dns::DNS_RECORDA**, ppDiff2 : Win32cr::NetworkManagement::Dns::DNS_RECORDA**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DnsRecordSetDetach(pRecordList : Win32cr::NetworkManagement::Dns::DNS_RECORDA*) : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
 
+    # :nodoc:
     fun DnsFree(pData : Void*, free_type : Win32cr::NetworkManagement::Dns::DNS_FREE_TYPE) : Void
 
+    # :nodoc:
     fun DnsQuery_A(pszName : Win32cr::Foundation::PSTR, wType : UInt16, options : UInt32, pExtra : Void*, ppQueryResults : Win32cr::NetworkManagement::Dns::DNS_RECORDA**, pReserved : Void**) : Int32
 
+    # :nodoc:
     fun DnsQuery_UTF8(pszName : Win32cr::Foundation::PSTR, wType : UInt16, options : UInt32, pExtra : Void*, ppQueryResults : Win32cr::NetworkManagement::Dns::DNS_RECORDA**, pReserved : Void**) : Int32
 
+    # :nodoc:
     fun DnsQuery_W(pszName : Win32cr::Foundation::PWSTR, wType : UInt16, options : UInt32, pExtra : Void*, ppQueryResults : Win32cr::NetworkManagement::Dns::DNS_RECORDA**, pReserved : Void**) : Int32
 
+    # :nodoc:
     fun DnsQueryEx(pQueryRequest : Win32cr::NetworkManagement::Dns::DNS_QUERY_REQUEST*, pQueryResults : Win32cr::NetworkManagement::Dns::DNS_QUERY_RESULT*, pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_QUERY_CANCEL*) : Int32
 
+    # :nodoc:
     fun DnsCancelQuery(pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_QUERY_CANCEL*) : Int32
 
+    # :nodoc:
     fun DnsFreeCustomServers(pcServers : UInt32*, ppServers : Win32cr::NetworkManagement::Dns::DNS_CUSTOM_SERVER**) : Void
 
+    # :nodoc:
     fun DnsGetApplicationSettings(pcServers : UInt32*, ppDefaultServers : Win32cr::NetworkManagement::Dns::DNS_CUSTOM_SERVER**, pSettings : Win32cr::NetworkManagement::Dns::DNS_APPLICATION_SETTINGS*) : UInt32
 
+    # :nodoc:
     fun DnsSetApplicationSettings(cServers : UInt32, pServers : Win32cr::NetworkManagement::Dns::DNS_CUSTOM_SERVER*, pSettings : Win32cr::NetworkManagement::Dns::DNS_APPLICATION_SETTINGS*) : UInt32
 
+    # :nodoc:
     fun DnsAcquireContextHandle_W(credential_flags : UInt32, credentials : Void*, pContext : Win32cr::NetworkManagement::Dns::DnsContextHandle*) : Int32
 
+    # :nodoc:
     fun DnsAcquireContextHandle_A(credential_flags : UInt32, credentials : Void*, pContext : Win32cr::NetworkManagement::Dns::DnsContextHandle*) : Int32
 
+    # :nodoc:
     fun DnsReleaseContextHandle(hContext : Win32cr::Foundation::HANDLE) : Void
 
+    # :nodoc:
     fun DnsModifyRecordsInSet_W(pAddRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pDeleteRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hCredentials : Win32cr::Foundation::HANDLE, pExtraList : Void*, pReserved : Void*) : Int32
 
+    # :nodoc:
     fun DnsModifyRecordsInSet_A(pAddRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pDeleteRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hCredentials : Win32cr::Foundation::HANDLE, pExtraList : Void*, pReserved : Void*) : Int32
 
+    # :nodoc:
     fun DnsModifyRecordsInSet_UTF8(pAddRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pDeleteRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hCredentials : Win32cr::Foundation::HANDLE, pExtraList : Void*, pReserved : Void*) : Int32
 
+    # :nodoc:
     fun DnsReplaceRecordSetW(pReplaceSet : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hContext : Win32cr::Foundation::HANDLE, pExtraInfo : Void*, pReserved : Void*) : Int32
 
+    # :nodoc:
     fun DnsReplaceRecordSetA(pReplaceSet : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hContext : Win32cr::Foundation::HANDLE, pExtraInfo : Void*, pReserved : Void*) : Int32
 
+    # :nodoc:
     fun DnsReplaceRecordSetUTF8(pReplaceSet : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hContext : Win32cr::Foundation::HANDLE, pExtraInfo : Void*, pReserved : Void*) : Int32
 
+    # :nodoc:
     fun DnsValidateName_W(pszName : Win32cr::Foundation::PWSTR, format : Win32cr::NetworkManagement::Dns::DNS_NAME_FORMAT) : Int32
 
+    # :nodoc:
     fun DnsValidateName_A(pszName : Win32cr::Foundation::PSTR, format : Win32cr::NetworkManagement::Dns::DNS_NAME_FORMAT) : Int32
 
+    # :nodoc:
     fun DnsValidateName_UTF8(pszName : Win32cr::Foundation::PSTR, format : Win32cr::NetworkManagement::Dns::DNS_NAME_FORMAT) : Int32
 
+    # :nodoc:
     fun DnsNameCompare_A(pName1 : Win32cr::Foundation::PSTR, pName2 : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DnsNameCompare_W(pName1 : Win32cr::Foundation::PWSTR, pName2 : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DnsWriteQuestionToBuffer_W(pDnsBuffer : Win32cr::NetworkManagement::Dns::DNS_MESSAGE_BUFFER*, pdwBufferSize : UInt32*, pszName : Win32cr::Foundation::PWSTR, wType : UInt16, xid : UInt16, fRecursionDesired : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DnsWriteQuestionToBuffer_UTF8(pDnsBuffer : Win32cr::NetworkManagement::Dns::DNS_MESSAGE_BUFFER*, pdwBufferSize : UInt32*, pszName : Win32cr::Foundation::PSTR, wType : UInt16, xid : UInt16, fRecursionDesired : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DnsExtractRecordsFromMessage_W(pDnsBuffer : Win32cr::NetworkManagement::Dns::DNS_MESSAGE_BUFFER*, wMessageLength : UInt16, ppRecord : Win32cr::NetworkManagement::Dns::DNS_RECORDA**) : Int32
 
+    # :nodoc:
     fun DnsExtractRecordsFromMessage_UTF8(pDnsBuffer : Win32cr::NetworkManagement::Dns::DNS_MESSAGE_BUFFER*, wMessageLength : UInt16, ppRecord : Win32cr::NetworkManagement::Dns::DNS_RECORDA**) : Int32
 
+    # :nodoc:
     fun DnsGetProxyInformation(hostName : Win32cr::Foundation::PWSTR, proxyInformation : Win32cr::NetworkManagement::Dns::DNS_PROXY_INFORMATION*, defaultProxyInformation : Win32cr::NetworkManagement::Dns::DNS_PROXY_INFORMATION*, completionRoutine : Win32cr::NetworkManagement::Dns::DNS_PROXY_COMPLETION_ROUTINE, completionContext : Void*) : UInt32
 
+    # :nodoc:
     fun DnsFreeProxyName(proxyName : Win32cr::Foundation::PWSTR) : Void
 
+    # :nodoc:
     fun DnsConnectionGetProxyInfoForHostUrl(pwszHostUrl : Win32cr::Foundation::PWSTR, pSelectionContext : UInt8*, dwSelectionContextLength : UInt32, dwExplicitInterfaceIndex : UInt32, pProxyInfoEx : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO_EX*) : UInt32
 
+    # :nodoc:
     fun DnsConnectionFreeProxyInfoEx(pProxyInfoEx : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO_EX*) : Void
 
+    # :nodoc:
     fun DnsConnectionGetProxyInfo(pwszConnectionName : Win32cr::Foundation::PWSTR, type__ : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_TYPE, pProxyInfo : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO*) : UInt32
 
+    # :nodoc:
     fun DnsConnectionFreeProxyInfo(pProxyInfo : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO*) : Void
 
+    # :nodoc:
     fun DnsConnectionSetProxyInfo(pwszConnectionName : Win32cr::Foundation::PWSTR, type__ : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_TYPE, pProxyInfo : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO*) : UInt32
 
+    # :nodoc:
     fun DnsConnectionDeleteProxyInfo(pwszConnectionName : Win32cr::Foundation::PWSTR, type__ : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_TYPE) : UInt32
 
+    # :nodoc:
     fun DnsConnectionGetProxyList(pwszConnectionName : Win32cr::Foundation::PWSTR, pProxyList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_LIST*) : UInt32
 
+    # :nodoc:
     fun DnsConnectionFreeProxyList(pProxyList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_LIST*) : Void
 
+    # :nodoc:
     fun DnsConnectionGetNameList(pNameList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_NAME_LIST*) : UInt32
 
+    # :nodoc:
     fun DnsConnectionFreeNameList(pNameList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_NAME_LIST*) : Void
 
+    # :nodoc:
     fun DnsConnectionUpdateIfIndexTable(pConnectionIfIndexEntries : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_IFINDEX_LIST*) : UInt32
 
+    # :nodoc:
     fun DnsConnectionSetPolicyEntries(policy_entry_tag : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_POLICY_TAG, pPolicyEntryList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_POLICY_ENTRY_LIST*) : UInt32
 
+    # :nodoc:
     fun DnsConnectionDeletePolicyEntries(policy_entry_tag : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_POLICY_TAG) : UInt32
 
+    # :nodoc:
     fun DnsServiceConstructInstance(pServiceName : Win32cr::Foundation::PWSTR, pHostName : Win32cr::Foundation::PWSTR, pIp4 : UInt32*, pIp6 : Win32cr::NetworkManagement::Dns::IP6_ADDRESS*, wPort : UInt16, wPriority : UInt16, wWeight : UInt16, dwPropertiesCount : UInt32, keys : Win32cr::Foundation::PWSTR*, values : Win32cr::Foundation::PWSTR*) : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*
 
+    # :nodoc:
     fun DnsServiceCopyInstance(pOrig : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*) : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*
 
+    # :nodoc:
     fun DnsServiceFreeInstance(pInstance : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*) : Void
 
+    # :nodoc:
     fun DnsServiceBrowse(pRequest : Win32cr::NetworkManagement::Dns::DNS_SERVICE_BROWSE_REQUEST*, pCancel : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : Int32
 
+    # :nodoc:
     fun DnsServiceBrowseCancel(pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : Int32
 
+    # :nodoc:
     fun DnsServiceResolve(pRequest : Win32cr::NetworkManagement::Dns::DNS_SERVICE_RESOLVE_REQUEST*, pCancel : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : Int32
 
+    # :nodoc:
     fun DnsServiceResolveCancel(pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : Int32
 
+    # :nodoc:
     fun DnsServiceRegister(pRequest : Win32cr::NetworkManagement::Dns::DNS_SERVICE_REGISTER_REQUEST*, pCancel : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : UInt32
 
+    # :nodoc:
     fun DnsServiceDeRegister(pRequest : Win32cr::NetworkManagement::Dns::DNS_SERVICE_REGISTER_REQUEST*, pCancel : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : UInt32
 
+    # :nodoc:
     fun DnsServiceRegisterCancel(pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : UInt32
 
+    # :nodoc:
     fun DnsStartMulticastQuery(pQueryRequest : Win32cr::NetworkManagement::Dns::MDNS_QUERY_REQUEST*, pHandle : Win32cr::NetworkManagement::Dns::MDNS_QUERY_HANDLE*) : Int32
 
+    # :nodoc:
     fun DnsStopMulticastQuery(pHandle : Win32cr::NetworkManagement::Dns::MDNS_QUERY_HANDLE*) : Int32
 
   end

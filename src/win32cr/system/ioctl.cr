@@ -4,6 +4,7 @@ require "./../security.cr"
 require "./../storage/vhd.cr"
 
 module Win32cr::System::Ioctl
+  extend self
   alias PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK = Proc(Win32cr::System::Ioctl::IO_IRP_EXT_TRACK_OFFSET_HEADER*, Win32cr::System::Ioctl::IO_IRP_EXT_TRACK_OFFSET_HEADER*, Int64, Void)
 
   IOCTL_STORAGE_BASE = 45_u32

@@ -7,6 +7,7 @@ require "./dxgi.cr"
 require "./../security.cr"
 
 module Win32cr::Graphics::DirectComposition
+  extend self
   COMPOSITIONOBJECT_READ = 1_i32
   COMPOSITIONOBJECT_WRITE = 2_i32
   DCOMPOSITION_MAX_WAITFORCOMPOSITORCLOCK_OBJECTS = 32_u32
@@ -2797,28 +2798,83 @@ module Win32cr::Graphics::DirectComposition
 
   end
 
+  def dCompositionCreateDevice(dxgiDevice : Void*, iid : LibC::GUID*, dcompositionDevice : Void**) : Win32cr::Foundation::HRESULT
+    C.DCompositionCreateDevice(dxgiDevice, iid, dcompositionDevice)
+  end
+
+  def dCompositionCreateDevice2(renderingDevice : Void*, iid : LibC::GUID*, dcompositionDevice : Void**) : Win32cr::Foundation::HRESULT
+    C.DCompositionCreateDevice2(renderingDevice, iid, dcompositionDevice)
+  end
+
+  def dCompositionCreateDevice3(renderingDevice : Void*, iid : LibC::GUID*, dcompositionDevice : Void**) : Win32cr::Foundation::HRESULT
+    C.DCompositionCreateDevice3(renderingDevice, iid, dcompositionDevice)
+  end
+
+  def dCompositionCreateSurfaceHandle(desiredAccess : UInt32, securityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, surfaceHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.DCompositionCreateSurfaceHandle(desiredAccess, securityAttributes, surfaceHandle)
+  end
+
+  def dCompositionAttachMouseWheelToHwnd(visual : Void*, hwnd : Win32cr::Foundation::HWND, enable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.DCompositionAttachMouseWheelToHwnd(visual, hwnd, enable)
+  end
+
+  def dCompositionAttachMouseDragToHwnd(visual : Void*, hwnd : Win32cr::Foundation::HWND, enable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.DCompositionAttachMouseDragToHwnd(visual, hwnd, enable)
+  end
+
+  def dCompositionGetFrameId(frameIdType : Win32cr::Graphics::DirectComposition::COMPOSITION_FRAME_ID_TYPE, frameId : UInt64*) : Win32cr::Foundation::HRESULT
+    C.DCompositionGetFrameId(frameIdType, frameId)
+  end
+
+  def dCompositionGetStatistics(frameId : UInt64, frameStats : Win32cr::Graphics::DirectComposition::COMPOSITION_FRAME_STATS*, targetIdCount : UInt32, targetIds : Win32cr::Graphics::DirectComposition::COMPOSITION_TARGET_ID*, actualTargetIdCount : UInt32*) : Win32cr::Foundation::HRESULT
+    C.DCompositionGetStatistics(frameId, frameStats, targetIdCount, targetIds, actualTargetIdCount)
+  end
+
+  def dCompositionGetTargetStatistics(frameId : UInt64, targetId : Win32cr::Graphics::DirectComposition::COMPOSITION_TARGET_ID*, targetStats : Win32cr::Graphics::DirectComposition::COMPOSITION_TARGET_STATS*) : Win32cr::Foundation::HRESULT
+    C.DCompositionGetTargetStatistics(frameId, targetId, targetStats)
+  end
+
+  def dCompositionBoostCompositorClock(enable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.DCompositionBoostCompositorClock(enable)
+  end
+
+  def dCompositionWaitForCompositorClock(count : UInt32, handles : Win32cr::Foundation::HANDLE*, timeoutInMs : UInt32) : UInt32
+    C.DCompositionWaitForCompositorClock(count, handles, timeoutInMs)
+  end
+
   @[Link("dcomp")]
   lib C
+    # :nodoc:
     fun DCompositionCreateDevice(dxgiDevice : Void*, iid : LibC::GUID*, dcompositionDevice : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DCompositionCreateDevice2(renderingDevice : Void*, iid : LibC::GUID*, dcompositionDevice : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DCompositionCreateDevice3(renderingDevice : Void*, iid : LibC::GUID*, dcompositionDevice : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DCompositionCreateSurfaceHandle(desiredAccess : UInt32, securityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, surfaceHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DCompositionAttachMouseWheelToHwnd(visual : Void*, hwnd : Win32cr::Foundation::HWND, enable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DCompositionAttachMouseDragToHwnd(visual : Void*, hwnd : Win32cr::Foundation::HWND, enable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DCompositionGetFrameId(frameIdType : Win32cr::Graphics::DirectComposition::COMPOSITION_FRAME_ID_TYPE, frameId : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DCompositionGetStatistics(frameId : UInt64, frameStats : Win32cr::Graphics::DirectComposition::COMPOSITION_FRAME_STATS*, targetIdCount : UInt32, targetIds : Win32cr::Graphics::DirectComposition::COMPOSITION_TARGET_ID*, actualTargetIdCount : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DCompositionGetTargetStatistics(frameId : UInt64, targetId : Win32cr::Graphics::DirectComposition::COMPOSITION_TARGET_ID*, targetStats : Win32cr::Graphics::DirectComposition::COMPOSITION_TARGET_STATS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DCompositionBoostCompositorClock(enable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DCompositionWaitForCompositorClock(count : UInt32, handles : Win32cr::Foundation::HANDLE*, timeoutInMs : UInt32) : UInt32
 
   end

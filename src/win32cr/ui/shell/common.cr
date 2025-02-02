@@ -2,6 +2,7 @@ require "./../../foundation.cr"
 require "./../../system/com.cr"
 
 module Win32cr::UI::Shell::Common
+  extend self
   PERCEIVEDFLAG_UNDEFINED = 0_u32
   PERCEIVEDFLAG_SOFTCODED = 1_u32
   PERCEIVEDFLAG_HARDCODED = 2_u32

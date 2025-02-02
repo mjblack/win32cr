@@ -5,6 +5,7 @@ require "./../system/com/structured_storage.cr"
 require "./../system/ole.cr"
 
 module Win32cr::UI::LegacyWindowsEnvironmentFeatures
+  extend self
   EVCF_HASSETTINGS = 1_u32
   EVCF_ENABLEBYDEFAULT = 2_u32
   EVCF_REMOVEFROMLIST = 4_u32

@@ -3,6 +3,7 @@ require "./../../graphics/direct3_d12.cr"
 require "./../../system/com.cr"
 
 module Win32cr::AI::MachineLearning::WinML
+  extend self
   WINML_TENSOR_DIMENSION_COUNT_MAX = 4_u32
 
   enum WINML_TENSOR_DATA_TYPE
@@ -1032,11 +1033,21 @@ module Win32cr::AI::MachineLearning::WinML
 
   end
 
+  def winMLCreateRuntime(runtime : Void**) : Win32cr::Foundation::HRESULT
+    C.WinMLCreateRuntime(runtime)
+  end
+
+  def mLCreateOperatorRegistry(registry : Void**) : Win32cr::Foundation::HRESULT
+    C.MLCreateOperatorRegistry(registry)
+  end
+
   @[Link("winml")]
   @[Link("windows.ai.machinelearning")]
   lib C
+    # :nodoc:
     fun WinMLCreateRuntime(runtime : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MLCreateOperatorRegistry(registry : Void**) : Win32cr::Foundation::HRESULT
 
   end

@@ -2,6 +2,7 @@ require "./../com.cr"
 require "./../../foundation.cr"
 
 module Win32cr::System::WinRT::Isolation
+  extend self
 
 
   @[Extern]
