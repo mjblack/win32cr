@@ -7,6 +7,7 @@ require "./../ui/shell/properties_system.cr"
 require "./../ui/windows_and_messaging.cr"
 
 module Win32cr::Media::Audio
+  extend self
   alias HMIDI = LibC::IntPtrT
   alias HMIDIIN = LibC::IntPtrT
   alias HMIDIOUT = LibC::IntPtrT
@@ -5179,326 +5180,1116 @@ module Win32cr::Media::Audio
 
   end
 
+  def coRegisterMessageFilter(lpMessageFilter : Void*, lplpMessageFilter : Void**) : Win32cr::Foundation::HRESULT
+    C.CoRegisterMessageFilter(lpMessageFilter, lplpMessageFilter)
+  end
+
+  def sndPlaySoundA(pszSound : Win32cr::Foundation::PSTR, fuSound : UInt32) : Win32cr::Foundation::BOOL
+    C.sndPlaySoundA(pszSound, fuSound)
+  end
+
+  def sndPlaySoundW(pszSound : Win32cr::Foundation::PWSTR, fuSound : UInt32) : Win32cr::Foundation::BOOL
+    C.sndPlaySoundW(pszSound, fuSound)
+  end
+
+  def playSoundA(pszSound : Win32cr::Foundation::PSTR, hmod : Win32cr::Foundation::HINSTANCE, fdwSound : Win32cr::Media::Audio::SND_FLAGS) : Win32cr::Foundation::BOOL
+    C.PlaySoundA(pszSound, hmod, fdwSound)
+  end
+
+  def playSoundW(pszSound : Win32cr::Foundation::PWSTR, hmod : Win32cr::Foundation::HINSTANCE, fdwSound : Win32cr::Media::Audio::SND_FLAGS) : Win32cr::Foundation::BOOL
+    C.PlaySoundW(pszSound, hmod, fdwSound)
+  end
+
+  def waveOutGetNumDevs : UInt32
+    C.waveOutGetNumDevs
+  end
+
+  def waveOutGetDevCapsA(uDeviceID : LibC::UIntPtrT, pwoc : Win32cr::Media::Audio::WAVEOUTCAPSA*, cbwoc : UInt32) : UInt32
+    C.waveOutGetDevCapsA(uDeviceID, pwoc, cbwoc)
+  end
+
+  def waveOutGetDevCapsW(uDeviceID : LibC::UIntPtrT, pwoc : Win32cr::Media::Audio::WAVEOUTCAPSW*, cbwoc : UInt32) : UInt32
+    C.waveOutGetDevCapsW(uDeviceID, pwoc, cbwoc)
+  end
+
+  def waveOutGetVolume(hwo : Win32cr::Media::Audio::HWAVEOUT, pdwVolume : UInt32*) : UInt32
+    C.waveOutGetVolume(hwo, pdwVolume)
+  end
+
+  def waveOutSetVolume(hwo : Win32cr::Media::Audio::HWAVEOUT, dwVolume : UInt32) : UInt32
+    C.waveOutSetVolume(hwo, dwVolume)
+  end
+
+  def waveOutGetErrorTextA(mmrError : UInt32, pszText : UInt8*, cchText : UInt32) : UInt32
+    C.waveOutGetErrorTextA(mmrError, pszText, cchText)
+  end
+
+  def waveOutGetErrorTextW(mmrError : UInt32, pszText : UInt16*, cchText : UInt32) : UInt32
+    C.waveOutGetErrorTextW(mmrError, pszText, cchText)
+  end
+
+  def waveOutOpen(phwo : Win32cr::Media::Audio::HWAVEOUT*, uDeviceID : UInt32, pwfx : Win32cr::Media::Audio::WAVEFORMATEX*, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : Win32cr::Media::Audio::MIDI_WAVE_OPEN_TYPE) : UInt32
+    C.waveOutOpen(phwo, uDeviceID, pwfx, dwCallback, dwInstance, fdwOpen)
+  end
+
+  def waveOutClose(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
+    C.waveOutClose(hwo)
+  end
+
+  def waveOutPrepareHeader(hwo : Win32cr::Media::Audio::HWAVEOUT, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
+    C.waveOutPrepareHeader(hwo, pwh, cbwh)
+  end
+
+  def waveOutUnprepareHeader(hwo : Win32cr::Media::Audio::HWAVEOUT, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
+    C.waveOutUnprepareHeader(hwo, pwh, cbwh)
+  end
+
+  def waveOutWrite(hwo : Win32cr::Media::Audio::HWAVEOUT, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
+    C.waveOutWrite(hwo, pwh, cbwh)
+  end
+
+  def waveOutPause(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
+    C.waveOutPause(hwo)
+  end
+
+  def waveOutRestart(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
+    C.waveOutRestart(hwo)
+  end
+
+  def waveOutReset(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
+    C.waveOutReset(hwo)
+  end
+
+  def waveOutBreakLoop(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
+    C.waveOutBreakLoop(hwo)
+  end
+
+  def waveOutGetPosition(hwo : Win32cr::Media::Audio::HWAVEOUT, pmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
+    C.waveOutGetPosition(hwo, pmmt, cbmmt)
+  end
+
+  def waveOutGetPitch(hwo : Win32cr::Media::Audio::HWAVEOUT, pdwPitch : UInt32*) : UInt32
+    C.waveOutGetPitch(hwo, pdwPitch)
+  end
+
+  def waveOutSetPitch(hwo : Win32cr::Media::Audio::HWAVEOUT, dwPitch : UInt32) : UInt32
+    C.waveOutSetPitch(hwo, dwPitch)
+  end
+
+  def waveOutGetPlaybackRate(hwo : Win32cr::Media::Audio::HWAVEOUT, pdwRate : UInt32*) : UInt32
+    C.waveOutGetPlaybackRate(hwo, pdwRate)
+  end
+
+  def waveOutSetPlaybackRate(hwo : Win32cr::Media::Audio::HWAVEOUT, dwRate : UInt32) : UInt32
+    C.waveOutSetPlaybackRate(hwo, dwRate)
+  end
+
+  def waveOutGetID(hwo : Win32cr::Media::Audio::HWAVEOUT, puDeviceID : UInt32*) : UInt32
+    C.waveOutGetID(hwo, puDeviceID)
+  end
+
+  def waveOutMessage(hwo : Win32cr::Media::Audio::HWAVEOUT, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
+    C.waveOutMessage(hwo, uMsg, dw1, dw2)
+  end
+
+  def waveInGetNumDevs : UInt32
+    C.waveInGetNumDevs
+  end
+
+  def waveInGetDevCapsA(uDeviceID : LibC::UIntPtrT, pwic : Win32cr::Media::Audio::WAVEINCAPSA*, cbwic : UInt32) : UInt32
+    C.waveInGetDevCapsA(uDeviceID, pwic, cbwic)
+  end
+
+  def waveInGetDevCapsW(uDeviceID : LibC::UIntPtrT, pwic : Win32cr::Media::Audio::WAVEINCAPSW*, cbwic : UInt32) : UInt32
+    C.waveInGetDevCapsW(uDeviceID, pwic, cbwic)
+  end
+
+  def waveInGetErrorTextA(mmrError : UInt32, pszText : UInt8*, cchText : UInt32) : UInt32
+    C.waveInGetErrorTextA(mmrError, pszText, cchText)
+  end
+
+  def waveInGetErrorTextW(mmrError : UInt32, pszText : UInt16*, cchText : UInt32) : UInt32
+    C.waveInGetErrorTextW(mmrError, pszText, cchText)
+  end
+
+  def waveInOpen(phwi : Win32cr::Media::Audio::HWAVEIN*, uDeviceID : UInt32, pwfx : Win32cr::Media::Audio::WAVEFORMATEX*, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : Win32cr::Media::Audio::MIDI_WAVE_OPEN_TYPE) : UInt32
+    C.waveInOpen(phwi, uDeviceID, pwfx, dwCallback, dwInstance, fdwOpen)
+  end
+
+  def waveInClose(hwi : Win32cr::Media::Audio::HWAVEIN) : UInt32
+    C.waveInClose(hwi)
+  end
+
+  def waveInPrepareHeader(hwi : Win32cr::Media::Audio::HWAVEIN, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
+    C.waveInPrepareHeader(hwi, pwh, cbwh)
+  end
+
+  def waveInUnprepareHeader(hwi : Win32cr::Media::Audio::HWAVEIN, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
+    C.waveInUnprepareHeader(hwi, pwh, cbwh)
+  end
+
+  def waveInAddBuffer(hwi : Win32cr::Media::Audio::HWAVEIN, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
+    C.waveInAddBuffer(hwi, pwh, cbwh)
+  end
+
+  def waveInStart(hwi : Win32cr::Media::Audio::HWAVEIN) : UInt32
+    C.waveInStart(hwi)
+  end
+
+  def waveInStop(hwi : Win32cr::Media::Audio::HWAVEIN) : UInt32
+    C.waveInStop(hwi)
+  end
+
+  def waveInReset(hwi : Win32cr::Media::Audio::HWAVEIN) : UInt32
+    C.waveInReset(hwi)
+  end
+
+  def waveInGetPosition(hwi : Win32cr::Media::Audio::HWAVEIN, pmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
+    C.waveInGetPosition(hwi, pmmt, cbmmt)
+  end
+
+  def waveInGetID(hwi : Win32cr::Media::Audio::HWAVEIN, puDeviceID : UInt32*) : UInt32
+    C.waveInGetID(hwi, puDeviceID)
+  end
+
+  def waveInMessage(hwi : Win32cr::Media::Audio::HWAVEIN, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
+    C.waveInMessage(hwi, uMsg, dw1, dw2)
+  end
+
+  def midiOutGetNumDevs : UInt32
+    C.midiOutGetNumDevs
+  end
+
+  def midiStreamOpen(phms : Win32cr::Media::Audio::HMIDISTRM*, puDeviceID : UInt32*, cMidi : UInt32, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : UInt32) : UInt32
+    C.midiStreamOpen(phms, puDeviceID, cMidi, dwCallback, dwInstance, fdwOpen)
+  end
+
+  def midiStreamClose(hms : Win32cr::Media::Audio::HMIDISTRM) : UInt32
+    C.midiStreamClose(hms)
+  end
+
+  def midiStreamProperty(hms : Win32cr::Media::Audio::HMIDISTRM, lppropdata : UInt8*, dwProperty : UInt32) : UInt32
+    C.midiStreamProperty(hms, lppropdata, dwProperty)
+  end
+
+  def midiStreamPosition(hms : Win32cr::Media::Audio::HMIDISTRM, lpmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
+    C.midiStreamPosition(hms, lpmmt, cbmmt)
+  end
+
+  def midiStreamOut(hms : Win32cr::Media::Audio::HMIDISTRM, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+    C.midiStreamOut(hms, pmh, cbmh)
+  end
+
+  def midiStreamPause(hms : Win32cr::Media::Audio::HMIDISTRM) : UInt32
+    C.midiStreamPause(hms)
+  end
+
+  def midiStreamRestart(hms : Win32cr::Media::Audio::HMIDISTRM) : UInt32
+    C.midiStreamRestart(hms)
+  end
+
+  def midiStreamStop(hms : Win32cr::Media::Audio::HMIDISTRM) : UInt32
+    C.midiStreamStop(hms)
+  end
+
+  def midiConnect(hmi : Win32cr::Media::Audio::HMIDI, hmo : Win32cr::Media::Audio::HMIDIOUT, pReserved : Void*) : UInt32
+    C.midiConnect(hmi, hmo, pReserved)
+  end
+
+  def midiDisconnect(hmi : Win32cr::Media::Audio::HMIDI, hmo : Win32cr::Media::Audio::HMIDIOUT, pReserved : Void*) : UInt32
+    C.midiDisconnect(hmi, hmo, pReserved)
+  end
+
+  def midiOutGetDevCapsA(uDeviceID : LibC::UIntPtrT, pmoc : Win32cr::Media::Audio::MIDIOUTCAPSA*, cbmoc : UInt32) : UInt32
+    C.midiOutGetDevCapsA(uDeviceID, pmoc, cbmoc)
+  end
+
+  def midiOutGetDevCapsW(uDeviceID : LibC::UIntPtrT, pmoc : Win32cr::Media::Audio::MIDIOUTCAPSW*, cbmoc : UInt32) : UInt32
+    C.midiOutGetDevCapsW(uDeviceID, pmoc, cbmoc)
+  end
+
+  def midiOutGetVolume(hmo : Win32cr::Media::Audio::HMIDIOUT, pdwVolume : UInt32*) : UInt32
+    C.midiOutGetVolume(hmo, pdwVolume)
+  end
+
+  def midiOutSetVolume(hmo : Win32cr::Media::Audio::HMIDIOUT, dwVolume : UInt32) : UInt32
+    C.midiOutSetVolume(hmo, dwVolume)
+  end
+
+  def midiOutGetErrorTextA(mmrError : UInt32, pszText : UInt8*, cchText : UInt32) : UInt32
+    C.midiOutGetErrorTextA(mmrError, pszText, cchText)
+  end
+
+  def midiOutGetErrorTextW(mmrError : UInt32, pszText : UInt16*, cchText : UInt32) : UInt32
+    C.midiOutGetErrorTextW(mmrError, pszText, cchText)
+  end
+
+  def midiOutOpen(phmo : Win32cr::Media::Audio::HMIDIOUT*, uDeviceID : UInt32, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : Win32cr::Media::Audio::MIDI_WAVE_OPEN_TYPE) : UInt32
+    C.midiOutOpen(phmo, uDeviceID, dwCallback, dwInstance, fdwOpen)
+  end
+
+  def midiOutClose(hmo : Win32cr::Media::Audio::HMIDIOUT) : UInt32
+    C.midiOutClose(hmo)
+  end
+
+  def midiOutPrepareHeader(hmo : Win32cr::Media::Audio::HMIDIOUT, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+    C.midiOutPrepareHeader(hmo, pmh, cbmh)
+  end
+
+  def midiOutUnprepareHeader(hmo : Win32cr::Media::Audio::HMIDIOUT, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+    C.midiOutUnprepareHeader(hmo, pmh, cbmh)
+  end
+
+  def midiOutShortMsg(hmo : Win32cr::Media::Audio::HMIDIOUT, dwMsg : UInt32) : UInt32
+    C.midiOutShortMsg(hmo, dwMsg)
+  end
+
+  def midiOutLongMsg(hmo : Win32cr::Media::Audio::HMIDIOUT, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+    C.midiOutLongMsg(hmo, pmh, cbmh)
+  end
+
+  def midiOutReset(hmo : Win32cr::Media::Audio::HMIDIOUT) : UInt32
+    C.midiOutReset(hmo)
+  end
+
+  def midiOutCachePatches(hmo : Win32cr::Media::Audio::HMIDIOUT, uBank : UInt32, pwpa : UInt16*, fuCache : UInt32) : UInt32
+    C.midiOutCachePatches(hmo, uBank, pwpa, fuCache)
+  end
+
+  def midiOutCacheDrumPatches(hmo : Win32cr::Media::Audio::HMIDIOUT, uPatch : UInt32, pwkya : UInt16*, fuCache : UInt32) : UInt32
+    C.midiOutCacheDrumPatches(hmo, uPatch, pwkya, fuCache)
+  end
+
+  def midiOutGetID(hmo : Win32cr::Media::Audio::HMIDIOUT, puDeviceID : UInt32*) : UInt32
+    C.midiOutGetID(hmo, puDeviceID)
+  end
+
+  def midiOutMessage(hmo : Win32cr::Media::Audio::HMIDIOUT, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
+    C.midiOutMessage(hmo, uMsg, dw1, dw2)
+  end
+
+  def midiInGetNumDevs : UInt32
+    C.midiInGetNumDevs
+  end
+
+  def midiInGetDevCapsA(uDeviceID : LibC::UIntPtrT, pmic : Win32cr::Media::Audio::MIDIINCAPSA*, cbmic : UInt32) : UInt32
+    C.midiInGetDevCapsA(uDeviceID, pmic, cbmic)
+  end
+
+  def midiInGetDevCapsW(uDeviceID : LibC::UIntPtrT, pmic : Win32cr::Media::Audio::MIDIINCAPSW*, cbmic : UInt32) : UInt32
+    C.midiInGetDevCapsW(uDeviceID, pmic, cbmic)
+  end
+
+  def midiInGetErrorTextA(mmrError : UInt32, pszText : UInt8*, cchText : UInt32) : UInt32
+    C.midiInGetErrorTextA(mmrError, pszText, cchText)
+  end
+
+  def midiInGetErrorTextW(mmrError : UInt32, pszText : UInt16*, cchText : UInt32) : UInt32
+    C.midiInGetErrorTextW(mmrError, pszText, cchText)
+  end
+
+  def midiInOpen(phmi : Win32cr::Media::Audio::HMIDIIN*, uDeviceID : UInt32, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : Win32cr::Media::Audio::MIDI_WAVE_OPEN_TYPE) : UInt32
+    C.midiInOpen(phmi, uDeviceID, dwCallback, dwInstance, fdwOpen)
+  end
+
+  def midiInClose(hmi : Win32cr::Media::Audio::HMIDIIN) : UInt32
+    C.midiInClose(hmi)
+  end
+
+  def midiInPrepareHeader(hmi : Win32cr::Media::Audio::HMIDIIN, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+    C.midiInPrepareHeader(hmi, pmh, cbmh)
+  end
+
+  def midiInUnprepareHeader(hmi : Win32cr::Media::Audio::HMIDIIN, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+    C.midiInUnprepareHeader(hmi, pmh, cbmh)
+  end
+
+  def midiInAddBuffer(hmi : Win32cr::Media::Audio::HMIDIIN, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+    C.midiInAddBuffer(hmi, pmh, cbmh)
+  end
+
+  def midiInStart(hmi : Win32cr::Media::Audio::HMIDIIN) : UInt32
+    C.midiInStart(hmi)
+  end
+
+  def midiInStop(hmi : Win32cr::Media::Audio::HMIDIIN) : UInt32
+    C.midiInStop(hmi)
+  end
+
+  def midiInReset(hmi : Win32cr::Media::Audio::HMIDIIN) : UInt32
+    C.midiInReset(hmi)
+  end
+
+  def midiInGetID(hmi : Win32cr::Media::Audio::HMIDIIN, puDeviceID : UInt32*) : UInt32
+    C.midiInGetID(hmi, puDeviceID)
+  end
+
+  def midiInMessage(hmi : Win32cr::Media::Audio::HMIDIIN, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
+    C.midiInMessage(hmi, uMsg, dw1, dw2)
+  end
+
+  def auxGetNumDevs : UInt32
+    C.auxGetNumDevs
+  end
+
+  def auxGetDevCapsA(uDeviceID : LibC::UIntPtrT, pac : Win32cr::Media::Audio::AUXCAPSA*, cbac : UInt32) : UInt32
+    C.auxGetDevCapsA(uDeviceID, pac, cbac)
+  end
+
+  def auxGetDevCapsW(uDeviceID : LibC::UIntPtrT, pac : Win32cr::Media::Audio::AUXCAPSW*, cbac : UInt32) : UInt32
+    C.auxGetDevCapsW(uDeviceID, pac, cbac)
+  end
+
+  def auxSetVolume(uDeviceID : UInt32, dwVolume : UInt32) : UInt32
+    C.auxSetVolume(uDeviceID, dwVolume)
+  end
+
+  def auxGetVolume(uDeviceID : UInt32, pdwVolume : UInt32*) : UInt32
+    C.auxGetVolume(uDeviceID, pdwVolume)
+  end
+
+  def auxOutMessage(uDeviceID : UInt32, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
+    C.auxOutMessage(uDeviceID, uMsg, dw1, dw2)
+  end
+
+  def mixerGetNumDevs : UInt32
+    C.mixerGetNumDevs
+  end
+
+  def mixerGetDevCapsA(uMxId : LibC::UIntPtrT, pmxcaps : Win32cr::Media::Audio::MIXERCAPSA*, cbmxcaps : UInt32) : UInt32
+    C.mixerGetDevCapsA(uMxId, pmxcaps, cbmxcaps)
+  end
+
+  def mixerGetDevCapsW(uMxId : LibC::UIntPtrT, pmxcaps : Win32cr::Media::Audio::MIXERCAPSW*, cbmxcaps : UInt32) : UInt32
+    C.mixerGetDevCapsW(uMxId, pmxcaps, cbmxcaps)
+  end
+
+  def mixerOpen(phmx : LibC::IntPtrT*, uMxId : UInt32, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : UInt32) : UInt32
+    C.mixerOpen(phmx, uMxId, dwCallback, dwInstance, fdwOpen)
+  end
+
+  def mixerClose(hmx : Win32cr::Media::Audio::HMIXER) : UInt32
+    C.mixerClose(hmx)
+  end
+
+  def mixerMessage(hmx : Win32cr::Media::Audio::HMIXER, uMsg : UInt32, dwParam1 : LibC::UIntPtrT, dwParam2 : LibC::UIntPtrT) : UInt32
+    C.mixerMessage(hmx, uMsg, dwParam1, dwParam2)
+  end
+
+  def mixerGetLineInfoA(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxl : Win32cr::Media::Audio::MIXERLINEA*, fdwInfo : UInt32) : UInt32
+    C.mixerGetLineInfoA(hmxobj, pmxl, fdwInfo)
+  end
+
+  def mixerGetLineInfoW(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxl : Win32cr::Media::Audio::MIXERLINEW*, fdwInfo : UInt32) : UInt32
+    C.mixerGetLineInfoW(hmxobj, pmxl, fdwInfo)
+  end
+
+  def mixerGetID(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, puMxId : UInt32*, fdwId : UInt32) : UInt32
+    C.mixerGetID(hmxobj, puMxId, fdwId)
+  end
+
+  def mixerGetLineControlsA(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxlc : Win32cr::Media::Audio::MIXERLINECONTROLSA*, fdwControls : UInt32) : UInt32
+    C.mixerGetLineControlsA(hmxobj, pmxlc, fdwControls)
+  end
+
+  def mixerGetLineControlsW(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxlc : Win32cr::Media::Audio::MIXERLINECONTROLSW*, fdwControls : UInt32) : UInt32
+    C.mixerGetLineControlsW(hmxobj, pmxlc, fdwControls)
+  end
+
+  def mixerGetControlDetailsA(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxcd : Win32cr::Media::Audio::MIXERCONTROLDETAILS*, fdwDetails : UInt32) : UInt32
+    C.mixerGetControlDetailsA(hmxobj, pmxcd, fdwDetails)
+  end
+
+  def mixerGetControlDetailsW(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxcd : Win32cr::Media::Audio::MIXERCONTROLDETAILS*, fdwDetails : UInt32) : UInt32
+    C.mixerGetControlDetailsW(hmxobj, pmxcd, fdwDetails)
+  end
+
+  def mixerSetControlDetails(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxcd : Win32cr::Media::Audio::MIXERCONTROLDETAILS*, fdwDetails : UInt32) : UInt32
+    C.mixerSetControlDetails(hmxobj, pmxcd, fdwDetails)
+  end
+
+  def activateAudioInterfaceAsync(deviceInterfacePath : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, activationParams : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, completionHandler : Void*, activationOperation : Void**) : Win32cr::Foundation::HRESULT
+    C.ActivateAudioInterfaceAsync(deviceInterfacePath, riid, activationParams, completionHandler, activationOperation)
+  end
+
+  def createRenderAudioStateMonitor(audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateRenderAudioStateMonitor(audioStateMonitor)
+  end
+
+  def createRenderAudioStateMonitorForCategory(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateRenderAudioStateMonitorForCategory(category, audioStateMonitor)
+  end
+
+  def createRenderAudioStateMonitorForCategoryAndDeviceRole(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, role : Win32cr::Media::Audio::ERole, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateRenderAudioStateMonitorForCategoryAndDeviceRole(category, role, audioStateMonitor)
+  end
+
+  def createRenderAudioStateMonitorForCategoryAndDeviceId(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, deviceId : Win32cr::Foundation::PWSTR, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateRenderAudioStateMonitorForCategoryAndDeviceId(category, deviceId, audioStateMonitor)
+  end
+
+  def createCaptureAudioStateMonitor(audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateCaptureAudioStateMonitor(audioStateMonitor)
+  end
+
+  def createCaptureAudioStateMonitorForCategory(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateCaptureAudioStateMonitorForCategory(category, audioStateMonitor)
+  end
+
+  def createCaptureAudioStateMonitorForCategoryAndDeviceRole(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, role : Win32cr::Media::Audio::ERole, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateCaptureAudioStateMonitorForCategoryAndDeviceRole(category, role, audioStateMonitor)
+  end
+
+  def createCaptureAudioStateMonitorForCategoryAndDeviceId(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, deviceId : Win32cr::Foundation::PWSTR, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateCaptureAudioStateMonitorForCategoryAndDeviceId(category, deviceId, audioStateMonitor)
+  end
+
+  def acmGetVersion : UInt32
+    C.acmGetVersion
+  end
+
+  def acmMetrics(hao : Win32cr::Media::Audio::HACMOBJ, uMetric : UInt32, pMetric : Void*) : UInt32
+    C.acmMetrics(hao, uMetric, pMetric)
+  end
+
+  def acmDriverEnum(fnCallback : Win32cr::Media::Audio::ACMDRIVERENUMCB, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+    C.acmDriverEnum(fnCallback, dwInstance, fdwEnum)
+  end
+
+  def acmDriverID(hao : Win32cr::Media::Audio::HACMOBJ, phadid : LibC::IntPtrT*, fdwDriverID : UInt32) : UInt32
+    C.acmDriverID(hao, phadid, fdwDriverID)
+  end
+
+  def acmDriverAddA(phadid : LibC::IntPtrT*, hinstModule : Win32cr::Foundation::HINSTANCE, lParam : Win32cr::Foundation::LPARAM, dwPriority : UInt32, fdwAdd : UInt32) : UInt32
+    C.acmDriverAddA(phadid, hinstModule, lParam, dwPriority, fdwAdd)
+  end
+
+  def acmDriverAddW(phadid : LibC::IntPtrT*, hinstModule : Win32cr::Foundation::HINSTANCE, lParam : Win32cr::Foundation::LPARAM, dwPriority : UInt32, fdwAdd : UInt32) : UInt32
+    C.acmDriverAddW(phadid, hinstModule, lParam, dwPriority, fdwAdd)
+  end
+
+  def acmDriverRemove(hadid : Win32cr::Media::Audio::HACMDRIVERID, fdwRemove : UInt32) : UInt32
+    C.acmDriverRemove(hadid, fdwRemove)
+  end
+
+  def acmDriverOpen(phad : LibC::IntPtrT*, hadid : Win32cr::Media::Audio::HACMDRIVERID, fdwOpen : UInt32) : UInt32
+    C.acmDriverOpen(phad, hadid, fdwOpen)
+  end
+
+  def acmDriverClose(had : Win32cr::Media::Audio::HACMDRIVER, fdwClose : UInt32) : UInt32
+    C.acmDriverClose(had, fdwClose)
+  end
+
+  def acmDriverMessage(had : Win32cr::Media::Audio::HACMDRIVER, uMsg : UInt32, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.acmDriverMessage(had, uMsg, lParam1, lParam2)
+  end
+
+  def acmDriverPriority(hadid : Win32cr::Media::Audio::HACMDRIVERID, dwPriority : UInt32, fdwPriority : UInt32) : UInt32
+    C.acmDriverPriority(hadid, dwPriority, fdwPriority)
+  end
+
+  def acmDriverDetailsA(hadid : Win32cr::Media::Audio::HACMDRIVERID, padd : Win32cr::Media::Audio::ACMDRIVERDETAILSA*, fdwDetails : UInt32) : UInt32
+    C.acmDriverDetailsA(hadid, padd, fdwDetails)
+  end
+
+  def acmDriverDetailsW(hadid : Win32cr::Media::Audio::HACMDRIVERID, padd : Win32cr::Media::Audio::ACMDRIVERDETAILSW*, fdwDetails : UInt32) : UInt32
+    C.acmDriverDetailsW(hadid, padd, fdwDetails)
+  end
+
+  def acmFormatTagDetailsA(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFORMATTAGDETAILSA*, fdwDetails : UInt32) : UInt32
+    C.acmFormatTagDetailsA(had, paftd, fdwDetails)
+  end
+
+  def acmFormatTagDetailsW(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFORMATTAGDETAILSW*, fdwDetails : UInt32) : UInt32
+    C.acmFormatTagDetailsW(had, paftd, fdwDetails)
+  end
+
+  def acmFormatTagEnumA(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFORMATTAGDETAILSA*, fnCallback : Win32cr::Media::Audio::ACMFORMATTAGENUMCBA, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+    C.acmFormatTagEnumA(had, paftd, fnCallback, dwInstance, fdwEnum)
+  end
+
+  def acmFormatTagEnumW(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFORMATTAGDETAILSW*, fnCallback : Win32cr::Media::Audio::ACMFORMATTAGENUMCBW, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+    C.acmFormatTagEnumW(had, paftd, fnCallback, dwInstance, fdwEnum)
+  end
+
+  def acmFormatDetailsA(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFORMATDETAILSA*, fdwDetails : UInt32) : UInt32
+    C.acmFormatDetailsA(had, pafd, fdwDetails)
+  end
+
+  def acmFormatDetailsW(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::Tacmformatdetailsw*, fdwDetails : UInt32) : UInt32
+    C.acmFormatDetailsW(had, pafd, fdwDetails)
+  end
+
+  def acmFormatEnumA(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFORMATDETAILSA*, fnCallback : Win32cr::Media::Audio::ACMFORMATENUMCBA, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+    C.acmFormatEnumA(had, pafd, fnCallback, dwInstance, fdwEnum)
+  end
+
+  def acmFormatEnumW(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::Tacmformatdetailsw*, fnCallback : Win32cr::Media::Audio::ACMFORMATENUMCBW, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+    C.acmFormatEnumW(had, pafd, fnCallback, dwInstance, fdwEnum)
+  end
+
+  def acmFormatSuggest(had : Win32cr::Media::Audio::HACMDRIVER, pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*, pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*, cbwfxDst : UInt32, fdwSuggest : UInt32) : UInt32
+    C.acmFormatSuggest(had, pwfxSrc, pwfxDst, cbwfxDst, fdwSuggest)
+  end
+
+  def acmFormatChooseA(pafmtc : Win32cr::Media::Audio::ACMFORMATCHOOSEA*) : UInt32
+    C.acmFormatChooseA(pafmtc)
+  end
+
+  def acmFormatChooseW(pafmtc : Win32cr::Media::Audio::ACMFORMATCHOOSEW*) : UInt32
+    C.acmFormatChooseW(pafmtc)
+  end
+
+  def acmFilterTagDetailsA(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFILTERTAGDETAILSA*, fdwDetails : UInt32) : UInt32
+    C.acmFilterTagDetailsA(had, paftd, fdwDetails)
+  end
+
+  def acmFilterTagDetailsW(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFILTERTAGDETAILSW*, fdwDetails : UInt32) : UInt32
+    C.acmFilterTagDetailsW(had, paftd, fdwDetails)
+  end
+
+  def acmFilterTagEnumA(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFILTERTAGDETAILSA*, fnCallback : Win32cr::Media::Audio::ACMFILTERTAGENUMCBA, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+    C.acmFilterTagEnumA(had, paftd, fnCallback, dwInstance, fdwEnum)
+  end
+
+  def acmFilterTagEnumW(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFILTERTAGDETAILSW*, fnCallback : Win32cr::Media::Audio::ACMFILTERTAGENUMCBW, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+    C.acmFilterTagEnumW(had, paftd, fnCallback, dwInstance, fdwEnum)
+  end
+
+  def acmFilterDetailsA(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFILTERDETAILSA*, fdwDetails : UInt32) : UInt32
+    C.acmFilterDetailsA(had, pafd, fdwDetails)
+  end
+
+  def acmFilterDetailsW(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFILTERDETAILSW*, fdwDetails : UInt32) : UInt32
+    C.acmFilterDetailsW(had, pafd, fdwDetails)
+  end
+
+  def acmFilterEnumA(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFILTERDETAILSA*, fnCallback : Win32cr::Media::Audio::ACMFILTERENUMCBA, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+    C.acmFilterEnumA(had, pafd, fnCallback, dwInstance, fdwEnum)
+  end
+
+  def acmFilterEnumW(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFILTERDETAILSW*, fnCallback : Win32cr::Media::Audio::ACMFILTERENUMCBW, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+    C.acmFilterEnumW(had, pafd, fnCallback, dwInstance, fdwEnum)
+  end
+
+  def acmFilterChooseA(pafltrc : Win32cr::Media::Audio::ACMFILTERCHOOSEA*) : UInt32
+    C.acmFilterChooseA(pafltrc)
+  end
+
+  def acmFilterChooseW(pafltrc : Win32cr::Media::Audio::ACMFILTERCHOOSEW*) : UInt32
+    C.acmFilterChooseW(pafltrc)
+  end
+
+  def acmStreamOpen(phas : LibC::IntPtrT*, had : Win32cr::Media::Audio::HACMDRIVER, pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*, pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*, pwfltr : Win32cr::Media::Audio::WAVEFILTER*, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : UInt32) : UInt32
+    C.acmStreamOpen(phas, had, pwfxSrc, pwfxDst, pwfltr, dwCallback, dwInstance, fdwOpen)
+  end
+
+  def acmStreamClose(has : Win32cr::Media::Audio::HACMSTREAM, fdwClose : UInt32) : UInt32
+    C.acmStreamClose(has, fdwClose)
+  end
+
+  def acmStreamSize(has : Win32cr::Media::Audio::HACMSTREAM, cbInput : UInt32, pdwOutputBytes : UInt32*, fdwSize : UInt32) : UInt32
+    C.acmStreamSize(has, cbInput, pdwOutputBytes, fdwSize)
+  end
+
+  def acmStreamReset(has : Win32cr::Media::Audio::HACMSTREAM, fdwReset : UInt32) : UInt32
+    C.acmStreamReset(has, fdwReset)
+  end
+
+  def acmStreamMessage(has : Win32cr::Media::Audio::HACMSTREAM, uMsg : UInt32, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : UInt32
+    C.acmStreamMessage(has, uMsg, lParam1, lParam2)
+  end
+
+  def acmStreamConvert(has : Win32cr::Media::Audio::HACMSTREAM, pash : Win32cr::Media::Audio::ACMSTREAMHEADER*, fdwConvert : UInt32) : UInt32
+    C.acmStreamConvert(has, pash, fdwConvert)
+  end
+
+  def acmStreamPrepareHeader(has : Win32cr::Media::Audio::HACMSTREAM, pash : Win32cr::Media::Audio::ACMSTREAMHEADER*, fdwPrepare : UInt32) : UInt32
+    C.acmStreamPrepareHeader(has, pash, fdwPrepare)
+  end
+
+  def acmStreamUnprepareHeader(has : Win32cr::Media::Audio::HACMSTREAM, pash : Win32cr::Media::Audio::ACMSTREAMHEADER*, fdwUnprepare : UInt32) : UInt32
+    C.acmStreamUnprepareHeader(has, pash, fdwUnprepare)
+  end
+
   @[Link("ole32")]
   @[Link("winmm")]
   @[Link("mmdevapi")]
   @[Link("windows.media.mediacontrol")]
   @[Link("msacm32")]
   lib C
+    # :nodoc:
     fun CoRegisterMessageFilter(lpMessageFilter : Void*, lplpMessageFilter : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun sndPlaySoundA(pszSound : Win32cr::Foundation::PSTR, fuSound : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun sndPlaySoundW(pszSound : Win32cr::Foundation::PWSTR, fuSound : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PlaySoundA(pszSound : Win32cr::Foundation::PSTR, hmod : Win32cr::Foundation::HINSTANCE, fdwSound : Win32cr::Media::Audio::SND_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PlaySoundW(pszSound : Win32cr::Foundation::PWSTR, hmod : Win32cr::Foundation::HINSTANCE, fdwSound : Win32cr::Media::Audio::SND_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun waveOutGetNumDevs : UInt32
 
+    # :nodoc:
     fun waveOutGetDevCapsA(uDeviceID : LibC::UIntPtrT, pwoc : Win32cr::Media::Audio::WAVEOUTCAPSA*, cbwoc : UInt32) : UInt32
 
+    # :nodoc:
     fun waveOutGetDevCapsW(uDeviceID : LibC::UIntPtrT, pwoc : Win32cr::Media::Audio::WAVEOUTCAPSW*, cbwoc : UInt32) : UInt32
 
+    # :nodoc:
     fun waveOutGetVolume(hwo : Win32cr::Media::Audio::HWAVEOUT, pdwVolume : UInt32*) : UInt32
 
+    # :nodoc:
     fun waveOutSetVolume(hwo : Win32cr::Media::Audio::HWAVEOUT, dwVolume : UInt32) : UInt32
 
+    # :nodoc:
     fun waveOutGetErrorTextA(mmrError : UInt32, pszText : UInt8*, cchText : UInt32) : UInt32
 
+    # :nodoc:
     fun waveOutGetErrorTextW(mmrError : UInt32, pszText : UInt16*, cchText : UInt32) : UInt32
 
+    # :nodoc:
     fun waveOutOpen(phwo : Win32cr::Media::Audio::HWAVEOUT*, uDeviceID : UInt32, pwfx : Win32cr::Media::Audio::WAVEFORMATEX*, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : Win32cr::Media::Audio::MIDI_WAVE_OPEN_TYPE) : UInt32
 
+    # :nodoc:
     fun waveOutClose(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
 
+    # :nodoc:
     fun waveOutPrepareHeader(hwo : Win32cr::Media::Audio::HWAVEOUT, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
 
+    # :nodoc:
     fun waveOutUnprepareHeader(hwo : Win32cr::Media::Audio::HWAVEOUT, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
 
+    # :nodoc:
     fun waveOutWrite(hwo : Win32cr::Media::Audio::HWAVEOUT, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
 
+    # :nodoc:
     fun waveOutPause(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
 
+    # :nodoc:
     fun waveOutRestart(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
 
+    # :nodoc:
     fun waveOutReset(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
 
+    # :nodoc:
     fun waveOutBreakLoop(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
 
+    # :nodoc:
     fun waveOutGetPosition(hwo : Win32cr::Media::Audio::HWAVEOUT, pmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
 
+    # :nodoc:
     fun waveOutGetPitch(hwo : Win32cr::Media::Audio::HWAVEOUT, pdwPitch : UInt32*) : UInt32
 
+    # :nodoc:
     fun waveOutSetPitch(hwo : Win32cr::Media::Audio::HWAVEOUT, dwPitch : UInt32) : UInt32
 
+    # :nodoc:
     fun waveOutGetPlaybackRate(hwo : Win32cr::Media::Audio::HWAVEOUT, pdwRate : UInt32*) : UInt32
 
+    # :nodoc:
     fun waveOutSetPlaybackRate(hwo : Win32cr::Media::Audio::HWAVEOUT, dwRate : UInt32) : UInt32
 
+    # :nodoc:
     fun waveOutGetID(hwo : Win32cr::Media::Audio::HWAVEOUT, puDeviceID : UInt32*) : UInt32
 
+    # :nodoc:
     fun waveOutMessage(hwo : Win32cr::Media::Audio::HWAVEOUT, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun waveInGetNumDevs : UInt32
 
+    # :nodoc:
     fun waveInGetDevCapsA(uDeviceID : LibC::UIntPtrT, pwic : Win32cr::Media::Audio::WAVEINCAPSA*, cbwic : UInt32) : UInt32
 
+    # :nodoc:
     fun waveInGetDevCapsW(uDeviceID : LibC::UIntPtrT, pwic : Win32cr::Media::Audio::WAVEINCAPSW*, cbwic : UInt32) : UInt32
 
+    # :nodoc:
     fun waveInGetErrorTextA(mmrError : UInt32, pszText : UInt8*, cchText : UInt32) : UInt32
 
+    # :nodoc:
     fun waveInGetErrorTextW(mmrError : UInt32, pszText : UInt16*, cchText : UInt32) : UInt32
 
+    # :nodoc:
     fun waveInOpen(phwi : Win32cr::Media::Audio::HWAVEIN*, uDeviceID : UInt32, pwfx : Win32cr::Media::Audio::WAVEFORMATEX*, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : Win32cr::Media::Audio::MIDI_WAVE_OPEN_TYPE) : UInt32
 
+    # :nodoc:
     fun waveInClose(hwi : Win32cr::Media::Audio::HWAVEIN) : UInt32
 
+    # :nodoc:
     fun waveInPrepareHeader(hwi : Win32cr::Media::Audio::HWAVEIN, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
 
+    # :nodoc:
     fun waveInUnprepareHeader(hwi : Win32cr::Media::Audio::HWAVEIN, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
 
+    # :nodoc:
     fun waveInAddBuffer(hwi : Win32cr::Media::Audio::HWAVEIN, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
 
+    # :nodoc:
     fun waveInStart(hwi : Win32cr::Media::Audio::HWAVEIN) : UInt32
 
+    # :nodoc:
     fun waveInStop(hwi : Win32cr::Media::Audio::HWAVEIN) : UInt32
 
+    # :nodoc:
     fun waveInReset(hwi : Win32cr::Media::Audio::HWAVEIN) : UInt32
 
+    # :nodoc:
     fun waveInGetPosition(hwi : Win32cr::Media::Audio::HWAVEIN, pmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
 
+    # :nodoc:
     fun waveInGetID(hwi : Win32cr::Media::Audio::HWAVEIN, puDeviceID : UInt32*) : UInt32
 
+    # :nodoc:
     fun waveInMessage(hwi : Win32cr::Media::Audio::HWAVEIN, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun midiOutGetNumDevs : UInt32
 
+    # :nodoc:
     fun midiStreamOpen(phms : Win32cr::Media::Audio::HMIDISTRM*, puDeviceID : UInt32*, cMidi : UInt32, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : UInt32) : UInt32
 
+    # :nodoc:
     fun midiStreamClose(hms : Win32cr::Media::Audio::HMIDISTRM) : UInt32
 
+    # :nodoc:
     fun midiStreamProperty(hms : Win32cr::Media::Audio::HMIDISTRM, lppropdata : UInt8*, dwProperty : UInt32) : UInt32
 
+    # :nodoc:
     fun midiStreamPosition(hms : Win32cr::Media::Audio::HMIDISTRM, lpmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
 
+    # :nodoc:
     fun midiStreamOut(hms : Win32cr::Media::Audio::HMIDISTRM, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
 
+    # :nodoc:
     fun midiStreamPause(hms : Win32cr::Media::Audio::HMIDISTRM) : UInt32
 
+    # :nodoc:
     fun midiStreamRestart(hms : Win32cr::Media::Audio::HMIDISTRM) : UInt32
 
+    # :nodoc:
     fun midiStreamStop(hms : Win32cr::Media::Audio::HMIDISTRM) : UInt32
 
+    # :nodoc:
     fun midiConnect(hmi : Win32cr::Media::Audio::HMIDI, hmo : Win32cr::Media::Audio::HMIDIOUT, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun midiDisconnect(hmi : Win32cr::Media::Audio::HMIDI, hmo : Win32cr::Media::Audio::HMIDIOUT, pReserved : Void*) : UInt32
 
+    # :nodoc:
     fun midiOutGetDevCapsA(uDeviceID : LibC::UIntPtrT, pmoc : Win32cr::Media::Audio::MIDIOUTCAPSA*, cbmoc : UInt32) : UInt32
 
+    # :nodoc:
     fun midiOutGetDevCapsW(uDeviceID : LibC::UIntPtrT, pmoc : Win32cr::Media::Audio::MIDIOUTCAPSW*, cbmoc : UInt32) : UInt32
 
+    # :nodoc:
     fun midiOutGetVolume(hmo : Win32cr::Media::Audio::HMIDIOUT, pdwVolume : UInt32*) : UInt32
 
+    # :nodoc:
     fun midiOutSetVolume(hmo : Win32cr::Media::Audio::HMIDIOUT, dwVolume : UInt32) : UInt32
 
+    # :nodoc:
     fun midiOutGetErrorTextA(mmrError : UInt32, pszText : UInt8*, cchText : UInt32) : UInt32
 
+    # :nodoc:
     fun midiOutGetErrorTextW(mmrError : UInt32, pszText : UInt16*, cchText : UInt32) : UInt32
 
+    # :nodoc:
     fun midiOutOpen(phmo : Win32cr::Media::Audio::HMIDIOUT*, uDeviceID : UInt32, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : Win32cr::Media::Audio::MIDI_WAVE_OPEN_TYPE) : UInt32
 
+    # :nodoc:
     fun midiOutClose(hmo : Win32cr::Media::Audio::HMIDIOUT) : UInt32
 
+    # :nodoc:
     fun midiOutPrepareHeader(hmo : Win32cr::Media::Audio::HMIDIOUT, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
 
+    # :nodoc:
     fun midiOutUnprepareHeader(hmo : Win32cr::Media::Audio::HMIDIOUT, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
 
+    # :nodoc:
     fun midiOutShortMsg(hmo : Win32cr::Media::Audio::HMIDIOUT, dwMsg : UInt32) : UInt32
 
+    # :nodoc:
     fun midiOutLongMsg(hmo : Win32cr::Media::Audio::HMIDIOUT, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
 
+    # :nodoc:
     fun midiOutReset(hmo : Win32cr::Media::Audio::HMIDIOUT) : UInt32
 
+    # :nodoc:
     fun midiOutCachePatches(hmo : Win32cr::Media::Audio::HMIDIOUT, uBank : UInt32, pwpa : UInt16*, fuCache : UInt32) : UInt32
 
+    # :nodoc:
     fun midiOutCacheDrumPatches(hmo : Win32cr::Media::Audio::HMIDIOUT, uPatch : UInt32, pwkya : UInt16*, fuCache : UInt32) : UInt32
 
+    # :nodoc:
     fun midiOutGetID(hmo : Win32cr::Media::Audio::HMIDIOUT, puDeviceID : UInt32*) : UInt32
 
+    # :nodoc:
     fun midiOutMessage(hmo : Win32cr::Media::Audio::HMIDIOUT, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun midiInGetNumDevs : UInt32
 
+    # :nodoc:
     fun midiInGetDevCapsA(uDeviceID : LibC::UIntPtrT, pmic : Win32cr::Media::Audio::MIDIINCAPSA*, cbmic : UInt32) : UInt32
 
+    # :nodoc:
     fun midiInGetDevCapsW(uDeviceID : LibC::UIntPtrT, pmic : Win32cr::Media::Audio::MIDIINCAPSW*, cbmic : UInt32) : UInt32
 
+    # :nodoc:
     fun midiInGetErrorTextA(mmrError : UInt32, pszText : UInt8*, cchText : UInt32) : UInt32
 
+    # :nodoc:
     fun midiInGetErrorTextW(mmrError : UInt32, pszText : UInt16*, cchText : UInt32) : UInt32
 
+    # :nodoc:
     fun midiInOpen(phmi : Win32cr::Media::Audio::HMIDIIN*, uDeviceID : UInt32, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : Win32cr::Media::Audio::MIDI_WAVE_OPEN_TYPE) : UInt32
 
+    # :nodoc:
     fun midiInClose(hmi : Win32cr::Media::Audio::HMIDIIN) : UInt32
 
+    # :nodoc:
     fun midiInPrepareHeader(hmi : Win32cr::Media::Audio::HMIDIIN, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
 
+    # :nodoc:
     fun midiInUnprepareHeader(hmi : Win32cr::Media::Audio::HMIDIIN, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
 
+    # :nodoc:
     fun midiInAddBuffer(hmi : Win32cr::Media::Audio::HMIDIIN, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
 
+    # :nodoc:
     fun midiInStart(hmi : Win32cr::Media::Audio::HMIDIIN) : UInt32
 
+    # :nodoc:
     fun midiInStop(hmi : Win32cr::Media::Audio::HMIDIIN) : UInt32
 
+    # :nodoc:
     fun midiInReset(hmi : Win32cr::Media::Audio::HMIDIIN) : UInt32
 
+    # :nodoc:
     fun midiInGetID(hmi : Win32cr::Media::Audio::HMIDIIN, puDeviceID : UInt32*) : UInt32
 
+    # :nodoc:
     fun midiInMessage(hmi : Win32cr::Media::Audio::HMIDIIN, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun auxGetNumDevs : UInt32
 
+    # :nodoc:
     fun auxGetDevCapsA(uDeviceID : LibC::UIntPtrT, pac : Win32cr::Media::Audio::AUXCAPSA*, cbac : UInt32) : UInt32
 
+    # :nodoc:
     fun auxGetDevCapsW(uDeviceID : LibC::UIntPtrT, pac : Win32cr::Media::Audio::AUXCAPSW*, cbac : UInt32) : UInt32
 
+    # :nodoc:
     fun auxSetVolume(uDeviceID : UInt32, dwVolume : UInt32) : UInt32
 
+    # :nodoc:
     fun auxGetVolume(uDeviceID : UInt32, pdwVolume : UInt32*) : UInt32
 
+    # :nodoc:
     fun auxOutMessage(uDeviceID : UInt32, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun mixerGetNumDevs : UInt32
 
+    # :nodoc:
     fun mixerGetDevCapsA(uMxId : LibC::UIntPtrT, pmxcaps : Win32cr::Media::Audio::MIXERCAPSA*, cbmxcaps : UInt32) : UInt32
 
+    # :nodoc:
     fun mixerGetDevCapsW(uMxId : LibC::UIntPtrT, pmxcaps : Win32cr::Media::Audio::MIXERCAPSW*, cbmxcaps : UInt32) : UInt32
 
+    # :nodoc:
     fun mixerOpen(phmx : LibC::IntPtrT*, uMxId : UInt32, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : UInt32) : UInt32
 
+    # :nodoc:
     fun mixerClose(hmx : Win32cr::Media::Audio::HMIXER) : UInt32
 
+    # :nodoc:
     fun mixerMessage(hmx : Win32cr::Media::Audio::HMIXER, uMsg : UInt32, dwParam1 : LibC::UIntPtrT, dwParam2 : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun mixerGetLineInfoA(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxl : Win32cr::Media::Audio::MIXERLINEA*, fdwInfo : UInt32) : UInt32
 
+    # :nodoc:
     fun mixerGetLineInfoW(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxl : Win32cr::Media::Audio::MIXERLINEW*, fdwInfo : UInt32) : UInt32
 
+    # :nodoc:
     fun mixerGetID(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, puMxId : UInt32*, fdwId : UInt32) : UInt32
 
+    # :nodoc:
     fun mixerGetLineControlsA(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxlc : Win32cr::Media::Audio::MIXERLINECONTROLSA*, fdwControls : UInt32) : UInt32
 
+    # :nodoc:
     fun mixerGetLineControlsW(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxlc : Win32cr::Media::Audio::MIXERLINECONTROLSW*, fdwControls : UInt32) : UInt32
 
+    # :nodoc:
     fun mixerGetControlDetailsA(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxcd : Win32cr::Media::Audio::MIXERCONTROLDETAILS*, fdwDetails : UInt32) : UInt32
 
+    # :nodoc:
     fun mixerGetControlDetailsW(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxcd : Win32cr::Media::Audio::MIXERCONTROLDETAILS*, fdwDetails : UInt32) : UInt32
 
+    # :nodoc:
     fun mixerSetControlDetails(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxcd : Win32cr::Media::Audio::MIXERCONTROLDETAILS*, fdwDetails : UInt32) : UInt32
 
+    # :nodoc:
     fun ActivateAudioInterfaceAsync(deviceInterfacePath : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, activationParams : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, completionHandler : Void*, activationOperation : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateRenderAudioStateMonitor(audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateRenderAudioStateMonitorForCategory(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateRenderAudioStateMonitorForCategoryAndDeviceRole(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, role : Win32cr::Media::Audio::ERole, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateRenderAudioStateMonitorForCategoryAndDeviceId(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, deviceId : Win32cr::Foundation::PWSTR, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateCaptureAudioStateMonitor(audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateCaptureAudioStateMonitorForCategory(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateCaptureAudioStateMonitorForCategoryAndDeviceRole(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, role : Win32cr::Media::Audio::ERole, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateCaptureAudioStateMonitorForCategoryAndDeviceId(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, deviceId : Win32cr::Foundation::PWSTR, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun acmGetVersion : UInt32
 
+    # :nodoc:
     fun acmMetrics(hao : Win32cr::Media::Audio::HACMOBJ, uMetric : UInt32, pMetric : Void*) : UInt32
 
+    # :nodoc:
     fun acmDriverEnum(fnCallback : Win32cr::Media::Audio::ACMDRIVERENUMCB, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
 
+    # :nodoc:
     fun acmDriverID(hao : Win32cr::Media::Audio::HACMOBJ, phadid : LibC::IntPtrT*, fdwDriverID : UInt32) : UInt32
 
+    # :nodoc:
     fun acmDriverAddA(phadid : LibC::IntPtrT*, hinstModule : Win32cr::Foundation::HINSTANCE, lParam : Win32cr::Foundation::LPARAM, dwPriority : UInt32, fdwAdd : UInt32) : UInt32
 
+    # :nodoc:
     fun acmDriverAddW(phadid : LibC::IntPtrT*, hinstModule : Win32cr::Foundation::HINSTANCE, lParam : Win32cr::Foundation::LPARAM, dwPriority : UInt32, fdwAdd : UInt32) : UInt32
 
+    # :nodoc:
     fun acmDriverRemove(hadid : Win32cr::Media::Audio::HACMDRIVERID, fdwRemove : UInt32) : UInt32
 
+    # :nodoc:
     fun acmDriverOpen(phad : LibC::IntPtrT*, hadid : Win32cr::Media::Audio::HACMDRIVERID, fdwOpen : UInt32) : UInt32
 
+    # :nodoc:
     fun acmDriverClose(had : Win32cr::Media::Audio::HACMDRIVER, fdwClose : UInt32) : UInt32
 
+    # :nodoc:
     fun acmDriverMessage(had : Win32cr::Media::Audio::HACMDRIVER, uMsg : UInt32, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun acmDriverPriority(hadid : Win32cr::Media::Audio::HACMDRIVERID, dwPriority : UInt32, fdwPriority : UInt32) : UInt32
 
+    # :nodoc:
     fun acmDriverDetailsA(hadid : Win32cr::Media::Audio::HACMDRIVERID, padd : Win32cr::Media::Audio::ACMDRIVERDETAILSA*, fdwDetails : UInt32) : UInt32
 
+    # :nodoc:
     fun acmDriverDetailsW(hadid : Win32cr::Media::Audio::HACMDRIVERID, padd : Win32cr::Media::Audio::ACMDRIVERDETAILSW*, fdwDetails : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFormatTagDetailsA(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFORMATTAGDETAILSA*, fdwDetails : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFormatTagDetailsW(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFORMATTAGDETAILSW*, fdwDetails : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFormatTagEnumA(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFORMATTAGDETAILSA*, fnCallback : Win32cr::Media::Audio::ACMFORMATTAGENUMCBA, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFormatTagEnumW(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFORMATTAGDETAILSW*, fnCallback : Win32cr::Media::Audio::ACMFORMATTAGENUMCBW, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFormatDetailsA(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFORMATDETAILSA*, fdwDetails : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFormatDetailsW(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::Tacmformatdetailsw*, fdwDetails : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFormatEnumA(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFORMATDETAILSA*, fnCallback : Win32cr::Media::Audio::ACMFORMATENUMCBA, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFormatEnumW(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::Tacmformatdetailsw*, fnCallback : Win32cr::Media::Audio::ACMFORMATENUMCBW, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFormatSuggest(had : Win32cr::Media::Audio::HACMDRIVER, pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*, pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*, cbwfxDst : UInt32, fdwSuggest : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFormatChooseA(pafmtc : Win32cr::Media::Audio::ACMFORMATCHOOSEA*) : UInt32
 
+    # :nodoc:
     fun acmFormatChooseW(pafmtc : Win32cr::Media::Audio::ACMFORMATCHOOSEW*) : UInt32
 
+    # :nodoc:
     fun acmFilterTagDetailsA(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFILTERTAGDETAILSA*, fdwDetails : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFilterTagDetailsW(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFILTERTAGDETAILSW*, fdwDetails : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFilterTagEnumA(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFILTERTAGDETAILSA*, fnCallback : Win32cr::Media::Audio::ACMFILTERTAGENUMCBA, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFilterTagEnumW(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFILTERTAGDETAILSW*, fnCallback : Win32cr::Media::Audio::ACMFILTERTAGENUMCBW, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFilterDetailsA(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFILTERDETAILSA*, fdwDetails : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFilterDetailsW(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFILTERDETAILSW*, fdwDetails : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFilterEnumA(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFILTERDETAILSA*, fnCallback : Win32cr::Media::Audio::ACMFILTERENUMCBA, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFilterEnumW(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFILTERDETAILSW*, fnCallback : Win32cr::Media::Audio::ACMFILTERENUMCBW, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
 
+    # :nodoc:
     fun acmFilterChooseA(pafltrc : Win32cr::Media::Audio::ACMFILTERCHOOSEA*) : UInt32
 
+    # :nodoc:
     fun acmFilterChooseW(pafltrc : Win32cr::Media::Audio::ACMFILTERCHOOSEW*) : UInt32
 
+    # :nodoc:
     fun acmStreamOpen(phas : LibC::IntPtrT*, had : Win32cr::Media::Audio::HACMDRIVER, pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*, pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*, pwfltr : Win32cr::Media::Audio::WAVEFILTER*, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : UInt32) : UInt32
 
+    # :nodoc:
     fun acmStreamClose(has : Win32cr::Media::Audio::HACMSTREAM, fdwClose : UInt32) : UInt32
 
+    # :nodoc:
     fun acmStreamSize(has : Win32cr::Media::Audio::HACMSTREAM, cbInput : UInt32, pdwOutputBytes : UInt32*, fdwSize : UInt32) : UInt32
 
+    # :nodoc:
     fun acmStreamReset(has : Win32cr::Media::Audio::HACMSTREAM, fdwReset : UInt32) : UInt32
 
+    # :nodoc:
     fun acmStreamMessage(has : Win32cr::Media::Audio::HACMSTREAM, uMsg : UInt32, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : UInt32
 
+    # :nodoc:
     fun acmStreamConvert(has : Win32cr::Media::Audio::HACMSTREAM, pash : Win32cr::Media::Audio::ACMSTREAMHEADER*, fdwConvert : UInt32) : UInt32
 
+    # :nodoc:
     fun acmStreamPrepareHeader(has : Win32cr::Media::Audio::HACMSTREAM, pash : Win32cr::Media::Audio::ACMSTREAMHEADER*, fdwPrepare : UInt32) : UInt32
 
+    # :nodoc:
     fun acmStreamUnprepareHeader(has : Win32cr::Media::Audio::HACMSTREAM, pash : Win32cr::Media::Audio::ACMSTREAMHEADER*, fdwUnprepare : UInt32) : UInt32
 
   end

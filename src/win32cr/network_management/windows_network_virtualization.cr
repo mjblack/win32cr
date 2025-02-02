@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./../system/io.cr"
 
 module Win32cr::NetworkManagement::WindowsNetworkVirtualization
+  extend self
   WNV_API_MAJOR_VERSION_1 = 1_u32
   WNV_API_MINOR_VERSION_0 = 0_u32
 
@@ -125,10 +126,20 @@ module Win32cr::NetworkManagement::WindowsNetworkVirtualization
     end
   end
 
+  def wnvOpen : Win32cr::Foundation::HANDLE
+    C.WnvOpen
+  end
+
+  def wnvRequestNotification(wnv_handle : Win32cr::Foundation::HANDLE, notification_param : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_NOTIFICATION_PARAM*, overlapped : Win32cr::System::IO::OVERLAPPED*, bytes_transferred : UInt32*) : UInt32
+    C.WnvRequestNotification(wnv_handle, notification_param, overlapped, bytes_transferred)
+  end
+
   @[Link("wnvapi")]
   lib C
+    # :nodoc:
     fun WnvOpen : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun WnvRequestNotification(wnv_handle : Win32cr::Foundation::HANDLE, notification_param : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_NOTIFICATION_PARAM*, overlapped : Win32cr::System::IO::OVERLAPPED*, bytes_transferred : UInt32*) : UInt32
 
   end

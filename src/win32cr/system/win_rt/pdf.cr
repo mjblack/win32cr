@@ -5,6 +5,7 @@ require "./../com.cr"
 require "./../../graphics/direct2_d.cr"
 
 module Win32cr::System::WinRT::Pdf
+  extend self
   alias PFN_PDF_CREATE_RENDERER = Proc(Void*, Void**, Win32cr::Foundation::HRESULT)
 
 
@@ -50,8 +51,13 @@ module Win32cr::System::WinRT::Pdf
 
   end
 
+  def pdfCreateRenderer(pDevice : Void*, ppRenderer : Void**) : Win32cr::Foundation::HRESULT
+    C.PdfCreateRenderer(pDevice, ppRenderer)
+  end
+
   @[Link("windows.data.pdf")]
   lib C
+    # :nodoc:
     fun PdfCreateRenderer(pDevice : Void*, ppRenderer : Void**) : Win32cr::Foundation::HRESULT
 
   end

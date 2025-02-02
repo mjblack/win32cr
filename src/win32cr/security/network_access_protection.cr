@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::Security::NetworkAccessProtection
+  extend self
   Maxsohattributecount = 100_u32
   Maxsohattributesize = 4000_u32
   Minnetworksohsize = 12_u32

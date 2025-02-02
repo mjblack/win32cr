@@ -3,6 +3,7 @@ require "./com.cr"
 require "./../security/cryptography.cr"
 
 module Win32cr::System::Iis
+  extend self
   alias PFN_HSE_IO_COMPLETION = Proc(Win32cr::System::Iis::EXTENSION_CONTROL_BLOCK*, Void*, UInt32, UInt32, Void)
 
   alias PFN_HSE_CACHE_INVALIDATION_CALLBACK = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
@@ -2546,14 +2547,34 @@ module Win32cr::System::Iis
 
   end
 
+  def getExtensionVersion(pVer : Win32cr::System::Iis::HSE_VERSION_INFO*) : Win32cr::Foundation::BOOL
+    C.GetExtensionVersion(pVer)
+  end
+
+  def httpExtensionProc(pECB : Win32cr::System::Iis::EXTENSION_CONTROL_BLOCK*) : UInt32
+    C.HttpExtensionProc(pECB)
+  end
+
+  def httpFilterProc(pfc : Win32cr::System::Iis::HTTP_FILTER_CONTEXT*, notification_type : UInt32, pvNotification : Void*) : UInt32
+    C.HttpFilterProc(pfc, notification_type, pvNotification)
+  end
+
+  def getFilterVersion(pVer : Win32cr::System::Iis::HTTP_FILTER_VERSION*) : Win32cr::Foundation::BOOL
+    C.GetFilterVersion(pVer)
+  end
+
   @[Link("rpcproxy")]
   lib C
+    # :nodoc:
     fun GetExtensionVersion(pVer : Win32cr::System::Iis::HSE_VERSION_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun HttpExtensionProc(pECB : Win32cr::System::Iis::EXTENSION_CONTROL_BLOCK*) : UInt32
 
+    # :nodoc:
     fun HttpFilterProc(pfc : Win32cr::System::Iis::HTTP_FILTER_CONTEXT*, notification_type : UInt32, pvNotification : Void*) : UInt32
 
+    # :nodoc:
     fun GetFilterVersion(pVer : Win32cr::System::Iis::HTTP_FILTER_VERSION*) : Win32cr::Foundation::BOOL
 
   end

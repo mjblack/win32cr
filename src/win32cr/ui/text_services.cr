@@ -4,6 +4,7 @@ require "./windows_and_messaging.cr"
 require "./../graphics/gdi.cr"
 
 module Win32cr::UI::TextServices
+  extend self
   alias HKL = LibC::IntPtrT
   GUID_PROP_TEXTOWNER = "f1e2d520-0969-11d3-8df0-00105a2799b5"
   GUID_PROP_ATTRIBUTE = "34b45670-7526-11d2-a147-00105a2799b5"
@@ -7396,12 +7397,27 @@ module Win32cr::UI::TextServices
 
   end
 
+  def doMsCtfMonitor(dwFlags : UInt32, hEventForServiceStop : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.DoMsCtfMonitor(dwFlags, hEventForServiceStop)
+  end
+
+  def initLocalMsCtfMonitor(dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.InitLocalMsCtfMonitor(dwFlags)
+  end
+
+  def uninitLocalMsCtfMonitor : Win32cr::Foundation::HRESULT
+    C.UninitLocalMsCtfMonitor
+  end
+
   @[Link("msctfmonitor")]
   lib C
+    # :nodoc:
     fun DoMsCtfMonitor(dwFlags : UInt32, hEventForServiceStop : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InitLocalMsCtfMonitor(dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UninitLocalMsCtfMonitor : Win32cr::Foundation::HRESULT
 
   end

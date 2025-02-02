@@ -3,6 +3,7 @@ require "./com.cr"
 require "./../ui/shell/properties_system.cr"
 
 module Win32cr::System::WindowsSync
+  extend self
   SYNC_VERSION_FLAG_FROM_FEED = 1_u32
   SYNC_VERSION_FLAG_HAS_BY = 2_u32
   SYNC_SERIALIZE_REPLICA_KEY_MAP = 1_u32

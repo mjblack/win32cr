@@ -3,6 +3,7 @@ require "./../../../foundation.cr"
 require "./../../../graphics/gdi.cr"
 
 module Win32cr::System::WinRT::Graphics::Capture
+  extend self
 
 
   @[Extern]

@@ -1,6 +1,7 @@
 require "./../../foundation.cr"
 
 module Win32cr::Graphics::Dxgi::Common
+  extend self
   FACDXGI_ = 2170_u32
   DXGI_CPU_ACCESS_NONE = 0_u32
   DXGI_CPU_ACCESS_DYNAMIC = 1_u32

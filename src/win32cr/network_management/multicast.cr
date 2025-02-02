@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::Multicast
+  extend self
   MCAST_CLIENT_ID_LEN = 17_u32
   MCAST_API_CURRENT_VERSION = 1_i32
   MCAST_API_VERSION_0 = 0_i32
@@ -67,20 +68,55 @@ module Win32cr::NetworkManagement::Multicast
     end
   end
 
+  def mcastApiStartup(version : UInt32*) : UInt32
+    C.McastApiStartup(version)
+  end
+
+  def mcastApiCleanup : Void
+    C.McastApiCleanup
+  end
+
+  def mcastGenUID(pRequestID : Win32cr::NetworkManagement::Multicast::MCAST_CLIENT_UID*) : UInt32
+    C.McastGenUID(pRequestID)
+  end
+
+  def mcastEnumerateScopes(addr_family : UInt16, re_query : Win32cr::Foundation::BOOL, pScopeList : Win32cr::NetworkManagement::Multicast::MCAST_SCOPE_ENTRY*, pScopeLen : UInt32*, pScopeCount : UInt32*) : UInt32
+    C.McastEnumerateScopes(addr_family, re_query, pScopeList, pScopeLen, pScopeCount)
+  end
+
+  def mcastRequestAddress(addr_family : UInt16, pRequestID : Win32cr::NetworkManagement::Multicast::MCAST_CLIENT_UID*, pScopeCtx : Win32cr::NetworkManagement::Multicast::MCAST_SCOPE_CTX*, pAddrRequest : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_REQUEST*, pAddrResponse : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_RESPONSE*) : UInt32
+    C.McastRequestAddress(addr_family, pRequestID, pScopeCtx, pAddrRequest, pAddrResponse)
+  end
+
+  def mcastRenewAddress(addr_family : UInt16, pRequestID : Win32cr::NetworkManagement::Multicast::MCAST_CLIENT_UID*, pRenewRequest : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_REQUEST*, pRenewResponse : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_RESPONSE*) : UInt32
+    C.McastRenewAddress(addr_family, pRequestID, pRenewRequest, pRenewResponse)
+  end
+
+  def mcastReleaseAddress(addr_family : UInt16, pRequestID : Win32cr::NetworkManagement::Multicast::MCAST_CLIENT_UID*, pReleaseRequest : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_REQUEST*) : UInt32
+    C.McastReleaseAddress(addr_family, pRequestID, pReleaseRequest)
+  end
+
   @[Link("dhcpcsvc")]
   lib C
+    # :nodoc:
     fun McastApiStartup(version : UInt32*) : UInt32
 
+    # :nodoc:
     fun McastApiCleanup : Void
 
+    # :nodoc:
     fun McastGenUID(pRequestID : Win32cr::NetworkManagement::Multicast::MCAST_CLIENT_UID*) : UInt32
 
+    # :nodoc:
     fun McastEnumerateScopes(addr_family : UInt16, re_query : Win32cr::Foundation::BOOL, pScopeList : Win32cr::NetworkManagement::Multicast::MCAST_SCOPE_ENTRY*, pScopeLen : UInt32*, pScopeCount : UInt32*) : UInt32
 
+    # :nodoc:
     fun McastRequestAddress(addr_family : UInt16, pRequestID : Win32cr::NetworkManagement::Multicast::MCAST_CLIENT_UID*, pScopeCtx : Win32cr::NetworkManagement::Multicast::MCAST_SCOPE_CTX*, pAddrRequest : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_REQUEST*, pAddrResponse : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_RESPONSE*) : UInt32
 
+    # :nodoc:
     fun McastRenewAddress(addr_family : UInt16, pRequestID : Win32cr::NetworkManagement::Multicast::MCAST_CLIENT_UID*, pRenewRequest : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_REQUEST*, pRenewResponse : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_RESPONSE*) : UInt32
 
+    # :nodoc:
     fun McastReleaseAddress(addr_family : UInt16, pRequestID : Win32cr::NetworkManagement::Multicast::MCAST_CLIENT_UID*, pReleaseRequest : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_REQUEST*) : UInt32
 
   end

@@ -2,6 +2,7 @@ require "./../system/com.cr"
 require "./../foundation.cr"
 
 module Win32cr::Networking::RemoteDifferentialCompression
+  extend self
   RDCE_TABLE_FULL = 2147745793_u32
   RDCE_TABLE_CORRUPT = 2147745794_u32
   MSRDC_SIGNATURE_HASHSIZE = 16_u32

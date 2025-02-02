@@ -4,6 +4,7 @@ require "./../system/com/structured_storage.cr"
 require "./../ui/shell/properties_system.cr"
 
 module Win32cr::Devices::FunctionDiscovery
+  extend self
   FD_EVENTID_PRIVATE = 100_u32
   FD_EVENTID = 1000_u32
   FD_EVENTID_SEARCHCOMPLETE = 1000_u32

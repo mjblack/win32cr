@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./diagnostics/debug.cr"
 
 module Win32cr::System::Kernel
+  extend self
   alias EXCEPTION_ROUTINE = Proc(Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, Void*, Win32cr::System::Diagnostics::Debug::CONTEXT*, Void*, Win32cr::System::Kernel::EXCEPTION_DISPOSITION)
 
   OBJ_HANDLE_TAGBITS = 3_i32
@@ -404,20 +405,55 @@ module Win32cr::System::Kernel
   end
   {% end %}
 
+  def rtlInitializeSListHead(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Void
+    C.RtlInitializeSListHead(list_head)
+  end
+
+  def rtlFirstEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    C.RtlFirstEntrySList(list_head)
+  end
+
+  def rtlInterlockedPopEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    C.RtlInterlockedPopEntrySList(list_head)
+  end
+
+  def rtlInterlockedPushEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list_entry : Win32cr::System::Kernel::SLIST_ENTRY*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    C.RtlInterlockedPushEntrySList(list_head, list_entry)
+  end
+
+  def rtlInterlockedPushListSListEx(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list : Win32cr::System::Kernel::SLIST_ENTRY*, list_end : Win32cr::System::Kernel::SLIST_ENTRY*, count : UInt32) : Win32cr::System::Kernel::SLIST_ENTRY*
+    C.RtlInterlockedPushListSListEx(list_head, list, list_end, count)
+  end
+
+  def rtlInterlockedFlushSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    C.RtlInterlockedFlushSList(list_head)
+  end
+
+  def rtlQueryDepthSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : UInt16
+    C.RtlQueryDepthSList(list_head)
+  end
+
   @[Link("ntdll")]
   lib C
+    # :nodoc:
     fun RtlInitializeSListHead(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Void
 
+    # :nodoc:
     fun RtlFirstEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
 
+    # :nodoc:
     fun RtlInterlockedPopEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
 
+    # :nodoc:
     fun RtlInterlockedPushEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list_entry : Win32cr::System::Kernel::SLIST_ENTRY*) : Win32cr::System::Kernel::SLIST_ENTRY*
 
+    # :nodoc:
     fun RtlInterlockedPushListSListEx(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list : Win32cr::System::Kernel::SLIST_ENTRY*, list_end : Win32cr::System::Kernel::SLIST_ENTRY*, count : UInt32) : Win32cr::System::Kernel::SLIST_ENTRY*
 
+    # :nodoc:
     fun RtlInterlockedFlushSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
 
+    # :nodoc:
     fun RtlQueryDepthSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : UInt16
 
   end

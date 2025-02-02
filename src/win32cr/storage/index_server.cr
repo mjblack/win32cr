@@ -3,6 +3,7 @@ require "./../system/com.cr"
 require "./../foundation.cr"
 
 module Win32cr::Storage::IndexServer
+  extend self
   CI_VERSION_WDS30 = 258_u32
   CI_VERSION_WDS40 = 265_u32
   CI_VERSION_WIN70 = 1792_u32
@@ -375,14 +376,34 @@ module Win32cr::Storage::IndexServer
 
   end
 
+  def loadIFilter(pwcsPath : Win32cr::Foundation::PWSTR, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
+    C.LoadIFilter(pwcsPath, pUnkOuter, ppIUnk)
+  end
+
+  def loadIFilterEx(pwcsPath : Win32cr::Foundation::PWSTR, dwFlags : UInt32, riid : LibC::GUID*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
+    C.LoadIFilterEx(pwcsPath, dwFlags, riid, ppIUnk)
+  end
+
+  def bindIFilterFromStorage(pStg : Void*, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
+    C.BindIFilterFromStorage(pStg, pUnkOuter, ppIUnk)
+  end
+
+  def bindIFilterFromStream(pStm : Void*, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
+    C.BindIFilterFromStream(pStm, pUnkOuter, ppIUnk)
+  end
+
   @[Link("query")]
   lib C
+    # :nodoc:
     fun LoadIFilter(pwcsPath : Win32cr::Foundation::PWSTR, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LoadIFilterEx(pwcsPath : Win32cr::Foundation::PWSTR, dwFlags : UInt32, riid : LibC::GUID*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BindIFilterFromStorage(pStg : Void*, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BindIFilterFromStream(pStm : Void*, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
 
   end

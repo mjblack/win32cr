@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::NetBios
+  extend self
   NCBNAMSZ = 16_u32
   MAX_LANA = 254_u32
   NAME_FLAGS_MASK = 135_u32
@@ -235,8 +236,13 @@ module Win32cr::NetworkManagement::NetBios
   end
   {% end %}
 
+  def netbios(pncb : Win32cr::NetworkManagement::NetBios::NCB*) : UInt8
+    C.Netbios(pncb)
+  end
+
   @[Link("netapi32")]
   lib C
+    # :nodoc:
     fun Netbios(pncb : Win32cr::NetworkManagement::NetBios::NCB*) : UInt8
 
   end

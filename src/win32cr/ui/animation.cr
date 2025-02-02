@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./../graphics/direct_composition.cr"
 
 module Win32cr::UI::Animation
+  extend self
   alias UI_ANIMATION_KEYFRAME = LibC::IntPtrT
   UI_ANIMATION_SECONDS_EVENTUALLY = -1_i32
   UI_ANIMATION_REPEAT_INDEFINITELY = -1_i32

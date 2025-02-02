@@ -5,6 +5,7 @@ require "./../../system/search/common.cr"
 require "./common.cr"
 
 module Win32cr::UI::Shell::PropertiesSystem
+  extend self
   PKEY_PIDSTR_MAX = 10_u32
 
   CLSID_InMemoryPropertyStore = LibC::GUID.new(0x9a02e012_u32, 0x6303_u16, 0x4e1e_u16, StaticArray[0xb9_u8, 0xa1_u8, 0x63_u8, 0xf_u8, 0x80_u8, 0x25_u8, 0x92_u8, 0xc5_u8])
@@ -1680,461 +1681,1596 @@ module Win32cr::UI::Shell::PropertiesSystem
 
   end
 
+  def propVariantToWinRTPropertyValue(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PropVariantToWinRTPropertyValue(propvar, riid, ppv)
+  end
+
+  def winRTPropertyValueToPropVariant(punkPropertyValue : Void*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.WinRTPropertyValueToPropVariant(punkPropertyValue, ppropvar)
+  end
+
+  def pSFormatForDisplay(propkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pdfFlags : Win32cr::UI::Shell::PropertiesSystem::PROPDESC_FORMAT_FLAGS, pwszText : UInt16*, cchText : UInt32) : Win32cr::Foundation::HRESULT
+    C.PSFormatForDisplay(propkey, propvar, pdfFlags, pwszText, cchText)
+  end
+
+  def pSFormatForDisplayAlloc(key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pdff : Win32cr::UI::Shell::PropertiesSystem::PROPDESC_FORMAT_FLAGS, ppszDisplay : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.PSFormatForDisplayAlloc(key, propvar, pdff, ppszDisplay)
+  end
+
+  def pSFormatPropertyValue(pps : Void*, ppd : Void*, pdff : Win32cr::UI::Shell::PropertiesSystem::PROPDESC_FORMAT_FLAGS, ppszDisplay : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.PSFormatPropertyValue(pps, ppd, pdff, ppszDisplay)
+  end
+
+  def pSGetImageReferenceForValue(propkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ppszImageRes : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.PSGetImageReferenceForValue(propkey, propvar, ppszImageRes)
+  end
+
+  def pSStringFromPropertyKey(pkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, psz : UInt16*, cch : UInt32) : Win32cr::Foundation::HRESULT
+    C.PSStringFromPropertyKey(pkey, psz, cch)
+  end
+
+  def pSPropertyKeyFromString(pszString : Win32cr::Foundation::PWSTR, pkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyKeyFromString(pszString, pkey)
+  end
+
+  def pSCreateMemoryPropertyStore(riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSCreateMemoryPropertyStore(riid, ppv)
+  end
+
+  def pSCreateDelayedMultiplexPropertyStore(flags : Win32cr::UI::Shell::PropertiesSystem::GETPROPERTYSTOREFLAGS, pdpsf : Void*, rgStoreIds : UInt32*, cStores : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSCreateDelayedMultiplexPropertyStore(flags, pdpsf, rgStoreIds, cStores, riid, ppv)
+  end
+
+  def pSCreateMultiplexPropertyStore(prgpunkStores : Void**, cStores : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSCreateMultiplexPropertyStore(prgpunkStores, cStores, riid, ppv)
+  end
+
+  def pSCreatePropertyChangeArray(rgpropkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, rgflags : Win32cr::UI::Shell::PropertiesSystem::PKA_FLAGS*, rgpropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, cChanges : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSCreatePropertyChangeArray(rgpropkey, rgflags, rgpropvar, cChanges, riid, ppv)
+  end
+
+  def pSCreateSimplePropertyChange(flags : Win32cr::UI::Shell::PropertiesSystem::PKA_FLAGS, key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSCreateSimplePropertyChange(flags, key, propvar, riid, ppv)
+  end
+
+  def pSGetPropertyDescription(propkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSGetPropertyDescription(propkey, riid, ppv)
+  end
+
+  def pSGetPropertyDescriptionByName(pszCanonicalName : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSGetPropertyDescriptionByName(pszCanonicalName, riid, ppv)
+  end
+
+  def pSLookupPropertyHandlerCLSID(pszFilePath : Win32cr::Foundation::PWSTR, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.PSLookupPropertyHandlerCLSID(pszFilePath, pclsid)
+  end
+
+  def pSGetItemPropertyHandler(punkItem : Void*, fReadWrite : Win32cr::Foundation::BOOL, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSGetItemPropertyHandler(punkItem, fReadWrite, riid, ppv)
+  end
+
+  def pSGetItemPropertyHandlerWithCreateObject(punkItem : Void*, fReadWrite : Win32cr::Foundation::BOOL, punkCreateObject : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSGetItemPropertyHandlerWithCreateObject(punkItem, fReadWrite, punkCreateObject, riid, ppv)
+  end
+
+  def pSGetPropertyValue(pps : Void*, ppd : Void*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.PSGetPropertyValue(pps, ppd, ppropvar)
+  end
+
+  def pSSetPropertyValue(pps : Void*, ppd : Void*, propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.PSSetPropertyValue(pps, ppd, propvar)
+  end
+
+  def pSRegisterPropertySchema(pszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.PSRegisterPropertySchema(pszPath)
+  end
+
+  def pSUnregisterPropertySchema(pszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.PSUnregisterPropertySchema(pszPath)
+  end
+
+  def pSRefreshPropertySchema : Win32cr::Foundation::HRESULT
+    C.PSRefreshPropertySchema
+  end
+
+  def pSEnumeratePropertyDescriptions(filterOn : Win32cr::UI::Shell::PropertiesSystem::PROPDESC_ENUMFILTER, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSEnumeratePropertyDescriptions(filterOn, riid, ppv)
+  end
+
+  def pSGetPropertyKeyFromName(pszName : Win32cr::Foundation::PWSTR, ppropkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::HRESULT
+    C.PSGetPropertyKeyFromName(pszName, ppropkey)
+  end
+
+  def pSGetNameFromPropertyKey(propkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, ppszCanonicalName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.PSGetNameFromPropertyKey(propkey, ppszCanonicalName)
+  end
+
+  def pSCoerceToCanonicalValue(key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.PSCoerceToCanonicalValue(key, ppropvar)
+  end
+
+  def pSGetPropertyDescriptionListFromString(pszPropList : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSGetPropertyDescriptionListFromString(pszPropList, riid, ppv)
+  end
+
+  def pSCreatePropertyStoreFromPropertySetStorage(ppss : Void*, grfMode : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSCreatePropertyStoreFromPropertySetStorage(ppss, grfMode, riid, ppv)
+  end
+
+  def pSCreatePropertyStoreFromObject(punk : Void*, grfMode : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSCreatePropertyStoreFromObject(punk, grfMode, riid, ppv)
+  end
+
+  def pSCreateAdapterFromPropertyStore(pps : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSCreateAdapterFromPropertyStore(pps, riid, ppv)
+  end
+
+  def pSGetPropertySystem(riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSGetPropertySystem(riid, ppv)
+  end
+
+  def pSGetPropertyFromPropertyStorage(psps : Win32cr::UI::Shell::PropertiesSystem::SERIALIZEDPROPSTORAGE*, cb : UInt32, rpkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.PSGetPropertyFromPropertyStorage(psps, cb, rpkey, ppropvar)
+  end
+
+  def pSGetNamedPropertyFromPropertyStorage(psps : Win32cr::UI::Shell::PropertiesSystem::SERIALIZEDPROPSTORAGE*, cb : UInt32, pszName : Win32cr::Foundation::PWSTR, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.PSGetNamedPropertyFromPropertyStorage(psps, cb, pszName, ppropvar)
+  end
+
+  def pSPropertyBagReadType(propBag : Void*, propName : Win32cr::Foundation::PWSTR, var : Win32cr::System::Com::VARIANT*, type__ : UInt16) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadType(propBag, propName, var, type__)
+  end
+
+  def pSPropertyBagReadStr(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : UInt16*, characterCount : Int32) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadStr(propBag, propName, value, characterCount)
+  end
+
+  def pSPropertyBagReadStrAlloc(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadStrAlloc(propBag, propName, value)
+  end
+
+  def pSPropertyBagReadBSTR(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadBSTR(propBag, propName, value)
+  end
+
+  def pSPropertyBagWriteStr(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WriteStr(propBag, propName, value)
+  end
+
+  def pSPropertyBagWriteBSTR(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WriteBSTR(propBag, propName, value)
+  end
+
+  def pSPropertyBagReadInt(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Int32*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadInt(propBag, propName, value)
+  end
+
+  def pSPropertyBagWriteInt(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Int32) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WriteInt(propBag, propName, value)
+  end
+
+  def pSPropertyBagReadSHORT(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Int16*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadSHORT(propBag, propName, value)
+  end
+
+  def pSPropertyBagWriteSHORT(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Int16) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WriteSHORT(propBag, propName, value)
+  end
+
+  def pSPropertyBagReadLONG(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Int32*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadLONG(propBag, propName, value)
+  end
+
+  def pSPropertyBagWriteLONG(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Int32) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WriteLONG(propBag, propName, value)
+  end
+
+  def pSPropertyBagReadDWORD(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadDWORD(propBag, propName, value)
+  end
+
+  def pSPropertyBagWriteDWORD(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : UInt32) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WriteDWORD(propBag, propName, value)
+  end
+
+  def pSPropertyBagReadBOOL(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadBOOL(propBag, propName, value)
+  end
+
+  def pSPropertyBagWriteBOOL(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WriteBOOL(propBag, propName, value)
+  end
+
+  def pSPropertyBagReadPOINTL(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::POINTL*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadPOINTL(propBag, propName, value)
+  end
+
+  def pSPropertyBagWritePOINTL(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::POINTL*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WritePOINTL(propBag, propName, value)
+  end
+
+  def pSPropertyBagReadPOINTS(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::POINTS*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadPOINTS(propBag, propName, value)
+  end
+
+  def pSPropertyBagWritePOINTS(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::POINTS*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WritePOINTS(propBag, propName, value)
+  end
+
+  def pSPropertyBagReadRECTL(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::RECTL*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadRECTL(propBag, propName, value)
+  end
+
+  def pSPropertyBagWriteRECTL(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::RECTL*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WriteRECTL(propBag, propName, value)
+  end
+
+  def pSPropertyBagReadStream(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Void**) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadStream(propBag, propName, value)
+  end
+
+  def pSPropertyBagWriteStream(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Void*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WriteStream(propBag, propName, value)
+  end
+
+  def pSPropertyBagDelete(propBag : Void*, propName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_Delete(propBag, propName)
+  end
+
+  def pSPropertyBagReadULONGLONG(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : UInt64*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadULONGLONG(propBag, propName, value)
+  end
+
+  def pSPropertyBagWriteULONGLONG(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : UInt64) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WriteULONGLONG(propBag, propName, value)
+  end
+
+  def pSPropertyBagReadUnknown(propBag : Void*, propName : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadUnknown(propBag, propName, riid, ppv)
+  end
+
+  def pSPropertyBagWriteUnknown(propBag : Void*, propName : Win32cr::Foundation::PWSTR, punk : Void*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WriteUnknown(propBag, propName, punk)
+  end
+
+  def pSPropertyBagReadGUID(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadGUID(propBag, propName, value)
+  end
+
+  def pSPropertyBagWriteGUID(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WriteGUID(propBag, propName, value)
+  end
+
+  def pSPropertyBagReadPropertyKey(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_ReadPropertyKey(propBag, propName, value)
+  end
+
+  def pSPropertyBagWritePropertyKey(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::HRESULT
+    C.PSPropertyBag_WritePropertyKey(propBag, propName, value)
+  end
+
+  def initPropVariantFromResource(hinst : Win32cr::Foundation::HINSTANCE, id : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromResource(hinst, id, ppropvar)
+  end
+
+  def initPropVariantFromBuffer(pv : Void*, cb : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromBuffer(pv, cb, ppropvar)
+  end
+
+  def initPropVariantFromCLSID(clsid : LibC::GUID*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromCLSID(clsid, ppropvar)
+  end
+
+  def initPropVariantFromGUIDAsString(guid : LibC::GUID*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromGUIDAsString(guid, ppropvar)
+  end
+
+  def initPropVariantFromFileTime(pftIn : Win32cr::Foundation::FILETIME*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromFileTime(pftIn, ppropvar)
+  end
+
+  def initPropVariantFromPropVariantVectorElem(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromPropVariantVectorElem(propvarIn, iElem, ppropvar)
+  end
+
+  def initPropVariantVectorFromPropVariant(propvarSingle : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ppropvarVector : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantVectorFromPropVariant(propvarSingle, ppropvarVector)
+  end
+
+  def initPropVariantFromStrRet(pstrret : Win32cr::UI::Shell::Common::STRRET*, pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromStrRet(pstrret, pidl, ppropvar)
+  end
+
+  def initPropVariantFromBooleanVector(prgf : Win32cr::Foundation::BOOL*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromBooleanVector(prgf, cElems, ppropvar)
+  end
+
+  def initPropVariantFromInt16Vector(prgn : Int16*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromInt16Vector(prgn, cElems, ppropvar)
+  end
+
+  def initPropVariantFromUInt16Vector(prgn : UInt16*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromUInt16Vector(prgn, cElems, ppropvar)
+  end
+
+  def initPropVariantFromInt32Vector(prgn : Int32*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromInt32Vector(prgn, cElems, ppropvar)
+  end
+
+  def initPropVariantFromUInt32Vector(prgn : UInt32*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromUInt32Vector(prgn, cElems, ppropvar)
+  end
+
+  def initPropVariantFromInt64Vector(prgn : Int64*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromInt64Vector(prgn, cElems, ppropvar)
+  end
+
+  def initPropVariantFromUInt64Vector(prgn : UInt64*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromUInt64Vector(prgn, cElems, ppropvar)
+  end
+
+  def initPropVariantFromDoubleVector(prgn : Float64*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromDoubleVector(prgn, cElems, ppropvar)
+  end
+
+  def initPropVariantFromFileTimeVector(prgft : Win32cr::Foundation::FILETIME*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromFileTimeVector(prgft, cElems, ppropvar)
+  end
+
+  def initPropVariantFromStringVector(prgsz : Win32cr::Foundation::PWSTR*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromStringVector(prgsz, cElems, ppropvar)
+  end
+
+  def initPropVariantFromStringAsVector(psz : Win32cr::Foundation::PWSTR, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromStringAsVector(psz, ppropvar)
+  end
+
+  def propVariantToBooleanWithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, fDefault : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.PropVariantToBooleanWithDefault(propvarIn, fDefault)
+  end
+
+  def propVariantToInt16WithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iDefault : Int16) : Int16
+    C.PropVariantToInt16WithDefault(propvarIn, iDefault)
+  end
+
+  def propVariantToUInt16WithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, uiDefault : UInt16) : UInt16
+    C.PropVariantToUInt16WithDefault(propvarIn, uiDefault)
+  end
+
+  def propVariantToInt32WithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, lDefault : Int32) : Int32
+    C.PropVariantToInt32WithDefault(propvarIn, lDefault)
+  end
+
+  def propVariantToUInt32WithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ulDefault : UInt32) : UInt32
+    C.PropVariantToUInt32WithDefault(propvarIn, ulDefault)
+  end
+
+  def propVariantToInt64WithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, llDefault : Int64) : Int64
+    C.PropVariantToInt64WithDefault(propvarIn, llDefault)
+  end
+
+  def propVariantToUInt64WithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ullDefault : UInt64) : UInt64
+    C.PropVariantToUInt64WithDefault(propvarIn, ullDefault)
+  end
+
+  def propVariantToDoubleWithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, dblDefault : Float64) : Float64
+    C.PropVariantToDoubleWithDefault(propvarIn, dblDefault)
+  end
+
+  def propVariantToStringWithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pszDefault : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.PropVariantToStringWithDefault(propvarIn, pszDefault)
+  end
+
+  def propVariantToBoolean(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pfRet : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToBoolean(propvarIn, pfRet)
+  end
+
+  def propVariantToInt16(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, piRet : Int16*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToInt16(propvarIn, piRet)
+  end
+
+  def propVariantToUInt16(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, puiRet : UInt16*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToUInt16(propvarIn, puiRet)
+  end
+
+  def propVariantToInt32(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, plRet : Int32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToInt32(propvarIn, plRet)
+  end
+
+  def propVariantToUInt32(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pulRet : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToUInt32(propvarIn, pulRet)
+  end
+
+  def propVariantToInt64(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pllRet : Int64*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToInt64(propvarIn, pllRet)
+  end
+
+  def propVariantToUInt64(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pullRet : UInt64*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToUInt64(propvarIn, pullRet)
+  end
+
+  def propVariantToDouble(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pdblRet : Float64*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToDouble(propvarIn, pdblRet)
+  end
+
+  def propVariantToBuffer(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pv : Void*, cb : UInt32) : Win32cr::Foundation::HRESULT
+    C.PropVariantToBuffer(propvar, pv, cb)
+  end
+
+  def propVariantToString(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, psz : UInt16*, cch : UInt32) : Win32cr::Foundation::HRESULT
+    C.PropVariantToString(propvar, psz, cch)
+  end
+
+  def propVariantToGUID(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pguid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToGUID(propvar, pguid)
+  end
+
+  def propVariantToStringAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ppszOut : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToStringAlloc(propvar, ppszOut)
+  end
+
+  def propVariantToBSTR(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pbstrOut : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToBSTR(propvar, pbstrOut)
+  end
+
+  def propVariantToStrRet(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pstrret : Win32cr::UI::Shell::Common::STRRET*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToStrRet(propvar, pstrret)
+  end
+
+  def propVariantToFileTime(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pstfOut : Win32cr::UI::Shell::PropertiesSystem::PSTIME_FLAGS, pftOut : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToFileTime(propvar, pstfOut, pftOut)
+  end
+
+  def propVariantGetElementCount(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : UInt32
+    C.PropVariantGetElementCount(propvar)
+  end
+
+  def propVariantToBooleanVector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgf : Win32cr::Foundation::BOOL*, crgf : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToBooleanVector(propvar, prgf, crgf, pcElem)
+  end
+
+  def propVariantToInt16Vector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : Int16*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToInt16Vector(propvar, prgn, crgn, pcElem)
+  end
+
+  def propVariantToUInt16Vector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : UInt16*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToUInt16Vector(propvar, prgn, crgn, pcElem)
+  end
+
+  def propVariantToInt32Vector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : Int32*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToInt32Vector(propvar, prgn, crgn, pcElem)
+  end
+
+  def propVariantToUInt32Vector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : UInt32*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToUInt32Vector(propvar, prgn, crgn, pcElem)
+  end
+
+  def propVariantToInt64Vector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : Int64*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToInt64Vector(propvar, prgn, crgn, pcElem)
+  end
+
+  def propVariantToUInt64Vector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : UInt64*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToUInt64Vector(propvar, prgn, crgn, pcElem)
+  end
+
+  def propVariantToDoubleVector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : Float64*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToDoubleVector(propvar, prgn, crgn, pcElem)
+  end
+
+  def propVariantToFileTimeVector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgft : Win32cr::Foundation::FILETIME*, crgft : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToFileTimeVector(propvar, prgft, crgft, pcElem)
+  end
+
+  def propVariantToStringVector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgsz : Win32cr::Foundation::PWSTR*, crgsz : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToStringVector(propvar, prgsz, crgsz, pcElem)
+  end
+
+  def propVariantToBooleanVectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgf : Win32cr::Foundation::BOOL**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToBooleanVectorAlloc(propvar, pprgf, pcElem)
+  end
+
+  def propVariantToInt16VectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : Int16**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToInt16VectorAlloc(propvar, pprgn, pcElem)
+  end
+
+  def propVariantToUInt16VectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : UInt16**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToUInt16VectorAlloc(propvar, pprgn, pcElem)
+  end
+
+  def propVariantToInt32VectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : Int32**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToInt32VectorAlloc(propvar, pprgn, pcElem)
+  end
+
+  def propVariantToUInt32VectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : UInt32**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToUInt32VectorAlloc(propvar, pprgn, pcElem)
+  end
+
+  def propVariantToInt64VectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : Int64**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToInt64VectorAlloc(propvar, pprgn, pcElem)
+  end
+
+  def propVariantToUInt64VectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : UInt64**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToUInt64VectorAlloc(propvar, pprgn, pcElem)
+  end
+
+  def propVariantToDoubleVectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : Float64**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToDoubleVectorAlloc(propvar, pprgn, pcElem)
+  end
+
+  def propVariantToFileTimeVectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgft : Win32cr::Foundation::FILETIME**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToFileTimeVectorAlloc(propvar, pprgft, pcElem)
+  end
+
+  def propVariantToStringVectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgsz : Win32cr::Foundation::PWSTR**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToStringVectorAlloc(propvar, pprgsz, pcElem)
+  end
+
+  def propVariantGetBooleanElem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pfVal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.PropVariantGetBooleanElem(propvar, iElem, pfVal)
+  end
+
+  def propVariantGetInt16Elem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : Int16*) : Win32cr::Foundation::HRESULT
+    C.PropVariantGetInt16Elem(propvar, iElem, pnVal)
+  end
+
+  def propVariantGetUInt16Elem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : UInt16*) : Win32cr::Foundation::HRESULT
+    C.PropVariantGetUInt16Elem(propvar, iElem, pnVal)
+  end
+
+  def propVariantGetInt32Elem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : Int32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantGetInt32Elem(propvar, iElem, pnVal)
+  end
+
+  def propVariantGetUInt32Elem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantGetUInt32Elem(propvar, iElem, pnVal)
+  end
+
+  def propVariantGetInt64Elem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : Int64*) : Win32cr::Foundation::HRESULT
+    C.PropVariantGetInt64Elem(propvar, iElem, pnVal)
+  end
+
+  def propVariantGetUInt64Elem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : UInt64*) : Win32cr::Foundation::HRESULT
+    C.PropVariantGetUInt64Elem(propvar, iElem, pnVal)
+  end
+
+  def propVariantGetDoubleElem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : Float64*) : Win32cr::Foundation::HRESULT
+    C.PropVariantGetDoubleElem(propvar, iElem, pnVal)
+  end
+
+  def propVariantGetFileTimeElem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pftVal : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
+    C.PropVariantGetFileTimeElem(propvar, iElem, pftVal)
+  end
+
+  def propVariantGetStringElem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, ppszVal : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.PropVariantGetStringElem(propvar, iElem, ppszVal)
+  end
+
+  def clearPropVariantArray(rgPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, cVars : UInt32) : Void
+    C.ClearPropVariantArray(rgPropVar, cVars)
+  end
+
+  def propVariantCompareEx(propvar1 : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, propvar2 : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, unit : Win32cr::UI::Shell::PropertiesSystem::PROPVAR_COMPARE_UNIT, flags : Win32cr::UI::Shell::PropertiesSystem::PROPVAR_COMPARE_FLAGS) : Int32
+    C.PropVariantCompareEx(propvar1, propvar2, unit, flags)
+  end
+
+  def propVariantChangeType(ppropvarDest : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, propvarSrc : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, flags : Win32cr::UI::Shell::PropertiesSystem::PROPVAR_CHANGE_FLAGS, vt : UInt16) : Win32cr::Foundation::HRESULT
+    C.PropVariantChangeType(ppropvarDest, propvarSrc, flags, vt)
+  end
+
+  def propVariantToVariant(pPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToVariant(pPropVar, pVar)
+  end
+
+  def variantToPropVariant(pVar : Win32cr::System::Com::VARIANT*, pPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.VariantToPropVariant(pVar, pPropVar)
+  end
+
+  def initVariantFromResource(hinst : Win32cr::Foundation::HINSTANCE, id : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromResource(hinst, id, pvar)
+  end
+
+  def initVariantFromBuffer(pv : Void*, cb : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromBuffer(pv, cb, pvar)
+  end
+
+  def initVariantFromGUIDAsString(guid : LibC::GUID*, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromGUIDAsString(guid, pvar)
+  end
+
+  def initVariantFromFileTime(pft : Win32cr::Foundation::FILETIME*, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromFileTime(pft, pvar)
+  end
+
+  def initVariantFromFileTimeArray(prgft : Win32cr::Foundation::FILETIME*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromFileTimeArray(prgft, cElems, pvar)
+  end
+
+  def initVariantFromStrRet(pstrret : Win32cr::UI::Shell::Common::STRRET*, pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromStrRet(pstrret, pidl, pvar)
+  end
+
+  def initVariantFromVariantArrayElem(varIn : Win32cr::System::Com::VARIANT*, iElem : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromVariantArrayElem(varIn, iElem, pvar)
+  end
+
+  def initVariantFromBooleanArray(prgf : Win32cr::Foundation::BOOL*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromBooleanArray(prgf, cElems, pvar)
+  end
+
+  def initVariantFromInt16Array(prgn : Int16*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromInt16Array(prgn, cElems, pvar)
+  end
+
+  def initVariantFromUInt16Array(prgn : UInt16*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromUInt16Array(prgn, cElems, pvar)
+  end
+
+  def initVariantFromInt32Array(prgn : Int32*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromInt32Array(prgn, cElems, pvar)
+  end
+
+  def initVariantFromUInt32Array(prgn : UInt32*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromUInt32Array(prgn, cElems, pvar)
+  end
+
+  def initVariantFromInt64Array(prgn : Int64*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromInt64Array(prgn, cElems, pvar)
+  end
+
+  def initVariantFromUInt64Array(prgn : UInt64*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromUInt64Array(prgn, cElems, pvar)
+  end
+
+  def initVariantFromDoubleArray(prgn : Float64*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromDoubleArray(prgn, cElems, pvar)
+  end
+
+  def initVariantFromStringArray(prgsz : Win32cr::Foundation::PWSTR*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitVariantFromStringArray(prgsz, cElems, pvar)
+  end
+
+  def variantToBooleanWithDefault(varIn : Win32cr::System::Com::VARIANT*, fDefault : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.VariantToBooleanWithDefault(varIn, fDefault)
+  end
+
+  def variantToInt16WithDefault(varIn : Win32cr::System::Com::VARIANT*, iDefault : Int16) : Int16
+    C.VariantToInt16WithDefault(varIn, iDefault)
+  end
+
+  def variantToUInt16WithDefault(varIn : Win32cr::System::Com::VARIANT*, uiDefault : UInt16) : UInt16
+    C.VariantToUInt16WithDefault(varIn, uiDefault)
+  end
+
+  def variantToInt32WithDefault(varIn : Win32cr::System::Com::VARIANT*, lDefault : Int32) : Int32
+    C.VariantToInt32WithDefault(varIn, lDefault)
+  end
+
+  def variantToUInt32WithDefault(varIn : Win32cr::System::Com::VARIANT*, ulDefault : UInt32) : UInt32
+    C.VariantToUInt32WithDefault(varIn, ulDefault)
+  end
+
+  def variantToInt64WithDefault(varIn : Win32cr::System::Com::VARIANT*, llDefault : Int64) : Int64
+    C.VariantToInt64WithDefault(varIn, llDefault)
+  end
+
+  def variantToUInt64WithDefault(varIn : Win32cr::System::Com::VARIANT*, ullDefault : UInt64) : UInt64
+    C.VariantToUInt64WithDefault(varIn, ullDefault)
+  end
+
+  def variantToDoubleWithDefault(varIn : Win32cr::System::Com::VARIANT*, dblDefault : Float64) : Float64
+    C.VariantToDoubleWithDefault(varIn, dblDefault)
+  end
+
+  def variantToStringWithDefault(varIn : Win32cr::System::Com::VARIANT*, pszDefault : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.VariantToStringWithDefault(varIn, pszDefault)
+  end
+
+  def variantToBoolean(varIn : Win32cr::System::Com::VARIANT*, pfRet : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.VariantToBoolean(varIn, pfRet)
+  end
+
+  def variantToInt16(varIn : Win32cr::System::Com::VARIANT*, piRet : Int16*) : Win32cr::Foundation::HRESULT
+    C.VariantToInt16(varIn, piRet)
+  end
+
+  def variantToUInt16(varIn : Win32cr::System::Com::VARIANT*, puiRet : UInt16*) : Win32cr::Foundation::HRESULT
+    C.VariantToUInt16(varIn, puiRet)
+  end
+
+  def variantToInt32(varIn : Win32cr::System::Com::VARIANT*, plRet : Int32*) : Win32cr::Foundation::HRESULT
+    C.VariantToInt32(varIn, plRet)
+  end
+
+  def variantToUInt32(varIn : Win32cr::System::Com::VARIANT*, pulRet : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToUInt32(varIn, pulRet)
+  end
+
+  def variantToInt64(varIn : Win32cr::System::Com::VARIANT*, pllRet : Int64*) : Win32cr::Foundation::HRESULT
+    C.VariantToInt64(varIn, pllRet)
+  end
+
+  def variantToUInt64(varIn : Win32cr::System::Com::VARIANT*, pullRet : UInt64*) : Win32cr::Foundation::HRESULT
+    C.VariantToUInt64(varIn, pullRet)
+  end
+
+  def variantToDouble(varIn : Win32cr::System::Com::VARIANT*, pdblRet : Float64*) : Win32cr::Foundation::HRESULT
+    C.VariantToDouble(varIn, pdblRet)
+  end
+
+  def variantToBuffer(varIn : Win32cr::System::Com::VARIANT*, pv : Void*, cb : UInt32) : Win32cr::Foundation::HRESULT
+    C.VariantToBuffer(varIn, pv, cb)
+  end
+
+  def variantToGUID(varIn : Win32cr::System::Com::VARIANT*, pguid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.VariantToGUID(varIn, pguid)
+  end
+
+  def variantToString(varIn : Win32cr::System::Com::VARIANT*, pszBuf : UInt16*, cchBuf : UInt32) : Win32cr::Foundation::HRESULT
+    C.VariantToString(varIn, pszBuf, cchBuf)
+  end
+
+  def variantToStringAlloc(varIn : Win32cr::System::Com::VARIANT*, ppszBuf : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.VariantToStringAlloc(varIn, ppszBuf)
+  end
+
+  def variantToDosDateTime(varIn : Win32cr::System::Com::VARIANT*, pwDate : UInt16*, pwTime : UInt16*) : Win32cr::Foundation::HRESULT
+    C.VariantToDosDateTime(varIn, pwDate, pwTime)
+  end
+
+  def variantToStrRet(varIn : Win32cr::System::Com::VARIANT*, pstrret : Win32cr::UI::Shell::Common::STRRET*) : Win32cr::Foundation::HRESULT
+    C.VariantToStrRet(varIn, pstrret)
+  end
+
+  def variantToFileTime(varIn : Win32cr::System::Com::VARIANT*, stfOut : Win32cr::UI::Shell::PropertiesSystem::PSTIME_FLAGS, pftOut : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
+    C.VariantToFileTime(varIn, stfOut, pftOut)
+  end
+
+  def variantGetElementCount(varIn : Win32cr::System::Com::VARIANT*) : UInt32
+    C.VariantGetElementCount(varIn)
+  end
+
+  def variantToBooleanArray(var : Win32cr::System::Com::VARIANT*, prgf : Win32cr::Foundation::BOOL*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToBooleanArray(var, prgf, crgn, pcElem)
+  end
+
+  def variantToInt16Array(var : Win32cr::System::Com::VARIANT*, prgn : Int16*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToInt16Array(var, prgn, crgn, pcElem)
+  end
+
+  def variantToUInt16Array(var : Win32cr::System::Com::VARIANT*, prgn : UInt16*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToUInt16Array(var, prgn, crgn, pcElem)
+  end
+
+  def variantToInt32Array(var : Win32cr::System::Com::VARIANT*, prgn : Int32*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToInt32Array(var, prgn, crgn, pcElem)
+  end
+
+  def variantToUInt32Array(var : Win32cr::System::Com::VARIANT*, prgn : UInt32*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToUInt32Array(var, prgn, crgn, pcElem)
+  end
+
+  def variantToInt64Array(var : Win32cr::System::Com::VARIANT*, prgn : Int64*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToInt64Array(var, prgn, crgn, pcElem)
+  end
+
+  def variantToUInt64Array(var : Win32cr::System::Com::VARIANT*, prgn : UInt64*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToUInt64Array(var, prgn, crgn, pcElem)
+  end
+
+  def variantToDoubleArray(var : Win32cr::System::Com::VARIANT*, prgn : Float64*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToDoubleArray(var, prgn, crgn, pcElem)
+  end
+
+  def variantToStringArray(var : Win32cr::System::Com::VARIANT*, prgsz : Win32cr::Foundation::PWSTR*, crgsz : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToStringArray(var, prgsz, crgsz, pcElem)
+  end
+
+  def variantToBooleanArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgf : Win32cr::Foundation::BOOL**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToBooleanArrayAlloc(var, pprgf, pcElem)
+  end
+
+  def variantToInt16ArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : Int16**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToInt16ArrayAlloc(var, pprgn, pcElem)
+  end
+
+  def variantToUInt16ArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : UInt16**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToUInt16ArrayAlloc(var, pprgn, pcElem)
+  end
+
+  def variantToInt32ArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : Int32**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToInt32ArrayAlloc(var, pprgn, pcElem)
+  end
+
+  def variantToUInt32ArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : UInt32**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToUInt32ArrayAlloc(var, pprgn, pcElem)
+  end
+
+  def variantToInt64ArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : Int64**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToInt64ArrayAlloc(var, pprgn, pcElem)
+  end
+
+  def variantToUInt64ArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : UInt64**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToUInt64ArrayAlloc(var, pprgn, pcElem)
+  end
+
+  def variantToDoubleArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : Float64**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToDoubleArrayAlloc(var, pprgn, pcElem)
+  end
+
+  def variantToStringArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgsz : Win32cr::Foundation::PWSTR**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantToStringArrayAlloc(var, pprgsz, pcElem)
+  end
+
+  def variantGetBooleanElem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pfVal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.VariantGetBooleanElem(var, iElem, pfVal)
+  end
+
+  def variantGetInt16Elem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : Int16*) : Win32cr::Foundation::HRESULT
+    C.VariantGetInt16Elem(var, iElem, pnVal)
+  end
+
+  def variantGetUInt16Elem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : UInt16*) : Win32cr::Foundation::HRESULT
+    C.VariantGetUInt16Elem(var, iElem, pnVal)
+  end
+
+  def variantGetInt32Elem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : Int32*) : Win32cr::Foundation::HRESULT
+    C.VariantGetInt32Elem(var, iElem, pnVal)
+  end
+
+  def variantGetUInt32Elem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : UInt32*) : Win32cr::Foundation::HRESULT
+    C.VariantGetUInt32Elem(var, iElem, pnVal)
+  end
+
+  def variantGetInt64Elem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : Int64*) : Win32cr::Foundation::HRESULT
+    C.VariantGetInt64Elem(var, iElem, pnVal)
+  end
+
+  def variantGetUInt64Elem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : UInt64*) : Win32cr::Foundation::HRESULT
+    C.VariantGetUInt64Elem(var, iElem, pnVal)
+  end
+
+  def variantGetDoubleElem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : Float64*) : Win32cr::Foundation::HRESULT
+    C.VariantGetDoubleElem(var, iElem, pnVal)
+  end
+
+  def variantGetStringElem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, ppszVal : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.VariantGetStringElem(var, iElem, ppszVal)
+  end
+
+  def clearVariantArray(pvars : Win32cr::System::Com::VARIANT*, cvars : UInt32) : Void
+    C.ClearVariantArray(pvars, cvars)
+  end
+
+  def variantCompare(var1 : Win32cr::System::Com::VARIANT*, var2 : Win32cr::System::Com::VARIANT*) : Int32
+    C.VariantCompare(var1, var2)
+  end
+
+  def sHGetPropertyStoreFromIDList(pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*, flags : Win32cr::UI::Shell::PropertiesSystem::GETPROPERTYSTOREFLAGS, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.SHGetPropertyStoreFromIDList(pidl, flags, riid, ppv)
+  end
+
+  def sHGetPropertyStoreFromParsingName(pszPath : Win32cr::Foundation::PWSTR, pbc : Void*, flags : Win32cr::UI::Shell::PropertiesSystem::GETPROPERTYSTOREFLAGS, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.SHGetPropertyStoreFromParsingName(pszPath, pbc, flags, riid, ppv)
+  end
+
+  def sHAddDefaultPropertiesByExt(pszExt : Win32cr::Foundation::PWSTR, pPropStore : Void*) : Win32cr::Foundation::HRESULT
+    C.SHAddDefaultPropertiesByExt(pszExt, pPropStore)
+  end
+
+  def pifMgrOpenProperties(pszApp : Win32cr::Foundation::PWSTR, pszPIF : Win32cr::Foundation::PWSTR, hInf : UInt32, flOpt : UInt32) : Win32cr::Foundation::HANDLE
+    C.PifMgr_OpenProperties(pszApp, pszPIF, hInf, flOpt)
+  end
+
+  def pifMgrGetProperties(hProps : Win32cr::Foundation::HANDLE, pszGroup : Win32cr::Foundation::PSTR, lpProps : Void*, cbProps : Int32, flOpt : UInt32) : Int32
+    C.PifMgr_GetProperties(hProps, pszGroup, lpProps, cbProps, flOpt)
+  end
+
+  def pifMgrSetProperties(hProps : Win32cr::Foundation::HANDLE, pszGroup : Win32cr::Foundation::PSTR, lpProps : Void*, cbProps : Int32, flOpt : UInt32) : Int32
+    C.PifMgr_SetProperties(hProps, pszGroup, lpProps, cbProps, flOpt)
+  end
+
+  def pifMgrCloseProperties(hProps : Win32cr::Foundation::HANDLE, flOpt : UInt32) : Win32cr::Foundation::HANDLE
+    C.PifMgr_CloseProperties(hProps, flOpt)
+  end
+
+  def sHPropStgCreate(psstg : Void*, fmtid : LibC::GUID*, pclsid : LibC::GUID*, grfFlags : UInt32, grfMode : UInt32, dwDisposition : UInt32, ppstg : Void**, puCodePage : UInt32*) : Win32cr::Foundation::HRESULT
+    C.SHPropStgCreate(psstg, fmtid, pclsid, grfFlags, grfMode, dwDisposition, ppstg, puCodePage)
+  end
+
+  def sHPropStgReadMultiple(pps : Void*, uCodePage : UInt32, cpspec : UInt32, rgpspec : Win32cr::System::Com::StructuredStorage::PROPSPEC*, rgvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.SHPropStgReadMultiple(pps, uCodePage, cpspec, rgpspec, rgvar)
+  end
+
+  def sHPropStgWriteMultiple(pps : Void*, puCodePage : UInt32*, cpspec : UInt32, rgpspec : Win32cr::System::Com::StructuredStorage::PROPSPEC*, rgvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, propidNameFirst : UInt32) : Win32cr::Foundation::HRESULT
+    C.SHPropStgWriteMultiple(pps, puCodePage, cpspec, rgpspec, rgvar, propidNameFirst)
+  end
+
+  def sHGetPropertyStoreForWindow(hwnd : Win32cr::Foundation::HWND, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.SHGetPropertyStoreForWindow(hwnd, riid, ppv)
+  end
+
   @[Link("propsys")]
   @[Link("shell32")]
   lib C
+    # :nodoc:
     fun PropVariantToWinRTPropertyValue(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WinRTPropertyValueToPropVariant(punkPropertyValue : Void*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSFormatForDisplay(propkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pdfFlags : Win32cr::UI::Shell::PropertiesSystem::PROPDESC_FORMAT_FLAGS, pwszText : UInt16*, cchText : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSFormatForDisplayAlloc(key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pdff : Win32cr::UI::Shell::PropertiesSystem::PROPDESC_FORMAT_FLAGS, ppszDisplay : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSFormatPropertyValue(pps : Void*, ppd : Void*, pdff : Win32cr::UI::Shell::PropertiesSystem::PROPDESC_FORMAT_FLAGS, ppszDisplay : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSGetImageReferenceForValue(propkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ppszImageRes : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSStringFromPropertyKey(pkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, psz : UInt16*, cch : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyKeyFromString(pszString : Win32cr::Foundation::PWSTR, pkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSCreateMemoryPropertyStore(riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSCreateDelayedMultiplexPropertyStore(flags : Win32cr::UI::Shell::PropertiesSystem::GETPROPERTYSTOREFLAGS, pdpsf : Void*, rgStoreIds : UInt32*, cStores : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSCreateMultiplexPropertyStore(prgpunkStores : Void**, cStores : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSCreatePropertyChangeArray(rgpropkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, rgflags : Win32cr::UI::Shell::PropertiesSystem::PKA_FLAGS*, rgpropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, cChanges : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSCreateSimplePropertyChange(flags : Win32cr::UI::Shell::PropertiesSystem::PKA_FLAGS, key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSGetPropertyDescription(propkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSGetPropertyDescriptionByName(pszCanonicalName : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSLookupPropertyHandlerCLSID(pszFilePath : Win32cr::Foundation::PWSTR, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSGetItemPropertyHandler(punkItem : Void*, fReadWrite : Win32cr::Foundation::BOOL, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSGetItemPropertyHandlerWithCreateObject(punkItem : Void*, fReadWrite : Win32cr::Foundation::BOOL, punkCreateObject : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSGetPropertyValue(pps : Void*, ppd : Void*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSSetPropertyValue(pps : Void*, ppd : Void*, propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSRegisterPropertySchema(pszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSUnregisterPropertySchema(pszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSRefreshPropertySchema : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSEnumeratePropertyDescriptions(filterOn : Win32cr::UI::Shell::PropertiesSystem::PROPDESC_ENUMFILTER, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSGetPropertyKeyFromName(pszName : Win32cr::Foundation::PWSTR, ppropkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSGetNameFromPropertyKey(propkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, ppszCanonicalName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSCoerceToCanonicalValue(key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSGetPropertyDescriptionListFromString(pszPropList : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSCreatePropertyStoreFromPropertySetStorage(ppss : Void*, grfMode : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSCreatePropertyStoreFromObject(punk : Void*, grfMode : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSCreateAdapterFromPropertyStore(pps : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSGetPropertySystem(riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSGetPropertyFromPropertyStorage(psps : Win32cr::UI::Shell::PropertiesSystem::SERIALIZEDPROPSTORAGE*, cb : UInt32, rpkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSGetNamedPropertyFromPropertyStorage(psps : Win32cr::UI::Shell::PropertiesSystem::SERIALIZEDPROPSTORAGE*, cb : UInt32, pszName : Win32cr::Foundation::PWSTR, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadType(propBag : Void*, propName : Win32cr::Foundation::PWSTR, var : Win32cr::System::Com::VARIANT*, type__ : UInt16) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadStr(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : UInt16*, characterCount : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadStrAlloc(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadBSTR(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WriteStr(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WriteBSTR(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadInt(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WriteInt(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadSHORT(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Int16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WriteSHORT(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Int16) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadLONG(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WriteLONG(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadDWORD(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WriteDWORD(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadBOOL(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WriteBOOL(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadPOINTL(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::POINTL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WritePOINTL(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::POINTL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadPOINTS(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::POINTS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WritePOINTS(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::POINTS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadRECTL(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::RECTL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WriteRECTL(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::RECTL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadStream(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WriteStream(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_Delete(propBag : Void*, propName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadULONGLONG(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WriteULONGLONG(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : UInt64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadUnknown(propBag : Void*, propName : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WriteUnknown(propBag : Void*, propName : Win32cr::Foundation::PWSTR, punk : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadGUID(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WriteGUID(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_ReadPropertyKey(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PSPropertyBag_WritePropertyKey(propBag : Void*, propName : Win32cr::Foundation::PWSTR, value : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromResource(hinst : Win32cr::Foundation::HINSTANCE, id : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromBuffer(pv : Void*, cb : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromCLSID(clsid : LibC::GUID*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromGUIDAsString(guid : LibC::GUID*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromFileTime(pftIn : Win32cr::Foundation::FILETIME*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromPropVariantVectorElem(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantVectorFromPropVariant(propvarSingle : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ppropvarVector : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromStrRet(pstrret : Win32cr::UI::Shell::Common::STRRET*, pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromBooleanVector(prgf : Win32cr::Foundation::BOOL*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromInt16Vector(prgn : Int16*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromUInt16Vector(prgn : UInt16*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromInt32Vector(prgn : Int32*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromUInt32Vector(prgn : UInt32*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromInt64Vector(prgn : Int64*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromUInt64Vector(prgn : UInt64*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromDoubleVector(prgn : Float64*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromFileTimeVector(prgft : Win32cr::Foundation::FILETIME*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromStringVector(prgsz : Win32cr::Foundation::PWSTR*, cElems : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitPropVariantFromStringAsVector(psz : Win32cr::Foundation::PWSTR, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToBooleanWithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, fDefault : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PropVariantToInt16WithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iDefault : Int16) : Int16
 
+    # :nodoc:
     fun PropVariantToUInt16WithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, uiDefault : UInt16) : UInt16
 
+    # :nodoc:
     fun PropVariantToInt32WithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, lDefault : Int32) : Int32
 
+    # :nodoc:
     fun PropVariantToUInt32WithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ulDefault : UInt32) : UInt32
 
+    # :nodoc:
     fun PropVariantToInt64WithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, llDefault : Int64) : Int64
 
+    # :nodoc:
     fun PropVariantToUInt64WithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ullDefault : UInt64) : UInt64
 
+    # :nodoc:
     fun PropVariantToDoubleWithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, dblDefault : Float64) : Float64
 
+    # :nodoc:
     fun PropVariantToStringWithDefault(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pszDefault : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun PropVariantToBoolean(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pfRet : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToInt16(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, piRet : Int16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToUInt16(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, puiRet : UInt16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToInt32(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, plRet : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToUInt32(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pulRet : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToInt64(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pllRet : Int64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToUInt64(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pullRet : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToDouble(propvarIn : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pdblRet : Float64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToBuffer(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pv : Void*, cb : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToString(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, psz : UInt16*, cch : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToGUID(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pguid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToStringAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ppszOut : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToBSTR(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pbstrOut : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToStrRet(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pstrret : Win32cr::UI::Shell::Common::STRRET*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToFileTime(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pstfOut : Win32cr::UI::Shell::PropertiesSystem::PSTIME_FLAGS, pftOut : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantGetElementCount(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : UInt32
 
+    # :nodoc:
     fun PropVariantToBooleanVector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgf : Win32cr::Foundation::BOOL*, crgf : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToInt16Vector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : Int16*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToUInt16Vector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : UInt16*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToInt32Vector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : Int32*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToUInt32Vector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : UInt32*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToInt64Vector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : Int64*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToUInt64Vector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : UInt64*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToDoubleVector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgn : Float64*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToFileTimeVector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgft : Win32cr::Foundation::FILETIME*, crgft : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToStringVector(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prgsz : Win32cr::Foundation::PWSTR*, crgsz : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToBooleanVectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgf : Win32cr::Foundation::BOOL**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToInt16VectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : Int16**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToUInt16VectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : UInt16**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToInt32VectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : Int32**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToUInt32VectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : UInt32**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToInt64VectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : Int64**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToUInt64VectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : UInt64**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToDoubleVectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgn : Float64**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToFileTimeVectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgft : Win32cr::Foundation::FILETIME**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToStringVectorAlloc(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pprgsz : Win32cr::Foundation::PWSTR**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantGetBooleanElem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pfVal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantGetInt16Elem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : Int16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantGetUInt16Elem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : UInt16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantGetInt32Elem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantGetUInt32Elem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantGetInt64Elem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : Int64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantGetUInt64Elem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantGetDoubleElem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pnVal : Float64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantGetFileTimeElem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, pftVal : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantGetStringElem(propvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, iElem : UInt32, ppszVal : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ClearPropVariantArray(rgPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, cVars : UInt32) : Void
 
+    # :nodoc:
     fun PropVariantCompareEx(propvar1 : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, propvar2 : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, unit : Win32cr::UI::Shell::PropertiesSystem::PROPVAR_COMPARE_UNIT, flags : Win32cr::UI::Shell::PropertiesSystem::PROPVAR_COMPARE_FLAGS) : Int32
 
+    # :nodoc:
     fun PropVariantChangeType(ppropvarDest : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, propvarSrc : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, flags : Win32cr::UI::Shell::PropertiesSystem::PROPVAR_CHANGE_FLAGS, vt : UInt16) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToVariant(pPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToPropVariant(pVar : Win32cr::System::Com::VARIANT*, pPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromResource(hinst : Win32cr::Foundation::HINSTANCE, id : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromBuffer(pv : Void*, cb : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromGUIDAsString(guid : LibC::GUID*, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromFileTime(pft : Win32cr::Foundation::FILETIME*, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromFileTimeArray(prgft : Win32cr::Foundation::FILETIME*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromStrRet(pstrret : Win32cr::UI::Shell::Common::STRRET*, pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromVariantArrayElem(varIn : Win32cr::System::Com::VARIANT*, iElem : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromBooleanArray(prgf : Win32cr::Foundation::BOOL*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromInt16Array(prgn : Int16*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromUInt16Array(prgn : UInt16*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromInt32Array(prgn : Int32*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromUInt32Array(prgn : UInt32*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromInt64Array(prgn : Int64*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromUInt64Array(prgn : UInt64*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromDoubleArray(prgn : Float64*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InitVariantFromStringArray(prgsz : Win32cr::Foundation::PWSTR*, cElems : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToBooleanWithDefault(varIn : Win32cr::System::Com::VARIANT*, fDefault : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun VariantToInt16WithDefault(varIn : Win32cr::System::Com::VARIANT*, iDefault : Int16) : Int16
 
+    # :nodoc:
     fun VariantToUInt16WithDefault(varIn : Win32cr::System::Com::VARIANT*, uiDefault : UInt16) : UInt16
 
+    # :nodoc:
     fun VariantToInt32WithDefault(varIn : Win32cr::System::Com::VARIANT*, lDefault : Int32) : Int32
 
+    # :nodoc:
     fun VariantToUInt32WithDefault(varIn : Win32cr::System::Com::VARIANT*, ulDefault : UInt32) : UInt32
 
+    # :nodoc:
     fun VariantToInt64WithDefault(varIn : Win32cr::System::Com::VARIANT*, llDefault : Int64) : Int64
 
+    # :nodoc:
     fun VariantToUInt64WithDefault(varIn : Win32cr::System::Com::VARIANT*, ullDefault : UInt64) : UInt64
 
+    # :nodoc:
     fun VariantToDoubleWithDefault(varIn : Win32cr::System::Com::VARIANT*, dblDefault : Float64) : Float64
 
+    # :nodoc:
     fun VariantToStringWithDefault(varIn : Win32cr::System::Com::VARIANT*, pszDefault : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun VariantToBoolean(varIn : Win32cr::System::Com::VARIANT*, pfRet : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToInt16(varIn : Win32cr::System::Com::VARIANT*, piRet : Int16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToUInt16(varIn : Win32cr::System::Com::VARIANT*, puiRet : UInt16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToInt32(varIn : Win32cr::System::Com::VARIANT*, plRet : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToUInt32(varIn : Win32cr::System::Com::VARIANT*, pulRet : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToInt64(varIn : Win32cr::System::Com::VARIANT*, pllRet : Int64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToUInt64(varIn : Win32cr::System::Com::VARIANT*, pullRet : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToDouble(varIn : Win32cr::System::Com::VARIANT*, pdblRet : Float64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToBuffer(varIn : Win32cr::System::Com::VARIANT*, pv : Void*, cb : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToGUID(varIn : Win32cr::System::Com::VARIANT*, pguid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToString(varIn : Win32cr::System::Com::VARIANT*, pszBuf : UInt16*, cchBuf : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToStringAlloc(varIn : Win32cr::System::Com::VARIANT*, ppszBuf : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToDosDateTime(varIn : Win32cr::System::Com::VARIANT*, pwDate : UInt16*, pwTime : UInt16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToStrRet(varIn : Win32cr::System::Com::VARIANT*, pstrret : Win32cr::UI::Shell::Common::STRRET*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToFileTime(varIn : Win32cr::System::Com::VARIANT*, stfOut : Win32cr::UI::Shell::PropertiesSystem::PSTIME_FLAGS, pftOut : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantGetElementCount(varIn : Win32cr::System::Com::VARIANT*) : UInt32
 
+    # :nodoc:
     fun VariantToBooleanArray(var : Win32cr::System::Com::VARIANT*, prgf : Win32cr::Foundation::BOOL*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToInt16Array(var : Win32cr::System::Com::VARIANT*, prgn : Int16*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToUInt16Array(var : Win32cr::System::Com::VARIANT*, prgn : UInt16*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToInt32Array(var : Win32cr::System::Com::VARIANT*, prgn : Int32*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToUInt32Array(var : Win32cr::System::Com::VARIANT*, prgn : UInt32*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToInt64Array(var : Win32cr::System::Com::VARIANT*, prgn : Int64*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToUInt64Array(var : Win32cr::System::Com::VARIANT*, prgn : UInt64*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToDoubleArray(var : Win32cr::System::Com::VARIANT*, prgn : Float64*, crgn : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToStringArray(var : Win32cr::System::Com::VARIANT*, prgsz : Win32cr::Foundation::PWSTR*, crgsz : UInt32, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToBooleanArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgf : Win32cr::Foundation::BOOL**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToInt16ArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : Int16**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToUInt16ArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : UInt16**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToInt32ArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : Int32**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToUInt32ArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : UInt32**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToInt64ArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : Int64**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToUInt64ArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : UInt64**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToDoubleArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgn : Float64**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantToStringArrayAlloc(var : Win32cr::System::Com::VARIANT*, pprgsz : Win32cr::Foundation::PWSTR**, pcElem : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantGetBooleanElem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pfVal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantGetInt16Elem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : Int16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantGetUInt16Elem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : UInt16*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantGetInt32Elem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantGetUInt32Elem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantGetInt64Elem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : Int64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantGetUInt64Elem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : UInt64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantGetDoubleElem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, pnVal : Float64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VariantGetStringElem(var : Win32cr::System::Com::VARIANT*, iElem : UInt32, ppszVal : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ClearVariantArray(pvars : Win32cr::System::Com::VARIANT*, cvars : UInt32) : Void
 
+    # :nodoc:
     fun VariantCompare(var1 : Win32cr::System::Com::VARIANT*, var2 : Win32cr::System::Com::VARIANT*) : Int32
 
+    # :nodoc:
     fun SHGetPropertyStoreFromIDList(pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*, flags : Win32cr::UI::Shell::PropertiesSystem::GETPROPERTYSTOREFLAGS, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SHGetPropertyStoreFromParsingName(pszPath : Win32cr::Foundation::PWSTR, pbc : Void*, flags : Win32cr::UI::Shell::PropertiesSystem::GETPROPERTYSTOREFLAGS, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SHAddDefaultPropertiesByExt(pszExt : Win32cr::Foundation::PWSTR, pPropStore : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PifMgr_OpenProperties(pszApp : Win32cr::Foundation::PWSTR, pszPIF : Win32cr::Foundation::PWSTR, hInf : UInt32, flOpt : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun PifMgr_GetProperties(hProps : Win32cr::Foundation::HANDLE, pszGroup : Win32cr::Foundation::PSTR, lpProps : Void*, cbProps : Int32, flOpt : UInt32) : Int32
 
+    # :nodoc:
     fun PifMgr_SetProperties(hProps : Win32cr::Foundation::HANDLE, pszGroup : Win32cr::Foundation::PSTR, lpProps : Void*, cbProps : Int32, flOpt : UInt32) : Int32
 
+    # :nodoc:
     fun PifMgr_CloseProperties(hProps : Win32cr::Foundation::HANDLE, flOpt : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun SHPropStgCreate(psstg : Void*, fmtid : LibC::GUID*, pclsid : LibC::GUID*, grfFlags : UInt32, grfMode : UInt32, dwDisposition : UInt32, ppstg : Void**, puCodePage : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SHPropStgReadMultiple(pps : Void*, uCodePage : UInt32, cpspec : UInt32, rgpspec : Win32cr::System::Com::StructuredStorage::PROPSPEC*, rgvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SHPropStgWriteMultiple(pps : Void*, puCodePage : UInt32*, cpspec : UInt32, rgpspec : Win32cr::System::Com::StructuredStorage::PROPSPEC*, rgvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, propidNameFirst : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SHGetPropertyStoreForWindow(hwnd : Win32cr::Foundation::HWND, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
   end

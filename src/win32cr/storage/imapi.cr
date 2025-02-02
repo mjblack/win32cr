@@ -5,6 +5,7 @@ require "./../system/com/structured_storage.cr"
 require "./../system/address_book.cr"
 
 module Win32cr::Storage::Imapi
+  extend self
   alias MSGCALLRELEASE = Proc(UInt32, Void*, Void)
 
   IMAPI_SECTOR_SIZE = 2048_u32
@@ -5510,18 +5511,48 @@ module Win32cr::Storage::Imapi
 
   end
 
+  def openIMsgSession(lpMalloc : Void*, ulFlags : UInt32, lppMsgSess : Win32cr::Storage::Imapi::MSGSESS_**) : Int32
+    C.OpenIMsgSession(lpMalloc, ulFlags, lppMsgSess)
+  end
+
+  def closeIMsgSession(lpMsgSess : Win32cr::Storage::Imapi::MSGSESS_*) : Void
+    C.CloseIMsgSession(lpMsgSess)
+  end
+
+  def openIMsgOnIStg(lpMsgSess : Win32cr::Storage::Imapi::MSGSESS_*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpAllocateMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpMalloc : Void*, lpMapiSup : Void*, lpStg : Void*, lpfMsgCallRelease : Win32cr::Storage::Imapi::MSGCALLRELEASE*, ulCallerData : UInt32, ulFlags : UInt32, lppMsg : Void**) : Int32
+    C.OpenIMsgOnIStg(lpMsgSess, lpAllocateBuffer, lpAllocateMore, lpFreeBuffer, lpMalloc, lpMapiSup, lpStg, lpfMsgCallRelease, ulCallerData, ulFlags, lppMsg)
+  end
+
+  def getAttribIMsgOnIStg(lpObject : Void*, lpPropTagArray : Win32cr::System::AddressBook::SPropTagArray*, lppPropAttrArray : Win32cr::Storage::Imapi::SPropAttrArray**) : Win32cr::Foundation::HRESULT
+    C.GetAttribIMsgOnIStg(lpObject, lpPropTagArray, lppPropAttrArray)
+  end
+
+  def setAttribIMsgOnIStg(lpObject : Void*, lpPropTags : Win32cr::System::AddressBook::SPropTagArray*, lpPropAttrs : Win32cr::Storage::Imapi::SPropAttrArray*, lppPropProblems : Win32cr::System::AddressBook::SPropProblemArray**) : Win32cr::Foundation::HRESULT
+    C.SetAttribIMsgOnIStg(lpObject, lpPropTags, lpPropAttrs, lppPropProblems)
+  end
+
+  def mapStorageSCode(stg_s_code : Int32) : Int32
+    C.MapStorageSCode(stg_s_code)
+  end
+
   @[Link("mapi32")]
   lib C
+    # :nodoc:
     fun OpenIMsgSession(lpMalloc : Void*, ulFlags : UInt32, lppMsgSess : Win32cr::Storage::Imapi::MSGSESS_**) : Int32
 
+    # :nodoc:
     fun CloseIMsgSession(lpMsgSess : Win32cr::Storage::Imapi::MSGSESS_*) : Void
 
+    # :nodoc:
     fun OpenIMsgOnIStg(lpMsgSess : Win32cr::Storage::Imapi::MSGSESS_*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpAllocateMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpMalloc : Void*, lpMapiSup : Void*, lpStg : Void*, lpfMsgCallRelease : Win32cr::Storage::Imapi::MSGCALLRELEASE*, ulCallerData : UInt32, ulFlags : UInt32, lppMsg : Void**) : Int32
 
+    # :nodoc:
     fun GetAttribIMsgOnIStg(lpObject : Void*, lpPropTagArray : Win32cr::System::AddressBook::SPropTagArray*, lppPropAttrArray : Win32cr::Storage::Imapi::SPropAttrArray**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetAttribIMsgOnIStg(lpObject : Void*, lpPropTags : Win32cr::System::AddressBook::SPropTagArray*, lpPropAttrs : Win32cr::Storage::Imapi::SPropAttrArray*, lppPropProblems : Win32cr::System::AddressBook::SPropProblemArray**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MapStorageSCode(stg_s_code : Int32) : Int32
 
   end

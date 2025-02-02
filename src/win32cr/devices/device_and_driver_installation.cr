@@ -8,6 +8,7 @@ require "./../graphics/gdi.cr"
 require "./../data/html_help.cr"
 
 module Win32cr::Devices::DeviceAndDriverInstallation
+  extend self
   alias HCMNOTIFICATION = LibC::IntPtrT
   alias HDEVINFO = LibC::IntPtrT
   alias PSP_FILE_CALLBACK_A = Proc(Void*, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, UInt32)
@@ -3742,1158 +3743,4033 @@ module Win32cr::Devices::DeviceAndDriverInstallation
   end
   {% end %}
 
+  def setupGetInfInformationA(inf_spec : Void*, search_control : UInt32, return_buffer : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetInfInformationA(inf_spec, search_control, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetInfInformationW(inf_spec : Void*, search_control : UInt32, return_buffer : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetInfInformationW(inf_spec, search_control, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupQueryInfFileInformationA(inf_information : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, inf_index : UInt32, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupQueryInfFileInformationA(inf_information, inf_index, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupQueryInfFileInformationW(inf_information : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, inf_index : UInt32, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupQueryInfFileInformationW(inf_information, inf_index, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupQueryInfOriginalFileInformationA(inf_information : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, inf_index : UInt32, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, original_file_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ORIGINAL_FILE_INFO_A*) : Win32cr::Foundation::BOOL
+    C.SetupQueryInfOriginalFileInformationA(inf_information, inf_index, alternate_platform_info, original_file_info)
+  end
+
+  def setupQueryInfOriginalFileInformationW(inf_information : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, inf_index : UInt32, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, original_file_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ORIGINAL_FILE_INFO_W*) : Win32cr::Foundation::BOOL
+    C.SetupQueryInfOriginalFileInformationW(inf_information, inf_index, alternate_platform_info, original_file_info)
+  end
+
+  def setupQueryInfVersionInformationA(inf_information : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, inf_index : UInt32, key : Win32cr::Foundation::PSTR, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupQueryInfVersionInformationA(inf_information, inf_index, key, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupQueryInfVersionInformationW(inf_information : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, inf_index : UInt32, key : Win32cr::Foundation::PWSTR, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupQueryInfVersionInformationW(inf_information, inf_index, key, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetInfDriverStoreLocationA(file_name : Win32cr::Foundation::PSTR, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, locale_name : Win32cr::Foundation::PSTR, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetInfDriverStoreLocationA(file_name, alternate_platform_info, locale_name, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetInfDriverStoreLocationW(file_name : Win32cr::Foundation::PWSTR, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, locale_name : Win32cr::Foundation::PWSTR, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetInfDriverStoreLocationW(file_name, alternate_platform_info, locale_name, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetInfPublishedNameA(driver_store_location : Win32cr::Foundation::PSTR, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetInfPublishedNameA(driver_store_location, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetInfPublishedNameW(driver_store_location : Win32cr::Foundation::PWSTR, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetInfPublishedNameW(driver_store_location, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetInfFileListA(directory_path : Win32cr::Foundation::PSTR, inf_style : UInt32, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetInfFileListA(directory_path, inf_style, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetInfFileListW(directory_path : Win32cr::Foundation::PWSTR, inf_style : UInt32, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetInfFileListW(directory_path, inf_style, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupOpenInfFileW(file_name : Win32cr::Foundation::PWSTR, inf_class : Win32cr::Foundation::PWSTR, inf_style : UInt32, error_line : UInt32*) : Void*
+    C.SetupOpenInfFileW(file_name, inf_class, inf_style, error_line)
+  end
+
+  def setupOpenInfFileA(file_name : Win32cr::Foundation::PSTR, inf_class : Win32cr::Foundation::PSTR, inf_style : UInt32, error_line : UInt32*) : Void*
+    C.SetupOpenInfFileA(file_name, inf_class, inf_style, error_line)
+  end
+
+  def setupOpenMasterInf : Void*
+    C.SetupOpenMasterInf
+  end
+
+  def setupOpenAppendInfFileW(file_name : Win32cr::Foundation::PWSTR, inf_handle : Void*, error_line : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupOpenAppendInfFileW(file_name, inf_handle, error_line)
+  end
+
+  def setupOpenAppendInfFileA(file_name : Win32cr::Foundation::PSTR, inf_handle : Void*, error_line : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupOpenAppendInfFileA(file_name, inf_handle, error_line)
+  end
+
+  def setupCloseInfFile(inf_handle : Void*) : Void
+    C.SetupCloseInfFile(inf_handle)
+  end
+
+  def setupFindFirstLineA(inf_handle : Void*, section : Win32cr::Foundation::PSTR, key : Win32cr::Foundation::PSTR, context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
+    C.SetupFindFirstLineA(inf_handle, section, key, context)
+  end
+
+  def setupFindFirstLineW(inf_handle : Void*, section : Win32cr::Foundation::PWSTR, key : Win32cr::Foundation::PWSTR, context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
+    C.SetupFindFirstLineW(inf_handle, section, key, context)
+  end
+
+  def setupFindNextLine(context_in : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, context_out : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
+    C.SetupFindNextLine(context_in, context_out)
+  end
+
+  def setupFindNextMatchLineA(context_in : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, key : Win32cr::Foundation::PSTR, context_out : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
+    C.SetupFindNextMatchLineA(context_in, key, context_out)
+  end
+
+  def setupFindNextMatchLineW(context_in : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, key : Win32cr::Foundation::PWSTR, context_out : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
+    C.SetupFindNextMatchLineW(context_in, key, context_out)
+  end
+
+  def setupGetLineByIndexA(inf_handle : Void*, section : Win32cr::Foundation::PSTR, index : UInt32, context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
+    C.SetupGetLineByIndexA(inf_handle, section, index, context)
+  end
+
+  def setupGetLineByIndexW(inf_handle : Void*, section : Win32cr::Foundation::PWSTR, index : UInt32, context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
+    C.SetupGetLineByIndexW(inf_handle, section, index, context)
+  end
+
+  def setupGetLineCountA(inf_handle : Void*, section : Win32cr::Foundation::PSTR) : Int32
+    C.SetupGetLineCountA(inf_handle, section)
+  end
+
+  def setupGetLineCountW(inf_handle : Void*, section : Win32cr::Foundation::PWSTR) : Int32
+    C.SetupGetLineCountW(inf_handle, section)
+  end
+
+  def setupGetLineTextA(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, inf_handle : Void*, section : Win32cr::Foundation::PSTR, key : Win32cr::Foundation::PSTR, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetLineTextA(context, inf_handle, section, key, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetLineTextW(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, inf_handle : Void*, section : Win32cr::Foundation::PWSTR, key : Win32cr::Foundation::PWSTR, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetLineTextW(context, inf_handle, section, key, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetFieldCount(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : UInt32
+    C.SetupGetFieldCount(context)
+  end
+
+  def setupGetStringFieldA(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, field_index : UInt32, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetStringFieldA(context, field_index, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetStringFieldW(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, field_index : UInt32, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetStringFieldW(context, field_index, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetIntField(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, field_index : UInt32, integer_value : Int32*) : Win32cr::Foundation::BOOL
+    C.SetupGetIntField(context, field_index, integer_value)
+  end
+
+  def setupGetMultiSzFieldA(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, field_index : UInt32, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetMultiSzFieldA(context, field_index, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetMultiSzFieldW(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, field_index : UInt32, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetMultiSzFieldW(context, field_index, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetBinaryField(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, field_index : UInt32, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetBinaryField(context, field_index, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetFileCompressionInfoA(source_file_name : Win32cr::Foundation::PSTR, actual_source_file_name : Win32cr::Foundation::PSTR*, source_file_size : UInt32*, target_file_size : UInt32*, compression_type : UInt32*) : UInt32
+    C.SetupGetFileCompressionInfoA(source_file_name, actual_source_file_name, source_file_size, target_file_size, compression_type)
+  end
+
+  def setupGetFileCompressionInfoW(source_file_name : Win32cr::Foundation::PWSTR, actual_source_file_name : Win32cr::Foundation::PWSTR*, source_file_size : UInt32*, target_file_size : UInt32*, compression_type : UInt32*) : UInt32
+    C.SetupGetFileCompressionInfoW(source_file_name, actual_source_file_name, source_file_size, target_file_size, compression_type)
+  end
+
+  def setupGetFileCompressionInfoExA(source_file_name : Win32cr::Foundation::PSTR, actual_source_file_name_buffer : UInt8*, actual_source_file_name_buffer_len : UInt32, required_buffer_len : UInt32*, source_file_size : UInt32*, target_file_size : UInt32*, compression_type : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetFileCompressionInfoExA(source_file_name, actual_source_file_name_buffer, actual_source_file_name_buffer_len, required_buffer_len, source_file_size, target_file_size, compression_type)
+  end
+
+  def setupGetFileCompressionInfoExW(source_file_name : Win32cr::Foundation::PWSTR, actual_source_file_name_buffer : UInt16*, actual_source_file_name_buffer_len : UInt32, required_buffer_len : UInt32*, source_file_size : UInt32*, target_file_size : UInt32*, compression_type : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetFileCompressionInfoExW(source_file_name, actual_source_file_name_buffer, actual_source_file_name_buffer_len, required_buffer_len, source_file_size, target_file_size, compression_type)
+  end
+
+  def setupDecompressOrCopyFileA(source_file_name : Win32cr::Foundation::PSTR, target_file_name : Win32cr::Foundation::PSTR, compression_type : UInt32*) : UInt32
+    C.SetupDecompressOrCopyFileA(source_file_name, target_file_name, compression_type)
+  end
+
+  def setupDecompressOrCopyFileW(source_file_name : Win32cr::Foundation::PWSTR, target_file_name : Win32cr::Foundation::PWSTR, compression_type : UInt32*) : UInt32
+    C.SetupDecompressOrCopyFileW(source_file_name, target_file_name, compression_type)
+  end
+
+  def setupGetSourceFileLocationA(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, file_name : Win32cr::Foundation::PSTR, source_id : UInt32*, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetSourceFileLocationA(inf_handle, inf_context, file_name, source_id, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetSourceFileLocationW(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, file_name : Win32cr::Foundation::PWSTR, source_id : UInt32*, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetSourceFileLocationW(inf_handle, inf_context, file_name, source_id, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetSourceFileSizeA(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, file_name : Win32cr::Foundation::PSTR, section : Win32cr::Foundation::PSTR, file_size : UInt32*, rounding_factor : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupGetSourceFileSizeA(inf_handle, inf_context, file_name, section, file_size, rounding_factor)
+  end
+
+  def setupGetSourceFileSizeW(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, file_name : Win32cr::Foundation::PWSTR, section : Win32cr::Foundation::PWSTR, file_size : UInt32*, rounding_factor : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupGetSourceFileSizeW(inf_handle, inf_context, file_name, section, file_size, rounding_factor)
+  end
+
+  def setupGetTargetPathA(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, section : Win32cr::Foundation::PSTR, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetTargetPathA(inf_handle, inf_context, section, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetTargetPathW(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, section : Win32cr::Foundation::PWSTR, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetTargetPathW(inf_handle, inf_context, section, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupSetSourceListA(flags : UInt32, source_list : Win32cr::Foundation::PSTR*, source_count : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupSetSourceListA(flags, source_list, source_count)
+  end
+
+  def setupSetSourceListW(flags : UInt32, source_list : Win32cr::Foundation::PWSTR*, source_count : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupSetSourceListW(flags, source_list, source_count)
+  end
+
+  def setupCancelTemporarySourceList : Win32cr::Foundation::BOOL
+    C.SetupCancelTemporarySourceList
+  end
+
+  def setupAddToSourceListA(flags : UInt32, source : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetupAddToSourceListA(flags, source)
+  end
+
+  def setupAddToSourceListW(flags : UInt32, source : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetupAddToSourceListW(flags, source)
+  end
+
+  def setupRemoveFromSourceListA(flags : UInt32, source : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetupRemoveFromSourceListA(flags, source)
+  end
+
+  def setupRemoveFromSourceListW(flags : UInt32, source : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetupRemoveFromSourceListW(flags, source)
+  end
+
+  def setupQuerySourceListA(flags : UInt32, list : Win32cr::Foundation::PSTR**, count : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupQuerySourceListA(flags, list, count)
+  end
+
+  def setupQuerySourceListW(flags : UInt32, list : Win32cr::Foundation::PWSTR**, count : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupQuerySourceListW(flags, list, count)
+  end
+
+  def setupFreeSourceListA(list : Win32cr::Foundation::PSTR**, count : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupFreeSourceListA(list, count)
+  end
+
+  def setupFreeSourceListW(list : Win32cr::Foundation::PWSTR**, count : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupFreeSourceListW(list, count)
+  end
+
+  def setupPromptForDiskA(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PSTR, disk_name : Win32cr::Foundation::PSTR, path_to_source : Win32cr::Foundation::PSTR, file_sought : Win32cr::Foundation::PSTR, tag_file : Win32cr::Foundation::PSTR, disk_prompt_style : UInt32, path_buffer : UInt8*, path_buffer_size : UInt32, path_required_size : UInt32*) : UInt32
+    C.SetupPromptForDiskA(hwndParent, dialog_title, disk_name, path_to_source, file_sought, tag_file, disk_prompt_style, path_buffer, path_buffer_size, path_required_size)
+  end
+
+  def setupPromptForDiskW(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PWSTR, disk_name : Win32cr::Foundation::PWSTR, path_to_source : Win32cr::Foundation::PWSTR, file_sought : Win32cr::Foundation::PWSTR, tag_file : Win32cr::Foundation::PWSTR, disk_prompt_style : UInt32, path_buffer : UInt16*, path_buffer_size : UInt32, path_required_size : UInt32*) : UInt32
+    C.SetupPromptForDiskW(hwndParent, dialog_title, disk_name, path_to_source, file_sought, tag_file, disk_prompt_style, path_buffer, path_buffer_size, path_required_size)
+  end
+
+  def setupCopyErrorA(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PSTR, disk_name : Win32cr::Foundation::PSTR, path_to_source : Win32cr::Foundation::PSTR, source_file : Win32cr::Foundation::PSTR, target_path_file : Win32cr::Foundation::PSTR, win32_error_code : UInt32, style : UInt32, path_buffer : UInt8*, path_buffer_size : UInt32, path_required_size : UInt32*) : UInt32
+    C.SetupCopyErrorA(hwndParent, dialog_title, disk_name, path_to_source, source_file, target_path_file, win32_error_code, style, path_buffer, path_buffer_size, path_required_size)
+  end
+
+  def setupCopyErrorW(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PWSTR, disk_name : Win32cr::Foundation::PWSTR, path_to_source : Win32cr::Foundation::PWSTR, source_file : Win32cr::Foundation::PWSTR, target_path_file : Win32cr::Foundation::PWSTR, win32_error_code : UInt32, style : UInt32, path_buffer : UInt16*, path_buffer_size : UInt32, path_required_size : UInt32*) : UInt32
+    C.SetupCopyErrorW(hwndParent, dialog_title, disk_name, path_to_source, source_file, target_path_file, win32_error_code, style, path_buffer, path_buffer_size, path_required_size)
+  end
+
+  def setupRenameErrorA(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PSTR, source_file : Win32cr::Foundation::PSTR, target_file : Win32cr::Foundation::PSTR, win32_error_code : UInt32, style : UInt32) : UInt32
+    C.SetupRenameErrorA(hwndParent, dialog_title, source_file, target_file, win32_error_code, style)
+  end
+
+  def setupRenameErrorW(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PWSTR, source_file : Win32cr::Foundation::PWSTR, target_file : Win32cr::Foundation::PWSTR, win32_error_code : UInt32, style : UInt32) : UInt32
+    C.SetupRenameErrorW(hwndParent, dialog_title, source_file, target_file, win32_error_code, style)
+  end
+
+  def setupDeleteErrorA(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, win32_error_code : UInt32, style : UInt32) : UInt32
+    C.SetupDeleteErrorA(hwndParent, dialog_title, file, win32_error_code, style)
+  end
+
+  def setupDeleteErrorW(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, win32_error_code : UInt32, style : UInt32) : UInt32
+    C.SetupDeleteErrorW(hwndParent, dialog_title, file, win32_error_code, style)
+  end
+
+  def setupBackupErrorA(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PSTR, source_file : Win32cr::Foundation::PSTR, target_file : Win32cr::Foundation::PSTR, win32_error_code : UInt32, style : UInt32) : UInt32
+    C.SetupBackupErrorA(hwndParent, dialog_title, source_file, target_file, win32_error_code, style)
+  end
+
+  def setupBackupErrorW(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PWSTR, source_file : Win32cr::Foundation::PWSTR, target_file : Win32cr::Foundation::PWSTR, win32_error_code : UInt32, style : UInt32) : UInt32
+    C.SetupBackupErrorW(hwndParent, dialog_title, source_file, target_file, win32_error_code, style)
+  end
+
+  def setupSetDirectoryIdA(inf_handle : Void*, id : UInt32, directory : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetupSetDirectoryIdA(inf_handle, id, directory)
+  end
+
+  def setupSetDirectoryIdW(inf_handle : Void*, id : UInt32, directory : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetupSetDirectoryIdW(inf_handle, id, directory)
+  end
+
+  def setupSetDirectoryIdExA(inf_handle : Void*, id : UInt32, directory : Win32cr::Foundation::PSTR, flags : UInt32, reserved1 : UInt32, reserved2 : Void*) : Win32cr::Foundation::BOOL
+    C.SetupSetDirectoryIdExA(inf_handle, id, directory, flags, reserved1, reserved2)
+  end
+
+  def setupSetDirectoryIdExW(inf_handle : Void*, id : UInt32, directory : Win32cr::Foundation::PWSTR, flags : UInt32, reserved1 : UInt32, reserved2 : Void*) : Win32cr::Foundation::BOOL
+    C.SetupSetDirectoryIdExW(inf_handle, id, directory, flags, reserved1, reserved2)
+  end
+
+  def setupGetSourceInfoA(inf_handle : Void*, source_id : UInt32, info_desired : UInt32, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetSourceInfoA(inf_handle, source_id, info_desired, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupGetSourceInfoW(inf_handle : Void*, source_id : UInt32, info_desired : UInt32, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetSourceInfoW(inf_handle, source_id, info_desired, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupInstallFileA(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, source_file : Win32cr::Foundation::PSTR, source_path_root : Win32cr::Foundation::PSTR, destination_name : Win32cr::Foundation::PSTR, copy_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_COPY_STYLE, copy_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, context : Void*) : Win32cr::Foundation::BOOL
+    C.SetupInstallFileA(inf_handle, inf_context, source_file, source_path_root, destination_name, copy_style, copy_msg_handler, context)
+  end
+
+  def setupInstallFileW(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, source_file : Win32cr::Foundation::PWSTR, source_path_root : Win32cr::Foundation::PWSTR, destination_name : Win32cr::Foundation::PWSTR, copy_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_COPY_STYLE, copy_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_W, context : Void*) : Win32cr::Foundation::BOOL
+    C.SetupInstallFileW(inf_handle, inf_context, source_file, source_path_root, destination_name, copy_style, copy_msg_handler, context)
+  end
+
+  def setupInstallFileExA(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, source_file : Win32cr::Foundation::PSTR, source_path_root : Win32cr::Foundation::PSTR, destination_name : Win32cr::Foundation::PSTR, copy_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_COPY_STYLE, copy_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, context : Void*, file_was_in_use : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.SetupInstallFileExA(inf_handle, inf_context, source_file, source_path_root, destination_name, copy_style, copy_msg_handler, context, file_was_in_use)
+  end
+
+  def setupInstallFileExW(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, source_file : Win32cr::Foundation::PWSTR, source_path_root : Win32cr::Foundation::PWSTR, destination_name : Win32cr::Foundation::PWSTR, copy_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_COPY_STYLE, copy_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_W, context : Void*, file_was_in_use : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.SetupInstallFileExW(inf_handle, inf_context, source_file, source_path_root, destination_name, copy_style, copy_msg_handler, context, file_was_in_use)
+  end
+
+  def setupOpenFileQueue : Void*
+    C.SetupOpenFileQueue
+  end
+
+  def setupCloseFileQueue(queue_handle : Void*) : Win32cr::Foundation::BOOL
+    C.SetupCloseFileQueue(queue_handle)
+  end
+
+  def setupSetFileQueueAlternatePlatformA(queue_handle : Void*, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, alternate_default_catalog_file : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetupSetFileQueueAlternatePlatformA(queue_handle, alternate_platform_info, alternate_default_catalog_file)
+  end
+
+  def setupSetFileQueueAlternatePlatformW(queue_handle : Void*, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, alternate_default_catalog_file : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetupSetFileQueueAlternatePlatformW(queue_handle, alternate_platform_info, alternate_default_catalog_file)
+  end
+
+  def setupSetPlatformPathOverrideA(override : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetupSetPlatformPathOverrideA(override)
+  end
+
+  def setupSetPlatformPathOverrideW(override : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetupSetPlatformPathOverrideW(override)
+  end
+
+  def setupQueueCopyA(queue_handle : Void*, source_root_path : Win32cr::Foundation::PSTR, source_path : Win32cr::Foundation::PSTR, source_filename : Win32cr::Foundation::PSTR, source_description : Win32cr::Foundation::PSTR, source_tagfile : Win32cr::Foundation::PSTR, target_directory : Win32cr::Foundation::PSTR, target_filename : Win32cr::Foundation::PSTR, copy_style : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupQueueCopyA(queue_handle, source_root_path, source_path, source_filename, source_description, source_tagfile, target_directory, target_filename, copy_style)
+  end
+
+  def setupQueueCopyW(queue_handle : Void*, source_root_path : Win32cr::Foundation::PWSTR, source_path : Win32cr::Foundation::PWSTR, source_filename : Win32cr::Foundation::PWSTR, source_description : Win32cr::Foundation::PWSTR, source_tagfile : Win32cr::Foundation::PWSTR, target_directory : Win32cr::Foundation::PWSTR, target_filename : Win32cr::Foundation::PWSTR, copy_style : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupQueueCopyW(queue_handle, source_root_path, source_path, source_filename, source_description, source_tagfile, target_directory, target_filename, copy_style)
+  end
+
+  def setupQueueCopyIndirectA(copy_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_FILE_COPY_PARAMS_A*) : Win32cr::Foundation::BOOL
+    C.SetupQueueCopyIndirectA(copy_params)
+  end
+
+  def setupQueueCopyIndirectW(copy_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_FILE_COPY_PARAMS_W*) : Win32cr::Foundation::BOOL
+    C.SetupQueueCopyIndirectW(copy_params)
+  end
+
+  def setupQueueDefaultCopyA(queue_handle : Void*, inf_handle : Void*, source_root_path : Win32cr::Foundation::PSTR, source_filename : Win32cr::Foundation::PSTR, target_filename : Win32cr::Foundation::PSTR, copy_style : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupQueueDefaultCopyA(queue_handle, inf_handle, source_root_path, source_filename, target_filename, copy_style)
+  end
+
+  def setupQueueDefaultCopyW(queue_handle : Void*, inf_handle : Void*, source_root_path : Win32cr::Foundation::PWSTR, source_filename : Win32cr::Foundation::PWSTR, target_filename : Win32cr::Foundation::PWSTR, copy_style : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupQueueDefaultCopyW(queue_handle, inf_handle, source_root_path, source_filename, target_filename, copy_style)
+  end
+
+  def setupQueueCopySectionA(queue_handle : Void*, source_root_path : Win32cr::Foundation::PSTR, inf_handle : Void*, list_inf_handle : Void*, section : Win32cr::Foundation::PSTR, copy_style : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupQueueCopySectionA(queue_handle, source_root_path, inf_handle, list_inf_handle, section, copy_style)
+  end
+
+  def setupQueueCopySectionW(queue_handle : Void*, source_root_path : Win32cr::Foundation::PWSTR, inf_handle : Void*, list_inf_handle : Void*, section : Win32cr::Foundation::PWSTR, copy_style : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupQueueCopySectionW(queue_handle, source_root_path, inf_handle, list_inf_handle, section, copy_style)
+  end
+
+  def setupQueueDeleteA(queue_handle : Void*, path_part1 : Win32cr::Foundation::PSTR, path_part2 : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetupQueueDeleteA(queue_handle, path_part1, path_part2)
+  end
+
+  def setupQueueDeleteW(queue_handle : Void*, path_part1 : Win32cr::Foundation::PWSTR, path_part2 : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetupQueueDeleteW(queue_handle, path_part1, path_part2)
+  end
+
+  def setupQueueDeleteSectionA(queue_handle : Void*, inf_handle : Void*, list_inf_handle : Void*, section : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetupQueueDeleteSectionA(queue_handle, inf_handle, list_inf_handle, section)
+  end
+
+  def setupQueueDeleteSectionW(queue_handle : Void*, inf_handle : Void*, list_inf_handle : Void*, section : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetupQueueDeleteSectionW(queue_handle, inf_handle, list_inf_handle, section)
+  end
+
+  def setupQueueRenameA(queue_handle : Void*, source_path : Win32cr::Foundation::PSTR, source_filename : Win32cr::Foundation::PSTR, target_path : Win32cr::Foundation::PSTR, target_filename : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetupQueueRenameA(queue_handle, source_path, source_filename, target_path, target_filename)
+  end
+
+  def setupQueueRenameW(queue_handle : Void*, source_path : Win32cr::Foundation::PWSTR, source_filename : Win32cr::Foundation::PWSTR, target_path : Win32cr::Foundation::PWSTR, target_filename : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetupQueueRenameW(queue_handle, source_path, source_filename, target_path, target_filename)
+  end
+
+  def setupQueueRenameSectionA(queue_handle : Void*, inf_handle : Void*, list_inf_handle : Void*, section : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetupQueueRenameSectionA(queue_handle, inf_handle, list_inf_handle, section)
+  end
+
+  def setupQueueRenameSectionW(queue_handle : Void*, inf_handle : Void*, list_inf_handle : Void*, section : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetupQueueRenameSectionW(queue_handle, inf_handle, list_inf_handle, section)
+  end
+
+  def setupCommitFileQueueA(owner : Win32cr::Foundation::HWND, queue_handle : Void*, msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, context : Void*) : Win32cr::Foundation::BOOL
+    C.SetupCommitFileQueueA(owner, queue_handle, msg_handler, context)
+  end
+
+  def setupCommitFileQueueW(owner : Win32cr::Foundation::HWND, queue_handle : Void*, msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_W, context : Void*) : Win32cr::Foundation::BOOL
+    C.SetupCommitFileQueueW(owner, queue_handle, msg_handler, context)
+  end
+
+  def setupScanFileQueueA(file_queue : Void*, flags : UInt32, window : Win32cr::Foundation::HWND, callback_routine : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, callback_context : Void*, result : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupScanFileQueueA(file_queue, flags, window, callback_routine, callback_context, result)
+  end
+
+  def setupScanFileQueueW(file_queue : Void*, flags : UInt32, window : Win32cr::Foundation::HWND, callback_routine : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_W, callback_context : Void*, result : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupScanFileQueueW(file_queue, flags, window, callback_routine, callback_context, result)
+  end
+
+  def setupGetFileQueueCount(file_queue : Void*, sub_queue_file_op : UInt32, num_operations : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetFileQueueCount(file_queue, sub_queue_file_op, num_operations)
+  end
+
+  def setupGetFileQueueFlags(file_queue : Void*, flags : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupGetFileQueueFlags(file_queue, flags)
+  end
+
+  def setupSetFileQueueFlags(file_queue : Void*, flag_mask : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupSetFileQueueFlags(file_queue, flag_mask, flags)
+  end
+
+  def setupCopyOEMInfA(source_inf_file_name : Win32cr::Foundation::PSTR, oem_source_media_location : Win32cr::Foundation::PSTR, oem_source_media_type : Win32cr::Devices::DeviceAndDriverInstallation::OEM_SOURCE_MEDIA_TYPE, copy_style : UInt32, destination_inf_file_name : UInt8*, destination_inf_file_name_size : UInt32, required_size : UInt32*, destination_inf_file_name_component : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    C.SetupCopyOEMInfA(source_inf_file_name, oem_source_media_location, oem_source_media_type, copy_style, destination_inf_file_name, destination_inf_file_name_size, required_size, destination_inf_file_name_component)
+  end
+
+  def setupCopyOEMInfW(source_inf_file_name : Win32cr::Foundation::PWSTR, oem_source_media_location : Win32cr::Foundation::PWSTR, oem_source_media_type : Win32cr::Devices::DeviceAndDriverInstallation::OEM_SOURCE_MEDIA_TYPE, copy_style : UInt32, destination_inf_file_name : UInt16*, destination_inf_file_name_size : UInt32, required_size : UInt32*, destination_inf_file_name_component : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    C.SetupCopyOEMInfW(source_inf_file_name, oem_source_media_location, oem_source_media_type, copy_style, destination_inf_file_name, destination_inf_file_name_size, required_size, destination_inf_file_name_component)
+  end
+
+  def setupUninstallOEMInfA(inf_file_name : Win32cr::Foundation::PSTR, flags : UInt32, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupUninstallOEMInfA(inf_file_name, flags, reserved)
+  end
+
+  def setupUninstallOEMInfW(inf_file_name : Win32cr::Foundation::PWSTR, flags : UInt32, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupUninstallOEMInfW(inf_file_name, flags, reserved)
+  end
+
+  def setupUninstallNewlyCopiedInfs(file_queue : Void*, flags : UInt32, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupUninstallNewlyCopiedInfs(file_queue, flags, reserved)
+  end
+
+  def setupCreateDiskSpaceListA(reserved1 : Void*, reserved2 : UInt32, flags : UInt32) : Void*
+    C.SetupCreateDiskSpaceListA(reserved1, reserved2, flags)
+  end
+
+  def setupCreateDiskSpaceListW(reserved1 : Void*, reserved2 : UInt32, flags : UInt32) : Void*
+    C.SetupCreateDiskSpaceListW(reserved1, reserved2, flags)
+  end
+
+  def setupDuplicateDiskSpaceListA(disk_space : Void*, reserved1 : Void*, reserved2 : UInt32, flags : UInt32) : Void*
+    C.SetupDuplicateDiskSpaceListA(disk_space, reserved1, reserved2, flags)
+  end
+
+  def setupDuplicateDiskSpaceListW(disk_space : Void*, reserved1 : Void*, reserved2 : UInt32, flags : UInt32) : Void*
+    C.SetupDuplicateDiskSpaceListW(disk_space, reserved1, reserved2, flags)
+  end
+
+  def setupDestroyDiskSpaceList(disk_space : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDestroyDiskSpaceList(disk_space)
+  end
+
+  def setupQueryDrivesInDiskSpaceListA(disk_space : Void*, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupQueryDrivesInDiskSpaceListA(disk_space, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupQueryDrivesInDiskSpaceListW(disk_space : Void*, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupQueryDrivesInDiskSpaceListW(disk_space, return_buffer, return_buffer_size, required_size)
+  end
+
+  def setupQuerySpaceRequiredOnDriveA(disk_space : Void*, drive_spec : Win32cr::Foundation::PSTR, space_required : Int64*, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupQuerySpaceRequiredOnDriveA(disk_space, drive_spec, space_required, reserved1, reserved2)
+  end
+
+  def setupQuerySpaceRequiredOnDriveW(disk_space : Void*, drive_spec : Win32cr::Foundation::PWSTR, space_required : Int64*, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupQuerySpaceRequiredOnDriveW(disk_space, drive_spec, space_required, reserved1, reserved2)
+  end
+
+  def setupAdjustDiskSpaceListA(disk_space : Void*, drive_root : Win32cr::Foundation::PSTR, amount : Int64, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupAdjustDiskSpaceListA(disk_space, drive_root, amount, reserved1, reserved2)
+  end
+
+  def setupAdjustDiskSpaceListW(disk_space : Void*, drive_root : Win32cr::Foundation::PWSTR, amount : Int64, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupAdjustDiskSpaceListW(disk_space, drive_root, amount, reserved1, reserved2)
+  end
+
+  def setupAddToDiskSpaceListA(disk_space : Void*, target_filespec : Win32cr::Foundation::PSTR, file_size : Int64, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupAddToDiskSpaceListA(disk_space, target_filespec, file_size, operation, reserved1, reserved2)
+  end
+
+  def setupAddToDiskSpaceListW(disk_space : Void*, target_filespec : Win32cr::Foundation::PWSTR, file_size : Int64, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupAddToDiskSpaceListW(disk_space, target_filespec, file_size, operation, reserved1, reserved2)
+  end
+
+  def setupAddSectionToDiskSpaceListA(disk_space : Void*, inf_handle : Void*, list_inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupAddSectionToDiskSpaceListA(disk_space, inf_handle, list_inf_handle, section_name, operation, reserved1, reserved2)
+  end
+
+  def setupAddSectionToDiskSpaceListW(disk_space : Void*, inf_handle : Void*, list_inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupAddSectionToDiskSpaceListW(disk_space, inf_handle, list_inf_handle, section_name, operation, reserved1, reserved2)
+  end
+
+  def setupAddInstallSectionToDiskSpaceListA(disk_space : Void*, inf_handle : Void*, layout_inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupAddInstallSectionToDiskSpaceListA(disk_space, inf_handle, layout_inf_handle, section_name, reserved1, reserved2)
+  end
+
+  def setupAddInstallSectionToDiskSpaceListW(disk_space : Void*, inf_handle : Void*, layout_inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupAddInstallSectionToDiskSpaceListW(disk_space, inf_handle, layout_inf_handle, section_name, reserved1, reserved2)
+  end
+
+  def setupRemoveFromDiskSpaceListA(disk_space : Void*, target_filespec : Win32cr::Foundation::PSTR, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupRemoveFromDiskSpaceListA(disk_space, target_filespec, operation, reserved1, reserved2)
+  end
+
+  def setupRemoveFromDiskSpaceListW(disk_space : Void*, target_filespec : Win32cr::Foundation::PWSTR, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupRemoveFromDiskSpaceListW(disk_space, target_filespec, operation, reserved1, reserved2)
+  end
+
+  def setupRemoveSectionFromDiskSpaceListA(disk_space : Void*, inf_handle : Void*, list_inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupRemoveSectionFromDiskSpaceListA(disk_space, inf_handle, list_inf_handle, section_name, operation, reserved1, reserved2)
+  end
+
+  def setupRemoveSectionFromDiskSpaceListW(disk_space : Void*, inf_handle : Void*, list_inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupRemoveSectionFromDiskSpaceListW(disk_space, inf_handle, list_inf_handle, section_name, operation, reserved1, reserved2)
+  end
+
+  def setupRemoveInstallSectionFromDiskSpaceListA(disk_space : Void*, inf_handle : Void*, layout_inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupRemoveInstallSectionFromDiskSpaceListA(disk_space, inf_handle, layout_inf_handle, section_name, reserved1, reserved2)
+  end
+
+  def setupRemoveInstallSectionFromDiskSpaceListW(disk_space : Void*, inf_handle : Void*, layout_inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupRemoveInstallSectionFromDiskSpaceListW(disk_space, inf_handle, layout_inf_handle, section_name, reserved1, reserved2)
+  end
+
+  def setupIterateCabinetA(cabinet_file : Win32cr::Foundation::PSTR, reserved : UInt32, msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, context : Void*) : Win32cr::Foundation::BOOL
+    C.SetupIterateCabinetA(cabinet_file, reserved, msg_handler, context)
+  end
+
+  def setupIterateCabinetW(cabinet_file : Win32cr::Foundation::PWSTR, reserved : UInt32, msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_W, context : Void*) : Win32cr::Foundation::BOOL
+    C.SetupIterateCabinetW(cabinet_file, reserved, msg_handler, context)
+  end
+
+  def setupPromptReboot(file_queue : Void*, owner : Win32cr::Foundation::HWND, scan_only : Win32cr::Foundation::BOOL) : Int32
+    C.SetupPromptReboot(file_queue, owner, scan_only)
+  end
+
+  def setupInitDefaultQueueCallback(owner_window : Win32cr::Foundation::HWND) : Void*
+    C.SetupInitDefaultQueueCallback(owner_window)
+  end
+
+  def setupInitDefaultQueueCallbackEx(owner_window : Win32cr::Foundation::HWND, alternate_progress_window : Win32cr::Foundation::HWND, progress_message : UInt32, reserved1 : UInt32, reserved2 : Void*) : Void*
+    C.SetupInitDefaultQueueCallbackEx(owner_window, alternate_progress_window, progress_message, reserved1, reserved2)
+  end
+
+  def setupTermDefaultQueueCallback(context : Void*) : Void
+    C.SetupTermDefaultQueueCallback(context)
+  end
+
+  def setupDefaultQueueCallbackA(context : Void*, notification : UInt32, param1 : LibC::UIntPtrT, param2 : LibC::UIntPtrT) : UInt32
+    C.SetupDefaultQueueCallbackA(context, notification, param1, param2)
+  end
+
+  def setupDefaultQueueCallbackW(context : Void*, notification : UInt32, param1 : LibC::UIntPtrT, param2 : LibC::UIntPtrT) : UInt32
+    C.SetupDefaultQueueCallbackW(context, notification, param1, param2)
+  end
+
+  def setupInstallFromInfSectionA(owner : Win32cr::Foundation::HWND, inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, flags : UInt32, relative_key_root : Win32cr::System::Registry::HKEY, source_root_path : Win32cr::Foundation::PSTR, copy_flags : UInt32, msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, context : Void*, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupInstallFromInfSectionA(owner, inf_handle, section_name, flags, relative_key_root, source_root_path, copy_flags, msg_handler, context, device_info_set, device_info_data)
+  end
+
+  def setupInstallFromInfSectionW(owner : Win32cr::Foundation::HWND, inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, flags : UInt32, relative_key_root : Win32cr::System::Registry::HKEY, source_root_path : Win32cr::Foundation::PWSTR, copy_flags : UInt32, msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_W, context : Void*, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupInstallFromInfSectionW(owner, inf_handle, section_name, flags, relative_key_root, source_root_path, copy_flags, msg_handler, context, device_info_set, device_info_data)
+  end
+
+  def setupInstallFilesFromInfSectionA(inf_handle : Void*, layout_inf_handle : Void*, file_queue : Void*, section_name : Win32cr::Foundation::PSTR, source_root_path : Win32cr::Foundation::PSTR, copy_flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupInstallFilesFromInfSectionA(inf_handle, layout_inf_handle, file_queue, section_name, source_root_path, copy_flags)
+  end
+
+  def setupInstallFilesFromInfSectionW(inf_handle : Void*, layout_inf_handle : Void*, file_queue : Void*, section_name : Win32cr::Foundation::PWSTR, source_root_path : Win32cr::Foundation::PWSTR, copy_flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupInstallFilesFromInfSectionW(inf_handle, layout_inf_handle, file_queue, section_name, source_root_path, copy_flags)
+  end
+
+  def setupInstallServicesFromInfSectionA(inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupInstallServicesFromInfSectionA(inf_handle, section_name, flags)
+  end
+
+  def setupInstallServicesFromInfSectionW(inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupInstallServicesFromInfSectionW(inf_handle, section_name, flags)
+  end
+
+  def setupInstallServicesFromInfSectionExA(inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, flags : UInt32, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, reserved1 : Void*, reserved2 : Void*) : Win32cr::Foundation::BOOL
+    C.SetupInstallServicesFromInfSectionExA(inf_handle, section_name, flags, device_info_set, device_info_data, reserved1, reserved2)
+  end
+
+  def setupInstallServicesFromInfSectionExW(inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, flags : UInt32, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, reserved1 : Void*, reserved2 : Void*) : Win32cr::Foundation::BOOL
+    C.SetupInstallServicesFromInfSectionExW(inf_handle, section_name, flags, device_info_set, device_info_data, reserved1, reserved2)
+  end
+
+  def installHinfSectionA(window : Win32cr::Foundation::HWND, module_handle : Win32cr::Foundation::HINSTANCE, command_line : Win32cr::Foundation::PSTR, show_command : Int32) : Void
+    C.InstallHinfSectionA(window, module_handle, command_line, show_command)
+  end
+
+  def installHinfSectionW(window : Win32cr::Foundation::HWND, module_handle : Win32cr::Foundation::HINSTANCE, command_line : Win32cr::Foundation::PWSTR, show_command : Int32) : Void
+    C.InstallHinfSectionW(window, module_handle, command_line, show_command)
+  end
+
+  def setupInitializeFileLogA(log_file_name : Win32cr::Foundation::PSTR, flags : UInt32) : Void*
+    C.SetupInitializeFileLogA(log_file_name, flags)
+  end
+
+  def setupInitializeFileLogW(log_file_name : Win32cr::Foundation::PWSTR, flags : UInt32) : Void*
+    C.SetupInitializeFileLogW(log_file_name, flags)
+  end
+
+  def setupTerminateFileLog(file_log_handle : Void*) : Win32cr::Foundation::BOOL
+    C.SetupTerminateFileLog(file_log_handle)
+  end
+
+  def setupLogFileA(file_log_handle : Void*, log_section_name : Win32cr::Foundation::PSTR, source_filename : Win32cr::Foundation::PSTR, target_filename : Win32cr::Foundation::PSTR, checksum : UInt32, disk_tagfile : Win32cr::Foundation::PSTR, disk_description : Win32cr::Foundation::PSTR, other_info : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupLogFileA(file_log_handle, log_section_name, source_filename, target_filename, checksum, disk_tagfile, disk_description, other_info, flags)
+  end
+
+  def setupLogFileW(file_log_handle : Void*, log_section_name : Win32cr::Foundation::PWSTR, source_filename : Win32cr::Foundation::PWSTR, target_filename : Win32cr::Foundation::PWSTR, checksum : UInt32, disk_tagfile : Win32cr::Foundation::PWSTR, disk_description : Win32cr::Foundation::PWSTR, other_info : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupLogFileW(file_log_handle, log_section_name, source_filename, target_filename, checksum, disk_tagfile, disk_description, other_info, flags)
+  end
+
+  def setupRemoveFileLogEntryA(file_log_handle : Void*, log_section_name : Win32cr::Foundation::PSTR, target_filename : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetupRemoveFileLogEntryA(file_log_handle, log_section_name, target_filename)
+  end
+
+  def setupRemoveFileLogEntryW(file_log_handle : Void*, log_section_name : Win32cr::Foundation::PWSTR, target_filename : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetupRemoveFileLogEntryW(file_log_handle, log_section_name, target_filename)
+  end
+
+  def setupQueryFileLogA(file_log_handle : Void*, log_section_name : Win32cr::Foundation::PSTR, target_filename : Win32cr::Foundation::PSTR, desired_info : Win32cr::Devices::DeviceAndDriverInstallation::SetupFileLogInfo, data_out : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupQueryFileLogA(file_log_handle, log_section_name, target_filename, desired_info, data_out, return_buffer_size, required_size)
+  end
+
+  def setupQueryFileLogW(file_log_handle : Void*, log_section_name : Win32cr::Foundation::PWSTR, target_filename : Win32cr::Foundation::PWSTR, desired_info : Win32cr::Devices::DeviceAndDriverInstallation::SetupFileLogInfo, data_out : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupQueryFileLogW(file_log_handle, log_section_name, target_filename, desired_info, data_out, return_buffer_size, required_size)
+  end
+
+  def setupOpenLog(erase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SetupOpenLog(erase)
+  end
+
+  def setupLogErrorA(message_string : Win32cr::Foundation::PSTR, severity : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupLogErrorA(message_string, severity)
+  end
+
+  def setupLogErrorW(message_string : Win32cr::Foundation::PWSTR, severity : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupLogErrorW(message_string, severity)
+  end
+
+  def setupCloseLog : Void
+    C.SetupCloseLog
+  end
+
+  def setupGetThreadLogToken : UInt64
+    C.SetupGetThreadLogToken
+  end
+
+  def setupSetThreadLogToken(log_token : UInt64) : Void
+    C.SetupSetThreadLogToken(log_token)
+  end
+
+  def setupWriteTextLog(log_token : UInt64, category : UInt32, flags : UInt32, message_str : Win32cr::Foundation::PSTR) : Void
+    C.SetupWriteTextLog(log_token, category, flags, message_str)
+  end
+
+  def setupWriteTextLogError(log_token : UInt64, category : UInt32, log_flags : UInt32, error : UInt32, message_str : Win32cr::Foundation::PSTR) : Void
+    C.SetupWriteTextLogError(log_token, category, log_flags, error, message_str)
+  end
+
+  def setupWriteTextLogInfLine(log_token : UInt64, flags : UInt32, inf_handle : Void*, context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Void
+    C.SetupWriteTextLogInfLine(log_token, flags, inf_handle, context)
+  end
+
+  def setupGetBackupInformationA(queue_handle : Void*, backup_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_BACKUP_QUEUE_PARAMS_V2_A*) : Win32cr::Foundation::BOOL
+    C.SetupGetBackupInformationA(queue_handle, backup_params)
+  end
+
+  def setupGetBackupInformationW(queue_handle : Void*, backup_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_BACKUP_QUEUE_PARAMS_V2_W*) : Win32cr::Foundation::BOOL
+    C.SetupGetBackupInformationW(queue_handle, backup_params)
+  end
+
+  def setupPrepareQueueForRestoreA(queue_handle : Void*, backup_path : Win32cr::Foundation::PSTR, restore_flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupPrepareQueueForRestoreA(queue_handle, backup_path, restore_flags)
+  end
+
+  def setupPrepareQueueForRestoreW(queue_handle : Void*, backup_path : Win32cr::Foundation::PWSTR, restore_flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupPrepareQueueForRestoreW(queue_handle, backup_path, restore_flags)
+  end
+
+  def setupSetNonInteractiveMode(non_interactive_flag : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SetupSetNonInteractiveMode(non_interactive_flag)
+  end
+
+  def setupGetNonInteractiveMode : Win32cr::Foundation::BOOL
+    C.SetupGetNonInteractiveMode
+  end
+
+  def setupDiCreateDeviceInfoList(class_guid : LibC::GUID*, hwndParent : Win32cr::Foundation::HWND) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
+    C.SetupDiCreateDeviceInfoList(class_guid, hwndParent)
+  end
+
+  def setupDiCreateDeviceInfoListExA(class_guid : LibC::GUID*, hwndParent : Win32cr::Foundation::HWND, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
+    C.SetupDiCreateDeviceInfoListExA(class_guid, hwndParent, machine_name, reserved)
+  end
+
+  def setupDiCreateDeviceInfoListExW(class_guid : LibC::GUID*, hwndParent : Win32cr::Foundation::HWND, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
+    C.SetupDiCreateDeviceInfoListExW(class_guid, hwndParent, machine_name, reserved)
+  end
+
+  def setupDiGetDeviceInfoListClass(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, class_guid : LibC::GUID*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceInfoListClass(device_info_set, class_guid)
+  end
+
+  def setupDiGetDeviceInfoListDetailA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_set_detail_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_LIST_DETAIL_DATA_A*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceInfoListDetailA(device_info_set, device_info_set_detail_data)
+  end
+
+  def setupDiGetDeviceInfoListDetailW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_set_detail_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_LIST_DETAIL_DATA_W*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceInfoListDetailW(device_info_set, device_info_set_detail_data)
+  end
+
+  def setupDiCreateDeviceInfoA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_name : Win32cr::Foundation::PSTR, class_guid : LibC::GUID*, device_description : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND, creation_flags : UInt32, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiCreateDeviceInfoA(device_info_set, device_name, class_guid, device_description, hwndParent, creation_flags, device_info_data)
+  end
+
+  def setupDiCreateDeviceInfoW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_name : Win32cr::Foundation::PWSTR, class_guid : LibC::GUID*, device_description : Win32cr::Foundation::PWSTR, hwndParent : Win32cr::Foundation::HWND, creation_flags : UInt32, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiCreateDeviceInfoW(device_info_set, device_name, class_guid, device_description, hwndParent, creation_flags, device_info_data)
+  end
+
+  def setupDiOpenDeviceInfoA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_instance_id : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND, open_flags : UInt32, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiOpenDeviceInfoA(device_info_set, device_instance_id, hwndParent, open_flags, device_info_data)
+  end
+
+  def setupDiOpenDeviceInfoW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_instance_id : Win32cr::Foundation::PWSTR, hwndParent : Win32cr::Foundation::HWND, open_flags : UInt32, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiOpenDeviceInfoW(device_info_set, device_instance_id, hwndParent, open_flags, device_info_data)
+  end
+
+  def setupDiGetDeviceInstanceIdA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, device_instance_id : UInt8*, device_instance_id_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceInstanceIdA(device_info_set, device_info_data, device_instance_id, device_instance_id_size, required_size)
+  end
+
+  def setupDiGetDeviceInstanceIdW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, device_instance_id : UInt16*, device_instance_id_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceInstanceIdW(device_info_set, device_info_data, device_instance_id, device_instance_id_size, required_size)
+  end
+
+  def setupDiDeleteDeviceInfo(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiDeleteDeviceInfo(device_info_set, device_info_data)
+  end
+
+  def setupDiEnumDeviceInfo(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, member_index : UInt32, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiEnumDeviceInfo(device_info_set, member_index, device_info_data)
+  end
+
+  def setupDiDestroyDeviceInfoList(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO) : Win32cr::Foundation::BOOL
+    C.SetupDiDestroyDeviceInfoList(device_info_set)
+  end
+
+  def setupDiEnumDeviceInterfaces(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, interface_class_guid : LibC::GUID*, member_index : UInt32, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiEnumDeviceInterfaces(device_info_set, device_info_data, interface_class_guid, member_index, device_interface_data)
+  end
+
+  def setupDiCreateDeviceInterfaceA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, interface_class_guid : LibC::GUID*, reference_string : Win32cr::Foundation::PSTR, creation_flags : UInt32, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiCreateDeviceInterfaceA(device_info_set, device_info_data, interface_class_guid, reference_string, creation_flags, device_interface_data)
+  end
+
+  def setupDiCreateDeviceInterfaceW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, interface_class_guid : LibC::GUID*, reference_string : Win32cr::Foundation::PWSTR, creation_flags : UInt32, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiCreateDeviceInterfaceW(device_info_set, device_info_data, interface_class_guid, reference_string, creation_flags, device_interface_data)
+  end
+
+  def setupDiOpenDeviceInterfaceA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_path : Win32cr::Foundation::PSTR, open_flags : UInt32, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiOpenDeviceInterfaceA(device_info_set, device_path, open_flags, device_interface_data)
+  end
+
+  def setupDiOpenDeviceInterfaceW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_path : Win32cr::Foundation::PWSTR, open_flags : UInt32, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiOpenDeviceInterfaceW(device_info_set, device_path, open_flags, device_interface_data)
+  end
+
+  def setupDiGetDeviceInterfaceAlias(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, alias_interface_class_guid : LibC::GUID*, alias_device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceInterfaceAlias(device_info_set, device_interface_data, alias_interface_class_guid, alias_device_interface_data)
+  end
+
+  def setupDiDeleteDeviceInterfaceData(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiDeleteDeviceInterfaceData(device_info_set, device_interface_data)
+  end
+
+  def setupDiRemoveDeviceInterface(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiRemoveDeviceInterface(device_info_set, device_interface_data)
+  end
+
+  def setupDiGetDeviceInterfaceDetailA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, device_interface_detail_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DETAIL_DATA_A*, device_interface_detail_data_size : UInt32, required_size : UInt32*, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceInterfaceDetailA(device_info_set, device_interface_data, device_interface_detail_data, device_interface_detail_data_size, required_size, device_info_data)
+  end
+
+  def setupDiGetDeviceInterfaceDetailW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, device_interface_detail_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DETAIL_DATA_W*, device_interface_detail_data_size : UInt32, required_size : UInt32*, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceInterfaceDetailW(device_info_set, device_interface_data, device_interface_detail_data, device_interface_detail_data_size, required_size, device_info_data)
+  end
+
+  def setupDiInstallDeviceInterfaces(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiInstallDeviceInterfaces(device_info_set, device_info_data)
+  end
+
+  def setupDiSetDeviceInterfaceDefault(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, flags : UInt32, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiSetDeviceInterfaceDefault(device_info_set, device_interface_data, flags, reserved)
+  end
+
+  def setupDiRegisterDeviceInfo(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, flags : UInt32, compare_proc : Win32cr::Devices::DeviceAndDriverInstallation::PSP_DETSIG_CMPPROC, compare_context : Void*, dup_device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiRegisterDeviceInfo(device_info_set, device_info_data, flags, compare_proc, compare_context, dup_device_info_data)
+  end
+
+  def setupDiBuildDriverInfoList(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_type : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_DI_BUILD_DRIVER_DRIVER_TYPE) : Win32cr::Foundation::BOOL
+    C.SetupDiBuildDriverInfoList(device_info_set, device_info_data, driver_type)
+  end
+
+  def setupDiCancelDriverInfoSearch(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO) : Win32cr::Foundation::BOOL
+    C.SetupDiCancelDriverInfoSearch(device_info_set)
+  end
+
+  def setupDiEnumDriverInfoA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_type : UInt32, member_index : UInt32, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*) : Win32cr::Foundation::BOOL
+    C.SetupDiEnumDriverInfoA(device_info_set, device_info_data, driver_type, member_index, driver_info_data)
+  end
+
+  def setupDiEnumDriverInfoW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_type : UInt32, member_index : UInt32, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_W*) : Win32cr::Foundation::BOOL
+    C.SetupDiEnumDriverInfoW(device_info_set, device_info_data, driver_type, member_index, driver_info_data)
+  end
+
+  def setupDiGetSelectedDriverA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetSelectedDriverA(device_info_set, device_info_data, driver_info_data)
+  end
+
+  def setupDiGetSelectedDriverW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_W*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetSelectedDriverW(device_info_set, device_info_data, driver_info_data)
+  end
+
+  def setupDiSetSelectedDriverA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*) : Win32cr::Foundation::BOOL
+    C.SetupDiSetSelectedDriverA(device_info_set, device_info_data, driver_info_data)
+  end
+
+  def setupDiSetSelectedDriverW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_W*) : Win32cr::Foundation::BOOL
+    C.SetupDiSetSelectedDriverW(device_info_set, device_info_data, driver_info_data)
+  end
+
+  def setupDiGetDriverInfoDetailA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*, driver_info_detail_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DETAIL_DATA_A*, driver_info_detail_data_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDriverInfoDetailA(device_info_set, device_info_data, driver_info_data, driver_info_detail_data, driver_info_detail_data_size, required_size)
+  end
+
+  def setupDiGetDriverInfoDetailW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_W*, driver_info_detail_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DETAIL_DATA_W*, driver_info_detail_data_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDriverInfoDetailW(device_info_set, device_info_data, driver_info_data, driver_info_detail_data, driver_info_detail_data_size, required_size)
+  end
+
+  def setupDiDestroyDriverInfoList(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_type : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiDestroyDriverInfoList(device_info_set, device_info_data, driver_type)
+  end
+
+  def setupDiGetClassDevsA(class_guid : LibC::GUID*, enumerator : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND, flags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
+    C.SetupDiGetClassDevsA(class_guid, enumerator, hwndParent, flags)
+  end
+
+  def setupDiGetClassDevsW(class_guid : LibC::GUID*, enumerator : Win32cr::Foundation::PWSTR, hwndParent : Win32cr::Foundation::HWND, flags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
+    C.SetupDiGetClassDevsW(class_guid, enumerator, hwndParent, flags)
+  end
+
+  def setupDiGetClassDevsExA(class_guid : LibC::GUID*, enumerator : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND, flags : UInt32, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
+    C.SetupDiGetClassDevsExA(class_guid, enumerator, hwndParent, flags, device_info_set, machine_name, reserved)
+  end
+
+  def setupDiGetClassDevsExW(class_guid : LibC::GUID*, enumerator : Win32cr::Foundation::PWSTR, hwndParent : Win32cr::Foundation::HWND, flags : UInt32, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
+    C.SetupDiGetClassDevsExW(class_guid, enumerator, hwndParent, flags, device_info_set, machine_name, reserved)
+  end
+
+  def setupDiGetINFClassA(inf_name : Win32cr::Foundation::PSTR, class_guid : LibC::GUID*, class_name : UInt8*, class_name_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetINFClassA(inf_name, class_guid, class_name, class_name_size, required_size)
+  end
+
+  def setupDiGetINFClassW(inf_name : Win32cr::Foundation::PWSTR, class_guid : LibC::GUID*, class_name : UInt16*, class_name_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetINFClassW(inf_name, class_guid, class_name, class_name_size, required_size)
+  end
+
+  def setupDiBuildClassInfoList(flags : UInt32, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiBuildClassInfoList(flags, class_guid_list, class_guid_list_size, required_size)
+  end
+
+  def setupDiBuildClassInfoListExA(flags : UInt32, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiBuildClassInfoListExA(flags, class_guid_list, class_guid_list_size, required_size, machine_name, reserved)
+  end
+
+  def setupDiBuildClassInfoListExW(flags : UInt32, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiBuildClassInfoListExW(flags, class_guid_list, class_guid_list_size, required_size, machine_name, reserved)
+  end
+
+  def setupDiGetClassDescriptionA(class_guid : LibC::GUID*, class_description : UInt8*, class_description_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassDescriptionA(class_guid, class_description, class_description_size, required_size)
+  end
+
+  def setupDiGetClassDescriptionW(class_guid : LibC::GUID*, class_description : UInt16*, class_description_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassDescriptionW(class_guid, class_description, class_description_size, required_size)
+  end
+
+  def setupDiGetClassDescriptionExA(class_guid : LibC::GUID*, class_description : UInt8*, class_description_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassDescriptionExA(class_guid, class_description, class_description_size, required_size, machine_name, reserved)
+  end
+
+  def setupDiGetClassDescriptionExW(class_guid : LibC::GUID*, class_description : UInt16*, class_description_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassDescriptionExW(class_guid, class_description, class_description_size, required_size, machine_name, reserved)
+  end
+
+  def setupDiCallClassInstaller(install_function : UInt32, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiCallClassInstaller(install_function, device_info_set, device_info_data)
+  end
+
+  def setupDiSelectDevice(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiSelectDevice(device_info_set, device_info_data)
+  end
+
+  def setupDiSelectBestCompatDrv(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiSelectBestCompatDrv(device_info_set, device_info_data)
+  end
+
+  def setupDiInstallDevice(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiInstallDevice(device_info_set, device_info_data)
+  end
+
+  def setupDiInstallDriverFiles(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiInstallDriverFiles(device_info_set, device_info_data)
+  end
+
+  def setupDiRegisterCoDeviceInstallers(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiRegisterCoDeviceInstallers(device_info_set, device_info_data)
+  end
+
+  def setupDiRemoveDevice(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiRemoveDevice(device_info_set, device_info_data)
+  end
+
+  def setupDiUnremoveDevice(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiUnremoveDevice(device_info_set, device_info_data)
+  end
+
+  def setupDiRestartDevices(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiRestartDevices(device_info_set, device_info_data)
+  end
+
+  def setupDiChangeState(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiChangeState(device_info_set, device_info_data)
+  end
+
+  def setupDiInstallClassA(hwndParent : Win32cr::Foundation::HWND, inf_file_name : Win32cr::Foundation::PSTR, flags : UInt32, file_queue : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiInstallClassA(hwndParent, inf_file_name, flags, file_queue)
+  end
+
+  def setupDiInstallClassW(hwndParent : Win32cr::Foundation::HWND, inf_file_name : Win32cr::Foundation::PWSTR, flags : UInt32, file_queue : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiInstallClassW(hwndParent, inf_file_name, flags, file_queue)
+  end
+
+  def setupDiInstallClassExA(hwndParent : Win32cr::Foundation::HWND, inf_file_name : Win32cr::Foundation::PSTR, flags : UInt32, file_queue : Void*, interface_class_guid : LibC::GUID*, reserved1 : Void*, reserved2 : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiInstallClassExA(hwndParent, inf_file_name, flags, file_queue, interface_class_guid, reserved1, reserved2)
+  end
+
+  def setupDiInstallClassExW(hwndParent : Win32cr::Foundation::HWND, inf_file_name : Win32cr::Foundation::PWSTR, flags : UInt32, file_queue : Void*, interface_class_guid : LibC::GUID*, reserved1 : Void*, reserved2 : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiInstallClassExW(hwndParent, inf_file_name, flags, file_queue, interface_class_guid, reserved1, reserved2)
+  end
+
+  def setupDiOpenClassRegKey(class_guid : LibC::GUID*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    C.SetupDiOpenClassRegKey(class_guid, samDesired)
+  end
+
+  def setupDiOpenClassRegKeyExA(class_guid : LibC::GUID*, samDesired : UInt32, flags : UInt32, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::System::Registry::HKEY
+    C.SetupDiOpenClassRegKeyExA(class_guid, samDesired, flags, machine_name, reserved)
+  end
+
+  def setupDiOpenClassRegKeyExW(class_guid : LibC::GUID*, samDesired : UInt32, flags : UInt32, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::System::Registry::HKEY
+    C.SetupDiOpenClassRegKeyExW(class_guid, samDesired, flags, machine_name, reserved)
+  end
+
+  def setupDiCreateDeviceInterfaceRegKeyA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, reserved : UInt32, samDesired : UInt32, inf_handle : Void*, inf_section_name : Win32cr::Foundation::PSTR) : Win32cr::System::Registry::HKEY
+    C.SetupDiCreateDeviceInterfaceRegKeyA(device_info_set, device_interface_data, reserved, samDesired, inf_handle, inf_section_name)
+  end
+
+  def setupDiCreateDeviceInterfaceRegKeyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, reserved : UInt32, samDesired : UInt32, inf_handle : Void*, inf_section_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Registry::HKEY
+    C.SetupDiCreateDeviceInterfaceRegKeyW(device_info_set, device_interface_data, reserved, samDesired, inf_handle, inf_section_name)
+  end
+
+  def setupDiOpenDeviceInterfaceRegKey(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, reserved : UInt32, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    C.SetupDiOpenDeviceInterfaceRegKey(device_info_set, device_interface_data, reserved, samDesired)
+  end
+
+  def setupDiDeleteDeviceInterfaceRegKey(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, reserved : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiDeleteDeviceInterfaceRegKey(device_info_set, device_interface_data, reserved)
+  end
+
+  def setupDiCreateDevRegKeyA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, scope : UInt32, hw_profile : UInt32, key_type : UInt32, inf_handle : Void*, inf_section_name : Win32cr::Foundation::PSTR) : Win32cr::System::Registry::HKEY
+    C.SetupDiCreateDevRegKeyA(device_info_set, device_info_data, scope, hw_profile, key_type, inf_handle, inf_section_name)
+  end
+
+  def setupDiCreateDevRegKeyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, scope : UInt32, hw_profile : UInt32, key_type : UInt32, inf_handle : Void*, inf_section_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Registry::HKEY
+    C.SetupDiCreateDevRegKeyW(device_info_set, device_info_data, scope, hw_profile, key_type, inf_handle, inf_section_name)
+  end
+
+  def setupDiOpenDevRegKey(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, scope : UInt32, hw_profile : UInt32, key_type : UInt32, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    C.SetupDiOpenDevRegKey(device_info_set, device_info_data, scope, hw_profile, key_type, samDesired)
+  end
+
+  def setupDiDeleteDevRegKey(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, scope : UInt32, hw_profile : UInt32, key_type : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiDeleteDevRegKey(device_info_set, device_info_data, scope, hw_profile, key_type)
+  end
+
+  def setupDiGetHwProfileList(hw_profile_list : UInt32*, hw_profile_list_size : UInt32, required_size : UInt32*, currently_active_index : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetHwProfileList(hw_profile_list, hw_profile_list_size, required_size, currently_active_index)
+  end
+
+  def setupDiGetHwProfileListExA(hw_profile_list : UInt32*, hw_profile_list_size : UInt32, required_size : UInt32*, currently_active_index : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetHwProfileListExA(hw_profile_list, hw_profile_list_size, required_size, currently_active_index, machine_name, reserved)
+  end
+
+  def setupDiGetHwProfileListExW(hw_profile_list : UInt32*, hw_profile_list_size : UInt32, required_size : UInt32*, currently_active_index : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetHwProfileListExW(hw_profile_list, hw_profile_list_size, required_size, currently_active_index, machine_name, reserved)
+  end
+
+  def setupDiGetDevicePropertyKeys(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32, required_property_key_count : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDevicePropertyKeys(device_info_set, device_info_data, property_key_array, property_key_count, required_property_key_count, flags)
+  end
+
+  def setupDiGetDevicePropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDevicePropertyW(device_info_set, device_info_data, property_key, property_type, property_buffer, property_buffer_size, required_size, flags)
+  end
+
+  def setupDiSetDevicePropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiSetDevicePropertyW(device_info_set, device_info_data, property_key, property_type, property_buffer, property_buffer_size, flags)
+  end
+
+  def setupDiGetDeviceInterfacePropertyKeys(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32, required_property_key_count : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceInterfacePropertyKeys(device_info_set, device_interface_data, property_key_array, property_key_count, required_property_key_count, flags)
+  end
+
+  def setupDiGetDeviceInterfacePropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceInterfacePropertyW(device_info_set, device_interface_data, property_key, property_type, property_buffer, property_buffer_size, required_size, flags)
+  end
+
+  def setupDiSetDeviceInterfacePropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiSetDeviceInterfacePropertyW(device_info_set, device_interface_data, property_key, property_type, property_buffer, property_buffer_size, flags)
+  end
+
+  def setupDiGetClassPropertyKeys(class_guid : LibC::GUID*, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32, required_property_key_count : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassPropertyKeys(class_guid, property_key_array, property_key_count, required_property_key_count, flags)
+  end
+
+  def setupDiGetClassPropertyKeysExW(class_guid : LibC::GUID*, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32, required_property_key_count : UInt32*, flags : UInt32, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassPropertyKeysExW(class_guid, property_key_array, property_key_count, required_property_key_count, flags, machine_name, reserved)
+  end
+
+  def setupDiGetClassPropertyW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassPropertyW(class_guid, property_key, property_type, property_buffer, property_buffer_size, required_size, flags)
+  end
+
+  def setupDiGetClassPropertyExW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*, flags : UInt32, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassPropertyExW(class_guid, property_key, property_type, property_buffer, property_buffer_size, required_size, flags, machine_name, reserved)
+  end
+
+  def setupDiSetClassPropertyW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiSetClassPropertyW(class_guid, property_key, property_type, property_buffer, property_buffer_size, flags)
+  end
+
+  def setupDiSetClassPropertyExW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, flags : UInt32, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiSetClassPropertyExW(class_guid, property_key, property_type, property_buffer, property_buffer_size, flags, machine_name, reserved)
+  end
+
+  def setupDiGetDeviceRegistryPropertyA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property : UInt32, property_reg_data_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceRegistryPropertyA(device_info_set, device_info_data, property, property_reg_data_type, property_buffer, property_buffer_size, required_size)
+  end
+
+  def setupDiGetDeviceRegistryPropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property : UInt32, property_reg_data_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceRegistryPropertyW(device_info_set, device_info_data, property, property_reg_data_type, property_buffer, property_buffer_size, required_size)
+  end
+
+  def setupDiGetClassRegistryPropertyA(class_guid : LibC::GUID*, property : UInt32, property_reg_data_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassRegistryPropertyA(class_guid, property, property_reg_data_type, property_buffer, property_buffer_size, required_size, machine_name, reserved)
+  end
+
+  def setupDiGetClassRegistryPropertyW(class_guid : LibC::GUID*, property : UInt32, property_reg_data_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassRegistryPropertyW(class_guid, property, property_reg_data_type, property_buffer, property_buffer_size, required_size, machine_name, reserved)
+  end
+
+  def setupDiSetDeviceRegistryPropertyA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiSetDeviceRegistryPropertyA(device_info_set, device_info_data, property, property_buffer, property_buffer_size)
+  end
+
+  def setupDiSetDeviceRegistryPropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiSetDeviceRegistryPropertyW(device_info_set, device_info_data, property, property_buffer, property_buffer_size)
+  end
+
+  def setupDiSetClassRegistryPropertyA(class_guid : LibC::GUID*, property : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiSetClassRegistryPropertyA(class_guid, property, property_buffer, property_buffer_size, machine_name, reserved)
+  end
+
+  def setupDiSetClassRegistryPropertyW(class_guid : LibC::GUID*, property : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiSetClassRegistryPropertyW(class_guid, property, property_buffer, property_buffer_size, machine_name, reserved)
+  end
+
+  def setupDiGetDeviceInstallParamsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, device_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINSTALL_PARAMS_A*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceInstallParamsA(device_info_set, device_info_data, device_install_params)
+  end
+
+  def setupDiGetDeviceInstallParamsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, device_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINSTALL_PARAMS_W*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDeviceInstallParamsW(device_info_set, device_info_data, device_install_params)
+  end
+
+  def setupDiGetClassInstallParamsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, class_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER*, class_install_params_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassInstallParamsA(device_info_set, device_info_data, class_install_params, class_install_params_size, required_size)
+  end
+
+  def setupDiGetClassInstallParamsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, class_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER*, class_install_params_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassInstallParamsW(device_info_set, device_info_data, class_install_params, class_install_params_size, required_size)
+  end
+
+  def setupDiSetDeviceInstallParamsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, device_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINSTALL_PARAMS_A*) : Win32cr::Foundation::BOOL
+    C.SetupDiSetDeviceInstallParamsA(device_info_set, device_info_data, device_install_params)
+  end
+
+  def setupDiSetDeviceInstallParamsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, device_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINSTALL_PARAMS_W*) : Win32cr::Foundation::BOOL
+    C.SetupDiSetDeviceInstallParamsW(device_info_set, device_info_data, device_install_params)
+  end
+
+  def setupDiSetClassInstallParamsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, class_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER*, class_install_params_size : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiSetClassInstallParamsA(device_info_set, device_info_data, class_install_params, class_install_params_size)
+  end
+
+  def setupDiSetClassInstallParamsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, class_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER*, class_install_params_size : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiSetClassInstallParamsW(device_info_set, device_info_data, class_install_params, class_install_params_size)
+  end
+
+  def setupDiGetDriverInstallParamsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*, driver_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINSTALL_PARAMS*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDriverInstallParamsA(device_info_set, device_info_data, driver_info_data, driver_install_params)
+  end
+
+  def setupDiGetDriverInstallParamsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_W*, driver_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINSTALL_PARAMS*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetDriverInstallParamsW(device_info_set, device_info_data, driver_info_data, driver_install_params)
+  end
+
+  def setupDiSetDriverInstallParamsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*, driver_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINSTALL_PARAMS*) : Win32cr::Foundation::BOOL
+    C.SetupDiSetDriverInstallParamsA(device_info_set, device_info_data, driver_info_data, driver_install_params)
+  end
+
+  def setupDiSetDriverInstallParamsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_W*, driver_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINSTALL_PARAMS*) : Win32cr::Foundation::BOOL
+    C.SetupDiSetDriverInstallParamsW(device_info_set, device_info_data, driver_info_data, driver_install_params)
+  end
+
+  def setupDiLoadClassIcon(class_guid : LibC::GUID*, large_icon : Win32cr::UI::WindowsAndMessaging::HICON*, mini_icon_index : Int32*) : Win32cr::Foundation::BOOL
+    C.SetupDiLoadClassIcon(class_guid, large_icon, mini_icon_index)
+  end
+
+  def setupDiLoadDeviceIcon(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, cxIcon : UInt32, cyIcon : UInt32, flags : UInt32, hIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Win32cr::Foundation::BOOL
+    C.SetupDiLoadDeviceIcon(device_info_set, device_info_data, cxIcon, cyIcon, flags, hIcon)
+  end
+
+  def setupDiDrawMiniIcon(hdc : Win32cr::Graphics::Gdi::HDC, rc : Win32cr::Foundation::RECT, mini_icon_index : Int32, flags : UInt32) : Int32
+    C.SetupDiDrawMiniIcon(hdc, rc, mini_icon_index, flags)
+  end
+
+  def setupDiGetClassBitmapIndex(class_guid : LibC::GUID*, mini_icon_index : Int32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassBitmapIndex(class_guid, mini_icon_index)
+  end
+
+  def setupDiGetClassImageList(class_image_list_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSIMAGELIST_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassImageList(class_image_list_data)
+  end
+
+  def setupDiGetClassImageListExA(class_image_list_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSIMAGELIST_DATA*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassImageListExA(class_image_list_data, machine_name, reserved)
+  end
+
+  def setupDiGetClassImageListExW(class_image_list_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSIMAGELIST_DATA*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassImageListExW(class_image_list_data, machine_name, reserved)
+  end
+
+  def setupDiGetClassImageIndex(class_image_list_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSIMAGELIST_DATA*, class_guid : LibC::GUID*, image_index : Int32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassImageIndex(class_image_list_data, class_guid, image_index)
+  end
+
+  def setupDiDestroyClassImageList(class_image_list_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSIMAGELIST_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiDestroyClassImageList(class_image_list_data)
+  end
+
+  def setupDiGetClassDevPropertySheetsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property_sheet_header : Win32cr::UI::Controls::PROPSHEETHEADERA_V2*, property_sheet_header_page_list_size : UInt32, required_size : UInt32*, property_sheet_type : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassDevPropertySheetsA(device_info_set, device_info_data, property_sheet_header, property_sheet_header_page_list_size, required_size, property_sheet_type)
+  end
+
+  def setupDiGetClassDevPropertySheetsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property_sheet_header : Win32cr::UI::Controls::PROPSHEETHEADERW_V2*, property_sheet_header_page_list_size : UInt32, required_size : UInt32*, property_sheet_type : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupDiGetClassDevPropertySheetsW(device_info_set, device_info_data, property_sheet_header, property_sheet_header_page_list_size, required_size, property_sheet_type)
+  end
+
+  def setupDiAskForOEMDisk(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiAskForOEMDisk(device_info_set, device_info_data)
+  end
+
+  def setupDiSelectOEMDrv(hwndParent : Win32cr::Foundation::HWND, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiSelectOEMDrv(hwndParent, device_info_set, device_info_data)
+  end
+
+  def setupDiClassNameFromGuidA(class_guid : LibC::GUID*, class_name : UInt8*, class_name_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiClassNameFromGuidA(class_guid, class_name, class_name_size, required_size)
+  end
+
+  def setupDiClassNameFromGuidW(class_guid : LibC::GUID*, class_name : UInt16*, class_name_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiClassNameFromGuidW(class_guid, class_name, class_name_size, required_size)
+  end
+
+  def setupDiClassNameFromGuidExA(class_guid : LibC::GUID*, class_name : UInt8*, class_name_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiClassNameFromGuidExA(class_guid, class_name, class_name_size, required_size, machine_name, reserved)
+  end
+
+  def setupDiClassNameFromGuidExW(class_guid : LibC::GUID*, class_name : UInt16*, class_name_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiClassNameFromGuidExW(class_guid, class_name, class_name_size, required_size, machine_name, reserved)
+  end
+
+  def setupDiClassGuidsFromNameA(class_name : Win32cr::Foundation::PSTR, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiClassGuidsFromNameA(class_name, class_guid_list, class_guid_list_size, required_size)
+  end
+
+  def setupDiClassGuidsFromNameW(class_name : Win32cr::Foundation::PWSTR, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiClassGuidsFromNameW(class_name, class_guid_list, class_guid_list_size, required_size)
+  end
+
+  def setupDiClassGuidsFromNameExA(class_name : Win32cr::Foundation::PSTR, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiClassGuidsFromNameExA(class_name, class_guid_list, class_guid_list_size, required_size, machine_name, reserved)
+  end
+
+  def setupDiClassGuidsFromNameExW(class_name : Win32cr::Foundation::PWSTR, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiClassGuidsFromNameExW(class_name, class_guid_list, class_guid_list_size, required_size, machine_name, reserved)
+  end
+
+  def setupDiGetHwProfileFriendlyNameA(hw_profile : UInt32, friendly_name : UInt8*, friendly_name_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetHwProfileFriendlyNameA(hw_profile, friendly_name, friendly_name_size, required_size)
+  end
+
+  def setupDiGetHwProfileFriendlyNameW(hw_profile : UInt32, friendly_name : UInt16*, friendly_name_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetHwProfileFriendlyNameW(hw_profile, friendly_name, friendly_name_size, required_size)
+  end
+
+  def setupDiGetHwProfileFriendlyNameExA(hw_profile : UInt32, friendly_name : UInt8*, friendly_name_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetHwProfileFriendlyNameExA(hw_profile, friendly_name, friendly_name_size, required_size, machine_name, reserved)
+  end
+
+  def setupDiGetHwProfileFriendlyNameExW(hw_profile : UInt32, friendly_name : UInt16*, friendly_name_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetHwProfileFriendlyNameExW(hw_profile, friendly_name, friendly_name_size, required_size, machine_name, reserved)
+  end
+
+  def setupDiGetWizardPage(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, install_wizard_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_INSTALLWIZARD_DATA*, page_type : UInt32, flags : UInt32) : Win32cr::UI::Controls::HPROPSHEETPAGE
+    C.SetupDiGetWizardPage(device_info_set, device_info_data, install_wizard_data, page_type, flags)
+  end
+
+  def setupDiGetSelectedDevice(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetSelectedDevice(device_info_set, device_info_data)
+  end
+
+  def setupDiSetSelectedDevice(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
+    C.SetupDiSetSelectedDevice(device_info_set, device_info_data)
+  end
+
+  def setupDiGetActualModelsSectionA(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, inf_section_with_ext : UInt8*, inf_section_with_ext_size : UInt32, required_size : UInt32*, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetActualModelsSectionA(context, alternate_platform_info, inf_section_with_ext, inf_section_with_ext_size, required_size, reserved)
+  end
+
+  def setupDiGetActualModelsSectionW(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, inf_section_with_ext : UInt16*, inf_section_with_ext_size : UInt32, required_size : UInt32*, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetActualModelsSectionW(context, alternate_platform_info, inf_section_with_ext, inf_section_with_ext_size, required_size, reserved)
+  end
+
+  def setupDiGetActualSectionToInstallA(inf_handle : Void*, inf_section_name : Win32cr::Foundation::PSTR, inf_section_with_ext : UInt8*, inf_section_with_ext_size : UInt32, required_size : UInt32*, extension : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetActualSectionToInstallA(inf_handle, inf_section_name, inf_section_with_ext, inf_section_with_ext_size, required_size, extension)
+  end
+
+  def setupDiGetActualSectionToInstallW(inf_handle : Void*, inf_section_name : Win32cr::Foundation::PWSTR, inf_section_with_ext : UInt16*, inf_section_with_ext_size : UInt32, required_size : UInt32*, extension : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetActualSectionToInstallW(inf_handle, inf_section_name, inf_section_with_ext, inf_section_with_ext_size, required_size, extension)
+  end
+
+  def setupDiGetActualSectionToInstallExA(inf_handle : Void*, inf_section_name : Win32cr::Foundation::PSTR, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, inf_section_with_ext : UInt8*, inf_section_with_ext_size : UInt32, required_size : UInt32*, extension : Win32cr::Foundation::PSTR*, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetActualSectionToInstallExA(inf_handle, inf_section_name, alternate_platform_info, inf_section_with_ext, inf_section_with_ext_size, required_size, extension, reserved)
+  end
+
+  def setupDiGetActualSectionToInstallExW(inf_handle : Void*, inf_section_name : Win32cr::Foundation::PWSTR, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, inf_section_with_ext : UInt16*, inf_section_with_ext_size : UInt32, required_size : UInt32*, extension : Win32cr::Foundation::PWSTR*, reserved : Void*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetActualSectionToInstallExW(inf_handle, inf_section_name, alternate_platform_info, inf_section_with_ext, inf_section_with_ext_size, required_size, extension, reserved)
+  end
+
+  def setupEnumInfSectionsA(inf_handle : Void*, index : UInt32, buffer : UInt8*, size : UInt32, size_needed : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupEnumInfSectionsA(inf_handle, index, buffer, size, size_needed)
+  end
+
+  def setupEnumInfSectionsW(inf_handle : Void*, index : UInt32, buffer : UInt16*, size : UInt32, size_needed : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupEnumInfSectionsW(inf_handle, index, buffer, size, size_needed)
+  end
+
+  def setupVerifyInfFileA(inf_name : Win32cr::Foundation::PSTR, alt_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, inf_signer_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_SIGNER_INFO_V2_A*) : Win32cr::Foundation::BOOL
+    C.SetupVerifyInfFileA(inf_name, alt_platform_info, inf_signer_info)
+  end
+
+  def setupVerifyInfFileW(inf_name : Win32cr::Foundation::PWSTR, alt_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, inf_signer_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_SIGNER_INFO_V2_W*) : Win32cr::Foundation::BOOL
+    C.SetupVerifyInfFileW(inf_name, alt_platform_info, inf_signer_info)
+  end
+
+  def setupDiGetCustomDevicePropertyA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, custom_property_name : Win32cr::Foundation::PSTR, flags : UInt32, property_reg_data_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetCustomDevicePropertyA(device_info_set, device_info_data, custom_property_name, flags, property_reg_data_type, property_buffer, property_buffer_size, required_size)
+  end
+
+  def setupDiGetCustomDevicePropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, custom_property_name : Win32cr::Foundation::PWSTR, flags : UInt32, property_reg_data_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetupDiGetCustomDevicePropertyW(device_info_set, device_info_data, custom_property_name, flags, property_reg_data_type, property_buffer, property_buffer_size, required_size)
+  end
+
+  def setupConfigureWmiFromInfSectionA(inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupConfigureWmiFromInfSectionA(inf_handle, section_name, flags)
+  end
+
+  def setupConfigureWmiFromInfSectionW(inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupConfigureWmiFromInfSectionW(inf_handle, section_name, flags)
+  end
+
+  def cMAddEmptyLogConf(plcLogConf : LibC::UIntPtrT*, dnDevInst : UInt32, priority : Win32cr::Data::HtmlHelp::PRIORITY, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Add_Empty_Log_Conf(plcLogConf, dnDevInst, priority, ulFlags)
+  end
+
+  def cMAddEmptyLogConfEx(plcLogConf : LibC::UIntPtrT*, dnDevInst : UInt32, priority : Win32cr::Data::HtmlHelp::PRIORITY, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Add_Empty_Log_Conf_Ex(plcLogConf, dnDevInst, priority, ulFlags, hMachine)
+  end
+
+  def cMAddIDA(dnDevInst : UInt32, pszID : Win32cr::Foundation::PSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Add_IDA(dnDevInst, pszID, ulFlags)
+  end
+
+  def cMAddIDW(dnDevInst : UInt32, pszID : Win32cr::Foundation::PWSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Add_IDW(dnDevInst, pszID, ulFlags)
+  end
+
+  def cMAddIDExA(dnDevInst : UInt32, pszID : Win32cr::Foundation::PSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Add_ID_ExA(dnDevInst, pszID, ulFlags, hMachine)
+  end
+
+  def cMAddIDExW(dnDevInst : UInt32, pszID : Win32cr::Foundation::PWSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Add_ID_ExW(dnDevInst, pszID, ulFlags, hMachine)
+  end
+
+  def cMAddRange(ullStartValue : UInt64, ullEndValue : UInt64, rlh : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Add_Range(ullStartValue, ullEndValue, rlh, ulFlags)
+  end
+
+  def cMAddResDes(prdResDes : LibC::UIntPtrT*, lcLogConf : LibC::UIntPtrT, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Add_Res_Des(prdResDes, lcLogConf, resource_id, resource_data, resource_len, ulFlags)
+  end
+
+  def cMAddResDesEx(prdResDes : LibC::UIntPtrT*, lcLogConf : LibC::UIntPtrT, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Add_Res_Des_Ex(prdResDes, lcLogConf, resource_id, resource_data, resource_len, ulFlags, hMachine)
+  end
+
+  def cMConnectMachineA(unc_server_name : Win32cr::Foundation::PSTR, phMachine : LibC::IntPtrT*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Connect_MachineA(unc_server_name, phMachine)
+  end
+
+  def cMConnectMachineW(unc_server_name : Win32cr::Foundation::PWSTR, phMachine : LibC::IntPtrT*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Connect_MachineW(unc_server_name, phMachine)
+  end
+
+  def cMCreateDevNodeA(pdnDevInst : UInt32*, pDeviceID : Int8*, dnParent : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Create_DevNodeA(pdnDevInst, pDeviceID, dnParent, ulFlags)
+  end
+
+  def cMCreateDevNodeW(pdnDevInst : UInt32*, pDeviceID : UInt16*, dnParent : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Create_DevNodeW(pdnDevInst, pDeviceID, dnParent, ulFlags)
+  end
+
+  def cMCreateDevNodeExA(pdnDevInst : UInt32*, pDeviceID : Int8*, dnParent : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Create_DevNode_ExA(pdnDevInst, pDeviceID, dnParent, ulFlags, hMachine)
+  end
+
+  def cMCreateDevNodeExW(pdnDevInst : UInt32*, pDeviceID : UInt16*, dnParent : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Create_DevNode_ExW(pdnDevInst, pDeviceID, dnParent, ulFlags, hMachine)
+  end
+
+  def cMCreateRangeList(prlh : LibC::UIntPtrT*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Create_Range_List(prlh, ulFlags)
+  end
+
+  def cMDeleteClassKey(class_guid : LibC::GUID*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Delete_Class_Key(class_guid, ulFlags)
+  end
+
+  def cMDeleteClassKeyEx(class_guid : LibC::GUID*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Delete_Class_Key_Ex(class_guid, ulFlags, hMachine)
+  end
+
+  def cMDeleteDevNodeKey(dnDevNode : UInt32, ulHardwareProfile : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Delete_DevNode_Key(dnDevNode, ulHardwareProfile, ulFlags)
+  end
+
+  def cMDeleteDevNodeKeyEx(dnDevNode : UInt32, ulHardwareProfile : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Delete_DevNode_Key_Ex(dnDevNode, ulHardwareProfile, ulFlags, hMachine)
+  end
+
+  def cMDeleteRange(ullStartValue : UInt64, ullEndValue : UInt64, rlh : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Delete_Range(ullStartValue, ullEndValue, rlh, ulFlags)
+  end
+
+  def cMDetectResourceConflict(dnDevInst : UInt32, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, pbConflictDetected : Win32cr::Foundation::BOOL*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Detect_Resource_Conflict(dnDevInst, resource_id, resource_data, resource_len, pbConflictDetected, ulFlags)
+  end
+
+  def cMDetectResourceConflictEx(dnDevInst : UInt32, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, pbConflictDetected : Win32cr::Foundation::BOOL*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Detect_Resource_Conflict_Ex(dnDevInst, resource_id, resource_data, resource_len, pbConflictDetected, ulFlags, hMachine)
+  end
+
+  def cMDisableDevNode(dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Disable_DevNode(dnDevInst, ulFlags)
+  end
+
+  def cMDisableDevNodeEx(dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Disable_DevNode_Ex(dnDevInst, ulFlags, hMachine)
+  end
+
+  def cMDisconnectMachine(hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Disconnect_Machine(hMachine)
+  end
+
+  def cMDupRangeList(rlhOld : LibC::UIntPtrT, rlhNew : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Dup_Range_List(rlhOld, rlhNew, ulFlags)
+  end
+
+  def cMEnableDevNode(dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Enable_DevNode(dnDevInst, ulFlags)
+  end
+
+  def cMEnableDevNodeEx(dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Enable_DevNode_Ex(dnDevInst, ulFlags, hMachine)
+  end
+
+  def cMEnumerateClasses(ulClassIndex : UInt32, class_guid : LibC::GUID*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Enumerate_Classes(ulClassIndex, class_guid, ulFlags)
+  end
+
+  def cMEnumerateClassesEx(ulClassIndex : UInt32, class_guid : LibC::GUID*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Enumerate_Classes_Ex(ulClassIndex, class_guid, ulFlags, hMachine)
+  end
+
+  def cMEnumerateEnumeratorsA(ulEnumIndex : UInt32, buffer : UInt8*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Enumerate_EnumeratorsA(ulEnumIndex, buffer, pulLength, ulFlags)
+  end
+
+  def cMEnumerateEnumeratorsW(ulEnumIndex : UInt32, buffer : UInt16*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Enumerate_EnumeratorsW(ulEnumIndex, buffer, pulLength, ulFlags)
+  end
+
+  def cMEnumerateEnumeratorsExA(ulEnumIndex : UInt32, buffer : UInt8*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Enumerate_Enumerators_ExA(ulEnumIndex, buffer, pulLength, ulFlags, hMachine)
+  end
+
+  def cMEnumerateEnumeratorsExW(ulEnumIndex : UInt32, buffer : UInt16*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Enumerate_Enumerators_ExW(ulEnumIndex, buffer, pulLength, ulFlags, hMachine)
+  end
+
+  def cMFindRange(pullStart : UInt64*, ullStart : UInt64, ulLength : UInt32, ullAlignment : UInt64, ullEnd : UInt64, rlh : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Find_Range(pullStart, ullStart, ulLength, ullAlignment, ullEnd, rlh, ulFlags)
+  end
+
+  def cMFirstRange(rlh : LibC::UIntPtrT, pullStart : UInt64*, pullEnd : UInt64*, preElement : LibC::UIntPtrT*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_First_Range(rlh, pullStart, pullEnd, preElement, ulFlags)
+  end
+
+  def cMFreeLogConf(lcLogConfToBeFreed : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Free_Log_Conf(lcLogConfToBeFreed, ulFlags)
+  end
+
+  def cMFreeLogConfEx(lcLogConfToBeFreed : LibC::UIntPtrT, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Free_Log_Conf_Ex(lcLogConfToBeFreed, ulFlags, hMachine)
+  end
+
+  def cMFreeLogConfHandle(lcLogConf : LibC::UIntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Free_Log_Conf_Handle(lcLogConf)
+  end
+
+  def cMFreeRangeList(rlh : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Free_Range_List(rlh, ulFlags)
+  end
+
+  def cMFreeResDes(prdResDes : LibC::UIntPtrT*, rdResDes : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Free_Res_Des(prdResDes, rdResDes, ulFlags)
+  end
+
+  def cMFreeResDesEx(prdResDes : LibC::UIntPtrT*, rdResDes : LibC::UIntPtrT, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Free_Res_Des_Ex(prdResDes, rdResDes, ulFlags, hMachine)
+  end
+
+  def cMFreeResDesHandle(rdResDes : LibC::UIntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Free_Res_Des_Handle(rdResDes)
+  end
+
+  def cMGetChild(pdnDevInst : UInt32*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Child(pdnDevInst, dnDevInst, ulFlags)
+  end
+
+  def cMGetChildEx(pdnDevInst : UInt32*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Child_Ex(pdnDevInst, dnDevInst, ulFlags, hMachine)
+  end
+
+  def cMGetClassNameA(class_guid : LibC::GUID*, buffer : UInt8*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_NameA(class_guid, buffer, pulLength, ulFlags)
+  end
+
+  def cMGetClassNameW(class_guid : LibC::GUID*, buffer : UInt16*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_NameW(class_guid, buffer, pulLength, ulFlags)
+  end
+
+  def cMGetClassNameExA(class_guid : LibC::GUID*, buffer : UInt8*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_Name_ExA(class_guid, buffer, pulLength, ulFlags, hMachine)
+  end
+
+  def cMGetClassNameExW(class_guid : LibC::GUID*, buffer : UInt16*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_Name_ExW(class_guid, buffer, pulLength, ulFlags, hMachine)
+  end
+
+  def cMGetClassKeyNameA(class_guid : LibC::GUID*, pszKeyName : UInt8*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_Key_NameA(class_guid, pszKeyName, pulLength, ulFlags)
+  end
+
+  def cMGetClassKeyNameW(class_guid : LibC::GUID*, pszKeyName : UInt16*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_Key_NameW(class_guid, pszKeyName, pulLength, ulFlags)
+  end
+
+  def cMGetClassKeyNameExA(class_guid : LibC::GUID*, pszKeyName : UInt8*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_Key_Name_ExA(class_guid, pszKeyName, pulLength, ulFlags, hMachine)
+  end
+
+  def cMGetClassKeyNameExW(class_guid : LibC::GUID*, pszKeyName : UInt16*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_Key_Name_ExW(class_guid, pszKeyName, pulLength, ulFlags, hMachine)
+  end
+
+  def cMGetDepth(pulDepth : UInt32*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Depth(pulDepth, dnDevInst, ulFlags)
+  end
+
+  def cMGetDepthEx(pulDepth : UInt32*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Depth_Ex(pulDepth, dnDevInst, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceIDA(dnDevInst : UInt32, buffer : UInt8*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_IDA(dnDevInst, buffer, buffer_len, ulFlags)
+  end
+
+  def cMGetDeviceIDW(dnDevInst : UInt32, buffer : UInt16*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_IDW(dnDevInst, buffer, buffer_len, ulFlags)
+  end
+
+  def cMGetDeviceIDExA(dnDevInst : UInt32, buffer : UInt8*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_ID_ExA(dnDevInst, buffer, buffer_len, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceIDExW(dnDevInst : UInt32, buffer : UInt16*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_ID_ExW(dnDevInst, buffer, buffer_len, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceIDListA(pszFilter : Win32cr::Foundation::PSTR, buffer : UInt8*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_ID_ListA(pszFilter, buffer, buffer_len, ulFlags)
+  end
+
+  def cMGetDeviceIDListW(pszFilter : Win32cr::Foundation::PWSTR, buffer : UInt16*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_ID_ListW(pszFilter, buffer, buffer_len, ulFlags)
+  end
+
+  def cMGetDeviceIDListExA(pszFilter : Win32cr::Foundation::PSTR, buffer : UInt8*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_ID_List_ExA(pszFilter, buffer, buffer_len, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceIDListExW(pszFilter : Win32cr::Foundation::PWSTR, buffer : UInt16*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_ID_List_ExW(pszFilter, buffer, buffer_len, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceIDListSizeA(pulLen : UInt32*, pszFilter : Win32cr::Foundation::PSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_ID_List_SizeA(pulLen, pszFilter, ulFlags)
+  end
+
+  def cMGetDeviceIDListSizeW(pulLen : UInt32*, pszFilter : Win32cr::Foundation::PWSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_ID_List_SizeW(pulLen, pszFilter, ulFlags)
+  end
+
+  def cMGetDeviceIDListSizeExA(pulLen : UInt32*, pszFilter : Win32cr::Foundation::PSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_ID_List_Size_ExA(pulLen, pszFilter, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceIDListSizeExW(pulLen : UInt32*, pszFilter : Win32cr::Foundation::PWSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_ID_List_Size_ExW(pulLen, pszFilter, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceIDSize(pulLen : UInt32*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_ID_Size(pulLen, dnDevInst, ulFlags)
+  end
+
+  def cMGetDeviceIDSizeEx(pulLen : UInt32*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_ID_Size_Ex(pulLen, dnDevInst, ulFlags, hMachine)
+  end
+
+  def cMGetDevNodePropertyW(dnDevInst : UInt32, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_PropertyW(dnDevInst, property_key, property_type, property_buffer, property_buffer_size, ulFlags)
+  end
+
+  def cMGetDevNodePropertyExW(dnDevInst : UInt32, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_Property_ExW(dnDevInst, property_key, property_type, property_buffer, property_buffer_size, ulFlags, hMachine)
+  end
+
+  def cMGetDevNodePropertyKeys(dnDevInst : UInt32, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_Property_Keys(dnDevInst, property_key_array, property_key_count, ulFlags)
+  end
+
+  def cMGetDevNodePropertyKeysEx(dnDevInst : UInt32, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_Property_Keys_Ex(dnDevInst, property_key_array, property_key_count, ulFlags, hMachine)
+  end
+
+  def cMGetDevNodeRegistryPropertyA(dnDevInst : UInt32, ulProperty : UInt32, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_Registry_PropertyA(dnDevInst, ulProperty, pulRegDataType, buffer, pulLength, ulFlags)
+  end
+
+  def cMGetDevNodeRegistryPropertyW(dnDevInst : UInt32, ulProperty : UInt32, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_Registry_PropertyW(dnDevInst, ulProperty, pulRegDataType, buffer, pulLength, ulFlags)
+  end
+
+  def cMGetDevNodeRegistryPropertyExA(dnDevInst : UInt32, ulProperty : UInt32, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_Registry_Property_ExA(dnDevInst, ulProperty, pulRegDataType, buffer, pulLength, ulFlags, hMachine)
+  end
+
+  def cMGetDevNodeRegistryPropertyExW(dnDevInst : UInt32, ulProperty : UInt32, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_Registry_Property_ExW(dnDevInst, ulProperty, pulRegDataType, buffer, pulLength, ulFlags, hMachine)
+  end
+
+  def cMGetDevNodeCustomPropertyA(dnDevInst : UInt32, pszCustomPropertyName : Win32cr::Foundation::PSTR, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_Custom_PropertyA(dnDevInst, pszCustomPropertyName, pulRegDataType, buffer, pulLength, ulFlags)
+  end
+
+  def cMGetDevNodeCustomPropertyW(dnDevInst : UInt32, pszCustomPropertyName : Win32cr::Foundation::PWSTR, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_Custom_PropertyW(dnDevInst, pszCustomPropertyName, pulRegDataType, buffer, pulLength, ulFlags)
+  end
+
+  def cMGetDevNodeCustomPropertyExA(dnDevInst : UInt32, pszCustomPropertyName : Win32cr::Foundation::PSTR, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_Custom_Property_ExA(dnDevInst, pszCustomPropertyName, pulRegDataType, buffer, pulLength, ulFlags, hMachine)
+  end
+
+  def cMGetDevNodeCustomPropertyExW(dnDevInst : UInt32, pszCustomPropertyName : Win32cr::Foundation::PWSTR, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_Custom_Property_ExW(dnDevInst, pszCustomPropertyName, pulRegDataType, buffer, pulLength, ulFlags, hMachine)
+  end
+
+  def cMGetDevNodeStatus(pulStatus : UInt32*, pulProblemNumber : UInt32*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_Status(pulStatus, pulProblemNumber, dnDevInst, ulFlags)
+  end
+
+  def cMGetDevNodeStatusEx(pulStatus : UInt32*, pulProblemNumber : UInt32*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_DevNode_Status_Ex(pulStatus, pulProblemNumber, dnDevInst, ulFlags, hMachine)
+  end
+
+  def cMGetFirstLogConf(plcLogConf : LibC::UIntPtrT*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_First_Log_Conf(plcLogConf, dnDevInst, ulFlags)
+  end
+
+  def cMGetFirstLogConfEx(plcLogConf : LibC::UIntPtrT*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_First_Log_Conf_Ex(plcLogConf, dnDevInst, ulFlags, hMachine)
+  end
+
+  def cMGetGlobalState(pulState : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Global_State(pulState, ulFlags)
+  end
+
+  def cMGetGlobalStateEx(pulState : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Global_State_Ex(pulState, ulFlags, hMachine)
+  end
+
+  def cMGetHardwareProfileInfoA(ulIndex : UInt32, pHWProfileInfo : Win32cr::Devices::DeviceAndDriverInstallation::HWProfileInfo_sA*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Hardware_Profile_InfoA(ulIndex, pHWProfileInfo, ulFlags)
+  end
+
+  def cMGetHardwareProfileInfoExA(ulIndex : UInt32, pHWProfileInfo : Win32cr::Devices::DeviceAndDriverInstallation::HWProfileInfo_sA*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Hardware_Profile_Info_ExA(ulIndex, pHWProfileInfo, ulFlags, hMachine)
+  end
+
+  def cMGetHardwareProfileInfoW(ulIndex : UInt32, pHWProfileInfo : Win32cr::Devices::DeviceAndDriverInstallation::HWProfileInfo_sW*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Hardware_Profile_InfoW(ulIndex, pHWProfileInfo, ulFlags)
+  end
+
+  def cMGetHardwareProfileInfoExW(ulIndex : UInt32, pHWProfileInfo : Win32cr::Devices::DeviceAndDriverInstallation::HWProfileInfo_sW*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Hardware_Profile_Info_ExW(ulIndex, pHWProfileInfo, ulFlags, hMachine)
+  end
+
+  def cMGetHWProfFlagsA(pDeviceID : Int8*, ulHardwareProfile : UInt32, pulValue : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_HW_Prof_FlagsA(pDeviceID, ulHardwareProfile, pulValue, ulFlags)
+  end
+
+  def cMGetHWProfFlagsW(pDeviceID : UInt16*, ulHardwareProfile : UInt32, pulValue : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_HW_Prof_FlagsW(pDeviceID, ulHardwareProfile, pulValue, ulFlags)
+  end
+
+  def cMGetHWProfFlagsExA(pDeviceID : Int8*, ulHardwareProfile : UInt32, pulValue : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_HW_Prof_Flags_ExA(pDeviceID, ulHardwareProfile, pulValue, ulFlags, hMachine)
+  end
+
+  def cMGetHWProfFlagsExW(pDeviceID : UInt16*, ulHardwareProfile : UInt32, pulValue : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_HW_Prof_Flags_ExW(pDeviceID, ulHardwareProfile, pulValue, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceInterfaceAliasA(pszDeviceInterface : Win32cr::Foundation::PSTR, alias_interface_guid : LibC::GUID*, pszAliasDeviceInterface : UInt8*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_AliasA(pszDeviceInterface, alias_interface_guid, pszAliasDeviceInterface, pulLength, ulFlags)
+  end
+
+  def cMGetDeviceInterfaceAliasW(pszDeviceInterface : Win32cr::Foundation::PWSTR, alias_interface_guid : LibC::GUID*, pszAliasDeviceInterface : UInt16*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_AliasW(pszDeviceInterface, alias_interface_guid, pszAliasDeviceInterface, pulLength, ulFlags)
+  end
+
+  def cMGetDeviceInterfaceAliasExA(pszDeviceInterface : Win32cr::Foundation::PSTR, alias_interface_guid : LibC::GUID*, pszAliasDeviceInterface : UInt8*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_Alias_ExA(pszDeviceInterface, alias_interface_guid, pszAliasDeviceInterface, pulLength, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceInterfaceAliasExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, alias_interface_guid : LibC::GUID*, pszAliasDeviceInterface : UInt16*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_Alias_ExW(pszDeviceInterface, alias_interface_guid, pszAliasDeviceInterface, pulLength, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceInterfaceListA(interface_class_guid : LibC::GUID*, pDeviceID : Int8*, buffer : UInt8*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_ListA(interface_class_guid, pDeviceID, buffer, buffer_len, ulFlags)
+  end
+
+  def cMGetDeviceInterfaceListW(interface_class_guid : LibC::GUID*, pDeviceID : UInt16*, buffer : UInt16*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_ListW(interface_class_guid, pDeviceID, buffer, buffer_len, ulFlags)
+  end
+
+  def cMGetDeviceInterfaceListExA(interface_class_guid : LibC::GUID*, pDeviceID : Int8*, buffer : UInt8*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_List_ExA(interface_class_guid, pDeviceID, buffer, buffer_len, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceInterfaceListExW(interface_class_guid : LibC::GUID*, pDeviceID : UInt16*, buffer : UInt16*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_List_ExW(interface_class_guid, pDeviceID, buffer, buffer_len, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceInterfaceListSizeA(pulLen : UInt32*, interface_class_guid : LibC::GUID*, pDeviceID : Int8*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_List_SizeA(pulLen, interface_class_guid, pDeviceID, ulFlags)
+  end
+
+  def cMGetDeviceInterfaceListSizeW(pulLen : UInt32*, interface_class_guid : LibC::GUID*, pDeviceID : UInt16*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_List_SizeW(pulLen, interface_class_guid, pDeviceID, ulFlags)
+  end
+
+  def cMGetDeviceInterfaceListSizeExA(pulLen : UInt32*, interface_class_guid : LibC::GUID*, pDeviceID : Int8*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_List_Size_ExA(pulLen, interface_class_guid, pDeviceID, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceInterfaceListSizeExW(pulLen : UInt32*, interface_class_guid : LibC::GUID*, pDeviceID : UInt16*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_List_Size_ExW(pulLen, interface_class_guid, pDeviceID, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceInterfacePropertyW(pszDeviceInterface : Win32cr::Foundation::PWSTR, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_PropertyW(pszDeviceInterface, property_key, property_type, property_buffer, property_buffer_size, ulFlags)
+  end
+
+  def cMGetDeviceInterfacePropertyExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_Property_ExW(pszDeviceInterface, property_key, property_type, property_buffer, property_buffer_size, ulFlags, hMachine)
+  end
+
+  def cMGetDeviceInterfacePropertyKeysW(pszDeviceInterface : Win32cr::Foundation::PWSTR, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_Property_KeysW(pszDeviceInterface, property_key_array, property_key_count, ulFlags)
+  end
+
+  def cMGetDeviceInterfacePropertyKeysExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Device_Interface_Property_Keys_ExW(pszDeviceInterface, property_key_array, property_key_count, ulFlags, hMachine)
+  end
+
+  def cMGetLogConfPriority(lcLogConf : LibC::UIntPtrT, pPriority : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Log_Conf_Priority(lcLogConf, pPriority, ulFlags)
+  end
+
+  def cMGetLogConfPriorityEx(lcLogConf : LibC::UIntPtrT, pPriority : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Log_Conf_Priority_Ex(lcLogConf, pPriority, ulFlags, hMachine)
+  end
+
+  def cMGetNextLogConf(plcLogConf : LibC::UIntPtrT*, lcLogConf : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Next_Log_Conf(plcLogConf, lcLogConf, ulFlags)
+  end
+
+  def cMGetNextLogConfEx(plcLogConf : LibC::UIntPtrT*, lcLogConf : LibC::UIntPtrT, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Next_Log_Conf_Ex(plcLogConf, lcLogConf, ulFlags, hMachine)
+  end
+
+  def cMGetParent(pdnDevInst : UInt32*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Parent(pdnDevInst, dnDevInst, ulFlags)
+  end
+
+  def cMGetParentEx(pdnDevInst : UInt32*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Parent_Ex(pdnDevInst, dnDevInst, ulFlags, hMachine)
+  end
+
+  def cMGetResDesData(rdResDes : LibC::UIntPtrT, buffer : Void*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Res_Des_Data(rdResDes, buffer, buffer_len, ulFlags)
+  end
+
+  def cMGetResDesDataEx(rdResDes : LibC::UIntPtrT, buffer : Void*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Res_Des_Data_Ex(rdResDes, buffer, buffer_len, ulFlags, hMachine)
+  end
+
+  def cMGetResDesDataSize(pulSize : UInt32*, rdResDes : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Res_Des_Data_Size(pulSize, rdResDes, ulFlags)
+  end
+
+  def cMGetResDesDataSizeEx(pulSize : UInt32*, rdResDes : LibC::UIntPtrT, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Res_Des_Data_Size_Ex(pulSize, rdResDes, ulFlags, hMachine)
+  end
+
+  def cMGetSibling(pdnDevInst : UInt32*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Sibling(pdnDevInst, dnDevInst, ulFlags)
+  end
+
+  def cMGetSiblingEx(pdnDevInst : UInt32*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Sibling_Ex(pdnDevInst, dnDevInst, ulFlags, hMachine)
+  end
+
+  def cMGetVersion : UInt16
+    C.CM_Get_Version
+  end
+
+  def cMGetVersionEx(hMachine : LibC::IntPtrT) : UInt16
+    C.CM_Get_Version_Ex(hMachine)
+  end
+
+  def cMIsVersionAvailable(wVersion : UInt16) : Win32cr::Foundation::BOOL
+    C.CM_Is_Version_Available(wVersion)
+  end
+
+  def cMIsVersionAvailableEx(wVersion : UInt16, hMachine : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    C.CM_Is_Version_Available_Ex(wVersion, hMachine)
+  end
+
+  def cMIntersectRangeList(rlhOld1 : LibC::UIntPtrT, rlhOld2 : LibC::UIntPtrT, rlhNew : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Intersect_Range_List(rlhOld1, rlhOld2, rlhNew, ulFlags)
+  end
+
+  def cMInvertRangeList(rlhOld : LibC::UIntPtrT, rlhNew : LibC::UIntPtrT, ullMaxValue : UInt64, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Invert_Range_List(rlhOld, rlhNew, ullMaxValue, ulFlags)
+  end
+
+  def cMLocateDevNodeA(pdnDevInst : UInt32*, pDeviceID : Int8*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Locate_DevNodeA(pdnDevInst, pDeviceID, ulFlags)
+  end
+
+  def cMLocateDevNodeW(pdnDevInst : UInt32*, pDeviceID : UInt16*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Locate_DevNodeW(pdnDevInst, pDeviceID, ulFlags)
+  end
+
+  def cMLocateDevNodeExA(pdnDevInst : UInt32*, pDeviceID : Int8*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Locate_DevNode_ExA(pdnDevInst, pDeviceID, ulFlags, hMachine)
+  end
+
+  def cMLocateDevNodeExW(pdnDevInst : UInt32*, pDeviceID : UInt16*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Locate_DevNode_ExW(pdnDevInst, pDeviceID, ulFlags, hMachine)
+  end
+
+  def cMMergeRangeList(rlhOld1 : LibC::UIntPtrT, rlhOld2 : LibC::UIntPtrT, rlhNew : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Merge_Range_List(rlhOld1, rlhOld2, rlhNew, ulFlags)
+  end
+
+  def cMModifyResDes(prdResDes : LibC::UIntPtrT*, rdResDes : LibC::UIntPtrT, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Modify_Res_Des(prdResDes, rdResDes, resource_id, resource_data, resource_len, ulFlags)
+  end
+
+  def cMModifyResDesEx(prdResDes : LibC::UIntPtrT*, rdResDes : LibC::UIntPtrT, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Modify_Res_Des_Ex(prdResDes, rdResDes, resource_id, resource_data, resource_len, ulFlags, hMachine)
+  end
+
+  def cMMoveDevNode(dnFromDevInst : UInt32, dnToDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Move_DevNode(dnFromDevInst, dnToDevInst, ulFlags)
+  end
+
+  def cMMoveDevNodeEx(dnFromDevInst : UInt32, dnToDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Move_DevNode_Ex(dnFromDevInst, dnToDevInst, ulFlags, hMachine)
+  end
+
+  def cMNextRange(preElement : LibC::UIntPtrT*, pullStart : UInt64*, pullEnd : UInt64*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Next_Range(preElement, pullStart, pullEnd, ulFlags)
+  end
+
+  def cMGetNextResDes(prdResDes : LibC::UIntPtrT*, rdResDes : LibC::UIntPtrT, for_resource : UInt32, pResourceID : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Next_Res_Des(prdResDes, rdResDes, for_resource, pResourceID, ulFlags)
+  end
+
+  def cMGetNextResDesEx(prdResDes : LibC::UIntPtrT*, rdResDes : LibC::UIntPtrT, for_resource : UInt32, pResourceID : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Next_Res_Des_Ex(prdResDes, rdResDes, for_resource, pResourceID, ulFlags, hMachine)
+  end
+
+  def cMOpenClassKeyA(class_guid : LibC::GUID*, pszClassName : Win32cr::Foundation::PSTR, samDesired : UInt32, disposition : UInt32, phkClass : Win32cr::System::Registry::HKEY*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Open_Class_KeyA(class_guid, pszClassName, samDesired, disposition, phkClass, ulFlags)
+  end
+
+  def cMOpenClassKeyW(class_guid : LibC::GUID*, pszClassName : Win32cr::Foundation::PWSTR, samDesired : UInt32, disposition : UInt32, phkClass : Win32cr::System::Registry::HKEY*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Open_Class_KeyW(class_guid, pszClassName, samDesired, disposition, phkClass, ulFlags)
+  end
+
+  def cMOpenClassKeyExA(class_guid : LibC::GUID*, pszClassName : Win32cr::Foundation::PSTR, samDesired : UInt32, disposition : UInt32, phkClass : Win32cr::System::Registry::HKEY*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Open_Class_Key_ExA(class_guid, pszClassName, samDesired, disposition, phkClass, ulFlags, hMachine)
+  end
+
+  def cMOpenClassKeyExW(class_guid : LibC::GUID*, pszClassName : Win32cr::Foundation::PWSTR, samDesired : UInt32, disposition : UInt32, phkClass : Win32cr::System::Registry::HKEY*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Open_Class_Key_ExW(class_guid, pszClassName, samDesired, disposition, phkClass, ulFlags, hMachine)
+  end
+
+  def cMOpenDevNodeKey(dnDevNode : UInt32, samDesired : UInt32, ulHardwareProfile : UInt32, disposition : UInt32, phkDevice : Win32cr::System::Registry::HKEY*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Open_DevNode_Key(dnDevNode, samDesired, ulHardwareProfile, disposition, phkDevice, ulFlags)
+  end
+
+  def cMOpenDevNodeKeyEx(dnDevNode : UInt32, samDesired : UInt32, ulHardwareProfile : UInt32, disposition : UInt32, phkDevice : Win32cr::System::Registry::HKEY*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Open_DevNode_Key_Ex(dnDevNode, samDesired, ulHardwareProfile, disposition, phkDevice, ulFlags, hMachine)
+  end
+
+  def cMOpenDeviceInterfaceKeyA(pszDeviceInterface : Win32cr::Foundation::PSTR, samDesired : UInt32, disposition : UInt32, phkDeviceInterface : Win32cr::System::Registry::HKEY*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Open_Device_Interface_KeyA(pszDeviceInterface, samDesired, disposition, phkDeviceInterface, ulFlags)
+  end
+
+  def cMOpenDeviceInterfaceKeyW(pszDeviceInterface : Win32cr::Foundation::PWSTR, samDesired : UInt32, disposition : UInt32, phkDeviceInterface : Win32cr::System::Registry::HKEY*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Open_Device_Interface_KeyW(pszDeviceInterface, samDesired, disposition, phkDeviceInterface, ulFlags)
+  end
+
+  def cMOpenDeviceInterfaceKeyExA(pszDeviceInterface : Win32cr::Foundation::PSTR, samDesired : UInt32, disposition : UInt32, phkDeviceInterface : Win32cr::System::Registry::HKEY*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Open_Device_Interface_Key_ExA(pszDeviceInterface, samDesired, disposition, phkDeviceInterface, ulFlags, hMachine)
+  end
+
+  def cMOpenDeviceInterfaceKeyExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, samDesired : UInt32, disposition : UInt32, phkDeviceInterface : Win32cr::System::Registry::HKEY*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Open_Device_Interface_Key_ExW(pszDeviceInterface, samDesired, disposition, phkDeviceInterface, ulFlags, hMachine)
+  end
+
+  def cMDeleteDeviceInterfaceKeyA(pszDeviceInterface : Win32cr::Foundation::PSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Delete_Device_Interface_KeyA(pszDeviceInterface, ulFlags)
+  end
+
+  def cMDeleteDeviceInterfaceKeyW(pszDeviceInterface : Win32cr::Foundation::PWSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Delete_Device_Interface_KeyW(pszDeviceInterface, ulFlags)
+  end
+
+  def cMDeleteDeviceInterfaceKeyExA(pszDeviceInterface : Win32cr::Foundation::PSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Delete_Device_Interface_Key_ExA(pszDeviceInterface, ulFlags, hMachine)
+  end
+
+  def cMDeleteDeviceInterfaceKeyExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Delete_Device_Interface_Key_ExW(pszDeviceInterface, ulFlags, hMachine)
+  end
+
+  def cMQueryArbitratorFreeData(pData : Void*, data_len : UInt32, dnDevInst : UInt32, resource_id : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Query_Arbitrator_Free_Data(pData, data_len, dnDevInst, resource_id, ulFlags)
+  end
+
+  def cMQueryArbitratorFreeDataEx(pData : Void*, data_len : UInt32, dnDevInst : UInt32, resource_id : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Query_Arbitrator_Free_Data_Ex(pData, data_len, dnDevInst, resource_id, ulFlags, hMachine)
+  end
+
+  def cMQueryArbitratorFreeSize(pulSize : UInt32*, dnDevInst : UInt32, resource_id : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Query_Arbitrator_Free_Size(pulSize, dnDevInst, resource_id, ulFlags)
+  end
+
+  def cMQueryArbitratorFreeSizeEx(pulSize : UInt32*, dnDevInst : UInt32, resource_id : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Query_Arbitrator_Free_Size_Ex(pulSize, dnDevInst, resource_id, ulFlags, hMachine)
+  end
+
+  def cMQueryRemoveSubTree(dnAncestor : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Query_Remove_SubTree(dnAncestor, ulFlags)
+  end
+
+  def cMQueryRemoveSubTreeEx(dnAncestor : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Query_Remove_SubTree_Ex(dnAncestor, ulFlags, hMachine)
+  end
+
+  def cMQueryAndRemoveSubTreeA(dnAncestor : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt8*, ulNameLength : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Query_And_Remove_SubTreeA(dnAncestor, pVetoType, pszVetoName, ulNameLength, ulFlags)
+  end
+
+  def cMQueryAndRemoveSubTreeW(dnAncestor : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt16*, ulNameLength : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Query_And_Remove_SubTreeW(dnAncestor, pVetoType, pszVetoName, ulNameLength, ulFlags)
+  end
+
+  def cMQueryAndRemoveSubTreeExA(dnAncestor : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt8*, ulNameLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Query_And_Remove_SubTree_ExA(dnAncestor, pVetoType, pszVetoName, ulNameLength, ulFlags, hMachine)
+  end
+
+  def cMQueryAndRemoveSubTreeExW(dnAncestor : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt16*, ulNameLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Query_And_Remove_SubTree_ExW(dnAncestor, pVetoType, pszVetoName, ulNameLength, ulFlags, hMachine)
+  end
+
+  def cMRequestDeviceEjectA(dnDevInst : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt8*, ulNameLength : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Request_Device_EjectA(dnDevInst, pVetoType, pszVetoName, ulNameLength, ulFlags)
+  end
+
+  def cMRequestDeviceEjectExA(dnDevInst : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt8*, ulNameLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Request_Device_Eject_ExA(dnDevInst, pVetoType, pszVetoName, ulNameLength, ulFlags, hMachine)
+  end
+
+  def cMRequestDeviceEjectW(dnDevInst : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt16*, ulNameLength : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Request_Device_EjectW(dnDevInst, pVetoType, pszVetoName, ulNameLength, ulFlags)
+  end
+
+  def cMRequestDeviceEjectExW(dnDevInst : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt16*, ulNameLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Request_Device_Eject_ExW(dnDevInst, pVetoType, pszVetoName, ulNameLength, ulFlags, hMachine)
+  end
+
+  def cMReenumerateDevNode(dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Reenumerate_DevNode(dnDevInst, ulFlags)
+  end
+
+  def cMReenumerateDevNodeEx(dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Reenumerate_DevNode_Ex(dnDevInst, ulFlags, hMachine)
+  end
+
+  def cMRegisterDeviceInterfaceA(dnDevInst : UInt32, interface_class_guid : LibC::GUID*, pszReference : Win32cr::Foundation::PSTR, pszDeviceInterface : UInt8*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Register_Device_InterfaceA(dnDevInst, interface_class_guid, pszReference, pszDeviceInterface, pulLength, ulFlags)
+  end
+
+  def cMRegisterDeviceInterfaceW(dnDevInst : UInt32, interface_class_guid : LibC::GUID*, pszReference : Win32cr::Foundation::PWSTR, pszDeviceInterface : UInt16*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Register_Device_InterfaceW(dnDevInst, interface_class_guid, pszReference, pszDeviceInterface, pulLength, ulFlags)
+  end
+
+  def cMRegisterDeviceInterfaceExA(dnDevInst : UInt32, interface_class_guid : LibC::GUID*, pszReference : Win32cr::Foundation::PSTR, pszDeviceInterface : UInt8*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Register_Device_Interface_ExA(dnDevInst, interface_class_guid, pszReference, pszDeviceInterface, pulLength, ulFlags, hMachine)
+  end
+
+  def cMRegisterDeviceInterfaceExW(dnDevInst : UInt32, interface_class_guid : LibC::GUID*, pszReference : Win32cr::Foundation::PWSTR, pszDeviceInterface : UInt16*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Register_Device_Interface_ExW(dnDevInst, interface_class_guid, pszReference, pszDeviceInterface, pulLength, ulFlags, hMachine)
+  end
+
+  def cMSetDevNodeProblemEx(dnDevInst : UInt32, ulProblem : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_DevNode_Problem_Ex(dnDevInst, ulProblem, ulFlags, hMachine)
+  end
+
+  def cMSetDevNodeProblem(dnDevInst : UInt32, ulProblem : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_DevNode_Problem(dnDevInst, ulProblem, ulFlags)
+  end
+
+  def cMUnregisterDeviceInterfaceA(pszDeviceInterface : Win32cr::Foundation::PSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Unregister_Device_InterfaceA(pszDeviceInterface, ulFlags)
+  end
+
+  def cMUnregisterDeviceInterfaceW(pszDeviceInterface : Win32cr::Foundation::PWSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Unregister_Device_InterfaceW(pszDeviceInterface, ulFlags)
+  end
+
+  def cMUnregisterDeviceInterfaceExA(pszDeviceInterface : Win32cr::Foundation::PSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Unregister_Device_Interface_ExA(pszDeviceInterface, ulFlags, hMachine)
+  end
+
+  def cMUnregisterDeviceInterfaceExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Unregister_Device_Interface_ExW(pszDeviceInterface, ulFlags, hMachine)
+  end
+
+  def cMRegisterDeviceDriver(dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Register_Device_Driver(dnDevInst, ulFlags)
+  end
+
+  def cMRegisterDeviceDriverEx(dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Register_Device_Driver_Ex(dnDevInst, ulFlags, hMachine)
+  end
+
+  def cMRemoveSubTree(dnAncestor : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Remove_SubTree(dnAncestor, ulFlags)
+  end
+
+  def cMRemoveSubTreeEx(dnAncestor : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Remove_SubTree_Ex(dnAncestor, ulFlags, hMachine)
+  end
+
+  def cMSetDevNodePropertyW(dnDevInst : UInt32, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_DevNode_PropertyW(dnDevInst, property_key, property_type, property_buffer, property_buffer_size, ulFlags)
+  end
+
+  def cMSetDevNodePropertyExW(dnDevInst : UInt32, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_DevNode_Property_ExW(dnDevInst, property_key, property_type, property_buffer, property_buffer_size, ulFlags, hMachine)
+  end
+
+  def cMSetDevNodeRegistryPropertyA(dnDevInst : UInt32, ulProperty : UInt32, buffer : Void*, ulLength : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_DevNode_Registry_PropertyA(dnDevInst, ulProperty, buffer, ulLength, ulFlags)
+  end
+
+  def cMSetDevNodeRegistryPropertyW(dnDevInst : UInt32, ulProperty : UInt32, buffer : Void*, ulLength : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_DevNode_Registry_PropertyW(dnDevInst, ulProperty, buffer, ulLength, ulFlags)
+  end
+
+  def cMSetDevNodeRegistryPropertyExA(dnDevInst : UInt32, ulProperty : UInt32, buffer : Void*, ulLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_DevNode_Registry_Property_ExA(dnDevInst, ulProperty, buffer, ulLength, ulFlags, hMachine)
+  end
+
+  def cMSetDevNodeRegistryPropertyExW(dnDevInst : UInt32, ulProperty : UInt32, buffer : Void*, ulLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_DevNode_Registry_Property_ExW(dnDevInst, ulProperty, buffer, ulLength, ulFlags, hMachine)
+  end
+
+  def cMSetDeviceInterfacePropertyW(pszDeviceInterface : Win32cr::Foundation::PWSTR, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_Device_Interface_PropertyW(pszDeviceInterface, property_key, property_type, property_buffer, property_buffer_size, ulFlags)
+  end
+
+  def cMSetDeviceInterfacePropertyExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_Device_Interface_Property_ExW(pszDeviceInterface, property_key, property_type, property_buffer, property_buffer_size, ulFlags, hMachine)
+  end
+
+  def cMIsDockStationPresent(pbPresent : Win32cr::Foundation::BOOL*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Is_Dock_Station_Present(pbPresent)
+  end
+
+  def cMIsDockStationPresentEx(pbPresent : Win32cr::Foundation::BOOL*, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Is_Dock_Station_Present_Ex(pbPresent, hMachine)
+  end
+
+  def cMRequestEjectPC : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Request_Eject_PC
+  end
+
+  def cMRequestEjectPCEx(hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Request_Eject_PC_Ex(hMachine)
+  end
+
+  def cMSetHWProfFlagsA(pDeviceID : Int8*, ulConfig : UInt32, ulValue : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_HW_Prof_FlagsA(pDeviceID, ulConfig, ulValue, ulFlags)
+  end
+
+  def cMSetHWProfFlagsW(pDeviceID : UInt16*, ulConfig : UInt32, ulValue : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_HW_Prof_FlagsW(pDeviceID, ulConfig, ulValue, ulFlags)
+  end
+
+  def cMSetHWProfFlagsExA(pDeviceID : Int8*, ulConfig : UInt32, ulValue : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_HW_Prof_Flags_ExA(pDeviceID, ulConfig, ulValue, ulFlags, hMachine)
+  end
+
+  def cMSetHWProfFlagsExW(pDeviceID : UInt16*, ulConfig : UInt32, ulValue : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_HW_Prof_Flags_ExW(pDeviceID, ulConfig, ulValue, ulFlags, hMachine)
+  end
+
+  def cMSetupDevNode(dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Setup_DevNode(dnDevInst, ulFlags)
+  end
+
+  def cMSetupDevNodeEx(dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Setup_DevNode_Ex(dnDevInst, ulFlags, hMachine)
+  end
+
+  def cMTestRangeAvailable(ullStartValue : UInt64, ullEndValue : UInt64, rlh : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Test_Range_Available(ullStartValue, ullEndValue, rlh, ulFlags)
+  end
+
+  def cMUninstallDevNode(dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Uninstall_DevNode(dnDevInst, ulFlags)
+  end
+
+  def cMUninstallDevNodeEx(dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Uninstall_DevNode_Ex(dnDevInst, ulFlags, hMachine)
+  end
+
+  def cMRunDetection(ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Run_Detection(ulFlags)
+  end
+
+  def cMRunDetectionEx(ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Run_Detection_Ex(ulFlags, hMachine)
+  end
+
+  def cMSetHWProf(ulHardwareProfile : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_HW_Prof(ulHardwareProfile, ulFlags)
+  end
+
+  def cMSetHWProfEx(ulHardwareProfile : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_HW_Prof_Ex(ulHardwareProfile, ulFlags, hMachine)
+  end
+
+  def cMQueryResourceConflictList(pclConflictList : LibC::UIntPtrT*, dnDevInst : UInt32, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Query_Resource_Conflict_List(pclConflictList, dnDevInst, resource_id, resource_data, resource_len, ulFlags, hMachine)
+  end
+
+  def cMFreeResourceConflictHandle(clConflictList : LibC::UIntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Free_Resource_Conflict_Handle(clConflictList)
+  end
+
+  def cMGetResourceConflictCount(clConflictList : LibC::UIntPtrT, pulCount : UInt32*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Resource_Conflict_Count(clConflictList, pulCount)
+  end
+
+  def cMGetResourceConflictDetailsA(clConflictList : LibC::UIntPtrT, ulIndex : UInt32, pConflictDetails : Win32cr::Devices::DeviceAndDriverInstallation::CONFLICT_DETAILS_A*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Resource_Conflict_DetailsA(clConflictList, ulIndex, pConflictDetails)
+  end
+
+  def cMGetResourceConflictDetailsW(clConflictList : LibC::UIntPtrT, ulIndex : UInt32, pConflictDetails : Win32cr::Devices::DeviceAndDriverInstallation::CONFLICT_DETAILS_W*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Resource_Conflict_DetailsW(clConflictList, ulIndex, pConflictDetails)
+  end
+
+  def cMGetClassPropertyW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_PropertyW(class_guid, property_key, property_type, property_buffer, property_buffer_size, ulFlags)
+  end
+
+  def cMGetClassPropertyExW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_Property_ExW(class_guid, property_key, property_type, property_buffer, property_buffer_size, ulFlags, hMachine)
+  end
+
+  def cMGetClassPropertyKeys(class_guid : LibC::GUID*, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_Property_Keys(class_guid, property_key_array, property_key_count, ulFlags)
+  end
+
+  def cMGetClassPropertyKeysEx(class_guid : LibC::GUID*, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_Property_Keys_Ex(class_guid, property_key_array, property_key_count, ulFlags, hMachine)
+  end
+
+  def cMSetClassPropertyW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_Class_PropertyW(class_guid, property_key, property_type, property_buffer, property_buffer_size, ulFlags)
+  end
+
+  def cMSetClassPropertyExW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_Class_Property_ExW(class_guid, property_key, property_type, property_buffer, property_buffer_size, ulFlags, hMachine)
+  end
+
+  def cMGetClassRegistryPropertyA(class_guid : LibC::GUID*, ulProperty : UInt32, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_Registry_PropertyA(class_guid, ulProperty, pulRegDataType, buffer, pulLength, ulFlags, hMachine)
+  end
+
+  def cMGetClassRegistryPropertyW(class_guid : LibC::GUID*, ulProperty : UInt32, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Get_Class_Registry_PropertyW(class_guid, ulProperty, pulRegDataType, buffer, pulLength, ulFlags, hMachine)
+  end
+
+  def cMSetClassRegistryPropertyA(class_guid : LibC::GUID*, ulProperty : UInt32, buffer : Void*, ulLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_Class_Registry_PropertyA(class_guid, ulProperty, buffer, ulLength, ulFlags, hMachine)
+  end
+
+  def cMSetClassRegistryPropertyW(class_guid : LibC::GUID*, ulProperty : UInt32, buffer : Void*, ulLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Set_Class_Registry_PropertyW(class_guid, ulProperty, buffer, ulLength, ulFlags, hMachine)
+  end
+
+  def cMPWaitNoPendingInstallEvents(dwTimeout : UInt32) : UInt32
+    C.CMP_WaitNoPendingInstallEvents(dwTimeout)
+  end
+
+  def cMRegisterNotification(pFilter : Win32cr::Devices::DeviceAndDriverInstallation::CM_NOTIFY_FILTER*, pContext : Void*, pCallback : Win32cr::Devices::DeviceAndDriverInstallation::PCM_NOTIFY_CALLBACK, pNotifyContext : LibC::IntPtrT*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Register_Notification(pFilter, pContext, pCallback, pNotifyContext)
+  end
+
+  def cMUnregisterNotification(notify_context : Win32cr::Devices::DeviceAndDriverInstallation::HCMNOTIFICATION) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
+    C.CM_Unregister_Notification(notify_context)
+  end
+
+  def cMMapCrToWin32Err(cm_return_code : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET, default_err : UInt32) : UInt32
+    C.CM_MapCrToWin32Err(cm_return_code, default_err)
+  end
+
+  def updateDriverForPlugAndPlayDevicesA(hwndParent : Win32cr::Foundation::HWND, hardware_id : Win32cr::Foundation::PSTR, full_inf_path : Win32cr::Foundation::PSTR, install_flags : UInt32, bRebootRequired : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.UpdateDriverForPlugAndPlayDevicesA(hwndParent, hardware_id, full_inf_path, install_flags, bRebootRequired)
+  end
+
+  def updateDriverForPlugAndPlayDevicesW(hwndParent : Win32cr::Foundation::HWND, hardware_id : Win32cr::Foundation::PWSTR, full_inf_path : Win32cr::Foundation::PWSTR, install_flags : UInt32, bRebootRequired : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.UpdateDriverForPlugAndPlayDevicesW(hwndParent, hardware_id, full_inf_path, install_flags, bRebootRequired)
+  end
+
+  def diInstallDevice(hwndParent : Win32cr::Foundation::HWND, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.DiInstallDevice(hwndParent, device_info_set, device_info_data, driver_info_data, flags, need_reboot)
+  end
+
+  def diInstallDriverW(hwndParent : Win32cr::Foundation::HWND, inf_path : Win32cr::Foundation::PWSTR, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.DiInstallDriverW(hwndParent, inf_path, flags, need_reboot)
+  end
+
+  def diInstallDriverA(hwndParent : Win32cr::Foundation::HWND, inf_path : Win32cr::Foundation::PSTR, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.DiInstallDriverA(hwndParent, inf_path, flags, need_reboot)
+  end
+
+  def diUninstallDevice(hwndParent : Win32cr::Foundation::HWND, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.DiUninstallDevice(hwndParent, device_info_set, device_info_data, flags, need_reboot)
+  end
+
+  def diUninstallDriverW(hwndParent : Win32cr::Foundation::HWND, inf_path : Win32cr::Foundation::PWSTR, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.DiUninstallDriverW(hwndParent, inf_path, flags, need_reboot)
+  end
+
+  def diUninstallDriverA(hwndParent : Win32cr::Foundation::HWND, inf_path : Win32cr::Foundation::PSTR, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.DiUninstallDriverA(hwndParent, inf_path, flags, need_reboot)
+  end
+
+  def diShowUpdateDevice(hwndParent : Win32cr::Foundation::HWND, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.DiShowUpdateDevice(hwndParent, device_info_set, device_info_data, flags, need_reboot)
+  end
+
+  def diRollbackDriver(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, hwndParent : Win32cr::Foundation::HWND, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.DiRollbackDriver(device_info_set, device_info_data, hwndParent, flags, need_reboot)
+  end
+
+  def diShowUpdateDriver(hwndParent : Win32cr::Foundation::HWND, file_path : Win32cr::Foundation::PWSTR, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.DiShowUpdateDriver(hwndParent, file_path, flags, need_reboot)
+  end
+
   @[Link("setupapi")]
   @[Link("cfgmgr32")]
   @[Link("newdev")]
   lib C
+    # :nodoc:
     fun SetupGetInfInformationA(inf_spec : Void*, search_control : UInt32, return_buffer : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetInfInformationW(inf_spec : Void*, search_control : UInt32, return_buffer : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueryInfFileInformationA(inf_information : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, inf_index : UInt32, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueryInfFileInformationW(inf_information : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, inf_index : UInt32, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueryInfOriginalFileInformationA(inf_information : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, inf_index : UInt32, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, original_file_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ORIGINAL_FILE_INFO_A*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueryInfOriginalFileInformationW(inf_information : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, inf_index : UInt32, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, original_file_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ORIGINAL_FILE_INFO_W*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueryInfVersionInformationA(inf_information : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, inf_index : UInt32, key : Win32cr::Foundation::PSTR, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueryInfVersionInformationW(inf_information : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_INFORMATION*, inf_index : UInt32, key : Win32cr::Foundation::PWSTR, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetInfDriverStoreLocationA(file_name : Win32cr::Foundation::PSTR, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, locale_name : Win32cr::Foundation::PSTR, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetInfDriverStoreLocationW(file_name : Win32cr::Foundation::PWSTR, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, locale_name : Win32cr::Foundation::PWSTR, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetInfPublishedNameA(driver_store_location : Win32cr::Foundation::PSTR, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetInfPublishedNameW(driver_store_location : Win32cr::Foundation::PWSTR, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetInfFileListA(directory_path : Win32cr::Foundation::PSTR, inf_style : UInt32, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetInfFileListW(directory_path : Win32cr::Foundation::PWSTR, inf_style : UInt32, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupOpenInfFileW(file_name : Win32cr::Foundation::PWSTR, inf_class : Win32cr::Foundation::PWSTR, inf_style : UInt32, error_line : UInt32*) : Void*
 
+    # :nodoc:
     fun SetupOpenInfFileA(file_name : Win32cr::Foundation::PSTR, inf_class : Win32cr::Foundation::PSTR, inf_style : UInt32, error_line : UInt32*) : Void*
 
+    # :nodoc:
     fun SetupOpenMasterInf : Void*
 
+    # :nodoc:
     fun SetupOpenAppendInfFileW(file_name : Win32cr::Foundation::PWSTR, inf_handle : Void*, error_line : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupOpenAppendInfFileA(file_name : Win32cr::Foundation::PSTR, inf_handle : Void*, error_line : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupCloseInfFile(inf_handle : Void*) : Void
 
+    # :nodoc:
     fun SetupFindFirstLineA(inf_handle : Void*, section : Win32cr::Foundation::PSTR, key : Win32cr::Foundation::PSTR, context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupFindFirstLineW(inf_handle : Void*, section : Win32cr::Foundation::PWSTR, key : Win32cr::Foundation::PWSTR, context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupFindNextLine(context_in : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, context_out : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupFindNextMatchLineA(context_in : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, key : Win32cr::Foundation::PSTR, context_out : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupFindNextMatchLineW(context_in : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, key : Win32cr::Foundation::PWSTR, context_out : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetLineByIndexA(inf_handle : Void*, section : Win32cr::Foundation::PSTR, index : UInt32, context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetLineByIndexW(inf_handle : Void*, section : Win32cr::Foundation::PWSTR, index : UInt32, context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetLineCountA(inf_handle : Void*, section : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun SetupGetLineCountW(inf_handle : Void*, section : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun SetupGetLineTextA(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, inf_handle : Void*, section : Win32cr::Foundation::PSTR, key : Win32cr::Foundation::PSTR, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetLineTextW(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, inf_handle : Void*, section : Win32cr::Foundation::PWSTR, key : Win32cr::Foundation::PWSTR, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetFieldCount(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : UInt32
 
+    # :nodoc:
     fun SetupGetStringFieldA(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, field_index : UInt32, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetStringFieldW(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, field_index : UInt32, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetIntField(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, field_index : UInt32, integer_value : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetMultiSzFieldA(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, field_index : UInt32, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetMultiSzFieldW(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, field_index : UInt32, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetBinaryField(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, field_index : UInt32, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetFileCompressionInfoA(source_file_name : Win32cr::Foundation::PSTR, actual_source_file_name : Win32cr::Foundation::PSTR*, source_file_size : UInt32*, target_file_size : UInt32*, compression_type : UInt32*) : UInt32
 
+    # :nodoc:
     fun SetupGetFileCompressionInfoW(source_file_name : Win32cr::Foundation::PWSTR, actual_source_file_name : Win32cr::Foundation::PWSTR*, source_file_size : UInt32*, target_file_size : UInt32*, compression_type : UInt32*) : UInt32
 
+    # :nodoc:
     fun SetupGetFileCompressionInfoExA(source_file_name : Win32cr::Foundation::PSTR, actual_source_file_name_buffer : UInt8*, actual_source_file_name_buffer_len : UInt32, required_buffer_len : UInt32*, source_file_size : UInt32*, target_file_size : UInt32*, compression_type : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetFileCompressionInfoExW(source_file_name : Win32cr::Foundation::PWSTR, actual_source_file_name_buffer : UInt16*, actual_source_file_name_buffer_len : UInt32, required_buffer_len : UInt32*, source_file_size : UInt32*, target_file_size : UInt32*, compression_type : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDecompressOrCopyFileA(source_file_name : Win32cr::Foundation::PSTR, target_file_name : Win32cr::Foundation::PSTR, compression_type : UInt32*) : UInt32
 
+    # :nodoc:
     fun SetupDecompressOrCopyFileW(source_file_name : Win32cr::Foundation::PWSTR, target_file_name : Win32cr::Foundation::PWSTR, compression_type : UInt32*) : UInt32
 
+    # :nodoc:
     fun SetupGetSourceFileLocationA(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, file_name : Win32cr::Foundation::PSTR, source_id : UInt32*, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetSourceFileLocationW(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, file_name : Win32cr::Foundation::PWSTR, source_id : UInt32*, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetSourceFileSizeA(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, file_name : Win32cr::Foundation::PSTR, section : Win32cr::Foundation::PSTR, file_size : UInt32*, rounding_factor : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetSourceFileSizeW(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, file_name : Win32cr::Foundation::PWSTR, section : Win32cr::Foundation::PWSTR, file_size : UInt32*, rounding_factor : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetTargetPathA(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, section : Win32cr::Foundation::PSTR, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetTargetPathW(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, section : Win32cr::Foundation::PWSTR, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupSetSourceListA(flags : UInt32, source_list : Win32cr::Foundation::PSTR*, source_count : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupSetSourceListW(flags : UInt32, source_list : Win32cr::Foundation::PWSTR*, source_count : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupCancelTemporarySourceList : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupAddToSourceListA(flags : UInt32, source : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupAddToSourceListW(flags : UInt32, source : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupRemoveFromSourceListA(flags : UInt32, source : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupRemoveFromSourceListW(flags : UInt32, source : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQuerySourceListA(flags : UInt32, list : Win32cr::Foundation::PSTR**, count : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQuerySourceListW(flags : UInt32, list : Win32cr::Foundation::PWSTR**, count : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupFreeSourceListA(list : Win32cr::Foundation::PSTR**, count : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupFreeSourceListW(list : Win32cr::Foundation::PWSTR**, count : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupPromptForDiskA(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PSTR, disk_name : Win32cr::Foundation::PSTR, path_to_source : Win32cr::Foundation::PSTR, file_sought : Win32cr::Foundation::PSTR, tag_file : Win32cr::Foundation::PSTR, disk_prompt_style : UInt32, path_buffer : UInt8*, path_buffer_size : UInt32, path_required_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun SetupPromptForDiskW(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PWSTR, disk_name : Win32cr::Foundation::PWSTR, path_to_source : Win32cr::Foundation::PWSTR, file_sought : Win32cr::Foundation::PWSTR, tag_file : Win32cr::Foundation::PWSTR, disk_prompt_style : UInt32, path_buffer : UInt16*, path_buffer_size : UInt32, path_required_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun SetupCopyErrorA(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PSTR, disk_name : Win32cr::Foundation::PSTR, path_to_source : Win32cr::Foundation::PSTR, source_file : Win32cr::Foundation::PSTR, target_path_file : Win32cr::Foundation::PSTR, win32_error_code : UInt32, style : UInt32, path_buffer : UInt8*, path_buffer_size : UInt32, path_required_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun SetupCopyErrorW(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PWSTR, disk_name : Win32cr::Foundation::PWSTR, path_to_source : Win32cr::Foundation::PWSTR, source_file : Win32cr::Foundation::PWSTR, target_path_file : Win32cr::Foundation::PWSTR, win32_error_code : UInt32, style : UInt32, path_buffer : UInt16*, path_buffer_size : UInt32, path_required_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun SetupRenameErrorA(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PSTR, source_file : Win32cr::Foundation::PSTR, target_file : Win32cr::Foundation::PSTR, win32_error_code : UInt32, style : UInt32) : UInt32
 
+    # :nodoc:
     fun SetupRenameErrorW(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PWSTR, source_file : Win32cr::Foundation::PWSTR, target_file : Win32cr::Foundation::PWSTR, win32_error_code : UInt32, style : UInt32) : UInt32
 
+    # :nodoc:
     fun SetupDeleteErrorA(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, win32_error_code : UInt32, style : UInt32) : UInt32
 
+    # :nodoc:
     fun SetupDeleteErrorW(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, win32_error_code : UInt32, style : UInt32) : UInt32
 
+    # :nodoc:
     fun SetupBackupErrorA(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PSTR, source_file : Win32cr::Foundation::PSTR, target_file : Win32cr::Foundation::PSTR, win32_error_code : UInt32, style : UInt32) : UInt32
 
+    # :nodoc:
     fun SetupBackupErrorW(hwndParent : Win32cr::Foundation::HWND, dialog_title : Win32cr::Foundation::PWSTR, source_file : Win32cr::Foundation::PWSTR, target_file : Win32cr::Foundation::PWSTR, win32_error_code : UInt32, style : UInt32) : UInt32
 
+    # :nodoc:
     fun SetupSetDirectoryIdA(inf_handle : Void*, id : UInt32, directory : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupSetDirectoryIdW(inf_handle : Void*, id : UInt32, directory : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupSetDirectoryIdExA(inf_handle : Void*, id : UInt32, directory : Win32cr::Foundation::PSTR, flags : UInt32, reserved1 : UInt32, reserved2 : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupSetDirectoryIdExW(inf_handle : Void*, id : UInt32, directory : Win32cr::Foundation::PWSTR, flags : UInt32, reserved1 : UInt32, reserved2 : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetSourceInfoA(inf_handle : Void*, source_id : UInt32, info_desired : UInt32, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetSourceInfoW(inf_handle : Void*, source_id : UInt32, info_desired : UInt32, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupInstallFileA(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, source_file : Win32cr::Foundation::PSTR, source_path_root : Win32cr::Foundation::PSTR, destination_name : Win32cr::Foundation::PSTR, copy_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_COPY_STYLE, copy_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupInstallFileW(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, source_file : Win32cr::Foundation::PWSTR, source_path_root : Win32cr::Foundation::PWSTR, destination_name : Win32cr::Foundation::PWSTR, copy_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_COPY_STYLE, copy_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_W, context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupInstallFileExA(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, source_file : Win32cr::Foundation::PSTR, source_path_root : Win32cr::Foundation::PSTR, destination_name : Win32cr::Foundation::PSTR, copy_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_COPY_STYLE, copy_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, context : Void*, file_was_in_use : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupInstallFileExW(inf_handle : Void*, inf_context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, source_file : Win32cr::Foundation::PWSTR, source_path_root : Win32cr::Foundation::PWSTR, destination_name : Win32cr::Foundation::PWSTR, copy_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_COPY_STYLE, copy_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_W, context : Void*, file_was_in_use : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupOpenFileQueue : Void*
 
+    # :nodoc:
     fun SetupCloseFileQueue(queue_handle : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupSetFileQueueAlternatePlatformA(queue_handle : Void*, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, alternate_default_catalog_file : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupSetFileQueueAlternatePlatformW(queue_handle : Void*, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, alternate_default_catalog_file : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupSetPlatformPathOverrideA(override : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupSetPlatformPathOverrideW(override : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueCopyA(queue_handle : Void*, source_root_path : Win32cr::Foundation::PSTR, source_path : Win32cr::Foundation::PSTR, source_filename : Win32cr::Foundation::PSTR, source_description : Win32cr::Foundation::PSTR, source_tagfile : Win32cr::Foundation::PSTR, target_directory : Win32cr::Foundation::PSTR, target_filename : Win32cr::Foundation::PSTR, copy_style : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueCopyW(queue_handle : Void*, source_root_path : Win32cr::Foundation::PWSTR, source_path : Win32cr::Foundation::PWSTR, source_filename : Win32cr::Foundation::PWSTR, source_description : Win32cr::Foundation::PWSTR, source_tagfile : Win32cr::Foundation::PWSTR, target_directory : Win32cr::Foundation::PWSTR, target_filename : Win32cr::Foundation::PWSTR, copy_style : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueCopyIndirectA(copy_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_FILE_COPY_PARAMS_A*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueCopyIndirectW(copy_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_FILE_COPY_PARAMS_W*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueDefaultCopyA(queue_handle : Void*, inf_handle : Void*, source_root_path : Win32cr::Foundation::PSTR, source_filename : Win32cr::Foundation::PSTR, target_filename : Win32cr::Foundation::PSTR, copy_style : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueDefaultCopyW(queue_handle : Void*, inf_handle : Void*, source_root_path : Win32cr::Foundation::PWSTR, source_filename : Win32cr::Foundation::PWSTR, target_filename : Win32cr::Foundation::PWSTR, copy_style : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueCopySectionA(queue_handle : Void*, source_root_path : Win32cr::Foundation::PSTR, inf_handle : Void*, list_inf_handle : Void*, section : Win32cr::Foundation::PSTR, copy_style : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueCopySectionW(queue_handle : Void*, source_root_path : Win32cr::Foundation::PWSTR, inf_handle : Void*, list_inf_handle : Void*, section : Win32cr::Foundation::PWSTR, copy_style : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueDeleteA(queue_handle : Void*, path_part1 : Win32cr::Foundation::PSTR, path_part2 : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueDeleteW(queue_handle : Void*, path_part1 : Win32cr::Foundation::PWSTR, path_part2 : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueDeleteSectionA(queue_handle : Void*, inf_handle : Void*, list_inf_handle : Void*, section : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueDeleteSectionW(queue_handle : Void*, inf_handle : Void*, list_inf_handle : Void*, section : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueRenameA(queue_handle : Void*, source_path : Win32cr::Foundation::PSTR, source_filename : Win32cr::Foundation::PSTR, target_path : Win32cr::Foundation::PSTR, target_filename : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueRenameW(queue_handle : Void*, source_path : Win32cr::Foundation::PWSTR, source_filename : Win32cr::Foundation::PWSTR, target_path : Win32cr::Foundation::PWSTR, target_filename : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueRenameSectionA(queue_handle : Void*, inf_handle : Void*, list_inf_handle : Void*, section : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueueRenameSectionW(queue_handle : Void*, inf_handle : Void*, list_inf_handle : Void*, section : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupCommitFileQueueA(owner : Win32cr::Foundation::HWND, queue_handle : Void*, msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupCommitFileQueueW(owner : Win32cr::Foundation::HWND, queue_handle : Void*, msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_W, context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupScanFileQueueA(file_queue : Void*, flags : UInt32, window : Win32cr::Foundation::HWND, callback_routine : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, callback_context : Void*, result : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupScanFileQueueW(file_queue : Void*, flags : UInt32, window : Win32cr::Foundation::HWND, callback_routine : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_W, callback_context : Void*, result : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetFileQueueCount(file_queue : Void*, sub_queue_file_op : UInt32, num_operations : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetFileQueueFlags(file_queue : Void*, flags : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupSetFileQueueFlags(file_queue : Void*, flag_mask : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupCopyOEMInfA(source_inf_file_name : Win32cr::Foundation::PSTR, oem_source_media_location : Win32cr::Foundation::PSTR, oem_source_media_type : Win32cr::Devices::DeviceAndDriverInstallation::OEM_SOURCE_MEDIA_TYPE, copy_style : UInt32, destination_inf_file_name : UInt8*, destination_inf_file_name_size : UInt32, required_size : UInt32*, destination_inf_file_name_component : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupCopyOEMInfW(source_inf_file_name : Win32cr::Foundation::PWSTR, oem_source_media_location : Win32cr::Foundation::PWSTR, oem_source_media_type : Win32cr::Devices::DeviceAndDriverInstallation::OEM_SOURCE_MEDIA_TYPE, copy_style : UInt32, destination_inf_file_name : UInt16*, destination_inf_file_name_size : UInt32, required_size : UInt32*, destination_inf_file_name_component : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupUninstallOEMInfA(inf_file_name : Win32cr::Foundation::PSTR, flags : UInt32, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupUninstallOEMInfW(inf_file_name : Win32cr::Foundation::PWSTR, flags : UInt32, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupUninstallNewlyCopiedInfs(file_queue : Void*, flags : UInt32, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupCreateDiskSpaceListA(reserved1 : Void*, reserved2 : UInt32, flags : UInt32) : Void*
 
+    # :nodoc:
     fun SetupCreateDiskSpaceListW(reserved1 : Void*, reserved2 : UInt32, flags : UInt32) : Void*
 
+    # :nodoc:
     fun SetupDuplicateDiskSpaceListA(disk_space : Void*, reserved1 : Void*, reserved2 : UInt32, flags : UInt32) : Void*
 
+    # :nodoc:
     fun SetupDuplicateDiskSpaceListW(disk_space : Void*, reserved1 : Void*, reserved2 : UInt32, flags : UInt32) : Void*
 
+    # :nodoc:
     fun SetupDestroyDiskSpaceList(disk_space : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueryDrivesInDiskSpaceListA(disk_space : Void*, return_buffer : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueryDrivesInDiskSpaceListW(disk_space : Void*, return_buffer : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQuerySpaceRequiredOnDriveA(disk_space : Void*, drive_spec : Win32cr::Foundation::PSTR, space_required : Int64*, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQuerySpaceRequiredOnDriveW(disk_space : Void*, drive_spec : Win32cr::Foundation::PWSTR, space_required : Int64*, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupAdjustDiskSpaceListA(disk_space : Void*, drive_root : Win32cr::Foundation::PSTR, amount : Int64, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupAdjustDiskSpaceListW(disk_space : Void*, drive_root : Win32cr::Foundation::PWSTR, amount : Int64, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupAddToDiskSpaceListA(disk_space : Void*, target_filespec : Win32cr::Foundation::PSTR, file_size : Int64, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupAddToDiskSpaceListW(disk_space : Void*, target_filespec : Win32cr::Foundation::PWSTR, file_size : Int64, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupAddSectionToDiskSpaceListA(disk_space : Void*, inf_handle : Void*, list_inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupAddSectionToDiskSpaceListW(disk_space : Void*, inf_handle : Void*, list_inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupAddInstallSectionToDiskSpaceListA(disk_space : Void*, inf_handle : Void*, layout_inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupAddInstallSectionToDiskSpaceListW(disk_space : Void*, inf_handle : Void*, layout_inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupRemoveFromDiskSpaceListA(disk_space : Void*, target_filespec : Win32cr::Foundation::PSTR, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupRemoveFromDiskSpaceListW(disk_space : Void*, target_filespec : Win32cr::Foundation::PWSTR, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupRemoveSectionFromDiskSpaceListA(disk_space : Void*, inf_handle : Void*, list_inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupRemoveSectionFromDiskSpaceListW(disk_space : Void*, inf_handle : Void*, list_inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, operation : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_FILE_OPERATION, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupRemoveInstallSectionFromDiskSpaceListA(disk_space : Void*, inf_handle : Void*, layout_inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupRemoveInstallSectionFromDiskSpaceListW(disk_space : Void*, inf_handle : Void*, layout_inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, reserved1 : Void*, reserved2 : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupIterateCabinetA(cabinet_file : Win32cr::Foundation::PSTR, reserved : UInt32, msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupIterateCabinetW(cabinet_file : Win32cr::Foundation::PWSTR, reserved : UInt32, msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_W, context : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupPromptReboot(file_queue : Void*, owner : Win32cr::Foundation::HWND, scan_only : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun SetupInitDefaultQueueCallback(owner_window : Win32cr::Foundation::HWND) : Void*
 
+    # :nodoc:
     fun SetupInitDefaultQueueCallbackEx(owner_window : Win32cr::Foundation::HWND, alternate_progress_window : Win32cr::Foundation::HWND, progress_message : UInt32, reserved1 : UInt32, reserved2 : Void*) : Void*
 
+    # :nodoc:
     fun SetupTermDefaultQueueCallback(context : Void*) : Void
 
+    # :nodoc:
     fun SetupDefaultQueueCallbackA(context : Void*, notification : UInt32, param1 : LibC::UIntPtrT, param2 : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun SetupDefaultQueueCallbackW(context : Void*, notification : UInt32, param1 : LibC::UIntPtrT, param2 : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun SetupInstallFromInfSectionA(owner : Win32cr::Foundation::HWND, inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, flags : UInt32, relative_key_root : Win32cr::System::Registry::HKEY, source_root_path : Win32cr::Foundation::PSTR, copy_flags : UInt32, msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, context : Void*, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupInstallFromInfSectionW(owner : Win32cr::Foundation::HWND, inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, flags : UInt32, relative_key_root : Win32cr::System::Registry::HKEY, source_root_path : Win32cr::Foundation::PWSTR, copy_flags : UInt32, msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_W, context : Void*, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupInstallFilesFromInfSectionA(inf_handle : Void*, layout_inf_handle : Void*, file_queue : Void*, section_name : Win32cr::Foundation::PSTR, source_root_path : Win32cr::Foundation::PSTR, copy_flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupInstallFilesFromInfSectionW(inf_handle : Void*, layout_inf_handle : Void*, file_queue : Void*, section_name : Win32cr::Foundation::PWSTR, source_root_path : Win32cr::Foundation::PWSTR, copy_flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupInstallServicesFromInfSectionA(inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupInstallServicesFromInfSectionW(inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupInstallServicesFromInfSectionExA(inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, flags : UInt32, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, reserved1 : Void*, reserved2 : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupInstallServicesFromInfSectionExW(inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, flags : UInt32, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, reserved1 : Void*, reserved2 : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InstallHinfSectionA(window : Win32cr::Foundation::HWND, module_handle : Win32cr::Foundation::HINSTANCE, command_line : Win32cr::Foundation::PSTR, show_command : Int32) : Void
 
+    # :nodoc:
     fun InstallHinfSectionW(window : Win32cr::Foundation::HWND, module_handle : Win32cr::Foundation::HINSTANCE, command_line : Win32cr::Foundation::PWSTR, show_command : Int32) : Void
 
+    # :nodoc:
     fun SetupInitializeFileLogA(log_file_name : Win32cr::Foundation::PSTR, flags : UInt32) : Void*
 
+    # :nodoc:
     fun SetupInitializeFileLogW(log_file_name : Win32cr::Foundation::PWSTR, flags : UInt32) : Void*
 
+    # :nodoc:
     fun SetupTerminateFileLog(file_log_handle : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupLogFileA(file_log_handle : Void*, log_section_name : Win32cr::Foundation::PSTR, source_filename : Win32cr::Foundation::PSTR, target_filename : Win32cr::Foundation::PSTR, checksum : UInt32, disk_tagfile : Win32cr::Foundation::PSTR, disk_description : Win32cr::Foundation::PSTR, other_info : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupLogFileW(file_log_handle : Void*, log_section_name : Win32cr::Foundation::PWSTR, source_filename : Win32cr::Foundation::PWSTR, target_filename : Win32cr::Foundation::PWSTR, checksum : UInt32, disk_tagfile : Win32cr::Foundation::PWSTR, disk_description : Win32cr::Foundation::PWSTR, other_info : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupRemoveFileLogEntryA(file_log_handle : Void*, log_section_name : Win32cr::Foundation::PSTR, target_filename : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupRemoveFileLogEntryW(file_log_handle : Void*, log_section_name : Win32cr::Foundation::PWSTR, target_filename : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueryFileLogA(file_log_handle : Void*, log_section_name : Win32cr::Foundation::PSTR, target_filename : Win32cr::Foundation::PSTR, desired_info : Win32cr::Devices::DeviceAndDriverInstallation::SetupFileLogInfo, data_out : UInt8*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupQueryFileLogW(file_log_handle : Void*, log_section_name : Win32cr::Foundation::PWSTR, target_filename : Win32cr::Foundation::PWSTR, desired_info : Win32cr::Devices::DeviceAndDriverInstallation::SetupFileLogInfo, data_out : UInt16*, return_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupOpenLog(erase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupLogErrorA(message_string : Win32cr::Foundation::PSTR, severity : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupLogErrorW(message_string : Win32cr::Foundation::PWSTR, severity : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupCloseLog : Void
 
+    # :nodoc:
     fun SetupGetThreadLogToken : UInt64
 
+    # :nodoc:
     fun SetupSetThreadLogToken(log_token : UInt64) : Void
 
+    # :nodoc:
     fun SetupWriteTextLog(log_token : UInt64, category : UInt32, flags : UInt32, message_str : Win32cr::Foundation::PSTR) : Void
 
+    # :nodoc:
     fun SetupWriteTextLogError(log_token : UInt64, category : UInt32, log_flags : UInt32, error : UInt32, message_str : Win32cr::Foundation::PSTR) : Void
 
+    # :nodoc:
     fun SetupWriteTextLogInfLine(log_token : UInt64, flags : UInt32, inf_handle : Void*, context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*) : Void
 
+    # :nodoc:
     fun SetupGetBackupInformationA(queue_handle : Void*, backup_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_BACKUP_QUEUE_PARAMS_V2_A*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetBackupInformationW(queue_handle : Void*, backup_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_BACKUP_QUEUE_PARAMS_V2_W*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupPrepareQueueForRestoreA(queue_handle : Void*, backup_path : Win32cr::Foundation::PSTR, restore_flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupPrepareQueueForRestoreW(queue_handle : Void*, backup_path : Win32cr::Foundation::PWSTR, restore_flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupSetNonInteractiveMode(non_interactive_flag : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupGetNonInteractiveMode : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiCreateDeviceInfoList(class_guid : LibC::GUID*, hwndParent : Win32cr::Foundation::HWND) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
 
+    # :nodoc:
     fun SetupDiCreateDeviceInfoListExA(class_guid : LibC::GUID*, hwndParent : Win32cr::Foundation::HWND, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
 
+    # :nodoc:
     fun SetupDiCreateDeviceInfoListExW(class_guid : LibC::GUID*, hwndParent : Win32cr::Foundation::HWND, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
 
+    # :nodoc:
     fun SetupDiGetDeviceInfoListClass(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, class_guid : LibC::GUID*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDeviceInfoListDetailA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_set_detail_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_LIST_DETAIL_DATA_A*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDeviceInfoListDetailW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_set_detail_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_LIST_DETAIL_DATA_W*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiCreateDeviceInfoA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_name : Win32cr::Foundation::PSTR, class_guid : LibC::GUID*, device_description : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND, creation_flags : UInt32, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiCreateDeviceInfoW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_name : Win32cr::Foundation::PWSTR, class_guid : LibC::GUID*, device_description : Win32cr::Foundation::PWSTR, hwndParent : Win32cr::Foundation::HWND, creation_flags : UInt32, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiOpenDeviceInfoA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_instance_id : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND, open_flags : UInt32, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiOpenDeviceInfoW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_instance_id : Win32cr::Foundation::PWSTR, hwndParent : Win32cr::Foundation::HWND, open_flags : UInt32, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDeviceInstanceIdA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, device_instance_id : UInt8*, device_instance_id_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDeviceInstanceIdW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, device_instance_id : UInt16*, device_instance_id_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiDeleteDeviceInfo(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiEnumDeviceInfo(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, member_index : UInt32, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiDestroyDeviceInfoList(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiEnumDeviceInterfaces(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, interface_class_guid : LibC::GUID*, member_index : UInt32, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiCreateDeviceInterfaceA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, interface_class_guid : LibC::GUID*, reference_string : Win32cr::Foundation::PSTR, creation_flags : UInt32, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiCreateDeviceInterfaceW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, interface_class_guid : LibC::GUID*, reference_string : Win32cr::Foundation::PWSTR, creation_flags : UInt32, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiOpenDeviceInterfaceA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_path : Win32cr::Foundation::PSTR, open_flags : UInt32, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiOpenDeviceInterfaceW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_path : Win32cr::Foundation::PWSTR, open_flags : UInt32, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDeviceInterfaceAlias(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, alias_interface_class_guid : LibC::GUID*, alias_device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiDeleteDeviceInterfaceData(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiRemoveDeviceInterface(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDeviceInterfaceDetailA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, device_interface_detail_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DETAIL_DATA_A*, device_interface_detail_data_size : UInt32, required_size : UInt32*, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDeviceInterfaceDetailW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, device_interface_detail_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DETAIL_DATA_W*, device_interface_detail_data_size : UInt32, required_size : UInt32*, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiInstallDeviceInterfaces(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetDeviceInterfaceDefault(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, flags : UInt32, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiRegisterDeviceInfo(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, flags : UInt32, compare_proc : Win32cr::Devices::DeviceAndDriverInstallation::PSP_DETSIG_CMPPROC, compare_context : Void*, dup_device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiBuildDriverInfoList(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_type : Win32cr::Devices::DeviceAndDriverInstallation::SETUP_DI_BUILD_DRIVER_DRIVER_TYPE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiCancelDriverInfoSearch(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiEnumDriverInfoA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_type : UInt32, member_index : UInt32, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiEnumDriverInfoW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_type : UInt32, member_index : UInt32, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_W*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetSelectedDriverA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetSelectedDriverW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_W*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetSelectedDriverA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetSelectedDriverW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_W*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDriverInfoDetailA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*, driver_info_detail_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DETAIL_DATA_A*, driver_info_detail_data_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDriverInfoDetailW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_W*, driver_info_detail_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DETAIL_DATA_W*, driver_info_detail_data_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiDestroyDriverInfoList(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_type : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassDevsA(class_guid : LibC::GUID*, enumerator : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND, flags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
 
+    # :nodoc:
     fun SetupDiGetClassDevsW(class_guid : LibC::GUID*, enumerator : Win32cr::Foundation::PWSTR, hwndParent : Win32cr::Foundation::HWND, flags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
 
+    # :nodoc:
     fun SetupDiGetClassDevsExA(class_guid : LibC::GUID*, enumerator : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND, flags : UInt32, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
 
+    # :nodoc:
     fun SetupDiGetClassDevsExW(class_guid : LibC::GUID*, enumerator : Win32cr::Foundation::PWSTR, hwndParent : Win32cr::Foundation::HWND, flags : UInt32, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
 
+    # :nodoc:
     fun SetupDiGetINFClassA(inf_name : Win32cr::Foundation::PSTR, class_guid : LibC::GUID*, class_name : UInt8*, class_name_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetINFClassW(inf_name : Win32cr::Foundation::PWSTR, class_guid : LibC::GUID*, class_name : UInt16*, class_name_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiBuildClassInfoList(flags : UInt32, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiBuildClassInfoListExA(flags : UInt32, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiBuildClassInfoListExW(flags : UInt32, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassDescriptionA(class_guid : LibC::GUID*, class_description : UInt8*, class_description_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassDescriptionW(class_guid : LibC::GUID*, class_description : UInt16*, class_description_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassDescriptionExA(class_guid : LibC::GUID*, class_description : UInt8*, class_description_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassDescriptionExW(class_guid : LibC::GUID*, class_description : UInt16*, class_description_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiCallClassInstaller(install_function : UInt32, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSelectDevice(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSelectBestCompatDrv(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiInstallDevice(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiInstallDriverFiles(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiRegisterCoDeviceInstallers(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiRemoveDevice(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiUnremoveDevice(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiRestartDevices(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiChangeState(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiInstallClassA(hwndParent : Win32cr::Foundation::HWND, inf_file_name : Win32cr::Foundation::PSTR, flags : UInt32, file_queue : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiInstallClassW(hwndParent : Win32cr::Foundation::HWND, inf_file_name : Win32cr::Foundation::PWSTR, flags : UInt32, file_queue : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiInstallClassExA(hwndParent : Win32cr::Foundation::HWND, inf_file_name : Win32cr::Foundation::PSTR, flags : UInt32, file_queue : Void*, interface_class_guid : LibC::GUID*, reserved1 : Void*, reserved2 : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiInstallClassExW(hwndParent : Win32cr::Foundation::HWND, inf_file_name : Win32cr::Foundation::PWSTR, flags : UInt32, file_queue : Void*, interface_class_guid : LibC::GUID*, reserved1 : Void*, reserved2 : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiOpenClassRegKey(class_guid : LibC::GUID*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun SetupDiOpenClassRegKeyExA(class_guid : LibC::GUID*, samDesired : UInt32, flags : UInt32, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun SetupDiOpenClassRegKeyExW(class_guid : LibC::GUID*, samDesired : UInt32, flags : UInt32, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun SetupDiCreateDeviceInterfaceRegKeyA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, reserved : UInt32, samDesired : UInt32, inf_handle : Void*, inf_section_name : Win32cr::Foundation::PSTR) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun SetupDiCreateDeviceInterfaceRegKeyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, reserved : UInt32, samDesired : UInt32, inf_handle : Void*, inf_section_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun SetupDiOpenDeviceInterfaceRegKey(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, reserved : UInt32, samDesired : UInt32) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun SetupDiDeleteDeviceInterfaceRegKey(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, reserved : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiCreateDevRegKeyA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, scope : UInt32, hw_profile : UInt32, key_type : UInt32, inf_handle : Void*, inf_section_name : Win32cr::Foundation::PSTR) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun SetupDiCreateDevRegKeyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, scope : UInt32, hw_profile : UInt32, key_type : UInt32, inf_handle : Void*, inf_section_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun SetupDiOpenDevRegKey(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, scope : UInt32, hw_profile : UInt32, key_type : UInt32, samDesired : UInt32) : Win32cr::System::Registry::HKEY
 
+    # :nodoc:
     fun SetupDiDeleteDevRegKey(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, scope : UInt32, hw_profile : UInt32, key_type : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetHwProfileList(hw_profile_list : UInt32*, hw_profile_list_size : UInt32, required_size : UInt32*, currently_active_index : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetHwProfileListExA(hw_profile_list : UInt32*, hw_profile_list_size : UInt32, required_size : UInt32*, currently_active_index : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetHwProfileListExW(hw_profile_list : UInt32*, hw_profile_list_size : UInt32, required_size : UInt32*, currently_active_index : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDevicePropertyKeys(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32, required_property_key_count : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDevicePropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetDevicePropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDeviceInterfacePropertyKeys(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32, required_property_key_count : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDeviceInterfacePropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetDeviceInterfacePropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_interface_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVICE_INTERFACE_DATA*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassPropertyKeys(class_guid : LibC::GUID*, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32, required_property_key_count : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassPropertyKeysExW(class_guid : LibC::GUID*, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32, required_property_key_count : UInt32*, flags : UInt32, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassPropertyW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassPropertyExW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*, flags : UInt32, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetClassPropertyW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetClassPropertyExW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, flags : UInt32, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDeviceRegistryPropertyA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property : UInt32, property_reg_data_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDeviceRegistryPropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property : UInt32, property_reg_data_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassRegistryPropertyA(class_guid : LibC::GUID*, property : UInt32, property_reg_data_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassRegistryPropertyW(class_guid : LibC::GUID*, property : UInt32, property_reg_data_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetDeviceRegistryPropertyA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetDeviceRegistryPropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetClassRegistryPropertyA(class_guid : LibC::GUID*, property : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetClassRegistryPropertyW(class_guid : LibC::GUID*, property : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDeviceInstallParamsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, device_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINSTALL_PARAMS_A*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDeviceInstallParamsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, device_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINSTALL_PARAMS_W*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassInstallParamsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, class_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER*, class_install_params_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassInstallParamsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, class_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER*, class_install_params_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetDeviceInstallParamsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, device_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINSTALL_PARAMS_A*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetDeviceInstallParamsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, device_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINSTALL_PARAMS_W*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetClassInstallParamsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, class_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER*, class_install_params_size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetClassInstallParamsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, class_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER*, class_install_params_size : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDriverInstallParamsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*, driver_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINSTALL_PARAMS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetDriverInstallParamsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_W*, driver_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINSTALL_PARAMS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetDriverInstallParamsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*, driver_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINSTALL_PARAMS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetDriverInstallParamsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_W*, driver_install_params : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINSTALL_PARAMS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiLoadClassIcon(class_guid : LibC::GUID*, large_icon : Win32cr::UI::WindowsAndMessaging::HICON*, mini_icon_index : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiLoadDeviceIcon(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, cxIcon : UInt32, cyIcon : UInt32, flags : UInt32, hIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiDrawMiniIcon(hdc : Win32cr::Graphics::Gdi::HDC, rc : Win32cr::Foundation::RECT, mini_icon_index : Int32, flags : UInt32) : Int32
 
+    # :nodoc:
     fun SetupDiGetClassBitmapIndex(class_guid : LibC::GUID*, mini_icon_index : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassImageList(class_image_list_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSIMAGELIST_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassImageListExA(class_image_list_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSIMAGELIST_DATA*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassImageListExW(class_image_list_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSIMAGELIST_DATA*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassImageIndex(class_image_list_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSIMAGELIST_DATA*, class_guid : LibC::GUID*, image_index : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiDestroyClassImageList(class_image_list_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSIMAGELIST_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassDevPropertySheetsA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property_sheet_header : Win32cr::UI::Controls::PROPSHEETHEADERA_V2*, property_sheet_header_page_list_size : UInt32, required_size : UInt32*, property_sheet_type : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetClassDevPropertySheetsW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, property_sheet_header : Win32cr::UI::Controls::PROPSHEETHEADERW_V2*, property_sheet_header_page_list_size : UInt32, required_size : UInt32*, property_sheet_type : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiAskForOEMDisk(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSelectOEMDrv(hwndParent : Win32cr::Foundation::HWND, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiClassNameFromGuidA(class_guid : LibC::GUID*, class_name : UInt8*, class_name_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiClassNameFromGuidW(class_guid : LibC::GUID*, class_name : UInt16*, class_name_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiClassNameFromGuidExA(class_guid : LibC::GUID*, class_name : UInt8*, class_name_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiClassNameFromGuidExW(class_guid : LibC::GUID*, class_name : UInt16*, class_name_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiClassGuidsFromNameA(class_name : Win32cr::Foundation::PSTR, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiClassGuidsFromNameW(class_name : Win32cr::Foundation::PWSTR, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiClassGuidsFromNameExA(class_name : Win32cr::Foundation::PSTR, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiClassGuidsFromNameExW(class_name : Win32cr::Foundation::PWSTR, class_guid_list : LibC::GUID*, class_guid_list_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetHwProfileFriendlyNameA(hw_profile : UInt32, friendly_name : UInt8*, friendly_name_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetHwProfileFriendlyNameW(hw_profile : UInt32, friendly_name : UInt16*, friendly_name_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetHwProfileFriendlyNameExA(hw_profile : UInt32, friendly_name : UInt8*, friendly_name_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetHwProfileFriendlyNameExW(hw_profile : UInt32, friendly_name : UInt16*, friendly_name_size : UInt32, required_size : UInt32*, machine_name : Win32cr::Foundation::PWSTR, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetWizardPage(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, install_wizard_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_INSTALLWIZARD_DATA*, page_type : UInt32, flags : UInt32) : Win32cr::UI::Controls::HPROPSHEETPAGE
 
+    # :nodoc:
     fun SetupDiGetSelectedDevice(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiSetSelectedDevice(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetActualModelsSectionA(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, inf_section_with_ext : UInt8*, inf_section_with_ext_size : UInt32, required_size : UInt32*, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetActualModelsSectionW(context : Win32cr::Devices::DeviceAndDriverInstallation::INFCONTEXT*, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, inf_section_with_ext : UInt16*, inf_section_with_ext_size : UInt32, required_size : UInt32*, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetActualSectionToInstallA(inf_handle : Void*, inf_section_name : Win32cr::Foundation::PSTR, inf_section_with_ext : UInt8*, inf_section_with_ext_size : UInt32, required_size : UInt32*, extension : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetActualSectionToInstallW(inf_handle : Void*, inf_section_name : Win32cr::Foundation::PWSTR, inf_section_with_ext : UInt16*, inf_section_with_ext_size : UInt32, required_size : UInt32*, extension : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetActualSectionToInstallExA(inf_handle : Void*, inf_section_name : Win32cr::Foundation::PSTR, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, inf_section_with_ext : UInt8*, inf_section_with_ext_size : UInt32, required_size : UInt32*, extension : Win32cr::Foundation::PSTR*, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetActualSectionToInstallExW(inf_handle : Void*, inf_section_name : Win32cr::Foundation::PWSTR, alternate_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, inf_section_with_ext : UInt16*, inf_section_with_ext_size : UInt32, required_size : UInt32*, extension : Win32cr::Foundation::PWSTR*, reserved : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupEnumInfSectionsA(inf_handle : Void*, index : UInt32, buffer : UInt8*, size : UInt32, size_needed : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupEnumInfSectionsW(inf_handle : Void*, index : UInt32, buffer : UInt16*, size : UInt32, size_needed : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupVerifyInfFileA(inf_name : Win32cr::Foundation::PSTR, alt_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, inf_signer_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_SIGNER_INFO_V2_A*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupVerifyInfFileW(inf_name : Win32cr::Foundation::PWSTR, alt_platform_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_ALTPLATFORM_INFO_V2*, inf_signer_info : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_SIGNER_INFO_V2_W*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetCustomDevicePropertyA(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, custom_property_name : Win32cr::Foundation::PSTR, flags : UInt32, property_reg_data_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupDiGetCustomDevicePropertyW(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, custom_property_name : Win32cr::Foundation::PWSTR, flags : UInt32, property_reg_data_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32, required_size : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupConfigureWmiFromInfSectionA(inf_handle : Void*, section_name : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupConfigureWmiFromInfSectionW(inf_handle : Void*, section_name : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CM_Add_Empty_Log_Conf(plcLogConf : LibC::UIntPtrT*, dnDevInst : UInt32, priority : Win32cr::Data::HtmlHelp::PRIORITY, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Add_Empty_Log_Conf_Ex(plcLogConf : LibC::UIntPtrT*, dnDevInst : UInt32, priority : Win32cr::Data::HtmlHelp::PRIORITY, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Add_IDA(dnDevInst : UInt32, pszID : Win32cr::Foundation::PSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Add_IDW(dnDevInst : UInt32, pszID : Win32cr::Foundation::PWSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Add_ID_ExA(dnDevInst : UInt32, pszID : Win32cr::Foundation::PSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Add_ID_ExW(dnDevInst : UInt32, pszID : Win32cr::Foundation::PWSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Add_Range(ullStartValue : UInt64, ullEndValue : UInt64, rlh : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Add_Res_Des(prdResDes : LibC::UIntPtrT*, lcLogConf : LibC::UIntPtrT, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Add_Res_Des_Ex(prdResDes : LibC::UIntPtrT*, lcLogConf : LibC::UIntPtrT, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Connect_MachineA(unc_server_name : Win32cr::Foundation::PSTR, phMachine : LibC::IntPtrT*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Connect_MachineW(unc_server_name : Win32cr::Foundation::PWSTR, phMachine : LibC::IntPtrT*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Create_DevNodeA(pdnDevInst : UInt32*, pDeviceID : Int8*, dnParent : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Create_DevNodeW(pdnDevInst : UInt32*, pDeviceID : UInt16*, dnParent : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Create_DevNode_ExA(pdnDevInst : UInt32*, pDeviceID : Int8*, dnParent : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Create_DevNode_ExW(pdnDevInst : UInt32*, pDeviceID : UInt16*, dnParent : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Create_Range_List(prlh : LibC::UIntPtrT*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Delete_Class_Key(class_guid : LibC::GUID*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Delete_Class_Key_Ex(class_guid : LibC::GUID*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Delete_DevNode_Key(dnDevNode : UInt32, ulHardwareProfile : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Delete_DevNode_Key_Ex(dnDevNode : UInt32, ulHardwareProfile : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Delete_Range(ullStartValue : UInt64, ullEndValue : UInt64, rlh : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Detect_Resource_Conflict(dnDevInst : UInt32, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, pbConflictDetected : Win32cr::Foundation::BOOL*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Detect_Resource_Conflict_Ex(dnDevInst : UInt32, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, pbConflictDetected : Win32cr::Foundation::BOOL*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Disable_DevNode(dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Disable_DevNode_Ex(dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Disconnect_Machine(hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Dup_Range_List(rlhOld : LibC::UIntPtrT, rlhNew : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Enable_DevNode(dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Enable_DevNode_Ex(dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Enumerate_Classes(ulClassIndex : UInt32, class_guid : LibC::GUID*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Enumerate_Classes_Ex(ulClassIndex : UInt32, class_guid : LibC::GUID*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Enumerate_EnumeratorsA(ulEnumIndex : UInt32, buffer : UInt8*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Enumerate_EnumeratorsW(ulEnumIndex : UInt32, buffer : UInt16*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Enumerate_Enumerators_ExA(ulEnumIndex : UInt32, buffer : UInt8*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Enumerate_Enumerators_ExW(ulEnumIndex : UInt32, buffer : UInt16*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Find_Range(pullStart : UInt64*, ullStart : UInt64, ulLength : UInt32, ullAlignment : UInt64, ullEnd : UInt64, rlh : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_First_Range(rlh : LibC::UIntPtrT, pullStart : UInt64*, pullEnd : UInt64*, preElement : LibC::UIntPtrT*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Free_Log_Conf(lcLogConfToBeFreed : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Free_Log_Conf_Ex(lcLogConfToBeFreed : LibC::UIntPtrT, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Free_Log_Conf_Handle(lcLogConf : LibC::UIntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Free_Range_List(rlh : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Free_Res_Des(prdResDes : LibC::UIntPtrT*, rdResDes : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Free_Res_Des_Ex(prdResDes : LibC::UIntPtrT*, rdResDes : LibC::UIntPtrT, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Free_Res_Des_Handle(rdResDes : LibC::UIntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Child(pdnDevInst : UInt32*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Child_Ex(pdnDevInst : UInt32*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_NameA(class_guid : LibC::GUID*, buffer : UInt8*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_NameW(class_guid : LibC::GUID*, buffer : UInt16*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_Name_ExA(class_guid : LibC::GUID*, buffer : UInt8*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_Name_ExW(class_guid : LibC::GUID*, buffer : UInt16*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_Key_NameA(class_guid : LibC::GUID*, pszKeyName : UInt8*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_Key_NameW(class_guid : LibC::GUID*, pszKeyName : UInt16*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_Key_Name_ExA(class_guid : LibC::GUID*, pszKeyName : UInt8*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_Key_Name_ExW(class_guid : LibC::GUID*, pszKeyName : UInt16*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Depth(pulDepth : UInt32*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Depth_Ex(pulDepth : UInt32*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_IDA(dnDevInst : UInt32, buffer : UInt8*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_IDW(dnDevInst : UInt32, buffer : UInt16*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_ID_ExA(dnDevInst : UInt32, buffer : UInt8*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_ID_ExW(dnDevInst : UInt32, buffer : UInt16*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_ID_ListA(pszFilter : Win32cr::Foundation::PSTR, buffer : UInt8*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_ID_ListW(pszFilter : Win32cr::Foundation::PWSTR, buffer : UInt16*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_ID_List_ExA(pszFilter : Win32cr::Foundation::PSTR, buffer : UInt8*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_ID_List_ExW(pszFilter : Win32cr::Foundation::PWSTR, buffer : UInt16*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_ID_List_SizeA(pulLen : UInt32*, pszFilter : Win32cr::Foundation::PSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_ID_List_SizeW(pulLen : UInt32*, pszFilter : Win32cr::Foundation::PWSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_ID_List_Size_ExA(pulLen : UInt32*, pszFilter : Win32cr::Foundation::PSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_ID_List_Size_ExW(pulLen : UInt32*, pszFilter : Win32cr::Foundation::PWSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_ID_Size(pulLen : UInt32*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_ID_Size_Ex(pulLen : UInt32*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_PropertyW(dnDevInst : UInt32, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_Property_ExW(dnDevInst : UInt32, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_Property_Keys(dnDevInst : UInt32, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_Property_Keys_Ex(dnDevInst : UInt32, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_Registry_PropertyA(dnDevInst : UInt32, ulProperty : UInt32, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_Registry_PropertyW(dnDevInst : UInt32, ulProperty : UInt32, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_Registry_Property_ExA(dnDevInst : UInt32, ulProperty : UInt32, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_Registry_Property_ExW(dnDevInst : UInt32, ulProperty : UInt32, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_Custom_PropertyA(dnDevInst : UInt32, pszCustomPropertyName : Win32cr::Foundation::PSTR, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_Custom_PropertyW(dnDevInst : UInt32, pszCustomPropertyName : Win32cr::Foundation::PWSTR, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_Custom_Property_ExA(dnDevInst : UInt32, pszCustomPropertyName : Win32cr::Foundation::PSTR, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_Custom_Property_ExW(dnDevInst : UInt32, pszCustomPropertyName : Win32cr::Foundation::PWSTR, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_Status(pulStatus : UInt32*, pulProblemNumber : UInt32*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_DevNode_Status_Ex(pulStatus : UInt32*, pulProblemNumber : UInt32*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_First_Log_Conf(plcLogConf : LibC::UIntPtrT*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_First_Log_Conf_Ex(plcLogConf : LibC::UIntPtrT*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Global_State(pulState : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Global_State_Ex(pulState : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Hardware_Profile_InfoA(ulIndex : UInt32, pHWProfileInfo : Win32cr::Devices::DeviceAndDriverInstallation::HWProfileInfo_sA*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Hardware_Profile_Info_ExA(ulIndex : UInt32, pHWProfileInfo : Win32cr::Devices::DeviceAndDriverInstallation::HWProfileInfo_sA*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Hardware_Profile_InfoW(ulIndex : UInt32, pHWProfileInfo : Win32cr::Devices::DeviceAndDriverInstallation::HWProfileInfo_sW*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Hardware_Profile_Info_ExW(ulIndex : UInt32, pHWProfileInfo : Win32cr::Devices::DeviceAndDriverInstallation::HWProfileInfo_sW*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_HW_Prof_FlagsA(pDeviceID : Int8*, ulHardwareProfile : UInt32, pulValue : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_HW_Prof_FlagsW(pDeviceID : UInt16*, ulHardwareProfile : UInt32, pulValue : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_HW_Prof_Flags_ExA(pDeviceID : Int8*, ulHardwareProfile : UInt32, pulValue : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_HW_Prof_Flags_ExW(pDeviceID : UInt16*, ulHardwareProfile : UInt32, pulValue : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_AliasA(pszDeviceInterface : Win32cr::Foundation::PSTR, alias_interface_guid : LibC::GUID*, pszAliasDeviceInterface : UInt8*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_AliasW(pszDeviceInterface : Win32cr::Foundation::PWSTR, alias_interface_guid : LibC::GUID*, pszAliasDeviceInterface : UInt16*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_Alias_ExA(pszDeviceInterface : Win32cr::Foundation::PSTR, alias_interface_guid : LibC::GUID*, pszAliasDeviceInterface : UInt8*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_Alias_ExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, alias_interface_guid : LibC::GUID*, pszAliasDeviceInterface : UInt16*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_ListA(interface_class_guid : LibC::GUID*, pDeviceID : Int8*, buffer : UInt8*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_ListW(interface_class_guid : LibC::GUID*, pDeviceID : UInt16*, buffer : UInt16*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_List_ExA(interface_class_guid : LibC::GUID*, pDeviceID : Int8*, buffer : UInt8*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_List_ExW(interface_class_guid : LibC::GUID*, pDeviceID : UInt16*, buffer : UInt16*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_List_SizeA(pulLen : UInt32*, interface_class_guid : LibC::GUID*, pDeviceID : Int8*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_List_SizeW(pulLen : UInt32*, interface_class_guid : LibC::GUID*, pDeviceID : UInt16*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_List_Size_ExA(pulLen : UInt32*, interface_class_guid : LibC::GUID*, pDeviceID : Int8*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_List_Size_ExW(pulLen : UInt32*, interface_class_guid : LibC::GUID*, pDeviceID : UInt16*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_PropertyW(pszDeviceInterface : Win32cr::Foundation::PWSTR, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_Property_ExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_Property_KeysW(pszDeviceInterface : Win32cr::Foundation::PWSTR, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Device_Interface_Property_Keys_ExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Log_Conf_Priority(lcLogConf : LibC::UIntPtrT, pPriority : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Log_Conf_Priority_Ex(lcLogConf : LibC::UIntPtrT, pPriority : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Next_Log_Conf(plcLogConf : LibC::UIntPtrT*, lcLogConf : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Next_Log_Conf_Ex(plcLogConf : LibC::UIntPtrT*, lcLogConf : LibC::UIntPtrT, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Parent(pdnDevInst : UInt32*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Parent_Ex(pdnDevInst : UInt32*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Res_Des_Data(rdResDes : LibC::UIntPtrT, buffer : Void*, buffer_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Res_Des_Data_Ex(rdResDes : LibC::UIntPtrT, buffer : Void*, buffer_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Res_Des_Data_Size(pulSize : UInt32*, rdResDes : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Res_Des_Data_Size_Ex(pulSize : UInt32*, rdResDes : LibC::UIntPtrT, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Sibling(pdnDevInst : UInt32*, dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Sibling_Ex(pdnDevInst : UInt32*, dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Version : UInt16
 
+    # :nodoc:
     fun CM_Get_Version_Ex(hMachine : LibC::IntPtrT) : UInt16
 
+    # :nodoc:
     fun CM_Is_Version_Available(wVersion : UInt16) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CM_Is_Version_Available_Ex(wVersion : UInt16, hMachine : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CM_Intersect_Range_List(rlhOld1 : LibC::UIntPtrT, rlhOld2 : LibC::UIntPtrT, rlhNew : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Invert_Range_List(rlhOld : LibC::UIntPtrT, rlhNew : LibC::UIntPtrT, ullMaxValue : UInt64, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Locate_DevNodeA(pdnDevInst : UInt32*, pDeviceID : Int8*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Locate_DevNodeW(pdnDevInst : UInt32*, pDeviceID : UInt16*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Locate_DevNode_ExA(pdnDevInst : UInt32*, pDeviceID : Int8*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Locate_DevNode_ExW(pdnDevInst : UInt32*, pDeviceID : UInt16*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Merge_Range_List(rlhOld1 : LibC::UIntPtrT, rlhOld2 : LibC::UIntPtrT, rlhNew : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Modify_Res_Des(prdResDes : LibC::UIntPtrT*, rdResDes : LibC::UIntPtrT, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Modify_Res_Des_Ex(prdResDes : LibC::UIntPtrT*, rdResDes : LibC::UIntPtrT, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Move_DevNode(dnFromDevInst : UInt32, dnToDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Move_DevNode_Ex(dnFromDevInst : UInt32, dnToDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Next_Range(preElement : LibC::UIntPtrT*, pullStart : UInt64*, pullEnd : UInt64*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Next_Res_Des(prdResDes : LibC::UIntPtrT*, rdResDes : LibC::UIntPtrT, for_resource : UInt32, pResourceID : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Next_Res_Des_Ex(prdResDes : LibC::UIntPtrT*, rdResDes : LibC::UIntPtrT, for_resource : UInt32, pResourceID : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Open_Class_KeyA(class_guid : LibC::GUID*, pszClassName : Win32cr::Foundation::PSTR, samDesired : UInt32, disposition : UInt32, phkClass : Win32cr::System::Registry::HKEY*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Open_Class_KeyW(class_guid : LibC::GUID*, pszClassName : Win32cr::Foundation::PWSTR, samDesired : UInt32, disposition : UInt32, phkClass : Win32cr::System::Registry::HKEY*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Open_Class_Key_ExA(class_guid : LibC::GUID*, pszClassName : Win32cr::Foundation::PSTR, samDesired : UInt32, disposition : UInt32, phkClass : Win32cr::System::Registry::HKEY*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Open_Class_Key_ExW(class_guid : LibC::GUID*, pszClassName : Win32cr::Foundation::PWSTR, samDesired : UInt32, disposition : UInt32, phkClass : Win32cr::System::Registry::HKEY*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Open_DevNode_Key(dnDevNode : UInt32, samDesired : UInt32, ulHardwareProfile : UInt32, disposition : UInt32, phkDevice : Win32cr::System::Registry::HKEY*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Open_DevNode_Key_Ex(dnDevNode : UInt32, samDesired : UInt32, ulHardwareProfile : UInt32, disposition : UInt32, phkDevice : Win32cr::System::Registry::HKEY*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Open_Device_Interface_KeyA(pszDeviceInterface : Win32cr::Foundation::PSTR, samDesired : UInt32, disposition : UInt32, phkDeviceInterface : Win32cr::System::Registry::HKEY*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Open_Device_Interface_KeyW(pszDeviceInterface : Win32cr::Foundation::PWSTR, samDesired : UInt32, disposition : UInt32, phkDeviceInterface : Win32cr::System::Registry::HKEY*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Open_Device_Interface_Key_ExA(pszDeviceInterface : Win32cr::Foundation::PSTR, samDesired : UInt32, disposition : UInt32, phkDeviceInterface : Win32cr::System::Registry::HKEY*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Open_Device_Interface_Key_ExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, samDesired : UInt32, disposition : UInt32, phkDeviceInterface : Win32cr::System::Registry::HKEY*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Delete_Device_Interface_KeyA(pszDeviceInterface : Win32cr::Foundation::PSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Delete_Device_Interface_KeyW(pszDeviceInterface : Win32cr::Foundation::PWSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Delete_Device_Interface_Key_ExA(pszDeviceInterface : Win32cr::Foundation::PSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Delete_Device_Interface_Key_ExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Query_Arbitrator_Free_Data(pData : Void*, data_len : UInt32, dnDevInst : UInt32, resource_id : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Query_Arbitrator_Free_Data_Ex(pData : Void*, data_len : UInt32, dnDevInst : UInt32, resource_id : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Query_Arbitrator_Free_Size(pulSize : UInt32*, dnDevInst : UInt32, resource_id : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Query_Arbitrator_Free_Size_Ex(pulSize : UInt32*, dnDevInst : UInt32, resource_id : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Query_Remove_SubTree(dnAncestor : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Query_Remove_SubTree_Ex(dnAncestor : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Query_And_Remove_SubTreeA(dnAncestor : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt8*, ulNameLength : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Query_And_Remove_SubTreeW(dnAncestor : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt16*, ulNameLength : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Query_And_Remove_SubTree_ExA(dnAncestor : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt8*, ulNameLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Query_And_Remove_SubTree_ExW(dnAncestor : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt16*, ulNameLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Request_Device_EjectA(dnDevInst : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt8*, ulNameLength : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Request_Device_Eject_ExA(dnDevInst : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt8*, ulNameLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Request_Device_EjectW(dnDevInst : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt16*, ulNameLength : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Request_Device_Eject_ExW(dnDevInst : UInt32, pVetoType : Win32cr::Devices::DeviceAndDriverInstallation::PNP_VETO_TYPE*, pszVetoName : UInt16*, ulNameLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Reenumerate_DevNode(dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Reenumerate_DevNode_Ex(dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Register_Device_InterfaceA(dnDevInst : UInt32, interface_class_guid : LibC::GUID*, pszReference : Win32cr::Foundation::PSTR, pszDeviceInterface : UInt8*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Register_Device_InterfaceW(dnDevInst : UInt32, interface_class_guid : LibC::GUID*, pszReference : Win32cr::Foundation::PWSTR, pszDeviceInterface : UInt16*, pulLength : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Register_Device_Interface_ExA(dnDevInst : UInt32, interface_class_guid : LibC::GUID*, pszReference : Win32cr::Foundation::PSTR, pszDeviceInterface : UInt8*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Register_Device_Interface_ExW(dnDevInst : UInt32, interface_class_guid : LibC::GUID*, pszReference : Win32cr::Foundation::PWSTR, pszDeviceInterface : UInt16*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_DevNode_Problem_Ex(dnDevInst : UInt32, ulProblem : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_DevNode_Problem(dnDevInst : UInt32, ulProblem : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Unregister_Device_InterfaceA(pszDeviceInterface : Win32cr::Foundation::PSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Unregister_Device_InterfaceW(pszDeviceInterface : Win32cr::Foundation::PWSTR, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Unregister_Device_Interface_ExA(pszDeviceInterface : Win32cr::Foundation::PSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Unregister_Device_Interface_ExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Register_Device_Driver(dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Register_Device_Driver_Ex(dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Remove_SubTree(dnAncestor : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Remove_SubTree_Ex(dnAncestor : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_DevNode_PropertyW(dnDevInst : UInt32, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_DevNode_Property_ExW(dnDevInst : UInt32, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_DevNode_Registry_PropertyA(dnDevInst : UInt32, ulProperty : UInt32, buffer : Void*, ulLength : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_DevNode_Registry_PropertyW(dnDevInst : UInt32, ulProperty : UInt32, buffer : Void*, ulLength : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_DevNode_Registry_Property_ExA(dnDevInst : UInt32, ulProperty : UInt32, buffer : Void*, ulLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_DevNode_Registry_Property_ExW(dnDevInst : UInt32, ulProperty : UInt32, buffer : Void*, ulLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_Device_Interface_PropertyW(pszDeviceInterface : Win32cr::Foundation::PWSTR, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_Device_Interface_Property_ExW(pszDeviceInterface : Win32cr::Foundation::PWSTR, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Is_Dock_Station_Present(pbPresent : Win32cr::Foundation::BOOL*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Is_Dock_Station_Present_Ex(pbPresent : Win32cr::Foundation::BOOL*, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Request_Eject_PC : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Request_Eject_PC_Ex(hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_HW_Prof_FlagsA(pDeviceID : Int8*, ulConfig : UInt32, ulValue : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_HW_Prof_FlagsW(pDeviceID : UInt16*, ulConfig : UInt32, ulValue : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_HW_Prof_Flags_ExA(pDeviceID : Int8*, ulConfig : UInt32, ulValue : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_HW_Prof_Flags_ExW(pDeviceID : UInt16*, ulConfig : UInt32, ulValue : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Setup_DevNode(dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Setup_DevNode_Ex(dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Test_Range_Available(ullStartValue : UInt64, ullEndValue : UInt64, rlh : LibC::UIntPtrT, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Uninstall_DevNode(dnDevInst : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Uninstall_DevNode_Ex(dnDevInst : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Run_Detection(ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Run_Detection_Ex(ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_HW_Prof(ulHardwareProfile : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_HW_Prof_Ex(ulHardwareProfile : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Query_Resource_Conflict_List(pclConflictList : LibC::UIntPtrT*, dnDevInst : UInt32, resource_id : UInt32, resource_data : Void*, resource_len : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Free_Resource_Conflict_Handle(clConflictList : LibC::UIntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Resource_Conflict_Count(clConflictList : LibC::UIntPtrT, pulCount : UInt32*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Resource_Conflict_DetailsA(clConflictList : LibC::UIntPtrT, ulIndex : UInt32, pConflictDetails : Win32cr::Devices::DeviceAndDriverInstallation::CONFLICT_DETAILS_A*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Resource_Conflict_DetailsW(clConflictList : LibC::UIntPtrT, ulIndex : UInt32, pConflictDetails : Win32cr::Devices::DeviceAndDriverInstallation::CONFLICT_DETAILS_W*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_PropertyW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_Property_ExW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32*, property_buffer : UInt8*, property_buffer_size : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_Property_Keys(class_guid : LibC::GUID*, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32*, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_Property_Keys_Ex(class_guid : LibC::GUID*, property_key_array : Win32cr::Devices::Properties::DEVPROPKEY*, property_key_count : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_Class_PropertyW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, ulFlags : UInt32) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_Class_Property_ExW(class_guid : LibC::GUID*, property_key : Win32cr::Devices::Properties::DEVPROPKEY*, property_type : UInt32, property_buffer : UInt8*, property_buffer_size : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_Registry_PropertyA(class_guid : LibC::GUID*, ulProperty : UInt32, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Get_Class_Registry_PropertyW(class_guid : LibC::GUID*, ulProperty : UInt32, pulRegDataType : UInt32*, buffer : Void*, pulLength : UInt32*, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_Class_Registry_PropertyA(class_guid : LibC::GUID*, ulProperty : UInt32, buffer : Void*, ulLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Set_Class_Registry_PropertyW(class_guid : LibC::GUID*, ulProperty : UInt32, buffer : Void*, ulLength : UInt32, ulFlags : UInt32, hMachine : LibC::IntPtrT) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CMP_WaitNoPendingInstallEvents(dwTimeout : UInt32) : UInt32
 
+    # :nodoc:
     fun CM_Register_Notification(pFilter : Win32cr::Devices::DeviceAndDriverInstallation::CM_NOTIFY_FILTER*, pContext : Void*, pCallback : Win32cr::Devices::DeviceAndDriverInstallation::PCM_NOTIFY_CALLBACK, pNotifyContext : LibC::IntPtrT*) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_Unregister_Notification(notify_context : Win32cr::Devices::DeviceAndDriverInstallation::HCMNOTIFICATION) : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET
 
+    # :nodoc:
     fun CM_MapCrToWin32Err(cm_return_code : Win32cr::Devices::DeviceAndDriverInstallation::CONFIGRET, default_err : UInt32) : UInt32
 
+    # :nodoc:
     fun UpdateDriverForPlugAndPlayDevicesA(hwndParent : Win32cr::Foundation::HWND, hardware_id : Win32cr::Foundation::PSTR, full_inf_path : Win32cr::Foundation::PSTR, install_flags : UInt32, bRebootRequired : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UpdateDriverForPlugAndPlayDevicesW(hwndParent : Win32cr::Foundation::HWND, hardware_id : Win32cr::Foundation::PWSTR, full_inf_path : Win32cr::Foundation::PWSTR, install_flags : UInt32, bRebootRequired : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DiInstallDevice(hwndParent : Win32cr::Foundation::HWND, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, driver_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DRVINFO_DATA_V2_A*, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DiInstallDriverW(hwndParent : Win32cr::Foundation::HWND, inf_path : Win32cr::Foundation::PWSTR, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DiInstallDriverA(hwndParent : Win32cr::Foundation::HWND, inf_path : Win32cr::Foundation::PSTR, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DiUninstallDevice(hwndParent : Win32cr::Foundation::HWND, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DiUninstallDriverW(hwndParent : Win32cr::Foundation::HWND, inf_path : Win32cr::Foundation::PWSTR, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DiUninstallDriverA(hwndParent : Win32cr::Foundation::HWND, inf_path : Win32cr::Foundation::PSTR, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DiShowUpdateDevice(hwndParent : Win32cr::Foundation::HWND, device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DiRollbackDriver(device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, hwndParent : Win32cr::Foundation::HWND, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DiShowUpdateDriver(hwndParent : Win32cr::Foundation::HWND, file_path : Win32cr::Foundation::PWSTR, flags : UInt32, need_reboot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
   end

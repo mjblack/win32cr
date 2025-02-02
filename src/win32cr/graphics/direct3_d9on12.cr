@@ -4,6 +4,7 @@ require "./direct3_d9.cr"
 require "./direct3_d12.cr"
 
 module Win32cr::Graphics::Direct3D9on12
+  extend self
   alias PFN_Direct3DCreate9On12Ex = Proc(UInt32, Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
   alias PFN_Direct3DCreate9On12 = Proc(UInt32, Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, UInt32, Void*)
@@ -56,10 +57,20 @@ module Win32cr::Graphics::Direct3D9on12
 
   end
 
+  def direct3DCreate9On12Ex(sdk_version : UInt32, pOverrideList : Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, num_override_entries : UInt32, ppOutputInterface : Void**) : Win32cr::Foundation::HRESULT
+    C.Direct3DCreate9On12Ex(sdk_version, pOverrideList, num_override_entries, ppOutputInterface)
+  end
+
+  def direct3DCreate9On12(sdk_version : UInt32, pOverrideList : Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, num_override_entries : UInt32) : Void*
+    C.Direct3DCreate9On12(sdk_version, pOverrideList, num_override_entries)
+  end
+
   @[Link("d3d9")]
   lib C
+    # :nodoc:
     fun Direct3DCreate9On12Ex(sdk_version : UInt32, pOverrideList : Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, num_override_entries : UInt32, ppOutputInterface : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun Direct3DCreate9On12(sdk_version : UInt32, pOverrideList : Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, num_override_entries : UInt32) : Void*
 
   end

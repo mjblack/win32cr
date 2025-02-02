@@ -3,6 +3,7 @@ require "./../security.cr"
 require "./registry.cr"
 
 module Win32cr::System::Services
+  extend self
   alias SERVICE_STATUS_HANDLE = LibC::IntPtrT
   alias SERVICE_MAIN_FUNCTIONW = Proc(UInt32, Win32cr::Foundation::PWSTR*, Void)
 
@@ -647,118 +648,398 @@ module Win32cr::System::Services
     end
   end
 
+  def setServiceBits(hServiceStatus : Win32cr::System::Services::SERVICE_STATUS_HANDLE, dwServiceBits : UInt32, bSetBitsOn : Win32cr::Foundation::BOOL, bUpdateImmediately : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SetServiceBits(hServiceStatus, dwServiceBits, bSetBitsOn, bUpdateImmediately)
+  end
+
+  def changeServiceConfigA(hService : Win32cr::Security::SC_HANDLE, dwServiceType : UInt32, dwStartType : Win32cr::System::Services::SERVICE_START_TYPE, dwErrorControl : Win32cr::System::Services::SERVICE_ERROR, lpBinaryPathName : Win32cr::Foundation::PSTR, lpLoadOrderGroup : Win32cr::Foundation::PSTR, lpdwTagId : UInt32*, lpDependencies : Win32cr::Foundation::PSTR, lpServiceStartName : Win32cr::Foundation::PSTR, lpPassword : Win32cr::Foundation::PSTR, lpDisplayName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.ChangeServiceConfigA(hService, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName, lpLoadOrderGroup, lpdwTagId, lpDependencies, lpServiceStartName, lpPassword, lpDisplayName)
+  end
+
+  def changeServiceConfigW(hService : Win32cr::Security::SC_HANDLE, dwServiceType : UInt32, dwStartType : Win32cr::System::Services::SERVICE_START_TYPE, dwErrorControl : Win32cr::System::Services::SERVICE_ERROR, lpBinaryPathName : Win32cr::Foundation::PWSTR, lpLoadOrderGroup : Win32cr::Foundation::PWSTR, lpdwTagId : UInt32*, lpDependencies : Win32cr::Foundation::PWSTR, lpServiceStartName : Win32cr::Foundation::PWSTR, lpPassword : Win32cr::Foundation::PWSTR, lpDisplayName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.ChangeServiceConfigW(hService, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName, lpLoadOrderGroup, lpdwTagId, lpDependencies, lpServiceStartName, lpPassword, lpDisplayName)
+  end
+
+  def changeServiceConfig2A(hService : Win32cr::Security::SC_HANDLE, dwInfoLevel : Win32cr::System::Services::SERVICE_CONFIG, lpInfo : Void*) : Win32cr::Foundation::BOOL
+    C.ChangeServiceConfig2A(hService, dwInfoLevel, lpInfo)
+  end
+
+  def changeServiceConfig2W(hService : Win32cr::Security::SC_HANDLE, dwInfoLevel : Win32cr::System::Services::SERVICE_CONFIG, lpInfo : Void*) : Win32cr::Foundation::BOOL
+    C.ChangeServiceConfig2W(hService, dwInfoLevel, lpInfo)
+  end
+
+  def closeServiceHandle(hSCObject : Win32cr::Security::SC_HANDLE) : Win32cr::Foundation::BOOL
+    C.CloseServiceHandle(hSCObject)
+  end
+
+  def controlService(hService : Win32cr::Security::SC_HANDLE, dwControl : UInt32, lpServiceStatus : Win32cr::System::Services::SERVICE_STATUS*) : Win32cr::Foundation::BOOL
+    C.ControlService(hService, dwControl, lpServiceStatus)
+  end
+
+  def createServiceA(hSCManager : Win32cr::Security::SC_HANDLE, lpServiceName : Win32cr::Foundation::PSTR, lpDisplayName : Win32cr::Foundation::PSTR, dwDesiredAccess : UInt32, dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, dwStartType : Win32cr::System::Services::SERVICE_START_TYPE, dwErrorControl : Win32cr::System::Services::SERVICE_ERROR, lpBinaryPathName : Win32cr::Foundation::PSTR, lpLoadOrderGroup : Win32cr::Foundation::PSTR, lpdwTagId : UInt32*, lpDependencies : Win32cr::Foundation::PSTR, lpServiceStartName : Win32cr::Foundation::PSTR, lpPassword : Win32cr::Foundation::PSTR) : Win32cr::Security::SC_HANDLE
+    C.CreateServiceA(hSCManager, lpServiceName, lpDisplayName, dwDesiredAccess, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName, lpLoadOrderGroup, lpdwTagId, lpDependencies, lpServiceStartName, lpPassword)
+  end
+
+  def createServiceW(hSCManager : Win32cr::Security::SC_HANDLE, lpServiceName : Win32cr::Foundation::PWSTR, lpDisplayName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, dwStartType : Win32cr::System::Services::SERVICE_START_TYPE, dwErrorControl : Win32cr::System::Services::SERVICE_ERROR, lpBinaryPathName : Win32cr::Foundation::PWSTR, lpLoadOrderGroup : Win32cr::Foundation::PWSTR, lpdwTagId : UInt32*, lpDependencies : Win32cr::Foundation::PWSTR, lpServiceStartName : Win32cr::Foundation::PWSTR, lpPassword : Win32cr::Foundation::PWSTR) : Win32cr::Security::SC_HANDLE
+    C.CreateServiceW(hSCManager, lpServiceName, lpDisplayName, dwDesiredAccess, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName, lpLoadOrderGroup, lpdwTagId, lpDependencies, lpServiceStartName, lpPassword)
+  end
+
+  def deleteService(hService : Win32cr::Security::SC_HANDLE) : Win32cr::Foundation::BOOL
+    C.DeleteService(hService)
+  end
+
+  def enumDependentServicesA(hService : Win32cr::Security::SC_HANDLE, dwServiceState : Win32cr::System::Services::ENUM_SERVICE_STATE, lpServices : Win32cr::System::Services::ENUM_SERVICE_STATUSA*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*, lpServicesReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumDependentServicesA(hService, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned)
+  end
+
+  def enumDependentServicesW(hService : Win32cr::Security::SC_HANDLE, dwServiceState : Win32cr::System::Services::ENUM_SERVICE_STATE, lpServices : Win32cr::System::Services::ENUM_SERVICE_STATUSW*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*, lpServicesReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumDependentServicesW(hService, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned)
+  end
+
+  def enumServicesStatusA(hSCManager : Win32cr::Security::SC_HANDLE, dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, dwServiceState : Win32cr::System::Services::ENUM_SERVICE_STATE, lpServices : Win32cr::System::Services::ENUM_SERVICE_STATUSA*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*, lpServicesReturned : UInt32*, lpResumeHandle : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumServicesStatusA(hSCManager, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle)
+  end
+
+  def enumServicesStatusW(hSCManager : Win32cr::Security::SC_HANDLE, dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, dwServiceState : Win32cr::System::Services::ENUM_SERVICE_STATE, lpServices : Win32cr::System::Services::ENUM_SERVICE_STATUSW*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*, lpServicesReturned : UInt32*, lpResumeHandle : UInt32*) : Win32cr::Foundation::BOOL
+    C.EnumServicesStatusW(hSCManager, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle)
+  end
+
+  def enumServicesStatusExA(hSCManager : Win32cr::Security::SC_HANDLE, info_level : Win32cr::System::Services::SC_ENUM_TYPE, dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, dwServiceState : Win32cr::System::Services::ENUM_SERVICE_STATE, lpServices : UInt8*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*, lpServicesReturned : UInt32*, lpResumeHandle : UInt32*, pszGroupName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.EnumServicesStatusExA(hSCManager, info_level, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle, pszGroupName)
+  end
+
+  def enumServicesStatusExW(hSCManager : Win32cr::Security::SC_HANDLE, info_level : Win32cr::System::Services::SC_ENUM_TYPE, dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, dwServiceState : Win32cr::System::Services::ENUM_SERVICE_STATE, lpServices : UInt8*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*, lpServicesReturned : UInt32*, lpResumeHandle : UInt32*, pszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.EnumServicesStatusExW(hSCManager, info_level, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle, pszGroupName)
+  end
+
+  def getServiceKeyNameA(hSCManager : Win32cr::Security::SC_HANDLE, lpDisplayName : Win32cr::Foundation::PSTR, lpServiceName : UInt8*, lpcchBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetServiceKeyNameA(hSCManager, lpDisplayName, lpServiceName, lpcchBuffer)
+  end
+
+  def getServiceKeyNameW(hSCManager : Win32cr::Security::SC_HANDLE, lpDisplayName : Win32cr::Foundation::PWSTR, lpServiceName : UInt16*, lpcchBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetServiceKeyNameW(hSCManager, lpDisplayName, lpServiceName, lpcchBuffer)
+  end
+
+  def getServiceDisplayNameA(hSCManager : Win32cr::Security::SC_HANDLE, lpServiceName : Win32cr::Foundation::PSTR, lpDisplayName : UInt8*, lpcchBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetServiceDisplayNameA(hSCManager, lpServiceName, lpDisplayName, lpcchBuffer)
+  end
+
+  def getServiceDisplayNameW(hSCManager : Win32cr::Security::SC_HANDLE, lpServiceName : Win32cr::Foundation::PWSTR, lpDisplayName : UInt16*, lpcchBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetServiceDisplayNameW(hSCManager, lpServiceName, lpDisplayName, lpcchBuffer)
+  end
+
+  def lockServiceDatabase(hSCManager : Win32cr::Security::SC_HANDLE) : Void*
+    C.LockServiceDatabase(hSCManager)
+  end
+
+  def notifyBootConfigStatus(boot_acceptable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.NotifyBootConfigStatus(boot_acceptable)
+  end
+
+  def openSCManagerA(lpMachineName : Win32cr::Foundation::PSTR, lpDatabaseName : Win32cr::Foundation::PSTR, dwDesiredAccess : UInt32) : Win32cr::Security::SC_HANDLE
+    C.OpenSCManagerA(lpMachineName, lpDatabaseName, dwDesiredAccess)
+  end
+
+  def openSCManagerW(lpMachineName : Win32cr::Foundation::PWSTR, lpDatabaseName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Security::SC_HANDLE
+    C.OpenSCManagerW(lpMachineName, lpDatabaseName, dwDesiredAccess)
+  end
+
+  def openServiceA(hSCManager : Win32cr::Security::SC_HANDLE, lpServiceName : Win32cr::Foundation::PSTR, dwDesiredAccess : UInt32) : Win32cr::Security::SC_HANDLE
+    C.OpenServiceA(hSCManager, lpServiceName, dwDesiredAccess)
+  end
+
+  def openServiceW(hSCManager : Win32cr::Security::SC_HANDLE, lpServiceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Security::SC_HANDLE
+    C.OpenServiceW(hSCManager, lpServiceName, dwDesiredAccess)
+  end
+
+  def queryServiceConfigA(hService : Win32cr::Security::SC_HANDLE, lpServiceConfig : Win32cr::System::Services::QUERY_SERVICE_CONFIGA*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.QueryServiceConfigA(hService, lpServiceConfig, cbBufSize, pcbBytesNeeded)
+  end
+
+  def queryServiceConfigW(hService : Win32cr::Security::SC_HANDLE, lpServiceConfig : Win32cr::System::Services::QUERY_SERVICE_CONFIGW*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.QueryServiceConfigW(hService, lpServiceConfig, cbBufSize, pcbBytesNeeded)
+  end
+
+  def queryServiceConfig2A(hService : Win32cr::Security::SC_HANDLE, dwInfoLevel : Win32cr::System::Services::SERVICE_CONFIG, lpBuffer : UInt8*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.QueryServiceConfig2A(hService, dwInfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded)
+  end
+
+  def queryServiceConfig2W(hService : Win32cr::Security::SC_HANDLE, dwInfoLevel : Win32cr::System::Services::SERVICE_CONFIG, lpBuffer : UInt8*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.QueryServiceConfig2W(hService, dwInfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded)
+  end
+
+  def queryServiceLockStatusA(hSCManager : Win32cr::Security::SC_HANDLE, lpLockStatus : Win32cr::System::Services::QUERY_SERVICE_LOCK_STATUSA*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.QueryServiceLockStatusA(hSCManager, lpLockStatus, cbBufSize, pcbBytesNeeded)
+  end
+
+  def queryServiceLockStatusW(hSCManager : Win32cr::Security::SC_HANDLE, lpLockStatus : Win32cr::System::Services::QUERY_SERVICE_LOCK_STATUSW*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.QueryServiceLockStatusW(hSCManager, lpLockStatus, cbBufSize, pcbBytesNeeded)
+  end
+
+  def queryServiceObjectSecurity(hService : Win32cr::Security::SC_HANDLE, dwSecurityInformation : UInt32, lpSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.QueryServiceObjectSecurity(hService, dwSecurityInformation, lpSecurityDescriptor, cbBufSize, pcbBytesNeeded)
+  end
+
+  def queryServiceStatus(hService : Win32cr::Security::SC_HANDLE, lpServiceStatus : Win32cr::System::Services::SERVICE_STATUS*) : Win32cr::Foundation::BOOL
+    C.QueryServiceStatus(hService, lpServiceStatus)
+  end
+
+  def queryServiceStatusEx(hService : Win32cr::Security::SC_HANDLE, info_level : Win32cr::System::Services::SC_STATUS_TYPE, lpBuffer : UInt8*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.QueryServiceStatusEx(hService, info_level, lpBuffer, cbBufSize, pcbBytesNeeded)
+  end
+
+  def registerServiceCtrlHandlerA(lpServiceName : Win32cr::Foundation::PSTR, lpHandlerProc : Win32cr::System::Services::LPHANDLER_FUNCTION) : Win32cr::System::Services::SERVICE_STATUS_HANDLE
+    C.RegisterServiceCtrlHandlerA(lpServiceName, lpHandlerProc)
+  end
+
+  def registerServiceCtrlHandlerW(lpServiceName : Win32cr::Foundation::PWSTR, lpHandlerProc : Win32cr::System::Services::LPHANDLER_FUNCTION) : Win32cr::System::Services::SERVICE_STATUS_HANDLE
+    C.RegisterServiceCtrlHandlerW(lpServiceName, lpHandlerProc)
+  end
+
+  def registerServiceCtrlHandlerExA(lpServiceName : Win32cr::Foundation::PSTR, lpHandlerProc : Win32cr::System::Services::LPHANDLER_FUNCTION_EX, lpContext : Void*) : Win32cr::System::Services::SERVICE_STATUS_HANDLE
+    C.RegisterServiceCtrlHandlerExA(lpServiceName, lpHandlerProc, lpContext)
+  end
+
+  def registerServiceCtrlHandlerExW(lpServiceName : Win32cr::Foundation::PWSTR, lpHandlerProc : Win32cr::System::Services::LPHANDLER_FUNCTION_EX, lpContext : Void*) : Win32cr::System::Services::SERVICE_STATUS_HANDLE
+    C.RegisterServiceCtrlHandlerExW(lpServiceName, lpHandlerProc, lpContext)
+  end
+
+  def setServiceObjectSecurity(hService : Win32cr::Security::SC_HANDLE, dwSecurityInformation : Win32cr::Security::OBJECT_SECURITY_INFORMATION, lpSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+    C.SetServiceObjectSecurity(hService, dwSecurityInformation, lpSecurityDescriptor)
+  end
+
+  def setServiceStatus(hServiceStatus : Win32cr::System::Services::SERVICE_STATUS_HANDLE, lpServiceStatus : Win32cr::System::Services::SERVICE_STATUS*) : Win32cr::Foundation::BOOL
+    C.SetServiceStatus(hServiceStatus, lpServiceStatus)
+  end
+
+  def startServiceCtrlDispatcherA(lpServiceStartTable : Win32cr::System::Services::SERVICE_TABLE_ENTRYA*) : Win32cr::Foundation::BOOL
+    C.StartServiceCtrlDispatcherA(lpServiceStartTable)
+  end
+
+  def startServiceCtrlDispatcherW(lpServiceStartTable : Win32cr::System::Services::SERVICE_TABLE_ENTRYW*) : Win32cr::Foundation::BOOL
+    C.StartServiceCtrlDispatcherW(lpServiceStartTable)
+  end
+
+  def startServiceA(hService : Win32cr::Security::SC_HANDLE, dwNumServiceArgs : UInt32, lpServiceArgVectors : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    C.StartServiceA(hService, dwNumServiceArgs, lpServiceArgVectors)
+  end
+
+  def startServiceW(hService : Win32cr::Security::SC_HANDLE, dwNumServiceArgs : UInt32, lpServiceArgVectors : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    C.StartServiceW(hService, dwNumServiceArgs, lpServiceArgVectors)
+  end
+
+  def unlockServiceDatabase(sc_lock : Void*) : Win32cr::Foundation::BOOL
+    C.UnlockServiceDatabase(sc_lock)
+  end
+
+  def notifyServiceStatusChangeA(hService : Win32cr::Security::SC_HANDLE, dwNotifyMask : Win32cr::System::Services::SERVICE_NOTIFY, pNotifyBuffer : Win32cr::System::Services::SERVICE_NOTIFY_2A*) : UInt32
+    C.NotifyServiceStatusChangeA(hService, dwNotifyMask, pNotifyBuffer)
+  end
+
+  def notifyServiceStatusChangeW(hService : Win32cr::Security::SC_HANDLE, dwNotifyMask : Win32cr::System::Services::SERVICE_NOTIFY, pNotifyBuffer : Win32cr::System::Services::SERVICE_NOTIFY_2W*) : UInt32
+    C.NotifyServiceStatusChangeW(hService, dwNotifyMask, pNotifyBuffer)
+  end
+
+  def controlServiceExA(hService : Win32cr::Security::SC_HANDLE, dwControl : UInt32, dwInfoLevel : UInt32, pControlParams : Void*) : Win32cr::Foundation::BOOL
+    C.ControlServiceExA(hService, dwControl, dwInfoLevel, pControlParams)
+  end
+
+  def controlServiceExW(hService : Win32cr::Security::SC_HANDLE, dwControl : UInt32, dwInfoLevel : UInt32, pControlParams : Void*) : Win32cr::Foundation::BOOL
+    C.ControlServiceExW(hService, dwControl, dwInfoLevel, pControlParams)
+  end
+
+  def queryServiceDynamicInformation(hServiceStatus : Win32cr::System::Services::SERVICE_STATUS_HANDLE, dwInfoLevel : UInt32, ppDynamicInfo : Void**) : Win32cr::Foundation::BOOL
+    C.QueryServiceDynamicInformation(hServiceStatus, dwInfoLevel, ppDynamicInfo)
+  end
+
+  def waitServiceState(hService : Win32cr::Security::SC_HANDLE, dwNotify : UInt32, dwTimeout : UInt32, hCancelEvent : Win32cr::Foundation::HANDLE) : UInt32
+    C.WaitServiceState(hService, dwNotify, dwTimeout, hCancelEvent)
+  end
+
+  def getServiceRegistryStateKey(service_status_handle : Win32cr::System::Services::SERVICE_STATUS_HANDLE, state_type : Win32cr::System::Services::SERVICE_REGISTRY_STATE_TYPE, access_mask : UInt32, service_state_key : Win32cr::System::Registry::HKEY*) : UInt32
+    C.GetServiceRegistryStateKey(service_status_handle, state_type, access_mask, service_state_key)
+  end
+
+  def getServiceDirectory(hServiceStatus : Win32cr::System::Services::SERVICE_STATUS_HANDLE, eDirectoryType : Win32cr::System::Services::SERVICE_DIRECTORY_TYPE, lpPathBuffer : UInt16*, cchPathBufferLength : UInt32, lpcchRequiredBufferLength : UInt32*) : UInt32
+    C.GetServiceDirectory(hServiceStatus, eDirectoryType, lpPathBuffer, cchPathBufferLength, lpcchRequiredBufferLength)
+  end
+
+  def getSharedServiceRegistryStateKey(service_handle : Win32cr::Security::SC_HANDLE, state_type : Win32cr::System::Services::SERVICE_SHARED_REGISTRY_STATE_TYPE, access_mask : UInt32, service_state_key : Win32cr::System::Registry::HKEY*) : UInt32
+    C.GetSharedServiceRegistryStateKey(service_handle, state_type, access_mask, service_state_key)
+  end
+
+  def getSharedServiceDirectory(service_handle : Win32cr::Security::SC_HANDLE, directory_type : Win32cr::System::Services::SERVICE_SHARED_DIRECTORY_TYPE, path_buffer : UInt16*, path_buffer_length : UInt32, required_buffer_length : UInt32*) : UInt32
+    C.GetSharedServiceDirectory(service_handle, directory_type, path_buffer, path_buffer_length, required_buffer_length)
+  end
+
   @[Link("advapi32")]
   lib C
+    # :nodoc:
     fun SetServiceBits(hServiceStatus : Win32cr::System::Services::SERVICE_STATUS_HANDLE, dwServiceBits : UInt32, bSetBitsOn : Win32cr::Foundation::BOOL, bUpdateImmediately : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ChangeServiceConfigA(hService : Win32cr::Security::SC_HANDLE, dwServiceType : UInt32, dwStartType : Win32cr::System::Services::SERVICE_START_TYPE, dwErrorControl : Win32cr::System::Services::SERVICE_ERROR, lpBinaryPathName : Win32cr::Foundation::PSTR, lpLoadOrderGroup : Win32cr::Foundation::PSTR, lpdwTagId : UInt32*, lpDependencies : Win32cr::Foundation::PSTR, lpServiceStartName : Win32cr::Foundation::PSTR, lpPassword : Win32cr::Foundation::PSTR, lpDisplayName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ChangeServiceConfigW(hService : Win32cr::Security::SC_HANDLE, dwServiceType : UInt32, dwStartType : Win32cr::System::Services::SERVICE_START_TYPE, dwErrorControl : Win32cr::System::Services::SERVICE_ERROR, lpBinaryPathName : Win32cr::Foundation::PWSTR, lpLoadOrderGroup : Win32cr::Foundation::PWSTR, lpdwTagId : UInt32*, lpDependencies : Win32cr::Foundation::PWSTR, lpServiceStartName : Win32cr::Foundation::PWSTR, lpPassword : Win32cr::Foundation::PWSTR, lpDisplayName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ChangeServiceConfig2A(hService : Win32cr::Security::SC_HANDLE, dwInfoLevel : Win32cr::System::Services::SERVICE_CONFIG, lpInfo : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ChangeServiceConfig2W(hService : Win32cr::Security::SC_HANDLE, dwInfoLevel : Win32cr::System::Services::SERVICE_CONFIG, lpInfo : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CloseServiceHandle(hSCObject : Win32cr::Security::SC_HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ControlService(hService : Win32cr::Security::SC_HANDLE, dwControl : UInt32, lpServiceStatus : Win32cr::System::Services::SERVICE_STATUS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateServiceA(hSCManager : Win32cr::Security::SC_HANDLE, lpServiceName : Win32cr::Foundation::PSTR, lpDisplayName : Win32cr::Foundation::PSTR, dwDesiredAccess : UInt32, dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, dwStartType : Win32cr::System::Services::SERVICE_START_TYPE, dwErrorControl : Win32cr::System::Services::SERVICE_ERROR, lpBinaryPathName : Win32cr::Foundation::PSTR, lpLoadOrderGroup : Win32cr::Foundation::PSTR, lpdwTagId : UInt32*, lpDependencies : Win32cr::Foundation::PSTR, lpServiceStartName : Win32cr::Foundation::PSTR, lpPassword : Win32cr::Foundation::PSTR) : Win32cr::Security::SC_HANDLE
 
+    # :nodoc:
     fun CreateServiceW(hSCManager : Win32cr::Security::SC_HANDLE, lpServiceName : Win32cr::Foundation::PWSTR, lpDisplayName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, dwStartType : Win32cr::System::Services::SERVICE_START_TYPE, dwErrorControl : Win32cr::System::Services::SERVICE_ERROR, lpBinaryPathName : Win32cr::Foundation::PWSTR, lpLoadOrderGroup : Win32cr::Foundation::PWSTR, lpdwTagId : UInt32*, lpDependencies : Win32cr::Foundation::PWSTR, lpServiceStartName : Win32cr::Foundation::PWSTR, lpPassword : Win32cr::Foundation::PWSTR) : Win32cr::Security::SC_HANDLE
 
+    # :nodoc:
     fun DeleteService(hService : Win32cr::Security::SC_HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumDependentServicesA(hService : Win32cr::Security::SC_HANDLE, dwServiceState : Win32cr::System::Services::ENUM_SERVICE_STATE, lpServices : Win32cr::System::Services::ENUM_SERVICE_STATUSA*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*, lpServicesReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumDependentServicesW(hService : Win32cr::Security::SC_HANDLE, dwServiceState : Win32cr::System::Services::ENUM_SERVICE_STATE, lpServices : Win32cr::System::Services::ENUM_SERVICE_STATUSW*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*, lpServicesReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumServicesStatusA(hSCManager : Win32cr::Security::SC_HANDLE, dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, dwServiceState : Win32cr::System::Services::ENUM_SERVICE_STATE, lpServices : Win32cr::System::Services::ENUM_SERVICE_STATUSA*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*, lpServicesReturned : UInt32*, lpResumeHandle : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumServicesStatusW(hSCManager : Win32cr::Security::SC_HANDLE, dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, dwServiceState : Win32cr::System::Services::ENUM_SERVICE_STATE, lpServices : Win32cr::System::Services::ENUM_SERVICE_STATUSW*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*, lpServicesReturned : UInt32*, lpResumeHandle : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumServicesStatusExA(hSCManager : Win32cr::Security::SC_HANDLE, info_level : Win32cr::System::Services::SC_ENUM_TYPE, dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, dwServiceState : Win32cr::System::Services::ENUM_SERVICE_STATE, lpServices : UInt8*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*, lpServicesReturned : UInt32*, lpResumeHandle : UInt32*, pszGroupName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumServicesStatusExW(hSCManager : Win32cr::Security::SC_HANDLE, info_level : Win32cr::System::Services::SC_ENUM_TYPE, dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, dwServiceState : Win32cr::System::Services::ENUM_SERVICE_STATE, lpServices : UInt8*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*, lpServicesReturned : UInt32*, lpResumeHandle : UInt32*, pszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetServiceKeyNameA(hSCManager : Win32cr::Security::SC_HANDLE, lpDisplayName : Win32cr::Foundation::PSTR, lpServiceName : UInt8*, lpcchBuffer : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetServiceKeyNameW(hSCManager : Win32cr::Security::SC_HANDLE, lpDisplayName : Win32cr::Foundation::PWSTR, lpServiceName : UInt16*, lpcchBuffer : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetServiceDisplayNameA(hSCManager : Win32cr::Security::SC_HANDLE, lpServiceName : Win32cr::Foundation::PSTR, lpDisplayName : UInt8*, lpcchBuffer : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetServiceDisplayNameW(hSCManager : Win32cr::Security::SC_HANDLE, lpServiceName : Win32cr::Foundation::PWSTR, lpDisplayName : UInt16*, lpcchBuffer : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LockServiceDatabase(hSCManager : Win32cr::Security::SC_HANDLE) : Void*
 
+    # :nodoc:
     fun NotifyBootConfigStatus(boot_acceptable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OpenSCManagerA(lpMachineName : Win32cr::Foundation::PSTR, lpDatabaseName : Win32cr::Foundation::PSTR, dwDesiredAccess : UInt32) : Win32cr::Security::SC_HANDLE
 
+    # :nodoc:
     fun OpenSCManagerW(lpMachineName : Win32cr::Foundation::PWSTR, lpDatabaseName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Security::SC_HANDLE
 
+    # :nodoc:
     fun OpenServiceA(hSCManager : Win32cr::Security::SC_HANDLE, lpServiceName : Win32cr::Foundation::PSTR, dwDesiredAccess : UInt32) : Win32cr::Security::SC_HANDLE
 
+    # :nodoc:
     fun OpenServiceW(hSCManager : Win32cr::Security::SC_HANDLE, lpServiceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Security::SC_HANDLE
 
+    # :nodoc:
     fun QueryServiceConfigA(hService : Win32cr::Security::SC_HANDLE, lpServiceConfig : Win32cr::System::Services::QUERY_SERVICE_CONFIGA*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryServiceConfigW(hService : Win32cr::Security::SC_HANDLE, lpServiceConfig : Win32cr::System::Services::QUERY_SERVICE_CONFIGW*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryServiceConfig2A(hService : Win32cr::Security::SC_HANDLE, dwInfoLevel : Win32cr::System::Services::SERVICE_CONFIG, lpBuffer : UInt8*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryServiceConfig2W(hService : Win32cr::Security::SC_HANDLE, dwInfoLevel : Win32cr::System::Services::SERVICE_CONFIG, lpBuffer : UInt8*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryServiceLockStatusA(hSCManager : Win32cr::Security::SC_HANDLE, lpLockStatus : Win32cr::System::Services::QUERY_SERVICE_LOCK_STATUSA*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryServiceLockStatusW(hSCManager : Win32cr::Security::SC_HANDLE, lpLockStatus : Win32cr::System::Services::QUERY_SERVICE_LOCK_STATUSW*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryServiceObjectSecurity(hService : Win32cr::Security::SC_HANDLE, dwSecurityInformation : UInt32, lpSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryServiceStatus(hService : Win32cr::Security::SC_HANDLE, lpServiceStatus : Win32cr::System::Services::SERVICE_STATUS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryServiceStatusEx(hService : Win32cr::Security::SC_HANDLE, info_level : Win32cr::System::Services::SC_STATUS_TYPE, lpBuffer : UInt8*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterServiceCtrlHandlerA(lpServiceName : Win32cr::Foundation::PSTR, lpHandlerProc : Win32cr::System::Services::LPHANDLER_FUNCTION) : Win32cr::System::Services::SERVICE_STATUS_HANDLE
 
+    # :nodoc:
     fun RegisterServiceCtrlHandlerW(lpServiceName : Win32cr::Foundation::PWSTR, lpHandlerProc : Win32cr::System::Services::LPHANDLER_FUNCTION) : Win32cr::System::Services::SERVICE_STATUS_HANDLE
 
+    # :nodoc:
     fun RegisterServiceCtrlHandlerExA(lpServiceName : Win32cr::Foundation::PSTR, lpHandlerProc : Win32cr::System::Services::LPHANDLER_FUNCTION_EX, lpContext : Void*) : Win32cr::System::Services::SERVICE_STATUS_HANDLE
 
+    # :nodoc:
     fun RegisterServiceCtrlHandlerExW(lpServiceName : Win32cr::Foundation::PWSTR, lpHandlerProc : Win32cr::System::Services::LPHANDLER_FUNCTION_EX, lpContext : Void*) : Win32cr::System::Services::SERVICE_STATUS_HANDLE
 
+    # :nodoc:
     fun SetServiceObjectSecurity(hService : Win32cr::Security::SC_HANDLE, dwSecurityInformation : Win32cr::Security::OBJECT_SECURITY_INFORMATION, lpSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetServiceStatus(hServiceStatus : Win32cr::System::Services::SERVICE_STATUS_HANDLE, lpServiceStatus : Win32cr::System::Services::SERVICE_STATUS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun StartServiceCtrlDispatcherA(lpServiceStartTable : Win32cr::System::Services::SERVICE_TABLE_ENTRYA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun StartServiceCtrlDispatcherW(lpServiceStartTable : Win32cr::System::Services::SERVICE_TABLE_ENTRYW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun StartServiceA(hService : Win32cr::Security::SC_HANDLE, dwNumServiceArgs : UInt32, lpServiceArgVectors : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun StartServiceW(hService : Win32cr::Security::SC_HANDLE, dwNumServiceArgs : UInt32, lpServiceArgVectors : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnlockServiceDatabase(sc_lock : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun NotifyServiceStatusChangeA(hService : Win32cr::Security::SC_HANDLE, dwNotifyMask : Win32cr::System::Services::SERVICE_NOTIFY, pNotifyBuffer : Win32cr::System::Services::SERVICE_NOTIFY_2A*) : UInt32
 
+    # :nodoc:
     fun NotifyServiceStatusChangeW(hService : Win32cr::Security::SC_HANDLE, dwNotifyMask : Win32cr::System::Services::SERVICE_NOTIFY, pNotifyBuffer : Win32cr::System::Services::SERVICE_NOTIFY_2W*) : UInt32
 
+    # :nodoc:
     fun ControlServiceExA(hService : Win32cr::Security::SC_HANDLE, dwControl : UInt32, dwInfoLevel : UInt32, pControlParams : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ControlServiceExW(hService : Win32cr::Security::SC_HANDLE, dwControl : UInt32, dwInfoLevel : UInt32, pControlParams : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryServiceDynamicInformation(hServiceStatus : Win32cr::System::Services::SERVICE_STATUS_HANDLE, dwInfoLevel : UInt32, ppDynamicInfo : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WaitServiceState(hService : Win32cr::Security::SC_HANDLE, dwNotify : UInt32, dwTimeout : UInt32, hCancelEvent : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun GetServiceRegistryStateKey(service_status_handle : Win32cr::System::Services::SERVICE_STATUS_HANDLE, state_type : Win32cr::System::Services::SERVICE_REGISTRY_STATE_TYPE, access_mask : UInt32, service_state_key : Win32cr::System::Registry::HKEY*) : UInt32
 
+    # :nodoc:
     fun GetServiceDirectory(hServiceStatus : Win32cr::System::Services::SERVICE_STATUS_HANDLE, eDirectoryType : Win32cr::System::Services::SERVICE_DIRECTORY_TYPE, lpPathBuffer : UInt16*, cchPathBufferLength : UInt32, lpcchRequiredBufferLength : UInt32*) : UInt32
 
+    # :nodoc:
     fun GetSharedServiceRegistryStateKey(service_handle : Win32cr::Security::SC_HANDLE, state_type : Win32cr::System::Services::SERVICE_SHARED_REGISTRY_STATE_TYPE, access_mask : UInt32, service_state_key : Win32cr::System::Registry::HKEY*) : UInt32
 
+    # :nodoc:
     fun GetSharedServiceDirectory(service_handle : Win32cr::Security::SC_HANDLE, directory_type : Win32cr::System::Services::SERVICE_SHARED_DIRECTORY_TYPE, path_buffer : UInt16*, path_buffer_length : UInt32, required_buffer_length : UInt32*) : UInt32
 
   end

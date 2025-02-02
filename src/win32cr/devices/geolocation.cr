@@ -5,6 +5,7 @@ require "./../system/com/structured_storage.cr"
 require "./sensors.cr"
 
 module Win32cr::Devices::Geolocation
+  extend self
   GNSS_DRIVER_VERSION_1 = 1_u32
   GNSS_DRIVER_VERSION_2 = 2_u32
   GNSS_DRIVER_VERSION_3 = 3_u32

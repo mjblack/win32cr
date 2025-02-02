@@ -2,6 +2,7 @@ require "./com.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::ServerBackup
+  extend self
   WSB_MAX_OB_STATUS_VALUE_TYPE_PAIR = 5_u32
   WSB_MAX_OB_STATUS_ENTRY = 5_u32
   WSBAPP_ASYNC_IN_PROGRESS = 7995396_i32

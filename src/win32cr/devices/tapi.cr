@@ -5,6 +5,7 @@ require "./../media/direct_show.cr"
 require "./../system/address_book.cr"
 
 module Win32cr::Devices::Tapi
+  extend self
   alias LINECALLBACK = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
   alias PHONECALLBACK = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
@@ -10402,511 +10403,1771 @@ module Win32cr::Devices::Tapi
 
   end
 
+  def lineAccept(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    C.lineAccept(hCall, lpsUserUserInfo, dwSize)
+  end
+
+  def lineAddProvider(lpszProviderFilename : Win32cr::Foundation::PSTR, hwndOwner : Win32cr::Foundation::HWND, lpdwPermanentProviderID : UInt32*) : Int32
+    C.lineAddProvider(lpszProviderFilename, hwndOwner, lpdwPermanentProviderID)
+  end
+
+  def lineAddProviderA(lpszProviderFilename : Win32cr::Foundation::PSTR, hwndOwner : Win32cr::Foundation::HWND, lpdwPermanentProviderID : UInt32*) : Int32
+    C.lineAddProviderA(lpszProviderFilename, hwndOwner, lpdwPermanentProviderID)
+  end
+
+  def lineAddProviderW(lpszProviderFilename : Win32cr::Foundation::PWSTR, hwndOwner : Win32cr::Foundation::HWND, lpdwPermanentProviderID : UInt32*) : Int32
+    C.lineAddProviderW(lpszProviderFilename, hwndOwner, lpdwPermanentProviderID)
+  end
+
+  def lineAddToConference(hConfCall : UInt32, hConsultCall : UInt32) : Int32
+    C.lineAddToConference(hConfCall, hConsultCall)
+  end
+
+  def lineAgentSpecific(hLine : UInt32, dwAddressID : UInt32, dwAgentExtensionIDIndex : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
+    C.lineAgentSpecific(hLine, dwAddressID, dwAgentExtensionIDIndex, lpParams, dwSize)
+  end
+
+  def lineAnswer(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    C.lineAnswer(hCall, lpsUserUserInfo, dwSize)
+  end
+
+  def lineBlindTransfer(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    C.lineBlindTransfer(hCall, lpszDestAddress, dwCountryCode)
+  end
+
+  def lineBlindTransferA(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    C.lineBlindTransferA(hCall, lpszDestAddress, dwCountryCode)
+  end
+
+  def lineBlindTransferW(hCall : UInt32, lpszDestAddressW : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32) : Int32
+    C.lineBlindTransferW(hCall, lpszDestAddressW, dwCountryCode)
+  end
+
+  def lineClose(hLine : UInt32) : Int32
+    C.lineClose(hLine)
+  end
+
+  def lineCompleteCall(hCall : UInt32, lpdwCompletionID : UInt32*, dwCompletionMode : UInt32, dwMessageID : UInt32) : Int32
+    C.lineCompleteCall(hCall, lpdwCompletionID, dwCompletionMode, dwMessageID)
+  end
+
+  def lineCompleteTransfer(hCall : UInt32, hConsultCall : UInt32, lphConfCall : UInt32*, dwTransferMode : UInt32) : Int32
+    C.lineCompleteTransfer(hCall, hConsultCall, lphConfCall, dwTransferMode)
+  end
+
+  def lineConfigDialog(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    C.lineConfigDialog(dwDeviceID, hwndOwner, lpszDeviceClass)
+  end
+
+  def lineConfigDialogA(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    C.lineConfigDialogA(dwDeviceID, hwndOwner, lpszDeviceClass)
+  end
+
+  def lineConfigDialogW(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    C.lineConfigDialogW(dwDeviceID, hwndOwner, lpszDeviceClass)
+  end
+
+  def lineConfigDialogEdit(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceConfigIn : Void*, dwSize : UInt32, lpDeviceConfigOut : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    C.lineConfigDialogEdit(dwDeviceID, hwndOwner, lpszDeviceClass, lpDeviceConfigIn, dwSize, lpDeviceConfigOut)
+  end
+
+  def lineConfigDialogEditA(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceConfigIn : Void*, dwSize : UInt32, lpDeviceConfigOut : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    C.lineConfigDialogEditA(dwDeviceID, hwndOwner, lpszDeviceClass, lpDeviceConfigIn, dwSize, lpDeviceConfigOut)
+  end
+
+  def lineConfigDialogEditW(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PWSTR, lpDeviceConfigIn : Void*, dwSize : UInt32, lpDeviceConfigOut : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    C.lineConfigDialogEditW(dwDeviceID, hwndOwner, lpszDeviceClass, lpDeviceConfigIn, dwSize, lpDeviceConfigOut)
+  end
+
+  def lineConfigProvider(hwndOwner : Win32cr::Foundation::HWND, dwPermanentProviderID : UInt32) : Int32
+    C.lineConfigProvider(hwndOwner, dwPermanentProviderID)
+  end
+
+  def lineCreateAgentW(hLine : UInt32, lpszAgentID : Win32cr::Foundation::PWSTR, lpszAgentPIN : Win32cr::Foundation::PWSTR, lphAgent : UInt32*) : Int32
+    C.lineCreateAgentW(hLine, lpszAgentID, lpszAgentPIN, lphAgent)
+  end
+
+  def lineCreateAgentA(hLine : UInt32, lpszAgentID : Win32cr::Foundation::PSTR, lpszAgentPIN : Win32cr::Foundation::PSTR, lphAgent : UInt32*) : Int32
+    C.lineCreateAgentA(hLine, lpszAgentID, lpszAgentPIN, lphAgent)
+  end
+
+  def lineCreateAgentSessionW(hLine : UInt32, hAgent : UInt32, lpszAgentPIN : Win32cr::Foundation::PWSTR, dwWorkingAddressID : UInt32, lpGroupID : LibC::GUID*, lphAgentSession : UInt32*) : Int32
+    C.lineCreateAgentSessionW(hLine, hAgent, lpszAgentPIN, dwWorkingAddressID, lpGroupID, lphAgentSession)
+  end
+
+  def lineCreateAgentSessionA(hLine : UInt32, hAgent : UInt32, lpszAgentPIN : Win32cr::Foundation::PSTR, dwWorkingAddressID : UInt32, lpGroupID : LibC::GUID*, lphAgentSession : UInt32*) : Int32
+    C.lineCreateAgentSessionA(hLine, hAgent, lpszAgentPIN, dwWorkingAddressID, lpGroupID, lphAgentSession)
+  end
+
+  def lineDeallocateCall(hCall : UInt32) : Int32
+    C.lineDeallocateCall(hCall)
+  end
+
+  def lineDevSpecific(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
+    C.lineDevSpecific(hLine, dwAddressID, hCall, lpParams, dwSize)
+  end
+
+  def lineDevSpecificFeature(hLine : UInt32, dwFeature : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
+    C.lineDevSpecificFeature(hLine, dwFeature, lpParams, dwSize)
+  end
+
+  def lineDial(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    C.lineDial(hCall, lpszDestAddress, dwCountryCode)
+  end
+
+  def lineDialA(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    C.lineDialA(hCall, lpszDestAddress, dwCountryCode)
+  end
+
+  def lineDialW(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32) : Int32
+    C.lineDialW(hCall, lpszDestAddress, dwCountryCode)
+  end
+
+  def lineDrop(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    C.lineDrop(hCall, lpsUserUserInfo, dwSize)
+  end
+
+  def lineForward(hLine : UInt32, bAllAddresses : UInt32, dwAddressID : UInt32, lpForwardList : Win32cr::Devices::Tapi::LINEFORWARDLIST*, dwNumRingsNoAnswer : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineForward(hLine, bAllAddresses, dwAddressID, lpForwardList, dwNumRingsNoAnswer, lphConsultCall, lpCallParams)
+  end
+
+  def lineForwardA(hLine : UInt32, bAllAddresses : UInt32, dwAddressID : UInt32, lpForwardList : Win32cr::Devices::Tapi::LINEFORWARDLIST*, dwNumRingsNoAnswer : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineForwardA(hLine, bAllAddresses, dwAddressID, lpForwardList, dwNumRingsNoAnswer, lphConsultCall, lpCallParams)
+  end
+
+  def lineForwardW(hLine : UInt32, bAllAddresses : UInt32, dwAddressID : UInt32, lpForwardList : Win32cr::Devices::Tapi::LINEFORWARDLIST*, dwNumRingsNoAnswer : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineForwardW(hLine, bAllAddresses, dwAddressID, lpForwardList, dwNumRingsNoAnswer, lphConsultCall, lpCallParams)
+  end
+
+  def lineGatherDigits(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt8*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+    C.lineGatherDigits(hCall, dwDigitModes, lpsDigits, dwNumDigits, lpszTerminationDigits, dwFirstDigitTimeout, dwInterDigitTimeout)
+  end
+
+  def lineGatherDigitsA(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt8*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+    C.lineGatherDigitsA(hCall, dwDigitModes, lpsDigits, dwNumDigits, lpszTerminationDigits, dwFirstDigitTimeout, dwInterDigitTimeout)
+  end
+
+  def lineGatherDigitsW(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt16*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PWSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+    C.lineGatherDigitsW(hCall, dwDigitModes, lpsDigits, dwNumDigits, lpszTerminationDigits, dwFirstDigitTimeout, dwInterDigitTimeout)
+  end
+
+  def lineGenerateDigits(hCall : UInt32, dwDigitMode : UInt32, lpszDigits : Win32cr::Foundation::PSTR, dwDuration : UInt32) : Int32
+    C.lineGenerateDigits(hCall, dwDigitMode, lpszDigits, dwDuration)
+  end
+
+  def lineGenerateDigitsA(hCall : UInt32, dwDigitMode : UInt32, lpszDigits : Win32cr::Foundation::PSTR, dwDuration : UInt32) : Int32
+    C.lineGenerateDigitsA(hCall, dwDigitMode, lpszDigits, dwDuration)
+  end
+
+  def lineGenerateDigitsW(hCall : UInt32, dwDigitMode : UInt32, lpszDigits : Win32cr::Foundation::PWSTR, dwDuration : UInt32) : Int32
+    C.lineGenerateDigitsW(hCall, dwDigitMode, lpszDigits, dwDuration)
+  end
+
+  def lineGenerateTone(hCall : UInt32, dwToneMode : UInt32, dwDuration : UInt32, dwNumTones : UInt32, lpTones : Win32cr::Devices::Tapi::LINEGENERATETONE*) : Int32
+    C.lineGenerateTone(hCall, dwToneMode, dwDuration, dwNumTones, lpTones)
+  end
+
+  def lineGetAddressCaps(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpAddressCaps : Win32cr::Devices::Tapi::LINEADDRESSCAPS*) : Int32
+    C.lineGetAddressCaps(hLineApp, dwDeviceID, dwAddressID, dwAPIVersion, dwExtVersion, lpAddressCaps)
+  end
+
+  def lineGetAddressCapsA(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpAddressCaps : Win32cr::Devices::Tapi::LINEADDRESSCAPS*) : Int32
+    C.lineGetAddressCapsA(hLineApp, dwDeviceID, dwAddressID, dwAPIVersion, dwExtVersion, lpAddressCaps)
+  end
+
+  def lineGetAddressCapsW(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpAddressCaps : Win32cr::Devices::Tapi::LINEADDRESSCAPS*) : Int32
+    C.lineGetAddressCapsW(hLineApp, dwDeviceID, dwAddressID, dwAPIVersion, dwExtVersion, lpAddressCaps)
+  end
+
+  def lineGetAddressID(hLine : UInt32, lpdwAddressID : UInt32*, dwAddressMode : UInt32, lpsAddress : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    C.lineGetAddressID(hLine, lpdwAddressID, dwAddressMode, lpsAddress, dwSize)
+  end
+
+  def lineGetAddressIDA(hLine : UInt32, lpdwAddressID : UInt32*, dwAddressMode : UInt32, lpsAddress : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    C.lineGetAddressIDA(hLine, lpdwAddressID, dwAddressMode, lpsAddress, dwSize)
+  end
+
+  def lineGetAddressIDW(hLine : UInt32, lpdwAddressID : UInt32*, dwAddressMode : UInt32, lpsAddress : Win32cr::Foundation::PWSTR, dwSize : UInt32) : Int32
+    C.lineGetAddressIDW(hLine, lpdwAddressID, dwAddressMode, lpsAddress, dwSize)
+  end
+
+  def lineGetAddressStatus(hLine : UInt32, dwAddressID : UInt32, lpAddressStatus : Win32cr::Devices::Tapi::LINEADDRESSSTATUS*) : Int32
+    C.lineGetAddressStatus(hLine, dwAddressID, lpAddressStatus)
+  end
+
+  def lineGetAddressStatusA(hLine : UInt32, dwAddressID : UInt32, lpAddressStatus : Win32cr::Devices::Tapi::LINEADDRESSSTATUS*) : Int32
+    C.lineGetAddressStatusA(hLine, dwAddressID, lpAddressStatus)
+  end
+
+  def lineGetAddressStatusW(hLine : UInt32, dwAddressID : UInt32, lpAddressStatus : Win32cr::Devices::Tapi::LINEADDRESSSTATUS*) : Int32
+    C.lineGetAddressStatusW(hLine, dwAddressID, lpAddressStatus)
+  end
+
+  def lineGetAgentActivityListA(hLine : UInt32, dwAddressID : UInt32, lpAgentActivityList : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST*) : Int32
+    C.lineGetAgentActivityListA(hLine, dwAddressID, lpAgentActivityList)
+  end
+
+  def lineGetAgentActivityListW(hLine : UInt32, dwAddressID : UInt32, lpAgentActivityList : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST*) : Int32
+    C.lineGetAgentActivityListW(hLine, dwAddressID, lpAgentActivityList)
+  end
+
+  def lineGetAgentCapsA(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAppAPIVersion : UInt32, lpAgentCaps : Win32cr::Devices::Tapi::LINEAGENTCAPS*) : Int32
+    C.lineGetAgentCapsA(hLineApp, dwDeviceID, dwAddressID, dwAppAPIVersion, lpAgentCaps)
+  end
+
+  def lineGetAgentCapsW(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAppAPIVersion : UInt32, lpAgentCaps : Win32cr::Devices::Tapi::LINEAGENTCAPS*) : Int32
+    C.lineGetAgentCapsW(hLineApp, dwDeviceID, dwAddressID, dwAppAPIVersion, lpAgentCaps)
+  end
+
+  def lineGetAgentGroupListA(hLine : UInt32, dwAddressID : UInt32, lpAgentGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    C.lineGetAgentGroupListA(hLine, dwAddressID, lpAgentGroupList)
+  end
+
+  def lineGetAgentGroupListW(hLine : UInt32, dwAddressID : UInt32, lpAgentGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    C.lineGetAgentGroupListW(hLine, dwAddressID, lpAgentGroupList)
+  end
+
+  def lineGetAgentInfo(hLine : UInt32, hAgent : UInt32, lpAgentInfo : Win32cr::Devices::Tapi::LINEAGENTINFO*) : Int32
+    C.lineGetAgentInfo(hLine, hAgent, lpAgentInfo)
+  end
+
+  def lineGetAgentSessionInfo(hLine : UInt32, hAgentSession : UInt32, lpAgentSessionInfo : Win32cr::Devices::Tapi::LINEAGENTSESSIONINFO*) : Int32
+    C.lineGetAgentSessionInfo(hLine, hAgentSession, lpAgentSessionInfo)
+  end
+
+  def lineGetAgentSessionList(hLine : UInt32, hAgent : UInt32, lpAgentSessionList : Win32cr::Devices::Tapi::LINEAGENTSESSIONLIST*) : Int32
+    C.lineGetAgentSessionList(hLine, hAgent, lpAgentSessionList)
+  end
+
+  def lineGetAgentStatusA(hLine : UInt32, dwAddressID : UInt32, lpAgentStatus : Win32cr::Devices::Tapi::LINEAGENTSTATUS*) : Int32
+    C.lineGetAgentStatusA(hLine, dwAddressID, lpAgentStatus)
+  end
+
+  def lineGetAgentStatusW(hLine : UInt32, dwAddressID : UInt32, lpAgentStatus : Win32cr::Devices::Tapi::LINEAGENTSTATUS*) : Int32
+    C.lineGetAgentStatusW(hLine, dwAddressID, lpAgentStatus)
+  end
+
+  def lineGetAppPriority(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpExtensionName : Win32cr::Devices::Tapi::VARSTRING*, lpdwPriority : UInt32*) : Int32
+    C.lineGetAppPriority(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpExtensionName, lpdwPriority)
+  end
+
+  def lineGetAppPriorityA(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpExtensionName : Win32cr::Devices::Tapi::VARSTRING*, lpdwPriority : UInt32*) : Int32
+    C.lineGetAppPriorityA(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpExtensionName, lpdwPriority)
+  end
+
+  def lineGetAppPriorityW(lpszAppFilename : Win32cr::Foundation::PWSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpExtensionName : Win32cr::Devices::Tapi::VARSTRING*, lpdwPriority : UInt32*) : Int32
+    C.lineGetAppPriorityW(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpExtensionName, lpdwPriority)
+  end
+
+  def lineGetCallInfo(hCall : UInt32, lpCallInfo : Win32cr::Devices::Tapi::LINECALLINFO*) : Int32
+    C.lineGetCallInfo(hCall, lpCallInfo)
+  end
+
+  def lineGetCallInfoA(hCall : UInt32, lpCallInfo : Win32cr::Devices::Tapi::LINECALLINFO*) : Int32
+    C.lineGetCallInfoA(hCall, lpCallInfo)
+  end
+
+  def lineGetCallInfoW(hCall : UInt32, lpCallInfo : Win32cr::Devices::Tapi::LINECALLINFO*) : Int32
+    C.lineGetCallInfoW(hCall, lpCallInfo)
+  end
+
+  def lineGetCallStatus(hCall : UInt32, lpCallStatus : Win32cr::Devices::Tapi::LINECALLSTATUS*) : Int32
+    C.lineGetCallStatus(hCall, lpCallStatus)
+  end
+
+  def lineGetConfRelatedCalls(hCall : UInt32, lpCallList : Win32cr::Devices::Tapi::LINECALLLIST*) : Int32
+    C.lineGetConfRelatedCalls(hCall, lpCallList)
+  end
+
+  def lineGetCountry(dwCountryID : UInt32, dwAPIVersion : UInt32, lpLineCountryList : Win32cr::Devices::Tapi::LINECOUNTRYLIST*) : Int32
+    C.lineGetCountry(dwCountryID, dwAPIVersion, lpLineCountryList)
+  end
+
+  def lineGetCountryA(dwCountryID : UInt32, dwAPIVersion : UInt32, lpLineCountryList : Win32cr::Devices::Tapi::LINECOUNTRYLIST*) : Int32
+    C.lineGetCountryA(dwCountryID, dwAPIVersion, lpLineCountryList)
+  end
+
+  def lineGetCountryW(dwCountryID : UInt32, dwAPIVersion : UInt32, lpLineCountryList : Win32cr::Devices::Tapi::LINECOUNTRYLIST*) : Int32
+    C.lineGetCountryW(dwCountryID, dwAPIVersion, lpLineCountryList)
+  end
+
+  def lineGetDevCaps(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpLineDevCaps : Win32cr::Devices::Tapi::LINEDEVCAPS*) : Int32
+    C.lineGetDevCaps(hLineApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpLineDevCaps)
+  end
+
+  def lineGetDevCapsA(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpLineDevCaps : Win32cr::Devices::Tapi::LINEDEVCAPS*) : Int32
+    C.lineGetDevCapsA(hLineApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpLineDevCaps)
+  end
+
+  def lineGetDevCapsW(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpLineDevCaps : Win32cr::Devices::Tapi::LINEDEVCAPS*) : Int32
+    C.lineGetDevCapsW(hLineApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpLineDevCaps)
+  end
+
+  def lineGetDevConfig(dwDeviceID : UInt32, lpDeviceConfig : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    C.lineGetDevConfig(dwDeviceID, lpDeviceConfig, lpszDeviceClass)
+  end
+
+  def lineGetDevConfigA(dwDeviceID : UInt32, lpDeviceConfig : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    C.lineGetDevConfigA(dwDeviceID, lpDeviceConfig, lpszDeviceClass)
+  end
+
+  def lineGetDevConfigW(dwDeviceID : UInt32, lpDeviceConfig : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    C.lineGetDevConfigW(dwDeviceID, lpDeviceConfig, lpszDeviceClass)
+  end
+
+  def lineGetGroupListA(hLine : UInt32, lpGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    C.lineGetGroupListA(hLine, lpGroupList)
+  end
+
+  def lineGetGroupListW(hLine : UInt32, lpGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    C.lineGetGroupListW(hLine, lpGroupList)
+  end
+
+  def lineGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+    C.lineGetIcon(dwDeviceID, lpszDeviceClass, lphIcon)
+  end
+
+  def lineGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+    C.lineGetIconA(dwDeviceID, lpszDeviceClass, lphIcon)
+  end
+
+  def lineGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : LibC::IntPtrT*) : Int32
+    C.lineGetIconW(dwDeviceID, lpszDeviceClass, lphIcon)
+  end
+
+  def lineGetID(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    C.lineGetID(hLine, dwAddressID, hCall, dwSelect, lpDeviceID, lpszDeviceClass)
+  end
+
+  def lineGetIDA(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    C.lineGetIDA(hLine, dwAddressID, hCall, dwSelect, lpDeviceID, lpszDeviceClass)
+  end
+
+  def lineGetIDW(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    C.lineGetIDW(hLine, dwAddressID, hCall, dwSelect, lpDeviceID, lpszDeviceClass)
+  end
+
+  def lineGetLineDevStatus(hLine : UInt32, lpLineDevStatus : Win32cr::Devices::Tapi::LINEDEVSTATUS*) : Int32
+    C.lineGetLineDevStatus(hLine, lpLineDevStatus)
+  end
+
+  def lineGetLineDevStatusA(hLine : UInt32, lpLineDevStatus : Win32cr::Devices::Tapi::LINEDEVSTATUS*) : Int32
+    C.lineGetLineDevStatusA(hLine, lpLineDevStatus)
+  end
+
+  def lineGetLineDevStatusW(hLine : UInt32, lpLineDevStatus : Win32cr::Devices::Tapi::LINEDEVSTATUS*) : Int32
+    C.lineGetLineDevStatusW(hLine, lpLineDevStatus)
+  end
+
+  def lineGetMessage(hLineApp : UInt32, lpMessage : Win32cr::Devices::Tapi::LINEMESSAGE*, dwTimeout : UInt32) : Int32
+    C.lineGetMessage(hLineApp, lpMessage, dwTimeout)
+  end
+
+  def lineGetNewCalls(hLine : UInt32, dwAddressID : UInt32, dwSelect : UInt32, lpCallList : Win32cr::Devices::Tapi::LINECALLLIST*) : Int32
+    C.lineGetNewCalls(hLine, dwAddressID, dwSelect, lpCallList)
+  end
+
+  def lineGetNumRings(hLine : UInt32, dwAddressID : UInt32, lpdwNumRings : UInt32*) : Int32
+    C.lineGetNumRings(hLine, dwAddressID, lpdwNumRings)
+  end
+
+  def lineGetProviderList(dwAPIVersion : UInt32, lpProviderList : Win32cr::Devices::Tapi::LINEPROVIDERLIST*) : Int32
+    C.lineGetProviderList(dwAPIVersion, lpProviderList)
+  end
+
+  def lineGetProviderListA(dwAPIVersion : UInt32, lpProviderList : Win32cr::Devices::Tapi::LINEPROVIDERLIST*) : Int32
+    C.lineGetProviderListA(dwAPIVersion, lpProviderList)
+  end
+
+  def lineGetProviderListW(dwAPIVersion : UInt32, lpProviderList : Win32cr::Devices::Tapi::LINEPROVIDERLIST*) : Int32
+    C.lineGetProviderListW(dwAPIVersion, lpProviderList)
+  end
+
+  def lineGetProxyStatus(hLineApp : UInt32, dwDeviceID : UInt32, dwAppAPIVersion : UInt32, lpLineProxyReqestList : Win32cr::Devices::Tapi::LINEPROXYREQUESTLIST*) : Int32
+    C.lineGetProxyStatus(hLineApp, dwDeviceID, dwAppAPIVersion, lpLineProxyReqestList)
+  end
+
+  def lineGetQueueInfo(hLine : UInt32, dwQueueID : UInt32, lpLineQueueInfo : Win32cr::Devices::Tapi::LINEQUEUEINFO*) : Int32
+    C.lineGetQueueInfo(hLine, dwQueueID, lpLineQueueInfo)
+  end
+
+  def lineGetQueueListA(hLine : UInt32, lpGroupID : LibC::GUID*, lpQueueList : Win32cr::Devices::Tapi::LINEQUEUELIST*) : Int32
+    C.lineGetQueueListA(hLine, lpGroupID, lpQueueList)
+  end
+
+  def lineGetQueueListW(hLine : UInt32, lpGroupID : LibC::GUID*, lpQueueList : Win32cr::Devices::Tapi::LINEQUEUELIST*) : Int32
+    C.lineGetQueueListW(hLine, lpGroupID, lpQueueList)
+  end
+
+  def lineGetRequest(hLineApp : UInt32, dwRequestMode : UInt32, lpRequestBuffer : Void*) : Int32
+    C.lineGetRequest(hLineApp, dwRequestMode, lpRequestBuffer)
+  end
+
+  def lineGetRequestA(hLineApp : UInt32, dwRequestMode : UInt32, lpRequestBuffer : Void*) : Int32
+    C.lineGetRequestA(hLineApp, dwRequestMode, lpRequestBuffer)
+  end
+
+  def lineGetRequestW(hLineApp : UInt32, dwRequestMode : UInt32, lpRequestBuffer : Void*) : Int32
+    C.lineGetRequestW(hLineApp, dwRequestMode, lpRequestBuffer)
+  end
+
+  def lineGetStatusMessages(hLine : UInt32, lpdwLineStates : UInt32*, lpdwAddressStates : UInt32*) : Int32
+    C.lineGetStatusMessages(hLine, lpdwLineStates, lpdwAddressStates)
+  end
+
+  def lineGetTranslateCaps(hLineApp : UInt32, dwAPIVersion : UInt32, lpTranslateCaps : Win32cr::Devices::Tapi::LINETRANSLATECAPS*) : Int32
+    C.lineGetTranslateCaps(hLineApp, dwAPIVersion, lpTranslateCaps)
+  end
+
+  def lineGetTranslateCapsA(hLineApp : UInt32, dwAPIVersion : UInt32, lpTranslateCaps : Win32cr::Devices::Tapi::LINETRANSLATECAPS*) : Int32
+    C.lineGetTranslateCapsA(hLineApp, dwAPIVersion, lpTranslateCaps)
+  end
+
+  def lineGetTranslateCapsW(hLineApp : UInt32, dwAPIVersion : UInt32, lpTranslateCaps : Win32cr::Devices::Tapi::LINETRANSLATECAPS*) : Int32
+    C.lineGetTranslateCapsW(hLineApp, dwAPIVersion, lpTranslateCaps)
+  end
+
+  def lineHandoff(hCall : UInt32, lpszFileName : Win32cr::Foundation::PSTR, dwMediaMode : UInt32) : Int32
+    C.lineHandoff(hCall, lpszFileName, dwMediaMode)
+  end
+
+  def lineHandoffA(hCall : UInt32, lpszFileName : Win32cr::Foundation::PSTR, dwMediaMode : UInt32) : Int32
+    C.lineHandoffA(hCall, lpszFileName, dwMediaMode)
+  end
+
+  def lineHandoffW(hCall : UInt32, lpszFileName : Win32cr::Foundation::PWSTR, dwMediaMode : UInt32) : Int32
+    C.lineHandoffW(hCall, lpszFileName, dwMediaMode)
+  end
+
+  def lineHold(hCall : UInt32) : Int32
+    C.lineHold(hCall)
+  end
+
+  def lineInitialize(lphLineApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::LINECALLBACK, lpszAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*) : Int32
+    C.lineInitialize(lphLineApp, hInstance, lpfnCallback, lpszAppName, lpdwNumDevs)
+  end
+
+  def lineInitializeExA(lphLineApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::LINECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpLineInitializeExParams : Win32cr::Devices::Tapi::LINEINITIALIZEEXPARAMS*) : Int32
+    C.lineInitializeExA(lphLineApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpLineInitializeExParams)
+  end
+
+  def lineInitializeExW(lphLineApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::LINECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PWSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpLineInitializeExParams : Win32cr::Devices::Tapi::LINEINITIALIZEEXPARAMS*) : Int32
+    C.lineInitializeExW(lphLineApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpLineInitializeExParams)
+  end
+
+  def lineMakeCall(hLine : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineMakeCall(hLine, lphCall, lpszDestAddress, dwCountryCode, lpCallParams)
+  end
+
+  def lineMakeCallA(hLine : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineMakeCallA(hLine, lphCall, lpszDestAddress, dwCountryCode, lpCallParams)
+  end
+
+  def lineMakeCallW(hLine : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineMakeCallW(hLine, lphCall, lpszDestAddress, dwCountryCode, lpCallParams)
+  end
+
+  def lineMonitorDigits(hCall : UInt32, dwDigitModes : UInt32) : Int32
+    C.lineMonitorDigits(hCall, dwDigitModes)
+  end
+
+  def lineMonitorMedia(hCall : UInt32, dwMediaModes : UInt32) : Int32
+    C.lineMonitorMedia(hCall, dwMediaModes)
+  end
+
+  def lineMonitorTones(hCall : UInt32, lpToneList : Win32cr::Devices::Tapi::LINEMONITORTONE*, dwNumEntries : UInt32) : Int32
+    C.lineMonitorTones(hCall, lpToneList, dwNumEntries)
+  end
+
+  def lineNegotiateAPIVersion(hLineApp : UInt32, dwDeviceID : UInt32, dwAPILowVersion : UInt32, dwAPIHighVersion : UInt32, lpdwAPIVersion : UInt32*, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*) : Int32
+    C.lineNegotiateAPIVersion(hLineApp, dwDeviceID, dwAPILowVersion, dwAPIHighVersion, lpdwAPIVersion, lpExtensionID)
+  end
+
+  def lineNegotiateExtVersion(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtLowVersion : UInt32, dwExtHighVersion : UInt32, lpdwExtVersion : UInt32*) : Int32
+    C.lineNegotiateExtVersion(hLineApp, dwDeviceID, dwAPIVersion, dwExtLowVersion, dwExtHighVersion, lpdwExtVersion)
+  end
+
+  def lineOpen(hLineApp : UInt32, dwDeviceID : UInt32, lphLine : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivileges : UInt32, dwMediaModes : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineOpen(hLineApp, dwDeviceID, lphLine, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivileges, dwMediaModes, lpCallParams)
+  end
+
+  def lineOpenA(hLineApp : UInt32, dwDeviceID : UInt32, lphLine : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivileges : UInt32, dwMediaModes : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineOpenA(hLineApp, dwDeviceID, lphLine, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivileges, dwMediaModes, lpCallParams)
+  end
+
+  def lineOpenW(hLineApp : UInt32, dwDeviceID : UInt32, lphLine : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivileges : UInt32, dwMediaModes : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineOpenW(hLineApp, dwDeviceID, lphLine, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivileges, dwMediaModes, lpCallParams)
+  end
+
+  def linePark(hCall : UInt32, dwParkMode : UInt32, lpszDirAddress : Win32cr::Foundation::PSTR, lpNonDirAddress : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    C.linePark(hCall, dwParkMode, lpszDirAddress, lpNonDirAddress)
+  end
+
+  def lineParkA(hCall : UInt32, dwParkMode : UInt32, lpszDirAddress : Win32cr::Foundation::PSTR, lpNonDirAddress : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    C.lineParkA(hCall, dwParkMode, lpszDirAddress, lpNonDirAddress)
+  end
+
+  def lineParkW(hCall : UInt32, dwParkMode : UInt32, lpszDirAddress : Win32cr::Foundation::PWSTR, lpNonDirAddress : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    C.lineParkW(hCall, dwParkMode, lpszDirAddress, lpNonDirAddress)
+  end
+
+  def linePickup(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, lpszGroupID : Win32cr::Foundation::PSTR) : Int32
+    C.linePickup(hLine, dwAddressID, lphCall, lpszDestAddress, lpszGroupID)
+  end
+
+  def linePickupA(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, lpszGroupID : Win32cr::Foundation::PSTR) : Int32
+    C.linePickupA(hLine, dwAddressID, lphCall, lpszDestAddress, lpszGroupID)
+  end
+
+  def linePickupW(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PWSTR, lpszGroupID : Win32cr::Foundation::PWSTR) : Int32
+    C.linePickupW(hLine, dwAddressID, lphCall, lpszDestAddress, lpszGroupID)
+  end
+
+  def linePrepareAddToConference(hConfCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.linePrepareAddToConference(hConfCall, lphConsultCall, lpCallParams)
+  end
+
+  def linePrepareAddToConferenceA(hConfCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.linePrepareAddToConferenceA(hConfCall, lphConsultCall, lpCallParams)
+  end
+
+  def linePrepareAddToConferenceW(hConfCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.linePrepareAddToConferenceW(hConfCall, lphConsultCall, lpCallParams)
+  end
+
+  def lineProxyMessage(hLine : UInt32, hCall : UInt32, dwMsg : UInt32, dwParam1 : UInt32, dwParam2 : UInt32, dwParam3 : UInt32) : Int32
+    C.lineProxyMessage(hLine, hCall, dwMsg, dwParam1, dwParam2, dwParam3)
+  end
+
+  def lineProxyResponse(hLine : UInt32, lpProxyRequest : Win32cr::Devices::Tapi::LINEPROXYREQUEST*, dwResult : UInt32) : Int32
+    C.lineProxyResponse(hLine, lpProxyRequest, dwResult)
+  end
+
+  def lineRedirect(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    C.lineRedirect(hCall, lpszDestAddress, dwCountryCode)
+  end
+
+  def lineRedirectA(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    C.lineRedirectA(hCall, lpszDestAddress, dwCountryCode)
+  end
+
+  def lineRedirectW(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32) : Int32
+    C.lineRedirectW(hCall, lpszDestAddress, dwCountryCode)
+  end
+
+  def lineRegisterRequestRecipient(hLineApp : UInt32, dwRegistrationInstance : UInt32, dwRequestMode : UInt32, bEnable : UInt32) : Int32
+    C.lineRegisterRequestRecipient(hLineApp, dwRegistrationInstance, dwRequestMode, bEnable)
+  end
+
+  def lineReleaseUserUserInfo(hCall : UInt32) : Int32
+    C.lineReleaseUserUserInfo(hCall)
+  end
+
+  def lineRemoveFromConference(hCall : UInt32) : Int32
+    C.lineRemoveFromConference(hCall)
+  end
+
+  def lineRemoveProvider(dwPermanentProviderID : UInt32, hwndOwner : Win32cr::Foundation::HWND) : Int32
+    C.lineRemoveProvider(dwPermanentProviderID, hwndOwner)
+  end
+
+  def lineSecureCall(hCall : UInt32) : Int32
+    C.lineSecureCall(hCall)
+  end
+
+  def lineSendUserUserInfo(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    C.lineSendUserUserInfo(hCall, lpsUserUserInfo, dwSize)
+  end
+
+  def lineSetAgentActivity(hLine : UInt32, dwAddressID : UInt32, dwActivityID : UInt32) : Int32
+    C.lineSetAgentActivity(hLine, dwAddressID, dwActivityID)
+  end
+
+  def lineSetAgentGroup(hLine : UInt32, dwAddressID : UInt32, lpAgentGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    C.lineSetAgentGroup(hLine, dwAddressID, lpAgentGroupList)
+  end
+
+  def lineSetAgentMeasurementPeriod(hLine : UInt32, hAgent : UInt32, dwMeasurementPeriod : UInt32) : Int32
+    C.lineSetAgentMeasurementPeriod(hLine, hAgent, dwMeasurementPeriod)
+  end
+
+  def lineSetAgentSessionState(hLine : UInt32, hAgentSession : UInt32, dwAgentSessionState : UInt32, dwNextAgentSessionState : UInt32) : Int32
+    C.lineSetAgentSessionState(hLine, hAgentSession, dwAgentSessionState, dwNextAgentSessionState)
+  end
+
+  def lineSetAgentStateEx(hLine : UInt32, hAgent : UInt32, dwAgentState : UInt32, dwNextAgentState : UInt32) : Int32
+    C.lineSetAgentStateEx(hLine, hAgent, dwAgentState, dwNextAgentState)
+  end
+
+  def lineSetAgentState(hLine : UInt32, dwAddressID : UInt32, dwAgentState : UInt32, dwNextAgentState : UInt32) : Int32
+    C.lineSetAgentState(hLine, dwAddressID, dwAgentState, dwNextAgentState)
+  end
+
+  def lineSetAppPriority(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpszExtensionName : Win32cr::Foundation::PSTR, dwPriority : UInt32) : Int32
+    C.lineSetAppPriority(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpszExtensionName, dwPriority)
+  end
+
+  def lineSetAppPriorityA(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpszExtensionName : Win32cr::Foundation::PSTR, dwPriority : UInt32) : Int32
+    C.lineSetAppPriorityA(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpszExtensionName, dwPriority)
+  end
+
+  def lineSetAppPriorityW(lpszAppFilename : Win32cr::Foundation::PWSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpszExtensionName : Win32cr::Foundation::PWSTR, dwPriority : UInt32) : Int32
+    C.lineSetAppPriorityW(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpszExtensionName, dwPriority)
+  end
+
+  def lineSetAppSpecific(hCall : UInt32, dwAppSpecific : UInt32) : Int32
+    C.lineSetAppSpecific(hCall, dwAppSpecific)
+  end
+
+  def lineSetCallData(hCall : UInt32, lpCallData : Void*, dwSize : UInt32) : Int32
+    C.lineSetCallData(hCall, lpCallData, dwSize)
+  end
+
+  def lineSetCallParams(hCall : UInt32, dwBearerMode : UInt32, dwMinRate : UInt32, dwMaxRate : UInt32, lpDialParams : Win32cr::Devices::Tapi::LINEDIALPARAMS*) : Int32
+    C.lineSetCallParams(hCall, dwBearerMode, dwMinRate, dwMaxRate, lpDialParams)
+  end
+
+  def lineSetCallPrivilege(hCall : UInt32, dwCallPrivilege : UInt32) : Int32
+    C.lineSetCallPrivilege(hCall, dwCallPrivilege)
+  end
+
+  def lineSetCallQualityOfService(hCall : UInt32, lpSendingFlowspec : Void*, dwSendingFlowspecSize : UInt32, lpReceivingFlowspec : Void*, dwReceivingFlowspecSize : UInt32) : Int32
+    C.lineSetCallQualityOfService(hCall, lpSendingFlowspec, dwSendingFlowspecSize, lpReceivingFlowspec, dwReceivingFlowspecSize)
+  end
+
+  def lineSetCallTreatment(hCall : UInt32, dwTreatment : UInt32) : Int32
+    C.lineSetCallTreatment(hCall, dwTreatment)
+  end
+
+  def lineSetCurrentLocation(hLineApp : UInt32, dwLocation : UInt32) : Int32
+    C.lineSetCurrentLocation(hLineApp, dwLocation)
+  end
+
+  def lineSetDevConfig(dwDeviceID : UInt32, lpDeviceConfig : Void*, dwSize : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    C.lineSetDevConfig(dwDeviceID, lpDeviceConfig, dwSize, lpszDeviceClass)
+  end
+
+  def lineSetDevConfigA(dwDeviceID : UInt32, lpDeviceConfig : Void*, dwSize : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    C.lineSetDevConfigA(dwDeviceID, lpDeviceConfig, dwSize, lpszDeviceClass)
+  end
+
+  def lineSetDevConfigW(dwDeviceID : UInt32, lpDeviceConfig : Void*, dwSize : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    C.lineSetDevConfigW(dwDeviceID, lpDeviceConfig, dwSize, lpszDeviceClass)
+  end
+
+  def lineSetLineDevStatus(hLine : UInt32, dwStatusToChange : UInt32, fStatus : UInt32) : Int32
+    C.lineSetLineDevStatus(hLine, dwStatusToChange, fStatus)
+  end
+
+  def lineSetMediaControl(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDigitList : Win32cr::Devices::Tapi::LINEMEDIACONTROLDIGIT*, dwDigitNumEntries : UInt32, lpMediaList : Win32cr::Devices::Tapi::LINEMEDIACONTROLMEDIA*, dwMediaNumEntries : UInt32, lpToneList : Win32cr::Devices::Tapi::LINEMEDIACONTROLTONE*, dwToneNumEntries : UInt32, lpCallStateList : Win32cr::Devices::Tapi::LINEMEDIACONTROLCALLSTATE*, dwCallStateNumEntries : UInt32) : Int32
+    C.lineSetMediaControl(hLine, dwAddressID, hCall, dwSelect, lpDigitList, dwDigitNumEntries, lpMediaList, dwMediaNumEntries, lpToneList, dwToneNumEntries, lpCallStateList, dwCallStateNumEntries)
+  end
+
+  def lineSetMediaMode(hCall : UInt32, dwMediaModes : UInt32) : Int32
+    C.lineSetMediaMode(hCall, dwMediaModes)
+  end
+
+  def lineSetQueueMeasurementPeriod(hLine : UInt32, dwQueueID : UInt32, dwMeasurementPeriod : UInt32) : Int32
+    C.lineSetQueueMeasurementPeriod(hLine, dwQueueID, dwMeasurementPeriod)
+  end
+
+  def lineSetNumRings(hLine : UInt32, dwAddressID : UInt32, dwNumRings : UInt32) : Int32
+    C.lineSetNumRings(hLine, dwAddressID, dwNumRings)
+  end
+
+  def lineSetStatusMessages(hLine : UInt32, dwLineStates : UInt32, dwAddressStates : UInt32) : Int32
+    C.lineSetStatusMessages(hLine, dwLineStates, dwAddressStates)
+  end
+
+  def lineSetTerminal(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, dwTerminalModes : UInt32, dwTerminalID : UInt32, bEnable : UInt32) : Int32
+    C.lineSetTerminal(hLine, dwAddressID, hCall, dwSelect, dwTerminalModes, dwTerminalID, bEnable)
+  end
+
+  def lineSetTollList(hLineApp : UInt32, dwDeviceID : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwTollListOption : UInt32) : Int32
+    C.lineSetTollList(hLineApp, dwDeviceID, lpszAddressIn, dwTollListOption)
+  end
+
+  def lineSetTollListA(hLineApp : UInt32, dwDeviceID : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwTollListOption : UInt32) : Int32
+    C.lineSetTollListA(hLineApp, dwDeviceID, lpszAddressIn, dwTollListOption)
+  end
+
+  def lineSetTollListW(hLineApp : UInt32, dwDeviceID : UInt32, lpszAddressInW : Win32cr::Foundation::PWSTR, dwTollListOption : UInt32) : Int32
+    C.lineSetTollListW(hLineApp, dwDeviceID, lpszAddressInW, dwTollListOption)
+  end
+
+  def lineSetupConference(hCall : UInt32, hLine : UInt32, lphConfCall : UInt32*, lphConsultCall : UInt32*, dwNumParties : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineSetupConference(hCall, hLine, lphConfCall, lphConsultCall, dwNumParties, lpCallParams)
+  end
+
+  def lineSetupConferenceA(hCall : UInt32, hLine : UInt32, lphConfCall : UInt32*, lphConsultCall : UInt32*, dwNumParties : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineSetupConferenceA(hCall, hLine, lphConfCall, lphConsultCall, dwNumParties, lpCallParams)
+  end
+
+  def lineSetupConferenceW(hCall : UInt32, hLine : UInt32, lphConfCall : UInt32*, lphConsultCall : UInt32*, dwNumParties : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineSetupConferenceW(hCall, hLine, lphConfCall, lphConsultCall, dwNumParties, lpCallParams)
+  end
+
+  def lineSetupTransfer(hCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineSetupTransfer(hCall, lphConsultCall, lpCallParams)
+  end
+
+  def lineSetupTransferA(hCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineSetupTransferA(hCall, lphConsultCall, lpCallParams)
+  end
+
+  def lineSetupTransferW(hCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    C.lineSetupTransferW(hCall, lphConsultCall, lpCallParams)
+  end
+
+  def lineShutdown(hLineApp : UInt32) : Int32
+    C.lineShutdown(hLineApp)
+  end
+
+  def lineSwapHold(hActiveCall : UInt32, hHeldCall : UInt32) : Int32
+    C.lineSwapHold(hActiveCall, hHeldCall)
+  end
+
+  def lineTranslateAddress(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwCard : UInt32, dwTranslateOptions : UInt32, lpTranslateOutput : Win32cr::Devices::Tapi::LINETRANSLATEOUTPUT*) : Int32
+    C.lineTranslateAddress(hLineApp, dwDeviceID, dwAPIVersion, lpszAddressIn, dwCard, dwTranslateOptions, lpTranslateOutput)
+  end
+
+  def lineTranslateAddressA(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwCard : UInt32, dwTranslateOptions : UInt32, lpTranslateOutput : Win32cr::Devices::Tapi::LINETRANSLATEOUTPUT*) : Int32
+    C.lineTranslateAddressA(hLineApp, dwDeviceID, dwAPIVersion, lpszAddressIn, dwCard, dwTranslateOptions, lpTranslateOutput)
+  end
+
+  def lineTranslateAddressW(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, lpszAddressIn : Win32cr::Foundation::PWSTR, dwCard : UInt32, dwTranslateOptions : UInt32, lpTranslateOutput : Win32cr::Devices::Tapi::LINETRANSLATEOUTPUT*) : Int32
+    C.lineTranslateAddressW(hLineApp, dwDeviceID, dwAPIVersion, lpszAddressIn, dwCard, dwTranslateOptions, lpTranslateOutput)
+  end
+
+  def lineTranslateDialog(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszAddressIn : Win32cr::Foundation::PSTR) : Int32
+    C.lineTranslateDialog(hLineApp, dwDeviceID, dwAPIVersion, hwndOwner, lpszAddressIn)
+  end
+
+  def lineTranslateDialogA(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszAddressIn : Win32cr::Foundation::PSTR) : Int32
+    C.lineTranslateDialogA(hLineApp, dwDeviceID, dwAPIVersion, hwndOwner, lpszAddressIn)
+  end
+
+  def lineTranslateDialogW(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszAddressIn : Win32cr::Foundation::PWSTR) : Int32
+    C.lineTranslateDialogW(hLineApp, dwDeviceID, dwAPIVersion, hwndOwner, lpszAddressIn)
+  end
+
+  def lineUncompleteCall(hLine : UInt32, dwCompletionID : UInt32) : Int32
+    C.lineUncompleteCall(hLine, dwCompletionID)
+  end
+
+  def lineUnhold(hCall : UInt32) : Int32
+    C.lineUnhold(hCall)
+  end
+
+  def lineUnpark(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR) : Int32
+    C.lineUnpark(hLine, dwAddressID, lphCall, lpszDestAddress)
+  end
+
+  def lineUnparkA(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR) : Int32
+    C.lineUnparkA(hLine, dwAddressID, lphCall, lpszDestAddress)
+  end
+
+  def lineUnparkW(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PWSTR) : Int32
+    C.lineUnparkW(hLine, dwAddressID, lphCall, lpszDestAddress)
+  end
+
+  def phoneClose(hPhone : UInt32) : Int32
+    C.phoneClose(hPhone)
+  end
+
+  def phoneConfigDialog(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    C.phoneConfigDialog(dwDeviceID, hwndOwner, lpszDeviceClass)
+  end
+
+  def phoneConfigDialogA(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    C.phoneConfigDialogA(dwDeviceID, hwndOwner, lpszDeviceClass)
+  end
+
+  def phoneConfigDialogW(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    C.phoneConfigDialogW(dwDeviceID, hwndOwner, lpszDeviceClass)
+  end
+
+  def phoneDevSpecific(hPhone : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
+    C.phoneDevSpecific(hPhone, lpParams, dwSize)
+  end
+
+  def phoneGetButtonInfo(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    C.phoneGetButtonInfo(hPhone, dwButtonLampID, lpButtonInfo)
+  end
+
+  def phoneGetButtonInfoA(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    C.phoneGetButtonInfoA(hPhone, dwButtonLampID, lpButtonInfo)
+  end
+
+  def phoneGetButtonInfoW(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    C.phoneGetButtonInfoW(hPhone, dwButtonLampID, lpButtonInfo)
+  end
+
+  def phoneGetData(hPhone : UInt32, dwDataID : UInt32, lpData : Void*, dwSize : UInt32) : Int32
+    C.phoneGetData(hPhone, dwDataID, lpData, dwSize)
+  end
+
+  def phoneGetDevCaps(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpPhoneCaps : Win32cr::Devices::Tapi::PHONECAPS*) : Int32
+    C.phoneGetDevCaps(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpPhoneCaps)
+  end
+
+  def phoneGetDevCapsA(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpPhoneCaps : Win32cr::Devices::Tapi::PHONECAPS*) : Int32
+    C.phoneGetDevCapsA(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpPhoneCaps)
+  end
+
+  def phoneGetDevCapsW(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpPhoneCaps : Win32cr::Devices::Tapi::PHONECAPS*) : Int32
+    C.phoneGetDevCapsW(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpPhoneCaps)
+  end
+
+  def phoneGetDisplay(hPhone : UInt32, lpDisplay : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    C.phoneGetDisplay(hPhone, lpDisplay)
+  end
+
+  def phoneGetGain(hPhone : UInt32, dwHookSwitchDev : UInt32, lpdwGain : UInt32*) : Int32
+    C.phoneGetGain(hPhone, dwHookSwitchDev, lpdwGain)
+  end
+
+  def phoneGetHookSwitch(hPhone : UInt32, lpdwHookSwitchDevs : UInt32*) : Int32
+    C.phoneGetHookSwitch(hPhone, lpdwHookSwitchDevs)
+  end
+
+  def phoneGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+    C.phoneGetIcon(dwDeviceID, lpszDeviceClass, lphIcon)
+  end
+
+  def phoneGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+    C.phoneGetIconA(dwDeviceID, lpszDeviceClass, lphIcon)
+  end
+
+  def phoneGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : LibC::IntPtrT*) : Int32
+    C.phoneGetIconW(dwDeviceID, lpszDeviceClass, lphIcon)
+  end
+
+  def phoneGetID(hPhone : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    C.phoneGetID(hPhone, lpDeviceID, lpszDeviceClass)
+  end
+
+  def phoneGetIDA(hPhone : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    C.phoneGetIDA(hPhone, lpDeviceID, lpszDeviceClass)
+  end
+
+  def phoneGetIDW(hPhone : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    C.phoneGetIDW(hPhone, lpDeviceID, lpszDeviceClass)
+  end
+
+  def phoneGetLamp(hPhone : UInt32, dwButtonLampID : UInt32, lpdwLampMode : UInt32*) : Int32
+    C.phoneGetLamp(hPhone, dwButtonLampID, lpdwLampMode)
+  end
+
+  def phoneGetMessage(hPhoneApp : UInt32, lpMessage : Win32cr::Devices::Tapi::PHONEMESSAGE*, dwTimeout : UInt32) : Int32
+    C.phoneGetMessage(hPhoneApp, lpMessage, dwTimeout)
+  end
+
+  def phoneGetRing(hPhone : UInt32, lpdwRingMode : UInt32*, lpdwVolume : UInt32*) : Int32
+    C.phoneGetRing(hPhone, lpdwRingMode, lpdwVolume)
+  end
+
+  def phoneGetStatus(hPhone : UInt32, lpPhoneStatus : Win32cr::Devices::Tapi::PHONESTATUS*) : Int32
+    C.phoneGetStatus(hPhone, lpPhoneStatus)
+  end
+
+  def phoneGetStatusA(hPhone : UInt32, lpPhoneStatus : Win32cr::Devices::Tapi::PHONESTATUS*) : Int32
+    C.phoneGetStatusA(hPhone, lpPhoneStatus)
+  end
+
+  def phoneGetStatusW(hPhone : UInt32, lpPhoneStatus : Win32cr::Devices::Tapi::PHONESTATUS*) : Int32
+    C.phoneGetStatusW(hPhone, lpPhoneStatus)
+  end
+
+  def phoneGetStatusMessages(hPhone : UInt32, lpdwPhoneStates : UInt32*, lpdwButtonModes : UInt32*, lpdwButtonStates : UInt32*) : Int32
+    C.phoneGetStatusMessages(hPhone, lpdwPhoneStates, lpdwButtonModes, lpdwButtonStates)
+  end
+
+  def phoneGetVolume(hPhone : UInt32, dwHookSwitchDev : UInt32, lpdwVolume : UInt32*) : Int32
+    C.phoneGetVolume(hPhone, dwHookSwitchDev, lpdwVolume)
+  end
+
+  def phoneInitialize(lphPhoneApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::PHONECALLBACK, lpszAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*) : Int32
+    C.phoneInitialize(lphPhoneApp, hInstance, lpfnCallback, lpszAppName, lpdwNumDevs)
+  end
+
+  def phoneInitializeExA(lphPhoneApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::PHONECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpPhoneInitializeExParams : Win32cr::Devices::Tapi::PHONEINITIALIZEEXPARAMS*) : Int32
+    C.phoneInitializeExA(lphPhoneApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpPhoneInitializeExParams)
+  end
+
+  def phoneInitializeExW(lphPhoneApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::PHONECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PWSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpPhoneInitializeExParams : Win32cr::Devices::Tapi::PHONEINITIALIZEEXPARAMS*) : Int32
+    C.phoneInitializeExW(lphPhoneApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpPhoneInitializeExParams)
+  end
+
+  def phoneNegotiateAPIVersion(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPILowVersion : UInt32, dwAPIHighVersion : UInt32, lpdwAPIVersion : UInt32*, lpExtensionID : Win32cr::Devices::Tapi::PHONEEXTENSIONID*) : Int32
+    C.phoneNegotiateAPIVersion(hPhoneApp, dwDeviceID, dwAPILowVersion, dwAPIHighVersion, lpdwAPIVersion, lpExtensionID)
+  end
+
+  def phoneNegotiateExtVersion(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtLowVersion : UInt32, dwExtHighVersion : UInt32, lpdwExtVersion : UInt32*) : Int32
+    C.phoneNegotiateExtVersion(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtLowVersion, dwExtHighVersion, lpdwExtVersion)
+  end
+
+  def phoneOpen(hPhoneApp : UInt32, dwDeviceID : UInt32, lphPhone : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivilege : UInt32) : Int32
+    C.phoneOpen(hPhoneApp, dwDeviceID, lphPhone, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivilege)
+  end
+
+  def phoneSetButtonInfo(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    C.phoneSetButtonInfo(hPhone, dwButtonLampID, lpButtonInfo)
+  end
+
+  def phoneSetButtonInfoA(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    C.phoneSetButtonInfoA(hPhone, dwButtonLampID, lpButtonInfo)
+  end
+
+  def phoneSetButtonInfoW(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    C.phoneSetButtonInfoW(hPhone, dwButtonLampID, lpButtonInfo)
+  end
+
+  def phoneSetData(hPhone : UInt32, dwDataID : UInt32, lpData : Void*, dwSize : UInt32) : Int32
+    C.phoneSetData(hPhone, dwDataID, lpData, dwSize)
+  end
+
+  def phoneSetDisplay(hPhone : UInt32, dwRow : UInt32, dwColumn : UInt32, lpsDisplay : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    C.phoneSetDisplay(hPhone, dwRow, dwColumn, lpsDisplay, dwSize)
+  end
+
+  def phoneSetGain(hPhone : UInt32, dwHookSwitchDev : UInt32, dwGain : UInt32) : Int32
+    C.phoneSetGain(hPhone, dwHookSwitchDev, dwGain)
+  end
+
+  def phoneSetHookSwitch(hPhone : UInt32, dwHookSwitchDevs : UInt32, dwHookSwitchMode : UInt32) : Int32
+    C.phoneSetHookSwitch(hPhone, dwHookSwitchDevs, dwHookSwitchMode)
+  end
+
+  def phoneSetLamp(hPhone : UInt32, dwButtonLampID : UInt32, dwLampMode : UInt32) : Int32
+    C.phoneSetLamp(hPhone, dwButtonLampID, dwLampMode)
+  end
+
+  def phoneSetRing(hPhone : UInt32, dwRingMode : UInt32, dwVolume : UInt32) : Int32
+    C.phoneSetRing(hPhone, dwRingMode, dwVolume)
+  end
+
+  def phoneSetStatusMessages(hPhone : UInt32, dwPhoneStates : UInt32, dwButtonModes : UInt32, dwButtonStates : UInt32) : Int32
+    C.phoneSetStatusMessages(hPhone, dwPhoneStates, dwButtonModes, dwButtonStates)
+  end
+
+  def phoneSetVolume(hPhone : UInt32, dwHookSwitchDev : UInt32, dwVolume : UInt32) : Int32
+    C.phoneSetVolume(hPhone, dwHookSwitchDev, dwVolume)
+  end
+
+  def phoneShutdown(hPhoneApp : UInt32) : Int32
+    C.phoneShutdown(hPhoneApp)
+  end
+
+  def tapiGetLocationInfo(lpszCountryCode : UInt8*, lpszCityCode : UInt8*) : Int32
+    C.tapiGetLocationInfo(lpszCountryCode, lpszCityCode)
+  end
+
+  def tapiGetLocationInfoA(lpszCountryCode : UInt8*, lpszCityCode : UInt8*) : Int32
+    C.tapiGetLocationInfoA(lpszCountryCode, lpszCityCode)
+  end
+
+  def tapiGetLocationInfoW(lpszCountryCodeW : UInt16*, lpszCityCodeW : UInt16*) : Int32
+    C.tapiGetLocationInfoW(lpszCountryCodeW, lpszCityCodeW)
+  end
+
+  def tapiRequestDrop(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM) : Int32
+    C.tapiRequestDrop(hwnd, wRequestID)
+  end
+
+  def tapiRequestMakeCall(lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
+    C.tapiRequestMakeCall(lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+  end
+
+  def tapiRequestMakeCallA(lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
+    C.tapiRequestMakeCallA(lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+  end
+
+  def tapiRequestMakeCallW(lpszDestAddress : Win32cr::Foundation::PWSTR, lpszAppName : Win32cr::Foundation::PWSTR, lpszCalledParty : Win32cr::Foundation::PWSTR, lpszComment : Win32cr::Foundation::PWSTR) : Int32
+    C.tapiRequestMakeCallW(lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+  end
+
+  def tapiRequestMediaCall(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceID : Win32cr::Foundation::PSTR, dwSize : UInt32, dwSecure : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
+    C.tapiRequestMediaCall(hwnd, wRequestID, lpszDeviceClass, lpDeviceID, dwSize, dwSecure, lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+  end
+
+  def tapiRequestMediaCallA(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceID : Win32cr::Foundation::PSTR, dwSize : UInt32, dwSecure : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
+    C.tapiRequestMediaCallA(hwnd, wRequestID, lpszDeviceClass, lpDeviceID, dwSize, dwSecure, lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+  end
+
+  def tapiRequestMediaCallW(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM, lpszDeviceClass : Win32cr::Foundation::PWSTR, lpDeviceID : Win32cr::Foundation::PWSTR, dwSize : UInt32, dwSecure : UInt32, lpszDestAddress : Win32cr::Foundation::PWSTR, lpszAppName : Win32cr::Foundation::PWSTR, lpszCalledParty : Win32cr::Foundation::PWSTR, lpszComment : Win32cr::Foundation::PWSTR) : Int32
+    C.tapiRequestMediaCallW(hwnd, wRequestID, lpszDeviceClass, lpDeviceID, dwSize, dwSecure, lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+  end
+
+  def openTnefStream(lpvSupport : Void*, lpStream : Void*, lpszStreamName : Int8*, ulFlags : UInt32, lpMessage : Void*, wKeyVal : UInt16, lppTNEF : Void**) : Win32cr::Foundation::HRESULT
+    C.OpenTnefStream(lpvSupport, lpStream, lpszStreamName, ulFlags, lpMessage, wKeyVal, lppTNEF)
+  end
+
+  def openTnefStreamEx(lpvSupport : Void*, lpStream : Void*, lpszStreamName : Int8*, ulFlags : UInt32, lpMessage : Void*, wKeyVal : UInt16, lpAdressBook : Void*, lppTNEF : Void**) : Win32cr::Foundation::HRESULT
+    C.OpenTnefStreamEx(lpvSupport, lpStream, lpszStreamName, ulFlags, lpMessage, wKeyVal, lpAdressBook, lppTNEF)
+  end
+
+  def getTnefStreamCodepage(lpStream : Void*, lpulCodepage : UInt32*, lpulSubCodepage : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetTnefStreamCodepage(lpStream, lpulCodepage, lpulSubCodepage)
+  end
+
   @[Link("tapi32")]
   @[Link("mapi32")]
   lib C
+    # :nodoc:
     fun lineAccept(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun lineAddProvider(lpszProviderFilename : Win32cr::Foundation::PSTR, hwndOwner : Win32cr::Foundation::HWND, lpdwPermanentProviderID : UInt32*) : Int32
 
+    # :nodoc:
     fun lineAddProviderA(lpszProviderFilename : Win32cr::Foundation::PSTR, hwndOwner : Win32cr::Foundation::HWND, lpdwPermanentProviderID : UInt32*) : Int32
 
+    # :nodoc:
     fun lineAddProviderW(lpszProviderFilename : Win32cr::Foundation::PWSTR, hwndOwner : Win32cr::Foundation::HWND, lpdwPermanentProviderID : UInt32*) : Int32
 
+    # :nodoc:
     fun lineAddToConference(hConfCall : UInt32, hConsultCall : UInt32) : Int32
 
+    # :nodoc:
     fun lineAgentSpecific(hLine : UInt32, dwAddressID : UInt32, dwAgentExtensionIDIndex : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun lineAnswer(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun lineBlindTransfer(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
 
+    # :nodoc:
     fun lineBlindTransferA(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
 
+    # :nodoc:
     fun lineBlindTransferW(hCall : UInt32, lpszDestAddressW : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32) : Int32
 
+    # :nodoc:
     fun lineClose(hLine : UInt32) : Int32
 
+    # :nodoc:
     fun lineCompleteCall(hCall : UInt32, lpdwCompletionID : UInt32*, dwCompletionMode : UInt32, dwMessageID : UInt32) : Int32
 
+    # :nodoc:
     fun lineCompleteTransfer(hCall : UInt32, hConsultCall : UInt32, lphConfCall : UInt32*, dwTransferMode : UInt32) : Int32
 
+    # :nodoc:
     fun lineConfigDialog(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun lineConfigDialogA(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun lineConfigDialogW(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun lineConfigDialogEdit(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceConfigIn : Void*, dwSize : UInt32, lpDeviceConfigOut : Win32cr::Devices::Tapi::VARSTRING*) : Int32
 
+    # :nodoc:
     fun lineConfigDialogEditA(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceConfigIn : Void*, dwSize : UInt32, lpDeviceConfigOut : Win32cr::Devices::Tapi::VARSTRING*) : Int32
 
+    # :nodoc:
     fun lineConfigDialogEditW(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PWSTR, lpDeviceConfigIn : Void*, dwSize : UInt32, lpDeviceConfigOut : Win32cr::Devices::Tapi::VARSTRING*) : Int32
 
+    # :nodoc:
     fun lineConfigProvider(hwndOwner : Win32cr::Foundation::HWND, dwPermanentProviderID : UInt32) : Int32
 
+    # :nodoc:
     fun lineCreateAgentW(hLine : UInt32, lpszAgentID : Win32cr::Foundation::PWSTR, lpszAgentPIN : Win32cr::Foundation::PWSTR, lphAgent : UInt32*) : Int32
 
+    # :nodoc:
     fun lineCreateAgentA(hLine : UInt32, lpszAgentID : Win32cr::Foundation::PSTR, lpszAgentPIN : Win32cr::Foundation::PSTR, lphAgent : UInt32*) : Int32
 
+    # :nodoc:
     fun lineCreateAgentSessionW(hLine : UInt32, hAgent : UInt32, lpszAgentPIN : Win32cr::Foundation::PWSTR, dwWorkingAddressID : UInt32, lpGroupID : LibC::GUID*, lphAgentSession : UInt32*) : Int32
 
+    # :nodoc:
     fun lineCreateAgentSessionA(hLine : UInt32, hAgent : UInt32, lpszAgentPIN : Win32cr::Foundation::PSTR, dwWorkingAddressID : UInt32, lpGroupID : LibC::GUID*, lphAgentSession : UInt32*) : Int32
 
+    # :nodoc:
     fun lineDeallocateCall(hCall : UInt32) : Int32
 
+    # :nodoc:
     fun lineDevSpecific(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun lineDevSpecificFeature(hLine : UInt32, dwFeature : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun lineDial(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
 
+    # :nodoc:
     fun lineDialA(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
 
+    # :nodoc:
     fun lineDialW(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32) : Int32
 
+    # :nodoc:
     fun lineDrop(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun lineForward(hLine : UInt32, bAllAddresses : UInt32, dwAddressID : UInt32, lpForwardList : Win32cr::Devices::Tapi::LINEFORWARDLIST*, dwNumRingsNoAnswer : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineForwardA(hLine : UInt32, bAllAddresses : UInt32, dwAddressID : UInt32, lpForwardList : Win32cr::Devices::Tapi::LINEFORWARDLIST*, dwNumRingsNoAnswer : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineForwardW(hLine : UInt32, bAllAddresses : UInt32, dwAddressID : UInt32, lpForwardList : Win32cr::Devices::Tapi::LINEFORWARDLIST*, dwNumRingsNoAnswer : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineGatherDigits(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt8*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
 
+    # :nodoc:
     fun lineGatherDigitsA(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt8*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
 
+    # :nodoc:
     fun lineGatherDigitsW(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt16*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PWSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
 
+    # :nodoc:
     fun lineGenerateDigits(hCall : UInt32, dwDigitMode : UInt32, lpszDigits : Win32cr::Foundation::PSTR, dwDuration : UInt32) : Int32
 
+    # :nodoc:
     fun lineGenerateDigitsA(hCall : UInt32, dwDigitMode : UInt32, lpszDigits : Win32cr::Foundation::PSTR, dwDuration : UInt32) : Int32
 
+    # :nodoc:
     fun lineGenerateDigitsW(hCall : UInt32, dwDigitMode : UInt32, lpszDigits : Win32cr::Foundation::PWSTR, dwDuration : UInt32) : Int32
 
+    # :nodoc:
     fun lineGenerateTone(hCall : UInt32, dwToneMode : UInt32, dwDuration : UInt32, dwNumTones : UInt32, lpTones : Win32cr::Devices::Tapi::LINEGENERATETONE*) : Int32
 
+    # :nodoc:
     fun lineGetAddressCaps(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpAddressCaps : Win32cr::Devices::Tapi::LINEADDRESSCAPS*) : Int32
 
+    # :nodoc:
     fun lineGetAddressCapsA(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpAddressCaps : Win32cr::Devices::Tapi::LINEADDRESSCAPS*) : Int32
 
+    # :nodoc:
     fun lineGetAddressCapsW(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpAddressCaps : Win32cr::Devices::Tapi::LINEADDRESSCAPS*) : Int32
 
+    # :nodoc:
     fun lineGetAddressID(hLine : UInt32, lpdwAddressID : UInt32*, dwAddressMode : UInt32, lpsAddress : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun lineGetAddressIDA(hLine : UInt32, lpdwAddressID : UInt32*, dwAddressMode : UInt32, lpsAddress : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun lineGetAddressIDW(hLine : UInt32, lpdwAddressID : UInt32*, dwAddressMode : UInt32, lpsAddress : Win32cr::Foundation::PWSTR, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun lineGetAddressStatus(hLine : UInt32, dwAddressID : UInt32, lpAddressStatus : Win32cr::Devices::Tapi::LINEADDRESSSTATUS*) : Int32
 
+    # :nodoc:
     fun lineGetAddressStatusA(hLine : UInt32, dwAddressID : UInt32, lpAddressStatus : Win32cr::Devices::Tapi::LINEADDRESSSTATUS*) : Int32
 
+    # :nodoc:
     fun lineGetAddressStatusW(hLine : UInt32, dwAddressID : UInt32, lpAddressStatus : Win32cr::Devices::Tapi::LINEADDRESSSTATUS*) : Int32
 
+    # :nodoc:
     fun lineGetAgentActivityListA(hLine : UInt32, dwAddressID : UInt32, lpAgentActivityList : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST*) : Int32
 
+    # :nodoc:
     fun lineGetAgentActivityListW(hLine : UInt32, dwAddressID : UInt32, lpAgentActivityList : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST*) : Int32
 
+    # :nodoc:
     fun lineGetAgentCapsA(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAppAPIVersion : UInt32, lpAgentCaps : Win32cr::Devices::Tapi::LINEAGENTCAPS*) : Int32
 
+    # :nodoc:
     fun lineGetAgentCapsW(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAppAPIVersion : UInt32, lpAgentCaps : Win32cr::Devices::Tapi::LINEAGENTCAPS*) : Int32
 
+    # :nodoc:
     fun lineGetAgentGroupListA(hLine : UInt32, dwAddressID : UInt32, lpAgentGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
 
+    # :nodoc:
     fun lineGetAgentGroupListW(hLine : UInt32, dwAddressID : UInt32, lpAgentGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
 
+    # :nodoc:
     fun lineGetAgentInfo(hLine : UInt32, hAgent : UInt32, lpAgentInfo : Win32cr::Devices::Tapi::LINEAGENTINFO*) : Int32
 
+    # :nodoc:
     fun lineGetAgentSessionInfo(hLine : UInt32, hAgentSession : UInt32, lpAgentSessionInfo : Win32cr::Devices::Tapi::LINEAGENTSESSIONINFO*) : Int32
 
+    # :nodoc:
     fun lineGetAgentSessionList(hLine : UInt32, hAgent : UInt32, lpAgentSessionList : Win32cr::Devices::Tapi::LINEAGENTSESSIONLIST*) : Int32
 
+    # :nodoc:
     fun lineGetAgentStatusA(hLine : UInt32, dwAddressID : UInt32, lpAgentStatus : Win32cr::Devices::Tapi::LINEAGENTSTATUS*) : Int32
 
+    # :nodoc:
     fun lineGetAgentStatusW(hLine : UInt32, dwAddressID : UInt32, lpAgentStatus : Win32cr::Devices::Tapi::LINEAGENTSTATUS*) : Int32
 
+    # :nodoc:
     fun lineGetAppPriority(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpExtensionName : Win32cr::Devices::Tapi::VARSTRING*, lpdwPriority : UInt32*) : Int32
 
+    # :nodoc:
     fun lineGetAppPriorityA(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpExtensionName : Win32cr::Devices::Tapi::VARSTRING*, lpdwPriority : UInt32*) : Int32
 
+    # :nodoc:
     fun lineGetAppPriorityW(lpszAppFilename : Win32cr::Foundation::PWSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpExtensionName : Win32cr::Devices::Tapi::VARSTRING*, lpdwPriority : UInt32*) : Int32
 
+    # :nodoc:
     fun lineGetCallInfo(hCall : UInt32, lpCallInfo : Win32cr::Devices::Tapi::LINECALLINFO*) : Int32
 
+    # :nodoc:
     fun lineGetCallInfoA(hCall : UInt32, lpCallInfo : Win32cr::Devices::Tapi::LINECALLINFO*) : Int32
 
+    # :nodoc:
     fun lineGetCallInfoW(hCall : UInt32, lpCallInfo : Win32cr::Devices::Tapi::LINECALLINFO*) : Int32
 
+    # :nodoc:
     fun lineGetCallStatus(hCall : UInt32, lpCallStatus : Win32cr::Devices::Tapi::LINECALLSTATUS*) : Int32
 
+    # :nodoc:
     fun lineGetConfRelatedCalls(hCall : UInt32, lpCallList : Win32cr::Devices::Tapi::LINECALLLIST*) : Int32
 
+    # :nodoc:
     fun lineGetCountry(dwCountryID : UInt32, dwAPIVersion : UInt32, lpLineCountryList : Win32cr::Devices::Tapi::LINECOUNTRYLIST*) : Int32
 
+    # :nodoc:
     fun lineGetCountryA(dwCountryID : UInt32, dwAPIVersion : UInt32, lpLineCountryList : Win32cr::Devices::Tapi::LINECOUNTRYLIST*) : Int32
 
+    # :nodoc:
     fun lineGetCountryW(dwCountryID : UInt32, dwAPIVersion : UInt32, lpLineCountryList : Win32cr::Devices::Tapi::LINECOUNTRYLIST*) : Int32
 
+    # :nodoc:
     fun lineGetDevCaps(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpLineDevCaps : Win32cr::Devices::Tapi::LINEDEVCAPS*) : Int32
 
+    # :nodoc:
     fun lineGetDevCapsA(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpLineDevCaps : Win32cr::Devices::Tapi::LINEDEVCAPS*) : Int32
 
+    # :nodoc:
     fun lineGetDevCapsW(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpLineDevCaps : Win32cr::Devices::Tapi::LINEDEVCAPS*) : Int32
 
+    # :nodoc:
     fun lineGetDevConfig(dwDeviceID : UInt32, lpDeviceConfig : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun lineGetDevConfigA(dwDeviceID : UInt32, lpDeviceConfig : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun lineGetDevConfigW(dwDeviceID : UInt32, lpDeviceConfig : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun lineGetGroupListA(hLine : UInt32, lpGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
 
+    # :nodoc:
     fun lineGetGroupListW(hLine : UInt32, lpGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
 
+    # :nodoc:
     fun lineGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun lineGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun lineGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun lineGetID(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun lineGetIDA(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun lineGetIDW(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun lineGetLineDevStatus(hLine : UInt32, lpLineDevStatus : Win32cr::Devices::Tapi::LINEDEVSTATUS*) : Int32
 
+    # :nodoc:
     fun lineGetLineDevStatusA(hLine : UInt32, lpLineDevStatus : Win32cr::Devices::Tapi::LINEDEVSTATUS*) : Int32
 
+    # :nodoc:
     fun lineGetLineDevStatusW(hLine : UInt32, lpLineDevStatus : Win32cr::Devices::Tapi::LINEDEVSTATUS*) : Int32
 
+    # :nodoc:
     fun lineGetMessage(hLineApp : UInt32, lpMessage : Win32cr::Devices::Tapi::LINEMESSAGE*, dwTimeout : UInt32) : Int32
 
+    # :nodoc:
     fun lineGetNewCalls(hLine : UInt32, dwAddressID : UInt32, dwSelect : UInt32, lpCallList : Win32cr::Devices::Tapi::LINECALLLIST*) : Int32
 
+    # :nodoc:
     fun lineGetNumRings(hLine : UInt32, dwAddressID : UInt32, lpdwNumRings : UInt32*) : Int32
 
+    # :nodoc:
     fun lineGetProviderList(dwAPIVersion : UInt32, lpProviderList : Win32cr::Devices::Tapi::LINEPROVIDERLIST*) : Int32
 
+    # :nodoc:
     fun lineGetProviderListA(dwAPIVersion : UInt32, lpProviderList : Win32cr::Devices::Tapi::LINEPROVIDERLIST*) : Int32
 
+    # :nodoc:
     fun lineGetProviderListW(dwAPIVersion : UInt32, lpProviderList : Win32cr::Devices::Tapi::LINEPROVIDERLIST*) : Int32
 
+    # :nodoc:
     fun lineGetProxyStatus(hLineApp : UInt32, dwDeviceID : UInt32, dwAppAPIVersion : UInt32, lpLineProxyReqestList : Win32cr::Devices::Tapi::LINEPROXYREQUESTLIST*) : Int32
 
+    # :nodoc:
     fun lineGetQueueInfo(hLine : UInt32, dwQueueID : UInt32, lpLineQueueInfo : Win32cr::Devices::Tapi::LINEQUEUEINFO*) : Int32
 
+    # :nodoc:
     fun lineGetQueueListA(hLine : UInt32, lpGroupID : LibC::GUID*, lpQueueList : Win32cr::Devices::Tapi::LINEQUEUELIST*) : Int32
 
+    # :nodoc:
     fun lineGetQueueListW(hLine : UInt32, lpGroupID : LibC::GUID*, lpQueueList : Win32cr::Devices::Tapi::LINEQUEUELIST*) : Int32
 
+    # :nodoc:
     fun lineGetRequest(hLineApp : UInt32, dwRequestMode : UInt32, lpRequestBuffer : Void*) : Int32
 
+    # :nodoc:
     fun lineGetRequestA(hLineApp : UInt32, dwRequestMode : UInt32, lpRequestBuffer : Void*) : Int32
 
+    # :nodoc:
     fun lineGetRequestW(hLineApp : UInt32, dwRequestMode : UInt32, lpRequestBuffer : Void*) : Int32
 
+    # :nodoc:
     fun lineGetStatusMessages(hLine : UInt32, lpdwLineStates : UInt32*, lpdwAddressStates : UInt32*) : Int32
 
+    # :nodoc:
     fun lineGetTranslateCaps(hLineApp : UInt32, dwAPIVersion : UInt32, lpTranslateCaps : Win32cr::Devices::Tapi::LINETRANSLATECAPS*) : Int32
 
+    # :nodoc:
     fun lineGetTranslateCapsA(hLineApp : UInt32, dwAPIVersion : UInt32, lpTranslateCaps : Win32cr::Devices::Tapi::LINETRANSLATECAPS*) : Int32
 
+    # :nodoc:
     fun lineGetTranslateCapsW(hLineApp : UInt32, dwAPIVersion : UInt32, lpTranslateCaps : Win32cr::Devices::Tapi::LINETRANSLATECAPS*) : Int32
 
+    # :nodoc:
     fun lineHandoff(hCall : UInt32, lpszFileName : Win32cr::Foundation::PSTR, dwMediaMode : UInt32) : Int32
 
+    # :nodoc:
     fun lineHandoffA(hCall : UInt32, lpszFileName : Win32cr::Foundation::PSTR, dwMediaMode : UInt32) : Int32
 
+    # :nodoc:
     fun lineHandoffW(hCall : UInt32, lpszFileName : Win32cr::Foundation::PWSTR, dwMediaMode : UInt32) : Int32
 
+    # :nodoc:
     fun lineHold(hCall : UInt32) : Int32
 
+    # :nodoc:
     fun lineInitialize(lphLineApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::LINECALLBACK, lpszAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*) : Int32
 
+    # :nodoc:
     fun lineInitializeExA(lphLineApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::LINECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpLineInitializeExParams : Win32cr::Devices::Tapi::LINEINITIALIZEEXPARAMS*) : Int32
 
+    # :nodoc:
     fun lineInitializeExW(lphLineApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::LINECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PWSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpLineInitializeExParams : Win32cr::Devices::Tapi::LINEINITIALIZEEXPARAMS*) : Int32
 
+    # :nodoc:
     fun lineMakeCall(hLine : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineMakeCallA(hLine : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineMakeCallW(hLine : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineMonitorDigits(hCall : UInt32, dwDigitModes : UInt32) : Int32
 
+    # :nodoc:
     fun lineMonitorMedia(hCall : UInt32, dwMediaModes : UInt32) : Int32
 
+    # :nodoc:
     fun lineMonitorTones(hCall : UInt32, lpToneList : Win32cr::Devices::Tapi::LINEMONITORTONE*, dwNumEntries : UInt32) : Int32
 
+    # :nodoc:
     fun lineNegotiateAPIVersion(hLineApp : UInt32, dwDeviceID : UInt32, dwAPILowVersion : UInt32, dwAPIHighVersion : UInt32, lpdwAPIVersion : UInt32*, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*) : Int32
 
+    # :nodoc:
     fun lineNegotiateExtVersion(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtLowVersion : UInt32, dwExtHighVersion : UInt32, lpdwExtVersion : UInt32*) : Int32
 
+    # :nodoc:
     fun lineOpen(hLineApp : UInt32, dwDeviceID : UInt32, lphLine : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivileges : UInt32, dwMediaModes : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineOpenA(hLineApp : UInt32, dwDeviceID : UInt32, lphLine : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivileges : UInt32, dwMediaModes : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineOpenW(hLineApp : UInt32, dwDeviceID : UInt32, lphLine : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivileges : UInt32, dwMediaModes : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun linePark(hCall : UInt32, dwParkMode : UInt32, lpszDirAddress : Win32cr::Foundation::PSTR, lpNonDirAddress : Win32cr::Devices::Tapi::VARSTRING*) : Int32
 
+    # :nodoc:
     fun lineParkA(hCall : UInt32, dwParkMode : UInt32, lpszDirAddress : Win32cr::Foundation::PSTR, lpNonDirAddress : Win32cr::Devices::Tapi::VARSTRING*) : Int32
 
+    # :nodoc:
     fun lineParkW(hCall : UInt32, dwParkMode : UInt32, lpszDirAddress : Win32cr::Foundation::PWSTR, lpNonDirAddress : Win32cr::Devices::Tapi::VARSTRING*) : Int32
 
+    # :nodoc:
     fun linePickup(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, lpszGroupID : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun linePickupA(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, lpszGroupID : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun linePickupW(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PWSTR, lpszGroupID : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun linePrepareAddToConference(hConfCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun linePrepareAddToConferenceA(hConfCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun linePrepareAddToConferenceW(hConfCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineProxyMessage(hLine : UInt32, hCall : UInt32, dwMsg : UInt32, dwParam1 : UInt32, dwParam2 : UInt32, dwParam3 : UInt32) : Int32
 
+    # :nodoc:
     fun lineProxyResponse(hLine : UInt32, lpProxyRequest : Win32cr::Devices::Tapi::LINEPROXYREQUEST*, dwResult : UInt32) : Int32
 
+    # :nodoc:
     fun lineRedirect(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
 
+    # :nodoc:
     fun lineRedirectA(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
 
+    # :nodoc:
     fun lineRedirectW(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32) : Int32
 
+    # :nodoc:
     fun lineRegisterRequestRecipient(hLineApp : UInt32, dwRegistrationInstance : UInt32, dwRequestMode : UInt32, bEnable : UInt32) : Int32
 
+    # :nodoc:
     fun lineReleaseUserUserInfo(hCall : UInt32) : Int32
 
+    # :nodoc:
     fun lineRemoveFromConference(hCall : UInt32) : Int32
 
+    # :nodoc:
     fun lineRemoveProvider(dwPermanentProviderID : UInt32, hwndOwner : Win32cr::Foundation::HWND) : Int32
 
+    # :nodoc:
     fun lineSecureCall(hCall : UInt32) : Int32
 
+    # :nodoc:
     fun lineSendUserUserInfo(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetAgentActivity(hLine : UInt32, dwAddressID : UInt32, dwActivityID : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetAgentGroup(hLine : UInt32, dwAddressID : UInt32, lpAgentGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
 
+    # :nodoc:
     fun lineSetAgentMeasurementPeriod(hLine : UInt32, hAgent : UInt32, dwMeasurementPeriod : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetAgentSessionState(hLine : UInt32, hAgentSession : UInt32, dwAgentSessionState : UInt32, dwNextAgentSessionState : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetAgentStateEx(hLine : UInt32, hAgent : UInt32, dwAgentState : UInt32, dwNextAgentState : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetAgentState(hLine : UInt32, dwAddressID : UInt32, dwAgentState : UInt32, dwNextAgentState : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetAppPriority(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpszExtensionName : Win32cr::Foundation::PSTR, dwPriority : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetAppPriorityA(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpszExtensionName : Win32cr::Foundation::PSTR, dwPriority : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetAppPriorityW(lpszAppFilename : Win32cr::Foundation::PWSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpszExtensionName : Win32cr::Foundation::PWSTR, dwPriority : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetAppSpecific(hCall : UInt32, dwAppSpecific : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetCallData(hCall : UInt32, lpCallData : Void*, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetCallParams(hCall : UInt32, dwBearerMode : UInt32, dwMinRate : UInt32, dwMaxRate : UInt32, lpDialParams : Win32cr::Devices::Tapi::LINEDIALPARAMS*) : Int32
 
+    # :nodoc:
     fun lineSetCallPrivilege(hCall : UInt32, dwCallPrivilege : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetCallQualityOfService(hCall : UInt32, lpSendingFlowspec : Void*, dwSendingFlowspecSize : UInt32, lpReceivingFlowspec : Void*, dwReceivingFlowspecSize : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetCallTreatment(hCall : UInt32, dwTreatment : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetCurrentLocation(hLineApp : UInt32, dwLocation : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetDevConfig(dwDeviceID : UInt32, lpDeviceConfig : Void*, dwSize : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun lineSetDevConfigA(dwDeviceID : UInt32, lpDeviceConfig : Void*, dwSize : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun lineSetDevConfigW(dwDeviceID : UInt32, lpDeviceConfig : Void*, dwSize : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun lineSetLineDevStatus(hLine : UInt32, dwStatusToChange : UInt32, fStatus : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetMediaControl(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDigitList : Win32cr::Devices::Tapi::LINEMEDIACONTROLDIGIT*, dwDigitNumEntries : UInt32, lpMediaList : Win32cr::Devices::Tapi::LINEMEDIACONTROLMEDIA*, dwMediaNumEntries : UInt32, lpToneList : Win32cr::Devices::Tapi::LINEMEDIACONTROLTONE*, dwToneNumEntries : UInt32, lpCallStateList : Win32cr::Devices::Tapi::LINEMEDIACONTROLCALLSTATE*, dwCallStateNumEntries : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetMediaMode(hCall : UInt32, dwMediaModes : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetQueueMeasurementPeriod(hLine : UInt32, dwQueueID : UInt32, dwMeasurementPeriod : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetNumRings(hLine : UInt32, dwAddressID : UInt32, dwNumRings : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetStatusMessages(hLine : UInt32, dwLineStates : UInt32, dwAddressStates : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetTerminal(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, dwTerminalModes : UInt32, dwTerminalID : UInt32, bEnable : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetTollList(hLineApp : UInt32, dwDeviceID : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwTollListOption : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetTollListA(hLineApp : UInt32, dwDeviceID : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwTollListOption : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetTollListW(hLineApp : UInt32, dwDeviceID : UInt32, lpszAddressInW : Win32cr::Foundation::PWSTR, dwTollListOption : UInt32) : Int32
 
+    # :nodoc:
     fun lineSetupConference(hCall : UInt32, hLine : UInt32, lphConfCall : UInt32*, lphConsultCall : UInt32*, dwNumParties : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineSetupConferenceA(hCall : UInt32, hLine : UInt32, lphConfCall : UInt32*, lphConsultCall : UInt32*, dwNumParties : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineSetupConferenceW(hCall : UInt32, hLine : UInt32, lphConfCall : UInt32*, lphConsultCall : UInt32*, dwNumParties : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineSetupTransfer(hCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineSetupTransferA(hCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineSetupTransferW(hCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
+    # :nodoc:
     fun lineShutdown(hLineApp : UInt32) : Int32
 
+    # :nodoc:
     fun lineSwapHold(hActiveCall : UInt32, hHeldCall : UInt32) : Int32
 
+    # :nodoc:
     fun lineTranslateAddress(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwCard : UInt32, dwTranslateOptions : UInt32, lpTranslateOutput : Win32cr::Devices::Tapi::LINETRANSLATEOUTPUT*) : Int32
 
+    # :nodoc:
     fun lineTranslateAddressA(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwCard : UInt32, dwTranslateOptions : UInt32, lpTranslateOutput : Win32cr::Devices::Tapi::LINETRANSLATEOUTPUT*) : Int32
 
+    # :nodoc:
     fun lineTranslateAddressW(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, lpszAddressIn : Win32cr::Foundation::PWSTR, dwCard : UInt32, dwTranslateOptions : UInt32, lpTranslateOutput : Win32cr::Devices::Tapi::LINETRANSLATEOUTPUT*) : Int32
 
+    # :nodoc:
     fun lineTranslateDialog(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszAddressIn : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun lineTranslateDialogA(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszAddressIn : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun lineTranslateDialogW(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszAddressIn : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun lineUncompleteCall(hLine : UInt32, dwCompletionID : UInt32) : Int32
 
+    # :nodoc:
     fun lineUnhold(hCall : UInt32) : Int32
 
+    # :nodoc:
     fun lineUnpark(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun lineUnparkA(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun lineUnparkW(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun phoneClose(hPhone : UInt32) : Int32
 
+    # :nodoc:
     fun phoneConfigDialog(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun phoneConfigDialogA(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun phoneConfigDialogW(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun phoneDevSpecific(hPhone : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun phoneGetButtonInfo(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
 
+    # :nodoc:
     fun phoneGetButtonInfoA(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
 
+    # :nodoc:
     fun phoneGetButtonInfoW(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
 
+    # :nodoc:
     fun phoneGetData(hPhone : UInt32, dwDataID : UInt32, lpData : Void*, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun phoneGetDevCaps(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpPhoneCaps : Win32cr::Devices::Tapi::PHONECAPS*) : Int32
 
+    # :nodoc:
     fun phoneGetDevCapsA(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpPhoneCaps : Win32cr::Devices::Tapi::PHONECAPS*) : Int32
 
+    # :nodoc:
     fun phoneGetDevCapsW(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpPhoneCaps : Win32cr::Devices::Tapi::PHONECAPS*) : Int32
 
+    # :nodoc:
     fun phoneGetDisplay(hPhone : UInt32, lpDisplay : Win32cr::Devices::Tapi::VARSTRING*) : Int32
 
+    # :nodoc:
     fun phoneGetGain(hPhone : UInt32, dwHookSwitchDev : UInt32, lpdwGain : UInt32*) : Int32
 
+    # :nodoc:
     fun phoneGetHookSwitch(hPhone : UInt32, lpdwHookSwitchDevs : UInt32*) : Int32
 
+    # :nodoc:
     fun phoneGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun phoneGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun phoneGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun phoneGetID(hPhone : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun phoneGetIDA(hPhone : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun phoneGetIDW(hPhone : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun phoneGetLamp(hPhone : UInt32, dwButtonLampID : UInt32, lpdwLampMode : UInt32*) : Int32
 
+    # :nodoc:
     fun phoneGetMessage(hPhoneApp : UInt32, lpMessage : Win32cr::Devices::Tapi::PHONEMESSAGE*, dwTimeout : UInt32) : Int32
 
+    # :nodoc:
     fun phoneGetRing(hPhone : UInt32, lpdwRingMode : UInt32*, lpdwVolume : UInt32*) : Int32
 
+    # :nodoc:
     fun phoneGetStatus(hPhone : UInt32, lpPhoneStatus : Win32cr::Devices::Tapi::PHONESTATUS*) : Int32
 
+    # :nodoc:
     fun phoneGetStatusA(hPhone : UInt32, lpPhoneStatus : Win32cr::Devices::Tapi::PHONESTATUS*) : Int32
 
+    # :nodoc:
     fun phoneGetStatusW(hPhone : UInt32, lpPhoneStatus : Win32cr::Devices::Tapi::PHONESTATUS*) : Int32
 
+    # :nodoc:
     fun phoneGetStatusMessages(hPhone : UInt32, lpdwPhoneStates : UInt32*, lpdwButtonModes : UInt32*, lpdwButtonStates : UInt32*) : Int32
 
+    # :nodoc:
     fun phoneGetVolume(hPhone : UInt32, dwHookSwitchDev : UInt32, lpdwVolume : UInt32*) : Int32
 
+    # :nodoc:
     fun phoneInitialize(lphPhoneApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::PHONECALLBACK, lpszAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*) : Int32
 
+    # :nodoc:
     fun phoneInitializeExA(lphPhoneApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::PHONECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpPhoneInitializeExParams : Win32cr::Devices::Tapi::PHONEINITIALIZEEXPARAMS*) : Int32
 
+    # :nodoc:
     fun phoneInitializeExW(lphPhoneApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::PHONECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PWSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpPhoneInitializeExParams : Win32cr::Devices::Tapi::PHONEINITIALIZEEXPARAMS*) : Int32
 
+    # :nodoc:
     fun phoneNegotiateAPIVersion(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPILowVersion : UInt32, dwAPIHighVersion : UInt32, lpdwAPIVersion : UInt32*, lpExtensionID : Win32cr::Devices::Tapi::PHONEEXTENSIONID*) : Int32
 
+    # :nodoc:
     fun phoneNegotiateExtVersion(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtLowVersion : UInt32, dwExtHighVersion : UInt32, lpdwExtVersion : UInt32*) : Int32
 
+    # :nodoc:
     fun phoneOpen(hPhoneApp : UInt32, dwDeviceID : UInt32, lphPhone : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivilege : UInt32) : Int32
 
+    # :nodoc:
     fun phoneSetButtonInfo(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
 
+    # :nodoc:
     fun phoneSetButtonInfoA(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
 
+    # :nodoc:
     fun phoneSetButtonInfoW(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
 
+    # :nodoc:
     fun phoneSetData(hPhone : UInt32, dwDataID : UInt32, lpData : Void*, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun phoneSetDisplay(hPhone : UInt32, dwRow : UInt32, dwColumn : UInt32, lpsDisplay : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
 
+    # :nodoc:
     fun phoneSetGain(hPhone : UInt32, dwHookSwitchDev : UInt32, dwGain : UInt32) : Int32
 
+    # :nodoc:
     fun phoneSetHookSwitch(hPhone : UInt32, dwHookSwitchDevs : UInt32, dwHookSwitchMode : UInt32) : Int32
 
+    # :nodoc:
     fun phoneSetLamp(hPhone : UInt32, dwButtonLampID : UInt32, dwLampMode : UInt32) : Int32
 
+    # :nodoc:
     fun phoneSetRing(hPhone : UInt32, dwRingMode : UInt32, dwVolume : UInt32) : Int32
 
+    # :nodoc:
     fun phoneSetStatusMessages(hPhone : UInt32, dwPhoneStates : UInt32, dwButtonModes : UInt32, dwButtonStates : UInt32) : Int32
 
+    # :nodoc:
     fun phoneSetVolume(hPhone : UInt32, dwHookSwitchDev : UInt32, dwVolume : UInt32) : Int32
 
+    # :nodoc:
     fun phoneShutdown(hPhoneApp : UInt32) : Int32
 
+    # :nodoc:
     fun tapiGetLocationInfo(lpszCountryCode : UInt8*, lpszCityCode : UInt8*) : Int32
 
+    # :nodoc:
     fun tapiGetLocationInfoA(lpszCountryCode : UInt8*, lpszCityCode : UInt8*) : Int32
 
+    # :nodoc:
     fun tapiGetLocationInfoW(lpszCountryCodeW : UInt16*, lpszCityCodeW : UInt16*) : Int32
 
+    # :nodoc:
     fun tapiRequestDrop(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM) : Int32
 
+    # :nodoc:
     fun tapiRequestMakeCall(lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun tapiRequestMakeCallA(lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun tapiRequestMakeCallW(lpszDestAddress : Win32cr::Foundation::PWSTR, lpszAppName : Win32cr::Foundation::PWSTR, lpszCalledParty : Win32cr::Foundation::PWSTR, lpszComment : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun tapiRequestMediaCall(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceID : Win32cr::Foundation::PSTR, dwSize : UInt32, dwSecure : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun tapiRequestMediaCallA(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceID : Win32cr::Foundation::PSTR, dwSize : UInt32, dwSecure : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun tapiRequestMediaCallW(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM, lpszDeviceClass : Win32cr::Foundation::PWSTR, lpDeviceID : Win32cr::Foundation::PWSTR, dwSize : UInt32, dwSecure : UInt32, lpszDestAddress : Win32cr::Foundation::PWSTR, lpszAppName : Win32cr::Foundation::PWSTR, lpszCalledParty : Win32cr::Foundation::PWSTR, lpszComment : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun OpenTnefStream(lpvSupport : Void*, lpStream : Void*, lpszStreamName : Int8*, ulFlags : UInt32, lpMessage : Void*, wKeyVal : UInt16, lppTNEF : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun OpenTnefStreamEx(lpvSupport : Void*, lpStream : Void*, lpszStreamName : Int8*, ulFlags : UInt32, lpMessage : Void*, wKeyVal : UInt16, lpAdressBook : Void*, lppTNEF : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetTnefStreamCodepage(lpStream : Void*, lpulCodepage : UInt32*, lpulSubCodepage : UInt32*) : Win32cr::Foundation::HRESULT
 
   end

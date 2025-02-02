@@ -3,6 +3,7 @@ require "./registry.cr"
 require "./threading.cr"
 
 module Win32cr::System::Power
+  extend self
   alias HPOWERNOTIFY = LibC::IntPtrT
   alias EFFECTIVE_POWER_MODE_CALLBACK = Proc(Win32cr::System::Power::EFFECTIVE_POWER_MODE, Void*, Void)
 
@@ -998,202 +999,687 @@ module Win32cr::System::Power
     end
   end
 
+  def callNtPowerInformation(information_level : Win32cr::System::Power::POWER_INFORMATION_LEVEL, input_buffer : Void*, input_buffer_length : UInt32, output_buffer : Void*, output_buffer_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    C.CallNtPowerInformation(information_level, input_buffer, input_buffer_length, output_buffer, output_buffer_length)
+  end
+
+  def getPwrCapabilities(lpspc : Win32cr::System::Power::SYSTEM_POWER_CAPABILITIES*) : Win32cr::Foundation::BOOLEAN
+    C.GetPwrCapabilities(lpspc)
+  end
+
+  def powerDeterminePlatformRoleEx(version : Win32cr::System::Power::POWER_PLATFORM_ROLE_VERSION) : Win32cr::System::Power::POWER_PLATFORM_ROLE
+    C.PowerDeterminePlatformRoleEx(version)
+  end
+
+  def powerRegisterSuspendResumeNotification(flags : UInt32, recipient : Win32cr::Foundation::HANDLE, registration_handle : Void**) : UInt32
+    C.PowerRegisterSuspendResumeNotification(flags, recipient, registration_handle)
+  end
+
+  def powerUnregisterSuspendResumeNotification(registration_handle : Win32cr::System::Power::HPOWERNOTIFY) : UInt32
+    C.PowerUnregisterSuspendResumeNotification(registration_handle)
+  end
+
+  def powerReadACValue(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, type__ : UInt32*, buffer : UInt8*, buffer_size : UInt32*) : UInt32
+    C.PowerReadACValue(root_power_key, scheme_guid, sub_group_of_power_settings_guid, power_setting_guid, type__, buffer, buffer_size)
+  end
+
+  def powerReadDCValue(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, type__ : UInt32*, buffer : UInt8*, buffer_size : UInt32*) : UInt32
+    C.PowerReadDCValue(root_power_key, scheme_guid, sub_group_of_power_settings_guid, power_setting_guid, type__, buffer, buffer_size)
+  end
+
+  def powerWriteACValueIndex(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, ac_value_index : UInt32) : UInt32
+    C.PowerWriteACValueIndex(root_power_key, scheme_guid, sub_group_of_power_settings_guid, power_setting_guid, ac_value_index)
+  end
+
+  def powerWriteDCValueIndex(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, dc_value_index : UInt32) : UInt32
+    C.PowerWriteDCValueIndex(root_power_key, scheme_guid, sub_group_of_power_settings_guid, power_setting_guid, dc_value_index)
+  end
+
+  def powerGetActiveScheme(user_root_power_key : Win32cr::System::Registry::HKEY, active_policy_guid : LibC::GUID**) : UInt32
+    C.PowerGetActiveScheme(user_root_power_key, active_policy_guid)
+  end
+
+  def powerSetActiveScheme(user_root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*) : UInt32
+    C.PowerSetActiveScheme(user_root_power_key, scheme_guid)
+  end
+
+  def powerSettingRegisterNotification(setting_guid : LibC::GUID*, flags : Win32cr::System::Power::POWER_SETTING_REGISTER_NOTIFICATION_FLAGS, recipient : Win32cr::Foundation::HANDLE, registration_handle : Void**) : UInt32
+    C.PowerSettingRegisterNotification(setting_guid, flags, recipient, registration_handle)
+  end
+
+  def powerSettingUnregisterNotification(registration_handle : Win32cr::System::Power::HPOWERNOTIFY) : UInt32
+    C.PowerSettingUnregisterNotification(registration_handle)
+  end
+
+  def powerRegisterForEffectivePowerModeNotifications(version : UInt32, callback : Win32cr::System::Power::EFFECTIVE_POWER_MODE_CALLBACK, context : Void*, registration_handle : Void**) : Win32cr::Foundation::HRESULT
+    C.PowerRegisterForEffectivePowerModeNotifications(version, callback, context, registration_handle)
+  end
+
+  def powerUnregisterFromEffectivePowerModeNotifications(registration_handle : Void*) : Win32cr::Foundation::HRESULT
+    C.PowerUnregisterFromEffectivePowerModeNotifications(registration_handle)
+  end
+
+  def getPwrDiskSpindownRange(puiMax : UInt32*, puiMin : UInt32*) : Win32cr::Foundation::BOOLEAN
+    C.GetPwrDiskSpindownRange(puiMax, puiMin)
+  end
+
+  def enumPwrSchemes(lpfn : Win32cr::System::Power::PWRSCHEMESENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOLEAN
+    C.EnumPwrSchemes(lpfn, lParam)
+  end
+
+  def readGlobalPwrPolicy(pGlobalPowerPolicy : Win32cr::System::Power::GLOBAL_POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
+    C.ReadGlobalPwrPolicy(pGlobalPowerPolicy)
+  end
+
+  def readPwrScheme(uiID : UInt32, pPowerPolicy : Win32cr::System::Power::POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
+    C.ReadPwrScheme(uiID, pPowerPolicy)
+  end
+
+  def writePwrScheme(puiID : UInt32*, lpszSchemeName : Win32cr::Foundation::PWSTR, lpszDescription : Win32cr::Foundation::PWSTR, lpScheme : Win32cr::System::Power::POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
+    C.WritePwrScheme(puiID, lpszSchemeName, lpszDescription, lpScheme)
+  end
+
+  def writeGlobalPwrPolicy(pGlobalPowerPolicy : Win32cr::System::Power::GLOBAL_POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
+    C.WriteGlobalPwrPolicy(pGlobalPowerPolicy)
+  end
+
+  def deletePwrScheme(uiID : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.DeletePwrScheme(uiID)
+  end
+
+  def getActivePwrScheme(puiID : UInt32*) : Win32cr::Foundation::BOOLEAN
+    C.GetActivePwrScheme(puiID)
+  end
+
+  def setActivePwrScheme(uiID : UInt32, pGlobalPowerPolicy : Win32cr::System::Power::GLOBAL_POWER_POLICY*, pPowerPolicy : Win32cr::System::Power::POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
+    C.SetActivePwrScheme(uiID, pGlobalPowerPolicy, pPowerPolicy)
+  end
+
+  def isPwrSuspendAllowed : Win32cr::Foundation::BOOLEAN
+    C.IsPwrSuspendAllowed
+  end
+
+  def isPwrHibernateAllowed : Win32cr::Foundation::BOOLEAN
+    C.IsPwrHibernateAllowed
+  end
+
+  def isPwrShutdownAllowed : Win32cr::Foundation::BOOLEAN
+    C.IsPwrShutdownAllowed
+  end
+
+  def isAdminOverrideActive(papp : Win32cr::System::Power::ADMINISTRATOR_POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
+    C.IsAdminOverrideActive(papp)
+  end
+
+  def setSuspendState(bHibernate : Win32cr::Foundation::BOOLEAN, bForce : Win32cr::Foundation::BOOLEAN, bWakeupEventsDisabled : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::BOOLEAN
+    C.SetSuspendState(bHibernate, bForce, bWakeupEventsDisabled)
+  end
+
+  def getCurrentPowerPolicies(pGlobalPowerPolicy : Win32cr::System::Power::GLOBAL_POWER_POLICY*, pPowerPolicy : Win32cr::System::Power::POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
+    C.GetCurrentPowerPolicies(pGlobalPowerPolicy, pPowerPolicy)
+  end
+
+  def canUserWritePwrScheme : Win32cr::Foundation::BOOLEAN
+    C.CanUserWritePwrScheme
+  end
+
+  def readProcessorPwrScheme(uiID : UInt32, pMachineProcessorPowerPolicy : Win32cr::System::Power::MACHINE_PROCESSOR_POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
+    C.ReadProcessorPwrScheme(uiID, pMachineProcessorPowerPolicy)
+  end
+
+  def writeProcessorPwrScheme(uiID : UInt32, pMachineProcessorPowerPolicy : Win32cr::System::Power::MACHINE_PROCESSOR_POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
+    C.WriteProcessorPwrScheme(uiID, pMachineProcessorPowerPolicy)
+  end
+
+  def validatePowerPolicies(pGlobalPowerPolicy : Win32cr::System::Power::GLOBAL_POWER_POLICY*, pPowerPolicy : Win32cr::System::Power::POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
+    C.ValidatePowerPolicies(pGlobalPowerPolicy, pPowerPolicy)
+  end
+
+  def powerIsSettingRangeDefined(sub_key_guid : LibC::GUID*, setting_guid : LibC::GUID*) : Win32cr::Foundation::BOOLEAN
+    C.PowerIsSettingRangeDefined(sub_key_guid, setting_guid)
+  end
+
+  def powerSettingAccessCheckEx(access_flags : Win32cr::System::Power::POWER_DATA_ACCESSOR, power_guid : LibC::GUID*, access_type : Win32cr::System::Registry::REG_SAM_FLAGS) : UInt32
+    C.PowerSettingAccessCheckEx(access_flags, power_guid, access_type)
+  end
+
+  def powerSettingAccessCheck(access_flags : Win32cr::System::Power::POWER_DATA_ACCESSOR, power_guid : LibC::GUID*) : UInt32
+    C.PowerSettingAccessCheck(access_flags, power_guid)
+  end
+
+  def powerReadACValueIndex(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, ac_value_index : UInt32*) : UInt32
+    C.PowerReadACValueIndex(root_power_key, scheme_guid, sub_group_of_power_settings_guid, power_setting_guid, ac_value_index)
+  end
+
+  def powerReadDCValueIndex(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, dc_value_index : UInt32*) : UInt32
+    C.PowerReadDCValueIndex(root_power_key, scheme_guid, sub_group_of_power_settings_guid, power_setting_guid, dc_value_index)
+  end
+
+  def powerReadFriendlyName(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32*) : UInt32
+    C.PowerReadFriendlyName(root_power_key, scheme_guid, sub_group_of_power_settings_guid, power_setting_guid, buffer, buffer_size)
+  end
+
+  def powerReadDescription(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32*) : UInt32
+    C.PowerReadDescription(root_power_key, scheme_guid, sub_group_of_power_settings_guid, power_setting_guid, buffer, buffer_size)
+  end
+
+  def powerReadPossibleValue(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, type__ : UInt32*, possible_setting_index : UInt32, buffer : UInt8*, buffer_size : UInt32*) : UInt32
+    C.PowerReadPossibleValue(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, type__, possible_setting_index, buffer, buffer_size)
+  end
+
+  def powerReadPossibleFriendlyName(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, possible_setting_index : UInt32, buffer : UInt8*, buffer_size : UInt32*) : UInt32
+    C.PowerReadPossibleFriendlyName(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, possible_setting_index, buffer, buffer_size)
+  end
+
+  def powerReadPossibleDescription(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, possible_setting_index : UInt32, buffer : UInt8*, buffer_size : UInt32*) : UInt32
+    C.PowerReadPossibleDescription(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, possible_setting_index, buffer, buffer_size)
+  end
+
+  def powerReadValueMin(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, value_minimum : UInt32*) : UInt32
+    C.PowerReadValueMin(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, value_minimum)
+  end
+
+  def powerReadValueMax(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, value_maximum : UInt32*) : UInt32
+    C.PowerReadValueMax(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, value_maximum)
+  end
+
+  def powerReadValueIncrement(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, value_increment : UInt32*) : UInt32
+    C.PowerReadValueIncrement(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, value_increment)
+  end
+
+  def powerReadValueUnitsSpecifier(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32*) : UInt32
+    C.PowerReadValueUnitsSpecifier(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, buffer, buffer_size)
+  end
+
+  def powerReadACDefaultIndex(root_power_key : Win32cr::System::Registry::HKEY, scheme_personality_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, ac_default_index : UInt32*) : UInt32
+    C.PowerReadACDefaultIndex(root_power_key, scheme_personality_guid, sub_group_of_power_settings_guid, power_setting_guid, ac_default_index)
+  end
+
+  def powerReadDCDefaultIndex(root_power_key : Win32cr::System::Registry::HKEY, scheme_personality_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, dc_default_index : UInt32*) : UInt32
+    C.PowerReadDCDefaultIndex(root_power_key, scheme_personality_guid, sub_group_of_power_settings_guid, power_setting_guid, dc_default_index)
+  end
+
+  def powerReadIconResourceSpecifier(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32*) : UInt32
+    C.PowerReadIconResourceSpecifier(root_power_key, scheme_guid, sub_group_of_power_settings_guid, power_setting_guid, buffer, buffer_size)
+  end
+
+  def powerReadSettingAttributes(sub_group_guid : LibC::GUID*, power_setting_guid : LibC::GUID*) : UInt32
+    C.PowerReadSettingAttributes(sub_group_guid, power_setting_guid)
+  end
+
+  def powerWriteFriendlyName(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32) : UInt32
+    C.PowerWriteFriendlyName(root_power_key, scheme_guid, sub_group_of_power_settings_guid, power_setting_guid, buffer, buffer_size)
+  end
+
+  def powerWriteDescription(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32) : UInt32
+    C.PowerWriteDescription(root_power_key, scheme_guid, sub_group_of_power_settings_guid, power_setting_guid, buffer, buffer_size)
+  end
+
+  def powerWritePossibleValue(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, type__ : UInt32, possible_setting_index : UInt32, buffer : UInt8*, buffer_size : UInt32) : UInt32
+    C.PowerWritePossibleValue(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, type__, possible_setting_index, buffer, buffer_size)
+  end
+
+  def powerWritePossibleFriendlyName(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, possible_setting_index : UInt32, buffer : UInt8*, buffer_size : UInt32) : UInt32
+    C.PowerWritePossibleFriendlyName(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, possible_setting_index, buffer, buffer_size)
+  end
+
+  def powerWritePossibleDescription(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, possible_setting_index : UInt32, buffer : UInt8*, buffer_size : UInt32) : UInt32
+    C.PowerWritePossibleDescription(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, possible_setting_index, buffer, buffer_size)
+  end
+
+  def powerWriteValueMin(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, value_minimum : UInt32) : UInt32
+    C.PowerWriteValueMin(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, value_minimum)
+  end
+
+  def powerWriteValueMax(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, value_maximum : UInt32) : UInt32
+    C.PowerWriteValueMax(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, value_maximum)
+  end
+
+  def powerWriteValueIncrement(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, value_increment : UInt32) : UInt32
+    C.PowerWriteValueIncrement(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, value_increment)
+  end
+
+  def powerWriteValueUnitsSpecifier(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32) : UInt32
+    C.PowerWriteValueUnitsSpecifier(root_power_key, sub_group_of_power_settings_guid, power_setting_guid, buffer, buffer_size)
+  end
+
+  def powerWriteACDefaultIndex(root_system_power_key : Win32cr::System::Registry::HKEY, scheme_personality_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, default_ac_index : UInt32) : UInt32
+    C.PowerWriteACDefaultIndex(root_system_power_key, scheme_personality_guid, sub_group_of_power_settings_guid, power_setting_guid, default_ac_index)
+  end
+
+  def powerWriteDCDefaultIndex(root_system_power_key : Win32cr::System::Registry::HKEY, scheme_personality_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, default_dc_index : UInt32) : UInt32
+    C.PowerWriteDCDefaultIndex(root_system_power_key, scheme_personality_guid, sub_group_of_power_settings_guid, power_setting_guid, default_dc_index)
+  end
+
+  def powerWriteIconResourceSpecifier(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32) : UInt32
+    C.PowerWriteIconResourceSpecifier(root_power_key, scheme_guid, sub_group_of_power_settings_guid, power_setting_guid, buffer, buffer_size)
+  end
+
+  def powerWriteSettingAttributes(sub_group_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, attributes : UInt32) : UInt32
+    C.PowerWriteSettingAttributes(sub_group_guid, power_setting_guid, attributes)
+  end
+
+  def powerDuplicateScheme(root_power_key : Win32cr::System::Registry::HKEY, source_scheme_guid : LibC::GUID*, destination_scheme_guid : LibC::GUID**) : UInt32
+    C.PowerDuplicateScheme(root_power_key, source_scheme_guid, destination_scheme_guid)
+  end
+
+  def powerImportPowerScheme(root_power_key : Win32cr::System::Registry::HKEY, import_file_name_path : Win32cr::Foundation::PWSTR, destination_scheme_guid : LibC::GUID**) : UInt32
+    C.PowerImportPowerScheme(root_power_key, import_file_name_path, destination_scheme_guid)
+  end
+
+  def powerDeleteScheme(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*) : UInt32
+    C.PowerDeleteScheme(root_power_key, scheme_guid)
+  end
+
+  def powerRemovePowerSetting(power_setting_sub_key_guid : LibC::GUID*, power_setting_guid : LibC::GUID*) : UInt32
+    C.PowerRemovePowerSetting(power_setting_sub_key_guid, power_setting_guid)
+  end
+
+  def powerCreateSetting(root_system_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*) : UInt32
+    C.PowerCreateSetting(root_system_power_key, sub_group_of_power_settings_guid, power_setting_guid)
+  end
+
+  def powerCreatePossibleSetting(root_system_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, possible_setting_index : UInt32) : UInt32
+    C.PowerCreatePossibleSetting(root_system_power_key, sub_group_of_power_settings_guid, power_setting_guid, possible_setting_index)
+  end
+
+  def powerEnumerate(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, access_flags : Win32cr::System::Power::POWER_DATA_ACCESSOR, index : UInt32, buffer : UInt8*, buffer_size : UInt32*) : UInt32
+    C.PowerEnumerate(root_power_key, scheme_guid, sub_group_of_power_settings_guid, access_flags, index, buffer, buffer_size)
+  end
+
+  def powerOpenUserPowerKey(phUserPowerKey : Win32cr::System::Registry::HKEY*, access : UInt32, open_existing : Win32cr::Foundation::BOOL) : UInt32
+    C.PowerOpenUserPowerKey(phUserPowerKey, access, open_existing)
+  end
+
+  def powerOpenSystemPowerKey(phSystemPowerKey : Win32cr::System::Registry::HKEY*, access : UInt32, open_existing : Win32cr::Foundation::BOOL) : UInt32
+    C.PowerOpenSystemPowerKey(phSystemPowerKey, access, open_existing)
+  end
+
+  def powerCanRestoreIndividualDefaultPowerScheme(scheme_guid : LibC::GUID*) : UInt32
+    C.PowerCanRestoreIndividualDefaultPowerScheme(scheme_guid)
+  end
+
+  def powerRestoreIndividualDefaultPowerScheme(scheme_guid : LibC::GUID*) : UInt32
+    C.PowerRestoreIndividualDefaultPowerScheme(scheme_guid)
+  end
+
+  def powerRestoreDefaultPowerSchemes : UInt32
+    C.PowerRestoreDefaultPowerSchemes
+  end
+
+  def powerReplaceDefaultPowerSchemes : UInt32
+    C.PowerReplaceDefaultPowerSchemes
+  end
+
+  def powerDeterminePlatformRole : Win32cr::System::Power::POWER_PLATFORM_ROLE
+    C.PowerDeterminePlatformRole
+  end
+
+  def devicePowerEnumDevices(query_index : UInt32, query_interpretation_flags : UInt32, query_flags : UInt32, pReturnBuffer : UInt8*, pBufferSize : UInt32*) : Win32cr::Foundation::BOOLEAN
+    C.DevicePowerEnumDevices(query_index, query_interpretation_flags, query_flags, pReturnBuffer, pBufferSize)
+  end
+
+  def devicePowerSetDeviceState(device_description : Win32cr::Foundation::PWSTR, set_flags : UInt32, set_data : Void*) : UInt32
+    C.DevicePowerSetDeviceState(device_description, set_flags, set_data)
+  end
+
+  def devicePowerOpen(debug_mask : UInt32) : Win32cr::Foundation::BOOLEAN
+    C.DevicePowerOpen(debug_mask)
+  end
+
+  def devicePowerClose : Win32cr::Foundation::BOOLEAN
+    C.DevicePowerClose
+  end
+
+  def powerReportThermalEvent(event : Win32cr::System::Power::THERMAL_EVENT*) : UInt32
+    C.PowerReportThermalEvent(event)
+  end
+
+  def registerPowerSettingNotification(hRecipient : Win32cr::Foundation::HANDLE, power_setting_guid : LibC::GUID*, flags : UInt32) : Win32cr::System::Power::HPOWERNOTIFY
+    C.RegisterPowerSettingNotification(hRecipient, power_setting_guid, flags)
+  end
+
+  def unregisterPowerSettingNotification(handle : Win32cr::System::Power::HPOWERNOTIFY) : Win32cr::Foundation::BOOL
+    C.UnregisterPowerSettingNotification(handle)
+  end
+
+  def registerSuspendResumeNotification(hRecipient : Win32cr::Foundation::HANDLE, flags : UInt32) : Win32cr::System::Power::HPOWERNOTIFY
+    C.RegisterSuspendResumeNotification(hRecipient, flags)
+  end
+
+  def unregisterSuspendResumeNotification(handle : Win32cr::System::Power::HPOWERNOTIFY) : Win32cr::Foundation::BOOL
+    C.UnregisterSuspendResumeNotification(handle)
+  end
+
+  def requestWakeupLatency(latency : Win32cr::System::Power::LATENCY_TIME) : Win32cr::Foundation::BOOL
+    C.RequestWakeupLatency(latency)
+  end
+
+  def isSystemResumeAutomatic : Win32cr::Foundation::BOOL
+    C.IsSystemResumeAutomatic
+  end
+
+  def setThreadExecutionState(esFlags : Win32cr::System::Power::EXECUTION_STATE) : Win32cr::System::Power::EXECUTION_STATE
+    C.SetThreadExecutionState(esFlags)
+  end
+
+  def powerCreateRequest(context : Win32cr::System::Threading::REASON_CONTEXT*) : Win32cr::Foundation::HANDLE
+    C.PowerCreateRequest(context)
+  end
+
+  def powerSetRequest(power_request : Win32cr::Foundation::HANDLE, request_type : Win32cr::System::Power::POWER_REQUEST_TYPE) : Win32cr::Foundation::BOOL
+    C.PowerSetRequest(power_request, request_type)
+  end
+
+  def powerClearRequest(power_request : Win32cr::Foundation::HANDLE, request_type : Win32cr::System::Power::POWER_REQUEST_TYPE) : Win32cr::Foundation::BOOL
+    C.PowerClearRequest(power_request, request_type)
+  end
+
+  def getDevicePowerState(hDevice : Win32cr::Foundation::HANDLE, pfOn : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.GetDevicePowerState(hDevice, pfOn)
+  end
+
+  def setSystemPowerState(fSuspend : Win32cr::Foundation::BOOL, fForce : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SetSystemPowerState(fSuspend, fForce)
+  end
+
+  def getSystemPowerStatus(lpSystemPowerStatus : Win32cr::System::Power::SYSTEM_POWER_STATUS*) : Win32cr::Foundation::BOOL
+    C.GetSystemPowerStatus(lpSystemPowerStatus)
+  end
+
   @[Link("powrprof")]
   @[Link("user32")]
   @[Link("kernel32")]
   lib C
+    # :nodoc:
     fun CallNtPowerInformation(information_level : Win32cr::System::Power::POWER_INFORMATION_LEVEL, input_buffer : Void*, input_buffer_length : UInt32, output_buffer : Void*, output_buffer_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun GetPwrCapabilities(lpspc : Win32cr::System::Power::SYSTEM_POWER_CAPABILITIES*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun PowerDeterminePlatformRoleEx(version : Win32cr::System::Power::POWER_PLATFORM_ROLE_VERSION) : Win32cr::System::Power::POWER_PLATFORM_ROLE
 
+    # :nodoc:
     fun PowerRegisterSuspendResumeNotification(flags : UInt32, recipient : Win32cr::Foundation::HANDLE, registration_handle : Void**) : UInt32
 
+    # :nodoc:
     fun PowerUnregisterSuspendResumeNotification(registration_handle : Win32cr::System::Power::HPOWERNOTIFY) : UInt32
 
+    # :nodoc:
     fun PowerReadACValue(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, type__ : UInt32*, buffer : UInt8*, buffer_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadDCValue(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, type__ : UInt32*, buffer : UInt8*, buffer_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerWriteACValueIndex(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, ac_value_index : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerWriteDCValueIndex(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, dc_value_index : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerGetActiveScheme(user_root_power_key : Win32cr::System::Registry::HKEY, active_policy_guid : LibC::GUID**) : UInt32
 
+    # :nodoc:
     fun PowerSetActiveScheme(user_root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun PowerSettingRegisterNotification(setting_guid : LibC::GUID*, flags : Win32cr::System::Power::POWER_SETTING_REGISTER_NOTIFICATION_FLAGS, recipient : Win32cr::Foundation::HANDLE, registration_handle : Void**) : UInt32
 
+    # :nodoc:
     fun PowerSettingUnregisterNotification(registration_handle : Win32cr::System::Power::HPOWERNOTIFY) : UInt32
 
+    # :nodoc:
     fun PowerRegisterForEffectivePowerModeNotifications(version : UInt32, callback : Win32cr::System::Power::EFFECTIVE_POWER_MODE_CALLBACK, context : Void*, registration_handle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PowerUnregisterFromEffectivePowerModeNotifications(registration_handle : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetPwrDiskSpindownRange(puiMax : UInt32*, puiMin : UInt32*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun EnumPwrSchemes(lpfn : Win32cr::System::Power::PWRSCHEMESENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun ReadGlobalPwrPolicy(pGlobalPowerPolicy : Win32cr::System::Power::GLOBAL_POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun ReadPwrScheme(uiID : UInt32, pPowerPolicy : Win32cr::System::Power::POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun WritePwrScheme(puiID : UInt32*, lpszSchemeName : Win32cr::Foundation::PWSTR, lpszDescription : Win32cr::Foundation::PWSTR, lpScheme : Win32cr::System::Power::POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun WriteGlobalPwrPolicy(pGlobalPowerPolicy : Win32cr::System::Power::GLOBAL_POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun DeletePwrScheme(uiID : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun GetActivePwrScheme(puiID : UInt32*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun SetActivePwrScheme(uiID : UInt32, pGlobalPowerPolicy : Win32cr::System::Power::GLOBAL_POWER_POLICY*, pPowerPolicy : Win32cr::System::Power::POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun IsPwrSuspendAllowed : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun IsPwrHibernateAllowed : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun IsPwrShutdownAllowed : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun IsAdminOverrideActive(papp : Win32cr::System::Power::ADMINISTRATOR_POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun SetSuspendState(bHibernate : Win32cr::Foundation::BOOLEAN, bForce : Win32cr::Foundation::BOOLEAN, bWakeupEventsDisabled : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun GetCurrentPowerPolicies(pGlobalPowerPolicy : Win32cr::System::Power::GLOBAL_POWER_POLICY*, pPowerPolicy : Win32cr::System::Power::POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun CanUserWritePwrScheme : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun ReadProcessorPwrScheme(uiID : UInt32, pMachineProcessorPowerPolicy : Win32cr::System::Power::MACHINE_PROCESSOR_POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun WriteProcessorPwrScheme(uiID : UInt32, pMachineProcessorPowerPolicy : Win32cr::System::Power::MACHINE_PROCESSOR_POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun ValidatePowerPolicies(pGlobalPowerPolicy : Win32cr::System::Power::GLOBAL_POWER_POLICY*, pPowerPolicy : Win32cr::System::Power::POWER_POLICY*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun PowerIsSettingRangeDefined(sub_key_guid : LibC::GUID*, setting_guid : LibC::GUID*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun PowerSettingAccessCheckEx(access_flags : Win32cr::System::Power::POWER_DATA_ACCESSOR, power_guid : LibC::GUID*, access_type : Win32cr::System::Registry::REG_SAM_FLAGS) : UInt32
 
+    # :nodoc:
     fun PowerSettingAccessCheck(access_flags : Win32cr::System::Power::POWER_DATA_ACCESSOR, power_guid : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun PowerReadACValueIndex(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, ac_value_index : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadDCValueIndex(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, dc_value_index : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadFriendlyName(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadDescription(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadPossibleValue(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, type__ : UInt32*, possible_setting_index : UInt32, buffer : UInt8*, buffer_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadPossibleFriendlyName(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, possible_setting_index : UInt32, buffer : UInt8*, buffer_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadPossibleDescription(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, possible_setting_index : UInt32, buffer : UInt8*, buffer_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadValueMin(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, value_minimum : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadValueMax(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, value_maximum : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadValueIncrement(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, value_increment : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadValueUnitsSpecifier(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadACDefaultIndex(root_power_key : Win32cr::System::Registry::HKEY, scheme_personality_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, ac_default_index : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadDCDefaultIndex(root_power_key : Win32cr::System::Registry::HKEY, scheme_personality_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, dc_default_index : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadIconResourceSpecifier(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerReadSettingAttributes(sub_group_guid : LibC::GUID*, power_setting_guid : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun PowerWriteFriendlyName(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerWriteDescription(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerWritePossibleValue(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, type__ : UInt32, possible_setting_index : UInt32, buffer : UInt8*, buffer_size : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerWritePossibleFriendlyName(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, possible_setting_index : UInt32, buffer : UInt8*, buffer_size : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerWritePossibleDescription(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, possible_setting_index : UInt32, buffer : UInt8*, buffer_size : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerWriteValueMin(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, value_minimum : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerWriteValueMax(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, value_maximum : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerWriteValueIncrement(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, value_increment : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerWriteValueUnitsSpecifier(root_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerWriteACDefaultIndex(root_system_power_key : Win32cr::System::Registry::HKEY, scheme_personality_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, default_ac_index : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerWriteDCDefaultIndex(root_system_power_key : Win32cr::System::Registry::HKEY, scheme_personality_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, default_dc_index : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerWriteIconResourceSpecifier(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, buffer : UInt8*, buffer_size : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerWriteSettingAttributes(sub_group_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, attributes : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerDuplicateScheme(root_power_key : Win32cr::System::Registry::HKEY, source_scheme_guid : LibC::GUID*, destination_scheme_guid : LibC::GUID**) : UInt32
 
+    # :nodoc:
     fun PowerImportPowerScheme(root_power_key : Win32cr::System::Registry::HKEY, import_file_name_path : Win32cr::Foundation::PWSTR, destination_scheme_guid : LibC::GUID**) : UInt32
 
+    # :nodoc:
     fun PowerDeleteScheme(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun PowerRemovePowerSetting(power_setting_sub_key_guid : LibC::GUID*, power_setting_guid : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun PowerCreateSetting(root_system_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun PowerCreatePossibleSetting(root_system_power_key : Win32cr::System::Registry::HKEY, sub_group_of_power_settings_guid : LibC::GUID*, power_setting_guid : LibC::GUID*, possible_setting_index : UInt32) : UInt32
 
+    # :nodoc:
     fun PowerEnumerate(root_power_key : Win32cr::System::Registry::HKEY, scheme_guid : LibC::GUID*, sub_group_of_power_settings_guid : LibC::GUID*, access_flags : Win32cr::System::Power::POWER_DATA_ACCESSOR, index : UInt32, buffer : UInt8*, buffer_size : UInt32*) : UInt32
 
+    # :nodoc:
     fun PowerOpenUserPowerKey(phUserPowerKey : Win32cr::System::Registry::HKEY*, access : UInt32, open_existing : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun PowerOpenSystemPowerKey(phSystemPowerKey : Win32cr::System::Registry::HKEY*, access : UInt32, open_existing : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun PowerCanRestoreIndividualDefaultPowerScheme(scheme_guid : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun PowerRestoreIndividualDefaultPowerScheme(scheme_guid : LibC::GUID*) : UInt32
 
+    # :nodoc:
     fun PowerRestoreDefaultPowerSchemes : UInt32
 
+    # :nodoc:
     fun PowerReplaceDefaultPowerSchemes : UInt32
 
+    # :nodoc:
     fun PowerDeterminePlatformRole : Win32cr::System::Power::POWER_PLATFORM_ROLE
 
+    # :nodoc:
     fun DevicePowerEnumDevices(query_index : UInt32, query_interpretation_flags : UInt32, query_flags : UInt32, pReturnBuffer : UInt8*, pBufferSize : UInt32*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun DevicePowerSetDeviceState(device_description : Win32cr::Foundation::PWSTR, set_flags : UInt32, set_data : Void*) : UInt32
 
+    # :nodoc:
     fun DevicePowerOpen(debug_mask : UInt32) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun DevicePowerClose : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun PowerReportThermalEvent(event : Win32cr::System::Power::THERMAL_EVENT*) : UInt32
 
+    # :nodoc:
     fun RegisterPowerSettingNotification(hRecipient : Win32cr::Foundation::HANDLE, power_setting_guid : LibC::GUID*, flags : UInt32) : Win32cr::System::Power::HPOWERNOTIFY
 
+    # :nodoc:
     fun UnregisterPowerSettingNotification(handle : Win32cr::System::Power::HPOWERNOTIFY) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterSuspendResumeNotification(hRecipient : Win32cr::Foundation::HANDLE, flags : UInt32) : Win32cr::System::Power::HPOWERNOTIFY
 
+    # :nodoc:
     fun UnregisterSuspendResumeNotification(handle : Win32cr::System::Power::HPOWERNOTIFY) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RequestWakeupLatency(latency : Win32cr::System::Power::LATENCY_TIME) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsSystemResumeAutomatic : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetThreadExecutionState(esFlags : Win32cr::System::Power::EXECUTION_STATE) : Win32cr::System::Power::EXECUTION_STATE
 
+    # :nodoc:
     fun PowerCreateRequest(context : Win32cr::System::Threading::REASON_CONTEXT*) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun PowerSetRequest(power_request : Win32cr::Foundation::HANDLE, request_type : Win32cr::System::Power::POWER_REQUEST_TYPE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PowerClearRequest(power_request : Win32cr::Foundation::HANDLE, request_type : Win32cr::System::Power::POWER_REQUEST_TYPE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDevicePowerState(hDevice : Win32cr::Foundation::HANDLE, pfOn : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetSystemPowerState(fSuspend : Win32cr::Foundation::BOOL, fForce : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetSystemPowerStatus(lpSystemPowerStatus : Win32cr::System::Power::SYSTEM_POWER_STATUS*) : Win32cr::Foundation::BOOL
 
   end

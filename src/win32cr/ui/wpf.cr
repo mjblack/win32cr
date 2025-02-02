@@ -4,6 +4,7 @@ require "./../graphics/imaging.cr"
 require "./../graphics/dwm.cr"
 
 module Win32cr::UI::Wpf
+  extend self
   MILBITMAPEFFECT_SDK_VERSION = 16777216_u32
   CLSID_MILBitmapEffectGroup = "ac9c1a9a-7e18-4f64-ac7e-47cf7f051e95"
   CLSID_MILBitmapEffectBlur = "a924df87-225d-4373-8f5b-b90ec85ae3de"

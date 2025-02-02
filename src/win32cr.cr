@@ -1,3 +1,4 @@
+require "./macros"
 require "./win32cr/com_ptr"
 
 module Win32cr

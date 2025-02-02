@@ -6,6 +6,7 @@ require "./../security.cr"
 require "./ole.cr"
 
 module Win32cr::System::Com
+  extend self
   alias CO_MTA_USAGE_COOKIE = LibC::IntPtrT
   alias CO_DEVICE_CATALOG_COOKIE = LibC::IntPtrT
   alias LPEXCEPFINO_DEFERRED_FILLIN = Proc(Win32cr::System::Com::EXCEPINFO*, Win32cr::Foundation::HRESULT)
@@ -5948,229 +5949,779 @@ module Win32cr::System::Com
 
   end
 
+  def coBuildVersion : UInt32
+    C.CoBuildVersion
+  end
+
+  def coInitialize(pvReserved : Void*) : Win32cr::Foundation::HRESULT
+    C.CoInitialize(pvReserved)
+  end
+
+  def coRegisterMallocSpy(pMallocSpy : Void*) : Win32cr::Foundation::HRESULT
+    C.CoRegisterMallocSpy(pMallocSpy)
+  end
+
+  def coRevokeMallocSpy : Win32cr::Foundation::HRESULT
+    C.CoRevokeMallocSpy
+  end
+
+  def coRegisterInitializeSpy(pSpy : Void*, puliCookie : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    C.CoRegisterInitializeSpy(pSpy, puliCookie)
+  end
+
+  def coRevokeInitializeSpy(uliCookie : Win32cr::Foundation::ULARGE_INTEGER) : Win32cr::Foundation::HRESULT
+    C.CoRevokeInitializeSpy(uliCookie)
+  end
+
+  def coGetSystemSecurityPermissions(comSDType : Win32cr::System::Com::COMSD, ppSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::HRESULT
+    C.CoGetSystemSecurityPermissions(comSDType, ppSD)
+  end
+
+  def coLoadLibrary(lpszLibName : Win32cr::Foundation::PWSTR, bAutoFree : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HINSTANCE
+    C.CoLoadLibrary(lpszLibName, bAutoFree)
+  end
+
+  def coFreeLibrary(hInst : Win32cr::Foundation::HINSTANCE) : Void
+    C.CoFreeLibrary(hInst)
+  end
+
+  def coFreeAllLibraries : Void
+    C.CoFreeAllLibraries
+  end
+
+  def coAllowSetForegroundWindow(pUnk : Void*, lpvReserved : Void*) : Win32cr::Foundation::HRESULT
+    C.CoAllowSetForegroundWindow(pUnk, lpvReserved)
+  end
+
+  def dcomChannelSetHResult(pvReserved : Void*, pulReserved : UInt32*, appsHR : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+    C.DcomChannelSetHResult(pvReserved, pulReserved, appsHR)
+  end
+
+  def coIsOle1Class(rclsid : LibC::GUID*) : Win32cr::Foundation::BOOL
+    C.CoIsOle1Class(rclsid)
+  end
+
+  def cLSIDFromProgIDEx(lpszProgID : Win32cr::Foundation::PWSTR, lpclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.CLSIDFromProgIDEx(lpszProgID, lpclsid)
+  end
+
+  def coFileTimeToDosDateTime(lpFileTime : Win32cr::Foundation::FILETIME*, lpDosDate : UInt16*, lpDosTime : UInt16*) : Win32cr::Foundation::BOOL
+    C.CoFileTimeToDosDateTime(lpFileTime, lpDosDate, lpDosTime)
+  end
+
+  def coDosDateTimeToFileTime(nDosDate : UInt16, nDosTime : UInt16, lpFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    C.CoDosDateTimeToFileTime(nDosDate, nDosTime, lpFileTime)
+  end
+
+  def coFileTimeNow(lpFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
+    C.CoFileTimeNow(lpFileTime)
+  end
+
+  def coRegisterChannelHook(extension_uuid : LibC::GUID*, pChannelHook : Void*) : Win32cr::Foundation::HRESULT
+    C.CoRegisterChannelHook(extension_uuid, pChannelHook)
+  end
+
+  def coTreatAsClass(clsidOld : LibC::GUID*, clsidNew : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.CoTreatAsClass(clsidOld, clsidNew)
+  end
+
+  def createDataAdviseHolder(ppDAHolder : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateDataAdviseHolder(ppDAHolder)
+  end
+
+  def createDataCache(pUnkOuter : Void*, rclsid : LibC::GUID*, iid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateDataCache(pUnkOuter, rclsid, iid, ppv)
+  end
+
+  def coInstall(pbc : Void*, dwFlags : UInt32, pClassSpec : Win32cr::System::Com::Uclsspec*, pQuery : Win32cr::System::Com::QUERYCONTEXT*, pszCodeBase : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.CoInstall(pbc, dwFlags, pClassSpec, pQuery, pszCodeBase)
+  end
+
+  def bindMoniker(pmk : Void*, grfOpt : UInt32, iidResult : LibC::GUID*, ppvResult : Void**) : Win32cr::Foundation::HRESULT
+    C.BindMoniker(pmk, grfOpt, iidResult, ppvResult)
+  end
+
+  def coGetObject(pszName : Win32cr::Foundation::PWSTR, pBindOptions : Win32cr::System::Com::BIND_OPTS*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CoGetObject(pszName, pBindOptions, riid, ppv)
+  end
+
+  def mkParseDisplayName(pbc : Void*, szUserName : Win32cr::Foundation::PWSTR, pchEaten : UInt32*, ppmk : Void**) : Win32cr::Foundation::HRESULT
+    C.MkParseDisplayName(pbc, szUserName, pchEaten, ppmk)
+  end
+
+  def monikerRelativePathTo(pmkSrc : Void*, pmkDest : Void*, ppmkRelPath : Void**, dwReserved : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.MonikerRelativePathTo(pmkSrc, pmkDest, ppmkRelPath, dwReserved)
+  end
+
+  def monikerCommonPrefixWith(pmkThis : Void*, pmkOther : Void*, ppmkCommon : Void**) : Win32cr::Foundation::HRESULT
+    C.MonikerCommonPrefixWith(pmkThis, pmkOther, ppmkCommon)
+  end
+
+  def createBindCtx(reserved : UInt32, ppbc : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateBindCtx(reserved, ppbc)
+  end
+
+  def createGenericComposite(pmkFirst : Void*, pmkRest : Void*, ppmkComposite : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateGenericComposite(pmkFirst, pmkRest, ppmkComposite)
+  end
+
+  def getClassFile(szFilename : Win32cr::Foundation::PWSTR, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.GetClassFile(szFilename, pclsid)
+  end
+
+  def createClassMoniker(rclsid : LibC::GUID*, ppmk : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateClassMoniker(rclsid, ppmk)
+  end
+
+  def createFileMoniker(lpszPathName : Win32cr::Foundation::PWSTR, ppmk : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateFileMoniker(lpszPathName, ppmk)
+  end
+
+  def createItemMoniker(lpszDelim : Win32cr::Foundation::PWSTR, lpszItem : Win32cr::Foundation::PWSTR, ppmk : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateItemMoniker(lpszDelim, lpszItem, ppmk)
+  end
+
+  def createAntiMoniker(ppmk : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateAntiMoniker(ppmk)
+  end
+
+  def createPointerMoniker(punk : Void*, ppmk : Void**) : Win32cr::Foundation::HRESULT
+    C.CreatePointerMoniker(punk, ppmk)
+  end
+
+  def createObjrefMoniker(punk : Void*, ppmk : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateObjrefMoniker(punk, ppmk)
+  end
+
+  def getRunningObjectTable(reserved : UInt32, pprot : Void**) : Win32cr::Foundation::HRESULT
+    C.GetRunningObjectTable(reserved, pprot)
+  end
+
+  def createStdProgressIndicator(hwndParent : Win32cr::Foundation::HWND, pszTitle : Win32cr::Foundation::PWSTR, pIbscCaller : Void*, ppIbsc : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateStdProgressIndicator(hwndParent, pszTitle, pIbscCaller, ppIbsc)
+  end
+
+  def coGetMalloc(dwMemContext : UInt32, ppMalloc : Void**) : Win32cr::Foundation::HRESULT
+    C.CoGetMalloc(dwMemContext, ppMalloc)
+  end
+
+  def coUninitialize : Void
+    C.CoUninitialize
+  end
+
+  def coGetCurrentProcess : UInt32
+    C.CoGetCurrentProcess
+  end
+
+  def coInitializeEx(pvReserved : Void*, dwCoInit : Win32cr::System::Com::COINIT) : Win32cr::Foundation::HRESULT
+    C.CoInitializeEx(pvReserved, dwCoInit)
+  end
+
+  def coGetCallerTID(lpdwTID : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CoGetCallerTID(lpdwTID)
+  end
+
+  def coGetCurrentLogicalThreadId(pguid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.CoGetCurrentLogicalThreadId(pguid)
+  end
+
+  def coGetContextToken(pToken : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    C.CoGetContextToken(pToken)
+  end
+
+  def coGetApartmentType(pAptType : Win32cr::System::Com::APTTYPE*, pAptQualifier : Win32cr::System::Com::APTTYPEQUALIFIER*) : Win32cr::Foundation::HRESULT
+    C.CoGetApartmentType(pAptType, pAptQualifier)
+  end
+
+  def coIncrementMTAUsage(pCookie : Win32cr::System::Com::CO_MTA_USAGE_COOKIE*) : Win32cr::Foundation::HRESULT
+    C.CoIncrementMTAUsage(pCookie)
+  end
+
+  def coDecrementMTAUsage(cookie : Win32cr::System::Com::CO_MTA_USAGE_COOKIE) : Win32cr::Foundation::HRESULT
+    C.CoDecrementMTAUsage(cookie)
+  end
+
+  def coAllowUnmarshalerCLSID(clsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.CoAllowUnmarshalerCLSID(clsid)
+  end
+
+  def coGetObjectContext(riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CoGetObjectContext(riid, ppv)
+  end
+
+  def coGetClassObject(rclsid : LibC::GUID*, dwClsContext : Win32cr::System::Com::CLSCTX, pvReserved : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CoGetClassObject(rclsid, dwClsContext, pvReserved, riid, ppv)
+  end
+
+  def coRegisterClassObject(rclsid : LibC::GUID*, pUnk : Void*, dwClsContext : Win32cr::System::Com::CLSCTX, flags : Win32cr::System::Com::REGCLS, lpdwRegister : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CoRegisterClassObject(rclsid, pUnk, dwClsContext, flags, lpdwRegister)
+  end
+
+  def coRevokeClassObject(dwRegister : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoRevokeClassObject(dwRegister)
+  end
+
+  def coResumeClassObjects : Win32cr::Foundation::HRESULT
+    C.CoResumeClassObjects
+  end
+
+  def coSuspendClassObjects : Win32cr::Foundation::HRESULT
+    C.CoSuspendClassObjects
+  end
+
+  def coAddRefServerProcess : UInt32
+    C.CoAddRefServerProcess
+  end
+
+  def coReleaseServerProcess : UInt32
+    C.CoReleaseServerProcess
+  end
+
+  def coGetPSClsid(riid : LibC::GUID*, pClsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.CoGetPSClsid(riid, pClsid)
+  end
+
+  def coRegisterPSClsid(riid : LibC::GUID*, rclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.CoRegisterPSClsid(riid, rclsid)
+  end
+
+  def coRegisterSurrogate(pSurrogate : Void*) : Win32cr::Foundation::HRESULT
+    C.CoRegisterSurrogate(pSurrogate)
+  end
+
+  def coDisconnectObject(pUnk : Void*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoDisconnectObject(pUnk, dwReserved)
+  end
+
+  def coLockObjectExternal(pUnk : Void*, fLock : Win32cr::Foundation::BOOL, fLastUnlockReleases : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.CoLockObjectExternal(pUnk, fLock, fLastUnlockReleases)
+  end
+
+  def coIsHandlerConnected(pUnk : Void*) : Win32cr::Foundation::BOOL
+    C.CoIsHandlerConnected(pUnk)
+  end
+
+  def coCreateFreeThreadedMarshaler(punkOuter : Void*, ppunkMarshal : Void**) : Win32cr::Foundation::HRESULT
+    C.CoCreateFreeThreadedMarshaler(punkOuter, ppunkMarshal)
+  end
+
+  def coFreeUnusedLibraries : Void
+    C.CoFreeUnusedLibraries
+  end
+
+  def coFreeUnusedLibrariesEx(dwUnloadDelay : UInt32, dwReserved : UInt32) : Void
+    C.CoFreeUnusedLibrariesEx(dwUnloadDelay, dwReserved)
+  end
+
+  def coDisconnectContext(dwTimeout : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoDisconnectContext(dwTimeout)
+  end
+
+  def coInitializeSecurity(pSecDesc : Win32cr::Security::PSECURITY_DESCRIPTOR, cAuthSvc : Int32, asAuthSvc : Win32cr::System::Com::SOLE_AUTHENTICATION_SERVICE*, pReserved1 : Void*, dwAuthnLevel : Win32cr::System::Com::RPC_C_AUTHN_LEVEL, dwImpLevel : Win32cr::System::Com::RPC_C_IMP_LEVEL, pAuthList : Void*, dwCapabilities : Win32cr::System::Com::EOLE_AUTHENTICATION_CAPABILITIES, pReserved3 : Void*) : Win32cr::Foundation::HRESULT
+    C.CoInitializeSecurity(pSecDesc, cAuthSvc, asAuthSvc, pReserved1, dwAuthnLevel, dwImpLevel, pAuthList, dwCapabilities, pReserved3)
+  end
+
+  def coGetCallContext(riid : LibC::GUID*, ppInterface : Void**) : Win32cr::Foundation::HRESULT
+    C.CoGetCallContext(riid, ppInterface)
+  end
+
+  def coQueryProxyBlanket(pProxy : Void*, pwAuthnSvc : UInt32*, pAuthzSvc : UInt32*, pServerPrincName : Win32cr::Foundation::PWSTR*, pAuthnLevel : UInt32*, pImpLevel : UInt32*, pAuthInfo : Void**, pCapabilites : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CoQueryProxyBlanket(pProxy, pwAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pAuthInfo, pCapabilites)
+  end
+
+  def coSetProxyBlanket(pProxy : Void*, dwAuthnSvc : UInt32, dwAuthzSvc : UInt32, pServerPrincName : Win32cr::Foundation::PWSTR, dwAuthnLevel : Win32cr::System::Com::RPC_C_AUTHN_LEVEL, dwImpLevel : Win32cr::System::Com::RPC_C_IMP_LEVEL, pAuthInfo : Void*, dwCapabilities : Win32cr::System::Com::EOLE_AUTHENTICATION_CAPABILITIES) : Win32cr::Foundation::HRESULT
+    C.CoSetProxyBlanket(pProxy, dwAuthnSvc, dwAuthzSvc, pServerPrincName, dwAuthnLevel, dwImpLevel, pAuthInfo, dwCapabilities)
+  end
+
+  def coCopyProxy(pProxy : Void*, ppCopy : Void**) : Win32cr::Foundation::HRESULT
+    C.CoCopyProxy(pProxy, ppCopy)
+  end
+
+  def coQueryClientBlanket(pAuthnSvc : UInt32*, pAuthzSvc : UInt32*, pServerPrincName : Win32cr::Foundation::PWSTR*, pAuthnLevel : UInt32*, pImpLevel : UInt32*, pPrivs : Void**, pCapabilities : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CoQueryClientBlanket(pAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pPrivs, pCapabilities)
+  end
+
+  def coImpersonateClient : Win32cr::Foundation::HRESULT
+    C.CoImpersonateClient
+  end
+
+  def coRevertToSelf : Win32cr::Foundation::HRESULT
+    C.CoRevertToSelf
+  end
+
+  def coQueryAuthenticationServices(pcAuthSvc : UInt32*, asAuthSvc : Win32cr::System::Com::SOLE_AUTHENTICATION_SERVICE**) : Win32cr::Foundation::HRESULT
+    C.CoQueryAuthenticationServices(pcAuthSvc, asAuthSvc)
+  end
+
+  def coSwitchCallContext(pNewObject : Void*, ppOldObject : Void**) : Win32cr::Foundation::HRESULT
+    C.CoSwitchCallContext(pNewObject, ppOldObject)
+  end
+
+  def coCreateInstance(rclsid : LibC::GUID*, pUnkOuter : Void*, dwClsContext : Win32cr::System::Com::CLSCTX, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CoCreateInstance(rclsid, pUnkOuter, dwClsContext, riid, ppv)
+  end
+
+  def coCreateInstanceEx(clsid : LibC::GUID*, punkOuter : Void*, dwClsCtx : Win32cr::System::Com::CLSCTX, pServerInfo : Win32cr::System::Com::COSERVERINFO*, dwCount : UInt32, pResults : Win32cr::System::Com::MULTI_QI*) : Win32cr::Foundation::HRESULT
+    C.CoCreateInstanceEx(clsid, punkOuter, dwClsCtx, pServerInfo, dwCount, pResults)
+  end
+
+  def coCreateInstanceFromApp(clsid : LibC::GUID*, punkOuter : Void*, dwClsCtx : Win32cr::System::Com::CLSCTX, reserved : Void*, dwCount : UInt32, pResults : Win32cr::System::Com::MULTI_QI*) : Win32cr::Foundation::HRESULT
+    C.CoCreateInstanceFromApp(clsid, punkOuter, dwClsCtx, reserved, dwCount, pResults)
+  end
+
+  def coRegisterActivationFilter(pActivationFilter : Void*) : Win32cr::Foundation::HRESULT
+    C.CoRegisterActivationFilter(pActivationFilter)
+  end
+
+  def coGetCancelObject(dwThreadId : UInt32, iid : LibC::GUID*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
+    C.CoGetCancelObject(dwThreadId, iid, ppUnk)
+  end
+
+  def coSetCancelObject(pUnk : Void*) : Win32cr::Foundation::HRESULT
+    C.CoSetCancelObject(pUnk)
+  end
+
+  def coCancelCall(dwThreadId : UInt32, ulTimeout : UInt32) : Win32cr::Foundation::HRESULT
+    C.CoCancelCall(dwThreadId, ulTimeout)
+  end
+
+  def coTestCancel : Win32cr::Foundation::HRESULT
+    C.CoTestCancel
+  end
+
+  def coEnableCallCancellation(pReserved : Void*) : Win32cr::Foundation::HRESULT
+    C.CoEnableCallCancellation(pReserved)
+  end
+
+  def coDisableCallCancellation(pReserved : Void*) : Win32cr::Foundation::HRESULT
+    C.CoDisableCallCancellation(pReserved)
+  end
+
+  def stringFromCLSID(rclsid : LibC::GUID*, lplpsz : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.StringFromCLSID(rclsid, lplpsz)
+  end
+
+  def cLSIDFromString(lpsz : Win32cr::Foundation::PWSTR, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.CLSIDFromString(lpsz, pclsid)
+  end
+
+  def stringFromIID(rclsid : LibC::GUID*, lplpsz : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.StringFromIID(rclsid, lplpsz)
+  end
+
+  def iIDFromString(lpsz : Win32cr::Foundation::PWSTR, lpiid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.IIDFromString(lpsz, lpiid)
+  end
+
+  def progIDFromCLSID(clsid : LibC::GUID*, lplpszProgID : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.ProgIDFromCLSID(clsid, lplpszProgID)
+  end
+
+  def cLSIDFromProgID(lpszProgID : Win32cr::Foundation::PWSTR, lpclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.CLSIDFromProgID(lpszProgID, lpclsid)
+  end
+
+  def stringFromGUID2(rguid : LibC::GUID*, lpsz : UInt16*, cchMax : Int32) : Int32
+    C.StringFromGUID2(rguid, lpsz, cchMax)
+  end
+
+  def coCreateGuid(pguid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.CoCreateGuid(pguid)
+  end
+
+  def coWaitForMultipleHandles(dwFlags : UInt32, dwTimeout : UInt32, cHandles : UInt32, pHandles : Win32cr::Foundation::HANDLE*, lpdwindex : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CoWaitForMultipleHandles(dwFlags, dwTimeout, cHandles, pHandles, lpdwindex)
+  end
+
+  def coWaitForMultipleObjects(dwFlags : UInt32, dwTimeout : UInt32, cHandles : UInt32, pHandles : Win32cr::Foundation::HANDLE*, lpdwindex : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CoWaitForMultipleObjects(dwFlags, dwTimeout, cHandles, pHandles, lpdwindex)
+  end
+
+  def coGetTreatAsClass(clsidOld : LibC::GUID*, pClsidNew : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    C.CoGetTreatAsClass(clsidOld, pClsidNew)
+  end
+
+  def coInvalidateRemoteMachineBindings(pszMachineName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.CoInvalidateRemoteMachineBindings(pszMachineName)
+  end
+
+  def coTaskMemAlloc(cb : LibC::UIntPtrT) : Void*
+    C.CoTaskMemAlloc(cb)
+  end
+
+  def coTaskMemRealloc(pv : Void*, cb : LibC::UIntPtrT) : Void*
+    C.CoTaskMemRealloc(pv, cb)
+  end
+
+  #def coTaskMemFree(pv : Void*) : Void
+    #C.CoTaskMemFree(pv)
+  #end
+
+  def coRegisterDeviceCatalog(deviceInstanceId : Win32cr::Foundation::PWSTR, cookie : Win32cr::System::Com::CO_DEVICE_CATALOG_COOKIE*) : Win32cr::Foundation::HRESULT
+    C.CoRegisterDeviceCatalog(deviceInstanceId, cookie)
+  end
+
+  def coRevokeDeviceCatalog(cookie : Win32cr::System::Com::CO_DEVICE_CATALOG_COOKIE) : Win32cr::Foundation::HRESULT
+    C.CoRevokeDeviceCatalog(cookie)
+  end
+
+  def createUri(pwzURI : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::Com::URI_CREATE_FLAGS, dwReserved : LibC::UIntPtrT, ppURI : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateUri(pwzURI, dwFlags, dwReserved, ppURI)
+  end
+
+  def createUriWithFragment(pwzURI : Win32cr::Foundation::PWSTR, pwzFragment : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwReserved : LibC::UIntPtrT, ppURI : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateUriWithFragment(pwzURI, pwzFragment, dwFlags, dwReserved, ppURI)
+  end
+
+  def createUriFromMultiByteString(pszANSIInputUri : Win32cr::Foundation::PSTR, dwEncodingFlags : UInt32, dwCodePage : UInt32, dwCreateFlags : UInt32, dwReserved : LibC::UIntPtrT, ppUri : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateUriFromMultiByteString(pszANSIInputUri, dwEncodingFlags, dwCodePage, dwCreateFlags, dwReserved, ppUri)
+  end
+
+  def createIUriBuilder(pIUri : Void*, dwFlags : UInt32, dwReserved : LibC::UIntPtrT, ppIUriBuilder : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateIUriBuilder(pIUri, dwFlags, dwReserved, ppIUriBuilder)
+  end
+
+  def setErrorInfo(dwReserved : UInt32, perrinfo : Void*) : Win32cr::Foundation::HRESULT
+    C.SetErrorInfo(dwReserved, perrinfo)
+  end
+
+  def getErrorInfo(dwReserved : UInt32, pperrinfo : Void**) : Win32cr::Foundation::HRESULT
+    C.GetErrorInfo(dwReserved, pperrinfo)
+  end
+
   @[Link("ole32")]
   @[Link("urlmon")]
   @[Link("oleaut32")]
   lib C
+    # :nodoc:
     fun CoBuildVersion : UInt32
 
+    # :nodoc:
     fun CoInitialize(pvReserved : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoRegisterMallocSpy(pMallocSpy : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoRevokeMallocSpy : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoRegisterInitializeSpy(pSpy : Void*, puliCookie : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoRevokeInitializeSpy(uliCookie : Win32cr::Foundation::ULARGE_INTEGER) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetSystemSecurityPermissions(comSDType : Win32cr::System::Com::COMSD, ppSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoLoadLibrary(lpszLibName : Win32cr::Foundation::PWSTR, bAutoFree : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HINSTANCE
 
+    # :nodoc:
     fun CoFreeLibrary(hInst : Win32cr::Foundation::HINSTANCE) : Void
 
+    # :nodoc:
     fun CoFreeAllLibraries : Void
 
+    # :nodoc:
     fun CoAllowSetForegroundWindow(pUnk : Void*, lpvReserved : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DcomChannelSetHResult(pvReserved : Void*, pulReserved : UInt32*, appsHR : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoIsOle1Class(rclsid : LibC::GUID*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CLSIDFromProgIDEx(lpszProgID : Win32cr::Foundation::PWSTR, lpclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoFileTimeToDosDateTime(lpFileTime : Win32cr::Foundation::FILETIME*, lpDosDate : UInt16*, lpDosTime : UInt16*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CoDosDateTimeToFileTime(nDosDate : UInt16, nDosTime : UInt16, lpFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CoFileTimeNow(lpFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoRegisterChannelHook(extension_uuid : LibC::GUID*, pChannelHook : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoTreatAsClass(clsidOld : LibC::GUID*, clsidNew : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateDataAdviseHolder(ppDAHolder : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateDataCache(pUnkOuter : Void*, rclsid : LibC::GUID*, iid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInstall(pbc : Void*, dwFlags : UInt32, pClassSpec : Win32cr::System::Com::Uclsspec*, pQuery : Win32cr::System::Com::QUERYCONTEXT*, pszCodeBase : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BindMoniker(pmk : Void*, grfOpt : UInt32, iidResult : LibC::GUID*, ppvResult : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetObject(pszName : Win32cr::Foundation::PWSTR, pBindOptions : Win32cr::System::Com::BIND_OPTS*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MkParseDisplayName(pbc : Void*, szUserName : Win32cr::Foundation::PWSTR, pchEaten : UInt32*, ppmk : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MonikerRelativePathTo(pmkSrc : Void*, pmkDest : Void*, ppmkRelPath : Void**, dwReserved : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MonikerCommonPrefixWith(pmkThis : Void*, pmkOther : Void*, ppmkCommon : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateBindCtx(reserved : UInt32, ppbc : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateGenericComposite(pmkFirst : Void*, pmkRest : Void*, ppmkComposite : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetClassFile(szFilename : Win32cr::Foundation::PWSTR, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateClassMoniker(rclsid : LibC::GUID*, ppmk : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateFileMoniker(lpszPathName : Win32cr::Foundation::PWSTR, ppmk : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateItemMoniker(lpszDelim : Win32cr::Foundation::PWSTR, lpszItem : Win32cr::Foundation::PWSTR, ppmk : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateAntiMoniker(ppmk : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreatePointerMoniker(punk : Void*, ppmk : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateObjrefMoniker(punk : Void*, ppmk : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetRunningObjectTable(reserved : UInt32, pprot : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateStdProgressIndicator(hwndParent : Win32cr::Foundation::HWND, pszTitle : Win32cr::Foundation::PWSTR, pIbscCaller : Void*, ppIbsc : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetMalloc(dwMemContext : UInt32, ppMalloc : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoUninitialize : Void
 
+    # :nodoc:
     fun CoGetCurrentProcess : UInt32
 
+    # :nodoc:
     fun CoInitializeEx(pvReserved : Void*, dwCoInit : Win32cr::System::Com::COINIT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetCallerTID(lpdwTID : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetCurrentLogicalThreadId(pguid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetContextToken(pToken : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetApartmentType(pAptType : Win32cr::System::Com::APTTYPE*, pAptQualifier : Win32cr::System::Com::APTTYPEQUALIFIER*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoIncrementMTAUsage(pCookie : Win32cr::System::Com::CO_MTA_USAGE_COOKIE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoDecrementMTAUsage(cookie : Win32cr::System::Com::CO_MTA_USAGE_COOKIE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoAllowUnmarshalerCLSID(clsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetObjectContext(riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetClassObject(rclsid : LibC::GUID*, dwClsContext : Win32cr::System::Com::CLSCTX, pvReserved : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoRegisterClassObject(rclsid : LibC::GUID*, pUnk : Void*, dwClsContext : Win32cr::System::Com::CLSCTX, flags : Win32cr::System::Com::REGCLS, lpdwRegister : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoRevokeClassObject(dwRegister : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoResumeClassObjects : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoSuspendClassObjects : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoAddRefServerProcess : UInt32
 
+    # :nodoc:
     fun CoReleaseServerProcess : UInt32
 
+    # :nodoc:
     fun CoGetPSClsid(riid : LibC::GUID*, pClsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoRegisterPSClsid(riid : LibC::GUID*, rclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoRegisterSurrogate(pSurrogate : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoDisconnectObject(pUnk : Void*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoLockObjectExternal(pUnk : Void*, fLock : Win32cr::Foundation::BOOL, fLastUnlockReleases : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoIsHandlerConnected(pUnk : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CoCreateFreeThreadedMarshaler(punkOuter : Void*, ppunkMarshal : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoFreeUnusedLibraries : Void
 
+    # :nodoc:
     fun CoFreeUnusedLibrariesEx(dwUnloadDelay : UInt32, dwReserved : UInt32) : Void
 
+    # :nodoc:
     fun CoDisconnectContext(dwTimeout : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInitializeSecurity(pSecDesc : Win32cr::Security::PSECURITY_DESCRIPTOR, cAuthSvc : Int32, asAuthSvc : Win32cr::System::Com::SOLE_AUTHENTICATION_SERVICE*, pReserved1 : Void*, dwAuthnLevel : Win32cr::System::Com::RPC_C_AUTHN_LEVEL, dwImpLevel : Win32cr::System::Com::RPC_C_IMP_LEVEL, pAuthList : Void*, dwCapabilities : Win32cr::System::Com::EOLE_AUTHENTICATION_CAPABILITIES, pReserved3 : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetCallContext(riid : LibC::GUID*, ppInterface : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoQueryProxyBlanket(pProxy : Void*, pwAuthnSvc : UInt32*, pAuthzSvc : UInt32*, pServerPrincName : Win32cr::Foundation::PWSTR*, pAuthnLevel : UInt32*, pImpLevel : UInt32*, pAuthInfo : Void**, pCapabilites : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoSetProxyBlanket(pProxy : Void*, dwAuthnSvc : UInt32, dwAuthzSvc : UInt32, pServerPrincName : Win32cr::Foundation::PWSTR, dwAuthnLevel : Win32cr::System::Com::RPC_C_AUTHN_LEVEL, dwImpLevel : Win32cr::System::Com::RPC_C_IMP_LEVEL, pAuthInfo : Void*, dwCapabilities : Win32cr::System::Com::EOLE_AUTHENTICATION_CAPABILITIES) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoCopyProxy(pProxy : Void*, ppCopy : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoQueryClientBlanket(pAuthnSvc : UInt32*, pAuthzSvc : UInt32*, pServerPrincName : Win32cr::Foundation::PWSTR*, pAuthnLevel : UInt32*, pImpLevel : UInt32*, pPrivs : Void**, pCapabilities : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoImpersonateClient : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoRevertToSelf : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoQueryAuthenticationServices(pcAuthSvc : UInt32*, asAuthSvc : Win32cr::System::Com::SOLE_AUTHENTICATION_SERVICE**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoSwitchCallContext(pNewObject : Void*, ppOldObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoCreateInstance(rclsid : LibC::GUID*, pUnkOuter : Void*, dwClsContext : Win32cr::System::Com::CLSCTX, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoCreateInstanceEx(clsid : LibC::GUID*, punkOuter : Void*, dwClsCtx : Win32cr::System::Com::CLSCTX, pServerInfo : Win32cr::System::Com::COSERVERINFO*, dwCount : UInt32, pResults : Win32cr::System::Com::MULTI_QI*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoCreateInstanceFromApp(clsid : LibC::GUID*, punkOuter : Void*, dwClsCtx : Win32cr::System::Com::CLSCTX, reserved : Void*, dwCount : UInt32, pResults : Win32cr::System::Com::MULTI_QI*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoRegisterActivationFilter(pActivationFilter : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetCancelObject(dwThreadId : UInt32, iid : LibC::GUID*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoSetCancelObject(pUnk : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoCancelCall(dwThreadId : UInt32, ulTimeout : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoTestCancel : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoEnableCallCancellation(pReserved : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoDisableCallCancellation(pReserved : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StringFromCLSID(rclsid : LibC::GUID*, lplpsz : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CLSIDFromString(lpsz : Win32cr::Foundation::PWSTR, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StringFromIID(rclsid : LibC::GUID*, lplpsz : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IIDFromString(lpsz : Win32cr::Foundation::PWSTR, lpiid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ProgIDFromCLSID(clsid : LibC::GUID*, lplpszProgID : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CLSIDFromProgID(lpszProgID : Win32cr::Foundation::PWSTR, lpclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StringFromGUID2(rguid : LibC::GUID*, lpsz : UInt16*, cchMax : Int32) : Int32
 
+    # :nodoc:
     fun CoCreateGuid(pguid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoWaitForMultipleHandles(dwFlags : UInt32, dwTimeout : UInt32, cHandles : UInt32, pHandles : Win32cr::Foundation::HANDLE*, lpdwindex : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoWaitForMultipleObjects(dwFlags : UInt32, dwTimeout : UInt32, cHandles : UInt32, pHandles : Win32cr::Foundation::HANDLE*, lpdwindex : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetTreatAsClass(clsidOld : LibC::GUID*, pClsidNew : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoInvalidateRemoteMachineBindings(pszMachineName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoTaskMemAlloc(cb : LibC::UIntPtrT) : Void*
 
+    # :nodoc:
     fun CoTaskMemRealloc(pv : Void*, cb : LibC::UIntPtrT) : Void*
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun CoTaskMemFree(pv : Void*) : Void
 
+    # :nodoc:
     fun CoRegisterDeviceCatalog(deviceInstanceId : Win32cr::Foundation::PWSTR, cookie : Win32cr::System::Com::CO_DEVICE_CATALOG_COOKIE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoRevokeDeviceCatalog(cookie : Win32cr::System::Com::CO_DEVICE_CATALOG_COOKIE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateUri(pwzURI : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::Com::URI_CREATE_FLAGS, dwReserved : LibC::UIntPtrT, ppURI : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateUriWithFragment(pwzURI : Win32cr::Foundation::PWSTR, pwzFragment : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwReserved : LibC::UIntPtrT, ppURI : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateUriFromMultiByteString(pszANSIInputUri : Win32cr::Foundation::PSTR, dwEncodingFlags : UInt32, dwCodePage : UInt32, dwCreateFlags : UInt32, dwReserved : LibC::UIntPtrT, ppUri : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateIUriBuilder(pIUri : Void*, dwFlags : UInt32, dwReserved : LibC::UIntPtrT, ppIUriBuilder : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SetErrorInfo(dwReserved : UInt32, perrinfo : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetErrorInfo(dwReserved : UInt32, pperrinfo : Void**) : Win32cr::Foundation::HRESULT
 
   end

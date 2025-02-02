@@ -4,6 +4,7 @@ require "./../direct2_d.cr"
 require "./../imaging.cr"
 
 module Win32cr::Graphics::Imaging::D2D
+  extend self
 
 
   @[Extern]

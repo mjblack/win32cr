@@ -1,5 +1,6 @@
 
 module Win32cr::Storage::StructuredStorage
+  extend self
   alias JET_HANDLE = LibC::UIntPtrT
   alias JET_INSTANCE = LibC::UIntPtrT
   alias JET_SESID = LibC::UIntPtrT

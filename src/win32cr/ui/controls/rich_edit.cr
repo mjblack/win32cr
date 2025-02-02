@@ -9,6 +9,7 @@ require "./../../graphics/direct2_d.cr"
 require "./../../system/com/structured_storage.cr"
 
 module Win32cr::UI::Controls::RichEdit
+  extend self
   alias AutoCorrectProc = Proc(UInt16, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Int32, Int32*, Int32)
 
   alias EDITWORDBREAKPROCEX = Proc(Win32cr::Foundation::PSTR, Int32, UInt8, Int32, Int32)

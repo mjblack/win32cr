@@ -2,6 +2,7 @@ require "./../../foundation.cr"
 require "./../../system/com.cr"
 
 module Win32cr::Storage::Packaging::Appx
+  extend self
   PACKAGE_PROPERTY_FRAMEWORK = 1_u32
   PACKAGE_PROPERTY_RESOURCE = 2_u32
   PACKAGE_PROPERTY_BUNDLE = 4_u32
@@ -3168,133 +3169,448 @@ module Win32cr::Storage::Packaging::Appx
 
   end
 
+  def getCurrentPackageId(bufferLength : UInt32*, buffer : UInt8*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetCurrentPackageId(bufferLength, buffer)
+  end
+
+  def getCurrentPackageFullName(packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetCurrentPackageFullName(packageFullNameLength, packageFullName)
+  end
+
+  def getCurrentPackageFamilyName(packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetCurrentPackageFamilyName(packageFamilyNameLength, packageFamilyName)
+  end
+
+  def getCurrentPackagePath(pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetCurrentPackagePath(pathLength, path)
+  end
+
+  def getPackageId(hProcess : Win32cr::Foundation::HANDLE, bufferLength : UInt32*, buffer : UInt8*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetPackageId(hProcess, bufferLength, buffer)
+  end
+
+  def getPackageFullName(hProcess : Win32cr::Foundation::HANDLE, packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetPackageFullName(hProcess, packageFullNameLength, packageFullName)
+  end
+
+  def getPackageFullNameFromToken(token : Win32cr::Foundation::HANDLE, packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetPackageFullNameFromToken(token, packageFullNameLength, packageFullName)
+  end
+
+  def getPackageFamilyName(hProcess : Win32cr::Foundation::HANDLE, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetPackageFamilyName(hProcess, packageFamilyNameLength, packageFamilyName)
+  end
+
+  def getPackageFamilyNameFromToken(token : Win32cr::Foundation::HANDLE, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetPackageFamilyNameFromToken(token, packageFamilyNameLength, packageFamilyName)
+  end
+
+  def getPackagePath(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, reserved : UInt32, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetPackagePath(packageId, reserved, pathLength, path)
+  end
+
+  def getPackagePathByFullName(packageFullName : Win32cr::Foundation::PWSTR, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetPackagePathByFullName(packageFullName, pathLength, path)
+  end
+
+  def getStagedPackagePathByFullName(packageFullName : Win32cr::Foundation::PWSTR, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetStagedPackagePathByFullName(packageFullName, pathLength, path)
+  end
+
+  def getPackagePathByFullName2(packageFullName : Win32cr::Foundation::PWSTR, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetPackagePathByFullName2(packageFullName, packagePathType, pathLength, path)
+  end
+
+  def getStagedPackagePathByFullName2(packageFullName : Win32cr::Foundation::PWSTR, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetStagedPackagePathByFullName2(packageFullName, packagePathType, pathLength, path)
+  end
+
+  def getCurrentPackageInfo2(flags : UInt32, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetCurrentPackageInfo2(flags, packagePathType, bufferLength, buffer, count)
+  end
+
+  def getCurrentPackagePath2(packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetCurrentPackagePath2(packagePathType, pathLength, path)
+  end
+
+  def getCurrentApplicationUserModelId(applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetCurrentApplicationUserModelId(applicationUserModelIdLength, applicationUserModelId)
+  end
+
+  def getApplicationUserModelId(hProcess : Win32cr::Foundation::HANDLE, applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetApplicationUserModelId(hProcess, applicationUserModelIdLength, applicationUserModelId)
+  end
+
+  def getApplicationUserModelIdFromToken(token : Win32cr::Foundation::HANDLE, applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetApplicationUserModelIdFromToken(token, applicationUserModelIdLength, applicationUserModelId)
+  end
+
+  def verifyPackageFullName(packageFullName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.VerifyPackageFullName(packageFullName)
+  end
+
+  def verifyPackageFamilyName(packageFamilyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.VerifyPackageFamilyName(packageFamilyName)
+  end
+
+  def verifyPackageId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*) : Win32cr::Foundation::WIN32_ERROR
+    C.VerifyPackageId(packageId)
+  end
+
+  def verifyApplicationUserModelId(applicationUserModelId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.VerifyApplicationUserModelId(applicationUserModelId)
+  end
+
+  def verifyPackageRelativeApplicationId(packageRelativeApplicationId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    C.VerifyPackageRelativeApplicationId(packageRelativeApplicationId)
+  end
+
+  def packageIdFromFullName(packageFullName : Win32cr::Foundation::PWSTR, flags : UInt32, bufferLength : UInt32*, buffer : UInt8*) : Win32cr::Foundation::WIN32_ERROR
+    C.PackageIdFromFullName(packageFullName, flags, bufferLength, buffer)
+  end
+
+  def packageFullNameFromId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.PackageFullNameFromId(packageId, packageFullNameLength, packageFullName)
+  end
+
+  def packageFamilyNameFromId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.PackageFamilyNameFromId(packageId, packageFamilyNameLength, packageFamilyName)
+  end
+
+  def packageFamilyNameFromFullName(packageFullName : Win32cr::Foundation::PWSTR, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.PackageFamilyNameFromFullName(packageFullName, packageFamilyNameLength, packageFamilyName)
+  end
+
+  def packageNameAndPublisherIdFromFamilyName(packageFamilyName : Win32cr::Foundation::PWSTR, packageNameLength : UInt32*, packageName : UInt16*, packagePublisherIdLength : UInt32*, packagePublisherId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.PackageNameAndPublisherIdFromFamilyName(packageFamilyName, packageNameLength, packageName, packagePublisherIdLength, packagePublisherId)
+  end
+
+  def formatApplicationUserModelId(packageFamilyName : Win32cr::Foundation::PWSTR, packageRelativeApplicationId : Win32cr::Foundation::PWSTR, applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.FormatApplicationUserModelId(packageFamilyName, packageRelativeApplicationId, applicationUserModelIdLength, applicationUserModelId)
+  end
+
+  def parseApplicationUserModelId(applicationUserModelId : Win32cr::Foundation::PWSTR, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*, packageRelativeApplicationIdLength : UInt32*, packageRelativeApplicationId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.ParseApplicationUserModelId(applicationUserModelId, packageFamilyNameLength, packageFamilyName, packageRelativeApplicationIdLength, packageRelativeApplicationId)
+  end
+
+  def getPackagesByPackageFamily(packageFamilyName : Win32cr::Foundation::PWSTR, count : UInt32*, packageFullNames : Win32cr::Foundation::PWSTR*, bufferLength : UInt32*, buffer : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetPackagesByPackageFamily(packageFamilyName, count, packageFullNames, bufferLength, buffer)
+  end
+
+  def findPackagesByPackageFamily(packageFamilyName : Win32cr::Foundation::PWSTR, packageFilters : UInt32, count : UInt32*, packageFullNames : Win32cr::Foundation::PWSTR*, bufferLength : UInt32*, buffer : UInt16*, packageProperties : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.FindPackagesByPackageFamily(packageFamilyName, packageFilters, count, packageFullNames, bufferLength, buffer, packageProperties)
+  end
+
+  def getStagedPackageOrigin(packageFullName : Win32cr::Foundation::PWSTR, origin : Win32cr::Storage::Packaging::Appx::PackageOrigin*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetStagedPackageOrigin(packageFullName, origin)
+  end
+
+  def getCurrentPackageInfo(flags : UInt32, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetCurrentPackageInfo(flags, bufferLength, buffer, count)
+  end
+
+  def openPackageInfoByFullName(packageFullName : Win32cr::Foundation::PWSTR, reserved : UInt32, packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_**) : Win32cr::Foundation::WIN32_ERROR
+    C.OpenPackageInfoByFullName(packageFullName, reserved, packageInfoReference)
+  end
+
+  def openPackageInfoByFullNameForUser(userSid : Win32cr::Foundation::PSID, packageFullName : Win32cr::Foundation::PWSTR, reserved : UInt32, packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_**) : Win32cr::Foundation::WIN32_ERROR
+    C.OpenPackageInfoByFullNameForUser(userSid, packageFullName, reserved, packageInfoReference)
+  end
+
+  def closePackageInfo(packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_*) : Win32cr::Foundation::WIN32_ERROR
+    C.ClosePackageInfo(packageInfoReference)
+  end
+
+  def getPackageInfo(packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_*, flags : UInt32, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetPackageInfo(packageInfoReference, flags, bufferLength, buffer, count)
+  end
+
+  def getPackageApplicationIds(packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_*, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetPackageApplicationIds(packageInfoReference, bufferLength, buffer, count)
+  end
+
+  def getPackageInfo2(packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_*, flags : UInt32, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    C.GetPackageInfo2(packageInfoReference, flags, packagePathType, bufferLength, buffer, count)
+  end
+
+  def checkIsMSIXPackage(packageFullName : Win32cr::Foundation::PWSTR, isMSIXPackage : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.CheckIsMSIXPackage(packageFullName, isMSIXPackage)
+  end
+
+  def tryCreatePackageDependency(user : Win32cr::Foundation::PSID, packageFamilyName : Win32cr::Foundation::PWSTR, minVersion : Win32cr::Storage::Packaging::Appx::PACKAGE_VERSION, packageDependencyProcessorArchitectures : Win32cr::Storage::Packaging::Appx::PackageDependencyProcessorArchitectures, lifetimeKind : Win32cr::Storage::Packaging::Appx::PackageDependencyLifetimeKind, lifetimeArtifact : Win32cr::Foundation::PWSTR, options : Win32cr::Storage::Packaging::Appx::CreatePackageDependencyOptions, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.TryCreatePackageDependency(user, packageFamilyName, minVersion, packageDependencyProcessorArchitectures, lifetimeKind, lifetimeArtifact, options, packageDependencyId)
+  end
+
+  def deletePackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.DeletePackageDependency(packageDependencyId)
+  end
+
+  def addPackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR, rank : Int32, options : Win32cr::Storage::Packaging::Appx::AddPackageDependencyOptions, packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT__**, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.AddPackageDependency(packageDependencyId, rank, options, packageDependencyContext, packageFullName)
+  end
+
+  def removePackageDependency(packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT__*) : Win32cr::Foundation::HRESULT
+    C.RemovePackageDependency(packageDependencyContext)
+  end
+
+  def getResolvedPackageFullNameForPackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.GetResolvedPackageFullNameForPackageDependency(packageDependencyId, packageFullName)
+  end
+
+  def getIdForPackageDependencyContext(packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT__*, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.GetIdForPackageDependencyContext(packageDependencyContext, packageDependencyId)
+  end
+
+  def appPolicyGetLifecycleManagement(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyLifecycleManagement*) : Win32cr::Foundation::WIN32_ERROR
+    C.AppPolicyGetLifecycleManagement(processToken, policy)
+  end
+
+  def appPolicyGetWindowingModel(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyWindowingModel*) : Win32cr::Foundation::WIN32_ERROR
+    C.AppPolicyGetWindowingModel(processToken, policy)
+  end
+
+  def appPolicyGetMediaFoundationCodecLoading(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyMediaFoundationCodecLoading*) : Win32cr::Foundation::WIN32_ERROR
+    C.AppPolicyGetMediaFoundationCodecLoading(processToken, policy)
+  end
+
+  def appPolicyGetClrCompat(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyClrCompat*) : Win32cr::Foundation::WIN32_ERROR
+    C.AppPolicyGetClrCompat(processToken, policy)
+  end
+
+  def appPolicyGetThreadInitializationType(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyThreadInitializationType*) : Win32cr::Foundation::WIN32_ERROR
+    C.AppPolicyGetThreadInitializationType(processToken, policy)
+  end
+
+  def appPolicyGetShowDeveloperDiagnostic(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyShowDeveloperDiagnostic*) : Win32cr::Foundation::WIN32_ERROR
+    C.AppPolicyGetShowDeveloperDiagnostic(processToken, policy)
+  end
+
+  def appPolicyGetProcessTerminationMethod(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyProcessTerminationMethod*) : Win32cr::Foundation::WIN32_ERROR
+    C.AppPolicyGetProcessTerminationMethod(processToken, policy)
+  end
+
+  def appPolicyGetCreateFileAccess(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyCreateFileAccess*) : Win32cr::Foundation::WIN32_ERROR
+    C.AppPolicyGetCreateFileAccess(processToken, policy)
+  end
+
+  def createPackageVirtualizationContext(packageFamilyName : Win32cr::Foundation::PWSTR, context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__**) : Win32cr::Foundation::HRESULT
+    C.CreatePackageVirtualizationContext(packageFamilyName, context)
+  end
+
+  def activatePackageVirtualizationContext(context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*, cookie : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    C.ActivatePackageVirtualizationContext(context, cookie)
+  end
+
+  def releasePackageVirtualizationContext(context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*) : Void
+    C.ReleasePackageVirtualizationContext(context)
+  end
+
+  def deactivatePackageVirtualizationContext(cookie : LibC::UIntPtrT) : Void
+    C.DeactivatePackageVirtualizationContext(cookie)
+  end
+
+  def duplicatePackageVirtualizationContext(sourceContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*, destContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__**) : Win32cr::Foundation::HRESULT
+    C.DuplicatePackageVirtualizationContext(sourceContext, destContext)
+  end
+
+  def getCurrentPackageVirtualizationContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*
+    C.GetCurrentPackageVirtualizationContext
+  end
+
+  def getProcessesInVirtualizationContext(packageFamilyName : Win32cr::Foundation::PWSTR, count : UInt32*, processes : Win32cr::Foundation::HANDLE**) : Win32cr::Foundation::HRESULT
+    C.GetProcessesInVirtualizationContext(packageFamilyName, count, processes)
+  end
+
   @[Link("kernel32")]
   @[Link("kernelbase")]
   lib C
+    # :nodoc:
     fun GetCurrentPackageId(bufferLength : UInt32*, buffer : UInt8*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetCurrentPackageFullName(packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetCurrentPackageFamilyName(packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetCurrentPackagePath(pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetPackageId(hProcess : Win32cr::Foundation::HANDLE, bufferLength : UInt32*, buffer : UInt8*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetPackageFullName(hProcess : Win32cr::Foundation::HANDLE, packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetPackageFullNameFromToken(token : Win32cr::Foundation::HANDLE, packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetPackageFamilyName(hProcess : Win32cr::Foundation::HANDLE, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetPackageFamilyNameFromToken(token : Win32cr::Foundation::HANDLE, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetPackagePath(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, reserved : UInt32, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetPackagePathByFullName(packageFullName : Win32cr::Foundation::PWSTR, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetStagedPackagePathByFullName(packageFullName : Win32cr::Foundation::PWSTR, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetPackagePathByFullName2(packageFullName : Win32cr::Foundation::PWSTR, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetStagedPackagePathByFullName2(packageFullName : Win32cr::Foundation::PWSTR, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetCurrentPackageInfo2(flags : UInt32, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetCurrentPackagePath2(packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetCurrentApplicationUserModelId(applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetApplicationUserModelId(hProcess : Win32cr::Foundation::HANDLE, applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetApplicationUserModelIdFromToken(token : Win32cr::Foundation::HANDLE, applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun VerifyPackageFullName(packageFullName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun VerifyPackageFamilyName(packageFamilyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun VerifyPackageId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun VerifyApplicationUserModelId(applicationUserModelId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun VerifyPackageRelativeApplicationId(packageRelativeApplicationId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun PackageIdFromFullName(packageFullName : Win32cr::Foundation::PWSTR, flags : UInt32, bufferLength : UInt32*, buffer : UInt8*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun PackageFullNameFromId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun PackageFamilyNameFromId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun PackageFamilyNameFromFullName(packageFullName : Win32cr::Foundation::PWSTR, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun PackageNameAndPublisherIdFromFamilyName(packageFamilyName : Win32cr::Foundation::PWSTR, packageNameLength : UInt32*, packageName : UInt16*, packagePublisherIdLength : UInt32*, packagePublisherId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun FormatApplicationUserModelId(packageFamilyName : Win32cr::Foundation::PWSTR, packageRelativeApplicationId : Win32cr::Foundation::PWSTR, applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun ParseApplicationUserModelId(applicationUserModelId : Win32cr::Foundation::PWSTR, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*, packageRelativeApplicationIdLength : UInt32*, packageRelativeApplicationId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetPackagesByPackageFamily(packageFamilyName : Win32cr::Foundation::PWSTR, count : UInt32*, packageFullNames : Win32cr::Foundation::PWSTR*, bufferLength : UInt32*, buffer : UInt16*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun FindPackagesByPackageFamily(packageFamilyName : Win32cr::Foundation::PWSTR, packageFilters : UInt32, count : UInt32*, packageFullNames : Win32cr::Foundation::PWSTR*, bufferLength : UInt32*, buffer : UInt16*, packageProperties : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetStagedPackageOrigin(packageFullName : Win32cr::Foundation::PWSTR, origin : Win32cr::Storage::Packaging::Appx::PackageOrigin*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetCurrentPackageInfo(flags : UInt32, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun OpenPackageInfoByFullName(packageFullName : Win32cr::Foundation::PWSTR, reserved : UInt32, packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_**) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun OpenPackageInfoByFullNameForUser(userSid : Win32cr::Foundation::PSID, packageFullName : Win32cr::Foundation::PWSTR, reserved : UInt32, packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_**) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun ClosePackageInfo(packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetPackageInfo(packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_*, flags : UInt32, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetPackageApplicationIds(packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_*, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun GetPackageInfo2(packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_*, flags : UInt32, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun CheckIsMSIXPackage(packageFullName : Win32cr::Foundation::PWSTR, isMSIXPackage : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TryCreatePackageDependency(user : Win32cr::Foundation::PSID, packageFamilyName : Win32cr::Foundation::PWSTR, minVersion : Win32cr::Storage::Packaging::Appx::PACKAGE_VERSION, packageDependencyProcessorArchitectures : Win32cr::Storage::Packaging::Appx::PackageDependencyProcessorArchitectures, lifetimeKind : Win32cr::Storage::Packaging::Appx::PackageDependencyLifetimeKind, lifetimeArtifact : Win32cr::Foundation::PWSTR, options : Win32cr::Storage::Packaging::Appx::CreatePackageDependencyOptions, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DeletePackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun AddPackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR, rank : Int32, options : Win32cr::Storage::Packaging::Appx::AddPackageDependencyOptions, packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT__**, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RemovePackageDependency(packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT__*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetResolvedPackageFullNameForPackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetIdForPackageDependencyContext(packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT__*, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun AppPolicyGetLifecycleManagement(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyLifecycleManagement*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun AppPolicyGetWindowingModel(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyWindowingModel*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun AppPolicyGetMediaFoundationCodecLoading(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyMediaFoundationCodecLoading*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun AppPolicyGetClrCompat(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyClrCompat*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun AppPolicyGetThreadInitializationType(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyThreadInitializationType*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun AppPolicyGetShowDeveloperDiagnostic(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyShowDeveloperDiagnostic*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun AppPolicyGetProcessTerminationMethod(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyProcessTerminationMethod*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun AppPolicyGetCreateFileAccess(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyCreateFileAccess*) : Win32cr::Foundation::WIN32_ERROR
 
+    # :nodoc:
     fun CreatePackageVirtualizationContext(packageFamilyName : Win32cr::Foundation::PWSTR, context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ActivatePackageVirtualizationContext(context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*, cookie : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ReleasePackageVirtualizationContext(context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*) : Void
 
+    # :nodoc:
     fun DeactivatePackageVirtualizationContext(cookie : LibC::UIntPtrT) : Void
 
+    # :nodoc:
     fun DuplicatePackageVirtualizationContext(sourceContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*, destContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetCurrentPackageVirtualizationContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*
 
+    # :nodoc:
     fun GetProcessesInVirtualizationContext(packageFamilyName : Win32cr::Foundation::PWSTR, count : UInt32*, processes : Win32cr::Foundation::HANDLE**) : Win32cr::Foundation::HRESULT
 
   end

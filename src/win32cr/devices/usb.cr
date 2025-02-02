@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./../system/io.cr"
 
 module Win32cr::Devices::Usb
+  extend self
   alias USB_IDLE_CALLBACK = Proc(Void*, Void)
 
   SHORT_PACKET_TERMINATE = 1_u32
@@ -2587,74 +2588,244 @@ module Win32cr::Devices::Usb
     end
   end
 
+  def winUsbInitialize(device_handle : Win32cr::Foundation::HANDLE, interface_handle : Void**) : Win32cr::Foundation::BOOL
+    C.WinUsb_Initialize(device_handle, interface_handle)
+  end
+
+  def winUsbFree(interface_handle : Void*) : Win32cr::Foundation::BOOL
+    C.WinUsb_Free(interface_handle)
+  end
+
+  def winUsbGetAssociatedInterface(interface_handle : Void*, associated_interface_index : UInt8, associated_interface_handle : Void**) : Win32cr::Foundation::BOOL
+    C.WinUsb_GetAssociatedInterface(interface_handle, associated_interface_index, associated_interface_handle)
+  end
+
+  def winUsbGetDescriptor(interface_handle : Void*, descriptor_type : UInt8, index : UInt8, language_id : UInt16, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*) : Win32cr::Foundation::BOOL
+    C.WinUsb_GetDescriptor(interface_handle, descriptor_type, index, language_id, buffer, buffer_length, length_transferred)
+  end
+
+  def winUsbQueryInterfaceSettings(interface_handle : Void*, alternate_interface_number : UInt8, usb_alt_interface_descriptor : Win32cr::Devices::Usb::USB_INTERFACE_DESCRIPTOR*) : Win32cr::Foundation::BOOL
+    C.WinUsb_QueryInterfaceSettings(interface_handle, alternate_interface_number, usb_alt_interface_descriptor)
+  end
+
+  def winUsbQueryDeviceInformation(interface_handle : Void*, information_type : UInt32, buffer_length : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
+    C.WinUsb_QueryDeviceInformation(interface_handle, information_type, buffer_length, buffer)
+  end
+
+  def winUsbSetCurrentAlternateSetting(interface_handle : Void*, setting_number : UInt8) : Win32cr::Foundation::BOOL
+    C.WinUsb_SetCurrentAlternateSetting(interface_handle, setting_number)
+  end
+
+  def winUsbGetCurrentAlternateSetting(interface_handle : Void*, setting_number : UInt8*) : Win32cr::Foundation::BOOL
+    C.WinUsb_GetCurrentAlternateSetting(interface_handle, setting_number)
+  end
+
+  def winUsbQueryPipe(interface_handle : Void*, alternate_interface_number : UInt8, pipe_index : UInt8, pipe_information : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.WinUsb_QueryPipe(interface_handle, alternate_interface_number, pipe_index, pipe_information)
+  end
+
+  def winUsbQueryPipeEx(interface_handle : Void*, alternate_setting_number : UInt8, pipe_index : UInt8, pipe_information_ex : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION_EX*) : Win32cr::Foundation::BOOL
+    C.WinUsb_QueryPipeEx(interface_handle, alternate_setting_number, pipe_index, pipe_information_ex)
+  end
+
+  def winUsbSetPipePolicy(interface_handle : Void*, pipe_id : UInt8, policy_type : UInt32, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
+    C.WinUsb_SetPipePolicy(interface_handle, pipe_id, policy_type, value_length, value)
+  end
+
+  def winUsbGetPipePolicy(interface_handle : Void*, pipe_id : UInt8, policy_type : UInt32, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
+    C.WinUsb_GetPipePolicy(interface_handle, pipe_id, policy_type, value_length, value)
+  end
+
+  def winUsbReadPipe(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.WinUsb_ReadPipe(interface_handle, pipe_id, buffer, buffer_length, length_transferred, overlapped)
+  end
+
+  def winUsbWritePipe(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.WinUsb_WritePipe(interface_handle, pipe_id, buffer, buffer_length, length_transferred, overlapped)
+  end
+
+  def winUsbControlTransfer(interface_handle : Void*, setup_packet : Win32cr::Devices::Usb::WINUSB_SETUP_PACKET, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.WinUsb_ControlTransfer(interface_handle, setup_packet, buffer, buffer_length, length_transferred, overlapped)
+  end
+
+  def winUsbResetPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+    C.WinUsb_ResetPipe(interface_handle, pipe_id)
+  end
+
+  def winUsbAbortPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+    C.WinUsb_AbortPipe(interface_handle, pipe_id)
+  end
+
+  def winUsbFlushPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+    C.WinUsb_FlushPipe(interface_handle, pipe_id)
+  end
+
+  def winUsbSetPowerPolicy(interface_handle : Void*, policy_type : UInt32, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
+    C.WinUsb_SetPowerPolicy(interface_handle, policy_type, value_length, value)
+  end
+
+  def winUsbGetPowerPolicy(interface_handle : Void*, policy_type : UInt32, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
+    C.WinUsb_GetPowerPolicy(interface_handle, policy_type, value_length, value)
+  end
+
+  def winUsbGetOverlappedResult(interface_handle : Void*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpNumberOfBytesTransferred : UInt32*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.WinUsb_GetOverlappedResult(interface_handle, lpOverlapped, lpNumberOfBytesTransferred, bWait)
+  end
+
+  def winUsbParseConfigurationDescriptor(configuration_descriptor : Win32cr::Devices::Usb::USB_CONFIGURATION_DESCRIPTOR*, start_position : Void*, interface_number : Int32, alternate_setting : Int32, interface_class : Int32, interface_sub_class : Int32, interface_protocol : Int32) : Win32cr::Devices::Usb::USB_INTERFACE_DESCRIPTOR*
+    C.WinUsb_ParseConfigurationDescriptor(configuration_descriptor, start_position, interface_number, alternate_setting, interface_class, interface_sub_class, interface_protocol)
+  end
+
+  def winUsbParseDescriptors(descriptor_buffer : Void*, total_length : UInt32, start_position : Void*, descriptor_type : Int32) : Win32cr::Devices::Usb::USB_COMMON_DESCRIPTOR*
+    C.WinUsb_ParseDescriptors(descriptor_buffer, total_length, start_position, descriptor_type)
+  end
+
+  def winUsbGetCurrentFrameNumber(interface_handle : Void*, current_frame_number : UInt32*, time_stamp : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    C.WinUsb_GetCurrentFrameNumber(interface_handle, current_frame_number, time_stamp)
+  end
+
+  def winUsbGetAdjustedFrameNumber(current_frame_number : UInt32*, time_stamp : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::BOOL
+    C.WinUsb_GetAdjustedFrameNumber(current_frame_number, time_stamp)
+  end
+
+  def winUsbRegisterIsochBuffer(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, isoch_buffer_handle : Void**) : Win32cr::Foundation::BOOL
+    C.WinUsb_RegisterIsochBuffer(interface_handle, pipe_id, buffer, buffer_length, isoch_buffer_handle)
+  end
+
+  def winUsbUnregisterIsochBuffer(isoch_buffer_handle : Void*) : Win32cr::Foundation::BOOL
+    C.WinUsb_UnregisterIsochBuffer(isoch_buffer_handle)
+  end
+
+  def winUsbWriteIsochPipe(buffer_handle : Void*, offset : UInt32, length : UInt32, frame_number : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.WinUsb_WriteIsochPipe(buffer_handle, offset, length, frame_number, overlapped)
+  end
+
+  def winUsbReadIsochPipe(buffer_handle : Void*, offset : UInt32, length : UInt32, frame_number : UInt32*, number_of_packets : UInt32, iso_packet_descriptors : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.WinUsb_ReadIsochPipe(buffer_handle, offset, length, frame_number, number_of_packets, iso_packet_descriptors, overlapped)
+  end
+
+  def winUsbWriteIsochPipeAsap(buffer_handle : Void*, offset : UInt32, length : UInt32, continue_stream : Win32cr::Foundation::BOOL, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.WinUsb_WriteIsochPipeAsap(buffer_handle, offset, length, continue_stream, overlapped)
+  end
+
+  def winUsbReadIsochPipeAsap(buffer_handle : Void*, offset : UInt32, length : UInt32, continue_stream : Win32cr::Foundation::BOOL, number_of_packets : UInt32, iso_packet_descriptors : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.WinUsb_ReadIsochPipeAsap(buffer_handle, offset, length, continue_stream, number_of_packets, iso_packet_descriptors, overlapped)
+  end
+
+  def winUsbStartTrackingForTimeSync(interface_handle : Void*, start_tracking_info : Win32cr::Devices::Usb::USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.WinUsb_StartTrackingForTimeSync(interface_handle, start_tracking_info)
+  end
+
+  def winUsbGetCurrentFrameNumberAndQpc(interface_handle : Void*, frame_qpc_info : Win32cr::Devices::Usb::USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.WinUsb_GetCurrentFrameNumberAndQpc(interface_handle, frame_qpc_info)
+  end
+
+  def winUsbStopTrackingForTimeSync(interface_handle : Void*, stop_tracking_info : Win32cr::Devices::Usb::USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+    C.WinUsb_StopTrackingForTimeSync(interface_handle, stop_tracking_info)
+  end
+
   @[Link("winusb")]
   lib C
+    # :nodoc:
     fun WinUsb_Initialize(device_handle : Win32cr::Foundation::HANDLE, interface_handle : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_Free(interface_handle : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_GetAssociatedInterface(interface_handle : Void*, associated_interface_index : UInt8, associated_interface_handle : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_GetDescriptor(interface_handle : Void*, descriptor_type : UInt8, index : UInt8, language_id : UInt16, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_QueryInterfaceSettings(interface_handle : Void*, alternate_interface_number : UInt8, usb_alt_interface_descriptor : Win32cr::Devices::Usb::USB_INTERFACE_DESCRIPTOR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_QueryDeviceInformation(interface_handle : Void*, information_type : UInt32, buffer_length : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_SetCurrentAlternateSetting(interface_handle : Void*, setting_number : UInt8) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_GetCurrentAlternateSetting(interface_handle : Void*, setting_number : UInt8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_QueryPipe(interface_handle : Void*, alternate_interface_number : UInt8, pipe_index : UInt8, pipe_information : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_QueryPipeEx(interface_handle : Void*, alternate_setting_number : UInt8, pipe_index : UInt8, pipe_information_ex : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION_EX*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_SetPipePolicy(interface_handle : Void*, pipe_id : UInt8, policy_type : UInt32, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_GetPipePolicy(interface_handle : Void*, pipe_id : UInt8, policy_type : UInt32, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_ReadPipe(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_WritePipe(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_ControlTransfer(interface_handle : Void*, setup_packet : Win32cr::Devices::Usb::WINUSB_SETUP_PACKET, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_ResetPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_AbortPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_FlushPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_SetPowerPolicy(interface_handle : Void*, policy_type : UInt32, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_GetPowerPolicy(interface_handle : Void*, policy_type : UInt32, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_GetOverlappedResult(interface_handle : Void*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpNumberOfBytesTransferred : UInt32*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_ParseConfigurationDescriptor(configuration_descriptor : Win32cr::Devices::Usb::USB_CONFIGURATION_DESCRIPTOR*, start_position : Void*, interface_number : Int32, alternate_setting : Int32, interface_class : Int32, interface_sub_class : Int32, interface_protocol : Int32) : Win32cr::Devices::Usb::USB_INTERFACE_DESCRIPTOR*
 
+    # :nodoc:
     fun WinUsb_ParseDescriptors(descriptor_buffer : Void*, total_length : UInt32, start_position : Void*, descriptor_type : Int32) : Win32cr::Devices::Usb::USB_COMMON_DESCRIPTOR*
 
+    # :nodoc:
     fun WinUsb_GetCurrentFrameNumber(interface_handle : Void*, current_frame_number : UInt32*, time_stamp : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_GetAdjustedFrameNumber(current_frame_number : UInt32*, time_stamp : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_RegisterIsochBuffer(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, isoch_buffer_handle : Void**) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_UnregisterIsochBuffer(isoch_buffer_handle : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_WriteIsochPipe(buffer_handle : Void*, offset : UInt32, length : UInt32, frame_number : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_ReadIsochPipe(buffer_handle : Void*, offset : UInt32, length : UInt32, frame_number : UInt32*, number_of_packets : UInt32, iso_packet_descriptors : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_WriteIsochPipeAsap(buffer_handle : Void*, offset : UInt32, length : UInt32, continue_stream : Win32cr::Foundation::BOOL, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_ReadIsochPipeAsap(buffer_handle : Void*, offset : UInt32, length : UInt32, continue_stream : Win32cr::Foundation::BOOL, number_of_packets : UInt32, iso_packet_descriptors : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_StartTrackingForTimeSync(interface_handle : Void*, start_tracking_info : Win32cr::Devices::Usb::USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_GetCurrentFrameNumberAndQpc(interface_handle : Void*, frame_qpc_info : Win32cr::Devices::Usb::USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WinUsb_StopTrackingForTimeSync(interface_handle : Void*, stop_tracking_info : Win32cr::Devices::Usb::USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
 
   end

@@ -1,6 +1,7 @@
 require "./../../foundation.cr"
 
 module Win32cr::System::Performance::HardwareCounterProfiling
+  extend self
 
   enum HARDWARE_COUNTER_TYPE
     PMCCounter = 0_i32
@@ -31,14 +32,34 @@ module Win32cr::System::Performance::HardwareCounterProfiling
     end
   end
 
+  def enableThreadProfiling(thread_handle : Win32cr::Foundation::HANDLE, flags : UInt32, hardware_counters : UInt64, performance_data_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    C.EnableThreadProfiling(thread_handle, flags, hardware_counters, performance_data_handle)
+  end
+
+  def disableThreadProfiling(performance_data_handle : Win32cr::Foundation::HANDLE) : UInt32
+    C.DisableThreadProfiling(performance_data_handle)
+  end
+
+  def queryThreadProfiling(thread_handle : Win32cr::Foundation::HANDLE, enabled : Win32cr::Foundation::BOOLEAN*) : UInt32
+    C.QueryThreadProfiling(thread_handle, enabled)
+  end
+
+  def readThreadProfilingData(performance_data_handle : Win32cr::Foundation::HANDLE, flags : UInt32, performance_data : Win32cr::System::Performance::HardwareCounterProfiling::PERFORMANCE_DATA*) : UInt32
+    C.ReadThreadProfilingData(performance_data_handle, flags, performance_data)
+  end
+
   @[Link("kernel32")]
   lib C
+    # :nodoc:
     fun EnableThreadProfiling(thread_handle : Win32cr::Foundation::HANDLE, flags : UInt32, hardware_counters : UInt64, performance_data_handle : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DisableThreadProfiling(performance_data_handle : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun QueryThreadProfiling(thread_handle : Win32cr::Foundation::HANDLE, enabled : Win32cr::Foundation::BOOLEAN*) : UInt32
 
+    # :nodoc:
     fun ReadThreadProfilingData(performance_data_handle : Win32cr::Foundation::HANDLE, flags : UInt32, performance_data : Win32cr::System::Performance::HardwareCounterProfiling::PERFORMANCE_DATA*) : UInt32
 
   end

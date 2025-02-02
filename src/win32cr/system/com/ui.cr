@@ -5,6 +5,7 @@ require "./../../graphics/gdi.cr"
 require "./../../ui/windows_and_messaging.cr"
 
 module Win32cr::System::Com::UI
+  extend self
 
 
   @[Extern]

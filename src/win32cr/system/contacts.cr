@@ -2,6 +2,7 @@ require "./com.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::Contacts
+  extend self
   CGD_DEFAULT = 0_u32
   CGD_UNKNOWN_PROPERTY = 0_u32
   CGD_STRING_PROPERTY = 1_u32

@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./diagnostics/debug.cr"
 
 module Win32cr::System::VirtualDosMachines
+  extend self
   alias DEBUGEVENTPROC = Proc(Win32cr::System::Diagnostics::Debug::DEBUG_EVENT*, Void*, UInt32)
 
   alias PROCESSENUMPROC = Proc(UInt32, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)

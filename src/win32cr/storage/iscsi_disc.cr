@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./../system/ioctl.cr"
 
 module Win32cr::Storage::IscsiDisc
+  extend self
   alias PDUMP_DEVICE_POWERON_ROUTINE = Proc(Void*, Int32)
 
   IOCTL_SCSI_BASE = 4_u32
@@ -1431,164 +1432,559 @@ module Win32cr::Storage::IscsiDisc
     end
   end
 
+  def getIScsiVersionInformation(version_info : Win32cr::Storage::IscsiDisc::ISCSI_VERSION_INFO*) : UInt32
+    C.GetIScsiVersionInformation(version_info)
+  end
+
+  def getIScsiTargetInformationW(target_name : Win32cr::Foundation::PWSTR, discovery_mechanism : Win32cr::Foundation::PWSTR, info_class : Win32cr::Storage::IscsiDisc::TARGET_INFORMATION_CLASS, buffer_size : UInt32*, buffer : Void*) : UInt32
+    C.GetIScsiTargetInformationW(target_name, discovery_mechanism, info_class, buffer_size, buffer)
+  end
+
+  def getIScsiTargetInformationA(target_name : Win32cr::Foundation::PSTR, discovery_mechanism : Win32cr::Foundation::PSTR, info_class : Win32cr::Storage::IscsiDisc::TARGET_INFORMATION_CLASS, buffer_size : UInt32*, buffer : Void*) : UInt32
+    C.GetIScsiTargetInformationA(target_name, discovery_mechanism, info_class, buffer_size, buffer)
+  end
+
+  def addIScsiConnectionW(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, reserved : Void*, initiator_port_number : UInt32, target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*, security_flags : UInt64, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, key_size : UInt32, key : UInt8*, connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
+    C.AddIScsiConnectionW(unique_session_id, reserved, initiator_port_number, target_portal, security_flags, login_options, key_size, key, connection_id)
+  end
+
+  def addIScsiConnectionA(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, reserved : Void*, initiator_port_number : UInt32, target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*, security_flags : UInt64, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, key_size : UInt32, key : UInt8*, connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
+    C.AddIScsiConnectionA(unique_session_id, reserved, initiator_port_number, target_portal, security_flags, login_options, key_size, key, connection_id)
+  end
+
+  def removeIScsiConnection(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
+    C.RemoveIScsiConnection(unique_session_id, connection_id)
+  end
+
+  def reportIScsiTargetsW(force_update : Win32cr::Foundation::BOOLEAN, buffer_size : UInt32*, buffer : UInt16*) : UInt32
+    C.ReportIScsiTargetsW(force_update, buffer_size, buffer)
+  end
+
+  def reportIScsiTargetsA(force_update : Win32cr::Foundation::BOOLEAN, buffer_size : UInt32*, buffer : UInt8*) : UInt32
+    C.ReportIScsiTargetsA(force_update, buffer_size, buffer)
+  end
+
+  def addIScsiStaticTargetW(target_name : Win32cr::Foundation::PWSTR, target_alias : Win32cr::Foundation::PWSTR, target_flags : UInt32, persist : Win32cr::Foundation::BOOLEAN, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGW*, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, portal_group : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_GROUPW*) : UInt32
+    C.AddIScsiStaticTargetW(target_name, target_alias, target_flags, persist, mappings, login_options, portal_group)
+  end
+
+  def addIScsiStaticTargetA(target_name : Win32cr::Foundation::PSTR, target_alias : Win32cr::Foundation::PSTR, target_flags : UInt32, persist : Win32cr::Foundation::BOOLEAN, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGA*, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, portal_group : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_GROUPA*) : UInt32
+    C.AddIScsiStaticTargetA(target_name, target_alias, target_flags, persist, mappings, login_options, portal_group)
+  end
+
+  def removeIScsiStaticTargetW(target_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.RemoveIScsiStaticTargetW(target_name)
+  end
+
+  def removeIScsiStaticTargetA(target_name : Win32cr::Foundation::PSTR) : UInt32
+    C.RemoveIScsiStaticTargetA(target_name)
+  end
+
+  def addIScsiSendTargetPortalW(initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, security_flags : UInt64, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
+    C.AddIScsiSendTargetPortalW(initiator_instance, initiator_port_number, login_options, security_flags, portal)
+  end
+
+  def addIScsiSendTargetPortalA(initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, security_flags : UInt64, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
+    C.AddIScsiSendTargetPortalA(initiator_instance, initiator_port_number, login_options, security_flags, portal)
+  end
+
+  def removeIScsiSendTargetPortalW(initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
+    C.RemoveIScsiSendTargetPortalW(initiator_instance, initiator_port_number, portal)
+  end
+
+  def removeIScsiSendTargetPortalA(initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
+    C.RemoveIScsiSendTargetPortalA(initiator_instance, initiator_port_number, portal)
+  end
+
+  def refreshIScsiSendTargetPortalW(initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
+    C.RefreshIScsiSendTargetPortalW(initiator_instance, initiator_port_number, portal)
+  end
+
+  def refreshIScsiSendTargetPortalA(initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
+    C.RefreshIScsiSendTargetPortalA(initiator_instance, initiator_port_number, portal)
+  end
+
+  def reportIScsiSendTargetPortalsW(portal_count : UInt32*, portal_info : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_INFOW*) : UInt32
+    C.ReportIScsiSendTargetPortalsW(portal_count, portal_info)
+  end
+
+  def reportIScsiSendTargetPortalsA(portal_count : UInt32*, portal_info : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_INFOA*) : UInt32
+    C.ReportIScsiSendTargetPortalsA(portal_count, portal_info)
+  end
+
+  def reportIScsiSendTargetPortalsExW(portal_count : UInt32*, portal_info_size : UInt32*, portal_info : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_INFO_EXW*) : UInt32
+    C.ReportIScsiSendTargetPortalsExW(portal_count, portal_info_size, portal_info)
+  end
+
+  def reportIScsiSendTargetPortalsExA(portal_count : UInt32*, portal_info_size : UInt32*, portal_info : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_INFO_EXA*) : UInt32
+    C.ReportIScsiSendTargetPortalsExA(portal_count, portal_info_size, portal_info)
+  end
+
+  def loginIScsiTargetW(target_name : Win32cr::Foundation::PWSTR, is_informational_session : Win32cr::Foundation::BOOLEAN, initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*, security_flags : UInt64, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGW*, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, key_size : UInt32, key : UInt8*, is_persistent : Win32cr::Foundation::BOOLEAN, unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, unique_connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
+    C.LoginIScsiTargetW(target_name, is_informational_session, initiator_instance, initiator_port_number, target_portal, security_flags, mappings, login_options, key_size, key, is_persistent, unique_session_id, unique_connection_id)
+  end
+
+  def loginIScsiTargetA(target_name : Win32cr::Foundation::PSTR, is_informational_session : Win32cr::Foundation::BOOLEAN, initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*, security_flags : UInt64, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGA*, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, key_size : UInt32, key : UInt8*, is_persistent : Win32cr::Foundation::BOOLEAN, unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, unique_connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
+    C.LoginIScsiTargetA(target_name, is_informational_session, initiator_instance, initiator_port_number, target_portal, security_flags, mappings, login_options, key_size, key, is_persistent, unique_session_id, unique_connection_id)
+  end
+
+  def reportIScsiPersistentLoginsW(count : UInt32*, persistent_login_info : Win32cr::Storage::IscsiDisc::PERSISTENT_ISCSI_LOGIN_INFOW*, buffer_size_in_bytes : UInt32*) : UInt32
+    C.ReportIScsiPersistentLoginsW(count, persistent_login_info, buffer_size_in_bytes)
+  end
+
+  def reportIScsiPersistentLoginsA(count : UInt32*, persistent_login_info : Win32cr::Storage::IscsiDisc::PERSISTENT_ISCSI_LOGIN_INFOA*, buffer_size_in_bytes : UInt32*) : UInt32
+    C.ReportIScsiPersistentLoginsA(count, persistent_login_info, buffer_size_in_bytes)
+  end
+
+  def logoutIScsiTarget(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
+    C.LogoutIScsiTarget(unique_session_id)
+  end
+
+  def removeIScsiPersistentTargetW(initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, target_name : Win32cr::Foundation::PWSTR, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
+    C.RemoveIScsiPersistentTargetW(initiator_instance, initiator_port_number, target_name, portal)
+  end
+
+  def removeIScsiPersistentTargetA(initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, target_name : Win32cr::Foundation::PSTR, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
+    C.RemoveIScsiPersistentTargetA(initiator_instance, initiator_port_number, target_name, portal)
+  end
+
+  def sendScsiInquiry(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, lun : UInt64, evpd_cmddt : UInt8, page_code : UInt8, scsi_status : UInt8*, response_size : UInt32*, response_buffer : UInt8*, sense_size : UInt32*, sense_buffer : UInt8*) : UInt32
+    C.SendScsiInquiry(unique_session_id, lun, evpd_cmddt, page_code, scsi_status, response_size, response_buffer, sense_size, sense_buffer)
+  end
+
+  def sendScsiReadCapacity(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, lun : UInt64, scsi_status : UInt8*, response_size : UInt32*, response_buffer : UInt8*, sense_size : UInt32*, sense_buffer : UInt8*) : UInt32
+    C.SendScsiReadCapacity(unique_session_id, lun, scsi_status, response_size, response_buffer, sense_size, sense_buffer)
+  end
+
+  def sendScsiReportLuns(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, scsi_status : UInt8*, response_size : UInt32*, response_buffer : UInt8*, sense_size : UInt32*, sense_buffer : UInt8*) : UInt32
+    C.SendScsiReportLuns(unique_session_id, scsi_status, response_size, response_buffer, sense_size, sense_buffer)
+  end
+
+  def reportIScsiInitiatorListW(buffer_size : UInt32*, buffer : UInt16*) : UInt32
+    C.ReportIScsiInitiatorListW(buffer_size, buffer)
+  end
+
+  def reportIScsiInitiatorListA(buffer_size : UInt32*, buffer : UInt8*) : UInt32
+    C.ReportIScsiInitiatorListA(buffer_size, buffer)
+  end
+
+  def reportActiveIScsiTargetMappingsW(buffer_size : UInt32*, mapping_count : UInt32*, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGW*) : UInt32
+    C.ReportActiveIScsiTargetMappingsW(buffer_size, mapping_count, mappings)
+  end
+
+  def reportActiveIScsiTargetMappingsA(buffer_size : UInt32*, mapping_count : UInt32*, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGA*) : UInt32
+    C.ReportActiveIScsiTargetMappingsA(buffer_size, mapping_count, mappings)
+  end
+
+  def setIScsiTunnelModeOuterAddressW(initiator_name : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, destination_address : Win32cr::Foundation::PWSTR, outer_mode_address : Win32cr::Foundation::PWSTR, persist : Win32cr::Foundation::BOOLEAN) : UInt32
+    C.SetIScsiTunnelModeOuterAddressW(initiator_name, initiator_port_number, destination_address, outer_mode_address, persist)
+  end
+
+  def setIScsiTunnelModeOuterAddressA(initiator_name : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, destination_address : Win32cr::Foundation::PSTR, outer_mode_address : Win32cr::Foundation::PSTR, persist : Win32cr::Foundation::BOOLEAN) : UInt32
+    C.SetIScsiTunnelModeOuterAddressA(initiator_name, initiator_port_number, destination_address, outer_mode_address, persist)
+  end
+
+  def setIScsiIKEInfoW(initiator_name : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, auth_info : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_INFORMATION*, persist : Win32cr::Foundation::BOOLEAN) : UInt32
+    C.SetIScsiIKEInfoW(initiator_name, initiator_port_number, auth_info, persist)
+  end
+
+  def setIScsiIKEInfoA(initiator_name : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, auth_info : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_INFORMATION*, persist : Win32cr::Foundation::BOOLEAN) : UInt32
+    C.SetIScsiIKEInfoA(initiator_name, initiator_port_number, auth_info, persist)
+  end
+
+  def getIScsiIKEInfoW(initiator_name : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, reserved : UInt32*, auth_info : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_INFORMATION*) : UInt32
+    C.GetIScsiIKEInfoW(initiator_name, initiator_port_number, reserved, auth_info)
+  end
+
+  def getIScsiIKEInfoA(initiator_name : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, reserved : UInt32*, auth_info : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_INFORMATION*) : UInt32
+    C.GetIScsiIKEInfoA(initiator_name, initiator_port_number, reserved, auth_info)
+  end
+
+  def setIScsiGroupPresharedKey(key_length : UInt32, key : UInt8*, persist : Win32cr::Foundation::BOOLEAN) : UInt32
+    C.SetIScsiGroupPresharedKey(key_length, key, persist)
+  end
+
+  def setIScsiInitiatorCHAPSharedSecret(shared_secret_length : UInt32, shared_secret : UInt8*) : UInt32
+    C.SetIScsiInitiatorCHAPSharedSecret(shared_secret_length, shared_secret)
+  end
+
+  def setIScsiInitiatorRADIUSSharedSecret(shared_secret_length : UInt32, shared_secret : UInt8*) : UInt32
+    C.SetIScsiInitiatorRADIUSSharedSecret(shared_secret_length, shared_secret)
+  end
+
+  def setIScsiInitiatorNodeNameW(initiator_node_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.SetIScsiInitiatorNodeNameW(initiator_node_name)
+  end
+
+  def setIScsiInitiatorNodeNameA(initiator_node_name : Win32cr::Foundation::PSTR) : UInt32
+    C.SetIScsiInitiatorNodeNameA(initiator_node_name)
+  end
+
+  def getIScsiInitiatorNodeNameW(initiator_node_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.GetIScsiInitiatorNodeNameW(initiator_node_name)
+  end
+
+  def getIScsiInitiatorNodeNameA(initiator_node_name : Win32cr::Foundation::PSTR) : UInt32
+    C.GetIScsiInitiatorNodeNameA(initiator_node_name)
+  end
+
+  def addISNSServerW(address : Win32cr::Foundation::PWSTR) : UInt32
+    C.AddISNSServerW(address)
+  end
+
+  def addISNSServerA(address : Win32cr::Foundation::PSTR) : UInt32
+    C.AddISNSServerA(address)
+  end
+
+  def removeISNSServerW(address : Win32cr::Foundation::PWSTR) : UInt32
+    C.RemoveISNSServerW(address)
+  end
+
+  def removeISNSServerA(address : Win32cr::Foundation::PSTR) : UInt32
+    C.RemoveISNSServerA(address)
+  end
+
+  def refreshISNSServerW(address : Win32cr::Foundation::PWSTR) : UInt32
+    C.RefreshISNSServerW(address)
+  end
+
+  def refreshISNSServerA(address : Win32cr::Foundation::PSTR) : UInt32
+    C.RefreshISNSServerA(address)
+  end
+
+  def reportISNSServerListW(buffer_size_in_char : UInt32*, buffer : UInt16*) : UInt32
+    C.ReportISNSServerListW(buffer_size_in_char, buffer)
+  end
+
+  def reportISNSServerListA(buffer_size_in_char : UInt32*, buffer : UInt8*) : UInt32
+    C.ReportISNSServerListA(buffer_size_in_char, buffer)
+  end
+
+  def getIScsiSessionListW(buffer_size : UInt32*, session_count : UInt32*, session_info : Win32cr::Storage::IscsiDisc::ISCSI_SESSION_INFOW*) : UInt32
+    C.GetIScsiSessionListW(buffer_size, session_count, session_info)
+  end
+
+  def getIScsiSessionListA(buffer_size : UInt32*, session_count : UInt32*, session_info : Win32cr::Storage::IscsiDisc::ISCSI_SESSION_INFOA*) : UInt32
+    C.GetIScsiSessionListA(buffer_size, session_count, session_info)
+  end
+
+  def getIScsiSessionListEx(buffer_size : UInt32*, session_count_ptr : UInt32*, session_info : Win32cr::Storage::IscsiDisc::ISCSI_SESSION_INFO_EX*) : UInt32
+    C.GetIScsiSessionListEx(buffer_size, session_count_ptr, session_info)
+  end
+
+  def getDevicesForIScsiSessionW(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, device_count : UInt32*, devices : Win32cr::Storage::IscsiDisc::ISCSI_DEVICE_ON_SESSIONW*) : UInt32
+    C.GetDevicesForIScsiSessionW(unique_session_id, device_count, devices)
+  end
+
+  def getDevicesForIScsiSessionA(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, device_count : UInt32*, devices : Win32cr::Storage::IscsiDisc::ISCSI_DEVICE_ON_SESSIONA*) : UInt32
+    C.GetDevicesForIScsiSessionA(unique_session_id, device_count, devices)
+  end
+
+  def setupPersistentIScsiVolumes : UInt32
+    C.SetupPersistentIScsiVolumes
+  end
+
+  def setupPersistentIScsiDevices : UInt32
+    C.SetupPersistentIScsiDevices
+  end
+
+  def addPersistentIScsiDeviceW(device_path : Win32cr::Foundation::PWSTR) : UInt32
+    C.AddPersistentIScsiDeviceW(device_path)
+  end
+
+  def addPersistentIScsiDeviceA(device_path : Win32cr::Foundation::PSTR) : UInt32
+    C.AddPersistentIScsiDeviceA(device_path)
+  end
+
+  def removePersistentIScsiDeviceW(device_path : Win32cr::Foundation::PWSTR) : UInt32
+    C.RemovePersistentIScsiDeviceW(device_path)
+  end
+
+  def removePersistentIScsiDeviceA(device_path : Win32cr::Foundation::PSTR) : UInt32
+    C.RemovePersistentIScsiDeviceA(device_path)
+  end
+
+  def clearPersistentIScsiDevices : UInt32
+    C.ClearPersistentIScsiDevices
+  end
+
+  def reportPersistentIScsiDevicesW(buffer_size_in_char : UInt32*, buffer : UInt16*) : UInt32
+    C.ReportPersistentIScsiDevicesW(buffer_size_in_char, buffer)
+  end
+
+  def reportPersistentIScsiDevicesA(buffer_size_in_char : UInt32*, buffer : UInt8*) : UInt32
+    C.ReportPersistentIScsiDevicesA(buffer_size_in_char, buffer)
+  end
+
+  def reportIScsiTargetPortalsW(initiator_name : Win32cr::Foundation::PWSTR, target_name : Win32cr::Foundation::PWSTR, target_portal_tag : UInt16*, element_count : UInt32*, portals : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
+    C.ReportIScsiTargetPortalsW(initiator_name, target_name, target_portal_tag, element_count, portals)
+  end
+
+  def reportIScsiTargetPortalsA(initiator_name : Win32cr::Foundation::PSTR, target_name : Win32cr::Foundation::PSTR, target_portal_tag : UInt16*, element_count : UInt32*, portals : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
+    C.ReportIScsiTargetPortalsA(initiator_name, target_name, target_portal_tag, element_count, portals)
+  end
+
+  def addRadiusServerW(address : Win32cr::Foundation::PWSTR) : UInt32
+    C.AddRadiusServerW(address)
+  end
+
+  def addRadiusServerA(address : Win32cr::Foundation::PSTR) : UInt32
+    C.AddRadiusServerA(address)
+  end
+
+  def removeRadiusServerW(address : Win32cr::Foundation::PWSTR) : UInt32
+    C.RemoveRadiusServerW(address)
+  end
+
+  def removeRadiusServerA(address : Win32cr::Foundation::PSTR) : UInt32
+    C.RemoveRadiusServerA(address)
+  end
+
+  def reportRadiusServerListW(buffer_size_in_char : UInt32*, buffer : UInt16*) : UInt32
+    C.ReportRadiusServerListW(buffer_size_in_char, buffer)
+  end
+
+  def reportRadiusServerListA(buffer_size_in_char : UInt32*, buffer : UInt8*) : UInt32
+    C.ReportRadiusServerListA(buffer_size_in_char, buffer)
+  end
+
   @[Link("iscsidsc")]
   lib C
+    # :nodoc:
     fun GetIScsiVersionInformation(version_info : Win32cr::Storage::IscsiDisc::ISCSI_VERSION_INFO*) : UInt32
 
+    # :nodoc:
     fun GetIScsiTargetInformationW(target_name : Win32cr::Foundation::PWSTR, discovery_mechanism : Win32cr::Foundation::PWSTR, info_class : Win32cr::Storage::IscsiDisc::TARGET_INFORMATION_CLASS, buffer_size : UInt32*, buffer : Void*) : UInt32
 
+    # :nodoc:
     fun GetIScsiTargetInformationA(target_name : Win32cr::Foundation::PSTR, discovery_mechanism : Win32cr::Foundation::PSTR, info_class : Win32cr::Storage::IscsiDisc::TARGET_INFORMATION_CLASS, buffer_size : UInt32*, buffer : Void*) : UInt32
 
+    # :nodoc:
     fun AddIScsiConnectionW(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, reserved : Void*, initiator_port_number : UInt32, target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*, security_flags : UInt64, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, key_size : UInt32, key : UInt8*, connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
 
+    # :nodoc:
     fun AddIScsiConnectionA(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, reserved : Void*, initiator_port_number : UInt32, target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*, security_flags : UInt64, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, key_size : UInt32, key : UInt8*, connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
 
+    # :nodoc:
     fun RemoveIScsiConnection(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
 
+    # :nodoc:
     fun ReportIScsiTargetsW(force_update : Win32cr::Foundation::BOOLEAN, buffer_size : UInt32*, buffer : UInt16*) : UInt32
 
+    # :nodoc:
     fun ReportIScsiTargetsA(force_update : Win32cr::Foundation::BOOLEAN, buffer_size : UInt32*, buffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun AddIScsiStaticTargetW(target_name : Win32cr::Foundation::PWSTR, target_alias : Win32cr::Foundation::PWSTR, target_flags : UInt32, persist : Win32cr::Foundation::BOOLEAN, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGW*, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, portal_group : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_GROUPW*) : UInt32
 
+    # :nodoc:
     fun AddIScsiStaticTargetA(target_name : Win32cr::Foundation::PSTR, target_alias : Win32cr::Foundation::PSTR, target_flags : UInt32, persist : Win32cr::Foundation::BOOLEAN, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGA*, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, portal_group : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_GROUPA*) : UInt32
 
+    # :nodoc:
     fun RemoveIScsiStaticTargetW(target_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RemoveIScsiStaticTargetA(target_name : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun AddIScsiSendTargetPortalW(initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, security_flags : UInt64, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
 
+    # :nodoc:
     fun AddIScsiSendTargetPortalA(initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, security_flags : UInt64, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
 
+    # :nodoc:
     fun RemoveIScsiSendTargetPortalW(initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
 
+    # :nodoc:
     fun RemoveIScsiSendTargetPortalA(initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
 
+    # :nodoc:
     fun RefreshIScsiSendTargetPortalW(initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
 
+    # :nodoc:
     fun RefreshIScsiSendTargetPortalA(initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
 
+    # :nodoc:
     fun ReportIScsiSendTargetPortalsW(portal_count : UInt32*, portal_info : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_INFOW*) : UInt32
 
+    # :nodoc:
     fun ReportIScsiSendTargetPortalsA(portal_count : UInt32*, portal_info : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_INFOA*) : UInt32
 
+    # :nodoc:
     fun ReportIScsiSendTargetPortalsExW(portal_count : UInt32*, portal_info_size : UInt32*, portal_info : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_INFO_EXW*) : UInt32
 
+    # :nodoc:
     fun ReportIScsiSendTargetPortalsExA(portal_count : UInt32*, portal_info_size : UInt32*, portal_info : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_INFO_EXA*) : UInt32
 
+    # :nodoc:
     fun LoginIScsiTargetW(target_name : Win32cr::Foundation::PWSTR, is_informational_session : Win32cr::Foundation::BOOLEAN, initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*, security_flags : UInt64, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGW*, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, key_size : UInt32, key : UInt8*, is_persistent : Win32cr::Foundation::BOOLEAN, unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, unique_connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
 
+    # :nodoc:
     fun LoginIScsiTargetA(target_name : Win32cr::Foundation::PSTR, is_informational_session : Win32cr::Foundation::BOOLEAN, initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*, security_flags : UInt64, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGA*, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, key_size : UInt32, key : UInt8*, is_persistent : Win32cr::Foundation::BOOLEAN, unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, unique_connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
 
+    # :nodoc:
     fun ReportIScsiPersistentLoginsW(count : UInt32*, persistent_login_info : Win32cr::Storage::IscsiDisc::PERSISTENT_ISCSI_LOGIN_INFOW*, buffer_size_in_bytes : UInt32*) : UInt32
 
+    # :nodoc:
     fun ReportIScsiPersistentLoginsA(count : UInt32*, persistent_login_info : Win32cr::Storage::IscsiDisc::PERSISTENT_ISCSI_LOGIN_INFOA*, buffer_size_in_bytes : UInt32*) : UInt32
 
+    # :nodoc:
     fun LogoutIScsiTarget(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
 
+    # :nodoc:
     fun RemoveIScsiPersistentTargetW(initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, target_name : Win32cr::Foundation::PWSTR, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
 
+    # :nodoc:
     fun RemoveIScsiPersistentTargetA(initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, target_name : Win32cr::Foundation::PSTR, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
 
+    # :nodoc:
     fun SendScsiInquiry(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, lun : UInt64, evpd_cmddt : UInt8, page_code : UInt8, scsi_status : UInt8*, response_size : UInt32*, response_buffer : UInt8*, sense_size : UInt32*, sense_buffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun SendScsiReadCapacity(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, lun : UInt64, scsi_status : UInt8*, response_size : UInt32*, response_buffer : UInt8*, sense_size : UInt32*, sense_buffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun SendScsiReportLuns(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, scsi_status : UInt8*, response_size : UInt32*, response_buffer : UInt8*, sense_size : UInt32*, sense_buffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun ReportIScsiInitiatorListW(buffer_size : UInt32*, buffer : UInt16*) : UInt32
 
+    # :nodoc:
     fun ReportIScsiInitiatorListA(buffer_size : UInt32*, buffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun ReportActiveIScsiTargetMappingsW(buffer_size : UInt32*, mapping_count : UInt32*, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGW*) : UInt32
 
+    # :nodoc:
     fun ReportActiveIScsiTargetMappingsA(buffer_size : UInt32*, mapping_count : UInt32*, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGA*) : UInt32
 
+    # :nodoc:
     fun SetIScsiTunnelModeOuterAddressW(initiator_name : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, destination_address : Win32cr::Foundation::PWSTR, outer_mode_address : Win32cr::Foundation::PWSTR, persist : Win32cr::Foundation::BOOLEAN) : UInt32
 
+    # :nodoc:
     fun SetIScsiTunnelModeOuterAddressA(initiator_name : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, destination_address : Win32cr::Foundation::PSTR, outer_mode_address : Win32cr::Foundation::PSTR, persist : Win32cr::Foundation::BOOLEAN) : UInt32
 
+    # :nodoc:
     fun SetIScsiIKEInfoW(initiator_name : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, auth_info : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_INFORMATION*, persist : Win32cr::Foundation::BOOLEAN) : UInt32
 
+    # :nodoc:
     fun SetIScsiIKEInfoA(initiator_name : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, auth_info : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_INFORMATION*, persist : Win32cr::Foundation::BOOLEAN) : UInt32
 
+    # :nodoc:
     fun GetIScsiIKEInfoW(initiator_name : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, reserved : UInt32*, auth_info : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_INFORMATION*) : UInt32
 
+    # :nodoc:
     fun GetIScsiIKEInfoA(initiator_name : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, reserved : UInt32*, auth_info : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_INFORMATION*) : UInt32
 
+    # :nodoc:
     fun SetIScsiGroupPresharedKey(key_length : UInt32, key : UInt8*, persist : Win32cr::Foundation::BOOLEAN) : UInt32
 
+    # :nodoc:
     fun SetIScsiInitiatorCHAPSharedSecret(shared_secret_length : UInt32, shared_secret : UInt8*) : UInt32
 
+    # :nodoc:
     fun SetIScsiInitiatorRADIUSSharedSecret(shared_secret_length : UInt32, shared_secret : UInt8*) : UInt32
 
+    # :nodoc:
     fun SetIScsiInitiatorNodeNameW(initiator_node_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun SetIScsiInitiatorNodeNameA(initiator_node_name : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun GetIScsiInitiatorNodeNameW(initiator_node_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun GetIScsiInitiatorNodeNameA(initiator_node_name : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun AddISNSServerW(address : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun AddISNSServerA(address : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun RemoveISNSServerW(address : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RemoveISNSServerA(address : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun RefreshISNSServerW(address : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RefreshISNSServerA(address : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ReportISNSServerListW(buffer_size_in_char : UInt32*, buffer : UInt16*) : UInt32
 
+    # :nodoc:
     fun ReportISNSServerListA(buffer_size_in_char : UInt32*, buffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun GetIScsiSessionListW(buffer_size : UInt32*, session_count : UInt32*, session_info : Win32cr::Storage::IscsiDisc::ISCSI_SESSION_INFOW*) : UInt32
 
+    # :nodoc:
     fun GetIScsiSessionListA(buffer_size : UInt32*, session_count : UInt32*, session_info : Win32cr::Storage::IscsiDisc::ISCSI_SESSION_INFOA*) : UInt32
 
+    # :nodoc:
     fun GetIScsiSessionListEx(buffer_size : UInt32*, session_count_ptr : UInt32*, session_info : Win32cr::Storage::IscsiDisc::ISCSI_SESSION_INFO_EX*) : UInt32
 
+    # :nodoc:
     fun GetDevicesForIScsiSessionW(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, device_count : UInt32*, devices : Win32cr::Storage::IscsiDisc::ISCSI_DEVICE_ON_SESSIONW*) : UInt32
 
+    # :nodoc:
     fun GetDevicesForIScsiSessionA(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, device_count : UInt32*, devices : Win32cr::Storage::IscsiDisc::ISCSI_DEVICE_ON_SESSIONA*) : UInt32
 
+    # :nodoc:
     fun SetupPersistentIScsiVolumes : UInt32
 
+    # :nodoc:
     fun SetupPersistentIScsiDevices : UInt32
 
+    # :nodoc:
     fun AddPersistentIScsiDeviceW(device_path : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun AddPersistentIScsiDeviceA(device_path : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun RemovePersistentIScsiDeviceW(device_path : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RemovePersistentIScsiDeviceA(device_path : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ClearPersistentIScsiDevices : UInt32
 
+    # :nodoc:
     fun ReportPersistentIScsiDevicesW(buffer_size_in_char : UInt32*, buffer : UInt16*) : UInt32
 
+    # :nodoc:
     fun ReportPersistentIScsiDevicesA(buffer_size_in_char : UInt32*, buffer : UInt8*) : UInt32
 
+    # :nodoc:
     fun ReportIScsiTargetPortalsW(initiator_name : Win32cr::Foundation::PWSTR, target_name : Win32cr::Foundation::PWSTR, target_portal_tag : UInt16*, element_count : UInt32*, portals : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
 
+    # :nodoc:
     fun ReportIScsiTargetPortalsA(initiator_name : Win32cr::Foundation::PSTR, target_name : Win32cr::Foundation::PSTR, target_portal_tag : UInt16*, element_count : UInt32*, portals : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
 
+    # :nodoc:
     fun AddRadiusServerW(address : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun AddRadiusServerA(address : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun RemoveRadiusServerW(address : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RemoveRadiusServerA(address : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ReportRadiusServerListW(buffer_size_in_char : UInt32*, buffer : UInt16*) : UInt32
 
+    # :nodoc:
     fun ReportRadiusServerListA(buffer_size_in_char : UInt32*, buffer : UInt8*) : UInt32
 
   end

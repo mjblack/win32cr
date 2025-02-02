@@ -8,6 +8,7 @@ require "./../ui/windows_and_messaging.cr"
 require "./../security.cr"
 
 module Win32cr::System::RemoteDesktop
+  extend self
   alias HwtsVirtualChannelHandle = LibC::IntPtrT
   alias PCHANNEL_INIT_EVENT_FN = Proc(Void*, UInt32, Void*, UInt32, Void)
 
@@ -6310,137 +6311,462 @@ module Win32cr::System::RemoteDesktop
 
   end
 
+  def wTSStopRemoteControlSession(logon_id : UInt32) : Win32cr::Foundation::BOOL
+    C.WTSStopRemoteControlSession(logon_id)
+  end
+
+  def wTSStartRemoteControlSessionW(pTargetServerName : Win32cr::Foundation::PWSTR, target_logon_id : UInt32, hotkey_vk : UInt8, hotkey_modifiers : UInt16) : Win32cr::Foundation::BOOL
+    C.WTSStartRemoteControlSessionW(pTargetServerName, target_logon_id, hotkey_vk, hotkey_modifiers)
+  end
+
+  def wTSStartRemoteControlSessionA(pTargetServerName : Win32cr::Foundation::PSTR, target_logon_id : UInt32, hotkey_vk : UInt8, hotkey_modifiers : UInt16) : Win32cr::Foundation::BOOL
+    C.WTSStartRemoteControlSessionA(pTargetServerName, target_logon_id, hotkey_vk, hotkey_modifiers)
+  end
+
+  def wTSConnectSessionA(logon_id : UInt32, target_logon_id : UInt32, pPassword : Win32cr::Foundation::PSTR, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.WTSConnectSessionA(logon_id, target_logon_id, pPassword, bWait)
+  end
+
+  def wTSConnectSessionW(logon_id : UInt32, target_logon_id : UInt32, pPassword : Win32cr::Foundation::PWSTR, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.WTSConnectSessionW(logon_id, target_logon_id, pPassword, bWait)
+  end
+
+  def wTSEnumerateServersW(pDomainName : Win32cr::Foundation::PWSTR, reserved : UInt32, version : UInt32, ppServerInfo : Win32cr::System::RemoteDesktop::WTS_SERVER_INFOW**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSEnumerateServersW(pDomainName, reserved, version, ppServerInfo, pCount)
+  end
+
+  def wTSEnumerateServersA(pDomainName : Win32cr::Foundation::PSTR, reserved : UInt32, version : UInt32, ppServerInfo : Win32cr::System::RemoteDesktop::WTS_SERVER_INFOA**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSEnumerateServersA(pDomainName, reserved, version, ppServerInfo, pCount)
+  end
+
+  def wTSOpenServerW(pServerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.WTSOpenServerW(pServerName)
+  end
+
+  def wTSOpenServerA(pServerName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    C.WTSOpenServerA(pServerName)
+  end
+
+  def wTSOpenServerExW(pServerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.WTSOpenServerExW(pServerName)
+  end
+
+  def wTSOpenServerExA(pServerName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    C.WTSOpenServerExA(pServerName)
+  end
+
+  def wTSCloseServer(hServer : Win32cr::Foundation::HANDLE) : Void
+    C.WTSCloseServer(hServer)
+  end
+
+  def wTSEnumerateSessionsW(hServer : Win32cr::Foundation::HANDLE, reserved : UInt32, version : UInt32, ppSessionInfo : Win32cr::System::RemoteDesktop::WTS_SESSION_INFOW**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSEnumerateSessionsW(hServer, reserved, version, ppSessionInfo, pCount)
+  end
+
+  def wTSEnumerateSessionsA(hServer : Win32cr::Foundation::HANDLE, reserved : UInt32, version : UInt32, ppSessionInfo : Win32cr::System::RemoteDesktop::WTS_SESSION_INFOA**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSEnumerateSessionsA(hServer, reserved, version, ppSessionInfo, pCount)
+  end
+
+  def wTSEnumerateSessionsExW(hServer : Win32cr::Foundation::HANDLE, pLevel : UInt32*, filter : UInt32, ppSessionInfo : Win32cr::System::RemoteDesktop::WTS_SESSION_INFO_1W**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSEnumerateSessionsExW(hServer, pLevel, filter, ppSessionInfo, pCount)
+  end
+
+  def wTSEnumerateSessionsExA(hServer : Win32cr::Foundation::HANDLE, pLevel : UInt32*, filter : UInt32, ppSessionInfo : Win32cr::System::RemoteDesktop::WTS_SESSION_INFO_1A**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSEnumerateSessionsExA(hServer, pLevel, filter, ppSessionInfo, pCount)
+  end
+
+  def wTSEnumerateProcessesW(hServer : Win32cr::Foundation::HANDLE, reserved : UInt32, version : UInt32, ppProcessInfo : Win32cr::System::RemoteDesktop::WTS_PROCESS_INFOW**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSEnumerateProcessesW(hServer, reserved, version, ppProcessInfo, pCount)
+  end
+
+  def wTSEnumerateProcessesA(hServer : Win32cr::Foundation::HANDLE, reserved : UInt32, version : UInt32, ppProcessInfo : Win32cr::System::RemoteDesktop::WTS_PROCESS_INFOA**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSEnumerateProcessesA(hServer, reserved, version, ppProcessInfo, pCount)
+  end
+
+  def wTSTerminateProcess(hServer : Win32cr::Foundation::HANDLE, process_id : UInt32, exit_code : UInt32) : Win32cr::Foundation::BOOL
+    C.WTSTerminateProcess(hServer, process_id, exit_code)
+  end
+
+  def wTSQuerySessionInformationW(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, wts_info_class : Win32cr::System::RemoteDesktop::WTS_INFO_CLASS, ppBuffer : Win32cr::Foundation::PWSTR*, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSQuerySessionInformationW(hServer, session_id, wts_info_class, ppBuffer, pBytesReturned)
+  end
+
+  def wTSQuerySessionInformationA(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, wts_info_class : Win32cr::System::RemoteDesktop::WTS_INFO_CLASS, ppBuffer : Win32cr::Foundation::PSTR*, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSQuerySessionInformationA(hServer, session_id, wts_info_class, ppBuffer, pBytesReturned)
+  end
+
+  def wTSQueryUserConfigW(pServerName : Win32cr::Foundation::PWSTR, pUserName : Win32cr::Foundation::PWSTR, wts_config_class : Win32cr::System::RemoteDesktop::WTS_CONFIG_CLASS, ppBuffer : Win32cr::Foundation::PWSTR*, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSQueryUserConfigW(pServerName, pUserName, wts_config_class, ppBuffer, pBytesReturned)
+  end
+
+  def wTSQueryUserConfigA(pServerName : Win32cr::Foundation::PSTR, pUserName : Win32cr::Foundation::PSTR, wts_config_class : Win32cr::System::RemoteDesktop::WTS_CONFIG_CLASS, ppBuffer : Win32cr::Foundation::PSTR*, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSQueryUserConfigA(pServerName, pUserName, wts_config_class, ppBuffer, pBytesReturned)
+  end
+
+  def wTSSetUserConfigW(pServerName : Win32cr::Foundation::PWSTR, pUserName : Win32cr::Foundation::PWSTR, wts_config_class : Win32cr::System::RemoteDesktop::WTS_CONFIG_CLASS, pBuffer : Win32cr::Foundation::PWSTR, data_length : UInt32) : Win32cr::Foundation::BOOL
+    C.WTSSetUserConfigW(pServerName, pUserName, wts_config_class, pBuffer, data_length)
+  end
+
+  def wTSSetUserConfigA(pServerName : Win32cr::Foundation::PSTR, pUserName : Win32cr::Foundation::PSTR, wts_config_class : Win32cr::System::RemoteDesktop::WTS_CONFIG_CLASS, pBuffer : Win32cr::Foundation::PSTR, data_length : UInt32) : Win32cr::Foundation::BOOL
+    C.WTSSetUserConfigA(pServerName, pUserName, wts_config_class, pBuffer, data_length)
+  end
+
+  def wTSSendMessageW(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, pTitle : Win32cr::Foundation::PWSTR, title_length : UInt32, pMessage : Win32cr::Foundation::PWSTR, message_length : UInt32, style : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, timeout : UInt32, pResponse : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.WTSSendMessageW(hServer, session_id, pTitle, title_length, pMessage, message_length, style, timeout, pResponse, bWait)
+  end
+
+  def wTSSendMessageA(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, pTitle : Win32cr::Foundation::PSTR, title_length : UInt32, pMessage : Win32cr::Foundation::PSTR, message_length : UInt32, style : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, timeout : UInt32, pResponse : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.WTSSendMessageA(hServer, session_id, pTitle, title_length, pMessage, message_length, style, timeout, pResponse, bWait)
+  end
+
+  def wTSDisconnectSession(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.WTSDisconnectSession(hServer, session_id, bWait)
+  end
+
+  def wTSLogoffSession(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.WTSLogoffSession(hServer, session_id, bWait)
+  end
+
+  def wTSShutdownSystem(hServer : Win32cr::Foundation::HANDLE, shutdown_flag : UInt32) : Win32cr::Foundation::BOOL
+    C.WTSShutdownSystem(hServer, shutdown_flag)
+  end
+
+  def wTSWaitSystemEvent(hServer : Win32cr::Foundation::HANDLE, event_mask : UInt32, pEventFlags : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSWaitSystemEvent(hServer, event_mask, pEventFlags)
+  end
+
+  def wTSVirtualChannelOpen(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, pVirtualName : Win32cr::Foundation::PSTR) : Win32cr::System::RemoteDesktop::HwtsVirtualChannelHandle
+    C.WTSVirtualChannelOpen(hServer, session_id, pVirtualName)
+  end
+
+  def wTSVirtualChannelOpenEx(session_id : UInt32, pVirtualName : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::System::RemoteDesktop::HwtsVirtualChannelHandle
+    C.WTSVirtualChannelOpenEx(session_id, pVirtualName, flags)
+  end
+
+  def wTSVirtualChannelClose(hChannelHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.WTSVirtualChannelClose(hChannelHandle)
+  end
+
+  def wTSVirtualChannelRead(hChannelHandle : Win32cr::Foundation::HANDLE, time_out : UInt32, buffer : Win32cr::Foundation::PSTR, buffer_size : UInt32, pBytesRead : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSVirtualChannelRead(hChannelHandle, time_out, buffer, buffer_size, pBytesRead)
+  end
+
+  def wTSVirtualChannelWrite(hChannelHandle : Win32cr::Foundation::HANDLE, buffer : Win32cr::Foundation::PSTR, length : UInt32, pBytesWritten : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSVirtualChannelWrite(hChannelHandle, buffer, length, pBytesWritten)
+  end
+
+  def wTSVirtualChannelPurgeInput(hChannelHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.WTSVirtualChannelPurgeInput(hChannelHandle)
+  end
+
+  def wTSVirtualChannelPurgeOutput(hChannelHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.WTSVirtualChannelPurgeOutput(hChannelHandle)
+  end
+
+  def wTSVirtualChannelQuery(hChannelHandle : Win32cr::Foundation::HANDLE, param1 : Win32cr::System::RemoteDesktop::WTS_VIRTUAL_CLASS, ppBuffer : Void**, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSVirtualChannelQuery(hChannelHandle, param1, ppBuffer, pBytesReturned)
+  end
+
+  def wTSFreeMemory(pMemory : Void*) : Void
+    C.WTSFreeMemory(pMemory)
+  end
+
+  def wTSRegisterSessionNotification(hWnd : Win32cr::Foundation::HWND, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.WTSRegisterSessionNotification(hWnd, dwFlags)
+  end
+
+  def wTSUnRegisterSessionNotification(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.WTSUnRegisterSessionNotification(hWnd)
+  end
+
+  def wTSRegisterSessionNotificationEx(hServer : Win32cr::Foundation::HANDLE, hWnd : Win32cr::Foundation::HWND, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    C.WTSRegisterSessionNotificationEx(hServer, hWnd, dwFlags)
+  end
+
+  def wTSUnRegisterSessionNotificationEx(hServer : Win32cr::Foundation::HANDLE, hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.WTSUnRegisterSessionNotificationEx(hServer, hWnd)
+  end
+
+  def wTSQueryUserToken(session_id : UInt32, phToken : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    C.WTSQueryUserToken(session_id, phToken)
+  end
+
+  def wTSFreeMemoryExW(wts_type_class : Win32cr::System::RemoteDesktop::WTS_TYPE_CLASS, pMemory : Void*, number_of_entries : UInt32) : Win32cr::Foundation::BOOL
+    C.WTSFreeMemoryExW(wts_type_class, pMemory, number_of_entries)
+  end
+
+  def wTSFreeMemoryExA(wts_type_class : Win32cr::System::RemoteDesktop::WTS_TYPE_CLASS, pMemory : Void*, number_of_entries : UInt32) : Win32cr::Foundation::BOOL
+    C.WTSFreeMemoryExA(wts_type_class, pMemory, number_of_entries)
+  end
+
+  def wTSEnumerateProcessesExW(hServer : Win32cr::Foundation::HANDLE, pLevel : UInt32*, session_id : UInt32, ppProcessInfo : Win32cr::Foundation::PWSTR*, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSEnumerateProcessesExW(hServer, pLevel, session_id, ppProcessInfo, pCount)
+  end
+
+  def wTSEnumerateProcessesExA(hServer : Win32cr::Foundation::HANDLE, pLevel : UInt32*, session_id : UInt32, ppProcessInfo : Win32cr::Foundation::PSTR*, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSEnumerateProcessesExA(hServer, pLevel, session_id, ppProcessInfo, pCount)
+  end
+
+  def wTSEnumerateListenersW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListeners : UInt16**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSEnumerateListenersW(hServer, pReserved, reserved, pListeners, pCount)
+  end
+
+  def wTSEnumerateListenersA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListeners : Int8**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSEnumerateListenersA(hServer, pReserved, reserved, pListeners, pCount)
+  end
+
+  def wTSQueryListenerConfigW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, pBuffer : Win32cr::System::RemoteDesktop::WTSLISTENERCONFIGW*) : Win32cr::Foundation::BOOL
+    C.WTSQueryListenerConfigW(hServer, pReserved, reserved, pListenerName, pBuffer)
+  end
+
+  def wTSQueryListenerConfigA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, pBuffer : Win32cr::System::RemoteDesktop::WTSLISTENERCONFIGA*) : Win32cr::Foundation::BOOL
+    C.WTSQueryListenerConfigA(hServer, pReserved, reserved, pListenerName, pBuffer)
+  end
+
+  def wTSCreateListenerW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, pBuffer : Win32cr::System::RemoteDesktop::WTSLISTENERCONFIGW*, flag : UInt32) : Win32cr::Foundation::BOOL
+    C.WTSCreateListenerW(hServer, pReserved, reserved, pListenerName, pBuffer, flag)
+  end
+
+  def wTSCreateListenerA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, pBuffer : Win32cr::System::RemoteDesktop::WTSLISTENERCONFIGA*, flag : UInt32) : Win32cr::Foundation::BOOL
+    C.WTSCreateListenerA(hServer, pReserved, reserved, pListenerName, pBuffer, flag)
+  end
+
+  def wTSSetListenerSecurityW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+    C.WTSSetListenerSecurityW(hServer, pReserved, reserved, pListenerName, security_information, pSecurityDescriptor)
+  end
+
+  def wTSSetListenerSecurityA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+    C.WTSSetListenerSecurityA(hServer, pReserved, reserved, pListenerName, security_information, pSecurityDescriptor)
+  end
+
+  def wTSGetListenerSecurityW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSGetListenerSecurityW(hServer, pReserved, reserved, pListenerName, security_information, pSecurityDescriptor, nLength, lpnLengthNeeded)
+  end
+
+  def wTSGetListenerSecurityA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSGetListenerSecurityA(hServer, pReserved, reserved, pListenerName, security_information, pSecurityDescriptor, nLength, lpnLengthNeeded)
+  end
+
+  def wTSEnableChildSessions(bEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.WTSEnableChildSessions(bEnable)
+  end
+
+  def wTSIsChildSessionsEnabled(pbEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.WTSIsChildSessionsEnabled(pbEnabled)
+  end
+
+  def wTSGetChildSessionId(pSessionId : UInt32*) : Win32cr::Foundation::BOOL
+    C.WTSGetChildSessionId(pSessionId)
+  end
+
+  def wTSSetRenderHint(pRenderHintID : UInt64*, hwndOwner : Win32cr::Foundation::HWND, renderHintType : UInt32, cbHintDataLength : UInt32, pHintData : UInt8*) : Win32cr::Foundation::HRESULT
+    C.WTSSetRenderHint(pRenderHintID, hwndOwner, renderHintType, cbHintDataLength, pHintData)
+  end
+
+  def processIdToSessionId(dwProcessId : UInt32, pSessionId : UInt32*) : Win32cr::Foundation::BOOL
+    C.ProcessIdToSessionId(dwProcessId, pSessionId)
+  end
+
+  def wTSGetActiveConsoleSessionId : UInt32
+    C.WTSGetActiveConsoleSessionId
+  end
+
   @[Link("wtsapi32")]
   @[Link("kernel32")]
   lib C
+    # :nodoc:
     fun WTSStopRemoteControlSession(logon_id : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSStartRemoteControlSessionW(pTargetServerName : Win32cr::Foundation::PWSTR, target_logon_id : UInt32, hotkey_vk : UInt8, hotkey_modifiers : UInt16) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSStartRemoteControlSessionA(pTargetServerName : Win32cr::Foundation::PSTR, target_logon_id : UInt32, hotkey_vk : UInt8, hotkey_modifiers : UInt16) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSConnectSessionA(logon_id : UInt32, target_logon_id : UInt32, pPassword : Win32cr::Foundation::PSTR, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSConnectSessionW(logon_id : UInt32, target_logon_id : UInt32, pPassword : Win32cr::Foundation::PWSTR, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSEnumerateServersW(pDomainName : Win32cr::Foundation::PWSTR, reserved : UInt32, version : UInt32, ppServerInfo : Win32cr::System::RemoteDesktop::WTS_SERVER_INFOW**, pCount : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSEnumerateServersA(pDomainName : Win32cr::Foundation::PSTR, reserved : UInt32, version : UInt32, ppServerInfo : Win32cr::System::RemoteDesktop::WTS_SERVER_INFOA**, pCount : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSOpenServerW(pServerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun WTSOpenServerA(pServerName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun WTSOpenServerExW(pServerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun WTSOpenServerExA(pServerName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun WTSCloseServer(hServer : Win32cr::Foundation::HANDLE) : Void
 
+    # :nodoc:
     fun WTSEnumerateSessionsW(hServer : Win32cr::Foundation::HANDLE, reserved : UInt32, version : UInt32, ppSessionInfo : Win32cr::System::RemoteDesktop::WTS_SESSION_INFOW**, pCount : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSEnumerateSessionsA(hServer : Win32cr::Foundation::HANDLE, reserved : UInt32, version : UInt32, ppSessionInfo : Win32cr::System::RemoteDesktop::WTS_SESSION_INFOA**, pCount : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSEnumerateSessionsExW(hServer : Win32cr::Foundation::HANDLE, pLevel : UInt32*, filter : UInt32, ppSessionInfo : Win32cr::System::RemoteDesktop::WTS_SESSION_INFO_1W**, pCount : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSEnumerateSessionsExA(hServer : Win32cr::Foundation::HANDLE, pLevel : UInt32*, filter : UInt32, ppSessionInfo : Win32cr::System::RemoteDesktop::WTS_SESSION_INFO_1A**, pCount : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSEnumerateProcessesW(hServer : Win32cr::Foundation::HANDLE, reserved : UInt32, version : UInt32, ppProcessInfo : Win32cr::System::RemoteDesktop::WTS_PROCESS_INFOW**, pCount : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSEnumerateProcessesA(hServer : Win32cr::Foundation::HANDLE, reserved : UInt32, version : UInt32, ppProcessInfo : Win32cr::System::RemoteDesktop::WTS_PROCESS_INFOA**, pCount : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSTerminateProcess(hServer : Win32cr::Foundation::HANDLE, process_id : UInt32, exit_code : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSQuerySessionInformationW(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, wts_info_class : Win32cr::System::RemoteDesktop::WTS_INFO_CLASS, ppBuffer : Win32cr::Foundation::PWSTR*, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSQuerySessionInformationA(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, wts_info_class : Win32cr::System::RemoteDesktop::WTS_INFO_CLASS, ppBuffer : Win32cr::Foundation::PSTR*, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSQueryUserConfigW(pServerName : Win32cr::Foundation::PWSTR, pUserName : Win32cr::Foundation::PWSTR, wts_config_class : Win32cr::System::RemoteDesktop::WTS_CONFIG_CLASS, ppBuffer : Win32cr::Foundation::PWSTR*, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSQueryUserConfigA(pServerName : Win32cr::Foundation::PSTR, pUserName : Win32cr::Foundation::PSTR, wts_config_class : Win32cr::System::RemoteDesktop::WTS_CONFIG_CLASS, ppBuffer : Win32cr::Foundation::PSTR*, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSSetUserConfigW(pServerName : Win32cr::Foundation::PWSTR, pUserName : Win32cr::Foundation::PWSTR, wts_config_class : Win32cr::System::RemoteDesktop::WTS_CONFIG_CLASS, pBuffer : Win32cr::Foundation::PWSTR, data_length : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSSetUserConfigA(pServerName : Win32cr::Foundation::PSTR, pUserName : Win32cr::Foundation::PSTR, wts_config_class : Win32cr::System::RemoteDesktop::WTS_CONFIG_CLASS, pBuffer : Win32cr::Foundation::PSTR, data_length : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSSendMessageW(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, pTitle : Win32cr::Foundation::PWSTR, title_length : UInt32, pMessage : Win32cr::Foundation::PWSTR, message_length : UInt32, style : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, timeout : UInt32, pResponse : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSSendMessageA(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, pTitle : Win32cr::Foundation::PSTR, title_length : UInt32, pMessage : Win32cr::Foundation::PSTR, message_length : UInt32, style : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, timeout : UInt32, pResponse : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSDisconnectSession(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSLogoffSession(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSShutdownSystem(hServer : Win32cr::Foundation::HANDLE, shutdown_flag : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSWaitSystemEvent(hServer : Win32cr::Foundation::HANDLE, event_mask : UInt32, pEventFlags : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSVirtualChannelOpen(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, pVirtualName : Win32cr::Foundation::PSTR) : Win32cr::System::RemoteDesktop::HwtsVirtualChannelHandle
 
+    # :nodoc:
     fun WTSVirtualChannelOpenEx(session_id : UInt32, pVirtualName : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::System::RemoteDesktop::HwtsVirtualChannelHandle
 
+    # :nodoc:
     fun WTSVirtualChannelClose(hChannelHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSVirtualChannelRead(hChannelHandle : Win32cr::Foundation::HANDLE, time_out : UInt32, buffer : Win32cr::Foundation::PSTR, buffer_size : UInt32, pBytesRead : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSVirtualChannelWrite(hChannelHandle : Win32cr::Foundation::HANDLE, buffer : Win32cr::Foundation::PSTR, length : UInt32, pBytesWritten : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSVirtualChannelPurgeInput(hChannelHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSVirtualChannelPurgeOutput(hChannelHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSVirtualChannelQuery(hChannelHandle : Win32cr::Foundation::HANDLE, param1 : Win32cr::System::RemoteDesktop::WTS_VIRTUAL_CLASS, ppBuffer : Void**, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSFreeMemory(pMemory : Void*) : Void
 
+    # :nodoc:
     fun WTSRegisterSessionNotification(hWnd : Win32cr::Foundation::HWND, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSUnRegisterSessionNotification(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSRegisterSessionNotificationEx(hServer : Win32cr::Foundation::HANDLE, hWnd : Win32cr::Foundation::HWND, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSUnRegisterSessionNotificationEx(hServer : Win32cr::Foundation::HANDLE, hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSQueryUserToken(session_id : UInt32, phToken : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSFreeMemoryExW(wts_type_class : Win32cr::System::RemoteDesktop::WTS_TYPE_CLASS, pMemory : Void*, number_of_entries : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSFreeMemoryExA(wts_type_class : Win32cr::System::RemoteDesktop::WTS_TYPE_CLASS, pMemory : Void*, number_of_entries : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSEnumerateProcessesExW(hServer : Win32cr::Foundation::HANDLE, pLevel : UInt32*, session_id : UInt32, ppProcessInfo : Win32cr::Foundation::PWSTR*, pCount : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSEnumerateProcessesExA(hServer : Win32cr::Foundation::HANDLE, pLevel : UInt32*, session_id : UInt32, ppProcessInfo : Win32cr::Foundation::PSTR*, pCount : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSEnumerateListenersW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListeners : UInt16**, pCount : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSEnumerateListenersA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListeners : Int8**, pCount : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSQueryListenerConfigW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, pBuffer : Win32cr::System::RemoteDesktop::WTSLISTENERCONFIGW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSQueryListenerConfigA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, pBuffer : Win32cr::System::RemoteDesktop::WTSLISTENERCONFIGA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSCreateListenerW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, pBuffer : Win32cr::System::RemoteDesktop::WTSLISTENERCONFIGW*, flag : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSCreateListenerA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, pBuffer : Win32cr::System::RemoteDesktop::WTSLISTENERCONFIGA*, flag : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSSetListenerSecurityW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSSetListenerSecurityA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSGetListenerSecurityW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSGetListenerSecurityA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSEnableChildSessions(bEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSIsChildSessionsEnabled(pbEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSGetChildSessionId(pSessionId : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSSetRenderHint(pRenderHintID : UInt64*, hwndOwner : Win32cr::Foundation::HWND, renderHintType : UInt32, cbHintDataLength : UInt32, pHintData : UInt8*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ProcessIdToSessionId(dwProcessId : UInt32, pSessionId : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WTSGetActiveConsoleSessionId : UInt32
 
   end

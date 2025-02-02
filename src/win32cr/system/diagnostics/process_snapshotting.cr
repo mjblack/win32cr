@@ -3,6 +3,7 @@ require "./../memory.cr"
 require "./debug.cr"
 
 module Win32cr::System::Diagnostics::ProcessSnapshotting
+  extend self
   alias HPSS = LibC::IntPtrT
   alias HPSSWALK = LibC::IntPtrT
   PSS_PERF_RESOLUTION = 1000000_u32
@@ -353,26 +354,76 @@ module Win32cr::System::Diagnostics::ProcessSnapshotting
     end
   end
 
+  def pssCaptureSnapshot(process_handle : Win32cr::Foundation::HANDLE, capture_flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_CAPTURE_FLAGS, thread_context_flags : UInt32, snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS*) : UInt32
+    C.PssCaptureSnapshot(process_handle, capture_flags, thread_context_flags, snapshot_handle)
+  end
+
+  def pssFreeSnapshot(process_handle : Win32cr::Foundation::HANDLE, snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS) : UInt32
+    C.PssFreeSnapshot(process_handle, snapshot_handle)
+  end
+
+  def pssQuerySnapshot(snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS, information_class : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_QUERY_INFORMATION_CLASS, buffer : Void*, buffer_length : UInt32) : UInt32
+    C.PssQuerySnapshot(snapshot_handle, information_class, buffer, buffer_length)
+  end
+
+  def pssWalkSnapshot(snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS, information_class : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_WALK_INFORMATION_CLASS, walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK, buffer : Void*, buffer_length : UInt32) : UInt32
+    C.PssWalkSnapshot(snapshot_handle, information_class, walk_marker_handle, buffer, buffer_length)
+  end
+
+  def pssDuplicateSnapshot(source_process_handle : Win32cr::Foundation::HANDLE, snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS, target_process_handle : Win32cr::Foundation::HANDLE, target_snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS*, flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_DUPLICATE_FLAGS) : UInt32
+    C.PssDuplicateSnapshot(source_process_handle, snapshot_handle, target_process_handle, target_snapshot_handle, flags)
+  end
+
+  def pssWalkMarkerCreate(allocator : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_ALLOCATOR*, walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK*) : UInt32
+    C.PssWalkMarkerCreate(allocator, walk_marker_handle)
+  end
+
+  def pssWalkMarkerFree(walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK) : UInt32
+    C.PssWalkMarkerFree(walk_marker_handle)
+  end
+
+  def pssWalkMarkerGetPosition(walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK, position : LibC::UIntPtrT*) : UInt32
+    C.PssWalkMarkerGetPosition(walk_marker_handle, position)
+  end
+
+  def pssWalkMarkerSetPosition(walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK, position : LibC::UIntPtrT) : UInt32
+    C.PssWalkMarkerSetPosition(walk_marker_handle, position)
+  end
+
+  def pssWalkMarkerSeekToBeginning(walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK) : UInt32
+    C.PssWalkMarkerSeekToBeginning(walk_marker_handle)
+  end
+
   @[Link("kernel32")]
   lib C
+    # :nodoc:
     fun PssCaptureSnapshot(process_handle : Win32cr::Foundation::HANDLE, capture_flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_CAPTURE_FLAGS, thread_context_flags : UInt32, snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS*) : UInt32
 
+    # :nodoc:
     fun PssFreeSnapshot(process_handle : Win32cr::Foundation::HANDLE, snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS) : UInt32
 
+    # :nodoc:
     fun PssQuerySnapshot(snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS, information_class : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_QUERY_INFORMATION_CLASS, buffer : Void*, buffer_length : UInt32) : UInt32
 
+    # :nodoc:
     fun PssWalkSnapshot(snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS, information_class : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_WALK_INFORMATION_CLASS, walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK, buffer : Void*, buffer_length : UInt32) : UInt32
 
+    # :nodoc:
     fun PssDuplicateSnapshot(source_process_handle : Win32cr::Foundation::HANDLE, snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS, target_process_handle : Win32cr::Foundation::HANDLE, target_snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS*, flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_DUPLICATE_FLAGS) : UInt32
 
+    # :nodoc:
     fun PssWalkMarkerCreate(allocator : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_ALLOCATOR*, walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK*) : UInt32
 
+    # :nodoc:
     fun PssWalkMarkerFree(walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK) : UInt32
 
+    # :nodoc:
     fun PssWalkMarkerGetPosition(walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK, position : LibC::UIntPtrT*) : UInt32
 
+    # :nodoc:
     fun PssWalkMarkerSetPosition(walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK, position : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun PssWalkMarkerSeekToBeginning(walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK) : UInt32
 
   end

@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./threading.cr"
 
 module Win32cr::System::SecurityCenter
+  extend self
 
   CLSID_WSCProductList = LibC::GUID.new(0x17072f7b_u32, 0x9abe_u16, 0x4a74_u16, StaticArray[0xa2_u8, 0x61_u8, 0x1e_u8, 0xb7_u8, 0x6b_u8, 0x55_u8, 0x10_u8, 0x7a_u8])
 
@@ -389,18 +390,48 @@ module Win32cr::System::SecurityCenter
 
   end
 
+  def wscRegisterForChanges(reserved : Void*, phCallbackRegistration : Win32cr::Foundation::HANDLE*, lpCallbackAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, pContext : Void*) : Win32cr::Foundation::HRESULT
+    C.WscRegisterForChanges(reserved, phCallbackRegistration, lpCallbackAddress, pContext)
+  end
+
+  def wscUnRegisterChanges(hRegistrationHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.WscUnRegisterChanges(hRegistrationHandle)
+  end
+
+  def wscRegisterForUserNotifications : Win32cr::Foundation::HRESULT
+    C.WscRegisterForUserNotifications
+  end
+
+  def wscGetSecurityProviderHealth(providers : UInt32, pHealth : Win32cr::System::SecurityCenter::WSC_SECURITY_PROVIDER_HEALTH*) : Win32cr::Foundation::HRESULT
+    C.WscGetSecurityProviderHealth(providers, pHealth)
+  end
+
+  def wscQueryAntiMalwareUri : Win32cr::Foundation::HRESULT
+    C.WscQueryAntiMalwareUri
+  end
+
+  def wscGetAntiMalwareUri(ppszUri : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.WscGetAntiMalwareUri(ppszUri)
+  end
+
   @[Link("wscapi")]
   lib C
+    # :nodoc:
     fun WscRegisterForChanges(reserved : Void*, phCallbackRegistration : Win32cr::Foundation::HANDLE*, lpCallbackAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, pContext : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WscUnRegisterChanges(hRegistrationHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WscRegisterForUserNotifications : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WscGetSecurityProviderHealth(providers : UInt32, pHealth : Win32cr::System::SecurityCenter::WSC_SECURITY_PROVIDER_HEALTH*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WscQueryAntiMalwareUri : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WscGetAntiMalwareUri(ppszUri : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
   end

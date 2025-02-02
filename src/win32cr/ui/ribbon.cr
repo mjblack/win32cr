@@ -5,6 +5,7 @@ require "./../system/com/structured_storage.cr"
 require "./../graphics/gdi.cr"
 
 module Win32cr::UI::Ribbon
+  extend self
   UI_ALL_COMMANDS = 0_u32
   UI_COLLECTION_INVALIDINDEX = 4294967295_u32
   LIBID_UIRibbon = "942f35c2-e83b-45ef-b085-ac295dd63d5b"

@@ -4,6 +4,7 @@ require "./../system/stations_and_desktops.cr"
 require "./../ui/windows_and_messaging.cr"
 
 module Win32cr::Security::WinWlx
+  extend self
   alias PWLX_USE_CTRL_ALT_DEL = Proc(Win32cr::Foundation::HANDLE, Void)
 
   alias PWLX_SET_CONTEXT_POINTER = Proc(Win32cr::Foundation::HANDLE, Void*, Void)

@@ -1,5 +1,6 @@
 
 module Win32cr::System::Search::Common
+  extend self
 
   enum CONDITION_TYPE
     CT_AND_CONDITION = 0_i32

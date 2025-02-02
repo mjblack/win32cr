@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::NetShell
+  extend self
   alias PGET_RESOURCE_STRING_FN = Proc(UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32)
 
   alias PNS_CONTEXT_COMMIT_FN = Proc(UInt32, UInt32)
@@ -195,22 +196,62 @@ module Win32cr::NetworkManagement::NetShell
     end
   end
 
+  def matchEnumTag(hModule : Win32cr::Foundation::HANDLE, pwcArg : Win32cr::Foundation::PWSTR, dwNumArg : UInt32, pEnumTable : Win32cr::NetworkManagement::NetShell::TOKEN_VALUE*, pdwValue : UInt32*) : UInt32
+    C.MatchEnumTag(hModule, pwcArg, dwNumArg, pEnumTable, pdwValue)
+  end
+
+  def matchToken(pwszUserToken : Win32cr::Foundation::PWSTR, pwszCmdToken : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.MatchToken(pwszUserToken, pwszCmdToken)
+  end
+
+  def preprocessCommand(hModule : Win32cr::Foundation::HANDLE, ppwcArguments : Win32cr::Foundation::PWSTR*, dwCurrentIndex : UInt32, dwArgCount : UInt32, pttTags : Win32cr::NetworkManagement::NetShell::TAG_TYPE*, dwTagCount : UInt32, dwMinArgs : UInt32, dwMaxArgs : UInt32, pdwTagType : UInt32*) : UInt32
+    C.PreprocessCommand(hModule, ppwcArguments, dwCurrentIndex, dwArgCount, pttTags, dwTagCount, dwMinArgs, dwMaxArgs, pdwTagType)
+  end
+
+  def printError(hModule : Win32cr::Foundation::HANDLE, dwErrId : UInt32) : UInt32
+    C.PrintError(hModule, dwErrId)
+  end
+
+  def printMessageFromModule(hModule : Win32cr::Foundation::HANDLE, dwMsgId : UInt32) : UInt32
+    C.PrintMessageFromModule(hModule, dwMsgId)
+  end
+
+  def printMessage(pwszFormat : Win32cr::Foundation::PWSTR) : UInt32
+    C.PrintMessage(pwszFormat)
+  end
+
+  def registerContext(pChildContext : Win32cr::NetworkManagement::NetShell::NS_CONTEXT_ATTRIBUTES*) : UInt32
+    C.RegisterContext(pChildContext)
+  end
+
+  def registerHelper(pguidParentContext : LibC::GUID*, pfnRegisterSubContext : Win32cr::NetworkManagement::NetShell::NS_HELPER_ATTRIBUTES*) : UInt32
+    C.RegisterHelper(pguidParentContext, pfnRegisterSubContext)
+  end
+
   @[Link("netsh")]
   lib C
+    # :nodoc:
     fun MatchEnumTag(hModule : Win32cr::Foundation::HANDLE, pwcArg : Win32cr::Foundation::PWSTR, dwNumArg : UInt32, pEnumTable : Win32cr::NetworkManagement::NetShell::TOKEN_VALUE*, pdwValue : UInt32*) : UInt32
 
+    # :nodoc:
     fun MatchToken(pwszUserToken : Win32cr::Foundation::PWSTR, pwszCmdToken : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PreprocessCommand(hModule : Win32cr::Foundation::HANDLE, ppwcArguments : Win32cr::Foundation::PWSTR*, dwCurrentIndex : UInt32, dwArgCount : UInt32, pttTags : Win32cr::NetworkManagement::NetShell::TAG_TYPE*, dwTagCount : UInt32, dwMinArgs : UInt32, dwMaxArgs : UInt32, pdwTagType : UInt32*) : UInt32
 
+    # :nodoc:
     fun PrintError(hModule : Win32cr::Foundation::HANDLE, dwErrId : UInt32) : UInt32
 
+    # :nodoc:
     fun PrintMessageFromModule(hModule : Win32cr::Foundation::HANDLE, dwMsgId : UInt32) : UInt32
 
+    # :nodoc:
     fun PrintMessage(pwszFormat : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RegisterContext(pChildContext : Win32cr::NetworkManagement::NetShell::NS_CONTEXT_ATTRIBUTES*) : UInt32
 
+    # :nodoc:
     fun RegisterHelper(pguidParentContext : LibC::GUID*, pfnRegisterSubContext : Win32cr::NetworkManagement::NetShell::NS_HELPER_ATTRIBUTES*) : UInt32
 
   end

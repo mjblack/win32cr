@@ -4,6 +4,7 @@ require "./../networking/win_sock.cr"
 require "./../security.cr"
 
 module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
+  extend self
   NDF_ERROR_START = 63744_u32
   NDF_E_LENGTH_EXCEEDED = -2146895616_i32
   NDF_E_NOHELPERCLASS = -2146895615_i32
@@ -457,38 +458,118 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
 
   end
 
+  def ndfCreateIncident(helperClassName : Win32cr::Foundation::PWSTR, celt : UInt32, attributes : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::HELPER_ATTRIBUTE*, handle : Void**) : Win32cr::Foundation::HRESULT
+    C.NdfCreateIncident(helperClassName, celt, attributes, handle)
+  end
+
+  def ndfCreateWinSockIncident(sock : Win32cr::Networking::WinSock::SOCKET, host : Win32cr::Foundation::PWSTR, port : UInt16, appId : Win32cr::Foundation::PWSTR, userId : Win32cr::Security::SID*, handle : Void**) : Win32cr::Foundation::HRESULT
+    C.NdfCreateWinSockIncident(sock, host, port, appId, userId, handle)
+  end
+
+  def ndfCreateWebIncident(url : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
+    C.NdfCreateWebIncident(url, handle)
+  end
+
+  def ndfCreateWebIncidentEx(url : Win32cr::Foundation::PWSTR, useWinHTTP : Win32cr::Foundation::BOOL, moduleName : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
+    C.NdfCreateWebIncidentEx(url, useWinHTTP, moduleName, handle)
+  end
+
+  def ndfCreateSharingIncident(unc_path : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
+    C.NdfCreateSharingIncident(unc_path, handle)
+  end
+
+  def ndfCreateDNSIncident(hostname : Win32cr::Foundation::PWSTR, queryType : UInt16, handle : Void**) : Win32cr::Foundation::HRESULT
+    C.NdfCreateDNSIncident(hostname, queryType, handle)
+  end
+
+  def ndfCreateConnectivityIncident(handle : Void**) : Win32cr::Foundation::HRESULT
+    C.NdfCreateConnectivityIncident(handle)
+  end
+
+  def ndfCreateNetConnectionIncident(handle : Void**, id : LibC::GUID) : Win32cr::Foundation::HRESULT
+    C.NdfCreateNetConnectionIncident(handle, id)
+  end
+
+  def ndfCreatePnrpIncident(cloudname : Win32cr::Foundation::PWSTR, peername : Win32cr::Foundation::PWSTR, diagnosePublish : Win32cr::Foundation::BOOL, appId : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
+    C.NdfCreatePnrpIncident(cloudname, peername, diagnosePublish, appId, handle)
+  end
+
+  def ndfCreateGroupingIncident(cloud_name : Win32cr::Foundation::PWSTR, group_name : Win32cr::Foundation::PWSTR, identity : Win32cr::Foundation::PWSTR, invitation : Win32cr::Foundation::PWSTR, addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS_LIST*, appId : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
+    C.NdfCreateGroupingIncident(cloud_name, group_name, identity, invitation, addresses, appId, handle)
+  end
+
+  def ndfExecuteDiagnosis(handle : Void*, hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
+    C.NdfExecuteDiagnosis(handle, hwnd)
+  end
+
+  def ndfCloseIncident(handle : Void*) : Win32cr::Foundation::HRESULT
+    C.NdfCloseIncident(handle)
+  end
+
+  def ndfDiagnoseIncident(handle : Void*, root_cause_count : UInt32*, root_causes : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::RootCauseInfo**, dwWait : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.NdfDiagnoseIncident(handle, root_cause_count, root_causes, dwWait, dwFlags)
+  end
+
+  def ndfRepairIncident(handle : Void*, repair_ex : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::RepairInfoEx*, dwWait : UInt32) : Win32cr::Foundation::HRESULT
+    C.NdfRepairIncident(handle, repair_ex, dwWait)
+  end
+
+  def ndfCancelIncident(handle : Void*) : Win32cr::Foundation::HRESULT
+    C.NdfCancelIncident(handle)
+  end
+
+  def ndfGetTraceFile(handle : Void*, trace_file_location : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.NdfGetTraceFile(handle, trace_file_location)
+  end
+
   @[Link("ndfapi")]
   lib C
+    # :nodoc:
     fun NdfCreateIncident(helperClassName : Win32cr::Foundation::PWSTR, celt : UInt32, attributes : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::HELPER_ATTRIBUTE*, handle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfCreateWinSockIncident(sock : Win32cr::Networking::WinSock::SOCKET, host : Win32cr::Foundation::PWSTR, port : UInt16, appId : Win32cr::Foundation::PWSTR, userId : Win32cr::Security::SID*, handle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfCreateWebIncident(url : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfCreateWebIncidentEx(url : Win32cr::Foundation::PWSTR, useWinHTTP : Win32cr::Foundation::BOOL, moduleName : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfCreateSharingIncident(unc_path : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfCreateDNSIncident(hostname : Win32cr::Foundation::PWSTR, queryType : UInt16, handle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfCreateConnectivityIncident(handle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfCreateNetConnectionIncident(handle : Void**, id : LibC::GUID) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfCreatePnrpIncident(cloudname : Win32cr::Foundation::PWSTR, peername : Win32cr::Foundation::PWSTR, diagnosePublish : Win32cr::Foundation::BOOL, appId : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfCreateGroupingIncident(cloud_name : Win32cr::Foundation::PWSTR, group_name : Win32cr::Foundation::PWSTR, identity : Win32cr::Foundation::PWSTR, invitation : Win32cr::Foundation::PWSTR, addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS_LIST*, appId : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfExecuteDiagnosis(handle : Void*, hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfCloseIncident(handle : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfDiagnoseIncident(handle : Void*, root_cause_count : UInt32*, root_causes : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::RootCauseInfo**, dwWait : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfRepairIncident(handle : Void*, repair_ex : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::RepairInfoEx*, dwWait : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfCancelIncident(handle : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NdfGetTraceFile(handle : Void*, trace_file_location : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
   end

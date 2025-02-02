@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::Ndis
+  extend self
   IOCTL_NDIS_RESERVED5 = 1507380_u32
   IOCTL_NDIS_RESERVED6 = 1540152_u32
   NDIS_OBJECT_TYPE_DEFAULT = 128_u32

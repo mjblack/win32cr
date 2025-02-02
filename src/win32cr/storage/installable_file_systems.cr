@@ -3,6 +3,7 @@ require "./../security.cr"
 require "./../system/io.cr"
 
 module Win32cr::Storage::InstallableFileSystems
+  extend self
   alias HFILTER = LibC::IntPtrT
   alias HFILTER_INSTANCE = LibC::IntPtrT
   alias FilterFindHandle = LibC::IntPtrT
@@ -372,62 +373,202 @@ module Win32cr::Storage::InstallableFileSystems
     end
   end
 
+  def filterLoad(lpFilterName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.FilterLoad(lpFilterName)
+  end
+
+  def filterUnload(lpFilterName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.FilterUnload(lpFilterName)
+  end
+
+  def filterCreate(lpFilterName : Win32cr::Foundation::PWSTR, hFilter : Win32cr::Storage::InstallableFileSystems::HFILTER*) : Win32cr::Foundation::HRESULT
+    C.FilterCreate(lpFilterName, hFilter)
+  end
+
+  def filterClose(hFilter : Win32cr::Storage::InstallableFileSystems::HFILTER) : Win32cr::Foundation::HRESULT
+    C.FilterClose(hFilter)
+  end
+
+  def filterInstanceCreate(lpFilterName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR, lpInstanceName : Win32cr::Foundation::PWSTR, hInstance : Win32cr::Storage::InstallableFileSystems::HFILTER_INSTANCE*) : Win32cr::Foundation::HRESULT
+    C.FilterInstanceCreate(lpFilterName, lpVolumeName, lpInstanceName, hInstance)
+  end
+
+  def filterInstanceClose(hInstance : Win32cr::Storage::InstallableFileSystems::HFILTER_INSTANCE) : Win32cr::Foundation::HRESULT
+    C.FilterInstanceClose(hInstance)
+  end
+
+  def filterAttach(lpFilterName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR, lpInstanceName : Win32cr::Foundation::PWSTR, dwCreatedInstanceNameLength : UInt32, lpCreatedInstanceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.FilterAttach(lpFilterName, lpVolumeName, lpInstanceName, dwCreatedInstanceNameLength, lpCreatedInstanceName)
+  end
+
+  def filterAttachAtAltitude(lpFilterName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR, lpAltitude : Win32cr::Foundation::PWSTR, lpInstanceName : Win32cr::Foundation::PWSTR, dwCreatedInstanceNameLength : UInt32, lpCreatedInstanceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.FilterAttachAtAltitude(lpFilterName, lpVolumeName, lpAltitude, lpInstanceName, dwCreatedInstanceNameLength, lpCreatedInstanceName)
+  end
+
+  def filterDetach(lpFilterName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR, lpInstanceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.FilterDetach(lpFilterName, lpVolumeName, lpInstanceName)
+  end
+
+  def filterFindFirst(dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*, lpFilterFind : Win32cr::Storage::InstallableFileSystems::FilterFindHandle*) : Win32cr::Foundation::HRESULT
+    C.FilterFindFirst(dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned, lpFilterFind)
+  end
+
+  def filterFindNext(hFilterFind : Win32cr::Foundation::HANDLE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    C.FilterFindNext(hFilterFind, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned)
+  end
+
+  def filterFindClose(hFilterFind : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.FilterFindClose(hFilterFind)
+  end
+
+  def filterVolumeFindFirst(dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_VOLUME_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*, lpVolumeFind : Win32cr::Storage::InstallableFileSystems::FilterVolumeFindHandle*) : Win32cr::Foundation::HRESULT
+    C.FilterVolumeFindFirst(dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned, lpVolumeFind)
+  end
+
+  def filterVolumeFindNext(hVolumeFind : Win32cr::Foundation::HANDLE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_VOLUME_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    C.FilterVolumeFindNext(hVolumeFind, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned)
+  end
+
+  def filterVolumeFindClose(hVolumeFind : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.FilterVolumeFindClose(hVolumeFind)
+  end
+
+  def filterInstanceFindFirst(lpFilterName : Win32cr::Foundation::PWSTR, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*, lpFilterInstanceFind : Win32cr::Storage::InstallableFileSystems::FilterInstanceFindHandle*) : Win32cr::Foundation::HRESULT
+    C.FilterInstanceFindFirst(lpFilterName, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned, lpFilterInstanceFind)
+  end
+
+  def filterInstanceFindNext(hFilterInstanceFind : Win32cr::Foundation::HANDLE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    C.FilterInstanceFindNext(hFilterInstanceFind, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned)
+  end
+
+  def filterInstanceFindClose(hFilterInstanceFind : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.FilterInstanceFindClose(hFilterInstanceFind)
+  end
+
+  def filterVolumeInstanceFindFirst(lpVolumeName : Win32cr::Foundation::PWSTR, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*, lpVolumeInstanceFind : Win32cr::Storage::InstallableFileSystems::FilterVolumeInstanceFindHandle*) : Win32cr::Foundation::HRESULT
+    C.FilterVolumeInstanceFindFirst(lpVolumeName, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned, lpVolumeInstanceFind)
+  end
+
+  def filterVolumeInstanceFindNext(hVolumeInstanceFind : Win32cr::Foundation::HANDLE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    C.FilterVolumeInstanceFindNext(hVolumeInstanceFind, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned)
+  end
+
+  def filterVolumeInstanceFindClose(hVolumeInstanceFind : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    C.FilterVolumeInstanceFindClose(hVolumeInstanceFind)
+  end
+
+  def filterGetInformation(hFilter : Win32cr::Storage::InstallableFileSystems::HFILTER, dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    C.FilterGetInformation(hFilter, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned)
+  end
+
+  def filterInstanceGetInformation(hInstance : Win32cr::Storage::InstallableFileSystems::HFILTER_INSTANCE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    C.FilterInstanceGetInformation(hInstance, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned)
+  end
+
+  def filterConnectCommunicationPort(lpPortName : Win32cr::Foundation::PWSTR, dwOptions : UInt32, lpContext : Void*, wSizeOfContext : UInt16, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, hPort : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.FilterConnectCommunicationPort(lpPortName, dwOptions, lpContext, wSizeOfContext, lpSecurityAttributes, hPort)
+  end
+
+  def filterSendMessage(hPort : Win32cr::Foundation::HANDLE, lpInBuffer : Void*, dwInBufferSize : UInt32, lpOutBuffer : Void*, dwOutBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    C.FilterSendMessage(hPort, lpInBuffer, dwInBufferSize, lpOutBuffer, dwOutBufferSize, lpBytesReturned)
+  end
+
+  def filterGetMessage(hPort : Win32cr::Foundation::HANDLE, lpMessageBuffer : Win32cr::Storage::InstallableFileSystems::FILTER_MESSAGE_HEADER*, dwMessageBufferSize : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    C.FilterGetMessage(hPort, lpMessageBuffer, dwMessageBufferSize, lpOverlapped)
+  end
+
+  def filterReplyMessage(hPort : Win32cr::Foundation::HANDLE, lpReplyBuffer : Win32cr::Storage::InstallableFileSystems::FILTER_REPLY_HEADER*, dwReplyBufferSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.FilterReplyMessage(hPort, lpReplyBuffer, dwReplyBufferSize)
+  end
+
+  def filterGetDosName(lpVolumeName : Win32cr::Foundation::PWSTR, lpDosName : UInt16*, dwDosNameBufferSize : UInt32) : Win32cr::Foundation::HRESULT
+    C.FilterGetDosName(lpVolumeName, lpDosName, dwDosNameBufferSize)
+  end
+
   @[Link("fltlib")]
   lib C
+    # :nodoc:
     fun FilterLoad(lpFilterName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterUnload(lpFilterName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterCreate(lpFilterName : Win32cr::Foundation::PWSTR, hFilter : Win32cr::Storage::InstallableFileSystems::HFILTER*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterClose(hFilter : Win32cr::Storage::InstallableFileSystems::HFILTER) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterInstanceCreate(lpFilterName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR, lpInstanceName : Win32cr::Foundation::PWSTR, hInstance : Win32cr::Storage::InstallableFileSystems::HFILTER_INSTANCE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterInstanceClose(hInstance : Win32cr::Storage::InstallableFileSystems::HFILTER_INSTANCE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterAttach(lpFilterName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR, lpInstanceName : Win32cr::Foundation::PWSTR, dwCreatedInstanceNameLength : UInt32, lpCreatedInstanceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterAttachAtAltitude(lpFilterName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR, lpAltitude : Win32cr::Foundation::PWSTR, lpInstanceName : Win32cr::Foundation::PWSTR, dwCreatedInstanceNameLength : UInt32, lpCreatedInstanceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterDetach(lpFilterName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR, lpInstanceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterFindFirst(dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*, lpFilterFind : Win32cr::Storage::InstallableFileSystems::FilterFindHandle*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterFindNext(hFilterFind : Win32cr::Foundation::HANDLE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterFindClose(hFilterFind : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterVolumeFindFirst(dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_VOLUME_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*, lpVolumeFind : Win32cr::Storage::InstallableFileSystems::FilterVolumeFindHandle*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterVolumeFindNext(hVolumeFind : Win32cr::Foundation::HANDLE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_VOLUME_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterVolumeFindClose(hVolumeFind : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterInstanceFindFirst(lpFilterName : Win32cr::Foundation::PWSTR, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*, lpFilterInstanceFind : Win32cr::Storage::InstallableFileSystems::FilterInstanceFindHandle*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterInstanceFindNext(hFilterInstanceFind : Win32cr::Foundation::HANDLE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterInstanceFindClose(hFilterInstanceFind : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterVolumeInstanceFindFirst(lpVolumeName : Win32cr::Foundation::PWSTR, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*, lpVolumeInstanceFind : Win32cr::Storage::InstallableFileSystems::FilterVolumeInstanceFindHandle*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterVolumeInstanceFindNext(hVolumeInstanceFind : Win32cr::Foundation::HANDLE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterVolumeInstanceFindClose(hVolumeInstanceFind : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterGetInformation(hFilter : Win32cr::Storage::InstallableFileSystems::HFILTER, dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterInstanceGetInformation(hInstance : Win32cr::Storage::InstallableFileSystems::HFILTER_INSTANCE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterConnectCommunicationPort(lpPortName : Win32cr::Foundation::PWSTR, dwOptions : UInt32, lpContext : Void*, wSizeOfContext : UInt16, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, hPort : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterSendMessage(hPort : Win32cr::Foundation::HANDLE, lpInBuffer : Void*, dwInBufferSize : UInt32, lpOutBuffer : Void*, dwOutBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterGetMessage(hPort : Win32cr::Foundation::HANDLE, lpMessageBuffer : Win32cr::Storage::InstallableFileSystems::FILTER_MESSAGE_HEADER*, dwMessageBufferSize : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterReplyMessage(hPort : Win32cr::Foundation::HANDLE, lpReplyBuffer : Win32cr::Storage::InstallableFileSystems::FILTER_REPLY_HEADER*, dwReplyBufferSize : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FilterGetDosName(lpVolumeName : Win32cr::Foundation::PWSTR, lpDosName : UInt16*, dwDosNameBufferSize : UInt32) : Win32cr::Foundation::HRESULT
 
   end

@@ -4,6 +4,7 @@ require "./../cryptography.cr"
 require "./../authentication/identity.cr"
 
 module Win32cr::Security::Cryptography::Certificates
+  extend self
   alias FNCERTSRVISSERVERONLINEW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
 
   alias FNCERTSRVBACKUPGETDYNAMICFILELISTW = Proc(Void*, UInt16**, UInt32*, Win32cr::Foundation::HRESULT)
@@ -17532,59 +17533,189 @@ module Win32cr::Security::Cryptography::Certificates
 
   end
 
+  def certSrvIsServerOnlineW(pwszServerName : Win32cr::Foundation::PWSTR, pfServerOnline : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.CertSrvIsServerOnlineW(pwszServerName, pfServerOnline)
+  end
+
+  def certSrvBackupGetDynamicFileListW(hbc : Void*, ppwszzFileList : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CertSrvBackupGetDynamicFileListW(hbc, ppwszzFileList, pcbSize)
+  end
+
+  def certSrvBackupPrepareW(pwszServerName : Win32cr::Foundation::PWSTR, grbitJet : UInt32, dwBackupFlags : Win32cr::Security::Cryptography::Certificates::CSBACKUP_TYPE, phbc : Void**) : Win32cr::Foundation::HRESULT
+    C.CertSrvBackupPrepareW(pwszServerName, grbitJet, dwBackupFlags, phbc)
+  end
+
+  def certSrvBackupGetDatabaseNamesW(hbc : Void*, ppwszzAttachmentInformation : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CertSrvBackupGetDatabaseNamesW(hbc, ppwszzAttachmentInformation, pcbSize)
+  end
+
+  def certSrvBackupOpenFileW(hbc : Void*, pwszAttachmentName : Win32cr::Foundation::PWSTR, cbReadHintSize : UInt32, pliFileSize : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    C.CertSrvBackupOpenFileW(hbc, pwszAttachmentName, cbReadHintSize, pliFileSize)
+  end
+
+  def certSrvBackupRead(hbc : Void*, pvBuffer : Void*, cbBuffer : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CertSrvBackupRead(hbc, pvBuffer, cbBuffer, pcbRead)
+  end
+
+  def certSrvBackupClose(hbc : Void*) : Win32cr::Foundation::HRESULT
+    C.CertSrvBackupClose(hbc)
+  end
+
+  def certSrvBackupGetBackupLogsW(hbc : Void*, ppwszzBackupLogFiles : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CertSrvBackupGetBackupLogsW(hbc, ppwszzBackupLogFiles, pcbSize)
+  end
+
+  def certSrvBackupTruncateLogs(hbc : Void*) : Win32cr::Foundation::HRESULT
+    C.CertSrvBackupTruncateLogs(hbc)
+  end
+
+  def certSrvBackupEnd(hbc : Void*) : Win32cr::Foundation::HRESULT
+    C.CertSrvBackupEnd(hbc)
+  end
+
+  def certSrvBackupFree(pv : Void*) : Void
+    C.CertSrvBackupFree(pv)
+  end
+
+  def certSrvRestoreGetDatabaseLocationsW(hbc : Void*, ppwszzDatabaseLocationList : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CertSrvRestoreGetDatabaseLocationsW(hbc, ppwszzDatabaseLocationList, pcbSize)
+  end
+
+  def certSrvRestorePrepareW(pwszServerName : Win32cr::Foundation::PWSTR, dwRestoreFlags : UInt32, phbc : Void**) : Win32cr::Foundation::HRESULT
+    C.CertSrvRestorePrepareW(pwszServerName, dwRestoreFlags, phbc)
+  end
+
+  def certSrvRestoreRegisterW(hbc : Void*, pwszCheckPointFilePath : Win32cr::Foundation::PWSTR, pwszLogPath : Win32cr::Foundation::PWSTR, rgrstmap : Win32cr::Security::Cryptography::Certificates::CSEDB_RSTMAPW*, crstmap : Int32, pwszBackupLogPath : Win32cr::Foundation::PWSTR, genLow : UInt32, genHigh : UInt32) : Win32cr::Foundation::HRESULT
+    C.CertSrvRestoreRegisterW(hbc, pwszCheckPointFilePath, pwszLogPath, rgrstmap, crstmap, pwszBackupLogPath, genLow, genHigh)
+  end
+
+  def certSrvRestoreRegisterThroughFile(hbc : Void*, pwszCheckPointFilePath : Win32cr::Foundation::PWSTR, pwszLogPath : Win32cr::Foundation::PWSTR, rgrstmap : Win32cr::Security::Cryptography::Certificates::CSEDB_RSTMAPW*, crstmap : Int32, pwszBackupLogPath : Win32cr::Foundation::PWSTR, genLow : UInt32, genHigh : UInt32) : Win32cr::Foundation::HRESULT
+    C.CertSrvRestoreRegisterThroughFile(hbc, pwszCheckPointFilePath, pwszLogPath, rgrstmap, crstmap, pwszBackupLogPath, genLow, genHigh)
+  end
+
+  def certSrvRestoreRegisterComplete(hbc : Void*, hrRestoreState : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+    C.CertSrvRestoreRegisterComplete(hbc, hrRestoreState)
+  end
+
+  def certSrvRestoreEnd(hbc : Void*) : Win32cr::Foundation::HRESULT
+    C.CertSrvRestoreEnd(hbc)
+  end
+
+  def certSrvServerControlW(pwszServerName : Win32cr::Foundation::PWSTR, dwControlFlags : UInt32, pcbOut : UInt32*, ppbOut : UInt8**) : Win32cr::Foundation::HRESULT
+    C.CertSrvServerControlW(pwszServerName, dwControlFlags, pcbOut, ppbOut)
+  end
+
+  def pstGetTrustAnchors(pTargetName : Win32cr::Foundation::UNICODE_STRING*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, ppTrustedIssuers : Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx**) : Win32cr::Foundation::NTSTATUS
+    C.PstGetTrustAnchors(pTargetName, cCriteria, rgpCriteria, ppTrustedIssuers)
+  end
+
+  def pstGetTrustAnchorsEx(pTargetName : Win32cr::Foundation::UNICODE_STRING*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, ppTrustedIssuers : Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx**) : Win32cr::Foundation::NTSTATUS
+    C.PstGetTrustAnchorsEx(pTargetName, cCriteria, rgpCriteria, pCertContext, ppTrustedIssuers)
+  end
+
+  def pstGetCertificateChain(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pTrustedIssuers : Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx*, ppCertChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT**) : Win32cr::Foundation::NTSTATUS
+    C.PstGetCertificateChain(pCert, pTrustedIssuers, ppCertChainContext)
+  end
+
+  def pstGetCertificates(pTargetName : Win32cr::Foundation::UNICODE_STRING*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, bIsClient : Win32cr::Foundation::BOOL, pdwCertChainContextCount : UInt32*, ppCertChainContexts : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT***) : Win32cr::Foundation::NTSTATUS
+    C.PstGetCertificates(pTargetName, cCriteria, rgpCriteria, bIsClient, pdwCertChainContextCount, ppCertChainContexts)
+  end
+
+  def pstAcquirePrivateKey(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::NTSTATUS
+    C.PstAcquirePrivateKey(pCert)
+  end
+
+  def pstValidate(pTargetName : Win32cr::Foundation::UNICODE_STRING*, bIsClient : Win32cr::Foundation::BOOL, pRequestedIssuancePolicy : Win32cr::Security::Cryptography::CERT_USAGE_MATCH*, phAdditionalCertStore : Win32cr::Security::Cryptography::HCERTSTORE*, pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pProvGUID : LibC::GUID*) : Win32cr::Foundation::NTSTATUS
+    C.PstValidate(pTargetName, bIsClient, pRequestedIssuancePolicy, phAdditionalCertStore, pCert, pProvGUID)
+  end
+
+  def pstMapCertificate(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pTokenInformationType : Win32cr::Security::Authentication::Identity::LSA_TOKEN_INFORMATION_TYPE*, ppTokenInformation : Void**) : Win32cr::Foundation::NTSTATUS
+    C.PstMapCertificate(pCert, pTokenInformationType, ppTokenInformation)
+  end
+
+  def pstGetUserNameForCertificate(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, user_name : Win32cr::Foundation::UNICODE_STRING*) : Win32cr::Foundation::NTSTATUS
+    C.PstGetUserNameForCertificate(pCertContext, user_name)
+  end
+
   @[Link("certadm")]
   @[Link("certpoleng")]
   lib C
+    # :nodoc:
     fun CertSrvIsServerOnlineW(pwszServerName : Win32cr::Foundation::PWSTR, pfServerOnline : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvBackupGetDynamicFileListW(hbc : Void*, ppwszzFileList : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvBackupPrepareW(pwszServerName : Win32cr::Foundation::PWSTR, grbitJet : UInt32, dwBackupFlags : Win32cr::Security::Cryptography::Certificates::CSBACKUP_TYPE, phbc : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvBackupGetDatabaseNamesW(hbc : Void*, ppwszzAttachmentInformation : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvBackupOpenFileW(hbc : Void*, pwszAttachmentName : Win32cr::Foundation::PWSTR, cbReadHintSize : UInt32, pliFileSize : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvBackupRead(hbc : Void*, pvBuffer : Void*, cbBuffer : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvBackupClose(hbc : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvBackupGetBackupLogsW(hbc : Void*, ppwszzBackupLogFiles : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvBackupTruncateLogs(hbc : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvBackupEnd(hbc : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvBackupFree(pv : Void*) : Void
 
+    # :nodoc:
     fun CertSrvRestoreGetDatabaseLocationsW(hbc : Void*, ppwszzDatabaseLocationList : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvRestorePrepareW(pwszServerName : Win32cr::Foundation::PWSTR, dwRestoreFlags : UInt32, phbc : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvRestoreRegisterW(hbc : Void*, pwszCheckPointFilePath : Win32cr::Foundation::PWSTR, pwszLogPath : Win32cr::Foundation::PWSTR, rgrstmap : Win32cr::Security::Cryptography::Certificates::CSEDB_RSTMAPW*, crstmap : Int32, pwszBackupLogPath : Win32cr::Foundation::PWSTR, genLow : UInt32, genHigh : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvRestoreRegisterThroughFile(hbc : Void*, pwszCheckPointFilePath : Win32cr::Foundation::PWSTR, pwszLogPath : Win32cr::Foundation::PWSTR, rgrstmap : Win32cr::Security::Cryptography::Certificates::CSEDB_RSTMAPW*, crstmap : Int32, pwszBackupLogPath : Win32cr::Foundation::PWSTR, genLow : UInt32, genHigh : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvRestoreRegisterComplete(hbc : Void*, hrRestoreState : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvRestoreEnd(hbc : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CertSrvServerControlW(pwszServerName : Win32cr::Foundation::PWSTR, dwControlFlags : UInt32, pcbOut : UInt32*, ppbOut : UInt8**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PstGetTrustAnchors(pTargetName : Win32cr::Foundation::UNICODE_STRING*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, ppTrustedIssuers : Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx**) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PstGetTrustAnchorsEx(pTargetName : Win32cr::Foundation::UNICODE_STRING*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, ppTrustedIssuers : Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx**) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PstGetCertificateChain(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pTrustedIssuers : Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx*, ppCertChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT**) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PstGetCertificates(pTargetName : Win32cr::Foundation::UNICODE_STRING*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, bIsClient : Win32cr::Foundation::BOOL, pdwCertChainContextCount : UInt32*, ppCertChainContexts : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT***) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PstAcquirePrivateKey(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PstValidate(pTargetName : Win32cr::Foundation::UNICODE_STRING*, bIsClient : Win32cr::Foundation::BOOL, pRequestedIssuancePolicy : Win32cr::Security::Cryptography::CERT_USAGE_MATCH*, phAdditionalCertStore : Win32cr::Security::Cryptography::HCERTSTORE*, pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pProvGUID : LibC::GUID*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PstMapCertificate(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pTokenInformationType : Win32cr::Security::Authentication::Identity::LSA_TOKEN_INFORMATION_TYPE*, ppTokenInformation : Void**) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PstGetUserNameForCertificate(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, user_name : Win32cr::Foundation::UNICODE_STRING*) : Win32cr::Foundation::NTSTATUS
 
   end

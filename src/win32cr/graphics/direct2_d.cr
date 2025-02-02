@@ -10,6 +10,7 @@ require "./../storage/xps/printing.cr"
 require "./direct3_d.cr"
 
 module Win32cr::Graphics::Direct2D
+  extend self
   alias PD2D1_EFFECT_FACTORY = Proc(Void**, Win32cr::Foundation::HRESULT)
 
   alias PD2D1_PROPERTY_SET_FUNCTION = Proc(Void*, UInt8*, UInt32, Win32cr::Foundation::HRESULT)
@@ -12442,32 +12443,97 @@ module Win32cr::Graphics::Direct2D
 
   end
 
+  def d2D1CreateFactory(factoryType : Win32cr::Graphics::Direct2D::D2D1_FACTORY_TYPE, riid : LibC::GUID*, pFactoryOptions : Win32cr::Graphics::Direct2D::D2D1_FACTORY_OPTIONS*, ppIFactory : Void**) : Win32cr::Foundation::HRESULT
+    C.D2D1CreateFactory(factoryType, riid, pFactoryOptions, ppIFactory)
+  end
+
+  def d2D1MakeRotateMatrix(angle : Float32, center : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Void
+    C.D2D1MakeRotateMatrix(angle, center, matrix)
+  end
+
+  def d2D1MakeSkewMatrix(angleX : Float32, angleY : Float32, center : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Void
+    C.D2D1MakeSkewMatrix(angleX, angleY, center, matrix)
+  end
+
+  def d2D1IsMatrixInvertible(matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::BOOL
+    C.D2D1IsMatrixInvertible(matrix)
+  end
+
+  def d2D1InvertMatrix(matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::BOOL
+    C.D2D1InvertMatrix(matrix)
+  end
+
+  def d2D1CreateDevice(dxgiDevice : Void*, creationProperties : Win32cr::Graphics::Direct2D::D2D1_CREATION_PROPERTIES*, d2dDevice : Void**) : Win32cr::Foundation::HRESULT
+    C.D2D1CreateDevice(dxgiDevice, creationProperties, d2dDevice)
+  end
+
+  def d2D1CreateDeviceContext(dxgiSurface : Void*, creationProperties : Win32cr::Graphics::Direct2D::D2D1_CREATION_PROPERTIES*, d2dDeviceContext : Void**) : Win32cr::Foundation::HRESULT
+    C.D2D1CreateDeviceContext(dxgiSurface, creationProperties, d2dDeviceContext)
+  end
+
+  def d2D1ConvertColorSpace(sourceColorSpace : Win32cr::Graphics::Direct2D::D2D1_COLOR_SPACE, destinationColorSpace : Win32cr::Graphics::Direct2D::D2D1_COLOR_SPACE, color : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F*) : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F
+    C.D2D1ConvertColorSpace(sourceColorSpace, destinationColorSpace, color)
+  end
+
+  def d2D1SinCos(angle : Float32, s : Float32*, c : Float32*) : Void
+    C.D2D1SinCos(angle, s, c)
+  end
+
+  def d2D1Tan(angle : Float32) : Float32
+    C.D2D1Tan(angle)
+  end
+
+  def d2D1Vec3Length(x : Float32, y : Float32, z : Float32) : Float32
+    C.D2D1Vec3Length(x, y, z)
+  end
+
+  def d2D1ComputeMaximumScaleFactor(matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Float32
+    C.D2D1ComputeMaximumScaleFactor(matrix)
+  end
+
+  def d2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint1 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint2 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint3 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint4 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint5 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint6 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint7 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint8 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint9 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint10 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint11 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint11 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint12 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint21 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint22 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*) : Void
+    C.D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0, pPoint1, pPoint2, pPoint3, pPoint4, pPoint5, pPoint6, pPoint7, pPoint8, pPoint9, pPoint10, pPoint11, pTensorPoint11, pTensorPoint12, pTensorPoint21, pTensorPoint22)
+  end
+
   @[Link("d2d1")]
   lib C
+    # :nodoc:
     fun D2D1CreateFactory(factoryType : Win32cr::Graphics::Direct2D::D2D1_FACTORY_TYPE, riid : LibC::GUID*, pFactoryOptions : Win32cr::Graphics::Direct2D::D2D1_FACTORY_OPTIONS*, ppIFactory : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D2D1MakeRotateMatrix(angle : Float32, center : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Void
 
+    # :nodoc:
     fun D2D1MakeSkewMatrix(angleX : Float32, angleY : Float32, center : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Void
 
+    # :nodoc:
     fun D2D1IsMatrixInvertible(matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun D2D1InvertMatrix(matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun D2D1CreateDevice(dxgiDevice : Void*, creationProperties : Win32cr::Graphics::Direct2D::D2D1_CREATION_PROPERTIES*, d2dDevice : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D2D1CreateDeviceContext(dxgiSurface : Void*, creationProperties : Win32cr::Graphics::Direct2D::D2D1_CREATION_PROPERTIES*, d2dDeviceContext : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D2D1ConvertColorSpace(sourceColorSpace : Win32cr::Graphics::Direct2D::D2D1_COLOR_SPACE, destinationColorSpace : Win32cr::Graphics::Direct2D::D2D1_COLOR_SPACE, color : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F*) : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F
 
+    # :nodoc:
     fun D2D1SinCos(angle : Float32, s : Float32*, c : Float32*) : Void
 
+    # :nodoc:
     fun D2D1Tan(angle : Float32) : Float32
 
+    # :nodoc:
     fun D2D1Vec3Length(x : Float32, y : Float32, z : Float32) : Float32
 
+    # :nodoc:
     fun D2D1ComputeMaximumScaleFactor(matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Float32
 
+    # :nodoc:
     fun D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint1 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint2 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint3 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint4 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint5 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint6 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint7 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint8 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint9 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint10 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint11 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint11 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint12 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint21 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint22 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*) : Void
 
   end

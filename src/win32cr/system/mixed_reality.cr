@@ -1,5 +1,6 @@
 
 module Win32cr::System::MixedReality
+  extend self
   PERCEPTIONFIELD_StateStream_TimeStamps = "aa886119-f32f-49bf-92ca-f9ddf784d297"
 
 

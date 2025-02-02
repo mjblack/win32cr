@@ -5,6 +5,7 @@ require "./direct3_d.cr"
 require "./dxgi.cr"
 
 module Win32cr::Graphics::Direct3D10
+  extend self
   alias PFN_D3D10_CREATE_DEVICE1 = Proc(Void*, Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Graphics::Direct3D10::D3D10_FEATURE_LEVEL1, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
   alias PFN_D3D10_CREATE_DEVICE_AND_SWAP_CHAIN1 = Proc(Void*, Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Graphics::Direct3D10::D3D10_FEATURE_LEVEL1, UInt32, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, Void**, Void**, Win32cr::Foundation::HRESULT)
@@ -6684,65 +6685,210 @@ module Win32cr::Graphics::Direct3D10
 
   end
 
+  def d3D10CreateDevice(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, sdk_version : UInt32, ppDevice : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10CreateDevice(pAdapter, driver_type, software, flags, sdk_version, ppDevice)
+  end
+
+  def d3D10CreateDeviceAndSwapChain(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, sdk_version : UInt32, pSwapChainDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, ppSwapChain : Void**, ppDevice : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10CreateDeviceAndSwapChain(pAdapter, driver_type, software, flags, sdk_version, pSwapChainDesc, ppSwapChain, ppDevice)
+  end
+
+  def d3D10CreateBlob(num_bytes : LibC::UIntPtrT, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10CreateBlob(num_bytes, ppBuffer)
+  end
+
+  def d3D10CompileShader(pSrcData : Win32cr::Foundation::PSTR, src_data_size : LibC::UIntPtrT, pFileName : Win32cr::Foundation::PSTR, pDefines : Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, pInclude : Void*, pFunctionName : Win32cr::Foundation::PSTR, pProfile : Win32cr::Foundation::PSTR, flags : UInt32, ppShader : Void**, ppErrorMsgs : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10CompileShader(pSrcData, src_data_size, pFileName, pDefines, pInclude, pFunctionName, pProfile, flags, ppShader, ppErrorMsgs)
+  end
+
+  def d3D10DisassembleShader(pShader : Void*, bytecode_length : LibC::UIntPtrT, enable_color_code : Win32cr::Foundation::BOOL, pComments : Win32cr::Foundation::PSTR, ppDisassembly : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10DisassembleShader(pShader, bytecode_length, enable_color_code, pComments, ppDisassembly)
+  end
+
+  def d3D10GetPixelShaderProfile(pDevice : Void*) : Win32cr::Foundation::PSTR
+    C.D3D10GetPixelShaderProfile(pDevice)
+  end
+
+  def d3D10GetVertexShaderProfile(pDevice : Void*) : Win32cr::Foundation::PSTR
+    C.D3D10GetVertexShaderProfile(pDevice)
+  end
+
+  def d3D10GetGeometryShaderProfile(pDevice : Void*) : Win32cr::Foundation::PSTR
+    C.D3D10GetGeometryShaderProfile(pDevice)
+  end
+
+  def d3D10ReflectShader(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppReflector : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10ReflectShader(pShaderBytecode, bytecode_length, ppReflector)
+  end
+
+  def d3D10PreprocessShader(pSrcData : Win32cr::Foundation::PSTR, src_data_size : LibC::UIntPtrT, pFileName : Win32cr::Foundation::PSTR, pDefines : Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, pInclude : Void*, ppShaderText : Void**, ppErrorMsgs : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10PreprocessShader(pSrcData, src_data_size, pFileName, pDefines, pInclude, ppShaderText, ppErrorMsgs)
+  end
+
+  def d3D10GetInputSignatureBlob(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppSignatureBlob : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10GetInputSignatureBlob(pShaderBytecode, bytecode_length, ppSignatureBlob)
+  end
+
+  def d3D10GetOutputSignatureBlob(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppSignatureBlob : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10GetOutputSignatureBlob(pShaderBytecode, bytecode_length, ppSignatureBlob)
+  end
+
+  def d3D10GetInputAndOutputSignatureBlob(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppSignatureBlob : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10GetInputAndOutputSignatureBlob(pShaderBytecode, bytecode_length, ppSignatureBlob)
+  end
+
+  def d3D10GetShaderDebugInfo(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppDebugInfo : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10GetShaderDebugInfo(pShaderBytecode, bytecode_length, ppDebugInfo)
+  end
+
+  def d3D10StateBlockMaskUnion(pA : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pB : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pResult : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
+    C.D3D10StateBlockMaskUnion(pA, pB, pResult)
+  end
+
+  def d3D10StateBlockMaskIntersect(pA : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pB : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pResult : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
+    C.D3D10StateBlockMaskIntersect(pA, pB, pResult)
+  end
+
+  def d3D10StateBlockMaskDifference(pA : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pB : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pResult : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
+    C.D3D10StateBlockMaskDifference(pA, pB, pResult)
+  end
+
+  def d3D10StateBlockMaskEnableCapture(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, state_type : Win32cr::Graphics::Direct3D10::D3D10_DEVICE_STATE_TYPES, range_start : UInt32, range_length : UInt32) : Win32cr::Foundation::HRESULT
+    C.D3D10StateBlockMaskEnableCapture(pMask, state_type, range_start, range_length)
+  end
+
+  def d3D10StateBlockMaskDisableCapture(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, state_type : Win32cr::Graphics::Direct3D10::D3D10_DEVICE_STATE_TYPES, range_start : UInt32, range_length : UInt32) : Win32cr::Foundation::HRESULT
+    C.D3D10StateBlockMaskDisableCapture(pMask, state_type, range_start, range_length)
+  end
+
+  def d3D10StateBlockMaskEnableAll(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
+    C.D3D10StateBlockMaskEnableAll(pMask)
+  end
+
+  def d3D10StateBlockMaskDisableAll(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
+    C.D3D10StateBlockMaskDisableAll(pMask)
+  end
+
+  def d3D10StateBlockMaskGetSetting(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, state_type : Win32cr::Graphics::Direct3D10::D3D10_DEVICE_STATE_TYPES, entry : UInt32) : Win32cr::Foundation::BOOL
+    C.D3D10StateBlockMaskGetSetting(pMask, state_type, entry)
+  end
+
+  def d3D10CreateStateBlock(pDevice : Void*, pStateBlockMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, ppStateBlock : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10CreateStateBlock(pDevice, pStateBlockMask, ppStateBlock)
+  end
+
+  def d3D10CompileEffectFromMemory(pData : Void*, data_length : LibC::UIntPtrT, pSrcFileName : Win32cr::Foundation::PSTR, pDefines : Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, pInclude : Void*, hlsl_flags : UInt32, fx_flags : UInt32, ppCompiledEffect : Void**, ppErrors : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10CompileEffectFromMemory(pData, data_length, pSrcFileName, pDefines, pInclude, hlsl_flags, fx_flags, ppCompiledEffect, ppErrors)
+  end
+
+  def d3D10CreateEffectFromMemory(pData : Void*, data_length : LibC::UIntPtrT, fx_flags : UInt32, pDevice : Void*, pEffectPool : Void*, ppEffect : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10CreateEffectFromMemory(pData, data_length, fx_flags, pDevice, pEffectPool, ppEffect)
+  end
+
+  def d3D10CreateEffectPoolFromMemory(pData : Void*, data_length : LibC::UIntPtrT, fx_flags : UInt32, pDevice : Void*, ppEffectPool : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10CreateEffectPoolFromMemory(pData, data_length, fx_flags, pDevice, ppEffectPool)
+  end
+
+  def d3D10DisassembleEffect(pEffect : Void*, enable_color_code : Win32cr::Foundation::BOOL, ppDisassembly : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10DisassembleEffect(pEffect, enable_color_code, ppDisassembly)
+  end
+
+  def d3D10CreateDevice1(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, hardware_level : Win32cr::Graphics::Direct3D10::D3D10_FEATURE_LEVEL1, sdk_version : UInt32, ppDevice : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10CreateDevice1(pAdapter, driver_type, software, flags, hardware_level, sdk_version, ppDevice)
+  end
+
+  def d3D10CreateDeviceAndSwapChain1(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, hardware_level : Win32cr::Graphics::Direct3D10::D3D10_FEATURE_LEVEL1, sdk_version : UInt32, pSwapChainDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, ppSwapChain : Void**, ppDevice : Void**) : Win32cr::Foundation::HRESULT
+    C.D3D10CreateDeviceAndSwapChain1(pAdapter, driver_type, software, flags, hardware_level, sdk_version, pSwapChainDesc, ppSwapChain, ppDevice)
+  end
+
   @[Link("d3d10")]
   @[Link("d3d10_1")]
   lib C
+    # :nodoc:
     fun D3D10CreateDevice(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, sdk_version : UInt32, ppDevice : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10CreateDeviceAndSwapChain(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, sdk_version : UInt32, pSwapChainDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, ppSwapChain : Void**, ppDevice : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10CreateBlob(num_bytes : LibC::UIntPtrT, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10CompileShader(pSrcData : Win32cr::Foundation::PSTR, src_data_size : LibC::UIntPtrT, pFileName : Win32cr::Foundation::PSTR, pDefines : Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, pInclude : Void*, pFunctionName : Win32cr::Foundation::PSTR, pProfile : Win32cr::Foundation::PSTR, flags : UInt32, ppShader : Void**, ppErrorMsgs : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10DisassembleShader(pShader : Void*, bytecode_length : LibC::UIntPtrT, enable_color_code : Win32cr::Foundation::BOOL, pComments : Win32cr::Foundation::PSTR, ppDisassembly : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10GetPixelShaderProfile(pDevice : Void*) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun D3D10GetVertexShaderProfile(pDevice : Void*) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun D3D10GetGeometryShaderProfile(pDevice : Void*) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun D3D10ReflectShader(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppReflector : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10PreprocessShader(pSrcData : Win32cr::Foundation::PSTR, src_data_size : LibC::UIntPtrT, pFileName : Win32cr::Foundation::PSTR, pDefines : Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, pInclude : Void*, ppShaderText : Void**, ppErrorMsgs : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10GetInputSignatureBlob(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppSignatureBlob : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10GetOutputSignatureBlob(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppSignatureBlob : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10GetInputAndOutputSignatureBlob(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppSignatureBlob : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10GetShaderDebugInfo(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppDebugInfo : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10StateBlockMaskUnion(pA : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pB : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pResult : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10StateBlockMaskIntersect(pA : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pB : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pResult : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10StateBlockMaskDifference(pA : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pB : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pResult : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10StateBlockMaskEnableCapture(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, state_type : Win32cr::Graphics::Direct3D10::D3D10_DEVICE_STATE_TYPES, range_start : UInt32, range_length : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10StateBlockMaskDisableCapture(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, state_type : Win32cr::Graphics::Direct3D10::D3D10_DEVICE_STATE_TYPES, range_start : UInt32, range_length : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10StateBlockMaskEnableAll(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10StateBlockMaskDisableAll(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10StateBlockMaskGetSetting(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, state_type : Win32cr::Graphics::Direct3D10::D3D10_DEVICE_STATE_TYPES, entry : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun D3D10CreateStateBlock(pDevice : Void*, pStateBlockMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, ppStateBlock : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10CompileEffectFromMemory(pData : Void*, data_length : LibC::UIntPtrT, pSrcFileName : Win32cr::Foundation::PSTR, pDefines : Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, pInclude : Void*, hlsl_flags : UInt32, fx_flags : UInt32, ppCompiledEffect : Void**, ppErrors : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10CreateEffectFromMemory(pData : Void*, data_length : LibC::UIntPtrT, fx_flags : UInt32, pDevice : Void*, pEffectPool : Void*, ppEffect : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10CreateEffectPoolFromMemory(pData : Void*, data_length : LibC::UIntPtrT, fx_flags : UInt32, pDevice : Void*, ppEffectPool : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10DisassembleEffect(pEffect : Void*, enable_color_code : Win32cr::Foundation::BOOL, ppDisassembly : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10CreateDevice1(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, hardware_level : Win32cr::Graphics::Direct3D10::D3D10_FEATURE_LEVEL1, sdk_version : UInt32, ppDevice : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun D3D10CreateDeviceAndSwapChain1(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, hardware_level : Win32cr::Graphics::Direct3D10::D3D10_FEATURE_LEVEL1, sdk_version : UInt32, pSwapChainDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, ppSwapChain : Void**, ppDevice : Void**) : Win32cr::Foundation::HRESULT
 
   end

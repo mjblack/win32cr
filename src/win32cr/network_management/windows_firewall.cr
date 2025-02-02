@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./../security.cr"
 
 module Win32cr::NetworkManagement::WindowsFirewall
+  extend self
   alias PAC_CHANGES_CALLBACK_FN = Proc(Void*, Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_AC_CHANGE*, Void)
 
   alias PNETISO_EDP_ID_CALLBACK_FN = Proc(Void*, Win32cr::Foundation::PWSTR, UInt32, Void)
@@ -3354,21 +3355,61 @@ module Win32cr::NetworkManagement::WindowsFirewall
 
   end
 
+  def networkIsolationSetupAppContainerBinaries(applicationContainerSid : Win32cr::Foundation::PSID, packageFullName : Win32cr::Foundation::PWSTR, packageFolder : Win32cr::Foundation::PWSTR, displayName : Win32cr::Foundation::PWSTR, bBinariesFullyComputed : Win32cr::Foundation::BOOL, binaries : Win32cr::Foundation::PWSTR*, binariesCount : UInt32) : Win32cr::Foundation::HRESULT
+    C.NetworkIsolationSetupAppContainerBinaries(applicationContainerSid, packageFullName, packageFolder, displayName, bBinariesFullyComputed, binaries, binariesCount)
+  end
+
+  def networkIsolationRegisterForAppContainerChanges(flags : UInt32, callback : Win32cr::NetworkManagement::WindowsFirewall::PAC_CHANGES_CALLBACK_FN, context : Void*, registrationObject : Win32cr::Foundation::HANDLE*) : UInt32
+    C.NetworkIsolationRegisterForAppContainerChanges(flags, callback, context, registrationObject)
+  end
+
+  def networkIsolationUnregisterForAppContainerChanges(registrationObject : Win32cr::Foundation::HANDLE) : UInt32
+    C.NetworkIsolationUnregisterForAppContainerChanges(registrationObject)
+  end
+
+  def networkIsolationFreeAppContainers(pPublicAppCs : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_APP_CONTAINER*) : UInt32
+    C.NetworkIsolationFreeAppContainers(pPublicAppCs)
+  end
+
+  def networkIsolationEnumAppContainers(flags : UInt32, pdwNumPublicAppCs : UInt32*, ppPublicAppCs : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_APP_CONTAINER**) : UInt32
+    C.NetworkIsolationEnumAppContainers(flags, pdwNumPublicAppCs, ppPublicAppCs)
+  end
+
+  def networkIsolationGetAppContainerConfig(pdwNumPublicAppCs : UInt32*, appContainerSids : Win32cr::Security::SID_AND_ATTRIBUTES**) : UInt32
+    C.NetworkIsolationGetAppContainerConfig(pdwNumPublicAppCs, appContainerSids)
+  end
+
+  def networkIsolationSetAppContainerConfig(dwNumPublicAppCs : UInt32, appContainerSids : Win32cr::Security::SID_AND_ATTRIBUTES*) : UInt32
+    C.NetworkIsolationSetAppContainerConfig(dwNumPublicAppCs, appContainerSids)
+  end
+
+  def networkIsolationDiagnoseConnectFailureAndGetInfo(wszServerName : Win32cr::Foundation::PWSTR, netIsoError : Win32cr::NetworkManagement::WindowsFirewall::NETISO_ERROR_TYPE*) : UInt32
+    C.NetworkIsolationDiagnoseConnectFailureAndGetInfo(wszServerName, netIsoError)
+  end
+
   lib C
+    # :nodoc:
     fun NetworkIsolationSetupAppContainerBinaries(applicationContainerSid : Win32cr::Foundation::PSID, packageFullName : Win32cr::Foundation::PWSTR, packageFolder : Win32cr::Foundation::PWSTR, displayName : Win32cr::Foundation::PWSTR, bBinariesFullyComputed : Win32cr::Foundation::BOOL, binaries : Win32cr::Foundation::PWSTR*, binariesCount : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun NetworkIsolationRegisterForAppContainerChanges(flags : UInt32, callback : Win32cr::NetworkManagement::WindowsFirewall::PAC_CHANGES_CALLBACK_FN, context : Void*, registrationObject : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun NetworkIsolationUnregisterForAppContainerChanges(registrationObject : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun NetworkIsolationFreeAppContainers(pPublicAppCs : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_APP_CONTAINER*) : UInt32
 
+    # :nodoc:
     fun NetworkIsolationEnumAppContainers(flags : UInt32, pdwNumPublicAppCs : UInt32*, ppPublicAppCs : Win32cr::NetworkManagement::WindowsFirewall::INET_FIREWALL_APP_CONTAINER**) : UInt32
 
+    # :nodoc:
     fun NetworkIsolationGetAppContainerConfig(pdwNumPublicAppCs : UInt32*, appContainerSids : Win32cr::Security::SID_AND_ATTRIBUTES**) : UInt32
 
+    # :nodoc:
     fun NetworkIsolationSetAppContainerConfig(dwNumPublicAppCs : UInt32, appContainerSids : Win32cr::Security::SID_AND_ATTRIBUTES*) : UInt32
 
+    # :nodoc:
     fun NetworkIsolationDiagnoseConnectFailureAndGetInfo(wszServerName : Win32cr::Foundation::PWSTR, netIsoError : Win32cr::NetworkManagement::WindowsFirewall::NETISO_ERROR_TYPE*) : UInt32
 
   end

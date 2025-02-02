@@ -1,6 +1,7 @@
 require "./../../foundation.cr"
 
 module Win32cr::UI::Input::XboxController
+  extend self
   XINPUT_DLL_A = "xinput1_4.dll"
   XINPUT_DLL_W = "xinput1_4.dll"
   XINPUT_DLL = "xinput1_4.dll"
@@ -150,20 +151,55 @@ module Win32cr::UI::Input::XboxController
     end
   end
 
+  def xInputGetState(dwUserIndex : UInt32, pState : Win32cr::UI::Input::XboxController::XINPUT_STATE*) : UInt32
+    C.XInputGetState(dwUserIndex, pState)
+  end
+
+  def xInputSetState(dwUserIndex : UInt32, pVibration : Win32cr::UI::Input::XboxController::XINPUT_VIBRATION*) : UInt32
+    C.XInputSetState(dwUserIndex, pVibration)
+  end
+
+  def xInputGetCapabilities(dwUserIndex : UInt32, dwFlags : UInt32, pCapabilities : Win32cr::UI::Input::XboxController::XINPUT_CAPABILITIES*) : UInt32
+    C.XInputGetCapabilities(dwUserIndex, dwFlags, pCapabilities)
+  end
+
+  def xInputEnable(enable : Win32cr::Foundation::BOOL) : Void
+    C.XInputEnable(enable)
+  end
+
+  def xInputGetAudioDeviceIds(dwUserIndex : UInt32, pRenderDeviceId : UInt16*, pRenderCount : UInt32*, pCaptureDeviceId : UInt16*, pCaptureCount : UInt32*) : UInt32
+    C.XInputGetAudioDeviceIds(dwUserIndex, pRenderDeviceId, pRenderCount, pCaptureDeviceId, pCaptureCount)
+  end
+
+  def xInputGetBatteryInformation(dwUserIndex : UInt32, devType : UInt8, pBatteryInformation : Win32cr::UI::Input::XboxController::XINPUT_BATTERY_INFORMATION*) : UInt32
+    C.XInputGetBatteryInformation(dwUserIndex, devType, pBatteryInformation)
+  end
+
+  def xInputGetKeystroke(dwUserIndex : UInt32, dwReserved : UInt32, pKeystroke : Win32cr::UI::Input::XboxController::XINPUT_KEYSTROKE*) : UInt32
+    C.XInputGetKeystroke(dwUserIndex, dwReserved, pKeystroke)
+  end
+
   @[Link("xinputuap")]
   lib C
+    # :nodoc:
     fun XInputGetState(dwUserIndex : UInt32, pState : Win32cr::UI::Input::XboxController::XINPUT_STATE*) : UInt32
 
+    # :nodoc:
     fun XInputSetState(dwUserIndex : UInt32, pVibration : Win32cr::UI::Input::XboxController::XINPUT_VIBRATION*) : UInt32
 
+    # :nodoc:
     fun XInputGetCapabilities(dwUserIndex : UInt32, dwFlags : UInt32, pCapabilities : Win32cr::UI::Input::XboxController::XINPUT_CAPABILITIES*) : UInt32
 
+    # :nodoc:
     fun XInputEnable(enable : Win32cr::Foundation::BOOL) : Void
 
+    # :nodoc:
     fun XInputGetAudioDeviceIds(dwUserIndex : UInt32, pRenderDeviceId : UInt16*, pRenderCount : UInt32*, pCaptureDeviceId : UInt16*, pCaptureCount : UInt32*) : UInt32
 
+    # :nodoc:
     fun XInputGetBatteryInformation(dwUserIndex : UInt32, devType : UInt8, pBatteryInformation : Win32cr::UI::Input::XboxController::XINPUT_BATTERY_INFORMATION*) : UInt32
 
+    # :nodoc:
     fun XInputGetKeystroke(dwUserIndex : UInt32, dwReserved : UInt32, pKeystroke : Win32cr::UI::Input::XboxController::XINPUT_KEYSTROKE*) : UInt32
 
   end

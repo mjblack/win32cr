@@ -3,6 +3,7 @@ require "./foundation.cr"
 require "./system/win_rt.cr"
 
 module Win32cr::Gaming
+  extend self
   alias GameUICompletionRoutine = Proc(Win32cr::Foundation::HRESULT, Void*, Void)
 
   alias PlayerPickerUICompletionRoutine = Proc(Win32cr::Foundation::HRESULT, Void*, Win32cr::System::WinRT::HSTRING*, LibC::UIntPtrT, Void)
@@ -440,65 +441,215 @@ module Win32cr::Gaming
 
   end
 
+  def hasExpandedResources(hasExpandedResources : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.HasExpandedResources(hasExpandedResources)
+  end
+
+  def getExpandedResourceExclusiveCpuCount(exclusiveCpuCount : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetExpandedResourceExclusiveCpuCount(exclusiveCpuCount)
+  end
+
+  def releaseExclusiveCpuSets : Win32cr::Foundation::HRESULT
+    C.ReleaseExclusiveCpuSets
+  end
+
+  def getGamingDeviceModelInformation(information : Win32cr::Gaming::GAMING_DEVICE_MODEL_INFORMATION*) : Win32cr::Foundation::HRESULT
+    C.GetGamingDeviceModelInformation(information)
+  end
+
+  def showGameInviteUI(serviceConfigurationId : Win32cr::System::WinRT::HSTRING, sessionTemplateName : Win32cr::System::WinRT::HSTRING, sessionId : Win32cr::System::WinRT::HSTRING, invitationDisplayText : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowGameInviteUI(serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, completionRoutine, context)
+  end
+
+  def showPlayerPickerUI(promptDisplayText : Win32cr::System::WinRT::HSTRING, xuids : Win32cr::System::WinRT::HSTRING*, xuidsCount : LibC::UIntPtrT, preSelectedXuids : Win32cr::System::WinRT::HSTRING*, preSelectedXuidsCount : LibC::UIntPtrT, minSelectionCount : LibC::UIntPtrT, maxSelectionCount : LibC::UIntPtrT, completionRoutine : Win32cr::Gaming::PlayerPickerUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowPlayerPickerUI(promptDisplayText, xuids, xuidsCount, preSelectedXuids, preSelectedXuidsCount, minSelectionCount, maxSelectionCount, completionRoutine, context)
+  end
+
+  def showProfileCardUI(targetUserXuid : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowProfileCardUI(targetUserXuid, completionRoutine, context)
+  end
+
+  def showChangeFriendRelationshipUI(targetUserXuid : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowChangeFriendRelationshipUI(targetUserXuid, completionRoutine, context)
+  end
+
+  def showTitleAchievementsUI(titleId : UInt32, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowTitleAchievementsUI(titleId, completionRoutine, context)
+  end
+
+  def processPendingGameUI(waitForCompletion : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.ProcessPendingGameUI(waitForCompletion)
+  end
+
+  def tryCancelPendingGameUI : Win32cr::Foundation::BOOL
+    C.TryCancelPendingGameUI
+  end
+
+  def checkGamingPrivilegeWithUI(privilegeId : UInt32, scope : Win32cr::System::WinRT::HSTRING, policy : Win32cr::System::WinRT::HSTRING, friendlyMessage : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.CheckGamingPrivilegeWithUI(privilegeId, scope, policy, friendlyMessage, completionRoutine, context)
+  end
+
+  def checkGamingPrivilegeSilently(privilegeId : UInt32, scope : Win32cr::System::WinRT::HSTRING, policy : Win32cr::System::WinRT::HSTRING, hasPrivilege : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.CheckGamingPrivilegeSilently(privilegeId, scope, policy, hasPrivilege)
+  end
+
+  def showGameInviteUIForUser(user : Void*, serviceConfigurationId : Win32cr::System::WinRT::HSTRING, sessionTemplateName : Win32cr::System::WinRT::HSTRING, sessionId : Win32cr::System::WinRT::HSTRING, invitationDisplayText : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowGameInviteUIForUser(user, serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, completionRoutine, context)
+  end
+
+  def showPlayerPickerUIForUser(user : Void*, promptDisplayText : Win32cr::System::WinRT::HSTRING, xuids : Win32cr::System::WinRT::HSTRING*, xuidsCount : LibC::UIntPtrT, preSelectedXuids : Win32cr::System::WinRT::HSTRING*, preSelectedXuidsCount : LibC::UIntPtrT, minSelectionCount : LibC::UIntPtrT, maxSelectionCount : LibC::UIntPtrT, completionRoutine : Win32cr::Gaming::PlayerPickerUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowPlayerPickerUIForUser(user, promptDisplayText, xuids, xuidsCount, preSelectedXuids, preSelectedXuidsCount, minSelectionCount, maxSelectionCount, completionRoutine, context)
+  end
+
+  def showProfileCardUIForUser(user : Void*, targetUserXuid : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowProfileCardUIForUser(user, targetUserXuid, completionRoutine, context)
+  end
+
+  def showChangeFriendRelationshipUIForUser(user : Void*, targetUserXuid : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowChangeFriendRelationshipUIForUser(user, targetUserXuid, completionRoutine, context)
+  end
+
+  def showTitleAchievementsUIForUser(user : Void*, titleId : UInt32, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowTitleAchievementsUIForUser(user, titleId, completionRoutine, context)
+  end
+
+  def checkGamingPrivilegeWithUIForUser(user : Void*, privilegeId : UInt32, scope : Win32cr::System::WinRT::HSTRING, policy : Win32cr::System::WinRT::HSTRING, friendlyMessage : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.CheckGamingPrivilegeWithUIForUser(user, privilegeId, scope, policy, friendlyMessage, completionRoutine, context)
+  end
+
+  def checkGamingPrivilegeSilentlyForUser(user : Void*, privilegeId : UInt32, scope : Win32cr::System::WinRT::HSTRING, policy : Win32cr::System::WinRT::HSTRING, hasPrivilege : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.CheckGamingPrivilegeSilentlyForUser(user, privilegeId, scope, policy, hasPrivilege)
+  end
+
+  def showGameInviteUIWithContext(serviceConfigurationId : Win32cr::System::WinRT::HSTRING, sessionTemplateName : Win32cr::System::WinRT::HSTRING, sessionId : Win32cr::System::WinRT::HSTRING, invitationDisplayText : Win32cr::System::WinRT::HSTRING, customActivationContext : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowGameInviteUIWithContext(serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, customActivationContext, completionRoutine, context)
+  end
+
+  def showGameInviteUIWithContextForUser(user : Void*, serviceConfigurationId : Win32cr::System::WinRT::HSTRING, sessionTemplateName : Win32cr::System::WinRT::HSTRING, sessionId : Win32cr::System::WinRT::HSTRING, invitationDisplayText : Win32cr::System::WinRT::HSTRING, customActivationContext : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowGameInviteUIWithContextForUser(user, serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, customActivationContext, completionRoutine, context)
+  end
+
+  def showGameInfoUI(titleId : UInt32, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowGameInfoUI(titleId, completionRoutine, context)
+  end
+
+  def showGameInfoUIForUser(user : Void*, titleId : UInt32, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowGameInfoUIForUser(user, titleId, completionRoutine, context)
+  end
+
+  def showFindFriendsUI(completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowFindFriendsUI(completionRoutine, context)
+  end
+
+  def showFindFriendsUIForUser(user : Void*, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowFindFriendsUIForUser(user, completionRoutine, context)
+  end
+
+  def showCustomizeUserProfileUI(completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowCustomizeUserProfileUI(completionRoutine, context)
+  end
+
+  def showCustomizeUserProfileUIForUser(user : Void*, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowCustomizeUserProfileUIForUser(user, completionRoutine, context)
+  end
+
+  def showUserSettingsUI(completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowUserSettingsUI(completionRoutine, context)
+  end
+
+  def showUserSettingsUIForUser(user : Void*, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    C.ShowUserSettingsUIForUser(user, completionRoutine, context)
+  end
+
   lib C
+    # :nodoc:
     fun HasExpandedResources(hasExpandedResources : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetExpandedResourceExclusiveCpuCount(exclusiveCpuCount : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ReleaseExclusiveCpuSets : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetGamingDeviceModelInformation(information : Win32cr::Gaming::GAMING_DEVICE_MODEL_INFORMATION*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowGameInviteUI(serviceConfigurationId : Win32cr::System::WinRT::HSTRING, sessionTemplateName : Win32cr::System::WinRT::HSTRING, sessionId : Win32cr::System::WinRT::HSTRING, invitationDisplayText : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowPlayerPickerUI(promptDisplayText : Win32cr::System::WinRT::HSTRING, xuids : Win32cr::System::WinRT::HSTRING*, xuidsCount : LibC::UIntPtrT, preSelectedXuids : Win32cr::System::WinRT::HSTRING*, preSelectedXuidsCount : LibC::UIntPtrT, minSelectionCount : LibC::UIntPtrT, maxSelectionCount : LibC::UIntPtrT, completionRoutine : Win32cr::Gaming::PlayerPickerUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowProfileCardUI(targetUserXuid : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowChangeFriendRelationshipUI(targetUserXuid : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowTitleAchievementsUI(titleId : UInt32, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ProcessPendingGameUI(waitForCompletion : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TryCancelPendingGameUI : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CheckGamingPrivilegeWithUI(privilegeId : UInt32, scope : Win32cr::System::WinRT::HSTRING, policy : Win32cr::System::WinRT::HSTRING, friendlyMessage : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CheckGamingPrivilegeSilently(privilegeId : UInt32, scope : Win32cr::System::WinRT::HSTRING, policy : Win32cr::System::WinRT::HSTRING, hasPrivilege : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowGameInviteUIForUser(user : Void*, serviceConfigurationId : Win32cr::System::WinRT::HSTRING, sessionTemplateName : Win32cr::System::WinRT::HSTRING, sessionId : Win32cr::System::WinRT::HSTRING, invitationDisplayText : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowPlayerPickerUIForUser(user : Void*, promptDisplayText : Win32cr::System::WinRT::HSTRING, xuids : Win32cr::System::WinRT::HSTRING*, xuidsCount : LibC::UIntPtrT, preSelectedXuids : Win32cr::System::WinRT::HSTRING*, preSelectedXuidsCount : LibC::UIntPtrT, minSelectionCount : LibC::UIntPtrT, maxSelectionCount : LibC::UIntPtrT, completionRoutine : Win32cr::Gaming::PlayerPickerUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowProfileCardUIForUser(user : Void*, targetUserXuid : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowChangeFriendRelationshipUIForUser(user : Void*, targetUserXuid : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowTitleAchievementsUIForUser(user : Void*, titleId : UInt32, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CheckGamingPrivilegeWithUIForUser(user : Void*, privilegeId : UInt32, scope : Win32cr::System::WinRT::HSTRING, policy : Win32cr::System::WinRT::HSTRING, friendlyMessage : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CheckGamingPrivilegeSilentlyForUser(user : Void*, privilegeId : UInt32, scope : Win32cr::System::WinRT::HSTRING, policy : Win32cr::System::WinRT::HSTRING, hasPrivilege : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowGameInviteUIWithContext(serviceConfigurationId : Win32cr::System::WinRT::HSTRING, sessionTemplateName : Win32cr::System::WinRT::HSTRING, sessionId : Win32cr::System::WinRT::HSTRING, invitationDisplayText : Win32cr::System::WinRT::HSTRING, customActivationContext : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowGameInviteUIWithContextForUser(user : Void*, serviceConfigurationId : Win32cr::System::WinRT::HSTRING, sessionTemplateName : Win32cr::System::WinRT::HSTRING, sessionId : Win32cr::System::WinRT::HSTRING, invitationDisplayText : Win32cr::System::WinRT::HSTRING, customActivationContext : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowGameInfoUI(titleId : UInt32, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowGameInfoUIForUser(user : Void*, titleId : UInt32, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowFindFriendsUI(completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowFindFriendsUIForUser(user : Void*, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowCustomizeUserProfileUI(completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowCustomizeUserProfileUIForUser(user : Void*, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowUserSettingsUI(completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ShowUserSettingsUIForUser(user : Void*, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
   end

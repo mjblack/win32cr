@@ -2,6 +2,7 @@ require "./../com.cr"
 require "./../../foundation.cr"
 
 module Win32cr::System::Com::Events
+  extend self
 
   CLSID_CEventSystem = LibC::GUID.new(0x4e14fba2_u32, 0x2e22_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
 

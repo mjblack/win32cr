@@ -11,6 +11,7 @@ require "./win_sock.cr"
 require "./../security/authentication/identity.cr"
 
 module Win32cr::Networking::ActiveDirectory
+  extend self
   alias GetDcContextHandle = LibC::IntPtrT
   alias ADS_SEARCH_HANDLE = LibC::IntPtrT
   alias LPCQADDFORMSPROC = Proc(Win32cr::Foundation::LPARAM, Win32cr::Networking::ActiveDirectory::CQFORM*, Win32cr::Foundation::HRESULT)
@@ -9119,6 +9120,638 @@ module Win32cr::Networking::ActiveDirectory
 
   end
 
+  def aDsGetObject(lpszPathName : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, ppObject : Void**) : Win32cr::Foundation::HRESULT
+    C.ADsGetObject(lpszPathName, riid, ppObject)
+  end
+
+  def aDsBuildEnumerator(pADsContainer : Void*, ppEnumVariant : Void**) : Win32cr::Foundation::HRESULT
+    C.ADsBuildEnumerator(pADsContainer, ppEnumVariant)
+  end
+
+  def aDsFreeEnumerator(pEnumVariant : Void*) : Win32cr::Foundation::HRESULT
+    C.ADsFreeEnumerator(pEnumVariant)
+  end
+
+  def aDsEnumerateNext(pEnumVariant : Void*, cElements : UInt32, pvar : Win32cr::System::Com::VARIANT*, pcElementsFetched : UInt32*) : Win32cr::Foundation::HRESULT
+    C.ADsEnumerateNext(pEnumVariant, cElements, pvar, pcElementsFetched)
+  end
+
+  def aDsBuildVarArrayStr(lppPathNames : Win32cr::Foundation::PWSTR*, dwPathNames : UInt32, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.ADsBuildVarArrayStr(lppPathNames, dwPathNames, pVar)
+  end
+
+  def aDsBuildVarArrayInt(lpdwObjectTypes : UInt32*, dwObjectTypes : UInt32, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.ADsBuildVarArrayInt(lpdwObjectTypes, dwObjectTypes, pVar)
+  end
+
+  def aDsOpenObject(lpszPathName : Win32cr::Foundation::PWSTR, lpszUserName : Win32cr::Foundation::PWSTR, lpszPassword : Win32cr::Foundation::PWSTR, dwReserved : Win32cr::Networking::ActiveDirectory::ADS_AUTHENTICATION_ENUM, riid : LibC::GUID*, ppObject : Void**) : Win32cr::Foundation::HRESULT
+    C.ADsOpenObject(lpszPathName, lpszUserName, lpszPassword, dwReserved, riid, ppObject)
+  end
+
+  def aDsGetLastError(lpError : UInt32*, lpErrorBuf : UInt16*, dwErrorBufLen : UInt32, lpNameBuf : UInt16*, dwNameBufLen : UInt32) : Win32cr::Foundation::HRESULT
+    C.ADsGetLastError(lpError, lpErrorBuf, dwErrorBufLen, lpNameBuf, dwNameBufLen)
+  end
+
+  def aDsSetLastError(dwErr : UInt32, pszError : Win32cr::Foundation::PWSTR, pszProvider : Win32cr::Foundation::PWSTR) : Void
+    C.ADsSetLastError(dwErr, pszError, pszProvider)
+  end
+
+  def allocADsMem(cb : UInt32) : Void*
+    C.AllocADsMem(cb)
+  end
+
+  def freeADsMem(pMem : Void*) : Win32cr::Foundation::BOOL
+    C.FreeADsMem(pMem)
+  end
+
+  def reallocADsMem(pOldMem : Void*, cbOld : UInt32, cbNew : UInt32) : Void*
+    C.ReallocADsMem(pOldMem, cbOld, cbNew)
+  end
+
+  def allocADsStr(pStr : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.AllocADsStr(pStr)
+  end
+
+  def freeADsStr(pStr : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.FreeADsStr(pStr)
+  end
+
+  def reallocADsStr(ppStr : Win32cr::Foundation::PWSTR*, pStr : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.ReallocADsStr(ppStr, pStr)
+  end
+
+  def aDsEncodeBinaryData(pbSrcData : UInt8*, dwSrcLen : UInt32, ppszDestData : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    C.ADsEncodeBinaryData(pbSrcData, dwSrcLen, ppszDestData)
+  end
+
+  def aDsDecodeBinaryData(szSrcData : Win32cr::Foundation::PWSTR, ppbDestData : UInt8**, pdwDestLen : UInt32*) : Win32cr::Foundation::HRESULT
+    C.ADsDecodeBinaryData(szSrcData, ppbDestData, pdwDestLen)
+  end
+
+  def propVariantToAdsType(pVariant : Win32cr::System::Com::VARIANT*, dwNumVariant : UInt32, ppAdsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE**, pdwNumValues : UInt32*) : Win32cr::Foundation::HRESULT
+    C.PropVariantToAdsType(pVariant, dwNumVariant, ppAdsValues, pdwNumValues)
+  end
+
+  def adsTypeToPropVariant(pAdsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE*, dwNumValues : UInt32, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.AdsTypeToPropVariant(pAdsValues, dwNumValues, pVariant)
+  end
+
+  def adsFreeAdsValues(pAdsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE*, dwNumValues : UInt32) : Void
+    C.AdsFreeAdsValues(pAdsValues, dwNumValues)
+  end
+
+  def binarySDToSecurityDescriptor(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pVarsec : Win32cr::System::Com::VARIANT*, pszServerName : Win32cr::Foundation::PWSTR, userName : Win32cr::Foundation::PWSTR, passWord : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.BinarySDToSecurityDescriptor(pSecurityDescriptor, pVarsec, pszServerName, userName, passWord, dwFlags)
+  end
+
+  def securityDescriptorToBinarySD(vVarSecDes : Win32cr::System::Com::VARIANT, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, pdwSDLength : UInt32*, pszServerName : Win32cr::Foundation::PWSTR, userName : Win32cr::Foundation::PWSTR, passWord : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.SecurityDescriptorToBinarySD(vVarSecDes, ppSecurityDescriptor, pdwSDLength, pszServerName, userName, passWord, dwFlags)
+  end
+
+  def dsBrowseForContainerW(pInfo : Win32cr::Networking::ActiveDirectory::DSBROWSEINFOW*) : Int32
+    C.DsBrowseForContainerW(pInfo)
+  end
+
+  def dsBrowseForContainerA(pInfo : Win32cr::Networking::ActiveDirectory::DSBROWSEINFOA*) : Int32
+    C.DsBrowseForContainerA(pInfo)
+  end
+
+  def dsGetIcon(dwFlags : UInt32, pszObjectClass : Win32cr::Foundation::PWSTR, cxImage : Int32, cyImage : Int32) : Win32cr::UI::WindowsAndMessaging::HICON
+    C.DsGetIcon(dwFlags, pszObjectClass, cxImage, cyImage)
+  end
+
+  def dsGetFriendlyClassName(pszObjectClass : Win32cr::Foundation::PWSTR, pszBuffer : UInt16*, cchBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    C.DsGetFriendlyClassName(pszObjectClass, pszBuffer, cchBuffer)
+  end
+
+  def aDsPropCreateNotifyObj(pAppThdDataObj : Void*, pwzADsObjName : Win32cr::Foundation::PWSTR, phNotifyObj : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
+    C.ADsPropCreateNotifyObj(pAppThdDataObj, pwzADsObjName, phNotifyObj)
+  end
+
+  def aDsPropGetInitInfo(hNotifyObj : Win32cr::Foundation::HWND, pInitParams : Win32cr::Networking::ActiveDirectory::ADSPROPINITPARAMS*) : Win32cr::Foundation::BOOL
+    C.ADsPropGetInitInfo(hNotifyObj, pInitParams)
+  end
+
+  def aDsPropSetHwndWithTitle(hNotifyObj : Win32cr::Foundation::HWND, hPage : Win32cr::Foundation::HWND, ptzTitle : Int8*) : Win32cr::Foundation::BOOL
+    C.ADsPropSetHwndWithTitle(hNotifyObj, hPage, ptzTitle)
+  end
+
+  def aDsPropSetHwnd(hNotifyObj : Win32cr::Foundation::HWND, hPage : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.ADsPropSetHwnd(hNotifyObj, hPage)
+  end
+
+  def aDsPropCheckIfWritable(pwzAttr : Win32cr::Foundation::PWSTR, pWritableAttrs : Win32cr::Networking::ActiveDirectory::ADS_ATTR_INFO*) : Win32cr::Foundation::BOOL
+    C.ADsPropCheckIfWritable(pwzAttr, pWritableAttrs)
+  end
+
+  def aDsPropSendErrorMessage(hNotifyObj : Win32cr::Foundation::HWND, pError : Win32cr::Networking::ActiveDirectory::ADSPROPERROR*) : Win32cr::Foundation::BOOL
+    C.ADsPropSendErrorMessage(hNotifyObj, pError)
+  end
+
+  def aDsPropShowErrorDialog(hNotifyObj : Win32cr::Foundation::HWND, hPage : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.ADsPropShowErrorDialog(hNotifyObj, hPage)
+  end
+
+  def dsMakeSpnW(service_class : Win32cr::Foundation::PWSTR, service_name : Win32cr::Foundation::PWSTR, instance_name : Win32cr::Foundation::PWSTR, instance_port : UInt16, referrer : Win32cr::Foundation::PWSTR, pcSpnLength : UInt32*, pszSpn : UInt16*) : UInt32
+    C.DsMakeSpnW(service_class, service_name, instance_name, instance_port, referrer, pcSpnLength, pszSpn)
+  end
+
+  def dsMakeSpnA(service_class : Win32cr::Foundation::PSTR, service_name : Win32cr::Foundation::PSTR, instance_name : Win32cr::Foundation::PSTR, instance_port : UInt16, referrer : Win32cr::Foundation::PSTR, pcSpnLength : UInt32*, pszSpn : UInt8*) : UInt32
+    C.DsMakeSpnA(service_class, service_name, instance_name, instance_port, referrer, pcSpnLength, pszSpn)
+  end
+
+  def dsCrackSpnA(pszSpn : Win32cr::Foundation::PSTR, pcServiceClass : UInt32*, service_class : UInt8*, pcServiceName : UInt32*, service_name : UInt8*, pcInstanceName : UInt32*, instance_name : UInt8*, pInstancePort : UInt16*) : UInt32
+    C.DsCrackSpnA(pszSpn, pcServiceClass, service_class, pcServiceName, service_name, pcInstanceName, instance_name, pInstancePort)
+  end
+
+  def dsCrackSpnW(pszSpn : Win32cr::Foundation::PWSTR, pcServiceClass : UInt32*, service_class : UInt16*, pcServiceName : UInt32*, service_name : UInt16*, pcInstanceName : UInt32*, instance_name : UInt16*, pInstancePort : UInt16*) : UInt32
+    C.DsCrackSpnW(pszSpn, pcServiceClass, service_class, pcServiceName, service_name, pcInstanceName, instance_name, pInstancePort)
+  end
+
+  def dsQuoteRdnValueW(cUnquotedRdnValueLength : UInt32, psUnquotedRdnValue : UInt16*, pcQuotedRdnValueLength : UInt32*, psQuotedRdnValue : UInt16*) : UInt32
+    C.DsQuoteRdnValueW(cUnquotedRdnValueLength, psUnquotedRdnValue, pcQuotedRdnValueLength, psQuotedRdnValue)
+  end
+
+  def dsQuoteRdnValueA(cUnquotedRdnValueLength : UInt32, psUnquotedRdnValue : UInt8*, pcQuotedRdnValueLength : UInt32*, psQuotedRdnValue : UInt8*) : UInt32
+    C.DsQuoteRdnValueA(cUnquotedRdnValueLength, psUnquotedRdnValue, pcQuotedRdnValueLength, psQuotedRdnValue)
+  end
+
+  def dsUnquoteRdnValueW(cQuotedRdnValueLength : UInt32, psQuotedRdnValue : UInt16*, pcUnquotedRdnValueLength : UInt32*, psUnquotedRdnValue : UInt16*) : UInt32
+    C.DsUnquoteRdnValueW(cQuotedRdnValueLength, psQuotedRdnValue, pcUnquotedRdnValueLength, psUnquotedRdnValue)
+  end
+
+  def dsUnquoteRdnValueA(cQuotedRdnValueLength : UInt32, psQuotedRdnValue : UInt8*, pcUnquotedRdnValueLength : UInt32*, psUnquotedRdnValue : UInt8*) : UInt32
+    C.DsUnquoteRdnValueA(cQuotedRdnValueLength, psQuotedRdnValue, pcUnquotedRdnValueLength, psUnquotedRdnValue)
+  end
+
+  def dsGetRdnW(ppDN : Win32cr::Foundation::PWSTR*, pcDN : UInt32*, ppKey : Win32cr::Foundation::PWSTR*, pcKey : UInt32*, ppVal : Win32cr::Foundation::PWSTR*, pcVal : UInt32*) : UInt32
+    C.DsGetRdnW(ppDN, pcDN, ppKey, pcKey, ppVal, pcVal)
+  end
+
+  def dsCrackUnquotedMangledRdnW(pszRDN : UInt16*, cchRDN : UInt32, pGuid : LibC::GUID*, peDsMangleFor : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR*) : Win32cr::Foundation::BOOL
+    C.DsCrackUnquotedMangledRdnW(pszRDN, cchRDN, pGuid, peDsMangleFor)
+  end
+
+  def dsCrackUnquotedMangledRdnA(pszRDN : UInt8*, cchRDN : UInt32, pGuid : LibC::GUID*, peDsMangleFor : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR*) : Win32cr::Foundation::BOOL
+    C.DsCrackUnquotedMangledRdnA(pszRDN, cchRDN, pGuid, peDsMangleFor)
+  end
+
+  def dsIsMangledRdnValueW(pszRdn : UInt16*, cRdn : UInt32, eDsMangleForDesired : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR) : Win32cr::Foundation::BOOL
+    C.DsIsMangledRdnValueW(pszRdn, cRdn, eDsMangleForDesired)
+  end
+
+  def dsIsMangledRdnValueA(pszRdn : UInt8*, cRdn : UInt32, eDsMangleForDesired : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR) : Win32cr::Foundation::BOOL
+    C.DsIsMangledRdnValueA(pszRdn, cRdn, eDsMangleForDesired)
+  end
+
+  def dsIsMangledDnA(pszDn : Win32cr::Foundation::PSTR, eDsMangleFor : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR) : Win32cr::Foundation::BOOL
+    C.DsIsMangledDnA(pszDn, eDsMangleFor)
+  end
+
+  def dsIsMangledDnW(pszDn : Win32cr::Foundation::PWSTR, eDsMangleFor : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR) : Win32cr::Foundation::BOOL
+    C.DsIsMangledDnW(pszDn, eDsMangleFor)
+  end
+
+  def dsCrackSpn2A(pszSpn : UInt8*, cSpn : UInt32, pcServiceClass : UInt32*, service_class : UInt8*, pcServiceName : UInt32*, service_name : UInt8*, pcInstanceName : UInt32*, instance_name : UInt8*, pInstancePort : UInt16*) : UInt32
+    C.DsCrackSpn2A(pszSpn, cSpn, pcServiceClass, service_class, pcServiceName, service_name, pcInstanceName, instance_name, pInstancePort)
+  end
+
+  def dsCrackSpn2W(pszSpn : UInt16*, cSpn : UInt32, pcServiceClass : UInt32*, service_class : UInt16*, pcServiceName : UInt32*, service_name : UInt16*, pcInstanceName : UInt32*, instance_name : UInt16*, pInstancePort : UInt16*) : UInt32
+    C.DsCrackSpn2W(pszSpn, cSpn, pcServiceClass, service_class, pcServiceName, service_name, pcInstanceName, instance_name, pInstancePort)
+  end
+
+  def dsCrackSpn3W(pszSpn : Win32cr::Foundation::PWSTR, cSpn : UInt32, pcHostName : UInt32*, host_name : UInt16*, pcInstanceName : UInt32*, instance_name : UInt16*, pPortNumber : UInt16*, pcDomainName : UInt32*, domain_name : UInt16*, pcRealmName : UInt32*, realm_name : UInt16*) : UInt32
+    C.DsCrackSpn3W(pszSpn, cSpn, pcHostName, host_name, pcInstanceName, instance_name, pPortNumber, pcDomainName, domain_name, pcRealmName, realm_name)
+  end
+
+  def dsCrackSpn4W(pszSpn : Win32cr::Foundation::PWSTR, cSpn : UInt32, pcHostName : UInt32*, host_name : UInt16*, pcInstanceName : UInt32*, instance_name : UInt16*, pcPortName : UInt32*, port_name : UInt16*, pcDomainName : UInt32*, domain_name : UInt16*, pcRealmName : UInt32*, realm_name : UInt16*) : UInt32
+    C.DsCrackSpn4W(pszSpn, cSpn, pcHostName, host_name, pcInstanceName, instance_name, pcPortName, port_name, pcDomainName, domain_name, pcRealmName, realm_name)
+  end
+
+  def dsBindW(domain_controller_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsBindW(domain_controller_name, dns_domain_name, phDS)
+  end
+
+  def dsBindA(domain_controller_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsBindA(domain_controller_name, dns_domain_name, phDS)
+  end
+
+  def dsBindWithCredW(domain_controller_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, auth_identity : Void*, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsBindWithCredW(domain_controller_name, dns_domain_name, auth_identity, phDS)
+  end
+
+  def dsBindWithCredA(domain_controller_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, auth_identity : Void*, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsBindWithCredA(domain_controller_name, dns_domain_name, auth_identity, phDS)
+  end
+
+  def dsBindWithSpnW(domain_controller_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PWSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsBindWithSpnW(domain_controller_name, dns_domain_name, auth_identity, service_principal_name, phDS)
+  end
+
+  def dsBindWithSpnA(domain_controller_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsBindWithSpnA(domain_controller_name, dns_domain_name, auth_identity, service_principal_name, phDS)
+  end
+
+  def dsBindWithSpnExW(domain_controller_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PWSTR, bind_flags : UInt32, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsBindWithSpnExW(domain_controller_name, dns_domain_name, auth_identity, service_principal_name, bind_flags, phDS)
+  end
+
+  def dsBindWithSpnExA(domain_controller_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PSTR, bind_flags : UInt32, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsBindWithSpnExA(domain_controller_name, dns_domain_name, auth_identity, service_principal_name, bind_flags, phDS)
+  end
+
+  def dsBindByInstanceW(server_name : Win32cr::Foundation::PWSTR, annotation__ : Win32cr::Foundation::PWSTR, instance_guid : LibC::GUID*, dns_domain_name : Win32cr::Foundation::PWSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PWSTR, bind_flags : UInt32, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsBindByInstanceW(server_name, annotation__, instance_guid, dns_domain_name, auth_identity, service_principal_name, bind_flags, phDS)
+  end
+
+  def dsBindByInstanceA(server_name : Win32cr::Foundation::PSTR, annotation__ : Win32cr::Foundation::PSTR, instance_guid : LibC::GUID*, dns_domain_name : Win32cr::Foundation::PSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PSTR, bind_flags : UInt32, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsBindByInstanceA(server_name, annotation__, instance_guid, dns_domain_name, auth_identity, service_principal_name, bind_flags, phDS)
+  end
+
+  def dsBindToISTGW(site_name : Win32cr::Foundation::PWSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsBindToISTGW(site_name, phDS)
+  end
+
+  def dsBindToISTGA(site_name : Win32cr::Foundation::PSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsBindToISTGA(site_name, phDS)
+  end
+
+  def dsBindingSetTimeout(hDS : Win32cr::Foundation::HANDLE, cTimeoutSecs : UInt32) : UInt32
+    C.DsBindingSetTimeout(hDS, cTimeoutSecs)
+  end
+
+  def dsUnBindW(phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsUnBindW(phDS)
+  end
+
+  def dsUnBindA(phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    C.DsUnBindA(phDS)
+  end
+
+  def dsMakePasswordCredentialsW(user : Win32cr::Foundation::PWSTR, domain : Win32cr::Foundation::PWSTR, password : Win32cr::Foundation::PWSTR, pAuthIdentity : Void**) : UInt32
+    C.DsMakePasswordCredentialsW(user, domain, password, pAuthIdentity)
+  end
+
+  def dsMakePasswordCredentialsA(user : Win32cr::Foundation::PSTR, domain : Win32cr::Foundation::PSTR, password : Win32cr::Foundation::PSTR, pAuthIdentity : Void**) : UInt32
+    C.DsMakePasswordCredentialsA(user, domain, password, pAuthIdentity)
+  end
+
+  def dsFreePasswordCredentials(auth_identity : Void*) : Void
+    C.DsFreePasswordCredentials(auth_identity)
+  end
+
+  def dsCrackNamesW(hDS : Win32cr::Foundation::HANDLE, flags : Win32cr::Networking::ActiveDirectory::DS_NAME_FLAGS, formatOffered : Win32cr::Networking::ActiveDirectory::DS_NAME_FORMAT, formatDesired : Win32cr::Networking::ActiveDirectory::DS_NAME_FORMAT, cNames : UInt32, rpNames : Win32cr::Foundation::PWSTR*, ppResult : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    C.DsCrackNamesW(hDS, flags, formatOffered, formatDesired, cNames, rpNames, ppResult)
+  end
+
+  def dsCrackNamesA(hDS : Win32cr::Foundation::HANDLE, flags : Win32cr::Networking::ActiveDirectory::DS_NAME_FLAGS, formatOffered : Win32cr::Networking::ActiveDirectory::DS_NAME_FORMAT, formatDesired : Win32cr::Networking::ActiveDirectory::DS_NAME_FORMAT, cNames : UInt32, rpNames : Win32cr::Foundation::PSTR*, ppResult : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    C.DsCrackNamesA(hDS, flags, formatOffered, formatDesired, cNames, rpNames, ppResult)
+  end
+
+  def dsFreeNameResultW(pResult : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW*) : Void
+    C.DsFreeNameResultW(pResult)
+  end
+
+  def dsFreeNameResultA(pResult : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA*) : Void
+    C.DsFreeNameResultA(pResult)
+  end
+
+  def dsGetSpnA(service_type : Win32cr::Networking::ActiveDirectory::DS_SPN_NAME_TYPE, service_class : Win32cr::Foundation::PSTR, service_name : Win32cr::Foundation::PSTR, instance_port : UInt16, cInstanceNames : UInt16, pInstanceNames : Win32cr::Foundation::PSTR*, pInstancePorts : UInt16*, pcSpn : UInt32*, prpszSpn : Win32cr::Foundation::PSTR**) : UInt32
+    C.DsGetSpnA(service_type, service_class, service_name, instance_port, cInstanceNames, pInstanceNames, pInstancePorts, pcSpn, prpszSpn)
+  end
+
+  def dsGetSpnW(service_type : Win32cr::Networking::ActiveDirectory::DS_SPN_NAME_TYPE, service_class : Win32cr::Foundation::PWSTR, service_name : Win32cr::Foundation::PWSTR, instance_port : UInt16, cInstanceNames : UInt16, pInstanceNames : Win32cr::Foundation::PWSTR*, pInstancePorts : UInt16*, pcSpn : UInt32*, prpszSpn : Win32cr::Foundation::PWSTR**) : UInt32
+    C.DsGetSpnW(service_type, service_class, service_name, instance_port, cInstanceNames, pInstanceNames, pInstancePorts, pcSpn, prpszSpn)
+  end
+
+  def dsFreeSpnArrayA(cSpn : UInt32, rpszSpn : Win32cr::Foundation::PSTR*) : Void
+    C.DsFreeSpnArrayA(cSpn, rpszSpn)
+  end
+
+  def dsFreeSpnArrayW(cSpn : UInt32, rpszSpn : Win32cr::Foundation::PWSTR*) : Void
+    C.DsFreeSpnArrayW(cSpn, rpszSpn)
+  end
+
+  def dsWriteAccountSpnA(hDS : Win32cr::Foundation::HANDLE, operation : Win32cr::Networking::ActiveDirectory::DS_SPN_WRITE_OP, pszAccount : Win32cr::Foundation::PSTR, cSpn : UInt32, rpszSpn : Win32cr::Foundation::PSTR*) : UInt32
+    C.DsWriteAccountSpnA(hDS, operation, pszAccount, cSpn, rpszSpn)
+  end
+
+  def dsWriteAccountSpnW(hDS : Win32cr::Foundation::HANDLE, operation : Win32cr::Networking::ActiveDirectory::DS_SPN_WRITE_OP, pszAccount : Win32cr::Foundation::PWSTR, cSpn : UInt32, rpszSpn : Win32cr::Foundation::PWSTR*) : UInt32
+    C.DsWriteAccountSpnW(hDS, operation, pszAccount, cSpn, rpszSpn)
+  end
+
+  def dsClientMakeSpnForTargetServerW(service_class : Win32cr::Foundation::PWSTR, service_name : Win32cr::Foundation::PWSTR, pcSpnLength : UInt32*, pszSpn : UInt16*) : UInt32
+    C.DsClientMakeSpnForTargetServerW(service_class, service_name, pcSpnLength, pszSpn)
+  end
+
+  def dsClientMakeSpnForTargetServerA(service_class : Win32cr::Foundation::PSTR, service_name : Win32cr::Foundation::PSTR, pcSpnLength : UInt32*, pszSpn : UInt8*) : UInt32
+    C.DsClientMakeSpnForTargetServerA(service_class, service_name, pcSpnLength, pszSpn)
+  end
+
+  def dsServerRegisterSpnA(operation : Win32cr::Networking::ActiveDirectory::DS_SPN_WRITE_OP, service_class : Win32cr::Foundation::PSTR, user_object_dn : Win32cr::Foundation::PSTR) : UInt32
+    C.DsServerRegisterSpnA(operation, service_class, user_object_dn)
+  end
+
+  def dsServerRegisterSpnW(operation : Win32cr::Networking::ActiveDirectory::DS_SPN_WRITE_OP, service_class : Win32cr::Foundation::PWSTR, user_object_dn : Win32cr::Foundation::PWSTR) : UInt32
+    C.DsServerRegisterSpnW(operation, service_class, user_object_dn)
+  end
+
+  def dsReplicaSyncA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, pUuidDsaSrc : LibC::GUID*, options : UInt32) : UInt32
+    C.DsReplicaSyncA(hDS, name_context, pUuidDsaSrc, options)
+  end
+
+  def dsReplicaSyncW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, pUuidDsaSrc : LibC::GUID*, options : UInt32) : UInt32
+    C.DsReplicaSyncW(hDS, name_context, pUuidDsaSrc, options)
+  end
+
+  def dsReplicaAddA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, source_dsa_dn : Win32cr::Foundation::PSTR, transport_dn : Win32cr::Foundation::PSTR, source_dsa_address : Win32cr::Foundation::PSTR, pSchedule : Win32cr::Networking::ActiveDirectory::SCHEDULE*, options : UInt32) : UInt32
+    C.DsReplicaAddA(hDS, name_context, source_dsa_dn, transport_dn, source_dsa_address, pSchedule, options)
+  end
+
+  def dsReplicaAddW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, source_dsa_dn : Win32cr::Foundation::PWSTR, transport_dn : Win32cr::Foundation::PWSTR, source_dsa_address : Win32cr::Foundation::PWSTR, pSchedule : Win32cr::Networking::ActiveDirectory::SCHEDULE*, options : UInt32) : UInt32
+    C.DsReplicaAddW(hDS, name_context, source_dsa_dn, transport_dn, source_dsa_address, pSchedule, options)
+  end
+
+  def dsReplicaDelA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, dsa_src : Win32cr::Foundation::PSTR, options : UInt32) : UInt32
+    C.DsReplicaDelA(hDS, name_context, dsa_src, options)
+  end
+
+  def dsReplicaDelW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, dsa_src : Win32cr::Foundation::PWSTR, options : UInt32) : UInt32
+    C.DsReplicaDelW(hDS, name_context, dsa_src, options)
+  end
+
+  def dsReplicaModifyA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, pUuidSourceDsa : LibC::GUID*, transport_dn : Win32cr::Foundation::PSTR, source_dsa_address : Win32cr::Foundation::PSTR, pSchedule : Win32cr::Networking::ActiveDirectory::SCHEDULE*, replica_flags : UInt32, modify_fields : UInt32, options : UInt32) : UInt32
+    C.DsReplicaModifyA(hDS, name_context, pUuidSourceDsa, transport_dn, source_dsa_address, pSchedule, replica_flags, modify_fields, options)
+  end
+
+  def dsReplicaModifyW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, pUuidSourceDsa : LibC::GUID*, transport_dn : Win32cr::Foundation::PWSTR, source_dsa_address : Win32cr::Foundation::PWSTR, pSchedule : Win32cr::Networking::ActiveDirectory::SCHEDULE*, replica_flags : UInt32, modify_fields : UInt32, options : UInt32) : UInt32
+    C.DsReplicaModifyW(hDS, name_context, pUuidSourceDsa, transport_dn, source_dsa_address, pSchedule, replica_flags, modify_fields, options)
+  end
+
+  def dsReplicaUpdateRefsA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, dsa_dest : Win32cr::Foundation::PSTR, pUuidDsaDest : LibC::GUID*, options : UInt32) : UInt32
+    C.DsReplicaUpdateRefsA(hDS, name_context, dsa_dest, pUuidDsaDest, options)
+  end
+
+  def dsReplicaUpdateRefsW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, dsa_dest : Win32cr::Foundation::PWSTR, pUuidDsaDest : LibC::GUID*, options : UInt32) : UInt32
+    C.DsReplicaUpdateRefsW(hDS, name_context, dsa_dest, pUuidDsaDest, options)
+  end
+
+  def dsReplicaSyncAllA(hDS : Win32cr::Foundation::HANDLE, pszNameContext : Win32cr::Foundation::PSTR, ulFlags : UInt32, pFnCallBack : LibC::IntPtrT, pCallbackData : Void*, pErrors : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERRINFOA***) : UInt32
+    C.DsReplicaSyncAllA(hDS, pszNameContext, ulFlags, pFnCallBack, pCallbackData, pErrors)
+  end
+
+  def dsReplicaSyncAllW(hDS : Win32cr::Foundation::HANDLE, pszNameContext : Win32cr::Foundation::PWSTR, ulFlags : UInt32, pFnCallBack : LibC::IntPtrT, pCallbackData : Void*, pErrors : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERRINFOW***) : UInt32
+    C.DsReplicaSyncAllW(hDS, pszNameContext, ulFlags, pFnCallBack, pCallbackData, pErrors)
+  end
+
+  def dsRemoveDsServerW(hDs : Win32cr::Foundation::HANDLE, server_dn : Win32cr::Foundation::PWSTR, domain_dn : Win32cr::Foundation::PWSTR, fLastDcInDomain : Win32cr::Foundation::BOOL*, fCommit : Win32cr::Foundation::BOOL) : UInt32
+    C.DsRemoveDsServerW(hDs, server_dn, domain_dn, fLastDcInDomain, fCommit)
+  end
+
+  def dsRemoveDsServerA(hDs : Win32cr::Foundation::HANDLE, server_dn : Win32cr::Foundation::PSTR, domain_dn : Win32cr::Foundation::PSTR, fLastDcInDomain : Win32cr::Foundation::BOOL*, fCommit : Win32cr::Foundation::BOOL) : UInt32
+    C.DsRemoveDsServerA(hDs, server_dn, domain_dn, fLastDcInDomain, fCommit)
+  end
+
+  def dsRemoveDsDomainW(hDs : Win32cr::Foundation::HANDLE, domain_dn : Win32cr::Foundation::PWSTR) : UInt32
+    C.DsRemoveDsDomainW(hDs, domain_dn)
+  end
+
+  def dsRemoveDsDomainA(hDs : Win32cr::Foundation::HANDLE, domain_dn : Win32cr::Foundation::PSTR) : UInt32
+    C.DsRemoveDsDomainA(hDs, domain_dn)
+  end
+
+  def dsListSitesA(hDs : Win32cr::Foundation::HANDLE, ppSites : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    C.DsListSitesA(hDs, ppSites)
+  end
+
+  def dsListSitesW(hDs : Win32cr::Foundation::HANDLE, ppSites : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    C.DsListSitesW(hDs, ppSites)
+  end
+
+  def dsListServersInSiteA(hDs : Win32cr::Foundation::HANDLE, site : Win32cr::Foundation::PSTR, ppServers : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    C.DsListServersInSiteA(hDs, site, ppServers)
+  end
+
+  def dsListServersInSiteW(hDs : Win32cr::Foundation::HANDLE, site : Win32cr::Foundation::PWSTR, ppServers : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    C.DsListServersInSiteW(hDs, site, ppServers)
+  end
+
+  def dsListDomainsInSiteA(hDs : Win32cr::Foundation::HANDLE, site : Win32cr::Foundation::PSTR, ppDomains : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    C.DsListDomainsInSiteA(hDs, site, ppDomains)
+  end
+
+  def dsListDomainsInSiteW(hDs : Win32cr::Foundation::HANDLE, site : Win32cr::Foundation::PWSTR, ppDomains : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    C.DsListDomainsInSiteW(hDs, site, ppDomains)
+  end
+
+  def dsListServersForDomainInSiteA(hDs : Win32cr::Foundation::HANDLE, domain : Win32cr::Foundation::PSTR, site : Win32cr::Foundation::PSTR, ppServers : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    C.DsListServersForDomainInSiteA(hDs, domain, site, ppServers)
+  end
+
+  def dsListServersForDomainInSiteW(hDs : Win32cr::Foundation::HANDLE, domain : Win32cr::Foundation::PWSTR, site : Win32cr::Foundation::PWSTR, ppServers : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    C.DsListServersForDomainInSiteW(hDs, domain, site, ppServers)
+  end
+
+  def dsListInfoForServerA(hDs : Win32cr::Foundation::HANDLE, server : Win32cr::Foundation::PSTR, ppInfo : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    C.DsListInfoForServerA(hDs, server, ppInfo)
+  end
+
+  def dsListInfoForServerW(hDs : Win32cr::Foundation::HANDLE, server : Win32cr::Foundation::PWSTR, ppInfo : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    C.DsListInfoForServerW(hDs, server, ppInfo)
+  end
+
+  def dsListRolesA(hDs : Win32cr::Foundation::HANDLE, ppRoles : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    C.DsListRolesA(hDs, ppRoles)
+  end
+
+  def dsListRolesW(hDs : Win32cr::Foundation::HANDLE, ppRoles : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    C.DsListRolesW(hDs, ppRoles)
+  end
+
+  def dsQuerySitesByCostW(hDS : Win32cr::Foundation::HANDLE, pwszFromSite : Win32cr::Foundation::PWSTR, rgwszToSites : Win32cr::Foundation::PWSTR*, cToSites : UInt32, dwFlags : UInt32, prgSiteInfo : Win32cr::Networking::ActiveDirectory::DS_SITE_COST_INFO**) : UInt32
+    C.DsQuerySitesByCostW(hDS, pwszFromSite, rgwszToSites, cToSites, dwFlags, prgSiteInfo)
+  end
+
+  def dsQuerySitesByCostA(hDS : Win32cr::Foundation::HANDLE, pszFromSite : Win32cr::Foundation::PSTR, rgszToSites : Win32cr::Foundation::PSTR*, cToSites : UInt32, dwFlags : UInt32, prgSiteInfo : Win32cr::Networking::ActiveDirectory::DS_SITE_COST_INFO**) : UInt32
+    C.DsQuerySitesByCostA(hDS, pszFromSite, rgszToSites, cToSites, dwFlags, prgSiteInfo)
+  end
+
+  def dsQuerySitesFree(rgSiteInfo : Win32cr::Networking::ActiveDirectory::DS_SITE_COST_INFO*) : Void
+    C.DsQuerySitesFree(rgSiteInfo)
+  end
+
+  def dsMapSchemaGuidsA(hDs : Win32cr::Foundation::HANDLE, cGuids : UInt32, rGuids : LibC::GUID*, ppGuidMap : Win32cr::Networking::ActiveDirectory::DS_SCHEMA_GUID_MAPA**) : UInt32
+    C.DsMapSchemaGuidsA(hDs, cGuids, rGuids, ppGuidMap)
+  end
+
+  def dsFreeSchemaGuidMapA(pGuidMap : Win32cr::Networking::ActiveDirectory::DS_SCHEMA_GUID_MAPA*) : Void
+    C.DsFreeSchemaGuidMapA(pGuidMap)
+  end
+
+  def dsMapSchemaGuidsW(hDs : Win32cr::Foundation::HANDLE, cGuids : UInt32, rGuids : LibC::GUID*, ppGuidMap : Win32cr::Networking::ActiveDirectory::DS_SCHEMA_GUID_MAPW**) : UInt32
+    C.DsMapSchemaGuidsW(hDs, cGuids, rGuids, ppGuidMap)
+  end
+
+  def dsFreeSchemaGuidMapW(pGuidMap : Win32cr::Networking::ActiveDirectory::DS_SCHEMA_GUID_MAPW*) : Void
+    C.DsFreeSchemaGuidMapW(pGuidMap)
+  end
+
+  def dsGetDomainControllerInfoA(hDs : Win32cr::Foundation::HANDLE, domain_name : Win32cr::Foundation::PSTR, info_level : UInt32, pcOut : UInt32*, ppInfo : Void**) : UInt32
+    C.DsGetDomainControllerInfoA(hDs, domain_name, info_level, pcOut, ppInfo)
+  end
+
+  def dsGetDomainControllerInfoW(hDs : Win32cr::Foundation::HANDLE, domain_name : Win32cr::Foundation::PWSTR, info_level : UInt32, pcOut : UInt32*, ppInfo : Void**) : UInt32
+    C.DsGetDomainControllerInfoW(hDs, domain_name, info_level, pcOut, ppInfo)
+  end
+
+  def dsFreeDomainControllerInfoA(info_level : UInt32, cInfo : UInt32, pInfo : Void*) : Void
+    C.DsFreeDomainControllerInfoA(info_level, cInfo, pInfo)
+  end
+
+  def dsFreeDomainControllerInfoW(info_level : UInt32, cInfo : UInt32, pInfo : Void*) : Void
+    C.DsFreeDomainControllerInfoW(info_level, cInfo, pInfo)
+  end
+
+  def dsReplicaConsistencyCheck(hDS : Win32cr::Foundation::HANDLE, task_id : Win32cr::Networking::ActiveDirectory::DS_KCC_TASKID, dwFlags : UInt32) : UInt32
+    C.DsReplicaConsistencyCheck(hDS, task_id, dwFlags)
+  end
+
+  def dsReplicaVerifyObjectsW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, pUuidDsaSrc : LibC::GUID*, ulOptions : UInt32) : UInt32
+    C.DsReplicaVerifyObjectsW(hDS, name_context, pUuidDsaSrc, ulOptions)
+  end
+
+  def dsReplicaVerifyObjectsA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, pUuidDsaSrc : LibC::GUID*, ulOptions : UInt32) : UInt32
+    C.DsReplicaVerifyObjectsA(hDS, name_context, pUuidDsaSrc, ulOptions)
+  end
+
+  def dsReplicaGetInfoW(hDS : Win32cr::Foundation::HANDLE, info_type : Win32cr::Networking::ActiveDirectory::DS_REPL_INFO_TYPE, pszObject : Win32cr::Foundation::PWSTR, puuidForSourceDsaObjGuid : LibC::GUID*, ppInfo : Void**) : UInt32
+    C.DsReplicaGetInfoW(hDS, info_type, pszObject, puuidForSourceDsaObjGuid, ppInfo)
+  end
+
+  def dsReplicaGetInfo2W(hDS : Win32cr::Foundation::HANDLE, info_type : Win32cr::Networking::ActiveDirectory::DS_REPL_INFO_TYPE, pszObject : Win32cr::Foundation::PWSTR, puuidForSourceDsaObjGuid : LibC::GUID*, pszAttributeName : Win32cr::Foundation::PWSTR, pszValue : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwEnumerationContext : UInt32, ppInfo : Void**) : UInt32
+    C.DsReplicaGetInfo2W(hDS, info_type, pszObject, puuidForSourceDsaObjGuid, pszAttributeName, pszValue, dwFlags, dwEnumerationContext, ppInfo)
+  end
+
+  def dsReplicaFreeInfo(info_type : Win32cr::Networking::ActiveDirectory::DS_REPL_INFO_TYPE, pInfo : Void*) : Void
+    C.DsReplicaFreeInfo(info_type, pInfo)
+  end
+
+  def dsAddSidHistoryW(hDS : Win32cr::Foundation::HANDLE, flags : UInt32, src_domain : Win32cr::Foundation::PWSTR, src_principal : Win32cr::Foundation::PWSTR, src_domain_controller : Win32cr::Foundation::PWSTR, src_domain_creds : Void*, dst_domain : Win32cr::Foundation::PWSTR, dst_principal : Win32cr::Foundation::PWSTR) : UInt32
+    C.DsAddSidHistoryW(hDS, flags, src_domain, src_principal, src_domain_controller, src_domain_creds, dst_domain, dst_principal)
+  end
+
+  def dsAddSidHistoryA(hDS : Win32cr::Foundation::HANDLE, flags : UInt32, src_domain : Win32cr::Foundation::PSTR, src_principal : Win32cr::Foundation::PSTR, src_domain_controller : Win32cr::Foundation::PSTR, src_domain_creds : Void*, dst_domain : Win32cr::Foundation::PSTR, dst_principal : Win32cr::Foundation::PSTR) : UInt32
+    C.DsAddSidHistoryA(hDS, flags, src_domain, src_principal, src_domain_controller, src_domain_creds, dst_domain, dst_principal)
+  end
+
+  def dsInheritSecurityIdentityW(hDS : Win32cr::Foundation::HANDLE, flags : UInt32, src_principal : Win32cr::Foundation::PWSTR, dst_principal : Win32cr::Foundation::PWSTR) : UInt32
+    C.DsInheritSecurityIdentityW(hDS, flags, src_principal, dst_principal)
+  end
+
+  def dsInheritSecurityIdentityA(hDS : Win32cr::Foundation::HANDLE, flags : UInt32, src_principal : Win32cr::Foundation::PSTR, dst_principal : Win32cr::Foundation::PSTR) : UInt32
+    C.DsInheritSecurityIdentityA(hDS, flags, src_principal, dst_principal)
+  end
+
+  def dsRoleGetPrimaryDomainInformation(lpServer : Win32cr::Foundation::PWSTR, info_level : Win32cr::Networking::ActiveDirectory::DSROLE_PRIMARY_DOMAIN_INFO_LEVEL, buffer : UInt8**) : UInt32
+    C.DsRoleGetPrimaryDomainInformation(lpServer, info_level, buffer)
+  end
+
+  def dsRoleFreeMemory(buffer : Void*) : Void
+    C.DsRoleFreeMemory(buffer)
+  end
+
+  def dsGetDcNameA(computer_name : Win32cr::Foundation::PSTR, domain_name : Win32cr::Foundation::PSTR, domain_guid : LibC::GUID*, site_name : Win32cr::Foundation::PSTR, flags : UInt32, domain_controller_info : Win32cr::Networking::ActiveDirectory::DOMAIN_CONTROLLER_INFOA**) : UInt32
+    C.DsGetDcNameA(computer_name, domain_name, domain_guid, site_name, flags, domain_controller_info)
+  end
+
+  def dsGetDcNameW(computer_name : Win32cr::Foundation::PWSTR, domain_name : Win32cr::Foundation::PWSTR, domain_guid : LibC::GUID*, site_name : Win32cr::Foundation::PWSTR, flags : UInt32, domain_controller_info : Win32cr::Networking::ActiveDirectory::DOMAIN_CONTROLLER_INFOW**) : UInt32
+    C.DsGetDcNameW(computer_name, domain_name, domain_guid, site_name, flags, domain_controller_info)
+  end
+
+  def dsGetSiteNameA(computer_name : Win32cr::Foundation::PSTR, site_name : Win32cr::Foundation::PSTR*) : UInt32
+    C.DsGetSiteNameA(computer_name, site_name)
+  end
+
+  def dsGetSiteNameW(computer_name : Win32cr::Foundation::PWSTR, site_name : Win32cr::Foundation::PWSTR*) : UInt32
+    C.DsGetSiteNameW(computer_name, site_name)
+  end
+
+  def dsValidateSubnetNameW(subnet_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.DsValidateSubnetNameW(subnet_name)
+  end
+
+  def dsValidateSubnetNameA(subnet_name : Win32cr::Foundation::PSTR) : UInt32
+    C.DsValidateSubnetNameA(subnet_name)
+  end
+
+  def dsAddressToSiteNamesW(computer_name : Win32cr::Foundation::PWSTR, entry_count : UInt32, socket_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, site_names : Win32cr::Foundation::PWSTR**) : UInt32
+    C.DsAddressToSiteNamesW(computer_name, entry_count, socket_addresses, site_names)
+  end
+
+  def dsAddressToSiteNamesA(computer_name : Win32cr::Foundation::PSTR, entry_count : UInt32, socket_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, site_names : Win32cr::Foundation::PSTR**) : UInt32
+    C.DsAddressToSiteNamesA(computer_name, entry_count, socket_addresses, site_names)
+  end
+
+  def dsAddressToSiteNamesExW(computer_name : Win32cr::Foundation::PWSTR, entry_count : UInt32, socket_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, site_names : Win32cr::Foundation::PWSTR**, subnet_names : Win32cr::Foundation::PWSTR**) : UInt32
+    C.DsAddressToSiteNamesExW(computer_name, entry_count, socket_addresses, site_names, subnet_names)
+  end
+
+  def dsAddressToSiteNamesExA(computer_name : Win32cr::Foundation::PSTR, entry_count : UInt32, socket_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, site_names : Win32cr::Foundation::PSTR**, subnet_names : Win32cr::Foundation::PSTR**) : UInt32
+    C.DsAddressToSiteNamesExA(computer_name, entry_count, socket_addresses, site_names, subnet_names)
+  end
+
+  def dsEnumerateDomainTrustsW(server_name : Win32cr::Foundation::PWSTR, flags : UInt32, domains : Win32cr::Networking::ActiveDirectory::DS_DOMAIN_TRUSTSW**, domain_count : UInt32*) : UInt32
+    C.DsEnumerateDomainTrustsW(server_name, flags, domains, domain_count)
+  end
+
+  def dsEnumerateDomainTrustsA(server_name : Win32cr::Foundation::PSTR, flags : UInt32, domains : Win32cr::Networking::ActiveDirectory::DS_DOMAIN_TRUSTSA**, domain_count : UInt32*) : UInt32
+    C.DsEnumerateDomainTrustsA(server_name, flags, domains, domain_count)
+  end
+
+  def dsGetForestTrustInformationW(server_name : Win32cr::Foundation::PWSTR, trusted_domain_name : Win32cr::Foundation::PWSTR, flags : UInt32, forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION**) : UInt32
+    C.DsGetForestTrustInformationW(server_name, trusted_domain_name, flags, forest_trust_info)
+  end
+
+  def dsMergeForestTrustInformationW(domain_name : Win32cr::Foundation::PWSTR, new_forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION*, old_forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION*, merged_forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION**) : UInt32
+    C.DsMergeForestTrustInformationW(domain_name, new_forest_trust_info, old_forest_trust_info, merged_forest_trust_info)
+  end
+
+  def dsGetDcSiteCoverageW(server_name : Win32cr::Foundation::PWSTR, entry_count : UInt32*, site_names : Win32cr::Foundation::PWSTR**) : UInt32
+    C.DsGetDcSiteCoverageW(server_name, entry_count, site_names)
+  end
+
+  def dsGetDcSiteCoverageA(server_name : Win32cr::Foundation::PSTR, entry_count : UInt32*, site_names : Win32cr::Foundation::PSTR**) : UInt32
+    C.DsGetDcSiteCoverageA(server_name, entry_count, site_names)
+  end
+
+  def dsDeregisterDnsHostRecordsW(server_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, domain_guid : LibC::GUID*, dsa_guid : LibC::GUID*, dns_host_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.DsDeregisterDnsHostRecordsW(server_name, dns_domain_name, domain_guid, dsa_guid, dns_host_name)
+  end
+
+  def dsDeregisterDnsHostRecordsA(server_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, domain_guid : LibC::GUID*, dsa_guid : LibC::GUID*, dns_host_name : Win32cr::Foundation::PSTR) : UInt32
+    C.DsDeregisterDnsHostRecordsA(server_name, dns_domain_name, domain_guid, dsa_guid, dns_host_name)
+  end
+
+  def dsGetDcOpenW(dns_name : Win32cr::Foundation::PWSTR, option_flags : UInt32, site_name : Win32cr::Foundation::PWSTR, domain_guid : LibC::GUID*, dns_forest_name : Win32cr::Foundation::PWSTR, dc_flags : UInt32, ret_get_dc_context : Win32cr::Networking::ActiveDirectory::GetDcContextHandle*) : UInt32
+    C.DsGetDcOpenW(dns_name, option_flags, site_name, domain_guid, dns_forest_name, dc_flags, ret_get_dc_context)
+  end
+
+  def dsGetDcOpenA(dns_name : Win32cr::Foundation::PSTR, option_flags : UInt32, site_name : Win32cr::Foundation::PSTR, domain_guid : LibC::GUID*, dns_forest_name : Win32cr::Foundation::PSTR, dc_flags : UInt32, ret_get_dc_context : Win32cr::Networking::ActiveDirectory::GetDcContextHandle*) : UInt32
+    C.DsGetDcOpenA(dns_name, option_flags, site_name, domain_guid, dns_forest_name, dc_flags, ret_get_dc_context)
+  end
+
+  def dsGetDcNextW(get_dc_context_handle : Win32cr::Foundation::HANDLE, sock_address_count : UInt32*, sock_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS**, dns_host_name : Win32cr::Foundation::PWSTR*) : UInt32
+    C.DsGetDcNextW(get_dc_context_handle, sock_address_count, sock_addresses, dns_host_name)
+  end
+
+  def dsGetDcNextA(get_dc_context_handle : Win32cr::Foundation::HANDLE, sock_address_count : UInt32*, sock_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS**, dns_host_name : Win32cr::Foundation::PSTR*) : UInt32
+    C.DsGetDcNextA(get_dc_context_handle, sock_address_count, sock_addresses, dns_host_name)
+  end
+
+  def dsGetDcCloseW(get_dc_context_handle : Win32cr::Networking::ActiveDirectory::GetDcContextHandle) : Void
+    C.DsGetDcCloseW(get_dc_context_handle)
+  end
+
   @[Link("activeds")]
   @[Link("dsuiext")]
   @[Link("dsprop")]
@@ -9126,320 +9759,478 @@ module Win32cr::Networking::ActiveDirectory
   @[Link("ntdsapi")]
   @[Link("netapi32")]
   lib C
+    # :nodoc:
     fun ADsGetObject(lpszPathName : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, ppObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ADsBuildEnumerator(pADsContainer : Void*, ppEnumVariant : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ADsFreeEnumerator(pEnumVariant : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ADsEnumerateNext(pEnumVariant : Void*, cElements : UInt32, pvar : Win32cr::System::Com::VARIANT*, pcElementsFetched : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ADsBuildVarArrayStr(lppPathNames : Win32cr::Foundation::PWSTR*, dwPathNames : UInt32, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ADsBuildVarArrayInt(lpdwObjectTypes : UInt32*, dwObjectTypes : UInt32, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ADsOpenObject(lpszPathName : Win32cr::Foundation::PWSTR, lpszUserName : Win32cr::Foundation::PWSTR, lpszPassword : Win32cr::Foundation::PWSTR, dwReserved : Win32cr::Networking::ActiveDirectory::ADS_AUTHENTICATION_ENUM, riid : LibC::GUID*, ppObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ADsGetLastError(lpError : UInt32*, lpErrorBuf : UInt16*, dwErrorBufLen : UInt32, lpNameBuf : UInt16*, dwNameBufLen : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ADsSetLastError(dwErr : UInt32, pszError : Win32cr::Foundation::PWSTR, pszProvider : Win32cr::Foundation::PWSTR) : Void
 
+    # :nodoc:
     fun AllocADsMem(cb : UInt32) : Void*
 
+    # :nodoc:
     fun FreeADsMem(pMem : Void*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReallocADsMem(pOldMem : Void*, cbOld : UInt32, cbNew : UInt32) : Void*
 
+    # :nodoc:
     fun AllocADsStr(pStr : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun FreeADsStr(pStr : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReallocADsStr(ppStr : Win32cr::Foundation::PWSTR*, pStr : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ADsEncodeBinaryData(pbSrcData : UInt8*, dwSrcLen : UInt32, ppszDestData : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ADsDecodeBinaryData(szSrcData : Win32cr::Foundation::PWSTR, ppbDestData : UInt8**, pdwDestLen : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropVariantToAdsType(pVariant : Win32cr::System::Com::VARIANT*, dwNumVariant : UInt32, ppAdsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE**, pdwNumValues : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun AdsTypeToPropVariant(pAdsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE*, dwNumValues : UInt32, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun AdsFreeAdsValues(pAdsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE*, dwNumValues : UInt32) : Void
 
+    # :nodoc:
     fun BinarySDToSecurityDescriptor(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pVarsec : Win32cr::System::Com::VARIANT*, pszServerName : Win32cr::Foundation::PWSTR, userName : Win32cr::Foundation::PWSTR, passWord : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SecurityDescriptorToBinarySD(vVarSecDes : Win32cr::System::Com::VARIANT, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, pdwSDLength : UInt32*, pszServerName : Win32cr::Foundation::PWSTR, userName : Win32cr::Foundation::PWSTR, passWord : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DsBrowseForContainerW(pInfo : Win32cr::Networking::ActiveDirectory::DSBROWSEINFOW*) : Int32
 
+    # :nodoc:
     fun DsBrowseForContainerA(pInfo : Win32cr::Networking::ActiveDirectory::DSBROWSEINFOA*) : Int32
 
+    # :nodoc:
     fun DsGetIcon(dwFlags : UInt32, pszObjectClass : Win32cr::Foundation::PWSTR, cxImage : Int32, cyImage : Int32) : Win32cr::UI::WindowsAndMessaging::HICON
 
+    # :nodoc:
     fun DsGetFriendlyClassName(pszObjectClass : Win32cr::Foundation::PWSTR, pszBuffer : UInt16*, cchBuffer : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ADsPropCreateNotifyObj(pAppThdDataObj : Void*, pwzADsObjName : Win32cr::Foundation::PWSTR, phNotifyObj : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ADsPropGetInitInfo(hNotifyObj : Win32cr::Foundation::HWND, pInitParams : Win32cr::Networking::ActiveDirectory::ADSPROPINITPARAMS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ADsPropSetHwndWithTitle(hNotifyObj : Win32cr::Foundation::HWND, hPage : Win32cr::Foundation::HWND, ptzTitle : Int8*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ADsPropSetHwnd(hNotifyObj : Win32cr::Foundation::HWND, hPage : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ADsPropCheckIfWritable(pwzAttr : Win32cr::Foundation::PWSTR, pWritableAttrs : Win32cr::Networking::ActiveDirectory::ADS_ATTR_INFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ADsPropSendErrorMessage(hNotifyObj : Win32cr::Foundation::HWND, pError : Win32cr::Networking::ActiveDirectory::ADSPROPERROR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ADsPropShowErrorDialog(hNotifyObj : Win32cr::Foundation::HWND, hPage : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DsMakeSpnW(service_class : Win32cr::Foundation::PWSTR, service_name : Win32cr::Foundation::PWSTR, instance_name : Win32cr::Foundation::PWSTR, instance_port : UInt16, referrer : Win32cr::Foundation::PWSTR, pcSpnLength : UInt32*, pszSpn : UInt16*) : UInt32
 
+    # :nodoc:
     fun DsMakeSpnA(service_class : Win32cr::Foundation::PSTR, service_name : Win32cr::Foundation::PSTR, instance_name : Win32cr::Foundation::PSTR, instance_port : UInt16, referrer : Win32cr::Foundation::PSTR, pcSpnLength : UInt32*, pszSpn : UInt8*) : UInt32
 
+    # :nodoc:
     fun DsCrackSpnA(pszSpn : Win32cr::Foundation::PSTR, pcServiceClass : UInt32*, service_class : UInt8*, pcServiceName : UInt32*, service_name : UInt8*, pcInstanceName : UInt32*, instance_name : UInt8*, pInstancePort : UInt16*) : UInt32
 
+    # :nodoc:
     fun DsCrackSpnW(pszSpn : Win32cr::Foundation::PWSTR, pcServiceClass : UInt32*, service_class : UInt16*, pcServiceName : UInt32*, service_name : UInt16*, pcInstanceName : UInt32*, instance_name : UInt16*, pInstancePort : UInt16*) : UInt32
 
+    # :nodoc:
     fun DsQuoteRdnValueW(cUnquotedRdnValueLength : UInt32, psUnquotedRdnValue : UInt16*, pcQuotedRdnValueLength : UInt32*, psQuotedRdnValue : UInt16*) : UInt32
 
+    # :nodoc:
     fun DsQuoteRdnValueA(cUnquotedRdnValueLength : UInt32, psUnquotedRdnValue : UInt8*, pcQuotedRdnValueLength : UInt32*, psQuotedRdnValue : UInt8*) : UInt32
 
+    # :nodoc:
     fun DsUnquoteRdnValueW(cQuotedRdnValueLength : UInt32, psQuotedRdnValue : UInt16*, pcUnquotedRdnValueLength : UInt32*, psUnquotedRdnValue : UInt16*) : UInt32
 
+    # :nodoc:
     fun DsUnquoteRdnValueA(cQuotedRdnValueLength : UInt32, psQuotedRdnValue : UInt8*, pcUnquotedRdnValueLength : UInt32*, psUnquotedRdnValue : UInt8*) : UInt32
 
+    # :nodoc:
     fun DsGetRdnW(ppDN : Win32cr::Foundation::PWSTR*, pcDN : UInt32*, ppKey : Win32cr::Foundation::PWSTR*, pcKey : UInt32*, ppVal : Win32cr::Foundation::PWSTR*, pcVal : UInt32*) : UInt32
 
+    # :nodoc:
     fun DsCrackUnquotedMangledRdnW(pszRDN : UInt16*, cchRDN : UInt32, pGuid : LibC::GUID*, peDsMangleFor : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DsCrackUnquotedMangledRdnA(pszRDN : UInt8*, cchRDN : UInt32, pGuid : LibC::GUID*, peDsMangleFor : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DsIsMangledRdnValueW(pszRdn : UInt16*, cRdn : UInt32, eDsMangleForDesired : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DsIsMangledRdnValueA(pszRdn : UInt8*, cRdn : UInt32, eDsMangleForDesired : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DsIsMangledDnA(pszDn : Win32cr::Foundation::PSTR, eDsMangleFor : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DsIsMangledDnW(pszDn : Win32cr::Foundation::PWSTR, eDsMangleFor : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DsCrackSpn2A(pszSpn : UInt8*, cSpn : UInt32, pcServiceClass : UInt32*, service_class : UInt8*, pcServiceName : UInt32*, service_name : UInt8*, pcInstanceName : UInt32*, instance_name : UInt8*, pInstancePort : UInt16*) : UInt32
 
+    # :nodoc:
     fun DsCrackSpn2W(pszSpn : UInt16*, cSpn : UInt32, pcServiceClass : UInt32*, service_class : UInt16*, pcServiceName : UInt32*, service_name : UInt16*, pcInstanceName : UInt32*, instance_name : UInt16*, pInstancePort : UInt16*) : UInt32
 
+    # :nodoc:
     fun DsCrackSpn3W(pszSpn : Win32cr::Foundation::PWSTR, cSpn : UInt32, pcHostName : UInt32*, host_name : UInt16*, pcInstanceName : UInt32*, instance_name : UInt16*, pPortNumber : UInt16*, pcDomainName : UInt32*, domain_name : UInt16*, pcRealmName : UInt32*, realm_name : UInt16*) : UInt32
 
+    # :nodoc:
     fun DsCrackSpn4W(pszSpn : Win32cr::Foundation::PWSTR, cSpn : UInt32, pcHostName : UInt32*, host_name : UInt16*, pcInstanceName : UInt32*, instance_name : UInt16*, pcPortName : UInt32*, port_name : UInt16*, pcDomainName : UInt32*, domain_name : UInt16*, pcRealmName : UInt32*, realm_name : UInt16*) : UInt32
 
+    # :nodoc:
     fun DsBindW(domain_controller_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsBindA(domain_controller_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsBindWithCredW(domain_controller_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, auth_identity : Void*, phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsBindWithCredA(domain_controller_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, auth_identity : Void*, phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsBindWithSpnW(domain_controller_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PWSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsBindWithSpnA(domain_controller_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsBindWithSpnExW(domain_controller_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PWSTR, bind_flags : UInt32, phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsBindWithSpnExA(domain_controller_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PSTR, bind_flags : UInt32, phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsBindByInstanceW(server_name : Win32cr::Foundation::PWSTR, annotation__ : Win32cr::Foundation::PWSTR, instance_guid : LibC::GUID*, dns_domain_name : Win32cr::Foundation::PWSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PWSTR, bind_flags : UInt32, phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsBindByInstanceA(server_name : Win32cr::Foundation::PSTR, annotation__ : Win32cr::Foundation::PSTR, instance_guid : LibC::GUID*, dns_domain_name : Win32cr::Foundation::PSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PSTR, bind_flags : UInt32, phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsBindToISTGW(site_name : Win32cr::Foundation::PWSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsBindToISTGA(site_name : Win32cr::Foundation::PSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsBindingSetTimeout(hDS : Win32cr::Foundation::HANDLE, cTimeoutSecs : UInt32) : UInt32
 
+    # :nodoc:
     fun DsUnBindW(phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsUnBindA(phDS : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun DsMakePasswordCredentialsW(user : Win32cr::Foundation::PWSTR, domain : Win32cr::Foundation::PWSTR, password : Win32cr::Foundation::PWSTR, pAuthIdentity : Void**) : UInt32
 
+    # :nodoc:
     fun DsMakePasswordCredentialsA(user : Win32cr::Foundation::PSTR, domain : Win32cr::Foundation::PSTR, password : Win32cr::Foundation::PSTR, pAuthIdentity : Void**) : UInt32
 
+    # :nodoc:
     fun DsFreePasswordCredentials(auth_identity : Void*) : Void
 
+    # :nodoc:
     fun DsCrackNamesW(hDS : Win32cr::Foundation::HANDLE, flags : Win32cr::Networking::ActiveDirectory::DS_NAME_FLAGS, formatOffered : Win32cr::Networking::ActiveDirectory::DS_NAME_FORMAT, formatDesired : Win32cr::Networking::ActiveDirectory::DS_NAME_FORMAT, cNames : UInt32, rpNames : Win32cr::Foundation::PWSTR*, ppResult : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
 
+    # :nodoc:
     fun DsCrackNamesA(hDS : Win32cr::Foundation::HANDLE, flags : Win32cr::Networking::ActiveDirectory::DS_NAME_FLAGS, formatOffered : Win32cr::Networking::ActiveDirectory::DS_NAME_FORMAT, formatDesired : Win32cr::Networking::ActiveDirectory::DS_NAME_FORMAT, cNames : UInt32, rpNames : Win32cr::Foundation::PSTR*, ppResult : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
 
+    # :nodoc:
     fun DsFreeNameResultW(pResult : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW*) : Void
 
+    # :nodoc:
     fun DsFreeNameResultA(pResult : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA*) : Void
 
+    # :nodoc:
     fun DsGetSpnA(service_type : Win32cr::Networking::ActiveDirectory::DS_SPN_NAME_TYPE, service_class : Win32cr::Foundation::PSTR, service_name : Win32cr::Foundation::PSTR, instance_port : UInt16, cInstanceNames : UInt16, pInstanceNames : Win32cr::Foundation::PSTR*, pInstancePorts : UInt16*, pcSpn : UInt32*, prpszSpn : Win32cr::Foundation::PSTR**) : UInt32
 
+    # :nodoc:
     fun DsGetSpnW(service_type : Win32cr::Networking::ActiveDirectory::DS_SPN_NAME_TYPE, service_class : Win32cr::Foundation::PWSTR, service_name : Win32cr::Foundation::PWSTR, instance_port : UInt16, cInstanceNames : UInt16, pInstanceNames : Win32cr::Foundation::PWSTR*, pInstancePorts : UInt16*, pcSpn : UInt32*, prpszSpn : Win32cr::Foundation::PWSTR**) : UInt32
 
+    # :nodoc:
     fun DsFreeSpnArrayA(cSpn : UInt32, rpszSpn : Win32cr::Foundation::PSTR*) : Void
 
+    # :nodoc:
     fun DsFreeSpnArrayW(cSpn : UInt32, rpszSpn : Win32cr::Foundation::PWSTR*) : Void
 
+    # :nodoc:
     fun DsWriteAccountSpnA(hDS : Win32cr::Foundation::HANDLE, operation : Win32cr::Networking::ActiveDirectory::DS_SPN_WRITE_OP, pszAccount : Win32cr::Foundation::PSTR, cSpn : UInt32, rpszSpn : Win32cr::Foundation::PSTR*) : UInt32
 
+    # :nodoc:
     fun DsWriteAccountSpnW(hDS : Win32cr::Foundation::HANDLE, operation : Win32cr::Networking::ActiveDirectory::DS_SPN_WRITE_OP, pszAccount : Win32cr::Foundation::PWSTR, cSpn : UInt32, rpszSpn : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun DsClientMakeSpnForTargetServerW(service_class : Win32cr::Foundation::PWSTR, service_name : Win32cr::Foundation::PWSTR, pcSpnLength : UInt32*, pszSpn : UInt16*) : UInt32
 
+    # :nodoc:
     fun DsClientMakeSpnForTargetServerA(service_class : Win32cr::Foundation::PSTR, service_name : Win32cr::Foundation::PSTR, pcSpnLength : UInt32*, pszSpn : UInt8*) : UInt32
 
+    # :nodoc:
     fun DsServerRegisterSpnA(operation : Win32cr::Networking::ActiveDirectory::DS_SPN_WRITE_OP, service_class : Win32cr::Foundation::PSTR, user_object_dn : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun DsServerRegisterSpnW(operation : Win32cr::Networking::ActiveDirectory::DS_SPN_WRITE_OP, service_class : Win32cr::Foundation::PWSTR, user_object_dn : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DsReplicaSyncA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, pUuidDsaSrc : LibC::GUID*, options : UInt32) : UInt32
 
+    # :nodoc:
     fun DsReplicaSyncW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, pUuidDsaSrc : LibC::GUID*, options : UInt32) : UInt32
 
+    # :nodoc:
     fun DsReplicaAddA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, source_dsa_dn : Win32cr::Foundation::PSTR, transport_dn : Win32cr::Foundation::PSTR, source_dsa_address : Win32cr::Foundation::PSTR, pSchedule : Win32cr::Networking::ActiveDirectory::SCHEDULE*, options : UInt32) : UInt32
 
+    # :nodoc:
     fun DsReplicaAddW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, source_dsa_dn : Win32cr::Foundation::PWSTR, transport_dn : Win32cr::Foundation::PWSTR, source_dsa_address : Win32cr::Foundation::PWSTR, pSchedule : Win32cr::Networking::ActiveDirectory::SCHEDULE*, options : UInt32) : UInt32
 
+    # :nodoc:
     fun DsReplicaDelA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, dsa_src : Win32cr::Foundation::PSTR, options : UInt32) : UInt32
 
+    # :nodoc:
     fun DsReplicaDelW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, dsa_src : Win32cr::Foundation::PWSTR, options : UInt32) : UInt32
 
+    # :nodoc:
     fun DsReplicaModifyA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, pUuidSourceDsa : LibC::GUID*, transport_dn : Win32cr::Foundation::PSTR, source_dsa_address : Win32cr::Foundation::PSTR, pSchedule : Win32cr::Networking::ActiveDirectory::SCHEDULE*, replica_flags : UInt32, modify_fields : UInt32, options : UInt32) : UInt32
 
+    # :nodoc:
     fun DsReplicaModifyW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, pUuidSourceDsa : LibC::GUID*, transport_dn : Win32cr::Foundation::PWSTR, source_dsa_address : Win32cr::Foundation::PWSTR, pSchedule : Win32cr::Networking::ActiveDirectory::SCHEDULE*, replica_flags : UInt32, modify_fields : UInt32, options : UInt32) : UInt32
 
+    # :nodoc:
     fun DsReplicaUpdateRefsA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, dsa_dest : Win32cr::Foundation::PSTR, pUuidDsaDest : LibC::GUID*, options : UInt32) : UInt32
 
+    # :nodoc:
     fun DsReplicaUpdateRefsW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, dsa_dest : Win32cr::Foundation::PWSTR, pUuidDsaDest : LibC::GUID*, options : UInt32) : UInt32
 
+    # :nodoc:
     fun DsReplicaSyncAllA(hDS : Win32cr::Foundation::HANDLE, pszNameContext : Win32cr::Foundation::PSTR, ulFlags : UInt32, pFnCallBack : LibC::IntPtrT, pCallbackData : Void*, pErrors : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERRINFOA***) : UInt32
 
+    # :nodoc:
     fun DsReplicaSyncAllW(hDS : Win32cr::Foundation::HANDLE, pszNameContext : Win32cr::Foundation::PWSTR, ulFlags : UInt32, pFnCallBack : LibC::IntPtrT, pCallbackData : Void*, pErrors : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERRINFOW***) : UInt32
 
+    # :nodoc:
     fun DsRemoveDsServerW(hDs : Win32cr::Foundation::HANDLE, server_dn : Win32cr::Foundation::PWSTR, domain_dn : Win32cr::Foundation::PWSTR, fLastDcInDomain : Win32cr::Foundation::BOOL*, fCommit : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun DsRemoveDsServerA(hDs : Win32cr::Foundation::HANDLE, server_dn : Win32cr::Foundation::PSTR, domain_dn : Win32cr::Foundation::PSTR, fLastDcInDomain : Win32cr::Foundation::BOOL*, fCommit : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun DsRemoveDsDomainW(hDs : Win32cr::Foundation::HANDLE, domain_dn : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DsRemoveDsDomainA(hDs : Win32cr::Foundation::HANDLE, domain_dn : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun DsListSitesA(hDs : Win32cr::Foundation::HANDLE, ppSites : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
 
+    # :nodoc:
     fun DsListSitesW(hDs : Win32cr::Foundation::HANDLE, ppSites : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
 
+    # :nodoc:
     fun DsListServersInSiteA(hDs : Win32cr::Foundation::HANDLE, site : Win32cr::Foundation::PSTR, ppServers : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
 
+    # :nodoc:
     fun DsListServersInSiteW(hDs : Win32cr::Foundation::HANDLE, site : Win32cr::Foundation::PWSTR, ppServers : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
 
+    # :nodoc:
     fun DsListDomainsInSiteA(hDs : Win32cr::Foundation::HANDLE, site : Win32cr::Foundation::PSTR, ppDomains : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
 
+    # :nodoc:
     fun DsListDomainsInSiteW(hDs : Win32cr::Foundation::HANDLE, site : Win32cr::Foundation::PWSTR, ppDomains : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
 
+    # :nodoc:
     fun DsListServersForDomainInSiteA(hDs : Win32cr::Foundation::HANDLE, domain : Win32cr::Foundation::PSTR, site : Win32cr::Foundation::PSTR, ppServers : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
 
+    # :nodoc:
     fun DsListServersForDomainInSiteW(hDs : Win32cr::Foundation::HANDLE, domain : Win32cr::Foundation::PWSTR, site : Win32cr::Foundation::PWSTR, ppServers : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
 
+    # :nodoc:
     fun DsListInfoForServerA(hDs : Win32cr::Foundation::HANDLE, server : Win32cr::Foundation::PSTR, ppInfo : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
 
+    # :nodoc:
     fun DsListInfoForServerW(hDs : Win32cr::Foundation::HANDLE, server : Win32cr::Foundation::PWSTR, ppInfo : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
 
+    # :nodoc:
     fun DsListRolesA(hDs : Win32cr::Foundation::HANDLE, ppRoles : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
 
+    # :nodoc:
     fun DsListRolesW(hDs : Win32cr::Foundation::HANDLE, ppRoles : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
 
+    # :nodoc:
     fun DsQuerySitesByCostW(hDS : Win32cr::Foundation::HANDLE, pwszFromSite : Win32cr::Foundation::PWSTR, rgwszToSites : Win32cr::Foundation::PWSTR*, cToSites : UInt32, dwFlags : UInt32, prgSiteInfo : Win32cr::Networking::ActiveDirectory::DS_SITE_COST_INFO**) : UInt32
 
+    # :nodoc:
     fun DsQuerySitesByCostA(hDS : Win32cr::Foundation::HANDLE, pszFromSite : Win32cr::Foundation::PSTR, rgszToSites : Win32cr::Foundation::PSTR*, cToSites : UInt32, dwFlags : UInt32, prgSiteInfo : Win32cr::Networking::ActiveDirectory::DS_SITE_COST_INFO**) : UInt32
 
+    # :nodoc:
     fun DsQuerySitesFree(rgSiteInfo : Win32cr::Networking::ActiveDirectory::DS_SITE_COST_INFO*) : Void
 
+    # :nodoc:
     fun DsMapSchemaGuidsA(hDs : Win32cr::Foundation::HANDLE, cGuids : UInt32, rGuids : LibC::GUID*, ppGuidMap : Win32cr::Networking::ActiveDirectory::DS_SCHEMA_GUID_MAPA**) : UInt32
 
+    # :nodoc:
     fun DsFreeSchemaGuidMapA(pGuidMap : Win32cr::Networking::ActiveDirectory::DS_SCHEMA_GUID_MAPA*) : Void
 
+    # :nodoc:
     fun DsMapSchemaGuidsW(hDs : Win32cr::Foundation::HANDLE, cGuids : UInt32, rGuids : LibC::GUID*, ppGuidMap : Win32cr::Networking::ActiveDirectory::DS_SCHEMA_GUID_MAPW**) : UInt32
 
+    # :nodoc:
     fun DsFreeSchemaGuidMapW(pGuidMap : Win32cr::Networking::ActiveDirectory::DS_SCHEMA_GUID_MAPW*) : Void
 
+    # :nodoc:
     fun DsGetDomainControllerInfoA(hDs : Win32cr::Foundation::HANDLE, domain_name : Win32cr::Foundation::PSTR, info_level : UInt32, pcOut : UInt32*, ppInfo : Void**) : UInt32
 
+    # :nodoc:
     fun DsGetDomainControllerInfoW(hDs : Win32cr::Foundation::HANDLE, domain_name : Win32cr::Foundation::PWSTR, info_level : UInt32, pcOut : UInt32*, ppInfo : Void**) : UInt32
 
+    # :nodoc:
     fun DsFreeDomainControllerInfoA(info_level : UInt32, cInfo : UInt32, pInfo : Void*) : Void
 
+    # :nodoc:
     fun DsFreeDomainControllerInfoW(info_level : UInt32, cInfo : UInt32, pInfo : Void*) : Void
 
+    # :nodoc:
     fun DsReplicaConsistencyCheck(hDS : Win32cr::Foundation::HANDLE, task_id : Win32cr::Networking::ActiveDirectory::DS_KCC_TASKID, dwFlags : UInt32) : UInt32
 
+    # :nodoc:
     fun DsReplicaVerifyObjectsW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, pUuidDsaSrc : LibC::GUID*, ulOptions : UInt32) : UInt32
 
+    # :nodoc:
     fun DsReplicaVerifyObjectsA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, pUuidDsaSrc : LibC::GUID*, ulOptions : UInt32) : UInt32
 
+    # :nodoc:
     fun DsReplicaGetInfoW(hDS : Win32cr::Foundation::HANDLE, info_type : Win32cr::Networking::ActiveDirectory::DS_REPL_INFO_TYPE, pszObject : Win32cr::Foundation::PWSTR, puuidForSourceDsaObjGuid : LibC::GUID*, ppInfo : Void**) : UInt32
 
+    # :nodoc:
     fun DsReplicaGetInfo2W(hDS : Win32cr::Foundation::HANDLE, info_type : Win32cr::Networking::ActiveDirectory::DS_REPL_INFO_TYPE, pszObject : Win32cr::Foundation::PWSTR, puuidForSourceDsaObjGuid : LibC::GUID*, pszAttributeName : Win32cr::Foundation::PWSTR, pszValue : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwEnumerationContext : UInt32, ppInfo : Void**) : UInt32
 
+    # :nodoc:
     fun DsReplicaFreeInfo(info_type : Win32cr::Networking::ActiveDirectory::DS_REPL_INFO_TYPE, pInfo : Void*) : Void
 
+    # :nodoc:
     fun DsAddSidHistoryW(hDS : Win32cr::Foundation::HANDLE, flags : UInt32, src_domain : Win32cr::Foundation::PWSTR, src_principal : Win32cr::Foundation::PWSTR, src_domain_controller : Win32cr::Foundation::PWSTR, src_domain_creds : Void*, dst_domain : Win32cr::Foundation::PWSTR, dst_principal : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DsAddSidHistoryA(hDS : Win32cr::Foundation::HANDLE, flags : UInt32, src_domain : Win32cr::Foundation::PSTR, src_principal : Win32cr::Foundation::PSTR, src_domain_controller : Win32cr::Foundation::PSTR, src_domain_creds : Void*, dst_domain : Win32cr::Foundation::PSTR, dst_principal : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun DsInheritSecurityIdentityW(hDS : Win32cr::Foundation::HANDLE, flags : UInt32, src_principal : Win32cr::Foundation::PWSTR, dst_principal : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DsInheritSecurityIdentityA(hDS : Win32cr::Foundation::HANDLE, flags : UInt32, src_principal : Win32cr::Foundation::PSTR, dst_principal : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun DsRoleGetPrimaryDomainInformation(lpServer : Win32cr::Foundation::PWSTR, info_level : Win32cr::Networking::ActiveDirectory::DSROLE_PRIMARY_DOMAIN_INFO_LEVEL, buffer : UInt8**) : UInt32
 
+    # :nodoc:
     fun DsRoleFreeMemory(buffer : Void*) : Void
 
+    # :nodoc:
     fun DsGetDcNameA(computer_name : Win32cr::Foundation::PSTR, domain_name : Win32cr::Foundation::PSTR, domain_guid : LibC::GUID*, site_name : Win32cr::Foundation::PSTR, flags : UInt32, domain_controller_info : Win32cr::Networking::ActiveDirectory::DOMAIN_CONTROLLER_INFOA**) : UInt32
 
+    # :nodoc:
     fun DsGetDcNameW(computer_name : Win32cr::Foundation::PWSTR, domain_name : Win32cr::Foundation::PWSTR, domain_guid : LibC::GUID*, site_name : Win32cr::Foundation::PWSTR, flags : UInt32, domain_controller_info : Win32cr::Networking::ActiveDirectory::DOMAIN_CONTROLLER_INFOW**) : UInt32
 
+    # :nodoc:
     fun DsGetSiteNameA(computer_name : Win32cr::Foundation::PSTR, site_name : Win32cr::Foundation::PSTR*) : UInt32
 
+    # :nodoc:
     fun DsGetSiteNameW(computer_name : Win32cr::Foundation::PWSTR, site_name : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun DsValidateSubnetNameW(subnet_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DsValidateSubnetNameA(subnet_name : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun DsAddressToSiteNamesW(computer_name : Win32cr::Foundation::PWSTR, entry_count : UInt32, socket_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, site_names : Win32cr::Foundation::PWSTR**) : UInt32
 
+    # :nodoc:
     fun DsAddressToSiteNamesA(computer_name : Win32cr::Foundation::PSTR, entry_count : UInt32, socket_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, site_names : Win32cr::Foundation::PSTR**) : UInt32
 
+    # :nodoc:
     fun DsAddressToSiteNamesExW(computer_name : Win32cr::Foundation::PWSTR, entry_count : UInt32, socket_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, site_names : Win32cr::Foundation::PWSTR**, subnet_names : Win32cr::Foundation::PWSTR**) : UInt32
 
+    # :nodoc:
     fun DsAddressToSiteNamesExA(computer_name : Win32cr::Foundation::PSTR, entry_count : UInt32, socket_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, site_names : Win32cr::Foundation::PSTR**, subnet_names : Win32cr::Foundation::PSTR**) : UInt32
 
+    # :nodoc:
     fun DsEnumerateDomainTrustsW(server_name : Win32cr::Foundation::PWSTR, flags : UInt32, domains : Win32cr::Networking::ActiveDirectory::DS_DOMAIN_TRUSTSW**, domain_count : UInt32*) : UInt32
 
+    # :nodoc:
     fun DsEnumerateDomainTrustsA(server_name : Win32cr::Foundation::PSTR, flags : UInt32, domains : Win32cr::Networking::ActiveDirectory::DS_DOMAIN_TRUSTSA**, domain_count : UInt32*) : UInt32
 
+    # :nodoc:
     fun DsGetForestTrustInformationW(server_name : Win32cr::Foundation::PWSTR, trusted_domain_name : Win32cr::Foundation::PWSTR, flags : UInt32, forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION**) : UInt32
 
+    # :nodoc:
     fun DsMergeForestTrustInformationW(domain_name : Win32cr::Foundation::PWSTR, new_forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION*, old_forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION*, merged_forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION**) : UInt32
 
+    # :nodoc:
     fun DsGetDcSiteCoverageW(server_name : Win32cr::Foundation::PWSTR, entry_count : UInt32*, site_names : Win32cr::Foundation::PWSTR**) : UInt32
 
+    # :nodoc:
     fun DsGetDcSiteCoverageA(server_name : Win32cr::Foundation::PSTR, entry_count : UInt32*, site_names : Win32cr::Foundation::PSTR**) : UInt32
 
+    # :nodoc:
     fun DsDeregisterDnsHostRecordsW(server_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, domain_guid : LibC::GUID*, dsa_guid : LibC::GUID*, dns_host_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun DsDeregisterDnsHostRecordsA(server_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, domain_guid : LibC::GUID*, dsa_guid : LibC::GUID*, dns_host_name : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun DsGetDcOpenW(dns_name : Win32cr::Foundation::PWSTR, option_flags : UInt32, site_name : Win32cr::Foundation::PWSTR, domain_guid : LibC::GUID*, dns_forest_name : Win32cr::Foundation::PWSTR, dc_flags : UInt32, ret_get_dc_context : Win32cr::Networking::ActiveDirectory::GetDcContextHandle*) : UInt32
 
+    # :nodoc:
     fun DsGetDcOpenA(dns_name : Win32cr::Foundation::PSTR, option_flags : UInt32, site_name : Win32cr::Foundation::PSTR, domain_guid : LibC::GUID*, dns_forest_name : Win32cr::Foundation::PSTR, dc_flags : UInt32, ret_get_dc_context : Win32cr::Networking::ActiveDirectory::GetDcContextHandle*) : UInt32
 
+    # :nodoc:
     fun DsGetDcNextW(get_dc_context_handle : Win32cr::Foundation::HANDLE, sock_address_count : UInt32*, sock_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS**, dns_host_name : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun DsGetDcNextA(get_dc_context_handle : Win32cr::Foundation::HANDLE, sock_address_count : UInt32*, sock_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS**, dns_host_name : Win32cr::Foundation::PSTR*) : UInt32
 
+    # :nodoc:
     fun DsGetDcCloseW(get_dc_context_handle : Win32cr::Networking::ActiveDirectory::GetDcContextHandle) : Void
 
   end

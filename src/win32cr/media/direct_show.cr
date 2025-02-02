@@ -16,6 +16,7 @@ require "./../system/diagnostics/etw.cr"
 require "./../system/ole.cr"
 
 module Win32cr::Media::DirectShow
+  extend self
   alias AMGETERRORTEXTPROCA = Proc(Win32cr::Foundation::HRESULT, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::BOOL)
 
   alias AMGETERRORTEXTPROCW = Proc(Win32cr::Foundation::HRESULT, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL)
@@ -43242,10 +43243,20 @@ module Win32cr::Media::DirectShow
 
   end
 
+  def aMGetErrorTextA(hr : Win32cr::Foundation::HRESULT, pbuffer : UInt8*, max_len : UInt32) : UInt32
+    C.AMGetErrorTextA(hr, pbuffer, max_len)
+  end
+
+  def aMGetErrorTextW(hr : Win32cr::Foundation::HRESULT, pbuffer : UInt16*, max_len : UInt32) : UInt32
+    C.AMGetErrorTextW(hr, pbuffer, max_len)
+  end
+
   @[Link("quartz")]
   lib C
+    # :nodoc:
     fun AMGetErrorTextA(hr : Win32cr::Foundation::HRESULT, pbuffer : UInt8*, max_len : UInt32) : UInt32
 
+    # :nodoc:
     fun AMGetErrorTextW(hr : Win32cr::Foundation::HRESULT, pbuffer : UInt16*, max_len : UInt32) : UInt32
 
   end

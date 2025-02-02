@@ -4,6 +4,7 @@ require "./../../graphics/gdi.cr"
 require "./../../system/com.cr"
 
 module Win32cr::UI::Controls::Dialogs
+  extend self
   alias LPOFNHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)
 
   alias LPCCHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)
@@ -1297,48 +1298,153 @@ module Win32cr::UI::Controls::Dialogs
 
   end
 
+  def getOpenFileNameA(param0 : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*) : Win32cr::Foundation::BOOL
+    C.GetOpenFileNameA(param0)
+  end
+
+  def getOpenFileNameW(param0 : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*) : Win32cr::Foundation::BOOL
+    C.GetOpenFileNameW(param0)
+  end
+
+  def getSaveFileNameA(param0 : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*) : Win32cr::Foundation::BOOL
+    C.GetSaveFileNameA(param0)
+  end
+
+  def getSaveFileNameW(param0 : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*) : Win32cr::Foundation::BOOL
+    C.GetSaveFileNameW(param0)
+  end
+
+  def getFileTitleA(param0 : Win32cr::Foundation::PSTR, buf : UInt8*, cchSize : UInt16) : Int16
+    C.GetFileTitleA(param0, buf, cchSize)
+  end
+
+  def getFileTitleW(param0 : Win32cr::Foundation::PWSTR, buf : UInt16*, cchSize : UInt16) : Int16
+    C.GetFileTitleW(param0, buf, cchSize)
+  end
+
+  def chooseColorA(param0 : Win32cr::UI::Controls::Dialogs::CHOOSECOLORA*) : Win32cr::Foundation::BOOL
+    C.ChooseColorA(param0)
+  end
+
+  def chooseColorW(param0 : Win32cr::UI::Controls::Dialogs::CHOOSECOLORW*) : Win32cr::Foundation::BOOL
+    C.ChooseColorW(param0)
+  end
+
+  def findTextA(param0 : Win32cr::UI::Controls::Dialogs::FINDREPLACEA*) : Win32cr::Foundation::HWND
+    C.FindTextA(param0)
+  end
+
+  def findTextW(param0 : Win32cr::UI::Controls::Dialogs::FINDREPLACEW*) : Win32cr::Foundation::HWND
+    C.FindTextW(param0)
+  end
+
+  def replaceTextA(param0 : Win32cr::UI::Controls::Dialogs::FINDREPLACEA*) : Win32cr::Foundation::HWND
+    C.ReplaceTextA(param0)
+  end
+
+  def replaceTextW(param0 : Win32cr::UI::Controls::Dialogs::FINDREPLACEW*) : Win32cr::Foundation::HWND
+    C.ReplaceTextW(param0)
+  end
+
+  def chooseFontA(param0 : Win32cr::UI::Controls::Dialogs::CHOOSEFONTA*) : Win32cr::Foundation::BOOL
+    C.ChooseFontA(param0)
+  end
+
+  def chooseFontW(param0 : Win32cr::UI::Controls::Dialogs::CHOOSEFONTW*) : Win32cr::Foundation::BOOL
+    C.ChooseFontW(param0)
+  end
+
+  def printDlgA(pPD : Win32cr::UI::Controls::Dialogs::PRINTDLGA*) : Win32cr::Foundation::BOOL
+    C.PrintDlgA(pPD)
+  end
+
+  def printDlgW(pPD : Win32cr::UI::Controls::Dialogs::PRINTDLGW*) : Win32cr::Foundation::BOOL
+    C.PrintDlgW(pPD)
+  end
+
+  def printDlgExA(pPD : Win32cr::UI::Controls::Dialogs::PRINTDLGEXA*) : Win32cr::Foundation::HRESULT
+    C.PrintDlgExA(pPD)
+  end
+
+  def printDlgExW(pPD : Win32cr::UI::Controls::Dialogs::PRINTDLGEXW*) : Win32cr::Foundation::HRESULT
+    C.PrintDlgExW(pPD)
+  end
+
+  def commDlgExtendedError : Win32cr::UI::Controls::Dialogs::COMMON_DLG_ERRORS
+    C.CommDlgExtendedError
+  end
+
+  def pageSetupDlgA(param0 : Win32cr::UI::Controls::Dialogs::PAGESETUPDLGA*) : Win32cr::Foundation::BOOL
+    C.PageSetupDlgA(param0)
+  end
+
+  def pageSetupDlgW(param0 : Win32cr::UI::Controls::Dialogs::PAGESETUPDLGW*) : Win32cr::Foundation::BOOL
+    C.PageSetupDlgW(param0)
+  end
+
   @[Link("comdlg32")]
   lib C
+    # :nodoc:
     fun GetOpenFileNameA(param0 : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetOpenFileNameW(param0 : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetSaveFileNameA(param0 : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetSaveFileNameW(param0 : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetFileTitleA(param0 : Win32cr::Foundation::PSTR, buf : UInt8*, cchSize : UInt16) : Int16
 
+    # :nodoc:
     fun GetFileTitleW(param0 : Win32cr::Foundation::PWSTR, buf : UInt16*, cchSize : UInt16) : Int16
 
+    # :nodoc:
     fun ChooseColorA(param0 : Win32cr::UI::Controls::Dialogs::CHOOSECOLORA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ChooseColorW(param0 : Win32cr::UI::Controls::Dialogs::CHOOSECOLORW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindTextA(param0 : Win32cr::UI::Controls::Dialogs::FINDREPLACEA*) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun FindTextW(param0 : Win32cr::UI::Controls::Dialogs::FINDREPLACEW*) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun ReplaceTextA(param0 : Win32cr::UI::Controls::Dialogs::FINDREPLACEA*) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun ReplaceTextW(param0 : Win32cr::UI::Controls::Dialogs::FINDREPLACEW*) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun ChooseFontA(param0 : Win32cr::UI::Controls::Dialogs::CHOOSEFONTA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ChooseFontW(param0 : Win32cr::UI::Controls::Dialogs::CHOOSEFONTW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PrintDlgA(pPD : Win32cr::UI::Controls::Dialogs::PRINTDLGA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PrintDlgW(pPD : Win32cr::UI::Controls::Dialogs::PRINTDLGW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PrintDlgExA(pPD : Win32cr::UI::Controls::Dialogs::PRINTDLGEXA*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PrintDlgExW(pPD : Win32cr::UI::Controls::Dialogs::PRINTDLGEXW*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CommDlgExtendedError : Win32cr::UI::Controls::Dialogs::COMMON_DLG_ERRORS
 
+    # :nodoc:
     fun PageSetupDlgA(param0 : Win32cr::UI::Controls::Dialogs::PAGESETUPDLGA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PageSetupDlgW(param0 : Win32cr::UI::Controls::Dialogs::PAGESETUPDLGW*) : Win32cr::Foundation::BOOL
 
   end

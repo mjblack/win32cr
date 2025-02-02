@@ -2,6 +2,7 @@ require "./com.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::EventNotificationService
+  extend self
   NETWORK_ALIVE_LAN = 1_u32
   NETWORK_ALIVE_WAN = 2_u32
   NETWORK_ALIVE_AOL = 4_u32
@@ -274,12 +275,27 @@ module Win32cr::System::EventNotificationService
 
   end
 
+  def isDestinationReachableA(lpszDestination : Win32cr::Foundation::PSTR, lpQOCInfo : Win32cr::System::EventNotificationService::QOCINFO*) : Win32cr::Foundation::BOOL
+    C.IsDestinationReachableA(lpszDestination, lpQOCInfo)
+  end
+
+  def isDestinationReachableW(lpszDestination : Win32cr::Foundation::PWSTR, lpQOCInfo : Win32cr::System::EventNotificationService::QOCINFO*) : Win32cr::Foundation::BOOL
+    C.IsDestinationReachableW(lpszDestination, lpQOCInfo)
+  end
+
+  def isNetworkAlive(lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    C.IsNetworkAlive(lpdwFlags)
+  end
+
   @[Link("sensapi")]
   lib C
+    # :nodoc:
     fun IsDestinationReachableA(lpszDestination : Win32cr::Foundation::PSTR, lpQOCInfo : Win32cr::System::EventNotificationService::QOCINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsDestinationReachableW(lpszDestination : Win32cr::Foundation::PWSTR, lpQOCInfo : Win32cr::System::EventNotificationService::QOCINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsNetworkAlive(lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
 
   end

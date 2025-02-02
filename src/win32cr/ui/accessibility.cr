@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./windows_and_messaging.cr"
 
 module Win32cr::UI::Accessibility
+  extend self
   alias HWINEVENTHOOK = LibC::IntPtrT
   alias HUIANODE = LibC::IntPtrT
   alias HUIAPATTERNOBJECT = LibC::IntPtrT
@@ -12621,254 +12622,869 @@ module Win32cr::UI::Accessibility
 
   end
 
+  def lresultFromObject(riid : LibC::GUID*, wParam : Win32cr::Foundation::WPARAM, punk : Void*) : Win32cr::Foundation::LRESULT
+    C.LresultFromObject(riid, wParam, punk)
+  end
+
+  def objectFromLresult(lResult : Win32cr::Foundation::LRESULT, riid : LibC::GUID*, wParam : Win32cr::Foundation::WPARAM, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    C.ObjectFromLresult(lResult, riid, wParam, ppvObject)
+  end
+
+  def windowFromAccessibleObject(param0 : Void*, phwnd : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
+    C.WindowFromAccessibleObject(param0, phwnd)
+  end
+
+  def accessibleObjectFromWindow(hwnd : Win32cr::Foundation::HWND, dwId : UInt32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    C.AccessibleObjectFromWindow(hwnd, dwId, riid, ppvObject)
+  end
+
+  def accessibleObjectFromEvent(hwnd : Win32cr::Foundation::HWND, dwId : UInt32, dwChildId : UInt32, ppacc : Void**, pvarChild : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.AccessibleObjectFromEvent(hwnd, dwId, dwChildId, ppacc, pvarChild)
+  end
+
+  def accessibleObjectFromPoint(ptScreen : Win32cr::Foundation::POINT, ppacc : Void**, pvarChild : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.AccessibleObjectFromPoint(ptScreen, ppacc, pvarChild)
+  end
+
+  def accessibleChildren(paccContainer : Void*, iChildStart : Int32, cChildren : Int32, rgvarChildren : Win32cr::System::Com::VARIANT*, pcObtained : Int32*) : Win32cr::Foundation::HRESULT
+    C.AccessibleChildren(paccContainer, iChildStart, cChildren, rgvarChildren, pcObtained)
+  end
+
+  def getRoleTextA(lRole : UInt32, lpszRole : UInt8*, cchRoleMax : UInt32) : UInt32
+    C.GetRoleTextA(lRole, lpszRole, cchRoleMax)
+  end
+
+  def getRoleTextW(lRole : UInt32, lpszRole : UInt16*, cchRoleMax : UInt32) : UInt32
+    C.GetRoleTextW(lRole, lpszRole, cchRoleMax)
+  end
+
+  def getStateTextA(lStateBit : UInt32, lpszState : UInt8*, cchState : UInt32) : UInt32
+    C.GetStateTextA(lStateBit, lpszState, cchState)
+  end
+
+  def getStateTextW(lStateBit : UInt32, lpszState : UInt16*, cchState : UInt32) : UInt32
+    C.GetStateTextW(lStateBit, lpszState, cchState)
+  end
+
+  def getOleaccVersionInfo(pVer : UInt32*, pBuild : UInt32*) : Void
+    C.GetOleaccVersionInfo(pVer, pBuild)
+  end
+
+  def createStdAccessibleObject(hwnd : Win32cr::Foundation::HWND, idObject : Int32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateStdAccessibleObject(hwnd, idObject, riid, ppvObject)
+  end
+
+  def createStdAccessibleProxyA(hwnd : Win32cr::Foundation::HWND, pClassName : Win32cr::Foundation::PSTR, idObject : Int32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateStdAccessibleProxyA(hwnd, pClassName, idObject, riid, ppvObject)
+  end
+
+  def createStdAccessibleProxyW(hwnd : Win32cr::Foundation::HWND, pClassName : Win32cr::Foundation::PWSTR, idObject : Int32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateStdAccessibleProxyW(hwnd, pClassName, idObject, riid, ppvObject)
+  end
+
+  def accSetRunningUtilityState(hwndApp : Win32cr::Foundation::HWND, dwUtilityStateMask : UInt32, dwUtilityState : Win32cr::UI::Accessibility::ACC_UTILITY_STATE_FLAGS) : Win32cr::Foundation::HRESULT
+    C.AccSetRunningUtilityState(hwndApp, dwUtilityStateMask, dwUtilityState)
+  end
+
+  def accNotifyTouchInteraction(hwndApp : Win32cr::Foundation::HWND, hwndTarget : Win32cr::Foundation::HWND, ptTarget : Win32cr::Foundation::POINT) : Win32cr::Foundation::HRESULT
+    C.AccNotifyTouchInteraction(hwndApp, hwndTarget, ptTarget)
+  end
+
+  def uiaGetErrorDescription(pDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::BOOL
+    C.UiaGetErrorDescription(pDescription)
+  end
+
+  def uiaHUiaNodeFromVariant(pvar : Win32cr::System::Com::VARIANT*, phnode : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    C.UiaHUiaNodeFromVariant(pvar, phnode)
+  end
+
+  def uiaHPatternObjectFromVariant(pvar : Win32cr::System::Com::VARIANT*, phobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT*) : Win32cr::Foundation::HRESULT
+    C.UiaHPatternObjectFromVariant(pvar, phobj)
+  end
+
+  def uiaHTextRangeFromVariant(pvar : Win32cr::System::Com::VARIANT*, phtextrange : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    C.UiaHTextRangeFromVariant(pvar, phtextrange)
+  end
+
+  def uiaNodeRelease(hnode : Win32cr::UI::Accessibility::HUIANODE) : Win32cr::Foundation::BOOL
+    C.UiaNodeRelease(hnode)
+  end
+
+  def uiaGetPropertyValue(hnode : Win32cr::UI::Accessibility::HUIANODE, propertyId : Int32, pValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.UiaGetPropertyValue(hnode, propertyId, pValue)
+  end
+
+  def uiaGetPatternProvider(hnode : Win32cr::UI::Accessibility::HUIANODE, patternId : Int32, phobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT*) : Win32cr::Foundation::HRESULT
+    C.UiaGetPatternProvider(hnode, patternId, phobj)
+  end
+
+  def uiaGetRuntimeId(hnode : Win32cr::UI::Accessibility::HUIANODE, pruntimeId : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+    C.UiaGetRuntimeId(hnode, pruntimeId)
+  end
+
+  def uiaSetFocus(hnode : Win32cr::UI::Accessibility::HUIANODE) : Win32cr::Foundation::HRESULT
+    C.UiaSetFocus(hnode)
+  end
+
+  def uiaNavigate(hnode : Win32cr::UI::Accessibility::HUIANODE, direction : Win32cr::UI::Accessibility::NavigateDirection, pCondition : Win32cr::UI::Accessibility::UiaCondition*, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppTreeStructure : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    C.UiaNavigate(hnode, direction, pCondition, pRequest, ppRequestedData, ppTreeStructure)
+  end
+
+  def uiaGetUpdatedCache(hnode : Win32cr::UI::Accessibility::HUIANODE, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, normalizeState : Win32cr::UI::Accessibility::NormalizeState, pNormalizeCondition : Win32cr::UI::Accessibility::UiaCondition*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppTreeStructure : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    C.UiaGetUpdatedCache(hnode, pRequest, normalizeState, pNormalizeCondition, ppRequestedData, ppTreeStructure)
+  end
+
+  def uiaFind(hnode : Win32cr::UI::Accessibility::HUIANODE, pParams : Win32cr::UI::Accessibility::UiaFindParams*, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppOffsets : Win32cr::System::Com::SAFEARRAY**, ppTreeStructures : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+    C.UiaFind(hnode, pParams, pRequest, ppRequestedData, ppOffsets, ppTreeStructures)
+  end
+
+  def uiaNodeFromPoint(x : Float64, y : Float64, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppTreeStructure : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    C.UiaNodeFromPoint(x, y, pRequest, ppRequestedData, ppTreeStructure)
+  end
+
+  def uiaNodeFromFocus(pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppTreeStructure : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    C.UiaNodeFromFocus(pRequest, ppRequestedData, ppTreeStructure)
+  end
+
+  def uiaNodeFromHandle(hwnd : Win32cr::Foundation::HWND, phnode : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    C.UiaNodeFromHandle(hwnd, phnode)
+  end
+
+  def uiaNodeFromProvider(pProvider : Void*, phnode : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    C.UiaNodeFromProvider(pProvider, phnode)
+  end
+
+  def uiaGetRootNode(phnode : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    C.UiaGetRootNode(phnode)
+  end
+
+  def uiaRegisterProviderCallback(pCallback : Win32cr::UI::Accessibility::UiaProviderCallback*) : Void
+    C.UiaRegisterProviderCallback(pCallback)
+  end
+
+  def uiaLookupId(type__ : Win32cr::UI::Accessibility::AutomationIdentifierType, pGuid : LibC::GUID*) : Int32
+    C.UiaLookupId(type__, pGuid)
+  end
+
+  def uiaGetReservedNotSupportedValue(punkNotSupportedValue : Void**) : Win32cr::Foundation::HRESULT
+    C.UiaGetReservedNotSupportedValue(punkNotSupportedValue)
+  end
+
+  def uiaGetReservedMixedAttributeValue(punkMixedAttributeValue : Void**) : Win32cr::Foundation::HRESULT
+    C.UiaGetReservedMixedAttributeValue(punkMixedAttributeValue)
+  end
+
+  def uiaClientsAreListening : Win32cr::Foundation::BOOL
+    C.UiaClientsAreListening
+  end
+
+  def uiaRaiseAutomationPropertyChangedEvent(pProvider : Void*, id : Int32, oldValue : Win32cr::System::Com::VARIANT, newValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    C.UiaRaiseAutomationPropertyChangedEvent(pProvider, id, oldValue, newValue)
+  end
+
+  def uiaRaiseAutomationEvent(pProvider : Void*, id : Int32) : Win32cr::Foundation::HRESULT
+    C.UiaRaiseAutomationEvent(pProvider, id)
+  end
+
+  def uiaRaiseStructureChangedEvent(pProvider : Void*, structureChangeType : Win32cr::UI::Accessibility::StructureChangeType, pRuntimeId : Int32*, cRuntimeIdLen : Int32) : Win32cr::Foundation::HRESULT
+    C.UiaRaiseStructureChangedEvent(pProvider, structureChangeType, pRuntimeId, cRuntimeIdLen)
+  end
+
+  def uiaRaiseAsyncContentLoadedEvent(pProvider : Void*, asyncContentLoadedState : Win32cr::UI::Accessibility::AsyncContentLoadedState, percentComplete : Float64) : Win32cr::Foundation::HRESULT
+    C.UiaRaiseAsyncContentLoadedEvent(pProvider, asyncContentLoadedState, percentComplete)
+  end
+
+  def uiaRaiseTextEditTextChangedEvent(pProvider : Void*, textEditChangeType : Win32cr::UI::Accessibility::TextEditChangeType, pChangedData : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+    C.UiaRaiseTextEditTextChangedEvent(pProvider, textEditChangeType, pChangedData)
+  end
+
+  def uiaRaiseChangesEvent(pProvider : Void*, eventIdCount : Int32, pUiaChanges : Win32cr::UI::Accessibility::UiaChangeInfo*) : Win32cr::Foundation::HRESULT
+    C.UiaRaiseChangesEvent(pProvider, eventIdCount, pUiaChanges)
+  end
+
+  def uiaRaiseNotificationEvent(provider : Void*, notificationKind : Win32cr::UI::Accessibility::NotificationKind, notificationProcessing : Win32cr::UI::Accessibility::NotificationProcessing, displayString : Win32cr::Foundation::BSTR, activityId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    C.UiaRaiseNotificationEvent(provider, notificationKind, notificationProcessing, displayString, activityId)
+  end
+
+  def uiaRaiseActiveTextPositionChangedEvent(provider : Void*, textRange : Void*) : Win32cr::Foundation::HRESULT
+    C.UiaRaiseActiveTextPositionChangedEvent(provider, textRange)
+  end
+
+  def uiaAddEvent(hnode : Win32cr::UI::Accessibility::HUIANODE, eventId : Int32, pCallback : Win32cr::UI::Accessibility::UiaEventCallback*, scope : Win32cr::UI::Accessibility::TreeScope, pProperties : Int32*, cProperties : Int32, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, phEvent : Win32cr::UI::Accessibility::HUIAEVENT*) : Win32cr::Foundation::HRESULT
+    C.UiaAddEvent(hnode, eventId, pCallback, scope, pProperties, cProperties, pRequest, phEvent)
+  end
+
+  def uiaRemoveEvent(hEvent : Win32cr::UI::Accessibility::HUIAEVENT) : Win32cr::Foundation::HRESULT
+    C.UiaRemoveEvent(hEvent)
+  end
+
+  def uiaEventAddWindow(hEvent : Win32cr::UI::Accessibility::HUIAEVENT, hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
+    C.UiaEventAddWindow(hEvent, hwnd)
+  end
+
+  def uiaEventRemoveWindow(hEvent : Win32cr::UI::Accessibility::HUIAEVENT, hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
+    C.UiaEventRemoveWindow(hEvent, hwnd)
+  end
+
+  def dockPatternSetDockPosition(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, dockPosition : Win32cr::UI::Accessibility::DockPosition) : Win32cr::Foundation::HRESULT
+    C.DockPattern_SetDockPosition(hobj, dockPosition)
+  end
+
+  def expandCollapsePatternCollapse(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    C.ExpandCollapsePattern_Collapse(hobj)
+  end
+
+  def expandCollapsePatternExpand(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    C.ExpandCollapsePattern_Expand(hobj)
+  end
+
+  def gridPatternGetItem(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, row : Int32, column : Int32, pResult : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    C.GridPattern_GetItem(hobj, row, column, pResult)
+  end
+
+  def invokePatternInvoke(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    C.InvokePattern_Invoke(hobj)
+  end
+
+  def multipleViewPatternGetViewName(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, viewId : Int32, ppStr : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    C.MultipleViewPattern_GetViewName(hobj, viewId, ppStr)
+  end
+
+  def multipleViewPatternSetCurrentView(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, viewId : Int32) : Win32cr::Foundation::HRESULT
+    C.MultipleViewPattern_SetCurrentView(hobj, viewId)
+  end
+
+  def rangeValuePatternSetValue(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, val : Float64) : Win32cr::Foundation::HRESULT
+    C.RangeValuePattern_SetValue(hobj, val)
+  end
+
+  def scrollItemPatternScrollIntoView(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    C.ScrollItemPattern_ScrollIntoView(hobj)
+  end
+
+  def scrollPatternScroll(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, horizontalAmount : Win32cr::UI::Accessibility::ScrollAmount, verticalAmount : Win32cr::UI::Accessibility::ScrollAmount) : Win32cr::Foundation::HRESULT
+    C.ScrollPattern_Scroll(hobj, horizontalAmount, verticalAmount)
+  end
+
+  def scrollPatternSetScrollPercent(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, horizontalPercent : Float64, verticalPercent : Float64) : Win32cr::Foundation::HRESULT
+    C.ScrollPattern_SetScrollPercent(hobj, horizontalPercent, verticalPercent)
+  end
+
+  def selectionItemPatternAddToSelection(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    C.SelectionItemPattern_AddToSelection(hobj)
+  end
+
+  def selectionItemPatternRemoveFromSelection(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    C.SelectionItemPattern_RemoveFromSelection(hobj)
+  end
+
+  def selectionItemPatternSelect(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    C.SelectionItemPattern_Select(hobj)
+  end
+
+  def togglePatternToggle(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    C.TogglePattern_Toggle(hobj)
+  end
+
+  def transformPatternMove(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, x : Float64, y : Float64) : Win32cr::Foundation::HRESULT
+    C.TransformPattern_Move(hobj, x, y)
+  end
+
+  def transformPatternResize(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, width : Float64, height : Float64) : Win32cr::Foundation::HRESULT
+    C.TransformPattern_Resize(hobj, width, height)
+  end
+
+  def transformPatternRotate(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, degrees : Float64) : Win32cr::Foundation::HRESULT
+    C.TransformPattern_Rotate(hobj, degrees)
+  end
+
+  def valuePatternSetValue(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pVal : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.ValuePattern_SetValue(hobj, pVal)
+  end
+
+  def windowPatternClose(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    C.WindowPattern_Close(hobj)
+  end
+
+  def windowPatternSetWindowVisualState(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, state : Win32cr::UI::Accessibility::WindowVisualState) : Win32cr::Foundation::HRESULT
+    C.WindowPattern_SetWindowVisualState(hobj, state)
+  end
+
+  def windowPatternWaitForInputIdle(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, milliseconds : Int32, pResult : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.WindowPattern_WaitForInputIdle(hobj, milliseconds, pResult)
+  end
+
+  def textPatternGetSelection(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pRetVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+    C.TextPattern_GetSelection(hobj, pRetVal)
+  end
+
+  def textPatternGetVisibleRanges(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pRetVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+    C.TextPattern_GetVisibleRanges(hobj, pRetVal)
+  end
+
+  def textPatternRangeFromChild(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, hnodeChild : Win32cr::UI::Accessibility::HUIANODE, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    C.TextPattern_RangeFromChild(hobj, hnodeChild, pRetVal)
+  end
+
+  def textPatternRangeFromPoint(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, point : Win32cr::UI::Accessibility::UiaPoint, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    C.TextPattern_RangeFromPoint(hobj, point, pRetVal)
+  end
+
+  def textPatternGetDocumentRange(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    C.TextPattern_get_DocumentRange(hobj, pRetVal)
+  end
+
+  def textPatternGetSupportedTextSelection(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pRetVal : Win32cr::UI::Accessibility::SupportedTextSelection*) : Win32cr::Foundation::HRESULT
+    C.TextPattern_get_SupportedTextSelection(hobj, pRetVal)
+  end
+
+  def textRangeClone(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    C.TextRange_Clone(hobj, pRetVal)
+  end
+
+  def textRangeCompare(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, range : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.TextRange_Compare(hobj, range, pRetVal)
+  end
+
+  def textRangeCompareEndpoints(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, endpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint, targetRange : Win32cr::UI::Accessibility::HUIATEXTRANGE, targetEndpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint, pRetVal : Int32*) : Win32cr::Foundation::HRESULT
+    C.TextRange_CompareEndpoints(hobj, endpoint, targetRange, targetEndpoint, pRetVal)
+  end
+
+  def textRangeExpandToEnclosingUnit(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, unit : Win32cr::UI::Accessibility::TextUnit) : Win32cr::Foundation::HRESULT
+    C.TextRange_ExpandToEnclosingUnit(hobj, unit)
+  end
+
+  def textRangeGetAttributeValue(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, attributeId : Int32, pRetVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.TextRange_GetAttributeValue(hobj, attributeId, pRetVal)
+  end
+
+  def textRangeFindAttribute(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, attributeId : Int32, val : Win32cr::System::Com::VARIANT, backward : Win32cr::Foundation::BOOL, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    C.TextRange_FindAttribute(hobj, attributeId, val, backward, pRetVal)
+  end
+
+  def textRangeFindText(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, text : Win32cr::Foundation::BSTR, backward : Win32cr::Foundation::BOOL, ignoreCase : Win32cr::Foundation::BOOL, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    C.TextRange_FindText(hobj, text, backward, ignoreCase, pRetVal)
+  end
+
+  def textRangeGetBoundingRectangles(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+    C.TextRange_GetBoundingRectangles(hobj, pRetVal)
+  end
+
+  def textRangeGetEnclosingElement(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    C.TextRange_GetEnclosingElement(hobj, pRetVal)
+  end
+
+  def textRangeGetText(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, maxLength : Int32, pRetVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    C.TextRange_GetText(hobj, maxLength, pRetVal)
+  end
+
+  def textRangeMove(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, unit : Win32cr::UI::Accessibility::TextUnit, count : Int32, pRetVal : Int32*) : Win32cr::Foundation::HRESULT
+    C.TextRange_Move(hobj, unit, count, pRetVal)
+  end
+
+  def textRangeMoveEndpointByUnit(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, endpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint, unit : Win32cr::UI::Accessibility::TextUnit, count : Int32, pRetVal : Int32*) : Win32cr::Foundation::HRESULT
+    C.TextRange_MoveEndpointByUnit(hobj, endpoint, unit, count, pRetVal)
+  end
+
+  def textRangeMoveEndpointByRange(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, endpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint, targetRange : Win32cr::UI::Accessibility::HUIATEXTRANGE, targetEndpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint) : Win32cr::Foundation::HRESULT
+    C.TextRange_MoveEndpointByRange(hobj, endpoint, targetRange, targetEndpoint)
+  end
+
+  def textRangeSelect(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE) : Win32cr::Foundation::HRESULT
+    C.TextRange_Select(hobj)
+  end
+
+  def textRangeAddToSelection(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE) : Win32cr::Foundation::HRESULT
+    C.TextRange_AddToSelection(hobj)
+  end
+
+  def textRangeRemoveFromSelection(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE) : Win32cr::Foundation::HRESULT
+    C.TextRange_RemoveFromSelection(hobj)
+  end
+
+  def textRangeScrollIntoView(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, alignToTop : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    C.TextRange_ScrollIntoView(hobj, alignToTop)
+  end
+
+  def textRangeGetChildren(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+    C.TextRange_GetChildren(hobj, pRetVal)
+  end
+
+  def itemContainerPatternFindItemByProperty(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, hnodeStartAfter : Win32cr::UI::Accessibility::HUIANODE, propertyId : Int32, value : Win32cr::System::Com::VARIANT, pFound : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    C.ItemContainerPattern_FindItemByProperty(hobj, hnodeStartAfter, propertyId, value, pFound)
+  end
+
+  def legacyIAccessiblePatternSelect(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, flagsSelect : Int32) : Win32cr::Foundation::HRESULT
+    C.LegacyIAccessiblePattern_Select(hobj, flagsSelect)
+  end
+
+  def legacyIAccessiblePatternDoDefaultAction(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    C.LegacyIAccessiblePattern_DoDefaultAction(hobj)
+  end
+
+  def legacyIAccessiblePatternSetValue(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, szValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.LegacyIAccessiblePattern_SetValue(hobj, szValue)
+  end
+
+  def legacyIAccessiblePatternGetIAccessible(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pAccessible : Void**) : Win32cr::Foundation::HRESULT
+    C.LegacyIAccessiblePattern_GetIAccessible(hobj, pAccessible)
+  end
+
+  def synchronizedInputPatternStartListening(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, inputType : Win32cr::UI::Accessibility::SynchronizedInputType) : Win32cr::Foundation::HRESULT
+    C.SynchronizedInputPattern_StartListening(hobj, inputType)
+  end
+
+  def synchronizedInputPatternCancel(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    C.SynchronizedInputPattern_Cancel(hobj)
+  end
+
+  def virtualizedItemPatternRealize(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    C.VirtualizedItemPattern_Realize(hobj)
+  end
+
+  def uiaPatternRelease(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::BOOL
+    C.UiaPatternRelease(hobj)
+  end
+
+  def uiaTextRangeRelease(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE) : Win32cr::Foundation::BOOL
+    C.UiaTextRangeRelease(hobj)
+  end
+
+  def uiaReturnRawElementProvider(hwnd : Win32cr::Foundation::HWND, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, el : Void*) : Win32cr::Foundation::LRESULT
+    C.UiaReturnRawElementProvider(hwnd, wParam, lParam, el)
+  end
+
+  def uiaHostProviderFromHwnd(hwnd : Win32cr::Foundation::HWND, ppProvider : Void**) : Win32cr::Foundation::HRESULT
+    C.UiaHostProviderFromHwnd(hwnd, ppProvider)
+  end
+
+  def uiaProviderForNonClient(hwnd : Win32cr::Foundation::HWND, idObject : Int32, idChild : Int32, ppProvider : Void**) : Win32cr::Foundation::HRESULT
+    C.UiaProviderForNonClient(hwnd, idObject, idChild, ppProvider)
+  end
+
+  def uiaIAccessibleFromProvider(pProvider : Void*, dwFlags : UInt32, ppAccessible : Void**, pvarChild : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    C.UiaIAccessibleFromProvider(pProvider, dwFlags, ppAccessible, pvarChild)
+  end
+
+  def uiaProviderFromIAccessible(pAccessible : Void*, idChild : Int32, dwFlags : UInt32, ppProvider : Void**) : Win32cr::Foundation::HRESULT
+    C.UiaProviderFromIAccessible(pAccessible, idChild, dwFlags, ppProvider)
+  end
+
+  def uiaDisconnectAllProviders : Win32cr::Foundation::HRESULT
+    C.UiaDisconnectAllProviders
+  end
+
+  def uiaDisconnectProvider(pProvider : Void*) : Win32cr::Foundation::HRESULT
+    C.UiaDisconnectProvider(pProvider)
+  end
+
+  def uiaHasServerSideProvider(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.UiaHasServerSideProvider(hwnd)
+  end
+
+  def registerPointerInputTarget(hwnd : Win32cr::Foundation::HWND, pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE) : Win32cr::Foundation::BOOL
+    C.RegisterPointerInputTarget(hwnd, pointerType)
+  end
+
+  def unregisterPointerInputTarget(hwnd : Win32cr::Foundation::HWND, pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE) : Win32cr::Foundation::BOOL
+    C.UnregisterPointerInputTarget(hwnd, pointerType)
+  end
+
+  def registerPointerInputTargetEx(hwnd : Win32cr::Foundation::HWND, pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE, fObserve : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.RegisterPointerInputTargetEx(hwnd, pointerType, fObserve)
+  end
+
+  def unregisterPointerInputTargetEx(hwnd : Win32cr::Foundation::HWND, pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE) : Win32cr::Foundation::BOOL
+    C.UnregisterPointerInputTargetEx(hwnd, pointerType)
+  end
+
+  def notifyWinEvent(event : UInt32, hwnd : Win32cr::Foundation::HWND, idObject : Int32, idChild : Int32) : Void
+    C.NotifyWinEvent(event, hwnd, idObject, idChild)
+  end
+
+  def setWinEventHook(eventMin : UInt32, eventMax : UInt32, hmodWinEventProc : Win32cr::Foundation::HINSTANCE, pfnWinEventProc : Win32cr::UI::Accessibility::WINEVENTPROC, idProcess : UInt32, idThread : UInt32, dwFlags : UInt32) : Win32cr::UI::Accessibility::HWINEVENTHOOK
+    C.SetWinEventHook(eventMin, eventMax, hmodWinEventProc, pfnWinEventProc, idProcess, idThread, dwFlags)
+  end
+
+  def isWinEventHookInstalled(event : UInt32) : Win32cr::Foundation::BOOL
+    C.IsWinEventHookInstalled(event)
+  end
+
+  def unhookWinEvent(hWinEventHook : Win32cr::UI::Accessibility::HWINEVENTHOOK) : Win32cr::Foundation::BOOL
+    C.UnhookWinEvent(hWinEventHook)
+  end
+
   @[Link("oleacc")]
   @[Link("uiautomationcore")]
   @[Link("user32")]
   lib C
+    # :nodoc:
     fun LresultFromObject(riid : LibC::GUID*, wParam : Win32cr::Foundation::WPARAM, punk : Void*) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun ObjectFromLresult(lResult : Win32cr::Foundation::LRESULT, riid : LibC::GUID*, wParam : Win32cr::Foundation::WPARAM, ppvObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowFromAccessibleObject(param0 : Void*, phwnd : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun AccessibleObjectFromWindow(hwnd : Win32cr::Foundation::HWND, dwId : UInt32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun AccessibleObjectFromEvent(hwnd : Win32cr::Foundation::HWND, dwId : UInt32, dwChildId : UInt32, ppacc : Void**, pvarChild : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun AccessibleObjectFromPoint(ptScreen : Win32cr::Foundation::POINT, ppacc : Void**, pvarChild : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun AccessibleChildren(paccContainer : Void*, iChildStart : Int32, cChildren : Int32, rgvarChildren : Win32cr::System::Com::VARIANT*, pcObtained : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetRoleTextA(lRole : UInt32, lpszRole : UInt8*, cchRoleMax : UInt32) : UInt32
 
+    # :nodoc:
     fun GetRoleTextW(lRole : UInt32, lpszRole : UInt16*, cchRoleMax : UInt32) : UInt32
 
+    # :nodoc:
     fun GetStateTextA(lStateBit : UInt32, lpszState : UInt8*, cchState : UInt32) : UInt32
 
+    # :nodoc:
     fun GetStateTextW(lStateBit : UInt32, lpszState : UInt16*, cchState : UInt32) : UInt32
 
+    # :nodoc:
     fun GetOleaccVersionInfo(pVer : UInt32*, pBuild : UInt32*) : Void
 
+    # :nodoc:
     fun CreateStdAccessibleObject(hwnd : Win32cr::Foundation::HWND, idObject : Int32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateStdAccessibleProxyA(hwnd : Win32cr::Foundation::HWND, pClassName : Win32cr::Foundation::PSTR, idObject : Int32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateStdAccessibleProxyW(hwnd : Win32cr::Foundation::HWND, pClassName : Win32cr::Foundation::PWSTR, idObject : Int32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun AccSetRunningUtilityState(hwndApp : Win32cr::Foundation::HWND, dwUtilityStateMask : UInt32, dwUtilityState : Win32cr::UI::Accessibility::ACC_UTILITY_STATE_FLAGS) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun AccNotifyTouchInteraction(hwndApp : Win32cr::Foundation::HWND, hwndTarget : Win32cr::Foundation::HWND, ptTarget : Win32cr::Foundation::POINT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaGetErrorDescription(pDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UiaHUiaNodeFromVariant(pvar : Win32cr::System::Com::VARIANT*, phnode : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaHPatternObjectFromVariant(pvar : Win32cr::System::Com::VARIANT*, phobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaHTextRangeFromVariant(pvar : Win32cr::System::Com::VARIANT*, phtextrange : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaNodeRelease(hnode : Win32cr::UI::Accessibility::HUIANODE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UiaGetPropertyValue(hnode : Win32cr::UI::Accessibility::HUIANODE, propertyId : Int32, pValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaGetPatternProvider(hnode : Win32cr::UI::Accessibility::HUIANODE, patternId : Int32, phobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaGetRuntimeId(hnode : Win32cr::UI::Accessibility::HUIANODE, pruntimeId : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaSetFocus(hnode : Win32cr::UI::Accessibility::HUIANODE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaNavigate(hnode : Win32cr::UI::Accessibility::HUIANODE, direction : Win32cr::UI::Accessibility::NavigateDirection, pCondition : Win32cr::UI::Accessibility::UiaCondition*, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppTreeStructure : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaGetUpdatedCache(hnode : Win32cr::UI::Accessibility::HUIANODE, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, normalizeState : Win32cr::UI::Accessibility::NormalizeState, pNormalizeCondition : Win32cr::UI::Accessibility::UiaCondition*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppTreeStructure : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaFind(hnode : Win32cr::UI::Accessibility::HUIANODE, pParams : Win32cr::UI::Accessibility::UiaFindParams*, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppOffsets : Win32cr::System::Com::SAFEARRAY**, ppTreeStructures : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaNodeFromPoint(x : Float64, y : Float64, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppTreeStructure : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaNodeFromFocus(pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppTreeStructure : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaNodeFromHandle(hwnd : Win32cr::Foundation::HWND, phnode : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaNodeFromProvider(pProvider : Void*, phnode : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaGetRootNode(phnode : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaRegisterProviderCallback(pCallback : Win32cr::UI::Accessibility::UiaProviderCallback*) : Void
 
+    # :nodoc:
     fun UiaLookupId(type__ : Win32cr::UI::Accessibility::AutomationIdentifierType, pGuid : LibC::GUID*) : Int32
 
+    # :nodoc:
     fun UiaGetReservedNotSupportedValue(punkNotSupportedValue : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaGetReservedMixedAttributeValue(punkMixedAttributeValue : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaClientsAreListening : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UiaRaiseAutomationPropertyChangedEvent(pProvider : Void*, id : Int32, oldValue : Win32cr::System::Com::VARIANT, newValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaRaiseAutomationEvent(pProvider : Void*, id : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaRaiseStructureChangedEvent(pProvider : Void*, structureChangeType : Win32cr::UI::Accessibility::StructureChangeType, pRuntimeId : Int32*, cRuntimeIdLen : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaRaiseAsyncContentLoadedEvent(pProvider : Void*, asyncContentLoadedState : Win32cr::UI::Accessibility::AsyncContentLoadedState, percentComplete : Float64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaRaiseTextEditTextChangedEvent(pProvider : Void*, textEditChangeType : Win32cr::UI::Accessibility::TextEditChangeType, pChangedData : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaRaiseChangesEvent(pProvider : Void*, eventIdCount : Int32, pUiaChanges : Win32cr::UI::Accessibility::UiaChangeInfo*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaRaiseNotificationEvent(provider : Void*, notificationKind : Win32cr::UI::Accessibility::NotificationKind, notificationProcessing : Win32cr::UI::Accessibility::NotificationProcessing, displayString : Win32cr::Foundation::BSTR, activityId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaRaiseActiveTextPositionChangedEvent(provider : Void*, textRange : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaAddEvent(hnode : Win32cr::UI::Accessibility::HUIANODE, eventId : Int32, pCallback : Win32cr::UI::Accessibility::UiaEventCallback*, scope : Win32cr::UI::Accessibility::TreeScope, pProperties : Int32*, cProperties : Int32, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, phEvent : Win32cr::UI::Accessibility::HUIAEVENT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaRemoveEvent(hEvent : Win32cr::UI::Accessibility::HUIAEVENT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaEventAddWindow(hEvent : Win32cr::UI::Accessibility::HUIAEVENT, hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaEventRemoveWindow(hEvent : Win32cr::UI::Accessibility::HUIAEVENT, hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DockPattern_SetDockPosition(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, dockPosition : Win32cr::UI::Accessibility::DockPosition) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ExpandCollapsePattern_Collapse(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ExpandCollapsePattern_Expand(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GridPattern_GetItem(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, row : Int32, column : Int32, pResult : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun InvokePattern_Invoke(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MultipleViewPattern_GetViewName(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, viewId : Int32, ppStr : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MultipleViewPattern_SetCurrentView(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, viewId : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RangeValuePattern_SetValue(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, val : Float64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ScrollItemPattern_ScrollIntoView(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ScrollPattern_Scroll(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, horizontalAmount : Win32cr::UI::Accessibility::ScrollAmount, verticalAmount : Win32cr::UI::Accessibility::ScrollAmount) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ScrollPattern_SetScrollPercent(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, horizontalPercent : Float64, verticalPercent : Float64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SelectionItemPattern_AddToSelection(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SelectionItemPattern_RemoveFromSelection(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SelectionItemPattern_Select(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TogglePattern_Toggle(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TransformPattern_Move(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, x : Float64, y : Float64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TransformPattern_Resize(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, width : Float64, height : Float64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TransformPattern_Rotate(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, degrees : Float64) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ValuePattern_SetValue(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pVal : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowPattern_Close(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowPattern_SetWindowVisualState(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, state : Win32cr::UI::Accessibility::WindowVisualState) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WindowPattern_WaitForInputIdle(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, milliseconds : Int32, pResult : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextPattern_GetSelection(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pRetVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextPattern_GetVisibleRanges(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pRetVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextPattern_RangeFromChild(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, hnodeChild : Win32cr::UI::Accessibility::HUIANODE, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextPattern_RangeFromPoint(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, point : Win32cr::UI::Accessibility::UiaPoint, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextPattern_get_DocumentRange(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextPattern_get_SupportedTextSelection(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pRetVal : Win32cr::UI::Accessibility::SupportedTextSelection*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_Clone(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_Compare(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, range : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_CompareEndpoints(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, endpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint, targetRange : Win32cr::UI::Accessibility::HUIATEXTRANGE, targetEndpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint, pRetVal : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_ExpandToEnclosingUnit(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, unit : Win32cr::UI::Accessibility::TextUnit) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_GetAttributeValue(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, attributeId : Int32, pRetVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_FindAttribute(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, attributeId : Int32, val : Win32cr::System::Com::VARIANT, backward : Win32cr::Foundation::BOOL, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_FindText(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, text : Win32cr::Foundation::BSTR, backward : Win32cr::Foundation::BOOL, ignoreCase : Win32cr::Foundation::BOOL, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_GetBoundingRectangles(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_GetEnclosingElement(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_GetText(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, maxLength : Int32, pRetVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_Move(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, unit : Win32cr::UI::Accessibility::TextUnit, count : Int32, pRetVal : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_MoveEndpointByUnit(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, endpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint, unit : Win32cr::UI::Accessibility::TextUnit, count : Int32, pRetVal : Int32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_MoveEndpointByRange(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, endpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint, targetRange : Win32cr::UI::Accessibility::HUIATEXTRANGE, targetEndpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_Select(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_AddToSelection(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_RemoveFromSelection(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_ScrollIntoView(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, alignToTop : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun TextRange_GetChildren(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ItemContainerPattern_FindItemByProperty(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, hnodeStartAfter : Win32cr::UI::Accessibility::HUIANODE, propertyId : Int32, value : Win32cr::System::Com::VARIANT, pFound : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LegacyIAccessiblePattern_Select(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, flagsSelect : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LegacyIAccessiblePattern_DoDefaultAction(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LegacyIAccessiblePattern_SetValue(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, szValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun LegacyIAccessiblePattern_GetIAccessible(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pAccessible : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SynchronizedInputPattern_StartListening(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, inputType : Win32cr::UI::Accessibility::SynchronizedInputType) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SynchronizedInputPattern_Cancel(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun VirtualizedItemPattern_Realize(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaPatternRelease(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UiaTextRangeRelease(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UiaReturnRawElementProvider(hwnd : Win32cr::Foundation::HWND, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, el : Void*) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun UiaHostProviderFromHwnd(hwnd : Win32cr::Foundation::HWND, ppProvider : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaProviderForNonClient(hwnd : Win32cr::Foundation::HWND, idObject : Int32, idChild : Int32, ppProvider : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaIAccessibleFromProvider(pProvider : Void*, dwFlags : UInt32, ppAccessible : Void**, pvarChild : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaProviderFromIAccessible(pAccessible : Void*, idChild : Int32, dwFlags : UInt32, ppProvider : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaDisconnectAllProviders : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaDisconnectProvider(pProvider : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun UiaHasServerSideProvider(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterPointerInputTarget(hwnd : Win32cr::Foundation::HWND, pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnregisterPointerInputTarget(hwnd : Win32cr::Foundation::HWND, pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterPointerInputTargetEx(hwnd : Win32cr::Foundation::HWND, pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE, fObserve : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnregisterPointerInputTargetEx(hwnd : Win32cr::Foundation::HWND, pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun NotifyWinEvent(event : UInt32, hwnd : Win32cr::Foundation::HWND, idObject : Int32, idChild : Int32) : Void
 
+    # :nodoc:
     fun SetWinEventHook(eventMin : UInt32, eventMax : UInt32, hmodWinEventProc : Win32cr::Foundation::HINSTANCE, pfnWinEventProc : Win32cr::UI::Accessibility::WINEVENTPROC, idProcess : UInt32, idThread : UInt32, dwFlags : UInt32) : Win32cr::UI::Accessibility::HWINEVENTHOOK
 
+    # :nodoc:
     fun IsWinEventHookInstalled(event : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnhookWinEvent(hWinEventHook : Win32cr::UI::Accessibility::HWINEVENTHOOK) : Win32cr::Foundation::BOOL
 
   end

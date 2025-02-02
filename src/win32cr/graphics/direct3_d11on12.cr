@@ -5,6 +5,7 @@ require "./../foundation.cr"
 require "./direct3_d12.cr"
 
 module Win32cr::Graphics::Direct3D11on12
+  extend self
   alias PFN_D3D11ON12_CREATE_DEVICE = Proc(Void*, UInt32, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, UInt32, Void**, UInt32, UInt32, Void**, Void**, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, Win32cr::Foundation::HRESULT)
 
 
@@ -137,8 +138,13 @@ module Win32cr::Graphics::Direct3D11on12
 
   end
 
+  def d3D11On12CreateDevice(pDevice : Void*, flags : UInt32, pFeatureLevels : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, feature_levels : UInt32, ppCommandQueues : Void**, num_queues : UInt32, node_mask : UInt32, ppDevice : Void**, ppImmediateContext : Void**, pChosenFeatureLevel : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*) : Win32cr::Foundation::HRESULT
+    C.D3D11On12CreateDevice(pDevice, flags, pFeatureLevels, feature_levels, ppCommandQueues, num_queues, node_mask, ppDevice, ppImmediateContext, pChosenFeatureLevel)
+  end
+
   @[Link("d3d11")]
   lib C
+    # :nodoc:
     fun D3D11On12CreateDevice(pDevice : Void*, flags : UInt32, pFeatureLevels : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, feature_levels : UInt32, ppCommandQueues : Void**, num_queues : UInt32, node_mask : UInt32, ppDevice : Void**, ppImmediateContext : Void**, pChosenFeatureLevel : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*) : Win32cr::Foundation::HRESULT
 
   end

@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./../system/com.cr"
 
 module Win32cr::UI::Notifications
+  extend self
 
 
   @[Extern]

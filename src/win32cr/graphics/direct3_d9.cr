@@ -4,6 +4,7 @@ require "./../system/com.cr"
 require "./gdi.cr"
 
 module Win32cr::Graphics::Direct3D9
+  extend self
   D3DRTYPECOUNT = 8_u32
   D3DCS_LEFT = 1_i32
   D3DCS_RIGHT = 2_i32
@@ -4143,24 +4144,69 @@ module Win32cr::Graphics::Direct3D9
 
   end
 
+  def direct3DCreate9(sdk_version : UInt32) : Void*
+    C.Direct3DCreate9(sdk_version)
+  end
+
+  def d3DPERFBeginEvent(col : UInt32, wszName : Win32cr::Foundation::PWSTR) : Int32
+    C.D3DPERF_BeginEvent(col, wszName)
+  end
+
+  def d3DPERFEndEvent : Int32
+    C.D3DPERF_EndEvent
+  end
+
+  def d3DPERFSetMarker(col : UInt32, wszName : Win32cr::Foundation::PWSTR) : Void
+    C.D3DPERF_SetMarker(col, wszName)
+  end
+
+  def d3DPERFSetRegion(col : UInt32, wszName : Win32cr::Foundation::PWSTR) : Void
+    C.D3DPERF_SetRegion(col, wszName)
+  end
+
+  def d3DPERFQueryRepeatFrame : Win32cr::Foundation::BOOL
+    C.D3DPERF_QueryRepeatFrame
+  end
+
+  def d3DPERFSetOptions(dwOptions : UInt32) : Void
+    C.D3DPERF_SetOptions(dwOptions)
+  end
+
+  def d3DPERFGetStatus : UInt32
+    C.D3DPERF_GetStatus
+  end
+
+  def direct3DCreate9Ex(sdk_version : UInt32, param1 : Void**) : Win32cr::Foundation::HRESULT
+    C.Direct3DCreate9Ex(sdk_version, param1)
+  end
+
   @[Link("d3d9")]
   lib C
+    # :nodoc:
     fun Direct3DCreate9(sdk_version : UInt32) : Void*
 
+    # :nodoc:
     fun D3DPERF_BeginEvent(col : UInt32, wszName : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun D3DPERF_EndEvent : Int32
 
+    # :nodoc:
     fun D3DPERF_SetMarker(col : UInt32, wszName : Win32cr::Foundation::PWSTR) : Void
 
+    # :nodoc:
     fun D3DPERF_SetRegion(col : UInt32, wszName : Win32cr::Foundation::PWSTR) : Void
 
+    # :nodoc:
     fun D3DPERF_QueryRepeatFrame : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun D3DPERF_SetOptions(dwOptions : UInt32) : Void
 
+    # :nodoc:
     fun D3DPERF_GetStatus : UInt32
 
+    # :nodoc:
     fun Direct3DCreate9Ex(sdk_version : UInt32, param1 : Void**) : Win32cr::Foundation::HRESULT
 
   end

@@ -5,6 +5,7 @@ require "./../graphics/gdi.cr"
 require "./../ui/accessibility.cr"
 
 module Win32cr::System::AssessmentTool
+  extend self
 
   CLSID_CInitiateWinSAT = LibC::GUID.new(0x489331dc_u32, 0xf5e0_u16, 0x4528_u16, StaticArray[0x9f_u8, 0xda_u8, 0x45_u8, 0x33_u8, 0x1b_u8, 0xf4_u8, 0xa5_u8, 0x71_u8])
 

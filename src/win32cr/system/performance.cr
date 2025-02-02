@@ -3,6 +3,7 @@ require "./com.cr"
 require "./ole.cr"
 
 module Win32cr::System::Performance
+  extend self
   alias PerfProviderHandle = LibC::IntPtrT
   alias PerfQueryHandle = LibC::IntPtrT
   alias PLA_CABEXTRACT_CALLBACK = Proc(Win32cr::Foundation::PWSTR, Void*, Void)
@@ -5340,281 +5341,956 @@ module Win32cr::System::Performance
 
   end
 
+  #def queryPerformanceCounter(lpPerformanceCount : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    #C.QueryPerformanceCounter(lpPerformanceCount)
+  #end
+
+  #def queryPerformanceFrequency(lpFrequency : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    #C.QueryPerformanceFrequency(lpFrequency)
+  #end
+
+  def installPerfDllW(szComputerName : Win32cr::Foundation::PWSTR, lpIniFile : Win32cr::Foundation::PWSTR, dwFlags : LibC::UIntPtrT) : UInt32
+    C.InstallPerfDllW(szComputerName, lpIniFile, dwFlags)
+  end
+
+  def installPerfDllA(szComputerName : Win32cr::Foundation::PSTR, lpIniFile : Win32cr::Foundation::PSTR, dwFlags : LibC::UIntPtrT) : UInt32
+    C.InstallPerfDllA(szComputerName, lpIniFile, dwFlags)
+  end
+
+  def loadPerfCounterTextStringsA(lpCommandLine : Win32cr::Foundation::PSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
+    C.LoadPerfCounterTextStringsA(lpCommandLine, bQuietModeArg)
+  end
+
+  def loadPerfCounterTextStringsW(lpCommandLine : Win32cr::Foundation::PWSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
+    C.LoadPerfCounterTextStringsW(lpCommandLine, bQuietModeArg)
+  end
+
+  def unloadPerfCounterTextStringsW(lpCommandLine : Win32cr::Foundation::PWSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
+    C.UnloadPerfCounterTextStringsW(lpCommandLine, bQuietModeArg)
+  end
+
+  def unloadPerfCounterTextStringsA(lpCommandLine : Win32cr::Foundation::PSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
+    C.UnloadPerfCounterTextStringsA(lpCommandLine, bQuietModeArg)
+  end
+
+  def updatePerfNameFilesA(szNewCtrFilePath : Win32cr::Foundation::PSTR, szNewHlpFilePath : Win32cr::Foundation::PSTR, szLanguageID : Win32cr::Foundation::PSTR, dwFlags : LibC::UIntPtrT) : UInt32
+    C.UpdatePerfNameFilesA(szNewCtrFilePath, szNewHlpFilePath, szLanguageID, dwFlags)
+  end
+
+  def updatePerfNameFilesW(szNewCtrFilePath : Win32cr::Foundation::PWSTR, szNewHlpFilePath : Win32cr::Foundation::PWSTR, szLanguageID : Win32cr::Foundation::PWSTR, dwFlags : LibC::UIntPtrT) : UInt32
+    C.UpdatePerfNameFilesW(szNewCtrFilePath, szNewHlpFilePath, szLanguageID, dwFlags)
+  end
+
+  def setServiceAsTrustedA(szReserved : Win32cr::Foundation::PSTR, szServiceName : Win32cr::Foundation::PSTR) : UInt32
+    C.SetServiceAsTrustedA(szReserved, szServiceName)
+  end
+
+  def setServiceAsTrustedW(szReserved : Win32cr::Foundation::PWSTR, szServiceName : Win32cr::Foundation::PWSTR) : UInt32
+    C.SetServiceAsTrustedW(szReserved, szServiceName)
+  end
+
+  def backupPerfRegistryToFileW(szFileName : Win32cr::Foundation::PWSTR, szCommentString : Win32cr::Foundation::PWSTR) : UInt32
+    C.BackupPerfRegistryToFileW(szFileName, szCommentString)
+  end
+
+  def restorePerfRegistryFromFileW(szFileName : Win32cr::Foundation::PWSTR, szLangId : Win32cr::Foundation::PWSTR) : UInt32
+    C.RestorePerfRegistryFromFileW(szFileName, szLangId)
+  end
+
+  def perfStartProvider(provider_guid : LibC::GUID*, control_callback : Win32cr::System::Performance::PERFLIBREQUEST, phProvider : Win32cr::System::Performance::PerfProviderHandle*) : UInt32
+    C.PerfStartProvider(provider_guid, control_callback, phProvider)
+  end
+
+  def perfStartProviderEx(provider_guid : LibC::GUID*, provider_context : Win32cr::System::Performance::PERF_PROVIDER_CONTEXT*, provider : Win32cr::System::Performance::PerfProviderHandle*) : UInt32
+    C.PerfStartProviderEx(provider_guid, provider_context, provider)
+  end
+
+  def perfStopProvider(provider_handle : Win32cr::System::Performance::PerfProviderHandle) : UInt32
+    C.PerfStopProvider(provider_handle)
+  end
+
+  def perfSetCounterSetInfo(provider_handle : Win32cr::Foundation::HANDLE, template : Win32cr::System::Performance::PERF_COUNTERSET_INFO*, template_size : UInt32) : UInt32
+    C.PerfSetCounterSetInfo(provider_handle, template, template_size)
+  end
+
+  def perfCreateInstance(provider_handle : Win32cr::System::Performance::PerfProviderHandle, counter_set_guid : LibC::GUID*, name : Win32cr::Foundation::PWSTR, id : UInt32) : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*
+    C.PerfCreateInstance(provider_handle, counter_set_guid, name, id)
+  end
+
+  def perfDeleteInstance(provider : Win32cr::System::Performance::PerfProviderHandle, instance_block : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*) : UInt32
+    C.PerfDeleteInstance(provider, instance_block)
+  end
+
+  def perfQueryInstance(provider_handle : Win32cr::Foundation::HANDLE, counter_set_guid : LibC::GUID*, name : Win32cr::Foundation::PWSTR, id : UInt32) : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*
+    C.PerfQueryInstance(provider_handle, counter_set_guid, name, id)
+  end
+
+  def perfSetCounterRefValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, address : Void*) : UInt32
+    C.PerfSetCounterRefValue(provider, instance, counter_id, address)
+  end
+
+  def perfSetULongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt32) : UInt32
+    C.PerfSetULongCounterValue(provider, instance, counter_id, value)
+  end
+
+  def perfSetULongLongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt64) : UInt32
+    C.PerfSetULongLongCounterValue(provider, instance, counter_id, value)
+  end
+
+  def perfIncrementULongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt32) : UInt32
+    C.PerfIncrementULongCounterValue(provider, instance, counter_id, value)
+  end
+
+  def perfIncrementULongLongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt64) : UInt32
+    C.PerfIncrementULongLongCounterValue(provider, instance, counter_id, value)
+  end
+
+  def perfDecrementULongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt32) : UInt32
+    C.PerfDecrementULongCounterValue(provider, instance, counter_id, value)
+  end
+
+  def perfDecrementULongLongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt64) : UInt32
+    C.PerfDecrementULongLongCounterValue(provider, instance, counter_id, value)
+  end
+
+  def perfEnumerateCounterSet(szMachine : Win32cr::Foundation::PWSTR, pCounterSetIds : LibC::GUID*, cCounterSetIds : UInt32, pcCounterSetIdsActual : UInt32*) : UInt32
+    C.PerfEnumerateCounterSet(szMachine, pCounterSetIds, cCounterSetIds, pcCounterSetIdsActual)
+  end
+
+  def perfEnumerateCounterSetInstances(szMachine : Win32cr::Foundation::PWSTR, pCounterSetId : LibC::GUID*, pInstances : Win32cr::System::Performance::PERF_INSTANCE_HEADER*, cbInstances : UInt32, pcbInstancesActual : UInt32*) : UInt32
+    C.PerfEnumerateCounterSetInstances(szMachine, pCounterSetId, pInstances, cbInstances, pcbInstancesActual)
+  end
+
+  def perfQueryCounterSetRegistrationInfo(szMachine : Win32cr::Foundation::PWSTR, pCounterSetId : LibC::GUID*, requestCode : Win32cr::System::Performance::PerfRegInfoType, requestLangId : UInt32, pbRegInfo : UInt8*, cbRegInfo : UInt32, pcbRegInfoActual : UInt32*) : UInt32
+    C.PerfQueryCounterSetRegistrationInfo(szMachine, pCounterSetId, requestCode, requestLangId, pbRegInfo, cbRegInfo, pcbRegInfoActual)
+  end
+
+  def perfOpenQueryHandle(szMachine : Win32cr::Foundation::PWSTR, phQuery : Win32cr::System::Performance::PerfQueryHandle*) : UInt32
+    C.PerfOpenQueryHandle(szMachine, phQuery)
+  end
+
+  def perfCloseQueryHandle(hQuery : Win32cr::Foundation::HANDLE) : UInt32
+    C.PerfCloseQueryHandle(hQuery)
+  end
+
+  def perfQueryCounterInfo(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounters : Win32cr::System::Performance::PERF_COUNTER_IDENTIFIER*, cbCounters : UInt32, pcbCountersActual : UInt32*) : UInt32
+    C.PerfQueryCounterInfo(hQuery, pCounters, cbCounters, pcbCountersActual)
+  end
+
+  def perfQueryCounterData(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounterBlock : Win32cr::System::Performance::PERF_DATA_HEADER*, cbCounterBlock : UInt32, pcbCounterBlockActual : UInt32*) : UInt32
+    C.PerfQueryCounterData(hQuery, pCounterBlock, cbCounterBlock, pcbCounterBlockActual)
+  end
+
+  def perfAddCounters(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounters : Win32cr::System::Performance::PERF_COUNTER_IDENTIFIER*, cbCounters : UInt32) : UInt32
+    C.PerfAddCounters(hQuery, pCounters, cbCounters)
+  end
+
+  def perfDeleteCounters(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounters : Win32cr::System::Performance::PERF_COUNTER_IDENTIFIER*, cbCounters : UInt32) : UInt32
+    C.PerfDeleteCounters(hQuery, pCounters, cbCounters)
+  end
+
+  def pdhGetDllVersion(lpdwVersion : Win32cr::System::Performance::PDH_DLL_VERSION*) : Int32
+    C.PdhGetDllVersion(lpdwVersion)
+  end
+
+  def pdhOpenQueryW(szDataSource : Win32cr::Foundation::PWSTR, dwUserData : LibC::UIntPtrT, phQuery : LibC::IntPtrT*) : Int32
+    C.PdhOpenQueryW(szDataSource, dwUserData, phQuery)
+  end
+
+  def pdhOpenQueryA(szDataSource : Win32cr::Foundation::PSTR, dwUserData : LibC::UIntPtrT, phQuery : LibC::IntPtrT*) : Int32
+    C.PdhOpenQueryA(szDataSource, dwUserData, phQuery)
+  end
+
+  def pdhAddCounterW(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PWSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
+    C.PdhAddCounterW(hQuery, szFullCounterPath, dwUserData, phCounter)
+  end
+
+  def pdhAddCounterA(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
+    C.PdhAddCounterA(hQuery, szFullCounterPath, dwUserData, phCounter)
+  end
+
+  def pdhAddEnglishCounterW(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PWSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
+    C.PdhAddEnglishCounterW(hQuery, szFullCounterPath, dwUserData, phCounter)
+  end
+
+  def pdhAddEnglishCounterA(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
+    C.PdhAddEnglishCounterA(hQuery, szFullCounterPath, dwUserData, phCounter)
+  end
+
+  def pdhCollectQueryDataWithTime(hQuery : LibC::IntPtrT, pllTimeStamp : Int64*) : Int32
+    C.PdhCollectQueryDataWithTime(hQuery, pllTimeStamp)
+  end
+
+  def pdhValidatePathExW(hDataSource : LibC::IntPtrT, szFullPathBuffer : Win32cr::Foundation::PWSTR) : Int32
+    C.PdhValidatePathExW(hDataSource, szFullPathBuffer)
+  end
+
+  def pdhValidatePathExA(hDataSource : LibC::IntPtrT, szFullPathBuffer : Win32cr::Foundation::PSTR) : Int32
+    C.PdhValidatePathExA(hDataSource, szFullPathBuffer)
+  end
+
+  def pdhRemoveCounter(hCounter : LibC::IntPtrT) : Int32
+    C.PdhRemoveCounter(hCounter)
+  end
+
+  def pdhCollectQueryData(hQuery : LibC::IntPtrT) : Int32
+    C.PdhCollectQueryData(hQuery)
+  end
+
+  def pdhCloseQuery(hQuery : LibC::IntPtrT) : Int32
+    C.PdhCloseQuery(hQuery)
+  end
+
+  def pdhGetFormattedCounterValue(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, lpdwType : UInt32*, pValue : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE*) : Int32
+    C.PdhGetFormattedCounterValue(hCounter, dwFormat, lpdwType, pValue)
+  end
+
+  def pdhGetFormattedCounterArrayA(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE_ITEM_A*) : Int32
+    C.PdhGetFormattedCounterArrayA(hCounter, dwFormat, lpdwBufferSize, lpdwItemCount, item_buffer)
+  end
+
+  def pdhGetFormattedCounterArrayW(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE_ITEM_W*) : Int32
+    C.PdhGetFormattedCounterArrayW(hCounter, dwFormat, lpdwBufferSize, lpdwItemCount, item_buffer)
+  end
+
+  def pdhGetRawCounterValue(hCounter : LibC::IntPtrT, lpdwType : UInt32*, pValue : Win32cr::System::Performance::PDH_RAW_COUNTER*) : Int32
+    C.PdhGetRawCounterValue(hCounter, lpdwType, pValue)
+  end
+
+  def pdhGetRawCounterArrayA(hCounter : LibC::IntPtrT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_RAW_COUNTER_ITEM_A*) : Int32
+    C.PdhGetRawCounterArrayA(hCounter, lpdwBufferSize, lpdwItemCount, item_buffer)
+  end
+
+  def pdhGetRawCounterArrayW(hCounter : LibC::IntPtrT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_RAW_COUNTER_ITEM_W*) : Int32
+    C.PdhGetRawCounterArrayW(hCounter, lpdwBufferSize, lpdwItemCount, item_buffer)
+  end
+
+  def pdhCalculateCounterFromRawValue(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, rawValue1 : Win32cr::System::Performance::PDH_RAW_COUNTER*, rawValue2 : Win32cr::System::Performance::PDH_RAW_COUNTER*, fmtValue : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE*) : Int32
+    C.PdhCalculateCounterFromRawValue(hCounter, dwFormat, rawValue1, rawValue2, fmtValue)
+  end
+
+  def pdhComputeCounterStatistics(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, dwFirstEntry : UInt32, dwNumEntries : UInt32, lpRawValueArray : Win32cr::System::Performance::PDH_RAW_COUNTER*, data : Win32cr::System::Performance::PDH_STATISTICS*) : Int32
+    C.PdhComputeCounterStatistics(hCounter, dwFormat, dwFirstEntry, dwNumEntries, lpRawValueArray, data)
+  end
+
+  def pdhGetCounterInfoW(hCounter : LibC::IntPtrT, bRetrieveExplainText : Win32cr::Foundation::BOOLEAN, pdwBufferSize : UInt32*, lpBuffer : Win32cr::System::Performance::PDH_COUNTER_INFO_W*) : Int32
+    C.PdhGetCounterInfoW(hCounter, bRetrieveExplainText, pdwBufferSize, lpBuffer)
+  end
+
+  def pdhGetCounterInfoA(hCounter : LibC::IntPtrT, bRetrieveExplainText : Win32cr::Foundation::BOOLEAN, pdwBufferSize : UInt32*, lpBuffer : Win32cr::System::Performance::PDH_COUNTER_INFO_A*) : Int32
+    C.PdhGetCounterInfoA(hCounter, bRetrieveExplainText, pdwBufferSize, lpBuffer)
+  end
+
+  def pdhSetCounterScaleFactor(hCounter : LibC::IntPtrT, lFactor : Int32) : Int32
+    C.PdhSetCounterScaleFactor(hCounter, lFactor)
+  end
+
+  def pdhConnectMachineW(szMachineName : Win32cr::Foundation::PWSTR) : Int32
+    C.PdhConnectMachineW(szMachineName)
+  end
+
+  def pdhConnectMachineA(szMachineName : Win32cr::Foundation::PSTR) : Int32
+    C.PdhConnectMachineA(szMachineName)
+  end
+
+  def pdhEnumMachinesW(szDataSource : Win32cr::Foundation::PWSTR, mszMachineList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
+    C.PdhEnumMachinesW(szDataSource, mszMachineList, pcchBufferSize)
+  end
+
+  def pdhEnumMachinesA(szDataSource : Win32cr::Foundation::PSTR, mszMachineList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
+    C.PdhEnumMachinesA(szDataSource, mszMachineList, pcchBufferSize)
+  end
+
+  def pdhEnumObjectsW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, mszObjectList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
+    C.PdhEnumObjectsW(szDataSource, szMachineName, mszObjectList, pcchBufferSize, dwDetailLevel, bRefresh)
+  end
+
+  def pdhEnumObjectsA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, mszObjectList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
+    C.PdhEnumObjectsA(szDataSource, szMachineName, mszObjectList, pcchBufferSize, dwDetailLevel, bRefresh)
+  end
+
+  def pdhEnumObjectItemsW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, mszCounterList : Win32cr::Foundation::PWSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PWSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
+    C.PdhEnumObjectItemsW(szDataSource, szMachineName, szObjectName, mszCounterList, pcchCounterListLength, mszInstanceList, pcchInstanceListLength, dwDetailLevel, dwFlags)
+  end
+
+  def pdhEnumObjectItemsA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, mszCounterList : Win32cr::Foundation::PSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
+    C.PdhEnumObjectItemsA(szDataSource, szMachineName, szObjectName, mszCounterList, pcchCounterListLength, mszInstanceList, pcchInstanceListLength, dwDetailLevel, dwFlags)
+  end
+
+  def pdhMakeCounterPathW(pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_W*, szFullPathBuffer : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*, dwFlags : Win32cr::System::Performance::PDH_PATH_FLAGS) : Int32
+    C.PdhMakeCounterPathW(pCounterPathElements, szFullPathBuffer, pcchBufferSize, dwFlags)
+  end
+
+  def pdhMakeCounterPathA(pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_A*, szFullPathBuffer : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*, dwFlags : Win32cr::System::Performance::PDH_PATH_FLAGS) : Int32
+    C.PdhMakeCounterPathA(pCounterPathElements, szFullPathBuffer, pcchBufferSize, dwFlags)
+  end
+
+  def pdhParseCounterPathW(szFullPathBuffer : Win32cr::Foundation::PWSTR, pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_W*, pdwBufferSize : UInt32*, dwFlags : UInt32) : Int32
+    C.PdhParseCounterPathW(szFullPathBuffer, pCounterPathElements, pdwBufferSize, dwFlags)
+  end
+
+  def pdhParseCounterPathA(szFullPathBuffer : Win32cr::Foundation::PSTR, pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_A*, pdwBufferSize : UInt32*, dwFlags : UInt32) : Int32
+    C.PdhParseCounterPathA(szFullPathBuffer, pCounterPathElements, pdwBufferSize, dwFlags)
+  end
+
+  def pdhParseInstanceNameW(szInstanceString : Win32cr::Foundation::PWSTR, szInstanceName : Win32cr::Foundation::PWSTR, pcchInstanceNameLength : UInt32*, szParentName : Win32cr::Foundation::PWSTR, pcchParentNameLength : UInt32*, lpIndex : UInt32*) : Int32
+    C.PdhParseInstanceNameW(szInstanceString, szInstanceName, pcchInstanceNameLength, szParentName, pcchParentNameLength, lpIndex)
+  end
+
+  def pdhParseInstanceNameA(szInstanceString : Win32cr::Foundation::PSTR, szInstanceName : Win32cr::Foundation::PSTR, pcchInstanceNameLength : UInt32*, szParentName : Win32cr::Foundation::PSTR, pcchParentNameLength : UInt32*, lpIndex : UInt32*) : Int32
+    C.PdhParseInstanceNameA(szInstanceString, szInstanceName, pcchInstanceNameLength, szParentName, pcchParentNameLength, lpIndex)
+  end
+
+  def pdhValidatePathW(szFullPathBuffer : Win32cr::Foundation::PWSTR) : Int32
+    C.PdhValidatePathW(szFullPathBuffer)
+  end
+
+  def pdhValidatePathA(szFullPathBuffer : Win32cr::Foundation::PSTR) : Int32
+    C.PdhValidatePathA(szFullPathBuffer)
+  end
+
+  def pdhGetDefaultPerfObjectW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, szDefaultObjectName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
+    C.PdhGetDefaultPerfObjectW(szDataSource, szMachineName, szDefaultObjectName, pcchBufferSize)
+  end
+
+  def pdhGetDefaultPerfObjectA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, szDefaultObjectName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
+    C.PdhGetDefaultPerfObjectA(szDataSource, szMachineName, szDefaultObjectName, pcchBufferSize)
+  end
+
+  def pdhGetDefaultPerfCounterW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szDefaultCounterName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
+    C.PdhGetDefaultPerfCounterW(szDataSource, szMachineName, szObjectName, szDefaultCounterName, pcchBufferSize)
+  end
+
+  def pdhGetDefaultPerfCounterA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, szDefaultCounterName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
+    C.PdhGetDefaultPerfCounterA(szDataSource, szMachineName, szObjectName, szDefaultCounterName, pcchBufferSize)
+  end
+
+  def pdhBrowseCountersW(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_W*) : Int32
+    C.PdhBrowseCountersW(pBrowseDlgData)
+  end
+
+  def pdhBrowseCountersA(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_A*) : Int32
+    C.PdhBrowseCountersA(pBrowseDlgData)
+  end
+
+  def pdhExpandCounterPathW(szWildCardPath : Win32cr::Foundation::PWSTR, mszExpandedPathList : Win32cr::Foundation::PWSTR, pcchPathListLength : UInt32*) : Int32
+    C.PdhExpandCounterPathW(szWildCardPath, mszExpandedPathList, pcchPathListLength)
+  end
+
+  def pdhExpandCounterPathA(szWildCardPath : Win32cr::Foundation::PSTR, mszExpandedPathList : Win32cr::Foundation::PSTR, pcchPathListLength : UInt32*) : Int32
+    C.PdhExpandCounterPathA(szWildCardPath, mszExpandedPathList, pcchPathListLength)
+  end
+
+  def pdhLookupPerfNameByIndexW(szMachineName : Win32cr::Foundation::PWSTR, dwNameIndex : UInt32, szNameBuffer : Win32cr::Foundation::PWSTR, pcchNameBufferSize : UInt32*) : Int32
+    C.PdhLookupPerfNameByIndexW(szMachineName, dwNameIndex, szNameBuffer, pcchNameBufferSize)
+  end
+
+  def pdhLookupPerfNameByIndexA(szMachineName : Win32cr::Foundation::PSTR, dwNameIndex : UInt32, szNameBuffer : Win32cr::Foundation::PSTR, pcchNameBufferSize : UInt32*) : Int32
+    C.PdhLookupPerfNameByIndexA(szMachineName, dwNameIndex, szNameBuffer, pcchNameBufferSize)
+  end
+
+  def pdhLookupPerfIndexByNameW(szMachineName : Win32cr::Foundation::PWSTR, szNameBuffer : Win32cr::Foundation::PWSTR, pdwIndex : UInt32*) : Int32
+    C.PdhLookupPerfIndexByNameW(szMachineName, szNameBuffer, pdwIndex)
+  end
+
+  def pdhLookupPerfIndexByNameA(szMachineName : Win32cr::Foundation::PSTR, szNameBuffer : Win32cr::Foundation::PSTR, pdwIndex : UInt32*) : Int32
+    C.PdhLookupPerfIndexByNameA(szMachineName, szNameBuffer, pdwIndex)
+  end
+
+  def pdhExpandWildCardPathA(szDataSource : Win32cr::Foundation::PSTR, szWildCardPath : Win32cr::Foundation::PSTR, mszExpandedPathList : Win32cr::Foundation::PSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
+    C.PdhExpandWildCardPathA(szDataSource, szWildCardPath, mszExpandedPathList, pcchPathListLength, dwFlags)
+  end
+
+  def pdhExpandWildCardPathW(szDataSource : Win32cr::Foundation::PWSTR, szWildCardPath : Win32cr::Foundation::PWSTR, mszExpandedPathList : Win32cr::Foundation::PWSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
+    C.PdhExpandWildCardPathW(szDataSource, szWildCardPath, mszExpandedPathList, pcchPathListLength, dwFlags)
+  end
+
+  def pdhOpenLogW(szLogFileName : Win32cr::Foundation::PWSTR, dwAccessFlags : Win32cr::System::Performance::PDH_LOG, lpdwLogType : Win32cr::System::Performance::PDH_LOG_TYPE*, hQuery : LibC::IntPtrT, dwMaxSize : UInt32, szUserCaption : Win32cr::Foundation::PWSTR, phLog : LibC::IntPtrT*) : Int32
+    C.PdhOpenLogW(szLogFileName, dwAccessFlags, lpdwLogType, hQuery, dwMaxSize, szUserCaption, phLog)
+  end
+
+  def pdhOpenLogA(szLogFileName : Win32cr::Foundation::PSTR, dwAccessFlags : Win32cr::System::Performance::PDH_LOG, lpdwLogType : Win32cr::System::Performance::PDH_LOG_TYPE*, hQuery : LibC::IntPtrT, dwMaxSize : UInt32, szUserCaption : Win32cr::Foundation::PSTR, phLog : LibC::IntPtrT*) : Int32
+    C.PdhOpenLogA(szLogFileName, dwAccessFlags, lpdwLogType, hQuery, dwMaxSize, szUserCaption, phLog)
+  end
+
+  def pdhUpdateLogW(hLog : LibC::IntPtrT, szUserString : Win32cr::Foundation::PWSTR) : Int32
+    C.PdhUpdateLogW(hLog, szUserString)
+  end
+
+  def pdhUpdateLogA(hLog : LibC::IntPtrT, szUserString : Win32cr::Foundation::PSTR) : Int32
+    C.PdhUpdateLogA(hLog, szUserString)
+  end
+
+  def pdhUpdateLogFileCatalog(hLog : LibC::IntPtrT) : Int32
+    C.PdhUpdateLogFileCatalog(hLog)
+  end
+
+  def pdhGetLogFileSize(hLog : LibC::IntPtrT, llSize : Int64*) : Int32
+    C.PdhGetLogFileSize(hLog, llSize)
+  end
+
+  def pdhCloseLog(hLog : LibC::IntPtrT, dwFlags : UInt32) : Int32
+    C.PdhCloseLog(hLog, dwFlags)
+  end
+
+  def pdhSelectDataSourceW(hWndOwner : Win32cr::Foundation::HWND, dwFlags : Win32cr::System::Performance::PDH_SELECT_DATA_SOURCE_FLAGS, szDataSource : Win32cr::Foundation::PWSTR, pcchBufferLength : UInt32*) : Int32
+    C.PdhSelectDataSourceW(hWndOwner, dwFlags, szDataSource, pcchBufferLength)
+  end
+
+  def pdhSelectDataSourceA(hWndOwner : Win32cr::Foundation::HWND, dwFlags : Win32cr::System::Performance::PDH_SELECT_DATA_SOURCE_FLAGS, szDataSource : Win32cr::Foundation::PSTR, pcchBufferLength : UInt32*) : Int32
+    C.PdhSelectDataSourceA(hWndOwner, dwFlags, szDataSource, pcchBufferLength)
+  end
+
+  def pdhIsRealTimeQuery(hQuery : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    C.PdhIsRealTimeQuery(hQuery)
+  end
+
+  def pdhSetQueryTimeRange(hQuery : LibC::IntPtrT, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*) : Int32
+    C.PdhSetQueryTimeRange(hQuery, pInfo)
+  end
+
+  def pdhGetDataSourceTimeRangeW(szDataSource : Win32cr::Foundation::PWSTR, pdwNumEntries : UInt32*, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*, pdwBufferSize : UInt32*) : Int32
+    C.PdhGetDataSourceTimeRangeW(szDataSource, pdwNumEntries, pInfo, pdwBufferSize)
+  end
+
+  def pdhGetDataSourceTimeRangeA(szDataSource : Win32cr::Foundation::PSTR, pdwNumEntries : UInt32*, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*, pdwBufferSize : UInt32*) : Int32
+    C.PdhGetDataSourceTimeRangeA(szDataSource, pdwNumEntries, pInfo, pdwBufferSize)
+  end
+
+  def pdhCollectQueryDataEx(hQuery : LibC::IntPtrT, dwIntervalTime : UInt32, hNewDataEvent : Win32cr::Foundation::HANDLE) : Int32
+    C.PdhCollectQueryDataEx(hQuery, dwIntervalTime, hNewDataEvent)
+  end
+
+  def pdhFormatFromRawValue(dwCounterType : UInt32, dwFormat : Win32cr::System::Performance::PDH_FMT, pTimeBase : Int64*, pRawValue1 : Win32cr::System::Performance::PDH_RAW_COUNTER*, pRawValue2 : Win32cr::System::Performance::PDH_RAW_COUNTER*, pFmtValue : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE*) : Int32
+    C.PdhFormatFromRawValue(dwCounterType, dwFormat, pTimeBase, pRawValue1, pRawValue2, pFmtValue)
+  end
+
+  def pdhGetCounterTimeBase(hCounter : LibC::IntPtrT, pTimeBase : Int64*) : Int32
+    C.PdhGetCounterTimeBase(hCounter, pTimeBase)
+  end
+
+  def pdhReadRawLogRecord(hLog : LibC::IntPtrT, ftRecord : Win32cr::Foundation::FILETIME, pRawLogRecord : Win32cr::System::Performance::PDH_RAW_LOG_RECORD*, pdwBufferLength : UInt32*) : Int32
+    C.PdhReadRawLogRecord(hLog, ftRecord, pRawLogRecord, pdwBufferLength)
+  end
+
+  def pdhSetDefaultRealTimeDataSource(dwDataSourceId : Win32cr::System::Performance::REAL_TIME_DATA_SOURCE_ID_FLAGS) : Int32
+    C.PdhSetDefaultRealTimeDataSource(dwDataSourceId)
+  end
+
+  def pdhBindInputDataSourceW(phDataSource : LibC::IntPtrT*, log_file_name_list : Win32cr::Foundation::PWSTR) : Int32
+    C.PdhBindInputDataSourceW(phDataSource, log_file_name_list)
+  end
+
+  def pdhBindInputDataSourceA(phDataSource : LibC::IntPtrT*, log_file_name_list : Win32cr::Foundation::PSTR) : Int32
+    C.PdhBindInputDataSourceA(phDataSource, log_file_name_list)
+  end
+
+  def pdhOpenQueryH(hDataSource : LibC::IntPtrT, dwUserData : LibC::UIntPtrT, phQuery : LibC::IntPtrT*) : Int32
+    C.PdhOpenQueryH(hDataSource, dwUserData, phQuery)
+  end
+
+  def pdhEnumMachinesHW(hDataSource : LibC::IntPtrT, mszMachineList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
+    C.PdhEnumMachinesHW(hDataSource, mszMachineList, pcchBufferSize)
+  end
+
+  def pdhEnumMachinesHA(hDataSource : LibC::IntPtrT, mszMachineList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
+    C.PdhEnumMachinesHA(hDataSource, mszMachineList, pcchBufferSize)
+  end
+
+  def pdhEnumObjectsHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, mszObjectList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
+    C.PdhEnumObjectsHW(hDataSource, szMachineName, mszObjectList, pcchBufferSize, dwDetailLevel, bRefresh)
+  end
+
+  def pdhEnumObjectsHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, mszObjectList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
+    C.PdhEnumObjectsHA(hDataSource, szMachineName, mszObjectList, pcchBufferSize, dwDetailLevel, bRefresh)
+  end
+
+  def pdhEnumObjectItemsHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, mszCounterList : Win32cr::Foundation::PWSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PWSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
+    C.PdhEnumObjectItemsHW(hDataSource, szMachineName, szObjectName, mszCounterList, pcchCounterListLength, mszInstanceList, pcchInstanceListLength, dwDetailLevel, dwFlags)
+  end
+
+  def pdhEnumObjectItemsHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, mszCounterList : Win32cr::Foundation::PSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
+    C.PdhEnumObjectItemsHA(hDataSource, szMachineName, szObjectName, mszCounterList, pcchCounterListLength, mszInstanceList, pcchInstanceListLength, dwDetailLevel, dwFlags)
+  end
+
+  def pdhExpandWildCardPathHW(hDataSource : LibC::IntPtrT, szWildCardPath : Win32cr::Foundation::PWSTR, mszExpandedPathList : Win32cr::Foundation::PWSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
+    C.PdhExpandWildCardPathHW(hDataSource, szWildCardPath, mszExpandedPathList, pcchPathListLength, dwFlags)
+  end
+
+  def pdhExpandWildCardPathHA(hDataSource : LibC::IntPtrT, szWildCardPath : Win32cr::Foundation::PSTR, mszExpandedPathList : Win32cr::Foundation::PSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
+    C.PdhExpandWildCardPathHA(hDataSource, szWildCardPath, mszExpandedPathList, pcchPathListLength, dwFlags)
+  end
+
+  def pdhGetDataSourceTimeRangeH(hDataSource : LibC::IntPtrT, pdwNumEntries : UInt32*, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*, pdwBufferSize : UInt32*) : Int32
+    C.PdhGetDataSourceTimeRangeH(hDataSource, pdwNumEntries, pInfo, pdwBufferSize)
+  end
+
+  def pdhGetDefaultPerfObjectHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, szDefaultObjectName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
+    C.PdhGetDefaultPerfObjectHW(hDataSource, szMachineName, szDefaultObjectName, pcchBufferSize)
+  end
+
+  def pdhGetDefaultPerfObjectHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, szDefaultObjectName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
+    C.PdhGetDefaultPerfObjectHA(hDataSource, szMachineName, szDefaultObjectName, pcchBufferSize)
+  end
+
+  def pdhGetDefaultPerfCounterHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szDefaultCounterName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
+    C.PdhGetDefaultPerfCounterHW(hDataSource, szMachineName, szObjectName, szDefaultCounterName, pcchBufferSize)
+  end
+
+  def pdhGetDefaultPerfCounterHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, szDefaultCounterName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
+    C.PdhGetDefaultPerfCounterHA(hDataSource, szMachineName, szObjectName, szDefaultCounterName, pcchBufferSize)
+  end
+
+  def pdhBrowseCountersHW(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_HW*) : Int32
+    C.PdhBrowseCountersHW(pBrowseDlgData)
+  end
+
+  def pdhBrowseCountersHA(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_HA*) : Int32
+    C.PdhBrowseCountersHA(pBrowseDlgData)
+  end
+
+  def pdhVerifySQLDBW(szDataSource : Win32cr::Foundation::PWSTR) : Int32
+    C.PdhVerifySQLDBW(szDataSource)
+  end
+
+  def pdhVerifySQLDBA(szDataSource : Win32cr::Foundation::PSTR) : Int32
+    C.PdhVerifySQLDBA(szDataSource)
+  end
+
+  def pdhCreateSQLTablesW(szDataSource : Win32cr::Foundation::PWSTR) : Int32
+    C.PdhCreateSQLTablesW(szDataSource)
+  end
+
+  def pdhCreateSQLTablesA(szDataSource : Win32cr::Foundation::PSTR) : Int32
+    C.PdhCreateSQLTablesA(szDataSource)
+  end
+
+  def pdhEnumLogSetNamesW(szDataSource : Win32cr::Foundation::PWSTR, mszDataSetNameList : Win32cr::Foundation::PWSTR, pcchBufferLength : UInt32*) : Int32
+    C.PdhEnumLogSetNamesW(szDataSource, mszDataSetNameList, pcchBufferLength)
+  end
+
+  def pdhEnumLogSetNamesA(szDataSource : Win32cr::Foundation::PSTR, mszDataSetNameList : Win32cr::Foundation::PSTR, pcchBufferLength : UInt32*) : Int32
+    C.PdhEnumLogSetNamesA(szDataSource, mszDataSetNameList, pcchBufferLength)
+  end
+
+  def pdhGetLogSetGUID(hLog : LibC::IntPtrT, pGuid : LibC::GUID*, pRunId : Int32*) : Int32
+    C.PdhGetLogSetGUID(hLog, pGuid, pRunId)
+  end
+
+  def pdhSetLogSetRunID(hLog : LibC::IntPtrT, run_id : Int32) : Int32
+    C.PdhSetLogSetRunID(hLog, run_id)
+  end
+
   @[Link("kernel32")]
   @[Link("loadperf")]
   @[Link("advapi32")]
   @[Link("pdh")]
   lib C
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun QueryPerformanceCounter(lpPerformanceCount : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun QueryPerformanceFrequency(lpFrequency : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InstallPerfDllW(szComputerName : Win32cr::Foundation::PWSTR, lpIniFile : Win32cr::Foundation::PWSTR, dwFlags : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun InstallPerfDllA(szComputerName : Win32cr::Foundation::PSTR, lpIniFile : Win32cr::Foundation::PSTR, dwFlags : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun LoadPerfCounterTextStringsA(lpCommandLine : Win32cr::Foundation::PSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun LoadPerfCounterTextStringsW(lpCommandLine : Win32cr::Foundation::PWSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun UnloadPerfCounterTextStringsW(lpCommandLine : Win32cr::Foundation::PWSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun UnloadPerfCounterTextStringsA(lpCommandLine : Win32cr::Foundation::PSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun UpdatePerfNameFilesA(szNewCtrFilePath : Win32cr::Foundation::PSTR, szNewHlpFilePath : Win32cr::Foundation::PSTR, szLanguageID : Win32cr::Foundation::PSTR, dwFlags : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun UpdatePerfNameFilesW(szNewCtrFilePath : Win32cr::Foundation::PWSTR, szNewHlpFilePath : Win32cr::Foundation::PWSTR, szLanguageID : Win32cr::Foundation::PWSTR, dwFlags : LibC::UIntPtrT) : UInt32
 
+    # :nodoc:
     fun SetServiceAsTrustedA(szReserved : Win32cr::Foundation::PSTR, szServiceName : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun SetServiceAsTrustedW(szReserved : Win32cr::Foundation::PWSTR, szServiceName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun BackupPerfRegistryToFileW(szFileName : Win32cr::Foundation::PWSTR, szCommentString : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RestorePerfRegistryFromFileW(szFileName : Win32cr::Foundation::PWSTR, szLangId : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun PerfStartProvider(provider_guid : LibC::GUID*, control_callback : Win32cr::System::Performance::PERFLIBREQUEST, phProvider : Win32cr::System::Performance::PerfProviderHandle*) : UInt32
 
+    # :nodoc:
     fun PerfStartProviderEx(provider_guid : LibC::GUID*, provider_context : Win32cr::System::Performance::PERF_PROVIDER_CONTEXT*, provider : Win32cr::System::Performance::PerfProviderHandle*) : UInt32
 
+    # :nodoc:
     fun PerfStopProvider(provider_handle : Win32cr::System::Performance::PerfProviderHandle) : UInt32
 
+    # :nodoc:
     fun PerfSetCounterSetInfo(provider_handle : Win32cr::Foundation::HANDLE, template : Win32cr::System::Performance::PERF_COUNTERSET_INFO*, template_size : UInt32) : UInt32
 
+    # :nodoc:
     fun PerfCreateInstance(provider_handle : Win32cr::System::Performance::PerfProviderHandle, counter_set_guid : LibC::GUID*, name : Win32cr::Foundation::PWSTR, id : UInt32) : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*
 
+    # :nodoc:
     fun PerfDeleteInstance(provider : Win32cr::System::Performance::PerfProviderHandle, instance_block : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*) : UInt32
 
+    # :nodoc:
     fun PerfQueryInstance(provider_handle : Win32cr::Foundation::HANDLE, counter_set_guid : LibC::GUID*, name : Win32cr::Foundation::PWSTR, id : UInt32) : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*
 
+    # :nodoc:
     fun PerfSetCounterRefValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, address : Void*) : UInt32
 
+    # :nodoc:
     fun PerfSetULongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt32) : UInt32
 
+    # :nodoc:
     fun PerfSetULongLongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt64) : UInt32
 
+    # :nodoc:
     fun PerfIncrementULongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt32) : UInt32
 
+    # :nodoc:
     fun PerfIncrementULongLongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt64) : UInt32
 
+    # :nodoc:
     fun PerfDecrementULongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt32) : UInt32
 
+    # :nodoc:
     fun PerfDecrementULongLongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt64) : UInt32
 
+    # :nodoc:
     fun PerfEnumerateCounterSet(szMachine : Win32cr::Foundation::PWSTR, pCounterSetIds : LibC::GUID*, cCounterSetIds : UInt32, pcCounterSetIdsActual : UInt32*) : UInt32
 
+    # :nodoc:
     fun PerfEnumerateCounterSetInstances(szMachine : Win32cr::Foundation::PWSTR, pCounterSetId : LibC::GUID*, pInstances : Win32cr::System::Performance::PERF_INSTANCE_HEADER*, cbInstances : UInt32, pcbInstancesActual : UInt32*) : UInt32
 
+    # :nodoc:
     fun PerfQueryCounterSetRegistrationInfo(szMachine : Win32cr::Foundation::PWSTR, pCounterSetId : LibC::GUID*, requestCode : Win32cr::System::Performance::PerfRegInfoType, requestLangId : UInt32, pbRegInfo : UInt8*, cbRegInfo : UInt32, pcbRegInfoActual : UInt32*) : UInt32
 
+    # :nodoc:
     fun PerfOpenQueryHandle(szMachine : Win32cr::Foundation::PWSTR, phQuery : Win32cr::System::Performance::PerfQueryHandle*) : UInt32
 
+    # :nodoc:
     fun PerfCloseQueryHandle(hQuery : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun PerfQueryCounterInfo(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounters : Win32cr::System::Performance::PERF_COUNTER_IDENTIFIER*, cbCounters : UInt32, pcbCountersActual : UInt32*) : UInt32
 
+    # :nodoc:
     fun PerfQueryCounterData(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounterBlock : Win32cr::System::Performance::PERF_DATA_HEADER*, cbCounterBlock : UInt32, pcbCounterBlockActual : UInt32*) : UInt32
 
+    # :nodoc:
     fun PerfAddCounters(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounters : Win32cr::System::Performance::PERF_COUNTER_IDENTIFIER*, cbCounters : UInt32) : UInt32
 
+    # :nodoc:
     fun PerfDeleteCounters(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounters : Win32cr::System::Performance::PERF_COUNTER_IDENTIFIER*, cbCounters : UInt32) : UInt32
 
+    # :nodoc:
     fun PdhGetDllVersion(lpdwVersion : Win32cr::System::Performance::PDH_DLL_VERSION*) : Int32
 
+    # :nodoc:
     fun PdhOpenQueryW(szDataSource : Win32cr::Foundation::PWSTR, dwUserData : LibC::UIntPtrT, phQuery : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun PdhOpenQueryA(szDataSource : Win32cr::Foundation::PSTR, dwUserData : LibC::UIntPtrT, phQuery : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun PdhAddCounterW(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PWSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun PdhAddCounterA(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun PdhAddEnglishCounterW(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PWSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun PdhAddEnglishCounterA(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun PdhCollectQueryDataWithTime(hQuery : LibC::IntPtrT, pllTimeStamp : Int64*) : Int32
 
+    # :nodoc:
     fun PdhValidatePathExW(hDataSource : LibC::IntPtrT, szFullPathBuffer : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun PdhValidatePathExA(hDataSource : LibC::IntPtrT, szFullPathBuffer : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun PdhRemoveCounter(hCounter : LibC::IntPtrT) : Int32
 
+    # :nodoc:
     fun PdhCollectQueryData(hQuery : LibC::IntPtrT) : Int32
 
+    # :nodoc:
     fun PdhCloseQuery(hQuery : LibC::IntPtrT) : Int32
 
+    # :nodoc:
     fun PdhGetFormattedCounterValue(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, lpdwType : UInt32*, pValue : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE*) : Int32
 
+    # :nodoc:
     fun PdhGetFormattedCounterArrayA(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE_ITEM_A*) : Int32
 
+    # :nodoc:
     fun PdhGetFormattedCounterArrayW(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE_ITEM_W*) : Int32
 
+    # :nodoc:
     fun PdhGetRawCounterValue(hCounter : LibC::IntPtrT, lpdwType : UInt32*, pValue : Win32cr::System::Performance::PDH_RAW_COUNTER*) : Int32
 
+    # :nodoc:
     fun PdhGetRawCounterArrayA(hCounter : LibC::IntPtrT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_RAW_COUNTER_ITEM_A*) : Int32
 
+    # :nodoc:
     fun PdhGetRawCounterArrayW(hCounter : LibC::IntPtrT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_RAW_COUNTER_ITEM_W*) : Int32
 
+    # :nodoc:
     fun PdhCalculateCounterFromRawValue(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, rawValue1 : Win32cr::System::Performance::PDH_RAW_COUNTER*, rawValue2 : Win32cr::System::Performance::PDH_RAW_COUNTER*, fmtValue : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE*) : Int32
 
+    # :nodoc:
     fun PdhComputeCounterStatistics(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, dwFirstEntry : UInt32, dwNumEntries : UInt32, lpRawValueArray : Win32cr::System::Performance::PDH_RAW_COUNTER*, data : Win32cr::System::Performance::PDH_STATISTICS*) : Int32
 
+    # :nodoc:
     fun PdhGetCounterInfoW(hCounter : LibC::IntPtrT, bRetrieveExplainText : Win32cr::Foundation::BOOLEAN, pdwBufferSize : UInt32*, lpBuffer : Win32cr::System::Performance::PDH_COUNTER_INFO_W*) : Int32
 
+    # :nodoc:
     fun PdhGetCounterInfoA(hCounter : LibC::IntPtrT, bRetrieveExplainText : Win32cr::Foundation::BOOLEAN, pdwBufferSize : UInt32*, lpBuffer : Win32cr::System::Performance::PDH_COUNTER_INFO_A*) : Int32
 
+    # :nodoc:
     fun PdhSetCounterScaleFactor(hCounter : LibC::IntPtrT, lFactor : Int32) : Int32
 
+    # :nodoc:
     fun PdhConnectMachineW(szMachineName : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun PdhConnectMachineA(szMachineName : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun PdhEnumMachinesW(szDataSource : Win32cr::Foundation::PWSTR, mszMachineList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhEnumMachinesA(szDataSource : Win32cr::Foundation::PSTR, mszMachineList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhEnumObjectsW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, mszObjectList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun PdhEnumObjectsA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, mszObjectList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun PdhEnumObjectItemsW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, mszCounterList : Win32cr::Foundation::PWSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PWSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
 
+    # :nodoc:
     fun PdhEnumObjectItemsA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, mszCounterList : Win32cr::Foundation::PSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
 
+    # :nodoc:
     fun PdhMakeCounterPathW(pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_W*, szFullPathBuffer : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*, dwFlags : Win32cr::System::Performance::PDH_PATH_FLAGS) : Int32
 
+    # :nodoc:
     fun PdhMakeCounterPathA(pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_A*, szFullPathBuffer : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*, dwFlags : Win32cr::System::Performance::PDH_PATH_FLAGS) : Int32
 
+    # :nodoc:
     fun PdhParseCounterPathW(szFullPathBuffer : Win32cr::Foundation::PWSTR, pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_W*, pdwBufferSize : UInt32*, dwFlags : UInt32) : Int32
 
+    # :nodoc:
     fun PdhParseCounterPathA(szFullPathBuffer : Win32cr::Foundation::PSTR, pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_A*, pdwBufferSize : UInt32*, dwFlags : UInt32) : Int32
 
+    # :nodoc:
     fun PdhParseInstanceNameW(szInstanceString : Win32cr::Foundation::PWSTR, szInstanceName : Win32cr::Foundation::PWSTR, pcchInstanceNameLength : UInt32*, szParentName : Win32cr::Foundation::PWSTR, pcchParentNameLength : UInt32*, lpIndex : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhParseInstanceNameA(szInstanceString : Win32cr::Foundation::PSTR, szInstanceName : Win32cr::Foundation::PSTR, pcchInstanceNameLength : UInt32*, szParentName : Win32cr::Foundation::PSTR, pcchParentNameLength : UInt32*, lpIndex : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhValidatePathW(szFullPathBuffer : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun PdhValidatePathA(szFullPathBuffer : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun PdhGetDefaultPerfObjectW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, szDefaultObjectName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhGetDefaultPerfObjectA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, szDefaultObjectName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhGetDefaultPerfCounterW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szDefaultCounterName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhGetDefaultPerfCounterA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, szDefaultCounterName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhBrowseCountersW(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_W*) : Int32
 
+    # :nodoc:
     fun PdhBrowseCountersA(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_A*) : Int32
 
+    # :nodoc:
     fun PdhExpandCounterPathW(szWildCardPath : Win32cr::Foundation::PWSTR, mszExpandedPathList : Win32cr::Foundation::PWSTR, pcchPathListLength : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhExpandCounterPathA(szWildCardPath : Win32cr::Foundation::PSTR, mszExpandedPathList : Win32cr::Foundation::PSTR, pcchPathListLength : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhLookupPerfNameByIndexW(szMachineName : Win32cr::Foundation::PWSTR, dwNameIndex : UInt32, szNameBuffer : Win32cr::Foundation::PWSTR, pcchNameBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhLookupPerfNameByIndexA(szMachineName : Win32cr::Foundation::PSTR, dwNameIndex : UInt32, szNameBuffer : Win32cr::Foundation::PSTR, pcchNameBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhLookupPerfIndexByNameW(szMachineName : Win32cr::Foundation::PWSTR, szNameBuffer : Win32cr::Foundation::PWSTR, pdwIndex : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhLookupPerfIndexByNameA(szMachineName : Win32cr::Foundation::PSTR, szNameBuffer : Win32cr::Foundation::PSTR, pdwIndex : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhExpandWildCardPathA(szDataSource : Win32cr::Foundation::PSTR, szWildCardPath : Win32cr::Foundation::PSTR, mszExpandedPathList : Win32cr::Foundation::PSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
 
+    # :nodoc:
     fun PdhExpandWildCardPathW(szDataSource : Win32cr::Foundation::PWSTR, szWildCardPath : Win32cr::Foundation::PWSTR, mszExpandedPathList : Win32cr::Foundation::PWSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
 
+    # :nodoc:
     fun PdhOpenLogW(szLogFileName : Win32cr::Foundation::PWSTR, dwAccessFlags : Win32cr::System::Performance::PDH_LOG, lpdwLogType : Win32cr::System::Performance::PDH_LOG_TYPE*, hQuery : LibC::IntPtrT, dwMaxSize : UInt32, szUserCaption : Win32cr::Foundation::PWSTR, phLog : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun PdhOpenLogA(szLogFileName : Win32cr::Foundation::PSTR, dwAccessFlags : Win32cr::System::Performance::PDH_LOG, lpdwLogType : Win32cr::System::Performance::PDH_LOG_TYPE*, hQuery : LibC::IntPtrT, dwMaxSize : UInt32, szUserCaption : Win32cr::Foundation::PSTR, phLog : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun PdhUpdateLogW(hLog : LibC::IntPtrT, szUserString : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun PdhUpdateLogA(hLog : LibC::IntPtrT, szUserString : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun PdhUpdateLogFileCatalog(hLog : LibC::IntPtrT) : Int32
 
+    # :nodoc:
     fun PdhGetLogFileSize(hLog : LibC::IntPtrT, llSize : Int64*) : Int32
 
+    # :nodoc:
     fun PdhCloseLog(hLog : LibC::IntPtrT, dwFlags : UInt32) : Int32
 
+    # :nodoc:
     fun PdhSelectDataSourceW(hWndOwner : Win32cr::Foundation::HWND, dwFlags : Win32cr::System::Performance::PDH_SELECT_DATA_SOURCE_FLAGS, szDataSource : Win32cr::Foundation::PWSTR, pcchBufferLength : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhSelectDataSourceA(hWndOwner : Win32cr::Foundation::HWND, dwFlags : Win32cr::System::Performance::PDH_SELECT_DATA_SOURCE_FLAGS, szDataSource : Win32cr::Foundation::PSTR, pcchBufferLength : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhIsRealTimeQuery(hQuery : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PdhSetQueryTimeRange(hQuery : LibC::IntPtrT, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*) : Int32
 
+    # :nodoc:
     fun PdhGetDataSourceTimeRangeW(szDataSource : Win32cr::Foundation::PWSTR, pdwNumEntries : UInt32*, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*, pdwBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhGetDataSourceTimeRangeA(szDataSource : Win32cr::Foundation::PSTR, pdwNumEntries : UInt32*, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*, pdwBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhCollectQueryDataEx(hQuery : LibC::IntPtrT, dwIntervalTime : UInt32, hNewDataEvent : Win32cr::Foundation::HANDLE) : Int32
 
+    # :nodoc:
     fun PdhFormatFromRawValue(dwCounterType : UInt32, dwFormat : Win32cr::System::Performance::PDH_FMT, pTimeBase : Int64*, pRawValue1 : Win32cr::System::Performance::PDH_RAW_COUNTER*, pRawValue2 : Win32cr::System::Performance::PDH_RAW_COUNTER*, pFmtValue : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE*) : Int32
 
+    # :nodoc:
     fun PdhGetCounterTimeBase(hCounter : LibC::IntPtrT, pTimeBase : Int64*) : Int32
 
+    # :nodoc:
     fun PdhReadRawLogRecord(hLog : LibC::IntPtrT, ftRecord : Win32cr::Foundation::FILETIME, pRawLogRecord : Win32cr::System::Performance::PDH_RAW_LOG_RECORD*, pdwBufferLength : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhSetDefaultRealTimeDataSource(dwDataSourceId : Win32cr::System::Performance::REAL_TIME_DATA_SOURCE_ID_FLAGS) : Int32
 
+    # :nodoc:
     fun PdhBindInputDataSourceW(phDataSource : LibC::IntPtrT*, log_file_name_list : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun PdhBindInputDataSourceA(phDataSource : LibC::IntPtrT*, log_file_name_list : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun PdhOpenQueryH(hDataSource : LibC::IntPtrT, dwUserData : LibC::UIntPtrT, phQuery : LibC::IntPtrT*) : Int32
 
+    # :nodoc:
     fun PdhEnumMachinesHW(hDataSource : LibC::IntPtrT, mszMachineList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhEnumMachinesHA(hDataSource : LibC::IntPtrT, mszMachineList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhEnumObjectsHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, mszObjectList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun PdhEnumObjectsHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, mszObjectList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun PdhEnumObjectItemsHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, mszCounterList : Win32cr::Foundation::PWSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PWSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
 
+    # :nodoc:
     fun PdhEnumObjectItemsHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, mszCounterList : Win32cr::Foundation::PSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
 
+    # :nodoc:
     fun PdhExpandWildCardPathHW(hDataSource : LibC::IntPtrT, szWildCardPath : Win32cr::Foundation::PWSTR, mszExpandedPathList : Win32cr::Foundation::PWSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
 
+    # :nodoc:
     fun PdhExpandWildCardPathHA(hDataSource : LibC::IntPtrT, szWildCardPath : Win32cr::Foundation::PSTR, mszExpandedPathList : Win32cr::Foundation::PSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
 
+    # :nodoc:
     fun PdhGetDataSourceTimeRangeH(hDataSource : LibC::IntPtrT, pdwNumEntries : UInt32*, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*, pdwBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhGetDefaultPerfObjectHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, szDefaultObjectName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhGetDefaultPerfObjectHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, szDefaultObjectName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhGetDefaultPerfCounterHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szDefaultCounterName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhGetDefaultPerfCounterHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, szDefaultCounterName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhBrowseCountersHW(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_HW*) : Int32
 
+    # :nodoc:
     fun PdhBrowseCountersHA(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_HA*) : Int32
 
+    # :nodoc:
     fun PdhVerifySQLDBW(szDataSource : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun PdhVerifySQLDBA(szDataSource : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun PdhCreateSQLTablesW(szDataSource : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun PdhCreateSQLTablesA(szDataSource : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun PdhEnumLogSetNamesW(szDataSource : Win32cr::Foundation::PWSTR, mszDataSetNameList : Win32cr::Foundation::PWSTR, pcchBufferLength : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhEnumLogSetNamesA(szDataSource : Win32cr::Foundation::PSTR, mszDataSetNameList : Win32cr::Foundation::PSTR, pcchBufferLength : UInt32*) : Int32
 
+    # :nodoc:
     fun PdhGetLogSetGUID(hLog : LibC::IntPtrT, pGuid : LibC::GUID*, pRunId : Int32*) : Int32
 
+    # :nodoc:
     fun PdhSetLogSetRunID(hLog : LibC::IntPtrT, run_id : Int32) : Int32
 
   end

@@ -3,6 +3,7 @@ require "./../security/authentication/identity.cr"
 require "./../security/cryptography.cr"
 
 module Win32cr::Networking::Ldap
+  extend self
   alias DBGPRINT = Proc(Win32cr::Foundation::PSTR, UInt32)
 
   alias QUERYFORCONNECTION = Proc(Win32cr::Networking::Ldap::Ldap*, Win32cr::Networking::Ldap::Ldap*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PSTR, UInt32, Void*, Void*, Win32cr::Networking::Ldap::Ldap**, UInt32)
@@ -635,492 +636,1707 @@ module Win32cr::Networking::Ldap
     end
   end
 
+  def ldapOpenW(host_name : Win32cr::Foundation::PWSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
+    C.ldap_openW(host_name, port_number)
+  end
+
+  def ldapOpenA(host_name : Win32cr::Foundation::PSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
+    C.ldap_openA(host_name, port_number)
+  end
+
+  def ldapInitW(host_name : Win32cr::Foundation::PWSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
+    C.ldap_initW(host_name, port_number)
+  end
+
+  def ldapInitA(host_name : Win32cr::Foundation::PSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
+    C.ldap_initA(host_name, port_number)
+  end
+
+  def ldapSslinitW(host_name : Win32cr::Foundation::PWSTR, port_number : UInt32, secure : Int32) : Win32cr::Networking::Ldap::Ldap*
+    C.ldap_sslinitW(host_name, port_number, secure)
+  end
+
+  def ldapSslinitA(host_name : Win32cr::Foundation::PSTR, port_number : UInt32, secure : Int32) : Win32cr::Networking::Ldap::Ldap*
+    C.ldap_sslinitA(host_name, port_number, secure)
+  end
+
+  def ldapConnect(ld : Win32cr::Networking::Ldap::Ldap*, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*) : UInt32
+    C.ldap_connect(ld, timeout)
+  end
+
+  def ldapOpen(host_name : Win32cr::Foundation::PSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
+    C.ldap_open(host_name, port_number)
+  end
+
+  def ldapInit(host_name : Win32cr::Foundation::PSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
+    C.ldap_init(host_name, port_number)
+  end
+
+  def ldapSslinit(host_name : Win32cr::Foundation::PSTR, port_number : UInt32, secure : Int32) : Win32cr::Networking::Ldap::Ldap*
+    C.ldap_sslinit(host_name, port_number, secure)
+  end
+
+  def cldapOpenW(host_name : Win32cr::Foundation::PWSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
+    C.cldap_openW(host_name, port_number)
+  end
+
+  def cldapOpenA(host_name : Win32cr::Foundation::PSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
+    C.cldap_openA(host_name, port_number)
+  end
+
+  def cldapOpen(host_name : Win32cr::Foundation::PSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
+    C.cldap_open(host_name, port_number)
+  end
+
+  def ldapUnbind(ld : Win32cr::Networking::Ldap::Ldap*) : UInt32
+    C.ldap_unbind(ld)
+  end
+
+  def ldapUnbindS(ld : Win32cr::Networking::Ldap::Ldap*) : UInt32
+    C.ldap_unbind_s(ld)
+  end
+
+  def ldapGetOption(ld : Win32cr::Networking::Ldap::Ldap*, option : Int32, outvalue : Void*) : UInt32
+    C.ldap_get_option(ld, option, outvalue)
+  end
+
+  def ldapGetOptionW(ld : Win32cr::Networking::Ldap::Ldap*, option : Int32, outvalue : Void*) : UInt32
+    C.ldap_get_optionW(ld, option, outvalue)
+  end
+
+  def ldapSetOption(ld : Win32cr::Networking::Ldap::Ldap*, option : Int32, invalue : Void*) : UInt32
+    C.ldap_set_option(ld, option, invalue)
+  end
+
+  def ldapSetOptionW(ld : Win32cr::Networking::Ldap::Ldap*, option : Int32, invalue : Void*) : UInt32
+    C.ldap_set_optionW(ld, option, invalue)
+  end
+
+  def ldapSimpleBindW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, passwd : Win32cr::Foundation::PWSTR) : UInt32
+    C.ldap_simple_bindW(ld, dn, passwd)
+  end
+
+  def ldapSimpleBindA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, passwd : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_simple_bindA(ld, dn, passwd)
+  end
+
+  def ldapSimpleBindSW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, passwd : Win32cr::Foundation::PWSTR) : UInt32
+    C.ldap_simple_bind_sW(ld, dn, passwd)
+  end
+
+  def ldapSimpleBindSA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, passwd : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_simple_bind_sA(ld, dn, passwd)
+  end
+
+  def ldapBindW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, cred : Win32cr::Foundation::PWSTR, method : UInt32) : UInt32
+    C.ldap_bindW(ld, dn, cred, method)
+  end
+
+  def ldapBindA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, cred : Win32cr::Foundation::PSTR, method : UInt32) : UInt32
+    C.ldap_bindA(ld, dn, cred, method)
+  end
+
+  def ldapBindSW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, cred : Win32cr::Foundation::PWSTR, method : UInt32) : UInt32
+    C.ldap_bind_sW(ld, dn, cred, method)
+  end
+
+  def ldapBindSA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, cred : Win32cr::Foundation::PSTR, method : UInt32) : UInt32
+    C.ldap_bind_sA(ld, dn, cred, method)
+  end
+
+  def ldapSaslBindA(external_handle : Win32cr::Networking::Ldap::Ldap*, dist_name : Win32cr::Foundation::PSTR, auth_mechanism : Win32cr::Foundation::PSTR, cred : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_ctrls : Win32cr::Networking::Ldap::Ldapcontrola**, client_ctrls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : Int32*) : Int32
+    C.ldap_sasl_bindA(external_handle, dist_name, auth_mechanism, cred, server_ctrls, client_ctrls, message_number)
+  end
+
+  def ldapSaslBindW(external_handle : Win32cr::Networking::Ldap::Ldap*, dist_name : Win32cr::Foundation::PWSTR, auth_mechanism : Win32cr::Foundation::PWSTR, cred : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_ctrls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_ctrls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : Int32*) : Int32
+    C.ldap_sasl_bindW(external_handle, dist_name, auth_mechanism, cred, server_ctrls, client_ctrls, message_number)
+  end
+
+  def ldapSaslBindSA(external_handle : Win32cr::Networking::Ldap::Ldap*, dist_name : Win32cr::Foundation::PSTR, auth_mechanism : Win32cr::Foundation::PSTR, cred : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_ctrls : Win32cr::Networking::Ldap::Ldapcontrola**, client_ctrls : Win32cr::Networking::Ldap::Ldapcontrola**, server_data : Win32cr::Networking::Ldap::LDAP_BERVAL**) : Int32
+    C.ldap_sasl_bind_sA(external_handle, dist_name, auth_mechanism, cred, server_ctrls, client_ctrls, server_data)
+  end
+
+  def ldapSaslBindSW(external_handle : Win32cr::Networking::Ldap::Ldap*, dist_name : Win32cr::Foundation::PWSTR, auth_mechanism : Win32cr::Foundation::PWSTR, cred : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_ctrls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_ctrls : Win32cr::Networking::Ldap::Ldapcontrolw**, server_data : Win32cr::Networking::Ldap::LDAP_BERVAL**) : Int32
+    C.ldap_sasl_bind_sW(external_handle, dist_name, auth_mechanism, cred, server_ctrls, client_ctrls, server_data)
+  end
+
+  def ldapSimpleBind(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, passwd : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_simple_bind(ld, dn, passwd)
+  end
+
+  def ldapSimpleBindS(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, passwd : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_simple_bind_s(ld, dn, passwd)
+  end
+
+  def ldapBind(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, cred : Win32cr::Foundation::PSTR, method : UInt32) : UInt32
+    C.ldap_bind(ld, dn, cred, method)
+  end
+
+  def ldapBindS(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, cred : Win32cr::Foundation::PSTR, method : UInt32) : UInt32
+    C.ldap_bind_s(ld, dn, cred, method)
+  end
+
+  def ldapSearchW(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PWSTR, scope : UInt32, filter : Win32cr::Foundation::PWSTR, attrs : UInt16**, attrsonly : UInt32) : UInt32
+    C.ldap_searchW(ld, base, scope, filter, attrs, attrsonly)
+  end
+
+  def ldapSearchA(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32) : UInt32
+    C.ldap_searchA(ld, base, scope, filter, attrs, attrsonly)
+  end
+
+  def ldapSearchSW(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PWSTR, scope : UInt32, filter : Win32cr::Foundation::PWSTR, attrs : UInt16**, attrsonly : UInt32, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
+    C.ldap_search_sW(ld, base, scope, filter, attrs, attrsonly, res)
+  end
+
+  def ldapSearchSA(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
+    C.ldap_search_sA(ld, base, scope, filter, attrs, attrsonly, res)
+  end
+
+  def ldapSearchStW(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PWSTR, scope : UInt32, filter : Win32cr::Foundation::PWSTR, attrs : UInt16**, attrsonly : UInt32, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
+    C.ldap_search_stW(ld, base, scope, filter, attrs, attrsonly, timeout, res)
+  end
+
+  def ldapSearchStA(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
+    C.ldap_search_stA(ld, base, scope, filter, attrs, attrsonly, timeout, res)
+  end
+
+  def ldapSearchExtW(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PWSTR, scope : UInt32, filter : Win32cr::Foundation::PWSTR, attrs : UInt16**, attrsonly : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, time_limit : UInt32, size_limit : UInt32, message_number : UInt32*) : UInt32
+    C.ldap_search_extW(ld, base, scope, filter, attrs, attrsonly, server_controls, client_controls, time_limit, size_limit, message_number)
+  end
+
+  def ldapSearchExtA(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, time_limit : UInt32, size_limit : UInt32, message_number : UInt32*) : UInt32
+    C.ldap_search_extA(ld, base, scope, filter, attrs, attrsonly, server_controls, client_controls, time_limit, size_limit, message_number)
+  end
+
+  def ldapSearchExtSW(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PWSTR, scope : UInt32, filter : Win32cr::Foundation::PWSTR, attrs : UInt16**, attrsonly : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, size_limit : UInt32, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
+    C.ldap_search_ext_sW(ld, base, scope, filter, attrs, attrsonly, server_controls, client_controls, timeout, size_limit, res)
+  end
+
+  def ldapSearchExtSA(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, size_limit : UInt32, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
+    C.ldap_search_ext_sA(ld, base, scope, filter, attrs, attrsonly, server_controls, client_controls, timeout, size_limit, res)
+  end
+
+  def ldapSearch(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32) : UInt32
+    C.ldap_search(ld, base, scope, filter, attrs, attrsonly)
+  end
+
+  def ldapSearchS(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
+    C.ldap_search_s(ld, base, scope, filter, attrs, attrsonly, res)
+  end
+
+  def ldapSearchSt(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
+    C.ldap_search_st(ld, base, scope, filter, attrs, attrsonly, timeout, res)
+  end
+
+  def ldapSearchExt(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, time_limit : UInt32, size_limit : UInt32, message_number : UInt32*) : UInt32
+    C.ldap_search_ext(ld, base, scope, filter, attrs, attrsonly, server_controls, client_controls, time_limit, size_limit, message_number)
+  end
+
+  def ldapSearchExtS(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, size_limit : UInt32, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
+    C.ldap_search_ext_s(ld, base, scope, filter, attrs, attrsonly, server_controls, client_controls, timeout, size_limit, res)
+  end
+
+  def ldapCheckFilterW(ld : Win32cr::Networking::Ldap::Ldap*, search_filter : Win32cr::Foundation::PWSTR) : UInt32
+    C.ldap_check_filterW(ld, search_filter)
+  end
+
+  def ldapCheckFilterA(ld : Win32cr::Networking::Ldap::Ldap*, search_filter : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_check_filterA(ld, search_filter)
+  end
+
+  def ldapModifyW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, mods : Win32cr::Networking::Ldap::Ldapmodw**) : UInt32
+    C.ldap_modifyW(ld, dn, mods)
+  end
+
+  def ldapModifyA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
+    C.ldap_modifyA(ld, dn, mods)
+  end
+
+  def ldapModifySW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, mods : Win32cr::Networking::Ldap::Ldapmodw**) : UInt32
+    C.ldap_modify_sW(ld, dn, mods)
+  end
+
+  def ldapModifySA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
+    C.ldap_modify_sA(ld, dn, mods)
+  end
+
+  def ldapModifyExtW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, mods : Win32cr::Networking::Ldap::Ldapmodw**, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : UInt32*) : UInt32
+    C.ldap_modify_extW(ld, dn, mods, server_controls, client_controls, message_number)
+  end
+
+  def ldapModifyExtA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
+    C.ldap_modify_extA(ld, dn, mods, server_controls, client_controls, message_number)
+  end
+
+  def ldapModifyExtSW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, mods : Win32cr::Networking::Ldap::Ldapmodw**, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
+    C.ldap_modify_ext_sW(ld, dn, mods, server_controls, client_controls)
+  end
+
+  def ldapModifyExtSA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_modify_ext_sA(ld, dn, mods, server_controls, client_controls)
+  end
+
+  def ldapModify(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
+    C.ldap_modify(ld, dn, mods)
+  end
+
+  def ldapModifyS(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
+    C.ldap_modify_s(ld, dn, mods)
+  end
+
+  def ldapModifyExt(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
+    C.ldap_modify_ext(ld, dn, mods, server_controls, client_controls, message_number)
+  end
+
+  def ldapModifyExtS(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_modify_ext_s(ld, dn, mods, server_controls, client_controls)
+  end
+
+  def ldapModrdn2W(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PWSTR, new_distinguished_name : Win32cr::Foundation::PWSTR, delete_old_rdn : Int32) : UInt32
+    C.ldap_modrdn2W(external_handle, distinguished_name, new_distinguished_name, delete_old_rdn)
+  end
+
+  def ldapModrdn2A(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR, delete_old_rdn : Int32) : UInt32
+    C.ldap_modrdn2A(external_handle, distinguished_name, new_distinguished_name, delete_old_rdn)
+  end
+
+  def ldapModrdnW(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PWSTR, new_distinguished_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.ldap_modrdnW(external_handle, distinguished_name, new_distinguished_name)
+  end
+
+  def ldapModrdnA(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_modrdnA(external_handle, distinguished_name, new_distinguished_name)
+  end
+
+  def ldapModrdn2SW(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PWSTR, new_distinguished_name : Win32cr::Foundation::PWSTR, delete_old_rdn : Int32) : UInt32
+    C.ldap_modrdn2_sW(external_handle, distinguished_name, new_distinguished_name, delete_old_rdn)
+  end
+
+  def ldapModrdn2SA(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR, delete_old_rdn : Int32) : UInt32
+    C.ldap_modrdn2_sA(external_handle, distinguished_name, new_distinguished_name, delete_old_rdn)
+  end
+
+  def ldapModrdnSW(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PWSTR, new_distinguished_name : Win32cr::Foundation::PWSTR) : UInt32
+    C.ldap_modrdn_sW(external_handle, distinguished_name, new_distinguished_name)
+  end
+
+  def ldapModrdnSA(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_modrdn_sA(external_handle, distinguished_name, new_distinguished_name)
+  end
+
+  def ldapModrdn2(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR, delete_old_rdn : Int32) : UInt32
+    C.ldap_modrdn2(external_handle, distinguished_name, new_distinguished_name, delete_old_rdn)
+  end
+
+  def ldapModrdn(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_modrdn(external_handle, distinguished_name, new_distinguished_name)
+  end
+
+  def ldapModrdn2S(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR, delete_old_rdn : Int32) : UInt32
+    C.ldap_modrdn2_s(external_handle, distinguished_name, new_distinguished_name, delete_old_rdn)
+  end
+
+  def ldapModrdnS(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_modrdn_s(external_handle, distinguished_name, new_distinguished_name)
+  end
+
+  def ldapRenameExtW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, new_rdn : Win32cr::Foundation::PWSTR, new_parent : Win32cr::Foundation::PWSTR, delete_old_rdn : Int32, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : UInt32*) : UInt32
+    C.ldap_rename_extW(ld, dn, new_rdn, new_parent, delete_old_rdn, server_controls, client_controls, message_number)
+  end
+
+  def ldapRenameExtA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, new_rdn : Win32cr::Foundation::PSTR, new_parent : Win32cr::Foundation::PSTR, delete_old_rdn : Int32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
+    C.ldap_rename_extA(ld, dn, new_rdn, new_parent, delete_old_rdn, server_controls, client_controls, message_number)
+  end
+
+  def ldapRenameExtSW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, new_rdn : Win32cr::Foundation::PWSTR, new_parent : Win32cr::Foundation::PWSTR, delete_old_rdn : Int32, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
+    C.ldap_rename_ext_sW(ld, dn, new_rdn, new_parent, delete_old_rdn, server_controls, client_controls)
+  end
+
+  def ldapRenameExtSA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, new_rdn : Win32cr::Foundation::PSTR, new_parent : Win32cr::Foundation::PSTR, delete_old_rdn : Int32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_rename_ext_sA(ld, dn, new_rdn, new_parent, delete_old_rdn, server_controls, client_controls)
+  end
+
+  def ldapRenameExt(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, new_rdn : Win32cr::Foundation::PSTR, new_parent : Win32cr::Foundation::PSTR, delete_old_rdn : Int32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
+    C.ldap_rename_ext(ld, dn, new_rdn, new_parent, delete_old_rdn, server_controls, client_controls, message_number)
+  end
+
+  def ldapRenameExtS(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, new_rdn : Win32cr::Foundation::PSTR, new_parent : Win32cr::Foundation::PSTR, delete_old_rdn : Int32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_rename_ext_s(ld, dn, new_rdn, new_parent, delete_old_rdn, server_controls, client_controls)
+  end
+
+  def ldapAddW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attrs : Win32cr::Networking::Ldap::Ldapmodw**) : UInt32
+    C.ldap_addW(ld, dn, attrs)
+  end
+
+  def ldapAddA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
+    C.ldap_addA(ld, dn, attrs)
+  end
+
+  def ldapAddSW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attrs : Win32cr::Networking::Ldap::Ldapmodw**) : UInt32
+    C.ldap_add_sW(ld, dn, attrs)
+  end
+
+  def ldapAddSA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
+    C.ldap_add_sA(ld, dn, attrs)
+  end
+
+  def ldapAddExtW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attrs : Win32cr::Networking::Ldap::Ldapmodw**, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : UInt32*) : UInt32
+    C.ldap_add_extW(ld, dn, attrs, server_controls, client_controls, message_number)
+  end
+
+  def ldapAddExtA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
+    C.ldap_add_extA(ld, dn, attrs, server_controls, client_controls, message_number)
+  end
+
+  def ldapAddExtSW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attrs : Win32cr::Networking::Ldap::Ldapmodw**, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
+    C.ldap_add_ext_sW(ld, dn, attrs, server_controls, client_controls)
+  end
+
+  def ldapAddExtSA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_add_ext_sA(ld, dn, attrs, server_controls, client_controls)
+  end
+
+  def ldapAdd(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
+    C.ldap_add(ld, dn, attrs)
+  end
+
+  def ldapAddS(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
+    C.ldap_add_s(ld, dn, attrs)
+  end
+
+  def ldapAddExt(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
+    C.ldap_add_ext(ld, dn, attrs, server_controls, client_controls, message_number)
+  end
+
+  def ldapAddExtS(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_add_ext_s(ld, dn, attrs, server_controls, client_controls)
+  end
+
+  def ldapCompareW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attr : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::PWSTR) : UInt32
+    C.ldap_compareW(ld, dn, attr, value)
+  end
+
+  def ldapCompareA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_compareA(ld, dn, attr, value)
+  end
+
+  def ldapCompareSW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attr : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::PWSTR) : UInt32
+    C.ldap_compare_sW(ld, dn, attr, value)
+  end
+
+  def ldapCompareSA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_compare_sA(ld, dn, attr, value)
+  end
+
+  def ldapCompare(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_compare(ld, dn, attr, value)
+  end
+
+  def ldapCompareS(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_compare_s(ld, dn, attr, value)
+  end
+
+  def ldapCompareExtW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attr : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::PWSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : UInt32*) : UInt32
+    C.ldap_compare_extW(ld, dn, attr, value, data, server_controls, client_controls, message_number)
+  end
+
+  def ldapCompareExtA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
+    C.ldap_compare_extA(ld, dn, attr, value, data, server_controls, client_controls, message_number)
+  end
+
+  def ldapCompareExtSW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attr : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::PWSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
+    C.ldap_compare_ext_sW(ld, dn, attr, value, data, server_controls, client_controls)
+  end
+
+  def ldapCompareExtSA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_compare_ext_sA(ld, dn, attr, value, data, server_controls, client_controls)
+  end
+
+  def ldapCompareExt(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
+    C.ldap_compare_ext(ld, dn, attr, value, data, server_controls, client_controls, message_number)
+  end
+
+  def ldapCompareExtS(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_compare_ext_s(ld, dn, attr, value, data, server_controls, client_controls)
+  end
+
+  def ldapDeleteW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR) : UInt32
+    C.ldap_deleteW(ld, dn)
+  end
+
+  def ldapDeleteA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_deleteA(ld, dn)
+  end
+
+  def ldapDeleteSW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR) : UInt32
+    C.ldap_delete_sW(ld, dn)
+  end
+
+  def ldapDeleteSA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_delete_sA(ld, dn)
+  end
+
+  def ldapDeleteExtW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : UInt32*) : UInt32
+    C.ldap_delete_extW(ld, dn, server_controls, client_controls, message_number)
+  end
+
+  def ldapDeleteExtA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
+    C.ldap_delete_extA(ld, dn, server_controls, client_controls, message_number)
+  end
+
+  def ldapDeleteExtSW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
+    C.ldap_delete_ext_sW(ld, dn, server_controls, client_controls)
+  end
+
+  def ldapDeleteExtSA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_delete_ext_sA(ld, dn, server_controls, client_controls)
+  end
+
+  def ldapDelete(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_delete(ld, dn)
+  end
+
+  def ldapDeleteS(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR) : UInt32
+    C.ldap_delete_s(ld, dn)
+  end
+
+  def ldapDeleteExt(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
+    C.ldap_delete_ext(ld, dn, server_controls, client_controls, message_number)
+  end
+
+  def ldapDeleteExtS(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_delete_ext_s(ld, dn, server_controls, client_controls)
+  end
+
+  def ldapAbandon(ld : Win32cr::Networking::Ldap::Ldap*, msgid : UInt32) : UInt32
+    C.ldap_abandon(ld, msgid)
+  end
+
+  def ldapResult(ld : Win32cr::Networking::Ldap::Ldap*, msgid : UInt32, all : UInt32, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
+    C.ldap_result(ld, msgid, all, timeout, res)
+  end
+
+  def ldapMsgfree(res : Win32cr::Networking::Ldap::LDAPMessage*) : UInt32
+    C.ldap_msgfree(res)
+  end
+
+  def ldapResult2error(ld : Win32cr::Networking::Ldap::Ldap*, res : Win32cr::Networking::Ldap::LDAPMessage*, freeit : UInt32) : UInt32
+    C.ldap_result2error(ld, res, freeit)
+  end
+
+  def ldapParseResultW(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, return_code : UInt32*, matched_d_ns : Win32cr::Foundation::PWSTR*, error_message : Win32cr::Foundation::PWSTR*, referrals : UInt16***, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw***, freeit : Win32cr::Foundation::BOOLEAN) : UInt32
+    C.ldap_parse_resultW(connection, result_message, return_code, matched_d_ns, error_message, referrals, server_controls, freeit)
+  end
+
+  def ldapParseResultA(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, return_code : UInt32*, matched_d_ns : Win32cr::Foundation::PSTR*, error_message : Win32cr::Foundation::PSTR*, referrals : Int8***, server_controls : Win32cr::Networking::Ldap::Ldapcontrola***, freeit : Win32cr::Foundation::BOOLEAN) : UInt32
+    C.ldap_parse_resultA(connection, result_message, return_code, matched_d_ns, error_message, referrals, server_controls, freeit)
+  end
+
+  def ldapParseExtendedResultA(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, result_oid : Win32cr::Foundation::PSTR*, result_data : Win32cr::Networking::Ldap::LDAP_BERVAL**, freeit : Win32cr::Foundation::BOOLEAN) : UInt32
+    C.ldap_parse_extended_resultA(connection, result_message, result_oid, result_data, freeit)
+  end
+
+  def ldapParseExtendedResultW(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, result_oid : Win32cr::Foundation::PWSTR*, result_data : Win32cr::Networking::Ldap::LDAP_BERVAL**, freeit : Win32cr::Foundation::BOOLEAN) : UInt32
+    C.ldap_parse_extended_resultW(connection, result_message, result_oid, result_data, freeit)
+  end
+
+  def ldapControlsFreeA(controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_controls_freeA(controls)
+  end
+
+  def ldapControlFreeA(controls : Win32cr::Networking::Ldap::Ldapcontrola*) : UInt32
+    C.ldap_control_freeA(controls)
+  end
+
+  def ldapControlsFreeW(control : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
+    C.ldap_controls_freeW(control)
+  end
+
+  def ldapControlFreeW(control : Win32cr::Networking::Ldap::Ldapcontrolw*) : UInt32
+    C.ldap_control_freeW(control)
+  end
+
+  def ldapFreeControlsW(controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
+    C.ldap_free_controlsW(controls)
+  end
+
+  def ldapFreeControlsA(controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_free_controlsA(controls)
+  end
+
+  def ldapParseResult(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, return_code : UInt32*, matched_d_ns : Win32cr::Foundation::PSTR*, error_message : Win32cr::Foundation::PSTR*, referrals : Win32cr::Foundation::PSTR**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola***, freeit : Win32cr::Foundation::BOOLEAN) : UInt32
+    C.ldap_parse_result(connection, result_message, return_code, matched_d_ns, error_message, referrals, server_controls, freeit)
+  end
+
+  def ldapControlsFree(controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_controls_free(controls)
+  end
+
+  def ldapControlFree(control : Win32cr::Networking::Ldap::Ldapcontrola*) : UInt32
+    C.ldap_control_free(control)
+  end
+
+  def ldapFreeControls(controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_free_controls(controls)
+  end
+
+  def ldapErr2stringW(err : UInt32) : Win32cr::Foundation::PWSTR
+    C.ldap_err2stringW(err)
+  end
+
+  def ldapErr2stringA(err : UInt32) : Win32cr::Foundation::PSTR
+    C.ldap_err2stringA(err)
+  end
+
+  def ldapErr2string(err : UInt32) : Win32cr::Foundation::PSTR
+    C.ldap_err2string(err)
+  end
+
+  def ldapPerror(ld : Win32cr::Networking::Ldap::Ldap*, msg : Win32cr::Foundation::PSTR) : Void
+    C.ldap_perror(ld, msg)
+  end
+
+  def ldapFirstEntry(ld : Win32cr::Networking::Ldap::Ldap*, res : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Networking::Ldap::LDAPMessage*
+    C.ldap_first_entry(ld, res)
+  end
+
+  def ldapNextEntry(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Networking::Ldap::LDAPMessage*
+    C.ldap_next_entry(ld, entry)
+  end
+
+  def ldapCountEntries(ld : Win32cr::Networking::Ldap::Ldap*, res : Win32cr::Networking::Ldap::LDAPMessage*) : UInt32
+    C.ldap_count_entries(ld, res)
+  end
+
+  def ldapFirstAttributeW(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, ptr : Win32cr::Networking::Ldap::Berelement**) : Win32cr::Foundation::PWSTR
+    C.ldap_first_attributeW(ld, entry, ptr)
+  end
+
+  def ldapFirstAttributeA(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, ptr : Win32cr::Networking::Ldap::Berelement**) : Win32cr::Foundation::PSTR
+    C.ldap_first_attributeA(ld, entry, ptr)
+  end
+
+  def ldapFirstAttribute(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, ptr : Win32cr::Networking::Ldap::Berelement**) : Win32cr::Foundation::PSTR
+    C.ldap_first_attribute(ld, entry, ptr)
+  end
+
+  def ldapNextAttributeW(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, ptr : Win32cr::Networking::Ldap::Berelement*) : Win32cr::Foundation::PWSTR
+    C.ldap_next_attributeW(ld, entry, ptr)
+  end
+
+  def ldapNextAttributeA(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, ptr : Win32cr::Networking::Ldap::Berelement*) : Win32cr::Foundation::PSTR
+    C.ldap_next_attributeA(ld, entry, ptr)
+  end
+
+  def ldapNextAttribute(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, ptr : Win32cr::Networking::Ldap::Berelement*) : Win32cr::Foundation::PSTR
+    C.ldap_next_attribute(ld, entry, ptr)
+  end
+
+  def ldapGetValuesW(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, attr : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR*
+    C.ldap_get_valuesW(ld, entry, attr)
+  end
+
+  def ldapGetValuesA(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, attr : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR*
+    C.ldap_get_valuesA(ld, entry, attr)
+  end
+
+  def ldapGetValues(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, attr : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR*
+    C.ldap_get_values(ld, entry, attr)
+  end
+
+  def ldapGetValuesLenW(external_handle : Win32cr::Networking::Ldap::Ldap*, message : Win32cr::Networking::Ldap::LDAPMessage*, attr : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Ldap::LDAP_BERVAL**
+    C.ldap_get_values_lenW(external_handle, message, attr)
+  end
+
+  def ldapGetValuesLenA(external_handle : Win32cr::Networking::Ldap::Ldap*, message : Win32cr::Networking::Ldap::LDAPMessage*, attr : Win32cr::Foundation::PSTR) : Win32cr::Networking::Ldap::LDAP_BERVAL**
+    C.ldap_get_values_lenA(external_handle, message, attr)
+  end
+
+  def ldapGetValuesLen(external_handle : Win32cr::Networking::Ldap::Ldap*, message : Win32cr::Networking::Ldap::LDAPMessage*, attr : Win32cr::Foundation::PSTR) : Win32cr::Networking::Ldap::LDAP_BERVAL**
+    C.ldap_get_values_len(external_handle, message, attr)
+  end
+
+  def ldapCountValuesW(vals : Win32cr::Foundation::PWSTR*) : UInt32
+    C.ldap_count_valuesW(vals)
+  end
+
+  def ldapCountValuesA(vals : Win32cr::Foundation::PSTR*) : UInt32
+    C.ldap_count_valuesA(vals)
+  end
+
+  def ldapCountValues(vals : Win32cr::Foundation::PSTR*) : UInt32
+    C.ldap_count_values(vals)
+  end
+
+  def ldapCountValuesLen(vals : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
+    C.ldap_count_values_len(vals)
+  end
+
+  def ldapValueFreeW(vals : Win32cr::Foundation::PWSTR*) : UInt32
+    C.ldap_value_freeW(vals)
+  end
+
+  def ldapValueFreeA(vals : Win32cr::Foundation::PSTR*) : UInt32
+    C.ldap_value_freeA(vals)
+  end
+
+  def ldapValueFree(vals : Win32cr::Foundation::PSTR*) : UInt32
+    C.ldap_value_free(vals)
+  end
+
+  def ldapValueFreeLen(vals : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
+    C.ldap_value_free_len(vals)
+  end
+
+  def ldapGetDnW(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Foundation::PWSTR
+    C.ldap_get_dnW(ld, entry)
+  end
+
+  def ldapGetDnA(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Foundation::PSTR
+    C.ldap_get_dnA(ld, entry)
+  end
+
+  def ldapGetDn(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Foundation::PSTR
+    C.ldap_get_dn(ld, entry)
+  end
+
+  def ldapExplodeDnW(dn : Win32cr::Foundation::PWSTR, notypes : UInt32) : Win32cr::Foundation::PWSTR*
+    C.ldap_explode_dnW(dn, notypes)
+  end
+
+  def ldapExplodeDnA(dn : Win32cr::Foundation::PSTR, notypes : UInt32) : Win32cr::Foundation::PSTR*
+    C.ldap_explode_dnA(dn, notypes)
+  end
+
+  def ldapExplodeDn(dn : Win32cr::Foundation::PSTR, notypes : UInt32) : Win32cr::Foundation::PSTR*
+    C.ldap_explode_dn(dn, notypes)
+  end
+
+  def ldapDn2ufnW(dn : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.ldap_dn2ufnW(dn)
+  end
+
+  def ldapDn2ufnA(dn : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    C.ldap_dn2ufnA(dn)
+  end
+
+  def ldapDn2ufn(dn : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    C.ldap_dn2ufn(dn)
+  end
+
+  def ldapMemfreeW(block : Win32cr::Foundation::PWSTR) : Void
+    C.ldap_memfreeW(block)
+  end
+
+  def ldapMemfreeA(block : Win32cr::Foundation::PSTR) : Void
+    C.ldap_memfreeA(block)
+  end
+
+  def berBvfree(bv : Win32cr::Networking::Ldap::LDAP_BERVAL*) : Void
+    C.ber_bvfree(bv)
+  end
+
+  def ldapMemfree(block : Win32cr::Foundation::PSTR) : Void
+    C.ldap_memfree(block)
+  end
+
+  def ldapUfn2dnW(ufn : Win32cr::Foundation::PWSTR, pDn : Win32cr::Foundation::PWSTR*) : UInt32
+    C.ldap_ufn2dnW(ufn, pDn)
+  end
+
+  def ldapUfn2dnA(ufn : Win32cr::Foundation::PSTR, pDn : Win32cr::Foundation::PSTR*) : UInt32
+    C.ldap_ufn2dnA(ufn, pDn)
+  end
+
+  def ldapUfn2dn(ufn : Win32cr::Foundation::PSTR, pDn : Win32cr::Foundation::PSTR*) : UInt32
+    C.ldap_ufn2dn(ufn, pDn)
+  end
+
+  def ldapStartup(version : Win32cr::Networking::Ldap::Ldap_version_info*, instance : Win32cr::Foundation::HANDLE*) : UInt32
+    C.ldap_startup(version, instance)
+  end
+
+  def ldapCleanup(hInstance : Win32cr::Foundation::HANDLE) : UInt32
+    C.ldap_cleanup(hInstance)
+  end
+
+  def ldapEscapeFilterElementW(sourceFilterElement : Win32cr::Foundation::PSTR, sourceLength : UInt32, destFilterElement : Win32cr::Foundation::PWSTR, destLength : UInt32) : UInt32
+    C.ldap_escape_filter_elementW(sourceFilterElement, sourceLength, destFilterElement, destLength)
+  end
+
+  def ldapEscapeFilterElementA(sourceFilterElement : Win32cr::Foundation::PSTR, sourceLength : UInt32, destFilterElement : Win32cr::Foundation::PSTR, destLength : UInt32) : UInt32
+    C.ldap_escape_filter_elementA(sourceFilterElement, sourceLength, destFilterElement, destLength)
+  end
+
+  def ldapEscapeFilterElement(sourceFilterElement : Win32cr::Foundation::PSTR, sourceLength : UInt32, destFilterElement : Win32cr::Foundation::PSTR, destLength : UInt32) : UInt32
+    C.ldap_escape_filter_element(sourceFilterElement, sourceLength, destFilterElement, destLength)
+  end
+
+  def ldapSetDbgFlags(new_flags : UInt32) : UInt32
+    C.ldap_set_dbg_flags(new_flags)
+  end
+
+  def ldapSetDbgRoutine(debug_print_routine : Win32cr::Networking::Ldap::DBGPRINT) : Void
+    C.ldap_set_dbg_routine(debug_print_routine)
+  end
+
+  def ldapUTF8ToUnicode(lpSrcStr : UInt8*, cchSrc : Int32, lpDestStr : UInt16*, cchDest : Int32) : Int32
+    C.LdapUTF8ToUnicode(lpSrcStr, cchSrc, lpDestStr, cchDest)
+  end
+
+  def ldapUnicodeToUTF8(lpSrcStr : UInt16*, cchSrc : Int32, lpDestStr : UInt8*, cchDest : Int32) : Int32
+    C.LdapUnicodeToUTF8(lpSrcStr, cchSrc, lpDestStr, cchDest)
+  end
+
+  def ldapCreateSortControlA(external_handle : Win32cr::Networking::Ldap::Ldap*, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeya**, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_create_sort_controlA(external_handle, sort_keys, is_critical, control)
+  end
+
+  def ldapCreateSortControlW(external_handle : Win32cr::Networking::Ldap::Ldap*, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeyw**, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
+    C.ldap_create_sort_controlW(external_handle, sort_keys, is_critical, control)
+  end
+
+  def ldapParseSortControlA(external_handle : Win32cr::Networking::Ldap::Ldap*, control : Win32cr::Networking::Ldap::Ldapcontrola**, result : UInt32*, attribute : Win32cr::Foundation::PSTR*) : UInt32
+    C.ldap_parse_sort_controlA(external_handle, control, result, attribute)
+  end
+
+  def ldapParseSortControlW(external_handle : Win32cr::Networking::Ldap::Ldap*, control : Win32cr::Networking::Ldap::Ldapcontrolw**, result : UInt32*, attribute : Win32cr::Foundation::PWSTR*) : UInt32
+    C.ldap_parse_sort_controlW(external_handle, control, result, attribute)
+  end
+
+  def ldapCreateSortControl(external_handle : Win32cr::Networking::Ldap::Ldap*, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeya**, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_create_sort_control(external_handle, sort_keys, is_critical, control)
+  end
+
+  def ldapParseSortControl(external_handle : Win32cr::Networking::Ldap::Ldap*, control : Win32cr::Networking::Ldap::Ldapcontrola**, result : UInt32*, attribute : Win32cr::Foundation::PSTR*) : UInt32
+    C.ldap_parse_sort_control(external_handle, control, result, attribute)
+  end
+
+  def ldapEncodeSortControlW(external_handle : Win32cr::Networking::Ldap::Ldap*, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeyw**, control : Win32cr::Networking::Ldap::Ldapcontrolw*, criticality : Win32cr::Foundation::BOOLEAN) : UInt32
+    C.ldap_encode_sort_controlW(external_handle, sort_keys, control, criticality)
+  end
+
+  def ldapEncodeSortControlA(external_handle : Win32cr::Networking::Ldap::Ldap*, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeya**, control : Win32cr::Networking::Ldap::Ldapcontrola*, criticality : Win32cr::Foundation::BOOLEAN) : UInt32
+    C.ldap_encode_sort_controlA(external_handle, sort_keys, control, criticality)
+  end
+
+  def ldapCreatePageControlW(external_handle : Win32cr::Networking::Ldap::Ldap*, page_size : UInt32, cookie : Win32cr::Networking::Ldap::LDAP_BERVAL*, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
+    C.ldap_create_page_controlW(external_handle, page_size, cookie, is_critical, control)
+  end
+
+  def ldapCreatePageControlA(external_handle : Win32cr::Networking::Ldap::Ldap*, page_size : UInt32, cookie : Win32cr::Networking::Ldap::LDAP_BERVAL*, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_create_page_controlA(external_handle, page_size, cookie, is_critical, control)
+  end
+
+  def ldapParsePageControlW(external_handle : Win32cr::Networking::Ldap::Ldap*, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, total_count : UInt32*, cookie : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
+    C.ldap_parse_page_controlW(external_handle, server_controls, total_count, cookie)
+  end
+
+  def ldapParsePageControlA(external_handle : Win32cr::Networking::Ldap::Ldap*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, total_count : UInt32*, cookie : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
+    C.ldap_parse_page_controlA(external_handle, server_controls, total_count, cookie)
+  end
+
+  def ldapCreatePageControl(external_handle : Win32cr::Networking::Ldap::Ldap*, page_size : UInt32, cookie : Win32cr::Networking::Ldap::LDAP_BERVAL*, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_create_page_control(external_handle, page_size, cookie, is_critical, control)
+  end
+
+  def ldapParsePageControl(external_handle : Win32cr::Networking::Ldap::Ldap*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, total_count : UInt32*, cookie : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
+    C.ldap_parse_page_control(external_handle, server_controls, total_count, cookie)
+  end
+
+  def ldapSearchInitPageW(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PWSTR, scope_of_search : UInt32, search_filter : Win32cr::Foundation::PWSTR, attribute_list : UInt16**, attributes_only : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, page_time_limit : UInt32, total_size_limit : UInt32, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeyw**) : Win32cr::Networking::Ldap::Ldapsearch*
+    C.ldap_search_init_pageW(external_handle, distinguished_name, scope_of_search, search_filter, attribute_list, attributes_only, server_controls, client_controls, page_time_limit, total_size_limit, sort_keys)
+  end
+
+  def ldapSearchInitPageA(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, scope_of_search : UInt32, search_filter : Win32cr::Foundation::PSTR, attribute_list : Int8**, attributes_only : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, page_time_limit : UInt32, total_size_limit : UInt32, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeya**) : Win32cr::Networking::Ldap::Ldapsearch*
+    C.ldap_search_init_pageA(external_handle, distinguished_name, scope_of_search, search_filter, attribute_list, attributes_only, server_controls, client_controls, page_time_limit, total_size_limit, sort_keys)
+  end
+
+  def ldapSearchInitPage(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, scope_of_search : UInt32, search_filter : Win32cr::Foundation::PSTR, attribute_list : Int8**, attributes_only : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, page_time_limit : UInt32, total_size_limit : UInt32, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeya**) : Win32cr::Networking::Ldap::Ldapsearch*
+    C.ldap_search_init_page(external_handle, distinguished_name, scope_of_search, search_filter, attribute_list, attributes_only, server_controls, client_controls, page_time_limit, total_size_limit, sort_keys)
+  end
+
+  def ldapGetNextPage(external_handle : Win32cr::Networking::Ldap::Ldap*, search_handle : Win32cr::Networking::Ldap::Ldapsearch*, page_size : UInt32, message_number : UInt32*) : UInt32
+    C.ldap_get_next_page(external_handle, search_handle, page_size, message_number)
+  end
+
+  def ldapGetNextPageS(external_handle : Win32cr::Networking::Ldap::Ldap*, search_handle : Win32cr::Networking::Ldap::Ldapsearch*, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, page_size : UInt32, total_count : UInt32*, results : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
+    C.ldap_get_next_page_s(external_handle, search_handle, timeout, page_size, total_count, results)
+  end
+
+  def ldapGetPagedCount(external_handle : Win32cr::Networking::Ldap::Ldap*, search_block : Win32cr::Networking::Ldap::Ldapsearch*, total_count : UInt32*, results : Win32cr::Networking::Ldap::LDAPMessage*) : UInt32
+    C.ldap_get_paged_count(external_handle, search_block, total_count, results)
+  end
+
+  def ldapSearchAbandonPage(external_handle : Win32cr::Networking::Ldap::Ldap*, search_block : Win32cr::Networking::Ldap::Ldapsearch*) : UInt32
+    C.ldap_search_abandon_page(external_handle, search_block)
+  end
+
+  def ldapCreateVlvControlW(external_handle : Win32cr::Networking::Ldap::Ldap*, vlv_info : Win32cr::Networking::Ldap::Ldapvlvinfo*, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrolw**) : Int32
+    C.ldap_create_vlv_controlW(external_handle, vlv_info, is_critical, control)
+  end
+
+  def ldapCreateVlvControlA(external_handle : Win32cr::Networking::Ldap::Ldap*, vlv_info : Win32cr::Networking::Ldap::Ldapvlvinfo*, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrola**) : Int32
+    C.ldap_create_vlv_controlA(external_handle, vlv_info, is_critical, control)
+  end
+
+  def ldapParseVlvControlW(external_handle : Win32cr::Networking::Ldap::Ldap*, control : Win32cr::Networking::Ldap::Ldapcontrolw**, target_pos : UInt32*, list_count : UInt32*, context : Win32cr::Networking::Ldap::LDAP_BERVAL**, err_code : Int32*) : Int32
+    C.ldap_parse_vlv_controlW(external_handle, control, target_pos, list_count, context, err_code)
+  end
+
+  def ldapParseVlvControlA(external_handle : Win32cr::Networking::Ldap::Ldap*, control : Win32cr::Networking::Ldap::Ldapcontrola**, target_pos : UInt32*, list_count : UInt32*, context : Win32cr::Networking::Ldap::LDAP_BERVAL**, err_code : Int32*) : Int32
+    C.ldap_parse_vlv_controlA(external_handle, control, target_pos, list_count, context, err_code)
+  end
+
+  def ldapStartTlsSW(external_handle : Win32cr::Networking::Ldap::Ldap*, server_return_value : UInt32*, result : Win32cr::Networking::Ldap::LDAPMessage**, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
+    C.ldap_start_tls_sW(external_handle, server_return_value, result, server_controls, client_controls)
+  end
+
+  def ldapStartTlsSA(external_handle : Win32cr::Networking::Ldap::Ldap*, server_return_value : UInt32*, result : Win32cr::Networking::Ldap::LDAPMessage**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
+    C.ldap_start_tls_sA(external_handle, server_return_value, result, server_controls, client_controls)
+  end
+
+  def ldapStopTlsS(external_handle : Win32cr::Networking::Ldap::Ldap*) : Win32cr::Foundation::BOOLEAN
+    C.ldap_stop_tls_s(external_handle)
+  end
+
+  def ldapFirstReference(ld : Win32cr::Networking::Ldap::Ldap*, res : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Networking::Ldap::LDAPMessage*
+    C.ldap_first_reference(ld, res)
+  end
+
+  def ldapNextReference(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Networking::Ldap::LDAPMessage*
+    C.ldap_next_reference(ld, entry)
+  end
+
+  def ldapCountReferences(ld : Win32cr::Networking::Ldap::Ldap*, res : Win32cr::Networking::Ldap::LDAPMessage*) : UInt32
+    C.ldap_count_references(ld, res)
+  end
+
+  def ldapParseReferenceW(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, referrals : Win32cr::Foundation::PWSTR**) : UInt32
+    C.ldap_parse_referenceW(connection, result_message, referrals)
+  end
+
+  def ldapParseReferenceA(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, referrals : Win32cr::Foundation::PSTR**) : UInt32
+    C.ldap_parse_referenceA(connection, result_message, referrals)
+  end
+
+  def ldapParseReference(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, referrals : Win32cr::Foundation::PSTR**) : UInt32
+    C.ldap_parse_reference(connection, result_message, referrals)
+  end
+
+  def ldapExtendedOperationW(ld : Win32cr::Networking::Ldap::Ldap*, oid : Win32cr::Foundation::PWSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : UInt32*) : UInt32
+    C.ldap_extended_operationW(ld, oid, data, server_controls, client_controls, message_number)
+  end
+
+  def ldapExtendedOperationA(ld : Win32cr::Networking::Ldap::Ldap*, oid : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
+    C.ldap_extended_operationA(ld, oid, data, server_controls, client_controls, message_number)
+  end
+
+  def ldapExtendedOperationSA(external_handle : Win32cr::Networking::Ldap::Ldap*, oid : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, returned_oid : Win32cr::Foundation::PSTR*, returned_data : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
+    C.ldap_extended_operation_sA(external_handle, oid, data, server_controls, client_controls, returned_oid, returned_data)
+  end
+
+  def ldapExtendedOperationSW(external_handle : Win32cr::Networking::Ldap::Ldap*, oid : Win32cr::Foundation::PWSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, returned_oid : Win32cr::Foundation::PWSTR*, returned_data : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
+    C.ldap_extended_operation_sW(external_handle, oid, data, server_controls, client_controls, returned_oid, returned_data)
+  end
+
+  def ldapExtendedOperation(ld : Win32cr::Networking::Ldap::Ldap*, oid : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
+    C.ldap_extended_operation(ld, oid, data, server_controls, client_controls, message_number)
+  end
+
+  def ldapCloseExtendedOp(ld : Win32cr::Networking::Ldap::Ldap*, message_number : UInt32) : UInt32
+    C.ldap_close_extended_op(ld, message_number)
+  end
+
+  def ldapGetLastError : UInt32
+    C.LdapGetLastError
+  end
+
+  def ldapMapErrorToWin32(ldap_error : UInt32) : UInt32
+    C.LdapMapErrorToWin32(ldap_error)
+  end
+
+  def ldapConnFromMsg(primary_conn : Win32cr::Networking::Ldap::Ldap*, res : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Networking::Ldap::Ldap*
+    C.ldap_conn_from_msg(primary_conn, res)
+  end
+
+  def berInit(pBerVal : Win32cr::Networking::Ldap::LDAP_BERVAL*) : Win32cr::Networking::Ldap::Berelement*
+    C.ber_init(pBerVal)
+  end
+
+  def berFree(pBerElement : Win32cr::Networking::Ldap::Berelement*, fbuf : Int32) : Void
+    C.ber_free(pBerElement, fbuf)
+  end
+
+  def berBvecfree(pBerVal : Win32cr::Networking::Ldap::LDAP_BERVAL**) : Void
+    C.ber_bvecfree(pBerVal)
+  end
+
+  def berBvdup(pBerVal : Win32cr::Networking::Ldap::LDAP_BERVAL*) : Win32cr::Networking::Ldap::LDAP_BERVAL*
+    C.ber_bvdup(pBerVal)
+  end
+
+  def berAllocT(options : Int32) : Win32cr::Networking::Ldap::Berelement*
+    C.ber_alloc_t(options)
+  end
+
+  def berSkipTag(pBerElement : Win32cr::Networking::Ldap::Berelement*, pLen : UInt32*) : UInt32
+    C.ber_skip_tag(pBerElement, pLen)
+  end
+
+  def berPeekTag(pBerElement : Win32cr::Networking::Ldap::Berelement*, pLen : UInt32*) : UInt32
+    C.ber_peek_tag(pBerElement, pLen)
+  end
+
+  def berFirstElement(pBerElement : Win32cr::Networking::Ldap::Berelement*, pLen : UInt32*, ppOpaque : Win32cr::Foundation::CHAR**) : UInt32
+    C.ber_first_element(pBerElement, pLen, ppOpaque)
+  end
+
+  def berNextElement(pBerElement : Win32cr::Networking::Ldap::Berelement*, pLen : UInt32*, opaque : Win32cr::Foundation::PSTR) : UInt32
+    C.ber_next_element(pBerElement, pLen, opaque)
+  end
+
+  def berFlatten(pBerElement : Win32cr::Networking::Ldap::Berelement*, pBerVal : Win32cr::Networking::Ldap::LDAP_BERVAL**) : Int32
+    C.ber_flatten(pBerElement, pBerVal)
+  end
+
+  def berPrintf(pBerElement : Win32cr::Networking::Ldap::Berelement*, fmt : Win32cr::Foundation::PSTR) : Int32
+    C.ber_printf(pBerElement, fmt)
+  end
+
+  def berScanf(pBerElement : Win32cr::Networking::Ldap::Berelement*, fmt : Win32cr::Foundation::PSTR) : UInt32
+    C.ber_scanf(pBerElement, fmt)
+  end
+
   @[Link("wldap32")]
   lib C
+    # :nodoc:
     fun ldap_openW(host_name : Win32cr::Foundation::PWSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
 
+    # :nodoc:
     fun ldap_openA(host_name : Win32cr::Foundation::PSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
 
+    # :nodoc:
     fun ldap_initW(host_name : Win32cr::Foundation::PWSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
 
+    # :nodoc:
     fun ldap_initA(host_name : Win32cr::Foundation::PSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
 
+    # :nodoc:
     fun ldap_sslinitW(host_name : Win32cr::Foundation::PWSTR, port_number : UInt32, secure : Int32) : Win32cr::Networking::Ldap::Ldap*
 
+    # :nodoc:
     fun ldap_sslinitA(host_name : Win32cr::Foundation::PSTR, port_number : UInt32, secure : Int32) : Win32cr::Networking::Ldap::Ldap*
 
+    # :nodoc:
     fun ldap_connect(ld : Win32cr::Networking::Ldap::Ldap*, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*) : UInt32
 
+    # :nodoc:
     fun ldap_open(host_name : Win32cr::Foundation::PSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
 
+    # :nodoc:
     fun ldap_init(host_name : Win32cr::Foundation::PSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
 
+    # :nodoc:
     fun ldap_sslinit(host_name : Win32cr::Foundation::PSTR, port_number : UInt32, secure : Int32) : Win32cr::Networking::Ldap::Ldap*
 
+    # :nodoc:
     fun cldap_openW(host_name : Win32cr::Foundation::PWSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
 
+    # :nodoc:
     fun cldap_openA(host_name : Win32cr::Foundation::PSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
 
+    # :nodoc:
     fun cldap_open(host_name : Win32cr::Foundation::PSTR, port_number : UInt32) : Win32cr::Networking::Ldap::Ldap*
 
+    # :nodoc:
     fun ldap_unbind(ld : Win32cr::Networking::Ldap::Ldap*) : UInt32
 
+    # :nodoc:
     fun ldap_unbind_s(ld : Win32cr::Networking::Ldap::Ldap*) : UInt32
 
+    # :nodoc:
     fun ldap_get_option(ld : Win32cr::Networking::Ldap::Ldap*, option : Int32, outvalue : Void*) : UInt32
 
+    # :nodoc:
     fun ldap_get_optionW(ld : Win32cr::Networking::Ldap::Ldap*, option : Int32, outvalue : Void*) : UInt32
 
+    # :nodoc:
     fun ldap_set_option(ld : Win32cr::Networking::Ldap::Ldap*, option : Int32, invalue : Void*) : UInt32
 
+    # :nodoc:
     fun ldap_set_optionW(ld : Win32cr::Networking::Ldap::Ldap*, option : Int32, invalue : Void*) : UInt32
 
+    # :nodoc:
     fun ldap_simple_bindW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, passwd : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ldap_simple_bindA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, passwd : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_simple_bind_sW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, passwd : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ldap_simple_bind_sA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, passwd : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_bindW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, cred : Win32cr::Foundation::PWSTR, method : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_bindA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, cred : Win32cr::Foundation::PSTR, method : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_bind_sW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, cred : Win32cr::Foundation::PWSTR, method : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_bind_sA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, cred : Win32cr::Foundation::PSTR, method : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_sasl_bindA(external_handle : Win32cr::Networking::Ldap::Ldap*, dist_name : Win32cr::Foundation::PSTR, auth_mechanism : Win32cr::Foundation::PSTR, cred : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_ctrls : Win32cr::Networking::Ldap::Ldapcontrola**, client_ctrls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : Int32*) : Int32
 
+    # :nodoc:
     fun ldap_sasl_bindW(external_handle : Win32cr::Networking::Ldap::Ldap*, dist_name : Win32cr::Foundation::PWSTR, auth_mechanism : Win32cr::Foundation::PWSTR, cred : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_ctrls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_ctrls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : Int32*) : Int32
 
+    # :nodoc:
     fun ldap_sasl_bind_sA(external_handle : Win32cr::Networking::Ldap::Ldap*, dist_name : Win32cr::Foundation::PSTR, auth_mechanism : Win32cr::Foundation::PSTR, cred : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_ctrls : Win32cr::Networking::Ldap::Ldapcontrola**, client_ctrls : Win32cr::Networking::Ldap::Ldapcontrola**, server_data : Win32cr::Networking::Ldap::LDAP_BERVAL**) : Int32
 
+    # :nodoc:
     fun ldap_sasl_bind_sW(external_handle : Win32cr::Networking::Ldap::Ldap*, dist_name : Win32cr::Foundation::PWSTR, auth_mechanism : Win32cr::Foundation::PWSTR, cred : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_ctrls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_ctrls : Win32cr::Networking::Ldap::Ldapcontrolw**, server_data : Win32cr::Networking::Ldap::LDAP_BERVAL**) : Int32
 
+    # :nodoc:
     fun ldap_simple_bind(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, passwd : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_simple_bind_s(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, passwd : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_bind(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, cred : Win32cr::Foundation::PSTR, method : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_bind_s(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, cred : Win32cr::Foundation::PSTR, method : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_searchW(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PWSTR, scope : UInt32, filter : Win32cr::Foundation::PWSTR, attrs : UInt16**, attrsonly : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_searchA(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_search_sW(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PWSTR, scope : UInt32, filter : Win32cr::Foundation::PWSTR, attrs : UInt16**, attrsonly : UInt32, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
 
+    # :nodoc:
     fun ldap_search_sA(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
 
+    # :nodoc:
     fun ldap_search_stW(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PWSTR, scope : UInt32, filter : Win32cr::Foundation::PWSTR, attrs : UInt16**, attrsonly : UInt32, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
 
+    # :nodoc:
     fun ldap_search_stA(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
 
+    # :nodoc:
     fun ldap_search_extW(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PWSTR, scope : UInt32, filter : Win32cr::Foundation::PWSTR, attrs : UInt16**, attrsonly : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, time_limit : UInt32, size_limit : UInt32, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_search_extA(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, time_limit : UInt32, size_limit : UInt32, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_search_ext_sW(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PWSTR, scope : UInt32, filter : Win32cr::Foundation::PWSTR, attrs : UInt16**, attrsonly : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, size_limit : UInt32, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
 
+    # :nodoc:
     fun ldap_search_ext_sA(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, size_limit : UInt32, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
 
+    # :nodoc:
     fun ldap_search(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_search_s(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
 
+    # :nodoc:
     fun ldap_search_st(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
 
+    # :nodoc:
     fun ldap_search_ext(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, time_limit : UInt32, size_limit : UInt32, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_search_ext_s(ld : Win32cr::Networking::Ldap::Ldap*, base : Win32cr::Foundation::PSTR, scope : UInt32, filter : Win32cr::Foundation::PSTR, attrs : Int8**, attrsonly : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, size_limit : UInt32, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
 
+    # :nodoc:
     fun ldap_check_filterW(ld : Win32cr::Networking::Ldap::Ldap*, search_filter : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ldap_check_filterA(ld : Win32cr::Networking::Ldap::Ldap*, search_filter : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_modifyW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, mods : Win32cr::Networking::Ldap::Ldapmodw**) : UInt32
 
+    # :nodoc:
     fun ldap_modifyA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
 
+    # :nodoc:
     fun ldap_modify_sW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, mods : Win32cr::Networking::Ldap::Ldapmodw**) : UInt32
 
+    # :nodoc:
     fun ldap_modify_sA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
 
+    # :nodoc:
     fun ldap_modify_extW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, mods : Win32cr::Networking::Ldap::Ldapmodw**, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_modify_extA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_modify_ext_sW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, mods : Win32cr::Networking::Ldap::Ldapmodw**, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
 
+    # :nodoc:
     fun ldap_modify_ext_sA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_modify(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
 
+    # :nodoc:
     fun ldap_modify_s(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
 
+    # :nodoc:
     fun ldap_modify_ext(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_modify_ext_s(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, mods : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_modrdn2W(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PWSTR, new_distinguished_name : Win32cr::Foundation::PWSTR, delete_old_rdn : Int32) : UInt32
 
+    # :nodoc:
     fun ldap_modrdn2A(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR, delete_old_rdn : Int32) : UInt32
 
+    # :nodoc:
     fun ldap_modrdnW(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PWSTR, new_distinguished_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ldap_modrdnA(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_modrdn2_sW(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PWSTR, new_distinguished_name : Win32cr::Foundation::PWSTR, delete_old_rdn : Int32) : UInt32
 
+    # :nodoc:
     fun ldap_modrdn2_sA(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR, delete_old_rdn : Int32) : UInt32
 
+    # :nodoc:
     fun ldap_modrdn_sW(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PWSTR, new_distinguished_name : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ldap_modrdn_sA(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_modrdn2(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR, delete_old_rdn : Int32) : UInt32
 
+    # :nodoc:
     fun ldap_modrdn(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_modrdn2_s(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR, delete_old_rdn : Int32) : UInt32
 
+    # :nodoc:
     fun ldap_modrdn_s(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, new_distinguished_name : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_rename_extW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, new_rdn : Win32cr::Foundation::PWSTR, new_parent : Win32cr::Foundation::PWSTR, delete_old_rdn : Int32, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_rename_extA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, new_rdn : Win32cr::Foundation::PSTR, new_parent : Win32cr::Foundation::PSTR, delete_old_rdn : Int32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_rename_ext_sW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, new_rdn : Win32cr::Foundation::PWSTR, new_parent : Win32cr::Foundation::PWSTR, delete_old_rdn : Int32, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
 
+    # :nodoc:
     fun ldap_rename_ext_sA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, new_rdn : Win32cr::Foundation::PSTR, new_parent : Win32cr::Foundation::PSTR, delete_old_rdn : Int32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_rename_ext(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, new_rdn : Win32cr::Foundation::PSTR, new_parent : Win32cr::Foundation::PSTR, delete_old_rdn : Int32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_rename_ext_s(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, new_rdn : Win32cr::Foundation::PSTR, new_parent : Win32cr::Foundation::PSTR, delete_old_rdn : Int32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_addW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attrs : Win32cr::Networking::Ldap::Ldapmodw**) : UInt32
 
+    # :nodoc:
     fun ldap_addA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
 
+    # :nodoc:
     fun ldap_add_sW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attrs : Win32cr::Networking::Ldap::Ldapmodw**) : UInt32
 
+    # :nodoc:
     fun ldap_add_sA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
 
+    # :nodoc:
     fun ldap_add_extW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attrs : Win32cr::Networking::Ldap::Ldapmodw**, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_add_extA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_add_ext_sW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attrs : Win32cr::Networking::Ldap::Ldapmodw**, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
 
+    # :nodoc:
     fun ldap_add_ext_sA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_add(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
 
+    # :nodoc:
     fun ldap_add_s(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**) : UInt32
 
+    # :nodoc:
     fun ldap_add_ext(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_add_ext_s(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attrs : Win32cr::Networking::Ldap::Ldapmoda**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_compareW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attr : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ldap_compareA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_compare_sW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attr : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ldap_compare_sA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_compare(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_compare_s(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_compare_extW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attr : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::PWSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_compare_extA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_compare_ext_sW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, attr : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::PWSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
 
+    # :nodoc:
     fun ldap_compare_ext_sA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_compare_ext(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_compare_ext_s(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, attr : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_deleteW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ldap_deleteA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_delete_sW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun ldap_delete_sA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_delete_extW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_delete_extA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_delete_ext_sW(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PWSTR, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
 
+    # :nodoc:
     fun ldap_delete_ext_sA(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_delete(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_delete_s(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ldap_delete_ext(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_delete_ext_s(ld : Win32cr::Networking::Ldap::Ldap*, dn : Win32cr::Foundation::PSTR, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_abandon(ld : Win32cr::Networking::Ldap::Ldap*, msgid : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_result(ld : Win32cr::Networking::Ldap::Ldap*, msgid : UInt32, all : UInt32, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, res : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
 
+    # :nodoc:
     fun ldap_msgfree(res : Win32cr::Networking::Ldap::LDAPMessage*) : UInt32
 
+    # :nodoc:
     fun ldap_result2error(ld : Win32cr::Networking::Ldap::Ldap*, res : Win32cr::Networking::Ldap::LDAPMessage*, freeit : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_parse_resultW(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, return_code : UInt32*, matched_d_ns : Win32cr::Foundation::PWSTR*, error_message : Win32cr::Foundation::PWSTR*, referrals : UInt16***, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw***, freeit : Win32cr::Foundation::BOOLEAN) : UInt32
 
+    # :nodoc:
     fun ldap_parse_resultA(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, return_code : UInt32*, matched_d_ns : Win32cr::Foundation::PSTR*, error_message : Win32cr::Foundation::PSTR*, referrals : Int8***, server_controls : Win32cr::Networking::Ldap::Ldapcontrola***, freeit : Win32cr::Foundation::BOOLEAN) : UInt32
 
+    # :nodoc:
     fun ldap_parse_extended_resultA(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, result_oid : Win32cr::Foundation::PSTR*, result_data : Win32cr::Networking::Ldap::LDAP_BERVAL**, freeit : Win32cr::Foundation::BOOLEAN) : UInt32
 
+    # :nodoc:
     fun ldap_parse_extended_resultW(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, result_oid : Win32cr::Foundation::PWSTR*, result_data : Win32cr::Networking::Ldap::LDAP_BERVAL**, freeit : Win32cr::Foundation::BOOLEAN) : UInt32
 
+    # :nodoc:
     fun ldap_controls_freeA(controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_control_freeA(controls : Win32cr::Networking::Ldap::Ldapcontrola*) : UInt32
 
+    # :nodoc:
     fun ldap_controls_freeW(control : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
 
+    # :nodoc:
     fun ldap_control_freeW(control : Win32cr::Networking::Ldap::Ldapcontrolw*) : UInt32
 
+    # :nodoc:
     fun ldap_free_controlsW(controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
 
+    # :nodoc:
     fun ldap_free_controlsA(controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_parse_result(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, return_code : UInt32*, matched_d_ns : Win32cr::Foundation::PSTR*, error_message : Win32cr::Foundation::PSTR*, referrals : Win32cr::Foundation::PSTR**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola***, freeit : Win32cr::Foundation::BOOLEAN) : UInt32
 
+    # :nodoc:
     fun ldap_controls_free(controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_control_free(control : Win32cr::Networking::Ldap::Ldapcontrola*) : UInt32
 
+    # :nodoc:
     fun ldap_free_controls(controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_err2stringW(err : UInt32) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun ldap_err2stringA(err : UInt32) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun ldap_err2string(err : UInt32) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun ldap_perror(ld : Win32cr::Networking::Ldap::Ldap*, msg : Win32cr::Foundation::PSTR) : Void
 
+    # :nodoc:
     fun ldap_first_entry(ld : Win32cr::Networking::Ldap::Ldap*, res : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Networking::Ldap::LDAPMessage*
 
+    # :nodoc:
     fun ldap_next_entry(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Networking::Ldap::LDAPMessage*
 
+    # :nodoc:
     fun ldap_count_entries(ld : Win32cr::Networking::Ldap::Ldap*, res : Win32cr::Networking::Ldap::LDAPMessage*) : UInt32
 
+    # :nodoc:
     fun ldap_first_attributeW(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, ptr : Win32cr::Networking::Ldap::Berelement**) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun ldap_first_attributeA(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, ptr : Win32cr::Networking::Ldap::Berelement**) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun ldap_first_attribute(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, ptr : Win32cr::Networking::Ldap::Berelement**) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun ldap_next_attributeW(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, ptr : Win32cr::Networking::Ldap::Berelement*) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun ldap_next_attributeA(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, ptr : Win32cr::Networking::Ldap::Berelement*) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun ldap_next_attribute(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, ptr : Win32cr::Networking::Ldap::Berelement*) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun ldap_get_valuesW(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, attr : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR*
 
+    # :nodoc:
     fun ldap_get_valuesA(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, attr : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR*
 
+    # :nodoc:
     fun ldap_get_values(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*, attr : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR*
 
+    # :nodoc:
     fun ldap_get_values_lenW(external_handle : Win32cr::Networking::Ldap::Ldap*, message : Win32cr::Networking::Ldap::LDAPMessage*, attr : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Ldap::LDAP_BERVAL**
 
+    # :nodoc:
     fun ldap_get_values_lenA(external_handle : Win32cr::Networking::Ldap::Ldap*, message : Win32cr::Networking::Ldap::LDAPMessage*, attr : Win32cr::Foundation::PSTR) : Win32cr::Networking::Ldap::LDAP_BERVAL**
 
+    # :nodoc:
     fun ldap_get_values_len(external_handle : Win32cr::Networking::Ldap::Ldap*, message : Win32cr::Networking::Ldap::LDAPMessage*, attr : Win32cr::Foundation::PSTR) : Win32cr::Networking::Ldap::LDAP_BERVAL**
 
+    # :nodoc:
     fun ldap_count_valuesW(vals : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun ldap_count_valuesA(vals : Win32cr::Foundation::PSTR*) : UInt32
 
+    # :nodoc:
     fun ldap_count_values(vals : Win32cr::Foundation::PSTR*) : UInt32
 
+    # :nodoc:
     fun ldap_count_values_len(vals : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
 
+    # :nodoc:
     fun ldap_value_freeW(vals : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun ldap_value_freeA(vals : Win32cr::Foundation::PSTR*) : UInt32
 
+    # :nodoc:
     fun ldap_value_free(vals : Win32cr::Foundation::PSTR*) : UInt32
 
+    # :nodoc:
     fun ldap_value_free_len(vals : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
 
+    # :nodoc:
     fun ldap_get_dnW(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun ldap_get_dnA(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun ldap_get_dn(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun ldap_explode_dnW(dn : Win32cr::Foundation::PWSTR, notypes : UInt32) : Win32cr::Foundation::PWSTR*
 
+    # :nodoc:
     fun ldap_explode_dnA(dn : Win32cr::Foundation::PSTR, notypes : UInt32) : Win32cr::Foundation::PSTR*
 
+    # :nodoc:
     fun ldap_explode_dn(dn : Win32cr::Foundation::PSTR, notypes : UInt32) : Win32cr::Foundation::PSTR*
 
+    # :nodoc:
     fun ldap_dn2ufnW(dn : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun ldap_dn2ufnA(dn : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun ldap_dn2ufn(dn : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun ldap_memfreeW(block : Win32cr::Foundation::PWSTR) : Void
 
+    # :nodoc:
     fun ldap_memfreeA(block : Win32cr::Foundation::PSTR) : Void
 
+    # :nodoc:
     fun ber_bvfree(bv : Win32cr::Networking::Ldap::LDAP_BERVAL*) : Void
 
+    # :nodoc:
     fun ldap_memfree(block : Win32cr::Foundation::PSTR) : Void
 
+    # :nodoc:
     fun ldap_ufn2dnW(ufn : Win32cr::Foundation::PWSTR, pDn : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun ldap_ufn2dnA(ufn : Win32cr::Foundation::PSTR, pDn : Win32cr::Foundation::PSTR*) : UInt32
 
+    # :nodoc:
     fun ldap_ufn2dn(ufn : Win32cr::Foundation::PSTR, pDn : Win32cr::Foundation::PSTR*) : UInt32
 
+    # :nodoc:
     fun ldap_startup(version : Win32cr::Networking::Ldap::Ldap_version_info*, instance : Win32cr::Foundation::HANDLE*) : UInt32
 
+    # :nodoc:
     fun ldap_cleanup(hInstance : Win32cr::Foundation::HANDLE) : UInt32
 
+    # :nodoc:
     fun ldap_escape_filter_elementW(sourceFilterElement : Win32cr::Foundation::PSTR, sourceLength : UInt32, destFilterElement : Win32cr::Foundation::PWSTR, destLength : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_escape_filter_elementA(sourceFilterElement : Win32cr::Foundation::PSTR, sourceLength : UInt32, destFilterElement : Win32cr::Foundation::PSTR, destLength : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_escape_filter_element(sourceFilterElement : Win32cr::Foundation::PSTR, sourceLength : UInt32, destFilterElement : Win32cr::Foundation::PSTR, destLength : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_set_dbg_flags(new_flags : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_set_dbg_routine(debug_print_routine : Win32cr::Networking::Ldap::DBGPRINT) : Void
 
+    # :nodoc:
     fun LdapUTF8ToUnicode(lpSrcStr : UInt8*, cchSrc : Int32, lpDestStr : UInt16*, cchDest : Int32) : Int32
 
+    # :nodoc:
     fun LdapUnicodeToUTF8(lpSrcStr : UInt16*, cchSrc : Int32, lpDestStr : UInt8*, cchDest : Int32) : Int32
 
+    # :nodoc:
     fun ldap_create_sort_controlA(external_handle : Win32cr::Networking::Ldap::Ldap*, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeya**, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_create_sort_controlW(external_handle : Win32cr::Networking::Ldap::Ldap*, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeyw**, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
 
+    # :nodoc:
     fun ldap_parse_sort_controlA(external_handle : Win32cr::Networking::Ldap::Ldap*, control : Win32cr::Networking::Ldap::Ldapcontrola**, result : UInt32*, attribute : Win32cr::Foundation::PSTR*) : UInt32
 
+    # :nodoc:
     fun ldap_parse_sort_controlW(external_handle : Win32cr::Networking::Ldap::Ldap*, control : Win32cr::Networking::Ldap::Ldapcontrolw**, result : UInt32*, attribute : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun ldap_create_sort_control(external_handle : Win32cr::Networking::Ldap::Ldap*, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeya**, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_parse_sort_control(external_handle : Win32cr::Networking::Ldap::Ldap*, control : Win32cr::Networking::Ldap::Ldapcontrola**, result : UInt32*, attribute : Win32cr::Foundation::PSTR*) : UInt32
 
+    # :nodoc:
     fun ldap_encode_sort_controlW(external_handle : Win32cr::Networking::Ldap::Ldap*, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeyw**, control : Win32cr::Networking::Ldap::Ldapcontrolw*, criticality : Win32cr::Foundation::BOOLEAN) : UInt32
 
+    # :nodoc:
     fun ldap_encode_sort_controlA(external_handle : Win32cr::Networking::Ldap::Ldap*, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeya**, control : Win32cr::Networking::Ldap::Ldapcontrola*, criticality : Win32cr::Foundation::BOOLEAN) : UInt32
 
+    # :nodoc:
     fun ldap_create_page_controlW(external_handle : Win32cr::Networking::Ldap::Ldap*, page_size : UInt32, cookie : Win32cr::Networking::Ldap::LDAP_BERVAL*, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
 
+    # :nodoc:
     fun ldap_create_page_controlA(external_handle : Win32cr::Networking::Ldap::Ldap*, page_size : UInt32, cookie : Win32cr::Networking::Ldap::LDAP_BERVAL*, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_parse_page_controlW(external_handle : Win32cr::Networking::Ldap::Ldap*, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, total_count : UInt32*, cookie : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
 
+    # :nodoc:
     fun ldap_parse_page_controlA(external_handle : Win32cr::Networking::Ldap::Ldap*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, total_count : UInt32*, cookie : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
 
+    # :nodoc:
     fun ldap_create_page_control(external_handle : Win32cr::Networking::Ldap::Ldap*, page_size : UInt32, cookie : Win32cr::Networking::Ldap::LDAP_BERVAL*, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_parse_page_control(external_handle : Win32cr::Networking::Ldap::Ldap*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, total_count : UInt32*, cookie : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
 
+    # :nodoc:
     fun ldap_search_init_pageW(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PWSTR, scope_of_search : UInt32, search_filter : Win32cr::Foundation::PWSTR, attribute_list : UInt16**, attributes_only : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, page_time_limit : UInt32, total_size_limit : UInt32, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeyw**) : Win32cr::Networking::Ldap::Ldapsearch*
 
+    # :nodoc:
     fun ldap_search_init_pageA(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, scope_of_search : UInt32, search_filter : Win32cr::Foundation::PSTR, attribute_list : Int8**, attributes_only : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, page_time_limit : UInt32, total_size_limit : UInt32, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeya**) : Win32cr::Networking::Ldap::Ldapsearch*
 
+    # :nodoc:
     fun ldap_search_init_page(external_handle : Win32cr::Networking::Ldap::Ldap*, distinguished_name : Win32cr::Foundation::PSTR, scope_of_search : UInt32, search_filter : Win32cr::Foundation::PSTR, attribute_list : Int8**, attributes_only : UInt32, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, page_time_limit : UInt32, total_size_limit : UInt32, sort_keys : Win32cr::Networking::Ldap::Ldapsortkeya**) : Win32cr::Networking::Ldap::Ldapsearch*
 
+    # :nodoc:
     fun ldap_get_next_page(external_handle : Win32cr::Networking::Ldap::Ldap*, search_handle : Win32cr::Networking::Ldap::Ldapsearch*, page_size : UInt32, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_get_next_page_s(external_handle : Win32cr::Networking::Ldap::Ldap*, search_handle : Win32cr::Networking::Ldap::Ldapsearch*, timeout : Win32cr::Networking::Ldap::LDAP_TIMEVAL*, page_size : UInt32, total_count : UInt32*, results : Win32cr::Networking::Ldap::LDAPMessage**) : UInt32
 
+    # :nodoc:
     fun ldap_get_paged_count(external_handle : Win32cr::Networking::Ldap::Ldap*, search_block : Win32cr::Networking::Ldap::Ldapsearch*, total_count : UInt32*, results : Win32cr::Networking::Ldap::LDAPMessage*) : UInt32
 
+    # :nodoc:
     fun ldap_search_abandon_page(external_handle : Win32cr::Networking::Ldap::Ldap*, search_block : Win32cr::Networking::Ldap::Ldapsearch*) : UInt32
 
+    # :nodoc:
     fun ldap_create_vlv_controlW(external_handle : Win32cr::Networking::Ldap::Ldap*, vlv_info : Win32cr::Networking::Ldap::Ldapvlvinfo*, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrolw**) : Int32
 
+    # :nodoc:
     fun ldap_create_vlv_controlA(external_handle : Win32cr::Networking::Ldap::Ldap*, vlv_info : Win32cr::Networking::Ldap::Ldapvlvinfo*, is_critical : UInt8, control : Win32cr::Networking::Ldap::Ldapcontrola**) : Int32
 
+    # :nodoc:
     fun ldap_parse_vlv_controlW(external_handle : Win32cr::Networking::Ldap::Ldap*, control : Win32cr::Networking::Ldap::Ldapcontrolw**, target_pos : UInt32*, list_count : UInt32*, context : Win32cr::Networking::Ldap::LDAP_BERVAL**, err_code : Int32*) : Int32
 
+    # :nodoc:
     fun ldap_parse_vlv_controlA(external_handle : Win32cr::Networking::Ldap::Ldap*, control : Win32cr::Networking::Ldap::Ldapcontrola**, target_pos : UInt32*, list_count : UInt32*, context : Win32cr::Networking::Ldap::LDAP_BERVAL**, err_code : Int32*) : Int32
 
+    # :nodoc:
     fun ldap_start_tls_sW(external_handle : Win32cr::Networking::Ldap::Ldap*, server_return_value : UInt32*, result : Win32cr::Networking::Ldap::LDAPMessage**, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**) : UInt32
 
+    # :nodoc:
     fun ldap_start_tls_sA(external_handle : Win32cr::Networking::Ldap::Ldap*, server_return_value : UInt32*, result : Win32cr::Networking::Ldap::LDAPMessage**, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**) : UInt32
 
+    # :nodoc:
     fun ldap_stop_tls_s(external_handle : Win32cr::Networking::Ldap::Ldap*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun ldap_first_reference(ld : Win32cr::Networking::Ldap::Ldap*, res : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Networking::Ldap::LDAPMessage*
 
+    # :nodoc:
     fun ldap_next_reference(ld : Win32cr::Networking::Ldap::Ldap*, entry : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Networking::Ldap::LDAPMessage*
 
+    # :nodoc:
     fun ldap_count_references(ld : Win32cr::Networking::Ldap::Ldap*, res : Win32cr::Networking::Ldap::LDAPMessage*) : UInt32
 
+    # :nodoc:
     fun ldap_parse_referenceW(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, referrals : Win32cr::Foundation::PWSTR**) : UInt32
 
+    # :nodoc:
     fun ldap_parse_referenceA(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, referrals : Win32cr::Foundation::PSTR**) : UInt32
 
+    # :nodoc:
     fun ldap_parse_reference(connection : Win32cr::Networking::Ldap::Ldap*, result_message : Win32cr::Networking::Ldap::LDAPMessage*, referrals : Win32cr::Foundation::PSTR**) : UInt32
 
+    # :nodoc:
     fun ldap_extended_operationW(ld : Win32cr::Networking::Ldap::Ldap*, oid : Win32cr::Foundation::PWSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_extended_operationA(ld : Win32cr::Networking::Ldap::Ldap*, oid : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_extended_operation_sA(external_handle : Win32cr::Networking::Ldap::Ldap*, oid : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, returned_oid : Win32cr::Foundation::PSTR*, returned_data : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
 
+    # :nodoc:
     fun ldap_extended_operation_sW(external_handle : Win32cr::Networking::Ldap::Ldap*, oid : Win32cr::Foundation::PWSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, client_controls : Win32cr::Networking::Ldap::Ldapcontrolw**, returned_oid : Win32cr::Foundation::PWSTR*, returned_data : Win32cr::Networking::Ldap::LDAP_BERVAL**) : UInt32
 
+    # :nodoc:
     fun ldap_extended_operation(ld : Win32cr::Networking::Ldap::Ldap*, oid : Win32cr::Foundation::PSTR, data : Win32cr::Networking::Ldap::LDAP_BERVAL*, server_controls : Win32cr::Networking::Ldap::Ldapcontrola**, client_controls : Win32cr::Networking::Ldap::Ldapcontrola**, message_number : UInt32*) : UInt32
 
+    # :nodoc:
     fun ldap_close_extended_op(ld : Win32cr::Networking::Ldap::Ldap*, message_number : UInt32) : UInt32
 
+    # :nodoc:
     fun LdapGetLastError : UInt32
 
+    # :nodoc:
     fun LdapMapErrorToWin32(ldap_error : UInt32) : UInt32
 
+    # :nodoc:
     fun ldap_conn_from_msg(primary_conn : Win32cr::Networking::Ldap::Ldap*, res : Win32cr::Networking::Ldap::LDAPMessage*) : Win32cr::Networking::Ldap::Ldap*
 
+    # :nodoc:
     fun ber_init(pBerVal : Win32cr::Networking::Ldap::LDAP_BERVAL*) : Win32cr::Networking::Ldap::Berelement*
 
+    # :nodoc:
     fun ber_free(pBerElement : Win32cr::Networking::Ldap::Berelement*, fbuf : Int32) : Void
 
+    # :nodoc:
     fun ber_bvecfree(pBerVal : Win32cr::Networking::Ldap::LDAP_BERVAL**) : Void
 
+    # :nodoc:
     fun ber_bvdup(pBerVal : Win32cr::Networking::Ldap::LDAP_BERVAL*) : Win32cr::Networking::Ldap::LDAP_BERVAL*
 
+    # :nodoc:
     fun ber_alloc_t(options : Int32) : Win32cr::Networking::Ldap::Berelement*
 
+    # :nodoc:
     fun ber_skip_tag(pBerElement : Win32cr::Networking::Ldap::Berelement*, pLen : UInt32*) : UInt32
 
+    # :nodoc:
     fun ber_peek_tag(pBerElement : Win32cr::Networking::Ldap::Berelement*, pLen : UInt32*) : UInt32
 
+    # :nodoc:
     fun ber_first_element(pBerElement : Win32cr::Networking::Ldap::Berelement*, pLen : UInt32*, ppOpaque : Win32cr::Foundation::CHAR**) : UInt32
 
+    # :nodoc:
     fun ber_next_element(pBerElement : Win32cr::Networking::Ldap::Berelement*, pLen : UInt32*, opaque : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun ber_flatten(pBerElement : Win32cr::Networking::Ldap::Berelement*, pBerVal : Win32cr::Networking::Ldap::LDAP_BERVAL**) : Int32
 
+    # :nodoc:
     fun ber_printf(pBerElement : Win32cr::Networking::Ldap::Berelement*, fmt : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun ber_scanf(pBerElement : Win32cr::Networking::Ldap::Berelement*, fmt : Win32cr::Foundation::PSTR) : UInt32
 
   end

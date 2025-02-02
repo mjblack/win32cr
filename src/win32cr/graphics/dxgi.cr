@@ -5,6 +5,7 @@ require "./../system/com.cr"
 require "./../security.cr"
 
 module Win32cr::Graphics::Dxgi
+  extend self
   DXGI_USAGE_SHADER_INPUT = 16_u32
   DXGI_USAGE_RENDER_TARGET_OUTPUT = 32_u32
   DXGI_USAGE_BACK_BUFFER = 64_u32
@@ -4891,16 +4892,41 @@ module Win32cr::Graphics::Dxgi
 
   end
 
+  def createDXGIFactory(riid : LibC::GUID*, ppFactory : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateDXGIFactory(riid, ppFactory)
+  end
+
+  def createDXGIFactory1(riid : LibC::GUID*, ppFactory : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateDXGIFactory1(riid, ppFactory)
+  end
+
+  def createDXGIFactory2(flags : UInt32, riid : LibC::GUID*, ppFactory : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateDXGIFactory2(flags, riid, ppFactory)
+  end
+
+  def dXGIGetDebugInterface1(flags : UInt32, riid : LibC::GUID*, pDebug : Void**) : Win32cr::Foundation::HRESULT
+    C.DXGIGetDebugInterface1(flags, riid, pDebug)
+  end
+
+  def dXGIDeclareAdapterRemovalSupport : Win32cr::Foundation::HRESULT
+    C.DXGIDeclareAdapterRemovalSupport
+  end
+
   @[Link("dxgi")]
   lib C
+    # :nodoc:
     fun CreateDXGIFactory(riid : LibC::GUID*, ppFactory : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateDXGIFactory1(riid : LibC::GUID*, ppFactory : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateDXGIFactory2(flags : UInt32, riid : LibC::GUID*, ppFactory : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DXGIGetDebugInterface1(flags : UInt32, riid : LibC::GUID*, pDebug : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DXGIDeclareAdapterRemovalSupport : Win32cr::Foundation::HRESULT
 
   end

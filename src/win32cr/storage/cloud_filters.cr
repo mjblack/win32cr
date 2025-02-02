@@ -4,6 +4,7 @@ require "./../system/correlation_vector.cr"
 require "./../system/io.cr"
 
 module Win32cr::Storage::CloudFilters
+  extend self
   alias CF_CONNECTION_KEY = LibC::IntPtrT
   alias CF_CALLBACK = Proc(Win32cr::Storage::CloudFilters::CF_CALLBACK_INFO*, Win32cr::Storage::CloudFilters::CF_CALLBACK_PARAMETERS*, Void)
 
@@ -859,76 +860,251 @@ module Win32cr::Storage::CloudFilters
     end
   end
 
+  def cfGetPlatformInfo(platform_version : Win32cr::Storage::CloudFilters::CF_PLATFORM_INFO*) : Win32cr::Foundation::HRESULT
+    C.CfGetPlatformInfo(platform_version)
+  end
+
+  def cfRegisterSyncRoot(sync_root_path : Win32cr::Foundation::PWSTR, registration : Win32cr::Storage::CloudFilters::CF_SYNC_REGISTRATION*, policies : Win32cr::Storage::CloudFilters::CF_SYNC_POLICIES*, register_flags : Win32cr::Storage::CloudFilters::CF_REGISTER_FLAGS) : Win32cr::Foundation::HRESULT
+    C.CfRegisterSyncRoot(sync_root_path, registration, policies, register_flags)
+  end
+
+  def cfUnregisterSyncRoot(sync_root_path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.CfUnregisterSyncRoot(sync_root_path)
+  end
+
+  def cfConnectSyncRoot(sync_root_path : Win32cr::Foundation::PWSTR, callback_table : Win32cr::Storage::CloudFilters::CF_CALLBACK_REGISTRATION*, callback_context : Void*, connect_flags : Win32cr::Storage::CloudFilters::CF_CONNECT_FLAGS, connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY*) : Win32cr::Foundation::HRESULT
+    C.CfConnectSyncRoot(sync_root_path, callback_table, callback_context, connect_flags, connection_key)
+  end
+
+  def cfDisconnectSyncRoot(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY) : Win32cr::Foundation::HRESULT
+    C.CfDisconnectSyncRoot(connection_key)
+  end
+
+  def cfGetTransferKey(file_handle : Win32cr::Foundation::HANDLE, transfer_key : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    C.CfGetTransferKey(file_handle, transfer_key)
+  end
+
+  def cfReleaseTransferKey(file_handle : Win32cr::Foundation::HANDLE, transfer_key : Win32cr::Foundation::LARGE_INTEGER*) : Void
+    C.CfReleaseTransferKey(file_handle, transfer_key)
+  end
+
+  def cfExecute(op_info : Win32cr::Storage::CloudFilters::CF_OPERATION_INFO*, op_params : Win32cr::Storage::CloudFilters::CF_OPERATION_PARAMETERS*) : Win32cr::Foundation::HRESULT
+    C.CfExecute(op_info, op_params)
+  end
+
+  def cfUpdateSyncProviderStatus(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, provider_status : Win32cr::Storage::CloudFilters::CF_SYNC_PROVIDER_STATUS) : Win32cr::Foundation::HRESULT
+    C.CfUpdateSyncProviderStatus(connection_key, provider_status)
+  end
+
+  def cfQuerySyncProviderStatus(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, provider_status : Win32cr::Storage::CloudFilters::CF_SYNC_PROVIDER_STATUS*) : Win32cr::Foundation::HRESULT
+    C.CfQuerySyncProviderStatus(connection_key, provider_status)
+  end
+
+  def cfReportSyncStatus(sync_root_path : Win32cr::Foundation::PWSTR, sync_status : Win32cr::Storage::CloudFilters::CF_SYNC_STATUS*) : Win32cr::Foundation::HRESULT
+    C.CfReportSyncStatus(sync_root_path, sync_status)
+  end
+
+  def cfCreatePlaceholders(base_directory_path : Win32cr::Foundation::PWSTR, placeholder_array : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_CREATE_INFO*, placeholder_count : UInt32, create_flags : Win32cr::Storage::CloudFilters::CF_CREATE_FLAGS, entries_processed : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CfCreatePlaceholders(base_directory_path, placeholder_array, placeholder_count, create_flags, entries_processed)
+  end
+
+  def cfOpenFileWithOplock(file_path : Win32cr::Foundation::PWSTR, flags : Win32cr::Storage::CloudFilters::CF_OPEN_FILE_FLAGS, protected_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    C.CfOpenFileWithOplock(file_path, flags, protected_handle)
+  end
+
+  def cfReferenceProtectedHandle(protected_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOLEAN
+    C.CfReferenceProtectedHandle(protected_handle)
+  end
+
+  def cfGetWin32HandleFromProtectedHandle(protected_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
+    C.CfGetWin32HandleFromProtectedHandle(protected_handle)
+  end
+
+  def cfReleaseProtectedHandle(protected_handle : Win32cr::Foundation::HANDLE) : Void
+    C.CfReleaseProtectedHandle(protected_handle)
+  end
+
+  def cfCloseHandle(file_handle : Win32cr::Foundation::HANDLE) : Void
+    C.CfCloseHandle(file_handle)
+  end
+
+  def cfConvertToPlaceholder(file_handle : Win32cr::Foundation::HANDLE, file_identity : Void*, file_identity_length : UInt32, convert_flags : Win32cr::Storage::CloudFilters::CF_CONVERT_FLAGS, convert_usn : Int64*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    C.CfConvertToPlaceholder(file_handle, file_identity, file_identity_length, convert_flags, convert_usn, overlapped)
+  end
+
+  def cfUpdatePlaceholder(file_handle : Win32cr::Foundation::HANDLE, fs_metadata : Win32cr::Storage::CloudFilters::CF_FS_METADATA*, file_identity : Void*, file_identity_length : UInt32, dehydrate_range_array : Win32cr::Storage::CloudFilters::CF_FILE_RANGE*, dehydrate_range_count : UInt32, update_flags : Win32cr::Storage::CloudFilters::CF_UPDATE_FLAGS, update_usn : Int64*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    C.CfUpdatePlaceholder(file_handle, fs_metadata, file_identity, file_identity_length, dehydrate_range_array, dehydrate_range_count, update_flags, update_usn, overlapped)
+  end
+
+  def cfRevertPlaceholder(file_handle : Win32cr::Foundation::HANDLE, revert_flags : Win32cr::Storage::CloudFilters::CF_REVERT_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    C.CfRevertPlaceholder(file_handle, revert_flags, overlapped)
+  end
+
+  def cfHydratePlaceholder(file_handle : Win32cr::Foundation::HANDLE, starting_offset : Win32cr::Foundation::LARGE_INTEGER, length : Win32cr::Foundation::LARGE_INTEGER, hydrate_flags : Win32cr::Storage::CloudFilters::CF_HYDRATE_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    C.CfHydratePlaceholder(file_handle, starting_offset, length, hydrate_flags, overlapped)
+  end
+
+  def cfDehydratePlaceholder(file_handle : Win32cr::Foundation::HANDLE, starting_offset : Win32cr::Foundation::LARGE_INTEGER, length : Win32cr::Foundation::LARGE_INTEGER, dehydrate_flags : Win32cr::Storage::CloudFilters::CF_DEHYDRATE_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    C.CfDehydratePlaceholder(file_handle, starting_offset, length, dehydrate_flags, overlapped)
+  end
+
+  def cfSetPinState(file_handle : Win32cr::Foundation::HANDLE, pin_state : Win32cr::Storage::CloudFilters::CF_PIN_STATE, pin_flags : Win32cr::Storage::CloudFilters::CF_SET_PIN_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    C.CfSetPinState(file_handle, pin_state, pin_flags, overlapped)
+  end
+
+  def cfSetInSyncState(file_handle : Win32cr::Foundation::HANDLE, in_sync_state : Win32cr::Storage::CloudFilters::CF_IN_SYNC_STATE, in_sync_flags : Win32cr::Storage::CloudFilters::CF_SET_IN_SYNC_FLAGS, in_sync_usn : Int64*) : Win32cr::Foundation::HRESULT
+    C.CfSetInSyncState(file_handle, in_sync_state, in_sync_flags, in_sync_usn)
+  end
+
+  def cfSetCorrelationVector(file_handle : Win32cr::Foundation::HANDLE, correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*) : Win32cr::Foundation::HRESULT
+    C.CfSetCorrelationVector(file_handle, correlation_vector)
+  end
+
+  def cfGetCorrelationVector(file_handle : Win32cr::Foundation::HANDLE, correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*) : Win32cr::Foundation::HRESULT
+    C.CfGetCorrelationVector(file_handle, correlation_vector)
+  end
+
+  def cfGetPlaceholderStateFromAttributeTag(file_attributes : UInt32, reparse_tag : UInt32) : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_STATE
+    C.CfGetPlaceholderStateFromAttributeTag(file_attributes, reparse_tag)
+  end
+
+  def cfGetPlaceholderStateFromFileInfo(info_buffer : Void*, info_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_HANDLE_CLASS) : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_STATE
+    C.CfGetPlaceholderStateFromFileInfo(info_buffer, info_class)
+  end
+
+  def cfGetPlaceholderStateFromFindData(find_data : Win32cr::Storage::FileSystem::WIN32_FIND_DATAA*) : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_STATE
+    C.CfGetPlaceholderStateFromFindData(find_data)
+  end
+
+  def cfGetPlaceholderInfo(file_handle : Win32cr::Foundation::HANDLE, info_class : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_INFO_CLASS, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CfGetPlaceholderInfo(file_handle, info_class, info_buffer, info_buffer_length, returned_length)
+  end
+
+  def cfGetSyncRootInfoByPath(file_path : Win32cr::Foundation::PWSTR, info_class : Win32cr::Storage::CloudFilters::CF_SYNC_ROOT_INFO_CLASS, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CfGetSyncRootInfoByPath(file_path, info_class, info_buffer, info_buffer_length, returned_length)
+  end
+
+  def cfGetSyncRootInfoByHandle(file_handle : Win32cr::Foundation::HANDLE, info_class : Win32cr::Storage::CloudFilters::CF_SYNC_ROOT_INFO_CLASS, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CfGetSyncRootInfoByHandle(file_handle, info_class, info_buffer, info_buffer_length, returned_length)
+  end
+
+  def cfGetPlaceholderRangeInfo(file_handle : Win32cr::Foundation::HANDLE, info_class : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_RANGE_INFO_CLASS, starting_offset : Win32cr::Foundation::LARGE_INTEGER, length : Win32cr::Foundation::LARGE_INTEGER, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
+    C.CfGetPlaceholderRangeInfo(file_handle, info_class, starting_offset, length, info_buffer, info_buffer_length, returned_length)
+  end
+
+  def cfReportProviderProgress(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Win32cr::Foundation::LARGE_INTEGER, provider_progress_total : Win32cr::Foundation::LARGE_INTEGER, provider_progress_completed : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::HRESULT
+    C.CfReportProviderProgress(connection_key, transfer_key, provider_progress_total, provider_progress_completed)
+  end
+
+  def cfReportProviderProgress2(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Win32cr::Foundation::LARGE_INTEGER, request_key : Win32cr::Foundation::LARGE_INTEGER, provider_progress_total : Win32cr::Foundation::LARGE_INTEGER, provider_progress_completed : Win32cr::Foundation::LARGE_INTEGER, target_session_id : UInt32) : Win32cr::Foundation::HRESULT
+    C.CfReportProviderProgress2(connection_key, transfer_key, request_key, provider_progress_total, provider_progress_completed, target_session_id)
+  end
+
   @[Link("cldapi")]
   lib C
+    # :nodoc:
     fun CfGetPlatformInfo(platform_version : Win32cr::Storage::CloudFilters::CF_PLATFORM_INFO*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfRegisterSyncRoot(sync_root_path : Win32cr::Foundation::PWSTR, registration : Win32cr::Storage::CloudFilters::CF_SYNC_REGISTRATION*, policies : Win32cr::Storage::CloudFilters::CF_SYNC_POLICIES*, register_flags : Win32cr::Storage::CloudFilters::CF_REGISTER_FLAGS) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfUnregisterSyncRoot(sync_root_path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfConnectSyncRoot(sync_root_path : Win32cr::Foundation::PWSTR, callback_table : Win32cr::Storage::CloudFilters::CF_CALLBACK_REGISTRATION*, callback_context : Void*, connect_flags : Win32cr::Storage::CloudFilters::CF_CONNECT_FLAGS, connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfDisconnectSyncRoot(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfGetTransferKey(file_handle : Win32cr::Foundation::HANDLE, transfer_key : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfReleaseTransferKey(file_handle : Win32cr::Foundation::HANDLE, transfer_key : Win32cr::Foundation::LARGE_INTEGER*) : Void
 
+    # :nodoc:
     fun CfExecute(op_info : Win32cr::Storage::CloudFilters::CF_OPERATION_INFO*, op_params : Win32cr::Storage::CloudFilters::CF_OPERATION_PARAMETERS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfUpdateSyncProviderStatus(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, provider_status : Win32cr::Storage::CloudFilters::CF_SYNC_PROVIDER_STATUS) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfQuerySyncProviderStatus(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, provider_status : Win32cr::Storage::CloudFilters::CF_SYNC_PROVIDER_STATUS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfReportSyncStatus(sync_root_path : Win32cr::Foundation::PWSTR, sync_status : Win32cr::Storage::CloudFilters::CF_SYNC_STATUS*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfCreatePlaceholders(base_directory_path : Win32cr::Foundation::PWSTR, placeholder_array : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_CREATE_INFO*, placeholder_count : UInt32, create_flags : Win32cr::Storage::CloudFilters::CF_CREATE_FLAGS, entries_processed : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfOpenFileWithOplock(file_path : Win32cr::Foundation::PWSTR, flags : Win32cr::Storage::CloudFilters::CF_OPEN_FILE_FLAGS, protected_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfReferenceProtectedHandle(protected_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun CfGetWin32HandleFromProtectedHandle(protected_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CfReleaseProtectedHandle(protected_handle : Win32cr::Foundation::HANDLE) : Void
 
+    # :nodoc:
     fun CfCloseHandle(file_handle : Win32cr::Foundation::HANDLE) : Void
 
+    # :nodoc:
     fun CfConvertToPlaceholder(file_handle : Win32cr::Foundation::HANDLE, file_identity : Void*, file_identity_length : UInt32, convert_flags : Win32cr::Storage::CloudFilters::CF_CONVERT_FLAGS, convert_usn : Int64*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfUpdatePlaceholder(file_handle : Win32cr::Foundation::HANDLE, fs_metadata : Win32cr::Storage::CloudFilters::CF_FS_METADATA*, file_identity : Void*, file_identity_length : UInt32, dehydrate_range_array : Win32cr::Storage::CloudFilters::CF_FILE_RANGE*, dehydrate_range_count : UInt32, update_flags : Win32cr::Storage::CloudFilters::CF_UPDATE_FLAGS, update_usn : Int64*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfRevertPlaceholder(file_handle : Win32cr::Foundation::HANDLE, revert_flags : Win32cr::Storage::CloudFilters::CF_REVERT_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfHydratePlaceholder(file_handle : Win32cr::Foundation::HANDLE, starting_offset : Win32cr::Foundation::LARGE_INTEGER, length : Win32cr::Foundation::LARGE_INTEGER, hydrate_flags : Win32cr::Storage::CloudFilters::CF_HYDRATE_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfDehydratePlaceholder(file_handle : Win32cr::Foundation::HANDLE, starting_offset : Win32cr::Foundation::LARGE_INTEGER, length : Win32cr::Foundation::LARGE_INTEGER, dehydrate_flags : Win32cr::Storage::CloudFilters::CF_DEHYDRATE_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfSetPinState(file_handle : Win32cr::Foundation::HANDLE, pin_state : Win32cr::Storage::CloudFilters::CF_PIN_STATE, pin_flags : Win32cr::Storage::CloudFilters::CF_SET_PIN_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfSetInSyncState(file_handle : Win32cr::Foundation::HANDLE, in_sync_state : Win32cr::Storage::CloudFilters::CF_IN_SYNC_STATE, in_sync_flags : Win32cr::Storage::CloudFilters::CF_SET_IN_SYNC_FLAGS, in_sync_usn : Int64*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfSetCorrelationVector(file_handle : Win32cr::Foundation::HANDLE, correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfGetCorrelationVector(file_handle : Win32cr::Foundation::HANDLE, correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfGetPlaceholderStateFromAttributeTag(file_attributes : UInt32, reparse_tag : UInt32) : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_STATE
 
+    # :nodoc:
     fun CfGetPlaceholderStateFromFileInfo(info_buffer : Void*, info_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_HANDLE_CLASS) : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_STATE
 
+    # :nodoc:
     fun CfGetPlaceholderStateFromFindData(find_data : Win32cr::Storage::FileSystem::WIN32_FIND_DATAA*) : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_STATE
 
+    # :nodoc:
     fun CfGetPlaceholderInfo(file_handle : Win32cr::Foundation::HANDLE, info_class : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_INFO_CLASS, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfGetSyncRootInfoByPath(file_path : Win32cr::Foundation::PWSTR, info_class : Win32cr::Storage::CloudFilters::CF_SYNC_ROOT_INFO_CLASS, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfGetSyncRootInfoByHandle(file_handle : Win32cr::Foundation::HANDLE, info_class : Win32cr::Storage::CloudFilters::CF_SYNC_ROOT_INFO_CLASS, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfGetPlaceholderRangeInfo(file_handle : Win32cr::Foundation::HANDLE, info_class : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_RANGE_INFO_CLASS, starting_offset : Win32cr::Foundation::LARGE_INTEGER, length : Win32cr::Foundation::LARGE_INTEGER, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfReportProviderProgress(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Win32cr::Foundation::LARGE_INTEGER, provider_progress_total : Win32cr::Foundation::LARGE_INTEGER, provider_progress_completed : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CfReportProviderProgress2(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Win32cr::Foundation::LARGE_INTEGER, request_key : Win32cr::Foundation::LARGE_INTEGER, provider_progress_total : Win32cr::Foundation::LARGE_INTEGER, provider_progress_completed : Win32cr::Foundation::LARGE_INTEGER, target_session_id : UInt32) : Win32cr::Foundation::HRESULT
 
   end

@@ -2,6 +2,7 @@ require "./com.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::ParentalControls
+  extend self
   ARRAY_SEP_CHAR = 9_u32
   WPCCHANNEL = 16_u32
   WPC_SETTINGS_LOCATE = 20_u32

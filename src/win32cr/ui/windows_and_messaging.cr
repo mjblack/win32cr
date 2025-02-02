@@ -4,6 +4,7 @@ require "./shell.cr"
 require "./../system/power.cr"
 
 module Win32cr::UI::WindowsAndMessaging
+  extend self
   alias HHOOK = LibC::IntPtrT
   alias HICON = LibC::IntPtrT
   alias HMENU = LibC::IntPtrT
@@ -3317,851 +3318,2937 @@ module Win32cr::UI::WindowsAndMessaging
     end
   end
 
+  def loadStringA(hInstance : Win32cr::Foundation::HINSTANCE, uID : UInt32, lpBuffer : Win32cr::Foundation::PSTR, cchBufferMax : Int32) : Int32
+    C.LoadStringA(hInstance, uID, lpBuffer, cchBufferMax)
+  end
+
+  def loadStringW(hInstance : Win32cr::Foundation::HINSTANCE, uID : UInt32, lpBuffer : Win32cr::Foundation::PWSTR, cchBufferMax : Int32) : Int32
+    C.LoadStringW(hInstance, uID, lpBuffer, cchBufferMax)
+  end
+
+  def wvsprintfA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, arglist : Int8*) : Int32
+    C.wvsprintfA(param0, param1, arglist)
+  end
+
+  def wvsprintfW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, arglist : Int8*) : Int32
+    C.wvsprintfW(param0, param1, arglist)
+  end
+
+  def wsprintfA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR) : Int32
+    C.wsprintfA(param0, param1)
+  end
+
+  def wsprintfW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR) : Int32
+    C.wsprintfW(param0, param1)
+  end
+
+  def isHungAppWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.IsHungAppWindow(hwnd)
+  end
+
+  def disableProcessWindowsGhosting : Void
+    C.DisableProcessWindowsGhosting
+  end
+
+  def registerWindowMessageA(lpString : Win32cr::Foundation::PSTR) : UInt32
+    C.RegisterWindowMessageA(lpString)
+  end
+
+  def registerWindowMessageW(lpString : Win32cr::Foundation::PWSTR) : UInt32
+    C.RegisterWindowMessageW(lpString)
+  end
+
+  def getMessageA(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, hWnd : Win32cr::Foundation::HWND, wMsgFilterMin : UInt32, wMsgFilterMax : UInt32) : Win32cr::Foundation::BOOL
+    C.GetMessageA(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax)
+  end
+
+  def getMessageW(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, hWnd : Win32cr::Foundation::HWND, wMsgFilterMin : UInt32, wMsgFilterMax : UInt32) : Win32cr::Foundation::BOOL
+    C.GetMessageW(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax)
+  end
+
+  def translateMessage(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::BOOL
+    C.TranslateMessage(lpMsg)
+  end
+
+  def dispatchMessageA(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::LRESULT
+    C.DispatchMessageA(lpMsg)
+  end
+
+  def dispatchMessageW(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::LRESULT
+    C.DispatchMessageW(lpMsg)
+  end
+
+  def setMessageQueue(cMessagesMax : Int32) : Win32cr::Foundation::BOOL
+    C.SetMessageQueue(cMessagesMax)
+  end
+
+  def peekMessageA(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, hWnd : Win32cr::Foundation::HWND, wMsgFilterMin : UInt32, wMsgFilterMax : UInt32, wRemoveMsg : Win32cr::UI::WindowsAndMessaging::PEEK_MESSAGE_REMOVE_TYPE) : Win32cr::Foundation::BOOL
+    C.PeekMessageA(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, wRemoveMsg)
+  end
+
+  def peekMessageW(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, hWnd : Win32cr::Foundation::HWND, wMsgFilterMin : UInt32, wMsgFilterMax : UInt32, wRemoveMsg : Win32cr::UI::WindowsAndMessaging::PEEK_MESSAGE_REMOVE_TYPE) : Win32cr::Foundation::BOOL
+    C.PeekMessageW(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, wRemoveMsg)
+  end
+
+  def getMessagePos : UInt32
+    C.GetMessagePos
+  end
+
+  def getMessageTime : Int32
+    C.GetMessageTime
+  end
+
+  def getMessageExtraInfo : Win32cr::Foundation::LPARAM
+    C.GetMessageExtraInfo
+  end
+
+  def isWow64Message : Win32cr::Foundation::BOOL
+    C.IsWow64Message
+  end
+
+  def setMessageExtraInfo(lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LPARAM
+    C.SetMessageExtraInfo(lParam)
+  end
+
+  def sendMessageA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.SendMessageA(hWnd, msg, wParam, lParam)
+  end
+
+  def sendMessageW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.SendMessageW(hWnd, msg, wParam, lParam)
+  end
+
+  def sendMessageTimeoutA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, fuFlags : Win32cr::UI::WindowsAndMessaging::SEND_MESSAGE_TIMEOUT_FLAGS, uTimeout : UInt32, lpdwResult : LibC::UIntPtrT*) : Win32cr::Foundation::LRESULT
+    C.SendMessageTimeoutA(hWnd, msg, wParam, lParam, fuFlags, uTimeout, lpdwResult)
+  end
+
+  def sendMessageTimeoutW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, fuFlags : Win32cr::UI::WindowsAndMessaging::SEND_MESSAGE_TIMEOUT_FLAGS, uTimeout : UInt32, lpdwResult : LibC::UIntPtrT*) : Win32cr::Foundation::LRESULT
+    C.SendMessageTimeoutW(hWnd, msg, wParam, lParam, fuFlags, uTimeout, lpdwResult)
+  end
+
+  def sendNotifyMessageA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.SendNotifyMessageA(hWnd, msg, wParam, lParam)
+  end
+
+  def sendNotifyMessageW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.SendNotifyMessageW(hWnd, msg, wParam, lParam)
+  end
+
+  def sendMessageCallbackA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, lpResultCallBack : Win32cr::UI::WindowsAndMessaging::SENDASYNCPROC, dwData : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.SendMessageCallbackA(hWnd, msg, wParam, lParam, lpResultCallBack, dwData)
+  end
+
+  def sendMessageCallbackW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, lpResultCallBack : Win32cr::UI::WindowsAndMessaging::SENDASYNCPROC, dwData : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.SendMessageCallbackW(hWnd, msg, wParam, lParam, lpResultCallBack, dwData)
+  end
+
+  def registerDeviceNotificationA(hRecipient : Win32cr::Foundation::HANDLE, notification_filter : Void*, flags : Win32cr::System::Power::POWER_SETTING_REGISTER_NOTIFICATION_FLAGS) : Void*
+    C.RegisterDeviceNotificationA(hRecipient, notification_filter, flags)
+  end
+
+  def registerDeviceNotificationW(hRecipient : Win32cr::Foundation::HANDLE, notification_filter : Void*, flags : Win32cr::System::Power::POWER_SETTING_REGISTER_NOTIFICATION_FLAGS) : Void*
+    C.RegisterDeviceNotificationW(hRecipient, notification_filter, flags)
+  end
+
+  def postMessageA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.PostMessageA(hWnd, msg, wParam, lParam)
+  end
+
+  def postMessageW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.PostMessageW(hWnd, msg, wParam, lParam)
+  end
+
+  def postThreadMessageA(idThread : UInt32, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.PostThreadMessageA(idThread, msg, wParam, lParam)
+  end
+
+  def postThreadMessageW(idThread : UInt32, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.PostThreadMessageW(idThread, msg, wParam, lParam)
+  end
+
+  def replyMessage(lResult : Win32cr::Foundation::LRESULT) : Win32cr::Foundation::BOOL
+    C.ReplyMessage(lResult)
+  end
+
+  def waitMessage : Win32cr::Foundation::BOOL
+    C.WaitMessage
+  end
+
+  def defWindowProcA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.DefWindowProcA(hWnd, msg, wParam, lParam)
+  end
+
+  def defWindowProcW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.DefWindowProcW(hWnd, msg, wParam, lParam)
+  end
+
+  def postQuitMessage(nExitCode : Int32) : Void
+    C.PostQuitMessage(nExitCode)
+  end
+
+  def callWindowProcA(lpPrevWndFunc : Win32cr::UI::WindowsAndMessaging::WNDPROC, hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.CallWindowProcA(lpPrevWndFunc, hWnd, msg, wParam, lParam)
+  end
+
+  def callWindowProcW(lpPrevWndFunc : Win32cr::UI::WindowsAndMessaging::WNDPROC, hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.CallWindowProcW(lpPrevWndFunc, hWnd, msg, wParam, lParam)
+  end
+
+  def inSendMessage : Win32cr::Foundation::BOOL
+    C.InSendMessage
+  end
+
+  def inSendMessageEx(lpReserved : Void*) : UInt32
+    C.InSendMessageEx(lpReserved)
+  end
+
+  def registerClassA(lpWndClass : Win32cr::UI::WindowsAndMessaging::WNDCLASSA*) : UInt16
+    C.RegisterClassA(lpWndClass)
+  end
+
+  def registerClassW(lpWndClass : Win32cr::UI::WindowsAndMessaging::WNDCLASSW*) : UInt16
+    C.RegisterClassW(lpWndClass)
+  end
+
+  def unregisterClassA(lpClassName : Win32cr::Foundation::PSTR, hInstance : Win32cr::Foundation::HINSTANCE) : Win32cr::Foundation::BOOL
+    C.UnregisterClassA(lpClassName, hInstance)
+  end
+
+  def unregisterClassW(lpClassName : Win32cr::Foundation::PWSTR, hInstance : Win32cr::Foundation::HINSTANCE) : Win32cr::Foundation::BOOL
+    C.UnregisterClassW(lpClassName, hInstance)
+  end
+
+  def getClassInfoA(hInstance : Win32cr::Foundation::HINSTANCE, lpClassName : Win32cr::Foundation::PSTR, lpWndClass : Win32cr::UI::WindowsAndMessaging::WNDCLASSA*) : Win32cr::Foundation::BOOL
+    C.GetClassInfoA(hInstance, lpClassName, lpWndClass)
+  end
+
+  def getClassInfoW(hInstance : Win32cr::Foundation::HINSTANCE, lpClassName : Win32cr::Foundation::PWSTR, lpWndClass : Win32cr::UI::WindowsAndMessaging::WNDCLASSW*) : Win32cr::Foundation::BOOL
+    C.GetClassInfoW(hInstance, lpClassName, lpWndClass)
+  end
+
+  def registerClassExA(param0 : Win32cr::UI::WindowsAndMessaging::WNDCLASSEXA*) : UInt16
+    C.RegisterClassExA(param0)
+  end
+
+  def registerClassExW(param0 : Win32cr::UI::WindowsAndMessaging::WNDCLASSEXW*) : UInt16
+    C.RegisterClassExW(param0)
+  end
+
+  def getClassInfoExA(hInstance : Win32cr::Foundation::HINSTANCE, lpszClass : Win32cr::Foundation::PSTR, lpwcx : Win32cr::UI::WindowsAndMessaging::WNDCLASSEXA*) : Win32cr::Foundation::BOOL
+    C.GetClassInfoExA(hInstance, lpszClass, lpwcx)
+  end
+
+  def getClassInfoExW(hInstance : Win32cr::Foundation::HINSTANCE, lpszClass : Win32cr::Foundation::PWSTR, lpwcx : Win32cr::UI::WindowsAndMessaging::WNDCLASSEXW*) : Win32cr::Foundation::BOOL
+    C.GetClassInfoExW(hInstance, lpszClass, lpwcx)
+  end
+
+  def createWindowExA(dwExStyle : UInt32, lpClassName : Win32cr::Foundation::PSTR, lpWindowName : Win32cr::Foundation::PSTR, dwStyle : UInt32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, hInstance : Win32cr::Foundation::HINSTANCE, lpParam : Void*) : Win32cr::Foundation::HWND
+    C.CreateWindowExA(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam)
+  end
+
+  def createWindowExW(dwExStyle : UInt32, lpClassName : Win32cr::Foundation::PWSTR, lpWindowName : Win32cr::Foundation::PWSTR, dwStyle : UInt32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, hInstance : Win32cr::Foundation::HINSTANCE, lpParam : Void*) : Win32cr::Foundation::HWND
+    C.CreateWindowExW(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam)
+  end
+
+  def isWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.IsWindow(hWnd)
+  end
+
+  def isMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU) : Win32cr::Foundation::BOOL
+    C.IsMenu(hMenu)
+  end
+
+  def isChild(hWndParent : Win32cr::Foundation::HWND, hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.IsChild(hWndParent, hWnd)
+  end
+
+  def destroyWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.DestroyWindow(hWnd)
+  end
+
+  def showWindow(hWnd : Win32cr::Foundation::HWND, nCmdShow : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD) : Win32cr::Foundation::BOOL
+    C.ShowWindow(hWnd, nCmdShow)
+  end
+
+  def animateWindow(hWnd : Win32cr::Foundation::HWND, dwTime : UInt32, dwFlags : Win32cr::UI::WindowsAndMessaging::ANIMATE_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
+    C.AnimateWindow(hWnd, dwTime, dwFlags)
+  end
+
+  def updateLayeredWindow(hWnd : Win32cr::Foundation::HWND, hdcDst : Win32cr::Graphics::Gdi::HDC, pptDst : Win32cr::Foundation::POINT*, psize : Win32cr::Foundation::SIZE*, hdcSrc : Win32cr::Graphics::Gdi::HDC, pptSrc : Win32cr::Foundation::POINT*, crKey : UInt32, pblend : Win32cr::Graphics::Gdi::BLENDFUNCTION*, dwFlags : Win32cr::UI::WindowsAndMessaging::UPDATE_LAYERED_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
+    C.UpdateLayeredWindow(hWnd, hdcDst, pptDst, psize, hdcSrc, pptSrc, crKey, pblend, dwFlags)
+  end
+
+  def updateLayeredWindowIndirect(hWnd : Win32cr::Foundation::HWND, pULWInfo : Win32cr::UI::WindowsAndMessaging::UPDATELAYEREDWINDOWINFO*) : Win32cr::Foundation::BOOL
+    C.UpdateLayeredWindowIndirect(hWnd, pULWInfo)
+  end
+
+  def getLayeredWindowAttributes(hwnd : Win32cr::Foundation::HWND, pcrKey : UInt32*, pbAlpha : UInt8*, pdwFlags : Win32cr::UI::WindowsAndMessaging::LAYERED_WINDOW_ATTRIBUTES_FLAGS*) : Win32cr::Foundation::BOOL
+    C.GetLayeredWindowAttributes(hwnd, pcrKey, pbAlpha, pdwFlags)
+  end
+
+  def setLayeredWindowAttributes(hwnd : Win32cr::Foundation::HWND, crKey : UInt32, bAlpha : UInt8, dwFlags : Win32cr::UI::WindowsAndMessaging::LAYERED_WINDOW_ATTRIBUTES_FLAGS) : Win32cr::Foundation::BOOL
+    C.SetLayeredWindowAttributes(hwnd, crKey, bAlpha, dwFlags)
+  end
+
+  def showWindowAsync(hWnd : Win32cr::Foundation::HWND, nCmdShow : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD) : Win32cr::Foundation::BOOL
+    C.ShowWindowAsync(hWnd, nCmdShow)
+  end
+
+  def flashWindow(hWnd : Win32cr::Foundation::HWND, bInvert : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.FlashWindow(hWnd, bInvert)
+  end
+
+  def flashWindowEx(pfwi : Win32cr::UI::WindowsAndMessaging::FLASHWINFO*) : Win32cr::Foundation::BOOL
+    C.FlashWindowEx(pfwi)
+  end
+
+  def showOwnedPopups(hWnd : Win32cr::Foundation::HWND, fShow : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.ShowOwnedPopups(hWnd, fShow)
+  end
+
+  def openIcon(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.OpenIcon(hWnd)
+  end
+
+  def closeWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.CloseWindow(hWnd)
+  end
+
+  def moveWindow(hWnd : Win32cr::Foundation::HWND, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, bRepaint : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.MoveWindow(hWnd, x, y, nWidth, nHeight, bRepaint)
+  end
+
+  def setWindowPos(hWnd : Win32cr::Foundation::HWND, hWndInsertAfter : Win32cr::Foundation::HWND, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::UI::WindowsAndMessaging::SET_WINDOW_POS_FLAGS) : Win32cr::Foundation::BOOL
+    C.SetWindowPos(hWnd, hWndInsertAfter, x, y, cx, cy, uFlags)
+  end
+
+  def getWindowPlacement(hWnd : Win32cr::Foundation::HWND, lpwndpl : Win32cr::UI::WindowsAndMessaging::WINDOWPLACEMENT*) : Win32cr::Foundation::BOOL
+    C.GetWindowPlacement(hWnd, lpwndpl)
+  end
+
+  def setWindowPlacement(hWnd : Win32cr::Foundation::HWND, lpwndpl : Win32cr::UI::WindowsAndMessaging::WINDOWPLACEMENT*) : Win32cr::Foundation::BOOL
+    C.SetWindowPlacement(hWnd, lpwndpl)
+  end
+
+  def getWindowDisplayAffinity(hWnd : Win32cr::Foundation::HWND, pdwAffinity : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetWindowDisplayAffinity(hWnd, pdwAffinity)
+  end
+
+  def setWindowDisplayAffinity(hWnd : Win32cr::Foundation::HWND, dwAffinity : Win32cr::UI::WindowsAndMessaging::WINDOW_DISPLAY_AFFINITY) : Win32cr::Foundation::BOOL
+    C.SetWindowDisplayAffinity(hWnd, dwAffinity)
+  end
+
+  def beginDeferWindowPos(nNumWindows : Int32) : LibC::IntPtrT
+    C.BeginDeferWindowPos(nNumWindows)
+  end
+
+  def deferWindowPos(hWinPosInfo : LibC::IntPtrT, hWnd : Win32cr::Foundation::HWND, hWndInsertAfter : Win32cr::Foundation::HWND, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::UI::WindowsAndMessaging::SET_WINDOW_POS_FLAGS) : LibC::IntPtrT
+    C.DeferWindowPos(hWinPosInfo, hWnd, hWndInsertAfter, x, y, cx, cy, uFlags)
+  end
+
+  def endDeferWindowPos(hWinPosInfo : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    C.EndDeferWindowPos(hWinPosInfo)
+  end
+
+  def isWindowVisible(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.IsWindowVisible(hWnd)
+  end
+
+  def isIconic(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.IsIconic(hWnd)
+  end
+
+  def anyPopup : Win32cr::Foundation::BOOL
+    C.AnyPopup
+  end
+
+  def bringWindowToTop(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.BringWindowToTop(hWnd)
+  end
+
+  def isZoomed(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.IsZoomed(hWnd)
+  end
+
+  def createDialogParamA(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplateName : Win32cr::Foundation::PSTR, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
+    C.CreateDialogParamA(hInstance, lpTemplateName, hWndParent, lpDialogFunc, dwInitParam)
+  end
+
+  def createDialogParamW(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplateName : Win32cr::Foundation::PWSTR, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
+    C.CreateDialogParamW(hInstance, lpTemplateName, hWndParent, lpDialogFunc, dwInitParam)
+  end
+
+  def createDialogIndirectParamA(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplate : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
+    C.CreateDialogIndirectParamA(hInstance, lpTemplate, hWndParent, lpDialogFunc, dwInitParam)
+  end
+
+  def createDialogIndirectParamW(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplate : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
+    C.CreateDialogIndirectParamW(hInstance, lpTemplate, hWndParent, lpDialogFunc, dwInitParam)
+  end
+
+  def dialogBoxParamA(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplateName : Win32cr::Foundation::PSTR, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : LibC::IntPtrT
+    C.DialogBoxParamA(hInstance, lpTemplateName, hWndParent, lpDialogFunc, dwInitParam)
+  end
+
+  def dialogBoxParamW(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplateName : Win32cr::Foundation::PWSTR, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : LibC::IntPtrT
+    C.DialogBoxParamW(hInstance, lpTemplateName, hWndParent, lpDialogFunc, dwInitParam)
+  end
+
+  def dialogBoxIndirectParamA(hInstance : Win32cr::Foundation::HINSTANCE, hDialogTemplate : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : LibC::IntPtrT
+    C.DialogBoxIndirectParamA(hInstance, hDialogTemplate, hWndParent, lpDialogFunc, dwInitParam)
+  end
+
+  def dialogBoxIndirectParamW(hInstance : Win32cr::Foundation::HINSTANCE, hDialogTemplate : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : LibC::IntPtrT
+    C.DialogBoxIndirectParamW(hInstance, hDialogTemplate, hWndParent, lpDialogFunc, dwInitParam)
+  end
+
+  def endDialog(hDlg : Win32cr::Foundation::HWND, nResult : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    C.EndDialog(hDlg, nResult)
+  end
+
+  def getDlgItem(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32) : Win32cr::Foundation::HWND
+    C.GetDlgItem(hDlg, nIDDlgItem)
+  end
+
+  def setDlgItemInt(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, uValue : UInt32, bSigned : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.SetDlgItemInt(hDlg, nIDDlgItem, uValue, bSigned)
+  end
+
+  def getDlgItemInt(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpTranslated : Win32cr::Foundation::BOOL*, bSigned : Win32cr::Foundation::BOOL) : UInt32
+    C.GetDlgItemInt(hDlg, nIDDlgItem, lpTranslated, bSigned)
+  end
+
+  def setDlgItemTextA(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetDlgItemTextA(hDlg, nIDDlgItem, lpString)
+  end
+
+  def setDlgItemTextW(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetDlgItemTextW(hDlg, nIDDlgItem, lpString)
+  end
+
+  def getDlgItemTextA(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpString : UInt8*, cchMax : Int32) : UInt32
+    C.GetDlgItemTextA(hDlg, nIDDlgItem, lpString, cchMax)
+  end
+
+  def getDlgItemTextW(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpString : UInt16*, cchMax : Int32) : UInt32
+    C.GetDlgItemTextW(hDlg, nIDDlgItem, lpString, cchMax)
+  end
+
+  def sendDlgItemMessageA(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.SendDlgItemMessageA(hDlg, nIDDlgItem, msg, wParam, lParam)
+  end
+
+  def sendDlgItemMessageW(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.SendDlgItemMessageW(hDlg, nIDDlgItem, msg, wParam, lParam)
+  end
+
+  def getNextDlgGroupItem(hDlg : Win32cr::Foundation::HWND, hCtl : Win32cr::Foundation::HWND, bPrevious : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HWND
+    C.GetNextDlgGroupItem(hDlg, hCtl, bPrevious)
+  end
+
+  def getNextDlgTabItem(hDlg : Win32cr::Foundation::HWND, hCtl : Win32cr::Foundation::HWND, bPrevious : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HWND
+    C.GetNextDlgTabItem(hDlg, hCtl, bPrevious)
+  end
+
+  def getDlgCtrlID(hWnd : Win32cr::Foundation::HWND) : Int32
+    C.GetDlgCtrlID(hWnd)
+  end
+
+  def getDialogBaseUnits : Int32
+    C.GetDialogBaseUnits
+  end
+
+  def defDlgProcA(hDlg : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.DefDlgProcA(hDlg, msg, wParam, lParam)
+  end
+
+  def defDlgProcW(hDlg : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.DefDlgProcW(hDlg, msg, wParam, lParam)
+  end
+
+  def callMsgFilterA(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, nCode : Int32) : Win32cr::Foundation::BOOL
+    C.CallMsgFilterA(lpMsg, nCode)
+  end
+
+  def callMsgFilterW(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, nCode : Int32) : Win32cr::Foundation::BOOL
+    C.CallMsgFilterW(lpMsg, nCode)
+  end
+
+  def charToOemA(pSrc : Win32cr::Foundation::PSTR, pDst : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.CharToOemA(pSrc, pDst)
+  end
+
+  def charToOemW(pSrc : Win32cr::Foundation::PWSTR, pDst : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.CharToOemW(pSrc, pDst)
+  end
+
+  def oemToCharA(pSrc : Win32cr::Foundation::PSTR, pDst : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.OemToCharA(pSrc, pDst)
+  end
+
+  def oemToCharW(pSrc : Win32cr::Foundation::PSTR, pDst : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.OemToCharW(pSrc, pDst)
+  end
+
+  def charToOemBuffA(lpszSrc : Win32cr::Foundation::PSTR, lpszDst : UInt8*, cchDstLength : UInt32) : Win32cr::Foundation::BOOL
+    C.CharToOemBuffA(lpszSrc, lpszDst, cchDstLength)
+  end
+
+  def charToOemBuffW(lpszSrc : Win32cr::Foundation::PWSTR, lpszDst : UInt8*, cchDstLength : UInt32) : Win32cr::Foundation::BOOL
+    C.CharToOemBuffW(lpszSrc, lpszDst, cchDstLength)
+  end
+
+  def oemToCharBuffA(lpszSrc : Win32cr::Foundation::PSTR, lpszDst : UInt8*, cchDstLength : UInt32) : Win32cr::Foundation::BOOL
+    C.OemToCharBuffA(lpszSrc, lpszDst, cchDstLength)
+  end
+
+  def oemToCharBuffW(lpszSrc : Win32cr::Foundation::PSTR, lpszDst : UInt16*, cchDstLength : UInt32) : Win32cr::Foundation::BOOL
+    C.OemToCharBuffW(lpszSrc, lpszDst, cchDstLength)
+  end
+
+  def charUpperA(lpsz : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    C.CharUpperA(lpsz)
+  end
+
+  def charUpperW(lpsz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.CharUpperW(lpsz)
+  end
+
+  def charUpperBuffA(lpsz : UInt8*, cchLength : UInt32) : UInt32
+    C.CharUpperBuffA(lpsz, cchLength)
+  end
+
+  def charUpperBuffW(lpsz : UInt16*, cchLength : UInt32) : UInt32
+    C.CharUpperBuffW(lpsz, cchLength)
+  end
+
+  def charLowerA(lpsz : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    C.CharLowerA(lpsz)
+  end
+
+  def charLowerW(lpsz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.CharLowerW(lpsz)
+  end
+
+  def charLowerBuffA(lpsz : UInt8*, cchLength : UInt32) : UInt32
+    C.CharLowerBuffA(lpsz, cchLength)
+  end
+
+  def charLowerBuffW(lpsz : UInt16*, cchLength : UInt32) : UInt32
+    C.CharLowerBuffW(lpsz, cchLength)
+  end
+
+  def charNextA(lpsz : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    C.CharNextA(lpsz)
+  end
+
+  def charNextW(lpsz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.CharNextW(lpsz)
+  end
+
+  def charPrevA(lpszStart : Win32cr::Foundation::PSTR, lpszCurrent : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    C.CharPrevA(lpszStart, lpszCurrent)
+  end
+
+  def charPrevW(lpszStart : Win32cr::Foundation::PWSTR, lpszCurrent : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    C.CharPrevW(lpszStart, lpszCurrent)
+  end
+
+  def charNextExA(code_page : UInt16, lpCurrentChar : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::PSTR
+    C.CharNextExA(code_page, lpCurrentChar, dwFlags)
+  end
+
+  def charPrevExA(code_page : UInt16, lpStart : Win32cr::Foundation::PSTR, lpCurrentChar : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::PSTR
+    C.CharPrevExA(code_page, lpStart, lpCurrentChar, dwFlags)
+  end
+
+  def isCharAlphaA(ch : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
+    C.IsCharAlphaA(ch)
+  end
+
+  def isCharAlphaW(ch : UInt16) : Win32cr::Foundation::BOOL
+    C.IsCharAlphaW(ch)
+  end
+
+  def isCharAlphaNumericA(ch : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
+    C.IsCharAlphaNumericA(ch)
+  end
+
+  def isCharAlphaNumericW(ch : UInt16) : Win32cr::Foundation::BOOL
+    C.IsCharAlphaNumericW(ch)
+  end
+
+  def isCharUpperA(ch : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
+    C.IsCharUpperA(ch)
+  end
+
+  def isCharUpperW(ch : UInt16) : Win32cr::Foundation::BOOL
+    C.IsCharUpperW(ch)
+  end
+
+  def isCharLowerA(ch : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
+    C.IsCharLowerA(ch)
+  end
+
+  def getInputState : Win32cr::Foundation::BOOL
+    C.GetInputState
+  end
+
+  def getQueueStatus(flags : Win32cr::UI::WindowsAndMessaging::QUEUE_STATUS_FLAGS) : UInt32
+    C.GetQueueStatus(flags)
+  end
+
+  def msgWaitForMultipleObjects(nCount : UInt32, pHandles : Win32cr::Foundation::HANDLE*, fWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32, dwWakeMask : Win32cr::UI::WindowsAndMessaging::QUEUE_STATUS_FLAGS) : UInt32
+    C.MsgWaitForMultipleObjects(nCount, pHandles, fWaitAll, dwMilliseconds, dwWakeMask)
+  end
+
+  def msgWaitForMultipleObjectsEx(nCount : UInt32, pHandles : Win32cr::Foundation::HANDLE*, dwMilliseconds : UInt32, dwWakeMask : Win32cr::UI::WindowsAndMessaging::QUEUE_STATUS_FLAGS, dwFlags : Win32cr::UI::WindowsAndMessaging::MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS) : UInt32
+    C.MsgWaitForMultipleObjectsEx(nCount, pHandles, dwMilliseconds, dwWakeMask, dwFlags)
+  end
+
+  def setTimer(hWnd : Win32cr::Foundation::HWND, nIDEvent : LibC::UIntPtrT, uElapse : UInt32, lpTimerFunc : Win32cr::UI::WindowsAndMessaging::TIMERPROC) : LibC::UIntPtrT
+    C.SetTimer(hWnd, nIDEvent, uElapse, lpTimerFunc)
+  end
+
+  def setCoalescableTimer(hWnd : Win32cr::Foundation::HWND, nIDEvent : LibC::UIntPtrT, uElapse : UInt32, lpTimerFunc : Win32cr::UI::WindowsAndMessaging::TIMERPROC, uToleranceDelay : UInt32) : LibC::UIntPtrT
+    C.SetCoalescableTimer(hWnd, nIDEvent, uElapse, lpTimerFunc, uToleranceDelay)
+  end
+
+  def killTimer(hWnd : Win32cr::Foundation::HWND, uIDEvent : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.KillTimer(hWnd, uIDEvent)
+  end
+
+  def isWindowUnicode(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.IsWindowUnicode(hWnd)
+  end
+
+  def loadAcceleratorsA(hInstance : Win32cr::Foundation::HINSTANCE, lpTableName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HACCEL
+    C.LoadAcceleratorsA(hInstance, lpTableName)
+  end
+
+  def loadAcceleratorsW(hInstance : Win32cr::Foundation::HINSTANCE, lpTableName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HACCEL
+    C.LoadAcceleratorsW(hInstance, lpTableName)
+  end
+
+  def createAcceleratorTableA(paccel : Win32cr::UI::WindowsAndMessaging::ACCEL*, cAccel : Int32) : Win32cr::UI::WindowsAndMessaging::HACCEL
+    C.CreateAcceleratorTableA(paccel, cAccel)
+  end
+
+  def createAcceleratorTableW(paccel : Win32cr::UI::WindowsAndMessaging::ACCEL*, cAccel : Int32) : Win32cr::UI::WindowsAndMessaging::HACCEL
+    C.CreateAcceleratorTableW(paccel, cAccel)
+  end
+
+  def destroyAcceleratorTable(hAccel : Win32cr::UI::WindowsAndMessaging::HACCEL) : Win32cr::Foundation::BOOL
+    C.DestroyAcceleratorTable(hAccel)
+  end
+
+  def copyAcceleratorTableA(hAccelSrc : Win32cr::UI::WindowsAndMessaging::HACCEL, lpAccelDst : Win32cr::UI::WindowsAndMessaging::ACCEL*, cAccelEntries : Int32) : Int32
+    C.CopyAcceleratorTableA(hAccelSrc, lpAccelDst, cAccelEntries)
+  end
+
+  def copyAcceleratorTableW(hAccelSrc : Win32cr::UI::WindowsAndMessaging::HACCEL, lpAccelDst : Win32cr::UI::WindowsAndMessaging::ACCEL*, cAccelEntries : Int32) : Int32
+    C.CopyAcceleratorTableW(hAccelSrc, lpAccelDst, cAccelEntries)
+  end
+
+  def translateAcceleratorA(hWnd : Win32cr::Foundation::HWND, hAccTable : Win32cr::UI::WindowsAndMessaging::HACCEL, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Int32
+    C.TranslateAcceleratorA(hWnd, hAccTable, lpMsg)
+  end
+
+  def translateAcceleratorW(hWnd : Win32cr::Foundation::HWND, hAccTable : Win32cr::UI::WindowsAndMessaging::HACCEL, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Int32
+    C.TranslateAcceleratorW(hWnd, hAccTable, lpMsg)
+  end
+
+  def getSystemMetrics(nIndex : Win32cr::UI::WindowsAndMessaging::SYSTEM_METRICS_INDEX) : Int32
+    C.GetSystemMetrics(nIndex)
+  end
+
+  def loadMenuA(hInstance : Win32cr::Foundation::HINSTANCE, lpMenuName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HMENU
+    C.LoadMenuA(hInstance, lpMenuName)
+  end
+
+  def loadMenuW(hInstance : Win32cr::Foundation::HINSTANCE, lpMenuName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HMENU
+    C.LoadMenuW(hInstance, lpMenuName)
+  end
+
+  def loadMenuIndirectA(lpMenuTemplate : Void*) : Win32cr::UI::WindowsAndMessaging::HMENU
+    C.LoadMenuIndirectA(lpMenuTemplate)
+  end
+
+  def loadMenuIndirectW(lpMenuTemplate : Void*) : Win32cr::UI::WindowsAndMessaging::HMENU
+    C.LoadMenuIndirectW(lpMenuTemplate)
+  end
+
+  def getMenu(hWnd : Win32cr::Foundation::HWND) : Win32cr::UI::WindowsAndMessaging::HMENU
+    C.GetMenu(hWnd)
+  end
+
+  def setMenu(hWnd : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU) : Win32cr::Foundation::BOOL
+    C.SetMenu(hWnd, hMenu)
+  end
+
+  def changeMenuA(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, cmd : UInt32, lpszNewItem : Win32cr::Foundation::PSTR, cmdInsert : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.ChangeMenuA(hMenu, cmd, lpszNewItem, cmdInsert, flags)
+  end
+
+  def changeMenuW(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, cmd : UInt32, lpszNewItem : Win32cr::Foundation::PWSTR, cmdInsert : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.ChangeMenuW(hMenu, cmd, lpszNewItem, cmdInsert, flags)
+  end
+
+  def hiliteMenuItem(hWnd : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDHiliteItem : UInt32, uHilite : UInt32) : Win32cr::Foundation::BOOL
+    C.HiliteMenuItem(hWnd, hMenu, uIDHiliteItem, uHilite)
+  end
+
+  def getMenuStringA(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDItem : UInt32, lpString : UInt8*, cchMax : Int32, flags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Int32
+    C.GetMenuStringA(hMenu, uIDItem, lpString, cchMax, flags)
+  end
+
+  def getMenuStringW(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDItem : UInt32, lpString : UInt16*, cchMax : Int32, flags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Int32
+    C.GetMenuStringW(hMenu, uIDItem, lpString, cchMax, flags)
+  end
+
+  def getMenuState(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uId : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : UInt32
+    C.GetMenuState(hMenu, uId, uFlags)
+  end
+
+  def drawMenuBar(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.DrawMenuBar(hWnd)
+  end
+
+  def getSystemMenu(hWnd : Win32cr::Foundation::HWND, bRevert : Win32cr::Foundation::BOOL) : Win32cr::UI::WindowsAndMessaging::HMENU
+    C.GetSystemMenu(hWnd, bRevert)
+  end
+
+  def createMenu : Win32cr::UI::WindowsAndMessaging::HMENU
+    C.CreateMenu
+  end
+
+  def createPopupMenu : Win32cr::UI::WindowsAndMessaging::HMENU
+    C.CreatePopupMenu
+  end
+
+  def destroyMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU) : Win32cr::Foundation::BOOL
+    C.DestroyMenu(hMenu)
+  end
+
+  def checkMenuItem(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDCheckItem : UInt32, uCheck : UInt32) : UInt32
+    C.CheckMenuItem(hMenu, uIDCheckItem, uCheck)
+  end
+
+  def enableMenuItem(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDEnableItem : UInt32, uEnable : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Win32cr::Foundation::BOOL
+    C.EnableMenuItem(hMenu, uIDEnableItem, uEnable)
+  end
+
+  def getSubMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, nPos : Int32) : Win32cr::UI::WindowsAndMessaging::HMENU
+    C.GetSubMenu(hMenu, nPos)
+  end
+
+  def getMenuItemID(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, nPos : Int32) : UInt32
+    C.GetMenuItemID(hMenu, nPos)
+  end
+
+  def getMenuItemCount(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU) : Int32
+    C.GetMenuItemCount(hMenu)
+  end
+
+  def insertMenuA(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.InsertMenuA(hMenu, uPosition, uFlags, uIDNewItem, lpNewItem)
+  end
+
+  def insertMenuW(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.InsertMenuW(hMenu, uPosition, uFlags, uIDNewItem, lpNewItem)
+  end
+
+  def appendMenuA(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.AppendMenuA(hMenu, uFlags, uIDNewItem, lpNewItem)
+  end
+
+  def appendMenuW(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.AppendMenuW(hMenu, uFlags, uIDNewItem, lpNewItem)
+  end
+
+  def modifyMenuA(hMnu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.ModifyMenuA(hMnu, uPosition, uFlags, uIDNewItem, lpNewItem)
+  end
+
+  def modifyMenuW(hMnu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.ModifyMenuW(hMnu, uPosition, uFlags, uIDNewItem, lpNewItem)
+  end
+
+  def removeMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Win32cr::Foundation::BOOL
+    C.RemoveMenu(hMenu, uPosition, uFlags)
+  end
+
+  def deleteMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Win32cr::Foundation::BOOL
+    C.DeleteMenu(hMenu, uPosition, uFlags)
+  end
+
+  def setMenuItemBitmaps(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, hBitmapUnchecked : Win32cr::Graphics::Gdi::HBITMAP, hBitmapChecked : Win32cr::Graphics::Gdi::HBITMAP) : Win32cr::Foundation::BOOL
+    C.SetMenuItemBitmaps(hMenu, uPosition, uFlags, hBitmapUnchecked, hBitmapChecked)
+  end
+
+  def getMenuCheckMarkDimensions : Int32
+    C.GetMenuCheckMarkDimensions
+  end
+
+  def trackPopupMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uFlags : Win32cr::UI::WindowsAndMessaging::TRACK_POPUP_MENU_FLAGS, x : Int32, y : Int32, nReserved : Int32, hWnd : Win32cr::Foundation::HWND, prcRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.TrackPopupMenu(hMenu, uFlags, x, y, nReserved, hWnd, prcRect)
+  end
+
+  def trackPopupMenuEx(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uFlags : UInt32, x : Int32, y : Int32, hwnd : Win32cr::Foundation::HWND, lptpm : Win32cr::UI::WindowsAndMessaging::TPMPARAMS*) : Win32cr::Foundation::BOOL
+    C.TrackPopupMenuEx(hMenu, uFlags, x, y, hwnd, lptpm)
+  end
+
+  def calculatePopupWindowPosition(anchorPoint : Win32cr::Foundation::POINT*, windowSize : Win32cr::Foundation::SIZE*, flags : UInt32, excludeRect : Win32cr::Foundation::RECT*, popupWindowPosition : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.CalculatePopupWindowPosition(anchorPoint, windowSize, flags, excludeRect, popupWindowPosition)
+  end
+
+  def getMenuInfo(param0 : Win32cr::UI::WindowsAndMessaging::HMENU, param1 : Win32cr::UI::WindowsAndMessaging::MENUINFO*) : Win32cr::Foundation::BOOL
+    C.GetMenuInfo(param0, param1)
+  end
+
+  def setMenuInfo(param0 : Win32cr::UI::WindowsAndMessaging::HMENU, param1 : Win32cr::UI::WindowsAndMessaging::MENUINFO*) : Win32cr::Foundation::BOOL
+    C.SetMenuInfo(param0, param1)
+  end
+
+  def endMenu : Win32cr::Foundation::BOOL
+    C.EndMenu
+  end
+
+  def insertMenuItemA(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPosition : Win32cr::Foundation::BOOL, lpmi : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOA*) : Win32cr::Foundation::BOOL
+    C.InsertMenuItemA(hmenu, item, fByPosition, lpmi)
+  end
+
+  def insertMenuItemW(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPosition : Win32cr::Foundation::BOOL, lpmi : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOW*) : Win32cr::Foundation::BOOL
+    C.InsertMenuItemW(hmenu, item, fByPosition, lpmi)
+  end
+
+  def getMenuItemInfoA(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPosition : Win32cr::Foundation::BOOL, lpmii : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOA*) : Win32cr::Foundation::BOOL
+    C.GetMenuItemInfoA(hmenu, item, fByPosition, lpmii)
+  end
+
+  def getMenuItemInfoW(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPosition : Win32cr::Foundation::BOOL, lpmii : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOW*) : Win32cr::Foundation::BOOL
+    C.GetMenuItemInfoW(hmenu, item, fByPosition, lpmii)
+  end
+
+  def setMenuItemInfoA(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPositon : Win32cr::Foundation::BOOL, lpmii : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOA*) : Win32cr::Foundation::BOOL
+    C.SetMenuItemInfoA(hmenu, item, fByPositon, lpmii)
+  end
+
+  def setMenuItemInfoW(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPositon : Win32cr::Foundation::BOOL, lpmii : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOW*) : Win32cr::Foundation::BOOL
+    C.SetMenuItemInfoW(hmenu, item, fByPositon, lpmii)
+  end
+
+  def getMenuDefaultItem(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, fByPos : UInt32, gmdiFlags : Win32cr::UI::WindowsAndMessaging::GET_MENU_DEFAULT_ITEM_FLAGS) : UInt32
+    C.GetMenuDefaultItem(hMenu, fByPos, gmdiFlags)
+  end
+
+  def setMenuDefaultItem(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uItem : UInt32, fByPos : UInt32) : Win32cr::Foundation::BOOL
+    C.SetMenuDefaultItem(hMenu, uItem, fByPos)
+  end
+
+  def getMenuItemRect(hWnd : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uItem : UInt32, lprcItem : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.GetMenuItemRect(hWnd, hMenu, uItem, lprcItem)
+  end
+
+  def menuItemFromPoint(hWnd : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, ptScreen : Win32cr::Foundation::POINT) : Int32
+    C.MenuItemFromPoint(hWnd, hMenu, ptScreen)
+  end
+
+  def dragObject(hwndParent : Win32cr::Foundation::HWND, hwndFrom : Win32cr::Foundation::HWND, fmt : UInt32, data : LibC::UIntPtrT, hcur : Win32cr::UI::WindowsAndMessaging::HCURSOR) : UInt32
+    C.DragObject(hwndParent, hwndFrom, fmt, data, hcur)
+  end
+
+  def drawIcon(hDC : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, hIcon : Win32cr::UI::WindowsAndMessaging::HICON) : Win32cr::Foundation::BOOL
+    C.DrawIcon(hDC, x, y, hIcon)
+  end
+
+  def getForegroundWindow : Win32cr::Foundation::HWND
+    C.GetForegroundWindow
+  end
+
+  def switchToThisWindow(hwnd : Win32cr::Foundation::HWND, fUnknown : Win32cr::Foundation::BOOL) : Void
+    C.SwitchToThisWindow(hwnd, fUnknown)
+  end
+
+  def setForegroundWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.SetForegroundWindow(hWnd)
+  end
+
+  def allowSetForegroundWindow(dwProcessId : UInt32) : Win32cr::Foundation::BOOL
+    C.AllowSetForegroundWindow(dwProcessId)
+  end
+
+  def lockSetForegroundWindow(uLockCode : Win32cr::UI::WindowsAndMessaging::FOREGROUND_WINDOW_LOCK_CODE) : Win32cr::Foundation::BOOL
+    C.LockSetForegroundWindow(uLockCode)
+  end
+
+  def scrollWindow(hWnd : Win32cr::Foundation::HWND, x_amount : Int32, y_amount : Int32, lpRect : Win32cr::Foundation::RECT*, lpClipRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.ScrollWindow(hWnd, x_amount, y_amount, lpRect, lpClipRect)
+  end
+
+  def scrollDC(hDC : Win32cr::Graphics::Gdi::HDC, dx : Int32, dy : Int32, lprcScroll : Win32cr::Foundation::RECT*, lprcClip : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, lprcUpdate : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.ScrollDC(hDC, dx, dy, lprcScroll, lprcClip, hrgnUpdate, lprcUpdate)
+  end
+
+  def scrollWindowEx(hWnd : Win32cr::Foundation::HWND, dx : Int32, dy : Int32, prcScroll : Win32cr::Foundation::RECT*, prcClip : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, prcUpdate : Win32cr::Foundation::RECT*, flags : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD) : Int32
+    C.ScrollWindowEx(hWnd, dx, dy, prcScroll, prcClip, hrgnUpdate, prcUpdate, flags)
+  end
+
+  def getScrollPos(hWnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS) : Int32
+    C.GetScrollPos(hWnd, nBar)
+  end
+
+  def getScrollRange(hWnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, lpMinPos : Int32*, lpMaxPos : Int32*) : Win32cr::Foundation::BOOL
+    C.GetScrollRange(hWnd, nBar, lpMinPos, lpMaxPos)
+  end
+
+  def setPropA(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PSTR, hData : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.SetPropA(hWnd, lpString, hData)
+  end
+
+  def setPropW(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PWSTR, hData : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.SetPropW(hWnd, lpString, hData)
+  end
+
+  def getPropA(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    C.GetPropA(hWnd, lpString)
+  end
+
+  def getPropW(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.GetPropW(hWnd, lpString)
+  end
+
+  def removePropA(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    C.RemovePropA(hWnd, lpString)
+  end
+
+  def removePropW(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.RemovePropW(hWnd, lpString)
+  end
+
+  def enumPropsExA(hWnd : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::PROPENUMPROCEXA, lParam : Win32cr::Foundation::LPARAM) : Int32
+    C.EnumPropsExA(hWnd, lpEnumFunc, lParam)
+  end
+
+  def enumPropsExW(hWnd : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::PROPENUMPROCEXW, lParam : Win32cr::Foundation::LPARAM) : Int32
+    C.EnumPropsExW(hWnd, lpEnumFunc, lParam)
+  end
+
+  def enumPropsA(hWnd : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::PROPENUMPROCA) : Int32
+    C.EnumPropsA(hWnd, lpEnumFunc)
+  end
+
+  def enumPropsW(hWnd : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::PROPENUMPROCW) : Int32
+    C.EnumPropsW(hWnd, lpEnumFunc)
+  end
+
+  def setWindowTextA(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    C.SetWindowTextA(hWnd, lpString)
+  end
+
+  def setWindowTextW(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    C.SetWindowTextW(hWnd, lpString)
+  end
+
+  def getWindowTextA(hWnd : Win32cr::Foundation::HWND, lpString : UInt8*, nMaxCount : Int32) : Int32
+    C.GetWindowTextA(hWnd, lpString, nMaxCount)
+  end
+
+  def getWindowTextW(hWnd : Win32cr::Foundation::HWND, lpString : UInt16*, nMaxCount : Int32) : Int32
+    C.GetWindowTextW(hWnd, lpString, nMaxCount)
+  end
+
+  def getWindowTextLengthA(hWnd : Win32cr::Foundation::HWND) : Int32
+    C.GetWindowTextLengthA(hWnd)
+  end
+
+  def getWindowTextLengthW(hWnd : Win32cr::Foundation::HWND) : Int32
+    C.GetWindowTextLengthW(hWnd)
+  end
+
+  def getClientRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.GetClientRect(hWnd, lpRect)
+  end
+
+  def getWindowRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.GetWindowRect(hWnd, lpRect)
+  end
+
+  def adjustWindowRect(lpRect : Win32cr::Foundation::RECT*, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, bMenu : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.AdjustWindowRect(lpRect, dwStyle, bMenu)
+  end
+
+  def adjustWindowRectEx(lpRect : Win32cr::Foundation::RECT*, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, bMenu : Win32cr::Foundation::BOOL, dwExStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_EX_STYLE) : Win32cr::Foundation::BOOL
+    C.AdjustWindowRectEx(lpRect, dwStyle, bMenu, dwExStyle)
+  end
+
+  def messageBoxA(hWnd : Win32cr::Foundation::HWND, lpText : Win32cr::Foundation::PSTR, lpCaption : Win32cr::Foundation::PSTR, uType : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
+    C.MessageBoxA(hWnd, lpText, lpCaption, uType)
+  end
+
+  def messageBoxW(hWnd : Win32cr::Foundation::HWND, lpText : Win32cr::Foundation::PWSTR, lpCaption : Win32cr::Foundation::PWSTR, uType : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
+    C.MessageBoxW(hWnd, lpText, lpCaption, uType)
+  end
+
+  def messageBoxExA(hWnd : Win32cr::Foundation::HWND, lpText : Win32cr::Foundation::PSTR, lpCaption : Win32cr::Foundation::PSTR, uType : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, wLanguageId : UInt16) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
+    C.MessageBoxExA(hWnd, lpText, lpCaption, uType, wLanguageId)
+  end
+
+  def messageBoxExW(hWnd : Win32cr::Foundation::HWND, lpText : Win32cr::Foundation::PWSTR, lpCaption : Win32cr::Foundation::PWSTR, uType : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, wLanguageId : UInt16) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
+    C.MessageBoxExW(hWnd, lpText, lpCaption, uType, wLanguageId)
+  end
+
+  def messageBoxIndirectA(lpmbp : Win32cr::UI::WindowsAndMessaging::MSGBOXPARAMSA*) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
+    C.MessageBoxIndirectA(lpmbp)
+  end
+
+  def messageBoxIndirectW(lpmbp : Win32cr::UI::WindowsAndMessaging::MSGBOXPARAMSW*) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
+    C.MessageBoxIndirectW(lpmbp)
+  end
+
+  def showCursor(bShow : Win32cr::Foundation::BOOL) : Int32
+    C.ShowCursor(bShow)
+  end
+
+  def setCursorPos(x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    C.SetCursorPos(x, y)
+  end
+
+  def setPhysicalCursorPos(x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    C.SetPhysicalCursorPos(x, y)
+  end
+
+  def setCursor(hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    C.SetCursor(hCursor)
+  end
+
+  def getCursorPos(lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.GetCursorPos(lpPoint)
+  end
+
+  def getPhysicalCursorPos(lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.GetPhysicalCursorPos(lpPoint)
+  end
+
+  def getClipCursor(lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.GetClipCursor(lpRect)
+  end
+
+  def getCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    C.GetCursor
+  end
+
+  def createCaret(hWnd : Win32cr::Foundation::HWND, hBitmap : Win32cr::Graphics::Gdi::HBITMAP, nWidth : Int32, nHeight : Int32) : Win32cr::Foundation::BOOL
+    C.CreateCaret(hWnd, hBitmap, nWidth, nHeight)
+  end
+
+  def getCaretBlinkTime : UInt32
+    C.GetCaretBlinkTime
+  end
+
+  def setCaretBlinkTime(uMSeconds : UInt32) : Win32cr::Foundation::BOOL
+    C.SetCaretBlinkTime(uMSeconds)
+  end
+
+  def destroyCaret : Win32cr::Foundation::BOOL
+    C.DestroyCaret
+  end
+
+  def hideCaret(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.HideCaret(hWnd)
+  end
+
+  def showCaret(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.ShowCaret(hWnd)
+  end
+
+  def setCaretPos(x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    C.SetCaretPos(x, y)
+  end
+
+  def getCaretPos(lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.GetCaretPos(lpPoint)
+  end
+
+  def logicalToPhysicalPoint(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.LogicalToPhysicalPoint(hWnd, lpPoint)
+  end
+
+  def physicalToLogicalPoint(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    C.PhysicalToLogicalPoint(hWnd, lpPoint)
+  end
+
+  def windowFromPoint(point : Win32cr::Foundation::POINT) : Win32cr::Foundation::HWND
+    C.WindowFromPoint(point)
+  end
+
+  def windowFromPhysicalPoint(point : Win32cr::Foundation::POINT) : Win32cr::Foundation::HWND
+    C.WindowFromPhysicalPoint(point)
+  end
+
+  def childWindowFromPoint(hWndParent : Win32cr::Foundation::HWND, point : Win32cr::Foundation::POINT) : Win32cr::Foundation::HWND
+    C.ChildWindowFromPoint(hWndParent, point)
+  end
+
+  def clipCursor(lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.ClipCursor(lpRect)
+  end
+
+  def childWindowFromPointEx(hwnd : Win32cr::Foundation::HWND, pt : Win32cr::Foundation::POINT, flags : Win32cr::UI::WindowsAndMessaging::CWP_FLAGS) : Win32cr::Foundation::HWND
+    C.ChildWindowFromPointEx(hwnd, pt, flags)
+  end
+
+  def getSysColor(nIndex : Win32cr::UI::WindowsAndMessaging::SYS_COLOR_INDEX) : UInt32
+    C.GetSysColor(nIndex)
+  end
+
+  def setSysColors(cElements : Int32, lpaElements : Int32*, lpaRgbValues : UInt32*) : Win32cr::Foundation::BOOL
+    C.SetSysColors(cElements, lpaElements, lpaRgbValues)
+  end
+
+  def getWindowWord(hWnd : Win32cr::Foundation::HWND, nIndex : Int32) : UInt16
+    C.GetWindowWord(hWnd, nIndex)
+  end
+
+  def setWindowWord(hWnd : Win32cr::Foundation::HWND, nIndex : Int32, wNewWord : UInt16) : UInt16
+    C.SetWindowWord(hWnd, nIndex, wNewWord)
+  end
+
+  def getWindowLongA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX) : Int32
+    C.GetWindowLongA(hWnd, nIndex)
+  end
+
+  def getWindowLongW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX) : Int32
+    C.GetWindowLongW(hWnd, nIndex)
+  end
+
+  def setWindowLongA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX, dwNewLong : Int32) : Int32
+    C.SetWindowLongA(hWnd, nIndex, dwNewLong)
+  end
+
+  def setWindowLongW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX, dwNewLong : Int32) : Int32
+    C.SetWindowLongW(hWnd, nIndex, dwNewLong)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def getWindowLongPtrA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX) : LibC::IntPtrT
+    C.GetWindowLongPtrA(hWnd, nIndex)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def getWindowLongPtrW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX) : LibC::IntPtrT
+    C.GetWindowLongPtrW(hWnd, nIndex)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def setWindowLongPtrA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX, dwNewLong : LibC::IntPtrT) : LibC::IntPtrT
+    C.SetWindowLongPtrA(hWnd, nIndex, dwNewLong)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def setWindowLongPtrW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX, dwNewLong : LibC::IntPtrT) : LibC::IntPtrT
+    C.SetWindowLongPtrW(hWnd, nIndex, dwNewLong)
+  end
+{% end %}
+
+  def getClassWord(hWnd : Win32cr::Foundation::HWND, nIndex : Int32) : UInt16
+    C.GetClassWord(hWnd, nIndex)
+  end
+
+  def setClassWord(hWnd : Win32cr::Foundation::HWND, nIndex : Int32, wNewWord : UInt16) : UInt16
+    C.SetClassWord(hWnd, nIndex, wNewWord)
+  end
+
+  def getClassLongA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX) : UInt32
+    C.GetClassLongA(hWnd, nIndex)
+  end
+
+  def getClassLongW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX) : UInt32
+    C.GetClassLongW(hWnd, nIndex)
+  end
+
+  def setClassLongA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX, dwNewLong : Int32) : UInt32
+    C.SetClassLongA(hWnd, nIndex, dwNewLong)
+  end
+
+  def setClassLongW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX, dwNewLong : Int32) : UInt32
+    C.SetClassLongW(hWnd, nIndex, dwNewLong)
+  end
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def getClassLongPtrA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX) : LibC::UIntPtrT
+    C.GetClassLongPtrA(hWnd, nIndex)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def getClassLongPtrW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX) : LibC::UIntPtrT
+    C.GetClassLongPtrW(hWnd, nIndex)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def setClassLongPtrA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX, dwNewLong : LibC::IntPtrT) : LibC::UIntPtrT
+    C.SetClassLongPtrA(hWnd, nIndex, dwNewLong)
+  end
+{% end %}
+
+{% if flag?(:x86_64) || flag?(:arm) %}
+  def setClassLongPtrW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX, dwNewLong : LibC::IntPtrT) : LibC::UIntPtrT
+    C.SetClassLongPtrW(hWnd, nIndex, dwNewLong)
+  end
+{% end %}
+
+  def getProcessDefaultLayout(pdwDefaultLayout : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetProcessDefaultLayout(pdwDefaultLayout)
+  end
+
+  def setProcessDefaultLayout(dwDefaultLayout : UInt32) : Win32cr::Foundation::BOOL
+    C.SetProcessDefaultLayout(dwDefaultLayout)
+  end
+
+  def getDesktopWindow : Win32cr::Foundation::HWND
+    C.GetDesktopWindow
+  end
+
+  def getParent(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    C.GetParent(hWnd)
+  end
+
+  def setParent(hWndChild : Win32cr::Foundation::HWND, hWndNewParent : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    C.SetParent(hWndChild, hWndNewParent)
+  end
+
+  def enumChildWindows(hWndParent : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::WNDENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.EnumChildWindows(hWndParent, lpEnumFunc, lParam)
+  end
+
+  def findWindowA(lpClassName : Win32cr::Foundation::PSTR, lpWindowName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HWND
+    C.FindWindowA(lpClassName, lpWindowName)
+  end
+
+  def findWindowW(lpClassName : Win32cr::Foundation::PWSTR, lpWindowName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HWND
+    C.FindWindowW(lpClassName, lpWindowName)
+  end
+
+  def findWindowExA(hWndParent : Win32cr::Foundation::HWND, hWndChildAfter : Win32cr::Foundation::HWND, lpszClass : Win32cr::Foundation::PSTR, lpszWindow : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HWND
+    C.FindWindowExA(hWndParent, hWndChildAfter, lpszClass, lpszWindow)
+  end
+
+  def findWindowExW(hWndParent : Win32cr::Foundation::HWND, hWndChildAfter : Win32cr::Foundation::HWND, lpszClass : Win32cr::Foundation::PWSTR, lpszWindow : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HWND
+    C.FindWindowExW(hWndParent, hWndChildAfter, lpszClass, lpszWindow)
+  end
+
+  def getShellWindow : Win32cr::Foundation::HWND
+    C.GetShellWindow
+  end
+
+  def registerShellHookWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.RegisterShellHookWindow(hwnd)
+  end
+
+  def deregisterShellHookWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.DeregisterShellHookWindow(hwnd)
+  end
+
+  def enumWindows(lpEnumFunc : Win32cr::UI::WindowsAndMessaging::WNDENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.EnumWindows(lpEnumFunc, lParam)
+  end
+
+  def enumThreadWindows(dwThreadId : UInt32, lpfn : Win32cr::UI::WindowsAndMessaging::WNDENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.EnumThreadWindows(dwThreadId, lpfn, lParam)
+  end
+
+  def getClassNameA(hWnd : Win32cr::Foundation::HWND, lpClassName : UInt8*, nMaxCount : Int32) : Int32
+    C.GetClassNameA(hWnd, lpClassName, nMaxCount)
+  end
+
+  def getClassNameW(hWnd : Win32cr::Foundation::HWND, lpClassName : UInt16*, nMaxCount : Int32) : Int32
+    C.GetClassNameW(hWnd, lpClassName, nMaxCount)
+  end
+
+  def getTopWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    C.GetTopWindow(hWnd)
+  end
+
+  def getWindowThreadProcessId(hWnd : Win32cr::Foundation::HWND, lpdwProcessId : UInt32*) : UInt32
+    C.GetWindowThreadProcessId(hWnd, lpdwProcessId)
+  end
+
+  def isGUIThread(bConvert : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.IsGUIThread(bConvert)
+  end
+
+  def getLastActivePopup(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    C.GetLastActivePopup(hWnd)
+  end
+
+  def getWindow(hWnd : Win32cr::Foundation::HWND, uCmd : Win32cr::UI::WindowsAndMessaging::GET_WINDOW_CMD) : Win32cr::Foundation::HWND
+    C.GetWindow(hWnd, uCmd)
+  end
+
+  def setWindowsHookA(nFilterType : Int32, pfnFilterProc : Win32cr::UI::WindowsAndMessaging::HOOKPROC) : Win32cr::UI::WindowsAndMessaging::HHOOK
+    C.SetWindowsHookA(nFilterType, pfnFilterProc)
+  end
+
+  def setWindowsHookW(nFilterType : Int32, pfnFilterProc : Win32cr::UI::WindowsAndMessaging::HOOKPROC) : Win32cr::UI::WindowsAndMessaging::HHOOK
+    C.SetWindowsHookW(nFilterType, pfnFilterProc)
+  end
+
+  def unhookWindowsHook(nCode : Int32, pfnFilterProc : Win32cr::UI::WindowsAndMessaging::HOOKPROC) : Win32cr::Foundation::BOOL
+    C.UnhookWindowsHook(nCode, pfnFilterProc)
+  end
+
+  def setWindowsHookExA(idHook : Win32cr::UI::WindowsAndMessaging::WINDOWS_HOOK_ID, lpfn : Win32cr::UI::WindowsAndMessaging::HOOKPROC, hmod : Win32cr::Foundation::HINSTANCE, dwThreadId : UInt32) : Win32cr::UI::WindowsAndMessaging::HHOOK
+    C.SetWindowsHookExA(idHook, lpfn, hmod, dwThreadId)
+  end
+
+  def setWindowsHookExW(idHook : Win32cr::UI::WindowsAndMessaging::WINDOWS_HOOK_ID, lpfn : Win32cr::UI::WindowsAndMessaging::HOOKPROC, hmod : Win32cr::Foundation::HINSTANCE, dwThreadId : UInt32) : Win32cr::UI::WindowsAndMessaging::HHOOK
+    C.SetWindowsHookExW(idHook, lpfn, hmod, dwThreadId)
+  end
+
+  def unhookWindowsHookEx(hhk : Win32cr::UI::WindowsAndMessaging::HHOOK) : Win32cr::Foundation::BOOL
+    C.UnhookWindowsHookEx(hhk)
+  end
+
+  def callNextHookEx(hhk : Win32cr::UI::WindowsAndMessaging::HHOOK, nCode : Int32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.CallNextHookEx(hhk, nCode, wParam, lParam)
+  end
+
+  def checkMenuRadioItem(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, first : UInt32, last : UInt32, check : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.CheckMenuRadioItem(hmenu, first, last, check, flags)
+  end
+
+  def loadCursorA(hInstance : Win32cr::Foundation::HINSTANCE, lpCursorName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    C.LoadCursorA(hInstance, lpCursorName)
+  end
+
+  def loadCursorW(hInstance : Win32cr::Foundation::HINSTANCE, lpCursorName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    C.LoadCursorW(hInstance, lpCursorName)
+  end
+
+  def loadCursorFromFileA(lpFileName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    C.LoadCursorFromFileA(lpFileName)
+  end
+
+  def loadCursorFromFileW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    C.LoadCursorFromFileW(lpFileName)
+  end
+
+  def createCursor(hInst : Win32cr::Foundation::HINSTANCE, xHotSpot : Int32, yHotSpot : Int32, nWidth : Int32, nHeight : Int32, pvANDPlane : Void*, pvXORPlane : Void*) : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    C.CreateCursor(hInst, xHotSpot, yHotSpot, nWidth, nHeight, pvANDPlane, pvXORPlane)
+  end
+
+  def destroyCursor(hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR) : Win32cr::Foundation::BOOL
+    C.DestroyCursor(hCursor)
+  end
+
+  def setSystemCursor(hcur : Win32cr::UI::WindowsAndMessaging::HCURSOR, id : Win32cr::UI::WindowsAndMessaging::SYSTEM_CURSOR_ID) : Win32cr::Foundation::BOOL
+    C.SetSystemCursor(hcur, id)
+  end
+
+  def loadIconA(hInstance : Win32cr::Foundation::HINSTANCE, lpIconName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HICON
+    C.LoadIconA(hInstance, lpIconName)
+  end
+
+  def loadIconW(hInstance : Win32cr::Foundation::HINSTANCE, lpIconName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HICON
+    C.LoadIconW(hInstance, lpIconName)
+  end
+
+  def privateExtractIconsA(szFileName : UInt8*, nIconIndex : Int32, cxIcon : Int32, cyIcon : Int32, phicon : Win32cr::UI::WindowsAndMessaging::HICON*, piconid : UInt32*, nIcons : UInt32, flags : UInt32) : UInt32
+    C.PrivateExtractIconsA(szFileName, nIconIndex, cxIcon, cyIcon, phicon, piconid, nIcons, flags)
+  end
+
+  def privateExtractIconsW(szFileName : UInt16*, nIconIndex : Int32, cxIcon : Int32, cyIcon : Int32, phicon : Win32cr::UI::WindowsAndMessaging::HICON*, piconid : UInt32*, nIcons : UInt32, flags : UInt32) : UInt32
+    C.PrivateExtractIconsW(szFileName, nIconIndex, cxIcon, cyIcon, phicon, piconid, nIcons, flags)
+  end
+
+  def createIcon(hInstance : Win32cr::Foundation::HINSTANCE, nWidth : Int32, nHeight : Int32, cPlanes : UInt8, cBitsPixel : UInt8, lpbANDbits : UInt8*, lpbXORbits : UInt8*) : Win32cr::UI::WindowsAndMessaging::HICON
+    C.CreateIcon(hInstance, nWidth, nHeight, cPlanes, cBitsPixel, lpbANDbits, lpbXORbits)
+  end
+
+  def destroyIcon(hIcon : Win32cr::UI::WindowsAndMessaging::HICON) : Win32cr::Foundation::BOOL
+    C.DestroyIcon(hIcon)
+  end
+
+  def lookupIconIdFromDirectory(presbits : UInt8*, fIcon : Win32cr::Foundation::BOOL) : Int32
+    C.LookupIconIdFromDirectory(presbits, fIcon)
+  end
+
+  def lookupIconIdFromDirectoryEx(presbits : UInt8*, fIcon : Win32cr::Foundation::BOOL, cxDesired : Int32, cyDesired : Int32, flags : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Int32
+    C.LookupIconIdFromDirectoryEx(presbits, fIcon, cxDesired, cyDesired, flags)
+  end
+
+  def createIconFromResource(presbits : UInt8*, dwResSize : UInt32, fIcon : Win32cr::Foundation::BOOL, dwVer : UInt32) : Win32cr::UI::WindowsAndMessaging::HICON
+    C.CreateIconFromResource(presbits, dwResSize, fIcon, dwVer)
+  end
+
+  def createIconFromResourceEx(presbits : UInt8*, dwResSize : UInt32, fIcon : Win32cr::Foundation::BOOL, dwVer : UInt32, cxDesired : Int32, cyDesired : Int32, flags : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::UI::WindowsAndMessaging::HICON
+    C.CreateIconFromResourceEx(presbits, dwResSize, fIcon, dwVer, cxDesired, cyDesired, flags)
+  end
+
+  def loadImageA(hInst : Win32cr::Foundation::HINSTANCE, name : Win32cr::Foundation::PSTR, type__ : Win32cr::UI::WindowsAndMessaging::GDI_IMAGE_TYPE, cx : Int32, cy : Int32, fuLoad : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::Foundation::HANDLE
+    C.LoadImageA(hInst, name, type__, cx, cy, fuLoad)
+  end
+
+  def loadImageW(hInst : Win32cr::Foundation::HINSTANCE, name : Win32cr::Foundation::PWSTR, type__ : Win32cr::UI::WindowsAndMessaging::GDI_IMAGE_TYPE, cx : Int32, cy : Int32, fuLoad : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::Foundation::HANDLE
+    C.LoadImageW(hInst, name, type__, cx, cy, fuLoad)
+  end
+
+  def copyImage(h : Win32cr::Foundation::HANDLE, type__ : Win32cr::UI::WindowsAndMessaging::GDI_IMAGE_TYPE, cx : Int32, cy : Int32, flags : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::Foundation::HANDLE
+    C.CopyImage(h, type__, cx, cy, flags)
+  end
+
+  def drawIconEx(hdc : Win32cr::Graphics::Gdi::HDC, xLeft : Int32, yTop : Int32, hIcon : Win32cr::UI::WindowsAndMessaging::HICON, cxWidth : Int32, cyWidth : Int32, istepIfAniCur : UInt32, hbrFlickerFreeDraw : Win32cr::Graphics::Gdi::HBRUSH, diFlags : Win32cr::UI::WindowsAndMessaging::DI_FLAGS) : Win32cr::Foundation::BOOL
+    C.DrawIconEx(hdc, xLeft, yTop, hIcon, cxWidth, cyWidth, istepIfAniCur, hbrFlickerFreeDraw, diFlags)
+  end
+
+  def createIconIndirect(piconinfo : Win32cr::UI::WindowsAndMessaging::ICONINFO*) : Win32cr::UI::WindowsAndMessaging::HICON
+    C.CreateIconIndirect(piconinfo)
+  end
+
+  def copyIcon(hIcon : Win32cr::UI::WindowsAndMessaging::HICON) : Win32cr::UI::WindowsAndMessaging::HICON
+    C.CopyIcon(hIcon)
+  end
+
+  def getIconInfo(hIcon : Win32cr::UI::WindowsAndMessaging::HICON, piconinfo : Win32cr::UI::WindowsAndMessaging::ICONINFO*) : Win32cr::Foundation::BOOL
+    C.GetIconInfo(hIcon, piconinfo)
+  end
+
+  def getIconInfoExA(hicon : Win32cr::UI::WindowsAndMessaging::HICON, piconinfo : Win32cr::UI::WindowsAndMessaging::ICONINFOEXA*) : Win32cr::Foundation::BOOL
+    C.GetIconInfoExA(hicon, piconinfo)
+  end
+
+  def getIconInfoExW(hicon : Win32cr::UI::WindowsAndMessaging::HICON, piconinfo : Win32cr::UI::WindowsAndMessaging::ICONINFOEXW*) : Win32cr::Foundation::BOOL
+    C.GetIconInfoExW(hicon, piconinfo)
+  end
+
+  def isDialogMessageA(hDlg : Win32cr::Foundation::HWND, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::BOOL
+    C.IsDialogMessageA(hDlg, lpMsg)
+  end
+
+  def isDialogMessageW(hDlg : Win32cr::Foundation::HWND, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::BOOL
+    C.IsDialogMessageW(hDlg, lpMsg)
+  end
+
+  def mapDialogRect(hDlg : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    C.MapDialogRect(hDlg, lpRect)
+  end
+
+  def getScrollInfo(hwnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, lpsi : Win32cr::UI::WindowsAndMessaging::SCROLLINFO*) : Win32cr::Foundation::BOOL
+    C.GetScrollInfo(hwnd, nBar, lpsi)
+  end
+
+  def defFrameProcA(hWnd : Win32cr::Foundation::HWND, hWndMDIClient : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.DefFrameProcA(hWnd, hWndMDIClient, uMsg, wParam, lParam)
+  end
+
+  def defFrameProcW(hWnd : Win32cr::Foundation::HWND, hWndMDIClient : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.DefFrameProcW(hWnd, hWndMDIClient, uMsg, wParam, lParam)
+  end
+
+  def defMDIChildProcA(hWnd : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.DefMDIChildProcA(hWnd, uMsg, wParam, lParam)
+  end
+
+  def defMDIChildProcW(hWnd : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    C.DefMDIChildProcW(hWnd, uMsg, wParam, lParam)
+  end
+
+  def translateMDISysAccel(hWndClient : Win32cr::Foundation::HWND, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::BOOL
+    C.TranslateMDISysAccel(hWndClient, lpMsg)
+  end
+
+  def arrangeIconicWindows(hWnd : Win32cr::Foundation::HWND) : UInt32
+    C.ArrangeIconicWindows(hWnd)
+  end
+
+  def createMDIWindowA(lpClassName : Win32cr::Foundation::PSTR, lpWindowName : Win32cr::Foundation::PSTR, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
+    C.CreateMDIWindowA(lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hInstance, lParam)
+  end
+
+  def createMDIWindowW(lpClassName : Win32cr::Foundation::PWSTR, lpWindowName : Win32cr::Foundation::PWSTR, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
+    C.CreateMDIWindowW(lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hInstance, lParam)
+  end
+
+  def tileWindows(hwndParent : Win32cr::Foundation::HWND, wHow : Win32cr::UI::WindowsAndMessaging::TILE_WINDOWS_HOW, lpRect : Win32cr::Foundation::RECT*, cKids : UInt32, lpKids : Win32cr::Foundation::HWND*) : UInt16
+    C.TileWindows(hwndParent, wHow, lpRect, cKids, lpKids)
+  end
+
+  def cascadeWindows(hwndParent : Win32cr::Foundation::HWND, wHow : Win32cr::UI::WindowsAndMessaging::CASCADE_WINDOWS_HOW, lpRect : Win32cr::Foundation::RECT*, cKids : UInt32, lpKids : Win32cr::Foundation::HWND*) : UInt16
+    C.CascadeWindows(hwndParent, wHow, lpRect, cKids, lpKids)
+  end
+
+  def systemParametersInfoA(uiAction : Win32cr::UI::WindowsAndMessaging::SYSTEM_PARAMETERS_INFO_ACTION, uiParam : UInt32, pvParam : Void*, fWinIni : Win32cr::UI::WindowsAndMessaging::SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS) : Win32cr::Foundation::BOOL
+    C.SystemParametersInfoA(uiAction, uiParam, pvParam, fWinIni)
+  end
+
+  def systemParametersInfoW(uiAction : Win32cr::UI::WindowsAndMessaging::SYSTEM_PARAMETERS_INFO_ACTION, uiParam : UInt32, pvParam : Void*, fWinIni : Win32cr::UI::WindowsAndMessaging::SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS) : Win32cr::Foundation::BOOL
+    C.SystemParametersInfoW(uiAction, uiParam, pvParam, fWinIni)
+  end
+
+  def soundSentry : Win32cr::Foundation::BOOL
+    C.SoundSentry
+  end
+
+  def setDebugErrorLevel(dwLevel : UInt32) : Void
+    C.SetDebugErrorLevel(dwLevel)
+  end
+
+  def internalGetWindowText(hWnd : Win32cr::Foundation::HWND, pString : UInt16*, cchMaxCount : Int32) : Int32
+    C.InternalGetWindowText(hWnd, pString, cchMaxCount)
+  end
+
+  def cancelShutdown : Win32cr::Foundation::BOOL
+    C.CancelShutdown
+  end
+
+  def getGUIThreadInfo(idThread : UInt32, pgui : Win32cr::UI::WindowsAndMessaging::GUITHREADINFO*) : Win32cr::Foundation::BOOL
+    C.GetGUIThreadInfo(idThread, pgui)
+  end
+
+  def setProcessDPIAware : Win32cr::Foundation::BOOL
+    C.SetProcessDPIAware
+  end
+
+  def isProcessDPIAware : Win32cr::Foundation::BOOL
+    C.IsProcessDPIAware
+  end
+
+  def inheritWindowMonitor(hwnd : Win32cr::Foundation::HWND, hwndInherit : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.InheritWindowMonitor(hwnd, hwndInherit)
+  end
+
+  def getWindowModuleFileNameA(hwnd : Win32cr::Foundation::HWND, pszFileName : UInt8*, cchFileNameMax : UInt32) : UInt32
+    C.GetWindowModuleFileNameA(hwnd, pszFileName, cchFileNameMax)
+  end
+
+  def getWindowModuleFileNameW(hwnd : Win32cr::Foundation::HWND, pszFileName : UInt16*, cchFileNameMax : UInt32) : UInt32
+    C.GetWindowModuleFileNameW(hwnd, pszFileName, cchFileNameMax)
+  end
+
+  def getCursorInfo(pci : Win32cr::UI::WindowsAndMessaging::CURSORINFO*) : Win32cr::Foundation::BOOL
+    C.GetCursorInfo(pci)
+  end
+
+  def getWindowInfo(hwnd : Win32cr::Foundation::HWND, pwi : Win32cr::UI::WindowsAndMessaging::WINDOWINFO*) : Win32cr::Foundation::BOOL
+    C.GetWindowInfo(hwnd, pwi)
+  end
+
+  def getTitleBarInfo(hwnd : Win32cr::Foundation::HWND, pti : Win32cr::UI::WindowsAndMessaging::TITLEBARINFO*) : Win32cr::Foundation::BOOL
+    C.GetTitleBarInfo(hwnd, pti)
+  end
+
+  def getMenuBarInfo(hwnd : Win32cr::Foundation::HWND, idObject : Win32cr::UI::WindowsAndMessaging::OBJECT_IDENTIFIER, idItem : Int32, pmbi : Win32cr::UI::WindowsAndMessaging::MENUBARINFO*) : Win32cr::Foundation::BOOL
+    C.GetMenuBarInfo(hwnd, idObject, idItem, pmbi)
+  end
+
+  def getScrollBarInfo(hwnd : Win32cr::Foundation::HWND, idObject : Win32cr::UI::WindowsAndMessaging::OBJECT_IDENTIFIER, psbi : Win32cr::UI::WindowsAndMessaging::SCROLLBARINFO*) : Win32cr::Foundation::BOOL
+    C.GetScrollBarInfo(hwnd, idObject, psbi)
+  end
+
+  def getAncestor(hwnd : Win32cr::Foundation::HWND, gaFlags : Win32cr::UI::WindowsAndMessaging::GET_ANCESTOR_FLAGS) : Win32cr::Foundation::HWND
+    C.GetAncestor(hwnd, gaFlags)
+  end
+
+  def realChildWindowFromPoint(hwndParent : Win32cr::Foundation::HWND, ptParentClientCoords : Win32cr::Foundation::POINT) : Win32cr::Foundation::HWND
+    C.RealChildWindowFromPoint(hwndParent, ptParentClientCoords)
+  end
+
+  def realGetWindowClassA(hwnd : Win32cr::Foundation::HWND, ptszClassName : UInt8*, cchClassNameMax : UInt32) : UInt32
+    C.RealGetWindowClassA(hwnd, ptszClassName, cchClassNameMax)
+  end
+
+  def realGetWindowClassW(hwnd : Win32cr::Foundation::HWND, ptszClassName : UInt16*, cchClassNameMax : UInt32) : UInt32
+    C.RealGetWindowClassW(hwnd, ptszClassName, cchClassNameMax)
+  end
+
+  def getAltTabInfoA(hwnd : Win32cr::Foundation::HWND, iItem : Int32, pati : Win32cr::UI::WindowsAndMessaging::ALTTABINFO*, pszItemText : UInt8*, cchItemText : UInt32) : Win32cr::Foundation::BOOL
+    C.GetAltTabInfoA(hwnd, iItem, pati, pszItemText, cchItemText)
+  end
+
+  def getAltTabInfoW(hwnd : Win32cr::Foundation::HWND, iItem : Int32, pati : Win32cr::UI::WindowsAndMessaging::ALTTABINFO*, pszItemText : UInt16*, cchItemText : UInt32) : Win32cr::Foundation::BOOL
+    C.GetAltTabInfoW(hwnd, iItem, pati, pszItemText, cchItemText)
+  end
+
+  def changeWindowMessageFilter(message : UInt32, dwFlag : Win32cr::UI::WindowsAndMessaging::CHANGE_WINDOW_MESSAGE_FILTER_FLAGS) : Win32cr::Foundation::BOOL
+    C.ChangeWindowMessageFilter(message, dwFlag)
+  end
+
+  def changeWindowMessageFilterEx(hwnd : Win32cr::Foundation::HWND, message : UInt32, action : Win32cr::UI::WindowsAndMessaging::WINDOW_MESSAGE_FILTER_ACTION, pChangeFilterStruct : Win32cr::UI::WindowsAndMessaging::CHANGEFILTERSTRUCT*) : Win32cr::Foundation::BOOL
+    C.ChangeWindowMessageFilterEx(hwnd, message, action, pChangeFilterStruct)
+  end
+
+  def createResourceIndexer(projectRoot : Win32cr::Foundation::PWSTR, extensionDllPath : Win32cr::Foundation::PWSTR, ppResourceIndexer : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateResourceIndexer(projectRoot, extensionDllPath, ppResourceIndexer)
+  end
+
+  def destroyResourceIndexer(resourceIndexer : Void*) : Void
+    C.DestroyResourceIndexer(resourceIndexer)
+  end
+
+  def indexFilePath(resourceIndexer : Void*, filePath : Win32cr::Foundation::PWSTR, ppResourceUri : Win32cr::Foundation::PWSTR*, pQualifierCount : UInt32*, ppQualifiers : Win32cr::UI::WindowsAndMessaging::IndexedResourceQualifier**) : Win32cr::Foundation::HRESULT
+    C.IndexFilePath(resourceIndexer, filePath, ppResourceUri, pQualifierCount, ppQualifiers)
+  end
+
+  def destroyIndexedResults(resourceUri : Win32cr::Foundation::PWSTR, qualifierCount : UInt32, qualifiers : Win32cr::UI::WindowsAndMessaging::IndexedResourceQualifier*) : Void
+    C.DestroyIndexedResults(resourceUri, qualifierCount, qualifiers)
+  end
+
+  def mrmCreateResourceIndexer(packageFamilyName : Win32cr::Foundation::PWSTR, projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
+    C.MrmCreateResourceIndexer(packageFamilyName, projectRoot, platformVersion, defaultQualifiers, indexer)
+  end
+
+  def mrmCreateResourceIndexerFromPreviousSchemaFile(projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, schemaFile : Win32cr::Foundation::PWSTR, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
+    C.MrmCreateResourceIndexerFromPreviousSchemaFile(projectRoot, platformVersion, defaultQualifiers, schemaFile, indexer)
+  end
+
+  def mrmCreateResourceIndexerFromPreviousPriFile(projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, priFile : Win32cr::Foundation::PWSTR, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
+    C.MrmCreateResourceIndexerFromPreviousPriFile(projectRoot, platformVersion, defaultQualifiers, priFile, indexer)
+  end
+
+  def mrmCreateResourceIndexerFromPreviousSchemaData(projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, schemaXmlData : UInt8*, schemaXmlSize : UInt32, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
+    C.MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot, platformVersion, defaultQualifiers, schemaXmlData, schemaXmlSize, indexer)
+  end
+
+  def mrmCreateResourceIndexerFromPreviousPriData(projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, priData : UInt8*, priSize : UInt32, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
+    C.MrmCreateResourceIndexerFromPreviousPriData(projectRoot, platformVersion, defaultQualifiers, priData, priSize, indexer)
+  end
+
+  def mrmCreateResourceIndexerWithFlags(packageFamilyName : Win32cr::Foundation::PWSTR, projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, flags : Win32cr::UI::WindowsAndMessaging::MrmIndexerFlags, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
+    C.MrmCreateResourceIndexerWithFlags(packageFamilyName, projectRoot, platformVersion, defaultQualifiers, flags, indexer)
+  end
+
+  def mrmIndexString(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, resourceUri : Win32cr::Foundation::PWSTR, resourceString : Win32cr::Foundation::PWSTR, qualifiers : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.MrmIndexString(indexer, resourceUri, resourceString, qualifiers)
+  end
+
+  def mrmIndexEmbeddedData(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, resourceUri : Win32cr::Foundation::PWSTR, embeddedData : UInt8*, embeddedDataSize : UInt32, qualifiers : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.MrmIndexEmbeddedData(indexer, resourceUri, embeddedData, embeddedDataSize, qualifiers)
+  end
+
+  def mrmIndexFile(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, resourceUri : Win32cr::Foundation::PWSTR, filePath : Win32cr::Foundation::PWSTR, qualifiers : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.MrmIndexFile(indexer, resourceUri, filePath, qualifiers)
+  end
+
+  def mrmIndexFileAutoQualifiers(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, filePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.MrmIndexFileAutoQualifiers(indexer, filePath)
+  end
+
+  def mrmIndexResourceContainerAutoQualifiers(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, containerPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.MrmIndexResourceContainerAutoQualifiers(indexer, containerPath)
+  end
+
+  def mrmCreateResourceFile(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, packagingMode : Win32cr::UI::WindowsAndMessaging::MrmPackagingMode, packagingOptions : Win32cr::UI::WindowsAndMessaging::MrmPackagingOptions, outputDirectory : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.MrmCreateResourceFile(indexer, packagingMode, packagingOptions, outputDirectory)
+  end
+
+  def mrmCreateResourceFileWithChecksum(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, packagingMode : Win32cr::UI::WindowsAndMessaging::MrmPackagingMode, packagingOptions : Win32cr::UI::WindowsAndMessaging::MrmPackagingOptions, checksum : UInt32, outputDirectory : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.MrmCreateResourceFileWithChecksum(indexer, packagingMode, packagingOptions, checksum, outputDirectory)
+  end
+
+  def mrmCreateResourceFileInMemory(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, packagingMode : Win32cr::UI::WindowsAndMessaging::MrmPackagingMode, packagingOptions : Win32cr::UI::WindowsAndMessaging::MrmPackagingOptions, outputPriData : UInt8**, outputPriSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MrmCreateResourceFileInMemory(indexer, packagingMode, packagingOptions, outputPriData, outputPriSize)
+  end
+
+  def mrmPeekResourceIndexerMessages(handle : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, messages : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerMessage**, numMsgs : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MrmPeekResourceIndexerMessages(handle, messages, numMsgs)
+  end
+
+  def mrmDestroyIndexerAndMessages(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle) : Win32cr::Foundation::HRESULT
+    C.MrmDestroyIndexerAndMessages(indexer)
+  end
+
+  def mrmFreeMemory(data : UInt8*) : Win32cr::Foundation::HRESULT
+    C.MrmFreeMemory(data)
+  end
+
+  def mrmDumpPriFile(indexFileName : Win32cr::Foundation::PWSTR, schemaPriFile : Win32cr::Foundation::PWSTR, dumpType : Win32cr::UI::WindowsAndMessaging::MrmDumpType, outputXmlFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.MrmDumpPriFile(indexFileName, schemaPriFile, dumpType, outputXmlFile)
+  end
+
+  def mrmDumpPriFileInMemory(indexFileName : Win32cr::Foundation::PWSTR, schemaPriFile : Win32cr::Foundation::PWSTR, dumpType : Win32cr::UI::WindowsAndMessaging::MrmDumpType, outputXmlData : UInt8**, outputXmlSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MrmDumpPriFileInMemory(indexFileName, schemaPriFile, dumpType, outputXmlData, outputXmlSize)
+  end
+
+  def mrmDumpPriDataInMemory(inputPriData : UInt8*, inputPriSize : UInt32, schemaPriData : UInt8*, schemaPriSize : UInt32, dumpType : Win32cr::UI::WindowsAndMessaging::MrmDumpType, outputXmlData : UInt8**, outputXmlSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MrmDumpPriDataInMemory(inputPriData, inputPriSize, schemaPriData, schemaPriSize, dumpType, outputXmlData, outputXmlSize)
+  end
+
+  def mrmCreateConfig(platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, outputXmlFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    C.MrmCreateConfig(platformVersion, defaultQualifiers, outputXmlFile)
+  end
+
+  def mrmCreateConfigInMemory(platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, outputXmlData : UInt8**, outputXmlSize : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MrmCreateConfigInMemory(platformVersion, defaultQualifiers, outputXmlData, outputXmlSize)
+  end
+
+  def mrmGetPriFileContentChecksum(priFile : Win32cr::Foundation::PWSTR, checksum : UInt32*) : Win32cr::Foundation::HRESULT
+    C.MrmGetPriFileContentChecksum(priFile, checksum)
+  end
+
   @[Link("user32")]
   @[Link("mrmsupport")]
   lib C
+    # :nodoc:
     fun LoadStringA(hInstance : Win32cr::Foundation::HINSTANCE, uID : UInt32, lpBuffer : Win32cr::Foundation::PSTR, cchBufferMax : Int32) : Int32
 
+    # :nodoc:
     fun LoadStringW(hInstance : Win32cr::Foundation::HINSTANCE, uID : UInt32, lpBuffer : Win32cr::Foundation::PWSTR, cchBufferMax : Int32) : Int32
 
+    # :nodoc:
     fun wvsprintfA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, arglist : Int8*) : Int32
 
+    # :nodoc:
     fun wvsprintfW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, arglist : Int8*) : Int32
 
+    # :nodoc:
     fun wsprintfA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR) : Int32
 
+    # :nodoc:
     fun wsprintfW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR) : Int32
 
+    # :nodoc:
     fun IsHungAppWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DisableProcessWindowsGhosting : Void
 
+    # :nodoc:
     fun RegisterWindowMessageA(lpString : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun RegisterWindowMessageW(lpString : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun GetMessageA(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, hWnd : Win32cr::Foundation::HWND, wMsgFilterMin : UInt32, wMsgFilterMax : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetMessageW(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, hWnd : Win32cr::Foundation::HWND, wMsgFilterMin : UInt32, wMsgFilterMax : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TranslateMessage(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DispatchMessageA(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun DispatchMessageW(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun SetMessageQueue(cMessagesMax : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PeekMessageA(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, hWnd : Win32cr::Foundation::HWND, wMsgFilterMin : UInt32, wMsgFilterMax : UInt32, wRemoveMsg : Win32cr::UI::WindowsAndMessaging::PEEK_MESSAGE_REMOVE_TYPE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PeekMessageW(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, hWnd : Win32cr::Foundation::HWND, wMsgFilterMin : UInt32, wMsgFilterMax : UInt32, wRemoveMsg : Win32cr::UI::WindowsAndMessaging::PEEK_MESSAGE_REMOVE_TYPE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetMessagePos : UInt32
 
+    # :nodoc:
     fun GetMessageTime : Int32
 
+    # :nodoc:
     fun GetMessageExtraInfo : Win32cr::Foundation::LPARAM
 
+    # :nodoc:
     fun IsWow64Message : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetMessageExtraInfo(lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LPARAM
 
+    # :nodoc:
     fun SendMessageA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun SendMessageW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun SendMessageTimeoutA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, fuFlags : Win32cr::UI::WindowsAndMessaging::SEND_MESSAGE_TIMEOUT_FLAGS, uTimeout : UInt32, lpdwResult : LibC::UIntPtrT*) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun SendMessageTimeoutW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, fuFlags : Win32cr::UI::WindowsAndMessaging::SEND_MESSAGE_TIMEOUT_FLAGS, uTimeout : UInt32, lpdwResult : LibC::UIntPtrT*) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun SendNotifyMessageA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SendNotifyMessageW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SendMessageCallbackA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, lpResultCallBack : Win32cr::UI::WindowsAndMessaging::SENDASYNCPROC, dwData : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SendMessageCallbackW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, lpResultCallBack : Win32cr::UI::WindowsAndMessaging::SENDASYNCPROC, dwData : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterDeviceNotificationA(hRecipient : Win32cr::Foundation::HANDLE, notification_filter : Void*, flags : Win32cr::System::Power::POWER_SETTING_REGISTER_NOTIFICATION_FLAGS) : Void*
 
+    # :nodoc:
     fun RegisterDeviceNotificationW(hRecipient : Win32cr::Foundation::HANDLE, notification_filter : Void*, flags : Win32cr::System::Power::POWER_SETTING_REGISTER_NOTIFICATION_FLAGS) : Void*
 
+    # :nodoc:
     fun PostMessageA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PostMessageW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PostThreadMessageA(idThread : UInt32, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PostThreadMessageW(idThread : UInt32, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReplyMessage(lResult : Win32cr::Foundation::LRESULT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WaitMessage : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DefWindowProcA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun DefWindowProcW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun PostQuitMessage(nExitCode : Int32) : Void
 
+    # :nodoc:
     fun CallWindowProcA(lpPrevWndFunc : Win32cr::UI::WindowsAndMessaging::WNDPROC, hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun CallWindowProcW(lpPrevWndFunc : Win32cr::UI::WindowsAndMessaging::WNDPROC, hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun InSendMessage : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InSendMessageEx(lpReserved : Void*) : UInt32
 
+    # :nodoc:
     fun RegisterClassA(lpWndClass : Win32cr::UI::WindowsAndMessaging::WNDCLASSA*) : UInt16
 
+    # :nodoc:
     fun RegisterClassW(lpWndClass : Win32cr::UI::WindowsAndMessaging::WNDCLASSW*) : UInt16
 
+    # :nodoc:
     fun UnregisterClassA(lpClassName : Win32cr::Foundation::PSTR, hInstance : Win32cr::Foundation::HINSTANCE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UnregisterClassW(lpClassName : Win32cr::Foundation::PWSTR, hInstance : Win32cr::Foundation::HINSTANCE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetClassInfoA(hInstance : Win32cr::Foundation::HINSTANCE, lpClassName : Win32cr::Foundation::PSTR, lpWndClass : Win32cr::UI::WindowsAndMessaging::WNDCLASSA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetClassInfoW(hInstance : Win32cr::Foundation::HINSTANCE, lpClassName : Win32cr::Foundation::PWSTR, lpWndClass : Win32cr::UI::WindowsAndMessaging::WNDCLASSW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RegisterClassExA(param0 : Win32cr::UI::WindowsAndMessaging::WNDCLASSEXA*) : UInt16
 
+    # :nodoc:
     fun RegisterClassExW(param0 : Win32cr::UI::WindowsAndMessaging::WNDCLASSEXW*) : UInt16
 
+    # :nodoc:
     fun GetClassInfoExA(hInstance : Win32cr::Foundation::HINSTANCE, lpszClass : Win32cr::Foundation::PSTR, lpwcx : Win32cr::UI::WindowsAndMessaging::WNDCLASSEXA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetClassInfoExW(hInstance : Win32cr::Foundation::HINSTANCE, lpszClass : Win32cr::Foundation::PWSTR, lpwcx : Win32cr::UI::WindowsAndMessaging::WNDCLASSEXW*) : Win32cr::Foundation::BOOL
 
-    fun CreateWindowExA(dwExStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_EX_STYLE, lpClassName : Win32cr::Foundation::PSTR, lpWindowName : Win32cr::Foundation::PSTR, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, hInstance : Win32cr::Foundation::HINSTANCE, lpParam : Void*) : Win32cr::Foundation::HWND
+    # :nodoc:
+    fun CreateWindowExA(dwExStyle : UInt32, lpClassName : Win32cr::Foundation::PSTR, lpWindowName : Win32cr::Foundation::PSTR, dwStyle : UInt32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, hInstance : Win32cr::Foundation::HINSTANCE, lpParam : Void*) : Win32cr::Foundation::HWND
 
-    fun CreateWindowExW(dwExStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_EX_STYLE, lpClassName : Win32cr::Foundation::PWSTR, lpWindowName : Win32cr::Foundation::PWSTR, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, hInstance : Win32cr::Foundation::HINSTANCE, lpParam : Void*) : Win32cr::Foundation::HWND
+    # :nodoc:
+    fun CreateWindowExW(dwExStyle : UInt32, lpClassName : Win32cr::Foundation::PWSTR, lpWindowName : Win32cr::Foundation::PWSTR, dwStyle : UInt32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, hInstance : Win32cr::Foundation::HINSTANCE, lpParam : Void*) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun IsWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsChild(hWndParent : Win32cr::Foundation::HWND, hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DestroyWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ShowWindow(hWnd : Win32cr::Foundation::HWND, nCmdShow : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AnimateWindow(hWnd : Win32cr::Foundation::HWND, dwTime : UInt32, dwFlags : Win32cr::UI::WindowsAndMessaging::ANIMATE_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UpdateLayeredWindow(hWnd : Win32cr::Foundation::HWND, hdcDst : Win32cr::Graphics::Gdi::HDC, pptDst : Win32cr::Foundation::POINT*, psize : Win32cr::Foundation::SIZE*, hdcSrc : Win32cr::Graphics::Gdi::HDC, pptSrc : Win32cr::Foundation::POINT*, crKey : UInt32, pblend : Win32cr::Graphics::Gdi::BLENDFUNCTION*, dwFlags : Win32cr::UI::WindowsAndMessaging::UPDATE_LAYERED_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun UpdateLayeredWindowIndirect(hWnd : Win32cr::Foundation::HWND, pULWInfo : Win32cr::UI::WindowsAndMessaging::UPDATELAYEREDWINDOWINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetLayeredWindowAttributes(hwnd : Win32cr::Foundation::HWND, pcrKey : UInt32*, pbAlpha : UInt8*, pdwFlags : Win32cr::UI::WindowsAndMessaging::LAYERED_WINDOW_ATTRIBUTES_FLAGS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetLayeredWindowAttributes(hwnd : Win32cr::Foundation::HWND, crKey : UInt32, bAlpha : UInt8, dwFlags : Win32cr::UI::WindowsAndMessaging::LAYERED_WINDOW_ATTRIBUTES_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ShowWindowAsync(hWnd : Win32cr::Foundation::HWND, nCmdShow : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlashWindow(hWnd : Win32cr::Foundation::HWND, bInvert : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FlashWindowEx(pfwi : Win32cr::UI::WindowsAndMessaging::FLASHWINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ShowOwnedPopups(hWnd : Win32cr::Foundation::HWND, fShow : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OpenIcon(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CloseWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MoveWindow(hWnd : Win32cr::Foundation::HWND, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, bRepaint : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetWindowPos(hWnd : Win32cr::Foundation::HWND, hWndInsertAfter : Win32cr::Foundation::HWND, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::UI::WindowsAndMessaging::SET_WINDOW_POS_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetWindowPlacement(hWnd : Win32cr::Foundation::HWND, lpwndpl : Win32cr::UI::WindowsAndMessaging::WINDOWPLACEMENT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetWindowPlacement(hWnd : Win32cr::Foundation::HWND, lpwndpl : Win32cr::UI::WindowsAndMessaging::WINDOWPLACEMENT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetWindowDisplayAffinity(hWnd : Win32cr::Foundation::HWND, pdwAffinity : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetWindowDisplayAffinity(hWnd : Win32cr::Foundation::HWND, dwAffinity : Win32cr::UI::WindowsAndMessaging::WINDOW_DISPLAY_AFFINITY) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BeginDeferWindowPos(nNumWindows : Int32) : LibC::IntPtrT
 
+    # :nodoc:
     fun DeferWindowPos(hWinPosInfo : LibC::IntPtrT, hWnd : Win32cr::Foundation::HWND, hWndInsertAfter : Win32cr::Foundation::HWND, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::UI::WindowsAndMessaging::SET_WINDOW_POS_FLAGS) : LibC::IntPtrT
 
+    # :nodoc:
     fun EndDeferWindowPos(hWinPosInfo : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsWindowVisible(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsIconic(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AnyPopup : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BringWindowToTop(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsZoomed(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateDialogParamA(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplateName : Win32cr::Foundation::PSTR, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun CreateDialogParamW(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplateName : Win32cr::Foundation::PWSTR, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun CreateDialogIndirectParamA(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplate : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun CreateDialogIndirectParamW(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplate : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun DialogBoxParamA(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplateName : Win32cr::Foundation::PSTR, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : LibC::IntPtrT
 
+    # :nodoc:
     fun DialogBoxParamW(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplateName : Win32cr::Foundation::PWSTR, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : LibC::IntPtrT
 
+    # :nodoc:
     fun DialogBoxIndirectParamA(hInstance : Win32cr::Foundation::HINSTANCE, hDialogTemplate : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : LibC::IntPtrT
 
+    # :nodoc:
     fun DialogBoxIndirectParamW(hInstance : Win32cr::Foundation::HINSTANCE, hDialogTemplate : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : LibC::IntPtrT
 
+    # :nodoc:
     fun EndDialog(hDlg : Win32cr::Foundation::HWND, nResult : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDlgItem(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun SetDlgItemInt(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, uValue : UInt32, bSigned : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDlgItemInt(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpTranslated : Win32cr::Foundation::BOOL*, bSigned : Win32cr::Foundation::BOOL) : UInt32
 
+    # :nodoc:
     fun SetDlgItemTextA(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetDlgItemTextW(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDlgItemTextA(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpString : UInt8*, cchMax : Int32) : UInt32
 
+    # :nodoc:
     fun GetDlgItemTextW(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpString : UInt16*, cchMax : Int32) : UInt32
 
+    # :nodoc:
     fun SendDlgItemMessageA(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun SendDlgItemMessageW(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun GetNextDlgGroupItem(hDlg : Win32cr::Foundation::HWND, hCtl : Win32cr::Foundation::HWND, bPrevious : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun GetNextDlgTabItem(hDlg : Win32cr::Foundation::HWND, hCtl : Win32cr::Foundation::HWND, bPrevious : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun GetDlgCtrlID(hWnd : Win32cr::Foundation::HWND) : Int32
 
+    # :nodoc:
     fun GetDialogBaseUnits : Int32
 
+    # :nodoc:
     fun DefDlgProcA(hDlg : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun DefDlgProcW(hDlg : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun CallMsgFilterA(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, nCode : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CallMsgFilterW(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, nCode : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CharToOemA(pSrc : Win32cr::Foundation::PSTR, pDst : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CharToOemW(pSrc : Win32cr::Foundation::PWSTR, pDst : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OemToCharA(pSrc : Win32cr::Foundation::PSTR, pDst : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OemToCharW(pSrc : Win32cr::Foundation::PSTR, pDst : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CharToOemBuffA(lpszSrc : Win32cr::Foundation::PSTR, lpszDst : UInt8*, cchDstLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CharToOemBuffW(lpszSrc : Win32cr::Foundation::PWSTR, lpszDst : UInt8*, cchDstLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OemToCharBuffA(lpszSrc : Win32cr::Foundation::PSTR, lpszDst : UInt8*, cchDstLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OemToCharBuffW(lpszSrc : Win32cr::Foundation::PSTR, lpszDst : UInt16*, cchDstLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CharUpperA(lpsz : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun CharUpperW(lpsz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun CharUpperBuffA(lpsz : UInt8*, cchLength : UInt32) : UInt32
 
+    # :nodoc:
     fun CharUpperBuffW(lpsz : UInt16*, cchLength : UInt32) : UInt32
 
+    # :nodoc:
     fun CharLowerA(lpsz : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun CharLowerW(lpsz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun CharLowerBuffA(lpsz : UInt8*, cchLength : UInt32) : UInt32
 
+    # :nodoc:
     fun CharLowerBuffW(lpsz : UInt16*, cchLength : UInt32) : UInt32
 
+    # :nodoc:
     fun CharNextA(lpsz : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun CharNextW(lpsz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun CharPrevA(lpszStart : Win32cr::Foundation::PSTR, lpszCurrent : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun CharPrevW(lpszStart : Win32cr::Foundation::PWSTR, lpszCurrent : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
+    # :nodoc:
     fun CharNextExA(code_page : UInt16, lpCurrentChar : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun CharPrevExA(code_page : UInt16, lpStart : Win32cr::Foundation::PSTR, lpCurrentChar : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::PSTR
 
+    # :nodoc:
     fun IsCharAlphaA(ch : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsCharAlphaW(ch : UInt16) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsCharAlphaNumericA(ch : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsCharAlphaNumericW(ch : UInt16) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsCharUpperA(ch : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsCharUpperW(ch : UInt16) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsCharLowerA(ch : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetInputState : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetQueueStatus(flags : Win32cr::UI::WindowsAndMessaging::QUEUE_STATUS_FLAGS) : UInt32
 
+    # :nodoc:
     fun MsgWaitForMultipleObjects(nCount : UInt32, pHandles : Win32cr::Foundation::HANDLE*, fWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32, dwWakeMask : Win32cr::UI::WindowsAndMessaging::QUEUE_STATUS_FLAGS) : UInt32
 
+    # :nodoc:
     fun MsgWaitForMultipleObjectsEx(nCount : UInt32, pHandles : Win32cr::Foundation::HANDLE*, dwMilliseconds : UInt32, dwWakeMask : Win32cr::UI::WindowsAndMessaging::QUEUE_STATUS_FLAGS, dwFlags : Win32cr::UI::WindowsAndMessaging::MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS) : UInt32
 
+    # :nodoc:
     fun SetTimer(hWnd : Win32cr::Foundation::HWND, nIDEvent : LibC::UIntPtrT, uElapse : UInt32, lpTimerFunc : Win32cr::UI::WindowsAndMessaging::TIMERPROC) : LibC::UIntPtrT
 
+    # :nodoc:
     fun SetCoalescableTimer(hWnd : Win32cr::Foundation::HWND, nIDEvent : LibC::UIntPtrT, uElapse : UInt32, lpTimerFunc : Win32cr::UI::WindowsAndMessaging::TIMERPROC, uToleranceDelay : UInt32) : LibC::UIntPtrT
 
+    # :nodoc:
     fun KillTimer(hWnd : Win32cr::Foundation::HWND, uIDEvent : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsWindowUnicode(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LoadAcceleratorsA(hInstance : Win32cr::Foundation::HINSTANCE, lpTableName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HACCEL
 
+    # :nodoc:
     fun LoadAcceleratorsW(hInstance : Win32cr::Foundation::HINSTANCE, lpTableName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HACCEL
 
+    # :nodoc:
     fun CreateAcceleratorTableA(paccel : Win32cr::UI::WindowsAndMessaging::ACCEL*, cAccel : Int32) : Win32cr::UI::WindowsAndMessaging::HACCEL
 
+    # :nodoc:
     fun CreateAcceleratorTableW(paccel : Win32cr::UI::WindowsAndMessaging::ACCEL*, cAccel : Int32) : Win32cr::UI::WindowsAndMessaging::HACCEL
 
+    # :nodoc:
     fun DestroyAcceleratorTable(hAccel : Win32cr::UI::WindowsAndMessaging::HACCEL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CopyAcceleratorTableA(hAccelSrc : Win32cr::UI::WindowsAndMessaging::HACCEL, lpAccelDst : Win32cr::UI::WindowsAndMessaging::ACCEL*, cAccelEntries : Int32) : Int32
 
+    # :nodoc:
     fun CopyAcceleratorTableW(hAccelSrc : Win32cr::UI::WindowsAndMessaging::HACCEL, lpAccelDst : Win32cr::UI::WindowsAndMessaging::ACCEL*, cAccelEntries : Int32) : Int32
 
+    # :nodoc:
     fun TranslateAcceleratorA(hWnd : Win32cr::Foundation::HWND, hAccTable : Win32cr::UI::WindowsAndMessaging::HACCEL, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Int32
 
+    # :nodoc:
     fun TranslateAcceleratorW(hWnd : Win32cr::Foundation::HWND, hAccTable : Win32cr::UI::WindowsAndMessaging::HACCEL, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Int32
 
+    # :nodoc:
     fun GetSystemMetrics(nIndex : Win32cr::UI::WindowsAndMessaging::SYSTEM_METRICS_INDEX) : Int32
 
+    # :nodoc:
     fun LoadMenuA(hInstance : Win32cr::Foundation::HINSTANCE, lpMenuName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HMENU
 
+    # :nodoc:
     fun LoadMenuW(hInstance : Win32cr::Foundation::HINSTANCE, lpMenuName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HMENU
 
+    # :nodoc:
     fun LoadMenuIndirectA(lpMenuTemplate : Void*) : Win32cr::UI::WindowsAndMessaging::HMENU
 
+    # :nodoc:
     fun LoadMenuIndirectW(lpMenuTemplate : Void*) : Win32cr::UI::WindowsAndMessaging::HMENU
 
+    # :nodoc:
     fun GetMenu(hWnd : Win32cr::Foundation::HWND) : Win32cr::UI::WindowsAndMessaging::HMENU
 
+    # :nodoc:
     fun SetMenu(hWnd : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ChangeMenuA(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, cmd : UInt32, lpszNewItem : Win32cr::Foundation::PSTR, cmdInsert : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ChangeMenuW(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, cmd : UInt32, lpszNewItem : Win32cr::Foundation::PWSTR, cmdInsert : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun HiliteMenuItem(hWnd : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDHiliteItem : UInt32, uHilite : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetMenuStringA(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDItem : UInt32, lpString : UInt8*, cchMax : Int32, flags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Int32
 
+    # :nodoc:
     fun GetMenuStringW(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDItem : UInt32, lpString : UInt16*, cchMax : Int32, flags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Int32
 
+    # :nodoc:
     fun GetMenuState(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uId : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : UInt32
 
+    # :nodoc:
     fun DrawMenuBar(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetSystemMenu(hWnd : Win32cr::Foundation::HWND, bRevert : Win32cr::Foundation::BOOL) : Win32cr::UI::WindowsAndMessaging::HMENU
 
+    # :nodoc:
     fun CreateMenu : Win32cr::UI::WindowsAndMessaging::HMENU
 
+    # :nodoc:
     fun CreatePopupMenu : Win32cr::UI::WindowsAndMessaging::HMENU
 
+    # :nodoc:
     fun DestroyMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CheckMenuItem(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDCheckItem : UInt32, uCheck : UInt32) : UInt32
 
+    # :nodoc:
     fun EnableMenuItem(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDEnableItem : UInt32, uEnable : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetSubMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, nPos : Int32) : Win32cr::UI::WindowsAndMessaging::HMENU
 
+    # :nodoc:
     fun GetMenuItemID(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, nPos : Int32) : UInt32
 
+    # :nodoc:
     fun GetMenuItemCount(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU) : Int32
 
+    # :nodoc:
     fun InsertMenuA(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InsertMenuW(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AppendMenuA(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AppendMenuW(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ModifyMenuA(hMnu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ModifyMenuW(hMnu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RemoveMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetMenuItemBitmaps(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, hBitmapUnchecked : Win32cr::Graphics::Gdi::HBITMAP, hBitmapChecked : Win32cr::Graphics::Gdi::HBITMAP) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetMenuCheckMarkDimensions : Int32
 
+    # :nodoc:
     fun TrackPopupMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uFlags : Win32cr::UI::WindowsAndMessaging::TRACK_POPUP_MENU_FLAGS, x : Int32, y : Int32, nReserved : Int32, hWnd : Win32cr::Foundation::HWND, prcRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TrackPopupMenuEx(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uFlags : UInt32, x : Int32, y : Int32, hwnd : Win32cr::Foundation::HWND, lptpm : Win32cr::UI::WindowsAndMessaging::TPMPARAMS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CalculatePopupWindowPosition(anchorPoint : Win32cr::Foundation::POINT*, windowSize : Win32cr::Foundation::SIZE*, flags : UInt32, excludeRect : Win32cr::Foundation::RECT*, popupWindowPosition : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetMenuInfo(param0 : Win32cr::UI::WindowsAndMessaging::HMENU, param1 : Win32cr::UI::WindowsAndMessaging::MENUINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetMenuInfo(param0 : Win32cr::UI::WindowsAndMessaging::HMENU, param1 : Win32cr::UI::WindowsAndMessaging::MENUINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EndMenu : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InsertMenuItemA(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPosition : Win32cr::Foundation::BOOL, lpmi : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InsertMenuItemW(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPosition : Win32cr::Foundation::BOOL, lpmi : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetMenuItemInfoA(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPosition : Win32cr::Foundation::BOOL, lpmii : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetMenuItemInfoW(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPosition : Win32cr::Foundation::BOOL, lpmii : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetMenuItemInfoA(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPositon : Win32cr::Foundation::BOOL, lpmii : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetMenuItemInfoW(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPositon : Win32cr::Foundation::BOOL, lpmii : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetMenuDefaultItem(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, fByPos : UInt32, gmdiFlags : Win32cr::UI::WindowsAndMessaging::GET_MENU_DEFAULT_ITEM_FLAGS) : UInt32
 
+    # :nodoc:
     fun SetMenuDefaultItem(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uItem : UInt32, fByPos : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetMenuItemRect(hWnd : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uItem : UInt32, lprcItem : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MenuItemFromPoint(hWnd : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, ptScreen : Win32cr::Foundation::POINT) : Int32
 
+    # :nodoc:
     fun DragObject(hwndParent : Win32cr::Foundation::HWND, hwndFrom : Win32cr::Foundation::HWND, fmt : UInt32, data : LibC::UIntPtrT, hcur : Win32cr::UI::WindowsAndMessaging::HCURSOR) : UInt32
 
+    # :nodoc:
     fun DrawIcon(hDC : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, hIcon : Win32cr::UI::WindowsAndMessaging::HICON) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetForegroundWindow : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun SwitchToThisWindow(hwnd : Win32cr::Foundation::HWND, fUnknown : Win32cr::Foundation::BOOL) : Void
 
+    # :nodoc:
     fun SetForegroundWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AllowSetForegroundWindow(dwProcessId : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LockSetForegroundWindow(uLockCode : Win32cr::UI::WindowsAndMessaging::FOREGROUND_WINDOW_LOCK_CODE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ScrollWindow(hWnd : Win32cr::Foundation::HWND, x_amount : Int32, y_amount : Int32, lpRect : Win32cr::Foundation::RECT*, lpClipRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ScrollDC(hDC : Win32cr::Graphics::Gdi::HDC, dx : Int32, dy : Int32, lprcScroll : Win32cr::Foundation::RECT*, lprcClip : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, lprcUpdate : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ScrollWindowEx(hWnd : Win32cr::Foundation::HWND, dx : Int32, dy : Int32, prcScroll : Win32cr::Foundation::RECT*, prcClip : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, prcUpdate : Win32cr::Foundation::RECT*, flags : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD) : Int32
 
+    # :nodoc:
     fun GetScrollPos(hWnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS) : Int32
 
+    # :nodoc:
     fun GetScrollRange(hWnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, lpMinPos : Int32*, lpMaxPos : Int32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetPropA(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PSTR, hData : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetPropW(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PWSTR, hData : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPropA(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun GetPropW(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun RemovePropA(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun RemovePropW(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun EnumPropsExA(hWnd : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::PROPENUMPROCEXA, lParam : Win32cr::Foundation::LPARAM) : Int32
 
+    # :nodoc:
     fun EnumPropsExW(hWnd : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::PROPENUMPROCEXW, lParam : Win32cr::Foundation::LPARAM) : Int32
 
+    # :nodoc:
     fun EnumPropsA(hWnd : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::PROPENUMPROCA) : Int32
 
+    # :nodoc:
     fun EnumPropsW(hWnd : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::PROPENUMPROCW) : Int32
 
+    # :nodoc:
     fun SetWindowTextA(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetWindowTextW(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetWindowTextA(hWnd : Win32cr::Foundation::HWND, lpString : UInt8*, nMaxCount : Int32) : Int32
 
+    # :nodoc:
     fun GetWindowTextW(hWnd : Win32cr::Foundation::HWND, lpString : UInt16*, nMaxCount : Int32) : Int32
 
+    # :nodoc:
     fun GetWindowTextLengthA(hWnd : Win32cr::Foundation::HWND) : Int32
 
+    # :nodoc:
     fun GetWindowTextLengthW(hWnd : Win32cr::Foundation::HWND) : Int32
 
+    # :nodoc:
     fun GetClientRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetWindowRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AdjustWindowRect(lpRect : Win32cr::Foundation::RECT*, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, bMenu : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun AdjustWindowRectEx(lpRect : Win32cr::Foundation::RECT*, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, bMenu : Win32cr::Foundation::BOOL, dwExStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_EX_STYLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MessageBoxA(hWnd : Win32cr::Foundation::HWND, lpText : Win32cr::Foundation::PSTR, lpCaption : Win32cr::Foundation::PSTR, uType : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
 
+    # :nodoc:
     fun MessageBoxW(hWnd : Win32cr::Foundation::HWND, lpText : Win32cr::Foundation::PWSTR, lpCaption : Win32cr::Foundation::PWSTR, uType : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
 
+    # :nodoc:
     fun MessageBoxExA(hWnd : Win32cr::Foundation::HWND, lpText : Win32cr::Foundation::PSTR, lpCaption : Win32cr::Foundation::PSTR, uType : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, wLanguageId : UInt16) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
 
+    # :nodoc:
     fun MessageBoxExW(hWnd : Win32cr::Foundation::HWND, lpText : Win32cr::Foundation::PWSTR, lpCaption : Win32cr::Foundation::PWSTR, uType : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, wLanguageId : UInt16) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
 
+    # :nodoc:
     fun MessageBoxIndirectA(lpmbp : Win32cr::UI::WindowsAndMessaging::MSGBOXPARAMSA*) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
 
+    # :nodoc:
     fun MessageBoxIndirectW(lpmbp : Win32cr::UI::WindowsAndMessaging::MSGBOXPARAMSW*) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
 
+    # :nodoc:
     fun ShowCursor(bShow : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun SetCursorPos(x : Int32, y : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetPhysicalCursorPos(x : Int32, y : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetCursor(hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
 
+    # :nodoc:
     fun GetCursorPos(lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPhysicalCursorPos(lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetClipCursor(lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR
 
+    # :nodoc:
     fun CreateCaret(hWnd : Win32cr::Foundation::HWND, hBitmap : Win32cr::Graphics::Gdi::HBITMAP, nWidth : Int32, nHeight : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCaretBlinkTime : UInt32
 
+    # :nodoc:
     fun SetCaretBlinkTime(uMSeconds : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DestroyCaret : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun HideCaret(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ShowCaret(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetCaretPos(x : Int32, y : Int32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCaretPos(lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LogicalToPhysicalPoint(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PhysicalToLogicalPoint(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WindowFromPoint(point : Win32cr::Foundation::POINT) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun WindowFromPhysicalPoint(point : Win32cr::Foundation::POINT) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun ChildWindowFromPoint(hWndParent : Win32cr::Foundation::HWND, point : Win32cr::Foundation::POINT) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun ClipCursor(lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ChildWindowFromPointEx(hwnd : Win32cr::Foundation::HWND, pt : Win32cr::Foundation::POINT, flags : Win32cr::UI::WindowsAndMessaging::CWP_FLAGS) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun GetSysColor(nIndex : Win32cr::UI::WindowsAndMessaging::SYS_COLOR_INDEX) : UInt32
 
+    # :nodoc:
     fun SetSysColors(cElements : Int32, lpaElements : Int32*, lpaRgbValues : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetWindowWord(hWnd : Win32cr::Foundation::HWND, nIndex : Int32) : UInt16
 
+    # :nodoc:
     fun SetWindowWord(hWnd : Win32cr::Foundation::HWND, nIndex : Int32, wNewWord : UInt16) : UInt16
 
+    # :nodoc:
     fun GetWindowLongA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX) : Int32
 
+    # :nodoc:
     fun GetWindowLongW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX) : Int32
 
+    # :nodoc:
     fun SetWindowLongA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX, dwNewLong : Int32) : Int32
 
+    # :nodoc:
     fun SetWindowLongW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX, dwNewLong : Int32) : Int32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun GetWindowLongPtrA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX) : LibC::IntPtrT
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun GetWindowLongPtrW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX) : LibC::IntPtrT
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SetWindowLongPtrA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX, dwNewLong : LibC::IntPtrT) : LibC::IntPtrT
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SetWindowLongPtrW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX, dwNewLong : LibC::IntPtrT) : LibC::IntPtrT
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun GetClassWord(hWnd : Win32cr::Foundation::HWND, nIndex : Int32) : UInt16
 
+    # :nodoc:
     fun SetClassWord(hWnd : Win32cr::Foundation::HWND, nIndex : Int32, wNewWord : UInt16) : UInt16
 
+    # :nodoc:
     fun GetClassLongA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX) : UInt32
 
+    # :nodoc:
     fun GetClassLongW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX) : UInt32
 
+    # :nodoc:
     fun SetClassLongA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX, dwNewLong : Int32) : UInt32
 
+    # :nodoc:
     fun SetClassLongW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX, dwNewLong : Int32) : UInt32
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun GetClassLongPtrA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX) : LibC::UIntPtrT
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun GetClassLongPtrW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX) : LibC::UIntPtrT
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SetClassLongPtrA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX, dwNewLong : LibC::IntPtrT) : LibC::UIntPtrT
-  {% end %}
+    {% end %}
 
     {% if flag?(:x86_64) || flag?(:arm) %}
+    # :nodoc:
     fun SetClassLongPtrW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX, dwNewLong : LibC::IntPtrT) : LibC::UIntPtrT
-  {% end %}
+    {% end %}
 
+    # :nodoc:
     fun GetProcessDefaultLayout(pdwDefaultLayout : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProcessDefaultLayout(dwDefaultLayout : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDesktopWindow : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun GetParent(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun SetParent(hWndChild : Win32cr::Foundation::HWND, hWndNewParent : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun EnumChildWindows(hWndParent : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::WNDENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FindWindowA(lpClassName : Win32cr::Foundation::PSTR, lpWindowName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun FindWindowW(lpClassName : Win32cr::Foundation::PWSTR, lpWindowName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun FindWindowExA(hWndParent : Win32cr::Foundation::HWND, hWndChildAfter : Win32cr::Foundation::HWND, lpszClass : Win32cr::Foundation::PSTR, lpszWindow : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun FindWindowExW(hWndParent : Win32cr::Foundation::HWND, hWndChildAfter : Win32cr::Foundation::HWND, lpszClass : Win32cr::Foundation::PWSTR, lpszWindow : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun GetShellWindow : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun RegisterShellHookWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeregisterShellHookWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumWindows(lpEnumFunc : Win32cr::UI::WindowsAndMessaging::WNDENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EnumThreadWindows(dwThreadId : UInt32, lpfn : Win32cr::UI::WindowsAndMessaging::WNDENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetClassNameA(hWnd : Win32cr::Foundation::HWND, lpClassName : UInt8*, nMaxCount : Int32) : Int32
 
+    # :nodoc:
     fun GetClassNameW(hWnd : Win32cr::Foundation::HWND, lpClassName : UInt16*, nMaxCount : Int32) : Int32
 
+    # :nodoc:
     fun GetTopWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun GetWindowThreadProcessId(hWnd : Win32cr::Foundation::HWND, lpdwProcessId : UInt32*) : UInt32
 
+    # :nodoc:
     fun IsGUIThread(bConvert : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetLastActivePopup(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun GetWindow(hWnd : Win32cr::Foundation::HWND, uCmd : Win32cr::UI::WindowsAndMessaging::GET_WINDOW_CMD) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun SetWindowsHookA(nFilterType : Int32, pfnFilterProc : Win32cr::UI::WindowsAndMessaging::HOOKPROC) : Win32cr::UI::WindowsAndMessaging::HHOOK
 
+    # :nodoc:
     fun SetWindowsHookW(nFilterType : Int32, pfnFilterProc : Win32cr::UI::WindowsAndMessaging::HOOKPROC) : Win32cr::UI::WindowsAndMessaging::HHOOK
 
+    # :nodoc:
     fun UnhookWindowsHook(nCode : Int32, pfnFilterProc : Win32cr::UI::WindowsAndMessaging::HOOKPROC) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetWindowsHookExA(idHook : Win32cr::UI::WindowsAndMessaging::WINDOWS_HOOK_ID, lpfn : Win32cr::UI::WindowsAndMessaging::HOOKPROC, hmod : Win32cr::Foundation::HINSTANCE, dwThreadId : UInt32) : Win32cr::UI::WindowsAndMessaging::HHOOK
 
+    # :nodoc:
     fun SetWindowsHookExW(idHook : Win32cr::UI::WindowsAndMessaging::WINDOWS_HOOK_ID, lpfn : Win32cr::UI::WindowsAndMessaging::HOOKPROC, hmod : Win32cr::Foundation::HINSTANCE, dwThreadId : UInt32) : Win32cr::UI::WindowsAndMessaging::HHOOK
 
+    # :nodoc:
     fun UnhookWindowsHookEx(hhk : Win32cr::UI::WindowsAndMessaging::HHOOK) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CallNextHookEx(hhk : Win32cr::UI::WindowsAndMessaging::HHOOK, nCode : Int32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun CheckMenuRadioItem(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, first : UInt32, last : UInt32, check : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LoadCursorA(hInstance : Win32cr::Foundation::HINSTANCE, lpCursorName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
 
+    # :nodoc:
     fun LoadCursorW(hInstance : Win32cr::Foundation::HINSTANCE, lpCursorName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
 
+    # :nodoc:
     fun LoadCursorFromFileA(lpFileName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
 
+    # :nodoc:
     fun LoadCursorFromFileW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
 
+    # :nodoc:
     fun CreateCursor(hInst : Win32cr::Foundation::HINSTANCE, xHotSpot : Int32, yHotSpot : Int32, nWidth : Int32, nHeight : Int32, pvANDPlane : Void*, pvXORPlane : Void*) : Win32cr::UI::WindowsAndMessaging::HCURSOR
 
+    # :nodoc:
     fun DestroyCursor(hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetSystemCursor(hcur : Win32cr::UI::WindowsAndMessaging::HCURSOR, id : Win32cr::UI::WindowsAndMessaging::SYSTEM_CURSOR_ID) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LoadIconA(hInstance : Win32cr::Foundation::HINSTANCE, lpIconName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HICON
 
+    # :nodoc:
     fun LoadIconW(hInstance : Win32cr::Foundation::HINSTANCE, lpIconName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HICON
 
+    # :nodoc:
     fun PrivateExtractIconsA(szFileName : UInt8*, nIconIndex : Int32, cxIcon : Int32, cyIcon : Int32, phicon : Win32cr::UI::WindowsAndMessaging::HICON*, piconid : UInt32*, nIcons : UInt32, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun PrivateExtractIconsW(szFileName : UInt16*, nIconIndex : Int32, cxIcon : Int32, cyIcon : Int32, phicon : Win32cr::UI::WindowsAndMessaging::HICON*, piconid : UInt32*, nIcons : UInt32, flags : UInt32) : UInt32
 
+    # :nodoc:
     fun CreateIcon(hInstance : Win32cr::Foundation::HINSTANCE, nWidth : Int32, nHeight : Int32, cPlanes : UInt8, cBitsPixel : UInt8, lpbANDbits : UInt8*, lpbXORbits : UInt8*) : Win32cr::UI::WindowsAndMessaging::HICON
 
+    # :nodoc:
     fun DestroyIcon(hIcon : Win32cr::UI::WindowsAndMessaging::HICON) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LookupIconIdFromDirectory(presbits : UInt8*, fIcon : Win32cr::Foundation::BOOL) : Int32
 
+    # :nodoc:
     fun LookupIconIdFromDirectoryEx(presbits : UInt8*, fIcon : Win32cr::Foundation::BOOL, cxDesired : Int32, cyDesired : Int32, flags : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Int32
 
+    # :nodoc:
     fun CreateIconFromResource(presbits : UInt8*, dwResSize : UInt32, fIcon : Win32cr::Foundation::BOOL, dwVer : UInt32) : Win32cr::UI::WindowsAndMessaging::HICON
 
+    # :nodoc:
     fun CreateIconFromResourceEx(presbits : UInt8*, dwResSize : UInt32, fIcon : Win32cr::Foundation::BOOL, dwVer : UInt32, cxDesired : Int32, cyDesired : Int32, flags : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::UI::WindowsAndMessaging::HICON
 
+    # :nodoc:
     fun LoadImageA(hInst : Win32cr::Foundation::HINSTANCE, name : Win32cr::Foundation::PSTR, type__ : Win32cr::UI::WindowsAndMessaging::GDI_IMAGE_TYPE, cx : Int32, cy : Int32, fuLoad : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun LoadImageW(hInst : Win32cr::Foundation::HINSTANCE, name : Win32cr::Foundation::PWSTR, type__ : Win32cr::UI::WindowsAndMessaging::GDI_IMAGE_TYPE, cx : Int32, cy : Int32, fuLoad : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CopyImage(h : Win32cr::Foundation::HANDLE, type__ : Win32cr::UI::WindowsAndMessaging::GDI_IMAGE_TYPE, cx : Int32, cy : Int32, flags : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun DrawIconEx(hdc : Win32cr::Graphics::Gdi::HDC, xLeft : Int32, yTop : Int32, hIcon : Win32cr::UI::WindowsAndMessaging::HICON, cxWidth : Int32, cyWidth : Int32, istepIfAniCur : UInt32, hbrFlickerFreeDraw : Win32cr::Graphics::Gdi::HBRUSH, diFlags : Win32cr::UI::WindowsAndMessaging::DI_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateIconIndirect(piconinfo : Win32cr::UI::WindowsAndMessaging::ICONINFO*) : Win32cr::UI::WindowsAndMessaging::HICON
 
+    # :nodoc:
     fun CopyIcon(hIcon : Win32cr::UI::WindowsAndMessaging::HICON) : Win32cr::UI::WindowsAndMessaging::HICON
 
+    # :nodoc:
     fun GetIconInfo(hIcon : Win32cr::UI::WindowsAndMessaging::HICON, piconinfo : Win32cr::UI::WindowsAndMessaging::ICONINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetIconInfoExA(hicon : Win32cr::UI::WindowsAndMessaging::HICON, piconinfo : Win32cr::UI::WindowsAndMessaging::ICONINFOEXA*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetIconInfoExW(hicon : Win32cr::UI::WindowsAndMessaging::HICON, piconinfo : Win32cr::UI::WindowsAndMessaging::ICONINFOEXW*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsDialogMessageA(hDlg : Win32cr::Foundation::HWND, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsDialogMessageW(hDlg : Win32cr::Foundation::HWND, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun MapDialogRect(hDlg : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetScrollInfo(hwnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, lpsi : Win32cr::UI::WindowsAndMessaging::SCROLLINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DefFrameProcA(hWnd : Win32cr::Foundation::HWND, hWndMDIClient : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun DefFrameProcW(hWnd : Win32cr::Foundation::HWND, hWndMDIClient : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun DefMDIChildProcA(hWnd : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun DefMDIChildProcW(hWnd : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
+    # :nodoc:
     fun TranslateMDISysAccel(hWndClient : Win32cr::Foundation::HWND, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ArrangeIconicWindows(hWnd : Win32cr::Foundation::HWND) : UInt32
 
+    # :nodoc:
     fun CreateMDIWindowA(lpClassName : Win32cr::Foundation::PSTR, lpWindowName : Win32cr::Foundation::PSTR, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun CreateMDIWindowW(lpClassName : Win32cr::Foundation::PWSTR, lpWindowName : Win32cr::Foundation::PWSTR, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun TileWindows(hwndParent : Win32cr::Foundation::HWND, wHow : Win32cr::UI::WindowsAndMessaging::TILE_WINDOWS_HOW, lpRect : Win32cr::Foundation::RECT*, cKids : UInt32, lpKids : Win32cr::Foundation::HWND*) : UInt16
 
+    # :nodoc:
     fun CascadeWindows(hwndParent : Win32cr::Foundation::HWND, wHow : Win32cr::UI::WindowsAndMessaging::CASCADE_WINDOWS_HOW, lpRect : Win32cr::Foundation::RECT*, cKids : UInt32, lpKids : Win32cr::Foundation::HWND*) : UInt16
 
+    # :nodoc:
     fun SystemParametersInfoA(uiAction : Win32cr::UI::WindowsAndMessaging::SYSTEM_PARAMETERS_INFO_ACTION, uiParam : UInt32, pvParam : Void*, fWinIni : Win32cr::UI::WindowsAndMessaging::SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SystemParametersInfoW(uiAction : Win32cr::UI::WindowsAndMessaging::SYSTEM_PARAMETERS_INFO_ACTION, uiParam : UInt32, pvParam : Void*, fWinIni : Win32cr::UI::WindowsAndMessaging::SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SoundSentry : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetDebugErrorLevel(dwLevel : UInt32) : Void
 
+    # :nodoc:
     fun InternalGetWindowText(hWnd : Win32cr::Foundation::HWND, pString : UInt16*, cchMaxCount : Int32) : Int32
 
+    # :nodoc:
     fun CancelShutdown : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetGUIThreadInfo(idThread : UInt32, pgui : Win32cr::UI::WindowsAndMessaging::GUITHREADINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetProcessDPIAware : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsProcessDPIAware : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun InheritWindowMonitor(hwnd : Win32cr::Foundation::HWND, hwndInherit : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetWindowModuleFileNameA(hwnd : Win32cr::Foundation::HWND, pszFileName : UInt8*, cchFileNameMax : UInt32) : UInt32
 
+    # :nodoc:
     fun GetWindowModuleFileNameW(hwnd : Win32cr::Foundation::HWND, pszFileName : UInt16*, cchFileNameMax : UInt32) : UInt32
 
+    # :nodoc:
     fun GetCursorInfo(pci : Win32cr::UI::WindowsAndMessaging::CURSORINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetWindowInfo(hwnd : Win32cr::Foundation::HWND, pwi : Win32cr::UI::WindowsAndMessaging::WINDOWINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetTitleBarInfo(hwnd : Win32cr::Foundation::HWND, pti : Win32cr::UI::WindowsAndMessaging::TITLEBARINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetMenuBarInfo(hwnd : Win32cr::Foundation::HWND, idObject : Win32cr::UI::WindowsAndMessaging::OBJECT_IDENTIFIER, idItem : Int32, pmbi : Win32cr::UI::WindowsAndMessaging::MENUBARINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetScrollBarInfo(hwnd : Win32cr::Foundation::HWND, idObject : Win32cr::UI::WindowsAndMessaging::OBJECT_IDENTIFIER, psbi : Win32cr::UI::WindowsAndMessaging::SCROLLBARINFO*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetAncestor(hwnd : Win32cr::Foundation::HWND, gaFlags : Win32cr::UI::WindowsAndMessaging::GET_ANCESTOR_FLAGS) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun RealChildWindowFromPoint(hwndParent : Win32cr::Foundation::HWND, ptParentClientCoords : Win32cr::Foundation::POINT) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun RealGetWindowClassA(hwnd : Win32cr::Foundation::HWND, ptszClassName : UInt8*, cchClassNameMax : UInt32) : UInt32
 
+    # :nodoc:
     fun RealGetWindowClassW(hwnd : Win32cr::Foundation::HWND, ptszClassName : UInt16*, cchClassNameMax : UInt32) : UInt32
 
+    # :nodoc:
     fun GetAltTabInfoA(hwnd : Win32cr::Foundation::HWND, iItem : Int32, pati : Win32cr::UI::WindowsAndMessaging::ALTTABINFO*, pszItemText : UInt8*, cchItemText : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetAltTabInfoW(hwnd : Win32cr::Foundation::HWND, iItem : Int32, pati : Win32cr::UI::WindowsAndMessaging::ALTTABINFO*, pszItemText : UInt16*, cchItemText : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ChangeWindowMessageFilter(message : UInt32, dwFlag : Win32cr::UI::WindowsAndMessaging::CHANGE_WINDOW_MESSAGE_FILTER_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ChangeWindowMessageFilterEx(hwnd : Win32cr::Foundation::HWND, message : UInt32, action : Win32cr::UI::WindowsAndMessaging::WINDOW_MESSAGE_FILTER_ACTION, pChangeFilterStruct : Win32cr::UI::WindowsAndMessaging::CHANGEFILTERSTRUCT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateResourceIndexer(projectRoot : Win32cr::Foundation::PWSTR, extensionDllPath : Win32cr::Foundation::PWSTR, ppResourceIndexer : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DestroyResourceIndexer(resourceIndexer : Void*) : Void
 
+    # :nodoc:
     fun IndexFilePath(resourceIndexer : Void*, filePath : Win32cr::Foundation::PWSTR, ppResourceUri : Win32cr::Foundation::PWSTR*, pQualifierCount : UInt32*, ppQualifiers : Win32cr::UI::WindowsAndMessaging::IndexedResourceQualifier**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun DestroyIndexedResults(resourceUri : Win32cr::Foundation::PWSTR, qualifierCount : UInt32, qualifiers : Win32cr::UI::WindowsAndMessaging::IndexedResourceQualifier*) : Void
 
+    # :nodoc:
     fun MrmCreateResourceIndexer(packageFamilyName : Win32cr::Foundation::PWSTR, projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmCreateResourceIndexerFromPreviousSchemaFile(projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, schemaFile : Win32cr::Foundation::PWSTR, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmCreateResourceIndexerFromPreviousPriFile(projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, priFile : Win32cr::Foundation::PWSTR, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, schemaXmlData : UInt8*, schemaXmlSize : UInt32, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmCreateResourceIndexerFromPreviousPriData(projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, priData : UInt8*, priSize : UInt32, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmCreateResourceIndexerWithFlags(packageFamilyName : Win32cr::Foundation::PWSTR, projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, flags : Win32cr::UI::WindowsAndMessaging::MrmIndexerFlags, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmIndexString(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, resourceUri : Win32cr::Foundation::PWSTR, resourceString : Win32cr::Foundation::PWSTR, qualifiers : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmIndexEmbeddedData(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, resourceUri : Win32cr::Foundation::PWSTR, embeddedData : UInt8*, embeddedDataSize : UInt32, qualifiers : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmIndexFile(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, resourceUri : Win32cr::Foundation::PWSTR, filePath : Win32cr::Foundation::PWSTR, qualifiers : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmIndexFileAutoQualifiers(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, filePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmIndexResourceContainerAutoQualifiers(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, containerPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmCreateResourceFile(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, packagingMode : Win32cr::UI::WindowsAndMessaging::MrmPackagingMode, packagingOptions : Win32cr::UI::WindowsAndMessaging::MrmPackagingOptions, outputDirectory : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmCreateResourceFileWithChecksum(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, packagingMode : Win32cr::UI::WindowsAndMessaging::MrmPackagingMode, packagingOptions : Win32cr::UI::WindowsAndMessaging::MrmPackagingOptions, checksum : UInt32, outputDirectory : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmCreateResourceFileInMemory(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, packagingMode : Win32cr::UI::WindowsAndMessaging::MrmPackagingMode, packagingOptions : Win32cr::UI::WindowsAndMessaging::MrmPackagingOptions, outputPriData : UInt8**, outputPriSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmPeekResourceIndexerMessages(handle : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, messages : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerMessage**, numMsgs : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmDestroyIndexerAndMessages(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmFreeMemory(data : UInt8*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmDumpPriFile(indexFileName : Win32cr::Foundation::PWSTR, schemaPriFile : Win32cr::Foundation::PWSTR, dumpType : Win32cr::UI::WindowsAndMessaging::MrmDumpType, outputXmlFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmDumpPriFileInMemory(indexFileName : Win32cr::Foundation::PWSTR, schemaPriFile : Win32cr::Foundation::PWSTR, dumpType : Win32cr::UI::WindowsAndMessaging::MrmDumpType, outputXmlData : UInt8**, outputXmlSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmDumpPriDataInMemory(inputPriData : UInt8*, inputPriSize : UInt32, schemaPriData : UInt8*, schemaPriSize : UInt32, dumpType : Win32cr::UI::WindowsAndMessaging::MrmDumpType, outputXmlData : UInt8**, outputXmlSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmCreateConfig(platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, outputXmlFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmCreateConfigInMemory(platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, outputXmlData : UInt8**, outputXmlSize : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MrmGetPriFileContentChecksum(priFile : Win32cr::Foundation::PWSTR, checksum : UInt32*) : Win32cr::Foundation::HRESULT
 
   end

@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::System::RestartManager
+  extend self
   alias RM_WRITE_STATUS_CALLBACK = Proc(UInt32, Void)
 
   CCH_RM_SESSION_KEY = 32_u32
@@ -95,28 +96,83 @@ module Win32cr::System::RestartManager
     end
   end
 
+  def rmStartSession(pSessionHandle : UInt32*, dwSessionFlags : UInt32, strSessionKey : Win32cr::Foundation::PWSTR) : UInt32
+    C.RmStartSession(pSessionHandle, dwSessionFlags, strSessionKey)
+  end
+
+  def rmJoinSession(pSessionHandle : UInt32*, strSessionKey : Win32cr::Foundation::PWSTR) : UInt32
+    C.RmJoinSession(pSessionHandle, strSessionKey)
+  end
+
+  def rmEndSession(dwSessionHandle : UInt32) : UInt32
+    C.RmEndSession(dwSessionHandle)
+  end
+
+  def rmRegisterResources(dwSessionHandle : UInt32, nFiles : UInt32, rgsFileNames : Win32cr::Foundation::PWSTR*, nApplications : UInt32, rgApplications : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS*, nServices : UInt32, rgsServiceNames : Win32cr::Foundation::PWSTR*) : UInt32
+    C.RmRegisterResources(dwSessionHandle, nFiles, rgsFileNames, nApplications, rgApplications, nServices, rgsServiceNames)
+  end
+
+  def rmGetList(dwSessionHandle : UInt32, pnProcInfoNeeded : UInt32*, pnProcInfo : UInt32*, rgAffectedApps : Win32cr::System::RestartManager::RM_PROCESS_INFO*, lpdwRebootReasons : UInt32*) : UInt32
+    C.RmGetList(dwSessionHandle, pnProcInfoNeeded, pnProcInfo, rgAffectedApps, lpdwRebootReasons)
+  end
+
+  def rmShutdown(dwSessionHandle : UInt32, lActionFlags : UInt32, fnStatus : Win32cr::System::RestartManager::RM_WRITE_STATUS_CALLBACK) : UInt32
+    C.RmShutdown(dwSessionHandle, lActionFlags, fnStatus)
+  end
+
+  def rmRestart(dwSessionHandle : UInt32, dwRestartFlags : UInt32, fnStatus : Win32cr::System::RestartManager::RM_WRITE_STATUS_CALLBACK) : UInt32
+    C.RmRestart(dwSessionHandle, dwRestartFlags, fnStatus)
+  end
+
+  def rmCancelCurrentTask(dwSessionHandle : UInt32) : UInt32
+    C.RmCancelCurrentTask(dwSessionHandle)
+  end
+
+  def rmAddFilter(dwSessionHandle : UInt32, strModuleName : Win32cr::Foundation::PWSTR, pProcess : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS*, strServiceShortName : Win32cr::Foundation::PWSTR, filter_action : Win32cr::System::RestartManager::RM_FILTER_ACTION) : UInt32
+    C.RmAddFilter(dwSessionHandle, strModuleName, pProcess, strServiceShortName, filter_action)
+  end
+
+  def rmRemoveFilter(dwSessionHandle : UInt32, strModuleName : Win32cr::Foundation::PWSTR, pProcess : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS*, strServiceShortName : Win32cr::Foundation::PWSTR) : UInt32
+    C.RmRemoveFilter(dwSessionHandle, strModuleName, pProcess, strServiceShortName)
+  end
+
+  def rmGetFilterList(dwSessionHandle : UInt32, pbFilterBuf : UInt8*, cbFilterBuf : UInt32, cbFilterBufNeeded : UInt32*) : UInt32
+    C.RmGetFilterList(dwSessionHandle, pbFilterBuf, cbFilterBuf, cbFilterBufNeeded)
+  end
+
   @[Link("rstrtmgr")]
   lib C
+    # :nodoc:
     fun RmStartSession(pSessionHandle : UInt32*, dwSessionFlags : UInt32, strSessionKey : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RmJoinSession(pSessionHandle : UInt32*, strSessionKey : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RmEndSession(dwSessionHandle : UInt32) : UInt32
 
+    # :nodoc:
     fun RmRegisterResources(dwSessionHandle : UInt32, nFiles : UInt32, rgsFileNames : Win32cr::Foundation::PWSTR*, nApplications : UInt32, rgApplications : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS*, nServices : UInt32, rgsServiceNames : Win32cr::Foundation::PWSTR*) : UInt32
 
+    # :nodoc:
     fun RmGetList(dwSessionHandle : UInt32, pnProcInfoNeeded : UInt32*, pnProcInfo : UInt32*, rgAffectedApps : Win32cr::System::RestartManager::RM_PROCESS_INFO*, lpdwRebootReasons : UInt32*) : UInt32
 
+    # :nodoc:
     fun RmShutdown(dwSessionHandle : UInt32, lActionFlags : UInt32, fnStatus : Win32cr::System::RestartManager::RM_WRITE_STATUS_CALLBACK) : UInt32
 
+    # :nodoc:
     fun RmRestart(dwSessionHandle : UInt32, dwRestartFlags : UInt32, fnStatus : Win32cr::System::RestartManager::RM_WRITE_STATUS_CALLBACK) : UInt32
 
+    # :nodoc:
     fun RmCancelCurrentTask(dwSessionHandle : UInt32) : UInt32
 
+    # :nodoc:
     fun RmAddFilter(dwSessionHandle : UInt32, strModuleName : Win32cr::Foundation::PWSTR, pProcess : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS*, strServiceShortName : Win32cr::Foundation::PWSTR, filter_action : Win32cr::System::RestartManager::RM_FILTER_ACTION) : UInt32
 
+    # :nodoc:
     fun RmRemoveFilter(dwSessionHandle : UInt32, strModuleName : Win32cr::Foundation::PWSTR, pProcess : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS*, strServiceShortName : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun RmGetFilterList(dwSessionHandle : UInt32, pbFilterBuf : UInt8*, cbFilterBuf : UInt32, cbFilterBufNeeded : UInt32*) : UInt32
 
   end

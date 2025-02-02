@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./../graphics/gdi.cr"
 
 module Win32cr::System::DataExchange
+  extend self
   alias HSZ = LibC::IntPtrT
   alias HCONV = LibC::IntPtrT
   alias HCONVLIST = LibC::IntPtrT
@@ -394,162 +395,547 @@ module Win32cr::System::DataExchange
     end
   end
 
+  def ddeSetQualityOfService(hwndClient : Win32cr::Foundation::HWND, pqosNew : Win32cr::Security::SECURITY_QUALITY_OF_SERVICE*, pqosPrev : Win32cr::Security::SECURITY_QUALITY_OF_SERVICE*) : Win32cr::Foundation::BOOL
+    C.DdeSetQualityOfService(hwndClient, pqosNew, pqosPrev)
+  end
+
+  def impersonateDdeClientWindow(hWndClient : Win32cr::Foundation::HWND, hWndServer : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.ImpersonateDdeClientWindow(hWndClient, hWndServer)
+  end
+
+  def packDDElParam(msg : UInt32, uiLo : LibC::UIntPtrT, uiHi : LibC::UIntPtrT) : Win32cr::Foundation::LPARAM
+    C.PackDDElParam(msg, uiLo, uiHi)
+  end
+
+  def unpackDDElParam(msg : UInt32, lParam : Win32cr::Foundation::LPARAM, puiLo : LibC::UIntPtrT*, puiHi : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    C.UnpackDDElParam(msg, lParam, puiLo, puiHi)
+  end
+
+  def freeDDElParam(msg : UInt32, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    C.FreeDDElParam(msg, lParam)
+  end
+
+  def reuseDDElParam(lParam : Win32cr::Foundation::LPARAM, msgIn : UInt32, msgOut : UInt32, uiLo : LibC::UIntPtrT, uiHi : LibC::UIntPtrT) : Win32cr::Foundation::LPARAM
+    C.ReuseDDElParam(lParam, msgIn, msgOut, uiLo, uiHi)
+  end
+
+  def ddeInitializeA(pidInst : UInt32*, pfnCallback : Win32cr::System::DataExchange::PFNCALLBACK, afCmd : Win32cr::System::DataExchange::DDE_INITIALIZE_COMMAND, ulRes : UInt32) : UInt32
+    C.DdeInitializeA(pidInst, pfnCallback, afCmd, ulRes)
+  end
+
+  def ddeInitializeW(pidInst : UInt32*, pfnCallback : Win32cr::System::DataExchange::PFNCALLBACK, afCmd : Win32cr::System::DataExchange::DDE_INITIALIZE_COMMAND, ulRes : UInt32) : UInt32
+    C.DdeInitializeW(pidInst, pfnCallback, afCmd, ulRes)
+  end
+
+  def ddeUninitialize(idInst : UInt32) : Win32cr::Foundation::BOOL
+    C.DdeUninitialize(idInst)
+  end
+
+  def ddeConnectList(idInst : UInt32, hszService : Win32cr::System::DataExchange::HSZ, hszTopic : Win32cr::System::DataExchange::HSZ, hConvList : Win32cr::System::DataExchange::HCONVLIST, pCC : Win32cr::System::DataExchange::CONVCONTEXT*) : Win32cr::System::DataExchange::HCONVLIST
+    C.DdeConnectList(idInst, hszService, hszTopic, hConvList, pCC)
+  end
+
+  def ddeQueryNextServer(hConvList : Win32cr::System::DataExchange::HCONVLIST, hConvPrev : Win32cr::System::DataExchange::HCONV) : Win32cr::System::DataExchange::HCONV
+    C.DdeQueryNextServer(hConvList, hConvPrev)
+  end
+
+  def ddeDisconnectList(hConvList : Win32cr::System::DataExchange::HCONVLIST) : Win32cr::Foundation::BOOL
+    C.DdeDisconnectList(hConvList)
+  end
+
+  def ddeConnect(idInst : UInt32, hszService : Win32cr::System::DataExchange::HSZ, hszTopic : Win32cr::System::DataExchange::HSZ, pCC : Win32cr::System::DataExchange::CONVCONTEXT*) : Win32cr::System::DataExchange::HCONV
+    C.DdeConnect(idInst, hszService, hszTopic, pCC)
+  end
+
+  def ddeDisconnect(hConv : Win32cr::System::DataExchange::HCONV) : Win32cr::Foundation::BOOL
+    C.DdeDisconnect(hConv)
+  end
+
+  def ddeReconnect(hConv : Win32cr::System::DataExchange::HCONV) : Win32cr::System::DataExchange::HCONV
+    C.DdeReconnect(hConv)
+  end
+
+  def ddeQueryConvInfo(hConv : Win32cr::System::DataExchange::HCONV, idTransaction : UInt32, pConvInfo : Win32cr::System::DataExchange::CONVINFO*) : UInt32
+    C.DdeQueryConvInfo(hConv, idTransaction, pConvInfo)
+  end
+
+  def ddeSetUserHandle(hConv : Win32cr::System::DataExchange::HCONV, id : UInt32, hUser : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    C.DdeSetUserHandle(hConv, id, hUser)
+  end
+
+  def ddeAbandonTransaction(idInst : UInt32, hConv : Win32cr::System::DataExchange::HCONV, idTransaction : UInt32) : Win32cr::Foundation::BOOL
+    C.DdeAbandonTransaction(idInst, hConv, idTransaction)
+  end
+
+  def ddePostAdvise(idInst : UInt32, hszTopic : Win32cr::System::DataExchange::HSZ, hszItem : Win32cr::System::DataExchange::HSZ) : Win32cr::Foundation::BOOL
+    C.DdePostAdvise(idInst, hszTopic, hszItem)
+  end
+
+  def ddeEnableCallback(idInst : UInt32, hConv : Win32cr::System::DataExchange::HCONV, wCmd : Win32cr::System::DataExchange::DDE_ENABLE_CALLBACK_CMD) : Win32cr::Foundation::BOOL
+    C.DdeEnableCallback(idInst, hConv, wCmd)
+  end
+
+  def ddeImpersonateClient(hConv : Win32cr::System::DataExchange::HCONV) : Win32cr::Foundation::BOOL
+    C.DdeImpersonateClient(hConv)
+  end
+
+  def ddeNameService(idInst : UInt32, hsz1 : Win32cr::System::DataExchange::HSZ, hsz2 : Win32cr::System::DataExchange::HSZ, afCmd : Win32cr::System::DataExchange::DDE_NAME_SERVICE_CMD) : Win32cr::System::DataExchange::HDDEDATA
+    C.DdeNameService(idInst, hsz1, hsz2, afCmd)
+  end
+
+  def ddeClientTransaction(pData : UInt8*, cbData : UInt32, hConv : Win32cr::System::DataExchange::HCONV, hszItem : Win32cr::System::DataExchange::HSZ, wFmt : UInt32, wType : Win32cr::System::DataExchange::DDE_CLIENT_TRANSACTION_TYPE, dwTimeout : UInt32, pdwResult : UInt32*) : Win32cr::System::DataExchange::HDDEDATA
+    C.DdeClientTransaction(pData, cbData, hConv, hszItem, wFmt, wType, dwTimeout, pdwResult)
+  end
+
+  def ddeCreateDataHandle(idInst : UInt32, pSrc : UInt8*, cb : UInt32, cbOff : UInt32, hszItem : Win32cr::System::DataExchange::HSZ, wFmt : UInt32, afCmd : UInt32) : Win32cr::System::DataExchange::HDDEDATA
+    C.DdeCreateDataHandle(idInst, pSrc, cb, cbOff, hszItem, wFmt, afCmd)
+  end
+
+  def ddeAddData(hData : Win32cr::System::DataExchange::HDDEDATA, pSrc : UInt8*, cb : UInt32, cbOff : UInt32) : Win32cr::System::DataExchange::HDDEDATA
+    C.DdeAddData(hData, pSrc, cb, cbOff)
+  end
+
+  def ddeGetData(hData : Win32cr::System::DataExchange::HDDEDATA, pDst : UInt8*, cbMax : UInt32, cbOff : UInt32) : UInt32
+    C.DdeGetData(hData, pDst, cbMax, cbOff)
+  end
+
+  def ddeAccessData(hData : Win32cr::System::DataExchange::HDDEDATA, pcbDataSize : UInt32*) : UInt8*
+    C.DdeAccessData(hData, pcbDataSize)
+  end
+
+  def ddeUnaccessData(hData : Win32cr::System::DataExchange::HDDEDATA) : Win32cr::Foundation::BOOL
+    C.DdeUnaccessData(hData)
+  end
+
+  def ddeFreeDataHandle(hData : Win32cr::System::DataExchange::HDDEDATA) : Win32cr::Foundation::BOOL
+    C.DdeFreeDataHandle(hData)
+  end
+
+  def ddeGetLastError(idInst : UInt32) : UInt32
+    C.DdeGetLastError(idInst)
+  end
+
+  def ddeCreateStringHandleA(idInst : UInt32, psz : Win32cr::Foundation::PSTR, iCodePage : Int32) : Win32cr::System::DataExchange::HSZ
+    C.DdeCreateStringHandleA(idInst, psz, iCodePage)
+  end
+
+  def ddeCreateStringHandleW(idInst : UInt32, psz : Win32cr::Foundation::PWSTR, iCodePage : Int32) : Win32cr::System::DataExchange::HSZ
+    C.DdeCreateStringHandleW(idInst, psz, iCodePage)
+  end
+
+  def ddeQueryStringA(idInst : UInt32, hsz : Win32cr::System::DataExchange::HSZ, psz : UInt8*, cchMax : UInt32, iCodePage : Int32) : UInt32
+    C.DdeQueryStringA(idInst, hsz, psz, cchMax, iCodePage)
+  end
+
+  def ddeQueryStringW(idInst : UInt32, hsz : Win32cr::System::DataExchange::HSZ, psz : UInt16*, cchMax : UInt32, iCodePage : Int32) : UInt32
+    C.DdeQueryStringW(idInst, hsz, psz, cchMax, iCodePage)
+  end
+
+  def ddeFreeStringHandle(idInst : UInt32, hsz : Win32cr::System::DataExchange::HSZ) : Win32cr::Foundation::BOOL
+    C.DdeFreeStringHandle(idInst, hsz)
+  end
+
+  def ddeKeepStringHandle(idInst : UInt32, hsz : Win32cr::System::DataExchange::HSZ) : Win32cr::Foundation::BOOL
+    C.DdeKeepStringHandle(idInst, hsz)
+  end
+
+  def ddeCmpStringHandles(hsz1 : Win32cr::System::DataExchange::HSZ, hsz2 : Win32cr::System::DataExchange::HSZ) : Int32
+    C.DdeCmpStringHandles(hsz1, hsz2)
+  end
+
+  def setWinMetaFileBits(nSize : UInt32, lpMeta16Data : UInt8*, hdcRef : Win32cr::Graphics::Gdi::HDC, lpMFP : Win32cr::System::DataExchange::METAFILEPICT*) : Win32cr::Graphics::Gdi::HENHMETAFILE
+    C.SetWinMetaFileBits(nSize, lpMeta16Data, hdcRef, lpMFP)
+  end
+
+  def openClipboard(hWndNewOwner : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.OpenClipboard(hWndNewOwner)
+  end
+
+  def closeClipboard : Win32cr::Foundation::BOOL
+    C.CloseClipboard
+  end
+
+  def getClipboardSequenceNumber : UInt32
+    C.GetClipboardSequenceNumber
+  end
+
+  def getClipboardOwner : Win32cr::Foundation::HWND
+    C.GetClipboardOwner
+  end
+
+  def setClipboardViewer(hWndNewViewer : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    C.SetClipboardViewer(hWndNewViewer)
+  end
+
+  def getClipboardViewer : Win32cr::Foundation::HWND
+    C.GetClipboardViewer
+  end
+
+  def changeClipboardChain(hWndRemove : Win32cr::Foundation::HWND, hWndNewNext : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.ChangeClipboardChain(hWndRemove, hWndNewNext)
+  end
+
+  def setClipboardData(uFormat : UInt32, hMem : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
+    C.SetClipboardData(uFormat, hMem)
+  end
+
+  def getClipboardData(uFormat : UInt32) : Win32cr::Foundation::HANDLE
+    C.GetClipboardData(uFormat)
+  end
+
+  def registerClipboardFormatA(lpszFormat : Win32cr::Foundation::PSTR) : UInt32
+    C.RegisterClipboardFormatA(lpszFormat)
+  end
+
+  def registerClipboardFormatW(lpszFormat : Win32cr::Foundation::PWSTR) : UInt32
+    C.RegisterClipboardFormatW(lpszFormat)
+  end
+
+  def countClipboardFormats : Int32
+    C.CountClipboardFormats
+  end
+
+  def enumClipboardFormats(format : UInt32) : UInt32
+    C.EnumClipboardFormats(format)
+  end
+
+  def getClipboardFormatNameA(format : UInt32, lpszFormatName : UInt8*, cchMaxCount : Int32) : Int32
+    C.GetClipboardFormatNameA(format, lpszFormatName, cchMaxCount)
+  end
+
+  def getClipboardFormatNameW(format : UInt32, lpszFormatName : UInt16*, cchMaxCount : Int32) : Int32
+    C.GetClipboardFormatNameW(format, lpszFormatName, cchMaxCount)
+  end
+
+  def emptyClipboard : Win32cr::Foundation::BOOL
+    C.EmptyClipboard
+  end
+
+  def isClipboardFormatAvailable(format : UInt32) : Win32cr::Foundation::BOOL
+    C.IsClipboardFormatAvailable(format)
+  end
+
+  def getPriorityClipboardFormat(paFormatPriorityList : UInt32*, cFormats : Int32) : Int32
+    C.GetPriorityClipboardFormat(paFormatPriorityList, cFormats)
+  end
+
+  def getOpenClipboardWindow : Win32cr::Foundation::HWND
+    C.GetOpenClipboardWindow
+  end
+
+  def addClipboardFormatListener(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.AddClipboardFormatListener(hwnd)
+  end
+
+  def removeClipboardFormatListener(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    C.RemoveClipboardFormatListener(hwnd)
+  end
+
+  def getUpdatedClipboardFormats(lpuiFormats : UInt32*, cFormats : UInt32, pcFormatsOut : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetUpdatedClipboardFormats(lpuiFormats, cFormats, pcFormatsOut)
+  end
+
+  def globalDeleteAtom(nAtom : UInt16) : UInt16
+    C.GlobalDeleteAtom(nAtom)
+  end
+
+  def initAtomTable(nSize : UInt32) : Win32cr::Foundation::BOOL
+    C.InitAtomTable(nSize)
+  end
+
+  def deleteAtom(nAtom : UInt16) : UInt16
+    C.DeleteAtom(nAtom)
+  end
+
+  def globalAddAtomA(lpString : Win32cr::Foundation::PSTR) : UInt16
+    C.GlobalAddAtomA(lpString)
+  end
+
+  def globalAddAtomW(lpString : Win32cr::Foundation::PWSTR) : UInt16
+    C.GlobalAddAtomW(lpString)
+  end
+
+  def globalAddAtomExA(lpString : Win32cr::Foundation::PSTR, flags : UInt32) : UInt16
+    C.GlobalAddAtomExA(lpString, flags)
+  end
+
+  def globalAddAtomExW(lpString : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt16
+    C.GlobalAddAtomExW(lpString, flags)
+  end
+
+  def globalFindAtomA(lpString : Win32cr::Foundation::PSTR) : UInt16
+    C.GlobalFindAtomA(lpString)
+  end
+
+  def globalFindAtomW(lpString : Win32cr::Foundation::PWSTR) : UInt16
+    C.GlobalFindAtomW(lpString)
+  end
+
+  def globalGetAtomNameA(nAtom : UInt16, lpBuffer : UInt8*, nSize : Int32) : UInt32
+    C.GlobalGetAtomNameA(nAtom, lpBuffer, nSize)
+  end
+
+  def globalGetAtomNameW(nAtom : UInt16, lpBuffer : UInt16*, nSize : Int32) : UInt32
+    C.GlobalGetAtomNameW(nAtom, lpBuffer, nSize)
+  end
+
+  def addAtomA(lpString : Win32cr::Foundation::PSTR) : UInt16
+    C.AddAtomA(lpString)
+  end
+
+  def addAtomW(lpString : Win32cr::Foundation::PWSTR) : UInt16
+    C.AddAtomW(lpString)
+  end
+
+  def findAtomA(lpString : Win32cr::Foundation::PSTR) : UInt16
+    C.FindAtomA(lpString)
+  end
+
+  def findAtomW(lpString : Win32cr::Foundation::PWSTR) : UInt16
+    C.FindAtomW(lpString)
+  end
+
+  def getAtomNameA(nAtom : UInt16, lpBuffer : UInt8*, nSize : Int32) : UInt32
+    C.GetAtomNameA(nAtom, lpBuffer, nSize)
+  end
+
+  def getAtomNameW(nAtom : UInt16, lpBuffer : UInt16*, nSize : Int32) : UInt32
+    C.GetAtomNameW(nAtom, lpBuffer, nSize)
+  end
+
   @[Link("user32")]
   @[Link("gdi32")]
   @[Link("kernel32")]
   lib C
+    # :nodoc:
     fun DdeSetQualityOfService(hwndClient : Win32cr::Foundation::HWND, pqosNew : Win32cr::Security::SECURITY_QUALITY_OF_SERVICE*, pqosPrev : Win32cr::Security::SECURITY_QUALITY_OF_SERVICE*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ImpersonateDdeClientWindow(hWndClient : Win32cr::Foundation::HWND, hWndServer : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PackDDElParam(msg : UInt32, uiLo : LibC::UIntPtrT, uiHi : LibC::UIntPtrT) : Win32cr::Foundation::LPARAM
 
+    # :nodoc:
     fun UnpackDDElParam(msg : UInt32, lParam : Win32cr::Foundation::LPARAM, puiLo : LibC::UIntPtrT*, puiHi : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FreeDDElParam(msg : UInt32, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ReuseDDElParam(lParam : Win32cr::Foundation::LPARAM, msgIn : UInt32, msgOut : UInt32, uiLo : LibC::UIntPtrT, uiHi : LibC::UIntPtrT) : Win32cr::Foundation::LPARAM
 
+    # :nodoc:
     fun DdeInitializeA(pidInst : UInt32*, pfnCallback : Win32cr::System::DataExchange::PFNCALLBACK, afCmd : Win32cr::System::DataExchange::DDE_INITIALIZE_COMMAND, ulRes : UInt32) : UInt32
 
+    # :nodoc:
     fun DdeInitializeW(pidInst : UInt32*, pfnCallback : Win32cr::System::DataExchange::PFNCALLBACK, afCmd : Win32cr::System::DataExchange::DDE_INITIALIZE_COMMAND, ulRes : UInt32) : UInt32
 
+    # :nodoc:
     fun DdeUninitialize(idInst : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DdeConnectList(idInst : UInt32, hszService : Win32cr::System::DataExchange::HSZ, hszTopic : Win32cr::System::DataExchange::HSZ, hConvList : Win32cr::System::DataExchange::HCONVLIST, pCC : Win32cr::System::DataExchange::CONVCONTEXT*) : Win32cr::System::DataExchange::HCONVLIST
 
+    # :nodoc:
     fun DdeQueryNextServer(hConvList : Win32cr::System::DataExchange::HCONVLIST, hConvPrev : Win32cr::System::DataExchange::HCONV) : Win32cr::System::DataExchange::HCONV
 
+    # :nodoc:
     fun DdeDisconnectList(hConvList : Win32cr::System::DataExchange::HCONVLIST) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DdeConnect(idInst : UInt32, hszService : Win32cr::System::DataExchange::HSZ, hszTopic : Win32cr::System::DataExchange::HSZ, pCC : Win32cr::System::DataExchange::CONVCONTEXT*) : Win32cr::System::DataExchange::HCONV
 
+    # :nodoc:
     fun DdeDisconnect(hConv : Win32cr::System::DataExchange::HCONV) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DdeReconnect(hConv : Win32cr::System::DataExchange::HCONV) : Win32cr::System::DataExchange::HCONV
 
+    # :nodoc:
     fun DdeQueryConvInfo(hConv : Win32cr::System::DataExchange::HCONV, idTransaction : UInt32, pConvInfo : Win32cr::System::DataExchange::CONVINFO*) : UInt32
 
+    # :nodoc:
     fun DdeSetUserHandle(hConv : Win32cr::System::DataExchange::HCONV, id : UInt32, hUser : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DdeAbandonTransaction(idInst : UInt32, hConv : Win32cr::System::DataExchange::HCONV, idTransaction : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DdePostAdvise(idInst : UInt32, hszTopic : Win32cr::System::DataExchange::HSZ, hszItem : Win32cr::System::DataExchange::HSZ) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DdeEnableCallback(idInst : UInt32, hConv : Win32cr::System::DataExchange::HCONV, wCmd : Win32cr::System::DataExchange::DDE_ENABLE_CALLBACK_CMD) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DdeImpersonateClient(hConv : Win32cr::System::DataExchange::HCONV) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DdeNameService(idInst : UInt32, hsz1 : Win32cr::System::DataExchange::HSZ, hsz2 : Win32cr::System::DataExchange::HSZ, afCmd : Win32cr::System::DataExchange::DDE_NAME_SERVICE_CMD) : Win32cr::System::DataExchange::HDDEDATA
 
+    # :nodoc:
     fun DdeClientTransaction(pData : UInt8*, cbData : UInt32, hConv : Win32cr::System::DataExchange::HCONV, hszItem : Win32cr::System::DataExchange::HSZ, wFmt : UInt32, wType : Win32cr::System::DataExchange::DDE_CLIENT_TRANSACTION_TYPE, dwTimeout : UInt32, pdwResult : UInt32*) : Win32cr::System::DataExchange::HDDEDATA
 
+    # :nodoc:
     fun DdeCreateDataHandle(idInst : UInt32, pSrc : UInt8*, cb : UInt32, cbOff : UInt32, hszItem : Win32cr::System::DataExchange::HSZ, wFmt : UInt32, afCmd : UInt32) : Win32cr::System::DataExchange::HDDEDATA
 
+    # :nodoc:
     fun DdeAddData(hData : Win32cr::System::DataExchange::HDDEDATA, pSrc : UInt8*, cb : UInt32, cbOff : UInt32) : Win32cr::System::DataExchange::HDDEDATA
 
+    # :nodoc:
     fun DdeGetData(hData : Win32cr::System::DataExchange::HDDEDATA, pDst : UInt8*, cbMax : UInt32, cbOff : UInt32) : UInt32
 
+    # :nodoc:
     fun DdeAccessData(hData : Win32cr::System::DataExchange::HDDEDATA, pcbDataSize : UInt32*) : UInt8*
 
+    # :nodoc:
     fun DdeUnaccessData(hData : Win32cr::System::DataExchange::HDDEDATA) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DdeFreeDataHandle(hData : Win32cr::System::DataExchange::HDDEDATA) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DdeGetLastError(idInst : UInt32) : UInt32
 
+    # :nodoc:
     fun DdeCreateStringHandleA(idInst : UInt32, psz : Win32cr::Foundation::PSTR, iCodePage : Int32) : Win32cr::System::DataExchange::HSZ
 
+    # :nodoc:
     fun DdeCreateStringHandleW(idInst : UInt32, psz : Win32cr::Foundation::PWSTR, iCodePage : Int32) : Win32cr::System::DataExchange::HSZ
 
+    # :nodoc:
     fun DdeQueryStringA(idInst : UInt32, hsz : Win32cr::System::DataExchange::HSZ, psz : UInt8*, cchMax : UInt32, iCodePage : Int32) : UInt32
 
+    # :nodoc:
     fun DdeQueryStringW(idInst : UInt32, hsz : Win32cr::System::DataExchange::HSZ, psz : UInt16*, cchMax : UInt32, iCodePage : Int32) : UInt32
 
+    # :nodoc:
     fun DdeFreeStringHandle(idInst : UInt32, hsz : Win32cr::System::DataExchange::HSZ) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DdeKeepStringHandle(idInst : UInt32, hsz : Win32cr::System::DataExchange::HSZ) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DdeCmpStringHandles(hsz1 : Win32cr::System::DataExchange::HSZ, hsz2 : Win32cr::System::DataExchange::HSZ) : Int32
 
+    # :nodoc:
     fun SetWinMetaFileBits(nSize : UInt32, lpMeta16Data : UInt8*, hdcRef : Win32cr::Graphics::Gdi::HDC, lpMFP : Win32cr::System::DataExchange::METAFILEPICT*) : Win32cr::Graphics::Gdi::HENHMETAFILE
 
+    # :nodoc:
     fun OpenClipboard(hWndNewOwner : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CloseClipboard : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetClipboardSequenceNumber : UInt32
 
+    # :nodoc:
     fun GetClipboardOwner : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun SetClipboardViewer(hWndNewViewer : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun GetClipboardViewer : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun ChangeClipboardChain(hWndRemove : Win32cr::Foundation::HWND, hWndNewNext : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetClipboardData(uFormat : UInt32, hMem : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun GetClipboardData(uFormat : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun RegisterClipboardFormatA(lpszFormat : Win32cr::Foundation::PSTR) : UInt32
 
+    # :nodoc:
     fun RegisterClipboardFormatW(lpszFormat : Win32cr::Foundation::PWSTR) : UInt32
 
+    # :nodoc:
     fun CountClipboardFormats : Int32
 
+    # :nodoc:
     fun EnumClipboardFormats(format : UInt32) : UInt32
 
+    # :nodoc:
     fun GetClipboardFormatNameA(format : UInt32, lpszFormatName : UInt8*, cchMaxCount : Int32) : Int32
 
+    # :nodoc:
     fun GetClipboardFormatNameW(format : UInt32, lpszFormatName : UInt16*, cchMaxCount : Int32) : Int32
 
+    # :nodoc:
     fun EmptyClipboard : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun IsClipboardFormatAvailable(format : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetPriorityClipboardFormat(paFormatPriorityList : UInt32*, cFormats : Int32) : Int32
 
+    # :nodoc:
     fun GetOpenClipboardWindow : Win32cr::Foundation::HWND
 
+    # :nodoc:
     fun AddClipboardFormatListener(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun RemoveClipboardFormatListener(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetUpdatedClipboardFormats(lpuiFormats : UInt32*, cFormats : UInt32, pcFormatsOut : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GlobalDeleteAtom(nAtom : UInt16) : UInt16
 
+    # :nodoc:
     fun InitAtomTable(nSize : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun DeleteAtom(nAtom : UInt16) : UInt16
 
+    # :nodoc:
     fun GlobalAddAtomA(lpString : Win32cr::Foundation::PSTR) : UInt16
 
+    # :nodoc:
     fun GlobalAddAtomW(lpString : Win32cr::Foundation::PWSTR) : UInt16
 
+    # :nodoc:
     fun GlobalAddAtomExA(lpString : Win32cr::Foundation::PSTR, flags : UInt32) : UInt16
 
+    # :nodoc:
     fun GlobalAddAtomExW(lpString : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt16
 
+    # :nodoc:
     fun GlobalFindAtomA(lpString : Win32cr::Foundation::PSTR) : UInt16
 
+    # :nodoc:
     fun GlobalFindAtomW(lpString : Win32cr::Foundation::PWSTR) : UInt16
 
+    # :nodoc:
     fun GlobalGetAtomNameA(nAtom : UInt16, lpBuffer : UInt8*, nSize : Int32) : UInt32
 
+    # :nodoc:
     fun GlobalGetAtomNameW(nAtom : UInt16, lpBuffer : UInt16*, nSize : Int32) : UInt32
 
+    # :nodoc:
     fun AddAtomA(lpString : Win32cr::Foundation::PSTR) : UInt16
 
+    # :nodoc:
     fun AddAtomW(lpString : Win32cr::Foundation::PWSTR) : UInt16
 
+    # :nodoc:
     fun FindAtomA(lpString : Win32cr::Foundation::PSTR) : UInt16
 
+    # :nodoc:
     fun FindAtomW(lpString : Win32cr::Foundation::PWSTR) : UInt16
 
+    # :nodoc:
     fun GetAtomNameA(nAtom : UInt16, lpBuffer : UInt8*, nSize : Int32) : UInt32
 
+    # :nodoc:
     fun GetAtomNameW(nAtom : UInt16, lpBuffer : UInt16*, nSize : Int32) : UInt32
 
   end

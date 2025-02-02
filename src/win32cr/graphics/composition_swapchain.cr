@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./dxgi/common.cr"
 
 module Win32cr::Graphics::CompositionSwapchain
+  extend self
 
   enum PresentStatisticsKind
     PresentStatisticsKind_PresentStatus = 1_i32
@@ -435,8 +436,13 @@ module Win32cr::Graphics::CompositionSwapchain
 
   end
 
+  def createPresentationFactory(d3dDevice : Void*, riid : LibC::GUID*, presentationFactory : Void**) : Win32cr::Foundation::HRESULT
+    C.CreatePresentationFactory(d3dDevice, riid, presentationFactory)
+  end
+
   @[Link("dcomp")]
   lib C
+    # :nodoc:
     fun CreatePresentationFactory(d3dDevice : Void*, riid : LibC::GUID*, presentationFactory : Void**) : Win32cr::Foundation::HRESULT
 
   end

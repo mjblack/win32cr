@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./distributed_transaction_coordinator.cr"
 
 module Win32cr::System::ComponentServices
+  extend self
   TRACKER_STARTSTOP_EVENT = "Global\\COM+ Tracker Push Event"
   TRACKER_INIT_EVENT = "Global\\COM+ Tracker Init Event"
   GUID_STRING_SIZE = 40_u32
@@ -6169,26 +6170,71 @@ module Win32cr::System::ComponentServices
 
   end
 
+  def coGetDefaultContext(aptType : Win32cr::System::Com::APTTYPE, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CoGetDefaultContext(aptType, riid, ppv)
+  end
+
+  def coCreateActivity(pIUnknown : Void*, riid : LibC::GUID*, ppObj : Void**) : Win32cr::Foundation::HRESULT
+    C.CoCreateActivity(pIUnknown, riid, ppObj)
+  end
+
+  def coEnterServiceDomain(pConfigObject : Void*) : Win32cr::Foundation::HRESULT
+    C.CoEnterServiceDomain(pConfigObject)
+  end
+
+  def coLeaveServiceDomain(pUnkStatus : Void*) : Void
+    C.CoLeaveServiceDomain(pUnkStatus)
+  end
+
+  def getManagedExtensions(dwExts : UInt32*) : Win32cr::Foundation::HRESULT
+    C.GetManagedExtensions(dwExts)
+  end
+
+  def safeRef(rid : LibC::GUID*, pUnk : Void*) : Void*
+    C.SafeRef(rid, pUnk)
+  end
+
+  def recycleSurrogate(lReasonCode : Int32) : Win32cr::Foundation::HRESULT
+    C.RecycleSurrogate(lReasonCode)
+  end
+
+  def mTSCreateActivity(riid : LibC::GUID*, ppobj : Void**) : Win32cr::Foundation::HRESULT
+    C.MTSCreateActivity(riid, ppobj)
+  end
+
+  def getDispenserManager(param0 : Void**) : Win32cr::Foundation::HRESULT
+    C.GetDispenserManager(param0)
+  end
+
   @[Link("ole32")]
   @[Link("comsvcs")]
   @[Link("mtxdm")]
   lib C
+    # :nodoc:
     fun CoGetDefaultContext(aptType : Win32cr::System::Com::APTTYPE, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoCreateActivity(pIUnknown : Void*, riid : LibC::GUID*, ppObj : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoEnterServiceDomain(pConfigObject : Void*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoLeaveServiceDomain(pUnkStatus : Void*) : Void
 
+    # :nodoc:
     fun GetManagedExtensions(dwExts : UInt32*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SafeRef(rid : LibC::GUID*, pUnk : Void*) : Void*
 
+    # :nodoc:
     fun RecycleSurrogate(lReasonCode : Int32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun MTSCreateActivity(riid : LibC::GUID*, ppobj : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun GetDispenserManager(param0 : Void**) : Win32cr::Foundation::HRESULT
 
   end

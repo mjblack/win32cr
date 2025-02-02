@@ -1,6 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::System::ApplicationVerifier
+  extend self
   alias AVRF_RESOURCE_ENUMERATE_CALLBACK = Proc(Void*, Void*, UInt32*, UInt32)
 
   alias AVRF_HEAPALLOCATION_ENUMERATE_CALLBACK = Proc(Win32cr::System::ApplicationVerifier::AVRF_HEAP_ALLOCATION*, Void*, UInt32*, UInt32)
@@ -76,8 +77,13 @@ module Win32cr::System::ApplicationVerifier
     end
   end
 
+  def verifierEnumerateResource(process : Win32cr::Foundation::HANDLE, flags : Win32cr::System::ApplicationVerifier::VERIFIER_ENUM_RESOURCE_FLAGS, resource_type : Win32cr::System::ApplicationVerifier::Eavrfresourcetypes, resource_callback : Win32cr::System::ApplicationVerifier::AVRF_RESOURCE_ENUMERATE_CALLBACK, enumeration_context : Void*) : UInt32
+    C.VerifierEnumerateResource(process, flags, resource_type, resource_callback, enumeration_context)
+  end
+
   @[Link("verifier")]
   lib C
+    # :nodoc:
     fun VerifierEnumerateResource(process : Win32cr::Foundation::HANDLE, flags : Win32cr::System::ApplicationVerifier::VERIFIER_ENUM_RESOURCE_FLAGS, resource_type : Win32cr::System::ApplicationVerifier::Eavrfresourcetypes, resource_callback : Win32cr::System::ApplicationVerifier::AVRF_RESOURCE_ENUMERATE_CALLBACK, enumeration_context : Void*) : UInt32
 
   end

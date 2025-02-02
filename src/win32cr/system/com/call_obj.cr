@@ -2,6 +2,7 @@ require "./../../foundation.cr"
 require "./../com.cr"
 
 module Win32cr::System::Com::CallObj
+  extend self
 
   enum CALLFRAME_COPY
     CALLFRAME_COPY_NESTED = 1_i32
@@ -361,10 +362,20 @@ module Win32cr::System::Com::CallObj
 
   end
 
+  def coGetInterceptor(iidIntercepted : LibC::GUID*, punkOuter : Void*, iid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CoGetInterceptor(iidIntercepted, punkOuter, iid, ppv)
+  end
+
+  def coGetInterceptorFromTypeInfo(iidIntercepted : LibC::GUID*, punkOuter : Void*, typeInfo : Void*, iid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    C.CoGetInterceptorFromTypeInfo(iidIntercepted, punkOuter, typeInfo, iid, ppv)
+  end
+
   @[Link("ole32")]
   lib C
+    # :nodoc:
     fun CoGetInterceptor(iidIntercepted : LibC::GUID*, punkOuter : Void*, iid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CoGetInterceptorFromTypeInfo(iidIntercepted : LibC::GUID*, punkOuter : Void*, typeInfo : Void*, iid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
   end

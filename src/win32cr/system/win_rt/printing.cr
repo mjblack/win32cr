@@ -5,6 +5,7 @@ require "./../../storage/xps.cr"
 require "./../../graphics/printing.cr"
 
 module Win32cr::System::WinRT::Printing
+  extend self
 
 
   @[Extern]

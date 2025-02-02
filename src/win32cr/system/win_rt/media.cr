@@ -3,6 +3,7 @@ require "./../../foundation.cr"
 require "./../../media/media_foundation.cr"
 
 module Win32cr::System::WinRT::Media
+  extend self
   CLSID_AudioFrameNativeFactory = "16a0a3b9-9f65-4102-9367-2cda3a4f372a"
   CLSID_VideoFrameNativeFactory = "d194386a-04e3-4814-8100-b2b0ae6d78c7"
 

@@ -5,6 +5,7 @@ require "./../graphics/gdi.cr"
 require "./../security.cr"
 
 module Win32cr::System::SystemServices
+  extend self
   alias PUMS_SCHEDULER_ENTRY_POINT = Proc(Win32cr::System::SystemServices::RTL_UMS_SCHEDULER_REASON, LibC::UIntPtrT, Void*, Void)
 
   {% if flag?(:arm) %}
@@ -6754,8 +6755,13 @@ module Win32cr::System::SystemServices
     end
   end
 
+  def unregisterDeviceNotification(handle : Void*) : Win32cr::Foundation::BOOL
+    C.UnregisterDeviceNotification(handle)
+  end
+
   @[Link("user32")]
   lib C
+    # :nodoc:
     fun UnregisterDeviceNotification(handle : Void*) : Win32cr::Foundation::BOOL
 
   end

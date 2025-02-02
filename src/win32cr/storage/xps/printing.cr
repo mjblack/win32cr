@@ -3,6 +3,7 @@ require "./../../system/com.cr"
 require "./../xps.cr"
 
 module Win32cr::Storage::Xps::Printing
+  extend self
   ID_DOCUMENTPACKAGETARGET_MSXPS = "9cae40a8-ded1-41c9-a9fd-d735ef33aeda"
   ID_DOCUMENTPACKAGETARGET_OPENXPS = "0056bb72-8c9c-4612-bd0f-93012a87099d"
   ID_DOCUMENTPACKAGETARGET_OPENXPS_WITH_3D = "63dbd720-8b14-4577-b074-7bb11b596d28"
@@ -214,10 +215,20 @@ module Win32cr::Storage::Xps::Printing
 
   end
 
+  def startXpsPrintJob(printerName : Win32cr::Foundation::PWSTR, jobName : Win32cr::Foundation::PWSTR, outputFileName : Win32cr::Foundation::PWSTR, progressEvent : Win32cr::Foundation::HANDLE, completionEvent : Win32cr::Foundation::HANDLE, printablePagesOn : UInt8*, printablePagesOnCount : UInt32, xpsPrintJob : Void**, documentStream : Void**, printTicketStream : Void**) : Win32cr::Foundation::HRESULT
+    C.StartXpsPrintJob(printerName, jobName, outputFileName, progressEvent, completionEvent, printablePagesOn, printablePagesOnCount, xpsPrintJob, documentStream, printTicketStream)
+  end
+
+  def startXpsPrintJob1(printerName : Win32cr::Foundation::PWSTR, jobName : Win32cr::Foundation::PWSTR, outputFileName : Win32cr::Foundation::PWSTR, progressEvent : Win32cr::Foundation::HANDLE, completionEvent : Win32cr::Foundation::HANDLE, xpsPrintJob : Void**, printContentReceiver : Void**) : Win32cr::Foundation::HRESULT
+    C.StartXpsPrintJob1(printerName, jobName, outputFileName, progressEvent, completionEvent, xpsPrintJob, printContentReceiver)
+  end
+
   @[Link("xpsprint")]
   lib C
+    # :nodoc:
     fun StartXpsPrintJob(printerName : Win32cr::Foundation::PWSTR, jobName : Win32cr::Foundation::PWSTR, outputFileName : Win32cr::Foundation::PWSTR, progressEvent : Win32cr::Foundation::HANDLE, completionEvent : Win32cr::Foundation::HANDLE, printablePagesOn : UInt8*, printablePagesOnCount : UInt32, xpsPrintJob : Void**, documentStream : Void**, printTicketStream : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun StartXpsPrintJob1(printerName : Win32cr::Foundation::PWSTR, jobName : Win32cr::Foundation::PWSTR, outputFileName : Win32cr::Foundation::PWSTR, progressEvent : Win32cr::Foundation::HANDLE, completionEvent : Win32cr::Foundation::HANDLE, xpsPrintJob : Void**, printContentReceiver : Void**) : Win32cr::Foundation::HRESULT
 
   end

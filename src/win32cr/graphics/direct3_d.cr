@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./../system/com.cr"
 
 module Win32cr::Graphics::Direct3D
+  extend self
   alias PFN_DESTRUCTION_CALLBACK = Proc(Void*, Void)
 
   D3D_FL9_1_REQ_TEXTURE1D_U_DIMENSION = 2048_u32

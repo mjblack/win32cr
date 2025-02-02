@@ -6,6 +6,7 @@ require "./media_foundation.cr"
 require "./../system/ole.cr"
 
 module Win32cr::Media::DeviceManager
+  extend self
   IOCTL_MTP_CUSTOM_COMMAND = 827348045_u32
   MTP_NEXTPHASE_READ_DATA = 1_u32
   MTP_NEXTPHASE_WRITE_DATA = 2_u32

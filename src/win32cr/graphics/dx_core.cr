@@ -2,6 +2,7 @@ require "./../system/com.cr"
 require "./../foundation.cr"
 
 module Win32cr::Graphics::DXCore
+  extend self
   alias PFN_DXCORE_NOTIFICATION_CALLBACK = Proc(Win32cr::Graphics::DXCore::DXCoreNotificationType, Void*, Void*, Void)
 
   FACDXCORE_ = 2176_u32
@@ -235,8 +236,13 @@ module Win32cr::Graphics::DXCore
 
   end
 
+  def dXCoreCreateAdapterFactory(riid : LibC::GUID*, ppvFactory : Void**) : Win32cr::Foundation::HRESULT
+    C.DXCoreCreateAdapterFactory(riid, ppvFactory)
+  end
+
   @[Link("dxcore")]
   lib C
+    # :nodoc:
     fun DXCoreCreateAdapterFactory(riid : LibC::GUID*, ppvFactory : Void**) : Win32cr::Foundation::HRESULT
 
   end

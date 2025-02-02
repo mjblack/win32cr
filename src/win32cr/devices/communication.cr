@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./../system/io.cr"
 
 module Win32cr::Devices::Communication
+  extend self
   MDM_COMPRESSION = 1_u32
   MDM_ERROR_CONTROL = 2_u32
   MDM_FORCED_EC = 4_u32
@@ -320,66 +321,216 @@ module Win32cr::Devices::Communication
     end
   end
 
+  def clearCommBreak(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.ClearCommBreak(hFile)
+  end
+
+  def clearCommError(hFile : Win32cr::Foundation::HANDLE, lpErrors : Win32cr::Devices::Communication::CLEAR_COMM_ERROR_FLAGS*, lpStat : Win32cr::Devices::Communication::COMSTAT*) : Win32cr::Foundation::BOOL
+    C.ClearCommError(hFile, lpErrors, lpStat)
+  end
+
+  def setupComm(hFile : Win32cr::Foundation::HANDLE, dwInQueue : UInt32, dwOutQueue : UInt32) : Win32cr::Foundation::BOOL
+    C.SetupComm(hFile, dwInQueue, dwOutQueue)
+  end
+
+  def escapeCommFunction(hFile : Win32cr::Foundation::HANDLE, dwFunc : Win32cr::Devices::Communication::ESCAPE_COMM_FUNCTION) : Win32cr::Foundation::BOOL
+    C.EscapeCommFunction(hFile, dwFunc)
+  end
+
+  def getCommConfig(hCommDev : Win32cr::Foundation::HANDLE, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetCommConfig(hCommDev, lpCC, lpdwSize)
+  end
+
+  def getCommMask(hFile : Win32cr::Foundation::HANDLE, lpEvtMask : Win32cr::Devices::Communication::COMM_EVENT_MASK*) : Win32cr::Foundation::BOOL
+    C.GetCommMask(hFile, lpEvtMask)
+  end
+
+  def getCommProperties(hFile : Win32cr::Foundation::HANDLE, lpCommProp : Win32cr::Devices::Communication::COMMPROP*) : Win32cr::Foundation::BOOL
+    C.GetCommProperties(hFile, lpCommProp)
+  end
+
+  def getCommModemStatus(hFile : Win32cr::Foundation::HANDLE, lpModemStat : Win32cr::Devices::Communication::MODEM_STATUS_FLAGS*) : Win32cr::Foundation::BOOL
+    C.GetCommModemStatus(hFile, lpModemStat)
+  end
+
+  def getCommState(hFile : Win32cr::Foundation::HANDLE, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
+    C.GetCommState(hFile, lpDCB)
+  end
+
+  def getCommTimeouts(hFile : Win32cr::Foundation::HANDLE, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
+    C.GetCommTimeouts(hFile, lpCommTimeouts)
+  end
+
+  def purgeComm(hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::Devices::Communication::PURGE_COMM_FLAGS) : Win32cr::Foundation::BOOL
+    C.PurgeComm(hFile, dwFlags)
+  end
+
+  def setCommBreak(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    C.SetCommBreak(hFile)
+  end
+
+  def setCommConfig(hCommDev : Win32cr::Foundation::HANDLE, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+    C.SetCommConfig(hCommDev, lpCC, dwSize)
+  end
+
+  def setCommMask(hFile : Win32cr::Foundation::HANDLE, dwEvtMask : Win32cr::Devices::Communication::COMM_EVENT_MASK) : Win32cr::Foundation::BOOL
+    C.SetCommMask(hFile, dwEvtMask)
+  end
+
+  def setCommState(hFile : Win32cr::Foundation::HANDLE, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
+    C.SetCommState(hFile, lpDCB)
+  end
+
+  def setCommTimeouts(hFile : Win32cr::Foundation::HANDLE, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
+    C.SetCommTimeouts(hFile, lpCommTimeouts)
+  end
+
+  def transmitCommChar(hFile : Win32cr::Foundation::HANDLE, cChar : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
+    C.TransmitCommChar(hFile, cChar)
+  end
+
+  def waitCommEvent(hFile : Win32cr::Foundation::HANDLE, lpEvtMask : Win32cr::Devices::Communication::COMM_EVENT_MASK*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    C.WaitCommEvent(hFile, lpEvtMask, lpOverlapped)
+  end
+
+  def openCommPort(uPortNumber : UInt32, dwDesiredAccess : UInt32, dwFlagsAndAttributes : UInt32) : Win32cr::Foundation::HANDLE
+    C.OpenCommPort(uPortNumber, dwDesiredAccess, dwFlagsAndAttributes)
+  end
+
+  def getCommPorts(lpPortNumbers : UInt32*, uPortNumbersCount : UInt32, puPortNumbersFound : UInt32*) : UInt32
+    C.GetCommPorts(lpPortNumbers, uPortNumbersCount, puPortNumbersFound)
+  end
+
+  def buildCommDCBA(lpDef : Win32cr::Foundation::PSTR, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
+    C.BuildCommDCBA(lpDef, lpDCB)
+  end
+
+  def buildCommDCBW(lpDef : Win32cr::Foundation::PWSTR, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
+    C.BuildCommDCBW(lpDef, lpDCB)
+  end
+
+  def buildCommDCBAndTimeoutsA(lpDef : Win32cr::Foundation::PSTR, lpDCB : Win32cr::Devices::Communication::DCB*, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
+    C.BuildCommDCBAndTimeoutsA(lpDef, lpDCB, lpCommTimeouts)
+  end
+
+  def buildCommDCBAndTimeoutsW(lpDef : Win32cr::Foundation::PWSTR, lpDCB : Win32cr::Devices::Communication::DCB*, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
+    C.BuildCommDCBAndTimeoutsW(lpDef, lpDCB, lpCommTimeouts)
+  end
+
+  def commConfigDialogA(lpszName : Win32cr::Foundation::PSTR, hWnd : Win32cr::Foundation::HWND, lpCC : Win32cr::Devices::Communication::COMMCONFIG*) : Win32cr::Foundation::BOOL
+    C.CommConfigDialogA(lpszName, hWnd, lpCC)
+  end
+
+  def commConfigDialogW(lpszName : Win32cr::Foundation::PWSTR, hWnd : Win32cr::Foundation::HWND, lpCC : Win32cr::Devices::Communication::COMMCONFIG*) : Win32cr::Foundation::BOOL
+    C.CommConfigDialogW(lpszName, hWnd, lpCC)
+  end
+
+  def getDefaultCommConfigA(lpszName : Win32cr::Foundation::PSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetDefaultCommConfigA(lpszName, lpCC, lpdwSize)
+  end
+
+  def getDefaultCommConfigW(lpszName : Win32cr::Foundation::PWSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    C.GetDefaultCommConfigW(lpszName, lpCC, lpdwSize)
+  end
+
+  def setDefaultCommConfigA(lpszName : Win32cr::Foundation::PSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+    C.SetDefaultCommConfigA(lpszName, lpCC, dwSize)
+  end
+
+  def setDefaultCommConfigW(lpszName : Win32cr::Foundation::PWSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+    C.SetDefaultCommConfigW(lpszName, lpCC, dwSize)
+  end
+
   @[Link("kernel32")]
   lib C
+    # :nodoc:
     fun ClearCommBreak(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun ClearCommError(hFile : Win32cr::Foundation::HANDLE, lpErrors : Win32cr::Devices::Communication::CLEAR_COMM_ERROR_FLAGS*, lpStat : Win32cr::Devices::Communication::COMSTAT*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetupComm(hFile : Win32cr::Foundation::HANDLE, dwInQueue : UInt32, dwOutQueue : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun EscapeCommFunction(hFile : Win32cr::Foundation::HANDLE, dwFunc : Win32cr::Devices::Communication::ESCAPE_COMM_FUNCTION) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCommConfig(hCommDev : Win32cr::Foundation::HANDLE, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCommMask(hFile : Win32cr::Foundation::HANDLE, lpEvtMask : Win32cr::Devices::Communication::COMM_EVENT_MASK*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCommProperties(hFile : Win32cr::Foundation::HANDLE, lpCommProp : Win32cr::Devices::Communication::COMMPROP*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCommModemStatus(hFile : Win32cr::Foundation::HANDLE, lpModemStat : Win32cr::Devices::Communication::MODEM_STATUS_FLAGS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCommState(hFile : Win32cr::Foundation::HANDLE, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetCommTimeouts(hFile : Win32cr::Foundation::HANDLE, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PurgeComm(hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::Devices::Communication::PURGE_COMM_FLAGS) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetCommBreak(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetCommConfig(hCommDev : Win32cr::Foundation::HANDLE, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, dwSize : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetCommMask(hFile : Win32cr::Foundation::HANDLE, dwEvtMask : Win32cr::Devices::Communication::COMM_EVENT_MASK) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetCommState(hFile : Win32cr::Foundation::HANDLE, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetCommTimeouts(hFile : Win32cr::Foundation::HANDLE, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TransmitCommChar(hFile : Win32cr::Foundation::HANDLE, cChar : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun WaitCommEvent(hFile : Win32cr::Foundation::HANDLE, lpEvtMask : Win32cr::Devices::Communication::COMM_EVENT_MASK*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun OpenCommPort(uPortNumber : UInt32, dwDesiredAccess : UInt32, dwFlagsAndAttributes : UInt32) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun GetCommPorts(lpPortNumbers : UInt32*, uPortNumbersCount : UInt32, puPortNumbersFound : UInt32*) : UInt32
 
+    # :nodoc:
     fun BuildCommDCBA(lpDef : Win32cr::Foundation::PSTR, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BuildCommDCBW(lpDef : Win32cr::Foundation::PWSTR, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BuildCommDCBAndTimeoutsA(lpDef : Win32cr::Foundation::PSTR, lpDCB : Win32cr::Devices::Communication::DCB*, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun BuildCommDCBAndTimeoutsW(lpDef : Win32cr::Foundation::PWSTR, lpDCB : Win32cr::Devices::Communication::DCB*, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CommConfigDialogA(lpszName : Win32cr::Foundation::PSTR, hWnd : Win32cr::Foundation::HWND, lpCC : Win32cr::Devices::Communication::COMMCONFIG*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CommConfigDialogW(lpszName : Win32cr::Foundation::PWSTR, hWnd : Win32cr::Foundation::HWND, lpCC : Win32cr::Devices::Communication::COMMCONFIG*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDefaultCommConfigA(lpszName : Win32cr::Foundation::PSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun GetDefaultCommConfigW(lpszName : Win32cr::Foundation::PWSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetDefaultCommConfigA(lpszName : Win32cr::Foundation::PSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, dwSize : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetDefaultCommConfigW(lpszName : Win32cr::Foundation::PWSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, dwSize : UInt32) : Win32cr::Foundation::BOOL
 
   end

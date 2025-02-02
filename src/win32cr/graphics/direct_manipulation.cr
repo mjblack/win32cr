@@ -3,6 +3,7 @@ require "./../foundation.cr"
 require "./../ui/windows_and_messaging.cr"
 
 module Win32cr::Graphics::DirectManipulation
+  extend self
   DIRECTMANIPULATION_KEYBOARDFOCUS = 4294967294_u32
   DIRECTMANIPULATION_MOUSEFOCUS = 4294967293_u32
   CLSID_VerticalIndicatorContent = "a10b5f17-afe0-4aa2-91e9-3e7001d2e6b4"

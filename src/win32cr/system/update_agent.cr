@@ -2,6 +2,7 @@ require "./com.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::UpdateAgent
+  extend self
   LIBID_WUApiLib = "b596cc9f-56e5-419e-a622-e01bb457431e"
   UPDATE_LOCKDOWN_WEBSITE_ACCESS = 1_u32
   WU_S_SERVICE_STOP = 2359297_i32

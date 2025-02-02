@@ -3,6 +3,7 @@ require "./../../../foundation.cr"
 require "./../../../graphics/direct2_d.cr"
 
 module Win32cr::System::WinRT::Graphics::Direct2D
+  extend self
 
   enum GRAPHICS_EFFECT_PROPERTY_MAPPING
     GRAPHICS_EFFECT_PROPERTY_MAPPING_UNKNOWN = 0_i32

@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./../system/com.cr"
 
 module Win32cr::Security::ConfigurationSnapin
+  extend self
   alias PFSCE_QUERY_INFO = Proc(Void*, Win32cr::Security::ConfigurationSnapin::SCESVC_INFO_TYPE, Int8*, Win32cr::Foundation::BOOL, Void**, UInt32*, UInt32)
 
   alias PFSCE_SET_INFO = Proc(Void*, Win32cr::Security::ConfigurationSnapin::SCESVC_INFO_TYPE, Int8*, Win32cr::Foundation::BOOL, Void*, UInt32)

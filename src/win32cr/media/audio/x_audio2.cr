@@ -3,6 +3,7 @@ require "./../../system/com.cr"
 require "./../../foundation.cr"
 
 module Win32cr::Media::Audio::XAudio2
+  extend self
   FXEQ_MIN_FRAMERATE = 22000_u32
   FXEQ_MAX_FRAMERATE = 48000_u32
   FXEQ_MIN_FREQUENCY_CENTER = 20
@@ -1255,17 +1256,42 @@ module Win32cr::Media::Audio::XAudio2
 
   end
 
+  def createFX(clsid : LibC::GUID*, pEffect : Void**, pInitDat : Void*, init_data_byte_size : UInt32) : Win32cr::Foundation::HRESULT
+    C.CreateFX(clsid, pEffect, pInitDat, init_data_byte_size)
+  end
+
+  def xAudio2CreateWithVersionInfo(ppXAudio2 : Void**, flags : UInt32, x_audio2_processor : UInt32, ntddiVersion : UInt32) : Win32cr::Foundation::HRESULT
+    C.XAudio2CreateWithVersionInfo(ppXAudio2, flags, x_audio2_processor, ntddiVersion)
+  end
+
+  def createAudioVolumeMeter(ppApo : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateAudioVolumeMeter(ppApo)
+  end
+
+  def createAudioReverb(ppApo : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateAudioReverb(ppApo)
+  end
+
+  def createHrtfApo(init : Win32cr::Media::Audio::XAudio2::HrtfApoInit*, xApo : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateHrtfApo(init, xApo)
+  end
+
   @[Link("xaudio2_8")]
   @[Link("hrtfapo")]
   lib C
+    # :nodoc:
     fun CreateFX(clsid : LibC::GUID*, pEffect : Void**, pInitDat : Void*, init_data_byte_size : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun XAudio2CreateWithVersionInfo(ppXAudio2 : Void**, flags : UInt32, x_audio2_processor : UInt32, ntddiVersion : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateAudioVolumeMeter(ppApo : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateAudioReverb(ppApo : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateHrtfApo(init : Win32cr::Media::Audio::XAudio2::HrtfApoInit*, xApo : Void**) : Win32cr::Foundation::HRESULT
 
   end

@@ -3,6 +3,7 @@ require "./com.cr"
 require "./com/structured_storage.cr"
 
 module Win32cr::System::AddressBook
+  extend self
   alias LPALLOCATEBUFFER = Proc(UInt32, Void**, Int32)
 
   alias LPALLOCATEMORE = Proc(UInt32, Void*, Void**, Int32)
@@ -2753,121 +2754,406 @@ module Win32cr::System::AddressBook
 
   end
 
+  def createTable(lpInterface : LibC::GUID*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpAllocateMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpvReserved : Void*, ulTableType : UInt32, ulPropTagIndexColumn : UInt32, lpSPropTagArrayColumns : Win32cr::System::AddressBook::SPropTagArray*, lppTableData : Void**) : Int32
+    C.CreateTable(lpInterface, lpAllocateBuffer, lpAllocateMore, lpFreeBuffer, lpvReserved, ulTableType, ulPropTagIndexColumn, lpSPropTagArrayColumns, lppTableData)
+  end
+
+  def createIProp(lpInterface : LibC::GUID*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpAllocateMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpvReserved : Void*, lppPropData : Void**) : Int32
+    C.CreateIProp(lpInterface, lpAllocateBuffer, lpAllocateMore, lpFreeBuffer, lpvReserved, lppPropData)
+  end
+
+  def mAPIInitIdle(lpvReserved : Void*) : Int32
+    C.MAPIInitIdle(lpvReserved)
+  end
+
+  def mAPIDeinitIdle : Void
+    C.MAPIDeinitIdle
+  end
+
+  def ftgRegisterIdleRoutine(lpfnIdle : Win32cr::System::AddressBook::PFNIDLE, lpvIdleParam : Void*, priIdle : Int16, csecIdle : UInt32, iroIdle : UInt16) : Void*
+    C.FtgRegisterIdleRoutine(lpfnIdle, lpvIdleParam, priIdle, csecIdle, iroIdle)
+  end
+
+  def deregisterIdleRoutine(ftg : Void*) : Void
+    C.DeregisterIdleRoutine(ftg)
+  end
+
+  def enableIdleRoutine(ftg : Void*, fEnable : Win32cr::Foundation::BOOL) : Void
+    C.EnableIdleRoutine(ftg, fEnable)
+  end
+
+  def changeIdleRoutine(ftg : Void*, lpfnIdle : Win32cr::System::AddressBook::PFNIDLE, lpvIdleParam : Void*, priIdle : Int16, csecIdle : UInt32, iroIdle : UInt16, ircIdle : UInt16) : Void
+    C.ChangeIdleRoutine(ftg, lpfnIdle, lpvIdleParam, priIdle, csecIdle, iroIdle, ircIdle)
+  end
+
+  def mAPIGetDefaultMalloc : Void*
+    C.MAPIGetDefaultMalloc
+  end
+
+  def openStreamOnFile(lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, ulFlags : UInt32, lpszFileName : Int8*, lpszPrefix : Int8*, lppStream : Void**) : Win32cr::Foundation::HRESULT
+    C.OpenStreamOnFile(lpAllocateBuffer, lpFreeBuffer, ulFlags, lpszFileName, lpszPrefix, lppStream)
+  end
+
+  def propCopyMore(lpSPropValueDest : Win32cr::System::AddressBook::SPropValue*, lpSPropValueSrc : Win32cr::System::AddressBook::SPropValue*, lpfAllocMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpvObject : Void*) : Int32
+    C.PropCopyMore(lpSPropValueDest, lpSPropValueSrc, lpfAllocMore, lpvObject)
+  end
+
+  def ulPropSize(lpSPropValue : Win32cr::System::AddressBook::SPropValue*) : UInt32
+    C.UlPropSize(lpSPropValue)
+  end
+
+  def fEqualNames(lpName1 : Win32cr::System::AddressBook::MAPINAMEID*, lpName2 : Win32cr::System::AddressBook::MAPINAMEID*) : Win32cr::Foundation::BOOL
+    C.FEqualNames(lpName1, lpName2)
+  end
+
+  def fPropContainsProp(lpSPropValueDst : Win32cr::System::AddressBook::SPropValue*, lpSPropValueSrc : Win32cr::System::AddressBook::SPropValue*, ulFuzzyLevel : UInt32) : Win32cr::Foundation::BOOL
+    C.FPropContainsProp(lpSPropValueDst, lpSPropValueSrc, ulFuzzyLevel)
+  end
+
+  def fPropCompareProp(lpSPropValue1 : Win32cr::System::AddressBook::SPropValue*, ulRelOp : UInt32, lpSPropValue2 : Win32cr::System::AddressBook::SPropValue*) : Win32cr::Foundation::BOOL
+    C.FPropCompareProp(lpSPropValue1, ulRelOp, lpSPropValue2)
+  end
+
+  def lPropCompareProp(lpSPropValueA : Win32cr::System::AddressBook::SPropValue*, lpSPropValueB : Win32cr::System::AddressBook::SPropValue*) : Int32
+    C.LPropCompareProp(lpSPropValueA, lpSPropValueB)
+  end
+
+  def hrAddColumns(lptbl : Void*, lpproptagColumnsNew : Win32cr::System::AddressBook::SPropTagArray*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER) : Win32cr::Foundation::HRESULT
+    C.HrAddColumns(lptbl, lpproptagColumnsNew, lpAllocateBuffer, lpFreeBuffer)
+  end
+
+  def hrAddColumnsEx(lptbl : Void*, lpproptagColumnsNew : Win32cr::System::AddressBook::SPropTagArray*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpfnFilterColumns : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
+    C.HrAddColumnsEx(lptbl, lpproptagColumnsNew, lpAllocateBuffer, lpFreeBuffer, lpfnFilterColumns)
+  end
+
+  def hrAllocAdviseSink(lpfnCallback : Win32cr::System::AddressBook::LPNOTIFCALLBACK, lpvContext : Void*, lppAdviseSink : Void**) : Win32cr::Foundation::HRESULT
+    C.HrAllocAdviseSink(lpfnCallback, lpvContext, lppAdviseSink)
+  end
+
+  def hrThisThreadAdviseSink(lpAdviseSink : Void*, lppAdviseSink : Void**) : Win32cr::Foundation::HRESULT
+    C.HrThisThreadAdviseSink(lpAdviseSink, lppAdviseSink)
+  end
+
+  def hrDispatchNotifications(ulFlags : UInt32) : Win32cr::Foundation::HRESULT
+    C.HrDispatchNotifications(ulFlags)
+  end
+
+  def buildDisplayTable(lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpAllocateMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpMalloc : Void*, hInstance : Win32cr::Foundation::HINSTANCE, cPages : UInt32, lpPage : Win32cr::System::AddressBook::DTPAGE*, ulFlags : UInt32, lppTable : Void**, lppTblData : Void**) : Win32cr::Foundation::HRESULT
+    C.BuildDisplayTable(lpAllocateBuffer, lpAllocateMore, lpFreeBuffer, lpMalloc, hInstance, cPages, lpPage, ulFlags, lppTable, lppTblData)
+  end
+
+  def scCountNotifications(cNotifications : Int32, lpNotifications : Win32cr::System::AddressBook::NOTIFICATION*, lpcb : UInt32*) : Int32
+    C.ScCountNotifications(cNotifications, lpNotifications, lpcb)
+  end
+
+  def scCopyNotifications(cNotification : Int32, lpNotifications : Win32cr::System::AddressBook::NOTIFICATION*, lpvDst : Void*, lpcb : UInt32*) : Int32
+    C.ScCopyNotifications(cNotification, lpNotifications, lpvDst, lpcb)
+  end
+
+  def scRelocNotifications(cNotification : Int32, lpNotifications : Win32cr::System::AddressBook::NOTIFICATION*, lpvBaseOld : Void*, lpvBaseNew : Void*, lpcb : UInt32*) : Int32
+    C.ScRelocNotifications(cNotification, lpNotifications, lpvBaseOld, lpvBaseNew, lpcb)
+  end
+
+  def scCountProps(cValues : Int32, lpPropArray : Win32cr::System::AddressBook::SPropValue*, lpcb : UInt32*) : Int32
+    C.ScCountProps(cValues, lpPropArray, lpcb)
+  end
+
+  def lpValFindProp(ulPropTag : UInt32, cValues : UInt32, lpPropArray : Win32cr::System::AddressBook::SPropValue*) : Win32cr::System::AddressBook::SPropValue*
+    C.LpValFindProp(ulPropTag, cValues, lpPropArray)
+  end
+
+  def scCopyProps(cValues : Int32, lpPropArray : Win32cr::System::AddressBook::SPropValue*, lpvDst : Void*, lpcb : UInt32*) : Int32
+    C.ScCopyProps(cValues, lpPropArray, lpvDst, lpcb)
+  end
+
+  def scRelocProps(cValues : Int32, lpPropArray : Win32cr::System::AddressBook::SPropValue*, lpvBaseOld : Void*, lpvBaseNew : Void*, lpcb : UInt32*) : Int32
+    C.ScRelocProps(cValues, lpPropArray, lpvBaseOld, lpvBaseNew, lpcb)
+  end
+
+  def scDupPropset(cValues : Int32, lpPropArray : Win32cr::System::AddressBook::SPropValue*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lppPropArray : Win32cr::System::AddressBook::SPropValue**) : Int32
+    C.ScDupPropset(cValues, lpPropArray, lpAllocateBuffer, lppPropArray)
+  end
+
+  def ulAddRef(lpunk : Void*) : UInt32
+    C.UlAddRef(lpunk)
+  end
+
+  def ulRelease(lpunk : Void*) : UInt32
+    C.UlRelease(lpunk)
+  end
+
+  def hrGetOneProp(lpMapiProp : Void*, ulPropTag : UInt32, lppProp : Win32cr::System::AddressBook::SPropValue**) : Win32cr::Foundation::HRESULT
+    C.HrGetOneProp(lpMapiProp, ulPropTag, lppProp)
+  end
+
+  def hrSetOneProp(lpMapiProp : Void*, lpProp : Win32cr::System::AddressBook::SPropValue*) : Win32cr::Foundation::HRESULT
+    C.HrSetOneProp(lpMapiProp, lpProp)
+  end
+
+  def fPropExists(lpMapiProp : Void*, ulPropTag : UInt32) : Win32cr::Foundation::BOOL
+    C.FPropExists(lpMapiProp, ulPropTag)
+  end
+
+  def ppropFindProp(lpPropArray : Win32cr::System::AddressBook::SPropValue*, cValues : UInt32, ulPropTag : UInt32) : Win32cr::System::AddressBook::SPropValue*
+    C.PpropFindProp(lpPropArray, cValues, ulPropTag)
+  end
+
+  def freePadrlist(lpAdrlist : Win32cr::System::AddressBook::ADRLIST*) : Void
+    C.FreePadrlist(lpAdrlist)
+  end
+
+  def freeProws(lpRows : Win32cr::System::AddressBook::SRowSet*) : Void
+    C.FreeProws(lpRows)
+  end
+
+  def hrQueryAllRows(lpTable : Void*, lpPropTags : Win32cr::System::AddressBook::SPropTagArray*, lpRestriction : Win32cr::System::AddressBook::SRestriction*, lpSortOrderSet : Win32cr::System::AddressBook::SSortOrderSet*, crowsMax : Int32, lppRows : Win32cr::System::AddressBook::SRowSet**) : Win32cr::Foundation::HRESULT
+    C.HrQueryAllRows(lpTable, lpPropTags, lpRestriction, lpSortOrderSet, crowsMax, lppRows)
+  end
+
+  def szFindCh(lpsz : Int8*, ch : UInt16) : Int8*
+    C.SzFindCh(lpsz, ch)
+  end
+
+  def szFindLastCh(lpsz : Int8*, ch : UInt16) : Int8*
+    C.SzFindLastCh(lpsz, ch)
+  end
+
+  def szFindSz(lpsz : Int8*, lpszKey : Int8*) : Int8*
+    C.SzFindSz(lpsz, lpszKey)
+  end
+
+  def uFromSz(lpsz : Int8*) : UInt32
+    C.UFromSz(lpsz)
+  end
+
+  def scUNCFromLocalPath(lpszLocal : Win32cr::Foundation::PSTR, lpszUNC : UInt8*, cchUNC : UInt32) : Int32
+    C.ScUNCFromLocalPath(lpszLocal, lpszUNC, cchUNC)
+  end
+
+  def scLocalPathFromUNC(lpszUNC : Win32cr::Foundation::PSTR, lpszLocal : UInt8*, cchLocal : UInt32) : Int32
+    C.ScLocalPathFromUNC(lpszUNC, lpszLocal, cchLocal)
+  end
+
+  def ftAddFt(ftAddend1 : Win32cr::Foundation::FILETIME, ftAddend2 : Win32cr::Foundation::FILETIME) : Win32cr::Foundation::FILETIME
+    C.FtAddFt(ftAddend1, ftAddend2)
+  end
+
+  def ftMulDwDw(ftMultiplicand : UInt32, ftMultiplier : UInt32) : Win32cr::Foundation::FILETIME
+    C.FtMulDwDw(ftMultiplicand, ftMultiplier)
+  end
+
+  def ftMulDw(ftMultiplier : UInt32, ftMultiplicand : Win32cr::Foundation::FILETIME) : Win32cr::Foundation::FILETIME
+    C.FtMulDw(ftMultiplier, ftMultiplicand)
+  end
+
+  def ftSubFt(ftMinuend : Win32cr::Foundation::FILETIME, ftSubtrahend : Win32cr::Foundation::FILETIME) : Win32cr::Foundation::FILETIME
+    C.FtSubFt(ftMinuend, ftSubtrahend)
+  end
+
+  def ftNegFt(ft : Win32cr::Foundation::FILETIME) : Win32cr::Foundation::FILETIME
+    C.FtNegFt(ft)
+  end
+
+  def scCreateConversationIndex(cbParent : UInt32, lpbParent : UInt8*, lpcbConvIndex : UInt32*, lppbConvIndex : UInt8**) : Int32
+    C.ScCreateConversationIndex(cbParent, lpbParent, lpcbConvIndex, lppbConvIndex)
+  end
+
+  def wrapStoreEntryID(ulFlags : UInt32, lpszDLLName : Int8*, cbOrigEntry : UInt32, lpOrigEntry : Win32cr::System::AddressBook::ENTRYID*, lpcbWrappedEntry : UInt32*, lppWrappedEntry : Win32cr::System::AddressBook::ENTRYID**) : Win32cr::Foundation::HRESULT
+    C.WrapStoreEntryID(ulFlags, lpszDLLName, cbOrigEntry, lpOrigEntry, lpcbWrappedEntry, lppWrappedEntry)
+  end
+
+  def rTFSync(lpMessage : Void*, ulFlags : UInt32, lpfMessageUpdated : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    C.RTFSync(lpMessage, ulFlags, lpfMessageUpdated)
+  end
+
+  def wrapCompressedRTFStream(lpCompressedRTFStream : Void*, ulFlags : UInt32, lpUncompressedRTFStream : Void**) : Win32cr::Foundation::HRESULT
+    C.WrapCompressedRTFStream(lpCompressedRTFStream, ulFlags, lpUncompressedRTFStream)
+  end
+
+  def hrIStorageFromStream(lpUnkIn : Void*, lpInterface : LibC::GUID*, ulFlags : UInt32, lppStorageOut : Void**) : Win32cr::Foundation::HRESULT
+    C.HrIStorageFromStream(lpUnkIn, lpInterface, ulFlags, lppStorageOut)
+  end
+
+  def scInitMapiUtil(ulFlags : UInt32) : Int32
+    C.ScInitMapiUtil(ulFlags)
+  end
+
+  def deinitMapiUtil : Void
+    C.DeinitMapiUtil
+  end
+
   @[Link("rtm")]
   @[Link("mapi32")]
   lib C
+    # :nodoc:
     fun CreateTable(lpInterface : LibC::GUID*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpAllocateMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpvReserved : Void*, ulTableType : UInt32, ulPropTagIndexColumn : UInt32, lpSPropTagArrayColumns : Win32cr::System::AddressBook::SPropTagArray*, lppTableData : Void**) : Int32
 
+    # :nodoc:
     fun CreateIProp(lpInterface : LibC::GUID*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpAllocateMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpvReserved : Void*, lppPropData : Void**) : Int32
 
+    # :nodoc:
     fun MAPIInitIdle(lpvReserved : Void*) : Int32
 
+    # :nodoc:
     fun MAPIDeinitIdle : Void
 
+    # :nodoc:
     fun FtgRegisterIdleRoutine(lpfnIdle : Win32cr::System::AddressBook::PFNIDLE, lpvIdleParam : Void*, priIdle : Int16, csecIdle : UInt32, iroIdle : UInt16) : Void*
 
+    # :nodoc:
     fun DeregisterIdleRoutine(ftg : Void*) : Void
 
+    # :nodoc:
     fun EnableIdleRoutine(ftg : Void*, fEnable : Win32cr::Foundation::BOOL) : Void
 
+    # :nodoc:
     fun ChangeIdleRoutine(ftg : Void*, lpfnIdle : Win32cr::System::AddressBook::PFNIDLE, lpvIdleParam : Void*, priIdle : Int16, csecIdle : UInt32, iroIdle : UInt16, ircIdle : UInt16) : Void
 
+    # :nodoc:
     fun MAPIGetDefaultMalloc : Void*
 
+    # :nodoc:
     fun OpenStreamOnFile(lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, ulFlags : UInt32, lpszFileName : Int8*, lpszPrefix : Int8*, lppStream : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropCopyMore(lpSPropValueDest : Win32cr::System::AddressBook::SPropValue*, lpSPropValueSrc : Win32cr::System::AddressBook::SPropValue*, lpfAllocMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpvObject : Void*) : Int32
 
+    # :nodoc:
     fun UlPropSize(lpSPropValue : Win32cr::System::AddressBook::SPropValue*) : UInt32
 
+    # :nodoc:
     fun FEqualNames(lpName1 : Win32cr::System::AddressBook::MAPINAMEID*, lpName2 : Win32cr::System::AddressBook::MAPINAMEID*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FPropContainsProp(lpSPropValueDst : Win32cr::System::AddressBook::SPropValue*, lpSPropValueSrc : Win32cr::System::AddressBook::SPropValue*, ulFuzzyLevel : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun FPropCompareProp(lpSPropValue1 : Win32cr::System::AddressBook::SPropValue*, ulRelOp : UInt32, lpSPropValue2 : Win32cr::System::AddressBook::SPropValue*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun LPropCompareProp(lpSPropValueA : Win32cr::System::AddressBook::SPropValue*, lpSPropValueB : Win32cr::System::AddressBook::SPropValue*) : Int32
 
+    # :nodoc:
     fun HrAddColumns(lptbl : Void*, lpproptagColumnsNew : Win32cr::System::AddressBook::SPropTagArray*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HrAddColumnsEx(lptbl : Void*, lpproptagColumnsNew : Win32cr::System::AddressBook::SPropTagArray*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpfnFilterColumns : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HrAllocAdviseSink(lpfnCallback : Win32cr::System::AddressBook::LPNOTIFCALLBACK, lpvContext : Void*, lppAdviseSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HrThisThreadAdviseSink(lpAdviseSink : Void*, lppAdviseSink : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HrDispatchNotifications(ulFlags : UInt32) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun BuildDisplayTable(lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpAllocateMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpMalloc : Void*, hInstance : Win32cr::Foundation::HINSTANCE, cPages : UInt32, lpPage : Win32cr::System::AddressBook::DTPAGE*, ulFlags : UInt32, lppTable : Void**, lppTblData : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ScCountNotifications(cNotifications : Int32, lpNotifications : Win32cr::System::AddressBook::NOTIFICATION*, lpcb : UInt32*) : Int32
 
+    # :nodoc:
     fun ScCopyNotifications(cNotification : Int32, lpNotifications : Win32cr::System::AddressBook::NOTIFICATION*, lpvDst : Void*, lpcb : UInt32*) : Int32
 
+    # :nodoc:
     fun ScRelocNotifications(cNotification : Int32, lpNotifications : Win32cr::System::AddressBook::NOTIFICATION*, lpvBaseOld : Void*, lpvBaseNew : Void*, lpcb : UInt32*) : Int32
 
+    # :nodoc:
     fun ScCountProps(cValues : Int32, lpPropArray : Win32cr::System::AddressBook::SPropValue*, lpcb : UInt32*) : Int32
 
+    # :nodoc:
     fun LpValFindProp(ulPropTag : UInt32, cValues : UInt32, lpPropArray : Win32cr::System::AddressBook::SPropValue*) : Win32cr::System::AddressBook::SPropValue*
 
+    # :nodoc:
     fun ScCopyProps(cValues : Int32, lpPropArray : Win32cr::System::AddressBook::SPropValue*, lpvDst : Void*, lpcb : UInt32*) : Int32
 
+    # :nodoc:
     fun ScRelocProps(cValues : Int32, lpPropArray : Win32cr::System::AddressBook::SPropValue*, lpvBaseOld : Void*, lpvBaseNew : Void*, lpcb : UInt32*) : Int32
 
+    # :nodoc:
     fun ScDupPropset(cValues : Int32, lpPropArray : Win32cr::System::AddressBook::SPropValue*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lppPropArray : Win32cr::System::AddressBook::SPropValue**) : Int32
 
+    # :nodoc:
     fun UlAddRef(lpunk : Void*) : UInt32
 
+    # :nodoc:
     fun UlRelease(lpunk : Void*) : UInt32
 
+    # :nodoc:
     fun HrGetOneProp(lpMapiProp : Void*, ulPropTag : UInt32, lppProp : Win32cr::System::AddressBook::SPropValue**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HrSetOneProp(lpMapiProp : Void*, lpProp : Win32cr::System::AddressBook::SPropValue*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun FPropExists(lpMapiProp : Void*, ulPropTag : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun PpropFindProp(lpPropArray : Win32cr::System::AddressBook::SPropValue*, cValues : UInt32, ulPropTag : UInt32) : Win32cr::System::AddressBook::SPropValue*
 
+    # :nodoc:
     fun FreePadrlist(lpAdrlist : Win32cr::System::AddressBook::ADRLIST*) : Void
 
+    # :nodoc:
     fun FreeProws(lpRows : Win32cr::System::AddressBook::SRowSet*) : Void
 
+    # :nodoc:
     fun HrQueryAllRows(lpTable : Void*, lpPropTags : Win32cr::System::AddressBook::SPropTagArray*, lpRestriction : Win32cr::System::AddressBook::SRestriction*, lpSortOrderSet : Win32cr::System::AddressBook::SSortOrderSet*, crowsMax : Int32, lppRows : Win32cr::System::AddressBook::SRowSet**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun SzFindCh(lpsz : Int8*, ch : UInt16) : Int8*
 
+    # :nodoc:
     fun SzFindLastCh(lpsz : Int8*, ch : UInt16) : Int8*
 
+    # :nodoc:
     fun SzFindSz(lpsz : Int8*, lpszKey : Int8*) : Int8*
 
+    # :nodoc:
     fun UFromSz(lpsz : Int8*) : UInt32
 
+    # :nodoc:
     fun ScUNCFromLocalPath(lpszLocal : Win32cr::Foundation::PSTR, lpszUNC : UInt8*, cchUNC : UInt32) : Int32
 
+    # :nodoc:
     fun ScLocalPathFromUNC(lpszUNC : Win32cr::Foundation::PSTR, lpszLocal : UInt8*, cchLocal : UInt32) : Int32
 
+    # :nodoc:
     fun FtAddFt(ftAddend1 : Win32cr::Foundation::FILETIME, ftAddend2 : Win32cr::Foundation::FILETIME) : Win32cr::Foundation::FILETIME
 
+    # :nodoc:
     fun FtMulDwDw(ftMultiplicand : UInt32, ftMultiplier : UInt32) : Win32cr::Foundation::FILETIME
 
+    # :nodoc:
     fun FtMulDw(ftMultiplier : UInt32, ftMultiplicand : Win32cr::Foundation::FILETIME) : Win32cr::Foundation::FILETIME
 
+    # :nodoc:
     fun FtSubFt(ftMinuend : Win32cr::Foundation::FILETIME, ftSubtrahend : Win32cr::Foundation::FILETIME) : Win32cr::Foundation::FILETIME
 
+    # :nodoc:
     fun FtNegFt(ft : Win32cr::Foundation::FILETIME) : Win32cr::Foundation::FILETIME
 
+    # :nodoc:
     fun ScCreateConversationIndex(cbParent : UInt32, lpbParent : UInt8*, lpcbConvIndex : UInt32*, lppbConvIndex : UInt8**) : Int32
 
+    # :nodoc:
     fun WrapStoreEntryID(ulFlags : UInt32, lpszDLLName : Int8*, cbOrigEntry : UInt32, lpOrigEntry : Win32cr::System::AddressBook::ENTRYID*, lpcbWrappedEntry : UInt32*, lppWrappedEntry : Win32cr::System::AddressBook::ENTRYID**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun RTFSync(lpMessage : Void*, ulFlags : UInt32, lpfMessageUpdated : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun WrapCompressedRTFStream(lpCompressedRTFStream : Void*, ulFlags : UInt32, lpUncompressedRTFStream : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun HrIStorageFromStream(lpUnkIn : Void*, lpInterface : LibC::GUID*, ulFlags : UInt32, lppStorageOut : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun ScInitMapiUtil(ulFlags : UInt32) : Int32
 
+    # :nodoc:
     fun DeinitMapiUtil : Void
 
   end

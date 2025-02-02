@@ -2,6 +2,7 @@ require "./../system/com.cr"
 require "./../foundation.cr"
 
 module Win32cr::Devices::DeviceAccess
+  extend self
   ED_BASE = 4096_i32
   DEV_PORT_SIM = 1_u32
   DEV_PORT_COM1 = 2_u32
@@ -147,8 +148,13 @@ module Win32cr::Devices::DeviceAccess
 
   end
 
+  def createDeviceAccessInstance(deviceInterfacePath : Win32cr::Foundation::PWSTR, desiredAccess : UInt32, createAsync : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateDeviceAccessInstance(deviceInterfacePath, desiredAccess, createAsync)
+  end
+
   @[Link("deviceaccess")]
   lib C
+    # :nodoc:
     fun CreateDeviceAccessInstance(deviceInterfacePath : Win32cr::Foundation::PWSTR, desiredAccess : UInt32, createAsync : Void**) : Win32cr::Foundation::HRESULT
 
   end

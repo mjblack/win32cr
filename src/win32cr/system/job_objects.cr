@@ -3,6 +3,7 @@ require "./threading.cr"
 require "./../security.cr"
 
 module Win32cr::System::JobObjects
+  extend self
 
   @[Flags]
   enum JOB_OBJECT_LIMIT : UInt32
@@ -512,38 +513,108 @@ module Win32cr::System::JobObjects
     end
   end
 
+  def isProcessInJob(process_handle : Win32cr::Foundation::HANDLE, job_handle : Win32cr::Foundation::HANDLE, result : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    C.IsProcessInJob(process_handle, job_handle, result)
+  end
+
+  #def createJobObjectW(lpJobAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    #C.CreateJobObjectW(lpJobAttributes, lpName)
+  #end
+
+  def freeMemoryJobObject(buffer : Void*) : Void
+    C.FreeMemoryJobObject(buffer)
+  end
+
+  def openJobObjectW(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    C.OpenJobObjectW(dwDesiredAccess, bInheritHandle, lpName)
+  end
+
+  #def assignProcessToJobObject(hJob : Win32cr::Foundation::HANDLE, hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    #C.AssignProcessToJobObject(hJob, hProcess)
+  #end
+
+  def terminateJobObject(hJob : Win32cr::Foundation::HANDLE, uExitCode : UInt32) : Win32cr::Foundation::BOOL
+    C.TerminateJobObject(hJob, uExitCode)
+  end
+
+  #def setInformationJobObject(hJob : Win32cr::Foundation::HANDLE, job_object_information_class : Win32cr::System::JobObjects::JOBOBJECTINFOCLASS, lpJobObjectInformation : Void*, cbJobObjectInformationLength : UInt32) : Win32cr::Foundation::BOOL
+    #C.SetInformationJobObject(hJob, job_object_information_class, lpJobObjectInformation, cbJobObjectInformationLength)
+  #end
+
+  def setIoRateControlInformationJobObject(hJob : Win32cr::Foundation::HANDLE, io_rate_control_info : Win32cr::System::JobObjects::JOBOBJECT_IO_RATE_CONTROL_INFORMATION*) : UInt32
+    C.SetIoRateControlInformationJobObject(hJob, io_rate_control_info)
+  end
+
+  def queryInformationJobObject(hJob : Win32cr::Foundation::HANDLE, job_object_information_class : Win32cr::System::JobObjects::JOBOBJECTINFOCLASS, lpJobObjectInformation : Void*, cbJobObjectInformationLength : UInt32, lpReturnLength : UInt32*) : Win32cr::Foundation::BOOL
+    C.QueryInformationJobObject(hJob, job_object_information_class, lpJobObjectInformation, cbJobObjectInformationLength, lpReturnLength)
+  end
+
+  def queryIoRateControlInformationJobObject(hJob : Win32cr::Foundation::HANDLE, volume_name : Win32cr::Foundation::PWSTR, info_blocks : Win32cr::System::JobObjects::JOBOBJECT_IO_RATE_CONTROL_INFORMATION**, info_block_count : UInt32*) : UInt32
+    C.QueryIoRateControlInformationJobObject(hJob, volume_name, info_blocks, info_block_count)
+  end
+
+  def userHandleGrantAccess(hUserHandle : Win32cr::Foundation::HANDLE, hJob : Win32cr::Foundation::HANDLE, bGrant : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    C.UserHandleGrantAccess(hUserHandle, hJob, bGrant)
+  end
+
+  def createJobObjectA(lpJobAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    C.CreateJobObjectA(lpJobAttributes, lpName)
+  end
+
+  def openJobObjectA(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    C.OpenJobObjectA(dwDesiredAccess, bInheritHandle, lpName)
+  end
+
+  def createJobSet(num_job : UInt32, user_job_set : Win32cr::System::JobObjects::JOB_SET_ARRAY*, flags : UInt32) : Win32cr::Foundation::BOOL
+    C.CreateJobSet(num_job, user_job_set, flags)
+  end
+
   @[Link("kernel32")]
   @[Link("user32")]
   lib C
+    # :nodoc:
     fun IsProcessInJob(process_handle : Win32cr::Foundation::HANDLE, job_handle : Win32cr::Foundation::HANDLE, result : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun CreateJobObjectW(lpJobAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun FreeMemoryJobObject(buffer : Void*) : Void
 
+    # :nodoc:
     fun OpenJobObjectW(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun AssignProcessToJobObject(hJob : Win32cr::Foundation::HANDLE, hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun TerminateJobObject(hJob : Win32cr::Foundation::HANDLE, uExitCode : UInt32) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
+    # :nodoc:
     #fun SetInformationJobObject(hJob : Win32cr::Foundation::HANDLE, job_object_information_class : Win32cr::System::JobObjects::JOBOBJECTINFOCLASS, lpJobObjectInformation : Void*, cbJobObjectInformationLength : UInt32) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun SetIoRateControlInformationJobObject(hJob : Win32cr::Foundation::HANDLE, io_rate_control_info : Win32cr::System::JobObjects::JOBOBJECT_IO_RATE_CONTROL_INFORMATION*) : UInt32
 
+    # :nodoc:
     fun QueryInformationJobObject(hJob : Win32cr::Foundation::HANDLE, job_object_information_class : Win32cr::System::JobObjects::JOBOBJECTINFOCLASS, lpJobObjectInformation : Void*, cbJobObjectInformationLength : UInt32, lpReturnLength : UInt32*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun QueryIoRateControlInformationJobObject(hJob : Win32cr::Foundation::HANDLE, volume_name : Win32cr::Foundation::PWSTR, info_blocks : Win32cr::System::JobObjects::JOBOBJECT_IO_RATE_CONTROL_INFORMATION**, info_block_count : UInt32*) : UInt32
 
+    # :nodoc:
     fun UserHandleGrantAccess(hUserHandle : Win32cr::Foundation::HANDLE, hJob : Win32cr::Foundation::HANDLE, bGrant : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
     fun CreateJobObjectA(lpJobAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun OpenJobObjectA(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
+    # :nodoc:
     fun CreateJobSet(num_job : UInt32, user_job_set : Win32cr::System::JobObjects::JOB_SET_ARRAY*, flags : UInt32) : Win32cr::Foundation::BOOL
 
   end

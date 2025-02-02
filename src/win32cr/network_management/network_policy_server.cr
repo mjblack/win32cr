@@ -2,6 +2,7 @@ require "./../system/com.cr"
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::NetworkPolicyServer
+  extend self
   alias PRADIUS_EXTENSION_INIT = Proc(UInt32)
 
   alias PRADIUS_EXTENSION_TERM = Proc(Void)

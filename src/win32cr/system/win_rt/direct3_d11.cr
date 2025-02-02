@@ -4,6 +4,7 @@ require "./../../graphics/dxgi.cr"
 require "./../win_rt.cr"
 
 module Win32cr::System::WinRT::Direct3D11
+  extend self
 
 
   @[Extern]
@@ -32,10 +33,20 @@ module Win32cr::System::WinRT::Direct3D11
 
   end
 
+  def createDirect3D11DeviceFromDXGIDevice(dxgiDevice : Void*, graphicsDevice : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateDirect3D11DeviceFromDXGIDevice(dxgiDevice, graphicsDevice)
+  end
+
+  def createDirect3D11SurfaceFromDXGISurface(dgxiSurface : Void*, graphicsSurface : Void**) : Win32cr::Foundation::HRESULT
+    C.CreateDirect3D11SurfaceFromDXGISurface(dgxiSurface, graphicsSurface)
+  end
+
   @[Link("d3d11")]
   lib C
+    # :nodoc:
     fun CreateDirect3D11DeviceFromDXGIDevice(dxgiDevice : Void*, graphicsDevice : Void**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun CreateDirect3D11SurfaceFromDXGISurface(dgxiSurface : Void*, graphicsSurface : Void**) : Win32cr::Foundation::HRESULT
 
   end

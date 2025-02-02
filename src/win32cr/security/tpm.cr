@@ -2,6 +2,7 @@ require "./../system/com.cr"
 require "./../foundation.cr"
 
 module Win32cr::Security::Tpm
+  extend self
   TPMVSC_DEFAULT_ADMIN_ALGORITHM_ID = 130_u32
 
   CLSID_TpmVirtualSmartCardManager = LibC::GUID.new(0x16a18e86_u32, 0x7f6e_u16, 0x4c20_u16, StaticArray[0xad_u8, 0x89_u8, 0x4f_u8, 0xfc_u8, 0xd_u8, 0xb7_u8, 0xa9_u8, 0x6a_u8])

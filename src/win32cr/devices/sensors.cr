@@ -5,6 +5,7 @@ require "./../system/com/structured_storage.cr"
 require "./portable_devices.cr"
 
 module Win32cr::Devices::Sensors
+  extend self
   GUID_DEVINTERFACE_SENSOR = "ba1bb692-9b7a-4833-9a1e-525ed134e7e2"
   SENSOR_EVENT_STATE_CHANGED = "bfd96016-6bd7-4560-ad34-f2f6607e8f81"
   SENSOR_EVENT_DATA_UPDATED = "2ed0f2a4-0087-41d3-87db-6773370b3c88"
@@ -800,86 +801,286 @@ module Win32cr::Devices::Sensors
 
   end
 
+  def getPerformanceTime(time_ms : UInt32*) : Win32cr::Foundation::NTSTATUS
+    C.GetPerformanceTime(time_ms)
+  end
+
+  def initPropVariantFromFloat(fltVal : Float32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromFloat(fltVal, ppropvar)
+  end
+
+  def propKeyFindKeyGetPropVariant(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, type_check : Win32cr::Foundation::BOOLEAN, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeyGetPropVariant(pList, pKey, type_check, pValue)
+  end
+
+  def propKeyFindKeySetPropVariant(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, type_check : Win32cr::Foundation::BOOLEAN, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeySetPropVariant(pList, pKey, type_check, pValue)
+  end
+
+  def propKeyFindKeyGetFileTime(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeyGetFileTime(pList, pKey, pRetValue)
+  end
+
+  def propKeyFindKeyGetGuid(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : LibC::GUID*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeyGetGuid(pList, pKey, pRetValue)
+  end
+
+  def propKeyFindKeyGetBool(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeyGetBool(pList, pKey, pRetValue)
+  end
+
+  def propKeyFindKeyGetUlong(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : UInt32*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeyGetUlong(pList, pKey, pRetValue)
+  end
+
+  def propKeyFindKeyGetUshort(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : UInt16*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeyGetUshort(pList, pKey, pRetValue)
+  end
+
+  def propKeyFindKeyGetFloat(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Float32*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeyGetFloat(pList, pKey, pRetValue)
+  end
+
+  def propKeyFindKeyGetDouble(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Float64*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeyGetDouble(pList, pKey, pRetValue)
+  end
+
+  def propKeyFindKeyGetInt32(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Int32*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeyGetInt32(pList, pKey, pRetValue)
+  end
+
+  def propKeyFindKeyGetInt64(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Int64*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeyGetInt64(pList, pKey, pRetValue)
+  end
+
+  def propKeyFindKeyGetNthUlong(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, occurrence : UInt32, pRetValue : UInt32*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeyGetNthUlong(pList, pKey, occurrence, pRetValue)
+  end
+
+  def propKeyFindKeyGetNthUshort(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, occurrence : UInt32, pRetValue : UInt16*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeyGetNthUshort(pList, pKey, occurrence, pRetValue)
+  end
+
+  def propKeyFindKeyGetNthInt64(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, occurrence : UInt32, pRetValue : Int64*) : Win32cr::Foundation::NTSTATUS
+    C.PropKeyFindKeyGetNthInt64(pList, pKey, occurrence, pRetValue)
+  end
+
+  def isKeyPresentInPropertyList(pList : Win32cr::Devices::Sensors::SENSOR_PROPERTY_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::BOOLEAN
+    C.IsKeyPresentInPropertyList(pList, pKey)
+  end
+
+  def isKeyPresentInCollectionList(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::BOOLEAN
+    C.IsKeyPresentInCollectionList(pList, pKey)
+  end
+
+  def isCollectionListSame(list_a : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, list_b : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::BOOLEAN
+    C.IsCollectionListSame(list_a, list_b)
+  end
+
+  def propVariantGetInformation(prop_variant_value : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prop_variant_offset : UInt32*, prop_variant_size : UInt32*, prop_variant_pointer : Void**, remapped_type : UInt32*) : Win32cr::Foundation::NTSTATUS
+    C.PropVariantGetInformation(prop_variant_value, prop_variant_offset, prop_variant_size, prop_variant_pointer, remapped_type)
+  end
+
+  def propertiesListCopy(target : Win32cr::Devices::Sensors::SENSOR_PROPERTY_LIST*, source : Win32cr::Devices::Sensors::SENSOR_PROPERTY_LIST*) : Win32cr::Foundation::NTSTATUS
+    C.PropertiesListCopy(target, source)
+  end
+
+  def propertiesListGetFillableCount(buffer_size_bytes : UInt32) : UInt32
+    C.PropertiesListGetFillableCount(buffer_size_bytes)
+  end
+
+  def collectionsListGetMarshalledSize(collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : UInt32
+    C.CollectionsListGetMarshalledSize(collection)
+  end
+
+  def collectionsListCopyAndMarshall(target : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, source : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
+    C.CollectionsListCopyAndMarshall(target, source)
+  end
+
+  def collectionsListMarshall(target : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
+    C.CollectionsListMarshall(target)
+  end
+
+  def collectionsListGetMarshalledSizeWithoutSerialization(collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : UInt32
+    C.CollectionsListGetMarshalledSizeWithoutSerialization(collection)
+  end
+
+  def collectionsListUpdateMarshalledPointer(collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
+    C.CollectionsListUpdateMarshalledPointer(collection)
+  end
+
+  def serializationBufferAllocate(size_in_bytes : UInt32, pBuffer : UInt8**) : Win32cr::Foundation::NTSTATUS
+    C.SerializationBufferAllocate(size_in_bytes, pBuffer)
+  end
+
+  def serializationBufferFree(buffer : UInt8*) : Void
+    C.SerializationBufferFree(buffer)
+  end
+
+  def collectionsListGetSerializedSize(collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : UInt32
+    C.CollectionsListGetSerializedSize(collection)
+  end
+
+  def collectionsListSerializeToBuffer(source_collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, target_buffer_size_in_bytes : UInt32, target_buffer : UInt8*) : Win32cr::Foundation::NTSTATUS
+    C.CollectionsListSerializeToBuffer(source_collection, target_buffer_size_in_bytes, target_buffer)
+  end
+
+  def collectionsListAllocateBufferAndSerialize(source_collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pTargetBufferSizeInBytes : UInt32*, pTargetBuffer : UInt8**) : Win32cr::Foundation::NTSTATUS
+    C.CollectionsListAllocateBufferAndSerialize(source_collection, pTargetBufferSizeInBytes, pTargetBuffer)
+  end
+
+  def collectionsListDeserializeFromBuffer(source_buffer_size_in_bytes : UInt32, source_buffer : UInt8*, target_collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
+    C.CollectionsListDeserializeFromBuffer(source_buffer_size_in_bytes, source_buffer, target_collection)
+  end
+
+  def sensorCollectionGetAt(index : UInt32, pSensorsList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::NTSTATUS
+    C.SensorCollectionGetAt(index, pSensorsList, pKey, pValue)
+  end
+
+  def collectionsListGetFillableCount(buffer_size_bytes : UInt32) : UInt32
+    C.CollectionsListGetFillableCount(buffer_size_bytes)
+  end
+
+  def evaluateActivityThresholds(newSample : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, oldSample : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, thresholds : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::BOOLEAN
+    C.EvaluateActivityThresholds(newSample, oldSample, thresholds)
+  end
+
+  def collectionsListSortSubscribedActivitiesByConfidence(thresholds : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pCollection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
+    C.CollectionsListSortSubscribedActivitiesByConfidence(thresholds, pCollection)
+  end
+
+  def initPropVariantFromCLSIDArray(members : LibC::GUID*, size : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    C.InitPropVariantFromCLSIDArray(members, size, ppropvar)
+  end
+
+  def isSensorSubscribed(subscriptionList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, currentType : LibC::GUID) : Win32cr::Foundation::BOOLEAN
+    C.IsSensorSubscribed(subscriptionList, currentType)
+  end
+
+  def isGUIDPresentInList(guidArray : LibC::GUID*, arrayLength : UInt32, guidElem : LibC::GUID*) : Win32cr::Foundation::BOOLEAN
+    C.IsGUIDPresentInList(guidArray, arrayLength, guidElem)
+  end
+
   @[Link("sensorsutilsv2")]
   lib C
+    # :nodoc:
     fun GetPerformanceTime(time_ms : UInt32*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun InitPropVariantFromFloat(fltVal : Float32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun PropKeyFindKeyGetPropVariant(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, type_check : Win32cr::Foundation::BOOLEAN, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropKeyFindKeySetPropVariant(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, type_check : Win32cr::Foundation::BOOLEAN, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropKeyFindKeyGetFileTime(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropKeyFindKeyGetGuid(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : LibC::GUID*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropKeyFindKeyGetBool(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropKeyFindKeyGetUlong(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : UInt32*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropKeyFindKeyGetUshort(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : UInt16*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropKeyFindKeyGetFloat(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Float32*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropKeyFindKeyGetDouble(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Float64*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropKeyFindKeyGetInt32(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Int32*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropKeyFindKeyGetInt64(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Int64*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropKeyFindKeyGetNthUlong(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, occurrence : UInt32, pRetValue : UInt32*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropKeyFindKeyGetNthUshort(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, occurrence : UInt32, pRetValue : UInt16*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropKeyFindKeyGetNthInt64(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, occurrence : UInt32, pRetValue : Int64*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun IsKeyPresentInPropertyList(pList : Win32cr::Devices::Sensors::SENSOR_PROPERTY_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun IsKeyPresentInCollectionList(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun IsCollectionListSame(list_a : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, list_b : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun PropVariantGetInformation(prop_variant_value : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prop_variant_offset : UInt32*, prop_variant_size : UInt32*, prop_variant_pointer : Void**, remapped_type : UInt32*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropertiesListCopy(target : Win32cr::Devices::Sensors::SENSOR_PROPERTY_LIST*, source : Win32cr::Devices::Sensors::SENSOR_PROPERTY_LIST*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun PropertiesListGetFillableCount(buffer_size_bytes : UInt32) : UInt32
 
+    # :nodoc:
     fun CollectionsListGetMarshalledSize(collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : UInt32
 
+    # :nodoc:
     fun CollectionsListCopyAndMarshall(target : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, source : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun CollectionsListMarshall(target : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun CollectionsListGetMarshalledSizeWithoutSerialization(collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : UInt32
 
+    # :nodoc:
     fun CollectionsListUpdateMarshalledPointer(collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun SerializationBufferAllocate(size_in_bytes : UInt32, pBuffer : UInt8**) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun SerializationBufferFree(buffer : UInt8*) : Void
 
+    # :nodoc:
     fun CollectionsListGetSerializedSize(collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : UInt32
 
+    # :nodoc:
     fun CollectionsListSerializeToBuffer(source_collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, target_buffer_size_in_bytes : UInt32, target_buffer : UInt8*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun CollectionsListAllocateBufferAndSerialize(source_collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pTargetBufferSizeInBytes : UInt32*, pTargetBuffer : UInt8**) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun CollectionsListDeserializeFromBuffer(source_buffer_size_in_bytes : UInt32, source_buffer : UInt8*, target_collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun SensorCollectionGetAt(index : UInt32, pSensorsList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun CollectionsListGetFillableCount(buffer_size_bytes : UInt32) : UInt32
 
+    # :nodoc:
     fun EvaluateActivityThresholds(newSample : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, oldSample : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, thresholds : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun CollectionsListSortSubscribedActivitiesByConfidence(thresholds : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pCollection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
 
+    # :nodoc:
     fun InitPropVariantFromCLSIDArray(members : LibC::GUID*, size : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
     fun IsSensorSubscribed(subscriptionList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, currentType : LibC::GUID) : Win32cr::Foundation::BOOLEAN
 
+    # :nodoc:
     fun IsGUIDPresentInList(guidArray : LibC::GUID*, arrayLength : UInt32, guidElem : LibC::GUID*) : Win32cr::Foundation::BOOLEAN
 
   end

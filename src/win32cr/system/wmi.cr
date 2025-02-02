@@ -2,6 +2,7 @@ require "./com.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::Wmi
+  extend self
   alias MI_MethodDecl_Invoke = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, Win32cr::System::Wmi::MI_Instance*, Void)
 
   alias MI_ProviderFT_Load = Proc(Void**, Win32cr::System::Wmi::MI_Module_Self*, Win32cr::System::Wmi::MI_Context*, Void)
@@ -6890,8 +6891,13 @@ module Win32cr::System::Wmi
 
   end
 
+  def mIApplicationInitializeV1(flags : UInt32, applicationID : UInt16*, extendedError : Win32cr::System::Wmi::MI_Instance**, application : Win32cr::System::Wmi::MI_Application*) : Win32cr::System::Wmi::MI_Result
+    C.MI_Application_InitializeV1(flags, applicationID, extendedError, application)
+  end
+
   @[Link("mi")]
   lib C
+    # :nodoc:
     fun MI_Application_InitializeV1(flags : UInt32, applicationID : UInt16*, extendedError : Win32cr::System::Wmi::MI_Instance**, application : Win32cr::System::Wmi::MI_Application*) : Win32cr::System::Wmi::MI_Result
 
   end
