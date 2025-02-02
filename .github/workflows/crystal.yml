@@ -3,6 +3,11 @@ name: Crystal CI
 on:
   workflow_dispatch:
     inputs:
+      debug:
+        type: boolean
+        description: 'Run the build with debugging enabled'
+        required: false
+        default: false
       logLevel:
         description: 'Log level'
         required: true
@@ -66,3 +71,6 @@ jobs:
       shell: pwsh
       run: |
         & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" spec --error-trace --debug
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+      if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug }}
