@@ -1,4 +1,5 @@
 require "../spec_helper"
+require "../../src/win32cr"
 require "../../src/win32cr/system/com"
 
 module Win32cr::System
